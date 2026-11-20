@@ -1088,17 +1088,20 @@ def stage8(pg,lab,landscape=False):
     caps+=bfr[:6]
     # 3. body states drawn from clips: a family member hit by a monster, a monster hit, the guard loop, a knock-out, the victory
     st=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key];
-      b3cWant(b3cOf(u.id,'hit'),9000); b3cWant(b3cOf(B3.F.party[2].id,'ko'),9000); b3cWant(b3cOf(u.id,'guard'),9000); return out; }""")
+      b3cWant(b3cOf(u.id,'hit'),9000); b3cWant(b3cOf(B3.F.party[2].id,'ko'),9000); b3cWant(b3cOf(B3.F.party[1].id,'guard'),9000); return out; }""")
     pg.wait_for_timeout(1800)
     st=pg.evaluate("()=>{ const u=B3.F.party[0]; b3cBodyClip(u.key,'hit'); return {hitBody:B3P.body[u.key]&&B3P.body[u.key].kind}; }")
     st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
-      vu.sh=30; out.guard=!!b3cMemberFrame(u,vu,B3P.t,null)&&b3cGuarding(u); vu.sh=0;
+      // the guard loop is a clip for Tom; Grace's guard is a painted pose since clipreset (tools/paint_state_test.py measures it)
+      const g=B3.F.party[1],vg=B3.view.u[g.key],gc=b3cOf(g.id,'guard'); vg.sh=30; out.guard=!!gc&&bclipReady(gc)&&!!b3cMemberFrame(g,vg,B3P.t,null)&&b3cGuarding(g); vg.sh=0;
+      out.paint=b3cOf(u.id,'guard')===null&&!!b3PaintState(u,'guard');
       const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
       const w=B3.F.party[2],vw=B3.view.u[w.key]; vw.ko=true; out.ko=!!b3cMemberFrame(w,vw,B3P.t,{kind:'ko',t0:B3P.t-5}); vw.ko=false;
       vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
     print('   states',st,st2)
     need(st['hitBody']=='cs',f"a hit on a family member plays the hit clip: {st}")
     need(st2['guard'] and st2['foeHit'] and st2['ko'],f'guard loop, a monster hit clip and a knock-out clip are available and drawn: {st2}')
+    need(st2['paint'],f"Grace's guard is a painted pose with no clip row: {st2}")
     # Flustered: the held picture, then restore
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; vf.st=vf.st.filter(x=>x!=='flustered'); }")

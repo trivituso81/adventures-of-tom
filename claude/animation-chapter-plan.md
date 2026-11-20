@@ -1,5 +1,7 @@
 # Battle animations chapter by chapter (Tom, 2026-11-18 17:22). This file wins over every older animation-test file
 
+SUPERSEDED FOR THE FAMILY'S CLIPS (clipreset, 2026-11-19): Tom stopped this approach after Grace's guard came out as praying hands. The reset, the reflection and the one plan are in claude/clip-reset-plan.md, which wins over this file. Do not re-make a family clip from this file.
+
 Tom: "i dont want to test anything else. im tired of testing each animation one by one. let's do it chapter by chapter"
 
 STATUS (2026-11-19 15:40 PT): builds 1, 2 and 3 are DONE and Tom's review (step 4) is DONE: he sent 44 of the 67 clips back with 45 notes (REDO notes in data/art-prompts.json, rejects `from:'review'`). Then Tom (11-19 14:27): "Build an automatic quality gate for battle clips before any re-make ... Do not generate or spend anything until the gate flags the clips he rejected." clipgate1 (main 69f0647) built the measured part of the gate and replayed it against his notes: it flags 27 of the 44, every measurable fault in his own words but one, and 1 of the 23 approved. It also found that many notes come from the bake settings (loops keep the calmest 0.875 s at 0.3x forward and back; moves play at 1.5x) and from what the prompts asked, so re-making first would repeat them. **NEXT is clipgate2 (the vision check), NOT clipch1fix.** Plan, findings and order: `claude/clip-gate-plan.md` (wins over the clipch1fix lines below).

@@ -1,5 +1,7 @@
 # Clip quality gate (clipgate1 built 2026-11-19; clipgate2 built 2026-11-19, main 226e28a). This file wins over the clipch1fix lines in claude/animation-chapter-plan.md where they differ
 
+SUPERSEDED FOR THE FAMILY'S CLIPS (clipreset, 2026-11-19): Tom stopped this approach after Grace's guard came out as praying hands. The reset, the reflection and the one plan are in claude/clip-reset-plan.md, which wins over this file. Do not re-make a family clip from this file.
+
 Tom (11-19 14:27): "Build an automatic quality gate for battle clips before any re-make: measured frame checks first, replayed against Tom's 47 notes, then plan the vision-model check. Do not generate or spend anything until the gate flags the clips he rejected."
 
 STATUS: sections 1 to 3 as built in clipgate1. Section 4 (vision) is BUILT (clipgate2); results in 4.5. Section 5 order updated. Hand-over: claude/next-addendum-clipgate2.md.

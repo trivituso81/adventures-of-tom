@@ -19,7 +19,7 @@
 // Every kind ends by calling reveal(), which shows the next hit's beats.
 
 const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending:null,actor:null,result:null,artWait:false,log:[]};
-const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null};
+const B3P={t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null};
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_FOE_LOOK={skeeter:{hover:14}};
 // How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
@@ -41,7 +41,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null}); }
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null}); }
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -124,7 +124,8 @@ function b3Show(b) {
     if(b.tick) b3Pop(b.tgt,B3_STATUS[b.tick].short,B3_STATUS[b.tick].color,{sc:2});
     if(b.soak) { vu.sh=b.sh; b3Pop(b.tgt,'SHIELD TOOK '+b.soak,'#9fd0ff',{sc:2}); }
     if(b.tgt[0]==='f') { const a=B3P.fa[b.tgt],hc=b3cFoeClip(b.tgt,'hit'); a.hurtUntil=now+.7; a.shakeUntil=now+(hc?0:.28); a.flashUntil=now+.09; b3Sfx('hitEnemy'); }
-    else { if(!b3cBodyClip(b.tgt,'hit',true)) B3P.body[b.tgt]={kind:'hit',t0:now,dur:.45}; b3Sfx('hitParty'); }
+    else { if(b3GuardShown(b.tgt)) B3P.body[b.tgt]={kind:'hit',guard:true,t0:now,dur:.4};   // braced: the painted guard takes the hit and slides back a little
+      else if(!b3cBodyClip(b.tgt,'hit',true)) B3P.body[b.tgt]={kind:'hit',t0:now,dur:.45}; b3Sfx('hitParty'); }
     B3P.fx.push({kind:'burst',x:b3Spot(b.tgt).x,y:b3Spot(b.tgt).y,color:fl.color,t0:now,dur:.35});
   }
   else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.tgt[0]!=='f') b3cBodyClip(b.tgt,'dodge'); if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
@@ -393,6 +394,36 @@ function b3DrawFoe(f,t,picked) {
   for(const id of b3ViewIcons(f.key)) { const S=B3_STATUS[id]; b3Text(S.short,L.px,sy,S.color,2); sy-=13; }
   if(picked) b3Arrow(L.px,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#ffe27a');
 }
+// ---------- Painted body states (clipreset; the table is B3_BODY_PAINT in data/b3-clips.js) ----------
+// The guard is the painted guard frame, moved by the engine: the standing picture dips for B3_GUARD.dip seconds, the guard picture takes over a
+// little stretched and settles into its crouch, then holds with a slow breath. The feet never leave their spot. Leaving the guard plays it backwards.
+// After a move of their own a guarding fighter sinks back into the pose the same way.
+const B3_GUARD={dip:.09,settle:.2,rise:.08,up:.14,low:.93,tall:1.1,breath:.006,ghost:.07};
+function b3PaintState(u,state) { const T=B3_BODY_PAINT[u.id],R=T&&T[state],sp=BATTLE_SPRITES[u.id]; return R&&sp&&sp[R.f]?R:null; }
+// Is this family member (by key) standing in a painted guard right now?
+function b3GuardShown(key) { const u=b3Unit(B3.F,key),G=B3P.gd[key]; return !!(u&&G&&G.on&&b3PaintState(u,'guard')); }
+// What the guard asks of the draw this frame, or null: {pose:true|false (the guard frame or the standing one), sx, sy (about the feet)}, and for
+// the first B3_GUARD.ghost seconds after the pictures trade places, ghost:{a,sx,sy}: the picture just left, fading out underneath.
+function b3GuardDraw(u,t,busy) {
+  const R=b3PaintState(u,'guard'); if(!R) return null;
+  const G=B3P.gd[u.key]||(B3P.gd[u.key]={on:false,t0:-9,busy:false}),on=b3cGuarding(u),K=B3_GUARD;
+  if(on!==G.on) { G.on=on; G.t0=t; }
+  if(G.busy&&!busy&&on) G.t0=t;   // back from a move: sink into the guard again
+  G.busy=busy; if(busy) return null;
+  const e=t-G.t0,ez=q=>{ q=Math.max(0,Math.min(1,q)); return q*q*(3-2*q); },P=R.s||1,top=Math.min(K.tall,K.low/(R.h*P)),wide=s=>1+(1-s)*.45;
+  // The pose's own size (R.s) is folded in here, so the caller only scales about the feet.
+  const pose=(s,x)=>({pose:true,sy:s*P,sx:(x||1+(1-s)*.3)*P});
+  if(on) {
+    if(e<K.dip) { const s=1-(1-K.low)*ez(e/K.dip); return {pose:false,sy:s,sx:wide(s)}; }
+    if(e<K.dip+K.settle) { const q=(e-K.dip)/K.settle,o=pose(1+(top-1)*(1-ez(q))-.02*Math.sin(q*Math.PI)),g=e-K.dip;
+      if(g<K.ghost) o.ghost={a:.4*(1-g/K.ghost),sx:wide(K.low),sy:K.low}; return o; }
+    return pose(1+K.breath*(.5+.5*Math.sin((e-K.dip-K.settle)*1.3-Math.PI/2)),1);
+  }
+  if(e<K.rise) return pose(1+(top-1)*ez(e/K.rise));
+  if(e<K.rise+K.up) { const s=K.low+(1-K.low)*ez((e-K.rise)/K.up),o={pose:false,sy:s,sx:wide(s)},g=e-K.rise;
+    if(g<K.ghost) o.ghost={a:.4*(1-g/K.ghost),sx:(1+(1-top)*.3)*P,sy:top*P}; return o; }
+  return null;
+}
 function b3DrawMember(u,t,picked) {
   const sp=BATTLE_SPRITES[u.id],home=b3PartyHome(u),vu=B3.view.u[u.key],A=B3P.body[u.key];
   let cx=home.cx,base=home.base,fk=B3_BODY.idle,flash=false,hop=0,CF=null;
@@ -421,18 +452,25 @@ function b3DrawMember(u,t,picked) {
     else if(e<B.T0+cd+.12) { cx=B.jx; base=B.jy; CF=b3cOnce(B.C,(e-B.T0)*1000); }
     else { const s=ease((e-B.T0-cd-.12)/Math.max(.01,B.back)); cx=B.jx+(home.cx-B.jx)*s; base=B.jy+(home.base-B.jy)*s; if(B.back&&s<1) { if(R) CF=b3cMirror(bclipLoopFrame(R,e*1000)); else fk=B3_BODY.dash; } }
   } else if(B&&B.kind==='pose') fk=B.f;
+  else if(B&&B.kind==='hit'&&B.guard) { const e=t-B.t0; cx+=Math.round(7*Math.sin(Math.min(1,e/B.dur)*Math.PI)*(1-e/B.dur)*2); flash=e<.08; }   // braced in the painted guard: pushed back half a step, feet sliding home
   else if(B&&B.kind==='hit') { fk=B3_BODY.hit; const e=t-B.t0; if(e<.25) cx+=rand(-4,4); flash=e<.08; }
   else if(B3P.cheer) { fk=B3_BODY.victory; hop=Math.abs(Math.sin(t*6+u.slot))*16; }
   else if(low) fk=B3_BODY.low;
   // A clip, when one shows this state and is loaded: idle and guard loops, a hit, a dodge, a give or cast, the victory (engine/b3-clips.js).
   if(!CF&&!(B&&(B.kind==='path'||B.kind==='cmove'||B.kind==='pose'||B.kind==='hit'))&&!(low&&!B3P.cheer)) CF=b3cMemberFrame(u,vu,t,B);
   if(CF&&B3P.cheer&&!B) hop=0;
-  const frame=CF||sp[fk]||sp.idle,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
+  // A painted guard (B3_BODY_PAINT): the guard frame with the engine's motion, in place of a guard clip. Not while low, cheering or in a move.
+  const GD=!low&&!B3P.cheer?b3GuardDraw(u,t,!!B&&!(B.kind==='hit'&&B.guard)):null,gp=GD&&GD.pose?sp[B3_BODY_PAINT[u.id].guard.f]:null;
+  const stand=CF||sp[fk]||sp.idle,frame=gp||stand,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
   const x=Math.round(cx-w/2),y=Math.round(base-h-hop);
   const idle=fk===B3_BODY.idle&&!CF,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
   activeKneelCut=frame===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
-  if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }
+  if(GD) {
+    if(GD.ghost) { const o=GD.pose?stand:sp[B3_BODY_PAINT[u.id].guard.f],ow=o[0].length*sp.scale,oh=o.length*sp.scale;
+      gfx.save(); gfx.globalAlpha=GD.ghost.a; gfx.translate(cx,base); gfx.scale(GD.ghost.sx,GD.ghost.sy); gfx.translate(-cx,-base); drawSprite(o,sp.pal,Math.round(cx-ow/2),Math.round(base-oh),sp.scale,{flash:0}); gfx.restore(); }
+    gfx.save(); gfx.translate(cx,base); gfx.scale(GD.sx,GD.sy); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }
+  else if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }
   else drawSprite(frame,sp.pal,x,y,sp.scale,{flash});
   activeKneelCut=0;
   // The turn marker and the target arrow. (A family member's statuses show on their card, not over the head.)

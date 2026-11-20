@@ -11,3 +11,5 @@ A run started by the board's START button is not in the claude.ai Project, so it
 
 Copied on 2026-11-20 from the Project, word for word:
 animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, battle-scope.md, board2-plan.md, board3-plan.md, clip-gate-plan.md, cutscene-polish-plan.md, handoff-rules.md, next.md, next-addendum-b3s9a.md, next-addendum-board1.md, next-addendum-board2.md, next-addendum-board3.md, pose-editor-plan.md, pose-editor-poseedit2.md, project-cleanup-plan.md, story-next.md.
+
+Added 2026-11-19 by clipreset (written in both places): clip-reset-plan.md.
