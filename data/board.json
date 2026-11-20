@@ -11864,6 +11864,29 @@
      "t": "Gemini's report flagged this line for a taste check: `\"Mom. That's a boss. You don't just walk up to a boss.\"` Fourth-wall boss gag versus grounded phrasing, and Mom versus Deedee in front of the girls."
     }
    ]
+  },
+  {
+   "id": "b-board-gemcards",
+   "tag": "board-gemcards",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: one card for every issue in Gemini's chapter 1 test report",
+   "next": "Done: board only: one card for every issue in Gemini's chapter 1 test report",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCr6vD52TNPJtftHUH",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-gemcards. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -12082,6 +12105,26 @@
    ],
    "cards": [
     "c-fix-oldchecks"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCr6vD52TNPJtftHUH",
+   "title": "board only: one card for every issue in Gemini's chapter 1 test report",
+   "first": "2026-11-20T08:02:53-08:00",
+   "last": "2026-11-20T08:02:53-08:00",
+   "tags": [
+    "board-gemcards"
+   ],
+   "cards": []
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFEKCHz2sXbR5Y4xGu",
+   "title": "Board: empty bar at the top in landscape on the Duo",
+   "first": "2026-11-20T08:02:11-08:00",
+   "last": "2026-11-20T08:02:11-08:00",
+   "tags": [],
+   "cards": [
+    "c-boardbar1"
    ]
   },
   {
@@ -13159,8 +13202,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "7592d368ef5678641e5ed86ceace12cca9c2a721",
- "synced_at": "2026-11-20T16:01:36+00:00",
+ "synced": "ff4858f2d742766d096a21163d7eb07ea4ae05d4",
+ "synced_at": "2026-11-20T16:03:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
