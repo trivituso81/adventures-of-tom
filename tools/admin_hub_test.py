@@ -10,7 +10,7 @@ fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-BUTTONS = ['Board', 'Art Library', 'Voice Library', 'Music Library', 'Script Editor', 'Pose Editor', 'Head Sizes', 'Portrait Crops',
+BUTTONS = ['Board', 'Art Library', 'Voice Library', 'Music Library', 'Script Editor', 'Pose Editor', 'Head Sizes', 'Portrait Crops', 'Effects',
            'Area Builder', 'Welcome Layout', 'Battle Lab', 'Block Break Lab']
 web = subprocess.Popen([sys.executable, '-m', 'http.server', str(PORT)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 time.sleep(2)

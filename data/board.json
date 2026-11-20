@@ -12802,7 +12802,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
-   "next": "Claude is writing the full list of effects (squash, hop, pips, wince, turn, mood and talk poses, face swap, hold), what triggers each, and an Effects page in Admin to preview them.",
+   "next": "Built and pushed as build idea-reviewwhatever: ADMIN > Effects. Waiting only for Tom to look.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -12839,7 +12839,7 @@
     },
     {
      "d": "2026-11-20",
-     "t": "Started: the conversation claimed this card."
+     "t": "Built effects.html (15 effects, triggers, live preview) and shared the squash and hop maths in engine/life-math.js. Nothing in the game changed."
     }
    ],
    "prompt": {
@@ -12852,7 +12852,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-reviewwhatever in data/board.json, history included. Your first push is the commit board: start c-idea-reviewwhatever.\n\nTom made this card himself with New card on the board. His words: \"we need to review whatever effect is happening to characters in the overworld in respond to conversation and emotions. id like to understand the exhaustive list of effects, what triggers each, and a way to preview them somewhere in Admin\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-reviewwhatever with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    },
    "auto": true,
-   "started_at": "2026-11-20T17:12:12+00:00"
+   "started_at": "2026-11-20T17:12:12+00:00",
+   "after": "t-effectslook"
   },
   {
    "id": "c-idea-skippingcut",
@@ -13109,6 +13110,25 @@
    "after": "t-heist1play",
    "auto": true,
    "started_at": "2026-11-20T17:20:04+00:00"
+  },
+  {
+   "id": "t-effectslook",
+   "title": "Look at the Effects page in Admin",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). You should see a face with Squash, Hop, Pip and Wince buttons, then 15 effect cards. Tap Hop: the face jumps. Tap a face in the gallery at the bottom: it appears in the preview. Say which effects you want changed or removed.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-idea-reviewwhatever."
+    }
+   ]
   }
  ],
  "sessions": [

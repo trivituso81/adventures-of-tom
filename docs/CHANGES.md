@@ -1,3 +1,12 @@
+## idea-reviewwhatever (2026-11-20): Admin has an Effects page: every effect on people in the overworld, what sets it off, and a preview
+
+Tom (11-20, new card): "we need to review whatever effect is happening to characters in the overworld in respond to conversation and emotions. id like to understand the exhaustive list of effects, what triggers each, and a way to preview them somewhere in Admin".
+
+- New `effects.html` (ADMIN > Effects, `admin.html`): 15 effects with what you see, what triggers it, who gets it, how many script lines use it, and the code. Counts are read live from the data files. Preview: pick a person and a feeling or talking pose, then Squash, Hop, Pip !, Pip ?, Pip ..., Wince. The figure is the dialogue face (full-body paintings load only inside the game).
+- Effects found: mood face, mood pose with 0.6 s hold, talking poses (tell, point, ask, answer, think), one-line paintings, listener reaction poses (timed to words), squash and settle, talking bob, listeners turning, mirroring a pose to face the right way, hop, pips (! ? ...), wince, and the off switch for skip, fights, monsters, riders.
+- No breathing, as Tom's 11-20 rule says. Nothing in the game changed: the squash and hop curves moved unchanged into `engine/life-math.js` so the preview uses the game's own maths (`actorLife` calls them). Test: `python3 tools/effects_test.py`; `tools/cut_life_test.py` still passes.
+- Not done: previewing the full-body painted poses (they live in the game), and adding any new effect.
+
 ## gracevoice-rest (2026-11-20): Grace's other slowed story lines are back at her real speed, from the takes Tom kept
 
 - Fetched branch `takes` (196 Grace takes, from Send my takes to Claude) and ran `python3 tools/voice-library/unshrink_grace.py --apply`. It replaced only clips that were byte for byte the old Grace filter applied to one of Tom's takes: 126 clips in `dialog-ch1.js`, `dialog-ch10.js`, `dialog-ch26.js`, `dialog-ch28.js`. Nothing was re-filtered, guessed or hand-edited; nothing spent.

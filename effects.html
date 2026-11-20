@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Effects</title>
+<!-- effects.html (effectslab1, Tom 2026-11-20): every effect people get in the overworld in answer to conversation and feelings, what triggers each, and a live preview.
+     Squash, hop and pip use the game's own curves (engine/life-math.js). The figure is the person's dialogue face, because the full-body paintings load only inside the game. Untagged page. -->
+<style>
+:root{--bg:#14161c;--card:#1d2029;--ink:#eef0f5;--mute:#9aa1b2;--acc:#ffd34d;--line:#2d3140}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif;padding:0 16px 40px}
+header{display:flex;gap:12px;align-items:center;padding:14px 0}header a{color:var(--acc);text-decoration:none}h1{font-size:20px;margin:0}
+h2{font-size:15px;color:var(--acc);margin:22px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0 0 10px}
+.card b{font-size:16px}.mute{color:var(--mute)}.row{display:grid;grid-template-columns:96px 1fr;gap:4px 10px;margin-top:6px}.row span:nth-child(odd){color:var(--mute)}
+#stage{display:block;margin:0 auto;background:#2a2f3c;border-radius:10px;width:100%;max-width:340px;height:auto}
+button,select{font:inherit;background:#2b3040;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:3px 3px 0 0;min-height:40px}
+button.on{outline:2px solid var(--acc)}.bar{margin:8px 0}
+.gal{display:flex;flex-wrap:wrap;gap:6px}.gal img{width:70px;height:70px;object-fit:cover;border-radius:8px;background:#2a2f3c;cursor:pointer}
+.gal figure{margin:0;text-align:center;font-size:11px;color:var(--mute)}
+</style></head><body>
+<header><a href="admin.html">Admin</a><h1>Effects on people in the overworld</h1></header>
+<p class="mute">What a person does when they talk or listen in a story scene, what sets it off, and a preview. People never breathe here (Tom 2026-11-20); breathing is for battle only.</p>
+<h2>Preview</h2>
+<div class="card">
+<canvas id="stage" width="340" height="300"></canvas>
+<div class="bar"><select id="who"></select> <select id="mood"></select></div>
+<div class="bar" id="btns"></div>
+<div class="mute" id="note">Pick a person, a feeling and an effect. The figure is the dialogue face; in the game the full body does this.</div>
+</div>
+<h2>Every effect</h2><div id="list"></div>
+<h2>Feelings and talking poses</h2>
+<div class="card"><div class="mute">Tap a face to show it in the preview. Feelings (8) swap the face and the full-body pose; talking poses (5: tell, point, ask, answer, think) do the same for lines with no strong feeling.</div><div class="gal" id="gal"></div></div>
+<script src="engine/life-math.js?v=effectslab1"></script>
+<script src="data/emotion-moods.js"></script><script src="data/npc-emotion-moods.js"></script>
+<script src="data/emotion-reactions.js"></script><script src="data/talk-types.js"></script><script src="data/line-poses.js"></script>
+<script>
+var WHO=['tom','grace','rose','amy','justin','deedee','boppy','ellie'];
+var MOODS=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],TALKS=['tell','point','ask','answer','think'];
+function n(o){try{return Object.keys(o).length;}catch(e){return 0;}}
+var fxCount={};try{Object.values(EMOTION_REACTIONS).forEach(function(rs){rs.forEach(function(r){if(r[3])fxCount[r[3]]=(fxCount[r[3]]||0)+1;});});}catch(e){}
+var reactCount=n(typeof EMOTION_REACTIONS!=='undefined'?EMOTION_REACTIONS:{}),moodCount=n(typeof EMOTION_MOODS!=='undefined'?EMOTION_MOODS:{}),npcCount=n(typeof NPC_EMOTION_MOODS!=='undefined'?NPC_EMOTION_MOODS:{}),talkCount=n(typeof TALK_TYPES!=='undefined'?TALK_TYPES:{}),lpCount=n(typeof LINE_POSES!=='undefined'?LINE_POSES:{});
+// kind: key used by the preview (null = no motion to preview)
+var EFFECTS=[
+ {k:'face',name:'Mood face in the dialogue box',see:'The speaker\'s portrait changes to their face in that feeling (8 feelings).',trig:'A story line, or a map NPC line, that has a mood in the script tables.',who:'The speaker.',code:'emoApply, data/emotion-moods.js, data/npc-emotion-moods.js',used:moodCount+' scene lines, '+npcCount+' NPC lines'},
+ {k:'pose',name:'Mood pose (full body)',see:'The speaker is drawn in the painted full-body pose for the feeling, whichever way they face.',trig:'Same lines as the mood face. Held 0.6 s after the box closes inside a scene, so they do not drop to standing between lines.',who:'The speaker (people only).',code:'emoApply, emoHold, EMO_HOLD_SEC',used:'with every mood line'},
+ {k:'talk',name:'Talking pose and face',see:'A full-body pose for plain lines: tell, point, ask, answer, think. The dialogue face is cropped from the same pose.',trig:'A plain cast line with no strong feeling; TALK_TYPES names the type, otherwise a rule reads the words ("look over there" is point, a question is ask).',who:'The speaker, only if their talking sheet is baked.',code:'talkTypeOf, talkRule, data/talk-types.js',used:talkCount+' listed lines'},
+ {k:'linepose',name:'One-line painting',see:'A single painted pose and face made for one exact line.',trig:'The speaker and the exact line text match a row of LINE_POSES.',who:'The speaker.',code:'emoApply, data/line-poses.js',used:lpCount+' lines'},
+ {k:'react',name:'Listener reaction pose',see:'Another person in the scene takes a mood pose while someone else talks.',trig:'A row in the reactions table for that line. A position means they react when the line reaches those words, not at the start. Skipped for anyone already in a story pose, Rose riding, hidden people.',who:'Listeners (and the speaker on a cue word).',code:'emoReact, emoCueTick, data/emotion-reactions.js; chapters 1 and 2 only, plus the hand-set chapter 10 laugh',used:reactCount+' lines'},
+ {k:'squash',name:'Squash and settle',see:'A 0.12 second dip and bounce in size (0.94, 1.04, back to 1).',trig:'The speaker\'s line starts, and any change of pose.',who:'People in a running scene.',code:'actorLife, lifeSquashScale',used:'every scene line'},
+ {k:'bob',name:'Talking bob',see:'A 1 pixel lift on every other typed letter.',trig:'While the speaker\'s line is still typing.',who:'The speaker.',code:'actorLife',used:'every scene line'},
+ {k:'turn',name:'Listeners turn to the speaker',see:'People who are standing still turn to face the speaker, 80 to 180 ms after the line opens (a little apart, so it is not in lockstep).',trig:'A scene line opens. Not for anyone walking, in a pose, or whose facing a step set.',who:'Everyone else on the map.',code:'emoTurnListeners',used:'every scene line'},
+ {k:'mirror',name:'Mirror a pose to face the right way',see:'A mood or talking painting that leans the wrong way is flipped to face who they are talking to.',trig:'Always, while a pose shows. Order: the object they gather around, the boss in a boss scene, the way they already face, the speaker, the nearest person.',who:'Anyone in a pose.',code:'poseFacingWant (engine/story.js), data/pose-facing.js',used:'automatic'},
+ {k:'hop',name:'Hop',see:'An 8 pixel jump over 0.3 seconds.',trig:'A reaction row marked hop.',who:'The person named in that row.',code:'emoFx, lifeHopLift',used:(fxCount.hop||0)+' rows'},
+ {k:'!',name:'Pip: !',see:'A red ! floats over the head, with a short hop.',trig:'A reaction row marked !.',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['!']||0)+' rows'},
+ {k:'?',name:'Pip: ?',see:'A ? floats over the head.',trig:'A reaction row marked ?.',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['?']||0)+' rows'},
+ {k:'...',name:'Pip: ...',see:'Three dots float over the head.',trig:'A reaction row marked ...',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['...']||0)+' rows'},
+ {k:'wince',name:'Wince',see:'Held at 0.95 size for 2.6 seconds with a sweat drop. A code stand-in until a painted pose is approved.',trig:'Boppy\'s line "Gently. The stomach." and reaction rows marked wince or sweat.',who:'Boppy, and rows that name it.',code:'emoFx, actorLife',used:(fxCount.sweat||0)+' sweat rows, 1 hand-set line'},
+ {k:null,name:'Off during skip and fights',see:'No squash, hop, pip or wince while SKIP or fast-forward runs, during a battle, or on monsters, riders, people seated or turned to amber.',trig:'Automatic.',who:'Everyone.',code:'lifeOn',used:'rule'}
+];
+var cur={kind:'squash',t0:0,who:'tom',mood:'happy'},img=new Image(),cv=document.getElementById('stage'),cx=cv.getContext('2d');
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function setFace(src){img.onload=null;img.src=src;}
+function faceSrc(){var m=document.getElementById('mood').value;return TALKS.indexOf(m)>=0?'portraits/talk/pose/'+cur.who+'-'+m+'.webp':'portraits/emo/'+cur.who+'-'+m+'.webp';}
+function reload(){cur.who=document.getElementById('who').value;setFace(faceSrc());}
+function play(k){cur.kind=k;cur.t0=performance.now()/1000;[].forEach.call(document.querySelectorAll('#btns button'),function(b){b.classList.toggle('on',b.dataset.k===k);});}
+function init(){
+ var w=document.getElementById('who'),m=document.getElementById('mood');
+ WHO.forEach(function(i){w.appendChild(new Option(i,i));});
+ MOODS.concat(TALKS).forEach(function(i){m.appendChild(new Option(i,i));});
+ w.onchange=m.onchange=reload;
+ var L=document.getElementById('list'),B=document.getElementById('btns');
+ EFFECTS.forEach(function(e){
+  var c=el('div','card','<b>'+e.name+'</b><div>'+e.see+'</div><div class="row"><span>Triggered by</span><span>'+e.trig+'</span><span>Who</span><span>'+e.who+'</span><span>Used</span><span>'+e.used+'</span><span>Code</span><span class="mute">'+e.code+'</span></div>');
+  if(e.k&&['squash','hop','!','?','...','wince'].indexOf(e.k)>=0){var b=el('button',null,'Preview');b.onclick=function(){play(e.k);window.scrollTo({top:0,behavior:'smooth'});};c.appendChild(b);}
+  L.appendChild(c);
+ });
+ ['squash','hop','!','?','...','wince'].forEach(function(k){var b=el('button',null,k==='squash'?'Squash':k==='hop'?'Hop':k==='wince'?'Wince':'Pip '+k);b.dataset.k=k;b.onclick=function(){play(k);};B.appendChild(b);});
+ var G=document.getElementById('gal');
+ WHO.slice(0,3).forEach(function(i){MOODS.forEach(function(md){var f=el('figure',null,'<img loading="lazy" src="portraits/emo/'+i+'-'+md+'.webp"><div>'+i+' '+md+'</div>');f.onclick=function(){w.value=i;m.value=md;reload();window.scrollTo({top:0,behavior:'smooth'});};G.appendChild(f);});
+  TALKS.forEach(function(md){var f=el('figure',null,'<img loading="lazy" src="portraits/talk/pose/'+i+'-'+md+'.webp"><div>'+i+' '+md+'</div>');f.onclick=function(){w.value=i;m.value=md;reload();window.scrollTo({top:0,behavior:'smooth'});};G.appendChild(f);});});
+ reload();play('squash');requestAnimationFrame(draw);
+}
+var look={t:0};
+function draw(){
+ requestAnimationFrame(draw);
+ var now=performance.now()/1000,e=now-cur.t0,s=1,lift=0,pip=null,pt=0,k=cur.kind;
+ if(k==='squash'){var q=e%1.2/LIFE_SQ;s=lifeSquashScale(q);}
+ else if(k==='hop'){lift=lifeHopLift(e%1.2);}
+ else if(k==='wince'){var w=e%(LIFE_WINCE_SEC+.6);if(w<LIFE_WINCE_SEC){s=.95;pip='sweat';pt=w;}}
+ else {var p=e%(LIFE_PIP_SEC+.5);if(p<LIFE_PIP_SEC){pip=k;pt=p;if(k==='!')lift=lifeHopLift(p);}}
+ cx.clearRect(0,0,340,300);
+ cx.fillStyle='#3a4050';cx.fillRect(0,260,340,40);
+ if(!img.complete||!img.naturalWidth)return;
+ var H=190,W=H*img.naturalWidth/img.naturalHeight,base=262-lift*2;
+ cx.save();cx.translate(170,base);cx.scale(s,s);cx.drawImage(img,-W/2,-H,W,H);cx.restore();
+ if(pip){var top=base-H*s,y=top-8-Math.min(10,pt*14),x=170+W*.35;
+  if(pip==='sweat'){cx.fillStyle='#7fc4e8';cx.beginPath();cx.ellipse(x,y+4,4,6,0,0,7);cx.fill();}
+  else{cx.font='bold 34px system-ui';cx.textAlign='center';cx.fillStyle=pip==='!'?'#c43c2a':'#9fb4e0';cx.fillText(pip,x,y);}}
+}
+init();
+</script></body></html>
