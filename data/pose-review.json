@@ -25,6 +25,12 @@
      "note": "The animation needs to be slower, and he should be facing left, not right",
      "at": "2026-11-20T16:05:47.336Z",
      "build": "fix-gracevoice-distort"
+    },
+    "tom.dodge": {
+     "v": "reject",
+     "note": "Needs to be a more dramatic dodging motion backwards, but this is in the right direction",
+     "at": "2026-11-20T16:06:03.487Z",
+     "build": "fix-gracevoice-distort"
     }
    },
    "expect": [
@@ -65,7 +71,7 @@
     "deedee.victory",
     "deedee.run"
    ],
-   "updated": "2026-11-20T16:05:47.540Z"
+   "updated": "2026-11-20T16:06:03.753Z"
   }
  },
  "about": "Answers from ADMIN > BATTLE LAB > NEW BATTLE > PAINTED STATES (engine/pose-review.js). Key: fighter.state. v approve or reject."
