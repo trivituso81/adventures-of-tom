@@ -5485,7 +5485,7 @@
   {
    "id": "t-ch1art2",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Areas",
    "ask": "pictures",
    "title": "Chapter 1 pictures: six were not needed, only Grace's list is left",
@@ -5513,10 +5513,15 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Fix what you found on: Make the seven chapter 1 pictures is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch1art3",
