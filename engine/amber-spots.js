@@ -62,10 +62,11 @@ function amberSpotSync() {
     }
   }
 }
-// Press A facing a spot: replay the found lines of whoever is here. Before the family has found it, A does nothing special.
+// Press A facing a spot: replay the found lines of whoever is here. Before the family has found it (the scene has not played), A plays
+// only the first line, said by the person who says it in the scene (gem-canon08: it used to open a plain dialog headed "Orange block").
 function amberSpotPress(sp) {
-  if(!flag(sp.found)) return false;
-  const steps=sp.lines.filter(([id])=>amberSpotWith(id)).map(([id,text])=>({talk:AMBER_SPOT_SPEAKER[id]||id,lines:[text]}));
+  const rows=flag(sp.found)?sp.lines:sp.lines.slice(0,1);
+  const steps=rows.filter(([id])=>amberSpotWith(id)).map(([id,text])=>({talk:AMBER_SPOT_SPEAKER[id]||id,lines:[text]}));
   if(!steps.length) return false;
   playScene(steps);
   return true;

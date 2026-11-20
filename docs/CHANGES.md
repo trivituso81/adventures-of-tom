@@ -1,3 +1,10 @@
+## gem-canon08 (2026-11-20): Pressing A on Boppy's orange block before the family has seen it now shows Rose, not "Orange block"
+
+- Gemini chapter 1 report CANON-08 (claude/ch1-gemini-tracker.md), checked on current main. The cutscene `ch1Spot` already says `Rose` (happy) for "The grass is Boppy color!", so the report's target was met there. The wrong name came from the other way in: before the scene has played (`ch1-spot` not set), A on the block fell through to the plain object dialog, which is headed with the block's name, "Orange block", and has no portrait.
+- Fix (`engine/amber-spots.js`, `amberSpotPress`): before the family has found a spot, A plays only its first line, said by the person who says it in the scene (Rose for Boppy's spot, happy mood and her talking face as in the scene). After the scene A still replays all the lines as before. The same change covers the first line of the chapter 2 to 5 spots (TNB, Grace, Grace, Grace), which had the same fault.
+- No spoken line changed or added (same text, same baked clip). If the speaker is not with Tom, A falls back to the old plain dialog.
+- Test: `python3 tools/gem_canon08_test.py` (portrait and landscape screenshots `tools/shots/gem-canon08-*`).
+
 ## startmore (2026-11-20): START now also runs Opus 5.5 medium and Sonnet 5.5 high cards
 
 Tom (11-20): "Add START for more card sizes."
