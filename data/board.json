@@ -9848,7 +9848,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9926,9 +9926,12 @@
     {
      "d": "2026-11-20",
      "t": "Ready to watch again: build fix-heist1play-5 shipped the rebuilt mud blob path (eight rows)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -14235,7 +14238,7 @@
    "id": "c-fix-heist1play-5",
    "tag": "fix-heist1play-5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -14296,6 +14299,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped fix-heist1play-5. Rose pink/yellow dress inconsistency left alone as asked (a separate fix). The plan suggested mh_sneak frames for the charge but they hold the pan overhead, so the charge uses mh_look. Tests: cut_life_test passed; script_convo_test and board_sync_test R5 fail the same on main without this change (not caused by it)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-5: The mud blob's whole path in the muffin theft is rebuilt: hops, stop-off, knock-downs on contact, counter, hop down, a real run out the door"
     }
    ],
    "prompt": {
@@ -14308,7 +14315,8 @@
     "text": "Read CLAUDE.md, then claude/heist-fix5-plan.md in the Project (an interactive session reads it there; the repo has no copy). Cards c-fix-heist1play-5 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-5. Do all eight rows of the plan, then record the scene in portrait and landscape, cut frames at 10 per second from the bang to the despawn and look at every frame against the plan's fail list before you push. You have my full permission to access the repo."
    },
    "after": "t-heist1play",
-   "started_at": "2026-11-20T18:05:00+00:00"
+   "started_at": "2026-11-20T18:05:00+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-welcomepage-play",
@@ -14895,7 +14903,7 @@
    "id": "c-builds1",
    "tag": "builds1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Build history redesign 1: readable rows by day",
    "next": "Ready to start: tap START. Rebuilds the build history list: the plain sentence first, days you open and close, a line showing where this phone is, retries of one card folded into one row, housekeeping hidden, a details sheet on tap, bigger buttons. Plan: claude/builds-plan.md. You test once, after redesign 3.",
@@ -14905,7 +14913,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEtzMhZSD8kTMStGnn",
     "opening": "not started"
    },
    "history": [
@@ -14916,6 +14924,10 @@
     {
      "d": "2026-11-20",
      "t": "The plan and these cards were pushed as board-builds."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -15507,6 +15519,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFovXouovpUQ7r3YLo",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T10:02:24-08:00",
+   "last": "2026-11-20T10:40:07-08:00",
+   "tags": [
+    "fix-heist1play-5"
+   ],
+   "cards": [
+    "c-fix-heist1play-5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEtzMhZSD8kTMStGnn",
+   "title": "Build history redesign 1: readable rows by day",
+   "first": "2026-11-20T10:39:46-08:00",
+   "last": "2026-11-20T10:39:46-08:00",
+   "tags": [],
+   "cards": [
+    "c-builds1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS",
    "title": "board only: UX audit of the build history screen, a redesign plan and its four cards",
    "first": "2026-11-20T10:25:22-08:00",
@@ -15558,16 +15592,6 @@
    "tags": [],
    "cards": [
     "c-idea-implementlisteni"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFovXouovpUQ7r3YLo",
-   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
-   "first": "2026-11-20T10:02:24-08:00",
-   "last": "2026-11-20T10:03:15-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-heist1play-5"
    ]
   },
   {
@@ -16992,8 +17016,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "6e6601d54ae3ab475df23c5ab29b2c49d59571f5",
- "synced_at": "2026-11-20T18:27:05+00:00",
+ "synced": "bfd23692b6ff5422c446cbeeb9cd7a984736cf1f",
+ "synced_at": "2026-11-20T18:40:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
