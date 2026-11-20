@@ -11678,19 +11678,24 @@
    "title": "Fix the speaker name on Rose's first orange-block line",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Claude brings the build to the locked canon for CANON-08 when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, CANON-08 (claude/ch1-gemini-tracker.md). Priority: Medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T16:55:11.877Z"
     }
    ],
    "tag": "gem-canon08",
