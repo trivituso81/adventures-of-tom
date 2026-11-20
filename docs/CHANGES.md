@@ -1,3 +1,19 @@
+## boardux3 (2026-11-20): The board is four tabs (For you, Claude, Chats, Shipped) with search, the same at every screen size
+
+- Card c-boardux3, plan claude/boardux-plan.md sections 3.1 and 3.3 (search and themes), checks A1 to A6, A12, A13 (Built section has the details). `board.html`, `tools/board_shots.py` (checks A1 to A6 on every view), `tools/board_test.py` (A12 search, tabs, columns), `tools/board_backlog_test.py`, `tools/board_ux1_test.py`, `tools/board_ux2_test.py`.
+- Four views with the same names at every width. A phone shows one at a time with a tab bar fixed to the bottom edge (counts on For you and Claude); at 860 px and wider For you and Claude sit side by side with a 32 px gutter (nothing crosses the fold on the open Duo) and the tabs move to the top. The lanes grid is gone.
+- Chats: Working, Waiting on you, Finished. Shipped: every finished card grouped by day, 20 at a time with Show more; BACKLOG sits at the bottom of Shipped.
+- Search box under the header filters every view by title, next step, build name and theme. A Theme button opens a list of the nine themes with open counts in place of the sideways chips.
+- Test fixes found on the way: board_test.py and board_backlog_test.py no longer count parked (backlog) cards as open, and board_test.py uses its own hand-back fixture card.
+
+## itembanner1 (2026-11-20): An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster
+
+- Card c-itembanner1. Tom (11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained".
+- `itemBanner(ids, note)` in engine/party-banner.js: the item's picture (the game's emoji icon) and name ("Got Deedee's Cookie!"), a short original jingle, held until tap or A exactly like the party banner, in the same queue (a join banner shown at the same time comes after it). Several items from one source share one banner ("Got Juice x2, Cookie!"). It waits while a fight is on screen.
+- It replaces the small "Got ... It went in a pocket." popup (`grantItem`, data/party.js: NPC gifts, story give steps, Ellie's prizes, Nara, the first-visit souvenir) and the monster drop line: a win in the old battle shows the banner after the fight (the drop line is its second line, plus the auto-gear note), and a popped monster on the map does the same instead of the "Found:" text. Shop purchases keep their message. The victory card's own "Found:" line stays.
+- Not changed: stealing an item with Big Catch mid-fight keeps its floating text (the item is not from a defeat). Battle 3 has no item drops yet.
+- Test: tools/itembanner_test.py (portrait and landscape, queue order, waits for a fight). Shots: tools/shots/itembanner-portrait.png and -landscape.png.
+
 ## alvareza (2026-11-20): Casa Alvarez scene: everyone walks into the living room and stays on one spot for the whole scene, nobody on the amber
 
 - Card c-alvarez, part 1 of 2 (Tom 2026-11-12 22:22 on the near1 scenes: "I just want them to be close in a normal way"). Before: in `ch12Alvarez` the six walkers shuffled between lines, some stood on amber figures, Tom ended alone by the door (8,11).

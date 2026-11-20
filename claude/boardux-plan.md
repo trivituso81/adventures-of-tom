@@ -267,3 +267,26 @@ Differences from the plan, and why:
 12. The toast now sits above the action bar and the undo bar.
 
 Tests: `python3 tools/board_ux2_test.py`, `python3 tools/board_test.py /tmp/board`, `python3 tools/board_artgen_test.py`, `python3 tools/board_backlog_test.py`, `python3 tools/board_ux1_test.py`, `python3 tools/board_shots.py /tmp/boardshots`, `python3 tools/board_sync_test.py`, `python3 tools/board_check.py`.
+
+### boardux3 (2026-11-20): four views, search and the wide layout
+
+Sections 3.1 and 3.3 (search, themes), checks A1 to A6, A12, A13. Files: `board.html`, `tools/board_shots.py` (A1 to A6 on every view at the five sizes), `tools/board_test.py` (A12, tabs, two columns, Show more), `tools/board_backlog_test.py`, `tools/board_ux1_test.py` (A9 on every view), `tools/board_ux2_test.py`, `data/board.json` (card t-boarduxtry's next step).
+
+| Built | Notes |
+|---|---|
+| Views | `#views` holds `#vFor`, `#vClaude`, `#vChats`, `#vShipped`; the tab bar `#tabs` (`data-view`) picks one. The last view is remembered on the device (the page opens on For you on a first visit). For you holds FOR YOU and COMING BACK TO YOU. Claude holds START NEXT, WORKING NOW, QUEUED, NEEDS ATTENTION (service runs sit in WORKING NOW). |
+| Wide | From 860 px, For you and Claude are two equal columns with a 32 px gutter, so at 951 px the fold at x = 475 is inside the gutter. The tab bar moves to the top; For you and Claude both show as selected. Chats and Shipped replace the columns. |
+| Chats | Three sections open by default: WORKING, WAITING ON YOU, FINISHED (last 3 days, newest push first). |
+| Shipped | All finished cards (not retired) grouped by day (Today, Yesterday, weekday and date), newest first, 20 at a time with Show more. BACKLOG is the last section, closed. |
+| Search and Theme | `#q` filters open, Done and parked cards and conversations by title, next step, build name, id and theme; the Theme button lists the themes with counts of open cards. |
+| Since you last looked | Tapping the line shows every changed card across all views (the tabs are bypassed until the second tap). |
+| Tab counts | For you and Claude carry a count; `#tabs[data-text]` holds the full line the test reads. The five count boxes are gone (F22). |
+
+Differences from the plan, and why:
+
+1. **BACKLOG lives at the bottom of Shipped.** The plan does not place it; it is archive-like and the lanes grid it used to follow is gone.
+2. **Plan 3.1 keeps Needs attention last in Claude**, so the tab count is the whole Claude view's open cards, not just attention. The red stays only inside Needs attention.
+3. **The page remembers the last tab** on the device (not in the plan).
+4. **The Project copy of this file is not updated here** (a scheduled run has no Project access); copy this section there by hand when convenient.
+
+Test changes: board_test.py and board_backlog_test.py did not count parked cards as open before; they do now. board_test.py uses its own hand-back fixture card, because the live board's first Claude card in Up next changes every day. `tools/cardlinks_test.py` fails once in a while on "art unknown id shows no message" with or without this build (it did before it too).

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BOARD pictures and layout checks (boardux1, plan claude/boardux-plan.md section 4): python3 tools/board_shots.py [outdir]
+"""BOARD pictures and layout checks (boardux1 to 3, plan claude/boardux-plan.md section 4): python3 tools/board_shots.py [outdir]
 Opens board.html with a test copy of today's board (data/board.json plus a few fixture cards, a fresh sync) through the stub GitHub at five sizes
 (382 x 580 the folded Duo in Safari, 466 x 657 the folded Duo home-screen app, 669 x 869 the open Duo upright, 951 x 648 the open Duo sideways, 1440 x 900),
 saves a picture of the page, of an open card sheet and (at 382) of the open menu and of one open sheet per section (boardux2), and checks A1 (no sideways scroll at any size) and A2 (the header is one
@@ -52,7 +52,7 @@ INIT = "localStorage.setItem('aot-gh-token','test');"
 
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else '/tmp/boardshots'; os.makedirs(out, exist_ok=True)
-    fails = []
+    fails = []; ORDERS = {}
     rig = Rig(test_board(), 8093, {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])})
     try:
         with sync_playwright() as p:
@@ -69,7 +69,34 @@ def main():
                 pg.screenshot(path=f'{out}/shot-{w}x{h}-page.png'); pg.screenshot(path=f'{out}/shot-{w}x{h}-full.png', full_page=True)
                 if w == 382:
                     pg.click('#menub'); pg.wait_for_timeout(150); pg.screenshot(path=f'{out}/shot-{w}x{h}-menu.png'); pg.click('#menub')
-                first = pg.query_selector('#secView .card:visible, #lanesView .card:visible')
+                # boardux3: every view at every size (A1 per view), tab bar and column checks
+                for v in ('for', 'claude', 'chats', 'shipped'):
+                    pg.click(f'#tabs [data-view={v}]'); pg.wait_for_timeout(250)
+                    if pg.evaluate('document.documentElement.scrollWidth') > w: fails.append(f'A1 {w}x{h}: the {v} view scrolls sideways')
+                    pg.evaluate('window.scrollTo(0,0)'); pg.screenshot(path=f'{out}/shot-{w}x{h}-view-{v}.png')
+                    if v == 'for':
+                        tabs = pg.evaluate("[...document.querySelectorAll('#tabs button')].map(b=>b.dataset.view)")
+                        if tabs != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{w}x{h}: tab names {tabs}')
+                        if w < 860:
+                            r = pg.eval_on_selector('#tabs', 'e=>{const r=e.getBoundingClientRect();return [r.bottom,innerHeight]}')
+                            if abs(r[0] - r[1]) > 1: fails.append(f'{w}x{h}: the tab bar is not at the bottom edge {r}')
+                        else:
+                            if pg.evaluate("document.querySelectorAll('#views .view')[1]&&getComputedStyle(document.querySelector('#vClaude')).display")!='block': fails.append(f'{w}x{h}: wide page does not show For you and Claude together')
+                if w in (669, 951):   # A6: the same view names and the same card order at both sizes
+                    ORDERS[w] = pg.evaluate("[...document.querySelectorAll('#tabs button')].map(b=>b.dataset.view+':'+b.textContent).join()+'|'+['vFor','vClaude','vChats','vShipped'].map(v=>[...document.querySelectorAll('#'+v+' .card,#'+v+' .conv')].map(e=>e.dataset.id||e.textContent.slice(0,20)).join()).join('|')")
+                if w == 951:   # A5: no card or button crosses the fold at x = 475
+                    pg.click('#tabs [data-view=for]'); pg.wait_for_timeout(250)
+                    x = pg.evaluate("[...document.querySelectorAll('#views .card,#views button,#views summary,#views input')].filter(e=>e.offsetParent&&(()=>{const r=e.getBoundingClientRect();return r.left<476&&r.right>474;})()).length")
+                    if x: fails.append(f'A5 {w}x{h}: {x} elements cross x = 475')
+                if w == 466:   # A3, A4
+                    pg.click('#tabs [data-view=for]'); pg.wait_for_timeout(250); pg.evaluate('window.scrollTo(0,0)')
+                    top = pg.evaluate("(()=>{const c=document.querySelector('#vFor .card');if(!c)return null;const r=c.getBoundingClientRect();return [r.top,r.bottom,innerHeight]})()")
+                    if not top or top[1] > top[2]: fails.append(f'A3 {w}x{h}: no whole card of his on the first screen {top}')
+                    tall = pg.evaluate("document.documentElement.scrollHeight")
+                    n = pg.evaluate("document.querySelectorAll('#vFor [data-sec=mine] .card').length")
+                    if n <= 25 and tall > 3 * h + 80: fails.append(f'A4 {w}x{h}: For you is {tall} px tall with {n} cards (3 screens = {3*h})')
+                pg.click('#tabs [data-view=for]'); pg.wait_for_timeout(200)
+                first = pg.query_selector('#views .card:visible .t')
                 if first:
                     first.click(); pg.wait_for_selector('#sheet', state='visible'); pg.wait_for_timeout(150)
                     if pg.evaluate('document.documentElement.scrollWidth') > w: fails.append(f'A1 {w}x{h}: the page scrolls sideways with a card open')
@@ -84,6 +111,7 @@ def main():
             br.close()
     finally:
         rig.stop()
+    if ORDERS.get(669) != ORDERS.get(951): fails.append('A6: 669 and 951 show different view names or card order')
     print('pictures in', out); print('FAILS:', fails)
     return 1 if fails else 0
 if __name__ == '__main__': sys.exit(main())

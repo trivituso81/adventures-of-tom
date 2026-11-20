@@ -20,12 +20,14 @@ b = test_board(extra=False)
 b['cards'] += [tom_card('t-bk1', 'Play the kitchen and report.'), claude_card('c-bk2', 'Being built.', 'prog'),
                claude_card('c-bk3', 'Waits on Tom.', 'wait', waiting_on='tom'), tom_card('t-bk3b', 'Unblocks c-bk3.', blocks=['c-bk3']),
                {'id': 'svc-bk4', 'service': 'x', 'lane': 'github', 'col': 'up', 'theme': 'Tools', 'title': 'Fixture svc-bk4', 'next': 'Renew the token.', 'blocks': [], 'changed': b['cards'][0]['changed'], 'created': b['cards'][0]['changed'], 'chat': {'url': '', 'opening': 'x'}, 'history': []}]
+LIVE_PARKED = len([c for c in b['cards'] if c.get('backlog') and c['col'] != 'done' and not c['id'].startswith(('t-bk', 'c-bk', 'svc-bk'))])   # parked cards already on the live board
 ENV = {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])}
 rig = None
 def saved():   # what the page wrote, read back from the stub GitHub
     j = json.load(urllib.request.urlopen(rig.url.split('?gh=')[1] + '/repos/trivituso81/adventures-of-tom/contents/data/board.json'))
     return {c['id']: c for c in json.loads(base64.b64decode(j['content']))['cards']}
-VIEW = {'phone': '#secView', 'wide': '#lanesView'}
+VIEW = {'phone': '#views', 'wide': '#views'}
+HOME = {'t-bk1': 'for', 'c-bk2': 'claude', 'c-bk3': 'claude', 'svc-bk4': 'claude'}   # boardux3: the view each fixture card lives in; parked cards are at the bottom of Shipped
 try:
     with sync_playwright() as p:
         br = p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None)
@@ -35,11 +37,14 @@ try:
             ctx = br.new_context(viewport={'width': w, 'height': h}); pg = ctx.new_page(); pg.add_init_script(INIT)
             pg.goto(rig.url); pg.wait_for_selector('.card >> visible=true'); pg.wait_for_timeout(600)
             V = VIEW[name]
-            last = pg.evaluate(f"(()=>{{const s=[...document.querySelectorAll('{V} > details')];return s.length?s[s.length-1].dataset.sec:''}})()")
+            pg.click('#tabs [data-view=shipped]'); pg.wait_for_timeout(200)
+            last = pg.evaluate(f"(()=>{{const s=[...document.querySelectorAll('#vShipped > details')];return s.length?s[s.length-1].dataset.sec:''}})()")
+            pg.click('#tabs [data-view=for]'); pg.wait_for_timeout(150)
             check(f'{name}: BACKLOG is the last section', last == 'backlog', last)
             check(f'{name}: BACKLOG is closed when the page opens', pg.evaluate(f"!document.querySelector('{V} details[data-sec=backlog]').open"))
             for cid, lane_word in (('t-bk1', "Tom's"), ('c-bk2', "Claude's"), ('c-bk3', "Claude's"), ('svc-bk4', "GitHub's")):
-                pg.click(f'{V} .card[data-id="{cid}"]'); pg.wait_for_selector('#bmore', state='visible'); pg.click('#bmore'); pg.wait_for_selector('#bback', state='visible')   # boardux2: behind More
+                pg.click(f'#tabs [data-view={HOME[cid]}]'); pg.wait_for_timeout(150)
+                pg.click(f'{V} .card[data-id="{cid}"] .t'); pg.wait_for_selector('#bmore', state='visible'); pg.click('#bmore'); pg.wait_for_selector('#bback', state='visible')   # boardux2: behind More
                 if cid == 't-bk1' and name == 'phone': pg.screenshot(path=f'{out}/{name}-sheet-send.png')
                 pg.click('#bback'); pg.wait_for_selector('#sheet', state='hidden'); pg.wait_for_timeout(250)
                 s = saved()[cid]
@@ -53,17 +58,18 @@ try:
                 lbl = pg.evaluate(f"(document.querySelector('{V} details[data-sec=backlog] .card[data-id=\"{cid}\"] [data-act=unbacklog]')||{{}}).textContent")
                 check(f'{name} {cid}: the button says Add to {lane_word} to-do', lbl == f'Add to {lane_word} to-do', lbl)
             cnt = pg.evaluate(f"document.querySelector('{V} details[data-sec=backlog] .ct').textContent")
-            check(f'{name}: BACKLOG count is 4', cnt == '4', cnt)
+            check(f'{name}: BACKLOG count is the 4 fixtures plus the live ones', cnt == str(4 + LIVE_PARKED), cnt)
+            pg.click('#tabs [data-view=shipped]'); pg.wait_for_timeout(200)
             pg.click(f'{V} details[data-sec=backlog] > summary'); pg.wait_for_timeout(200)
             pg.evaluate(f"document.querySelector('{V} details[data-sec=backlog]').scrollIntoView()"); pg.wait_for_timeout(150)
             pg.screenshot(path=f'{out}/{name}-backlog-open.png')
             if pg.evaluate('document.documentElement.scrollWidth') > w: fails.append(f'{name}: the page scrolls sideways')
-            for cid, where in (('t-bk1', 'mine' if name == 'phone' else 'tom'), ('c-bk2', 'ready' if name == 'phone' else 'claude')):
+            for cid, where in (('t-bk1', 'mine'), ('c-bk2', 'ready')):
                 pg.click(f'{V} details[data-sec=backlog] .card[data-id="{cid}"] [data-act=unbacklog]'); pg.wait_for_timeout(400)
                 s = saved()[cid]
                 check(f'{name} {cid}: one tap on Add puts it back', not s.get('backlog') and 'added this back' in s['history'][-1]['t'], s.get('backlog'))
                 check(f'{name} {cid}: the sheet did not open', not pg.is_visible('#sheet'))
-                sel = f'{V} details[data-sec={where}] .card[data-id="{cid}"]' if name == 'phone' else f'{V} .lane[data-lane={where}] .col[data-col=up] .card[data-id="{cid}"]'
+                sel = f'{V} details[data-sec={where}] .card[data-id="{cid}"]'
                 check(f'{name} {cid}: back on the to-do list ({where})', pg.query_selector(sel) is not None)
             check(f'{name}: BACKLOG stays open after an Add', pg.evaluate(f"document.querySelector('{V} details[data-sec=backlog]').open"))
             # the sheet of a parked card: Add to ... there too, no Send to backlog

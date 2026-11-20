@@ -38,7 +38,7 @@ CASES = [('test card', 't-u-play', '.sh-bar [data-act=good]'), ('pictures', 't-u
 INVIEW = """(sel)=>{const e=document.querySelector('#sheet '+sel);if(!e)return 'missing';const r=e.getBoundingClientRect();
  if(r.top<0||r.bottom>innerHeight||r.left<0||r.right>innerWidth)return 'outside the window ('+Math.round(r.top)+'..'+Math.round(r.bottom)+' of '+innerHeight+')';
  const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return (t&&(t===e||e.contains(t)))?'':'covered by '+(t&&t.tagName+'.'+t.className);}"""
-SOLID = """()=>[...document.querySelectorAll('#secView .card')].map(c=>[c.dataset.id,[...c.querySelectorAll('button')].filter(x=>{const bg=getComputedStyle(x).backgroundColor;return bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent'&&!x.classList.contains('ob')&&!x.classList.contains('tb')}).length]).filter(x=>x[1]>1)"""
+SOLID = """()=>[...document.querySelectorAll('#views .card')].map(c=>[c.dataset.id,[...c.querySelectorAll('button')].filter(x=>{const bg=getComputedStyle(x).backgroundColor;return bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent'&&!x.classList.contains('ob')&&!x.classList.contains('tb')}).length]).filter(x=>x[1]>1)"""
 rig = Rig(b, 8103, {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])})
 try:
     with sync_playwright() as p:
@@ -48,8 +48,8 @@ try:
         pg.goto(rig.url); pg.wait_for_selector('.card >> visible=true'); pg.wait_for_timeout(700)
         pg.evaluate("document.querySelectorAll('details.sec').forEach(d=>d.open=true)"); pg.wait_for_timeout(150)
         # ---- cards (3.4)
-        if pg.query_selector('#secView .card .tag, #secView .card .age, #secView .card .mdl.pill, #secView .card .ask'): fails.append('3.4: a card still shows a filled pill (theme, age, model or ask)')
-        if pg.evaluate("[...document.querySelectorAll('#secView .card')].some(c=>/\\b\\d+d\\b/.test(c.querySelector('.kick').textContent))"): fails.append('3.4: an age like 0d is still on a card')
+        if pg.query_selector('#views .card .tag, #views .card .age, #views .card .mdl.pill, #views .card .ask'): fails.append('3.4: a card still shows a filled pill (theme, age, model or ask)')
+        if pg.evaluate("[...document.querySelectorAll('#views .card')].some(c=>/\\b\\d+d\\b/.test(c.querySelector('.kick').textContent))"): fails.append('3.4: an age like 0d is still on a card')
         many = pg.evaluate(SOLID)
         if many: fails.append('3.4: more than one solid button on a card: ' + str(many[:4]))
         k = pg.inner_text('.card[data-id="t-u-play"] .kick')
@@ -62,12 +62,11 @@ try:
         if pg.evaluate("""()=>{const e=document.querySelector('.card[data-id="t-u-play"] [data-act=wrong]');return e.scrollHeight>e.clientHeight+2||getComputedStyle(e).whiteSpace!=='nowrap'}"""): fails.append('3.4: Something is wrong wraps')
         st = pg.inner_text('.card[data-id="c-u-queued"] .state')
         if not st.startswith('After: Watch the chapter 1 clips'): fails.append('3.4: queued card state line: ' + st)
-        if pg.eval_on_selector_all('#secView .card[data-id="c-u-queued"] .state', 'e=>e.length') != 1: fails.append('3.4: more than one state line')
+        if pg.eval_on_selector_all('#views .card[data-id="c-u-queued"] .state', 'e=>e.length') != 1: fails.append('3.4: more than one state line')
         if '2 days quiet' not in pg.inner_text('.card[data-id="t-u-old"]') and '3 days quiet' not in pg.inner_text('.card[data-id="t-u-old"]'): fails.append('3.4: a card of yours older than a day should say "N days quiet": ' + pg.inner_text('.card[data-id="t-u-old"]'))
         if 'quiet' in pg.inner_text('.card[data-id="t-u-setup"]'): fails.append('3.4: a fresh card should not show an age')
         if 'Unblocks: A queued card' not in pg.inner_text('.card[data-id="t-u-play"]'): fails.append('3.4: Unblocks line missing on the test card')
         if 'Sonnet 5.5, medium' not in pg.inner_text('.card[data-id="c-u-start"] .acts'): fails.append('3.4: model is not plain text beside START')
-        pg.click('[data-sec=done] summary') if not pg.eval_on_selector('[data-sec=done]', 'e=>e.open') else None
         if pg.query_selector('.card[data-id="c-u-tag9"]') and '(u-tag9)' in pg.inner_text('.card[data-id="c-u-tag9"] .t'): fails.append('3.4: a build name in brackets is still shown in a title')
         pg.screenshot(path=f'{out}/ux2-cards-382.png', full_page=True)
         # ---- A10 and the sheets (3.5)

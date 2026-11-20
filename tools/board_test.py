@@ -25,7 +25,8 @@ def tomcard(i, title, nxt, blocks=(), ask='play', **kw):
 b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True}]
 PR = lambda m, e: {'what': 'w', 'before': ['b'], 'model': m, 'effort': e, 'text': 'Prompt for ' + m}
 open_ids = {c['id'] for c in b['cards'] if c['col'] != 'done'}
-target = 'c-nextclean' if 'c-nextclean' in open_ids else next(c['id'] for c in b['cards'] if c['lane'] == 'claude' and c['col'] == 'up')
+target = 'c-handback'   # a fixture the hand-back screen points at (the live board's own cards change every day)
+b['cards'].append({'id': 'c-handback', 'tag': 'handback', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A hand-back card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T, 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Opus 5.5 (row D)', 'effort': 'high (x)', 'text': 'Prompt for handback'}})
 b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target], 'play'), tomcard('t-test2', 'Test card two', 'Do the second thing.', ask='pictures', fyi=True),
                tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
                tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
@@ -57,7 +58,7 @@ stub = subprocess.Popen([sys.executable, os.path.join(HERE, 'art-library', 'stub
 time.sleep(2)
 
 # ---- expected numbers, worked out here from the rules (not copied from the page)
-oc = [c for c in b['cards'] if c['col'] != 'done']
+oc = [c for c in b['cards'] if c['col'] != 'done' and not c.get('backlog')]   # parked cards (backlog1) are on no list
 E_MINE = len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog')])
 E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up' and not c.get('start') and not any(c['id'] in k.get('blocks', []) for k in oc)])
 # boardux1: the status words (plan 3.2). Needs attention = a Claude or service card that is quiet, says Shipped, Done or Built while open, or has a failed run or START.
@@ -79,6 +80,8 @@ def stored():
     f = files()['data/board.json']['content']; return json.loads(base64.b64decode(f.replace('\n', '')).decode())
 def card(i): return [x for x in stored()['cards'] if x['id'] == i][0]
 INIT = "localStorage.setItem('aot-gh-token','test');window.__copied=null;Object.defineProperty(navigator,'clipboard',{value:{writeText:t=>{window.__copied=t;return Promise.resolve();}},configurable:true});"
+def V(pg, v):
+    pg.click(f'#tabs [data-view={v}]'); pg.wait_for_timeout(150)
 URL = 'http://127.0.0.1:8091/board.html?gh=http://127.0.0.1:8092'
 try:
     with sync_playwright() as p:
@@ -89,16 +92,17 @@ try:
             pg.add_init_script(INIT)
             pg.on('pageerror', lambda e: errs.append(str(e)))
             pg.goto(URL); pg.wait_for_selector('.card >> visible=true'); pg.wait_for_timeout(400)
-            if pg.get_attribute('#sum', 'data-text') != WANT: fails.append(f'{name}: top line {pg.get_attribute("#sum", "data-text")!r}, want {WANT!r}')
-            if pg.eval_on_selector_all('#sum button', 'e=>e.length') != 5: fails.append(f'{name}: want 5 count buttons')
+            if pg.get_attribute('#tabs', 'data-text') != WANT: fails.append(f'{name}: top line {pg.get_attribute("#tabs", "data-text")!r}, want {WANT!r}')
+            if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{name}: want the four tabs For you, Claude, Chats, Shipped')
             if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: page scrolls sideways')
             if pg.inner_text('#src') != 'live': fails.append(f'{name}: page did not read the stub')
             if w < 860:
-                order = pg.eval_on_selector_all('#secView .sec', 'e=>e.map(x=>x.dataset.sec)')
-                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv', 'done', 'backlog']: fails.append(f'{name}: section order {order}')
-                cnt = pg.eval_on_selector_all('#secView .sec', 'e=>Object.fromEntries(e.map(x=>[x.dataset.sec,x.querySelectorAll(".card,.conv").length]))')
+                order = pg.eval_on_selector_all('#views .sec', 'e=>e.map(x=>x.dataset.sec)')
+                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv-running', 'conv-you', 'conv-fin', 'backlog']: fails.append(f'{name}: section order {order}')
+                cnt = pg.eval_on_selector_all('#views .sec', 'e=>Object.fromEntries(e.map(x=>[x.dataset.sec,x.querySelectorAll(".card,.conv").length]))')
                 for k, v in (('mine', E_MINE), ('back', E_BACK), ('ready', E_READY), ('run', E_RUN), ('queued', E_QUEUED), ('attn', E_ATTN)):
                     if cnt[k] != v: fails.append(f'{name}: section {k} has {cnt[k]} cards, want {v}')
+                cnt['conv'] = cnt['conv-running'] + cnt['conv-you'] + cnt['conv-fin']
                 if cnt['conv'] != 2: fails.append(f'{name}: conversations {cnt["conv"]}, want 2 (the 10 day old one is left out)')
                 subs = pg.eval_on_selector_all('[data-sec=mine] .sub', 'e=>e.map(x=>x.dataset.ask+":"+x.querySelector(".ct").textContent)')
                 wsubs = [k + ':' + str(len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])) for k in ORDER if any(c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k for c in oc)]
@@ -107,38 +111,57 @@ try:
                 if not pg.inner_text('#synctxt').startswith('Synced '): fails.append(f'{name}: no Synced time in the header: {pg.inner_text("#synctxt")!r}')
                 if 'START' not in pg.inner_text('.card[data-id="c-startme"]'): fails.append(f'{name}: startable card has no START')
                 if 'START' in pg.inner_text('.card[data-id="c-opuscard"]').replace('Copy prompt', ''): fails.append(f'{name}: Opus card has START but no task exists for it')
-                if pg.eval_on_selector('[data-sec=done]', 'e=>e.open'): fails.append(f'{name}: Done should be closed by default')
-                if pg.eval_on_selector('#secView', 'e=>getComputedStyle(e).display') == 'none': fails.append(f'{name}: sections hidden')
-                if pg.eval_on_selector('#lanesView', 'e=>getComputedStyle(e).display') != 'none': fails.append(f'{name}: lane grid shown on a phone')
+                if not pg.query_selector('#vShipped .day'): fails.append(f'{name}: Shipped has no day groups')
+                if pg.eval_on_selector('#vFor', 'e=>getComputedStyle(e).display') == 'none' or pg.eval_on_selector('#vClaude', 'e=>getComputedStyle(e).display') != 'none': fails.append(f'{name}: a phone shows one view at a time, opening on For you')
+                if pg.query_selector('#lanesView') or pg.query_selector('.lane'): fails.append(f'{name}: the lane grid is back')
                 if 'Unblocks: ' not in pg.inner_text('.card[data-id="t-test1"]'): fails.append(f'{name}: Tom card does not say what it unblocks')
                 rc = pg.inner_text('[data-sec=ready]')
                 if 'Copy prompt' not in rc or 'Sonnet 5.5' not in rc: fails.append(f'{name}: Ready cards lack model or Copy prompt')
                 if 'Quiet for 1 day' not in pg.inner_text('[data-sec=attn]'): fails.append(f'{name}: quiet flag text missing in NEEDS ATTENTION')
                 rn = pg.inner_text('[data-sec=run]')
                 if 'Open chat' not in rn or 'last push' not in rn: fails.append(f'{name}: running card lacks Open chat or last push')
-                if pg.eval_on_selector('[data-sec=conv]', 'e=>e.open'): fails.append(f'{name}: Conversations should be closed by default')
-                cv = pg.eval_on_selector('[data-sec=conv]', 'e=>e.textContent')
+                cv = pg.eval_on_selector('#vChats', 'e=>e.textContent')
                 if 'Recent conversation title' not in cv or 'Waiting on you' not in cv or 'Open chat' not in cv: fails.append(f'{name}: conversation strip content ' + cv[:120])
                 if 'Quiet conversation' not in cv or 'Ten days old' in cv: fails.append(f'{name}: conversation window wrong')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=(name != 'portrait'))
-                # count buttons filter
-                pg.click('#sum button[data-only=mine]'); pg.wait_for_timeout(150)
-                if pg.eval_on_selector_all('#secView .sec', 'e=>e.map(x=>x.dataset.sec)') != ['mine', 'back']: fails.append('count button does not filter to its section (For you shows its Coming back to you list too)')
-                pg.click('#sum button[data-only=mine]')
-                pg.click('.chip[data-t="Tools"]'); pg.wait_for_timeout(150)
-                bad = pg.eval_on_selector_all('#secView .card .kick .th', 'e=>e.filter(x=>x.textContent!="Tools").length')
+                # tabs: one view at a time, For you first
+                V(pg, 'claude')
+                if pg.eval_on_selector('#vFor', 'e=>getComputedStyle(e).display') != 'none' or pg.eval_on_selector('#vClaude', 'e=>getComputedStyle(e).display') == 'none': fails.append('the Claude tab does not show only the Claude view')
+                V(pg, 'for')
+                pg.click('#themeb'); pg.click('#themes [data-t="Tools"]'); pg.wait_for_timeout(150)
+                bad = pg.eval_on_selector_all('#views .card .kick .th', 'e=>e.filter(x=>x.textContent!="Tools").length')
                 if bad: fails.append('theme filter leaves other themes')
-                pg.click('.chip[data-t="All"]')
+                pg.click('#themeb'); pg.click('#themes [data-t="All"]'); pg.wait_for_timeout(100)
+                # A12: search finds an open card and a Done card by a word in the title
+                for who, sel, view_ in (('open', '#vFor .card .t', 'for'), ('done', '#vShipped .card .t', 'shipped')):
+                    ttl = pg.eval_on_selector(sel, 'e=>e.textContent'); wd = max(ttl.split(), key=len)
+                    pg.fill('#q', wd); pg.wait_for_timeout(200); V(pg, view_)
+                    if not pg.evaluate("(t)=>[...document.querySelectorAll('#views .card .t')].some(e=>e.offsetParent&&e.textContent===t)", ttl): fails.append(f'A12: search for {wd!r} did not find the {who} card {ttl!r}')
+                    pg.fill('#q', 'zzqqxx'); pg.wait_for_timeout(200)
+                    if pg.evaluate("[...document.querySelectorAll('#views .card')].some(e=>e.offsetParent)"): fails.append('A12: a nonsense search still shows cards')
+                    pg.fill('#q', ''); pg.wait_for_timeout(150)
+                V(pg, 'for')
+                # A13 Chats: the three groups; Shipped: more than 20 done cards show Show more
+                if pg.eval_on_selector_all('#vChats .sec', 'e=>e.map(x=>x.dataset.sec)') != ['conv-running', 'conv-you', 'conv-fin']: fails.append('Chats lacks Working, Waiting on you, Finished')
+                if pg.eval_on_selector_all('#vShipped .card', 'e=>e.length') > 20 + 0 and not pg.query_selector('#shipmore'): fails.append('Shipped shows more than 20 with no Show more')
+                if pg.query_selector('#shipmore'):
+                    n1 = pg.eval_on_selector_all('#vShipped .card', 'e=>e.length'); V(pg, 'shipped'); pg.click('#shipmore'); pg.wait_for_timeout(200)
+                    if pg.eval_on_selector_all('#vShipped .card', 'e=>e.length') <= n1: fails.append('Show more added nothing')
+                    V(pg, 'for')
                 # copy prompt on a Ready card
+                V(pg, 'claude')
                 first = pg.eval_on_selector('[data-sec=ready] .card', 'e=>e.dataset.id')
                 pg.click('[data-sec=ready] .card [data-act=copy]'); pg.wait_for_timeout(150)
-                want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text'] + HIST(first)
+                want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text']
+                if 'Read its history first' not in want: want += ' Board card %s. Read its history first: my notes and answers are there.' % first
+                if 'board: start ' + first not in want: want += FIRST(first)   # mirrors withId in board.html
                 if pg.evaluate('window.__copied') != want: fails.append('Copy prompt did not copy that card\'s prompt plus the board card line: ' + str(pg.evaluate('window.__copied'))[-120:])
                 if pg.query_selector('#sheet').is_visible(): fails.append('Copy prompt opened the sheet')
                 pg.wait_for_timeout(500)
                 cc = card(first)
                 if cc['col'] != 'prog' or cc['chat'].get('url') or 'copied the prompt' not in cc['history'][-1]['t']: fails.append(f'board5: Copy prompt should move the card to In progress: {cc["col"]} {cc["chat"]}')
                 if not pg.query_selector(f'[data-sec=run] .card[data-id="{first}"]'): fails.append('board5: copied card not shown under WORKING NOW')
+                V(pg, 'for')
                 for i in ('t-test1', 't-test2', 't-test3', 't-test8', 't-test9'):
                     ct = pg.inner_text(f'.card[data-id="{i}"]')
                     if 'All good' not in ct or 'Something is wrong' not in ct: fails.append(f'{i}: a test card lacks All good or Something is wrong on the card itself')
@@ -161,6 +184,7 @@ try:
                 if pg.eval_on_selector_all('#sheet [data-choice]', 'e=>e.length') != 3 or 'A leads to the quick road.' not in ds or 'Something else' not in ds: fails.append('decide sheet: want 2 choices plus Something else, each with what it leads to')
                 if 'I did this' in ds: fails.append('a decide card offers I did this')
                 pg.screenshot(path=f'{out}/board-decide.png'); pg.click('#bclose')
+                V(pg, 'claude')
                 pg.click('.card[data-id="c-opuscard"]'); pg.wait_for_selector('#bcopy')
                 os_ = pg.inner_text('#sheet')
                 if 'Opus 5.5, high' not in os_ or 'Open the Project in Claude' not in os_ or pg.query_selector('#bstart'): fails.append('Opus card sheet: want large model and effort, the Project link, no START')
@@ -169,17 +193,13 @@ try:
                 if 'I did this' in pg.inner_text('#sheet'): fails.append('a Claude card offers I did this')
                 pg.click('#bclose')
             else:
-                if pg.eval_on_selector('#lanesView', 'e=>getComputedStyle(e).display') == 'none': fails.append(f'{name}: lane grid hidden on wide screen')
-                if pg.eval_on_selector('#secView', 'e=>getComputedStyle(e).display') != 'none': fails.append(f'{name}: sections shown on wide screen')
-                lanes = pg.eval_on_selector_all('#lanesView .lane', 'e=>e.map(x=>x.dataset.lane)')
-                if lanes != ['tom', 'claude', 'xai']: fails.append(f'{name}: lanes {lanes}, want tom, claude, xai (service lanes only when they hold a card)')
-                cols = pg.eval_on_selector('#lanesView .cols', 'e=>getComputedStyle(e).display')
-                if cols != 'grid': fails.append(f'{name}: cols {cols}')
-                if pg.query_selector('#lanesView .col[data-col=done]'): fails.append(f'{name}: the lane grid still has a Done column')
-                if pg.eval_on_selector_all('#lanesView .lane[data-lane=tom] .col', 'e=>e.length') != 3: fails.append(f'{name}: want 3 columns (Up next, In progress, Waiting)')
-                if not pg.query_selector('#lanesView > [data-sec=done]') or pg.eval_on_selector('#lanesView > [data-sec=done]', 'e=>e.open'): fails.append(f'{name}: Done should be a closed list below the lanes')
-                if pg.eval_on_selector('#lanesView > [data-sec=done]', 'e=>e.getBoundingClientRect().top') < pg.eval_on_selector_all('#lanesView .lane', 'e=>e[e.length-1].getBoundingClientRect().bottom') - 1: fails.append(f'{name}: Done list is not below the lanes')
-                if not pg.query_selector('#lanesView [data-sec=conv]'): fails.append(f'{name}: no Conversations strip on the wide layout')
+                if pg.query_selector('#lanesView') or pg.query_selector('.lane'): fails.append(f'{name}: the lane grid is still on the page')
+                if pg.eval_on_selector('#views', 'e=>getComputedStyle(e).display') != 'grid': fails.append(f'{name}: For you and Claude should sit in two columns')
+                if pg.eval_on_selector('#vFor', 'e=>getComputedStyle(e).display') == 'none' or pg.eval_on_selector('#vClaude', 'e=>getComputedStyle(e).display') == 'none': fails.append(f'{name}: wide page lacks one of the two columns')
+                if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{name}: tab names differ from the phone')
+                a1, a2 = pg.eval_on_selector('#vFor', 'e=>e.getBoundingClientRect().right'), pg.eval_on_selector('#vClaude', 'e=>e.getBoundingClientRect().left')
+                if a2 - a1 < 31: fails.append(f'{name}: the gutter between the columns is {a2 - a1} px (want 32)')
+                if not pg.query_selector('#vClaude [data-sec=ready] .card') or not pg.query_selector('#vFor [data-sec=mine] .card'): fails.append(f'{name}: columns hold the wrong cards')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=True)
             ctx.close()
         # actions against the stub
@@ -230,7 +250,7 @@ try:
         c = card(tid)
         if c['col'] != 'done' or not c.get('retired') or 'covered by another card' not in c['history'][-1]['t']: fails.append('Not needed not saved right')
         if not any(x['id'] == tid for x in stored()['cards']): fails.append('retired card removed from the file (it must stay)')
-        if tid in pg.inner_text('#secView') or c['title'] in pg.inner_text('[data-sec=done]'): fails.append('retired card still shown on the page')
+        if tid in pg.inner_text('#views') or c['title'] in pg.inner_text('#vShipped'): fails.append('retired card still shown on the page')
         pg.click('.card[data-id="t-test4"]'); pg.click('#sheet [data-choice="0"]'); pg.wait_for_timeout(600)
         c = card('t-test4')
         if c['col'] != 'done' or c.get('answer') != 'Option A' or 'Option A' not in c['history'][-1]['t']: fails.append(f'choice not saved: {c["col"]} {c.get("answer")}')
@@ -242,11 +262,13 @@ try:
         c = card('t-test5')
         if c['col'] != 'done' or c.get('answer') != 'Maybe later (ok)': fails.append(f'something else not saved: {c.get("answer")}')
         pg.click('#bclose')
+        V(pg, 'claude')
         pg.click('.card[data-id="c-startme"] [data-act=start]'); pg.wait_for_timeout(600)
         c = card('c-startme')
         if c.get('start') is not True or 'START' not in c['history'][-1]['t'] or c['col'] != 'up': fails.append(f'START not saved right: {c.get("start")} {c["col"]}')
         if 'Starting' not in pg.inner_text('#sheet'): fails.append('START showed no confirmation')
         pg.click('#bclose')
+        V(pg, 'for')
         if not pg.evaluate('window.__board.reload()'): fails.append('reload returned false with no sheet open')
         pg.click('.card[data-id="t-test3"]')
         if pg.evaluate('window.__board.reload()'): fails.append('reload ran while a card sheet was open (it would wipe what Tom is typing)')
@@ -294,7 +316,7 @@ try:
         if 'kitchen' not in f['prompt']['text'] or '<' in json.dumps(f): fails.append('play fix prompt lacks what he was asked, or holds a "<"')
         if 'starts fixing this by itself' not in pg.inner_text('#sheet'): fails.append('auto-start screen text: ' + pg.inner_text('#sheet')[:160])
         pg.screenshot(path=f'{out}/board-wrong-auto.png'); pg.click('#bclose')
-        pg.click('#secView .card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
+        V(pg, 'claude'); pg.click('#views .card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
         open('/tmp/board_after.json', 'w').write(json.dumps(stored()))
         r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_after.json'], capture_output=True, text=True)
         if r.returncode: fails.append('board_check fails on the board the page wrote: ' + r.stdout[-300:])

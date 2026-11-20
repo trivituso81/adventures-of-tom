@@ -7711,7 +7711,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try the redesigned board on your phone",
-   "next": "Open the board from your home screen with the Duo folded. 1) The header is one row and nothing slides sideways. 2) For you shows your cards first, and you can read what to do without opening one. 3) Tap a card: the main button is in view without scrolling. 4) Tap All good on a card you have finished, then Undo. 5) Search for \"muffin\". 6) Unfold the Duo and turn it sideways: the same four views, two columns, nothing across the fold. All good if it works; Something is wrong with what you saw.",
+   "next": "Open the board from your home screen with the Duo folded. 1) The header is one row and nothing slides sideways. 2) The bar at the bottom has four tabs: For you, Claude, Chats, Shipped. For you opens first and shows your cards with what to do. 3) Tap Claude, then Chats (Working, Waiting on you, Finished), then Shipped (cards grouped by day, Show more at the bottom). 4) Type \"muffin\" in the search box: cards in every tab narrow to that word. Tap Theme to pick one theme. 5) Tap a card: the main button is in view without scrolling. Tap All good on a card you have finished, then Undo. 6) Unfold the Duo and turn it sideways: the same four names, For you and Claude as two columns, nothing across the fold. All good if it works; Something is wrong with what you saw.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -7731,6 +7731,10 @@
     {
      "d": "2026-11-20",
      "t": "Precondition moved to its own First line (boardux2)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "boardux3: the redesign is built. The next step now describes the four tabs, search, Theme button and the two columns."
     }
    ],
    "first": "Wait for Board redesign 3 to ship (build boardux3)."
