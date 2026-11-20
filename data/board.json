@@ -6713,7 +6713,7 @@
    "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "voice",
    "next": "Build fix-ch1starving-3 is live now (your last try was about 40 seconds too early, so you had the old page). Close the Voice Library fully and reopen it with the button below (Open in the Voice Library: Tom's line). The script box ends \"...number two can't wait. [hungry] I'm starving!\" and stays when you tap out. Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
    "blocks": [
@@ -6781,6 +6781,10 @@
     {
      "d": "2026-11-20",
      "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
    "links": [
@@ -6791,7 +6795,8 @@
      ],
      "label": "Tom's line"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1starving",
