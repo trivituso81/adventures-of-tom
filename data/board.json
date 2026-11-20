@@ -13391,7 +13391,7 @@
   {
    "id": "t-startmore-setup",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "setup",
    "title": "Set up two more START tasks (Opus medium, Sonnet high)",
@@ -13410,6 +13410,11 @@
     {
      "d": "2026-11-20",
      "t": "Added by startmore: START needs one Claude scheduled task and two repo secrets per size, and only you can create them. Same steps as Set up the START button, done twice."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this.",
+     "at": "2026-11-20T17:40:35.834Z"
     }
    ],
    "steps": [
@@ -13423,7 +13428,8 @@
     "Model picker for the second task: choose Sonnet 5.5 and set the effort to High (it starts on Medium, change it). Trigger row: API again, nothing else. Tap Create, then copy its token and Fire URL into Notes the same way, labelled SONNET HIGH TOKEN and SONNET HIGH URL.",
     "On github.com open the repo, then Settings > Secrets and variables > Actions > New repository secret. Add four secrets, one at a time: CLAUDE_TASK_OPUS_MEDIUM_URL and CLAUDE_TASK_OPUS_MEDIUM_TOKEN (from the first task), then CLAUDE_TASK_SONNET_HIGH_URL and CLAUDE_TASK_SONNET_HIGH_TOKEN (from the second).",
     "Come back here and tap I did this. The board turns START on for both sizes by itself and starts the test card (Test the new START tasks)."
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-startmore-test",
