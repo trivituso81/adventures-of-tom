@@ -6874,7 +6874,7 @@
    "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "animations",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses (clipposesfix).",
    "blocks": [
@@ -6894,9 +6894,12 @@
     {
      "d": "2026-11-20",
      "t": "fix-clipposes: reproduced. All 36 states played, but the four stood in a tight overlapping group, so Rose's guard, knocked out and get up were behind Deedee and Tom's were behind Grace and Rose. Each fighter now steps out to an open spot and is drawn in front."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1) is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-clipposesfix",
@@ -8631,7 +8634,7 @@
    "id": "c-fix-clipposes",
    "tag": "fix-clipposes",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
@@ -8676,6 +8679,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-clipposes: the fighter showing states stands on an open spot in front of the family, drawn on top; the demo's run is 80 battle pixels (was 110) so it stops short of the Mudling. No pencil report since 08:26 UTC was about this."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-clipposes: PAINTED STATES: CHAPTER 1 now shows each fighter on an open spot in front of the family, so no state is hidden behind someone"
     }
    ],
    "prompt": {
@@ -8687,7 +8694,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the painted poses for the family (PAINTED STATES: CHAPTER 1), ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix). He wrote: Some of these are missing from the screen, like I don't see them in the battle test\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:26:38.640Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-clipposes"
+   "after": "t-clipposes",
+   "done": "2026-11-20"
   },
   {
    "id": "t-ch6play",
@@ -9279,6 +9287,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFiXq97j4v19xAg1P9",
+   "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "first": "2026-11-20T00:36:32-08:00",
+   "last": "2026-11-20T01:01:46-08:00",
+   "tags": [
+    "fix-clipposes"
+   ],
+   "cards": [
+    "c-fix-clipposes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
    "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
    "first": "2026-11-20T00:54:15-08:00",
@@ -9328,16 +9348,6 @@
    "tags": [],
    "cards": [
     "c-alvarez"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFiXq97j4v19xAg1P9",
-   "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
-   "first": "2026-11-20T00:36:32-08:00",
-   "last": "2026-11-20T00:36:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-clipposes"
    ]
   },
   {
@@ -9959,8 +9969,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "247cf11c1e43523028e06d9abd8540f7144e50fa",
- "synced_at": "2026-11-20T09:00:08+00:00",
+ "synced": "79c68d98e918894fb7ce8350ea475b7ec10c22af",
+ "synced_at": "2026-11-20T09:02:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
