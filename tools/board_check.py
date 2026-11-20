@@ -80,6 +80,21 @@ for c in d.get('cards', []):
                 nx = c.get('next', '').lower()
                 if not any(x and x.lower() in nx for x in (k.get('title'), k.get('tag'), k.get('id'))):
                     bad.append('%s: blocks "%s" but its next step does not name that card' % (n, k.get('id')))
+# cardlinks1: a card's `links` open the exact Library entry; an open Tom card that sends Tom to a Library carries one for it
+LIBS = {'art': 'ART LIBRARY', 'voice': 'VOICE LIBRARY', 'music': 'MUSIC LIBRARY'}
+for c in d['cards']:
+    n = c.get('id')
+    for l in c.get('links') or []:
+        if not isinstance(l, dict) or l.get('to') not in LIBS: bad.append('%s: a link needs `to` of art, voice or music' % n); continue
+        ids = l.get('ids')
+        if not ids: bad.append('%s: a %s link needs ids (not empty)' % (n, l['to']))
+        elif isinstance(ids, dict) and not (l['to'] == 'voice' and (ids.get('chapter') is not None or ids.get('show'))): bad.append('%s: only a voice link may use {chapter, show} for ids' % n)
+        elif isinstance(ids, str): bad.append('%s: link ids is a list of ids' % n)
+    if c.get('lane') == 'tom' and c.get('col') != 'done':
+        have = {l.get('to') for l in c.get('links') or [] if isinstance(l, dict)} | ({'art'} if (c.get('done_when') or {}).get('art_approved') else set())
+        for k, name in LIBS.items():
+            if name in c.get('next', '').upper() and k not in have:
+                bad.append('%s: its next step sends you to the %s but the card has no link to it (add `links: [{to: "%s", ids: [...], label: "..."}]`)' % (n, name.title(), k))
 if push_tag:
     def on_card(c):
         t = c.get('tag')

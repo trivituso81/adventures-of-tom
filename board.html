@@ -95,6 +95,8 @@ input[type=text]{width:100%}
 .sec .none{color:var(--muted);font-size:13px;padding:6px 4px}
 .card .meta2{color:var(--muted);font-size:13px;margin-top:6px}
 .card .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.links .lnk{display:inline-block;background:var(--line);color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:7px 10px;font-size:13px;font-weight:700;text-decoration:none}
 .card .unb{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
 .card .quiet{color:var(--prob-text);font-size:13px;margin-top:6px;font-weight:600}
 .card .mdl{display:inline-block;font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff;font-weight:700}
@@ -319,6 +321,22 @@ function convState(s){
 const recentConvs=()=>(B.sessions||[]).filter(s=>nowMs()-Date.parse(s.last)<=3*864e5);
 function quietFor(c){const s=sessionFor(c);if(!s){const d=Math.max(1,ageOf(c));return d+' day'+(d===1?'':'s');}const h=Math.max(1,Math.floor((nowMs()-Date.parse(s.last))/36e5));return h<24?h+' hour'+(h===1?'':'s'):Math.floor(h/24)+' day'+(Math.floor(h/24)===1?'':'s');}
 
+// cardlinks1: buttons that open the exact Library entry a card is about. c.links = [{to:'art'|'voice'|'music', ids, label}]; a card with done_when.art_approved gets its Art Library link from those ids.
+const LIBNAME={art:'Art Library',voice:'Voice Library',music:'Music Library'};
+function linkList(c){
+  if(!c||c.col==='done')return [];
+  const out=[];
+  (c.links||[]).forEach(l=>{
+    if(!l||!LIBNAME[l.to])return;
+    const lab=l.label||'';
+    if(l.to==='art'){const ids=[].concat(l.ids||[]).filter(Boolean);if(ids.length)out.push({to:'art',href:'art.html?open='+ids.map(encodeURIComponent).join(','),label:lab});}
+    else if(l.to==='voice'&&l.ids&&!Array.isArray(l.ids)){const q=new URLSearchParams();if(l.ids.chapter!=null)q.set('chapter',l.ids.chapter);if(l.ids.show)q.set('show',l.ids.show);out.push({to:'voice',href:'voices.html?'+q.toString(),label:lab});}
+    else [].concat(l.ids||[]).filter(Boolean).forEach(id=>out.push({to:l.to,href:(l.to==='voice'?'voices.html?line=':'music.html?track=')+encodeURIComponent(id),label:lab}));
+  });
+  if(!out.some(x=>x.to==='art')){const ids=picIds(c);if(ids.length&&c.lane==='tom')out.push({to:'art',href:'art.html?open='+ids.map(encodeURIComponent).join(','),label:ids.length===1?'':'all '+ids.length+' pictures'});}
+  return out;
+}
+const linksHtml=c=>{const l=linkList(c);return l.length?'<div class="links">'+l.map(x=>'<a class="lnk" href="'+esc(x.href)+'">Open in the '+LIBNAME[x.to]+(x.label?': '+esc(x.label):'')+'</a>').join('')+'</div>':'';};
 function cardHtml(c,ctx){
   const a=ageOf(c),bl=blocksOpen(c),tcol=THEME_COL[c.theme]||'#ccc';
   let meta='<span class="tag" style="background:'+tcol+'">'+esc(c.theme)+'</span>';
@@ -338,7 +356,7 @@ function cardHtml(c,ctx){
   if(c.start_error&&c.col!=='done'&&ctx!=='attn') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
   if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=picsHtml(c,true)+rvBtns(c.id);
   const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
-  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+dot+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
+  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+dot+'</div><div class="n">'+esc(c.next)+'</div>'+linksHtml(c)+'<div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
 const rvBtns=id=>'<div class="rv"><button class="good" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
 function convHtml(s){
@@ -481,6 +499,7 @@ function openSheet(id){
   let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
+  h+=linksHtml(c);
   if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
   h+=picsHtml(c,false);
   if(isReview(c)&&c.col!=='wait') h+='<h4>How did it go?</h4>'+rvBtns(c.id)+'<p class="hint" style="margin-top:6px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';

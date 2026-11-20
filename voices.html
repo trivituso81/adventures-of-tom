@@ -28,6 +28,7 @@ button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
 button.danger{background:#5a2233}
 .hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px}.ok{color:#7be0a6}
 .keyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row.linked{outline:2px solid #e8c14a;outline-offset:-2px}
 .filters{padding:10px 0 8px;border-bottom:1px solid #2c2852}
 .frow{display:flex;gap:6px;overflow-x:auto;padding:4px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .frow::-webkit-scrollbar{display:none}
@@ -819,6 +820,25 @@ async function exportClips(pending){
   if(done&&pending){ hashes.forEach(h=>SENT.add(h)); saveSent(); renderFilters(); if(F.show==='pending'||F.show==='sent') renderAll(); }
 }
 
+// cardlinks1: ?line=<line key> opens one line and scrolls to it; ?chapter=<n>&show=<filter> sets those filters (show: all, none, phone, pending, sent, builtin, old, retake or the chip's words).
+// A link that names nothing real shows one line at the top of the list instead of a blank page.
+function voiceLink(again){
+  const Q=new URLSearchParams(location.search), line=Q.get('line'), ch=Q.get('chapter'), sh=(Q.get('show')||'').toLowerCase().trim();
+  if(!line&&!ch&&!sh) return;
+  const say=m=>{ let b=$('linkmsg'); if(!b){ b=document.createElement('div'); b.id='linkmsg'; b.className='empty err'; $('list').parentNode.insertBefore(b,$('list')); } b.textContent=m; };
+  if(!again){
+    const SHOWS={'all lines':'all','no clip yet':'none','re-recorded on this device':'phone','pending upload':'pending','sent, not merged yet':'sent','built-in clip':'builtin','old voice':'old','new direction':'retake'};
+    if(sh){ const v=SHOWS[sh]||sh; if(['all','none','phone','pending','sent','builtin','old','retake'].includes(v)){ F.show=v; F.q=''; $('q').value=''; F.who.clear(); F.type.clear(); } else say('This link names a filter the Voice Library does not have: '+sh+'.'); }
+    if(ch){ const n=+ch; if(IDX.chapters.some(c=>c.n===n)||n===0){ F.ch=new Set([n]); } else say('This link names a chapter the Voice Library does not have: '+ch+'.'); }
+    if(line){
+      const it=itemByKey(line);
+      if(!it) say('This link names a voice line the Voice Library does not have.');
+      else { F.show='all'; F.q=''; $('q').value=''; F.who.clear(); F.type.clear(); F.ch.clear(); F.ord='story'; openKey=lk(it); const i=(F.ord==='story'?visible().sort((a,b)=>a.o-b.o):visible()).indexOf(it); if(i>=shown) shown=i+1; }
+    }
+    saveF(); renderAll();
+  }
+  if(line&&openKey){ const el=document.querySelector('.row[data-k="'+CSS.escape(openKey)+'"]'); if(el){ el.scrollIntoView({block:'start'}); el.classList.add('linked'); } }
+}
 // ---------- start ----------
 (async()=>{
   paintKey(); $('q').value=F.q;
@@ -827,8 +847,8 @@ async function exportClips(pending){
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
   $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this device at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
-  renderAll();
-  await loadPhone(false);
+  renderAll(); voiceLink();
+  await loadPhone(false); voiceLink(true);
   if(window.__VL_READY) window.__VL_READY();
 })();
 // The phone's clips and takes load after the list is on screen. If the last visit never finished this step (the browser ran

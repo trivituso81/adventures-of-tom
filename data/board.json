@@ -6703,7 +6703,16 @@
      "t": "Tom: something is wrong: That's not what I wanted. I don't want. I'm starving to be dropped Sent to Claude as card c-fix-ch1starving-2; this card waits on it and comes back to you when the fix ships."
     }
    ],
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait."
+     ],
+     "label": "Tom's line"
+    }
+   ]
   },
   {
    "id": "c-fix-ch1starving",
@@ -7022,7 +7031,7 @@
    "col": "prog",
    "tag": "cardlinks1",
    "auto": true,
-   "next": "Waits on Generate all (artgen1), because both change the board page. Then every card that sends you to a Library gets a button that opens that exact entry, and the three Library pages learn to open an entry from a link.",
+   "next": "Built (cardlinks1): board cards show Open in the Art, Voice or Music Library buttons; art.html?open=IDS, voices.html?line=KEY and ?chapter=N&show=FILTER, music.html?track=ID open that entry. The open Tom cards that name a Library carry their links. Plan Built section updated.",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
@@ -7050,6 +7059,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built cardlinks1 on Claude Sonnet 5.5, effort medium. It hands to t-cardlinks1try."
     }
    ],
    "prompt": {
@@ -7060,7 +7073,8 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (one small feature on four pages, written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-cardlinks1try"
   },
   {
    "id": "c-adminhub1",
@@ -7207,6 +7221,15 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-artgen1 (artgen1 shipped). It waits until the Mudling sheet card (t-heistart) is open for you, because that card waits on its Claude card first."
+    }
+   ],
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "ch1-mudling-heist2"
+     ],
+     "label": "the Mudling sheet"
     }
    ]
   },
@@ -7745,6 +7768,29 @@
      "d": "2026-11-20",
      "t": "Collected from the Waiting on Tom list in claude/next.md by c-nextclean."
     }
+   ],
+   "links": [
+    {
+     "to": "voice",
+     "ids": {
+      "show": "none"
+     },
+     "label": "No clip yet"
+    },
+    {
+     "to": "art",
+     "ids": [
+      "ch7-stacks-grey",
+      "ch8-yard-grey",
+      "ch8-potluck-day",
+      "ch8-potluck-night",
+      "ch8-orange-block",
+      "ch8-coin",
+      "ch8-notice",
+      "ch8-rosebush"
+     ],
+     "label": "chapter 7 and 8 art to make"
+    }
    ]
   },
   {
@@ -7765,6 +7811,46 @@
      "t": "Made by cutpolish5."
     }
    ]
+  },
+  {
+   "id": "t-cardlinks1try",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Try the Open in the Library buttons on a card",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-cardlinks1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-cardlinks1 (build cardlinks1)."
+    }
+   ],
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "ch1-mudling-heist2"
+     ],
+     "label": "the Mudling sheet"
+    },
+    {
+     "to": "voice",
+     "ids": [
+      "d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait."
+     ],
+     "label": "Tom's line"
+    }
+   ],
+   "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong."
   }
  ],
  "sessions": [

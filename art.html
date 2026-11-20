@@ -54,6 +54,7 @@ input[type=search]{width:100%;padding:12px;border-radius:10px;border:1px solid #
 .open>.car,.ih[aria-expanded=true] .car{transform:rotate(45deg)}
 .gbody{border:1px solid #2c2852;border-radius:12px;overflow:hidden;margin:6px 0 0}
 .item+.item{border-top:1px solid #2c2852}
+.item.linked{outline:2px solid #e8c14a;outline-offset:-2px}
 .ih{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#1d1a3d;border-radius:0;min-height:52px;padding:8px 12px;font-weight:500}
 .ih .it{flex:1;min-width:0;display:block;line-height:1.3}
 .ih .why{display:block;font-weight:400;font-size:12px;color:#b9b3e6;margin-top:2px}
@@ -289,7 +290,7 @@ function renderCard(e){
 }
 function renderItem(e){
   const s=ST[e.id], open=!!UI.open[e.id], blk=s==='blocked'&&!open?blockInfo(e):null;   // an open row shows the reason in its banner instead
-  return '<div class="item s-'+s+'" data-id="'+esc(e.id)+'"><button class="ih" data-toggle="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="dot"></span><span class="it">'+esc(rowLabel(e))+(blk?'<span class="why">'+esc(blk.why)+'</span>':'')+'</span>'+(inGame(e)?'<span class="chip c-ingame">In game</span>':'')+'<span class="chip c-'+s+'">'+STATE_NAME[s]+'</span><span class="car"></span></button>'+(open?renderCard(e):'')+'</div>';
+  return '<div class="item s-'+s+(LINKED[e.id]?' linked':'')+'" data-id="'+esc(e.id)+'"><button class="ih" data-toggle="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="dot"></span><span class="it">'+esc(rowLabel(e))+(blk?'<span class="why">'+esc(blk.why)+'</span>':'')+'</span>'+(inGame(e)?'<span class="chip c-ingame">In game</span>':'')+'<span class="chip c-'+s+'">'+STATE_NAME[s]+'</span><span class="car"></span></button>'+(open?renderCard(e):'')+'</div>';
 }
 function renderGroup(tab,g,items,single){
   const shown=items.filter(visible); if(!shown.length) return '';
@@ -623,9 +624,26 @@ async function artgenImport(manual){
   if(manual||n) toast(n?n+' picture'+(n===1?'':'s')+' made for you '+(n===1?'is':'are')+' waiting for your review.':'No new pictures were made for you.');
   return n;
 }
+// ?review=<ids> and ?open=<ids> (cardlinks1) share one reader: split the list, keep the ids that are entries, say so when none is.
+function linkIds(ids){
+  const known=ids.filter(id=>ENTRY[id]), bad=ids.filter(id=>!ENTRY[id]);
+  if(!known.length) toast('This link names '+(bad.length===1?'a picture':'pictures')+' the Art Library does not have: '+bad.join(', ')+'.');
+  else if(bad.length) toast('Not found in the Art Library: '+bad.join(', ')+'.');
+  return known;
+}
+// ?open=<ids>: switch to the entry's tab, show every filter, open its group and row, scroll to the first one
+const LINKED={};
+function openIds(ids){
+  const k=linkIds(ids); if(!k.length) return;
+  const e0=ENTRY[k[0]]; UI.tab=e0.tab; UI.filter='all'; UI.q=''; const qi=$('q'); if(qi) qi.value='';
+  for(const id of k){ LINKED[id]=1; const e=ENTRY[id]; UI.grp[gkey(e.tab,e.group||e.tab)]=1; UI.open[id]=1; }
+  saveUI(); paintList();
+  const el=findBy('.item','id',k[0]); if(el) el.scrollIntoView({block:'start'});
+}
 // ?review=<ids>: the review viewer on those entries (the ones waiting on Tom on this device)
 function reviewIds(ids){
-  computeStates(); const w=ids.filter(id=>ENTRY[id]&&ST[id]==='wait');
+  ids=linkIds(ids); if(!ids.length) return;
+  computeStates(); const w=ids.filter(id=>ST[id]==='wait');
   if(!w.length) return toast('Those pictures are not waiting for review on this device. Open Setup and press Check for pictures made for you.');
   RV.q=w; RV.mode='queue'; RV.i=0; RV.v=0; $('rv').hidden=false; document.body.style.overflow='hidden'; rvDraw();
 }
@@ -651,7 +669,7 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   if(!FILTERS.some(f=>f[0]===UI.filter)) UI.filter='todo';
   setupOpen(!(LS.get('aot-art-key')&&LS.get('aot-gh-token')));   // fold the keys and spend cards once both keys are saved
   paintList(); scrollTo(0,UI.sy[UI.tab]||0);
-  { const rv=(Q.get('review')||'').split(',').map(x=>x.trim()).filter(Boolean); if(rv.length) reviewIds(rv); }
+  { const rv=(Q.get('review')||'').split(',').map(x=>x.trim()).filter(Boolean); if(rv.length) reviewIds(rv); const op=(Q.get('open')||'').split(',').map(x=>x.trim()).filter(Boolean); if(op.length) openIds(op); }
 })();
 </script>
 </body>

@@ -1,3 +1,9 @@
+## cardlinks1 (2026-11-20): Board cards open the exact Art, Voice or Music Library entry
+
+- Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art library voice library music library directly from the kanban card". A card's `links` (or its `done_when.art_approved`) become Open in the ... Library buttons on the card and in its sheet.
+- art.html `?open=<ids>` opens the tab, group and row and scrolls to it (several ids: all open, scrolled to the first); `?review=` uses the same id check. voices.html `?line=<key>` and `?chapter=<n>&show=<filter>`; music.html `?track=<id>`. An unknown id says so in one line.
+- tools/board_check.py: link rules, and an open Tom card that names a Library must link it. claude/handoff-rules.md and CLAUDE.md name the field. Backfilled t-artgen1try, t-ch1starving and t-oldchecks. Test: tools/cardlinks_test.py. Plan notes: claude/artgen-plan.md "cardlinks1". No xAI or ElevenLabs call.
+
 ## cutpolish5 (2026-11-20): Cutscene people breathe, squash into a new pose and bob while talking, listeners turn to the speaker, reaction pips and hops, chapter 1 reaction rows
 
 - Plan: `claude/cutscene-polish-plan.md` phase 5. No dialogue text changed. Only while a scene runs, never for monsters, riders, knocked-down figures or amber figures, off during SKIP and FAST (`actorLife`, `engine/emotions.js`, drawn in `drawSheetActor`, `engine/town-render.js`).

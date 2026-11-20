@@ -173,3 +173,13 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 - Not done on GitHub: the dry run of section 4.4 (dispatch needs the workflow on main first): see the card c-artgen1 history for whether it was run after the push.
 - Measured: nothing, no xAI call was made. The first paid run is Tom's tap on t-artgen1try.
 - Checkout: the workflow checks out only data/art-prompts.json, data/board.json, tools/art-library and .github (not data, tools and art/raw as section 4.2 says; data holds about 100 MB of voice files). The first dry run sat in the checkout step for minutes because art/raw holds every approved picture; reference pictures are read with `git show HEAD:<path>`, which the job already does.
+
+### cardlinks1 (2026-11-20, Sonnet 5.5): built as section 7 says, with these differences
+
+- Files: board.html (`linkList`, `linksHtml`: buttons under Next step on the list card and in the sheet), art.html (`?open=<ids>` with `linkIds`, shared with `?review=`; the opened row gets a gold outline), voices.html (`voiceLink`), music.html (`?track=`), tools/board_check.py (the link rules), tools/cardlinks_test.py (board buttons plus each Library page at 390 px, ids picked from the repo data).
+- Voice: `?line=<key>` takes the line's Library key (`d|<voice>|<spoken text>`, the same string `lk()` builds), clears every filter, opens the row and scrolls to it. `?chapter=<n>&show=<name>` sets those filters; `show` is the chip's value (all, none, phone, pending, sent, builtin, old, retake) or its words ("No clip yet"). In a card, voice `ids` is a list of keys (one button each) or one `{chapter, show}` object. Music `ids` gives one button per track.
+- An unknown id: art and music show their toast, voices shows one red line above the list. Nothing is left blank.
+- Backfill: t-heistart gets its button from `done_when.art_approved` (no field); t-artgen1try (art) and t-ch1starving (voice) carry `links`. The other open Tom cards do not name a Library.
+- board_check: a link needs `to` of art, voice or music and non-empty ids; an open Tom card whose next step names a Library must link it. Something is wrong keeps the card, so `links` stay on it (nothing was changed there).
+- claude/handoff-rules.md (repo copy; write the same line in the Project copy): one line under "The board".
+- Measured: no xAI or ElevenLabs call was made.

@@ -57,6 +57,7 @@ header{padding:10px 28px}
 #list .card{margin:0}
 #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(520px,100%),1fr));gap:14px;align-content:start}
 }
+.card.linked{outline:2px solid #e8c14a;outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -382,7 +383,14 @@ $('exp').onclick=async()=>{
   try{DB=await idb();await loadDb();}catch(e){DB=null;toast('This browser would not keep takes. You can still listen.');}
   $('q').value=F.q;
   $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this device at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. Model: each card has its own model choice, newest (v2.5) first; v1 is ElevenLabs\' old model and is removed on 31 Jan 2027, so it stays only to compare. The credit estimate was measured on v1; v2 prices are not measured. List made '+IDX.made+'.';
+  // cardlinks1: ?track=<id> shows every track, opens that one's takes and scrolls to it; an unknown id says so in one line.
+  const tr=Q.get('track');
+  if(tr){
+    if(!T(tr)) toast('This link names a track the Music Library does not have: '+tr+'.');
+    else{ F.group.clear();F.kind.clear();F.use.clear();F.show='all';F.q='';$('q').value='';OPEN.add(tr); }
+  }
   paintFilters();paintList();paintBar();
+  if(tr&&T(tr)){const el=document.querySelector('.card[data-id="'+CSS.escape(tr)+'"]');if(el){el.scrollIntoView({block:'start'});el.classList.add('linked');}}
 })();
 </script>
 </body>

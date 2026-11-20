@@ -45,6 +45,7 @@ Tom's words: "a kanban style board that i can refer to at anytime ... lanes for 
 - Identify the chat: the first push sets `chat.url` (the job copies it from the commit); set `chat.opening` to the first words of Tom's opening message in quotes. If no session link is in context, leave `url` blank and say so in the history line.
 - Last line of the closing reply, always: "Theme: <theme>. Pending your action: yes." (a card is in Tom's lane) or "Theme: <theme>. Pending your action: no."
 - Write cards in plain words, one action per card.
+- A Tom card that sends Tom to the Art, Voice or Music Library carries `links: [{to: "art"|"voice"|"music", ids: [...], label}]` (art: entry ids; voice: line keys or one `{chapter, show}`; music: track ids; a card with `done_when.art_approved` needs none for art). The board page makes them buttons that open that exact entry; `board_check.py` refuses a card that names a Library with no link. The "ADMIN > ..." words stay in `next`.
 
 ## How the before-steps are written (added 2026-11-18 15:13)
 
