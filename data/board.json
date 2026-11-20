@@ -859,13 +859,13 @@
    "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Ready to start: its plan file claude/cutscene-polish-plan.md and claude/handoff-rules.md are now in the repo under claude/, so a START session can read them.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGFwiBJp2ia8MCGBjn",
+    "url": "https://claude.ai/code/cse_01RXeukGvLGXY41TvdXeV1zA",
     "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
    },
    "history": [
@@ -896,6 +896,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -907,8 +911,7 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
-   "tag": "cutpolish5",
-   "start": true
+   "tag": "cutpolish5"
   },
   {
    "id": "c-boardready",
@@ -1136,7 +1139,7 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "next": "Ready to start: claude/next.md and the plans the prompt names are now in the repo under claude/ (copydocs). Put every wanted item on a card and cut next.md to rules, tests and push steps only.",
@@ -1150,7 +1153,7 @@
     "text": "Read claude/board2-plan.md section 6, claude/project-cleanup-plan.md and claude/handoff-rules.md, then make the board the only list of open work and cut claude/next.md down. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGYUPLZiib59SQWmGs",
+    "url": "https://claude.ai/code/cse_01RXeukFH1RcLVuFKu9uEo1Q",
     "opening": "not started"
    },
    "history": [
@@ -1181,13 +1184,16 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "tag": "nextclean",
-   "start": true
+   "tag": "nextclean"
   },
   {
    "id": "c-takes-2337ed",
@@ -6985,7 +6991,7 @@
    "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "cardlinks1",
    "auto": true,
    "next": "Waits on Generate all (artgen1), because both change the board page. Then every card that sends you to a Library gets a button that opens that exact entry, and the three Library pages learn to open an entry from a link.",
@@ -6993,7 +6999,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEz9uEZbuikuqZGDHC",
     "opening": "not started"
    },
    "history": [
@@ -7008,6 +7014,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7018,8 +7028,7 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (one small feature on four pages, written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   },
-   "start": true
+   }
   },
   {
    "id": "c-adminhub1",
@@ -7219,7 +7228,7 @@
    "id": "c-reports-2",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
@@ -7233,7 +7242,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGGUD269u96cXEAiKs",
     "opening": "not started"
    },
    "history": [
@@ -7244,12 +7253,15 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
-   "start": true
+   "changed": "2026-11-19"
   },
   {
    "id": "c-boardux1",
@@ -7407,7 +7419,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHFr2kMgU1c6NePBaP",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -7422,6 +7434,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7639,6 +7655,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHFr2kMgU1c6NePBaP",
+   "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
+   "first": "2026-11-19T23:43:31-08:00",
+   "last": "2026-11-19T23:43:31-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-ch1starving-2"
    ]
   },
   {
@@ -8231,8 +8257,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "aad0043d77002caaa0bae8eb72bf989357d63695",
- "synced_at": "2026-11-20T07:37:21+00:00",
+ "synced": "36d63a3dafbc681f15c11eb13cf2d158fa8cb1c6",
+ "synced_at": "2026-11-20T07:44:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
