@@ -15770,8 +15770,7 @@
    "title": "Build the Grace guard video proof",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "tag": "wanproof",
    "next": "Waits on your approval (card Approve the WAN proof). Then it makes Grace's large start picture and one 5 second Wan 3.0 guard video through fal.ai, checks every picture of it against the written list before you see anything, and puts it in ADMIN > BATTLE LAB > NEW BATTLE as PROOF: GRACE'S GUARD (VIDEO), tested in portrait and landscape. 54 cents expected, $2 at most.",
    "blocks": [],
@@ -15785,6 +15784,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanplan. Steps, the exact prompt, settings, cost and checks: claude/video-battle-plan.md section 4. Model that made the clips Tom liked on 11-17: Wan 3.0."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Approve the WAN proof: make a fal.ai key (5 minutes) is done."
     }
    ],
    "prompt": {
@@ -17857,8 +17860,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "408bfa46da9a297c93c21572ff8e7bf95dc0de7d",
- "synced_at": "2026-11-20T20:30:20+00:00",
+ "synced": "46f03e29949d1eaaba3c5bd67e9733f35db6ddab",
+ "synced_at": "2026-11-20T20:38:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
