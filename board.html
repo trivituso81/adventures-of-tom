@@ -98,7 +98,7 @@ div.card{cursor:pointer}
 #lanesView{display:none}
 @media (min-width:860px){
 #secView{display:none}#lanesView{display:block}
-.cols{overflow:visible;scroll-snap-type:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.cols{overflow:visible;scroll-snap-type:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .col{flex:none}
 }
 </style>
@@ -250,13 +250,14 @@ function renderLanes(){
     const inLane=B.cards.filter(c=>c.lane===l.id&&vis(c));
     if(!inLane.length&&l.id!=='tom'&&l.id!=='claude') return '';   // service lanes show only when they hold a card
     const openN=inLane.filter(c=>c.col!=='done').length;
-    const cols=B.columns.map(col=>{
+    const cols=B.columns.filter(col=>col.id!=='done').map(col=>{
       let cs=inLane.filter(c=>c.col===col.id);
       cs.sort((a,b)=>(col.id==='done'?String(b.done).localeCompare(String(a.done)):ageOf(b)-ageOf(a)));
       return '<div class="col" data-col="'+col.id+'"><h3><span>'+esc(col.name)+'</span><span>'+cs.length+'</span></h3>'+(cs.length?cs.map(c=>cardHtml(c,l.id==='tom'?'mine':col.id==='up'&&l.id==='claude'?'ready':col.id==='prog'?'run':col.id==='wait'?'stuck':'done')).join(''):'<div class="none">Nothing here</div>')+'</div>';
     }).join('');
     return '<details class="lane" data-lane="'+l.id+'" open><summary><span class="nm">'+esc(l.name)+'</span><span class="cv">'+esc(l.covers)+'</span><span class="ct'+(openN&&l.id==='tom'?' has':'')+'">'+openN+'</span></summary><div class="cols">'+cols+'</div></details>';
   }).join('');
+  h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);   // no Done column: finished cards sit below the board, closed
   $('lanesView').innerHTML=h;
 }
 function render(){

@@ -1,3 +1,7 @@
+## board-nodonecol (2026-11-19): The board has no Done column; finished cards are a closed list below the lanes
+
+- board.html: the wide layout shows Up next, In progress and Waiting only, and a closed DONE list (last 3 days) under the lanes, like the phone layout. tools/board_test.py checks it. The Done cards are still kept in data/board.json (the file grows until an archive rule is built).
+
 ## pubfast2 (2026-11-20): art/raw is off the published site: a publish drops from about 4 minutes to about 1.5, the site is about 0.7 GB
 
 - Card c-pubfast2. The Project plan doc (`claude/next-addendum-pubfast1.md`) could not be read in this session, so I rebuilt the plan from docs/WORKFLOW.md "How main reaches the phone".
