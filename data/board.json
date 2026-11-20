@@ -690,7 +690,7 @@
    "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s9b",
    "next": "Builds TNB's two Sig Vibes in Battle 3: 2 Basics, 4 Skills, 2 Capstones, 2 Traits, 4 Quirks (14 lines, 6 need their own function), a Lab fight with TNB in the party, simulator and screen tests.",
    "blocks": [],
@@ -716,6 +716,10 @@
     {
      "d": "2026-11-19",
      "t": "Built: TNB complete (Ceramicist and Longboarder, 14 lines, Lab fight NEW 7). 115 new rule checks, screen test in portrait and landscape. Calls made are listed in docs/BATTLE3.md \"What stage 9b holds\". Next: c-b3s9c."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s9b: New battle: TNB joins the Battle Lab with both of his Vibes, Ceramicist and Longboarder"
     }
    ],
    "prompt": {
@@ -727,7 +731,8 @@
     "effort": "high (6 of the 14 lines need a new function worked out from the spec)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9b (TNB) of the new battle system. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-b3s9c"
+   "after": "nothing for Tom: c-b3s9c",
+   "done": "2026-11-19"
   },
   {
    "id": "c-b3s9c",
@@ -6665,6 +6670,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
+   "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
+   "first": "2026-11-19T18:23:30-08:00",
+   "last": "2026-11-19T19:44:24-08:00",
+   "tags": [
+    "b3s9b"
+   ],
+   "cards": [
+    "c-b3s9b"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGDLBuSCmXaKfjjVof",
    "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
    "first": "2026-11-19T19:34:17-08:00",
@@ -7025,16 +7042,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
-   "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
-   "first": "2026-11-19T18:23:30-08:00",
-   "last": "2026-11-19T18:23:30-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s9b"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
    "title": "New battle system, stage 9a: the skill card (your testing notes)",
    "first": "2026-11-19T17:00:46-08:00",
@@ -7174,8 +7181,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "1662f28d3343a55b34b95d118b0f14f3a0783a99",
- "synced_at": "2026-11-20T03:38:23+00:00",
+ "synced": "2ddc1aabf80468c3cad4824eafe04340ae03b1a6",
+ "synced_at": "2026-11-20T03:45:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
