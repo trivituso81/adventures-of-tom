@@ -16814,7 +16814,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16872,9 +16872,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-keysecrets2-try-3 shipped: the phone was still running the old video script because its cache tag had not moved; now it loads the new one, and a stalled network ends in a plain error."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
     }
    ],
-   "waiting_on": "claude",
    "after": null
   },
   {
@@ -17069,7 +17072,7 @@
    "id": "c-fix-keysecrets2-try-3",
    "tag": "fix-keysecrets2-try-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17117,6 +17120,10 @@
     {
      "d": "2026-11-20",
      "t": "Cause found: stale cached script (tag not bumped in try-2). Fixed and pushed as build fix-keysecrets2-try-3."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-3: the Art Library page no longer serves a stale video script, and a stalled network ends in a plain line"
     }
    ],
    "prompt": {
@@ -17130,10 +17137,23 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-20T23:07:18+00:00"
+   "started_at": "2026-11-20T23:07:18+00:00",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCpdcFMZWaA7mYZvLA",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-20T23:11:58Z",
+   "last": "2026-11-20T23:11:58Z",
+   "tags": [
+    "fix-keysecrets2-try-3"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try-3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
    "title": "Fix the report backlog (22 open)",
@@ -19426,8 +19446,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "c7b67d0048eefe1763824cd5f380367167f65948",
- "synced_at": "2026-11-20T23:07:20+00:00",
+ "synced": "3caa9c9d565a7407b31a109e76687061836032eb",
+ "synced_at": "2026-11-20T23:12:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
