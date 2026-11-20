@@ -6773,6 +6773,146 @@
      "t": "Added by bannerhold1: your phone check of the banner hold; blocks nothing."
     }
    ]
+  },
+  {
+   "id": "c-artgen1",
+   "title": "Generate all of a card's pictures with one approval on the board (artgen1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "artgen1",
+   "auto": true,
+   "next": "Ready to START. Builds the Generate all button on picture cards, the art-gen job that makes the pictures with the xAI key in the repo, and the Art Library import so you review them as usual. Then your card to try it on the Mudling sheet.",
+   "blocks": [
+    "c-artgen2",
+    "c-cardlinks1"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"Make a way for me to approve the auto generation of images within the Kanban board for cards that require new image generation, all images required for a given card at once.\" Plan: claude/artgen-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom (22:19): \"Create these instructions and choose to design another prompt for a lesser model to execute your vision.\" So this chat wrote the plan and the cards and built nothing."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a Generate all button to board cards that need pictures. One approval (two taps, with the dollar estimate) makes every picture on the card on GitHub, and they show up in the Art Library waiting for your APPROVE or REJECT.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
+    "effort": "medium (the steps are written; clipgen.py is the model to follow)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 4), then card c-artgen1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen1 exactly as the plan says and push it as artgen1. Your first push is the commit board: start c-artgen1. Spend nothing on xAI: only the dry run in section 4.4. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-artgen2",
+   "title": "QA for generated pictures, with the results on the card (artgen2)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "artgen2",
+   "auto": true,
+   "next": "Waits on Generate all (artgen1) and your try of it. Then it adds a QA check of every generated picture against its prompt (a score and what failed, on the board card and in the Art Library review) and starts the record of QA against your own decisions. Nothing is auto-approved in this build.",
+   "blocks": [
+    "c-artgen3"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"Then a way to imitate a qa of images to ensure they meet the prompt criteria and see the results.\" Plan: claude/artgen-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a QA check of each generated picture against its prompt: a vision model answers a fixed checklist, you see the score and every failed line on the card and in the Library. Measures false alarms on 40 pictures you already approved (about $1.50 of xAI credit at most).",
+    "before": [
+     "Finish the card Try Generate all on a real card (All good, or Something is wrong and its fix)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
+    "effort": "medium (the questions, files and tests are written in the plan)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 5), then card c-artgen2 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen2 exactly as the plan says and push it as artgen2. Your first push is the commit board: start c-artgen2. The replay in section 5.3 is the only paid step: keep its cap at $1.50. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
+   },
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-artgen3",
+   "title": "Auto-approve pictures that pass QA (artgen3)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "artgen3",
+   "auto": true,
+   "next": "Waits on QA for generated pictures (artgen2) and your look at its results. Then it adds the second button, Generate and auto-approve what passes QA: a picture is approved for you only when every must-pass check is yes and the score reaches the threshold; the rest wait for you.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"If hitting a certain qa threshold we can auto approve\" Plan: claude/artgen-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Adds the auto-approve button: pictures that pass every must-pass QA check and reach the threshold are approved and baked for you, the rest wait for your review. A picture you rejected before is never auto-approved.",
+    "before": [
+     "Finish the card Look at the QA results on a real card (All good, or Something is wrong and its fix)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
+    "effort": "medium (the rule, files and tests are written in the plan)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 6), then card c-artgen3 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen3 exactly as the plan says and push it as artgen3. Your first push is the commit board: start c-artgen3. Spend nothing on xAI. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
+   },
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-cardlinks1",
+   "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "cardlinks1",
+   "auto": true,
+   "next": "Waits on Generate all (artgen1), because both change the board page. Then every card that sends you to a Library gets a button that opens that exact entry, and the three Library pages learn to open an entry from a link.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"Can we also create a prompt to link to the corresponding art library voice library music library directly from the kanban card\" Plan: claude/artgen-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Adds buttons on board cards that open the exact Art Library, Voice Library or Music Library entry the card is about, and fills them in on every open card.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
+    "effort": "medium (one small feature on four pages, written in the plan)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
+   },
+   "waiting_on": "claude"
   }
  ],
  "sessions": [

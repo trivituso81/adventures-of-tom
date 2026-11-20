@@ -17,3 +17,5 @@ Added 2026-11-19 by clipreset (written in both places): clip-reset-plan.md.
 Added 2026-11-19 by board-heist (written in both places): heist-redo-plan.md.
 
 Added 2026-11-19 by b3s9b (written in both places): next-addendum-b3s9b.md; battle-build.md updated.
+
+Added 2026-11-19 by board-artgen (written in both places): artgen-plan.md.

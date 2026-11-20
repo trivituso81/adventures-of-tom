@@ -1,3 +1,8 @@
+## board-artgen (2026-11-19): board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links
+
+- Tom (11-19 22:16 to 22:21): "Make a way for me to approve the auto generation of images within the Kanban board for cards that require new image generation, all images required for a given card at once." "Then a way to imitate a qa of images to ensure they meet the prompt criteria and see the results. If hitting a certain qa threshold we can auto approve." "Create these instructions and choose to design another prompt for a lesser model to execute your vision." "Can we also create a prompt to link to the corresponding art library voice library music library directly from the kanban card".
+- Plan: `claude/artgen-plan.md` (also in the Project). Cards, all Sonnet 5.5 medium with START: c-artgen1 (the Generate all button, the `art-gen` Action, the Library import), c-artgen2 (QA and its results), c-artgen3 (auto-approve at the threshold), c-cardlinks1 (buttons that open the exact Library entry). Nothing built, nothing spent, no game change.
+- Facts the plan rests on: 1,141 Library entries, 14 need a photo that lives only on Tom's phone; 1,284 approved pictures are in the repo and 90 reject notes, but no rejected picture was kept, so the QA can only be measured for false alarms until new decisions are recorded.
 ## 2026-11-20 (459): Art Library bake, clip-grump-idle, clip-toad-idle (`artbake1518`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
