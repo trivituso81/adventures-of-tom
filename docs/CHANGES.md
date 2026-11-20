@@ -1,3 +1,8 @@
+## ch6left (2026-11-20): Chapter 6 leftovers checked: kitchen and park in landscape, Chairman hop-off; nothing needed fixing
+
+- Card c-ch6left. Played ch6Kitchen (8 pages) and ch6Park (38 pages) in landscape with `tools/reaction_test.py` and the Chairman hop-off with `tools/boss_stage_test.py` (case ch06, frames looked at): no page errors, people stand at the island and picnic tables, the Chairman hops off the throne and is not in the scene afterward.
+- Not done: new talk and emotion rows. The new lines use existing faces and they read correctly in the frames, so no rows were added. The claude/ docs the card named (next-addendum-ch6stage4done.md, story-ch06.md) are not in the repo copy; the work was done from docs/CHANGES.md "ch6s4". No game code changed, smoke was not run.
+
 ## boardwait1 (2026-11-20): Your cards no longer sit in Waiting when nothing is left to wait on
 
 - Card c-boardwait1. Tom (11-20 00:22): "Why are there so many cards assigned to me but in the waiting column and it says waiting on Claude at the bottom of each one?"

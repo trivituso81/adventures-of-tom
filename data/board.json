@@ -7624,7 +7624,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Ready to start. Finishes the small chapter 6 items left after stage 4 (claude/next-addendum-ch6stage4done.md), then stops for your phone play of chapter 6.",
+   "next": "Checked in portrait and landscape; no code change needed. Your phone play of chapter 6 is next (t-ch6play).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7659,7 +7659,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch6stage4done.md and claude/story-ch06.md. Fix the chapter 6 leftovers (talk and emotion rows for new lines, landscape frames of ch6Park and ch6Kitchen, the Chairman finale at the picnic table), test, push, then tell me what to play. You have my full permission to access the repo."
    },
-   "tag": "ch6left"
+   "tag": "ch6left",
+   "after": "t-ch6play"
   },
   {
    "id": "c-stagefollow",
@@ -8567,6 +8568,25 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the painted poses for the family (PAINTED STATES: CHAPTER 1), ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix). He wrote: Some of these are missing from the screen, like I don't see them in the battle test\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:26:38.640Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-clipposes"
+  },
+  {
+   "id": "t-ch6play",
+   "title": "Play chapter 6 on your phone",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 6. Play from Tom's kitchen through Old Oak Park to the Chairman fight and the call home. Check: the kitchen and park scenes read well sideways as well as upright, and after the Chairman fight he hops off the throne and is waiting at the picnic tables. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-ch6left."
+    }
+   ]
   }
  ],
  "sessions": [
