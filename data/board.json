@@ -14626,9 +14626,18 @@
     {
      "d": "2026-11-20",
      "t": "Added by ch2build: your phone play of the rebuilt chapter 2."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-20T18:09:09.589Z"
     }
    ],
-   "first": "Wait for the publish of build ch2build."
+   "first": "Wait for the publish of build ch2build.",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "c-fix-effectslook-2",
