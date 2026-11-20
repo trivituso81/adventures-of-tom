@@ -1049,7 +1049,7 @@
   {
    "id": "t-startsetup",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "setup",
    "title": "Set up the START button (one task, two secrets)",
@@ -1084,6 +1084,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom sent the screen: API trigger set, \"Token will be generated when you save\". Fire URL and token appear only after Create. Steps rewritten to match."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom did this: he told Claude in chat that the task and both secrets are set. The board page tap did not save (no commit arrived), so Claude marked it done for him."
     }
    ],
    "steps": [
@@ -1096,7 +1100,8 @@
     "After Create, a box called Token generated may pop up. If it does, copy the token into Notes right away (it is shown only once). Then find the Fire URL: on the task's page tap the menu next to its name, choose Edit, and look in the Trigger row, where the API part now shows a Fire URL (a long address starting with https://api.anthropic.com) and the token controls. Copy the Fire URL into Notes. If you missed the token, tap Regenerate there to get a new one.",
     "On github.com open the repo, then Settings > Secrets and variables > Actions > New repository secret. Add CLAUDE_TASK_SONNET_MEDIUM_URL (the Fire URL) and CLAUDE_TASK_SONNET_MEDIUM_TOKEN (the token).",
     "Come back here and tap I did this. The board turns START on by itself and starts the test card (Test START on one real card)."
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-starttest",
