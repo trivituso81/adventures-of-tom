@@ -102,7 +102,7 @@ SCENES.ch1Goal=[
   {talk:'Tom',lines:["Twenty years, one witness. That's a strong number one. What's number two?"]},
   {talk:'Grace',lines:["Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet."]},
   {talk:'Rose',lines:["I licked one. Only the top!"]},
-  {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait."]},
+  {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!"]},
   {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},

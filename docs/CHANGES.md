@@ -1,3 +1,9 @@
+## ch1starving-sub (2026-11-20): Tom's line "Thank you for telling me, Rose..." now ends with "I'm starving!" on screen and in his voice
+
+- Card c-ch1starving-sub. Tom (11-20): "Keep it, I'll re-record". Kept take already on branch takes (session 20261119T230940-0ap, Tom's kept take of this line, 8.9 s). Transcribed with whisper base.en (the ch1retext1 method): "Thank you for telling me Rose. That one's yours. Grace, I'm so sorry but number two can't wait. I'm starving." It matches the new subtitle, so it is merged. The old 6.7 s clip (no "I'm starving!") is removed from `data/voice/dialog-ch1.js`.
+- Subtitle in `data/scenes.js` (ch1) now ends " I'm starving!". The same line is re-keyed in `data/emotion-moods.js` (loving), `data/emotion-reactions.js` (Rose proud hop), `tools/voice-library/retake.json`, `harvest.json` and `ch01-story-directions.json`; `data/script-index.json` and `data/voice-index.json` rebuilt; `starving_test.py` key updated.
+- Not done: no new take was sent after the card was made, so this used the take Tom had already kept. If he re-records later it will show under Show > New direction as usual. `unused_voice.py`: checks 1, 2, 3 and 5 clean; check 4 reports the same 93 as before.
+
 ## board-itembanner (2026-11-20): board only: new card for an ITEM GAINED banner
 
 - Tom (11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained". No card covered it. New card c-itembanner1 (Game Shell, Up next, build itembanner1, Sonnet 5.5 medium). No game code changed.

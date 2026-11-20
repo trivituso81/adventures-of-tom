@@ -1772,7 +1772,7 @@ const EMOTION_MOODS={
 "Tom|Talking to the stone does nothing. I’ve checked. What wakes stone up is being warm for a long time, with people close by.": "unimpressed",
 "Tom|Tell me how to get in.": "angry",
 "Tom|Thank the tree for us.": "loving",
-"Tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.": "loving",
+"Tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!": "loving",
 "Tom|Thank you! That's been bothering me for ten whole minutes.": "happy",
 "Tom|Thank you, Doña Carmen! That's the best towel I've ever been hit with!": "happy",
 "Tom|Thank you. All of you. I’ll put the rock on the mantel.": "loving",

@@ -179,7 +179,7 @@ const EMOTION_REACTIONS={
 "Tom|Sit, paw, treat. She knows the whole routine. So polite!|2": [["nara", "proud", 44], ["tnb", "happy", 55]],
 "Tom|Something really special.|2": [["tnb", "unimpressed", 24]],
 "Tom|Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.|2": [["tnb", "surprised", 70]],
-"Tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.|1": [["rose", "proud", 9, "hop"]],
+"Tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!|1": [["rose", "proud", 9, "hop"]],
 "Tom|Thank you, Doña Carmen! That's the best towel I've ever been hit with!|2": [["carmen", "unimpressed", 45], ["tnb", "happy", 69]],
 "Tom|That doesn't sound like him at all. He tells me how old he is every single morning. He's proud of it!|2": [["tnb", "sad", 34]],
 "Tom|That hill has EYES! The whole hill just stood up!|2": [["nara", "scared", 19], ["tnb", "scared", 19]],

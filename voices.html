@@ -164,11 +164,6 @@ const isDog=it=>it.v==='nara'&&it.t==='b';
 // Direction order: Tom's own edit here, then the direction the baked clip was actually made with (read from his ElevenLabs
 // history, see loadHistory), then the written one in the index.
 let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}; }catch(e){}
-// fix-ch1starving-3 (Tom 11-20: keep "I'm starving!", he re-records): earlier builds stripped it from his saved edit and stored history
-// direction for this line. Once, drop those stripped copies so the box shows the repo script, which ends "[hungry] I'm starving!".
-try{ if(!localStorage.getItem('aot-vl-starving3')){ const K="d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.";
-  let ch=0; for(const M of [SCRIPTS,HIST]) if(typeof M[K]==='string'&&!/starving/i.test(M[K])){ delete M[K]; ch++; }
-  if(ch){ saveScripts(); localStorage.setItem('aot-vl-hist',JSON.stringify(HIST)); } localStorage.setItem('aot-vl-starving3','1'); } }catch(e){}
 // Accent voices (index `accent`: Boppy, Justin, Amy): the accent is shown and sent at the start of EVERY [bracket], whatever the
 // script's source (Tom's edit, ElevenLabs history, index). The first bracket alone does not hold the accent through a line.
 function accentAll(a,s){ if(!a||!s) return s; const re=/new york/i.test(a)?/new york/i:/long island/i.test(a)?/long island/i:new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');

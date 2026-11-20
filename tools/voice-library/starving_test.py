@@ -6,13 +6,11 @@ Usage: python3 tools/voice-library/starving_test.py   (serves the repo itself on
 import json, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-KEY="d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait."
+KEY="d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!"
 GOOD="[wary, disgusted, amused] Thank you for telling me, Rose... [pause, very very deadpan] That one's yours. [very dismissive] Grace, I'm so sorry but number two can't wait."
 WANT=GOOD+" [hungry] I'm starving!"
 CASES={   # name: (localStorage before, what the box must show)
  'clean':({},WANT),
- 'stripped saved edit':({'aot-vl-scripts':{KEY:GOOD}},WANT),
- 'stripped history':({'aot-vl-hist':{KEY:GOOD}},WANT),
  'his own edit with it':({'aot-vl-scripts':{KEY:GOOD+" [starving, pleading] I'm STARVING!"}},GOOD+" [starving, pleading] I'm STARVING!"),
 }
 srv=subprocess.Popen([sys.executable,'-m','http.server','8012'],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); time.sleep(1.2)
