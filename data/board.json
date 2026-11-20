@@ -5430,6 +5430,37 @@
    "after": "t-cutpolish4b",
    "auto": true,
    "start": true
+  },
+  {
+   "id": "c-skillinfo1",
+   "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Add an i icon left of each skill name in the SKILLS list (words and Rose Mode pictures). The i opens the skill card with BACK and USE. A tap anywhere else on the row uses the skill, or goes to the target list when it needs a target. Update tools/b3_test.py, test portrait and landscape, push.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFjXctvj2WWfPf3LUf",
+    "opening": "\"we need an information \"i\" icon to the left of each ability name\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card, follow-up to b3s9a. Tom: \"we need an information \"i\" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable\""
+    }
+   ],
+   "tag": "skillinfo1",
+   "prompt": {
+    "what": "Adds an i icon to each skill row that opens the skill card, and makes a tap on the rest of the row use the skill.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small UI change across two list renderers and the click handler, with tests to update)",
+    "effort": "medium (small piece, steps known)",
+    "text": "Read claude/handoff-rules.md and docs/CHANGES.md b3s9a, then finish the card c-skillinfo1 if it is not shipped (tag skillinfo1): an i icon left of each skill name opens the skill card (BACK and USE), a tap anywhere else on the row uses the skill or opens the target list. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
