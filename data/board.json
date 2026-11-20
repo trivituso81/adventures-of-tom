@@ -707,6 +707,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked by the board audit: the picture is approved. The other approved chapter 1 pictures were added to this install."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -718,7 +722,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-cutpolish4.md and claude/next-addendum-ch1rebuild1.md, then install the empty counter patch (cutpolish4b) and every other approved stand-in picture in Art Library group Chapter 1. You have my full permission to access the repo."
    },
-   "tag": "cutpolish4b"
+   "tag": "cutpolish4b",
+   "start": true
   },
   {
    "id": "c-cutpolish5",
