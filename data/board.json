@@ -14882,6 +14882,137 @@
     "url": "",
     "opening": "not started"
    }
+  },
+  {
+   "id": "c-builds1",
+   "tag": "builds1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Build history redesign 1: readable rows by day",
+   "next": "Ready to start: tap START. Rebuilds the build history list: the plain sentence first, days you open and close, a line showing where this phone is, retries of one card folded into one row, housekeeping hidden, a details sheet on tap, bigger buttons. Plan: claude/builds-plan.md. You test once, after redesign 3.",
+   "blocks": [
+    "c-builds2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the build history UX audit (planning chat https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS). Tom (11-20 10:18): \"do a UX audit of the build history screen and create a plan to improve it to make it more usable. think about me as a user looking to see which builds have been done recently, which are currently pending and any subset of deployment status, with older builds archived and easily searchable/finable etc\" Plan: claude/builds-plan.md, mockup claude/builds-mock.png."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The plan and these cards were pushed as board-builds."
+    }
+   ],
+   "prompt": {
+    "what": "Rebuilds the build history list so a day of 70 builds is readable: sentence first, days that open and close, a marker for this phone, a details sheet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design, data and checks are written in claude/builds-plan.md, and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds1 in data/board.json with its history. Your first push is the commit board: start c-builds1. Build phase 1 (builds1) as the plan's section 6 row says: the data fields and backfill of section 4, sections 3.1, 3.2, 3.4 and 3.6, with checks B1 to B7 and B14. Push it as builds1. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds2 so it starts by itself. Do not build phase 2 yourself. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: c-builds2"
+  },
+  {
+   "id": "c-builds2",
+   "tag": "builds2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "auto": true,
+   "theme": "Tools",
+   "title": "Build history redesign 2: statuses and what is pending",
+   "next": "Waits on Build history redesign 1 (c-builds1). Then every build shows where it is (publishing, live, on this phone, waiting on your test), a failed publish is named, and a new view lists what is being built and queued, read from the board.",
+   "blocks": [
+    "c-builds3"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the build history UX audit (planning chat https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS). Plan: claude/builds-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a status to every build (publishing, live, on this phone, your test), names a failed publish, and adds the In the works view read from the board.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design, data and checks are written in claude/builds-plan.md, and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds2 in data/board.json with its history. Your first push is the commit board: start c-builds2. Build phase 2 (builds2) as the plan's section 6 row says: sections 3.3 and 3.5 and the Filters of section 3.7, with checks B8 to B10. Push it as builds2. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds3 so it starts by itself. Do not build phase 3 yourself. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: c-builds3"
+  },
+  {
+   "id": "c-builds3",
+   "tag": "builds3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "auto": true,
+   "theme": "Tools",
+   "title": "Build history redesign 3: archive, search and its own page",
+   "next": "Waits on Build history redesign 2 (c-builds2). Then builds older than 7 days move to an archive by month, search covers everything, and the screen gets its own page with a button in Admin. After it ships you try the whole redesign once (card t-buildstry).",
+   "blocks": [
+    "t-buildstry"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the build history UX audit (planning chat https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS). Plan: claude/builds-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Moves old builds to an archive by month, makes search cover everything, gives the screen its own page and Admin button, then hands the redesign to you to try.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design, data and checks are written in claude/builds-plan.md, and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds3 in data/board.json with its history. Your first push is the commit board: start c-builds3. Build phase 3 (builds3) as the plan's section 6 row says: the split of section 4 and sections 3.7 and 3.8 with the docs, with checks B11 to B13. Push it as builds3. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. Then rewrite card t-buildstry's next step to match what you built. You have my full permission to access the repo."
+   },
+   "after": "t-buildstry"
+  },
+  {
+   "id": "t-buildstry",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "fyi": true,
+   "theme": "Tools",
+   "title": "Try the new build history screen",
+   "first": "Build history redesign 3 has shipped and you have tapped RELOAD on the welcome screen.",
+   "next": "Tap the build label at the top left of the welcome screen. Look at: (1) Recent shows today's builds as sentences you can read, with a line marking this phone; (2) In the works lists what is being built and what waits on your test; (3) type a word in Search and find an older build; (4) tap a build and open its card. Tap All good, or Something is wrong with a note.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the build history UX audit. It opens when Build history redesign 3 (c-builds3) ships."
+    }
+   ]
   }
  ],
  "sessions": [

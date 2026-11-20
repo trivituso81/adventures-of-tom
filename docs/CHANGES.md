@@ -1,3 +1,11 @@
+## board-builds (2026-11-20): board only: UX audit of the build history screen, a redesign plan and its four cards
+
+Tom (11-20 10:18): "do a UX audit of the build history screen and create a plan to improve it to make it more usable. think about me as a user looking to see which builds have been done recently, which are currently pending and any subset of deployment status, with older builds archived and easily searchable/finable etc"
+
+- New `claude/builds-plan.md` (repo only): the audit (13 findings, measured: 482 builds, 73 today, about 10 rows a screen, no status, no pending, no search, rows cannot be tapped, buttons under 44 px), the redesign (three views Recent, In the works, Archive; a status per build; search and filters; a details sheet; its own page), the data changes, checks B1 to B14 and three build phases. Mockup: `claude/builds-mock.png` (source `claude/builds-mock.html`).
+- Cards: `c-builds1` (Up next, Tom taps START), `c-builds2` and `c-builds3` (waiting, each started by the phase before it), all Sonnet 5.5 medium; `t-buildstry` (Tom tries the whole redesign once, after phase 3).
+- No game or page code changed. `python3 tools/buildlog_test.py` passed on main before the audit (26 checks).
+
 ## gatezero (2026-11-20): Gate Zero window is empty and Flight Zero rolls away at the end of chapter 10
 
 Tom (11-20, t-gatezero-decide): "Keep the current painting and have Claude remove the painted plane by editing it". The two Art Library pictures (noplane-v1, plane-v1) were not used: wrong size (1248 x 832), window frames and jet bridge moved, a different jet.

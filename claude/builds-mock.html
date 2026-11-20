@@ -1,0 +1,67 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Builds screen mockup (plan claude/builds-plan.md)</title>
+<style>
+body{margin:0;background:#0a0e18;font:13px/1.35 Georgia,serif;color:#f2e6cc;display:flex;gap:18px;padding:18px;flex-wrap:wrap}
+.ph{width:390px;height:800px;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);display:flex;flex-direction:column;overflow:hidden;position:relative}
+.cap{width:390px;color:#aeb6c6;font:12px ui-monospace,Menlo,monospace;margin:0 0 6px}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:6px 8px 6px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
+.x{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.st{padding:10px 14px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#10141d;border-bottom:1px solid #2c3342}
+.st b{color:#f3dfa8}.st small{display:block;color:#aeb6c6;font-size:11px;margin-top:2px}
+.gold{height:44px;padding:0 14px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font:inherit;font-size:13px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 10px 0}
+.tabs button{height:44px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#cfd5e2;font:inherit;font-size:12px}
+.tabs button.on{border-color:#b8914a;background:#3a2f14;color:#f3dfa8}
+.tabs i{font-style:normal;margin-left:4px;padding:0 5px;border-radius:8px;background:#0a0e18;font-size:11px}
+.sr{display:grid;grid-template-columns:1fr auto;gap:6px;padding:8px 10px}
+.sr div{height:44px;border:1px solid #4b5160;border-radius:5px;background:#0d111a;color:#8790a3;display:flex;align-items:center;padding:0 12px}
+.sr button{height:44px;padding:0 12px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font:inherit;font-size:12px}
+.ls{flex:1;overflow:hidden}
+.dh{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:0 14px;background:#10141d;color:#f3dfa8;font-size:12px;letter-spacing:.5px;border-bottom:1px solid #232a38}
+.dh span{color:#aeb6c6;font-size:11px}
+.r{padding:9px 14px;border-bottom:1px solid #232a38;display:grid;grid-template-columns:1fr auto;gap:4px 10px}
+.w{color:#f2e6cc;font-size:13.5px}.m{grid-column:1;color:#8f98aa;font:11px ui-monospace,Menlo,monospace}.m em{font-style:normal;color:#c9b27a}
+.c{align-self:start;padding:2px 7px;border-radius:10px;font:10px ui-monospace,Menlo,monospace;letter-spacing:.3px;white-space:nowrap}
+.pub{background:#3b2f55;color:#d9c8ff;border:1px solid #7c62b8}.live{background:#173a2a;color:#a9e6c3;border:1px solid #3f8a63}
+.bld{background:#3a2f14;color:#f3dfa8;border:1px solid #b8914a}.q{background:#232834;color:#cfd5e2;border:1px solid #4b5160}.you{background:#4a2323;color:#ffc9c0;border:1px solid #a8584c}
+.here{display:flex;align-items:center;gap:8px;padding:5px 14px;background:#3a2f1466;color:#f3dfa8;font:11px ui-monospace,Menlo,monospace;letter-spacing:.5px;box-shadow:inset 3px 0 0 #b8914a}
+.here:after{content:"";flex:1;border-top:1px dashed #b8914a}
+.more{color:#c9b27a;font-size:11px;grid-column:1}
+.sub{padding:8px 14px 4px;color:#aeb6c6;font-size:11px}
+</style>
+<div><p class="cap">1. RECENT (opens here)</p><div class="ph">
+<div class="hd"><span>BUILDS</span><button class="x">&#10005;</button></div>
+<div class="st"><div>This phone: <b>fix-battlelabpagetry-2</b><small>2 newer builds are live. 1 more is publishing.</small></div><button class="gold">RELOAD</button></div>
+<div class="tabs"><button class="on">Recent</button><button>In the works<i>18</i></button><button>Archive</button></div>
+<div class="sr"><div>Search builds</div><button>Filters</button></div>
+<div class="ls">
+<div class="dh">TODAY, FRI, NOV 20<span>41 builds, 32 housekeeping hidden &#9662;</span></div>
+<div class="r"><div class="w">Rhubarb Crisp is gone from the game everywhere</div><span class="c pub">PUBLISHING</span><div class="m"><em>gem-pillar-rhubarb</em> · Story and Dialogue · 10:21 AM</div></div>
+<div class="r"><div class="w">Wince is removed everywhere; the speed difference needs one example</div><span class="c live">LIVE, RELOAD</span><div class="m"><em>fix-effectslook-2</em> · Tools · 10:15 AM</div><div class="more">+1 earlier try on this card</div></div>
+<div class="r"><div class="w">Rose no longer shows twice when she jumps off Tom's shoulders; Hi, Mom! line shortened</div><span class="c live">LIVE, RELOAD</span><div class="m"><em>reports-2026-11-20</em> · Game Shell · 10:14 AM</div></div>
+<div class="here">THIS PHONE IS HERE</div>
+<div class="r"><div class="w">The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away</div><span class="c you">YOUR TEST</span><div class="m"><em>fix-battlelabpagetry-2</em> · Tools · 10:08 AM</div><div class="more">+2 earlier tries on this card</div></div>
+<div class="r"><div class="w">Chapter 2 now plays the locked script: nine scenes, 93 lines word for word</div><span class="c you">YOUR TEST</span><div class="m"><em>ch2build</em> · Story and Dialogue · 10:04 AM</div></div>
+<div class="r"><div class="w">Play and report cards on the board name the build they are in</div><span></span><div class="m"><em>buildname1</em> · Tools · 10:01 AM</div></div>
+<div class="dh">YESTERDAY, THU, NOV 19<span>86 builds &#9656;</span></div>
+<div class="dh">WED, NOV 18<span>48 builds &#9656;</span></div>
+<div class="dh">TUE, NOV 17<span>11 builds &#9656;</span></div>
+</div></div></div>
+<div><p class="cap">2. IN THE WORKS (what is pending, read from the board)</p><div class="ph">
+<div class="hd"><span>BUILDS</span><button class="x">&#10005;</button></div>
+<div class="st"><div>This phone: <b>fix-battlelabpagetry-2</b><small>2 newer builds are live. 1 more is publishing.</small></div><button class="gold">RELOAD</button></div>
+<div class="tabs"><button>Recent</button><button class="on">In the works<i>18</i></button><button>Archive</button></div>
+<div class="ls">
+<div class="dh">PUBLISHING NOW<span>1</span></div>
+<div class="r"><div class="w">Rhubarb Crisp is gone from the game everywhere</div><span class="c pub">PUBLISHING</span><div class="m"><em>gem-pillar-rhubarb</em> · pushed 10:21 AM, usually live in 4 min</div></div>
+<div class="dh">BEING BUILT NOW<span>12</span></div>
+<div class="r"><div class="w">Battle system stage 12: bestiary chapters 5 to 7 and bosses</div><span class="c bld">BUILDING</span><div class="m"><em>b3s12</em> · Battle System · started 9:12 AM</div></div>
+<div class="r"><div class="w">Skip interstitials in cut scenes; never skip joins or leaves</div><span class="c bld">BUILDING</span><div class="m"><em>idea-skippingcut</em> · Story and Dialogue · started 9:40 AM</div></div>
+<div class="r"><div class="w">Install the Gate Zero pictures (no plane, plane)</div><span class="c bld">BUILDING</span><div class="m"><em>gatezero</em> · Areas · started 8:55 AM</div></div>
+<div class="sub">9 more &#9662;</div>
+<div class="dh">WAITING ON YOUR TEST<span>5</span></div>
+<div class="r"><div class="w">Play chapter 2 on your phone and report</div><span class="c you">YOUR TEST</span><div class="m"><em>ch2build</em> · on this phone</div></div>
+<div class="r"><div class="w">Play chapter 6 on your phone</div><span class="c you">YOUR TEST</span><div class="m"><em>ch6fix2</em> · on this phone</div></div>
+<div class="sub">3 more &#9662;</div>
+<div class="dh">QUEUED<span>4 &#9656;</span></div>
+</div></div></div>
