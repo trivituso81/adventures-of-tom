@@ -728,7 +728,10 @@ SCENES.ch2AfterBoss=[
 SCENES.ch2End=[
   {flag:'ch2-done',value:'pending'},
   {place:'Mr. Washington',at:[12,18],dir:'right'},
-  {walk:'tom',to:routeTo('tom',14,18),speed:.22}, {face:'tom',dir:'left'},
+  {all:[{walk:'tom',to:routeTo('tom',14,18),speed:.22},   // alvarez: TNB and Nara walk down with him (they stayed at the arch, 16 tiles off screen, and TNB talked from there)
+    {if:()=>{ const a=sceneActor('tnb'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.3},{walk:'tnb',to:routeTo('tnb',16,17),speed:.22},{face:'tnb',dir:'left'}]}]},
+    {if:()=>{ const a=sceneActor('nara'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.6},{walk:'nara',to:routeTo('nara',16,19),speed:.22},{face:'nara',dir:'left'}]}]}]},
+  {face:'tom',dir:'left'},
   {talk:'Mr. Washington',lines:['...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.','Where was I? Oh. I was done. That was the whole story.']},
   {talk:'TNB',lines:['That\'s ten times now. It gets better every time.']},
   {talk:'Mr. Washington',lines:['Funny. For a while there I didn\'t want anything to change. Then I remembered the best parts all came from things changing.']},
@@ -2026,14 +2029,16 @@ SCENES.ch5Pruitt=[
   {talk:'Tom',lines:["Exactly seven. Amy, I like this man."]},
   {talk:'Rose',lines:["Tata. A school. At NIGHT. With MONSTERS, probably."]},
   {talk:'Tom',lines:["Stay close, everybody. This is a professional learning environment."]},
-  {spawn:{name:'Man in the long coat',look:'vance',at:[2,9],dir:'right'}},
-  {walk:'Man in the long coat',to:[[3,9],[4,9],[5,9],[6,9],[6,8]],speed:.3,onStep:i=>{ if(i%2===0) sfx.run(); }},
-  {face:'Clara',dir:'left'},
+  // alvarez: he comes in from the east along row 9 and stops at (9,9), beside Clara and clear of Mrs. Kowalski (8,8). From the west he
+  // spawned on Amy (2,9), walked through Grace (4,9) and stopped on Principal Pruitt (6,8).
+  {spawn:{name:'Man in the long coat',look:'vance',at:[14,9],dir:'left'}},
+  {walk:'Man in the long coat',to:[[13,9],[12,9],[11,9],[10,9],[9,9]],speed:.3,onStep:i=>{ if(i%2===0) sfx.run(); }},
+  {face:'Man in the long coat',dir:'left'}, {face:'Clara',dir:'right'},
   {talk:'Clara',lines:["You said five thirty."]},
   {talk:'Man in the long coat',lines:["I know, sweetheart. I'm sorry. I'm here now."]},
-  {face:'Man in the long coat',dir:'right'}, {wait:.8},
-  {walk:'Clara',to:[[6,9],[5,9],[4,9],[2,9],[0,9]],speed:.25},
-  {walk:'Man in the long coat',to:[[6,9],[5,9],[4,9],[2,9],[0,9]],speed:.25},
+  {wait:.8},
+  {walk:'Man in the long coat',to:[[10,9],[11,9],[12,9],[13,9],[14,9],[14,10],[15,10]],speed:.25},
+  {walk:'Clara',to:[[7,9],[8,9],[9,9],[10,9],[11,9],[12,9],[13,9],[14,9],[14,10],[15,10]],speed:.25},
   {despawn:'Clara'}, {despawn:'Man in the long coat'}, {despawn:'Mrs. Kowalski'},
   {talk:'Amy',lines:["That's Clara's dad. He's the last one here every single day. But he always comes."]},
   {toast:'Goal: the kickball field, through the playground gate (east side of the yard). Then the school doors, at the top.',time:5.5}

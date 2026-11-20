@@ -1,3 +1,11 @@
+## alvarez (2026-11-20): Two more scenes keep the family together: the block party at Old Oak Park and Clara's dad at the school
+
+- Card c-alvarez, part 2 of 2: the twelve self-staged scenes named in near1 (ch2-smog, ch2-end, ch4-gate, ch4-end, ch5-pruitt, ch6-nara, ch6-park, ch6-end, ch7-page, ch7-end, ch8-end, ch9-luna) played with `tools/scene_stage_audit.py`, then measured for the distance from the party to whoever is talking on every page, and the doubtful ones looked at frame by frame.
+- Fixed `ch2End` (`data/scenes.js`): only Tom walked the 16 tiles from the Downtown arch down to Mr. Washington; TNB and Nara stayed at the arch, off screen, and TNB talked from there for the whole scene. They now walk down with him (TNB to (16,17), Nara to (16,19)); the scene's huddle then keeps them beside Tom as Miss Odette and Doña Carmen arrive.
+- Fixed `ch5Pruitt`: Clara's dad (the man in the long coat) spawned on Amy (2,9), walked through Grace (4,9) and stopped on Principal Pruitt (6,8). He now comes in from the east along row 9, stops at (9,9) beside Clara (she turns to him), and they leave east.
+- Looked at and left alone (fact): ch2-smog, ch4-gate, ch4-end, ch6-park, ch6-end, ch7-page, ch7-end, ch8-end, ch9-luna: the party stands within 3 tiles of every speaker (ch6-end: Bernadette is 4 from Tom with Olivia and Michael in between, one line). The audit's facing and off-centre marks on them are the side-facing rule (cutpolish3) and wide streets. ch6-nara: Michael says one line from his yard about 5 tiles away, on screen at the right edge in portrait (the audit had started Tom at the arch; from Tom's front door it is close). Doña Carmen and Miss Odette in ch2End stand one above the other (spawn spots, not changed).
+- Not done: landscape not looked at for part 2 (portrait only). Not played on a phone.
+
 ## posesizes (2026-11-20): Walking poses of Tom, TNB, Justin, Amy and Boppy now use your Pose Editor lines, so they match their feelings and talking poses
 
 Board card c-posesizes. Tom's saved Pose Editor lines (data/pose-requests.json, 2026-11-16) for the walking standing poses are now baked.

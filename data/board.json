@@ -7949,7 +7949,7 @@
    "theme": "Areas",
    "lane": "claude",
    "col": "prog",
-   "next": "Part 1 shipped (alvareza): Casa Alvarez staged by hand. Working on part 2: checking the twelve self-staged scenes from the near1 notes for distance.",
+   "next": "Shipped (alvareza, alvarez). Tom plays Casa Alvarez on his phone: card t-alvarezplay.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7981,6 +7981,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as alvareza: Casa Alvarez scene: everyone walks into the living room and stays on one spot for the whole scene, nobody on the amber"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as alvarez: twelve self-staged scenes checked; ch2End (TNB and Nara left at the arch) and ch5Pruitt (Clara's dad on Amy, Grace and Pruitt) fixed; the other ten left alone. Tom card t-alvarezplay added."
     }
    ],
    "prompt": {
@@ -7993,7 +7997,7 @@
     "text": "Read claude/next-addendum-near1.md. Casa Alvarez (ch12Alvarez): hand-place the six walkers in the living room, look at all 18 pages in portrait and landscape, push; then check the twelve self-staged scenes listed there. You have my full permission to access the repo."
    },
    "tag": "alvarez",
-   "after": "nothing for Tom: c-alvarez"
+   "after": "t-alvarezplay"
   },
   {
    "id": "c-knownwrong",
@@ -9499,6 +9503,30 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections) and docs/POSE_EDITOR.md (Applied so far), then card c-poselines2 and Tom's card t-poselines in data/board.json. Your first push is the commit board: start c-poselines2. Apply Tom's new lines in data/pose-requests.json for the people he lined: before changing any bake, rebake once with no change (python3 tools/sprite-bake/walk_splice.py followed by the ids of the people he lined) and confirm git shows no change; then the walks are already applied by walk_sheet_frames.py, so rebake with walk_splice.py and the same ids, run python3 tools/sprite-bake/heights.py write; the feelings and talking poses with python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run in the background, then git checkout art/chars/pipemo-story.webp data/npc-poses.js); the dialogue faces with bake_emotion_faces.py, bake_talk_faces.py and bake_talkpose_faces.py for those ids, bump EMO_V and TALK_V. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run python3 tools/pose-editor/manifest.py, python3 tools/pose_editor_test.py and python3 tools/heights_test.py. A person or pose still without lines stays as it is: list it on a Tom card named in after. Build tag poselines2. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-alvarezplay",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Areas",
+   "ask": "play",
+   "fyi": true,
+   "title": "Play the Casa Alvarez scene (chapter 12)",
+   "next": "Press RELOAD, then CHAPTERS > Chapter 12. Visit Doña Carmen's pupuseria first if the game asks, then walk into Casa Alvarez on 2nd Ave. Check: Daisy runs down from the kitchen, the family walks up the hall and stands around Mrs. Alvarez's amber (Tom and Amy on either side of her), nobody moves or stands on an amber block for the rest of the scene, and everyone is on screen in portrait and in landscape. All good if it looks right; Something is wrong with what you saw.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
+    "opening": "\"Read claude/next-addendum-near1.md. Casa Alvarez\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-alvarez when alvarez shipped."
+    }
+   ],
+   "first": "Build alvarez shows on the title screen."
   }
  ],
  "sessions": [
