@@ -1763,12 +1763,16 @@
    "fyi": true,
    "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). For anything off, write what you saw in a report (pencil tab).",
    "blocks": [],
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "created": "2026-11-20",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by cutpolish4b."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom found several issues on this card and could not tell what to do next. Kept open so he can report them with the new Something is wrong button (card c-board4)."
     }
    ]
   },
@@ -1794,6 +1798,37 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "c-board4",
+   "tag": "board4",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Something is wrong button on test cards (board4)",
+   "next": "Building: every play, pictures, animations, voice and script card gets All good and Something is wrong. Something is wrong saves your words and screenshot as a Claude fix card, and the tested card waits on it.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-board3.md and claude/board3-plan.md, then rework the board\""
+   },
+   "prompt": {
+    "what": "Builds the All good and Something is wrong buttons on Tom's test cards and the fix card they create.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new board feature, steps not written)",
+    "effort": "high (a new tool feature designed and built in one session)",
+    "text": "Read CLAUDE.md and data/board.json card c-board4, then build what its history describes: on every open Tom card with ask play, pictures, animations, voice or script, an All good button and a Something is wrong form (words, optional screenshot) that creates or extends a Claude fix card and moves the tested card to Waiting on it. Run tools/board_check.py, tools/board_sync_test.py and tools/board_test.py, look at board.html at 390 x 844, push build board4. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: on \"Look at the chapter 1 pictures in the game\" (t-cutpolish4b) he found several issues and could not tell what to do next; the pencil tab, come back, I did this, then Done flow is confusing and the fyi card felt like nothing waited on it. He wants one tap from the card to report, and the report to become Claude work."
+    }
+   ]
   }
  ],
  "sessions": [
