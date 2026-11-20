@@ -13191,7 +13191,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni\""
    },
    "history": [
     {
@@ -13218,6 +13218,11 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T18:01:29.798Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started (Opus 5.5, high). Sizing confirmed: row D (generator prompts, art judged by taste), high (new pose system, no written steps). No open card covers this.",
+     "at": "2026-11-20T18:05:00.000Z"
     }
    ],
    "prompt": {
