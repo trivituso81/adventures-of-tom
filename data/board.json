@@ -1725,10 +1725,10 @@
    "id": "c-note-pagessource",
    "tag": "note-pagessource",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Handle Tom's note on Switch GitHub Pages to publish from Actions (one setting)",
-   "next": "You left a note when you finished \"Switch GitHub Pages to publish from Actions (one setting)\": Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.",
+   "next": "Nothing to do. Tom's note was answered on card t-pagessource: the Pages source is already GitHub Actions, so the faster publish is on.",
    "prompt": {
     "what": "Reads the note you left on a finished card and acts on it or answers it.",
     "before": [
@@ -1754,11 +1754,16 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Read the note on t-pagessource. Tom's Pages source is already GitHub Actions, so that card was retired with no action for him. Nothing else needed; card closed."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "id": "t-follow1play",
