@@ -1,3 +1,7 @@
+## board-startpause (2026-11-20): the two broken START routes are paused instead of failing silently
+
+Every START on the Opus medium and Sonnet high routes died before its first push today (8 runs). `routines[].paused` keeps a route off even when its secret exists (`tools/board_sync.py`, startfix1 note); those cards now show Copy prompt. Proof cards closed as failed; searchthrough, keysecrets3 and keysecrets5 back in Up next; the takes merge restarted on the working Sonnet medium route; repair is card c-startfix.
+
 <<<<<<< HEAD
 ## fix-keysecrets2-try-4 (2026-11-20): the page reads the video job's report through the GitHub API, not the 5 minute cached copy
 

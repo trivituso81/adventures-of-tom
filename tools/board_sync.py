@@ -558,8 +558,9 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
-        if routines_on is not None and bool(r.get('enabled')) != bool(routines_on.get(r['id'])):
-            r['enabled'] = bool(routines_on.get(r['id'])); B.say('START is %s for %s, effort %s' % ('on' if r['enabled'] else 'off', r['model'], r['effort']))
+        want = bool(routines_on.get(r['id'])) and not r.get('paused') if routines_on is not None else None   # startfix1: a paused route stays off even with its secret
+        if routines_on is not None and bool(r.get('enabled')) != want:
+            r['enabled'] = want; B.say('START is %s for %s, effort %s' % ('on' if r['enabled'] else 'off', r['model'], r['effort']))
     for com in commits:
         if com['subject'].startswith('board-sync'): continue
         r4_claim(B, com)
