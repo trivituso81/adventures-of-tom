@@ -1806,6 +1806,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
+   "first": "2026-11-19T17:14:03-08:00",
+   "last": "2026-11-19T17:53:17-08:00",
+   "tags": [
+    "clipch1remake",
+    "clipch1remakea"
+   ],
+   "cards": [
+    "c-clipch1remake"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
    "title": "Fix party followers lagging behind Tom in free walking (follow1)",
    "first": "2026-11-19T17:23:21-08:00",
@@ -1854,18 +1867,6 @@
    "tags": [],
    "cards": [
     "c-ch1nodoor"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
-   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
-   "first": "2026-11-19T17:14:03-08:00",
-   "last": "2026-11-19T17:33:38-08:00",
-   "tags": [
-    "clipch1remake"
-   ],
-   "cards": [
-    "c-clipch1remake"
    ]
   },
   {
@@ -1942,8 +1943,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "ad58f917a71002bd5781e0ed430f2c89560e3b28",
- "synced_at": "2026-11-20T01:52:00+00:00",
+ "synced": "cafd6132023f87acfda4a90ec400cf9dd45c64b8",
+ "synced_at": "2026-11-20T01:54:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
