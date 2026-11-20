@@ -1,3 +1,7 @@
+## fix-oldchecks (2026-11-20): The old phone checks are six separate cards, one per item
+
+- Card c-fix-oldchecks, for t-oldchecks. Tom (11-20): "Break this out into one card per item that you've listed in". t-oldchecks held six checks in one text; it is retired and replaced by t-oldchecks-voice, -chapters, -script, -blocks, -pencil and -boppy, each with its own ask, exact steps and Library link where it names one. All are optional (fyi).
+- Pencil reports: only r-20261114-100555-mxvd is open (the Mudling picture, 11-14, unrelated), so none were marked done. Board change only, no game code, so smoke was not run.
 ## fix-ch1starving-2 (2026-11-20): The Voice Library now removes "I'm starving!" from Tom's "Thank you for telling me, Rose" script however an old copy reached the page
 
 - Card c-fix-ch1starving-2, for t-ch1starving. Tom (11-19 and 11-20): "i want to drop it - that's why it's not there. you delete it", then after the first fix: "That's not what I wanted. I don't want. I'm starving to be dropped". Reading taken: he still sees "I'm starving!" in the script box and wants it gone. If he meant the opposite (keep it in the script), the script of the take he kept is in git history (commit 0531945) and it is a one-line change to put back.

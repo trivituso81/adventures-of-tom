@@ -7769,14 +7769,14 @@
    "done": "2026-11-19"
   },
   {
-   "id": "t-oldchecks",
-   "title": "Older phone checks, when you next play (none block anything)",
+   "id": "t-oldchecks-voice",
+   "title": "Voices: record the old voice gaps",
    "theme": "Game Shell",
    "lane": "tom",
    "col": "wait",
-   "ask": "play",
+   "ask": "voice",
    "fyi": true,
-   "next": "Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show > No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library.",
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7787,11 +7787,7 @@
    "history": [
     {
      "d": "2026-11-20",
-     "t": "Collected from the Waiting on Tom list in claude/next.md by c-nextclean."
-    },
-    {
-     "d": "2026-11-20",
-     "t": "Tom: something is wrong: Break this out into one card per item that you've listed in Sent to Claude as card c-fix-oldchecks; this card waits on it and comes back to you when the fix ships."
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
     }
    ],
    "links": [
@@ -7801,7 +7797,33 @@
       "show": "none"
      },
      "label": "No clip yet"
-    },
+    }
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "t-oldchecks-chapters",
+   "title": "Chapters 2, 6 and 7: play them",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open the game, Chapter Select, and play chapters 2, 6 and 7. Chapter 7 and chapter 8 art is made in the Art Library groups Chapter 7 and Chapter 8 (press GENERATE, then APPROVE on each picture).",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    }
+   ],
+   "links": [
     {
      "to": "art",
      "ids": [
@@ -7817,7 +7839,112 @@
      "label": "chapter 7 and 8 art to make"
     }
    ],
-   "waiting_on": "claude"
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-oldchecks-script",
+   "title": "Script Editor: conversations, Workshop, Paste back",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "script",
+   "fyi": true,
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Script Editor and try the conversations list, Workshop and Paste back. Look for anything that does not open or save.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    }
+   ],
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-oldchecks-blocks",
+   "title": "Orange blocks: replay the family lines",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game, press A on an orange block that was left behind. You should see the family's lines replay.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    }
+   ],
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-oldchecks-pencil",
+   "title": "Pencil tab: send a test report",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game tap the pencil tab, type a note, tap the picture to drop a pin, press SEND. You should see Report sent.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    }
+   ],
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-oldchecks-boppy",
+   "title": "Art to make: Young Boppy Van Cortlandt '70",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "pictures",
+   "fyi": true,
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Art Library, find the entry Young Boppy Van Cortlandt '70 (boppy-young-hero), press Generate, then Approve or Reject.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    }
+   ],
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "boppy-young-hero"
+     ],
+     "label": "Young Boppy Van Cortlandt '70"
+    }
+   ],
+   "waiting_on": "tom"
   },
   {
    "id": "t-cutpolish5",
@@ -7888,7 +8015,7 @@
    "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
    "next": "You reported a problem on Older phone checks, when you next play (none block anything). Claude starts the fix by itself. Latest: Break this out into one card per item that you've listed in",
    "blocks": [
-    "t-oldchecks"
+    "t-oldchecks-voice"
    ],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -7927,6 +8054,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Split t-oldchecks into six cards, one per item (t-oldchecks-voice, -chapters, -script, -blocks, -pencil, -boppy); retired t-oldchecks."
     }
    ],
    "prompt": {
@@ -7938,7 +8069,7 @@
     "effort": "medium (one report, a small piece of work)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks and t-oldchecks in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks.\n\nTom tested and found problems:\n1. Card t-oldchecks (Older phone checks, when you next play (none block anything), ask play). He was asked: Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show ) No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library. He wrote: Break this out into one card per item that you've listed in\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:06:38.703Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks, and give the build fix-oldchecks a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-oldchecks",
+   "after": "t-oldchecks-voice",
    "auto": true
   },
   {
