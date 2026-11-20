@@ -1,3 +1,7 @@
+## gem-bug06 (2026-11-20): the quest log no longer says "Go to" in front of a full sentence
+
+Gemini chapter 1 report, BUG-06. Fact: the second half (location toasts running together) is already gone, because idea-removeall removed all toasts. Fix: `questPhrase` (`engine/story.js`) leaves a goal alone when its first sentence is already a statement (it now also recognises came, has, have, had, will and "It's"). "The splash came from across the pond. Follow it." and "It's Sunday. Head out the front door..." now show as written; place goals such as "the Reading Room." still get "Go to".
+
 ## b3s10 (2026-11-20): New battle: Amy, Justin and Olivia join the Battle Lab with both of their Vibes
 
 - Tom (11-20): "build stage 10 (Amy, Justin and Olivia) of the new battle system." Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) are built: 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks each (42 lines), `data/b3-kit-amy.js`, `data/b3-kit-justin.js` and `data/b3-kit-olivia.js`. Every Skill has a full plain sentence for its card. Armchair Ref and News Anchor are not built.
