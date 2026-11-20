@@ -6686,7 +6686,7 @@
    "title": "Look at the six fixed report pictures on your phone",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build reports-2026-11-19c: RELOAD on the title, then load a chapter 1 save. 1) Grump Hollow, the fishing spot at the pond: the grey grass, orange block and burnt bulb should be ONE picture, not three overlapping ones. 2) Deedee's house, press A on Deedee for her glasses chat: she should stand with the glasses on her head and the dialogue face should show them too. 3) Play on into chapter 2 and walk Old Oak Park while the smog is on: Mr. Washington, Marisol and Larry should stand dazed. Report with the REPORT tab if any of these look wrong (reports-2026-11-19c is the build to name).",
@@ -6705,8 +6705,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-ch1starving",
