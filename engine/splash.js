@@ -436,6 +436,7 @@ for(const ev of ['touchend','click']) window.addEventListener(ev,unlockAudio,{pa
 window.addEventListener('keydown',e=>{
   if(!splash.active) return;
   if(typeof B3V!=='undefined'&&B3V.open) return;   // the Vibes screen is open over the Battle Lab list: its own keys (engine/b3-menu.js)
+  if(typeof BUILDLOG!=='undefined'&&BUILDLOG.open) return;   // the builds list is open over the welcome screen: its own keys (engine/build-history.js)
   if(e.code==='KeyL') return; // rotate still works
   e.stopImmediatePropagation();
   unlockAudio();

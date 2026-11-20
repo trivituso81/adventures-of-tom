@@ -184,4 +184,34 @@ Each phase: first push `board: start <card id>`; fetch and rebase before every p
 
 ## 8. Built
 
-(nothing yet)
+### Phase 1, builds1 (2026-11-20, card c-builds1)
+
+Built as the section 6 row says: section 4 fields and backfill, 3.1, 3.2, 3.4 and 3.6, search over the loaded list, marker from the live list only, old day arrows and ALL DAYS removed and purged. Checks B1 to B7 and B14 are in `tools/buildlog_test.py` (it serves made-up builds and a made-up board relative to today, with the service worker blocked so the stubs apply) and pass in portrait and landscape. I looked at every picture of both layouts (recent, marker, tries open, housekeeping shown, search, sheet, this phone's sheet, menu).
+
+What exists now:
+
+| Part | Where |
+|---|---|
+| `card`, `theme`, `kind: "house"` on every build; `add` and `sync` fill them (`find_card`, `is_house`, `fill_card_fields` in `tools/build_history.py`) | `data/build-history.js`: 487 builds, 273 with a card and a theme, 35 housekeeping (81 KB, up from 68 KB; phase 3 splits it) |
+| The screen, one script | `engine/build-history.js`; styles in the `index.html` style block |
+| Test | `python3 tools/buildlog_test.py` |
+
+What differs from the plan (decisions I made; phases 2 and 3 should read these):
+
+| # | Plan said | What I did | Why |
+|---|---|---|---|
+| 1 | Three view buttons in 3.1 | No view row in phase 1; Recent is the whole screen. Phase 2 adds the row (Recent, In the works) and phase 3 adds Archive | The plan's phase 1 row says the other two appear from phase 2 and 3. A row with two dead buttons would be worse |
+| 2 | A Filters button next to the search box | A 44 px "Housekeeping" toggle sits there (class `bl-hk`, `BUILDLOG.house`). Phase 2 replaces it with Filters (which holds Show housekeeping) and removes the toggle | Housekeeping had to be showable (B6) before Filters exist |
+| 3 | Search "over the loaded list by name and sentence" | Also theme. Searches every build loaded, including ones older than 7 days (so nothing is out of reach until Archive exists). One flat list, newest first, with the date and time on each row, words marked, not folded into tries, housekeeping included | Phase 1 has no Archive; folding hides what a search is looking for |
+| 4 | Tries: builds of one card on one day | The `card` field is the exact card (a fix try has its own card, `c-fix-<x>-<n>`); rows group by a family key: `c-fix-<x>-<n>` and `c-fix-<x>` share `c-fix-<x>`, every other card is its own family (`buildFamily`) | Fix tries are separate cards but are one thing to Tom |
+| 5 | Marker above this phone's build | This phone's build always starts its own row (a newer try of the same card is never folded into it) and is never hidden as housekeeping. If it is in a closed day, that day's heading gets "THIS PHONE" | The marker must sit directly above it, and the phone's build can be a board-only push (the stamp changes on every push) |
+| 6 | Day heading "41 builds, 32 housekeeping hidden" | The count is visible builds (not rows); the hidden count follows after a comma | Matches B2 and B6 as written |
+| 7 | Detail sheet card line | The sheet reads `data/board.json` from the site when it first opens (the card title, and the open Tom card's `next` as What to check, only for ask play, pictures, animations, voice, script). Phase 2's 3.5 reads the board from GitHub for In the works; this one is the site copy | The sheet needs the title; the site copy is enough |
+| 8 | `board.html?card=<id>` | The sheet links to `board.html?card=<id>`, but `board.html` does not read that parameter yet. Phase 2 adds it (3.5 already says to) | Link is ready; the board just opens until then |
+| 9 | Status in the sheet | Phase 1 has only the live list: "On this phone. It is the build running now.", "On this phone." (older) or "Live. Reload to get it." (newer). Phase 2 adds Publishing, Your test, Publish failed | 3.3 is phase 2 |
+| 10 | Status strip line 2 | "The newest build." / "N newer builds are live." (all newer builds counted, housekeeping too) / "This build is not in the list yet." when this phone's build is missing. RELOAD only when newer builds exist | 3.1, with the missing case added |
+| 11 | Landscape layout "the same" | Same parts; in landscape the status strip and the search box sit side by side so the list keeps most of the height | The stacked version left about 2 rows visible |
+| 12 | Not in the plan | `engine/splash.js` key handler returns while the builds list is open, so Escape closes the list on the welcome screen (it used to be swallowed there; only the menu path worked) | B14 asks Escape to close it |
+| 13 | Backfill "263 of 482 match a card" | 273 of 487 match (the plan's count used a stricter rule) | The rule is the board_check rule plus card id and word-boundary history match |
+
+Not verified: no one has looked at the screen on a phone (Tom tests once, after phase 3). `python3 tools/smoke.py` runs all its checks including `buildlog_test` and `build_history check`, but its `board_sync_test` already fails on main before this work (R5 "board_check accepts an unstick card": `t-stuck-x` must block an open Claude card or be fyi). I did not touch it.

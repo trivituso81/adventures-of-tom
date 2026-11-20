@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Keeps data/build-history.js, the list the game shows when Tom taps the build label (welcome screen and menu).
 
-Each entry: {"tag": build name, "at": ISO time the build was tagged for pushing, "what": one line of what changed}.
+Each entry: {"tag": build name, "at": ISO time the build was tagged for pushing, "what": one line of what changed,
+"card": id of the board card the build belongs to, "theme": that card's theme, "kind": "house" for housekeeping}.
+`card`, `theme` and `kind` are left out when they do not apply (builds1, plan claude/builds-plan.md section 4).
 Newest first, one entry per line.
 
 Usage (repo root):
@@ -88,6 +90,51 @@ def sync(rows):
     return n
 
 
+def board_cards():
+    p = os.path.join(ROOT, 'data', 'board.json')
+    if not os.path.exists(p): return []
+    try: return json.load(open(p, encoding='utf-8')).get('cards', [])
+    except ValueError: return []
+
+
+def find_card(tag, cards):
+    """The card a build belongs to: the same rule as board_check.py --push (tag equal, tag plus one letter, or the build named
+    in a card's history, or the card id), tried in that order so an exact tag wins. A fix try (fix-<card>-<n>) has its own card
+    whose tag is the build name, so it is found by the exact rule."""
+    for c in cards:
+        if c.get('tag') == tag: return c
+    for c in cards:
+        t = c.get('tag')
+        if t and tag.startswith(t) and len(tag) == len(t) + 1 and tag[-1].isalpha(): return c
+    for c in cards:
+        if c.get('id') == tag: return c
+    pat = re.compile(r'(?<![\w-])%s(?![\w-])' % re.escape(tag))
+    for c in cards:
+        if any(pat.search(h.get('t', '')) for h in c.get('history', [])): return c
+    return None
+
+
+def is_house(r):
+    w = (r.get('what') or '').lower()
+    return r['tag'].startswith(('board-', 'artbake')) or 'board only' in w or 'no code change' in w
+
+
+def fill_card_fields(rows):
+    """Writes card, theme and kind on every row (the backfill); a row with no card keeps none. Returns how many rows changed."""
+    cards, n = board_cards(), 0
+    for r in rows:
+        before = (r.get('card'), r.get('theme'), r.get('kind'))
+        c = find_card(r['tag'], cards) if cards else None
+        if c:
+            r['card'] = c['id']
+            if c.get('theme'): r['theme'] = c['theme']
+            else: r.pop('theme', None)
+        if is_house(r): r['kind'] = 'house'
+        else: r.pop('kind', None)
+        n += before != (r.get('card'), r.get('theme'), r.get('kind'))
+    return n
+
+
 def stamp_tag():
     m = re.search(r"d\.textContent='build ([^']*)'", open(os.path.join(ROOT, 'engine', 'main.js'), encoding='utf-8').read())
     return m.group(1) if m else None
@@ -103,11 +150,12 @@ def main():
         now = datetime.datetime.now().astimezone().replace(microsecond=0).isoformat()
         rows = [r for r in rows if r['tag'] != a[1]]
         rows.append({'tag': a[1], 'at': now, 'what': changes_titles().get(a[1], '')})
+        fill_card_fields(rows)
         save(rows)
         print(f'build history: {a[1]} at {now}' + (f', {n} older build(s) filled in' if n else ''))
         return 0
     if a[0] == 'sync':
-        n = sync(rows); save(rows); print(f'build history: {len(rows)} builds, {n} added'); return 0
+        n = sync(rows); m = fill_card_fields(rows); save(rows); print(f'build history: {len(rows)} builds, {n} added, {m} with card fields changed'); return 0
     if a[0] == 'check':
         rows.sort(key=lambda r: when(r['at']), reverse=True)
         tag = stamp_tag()

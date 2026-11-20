@@ -1448,24 +1448,53 @@ html.landscape #build-stamp{top:calc(8px + env(safe-area-inset-top));min-height:
 html.landscape .mbuild{padding:4px 10px;gap:1px}
 #buildlog{position:absolute;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));background:#05070ccc;touch-action:auto}
 #buildlog[hidden]{display:none}
-.bl-panel{display:flex;flex-direction:column;width:min(100%,560px);max-height:100%;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18;color:#f2e6cc;font-size:13px;overflow:hidden}
-.bl-head{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
-.bl-close{width:38px;height:38px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
-.bl-status{padding:9px 14px;color:#cfd5e2;line-height:1.35}.bl-status b{color:#f3dfa8}
-.bl-reload{margin-left:4px;padding:5px 10px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font:inherit;font-size:12px}
-.bl-bar{display:flex;align-items:center;gap:6px;padding:6px 10px;border-top:1px solid #2c3342;border-bottom:1px solid #2c3342;background:#10141d}
-.bl-bar button{height:38px;min-width:40px;padding:0 10px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font:inherit;font-size:12px;touch-action:manipulation}
-.bl-bar button:disabled{opacity:.3}
-.bl-day{flex:1;display:grid;text-align:center;font-size:14px;color:#f3dfa8}.bl-day small{font-size:10px;color:#aeb6c6}
-.bl-list{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 0}
-.bl-row{display:grid;grid-template-columns:70px 1fr;gap:8px;padding:8px 14px;border-bottom:1px solid #232a38}
+.bl-panel{position:relative;display:flex;flex-direction:column;width:min(100%,560px);height:100%;max-height:100%;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18;color:#f2e6cc;font-size:13px;overflow:hidden}
+.bl-panel button{font:inherit;touch-action:manipulation}
+.bl-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
+.bl-close{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.bl-status{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid #2c3342;color:#cfd5e2;line-height:1.35}
+.bl-st1{font-size:14px}.bl-st1 b{color:#f3dfa8;font-family:ui-monospace,Menlo,monospace;font-weight:600;word-break:break-all}.bl-st2{margin-top:1px;font-size:12px;color:#aeb6c6}
+.bl-reload{flex:none;min-width:84px;height:44px;padding:0 14px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:13px;letter-spacing:.5px}
+.bl-find{display:flex;gap:8px;padding:8px 10px;border-bottom:1px solid #2c3342;background:#10141d}
+.bl-q{flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid #4b5160;border-radius:5px;background:#1b212e;color:#f2e6cc;font:inherit;font-size:16px;-webkit-appearance:none;appearance:none}
+.bl-q::placeholder{color:#8790a3}
+.bl-hk{flex:none;height:44px;padding:0 12px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font-size:12px}
+.bl-hk[aria-pressed=true]{border-color:#b8914a;background:#3a2f14;color:#f3dfa8}
+.bl-list{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 8px}
+.bl-dayhead{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:44px;padding:6px 14px;border:0;border-top:1px solid #2c3342;border-bottom:1px solid #2c3342;background:#10141d;color:#f3dfa8;font-size:12px;letter-spacing:.5px;text-align:left}
+.bl-dc{flex:none;color:#aeb6c6;font-size:11px;letter-spacing:0;text-align:right}
+.bl-row{display:grid;gap:3px;min-height:56px;padding:9px 14px;border-bottom:1px solid #232a38;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bl-row.sub{padding-left:28px;background:#10141d}
 .bl-row.mine{background:#3a2f1466;box-shadow:inset 3px 0 0 #b8914a}
-.bl-time{color:#aeb6c6;font-variant-numeric:tabular-nums;white-space:nowrap}
-.bl-main b{color:#f3dfa8;font-size:14px;font-weight:600}.bl-main i{margin-left:8px;padding:1px 5px;border:1px solid #b8914a;border-radius:3px;font-style:normal;font-size:9px;letter-spacing:.5px;color:#f3dfa8}
-.bl-what{display:block;margin-top:2px;color:#cfd5e2;font-size:12px;line-height:1.3}
-.bl-dayhead{padding:6px 14px;background:#10141d;color:#f3dfa8;font-size:11px;letter-spacing:.5px;position:sticky;top:0}
-.bl-empty{padding:26px 14px;text-align:center;color:#aeb6c6}
-.bl-foot{padding:7px 14px;border-top:1px solid #2c3342;color:#8790a3;font-size:10px;line-height:1.3}
+.bl-what{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#f2e6cc;font-size:14px;line-height:1.3}
+.bl-meta{color:#aeb6c6;font:11px/1.35 ui-monospace,Menlo,monospace;word-break:break-all}
+.bl-meta mark,.bl-what mark{background:#b8914a;color:#141924;border-radius:2px}
+.bl-tries{justify-self:start;min-height:44px;margin:-3px 0 -9px -6px;padding:0 6px;border:0;background:none;color:#d9b45f;font-size:12px;text-align:left}
+.bl-marker{display:flex;align-items:center;gap:10px;min-height:28px;padding:0 14px 0 11px;border-left:3px solid #b8914a;background:#1b212e;color:#f3dfa8;font:11px ui-monospace,Menlo,monospace;letter-spacing:.5px}
+.bl-marker:after{content:"";flex:1;border-top:1px dashed #b8914a}
+.bl-count{padding:8px 14px;color:#aeb6c6;font-size:12px}
+.bl-empty{padding:26px 14px;text-align:center;color:#aeb6c6}.bl-empty.small{padding:14px}
+.bl-clear{display:block;min-height:44px;margin:10px auto 0;padding:0 16px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8}
+.bl-sheetwrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;background:#05070caa;z-index:5}
+.bl-sheetwrap[hidden]{display:none}
+.bl-sheet{display:flex;flex-direction:column;max-height:88%;border-top:2px solid #b8914a;background:linear-gradient(#1b212e,#141924)}
+.bl-shead{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 14px;border-bottom:1px solid #6d5629;font-size:13px;letter-spacing:1px;color:#f3dfa8}
+.bl-sclose{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.bl-sbody{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px 14px}
+.bl-ssent{margin-bottom:8px;color:#f2e6cc;font-size:15px;line-height:1.4}
+.bl-sl{display:grid;grid-template-columns:78px 1fr;gap:8px;padding:7px 0;border-top:1px solid #232a38;align-items:center}
+.bl-k{color:#8790a3;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.bl-v{min-width:0;color:#cfd5e2;line-height:1.4}.bl-v small{display:block;color:#8790a3;font-size:10px}
+.bl-mono{font-family:ui-monospace,Menlo,monospace;color:#f3dfa8;word-break:break-all}
+.bl-copy,.bl-open{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;padding:0 12px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:12px;text-decoration:none}
+.bl-open{display:flex;width:max-content}
+.bl-other{display:grid;gap:2px;width:100%;min-height:44px;margin:2px 0;padding:6px 10px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;text-align:left;font-size:12px}
+.bl-other small{margin:0;color:#8790a3;font:10px ui-monospace,Menlo,monospace}
+html.landscape .bl-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);width:min(100%,820px)}
+html.landscape .bl-head{grid-column:1/-1}
+html.landscape .bl-status{grid-column:1;grid-row:2;border-bottom:1px solid #2c3342}
+html.landscape .bl-find{grid-column:2;grid-row:2}
+html.landscape .bl-list{grid-column:1/-1;grid-row:3}
 </style>
 <style>
 /* Desktop battle HUD (Tom 2026-11-18, build deskhud1): on a computer the screen has spare room, so the turn bar is 2.5x bigger and the
@@ -2016,7 +2045,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=fix-battlelabpagetry-2"></script>
+<script src="engine/splash.js?v=builds1"></script>
 <script src="engine/splash-edit.js?v=adminhub1"></script>
 <!-- Battle 3: the v11 battle system, loaded beside battle 2 (docs/BATTLE3.md). Data, then the rules (no drawing), then the screen. -->
 <script src="data/b3-rules.js?v=b3s4"></script>
@@ -2075,13 +2104,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=fix-effectslook-2"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=fix-heist1play-5"></script><!-- build names and times (tools/build_history.py) -->
-<script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
+<script src="data/build-history.js?v=builds1"></script><!-- build names and times (tools/build_history.py) -->
+<script src="engine/build-history.js?v=builds1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=gem-canon08"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-heist1play-4"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=fix-heist1play-5"></script>
+<script src="engine/main.js?v=builds1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

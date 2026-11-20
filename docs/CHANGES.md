@@ -1,3 +1,13 @@
+## builds1 (2026-11-20): the build history reads by day: sentence first, a marker for this phone, retries folded into one row, a details sheet on a tap
+
+Tom (11-20 10:18): "do a UX audit of the build history screen and create a plan to improve it to make it more usable." Phase 1 of 3 of `claude/builds-plan.md` (section 6). Tom tests once, after phase 3 (card t-buildstry).
+
+- Data (plan section 4): `tools/build_history.py` writes `card` (board card id), `theme` (that card's theme) and `kind: "house"` (housekeeping: tag starts `board-` or `artbake`, or the sentence says "board only" or "no code change") on every build, in `add` and `sync`. The card is found by the same rule as `board_check.py --push` (tag equal, tag plus one letter, card id, or the build named in a card's history), exact tag first. `sync` backfilled all rows: 273 of 487 have a card and a theme, 35 are housekeeping.
+- Screen (`engine/build-history.js`, styles in `index.html`): title BUILDS; status strip ("This phone: <name>", "The newest build." or "N newer builds are live.", RELOAD 44 px only when newer builds exist); a search box over every build loaded (name, sentence, theme, also builds older than 7 days); Recent = the last 7 days under 44 px day headings with counts ("8 builds, 2 housekeeping hidden"), today open, other days closed; a "THIS PHONE IS HERE" line directly above this phone's build; a row is the sentence (two lines at most), then name, theme and time; builds of one card on one day are one row with "+N earlier tries on this card" (a tap opens them in place); a tap on a row opens the details sheet (sentence, build with Copy name, made, status, theme, card with Open the card on the board, what to check from the open Tom card, other tries).
+- Removed and purged: the day arrows, ALL DAYS, the time column, the footer note (its time zone line is in the sheet), and their CSS and test lines.
+- `engine/splash.js`: the welcome screen's key handler now steps aside while the builds list is open, so Escape closes the list on the welcome screen too (before, only the menu path worked).
+- Tests: `python3 tools/buildlog_test.py` now serves made-up builds and a made-up board relative to today and checks B1 to B7 and B14 in portrait and landscape (service worker blocked so the stubs apply).
+
 ## fix-heist1play-5 (2026-11-20): The mud blob's whole path in the muffin theft is rebuilt: hops, stop-off, knock-downs on contact, counter, hop down, a real run out the door
 
 Tom (11-20 09:46 recording): "there are still several issues with the mudblob animation". Plan: `claude/heist-fix5-plan.md`, eight rows, all done in `SCENES.ch1Theft`:
