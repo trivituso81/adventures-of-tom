@@ -1256,13 +1256,17 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
     "opening": "\"Party followers lag behind Tom during free walking in chapter 1 and then catch up.\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Tom: party followers lag behind Tom during free walking in chapter 1 and then catch up. Suspected cause hiddenSpot in engine/followers.js; to be confirmed by reproducing first."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1278,6 +1282,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
+   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
+   "first": "2026-11-19T17:23:21-08:00",
+   "last": "2026-11-19T17:23:21-08:00",
+   "tags": [],
+   "cards": [
+    "c-follow1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
@@ -1387,8 +1401,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "bd66f95a2513ad6d9b9e6e41459668207a36f8d1",
- "synced_at": "2026-11-20T01:16:21+00:00",
+ "synced": "ea302eccbc428c987201b1668fb556bfff58fad1",
+ "synced_at": "2026-11-20T01:24:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
