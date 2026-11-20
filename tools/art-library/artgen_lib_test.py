@@ -18,18 +18,20 @@ def png():
 class Cors(http.server.SimpleHTTPRequestHandler):
     def end_headers(self): self.send_header('Access-Control-Allow-Origin', '*'); self.send_header('Cache-Control', 'no-store'); super().end_headers()
     def log_message(self, *a): pass
+socketserver.TCPServer.allow_reuse_address = True   # a quick second run must not trip on the last one
 async def main():
     folder = tempfile.mkdtemp(); os.makedirs(folder + '/results/' + ID); os.makedirs(folder + '/results/' + OLD)
     open(folder + '/results/%s/20261120T010000.png' % ID, 'wb').write(png()); open(folder + '/results/%s/20261120T010000.png' % OLD, 'wb').write(png())
     now = int(time.time() * 1000)
     prompts = {e['id']: e for e in json.load(open(ROOT + '/data/art-prompts.json'))['entries']}
-    idx = {'results': [{'key': ID + '@20261120T010000', 'id': ID, 'file': 'results/%s/20261120T010000.png' % ID, 't': now, 'prompt': prompts[ID]['prompt'], 'refs': prompts[ID]['refs'], 'card': 't-heistart', 'cost': .06},
+    idx = {'results': [{'key': ID + '@20261120T010000', 'id': ID, 'file': 'results/%s/20261120T010000.png' % ID, 't': now, 'prompt': prompts[ID]['prompt'], 'refs': prompts[ID]['refs'], 'card': 't-heistart', 'cost': .06,
+                        'qa': {'score': .667, 'yes': 2, 'of': 3, 'model': 'm', 'runs': 3, 'spent': .01, 'items': [{'id': 'f_bg', 'q': 'Does the background match?', 'kind': 'fixed', 'yes': False, 'why': 'a floor line'}, {'id': 'f_one', 'q': 'Is this one single image?', 'kind': 'fixed', 'yes': True, 'why': ''}, {'id': 'p1', 'q': 'Is there a red hat?', 'kind': 'prompt', 'yes': True, 'why': ''}]}},
                        {'key': OLD + '@20261120T010000', 'id': OLD, 'file': 'results/%s/20261120T010000.png' % OLD, 't': 1, 'prompt': 'p', 'refs': [], 'card': 'x', 'cost': .04}]}
     # the second record is older than any decision of its entry only if that entry has a decision; make sure by checking the repo data
     json.dump(idx, open(folder + '/index.json', 'w'))
     old_dec = max([0] + [int(x.get('at') or 0) for x in (prompts[OLD].get('versions') or []) + (prompts[OLD].get('rejects') or [])])
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8851'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8852'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8852'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=dict(os.environ, STUB_CLEAR=ID))   # Tom has approved this entry since: the stub serves it as never approved
     srv = socketserver.TCPServer(('127.0.0.1', 8853), functools.partial(Cors, directory=folder)); threading.Thread(target=srv.serve_forever, daemon=True).start()
     time.sleep(1.2)
     try:
@@ -42,6 +44,9 @@ async def main():
             ok(await pg.evaluate("(id)=>(RES[id]||[]).length", ID) == 1 and await pg.evaluate("(id)=>RES[id][0].srv", ID) == ID + '@20261120T010000', 'the made picture is imported as the entry\'s result with srv')
             ok(await pg.evaluate("(id)=>ST[id]", ID) == 'wait', 'the entry shows as waiting on Tom')
             ok('Mudling' in await pg.inner_text('#rvtitle') and await pg.evaluate("()=>!!document.getElementById('rvimg').getAttribute('src')"), 'ARTGEN: ?review= opens the review viewer on it with the picture: %s' % await pg.inner_text('#rvtitle'))
+            qt = await pg.inner_text('#rvqa')
+            ok('QA 2 of 3' in qt and 'Does the background match? (a floor line)' in qt and 'Passed (2)' in qt, 'the review viewer shows the QA: score, failed line with reason, passed folded: %s' % qt.replace('\n', ' | '))
+            ok(await pg.evaluate("()=>{const q=document.getElementById('rvqa').getBoundingClientRect(),n=document.getElementById('rvok').getBoundingClientRect();return n.bottom<=innerHeight+1&&q.height<=100}"), 'the QA block is short and APPROVE stays on the screen at 390x844')
             await pg.screenshot(path=SHOTS + '/artgen-lib-review.png')
             if old_dec:
                 ok(await pg.evaluate("(id)=>(RES[id]||[]).length", OLD) == 0, 'a picture older than the entry\'s last decision is not imported')
@@ -52,6 +57,7 @@ async def main():
             doc = json.loads(base64.b64decode(files['data/art-prompts.json']['content'].replace('\n', '')))
             e = next(x for x in doc['entries'] if x['id'] == ID)
             ok(e['status'] == 'approved' and e['versions'][-1].get('srv') == ID + '@20261120T010000' and e['versions'][-1]['from'] == 'v1', 'APPROVE writes srv on the version record: %s' % e['versions'][-1])
+            ok(e['versions'][-1].get('qa') == .667 and e['versions'][-1].get('qaFail') == ['f_bg'], 'and the QA score and the failed question ids (the record of QA against Tom): %s' % {k: e['versions'][-1].get(k) for k in ('qa', 'qaFail')})
             # reload: nothing is imported twice
             await pg.goto(base); await pg.wait_for_selector('#tabs .tab'); await pg.wait_for_timeout(1200)
             ok(await pg.evaluate("(id)=>(RES[id]||[]).length", ID) == 1, 'a second visit does not import it again')

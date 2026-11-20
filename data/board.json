@@ -7068,7 +7068,8 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (the questions, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 5), then card c-artgen2 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen2 exactly as the plan says and push it as artgen2. Your first push is the commit board: start c-artgen2. The replay in section 5.3 is the only paid step: keep its cap at $1.50. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: c-artgen2"
   },
   {
    "id": "c-artgen3",

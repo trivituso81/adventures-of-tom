@@ -1,3 +1,9 @@
+## artgen2a (2026-11-20): Pictures made from a board card now get a QA check (code and tests; the replay on your approved pictures comes next)
+
+- Plan: `claude/artgen-plan.md` section 5. `tools/art-library/artqa.py` asks an xAI vision model a fixed checklist (one image, painted not outlined, no stray text, background, nothing cut off, right count, same character as the reference, faces and hands) plus up to 10 requirements it reads out of the prompt, three runs, majority. `artgen.py` runs it right after each picture arrives (`--no-qa` turns it off); a failed or capped QA keeps the picture and says so.
+- Seen on the board card (thumbnail, "QA 11 of 12", each failed line with its reason, tap opens the review) and in the Art Library review (failed lines first, passed lines folded). Approve and reject write `qa` and `qaFail` on the record, `tools/art-library/artqa_report.py` and the board line say how often QA agreed with you.
+- `art-gen` has a `replay` input that judges the newest approved pictures (cap $1.50). Nothing is auto-approved. Tests: `artqa_test.py`, `artgen_lib_test.py`, `artgen_test.py`, `board_artgen_test.py`.
+
 ## ch6left (2026-11-20): Chapter 6 leftovers checked: kitchen and park in landscape, Chairman hop-off; nothing needed fixing
 
 - Card c-ch6left. Played ch6Kitchen (8 pages) and ch6Park (38 pages) in landscape with `tools/reaction_test.py` and the Chairman hop-off with `tools/boss_stage_test.py` (case ch06, frames looked at): no page errors, people stand at the island and picnic tables, the Chairman hops off the throne and is not in the scene afterward.

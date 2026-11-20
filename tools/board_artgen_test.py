@@ -33,6 +33,10 @@ claude_open = next(c['id'] for c in b['cards'] if c['lane'] == 'claude' and c['c
 b['cards'] += [tc('t-pics', 'Pictures test card', done_when={'art_approved': ids}),
                tc('t-pics-done', 'Pictures finished card', done_when={'art_approved': [two[0]['id'], appr['id']]},
                   gen={'want': False, 'ids': [two[0]['id']], 'run': {'state': 'done', 'at': '2026-11-20T01:00:00Z', 'made': [two[0]['id']], 'already': [], 'skipped': [{'id': appr['id'], 'why': 'already approved'}], 'failed': [{'id': 'zz-fail', 'why': 'xAI said 500'}], 'spent': 0.06}}),
+               tc('t-pics-qa', 'Pictures judged card', done_when={'art_approved': [two[0]['id'], two[1]['id']]},
+                  gen={'want': False, 'ids': [two[0]['id'], two[1]['id']], 'run': {'state': 'done', 'at': '2026-11-20T02:00:00Z', 'made': [two[0]['id'], two[1]['id']], 'already': [], 'skipped': [], 'failed': [], 'spent': 0.2,
+                       'qa': {two[0]['id']: {'file': 'results/x/a.png', 'yes': 11, 'of': 12, 'failed': [{'id': 'f_bg', 'q': 'Does the background match what the prompt asks for?', 'why': 'there is a floor line'}]},
+                              two[1]['id']: {'file': 'results/x/b.png', 'skipped': 'the spend cap would be passed: kept without QA'}}}}),
                tc('t-pics-wait', 'Pictures waiting card', col='wait', waiting_on='claude', fyi=False, done_when={'art_approved': [two[0]['id']]}), ]
 b['cards'].append({'id': 'c-pics-claude', 'tag': 'picsclaude', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'The Claude card the pictures wait on', 'next': 'Ready.', 'blocks': ['t-pics-wait'], 'changed': T, 'created': T,
                    'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 'Prompt.'}})
@@ -89,6 +93,15 @@ try:
         href = pg.get_attribute('#sheet .pics a', 'href')
         if href != 'art.html?review=' + two[0]['id']: fails.append('review link ' + str(href))
         pg.screenshot(path=f'{out}/board-artgen-done.png'); pg.click('#bclose')
+        # a card whose run has QA
+        pg.click('.card[data-id="t-pics-qa"] .t'); pg.wait_for_selector('#sheet .pics .qa')
+        q = pg.inner_text('#sheet .pics')
+        for want in ('QA 11 of 12', 'Failed: Does the background match what the prompt asks for? (there is a floor line)', 'QA not run: the spend cap would be passed', 'QA has not been checked against your decisions yet'):
+            if want not in q: fails.append('QA run lacks "%s": %s' % (want, q[-400:]))
+        imgs = pg.eval_on_selector_all('#sheet .pics .qa img', 'e=>e.map(x=>x.getAttribute("src"))')
+        if imgs[0] != 'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/artgen/results/x/a.png': fails.append('thumbnail address ' + str(imgs))
+        if pg.get_attribute('#sheet .pics .qa a', 'href') != 'art.html?review=' + two[0]['id']: fails.append('thumbnail link')
+        pg.screenshot(path=f'{out}/board-artgen-qa.png'); pg.click('#bclose')
         # a card in Waiting
         pg.evaluate("openSheet('t-pics-wait')")
         if pg.query_selector('#sheet .pics'):

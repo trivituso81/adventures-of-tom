@@ -104,6 +104,7 @@ header{padding:10px 28px}
 #rvchips button.on{background:#7b6cff;border-color:#a89dff}
 #rvchips button.ap{border-color:#2f9e63}#rvchips button.rj{border-color:#b4414f}
 #rvnote{margin:6px 0 8px;padding:10px 12px}
+#rvqa{max-height:96px;overflow:auto;font-size:12px;line-height:1.35;margin:0 0 6px;color:#cfcbe8}#rvqa b{color:#fff}#rvqa .qf{color:#ff9aa6;margin-top:2px}#rvqa summary{cursor:pointer;color:#9fe3b9}#rvqa .qp{color:#9fe3b9;margin-top:2px}
 .rvbtns{display:flex;gap:10px}.rvbtns button{flex:1;min-height:54px;font-size:17px;letter-spacing:.02em}
 #rvmsg{min-height:18px;margin:2px 0}
 @media (min-width:760px),(max-height:520px){
@@ -136,7 +137,7 @@ header{padding:10px 28px}
 <div id="rv" hidden role="dialog" aria-label="Review pictures">
 <div class="rvtop"><button class="small" id="rvx" aria-label="Close">Close</button><div class="rvt"><b id="rvtitle"></b><span id="rvsub"></span></div><button class="small" id="rvp" aria-label="Previous picture">&lsaquo;</button><button class="small" id="rvn" aria-label="Next picture">&rsaquo;</button></div>
 <div class="rvmain"><div id="rvstage"><img id="rvimg" alt=""></div>
-<div class="rvside"><div class="hint" id="rvcount"></div><div id="rvchips"></div><div class="hint" id="rvhist"></div><div class="hint" id="rvmsg"></div>
+<div class="rvside"><div class="hint" id="rvcount"></div><div id="rvchips"></div><div class="hint" id="rvhist"></div><div id="rvqa" hidden></div><div class="hint" id="rvmsg"></div>
 <input type="text" id="rvnote" placeholder="Note for Claude (needed to reject): what is wrong, what to change" autocomplete="off" aria-label="Note for Claude">
 <div class="rvbtns"><button class="bad rvb" id="rvno">REJECT</button><button class="good rvb" id="rvok">APPROVE</button></div></div></div>
 </div>
@@ -497,14 +498,14 @@ async function decide(kind,resKey,btn,auto){   // auto (clipbatch1): GENERATE CH
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
       setMsg(id,'Saving the prompt...');
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{})); },'Art Library: '+id+' approved (v'+k+')');
-      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{})]); delete EDITS[id]; saveEdits();
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); delete EDITS[id]; saveEdits();
       MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen'+(clipChapterGroup(e.group)?' and open ADMIN > BATTLE LAB > '+e.group.toUpperCase()+' REVIEW':'')+'.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{})); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
-      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{})]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
     refreshItem(id); return true;
@@ -532,11 +533,22 @@ function rvDraw(){
   const ap=n=>(e.versions||[]).some(v=>v.from==='v'+n), rj=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
   $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x.n)?'ap ':rj(x.n)?'rj ':'')+'">v'+x.n+(ap(x.n)?' approved':rj(x.n)?' rejected':'')+'</button>').join('');
   const lr=(e.rejects||[]).slice(-1)[0]; $('rvhist').textContent=lr&&lr.note?'Last rejection note: '+lr.note:'';
+  rvQa(r);
   $('rvnote').value=NOTES[id]||'';
   const m=MSG[id]; $('rvmsg').textContent=m&&m.err?m.text:''; $('rvmsg').className=m&&m.err?'err':'hint';
   $('rvok').disabled=$('rvno').disabled=!r;
   $('rvp').disabled=$('rvn').disabled=RV.q.length<2;
 }
+// artgen2: the QA the art-gen job ran on a picture it made (r.qa, carried in by artgenImport): failed lines first, passed lines folded
+function rvQa(r){
+  const q=r&&r.qa, el=$('rvqa'); if(!q||!q.items){ el.hidden=true; el.innerHTML=''; return; }
+  const esc2=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const bad=q.items.filter(i=>!i.yes), good=q.items.filter(i=>i.yes);
+  el.innerHTML='<b>QA '+q.yes+' of '+q.of+'</b>'+(bad.length?'':' (nothing failed)')+bad.map(i=>'<div class="qf">'+esc2(i.q)+(i.why?' ('+esc2(i.why)+')':'')+'</div>').join('')+(good.length?'<details><summary>Passed ('+good.length+')</summary>'+good.map(i=>'<div class="qp">'+esc2(i.q)+'</div>').join('')+'</details>':'');
+  el.hidden=false;
+}
+// artgen2: what decide() writes next to a decision on a picture that was judged: the score and which questions failed (data/art-prompts.json is the record of QA against Tom)
+const qaRec=r=>r&&r.qa&&r.qa.items?{qa:r.qa.score,qaFail:r.qa.items.filter(i=>!i.yes).map(i=>i.id)}:{};
 function rvGo(d){ if(RV.q.length<2) return; RV.i=(RV.i+d+RV.q.length)%RV.q.length; RV.v=0; rvDraw(); }
 function rvVer(d){ const n=(RES[rvId()]||[]).length, v=RV.v+d; if(v<0||v>=n) return; RV.v=v; rvDraw(); }
 async function rvDecide(kind){
@@ -616,7 +628,7 @@ async function artgenImport(manual){
     const ds=[].concat(e.versions||[],e.rejects||[]); if((r.t||0)<=Math.max(0,...ds.map(x=>+x.at||0))){ seen.push(r.key); continue; }
     try{
       const ir=await fetch(ARTGEN_BASE()+r.file,{cache:'no-store'}); if(!ir.ok) continue;
-      await addResult(r.id,await ir.blob(),r.prompt,r.refs||[],{t:r.t,srv:r.key}); seen.push(r.key); n++;
+      await addResult(r.id,await ir.blob(),r.prompt,r.refs||[],Object.assign({t:r.t,srv:r.key},r.qa&&r.qa.items?{qa:r.qa}:{})); seen.push(r.key); n++;
     }catch(err){ console.warn('artgen import failed',r.key,err); }
   }
   LS.set('aot-artgen-seen',JSON.stringify(seen.slice(-500)));

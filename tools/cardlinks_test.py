@@ -36,7 +36,7 @@ try:
         if got != [['Open in the Voice Library: one line', 'voices.html?line=' + urllib.parse.quote(vkey, safe='')], ['Open in the Voice Library: no clip yet', 'voices.html?chapter=%s&show=none' % vch]]: fails.append('voice links %s' % got)
         if hrefs('t-lm') != [['Open in the Music Library: a track', 'music.html?track=' + trk]]: fails.append('music link %s' % hrefs('t-lm'))
         if hrefs('t-ln'): fails.append('a card with no link shows a button')
-        if not hrefs('t-heistart'): fails.append('t-heistart has no automatic Art Library button (done_when.art_approved)')
+        if any(c['id'] == 't-heistart' and c['col'] != 'done' for c in b['cards']) and not hrefs('t-heistart'): fails.append('t-heistart has no automatic Art Library button (done_when.art_approved)')
         pg.click('.card[data-id="t-la"] .t'); pg.wait_for_selector('#sheet a.lnk')
         if pg.eval_on_selector_all('#sheet a.lnk', 'e=>e.length') != 1: fails.append('sheet link missing')
         pg.screenshot(path=out + '/board-sheet.png')

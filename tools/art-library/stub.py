@@ -68,6 +68,11 @@ class H(BaseHTTPRequestHandler):
             VIDEOS[rid] += 1; LOG.append({'xai': 'poll', 'rid': rid})
             if VIDEOS[rid] < 3: return self._send(200, {'status': 'pending'})
             return self._send(200, {'status': 'done', 'video': {'url': 'http://%s/video.bin?%s' % (self.headers.get('Host'), rid), 'duration': 3}, 'model': 'stub'})
+        if self.path.startswith('/v1/language-models'):   # artgen2: the list the QA picks its model from (cheapest with image input, not a reasoning one)
+            if self.headers.get('Authorization') != 'Bearer test': return self._send(401, {'error': 'bad key'})
+            return self._send(200, {'models': [{'id': 'stub-reasoning', 'input_modalities': ['text', 'image'], 'prompt_text_token_price': 1, 'completion_text_token_price': 1},
+                                               {'id': 'stub-vision-non-reasoning', 'input_modalities': ['text', 'image'], 'prompt_text_token_price': 5, 'completion_text_token_price': 5},
+                                               {'id': 'stub-text-non-reasoning', 'input_modalities': ['text'], 'prompt_text_token_price': 0, 'completion_text_token_price': 0}]})
         if self.path == '/log': return self._send(200, LOG)
         if self.path == '/files': return self._send(200, FILES)
         if self.path.startswith('/repos/') and '/commits/main' in self.path:   # boardux1: the board's sync light asks for the newest commit on main (STUB_COMMIT_AT, an ISO time; default now)
@@ -96,6 +101,27 @@ class H(BaseHTTPRequestHandler):
             if 'STILL' in str(b.get('prompt')): PICK[rid] = 'still'
             LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid, 'inflight': inflight})
             return self._send(200, {'request_id': rid})
+        if self.path == '/v1/chat/completions':   # artgen2: a stand-in checker. Marker words in the PROMPT text choose the answers:
+            # FAIL:<qid> answers no to that question every time, MISS:<qid> leaves it out, FLAKY:<qid> says no on the first call only, DOWN stops with a 500.
+            msgs = (b or {}).get('messages') or []; parts = (msgs[-1].get('content') if msgs else None) or []
+            parts = parts if isinstance(parts, list) else [{'type': 'text', 'text': str(parts)}]
+            txt = ' '.join(x.get('text', '') for x in parts if x.get('type') == 'text'); nimg = sum(1 for x in parts if x.get('type') == 'image_url')
+            usage = {'prompt_tokens': 1000 * (nimg + 1), 'completion_tokens': 200, 'cost_in_usd_ticks': 50000000 * (nimg + 1)}   # $0.005 per image + text
+            if 'DOWN' in txt and nimg: return self._send(500, {'error': 'down'})
+            if 'List up to' in txt and not nimg:
+                LOG.append({'xai': 'chat-criteria', 'model': b.get('model')})
+                req = ['Is there a red hat?', 'Is the cat sitting?'] + (['Is the tail long?'] if 'TAIL' in txt else [])
+                return self._send(200, {'choices': [{'message': {'content': json.dumps({'requirements': req})}}], 'usage': usage})
+            import re as _re
+            qids = _re.findall(r'^((?:f_[a-z]+|p\d+)): ', txt.split('QUESTIONS', 1)[-1], _re.M)
+            n = sum(1 for l in LOG if l.get('xai') == 'chat' and l.get('sig') == hashlib.sha1(txt.encode()).hexdigest()[:8])
+            LOG.append({'xai': 'chat', 'model': b.get('model'), 'imgs': nimg, 'qids': qids, 'sig': hashlib.sha1(txt.encode()).hexdigest()[:8]})
+            ans = {}
+            for q in qids:
+                if 'MISS:' + q in txt: continue
+                no = ('FAIL:' + q in txt) or ('FLAKY:' + q in txt and n == 0)
+                ans[q] = {'yes': not no, 'why': 'stub says no' if no else 'looks fine'}
+            return self._send(200, {'choices': [{'message': {'content': json.dumps(ans)}}], 'usage': usage})
         if self.path in ('/v1/images/generations', '/v1/images/edits'):
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt')
             if self.path.endswith('edits'):

@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
     inputs:
       card:
-        description: 'Board card id whose pictures to make (required for a manual run).'
-        required: true
+        description: 'Board card id whose pictures to make (needed unless replay is set).'
+        required: false
         default: ''
       ids:
         description: 'Only these Art Library entry ids, comma separated. Empty: the card''s own list.'
@@ -23,6 +23,10 @@ on:
         default: ''
       cap:
         description: 'Most dollars sent to xAI in this run (0 = twice the estimate, at least 1).'
+        required: false
+        default: '0'
+      replay:
+        description: 'artgen2: a number N above 0 judges the N newest approved pictures with the QA (no pictures made; costs real xAI money up to cap, default 1.5) and prints how often each question says no.'
         required: false
         default: '0'
       dry_run:
@@ -55,12 +59,31 @@ jobs:
             /data/art-prompts.json
             /data/board.json
             /tools/art-library/
+            /tools/clip-gate/vision.py
             /.github/
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests
+      - run: pip install requests pillow
+      - name: QA replay on pictures you approved (only when replay is set)
+        if: ${{ inputs.replay != '' && inputs.replay != '0' }}
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          N: ${{ inputs.replay }}
+          CAP: ${{ inputs.cap }}
+        run: |
+          set -o pipefail
+          C="${CAP:-0}"; [ "$C" = "0" ] && C=1.5
+          python3 -I tools/art-library/artqa.py --replay "$N" --cap "$C" --out "$RUNNER_TEMP/replay" 2>&1 | tee "$RUNNER_TEMP/replay.log"
+          { echo '### artqa replay'; echo '```'; tail -40 "$RUNNER_TEMP/replay.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && inputs.replay != '' && inputs.replay != '0' }}
+        with:
+          name: artqa-replay
+          path: ${{ runner.temp }}/replay
+          retention-days: 30
       - name: Restore what the artgen branch already holds
+        if: ${{ inputs.replay == '' || inputs.replay == '0' }}
         run: |
           mkdir -p "$RUNNER_TEMP/artgen"
           if git ls-remote --exit-code --heads origin artgen >/dev/null 2>&1; then
@@ -69,6 +92,7 @@ jobs:
           fi
           ls -la "$RUNNER_TEMP/artgen"
       - name: Make the pictures
+        if: ${{ inputs.replay == '' || inputs.replay == '0' }}
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           CARD: ${{ inputs.card }}
@@ -87,10 +111,10 @@ jobs:
           python3 -I tools/art-library/artgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
           { echo '### art-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Keep the pictures on the artgen branch
-        if: ${{ always() && inputs.dry_run != 'true' }}
+        if: ${{ always() && inputs.dry_run != 'true' && (inputs.replay == '' || inputs.replay == '0') }}
         run: python3 -I tools/art-library/artgen.py --save-only --out "$RUNNER_TEMP/artgen"
       - name: Keep a copy as a workflow artifact
-        if: ${{ always() && inputs.dry_run != 'true' }}
+        if: ${{ always() && inputs.dry_run != 'true' && (inputs.replay == '' || inputs.replay == '0') }}
         uses: actions/upload-artifact@v4
         with:
           name: art-gen-output

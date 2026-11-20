@@ -123,6 +123,8 @@ div.card{cursor:pointer}
 .pics button.gen{width:100%;margin-top:8px}
 .pics button.gen.armed{background:var(--accent);color:var(--on-accent)}
 .pics .gm{font-size:13px;margin-top:8px;color:#cfcbe8}
+.pics .qa{display:flex;gap:10px;margin-top:8px;font-size:13px;line-height:1.35}.pics .qa img{flex:none;width:64px;height:auto;max-height:86px;object-fit:contain;border-radius:6px;background:#0a0918}
+.pics .qa .qf{color:#ff9aa6}.pics .qa .qs{font-weight:700;color:#fff}
 .rv button{flex:1;min-height:48px;font-size:15px}
 button.bad{background:var(--prob);color:#fff}
 textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--btn);background:var(--well);color:#fff;width:100%;min-height:110px;resize:vertical}
@@ -450,12 +452,27 @@ function picRows(c){
     return {id,title,state:'make',cost:SPEND_PER+SPEND_REF*refs.length,text:'Ready to make'};
   });
 }
+// artgen2: QA of each picture the job made (gen.run.qa[id] = {file, yes, of, failed:[{id,q,why}]} or {file, skipped}); the thumbnail opens the Library review.
+const ARTGEN_RAW=()=> (Q.get('artgen')||'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/artgen').replace(/\/+$/,'')+'/';
+function qaHtml(run){
+  const qa=run.qa||{},ids=Object.keys(qa);if(!ids.length)return '';
+  return ids.map(id=>{const v=qa[id],e=ART&&ART[id],t=e?shortT(e.title):id;
+    const body=v.yes!=null?'<div class="qs">QA '+v.yes+' of '+v.of+'</div>'+((v.failed||[]).length?(v.failed||[]).map(f=>'<div class="qf">Failed: '+esc(f.q)+(f.why?' ('+esc(f.why)+')':'')+'</div>').join(''):'<div>Nothing failed.</div>'):'<div>QA not run: '+esc(v.skipped||'no reason given')+'</div>';
+    return '<div class="qa"><a href="art.html?review='+esc(id)+'"><img alt="'+esc(t)+'" src="'+esc(ARTGEN_RAW()+(v.file||''))+'" loading="lazy"></a><div><b>'+esc(t)+'</b>'+body+'</div></div>';}).join('');
+}
+// artgen2: QA against Tom's own decisions, worked out from data/art-prompts.json the way tools/art-library/artqa_report.py does
+function qaLine(){
+  if(!ART)return '';let ok=0,n=0;const thr=.9;
+  Object.values(ART).forEach(e=>[['a',e.versions],['r',e.rejects]].forEach(([k,rs])=>(rs||[]).forEach(r=>{if(r.qa==null)return;n++;const pass=+r.qa>=thr&&!(r.qaFail||[]).some(x=>/^f_/.test(x));if((k==='a')===pass)ok++;})));
+  return n?'QA so far: agreed with you on '+ok+' of '+n+' pictures':'QA has not been checked against your decisions yet';
+}
 function picsHtml(c,compact){
   if(!hasPics(c))return '';
   if(!ART)return '<div class="pics"><h4>Pictures on this card</h4><div class="gm">Loading the picture list...</div></div>';
   const g=c.gen||{},run=g.run||{},rows=picRows(c),mk=rows.filter(r=>r.state==='make'),n=mk.length,est=mk.reduce((a,r)=>a+r.cost,0);
   let h='<div class="pics"><h4>Pictures on this card</h4>'+(compact?'<div class="gm" style="margin:0">'+rows.filter(r=>r.state==='approved').length+' of '+rows.length+' approved, '+n+' ready to make. Open the card for the list.</div>':rows.map(r=>'<div class="pr"><b>'+esc(r.title)+'</b><span>'+esc(r.text)+'</span></div>').join(''));
   const busy=g.want||run.state==='running';
+  if(!compact)h+='<div class="gm">'+esc(qaLine())+'</div>';
   let why='';
   if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' picture'+((run.n||n)===1?'':'s')+'...';
   else if(c.col==='wait'){const by=blockedBy(c);why='Waiting on: '+(by.length?by.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
@@ -470,7 +487,8 @@ function picsHtml(c,compact){
       +(run.already&&run.already.length?'<br>Already waiting: '+esc(run.already.join(', ')):'')
       +(run.skipped||[]).map(x=>'<br>Skipped '+esc(x.id)+': '+esc(x.why)).join('')
       +(run.failed||[]).map(x=>'<br>Failed '+esc(x.id)+': '+esc(x.why)).join('')
-      +(ids.length?'<br><a href="art.html?review='+esc(ids.join(','))+'">Review them in the Art Library</a>':'')+'</div>';
+      +(run.qa_note?'<br>'+esc(run.qa_note):'')
+      +(ids.length?'<br><a href="art.html?review='+esc(ids.join(','))+'">Review them in the Art Library</a>':'')+'</div>'+qaHtml(run);
   }
   return h+'</div>';
 }

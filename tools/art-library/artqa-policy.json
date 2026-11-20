@@ -1,0 +1,6 @@
+{
+ "threshold": 0.9,
+ "hold": ["f_one", "f_paint", "f_text", "f_bg", "f_crop", "f_count", "f_same", "f_anat"],
+ "advisory": {},
+ "min_record": 20
+}

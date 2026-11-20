@@ -18,6 +18,7 @@ OUT is pushed to branch `artgen` (never merged, never served) after each one. No
 Tom's results and he presses APPROVE or REJECT as always.
 Output: OUT/artgen-report.json and, on main, gen.run on the card."""
 import os, sys, re, json, time, base64, argparse, datetime, subprocess, threading, hashlib, concurrent.futures
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODEL = 'grok-imagine-image-2.0'
@@ -240,7 +241,7 @@ def money(x):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--card', default=''); ap.add_argument('--ids', default=''); ap.add_argument('--cap', type=float, default=0.0)
-    ap.add_argument('--par', type=int, default=3); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true')
+    ap.add_argument('--par', type=int, default=3); ap.add_argument('--no-qa', action='store_true'); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'artgen-out')); ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
     a = ap.parse_args()
     repo = Repo(a.repo, os.environ.get('ARTGEN_REMOTE', 'origin'))
@@ -294,11 +295,15 @@ def do_card(a, repo, cid, override, results, key):
             c = next(x for x in b['cards'] if x['id'] == cid); g = c.setdefault('gen', {})
             g['want'] = False
             g['run'] = {'state': rep['state'], 'at': now_iso(), 'run': url, 'made': rep['made'], 'already': already, 'skipped': skipped, 'failed': rep['failed'], 'spent': rep['spent']}
+            if rep.get('qa'): g['run']['qa'] = rep['qa']
+            if rep.get('qa_note'): g['run']['qa_note'] = rep['qa_note']
             bits = []
             if rep['made']: bits.append('made %d picture%s' % (len(rep['made']), '' if len(rep['made']) == 1 else 's'))
             if already: bits.append('%d were already waiting for your review' % len(already))
             if skipped: bits.append('skipped %d' % len(skipped))
             if rep['failed']: bits.append('%d failed' % len(rep['failed']))
+            qs = [v for v in (rep.get('qa') or {}).values() if 'yes' in v]
+            if qs: bits.append('QA: ' + ', '.join('%d of %d' % (v['yes'], v['of']) for v in qs))
             touch(c, 'Pictures job: %s. Spent about %s.' % (', '.join(bits) or 'nothing to make', money(rep['spent'])))
         repo.update_board('board: art-gen %s %s' % (rep['state'], cid), fin)
         try: repo.branch_save(a.out)
@@ -318,6 +323,13 @@ def do_card(a, repo, cid, override, results, key):
         r = xai.s.get(xai.base + '/v1/models', headers={'Authorization': 'Bearer ' + key}, timeout=30)
         if r.status_code == 401: rep['failed'].append({'id': '*', 'why': 'xAI refused the key (401)'}); return finish()
     except Exception as x: say('warning: could not reach the xAI key check (%s); going on' % str(x)[:100])
+    judge = None
+    if not a.no_qa:   # artgen2: QA of each picture right after it arrives. A QA that cannot start never stops the pictures.
+        try:
+            import artqa
+            judge = artqa.Judge(key, os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
+        except BaseException as x:
+            judge = None; rep['qa_note'] = 'QA did not start: ' + str(x)[:150]; say('warning:', rep['qa_note'])
     say('preflight ok')
 
     def work(e):
@@ -352,6 +364,21 @@ def do_card(a, repo, cid, override, results, key):
                 try: repo.branch_save(a.out)
                 except Exception as x: say('warning: ' + str(x))
             say(i, 'made (%d KB)' % (len(png) // 1024))
+            if judge:   # QA never loses a paid picture: any failure here leaves the picture without a score
+                try:
+                    with lock: room = cap - spend['total']
+                    jj = artqa.Judge(key, judge.x.base, judge.model)
+                    qa = artqa.qa_picture(jj, e, (e.get('prompt') or '').strip(), png, blobs, a.out, room=room)
+                except Exception as x:
+                    jj = None; qa = {'skipped': 'QA failed: ' + str(x)[:120]}
+                with lock:
+                    if jj: spend['total'] += jj.spent
+                    rec = results[-1] if results[-1]['id'] == i else next(r for r in results if r['id'] == i)
+                    rec['qa'] = qa; save_index(a.out, results)
+                    rep.setdefault('qa', {})[i] = dict({'file': rel}, **({'yes': qa['yes'], 'of': qa['of'], 'failed': artqa.failed_lines(qa)} if 'yes' in qa else {'skipped': qa.get('skipped')}))
+                    try: repo.branch_save(a.out)
+                    except Exception as x: say('warning: ' + str(x))
+                say(i, artqa.short(qa) if 'yes' in qa else 'no QA: ' + str(qa.get('skipped')))
         except Stop as x:
             stop.set(); rep['failed'].append({'id': i, 'why': str(x)}); say(i, 'STOP:', x)
         except Exception as x:
