@@ -8250,7 +8250,7 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Not installed: the two pictures made do not match the plate. Waits on new pictures that keep the painting exactly and put the plane in the same place.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -8291,6 +8291,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stuck twice: The rescue started 7:26 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-gatezero)."
     }
    ],
    "prompt": {
@@ -8310,7 +8314,8 @@
     "url": "https://claude.ai/code/cse_01RXeukFJM32kdS8NhdQvMYp",
     "prev": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs"
    },
-   "started_at": "2026-11-20T15:26:24+00:00"
+   "started_at": "2026-11-20T15:26:24+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "t-gatezeroart",
@@ -13231,6 +13236,34 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-checkart in data/board.json, history included. Your first push is the commit board: start c-idea-checkart.\n\nTom made this card himself with New card on the board. His words: \"check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art gallery item was never updated. if the item is no longer needed, delete it. if it is already in the game, mark it approved\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-checkart with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-stuck-gatezero",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Areas",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-gatezero",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Install the Gate Zero pictures (no plane, plane",
+   "next": "Card c-gatezero (Install the Gate Zero pictures (no plane, plane)) stalled again after its one automatic rescue. The rescue started 7:26 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-gatezero"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: card c-gatezero stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -13513,6 +13546,16 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHF7db4ogWADdo3sy3",
+   "title": "Check the art library for all items in \"to do\" \"in game but",
+   "first": "2026-11-20T09:26:13-08:00",
+   "last": "2026-11-20T09:26:13-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-checkart"
    ]
   },
   {
@@ -14878,8 +14921,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "ac7f2ba8f960b426736e274f229d846eb56c684e",
- "synced_at": "2026-11-20T17:22:23+00:00",
+ "synced": "d79e3c2b97da86a162f2c0dcbb6bb5a2cf044e37",
+ "synced_at": "2026-11-20T17:27:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
