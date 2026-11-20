@@ -747,13 +747,13 @@
    "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Phase 5 of 5 in claude/cutscene-polish-plan.md: breathing and squash, listeners turn to the speaker, listener reaction effects (hop, pips), reaction rows for the rest of chapter 1, Boppy's stomach wince.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGFwiBJp2ia8MCGBjn",
     "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
    },
    "history": [
@@ -764,6 +764,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -775,8 +779,7 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
-   "tag": "cutpolish5",
-   "start": true
+   "tag": "cutpolish5"
   },
   {
    "id": "c-boardready",
@@ -1022,7 +1025,7 @@
    "id": "c-takes-2337ed",
    "tag": "takes-2026-11-19",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 13,
    "title": "Merge 13 new voice takes",
@@ -1037,7 +1040,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDSFVbmbuiGhUt1pZJ",
     "opening": "not started"
    },
    "history": [
@@ -1048,12 +1051,15 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
-   "start": true
+   "changed": "2026-11-19"
   },
   {
    "id": "c-reports",
@@ -1352,7 +1358,7 @@
    "title": "Fix party followers lagging behind Tom in free walking (follow1)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped: Grace and Rose stay one tile behind Tom in free walking. The lag came from hiddenSpot (cutpolish3) freezing followers behind painted cutouts; it now applies only while a scene runs. New free-walk check in tools/cut_natural_test.py.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -1373,6 +1379,10 @@
     {
      "d": "2026-11-19",
      "t": "Built follow1: reproduced the lag (followers up to 8.1 tiles off their spot in a 52 tile walk), confirmed hiddenSpot as the cause (51 freezes; 0 and worst gap 1.0 with it off), restricted it to running scenes, added the free-walk check. cut_natural_test open, row, theft, free pass in portrait and landscape."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as follow1: Grace and Rose stay one tile behind Tom in free walking again (no more lag and catch-up in chapter 1)"
     }
    ],
    "prompt": {
@@ -1385,7 +1395,8 @@
     "text": "Read claude/handoff-rules.md, then fix the follower lag in free walking (tag follow1): reproduce it first with a free-walk check in tools/cut_natural_test.py, confirm the cause (hiddenSpot in engine/followers.js, else followersWhereTheyStand), fix only that, test portrait and landscape. You have my full permission to access the repo."
    },
    "tag": "follow1",
-   "after": "t-follow1play"
+   "after": "t-follow1play",
+   "done": "2026-11-19"
   },
   {
    "id": "c-copydocs",
@@ -1710,6 +1721,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
+   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
+   "first": "2026-11-19T17:23:21-08:00",
+   "last": "2026-11-19T17:47:16-08:00",
+   "tags": [
+    "follow1"
+   ],
+   "cards": [
+    "c-follow1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
    "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
    "first": "2026-11-19T17:02:34-08:00",
@@ -1758,16 +1781,6 @@
    ],
    "cards": [
     "c-clipch1remake"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
-   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
-   "first": "2026-11-19T17:23:21-08:00",
-   "last": "2026-11-19T17:23:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-follow1"
    ]
   },
   {
@@ -1844,8 +1857,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "49efbc28754d60ea929913f9ec6128e5e1cff39d",
- "synced_at": "2026-11-20T01:46:13+00:00",
+ "synced": "4ff8e9b063865add7dd9e6af3f62cdbe7f00f2b8",
+ "synced_at": "2026-11-20T01:47:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
