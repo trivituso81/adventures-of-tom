@@ -10233,7 +10233,7 @@
   {
    "id": "t-attn-start",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Project Ops",
    "ask": "setup",
    "fyi": true,
@@ -10247,11 +10247,17 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-attn1: a session cannot edit the Board START task (it was made over the API), so Tom pastes the new prompt."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this.",
+     "at": "2026-11-20T16:49:55.213Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "theme": "Tools",
