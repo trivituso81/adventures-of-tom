@@ -9566,9 +9566,17 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-alvarez when alvarez shipped."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
-   "first": "Build alvarez shows on the title screen."
+   "first": "Build alvarez shows on the title screen.",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "t-heist1play",
