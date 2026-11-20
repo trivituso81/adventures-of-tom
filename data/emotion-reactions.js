@@ -30,7 +30,6 @@ const EMOTION_REACTIONS={
 "Grace|TATA! You're BACK!|1": [["tom", "loving", 5]],
 "Grace|Tata, LOOK. A sparkling diamond gold dumpling squishy!|1": [["rose", "surprised", 53], ["tom", "surprised", 11]],
 "Grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.|1": [["rose", "surprised", 109, "!"]],
-"Grace|Tata, get UP, it's getting away!|1": [["rose", "scared", 31, "!"]],
 "Grace|We waited for you for a hundred years.|1": [["rose", "happy", 37], ["tom", "loving", 17]],
 "Grace|You are slow. I've been on number four since the taxi place.|1": [["tom", "unimpressed", 12, "..."]],
 "Grace|You got new curtains.|1": [["tom", "happy", 20]],

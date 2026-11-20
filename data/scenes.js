@@ -187,58 +187,45 @@ SCENES.ch1Theft=[
   // heist1 (claude/heist-redo-plan.md sections 3 and 4): the theft is watched action. Boppy never turns around until "Wait, where'd the muffins go?";
   // Deedee stands her ground by the island; the Mudling of the fights (data/mudling-heist.js, mscale CH1_MUD) rolls in as a ball, bowls the three over,
   // lifts the whole pan over its head and sneaks out the long way, right behind Boppy's chair, while his story goes on.
-  // Beat 1, the bang: Tom and the girls turn, Boppy keeps facing the table, the ball rolls up the hall.
+  // fix-heist1play (Tom 11-20: "Looks very sloppy"): it walks in like the old scene (no rolling ball, no bowling over, nobody on the floor), everyone is startled
+  // and Rose screams, it goes straight to the island, lifts the pan and runs straight out the door (no detour behind Boppy), his story goes on over its exit.
+  // Beat 1, the bang: the party jumps and turns, Deedee is shocked, it walks up the hall.
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>{ storyPosesLoad('deedee'); const b=sceneActor('Boppy'); if(b) b.storyBack=true; }},   // storyBack: no mood, talk or reaction pose turns him (engine/emotions.js)
   {prop:'mudprints',kind:'mudprints',set:{map:'grands',x:8,y:11,t0:performance.now()}},   // three mud prints up the hall (8,11 to 8,13), they fade over 4 s (SPK.mudprints)
   {all:[
     {seq:[
       {spawn:{name:'Big Mudling',monster:'mudling',mscale:CH1_MUD,at:[8,15],dir:'up',fade:0}},
-      {pose:'Big Mudling',f:'mh_ball',spin:-2.2},
+      {pose:'Big Mudling',f:'mh_look',dir:'left'},
       {fadeActor:'Big Mudling',to:1,time:.12},
-      {walk:'Big Mudling',to:[[8,14],[8,13],[8,12],[8,11]],speed:.09,onStep:()=>sfx.splat()}]},
-    {seq:[{wait:.2},{face:'tom',dir:'down'},{wait:.08},{face:'rose',dir:'down'},{face:'grace',dir:'down'}]},
-    {cam:[6.5,9.6],time:.4}
+      {walk:'Big Mudling',to:[[8,14],[8,13],[8,12],[8,11.4]],speed:.22,onStep:()=>sfx.splat()}]},
+    {seq:[{face:'tom',dir:'down'},{face:'rose',dir:'down'},{face:'grace',dir:'down'},{face:'Deedee',dir:'down'},
+          {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'}]},
+    {seq:[{wait:.15},{hop:'rose',from:()=>[8,10],to:[8,10],time:.3,arc:12},{hop:'grace',from:()=>[10,10],to:[10,10],time:.3,arc:10}]},
+    {seq:[{wait:.2},{talk:'Rose',lines:["AHHH! DEEDEE!"]}]},   // Rose screams as it comes in
+    {cam:[6.5,9.6],time:.6}
   ]},
-  // Beat 2, the strike: through the three of them, a quarter second apart; Rose screams on the first hit, under the fall.
-  {all:[
-    {seq:[{walk:'Big Mudling',to:[[8.4,9.9]],speed:.12},
-          {pose:'Big Mudling',f:'mh_ball',spin:2.2},
-          {walk:'Big Mudling',to:[[7,10.3],[5.7,8.5]],speed:.16,onStep:()=>sfx.splat()}]},
-    {seq:[{wait:.1},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.2},{sfx:'thud'}]},
-    {knock:'rose',to:[8.6,10.9],delay:.1,dir:'right'},
-    {knock:'tom',to:[9.9,8.5],delay:.35,dir:'right'},
-    {knock:'grace',to:[11,10.7],delay:.6,dir:'right'},
-    {seq:[{wait:.1},{talk:'Rose',lines:["AHHH! DEEDEE!"]}]}
-  ]},
-  // Beat 3, the stand-off: it pops up a tile from the island, looks up at the pan, then at Deedee. Deedee looks at it.
-  {pose:'Big Mudling',f:'mh_look',dir:'left'}, {sfx:'look'}, {wait:.7},
+  // Beat 2, the stand-off: it walks up to the island and looks up at the pan, then at Deedee. She stands her ground, angry.
+  {walk:'Big Mudling',to:[[7.4,10.4],[5.7,8.9]],speed:.2,onStep:()=>sfx.splat()},
+  {pose:'Big Mudling',f:'mh_look',dir:'left'}, {sfx:'look'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_look',dir:'right'}, {face:'Deedee',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
-  {wait:.5},
+  {wait:.4},
   {talk:'Deedee',lines:["Excuse me! I just washed that floor."]},
-  // Beat 4, the lift: up against the island, it stretches, and the pan leaves the counter on the frame it is over its head.
+  // Beat 3, the lift: up against the island, it stretches, and the pan leaves the counter on the frame it is over its head.
   {walk:'Big Mudling',to:[[4.9,8.15]],speed:.3},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_hold',dir:'right'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {flag:'muffins-gone'},   // the painted island loses its muffins too (engine/plate.js grandsEmpty)
   {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.6},   // a few crumbs where the muffins were
-  // Beat 5, the sneak: slow along the back of Boppy's chair while his story goes on, then quick to the door. The three get up while it goes, Rose behind Tom.
+  // Beat 4, the escape: straight to the door while everyone watches it go, Boppy's story goes on behind it.
   {all:[
-    {seq:[{pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:3,dir:'right'},
-          {walk:'Big Mudling',to:[[6.1,10],[7.2,10.9]],speed:.4},
-          {walk:'Big Mudling',to:[[9.6,10.9],[11.4,10.9],[13.1,10.9]],speed:.75},
+    {seq:[{pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'right'},
+          {walk:'Big Mudling',to:[[6.4,9.8],[7.2,10.8],[8,11.8]],speed:.4},
           {pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'left'},
-          {walk:'Big Mudling',to:[[11,10.9],[9.2,10.9],[8,11.6],[8,13.2],[8,14.6]],speed:.15,onStep:()=>sfx.splat()},
+          {walk:'Big Mudling',to:[[8,13.2],[8,14.6]],speed:.3,onStep:()=>sfx.splat()},
           {sfx:'doorOut'},{despawn:'Big Mudling'}]},
-    {seq:[{wait:.9},{cam:[9,9.8],time:.8}]},
-    {getup:'tom',to:[9,9],delay:.25,dir:'left'},
-    {getup:'rose',to:[8,9],delay:.4,dir:'right'},   // she ducks in beside Tom, on the far side from the door
-    {getup:'grace',to:[10,10],delay:.55,dir:'left'},
-    {seq:[{wait:1.1},{talk:'Boppy',lines:["...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."]}]}
+    {seq:[{wait:.6},{face:'tom',dir:'down'},{face:'rose',dir:'down'},{face:'grace',dir:'down'},{face:'Deedee',dir:'down'},{cam:[8,10.2],time:.8}]},
+    {seq:[{wait:.4},{talk:'Boppy',lines:["...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."]}]}
   ]},
-  // Beat 6, the slam: it is gone, camera back.
   {cam:null},
-  // Beat 7, the words, everyone standing. Boppy finishes his story still facing the table.
-  {talk:'Grace',lines:["Tata, get UP, it's getting away!"]},
-  {talk:'Tom',lines:["I'm up. I've been here four minutes."]},
   {pose:'Deedee'},   // her shock ends when her pan line opens (cutpolish4)
   {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
   {face:'tom',dir:'right'},

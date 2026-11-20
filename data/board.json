@@ -9705,7 +9705,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Watch the new muffin theft in Deedee's kitchen",
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen (Deedee and Boppy's House), and watch it in portrait, then once in landscape. You should see: 1) the Mudling looks like the Mudling of the fights (matte, brushed); 2) the muffins are in its hands from the lift to the door; 3) the island is bare from the lift on; 4) Boppy keeps his back to the theft until \"Wait, where'd the muffins go?\"; 5) nobody is lying down during a line except Rose's scream; 6) the Mudling is up against the island when it lifts the pan. The 4 new lines are read by the stand-in voice until you record them (card t-heist1voice). All good if it plays like that; Something is wrong with what you saw.",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) Deedee says \"Excuse me! I just washed that floor.\"; 3) it lifts the pan and runs straight out the door, not past Boppy; 4) nobody ends up on the floor, and Grace's and Tom's floor lines are gone; 5) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw.",
    "first": "Wait for Rebuild the muffin theft scene to ship (build heist1).",
    "blocks": [],
    "created": "2026-11-20",
@@ -9737,8 +9737,8 @@
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
-   "title": "Make takes for the 4 new lines of the muffin theft",
-   "next": "ADMIN > VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1, Grace 1, Tom 1; the scripts with their tags are already in the script box). Make takes, keep one per line (Tom's is yours to record), then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 4 lines with the stand-in voice.",
+   "title": "Make takes for the 2 new lines of the muffin theft",
+   "next": "ADMIN > VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1; the scripts with their tags are already in the script box). Make takes, keep one per line, then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 2 lines with the stand-in voice.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -9760,26 +9760,16 @@
       "d|boppy|...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."
      ],
      "label": "Boppy's line"
-    },
-    {
-     "to": "voice",
-     "ids": [
-      "d|grace|Tata, get UP, it's getting away!"
-     ],
-     "label": "Grace's line"
-    },
-    {
-     "to": "voice",
-     "ids": [
-      "d|tom|I'm up. I've been here four minutes."
-     ],
-     "label": "Tom's line"
     }
    ],
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by c-heist1: the 3 new lines and Grace's changed line have no clip yet (Tom's floor line and Grace's old wording were purged)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-heist1play cut Grace's and Tom's floor lines: 2 lines left."
     }
    ]
   },
@@ -10041,6 +10031,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed in build fix-heist1play: Mudling walks in and straight out, everyone startled, Rose screams, floor lines cut. Tom's card t-heist1play shows what to look at again."
     }
    ],
    "prompt": {

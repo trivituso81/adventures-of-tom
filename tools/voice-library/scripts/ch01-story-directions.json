@@ -261,20 +261,6 @@
    "script": "[storytelling, enjoying himself] ...so I say to him, \"Nice hat.\" [mild, casual] He says, \"Thank you.\" [punchline, delighted] And the hat is STEAMING."
   },
   {
-   "voice": "grace",
-   "speaker": "Grace",
-   "text": "Tata, get UP, it's getting away!",
-   "ctx": "chapter 1 (locked rebuild)",
-   "script": "[urgent, bossy] Tata, get UP, it's getting AWAY!"
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "I'm up. I've been here four minutes.",
-   "ctx": "chapter 1 (heist1)",
-   "script": "[flat, winded] I'm up. [punchline, dry] I've been here four minutes."
-  },
-  {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.",

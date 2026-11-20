@@ -5733,4 +5733,3 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas. | Deedee proud (at "cinnamon topping"), Grace unimpressed (at "flew over Kansas") |
 | Deedee | I made twelve and they're all still there. I've been standing between that pan and your father since six this morning. | Boppy unimpressed (at "your father") |
 | Boppy | In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat... | Deedee unimpressed (at "back at Rikers"), Rose surprised (at "whole loaf of bread") |
-| Grace | Tata, get UP, it's getting away! | Rose scared (at "getting away") |

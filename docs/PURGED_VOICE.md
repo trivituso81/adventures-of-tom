@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-20 (`fix-heist1play`): 2 lines that never had a clip
+
+The muffin theft lost its floor talk. Cut from `data/scenes.js` and every index (spec `tools/clip-audit/purge-fixheist1play.json`; no clip had been baked): `grace|Tata, get UP, it's getting away!` and `tom|I'm up. I've been here four minutes.`
+
 ## 2026-11-20 (`heist1`): 2 chapter 1 dialogue clips
 
 The muffin theft scene was rebuilt (claude/heist-redo-plan.md). Removed from data/voice/dialog-ch1.js (spec `tools/clip-audit/purge-heist1.json`): `tom|GAH! I'm on the floor. Grace, is that your elbow or mine?` (the line is cut: nobody talks on the floor) and `grace|It's mine! Tata, get UP, it's getting away!` (the line is now "Tata, get UP, it's getting away!" and the take says the old words). Both wait for a new take in the Voice Library.

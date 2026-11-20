@@ -20,6 +20,15 @@
 - Tests: board_sync_test R1 to R6 (replaying the live board fires c-reports-2, c-gatezero and c-adminicons1 once each), board_test (running rescue, UNSTICK). One old expectation changed on purpose: a Claude card in Waiting with no blocker now moves to Up next. board_test's blocker mirror now counts a parked (backlog) blocker as the page does.
 - Not done by a session: the Board START task's prompt needs the rescue branch and could not be edited from here; card t-attn-start has the text and the link.
 
+## fix-heist1play (2026-11-20): The muffin theft is plainer: the Mudling walks in and straight out, everyone is startled and Rose screams, nobody is on the floor
+
+- Card c-fix-heist1play. Tom (11-20, t-heist1play): "Looks very sloppy. ... Why does the mud blob? roll now the animation before where he came in and walked normally he was much more natural and then I don't understand after he takes the muffin tin why he goes to Bobby and then exits and then the dialog between I think it's Tom and I can't remember if it's Grace or Rose on the floor isn't funny and then Tom is really rude and why isn't anyone surprised or shocked like why aren't the girls screaming or Rose at least should be screaming and the whole thing is totally botched."
+- Changed in `ch1Theft` (data/scenes.js), one answer per complaint: (1) no rolling ball, no bowling over: the Mudling walks up the hall on its standing frame, like the older scene; (2) after it lifts the pan it runs straight to the door, no detour behind Boppy's chair (Boppy still never turns until "Wait,", and his steaming-hat line plays over its exit); (3) nobody falls, so there is no floor talk: Grace's "Tata, get UP" and Tom's "I'm up. I've been here four minutes." are cut (Tom's was the rude one); (4) the party turns and jumps when it comes in, Deedee is shocked and then angry, Rose's scream plays as it enters.
+- Kept: the pan and island fix, the bang, the mud prints, Deedee's "Excuse me!" line, the lift, all the closing lines.
+- Purged: the two cut lines from the mood, gap, reaction and talk tables, `tools/voice-library` scripts and harvest, `data/voice-index.json` (docs/PURGED_VOICE.md). Voice card t-heist1voice now lists 2 lines (Deedee 1, Boppy 1).
+- Also fixed: two stale rows in docs/script-convos.tsv (ch1Theft step number, ch5Pruitt step 39).
+- Not done: Grace does not scream (a new line would need a take); a new kind of walking frame for the Mudling (the sheet has none, it slides on its standing frame). Tom's video could not be attached; his words are the evidence.
+- Tests: frames of the whole scene in portrait (every beat looked at: walks in, island bare after the lift, pan in its hands to the door). Landscape not re-run. Smoke below.
 ## stagefollow (2026-11-20): Chapter 16 opening restaged in the open Square, Gridlock Prime's family stands below the bus, bosses stay in the picture
 
 - Card c-stagefollow (the old close1, cutstage1, cutfront1 and bossbig1 follow-ups). Read the four Project addenda first.
