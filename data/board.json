@@ -13177,6 +13177,10 @@
     {
      "d": "2026-11-20",
      "t": "Started inside the Little Elsewhere Project with push access (Tom approved). Running the clean-up here."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1a: first 125 Project docs copied into the repo's claude/ folder, word for word"
     }
    ],
    "chat": {
@@ -16447,6 +16451,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T12:24:26-08:00",
+   "last": "2026-11-20T13:00:28-08:00",
+   "tags": [
+    "projclean1a"
+   ],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
    "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
    "first": "2026-11-20T12:54:42-08:00",
@@ -16488,16 +16504,6 @@
    ],
    "cards": [
     "c-wanplan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T12:24:26-08:00",
-   "tags": [],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -18007,8 +18013,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "6f2704f631dab3701ef393b1b07d541066af4edf",
- "synced_at": "2026-11-20T20:59:13+00:00",
+ "synced": "f7744cfdf293713974d49a49f302b8ca052290cb",
+ "synced_at": "2026-11-20T21:01:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
