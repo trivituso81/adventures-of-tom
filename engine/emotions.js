@@ -148,7 +148,6 @@ function emoApply() {
   if(EMO.spk&&dialog.emo&&lifeOn(EMO.spk)) { EMO.spk._sqT=lifeNow(); emoTurnListeners(EMO.spk); }   // cutpolish5: squash as the line starts, listeners turn
   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
-  else if(EMO.spk&&dialog.name==='Boppy'&&/Gently\. The stomach\./.test(text)) emoFx(EMO.spk,'wince');   // cutpolish5: Boppy's wince, a code stand-in (squash and a sweat drop) until a painted stomach pose is approved; this line is a press-A chat, not a scene step
   const lp=id&&typeof LINE_POSES!=='undefined'&&LINE_POSES[String(dialog.name||'').trim()+'|'+text];   // c-reports: one line, one painted pose and its own face (data/line-poses.js)
   if(lp&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lp.id]&&STORY_POSES[lp.id][lp.f]) {
     const box=$('dialog-portrait'),img=box&&box.querySelector('img');
@@ -223,11 +222,11 @@ addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window._
 
 // Life in a scene (cutpolish5, plan claude/cutscene-polish-plan.md phase 5). Only while a scene runs, only for people (never monsters, riders, knocked-down or
 // amber figures), and off during SKIP. actorLife(a,posKey) gives drawSheetActor a scale (NO breathing: Tom 2026-11-20, people in the overworld never breathe, breathing is for battle only;
-// a 120 ms squash and settle 0.94, 1.04, 1.0 when the pose changes or a line starts; a 'wince' fx holds 0.95), a lift in pixels (an 8 px hop; a 1 px bob on the
+// a 120 ms squash and settle 0.94, 1.04, 1.0 when the pose changes or a line starts), a lift in pixels (an 8 px hop; a 1 px bob on the
 // typing tick while that person's line types) and the pip to float over the head. The scale is uniform about the feet (the sprite drawer has no stretch).
 // The constants and the squash and hop curves are in engine/life-math.js (effectslab1), shared with the ADMIN > EFFECTS preview.
 function lifeNow() { return (typeof performance!=='undefined'?performance.now():Date.now())/1000; }
-function lifeOn(a) { return !!(a&&!a.monster&&!a.seat&&!a.amber&&typeof intro!=='undefined'&&(intro.active||(a._fx&&a._fx.kind==='wince'))&&!(typeof battle!=='undefined'&&battle.active)&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))); }
+function lifeOn(a) { return !!(a&&!a.monster&&!a.seat&&!a.amber&&typeof intro!=='undefined'&&intro.active&&!(typeof battle!=='undefined'&&battle.active)&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))); }
 function emoFx(a,kind) { if(a&&kind) a._fx={kind,t0:lifeNow()}; }
 function actorLife(a,posKey) {
   if(!lifeOn(a)) { if(a) a._fx=null; return null; }
@@ -240,15 +239,13 @@ function actorLife(a,posKey) {
   const f=a._fx;
   if(f) { const e=now-f.t0;
     if(f.kind==='hop') { if(e<LIFE_HOP_SEC) lift+=lifeHopLift(e); else a._fx=null; }
-    else if(f.kind==='wince') { if(e<LIFE_WINCE_SEC) { s*=.95; pip='sweat'; pt=e; } else a._fx=null; }
     else if(e<LIFE_PIP_SEC) { pip=f.kind; pt=e; if(f.kind==='!'&&e<LIFE_HOP_SEC) lift+=lifeHopLift(e); }
     else a._fx=null; }
   return {s,lift,pip,pt};
 }
-// The pip floats over the head: '!', '?', '...' are small painted-style bubble text, 'sweat' is a drop (code stand-ins until the Art Library pips are approved).
+// The pip floats over the head: '!', '?', '...' are small painted-style bubble text.
 function drawLifePip(pip,pt,cx,top,k) {
   const y=Math.round(top-6*k-Math.min(10,pt*14)),x=Math.round(cx+8*k);
-  if(pip==='sweat') { ellipse(x,y+3,2,3,'#7fc4e8'); rect(x-1,y-3,2,3,'#7fc4e8'); ellipse(x-1,y+2,1,1,'#e8f6ff'); return; }
   if(typeof BUBBLE!=='undefined'&&BUBBLE.text) BUBBLE.text(pip,x,y,pip==='!'?'#c43c2a':'#4a5a7a',1.6);
 }
 // Listeners turn toward the speaker 80 to 180 ms after a line opens (plan phase 5), unless a step set their facing, they hold a pose or they are walking.

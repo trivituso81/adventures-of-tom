@@ -1,3 +1,11 @@
+## fix-effectslook-2 (2026-11-20): Wince is removed everywhere; the speed difference needs one example
+
+Tom (t-effectslook): "looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed"
+
+- Removed: the Wince effect (the 0.95 size hold and sweat drop, Boppy's "Gently. The stomach." trigger, the page entry and button), and the sweat pip with the 4 chapter 1 reaction rows that used it (`tools/reaction-apply.py` no longer accepts `sweat` or `wince`; `data/emotion-reactions.js` regenerated, only those 4 fx entries changed). Page now lists 14 effects.
+- Not fixed: the speed. The Effects page and the game read the same curves (`engine/life-math.js`: squash 0.12 s, hop 0.3 s, pip 1.3 s), so the timings are equal in code. Not reproduced; I did not guess a change. Asked Tom on t-effectslook which effect and which scene.
+- Tests: `python3 tools/effects_test.py` and `tools/cut_life_test.py` pass; looked at the page in portrait. Not looked at: pencil reports (3 open, none about effects).
+
 ## reports-2026-11-20 (2026-11-20): Rose no longer shows twice when she jumps off Tom's shoulders; Hi, Mom! line shortened; the family reacts in the kitchen scene
 
 Three in-game reports on the chapter 1 kitchen scene (ch1Theft), build gem-polish02.

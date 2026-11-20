@@ -9565,11 +9565,11 @@ table	10	data/ellie-quests.js	ellie bet 10 pay	Aunt Ellie	I bet Deedee you would
 scene	1	data/scenes.js	ch1Goal	Grace	Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.	rose	surprised	the Big One	!
 scene	1	data/scenes.js	ch1Goal	Grace	It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.	rose	unimpressed	did not eat a boat	...
 scene	1	data/scenes.js	ch1Goal	Tom	Twenty years, one witness. That's a strong number one. What's number two?	grace	proud	strong number one	
-scene	1	data/scenes.js	ch1Goal	Grace	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.	rose	scared	nobody's allowed	sweat
+scene	1	data/scenes.js	ch1Goal	Grace	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.	rose	scared	nobody's allowed	
 scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	tom	surprised	I licked one	?
 scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	grace	angry	Only the top	!
 scene	1	data/scenes.js	ch1Goal	Tom	Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!	rose	proud	Thank you	hop
-scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	rose	scared	Rose licked	sweat
+scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	rose	scared	Rose licked	
 scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	tom	happy	licked a muffin	
 scene	1	data/scenes.js	ch1Amy	Amy	Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.	tom	unimpressed	faster walking on the sand	...
 scene	1	data/scenes.js	ch1Amy	Amy	Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.	grace	happy	Robert Moses	
@@ -9579,10 +9579,10 @@ scene	1	data/scenes.js	ch1Amy	Tom	Your mother says I'm slow.	grace	proud	slow
 scene	1	data/scenes.js	ch1Amy	Grace	You are slow. I've been on number four since the taxi place.	tom	unimpressed	You are slow	...
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.	tom	unimpressed	got off that plane wrinkled	...
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.	rose	surprised	seat that turns into a bed	?
-scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?	rose	scared	what is that on your hands	sweat
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?	rose	scared	what is that on your hands	
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.	rose	sad	stay up there	...
 scene	1	data/scenes.js	ch1Ellie	Grace	You got new curtains.	tom	happy	new curtains	
-scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.	grace	sad	Fix your list	sweat
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.	grace	sad	Fix your list	
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.	rose	happy	licked muffin	hop
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	tom	loving	I didn't care for it	
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	grace	loving	quieter without him	

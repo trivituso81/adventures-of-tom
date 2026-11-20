@@ -19,11 +19,11 @@ with sync_playwright() as p:
         pg = b.new_page(viewport=vp); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.goto('http://127.0.0.1:%d/effects.html' % port); pg.wait_for_timeout(1500)
-        ok(pg.locator('#list .card').count() == 15, name + ': 15 effects listed')
+        ok(pg.locator('#list .card').count() == 14, name + ': 14 effects listed')
         ok(pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), name + ': no sideways scroll')
         ok(pg.evaluate('lifeSquashScale(.33)<.95&&lifeSquashScale(1)===1&&lifeHopLift(.15)>7.9'), name + ': shared curves')
         ok(pg.evaluate('document.getElementById("stage").getContext("2d").getImageData(0,0,340,300).data.some((v,i)=>i%4==3&&v>0)'), name + ': figure drawn')
-        for k in ('hop', '!', 'wince'):
+        for k in ('hop', '!', '?'):
             pg.click('#btns button[data-k="%s"]' % k.replace('"', '')); pg.wait_for_timeout(200)
         pg.screenshot(path=os.path.join(ROOT, 'tools/shots/effects-%s.png' % name))
         ok(not errs, name + ': no page errors %s' % errs)

@@ -12,7 +12,7 @@ line exactly (fatal if not). Rows of other chapters may be short (no `at` field)
 Fatal: a line whose listeners get two different moods in one chapter (needs a scene key; not needed in chapter 1).
 """
 import csv, json, os, sys
-FX = ('', 'hop', '!', '?', '...', 'sweat', 'wince')   # cutpolish5: optional column fx
+FX = ('', 'hop', '!', '?', '...')   # cutpolish5: optional column fx
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TSV = os.path.join(ROOT, 'docs/emotion-reactions.tsv')
 OUT = os.path.join(ROOT, 'data/emotion-reactions.js')

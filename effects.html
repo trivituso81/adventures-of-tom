@@ -53,8 +53,7 @@ var EFFECTS=[
  {k:'!',name:'Pip: !',see:'A red ! floats over the head, with a short hop.',trig:'A reaction row marked !.',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['!']||0)+' rows'},
  {k:'?',name:'Pip: ?',see:'A ? floats over the head.',trig:'A reaction row marked ?.',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['?']||0)+' rows'},
  {k:'...',name:'Pip: ...',see:'Three dots float over the head.',trig:'A reaction row marked ...',who:'The person named in that row.',code:'emoFx, drawLifePip',used:(fxCount['...']||0)+' rows'},
- {k:'wince',name:'Wince',see:'Held at 0.95 size for 2.6 seconds with a sweat drop. A code stand-in until a painted pose is approved.',trig:'Boppy\'s line "Gently. The stomach." and reaction rows marked wince or sweat.',who:'Boppy, and rows that name it.',code:'emoFx, actorLife',used:(fxCount.sweat||0)+' sweat rows, 1 hand-set line'},
- {k:null,name:'Off during skip and fights',see:'No squash, hop, pip or wince while SKIP or fast-forward runs, during a battle, or on monsters, riders, people seated or turned to amber.',trig:'Automatic.',who:'Everyone.',code:'lifeOn',used:'rule'}
+ {k:null,name:'Off during skip and fights',see:'No squash, hop or pip while SKIP or fast-forward runs, during a battle, or on monsters, riders, people seated or turned to amber.',trig:'Automatic.',who:'Everyone.',code:'lifeOn',used:'rule'}
 ];
 var cur={kind:'squash',t0:0,who:'tom',mood:'happy'},img=new Image(),cv=document.getElementById('stage'),cx=cv.getContext('2d');
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
@@ -74,10 +73,10 @@ function init(){
  var L=document.getElementById('list'),B=document.getElementById('btns');
  EFFECTS.forEach(function(e){
   var c=el('div','card','<b>'+e.name+'</b><div>'+e.see+'</div><div class="row"><span>Triggered by</span><span>'+e.trig+'</span><span>Who</span><span>'+e.who+'</span><span>Used</span><span>'+e.used+'</span><span>Code</span><span class="mute">'+e.code+'</span></div>');
-  if(e.k&&['squash','hop','!','?','...','wince'].indexOf(e.k)>=0){var b=el('button',null,'Preview');b.onclick=function(){play(e.k);window.scrollTo({top:0,behavior:'smooth'});};c.appendChild(b);}
+  if(e.k&&['squash','hop','!','?','...'].indexOf(e.k)>=0){var b=el('button',null,'Preview');b.onclick=function(){play(e.k);window.scrollTo({top:0,behavior:'smooth'});};c.appendChild(b);}
   L.appendChild(c);
  });
- ['squash','hop','!','?','...','wince'].forEach(function(k){var b=el('button',null,k==='squash'?'Squash':k==='hop'?'Hop':k==='wince'?'Wince':'Pip '+k);b.dataset.k=k;b.onclick=function(){play(k);};B.appendChild(b);});
+ ['squash','hop','!','?','...'].forEach(function(k){var b=el('button',null,k==='squash'?'Squash':k==='hop'?'Hop':'Pip '+k);b.dataset.k=k;b.onclick=function(){play(k);};B.appendChild(b);});
  var G=document.getElementById('gal');
  WHO.slice(0,3).forEach(function(i){MOODS.forEach(function(md){var f=el('figure',null,'<img loading="lazy" src="portraits/emo/'+i+'-'+md+'.webp"><div>'+i+' '+md+'</div>');f.onclick=function(){w.value=i;m.value=md;reload();window.scrollTo({top:0,behavior:'smooth'});};G.appendChild(f);});
   TALKS.forEach(function(md){var f=el('figure',null,'<img loading="lazy" src="portraits/talk/pose/'+i+'-'+md+'.webp"><div>'+i+' '+md+'</div>');f.onclick=function(){w.value=i;m.value=md;reload();window.scrollTo({top:0,behavior:'smooth'});};G.appendChild(f);});});
@@ -89,7 +88,6 @@ function draw(){
  var now=performance.now()/1000,e=now-cur.t0,s=1,lift=0,pip=null,pt=0,k=cur.kind;
  if(k==='squash'){var q=e%1.2/LIFE_SQ;s=lifeSquashScale(q);}
  else if(k==='hop'){lift=lifeHopLift(e%1.2);}
- else if(k==='wince'){var w=e%(LIFE_WINCE_SEC+.6);if(w<LIFE_WINCE_SEC){s=.95;pip='sweat';pt=w;}}
  else {var p=e%(LIFE_PIP_SEC+.5);if(p<LIFE_PIP_SEC){pip=k;pt=p;if(k==='!')lift=lifeHopLift(p);}}
  cx.clearRect(0,0,340,300);
  cx.fillStyle='#4f7a46';cx.fillRect(0,0,340,300);
@@ -100,8 +98,7 @@ function draw(){
  cx.fillStyle='rgba(0,0,0,.25)';cx.beginPath();cx.ellipse(170,264,W*.3,6,0,0,7);cx.fill();
  cx.save();cx.translate(170,base);cx.scale(s,s);cx.drawImage(img,cut.r[0],cut.r[1],cut.r[2],cut.r[3],-W/2,-H,W,H);cx.restore();
  if(pip){var top=base-H*s,y=top-8-Math.min(10,pt*14),x=170+W*.35;
-  if(pip==='sweat'){cx.fillStyle='#7fc4e8';cx.beginPath();cx.ellipse(x,y+4,4,6,0,0,7);cx.fill();}
-  else{cx.font='bold 34px system-ui';cx.textAlign='center';cx.fillStyle=pip==='!'?'#c43c2a':'#9fb4e0';cx.fillText(pip,x,y);}}
+  {cx.font='bold 34px system-ui';cx.textAlign='center';cx.fillStyle=pip==='!'?'#c43c2a':'#9fb4e0';cx.fillText(pip,x,y);}}
 }
 init();
 </script></body></html>

@@ -13382,7 +13382,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove.",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -13408,6 +13408,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed Sent to Claude as card c-fix-effectslook-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T18:08:56.822Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-effectslook-2 shipped: Wince and the sweat drop removed everywhere. Speed note ('10x speed in the game') not fixed: same code and timings as the page, one example scene needed."
     }
    ],
    "waiting_on": "claude"
@@ -14718,6 +14722,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Removed Wince (Boppy's line, the effect, the page entry) and the 4 sweat rows. Speed difference page vs game not reproduced: both use engine/life-math.js; needs one example from Tom. Asked on t-effectslook."
     }
    ],
    "prompt": {
