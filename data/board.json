@@ -7228,10 +7228,10 @@
    "id": "c-reports-2",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "next": "Nothing to fix in code. Report r-20261114-100555-mxvd (mud blob art does not match) is already covered: the new Mudling sheet is made in the Art Library (card t-heistart), then c-heist1 rebuilds the scene with it. The report stays open on branch inbox until that ships.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7257,11 +7257,16 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session read the one report (mud blob in the Theft scene does not match the game's style). No code fix: new frames come from the Art Library, already queued on t-heistart and c-heist1. Report left open on purpose; close it with python3 tools/reports.py done r-20261114-100555-mxvd when c-heist1 ships."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-20",
+   "waiting_on": "tom"
   },
   {
    "id": "c-boardux1",
