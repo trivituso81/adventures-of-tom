@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "id": "r-20261120-130739-tr1a",
+ "at": "2026-11-20T13:08:12-08:00",
+ "kind": "change",
+ "note": "the choose how to play frame width should be shrunken so that it fits only new game load and the two icon buttons. it should remain centered.",
+ "pins": [],
+ "shot": "reports/r-20261120-130739-tr1a.jpg",
+ "where": {
+  "mode": "title",
+  "build": "reporttype1",
+  "url": "/adventures-of-tom/",
+  "screen": {
+   "layout": "landscape",
+   "rotated": false,
+   "duo": "",
+   "tablet": false,
+   "w": 1677,
+   "h": 1042,
+   "dpr": 1
+  },
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:160.0) Gecko/20100101 Firefox/160.0",
+  "story": {
+   "mode": "demo",
+   "chapter": 0,
+   "goal": "Explore Long Island and Los Angeles, meet everyone, and take on the monsters."
+  },
+  "map": {
+   "id": "town",
+   "name": "The Square",
+   "x": 11,
+   "y": 10,
+   "facing": "down",
+   "cam": [
+    0,
+    0
+   ],
+   "zoom": 1
+  },
+  "party": [
+   "tom",
+   "grace",
+   "rose"
+  ],
+  "bench": [],
+  "walkers": [
+   {
+    "id": "grace",
+    "x": 11,
+    "y": 10,
+    "facing": "down"
+   },
+   {
+    "id": "rose",
+    "x": 11,
+    "y": 10,
+    "facing": "down"
+   }
+  ],
+  "near": [
+   {
+    "name": "Pip",
+    "x": 5,
+    "y": 13,
+    "facing": "right"
+   },
+   {
+    "name": "Moss",
+    "x": 4,
+    "y": 9,
+    "facing": "left"
+   },
+   {
+    "name": "Dot",
+    "x": 20,
+    "y": 11,
+    "facing": "left"
+   }
+  ],
+  "scene": null,
+  "dialog": null,
+  "battle": null,
+  "menu": null,
+  "flags": {},
+  "faults": [],
+  "errors": [],
+  "save": null
+ }
+}
