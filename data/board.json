@@ -10306,7 +10306,7 @@
    "col": "prog",
    "title": "Every board button and link shows your tap right away",
    "changed": "2026-11-20",
-   "next": "Tom (2026-11-20): \"when tapping any button or any link, there needs to be some feedback to the user that the tap happened, even if it's not ready to finish processing the tap yet\". Building: an instant press look on every button, link, card and tab, and a spinner that locks a button while its save runs.",
+   "next": "Shipped in tapfb1: every button, link, card and tab shrinks and brightens while your finger is on it, and a button that saves shows a spinning ring until the save ends (a second tap on it does nothing). Nothing for Tom.",
    "blocks": [],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDiLsBePKA6YtUJVFo",
@@ -10320,6 +10320,11 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built and pushed tapfb1: pressed look on every tap, a spinner on any button that saves to GitHub and on the sync button, taps on a saving button ignored. Test tools/board_tap_test.py.",
+     "at": "2026-11-20T15:45:00Z"
     }
    ],
    "after": "nothing for Tom: end",

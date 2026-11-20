@@ -132,6 +132,7 @@ class H(BaseHTTPRequestHandler):
             return self._send(200, {'data': [{'b64_json': base64.b64encode(png()).decode(), 'mime_type': 'image/png'}]})
         self._send(404)
     def do_PUT(self):
+        if os.environ.get('STUB_PUT_DELAY'): time.sleep(float(os.environ['STUB_PUT_DELAY']))   # tapfb1: a slow GitHub, so a test can see the busy spinner
         if not self.path.startswith('/repos/'): return self._send(404)
         if not (self.headers.get('Authorization') or '').endswith(' test'): return self._send(401, {'message': 'Bad credentials'})
         b = self._body() or {}

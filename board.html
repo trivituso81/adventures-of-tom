@@ -39,6 +39,13 @@ header{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;padding:0 8px 0 
 main{max-width:1680px;margin:0 auto;padding:12px 16px 80px}
 button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:var(--btn);color:#fff;font-weight:600;cursor:pointer}
 button:disabled{opacity:.45}
+/* tapfb1: every tap shows at once. Pressed look on touch, then a spinner that locks the button while its save runs. */
+button,a,.card,summary,[data-act],[data-view],[data-t]{touch-action:manipulation;transition:transform .08s ease-out,filter .08s ease-out,background-color .08s}
+button:active:not(:disabled),a:active,summary:active,.card:active{transform:scale(.96);filter:brightness(1.3)}
+.card:active{transform:scale(.985)}
+button.busy{filter:brightness(.85)}button.busy:disabled{opacity:.8}
+button.busy::before{content:"";flex:none;display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:tapspin .7s linear infinite}
+@keyframes tapspin{to{transform:rotate(360deg)}}
 button.gold{background:var(--accent);color:var(--on-accent)}button.good{background:var(--good)}button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
 .hint{color:var(--muted);font-size:13px}.err{color:var(--prob-text);font-size:13px;white-space:pre-wrap}
 /* boardux2 (plan 3.4): a card is kicker, title, what to do, one state line, one row of actions. Nothing else. */
@@ -271,7 +278,7 @@ function syncState(){
 function renderSync(){
   if(!B)return;
   const st=syncState(),el=$('sync'),bar=$('behind');
-  el.className=st.behind?'behind':st.ref?'ok':'';
+  el.className=(st.behind?'behind':st.ref?'ok':'')+(el.classList.contains('busy')?' busy':'');
   $('synctxt').textContent=st.behind?'Sync behind':st.ref?'Synced '+ago(new Date(st.ref).toISOString()):'Sync unknown';
   if(st.behind){bar.style.display='block';bar.textContent='The board is behind. '+(st.fail?'The last sync failed'+(st.ref?' and the board was last synced at '+clock(st.ref):''):'Sync stopped'+(st.ref?' at '+clock(st.ref):''))+', so cards below may show as working after they shipped.';}
   else bar.style.display='none';
@@ -672,7 +679,18 @@ function showAct(html){$('act').innerHTML='<div class="btns" style="margin:0 0 1
 })();
 
 // ---- saving: read the latest file, change that card by id, write it back, so other sessions' edits are kept
+// tapfb1: the button the current tap landed on. A save started by that tap shows a spinner on it and ignores more taps until it finishes.
+let tapEl=null;
+document.addEventListener('touchstart',()=>{},{passive:true});   // lets iPhone Safari show the :active pressed look
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b&&b.classList.contains('busy')){e.preventDefault();e.stopPropagation();return;}   // a tap on a button that is still saving does nothing (and does not open the card under it)
+  tapEl=b;setTimeout(()=>{tapEl=null;},0);},true);
+function busyOn(b){if(b){b.classList.add('busy');b.setAttribute('aria-busy','true');}return b;}
+function busyOff(b){if(b){b.classList.remove('busy');b.removeAttribute('aria-busy');}}
 async function save(msg,fn){
+  const bb=busyOn(tapEl);tapEl=null;
+  try{return await save0(msg,fn);}finally{busyOff(bb);}
+}
+async function save0(msg,fn){
   const tok=lsGet(TOKEN);
   if(!tok&&!Q.get('gh')) throw new Error(NOTOK);
   for(let tries=0;;tries++){
@@ -770,7 +788,7 @@ async function sendWrong(id){
   const words=clean($('wtxt').value).replace(/\s*\n\s*/g,' / ');
   if(!words){$('serr').textContent='Say what you saw first.';return;}
   if(!lsGet(TOKEN)&&!Q.get('gh')){$('serr').textContent=NOTOK;return;}
-  const btn=$('wgo');btn.disabled=true;btn.textContent='Sending...';$('serr').textContent='';
+  const btn=busyOn($('wgo'));btn.disabled=true;btn.textContent='Sending...';$('serr').textContent='';
   let shot='',shotErr='';
   if(shotData){shot='board-shots/'+id+'-'+Date.now().toString(36)+'.jpg';
     try{await putFile(shot,shotData.split(',')[1],'board: screenshot for '+id,'inbox');}catch(e){shotErr=e.message;shot='';}}
@@ -799,7 +817,7 @@ async function sendWrong(id){
       touch(z,'Tom: something is wrong: '+words+' Sent to Claude as card '+f.id+'; this card waits on it and comes back to you when the fix ships.');
       res={fid:f.id,auto:!!f.start,merged,title:z.title,ftitle:f.title,p:f.prompt};
       return d;});
-  }catch(e){btn.disabled=false;btn.textContent='Send to Claude';$('serr').textContent=e.message;return;}
+  }catch(e){busyOff(btn);btn.disabled=false;btn.textContent='Send to Claude';$('serr').textContent=e.message;return;}
   render();toast('Sent to Claude');
   let h='<p class="what">',bar='';
   if(res.auto){h+='Claude starts fixing this by itself in about a minute, and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>';bar='<div class="barrow"><button class="ob" id="bdone" type="button">Close</button></div>';}
@@ -987,7 +1005,7 @@ document.addEventListener('click',e=>{
   const t=e.target;
   if(!t.closest('#menu')&&!t.closest('#menub'))menuOpen(false);
   if(t.closest('#menub')){menuOpen($('menu').style.display!=='block');return;}
-  if(t.closest('#sync')){checkSync(true);reload();return;}
+  if(t.closest('#sync')){const sb=busyOn($('sync'));Promise.all([checkSync(true),reload()]).finally(()=>busyOff(sb));return;}
   if(t.closest('#since')){if(CH.ids.size){only=only==='changed'?'':'changed';render();}return;}
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}

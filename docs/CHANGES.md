@@ -1,3 +1,12 @@
+## tapfb1 (2026-11-20): every board button and link shows your tap right away
+
+Tom (2026-11-20): "In the board, when tapping any button or any link, there needs to be some feedback to the user that the tap happened, even if it's not ready to finish processing the tap yet." Card c-tapfb1.
+
+- Pressed look: every button, link, card, tab and theme chip shrinks a little and brightens while the finger is on it (`:active` in `board.html`, with an empty `touchstart` listener so iPhone Safari applies it, and `touch-action:manipulation` so there is no tap delay).
+- Busy spinner: a tap that saves to GitHub (Copy prompt, START, Done, All good's save, answers, Hand to Claude, Retire, Note, Send to backlog, Add to to-do, Generate all, Send to Claude) puts a spinning ring on the tapped button until the save ends. `save()` now wraps `save0()` and marks the button the tap landed on (`tapEl`, set in a capture click listener). A tap on a button that is still saving does nothing, and does not fall through to open the card under it.
+- The sync button in the header spins while it checks GitHub; `renderSync` keeps the spinner through a redraw.
+- Test: `python3 tools/board_tap_test.py` (the stub GitHub takes 1.5 s per save with `STUB_PUT_DELAY`). `board_test.py`, `board_ux2_test.py`, `board_backlog_test.py` pass. `board_ux1_test.py` fails on its "Since" line wording before and after this change (attn1 added "rescued"), and `board_sync_test.py` R5 fails because it replays the live board, whose three expected cards have since closed; neither touched here.
+
 ## newcard1 (2026-11-20): + New card on the board: type an idea, the board sizes it and writes the Claude prompt
 
 - Card c-newcard. Tom: "Design a board feature where I can create a new card on my own that then creates a Claude prompt with the appropriate model and effort level. Automate as much as possible." and "Eg, For a new feature idea".
