@@ -13928,7 +13928,7 @@
    "lane": "claude",
    "col": "prog",
    "ask": "setup",
-   "next": "Handed to Claude by Tom: I dont want to do this - Claude should",
+   "next": "Claude cannot do this from START: this run has no Project tools (project_info, project_read, project_delete), the same block as before. Only a conversation opened inside the Little Elsewhere Project has them. Open a new conversation inside that Project, paste the prompt from card c-projclean (it is safe to run again), and approve push access if asked.",
    "blocks": [
     "c-projclean"
    ],
@@ -13951,7 +13951,11 @@
     },
     {
      "d": "2026-11-20",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+     "t": "Started by START on Claude Sonnet 5.5, effort medium.",
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: START run has no Project tools, so the clean-up cannot run here. Nothing deleted from the Project."
     }
    ],
    "chat": {
