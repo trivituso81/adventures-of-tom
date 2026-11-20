@@ -1,3 +1,10 @@
+## 2026-11-20 (459): Art Library bake, clip-grump-idle, clip-toad-idle (`artbake1518`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-grump-idle: clip `grump-idle` cut from art/raw/clips/clip-grump-idle-v2.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). grump_idle frames 27 frame px 400 328 rows 50 41 sheet (2504, 1225) in memory mb 12.3 (as a grid 14.2) kb 740 dur ms 2250 kind loop impact ms 0 reach [22.1, 9.6]
+- clip-toad-idle: clip `toad-idle` cut from art/raw/clips/clip-toad-idle-v2.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). toad_idle frames 37 frame px 384 328 rows 48 41 sheet (1794, 2496) in memory mb 17.9 (as a grid 18.6) kb 891 dur ms 3083 kind loop impact ms 0 reach [22.0, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## bannerhold1 (2026-11-19): A join or leave banner holds the game until you dismiss it
 
 - Card c-bannerhold1. Tom (11-19 19:25): "i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it." The rule had never been built: partybanner1 banners were non-blocking and faded by themselves after 2.6 s.
