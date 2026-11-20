@@ -7653,7 +7653,7 @@
      "room-gatezero-plane"
     ]
    },
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
     "url": "",
@@ -7667,6 +7667,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom approved generating 2 pictures (about $0.10)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pictures job: made 2 pictures. Spent about $0.10."
     }
    ],
    "gen": {
@@ -7679,10 +7683,17 @@
     "est": 0.1,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-20T07:50:20Z",
+     "state": "done",
+     "at": "2026-11-20T07:50:39Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44697888871",
-     "n": 2
+     "made": [
+      "room-gatezero-plane",
+      "room-gatezero-noplane"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.1
     }
    }
   },
