@@ -9192,7 +9192,7 @@
   {
    "id": "t-artgen2look",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Tools",
    "ask": "pictures",
    "title": "Look at the QA results on a real pictures card",
@@ -9210,6 +9210,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-artgen2 (artgen2 shipped)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy Sent to Claude as card c-fix-artgen2look; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "links": [
@@ -9220,7 +9224,58 @@
      ],
      "label": "Young Boppy Van Cortlandt '70"
     }
-   ]
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-fix-artgen2look",
+   "tag": "fix-artgen2look",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Look at the QA results on a real pictures card",
+   "next": "You reported a problem on Look at the QA results on a real pictures card. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Y",
+   "blocks": [
+    "t-artgen2look"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T09:14:25.506Z",
+     "card": "t-artgen2look",
+     "title": "Look at the QA results on a real pictures card",
+     "ask": "pictures",
+     "words": "Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy",
+     "shot": "",
+     "asked": "ADMIN ) BOARD, open a card that needs pictures (for example Art to make: Young Boppy Van Cortlandt '70). Tap Generate all, tap again to confirm. When the job finishes the card shows each picture with a QA score and what failed. Open each in the Art Library and APPROVE or REJECT as usual. All good if the QA lines matched what you saw; Something is wrong with what it missed or wrongly flagged. This starts card Auto-approve pictures that pass QA (artgen3)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-artgen2look"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-artgen2look."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-artgen2look: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the QA results on a real pictures card.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen2look and t-artgen2look in data/board.json, history included. Your first push is the commit board: start c-fix-artgen2look.\n\nTom tested and found problems:\n1. Card t-artgen2look (Look at the QA results on a real pictures card, ask pictures). He was asked: ADMIN ) BOARD, open a card that needs pictures (for example Art to make: Young Boppy Van Cortlandt '70). Tap Generate all, tap again to confirm. When the job finishes the card shows each picture with a QA score and what failed. Open each in the Art Library and APPROVE or REJECT as usual. All good if the QA lines matched what you saw; Something is wrong with what it missed or wrongly flagged. This starts card Auto-approve pictures that pass QA (artgen3). He wrote: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T09:14:25.506Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen2look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen2look, and give the build fix-artgen2look a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-artgen2look"
   }
  ],
  "sessions": [
