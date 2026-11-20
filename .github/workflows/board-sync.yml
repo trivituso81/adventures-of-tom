@@ -68,6 +68,10 @@ jobs:
         env:
           CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
           CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
+          CLAUDE_TASK_OPUS_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_OPUS_MEDIUM_URL }}
+          CLAUDE_TASK_OPUS_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_OPUS_MEDIUM_TOKEN }}
+          CLAUDE_TASK_SONNET_HIGH_URL: ${{ secrets.CLAUDE_TASK_SONNET_HIGH_URL }}
+          CLAUDE_TASK_SONNET_HIGH_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_HIGH_TOKEN }}
           BOARD_FIRED: /tmp/board-fired.json
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -77,6 +81,10 @@ jobs:
         env:
           CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
           CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
+          CLAUDE_TASK_OPUS_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_OPUS_MEDIUM_URL }}
+          CLAUDE_TASK_OPUS_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_OPUS_MEDIUM_TOKEN }}
+          CLAUDE_TASK_SONNET_HIGH_URL: ${{ secrets.CLAUDE_TASK_SONNET_HIGH_URL }}
+          CLAUDE_TASK_SONNET_HIGH_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_HIGH_TOKEN }}
           BOARD_FIRED: /tmp/board-fired.json
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

@@ -22,7 +22,9 @@ def tomcard(i, title, nxt, blocks=(), ask='play', **kw):
     d = {'id': i, 'lane': 'tom', 'col': 'up', 'theme': 'Tools', 'title': title, 'next': nxt, 'blocks': list(blocks), 'changed': T, 'created': T, 'ask': ask,
          'chat': {'url': '', 'opening': 'x'}, 'history': []}
     d.update(kw); return d
-b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True}]
+b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True},
+                 {'id': 'opus-medium', 'model': 'Claude Opus 5.5', 'effort': 'medium', 'env': 'OPUS_MEDIUM', 'enabled': True},
+                 {'id': 'sonnet-high', 'model': 'Claude Sonnet 5.5', 'effort': 'high', 'env': 'SONNET_HIGH', 'enabled': True}]   # startmore
 PR = lambda m, e: {'what': 'w', 'before': ['b'], 'model': m, 'effort': e, 'text': 'Prompt for ' + m}
 open_ids = {c['id'] for c in b['cards'] if c['col'] != 'done'}
 target = 'c-handback'   # a fixture the hand-back screen points at (the live board's own cards change every day)
@@ -325,7 +327,14 @@ try:
         if 'kitchen' not in f['prompt']['text'] or '<' in json.dumps(f): fails.append('play fix prompt lacks what he was asked, or holds a "<"')
         if 'starts fixing this by itself' not in pg.inner_text('#sheet'): fails.append('auto-start screen text: ' + pg.inner_text('#sheet')[:160])
         pg.screenshot(path=f'{out}/board-wrong-auto.png'); pg.click('#bclose')
-        V(pg, 'claude'); pg.click('#views .card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
+        V(pg, 'claude'); pg.click('#views .card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy')
+        for m, e, want in [('Claude Sonnet 5.5 (row B)', 'medium (x)', 'sonnet-medium'), ('Claude Sonnet 5.5 (row C)', 'high (x)', 'sonnet-high'), ('Claude Sonnet 5.5 (row B)', 'low (x)', 'sonnet-medium'),
+                           ('Claude Opus 5.5 (row D)', 'medium (x)', 'opus-medium'), ('Claude Opus 5.5 (row D)', 'low (x)', 'opus-medium'), ('Claude Opus 5.5 (row D)', 'high (x)', None),
+                           ('Claude Fable 5.2 (row E)', 'medium (x)', None), ('Claude Fable 5.2 (row E)', 'low (x)', None), ('Claude Haiku 5.5 (row A)', 'low (x)', None)]:
+            got = pg.evaluate("([m,e])=>{const r=window.__board.routineIn(window.__board.B.routines,m,e);return r&&r.id}", [m, e])
+            if got != want: fails.append(f'startmore: routineIn({m[:16]}, {e[:6]}) gave {got}, wanted {want}')
+        if card('c-fix-test2').get('auto'): fails.append('startmore: an Opus fix card must not be auto')
+        pg.click('#bclose')
         open('/tmp/board_after.json', 'w').write(json.dumps(stored()))
         r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_after.json'], capture_output=True, text=True)
         if r.returncode: fails.append('board_check fails on the board the page wrote: ' + r.stdout[-300:])

@@ -191,6 +191,40 @@ b = mk(); card(b, 'c-auto').update(col='up', start=True, prompt=dict(PR, model='
 bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
 check('R9: an Opus card is never started (no task for it)', card(b, 'c-auto')['col'] == 'up' and 'not set up' in card(b, 'c-auto')['history'][-1]['t'])
 
+# startmore: three tasks (Sonnet 5.5 medium, Opus 5.5 medium, Sonnet 5.5 high); a low effort card goes to its model's medium task; Fable and Haiku have none
+RT3 = RT + [{'id': 'opus-medium', 'model': 'Claude Opus 5.5', 'effort': 'medium', 'env': 'OPUS_MEDIUM', 'enabled': False},
+            {'id': 'sonnet-high', 'model': 'Claude Sonnet 5.5', 'effort': 'high', 'env': 'SONNET_HIGH', 'enabled': False}]
+ON3 = {'sonnet-medium': True, 'opus-medium': True, 'sonnet-high': True}
+def start3(model, effort, auto=False):
+    b = mk(auto=auto); b['routines'] = copy.deepcopy(RT3)
+    card(b, 'c-auto').update(col='up', start=True, prompt=dict(PR, model=model, effort=effort)); card(b, 'c-auto').pop('waiting_on')
+    b['cards'][0].pop('blocks'); b['cards'][0]['blocks'] = []
+    fired.clear(); used = []
+    bs.sync(b, [], None, None, None, NOW, lambda r, cid: (used.append(r['id']), fire(r, cid))[1], ON3)
+    c = card(b, 'c-auto')
+    return used, c
+for model, effort, want in [('Claude Sonnet 5.5 (row B)', 'medium (x)', 'sonnet-medium'), ('Claude Sonnet 5.5 (row C)', 'high (x)', 'sonnet-high'),
+                            ('Claude Sonnet 5.5 (row B)', 'low (x)', 'sonnet-medium'), ('Claude Opus 5.5 (row D)', 'medium (x)', 'opus-medium'),
+                            ('Claude Opus 5.5 (row D)', 'low (x)', 'opus-medium')]:
+    used, c = start3(model, effort)
+    check('startmore: %s, %s starts on the %s task' % (model.split(' (')[0][7:], effort.split()[0], want), used == [want] and c['col'] == 'prog', (used, c['col']))
+for model, effort in [('Claude Opus 5.5 (row D)', 'high (x)'), ('Claude Opus 5.5 (row D)', 'xhigh (x)'), ('Claude Fable 5.2 (row E)', 'medium (x)'), ('Claude Fable 5.2 (row E)', 'low (x)'),
+                      ('Claude Sonnet 5.5 (row B)', 'xhigh (x)'), ('Claude Haiku 5.5 (row A)', 'low (x)')]:
+    used, c = start3(model, effort)
+    check('startmore: %s, %s has no task and never starts' % (model.split(' (')[0][7:], effort.split()[0]), not used and c['col'] == 'up' and 'not set up' in c['history'][-1]['t'], (used, c['col']))
+used, c = start3('Claude Fable 5.2 (row E)', 'medium (x)', auto=True)
+check('startmore: a Fable card marked auto is still not started', not used and c['col'] == 'up', (used, c['col']))
+os.environ.update(CLAUDE_TASK_OPUS_MEDIUM_URL='u', CLAUDE_TASK_OPUS_MEDIUM_TOKEN='t', CLAUDE_TASK_SONNET_HIGH_URL='u')
+env3 = bs.routines_env({'routines': copy.deepcopy(RT3)})
+check('startmore: a task is on only when its URL and TOKEN secrets are both set', env3['opus-medium'] is True and env3['sonnet-high'] is False, env3)
+for k in ('CLAUDE_TASK_OPUS_MEDIUM_URL', 'CLAUDE_TASK_OPUS_MEDIUM_TOKEN', 'CLAUDE_TASK_SONNET_HIGH_URL'): os.environ.pop(k)
+_live = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8'))
+check('startmore: data/board.json has the three tasks', {(r['model'], r['effort'], r['env']) for r in _live['routines']} >= {('Claude Sonnet 5.5', 'medium', 'SONNET_MEDIUM'), ('Claude Opus 5.5', 'medium', 'OPUS_MEDIUM'), ('Claude Sonnet 5.5', 'high', 'SONNET_HIGH')}, _live['routines'])
+_wf = open(os.path.join(HERE, '..', '.github', 'workflows', 'board-sync.yml')).read()
+check('startmore: board-sync.yml passes all six secrets to both steps', all(_wf.count('secrets.CLAUDE_TASK_%s_%s' % (n, k)) == 2 for n in ('SONNET_MEDIUM', 'OPUS_MEDIUM', 'SONNET_HIGH') for k in ('URL', 'TOKEN')))
+_auto = [k['id'] for k in _live['cards'] if k.get('auto') and not (str(k['prompt']['model']).startswith('Claude Sonnet 5.5') and str(k['prompt']['effort']).startswith('medium'))]
+check('startmore: auto is only on Sonnet 5.5 medium cards', not _auto, _auto)
+
 # backlog1: a card Tom parked in the backlog never starts by itself, even when its blocker finishes or START is set
 b = mk(auto=True, backlog={'at': '2026-11-20', 'from': 'wait'}); fired.clear()
 bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
@@ -273,6 +307,7 @@ chk(lambda d: tom1(d).update(ask='decide', choices=['A', 'B'], leads=['a', 'b'])
 chk(lambda d: (tom1(d).update(blocks=[]), tom1(d).pop('fyi', None)), 'must block', 'board_check refuses a Tom card that blocks nothing and is not fyi')
 chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-board3').update(after='t-nope'), 'after', 'board_check refuses an after that names no Tom card')
 chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'])), 'auto', 'board_check refuses auto on an Opus card')
+chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'], model='Claude Sonnet 5.5 (row C)', effort='high (x)')), 'auto', 'board_check refuses auto on a Sonnet 5.5 high card')
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3'], capture_output=True, text=True)
 check('board_check --push accepts board3 once its card has after', r.returncode == 0, r.stdout)
 d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); _c3 = next(c for c in d['cards'] if c['id'] == 'c-board3'); _c3.pop('after'); _c3['col'] = 'prog'   # open again, so the test does not depend on the live card's column

@@ -315,9 +315,14 @@ def r10_notes(B):
 
 
 def routine_for(B, c):
+    # startmore: an exact model and effort match first; a low effort card goes to the same model's medium task. Fable has no task, so it never starts.
     p = c.get('prompt') or {}
-    for r in B.b.get('routines', []):
-        if str(p.get('model', '')).startswith(r['model']) and str(p.get('effort', '')).startswith(r['effort']): return r
+    model, effort = str(p.get('model', '')), str(p.get('effort', ''))
+    same = [r for r in B.b.get('routines', []) if model.startswith(r['model'])]
+    for r in same:
+        if effort.startswith(r['effort']): return r
+    if effort.startswith('low'):
+        return next((r for r in same if r['effort'] == 'medium'), None)
     return None
 
 

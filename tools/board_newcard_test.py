@@ -36,7 +36,9 @@ SIZES = [   # idea, model, effort, theme
     ('A fishing minigame with Boppy at Cattail Pier', 'Claude Sonnet 5.5', 'high', None),
 ]
 b = test_board(extra=False)
-b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True}]
+b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True},
+                 {'id': 'opus-medium', 'model': 'Claude Opus 5.5', 'effort': 'medium', 'env': 'OPUS_MEDIUM', 'enabled': True},
+                 {'id': 'sonnet-high', 'model': 'Claude Sonnet 5.5', 'effort': 'high', 'env': 'SONNET_HIGH', 'enabled': True}]   # startmore: three tasks
 N0 = len(b['cards'])
 ENV = {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])}
 rig = None
@@ -60,7 +62,7 @@ try:
                     check(f'title: {text[:44]}', 0 < len(z['title']) <= 60 and '<' not in z['title'], z['title'])
             check(f'{name}: + New card is on the page and it does not scroll sideways', pg.is_visible('#newb') and pg.evaluate('document.documentElement.scrollWidth') <= w)
             pg.screenshot(path=f'{out}/{name}-page.png')
-            # 1) a feature idea: Sonnet high, not auto, Copy prompt
+            # 1) a feature idea: Sonnet high, not auto, START (startmore) and Copy prompt
             pg.click('#newb'); pg.wait_for_selector('#nctxt', state='visible')
             check(f'{name}: nothing is sized before he types', not pg.is_visible('#ncsize') and pg.is_visible('#nchint'))
             pg.click('#ncgo'); check(f'{name}: empty idea is refused', 'Type your idea first' in pg.inner_text('#serr'))
@@ -68,7 +70,7 @@ try:
             pg.fill('#nctxt', idea); pg.wait_for_timeout(200)
             check(f'{name}: the size shows as he types', pg.inner_text('#ncbig') == 'Sonnet 5.5, effort high', pg.inner_text('#ncbig'))
             check(f'{name}: the card name shows', pg.inner_text('#nctitle').startswith('A photo mode where I can hide the menus'), pg.inner_text('#nctitle'))
-            check(f'{name}: no auto-start box for a size START cannot run', not pg.is_visible('#ncautorow'))
+            check(f'{name}: no auto-start box for a size that never starts by itself (only Sonnet 5.5 medium does)', not pg.is_visible('#ncautorow'))
             pg.screenshot(path=f'{out}/{name}-form.png')
             pg.click('#ncgo'); pg.wait_for_selector('#sheet[data-kind=made]'); pg.wait_for_timeout(200)
             pg.screenshot(path=f'{out}/{name}-made.png')
@@ -80,6 +82,7 @@ try:
             check(f'{name}: the prompt claims the card and ends with the permission line', ('board: start ' + c['id']) in c['prompt']['text'] and c['prompt']['text'].endswith('You have my full permission to access the repo.'))
             check(f'{name}: not auto-started', not c.get('auto') and not c.get('start'))
             check(f'{name}: the made screen shows the size and Copy prompt', 'Sonnet 5.5, effort high' in pg.inner_text('#sheet') and pg.is_visible(f'#sheet [data-act=copy][data-id="{c["id"]}"]'))
+            check(f'{name}: Sonnet high now offers START as well (startmore)', pg.is_visible(f'#sheet [data-act=start][data-id="{c["id"]}"]'))
             pg.click('#bdone'); pg.wait_for_timeout(200)
             pg.click('#tabs [data-view=claude]'); pg.wait_for_timeout(200)
             check(f'{name}: the card is in the Claude view', pg.query_selector(f'.card[data-id="{c["id"]}"]') is not None)
@@ -109,6 +112,21 @@ try:
             pg.click('#ncgo'); pg.wait_for_selector('#sheet[data-kind=made]'); pg.click('#bdone')
             c5 = saved_doc()['cards'][-1]
             check(f'{name}: the pick is saved as his choice', c5['prompt']['model'].startswith('Claude Opus 5.5 (your choice on the board; the rules said Sonnet 5.5'), c5['prompt']['model'])
+            # 6) startmore: an Opus medium idea offers START but never starts by itself; a Fable idea has no START at all
+            make(pg, "Grace's joke about the violin in chapter 2 is not funny, make it sharper")
+            check(f'{name}: Opus medium has no auto-start box', not pg.is_visible('#ncautorow') and pg.inner_text('#ncbig') == 'Opus 5.5, effort medium', pg.inner_text('#ncbig'))
+            pg.click('#ncgo'); pg.wait_for_selector('#sheet[data-kind=made]')
+            c6 = saved_doc()['cards'][-1]
+            check(f'{name}: Opus medium is saved without auto or start', not c6.get('auto') and not c6.get('start') and c6['prompt']['model'].startswith('Claude Opus 5.5'), c6.get('start'))
+            check(f'{name}: Opus medium offers START and Copy prompt', pg.is_visible(f'#sheet [data-act=start][data-id="{c6["id"]}"]') and pg.is_visible(f'#sheet [data-act=copy][data-id="{c6["id"]}"]'))
+            pg.click('#bdone')
+            make(pg, 'Rework the battle system rules so fights are shorter')
+            check(f'{name}: Fable has no auto-start box', not pg.is_visible('#ncautorow') and pg.inner_text('#ncbig').startswith('Fable 5.2'), pg.inner_text('#ncbig'))
+            pg.click('#ncgo'); pg.wait_for_selector('#sheet[data-kind=made]')
+            c7 = saved_doc()['cards'][-1]
+            check(f'{name}: Fable is saved without auto or start', not c7.get('auto') and not c7.get('start'), c7.get('start'))
+            check(f'{name}: Fable shows Copy prompt and no START', pg.is_visible(f'#sheet [data-act=copy][data-id="{c7["id"]}"]') and not pg.query_selector('#sheet [data-act=start]'))
+            pg.click('#bdone')
             # the saved board passes the board check
             tf = os.path.join(tempfile.mkdtemp(), 'board.json'); json.dump(saved_doc(), open(tf, 'w'), indent=1)
             r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), tf], capture_output=True, text=True)

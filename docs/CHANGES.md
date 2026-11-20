@@ -1,3 +1,13 @@
+## startmore (2026-11-20): START now also runs Opus 5.5 medium and Sonnet 5.5 high cards
+
+Tom (11-20): "Add START for more card sizes."
+
+- `data/board.json` `routines` has two more tasks: Opus 5.5 medium (env `OPUS_MEDIUM`) and Sonnet 5.5 high (env `SONNET_HIGH`). Each is switched on by the board job only when both its `CLAUDE_TASK_<env>_URL` and `_TOKEN` secrets exist; `.github/workflows/board-sync.yml` passes all six secrets to both steps.
+- `routineIn` in `board.html` and `routine_for` in `tools/board_sync.py`: an exact model and effort match first; a low effort card goes to the same model's medium task (Sonnet low and Opus low use their medium tasks). Opus high, Fable at any effort and Haiku have no task, so START is not offered and a tap is dropped with "not set up".
+- `auto: true` stays on Sonnet 5.5 medium only (`board_check.py` refuses it elsewhere; the Something is wrong fix card now sets `auto` only for Sonnet 5.5 medium, so an Opus fix card shows START but never starts by itself). Fable never starts automatically.
+- New Tom card `t-startmore-setup` (ask setup) with the steps and paste text for the two tasks and four secrets; it blocks `c-startmore-test`, which starts by itself afterwards and starts one tiny card on each new task.
+- Tests: `board_sync_test.py` (16 new startmore checks), `board_test.py` (routineIn matrix), `board_newcard_test.py` (Sonnet high and Opus medium offer START and no auto box; Fable offers Copy prompt only). Not changed and failing before this build: `board_sync_test.py` check "R5: replaying today fires c-reports-2, c-gatezero and c-adminicons1", which replays the live board against a snapshot from 11-20 15:10.
+
 ## fix-heist1play-4 (2026-11-20): The mud blob's held pan matches the counter pan, and it lands clear of the stool when it hops down
 
 Tom (11-20, card t-heist1play): "when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this".

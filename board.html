@@ -369,7 +369,10 @@ function statusOf(c){
 const byStatus=k=>open().filter(c=>statusOf(c)===k);
 const secYour=()=>byStatus('mine'),secBack=()=>byStatus('back'),secReady=()=>byStatus('ready'),secRun=()=>byStatus('run'),secQueued=()=>byStatus('queued'),secAttn=()=>byStatus('attn');
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
-const routineFor=c=>{const p=c.prompt;if(!p)return null;return (B.routines||[]).find(r=>String(p.model||'').startsWith(r.model)&&String(p.effort||'').startsWith(r.effort))||null;};
+// startmore: the task for a model and effort. An exact match first; a low effort card goes to the same model's medium task. Fable has no task, so it never starts.
+const routineIn=(rs,model,effort)=>{model=String(model||'');effort=String(effort||'');const same=(rs||[]).filter(r=>model.startsWith(r.model));
+  return same.find(r=>effort.startsWith(r.effort))||(effort.startsWith('low')?same.find(r=>r.effort==='medium'):null)||null;};
+const routineFor=c=>{const p=c.prompt;if(!p)return null;return routineIn(B.routines,p.model,p.effort);};
 const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&!c.backlog&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
 const sessionFor=c=>(B.sessions||[]).find(s=>s.url&&s.url===(c.chat||{}).url);
 const modelShort=c=>{const p=c.prompt;if(!p)return '';return String(p.model||'').split(' (')[0].replace('Claude ','')+', '+String(p.effort||'').split(' ')[0];};
@@ -797,7 +800,7 @@ async function sendWrong(id){
   try{
     await save('board: something is wrong '+id,d=>{
       const z=d.cards.find(q=>q.id===id);if(!z)throw new Error('This card is gone from the board. Close and reload.');
-      const [model,effort]=fixModel(z),rt=(d.routines||[]).find(r=>r.enabled&&model.startsWith(r.model)&&effort.startsWith(r.effort));
+      const [model,effort]=fixModel(z),rt=routineIn((d.routines||[]).filter(r=>r.enabled),model,effort);
       const waits=k=>d.cards.some(x=>x.col!=='done'&&(x.blocks||[]).includes(k.id));
       let f=d.cards.find(k=>k.fix&&k.lane==='claude'&&k.col==='up'&&!k.start&&!k.backlog&&k.theme===z.theme&&k.prompt&&String(k.prompt.model).split(' (')[0]===model.split(' (')[0]&&!waits(k)),merged=!!f;
       if(!f){
@@ -811,7 +814,7 @@ async function sendWrong(id){
       if(!f.blocks.includes(z.id))f.blocks.push(z.id);
       f.after=f.reports[0].card;f.prompt.text=fixPrompt(f);
       touch(f,'Tom reported on '+z.id+': '+words+(shot?' Screenshot: '+shot+' on branch inbox.':'')+(shotErr?' (The screenshot did not upload: '+shotErr+'.)':''));
-      if(rt&&!merged){f.auto=true;f.start=true;touch(f,'Auto-start: Tom reported a problem, so this fix starts by itself.');}
+      if(rt&&!merged&&model.startsWith('Claude Sonnet 5.5')&&effort.startsWith('medium')){f.auto=true;f.start=true;touch(f,'Auto-start: Tom reported a problem, so this fix starts by itself.');}
       const n=f.reports.length;
       f.next='You reported '+(n===1?'a problem':n+' problems')+' on '+[...new Set(f.reports.map(x=>x.title))].join('; ')+'. '+(f.start?'Claude starts the fix by itself.':'Copy the prompt into a new conversation in the Project on '+shortOf(f.prompt)+'.')+' Latest: '+words.slice(0,160);
       z.col='wait';z.waiting_on='claude';delete z.quiet;
@@ -922,7 +925,7 @@ function ncPick(){
   const p={theme:NC.th?$('ncth').value:z.theme,model:NC.mo?$('ncmo').value:z.model,effort:NC.ef?$('ncef').value:z.effort,title:z.title,kind:z.kind,z};
   p.modelFull=p.model+(p.model===z.model?' (row '+z.row+': '+z.why+')':' (your choice on the board; the rules said '+z.model.replace('Claude ','')+', row '+z.row+')');
   p.effortFull=p.effort+(p.effort===z.effort?' ('+z.ewhy+')':' (your choice on the board; the rules said '+z.effort+')');
-  p.rt=(B.routines||[]).find(r=>r.enabled&&p.model===r.model&&p.effort===r.effort)||null;
+  p.rt=routineIn((B.routines||[]).filter(r=>r.enabled),p.model,p.effort);
   p.auto=!!(p.rt&&p.model==='Claude Sonnet 5.5'&&p.effort==='medium');
   return p;
 }
@@ -1066,7 +1069,7 @@ loadSince();
 load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);}).catch(e=>{$('err').textContent=e.message;$('tabs').textContent='Could not load the board';});
 $('q').addEventListener('input',e=>{query=e.target.value.trim();shipN=20;render();});
 window.addEventListener('resize',()=>{if(B)counts();});
-window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy,sizeIdea,ideaTitle};
+window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy,sizeIdea,ideaTitle,routineIn};
 </script>
 </body>
 </html>
