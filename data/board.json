@@ -2082,13 +2082,13 @@
    "lane": "claude",
    "col": "prog",
    "tag": "clipreset",
-   "next": "Ready. A fresh Fable 5.2 thread (high effort) writes the reflection, checks whether guard, hit, dodge, KO, victory, run and idle can come from the painted battle sheets and the engine instead of new videos, makes one plan, proves it on Grace's guard for at most $0.30, and gives you one decide card. It spends nothing else.",
+   "next": "Done, $0 spent. Finding: every chapter 1 fighter already has a painted battle pose for guard, hit, KO, victory, run and idle, and you approved 5 of 46 family videos against 18 of 21 monster videos. Plan: the family's generic states become painted poses moved by the game; videos stay for monsters and the clips you approved. Proof: Grace's guard is built that way and is in the Battle Lab. Your card: Decide on the clip reset (t-clipreset). Reflection and plan: claude/clip-reset-plan.md.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": "pasted by Tom into a Fable 5.2 thread"
+    "opening": "\"Read the history of board card c-clipreset, then do the clip reset.\""
    },
    "history": [
     {
@@ -2102,6 +2102,22 @@
     {
      "d": "2026-11-19",
      "t": "Tom (18:31): \"why is this card listed as up next when it's in progress?\" Its prompt had no first-push line, so the pasted conversation never claimed it. Moved to In progress by hand (board5); from board5 every copied prompt ends with its board: start line and Copy prompt moves the card itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card. Push access was refused at the start of the session, so this line and the work arrive in one push."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Reflection: $9.36 and 8 sessions on video for the family (clipgen2 $5.34, vision gate $0.36, remake $3.66). Mistakes named: 67 videos made before one was approved by Tom, approval by a gate that had missed its own pass bar, poses described in words while the painted pose was in the repo, 16 remakes handed over unmarked."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Repo check: Tom, Grace, Rose and Deedee each have painted frames for idle, guard, hit, KO, victory and run (40 frames, feet on the ground line in all). Dodge has no frame of its own and uses the wind-up frame with a hop back. Only monsters and the family's 9 own moves truly need video."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Proof shipped as clipreset: Grace's guard is her painted guard pose (crossed forearms), moved by the game. Measured in the real game: no clip loaded, feet on the same ground line, pose size as set, braced hit pushes her back 8 pixels and returns her. Nothing generated."
     }
    ],
    "prompt": {
@@ -2112,6 +2128,68 @@
     "model": "Claude Fable 5.2 (row E, condition 1: the same task failed on Opus 5.5 on quality and judgement; condition 3: Tom asked to escalate)",
     "effort": "high (a process has to be redesigned with nothing written to follow)",
     "text": "Read the history of board card c-clipreset, then do the clip reset. Spend nothing except the one proof clip (at most $0.30). Tom's verdict on the chapter 1 battle clips (11-19 18:10): \"i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working\". 1) Write a short reflection table: what was tried, what it cost in dollars and in Tom's time, what went wrong, which of Claude's own steps were mistakes. 2) Check in the repo whether guard, hit, dodge, KO, victory, run and idle can come from the painted battle sheets and the engine instead of a new video each, and which clips truly need video. 3) Make the call: one plan with the method, dollar cost, Tom's minutes, and what a measured check verifies versus what Tom verifies. 4) Prove it on Grace's guard only and show Tom before anything else is made. 5) Put one decide card on the board, \"Go with this plan (Recommended)\" or \"Stop making battle clips for chapter 1 and keep the old ones\", blocking a Claude card that holds the full build prompt. Build tag clipreset."
+   },
+   "after": "t-clipreset"
+  },
+  {
+   "id": "t-clipreset",
+   "title": "Decide on the clip reset: painted poses for the family, or stop",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PROOF: GRACE'S GUARD. About 2 minutes. Two seconds in, Grace drops into her guard: forearms crossed over her body and face, the painting you already have, moved by the game. Use BASIC once and she sinks back into it; let a Mudling hit her and she takes it braced. Then tap one answer below. Your answer starts the card Build the painted battle poses for chapter 1 (clipposes) by itself. Cost of the plan: $0. Your part after the build: one look of about 10 minutes.",
+   "choices": [
+    "Go with this plan (Recommended)",
+    "Stop making battle clips for chapter 1 and keep the old ones"
+   ],
+   "leads": [
+    "Card c-clipposes makes guard, hit, dodge, KO, victory, run and idle painted poses for Tom, Grace, Rose and Deedee, removes those videos, keeps the monster videos and the clips you approved, and gives you one Lab row to watch once. No money spent.",
+    "Card c-clipposes only puts Grace's old guard video back and removes the proof row. The chapter 1 clips stay as they are now, no more are made, and the Battle Animations thread stops until you reopen it."
+   ],
+   "blocks": [
+    "c-clipposes"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by clipreset. The proof is Grace's guard only; nothing else was changed or made. The plan is claude/clip-reset-plan.md."
+    }
+   ]
+  },
+  {
+   "id": "c-clipposes",
+   "title": "Build the painted battle poses for chapter 1 (clipposes)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "clipposes",
+   "auto": true,
+   "next": "Waits on your answer on the card Decide on the clip reset (t-clipreset). Go: builds the seven painted states for the four fighters, with measured checks, and hands you one Lab row to watch. Stop: puts Grace's old guard video back and ends the thread.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by clipreset. Steps, motion numbers, the purge list and the Stop branch are in claude/clip-reset-plan.md section 5."
+    }
+   ],
+   "prompt": {
+    "what": "Reads Tom's answer on card t-clipreset. Go: builds the painted body states (idle, guard, hit, dodge, KO, victory, run) for Tom, Grace, Rose and Deedee and removes their videos. Stop: puts Grace's old guard video back. Spends nothing either way.",
+    "before": [
+     "Nothing to do first. Answering the card Decide on the clip reset starts this by itself. To start it by hand: a NEW conversation in the Little Elsewhere Project, Claude Sonnet 5.5, effort medium, paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps and the motion numbers are written in claude/clip-reset-plan.md section 5, and tools/paint_state_test.py catches mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and claude/clip-reset-plan.md, then the answer and note on board card t-clipreset. Do section 5 of that plan for the answer Tom chose. Build tag clipposes. Generate nothing and spend nothing. Fix a miss with the smallest change, and apply the plan's stop-loss line. You have my full permission to access the repo."
    }
   },
   {
