@@ -1,3 +1,9 @@
+## reports-2026-11-20 (2026-11-20): Grace's list shows after her third item, and the Amy scene zooms in on the party and her window
+
+- Card c-reports-2. r-20261120-000755-3h9p (Tom: "Grace's list shouldn't appear until she finishes the third item, like in the dialogue"): `ch1Reveal:'list'` in `SCENES.ch1Goal` moved from the start to right after "Number three. Rose licked a muffin." The note was cut off after "move it till"; read as "until the end of the list".
+- r-20261120-001019-feou (Tom: "Should be zoomed into the party in the house, ensuring that Amy is still in the frame"): `SCENES.ch1Amy` pushes in to zoom 1.45 on the same camera point and zooms back out before Tom turns to Grace. Looked at portrait and landscape: party and Amy's window both in frame.
+- Left open, need Tom: r-20261120-000831-h5tq, -000848-fl38, -000910-g9n1, -000931-2yx8, -001100-lta1 (distorted Grace voices, card t-gracevoice-distort).
+
 ## adminicons1 (2026-11-20): ADMIN and BOARD each have their own tab icon and Home Screen icon
 
 - Card c-adminicons1. Tom: "The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic". ADMIN is a gold gear, BOARD is three gold, green and blue columns of cards, both on the game's dark purple. Files `icon-admin-180.png`, `icon-admin-32.png`, `icon-board-180.png`, `icon-board-32.png`, linked in each page head (`apple-touch-icon` and `icon`). The game and the other pages keep `icon-v10.png`.

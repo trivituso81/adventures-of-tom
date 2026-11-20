@@ -7566,12 +7566,12 @@
   },
   {
    "id": "c-reports-2",
-   "tag": "reports-2026-11-19",
+   "tag": "reports-2026-11-20",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001019-feou and 1 more. First note: Grace's list shouldn't appear until she finishes the third item, like in the dialogue, so remove it ",
+   "next": "Fixed and pushed (reports-2026-11-20): the list close-up now comes after Grace's third item; the Amy scene zooms in on the party and her window. Still open on branch inbox: 5 Grace voice reports (need your re-recording, card t-gracevoice-distort) and 1 older art report r-20261114-100555-mxvd (waits on c-heist1).",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7625,6 +7625,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session fixed r-20261120-000755-3h9p (list close-up moved after item three) and r-20261120-001019-feou (zoom on party plus Amy). Voice reports left open for Tom's re-recording."
     }
    ],
    "blocks": [],
@@ -7637,7 +7641,8 @@
     "url": "https://claude.ai/code/cse_01RXeukDTjJ4EF5ZqM4W3ovf",
     "prev": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs"
    },
-   "started_at": "2026-11-20T15:26:24+00:00"
+   "started_at": "2026-11-20T15:26:24+00:00",
+   "after": "t-gracevoice-distort"
   },
   {
    "id": "c-boardux1",
@@ -10099,6 +10104,42 @@
     "effort": "medium (steps are known)",
     "text": "Make Backlog a fifth tab next to Shipped in board.html and update the board tests."
    }
+  },
+  {
+   "id": "t-gracevoice-distort",
+   "title": "Re-record Grace's distorted chapter 1 lines",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "ask": "voice",
+   "fyi": true,
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, open each of Grace's 5 lines with the buttons below (they play distorted in the game). Tap Takes, record until one is clean, keep it, press Send my takes to Claude. Your pencil report on 'Grace's chapter 1 voices almost have...' was cut off after those words: if more is wrong than distortion, say so in the note when you send.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Bo",
+      "d|grace|It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty",
+      "d|grace|Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one ye",
+      "d|grace|Number three. Rose licked a muffin.",
+      "d|grace|You are slow. I've been on number four since the taxi place."
+     ],
+     "label": "Grace's lines"
+    }
+   ],
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-reports-2 from reports r-20261120-000831-h5tq, -000848-fl38, -000910-g9n1, -000931-2yx8, -001100-lta1 (Tom: \"This line needs to be re-recorded. The voice is distorted somehow\")."
+    }
+   ]
   }
  ],
  "sessions": [
