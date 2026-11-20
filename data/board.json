@@ -11075,7 +11075,7 @@
    "title": "Fix: quest log 'Go to' prefix and run-on location toasts",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped gem-bug06: quest goals that are full sentences no longer get \"Go to\" in front. Toast half was already removed by idea-removeall.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11101,6 +11101,10 @@
     {
      "d": "2026-11-20",
      "t": "Toast half already gone (idea-removeall). Fixed the \"Go to\" prefix in questPhrase; shipped as gem-bug06. Nothing for Tom."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug06: the quest log no longer says \"Go to\" in front of a full sentence"
     }
    ],
    "tag": "gem-bug06",
@@ -11114,7 +11118,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug06 in data/board.json, history included. Your first push is the commit board: start c-gem-bug06.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-06. What the tester saw: Severity High. Where: Quest Log (`[!]`) & Location Toasts. (1) Quest log prepends `\"Go to \"` onto full sentences, producing `\"Go to the splash came from across the pond. Follow it.\"` and `\"Go to It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\"` (2) Interior location toasts lack separator punctuation (`\"Deedee and Boppy's House One resident. Four curious things.\"`, `\"Amy's House One resident...\"`, `\"Long Island Taxi Co. One driver...\"`).\n\nThe tester suggested (a suggestion, not an order): Strip automatic `\"Go to \"` prefixing when an objective string is already a full sentence, and render map title + subtitle on two lines or with a colon/period separator.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug06, push to main, and write the result and the next step onto the card.\n\nNote: card c-idea-removeall may have removed location toasts. Check docs/CHANGES.md idea-removeall first; fix only what is left.\n\nYou have my full permission to access the repo."
    },
    "started_at": "2026-11-20T16:21:44+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-bug07",
@@ -12140,6 +12145,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGj8aHSkt5pisuZ1bJ",
+   "title": "Fix: quest log 'Go to' prefix and run-on location toasts",
+   "first": "2026-11-20T16:24:05Z",
+   "last": "2026-11-20T16:24:05Z",
+   "tags": [
+    "gem-bug06"
+   ],
+   "cards": [
+    "c-gem-bug06"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEEvdnM3Hcz8aCVazR",
    "title": "Fix: blank portraits in chapter select, battle and dialogue",
@@ -13539,8 +13556,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "85340198e745dbe739b3dc2206a05a4e83ecabf5",
- "synced_at": "2026-11-20T16:23:09+00:00",
+ "synced": "befbf17e25687658c5abbae08ee2cc0a5b0637c9",
+ "synced_at": "2026-11-20T16:25:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
