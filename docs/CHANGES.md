@@ -1,3 +1,11 @@
+## amywin1 (2026-11-19): Chapter 1, Rivituso Row: Amy leans out of her upstairs window, and the party walks off the steps before she talks
+
+- Tom (11-19 16:45, screenshot of the scene): "Amy can't be seen - shouldn't her head be peering out of a window? Why did the party stop when hidden by a sign".
+- Cause of the stop: the scene trigger (data/scenes.js ch1-amy) fires the moment the party arrives on the Row, which is on the north steps under the LONG ISLAND SQUARE arch; the arch cutout drew over Tom's head. The scene now walks Tom (Rose on his shoulders) and Grace down to the open path in front of the GREGORI house (tiles 8,8 and 9,8) first.
+- Amy: new prop kind `windowfig` (engine/scene-props.js) draws a person's street figure inside a painted window, clipped so the frame and the flower box stay in front. Amy rises into the dormer window over her front door, says her two lines, and ducks back in. The camera holds between her window and the party. The two phone dings are gone (she is calling down, not texting). No spoken line changed, so no re-bake.
+- Deedee and Boppy's pose preload moved to the end of the scene: the longer scene let the 20 s idle release drop Boppy's story sheets mid-scene (caught by the natural-play test).
+- Tests: `tools/cut_natural_test.py row` portrait and landscape, and `theft` landscape, FAILS: []. Frames looked at in both layouts.
+
 ## board3 (2026-11-19): Your cards say what to do, answers travel on the card, finished work lands in your queue, and a START button (needs one setup from you)
 
 - **Ask types (board3 part A).** Every open card of yours has an `ask`: play, pictures, animations, voice, script, decide or setup. YOUR MOVE is grouped by it with a count per group, and the top line reads "Your move: N (2 play, 1 pictures, ...)". A DECIDE card shows one button per choice (Claude's pick first, marked, each with what it leads to) plus "Something else"; the tap saves `answer`, closes the card, and the board copies the answer into the card it unblocks.

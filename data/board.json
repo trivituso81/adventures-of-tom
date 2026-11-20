@@ -1088,6 +1088,61 @@
     "effort": "medium (three known checks)",
     "text": "Read claude/handoff-rules.md. You were started by the START button, which is the test. Check three things and write each result as a history line on this card (data/board.json, card c-starttest): (1) Can you read the Project docs claude/board3-plan.md and the Project instructions from this run? (2) Did your first push, the commit board: start c-starttest, reach main with no person approving it? (3) The board job reached the task, which is proven by you running. If check 1 or 2 failed, write on this card what you could see and what you could not, and write the fix the plan names (copy the docs a card needs into the repo) as a new Claude card with its full prompt. Then push the build starttest with a docs/CHANGES.md entry. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-amywin1",
+   "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Built and tested (portrait and landscape): the party walks off the steps to the path by the GREGORI house, Amy rises into the dormer window over her door for her two lines. Push is waiting on repo push access for this conversation.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
+    "opening": "\"What's a fix for this scene? Amy can't be seen\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card. Tom: \"Amy can't be seen - shouldn't her head be peering out of a window? Why did the party stop when hidden by a sign\". Cause: the scene fires on arrival, on the steps under the arch."
+    }
+   ],
+   "prompt": {
+    "what": "Pushes the finished amywin1 fix (Amy in her window, party off the steps) if it is not on main yet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written and tested, the patch is in the Project)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and claude/amywin1-handoff.md, then apply claude/amywin1.patch to main, rerun its tests and push build amywin1 (skip if docs/CHANGES.md on main already has ## amywin1). You have my full permission to access the repo."
+   },
+   "tag": "amywin1",
+   "after": "t-amywin1"
+  },
+  {
+   "id": "t-amywin1",
+   "title": "Play the Rivituso Row scene with Amy in her window",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After build amywin1 shows on the title screen: RELOAD, then CHAPTERS > Chapter 1 and walk south from the Square into Rivituso Row. Check: the party walks down off the steps before anyone talks, Amy pops up in the window over her front door, and her face reads at phone size. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
+    "opening": "\"What's a fix for this scene? Amy can't be seen\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added with c-amywin1."
+    }
+   ]
   }
  ],
  "sessions": [

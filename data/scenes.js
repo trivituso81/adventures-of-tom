@@ -117,17 +117,26 @@ SCENES.ch1Goal=[
   {call:()=>queueToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
 ];
 
-// 2. Rivituso Row, passing Amy's house. Amy watches from her window, unseen: her two texts are text boxes.
+// 2. Rivituso Row, passing Amy's house. Amy leans out of her upstairs window (the dormer over the GREGORI door) and calls down.
+// amywin1 (Tom 2026-11-19): "Amy can't be seen - shouldn't her head be peering out of a window? Why did the party stop when hidden by a sign".
+// The scene fires the moment the party arrives on the Row (still on the steps, where the LONG ISLAND SQUARE arch hid Tom's head), so it first
+// walks them down onto the open path in front of her house; the camera holds between her window and the party in both orientations.
+const CH1_AMY_WIN={sheet:'amy',win:[402,98,466,161],cx:434,top:110,facing:'down'};   // the dormer window in art/row.webp (row4), art px
 SCENES.ch1Amy=[
   {flag:'ch1-amy'},
-  {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},   // Deedee's greeting poses are ready before the kitchen (roofnpc2: they showed blurry for half a second)
-  {call:()=>sfx.ding()},
+  {all:[{walk:'tom',to:routeTo('tom',8,8),speed:.28},{walk:'grace',to:routeTo('grace',9,8),speed:.28}]},   // Rose rides along on Tom's shoulders
+  {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
+  {cam:[7.2,4.7],time:.6},
+  {prop:'amywin',kind:'windowfig',set:Object.assign({map:'row',u:0},CH1_AMY_WIN)},
+  {propTo:'amywin',field:'u',to:1,time:.35},
   {talk:'Amy',lines:["Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses."]},
   {talk:'Tom',lines:["I'm carrying a child and receiving a news report."]},
-  {call:()=>sfx.ding()},
   {talk:'Amy',lines:["I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run."]},
+  {propTo:'amywin',field:'u',to:0,time:.3}, {prop:'amywin',hide:true},
+  {cam:null},
   {talk:'Tom',lines:["Your mother says I'm slow."]},
-  {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]}
+  {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]},
+  {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }}   // Deedee's greeting poses are ready before the kitchen (roofnpc2); last, so the 20 s idle release (engine/painted.js) does not drop them during this scene (amywin1)
 ];
 
 // 2b. Optional: Aunt Ellie's door.

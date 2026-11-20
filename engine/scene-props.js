@@ -125,6 +125,24 @@ SPK.papers=(P)=>{
 
 // A painted picture: art/props/<art>.webp drawn with its feet at tile (x,y) and w tiles wide (the ears-row picture over the three of them). Fields art, x, y, w.
 SPK.img=(P)=>{ PROPART.draw(P.art,P.x*T,P.y*T-(P.w*T*(PROPART.ready(P.art)?PROPART.get(P.art).naturalHeight/PROPART.get(P.art).naturalWidth:1))/2,{w:P.w*T}); };
+// Someone leaning out of a painted window (amywin1, Tom 2026-11-19: "Amy can't be seen - shouldn't her head be peering out of a window?"). Their own
+// street figure, drawn behind the window frame: clipped to the open window so the frame and the flower box stay in front. Fields: sheet (an OW set id,
+// 'amy'), win [x0,y0,x1,y1] (the open window in art px, 64 px a tile), cx (art px centre of the head), top (art px y of the top of the head when she is
+// all the way out), facing ('down'), u (0: ducked out of sight below the sill, 1: leaning out; ease it with {propTo}).
+SPK.windowfig=(P)=>{
+  const set=typeof OW!=='undefined'&&OW[P.sheet]; if(!set) return;
+  const s=T/64,[x0,y0,x1,y1]=P.win,u=P.u==null?1:P.u; if(u<=0) return;
+  const a={x:0,y:0,facing:P.facing||'down',noShadow:true,sheet:P.sheet};
+  const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]),fr=(frames||set.down)[0];
+  const k=actorK(1)*(set.k||1)*owBoost(a,set);
+  let row=0; while(row<fr.length-1&&typeof fr[row]==='string'&&!/[^. ]/.test(fr[row])) row++;   // first painted row: the top of the head
+  const head=(P.top+(1-u)*(y1-P.top+6))*s;   // u 0: the head sits just under the sill
+  a.x=P.cx*s/T-.5; a.y=(head-row*k+fr.length*k+2)/T-1;
+  ctx.save(); ctx.beginPath(); ctx.rect(x0*s,y0*s,(x1-x0)*s,(y1-y0)*s); ctx.clip();
+  ctx.fillStyle='rgba(60,36,20,.35)'; ctx.fillRect(x0*s,y0*s,(x1-x0)*s,(y1-y0)*s);   // the room behind her, so the sash reads as open
+  drawSheetActor(a,set);
+  ctx.restore();
+};
 function sceneActorOrNull(a) { try { return sceneActor(a); } catch(e) { return null; } }
 SCENE_OPS.prop=o=>S.call(()=>{ const id=o.prop; if(o.hide) { if(SCENE_PROPS[id]) SCENE_PROPS[id].show=false; return; } scenePropSet(id,o.kind,Object.assign({show:true},o.set||{})); });
 SCENE_OPS.propTo=o=>({t:0,start(){ this.t=0; this.P=SCENE_PROPS[o.propTo]; this.a=this.P?this.P[o.field]:0; this.b=this.P?this.P[o.field]:0; if(this.P) this.a=this.P[o.field]==null?0:this.P[o.field]; this.arc=o.arc||0; },
