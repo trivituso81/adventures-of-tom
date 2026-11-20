@@ -7919,7 +7919,7 @@
    "title": "Scene staging follow-ups (facing, close-ups, boss size)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped stagefollow: chapter 16 opening restaged in the open Square, Gridlock Prime family below the bus, Mr. Washington scene fixed, bosses kept in the picture in portrait. Left over: ch13 Drill Worm framing (card c-wormstage).",
    "blocks": [],
    "changed": "2026-11-20",
@@ -7948,6 +7948,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped stagefollow. Facing checks found nothing to fix; monster line-ups were fine from a real approach tile. Fixed ch12Marlowe (Washington), ch16Open/Fight/After (Square marks), ch12Prime/After (Gridlock Prime marks), boss framing in portrait. ch13 Drill Worm left over as c-wormstage."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as stagefollow: Chapter 16 opening restaged in the open Square, Gridlock Prime's family stands below the bus, bosses stay in the picture"
     }
    ],
    "prompt": {
@@ -7960,7 +7964,8 @@
     "text": "Read claude/next-addendum-close1.md, claude/next-addendum-cutstage1.md, claude/next-addendum-cutfront1.md and claude/next-addendum-bossbig1.md (the ones that exist in the repo claude/ folder; if one is missing, use docs/CHANGES.md for that build). Then do these checks and fix what looks wrong: (1) LATE=1 reaction_test frames of ch12Carmen (bench amy tnb), ch12Marlowe and one townsfolk mood chat in portrait and landscape; anyone facing away from the speaker: fix that row in docs/pose-facing.tsv or poseFacingWant. (2) Landscape frames of a room with a counter or wall (ch9Club), and the audit's cover and offscreen columns on a few outdoor scenes with tall painted objects; a person who looks wrong: check that zone's base in PLATE_BEHIND. (3) Full scene scan on main with fresh OUT dirs (bench for chapters 11 to 20), read cover, spread, offscreen; landscape and Duo frames of five scenes; ordinary monster line-ups by moving Tom to the monster's left or most open side (two earlier attempts failed: reproduce from a real approach tile first). (4) bossbig1 leftovers: ch12 Gridlock Prime (Rose beside or behind Grace or Tom on 9 pages), boss in view in portrait (camera framing should include the boss box), landscape frames of five more bosses. Look at every frame, fix, test, push. You have my full permission to access the repo."
    },
    "tag": "stagefollow",
-   "after": "t-stagefollowplay"
+   "after": "t-stagefollowplay",
+   "done": "2026-11-20"
   },
   {
    "id": "c-alvarez",
@@ -9638,7 +9643,7 @@
    "title": "Play the chapter 16 opening and the Gridlock Prime fight",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "1) Chapter Select > Chapter 16: the family stands together in the Square under Penny's Pockets, little ones in front, facing Marlowe and the camera; nobody is hidden behind Kettle Cottage. 2) Chapter Select > Chapter 12, walk to Old Oak Park until Marlowe stops you: after Mr. Washington is found in amber you should see TNB beside him and the rest of the family to his right. 3) Same chapter, the Gridlock Prime scene: the bus is in view and the family stands below it, one person per column, through the fight and after. Use the REPORT tab if any of these look wrong.",
@@ -9653,9 +9658,12 @@
     {
      "d": "2026-11-20",
      "t": "Added by stagefollow: your phone check of the restaged scenes; blocks nothing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ],
-   "waiting_on": "claude",
    "first": "After the publish of build stagefollow, press RELOAD on the title."
   },
   {
@@ -9874,6 +9882,18 @@
    ],
    "cards": [
     "c-adminhub1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG3eY6YJ7gWZ4DLac2",
+   "title": "Scene staging follow-ups (facing, close-ups, boss size)",
+   "first": "2026-11-20T00:23:59-08:00",
+   "last": "2026-11-20T04:52:55-08:00",
+   "tags": [
+    "stagefollow"
+   ],
+   "cards": [
+    "c-stagefollow"
    ]
   },
   {
@@ -10191,16 +10211,6 @@
    "tags": [],
    "cards": [
     "c-alvarez"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG3eY6YJ7gWZ4DLac2",
-   "title": "Scene staging follow-ups (facing, cut-front, close-up, boss size)",
-   "first": "2026-11-20T00:23:59-08:00",
-   "last": "2026-11-20T00:23:59-08:00",
-   "tags": [],
-   "cards": [
-    "c-stagefollow"
    ]
   },
   {
@@ -10812,8 +10822,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "bacab831c779a1f14e733b38e91b8830079e56e4",
- "synced_at": "2026-11-20T10:02:30+00:00",
+ "synced": "5983a7d0765416478180dfd7ea5217922bdf0844",
+ "synced_at": "2026-11-20T12:53:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
