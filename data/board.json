@@ -7624,7 +7624,7 @@
    "title": "Board redesign 3: four views, search and the wide layout",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "boardux3",
    "next": "Waits on Board redesign 2 (c-boardux2). Then the board becomes four views with the same names at every screen size (For you, Claude, Chats, Shipped), with a tab bar on the phone, two columns clear of the fold on the open Duo, search, and Shipped grouped by day. After it ships you try the whole redesign once (card t-boarduxtry).",
    "blocks": [
@@ -7633,7 +7633,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDEhxpGxy5knknCF2p",
     "opening": "not started"
    },
    "history": [
@@ -7652,6 +7652,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7663,8 +7667,7 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux3 in data/board.json with its history. Your first push is the commit board: start c-boardux3. Build phase 3 (boardux3) as plan sections 3.1, 3.3 (search and themes) and 5 say, with checks A1 to A6, A12 and A13, and push it as boardux3. Then rewrite card t-boarduxtry's next step to match what you built. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). You have my full permission to access the repo."
    },
-   "after": "t-boarduxtry",
-   "start": true
+   "after": "t-boarduxtry"
   },
   {
    "id": "t-boarduxtry",
@@ -9099,7 +9102,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukH6yUh6dbf3JPguMqy",
+    "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
     "opening": "\"I do think we need to add to our Kanban board a feature that basically anytime a item is retrieved through conversation with a character or through defeating a character...\""
    },
    "history": [
@@ -9118,6 +9121,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -9155,6 +9162,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
+   "title": "An ITEM GAINED banner for items from talks and wins",
+   "first": "2026-11-20T09:11:42Z",
+   "last": "2026-11-20T09:11:42Z",
+   "tags": [],
+   "cards": [
+    "c-itembanner1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
    "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
@@ -10195,8 +10212,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a04c3f9f240271a0428d5590b42907d01cb01652",
- "synced_at": "2026-11-20T09:10:07+00:00",
+ "synced": "7f732cd0fc0b7dab534971224bc5cbd613912a21",
+ "synced_at": "2026-11-20T09:12:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
