@@ -13368,7 +13368,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove.",
@@ -13392,8 +13392,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Look at the Effects page in Admin is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed Sent to Claude as card c-fix-effectslook-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T18:08:56.822Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-startmore",
@@ -14623,6 +14629,65 @@
     }
    ],
    "first": "Wait for the publish of build ch2build."
+  },
+  {
+   "id": "c-fix-effectslook-2",
+   "tag": "fix-effectslook-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Look at the Effects page in Admin",
+   "next": "You reported a problem on Look at the Effects page in Admin. Claude starts the fix by itself. Latest: looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in th",
+   "blocks": [
+    "t-effectslook"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T18:08:55.826Z",
+     "card": "t-effectslook",
+     "title": "Look at the Effects page in Admin",
+     "ask": "play",
+     "words": "looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed",
+     "shot": "",
+     "asked": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-effectslook"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-effectslook.",
+     "at": "2026-11-20T18:08:56.822Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-effectslook: looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed",
+     "at": "2026-11-20T18:08:56.822Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T18:08:56.822Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the Effects page in Admin.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-effectslook-2 and t-effectslook in data/board.json, history included. Your first push is the commit board: start c-fix-effectslook-2.\n\nTom tested and found problems:\n1. Card t-effectslook (Look at the Effects page in Admin, ask play). He was asked: Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove. He wrote: looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T18:08:55.826Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-effectslook to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-effectslook, and give the build fix-effectslook-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-effectslook",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
