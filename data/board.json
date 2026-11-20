@@ -1019,7 +1019,7 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "next": "claude/next.md is 45,000 bytes against its own 20,000 limit and still carries a second, older list of open items and prompts. Put every item that is still wanted on a card, drop the rest, and leave next.md with rules, tests and the push steps only.",
@@ -1033,7 +1033,7 @@
     "text": "Read claude/board2-plan.md section 6, claude/project-cleanup-plan.md and claude/handoff-rules.md, then make the board the only list of open work and cut claude/next.md down. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGYUPLZiib59SQWmGs",
+    "url": "https://claude.ai/code/session_01RXeukGYUPLZiib59SQWmGs",
     "opening": "not started"
    },
    "history": [
@@ -1052,13 +1052,16 @@
     {
      "d": "2026-11-20",
      "t": "Not shipped: the repo has no claude/ folder (next.md and the plans the prompt names live in the claude.ai Project), so they could not be read. Stuck until run in a session that has the Project files."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
-   "tag": "nextclean",
-   "waiting_on": "tom"
+   "changed": "2026-11-19",
+   "tag": "nextclean"
   },
   {
    "id": "c-takes-2337ed",
@@ -1718,7 +1721,7 @@
    "id": "c-note-pagessource",
    "tag": "note-pagessource",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Handle Tom's note on Switch GitHub Pages to publish from Actions (one setting)",
    "next": "You left a note when you finished \"Switch GitHub Pages to publish from Actions (one setting)\": Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.",
@@ -1732,7 +1735,7 @@
     "text": "Read claude/handoff-rules.md. Tom left a note on board card t-pagessource (Switch GitHub Pages to publish from Actions (one setting)) when he finished it: Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.. Read that card's history in data/board.json, work out what the note asks for, do it or rewrite this card for the next session, and tell Tom what you did. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDRniYMHoLuUHQYtgr",
     "opening": "not started"
    },
    "history": [
@@ -1743,12 +1746,15 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
-   "start": true
+   "changed": "2026-11-19"
   },
   {
    "id": "t-follow1play",
@@ -1978,6 +1984,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGYUPLZiib59SQWmGs",
+   "title": "Make the board the only list of open work (cut claude/next.md down)",
+   "first": "2026-11-20T02:16:25Z",
+   "last": "2026-11-20T02:16:25Z",
+   "tags": [],
+   "cards": [
+    "c-nextclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDSFVbmbuiGhUt1pZJ",
    "title": "Merge 13 new voice takes",
    "first": "2026-11-20T01:51:14Z",
@@ -2204,8 +2220,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "2fa8d8132196e42104585f4854384d1339a9a53d",
- "synced_at": "2026-11-20T02:15:27+00:00",
+ "synced": "9b4059abee0763babb80cb04ea56ec487f1119cc",
+ "synced_at": "2026-11-20T02:17:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
