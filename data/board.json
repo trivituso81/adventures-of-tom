@@ -8730,7 +8730,7 @@
    "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "ch1starving-sub",
    "auto": true,
    "next": "Waits on your new take of Tom's line (card t-ch1starving). Then it adds \"I'm starving!\" to the end of the line in the game (subtitle) and merges your take, so the game shows and plays the whole line.",
@@ -8765,6 +8765,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as ch1starving-sub: subtitle now ends \"I'm starving!\"; merged Tom's already-kept take (branch takes, 0ap) after checking by transcription that it says the whole line. Nothing for Tom: end."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch1starving-sub: Tom's line \"Thank you for telling me, Rose...\" now ends with \"I'm starving!\" on screen and in his voice"
     }
    ],
    "prompt": {
@@ -8776,7 +8780,8 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, docs/VOICE.md and docs/CHANGES.md sections fix-ch1starving-3 and takes1, then card c-ch1starving-sub in data/board.json with its history. Your first push is the commit board: start c-ch1starving-sub. In data/scenes.js (scene ch1, Tom's line \"Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.\") append \" I'm starving!\" to the subtitle, move the line's script entry in tools/voice-library/scripts/ch01-story-directions.json and tools/voice-library/retake.json to the new text, then merge Tom's newest kept take of that line from branch takes under the new text (the take whose script ends \"[hungry] I'm starving!\"; check with the transcription method of ch1retext1 that the clip says it). Merge only that take unless others match their current subtitles. Run python3 tools/script-index/build.py, python3 tools/clip-audit/unused_voice.py (0 for all four), node tools/voice-library/make-index.js, smoke, and push as ch1starving-sub with after nothing for Tom: end. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1starving-4",
@@ -9022,6 +9027,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "first": "2026-11-20T08:50:18Z",
+   "last": "2026-11-20T09:06:21Z",
+   "tags": [
+    "ch1starving-sub"
+   ],
+   "cards": [
+    "c-ch1starving-sub"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGkSQR8RWqB1nkDck",
    "title": "Clear the known-wrong list from the old next.md",
    "first": "2026-11-20T08:36:39Z",
@@ -9043,16 +9060,6 @@
    ],
    "cards": [
     "c-artgen2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
-   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
-   "first": "2026-11-20T08:50:18Z",
-   "last": "2026-11-20T08:50:18Z",
-   "tags": [],
-   "cards": [
-    "c-ch1starving-sub"
    ]
   },
   {
@@ -10048,8 +10055,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "e8267017e3ec28cdd9d67e675926cd1c2a243891",
- "synced_at": "2026-11-20T09:05:57+00:00",
+ "synced": "dc42db608cf507df107d6e8e4d9b90972b2aa78a",
+ "synced_at": "2026-11-20T09:07:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
