@@ -1143,7 +1143,7 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "next": "Shipped: claude/next.md now holds rules, tests and push steps only; every open item is a card (c-ch6left, c-stagefollow, c-alvarez, c-knownwrong, c-gatezero, t-gatezeroart, t-oldchecks) or was already one or is finished.",
@@ -1200,13 +1200,18 @@
     {
      "d": "2026-11-20",
      "t": "Shipped nextclean: next.md cut to rules and tests; open items moved onto cards."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as nextclean: the board is now the only list of open work; claude/next.md holds rules, tests and push steps only"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "tag": "nextclean",
-   "after": "nothing for Tom: c-ch6left"
+   "after": "nothing for Tom: c-ch6left",
+   "done": "2026-11-19"
   },
   {
    "id": "c-takes-2337ed",
@@ -7687,6 +7692,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFH1RcLVuFKu9uEo1Q",
+   "title": "Make the board the only list of open work (cut claude/next.md down)",
+   "first": "2026-11-20T07:45:10Z",
+   "last": "2026-11-20T07:47:10Z",
+   "tags": [
+    "nextclean"
+   ],
+   "cards": [
+    "c-nextclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-20T07:45:26Z",
@@ -7696,16 +7713,6 @@
    ],
    "cards": [
     "c-reports-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFH1RcLVuFKu9uEo1Q",
-   "title": "Make the board the only list of open work (cut claude/next.md down)",
-   "first": "2026-11-20T07:45:10Z",
-   "last": "2026-11-20T07:45:10Z",
-   "tags": [],
-   "cards": [
-    "c-nextclean"
    ]
   },
   {
@@ -8532,8 +8539,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "38732ceb4f02426c92cd904905efb4f11dc81bff",
- "synced_at": "2026-11-20T07:46:01+00:00",
+ "synced": "3e55178d3554e52846f6e9c3d1a20ee5d06b695d",
+ "synced_at": "2026-11-20T07:47:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
