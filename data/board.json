@@ -933,6 +933,316 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "tag": "nextclean"
+  },
+  {
+   "id": "c-rep-r-20261114-100352-7v5z",
+   "tag": "rep-r-20261114-100352-7v5z",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-100352-7v5z: For this line in particular, we need to",
+   "next": "Fix the backlog entry r-20261114-100352-7v5z from the REPORT tab (kind art). Note: For this line in particular, we need to create a special frame that can be used in both the dialog and in the screen where DD has glasses on her head",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-100352-7v5z from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-100555-mxvd",
+   "tag": "rep-r-20261114-100555-mxvd",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-100555-mxvd: We need new frames for this art because",
+   "next": "Fix the backlog entry r-20261114-100555-mxvd from the REPORT tab (kind art). Note: We need new frames for this art because it doesn't match the style of the game for the monster, I mean for the mud blob",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-100555-mxvd from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-100734-1a2w",
+   "tag": "rep-r-20261114-100734-1a2w",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-100734-1a2w: In this pose for Bapi, his mustache is",
+   "next": "Fix the backlog entry r-20261114-100734-1a2w from the REPORT tab (kind art). Note: In this pose for Bapi, his mustache is missing",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-100734-1a2w from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-101501-c5no",
+   "tag": "rep-r-20261114-101501-c5no",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-101501-c5no: We need poses in the game that are",
+   "next": "Fix the backlog entry r-20261114-101501-c5no from the REPORT tab (kind change). Note: We need poses in the game that are like when the character is thinking or examining something that another character is talking about, like in this scenario, but we need to find all the other scenarios like it, tag it, and then create the art and associate it with",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-101501-c5no from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-101538-nre4",
+   "tag": "rep-r-20261114-101538-nre4",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-101538-nre4: In addition to having separate images that maybe",
+   "next": "Fix the backlog entry r-20261114-101538-nre4 from the REPORT tab (kind art). Note: In addition to having separate images that maybe we will need for the grass and the light bulb and the cube, I feel like we need to create one image together because right now they all look very strange, like kind of overlap each other",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-101538-nre4 from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-104915-g4gl",
+   "tag": "rep-r-20261114-104915-g4gl",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-104915-g4gl: I think in chapter 2 we need a",
+   "next": "Fix the backlog entry r-20261114-104915-g4gl from the REPORT tab (kind art). Note: I think in chapter 2 we need a special animation frame for every single NPC who's in this like dazed state, where their eyes look super dazed and they have a dazed expression on their face",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-104915-g4gl from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-162358-jykk",
+   "tag": "rep-r-20261114-162358-jykk",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-162358-jykk: We need images of whenever a person finds",
+   "next": "Fix the backlog entry r-20261114-162358-jykk from the REPORT tab (kind art). Note: We need images of whenever a person finds a flashbulb, whether it's in chapters 124567 whenever we need a dedicated art frame generated for them that's them holding the lightbulb",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-162358-jykk from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-rep-r-20261114-182326-95v4",
+   "tag": "rep-r-20261114-182326-95v4",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix report r-20261114-182326-95v4: Iron Gil is overlapping the pier. He needs",
+   "next": "Fix the backlog entry r-20261114-182326-95v4 from the REPORT tab (kind bug). Note: Iron Gil is overlapping the pier. He needs to be purely on the water all the way to the right, and if some of the right side fence is cut off, then so be it, but you can't be overlapping with the pier at all",
+   "prompt": {
+    "what": "Fixes the report you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix report r-20261114-182326-95v4 from the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new report on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-takes-2337ed",
+   "tag": "takes-2026-11-19",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 13,
+   "title": "Merge 13 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
- ]
+ ],
+ "sessions": [],
+ "seen": {
+  "reports": [
+   "r-20261114-100352-7v5z",
+   "r-20261114-100555-mxvd",
+   "r-20261114-100734-1a2w",
+   "r-20261114-101501-c5no",
+   "r-20261114-101538-nre4",
+   "r-20261114-104915-g4gl",
+   "r-20261114-162358-jykk",
+   "r-20261114-182326-95v4"
+  ],
+  "takes": [
+   "takes/20261118T234857-q6s/part-001.json",
+   "takes/20261118T234857-q6s/part-002.json",
+   "takes/20261118T234857-q6s/part-003.json",
+   "takes/20261118T234857-q6s/part-004.json",
+   "takes/20261118T234857-q6s/part-005.json",
+   "takes/20261118T234857-q6s/part-006.json",
+   "takes/20261118T234857-q6s/part-007.json",
+   "takes/20261118T234857-q6s/part-008.json",
+   "takes/20261118T234857-q6s/state.json",
+   "takes/20261119T163929-ott/part-001.json",
+   "takes/20261119T163929-ott/state.json",
+   "takes/20261119T230940-0ap/part-001.json",
+   "takes/20261119T230940-0ap/state.json"
+  ]
+ },
+ "synced": "6ac15c7c844c93eaec5e1ecd79c7767bf546374b",
+ "synced_at": "2026-11-20T00:09:57+00:00"
 }
