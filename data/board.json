@@ -15658,10 +15658,10 @@
    "id": "c-reports-5",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-140459-spj4. First note: rose facing the wrong way",
+   "title": "Fix the report backlog (22 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-140459-spj4, r-20261120-140511-a306, r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx and 16 more. First note: rose facing the wrong way",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15709,13 +15709,24 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 22 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Which way should Rose face in the kitchen? is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Which way should Rose face in the kitchen?\": Toward Tom, who is talking"
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T19:42:40+00:00",
-   "waiting_on": "tom",
    "after": "t-welcomepage-play"
   },
   {
@@ -15804,7 +15815,8 @@
    },
    "after": "t-listen1-play",
    "auto": true,
-   "started_at": "2026-11-20T20:12:55+00:00"
+   "started_at": "2026-11-20T20:12:55+00:00",
+   "quiet": true
   },
   {
    "id": "c-wanplan",
@@ -16165,8 +16177,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 4,
-   "title": "Merge 4 new voice takes",
+   "count": 10,
+   "title": "Merge 10 new voice takes",
    "next": "Merged 2 takes (Tom Delta One line, Deedee flashbulb line) into dialog-ch1.js. Shipped as takes-2026-11-20.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -16206,6 +16218,10 @@
     {
      "d": "2026-11-20",
      "t": "2 more take file(s) arrived."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "6 more take file(s) arrived."
     }
    ],
    "blocks": [],
@@ -16937,7 +16953,7 @@
    "id": "c-fix-keysecrets2-try-2",
    "tag": "fix-keysecrets2-try-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -16959,7 +16975,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCf5dxEs5Zj4xH87pM",
     "opening": "Something is wrong on t-keysecrets2-try"
    },
    "history": [
@@ -16977,6 +16993,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T22:50:51.999Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -16990,7 +17010,7 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T22:51:02+00:00"
   }
  ],
  "sessions": [
@@ -19197,7 +19217,27 @@
    "r-20261120-093004-0rco",
    "r-20261120-113001-w756",
    "r-20261120-130739-tr1a",
-   "r-20261120-140459-spj4"
+   "r-20261120-140459-spj4",
+   "r-20261120-140511-a306",
+   "r-20261120-140805-mhzt",
+   "r-20261120-141016-j0za",
+   "r-20261120-141209-58bx",
+   "r-20261120-141557-u861",
+   "r-20261120-141613-rahl",
+   "r-20261120-141624-q81w",
+   "r-20261120-141633-eo4t",
+   "r-20261120-142553-3p2h",
+   "r-20261120-142626-w74f",
+   "r-20261120-143457-hz96",
+   "r-20261120-143926-d8oa",
+   "r-20261120-143952-847o",
+   "r-20261120-144429-z482",
+   "r-20261120-144444-gdez",
+   "r-20261120-144505-9uqg",
+   "r-20261120-144521-mv3p",
+   "r-20261120-144624-06ax",
+   "r-20261120-144644-77qd",
+   "r-20261120-144650-ae66"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -19220,11 +19260,17 @@
    "takes/20261120T211742-sz1/part-001.json",
    "takes/20261120T211742-sz1/state.json",
    "takes/20261120T213706-d43/part-001.json",
-   "takes/20261120T213706-d43/state.json"
+   "takes/20261120T213706-d43/state.json",
+   "takes/20261120T221155-pak/part-001.json",
+   "takes/20261120T221155-pak/state.json",
+   "takes/20261120T224102-yg8/part-001.json",
+   "takes/20261120T224102-yg8/state.json",
+   "takes/20261120T224602-cq5/part-001.json",
+   "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "3412eed7492a1e7d0bba3130788c972ab66c67b1",
- "synced_at": "2026-11-20T22:05:13+00:00",
+ "synced": "1501485d843bbb4fc7883923f1ec24ba22d1e09b",
+ "synced_at": "2026-11-20T22:51:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
