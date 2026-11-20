@@ -15740,7 +15740,7 @@
    "title": "Approve the WAN proof: make a fal.ai key (5 minutes)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "setup",
    "next": "Doing this card is your approval of the Grace guard video proof: 54 cents expected, never more than $2. 1. On fal.ai, sign in and add $10 of prepaid credit (the spend can never pass what you load). 2. On fal.ai, create an API key and copy it. 3. On GitHub, open the repo trivituso81/adventures-of-tom, then Settings, Secrets and variables, Actions, New repository secret. Name it FAL_KEY, paste the key, Add secret. 4. Tap I did this. Then the card Build the Grace guard video proof is ready: open it, Copy prompt, paste into a new conversation in the Project on Claude Opus 5.5, effort high. If you do not approve, tap Not needed and say why in the note. The plan, the prompt and the prices: claude/video-battle-plan.md.",
    "blocks": [
@@ -15756,8 +15756,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanplan. Tom (11-20 12:11): \"Do not spend money yet. Write the exact plan for a proof clip of Grace's guard (prompt, settings, cost) and how it gets into Battle Lab in portrait and landscape, then stop for my approval.\" The plan is claude/video-battle-plan.md section 4. Nothing is generated until this card is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this.",
+     "at": "2026-11-20T20:38:20.807Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-wanproof",
