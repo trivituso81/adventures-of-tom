@@ -8698,7 +8698,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukER5KXdV8sp6XLkaer",
+    "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
     "opening": "not started"
    },
    "history": [
@@ -8717,6 +8717,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8810,6 +8814,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "first": "2026-11-20T08:50:18Z",
+   "last": "2026-11-20T08:50:18Z",
+   "tags": [],
+   "cards": [
+    "c-ch1starving-sub"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
    "title": "QA for generated pictures, with the results on the card (artgen2)",
@@ -9795,8 +9809,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "c07e6e03b80438f291f4a057b9b6d8d6ec0ad2b1",
- "synced_at": "2026-11-20T08:49:38+00:00",
+ "synced": "912d2c98f2ab64f5d01b175c58ef4a3eeb7ccd67",
+ "synced_at": "2026-11-20T08:51:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
