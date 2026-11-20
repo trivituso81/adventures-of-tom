@@ -1,4 +1,4 @@
-# Chapter 1 close-up test (data/closeup-ch1.js): door frame, gold coin, Boppy's gold teeth, via the scene step {ch1Reveal:...}.
+# Chapter 1 close-up test (data/closeup-ch1.js): gold coin, Boppy's gold teeth, via the scene step {ch1Reveal:...}.
 # Plays each reveal inside a tiny scene in portrait 390 x 844, landscape 844 x 390 and Duo 951 x 648. Checks the reveal opens, the box is inside
 # the screen, A is ignored while it settles, A continues to the next line, no page errors. Shots: tools/shots/cu1-*.png.
 import threading, http.server, socketserver, functools, os
@@ -28,7 +28,7 @@ with sync_playwright() as pw:
             if pg.evaluate("()=>!intro.active&&!dialog.active&&!transition"): break
             pg.keyboard.press('Enter'); pg.wait_for_timeout(90)
         check(name+': op registered',pg.evaluate("()=>typeof SCENE_OPS.ch1Reveal==='function'"))
-        for which in ('doorframe','coin','grin'):
+        for which in ('coin','grin'):
             pg.evaluate("(w)=>{ SCENES.__t1=[{ch1Reveal:w},{talk:'Tom',lines:['After the picture.']}]; playScene('__t1'); }",which)
             ok=pg.wait_for_function("()=>closeup.active&&closeup.reveal&&!dialog.active",timeout=6000) is not None
             check(f'{name} {which}: reveal opens',ok); pg.wait_for_timeout(2000)

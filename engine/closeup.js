@@ -243,7 +243,7 @@ function closeupReveal(img,label,onDone,v,opts) {
   const el=closeup.el=cuEl('div','reveal',host); el.id='closeup'; el.hidden=false; closeup.reveal=true; closeup.def=null; closeup.hooks={};
   closeup.busy=true; closeup.active=true; closeup.done=onDone||null;
   const sun=cuEl('div','cu-sun',el), box=cuEl('div','cu-rev',el), spin=cuEl('div','cu-spin',box);
-  if(opts&&opts.still) box.classList.add('still');   // no spin or bob: a flat picture (a door frame) just fades in
+  if(opts&&opts.still) box.classList.add('still');   // no spin or bob: a flat picture (Boppy's teeth) just fades in
   const im=cuImg(img+(v?'?v='+v:'')); spin.appendChild(im);
   if(opts&&opts.snow) { const sn=cuEl('div','cu-snow',spin), q=opts.snow; Object.assign(sn.style,{left:((q.x-q.r)*100)+'%',top:((q.y-q.r)*100)+'%',width:(q.r*200)+'%',height:(q.r*200)+'%'});
     for(let i=0;i<(q.n||26);i++) { const f=cuEl('i','',sn), z=1.5+((i*7)%4)*.8; Object.assign(f.style,{left:((i*37)%97+1)+'%',width:z+'px',height:z+'px',animationDuration:(7+((i*5)%6))+'s',animationDelay:'-'+((i*1.7)%9).toFixed(1)+'s'}); f.style.setProperty('--dx',(((i*13)%9)-4)*3+'px'); } }

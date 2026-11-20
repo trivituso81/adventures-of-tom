@@ -40,6 +40,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 - Voice: ElevenLabs v4. Tom runs all voice baking himself, once all ability updates are done. Do not build voice bakers or ask him to bake mid-stream.
 - Loved: Rose's original Boop. Disliked: its replacement "Tiny Tap". Do not revive Tiny Tap.
 - What a Boop is (Tom, 2026-11-18): "a like sharp jab (not necessarily on the nose) with her finger." One jab, level, never aimed up at an adult's nose.
+- Chapter 1 plant (Tom, 2026-11-19 17:27): the plant for Tom's fear of missing the girls growing up is Grace's list of everything he missed, read aloud in Scene 1 (The Square). The kitchen door frame height-marks beat is cut everywhere: no close-up, no silent action, no art.
 
 ## Part 2, Chapter 11 (canon, 2026-10-28)
 - Terminal Infinity is the layover between Long Island and Los Angeles: always dusk, every flight ON TIME, every gate PAUSED. Gate 00 shows two glass domes, green for Long Island and orange for Los Angeles.

@@ -1,3 +1,12 @@
+## ch1nodoor (2026-11-19): Chapter 1: the kitchen door frame height-marks look is cut
+
+- Tom (11-19 17:27): "cut the door frame height-marks beat from chapter 1 everywhere. It is a silent look nobody reads, and Grace's 'everything you missed' list in Scene 1 already plants Tom's fear of missing the girls growing up." Card c-ch1nodoor (updates t-ch1play).
+- `SCENES.ch1Theft` (data/scenes.js): removed Tom's walk to the hall arch, the `{ch1Reveal:'doorframe'}` step and the wait before it; Tom now turns at the bang from where he stands (his walk back to the island was an empty route, so it is a turn). No spoken line pointed only at the door frame, so no line and no clip was removed.
+- Close-up: `doorframe` removed from `CH1_REVEAL` (data/closeup-ch1.js, tag `ch1b`); the coin and Boppy's teeth stay. `tools/closeup_ch1_test.py` and `tools/art-library/bake_closeup_ch1.py` no longer know the door frame.
+- Art Library: entry `ch1-doorframe` retired (data/art-prompts.json, tools/art-library/ch01-prompts.js). Deleted `art/closeup/ch1-doorframe.webp`, `art/raw/props/ch1-doorframe-v1.png` and `-v2.png`. The in-game report `r-20261114-145325-4sgz` (its prompt) was already closed on 11-14, nothing left in the inbox.
+- docs/CANON.md: chapter 1 plant is Grace's list of what Tom missed. docs/script-convos.tsv rows for ch1Theft (51 to 47) and ch1Amy (3 to 7) updated to the new step numbers; data/script-index.json rebuilt.
+- Tests: `closeup_ch1_test.py` ok (portrait, landscape, Duo); `cut_natural_test.py` (opening, Row, kitchen) FAILS: [] in portrait and landscape; frames looked at. `unused_voice.py` unchanged from main (check 4 still lists 93 old dialogue clips that were there before; none from this change).
+
 ## takes1 (2026-11-20): merged the 2 voice takes from branch takes that match the current script
 
 - Card c-takes-2337ed. Branch `takes` holds 3 sessions of takes (13 files). 28 kept takes were not in `data/merged-takes.json`.

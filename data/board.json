@@ -95,7 +95,7 @@
    "theme": "Story and Dialogue",
    "lane": "tom",
    "col": "done",
-   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, you walking over to the door frame before the close-up, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab. Heist (cutpolish4): the Mudling bursts in through the front door, the island is on screen when it grabs the pan, you, Grace and Rose land on open floor, Deedee and Boppy stay shocked through the grab. The three muffin plates still sit on the island after the theft until the empty-counter picture is installed.",
+   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab. Heist (cutpolish4): the Mudling bursts in through the front door, the island is on screen when it grabs the pan, you, Grace and Rose land on open floor, Deedee and Boppy stay shocked through the grab. The three muffin plates still sit on the island after the theft until the empty-counter picture is installed.",
    "blocks": [
     "c-ch2build"
    ],
@@ -129,6 +129,10 @@
     {
      "d": "2026-11-19",
      "t": "Marked done by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom, 17:27: cut the door frame height-marks beat from chapter 1; removed that check from this card (ch1nodoor)."
     }
    ],
    "done": "2026-11-19"
@@ -1534,7 +1538,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Cut the kitchen door frame height-marks beat from chapter 1 everywhere (scene step, close-up picture, Art Library entry, docs). Tom: \"cut the door frame height-marks beat from chapter 1 everywhere. It is a silent look nobody reads\".",
+   "next": "Cut the kitchen door frame height-marks beat from chapter 1 everywhere: scene step, close-up picture and Art Library entry ch1-doorframe, docs and canon. Chapter 1 played in portrait and landscape through the kitchen. Nothing for Tom.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -1547,6 +1551,10 @@
     {
      "d": "2026-11-19",
      "t": "New card. Tom, 17:27: cut the door frame height-marks beat from chapter 1 everywhere; Grace's \"everything you missed\" list already plants his fear of missing the girls growing up."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built ch1nodoor: scene step, close-up, Library entry, baked picture and raw art removed; docs and canon updated. No other open card existed only for the door frame picture."
     }
    ],
    "prompt": {
@@ -1557,7 +1565,8 @@
     "model": "Claude Sonnet 5.5 (row B: the steps are written, tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Remove the door frame height-marks beat from SCENES.ch1Theft, retire Art Library entry ch1-doorframe and its close-up files, update the docs and canon addendum, play chapter 1 in portrait and landscape, run smoke, tag_check, unused_voice and board_check, and push build ch1nodoor. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "b-board-convclosed",

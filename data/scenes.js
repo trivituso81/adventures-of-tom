@@ -179,13 +179,11 @@ SCENES.ch1Theft=[
   {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
   {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
-  {walk:'tom',to:routeTo('tom',12,6),speed:.25}, {face:'tom',dir:'up'}, {wait:.35},   // Tom walks over to the door frame under the hall arch before the close-up (cutpolish3; roofnpc2: it cut in cold)
-  {ch1Reveal:'doorframe'},   // Tom sets his bag down by the pantry door frame and looks at two new pencil marks (the close-up is the silent action)
-  {wait:.8},
+  {wait:.8},   // a beat after Boppy's story, then the bang (ch1nodoor: the door frame height-marks look is cut)
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
   {prop:'mudprints',kind:'mudprints',set:{map:'grands',x:8,y:11,t0:performance.now()}},   // three mud prints up the hall (8,11 to 8,13), they fade over 4 s (SPK.mudprints)
   // It comes in through the front door (roofnpc2, Gemini audit: it popped up right behind Tom): fades in on the doorway and oozes up the hall.
-  {all:[   // Tom turns from the door frame at the bang and walks back to the floor by the island while the mud ball oozes in (cutpolish3)
+  {all:[   // Tom turns at the bang while the mud ball oozes in (cutpolish3)
     {seq:[
       {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,15],dir:'up',fade:0}},   // cutpolish4: it bursts in on the door tile on its charge frame with the bang, not an ooze up the hall
       {pose:'Big Mudling',f:'mh_charge',dir:'left'},
@@ -195,7 +193,7 @@ SCENES.ch1Theft=[
       {sfx:'look'}, {wait:.5},
       {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
     ]},
-    {seq:[{wait:.3},{walk:'tom',to:routeTo('tom',9,9),speed:.2},{face:'tom',dir:'down'}]}
+    {seq:[{wait:.3},{face:'tom',dir:'down'}]}   // ch1nodoor: Tom is already on the floor by the island, he just turns at the bang
   ]},
   {cam:[6,9],time:.26},   // cutpolish4: a quick set-length pan so the island is on screen in portrait for the grab
   {all:[
