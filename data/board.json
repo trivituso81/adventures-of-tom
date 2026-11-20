@@ -1556,7 +1556,7 @@
    "title": "Cutscenes: a {face} turn holds, the automatic staging no longer spins people the wrong way (facehold1)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Fix the engine so a turn set by the scene holds until that person walks, and add a facing check to the cutscene test.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -1569,6 +1569,10 @@
     {
      "d": "2026-11-19",
      "t": "New card. Tom: \"Tom faces the wrong way ... this is a persistent issue in cut scenes\" (amywin1, Tom turned to Grace during Amy's lines)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as facehold1: Cutscenes: when a scene turns someone, they stay turned; Tom faces Amy's window on Rivituso Row"
     }
    ],
    "tag": "facehold1",
@@ -1581,7 +1585,8 @@
     "model": "Claude Sonnet 5.5 (row C: the cause has to be found)",
     "effort": "high (unknown cause)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md facehold1, then finish the card c-facehold1 if it is not shipped. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "b-board-nodonecol",
@@ -1667,6 +1672,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
+   "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
+   "first": "2026-11-19T17:02:34-08:00",
+   "last": "2026-11-19T17:45:08-08:00",
+   "tags": [
+    "amywin1",
+    "facehold1"
+   ],
+   "cards": [
+    "c-amywin1",
+    "c-facehold1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "first": "2026-11-19T16:34:00-08:00",
@@ -1679,19 +1698,6 @@
    "cards": [
     "c-board3",
     "t-startsetup"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
-   "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
-   "first": "2026-11-19T17:02:34-08:00",
-   "last": "2026-11-19T17:40:30-08:00",
-   "tags": [
-    "amywin1"
-   ],
-   "cards": [
-    "c-amywin1",
-    "c-facehold1"
    ]
   },
   {
@@ -1800,8 +1806,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "f838771946be96e0f4b95b2e2d9eec91237d0ed6",
- "synced_at": "2026-11-20T01:44:34+00:00",
+ "synced": "49efbc28754d60ea929913f9ec6128e5e1cff39d",
+ "synced_at": "2026-11-20T01:46:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
