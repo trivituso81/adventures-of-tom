@@ -8255,7 +8255,7 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Not installed: the two pictures made do not match the plate. Waits on new pictures that keep the painting exactly and put the plane in the same place.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -8300,6 +8300,11 @@
     {
      "d": "2026-11-20",
      "t": "Stuck twice: The rescue started 7:26 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-gatezero)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again after Stuck twice.",
+     "at": "2026-11-20T17:42:23.313Z"
     }
    ],
    "prompt": {
@@ -8312,15 +8317,8 @@
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
    "tag": "gatezero",
-   "rescue": {
-    "at": "2026-11-20T15:26:24+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukFJM32kdS8NhdQvMYp",
-    "prev": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs"
-   },
    "started_at": "2026-11-20T15:26:24+00:00",
-   "waiting_on": "tom"
+   "start": true
   },
   {
    "id": "t-gatezeroart",
@@ -13306,7 +13304,7 @@
   {
    "id": "t-stuck-gatezero",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Areas",
    "ask": "unstick",
    "unstick": {
@@ -13326,10 +13324,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: card c-gatezero stalled after its rescue"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again.",
+     "at": "2026-11-20T17:42:23.313Z"
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-welcomepage",
