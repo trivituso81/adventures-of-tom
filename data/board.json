@@ -1106,7 +1106,7 @@
   {
    "id": "c-starttest",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "starttest",
    "auto": true,
@@ -1157,8 +1157,13 @@
     {
      "d": "2026-11-20",
      "t": "Check 3 PASSED: the board job reached the task; this conversation is the proof."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as starttest: First conversation started by the START button: it could push to main, it could not read the Project's claude/ docs"
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-amywin1",
@@ -1340,7 +1345,11 @@
      "d": "2026-11-20",
      "t": "Created by c-starttest check 1 (claude/ docs not readable from a START run)."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
+    "opening": "unknown"
+   }
   }
  ],
  "sessions": [
@@ -1348,10 +1357,13 @@
    "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
    "title": "Test START on one real card (starttest)",
    "first": "2026-11-20T01:28:08Z",
-   "last": "2026-11-20T01:28:08Z",
-   "tags": [],
+   "last": "2026-11-20T01:30:12Z",
+   "tags": [
+    "starttest"
+   ],
    "cards": [
-    "c-starttest"
+    "c-starttest",
+    "c-copydocs"
    ]
   },
   {
@@ -1473,8 +1485,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "7112f96c721f42f66a7e8c28928a60d97ad98d12",
- "synced_at": "2026-11-20T01:28:53+00:00",
+ "synced": "065691c0f0c50f416f985469e3d57d34d8cf7bae",
+ "synced_at": "2026-11-20T01:31:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
