@@ -11036,7 +11036,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEEvdnM3Hcz8aCVazR",
+    "url": "https://claude.ai/code/session_01RXeukEEvdnM3Hcz8aCVazR",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -11052,6 +11052,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-bug05",
@@ -11242,7 +11246,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEUtm8s5CiPeYfvujL",
+    "url": "https://claude.ai/code/session_01RXeukEUtm8s5CiPeYfvujL",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -11258,6 +11262,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-bug10",
@@ -12127,6 +12135,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEEvdnM3Hcz8aCVazR",
+   "title": "Fix: blank portraits in chapter select, battle and dialogue",
+   "first": "2026-11-20T16:22:24Z",
+   "last": "2026-11-20T16:22:24Z",
+   "tags": [],
+   "cards": [
+    "c-gem-bug05"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEUtm8s5CiPeYfvujL",
+   "title": "Fix: cut-off text and stray bars on battle and map screens",
+   "first": "2026-11-20T16:22:18Z",
+   "last": "2026-11-20T16:22:18Z",
+   "tags": [],
+   "cards": [
+    "c-gem-bug10"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEGWt235mq62dLSfWX",
    "title": "Fix: AUTO resets to ON and a tap skips unfinished text",
@@ -13506,8 +13534,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a80aa362aff62c06f910385dd870f31904d697a8",
- "synced_at": "2026-11-20T16:21:44+00:00",
+ "synced": "85340198e745dbe739b3dc2206a05a4e83ecabf5",
+ "synced_at": "2026-11-20T16:23:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
