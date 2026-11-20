@@ -6583,8 +6583,7 @@
    "title": "Generate and approve the new Mudling sheet (six poses with the muffin pan)",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "pictures",
    "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Make it either way: tap Generate all on this card (the board makes it for you, about two minutes, then tap Review them in the Art Library), or press GENERATE in the Library yourself. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
    "blocks": [
@@ -6605,6 +6604,10 @@
     {
      "d": "2026-11-20",
      "t": "artgen1: this card now has the Generate all button (about $0.06)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ]
   },
@@ -6646,12 +6649,12 @@
    "title": "Look at the six fixed report pictures on your phone",
    "theme": "Characters",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build reports-2026-11-19c: RELOAD on the title, then load a chapter 1 save. 1) Grump Hollow, the fishing spot at the pond: the grey grass, orange block and burnt bulb should be ONE picture, not three overlapping ones. 2) Deedee's house, press A on Deedee for her glasses chat: she should stand with the glasses on her head and the dialogue face should show them too. 3) Play on into chapter 2 and walk Old Oak Park while the smog is on: Mr. Washington, Marisol and Larry should stand dazed. Report with the REPORT tab if any of these look wrong (reports-2026-11-19c is the build to name).",
    "blocks": [],
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-19",
    "chat": {
     "url": "",
@@ -6661,9 +6664,12 @@
     {
      "d": "2026-11-19",
      "t": "Added by reports-2026-11-19c: your phone check of the six installed report pictures; blocks nothing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-ch1starving",
@@ -7233,8 +7239,7 @@
   {
    "id": "t-artgen1try",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Tools",
    "ask": "pictures",
    "title": "Try Generate all on the new Mudling sheet card",
@@ -7252,6 +7257,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-artgen1 (artgen1 shipped). It waits until the Mudling sheet card (t-heistart) is open for you, because that card waits on its Claude card first."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ],
    "links": [
@@ -7463,7 +7472,9 @@
    "waiting_on": "claude",
    "tag": "boardux3",
    "next": "Waits on Board redesign 2 (c-boardux2). Then the board becomes four views with the same names at every screen size (For you, Claude, Chats, Shipped), with a tab bar on the phone, two columns clear of the fold on the open Duo, search, and Shipped grouped by day. After it ships you try the whole redesign once (card t-boarduxtry).",
-   "blocks": [],
+   "blocks": [
+    "t-boarduxtry"
+   ],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
@@ -7508,6 +7519,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). One test after all three redesign builds (Tom, 2026-11-18: build to a milestone before he tests)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "boardwait1: c-boardux3 now lists this card as blocked, so it leaves Waiting by itself when Board redesign 3 ships."
     }
    ]
   },
@@ -7844,7 +7859,7 @@
    "title": "Voices: record the old voice gaps",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "ask": "voice",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude.",
@@ -7867,6 +7882,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: I don't wanna deal with any bugs past chapter 1 right now Sent to Claude as card c-fix-oldchecks-voice; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1: these are chapter 2 lines (Mr. Washington, Narrator). Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
     }
    ],
    "links": [
@@ -7878,14 +7897,14 @@
      "label": "No clip yet"
     }
    ],
-   "waiting_on": "claude"
+   "done": "2026-11-20"
   },
   {
    "id": "t-oldchecks-chapters",
    "title": "Chapters 2, 6 and 7: play them",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open the game, Chapter Select, and play chapters 2, 6 and 7. Chapter 7 and chapter 8 art is made in the Art Library groups Chapter 7 and Chapter 8 (press GENERATE, then APPROVE on each picture).",
@@ -7900,6 +7919,10 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1: chapters 2, 6 and 7 are past chapter 1. Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
     }
    ],
    "links": [
@@ -7918,14 +7941,14 @@
      "label": "chapter 7 and 8 art to make"
     }
    ],
-   "waiting_on": "tom"
+   "done": "2026-11-20"
   },
   {
    "id": "t-oldchecks-script",
    "title": "Script Editor: conversations, Workshop, Paste back",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "script",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Script Editor and try the conversations list, Workshop and Paste back. Look for anything that does not open or save.",
@@ -7940,16 +7963,19 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "t-oldchecks-blocks",
    "title": "Orange blocks: replay the family lines",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game, press A on an orange block that was left behind. You should see the family's lines replay.",
@@ -7964,16 +7990,19 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "t-oldchecks-pencil",
    "title": "Pencil tab: send a test report",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game tap the pencil tab, type a note, tap the picture to drop a pin, press SEND. You should see Report sent.",
@@ -7988,16 +8017,19 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "t-oldchecks-boppy",
    "title": "Art to make: Young Boppy Van Cortlandt '70",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "pictures",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Art Library, find the entry Young Boppy Van Cortlandt '70 (boppy-young-hero), press Generate, then Approve or Reject.",
@@ -8012,6 +8044,10 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ],
    "links": [
@@ -8022,8 +8058,7 @@
      ],
      "label": "Young Boppy Van Cortlandt '70"
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "t-cutpolish5",
@@ -8068,8 +8103,7 @@
   {
    "id": "t-cardlinks1try",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -8085,6 +8119,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-cardlinks1 (build cardlinks1)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ],
    "links": [
@@ -8266,7 +8304,7 @@
    "id": "c-fix-oldchecks-voice",
    "tag": "fix-oldchecks-voice",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix what you found on: Voices: record the old voice gaps",
@@ -8299,6 +8337,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom reported on t-oldchecks-voice: I don't wanna deal with any bugs past chapter 1 right now"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1: nothing to fix; the card it was for is retired. Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
     }
    ],
    "prompt": {
@@ -8310,7 +8352,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks-voice and t-oldchecks-voice in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks-voice.\n\nTom tested and found problems:\n1. Card t-oldchecks-voice (Voices: record the old voice gaps, ask voice). He was asked: Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude. He wrote: I don't wanna deal with any bugs past chapter 1 right now\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:09.380Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks-voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks-voice, and give the build fix-oldchecks-voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-oldchecks-voice"
+   "after": "t-oldchecks-voice",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-cutpolish5",
@@ -8387,7 +8430,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "boardwait1",
-   "next": "Find why Tom cards sit in Waiting saying waiting on Claude when the Claude work already shipped, fix the board-sync job so it cannot happen again, and clean up the cards stuck today.",
+   "next": "Built (boardwait1): the board-sync job now opens a Tom card that sits in Waiting with nothing blocking it. 8 stuck cards opened, 3 retired (chapter 2 and later, per Tom), t-boarduxtry now names its real blocker (c-boardux3).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -8403,6 +8446,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Cause: a Tom card leaves Waiting only when a card that lists it in blocks is Done. Cards made \"after\" a build (t-heistart, t-reportcheck, t-cardlinks1try, t-artgen1try) and the six old-checks cards were never listed by anyone, so they sat in Waiting labelled waiting on Claude forever. Fixed in tools/board_sync.py (R1) with a test."
     }
    ],
    "prompt": {
@@ -8413,7 +8460,8 @@
     "model": "Claude Sonnet 5.5 (row C: a fix whose cause the session works out)",
     "effort": "medium (small fix in one file)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardwait1 in data/board.json. Your first push is the commit board: start c-boardwait1. Fix tools/board_sync.py so a Tom card in Waiting that no card blocks moves to Up next, add a test to tools/board_sync_test.py, clean up the stuck cards, and push as boardwait1. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-fix-clipposes",

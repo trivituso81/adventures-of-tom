@@ -1,3 +1,9 @@
+## boardwait1 (2026-11-20): Your cards no longer sit in Waiting when nothing is left to wait on
+
+- Card c-boardwait1. Tom (11-20 00:22): "Why are there so many cards assigned to me but in the waiting column and it says waiting on Claude at the bottom of each one?"
+- Cause: board-sync rule R1 moved a Waiting card to Up next only when a card listing it in `blocks` was Done. Tom cards made as the `after` of a build (t-heistart, t-reportcheck, t-cardlinks1try, t-artgen1try) and the six old-checks cards were listed by no card, so nothing ever released them. Fix: R1 now opens a Tom card in Waiting that no card blocks (Claude cards are left alone). Test added to `tools/board_sync_test.py`.
+- Board: c-boardux3 now lists t-boarduxtry in `blocks` (it really waits on Board redesign 3). Retired, per Tom (11-20, "I don't wanna deal with any bugs past chapter 1 right now"): t-oldchecks-voice, its fix card c-fix-oldchecks-voice, and t-oldchecks-chapters. Still waiting, correctly: t-ch1starving (its fix, c-fix-ch1starving-3), t-clipposes (c-fix-clipposes), t-boarduxtry (c-boardux3).
+
 ## fix-oldchecks (2026-11-20): The old phone checks are six separate cards, one per item
 
 - Card c-fix-oldchecks, for t-oldchecks. Tom (11-20): "Break this out into one card per item that you've listed in". t-oldchecks held six checks in one text; it is retired and replaced by t-oldchecks-voice, -chapters, -script, -blocks, -pencil and -boppy, each with its own ask, exact steps and Library link where it names one. All are optional (fyi).

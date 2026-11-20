@@ -229,6 +229,16 @@ open('/tmp/board_fix.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_fix.json'], capture_output=True, text=True)
 check('board4: board_check accepts a Tom card waiting on its fix (not fyi, blocks nothing)', r.returncode == 0, r.stdout[-300:])
 
+# --- boardwait1: a Tom card in Waiting that nothing blocks is opened; one with an open blocker, or a Claude card, stays
+b = {'cards': [dict(id='t-orphan', lane='tom', col='wait', waiting_on='claude', ask='play', theme='Tools', title='Try it', next='n', changed='2026-11-19', blocks=[], fyi=True),
+               dict(id='t-held', lane='tom', col='wait', waiting_on='claude', ask='play', theme='Tools', title='Held', next='n', changed='2026-11-19', blocks=[], fyi=True),
+               dict(id='c-open', tag='openb', lane='claude', col='up', theme='Tools', title='Open build', next='n', changed='2026-11-19', blocks=['t-held']),
+               dict(id='c-svc', tag='svcb', lane='claude', col='wait', waiting_on='claude', theme='Tools', title='Service fix', next='n', changed='2026-11-19', blocks=[])], 'lanes': [], 'sessions': []}
+bs.sync(b, [], None, None, None, NOW)
+check('boardwait1: a Tom card in Waiting with no blocker moves to Up next', card(b, 't-orphan')['col'] == 'up' and 'waiting_on' not in card(b, 't-orphan') and 'nothing was left' in card(b, 't-orphan')['history'][-1]['t'])
+check('boardwait1: a Tom card with an open blocker still waits', card(b, 't-held')['col'] == 'wait')
+check('boardwait1: a Claude card in Waiting with no blocker is left alone', card(b, 'c-svc')['col'] == 'wait')
+
 # --- board_check board3 rules
 def chk(mut, want, label):
     d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); mut(d)

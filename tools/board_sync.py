@@ -201,7 +201,14 @@ def r1_unblock(B):
         for c in B.cards:
             if c['col'] != 'wait': continue
             blockers = [k for k in B.cards if c['id'] in k.get('blocks', [])]
-            if not blockers or any(k['col'] != 'done' for k in blockers): continue
+            if not blockers:
+                # boardwait1: a Tom card in Waiting that no card blocks has nothing to wait for (it was made "after" a build
+                # that has shipped, or its blocker was never listed), so it would sit in Waiting forever. Open it.
+                if c.get('lane') == 'tom':
+                    c['col'] = 'up'; c.pop('waiting_on', None)
+                    B.hist(c, 'Unblocked: nothing was left for it to wait on.'); B.say('unblocked %s (no blocker)' % c['id']); moved = True
+                continue
+            if any(k['col'] != 'done' for k in blockers): continue
             c['col'] = 'up'; c.pop('waiting_on', None)
             B.hist(c, 'Unblocked: %s is done.' % ', '.join(k['title'] for k in blockers))
             for k in blockers:
