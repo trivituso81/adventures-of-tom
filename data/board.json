@@ -13395,7 +13395,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference.",
@@ -13432,8 +13432,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: for example when Deedee greets tom and says my favorite son, she vibrates violently Sent to Claude as card c-fix-effectslook-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T18:53:25.033Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-startmore",
@@ -15056,6 +15062,65 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-fix-effectslook-3",
+   "tag": "fix-effectslook-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Look at the Effects page in Admin",
+   "next": "You reported a problem on Look at the Effects page in Admin. Claude starts the fix by itself. Latest: for example when Deedee greets tom and says my favorite son, she vibrates violently",
+   "blocks": [
+    "t-effectslook"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T18:53:24.548Z",
+     "card": "t-effectslook",
+     "title": "Look at the Effects page in Admin",
+     "ask": "play",
+     "words": "for example when Deedee greets tom and says my favorite son, she vibrates violently",
+     "shot": "",
+     "asked": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-effectslook"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-effectslook.",
+     "at": "2026-11-20T18:53:25.033Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-effectslook: for example when Deedee greets tom and says my favorite son, she vibrates violently",
+     "at": "2026-11-20T18:53:25.033Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T18:53:25.033Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the Effects page in Admin.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-effectslook-3 and t-effectslook in data/board.json, history included. Your first push is the commit board: start c-fix-effectslook-3.\n\nTom tested and found problems:\n1. Card t-effectslook (Look at the Effects page in Admin, ask play). He was asked: Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference. He wrote: for example when Deedee greets tom and says my favorite son, she vibrates violently\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T18:53:24.548Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-effectslook to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-effectslook, and give the build fix-effectslook-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-effectslook",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
