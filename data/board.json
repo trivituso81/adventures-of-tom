@@ -845,7 +845,7 @@
   {
    "id": "c-ch1art2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "Fix the four chapter 1 pictures you rejected, from your notes",
    "next": "Rewrite the prompts of ch1-grace-list, ch1-amy-window, ch1-ellie-door and ch1-cab-pulls-away from your reject notes by the smallest change, set them back to draft, and say which chapter 1 entries still have no decision (Mudling with muffins, green Big One with pan, Rose on shoulders had none on 11-19).",
@@ -859,13 +859,17 @@
     "text": "In data/art-prompts.json, group Chapter 1, four picture entries are rejected with my notes: ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away. Fix each prompt from its note by the smallest change, set the entry back to draft, and tell me which Chapter 1 picture entries still have no decision. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukEuuRRV3wp1jnp5CTq",
+    "opening": "\"In data/art-prompts.json, group Chapter 1, four picture entries are rejected\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Added by the board audit from your Art Library rejects of 11-19."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started in a conversation on Claude Opus 5.5."
     }
    ],
    "blocks": [],
