@@ -8321,6 +8321,37 @@
    "after": "t-cutpolish5",
    "auto": true,
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-boardwait1",
+   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "boardwait1",
+   "next": "Find why Tom cards sit in Waiting saying waiting on Claude when the Claude work already shipped, fix the board-sync job so it cannot happen again, and clean up the cards stuck today.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Why are there so many cards assigned to me but in the waiting column\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (00:22): \"Why are there so many cards assigned to me but in the waiting column and it says waiting on Claude at the bottom of each one? Can you investigate each one and see what's going on and resolve as needed?\""
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the board-sync job so a Tom card with nothing blocking it leaves Waiting, and cleans up the stuck cards.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix whose cause the session works out)",
+    "effort": "medium (small fix in one file)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardwait1 in data/board.json. Your first push is the commit board: start c-boardwait1. Fix tools/board_sync.py so a Tom card in Waiting that no card blocks moves to Up next, add a test to tools/board_sync_test.py, clean up the stuck cards, and push as boardwait1. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
