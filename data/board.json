@@ -12803,7 +12803,7 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "tag": "b3s12",
    "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
    "blocks": [],
@@ -12835,6 +12835,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stuck twice: The rescue started 1:18 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s12)."
     }
    ],
    "prompt": {
@@ -12857,7 +12861,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukFxcAPTykx1Dr76QGY",
     "prev": "https://claude.ai/code/cse_01RXeukEEScGq648BRA7rGuk"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "t-gem-canon01play",
@@ -15661,7 +15666,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (4 open)",
-   "next": "Parts b and c shipped. 4 reports stay open because they need new pictures: r-20261120-140805-mhzt (graphic), r-20261120-141016-j0za and r-20261120-141209-58bx (Grump Hollow muffin wrapper trail and monster positions) and r-20261120-142626-w74f (item banner art). They are on cards c-hollowtrail1 and c-itembannerart1; a backlog session should skip them.",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx, r-20261120-142626-w74f. First note: should be nine muffin wrappers not papers. also this graphic looks terrible - im starting to think w",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -17229,6 +17234,34 @@
      "t": "Added by c-reports-5: the reports named here need new pictures, so the backlog sessions left them open."
     }
    ]
+  },
+  {
+   "id": "t-stuck-b3s12",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle System",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-b3s12",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Battle system stage 12: bestiary chapters 5 to",
+   "next": "Card c-b3s12 (Battle system stage 12: bestiary chapters 5 to 7 and bosses) stalled again after its one automatic rescue. The rescue started 1:18 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-b3s12"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: card c-b3s12 stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -17894,12 +17927,17 @@
   },
   {
    "url": "https://claude.ai/code/session_01RXeukEqDeTjHXNr6y3HmJR",
-   "title": "Fix the report backlog (22 open)",
+   "title": "Fix the report backlog (4 open)",
    "first": "2026-11-20T14:56:02-08:00",
-   "last": "2026-11-20T14:56:02-08:00",
-   "tags": [],
+   "last": "2026-11-20T15:19:34-08:00",
+   "tags": [
+    "reports-2026-11-20c"
+   ],
    "cards": [
-    "c-reports-5"
+    "c-reports-5",
+    "c-reports-2",
+    "c-reports-3",
+    "c-reports-4"
    ]
   },
   {
@@ -19536,8 +19574,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "3caa9c9d565a7407b31a109e76687061836032eb",
- "synced_at": "2026-11-20T23:12:44+00:00",
+ "synced": "953806ea4e12f43238bd2b44a9173b30c6973154",
+ "synced_at": "2026-11-20T23:20:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
