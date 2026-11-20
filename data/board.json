@@ -10777,7 +10777,6 @@
    },
    "after": "t-heist1voice",
    "started_at": "2026-11-20T18:00:30+00:00",
-   "quiet": false,
    "backlog": {
     "at": "2026-11-20",
     "from": "prog"
@@ -12362,7 +12361,7 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Waiting on Tom: answer the card Decide how far to cut Rhubarb Crisp. Then run the prompt as written, scoped to his answer.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -12404,6 +12403,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stuck twice: The rescue started 11:12 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-gem-pillar-rhubarb)."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12424,7 +12427,8 @@
     "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
     "prev": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf"
    },
-   "after": "t-rhubarb-scope"
+   "after": "t-rhubarb-scope",
+   "waiting_on": "tom"
   },
   {
    "id": "c-gem-pillar-pep",
@@ -13197,6 +13201,10 @@
     {
      "d": "2026-11-20",
      "t": "projclean1a and 1b shipped from a conversation inside the Project: 205 docs copied, 174 deleted from the Project. Stopped at a safe point because the conversation got long; card stays In progress."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1c: progress written on card c-projclean, tools/claude_index.py added"
     }
    ],
    "chat": {
@@ -16003,6 +16011,34 @@
      "t": "Added with c-reporttype1 (build reporttype1)."
     }
    ]
+  },
+  {
+   "id": "t-stuck-gem-pillar-rhubarb",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-gem-pillar-rhubarb",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Purge Rhubarb Crisp from the game everywhere",
+   "next": "Card c-gem-pillar-rhubarb (Purge Rhubarb Crisp from the game everywhere) stalled again after its one automatic rescue. The rescue started 11:12 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-gem-pillar-rhubarb"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: card c-gem-pillar-rhubarb stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -16550,13 +16586,15 @@
    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T13:12:43-08:00",
+   "last": "2026-11-20T13:15:52-08:00",
    "tags": [
     "projclean1a",
-    "projclean1b"
+    "projclean1b",
+    "projclean1c"
    ],
    "cards": [
-    "c-projclean"
+    "c-projclean",
+    "c-fix-heist1voice"
    ]
   },
   {
@@ -18124,8 +18162,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "8c010eb70db7919267e3f2f7babffec80a847a3a",
- "synced_at": "2026-11-20T21:13:21+00:00",
+ "synced": "9701a4321763d7e5a5bd6c7f5b80a27c42b05a4b",
+ "synced_at": "2026-11-20T21:16:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
