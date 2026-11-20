@@ -6441,6 +6441,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-heist, part A of claude/heist-redo-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -6451,7 +6455,8 @@
     "model": "Claude Sonnet 5.5 (row B: the cause, the fix and the entry's prompt are written in claude/heist-redo-plan.md, a test and frames catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then build part A (section 6) and push it as heistart. Your first push is the commit board: start c-heistart. Change nothing else in the scene. Keep card t-heistart as the after of c-heistart and rewrite its next if the entry's place in the Art Library differs. You have my full permission to access the repo."
-   }
+   },
+   "start": true
   },
   {
    "id": "t-heistart",
