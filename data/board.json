@@ -7725,6 +7725,10 @@
     {
      "d": "2026-11-20",
      "t": "Moved off claude/next.md onto the board by c-nextclean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -7736,7 +7740,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
-   "tag": "gatezero"
+   "tag": "gatezero",
+   "start": true
   },
   {
    "id": "t-gatezeroart",
