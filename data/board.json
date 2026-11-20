@@ -5379,7 +5379,7 @@
    "id": "c-fix-cutpolish4b",
    "tag": "fix-cutpolish4b",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -5401,7 +5401,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGwuHP7eMa98YuUjg7",
     "opening": "Something is wrong on t-cutpolish4b"
    },
    "history": [
@@ -5416,6 +5416,10 @@
     {
      "d": "2026-11-19",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -5428,8 +5432,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Screenshot: board-shots/t-cutpolish4b-mwod2g2m.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwod2g2m.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:29:43.804Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true,
-   "start": true
+   "auto": true
   },
   {
    "id": "c-skillinfo1",
@@ -5555,6 +5558,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFjXctvj2WWfPf3LUf",
+   "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
+   "first": "2026-11-19T18:30:16-08:00",
+   "last": "2026-11-19T18:30:16-08:00",
+   "tags": [],
+   "cards": [
+    "c-skillinfo1"
    ]
   },
   {
@@ -5963,8 +5976,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "6abc0e3b263abf6223bde790d55da1068f262fb9",
- "synced_at": "2026-11-20T02:28:11+00:00",
+ "synced": "a9a732139bc9ff0e94a6215b44da480236f2a69c",
+ "synced_at": "2026-11-20T02:30:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
