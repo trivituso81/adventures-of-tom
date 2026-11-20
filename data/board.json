@@ -12799,7 +12799,7 @@
    "id": "c-idea-reviewwhatever",
    "tag": "idea-reviewwhatever",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
    "next": "Built and pushed as build idea-reviewwhatever: ADMIN > Effects. Waiting only for Tom to look.",
@@ -12840,6 +12840,10 @@
     {
      "d": "2026-11-20",
      "t": "Built effects.html (15 effects, triggers, live preview) and shared the squash and hop maths in engine/life-math.js. Nothing in the game changed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-reviewwhatever: Admin has an Effects page: every effect on people in the overworld, what sets it off, and a preview"
     }
    ],
    "prompt": {
@@ -12853,7 +12857,8 @@
    },
    "auto": true,
    "started_at": "2026-11-20T17:12:12+00:00",
-   "after": "t-effectslook"
+   "after": "t-effectslook",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-skippingcut",
@@ -12965,8 +12970,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -12988,6 +12993,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
@@ -13074,7 +13083,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDQX4RSnRr3Nh858L3",
+    "url": "https://claude.ai/code/session_01RXeukDQX4RSnRr3Nh858L3",
     "opening": "Something is wrong on t-heist1play"
    },
    "history": [
@@ -13096,6 +13105,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13133,6 +13146,28 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDQX4RSnRr3Nh858L3",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T17:20:45Z",
+   "last": "2026-11-20T17:20:45Z",
+   "tags": [],
+   "cards": [
+    "c-fix-heist1play-4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
+   "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
+   "first": "2026-11-20T17:13:10Z",
+   "last": "2026-11-20T17:20:18Z",
+   "tags": [
+    "idea-reviewwhatever"
+   ],
+   "cards": [
+    "c-idea-reviewwhatever"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHFSEVSn8L6ETAbMyy",
    "title": "Listening and thinking poses for chapter 1 conversations",
    "first": "2026-11-20T17:18:58Z",
@@ -13164,16 +13199,6 @@
    ],
    "cards": [
     "c-fix-gem-canon01play"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
-   "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
-   "first": "2026-11-20T17:13:10Z",
-   "last": "2026-11-20T17:13:10Z",
-   "tags": [],
-   "cards": [
-    "c-idea-reviewwhatever"
    ]
   },
   {
@@ -14740,7 +14765,8 @@
    "r-20261120-001019-feou",
    "r-20261120-001100-lta1",
    "r-20261120-091238-jecm",
-   "r-20261120-091310-jqps"
+   "r-20261120-091310-jqps",
+   "r-20261120-091936-yxqb"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -14762,8 +14788,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "079ee08837abc4d899e901f12ddb7507611fc2fe",
- "synced_at": "2026-11-20T17:20:05+00:00",
+ "synced": "565956cdb0c96feebbebf785122f1d52af18e83d",
+ "synced_at": "2026-11-20T17:20:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
