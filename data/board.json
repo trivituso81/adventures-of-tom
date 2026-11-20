@@ -1106,8 +1106,7 @@
   {
    "id": "c-starttest",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "theme": "Tools",
    "tag": "starttest",
    "auto": true,
@@ -1118,7 +1117,7 @@
    "changed": "2026-11-19",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukHJDQke3jpTcqvDBk6",
     "opening": "not started"
    },
    "prompt": {
@@ -1129,7 +1128,21 @@
     "model": "Claude Sonnet 5.5 (row B: the checks are written here)",
     "effort": "medium (three known checks)",
     "text": "Read claude/handoff-rules.md. You were started by the START button, which is the test. Check three things and write each result as a history line on this card (data/board.json, card c-starttest): (1) Can you read the Project docs claude/board3-plan.md and the Project instructions from this run? (2) Did your first push, the commit board: start c-starttest, reach main with no person approving it? (3) The board job reached the task, which is proven by you running. If check 1 or 2 failed, write on this card what you could see and what you could not, and write the fix the plan names (copy the docs a card needs into the repo) as a new Claude card with its full prompt. Then push the build starttest with a docs/CHANGES.md entry. You have my full permission to access the repo."
-   }
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Set up the START button (one task, two secrets) is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    }
+   ]
   },
   {
    "id": "c-amywin1",
@@ -1288,6 +1301,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
+   "title": "START button: one tap on a card opens the conversation for you (board3)",
+   "first": "2026-11-19T16:34:00-08:00",
+   "last": "2026-11-19T17:25:29-08:00",
+   "tags": [
+    "board3"
+   ],
+   "cards": [
+    "c-board3",
+    "t-startsetup"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
    "title": "Fix party followers lagging behind Tom in free walking (follow1)",
    "first": "2026-11-19T17:23:21-08:00",
@@ -1295,19 +1321,6 @@
    "tags": [],
    "cards": [
     "c-follow1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
-   "title": "START button: one tap on a card opens the conversation for you (board3)",
-   "first": "2026-11-19T16:34:00-08:00",
-   "last": "2026-11-19T17:16:03-08:00",
-   "tags": [
-    "board3"
-   ],
-   "cards": [
-    "c-board3",
-    "t-startsetup"
    ]
   },
   {
@@ -1406,15 +1419,15 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "ea302eccbc428c987201b1668fb556bfff58fad1",
- "synced_at": "2026-11-20T01:24:29+00:00",
+ "synced": "71698851c493362cef9e6bb5169ae262a539262b",
+ "synced_at": "2026-11-20T01:26:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
    "model": "Claude Sonnet 5.5",
    "effort": "medium",
    "env": "SONNET_MEDIUM",
-   "enabled": false
+   "enabled": true
   }
  ]
 }
