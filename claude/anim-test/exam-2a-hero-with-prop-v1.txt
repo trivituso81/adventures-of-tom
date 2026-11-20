@@ -1,0 +1,18 @@
+IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.
+
+ATTACH: 1. the magenta hero picture of the character. 2. one picture of the object the character will hold. Nothing else.
+
+WHAT THIS IS
+The same character as attached picture 1, now holding the object from attached picture 2, for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, clothes, shoes and accessories, the same colors, the same proportions, the same facing (turned to the left), the same size in the image, and the same drawing style, shading and line quality as picture 1. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.
+
+WHAT TO CHANGE (only this)
+The character holds the object from picture 2 in the hand nearest the viewer, at hip height, with a relaxed grip, arm slightly bent. Draw the object EXACTLY as in picture 2 (same shape, colors, face and details), redrawn in the drawing style of picture 1, at a believable real-life size compared to the character. The whole object is visible, not hidden behind the body, and it does not cover the face. Exactly one of this object in the image.
+
+BACKGROUND AND FRAMING
+- One flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge, exactly as in picture 1. No texture, no gradient, no ground line and no cast shadow. The character and the object must not contain any magenta.
+- The whole character and the whole object are visible, with a wide clear margin of magenta on every side, at least one quarter of the image width on the left and on the right. Nothing is cut off.
+
+EDGES
+Crisp, clean outlines all the way around the character and the object so they can be cut out from the flat background. No glow, no blur, no soft halo, no text, no other objects, no other people.
+
+Family friendly for ages 6 and up.

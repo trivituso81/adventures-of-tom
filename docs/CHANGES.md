@@ -1,3 +1,7 @@
+## projclean1a (2026-11-20): first 125 Project docs copied into the repo's claude/ folder, word for word
+
+Card c-projclean, part 1. Project docs 1 to 125 (newest first) copied to the same path in claude/ so every reference still resolves. Repo copies that already had more than the Project (artgen-plan.md, boardux-plan.md Built sections) were kept. The Project copies are deleted only after this push is confirmed on origin/main. Nothing in the game changes.
+
 ## permwording1 (2026-11-20): Every prompt the board writes now ends with the sentence the repo permission check accepts
 
 Card c-permwording1. The check refused "You have my full permission to access the repo." and accepted "Attach trivituso81/adventures-of-tom with push access (add_repo)." `PERM` in `board.html` and `tools/board_sync.py`, the tests that assert it, `claude/handoff-rules.md`, `claude/next.md`, CLAUDE.md (one line) and the prompt text of 19 open Claude cards use the new sentence. Done cards, fixtures and older plan notes unchanged.

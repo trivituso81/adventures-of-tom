@@ -1,0 +1,21 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.
+
+ATTACH: the magenta picture of the big creature (the first frame and the reference). Nothing else. Do not set an end frame.
+
+WHAT THIS IS
+A short attack animation of the big boss creature in the attached picture, for a family role-playing game. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings, accessories and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.
+
+LOOK (must hold in every moment of the clip)
+- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.
+- The creature keeps the same overall size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing splits, multiplies or morphs into something else.
+
+CAMERA AND BACKGROUND (strict)
+- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.
+- The creature stays in the same place in the frame, resting on the same line as in the attached picture. The whole creature stays inside the frame at all times, even at full stretch.
+- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).
+- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the figure. No ground, no cast shadow, no dust, no sparkles, no motion lines, no effects, no text, no extra people or objects.
+
+MOTION: HEAVY WIND-UP AND A BIG SLAM
+Start in the calm standing pose. The creature slowly rears up and leans back to the left, swelling its chest and raising its biggest limb (or its whole upper body if it has no limbs) high, eyes wide, mouth opening: a slow, heavy, grand wind-up that shows how big and strong it is. A short hold at the top. Then it throws its weight forward to the right in one fast, powerful move and slams the raised limb or body down in front of itself, with a visible squash on landing and a wobble that ripples through its body. Hold the slam pose for a moment, then it pulls back and settles into the calm standing pose. Grand and a little scary in a storybook way, never gory. Nothing is hit and nothing else appears.
+
+Length about 4 seconds. Family friendly for ages 6 and up.

@@ -1,0 +1,40 @@
+diff --git a/art.html b/art.html
+index 91c7834..646f2db 100644
+--- a/art.html
++++ b/art.html
+@@ -221,11 +221,16 @@ async function loadResults(){ RES={}; OWN={}; if(!DB) return; const all=await tx
+ // Waiting on me = the newest result on this device came after the last decision. Decisions carry `at` (ms) since udec1, so picking an
+ // older result (approve v5 after making v6 to v8) settles the row; decisions without `at` fall back to comparing result numbers.
+ function undecided(e){ const rs=RES[e.id]||[]; if(!rs.length) return false; const ds=[].concat(e.versions||[],e.rejects||[]); const at=Math.max(0,...ds.map(x=>+x.at||0)); if(at) return (rs[0].t||0)>at; const dec=Math.max(0,...ds.map(x=>parseInt(String(x.from||'').slice(1),10)||0)); return rs[0].n>dec; }
++// refoff1: the Mudling, Pond Grump and toad sheets were attached to most monster prompts as a painting-style example, and the generator
++// mixed that monster into the new one. Those style-example sheets now start UNTICKED on any entry that is not about that monster; a tap still ticks them.
++const STYLE_SHEETS={'enemy-mudling-':'mudling','enemy-grump-':'grump','enemy-toad-':'toad'};
++function refOn(e,i){ const k=e.id+'|'+i; if(USE[k]!==undefined) return USE[k]; const f=String((e.refs||[])[i]||'').split('/').pop(); const about=(e.id+' '+(e.title||'')).toLowerCase();
++  for(const pre in STYLE_SHEETS){ if(f.indexOf(pre)===0) return about.indexOf(STYLE_SHEETS[pre])>=0; } return true; }
+ // A ticked reference under art/raw/ is made by approving another entry. Blocked until that entry is approved and its file is published (checked with a HEAD request).
+ function blockInfo(e){
+   const rf=e.refs||[];
+   for(let i=0;i<rf.length;i++){
+-    if(USE[e.id+'|'+i]===false) continue;
++    if(!refOn(e,i)) continue;
+     const m=CHAIN.exec(rf[i]); if(!m) continue;
+     const dep=ENTRY[m[2]];
+     if(!dep){ const x=EXISTS[rf[i]]; if(x&&!x.ok) return {why:'Waiting for a picture you send to Claude: '+m[2].replace(/-/g,' ')+'.'}; continue; }
+@@ -268,7 +273,7 @@ function paintFilters(){
+ function renderCard(e){
+   if(e.clip) return clipCard(e);   // a video entry (engine/art-clips.js)
+   const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt;
+-  const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rawU(rp(p)))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
++  const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rawU(rp(p)))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(refOn(e,i)?'checked':'')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
+   const apr=n=>(e.versions||[]).some(v=>v.from==='v'+n), rjc=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
+   return '<div class="card" data-id="'+id+'">'+
+   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
+@@ -379,7 +384,7 @@ async function generate(id,btn){
+   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
+   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
+   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
+-  const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false).map(rp);
++  const refPaths=(e.refs||[]).filter((p,i)=>refOn(e,i)).map(rp);
+   const ownS=ownSpecs(e), ownR=ownS.map(o=>OWN[o.slot]||null); const miss=ownS.find((o,i)=>!ownR[i]); if(miss) return setMsg(id,'Add the picture first: '+miss.label+'.',true);
+   const nRef=refPaths.length+ownS.length;
+   if(nRef>5) return setMsg(id,'At most 5 reference pictures. Untick '+(nRef-5)+'.',true);

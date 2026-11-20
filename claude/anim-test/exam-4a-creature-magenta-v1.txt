@@ -1,0 +1,16 @@
+IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.
+
+ATTACH: the pose sheet of the creature (the reference). Nothing else.
+
+WHAT THIS IS
+The attached picture shows one game creature in several poses. Make a single picture of the same creature in its calm standing pose only (the first pose on the sheet, at the top left), for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings, accessories and proportions, and the same hand-painted style with smooth soft shading and warm light from the upper left. Do not redesign, restyle, simplify or change anything about the creature. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.
+
+WHAT TO CHANGE (only these three things)
+1. ONE POSE: only the calm standing pose. Exactly one creature in the image. Keep it facing the same way as on the sheet (toward the RIGHT of the image).
+2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No texture, no gradient, no vignette, no ground line, no puddle and no cast shadow. The creature must not contain any magenta.
+3. FRAMING: tall portrait image. The whole creature is visible and centered, filling about half of the image height, with a wide clear margin of magenta on every side so it has room to move. Nothing is cut off.
+
+EDGES
+Crisp, clean edges all the way around the creature so it can be cut out from the flat background. No glow, no blur, no soft halo, no drips or splashes floating away from the body, no text, no other objects, no other creatures.
+
+Family friendly for ages 6 and up.

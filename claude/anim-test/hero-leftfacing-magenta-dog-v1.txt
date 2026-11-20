@@ -1,0 +1,16 @@
+IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.
+
+ATTACH: the hero picture of the dog (the reference). Nothing else.
+
+WHAT THIS IS
+The same dog as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this dog: the same face, the same head size compared to the body, the same fur color and markings, the same long ears, curled tail, collar and tag, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the dog. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo. The dog has four legs, two ears and one tail.
+
+WHAT TO CHANGE (only these three things)
+1. FACING: the dog is sitting and turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge, happy and alert.
+2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The dog must not contain any magenta or pink-purple shades of that color.
+3. FRAMING: the whole dog from the top of the ears to the paws and the tail is visible, centered, with a clear margin of magenta on every side, at least 15 percent of the image on each side. Nothing is cut off.
+
+EDGES
+Crisp, clean outlines all the way around the dog so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no people.
+
+Family friendly for ages 6 and up.

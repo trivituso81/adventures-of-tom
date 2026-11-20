@@ -1,0 +1,24 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT CINEMATIC CLIP. Return exactly one video, nothing else.
+
+ATTACH: the wide scene picture (the first frame and the reference). Nothing else. Do not set an end frame.
+
+WHAT THIS IS
+A short, epic, full-screen movie moment for a family role-playing game: the hero's biggest special move. Animate EXACTLY the attached picture: the same man with the same face, head size, hair, clothes and proportions, the same car, the same jet, the same place and the same hand-painted look.
+
+LOOK (must hold in every moment of the clip)
+- The exact hand-painted, realistic style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo, not live action.
+- The man's face and head size never change. The car keeps its shape. Nothing morphs.
+- No text, letters, numbers or logos appear at any time. No new people or animals appear.
+
+CAMERA
+One continuous shot, no cuts. A slow, smooth push in toward the man and the car. No shake.
+
+MOTION
+1. The man stands calm with the gold card held high. A light wind moves his hair and clothes. He snaps the card forward and points it toward the right like a signal.
+2. The car's headlights jump to full bright. The car surges forward past the man toward the viewer with a spray of water from the wet pavement. The man does not flinch and does not move his feet.
+3. Behind them the jet's engines roar to life and a strong gust sweeps across the scene from right to left, flattening the puddles and whipping the man's clothes.
+4. The headlight beams sweep across the whole picture and bloom into warm white-gold light that fills the entire frame by the last moment of the clip.
+
+Big, proud and funny in a deadpan way. Nobody is hit and nothing crashes.
+
+Length about 5 seconds. Family friendly for ages 6 and up.
