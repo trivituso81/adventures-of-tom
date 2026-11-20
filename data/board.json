@@ -10180,6 +10180,38 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "theme": "Tools",
+   "lane": "claude",
+   "created": "2026-11-20",
+   "id": "c-tapfb1",
+   "tag": "tapfb1",
+   "col": "prog",
+   "title": "Every board button and link shows your tap right away",
+   "changed": "2026-11-20",
+   "next": "Tom (2026-11-20): \"when tapping any button or any link, there needs to be some feedback to the user that the tap happened, even if it's not ready to finish processing the tap yet\". Building: an instant press look on every button, link, card and tab, and a spinner that locks a button while its save runs.",
+   "blocks": [],
+   "chat": {
+    "url": "",
+    "opening": "\"In the board, when tapping any button or any link, there needs to be some feedback\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom asked for feedback on every tap in the board, even before the tap finishes processing. Started in that chat."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Adds instant tap feedback and a busy spinner to every button and link on the board.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small UI build, the design is not written yet)",
+    "effort": "medium (a small piece)",
+    "text": "Read CLAUDE.md and card c-tapfb1 in data/board.json. In board.html, give every button, link, card and tab an instant pressed look, and make a button that saves to GitHub show a spinner and ignore more taps until the save finishes. Test with python3 tools/board_test.py /tmp/board. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
