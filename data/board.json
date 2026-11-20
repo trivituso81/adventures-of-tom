@@ -6364,6 +6364,29 @@
      "t": "Added by skillinfo1: your phone check of the i icon and tap-to-use; blocks nothing."
     }
    ]
+  },
+  {
+   "id": "c-heistplan",
+   "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "board-heist",
+   "next": "Claude is watching your screen recording and working out why the scene misses. The plan and the next cards follow in this same conversation.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGDLBuSCmXaKfjjVof",
+    "opening": "\"im struggling with this scene - the monster animation looks out of place\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom (19:28, with a screen recording): \"im struggling with this scene - the monster animation looks out of place (differnet art style), he is holding a crisp instead of the muffins, the muffins are displayed on the counter after he takes them, and the dialogue of them falling is strange and doesnt feel natural (eg, why are they talking so much on the floor). we need a complete redo of this scene so that it hilarious!\""
+    }
+   ],
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
