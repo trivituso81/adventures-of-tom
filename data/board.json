@@ -294,13 +294,13 @@
    "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Ready (the gate is built; see c-clipgate2). Bake fixes first (loop stretch with a blink, speed 1.0 for moves except give), then prompt edits from your notes by the smallest change, then re-make only what the gate or your notes say needs it. The gate holds a clip that fails its measured checks or the guard, dodge, KO, run, victory, hit and same-face questions; for the invented moves your CHAPTER 1 REVIEW of the re-made clip is the check. Plan: claude/clip-gate-plan.md sections 3, 4.5 and 5.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDoFYTCVGKBQjNDfwU",
     "opening": "\"Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md\""
    },
    "history": [
@@ -319,6 +319,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by Tom: \"Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix.\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1004,6 +1008,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDoFYTCVGKBQjNDfwU",
+   "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
+   "first": "2026-11-19T16:24:19-08:00",
+   "last": "2026-11-19T16:24:19-08:00",
+   "tags": [],
+   "cards": [
+    "c-clipch1fix"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
    "title": "Board that keeps itself current (board2)",
    "first": "2026-11-19T16:11:14-08:00",
@@ -1043,6 +1057,6 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "94a7dc0e4115656c02d8286548ee3c7f35f373be",
- "synced_at": "2026-11-20T00:12:06+00:00"
+ "synced": "121c39e8b25012acd776387861a26b67667f8206",
+ "synced_at": "2026-11-20T00:25:06+00:00"
 }
