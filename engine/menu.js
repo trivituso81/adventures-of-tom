@@ -16,6 +16,10 @@ const PORTRAITS={tom:'portraits/tom.png?v=posefaces1',ellie:'portraits/ellie.png
 for(const id of ["mudling", "skeeter", "grump", "bigone", "coyote", "smoglet", "tickets", "bigshake", "soggysock", "tangle", "snag", "irongill", "ironbelly", "wetblanket", "thedraft", "pickyeater", "boommoth", "clapper", "cuecrab", "directorscut", "chairman", "cheekstuffer", "peanutgallery", "twigspy", "dodgeball", "glitterglue", "tardybell", "redpen", "cliffhanger", "knowitall", "popup", "unread", "coathanger", "soreloser", "wallflower", "mirrorball", "longline", "unclaimed", "armresthog", "lastcall", "gridlockprime", "finalcall", "standbysprite", "hush9final", "drillworm", "censor", "leviathan", "brainfreeze", "slushslug", "gremlin", "conehead", "toad", "log", "gridlock", "tarblob", "bobber", "extra", "fogwisp", "popquiz", "acornagent", "stickysap", "acorncache", "shusher", "dogear", "lukewarm", "leftover", "velvetrope", "stuffedshirt", "carryon", "jetlag", "lostluggage", "redeye", "hushling", "signalfault", "turnstile", "greynote", "twinlens", "pausesprite", "paperweight", "curator", "deadletter", "rubberstamp"]) PORTRAITS['foe_'+id]='portraits/foes/'+id+'.webp?v=foeport2';
 // Ending-frame faces (ch2fix1, tools/sprite-bake/bake_foe_portraits.py END_CROP): foe_<id>_<frame>.
 for(const [id,f] of [['bigshake','calm'],['bigshake','touched']]) PORTRAITS['foe_'+id+'_'+f]='portraits/foes/'+id+'-'+f+'.webp?v=ch2fix1';
+// gem-bug05: hero portraits are fetched and decoded once at load, and the pictures are kept, so the chapter list, the battle
+// turn bar and party panel and the menus draw a finished face on their first frame instead of a dark square.
+const PORTRAIT_KEEP=[];
+for(const [id,src] of Object.entries(PORTRAITS)) if(src&&!id.startsWith('foe_')) { const im=new Image(); im.decoding='async'; im.src=src; if(im.decode) im.decode().catch(()=>{}); PORTRAIT_KEEP.push(im); }
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;

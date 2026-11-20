@@ -44,7 +44,7 @@ function setDialogPortrait(name,npc) {
     if(P&&P.end===fid&&PORTRAITS['foe_'+fid+'_'+P.foe]) id='foe_'+fid+'_'+P.foe; }
   const src=dialogPortraitSrc(id);
   const img=box.querySelector('img');
-  if(src) { if(img.getAttribute('src')!==src) img.src=src; img.alt=''; }
+  if(src) { if(img.getAttribute('src')!==src) { img.style.visibility='hidden'; img.onload=img.onerror=()=>{ img.style.visibility=''; }; img.src=src; if(img.complete) img.style.visibility=''; } img.alt=''; }   // gem-bug05: never show the last speaker's face while the new one loads
   box.hidden=!src;
   $('dialog').classList.toggle('has-portrait',!!src);
   fitDialogPortrait();

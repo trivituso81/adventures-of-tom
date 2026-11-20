@@ -214,7 +214,7 @@ function splashSetMode(mode,sel=0) {
   box.classList.toggle('grid',!M.layout&&list.length>3);
   box.classList.toggle('launch',M.layout==='launch');
   box.innerHTML=list.map((c,i)=>
-    '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="portraits/'+id+'.png" alt="'+id+'" title="'+id+'">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
+    '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="'+(PORTRAITS[id]||'portraits/'+id+'.png')+'" alt="'+id+'" title="'+id+'" decoding="sync">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
   splashMark();
 }
 function splashMark() {
