@@ -2,7 +2,7 @@
 """BOARD pictures and layout checks (boardux1, plan claude/boardux-plan.md section 4): python3 tools/board_shots.py [outdir]
 Opens board.html with a test copy of today's board (data/board.json plus a few fixture cards, a fresh sync) through the stub GitHub at five sizes
 (382 x 580 the folded Duo in Safari, 466 x 657 the folded Duo home-screen app, 669 x 869 the open Duo upright, 951 x 648 the open Duo sideways, 1440 x 900),
-saves a picture of the page, of an open card sheet and (at 382) of the open menu, and checks A1 (no sideways scroll at any size) and A2 (the header is one
+saves a picture of the page, of an open card sheet and (at 382) of the open menu and of one open sheet per section (boardux2), and checks A1 (no sideways scroll at any size) and A2 (the header is one
 row, 56 px or less, at 382). Look at every picture before pushing. Prints FAILS: []. Also imported by board_ux1_test.py for the fixtures."""
 import base64, datetime, json, os, subprocess, sys, tempfile, time
 from playwright.sync_api import sync_playwright
@@ -74,6 +74,12 @@ def main():
                     first.click(); pg.wait_for_selector('#sheet', state='visible'); pg.wait_for_timeout(150)
                     if pg.evaluate('document.documentElement.scrollWidth') > w: fails.append(f'A1 {w}x{h}: the page scrolls sideways with a card open')
                     pg.screenshot(path=f'{out}/shot-{w}x{h}-sheet.png'); pg.click('#bclose')
+                if w == 382:   # boardux2: one open sheet per section at the smallest size (the main action must be in view, check A10 in board_ux2_test.py)
+                    for sec in ('mine', 'back', 'ready', 'run', 'queued', 'attn'):
+                        cid = pg.evaluate("(s)=>{const e=document.querySelector('[data-sec='+s+'] .card');return e&&e.dataset.id}", sec)
+                        if not cid: continue
+                        pg.evaluate("(i)=>openSheet(i)", cid); pg.wait_for_timeout(120)
+                        pg.screenshot(path=f'{out}/shot-{w}x{h}-sheet-{sec}.png'); pg.evaluate('closeSheet()')
                 ctx.close()
             br.close()
     finally:

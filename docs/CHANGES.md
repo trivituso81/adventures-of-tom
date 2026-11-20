@@ -1,3 +1,12 @@
+## boardux2 (2026-11-20): Board cards read without opening them, and the card panel keeps its main button in view
+
+- Card c-boardux2, plan claude/boardux-plan.md sections 3.4, 3.5 and 3.7 (Built section has the details and the differences from the plan). Checks A10, A11 and A13.
+- Card: theme and ask as quiet text above a short title, the instruction (with any precondition on its own "First:" line and screen paths as chips), one state line, one row of buttons. No more theme, age, model or ask pills. All good is an outline button next to a red "Something is wrong" text button, one row that never wraps.
+- All good can be undone for 8 seconds ("Marked all good. Undo"); it saves once, when the bar goes away.
+- Card panel: close X at the top (swipe down or Escape also close it), a body that scrolls, and an action bar fixed to the bottom with the one main action; Send to backlog, Not needed and Note are behind More. Empty facts (no chat, "Started with: unknown", lane names, row letters) are gone; the prompt is cut to 6 lines with Show all; the model's reason sits behind Why.
+- Data rules in tools/board_check.py: a new or changed open title is 60 characters or less with no build name; a Tom card's precondition goes in `first`, not at the start of `next`. Fix cards are titled "Fix: ..."; board-sync's note cards "Your note on: ...". Clean-up of the open cards: 14 titles shortened, 1 precondition moved to `first`, 3 dropped because they already happened, 5 preambles moved to `first`.
+- Kept from backlog1 and artgen2a (pushed while this was built): Send to backlog, the BACKLOG section with Add to, and the QA lines in the pictures box.
+- Tests: tools/board_ux2_test.py (new), board_test.py (A11 added), board_backlog_test.py, board_artgen_test.py, board_ux1_test.py, board_shots.py, board_sync_test.py, board_check.py all pass. cardlinks_test.py times out loading art.html here, before and after this change (not the board).
 ## ch1starving-sub (2026-11-20): Tom's line "Thank you for telling me, Rose..." now ends with "I'm starving!" on screen and in his voice
 
 - Card c-ch1starving-sub. Tom (11-20): "Keep it, I'll re-record". Kept take already on branch takes (session 20261119T230940-0ap, Tom's kept take of this line, 8.9 s). Transcribed with whisper base.en (the ch1retext1 method): "Thank you for telling me Rose. That one's yours. Grace, I'm so sorry but number two can't wait. I'm starving." It matches the new subtitle, so it is merged. The old 6.7 s clip (no "I'm starving!") is removed from `data/voice/dialog-ch1.js`.

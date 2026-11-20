@@ -39,7 +39,7 @@ try:
             check(f'{name}: BACKLOG is the last section', last == 'backlog', last)
             check(f'{name}: BACKLOG is closed when the page opens', pg.evaluate(f"!document.querySelector('{V} details[data-sec=backlog]').open"))
             for cid, lane_word in (('t-bk1', "Tom's"), ('c-bk2', "Claude's"), ('c-bk3', "Claude's"), ('svc-bk4', "GitHub's")):
-                pg.click(f'{V} .card[data-id="{cid}"]'); pg.wait_for_selector('#bback', state='visible')
+                pg.click(f'{V} .card[data-id="{cid}"]'); pg.wait_for_selector('#bmore', state='visible'); pg.click('#bmore'); pg.wait_for_selector('#bback', state='visible')   # boardux2: behind More
                 if cid == 't-bk1' and name == 'phone': pg.screenshot(path=f'{out}/{name}-sheet-send.png')
                 pg.click('#bback'); pg.wait_for_selector('#sheet', state='hidden'); pg.wait_for_timeout(250)
                 s = saved()[cid]

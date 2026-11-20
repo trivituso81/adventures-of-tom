@@ -12,7 +12,7 @@ Service mode (the same workflow, on a run of clip-gen, art-gen, voice-gen, clip-
 
 board3 (2026-11-19, claude/board3-plan.md): R1 also copies a Tom card's `answer`, and starts an `auto` card at once; R2 knows `clips_reviewed`;
 R9 start (a card with `start: true` is started on the Claude scheduled task for its model and effort, the link lands on the card); R10 note
-(a Tom card finished with a note that blocks nothing gets a Claude card "Handle Tom's note on ..."); R8 quiet is 6 hours.
+(a Tom card finished with a note that blocks nothing gets a Claude card "Your note on: ..."); R8 quiet is 6 hours.
 
 Rules (R1 to R10) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
 import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
@@ -278,7 +278,7 @@ def r10_notes(B):
         if B.get(cid): continue
         ttl, note = plain(c['title']), plain(c['note'])
         B.add({'id': cid, 'tag': 'note-' + c['id'].replace('t-', '', 1), 'lane': 'claude', 'col': 'up', 'theme': c.get('theme', 'Project Ops'),
-               'title': "Handle Tom's note on " + ttl[:100], 'next': 'You left a note when you finished "%s": %s' % (ttl[:100], note[:200]),
+               'title': 'Your note on: ' + ttl[:46].strip(),   # boardux2: titles are 60 characters or less 'next': 'You left a note when you finished "%s": %s' % (ttl[:100], note[:200]),
                'prompt': {'what': 'Reads the note you left on a finished card and acts on it or answers it.', 'before': ['Nothing to do first.'],
                           'model': 'Claude Sonnet 5.5 (row B: the steps are in the note and the card history)', 'effort': 'medium (one small piece of work)',
                           'text': 'Read claude/handoff-rules.md. Tom left a note on board card %s (%s) when he finished it: %s. Read that card\'s history in data/board.json, work out what the note asks for, do it or rewrite this card for the next session, and tell Tom what you did.' % (c['id'], ttl[:100], note) + PERM},

@@ -8,6 +8,10 @@ board3 rules: an open Tom card has a valid `ask` (play, pictures, animations, vo
 "(Recommended)") and one `leads` line per choice; an open Tom card blocks an open Claude card or is marked `fyi: true`; `auto: true` only on a Sonnet 5.5
 medium card; `after` (if present) is a Tom card id or "nothing for Tom: <next Claude card id or end>". With --push the card being shipped must have `after`.
 board4: a Tom card in Waiting that an open Claude card blocks (a tested card waiting on its fix, made by Something is wrong) passes the fyi rule.
+boardux2 (plan claude/boardux-plan.md 3.7): a new or changed open card's title is 60 characters or less and holds no build name (the card's tag, when the tag
+looks like a build name: it has a digit or a hyphen, or it is written in brackets); an open Tom card's next step does not start with "After": that
+precondition goes in the optional field `first` and `next` starts with the action. "New or changed" (the title, or the next step) is judged against origin/main when the file checked
+is the repo's data/board.json and git can read origin/main; otherwise every open card is checked.
 Run: python3 tools/board_check.py [path]
      python3 tools/board_check.py --push <tag> [path]   the build being pushed must be on a card (tag equal, a part of it, or named in a history line)"""
 import json, os, re, sys
@@ -17,7 +21,8 @@ push_tag = None
 if args[:1] == ['--push']:
     if len(args) < 2: print('usage: board_check.py --push <tag> [path]'); raise SystemExit(2)
     push_tag, args = args[1], args[2:]
-path = args[0] if args else os.path.join(HERE, '..', 'data', 'board.json')
+DEFAULT = os.path.join(HERE, '..', 'data', 'board.json')
+path = args[0] if args else DEFAULT
 ASKS = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
 THEMES = ['Voice Clips', 'Battle Animations', 'Battle System', 'Areas', 'Characters', 'Story and Dialogue', 'Game Shell', 'Tools', 'Project Ops']
 bad = []
@@ -77,9 +82,33 @@ for c in d.get('cards', []):
             bad.append('%s: an open Tom card must block an open Claude card, or be marked fyi: true' % n)
         for k in d.get('cards', []):
             if k.get('id') in c.get('blocks', []) and k.get('col') != 'done':
-                nx = c.get('next', '').lower()
+                nx = (c.get('next', '') + ' ' + str(c.get('first') or '')).lower()
                 if not any(x and x.lower() in nx for x in (k.get('title'), k.get('tag'), k.get('id'))):
                     bad.append('%s: blocks "%s" but its next step does not name that card' % (n, k.get('id')))
+# boardux2: titles and first lines (plan 3.7)
+import subprocess
+def baseline_titles():
+    if os.path.realpath(path) != os.path.realpath(DEFAULT): return None
+    try:
+        r = subprocess.run(['git', 'show', 'origin/main:data/board.json'], cwd=os.path.join(HERE, '..'), capture_output=True, text=True, timeout=30)
+        if r.returncode: return None
+        return {c.get('id'): c for c in json.loads(r.stdout).get('cards', [])}
+    except Exception: return None
+BASE = baseline_titles()
+TITLE_MAX = 60
+def build_like(tag): return bool(re.search(r'[0-9-]', tag))
+for c in d.get('cards', []):
+    if c.get('col') == 'done': continue
+    n, t = c.get('id'), str(c.get('title') or '')
+    if BASE is not None and (BASE.get(n) or {}).get('title') == t: continue   # an old title nobody touched: only new or changed titles are held to the rule
+    if len(t) > TITLE_MAX: bad.append('%s: the title is %d characters, keep it to %d (plan claude/boardux-plan.md 3.7): %s' % (n, len(t), TITLE_MAX, t))
+    tag = str(c.get('tag') or '')
+    if tag and (re.search(r'\(\s*' + re.escape(tag) + r'\s*\)', t, re.I) or (build_like(tag) and re.search(r'(?<![\w-])' + re.escape(tag) + r'(?![\w-])', t, re.I))):
+        bad.append('%s: the title holds the build name %r; leave it out (the board shows it in the card\'s history)' % (n, tag))
+for c in d.get('cards', []):
+    if BASE is not None and (BASE.get(c.get('id')) or {}).get('next') == c.get('next'): continue   # an old next step nobody touched
+    if c.get('lane') == 'tom' and c.get('col') != 'done' and re.match(r'\s*after\b', str(c.get('next') or ''), re.I):
+        bad.append('%s: the next step starts with "After": put that precondition in `first` and start `next` with the action' % c.get('id'))
 # cardlinks1: a card's `links` open the exact Library entry; an open Tom card that sends Tom to a Library carries one for it
 LIBS = {'art': 'ART LIBRARY', 'voice': 'VOICE LIBRARY', 'music': 'MUSIC LIBRARY'}
 for c in d['cards']:

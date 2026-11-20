@@ -11,6 +11,7 @@
 <style>
 :root{--bg:#14122b;--surface:#1d1a3d;--card:#211d47;--line:#2c2852;--text:#f4f1ff;--muted:#a9a3d6;--accent:#ffd34d;--on-accent:#241b00;--good:#1f7a4a;--prob:#b4414f;--prob-text:#ff9aa5;--amber:#f2b134;--btn:#3a3566;--well:#0f0d24}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
 html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
 body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 a{color:var(--text);text-decoration:underline}
@@ -61,26 +62,59 @@ button.gold{background:var(--accent);color:var(--on-accent)}button.good{backgrou
 .col{flex:0 0 84%;scroll-snap-align:start;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:90px}
 .col h3{margin:2px 4px 8px;font-size:13px;color:var(--muted);font-weight:600;display:flex;justify-content:space-between}
 .col .none{color:var(--muted);font-size:13px;padding:6px 4px}
-.card{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--btn);border-radius:12px;padding:10px 12px;margin:0 0 8px;font-weight:400;min-height:0}
-.card .t{font-weight:700;font-size:15px;line-height:1.3}
-.card .n{color:#cfc9ff;font-size:13px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
-.tag{font-size:12px;border-radius:9px;padding:2px 8px;color:#10101e;font-weight:700}
-.age{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff}
-.blk{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--btn);color:#d9d4ff;font-weight:700}
-.wt{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--btn);color:#ffe9a3}
+/* boardux2 (plan 3.4): a card is kicker, title, what to do, one state line, one row of actions. Nothing else. */
+.card{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px;font-weight:400;min-height:0}
+.kick{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;line-height:1.3}
+.kick i{flex:none;width:10px;height:10px;border-radius:50%}
+.kick .th,.kick .ak{overflow:hidden;text-overflow:ellipsis}
+.kick .ak{flex:none}
+.kick .ak::before{content:"\00B7";margin-right:6px}
+.card .t{font-weight:700;font-size:16px;line-height:1.3;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .first{font-size:13px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .do{font-size:14px;line-height:1.4;margin-top:5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .do.two{-webkit-line-clamp:2;color:#d9d4ff}
+code.path{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);border:1px solid var(--btn);border-radius:6px;padding:0 5px;color:var(--text);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.card .state{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .state a{font-weight:700}
+.card .state.quiet{color:var(--prob-text);font-weight:600}
+.acts{display:flex;align-items:center;gap:6px 10px;margin-top:10px;flex-wrap:wrap}
+.acts .rvrow{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;width:100%}
+.acts .mdl{font-size:13px;color:var(--muted);white-space:nowrap}
+button.ob{background:transparent;border:1.5px solid #8f88c7;color:var(--text)}
+button.tb{background:none;padding:10px 6px;color:var(--text);text-decoration:underline;font-weight:600}
+button.tb.bad{background:none;color:var(--prob-text)}
+.rvrow button{min-height:48px;white-space:nowrap;font-size:15px}
 .card .chg{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle}
 #dim{position:fixed;inset:0;background:rgba(5,4,16,.72);display:none;z-index:20}
-#sheet{position:fixed;left:0;right:0;bottom:0;max-height:90vh;overflow-y:auto;background:var(--surface);border-top:2px solid var(--btn);border-radius:18px 18px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));display:none;z-index:21;max-width:760px;margin:0 auto}
-#sheet h2{font-size:19px;margin:0 0 8px}
-#sheet h4{margin:14px 0 4px;font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+/* boardux2 (plan 3.5): the sheet is a top (kicker, title, close), a body that scrolls, and an action bar that is always in view. */
+#sheet{position:fixed;left:0;right:0;bottom:0;max-height:90vh;max-height:90dvh;background:var(--surface);border-top:2px solid var(--btn);border-radius:18px 18px 0 0;display:none;flex-direction:column;z-index:21;max-width:760px;margin:0 auto;overflow:hidden;transition:transform .18s}
+#sheet.open{display:flex}
+.sh-top{flex:none;position:relative;padding:10px 60px 10px 16px;border-bottom:1px solid var(--line);touch-action:none}
+.sh-top .grab{width:40px;height:4px;border-radius:2px;background:var(--btn);margin:0 auto 8px;position:relative;left:22px}
+.sh-top h2{font-size:19px;margin:4px 0 0;line-height:1.25}
+.sh-top .x{position:absolute;top:8px;right:8px;width:44px;height:44px;padding:0;font-size:26px;line-height:1;background:none;color:var(--text);font-weight:400}
+.sh-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 16px 14px}
+.sh-bar{flex:none;border-top:1px solid var(--line);background:var(--surface);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.sh-bar .barrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sh-bar .barrow .sp{flex:1 1 auto}
+.sh-bar .more{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.sh-bar .err:empty{display:none}
+#sheet h4{margin:16px 0 4px;font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 #sheet p{margin:0;font-size:15px}
+#sheet .first{color:var(--muted);font-size:14px;margin:0 0 6px}
+#sheet .where{margin:2px 0 8px}#sheet .where code.path{display:inline-block;max-width:100%;padding:4px 8px;font-size:14px}
 #sheet pre{white-space:pre-wrap;word-break:break-word;background:var(--well);border:1px solid var(--btn);border-radius:10px;padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace;margin:6px 0}
+#sheet pre.cut{max-height:calc(6 * 1.4em + 20px);overflow:hidden}
 #sheet ul,#sheet ol{margin:4px 0;padding-left:20px;font-size:14px}
+#sheet ol.todo{font-size:15px}#sheet ol.todo li{margin:0 0 6px}
+.lnkbtn{background:none;padding:6px 0;min-height:36px;color:var(--text);text-decoration:underline;font-weight:600;font-size:14px}
+.why{color:var(--muted);font-size:14px;margin-top:6px}
 .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+#undo{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:none;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--btn);color:var(--text);padding:4px 6px 4px 16px;border-radius:12px;font-weight:600;font-size:15px;z-index:30;box-shadow:0 8px 24px #0009;white-space:nowrap}
+#undo.on{display:flex}
 select,input[type=text]{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--btn);background:var(--well);color:#fff}
 input[type=text]{width:100%}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--good);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+#toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--good);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
 #toast.bad{background:var(--prob)}
 .sec{margin:0 0 14px}
 .sec>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:8px 2px;cursor:pointer;min-height:44px}
@@ -93,13 +127,9 @@ input[type=text]{width:100%}
 .sec>summary::after{content:"\25BE";color:var(--muted)}
 .sec:not([open])>summary::after{content:"\25B8"}
 .sec .none{color:var(--muted);font-size:13px;padding:6px 4px}
-.card .meta2{color:var(--muted);font-size:13px;margin-top:6px}
-.card .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .links{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
-.links .lnk{display:inline-block;background:var(--line);color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:7px 10px;font-size:13px;font-weight:700;text-decoration:none}
-.card .unb{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
-.card .quiet{color:var(--prob-text);font-size:13px;margin-top:6px;font-weight:600}
-.card .mdl{display:inline-block;font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff;font-weight:700}
+.links .lnk{display:inline-block;background:var(--well);color:var(--text);border:1px solid var(--btn);border-radius:8px;padding:7px 10px;font-size:13px;font-weight:600;text-decoration:underline}
+.age{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff}
 div.card{cursor:pointer}
 .conv{display:block;background:var(--card);border:1px solid var(--btn);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .conv .t{font-weight:700;font-size:15px;line-height:1.3}
@@ -109,30 +139,27 @@ div.card{cursor:pointer}
 .conv a{font-weight:700;font-size:13px}
 .sub{display:flex;align-items:center;gap:8px;margin:10px 2px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
 .sub .ct{background:var(--line);color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
-.ask{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:var(--text);font-weight:700;border:1px solid var(--btn)}
 .big{font-size:20px;font-weight:800;color:var(--text);margin:6px 0}
 .ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:var(--btn);border-radius:12px;padding:10px 12px}
 .ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
-.ch.rec{background:var(--good)}.ch.rec small{color:#e8fff2}
-.rv{display:flex;gap:8px;margin-top:10px}
+.ch.rec{background:var(--accent);color:var(--on-accent)}.ch.rec small{color:var(--on-accent)}
 .pics{margin:10px 0 0;padding:10px;border:1px solid var(--btn);border-radius:10px;background:#1c1a40}
 .pics h4{margin:0 0 6px}
 .pics .pr{display:flex;gap:8px;font-size:13px;line-height:1.35;margin:3px 0}
 .pics .pr b{flex:0 0 auto;max-width:48%}
 .pics .pr span{flex:1;color:#cfcbe8}
 .pics button.gen{width:100%;margin-top:8px}
-.pics button.gen.armed{background:var(--accent);color:var(--on-accent)}
+.pics button.gen{background:var(--accent);color:var(--on-accent)}
+.pics button.gen.armed{box-shadow:0 0 0 3px var(--text)}
+.pics button.gen:disabled{background:var(--btn);color:var(--text)}
 .pics .gm{font-size:13px;margin-top:8px;color:#cfcbe8}
 .pics .qa{display:flex;gap:10px;margin-top:8px;font-size:13px;line-height:1.35}.pics .qa img{flex:none;width:64px;height:auto;max-height:86px;object-fit:contain;border-radius:6px;background:#0a0918}
 .pics .qa .qf{color:#ff9aa6}.pics .qa .qs{font-weight:700;color:#fff}
-.rv button{flex:1;min-height:48px;font-size:15px}
+button.addto{width:100%;margin-top:8px;min-height:44px}
 button.bad{background:var(--prob);color:#fff}
 textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--btn);background:var(--well);color:#fff;width:100%;min-height:110px;resize:vertical}
 .shot{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
 .shot img{max-height:90px;border-radius:8px;border:1px solid var(--btn)}
-.fixnext{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
-.card .bkl{color:var(--muted);font-size:13px;margin-top:6px}
-button.addto{width:100%;margin-top:8px;min-height:44px}
 .what{font-size:17px;font-weight:700;color:var(--text);margin:8px 0}
 #lanesView{display:none}
 @media (min-width:860px){
@@ -158,6 +185,7 @@ button.addto{width:100%;margin-top:8px;min-height:44px}
 <div id="dim"></div>
 <div id="sheet"></div>
 <div id="toast"></div>
+<div id="undo" role="status"><span>Marked all good.</span><button class="tb" type="button" id="bundo">Undo</button></div>
 <script>
 'use strict';
 const Q=new URLSearchParams(location.search);
@@ -201,15 +229,15 @@ async function load(){
   B=await r.json();sha=null;$('src').textContent='site copy';stamp();
 }
 function stamp(){lastLoad=nowMs();}
-async function reload(){if($('sheet').style.display==='block')return false;try{await load();await loadArt();render();checkSync();return true;}catch(e){return false;}}
+async function reload(){if(sheetOpen())return false;try{await load();await loadArt();render();checkSync();return true;}catch(e){return false;}}
 setInterval(reload,60000);
 let hiddenAt=0;
 document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='hidden'){hiddenAt=nowMs();saveSnap();return;}
+  if(document.visibilityState==='hidden'){hiddenAt=nowMs();flushUndo();saveSnap();return;}
   if(hiddenAt&&nowMs()-hiddenAt>=12e4)loadSince();   // coming back after two minutes or more is a new visit
   if(nowMs()-lastLoad>5000)reload();else if(B)render();
 });
-window.addEventListener('pagehide',saveSnap);
+window.addEventListener('pagehide',()=>{flushUndo();saveSnap();});
 
 // ---- boardux1: the sync light (plan claude/boardux-plan.md 3.3). The page cannot know the data is behind from the data alone, so it asks GitHub for the
 // newest commit on main and for the board-sync runs. The board is behind when the last run failed, or the newest commit is more than 15 minutes newer
@@ -276,7 +304,7 @@ const laneName=id=>(B.lanes.find(l=>l.id===id)||{name:id}).name;
 const cardById=id=>B.cards.find(c=>c.id===id);
 const themeOk=c=>!theme||c.theme===theme;
 const inBacklog=c=>!!c&&!!c.backlog&&c.col!=='done';   // backlog1: parked by Tom; keeps its lane, out of every list until Add to ... puts it back
-const open=()=>B.cards.filter(c=>c.col!=='done'&&!c.backlog&&themeOk(c));
+const open=()=>B.cards.filter(c=>c.col!=='done'&&!c.backlog&&themeOk(c)&&!pendingGood(c.id));
 const secBacklog=()=>B.cards.filter(c=>inBacklog(c)&&themeOk(c)).sort((a,b)=>String((b.backlog||{}).at||'').localeCompare(String((a.backlog||{}).at||'')));
 const laneOwner=id=>{const n=laneName(id);return n+(/s$/i.test(n)?"'":"'s");};
 const BKL_HINT='parked work: tap Add to put it back on the to-do list';
@@ -346,29 +374,53 @@ function linkList(c){
   return out;
 }
 const linksHtml=c=>{const l=linkList(c);return l.length?'<div class="links">'+l.map(x=>'<a class="lnk" href="'+esc(x.href)+'">Open in the '+LIBNAME[x.to]+(x.label?': '+esc(x.label):'')+'</a>').join('')+'</div>':'';};
-function cardHtml(c,ctx){
-  const a=ageOf(c),bl=blocksOpen(c),tcol=THEME_COL[c.theme]||'#ccc';
-  let meta='<span class="tag" style="background:'+tcol+'">'+esc(c.theme)+'</span>';
-  if(c.lane==='tom'&&c.ask&&c.col!=='done') meta+='<span class="ask">'+esc(askName(c.ask))+'</span>';
-  if(c.col!=='done') meta+='<span class="age">'+a+'d</span>';
-  if(c.start) meta+='<span class="age">Starting...</span>';
-  if(ctx==='ready'&&c.prompt) meta+='<span class="mdl">'+esc(modelShort(c))+'</span>';
-  let extra='';
-  if(c.lane==='tom'&&c.col!=='done'&&bl.length) extra+='<div class="unb">Unblocks: '+esc(bl[0].title)+(bl.length>1?' and '+(bl.length-1)+' more':'')+'</div>';
-  if(ctx==='attn'){const w=attnWhy(c);if(w)extra+='<div class="quiet">'+esc(w)+'</div>';}
-  if(ctx==='run'||(ctx==='attn'&&c.col==='prog')){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
-  if(c.lane==='claude'&&c.col!=='done'){const back=blocksOpen(c).filter(x=>x.lane==='tom');if(back.length)extra+='<div class="fixnext">When this ships, you check again: '+esc(back.map(x=>x.title).join('; '))+'</div>';}
-  if((ctx==='queued'||ctx==='attn')&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'After: '+esc(by.map(x=>x.title).join('; ')):'Waiting on '+esc(laneName(c.waiting_on||'')))+'</div>';}
-  if((ctx==='queued')&&c.col==='up'){const by=blockedBy(c);extra+='<div class="meta2">After: '+esc(by.map(x=>x.title).join('; '))+'</div>';}
-  let row='';
-  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
-  if(c.start_error&&c.col!=='done'&&ctx!=='attn') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
-  if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=picsHtml(c,true)+rvBtns(c.id);
-  if(ctx==='backlog'){extra='<div class="bkl">'+esc(laneName(c.lane))+(c.backlog&&c.backlog.at?' · parked '+esc(c.backlog.at):'')+'</div>';row='<button class="good addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';}
-  const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
-  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+dot+'</div><div class="n">'+esc(c.next)+'</div>'+linksHtml(c)+'<div class="meta">'+meta+'</div>'+extra+row+'</div>';
+// ---- boardux2 (plan 3.4): the card. Kicker (theme dot, theme, and for Tom's cards the ask), title, what to do (Tom: the instruction, with any
+// precondition on its own "First:" line; Claude: what it builds), at most one state line, at most one solid button.
+const reEsc=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const dispTitle=c=>{let t=String(c.title||'');if(c.tag)t=t.replace(new RegExp('\\s*\\('+reEsc(c.tag)+'\\)\\s*$'),'');return t;};   // old Done cards keep their build name in the data; the page leaves it out
+// A path such as ADMIN > BATTLE LAB > CHAPTER 1 REVIEW is drawn as a monospace chip (inline on a card, its own line in the sheet).
+const PW="[A-Z0-9][A-Z0-9'&-]*(?![A-Za-z])",PCAPS=PW+'(?: '+PW+')*';
+const PATHRE=new RegExp('\\b'+PCAPS+'(?: > (?:'+PCAPS+'|[a-z][a-z ]{0,30}?(?= > )|[A-Z][a-z]+ \\d+))+','g');   // ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE, CHAPTERS > Chapter 6
+const withPaths=s=>{const t=String(s||'');let h='',i=0;t.replace(PATHRE,(m,at)=>{h+=esc(t.slice(i,at))+'<code class="path">'+esc(m)+'</code>';i=at+m.length;return m;});return h+esc(t.slice(i));};
+const kickHtml=c=>'<div class="kick"><i style="background:'+(THEME_COL[c.theme]||'#ccc')+'"></i><span class="th">'+esc(c.theme)+'</span>'+(c.lane==='tom'&&c.ask&&c.col!=='done'?'<span class="ak">'+esc(askName(c.ask))+'</span>':'')+'</div>';
+const doText=c=>c.lane==='tom'?c.next:((c.prompt&&c.prompt.what&&c.col!=='done')?c.prompt.what:c.next);
+const days=n=>n+' day'+(n===1?'':'s');
+// The one state line, picked in the plan's order: Needs attention reason, After (what it waits on), Unblocks, Returns to you when fixed. A Working now card
+// shows its last push and chat link instead (that is its state). Tom's open cards add "N days quiet" from one day on (the age pill is gone).
+function stateLine(c,ctx){
+  if(c.col==='done')return '';
+  if(ctx==='backlog')return '<div class="state">'+esc(laneName(c.lane))+(c.backlog&&c.backlog.at?' \u00B7 parked '+esc(c.backlog.at):'')+'</div>';
+  const w=attnWhy(c);if(w)return '<div class="state quiet">'+esc(w)+'</div>';
+  const by=blockedBy(c);let s='';
+  if(by.length)s='After: '+esc(by.map(x=>dispTitle(x)).join('; '))+(waitsOnClaude(c)?'. Returns to you when fixed.':'');
+  else if(c.col==='wait')s='Waiting on '+esc(laneName(c.waiting_on||''));
+  else if(c.service){s='';}
+  else if(ctx==='run'||(c.col==='prog'&&c.lane!=='tom')){const ss=sessionFor(c);s=(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener">Open chat</a> · ':'')+'last push '+esc(ss?ago(ss.last):'unknown');}
+  else{const bl=blocksOpen(c),back=c.lane!=='tom'?bl.filter(x=>x.lane==='tom'):[];
+    if(back.length)s='Returns to you when fixed: '+esc(back.map(x=>dispTitle(x)).join('; '));
+    else if(bl.length)s='Unblocks: '+esc(dispTitle(bl[0]))+(bl.length>1?' and '+(bl.length-1)+' more':'');}
+  if(c.lane==='tom'&&ageOf(c)>=1)s+=(s?' · ':'')+days(ageOf(c))+' quiet';
+  return s?'<div class="state">'+s+'</div>':'';
 }
-const rvBtns=id=>'<div class="rv"><button class="good" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
+function actsHtml(c,ctx){
+  if(c.col==='done')return '';
+  if(ctx==='backlog')return '<button class="gold addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
+  if(isReview(c)&&(c.col==='up'||c.col==='prog'))return picsHtml(c,true)+'<div class="acts">'+rvBtns(c.id)+'</div>';
+  if(c.lane==='claude'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')){
+    const st=startable(c),solid=st?'':(ctx==='queued'?'ob':'gold');
+    return '<div class="acts">'+(st?'<button class="small gold" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button><button class="small tb" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>':'<button class="small '+solid+'" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>')+'<span class="mdl">'+esc(modelShort(c))+'</span></div>';
+  }
+  return '';
+}
+function cardHtml(c,ctx){
+  const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
+  const first=c.lane==='tom'&&c.first&&c.col!=='done'?'<div class="first">First: '+withPaths(c.first)+'</div>':'';
+  const tom=c.lane==='tom';
+  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'">'+kickHtml(c)+'<div class="t">'+esc(dispTitle(c))+dot+'</div>'+first
+    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
+}
+// On a card in the list: All good is an outline button (it is undone for 8 seconds), Something is wrong a text button, one row that never wraps.
+const rvBtns=id=>'<div class="rvrow"><button class="ob" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
 function convHtml(s){
   const [k,l]=convState(s),cs=(s.cards||[]).map(cardById).filter(Boolean);
   return '<div class="conv"><div class="t">'+esc(s.title||'Conversation')+'</div><div class="m"><span class="st '+k+'">'+l+'</span><span>last push '+esc(ago(s.last))+'</span>'+((s.tags||[]).slice(0,3).map(t=>'<span class="age">'+esc(t)+'</span>').join(''))+'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open chat</a></div>'+(cs.length?'<div class="m">Cards: '+esc(cs.map(c=>c.title).join('; ').slice(0,160))+'</div>':'')+'</div>';
@@ -414,7 +466,7 @@ function renderSections(){
   $('secView').innerHTML=h;
 }
 function renderLanes(){
-  const vis=c=>themeOk(c)&&!inBacklog(c)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
+  const vis=c=>themeOk(c)&&!inBacklog(c)&&!pendingGood(c.id)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
   const cvh=recentConvs();
   let h=sec('conv','CONVERSATIONS','last 3 days, newest push first',cvh,convHtml,false);
   h+=B.lanes.map(l=>{
@@ -488,7 +540,7 @@ function picsHtml(c,compact){
   else if(c.col==='wait'){const by=blockedBy(c);why='Waiting on: '+(by.length?by.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
   else if(!n)why='Nothing to make right now.';
   const arm=GENARM===c.id;
-  h+='<button type="button" class="gen good'+(arm?' armed':'')+'" data-act="gen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+money(est)+')':'Generate all '+n+' picture'+(n===1?'':'s')+' (about '+money(est)+')')+'</button>';
+  h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="gen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+money(est)+')':'Generate all '+n+' picture'+(n===1?'':'s')+' (about '+money(est)+')')+'</button>';
   if(busy)h+='<div class="gm">'+(g.want?'Started. The pictures are made for you (about a minute each). This card shows them when they are ready.':'The job is running. This card shows the pictures when they are ready.')+'</div>';
   if(!busy&&run.state&&run.state!=='running'){
     const ids=(run.made||[]).concat(run.already||[]).filter(id=>rows.some(r=>r.id===id));
@@ -511,7 +563,7 @@ function genTap(id){
   save('board: generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.gen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),ids,est:+est.toFixed(2),mode:'review'};touch(z,'Tom approved generating '+ids.length+' picture'+(ids.length===1?'':'s')+' (about '+money(est)+').');}return d;})
     .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
 }
-function rerender(){render();if(cur&&$('sheet').style.display==='block'){const y=$('sheet').scrollTop;openSheet(cur);$('sheet').scrollTop=y;}}
+function rerender(){render();if(cur&&sheetOpen()&&$('sheet').querySelector('.sh-body')&&$('sheet').dataset.kind==='card'){const b=$('sheet').querySelector('.sh-body'),y=b.scrollTop,m=moreOpen;openSheet(cur);moreOpen=m;if(m)toggleMore(true);$('sheet').querySelector('.sh-body').scrollTop=y;}}
 
 function render(){
   counts();
@@ -519,46 +571,87 @@ function render(){
   renderSince();renderSections();renderLanes();renderSync();
 }
 
-// ---- detail sheet
-let cur=null;
+// ---- detail sheet (boardux2, plan 3.5). Every screen in the sheet has the same three parts: a top (kicker, title, close X), a body that scrolls,
+// and an action bar fixed to the bottom with the card's one main action. Not needed and Note sit behind More. Empty or unknown facts are not shown.
+let cur=null,moreOpen=false;
+const sheetOpen=()=>$('sheet').classList.contains('open');
+function shell(top,body,bar,kind){
+  return '<div class="sh-top"><div class="grab"></div>'+top+'<button class="x" id="bclose" type="button" aria-label="Close">&times;</button></div><div class="sh-body">'+body+'</div><div class="sh-bar"><div id="act"></div><p class="err" id="serr"></p>'+(bar||'')+'</div>';
+}
+function setSheet(html,kind){const sh=$('sheet');sh.innerHTML=html;sh.dataset.kind=kind||'';sh.classList.add('open');sh.style.transform='';$('dim').style.display='block';const b=sh.querySelector('.sh-body');if(b)b.scrollTop=0;moreOpen=false;}
+const reasonOf=s=>{const m=/\(([^)]*)\)\s*$/.exec(String(s||''));return m?m[1].replace(/^row [A-Z]:\s*/,''):'';};   // "(row B: written steps)" -> "written steps"
+// A next step with numbered parts ("1) ... 2) ...") is shown as a numbered list; otherwise as one paragraph.
+function todoHtml(t){
+  const parts=String(t||'').split(/\s(?=\d\)\s)/);
+  if(parts.length<3)return '<p style="white-space:pre-line">'+withPaths(t)+'</p>';
+  return (parts[0].trim()?'<p>'+withPaths(parts[0])+'</p>':'')+'<ol class="todo">'+parts.slice(1).map(x=>'<li>'+withPaths(x.replace(/^\d\)\s*/,''))+'</li>').join('')+'</ol>';
+}
+const NOTHING_FIRST=/^nothing to do first/i;
+function chatHtml(c){const ch=c.chat||{};if(!ch.url)return '';const s=sessionFor(c);
+  return '<h4>Chat</h4><p><a href="'+esc(ch.url)+'" target="_blank" rel="noopener">Open chat</a>'+(s?' <span class="hint">last push '+esc(ago(s.last))+'</span>':'')+'</p>';}
+function histHtml(c){
+  const n=(c.history||[]).length;
+  return '<h4>History</h4><details><summary class="hint" style="min-height:36px;cursor:pointer">'+(c.tag?'Build '+esc(c.tag)+'. ':'')+(c.col==='done'&&c.done?'Done '+esc(c.done)+'. ':'')+n+' entr'+(n===1?'y':'ies')+' (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
+}
 function openSheet(id){
   const c=cardById(id);if(!c)return;cur=id;
-  const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
-  let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
-  if(inBacklog(c)) h+='<h4>In the backlog</h4><p>Parked'+(c.backlog.at?' on '+esc(c.backlog.at):'')+'. Nothing happens to it until you add it back.</p><button class="good addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
-  if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
-  h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
-  h+=linksHtml(c);
-  if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
-  h+=picsHtml(c,false);
-  if(isReview(c)&&c.col!=='wait') h+='<h4>How did it go?</h4>'+rvBtns(c.id)+'<p class="hint" style="margin-top:6px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
-  if(c.paste) h+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
-  if(c.answer) h+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
-  if(c.start_error&&c.col!=='done') h+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
-  if(c.note) h+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
-  if(c.col==='wait'){const by=bb;h+='<h4>Waiting on</h4><p>'+(by.length?esc(by.map(x=>x.title).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?' When it ships, this card comes back to you to check again.':'')+'</p>';}
-  if(bl.length) h+='<h4>Unblocks</h4><ul>'+bl.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
-  if(bb.length&&c.col!=='wait') h+='<h4>Blocked by</h4><ul>'+bb.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
-  const ch=c.chat||{};
-  h+='<h4>Chat</h4><p>'+(ch.url?'<a href="'+esc(ch.url)+'" target="_blank" rel="noopener">Open chat</a>':'No conversation yet')+'<br><span class="hint">Started with: '+esc(ch.opening||'unknown')+'</span></p>';
-  if(p){
-    h+='<h4>Next session prompt</h4><p class="hint">'+esc(p.what||'')+'</p>';
-    if((p.before||[]).length) h+='<h4>Before you paste</h4><ol>'+p.before.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
-    h+='<p><b>Model:</b> '+esc(p.model||'')+'<br><b>Effort:</b> '+esc(p.effort||'')+'</p><pre id="ptxt">'+esc(withId(c))+'</pre>';
-    if(c.col!=='done'&&c.lane==='claude'){
-      if(startable(c)) h+='<button class="good" id="bstart" type="button">START</button> <span class="hint">starts the conversation on '+esc(modelShort(c))+'</span> ';
-      else if(c.col==='up') h+='<div class="big">'+esc(modelShort(c))+'</div><span class="hint">No START for this model and effort yet. Copy the prompt, open the Project, pick this model and effort, paste.</span><p><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></p>';
-    }
-    h+='<button class="small gold" id="bcopy" type="button">Copy prompt</button>';
+  const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt,tom=c.lane==='tom',open_=c.col!=='done';
+  let body='',bar='';const bk=inBacklog(c);
+  if(bk) body+='<h4>In the backlog</h4><p>Parked'+(c.backlog.at?' on '+esc(c.backlog.at):'')+'. Nothing happens to it until you add it back.</p>';
+  if(tom){
+    const where=(String(c.next||'').match(PATHRE)||[])[0];   // the screen to go to, on its own line above the instruction
+    body+='<h4>What to do</h4>'+(c.first&&open_?'<p class="first">First: '+withPaths(c.first)+'</p>':'')+(where&&open_?'<p class="where"><code class="path">'+esc(where)+'</code></p>':'');
+    body+=(c.steps||[]).length?'<p>'+withPaths(c.next)+'</p><ol class="todo">'+c.steps.map(x=>'<li>'+withPaths(x)+'</li>').join('')+'</ol>':todoHtml(c.next);
+    body+=linksHtml(c)+picsHtml(c,false);
+    if(c.paste) body+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
+    if(isReview(c)&&c.col!=='wait') body+='<p class="hint" style="margin-top:10px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
+  }else{
+    const what=p&&p.what?p.what:c.next;
+    body+='<h4>'+(c.service?'What is running':open_?'What it builds':'What it built')+'</h4><p>'+esc(what)+'</p>';
+    if(p&&p.what&&c.next&&c.next!==p.what) body+='<h4>'+(open_?'Where it stands':'Result')+'</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
   }
-  h+='<h4>History</h4><details><summary class="hint">'+((c.history||[]).length)+' entries (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
-  const bk=inBacklog(c),mine=c.lane==='tom'&&c.col!=='done'&&!bk,any=c.col!=='done',dec=mine&&c.ask==='decide'&&(c.choices||[]).length;
-  if(dec){h+='<h4>Pick one</h4>'+c.choices.map((x,i)=>'<button class="ch'+(i===0?' rec':'')+'" type="button" data-choice="'+i+'">'+esc(x)+((c.leads||[])[i]?'<small>'+esc(c.leads[i])+'</small>':'')+'</button>').join('')+'<button class="ch" type="button" data-choice="other">Something else<small>Type your own answer</small></button>';}
-  h+='<div class="btns">'+(mine&&!dec&&!isReview(c)?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine&&!isReview(c)?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
-  $('sheet').innerHTML=h;$('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
+  if(c.answer) body+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
+  if(c.note) body+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
+  const w=open_?attnWhy(c):'';
+  if(w) body+='<p class="err" style="font-size:14px;margin-top:10px">Needs attention: '+esc(w)+'</p>';
+  else if(c.start_error&&open_) body+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
+  if(open_&&(c.col==='wait'||bb.length)) body+='<h4>Waiting on</h4><p>'+(bb.length?esc(bb.map(x=>dispTitle(x)).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?'. When it ships, this card comes back to you to check again.':'')+'</p>';
+  if(bl.length){const back=!tom&&bl.every(x=>x.lane==='tom');
+    body+='<h4>'+(tom?'Why it matters':back?'Returns to you when fixed':'Unblocks')+'</h4><p>'+(tom?'It unblocks: ':'')+esc(bl.map(x=>dispTitle(x)).join('; '))+'</p>';}
+  if(p&&!c.service&&open_){   // a finished card's prompt is history: not shown
+    const bf=(p.before||[]).filter(x=>!NOTHING_FIRST.test(String(x)));
+    if(bf.length) body+='<h4>Before you paste</h4><ol>'+bf.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
+    body+='<h4>The prompt</h4><pre id="ptxt" class="cut">'+esc(withId(c))+'</pre><button class="lnkbtn" id="ballp" type="button">Show all</button>';
+    const rm=reasonOf(p.model),re=reasonOf(p.effort);
+    body+='<p style="margin-top:6px"><b>'+esc(modelShort(c))+'</b>'+(rm||re?' <button class="lnkbtn" id="bwhy" type="button">Why</button>':'')+'</p>'+(rm||re?'<div class="why" id="whytxt" hidden>'+(rm?'Model: '+esc(rm)+'. ':'')+(re?'Effort: '+esc(re)+'.':'')+'</div>':'');
+    if(open_&&c.lane==='claude'&&c.col==='up'&&!startable(c)) body+='<p class="hint" style="margin-top:6px">No START for this model and effort yet: copy the prompt, open the Project, pick this model and effort, paste. <a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></p>';
+  }
+  body+=chatHtml(c)+histHtml(c);
+  // the action bar: one main action, then More
+  const dec=!bk&&tom&&open_&&c.ask==='decide'&&(c.choices||[]).length;
+  if(dec) bar+='<div style="margin:0 0 8px">'+c.choices.map((x,i)=>'<button class="ch'+(i===0?' rec':'')+'" type="button" data-choice="'+i+'">'+esc(x)+((c.leads||[])[i]?'<small>'+esc(c.leads[i])+'</small>':'')+'</button>').join('')+'<button class="ch" type="button" data-choice="other">Something else<small>Type your own answer</small></button></div>';
+  let main='';
+  if(bk) main='<button class="gold" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
+  else if(isReview(c)&&c.col!=='wait') main='<button class="'+(hasPics(c)?'ob':'gold')+'" type="button" data-act="good" data-id="'+esc(c.id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(c.id)+'">Something is wrong</button>';
+  else if(tom&&open_&&!dec&&!isReview(c)&&!bk) main='<button class="gold" id="bdid" type="button">I did this</button><button class="ob" id="btake" type="button">Claude takes this</button>';
+  else if(tom&&open_&&dec) main='<button class="ob small" id="btake" type="button">Claude takes this</button>';
+  else if(p&&!c.service&&open_&&c.lane==='claude'){
+    if(startable(c)) main='<button class="gold" id="bstart" type="button">START</button><button class="ob" id="bcopy" type="button">Copy prompt</button>';
+    else main='<button class="'+(c.col==='up'?'gold':'ob')+'" id="bcopy" type="button">Copy prompt</button><span class="hint">'+esc(modelShort(c))+'</span>';
+  }else if(p&&!c.service&&open_) main='<button class="ob" id="bcopy" type="button">Copy prompt</button>';
+  const more=(open_&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(open_?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button>';
+  bar+='<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
+  setSheet(shell(kickHtml(c)+'<h2>'+esc(dispTitle(c))+'</h2>',body,bar),'card');
 }
-function closeSheet(){$('sheet').style.display='none';$('dim').style.display='none';cur=null;}
-function showAct(html){$('act').innerHTML='<div class="btns" style="margin-top:10px;flex-direction:column;align-items:stretch">'+html+'</div>';}
+function toggleMore(v){moreOpen=v==null?!moreOpen:v;const r=$('moreRow'),b=$('bmore');if(r)r.hidden=!moreOpen;if(b){b.setAttribute('aria-expanded',moreOpen?'true':'false');b.textContent=moreOpen?'Less':'More';}}
+function closeSheet(){const sh=$('sheet');sh.classList.remove('open');sh.style.transform='';sh.dataset.kind='';$('dim').style.display='none';cur=null;moreOpen=false;}
+function showAct(html){$('act').innerHTML='<div class="btns" style="margin:0 0 10px;flex-direction:column;align-items:stretch">'+html+'</div>';const i=$('ntxt');if(i)try{i.focus({preventScroll:true});}catch(e){}}
+// swipe the sheet down by its top to close it
+(function(){let y0=null,dy=0;const sh=()=>$('sheet');
+  document.addEventListener('touchstart',e=>{if(!e.target.closest('.sh-top')||e.target.closest('button'))return;y0=e.touches[0].clientY;dy=0;sh().style.transition='none';},{passive:true});
+  document.addEventListener('touchmove',e=>{if(y0==null)return;dy=Math.max(0,e.touches[0].clientY-y0);sh().style.transform='translateY('+dy+'px)';},{passive:true});
+  document.addEventListener('touchend',()=>{if(y0==null)return;y0=null;sh().style.transition='';if(dy>90)closeSheet();else sh().style.transform='';});
+})();
 
 // ---- saving: read the latest file, change that card by id, write it back, so other sessions' edits are kept
 async function save(msg,fn){
@@ -579,30 +672,32 @@ async function save(msg,fn){
 function touch(c,text){c.changed=today();c.history=(c.history||[]).concat([{d:today(),t:text}]);}
 async function run(msg,fn,okMsg,after){
   $('serr').textContent='';
-  try{await save(msg,fn);toast(okMsg);render();if(after){$('sheet').innerHTML=after();$('sheet').scrollTop=0;}else closeSheet();}catch(e){$('serr').textContent=e.message;}
+  try{await save(msg,fn);toast(okMsg);render();if(after){setSheet(after(),'saved');}else closeSheet();}catch(e){$('serr').textContent=e.message;}
 }
 // The hand-back screen (board3 part B): after I did this or a choice, say what it unblocked and put that card's prompt right there.
 function savedScreen(id){
   const c=cardById(id),nx=((c&&c.blocks)||[]).map(cardById).filter(Boolean);
-  let h='<h2>Saved.</h2>';
-  if(!nx.length) h+='<p>Nothing else waits on this card'+(c&&c.note?'. A session reads your note next (the board hands it to Claude).':'.')+'</p>';
+  let h='',bar='';
+  if(!nx.length) h+='<p style="margin-top:10px">Nothing else waits on this card'+(c&&c.note?'. A session reads your note next (the board hands it to Claude).':'.')+'</p>';
   nx.forEach(k=>{
     const other=blockedBy(k);
-    h+='<h4>Next: '+esc(k.title)+'</h4>';
+    h+='<h4>Next: '+esc(dispTitle(k))+'</h4>';
     if(k.backlog) h+='<p>It is in the backlog. Open BACKLOG at the bottom and tap Add to put it back.</p>';
-    else if(other.length) h+='<p>It still waits on: '+esc(other.map(x=>x.title).join('; '))+'.</p>';
+    else if(other.length) h+='<p>It still waits on: '+esc(other.map(x=>dispTitle(x)).join('; '))+'.</p>';
     else if(k.lane==='claude'&&k.prompt){
-      h+=k.auto&&routineFor(k)&&routineFor(k).enabled?'<p>It starts by itself in about a minute. The link appears on its card.</p>':'<p>Start it in a NEW conversation. Your note and answer are on its card, so you never go back to the old chat.</p><p><b>Model:</b> '+esc(k.prompt.model||'')+'<br><b>Effort:</b> '+esc(k.prompt.effort||'')+'</p>';
-      if(!(k.auto&&routineFor(k)&&routineFor(k).enabled)) h+='<div class="btns">'+(startable(k)?'<button class="good" type="button" data-act="start" data-id="'+esc(k.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(k.id)+'">Copy prompt</button></div>';
-    }else h+='<p>'+esc(k.next)+'</p>';
+      const auto=k.auto&&routineFor(k)&&routineFor(k).enabled;
+      h+=auto?'<p>It starts by itself in about a minute. The link appears on its card.</p>':'<p>Start it in a NEW conversation. Your note and answer are on its card, so you never go back to the old chat.</p><p><b>'+esc(modelShort(k))+'</b></p>';
+      if(!auto&&!bar) bar='<div class="barrow">'+(startable(k)?'<button class="gold" type="button" data-act="start" data-id="'+esc(k.id)+'">START</button><button class="ob" type="button" data-act="copy" data-id="'+esc(k.id)+'">Copy prompt</button>':'<button class="gold" type="button" data-act="copy" data-id="'+esc(k.id)+'">Copy prompt</button><span class="hint">'+esc(modelShort(k))+'</span>')+'</div>';
+    }else h+='<p>'+withPaths(k.next)+'</p>';
   });
-  return h+'<div class="btns"><button id="bclose" type="button">Close</button></div><p class="err" id="serr"></p><div id="act"></div>';
+  return shell('<h2>Saved.</h2>'+(c?'<p class="hint">'+esc(dispTitle(c))+'</p>':''),h,bar||'<div class="barrow"><button class="ob" id="bdone" type="button">Close</button></div>');
 }
+const cut50=t=>{t=String(t||'').trim();return t.length<=50?t:t.slice(0,51).replace(/\s+\S*$/,'').trim();};   // boardux2 (plan 3.7): a fix card is titled "Fix: <first 50 characters of the tested card's title>", cut at a word
 const clean=s=>String(s||'').replace(/</g,'(').replace(/>/g,')').replace(/\u2014/g,',').trim();
 async function startCard(id){
   $('serr')&&($('serr').textContent='');
   try{await save('board: start-request '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c&&c.col!=='done'&&c.col!=='prog'){c.start=true;touch(c,'Tom tapped START.');}return d;});
-    toast('Starting');render();$('sheet').innerHTML='<h2>Starting.</h2><p>The conversation opens on '+esc(modelShort(cardById(id)||{prompt:{}}))+' in about a minute. Its link appears on the card and in CONVERSATIONS. Nothing to copy.</p><div class="btns"><button id="bclose" type="button">Close</button></div>';$('sheet').style.display='block';$('dim').style.display='block';}
+    toast('Starting');render();setSheet(shell('<h2>Starting.</h2>','<p style="margin-top:10px">The conversation opens on '+esc(modelShort(cardById(id)||{prompt:{}}))+' in about a minute. Its link appears on the card and in CONVERSATIONS. Nothing to copy.</p>','<div class="barrow"><button class="ob" id="bdone" type="button">Close</button></div>'),'start');}
   catch(e){if($('serr'))$('serr').textContent=e.message;else toast(e.message);}
 }
 // ---- backlog1: Send to backlog (any open card, any lane) and Add to <lane>'s to-do (one tap on the backlog card). The card keeps its lane; `backlog`
@@ -641,12 +736,10 @@ async function putFile(path,b64,msg,branch){
 }
 function wrongForm(id){
   const c=cardById(id);if(!c)return;cur=id;shotData='';
-  $('sheet').innerHTML='<h2>Something is wrong</h2><p class="hint">'+esc(c.title)+'</p>'
-   +(hasTok()?'':'<p class="err" style="font-size:15px">'+NOTOK+'</p>')+'<h4>What did you see?</h4><textarea id="wtxt" placeholder="What is wrong and where. Several problems are fine, one per line."></textarea>'
+  const body=(hasTok()?'':'<p class="err" style="font-size:15px;margin-top:10px">'+NOTOK+'</p>')+'<h4>What did you see?</h4><textarea id="wtxt" placeholder="What is wrong and where. Several problems are fine, one per line."></textarea>'
    +'<div class="shot"><button class="small" type="button" id="wpick">Add a screenshot</button><span class="hint" id="wprev">Optional</span><input type="file" accept="image/*" id="wshot" hidden></div>'
-   +'<p class="hint">Filed a pencil tab report in the game while you played? This fix picks it up too.</p>'
-   +'<div class="btns"><button class="bad" type="button" id="wgo">Send to Claude</button><button type="button" id="bclose">Cancel</button></div><p class="err" id="serr"></p>';
-  $('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
+   +'<p class="hint">Filed a pencil tab report in the game while you played? This fix picks it up too.</p>';
+  setSheet(shell('<h2>Something is wrong</h2><p class="hint">'+esc(dispTitle(c))+'</p>',body,'<div class="barrow"><button class="bad" type="button" id="wgo">Send to Claude</button><button class="tb" type="button" id="bcancel">Cancel</button></div>'),'wrong');
 }
 async function sendWrong(id){
   const words=clean($('wtxt').value).replace(/\s*\n\s*/g,' / ');
@@ -666,7 +759,7 @@ async function sendWrong(id){
       if(!f){
         const tags=new Set(d.cards.map(k=>k.tag)),idsT=new Set(d.cards.map(k=>k.id)),base=z.id.replace(/^t-/,'');let n=1,fid='c-fix-'+base,tag='fix-'+base;
         while(idsT.has(fid)||tags.has(tag)){n++;fid='c-fix-'+base+'-'+n;tag='fix-'+base+'-'+n;}
-        f={id:fid,tag,lane:'claude',col:'up',fix:true,theme:z.theme,title:'Fix what you found on: '+String(z.title).slice(0,90),next:'',blocks:[],created:today(),changed:today(),reports:[],
+        f={id:fid,tag,lane:'claude',col:'up',fix:true,theme:z.theme,title:'Fix: '+cut50(z.title),next:'',blocks:[],created:today(),changed:today(),reports:[],
            chat:{url:'',opening:'Something is wrong on '+z.id},history:[],prompt:{what:'Fixes the problems you reported on '+String(z.title).slice(0,90)+'.',before:['Nothing to do first. Your words and screenshot are on the card.'],model,effort,text:''}};
         d.cards.push(f);touch(f,'Made by Something is wrong on '+z.id+'.');
       }
@@ -683,16 +776,34 @@ async function sendWrong(id){
       return d;});
   }catch(e){btn.disabled=false;btn.textContent='Send to Claude';$('serr').textContent=e.message;return;}
   render();toast('Sent to Claude');
-  let h='<h2>Sent to Claude.</h2><p class="what">';
-  if(res.auto) h+='Claude starts fixing this by itself in about a minute, and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>';
-  else h+=(res.merged?'Added to the fix "'+esc(res.ftitle)+'" (not started yet): paste':'Paste')+' the prompt below into a new conversation in the Project on '+esc(shortOf(res.p))+', and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>'
-    +'<div class="big">'+esc(shortOf(res.p))+'</div><div class="btns"><button class="gold" type="button" data-act="copy" data-id="'+esc(res.fid)+'">Copy prompt</button><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></div>';
+  let h='<p class="what">',bar='';
+  if(res.auto){h+='Claude starts fixing this by itself in about a minute, and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>';bar='<div class="barrow"><button class="ob" id="bdone" type="button">Close</button></div>';}
+  else{h+=(res.merged?'Added to the fix "'+esc(res.ftitle)+'" (not started yet): paste':'Paste')+' the prompt below into a new conversation in the Project on '+esc(shortOf(res.p))+', and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>'
+    +'<div class="big">'+esc(shortOf(res.p))+'</div><p><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></p>';
+    bar='<div class="barrow"><button class="gold" type="button" data-act="copy" data-id="'+esc(res.fid)+'">Copy prompt</button></div>';}
   if(shotErr) h+='<p class="err">The screenshot did not upload ('+esc(shotErr)+'). Your words were sent.</p>';
-  $('sheet').innerHTML=h+'<div class="btns"><button id="bclose" type="button">Close</button></div><p class="err" id="serr"></p><div id="act"></div>';$('sheet').scrollTop=0;
+  setSheet(shell('<h2>Sent to Claude.</h2>',h,bar),'sent');
 }
+// boardux2 (plan 3.4, check A11): All good is held for 8 seconds with "Marked all good. Undo" at the bottom. The card leaves the list at once; the save
+// happens once, when the bar goes away (or at once if Tom taps All good on another card, or leaves the page). Undo puts the card back and saves nothing.
+let UNDO=null;const UNDO_MS=8000;
+const pendingGood=id=>!!UNDO&&UNDO.id===id;
 function allGood(id){
-  if(cur!==id)openSheet(id);
-  run('board: all good '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.col='done';z.done=today();delete z.waiting_on;delete z.quiet;touch(z,'Tom: all good.');}return d;},'Marked all good',()=>savedScreen(id));
+  if(!hasTok()){if(sheetOpen()&&$('serr'))$('serr').textContent=NOTOK;else toast(NOTOK);return;}
+  if(UNDO)flushUndo();
+  if(sheetOpen())closeSheet();
+  UNDO={id,timer:setTimeout(flushUndo,UNDO_MS)};
+  $('toast').style.display='none';$('undo').classList.add('on');render();
+}
+function undoGood(){if(!UNDO)return;clearTimeout(UNDO.timer);UNDO=null;$('undo').classList.remove('on');render();}
+async function flushUndo(){
+  const u=UNDO;if(!u)return;UNDO=null;clearTimeout(u.timer);$('undo').classList.remove('on');
+  const id=u.id;
+  try{await save('board: all good '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.col='done';z.done=today();delete z.waiting_on;delete z.quiet;touch(z,'Tom: all good.');}return d;});
+    render();
+    const c=cardById(id),next=((c&&c.blocks)||[]).map(cardById).filter(Boolean);
+    if(!sheetOpen()&&next.length)setSheet(savedScreen(id),'saved');else toast('Saved: all good');}
+  catch(e){render();toast(e.message,true);}
 }
 document.addEventListener('input',e=>{if(e.target.id==='wtxt'&&$('serr'))$('serr').textContent='';});
 document.addEventListener('change',async e=>{
@@ -730,7 +841,11 @@ document.addEventListener('click',e=>{
   const card=t.closest('.card');if(card&&!$('sheet').contains(t)){openSheet(card.dataset.id);return;}
   const chip=t.closest('.chip');if(chip){theme=chip.dataset.t==='All'?'':chip.dataset.t;render();return;}
   const on=t.closest('[data-only]');if(on){only=only===on.dataset.only?'':on.dataset.only;render();return;}
-  if(t.id==='dim'||t.id==='bclose'){closeSheet();return;}
+  if(t.id==='bundo'){undoGood();return;}
+  if(t.id==='dim'||t.closest('#bclose')||t.id==='bcancel'||t.id==='bdone'){closeSheet();return;}
+  if(t.id==='bmore'){toggleMore();return;}
+  if(t.id==='ballp'){const pr=$('ptxt');if(pr){const cut=pr.classList.toggle('cut');t.textContent=cut?'Show all':'Show less';}return;}
+  if(t.id==='bwhy'){const w=$('whytxt');if(w)w.hidden=!w.hidden;return;}
   if(t.id==='bpaste'){const c=cardById(cur);if(c)copyText(c.paste);return;}
   if(t.id==='bcopy'){const c=cardById(cur);copyText(c?withId(c):$('ptxt').textContent);if(c)markCopied(c.id);return;}
   if(t.id==='toksave'){const v=$('tokin').value.trim();if(!v){toast('Paste the token first');return;}try{localStorage.setItem(TOKEN,v);}catch(err){toast('This browser would not save it');return;}toast('Token saved');menuOpen(false);tokbar();reload();checkSync(true);return;}
@@ -761,7 +876,7 @@ document.addEventListener('click',e=>{
   if(t.id==='ngo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type a note first.';return;}
     run('board: note '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c)touch(c,'Tom: '+tx);return d;},'Note saved');return;}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')menuOpen(false);if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){menuOpen(false);if(sheetOpen()&&!/^(INPUT|TEXTAREA)$/.test(e.target.tagName))closeSheet();}if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
 loadSince();
 load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);}).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
 window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy};

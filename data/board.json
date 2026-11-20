@@ -736,14 +736,14 @@
   },
   {
    "id": "c-b3s9c",
-   "title": "New battle system, stage 9c: Nara and Boppy kits, late joiners",
+   "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
    "theme": "Battle System",
    "lane": "claude",
    "col": "up",
    "tag": "b3s9c",
    "next": "After b3s9b (done). Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool, and moves TNB onto that pool; Lab fights with the chapter 2 and 3 parties.",
    "blocks": [],
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-19",
    "chat": {
     "url": "",
@@ -757,6 +757,10 @@
     {
      "d": "2026-11-19",
      "t": "b3s9b shipped: prompt now reads next-addendum-b3s9b.md; TNB moves onto the late joiners' pool here."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -6647,7 +6651,7 @@
   },
   {
    "id": "c-heist1",
-   "title": "Rebuild the muffin theft scene in Deedee's kitchen (heist1)",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "up",
@@ -6668,6 +6672,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Generate and approve the new Mudling sheet (six poses with the muffin pan) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -6880,12 +6888,12 @@
   },
   {
    "id": "t-clipposes",
-   "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "title": "Watch the family's painted battle poses",
    "theme": "Battle Animations",
    "lane": "tom",
    "col": "up",
    "ask": "animations",
-   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses (clipposesfix).",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses.",
    "blocks": [
     "c-clipposesfix"
    ],
@@ -6907,12 +6915,16 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ]
   },
   {
    "id": "c-clipposesfix",
-   "title": "Apply your notes on the painted poses (clipposesfix)",
+   "title": "Apply your notes on the painted poses",
    "theme": "Battle Animations",
    "lane": "claude",
    "col": "wait",
@@ -6927,6 +6939,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by clipposes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -7075,7 +7091,7 @@
   },
   {
    "id": "c-artgen2",
-   "title": "QA for generated pictures, with the results on the card (artgen2)",
+   "title": "QA for generated pictures, with the results on the card",
    "theme": "Tools",
    "lane": "claude",
    "col": "prog",
@@ -7115,6 +7131,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as artgen2a: Pictures made from a board card now get a QA check (code and tests; the replay on your approved pictures comes next)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -7130,7 +7150,7 @@
   },
   {
    "id": "c-artgen3",
-   "title": "Auto-approve pictures that pass QA (artgen3)",
+   "title": "Auto-approve pictures that pass QA",
    "theme": "Tools",
    "lane": "claude",
    "col": "wait",
@@ -7139,7 +7159,7 @@
    "next": "Waits on QA for generated pictures (artgen2) and your look at its results. Then it adds the second button, Generate and auto-approve what passes QA: a picture is approved for you only when every must-pass check is yes and the score reaches the threshold; the rest wait for you.",
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -7148,6 +7168,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"If hitting a certain qa threshold we can auto approve\" Plan: claude/artgen-plan.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -7543,7 +7567,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "boardux2",
-   "next": "Waits on Board redesign 1 (c-boardux1). Then it redraws every card (short title, the instruction readable without opening it, one status line, one main button, undo on All good) and the panel that opens on a tap (main action always in view), and shortens the titles of the open cards.",
+   "next": "Built and pushed as boardux2: every card is kicker, short title, the instruction (precondition on its own First line), one state line and one button row; All good can be undone for 8 seconds; the card panel keeps its main button in a bar at the bottom with More for the rest; open card titles shortened and checked by board_check. Nothing for you to do: you test once, after redesign 3. Next is Board redesign 3 (c-boardux3).",
    "blocks": [
     "c-boardux3"
    ],
@@ -7569,6 +7593,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: building boardux2 (plan sections 3.4, 3.5, 3.7)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built boardux2 (plan sections 3.4, 3.5, 3.7). Checks A10, A11 and A13 pass; what differs from the plan is in claude/boardux-plan.md, Built section (in the repo and the Project)."
     }
    ],
    "prompt": {
@@ -7604,6 +7632,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Plan: claude/boardux-plan.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "From boardux2: the card and sheet are rebuilt (cardHtml, stateLine, actsHtml, openSheet with shell()); the lanes grid still uses them. Send to backlog, Not needed and Note sit behind More. See the Built section of claude/boardux-plan.md before starting."
     }
    ],
    "prompt": {
@@ -7626,7 +7658,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try the redesigned board on your phone",
-   "next": "After Board redesign 3 ships (build boardux3): open the board from your home screen with the Duo folded. 1) The header is one row and nothing slides sideways. 2) For you shows your cards first, and you can read what to do without opening one. 3) Tap a card: the main button is in view without scrolling. 4) Tap All good on a card you have finished, then Undo. 5) Search for \"muffin\". 6) Unfold the Duo and turn it sideways: the same four views, two columns, nothing across the fold. All good if it works; Something is wrong with what you saw.",
+   "next": "Open the board from your home screen with the Duo folded. 1) The header is one row and nothing slides sideways. 2) For you shows your cards first, and you can read what to do without opening one. 3) Tap a card: the main button is in view without scrolling. 4) Tap All good on a card you have finished, then Undo. 5) Search for \"muffin\". 6) Unfold the Duo and turn it sideways: the same four views, two columns, nothing across the fold. All good if it works; Something is wrong with what you saw.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -7642,8 +7674,13 @@
     {
      "d": "2026-11-20",
      "t": "boardwait1: c-boardux3 now lists this card as blocked, so it leaves Waiting by itself when Board redesign 3 ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Precondition moved to its own First line (boardux2)."
     }
-   ]
+   ],
+   "first": "Wait for Board redesign 3 to ship (build boardux3)."
   },
   {
    "id": "c-fix-ch1starving-2",
@@ -7759,7 +7796,7 @@
   },
   {
    "id": "c-stagefollow",
-   "title": "Scene staging follow-ups (facing, cut-front, close-up, boss size)",
+   "title": "Scene staging follow-ups (facing, close-ups, boss size)",
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
@@ -7783,6 +7820,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: this conversation claimed the card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -8094,7 +8135,7 @@
    "col": "up",
    "ask": "script",
    "fyi": true,
-   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Script Editor and try the conversations list, Workshop and Paste back. Look for anything that does not open or save.",
+   "next": "Open Admin > Script Editor and try the conversations list, Workshop and Paste back. Look for anything that does not open or save. Report with the REPORT tab if something looks wrong.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -8114,12 +8155,17 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The \"optional\" note moved to its own First line so the card opens on the action (boardux2)."
     }
    ],
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
-   }
+   },
+   "first": "Optional, only when you feel like it."
   },
   {
    "id": "t-oldchecks-blocks",
@@ -8193,7 +8239,7 @@
    "col": "up",
    "ask": "pictures",
    "fyi": true,
-   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Admin > Art Library, find the entry Young Boppy Van Cortlandt '70 (boppy-young-hero), press Generate, then Approve or Reject.",
+   "next": "Open Admin > Art Library, find the entry Young Boppy Van Cortlandt '70 (boppy-young-hero), press Generate, then Approve or Reject. Report with the REPORT tab if something looks wrong.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -8213,6 +8259,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The \"optional\" note moved to its own First line so the card opens on the action (boardux2)."
     }
    ],
    "links": [
@@ -8227,7 +8277,8 @@
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
-   }
+   },
+   "first": "Optional, only when you feel like it."
   },
   {
    "id": "t-cutpolish5",
@@ -8395,7 +8446,7 @@
   },
   {
    "id": "c-adminicons1",
-   "title": "Give BOARD and ADMIN their own favicon and Home Screen icon (adminicons1)",
+   "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
    "theme": "Tools",
    "lane": "claude",
    "col": "prog",
@@ -8412,6 +8463,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by this chat. Tom: \"The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -8973,7 +9028,7 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Characters",
-   "title": "Pose sizes: walk bake for the walking stand frames, and unsized Grace, Rose, Deedee poses",
+   "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
    "next": "Ready to start. Applies Tom's saved Pose Editor lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (needs a walk bake) so the walking poses stop jumping in size against the other poses. Grace, Rose and Deedee poses stay unsized until Tom saves lines in the Pose Editor.",
    "blocks": [],
    "created": "2026-11-20",
@@ -8990,6 +9045,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {
@@ -9005,7 +9064,7 @@
   },
   {
    "id": "c-itembanner1",
-   "title": "An ITEM GAINED banner whenever the party gets an item from a conversation or from beating someone (itembanner1)",
+   "title": "An ITEM GAINED banner for items from talks and wins",
    "theme": "Game Shell",
    "lane": "claude",
    "col": "up",
@@ -9026,6 +9085,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
     }
    ],
    "prompt": {

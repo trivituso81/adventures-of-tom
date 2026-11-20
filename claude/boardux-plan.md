@@ -235,3 +235,35 @@ Differences from the plan, and why:
 5. Card age pills are now neutral grey (no amber or red) until phase 2 removes them; the card layout itself is untouched.
 
 Tests: `python3 tools/board_test.py /tmp/board`, `python3 tools/board_artgen_test.py`, `python3 tools/board_ux1_test.py`, `python3 tools/board_shots.py /tmp/boardshots`, `python3 tools/board_sync_test.py`. board_test.py kept every check and changed only the words (For you, Start next, Working now, Queued, Needs attention) and the token check (menu and red dot instead of the red bar).
+
+### boardux2 (2026-11-20): cards and the card panel
+
+Sections 3.4, 3.5 and 3.7, checks A10, A11, A13. Files: `board.html`, `tools/board_check.py` (data rules), `tools/board_sync.py` (the note card's title), `tools/board_ux2_test.py` (new: A10 and the card and sheet rules), `tools/board_shots.py` (one open sheet per section at 382), `tools/board_test.py` (A11, new selectors, same checks), `tools/board_backlog_test.py` (Send to backlog is behind More), `data/board.json` (the clean-up).
+
+| Built | Notes |
+|---|---|
+| Card | Kicker (10 px theme dot, theme, and on his cards the ask) as muted 12 px capitals; title 16 px bold, at most two lines; on his cards a "First: ..." line, then the instruction (three lines); on Claude cards what it builds (two lines); one state line; one row of actions. Gone: the theme, age, model, ask and "Starting..." pills, the gold border. |
+| State line | One line, in the plan's order: Needs attention reason (red, the only red), After: <card>, Unblocks: <card>, Returns to you when fixed: <card>. Working now cards show "Open chat · last push 20 min ago". His cards add "N days quiet" from one day on. |
+| Actions | His review cards: All good (outline) and Something is wrong (red text button), one row, 48 px, never wrapping. Claude cards: START (solid) with "Copy prompt" as a text button, or Copy prompt (solid; outline when the card is queued), with "Sonnet 5.5, medium" as plain text. Pictures cards: Generate all is the solid one. Backlog cards (backlog1): Add to <lane>'s to-do. |
+| Undo | All good takes the card off the list and shows "Marked all good. Undo" at the bottom for 8 seconds; the save happens once, when the bar goes away (at once if he taps All good on another card or leaves the page). Then the hand-back screen opens when the card unblocks something, otherwise a "Saved" toast. Undo puts the card back and saves nothing. |
+| Sheet | Three parts: the top (kicker, title, close X; swipe the top down to close; Escape closes), a body that scrolls, an action bar fixed to the bottom. His card: What to do (the screen path on its own line, numbered steps when the next step has 1) 2) 3)), links, pictures, Why it matters, Chat, History. Claude card: What it builds, Where it stands, Before you paste (only when there is something to do), the prompt cut to 6 lines with Show all, model and effort on one line with Why, Chat, History. History holds the build name. Not shown: empty chat, "Started with: unknown", lane and column names, row letters, "Nothing to do first". |
+| Action bar | All good and Something is wrong, I did this and Claude takes this, START and Copy prompt, or Copy prompt with the model; decide cards have their choices there. More holds Send to backlog, Not needed and Note. |
+| Data rules | `board_check.py`: a new or changed open title is 60 characters or less and holds no build name; an open Tom card's new or changed next step does not start with "After" (the precondition goes in `first`). The page writes fix cards as "Fix: <tested title, cut at a word within 50 characters>"; board-sync writes "Your note on: <46 characters>". |
+| Clean-up | 14 open titles shortened (12 rewritten, 2 fix cards renamed "Fix: ..."; build names out). t-boarduxtry: precondition moved to `first`. t-heistart, t-reportcheck, t-cardlinks1try: precondition dropped because it already happened (c-heistart shipped, builds reports-2026-11-19c and cardlinks1 are live). The four optional checks and the reload step on t-ch1starving moved to `first`. Next steps that named an old title follow the new one. Done cards untouched. |
+
+Differences from the plan, and why:
+
+1. **Path chips.** On a card the path is a chip inside the text, not its own line: the instruction is cut at three lines, and a block line inside it breaks the cut. In the sheet the first path is shown on its own line above the instruction and stays a chip in the text, because a block in the middle of a sentence left lines starting with a comma.
+2. **Claude cards' Do line is two lines, not one.** One line on a 382 px screen cut most "what it builds" texts after six words.
+3. **Working now cards** have none of the plan's four states, so their state line is "Open chat · last push". Service cards show none.
+4. **START cards keep Copy prompt** as a text button next to START (one solid button still), so a card START can run can also be pasted by hand. A queued card's Copy prompt is an outline: it is not ready.
+5. **In the sheet All good is solid gold** (it is a deliberate place); on the list it is an outline. On a pictures card Generate all is the gold one and All good stays an outline.
+6. **Decide cards** keep their choices in the action bar: the choice is the main action.
+7. **Extra sheet section "Where it stands"** (the card's current next step, "Result" on a Done card) on Claude cards: what it builds and where it is now are different facts. A Done card's prompt is not shown.
+8. **Send to backlog** (backlog1, shipped while this was built) sits behind More with Not needed and Note: two taps instead of one.
+9. **Data rules only bite on new or changed titles and next steps**, judged against origin/main: the sync job writes cards with long titles, and other sessions' checks must not fail on them. Without origin/main (a file path given) every open card is checked. The build-name rule applies to tags that look like build names (a digit or a hyphen) or to any tag in brackets, so "Casa Alvarez" (tag alvarez) passes.
+10. **Fix card titles are cut at a word** within 50 characters, not mid-word.
+11. **Old Done cards' "(tag)" endings** are hidden on the page; the data is left alone.
+12. The toast now sits above the action bar and the undo bar.
+
+Tests: `python3 tools/board_ux2_test.py`, `python3 tools/board_test.py /tmp/board`, `python3 tools/board_artgen_test.py`, `python3 tools/board_backlog_test.py`, `python3 tools/board_ux1_test.py`, `python3 tools/board_shots.py /tmp/boardshots`, `python3 tools/board_sync_test.py`, `python3 tools/board_check.py`.
