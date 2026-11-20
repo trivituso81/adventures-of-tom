@@ -12798,11 +12798,11 @@
    "id": "c-takes-56fb01",
    "tag": "takes-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Done: nothing to merge. Every kept take on branch takes is already in the game; the one unkept take is not merged.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -12833,12 +12833,17 @@
     {
      "d": "2026-11-20",
      "t": "Session started."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired, nothing to merge: checked every take on branch takes (175 in 3 sessions) against data/merged-takes.json. All 136 takes Tom kept in session 20261120T170347-1wa were already merged; the only unmerged ones are takes he did not keep, which are never merged. No voice file changed."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-20T18:00:30+00:00"
+   "started_at": "2026-11-20T18:00:30+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-gem-canon01play",
