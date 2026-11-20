@@ -355,13 +355,13 @@
    "title": "Build chapter 2 to the locked script",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "First writes the chapter 2 teardown list and shows you the questions marked ASK; builds only after you answer. Lines go in word for word from the locked file. One chapter per conversation. Start: claude/story-next.md.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-17",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGiA3jV2jT4TYuLzs2",
     "opening": "unknown"
    },
    "history": [
@@ -384,6 +384,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -396,7 +400,7 @@
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    },
    "tag": "ch2build",
-   "start": true
+   "started_at": "2026-11-20T15:31:14+00:00"
   },
   {
    "id": "c-b3s8",
@@ -11297,8 +11301,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "00b5a41ed9f1b673c3017e1864419a1925f971a7",
- "synced_at": "2026-11-20T15:30:28+00:00",
+ "synced": "666efe43b1efa087cdee9282171e36b36c1c1d5b",
+ "synced_at": "2026-11-20T15:31:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
