@@ -8260,7 +8260,7 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on card t-gatezero-decide. The two pictures made (noplane-v1, plane-v1) are 1248x832 not 1280x896, move the window frames and jet bridge, and the plane is a different jet. After Tom's answer: rebuild the entries or install, per his choice.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -8319,6 +8319,14 @@
      "d": "2026-11-20",
      "t": "Ended without shipping: third session found the same two rejected pictures in art/raw/rooms; nothing new to install. Moved behind Tom card t-gatezero-decide.",
      "at": "2026-11-20T18:00:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Generate and approve the Gate Zero room pictures, Stuck twice: Install the Gate Zero pictures (no plane, plane, Decide how to get a Gate Zero room with the plane removed is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Decide how to get a Gate Zero room with the plane removed\": Keep the current painting and have Claude remove the painted plane by editing it"
     }
    ],
    "prompt": {
@@ -8332,7 +8340,6 @@
    },
    "tag": "gatezero",
    "started_at": "2026-11-20T17:43:02+00:00",
-   "waiting_on": "tom",
    "after": "t-gatezero-decide"
   },
   {
@@ -13962,10 +13969,13 @@
     {
      "d": "2026-11-20",
      "t": "Claude fix c-fix-battlelabpagetry: the 404 was before the site finished publishing (page on main, publish finished 40 seconds after your tap). No code change; please try again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Open the Battle Lab page on your home screen is done."
     }
    ],
-   "col": "wait",
-   "waiting_on": "claude"
+   "col": "up"
   },
   {
    "id": "c-fix-heist1play-5",
@@ -14112,7 +14122,7 @@
    "id": "c-fix-battlelabpagetry",
    "tag": "fix-battlelabpagetry",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -14160,6 +14170,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry: The Battle Lab page 404 was the site not yet updated; no code change"
     }
    ],
    "prompt": {
@@ -14173,7 +14187,8 @@
    },
    "after": "t-battlelabpagetry",
    "auto": true,
-   "started_at": "2026-11-20T17:53:24+00:00"
+   "started_at": "2026-11-20T17:53:24+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-effectslook",
@@ -14201,7 +14216,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEeg94gABBmqmKonrd",
+    "url": "https://claude.ai/code/session_01RXeukEeg94gABBmqmKonrd",
     "opening": "Something is wrong on t-effectslook"
    },
    "history": [
@@ -14223,6 +14238,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -14241,6 +14260,28 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEeg94gABBmqmKonrd",
+   "title": "Fix: Look at the Effects page in Admin",
+   "first": "2026-11-20T17:55:59Z",
+   "last": "2026-11-20T17:55:59Z",
+   "tags": [],
+   "cards": [
+    "c-fix-effectslook"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGLRLwqv73KbUgoYtz",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "first": "2026-11-20T17:54:28Z",
+   "last": "2026-11-20T17:55:09Z",
+   "tags": [
+    "fix-battlelabpagetry"
+   ],
+   "cards": [
+    "c-fix-battlelabpagetry"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFEfHJ4Qb2GBqAXJFo",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T17:54:39Z",
@@ -14248,16 +14289,6 @@
    "tags": [],
    "cards": [
     "c-fix-heist1play-5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGLRLwqv73KbUgoYtz",
-   "title": "Fix: Open the Battle Lab page on your home screen",
-   "first": "2026-11-20T17:54:28Z",
-   "last": "2026-11-20T17:54:28Z",
-   "tags": [],
-   "cards": [
-    "c-fix-battlelabpagetry"
    ]
   },
   {
@@ -16020,8 +16051,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "cdd29b28b3497680a432dcd65efd5cae808f4db3",
- "synced_at": "2026-11-20T17:55:04+00:00",
+ "synced": "1d821d2bfde99096c11dc982fda200bd09af4d97",
+ "synced_at": "2026-11-20T17:56:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
