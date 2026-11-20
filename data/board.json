@@ -14256,6 +14256,37 @@
    "after": "t-effectslook",
    "auto": true,
    "started_at": "2026-11-20T17:55:03+00:00"
+  },
+  {
+   "id": "c-buildname",
+   "tag": "buildname1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Show the build name on Play and report cards",
+   "next": "In progress: card previews and the details sheet show which build the change is in, for cards that ask Tom to play and report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFTWCwqvD635XFuE71",
+    "opening": "\"in card previews on the board and in the details modal at the bottom of the screen, for items that require PLay and report, include the Build name the change is included in.\""
+   },
+   "prompt": {
+    "what": "Shows the build name on Play and report cards, in the card preview and at the bottom of the details sheet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small board page change, steps not written)",
+    "effort": "medium (one page, one rule)",
+    "text": "Read CLAUDE.md and card c-buildname in data/board.json, then finish what its history describes and push build buildname1. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"in card previews on the board and in the details modal at the bottom of the screen, for items that require PLay and report, include the Build name the change is included in.\""
+    }
+   ]
   }
  ],
  "sessions": [
