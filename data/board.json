@@ -10319,7 +10319,7 @@
    "title": "Listen to Grace's fixed chapter 1 lines (no re-recording)",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "voice",
    "fyi": false,
    "next": "Nothing to record. First, in ADMIN > VOICE LIBRARY, tap Send my takes to Claude once (near the bottom; it now also sends every Grace story take on this phone, at no ElevenLabs cost). Then open each of Grace's 5 chapter 1 lines with the buttons below, tap the line, and press the play button beside Built into the game: it should sound like the take you kept, at her normal speed and pitch (\"Tata, don't walk yet...\" is now 8.7 seconds, it was 12). Then press All good, or Something is wrong and say which line. It blocks the card Rebuild Grace's other slowed lines (c-gracevoice-rest).",
@@ -10366,8 +10366,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Re-record Grace's distorted chapter 1 lines is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T17:04:57.157Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-reports-3",
