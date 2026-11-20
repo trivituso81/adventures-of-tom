@@ -12790,7 +12790,7 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "b3s12",
    "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
    "blocks": [],
@@ -12818,6 +12818,10 @@
      "d": "2026-11-20",
      "t": "Rescue (START NEXT): the first conversation stopped before its first push, no work to finish. Prompt now says to push by chapter so a stall loses at most one chapter. Back in Up next.",
      "at": "2026-11-20T21:19:55Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -12831,7 +12835,7 @@
    },
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFxcAPTykx1Dr76QGY",
+    "url": "https://claude.ai/code/session_01RXeukFxcAPTykx1Dr76QGY",
     "opening": "started by START"
    },
    "rescue": {
@@ -15976,7 +15980,7 @@
   {
    "id": "c-keysecrets1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets1",
    "title": "Art Library makes pictures through repo secrets",
@@ -16000,6 +16004,10 @@
     {
      "d": "2026-11-20",
      "t": "Built: art-gen has a request mode (data/art-requests.json, commit message 'art: generate <id>'); the Library polls branch artgen and imports the picture; a failed run shows its reason on the entry. Photo-based entries are refused with the reason (14, all approved). Tests: artgen_test (request mode added), keysecrets_test, review_test, artgen_lib_test pass; test.py and clip_batch_test fail the same way without this change."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets1: Art Library GENERATE for pictures no longer calls xAI from the phone; GitHub makes the picture with the repo secret"
     }
    ],
    "prompt": {
@@ -16011,7 +16019,8 @@
     "effort": "high (touches the Library page, two Actions and their tests)",
     "text": "Read claude/handoff-rules.md and the card c-keysecrets1 in data/board.json. Art Library GENERATE (one picture, one video, a chapter of videos) must start the art-gen and clip-gen Actions by committing a request file instead of calling xAI from the phone; remove the xAI key and Relay boxes from art.html; keep the GitHub token box. Entries that need Tom's own photo stay unsupported and say so. Test with the stand-in tests, never run the Actions for real. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-keysecrets1-try"
+   "after": "t-keysecrets1-try",
+   "done": "2026-11-20"
   },
   {
    "id": "t-reporttype1play",
@@ -16076,7 +16085,7 @@
    "id": "c-takes-987c82",
    "tag": "takes-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -16091,7 +16100,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCdmkaZuGaBZcvcTNq",
     "opening": "not started"
    },
    "history": [
@@ -16103,12 +16112,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T21:19:10.535Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-20T21:20:13+00:00"
   },
   {
    "id": "t-keysecrets1-try",
@@ -16270,6 +16283,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFxcAPTykx1Dr76QGY",
+   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
+   "first": "2026-11-20T21:20:00Z",
+   "last": "2026-11-20T21:20:00Z",
+   "tags": [],
+   "cards": [
+    "c-b3s12"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukE1egNAF5Bcb9RuE5E",
    "title": "Make card prompts use the wording the repo check accepts",
@@ -16811,6 +16834,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDvGy4r9exekLEpXXy",
+   "title": "Art Library makes pictures through repo secrets",
+   "first": "2026-11-20T13:01:46-08:00",
+   "last": "2026-11-20T13:20:10-08:00",
+   "tags": [
+    "keysecrets1"
+   ],
+   "cards": [
+    "c-keysecrets1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T12:24:26-08:00",
@@ -16848,16 +16883,6 @@
    ],
    "cards": [
     "c-wanproof"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDvGy4r9exekLEpXXy",
-   "title": "Art Library makes pictures through repo secrets",
-   "first": "2026-11-20T13:01:46-08:00",
-   "last": "2026-11-20T13:01:46-08:00",
-   "tags": [],
-   "cards": [
-    "c-keysecrets1"
    ]
   },
   {
@@ -18392,8 +18417,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "49619a4d2c433f28c735f005abbc1513b0e6bbc9",
- "synced_at": "2026-11-20T21:18:58+00:00",
+ "synced": "4ae32469ff20b568f77710711fd4b8dfc1bbdfff",
+ "synced_at": "2026-11-20T21:20:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
