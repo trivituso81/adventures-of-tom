@@ -1117,7 +1117,7 @@
    "changed": "2026-11-19",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukHJDQke3jpTcqvDBk6",
+    "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
     "opening": "not started"
    },
    "prompt": {
@@ -1141,6 +1141,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -1301,6 +1305,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
+   "title": "Test START on one real card (starttest)",
+   "first": "2026-11-20T01:28:08Z",
+   "last": "2026-11-20T01:28:08Z",
+   "tags": [],
+   "cards": [
+    "c-starttest"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "first": "2026-11-19T16:34:00-08:00",
@@ -1419,8 +1433,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "71698851c493362cef9e6bb5169ae262a539262b",
- "synced_at": "2026-11-20T01:26:22+00:00",
+ "synced": "7112f96c721f42f66a7e8c28928a60d97ad98d12",
+ "synced_at": "2026-11-20T01:28:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
