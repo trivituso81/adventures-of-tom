@@ -1217,6 +1217,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukH9BhE3vicKhDvG91o",
+   "title": "Rule: battle animations are out of scope for the battle system",
+   "first": "2026-11-19T17:09:40-08:00",
+   "last": "2026-11-19T17:09:40-08:00",
+   "tags": [
+    "board-scope"
+   ],
+   "cards": [
+    "c-battlescope"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDoFYTCVGKBQjNDfwU",
    "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
    "first": "2026-11-19T16:24:19-08:00",
@@ -1302,8 +1314,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "2e0743d5ab85b44dafa31ff5082d4b87e12c1cf2",
- "synced_at": "2026-11-20T01:08:16+00:00",
+ "synced": "1462b0ab6f102817265139a8dd6e76ae81cb23cf",
+ "synced_at": "2026-11-20T01:10:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
