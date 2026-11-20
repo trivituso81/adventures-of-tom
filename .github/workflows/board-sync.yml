@@ -10,7 +10,7 @@ on:
   push:
     branches: [main]
   workflow_run:
-    workflows: [clip-gen, voice-gen, clip-gate, art-bake]
+    workflows: [clip-gen, art-gen, voice-gen, clip-gate, art-bake]
     types: [requested, completed]
   workflow_dispatch:
   schedule:
@@ -45,7 +45,8 @@ jobs:
           git fetch --depth=1 origin takes:refs/remotes/origin/takes || true
           git fetch --depth=1 origin generated:refs/remotes/origin/generated || true
       - name: A service run started or ended (R6)
-        if: github.event_name == 'workflow_run'
+        # art-gen also starts (and skips) on every push that touches data/board.json: only a tap ("board: generate ...") or a manual run is a real run
+        if: "github.event_name == 'workflow_run' && !(github.event.workflow_run.name == 'art-gen' && github.event.workflow_run.event == 'push' && !startsWith(github.event.workflow_run.head_commit.message, 'board: generate '))"
         env:
           NAME: ${{ github.event.workflow_run.name }}
           ACTION: ${{ github.event.action }}

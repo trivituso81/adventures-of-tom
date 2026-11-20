@@ -43,6 +43,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **copydocs (2026-11-20): a START run reads the repo copy.** The `claude/` folder in this repo holds copies of the Project's claude/*.md docs that this file or an open card names; a START run (no Project attached) reads those, and a session that changes one of them in the Project writes the same text there in the same push (`claude/README.md`).
 
+**artgen1 (2026-11-20): pictures from the board.** An open Tom card with ask pictures and `done_when.art_approved` has Generate all N pictures (two taps) on the board page. The tap saves `gen` on the card with the commit `board: generate <id>`; the `art-gen` Action (`.github/workflows/art-gen.yml`, `tools/art-library/artgen.py`, repo secret `XAI_API_KEY`; by hand it takes `card`, `ids`, `cap`, `dry_run` and defaults to a dry run) makes the pictures, keeps them on branch `artgen` (never merge it) and writes `gen.run` on the card. It approves nothing: the Art Library imports them (`artgen-seen`, Setup > Check for pictures made for you, `art.html?review=<ids>`) for Tom's APPROVE or REJECT. A session never runs it for real; the first paid run is Tom's tap. Plan and Built notes: `claude/artgen-plan.md`. Tests: `python3 tools/art-library/artgen_test.py`, `artgen_lib_test.py`, `python3 tools/board_artgen_test.py`.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## Battle animations are out of scope for the battle system (standing rule, Tom 2026-11-19 17:01)

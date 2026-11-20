@@ -1,3 +1,11 @@
+## artgen1 (2026-11-20): Generate all pictures from a board card, made on GitHub for you to review in the Art Library
+
+- Tom (11-19 22:16): "Make a way for me to approve the auto generation of images within the Kanban board for cards that require new image generation, all images required for a given card at once." Plan: `claude/artgen-plan.md` section 4.
+- Board (`board.html`): an open Tom card with ask pictures and `done_when.art_approved` shows Pictures on this card (one row per entry: Approved, Ready to make, Rejected with your note, Waiting for a named reference, Needs your photo, Made: waiting for your review) and the button Generate all N pictures (about $X). Two taps; the second saves `gen` on the card with the commit `board: generate <id>`. While it runs the card says so; after it, the lines per picture, the money spent and a link to the Library review.
+- Job (`.github/workflows/art-gen.yml`, `tools/art-library/artgen.py`): runs only on that commit (or by hand, dry run by default), makes each picture with the repo secret XAI_API_KEY the way the Library does (edits with at most 5 references, the newest approved version of a reference entry; generations without), saves each to branch `artgen` the moment it arrives, writes `gen.run` on the card. It approves nothing. The cap (twice the estimate, at least $1) is checked before each send; a picture that would pass it is skipped and named.
+- Art Library (`art.html`): imports the pictures from branch `artgen` as the entry's next result (so REVIEW, APPROVE and REJECT work as always), once each; Setup has Check for pictures made for you; `?review=<ids>` opens the review viewer on them; APPROVE and REJECT write `srv` on the record.
+- `board-sync` knows `art-gen` as an xAI service and ignores the skipped runs of ordinary board pushes. Tests: `python3 tools/art-library/artgen_test.py`, `python3 tools/art-library/artgen_lib_test.py`, `python3 tools/board_artgen_test.py`. Nothing was generated on xAI.
+
 ## adminhub1 (2026-11-20): one admin page with its own address, `?go=` links into the game, a home screen icon for the board
 
 - Tom (11-19 22:39): one unique address for all admin tools except the demo, grouped by what they do, plus direct links to the labs. Plan: `claude/adminhub-plan.md` (Built section).

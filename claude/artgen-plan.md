@@ -161,3 +161,14 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 ## 8. Built
 
 (Each phase's session writes here: what exists, the measured numbers, what differs from this plan and why.)
+
+### artgen1 (2026-11-20, Sonnet 5.5): built as section 4 says, with these differences
+
+- Files: `tools/art-library/artgen.py` (the job), `.github/workflows/art-gen.yml`, `tools/art-library/artgen_test.py` (classify and a full run against stub.py and a local bare remote), `tools/art-library/artgen_lib_test.py` (art.html import, `?review=`, `srv`), `tools/board_artgen_test.py` (board page; separate from board_test.py so its PUT counts stay as they were). The stub now logs the aspect ratio, size and a hash of each reference picture sent.
+- The job reads the board from the checked out main and restores and saves branch `artgen` itself (a commit made with a separate work tree, pushed with the checkout's credentials), after every picture and at the end. The workflow's extra step `--save-only` saves again after a crash.
+- The cap does not refuse the whole run. A picture that would pass it is skipped and named on the card ("the spend cap ... would be passed"), the others are made. Reason: the plan's "cap stops a third" test needs that.
+- `board-sync.yml`: the service step ignores `art-gen` runs started by an ordinary push to main (they start and skip on every board change; without this each would have made a failed-run card). Manual runs and taps count.
+- The list card shows a compact line plus the button; the full rows are in the sheet, above How did it go.
+- A rejected entry is counted as Ready (made again) in the estimate. A Library prompt edited only on Tom's phone is not seen by the job (stated limit, shown nowhere on the card yet).
+- Not done on GitHub: the dry run of section 4.4 (dispatch needs the workflow on main first): see the card c-artgen1 history for whether it was run after the push.
+- Measured: nothing, no xAI call was made. The first paid run is Tom's tap on t-artgen1try.

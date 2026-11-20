@@ -1,0 +1,96 @@
+name: art-gen
+
+# artgen1. Makes every picture of a board card on xAI when Tom taps "Generate all" on the card (tools/art-library/artgen.py). The page saves
+# data/board.json with the commit message "board: generate <card id>"; this workflow runs on that push only (every other push skips it without
+# a checkout). It never approves anything: the pictures wait on branch `artgen` (never merged, never served) and the Art Library imports them
+# for Tom's APPROVE or REJECT. Needs the repo secret XAI_API_KEY (never printed). Sessions can run it by hand (workflow_dispatch, dry_run true
+# by default); the first paid run is Tom's tap. Plan: claude/artgen-plan.md.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/board.json']
+  workflow_dispatch:
+    inputs:
+      card:
+        description: 'Board card id whose pictures to make (required for a manual run).'
+        required: true
+        default: ''
+      ids:
+        description: 'Only these Art Library entry ids, comma separated. Empty: the card''s own list.'
+        required: false
+        default: ''
+      cap:
+        description: 'Most dollars sent to xAI in this run (0 = twice the estimate, at least 1).'
+        required: false
+        default: '0'
+      dry_run:
+        description: 'true: list what would be made and the cost, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: art-gen
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: generate ')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            data
+            tools
+            art/raw
+            .github
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Restore what the artgen branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/artgen"
+          if git ls-remote --exit-code --heads origin artgen >/dev/null 2>&1; then
+            git fetch --depth 1 origin artgen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/artgen"
+          fi
+          ls -la "$RUNNER_TEMP/artgen"
+      - name: Make the pictures
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          CARD: ${{ inputs.card }}
+          IDS: ${{ inputs.ids }}
+          CAP: ${{ inputs.cap }}
+          DRY: ${{ inputs.dry_run }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -o pipefail
+          ARGS=(--out "$RUNNER_TEMP/artgen")
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            ARGS+=(--card "$CARD" --cap "${CAP:-0}")
+            [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+            [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          fi
+          python3 -I tools/art-library/artgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### art-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the pictures on the artgen branch
+        if: ${{ always() && inputs.dry_run != 'true' }}
+        run: python3 -I tools/art-library/artgen.py --save-only --out "$RUNNER_TEMP/artgen"
+      - name: Keep a copy as a workflow artifact
+        if: ${{ always() && inputs.dry_run != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: art-gen-output
+          path: ${{ runner.temp }}/artgen
+          retention-days: 30

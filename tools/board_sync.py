@@ -7,7 +7,7 @@ Git mode (run by .github/workflows/board-sync.yml on every push to main, and by 
   Reads the commits since the board's `synced` commit, applies the rules, writes data/board.json only when something changed.
   Prints one line per change. Never touches a card's title, next step or prompt (it only moves cards and adds history lines).
 
-Service mode (the same workflow, on a run of clip-gen, voice-gen, clip-gate or art-bake):
+Service mode (the same workflow, on a run of clip-gen, art-gen, voice-gen, clip-gate or art-bake):
     python3 tools/board_sync.py --service clip-gen --event start|fail|end [--detail TEXT] [--run URL] [--needs-human TEXT]
 
 board3 (2026-11-19, claude/board3-plan.md): R1 also copies a Tom card's `answer`, and starts an `auto` card at once; R2 knows `clips_reviewed`;
@@ -19,7 +19,7 @@ import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERM = ' You have my full permission to access the repo.'
-SERVICE_LANE = {'clip-gen': 'xai', 'clip-gate': 'xai', 'voice-gen': 'elevenlabs', 'art-bake': 'github'}
+SERVICE_LANE = {'clip-gen': 'xai', 'art-gen': 'xai', 'clip-gate': 'xai', 'voice-gen': 'elevenlabs', 'art-bake': 'github'}
 TAG_RE = r'[A-Za-z][A-Za-z0-9_.-]*'
 SESSION_KEEP_DAYS = 14
 QUIET_HOURS = 6

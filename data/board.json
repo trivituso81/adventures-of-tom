@@ -6501,12 +6501,12 @@
    "col": "wait",
    "waiting_on": "claude",
    "ask": "pictures",
-   "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Press GENERATE. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
+   "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Make it either way: tap Generate all on this card (the board makes it for you, about two minutes, then tap Review them in the Art Library), or press GENERATE in the Library yourself. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
    "blocks": [
     "c-heist1"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "done_when": {
     "art_approved": [
      "ch1-mudling-heist2"
@@ -6516,6 +6516,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-heist. Waits on c-heistart, which adds the entry."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "artgen1: this card now has the Generate all button (about $0.06)."
     }
    ]
   },
@@ -6782,13 +6786,13 @@
    "col": "up",
    "tag": "artgen1",
    "auto": true,
-   "next": "Ready to START. Builds the Generate all button on picture cards, the art-gen job that makes the pictures with the xAI key in the repo, and the Art Library import so you review them as usual. Then your card to try it on the Mudling sheet.",
+   "next": "Built (artgen1): Generate all pictures button on picture cards, the art-gen Action, the Art Library import. Dry run only, nothing spent on xAI. Your card to try it is t-artgen1try.",
    "blocks": [
     "c-artgen2",
     "c-cardlinks1"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -6805,6 +6809,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built artgen1 as claude/artgen-plan.md section 4 says. Differences are in the plan Built section (the cap skips a picture instead of refusing the whole run; board tests are in tools/board_artgen_test.py)."
     }
    ],
    "prompt": {
@@ -6816,7 +6824,8 @@
     "effort": "medium (the steps are written; clipgen.py is the model to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 4), then card c-artgen1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen1 exactly as the plan says and push it as artgen1. Your first push is the commit board: start c-artgen1. Spend nothing on xAI: only the dry run in section 4.4. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
    },
-   "start": true
+   "start": true,
+   "after": "t-artgen1try"
   },
   {
    "id": "c-artgen2",
@@ -7012,6 +7021,31 @@
     {
      "d": "2026-11-20",
      "t": "Added by adminhub1: your phone check of the admin page; blocks nothing."
+    }
+   ]
+  },
+  {
+   "id": "t-artgen1try",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "ask": "pictures",
+   "title": "Try Generate all on the new Mudling sheet card",
+   "next": "ADMIN > BOARD, open the card Generate and approve the new Mudling sheet. Tap Generate all 1 pictures (about $0.06), tap again to confirm. In about two minutes the card says the picture is made. Tap Review them in the Art Library: the Mudling sheet opens waiting for you. APPROVE or REJECT it as usual. All good here if the button, the wait and the review worked; Something is wrong if any step did not. This starts card QA for generated pictures (artgen2).",
+   "blocks": [
+    "c-artgen2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-artgen1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-artgen1 (artgen1 shipped). It waits until the Mudling sheet card (t-heistart) is open for you, because that card waits on its Claude card first."
     }
    ]
   }

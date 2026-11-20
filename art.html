@@ -120,7 +120,8 @@ header{padding:10px 28px}
 <aside class="side">
 <div class="card row" id="setupbar"><b style="flex:1">Setup <span class="hint" id="setupsum"></span></b><button class="small" id="setuptog">Open</button></div>
 <div id="setupbody"><div class="card" id="keys"></div>
-<div class="card" id="spend"></div></div>
+<div class="card" id="spend"></div>
+<div class="card row"><span style="flex:1">Pictures made for you on the board</span><button class="small" id="artgenchk">Check for pictures made for you</button></div></div>
 <input type="search" id="q" placeholder="Search every tab by name or id" autocomplete="off" aria-label="Search">
 <div class="tabs" id="tabs"></div>
 <div class="tabs fil" id="filters"></div>
@@ -170,9 +171,9 @@ let DB=null;
 const idb=()=>new Promise((res,rej)=>{const q=indexedDB.open('aot-art-library',1);q.onupgradeneeded=()=>q.result.createObjectStore('results',{keyPath:'key'});q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error);});
 const tx=(mode,fn)=>new Promise((res,rej)=>{const t=DB.transaction('results',mode);const r=fn(t.objectStore('results'));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);});
 async function results(id){ if(!DB) return []; const all=await tx('readonly',s=>s.getAll()); return all.filter(r=>r.id===id).sort((a,b)=>b.n-a.n); }
-async function addResult(id,blob,prompt,refs){
+async function addResult(id,blob,prompt,refs,extra){   // extra (artgen1): {t, srv} for a picture the art-gen job made
   const have=await results(id), n=(have[0]?have[0].n:0)+1;
-  await tx('readwrite',s=>s.put({key:id+'|'+n,id,n,blob,prompt,refs,t:Date.now()}));
+  await tx('readwrite',s=>s.put(Object.assign({key:id+'|'+n,id,n,blob,prompt,refs,t:Date.now()},extra||{})));
   for(const old of have.slice(KEEP-1)) await tx('readwrite',s=>s.delete(old.key));
   return n;
 }
@@ -196,6 +197,7 @@ $('keys').addEventListener('click',e=>{
 // --- setup fold: keys and spend sit under one row that starts closed once both keys are saved
 function setupSum(){ const k=!!LS.get('aot-art-key'), g=!!LS.get('aot-gh-token'), o=spendGet(); $('setupsum').textContent=(k&&g?'keys set':(k?'GitHub token missing':g?'xAI key missing':'keys missing'))+', about $'+o.total.toFixed(2)+' spent'+(typeof DATA!=='undefined'&&DATA&&DATA.live?', prompts live from GitHub':''); }
 function setupOpen(open){ $('setupbody').hidden=!open; $('setuptog').textContent=open?'Close':'Open'; setupSum(); }
+$('artgenchk').onclick=async()=>{ const b=$('artgenchk'); b.disabled=true; try{ await artgenImport(true); }finally{ b.disabled=false; } };
 $('setuptog').onclick=()=>setupOpen($('setupbody').hidden);
 // --- tabs, filters, groups and one-line rows (UX rebuild, CHANGES 110)
 // Every entry is one collapsed row. Rows sit in groups (the `group` field from make-prompts.js) and groups sit in tabs. Only an open row draws its prompt, references and results.
@@ -494,14 +496,14 @@ async function decide(kind,resKey,btn,auto){   // auto (clipbatch1): GENERATE CH
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
       setMsg(id,'Saving the prompt...');
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})); },'Art Library: '+id+' approved (v'+k+')');
-      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})]); delete EDITS[id]; saveEdits();
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{})); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{})]); delete EDITS[id]; saveEdits();
       MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen'+(clipChapterGroup(e.group)?' and open ADMIN > BATTLE LAB > '+e.group.toUpperCase()+' REVIEW':'')+'.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{})); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
-      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{})]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{})); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{})]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
     refreshItem(id); return true;
@@ -600,6 +602,33 @@ $('exp').onclick=async()=>{
   files.push({name:'art-prompts-edited.json',blob:new Blob([JSON.stringify(prompts,null,1)],{type:'application/json'})});
   download(await makeZip(files),'art-library-export.zip'); toast('Exported '+all.length+' pictures.');
 };
+// --- artgen1: pictures the art-gen job made for Tom (branch artgen, index.json). Each one becomes the next result of its entry on this device, so REVIEW, APPROVE
+// and REJECT work as for a picture made here. A key already imported is remembered (aot-artgen-seen); a picture older than the entry's last decision is not imported.
+const ARTGEN_BASE=()=> (Q.get('artgen')||'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/artgen').replace(/\/+$/,'')+'/';
+async function artgenImport(manual){
+  let n=0, list=[];
+  try{ const r=await fetch(ARTGEN_BASE()+'index.json?t='+Date.now(),{cache:'no-store'}); if(r.ok) list=(await r.json()).results||[]; else if(manual&&r.status!==404) toast('Could not read the pictures list ('+r.status+').'); }catch(err){ if(manual) toast('Could not reach the pictures list.'); return 0; }
+  let seen=[]; try{ seen=JSON.parse(LS.get('aot-artgen-seen')||'[]')||[]; }catch(err){}
+  for(const r of list){
+    if(seen.includes(r.key)) continue;
+    const e=ENTRY[r.id]; if(!e) continue;
+    const ds=[].concat(e.versions||[],e.rejects||[]); if((r.t||0)<=Math.max(0,...ds.map(x=>+x.at||0))){ seen.push(r.key); continue; }
+    try{
+      const ir=await fetch(ARTGEN_BASE()+r.file,{cache:'no-store'}); if(!ir.ok) continue;
+      await addResult(r.id,await ir.blob(),r.prompt,r.refs||[],{t:r.t,srv:r.key}); seen.push(r.key); n++;
+    }catch(err){ console.warn('artgen import failed',r.key,err); }
+  }
+  LS.set('aot-artgen-seen',JSON.stringify(seen.slice(-500)));
+  if(n){ await loadResults(); computeStates(); paintList(true); }
+  if(manual||n) toast(n?n+' picture'+(n===1?'':'s')+' made for you '+(n===1?'is':'are')+' waiting for your review.':'No new pictures were made for you.');
+  return n;
+}
+// ?review=<ids>: the review viewer on those entries (the ones waiting on Tom on this device)
+function reviewIds(ids){
+  computeStates(); const w=ids.filter(id=>ENTRY[id]&&ST[id]==='wait');
+  if(!w.length) return toast('Those pictures are not waiting for review on this device. Open Setup and press Check for pictures made for you.');
+  RV.q=w; RV.mode='queue'; RV.i=0; RV.v=0; $('rv').hidden=false; document.body.style.overflow='hidden'; rvDraw();
+}
 // --- flight preview (fprev1): flight-preview.html in a full-screen frame; its back link closes it
 document.addEventListener('click',e=>{ if(!e.target.closest('[data-fprev]')) return; if($('fpov')) return;
   const d=document.createElement('div'); d.id='fpov'; d.innerHTML='<iframe src="flight-preview.html?embed=1" title="Flight preview"></iframe>'; document.body.appendChild(d); document.body.style.overflow='hidden'; });
@@ -617,10 +646,12 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   for(const e of DATA.entries){ ENTRY[e.id]=e; if(!e.group) e.group=e.tab; }
   retireOldEdits();
   await loadResults();
+  await artgenImport(false);
   const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&(!TABS.includes(UI.tab)||!DATA.entries.some(e=>e.tab===UI.tab))) UI.tab=first;
   if(!FILTERS.some(f=>f[0]===UI.filter)) UI.filter='todo';
   setupOpen(!(LS.get('aot-art-key')&&LS.get('aot-gh-token')));   // fold the keys and spend cards once both keys are saved
   paintList(); scrollTo(0,UI.sy[UI.tab]||0);
+  { const rv=(Q.get('review')||'').split(',').map(x=>x.trim()).filter(Boolean); if(rv.length) reviewIds(rv); }
 })();
 </script>
 </body>

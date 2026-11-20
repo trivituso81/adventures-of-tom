@@ -98,6 +98,15 @@ div.card{cursor:pointer}
 .ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
 .ch.rec{background:#2f9e63}.ch.rec small{color:#e8fff2}
 .rv{display:flex;gap:8px;margin-top:10px}
+.pics{margin:10px 0 0;padding:10px;border:1px solid #3a3566;border-radius:10px;background:#1c1a40}
+.pics h4{margin:0 0 6px}
+.pics .pr{display:flex;gap:8px;font-size:13px;line-height:1.35;margin:3px 0}
+.pics .pr b{flex:0 0 auto;max-width:48%}
+.pics .pr span{flex:1;color:#cfcbe8}
+.pics button.gen{width:100%;margin-top:8px}
+.pics button.gen.armed{background:#ffd34d;color:#241f4e}
+.pics .gm{font-size:13px;margin-top:8px;color:#cfcbe8}
+.pics a{color:#ffd34d;font-weight:700}
 .rv button{flex:1;min-height:48px;font-size:15px}
 button.bad{background:#b4414f;color:#fff}
 textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;width:100%;min-height:110px;resize:vertical}
@@ -171,7 +180,7 @@ async function load(){
   B=await r.json();sha=null;$('src').textContent='site copy';stamp();
 }
 function stamp(){lastLoad=nowMs();$('upd').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}
-async function reload(){if($('sheet').style.display==='block')return false;try{await load();render();return true;}catch(e){return false;}}
+async function reload(){if($('sheet').style.display==='block')return false;try{await load();await loadArt();render();return true;}catch(e){return false;}}
 setInterval(reload,60000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&nowMs()-lastLoad>5000)reload();});
 
@@ -218,7 +227,7 @@ function cardHtml(c,ctx){
   let row='';
   if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
   if(c.start_error&&c.col!=='done') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
-  if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=rvBtns(c.id);
+  if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=picsHtml(c,true)+rvBtns(c.id);
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
 const rvBtns=id=>'<div class="rv"><button class="good" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
@@ -281,6 +290,71 @@ function renderLanes(){
   h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);   // no Done column: finished cards sit below the board, closed
   $('lanesView').innerHTML=h;
 }
+// ---- artgen1: Generate all pictures from the card. The page saves `gen` on the card with the message "board: generate <id>"; the GitHub Action art-gen
+// (tools/art-library/artgen.py) makes the pictures and writes gen.run; the Art Library imports them for APPROVE or REJECT. Plan: claude/artgen-plan.md.
+let ART=null,GENARM='';
+const SPEND_PER=.04,SPEND_REF=.01,CHAINRE=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/;
+const picIds=c=>(c.done_when&&c.done_when.art_approved)||[];
+const hasPics=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&c.ask==='pictures'&&picIds(c).length>0;
+async function loadArt(){
+  if(!B||!B.cards.some(hasPics)||ART)return;
+  try{const r=await fetch((Q.get('prompts')||'data/art-prompts.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok){const d=await r.json();ART={};d.entries.forEach(e=>{ART[e.id]=e;});}}catch(e){}
+}
+const shortT=t=>String(t||'').replace(/\s*\((?:needs step \d+ approved|same chat[^)]*|fresh generator chat[^)]*)\)/gi,'').replace(/\s*\([^)]*\)\s*$/,'').trim();
+const money=x=>'$'+x.toFixed(2);
+function picRows(c){
+  const run=(c.gen&&c.gen.run)||{},madeNow=[].concat(run.made||[],run.already||[]);
+  return picIds(c).map(id=>{
+    const e=ART&&ART[id];
+    if(!e)return {id,title:id,state:'unknown',text:'Not found in the Art Library list'};
+    const title=shortT(e.title);
+    if(e.status==='approved')return {id,title,state:'approved',text:'Approved'};
+    if(e.clip)return {id,title,state:'skip',text:'A video: make it in the Art Library, Clips tab'};
+    if(e.own)return {id,title,state:'skip',text:'Needs your photo: make it in the Art Library'};
+    const refs=e.refs||[];
+    if(refs.length>5)return {id,title,state:'skip',text:'More than 5 reference pictures: fix in the Art Library'};
+    for(const rf of refs){const m=CHAINRE.exec(rf),dep=m&&ART[m[2]];if(dep&&!(dep.versions||[]).length)return {id,title,state:'wait',text:'Waiting for "'+shortT(dep.title)+'" to be approved'};}
+    if(madeNow.includes(id))return {id,title,state:'made',text:'Made: waiting for your review'};
+    const rj=(e.rejects||[]).slice(-1)[0];
+    if(e.status==='rejected'||rj)return {id,title,state:'make',cost:SPEND_PER+SPEND_REF*refs.length,text:'Rejected'+(rj&&rj.note?' ('+rj.note+')':'')+': will be made again'};
+    return {id,title,state:'make',cost:SPEND_PER+SPEND_REF*refs.length,text:'Ready to make'};
+  });
+}
+function picsHtml(c,compact){
+  if(!hasPics(c))return '';
+  if(!ART)return '<div class="pics"><h4>Pictures on this card</h4><div class="gm">Loading the picture list...</div></div>';
+  const g=c.gen||{},run=g.run||{},rows=picRows(c),mk=rows.filter(r=>r.state==='make'),n=mk.length,est=mk.reduce((a,r)=>a+r.cost,0);
+  let h='<div class="pics"><h4>Pictures on this card</h4>'+(compact?'<div class="gm" style="margin:0">'+rows.filter(r=>r.state==='approved').length+' of '+rows.length+' approved, '+n+' ready to make. Open the card for the list.</div>':rows.map(r=>'<div class="pr"><b>'+esc(r.title)+'</b><span>'+esc(r.text)+'</span></div>').join(''));
+  const busy=g.want||run.state==='running';
+  let why='';
+  if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' picture'+((run.n||n)===1?'':'s')+'...';
+  else if(c.col==='wait'){const by=blockedBy(c);why='Waiting on: '+(by.length?by.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
+  else if(!n)why='Nothing to make right now.';
+  const arm=GENARM===c.id;
+  h+='<button type="button" class="gen good'+(arm?' armed':'')+'" data-act="gen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+money(est)+')':'Generate all '+n+' picture'+(n===1?'':'s')+' (about '+money(est)+')')+'</button>';
+  if(busy)h+='<div class="gm">'+(g.want?'Started. The pictures are made for you (about a minute each). This card shows them when they are ready.':'The job is running. This card shows the pictures when they are ready.')+'</div>';
+  if(!busy&&run.state&&run.state!=='running'){
+    const ids=(run.made||[]).concat(run.already||[]).filter(id=>rows.some(r=>r.id===id));
+    h+='<div class="gm"><b>Last run: '+(run.state==='done'?'finished':'failed')+'</b> (spent about '+money(+run.spent||0)+')'
+      +(run.made&&run.made.length?'<br>Made: '+esc(run.made.join(', ')):'')
+      +(run.already&&run.already.length?'<br>Already waiting: '+esc(run.already.join(', ')):'')
+      +(run.skipped||[]).map(x=>'<br>Skipped '+esc(x.id)+': '+esc(x.why)).join('')
+      +(run.failed||[]).map(x=>'<br>Failed '+esc(x.id)+': '+esc(x.why)).join('')
+      +(ids.length?'<br><a href="art.html?review='+esc(ids.join(','))+'">Review them in the Art Library</a>':'')+'</div>';
+  }
+  return h+'</div>';
+}
+function genTap(id){
+  const c=cardById(id);if(!c||!hasPics(c))return;
+  const mk=picRows(c).filter(r=>r.state==='make');if(!mk.length)return;
+  if(GENARM!==id){GENARM=id;rerender();clearTimeout(genTap.h);genTap.h=setTimeout(()=>{if(GENARM===id){GENARM='';rerender();}},4000);return;}
+  GENARM='';clearTimeout(genTap.h);
+  const ids=mk.map(r=>r.id),est=mk.reduce((a,r)=>a+r.cost,0);
+  save('board: generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.gen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),ids,est:+est.toFixed(2),mode:'review'};touch(z,'Tom approved generating '+ids.length+' picture'+(ids.length===1?'':'s')+' (about '+money(est)+').');}return d;})
+    .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
+}
+function rerender(){render();if(cur&&$('sheet').style.display==='block'){const y=$('sheet').scrollTop;openSheet(cur);$('sheet').scrollTop=y;}}
+
 function render(){
   counts();
   $('chips').innerHTML=['All'].concat(B.themes).map(t=>'<button class="chip'+((t==='All'?!theme:theme===t)?' on':'')+'" type="button" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('');
@@ -296,6 +370,7 @@ function openSheet(id){
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
   if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
+  h+=picsHtml(c,false);
   if(isReview(c)&&c.col!=='wait') h+='<h4>How did it go?</h4>'+rvBtns(c.id)+'<p class="hint" style="margin-top:6px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
   if(c.paste) h+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
   if(c.answer) h+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
@@ -470,6 +545,7 @@ document.addEventListener('click',e=>{
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='gen'){genTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
   if(t.id==='wpick'){$('wshot').click();return;}
@@ -509,7 +585,7 @@ document.addEventListener('click',e=>{
     run('board: note '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c)touch(c,'Tom: '+tx);return d;},'Note saved');return;}
 });
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
-load().then(render).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
+load().then(loadArt).then(render).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
 window.__board={get B(){return B;},render,reload};
 </script>
 </body>

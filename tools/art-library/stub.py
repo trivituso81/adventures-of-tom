@@ -8,7 +8,7 @@ xAI:    POST /v1/images/generations and /v1/images/edits  (Bearer must be 'test'
         video host that does not let a web page keep a copy).
 GitHub: PUT /repos/<o>/<r>/contents/<path>, GET same path (404 until put; data/art-prompts.json is pre-seeded from the repo with sha 'seed'; a PUT to an existing path without the right sha answers 409; GET /files lists everything stored). Calls are logged to /log (GET) for assertions.
 CORS is open so a page on another port can call it."""
-import base64, json, sys, zlib, struct
+import base64, json, sys, zlib, struct, hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 def png(w=96, h=128):
@@ -96,7 +96,7 @@ class H(BaseHTTPRequestHandler):
                 ims = b.get('images') if isinstance(b, dict) else None
                 ok = ok and isinstance(ims, list) and 1 <= len(ims) <= 5 and all(i.get('type') == 'image_url' and str(i.get('url', '')).startswith('data:') for i in ims)
             if not ok: return self._send(400, {'error': 'bad request shape'})
-            LOG.append({'xai': self.path, 'refs': len(b.get('images') or []), 'prompt': b['prompt'][:80]})
+            LOG.append({'xai': self.path, 'refs': len(b.get('images') or []), 'prompt': b['prompt'][:80], 'ar': b.get('aspect_ratio'), 'res': b.get('resolution'), 'refhash': [hashlib.sha1(i['url'].split(',', 1)[-1].encode()).hexdigest()[:10] for i in (b.get('images') or [])]})
             return self._send(200, {'data': [{'b64_json': base64.b64encode(png()).decode(), 'mime_type': 'image/png'}]})
         self._send(404)
     def do_PUT(self):
