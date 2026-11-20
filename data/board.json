@@ -9480,6 +9480,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by c-ch1leftovers: Gus and Bean have no amber-* entry or picture, so the glass block in engine/ch12-render.js is the only look they have."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
    "prompt": {
@@ -9491,7 +9495,11 @@
     "effort": "medium",
     "text": "Read CLAUDE.md, then docs/CHANGES.md entries amber1, amber2 and amber3 and tools/art-library/amber-prompts.js. Gus, Bean and Deedee on the porch (data/scenes-ch14.js, amber:true) show the old glass block because engine/ch12-render.js AMBER_IDS has no entry for them. Add Art Library entries amber-gus, amber-bean and amber-deedee in a group Chapter 14 amber, built like the chapter 12 ones (each person's newest approved npc-photo hero as the reference, the moment from their frozen lines in data/scenes-ch14.js), run the board check, and make a Tom card (ask pictures) to generate and approve them. Do not generate anything yourself. When they are approved, bake with tools/sprite-bake/bake_amber.py, add the three names to AMBER_IDS, look at the frames with tools/amber_look.py in portrait and landscape, bump AMBER_V. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "t-poselines",
