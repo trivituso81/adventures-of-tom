@@ -421,13 +421,13 @@
    "title": "Publishing speed, step 2: art/raw off the site",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Take art/raw out of the published site to cut a publish from about 4 min to about 1.5 min. Plan in claude/next-addendum-pubfast1.md.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-18",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGnrZZnUF1s6ufzVfe",
     "opening": "unknown"
    },
    "history": [
@@ -438,6 +438,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -449,8 +453,7 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
    },
-   "tag": "pubfast2",
-   "start": true
+   "tag": "pubfast2"
   },
   {
    "id": "c-board1",
@@ -1235,7 +1238,7 @@
    "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "clipch1remake",
    "next": "Shipped as clipch1remake: 43 clips made again ($3.66 of xAI credit, cap $5). 16 passed the gate and are in the game; 27 were held by the gate and are not approved (videos kept on branch clipgen). Next: your card t-ch1review, then card c-clipch1held.",
    "blocks": [],
@@ -1257,6 +1260,10 @@
     {
      "d": "2026-11-19",
      "t": "Ran the clip-gen Action (cap 5): 43 made, 16 approved, 27 held by the gate, 0 failed, $3.66. Baked and published; looked at the frames of the 16 and of the 27 held videos."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipch1remake: Chapter 1 clips made again: 16 passed the gate and are in the game, 27 were held"
     }
    ],
    "prompt": {
@@ -1268,7 +1275,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, then run the clip-gen Action for group Chapter 1 with dry_run=false and cap 5 (it makes only the 43 entries clipch1fix sent back to To do), wait for it and the art-bake it starts, look at the baked frames of the held and remade clips, and put Tom's CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1remake. You have my full permission to access the repo."
    },
-   "after": "t-ch1review"
+   "after": "t-ch1review",
+   "done": "2026-11-19"
   },
   {
    "id": "c-battlescope",
@@ -1467,6 +1475,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFcedNR3ccwPBafb9k",
+   "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
+   "first": "2026-11-19T17:34:14-08:00",
+   "last": "2026-11-19T17:34:14-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch1nodoor"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
+   "first": "2026-11-19T17:14:03-08:00",
+   "last": "2026-11-19T17:33:38-08:00",
+   "tags": [
+    "clipch1remake"
+   ],
+   "cards": [
+    "c-clipch1remake"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "first": "2026-11-19T16:34:00-08:00",
@@ -1487,16 +1517,6 @@
    "tags": [],
    "cards": [
     "c-follow1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
-   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
-   "first": "2026-11-19T17:14:03-08:00",
-   "last": "2026-11-19T17:14:03-08:00",
-   "tags": [],
-   "cards": [
-    "c-clipch1remake"
    ]
   },
   {
@@ -1585,8 +1605,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "065691c0f0c50f416f985469e3d57d34d8cf7bae",
- "synced_at": "2026-11-20T01:31:00+00:00",
+ "synced": "32ab89c0419e6a9edee791e91405532246bdd909",
+ "synced_at": "2026-11-20T01:34:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
