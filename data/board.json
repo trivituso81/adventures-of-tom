@@ -12803,7 +12803,7 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "tag": "b3s12",
    "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
    "blocks": [],
@@ -12839,6 +12839,11 @@
     {
      "d": "2026-11-20",
      "t": "Stuck twice: The rescue started 1:18 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s12)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again after Stuck twice.",
+     "at": "2026-11-20T23:51:22.239Z"
     }
    ],
    "prompt": {
@@ -12855,14 +12860,7 @@
     "url": "https://claude.ai/code/session_01RXeukFxcAPTykx1Dr76QGY",
     "opening": "started by START"
    },
-   "rescue": {
-    "at": "2026-11-20T21:18:55+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukFxcAPTykx1Dr76QGY",
-    "prev": "https://claude.ai/code/cse_01RXeukEEScGq648BRA7rGuk"
-   },
-   "waiting_on": "tom"
+   "start": true
   },
   {
    "id": "t-gem-canon01play",
@@ -17250,7 +17248,7 @@
   {
    "id": "t-stuck-b3s12",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle System",
    "ask": "unstick",
    "unstick": {
@@ -17270,10 +17268,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: card c-b3s12 stalled after its rescue"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again.",
+     "at": "2026-11-20T23:51:22.239Z"
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-keysecrets2-try-4",
