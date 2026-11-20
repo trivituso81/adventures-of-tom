@@ -11776,7 +11776,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEpcBb8S5f8oaA1rho",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -11788,6 +11788,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:56:16.960Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started; confirming the line still has the ;) on main."
     }
    ],
    "tag": "gem-polish01",
