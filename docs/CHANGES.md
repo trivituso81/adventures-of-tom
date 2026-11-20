@@ -1,3 +1,7 @@
+## board-clipresetb (2026-11-19): board only: the c-clipreset prompt cut to the task
+
+- Tom (11-19 18:13) objected that it repeated the Project instructions. No game change.
+
 ## board-clipreset (2026-11-19): board only: stop the clip remake plan, add the clip reset card
 
 - Tom (11-19 18:10) rejected the approach after Grace's guard came out with praying hands. Cards c-clipch1held and t-ch1review retired; new Claude card c-clipreset (Fable 5.2, high) holds the escalation prompt. No game change.
