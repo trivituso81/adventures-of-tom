@@ -8332,20 +8332,24 @@
    "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "boardwait1",
    "next": "Find why Tom cards sit in Waiting saying waiting on Claude when the Claude work already shipped, fix the board-sync job so it cannot happen again, and clean up the cards stuck today.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
     "opening": "\"Why are there so many cards assigned to me but in the waiting column\""
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Tom (00:22): \"Why are there so many cards assigned to me but in the waiting column and it says waiting on Claude at the bottom of each one? Can you investigate each one and see what's going on and resolve as needed?\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8684,6 +8688,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
+   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
+   "first": "2026-11-20T00:26:34-08:00",
+   "last": "2026-11-20T00:26:34-08:00",
+   "tags": [],
+   "cards": [
+    "c-boardwait1"
    ]
   },
   {
@@ -9317,8 +9331,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "eb6d86ed07cbb0d87816bc3a1ef04183dc0ca01e",
- "synced_at": "2026-11-20T08:24:56+00:00",
+ "synced": "6b08ebac7a1cfd86e2890676a43ff62b6f5eec1a",
+ "synced_at": "2026-11-20T08:27:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
