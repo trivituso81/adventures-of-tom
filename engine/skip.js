@@ -6,7 +6,10 @@
 //       happens (flags, items, party changes), so skipping never breaks the story. It pauses at a choice (the player
 //       picks) and stops at a story fight; both modes reset when a fight starts or the scene ends.
 // Loaded after engine/splash.js, before engine/main.js.
-const cut={ff:false,skip:false,hold:0,muteUntil:0,voiceMute:false};
+const cut={ff:false,skip:false,hold:0,muteUntil:0,voiceMute:false,carry:null};
+// Scene 1 of chapter 1 is two scripts (the opening, then Grace's list, ch1Goal) that Tom sees as one scene (Tom 2026-11-19: "when i hit skip it
+// should skip until the whole thing is done"). A scene that sets `intro.chain` to the id of the scene that follows it (beginOpening, engine/story.js)
+// hands a SKIP on: the next scene starts already skipped.
 function cutsceneOn() { return intro.active&&intro.phase==='scene'&&!battle.active; }
 function cutReset() { cut.ff=false; cut.skip=false; cut.hold=0; cut.voiceMute=false; }
 function cutFF() {
@@ -32,6 +35,17 @@ say=function(id,kind,delay=0,only=null,slice=null) {
   return LE_say_cut(id,kind,0,only,slice);
 };
 
+// A scene that starts while a carry is waiting is skipped from its first step; any other scene clears the carry.
+const LE_playScene_cut=playScene;
+playScene=function(script,opts) {
+  const carried=cut.carry&&script===cut.carry&&performance.now()-cut.carryAt<5000;
+  cut.carry=null;
+  const r=LE_playScene_cut(script,opts);
+  intro.chain=null;
+  if(carried&&cutsceneOn()) { cut.skip=true; cut.muteUntil=performance.now()+1200; }
+  return r;
+};
+
 const onChoiceNow=()=>dialog.active&&dialog.choice&&dialog.index===dialog.lines.length-1;
 function revealLine() { if(dialog.active&&dialog.shown<dialog.chars.length) advanceDialog(); }
 
@@ -42,6 +56,7 @@ updateIntro=function(dt) {
     cut.muteUntil=performance.now()+1200;
     for(let i=0;i<600;i++) {
       if(!cutsceneOn()) break;
+      if(intro.chain) { cut.carry=intro.chain; cut.carryAt=performance.now(); }
       if(dialog.active) {
         if(onChoiceNow()) { revealLine(); break; }   // the player picks; skipping carries on after
         revealLine(); advanceDialog();
@@ -49,7 +64,7 @@ updateIntro=function(dt) {
       }
       LE_updateIntro_cut(.1);
     }
-    if(battle.active||!intro.active) cutReset();
+    if(battle.active||!intro.active) { const c=battle.active?null:cut.carry; cutReset(); cut.carry=c; }   // the next scene of the chain starts skipped
     return;
   }
   if(cut.ff) {

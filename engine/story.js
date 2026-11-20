@@ -1216,6 +1216,7 @@ beginOpening=function() {
   resetStory('full',1);
   intro.phase='scene';
   playScene(()=>[{card:1,time:3.2},...SCENES.opening()],{fade:.7});
+  intro.chain='ch1Goal';   // scene 1 is this opening plus Grace's list: a SKIP in the opening carries on through ch1Goal (engine/skip.js)
 };
 
 // ---------- 5. Running a chapter (C1): triggers, gates, cutscene actors, story fights ----------

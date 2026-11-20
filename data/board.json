@@ -2086,7 +2086,8 @@
     "model": "Claude Sonnet 5.5 (row C: the cause had to be found)",
     "effort": "medium (a small engine fix with a test)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md skipchain1, then finish the card c-skipchain1 if it is not shipped. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-skipchain1play"
   },
   {
    "id": "b-board-b3s9a",
@@ -2110,6 +2111,29 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "t-skipchain1play",
+   "title": "Press SKIP in the opening of a new game and check scene 1 skips whole",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build skipchain1: RELOAD on the title, START NEW, and press SKIP » at the top right during the opening. It should run through Grace's list and the walk out, ending with you in control on the Square and the two Goal popups, with no second scene starting by itself. Report with the REPORT tab if it stops halfway (skipchain1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"the game is still incorrectly seeing scne 1 as two separate scenes\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by skipchain1: your phone check of the SKIP fix; blocks nothing."
+    }
+   ]
   }
  ],
  "sessions": [
