@@ -1958,12 +1958,12 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits fully on the bare table top between the cake stand and the table's right edge, touching neither the stand nor the floor behind. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
    "blocks": [],
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "created": "2026-11-20",
    "history": [
     {
@@ -2009,9 +2009,12 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: muffins overlap art. Fix fix-cutpolish4b-3 (card c-fix-cutpolish4b-3): rendered the island at the real zoom, the pan still touched the cake stand base and stood above the table's back edge; moved it to sit fully on the wood."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "b-takes1",
@@ -6089,7 +6092,7 @@
    "id": "c-fix-cutpolish4b-3",
    "tag": "fix-cutpolish4b-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -6134,6 +6137,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-cutpolish4b-3: the muffin pan sits fully inside the table top, clear of the cake stand"
     }
    ],
    "prompt": {
@@ -6146,7 +6153,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b-3 and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b-3.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). He wrote: muffins overlap art Screenshot: board-shots/t-cutpolish4b-mwoep1pq.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwoep1pq.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:15:17.642Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
   },
   {
    "id": "c-music3",
@@ -6189,8 +6197,10 @@
    "url": "https://claude.ai/code/session_01RXeukGvcdtn5b951ZTb9pW",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
    "first": "2026-11-20T03:16:26Z",
-   "last": "2026-11-20T03:16:26Z",
-   "tags": [],
+   "last": "2026-11-20T03:19:34Z",
+   "tags": [
+    "fix-cutpolish4b-3"
+   ],
    "cards": [
     "c-fix-cutpolish4b-3"
    ]
@@ -6816,8 +6826,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "e05a2c511939c7b68ce8bebca7335c080b5bb6d9",
- "synced_at": "2026-11-20T03:17:21+00:00",
+ "synced": "6bee62dc0c303713b307dc98a72d39ab374517ca",
+ "synced_at": "2026-11-20T03:20:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
