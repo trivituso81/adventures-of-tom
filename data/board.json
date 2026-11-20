@@ -11214,7 +11214,7 @@
    "title": "Fix: Boppy reacts to the Mudling he should miss",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "next": "Claude fixes this (BUG-11, severity Medium) when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11227,6 +11227,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, BUG-11 (claude/ch1-gemini-tracker.md). Severity: Medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Already fixed",
+     "at": "2026-11-20T16:19:46.976Z"
     }
    ],
    "tag": "gem-bug11",
@@ -11238,7 +11243,9 @@
     "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
     "effort": "low (one sprite pose in one scene)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug11 in data/board.json, history included. Your first push is the commit board: start c-gem-bug11.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-11. What the tester saw: Severity Medium. Where: `grands` Mudling Intrusion Staging. When the Mudling barges into `grands`, Boppy's sprite raises both hands in shock watching it, contradicting his oblivious punchline moments later (`\"...because the hat kept getting taller. Where'd the muffins go?\"`).\n\nThe tester suggested (a suggestion, not an order): Keep Boppy's sprite turned away / gesturing mid-story during the Mudling intrusion so he genuinely misses the monster.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug11, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-canon01",
