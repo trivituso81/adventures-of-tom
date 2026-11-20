@@ -10751,6 +10751,38 @@
    "after": "t-heist1play",
    "auto": true,
    "started_at": "2026-11-20T16:00:01+00:00"
+  },
+  {
+   "id": "c-boardbar1",
+   "tag": "boardbar1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Board: empty bar at the top in landscape on the Duo",
+   "next": "Claude is removing the top padding the Board adds in landscape.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFEKCHz2sXbR5Y4xGu",
+    "opening": "Why is there a dead big blue bar at the top of the Kanban board iPhone duo horizontal view?"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"Why is there a dead big blue bar at the top of the Kanban board iPhone duo horizontal view?\" (screenshot of the Board in landscape with an empty band above the header). Related older fix for the game page: vpfit1."
+    }
+   ],
+   "prompt": {
+    "what": "Removes the empty band above the Board header in landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, cause found in board.html)",
+    "effort": "medium (one small CSS change)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardbar1 in data/board.json. Your first push is the commit board: start c-boardbar1. In board.html the body adds padding-top env(safe-area-inset-top), which shows as an empty band above the header in landscape on the iPhone Duo. Remove that top padding in landscape and keep the menu position in step, test portrait and landscape, push. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
