@@ -6801,6 +6801,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom (22:19): \"Create these instructions and choose to design another prompt for a lesser model to execute your vision.\" So this chat wrote the plan and the cards and built nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -6811,7 +6815,8 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (the steps are written; clipgen.py is the model to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 4), then card c-artgen1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen1 exactly as the plan says and push it as artgen1. Your first push is the commit board: start c-artgen1. Spend nothing on xAI: only the dry run in section 4.4. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-artgen2",
