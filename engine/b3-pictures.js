@@ -13,14 +13,14 @@
 // and a bomb), and its pips (gold gems; a spent one is grey). The recommended move carries a gold star and a glowing edge.
 // Pictures: the flavors and Primes use the emoji pictures (data/battle-emoji.js), the rest the 16 x 16 pixel set (data/battle-icons.js).
 
-Object.assign(BE_MAP,{b3f_clobber:'1f44a',b3f_sizzle:'1f525',b3f_drench:'1f4a6',b3f_razzle:'2728',b3f_racket:'1f4e3',b3_bomb:'1f4a3',b3_star:'2b50',b3_guard:'1f6e1',b3_push:'1f4a8'});
+Object.assign(BE_MAP,{b3f_clobber:'1f44a',b3f_sizzle:'1f525',b3f_drench:'1f4a6',b3f_razzle:'2728',b3f_racket:'1f4e3',b3_bomb:'1f4a3',b3_star:'2b50',b3_guard:'1f6e1',b3_push:'1f4a8',b3f_support:'1f917',b3_pocket:'1f392',b3_use:'1f44d'});
 Object.assign(BI_ART,{
   b3_pip:'p8,1,14,6,8,15,2,6,Y;p8,2,12,6,8,6,4,6,y;d6,4,w',
   b3_pip_off:'p8,1,14,6,8,15,2,6,G;p8,2,12,6,8,6,4,6,g',
   b3_resist:'p7.5,14,13,7,9.5,7,9.5,1,5.5,1,5.5,7,2,7,R',
   b3_ko:'L2,2,13,13,R;L13,2,2,13,R',
   b3_ruckus:'X8,8,7.5,y;H8,8.5,3.8,P;d6,6,w'});
-const B3P_FLAV={clobber:'b3f_clobber',sizzle:'b3f_sizzle',drench:'b3f_drench',razzle:'b3f_razzle',racket:'b3f_racket',support:'m_shoulder'};
+const B3P_FLAV={clobber:'b3f_clobber',sizzle:'b3f_sizzle',drench:'b3f_drench',razzle:'b3f_razzle',racket:'b3f_racket',support:'b3f_support'};
 const B3P_PRIME={toasty:'b3f_sizzle',drenched:'b3f_drench',dazzled:'b3f_razzle'};
 const b3pOn=()=>typeof bpOn==='function'&&bpOn();
 const b3pFlavors=(S,px)=>'<span class="b3p-fl">'+S.flavor.map(f=>bpIcon(B3P_FLAV[f]||'m_shoulder',px)).join('')+'</span>';
@@ -58,11 +58,19 @@ function b3pCross(u,cmdOn,off) {
 // ---------- Lists ----------
 function b3pSkills(u) {
   const rows=b3SkillRows(u),free=b3Granted()===u,rc=b3Rec();
-  return '<div class="b2-grid bp-grid">'+'<div class="b3-pv" id="b3-pv"></div>'+rows.map((S,i)=>{
+  return '<div class="b2-grid bp-grid">'+rows.map((S,i)=>{
     const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S),ef=b3pEffect(S),r=rc&&rc.skill===S.id;
     return '<button type="button" class="b2-btn bp-btn'+(S.slot==='basic'?' b2-basic':'')+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(r?' rec':'')+'" data-i="'+i+'">'+
       '<span class="bp-ic">'+b3pFlavors(S,96)+(ef?'<span class="b3p-ef" style="width:30px;height:30px">'+bpIcon(ef,30)+'</span>':'')+(r?b3pStar(26):'')+(can.ok?'':'<span class="bp-lock">'+bpIcon('m_lock',24)+'</span>')+'</span>'+
       '<span class="bp-cost">'+b3pDrops(free?0:c,13)+'</span><span class="bp-w">'+b2Esc(bpWord(S.name))+'</span></button>'; }).join('')+(free?'':bpBack())+'</div>';
+}
+// The skill card as pictures: the flavor big, what it does, the drops, the picture preview, then BACK and USE (a thumbs up).
+function b3pSkill(u) {
+  const S=b3SkillRows(u)[B3.sel]; if(!S) return '';
+  const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S),free=b3Granted()===u,ef=b3pEffect(S),r=b3Rec()&&b3Rec().skill===S.id;
+  return '<div class="b2-list bp-list b3-det b3p-det"><div class="b3p-dh"><span class="b3p-big">'+b3pFlavors(S,72)+'</span>'+(ef?'<span class="b3p-ef" style="width:36px;height:36px">'+bpIcon(ef,36)+'</span>':'')+
+    '<span class="bp-cost">'+b3pDrops(free?0:c,18)+'</span></div><div class="bp-w b3p-dw">'+b2Esc(bpWord(S.name))+'</div><div class="b3-pv" id="b3-pv"></div>'+
+    '<div class="b3-det-b">'+bpBack()+'<button type="button" class="b2-btn b3-use'+(can.ok?'':' no')+(r?' rec':'')+'" data-use="1" aria-label="Use">'+bpIcon(can.ok?'b3_use':'m_lock',34)+(r?b3pStar(22):'')+'</button></div></div>';
 }
 function b3pRuckus(u) {
   const rc=b3Rec();
@@ -103,7 +111,7 @@ b3RenderCmd=function() {
   const cmdOn=battle.state==='command'&&u;
   box.classList.add('bp');
   if(!cmdOn||B3.ui==='cross'||B3.ui==='busy') { box.innerHTML=b3pCross(u,cmdOn); return; }
-  box.innerHTML=B3.ui==='info'?b3pInfo():B3.ui==='skills'?b3pSkills(u):B3.ui==='ruckus'?b3pRuckus(u):B3.ui==='target'?b3pTarget():'';
+  box.innerHTML=B3.ui==='info'?b3pInfo():B3.ui==='skills'?b3pSkills(u):B3.ui==='skill'?b3pSkill(u):B3.ui==='ruckus'?b3pRuckus(u):B3.ui==='target'?b3pTarget():'';
 };
 
 // ---------- The preview box, as pictures ----------

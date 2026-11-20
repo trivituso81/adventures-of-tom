@@ -934,6 +934,24 @@ html.landscape .bp .b2-x small,html.landscape .bp-mid small{font-size:8px}html.l
 .b3p-chips{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
 html.landscape #battle.v2 .b3-pv{font-size:8px;padding:1px 4px}html.landscape #battle.v2 .b3-pv-c{font-size:7px}html.landscape #battle.v2 .b3-pv-b,html.landscape #battle.v2 .b3-pv-n{font-size:7.5px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv{font-size:14px;padding:5px 9px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-c{font-size:12px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-b,html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-n{font-size:13px}
+/* b3s9: the SKILLS list (name, flavor pictures, big Pep pill) and the skill card (B3.ui 'skill', engine/b3-ui.js) */
+.b2-btn.b3-sk{flex-direction:row;align-items:center;gap:6px}.b3-sk .b2-sn{flex:1 1 auto;min-width:0}
+.b3-ico{display:flex;align-items:center;gap:2px;flex:none;line-height:0}.b3-ico .bi{width:1.35em;height:1.35em;flex:none}
+.b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
+.b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
+.b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}
+.b3-det{--f:15px}.b3-det>*{grid-column:1/-1}
+.b3-det-h{display:flex;align-items:center;gap:8px;font-size:var(--f)}.b3-det-h .b2-sn{font-size:calc(var(--f)*1.15);font-weight:900;flex:1 1 auto;min-width:0;color:#ffe9a8;line-height:1.15}
+.b3-det .b3-cost{font-size:calc(var(--f)*1.1)}
+.b3-det-f{display:flex;align-items:center;gap:6px;font-size:var(--f)}.b3-det-f em{font-style:normal;font-size:calc(var(--f)*.75);color:var(--ink-dim);font-weight:800}
+.b3-det-d{margin:0;font-size:calc(var(--f)*.85);line-height:1.35}.b3-det-no{margin:0;font-size:calc(var(--f)*.8);color:#ff9a8a;font-weight:800}
+.b3-det .b3-pv-h,.b3-det .b3p-h{display:none}.b3-det .b3-pv:not(:has(.b3-pv-r,.b3-pv-b,.b3-pv-n,.b3p-r,.b3p-no)){display:none}
+.b3-det-b{display:grid;grid-template-columns:1fr 2fr;gap:6px;position:sticky;bottom:0;background:#121a2b;padding-top:4px}.b3-det-b .b2-back{grid-column:auto;justify-content:center}
+.b2-btn.b3-use{position:relative;flex-direction:row;align-items:center;justify-content:center;background:#c99a2e;border-color:#ffe27a;color:#1a1206}.b3-use span{font-weight:900;letter-spacing:1.5px}.b2-btn.b3-use.no{opacity:.45}
+#b3-cmd .b3p-det{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:8px}.b3p-dh .b3p-ef{position:static}.b3p-det .b3-pv{align-self:center}
+.b3p-dh{display:flex;align-items:center;justify-content:center;gap:10px;line-height:0}.b3p-big{display:flex;height:72px}.b3p-big .b3p-fl{width:auto;height:72px}.b3p-big .bi{width:72px;height:72px;flex:none}
+.b3p-dh .bp-cost{display:flex;flex-wrap:wrap;max-width:120px;gap:1px}.b3p-dh .bp-cost .bi{width:18px;height:18px}.b3p-dw{text-align:center;font-weight:900}.b3p-det .b3-use .bi{width:34px;height:34px}.b3p-det .b3-use .b3p-star{position:absolute;right:4px;top:4px}
+html.landscape .b3-det{--f:12.5px}html.landscape #battle.v2 .b3-det{--f:11px}html.tablet.landscape #battle.v2 .b3-det{--f:calc(11px*var(--ts))}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-det{--f:14px}
 .b2-x.rec,.b2-btn.rec{border-color:#ffd24a;box-shadow:0 0 0 2px #ffd24a66,0 0 12px #ffd24a88;animation:b7glow 1.1s ease-in-out infinite}
 @keyframes b7glow{50%{box-shadow:0 0 0 3px #ffd24aaa,0 0 18px #ffd24acc}}
 .b7-card{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:14px calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));background:#0c0e12a6;cursor:pointer}
@@ -2008,8 +2026,8 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/b3-foe.js?v=b3s8"></script>
 <script src="engine/b3-clips.js?v=b3s8"></script>
 <script src="engine/b3-play.js?v=b3s8"></script>
-<script src="engine/b3-ui.js?v=b3s8"></script>
-<script src="engine/b3-pictures.js?v=b3s7"></script>
+<script src="engine/b3-ui.js?v=b3s9a"></script>
+<script src="engine/b3-pictures.js?v=b3s9a"></script>
 <script src="engine/b3-lab.js?v=b3s6"></script>
 <script src="engine/b3-menu.js?v=b3s7"></script>
 <script src="engine/save-backup.js?v=slotless1"></script>
@@ -2031,13 +2049,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=cutpolish1"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=board-b3s9a"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=b3s9a"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=ch1rebuild1"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=cutpolish4b"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=board-b3s9a"></script>
+<script src="engine/main.js?v=b3s9a"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

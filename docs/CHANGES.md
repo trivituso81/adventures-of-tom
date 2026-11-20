@@ -1,6 +1,13 @@
-## board-b3s9a (2026-11-19): board only: the stage 9b and 9c prompts read claude/next-addendum-b3s9a.md
+## b3s9a (2026-11-19): New battle: tapping a Skill opens a card with everything about it, then BACK and USE
 
-- Cards c-b3s9b and c-b3s9c: prompt text now names the addendum that holds the stage 9 split and the skill card facts.
+- Tom (11-19, his testing notes on the new battle): "I don't like the skill description at the top above the character bars. When tapping a skill it should hide the other skills, show all the information about that skill, then 2 buttons one Back and the other Use. On the view that lists the skills, the clobber support etc should be changed to an icon. The pep used should be more prominent". He also asked what the text above the Skills was ("3 PEP SUPPORT Bog Toad Skeeter Swarm"): it was the stage 7 preview box (cost, flavor, and the monsters the move would meet).
+- SKILLS list: each row is the name, the flavor as a picture (the same pictures Rose Mode uses; Support is the hugging face), a backpack picture for a Pocket Vibe Skill, and the Pep cost in a big blue pill on the right (FREE in green). No preview box, no word chips. The message line says "Tap a Skill to see what it does." instead of the description.
+- Skill card (new `B3.ui` 'skill', `engine/b3-ui.js`): a tap, a click, Enter or the pad's A on a row hides the other Skills and shows the name, the Pep pill, the flavor pictures with their names and the kind (Skill, Pocket Vibe Skill, Capstone, Revive), the whole description, why it cannot be used (if so), the preview (Pet Peeve, Resist, Detonation per monster; only monsters with something to say are listed), then BACK and USE. USE goes on to the target list when the Skill needs one; Back from the target list returns to the card. BACK and USE stay on screen when the card is long (they stick to the bottom of the box).
+- The target list's message line says "Pick who gets <Skill>." instead of the description. A pull in the preview now shows a whole number (it showed 6.22777).
+- Rose Mode: the same card as pictures (big flavor, what it does, the drops, the picture preview, BACK and a thumbs-up USE). The stage 7 "first tap arms, second tap uses" stays for RUCKUS and the target list only.
+- Stage 9 is split: b3s9b is TNB (Ceramicist and Longboarder, 6 of his 14 lines need their own function), b3s9c is Nara and Boppy plus the late joiners' Vibe Point pool.
+- Tests: `python3 tools/b3_test.py s9ui` (new, portrait and landscape: picture rows, the pill bigger than the name, no description in the message line, the card shows only BACK and USE, USE really on screen, USE to the target list and back), `s7` updated for the card. Frames: `tools/shots/b3-s9ui.png`, `b3-s9ui-land.png`, `b3-s9-card-portrait.png`, `b3-s9-card-landscape.png`.
+## board-b3s9a (2026-11-19): board only, and it changed nothing: the b3s9a push it followed had been refused, so the stage 9b and 9c cards were not there yet (they came with b3s9a, prompts already naming claude/next-addendum-b3s9a.md)
 
 ## board-clipresetb (2026-11-19): board only: the c-clipreset prompt cut to the task
 

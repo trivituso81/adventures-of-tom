@@ -97,11 +97,13 @@ def hand_fight(pg,idx,fid):
         if len(frames)<10 or turn%4==0: frames.append(shot(pg))
         expect_slip=False
         if who=='grace' and not did['skill'] and st['pep']>=3:
-            # SKILLS by taps: the first tap highlights the row and explains it, the second uses it; then a party card picks who.
+            # SKILLS by taps (b3s9a): a tap opens the skill card, a tap on USE goes on; then a party card picks who.
             pg.click('#b3-cmd .b2-x.right'); pg.wait_for_timeout(250); frames.append(shot(pg))
             pg.dispatch_event('#b3-ui','pointerdown',{'pointerType':'touch'})
             pg.click('#b3-cmd .b2-btn[data-i="0"]'); pg.wait_for_timeout(250)
-            if state(pg)['ui']!='target': fails.append(f'{fid} hand: tapping NeeDoh Stretch Pass did not open the target list')
+            if state(pg)['ui']!='skill': fails.append(f'{fid} hand: tapping NeeDoh Stretch Pass did not open its card')
+            frames.append(shot(pg)); pg.click('#b3-cmd [data-use]'); pg.wait_for_timeout(250)
+            if state(pg)['ui']!='target': fails.append(f'{fid} hand: USE on NeeDoh Stretch Pass did not open the target list')
             frames.append(shot(pg))
             pg.click('#b3-party .b2-pc[data-i="2"]'); did['skill']=True; did['card']=True
             pg.wait_for_timeout(1100); frames.append(shot(pg))
@@ -161,6 +163,7 @@ def skill(pg,name):
     names=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent)")
     if name not in names: fails.append(f'stage 2: {name} is not in the SKILLS list: {names}'); return names
     for _ in range(names.index(name)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(150)   # b3s9: Enter opens the skill card; the next Enter is USE
     return names
 def basic(pg):
     pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(200)
@@ -503,7 +506,7 @@ def stage4(pg,lab):
     cross=pg.evaluate("()=>document.querySelector('#b3-cmd .b2-x.up small').textContent"); ff.append(shot(pg))
     need(cross=='Cartridge Blow',f'with Gamer Geek as Main, BASIC should be Cartridge Blow: {cross}')
     pg.mouse.move(2,2); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); ff.append(shot(pg))
-    sk=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn[data-i]')].map(b=>b.querySelector('.b2-sn').textContent+(b.querySelector('.b3-pk')?' [POCKET]':''))")
+    sk=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn[data-i]')].map(b=>b.querySelector('.b2-sn').textContent+(b.querySelector('.b3-pki')?' [POCKET]':''))")
     need(sk==['Controller Toss','Winged Shell Lock-On','Zone One Blockade [POCKET]','Suite Door Slide [POCKET]'],f'the SKILLS list should be the Main Vibe\'s two Skills, then the Pocket Vibe\'s two, tagged: {sk}')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); ff.append(shot(pg))
     inf=pg.evaluate("()=>document.querySelector('#b3-cmd .b3-info').textContent")
@@ -596,7 +599,7 @@ def s5(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.part
     foe:Object.keys(f.st),hp:f.hp,tom:Object.keys(P.tom.st),grace:Object.keys(P.grace.st),rose:Object.keys(P.rose.st),deedee:Object.keys(P.deedee.st),
     cert:P.tom.counters.certificate||0,roseWait:P.rose.wait,roseTurns:P.rose.turns,clock:F.clock,chips:[0,1,2,3].map(chips),
     ctr:(document.querySelector('#b3-party .b2-pc[data-i="1"] .b3-ctr')||{}).textContent||'',
-    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost')].map(e=>e.textContent),
+    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost,#b3-cmd .b2-btn .b3-cost')].map(e=>e.textContent.replace(/(\\d)PEP/,'$1 PEP')),
     free:(document.querySelector('#b3-cmd .b3-free')||{}).textContent||'',back:!!document.querySelector('#b3-cmd [data-back]'),msg:document.getElementById('b3-msg').textContent,
     bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':''))}; }""")
 def pick_row(pg,name):
@@ -605,7 +608,7 @@ def pick_row(pg,name):
     names=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent)"); sel=pg.evaluate("()=>B3.sel")
     if name not in names: fails.append(f'stage 5a: {name} is not in the list: {names}'); return
     for _ in range((names.index(name)-sel)%len(names)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
-    pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(150); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)   # the card, then USE
 def aim(pg,label):
     """If a target list is open, put the cursor on the named target and press Enter."""
     if pg.evaluate("()=>B3.ui")!='target': return
@@ -638,7 +641,7 @@ def stage5(pg,lab):
     need('Sensory Satisfying' in txt and 'TRAIT' in txt and 'Slow-Rise Memory Foam' in txt and 'Ultra-Rare Limited Edition' in txt and 'QUIRK' in txt,f"Grace's list should name her Trait and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     # Grace: Colossal Diamond-Gold Dumpling for Rose
-    names=skill(pg,'Colossal Diamond-Gold Dumpling'); caps.append(shot(pg)); need(pg.evaluate("()=>B3.ui")=='skills','the SKILLS list did not open for Grace')
+    names=skill(pg,'Colossal Diamond-Gold Dumpling'); caps.append(shot(pg)); need(pg.evaluate("()=>B3.ui")=='skill','the skill card did not open for Grace')
     before=s5(pg); need(any(k.endswith('?') for k in before['bar']),f"the turn bar shows Grace's ghost for the highlighted Capstone: {before['bar']}")
     pg.keyboard.press('Enter'); pg.wait_for_timeout(250); aim(pg,'Rose'); caps+=burst(pg,3,330)
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='skills'",timeout=20000); pg.wait_for_timeout(300)
@@ -821,7 +824,7 @@ def stage5c(pg,lab,landscape=False):
 
 def s6(pg): return pg.evaluate("""()=>{ const F=B3.F; return {ui:B3.ui,actor:B3.actor&&B3.actor.id,ruckus:F.ruckus,view:B3.view.ruckus,turns:F.turnLog.length,
     btn:(document.querySelector('#b3-cmd .b3-rk small')||{}).textContent||'',btnOff:!!document.querySelector('#b3-cmd .b3-rk.off'),fill:(document.querySelector('#b3-cmd .b3-rk')||{style:{}}).style.cssText||'',
-    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost')].map(e=>e.textContent),
+    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost,#b3-cmd .b2-btn .b3-cost')].map(e=>e.textContent.replace(/(\\d)PEP/,'$1 PEP')),
     head:(document.querySelector('#b3-cmd .b3-rkh')||{}).textContent||'',msg:document.getElementById('b3-msg').textContent,
     pep:F.party.map(p=>p.pep),next:F.units.slice().sort(b3Before).map(u=>u.key).slice(0,5),log:B3.log.slice(-40).join(' | '),stored:localStorage.getItem('aot-b3-ruckus')}; }""")
 def stage6(pg,lab,landscape=False):
@@ -879,7 +882,7 @@ def s7(pg): return pg.evaluate("""()=>{ const q=sel=>[...document.querySelectorA
       noPic:rows.filter(e=>!e.querySelector('img')).map(e=>(e.dataset.d||e.dataset.i||'')+':'+e.textContent.trim().slice(0,12)),
       words:q('#b3-cmd .b2-btn:not(.b2-back):not([data-back]) .bp-w').length,star:q('#b3-cmd .b3p-star').length,pvThere:!!pv,pvImgs:pv?pv.querySelectorAll('img').length:0,pvText:pv?pv.textContent.trim():'',pvHeight:pv?Math.round(pv.getBoundingClientRect().height):0,
       cmdBox:Math.round(cmd.getBoundingClientRect().height),cmdScroll:cmd.scrollHeight,over:B3.F.over,msg:document.getElementById('b3-msg').textContent,
-      info:(document.querySelector('#b3-cmd .b3p-info')||null)!==null,moveGhost:q('#b3-bar .b3-ghost,#b3-bar .b3-pvm').length,logTail:B3.log.slice(-6).join(' | ')}; }""")
+      info:(document.querySelector('#b3-cmd .b3p-info')||null)!==null,use:q('#b3-cmd [data-use]').length,backs:q('#b3-cmd [data-back]').length,otherRows:q('#b3-cmd .b2-btn[data-i]').length,moveGhost:q('#b3-bar .b3-ghost,#b3-bar .b3-pvm').length,logTail:B3.log.slice(-6).join(' | ')}; }""")
 def stage7(pg,lab,landscape=False):
     S='stage 7'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new1')
     rot=landscape and pg.evaluate("()=>layout.rotated")
@@ -899,23 +902,30 @@ def stage7(pg,lab,landscape=False):
     need(v['ui']=='skills','Right should open SKILLS: '+v['ui'])
     need(v['noPic']==[] or all(x.startswith('back') or 'Back' in x or x=='' for x in v['noPic']),f"every Skill row should be a picture: {v['noPic']}")
     need(v['rec']<=1,f"at most one recommended Skill row: {v['rec']}")
-    need(v['pvThere'] and v['pvImgs']>=1,f"the preview box shows pictures for the row under the cursor: {v['pvThere']} {v['pvImgs']}")
-    need(v['pvText']=='' or len(v['pvText'])<=40,f"the preview box carries no sentences in Rose Mode: {v['pvText'][:80]}")
+    need(not v['pvThere'],'b3s9: the SKILLS list itself carries no preview box (it is on the skill card)')
     n0=v['turns']
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(300); v=s7(pg); caps.append(R(shot(pg)))
+    need(v['ui']=='skill' and v['turns']==n0,f"Enter on a Skill opens its card and uses nothing: {v['ui']} {v['turns']}")
+    need(v['pvThere'] and v['pvImgs']>=1,f"the skill card shows the preview as pictures: {v['pvThere']} {v['pvImgs']}")
+    need(v['pvText']=='' or len(v['pvText'])<=40,f"the preview box carries no sentences in Rose Mode: {v['pvText'][:80]}")
+    need(v['use']==1 and v['backs']==1 and v['otherRows']==0,f"the card shows only BACK and USE, no other Skills: use {v['use']} back {v['backs']} rows {v['otherRows']}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s7(pg)['ui']=='skills','Esc from the card returns to the SKILLS list')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s7(pg)['ui']=='cross','Esc from SKILLS returns to the cross')
-    # 3. touch: first tap on a Skill row arms it (preview), second tap uses it
+    # 3. touch (b3s9): a tap on a Skill row opens its card; a tap on USE uses it
     pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(300); pg.mouse.move(2,2)
     n=pg.evaluate("()=>document.querySelectorAll('#b3-cmd .b2-btn[data-i]').length"); need(n>=2,'the SKILLS list should have rows: '+str(n))
     pg.evaluate("()=>{ B3.armed=-1; }")
     TAP="(i)=>{ const e=document.querySelector('#b3-cmd .b2-btn[data-i=\"'+i+'\"]'); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"
     pg.evaluate(TAP,1); pg.wait_for_timeout(350); v=s7(pg)
-    need(v['sel']==1 and v['turns']==n0 and v['ui']=='skills',f"a first touch on a row previews it and does not use it: sel {v['sel']} turns {v['turns']} ui {v['ui']}")
-    need(v['pvImgs']>=1,'and the preview box is showing for that row')
-    pg.evaluate(TAP,1); pg.wait_for_timeout(400); v=s7(pg)
-    need(v['ui']!='skills' or v['turns']>n0,f"a second touch on the same row uses it (target list or the move): ui {v['ui']} turns {v['turns']}")
+    need(v['sel']==1 and v['turns']==n0 and v['ui']=='skill',f"a touch on a row opens its card and does not use it: sel {v['sel']} turns {v['turns']} ui {v['ui']}")
+    need(v['pvImgs']>=1,'and the card shows the preview for that Skill')
     caps.append(R(shot(pg)))
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
-    if s7(pg)['ui']!='cross': pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
+    pg.evaluate("()=>{ const e=document.querySelector('#b3-cmd [data-use]'); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"); pg.wait_for_timeout(400); v=s7(pg)
+    need(v['ui']!='skill' or v['turns']>n0,f"a touch on USE uses it (target list or the move): ui {v['ui']} turns {v['turns']}")
+    caps.append(R(shot(pg)))
+    for _ in range(3):
+        if s7(pg)['ui']=='cross': break
+        pg.keyboard.press('Escape'); pg.wait_for_timeout(250)   # target list, then the card, then the list
     # 4. a target list: pictures of the monsters, one star, the preview box says what the hit would do
     pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(350); v=s7(pg)
     need(v['ui']=='target','Basic on two monsters opens the target list: '+v['ui'])
@@ -942,10 +952,10 @@ def stage7(pg,lab,landscape=False):
         pg.evaluate("(d)=>b3Pad(d,true,false,false,false)",rw); pg.wait_for_timeout(300)
         seq=[pg.evaluate("()=>B3.ui")]
         for _ in range(3):
-            if pg.evaluate("()=>B3.ui")in('skills','target','ruckus'): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append(pg.evaluate("()=>B3.ui+':'+B3.sel"))
+            if pg.evaluate("()=>B3.ui")in('skills','skill','target','ruckus'): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append(pg.evaluate("()=>B3.ui+':'+B3.sel"))
         for _ in range(4):
             pg.wait_for_timeout(2200); wait_cmd(pg); pg.wait_for_timeout(300)
-            if pg.evaluate("()=>B3.ui")in('skills','target') and s7(pg)['turns']<=t0+0 or pg.evaluate("()=>!!B3.F.grant&&B3.ui!=='busy'"): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append('grant:'+pg.evaluate("()=>B3.ui"))
+            if pg.evaluate("()=>B3.ui")in('skills','skill','target') and s7(pg)['turns']<=t0+0 or pg.evaluate("()=>!!B3.F.grant&&B3.ui!=='busy'"): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append('grant:'+pg.evaluate("()=>B3.ui"))
             else: break
         need(s7(pg)['turns']>t0 or s7(pg)['over'],f"following the star ({rw}) plays a turn: {t0} -> {s7(pg)['turns']} via {seq} {s7(pg)['msg'][:80]}")
     else: need(False,'no recommended button to follow: '+str(k['recWhere']))
@@ -977,6 +987,47 @@ def stage7(pg,lab,landscape=False):
     pg.evaluate("()=>{ b3vClose(); }"); pg.wait_for_timeout(300)
     sheet(caps,4,os.path.join(OUT,'b3-s7'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>{ b7SetDiff('grace'); }"); pg.click('#b3-exit') if pg.evaluate("()=>!!document.getElementById('b3-exit')&&B3.active") else None; pg.wait_for_timeout(400)
+
+# ---------- b3s9: the SKILLS list and the skill card (Tom's note 2026-11-19), words mode ----------
+TAP9="(sel)=>{ const e=document.querySelector('#b3-cmd '+sel); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"
+def s9(pg): return pg.evaluate("""()=>{ const q=s=>[...document.querySelectorAll('#b3-cmd '+s)],cmd=document.getElementById('b3-cmd'),msg=document.getElementById('b3-msg').textContent,u=B3.actor;
+  const descs=u?b3SkillRows(u).map(S=>S.desc).filter(Boolean):[],fs=e=>e?parseFloat(getComputedStyle(e).fontSize):0,use=document.querySelector('#b3-cmd [data-use]'),cb=cmd.getBoundingClientRect();
+  return {ui:B3.ui,turns:B3.F.turnLog.length,rows:q('.b3-sk').length,iconRows:q('.b3-sk').filter(b=>b.querySelector('.b3-ico img')).length,chips:q('.b2-el').length,costs:q('.b3-sk .b3-cost').length,
+    costPx:fs(document.querySelector('#b3-cmd .b3-cost b')),namePx:fs(document.querySelector('#b3-cmd .b2-sn')),msgHasDesc:descs.some(d=>msg.includes(d.slice(0,30))),msg,
+    cardDesc:(document.querySelector('#b3-cmd .b3-det-d')||{}).textContent||'',use:q('[data-use]').length,backs:q('[data-back]').length,others:q('.b2-btn[data-i]').length,
+    useIn:!!use&&(()=>{ const r=use.getBoundingClientRect(),h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2); return r.height>0&&r.top>=cb.top-1&&r.bottom<=cb.bottom+1&&!!h&&use.contains(h); })(),wide:cmd.scrollWidth>cmd.clientWidth+2}; }""")
+def stage9ui(pg,lab,landscape=False):
+    S='b3s9 skill card'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new3')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); }")
+    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(400); pg.mouse.move(2,2)
+    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(300); v=s9(pg); caps.append(R(shot(pg)))
+    need(v['ui']=='skills' and v['rows']>=2,f"Right opens the SKILLS list with rows: {v['ui']} {v['rows']}")
+    need(v['iconRows']==v['rows'] and v['chips']==0,f"every row shows its flavor as a picture and no word chips: {v['iconRows']} of {v['rows']}, chips {v['chips']}")
+    need(v['costs']==v['rows'] and v['costPx']>v['namePx'],f"every row has the Pep pill, its number bigger than the name: {v['costs']} {v['costPx']} > {v['namePx']}")
+    need(not v['msgHasDesc'],f"the message line does not show a Skill description: {v['msg'][:90]}")
+    n0=v['turns']
+    pg.evaluate(TAP9,'.b2-btn[data-i="0"]'); pg.wait_for_timeout(350); v=s9(pg); f=R(shot(pg)); caps.append(f); f.save(os.path.join(OUT,'b3-s9-card-'+('landscape' if landscape else 'portrait')+'.png'))
+    need(v['ui']=='skill' and v['turns']==n0,f"a tap on a Skill opens its card and uses nothing: {v['ui']} {v['turns']}")
+    need(v['others']==0 and v['use']==1 and v['backs']==1,f"the card hides the other Skills and shows BACK and USE: others {v['others']} use {v['use']} back {v['backs']}")
+    need(len(v['cardDesc'])>20 and not v['msgHasDesc'],f"the description is on the card, not in the message line: '{v['cardDesc'][:60]}' / '{v['msg'][:60]}'")
+    need(v['useIn'] and not v['wide'],f"USE is inside the command box and nothing spills sideways: {v['useIn']} {v['wide']}")
+    pg.evaluate(TAP9,'[data-back]'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skills','BACK on the card returns to the list')
+    # USE on a Skill that needs a target opens the target list; Back from there returns to the card
+    rows=pg.evaluate("()=>b3SkillRows(B3.actor).map(S=>b3Options(B3.F,B3.actor,S).filter(o=>!o.no).length)")
+    i=next((k for k,n in enumerate(rows) if n>1),0)
+    pg.evaluate(TAP9,f'.b2-btn[data-i="{i}"]'); pg.wait_for_timeout(300); pg.evaluate(TAP9,'[data-use]'); pg.wait_for_timeout(400); v=s9(pg); caps.append(R(shot(pg)))
+    if rows[i]>1:
+        need(v['ui']=='target',f"USE on a Skill with several targets opens the target list: {v['ui']}")
+        pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skill','Back from the target list returns to the skill card')
+        pg.keyboard.press('Enter'); pg.wait_for_timeout(300); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    v=s9(pg); need(v['ui'] in('busy','cross','skills') or v['turns']>n0,f"USE plays the Skill: {v['ui']} {v['turns']}")
+    wait_cmd(pg); pg.wait_for_timeout(300); caps.append(R(shot(pg)))
+    sheet(caps,3,os.path.join(OUT,'b3-s9ui'+('-land' if landscape else '')+'.png'),scale=.5)
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
 
 # ---------- Stage 8: video clips in Battle 3 (idle loops, clip moves landing on the impact frame, body states, The Big One's acts) ----------
 S8_TRACE="""()=>{ if(window.__c8) { window.__c8.hits=[]; window.__c8.moves=[]; return; } window.__c8={hits:[],moves:[],cl:{}}; setInterval(()=>{ for(const k in B3P.fa){ const A=B3P.fa[k]; if(A&&A.cl) window.__c8.cl[A.cl.id]=1; } },50);
@@ -1086,7 +1137,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1170,6 +1221,11 @@ with sync_playwright() as pw:
     if 's8' in sys.argv or not only and len(want)==len(lab):
         print('stage 8: clips'); stage8(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage8(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6i. b3s9: the SKILLS list and the skill card (portrait, then landscape)
+    if 's9ui' in sys.argv or not only and len(want)==len(lab):
+        print('b3s9: skill card'); stage9ui(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9ui(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
