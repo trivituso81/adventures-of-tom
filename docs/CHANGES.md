@@ -25,6 +25,22 @@ Gemini chapter 1 report, BUG-06. Fact: the second half (location toasts running 
 - Tests fixed: `tools/b3-check-s4.js` (Amy now has a kit, the unkitted example is Michael), `tools/b3-check-s5.js` (one-off list), `tools/b3_test.py` (stale save-field assertion).
 - No picture or clip work, no voice lines added (`unused_voice.py` shows the same 39 dialogue clips outside the harvest as before this build; none are from this stage).
 - Tests: `node tools/b3-sim.js check` (1354 checks, 172 new in `tools/b3-check-s10.js`, FAILS: []), `new10` 200 fights won 200 (also `--rec`, `--swap=amy,justin,olivia`, `--rank=5`), `python3 tools/b3_test.py s10` (portrait and landscape; frames `tools/shots/b3-s10*.png`). Handoff: docs/handoff/b3s10.md.
+## gem-bug10 (2026-11-20): battle text no longer cut off, banner and quest panel stay clear
+
+Card c-gem-bug10, BUG-10 of Gemini's chapter 1 report (claude/ch1-gemini-tracker.md), checked on current main first.
+
+| Item in the report | On main | What I did |
+|---|---|---|
+| INSPECT box cut at the bottom ("...Weak to ??? (Flashcard") | Still happened in landscape (box 39 px, text 51 px) | The landscape message box now grows to 6.4 em (8 em on the larger landscape layout) and scrolls past that (`index.html`, `.b2-msg`). Portrait was already fine. |
+| Action buttons cut ("Moon & ...", "Disconnec") | "Moon & Back" (Deedee) still cut in landscape; "Disconnected Controller" already wraps | A button label over 9 characters now wraps (was over 11) (`engine/battle2-ui.js`). Checked 7 characters in both layouts: nothing cut. |
+| TOMBO banner over "DIAMOND" / "MILE +1" | Possible: pop-ups can sit at the banner's height | While a TOMBO or FAMILY FINISH banner is up, party pop-ups are placed below it (`b2BelowBanner`, `engine/battle2.js`). |
+| Quest panel over FAST / SKIP | Still possible (buttons sit above the panel) | FAST and SKIP are hidden while the quest panel is open (`index.html`, `#cut-ctrl`). Not seen on screen: my test scene did not start. |
+| Location toasts over faces | Already fixed | Toasts were removed in idea-removeall. |
+| HOLD + SLIDE during cutscenes | Already fixed | cutpolish1 hides it in cutscenes; it still shows in free roam on purpose. |
+| Stray slider above SCHOOL, stray bars under signs | Not seen | Square, Grump Hollow and Cattail Pier checked in portrait and landscape: nothing there. |
+
+Not done: the "Warmth" and "Rhubarb Crisp" wording in Inspect is the old battle system, outside this card (battle system sessions).
+
 ## fix-heist1play-3 (2026-11-20): the mud blob hops up onto the kitchen counter for the muffins and hops back down, and Deedee gets shoved back a step, shocked, without falling
 
 Tom (t-heist1play, 11-20): "Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down". Changed in `data/scenes.js` (`ch1Theft`) only: the walk into the island is now a hop up onto it, the grab happens on top, a hop down, then the run out as before. Deedee gets a short hop back with her surprised face while Tom, Rose and Grace still go down. Kept: everything else in the scene. No spoken line changed. Frames looked at in portrait; landscape not separately captured.

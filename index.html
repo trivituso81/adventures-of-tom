@@ -754,7 +754,7 @@ html.landscape #battle.v2 .b2-tk{width:22px;height:22px;font-size:9px}html.lands
 html.landscape #battle.v2 .b2-tk b{font-size:8px}
 html.landscape #battle.v2 .b2-ui{flex:0 0 var(--b2pw);width:var(--b2pw);gap:3px;padding:calc(3px + env(safe-area-inset-top)) calc(4px + env(safe-area-inset-right)) calc(3px + env(safe-area-inset-bottom)) 3px}
 html.landscape #battle.v2 .b2-low{gap:3px}
-html.landscape #battle.v2 .b2-msg{font-size:9px;line-height:1.25;padding:3px 6px;max-height:4.8em;overflow:hidden}
+html.landscape #battle.v2 .b2-msg{font-size:9px;line-height:1.25;padding:3px 6px;max-height:6.4em;overflow-y:auto;-webkit-overflow-scrolling:touch}
 html.landscape #battle.v2 .b2-party{padding:3px;gap:1px 3px}
 html.landscape #battle.v2 .b2-heart{padding:0 2px 2px;gap:3px}html.landscape #battle.v2 .b2-heart .lbl{font-size:7px;letter-spacing:.6px}
 html.landscape #battle.v2 .b2-heart svg{width:12px;height:11px}html.landscape #battle.v2 .b2-heart .hts{gap:1px}html.landscape #battle.v2 .b2-heart b{font-size:8px}
@@ -1124,6 +1124,7 @@ html.landscape #party-banner{top:16%;width:min(60%,520px)}
 html.cutscene:not(.talking) #action-wrap{visibility:hidden}   /* cutpolish1: no (A) button or HOLD + SLIDE caption between lines */
 html.cutscene #dpad .dir{visibility:hidden}   /* roofnpc2: the arrows stay hidden for a whole scene, so they no longer flash on between lines */
 html.landscape #cut-ctrl{top:62px}
+html:has(#hud .brand.open) #cut-ctrl{visibility:hidden}   /* gem-bug10: FAST and SKIP never sit over the open quest panel */
 /* HUD: no minimap or door count; save button sits where rotate was. Save popup reuses the quit popup look. */
 #minimap-wrap,#hud .progress{display:none!important}
 #save-hud{font-size:18px;margin-top:9px}html.landscape #save-hud{margin-top:3px}
@@ -1455,7 +1456,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-bar{gap:8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div{width:22px;margin:0 3px;border-left-width:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div b{font-size:20px;padding-left:2px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ui{gap:8px;padding:calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-low{gap:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:16px;line-height:1.3;padding:8px 11px;max-height:6.2em}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:16px;line-height:1.3;padding:8px 11px;max-height:8em;overflow-y:auto;-webkit-overflow-scrolling:touch}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:6px;padding:6px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc{grid-template-columns:70px minmax(0,1fr);gap:12px;padding:6px 8px;align-items:center;min-height:82px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ph{width:70px;height:70px;border-radius:6px}
@@ -1688,8 +1689,8 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/p2-battle.js"></script>
 <script src="data/progress.js"></script>
 <script src="data/abilities.js?v=tomrose1"></script>
-<script src="engine/battle2.js?v=itembanner1"></script>
-<script src="engine/battle2-ui.js?v=gem-bug09"></script>
+<script src="engine/battle2.js?v=gem-bug10"></script>
+<script src="engine/battle2-ui.js?v=gem-bug10"></script>
 <script src="engine/battle2-moves.js"></script>
 <script src="data/kid-sprites.js"></script>
 <script src="engine/battle2-kind.js?v=bubble4"></script>
@@ -2043,13 +2044,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=heist1"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=gem-bug09"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=gem-bug10"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=ch1rebuild1"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-cutpolish4b"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=gem-bug09"></script>
+<script src="engine/main.js?v=gem-bug10"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

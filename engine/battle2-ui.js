@@ -565,7 +565,7 @@ function b2RenderCmd() {
     const img=b2Portrait(pu.id);
     // One button per list. The small word is the first move in it (or NONE); ATTACK shows VP.
     const tabBtn=(tab,d)=>{ const f=b2TabRows(pu,tab)[0],nm=f?b2Esc(b2Title(b2RowName(f))):'NONE';
-      return '<button type="button" class="b2-x '+d+(tab==='attack'?off:(cmdOn&&b2TabOn(pu,tab)?'':' off'))+'" data-d="'+d+'"><span class="ar"></span>'+B2_TAB_NAME[tab]+'<small'+(tab!=='attack'&&f&&b2RowName(f).length>11?' class="long"':'')+'>'+(tab==='attack'?pu.vp+' VP':nm)+'</small></button>'; };
+      return '<button type="button" class="b2-x '+d+(tab==='attack'?off:(cmdOn&&b2TabOn(pu,tab)?'':' off'))+'" data-d="'+d+'"><span class="ar"></span>'+B2_TAB_NAME[tab]+'<small'+(tab!=='attack'&&f&&b2RowName(f).length>9?' class="long"':'')+'>'+(tab==='attack'?pu.vp+' VP':nm)+'</small></button>'; };
     box.innerHTML='<div class="b2-cross">'+tabBtn('attack','up')+tabBtn('warmth','left')+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
       tabBtn('heal','right')+

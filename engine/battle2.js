@@ -518,10 +518,12 @@ function b2MoveRow(t,row) {
   const p=b2FoePoint(t); battle.texts.push({txt:row==='front'?'PULLED IN':'KNOCKED BACK',x:p.x,y:p.y-20,color:'#fff1cb',sc:1,t:0,dur:1.1});
 }
 // Popups over party members (stage units) and enemies.
+// While a TOMBO / FAMILY FINISH banner crosses the top of the stage (y 22 to 72) a pop-up never sits inside it (gem-bug10).
+function b2BelowBanner(y) { return B2.fx&&B2.fx.some(e=>e.kind==='banner')?Math.max(y,84):y; }
 function b2PopParty(u,txt,c,dy=0) {
   const d=b2Riding(u)&&battle.drawnAt&&battle.drawnAt[u.idx];   // Rose up on Tom's shoulders
-  if(d) { pop(txt,Math.round(d.cx/3),Math.round(d.base/3)-30+dy,c); return; }
-  const q=BATTLE_POS[u.idx]; if(q) pop(txt,q.x,q.base-36+dy,c);
+  if(d) { pop(txt,Math.round(d.cx/3),b2BelowBanner(Math.round(d.base/3)-30+dy),c); return; }
+  const q=BATTLE_POS[u.idx]; if(q) pop(txt,q.x,b2BelowBanner(q.base-36+dy),c);
 }
 function b2PopUnit(u,txt,c,dy=0) { if(u.side==='party') b2PopParty(u,txt,c,dy); else { const p=b2FoePoint(u); pop(txt,p.x,p.y+dy,c); } }
 
