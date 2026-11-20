@@ -47,8 +47,9 @@ function b3FoePick(F,e,peek) {
 // first (Big Glare); notSameAllyTurns keeps an act off the ally it hit last, for that many of the foe's turns.
 function b3AggroPick(F,e,A) {
   let L=b3Live(F,b3Other(e.side)).filter(u=>!b3HasFlag(u,'untargetable'));
-  const T=L.filter(u=>b3HasFlag(u,'taunt'));
-  if(T.length) L=T;
+  const T=L.filter(u=>b3HasFlag(u,'taunt')),LK=b3AimLocker(F,e);
+  if(LK&&L.includes(LK)) L=[LK];   // 1970 Cross-Country Story: this monster's single-target attacks aim at Boppy, taunt or no taunt
+  else if(T.length) L=T;
   else if(A) {
     if(A.aim==='back') { const B=L.filter(u=>b3EffRow(F,u)==='back'); if(B.length) L=B; }
     const N=A.when&&A.when.notSameAllyTurns,last=e.lastAim[A.id];
@@ -91,7 +92,7 @@ function b3FoeTargets(F,e,A,given) {
     return {targets:row.slice(start,start+want)};
   }
   const lk=e.aimLock&&e.aimLock.act===A.id?b3Unit(F,e.aimLock.key):null;
-  return one(lk&&b3LockOk(F,lk)?lk:b3AggroPick(F,e,A));
+  return one(lk&&b3LockOk(F,lk,e)?lk:b3AggroPick(F,e,A));
 }
 // ---------- Cartridge Blow: a monster's next aim, shown early and kept (Tom, Gamer Geek) ----------
 // The foe picks its next act as it would right now (b3FoePick with peek: nothing is used up). If that act aims at one family
@@ -99,8 +100,14 @@ function b3FoeTargets(F,e,A,given) {
 // act goes where the screen said. The lock only holds while it is true: the same act is still due, the target still stands, and
 // no taunt has taken the aim. Anything else voids it (b3IntentRefresh) and the foe aims by the usual weights.
 const b3AimsOne=A=>!A.hits||A.hits==='one';
-function b3LockOk(F,t) {
+// The family member a status on this monster forces its single-target attacks onto (a status with the `lockAim` flag; its putter).
+function b3AimLocker(F,e) {
+  const id=Object.keys(e.st).find(i=>B3_STATUS[i].flags.includes('lockAim')),u=id&&b3Unit(F,e.st[id].src);
+  return u&&b3Alive(u)&&!b3HasFlag(u,'untargetable')?u:null;
+}
+function b3LockOk(F,t,e) {
   if(!b3Alive(t)||b3HasFlag(t,'untargetable')) return false;
+  const LK=e&&b3AimLocker(F,e); if(LK) return t===LK;
   const T=b3Live(F,t.side).filter(u=>b3HasFlag(u,'taunt'));
   return !T.length||T.includes(t);
 }
@@ -115,7 +122,7 @@ function b3Foresee(F,e) {
   else if(!wind&&A.power>0&&b3AimsOne(A)) {
     I.kind='strike';
     const keep=e.aimLock&&e.aimLock.act===A.id?b3Unit(F,e.aimLock.key):null;
-    const t=keep&&b3LockOk(F,keep)?keep:b3AggroPick(F,e,A);
+    const t=keep&&b3LockOk(F,keep,e)?keep:b3AggroPick(F,e,A);
     if(t) { e.aimLock={key:t.key,act:A.id}; I.aim=t.key; }
   }
   e.intent=I; return I;
@@ -124,7 +131,7 @@ function b3Foresee(F,e) {
 function b3IntentRefresh(F) {
   for(const e of F.foes) { if(!e.intent) continue;
     const P=b3Alive(e)?b3FoePick(F,e,true):null,I=e.intent,t=I.aim&&b3Unit(F,I.aim);
-    const ok=P&&P.act.id===I.act&&(!I.aim||(t&&b3Alive(t)&&(P.act.hits==='marked'||P.act.hits==='fastest'||(e.aimLock&&e.aimLock.key===I.aim&&b3LockOk(F,t)))));
+    const ok=P&&P.act.id===I.act&&(!I.aim||(t&&b3Alive(t)&&(P.act.hits==='marked'||P.act.hits==='fastest'||(e.aimLock&&e.aimLock.key===I.aim&&b3LockOk(F,t,e)))));
     if(!ok) { e.intent=null; e.aimLock=null; } }
 }
 // A hazard on this unit's floor catches it as it starts an act with one of the hazard's tags (Wet-Floor Hazard and melee):

@@ -50,9 +50,7 @@ function b3BeginTurn(F,u,beats) {
   if(u.broken) { u.broken=false; u.flusterTurn=true; u.pips=u.maxPips; beats.push({t:'pips',tgt:u.key,n:0,left:u.pips,max:u.maxPips,refill:true,g:'pre'}); }
   for(const id of Object.keys(u.st)) {
     const S=B3_STATUS[id],s=u.st[id]; if(!S.tick||!s) continue;
-    const fl=S.tick.flavor,pv=b3Peeves(u).includes(fl),rs=u.resists.includes(fl);
-    const dmg=Math.max(1,Math.round(s.atk*B3_RULES.power[S.tick.power]*100/(100+b3Stat(u,'def'))*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(u)));
-    b3Hurt(F,c,u,dmg,{src:s.src,flavor:fl,peeve:pv,resist:rs,tick:id});
+    b3TickHit(F,c,u,id,s);
   }
   b3KoCheck(F,c);
   for(const id of Object.keys(u.st)) {
@@ -69,6 +67,14 @@ function b3BeginTurn(F,u,beats) {
     return false;
   }
   return b3Alive(u);
+}
+// One tick of a damage-over-time status on u (Toasty's burn, Bleed). A tick takes the target's Defense and what it says about the flavor
+// (a Pet Peeve, a Resist, "takes less Sizzle"), and rolls to crit when whoever put it on has `hoseFlinched` ("The Hose Flinched").
+function b3TickHit(F,c,u,id,s) {
+  const S=B3_STATUS[id],fl=S.tick.flavor,pv=b3Peeves(u).includes(fl),rs=u.resists.includes(fl);
+  const src=s.src&&b3Unit(F,s.src),crit=!F.preview&&!!(src&&src.custom&&src.custom.hoseFlinched&&b3Rand(F)<b3CritChance(src,u));
+  const dmg=Math.max(1,Math.round(s.atk*B3_RULES.power[S.tick.power]*100/(100+b3Stat(u,'def'))*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(u,0,{F,c,t:u,fl})*(crit?B3_RULES.crit.dmg:1)));
+  b3Hurt(F,c,u,dmg,Object.assign({src:s.src,flavor:fl,peeve:pv,resist:rs,tick:id},crit?{crit:true}:null));
 }
 // What this unit left for its next turn (the `later` op) runs now, each as its own small action with its own group of beats and
 // its own Composure ledger. The monsters it was aimed at may be gone: a random live one takes their place.
@@ -132,17 +138,20 @@ function b3Hurt(F,c,t,dmg,info) {
   let left=dmg,soak=0; const broke=[];
   b3ClaySizzle(F,c,t,info);   // a Sizzle hit fires a stone clay shield first
   const glazed=[];
-  for(const sh of t.shields) { if(left<=0) break; const pw=b3ShieldPower(sh,info),a=Math.min(sh.amt*pw,left); sh.amt-=a/pw; left-=a; soak+=a; if(sh.glaze) glazed.push([sh,a]); if(sh.amt<=1e-9) { sh.amt=0; broke.push(sh); } }
+  for(const sh of (info&&info.pierce?[]:t.shields)) { if(left<=0) break; const pw=b3ShieldPower(sh,info),a=Math.min(sh.amt*pw,left); sh.amt-=a/pw; left-=a; soak+=a; if(sh.glaze) glazed.push([sh,a]); if(sh.amt<=1e-9) { sh.amt=0; broke.push(sh); } }
   if(broke.length) t.shields=t.shields.filter(sh=>sh.amt>0);
   // A status with the `survive` flag (the Ward's jacket) keeps its carrier at 1 HP the first time a hit would knock them out, then is spent.
-  let held=null;
-  if(left>=t.hp&&t.hp>0) { held=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('survive')&&!t.st[i].spent); if(held) { t.st[held].spent=true; left=t.hp-1; } }
+  let held=null,gold=null;
+  if(left>=t.hp&&t.hp>0) { held=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('survive')&&!t.st[i].spent); if(held) { t.st[held].spent=true; left=t.hp-1; }
+    // "Gold Like My Teeth" (Boppy, stage 9c, `custom:'goldTeeth'`): once a battle a lethal hit leaves him on 1 HP, and he gains Pep.
+    else if(t.custom&&t.custom.goldTeeth&&!t.used.goldTeeth) { t.used.goldTeeth=true; gold=t.custom.goldTeeth; held='gold_teeth'; left=t.hp-1; } }
   t.hp=Math.max(0,t.hp-left);
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;
   if(!(info&&info.tick)) t.hitSince=true;
   c.beats.push(Object.assign({t:'hit',tgt:t.key,dmg,hp:t.hp,g:c.g},soak?{soak,sh:b3ShieldTotal(t)}:null,info));
   if(held) c.beats.push({t:'survive',tgt:t.key,id:held,hp:t.hp,g:c.g});
+  if(gold) { const got=b3Pep(F,t,gold.pep,'effect'); if(got) c.beats.push({t:'pep',tgt:t.key,n:got,pep:t.pep,g:c.g}); }
   for(const [sh,a] of glazed) b3GlazeReflect(F,c,t,sh,a,info);   // Fired Glaze throws back what it soaked
   for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g,c},c.beats); }
 }
@@ -236,7 +245,8 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     B.push({t:'miss',src:a.key,tgt:t.key,why:'blind',g:c.g}); return;
   }
   const mc=b3MissChance(a); if(mc>0&&b3Rand(F)<mc) { B.push({t:'miss',src:a.key,tgt:t.key,why:'acc',g:c.g}); return; }
-  const ev=b3Evasion(t); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
+  // A pierce hit (Stunt-Double Squirrel Intercept) ignores Evasion and shields. A hit that is part of a party-wide act is `wide`.
+  const ev=e&&e.pierce?0:b3Evasion(t,!single); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
   c.landed=(c.landed||0)+1;   // hits this action has landed so far ("It's OUR Longboard Now")
   // Family Ruckus: each hit after the first of a multi-hit move that lands (engine/b3-ruckus.js).
   if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&(c.skill.hits||1)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
@@ -249,7 +259,9 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     const fl=flavors[fi];
     if(t.hp<=0) break;
     // Detonation check, before this flavor part lands: once per target per action, on the oldest matching Prime. Enemies never Detonate.
-    const det=a.side==='party'&&t.side==='foe'&&!c.detonated[t.key]?b3FindDetonation(t,fl,a):null;
+    // A Skill with `detonatesAll` (Don't Leave Me! Meltdown) sets off every matching Prime in turn, not only the oldest one (spec 2.5).
+    const every=!!(c.skill&&c.skill.detonatesAll);
+    let det=a.side==='party'&&t.side==='foe'&&(every||!c.detonated[t.key])?b3FindDetonation(t,fl,a):null;
     // The move's own bonus: `per` counts something this action did (buffs stripped), `if` is a condition on the target.
     const bonus=Object.assign({},c.outExtra);
     // `counter` reads one of the attacker's Portable Counters (so much per point built up).
@@ -262,7 +274,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     if(single&&fl==='clobber'&&b3EffRow(F,t)==='back') dmg*=1-B3_RULES.backRowClobber;
     if(t.side==='party') dmg*=F.mods.taken;
     dmg=Math.max(1,Math.round(dmg));
-    if(det) {
+    while(det) {
       c.detonated[t.key]=true; (c.detPrime=c.detPrime||{})[t.key]=det.prime; b3EndStatus(F,t,det.prime,'detonated');
       B.push({t:'detonate',src:a.key,tgt:t.key,id:det.id,name:det.name,prime:det.prime,g:c.g});
       b3RunEffects(F,Object.assign({},c,{tgt:t,partDmg:dmg}),det.effects);
@@ -270,8 +282,9 @@ function b3Hit(F,c,t,per,flavors,e,single) {
       const got=b3Pep(F,a,B3_RULES.pep.detonation,'detonation'); if(got) B.push({t:'pep',tgt:a.key,n:got,pep:a.pep,g:c.g});
       b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.detonation,a.key,'detonation');   // the gauge's own Detonation gain; a Trait's extra comes with the hook
       b3Fire(F,'detonation',{src:a,tgt:t,id:det.id,g:c.g,c},B);
+      det=every?b3FindDetonation(t,fl,a):null;
     }
-    b3Hurt(F,c,t,dmg,{src:a.key,flavor:fl,crit,peeve:pv,resist:rs});
+    b3Hurt(F,c,t,dmg,Object.assign({src:a.key,flavor:fl,crit,peeve:pv,resist:rs},e&&e.pierce?{pierce:true}:null));
     b3RuckusMix(F,c,a,t,fl);
     if(!c.hit.includes(t)) c.hit.push(t);
     if(a.side==='party'&&t.side==='foe') {
@@ -299,7 +312,7 @@ function b3Interceptor(F,t) {
 // whoever `to` names and its beats stay in the part of the action it was set off in.
 function b3DamageOp(F,c,e) {
   const own=e.power!=null,S=own?{flavor:e.flavor,power:e.power,hits:e.hits||1,target:'foe'}:c.skill;
-  const a=c.actor,hits=Math.max(1,S.hits||1),all=own?!!e.aoe:S.target==='all_foes';
+  const a=c.actor,hits=Math.max(1,S.hits||1),all=own?!!e.aoe:(S.target==='all_foes'||S.target==='foe_row');
   const tier=typeof S.power==='number'?S.power:B3_RULES.power[S.power];
   const per=tier*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
   if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
@@ -339,6 +352,7 @@ function b3Act(F,u,skillId,optKey) {
   if(!O||O.no) return {ok:false,why:(O&&O.no)||'Nobody to use that on right now.'};
   const beats=[],rec=G?0:b3MoveRec(F,u,S),cost=b3Cost(F,u,S,O);
   if(S.cooldown) u.cd[S.id]=F.round+S.cooldown;
+  if(u.custom&&u.custom.mailbox&&['s1','s2','cap'].includes(S.slot)) u.lastSkill=S.id;   // "The Mailbox Moved": counters copy this Skill (engine/b3-custom.js)
   F.grant=null;
   const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[],ledger:{}};
   beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',anim:(S.anim&&S.anim.kind==='clip')?S.anim:null,hits:Math.max(1,S.hits||1),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});

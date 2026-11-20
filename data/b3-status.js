@@ -18,6 +18,7 @@
 //   intercept {reduce}: single-target hits aimed at the carrier land on the unit that put this status on, that much weaker
 //   on      {hook:{...}}: a reaction (engine/b3-hooks.js)
 //   weight  which icons show when there are more than 3 (higher first)
+//   noSteal  a buff that cannot be ripped off a monster (the Big One's crown: "No Take, Only Throw!" gives Nara an Attack bonus instead)
 //   desc    one plain sentence for the full list the player opens by tapping a unit (spec 2.8, the screen rule)
 const B3_STATUS={
   // ---- The 3 Primes (spec 2.5): 2 of the foe's turns ----
@@ -141,6 +142,53 @@ const B3_STATUS={
   // E-Bike Tag-Along: +15% Speed, Attack and Defense. Baxter Hill Longboard Express doubles it (a `mult` of 2 on the carried status).
   e_bike:{id:'e_bike',name:'E-Bike',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'ebike',v:.15},{stat:'atk',kind:'ebike',v:.15},{stat:'def',kind:'ebike',v:.15}],flags:[],
     short:'E-BIKE',color:'#9be39a',weight:6,desc:'Riding a rental e-bike: 15% more Speed, Attack and Defense. Baxter Hill Longboard Express doubles it.'},
+  // ---- Kit statuses: Boppy's The Dep and Pepper Boss, Nara's Attached Pup and Guard Dog (stage 9c) ----
+  // Warden's Nightstick Rap: "-15% foe Atk 1t".
+  back_behind:{id:'back_behind',name:'Back Behind The Line',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'nightstick',v:-.15}],flags:[],
+    short:'ATTACK DOWN',color:'#c9a27a',weight:4,desc:'Boppy cracked it across the shin: 15% less Attack for its next turn.'},
+  // "Nobody Gets Past Me!": 2 turns, an AoE taunt (every single-target attack must aim at Boppy), +35% Defense, and a grumpy Racket answer
+  // (a light hit: my call, the spec gives no tier) to whoever hits him, once per action.
+  nobody_past:{id:'nobody_past',name:'Nobody Gets Past Me',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'nobody',v:.35}],flags:['taunt'],
+    on:{afterHit:{carrier:'target',from:'foe',limit:'action',react:true,effects:[{op:'damage',flavor:['racket'],power:'light',to:'attacker'}]}},
+    short:'NOBODY PASSES',color:'#e6c988',weight:7,desc:'Every single-target attack has to aim at Boppy. He has 35% more Defense and grumbles a Racket answer at whoever hits him.'},
+  // 1970 Cross-Country Story: the monster's single-target attacks aim at Boppy for 2 of its turns. It still takes its turns (spec).
+  story_lock:{id:'story_lock',name:'Stuck In The Story',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[],flags:['lockAim'],
+    short:'STORY LOCK',color:'#d9c28a',weight:6,desc:'Boppy is on his 41st telling of the passing field on the last hill: this monster\u2019s single-target attacks must aim at him.'},
+  // Warden's Iron Gate: on every family member for 2 rounds. -40% damage from a party-wide act, and a Clobber answer from Boppy to a melee hit.
+  iron_gate:{id:'iron_gate',name:'Iron Gate',kind:'buff',group:null,dur:{n:2,unit:'round'},mods:[{stat:'reduce',kind:'gate',v:.40,when:{aoe:true}}],flags:[],
+    on:{afterHit:{carrier:'target',from:'foe',tags:['melee'],limit:'action',react:true,answer:'thorns',effects:[{op:'damage',flavor:['clobber'],power:'light',to:'attacker'}]}},
+    short:'IRON GATE',color:'#d9b86a',weight:6,desc:'Boppy\u2019s brass-and-iron gate stands in front of the family: 40% less damage from an attack on everyone, and a monster that hits one of them in melee gets a Clobber hit from Boppy.'},
+  // "It's Nothing, It's Fine" Chomp: Spiced Up, 3 turns: +30% on his Sizzle hits and a burn answer (light Sizzle, and it leaves Toasty) to a melee hit.
+  spiced_up:{id:'spiced_up',name:'Spiced Up',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[{stat:'out',kind:'spiced',v:.30,when:{flavor:'sizzle'}}],flags:[],
+    on:{afterHit:{carrier:'target',from:'foe',tags:['melee'],limit:'action',react:true,effects:[{op:'damage',flavor:['sizzle'],power:'light',to:'attacker'}]}},
+    short:'SPICED UP',color:'#ff8c5a',weight:6,desc:'Boppy ate a raw pepper and blames the oven: his Sizzle hits do 30% more, and a monster that hits him in melee gets burned.'},
+  // "My Stomach Is Doing Something": 25% more Attack after Sizzle chip or self-heat.
+  stomach_buzz:{id:'stomach_buzz',name:'Stomach Doing Something',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'stomach',v:.25}],flags:[],
+    short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'Boppy\u2019s stomach is doing something: 25% more Attack.'},
+  // 1989 Pickle-Jar Bomb: Toasty turned up. It ticks a second burn (so the burn is doubled) and cuts Defense 20%. It goes when Toasty goes
+  // (engine/b3-core.js b3EndStatus), so a Detonation of Toasty puts it out too; while it is on, the monster still counts as Toasty (my call).
+  five_alarm:{id:'five_alarm',name:'Five-Alarm Burn',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'fiveAlarm',v:-.20}],flags:[],
+    tick:{flavor:'sizzle',power:'light'},short:'FIVE-ALARM',color:'#ff5a3c',weight:8,
+    desc:'Toasty turned up to five alarms: it burns twice as hard and has 20% less Defense. It stays Toasty, and goes out with the Toasty.'},
+  // Locked On the Gold Ball: Nara's mark. The monster takes 20% more Clobber damage from the family; when it is pushed back on the turn
+  // bar, Nara gets a free chase bite at it (light Clobber, once a round).
+  my_toy:{id:'my_toy',name:'My Toy',kind:'mark',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'taken',kind:'myToy',v:.20,when:{flavor:'clobber'}}],flags:[],
+    on:{barMoved:{carrier:'target',pushed:true,limit:'round',react:true,answer:'putter',quiet:true,effects:[{op:'damage',flavor:['clobber'],power:'light',to:'attacker'}]}},
+    short:'MY TOY',color:'#ffd36b',weight:6,desc:'Nara has her teeth on it: it takes 20% more Clobber damage, and when it is pushed back on the turn bar she gets a free chase bite.'},
+  // Relentless Tug-of-War: -25% Attack and Defense for 2 turns.
+  tugged:{id:'tugged',name:'Tugged',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'tug',v:-.25},{stat:'def',kind:'tug',v:-.25}],flags:[],
+    short:'WEAKENED',color:'#c9a27a',weight:5,desc:'Nara is hanging off it: 25% less Attack and Defense.'},
+  // "No Take, Only Throw!": the Attack bonus Nara gets when there was no buff to rip off.
+  gold_grip:{id:'gold_grip',name:'Gold Ball Grip',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'goldGrip',v:.35}],flags:[],
+    short:'ATTACK UP',color:'#ffd36b',weight:4,desc:'Nara has the gold tennis ball clenched in her teeth: 35% more Attack.'},
+  // Jittery Shake-It-Off: +25% Evasion for 1 turn.
+  jitter_shake:{id:'jitter_shake',name:'Shaken Off',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'eva',kind:'shake',v:.25}],flags:[],
+    short:'DODGY',color:'#9be39a',weight:4,desc:'Nara shook off the jitters and is hard to catch: she dodges 25% more attacks.'},
+  // Vacuum-Cleaner Bolt!: kicked-up debris, -20% accuracy for 2 turns. Hiding behind Tom's legs: -50% damage from a party-wide act, 1 turn.
+  debris:{id:'debris',name:'Kicked Debris',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'acc',kind:'debris',v:-.20}],flags:[],
+    short:'DEBRIS',color:'#b9a58f',weight:4,desc:'Debris in its eyes: each of its attacks has a 20% chance to miss.'},
+  behind_legs:{id:'behind_legs',name:'Behind Tom\u2019s Legs',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'reduce',kind:'legs',v:.50,when:{aoe:true}}],flags:[],
+    short:'HIDING',color:'#c9d8f0',weight:5,desc:'Nara is hiding behind Tom\u2019s legs: she takes 50% less damage from an attack on the whole family.'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
     short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},
@@ -148,7 +196,7 @@ const B3_STATUS={
   mossy_brace:{id:'mossy_brace',name:'Mossy Brace',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
     short:'GUARD',color:'#e6c988',weight:5,desc:'Braced: takes 25% less damage. Panic Boil! or a Break ends it.'},
   // The Big One wears Deedee's muffin tin: +15% Attack and Mend 3%. It is one buff, so any buff strip knocks the whole crown off.
-  muffin_crown:{id:'muffin_crown',name:'Muffin-Tin Crown',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'crown',v:.15}],flags:[],regen:.03,
+  muffin_crown:{id:'muffin_crown',name:'Muffin-Tin Crown',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'crown',v:.15}],flags:[],regen:.03,noSteal:true,
     short:'CROWN',color:'#f2d36b',weight:6,desc:'Wearing Deedee\u2019s muffin tin: 15% more Attack, and it heals a little at the start of each turn. Any buff strip knocks it off.'},
   // ---- Kit statuses: Cozy Rosie and Registered Nut (stage 5c) ----
   // Tattered Lamby Boomerang: a picture that Lamby is out on the monster. The tackle itself is the `later` effect of the Skill; this

@@ -132,6 +132,19 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 
 Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at TNB himself; the Kiln Firing, Waymo flash and Baxter Hill waves are standard, standard and heavy at the all-monsters share (the spec prints no tier for the first two); Kiln Glow, Fresh Ride and the e-bike last the common 2 turns; the Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out; Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind; Kintsugi Gold Seam heals once per action for each member and lets a hit of a flavor that has no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!; Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%") and Carving Momentum takes another 10% off a Basic; the "slowest ally" of TAP-Card Transfer is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the TAP-Card extra turn applies to every buff TNB puts on, his own included; Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns; "scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10).
 
+## What stage 9c holds, and what waits
+
+| In (build `b3s9c`) | Waits for |
+|---|---|
+| Nara and Boppy complete: `data/b3-kit-nara.js` (Attached Pup, Guard Dog) and `data/b3-kit-boppy.js` (The Dep, Pepper Boss): 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks each (28 lines), every Skill with a plain `desc`. Cast rows carry `late:true` (so does TNB's). | Pictures and clips: every Skill uses `anim:{kind:'default'}`. |
+| New ops: `steal` (take the heaviest buff that is not `noSteal`, keep its turns), `tick` (run a status's ticks now), `upgrade` (swap a status for a stronger one), `treasure`, `goldBall`. New targets and fields: `foe_row` (one option per occupied row, 70% share), a Skill's `detonatesAll` and `pierce`, mod condition `aoe`, effect conditions `stolen`, `notStolen`, `targetDebuffed`, listener conditions `pushed`, `byAlly`, `tgtBoss`, and the `thorns` answer. | Stage 10 uses none of these by name. |
+| Status flags `lockAim` (monsters prefer the putter over a taunt) and `noSteal` (Muffin Crown). 13 new statuses in `data/b3-status.js`. | |
+| One-offs in `engine/b3-custom.js`: `boppySpeed`, `goldTeeth`, `mailbox`, `hoseFlinched`, `nervous`, `shins`. Evasion takes the Nervous Vibrations bonus (`b3Evasion(u,wide)`); Attack takes the Shins bonus (`b3Stat`). | |
+| The late joiners' Vibe Point pool (`engine/b3-progress.js`, `engine/b3-menu.js`): a cast row with `late:true` starts from the largest total any one member holds (`b3PoolSize`), split evenly; the Vibes screen shows VIBE POINT POOL with a move-20 button per Vibe and LOCK IT IN (`b3PoolShift`, `b3PoolConfirm`); the pool rides in the save (`vibes.pool`). A record from before the pool counts as already split. TNB uses it too. | The story switch (stage 15) decides when a save first creates a late joiner. |
+| Lab: NEW 8 (Tom, TNB, Nara against Toad and Skeeter) and NEW 9 (Tom, Grace, Rose, Boppy against The Big One). | |
+
+Calls made in stage 9c (none confirmed by Tom) are rows in `claude/battle-build.md` "Calls made that Tom has not confirmed".
+
 ## What stage 7 holds, and what waits
 
 | In (build `b3s7`) | Waits for |

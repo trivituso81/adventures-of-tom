@@ -19,6 +19,10 @@ const b3Member=id=>ALL_MEMBERS().find(m=>m.id===id)||null;
 // A family member's loadout, made valid for this build. null for someone whose kit is not built yet.
 function b3MemberLoadout(m) {
   if(!m||!b3HasKit(m.id)) return null;
+  if(!m.vibes&&b3IsLate(m.id)) {   // a late joiner arriving: the pool is the most VP any one member holds (spec section 1)
+    const book={}; for(const o of ALL_MEMBERS()) if(o.id!==m.id&&b3HasKit(o.id)&&o.vibes) book[o.id]=o.vibes;
+    m.vibes=b3NewLoadout(m.id,1,b3PoolSize(book));
+  }
   m.vibes=b3FixLoadout(m.id,m.vibes);
   return m.vibes;
 }
@@ -27,7 +31,7 @@ saveSnapshot=function() {
   const s=LE_saveSnapshot_b3();
   for(const sm of (s.members||[])) {
     const m=b3Member(sm.id),L=b3MemberLoadout(m)||(m&&m.vibes)||null;   // someone with no kit yet keeps whatever their save held
-    if(L) { sm.vibes={main:L.main,pocket:L.pocket,quirks:(L.quirks||[]).slice(),vp:Object.assign({},L.vp)}; sm.row=L.row||null; }
+    if(L) { sm.vibes={main:L.main,pocket:L.pocket,quirks:(L.quirks||[]).slice(),vp:Object.assign({},L.vp)}; if(L.pool) sm.vibes.pool={total:L.pool.total,set:!!L.pool.set}; sm.row=L.row||null; }
   }
   return s;
 };
@@ -152,6 +156,8 @@ function b3vRankAll(rank) {
   const B=b3LabBook(); for(const id in B) b3SetRank(id,B[id],rank);
   b3LabSave(); B3V.say='Every Vibe in the Battle Lab is now Rank '+rank+'.'; if(typeof sfx!=='undefined') sfx.select(); b3vRender();
 }
+function b3vPool(id,from,to) { const L=b3vLoadout(id); if(b3PoolShift(id,L,from,to,20)) b3vChanged(id,'Moved 20 Vibe Points from '+B3_VIBES[from].name+' to '+B3_VIBES[to].name+'.'); else b3vNope('Nothing to move there.'); }
+function b3vPoolLock(id) { const L=b3vLoadout(id); if(b3PoolConfirm(L)) b3vChanged(id,b3vName(id)+'’s split is locked in.'); }
 function b3vWho(i) { if(i===B3V.sel) return; B3V.sel=i; B3V.pick=null; B3V.say=''; if(typeof sfx!=='undefined') sfx.tab(); B3V.focus='who-'+i; b3vRender(); const b=document.querySelector('#b3-vibes .b3v-body'); if(b) b.scrollTop=0; }
 function b3vCycle(d) { const n=B3V.ids.length; if(n>1) b3vWho((B3V.sel+d+n)%n); }
 function b3vBack() { if(B3V.pick!=null) { const k='quirk-'+B3V.pick; B3V.pick=null; B3V.focus=k; if(typeof sfx!=='undefined') sfx.tab(); b3vRender(); } else b3vClose(); }
@@ -239,6 +245,17 @@ function b3vRender() {
     const order=B3_CAST[id].vibes.slice().sort((a,b)=>(a===L.main?0:a===L.pocket?1:2)-(b===L.main?0:b===L.pocket?1:2));
     for(const v of order) cards.appendChild(b3vCard(id,L,B3_VIBES[v]));
     body.appendChild(cards);
+    // A late joiner's pool, until the player confirms the split (spec section 1).
+    if(b3PoolOpen(L)) {
+      const ps=el('div','b3v-sec'),ids=B3_CAST[id].vibes;
+      ps.appendChild(el('div','b3v-h','VIBE POINT POOL <small>'+b3vName(id)+' arrived with '+L.pool.total+' Vibe Points. Split them once, then lock it in.</small>'));
+      const prow=el('div','b3v-slots');
+      ids.forEach((v,i)=>{ const o=ids[(i+1)%ids.length];
+        const b=btn('b3v-slot','pool-'+v,'<small>'+b3vEsc(B3_VIBES[v].name)+'</small><b>'+L.vp[v]+' VP</b>',()=>b3vPool(id,o,v));
+        b.dataset.say='Move 20 Vibe Points from '+B3_VIBES[o].name+' to '+B3_VIBES[v].name+'.'; prow.appendChild(b); });
+      const ok=btn('b3v-slot','pool-lock','<b>LOCK IT IN</b>',()=>b3vPoolLock(id)); ok.dataset.say='Keep this split for good. It cannot be changed afterwards.'; prow.appendChild(ok);
+      ps.appendChild(prow); body.appendChild(ps);
+    }
     // Quirk slots.
     const pool=b3QuirkPool(id,L),qs=el('div','b3v-sec');
     qs.appendChild(el('div','b3v-h','QUIRKS'+(pool.length?'':' <small>The first one unlocks when a Vibe reaches Rank '+B3_RULES.rankUnlock.quirkA+'.</small>')));

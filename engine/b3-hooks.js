@@ -42,7 +42,10 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 // tgt: who they answered, c: the answer's own small action}; the ops' events carry c too (engine/b3-ops.js).
 //   every        the round number is a multiple of this (Well-Loved Original: every 2nd round)
 //   shieldBy     'holder': the shield that broke or ended was put on by the holder (Emergency Stuffy Swap)
-const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly'];
+//   pushed       the bar move was a push (it added ticks), not a pull (My Toy's chase bite)
+//   byAlly       the event's source is a family member on the holder's side other than the holder (Forty-Pound Counterweight)
+//   tgtBoss      the event's target is a Boss (Sandbox Clue Digger on a Break)
+const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.carrier==='target'&&ev.tgt!==u) return false;
@@ -62,6 +65,9 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.attacks&&!(ev.c&&ev.c.skill&&ev.c.skill.power)) return false;
   if(L.every&&F.round%L.every) return false;
   if(L.shieldBy==='holder'&&ev.by!==u.key) return false;
+  if(L.pushed&&!(ev.n>0)) return false;
+  if(L.byAlly&&!(ev.src&&ev.src.side===u.side&&ev.src!==u)) return false;
+  if(L.tgtBoss&&!(ev.tgt&&ev.tgt.D&&ev.tgt.D.role==='boss')) return false;
   if(L.limit==='round'&&u.used[useKey]===F.round) return false;
   if(L.limit==='battle'&&u.used[useKey]) return false;
   if(L.limit==='action'&&ev.c&&ev.c.reacted&&ev.c.reacted[u.key+useKey]) return false;
@@ -75,8 +81,10 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   else if(L.limit) u.used[useKey]=F.round;
   if(L.react) {
     // The status's own answer is the holder's. `answer:'putter'` makes it the answer of whoever put the status on, aimed at the holder.
-    const putter=L.answer==='putter'&&statusId?b3Unit(F,u.st[statusId].src):null;
-    if(L.answer==='putter'&&!putter) return;
+    // `answer:'thorns'`: the answer is the putter's, aimed at whoever set the status off (the Iron Gate's thorns are Boppy's, not the one it hit).
+    const putter=(L.answer==='putter'||L.answer==='thorns')&&statusId?b3Unit(F,u.st[statusId].src):null;
+    if(L.answer&&!putter) return;
+    if(L.answer==='thorns') { F.reactions.push({u:putter,L,src:ev.src||null,status:statusId,holder:u,used:false,name,root:ev.c&&ev.c.reacted}); return; }
     // A status that is used up by the answer is gone the moment it is set off, so a monster that acts twice sets it off once.
     const used=!!(L.consume&&statusId&&b3EndStatus(F,u,statusId,'used'));
     if(used) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
@@ -91,7 +99,7 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   // Composure they shave is written into the ledger of the action that set them off, inside its 3-pip cap (spec 2.7).
   // `dealt` is what the action has taken off the event's target so far, soaked or not (Creative Mess splashes a share of it).
   const dealt=ev.c&&ev.tgt&&ev.c.lost?(ev.c.lost[ev.tgt.key]||0)+((ev.c.soak&&ev.c.soak[ev.tgt.key])||0):0;
-  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},dealt,
+  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},dealt,act:ev.c,
     reacted:(ev.c&&ev.c.reacted)||{},ledger:(ev.c&&ev.c.ledger)||{},scale:relay?relay.scale:1},L.effects);
   if(L.consume&&statusId&&!relay&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
 }
@@ -117,7 +125,7 @@ function b3RunReactions(F,beats) {
     const g='r'+(F.reactSeq++);
     beats.push({t:'react',src:u.key,tgt:a.key,id:R.status,name:R.name,g});
     const c={F,actor:u,src:a,tgt:a,carrier:u,targets:[a],hit:[],beats,g,detonated:{},reacted:R.root||{},tags:R.tags||['counter'],ledger:{}};
-    b3RunEffects(F,c,R.L.effects);
+    b3RunEffects(F,c,u.custom&&u.custom.mailbox?b3MailboxEffects(u,R.L.effects):R.L.effects);
     b3SpendCounters(F,c);
     b3KoCheck(F,c);
     // The `counter` hook fires before the answer's Composure is paid, so a pip a Quirk adds to a counterattack (Million-Miler

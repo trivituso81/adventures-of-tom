@@ -46,7 +46,7 @@ function b3Tick(F,beats) {
 // ---------- Push, pull, place (spec 2.2) ----------
 // Each further push on the same unit inside one round is halved (35, then 17.5, then 8.75). Pulls halve the same way.
 function b3Push(F,u,n) {
-  if(!b3Alive(u)||b3HasFlag(u,'pushImmune')) return 0;
+  if(!b3Alive(u)||b3HasFlag(u,'pushImmune')||b3SpeedHold(u)) return 0;
   const amt=n*Math.pow(B3_RULES.halving,u.pushes); u.pushes++; u.wait+=amt; return amt;
 }
 function b3Pull(F,u,n) {

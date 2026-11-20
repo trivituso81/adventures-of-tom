@@ -777,6 +777,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: Nara and Boppy complete (28 lines, Lab fights NEW 8 and NEW 9), the late joiners' Vibe Point pool (TNB moved onto it). 55 new rule checks, screen test in portrait and landscape. Calls made are rows in claude/battle-build.md. Next: c-b3s10."
     }
    ],
    "prompt": {
@@ -787,6 +791,38 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose six custom functions are designed in the session)",
     "effort": "high (6 of the 28 lines need a new function worked out from the spec)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9b.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: c-b3s10"
+  },
+  {
+   "id": "c-b3s10",
+   "title": "Battle system stage 10: Amy, Justin and Olivia kits",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "tag": "b3s10",
+   "next": "After b3s9c (done). Builds Amy's (Fitness Queen, Classroom Boss), Justin's (Basement Boss, Live Wire) and Olivia's (Rope Champ, Working Mom) Sig Vibes (about 42 lines, 2 need their own function) and a Lab fight with any party of 4.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by b3s9c: stage 10 follows stage 9."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 10 of the new battle system: Amy, Justin and Olivia's two Sig Vibes each, complete, playable in the Battle Lab.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose custom functions are designed in the session)",
+    "effort": "high",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s9c.md, then build stage 10 (Amy, Justin and Olivia) of the new battle system. You have my full permission to access the repo. Board card c-b3s10. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s10 (it moves this card to In progress and links your conversation)."
    }
   },
   {

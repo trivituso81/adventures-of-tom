@@ -259,6 +259,15 @@ Card c-reports, Tom's seven open art reports installed from the approved entries
 - Sizing: every new single figure is keyed from the generator's background (it sometimes paints crimson instead of magenta, `single_figure` flattens it first), its head scaled to that person's own mood figures and grown by the HEAD SIZES factor (`tools/sprite-bake/report_singles.py`), then drawn at the mood scale (`bake_story_poses.py` `REPORT_STRIPS`, `DAZED_NPCS`). Faces: `bake_report_faces.py` (Rose's head rows set by eye, the bulb is held above her head).
 - Rebake drift: a full `bake_story_poses.py` run changes palette rows of nine NPC sets and the `pipemo` atlas with no art change; those were put back from the last build so the diff holds only this work. Same for the 7 other Boppy mood faces and the 40 existing talking faces.
 - Tests: `python3 tools/smoke.py`, `python3 tools/pose_editor_test.py`, the reaction tests and the spot screenshots (portrait and landscape) are in the push notes below.
+## b3s9c (2026-11-20): New battle: Nara and Boppy join the Battle Lab with both of their Vibes, and late joiners start from a Vibe Point pool
+
+- Tom (11-20): "build stage 9c (Nara and Boppy) of the new battle system." Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) are built: 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks each (28 lines), `data/b3-kit-nara.js` and `data/b3-kit-boppy.js`. Every Skill has a full plain sentence for its card. This ends stage 9.
+- New rule pieces (docs/BATTLE3.md "What stage 9c holds"): ops `steal`, `tick`, `upgrade`, `treasure`, `goldBall`; target `foe_row`; a Skill's `detonatesAll` and `pierce`; the status flags `lockAim` and `noSteal`; six one-offs (Boppy's Speed, Gold Teeth, the Mailbox, the Hose Flinched, Nervous Vibrations, Shins).
+- Late joiners' pool: TNB, Nara and Boppy start from the most Vibe Points any one member holds, split evenly, and the Vibes screen lets the player move them once and lock the split. Saves carry it.
+- Lab: NEW 8 (Tom, TNB, Nara) and NEW 9 (Tom, Grace, Rose, Boppy).
+- No picture or clip work, no voice lines added.
+- Tests: `node tools/b3-sim.js check` (1178 checks, 55 new in `tools/b3-check-s9c.js`, FAILS: []), `python3 tools/b3_test.py s9c` (portrait and landscape; frames `tools/shots/b3-s9c*.png`). Handoff: docs/handoff/b3s9c.md.
+
 ## b3s9b (2026-11-19): New battle: TNB joins the Battle Lab with both of his Vibes, Ceramicist and Longboarder
 
 - Tom (11-19): "build stage 9b (TNB) of the new battle system." TNB's two Sig Vibes are built: 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks (14 lines), `data/b3-kit-tnb.js`. Every Skill has a full plain sentence for its card.

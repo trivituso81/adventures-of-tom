@@ -165,8 +165,9 @@ function b3OverBeats(F,beats,g) {
 //         skillPep:X: (ctx.skill) the move is a Skill, not a Basic or a Grand Capstone, and costs X Pep or less (New Game Plus).
 //         tgtBelow:X: (ctx.tgt) the move's one target is a family member still up at less than X of their Max HP (First-Ring Pickup).
 //         basic: (ctx.skill) the move is a Basic (Carving Momentum).  shielded: the holder has a shield up right now (Coaster Policy).
-const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko'];
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded'];
+//         aoe: the act in progress reaches every family member at once (a monster's party-wide act: its tags carry `aoe`), 9c.
+const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row'];
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe'];
 // A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
 function b3Peeves(u) {
   let out=u.peeves;
@@ -186,6 +187,7 @@ function b3ModWhen(u,m,ctx,putBy) {
     else if(k==='skillPep') { const S=ctx.skill; if(!S||S.slot==='basic'||S.slot==='cap'||!(S.pep<=W.skillPep)) return false; }
     else if(k==='basic') { const S=ctx.skill; if(!S||S.slot!=='basic') return false; }
     else if(k==='shielded') { if(!(b3ShieldTotal(u)>0)) return false; }
+    else if(k==='aoe') { if(!(c&&c.tags&&c.tags.includes('aoe'))) return false; }
     else if(k==='tgtBelow') { const t=ctx.tgt; if(!t||t.side!==u.side||t.ko||!(t.hp<t.maxHp*W.tgtBelow)) return false; }
     else throw new Error('Battle 3 mod condition not built yet: '+k);
   }
@@ -210,7 +212,10 @@ const b3Mult=(u,stat,ctx)=>{ const M=b3Mods(u,stat,ctx); let m=1; for(const k in
 // (stat 'moveRec': Ultra-Rare Limited Edition). Fatigue and the like change every Recovery and are applied in b3WaitFor.
 const b3MoveRec=(F,u,S)=>(S.rec!=null?S.rec:B3_RULES.recovery[S.slot])*b3Mult(u,'moveRec',{skill:S});   // a Skill may print its own Base Recovery in `rec` (Longboard Push & Carve)
 // Attack, Defense or Speed with every mod applied. A crack is a battle-long cut of base Defense, 25% at most in total (spec 2.4).
-const b3Stat=(u,stat)=>u[stat]*(stat==='def'?1-u.crack:1)*b3Mult(u,stat);
+// Pressed Against Your Shins (Nara, stage 9c, `custom:'shins'`): her Attack also grows by `share` of the Speed bonuses she wears (the
+// positive Speed mods of her statuses and Quirks, not her Lean).
+const b3SpdBuff=u=>{ const M=b3Mods(u,'spd'); let s=0; for(const k in M) if(M[k]>0) s+=M[k]; return s; };
+const b3Stat=(u,stat)=>u[stat]*(stat==='def'?1-u.crack:1)*b3Mult(u,stat)*(stat==='atk'&&u.custom&&u.custom.shins?1+u.custom.shins.share*b3SpdBuff(u):1);
 // Damage dealt. `extra` is {kind: amount} from the move itself. Bonuses are capped at +100% in total (spec 2.4); penalties are not.
 function b3OutMult(u,extra,ctx) {
   const M=b3Mods(u,'out',ctx); for(const k in (extra||{})) M[k]=(M[k]||0)+extra[k];
@@ -220,7 +225,11 @@ function b3OutMult(u,extra,ctx) {
 // Damage taken: penalties of the "takes +X%" kind add together; reductions add together up to the 60% cap.
 // `extra` is a reduction that belongs to this one hit (an intercept's "-35% damage").
 const b3TakenMult=(u,extra,ctx)=>(1+Math.max(0,b3Sum(u,'taken',ctx)))*(1-Math.min(B3_RULES.caps.reduction,Math.max(0,b3Sum(u,'reduce',ctx)+(extra||0))));
-const b3Evasion=u=>Math.min(B3_RULES.caps.evasion,Math.max(0,b3Sum(u,'eva')));
+// Evasion. Nervous Vibrations (Nara, stage 9c, `custom:'nervous'`) adds `per` for every Pep she is holding, up to `max`, and only `wide`
+// of that against an attack that reaches the whole family (wide: the hit is part of a party-wide act).
+const b3Evasion=(u,wide)=>{ let e=b3Sum(u,'eva'); const n=u.custom&&u.custom.nervous;
+  if(n&&u.pep!=null) e+=Math.min(n.max,n.per*u.pep)*(wide?n.wide:1);
+  return Math.min(B3_RULES.caps.evasion,Math.max(0,e)); };
 const b3MissChance=u=>Math.min(1,Math.max(0,-b3Sum(u,'acc')));
 const b3HasFlag=(u,flag)=>Object.keys(u.st).some(id=>B3_STATUS[id].flags.includes(flag));
 // Front or Back as the rules see it: a Back-row unit with nobody standing in Front counts as Front (bestiary 1.1).
@@ -239,7 +248,11 @@ function b3AddStatus(F,u,id,o) {
   delete u.stripped[id];
   return !had;
 }
-function b3EndStatus(F,u,id,why) { if(!u.st[id]) return false; delete u.st[id]; if(why==='strip') u.stripped[id]=true; return true; }
+function b3EndStatus(F,u,id,why) {
+  if(!u.st[id]) return false; delete u.st[id]; if(why==='strip') u.stripped[id]=true;
+  if(id==='toasty'&&u.st.five_alarm) delete u.st.five_alarm;   // Five-Alarm Burn is Toasty turned up: it ends with it (1989 Pickle-Jar Bomb)
+  return true;
+}
 // The 3 icons a unit shows (spec 2.8): its Prime, its strongest debuff, its strongest buff.
 function b3Icons(u) {
   const ids=Object.keys(u.st),pick=kinds=>ids.filter(id=>kinds.includes(B3_STATUS[id].kind)).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight||u.st[a].at-u.st[b].at)[0];
@@ -359,6 +372,10 @@ function b3Options(F,u,S) {
   if(S.target==='ko_ally') return (u.side==='party'?F.party:F.foes).filter(m=>m.ko).map(m=>({key:m.key,label:m.name,units:[m],ally:true}));
   if(S.target==='adjacent_allies') { const adj=b3Adjacent(F,u); return adj.length?[{key:'*',label:adj.map(m=>m.name).join(' and '),units:adj,ally:true}]:[]; }
   if(S.target==='field') return foes.length?[{key:'*',label:'The monsters\u2019 floor',units:foes}]:[];
+  // One row of monsters (Vacuum-Cleaner Bolt!): a choice for each row that has someone standing in it. It hits like an AoE (spec 2.4: "all foes or a row").
+  if(S.target==='foe_row') { const out=[];
+    for(const row of ['front','back']) { const L=foes.filter(f=>b3EffRow(F,f)===row); if(L.length) out.push({key:'row:'+row,label:(row==='front'?'Front row: ':'Back row: ')+L.map(f=>f.name).join(', '),units:L}); }
+    return out; }
   if(S.target==='random_foes'||S.target==='all_foes') return foes.length?[{key:'*',label:S.target==='all_foes'?'All monsters':'Random monsters',units:foes}]:[];
   throw new Error('Battle 3 target kind not built yet: '+S.target);
 }
@@ -407,7 +424,7 @@ function b3AutoScore(F,u,S,O) {
         const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>b3Peeves(t).includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
         sc+=p*3+(p>=t.pips?14:0); }
     } else {
-      sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
+      sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'||S.target==='foe_row'?O.units.length*R.aoeShare:1);
       // A move on every monster: buffs it strips, a floor it clears, the pips it should take, and a taunt while the family is hurt.
       for(const e of S.effects) if(e.op==='strip') {
         if(e.kind==='hazard') sc+=F.hazards.filter(h=>h.side===u.side).length*8;

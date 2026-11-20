@@ -10,6 +10,8 @@
 //   quirks        two Quirk ids or null, from any of that member's own Vibes, each unlocked by its Vibe's Rank
 //   vp            Vibe Points per Vibe. The Rank is worked out from them (B3_RULES.rankVp), never stored.
 //   row           'front', 'back' or null (null: by the Main Vibe's Lean, B3_RULES.rowByLean)
+//   pool          (late joiners only, a cast row with `late:true`) {total, set}: the Vibe Points they arrived with, and whether the
+//                 player has confirmed the split. See "The late joiners' pool" below.
 // A BOOK is {<member id>: loadout}. The save holds one book, the Battle Lab holds its own.
 
 // ---------- Ranks ----------
@@ -33,12 +35,42 @@ function b3Subtitle(V,rank) { let t=0; B3_RULES.subtitleRank.forEach((r,i)=>{ if
 
 // ---------- Loadouts ----------
 // A fresh loadout: the two Sig Vibes as Main and Pocket, no Quirks, every Vibe at `rank` (1 when left out).
-function b3NewLoadout(id,rank) {
+// A late joiner (TNB, Nara, Boppy) starts from the pool instead (spec section 1): `pool` is its size, or, when left out, what every
+// Vibe at `rank` would hold in all. The pool is split evenly to begin with; the player may split it once, their own way (b3PoolShift).
+function b3NewLoadout(id,rank,pool) {
   const ids=B3_CAST[id].vibes,sig=n=>ids.find(v=>B3_VIBES[v].sig===n);
   const main=sig(1)||ids[0],pocket=sig(2)&&sig(2)!==main?sig(2):ids.find(v=>v!==main)||null,vp={};
-  for(const v of ids) vp[v]=B3_RULES.rankVp[Math.max(1,Math.min(b3MaxRank(),rank||1))-1];
-  return {main,pocket,quirks:Array.from({length:B3_RULES.quirkSlots},()=>null),vp,row:null};
+  const each=B3_RULES.rankVp[Math.max(1,Math.min(b3MaxRank(),rank||1))-1];
+  for(const v of ids) vp[v]=each;
+  const L={main,pocket,quirks:Array.from({length:B3_RULES.quirkSlots},()=>null),vp,row:null};
+  if(b3IsLate(id)) { const total=pool!=null?Math.max(0,Math.floor(pool)):each*ids.length;
+    b3PoolEven(id,L,total); L.pool={total,set:false}; }
+  return L;
 }
+// ---------- The late joiners' pool (spec section 1: "arrive ... with a VP pool equal to the most total VP any one character has earned so
+// far. The player splits that pool once across the newcomer's Vibes") ----------
+// The pool is the largest total of Vibe Points any one family member holds. A late joiner's Vibes start with it split evenly (so they are
+// playable at once), and until the player confirms, VP can be moved between the Vibes in steps (b3PoolShift); confirming locks the split
+// for good (b3PoolConfirm). My calls: only the Vibes that are built count (a third Vibe that arrives later starts at 0 and earns like any
+// other); the pool counts every Vibe Point a member holds, a late joiner's pool included.
+const b3IsLate=id=>!!(B3_CAST[id]&&B3_CAST[id].late);
+const b3VibeTotal=(id,L)=>B3_CAST[id].vibes.reduce((s,v)=>s+((L&&L.vp&&L.vp[v])||0),0);
+function b3PoolSize(book) { let best=0; for(const id in (book||{})) if(b3HasKit(id)&&book[id]) best=Math.max(best,b3VibeTotal(id,book[id])); return best; }
+function b3PoolEven(id,L,total) {
+  const ids=B3_CAST[id].vibes,M=b3MasterVp(),base=Math.floor(total/ids.length),rem=total-base*ids.length;
+  ids.forEach((v,i)=>{ L.vp[v]=Math.min(M,base+(i<rem?1:0)); });
+}
+const b3PoolOpen=L=>!!(L&&L.pool&&!L.pool.set);
+// Move n Vibe Points from one Vibe to another while the split is open. Returns true when it moved.
+function b3PoolShift(id,L,from,to,n) {
+  const ids=B3_CAST[id].vibes;
+  if(!b3PoolOpen(L)||from===to||!ids.includes(from)||!ids.includes(to)||!(n>0)) return false;
+  n=Math.min(n,L.vp[from]||0,b3MasterVp()-(L.vp[to]||0)); if(n<=0) return false;
+  L.vp[from]-=n; L.vp[to]+=n;
+  const pool=b3QuirkPool(id,L); L.quirks=L.quirks.map(q=>q&&pool.includes(q)?q:null);
+  return true;
+}
+function b3PoolConfirm(L) { if(!b3PoolOpen(L)) return false; L.pool.set=true; return true; }
 // The Quirks this member may equip right now: from all their own Vibes, each unlocked by its own Vibe's Rank.
 function b3QuirkPool(id,L) {
   const out=[];
@@ -61,6 +93,8 @@ function b3FixLoadout(id,L) {
   const D=b3NewLoadout(id,1); if(!L||typeof L!=='object') return D;
   const ids=B3_CAST[id].vibes,M=b3MasterVp(),out={main:D.main,pocket:D.pocket,quirks:D.quirks.slice(),vp:{},row:L.row==='front'||L.row==='back'?L.row:null};
   for(const v of ids) { const n=Math.floor(Number(L.vp&&L.vp[v])||0); out.vp[v]=Math.max(0,Math.min(M,n)); }
+  // A late joiner's pool: kept as saved; a record from before the pool existed counts as already split.
+  if(b3IsLate(id)) out.pool=L.pool&&typeof L.pool==='object'?{total:Math.max(0,Math.floor(Number(L.pool.total)||0)),set:!!L.pool.set}:{total:b3VibeTotal(id,out),set:true};
   if(ids.includes(L.main)) out.main=L.main;
   out.pocket=ids.includes(L.pocket)&&L.pocket!==out.main?L.pocket:ids.find(v=>v!==out.main)||null;
   const pool=b3QuirkPool(id,out),seen={};
@@ -93,6 +127,7 @@ const b3RowOf=L=>L.row||B3_RULES.rowByLean[B3_VIBES[L.main].lean]||'front';
 function b3SetRank(id,L,rank) {
   const vp=B3_RULES.rankVp[Math.max(1,Math.min(b3MaxRank(),rank))-1];
   for(const v of B3_CAST[id].vibes) L.vp[v]=vp;
+  if(L.pool) L.pool.total=vp*B3_CAST[id].vibes.length;   // a late joiner's pool follows the Rank picked
   const pool=b3QuirkPool(id,L); L.quirks=L.quirks.map(q=>q&&pool.includes(q)?q:null);
 }
 

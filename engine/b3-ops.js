@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -23,6 +23,10 @@ function b3Who(F,c,to) {
   if(to==='foes') return b3Live(F,b3Other(c.actor.side));
   // Whoever on the actor's side has the smallest share of their HP left, the actor included (the first in line on a tie).
   if(to==='lowestAlly') return b3Live(F,c.actor.side).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
+  // The family member with the least Pep (the first in line on a tie): a Pep Bone from Sandbox Clue Digger.
+  if(to==='lowestPepAlly') return b3Live(F,c.actor.side).filter(o=>o.pep!=null).sort((x,y)=>x.pep-y.pep||x.slot-y.slot).slice(0,1);
+  // One monster picked by the fight's own dice (a Squeaky Toy).
+  if(to==='randomFoe') { const L=b3Live(F,b3Other(c.actor.side)); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   // The next unit of the actor's own side due on the turn bar, not counting the actor.
   if(to==='nextAlly') return b3TurnOrder(F).filter(o=>o.side===c.actor.side&&o!==c.actor).slice(0,1);
   // Whoever is due next on the turn bar, but only if that is someone else on the actor's side (Sensory Satisfying).
@@ -158,6 +162,28 @@ const B3_OPS={
   double(F,c,e) { b3DoubleBuff(F,c,e); },
   // rebalance: a family member shares HP with the one who has the most (Waymo Tailgate Rescue).
   rebalance(F,c,e) { b3Rebalance(F,c,e); },
+  // steal (stage 9c, "No Take, Only Throw!"): the actor rips n buffs off each chosen unit (the heaviest first) and wears them for the
+  // turns they had left. A buff whose row says `noSteal` stays where it is. c.stolen counts what was taken (effects may carry
+  // `when:'stolen'` or `when:'notStolen'`).
+  steal(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
+      const ids=Object.keys(t.st).filter(id=>B3_STATUS[id].kind==='buff'&&!B3_STATUS[id].noSteal).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight).slice(0,e.n||1);
+      for(const id of ids) { const s=t.st[id]; b3EndStatus(F,t,id,'strip'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g});
+        b3AddStatus(F,c.actor,id,{src:c.actor,n:s.n}); c.beats.push({t:'status',tgt:c.actor.key,id,g:c.g});
+        c.stolen=(c.stolen||0)+1; b3Fire(F,'buffStripped',{src:c.actor,tgt:t,id,g:c.g,c},c.beats); } }
+  },
+  // tick (stage 9c, The Ghost One That Looks Back): every damage-over-time status of the chosen flavor on the chosen units ticks n times
+  // at once and stays on (engine/b3-resolve.js b3TickHit).
+  tick(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) for(let i=0;i<(e.n||1);i++) { if(!b3Alive(t)) break;
+      for(const id of Object.keys(t.st)) { const S=B3_STATUS[id],s=t.st[id]; if(!S.tick||!s||(e.flavor&&S.tick.flavor!==e.flavor)) continue; b3TickHit(F,c,t,id,s); } }
+  },
+  // upgrade (stage 9c, 1989 Pickle-Jar Bomb): each chosen unit that carries status `from` is also given status `id` (Five-Alarm Burn on a
+  // Toasty monster). The new status ends with the old one (engine/b3-core.js b3EndStatus).
+  upgrade(F,c,e) { for(const t of b3Who(F,c,e.to)) if(b3Alive(t)&&t.st[e.from]) b3PutStatus(F,c,t,{id:e.id}); },
+  // treasure and goldBall: Nara's Sandbox Clue Digger and Locked On the Gold Ball (engine/b3-custom.js).
+  treasure(F,c,e) { b3Treasure(F,c); },
+  goldBall(F,c,e) { b3GoldBall(F,c); },
   // ruckus: adds to the Family Ruckus gauge (0 to 100, shared by the party). The gauge's own gains and the two spends are in
   // engine/b3-ruckus.js; this is how a Trait, Quirk or Skill that prints its own gain adds to them.
   ruckus(F,c,e) { b3RuckusAdd(F,c.beats,c.g,e.n,c.actor&&c.actor.key,'trait'); },
@@ -195,13 +221,17 @@ const B3_OPS={
 //   cleansed  a cleanse in this action took at least one thing off
 //   stripped  a strip in this action took at least one buff or stance off
 //   revived   a revive in this action brought someone back;  notRevived  none did (To the Moon & Back heals the living instead)
-const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived'];
+//   stolen    a steal in this action took a buff;  notStolen  none did (No Take, Only Throw! then gives Nara the Attack bonus instead)
+//   targetDebuffed  a monster this action hit carries a debuff (Grip-Chicken Snap)
+const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived','stolen','notStolen','targetDebuffed'];
 // c.scale below 1 (a rider held for the later hits of a multi-hit move, engine/b3-custom.js): only the ops whose size can be
 // cut run, at that share; an effect that cannot be split (1 Pep, a status) does not repeat.
 const B3_SCALABLE=['damage','splash','heal','shield'];
 function b3RunEffects(F,c,effects) {
   for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
     if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)) continue;
-    if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when); if(e.when==='notRevived'?c.revived>0:!(c[e.when]>0)) continue; }
+    if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when);
+      const hold=e.when==='notRevived'?!(c.revived>0):e.when==='notStolen'?!(c.stolen>0):e.when==='targetDebuffed'?(c.hit||[]).some(t=>Object.keys(t.st).some(id=>B3_STATUS[id].kind==='debuff')):(c[e.when]>0);
+      if(!hold) continue; }
     fn(F,c,e); }
 }

@@ -1,10 +1,10 @@
 'use strict';
 // data/b3-kit-tnb.js — Battle 3 kit: TNB (spec section 3.7). Built: all of Ceramicist and all of Longboarder (stage 9b).
 // Same shape as the other kit files (see the top of data/b3-kit-tom.js). TNB is the first family member to join after chapter 1
-// (chapter 2 on); his Vibe Points start from the late joiners' pool in stage 9c, until then he starts like everyone else.
+// (chapter 2 on); his Vibe Points start from the late joiners' pool (`late:true` on his cast row; engine/b3-progress.js, stage 9c).
 // Six lines needed their own rule (engine/b3-custom.js): Wet Clay to Stoneware, Three-AM Kiln Firing (the firing half), Grand Amphora
 // Masterpiece, Kintsugi Gold Seam, Waymo Tailgate Rescue (the rebalance half) and Baxter Hill Longboard Express (the doubling half).
-B3_CAST.tnb={id:'tnb',name:'TNB',vibes:['tnb_potter','tnb_boarder'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.tnb={id:'tnb',name:'TNB',vibes:['tnb_potter','tnb_boarder'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Ceramicist (first Sig Vibe) ----------------------------------------------------------------
 B3_VIBES.tnb_potter={id:'tnb_potter',owner:'tnb',name:'Ceramicist',sig:1,lean:'support',

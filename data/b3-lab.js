@@ -21,5 +21,9 @@ const B3_LAB=[
   {id:'new6',name:'NEW 6: THE BIG ONE',sub:'Chapter 1 boss. 6 Composure pips. It glares at someone, then bites them on its next turn.',
     party:['grace','tom','rose','deedee'],level:2,formation:'bigone',bg:'pond'},
   {id:'new7',name:'NEW 7: TNB JOINS (LOG LUMP)',sub:'TNB takes Deedee\u2019s place: Ceramicist or Longboarder, with Grace, Tom and Rose. Log Lump has 4 Composure pips.',
-    party:['grace','tom','tnb','rose'],level:2,formation:'log',bg:'pond'}
+    party:['grace','tom','tnb','rose'],level:2,formation:'log',bg:'pond'},
+  {id:'new8',name:'NEW 8: NARA JOINS (TOAD AND SKEETER)',sub:'Chapter 2 party: Tom, TNB and Nara. Nara is Attached Pup (Guard Dog in the Pocket). A Bog Toad sweeps the whole family.',
+    party:['tom','tnb','nara'],level:2,formation:'toad',bg:'pond'},
+  {id:'new9',name:'NEW 9: BOPPY JOINS (BIG ONE)',sub:'Chapter 3 party: Tom, Grace, Rose and Boppy. Boppy is The Dep (Pepper Boss in the Pocket). The Big One has 6 Composure pips.',
+    party:['tom','grace','rose','boppy'],level:2,formation:'bigone',bg:'pond'}
 ];

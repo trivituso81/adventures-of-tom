@@ -8,8 +8,56 @@ const B3_CUSTOM={
   cleanBill:'Deedee, Registered Nut, Trait: half of any healing past full HP becomes a Clean Bill Shield (a share of the overheal, capped at a share of Max HP)',
   doubleCoat:'Grace, Craft Artist, Quirk B: a Razzle move after a Racket move (or the other way round) takes a free Composure pip off',
   wetClay:'TNB, Ceramicist, Trait: his clay shields soak extra Clobber damage, and a Sizzle hit fires one into Fired Glaze that reflects part of what it soaks',
-  tapCard:'TNB, Longboarder, Quirk A: the buffs he puts on last longer (engine/b3-ops.js b3PutStatus)'
+  tapCard:'TNB, Longboarder, Quirk A: the buffs he puts on last longer (engine/b3-ops.js b3PutStatus)',
+  boppySpeed:'Boppy, The Dep, Trait: while above half HP a push on the turn bar does nothing to him (engine/b3-timeline.js b3Push)',
+  goldTeeth:'Boppy, The Dep, Quirk A: once a battle a lethal hit leaves him on 1 HP and gives him Pep (engine/b3-resolve.js b3Hurt)',
+  mailbox:'Boppy, The Dep, Quirk B: his counterattacks copy the flavor and the status riders of his last Skill (b3MailboxEffects below)',
+  hoseFlinched:'Boppy, Pepper Boss, Quirk A: the damage-over-time ticks of statuses he put on can crit (engine/b3-resolve.js b3TickHit)',
+  nervous:'Nara, Attached Pup, Trait: Evasion from the Pep she is holding, half against a party-wide act (engine/b3-core.js b3Evasion)',
+  shins:'Nara, Attached Pup, Quirk B: her Attack grows by a share of her Speed bonuses (engine/b3-core.js b3Stat)'
 };
+
+// ---------- Boppy Speed (spec 3.6: "timeline pushback immune >50% HP") ----------
+// True while Boppy stands above `above` of his Max HP: b3Push then does nothing to him. (A status's `pushImmune` flag is the same thing for a while.)
+function b3SpeedHold(u) { const n=u.custom&&u.custom.boppySpeed; return !!n&&u.hp>u.maxHp*n.above; }
+
+// ---------- "The Mailbox Moved" (spec 3.6: "counters inherit element & riders of Boppy's last Active Skill") ----------
+// An answer Boppy gives (the grumpy counter of "Nobody Gets Past Me!", the Iron Gate's thorns) takes the flavor of his last Skill (Skill 1,
+// Skill 2 or Capstone; a Basic is not an Active Skill, my call) in place of its own, and carries that Skill's status riders: every status
+// the Skill puts on its target or on the monsters, put on whoever Boppy answers. A Skill with no damage flavor (a Support one) changes
+// nothing. An answer with no damage in it gets no riders. Before he has used a Skill his answers are the plain ones.
+function b3MailboxEffects(u,effects) {
+  const S=u.lastSkill&&B3_SKILLS[u.lastSkill]; if(!S||!effects.some(e=>e.op==='damage'&&e.power!=null)) return effects;
+  const fl=(S.flavor||[]).filter(f=>f!=='support'&&B3_FLAVORS[f]); if(!fl.length) return effects;
+  const riders=S.effects.filter(e=>e.op==='status'&&(e.to==='target'||e.to==null||e.to==='foes')).map(e=>Object.assign({},e,{to:'attacker'}));
+  return effects.map(e=>e.op==='damage'&&e.power!=null?Object.assign({},e,{flavor:fl}):e).concat(riders);
+}
+
+// ---------- Sandbox Clue Digger (spec 3.8: "Digs up buried neighborhood treasures (Pep Bone, Squeaky Toy, Chicken Strip) at battle start & on boss Break") ----------
+// The Quirk's two listeners (battleStart, and break with a Boss) each run the `treasure` op: one of the three, picked by the fight's dice.
+// The effects are my calls: a Pep Bone gives 2 Pep to whoever in the family has the least; a Squeaky Toy is a light Racket squeak on a
+// random monster; a Chicken Strip heals whoever has the smallest share of HP left by 15%.
+const B3_TREASURE=[
+  {id:'pep_bone',name:'Pep Bone',effects:[{op:'pep',n:2,to:'lowestPepAlly'}]},
+  {id:'squeaky_toy',name:'Squeaky Toy',effects:[{op:'damage',flavor:['racket'],power:'light',to:'randomFoe'}]},
+  {id:'chicken_strip',name:'Chicken Strip',effects:[{op:'heal',pct:.15,to:'lowestAlly'}]}];
+function b3Treasure(F,c) {
+  const T=B3_TREASURE[Math.min(B3_TREASURE.length-1,Math.floor(b3Rand(F)*B3_TREASURE.length))];
+  c.beats.push({t:'passive',src:c.actor.key,id:'sandbox_clue_digger',name:'Dug up a '+T.name,g:c.g});
+  b3RunEffects(F,c,T.effects); b3KoCheck(F,c);
+}
+
+// ---------- Locked On the Gold Ball (spec 3.8: "Hitting same foe twice marks My Toy") ----------
+// After each action of Nara's, she remembers the monsters it hit (`lastHit`). A monster her action hits that was also hit by her action
+// before it is given My Toy. My calls: "twice" is two of her own actions in a row; an action that hits nothing leaves the memory as it was;
+// a monster that already wears My Toy keeps it as it is.
+function b3GoldBall(F,c) {
+  const a=c.actor,act=c.act; if(!act||act.actor!==a) return;
+  const hit=(act.hit||[]).filter(t=>t.side==='foe'&&b3Alive(t)); if(!hit.length) return;
+  const last=a.lastHit||[];
+  for(const t of hit) if(last.includes(t.key)&&!t.st.my_toy) b3PutStatus(F,c,t,{id:'my_toy'});
+  a.lastHit=hit.map(t=>t.key);
+}
 
 // ---------- Twin-Lamb Relay (spec 3.3: "multi-hit skills trigger weapon/elemental enchantments on every hit at 40% power") ----------
 // An "enchantment" here is a RIDER: something another family member left on a monster that the next hit uses up. In data that
