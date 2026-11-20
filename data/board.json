@@ -11864,7 +11864,7 @@
    "title": "Decide: Boppy's fishing rod indoors, keep it or not",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "The tester (POLISH-03) says Boppy's kitchen face shows a fishing rod and creel at 6 AM. I checked: the rod and creel are painted into every approved Boppy picture (hero painting, walking sheet, the sprite you walk around with, all 8 feelings and the talking poses), so his body in the kitchen carries them too. A tighter crop cannot remove them. Tap one answer. Then copy the prompt of card c-gem-polish03 (Give Boppy a kitchen portrait without fishing gear) into a new conversation.",
    "choices": [
@@ -11884,12 +11884,19 @@
     {
      "d": "2026-11-20",
      "t": "Made by the c-gem-polish03 session after confirming on current main that the rod and creel are in every Boppy dialogue face and in his source sheets."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Keep the rod and creel: they are his look",
+     "at": "2026-11-20T17:02:22.596Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGYTdzfxUrLfVzoEGr",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-20",
+   "answer": "Keep the rod and creel: they are his look"
   },
   {
    "id": "c-gem-polish03",
