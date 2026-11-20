@@ -1,3 +1,11 @@
+## copydocs (2026-11-20): Board START runs can now read the plan notes: 18 Project docs copied into the repo
+
+- Card c-copydocs (made by c-starttest check 1: a START run has no Project attached and could not read claude/handoff-rules.md or claude/board3-plan.md).
+- New folder `claude/` with word-for-word copies of the Project docs that CLAUDE.md or an open board card names: handoff-rules, board2-plan, board3-plan, next-addendum-board1/2/3, battle-scope, battle-build, next-addendum-b3s9a, next, cutscene-polish-plan, project-cleanup-plan, story-next, animation-chapter-plan, animation-tool-test-pack1, clip-gate-plan, pose-editor-plan, pose-editor-poseedit2.
+- `claude/README.md`: the Project doc stays the original; a session that rewrites one of these docs writes the same text in both places in the same push; a card START may run names only repo files.
+- CLAUDE.md: one paragraph "copydocs" under the board rules.
+- Not copied: files named only on Done cards (board-plan, the amywin1 patch and handoff, board-audit/apply_audit.py) and docs these files point to that no card names (battle-architecture, battle-kit-ops, the v11 spec and bestiary, story drafts). Cards c-b3s9b and c-b3s9c need some of those; they are not auto cards, so an interactive session reads them from the Project.
+- No game file changed.
 ## fix-cutpolish4b (2026-11-20): kitchen island bare from the start, muffin pan clear of the pastries, painted pan in the Mudling's hands, bigger muffin papers
 
 - Tom (t-cutpolish4b): "the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible"

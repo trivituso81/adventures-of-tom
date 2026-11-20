@@ -41,6 +41,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **board4 (2026-11-19): Something is wrong.** A Tom card with ask play, pictures, animations, voice or script has All good and Something is wrong (no I did this). Something is wrong writes a Claude fix card (`fix: true`, `reports` with his words, screenshot on branch inbox `board-shots/`), Sonnet 5.5 medium and auto-started for play, Opus 5.5 medium for the rest; the tested card waits on it and comes back to Tom when the fix ships. A fix session: first push `board: start <fix id>`, read `reports`, run `python3 tools/reports.py list` for pencil reports filed since, rewrite the tested card's `next` to what to look at again, keep `after` on it. Prompts the page writes name repo files only (a START run cannot read the Project's claude/ docs). Facts: docs/CHANGES.md "board4", docs/REPORTS.md "The board link".
 
+**copydocs (2026-11-20): a START run reads the repo copy.** The `claude/` folder in this repo holds copies of the Project's claude/*.md docs that this file or an open card names; a START run (no Project attached) reads those, and a session that changes one of them in the Project writes the same text there in the same push (`claude/README.md`).
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## Battle animations are out of scope for the battle system (standing rule, Tom 2026-11-19 17:01)

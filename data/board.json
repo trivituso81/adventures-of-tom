@@ -1599,10 +1599,10 @@
    "theme": "Tools",
    "tag": "copydocs",
    "title": "Copy the Project docs a board card needs into the repo (copydocs)",
-   "next": "START runs cannot see the Project's claude/ files. Copy them into the repo so a started card can read them.",
+   "next": "Done: 18 Project docs copied into claude/ in the repo (the ones CLAUDE.md and open cards name), claude/README.md says how they stay equal, CLAUDE.md says a START run reads them. Pushed as copydocs.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "prompt": {
     "what": "Makes the Project docs that board cards name (claude/*.md) readable from a conversation started by the START button.",
@@ -1621,6 +1621,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "copydocs: copied handoff-rules, board2-plan, board3-plan, next-addendum-board1/2/3, battle-scope, battle-build, next-addendum-b3s9a, next, cutscene-polish-plan, project-cleanup-plan, story-next, animation-chapter-plan, animation-tool-test-pack1, clip-gate-plan, pose-editor-plan, pose-editor-poseedit2 word for word. Skipped: files named only on Done cards (board-plan, amywin1 patch and handoff, apply_audit.py) and docs these files point to that no card names (battle-architecture, battle-kit-ops, spec, bestiary, story drafts). Rule: the Project stays the original; a session that edits one of these docs writes both."
     }
    ],
    "chat": {
