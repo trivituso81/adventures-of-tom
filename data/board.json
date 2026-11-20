@@ -16304,6 +16304,37 @@
      "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
     }
    ]
+  },
+  {
+   "id": "c-voiceauto1",
+   "tag": "voiceauto1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Voice Clips",
+   "title": "Put new game lines in the Voice Library automatically",
+   "next": "Claude builds a GitHub job that rebuilds the Voice Library list on every push, so new lines show under No clip yet by themselves.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+    "opening": "\"the new lines in the came are not in the voice library for recording - can this be automated\""
+   },
+   "prompt": {
+    "what": "Builds the job that keeps the Voice Library list up to date by itself.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new tool, steps worked out in session)",
+    "effort": "medium (the rebuild steps are already written in docs/VOICE_LIBRARY.md)",
+    "text": "Read CLAUDE.md and card c-voiceauto1 in data/board.json, then finish what its history describes and push build voiceauto1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"the new lines in the came are not in the voice library for recording - can this be automated\". Cause: data/voice-index.json is rebuilt only when a session runs three scripts by hand; Sal's and Tom's new opening lines were missing."
+    }
+   ]
   }
  ],
  "sessions": [
