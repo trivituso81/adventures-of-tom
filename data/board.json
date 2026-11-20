@@ -380,6 +380,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom added this back to Claude's to-do."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -391,7 +395,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    },
-   "tag": "ch2build"
+   "tag": "ch2build",
+   "start": true
   },
   {
    "id": "c-b3s8",
