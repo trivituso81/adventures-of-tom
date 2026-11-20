@@ -1235,7 +1235,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "After build amywin1 shows on the title screen: RELOAD, then CHAPTERS > Chapter 1 and walk south from the Square into Rivituso Row. Check: the party walks down off the steps before anyone talks, Amy pops up in the window over her front door, and her face reads at phone size. Report anything off with the REPORT tab.",
+   "next": "After build facehold1 shows on the title screen: RELOAD, then CHAPTERS > Chapter 1 and walk south from the Square into Rivituso Row. Check: the party walks down off the steps before anyone talks, Amy pops up in the window over her front door, Tom faces her window while she talks and turns to Grace for the last two lines. Report anything off with the REPORT tab.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -1247,6 +1247,10 @@
     {
      "d": "2026-11-19",
      "t": "Added with c-amywin1."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported Tom facing the wrong way in this scene; fixed by facehold1, the check now includes facing."
     }
    ]
   },
@@ -1521,6 +1525,38 @@
      "t": "Added by pubfast2: the faster publish only runs once this setting is switched."
     }
    ]
+  },
+  {
+   "id": "c-facehold1",
+   "title": "Cutscenes: a {face} turn holds, the automatic staging no longer spins people the wrong way (facehold1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Fix the engine so a turn set by the scene holds until that person walks, and add a facing check to the cutscene test.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
+    "opening": "\"Tom faces the wrong way. how come you always make things facing the wrong way?\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card. Tom: \"Tom faces the wrong way ... this is a persistent issue in cut scenes\" (amywin1, Tom turned to Grace during Amy's lines)."
+    }
+   ],
+   "tag": "facehold1",
+   "after": "t-amywin1",
+   "prompt": {
+    "what": "Fixes cutscene facing in the engine and adds a test check.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause has to be found)",
+    "effort": "high (unknown cause)",
+    "text": "Read claude/handoff-rules.md and docs/CHANGES.md facehold1, then finish the card c-facehold1 if it is not shipped. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
