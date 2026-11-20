@@ -5,7 +5,7 @@
 // `passives`, with `on` naming the hook; the kit stages write those rows from stage 5 on).
 const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeHit','afterHit','crit','dodge','primeApplied','detonation',
   'pipsShaved','break','statusApplied','statusEnded','shieldBroken','shieldEnded','healed','cleansed','buffStripped','barMoved','intercept',
-  'counter','foeTelegraph','foeDoubleTurn','allyBelowHp','ko','revive','actionEnd','turnEnd','battleEnd'];
+  'counter','foeTelegraph','foeDoubleTurn','allyBelowHp','ko','revive','actionEnd','turnEnd','battleEnd','mix','counterFull'];
 // ev: who the moment is about ({src, tgt, tags (the act's tags), c (the action in progress), g ...}).
 // A listener row (the same fields for a status's `on.<hook>` and for a passive):
 //   carrier  'target' or 'source': the unit holding it must be that side of the event (left out = anyone)
@@ -13,7 +13,7 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //   from     'foe': the event's source must be on the other side from the holder
 //   tags     the event's act must carry one of these tags (melee, projectile...)
 //   limit    'action' (once per action), 'actionTarget' (once per action for each monster it is about: Creative Mess), 'round'
-//            (once a round) or 'battle' (once a fight), per holder
+//            (once a round) or 'battle' (once a fight), per holder; 'roundAll': once a round for every holder together (a banner on two monsters)
 //   limitKey a name two listeners share, so one `limit` counts both of them (Creative Mess, New Game Plus)
 //   answer   'putter' (a status's reaction): the answer is the one who put the status on, aimed at the one carrying it
 //            (Winged Shell Lock-On: Tom's shell slams the monster, the monster does not answer itself)
@@ -45,7 +45,15 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //   pushed       the bar move was a push (it added ticks), not a pull (My Toy's chase bite)
 //   byAlly       the event's source is a family member on the holder's side other than the holder (Forty-Pound Counterweight)
 //   tgtBoss      the event's target is a Boss (Sandbox Clue Digger on a Break)
-const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss'];
+// Stage 10 (Amy, Justin, Olivia):
+//   notBasic     the act in progress is not the holder's Basic.  supportTurn  the act is a Support Skill (b3IsSupport).  partySkill  the Skill is `party:true`
+//   lacksCustom  the holder does not carry this one-off rule (Muscle Memory)
+//   everyOwnTurn the holder's own turn count is a multiple of this (Walk It Off, Hydrate: every 3rd turn)
+//   tgtGuarded   the event's target is shielded (or was, as this hit landed) or has at least the holder's base Defense (Load-Bearing Swing)
+//   tgtHasStatus the event's target carries this status (Live Circuit: Wired).  tgtPrimeAny  it carries one of these Primes, or this action set one off on it
+//   tgtDebuffedBy:'holder'  the event's target carries a debuff or mark the holder put on (Good Try Margin Note; Flustered does not count)
+const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss',
+  'notBasic','supportTurn','partySkill','lacksCustom','everyOwnTurn','tgtGuarded','tgtHasStatus','tgtPrimeAny','tgtDebuffedBy'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.carrier==='target'&&ev.tgt!==u) return false;
@@ -55,7 +63,7 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.tags&&!(ev.tags&&L.tags.some(t=>ev.tags.includes(t)))) return false;
   if(L.ids&&!L.ids.includes(ev.id)) return false;
   if(L.flavor&&ev.flavor!==L.flavor) return false;
-  if(L.multiHit&&!(ev.c&&ev.c.skill&&(ev.c.skill.hits||1)>1&&!ev.part)) return false;
+  if(L.multiHit&&!(ev.c&&ev.c.skill&&b3HitsOf(ev.c.actor,ev.c.skill)>1&&!ev.part)) return false;
   if(L.landed&&!(ev.c&&(ev.c.landed||0)>=L.landed)) return false;
   if(L.targetPrime&&!(ev.tgt&&(ev.tgt.st[L.targetPrime]||(ev.c&&ev.c.detPrime&&ev.c.detPrime[ev.tgt.key]===L.targetPrime)))) return false;
   if(L.pepAtLeast!=null&&!(u.pep>=L.pepAtLeast)) return false;
@@ -68,6 +76,16 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.pushed&&!(ev.n>0)) return false;
   if(L.byAlly&&!(ev.src&&ev.src.side===u.side&&ev.src!==u)) return false;
   if(L.tgtBoss&&!(ev.tgt&&ev.tgt.D&&ev.tgt.D.role==='boss')) return false;
+  if(L.notBasic&&!(ev.c&&ev.c.skill&&ev.c.skill.slot!=='basic')) return false;
+  if(L.supportTurn&&!(ev.c&&b3IsSupport(ev.c.skill))) return false;
+  if(L.partySkill&&!(ev.c&&ev.c.skill&&ev.c.skill.party)) return false;
+  if(L.lacksCustom&&u.custom&&u.custom[L.lacksCustom]) return false;
+  if(L.everyOwnTurn&&(u.turns%L.everyOwnTurn)) return false;
+  if(L.tgtGuarded) { const t=ev.tgt,soaked=!!(ev.c&&ev.c.soak&&t&&ev.c.soak[t.key]>0); if(!(t&&(b3ShieldTotal(t)>0||soaked||b3Stat(t,'def')>=u.def))) return false; }
+  if(L.tgtHasStatus&&!(ev.tgt&&ev.tgt.st[L.tgtHasStatus])) return false;
+  if(L.tgtPrimeAny&&!(ev.tgt&&L.tgtPrimeAny.some(p=>ev.tgt.st[p]||(ev.c&&ev.c.detPrime&&ev.c.detPrime[ev.tgt.key]===p)))) return false;
+  if(L.tgtDebuffedBy==='holder'&&!(ev.tgt&&Object.keys(ev.tgt.st).some(id=>id!=='flustered'&&['debuff','mark'].includes(B3_STATUS[id].kind)&&ev.tgt.st[id].src===u.key))) return false;
+  if(L.limit==='roundAll'&&F.usedAll&&F.usedAll[useKey]===F.round) return false;
   if(L.limit==='round'&&u.used[useKey]===F.round) return false;
   if(L.limit==='battle'&&u.used[useKey]) return false;
   if(L.limit==='action'&&ev.c&&ev.c.reacted&&ev.c.reacted[u.key+useKey]) return false;
@@ -78,6 +96,7 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.limit==='action') { if(ev.c) (ev.c.reacted=ev.c.reacted||{})[u.key+useKey]=true; }
   else if(L.limit==='actionTarget') { if(ev.c&&ev.tgt) (ev.c.reacted=ev.c.reacted||{})[u.key+useKey+'@'+ev.tgt.key]=true; }
+  else if(L.limit==='roundAll') (F.usedAll=F.usedAll||{})[useKey]=F.round;
   else if(L.limit) u.used[useKey]=F.round;
   if(L.react) {
     // The status's own answer is the holder's. `answer:'putter'` makes it the answer of whoever put the status on, aimed at the holder.
@@ -100,7 +119,7 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   // `dealt` is what the action has taken off the event's target so far, soaked or not (Creative Mess splashes a share of it).
   const dealt=ev.c&&ev.tgt&&ev.c.lost?(ev.c.lost[ev.tgt.key]||0)+((ev.c.soak&&ev.c.soak[ev.tgt.key])||0):0;
   b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},dealt,act:ev.c,
-    reacted:(ev.c&&ev.c.reacted)||{},ledger:(ev.c&&ev.c.ledger)||{},scale:relay?relay.scale:1},L.effects);
+    reacted:(ev.c&&ev.c.reacted)||{},ledger:(ev.c&&ev.c.ledger)||{},scale:relay?relay.scale:1,mixHot:ev.hot?1:0},L.effects);
   if(L.consume&&statusId&&!relay&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
 }
 function b3Fire(F,hook,ev,beats) {

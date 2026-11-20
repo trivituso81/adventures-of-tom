@@ -14,7 +14,8 @@ const B3_CUSTOM={
   mailbox:'Boppy, The Dep, Quirk B: his counterattacks copy the flavor and the status riders of his last Skill (b3MailboxEffects below)',
   hoseFlinched:'Boppy, Pepper Boss, Quirk A: the damage-over-time ticks of statuses he put on can crit (engine/b3-resolve.js b3TickHit)',
   nervous:'Nara, Attached Pup, Trait: Evasion from the Pep she is holding, half against a party-wide act (engine/b3-core.js b3Evasion)',
-  shins:'Nara, Attached Pup, Quirk B: her Attack grows by a share of her Speed bonuses (engine/b3-core.js b3Stat)'
+  shins:'Nara, Attached Pup, Quirk B: her Attack grows by a share of her Speed bonuses (engine/b3-core.js b3Stat)',
+  muscleMemory:'Olivia, Rope Champ, Quirk A: a Support turn no longer resets her Cadence (the reset in her Vibe row has `lacksCustom:\'muscleMemory\'`, engine/b3-hooks.js)'
 };
 
 // ---------- Boppy Speed (spec 3.6: "timeline pushback immune >50% HP") ----------
@@ -73,7 +74,7 @@ function b3GoldBall(F,c) {
 // for a rider's mod; b3Act (engine/b3-resolve.js) calls b3RelayEnd when the move's effects are done.
 function b3RelayShare(c,a) {
   const n=a&&a.custom&&a.custom.twinLambRelay;
-  return n&&c&&c.actor===a&&c.skill&&(c.skill.hits||1)>1?n.share:0;
+  return n&&c&&c.actor===a&&c.skill&&b3HitsOf(a,c.skill)>1?n.share:0;
 }
 // A hit by ev.src is about to use up the rider `id` on u. Returns null (use it up as usual) or {scale}: keep it, and run its
 // effects at that scale (1 the first time this move meets it, the share after that).
@@ -207,4 +208,26 @@ function b3Rebalance(F,c,e) {
 function b3DoubleBuff(F,c,e) {
   for(const t of b3Who(F,c,e.to)) { const s=t.st[e.id]; if(!s||!b3Alive(t)) continue;
     s.mult=2; s.n=Math.max(s.n,e.n||s.n); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g}); }
+}
+
+// ---------- Demo-Day Prybar (spec 3.9: "Rips through shields/guards, blasting broken barrier value as splash damage") ----------
+// Justin's standard Clobber hit on one monster, in three steps (my calls where the spec is silent):
+//   1. Every shield and every stance on the monster is ripped off BEFORE the hit, so nothing soaks or softens it. Each shield that goes
+//      is a broken shield for anything that listens ('shieldBroken': the Store-Bought Bread quirk).
+//   2. The hit lands.
+//   3. The barrier's value blasts into the monsters standing next to it as Clobber splash: a shield is worth what it had left, a stance
+//      is worth 25% of the damage the hit did. No barrier, no blast.
+function b3Prybar(F,c,e) {
+  const t=c.targets[0]; if(!t||!b3Alive(t)) return;
+  let barrier=0,stances=0;
+  const shields=t.shields.slice();
+  for(const x of shields) barrier+=x.amt;
+  t.shields=[];
+  for(const id of Object.keys(t.st)) if(B3_STATUS[id].kind==='stance') { stances++; b3EndStatus(F,t,id,'strip'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); }
+  for(const x of shields) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:x.src,g:c.g,c},c.beats); }
+  b3DamageOp(F,c,{});
+  c.lost=c.lost||{}; c.soak=c.soak||{};
+  const dealt=(c.lost[t.key]||0)+(c.soak[t.key]||0),value=barrier+stances*.25*dealt;
+  if(!(value>0)||!b3Alive(t)&&!b3Adjacent(F,t).length) return;
+  B3_OPS.splash(F,Object.assign({},c,{partDmg:value,tgt:t}),{flavor:'clobber',share:1,to:'adjacent'});
 }

@@ -15,6 +15,8 @@ const B3_FOE_HITS=['one','all','self','marked','attacker','two_random','two_adja
 const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns'];
 function b3ActOk(F,e,A) {
   const W=A.when||{};
+  // Classroom Lights-Out Reset (`noAoe`): for a while it cannot use an act that reaches every family member.
+  if(b3HasFlag(e,'noAoe')&&(A.hits==='all'||A.tags.includes('aoe'))) return false;
   if(W.stripped&&!e.stripped[W.stripped]) return false;
   if(W.has&&!e.st[W.has]) return false;
   if(W.lacks&&e.st[W.lacks]) return false;
@@ -155,7 +157,7 @@ function b3HazardTrip(F,e,A,c) {
 // A family member's action hit this foe: each counter act it has ready answers, once per action however many hits landed
 // (bestiary 1.1 "Counter acts"). The answer runs as a reaction after the action (engine/b3-hooks.js b3RunReactions).
 function b3QueueCounters(F,c,t,a) {
-  if(!t.D||!b3Alive(t)) return;
+  if(!t.D||!b3Alive(t)||b3HasFlag(t,'noPassives')) return;   // Main Breaker Flip (`noPassives`): a blackout, its counter acts do not answer
   const done=c.reacted||(c.reacted={});
   for(const A of t.D.acts) {
     if(A.hits!=='attacker'||done[t.key+'ca:'+A.id]||!b3ActOk(F,t,A)) continue;

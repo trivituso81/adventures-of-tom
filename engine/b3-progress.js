@@ -191,6 +191,8 @@ function b3KitPassives(K) {
     if(P.shieldMods) out.shieldMods.push(...P.shieldMods);
     if(P.allyMods) out.allyMods.push(...P.allyMods.map(m=>Object.assign({},m,{from:P.id})));
   }
-  for(const C of K.counters) out.listeners.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
+  // `extra`: more listeners that travel with the counter (Olivia's Cadence resets on a Support turn), so they hold in the Pocket too.
+  for(const C of K.counters) { out.listeners.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
+    (C.extra||[]).forEach((L,i)=>out.listeners.push(Object.assign({},L,{id:'counter:'+C.id+':x'+i,name:C.name}))); }
   return out;
 }

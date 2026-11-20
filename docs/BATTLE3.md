@@ -132,6 +132,19 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 
 Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at TNB himself; the Kiln Firing, Waymo flash and Baxter Hill waves are standard, standard and heavy at the all-monsters share (the spec prints no tier for the first two); Kiln Glow, Fresh Ride and the e-bike last the common 2 turns; the Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out; Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind; Kintsugi Gold Seam heals once per action for each member and lets a hit of a flavor that has no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!; Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%") and Carving Momentum takes another 10% off a Basic; the "slowest ally" of TAP-Card Transfer is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the TAP-Card extra turn applies to every buff TNB puts on, his own included; Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns; "scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10).
 
+## What stage 10 holds, and what waits
+
+| In (build `b3s10`) | Waits for |
+|---|---|
+| Amy, Justin and Olivia complete: `data/b3-kit-amy.js` (Fitness Queen, Classroom Boss), `data/b3-kit-justin.js` (Basement Boss, Live Wire), `data/b3-kit-olivia.js` (Rope Champ, Working Mom): 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks each (42 lines), every Skill with a plain `desc`. | Justin's Armchair Ref and Olivia's News Anchor (still `B3_SOON`). |
+| Portable Counters: Reps (Fitness Queen, max 4) and Cadence (Rope Champ, max 3, reset by a Support turn unless Muscle Memory) and Mom Prep (Working Mom, max 3). A counter row can now carry `extra` listeners (`b3KitPassives`), a Skill's `needCounter:{id,min}` gates an effect, `hitsBy{counter,base,per,max,grow}` sets a hit count, and `per:{buffs,max}` scales a mod by buffs held. | |
+| New hooks `mix` (a Family Ruckus Mix check, with `mixHot`) and `counterFull`; new listener conditions `notBasic`, `supportTurn`, `partySkill`, `lacksCustom`, `everyOwnTurn`, `tgtGuarded`, `tgtHasStatus`, `tgtPrimeAny`, `tgtDebuffedBy`; new limit `roundAll` (once a round across every carrier). `foeDoubleTurn` fires when a monster acts twice before the family does (Detention). | |
+| New ops `refresh` (set the family's buffs back to full length) and `prybar` (Demo-Day Prybar, `engine/b3-custom.js`). Op changes: `strip` takes `stat`, `cleanse` takes `minor`, `heal` takes `perCounter`, `pull` takes `next` (the next turn comes sooner), `grant` takes `basic`, `splash` takes `of:'dealt'`, `interrupt` takes `aoeOnly`. New targets `either` (monster or family member, with `allyEffects`), `otherFoes`, `otherFoesLive`, `targetNeighbor`, `linked`, `randomAlly`. | |
+| Status flags `paceRun` (the Speed is held at the moment it was set, `b3Stat` override), `trueAim`, `guaranteeCrit`, `noAoe`, `noPassives`, `blockDebuff`; 17 new statuses in `data/b3-status.js`. A mod `when` can read `skillFlavor`, `oncePerRound`, `supportSkill`, `tagsAny`. | |
+| Lab: NEW 10 (Tom, Amy, Justin, Olivia against The Big One). | |
+
+Calls made in stage 10 (none confirmed by Tom) are rows in `claude/battle-build.md` "Calls made that Tom has not confirmed".
+
 ## What stage 9c holds, and what waits
 
 | In (build `b3s9c`) | Waits for |

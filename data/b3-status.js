@@ -189,6 +189,64 @@ const B3_STATUS={
     short:'DEBRIS',color:'#b9a58f',weight:4,desc:'Debris in its eyes: each of its attacks has a 20% chance to miss.'},
   behind_legs:{id:'behind_legs',name:'Behind Tom\u2019s Legs',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'reduce',kind:'legs',v:.50,when:{aoe:true}}],flags:[],
     short:'HIDING',color:'#c9d8f0',weight:5,desc:'Nara is hiding behind Tom\u2019s legs: she takes 50% less damage from an attack on the whole family.'},
+  // ---- Kit statuses: Amy, Justin and Olivia (stage 10). Every length is a call where the spec prints none. ----
+  // Pace-Partner Run: a Speed VALUE, Amy's Speed when she called the run, stored in the status (`v`). b3Stat (engine/b3-core.js) raises the carrier to it.
+  pace_run:{id:'pace_run',name:'Pace Run',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['paceRun'],
+    short:'PACE RUN',color:'#9be39a',weight:5,desc:'Running beside Amy: Speed raised to match hers when she called the run. It never slows anyone down.'},
+  // Follow-Along Finale Burnout: the whole family waits 20% less after each move.
+  finale_pace:{id:'finale_pace',name:'Finale Pace',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'moveRec',kind:'finale',v:-.20}],flags:[],
+    short:'QUICK MOVES',color:'#9be39a',weight:4,desc:'Still pumped from the finale: waits 20% less after each move.'},
+  // "I'm Counting to Three": 20% less Attack for 2 turns.
+  detention:{id:'detention',name:'Detention',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'detention',v:-.20}],flags:[],
+    short:'DETENTION',color:'#c9a27a',weight:4,desc:'Sent to the corner: 20% less Attack.'},
+  // Four-Tab Binder: a mark. When two family members hit it with two different flavors in one round (a Mix) it loses a Composure pip (2 if either hit struck
+  // a Pet Peeve or set off a Detonation) and the whole family gains 1 Pep. Then the Binder is used up.
+  binder:{id:'binder',name:'Four-Tab Binder',kind:'mark',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
+    on:{mix:{carrier:'target',consume:true,effects:[{op:'composure',n:1,to:'target'},{op:'composure',n:1,to:'target',when:'mixHot'},{op:'pep',n:1,to:'allies'}]}},
+    short:'BINDER',color:'#8fd0ff',weight:5,desc:'Amy\u2019s color-coded binder. The first time two family members hit it with two different flavors in one round, it loses a Composure pip (2 on a Pet Peeve or Detonation) and the family gains 1 Pep.'},
+  // Gold-Star Sticker: "guaranteed accuracy" is `trueAim` (engine/b3-resolve.js b3Hit): no miss from an accuracy penalty or Evasion, a Blind still holds.
+  gold_star:{id:'gold_star',name:'Gold Star',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'out',kind:'goldStar',v:.35},{stat:'healGiven',kind:'goldStar',v:.35}],flags:['trueAim'],
+    short:'GOLD STAR',color:'#ffe27a',weight:6,desc:'A giant gold star: hits, heals and shields are 35% stronger, and the hits cannot miss.'},
+  // Classroom Lights-Out Reset: the monster cannot use an act that reaches the whole family on its next turn (engine/b3-foe.js b3ActOk).
+  lights_out:{id:'lights_out',name:'Lights Out',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[],flags:['noAoe'],
+    short:'LIGHTS OUT',color:'#9db4d6',weight:6,desc:'The lights are off and the room is quiet: it cannot use an attack on the whole family on its next turn.'},
+  // Stud-Finder Beep & Knock: +15% Clobber taken for 1 turn.
+  knocked_loose:{id:'knocked_loose',name:'Knocked Loose',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'taken',kind:'knocked',v:.15,when:{flavor:'clobber'}}],flags:[],
+    short:'LOOSE',color:'#e6c988',weight:3,desc:'Rapped by a stud finder: takes 15% more damage from Clobber hits.'},
+  // Hang Fresh Drywall: halves the next 2 melee or thrown hits (`hits`, engine/b3-resolve.js b3Hit), or 3 turns if nobody tests it (my call).
+  drywall:{id:'drywall',name:'Drywall',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[{stat:'reduce',kind:'drywall',v:.50,when:{tagsAny:['melee','projectile']}}],flags:[],hits:{n:2,tagsAny:['melee','projectile']},
+    short:'DRYWALL',color:'#e8e0d0',weight:6,desc:'A fresh drywall wall in front: the next 2 melee or thrown hits on this family member do half damage.'},
+  // Measure Twice, Cut Once: the next Clobber or Razzle hit is a sure crit, and the status is used up by it.
+  squared_up:{id:'squared_up',name:'Squared Up',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['guaranteeCrit'],critFlavors:['clobber','razzle'],
+    short:'SURE CRIT',color:'#ffd27a',weight:6,desc:'Measured twice: the next Clobber or Razzle hit is a sure crit.'},
+  // Store-Bought Bread Peace Offering: +20% Attack for 2 turns.
+  bread_peace:{id:'bread_peace',name:'Peace Offering',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'bread',v:.20}],flags:[],
+    short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'Store-bought bread, allowed: 20% more Attack.'},
+  // Live Circuit: Wired. Hitting a Wired monster arcs part of the damage to the others (the Trait, engine data in data/b3-kit-justin.js).
+  wired:{id:'wired',name:'Wired',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
+    short:'WIRED',color:'#ffe27a',weight:5,desc:'Live current runs through it: when Justin hits it, 30% of that damage arcs to every other monster as Razzle.'},
+  // "Don't Touch the Copper!" Banner: a banner strung between two monsters. Once a round, when one loses Composure the other loses 1 pip too.
+  copper_link:{id:'copper_link',name:'Copper Banner',kind:'mark',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
+    on:{pipsShaved:{carrier:'target',limit:'roundAll',effects:[{op:'composure',n:1,to:'linked'}]}},
+    short:'COPPER',color:'#e6a06a',weight:4,desc:'A light-up copper banner links it to the monster beside it. Once a round, when one loses Composure the other loses 1 pip too.'},
+  // Main Breaker Flip: a blackout, its counter attacks do not answer (engine/b3-foe.js b3QueueCounters).
+  blackout:{id:'blackout',name:'Blackout',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[],flags:['noPassives'],
+    short:'BLACKOUT',color:'#9db4d6',weight:6,desc:'The power is out: its counter attacks cannot answer until its next turn is over.'},
+  // Rare Heart-Emoji Text: +40% Razzle damage through Justin's next turn.
+  static_charge:{id:'static_charge',name:'Static Charge',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'out',kind:'static',v:.40,when:{flavor:'razzle'}}],flags:[],
+    short:'CHARGED',color:'#ffe27a',weight:5,desc:'A rare heart-emoji text and a head full of static: Razzle hits do 40% more damage.'},
+  // Criss-Cross Double-Under: +20% Evasion and +15% Attack for 2 turns.
+  criss_cross:{id:'criss_cross',name:'Criss-Cross',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'crissCross',v:.20},{stat:'atk',kind:'crissCross',v:.15}],flags:[],
+    short:'CRISS-CROSS',color:'#9be39a',weight:5,desc:'In the zone: 20% more Evasion and 15% more Attack.'},
+  // "Better Than Bobby!" Hype: +30% Crit Rate for 2 turns.
+  bobby_hype:{id:'bobby_hype',name:'Hyped Up',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'crit',kind:'bobby',v:.30}],flags:[],
+    short:'CRIT UP',color:'#ffd27a',weight:4,desc:'Trash talk worked: 30% more likely to crit.'},
+  // Cool-Mist Humidifier: 25% less damage from thrown acts and acts on the whole family for 2 turns.
+  cool_mist:{id:'cool_mist',name:'Cool Mist',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'coolMist',v:.25,when:{tagsAny:['projectile','aoe']}}],flags:[],
+    short:'COOL MIST',color:'#7cc4f2',weight:5,desc:'Cool mist in the air: takes 25% less damage from thrown attacks and attacks on the whole family.'},
+  // Childproofed Locks: blocks the next debuff aimed at the carrier (engine/b3-ops.js b3PutStatus, the blockDebuff flag).
+  childproofed:{id:'childproofed',name:'Childproofed',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[],flags:['blockDebuff'],
+    short:'CHILDPROOF',color:'#8fe3a6',weight:5,desc:'Cabinet locks on: the next debuff aimed at this family member bounces off, and then the lock is used up.'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
     short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},

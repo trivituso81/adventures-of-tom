@@ -261,6 +261,8 @@ function check() {
   // Stage 9b's groups: TNB complete (Ceramicist and Longboarder).
   require('./b3-check-s9b.js')({G,ok,near,play,noCrit});
   require('./b3-check-s9c.js')({G,ok,near,play,noCrit});
+  // Stage 10's groups: Amy, Justin and Olivia complete (Fitness Queen, Classroom Boss, Basement Boss, Live Wire, Rope Champ, Working Mom).
+  require('./b3-check-s10.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
@@ -274,7 +276,7 @@ else {
   for(let i=0;i<n;i++) {
     const cfg=Object.assign({},cfg0,{seed:seed0+i});
     try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0),ruckus:has('ruckus'),rec:has('rec')})); }
-    catch(e) { errs.push('seed '+cfg.seed+': '+e.message); }
+    catch(e) { errs.push('seed '+cfg.seed+': '+e.message+(process.env.B3_STACK?' '+e.stack:'')); }
   }
   const wins=R.filter(r=>r.result==='win'),W=wins.map(r=>r.rounds).sort((a,b)=>a-b),avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
   const dets={},moves={}; for(const r of R) { for(const k in r.dets) dets[k]=(dets[k]||0)+r.dets[k]; for(const k in r.moves) moves[k]=(moves[k]||0)+r.moves[k]; }

@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -33,6 +33,13 @@ function b3Who(F,c,to) {
   if(to==='nextIfAlly') { const n=b3TurnOrder(F)[0]; return n&&n!==c.actor&&n.side===c.actor.side?[n]:[]; }
   // The slowest other family member (the lowest Speed, the first in line on a tie): TAP-Card Transfer.
   if(to==='slowestAlly') return b3Live(F,c.actor.side).filter(o=>o!==c.actor).sort((x,y)=>b3Stat(x,'spd')-b3Stat(y,'spd')||x.slot-y.slot).slice(0,1);
+  // Stage 10. The monster a move or a listener is about: c.tgt (a hook), else the first one chosen.
+  // otherFoes: every other monster.  otherFoesLive: the ones that are Wired or Drenched.  targetNeighbor: the one standing next to it (the lower slot when there are two).
+  // linked: the other monster that wears the same Copper Banner.  randomAlly: one family member picked by the fight's own dice, the actor included.
+  if(to==='otherFoes'||to==='otherFoesLive') { const p=c.tgt||c.targets[0]; return b3Live(F,b3Other(c.actor.side)).filter(o=>o!==p&&(to==='otherFoes'||o.st.wired||o.st.drenched)); }
+  if(to==='targetNeighbor') { const p=c.tgt||c.targets[0]; return p?b3Adjacent(F,p).sort((x,y)=>x.slot-y.slot).slice(0,1):[]; }
+  if(to==='linked') return b3Live(F,b3Other(c.actor.side)).filter(o=>o!==c.tgt&&o.st.copper_link);
+  if(to==='randomAlly') { const L=b3Live(F,c.actor.side); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -47,7 +54,8 @@ function b3PutStatus(F,c,t,e) {
   // Fresh Ride: a family member who wears it is not given the next debuff the other side aims at them; the lock is used up.
   if(S.kind==='debuff'&&c.actor.side!==t.side) { const fr=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('blockDebuff'));
     if(fr) { b3EndStatus(F,t,fr,'used'); c.beats.push({t:'soak',tgt:t.key,id:e.id,g:c.g},{t:'statusEnd',tgt:t.key,id:fr,g:c.g}); return; } }
-  b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
+  // Pace-Partner Run: the status carries Amy's Speed as it is right now (b3Stat in engine/b3-core.js reads it).
+  b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:S.flags.includes('paceRun')?b3Stat(c.actor,'spd'):e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
   // TAP-Card Transfer: a buff TNB puts on lasts longer.
   const tc=c.actor.custom&&c.actor.custom.tapCard; if(tc&&S.kind==='buff'&&t.side===c.actor.side&&S.dur.unit==='turn') t.st[e.id].n+=tc.extend;
   b3Fire(F,S.kind==='prime'?'primeApplied':'statusApplied',{src:c.actor,tgt:t,id:e.id,g:c.g,c},c.beats);
@@ -74,7 +82,8 @@ const B3_OPS={
       return;
     }
     for(const t of b3Who(F,c,e.to)) {
-      let ids=Object.keys(t.st).filter(id=>B3_STATUS[id].kind===e.kind).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight);
+      // `stat:[..]` takes only buffs that change one of those stats (Eyes On Me Clap: Speed or Evasion).
+      let ids=Object.keys(t.st).filter(id=>B3_STATUS[id].kind===e.kind&&(!e.stat||B3_STATUS[id].mods.some(m=>e.stat.includes(m.stat)))).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight);
       if(e.kind!=='stance'&&!e.all) ids=ids.slice(0,e.n||1);
       c.stripped=(c.stripped||0)+ids.length;
       for(const id of ids) { b3EndStatus(F,t,id,'strip'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:t,id,g:c.g,c},c.beats); }
@@ -83,8 +92,9 @@ const B3_OPS={
   // cleanse: takes debuffs, Primes and marks off (or only `ids`, or only a `group` such as 'mental'); n = at most that many, heaviest first.
   cleanse(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
-      let ids=Object.keys(t.st).filter(id=>{ const S=B3_STATUS[id]; return e.ids?e.ids.includes(id):e.group?S.group===e.group:['debuff','prime','mark'].includes(S.kind); })
-        .sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight);
+      // `minor:true` takes only a light debuff (a status weight of 4 or less: Slow, Fatigue, an accuracy drop), lightest first (Baby-Wipe Swipe).
+      let ids=Object.keys(t.st).filter(id=>{ const S=B3_STATUS[id]; return e.ids?e.ids.includes(id):e.group?S.group===e.group:e.minor?S.kind==='debuff'&&S.weight<=4:['debuff','prime','mark'].includes(S.kind); })
+        .sort((a,b)=>e.minor?B3_STATUS[a].weight-B3_STATUS[b].weight:B3_STATUS[b].weight-B3_STATUS[a].weight);
       if(e.n) ids=ids.slice(0,e.n);
       c.cleansed=(c.cleansed||0)+ids.length;
       for(const id of ids) { b3EndStatus(F,t,id,'cleanse'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'cleanse',g:c.g}); }
@@ -92,7 +102,9 @@ const B3_OPS={
   },
   // heal: pct is a share of the target's Max HP (a number, or a name from B3_RULES.heal). Heals and shields grow with the giver's healGiven.
   heal(F,c,e) {
-    const pct=typeof e.pct==='number'?e.pct:B3_RULES.heal[e.pct];
+    let pct=typeof e.pct==='number'?e.pct:B3_RULES.heal[e.pct];
+    // `perCounter` adds `add` for every point the actor has built of a Portable Counter; spend:true empties it when the action ends (Diaper-Bag Snack Drop).
+    if(e.perCounter) { const n=c.actor.counters[e.perCounter.counter]||0; pct+=e.perCounter.add*n; if(e.perCounter.spend&&n) (c.spend=c.spend||{})[c.actor.key+':'+e.perCounter.counter]=true; }
     // Forty Years a Nurse (a one-off of the Trait row, `custom:'cleanBill'`): a share of the healing that goes past full HP becomes a shield.
     const cb=c.actor.custom&&c.actor.custom.cleanBill;
     for(const t of b3Who(F,c,e.to)) { const want=Math.round(t.maxHp*pct*b3Mult(c.actor,'healGiven')*(c.scale||1)),alive=b3Alive(t),got=b3Heal(F,t,want);
@@ -114,7 +126,10 @@ const B3_OPS={
       c.beats.push({t:'push',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:amt,g:c.g,c},c.beats); }
   },
   pull(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { const amt=b3Pull(F,t,e.n); if(!amt) continue;
+    for(const t of b3Who(F,c,e.to)) {
+      // `next:true` on the unit whose turn this is: it takes `n` ticks off the wait this very turn sets (b3EndTurn), since it has no wait yet.
+      if(e.next&&F.acting===t) { t.nextPull=(t.nextPull||0)+e.n; continue; }
+      const amt=b3Pull(F,t,e.n); if(!amt) continue;
       c.beats.push({t:'pull',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:-amt,g:c.g,c},c.beats); }
   },
   place(F,c,e) {
@@ -128,6 +143,7 @@ const B3_OPS={
   // interrupt: the act a foe is winding up is cancelled, and its Mark with it (bestiary 1.1). Its "every Nth turn" count starts again.
   interrupt(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)||!t.charge) continue;
+      if(e.aoeOnly&&!(t.charge.hits==='all'||t.charge.tags.includes('aoe'))) continue;   // Lights-Out Reset only cancels a wound-up act on the whole family
       const A=b3LoseCharge(F,t);
       c.beats.push({t:'interrupt',src:c.actor.key,tgt:t.key,id:A.id,name:A.name,g:c.g}); }
   },
@@ -147,7 +163,9 @@ const B3_OPS={
     c.beats.push({t:'hazardOn',id:e.id,side,uses:H.uses,rounds:H.rounds,g:c.g});
   },
   // counter: adds to (or, with a negative n, spends from) a Portable Counter.
-  counter(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) { const v=b3Counter(t,e.id,e.n,e.max); c.beats.push({t:'counter',tgt:t.key,id:e.id,v,g:c.g}); } },
+  // When it fills to its max the `counterFull` hook fires (Walk It Off, Hydrate).
+  counter(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) { const was=t.counters[e.id]||0,mx=e.max!=null?e.max:(t.counterInfo[e.id]||{}).max,v=b3Counter(t,e.id,e.n,e.max); c.beats.push({t:'counter',tgt:t.key,id:e.id,v,g:c.g});
+    if(mx!=null&&v>=mx&&was<mx) b3Fire(F,'counterFull',{src:t,tgt:t,id:e.id,g:c.g,c},c.beats); } },
   // crack: a battle-long cut of base Defense, 25% in total at most. once:'<name>' lets each foe take that crack one time.
   crack(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)||(e.once&&t.cracked[e.once])) continue;
@@ -188,13 +206,13 @@ const B3_OPS={
   // engine/b3-ruckus.js; this is how a Trait, Quirk or Skill that prints its own gain adds to them.
   ruckus(F,c,e) { b3RuckusAdd(F,c.beats,c.g,e.n,c.actor&&c.actor.key,'trait'); },
   // grant: the chosen family member takes one Skill at once, out of turn (spec 2.2 "Granted actions": one per unit per round).
-  //   maxPep  only Skills that cost this much or less (never a Basic, never a Grand Capstone);  free  it costs them nothing.
+  //   maxPep  only Skills that cost this much or less (never a Grand Capstone; a Basic only with basic:true);  free  it costs them nothing.
   // The rules only open the door (F.grant). Whoever drives the fight (the screen, the simulator) asks that member for their
   // pick and calls b3Act for them before the clock moves on; b3Act then leaves their wait and their statuses' turn counts alone.
   // A door nobody used is closed by b3Next.
   grant(F,c,e) {
     const t=b3Who(F,c,e.to)[0]; if(!t||!b3Alive(t)||t.granted>=B3_RULES.grantedPerRound||!b3GrantSkills(F,t,e).length) return;
-    t.granted++; F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free};
+    t.granted++; F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free,basic:!!e.basic};
     c.beats.push({t:'grant',src:c.actor.key,tgt:t.key,g:c.g});
   },
   // foresee: each monster this move hit says who it will aim its next attack at, and keeps to that (engine/b3-foe.js b3Foresee).
@@ -205,11 +223,20 @@ const B3_OPS={
   later(F,c,e) { F.later.push({key:c.actor.key,name:e.name,effects:e.effects,tgt:c.targets.map(t=>t.key),who:e.who||'target',skill:c.skill}); },
   // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
   composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
+  // refresh (Classroom Lights-Out Reset): every buff and stance the chosen units carry that lasts a number of turns or rounds goes back to its full length.
+  refresh(F,c,e) { for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
+    for(const id of Object.keys(t.st)) { const S=B3_STATUS[id],s=t.st[id]; if(!['buff','stance'].includes(S.kind)||!['turn','round'].includes(s.unit)) continue;
+      const full=S.dur.n; if(s.n<full) { s.n=full; c.beats.push({t:'status',tgt:t.key,id,g:c.g}); } } } },
+  // prybar (Demo-Day Prybar, engine/b3-custom.js): rips the barrier off, hits, and blasts the barrier's value into the monsters next to it.
+  prybar(F,c,e) { b3Prybar(F,c,e); },
   // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!). With `of:'dealt'` the share is of
   // what the whole action has taken off the monster it is about (Creative Mess); when that is nothing (a debuff from a move that
   // deals no damage), it is a standard hit's worth of the actor's Attack.
   splash(F,c,e) {
-    const base=e.of==='dealt'?(c.dealt>0?c.dealt:b3Stat(c.actor,'atk')*B3_RULES.power.standard):(c.partDmg||0);
+    // In a Skill's own list `of:'dealt'` is what this action took off the first monster it was aimed at (Flashlight Block Rewire); a miss arcs nothing.
+    let dealt=c.dealt; if(dealt==null) { const p=c.tgt||c.targets[0]; dealt=p?((c.lost&&c.lost[p.key])||0)+((c.soak&&c.soak[p.key])||0):0;
+      if(e.of==='dealt'&&c.didDamage&&dealt<=0) return; }
+    const base=e.of==='dealt'?(dealt>0?dealt:b3Stat(c.actor,'atk')*B3_RULES.power.standard):(c.partDmg||0);
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       const pv=b3Peeves(t).includes(e.flavor),rs=t.resists.includes(e.flavor);
       const dmg=Math.max(1,Math.round(base*e.share*(c.scale||1)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
@@ -223,12 +250,14 @@ const B3_OPS={
 //   revived   a revive in this action brought someone back;  notRevived  none did (To the Moon & Back heals the living instead)
 //   stolen    a steal in this action took a buff;  notStolen  none did (No Take, Only Throw! then gives Nara the Attack bonus instead)
 //   targetDebuffed  a monster this action hit carries a debuff (Grip-Chicken Snap)
-const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived','stolen','notStolen','targetDebuffed'];
+const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived','stolen','notStolen','targetDebuffed','mixHot'];
 // c.scale below 1 (a rider held for the later hits of a multi-hit move, engine/b3-custom.js): only the ops whose size can be
 // cut run, at that share; an effect that cannot be split (1 Pep, a status) does not repeat.
 const B3_SCALABLE=['damage','splash','heal','shield'];
+// An effect may also carry `needCounter:{id,min}`: it runs only if the actor has built at least `min` of that Portable Counter (read before the counter is spent).
 function b3RunEffects(F,c,effects) {
   for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
+    if(e.needCounter&&!((c.actor.counters[e.needCounter.id]||0)>=e.needCounter.min)) continue;
     if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)) continue;
     if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when);
       const hold=e.when==='notRevived'?!(c.revived>0):e.when==='notStolen'?!(c.stolen>0):e.when==='targetDebuffed'?(c.hit||[]).some(t=>Object.keys(t.st).some(id=>B3_STATUS[id].kind==='debuff')):(c[e.when]>0);

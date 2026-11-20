@@ -58,6 +58,11 @@ function b3BeginTurn(F,u,beats) {
     const got=b3Heal(F,u,u.maxHp*(s.v==null?S.regen:s.v)); if(got) beats.push({t:'heal',tgt:u.key,n:got,hp:u.hp,id,g:'pre'});
   }
   b3Fire(F,'turnStart',{src:u,tgt:u,g:'pre'},beats);
+  // A monster that takes a turn for the second time before any family member has acted since its first (Amy's "I'm Counting to Three"). Its
+  // answer runs now, before the monster picks its move.
+  if(u.side==='foe') { let dbl=false;
+    for(let i=F.turnLog.length-2;i>=0;i--) { const k=F.turnLog[i]; if(k===u.key) { dbl=true; break; } const w=b3Unit(F,k); if(w&&w.side==='party') break; }
+    if(dbl) { b3Fire(F,'foeDoubleTurn',{src:u,tgt:u,g:'pre'},beats); b3RunReactions(F,beats); } }
   b3RunLater(F,u,beats);
   if(b3Alive(u)&&b3HasFlag(u,'skipTurn')) {
     for(const id of Object.keys(u.st)) if(B3_STATUS[id].flags.includes('skipTurn')) { b3EndStatus(F,u,id,'used'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
@@ -115,6 +120,8 @@ function b3EndTurn(F,u,recovery,beats) {
     if(u.flusterMove) { u.flusterMove=false; b3FlusterMove(F,u,0); }
     // The turn a Broken foe was owed is over: its pips can be shaved again.
     if(u.flusterTurn) { u.flusterTurn=false; u.pipLock=false; }
+    // A pull this turn asked for after its wait was set ("Better Than Bobby!": the next turn comes sooner).
+    if(u.nextPull) { const amt=b3Pull(F,u,u.nextPull); u.nextPull=0; if(amt) beats.push({t:'pull',tgt:u.key,n:amt,bar:b3BarSnap(F,null,0),g:'end'}); }
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(s.unit!=='turn') continue;
       if(s.skip) { s.skip=false; continue; }
       if(--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'end'}); b3Fire(F,'statusEnded',{src:u,tgt:u,id,g:'end'},beats); } }
@@ -244,14 +251,19 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     for(const id of Object.keys(a.st)) if(B3_STATUS[id].flags.includes('blind')) { b3EndStatus(F,a,id,'used'); B.push({t:'statusEnd',tgt:a.key,id,g:c.g}); }
     B.push({t:'miss',src:a.key,tgt:t.key,why:'blind',g:c.g}); return;
   }
-  const mc=b3MissChance(a); if(mc>0&&b3Rand(F)<mc) { B.push({t:'miss',src:a.key,tgt:t.key,why:'acc',g:c.g}); return; }
+  // Gold-Star Sticker (`trueAim`): the carrier's hits ignore accuracy penalties and Evasion. A Blind still makes the next single-target hit miss.
+  const ta=b3HasFlag(a,'trueAim');
+  const mc=ta?0:b3MissChance(a); if(mc>0&&b3Rand(F)<mc) { B.push({t:'miss',src:a.key,tgt:t.key,why:'acc',g:c.g}); return; }
   // A pierce hit (Stunt-Double Squirrel Intercept) ignores Evasion and shields. A hit that is part of a party-wide act is `wide`.
-  const ev=e&&e.pierce?0:b3Evasion(t,!single); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
+  const ev=e&&e.pierce||ta?0:b3Evasion(t,!single); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
   c.landed=(c.landed||0)+1;   // hits this action has landed so far ("It's OUR Longboard Now")
   // Family Ruckus: each hit after the first of a multi-hit move that lands (engine/b3-ruckus.js).
-  if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&(c.skill.hits||1)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
+  if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&b3HitsOf(a,c.skill)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
   // One crit roll per hit: base rate, the attacker's own bonus, and what the target gives away (Dazzled).
-  const crit=!F.preview&&b3Rand(F)<b3CritChance(a,t,e);   // a preview (engine/b3-preview.js) never shows luck
+  // Measure Twice, Cut Once (`guaranteeCrit`, with `critFlavors`): the next Clobber or Razzle hit is a sure crit, and that status is used up by it.
+  let gcId=null; if(!F.preview) for(const id of Object.keys(a.st)) { const S=B3_STATUS[id]; if(S.flags.includes('guaranteeCrit')&&flavors.some(f=>S.critFlavors.includes(f))) { gcId=id; break; } }
+  if(gcId) { b3EndStatus(F,a,gcId,'used'); B.push({t:'statusEnd',tgt:a.key,id:gcId,g:c.g}); }
+  const crit=!!gcId||(!F.preview&&b3Rand(F)<b3CritChance(a,t,e));   // a preview (engine/b3-preview.js) never shows luck
   if(crit) b3Fire(F,'crit',{src:a,tgt:t,g:c.g},B);
   // An intercepted hit lands that much weaker on the one who stepped in.
   const red=c.inter&&c.inter[t.key]?c.inter[t.key].reduce:0;
@@ -265,12 +277,14 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     // The move's own bonus: `per` counts something this action did (buffs stripped), `if` is a condition on the target.
     const bonus=Object.assign({},c.outExtra);
     // `counter` reads one of the attacker's Portable Counters (so much per point built up).
-    if(e.bonus) { if(e.bonus.counter) bonus.skill=e.bonus.add*(a.counters[e.bonus.counter]||0); else if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0);
+    if(e.bonus) { if(e.bonus.counter) { const n=a.counters[e.bonus.counter]||0; bonus.skill=e.bonus.add*n; if(e.bonus.spend&&n) (c.spend=c.spend||{})[a.key+':'+e.bonus.counter]=true; }
+      else if(e.bonus.buffs) bonus.skill=e.bonus.add*b3BuffCount(a);   // every buff the attacker has (Regional Championship Freestyle)
+      else if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0);
       else if(b3Cond(F,c,e.bonus,t)) bonus.skill=e.bonus.add*(e.bonus.grow?(c.hitNo||0)+1:1); }
     const pv=b3Peeves(t).includes(fl),rs=t.resists.includes(fl);
     // What this hit is, for the mods that only count on some hits (a Quirk's `when`, a rider like Spit Shine): b3Mods in engine/b3-core.js.
     const mx={F,c,a,t,fl};
-    let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg:1)*b3TakenMult(t,red,mx);
+    let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg*(1+b3Sum(a,'critDmg')):1)*b3TakenMult(t,red,mx);
     if(single&&fl==='clobber'&&b3EffRow(F,t)==='back') dmg*=1-B3_RULES.backRowClobber;
     if(t.side==='party') dmg*=F.mods.taken;
     dmg=Math.max(1,Math.round(dmg));
@@ -285,7 +299,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
       det=every?b3FindDetonation(t,fl,a):null;
     }
     b3Hurt(F,c,t,dmg,Object.assign({src:a.key,flavor:fl,crit,peeve:pv,resist:rs},e&&e.pierce?{pierce:true}:null));
-    b3RuckusMix(F,c,a,t,fl);
+    b3RuckusMix(F,c,a,t,fl,pv||!!c.detonated[t.key]);
     if(!c.hit.includes(t)) c.hit.push(t);
     if(a.side==='party'&&t.side==='foe') {
       if(pv) b3Pips(c,t,0,true);          // a Pet Peeve hit: 1 pip per action, not per hit (spec 2.7)
@@ -298,6 +312,9 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     }
     b3Fire(F,'afterHit',{src:a,tgt:t,dmg,flavor:fl,crit,part:fi,g:c.g,tags:c.tags||[],c},B);
   }
+  // A status with `hits:{n, tagsAny}` (Hang Fresh Drywall) wears down by one for each hit that lands on its carrier from the other side with one of those tags.
+  if(a.side!==t.side) for(const id of Object.keys(t.st)) { const H=B3_STATUS[id].hits; if(!H||!(c.tags&&H.tagsAny.some(x=>c.tags.includes(x)))) continue;
+    const s=t.st[id]; s.left=(s.left==null?H.n:s.left)-1; if(s.left<=0) { b3EndStatus(F,t,id,'used'); B.push({t:'statusEnd',tgt:t.key,id,why:'used',g:c.g}); } }
   b3KoCheck(F,c);
 }
 // The unit that takes a single-target hit aimed at t, if someone has stepped in for t (Suite Door Slide): {u, reduce} or null.
@@ -312,9 +329,11 @@ function b3Interceptor(F,t) {
 // whoever `to` names and its beats stay in the part of the action it was set off in.
 function b3DamageOp(F,c,e) {
   const own=e.power!=null,S=own?{flavor:e.flavor,power:e.power,hits:e.hits||1,target:'foe'}:c.skill;
-  const a=c.actor,hits=Math.max(1,S.hits||1),all=own?!!e.aoe:(S.target==='all_foes'||S.target==='foe_row');
+  const a=c.actor,hits=b3HitsOf(a,S),all=own?!!e.aoe:(S.target==='all_foes'||S.target==='foe_row');
   const tier=typeof S.power==='number'?S.power:B3_RULES.power[S.power];
-  const per=tier*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
+  // A move with `hitsBy`: its power is for `base` hits, and every hit past that adds `grow` of it (Criss-Cross Double-Under).
+  const grow=S.hitsBy?1+S.hitsBy.grow*(hits-S.hitsBy.base):1;
+  const per=tier*grow*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
   if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
   c.didDamage=true;
   if(a.side==='foe'&&b3VesselTake(F,c)) { c.g='post'; return; }   // a vessel on the family's floor soaked the whole act
@@ -351,15 +370,17 @@ function b3Act(F,u,skillId,optKey) {
   const O=b3Options(F,u,S).find(o=>o.key===optKey);
   if(!O||O.no) return {ok:false,why:(O&&O.no)||'Nobody to use that on right now.'};
   const beats=[],rec=G?0:b3MoveRec(F,u,S),cost=b3Cost(F,u,S,O);
+  // A Recovery mod that counts once a round (Active Recovery) is marked used now that this move has had it.
+  if(!G) for(const m of u.mods) if(m.stat==='moveRec'&&m.when&&m.when.oncePerRound&&b3ModWhen(u,m,{skill:S,F},null)) u.used['pr:'+m.when.oncePerRound]=F.round;
   if(S.cooldown) u.cd[S.id]=F.round+S.cooldown;
   if(u.custom&&u.custom.mailbox&&['s1','s2','cap'].includes(S.slot)) u.lastSkill=S.id;   // "The Mailbox Moved": counters copy this Skill (engine/b3-custom.js)
   F.grant=null;
   const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[],ledger:{}};
-  beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',anim:(S.anim&&S.anim.kind==='clip')?S.anim:null,hits:Math.max(1,S.hits||1),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});
+  beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.target==='either'&&O.ally)?'give':(S.anim&&S.anim.shape)||'strike',anim:(S.anim&&S.anim.kind==='clip')?S.anim:null,hits:b3HitsOf(u,S),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});
   if(cost) { b3Pep(F,u,-cost,'cost'); beats.push({t:'pep',tgt:u.key,n:-cost,pep:u.pep,g:'pre'}); }
   if(S.slot==='basic') { const got=b3Pep(F,u,B3_RULES.pep.basic,'basic'); if(got) beats.push({t:'pep',tgt:u.key,n:got,pep:u.pep,g:'pre'}); }
   b3Fire(F,'actionDeclared',{src:u,g:'pre'},beats);
-  b3RunEffects(F,c,S.effects);
+  b3RunEffects(F,c,S.target==='either'&&O.ally?S.allyEffects:S.effects);   // Baby-Wipe Swipe: a family member gets the ally branch
   c.g='post';
   b3RelayEnd(F,c);       // riders Twin-Lamb Relay held for the later hits come off now
   b3SpendCounters(F,c);  // counters a bonus cashed in (Upgrade Certificate) go back to 0

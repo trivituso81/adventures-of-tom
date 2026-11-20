@@ -449,7 +449,7 @@ def stage4(pg,lab):
     fr.append(shot(pg))
     pg.click('#splash .sp-choice:has-text("VIBES AND RANKS")'); pg.wait_for_timeout(450); v=vstate(pg); fr.append(shot(pg))
     need(v['open'] and not v['hidden'] and v['door']=='lab',f'the Vibes screen did not open from the Lab: {v}')
-    need(v['tabs']==['TOM','GRACE','ROSE','DEEDEE','BOPPY','TNB','NARA'],f"the Lab's Vibes screen should list everyone with a kit (Tom, Grace, Rose, Deedee, Boppy, TNB, Nara): {v['tabs']}")
+    need(v['tabs']==['TOM','GRACE','ROSE','AMY','DEEDEE','BOPPY','TNB','NARA','JUSTIN','OLIVIA'],f"the Lab's Vibes screen should list everyone with a kit (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara, Justin, Olivia): {v['tabs']}")
     need(v['rank']==['2'],f"the Lab starts with every Vibe at Rank 2: {v['rank']}")
     c=v['cards']
     need(len(c)==2 and c[0]['role']=='MAIN VIBE' and c[0]['name']=='Frequent Flier' and '60 / 220 VP' in c[0]['vp'] and c[0]['rows']==7,f'Tom\'s Main Vibe card is wrong: {c[:1]}')
@@ -474,11 +474,11 @@ def stage4(pg,lab):
     pg.evaluate("()=>{ document.querySelector('#b3-vibes .b3v-body').scrollTop=0; }"); vib(pg,'rank-2'); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Empty','Empty'] and v['rank']==['2'],f"back at Rank 2 the Quirks come off: {v['slots']}")
     vib(pg,'quirk-0'); v=vstate(pg); need('No Quirk is unlocked yet' in v['say'] and not v['picks'],f"an empty Quirk slot before Rank 3 should say why: {v['say']}")
     # Rows: three to the Back, the fourth is refused
-    for i,who_ in ((1,'grace'),(2,'rose'),(3,'deedee'),(4,'boppy'),(5,'tnb'),(6,'nara')):
+    for i,who_ in ((1,'grace'),(2,'rose'),(3,'amy'),(4,'deedee'),(5,'boppy'),(6,'tnb'),(7,'nara'),(8,'justin'),(9,'olivia')):
         vib(pg,f'who-{i}'); vbottom(pg); vib(pg,'rowpick-back')
     fr.append(shot(pg))
-    rows=pg.evaluate("()=>{ const B=b3LabBook(); return ['tom','grace','rose','deedee','boppy','tnb','nara'].map(id=>b3RowOf(B[id])); }")
-    need(rows==['front','back','back','back','back','back','back'],f'three of them moved to the Back row: {rows}')
+    rows=pg.evaluate("()=>{ const B=b3LabBook(); return ['tom','grace','rose','amy','deedee','boppy','tnb','nara','justin','olivia'].map(id=>b3RowOf(B[id])); }")
+    need(rows==['front']+['back']*9,f'three of them moved to the Back row: {rows}')
     vib(pg,'who-0'); vbottom(pg); vib(pg,'rowpick-back'); v=vstate(pg); fr.append(shot(pg))
     need('Someone has to stand in Front' in v['say'] and pg.evaluate("()=>b3RowOf(b3LabBook().tom)")=='front',f"the last one in Front cannot go to the Back: {v['say']}")
     # Keys and gamepad
@@ -531,9 +531,9 @@ def stage4(pg,lab):
     pg.evaluate("()=>{ b3LabReset(); }")
     # --- The save fields ---
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(200)
-    sv=pg.evaluate("()=>{ saveGame('7',true); const s=readSave('7'); return {tom:s.members.find(m=>m.id==='tom'),amy:s.members.find(m=>m.id==='amy'),n:s.members.filter(m=>m.vibes).map(m=>m.id)}; }")
+    sv=pg.evaluate("()=>{ saveGame('7',true); const s=readSave('7'); return {tom:s.members.find(m=>m.id==='tom'),mike:s.members.find(m=>m.id==='michael'),n:s.members.filter(m=>m.vibes).map(m=>m.id),cast:Object.keys(B3_CAST)}; }")
     need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
-    need(sv['n']==['tom','grace','rose','deedee','boppy','tnb','nara'] and 'vibes' not in sv['amy'],f"only family members with a kit get the fields for now: {sv['n']}")
+    need(sorted(sv['n'])==sorted(i for i in sv['cast'] if i in sv['n']) and set(sv['n'])>={'tom','grace','rose','deedee','boppy','tnb','nara'} and (not sv['mike'] or 'vibes' not in sv['mike']),f"only family members with a kit get the fields for now (stage 10 adds Amy, Justin and Olivia): {sv['n']}")
     need('stamps' in sv['tom'] and 'ranks' in sv['tom'] and 'loadouts' in sv['tom'],'the old save fields (stamps, ranks, loadouts) must stay')
     # The pause menu's door
     pg.evaluate("()=>{ openMenu(true); }"); pg.wait_for_timeout(350)
@@ -1061,6 +1061,34 @@ def s9b(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.par
     haz:F.hazards.map(h=>h.id+':'+h.side+':'+h.uses),st:F.party.map(p=>Object.keys(p.st)),foe:Object.keys(f.st),hp:F.party.map(p=>p.hp),maxHp:F.party.map(p=>p.maxHp),
     ruckus:F.ruckus,mult:F.party.map(p=>p.st.e_bike?p.st.e_bike.mult||1:0),foeHp:F.foes.map(x=>x.hp),log:B3.log.slice(-80).join(' | '),
     tags:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>e.innerText.replace(/\\n/g,' '))}; }""")
+def stage10(pg,lab,landscape=False):
+    S='stage 10'+(' landscape' if landscape else '')+': '; caps=[]
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    start(pg,lab.index('new10'),{'seed':SEED}); wait_cmd(pg); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    names=pg.evaluate("()=>B3.F.party.map(p=>p.id)"); need(sorted(names)==['amy','justin','olivia','tom'],f'the stage 10 party is Tom, Amy, Justin and Olivia: {names}')
+    vib=pg.evaluate("()=>B3.F.party.map(p=>p.id+':'+p.vibe+'/'+(p.pocket||''))"); need(any(v.startswith('amy:amy_fitness/amy_classroom') for v in vib) and any(v.startswith('justin:justin_basement/justin_wire') for v in vib) and any(v.startswith('olivia:olivia_rope/olivia_mom') for v in vib),f'each of them has their Sig 1 Main and Sig 2 Pocket: {vib}')
+    for who_,trait,sk in (('amy','Workout Streak','Burpee Blitz'),('justin','Load-Bearing Swing','Demo-Day Prybar'),('olivia','Unbroken Rhythm','Criss-Cross Double-Under')):
+        if not turn_of(pg,who_,S): return
+        caps.append(R(shot(pg)))
+        if not landscape: R(shot(pg)).save(os.path.join(OUT,f'b3-s10-{who_}-portrait.png'))
+        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+        need(trait in txt,f"{who_}'s list should name the Trait {trait}: {txt[:300]}")
+        pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+        names_=pg.evaluate("()=>(b3SkillRows(B3.actor)||[]).map(S=>S.name)"); need(any(sk in n for n in names_),f'{who_}: the SKILLS list should hold {sk}: {names_}')
+        sel=[n for n in names_ if sk in n]
+        if sel:
+            pg.evaluate("()=>{ B3.actor.pep=10; b3Render(); }")
+            skill(pg,sel[0]); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+            if pg.evaluate("()=>B3.ui")=='target': caps.append(R(shot(pg)))
+            aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(500); caps.append(R(shot(pg)))
+            if who_=='amy':
+                say=pg.evaluate("()=>document.getElementById('b3-say')?document.getElementById('b3-say').innerText:''"); need('Free from Amy' not in say,f'a self-grant should not say "Free from Amy": {say}')
+    sheet(caps,3,os.path.join(OUT,'b3-s10'+('-land' if landscape else '')+'.png'),scale=.5)
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
 def stage9c(pg,lab,landscape=False):
     S='stage 9c'+(' landscape' if landscape else '')+': '; caps=[]
     rot=landscape and pg.evaluate("()=>layout.rotated")
@@ -1265,7 +1293,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1363,6 +1391,10 @@ with sync_playwright() as pw:
     if 's9c' in sys.argv or not only and len(want)==len(lab):
         print('b3s9c: Nara and Boppy'); stage9c(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9c(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    if 's10' in sys.argv or not only and len(want)==len(lab):
+        print('b3s10: Amy, Justin and Olivia'); stage10(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage10(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

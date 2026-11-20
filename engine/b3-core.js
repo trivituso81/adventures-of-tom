@@ -166,8 +166,11 @@ function b3OverBeats(F,beats,g) {
 //         tgtBelow:X: (ctx.tgt) the move's one target is a family member still up at less than X of their Max HP (First-Ring Pickup).
 //         basic: (ctx.skill) the move is a Basic (Carving Momentum).  shielded: the holder has a shield up right now (Coaster Policy).
 //         aoe: the act in progress reaches every family member at once (a monster's party-wide act: its tags carry `aoe`), 9c.
-const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row'];
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe'];
+//         skillFlavor:X: (ctx.skill) the move has flavor X (Load-Bearing Swing).  supportSkill: (ctx.skill) the move is a Support Skill: not a Basic,
+//         deals no damage and builds no counter of its own (b3IsSupport).  oncePerRound:key: counts the first time each round (b3Act marks it).
+//         tagsAny:[..]: the act in progress carries one of these tags (Drywall: melee or projectile; Cool-Mist: projectile or aoe), stage 10.
+const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row','either'];
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny'];
 // A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
 function b3Peeves(u) {
   let out=u.peeves;
@@ -188,16 +191,27 @@ function b3ModWhen(u,m,ctx,putBy) {
     else if(k==='basic') { const S=ctx.skill; if(!S||S.slot!=='basic') return false; }
     else if(k==='shielded') { if(!(b3ShieldTotal(u)>0)) return false; }
     else if(k==='aoe') { if(!(c&&c.tags&&c.tags.includes('aoe'))) return false; }
+    else if(k==='skillFlavor') { const S=ctx.skill; if(!S||!S.flavor.includes(W.skillFlavor)) return false; }
+    else if(k==='supportSkill') { if(!b3IsSupport(ctx.skill)) return false; }
+    else if(k==='oncePerRound') { const F=ctx.F; if(!F||u.used['pr:'+W.oncePerRound]===F.round) return false; }
+    else if(k==='tagsAny') { if(!(c&&c.tags&&W.tagsAny.some(t=>c.tags.includes(t)))) return false; }
     else if(k==='tgtBelow') { const t=ctx.tgt; if(!t||t.side!==u.side||t.ko||!(t.hp<t.maxHp*W.tgtBelow)) return false; }
     else throw new Error('Battle 3 mod condition not built yet: '+k);
   }
   return true;
 }
+// A Support Skill: a Skill (not a Basic) that deals no damage and builds no Portable Counter of its own (stage 10: Nap-Window Efficiency,
+// Measure Twice Cut Once, Olivia's Cadence reset).
+const b3IsSupport=S=>!!S&&S.slot!=='basic'&&!S.power&&!(S.effects||[]).some(e=>e.op==='counter');
+// How many hits a move lands: its `hits`, or for a move with `hitsBy` (Olivia's Rope Skills) `base` plus `per` for each point of its Cadence, up to `max`.
+const b3HitsOf=(u,S)=>S.hitsBy?Math.min(S.hitsBy.max,S.hitsBy.base+S.hitsBy.per*(u.counters[S.hitsBy.counter]||0)):Math.max(1,S.hits||1);
+const b3BuffCount=u=>Object.keys(u.st).filter(id=>B3_STATUS[id].kind==='buff').length;
 function b3Mods(u,stat,ctx) {
   const out={};
   const add=(m,stId)=>{ if(m.stat!==stat) return; let v=m.v;
     if(m.when) { if(!ctx||!b3ModWhen(u,m,ctx,stId?u.st[stId].src:null)) return; if(stId) v*=b3RelayMod(ctx.c,u,stId); }
-    if(m.per) { v*=u.counters[m.per.counter]||0; if(m.per.spend&&v&&ctx&&ctx.c) (ctx.c.spend=ctx.c.spend||{})[u.key+':'+m.per.counter]=true; }
+    if(m.per&&m.per.buffs) v*=Math.min(m.per.max==null?99:m.per.max,b3BuffCount(u));   // Trophy-Shelf Ego: once for each different buff
+    else if(m.per) { v*=Math.min(m.per.max==null?99:m.per.max,u.counters[m.per.counter]||0); if(m.per.spend&&v&&ctx&&ctx.c) (ctx.c.spend=ctx.c.spend||{})[u.key+':'+m.per.counter]=true; }
     if(stId&&u.st[stId].mult) v*=u.st[stId].mult;   // a doubled buff (Baxter Hill Longboard Express)
     out[m.kind]=(out[m.kind]||0)+v; };
   for(const id in u.st) for(const m of B3_STATUS[id].mods) add(m,id);
@@ -210,12 +224,16 @@ const b3Sum=(u,stat,ctx)=>{ const M=b3Mods(u,stat,ctx); let s=0; for(const k in 
 const b3Mult=(u,stat,ctx)=>{ const M=b3Mods(u,stat,ctx); let m=1; for(const k in M) m*=Math.max(0,1+M[k]); return m; };
 // The Base Recovery of a move for the unit using it: the slot's number, times what its Quirks say about that kind of move
 // (stat 'moveRec': Ultra-Rare Limited Edition). Fatigue and the like change every Recovery and are applied in b3WaitFor.
-const b3MoveRec=(F,u,S)=>(S.rec!=null?S.rec:B3_RULES.recovery[S.slot])*b3Mult(u,'moveRec',{skill:S});   // a Skill may print its own Base Recovery in `rec` (Longboard Push & Carve)
+const b3MoveRec=(F,u,S)=>(S.rec!=null?S.rec:B3_RULES.recovery[S.slot])*b3Mult(u,'moveRec',{skill:S,F});   // a Skill may print its own Base Recovery in `rec` (Longboard Push & Carve)
 // Attack, Defense or Speed with every mod applied. A crack is a battle-long cut of base Defense, 25% at most in total (spec 2.4).
 // Pressed Against Your Shins (Nara, stage 9c, `custom:'shins'`): her Attack also grows by `share` of the Speed bonuses she wears (the
 // positive Speed mods of her statuses and Quirks, not her Lean).
 const b3SpdBuff=u=>{ const M=b3Mods(u,'spd'); let s=0; for(const k in M) if(M[k]>0) s+=M[k]; return s; };
-const b3Stat=(u,stat)=>u[stat]*(stat==='def'?1-u.crack:1)*b3Mult(u,stat)*(stat==='atk'&&u.custom&&u.custom.shins?1+u.custom.shins.share*b3SpdBuff(u):1);
+const b3StatPlain=(u,stat)=>u[stat]*(stat==='def'?1-u.crack:1)*b3Mult(u,stat)*(stat==='atk'&&u.custom&&u.custom.shins?1+u.custom.shins.share*b3SpdBuff(u):1);
+// Pace-Partner Run (Amy, stage 10): a status with the `paceRun` flag carries a Speed VALUE (`v`, Amy's Speed when she called them). Their Speed is
+// raised to it and never lowered by it.
+function b3Stat(u,stat) { const v=b3StatPlain(u,stat); if(stat!=='spd') return v;
+  let best=v; for(const id in u.st) if(u.st[id].v!=null&&B3_STATUS[id].flags.includes('paceRun')) best=Math.max(best,u.st[id].v); return best; }
 // Damage dealt. `extra` is {kind: amount} from the move itself. Bonuses are capped at +100% in total (spec 2.4); penalties are not.
 function b3OutMult(u,extra,ctx) {
   const M=b3Mods(u,'out',ctx); for(const k in (extra||{})) M[k]=(M[k]||0)+extra[k];
@@ -339,10 +357,10 @@ function b3Cost(F,u,S,O) {
 // While a granted action waits for this unit (F.grant), the list is only what the grant allows.
 const b3Skills=(F,u)=>F.grant&&F.grant.key===u.key?b3GrantSkills(F,u,F.grant):[u.basic,...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id]);
 // The Skills a grant lets this unit take: its own Skills (and Pick-Me-Up) that cost G.maxPep or less and have someone to be
-// used on. Never the Basic and never a Grand Capstone.
+// used on. Never a Grand Capstone; the Basic only when the grant says `basic:true` (Burpee Blitz, stage 10).
 function b3GrantSkills(F,u,G) {
-  return [...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id])
-    .filter(S=>S.slot!=='cap'&&S.slot!=='basic'&&S.pep<=G.maxPep&&b3Options(F,u,S).some(o=>!o.no));
+  return [...(G.basic?[u.basic]:[]),...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id])
+    .filter(S=>S.slot!=='cap'&&(G.basic||S.slot!=='basic')&&S.pep<=G.maxPep&&b3Options(F,u,S).some(o=>!o.no));
 }
 function b3CanUse(F,u,S) {
   if(!S) return {ok:false,why:'That move is not built yet.'};
@@ -364,6 +382,8 @@ function b3Options(F,u,S) {
   }
   if(S.target==='family') return mates.map(m=>({key:m.key,label:m.name,units:[m],ally:true}));   // anyone in the family, the user included
   if(S.target==='self') return [{key:u.key,label:u.name,units:[u],ally:true}];
+  // Either a monster or a family member (the user included): Baby-Wipe Swipe. A monster picked gets the Skill's `effects`, a family member its `allyEffects`.
+  if(S.target==='either') return [...foes.map(f=>({key:f.key,label:f.name,units:[f]})),...mates.map(m=>({key:m.key,label:m.name,units:[m],ally:true}))];
   // Two family members: the one picked and whoever else in the family has the smallest share of HP left ("Bring a Jacket!" Ward).
   if(S.target==='ally_pair') return mates.map(m=>{ const o=mates.filter(x=>x!==m).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot)[0],units=o?[m,o]:[m];
     return {key:m.key,label:units.map(x=>x.name).join(' and '),units,ally:true}; });
@@ -397,11 +417,15 @@ function b3AutoScore(F,u,S,O) {
   const R=B3_RULES,tier=typeof S.power==='number'?S.power:R.power[S.power]||0,cost=b3Cost(F,u,S,O),foes=b3Live(F,b3Other(u.side));
   const std=t=>b3Stat(u,'atk')*100/(100+b3Stat(t,'def')),has=op=>S.effects.find(e=>e.op===op);
   let sc=-1.5*cost+(S.slot==='basic'?3:0);
+  // Baby-Wipe Swipe picked on a family member: worth the HP it gives back and the minor debuff it clears, and nothing on someone who needs neither.
+  if(S.target==='either'&&O.ally) { const t=O.units[0],got=Math.min(t.maxHp-t.hp,t.maxHp*R.heal.small),
+      bad=Object.keys(t.st).filter(id=>B3_STATUS[id].kind==='debuff'&&B3_STATUS[id].weight<=4).length;
+    return sc+(t.hp/t.maxHp<.7||bad?got*.5+bad*4+(t.hp/t.maxHp<.35?10:0):-99); }
   // Damage that rides on a move's own effects aimed at every monster, now or later (a wave that follows a heal).
   const wave=(list)=>{ let w=0; for(const e of list||[]) { if(e.op==='damage'&&e.power!=null&&e.to==='foes') w+=foes.reduce((x,t)=>x+std(t)*(typeof e.power==='number'?e.power:R.power[e.power])*(e.aoe?R.aoeShare:1)*(b3Peeves(t).includes(e.flavor[0])?R.peeve:1),0);
     if(e.op==='later') w+=wave(e.effects)*.8; } return w; };
   const wv=wave(S.effects);
-  const gr=has('grant');
+  const gr=S.target==='ally'?has('grant'):null;   // a free Skill for someone else; Burpee Blitz's grant is Amy's own (scored below)
   if(gr) {
     // A free Skill for someone else: worth the best thing they could do with it (at no cost to them), plus the Pep it hands out.
     const t=O.units[0]; let best=-99;
@@ -469,6 +493,8 @@ function b3AutoScore(F,u,S,O) {
     if(dm&&foes.length) sc+=u.st[st.id]?-99:std(foes[0])*(typeof dm.power==='number'?dm.power:R.power[dm.power])*Math.min(2,foes.length)*.6;
   }
   if(tier<=0) sc+=wv;
+  // A mini-turn Amy gives herself (Burpee Blitz at 3 or more Reps): worth about a Basic's worth of damage and its Pep.
+  const sg=S.effects.find(e=>e.op==='grant'&&e.to==='self'); if(sg&&(!sg.needCounter||(u.counters[sg.needCounter.id]||0)>=sg.needCounter.min)) sc+=5;
   return sc;
 }
 
@@ -528,11 +554,12 @@ function b3CheckData() {
     const Ls=[...(P.on?[P]:[]),...(P.listen||[])];
     for(const L of Ls) { if(!B3_HOOKS.includes(L.on)) bad.push(w+': unknown hook '+L.on); effects(w,L.effects); }
     mods(w,P.mods);
-    for(const m of (P.mods||[])) if(m.per&&!(P.counter&&P.counter.id===m.per.counter)&&!(B3_VIBES[P.vibe]&&B3_VIBES[P.vibe].counter&&B3_VIBES[P.vibe].counter.id===m.per.counter)) bad.push(w+': a mod counts the counter '+m.per.counter+', which neither this row nor its Vibe builds');
+    for(const m of (P.mods||[])) if(m.per&&m.per.counter&&!(P.counter&&P.counter.id===m.per.counter)&&!(B3_VIBES[P.vibe]&&B3_VIBES[P.vibe].counter&&B3_VIBES[P.vibe].counter.id===m.per.counter)) bad.push(w+': a mod counts the counter '+m.per.counter+', which neither this row nor its Vibe builds');
     if(P.counter&&!(P.counter.id&&P.counter.name&&P.counter.max>0)) bad.push(w+': its counter needs id, name and max');
+    if(P.viaVibe&&!(B3_VIBES[P.vibe]&&B3_VIBES[P.vibe].counter)) bad.push(w+': says its rule is its Vibe\'s counter, but the Vibe has none');
     if(P.custom&&!B3_CUSTOM[P.custom]) bad.push(w+': one-off rule "'+P.custom+'" is not in engine/b3-custom.js');
     mods(w,P.allyMods);
-    if(!Ls.length&&!(P.mods||[]).length&&!P.custom&&!P.immune&&!P.shieldMods&&!P.allyMods) bad.push(w+': not marked soon, but it has no listener, no mods and no one-off rule'); }
+    if(!Ls.length&&!(P.mods||[]).length&&!P.custom&&!P.immune&&!P.shieldMods&&!P.allyMods&&!P.viaVibe) bad.push(w+': not marked soon, but it has no listener, no mods and no one-off rule'); }
   for(const id in B3_CAST) { const C=B3_CAST[id];
     for(const v of C.vibes) if(!B3_VIBES[v]) bad.push('cast '+id+': unknown vibe '+v);
     for(const n of [1,2]) if(C.vibes.filter(v=>B3_VIBES[v]&&B3_VIBES[v].sig===n).length>1) bad.push('cast '+id+': two Vibes are marked sig '+n);
@@ -542,6 +569,9 @@ function b3CheckData() {
     if(!B3_TARGETS.includes(S.target)) bad.push(w+': target kind "'+S.target+'" not built yet');
     if(S.counter&&!(B3_VIBES[S.vibe]&&B3_VIBES[S.vibe].counter&&B3_VIBES[S.vibe].counter.id===S.counter)) bad.push(w+': reads the counter '+S.counter+', which its Vibe does not build');
     for(const e of S.effects) { const b=e.bonus; if(b&&b.if&&!B3_CONDS.includes(b.if)) bad.push(w+': condition "'+b.if+'" not built yet'); if(e.when&&!B3_EFFECT_WHEN.includes(e.when)) bad.push(w+': effect condition "'+e.when+'" not built yet'); }
+    if(S.target==='either'&&!(S.allyEffects&&S.allyEffects.length)) bad.push(w+': a target kind "either" needs allyEffects (what it does on a family member)');
+    if(S.allyEffects) effects(w+' allyEffects',S.allyEffects);
+    if(S.hitsBy) { const H=S.hitsBy; if(!H.counter||!(H.base>=1)||!(H.per>=0)||!(H.max>=H.base)||S.counter!==H.counter) bad.push(w+': hitsBy needs counter (the Skill\'s own), base, per and max'); }
     if(!S.desc) bad.push(w+': needs desc');
     if(B3_RULES.recovery[S.slot]==null) bad.push(w+': unknown slot '+S.slot); if(!flav(S.flavor)) bad.push(w+': unknown flavor');
     if(typeof S.power!=='number'&&B3_RULES.power[S.power]==null) bad.push(w+': unknown power '+S.power);

@@ -25,5 +25,7 @@ const B3_LAB=[
   {id:'new8',name:'NEW 8: NARA JOINS (TOAD AND SKEETER)',sub:'Chapter 2 party: Tom, TNB and Nara. Nara is Attached Pup (Guard Dog in the Pocket). A Bog Toad sweeps the whole family.',
     party:['tom','tnb','nara'],level:2,formation:'toad',bg:'pond'},
   {id:'new9',name:'NEW 9: BOPPY JOINS (BIG ONE)',sub:'Chapter 3 party: Tom, Grace, Rose and Boppy. Boppy is The Dep (Pepper Boss in the Pocket). The Big One has 6 Composure pips.',
-    party:['tom','grace','rose','boppy'],level:2,formation:'bigone',bg:'pond'}
+    party:['tom','grace','rose','boppy'],level:2,formation:'bigone',bg:'pond'},
+  {id:'new10',name:'NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE)',sub:'Tom with the three grown-ups: Amy is Fitness Queen (Classroom Boss in the Pocket), Justin is Basement Boss (Live Wire in the Pocket), Olivia is Rope Champ (Working Mom in the Pocket). The Big One has 6 Composure pips.',
+    party:['tom','amy','justin','olivia'],level:2,formation:'bigone',bg:'pond'}
 ];

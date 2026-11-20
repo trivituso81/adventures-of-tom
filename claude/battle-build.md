@@ -49,8 +49,20 @@ Rules for every stage's session:
 | 9a | Tom's notes on the SKILLS list: a tap on a Skill opens its card (hides the other Skills, shows everything about it, BACK and USE); flavor pictures and a big Pep pill in the list | Pushed 2026-11-19 | `b3s9a`, main 95cb1d9 | Nothing is asked. |
 | 9b | TNB complete: Ceramicist and Longboarder (2 Traits, 2 Basics, 4 Skills, 2 Capstones, 4 Quirks). New seams: clay shields and Fired Glaze, the Grand Amphora vessel, `allyMods`, the `basic` and `shielded` conditions, a Skill's own `rec`, `tgtAlly`, the `razzleDet` and `blockDebuff` flags, `slowestAlly`, the `vitrify`, `double` and `rebalance` ops. Lab fight NEW 7 (TNB in Deedee's place). | Pushed 2026-11-19 | `b3s9b` | Nothing is asked. If he plays anyway: NEW BATTLE > NEW 7: TNB JOINS; VIBES AND RANKS to make Longboarder TNB's Main. |
 | 9c | Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) Sig Vibes (28 lines), the late joiners' Vibe Point pool (TNB moved onto it), Lab fights NEW 8 and NEW 9. Ends stage 9. | Pushed 2026-11-20 | `b3s9c` | Nothing is asked. |
-| 10 | Kits: Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire), Olivia (Rope Champ, Working Mom) | Not started (card c-b3s10) | `b3s10` | |
-| 11 to 23 | See architecture section 5 | Not started | | |
+| 10 | Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) Sig Vibes (42 lines), Lab fight NEW 10 (Tom, Amy, Justin, Olivia). All 10 characters now have both Sig Vibes | Pushed 2026-11-20 | `b3s10` | Nothing is asked. |
+| 11 | Bestiary chapters 2 to 4 with their bosses (architecture section 5) | Not started (card c-b3s11) | `b3s11` | |
+| 12 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 10 results (facts)
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 1354, FAILS: []. 172 more than stage 9c, in `tools/b3-check-s10.js`: every one of the six Vibes complete with plain descriptions, then each line of Fitness Queen, Classroom Boss, Basement Boss, Live Wire, Rope Champ and Working Mom played and its numbers checked. Two older checks edited (`b3-check-s4.js`: Amy has a kit now, so the unkitted example is Michael; `b3-check-s5.js`: the one-off key list gained `muscleMemory`). |
+| Simulator | `new10` 200 fights: 200 won, 0 lost, 0 errors, 3.1 rounds, 97% party HP left (also `--rec` 3.3 rounds, `--swap=amy,justin,olivia` 3.2, `--rank=5` 2.6, all won). The simple player rarely picks Support Skills, so support lines are tested by hand in the check file, not by these runs. |
+| `python3 tools/b3_test.py s10` | FAILS: [] (portrait then landscape): the party stands as Tom, Amy, Justin and Olivia, each one's Main and Pocket are the two Sig Vibes, each turn's list names the Trait, each Skill is in the SKILLS list and plays, and a self-grant does not say "Free from Amy". Frames looked at: `tools/shots/b3-s10.png`, `b3-s10-land.png`, `b3-s10-amy-portrait.png`, `b3-s10-justin-portrait.png`, `b3-s10-olivia-portrait.png`. |
+| Older stage tests | s4, s5c, s7, s9b, s9c, s9ui: see the b3s10 entry in docs/CHANGES.md. One stale save-field assertion in s4 was updated (Amy, Justin and Olivia now have the fields). |
+| `unused_voice.py` | Check 4 lists the same 39 dialogue clips with and without this work. No line or clip added. |
+| Tom's phone | Not played, not asked for. |
 
 ## Stage 9c results (facts)
 
@@ -134,6 +146,16 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | 9c | Boppy's counter ward is light Racket; the Iron Gate's thorns are light Clobber, answered by Boppy; the Gate is a round-long status on all allies, not a hazard. | A hazard on the family's floor. |
 | 9c | The Mailbox copies the flavor and status riders of Boppy's last s1, s2 or Capstone Skill (a Basic does not count). | Any last move. |
 | 9c | Gold Teeth works after a jacket's survive and counts toward the Pep refund cap. | Instead of a jacket. |
+| 10 | | Reps (Fitness Queen) builds +1 on each of Amy's non-Basic actions, plus 1 from each Basic and from Burpee Blitz as written; they persist through a knock-out. | Reset at a knock-out; a different build rule. |
+| 10 | | Kettlebell Swing's Base Recovery is 60; Burpee Blitz's mini turn is a paid, counted action (it can add another Rep). | Other Recovery; a free uncounted mini turn. |
+| 10 | | Pace-Partner Run only raises Speed (a held number set when the status goes on); Follow-Along Finale Burnout spends Reps for +25% each and pierces shields. | A Speed that keeps following Amy's buffs. |
+| 10 | | Detention, Gold-Star Sticker, Drywall (3 turns at most), Squared Up, Wired and the other stage 10 statuses last 2 turns unless data/b3-status.js says otherwise. | 1 or 3 turns. |
+| 10 | | Four-Tab Binder and the Copper Banner are light Racket and light Razzle hits; Lights-Out Reset is heavy and also cancels a wound-up all-family act. | Other tiers. |
+| 10 | | Gold-Star's true aim does not beat Blind. Demo-Day Prybar counts a stance as 25% of the hit when it blasts the neighbour. Toolbox Punt is double damage on a Flustered monster. | Beating Blind; another blast share. |
+| 10 | | High-Def (Load-Bearing Swing) means Defense at least equal to Justin's own base Defense. | A fixed number. |
+| 10 | | Cadence resets on any Support turn of Olivia's (also from Working Mom in the Pocket); Muscle Memory switches that off. Criss-Cross and Regional Freestyle add 15% power per hit past the second. | Reset only on a Support Skill with no attack. |
+| 10 | | Nap-Window Efficiency is 20% less Recovery on Support Skills. Baby-Wipe Swipe on a family member clears one minor debuff (weight 4 or less) and heals 10%; it is offered on every monster and every family member, Olivia too. A Ruckus Baby-Wipe is only used on a monster. | Other numbers; a Ruckus ally pick. |
+| 10 | | Childproofed Locks picks a random family member, Olivia included, once per action. | Never Olivia. |
 | 9c | "Chip" for the stomach Attack bonus means a monster's Sizzle hit or Spiced Up; burn ticks do not trigger it. | Burn ticks too. |
 | 9c | Five-Alarm Burn is a second tick status that ends with Toasty; Toasty stays, so Detonations still see it. | It replaces Toasty. |
 | 9c | Pickle Jar Bomb is standard at the all-monsters share; The Ghost One is heavy at that share plus 2 Sizzle ticks. No Reach for Water counts only Boppy's own Steam Clouds. | Light or standard; any Steam Cloud. |
@@ -268,19 +290,19 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 10)
+## Next conversation (stage 11)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for 9c are in `claude/next-addendum-b3s9c.md`; where it and this file differ, it wins until stage 10 folds it in.
+Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 10 are in `claude/next-addendum-b3s10.md`; where it and this file differ, it wins until stage 11 folds it in.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 10: Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) Sig Vibes (two each, about 42 lines, 2 need their own function: Pace-Partner Run and Demo-Day Prybar), a Lab fight with any party of 4. Its `## b3s10` heading ends stage 10. |
+| 1 | What it will do | Builds stage 11: the bestiary for chapters 2 to 4 with their bosses (`claude/bestiary-v11.md`), including the explicit stat blocks for chapter 2's five regular enemies, and Lab fights for each formation and boss. Its `## b3s11` heading ends stage 11. |
 | 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
-| 3 | Model | Claude Sonnet 5.5 (row C: two custom functions are designed in the session). |
+| 3 | Model | Claude Sonnet 5.5 (row C: boss mechanics that need their own function are designed in the session). |
 | 4 | Effort level | High. |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s9c.md, then build stage 10 (Amy, Justin and Olivia) of the new battle system. You have my full permission to access the repo. Board card c-b3s10. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s10 (it moves this card to In progress and links your conversation).` |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s10.md, then build stage 11 (bestiary chapters 2 to 4 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s11. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s11 (it moves this card to In progress and links your conversation).` |
 
-If a session fails stage 10 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 11 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
 Facts the next session needs (more in `docs/handoff/b3s8.md`):
 

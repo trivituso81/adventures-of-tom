@@ -268,7 +268,7 @@ function b3Info() {
   if(B3.ui==='cross') { const rc=b3Rec(); b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.'+(rc?' Suggested: '+(rc.kind==='ruckus'?b3RuckusName(rc.skill.slice(7)):B3_SKILLS[rc.skill].name)+(rc.why?'. '+rc.why:'.'):'')); }
   else if(B3.ui==='info') b3Say('What is on '+b3Unit(B3.F,B3.infoKey).name+'. Tap another family member or monster to see theirs.');
   else if(B3.ui==='ruckus') { const k=['double','full'][B3.sel]||'double',P=b3RuckusPlan(B3.F,u,k); b3Say(P.ok?b3RuckusName(k)+' with '+P.partner.name+', who is next on the turn bar: '+(k==='full'?'both fire their best Main Vibe Skill free, one action, up to 4 Composure pips. ':'both use their Basic on one monster at +50% power. ')+'No Pep, and '+P.partner.name+' still gets their own turn.':P.why); }
-  else if(B3.ui==='skills') { const g=b3Granted()===u?b3Unit(B3.F,B3.F.grant.by):null; b3Say((g?'Free from '+g.name+'. ':'')+'Tap a Skill to use it. Tap the i to see what it does.'); }
+  else if(B3.ui==='skills') { const g=b3Granted()===u&&B3.F.grant.by!==u.key?b3Unit(B3.F,B3.F.grant.by):null; b3Say((g?'Free from '+g.name+'. ':'')+'Tap a Skill to use it. Tap the i to see what it does.'); }
   else if(B3.ui==='skill') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S); b3Say(can.ok?u.name+': USE it, or BACK to the list.':can.why); } }
   else if(B3.ui==='target'&&B3.pending) { const o=B3.opts[B3.sel]; b3Say(o&&o.no?o.no:B3.pending.ruckus?B3.pending.desc:'Pick who gets '+B3.pending.name+'.'); }   // b3s9: no description up here
 }

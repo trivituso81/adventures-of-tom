@@ -23,17 +23,22 @@ function b3RuckusAdd(F,beats,g,n,src,why) {
   return d;
 }
 // A landed hit by a family member on a monster: the Mix check (once per monster per round, two allies, two flavors).
-function b3RuckusMix(F,c,a,t,fl) {
+// `hot`: this hit struck a Pet Peeve or set off a Detonation. When the Mix is made, the `mix` hook fires with `hot` true if this hit or any earlier
+// hit of the round on this monster was hot (Amy's Four-Tab Binder).
+function b3RuckusMix(F,c,a,t,fl,hot) {
   if(a.side!=='party'||t.side!=='foe') return;
   const M=F.mix&&F.mix.round===F.round?F.mix:(F.mix={round:F.round,hits:{},done:{}}),L=M.hits[t.key]||(M.hits[t.key]=[]);
-  if(!M.done[t.key]&&L.some(h=>h.a!==a.key&&h.fl!==fl)) { M.done[t.key]=true; b3RuckusAdd(F,c.beats,c.g,B3_RULES.ruckus.mix,a.key,'mix'); c.beats.push({t:'mix',src:a.key,tgt:t.key,g:c.g}); }
-  L.push({a:a.key,fl});
+  if(!M.done[t.key]&&L.some(h=>h.a!==a.key&&h.fl!==fl)) { M.done[t.key]=true; b3RuckusAdd(F,c.beats,c.g,B3_RULES.ruckus.mix,a.key,'mix'); c.beats.push({t:'mix',src:a.key,tgt:t.key,g:c.g});
+    b3Fire(F,'mix',{src:a,tgt:t,hot:!!hot||L.some(h=>h.hot),g:c.g,c},c.beats); }
+  L.push({a:a.key,fl,hot:!!hot});
 }
 
 // ---------- The spends ----------
 const B3_RK_SLOT={s1:1,s2:2,cap:3};
 const b3RuckusName=kind=>kind==='full'?'Full Family Ruckus':'Double Team';
 const b3RuckusCost=kind=>kind==='full'?B3_RULES.ruckus.full:B3_RULES.ruckus.doubleTeam;
+// The choices a Ruckus move may take: a move aimed at a monster or a family member (Baby-Wipe Swipe) is only ever used on a monster here.
+const b3RkOpts=(F,x,S)=>b3Options(F,x,S).filter(o=>!o.no&&!(S.target==='either'&&o.ally));
 // What one member uses: their Main Vibe's Basic, or their highest unlocked Main Vibe Skill (never the Pocket Vibe's, never Pick-Me-Up).
 function b3RuckusSkill(F,x,kind) {
   if(kind==='double') return B3_SKILLS[x.basic]||null;
@@ -53,10 +58,10 @@ function b3RuckusPlan(F,u,kind) {
   const parts=[];
   for(const x of [u,partner]) {
     const S=b3RuckusSkill(F,x,kind); if(!S) return no(x.name+' has no Skill unlocked for a Full Family Ruckus yet.');
-    const opts=b3Options(F,x,S).filter(o=>!o.no); if(!opts.length) return no('Nobody to use '+S.name+' on right now.');
+    const opts=b3RkOpts(F,x,S); if(!opts.length) return no('Nobody to use '+S.name+' on right now.');
     parts.push({unit:x,S,opts});
   }
-  const foeOpts=parts.some(p=>p.S.target==='foe')?b3Live(F,'foe').map(f=>({key:f.key,label:f.name,units:[f]})):[];
+  const foeOpts=parts.some(p=>p.S.target==='foe'||p.S.target==='either')?b3Live(F,'foe').map(f=>({key:f.key,label:f.name,units:[f]})):[];
   return {ok:true,why:'',kind,cost,partner,parts,foeOpts};
 }
 // Spends the gauge. optKey: the monster the player picked (used by every move aimed at one monster; any other move picks its own best choice).
@@ -75,10 +80,10 @@ function b3Ruckus(F,u,kind,optKey) {
     const x=pt.unit,S=pt.S;
     if(!b3Alive(x)) return;
     // The first move's choice was made before anything happened. The partner's is made now: the monster may be gone.
-    const opts=i===0?pt.opts:b3Options(F,x,S).filter(o=>!o.no); if(!opts.length) return;
+    const opts=i===0?pt.opts:b3RkOpts(F,x,S); if(!opts.length) return;
     const O=opts.find(o=>o.key===optKey)||opts.slice().sort((a,b)=>b3AutoScore(F,x,S,b)-b3AutoScore(F,x,S,a))[0];
     Object.assign(c,{actor:x,src:x,skill:S,targets:O.units.slice(),hit:[],landed:0,didDamage:false,tags:S.tags||[],g:'pre'});
-    const act={t:'act',src:x.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',hits:Math.max(1,S.hits||1),tgts:O.units.map(t=>t.key),free:true,via:'ruckus',g:'pre'};
+    const act={t:'act',src:x.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',hits:b3HitsOf(x,S),tgts:O.units.map(t=>t.key),free:true,via:'ruckus',g:'pre'};
     if(ran.length) act.part2=true;
     beats.push(act);
     b3Fire(F,'actionDeclared',{src:x,g:'pre'},beats);
@@ -89,7 +94,7 @@ function b3Ruckus(F,u,kind,optKey) {
     b3DoubleCoat(F,c);
     b3KoCheck(F,c);
     for(const t of c.hit) if(!allHit.includes(t)) allHit.push(t);
-    c.gOff+=Math.max(1,S.hits||1);
+    c.gOff+=b3HitsOf(x,S);
     ran.push(x);
   });
   Object.assign(c,{actor:u,src:u,skill:P.parts[0].S,hit:allHit,g:'post'});
@@ -114,7 +119,7 @@ function b3AutoRuckus(F,u) {
     if(kind==='double'&&b3Auto(F,u,S=>S.slot!=='basic')) continue;
     // Aim at the monster the first move aimed at one monster would pick, or the first monster.
     let target=null;
-    if(P.foeOpts.length) { const pt=P.parts.find(p=>p.S.target==='foe'),sc=o=>b3AutoScore(F,pt.unit,pt.S,pt.opts.find(q=>q.key===o.key)||o);
+    if(P.foeOpts.length) { const pt=P.parts.find(p=>p.S.target==='foe'||p.S.target==='either'),sc=o=>b3AutoScore(F,pt.unit,pt.S,pt.opts.find(q=>q.key===o.key)||o);
       target=P.foeOpts.slice().sort((a,b)=>sc(b)-sc(a))[0].key; }
     return {kind,target};
   }

@@ -107,7 +107,7 @@ module.exports=function(T) {
   // 76. The spec's pacing: 90 Main VP a chapter masters the first Vibe around chapter 9 and all three around chapter 18
   { const L=newL('tom'); let first=0,all=0; for(let ch=1;ch<=20;ch++) { award('tom',L,90); if(!first&&L.vp.tom_flier>=800) first=ch; if(!all&&CAST.tom.vibes.every(v=>L.vp[v]>=800)) all=ch; }
     ok(first===9&&all===18,'first Vibe mastered in chapter '+first+' (9), all three in chapter '+all+' (18)'); }
-  { const B=book(1); B.amy={main:'x'}; const r=awardAll(B,10); ok(Object.keys(r).sort().join()==='deedee,grace,rose,tom'&&B.grace.vp.grace_squishy===10&&B.rose.vp.rose_cozy===5,'everyone with a kit earns after a fight; someone with no kit yet is skipped'); }
+  { const B=book(1); B.michael={main:'x'}; const r=awardAll(B,10); ok(Object.keys(r).sort().join()==='deedee,grace,rose,tom'&&B.grace.vp.grace_squishy===10&&B.rose.vp.rose_cozy===5,'everyone with a kit earns after a fight; someone with no kit yet is skipped'); }
 
   // 77. What a loadout gives: Skills by Rank, Main first then Pocket; the Basic and the Trait from the Main Vibe only
   { const L=newL('tom',1); ok(J(kit('tom',L).skills)===J(['zone_one_blockade','controller_toss'])&&kit('tom',L).basic==='lounge_pass_flex','Rank 1: Skill 1 of the Main Vibe, then Skill 1 of the Pocket Vibe: '+J(kit('tom',L).skills));
