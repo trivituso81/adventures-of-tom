@@ -13426,7 +13426,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/index.html, play to a scene where Deedee says \"my favorite son\" to Tom. While she talks she should no longer shake: she lifts 1 pixel twice a second. If another effect still looks too fast, tell me which one and in which scene.",
@@ -13476,8 +13476,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T19:27:27.054Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-startmore",
