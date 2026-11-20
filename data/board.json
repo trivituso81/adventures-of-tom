@@ -844,7 +844,7 @@
    "title": "Battle system stage 10: Amy, Justin and Olivia kits",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s10",
    "next": "Built. Amy, Justin and Olivia complete (42 lines, Lab fight NEW 10). Next: c-b3s11.",
    "blocks": [],
@@ -870,6 +870,10 @@
     {
      "d": "2026-11-20",
      "t": "Built: Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) complete, 42 lines, Lab fight NEW 10. 172 new rule checks (1354 in all), 200 simulator fights won, screen test in portrait and landscape with frames looked at. Calls made are rows in claude/battle-build.md. Next: c-b3s11."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s10: New battle: Amy, Justin and Olivia join the Battle Lab with both of their Vibes"
     }
    ],
    "prompt": {
@@ -881,7 +885,8 @@
     "effort": "high",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9c.md, then build stage 10 (Amy, Justin and Olivia) of the new battle system. You have my full permission to access the repo. Board card c-b3s10. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s10 (it moves this card to In progress and links your conversation)."
    },
-   "after": "nothing for Tom: c-b3s11"
+   "after": "nothing for Tom: c-b3s11",
+   "done": "2026-11-20"
   },
   {
    "id": "c-b3s11",
@@ -908,6 +913,10 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose boss mechanics are designed in the session)",
     "effort": "high (boss mechanics that the acts cannot express need their own functions)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s10.md, then build stage 11 (bestiary chapters 2 to 4 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s11. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s11 (it moves this card to In progress and links your conversation)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCjNHpXhsjcnPB8w",
+    "opening": "unknown"
    }
   },
   {
@@ -12227,6 +12236,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCjNHpXhsjcnPB8w",
+   "title": "Battle system stage 10: Amy, Justin and Olivia kits",
+   "first": "2026-11-20T08:08:41-08:00",
+   "last": "2026-11-20T08:09:13-08:00",
+   "tags": [
+    "b3s10"
+   ],
+   "cards": [
+    "c-b3s10",
+    "c-b3s11"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFEKCHz2sXbR5Y4xGu",
    "title": "Board: empty bar at the top in landscape on the Duo",
    "first": "2026-11-20T08:02:11-08:00",
@@ -13323,8 +13345,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a2e04330e9389d69926939356b32fa89153e64f5",
- "synced_at": "2026-11-20T16:08:33+00:00",
+ "synced": "4e7e90b01ab44776ab5f03949740051ed1b899cc",
+ "synced_at": "2026-11-20T16:09:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
