@@ -13434,8 +13434,7 @@
   {
    "id": "c-startmore-test",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "theme": "Tools",
    "tag": "startmore-test",
    "auto": true,
@@ -13446,13 +13445,25 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDYWGobqKMTx2h2wbX",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by startmore. Waits on Set up two more START tasks (Opus medium, Sonnet high)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Set up two more START tasks (Opus medium, Sonnet high) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -13463,7 +13474,8 @@
     "model": "Claude Sonnet 5.5 (row B: the steps are written here)",
     "effort": "medium (two known checks)",
     "text": "Read CLAUDE.md. In data/board.json add two tiny Claude cards in Up next (col up), theme Tools, each with start: true, after: \"nothing for Tom: end\", blocks [], a prompt with before [\"Nothing to do first.\"], and the tag equal to the build name. Card 1: id c-startmore-opus, tag startmore-opus, model Claude Opus 5.5, effort medium. Card 2: id c-startmore-sonnet, tag startmore-sonnet, model Claude Sonnet 5.5, effort high. Each prompt text is: Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. You have my full permission to access the repo. Run python3 tools/board_check.py, then push the board change as the build board-startmore-test; the board job starts both cards. Write on this card's history that both were added, then push. If a later look shows START failed or START is not set up on either card, write the reason on this card and add a Tom card for it. You have my full permission to access the repo."
-   }
+   },
+   "started_at": "2026-11-20T17:41:19+00:00"
   },
   {
    "id": "c-fix-gem-canon01play-2",
@@ -15255,8 +15267,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "ef6753f02ca9d434b5d61153270872028f80f37c",
- "synced_at": "2026-11-20T17:38:12+00:00",
+ "synced": "210e1a2cd97b26b8d791c49c4badefce0c4302cd",
+ "synced_at": "2026-11-20T17:41:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -15270,14 +15282,14 @@
    "model": "Claude Opus 5.5",
    "effort": "medium",
    "env": "OPUS_MEDIUM",
-   "enabled": false
+   "enabled": true
   },
   {
    "id": "sonnet-high",
    "model": "Claude Sonnet 5.5",
    "effort": "high",
    "env": "SONNET_HIGH",
-   "enabled": false
+   "enabled": true
   }
  ]
 }
