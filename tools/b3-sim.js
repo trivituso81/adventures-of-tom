@@ -263,6 +263,8 @@ function check() {
   require('./b3-check-s9c.js')({G,ok,near,play,noCrit});
   // Stage 10's groups: Amy, Justin and Olivia complete (Fitness Queen, Classroom Boss, Basement Boss, Live Wire, Rope Champ, Working Mom).
   require('./b3-check-s10.js')({G,ok,near,play,noCrit});
+  // Stage 11's groups: the chapter 2 to 4 bestiary (16 monsters, three bosses), the dive, Skill Lock, ACTION! and CUT!.
+  require('./b3-check-s11.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

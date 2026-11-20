@@ -270,7 +270,44 @@ const B3_STATUS={
   // "Bring a Jacket!" Ward: 20% of Max HP back in all over 3 turns (7% a turn: my call, the spec says "20% HP regen (3t)"), and the
   // first knock-out is held at 1 HP. The `survive` flag is used up the first time it saves someone; the regen goes on.
   jacket:{id:'jacket',name:'Extra Jacket',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[],flags:['survive'],regen:.07,
-    short:'JACKET',color:'#8fe3a6',weight:7,desc:'Deedee bundled them in an extra jacket: heals a little at the start of each turn, and the first hit that would knock them out leaves them on 1 HP.'}
+    short:'JACKET',color:'#8fe3a6',weight:7,desc:'Deedee bundled them in an extra jacket: heals a little at the start of each turn, and the first hit that would knock them out leaves them on 1 HP.'},
+  // ---- Enemy statuses: chapters 2 to 4 (stage 11, bestiary v11 section 2) ----
+  // Starting evasion buffs: each is jitterflight under its own name (20% Evasion, 2 turns, can be stripped).
+  paper_swirl:{id:'paper_swirl',name:'Paper Swirl',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'paperSwirl',v:.20}],flags:[],
+    short:'SWIRL',color:'#e8e2c4',weight:4,desc:'A whirl of loose tickets: dodges 20% of attacks. It can be stripped.'},
+  choppy_bob:{id:'choppy_bob',name:'Choppy Bob',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'choppyBob',v:.20}],flags:[],
+    short:'BOBBING',color:'#e6a06a',weight:4,desc:'Bobbing on the waves: dodges 20% of attacks. It can be stripped.'},
+  rafter_hover:{id:'rafter_hover',name:'Rafter Hover',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'rafterHover',v:.20}],flags:[],
+    short:'HOVER',color:'#cbb8e8',weight:4,desc:'Hovering up in the rafters: dodges 20% of attacks. It can be stripped.'},
+  stage_mist:{id:'stage_mist',name:'Stage Mist',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'stageMist',v:.20}],flags:[],
+    short:'MIST',color:'#d4dfe8',weight:4,desc:'Hiding in the fog machine\u2019s mist: dodges 20% of attacks. It can be stripped.'},
+  // Elites that start braced: Guard Stance under their own names (25% less damage; Panic Boil! or a Break ends it).
+  asphalt_crust:{id:'asphalt_crust',name:'Asphalt Crust',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#9a8f86',weight:5,desc:'A hard crust of old asphalt: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  sunken_timber:{id:'sunken_timber',name:'Sunken Timber',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#b99a72',weight:5,desc:'Wedged in like a sunken log: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  posterboard_shell:{id:'posterboard_shell',name:'Posterboard Shell',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#f0e2a8',weight:5,desc:'Hiding behind a posterboard shell: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  // The Big Shake, below half HP: Guard Stance and Mend 5% together ("Faultline Guard"). The stance and the Mend are two statuses so the
+  // party's answers differ: Panic Boil! drops the stance, a buff strip or Nara's steal takes the Mend.
+  faultline_guard:{id:'faultline_guard',name:'Faultline Guard',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#c8a27a',weight:5,desc:'The ground locks around it: takes 25% less damage. Panic Boil!, a Break or a pull out of guard ends it.'},
+  faultline_mend:{id:'faultline_mend',name:'Faultline Mend',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],regen:.05,
+    short:'MEND',color:'#8fe3a6',weight:5,desc:'Cracks seal over: it heals 5% of its Max HP at the start of each turn. It can be stripped.'},
+  // Canyon Coyote's Pack Howl: every monster gets it. The Director's ACTION! gives every monster a Speed bonus.
+  pack_howl:{id:'pack_howl',name:'Pack Howl',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'packHowl',v:.15}],flags:[],
+    short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'The pack is fired up: 15% more Attack. It can be stripped.'},
+  action_speed:{id:'action_speed',name:'ACTION!',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'actionSpeed',v:.15}],flags:[],
+    short:'SPEED UP',color:'#9be39a',weight:4,desc:'\u201cAnd... ACTION!\u201d: 15% faster. It can be stripped.'},
+  // Snag's Hook Catch and The Director's Studio Notes (the family's side of it).
+  hooked:{id:'hooked',name:'Hooked',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'hooked',v:-.15}],flags:[],
+    short:'HOOKED',color:'#b8c9d8',weight:3,desc:'Caught on a fishing hook: 15% slower.'},
+  studio_notes:{id:'studio_notes',name:'Studio Notes',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'studioNotes',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#d7a4f5',weight:4,desc:'The director has notes about the stance: 15% less Defense.'},
+  // Skill Lock (bestiary 1.1): a Mental status. The family member cannot use the Skills that come from their Pocket Vibe
+  // (engine/b3-core.js b3CanUse reads the `skillLock` flag). Their Main Vibe's Basic and Skills still work.
+  skill_lock:{id:'skill_lock',name:'Skill Lock',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[],flags:['skillLock'],
+    short:'LOCKED',color:'#c9c9d6',weight:7,desc:'Cannot use the Skills from their Pocket Vibe. Their Basic and their Main Vibe Skills still work.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

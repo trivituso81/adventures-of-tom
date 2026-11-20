@@ -364,6 +364,8 @@ function b3GrantSkills(F,u,G) {
 }
 function b3CanUse(F,u,S) {
   if(!S) return {ok:false,why:'That move is not built yet.'};
+  // Skill Lock (a Mental status from a monster): the Skills that come from the Pocket Vibe cannot be used. The Basic and the Main Vibe's Skills can.
+  if(u.pocketSkills&&u.pocketSkills.includes(S.id)&&b3HasFlag(u,'skillLock')) return {ok:false,why:u.name+' is Skill Locked: the Pocket Vibe Skills cannot be used.'};
   const c=b3Cost(F,u,S);
   if(S.cooldown&&u.cd[S.id]>F.round) return {ok:false,why:S.name+' needs a rest. '+u.name+' can use it again in round '+u.cd[S.id]+'.'};
   if(c>u.pep) return {ok:false,why:'Not enough Pep. '+S.name+' costs '+c+'. '+u.name+' has '+u.pep+'.'};

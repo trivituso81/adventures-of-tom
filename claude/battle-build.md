@@ -50,8 +50,20 @@ Rules for every stage's session:
 | 9b | TNB complete: Ceramicist and Longboarder (2 Traits, 2 Basics, 4 Skills, 2 Capstones, 4 Quirks). New seams: clay shields and Fired Glaze, the Grand Amphora vessel, `allyMods`, the `basic` and `shielded` conditions, a Skill's own `rec`, `tgtAlly`, the `razzleDet` and `blockDebuff` flags, `slowestAlly`, the `vitrify`, `double` and `rebalance` ops. Lab fight NEW 7 (TNB in Deedee's place). | Pushed 2026-11-19 | `b3s9b` | Nothing is asked. If he plays anyway: NEW BATTLE > NEW 7: TNB JOINS; VIBES AND RANKS to make Longboarder TNB's Main. |
 | 9c | Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) Sig Vibes (28 lines), the late joiners' Vibe Point pool (TNB moved onto it), Lab fights NEW 8 and NEW 9. Ends stage 9. | Pushed 2026-11-20 | `b3s9c` | Nothing is asked. |
 | 10 | Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) Sig Vibes (42 lines), Lab fight NEW 10 (Tom, Amy, Justin, Olivia). All 10 characters now have both Sig Vibes | Pushed 2026-11-20 | `b3s10` | Nothing is asked. |
-| 11 | Bestiary chapters 2 to 4 with their bosses (architecture section 5) | Not started (card c-b3s11) | `b3s11` | |
-| 12 to 23 | See architecture section 5 | Not started | | |
+| 11 | Bestiary chapters 2 to 4 with their bosses: 15 regular monsters, The Big Shake, Old Iron-Gill, The Director's Cut, 17 formations, chapter 2's explicit stat blocks, Lab fights NEW 11 to NEW 27. New seams: `surfaces`, `stopByIntercept`, op `row`, summon `ifNoFront`, Skill Lock, 14 statuses | Pushed 2026-11-20 | `b3s11` | Nothing is asked. |
+| 12 | Bestiary chapters 5 to 7 (architecture section 5) | Not started (card c-b3s12) | `b3s12` | |
+| 13 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 11 results (facts)
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 1549, FAILS: []. 195 more than stage 10, in `tools/b3-check-s11.js`: the bestiary rows and their numbers, `hp3` and `hp4`, formation VP, the 17 Lab fights, the 14 statuses, the Skill Lock gate, Iron-Gill's dive, surfacing, called sock and 50% dive, Big Shake's Faultline Guard pick, Scene One, ACTION!, CUT! (stun, intercept soak, Blind miss, interrupt), Pack Howl, Brown Haze, Pea Souper. |
+| Simulator, 100 fights each, plain player | `new11` to `new27`: all won, 0 errors. Rounds to win: normal fights 0.7 to 3.5 (Tar Pit Blob 3.5, Snag 3.0), Big Shake 4.7, Old Iron-Gill 4.1, The Director's Cut 4.4, Cue Card Crab 4.7. Bosses are under the bestiary's 5 to 7 target, as chapter 1's Big One already was (3.5); HP kept as the bestiary prints it. Stage 14 owns balance. |
+| `python3 tools/b3_test.py s11` | FAILS: [] (portrait then landscape): Iron-Gill dives and surfaces on screen, the called Soggy Sock, the Director's ACTION! and CUT!, Big Shake's guard, Boom Moth's Skill Lock, Clapper's Scene One. Frames looked at: `tools/shots/b3-s11.png`, `b3-s11-land.png`, `b3-s11-dive-portrait.png`, `b3-s11-surface-portrait.png`. |
+| Bugs found on the way | A Toasty ending mid-loop crashed `b3EndTurn` (the status loop now skips a status that is not turn-counted). |
+| `unused_voice.py` | No line or clip added. |
+| Tom's phone | Not played, not asked for. |
 
 ## Stage 10 results (facts)
 
@@ -156,6 +168,14 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | 10 | | Cadence resets on any Support turn of Olivia's (also from Working Mom in the Pocket); Muscle Memory switches that off. Criss-Cross and Regional Freestyle add 15% power per hit past the second. | Reset only on a Support Skill with no attack. |
 | 10 | | Nap-Window Efficiency is 20% less Recovery on Support Skills. Baby-Wipe Swipe on a family member clears one minor debuff (weight 4 or less) and heals 10%; it is offered on every monster and every family member, Olivia too. A Ruckus Baby-Wipe is only used on a monster. | Other numbers; a Ruckus ally pick. |
 | 10 | | Childproofed Locks picks a random family member, Olivia included, once per action. | Never Olivia. |
+| 11 | Faultline Guard is cast whenever The Big Shake is below 50% and not already braced (the rotation picks it); Big Rumble follows. | Cast once, at the first turn below 50%. |
+| 11 | ACTION! pulls every monster 25 ticks, the Director included, and adds 1 to 2 Extra Extras in front. | Only the adds move. |
+| 11 | Clapper Snapper's Scene One pulls a dice-picked other monster 15 ticks, once. | Always the nearest to act. |
+| 11 | Iron-Gill surfaces after its Deep Dive, or at its next turn if a Break cancelled the dive; its dive below 50% is a second act with its own Deep Dive. | One dive act for both. |
+| 11 | CUT! only misses by Blind, an intercept or an interrupt (Spooked is not built). With an intercept the interceptor takes the damage but the stun and push do not land (`stopByIntercept`). | The stun lands on the Marked family member anyway. |
+| 11 | "Opens round 1" is a `once` act on the monster's first turn, not a wait of 0. | Starts at 0 on the bar. |
+| 11 | Chapter 2 has 5 normal formations (the bestiary's VP table counts 6 fights). The Boat Angler answer to Iron-Gill's dive waits for Boppy's third Vibe. | A sixth formation; a stand-in answer now. |
+| 11 | Skill Lock on a family member blocks only the Pocket Vibe Skills (Boom Mic Moth's Mic Feedback, 1 turn). | Blocks all Skills. |
 | 9c | "Chip" for the stomach Attack bonus means a monster's Sizzle hit or Spiced Up; burn ticks do not trigger it. | Burn ticks too. |
 | 9c | Five-Alarm Burn is a second tick status that ends with Toasty; Toasty stays, so Detonations still see it. | It replaces Toasty. |
 | 9c | Pickle Jar Bomb is standard at the all-monsters share; The Ghost One is heavy at that share plus 2 Sizzle ticks. No Reach for Water counts only Boppy's own Steam Clouds. | Light or standard; any Steam Cloud. |
@@ -290,31 +310,28 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 11)
+## Next conversation (stage 12)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 10 are in `claude/next-addendum-b3s10.md`; where it and this file differ, it wins until stage 11 folds it in.
+Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 11 are in `claude/next-addendum-b3s11.md`; where it and this file differ, it wins until stage 12 folds it in.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 11: the bestiary for chapters 2 to 4 with their bosses (`claude/bestiary-v11.md`), including the explicit stat blocks for chapter 2's five regular enemies, and Lab fights for each formation and boss. Its `## b3s11` heading ends stage 11. |
+| 1 | What it will do | Builds stage 12: the bestiary for chapters 5 to 7 with their bosses (`claude/bestiary-v11.md`, architecture section 5), and Lab fights for each formation and boss. Its `## b3s12` heading ends stage 12. |
 | 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
-| 3 | Model | Claude Sonnet 5.5 (row C: boss mechanics that need their own function are designed in the session). |
-| 4 | Effort level | High. |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s10.md, then build stage 11 (bestiary chapters 2 to 4 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s11. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s11 (it moves this card to In progress and links your conversation).` |
+| 3 | Model | Claude Sonnet 5.5 (row C: the steps for the new boss mechanics are not written; the recipe from stage 11 is). |
+| 4 | Effort level | High (three bosses with their own rules, nothing written to follow for those). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s11.md, then build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s12. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s12 (it moves this card to In progress and links your conversation).` |
 
-If a session fails stage 11 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 12 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
-Facts the next session needs (more in `docs/handoff/b3s8.md`):
+Facts the next session needs (more in `docs/handoff/b3s11.md`):
 
-- Clips: a move or act plays from a clip by a data row only (`anim:{kind:'clip',clip:'<id>'[,at:share]}`); `wind:'<clip>'` on a telegraph; body states in `B3_BODY_CLIPS` (`data/b3-clips.js`). A new character needs rows there (idle, guard, hit, dodge, ko, victory, run, give, cast) or it uses the old painted poses. Docs: `docs/BATTLE3.md` "Clips in Battle 3".
-- A clip move lands its hit later than a default move (it waits for its clip, up to 2.5 s): a screen test that reads state right after a move must poll. The hit beat has no `src` field.
-- `engine/clips.js` `bclipWanted` returns `b3cWanted()` while `B3.active`, and `engine/painted.js` releases `clip_` atlases 3 s after last use in a Battle 3 fight.
-- A preview (`b3Preview`) runs the real rules on a copy (`b3Clone`) with `F.preview` set; keep any new rule's state inside `F` or it leaks into previews. `F.preview` is read only by `b3Rand` and the crit roll.
-- Rose Mode: `b7Diff().pictures` and `.recommend`. The pictures file wraps `b3RenderCmd` and `b3PvHtml`, with the words versions in `engine/b3-ui.js` as the fallback; a new list or box needs both.
-- Picture CSS gotcha: `.bp-ic .bi{width:100%;height:100%}` blows up any extra picture inside a `.bp-ic`; give the wrapper an explicit pixel size (see `b3pStar`, `.b3p-ef`).
-- A touch test sends `pointerdown` with `pointerType:'touch'` and then a click (the `TAP` string in `stage7` of `tools/b3_test.py`); a Playwright mouse click is a mouse.
-- Test sandbox rows in a rules test are unique-named (`t7_*` in `tools/b3-check-s7.js`), deleted at the end, and `b3CheckData()` is compared to its start value.
-- `--rec` in `tools/b3-sim.js` plays with the recommended move; `new6 300 --rank=5 --swap=tom,grace --foehp=3` still uses every Capstone with the simple player.
-- Battle 2's pictures, icons and CSS are reused by `engine/b3-pictures.js`; do not rename `bp*` helpers.
+- A boss mechanic is first tried as data (acts, `when`, `then` and `after`, status rows, effects ops); stage 11 needed only five small seams (see `docs/BATTLE3.md` "What stage 11 holds").
+- Every wind-up act names its own follow-up in `after`; a boss with two dive or charge thresholds needs two copies of the follow-up.
+- `b3Who` target keys from a monster's view: `foes` is the family, `allies` is every monster including itself, `otherAllies` excludes itself.
+- A browser test that pokes a boss's HP to a threshold must raise its max HP too, or the boss dies in one round (`s11_run` in `tools/b3_test.py`).
+- A Break can cancel a dive or a charge, so a screen test asserts on either act name.
+- `console.error` is stubbed inside the sim vm: throw to see an error.
+- Clips: unchanged from stage 8 (`docs/BATTLE3.md` "Clips in Battle 3"); chapter 2 to 4 monsters have none and use default animations.
 
 Each stage ends by updating the stage board above, writing `docs/handoff/<tag>.md` in the repo, and updating item -8 in `claude/next.md`.

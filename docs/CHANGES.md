@@ -1,3 +1,12 @@
+## b3s11 (2026-11-20): New battle: the chapter 2, 3 and 4 monsters and their three bosses join the Battle Lab
+
+- Tom (11-20): "build stage 11 (bestiary chapters 2 to 4 with their bosses) of the new battle system." Built from `claude/bestiary-v11.md`: 15 regular monsters (Smoglet, Ticket Flurry, Canyon Coyote, Gridlock, Tar Pit Blob; Soggy Sock, Bobber, Tangle, Snag; Extra Extra, Boom Mic Moth, Clapper Snapper, Fog Wisp, Cue Card Crab) and three bosses (The Big Shake, Old Iron-Gill, The Director's Cut) in `data/b3-foes-ch02.js`, `data/b3-foes-ch03.js` and `data/b3-foes-ch04.js`, with their 17 formations. Chapter 2's five regular monsters now have explicit stat blocks in data (the bestiary left them to a formula).
+- Lab: NEW 11 to NEW 27, one fight for every formation and boss (chapter 2 party Tom, TNB, Nara at level 4 in front of the Griffith backdrop; chapter 3 Tom, Grace, Rose, Boppy at level 7 at the pond; chapter 4 Tom, TNB, Nara at level 9 in the lot).
+- New rule pieces (docs/BATTLE3.md "What stage 11 holds"): foe flag `surfaces` (Iron-Gill comes up from a dive on its next turn); act flag `stopByIntercept` (The Director's CUT! soaked by an intercept loses its stun and push); op `row` (a monster changes its own row); summon `ifNoFront`; targets `otherAllies` and `randomOtherAlly` from a monster's view; Skill Lock (`skillLock` flag stops Pocket Vibe Skills); 14 new statuses in `data/b3-status.js`.
+- Fixed on the way: a Toasty ending in the middle of the end-of-turn loop (Five-Alarm Burn) crashed `b3EndTurn`; the loop now skips a status that is not turn-counted.
+- Screen: a monster that changes row moves to a free spot of the new row (`b3FreeSpot`, `row` beat in `engine/b3-play.js`), smaller going back.
+- No picture or clip work (every act uses `anim:{kind:'default'}`), no voice lines added.
+- Tests: `node tools/b3-sim.js check` (1549 checks, 195 new in `tools/b3-check-s11.js`, FAILS: []); the 17 new Lab fights each 100 simulated, all won, 0 errors (Big Shake 4.7 rounds, Iron-Gill 4.1, Director's Cut 4.4, Cue Card Crab 4.7); `python3 tools/b3_test.py s11` (portrait and landscape; frames `tools/shots/b3-s11*.png`). Handoff: docs/handoff/b3s11.md.
 ## gem-polish06 (2026-11-20): Tom gives Deedee real boss advice before the Big One
 
 - Gemini chapter 1 report POLISH-06 (claude/ch1-gemini-tracker.md). Still on main. Tom's answer on the board: keep "Mom", drop "you don't just walk up to a boss" (no meaning), have Tom share boss knowledge as advice.

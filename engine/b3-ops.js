@@ -40,6 +40,10 @@ function b3Who(F,c,to) {
   if(to==='targetNeighbor') { const p=c.tgt||c.targets[0]; return p?b3Adjacent(F,p).sort((x,y)=>x.slot-y.slot).slice(0,1):[]; }
   if(to==='linked') return b3Live(F,b3Other(c.actor.side)).filter(o=>o!==c.tgt&&o.st.copper_link);
   if(to==='randomAlly') { const L=b3Live(F,c.actor.side); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
+  // Stage 11. otherAllies: every other monster on the actor's side.  randomOtherAlly: one of them picked by the fight's own dice
+  // (Scene One, Marker! pulls one other monster forward).
+  if(to==='otherAllies') return b3Live(F,c.actor.side).filter(o=>o!==c.actor);
+  if(to==='randomOtherAlly') { const L=b3Live(F,c.actor.side).filter(o=>o!==c.actor); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -151,9 +155,18 @@ const B3_OPS={
   // through a row change. It is on the ally the act AIMED at, even when someone stepped in and took the act's own hit.
   mark(F,c,e) { const t=c.targets[0]; if(t&&b3Alive(t)) c.actor.mark=t.key; },
   // summon: calls n adds of one kind into a row (bestiary 1.1 "Adds"). A full row takes no more.
+  // `ifNoFront`: only when no other monster stands in the Front row (Old Iron-Gill's Soggy Sock, called as it dives behind it).
   summon(F,c,e) {
+    if(e.ifNoFront&&b3Live(F,c.actor.side).some(o=>o.row!=='back')) return;
     for(let i=0;i<(e.n||1);i++) { const u=b3Summon(F,e.id,e.row,e.hp); if(!u) break;
       c.beats.push({t:'summon',src:c.actor.key,tgt:u.key,id:u.id,name:u.name,row:u.row,hp:u.hp,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); }
+  },
+  // row: a monster changes its own row (Old Iron-Gill's Inlet Submerge and Deep Dive). `row` is 'front' or 'back'. Moving family members
+  // between rows is a different thing (the trade, spec 2.1) and is not done here.
+  row(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) { if(t.side!=='foe'||t.row===e.row) continue;
+      t.row=e.row; b3Reslot(F);
+      c.beats.push({t:'row',tgt:t.key,row:e.row,g:c.g}); }
   },
   // hazard: lays a B3_HAZARDS row on one side's floor. Laying the same one again replaces it.
   hazard(F,c,e) {

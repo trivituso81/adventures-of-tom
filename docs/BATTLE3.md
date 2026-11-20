@@ -132,6 +132,18 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 
 Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at TNB himself; the Kiln Firing, Waymo flash and Baxter Hill waves are standard, standard and heavy at the all-monsters share (the spec prints no tier for the first two); Kiln Glow, Fresh Ride and the e-bike last the common 2 turns; the Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out; Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind; Kintsugi Gold Seam heals once per action for each member and lets a hit of a flavor that has no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!; Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%") and Carving Momentum takes another 10% off a Basic; the "slowest ally" of TAP-Card Transfer is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the TAP-Card extra turn applies to every buff TNB puts on, his own included; Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns; "scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10).
 
+## What stage 11 holds, and what waits
+
+| In (build `b3s11`) | Waits for |
+|---|---|
+| Chapters 2 to 4: `data/b3-foes-ch02.js` (Smoglet, Ticket Flurry, Canyon Coyote, Gridlock, Tar Pit Blob, The Big Shake), `data/b3-foes-ch03.js` (Soggy Sock, Bobber, Tangle, Snag, Old Iron-Gill), `data/b3-foes-ch04.js` (Extra Extra, Boom Mic Moth, Clapper Snapper, Fog Wisp, Cue Card Crab, The Director's Cut), with 17 formations (`vp` per fight, 8 to 10 normal, 26 to 30 boss). Boss HP by party size (`hp3`, `hp4`). | Chapters 5 to 10 and the bonus chapter (stages 12 and 13). |
+| Boss mechanics as data: Big Shake's Aftershock and Faultline Guard (below 50% it braces, then Big Rumble); Iron-Gill's dive (`inlet_submerge` every 3rd turn, a second dive once below 50%, each Deep Dive naming its own wind-up in `after`), its `surfaces` flag and the called Soggy Sock (`summon ifNoFront`); the Director's ACTION! (adds, pull, Action Speed) and CUT! (`stopByIntercept`). | Spooked (a way for CUT! to miss) and the Boppy Boat Angler answer (Boppy's third Vibe). |
+| New seams: foe flag `surfaces`; act flag `stopByIntercept`; op `row`; summon `ifNoFront`; targets `otherAllies`, `randomOtherAlly`; Skill Lock (`skillLock`, read in `b3CanUse`, blocks only `pocketSkills`); 14 statuses (paper_swirl, choppy_bob, rafter_hover, stage_mist, asphalt_crust, sunken_timber, posterboard_shell, faultline_guard, faultline_mend, pack_howl, action_speed, hooked, studio_notes, skill_lock). | |
+| Play layer: the `row` beat (a monster moves to a free spot of its new row). | |
+| Lab: NEW 11 to NEW 27 (one fight per formation and boss). | |
+
+Calls made in stage 11 (none confirmed by Tom) are rows in `claude/battle-build.md` "Calls made that Tom has not confirmed".
+
 ## What stage 10 holds, and what waits
 
 | In (build `b3s10`) | Waits for |

@@ -1286,6 +1286,62 @@ def stage8(pg,lab,landscape=False):
             need(not any(c['id']=='deedee_windex' for h in H for c in h['cur']),'that move was played by the default animation, not the missing clip')
         pg.evaluate("()=>{ const a=PAINTED.clip_deedee_windex; a.src=window.__wsrc; a.failed=false; }")
         pg.click('#b3-exit'); pg.wait_for_timeout(500)
+# ---------- Stage 11: chapters 2 to 4 (the dive, ACTION! and CUT!, Faultline Guard, Skill Lock, Scene One) ----------
+S11_WRAP="""()=>{ window.__s11={rows:[],summons:[],acts:[],statuses:[],pulls:[],soaks:[],misses:[]}; if(!window.__s11wrap){ window.__s11wrap=1; const os=b3Show; b3Show=function(b){ const H=window.__s11;
+  if(b.t==='row') H.rows.push(b.tgt+':'+b.row); if(b.t==='summon') H.summons.push(b.id); if(b.t==='act'&&b.foe) H.acts.push(b.id); if(b.t==='status') H.statuses.push(b.tgt+':'+b.id);
+  if(b.t==='pull') H.pulls.push(b.tgt); if(b.t==='soak') H.soaks.push(b.id); if(b.t==='miss') H.misses.push(b.why); return os.apply(this,arguments); }; } }"""
+def s11_run(pg,lab,fid,poke,frames,every=550,limit=360,watch=None,landscape=False):
+    """One chapter 2 to 4 fight played by the simple player on screen, with a poke at the start; returns what the screen was told."""
+    idx=lab.index(fid); pg.evaluate("()=>{ B7.speed=2; }"); pg.evaluate(S11_WRAP)
+    start(pg,idx,{'seed':SEED,'auto':True})
+    if poke: pg.evaluate(poke)
+    seen=set()
+    for k in range(limit):
+        pg.wait_for_timeout(every)
+        if len(frames)<40: frames.append(shot(pg))
+        for name,cond in (watch or {}).items():
+            if name not in seen and pg.evaluate(cond): seen.add(name); pg.wait_for_timeout(350); shot(pg).save(os.path.join(OUT,f'b3-s11-{name}-'+('landscape' if landscape else 'portrait')+'.png'))
+        if pg.evaluate("()=>B3.ui==='done'"): break
+    else: fails.append(f'stage 11 {fid}: the auto fight did not finish')
+    pg.wait_for_timeout(300)
+    R=pg.evaluate("()=>Object.assign({over:B3.F.over},window.__s11)"); pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
+    return R
+def stage11(pg,lab,landscape=False):
+    S='stage 11'+(' landscape' if landscape else '')+': '; caps=[]
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R_=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    def pick(fr,n): return [R_(fr[i]) for i in sorted(set(int(j*(len(fr)-1)/max(1,n-1)) for j in range(n)))] if fr else []
+    # Old Iron-Gill: the first foe turn is a dive (it has taken turns already), then Deep Dive; it surfaces; a Soggy Sock is called
+    fr=[]; R=s11_run(pg,lab,'new21',"()=>{ B3.F.foes[0].turns=3; }",fr,every=500,landscape=landscape,watch={'dive':"()=>window.__s11.rows.some(r=>r.endsWith(':back'))",'surface':"()=>window.__s11.rows.some(r=>r.endsWith(':front'))"})
+    need(R['over']=='win',f"Old Iron-Gill fight ended {R['over']}")
+    need(any(r.endswith(':back') for r in R['rows']) and any(r.endswith(':front') for r in R['rows']),f"Iron-Gill should dive to Back and come up again: {R['rows']}")
+    need('soggysock' in R['summons'],f"Inlet Submerge should call a Soggy Sock: {R['summons']}")
+    need(any(a.startswith('inlet_submerge') for a in R['acts']) and any(a.startswith('deep_dive') for a in R['acts']),f"the dive and Deep Dive should both be played (a Break may cancel the first): {R['acts'][:12]}")
+    caps+=pick(fr,6)
+    # The Director's Cut: ACTION! at 60% HP calls Extra Extras and pulls everyone, CUT! stuns
+    fr=[]; R=s11_run(pg,lab,'new27',"()=>{ const e=B3.F.foes[0]; e.hp=Math.floor(e.maxHp*.55); }",fr,every=500,landscape=landscape,watch={'action':"()=>window.__s11.summons.includes('extra')"})
+    need(R['over']=='win',f"Director fight ended {R['over']}")
+    need('action' in R['acts'] and R['summons'].count('extra')>=1,f"ACTION! should play and call Extra Extras: {R['acts'][:10]} {R['summons']}")
+    need(any(x.endswith(':action_speed') for x in R['statuses']),'ACTION! should put its Speed buff on the monsters')
+    caps+=pick(fr,6)
+    # The Big Shake: below half HP it takes Faultline Guard
+    fr=[]; R=s11_run(pg,lab,'new16',"()=>{ const e=B3.F.foes[0]; e.maxHp*=4; e.hp=Math.floor(e.maxHp*.45); }",fr,every=500)
+    need(R['over']=='win',f"Big Shake fight ended {R['over']}")
+    need('faultline_guard' in R['acts'] and any(x.endswith(':faultline_guard') for x in R['statuses']),f"Faultline Guard should be cast and show as a status: {R['acts'][:10]}")
+    caps+=pick(fr,4)
+    # Boom Mic Moth: Mic Feedback puts Skill Lock on the family, and the lock shows on the screen
+    fr=[]; R=s11_run(pg,lab,'new23',"()=>{ for(const f of B3.F.foes) if(f.id==='boommoth') { f.actIx=1; f.spd=999; } }",fr,every=500)
+    need(R['over']=='win',f"Boom Mic Moth fight ended {R['over']}")
+    need(any(x.endswith(':skill_lock') for x in R['statuses']),f"Mic Feedback should put Skill Lock on someone: {R['acts'][:10]}")
+    caps+=pick(fr,3)
+    # Clapper Snapper opens with Scene One, Marker!
+    fr=[]; R=s11_run(pg,lab,'new24',None,fr,every=500)
+    need(R['over']=='win',f"Clapper Snapper fight ended {R['over']}")
+    need('scene_one' in R['acts'][:3],f"the Clapper Snapper should open with Scene One, Marker!: {R['acts'][:5]}")
+    caps+=pick(fr,3)
+    sheet(caps,5,os.path.join(OUT,'b3-s11'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -1293,7 +1349,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1395,6 +1451,10 @@ with sync_playwright() as pw:
     if 's10' in sys.argv or not only and len(want)==len(lab):
         print('b3s10: Amy, Justin and Olivia'); stage10(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage10(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    if 's11' in sys.argv or not only and len(want)==len(lab):
+        print('b3s11: chapters 2 to 4'); stage11(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage11(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

@@ -172,7 +172,10 @@ function b3ActUsed(F,e,A) {
 }
 // One enemy turn. Returns its beats; the state is final when it returns.
 function b3FoeTurn(F,e) {
-  const beats=[],P=b3FoePick(F,e);
+  const beats=[];
+  // A monster that dived (`surfaces`) and lost its wound-up Deep Dive to an interrupt or a Break comes back up as its turn begins.
+  if(e.D.surfaces&&e.row==='back'&&!e.charge) { e.row='front'; b3Reslot(F); beats.push({t:'row',tgt:e.key,row:'front',g:'pre'}); }
+  const P=b3FoePick(F,e);
   // Whatever Cartridge Blow showed is judged as this turn begins: it is spent whether it held or not (b3EndTurn clears it).
   if(!P) { b3EndTurn(F,e,B3_RULES.forecast,beats); return beats; }
   const A=P.act;
@@ -203,7 +206,9 @@ function b3FoeTurn(F,e) {
   if(T.hidden) beats.push({t:'miss',src:e.key,tgt:targets[0].key,why:'hidden',g:'pre'});
   else {
     if(A.power>0&&targets.length) b3DamageOp(F,c,{});
-    b3RunEffects(F,c,A.effects);
+    // `stopByIntercept` (CUT!): when someone stepped in, they take the blast and its riders do not land.
+    if(A.stopByIntercept&&c.inter&&Object.keys(c.inter).length) { for(const k of Object.keys(c.inter)) for(const ef of A.effects) if(ef.op==='status') c.beats.push({t:'soak',tgt:k,id:ef.id,g:c.g}); }
+    else b3RunEffects(F,c,A.effects);
   }
   c.g='post';
   b3KoCheck(F,c);

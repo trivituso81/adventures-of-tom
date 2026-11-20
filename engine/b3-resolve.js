@@ -122,7 +122,7 @@ function b3EndTurn(F,u,recovery,beats) {
     if(u.flusterTurn) { u.flusterTurn=false; u.pipLock=false; }
     // A pull this turn asked for after its wait was set ("Better Than Bobby!": the next turn comes sooner).
     if(u.nextPull) { const amt=b3Pull(F,u,u.nextPull); u.nextPull=0; if(amt) beats.push({t:'pull',tgt:u.key,n:amt,bar:b3BarSnap(F,null,0),g:'end'}); }
-    for(const id of Object.keys(u.st)) { const s=u.st[id]; if(s.unit!=='turn') continue;
+    for(const id of Object.keys(u.st)) { const s=u.st[id]; if(!s||s.unit!=='turn') continue;   /* a status an earlier one's end took away: Toasty ending ends Five-Alarm Burn with it (found in stage 11) */
       if(s.skip) { s.skip=false; continue; }
       if(--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'end'}); b3Fire(F,'statusEnded',{src:u,tgt:u,id,g:'end'},beats); } }
     for(const sh of u.shields.slice()) {

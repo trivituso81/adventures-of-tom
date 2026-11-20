@@ -82,11 +82,15 @@ function b3LayoutFoes() {
 // An add walks in mid-fight: it takes the free spot of its row that is furthest from everyone standing. Nobody else moves.
 // Front adds stand between the caller and the family (they are its blockers); Back adds stand behind it.
 const B3_ADD_SPOTS={front:[[246,230],[240,304],[262,267]],back:[[92,214],[70,268],[58,236]]};
-function b3LayoutAdd(key) {
-  const F=B3.F,f=b3Unit(F,key),def=b2BattleDef(MONSTERS[f.id]),base=def.scale||3,w=def.sprite[0].length,back=f.row==='back';
-  const taken=F.foes.filter(o=>o!==f&&B3P.foe[o.key]&&b3Alive(o)).map(o=>B3P.foe[o.key]);
+function b3FreeSpot(f,back) {
+  const taken=B3.F.foes.filter(o=>o!==f&&B3P.foe[o.key]&&b3Alive(o)).map(o=>B3P.foe[o.key]);
   let best=null,bd=-1;
   for(const s of B3_ADD_SPOTS[back?'back':'front']) { const d=taken.reduce((m,o)=>Math.min(m,Math.hypot((o.px-s[0])*.6,o.py-s[1])),1e9); if(d>bd) { bd=d; best=s; } }
+  return best;
+}
+function b3LayoutAdd(key) {
+  const F=B3.F,f=b3Unit(F,key),def=b2BattleDef(MONSTERS[f.id]),base=def.scale||3,w=def.sprite[0].length,back=f.row==='back';
+  const best=b3FreeSpot(f,back);
   B3P.foe[key]={def,px:best[0],py:best[1],sc:Math.max(base*.7,Math.min(base*1.3,58/w))*(back?.9:1)*(def.shrink||1)};   // an add is drawn small: 58 wide
   B3P.fa[key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0,born:B3P.t};
 }
@@ -174,6 +178,13 @@ function b3Show(b) {
   else if(b.t==='summon') {
     V.u[b.tgt]={hp:b.hp,maxHp:b.hp,pep:undefined,st:[],ko:false,sh:0,pips:0,maxPips:0};
     b3LayoutAdd(b.tgt); V.bar=b.bar; b3RenderBar(b.tgt); b3Sfx('intro'); b3Say(b.name+' joins the fight!');
+  }
+  else if(b.t==='row') {
+    // A monster changes its own row (Old Iron-Gill dives to the Back and comes up again): it keeps its size (a Back-row monster is
+    // drawn a tenth smaller) and walks to the free spot of that row furthest from everyone standing. Nobody else moves.
+    const L=B3P.foe[b.tgt],u=b3Unit(B3.F,b.tgt);
+    if(L&&u) { const spot=b3FreeSpot(u,b.row==='back'); L.px=spot[0]; L.py=spot[1]; L.sc*=b.row==='back'?.9:1/.9;
+      b3Sfx('thud'); b3Say(u.name+(b.row==='back'?' dives under the surface.':' comes back up.')); }
   }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
   else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id),H=B3_HAZARDS[b.id]; if(h) h.uses=b.left; b3Pop(b.tgt,H.pop||'SLIPPED!',H.color); b3Sfx('thud'); if(b.tgt[0]==='f') b3cFoeClip(b.tgt,'slip'); b3Say(b3Name(b.tgt)+' '+(H.verb||'slips on')+' the '+H.name.toLowerCase()+'.'); }
