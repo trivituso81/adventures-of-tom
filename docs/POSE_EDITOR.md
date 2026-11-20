@@ -28,5 +28,12 @@ For every pose Tom has checked (walking, feelings, talking; later sets the same)
 ## Applied so far (cutpolish2, 2026-11-19)
 Feelings and talking poses Tom checked are applied by `bake_story_poses.py` (`warp_figure`, `apply_pose_lines`): head above his chin line at the page's h, body at f, 12 px blend, parity within 0.16 row of the page's `wholeRows` (60 poses: Tom, TNB, Justin, Boppy, Amy). `POSE_APPLY=0` turns it off. The page's "in the game now" (manifest.py) is not yet recomputed from the applied bake.
 
+## Walking poses applied (posesizes, 2026-11-20)
+- `tools/sprite-bake/walk_sheet_frames.py` (`pose_pages`, `warp_figure`, `_apply_pages`, called from `build(cid, fix=True)`, which every walk bake uses): a walking standing pose Tom checked on the current sheet is baked as the page draws it (head above his chin line at h, body from 12 px below at f, blend between, on the figure as painted). Its two steps take the same numbers unless a step has its own checked entry (`own`). The bake keeps one body scale per sheet, so the warp is h / fref and f / fref. A direction without checked lines keeps the old head rule. `POSE_APPLY=0` turns it off.
+- Applied: Tom, TNB, Justin, Amy front, back and side standing; Boppy back standing. Rebake: `python3 tools/sprite-bake/walk_splice.py <ids>`, then `heights.py write`.
+- Draw scale: `heights.py` `page_ratio` draws a lined front stand at the page's height (his Whole pose slider included), not refitted to the bare real height. This keeps walk-scale k close to what the feelings and talking poses were baked against (they are drawn with the same k). Justin is 43.9 rows (his sAdj 0.99) instead of 44.96.
+- `manifest.py` `now` of a lined walk frame, feelings or talking pose is the page's numbers (walk frames also carry `now.page`, the height his lines baked), so "in the game now" matches the bake.
+- Side effect measured: the k change moves the feelings and talking poses of TNB +0.7 percent, Justin +0.8, Amy +1.1 (Amy surprised 32.7 to 33.1 rows). Within what the page shows; no rebake of the story poses was needed.
+
 ## Not built yet
-Applying the saved sizes to the WALKING poses (needs walk_sheet_frames.py and a rebake of the walk sheets), and to Grace, Rose and Deedee (no lines saved). Old text: applying the saved sizes in the bakes. Method notes: claude/pose-editor-poseedit2.md "NEXT: the apply build" (use this file's rule 2 and 3 for the body, per pose).
+Grace, Rose and Deedee (no lines saved) and Boppy's front and side walking: Tom card `t-poselines`, then `c-poselines2` applies them with the code above (no new code needed: their bakes call `build(fix=True)`).

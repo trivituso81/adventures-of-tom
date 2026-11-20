@@ -1,3 +1,13 @@
+## posesizes (2026-11-20): Walking poses of Tom, TNB, Justin, Amy and Boppy now use your Pose Editor lines, so they match their feelings and talking poses
+
+Board card c-posesizes. Tom's saved Pose Editor lines (data/pose-requests.json, 2026-11-16) for the walking standing poses are now baked.
+- `walk_sheet_frames.py`: a checked walking stand is warped exactly as poses.html draws it (head at h above his chin line, body at f, 12 px blend); its steps follow it. 13 stands applied: Tom, TNB, Justin, Amy (front, back, side), Boppy (back). Tom's front stand is h 1, f 1, so it is untouched.
+- First a rebake with no change of all five walks: byte for byte the repo files.
+- `heights.py` `page_ratio`: a lined front stand is drawn at the page height (Justin 43.9 rows, his Whole pose slider 0.99), so the walk scale stays close to what the feelings poses were baked against. walk-scale k: TNB .9157 to .9225, Justin .8443 to .851, Amy .9155 to .9253.
+- Measured on the new art: every lined stand within 0.15 row of the page; head 12.29 rows in every stand (Tom's head) except where Tom set Head only (Justin, Amy side).
+- `manifest.py`: "in the game now" shows the applied sizes for walking, feelings and talking poses. `heights_test.py` and `pose_editor_test.py` expect the page height for a lined front stand.
+- Not done: Grace, Rose, Deedee (no lines), Boppy front and side walking (no lines): Tom card t-poselines, then c-poselines2. tools/board_test.py times out on the upstream board page as well (c-startme start button not found after boardux3); not touched here.
+
 ## ch1leftovers (2026-11-20): Chapter 1 staging leftovers checked: Amy and Aunt Ellie already stand clear and near, Gus and Bean wait for amber pictures
 
 - Card c-ch1leftovers. No game code or art changed: two of the three items did not reproduce, the third needs pictures that do not exist yet.

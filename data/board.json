@@ -9165,7 +9165,7 @@
    "col": "prog",
    "theme": "Characters",
    "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
-   "next": "Ready to start. Applies Tom's saved Pose Editor lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (needs a walk bake) so the walking poses stop jumping in size against the other poses. Grace, Rose and Deedee poses stay unsized until Tom saves lines in the Pose Editor.",
+   "next": "Shipped in posesizes: the walking front, back and side standing poses of Tom, TNB, Justin and Amy, and Boppy's back standing pose, are baked from your Pose Editor lines (steps follow their standing pose). Boppy's front and side walking, and all of Grace, Rose and Deedee, wait for your lines on card t-poselines.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -9193,6 +9193,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built posesizes: walk_sheet_frames.py bakes a checked walking pose as the page draws it; 13 standing poses applied (Boppy only has back lines). No-change rebake matched the repo byte for byte first. Draw scales follow the page height of a lined front stand (Justin stays at the 43.9 rows his Whole pose slider set). Grace, Rose, Deedee and Boppy front and side handed to Tom on t-poselines."
     }
    ],
    "prompt": {
@@ -9204,7 +9208,7 @@
     "effort": "medium (steps are known, frames judged by eye)",
     "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections), docs/POSE_EDITOR.md and claude/next-addendum-cutpolish2.md, then card c-posesizes in data/board.json. Your first push is the commit board: start c-posesizes. Tom saved lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (data/pose-requests.json); applying them needs a walk bake. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run `python3 tools/pose-editor/manifest.py` so the Pose Editor's 'in the game now' matches, and `python3 tools/pose_editor_test.py`. Grace, Rose and Deedee poses have no saved lines yet: do not size them, and list them on a Tom card (ask: setup) named in the card's `after`, telling him which poses to line in ADMIN > POSE EDITOR. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "t-poselines"
   },
   {
    "id": "c-itembanner1",
@@ -9437,6 +9441,59 @@
     "text": "Read CLAUDE.md, then docs/CHANGES.md entries amber1, amber2 and amber3 and tools/art-library/amber-prompts.js. Gus, Bean and Deedee on the porch (data/scenes-ch14.js, amber:true) show the old glass block because engine/ch12-render.js AMBER_IDS has no entry for them. Add Art Library entries amber-gus, amber-bean and amber-deedee in a group Chapter 14 amber, built like the chapter 12 ones (each person's newest approved npc-photo hero as the reference, the moment from their frozen lines in data/scenes-ch14.js), run the board check, and make a Tom card (ask pictures) to generate and approve them. Do not generate anything yourself. When they are approved, bake with tools/sprite-bake/bake_amber.py, add the three names to AMBER_IDS, look at the frames with tools/amber_look.py in portrait and landscape, bump AMBER_V. You have my full permission to access the repo."
    },
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "t-poselines",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Characters",
+   "ask": "setup",
+   "title": "Set Pose Editor lines for Grace, Rose, Deedee and Boppy",
+   "next": "Open ADMIN > POSE EDITOR. For each pose below, drag the red line to the top of the skull and the blue line to the bottom of the chin (or tap LINES ARE RIGHT if they already are), then press SAVE once at the end.\n1. Grace: walking front, back and side standing; the 8 feelings; the 4 talking poses.\n2. Rose: the same 15 poses.\n3. Deedee: the same 15 poses.\n4. Boppy: walking front standing and side standing (his back standing, feelings and talking are already done).\nSaving starts card c-poselines2, which bakes them so every pose of each person has one head size and their real height.",
+   "blocks": [
+    "c-poselines2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by posesizes: these poses have no saved lines, so they stay at the old sizes until you set them."
+    }
+   ]
+  },
+  {
+   "id": "c-poselines2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Characters",
+   "tag": "poselines2",
+   "title": "Apply Pose Editor lines: Grace, Rose, Deedee, Boppy walk",
+   "next": "Waits on your lines (card t-poselines). Then bakes the walking, feelings and talking poses you lined, with the code posesizes built, and the dialogue faces.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by posesizes."
+    }
+   ],
+   "prompt": {
+    "what": "Bakes Tom's new Pose Editor lines for Grace, Rose, Deedee (walking, feelings, talking) and Boppy's front and side walking, then the dialogue faces, so every pose of each person has one head size and their real height.",
+    "before": [
+     "Set the lines and press SAVE in ADMIN > POSE EDITOR (card t-poselines). Saving starts this card; nothing else to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the walk and story apply are built and written in docs/POSE_EDITOR.md, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections) and docs/POSE_EDITOR.md (Applied so far), then card c-poselines2 and Tom's card t-poselines in data/board.json. Your first push is the commit board: start c-poselines2. Apply Tom's new lines in data/pose-requests.json for the people he lined: before changing any bake, rebake once with no change (python3 tools/sprite-bake/walk_splice.py followed by the ids of the people he lined) and confirm git shows no change; then the walks are already applied by walk_sheet_frames.py, so rebake with walk_splice.py and the same ids, run python3 tools/sprite-bake/heights.py write; the feelings and talking poses with python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run in the background, then git checkout art/chars/pipemo-story.webp data/npc-poses.js); the dialogue faces with bake_emotion_faces.py, bake_talk_faces.py and bake_talkpose_faces.py for those ids, bump EMO_V and TALK_V. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run python3 tools/pose-editor/manifest.py, python3 tools/pose_editor_test.py and python3 tools/heights_test.py. A person or pose still without lines stays as it is: list it on a Tom card named in after. Build tag poselines2. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [

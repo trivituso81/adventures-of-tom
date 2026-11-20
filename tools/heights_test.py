@@ -17,10 +17,13 @@ filed = {m.group(1): float(m.group(2)) for m in re.finditer(r'\n  (\w+):\{inches
 inch, base = W.HEIGHTS['inches'], W.BASE; tom = HT.rows(base)   # battleOnly characters have no walk to measure
 ck("Tom's standing art is the %.0f rows the bakes assume" % W.TOM_ROWS, abs(tom - W.TOM_ROWS) / W.TOM_ROWS < .005, tom)
 for cid in inch:
-    want = tom * inch[cid] / inch[base]; got = HT.rows(cid) * filed.get(cid, 0)
+    want = tom * inch[cid] / inch[base] * HT.page_ratio(cid); got = HT.rows(cid) * filed.get(cid, 0)   # a lined front stand: the Pose Editor page's height
     ck('%s %d\'%d" is drawn %.2f rows next to Tom\'s %.1f' % (cid, inch[cid] // 12, inch[cid] % 12, want, tom), abs(got - want) / want < TOL, got)
     if cid in W.WALK_MATCH:
-        ck('%s walk art is baked at its %.1f rows' % (cid, W.WALK_MATCH[cid][1]), abs(HT.rows(cid) - W.WALK_MATCH[cid][1]) / W.WALK_MATCH[cid][1] < .015, HT.rows(cid))   # art measure vs nominal; the drawn height (line above) holds at 1 percent. Olivia at head 120 percent reads 1.05 percent over because of hair
+        # posesizes (2026-11-20): a front stand Tom lined in the Pose Editor is baked at the page's height (his Whole pose slider included), so the art's
+        # nominal rows scale by page wholeRows / real rows; the draw scale above still puts the figure at the real height on screen.
+        pg = W.pose_pages(cid).get('down_stand'); nom = W.WALK_MATCH[cid][1] * (float(pg['wholeRows']) / W.figure_rows(cid) if pg else 1.0)
+        ck('%s walk art is baked at its %.1f rows' % (cid, nom), abs(HT.rows(cid) - nom) / nom < .015, HT.rows(cid))   # art measure vs nominal; the drawn height (line above) holds at 1 percent. Olivia at head 120 percent reads 1.05 percent over because of hair
 typed = []
 for f in glob.glob('data/*-use.js') + ['data/recruit-sprites.js']:
     for m in re.finditer(r'(?:OW\.(\w+)\.k\s*=|set\.k\s*=)', open(f).read()):
@@ -36,7 +39,8 @@ for cid in ([] if '--fast' in sys.argv else inch):
         fig = W.build(cid, fix=True)['w_down_stand']
         if cid in W.WALK_MATCH: res.append(fig.height * W.BODY_ROWS_PER_PX[cid] * W.draw_k(cid))
         else: res.append(fig.height * W.BODY_SCALE.get(cid, 1.0) * W.figure_rows(cid) / W.UNWARPED_H[cid])
-    want = W.figure_rows(cid)
+    pg = W.pose_pages(cid).get('down_stand')
+    want = float(pg['wholeRows']) if pg else W.figure_rows(cid)   # a lined front stand: the page's height, and a head factor no longer touches it
     # 2 percent here: the neck taper under the chin adds a fraction of a row the bake formula does not count (Olivia's small sheet shows it most). The
     # draw scale is then re-measured from the baked art (heights.py write), which is what makes the on-screen height exact (checked above at 1 percent).
     ck('%s bakes within 2 percent of %.2f rows at head sizes 80, 100 and 125 percent' % (cid, want), all(abs(r - want) / want < .02 for r in res), [round(r, 2) for r in res])

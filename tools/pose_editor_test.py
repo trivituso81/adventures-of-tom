@@ -49,7 +49,7 @@ with sync_playwright() as pw:
         if p.is_visible('#introx'): p.click('#introx')
         for cid in ORDER:   # untouched, the walk is drawn exactly as the bake sizes it today: whole figure = the real height
             if MAN['chars'][cid]['locked']: continue
-            g = E(p, '__PE.geom("%s","down_stand")' % cid); R = MAN['chars'][cid]['R']
+            g = E(p, '__PE.geom("%s","down_stand")' % cid); R = MAN['chars'][cid]['frames']['down_stand']['now'].get('page', MAN['chars'][cid]['R'])   # posesizes: a stand baked from Tom's lines is in the game at the page's height
             ck(name + ': ' + cid + ' now = real height', abs(g['whole'] - R) < .35, (g['whole'], R))
         p.click('#chips button[data-id=amy]')
         ck(name + ': walking, feelings and talking sets', p.eval_on_selector_all('#sets button', 'b=>b.map(x=>x.dataset.s)') == ['walk', 'mood', 'talk'])

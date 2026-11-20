@@ -119,9 +119,59 @@ def src(cid):
     vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-walking-sheet-v*.png')), key=num) or sorted(glob.glob(os.path.join(RAW, f'{cid}-walk-sheet-v*.png')), key=num)
     return vs[-1]
 
+# Pose Editor walk apply (posesizes, 2026-11-20; docs/POSE_EDITOR.md). A standing frame Tom checked in ADMIN > POSE EDITOR (data/pose-requests.json,
+# `ok` and `page` {h, f, a} saved on this sheet) is baked as the page draws it: rows above his chin line `a` at h, rows from a + 12 px down at f, linear blend
+# between (the page's rowScale), on the figure as painted. Its two steps take the same numbers (the page links them, so the walk does not pulse), unless a step
+# has its own checked entry. h and f are multipliers on the painted figure drawn at its real height (s0 = R / stand height rows per px); the bake keeps its
+# one body scale per sheet (fref), so the warp here is h / fref and f / fref. A direction with no checked lines keeps the old head rule. POSE_APPLY=0 turns it off.
+POSE_APPLY = os.environ.get('POSE_APPLY', '1') != '0'
+POSE_REQ = os.path.join(ROOT, 'data', 'pose-requests.json')
+POSE_TP = 12
+def pose_pages(cid):
+    """{frame name: page} for the walk frames of cid that Tom checked on the current sheet (steps inherit their standing frame's page)."""
+    if not POSE_APPLY or not os.path.exists(POSE_REQ): return {}
+    fr = json.load(open(POSE_REQ)).get('frames', {}).get(cid, {}); sheet = os.path.basename(src(cid)); out = {}
+    ok = lambda e: bool(e and e.get('ok') and e.get('page') and not e.get('stale') and e.get('sheet', sheet) == sheet)
+    for row in NAMES:
+        st = row[0]
+        for n in row:
+            e = fr.get(n)
+            if n != st and ok(e) and e.get('own'): out[n] = e['page']
+            elif ok(fr.get(st)): out[n] = fr[st]['page']
+    return out
+def warp_figure(img, a, h, f, tp=POSE_TP):
+    """Head rows (above a) at scale h, body rows (below a + tp) at scale f, linear blend between, the same factor across each row, about the head column
+    (the figure's columns just above a). Same maths as bake_story_poses.warp_figure (that file is not importable: importing it runs its bake)."""
+    arr = np.array(img).astype(np.float32); H, Wd = arr.shape[:2]
+    al = arr[:, :, 3] > 40; band = np.where(al[max(0, int(a) - 10):max(1, int(a)), :].any(0))[0]; ax = float(band.mean()) if len(band) else Wd / 2.0
+    def sc(y): return np.where(y < a, h, np.where(y < a + tp, h + (f - h) * (y - a) / tp, f))
+    ys = np.linspace(0, H, H * 8 + 1); Yc = np.concatenate([[0], np.cumsum((sc(ys[1:]) + sc(ys[:-1])) / 2 * (ys[1] - ys[0]))])
+    Ho = int(np.ceil(Yc[-1])); Wo = int(np.ceil(Wd * max(h, f))) + 4; axo = Wo / 2.0
+    yo = np.arange(Ho) + 0.5; ysrc = np.interp(yo, Yc, ys) - 0.5; srow = sc(ysrc)
+    xo = np.arange(Wo) + 0.5
+    X = ax + (xo[None, :] - axo) / srow[:, None] - 0.5; Y = np.repeat(ysrc[:, None], Wo, 1)
+    pm = arr.copy(); pm[:, :, :3] *= pm[:, :, 3:4] / 255.0
+    out = np.stack([ndi.map_coordinates(pm[:, :, c], [Y, X], order=1, mode='constant', cval=0.0) for c in range(4)], 2)
+    al = out[:, :, 3:4]; rgb = np.where(al > 2, out[:, :, :3] / np.maximum(al, 2) * 255.0, 0)
+    o = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), np.clip(al, 0, 255)]).astype(np.uint8), 'RGBA')
+    return o.crop(o.getbbox())
+POSE_APPLIED = {}
+def _apply_pages(cid, raw, figs, fref):
+    """Replace the frames Tom checked by the page's version (raw = the nine figures as painted). Returns figs; POSE_APPLIED[cid] lists the names."""
+    pages = pose_pages(cid); names = [n for row in NAMES for n in row]; done = []
+    for i, n in enumerate(names):
+        pg = pages.get(n)
+        if not pg: continue
+        h, f = float(pg['h']) / fref, float(pg['f']) / fref
+        figs[i] = raw[i] if abs(h - 1) < 1e-9 and abs(f - 1) < 1e-9 else warp_figure(raw[i], float(pg['a']), h, f)   # identity: the painted figure untouched
+        done.append(n)
+    POSE_APPLIED[cid] = done
+    return figs
+
 def build(cid, fix=False):
     figs = grid(src(cid), 3, 3)
     UNWARPED_H[cid] = figs[0].height
+    raw = list(figs)
     if fix and cid in WALK_MATCH:
         from kidhead import grow_head
         chin, rows = WALK_MATCH[cid]; k = draw_k(cid); H = UNWARPED_H[cid]; chin *= H
@@ -130,11 +180,15 @@ def build(cid, fix=False):
         sb = (R - hr) / (H - chin)                               # on-screen rows per source px for the body
         BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
         figs = [grow_head(f, hr / (chin * sb), chin) for f in figs]
+        figs = _apply_pages(cid, raw, figs, sb / (R / H))              # fref: the bake's body scale as a multiplier on the figure drawn at its real height
     elif fix and cid in PLAIN and HEAD_TWEAK.get(cid, 1.0) != 1.0:
         from kidhead import grow_head
         f = HEAD_TWEAK[cid]; H = UNWARPED_H[cid]; chin = PLAIN[cid] * H
         BODY_SCALE[cid] = (H - chin * f) / (H - chin)           # body scale; the head is f times its painted on-screen size
         figs = [grow_head(x, f / BODY_SCALE[cid], chin) for x in figs]
+        figs = _apply_pages(cid, raw, figs, BODY_SCALE[cid])
+    elif fix and cid in PLAIN:
+        figs = _apply_pages(cid, raw, figs, 1.0)
     out = {}
     for r in range(3):
         for c in range(3):

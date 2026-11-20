@@ -49,12 +49,19 @@ def story_sets(cid, ch, cells):
     m = re.search(r"\b%s:\{inches:[\d.]+,rows:[\d.]+,k:([\d.]+)\}" % cid, open(os.path.join(ROOT, 'data', 'walk-scale.js')).read())
     if m: owk = float(m.group(1))
     R = ch['R']; std = ch['frames']['down_stand']['marks']; tshare = std['top'] / std['chin']   # hair allowance guess: the standing frame's skull top as a share of its chin row
+    req = json.load(open(os.path.join(ROOT, 'data', 'pose-requests.json'))).get('frames', {}).get(cid, {}) if os.environ.get('POSE_APPLY', '1') != '0' else {}
+    def applied(key, sheet):   # bake_story_poses.apply_pose_lines bakes a checked feelings or talking pose at the page's size (cutpolish2)
+        e = req.get(key)
+        if not (e and e.get('ok') and e.get('page')): return None
+        if key.startswith('em_') and e.get('sheet', sheet) != sheet: return None
+        return e['page']
     def add(setname, key, label, fig, chin, u, fct, sheet):
+        pg = applied(key, sheet)
         rel = 'art/poses/%s/%s-%s.webp' % (ch['_id'], setname, key); fig.save(os.path.join(ROOT, rel), 'WEBP', quality=92, method=6, exact=True)
         a = np.array(fig)[:, :, 3] > 40; band = np.where(a[max(0, int(chin) - 10):max(1, int(chin)), :].any(0))[0]
         ch['frames'][key] = {'set': setname, 'key': key, 'label': label, 'img': rel, 'w': fig.width, 'h': fig.height, 'ax': round(float(band.mean()) if len(band) else fig.width / 2.0, 1),
                              'link': None, 'sheet': sheet, 'marks': {'top': round(chin * tshare, 1), 'chin': round(float(chin), 1), 'feet': fig.height}, 'conf': 'low',
-                             's0': round(u, 6), 'now': {'f': 1.0, 'h': round(fct, 5), 'anchor': round(float(chin), 2)}}
+                             's0': round(u, 6), 'now': {'f': round(float(pg['f']), 5), 'h': round(float(pg['h']), 5), 'anchor': round(float(pg['a']), 2)} if pg else {'f': 1.0, 'h': round(fct, 5), 'anchor': round(float(chin), 2)}}
         if cells is not None: cells.append((ch['_id'], key, fig, chin * tshare, chin, fig.height, 'low', fig.height))
     if EF.has_sheet(cid) and cid in EMO_HEAD:
         figs = EF.cut(cid); sheet = os.path.basename(EF.src_path(cid)); fct = EF.head_factor(cid); rows = EC.chin_rows(cid, figs, EF.src_path(cid))
@@ -101,7 +108,10 @@ def main():
                                      'ax': round(float(band.mean()) if len(band) else fig.width / 2.0, 1), 'link': None if st == 'stand' else d + '_stand', 'sheet': sheet,
                                      'marks': {'top': round(top, 1), 'chin': round(chin, 1), 'feet': int(rows.max()) + 1}, 'conf': conf}
                 if (ruler and st == 'stand') or check: cells.append((cid, key, fig, top, chin, int(rows.max()) + 1, conf, H))
-        for fr in ch['frames'].values(): fr['s0'] = round(s0, 6); fr['now'] = now
+        pages = W.pose_pages(cid)   # posesizes: walk frames baked from Tom's lines (walk_sheet_frames._apply_pages) are in the game at the page's size
+        for key, fr in ch['frames'].items():
+            pg = pages.get(key); fr['s0'] = round(s0, 6)
+            fr['now'] = {'f': round(float(pg['f']), 5), 'h': round(float(pg['h']), 5), 'anchor': round(float(pg['a']), 2), 'page': round(float(pg['wholeRows']), 3)} if pg else now   # page: the height his lines baked (heights.py page_ratio)
         ch['sets'] = {'walk': {'name': 'Walking', 'keys': list(ch['frames']), 'upright': None}}
         if not LOCKED.get(cid): story_sets(cid, ch, cells if check else None)
         out['chars'][cid] = ch

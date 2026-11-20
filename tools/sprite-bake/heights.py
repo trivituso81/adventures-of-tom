@@ -6,7 +6,8 @@ draw scale the game uses, by MEASURING the baked walk art, so a height can never
   python3 tools/sprite-bake/heights.py check    exit 1 when data/walk-scale.js is not what `write` would produce
 
 Rule: Tom is the baseline (drawn at scale 1). Everyone's standing figure, top of hair or cap to feet, is drawn at
-(Tom's measured rows) x inches / (Tom's inches). draw scale k = that / the character's own measured standing rows.
+(Tom's measured rows) x inches / (Tom's inches). draw scale k = that / the character's own measured standing rows. A front stand Tom checked in
+the Pose Editor is drawn at the page's height instead (page_ratio, posesizes).
 Changing a height: edit data/heights.json, rebake that character's walk (walk_splice.py; adults' heads are pinned to Tom's, so the body must be
 rebuilt), run `write`, then python3 tools/heights_test.py. Changing a head (head_adjust.py) runs `write` and the test by itself."""
 import json, os, re, sys
@@ -27,10 +28,17 @@ def rows(cid):
     im, k = stand(cid); ys = np.where((np.array(im)[:, :, 3] > 40).any(1))[0]
     return (ys.max() - ys.min() + 1) / k
 
+def page_ratio(cid):
+    """posesizes (2026-11-20): a front stand Tom lined and checked in ADMIN > POSE EDITOR is drawn at the height the page showed him (his Whole pose
+    slider included), not refitted to the bare real height: page wholeRows / real rows. 1 when his front stand has no checked lines."""
+    sys.path.insert(0, HERE); import walk_sheet_frames as W
+    pg = W.pose_pages(cid).get('down_stand') if cid in W.INCHES and cid != W.BASE else None
+    return float(pg['wholeRows']) / W.figure_rows(cid) if pg else 1.0
+
 def table():
     H = json.load(open(SRC)); inch, base = H['inches'], H['baseline']; base_rows = rows(base); out = {}
     for cid in inch:
-        r = rows(cid); want = base_rows * inch[cid] / inch[base]
+        r = rows(cid); want = base_rows * inch[cid] / inch[base] * page_ratio(cid)
         out[cid] = {'inches': inch[cid], 'rows': round(r, 3), 'k': 1 if cid == base else round(want / r, 4)}
     return out
 

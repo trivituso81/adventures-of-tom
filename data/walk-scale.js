@@ -5,12 +5,12 @@
 // next to Tom at any head size. Loads after the last *-hires-use.js file and sets OW.<id>.k for everyone listed.
 const WALK_SCALE={
   tom:{inches:71,rows:42.0,k:1},
-  tnb:{inches:70,rows:45.222,k:0.9157},
-  justin:{inches:76,rows:53.25,k:0.8443},
+  tnb:{inches:70,rows:44.889,k:0.9225},
+  justin:{inches:76,rows:51.625,k:0.851},
   michael:{inches:76,rows:53.0,k:0.8483},
   boppy:{inches:67,rows:41.714,k:0.9501},
   jojo:{inches:66,rows:42.333,k:0.9223},
-  amy:{inches:65,rows:42.0,k:0.9155},
+  amy:{inches:65,rows:41.556,k:0.9253},
   deedee:{inches:65,rows:41.8,k:0.9199},
   olivia:{inches:68,rows:42.444,k:0.9477},
   ellie:{inches:62,rows:43.111,k:0.8507},
