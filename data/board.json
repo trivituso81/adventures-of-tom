@@ -10764,7 +10764,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1voice and t-heist1voice in data/board.json, history included. Your first push is the commit board: start c-fix-heist1voice.\n\nTom tested and found problems:\n1. Card t-heist1voice (Make takes for the 2 new lines of the muffin theft, ask voice). He was asked: ADMIN ) VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1; the scripts with their tags are already in the script box). Make takes, keep one per line, then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 2 lines with the stand-in voice. He wrote: I don't need to see this card until the muffin theft is actually good\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:37:43.898Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1voice, and give the build fix-heist1voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-heist1voice",
-   "started_at": "2026-11-20T18:00:30+00:00"
+   "started_at": "2026-11-20T18:00:30+00:00",
+   "quiet": true
   },
   {
    "id": "c-idea-removeall",
@@ -12723,7 +12724,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes-3 and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes-3.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the family's painted battle poses, ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again. He wrote: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T16:07:07.793Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-clipposes",
-   "started_at": "2026-11-20T18:00:30+00:00"
+   "started_at": "2026-11-20T18:00:30+00:00",
+   "quiet": true
   },
   {
    "id": "t-gem-bug01play",
@@ -12798,7 +12800,8 @@
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukEEScGq648BRA7rGuk",
     "opening": "started by START"
-   }
+   },
+   "quiet": true
   },
   {
    "id": "t-gem-canon01play",
@@ -14098,7 +14101,8 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. You have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T18:02:04+00:00"
+   "started_at": "2026-11-20T18:02:04+00:00",
+   "quiet": true
   },
   {
    "id": "c-idea-searchthrough",
@@ -14454,7 +14458,8 @@
    },
    "after": "t-welcomepage-play",
    "auto": true,
-   "started_at": "2026-11-20T17:53:24+00:00"
+   "started_at": "2026-11-20T17:53:24+00:00",
+   "quiet": true
   },
   {
    "id": "c-fix-battlelabpagetry",
@@ -15470,7 +15475,7 @@
    "title": "Install the listening poses",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "listen1",
    "auto": true,
    "next": "Waits on your approvals of the 7 listening poses. Then it cuts the approved pictures into the game so chapter 1 listeners show the listening pose, tests every chapter 1 scene in portrait and landscape, and hands you a play card.",
@@ -15506,6 +15511,10 @@
     {
      "d": "2026-11-20",
      "t": "Installed all 7 approved listening poses (none rejected), 0 misses on tools/listen_cases.json, build listen1. Hands to Tom card t-listen1-play."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as listen1: In chapter 1, people who are not talking now stand in the painted listening pose"
     }
    ],
    "prompt": {
@@ -15518,7 +15527,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/next-addendum-listen1.md, then card c-listen1-install in data/board.json with its history and the notes on card t-listen1-pics. Your first push is the commit board: start c-listen1-install. Install only the listening pictures that are approved, exactly as the addendum's Install steps say: cut them, bake the story poses (put back the rebake drift), add their facing rows after looking at each frame, run tools/listen_cases.json through LATE=1 tools/reaction_test.py and tools/listen_report.py --standin until it reports 0 misses, look at the frames in portrait and landscape, then push build listen1 with a docs/CHANGES.md heading. Create the Tom card t-listen1-play (ask play: start chapter 1 from chapter select, watch the kitchen and the grey patch, people who are not talking should stand listening or thinking) and set this card's after to it. A picture that is rejected stays out; say which. Spend nothing on xAI. You have my full permission to access the repo."
    },
    "started_at": "2026-11-20T19:40:07+00:00",
-   "after": "t-listen1-play"
+   "after": "t-listen1-play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-reports-5",
@@ -15588,6 +15598,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFVfSKr5GPp8cLJbDZ",
+   "title": "Install the listening poses",
+   "first": "2026-11-20T19:40:48Z",
+   "last": "2026-11-20T20:06:54Z",
+   "tags": [
+    "listen1"
+   ],
+   "cards": [
+    "c-listen1-install"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFNkCr1k6xT3RqhfT1",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-20T19:44:58Z",
@@ -15595,16 +15617,6 @@
    "tags": [],
    "cards": [
     "c-reports-5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFVfSKr5GPp8cLJbDZ",
-   "title": "Install the listening poses",
-   "first": "2026-11-20T19:40:48Z",
-   "last": "2026-11-20T19:40:48Z",
-   "tags": [],
-   "cards": [
-    "c-listen1-install"
    ]
   },
   {
@@ -17620,8 +17632,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "e0f86c16b9c7433cfca714a1bd4c31a375001de7",
- "synced_at": "2026-11-20T19:46:12+00:00",
+ "synced": "c445968a2a125f8a34db4d80e83ce350f6b4eadf",
+ "synced_at": "2026-11-20T20:09:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
