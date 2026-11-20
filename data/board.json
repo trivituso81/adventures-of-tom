@@ -14726,7 +14726,7 @@
    "id": "c-fix-battlelabpagetry-3",
    "tag": "fix-battlelabpagetry-3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -14748,7 +14748,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCZmu9BDyRxwTXwtHu",
     "opening": "Something is wrong on t-battlelabpagetry"
    },
    "history": [
@@ -14766,6 +14766,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T18:12:05.961Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -14779,7 +14783,7 @@
    },
    "after": "t-battlelabpagetry",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T18:12:44+00:00"
   }
  ],
  "sessions": [
@@ -16686,8 +16690,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "d17a6af91d388ed2384cd7d3913f09223f490e07",
- "synced_at": "2026-11-20T18:09:25+00:00",
+ "synced": "7bfd260d6b192af709bab865f05a65a3a78734c0",
+ "synced_at": "2026-11-20T18:12:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
