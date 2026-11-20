@@ -14269,7 +14269,7 @@
   {
    "id": "t-welcomepage-play",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -14302,8 +14302,14 @@
     {
      "d": "2026-11-20",
      "t": "Back to Tom: welcomefit1 built his report r-20261120-130739-tr1a."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T22:50:10.421Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-battlelabpage",
