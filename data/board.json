@@ -7297,8 +7297,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (3 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261120-000755-3h9p, r-20261120-000831-h5tq. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "title": "Fix the report backlog (8 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8 and 2 more. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7336,6 +7336,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 3 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 8 report(s)."
     }
    ],
    "blocks": [],
@@ -7773,7 +7777,7 @@
    "title": "Voices: record the old voice gaps",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "voice",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude.",
@@ -7788,6 +7792,10 @@
     {
      "d": "2026-11-20",
      "t": "Split out of t-oldchecks. Tom: \"Break this out into one card per item that you've listed in\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Older phone checks, when you next play (none block anything) is done."
     }
    ],
    "links": [
@@ -7798,8 +7806,7 @@
      },
      "label": "No clip yet"
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-oldchecks-chapters",
@@ -8009,7 +8016,7 @@
    "id": "c-fix-oldchecks",
    "tag": "fix-oldchecks",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
@@ -8058,6 +8065,10 @@
     {
      "d": "2026-11-20",
      "t": "Split t-oldchecks into six cards, one per item (t-oldchecks-voice, -chapters, -script, -blocks, -pencil, -boppy); retired t-oldchecks."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-oldchecks: The old phone checks are six separate cards, one per item"
     }
    ],
    "prompt": {
@@ -8070,7 +8081,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks and t-oldchecks in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks.\n\nTom tested and found problems:\n1. Card t-oldchecks (Older phone checks, when you next play (none block anything), ask play). He was asked: Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show ) No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library. He wrote: Break this out into one card per item that you've listed in\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:06:38.703Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks, and give the build fix-oldchecks a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-oldchecks-voice",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-20"
   },
   {
    "id": "c-adminicons1",
@@ -8109,8 +8121,10 @@
    "url": "https://claude.ai/code/session_01RXeukELyGq8ErEuz6apg1x",
    "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
    "first": "2026-11-20T08:07:54Z",
-   "last": "2026-11-20T08:07:54Z",
-   "tags": [],
+   "last": "2026-11-20T08:11:17Z",
+   "tags": [
+    "fix-oldchecks"
+   ],
    "cards": [
     "c-fix-oldchecks"
    ]
@@ -8963,7 +8977,12 @@
    "r-20261114-162358-jykk",
    "r-20261114-182326-95v4",
    "r-20261120-000755-3h9p",
-   "r-20261120-000831-h5tq"
+   "r-20261120-000831-h5tq",
+   "r-20261120-000848-fl38",
+   "r-20261120-000910-g9n1",
+   "r-20261120-000931-2yx8",
+   "r-20261120-001019-feou",
+   "r-20261120-001100-lta1"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -8983,8 +9002,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "6a89e7ba82b19d47546bef907ec5de3fa82d3465",
- "synced_at": "2026-11-20T08:09:00+00:00",
+ "synced": "47af9154fbfca1ff5be66a6443e5c9ccfb4d4c55",
+ "synced_at": "2026-11-20T08:12:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
