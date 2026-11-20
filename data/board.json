@@ -7095,6 +7095,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as artgen2a: Pictures made from a board card now get a QA check (code and tests; the replay on your approved pictures comes next)"
     }
    ],
    "prompt": {
@@ -8861,6 +8865,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
+   "title": "QA for generated pictures, with the results on the card (artgen2)",
+   "first": "2026-11-20T08:42:04Z",
+   "last": "2026-11-20T08:57:25Z",
+   "tags": [
+    "artgen2a"
+   ],
+   "cards": [
+    "c-artgen2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
    "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
    "first": "2026-11-20T08:50:18Z",
@@ -8868,16 +8884,6 @@
    "tags": [],
    "cards": [
     "c-ch1starving-sub"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
-   "title": "QA for generated pictures, with the results on the card (artgen2)",
-   "first": "2026-11-20T08:42:04Z",
-   "last": "2026-11-20T08:42:04Z",
-   "tags": [],
-   "cards": [
-    "c-artgen2"
    ]
   },
   {
@@ -9192,9 +9198,10 @@
    "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
    "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
    "first": "2026-11-20T00:54:15-08:00",
-   "last": "2026-11-20T00:54:16-08:00",
+   "last": "2026-11-20T00:57:43-08:00",
    "tags": [
-    "backlog1"
+    "backlog1",
+    "board-backlog1"
    ],
    "cards": [
     "c-backlog1",
@@ -9868,8 +9875,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "e0989a9c291b2b4455fe1df2969e3493ee8c96cc",
- "synced_at": "2026-11-20T08:56:15+00:00",
+ "synced": "a0bea9f194de26d0584b6ef80cce8b82a6b65c3b",
+ "synced_at": "2026-11-20T08:58:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
