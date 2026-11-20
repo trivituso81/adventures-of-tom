@@ -1,0 +1,54 @@
+{
+ "runs": {
+  "ch1": {
+   "answers": {
+    "tom.idle": {
+     "v": "reject",
+     "note": "He should be blinking, and his wrist should not be involuntarily moving",
+     "at": "2026-11-20T16:04:51.914Z",
+     "build": "fix-gracevoice-distort"
+    }
+   },
+   "expect": [
+    "tom.idle",
+    "tom.guard",
+    "tom.braced",
+    "tom.hit",
+    "tom.dodge",
+    "tom.ko",
+    "tom.getup",
+    "tom.victory",
+    "tom.run",
+    "grace.idle",
+    "grace.guard",
+    "grace.braced",
+    "grace.hit",
+    "grace.dodge",
+    "grace.ko",
+    "grace.getup",
+    "grace.victory",
+    "grace.run",
+    "rose.idle",
+    "rose.guard",
+    "rose.braced",
+    "rose.hit",
+    "rose.dodge",
+    "rose.ko",
+    "rose.getup",
+    "rose.victory",
+    "rose.run",
+    "deedee.idle",
+    "deedee.guard",
+    "deedee.braced",
+    "deedee.hit",
+    "deedee.dodge",
+    "deedee.ko",
+    "deedee.getup",
+    "deedee.victory",
+    "deedee.run"
+   ],
+   "updated": "2026-11-20T16:04:52.191Z"
+  }
+ },
+ "about": "Answers from ADMIN > BATTLE LAB > NEW BATTLE > PAINTED STATES (engine/pose-review.js). Key: fighter.state. v approve or reject."
+}
