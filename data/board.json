@@ -690,13 +690,13 @@
    "title": "Install the approved chapter 1 pictures (empty counter, muffin pan, empty pan, papers, phone on seat)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "The empty counter first: crop the island patch from ch1-kitchen-empty-island and draw it in both kitchen layers once the theft has happened. Then swap the code stand-ins for the other pictures you approved (muffin pan, empty pan, muffin papers, phone on seat). Look at each in portrait and landscape.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukH4syNcCKR4tfmUd8W",
     "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
    },
    "history": [
@@ -711,6 +711,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -722,8 +726,7 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-cutpolish4.md and claude/next-addendum-ch1rebuild1.md, then install the empty counter patch (cutpolish4b) and every other approved stand-in picture in Art Library group Chapter 1. You have my full permission to access the repo."
    },
-   "tag": "cutpolish4b",
-   "start": true
+   "tag": "cutpolish4b"
   },
   {
    "id": "c-cutpolish5",
@@ -1610,8 +1613,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "32ab89c0419e6a9edee791e91405532246bdd909",
- "synced_at": "2026-11-20T01:34:31+00:00",
+ "synced": "f2d9f7c9aaecc4f206ee5139ce81cb75c70c2b27",
+ "synced_at": "2026-11-20T01:36:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
