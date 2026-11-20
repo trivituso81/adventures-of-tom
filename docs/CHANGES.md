@@ -1,3 +1,11 @@
+## bannerhold1 (2026-11-19): A join or leave banner holds the game until you dismiss it
+
+- Card c-bannerhold1. Tom (11-19 19:25): "i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it." The rule had never been built: partybanner1 banners were non-blocking and faded by themselves after 2.6 s.
+- Now: from the first banner to the last dismiss the game is on hold. Walking, tapping the map, the menu, saving, dialogue, scenes and the SKIP and FAST buttons all wait, and the scene watchdog does not count the time. A banner is dismissed with a tap or click, A, Enter, Space or Escape, or gamepad A or B. Several banners at once still show one at a time and each needs its own dismiss (0.4 s between them). A press in a banner's first 0.45 s is ignored so the press that ended the line before does not dismiss it. A small line under the banner says "Tap or press A to continue".
+- Files: `engine/party-banner.js` (`partyBannerHeld()`, `partyBannerDismiss()`, capture-phase input guard on window; the 2.6 s timer is gone, so `PB_SHOW` is purged), `engine/main.js` (pad handler), `engine/overworld.js` (world and scenes pause), `engine/skip.js` (watchdog), `index.html` (hint style).
+- Tests: `python3 tools/banner_hold_test.py` FAILS: [] (22 checks: held and one at a time, no walking or menu, keys do not dismiss except the dismiss keys, early press ignored, touch tap and click dismiss, a scene waits behind a banner and carries on, gamepad d-pad ignored and A dismisses, portrait and landscape). Frames looked at: tools/shots/bannerhold-portrait.png and -landscape.png.
+- Not done: no real phone play. Banners that fire while a battle is running would hold input only (the battle's own loop keeps animating); none do today.
+
 ## clipposes (2026-11-20): The family's battle body states are painted poses moved by the game; their videos are removed
 
 - Card c-clipposes, Tom's answer "Go with this plan" on t-clipreset (plan: `claude/clip-reset-plan.md` section 5). Nothing generated, $0.

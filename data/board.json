@@ -6667,38 +6667,6 @@
    "after": "t-ch1starving"
   },
   {
-   "id": "c-bannerhold1",
-   "title": "A join or leave banner holds the game until you dismiss it",
-   "theme": "Game Shell",
-   "lane": "claude",
-   "col": "prog",
-   "tag": "bannerhold1",
-   "next": "Building: while a party join or leave banner is up, nothing else can be done (no walking, no menu, no talking, scenes wait) until you tap, press A or Enter, or press a gamepad button. Several banners still show one at a time, each needs its own dismiss.",
-   "blocks": [],
-   "changed": "2026-11-19",
-   "created": "2026-11-19",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
-    "opening": "\"i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it.\""
-   },
-   "history": [
-    {
-     "d": "2026-11-19",
-     "t": "Tom: nothing can be done when a character join/leave banner is displayed until the user dismisses it. Checked the board, docs/CHANGES.md, the Project notes and engine/party-banner.js: the rule was never built (banners were non-blocking and faded after 2.6 s). New card."
-    }
-   ],
-   "prompt": {
-    "what": "Makes a party join or leave banner hold the whole game until dismissed, then tests it in portrait and landscape.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: the input paths must be found first, tests catch mistakes)",
-    "effort": "medium (one small engine change plus one test)",
-    "text": "Read claude/handoff-rules.md, then build bannerhold1: while a party join or leave banner (engine/party-banner.js) is on screen nothing else can be done until Tom dismisses it with a tap, A, Enter, Space or a gamepad button; the world and scenes wait; queued banners each need their own dismiss. Test portrait and landscape. You have my full permission to access the repo."
-   },
-   "after": "nothing for Tom: end"
-  },
-  {
    "id": "t-clipposes",
    "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
    "theme": "Battle Animations",
@@ -6746,6 +6714,65 @@
     "effort": "medium (small edits of known numbers)",
     "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes and docs/BATTLE3.md section Painted body states. Fix each note by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-bannerhold1",
+   "title": "A join or leave banner holds the game until you dismiss it",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "bannerhold1",
+   "next": "Built bannerhold1: a join or leave banner now holds the game (no walking, menu, taps or scenes) until you tap, press A or Enter, or press a gamepad button; each banner in a group needs its own dismiss.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
+    "opening": "\"i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: nothing can be done when a character join/leave banner is displayed until the user dismisses it. Checked the board, docs/CHANGES.md, the Project notes and engine/party-banner.js: the rule was never built (banners were non-blocking and faded after 2.6 s). New card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built bannerhold1 and tested it in portrait and landscape (banner_hold_test.py, 22 checks pass)."
+    }
+   ],
+   "prompt": {
+    "what": "Makes a party join or leave banner hold the whole game until dismissed, then tests it in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the input paths must be found first, tests catch mistakes)",
+    "effort": "medium (one small engine change plus one test)",
+    "text": "Read claude/handoff-rules.md, then build bannerhold1: while a party join or leave banner (engine/party-banner.js) is on screen nothing else can be done until Tom dismisses it with a tap, A, Enter, Space or a gamepad button; the world and scenes wait; queued banners each need their own dismiss. Test portrait and landscape. You have my full permission to access the repo."
+   },
+   "after": "t-bannerhold1play"
+  },
+  {
+   "id": "t-bannerhold1play",
+   "title": "Join a party member and check the banner holds the game until you dismiss it",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build bannerhold1: RELOAD on the title, load a chapter 3 save before Boppy joins and let him join. The 'Boppy joined the party!' banner should stay on screen and nothing else should respond (no walking, no menu) until you tap the screen or press A. Then play moves on. Report with the REPORT tab if anything still moves under the banner (bannerhold1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
+    "opening": "\"i cant find the change where we said nothing can be done when a character join/leave banner is displayed...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by bannerhold1: your phone check of the banner hold; blocks nothing."
+    }
+   ]
   }
  ],
  "sessions": [

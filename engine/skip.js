@@ -86,7 +86,7 @@ updateIntro=function(dt) {
 const cutWatch={cur:null,t:0};
 function cutWatchdog(dt) {
   if(intro.cur!==cutWatch.cur) { cutWatch.cur=intro.cur; cutWatch.t=0; return; }
-  if(!intro.cur||dialog.active||battle.active||(typeof closeup!=='undefined'&&closeup.active)||(typeof brp!=='undefined'&&brp.open)||(typeof transition!=='undefined'&&transition)) { cutWatch.t=0; return; }
+  if(!intro.cur||dialog.active||battle.active||(typeof closeup!=='undefined'&&closeup.active)||(typeof brp!=='undefined'&&brp.open)||(typeof transition!=='undefined'&&transition)||(typeof partyBannerHeld==='function'&&partyBannerHeld())) { cutWatch.t=0; return; }
   if((cutWatch.t+=dt)<40) return;
   console.warn('scene step stalled for 40 s, moving on',intro.sid);
   intro.cur=null; cutWatch.cur=null; cutWatch.t=0;

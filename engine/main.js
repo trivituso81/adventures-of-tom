@@ -13,6 +13,7 @@ function pollGamepad() {
   const A=edge(0),B=edge(1),Y=edge(3),START=edge(9),SEL=edge(8),L=edge(4),R1=edge(5),L2=edge(6),R2=edge(7);
   const dirEdge=dir!==gp.dir; gp.dir=dir;
   const back=dir==='up'||dir==='left';
+  if(typeof partyBannerHeld==='function'&&partyBannerHeld()) { input.padDir=null; if(A||B) partyBannerDismiss(); return; }   // a join or leave banner holds the game (bannerhold1)
   if(L) toggleLayout();
   if(typeof B3V!=='undefined'&&B3V.open) { input.padDir=null; b3vPad(dir,dirEdge,A,B,L2,R1||R2); return; }   // the Vibes screen: engine/b3-menu.js
   if(splash.active) { input.padDir=null; splashPad(dir,dirEdge,A,B); return; }
@@ -108,7 +109,7 @@ startSplash();
   const d=document.createElement('button');
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build clipposes';
+  d.textContent='build bannerhold1';
   const build=d.textContent,stamp=()=>{ const w=typeof buildWhenLabel==='function'?buildWhenLabel(build.slice(6)).slice(2):'', duo=typeof duoMode!=='undefined'&&duoMode.device?window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):'';
     d.textContent=build; for(const t of [w,duo]) if(t){ const s=document.createElement('small'); s.textContent=t; d.appendChild(s); } };
   window.BUILD_TAG=build.slice(6);
