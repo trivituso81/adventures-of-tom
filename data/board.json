@@ -6670,12 +6670,12 @@
    "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "voice",
    "fyi": true,
    "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
    "blocks": [],
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-19",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
@@ -6709,6 +6709,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving!  is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: I'm starving. should not have been dropped Sent to Claude as card c-fix-ch1starving-3; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "links": [
@@ -6719,7 +6723,8 @@
      ],
      "label": "Tom's line"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-ch1starving",
@@ -8114,6 +8119,56 @@
     "effort": "medium (two small pictures and four link lines)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-adminicons1 in data/board.json. Make a generic icon for admin.html and a different one for board.html (favicon 32 and 180 x 180 apple-touch-icon each), link them in each page head, push as adminicons1 (first push: board: start c-adminicons1). You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-fix-ch1starving-3",
+   "tag": "fix-ch1starving-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Voice Clips",
+   "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
+   "next": "You reported a problem on Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: I'm starving. should not have been dropped",
+   "blocks": [
+    "t-ch1starving"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:16:40.684Z",
+     "card": "t-ch1starving",
+     "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
+     "ask": "voice",
+     "words": "I'm starving. should not have been dropped",
+     "shot": "",
+     "asked": "ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1starving"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-ch1starving."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-ch1starving: I'm starving. should not have been dropped"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! .",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-3 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-3.\n\nTom tested and found problems:\n1. Card t-ch1starving (Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped), ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good. He wrote: I'm starving. should not have been dropped\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:16:40.684Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-ch1starving"
   }
  ],
  "sessions": [
