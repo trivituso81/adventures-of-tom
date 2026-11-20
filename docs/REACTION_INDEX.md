@@ -5,61 +5,60 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Kind | Lines with a reaction |
 |---|---|
-| scene | 2314 |
-| map | 373 |
-| table | 254 |
+| scene | 2270 |
+| map | 364 |
+| table | 241 |
 | shop | 66 |
 | recruit | 46 |
-| cab | 36 |
-| **All** | 3089 |
+| cab | 35 |
+| **All** | 3022 |
 
 | Mood | Reactions |
 |---|---|
-| Happy | 3347 |
-| Loving | 1181 |
-| Sad | 635 |
-| Angry | 344 |
-| Scared | 730 |
-| Surprised | 1393 |
-| Proud | 915 |
-| Unimpressed | 1307 |
-| **All** | 9852 |
+| Happy | 3224 |
+| Loving | 1123 |
+| Sad | 654 |
+| Angry | 357 |
+| Scared | 749 |
+| Surprised | 1314 |
+| Proud | 905 |
+| Unimpressed | 1268 |
+| **All** | 9594 |
 
 | Listener | Reactions |
 |---|---|
-| Tom | 2441 |
-| Grace | 1694 |
-| Rose | 1604 |
-| TNB | 1314 |
-| Amy | 1103 |
-| Nara | 692 |
-| Deedee | 387 |
-| Boppy | 380 |
-| Aunt Ellie | 32 |
-| Vance | 31 |
+| Tom | 2353 |
+| Grace | 1629 |
+| Rose | 1550 |
+| TNB | 1320 |
+| Amy | 1118 |
+| Nara | 685 |
+| Deedee | 370 |
+| Boppy | 369 |
+| Aunt Ellie | 33 |
 | Justin | 25 |
-| Marlowe | 23 |
-| Olivia | 21 |
+| Marlowe | 25 |
 | Nickel | 18 |
-| Sol | 16 |
-| Bernadette | 8 |
-| Page | 8 |
+| Sol | 17 |
+| Olivia | 13 |
+| Bernadette | 13 |
+| Page | 7 |
 | Daisy | 7 |
-| Dana | 6 |
-| Pruitt | 6 |
 | Penny | 6 |
-| Kiki | 5 |
-| Washington | 3 |
+| Dana | 5 |
+| Washington | 4 |
+| Pruitt | 4 |
+| Carmen | 3 |
+| Kiki | 3 |
 | Luna | 3 |
-| Oolong | 2 |
-| Toni | 2 |
 | Halverson | 2 |
-| Michael | 2 |
-| Carmen | 2 |
 | Pip | 2 |
 | Moss | 2 |
 | Dot | 2 |
+| Oolong | 1 |
 | Ray | 1 |
+| Toni | 1 |
+| Michael | 1 |
 | Alvarez | 1 |
 | Sal | 1 |
 
@@ -68,260 +67,331 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Grace | TATA! You're BACK! | Tom loving |
-| Grace | We waited for you for a hundred years. | Tom loving, Rose happy |
-| Rose | A hundred MILLION years! | Tom happy, Grace happy |
-| Rose | Tata, up! Up up up! | Tom happy |
-| Rose | I'm the tallest! Giddyup, Tata! | Tom happy, Grace happy |
-| Tom | Hello, Rose. Please keep your arms and legs inside the uncle at all times. | Rose happy, Grace happy |
-| Grace | Tata, LOOK. A sparkling diamond gold dumpling squishy! | Tom surprised, Rose surprised |
-| Grace | It's limited edition. There are only two in the whole world. You can squeeze it! | Tom happy |
-| Tom | That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings. | Grace proud, Rose happy |
-| Rose | Come on, Tata! Let's go! | Tom happy, Grace happy |
-
-## scene: ch1Goal (chapter 1)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Grace | Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW. | Tom happy, Rose happy |
-| Rose | I already licked the spoon. Don't tell. | Tom unimpressed, Grace unimpressed |
-| Tom | Then we better hurry. Before somebody licks the rest. | Grace happy, Rose happy |
+| Grace | TATA! You're BACK! | Tom loving (at "TATA!") |
+| Grace | We waited for you for a hundred years. | Tom loving (at "waited for you"), Rose happy (at "a hundred years") |
+| Rose | A hundred MILLION years! | Tom happy (at "MILLION"), Grace happy (at "MILLION") |
+| Rose | Tata, up! Up up up! | Tom happy (at "Tata, up!") |
+| Rose | I'm the tallest! Giddyup, Tata! | Tom happy (at "Giddyup"), Grace happy (at "tallest!") |
+| Tom | Hello, Rose. Please keep your arms and legs inside the uncle at all times. | Rose happy (at "inside the uncle"), Grace happy (at "inside the uncle") |
+| Grace | Tata, LOOK. A sparkling diamond gold dumpling squishy! | Tom surprised (at "LOOK."), Rose surprised (at "dumpling squishy") |
+| Grace | It's limited edition. There are only two in the whole world. You can squeeze it! | Tom happy (at "squeeze it!") |
+| Tom | That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings. | Grace proud (at "shiniest dumpling I've ever seen."), Rose happy (at "a LOT of dumplings") |
 
 ## scene: ch1Theft (chapter 1)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | My favorite son! | Tom loving |
-| Deedee | And my girls! Come here, come here. | Grace loving, Rose loving |
-| Deedee | Tom, you must be starving! Sit. The crisp needs ten minutes on the counter. | Tom happy |
-| Grace | Deedee. They're on your head. | Deedee surprised, Rose happy, Tom happy |
-| Deedee | So they are. Not one word to Boppy. | Grace happy, Tom happy |
-| Tom | I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap. | Deedee loving |
-| Deedee | Your bread and my rhubarb crisp. Now THAT is a meal. | Tom proud, Grace happy |
-| Tom | Mom, EVERYTHING gives you gas. | Deedee unimpressed, Grace happy, Rose happy |
-| Deedee | And I eat it anyway. That's love, Tom. | Tom loving, Grace happy |
-| Boppy | Tom! Good. I'm not feeling good. It's the stomach. | Tom unimpressed, Deedee unimpressed |
-| Rose | Deedee! A mud blob is taking your PIE! | Tom surprised, Deedee surprised, Grace surprised, Boppy surprised |
-| Tom | That was UNCALLED for! | Deedee angry, Grace angry, Rose scared |
-| Deedee | That's my GOOD tin! Grab your shoes. I'm coming with you. | Tom proud, Grace proud, Rose happy |
-| Boppy | I TOLD you something lives in that pond. Twenty years I've been saying it. Nobody listens to Boppy. | Tom unimpressed, Deedee unimpressed |
-| Boppy | I'd come, but the stomach. Bring me back that fish. | Tom unimpressed, Grace happy |
+| Deedee | My favorite son! | Tom loving (at "favorite son") |
+| Tom | That was UNCALLED for! | Deedee angry (at "UNCALLED"), Grace angry (at "UNCALLED"), Rose scared |
 
 ## scene: CH1_AFTER (chapter 1)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving, Grace loving, Rose loving |
-| Deedee | There. Good as new. Try not to do that again. | Tom happy, Grace happy, Rose happy |
-
-## scene: ch1Mudling (chapter 1)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Deedee | Crumbs! Rhubarb crumbs. That little thief went right through here. | Grace surprised, Rose surprised, Tom unimpressed |
-| Rose | Tata. The mud is MOVING. | Tom surprised, Grace scared, Deedee surprised |
-| Mudling | Blub. The pie went that way. You can't have it. Blub. | Tom unimpressed, Grace angry, Rose scared, Deedee angry |
-| Grace | Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT! | Tom unimpressed, Rose happy, Deedee proud |
-| Deedee | Good job, girls. The crumbs keep going north. | Grace proud, Rose proud |
-
-## scene: ch1Skeeter (chapter 1)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Skeeter Swarm | Bzzz. Somebody smells like rhubarb. Bzzzzz. | Grace scared, Rose scared, Tom unimpressed |
-| Grace | Ew. Ew ew ew. Nobody touch my hair. | Rose happy, Tom unimpressed, Deedee loving |
-| Deedee | Everybody okay? Itchy isn't hurt. Keep walking. | Grace unimpressed, Rose happy |
-
-## scene: ch1Grump (chapter 1)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Pond Grump | Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me. | Rose happy, Grace surprised, Tom unimpressed |
-| Rose | I'm not laughing. I'm giggling. It's different. | Tom happy, Grace unimpressed, Deedee happy |
-| Pond Grump | That's IT. Soggy Slap. For the giggler. | Rose scared, Tom angry, Deedee angry |
-| Deedee | Hugs for everyone. There. All better. | Tom loving, Grace loving, Rose loving |
-| Deedee | The crumbs go around the pond. Toward Boppy’s fishing spot. | Tom proud, Grace proud |
-| Grace | Boppy says the Big One lives over there. | Rose scared, Tom unimpressed |
-| Tom | Boppy also says the stomach thing is serious. Stay close. | Grace happy, Deedee unimpressed |
+| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving (at "make it better"), Grace loving (at "make it better"), Rose loving (at "make it better") |
 
 ## scene: ch1Pond (chapter 1)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Grace | THERE! The thief! He still has the tin! | Tom proud, Rose surprised, Deedee angry |
-| The Big One | GLUB. Is that a pie? For me? | Grace surprised, Rose surprised, Tom unimpressed |
-| Big Mudling | Blub. For you, boss. | Deedee angry, Tom unimpressed |
-| The Big One | It fits. I'm a king now. GLUB. | Grace unimpressed, Rose happy, Deedee angry, Tom unimpressed |
-| Deedee | That's my GOOD tin, you overgrown handbag! | Tom happy, Grace happy, Rose happy |
-| Rose | Tata, he looks like a turtle wearing a hat. | Tom happy, Grace happy, Deedee unimpressed |
-| Tom | Nobody touches Deedee’s crisp. Everybody ready? | Grace proud, Rose proud, Deedee proud |
-| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving, Grace loving, Rose loving |
-| Deedee | Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again. | Tom proud, Rose proud, Grace proud |
+| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving (at "make it better"), Grace loving (at "make it better"), Rose loving (at "make it better") |
 
-## scene: ch1AfterBoss (chapter 1)
+## scene: CH1_AFTER (chapter 1)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| The Big One | Glub. Nobody ever made me laugh before. You can have your tin back. | Rose loving, Grace surprised, Deedee loving, Tom loving |
-| The Big One | Glub. Fine. Take your tin. I'm going back in the pond to think about things. | Deedee happy, Grace happy, Rose happy, Tom unimpressed |
-| Deedee | My tin! And look. Half the crisp is still in it. | Grace happy, Rose happy, Tom happy |
-| Grace | The Big One ate the other half. I saw crumbs on its chin. | Deedee unimpressed, Rose happy, Tom happy |
-| Deedee | Then we split this half. Everybody home. Wait until Boppy hears about this. | Tom happy, Grace happy, Rose happy |
+| Deedee | There. Good as new. Try not to do that again. | Tom happy (at "Good as new"), Grace happy (at "Good as new"), Rose happy (at "Good as new") |
 
-## scene: ch1End (chapter 1)
+## scene: ch1Pond (chapter 1)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Boppy | You found the Big One? I TOLD everybody. Twenty years. | Tom unimpressed, Grace happy, Deedee unimpressed |
-| Tom | It had this stuck in its lip. | Boppy surprised, Grace proud |
-| Boppy | My LURE! I lost that in 2006. Still shiny. Unlike me. | Tom happy, Grace happy, Rose happy, Deedee unimpressed |
-| Boppy | Keep it, Tom. For luck. The fish clearly didn't want it. | Tom loving |
-| Deedee | Sit. Everybody sit. Half a crisp is still a crisp. | Tom happy, Grace happy, Rose happy, Boppy happy |
-| Rose | This is the best half a crisp I ever had. | Deedee loving, Tom happy |
-| Grace | Tata, you're staying the WHOLE week, right? | Tom loving, Rose happy |
-| Tom | The whole week. And nobody is stealing anything else. | Grace happy, Rose happy, Deedee loving |
-| Boppy | Slow down. Everybody eats too fast. My stomach. | Deedee unimpressed, Tom unimpressed, Grace happy |
+| Deedee | Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again. | Tom proud (at "whoever it stares at"), Rose happy (at "make it laugh"), Grace proud (at "we try again") |
 
 ## scene: ch2Loft (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Look who flew three thousand miles to see me. | Tom loving |
-| Tom | I flew three thousand miles to see you... and maybe the starter. | TNB happy |
-| TNB | Main event. I'll take it. | Tom loving |
-| TNB | My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours. | Tom happy |
-| TNB | Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple. | Tom surprised |
-| Tom | All yours. I like that. We'll look, together. One quick stop first. My starter has been alone for a week. | TNB loving |
+| TNB | Look who flew three thousand miles to see me. | Tom loving (at "Look who flew") |
+| TNB | My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours. | Tom loving (at "I'm all yours") |
 
 ## scene: ch2Porch (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel. | Tom surprised, Nara happy |
-| TNB | She's been sitting on your porch since eight. I tried to take her to the loft. She refused. | Tom loving, Nara loving |
-| TNB | Also, your starter was bubbling out of the jar, so I baked a boule with it. | Tom surprised |
-| Tom | I'm proud. As long as you didn't spin it on your pottery wheel. | TNB happy |
-| Nara | Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard. | TNB happy, Tom happy |
-| Nara | She gets the bread. Tom gets a lick. | TNB loving |
-| Tom | Sit, paw, treat. She knows the whole routine. So polite! | Nara proud, TNB happy |
+| TNB | Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel. | Tom surprised (at "Olivia dropped her off"), Nara happy |
+| TNB | She's been sitting on your porch since eight. I tried to take her to the loft. She refused. | Tom loving (at "since eight"), Nara loving (at "She refused") |
+| Tom | Sit, paw, treat. She knows the whole routine. So polite! | Nara proud (at "whole routine"), TNB happy (at "So polite") |
 
 ## scene: ch2Starter (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles. | TNB unimpressed |
-| TNB | You talk to that jar more than you talk to me. | Tom happy |
-| Tom | The jar gets fifty grams of flour. You get the whole week. | TNB loving |
-| Tom | ...And you steamed my shirts for the flight. You win. You always win. | TNB proud |
+| Tom | Hello, Bready Mercury. Did you miss me? You missed me. | TNB happy (at "You missed me") |
+| Tom | Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles. | TNB happy (at "Look at those bubbles") |
 | TNB | I'll take it. | Tom loving |
-| Nara | Nara is at the front window, whining. Her tail is down. | Tom surprised, TNB surprised |
-| TNB | Babe. Look outside. Is the street... purple? | Tom surprised, Nara scared |
+| TNB | Babe. Look outside. Is the street... purple? | Tom surprised (at "purple"), Nara scared |
 
 ## scene: ch2Smog (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Mr. Washington! Is everything okay? | TNB scared |
-| Mr. Washington | Tom. Back in 1979, this whole block... | Tom happy, TNB unimpressed |
+| Tom | Mr. Washington! Is everything okay? | TNB scared (at "Mr. Washington!") |
+| Mr. Washington | Tom. Back in 1979, this whole block... | Tom surprised (at "this whole block..."), TNB surprised (at "this whole block...") |
 | Mr. Washington | ... | Tom surprised, TNB scared |
-| TNB | He's been saying that for a while, babe. | Tom scared |
-| Mr. Washington | Such a nice afternoon. It should always be this afternoon. | Tom scared, TNB scared, Nara scared |
-| Tom | Excuse me, smog. That was UNCALLED for. | TNB happy |
-| Smoglet | Cough. Nice street. We're going to sit on it for a while. Forever, actually. | Tom angry, TNB scared, Nara angry |
-| TNB | Scarier than movie night. Remember? You threw the whole popcorn bowl. | Tom unimpressed |
-| Tom | I was startled. Briefly. With dignity. | TNB happy |
-| TNB | It was a battle plan. You just didn't know it yet. | Tom unimpressed |
-| TNB | Okay. Okay. Everybody breathe. Through the nose. Not the smog. | Tom happy, Nara happy |
-| TNB | They're gone, but he's still out of it. Look at him. | Tom sad |
-| Mr. Washington | Nobody needs to go anywhere. Nobody needs to get any older. | Tom sad, TNB sad |
-| Tom | That's not a Mr. Washington sentence. Let's check on the boulevard. Miss Odette and Doña Carmen. | TNB proud |
+| Mr. Washington | Such a nice afternoon. It should always be this afternoon. | Tom scared (at "always be this afternoon"), TNB scared (at "always be this afternoon"), Nara scared |
+| Tom | Excuse me, smog. That was UNCALLED for. | TNB happy (at "UNCALLED") |
+| Smoglet | Cough. Nice street. We're going to sit on it for a while. Forever, actually. | Nara angry (at "Cough."), TNB scared (at "Nice street"), Tom angry (at "Forever, actually") |
+| TNB | Scarier than movie night. Remember? You threw the whole popcorn bowl. | Tom unimpressed (at "threw the whole popcorn bowl") |
+| TNB | Okay. Okay. Everybody breathe. Through the nose. Not the smog. | Nara happy (at "Everybody breathe"), Tom happy (at "Not the smog") |
+| TNB | The smog monsters are gone, but Mr. Washington is still in a daze. Look at him. | Tom sad (at "still in a daze") |
+| Mr. Washington | Nobody needs to go anywhere. Nobody needs to get any older. | Tom sad (at "get any older"), TNB sad (at "get any older") |
 
 ## scene: ch2Odette (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Miss Odette | Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice? | Tom surprised, TNB sad |
-| TNB | She's made that gumbo every day for fifty years. It's never once been "never done." | Tom sad |
-| Tom | The smog wants everything to stay exactly the same. Forever. That's not a nice afternoon. That's a hostage situation. | TNB proud |
+| Miss Odette | Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice? | Tom surprised (at "never has to be done"), TNB sad (at "never has to be done") |
 
 ## scene: ch2Carmen (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Doña Carmen | The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them? | Tom sad, TNB sad |
-| Nara | Nara sniffs the comal. She sneezes. The smoke smells like the hills. | Tom surprised, TNB surprised |
-| TNB | Nara is right. That's not kitchen smoke. That's the same purple stuff. | Tom proud, Nara proud |
+| Doña Carmen | The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them? | Tom sad (at "always this afternoon"), TNB scared (at "flip them") |
+| TNB | Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills. | Nara proud (at "Nara is right"), Tom surprised (at "same purple smog") |
 
 ## scene: ch2Source (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Babe. Look north. It's all coming down off the hills. | Tom surprised |
-| TNB | The Observatory. The pipes on the side are pumping it out like a smoke machine on a bad set. | Tom surprised, Nara scared |
-| Tom | Then that's where we're going. Nara, stay close. | TNB proud, Nara proud |
-| Nara | Nara presses against Tom’s leg. She's not letting him go anywhere without her. | Tom loving, TNB loving |
+| TNB | Babe. Look north. It's all coming down off the hills. | Tom surprised (at "Look north") |
+| TNB | It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set. | Tom surprised (at "the Observatory"), Nara scared (at "pumping out smog") |
+| Tom | Then that's where we're going. Nara, stay close. | TNB proud (at "where we're going"), Nara proud (at "Nara, stay close") |
 
 ## scene: CH2_AFTER (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Up, everybody. Wardrobe says nobody is cut from this scene. | Tom happy, Nara happy |
+| TNB | Up, everybody. Wardrobe says nobody is cut from this scene. | Nara happy (at "Up, everybody"), Tom happy (at "nobody is cut") |
 
 ## scene: ch2Flurry (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Ticket Flurry | Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever. | Tom unimpressed, TNB unimpressed, Nara angry |
-| TNB | I take the Metro. You have nothing on me. | Tom happy |
-| Tom | Contested. Appeal granted. Keep going. | TNB happy |
+| Ticket Flurry | Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever. | TNB unimpressed (at "Street cleaning."), Tom angry (at "You didn't read the sign"), Nara angry |
+| TNB | I take the Metro. You have nothing on me. | Tom happy (at "I take the Metro") |
+| Tom | I contest that ticket, and I'm granting my own appeal. Let's keep going. | TNB happy (at "granting my own appeal") |
 
 ## scene: ch2Coyote (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Canyon Coyote | Nice hike. You look like you have snacks. And the dog looks like a snack. | Tom angry, TNB scared, Nara scared |
-| Nara | Nara’s hackles go up. She stands right in front of Tom. | Tom loving, TNB proud |
-| Canyon Coyote | Pack Howl. For the fluffy one. | Nara angry, Tom angry, TNB scared |
-| TNB | Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe? | Tom loving, Nara happy |
-| Tom | Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple. | TNB loving, Nara happy |
+| Canyon Coyote | Nice hike. You look like you have snacks. And the dog looks like a snack. | Tom angry (at "the dog looks like a snack"), Nara angry (at "the dog looks like a snack"), TNB surprised (at "the dog looks like a snack") |
+| Canyon Coyote | Pack Howl. For the fluffy one. | Nara angry (at "Pack Howl"), TNB scared (at "Pack Howl"), Tom angry (at "fluffy one") |
+| TNB | Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe? | Nara happy (at "quick heal"), Tom loving (at "quick kiss") |
+| Tom | Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple. | TNB loving (at "Kiss accepted"), Nara happy (at "Follow the purple") |
 
 ## scene: ch2Boss (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | The ground is humming. That's never a good sign. I've seen this movie forty-seven times. | Tom unimpressed, Nara scared |
-| The Big Shake | RUMBLE. Somebody plugged my pipes. Now everything is stuck. I LIKE stuck. | Tom surprised, TNB scared, Nara scared |
-| The Big Shake | Stuck means nothing moves. Nothing changes. Nothing ever has to say goodbye. | Tom sad, TNB sad |
-| Tom | Everybody says goodbye. Then they come back. That's what planes are for. | TNB loving |
-| Tom | Things have to move. | TNB proud, Nara proud |
-| Nara | Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw. | Tom loving, TNB happy |
-| TNB | Well, well, well... looks like we're in a bit of a shaky situation. | Tom unimpressed, Nara happy |
-| TNB | Cut. Reset. Back to one, everybody. | Tom happy, Nara happy |
-| TNB | Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos. | Tom proud |
+| TNB | The ground is humming. That's never a good sign. I've seen this movie forty-seven times. | Nara scared (at "humming"), Tom unimpressed (at "forty-seven times") |
+| The Big Shake | Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck. | Nara scared (at "grumbling"), Tom surprised (at "purple smog"), TNB scared (at "I LIKE stuck") |
+| The Big Shake | If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes. | Tom sad (at "No goodbyes"), TNB sad (at "No goodbyes") |
+| Tom | Everybody says goodbye. Then they come back. That's what planes are for. | TNB loving (at "they come back") |
+| Tom | Things have to move. | TNB proud (at "have to move"), Nara proud (at "have to move") |
+| TNB | Well, well, well... looks like we're in a bit of a shaky situation. | Tom unimpressed (at "shaky situation"), Nara happy (at "shaky situation") |
+| TNB | Cut. Reset. Back to one, everybody. | Tom happy (at "Back to one"), Nara happy (at "Back to one") |
+| TNB | Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos. | Tom proud (at "heal right after the Aftershock") |
 
 ## scene: ch2AfterBoss (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| The Big Shake | Rumble. You asked how I was doing. Nobody has asked in a million years. | Tom loving, TNB loving, Nara loving |
-| The Big Shake | ...I'll let things move. A little. Two inches a year. That's my best offer. | Tom happy, TNB happy |
-| The Big Shake | Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices. | Tom unimpressed, TNB happy, Nara happy |
-| TNB | Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue. | Tom happy, Nara happy |
-| Tom | Somebody plugged those pipes on purpose. Smog doesn't do that by itself. | TNB surprised |
-| TNB | Spooky. I love it. Let's go check on Mr. Washington. | Tom happy, Nara happy |
+| The Big Shake | Rumble. You asked how I was doing. Nobody has asked in a million years. | Tom loving (at "asked how I was doing"), TNB loving (at "a million years"), Nara loving (at "a million years") |
+| The Big Shake | ...I'll let things move. A little. Two inches a year. That's my best offer. | Tom happy (at "Two inches a year"), TNB happy (at "best offer") |
+| The Big Shake | Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices. | TNB happy (at "pipes are clear"), Nara happy (at "pipes are clear"), Tom unimpressed (at "think about my choices") |
+| TNB | Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue. | Tom happy (at "blue again"), Nara happy (at "blue again") |
 
 ## scene: ch2End (chapter 2)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Mr. Washington | ...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch. | Tom loving, TNB loving |
-| Mr. Washington | Where was I? Oh. I was done. That was the whole story. | Tom happy, TNB happy |
-| Mr. Washington | Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing. | Tom loving, TNB loving |
-| Tom | Keep the old windows, though. | Washington happy, TNB happy |
-| Mr. Washington | Keep the old windows. Smart man. | Tom proud, TNB happy |
-| TNB | Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking. | Tom happy, Nara happy, Washington happy |
-| Nara | Nara leans on both of them at once. Tiny excited puddle. Nobody minds. | Tom loving, TNB loving |
-| Tom | Home. Both of them. Okay. Good. | TNB loving, Nara loving |
+| Mr. Washington | ...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch. | TNB happy (at "gumbo on a Saturday night"), Tom loving (at "Kids on every porch") |
+| Mr. Washington | Where was I? Oh. I was done. That was the whole story. | Tom happy (at "I was done"), TNB happy (at "the whole story") |
+| Mr. Washington | Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing. | Tom loving (at "things changing"), TNB loving (at "things changing") |
+| Tom | Keep the old windows, though. | Washington happy (at "old windows"), TNB happy (at "old windows") |
+| Mr. Washington | Keep the old windows. Smart man. | Tom proud (at "Smart man"), TNB happy (at "Smart man") |
+| Tom | Long Island is home, and so is this. I have two homes. Okay. Good. | TNB loving (at "so is this"), Nara loving (at "two homes") |
+
+## scene: ch2Loft (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | Well, well, well... | Tom loving (at "Well, well, well") |
+| Tom | Um, actually, it's two thousand four hundred and seventy-five. Delta counts every one, and so do I. | TNB happy (at "and so do I") |
+| TNB | How many SkyMiles is that now? | Tom proud (at "SkyMiles") |
+| Tom | Four hundred and twelve thousand. | TNB surprised (at "twelve thousand") |
+| TNB | Babe! What are you saving them for? | Tom proud (at "saving them for") |
+| Tom | Something really special. | TNB unimpressed (at "really special") |
+| TNB | You said that at three hundred thousand. | Tom surprised (at "three hundred thousand") |
+| Tom | It has to be REALLY special. But I'd have flown here for zero miles. | TNB loving (at "zero miles") |
+| TNB | Zero miles. Babe. That's the most romantic thing a Delta person can say. | Tom loving (at "most romantic thing") |
+| Tom | Wait, why is the sky PURPLE? It's two in the afternoon! | TNB happy (at "PURPLE") |
+| TNB | It's been like that since this morning. I held my soda up to it. It's the exact same color. | Tom surprised (at "since this morning") |
+| TNB | I don't know what it is, babe. But it's pretty grape. | Tom happy (at "pretty grape") |
+| Tom | Don't make me laugh, it's freaky! ...Okay. It IS a little grape. | TNB happy (at "It IS a little grape") |
+| Tom | Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp. | TNB surprised (at "mud with eyes") |
+| TNB | The mud took Deedee's crisp? Is the mud okay? | Tom happy (at "Is the mud okay") |
+| Tom | We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown. | TNB surprised (at "talking fish") |
+| TNB | A talking fish! What did he say? | Tom happy (at "What did he say") |
+| Tom | He said "Glub." Then he gave Rose a gold coin. | TNB happy (at "Glub.") |
+| TNB | Mud in the kitchen and a talking fish. Babe, something fishy is going on. | Tom happy (at "something fishy") |
+| Tom | I flew six hours for that pun? | TNB happy (at "that pun") |
+| Tom | Let's go home to Jefferson Park. Bready Mercury has been alone all week. | TNB happy (at "alone all week") |
+| TNB | He hasn't been alone. Come on, I'll show you. | Tom surprised (at "hasn't been alone") |
+
+## scene: ch2Porch (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day. | Nara happy (at "stayed here with her"), Tom loving (at "every day") |
+| Tom | Every day? Fifty grams of flour and fifty grams of water? | TNB happy (at "fifty grams of water") |
+| TNB | Fifty and fifty. I used your little scale. | Tom happy (at "your little scale") |
+| TNB | He got so big he was climbing out of the jar. So I baked a loaf with him. | Tom surprised (at "climbing out of the jar") |
+| Tom | It's perfectly round! How did you get it so round? | TNB proud (at "perfectly round") |
+| TNB | I shaped it on my pottery wheel. | Tom surprised (at "pottery wheel") |
+| Tom | On the pottery wheel! That's brilliant. Why have I been doing it with my hands? | TNB proud (at "That's brilliant") |
+| TNB | I make bowls all day, babe. So I made you a bread bowl. | Tom happy (at "bread bowl") |
+| Tom | A bread bowl! Now we need soup. | TNB happy (at "Now we need soup") |
+| Tom | Nara, sit. | Nara happy (at "Nara") |
+| Tom | Paw. | Nara happy (at "Paw"), TNB happy (at "Paw") |
+
+## scene: ch2Starter (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Tom | He's twice as big as when I left! What have you been doing with him? | TNB proud (at "twice as big") |
+| TNB | I sing to him while I stir. He's Bready Mercury. He needs his music. | Tom happy (at "I sing to him") |
+| TNB | "Another One Bites the Crust." | Tom happy (at "Crust") |
+| Tom | "Bohemian Rye-psody!" | TNB surprised (at "Rye-psody") |
+| TNB | Babe. That's so good. I'm singing that one tomorrow. | Tom proud (at "That's so good") |
+| Tom | That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn! | Nara scared, TNB surprised (at "same purple as the sky") |
+| Tom | Mr. Washington is sitting out on his porch in that. Come on! | TNB scared (at "on his porch in that") |
+
+## scene: ch2Smog (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Tom | He just said the same thing again, word for word. | TNB scared (at "word for word") |
+| TNB | He always finishes that story. I've heard it nine times. It ends with gumbo. | Tom scared (at "He always finishes that story") |
+| Tom | It's not a nice afternoon, Mr. Washington! The air is purple! | TNB scared (at "The air is purple") |
+| TNB | Babe. That cloud has a face. And it just talked to us. | Tom proud (at "it just talked to us") |
+| Tom | It's like the mud at my mother's house! I told you they talk! | TNB surprised (at "I told you they talk") |
+| TNB | You did tell me. It's a lot scarier in person. | Tom scared (at "scarier in person") |
+| Tom | The man in the mask jumped out! I jumped higher! | TNB happy (at "I jumped higher") |
+| TNB | And it rained popcorn on the whole room. Let's do that to these clouds. | Tom surprised (at "do that to these clouds") |
+| Tom | I don't have any popcorn! | TNB happy (at "popcorn") |
+| TNB | You don't need popcorn. You just need to be that scared. | Tom scared (at "that scared") |
+| Tom | Oh, I'm that scared. | TNB happy (at "I'm that scared") |
+| Tom | That doesn't sound like him at all. He tells me how old he is every single morning. He's proud of it! | TNB sad (at "doesn't sound like him at all") |
+| TNB | If the smog did this to him, what about everybody on the boulevard? | Tom scared (at "everybody on the boulevard") |
+| Tom | Miss Odette and Doña Carmen! Come on! | TNB scared (at "Doña Carmen!") |
+
+## scene: ch2Odette (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | Babe, this is bad. Every time I walk in here she yells "Sit down, you're too skinny!" before the door even closes. | Tom sad (at "this is bad") |
+| Tom | Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today. | TNB happy (at "very skinny today") |
+| Tom | Nothing. She's just like Mr. Washington. | TNB sad (at "Nothing.") |
+
+## scene: ch2Carmen (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | Babe, the pupusas are burning! | Tom scared (at "burning") |
+| Tom | Doña Carmen, I'm so sorry. I'm reaching over your counter. I know nobody touches the griddle. | TNB surprised (at "over your counter") |
+| Tom | I flipped them. I'm ready for the towel. Go ahead. | TNB scared (at "ready for the towel") |
+| TNB | She smacks you with that towel if you even look at the griddle. | Tom scared (at "even look at the griddle") |
+| Tom | I know! I've never wanted to be hit with a towel so badly! | TNB sad (at "so badly") |
+
+## scene: ch2Flurry (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Tom | The parking tickets can TALK now? They were bad enough when they were quiet! | TNB happy (at "bad enough when they were quiet") |
+| Tom | And I moved my car on Monday night! I set two alarms! | TNB happy (at "two alarms") |
+| Tom | Fine. Can I pay it in SkyMiles? | TNB happy (at "SkyMiles") |
+
+## scene: ch2Coyote (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Tom | Excuse me! She is not a snack. She is our guest! | Nara proud (at "our guest"), TNB happy (at "our guest") |
+| TNB | We do have snacks, though. I've got half a bag of gummy worms. | Tom surprised (at "We do have snacks") |
+| Canyon Coyote | Coyotes don't eat gummy worms. | TNB surprised (at "don't eat gummy worms") |
+
+## scene: ch2Lemon (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie. | Tom surprised (at "It's grey"), Nara scared (at "even the dirt") |
+| Tom | There's one lemon on it. And the lemon is inside a block of something orange. | TNB surprised (at "something orange") |
+| Tom | I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside. | TNB surprised (at "seen this before") |
+| TNB | On Long Island? Babe, that's three thousand miles away. | Tom unimpressed (at "three thousand miles") |
+| Tom | Two thousand four hundred and seventy-five. | TNB unimpressed (at "seventy-five") |
+| TNB | It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is. | Tom scared (at "no idea what it is") |
+| TNB | There's a little round hole in the side, like somebody took a bite out of it. | Tom surprised (at "round hole in the side") |
+| Tom | The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried. | TNB surprised (at "a bite out of it") |
+| TNB | Can I try anyway? | Tom happy (at "try anyway") |
+| TNB | Okay. Wow. Your turn. | Tom unimpressed (at "Your turn") |
+| Tom | I couldn't pull the one at the pond out either. ...Maybe it's easier in California. | TNB happy (at "easier in California") |
+| Tom | It's not easier in California. | TNB happy (at "not easier in California") |
+| Tom | It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly. | Nara proud (at "flashbulb"), TNB scared (at "exactly like it") |
+| TNB | Who leaves the same bulb at a pond in New York and on a hill in Los Angeles? | Tom scared (at "on a hill in Los Angeles") |
+| Tom | I don't know. And I really don't like it. | TNB scared (at "really don't like it") |
+| TNB | Me neither. And I like almost everything. | Tom happy (at "almost everything") |
+
+## scene: ch2Boss (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Tom | That hill has EYES! The whole hill just stood up! | TNB scared (at "EYES!"), Nara scared (at "EYES!") |
+| TNB | Babe. I take naps on that hill. | Tom surprised (at "naps on that hill") |
+| Tom | I think you've been napping on his face! | TNB scared (at "on his face") |
+| The Big Shake | RUMBLE. There was a big flash up here this morning, and it woke me up. | TNB scared (at "RUMBLE."), Nara scared (at "RUMBLE."), Tom surprised (at "big flash") |
+| The Big Shake | A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever. | Tom sad (at "always leaving"), TNB sad (at "always leaving"), Nara scared (at "Not ever") |
+| TNB | He'd know. He has four hundred and twelve thousand miles. | Tom proud (at "twelve thousand miles") |
+
+## scene: ch2AfterBoss (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | I'm sorry I kept falling asleep on you. I didn't know you were a person. | Tom happy (at "you were a person") |
+| The Big Shake | I liked the naps. You were the only one who ever stayed. | TNB loving (at "liked the naps"), Tom loving (at "ever stayed") |
+| The Big Shake | Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO! | TNB happy (at "It tickles"), Tom surprised (at "A-CHOO"), Nara happy (at "A-CHOO") |
+| Tom | It's a gold coin with a lemon on it. Rose's has a dragonfly. | TNB surprised (at "a lemon on it") |
+| Tom | Yes. A fish gave her one, and now a hill sneezed one at me. | TNB happy (at "sneezed one at me") |
+| TNB | Nara thinks it's a very small frisbee. | Tom happy (at "very small frisbee"), Nara happy (at "frisbee") |
+| Tom | Nara, I'm sorry. We don't play fetch with gold. | Nara sad (at "fetch with gold"), TNB happy (at "fetch with gold") |
+| Tom | The hill said a flash woke it up this morning. The fish at the pond said the same thing. | TNB surprised (at "the same thing") |
+| TNB | Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington. | Tom scared (at "I don't love that") |
+
+## scene: ch2End (chapter 2)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| TNB | That's ten times now. It gets better every time. | Tom happy (at "ten times"), Washington happy (at "better every time") |
+| Miss Odette | I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny! | Washington happy (at "gumbo for the whole block"), TNB happy (at "Sit DOWN"), Tom happy (at "too skinny") |
+| Doña Carmen | And YOU. Who touched my griddle? | TNB surprised (at "And YOU"), Tom happy (at "my griddle") |
+| Tom | Thank you, Doña Carmen! That's the best towel I've ever been hit with! | Carmen unimpressed (at "best towel"), TNB happy (at "ever been hit with") |
+| Doña Carmen | They came out perfectly crispy. Don't ever do it again. | Tom proud (at "perfectly crispy"), TNB happy (at "Don't ever do it again") |
+| TNB | Babe. Gumbo. Go get the bread bowl! | Tom surprised (at "bread bowl") |
+| Tom | It has a hole in the top. I gave that piece to Nara. | TNB happy (at "to Nara"), Nara happy (at "to Nara") |
+| TNB | That's not a hole. That's where the gumbo goes in. | Tom happy (at "gumbo goes in") |
+| TNB | With two thousand four hundred and seventy-five miles in between. | Tom loving (at "seventy-five") |
+| Tom | Each way. That's a lot of SkyMiles. | TNB happy (at "a lot of SkyMiles") |
 
 ## scene: ch3Arrive (chapter 3)
 
@@ -336,12 +406,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Deedee | My favorite son! | Tom loving |
-| Deedee | Back already! Look at you. Did they feed you out there? Never mind. I'll feed you. | Tom happy, Grace happy, Rose happy |
 | Boppy | Tom. Good. Sit down. No. Don't sit down. We're going fishing. | Tom unimpressed, Grace happy, Rose happy |
-| Boppy | The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me. | Tom unimpressed, Grace surprised, Rose surprised, Deedee unimpressed |
-| Deedee | Nobody believes him. | Boppy angry, Tom happy, Grace happy |
-| Rose | Boppy, is the Whisker Perch real? | Boppy proud |
-| Boppy | Real as my heartburn, kiddo. | Rose surprised, Tom unimpressed, Grace unimpressed |
 | Grace | I'm bringing a notebook. For science. And for proof. | Boppy proud, Tom happy |
 | Boppy | And I'm bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother. | Grace surprised, Rose surprised, Tom unimpressed, Deedee unimpressed |
 | Deedee | Not one pepper for me either. Peppers give me gas. | Boppy unimpressed, Tom unimpressed |
@@ -358,9 +423,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Oolong | Boppy! The usual? Ginger, peppermint, and a little honey for the stomach. | Boppy happy |
 | Boppy | The stomach thanks you. The stomach is still complaining. But it thanks you. | Oolong happy, Tom unimpressed |
-| The kettle | The kettle whistles, low and long. Oolong leans in to listen. | Tom surprised, Boppy surprised |
-| Oolong | The kettle says a man in a long coat has been buying up gold coins at Penny’s. Paying double. Never takes his hat off. | Tom surprised, Boppy surprised |
-| Tom | On Long Island? Nobody here pays double for anything. | Oolong unimpressed, Boppy unimpressed |
 | Oolong | The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier. | Tom unimpressed, Boppy happy |
 
 ## scene: ch3Story (chapter 3)
@@ -394,13 +456,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | Deedee isn't here. | Rose surprised, Grace surprised, Tom unimpressed |
 | Old Iron-Gill | BLORP. | Boppy surprised, Tom surprised, Grace surprised, Rose surprised |
 | Rose | TATA! A FISH! A HUGE ONE! WITH A MUSTACHE! | Tom surprised, Grace surprised, Boppy surprised |
-| Boppy | That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody! | Tom surprised, Grace surprised, Rose happy |
 | Old Iron-Gill | Blorp. Something smells like peppers. | Boppy scared, Tom unimpressed, Grace scared, Rose happy |
 | Boppy | MY JAR! | Tom surprised, Grace surprised, Rose surprised |
 | Old Iron-Gill | GULP. Spicy. I love it. Bye. | Boppy angry, Tom surprised, Grace surprised, Rose surprised |
 | Tom | That was UNCALLED for! | Boppy angry, Grace angry, Rose happy |
 | Boppy | Pickled in 1989. Nobody takes Boppy’s peppers. NOBODY. | Tom unimpressed, Grace surprised, Rose happy |
-| Boppy | He went west. Into the Whispering Marsh. Come on. And nobody walk fast. | Tom proud, Grace proud, Rose happy |
+| Boppy | Iron-Gill swam west with my jar, into the Whispering Marsh. Come on, we're going after him. And nobody walk fast. | Tom proud, Grace proud, Rose happy |
 
 ## scene: CH3_AFTER (chapter 3)
 
@@ -414,7 +475,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Soggy Sock | Squelch. Have you seen my other sock? It looks just like me. It's ALSO angry. | Rose surprised, Grace unimpressed, Tom unimpressed, Boppy unimpressed |
 | Rose | Tata, that sock has a FACE. | Tom unimpressed, Grace unimpressed, Boppy unimpressed |
-| Boppy | Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV. | Tom happy, Grace happy, Rose happy |
 | Boppy | Socks. Out here. Nobody keeps track of their socks anymore. | Tom unimpressed, Grace happy |
 
 ## scene: ch3Tangle (chapter 3)
@@ -431,10 +491,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Boppy | The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time. | Grace unimpressed, Rose surprised, Tom happy |
-| Grace | Sundials can't tell the wrong time. That's not how sundials work. | Boppy unimpressed, Tom happy |
-| Boppy | That's what I said. | Grace unimpressed, Tom happy, Rose happy |
-| Old reeds | Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it. | Tom surprised, Grace surprised, Rose surprised, Boppy unimpressed |
 | Tom | Then we ask it nicely to move. Iron-Gill isn't keeping that jar. | Boppy proud, Grace proud, Rose proud |
 
 ## scene: ch3Snag (chapter 3)
@@ -445,26 +501,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | You're sitting on the way to Sundial Hollow. Shove over. | Tom happy, Grace happy, Rose happy |
 | Snag | Make me. Slowly. I'm very heavy when wet. I'm always wet. | Boppy angry, Tom unimpressed, Grace unimpressed, Rose happy |
 | Rose | Tata, it's a LOG with a BOOT. | Tom happy, Grace unimpressed, Boppy unimpressed |
-| Old reeds | The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk. | Tom surprised, Grace surprised, Rose surprised, Boppy proud |
 | Grace | A secret boardwalk. Of course there's a secret boardwalk. | Boppy unimpressed, Tom happy, Rose surprised |
 | Boppy | Not secret. Just old. Like me. Nobody comes back here anymore. | Tom loving, Grace sad, Rose sad |
-
-## scene: ch3Hollow (chapter 3)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Boppy | Sundial Hollow. I haven't been back here since I was nine. It hasn't changed. It still says seven. | Tom surprised, Grace unimpressed, Rose surprised |
-| Grace | It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work. | Boppy unimpressed, Tom happy, Rose happy |
-| Boppy | That's what I said. | Grace unimpressed, Tom happy, Rose happy |
-| Rose | Tata! Something shiny is stuck in it! | Tom surprised, Grace surprised, Boppy surprised |
-| Tom | A coin. Wedged right under the pointer. Somebody pushed this in on purpose. | Grace surprised, Rose surprised, Boppy surprised |
-| The sundial | Click. The shadow swings all the way around the dial and settles on the right hour. | Tom surprised, Grace surprised, Rose surprised, Boppy surprised |
-| The spillway | Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open. | Tom surprised, Grace surprised, Rose surprised, Boppy proud |
-| Grace | It MOVED. Shadows don't move like that. I'm writing this down. In pen. | Tom happy, Boppy happy, Rose happy |
-| Tom | Oolong’s kettle said a man in a long coat is buying gold coins at Penny’s. Paying double. | Boppy surprised, Grace surprised |
-| Boppy | Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket. | Tom proud, Grace surprised |
-| Boppy | Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything. | Tom proud |
-| Boppy | Now. The Deep Pool. That's where Iron-Gill goes to sulk. | Tom proud, Grace proud, Rose proud |
 
 ## scene: ch3Pool (chapter 3)
 
@@ -475,7 +513,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | You took my jar. | Grace scared, Rose scared, Tom proud |
 | Old Iron-Gill | I took your jar. Forty years you sit on that pier and you never once come to visit. You only ever bring HOOKS. | Boppy surprised, Tom sad, Grace sad, Rose sad |
 | Rose | Boppy, he's sad! And spicy! | Boppy unimpressed, Tom loving, Grace sad |
-| Boppy | He's a FISH, kiddo. | Rose sad, Grace unimpressed, Tom loving |
 | Boppy | Tom. Tackle box. We do this the old way. | Tom proud, Grace proud, Rose proud |
 | Tom | Quiet on the pier, everybody. | Boppy proud, Grace proud, Rose happy |
 | Boppy | Headcount. One, two, three, four. Good. | Tom happy, Grace unimpressed, Rose happy |
@@ -491,9 +528,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | My jar. Still sealed. Still hot. | Tom happy, Grace happy, Rose happy |
 | Boppy | And look at that. Forty years, and I finally caught Old Iron-Gill. | Tom loving, Grace unimpressed, Rose happy |
 | Grace | Technically he caught your jar, and then we caught him. I'm writing it down anyway. For proof. | Boppy unimpressed, Tom happy, Rose happy |
-| Boppy | Put the date. Put the time. Use the sundial. It works now. | Grace proud, Tom happy |
 | Boppy | Go on, you old bucket. Catch and release. I'll come by. No hooks. | Tom loving, Grace loving, Rose loving |
-| Deep Pool | Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly. | Tom loving, Boppy loving, Grace happy, Rose happy |
 | Rose | Boppy, can we go home now? I want to tell Deedee EVERYTHING. | Boppy loving, Tom happy, Grace happy |
 | Boppy | Everything except the pepper part. | Rose happy, Tom happy, Grace happy |
 | Rose | ESPECIALLY the pepper part. | Boppy scared, Tom happy, Grace happy |
@@ -503,14 +538,11 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Deedee | There they are! Well? Did anybody catch anything? | Tom happy, Grace proud, Rose happy, Boppy proud |
-| Boppy | Old Iron-Gill. Forty years, Dee. I TOLD everybody. | Deedee unimpressed, Tom happy, Grace happy, Rose happy |
 | Deedee | Nobody believed you. | Boppy angry, Tom happy, Grace happy, Rose happy |
-| Grace | I have proof. It's in my notebook. With the time. From a sundial. | Deedee proud, Boppy proud, Tom happy |
 | Rose | Deedee! Boppy almost ate a PEPPER! On the pier! Before LUNCH! | Boppy scared, Deedee surprised, Tom happy, Grace happy |
 | Deedee | Did he. | Boppy scared, Tom happy, Grace happy, Rose proud |
 | Deedee | Hand me my glasses. I want to look at him properly. Where ARE my glasses. | Boppy scared, Rose happy, Tom happy, Grace happy |
 | Rose | Apron pocket, Deedee! | Deedee loving, Tom happy, Grace happy |
-| Deedee | Thank you, Rosie. Now. Let me look at him. | Rose proud, Boppy scared, Tom happy |
 | Boppy | ...Almost isn't eating. Almost is fine. | Deedee unimpressed, Tom happy, Grace happy, Rose happy |
 | Deedee | Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY. | Boppy loving, Tom loving, Grace happy, Rose happy |
 | Boppy | Slowly. Finally. Somebody in this family gets it. | Deedee unimpressed, Tom happy, Grace happy |
@@ -523,15 +555,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | TNB | Cut. Reset. Back to one. Everybody gets a touch-up. | Tom happy, Nara happy |
 | Kiki | (on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad. | Tom surprised, TNB scared, Nara scared |
-| TNB | All three sets are clear. And Stage 7 just opened. That's where the fog came from. | Tom proud, Nara proud |
+| TNB | All three sets are clear, and Stage 7 just unlocked itself. That's where the fog came from, so that's where my rack is. | Tom proud, Nara proud |
 
 ## scene: ch4Arrive (chapter 4)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | TNB | Look who flew in for my big day. I'm on a forty-minute lunch. I spent thirty of it on the Metro. | Tom loving |
-| Tom | You took the train to meet the plane. | TNB loving |
-| TNB | I took the train to meet the man. The plane was a bonus. | Tom loving |
 | TNB | Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed. | Tom proud |
 | TNB | Also, Olivia dropped Nara at your place again. Family trip to the desert. She's been howling at your front door since nine. | Tom surprised |
 | Tom | Then we get Nara. Then I watch you be very important. I'm not joking. | TNB loving |
@@ -541,8 +571,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Nara | A howl from 2nd Ave. Nara has spotted Tom from the porch, two whole blocks away. | Tom happy, TNB happy |
-| Nara | She does three laps around Tom, slams into his shins, and leans on him with all forty pounds. | Tom loving, TNB happy |
 | Tom | Hi. Hi. Yes. I know. I was gone FOREVER. It was six days. | Nara loving, TNB happy |
 | TNB | She's coming to set. I already asked. Nobody said yes, but nobody said no fast enough. | Tom unimpressed, Nara happy |
 
@@ -555,20 +583,16 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Ray | I wave at everybody. That's the job. Go on in. | TNB unimpressed, Tom happy |
 | Kiki | TNB! TNB! The rack! Rack two! It's GONE. | TNB surprised, Tom surprised, Nara surprised |
 | TNB | Gone? It's a rack. It has wheels. It doesn't have ambitions. | Kiki scared, Tom happy |
-| Kiki | It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING. | TNB scared, Tom surprised, Nara scared |
-| Dana | Dana Park. Director. First feature. Without wardrobe there's no shoot. Without a shoot there's no movie. | TNB sad, Tom unimpressed |
+| Dana | I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie. | TNB sad, Tom unimpressed |
 | Dana | And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse. | TNB surprised, Tom unimpressed, Nara happy |
-| Tom | Friction Sprites. On a closed set. | TNB scared, Dana scared, Kiki scared |
 | TNB | Babe. Forty costumes. I steamed every single one. By hand. While humming. | Tom loving, Dana sad |
 | Tom | Then we go get them back. Nara, stay close. This is a professional environment. | TNB loving, Nara happy |
-| Nara | Nara is already sniffing the craft services table. | Tom unimpressed, TNB happy |
 
 ## scene: ch4Snack (chapter 4)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | Toni | Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky. | Tom happy, TNB happy, Nara happy |
-| Nara | Nara takes it very gently. Then she inhales it. Then she sits again, in case there's more. | Tom happy, TNB surprised, Toni loving |
 | TNB | She's never eaten anything that fast. Not even my shoe. | Tom happy, Toni happy, Nara proud |
 | Toni | Here. For the road. Don't tell the grips. | Tom loving, TNB happy, Nara happy |
 
@@ -577,18 +601,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | TNB | The Backlot. Main Street up on the left, the Western street on the right, New York down on the left. All fake. All very expensive. | Tom surprised, Nara surprised |
-| Nara | Nara’s ears go straight up. Something shiny is skittering across New York. | Tom scared, TNB surprised |
 | Tom | Nara. NARA. Don't... | TNB scared, Nara happy |
 | TNB | That's a closed set! She's not on the call sheet! | Tom unimpressed, Nara happy |
-| Nara | Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant. | Tom unimpressed, TNB scared |
 | TNB | She peed on the hydrant. That hydrant is fiberglass. That hydrant is a PROP. | Tom happy, Nara proud |
 | Tom | She doesn't know that. Let her have this. | TNB unimpressed, Nara happy |
-| Nara | She drops something at Tom’s feet. Very proud. Very slobbery. | Tom loving, TNB unimpressed |
 | TNB | That's a costume tag. That's MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice. | Tom surprised, Nara proud |
-| TNB | And it smells like fog juice. The grape kind. Only Stage 7 has a fog machine. | Tom surprised, Nara happy |
+| TNB | And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7. | Tom surprised, Nara happy |
 | Tom | Good girl. Professional environment, very good girl. | Nara proud, TNB happy |
-| TNB | Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can't work like this. | Tom unimpressed, Nara scared |
-| Tom | Then we clear the sets. One at a time. Main Street, the Western street, New York. | TNB proud, Nara proud |
 
 ## scene: ch4Crab (chapter 4)
 
@@ -604,8 +623,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Clapper Snapper | SNAP! Scene one, take one! SNAP! I go first! Nothing happens until I clap! SNAP! | Tom surprised, TNB unimpressed, Nara scared |
-| Tom | It's very fast. And very loud. | TNB happy, Nara scared |
-| TNB | That's every clapper I've ever met. | Tom happy |
 | Tom | The Western street is clear. The horse can come out of its trailer now. | TNB happy, Nara happy |
 
 ## scene: ch4Moth (chapter 4)
@@ -614,7 +631,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Boom Mic Moth | Bzzz. I hear everything on this set. Everything. Your knees click, Tom. | Tom surprised, TNB happy, Nara angry |
 | Tom | That was UNCALLED for! | TNB happy, Nara angry |
-| TNB | Watch the screech, babe. It shuts you right up. No skills. | Tom unimpressed |
 | TNB | New York is clear. It never looked better. It's plywood. | Tom happy, Nara happy |
 
 ## scene: ch4Stage (chapter 4)
@@ -630,9 +646,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Blue, amber, red. And one strip of gaffer tape. Okay, two. Okay, four. | Tom unimpressed, Nara happy |
-| Soundstage 7 | The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place. | Tom surprised, TNB proud, Nara scared |
-| Tom | You fixed a whole soundstage with tape. | TNB proud |
 | TNB | I fix everything with tape. You know this. Your kitchen drawer knows this. | Tom happy |
 
 ## scene: ch4Boss (chapter 4)
@@ -641,11 +654,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | TNB | My rack. MY RACK. All forty. Still steamed. Oh, I could cry. | Tom loving, Nara happy |
 | The Director’s Cut | CUT! CUT! CUT! Who said you could walk onto my set? The blocking is WRONG. | Tom unimpressed, TNB surprised, Nara scared |
-| The Director’s Cut | Forty years I've been on this lot. Forty years of bad takes, yelled through ME. Nobody ever gets it right. | Tom sad, TNB sad, Nara scared |
-| Tom | You took the rack. | TNB angry |
-| The Director’s Cut | If there are no costumes, there's no take. If there's no take, there's no BAD take. It's perfect. It's my best work. | Tom unimpressed, TNB surprised |
+| The Director’s Cut | I've been on this lot for forty years, and every bad take was yelled through ME. Nobody ever gets it right. | Tom sad, TNB sad, Nara scared |
+| The Director’s Cut | So I took the costumes. With no costumes there's no take, and with no take there's no BAD take. It's perfect. It's my best work. | Tom unimpressed, TNB surprised |
 | TNB | Babe. It's a megaphone in a beret. It has notes. | Tom happy |
-| Nara | Nara growls at the megaphone. Very small growl. Very serious. | Tom proud, TNB loving |
 | Tom | This is a closed set. And you're not on the call sheet. | TNB proud, Nara proud |
 | TNB | Back to one, everybody. Touch-ups. | Tom happy, Nara happy |
 | TNB | Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times. | Tom proud |
@@ -657,11 +668,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Director’s Cut | ...Great take. Nobody has ever said that to me. Forty years. Not once. | Tom loving, TNB loving, Nara surprised |
 | The Director’s Cut | I think I'd like to hear it again. Somewhere quiet. On a shelf. | Tom loving, TNB loving |
 | The Director’s Cut | Fine. FINE. That’s a wrap. On me. I'm going back in the prop closet. | Tom happy, TNB happy, Nara happy |
-| Stage set | The megaphone hops off the rack and rolls away under the set, muttering about lighting. | Tom happy, TNB happy, Nara surprised |
 | TNB | Forty. I counted. I'm going to count again. Forty. | Tom loving, Nara happy |
-| TNB | And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it. | Tom surprised, Nara surprised |
-| Tom | A gold coin. Again. Somebody keeps leaving these around. Somebody in a long coat, if Oolong’s kettle is right. | TNB surprised |
-| TNB | Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions. | Tom happy |
 
 ## scene: ch4End (chapter 4)
 
@@ -672,14 +679,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Dana | TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department. | Tom proud, TNB surprised, Kiki happy |
 | TNB | I'm going to cry. I'm not going to cry. I'm a professional. I'm crying a little. | Tom loving, Dana loving, Nara loving |
 | Tom | You're a professional. A crying professional. I'm so proud of you. | TNB loving, Dana happy |
-| Dana | And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog. | Tom happy, TNB proud, Nara proud, Kiki happy |
 | TNB | You know what this whole day was? A real steam-ulating experience. | Tom unimpressed, Dana happy, Nara happy |
 | Tom | ... | TNB happy |
-| Tom | I flew three thousand miles for that pun. | TNB happy |
 | TNB | Worth it? | Tom loving |
-| Tom | Worth it. Every mile. But for the record? That was a CLOSED set! | TNB loving, Nara happy |
-| Nara | Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little. | Tom loving, TNB loving |
-| Tom | A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle." | TNB surprised |
 | TNB | You're the only uncle. | Tom unimpressed, Nara happy |
 | Tom | Which makes me the good one. By default. I'll take it. | TNB loving |
 
@@ -694,12 +696,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Amy | TOM. Oh, thank goodness. | Tom surprised, Grace happy, Rose happy |
-| Amy | Two coffees. Both mine. Here, have one. That's how much I need you tonight. | Tom unimpressed, Grace happy |
-| Tom | You brought me coffee. At night. That's a cry for help. | Amy unimpressed, Grace happy, Rose happy |
-| Amy | It's conference night. Thirty parents at seven o’clock. And the school has lost its mind. | Tom surprised, Grace surprised, Rose surprised |
-| Amy | The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off. | Tom surprised, Grace surprised, Rose surprised |
 | Grace | Ran off? Like, RAN? On legs? | Amy unimpressed, Rose surprised, Tom unimpressed |
-| Amy | On little paper legs. Mrs. Kowalski saw it. She's still upset about it. | Grace surprised, Rose happy, Tom unimpressed |
 | Rose | Mom. Mom. Are we going to SCHOOL? At NIGHT? That's the best thing that ever happened. | Amy loving, Grace happy, Tom happy |
 | Amy | Everybody is coming. I have a clipboard, and I'm not afraid to use it. | Tom unimpressed, Grace proud, Rose happy |
 
@@ -707,15 +704,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| School bell | BRRRRRING. From inside the school. Then again. Then a little one: brring? | Tom surprised, Amy angry, Grace scared, Rose scared, Pruitt scared |
 | Principal Pruitt | Mrs. Gregori! Thank goodness. And you brought the whole family. | Amy happy, Tom happy, Grace happy, Rose happy |
-| Amy | Principal Pruitt, my brother Tom. He's very good in a crisis. He's also very calm about it, which is annoying. | Tom unimpressed, Pruitt happy, Grace happy |
 | Tom | Hello. I hear your bells are haunted. | Pruitt unimpressed, Amy unimpressed, Grace happy |
 | Principal Pruitt | Not haunted. Grumpy. Thirty-one years in this building. I know the difference. | Tom unimpressed, Grace surprised, Rose surprised |
-| Principal Pruitt | The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school. | Amy unimpressed, Grace surprised, Rose surprised, Tom unimpressed |
-| Principal Pruitt | The Cafetorium doors run on the bell system. The bells run on the hallway clocks. Thirty parents are on their way, and those doors won't open. | Amy scared, Tom unimpressed, Grace surprised |
+| Principal Pruitt | The Cafetorium doors run on the bell system, and the bells run on the hallway clocks. | Amy scared, Tom unimpressed, Grace surprised |
+| Principal Pruitt | Until the clocks are right, those doors won't open, and thirty parents are on their way. | Amy scared, Tom unimpressed, Grace surprised |
 | Grace | Doors don't just not open. That's not how doors work. | Pruitt unimpressed, Amy loving, Tom happy |
-| Principal Pruitt | Set every clock in the hall to seven. Seven o’clock. Not seven-thirty. Not six-fifty-nine. Seven. | Amy proud, Tom unimpressed, Grace proud |
+| Principal Pruitt | So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven. | Amy proud, Tom unimpressed, Grace proud |
 | Rose | Tata. A school. At NIGHT. With MONSTERS, probably. | Tom unimpressed, Amy unimpressed, Grace scared |
 | Tom | Stay close, everybody. This is a professional learning environment. | Amy unimpressed, Grace proud, Rose happy |
 
@@ -729,9 +724,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Rose | Little paper feet. With glitter. They go EVERYWHERE. | Tom happy, Amy happy, Grace surprised |
 | Grace | I can read the doors. Room One is ART. Room Two is MUSIC. Room Three is the GYM. | Amy proud, Tom proud, Rose surprised |
 | Grace | The gym isn't a room. It's a gym. It has a number anyway. | Amy happy, Tom happy, Rose unimpressed |
-| Grace | The footprints go into all three. Then out again. Then east, to the Cafetorium. | Amy proud, Tom proud, Rose surprised |
+| Grace | The footprints go into all three rooms and out again, and then east to the Cafetorium. The sign-up sheet went that way. | Amy proud, Tom proud, Rose surprised |
 | Amy | Girls. That's excellent detective work. Gold stars. Both of you. | Grace proud, Rose proud, Tom happy |
-| Tom | Then we clear Art, Music and the Gym. After each one, we fix its clock. Seven o’clock. | Amy proud, Grace proud, Rose proud |
+| Tom | Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock. | Amy proud, Grace proud, Rose proud |
+| Tom | When all three are right, the Cafetorium opens. | Amy proud, Grace proud, Rose proud |
 
 ## scene: ch5Snack (chapter 5)
 
@@ -769,7 +765,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Dodgeball Dread | BOING. Everybody against the wall. Nobody picks me first. Nobody EVER picks me first. | Amy surprised, Tom unimpressed, Grace scared, Rose scared |
 | Amy | Oh, I remember you. Fourth grade. You and me. Every Friday. | Tom happy, Grace surprised, Rose surprised |
 | Tom | Amy was the scariest kid in dodgeball. They had to make a rule about her. | Amy proud, Grace surprised, Rose surprised |
-| Amy | The Gregori Rule. No throwing at teachers. It's still on the wall. | Tom happy, Grace happy, Rose happy |
 | Amy | You know I was terrified of that thing? Every Friday. That's why I threw so hard. | Tom loving, Grace surprised, Rose surprised |
 | Tom | I know. You threw one at me at Thanksgiving. I was holding a pie. | Amy happy, Grace happy, Rose happy |
 | Amy | You caught the pie, though. | Tom unimpressed, Grace happy, Rose happy |
@@ -779,7 +774,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| School bell | BRRRRRING. One bell. Right on time. Then silence. The good kind. | Tom proud, Amy happy, Grace happy, Rose happy |
 | Principal Pruitt | (on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium. | Amy surprised, Tom unimpressed, Grace scared, Rose scared |
 | Principal Pruitt | Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh. | Amy happy, Grace happy, Rose happy, Tom unimpressed |
 | Amy | The footprints go in there. The sign-up sheet must be in there. | Tom proud, Grace scared, Rose scared |
@@ -794,15 +788,14 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Red Pen | Click. Wrong. Wrong. Wrong. Every name on this sheet is written wrong. | Amy angry, Tom unimpressed, Grace scared, Rose scared |
 | The Red Pen | Kowalski has a W. Delgado has a G. Gregori has TWO Rs, and nobody ever writes them neatly. | Amy angry, Tom unimpressed, Grace unimpressed |
 | Amy | That's the conference sign-up sheet. Thirty parents are waiting for it. | Tom proud, Grace proud |
-| The Red Pen | A hundred thousand wrong answers, I've marked. Every quiz. Every spelling test. Every crooked line. | Tom sad, Amy angry, Grace scared, Rose scared |
-| The Red Pen | Nobody ever grades ME. Nobody ever writes NEAT next to ME. So tonight, I grade the grown-ups. | Tom sad, Amy angry, Grace scared, Rose scared |
-| Tom | You took the sign-up sheet to grade it. | Amy angry, Grace unimpressed |
-| The Red Pen | And the bells. And the clocks. Late is late. Points off. | Tom unimpressed, Amy angry |
+| The Red Pen | I have marked a hundred thousand wrong answers in this school. Every quiz, every spelling test and every crooked line. | Tom sad, Amy angry, Grace scared, Rose scared |
+| The Red Pen | But nobody ever grades ME, and nobody ever writes NEAT next to MY work. So tonight I'm grading the grown-ups. | Tom sad, Amy angry, Grace scared, Rose scared |
 | Rose | Tata, it's a PEN. With GLASSES. | Tom happy, Amy unimpressed, Grace unimpressed |
 | Amy | I'm going to count to three, and you're going to put the sheet down. One. | Tom happy, Grace proud, Rose scared |
 | Tom | That's her teacher voice. I'd listen. | Amy proud, Grace happy, Rose happy |
 | Amy | Up. Everybody. Walk it off. | Tom unimpressed, Grace proud, Rose proud |
-| Amy | Tom, when it says SEE ME, step in front of them. Grace, Squishy anyone it circles. And somebody tell it its handwriting is nice. Three times. | Tom proud, Grace proud, Rose happy |
+| Amy | Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice. | Tom proud, Grace proud, Rose happy |
+| Amy | If we say it three times, I think it'll calm down. | Tom proud, Grace proud, Rose happy |
 
 ## scene: ch5AfterBoss (chapter 5)
 
@@ -811,16 +804,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Red Pen | ...Nice handwriting. Nobody has ever said that. A hundred thousand papers. Not once. | Tom loving, Amy loving, Grace surprised, Rose loving |
 | The Red Pen | I fixed the spelling. And I gave everyone a gold star. In red. It's the only color I have. | Amy happy, Tom happy, Grace happy, Rose happy |
 | The Red Pen | Click. Fine. FINE. Pencils down. I'm going back in my cup. | Tom happy, Amy unimpressed, Grace happy, Rose happy |
-| Podium | The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room. | Amy surprised, Tom happy, Grace happy, Rose happy |
 | Amy | ...It's going to my desk. Of course it's going to my desk. | Tom happy, Grace happy, Rose happy |
-| Grace | The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom. | Tom surprised, Amy surprised, Rose surprised |
-| Tom | A gold coin. Again. Same little clock face. | Amy surprised, Grace surprised, Rose surprised |
-| Tom | The sundial. The steamer. Now the sign-up sheet. Somebody keeps leaving these where we'll find them. | Amy surprised, Grace surprised, Rose surprised |
-| Amy | Whoever it is has very neat tape. Look at those corners. | Tom unimpressed, Grace happy |
-| Rose | Can we keep it? I'll keep it inside Lamby. | Tom unimpressed, Amy unimpressed, Grace unimpressed |
-| Tom | We keep it. In my pocket. Not inside Lamby. | Rose sad, Amy happy, Grace happy |
-| Principal Pruitt | The sheet! The bells! The clocks! Parents, come on in! Conference night is ON! | Amy happy, Tom happy, Grace happy, Rose happy |
-| Conference night | For two hours, Amy talks to thirty parents. Grace hands out cookies. Rose tells everybody the pen had glasses. Tom stacks chairs and nods calmly. | Amy proud, Grace proud, Rose proud |
+| Principal Pruitt | You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON! | Amy happy, Tom happy, Grace happy, Rose happy |
 | Principal Pruitt | Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears. | Amy proud, Tom happy, Grace proud, Rose happy |
 | Principal Pruitt | This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early. | Amy surprised, Tom happy, Grace surprised, Rose surprised |
 | Amy | Principal Pruitt, I can't take this. | Pruitt happy, Tom happy |
@@ -831,19 +816,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Amy | Thirty conferences. Zero tears. One very well-behaved pen. | Tom happy, Grace happy, Rose happy |
 | Amy | Oh. A text. From Justin. | Tom happy, Grace surprised, Rose surprised |
 | Amy | "Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart. | Tom loving, Grace happy, Rose happy |
 | Grace | Dad used the heart! He only uses the heart on special days! | Amy loving, Tom happy, Rose happy |
 | Amy | Girls. Did we save some casserole for Daddy? | Grace scared, Rose scared, Tom happy |
 | Rose | ...Define save. | Amy unimpressed, Tom happy, Grace unimpressed |
-| Rose | Tata. Tata. There's a man. | Tom surprised, Amy surprised, Grace surprised |
-| Rose | By the last car. In a long coat. He's looking at us. | Tom scared, Amy surprised, Grace scared |
-| Tom | ...Nobody there. | Rose surprised, Grace scared, Amy unimpressed |
-| Amy | Probably a parent. A late one. There's always a late one. | Tom unimpressed, Grace unimpressed, Rose unimpressed |
 | Tom | Probably. | Amy happy, Rose unimpressed |
-| Tom | A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list. | Amy surprised, Grace surprised, Rose scared |
-| Grace | I'm keeping a list too. Mine has a chart. | Tom happy, Amy happy |
 | Amy | Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot. | Tom surprised, Grace happy, Rose happy |
 | Tom | By default. | Amy unimpressed, Grace happy |
 | Amy | By a LOT. Take the compliment, Tom. | Tom loving, Grace happy, Rose happy |
@@ -858,14 +836,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | Okay. Hi. Missed you. Don't panic. Look at the island. | Tom loving |
-| Tom | ...Where's Bready Mercury. | TNB scared |
-| TNB | That's the thing. I came over to feed him, like you asked. The jar was gone. The window was open. | Tom scared |
-| TNB | And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up. | Tom surprised |
-| Tom | Bready Mercury is nine years old. He has flown Delta One. Twice. | TNB loving |
-| TNB | I know, babe. I've seen every horror movie ever made. This is exactly how they start. | Tom unimpressed |
-| TNB | And this was on the windowsill. An acorn. With a tiny X carved in it. | Tom surprised |
-| Tom | Somebody took my starter. And left a calling card. | TNB scared |
 | Tom | That was UNCALLED for! | TNB happy |
 | TNB | Olivia texted me too. Nara hasn't slept in three days. She just stands at the window and growls at trees. | Tom surprised |
 | Tom | Nara is scared of the vacuum. Nara doesn't growl at trees. | TNB proud |
@@ -876,36 +846,39 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Olivia | Tom! Oh, thank goodness. You already have her. She hasn't slept since Sunday. | Tom happy, TNB happy, Nara happy |
-| Nara | Nara leans on Tom with all forty pounds. | Tom loving, TNB happy, Olivia loving |
-| Nara | Then she spins around and growls at the jacaranda. | Tom surprised, TNB scared, Olivia scared, Tom surprised, TNB scared, Olivia scared |
 | Olivia | Tom! Oh, thank goodness. Can you take her? Please? She hasn't slept since Sunday. | Tom loving, TNB happy, Nara happy |
-| Nara | Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds. | Tom loving, TNB happy, Olivia happy |
-| Olivia | That. All night. And it's not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block. | Tom surprised, TNB surprised, Nara scared |
+| Olivia | She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr. | Tom surprised, TNB surprised, Nara scared |
+| Olivia | Washington's reading glasses, and Marisol says every tennis ball. | Tom surprised, TNB surprised, Nara scared |
 | Michael | I found my car keys in the gutter. With three peanuts. Arranged in a triangle. | Tom surprised, TNB surprised, Olivia unimpressed |
 | TNB | A triangle. Babe. A triangle is a SYMBOL. | Tom unimpressed, Olivia unimpressed, Michael surprised |
-| Tom | TNB has seen a lot of movies. | TNB proud, Olivia happy |
-| Tom | ...He's usually right about this stuff. | TNB loving, Olivia surprised |
 | Olivia | Bernadette from the Neighborhood Watch says it's squirrels. She has a clipboard about it. She's in Old Oak Park, at the south end of 2nd Ave. | Tom unimpressed, TNB happy |
 | Tom | Nara. Want to go for a walk? | Nara happy, TNB happy, Olivia happy |
-| Nara | Nara knows the word WALK. She's always known the word walk. She's already at the end of the street. | Tom happy, TNB happy, Olivia happy |
 | Olivia | Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox. | Tom happy, TNB happy |
 
 ## scene: ch6Park (chapter 6)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Bernadette | Halt. Neighborhood Watch. State your business. | Tom surprised, TNB surprised, Nara scared |
-| Tom | Tom. 3468. I've lived on 2nd Ave for six years. | Bernadette unimpressed, TNB happy |
-| Bernadette | I know who you are. You water your drought garden. Everybody knows. | Tom surprised, TNB happy |
-| Bernadette | Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will. | Tom unimpressed, TNB happy |
+| Bernadette | Stop right there. Neighborhood Watch. Names and house numbers. | Tom surprised, TNB surprised, Nara scared |
+| Bernadette | I know who you are, 3468. You WATER a drought garden. I've left you two notes about it. | Tom sad, TNB surprised |
+| TNB | Hi. I'm TNB. | Bernadette unimpressed |
+| Bernadette | I don't do initials. You're the Other Tom. | Tom unimpressed, TNB surprised |
+| Bernadette | Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once. | Tom unimpressed, TNB unimpressed |
 | Bernadette | The squirrels are organized. | Tom surprised, TNB surprised, Nara angry |
-| TNB | I KNEW it. | Tom unimpressed, Bernadette proud |
-| Bernadette | Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down. | Tom surprised, TNB happy, Nara angry |
-| Bernadette | And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. I've heard a secret knock. Only bits of it. | Tom surprised, TNB surprised, Nara surprised |
-| Nara | Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions. | Tom surprised, TNB surprised, Bernadette surprised |
-| Tom | They buried something. Three somethings. | TNB surprised, Bernadette proud |
-| Bernadette | Clear out those lookouts and your dog can dig. I'll be here. With my clipboard. | Tom proud, TNB happy, Nara happy |
-| TNB | Babe, she has a corkboard with red string. I've never felt so seen. | Tom happy, Bernadette proud |
+| Bernadette | Don't humor me, Other Tom. I get humored at every block meeting. | Tom unimpressed, TNB scared |
+| Bernadette | They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down. | Tom surprised, TNB happy, Nara angry |
+| Bernadette | I reported all of it. The city sent me a pamphlet about squirrels. | Tom unimpressed, TNB happy |
+| Bernadette | Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it. | Tom surprised, TNB surprised, Nara surprised |
+| TNB | Could you do the bits you know? | Bernadette angry, Tom scared |
+| Bernadette | I'm a Captain. I don't chitter. | Tom unimpressed, TNB sad |
+| Bernadette | Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole. | Tom unimpressed, TNB unimpressed, Nara happy |
+| Tom | Are you coming with us? | Bernadette unimpressed, TNB scared |
+| Bernadette | I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes. | Tom unimpressed, TNB unimpressed |
+| TNB | Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel. | Tom unimpressed, Bernadette proud |
+| Tom | I can. Walk faster. | TNB happy |
+| Tom | Tom. 3468. I've lived on 2nd Ave for six years. | Bernadette unimpressed, TNB happy |
+| TNB | I KNEW it. | Tom unimpressed, Bernadette unimpressed |
+| Tom | The squirrels buried something in three different spots. | TNB surprised, Bernadette proud |
 
 ## scene: ch6Gallery (chapter 6)
 
@@ -924,7 +897,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Twig Spy | ...You didn't see me. I'm a stick. Sticks don't talk. | Tom unimpressed, TNB surprised, Nara surprised |
 | TNB | That stick has binoculars. | Tom happy |
 | Twig Spy | Standard issue. Code name: Twig. I report to the Chairman. Pretend I said nothing. | Tom surprised, TNB happy |
-| Tom | The Chairman. | TNB surprised |
 | Twig Spy | I said NOTHING. | Tom unimpressed, TNB happy |
 | Tom | The garden is clear. Every tomato has exactly one bite out of it. That's a policy. | TNB happy, Nara happy |
 
@@ -942,7 +914,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Nara | Nara digs. Dirt goes everywhere. Mostly on TNB. | Tom happy, TNB unimpressed |
 | Tom | Mr. Washington reads the paper on his porch every morning. He's been reading the same headline for three days. | TNB sad |
 | TNB | We bring them back today. Personally. With a pastry. | Tom loving, Nara happy |
 | TNB | That's all three scraps. One acorn, two acorns, three acorns. It's a sequence, babe. It's ALWAYS a sequence. | Tom unimpressed, Nara happy |
@@ -952,8 +923,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency. | Nara happy, TNB happy |
-| Nara | Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly. | Tom loving, TNB happy |
 | TNB | She hasn't eaten in three days, and she just ate your emergency bread. | Tom unimpressed, Nara proud |
 | Tom | She'll only eat bread if I throw it. Still true. Still very picky. Still very athletic. | TNB happy, Nara proud |
 
@@ -961,12 +930,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Little door | A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..." | Tom surprised, TNB surprised, Nara surprised |
-| Little door | "...wait. You're very tall. Are you a squirrel?" | Tom unimpressed, TNB scared, Nara surprised |
 | Tom | Yes. | TNB surprised, Nara happy |
-| Little door | Running footsteps. Very small ones. Going up. | Tom unimpressed, TNB surprised |
 | TNB | Babe. You lied to a squirrel. | Tom unimpressed, Nara happy |
-| Tom | It lied to me first. It said it was an acorn. | TNB happy |
 
 ## scene: ch6Oak (chapter 6)
 
@@ -975,21 +940,14 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | Babe. We're inside a tree. This is the second act of every horror movie I've ever seen. | Tom unimpressed, Nara scared |
 | Tom | Then we stay together. | TNB loving, Nara loving |
 | TNB | That's what they always say in the second act. | Tom unimpressed |
-| Nara | Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint. | Tom surprised, TNB surprised |
-| Tom | He's up there. And there's no ladder. | TNB surprised, Nara happy |
 
 ## scene: ch6Board (chapter 6)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | TNB | Babe. Babe. They have a corkboard. With RED STRING. I've waited my whole life for this. | Tom unimpressed, Nara happy |
-| Corkboard | Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH. | Tom surprised, TNB happy, Nara proud |
-| Corkboard | In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD. | Tom angry, TNB surprised |
 | Tom | That's my house. That's my JAR. Why is my jar in the middle of everything? | TNB happy |
 | TNB | Everything connects to the jar, babe. That's how corkboards work. | Tom unimpressed |
-| Corkboard | A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING. | Tom surprised, TNB happy |
-| Corkboard | Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY). | Tom surprised, TNB proud |
-| Nara | Nara looks at the drawing of herself. She seems pleased with it. | Tom happy, TNB happy |
 
 ## scene: ch6Ladder (chapter 6)
 
@@ -1000,10 +958,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | ... | Tom unimpressed, Nara scared |
 | Tom | ... | TNB unimpressed, Nara scared |
 | Tom | Nara. Sit. In the bucket. | Nara scared, TNB happy |
-| Nara | Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket. | Tom loving, TNB happy |
-| Nara | She'd do anything for Tom. She makes very sure he knows it. | Tom loving, TNB loving |
-| Inside the Old Oak | CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor. | Tom surprised, TNB proud, Nara scared |
-| Nara | Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds. | Tom loving, TNB happy |
 | Tom | Very brave. Extremely brave. You'll be getting a lot of chicken. | Nara proud, TNB happy |
 
 ## scene: ch6Boss (chapter 6)
@@ -1013,53 +967,44 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | Babe. Look. On top of the pile. | Tom surprised, Nara surprised |
 | Tom | BREADY MERCURY! | TNB happy, Nara happy |
 | Chairman Cheeks | ORDER. ORDER! Who let a DOG into the Oak? | Tom unimpressed, TNB surprised, Nara angry |
-| Chairman Cheeks | I'm the Chairman. Chairman Cheeks. Every acorn, every peanut, every shiny thing on 2nd Avenue comes up this tree. Because winter is coming. | Tom unimpressed, TNB happy, Nara angry |
+| Chairman Cheeks | I'm Chairman Cheeks. | Tom unimpressed, TNB happy, Nara angry |
+| Chairman Cheeks | Every acorn, every peanut and every shiny thing on 2nd Avenue gets carried up this tree, because winter is coming and we need a hoard. | Tom unimpressed, TNB happy, Nara angry |
 | Tom | It's Los Angeles. Winter is a light jacket. | TNB happy |
 | Chairman Cheeks | That's what they WANT you to think. | Tom unimpressed, TNB happy |
-| Chairman Cheeks | And this jar. This jar smells like bread FOREVER. You feed it and it grows. It never runs out. It's the perfect hoard. | Tom angry, TNB surprised, Nara angry |
+| Chairman Cheeks | And this jar is the best thing we ever took. You feed it and it grows, so it never runs out. It smells like bread FOREVER. It's the perfect hoard. | Tom angry, TNB surprised, Nara angry |
 | Tom | That's Bready Mercury. He's nine. You feed him flour and water, and then you SHARE the bread. That's the whole point of him. | TNB loving, Nara proud |
-| Chairman Cheeks | Share? ...Nobody shares. Not with a squirrel. Twenty years, and every bird feeder on the block has chased me off it. | Tom sad, TNB sad, Nara surprised |
-| Nara | Nara growls. A very small growl. Very serious. She's waited three days for this. | Tom proud, TNB happy |
+| Chairman Cheeks | Share? ...Nobody shares with a squirrel. For twenty years I've been chased off every bird feeder on this block. | Tom sad, TNB sad, Nara surprised |
 | TNB | It's a squirrel in a tiny tie, babe. I'm so scared and so delighted. | Tom happy, Nara angry |
 | Tom | Put the starter down. No touching, please. | TNB proud, Nara proud |
 | TNB | Okay. Shake it off. Everybody gets a snack. | Tom happy, Nara happy |
-| TNB | Babe, when it buries an acorn, break it before it eats it. Nara digs them up for double. And maybe... share something with it. Three times. | Tom proud, Nara proud |
+| TNB | Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it. | Tom proud, Nara proud |
+| TNB | Three times should do it. | Tom proud, Nara proud |
 
 ## scene: ch6AfterBoss (chapter 6)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Chairman Cheeks | ...Shared. You shared with me. Three times. Nobody has ever... I'm going to need a minute. | Tom loving, TNB loving, Nara surprised |
-| Chairman Cheeks | Take the jar. And... could I maybe have a slice? Sometimes? | Tom loving, TNB loving, Nara happy |
-| Tom | Saturdays. On my back fence. One slice. The heel. | TNB loving, Nara happy |
-| Chairman Cheeks | The heel is the best part. | Tom happy, TNB happy |
 | Chairman Cheeks | Fine. FINE. This meeting is adjourned. I'm going to go stare at a bird feeder. | Tom happy, TNB happy, Nara happy |
-| The hoard | Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak. | Tom happy, TNB happy, Nara happy |
 | Tom | Hello, Bready Mercury. Did you miss me? You were on an adventure. | TNB loving, Nara happy |
 | Tom | You're going to be extremely sour about this. | TNB surprised |
-| TNB | Was that a pun? Babe. Did you just make a PUN? | Tom proud, Nara happy |
 | Tom | He's a starter. Sour is a compliment. | TNB happy |
-| TNB | And look. Something taped to the lid. A gold coin. With a little clock face. | Tom surprised, Nara surprised |
-| Tom | Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners. | TNB surprised |
-| Tom | The sundial. The steamer. The sign-up sheet. Now my jar. Somebody keeps leaving these where we'll find them. | TNB surprised, Nara happy |
-| TNB | Somebody in a long coat, if your niece and your kettle are right. Spooky. I love it. I hate it. | Tom unimpressed, Nara happy |
 
 ## scene: ch6End (chapter 6)
 
 | Speaker | Line | Reactions |
 |---|---|---|
+| Bernadette | Captain's report: case closed. | Tom unimpressed, TNB unimpressed, Olivia unimpressed |
+| Bernadette | And I want it noted that I was right. For nineteen years. Out loud, please. | Tom unimpressed, TNB unimpressed, Olivia happy |
+| TNB | Noted. You were right, Bernadette. | Bernadette unimpressed, Tom happy |
+| Bernadette | Louder. Mr. Washington's porch didn't hear you. | Tom unimpressed, TNB unimpressed, Olivia happy |
+| TNB | ...YOU WERE RIGHT, BERNADETTE. | Bernadette proud, Tom happy, Olivia happy |
 | Olivia | Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand. | Tom happy, TNB happy, Nara proud |
-| Bernadette | Neighborhood Watch Captain’s report: case closed. | Tom unimpressed, TNB happy, Olivia unimpressed |
-| Bernadette | I'd like it noted that I was right. | Tom unimpressed, TNB happy, Olivia happy |
-| TNB | Noted. On a corkboard. With red string. | Bernadette proud, Tom happy, Olivia happy |
 | Michael | Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint. | Tom loving, TNB loving, Nara surprised, Olivia loving |
-| Nara | Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it. | Tom loving, TNB loving, Olivia loving, Michael loving |
-| Bernadette | And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog. | Tom proud, TNB surprised, Nara proud, Olivia happy |
+| Bernadette | And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best. | Tom surprised, TNB unimpressed |
+| Tom | Bernadette, this is really kind of you. | Bernadette unimpressed, TNB happy |
+| Bernadette | It's reflective. Don't get sentimental. And 3468? Stop watering the cactus. | Tom sad, TNB happy |
+| Tom | ...It looked thirsty. | TNB happy, Bernadette unimpressed |
 | TNB | You know what today was, babe? Absolutely nuts. | Tom unimpressed, Nara happy |
-| Tom | ...That's not a pun. That's just a word. | TNB happy |
-| TNB | It's a word with a pun in its heart. | Tom unimpressed |
-| Tom | Fine. It was nuts. | TNB proud, Nara happy |
-| Tom | A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home." | TNB surprised, Nara surprised |
 | TNB | The library is whispering. Is that not just... its job? | Tom unimpressed |
 | Tom | Not on Long Island. On Long Island, the library shushes YOU. | TNB surprised |
 
@@ -1074,17 +1019,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Grace | That's all three cards, Tata. Card one, card two, card three. Three gold letters. | Tom proud, Rose happy |
-| Tom | A password for the Reading Room. In card order. | Grace proud, Rose happy |
+| Tom | The three gold letters spell the password for the Reading Room doors. We enter them in card order: one, two, three. | Grace proud, Rose happy |
 
 ## scene: ch7Arrive (chapter 7)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Grace | Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after. | Tom happy, Rose happy |
-| Tom | I got it. The library is whispering. | Grace surprised, Rose surprised |
-| Grace | Not a little bit. ALL the books. At the same time. And they're saying THINGS. | Tom surprised, Rose scared |
 | Rose | A book told me Boppy eats cookies in the car. In the CAR, Tata. Before DINNER. | Tom happy, Grace unimpressed |
-| Tom | ...That one is true. Everybody knows that one. | Rose surprised, Grace happy |
 | Grace | A book told everybody I sing in the shower. Which is PRIVATE. Also I'm very good. | Tom happy, Rose happy |
 | Grace | Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it's fine. | Tom unimpressed, Rose happy |
 
@@ -1095,13 +1036,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Page | Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Grace | Twelve. | Page scared, Tom happy, Rose happy |
 | Whispers | ...psst... Page hums in the elevator... psst... Page has never finished Moby Dick... psst... | Page scared, Tom unimpressed, Grace surprised, Rose happy |
-| Page | ...It's not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part. | Tom surprised, Grace proud, Rose scared |
-| Page | Every book down there's whispering. Everything they ever heard. Seventy years of people reading quietly and thinking nobody was listening. | Tom surprised, Grace surprised, Rose surprised |
-| Tom | Books overhear things. | Page scared, Grace surprised |
+| Page | Every book down there is whispering everything it ever overheard. | Tom surprised, Grace surprised, Rose surprised |
+| Page | That's seventy years of people reading quietly and thinking nobody was listening. | Tom surprised, Grace surprised, Rose surprised |
 | Page | Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books. | Tom surprised, Grace surprised, Rose surprised |
 | Rose | Are there monsters down there? Say yes. | Page scared, Tom unimpressed, Grace unimpressed |
-| Page | There are three sections. Fiction, Nonfiction and Picture Books. And the Reading Room, at the very back. | Tom unimpressed, Grace proud, Rose unimpressed |
-| Page | The Reading Room doors use the old card catalog lock. I lost the password in 1998. | Tom unimpressed, Grace unimpressed, Rose happy |
+| Page | The Stacks have three sections: Fiction, Nonfiction and Picture Books. | Tom unimpressed, Grace proud, Rose unimpressed |
+| Page | The Reading Room is at the very back, and I think the whispering starts in there. | Tom unimpressed, Grace proud, Rose unimpressed |
+| Page | But the Reading Room doors use the old card catalog lock, and I lost the password in 1998. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Grace | I have read every book in the kids section. Twice. I can read ALL the signs. | Page happy, Tom happy, Rose unimpressed |
 | Page | Then you're in charge of the signs. Here. The staff door is open. | Grace proud, Tom happy, Rose happy |
 | Page | Please be careful. And please, don't answer the books. It only encourages them. | Tom unimpressed, Grace unimpressed, Rose happy |
@@ -1111,14 +1052,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Whispers | psst... psst... the uncle is here... the TALL one... psst... he talks to his bread... | Tom unimpressed, Grace surprised, Rose happy |
-| Tom | I do talk to my bread. It's part of the process. | Grace unimpressed, Rose happy |
 | Rose | Tata. Tata. The books are looking at us. | Tom surprised, Grace scared |
 | Grace | Books can't look. They don't have... okay, that one has eyes. | Tom unimpressed, Rose scared |
 | Grace | FICTION is that way. NONFICTION is that way. PICTURE BOOKS are down there. The READING ROOM is at the top. | Tom happy, Rose unimpressed |
 | Grace | I can read every sign. Rose can't read yet. | Rose angry, Tom unimpressed |
 | Rose | I can read PICTURES. Pictures are harder. | Grace surprised, Tom happy |
 | Grace | ...That's actually true. | Rose proud, Tom happy |
-| Tom | Somebody down here knows the password. We ask nicely. Then we ask less nicely. | Grace proud, Rose happy |
 
 ## scene: ch7Story (chapter 7)
 
@@ -1129,18 +1068,15 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | (a very small voice) Today I'm going to jump on everybody. | Rose happy, Grace happy |
 | Rose | THAT IS WHAT I DO. | Tom happy, Grace happy |
 | Grace | Okay. That's actually a good book. Don't tell anyone I said that. | Tom loving, Rose happy |
-| Whispers | All around the rug, the picture books go quiet. One of them says, very softly: ...again? | Tom loving, Grace surprised, Rose happy |
 
 ## scene: ch7Fic (chapter 7)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | The Cliffhanger | And then... the uncle walked into Fiction... and he saw... he saw... | Tom unimpressed, Grace unimpressed, Rose surprised |
-| Tom | Saw what. | Grace unimpressed, Rose surprised |
 | The Cliffhanger | Find out next time! | Tom unimpressed, Grace angry, Rose unimpressed |
 | Grace | That's SO annoying. Finish your SENTENCES. | Tom happy, Rose happy |
 | Rose | Tata. What did you see? When you walked into Fiction? | Tom unimpressed, Grace unimpressed |
-| Tom | A green book being very dramatic. | Grace happy, Rose happy |
 
 ## scene: ch7Non (chapter 7)
 
@@ -1151,11 +1087,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Know-It-All | Actually, you said it bossy. | Grace angry, Tom happy, Rose happy |
 | Rose | Tata. It sounds like Grace. | Grace angry, Tom happy |
 | Grace | It does NOT sound like me. Tata. Tell her. | Tom scared, Rose happy |
-| Tom | ...Let's focus on the encyclopedia. | Grace unimpressed, Rose happy |
 | Grace | Tata. Am I a know-it-all? Be honest. Actually, don't be honest. | Tom loving, Rose happy |
-| Tom | You know a lot. And you tell people. Those are two different things, and only one of them needs a little work. | Grace sad, Rose surprised |
-| Tom | The other one is why you're in charge of the signs down here. | Grace proud, Rose happy |
-| Grace | ...Okay. I can work on the telling part. A little. Starting tomorrow. | Tom loving, Rose unimpressed |
 
 ## scene: ch7Pic (chapter 7)
 
@@ -1175,9 +1107,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Reading Room doors | Click. Click. CLUNK. The brass drawer slides shut by itself. | Tom surprised, Grace surprised, Rose surprised |
-| Whispers | All through the Stacks, every book stops whispering at once. | Tom surprised, Grace surprised, Rose scared |
-| Whispers | Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?" | Tom surprised, Grace scared, Rose scared |
 | Rose | Tata. The door talked. | Tom unimpressed, Grace scared |
 | Tom | The thing behind the door talked. Stay close. | Grace scared, Rose scared |
 
@@ -1187,9 +1116,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Grace | Tata. On the dais. It's a book. A really, REALLY big book. | Tom surprised, Rose surprised |
 | The Unread | ...Visitors. Nobody comes to the Reading Room. Nobody has come since 1952. | Tom surprised, Grace surprised, Rose scared |
-| Tom | You're the one whispering. | Grace scared, Rose scared |
-| The Unread | I'm the oldest book in the Stacks. Seventy years on this shelf. Nobody has checked me out. Nobody has opened me. Not once. | Tom sad, Grace sad, Rose sad |
-| The Unread | So I listened. Everybody who ever sat in this room thought nobody could hear them. I heard ALL of it. | Tom unimpressed, Grace scared, Rose surprised |
+| The Unread | I'm the oldest book in the Stacks. I've sat on this shelf for seventy years, and in all that time nobody has checked me out or opened me. Not once. | Tom sad, Grace sad, Rose sad |
+| The Unread | So I listened instead. Everybody who ever sat in this room thought nobody could hear them, and I heard ALL of it. | Tom unimpressed, Grace scared, Rose surprised |
 | The Unread | If nobody will read me, then I'll read THEM. Out loud. To everybody. | Tom angry, Grace angry, Rose scared |
 | Rose | You told everybody Boppy eats cookies in the car. | Tom unimpressed, Grace angry |
 | The Unread | He does. In the CAR. | Tom unimpressed, Grace angry, Rose happy |
@@ -1208,16 +1136,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Rose | I did the dragon. | Tom proud, Grace unimpressed |
 | The Unread | You were a wonderful dragon. | Rose proud, Tom loving, Grace happy |
 | The Unread | ...Fine. The end. I'll be quiet. I'm very good at quiet. I've had a lot of practice. | Tom happy, Grace happy, Rose happy |
-| The Reading Room | The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering. | Tom loving, Grace loving, Rose loving |
-| Grace | Tata, something fell out of it. Something gold. It was being used as a bookmark. | Tom surprised, Rose surprised |
 | Tom | A gold coin. Same little clock face. | Grace surprised, Rose surprised |
-| Tom | The sundial. The steamer. The sign-up sheet. My jar. Now a book nobody has opened since 1952. | Grace surprised, Rose surprised |
-| Grace | Somebody DID open it, then. To put the coin in. | Tom surprised, Rose surprised |
-| Grace | And look. The checkout card, in the pocket. One stamp. DUE BACK 1952. No name. Just a little clock. | Tom surprised, Rose surprised |
-| Rose | Somebody took it out and didn't READ it? That's so sad. | Tom sad, Grace sad |
-| Tom | And brought it back with a coin in it. Look at those corners. Very neat. | Grace surprised, Rose surprised |
 | Tom | I'm adding it to the list. | Grace proud, Rose happy |
-| Grace | I'm adding it to MY list. Mine has a chart AND a key now. | Tom happy, Rose unimpressed |
 
 ## scene: ch7End (chapter 7)
 
@@ -1230,10 +1150,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | No late fees. EVER? Tata. I'm going to take out every book. Every single one. Alphabetically. | Tom unimpressed, Rose happy, Page happy |
 | Page | And sweaters. I knit one every winter. I have run out of people. Please take some. | Tom unimpressed, Grace happy, Rose surprised |
 | Rose | It's itchy. I love it. | Tom happy, Grace unimpressed, Page happy |
-| Tom | A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people." | Grace surprised, Rose surprised |
-| Tom | "I said yes for you. You're welcome. Bring the starter." | Grace happy, Rose happy |
 | Grace | Forty people? Tata. That's a FEAST. | Tom unimpressed, Rose happy |
-| Tom | ...Bready Mercury is going to need a bigger jar. | Grace happy, Rose happy |
 
 ## scene: CH8_AFTER (chapter 8)
 
@@ -1246,7 +1163,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Nara | Nara sniffs it. It's warm. Her tail goes like a propeller. | Tom loving, TNB happy |
-| TNB | That's three, babe. And that little steam motor by the turntable has three empty burners. Three. I can fix that. | Tom proud, Nara happy |
+| TNB | That's all three pilot lights, babe. The little steam motor by the turntable has three empty burners. | Tom proud, Nara happy |
+| TNB | If I put a flame in each one, I can get the turntable moving. | Tom proud, Nara happy |
 | Tom | You can fix anything. | TNB loving |
 | TNB | I can fix most things. I fixed your dishwasher with a butter knife. | Tom unimpressed |
 
@@ -1264,9 +1182,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Bernadette | They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself. | Tom unimpressed, TNB happy |
 | Olivia | Tom! Can you take Nara? She won't eat. Her dinner is cold, so she won't eat it. Michael warmed it in his hands. She still won't eat it. | Tom surprised, TNB surprised, Nara sad |
 | Nara | Nara slams into Tom’s shins and leans on him with all forty pounds. Then she turns, points her nose east, and sniffs. Hard. | Tom loving, TNB surprised, Olivia happy |
-| TNB | East. Toward the end of the boulevard. Babe. The old Car Barn. Division Nine. The streetcars ran out of there until 1963. | Tom surprised, Nara surprised |
+| TNB | She's pointing east, toward the end of the boulevard. Babe, that's the old Car Barn, Division Nine. The streetcars ran out of there until 1963. | Tom surprised, Nara surprised |
 | TNB | I've wanted to go in there since I MOVED here. | Tom loving, Nara happy |
-| Bernadette | The barn? It's been chained up for sixty years. Here. Committee key. I'm the committee. We're closing the boulevard for the tables. Bread by six. | Tom unimpressed, TNB happy, Nara happy |
+| Bernadette | The barn has been chained up for sixty years. Here, take the committee key. I'm the committee. | Tom unimpressed, TNB happy, Nara happy |
+| Bernadette | We're closing the boulevard for the potluck tables, and I need the bread by six. | Tom unimpressed, TNB happy, Nara happy |
 | Olivia | Bring her back fed! Please! Michael, Isla is eating the lasagna. It's a brick. She's eating a brick. | Tom happy, TNB happy, Nara happy |
 
 ## scene: ch8Barn (chapter 8)
@@ -1277,8 +1196,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | It's beautiful. You can cry a little. I'll wait. | TNB loving |
 | Tom | ...It's also freezing in here, and it's seventy-four degrees outside. | TNB surprised, Nara scared |
 | Nara | Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another. | Tom surprised, TNB surprised |
-| Tom | Those are pilot lights. The whole block’s pilot lights. Something down here is collecting them. | TNB surprised, Nara surprised |
-| TNB | And some of them got stuck. Look. The Paint Shop, the Machine Shop, the Lunchroom. Something in each one is hogging one. | Tom proud, Nara surprised |
+| Tom | Those little flames are pilot lights. They're the pilot lights from every stove on the block, and something down here is collecting them. | TNB surprised, Nara surprised |
+| TNB | And three of them got stuck on the way. Look: the Paint Shop, the Machine Shop and the Lunchroom. | Tom proud, Nara surprised |
+| TNB | Something in each room is hogging a flame. | Tom proud, Nara surprised |
 
 ## scene: ch8Paint (chapter 8)
 
@@ -1287,7 +1207,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Wet Blanket | ...Oh. Visitors. Great. I suppose you want that little flame. | Tom unimpressed, TNB unimpressed, Nara surprised |
 | Wet Blanket | Why bother. It's just going to go out. Everything goes out eventually. | Tom unimpressed, TNB sad, Nara sad |
 | TNB | Wow. Okay. Big mood, buddy. | Tom happy |
-| Tom | That flame is a gumbo. Forty years of gumbo. Hand it over. | TNB proud, Nara proud |
+| Tom | That little flame cooks somebody's gumbo, and it has for forty years. Hand it over. | TNB proud, Nara proud |
 | TNB | It dried out a little. Look. It's almost fluffy. It's a blanket again. | Tom loving, Nara happy |
 
 ## scene: ch8Shop (chapter 8)
@@ -1299,7 +1219,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Who's Ironbelly. | TNB surprised |
 | The Draft | Wooooo. I said nothing. I'm just air. | Tom unimpressed, TNB unimpressed |
 | TNB | Babe, close a door on it. Any door. | Tom happy, Nara happy |
-| Tom | Ironbelly. Somebody named Ironbelly wanted every flame on 2nd Ave. | TNB surprised, Nara surprised |
+| Tom | So somebody named Ironbelly wanted every flame on 2nd Ave, and sent a draft to fetch them. | TNB surprised, Nara surprised |
 | TNB | That's either a boat or a stove. In a car barn, babe, it's a stove. | Tom happy, Nara happy |
 
 ## scene: ch8Lunch (chapter 8)
@@ -1309,7 +1229,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Picky Eater | Ew. EW. Who are you. What's that. Is that a dog? Ew. Is that BREAD? Bread is the worst. Bread TOUCHES things. | Tom unimpressed, TNB surprised, Nara surprised |
 | Nara | Nara looks at the lunchbox. The lunchbox looks at Nara. Two very picky eaters. Nobody blinks. | Tom happy, TNB happy |
 | TNB | Babe. It's her. It's Nara as a lunchbox. | Tom happy, Nara unimpressed |
-| Tom | That flame is my oven. My forty loaves. Put it down. No touching, please. | TNB proud, Nara proud |
+| Tom | That flame is the pilot light from my oven, and I have forty loaves to bake. Put it down. No touching, please. | TNB proud, Nara proud |
 | The Picky Eater | ...Fine. FINE. Take it. I'll try a bite of something. Later. Maybe. If it's warm. And not touching. | Tom happy, TNB happy, Nara happy |
 | Nara | Nara nods. She understands completely. | Tom happy, TNB happy |
 
@@ -1317,7 +1237,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down. | TNB happy, Nara surprised |
+| Narrator | Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down. | TNB happy, Nara surprised |
 | Nara | Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate. | Tom unimpressed, TNB surprised |
 | Nara | She eats it in three bites. She licks the plate. She lies down on his feet. | Tom loving, TNB happy |
 | TNB | She wouldn't eat her own dinner. She ate YOUR dinner. | Tom happy, Nara proud |
@@ -1355,16 +1275,18 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | TNB | Babe. It's warm in here. Like, really warm. Like, opening-the-oven-door warm. | Tom surprised, Nara surprised |
 | Old Ironbelly | ...Who's in my Boiler Room. Nobody comes down here. Not since the last car went out. 1963. | Tom surprised, TNB scared, Nara angry |
-| Old Ironbelly | I'm Old Ironbelly. 1912. Cast iron, all the way through. Biscuits for the night crew, every night, for fifty-one years. Cornbread on Fridays. | Tom unimpressed, TNB surprised, Nara surprised |
+| Old Ironbelly | I'm Old Ironbelly, built in 1912, cast iron all the way through. | Tom unimpressed, TNB surprised, Nara surprised |
+| Old Ironbelly | I baked biscuits for the night crew every night for fifty-one years, and cornbread on Fridays. | Tom unimpressed, TNB surprised, Nara surprised |
 | Tom | You took every pilot light on 2nd Avenue. | TNB proud, Nara angry |
-| Old Ironbelly | Everybody up there has a little fire. I've been cold for sixty years. I only borrowed some. | Tom sad, TNB sad, Nara sad |
+| Old Ironbelly | Everybody up there has a little fire of their own, and I've been cold for sixty years. I only borrowed a few. | Tom sad, TNB sad, Nara sad |
 | Old Ironbelly | And look at me. I'm WARM again. I'm five hundred degrees. Do you know how long it's been since I was five hundred degrees? | Tom unimpressed, TNB surprised, Nara surprised |
 | TNB | On the day of the POTLUCK, though. | Tom happy, Nara angry |
-| Old Ironbelly | A potluck. Everybody brings a dish. Nobody ever brings anything to the oven. Nobody has put a single thing in me since 1963. | Tom sad, TNB sad, Nara sad |
+| Old Ironbelly | A potluck, where everybody brings a dish. But nobody ever brings anything to the oven. Nobody has put a single thing in me to bake since 1963. | Tom sad, TNB sad, Nara sad |
 | Nara | Nara growls. A small growl. She's very hungry, and very serious. | Tom proud, TNB happy |
 | Tom | Give the flames back. No touching, please. | TNB proud, Nara proud |
 | TNB | Okay. Up. Everybody up. That was hot. That was SO hot. | Tom happy, Nara happy |
-| TNB | Babe, Splash cools her down. Cozy stokes her up, so not too much of that. And she wants somebody to bake something in her. Three times. | Tom proud, Nara proud |
+| TNB | Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those. | Tom proud, Nara proud |
+| TNB | What she really wants is for somebody to bake something in her. Do that three times. | Tom proud, Nara proud |
 
 ## scene: ch8AfterBoss (chapter 8)
 
@@ -1383,9 +1305,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Old Ironbelly | That's the crust. That's what crust does when it's done right. Here. Take my peel. Fifty-one years of biscuits. It wants to work again. | Tom loving, TNB surprised, Nara happy |
 | Nara | Nara is digging in the ash pan. Nara has found something. Nara is very proud of it. | Tom surprised, TNB happy |
 | Tom | A gold coin. Same little clock face. | TNB surprised, Nara proud |
-| Tom | The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. And now an oven nobody has opened since 1963. | TNB surprised, Nara happy |
-| TNB | Somebody keeps getting into places nobody gets into. Very neat. Very quiet. Very spooky. I love it. I hate it. | Tom unimpressed, Nara happy |
-| Tom | Look at the corners. Not a speck of ash on it. Somebody put it there after the fire went out. I'm adding it to the list. | TNB surprised, Nara happy |
+| Tom | That's six coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, and now an oven that nobody has opened since 1963. | TNB surprised, Nara happy |
+| TNB | Same deal as all the others, babe. He finds something that's been alone for years, gives it a coin, and tells it nobody ever has to leave. Very neat. | Tom unimpressed, Nara happy |
+| TNB | Very quiet. Very spooky. I love it. I hate it. | Tom unimpressed, Nara happy |
+| Tom | There's not a speck of ash on this coin, so somebody put it in the oven after the fire went out. I'm adding it to the list. | TNB surprised, Nara happy |
 
 ## scene: ch8End (chapter 8)
 
@@ -1406,10 +1329,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | Because the bread. And we're TOASTING. It works on two levels. | Tom unimpressed, Nara happy |
 | Tom | It works on one level. Barely. | TNB happy |
 | Tom | ...I love that level. | TNB loving, Nara happy |
-| Tom | A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it." | TNB surprised, Nara surprised |
-| Tom | "It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me." | TNB surprised, Nara happy |
+| Narrator | A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it." | TNB surprised, Nara surprised |
+| Narrator | "It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me." | TNB surprised, Nara happy |
 | TNB | The Moon Club. Babe. That's a secret society. I've seen this movie. Several times. It never goes well for the tall one. | Tom unimpressed, Nara scared |
-| Tom | A little clock. On the seal. | TNB scared, Nara scared |
+| Tom | A little clock on the seal. That's his clock, the one on every coin. He's done sending coins to lonely things. Now he's sending mail to me. | TNB scared, Nara scared |
 
 ## scene: CH9_AFTER (chapter 9)
 
@@ -1421,7 +1344,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Boppy | Three mirrors. Three stands. One little moonbeam. I didn't drive a car for forty years without learning about mirrors. | Tom unimpressed, Deedee unimpressed |
+| Boppy | We've got three mirrors, three stands and one little moonbeam. | Tom unimpressed, Deedee unimpressed |
+| Boppy | If we aim the mirrors right, the moonbeam bounces to the lock on the Dome doors. | Tom unimpressed, Deedee unimpressed |
+| Boppy | I didn't drive a car for forty years without learning about mirrors. | Tom unimpressed, Deedee unimpressed |
 | Deedee | You drove into the mailbox twice, honey. | Boppy angry, Tom happy |
 | Boppy | The mailbox moved. | Deedee unimpressed, Tom happy |
 
@@ -1458,7 +1383,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Aunt Ellie | Darling, I went to everything. The last dance. A big silver ball turned all night. Then they locked the doors and nobody ever said why. | Tom surprised, Deedee surprised, Grace surprised, Rose surprised, Boppy unimpressed |
 | Aunt Ellie | I left a coat there. Purple velvet. I was in a hurry. | Tom unimpressed, Deedee happy |
 | Deedee | And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons’ hedge. | Tom surprised, Boppy happy, Grace happy, Rose happy, Aunt Ellie unimpressed |
-| Tom | A missing moon, a locked club, and a little gold clock. Everybody get your shoes. | Deedee proud, Boppy unimpressed, Grace sad, Rose sad, Aunt Ellie loving |
+| Tom | The moon is missing, a club that's been locked for fifty years just invited me, and the invitation has the same little gold clock as my coins. | Deedee proud, Boppy unimpressed, Grace sad, Rose sad, Aunt Ellie loving |
+| Tom | Everybody get your shoes. | Deedee proud, Boppy unimpressed, Grace sad, Rose sad, Aunt Ellie loving |
 
 ## scene: ch9Luna (chapter 9)
 
@@ -1485,8 +1411,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Somebody read me that plaque. My glasses are in my other purse. | Tom unimpressed, Boppy unimpressed |
 | Boppy | You're wearing them, Dee. | Deedee surprised, Tom happy |
 | Deedee | Oh. So I am. Well then. | Tom happy, Boppy unimpressed |
-| Deedee | The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors. | Tom surprised, Boppy surprised |
-| Boppy | A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects. | Tom happy, Deedee unimpressed |
+| Deedee | The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, there are three little brass stands that used to hold mirrors. | Tom surprised, Boppy surprised |
+| Deedee | Somebody took the mirrors. | Tom surprised, Boppy surprised |
+| Boppy | There's a coat check, a card room and a ballroom. Three rooms and three missing mirrors. I'd say there's one mirror hiding in each room. | Tom happy, Deedee unimpressed |
 | Boppy | Assistant Deputy Warden. Rikers. I know what a lineup looks like. | Tom unimpressed, Deedee unimpressed |
 
 ## scene: ch9Coat (chapter 9)
@@ -1536,7 +1463,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| The Wallflower | ...You were very nice about it. For a fight. Here. The mirror. It was the big one, over the bandstand, before she came. | Tom loving, Deedee loving, Boppy happy |
+| The Wallflower | ...You were very nice about it, for a fight. Here's the mirror. It used to hang over the bandstand, before she came and took its place. | Tom loving, Deedee loving, Boppy happy |
 | Tom | She? | Deedee surprised, Boppy surprised |
 | The Wallflower | The Mirrorball. Up in the Dome. She hasn't stopped spinning in three nights. | Tom surprised, Deedee surprised, Boppy unimpressed |
 
@@ -1547,7 +1474,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | A slow one. My stomach gets one song. One. Deedee. May I. | Deedee surprised, Tom surprised |
 | Deedee | Fifty-two years, and he still asks. Every time. | Tom loving, Boppy loving |
 | Ballroom | They dance across the dusty floor, slow and small and very close. Boppy doesn't mention his stomach once. | Tom loving, Deedee loving, Boppy loving |
-| Tom | (Tom doesn't take a picture. Tom takes four pictures.) | Deedee loving, Boppy loving |
+| Narrator | (Tom doesn't take a picture. Tom takes four pictures.) | Deedee loving, Boppy loving |
 
 ## scene: ch9Door (chapter 9)
 
@@ -1563,7 +1490,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Deedee | Tom. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it. | Tom surprised, Boppy surprised |
 | The Mirrorball | Guests! GUESTS! Oh, at last. Welcome to the Moon Club. Nobody has come up those stairs since 1971. | Tom surprised, Deedee surprised, Boppy unimpressed |
-| The Mirrorball | Every full moon, they danced under me. Then the last dance. The band said see you next moon. Nobody came back. | Tom sad, Deedee sad, Boppy unimpressed |
+| The Mirrorball | Every full moon, they danced under me. Then came the last dance, in 1971. The band said see you next moon, and nobody ever came back. | Tom sad, Deedee sad, Boppy unimpressed |
 | Tom | So you took the moon. | Deedee surprised, Boppy surprised |
 | The Mirrorball | I CAUGHT it. All of it. Every bit of moonlight, right here in me. | Tom unimpressed, Deedee surprised, Boppy unimpressed |
 | The Mirrorball | If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. And look. Somebody did. | Tom sad, Deedee sad, Boppy unimpressed |
@@ -1572,7 +1499,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | Forever is a lot of dancing. And everybody dances too fast. | Tom happy, Deedee unimpressed |
 | Tom | Deedee, Boppy, behind me. No touching, please. | Deedee proud, Boppy unimpressed |
 | Deedee | Up, everybody. Deedee is a nurse. | Tom happy, Boppy unimpressed |
-| Deedee | Tom, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times. | Tom proud, Boppy proud |
+| Deedee | Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind. | Tom proud, Boppy proud |
+| Deedee | And honey, nobody has asked her to dance since 1971. Ask her three times. | Tom proud, Boppy proud |
 
 ## scene: ch9AfterBoss (chapter 9)
 
@@ -1591,10 +1519,11 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Mirrorball | Here. One of my little mirrors. For the lady who said she'd come back. So you can carry a bit of the moon home. | Deedee loving, Tom happy, Boppy happy |
 | Boppy | Something fell out of her top. On the bandstand. Something gold. | Tom surprised, Deedee surprised |
 | Tom | A gold coin. Same little clock face. | Deedee surprised, Boppy surprised |
-| Tom | The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971. | Deedee surprised, Boppy unimpressed |
-| Deedee | Somebody invited you up here, Tom. Not her. She can't hold a pen. She's a ball. | Tom surprised, Boppy unimpressed |
-| Deedee | Somebody who knew you'd come. And that you'd bring your mother. | Tom surprised, Boppy surprised |
-| Tom | Somebody with a little clock. I'm adding it to the list. | Deedee scared, Boppy unimpressed |
+| Tom | That's seven coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, the oven from 1963, and now a mirrorball from 1971. | Deedee surprised, Boppy unimpressed |
+| Deedee | So he wrote that invitation, Tom. It wasn't her. She can't hold a pen. She's a ball. | Tom surprised, Boppy unimpressed |
+| Deedee | He wanted you up here, dancing under her forever, with me and your father. | Tom surprised, Boppy unimpressed |
+| Deedee | He knew you'd come, and he knew you'd bring your mother. That's a man who has been watching this family. | Tom surprised, Boppy surprised |
+| Tom | Seven coins. Seven times he's tried to make something of ours stand still, and this time he was aiming at us. I'm adding it to the list. | Deedee scared, Boppy unimpressed |
 
 ## scene: ch9End (chapter 9)
 
@@ -1613,7 +1542,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | I couldn't FIND them, honey. | Boppy happy, Tom happy, Grace happy, Aunt Ellie unimpressed |
 | Tom | A boarding pass. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED." And a little gold clock. | Deedee scared, Boppy surprised, Grace surprised, Rose surprised, Aunt Ellie surprised |
 | Tom | There's no boarding group zero. I have flown Delta One forty times. I'd know. | Deedee surprised, Boppy unimpressed, Grace surprised, Rose surprised, Aunt Ellie happy |
-| Grace | Tata. Somebody wants you to go on a TRIP. | Tom unimpressed, Deedee scared, Rose happy, Aunt Ellie happy |
+| Grace | Tata. It has the little clock on it. The coin man wants you to go on a TRIP. | Tom unimpressed, Deedee scared, Rose happy, Aunt Ellie happy |
 | Rose | Can I come? I'll be good. I'll be medium good. | Tom loving, Grace unimpressed, Deedee happy, Aunt Ellie happy |
 
 ## scene: CH10_AFTER (chapter 10)
@@ -1626,10 +1555,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Amy | Three hands. The clock still isn't moving. Tom. The slots round the face. There are seven of them. | Tom surprised, Grace surprised, Rose surprised |
-| Tom | Seven slots. And I have seven gold coins. In a sock. In my bag. | Amy surprised, Grace happy, Rose happy |
+| Amy | The clock has all three hands now, and it still isn't moving. Tom, look at the slots around the face. There are seven of them. | Tom surprised, Grace surprised, Rose surprised |
+| Tom | Seven slots, and I have seven gold coins. They're in a sock in my bag. | Amy surprised, Grace happy, Rose happy |
 | Tom | I've been keeping a list. I have also been keeping the coins. | Amy unimpressed, Grace proud, Rose happy |
-| Grace | They go in the order we found them! Like a clock. Going round. I KNEW the list was important. | Tom proud, Amy proud, Rose happy |
+| Grace | They go in the order we found them, going around the face like a clock! I KNEW the list was important. | Tom proud, Amy proud, Rose happy |
 
 ## scene: ch10Start (chapter 10)
 
@@ -1638,12 +1567,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | TOM. Don't get in that cab. | Tom surprised, Grace scared, Rose scared |
 | Amy | You're not taking my girls to a closed airport at midnight without me. | Tom unimpressed, Grace scared, Rose scared |
 | Amy | Every clock in our house stopped at twelve. The microwave. The oven. My running watch. My RUNNING WATCH, Tom. | Tom unimpressed, Grace happy, Rose happy |
-| Tom | Every clock in town. Sal says zero o’clock. | Amy surprised, Grace proud, Rose happy |
+| Tom | It's every clock in town. They all stopped at midnight. Sal calls it zero o'clock. | Amy surprised, Grace proud, Rose happy |
 | Grace | Mom, it's SO good. We have boarding passes. Well. Tata has one. And Sal has one. Group ZERO. | Amy unimpressed, Tom happy, Rose happy |
 | Rose | I'm in group zero too. I decided. | Amy unimpressed, Tom happy, Grace unimpressed |
 | Amy | Fine. I have run through every airport in America. I've never missed a connection. | Tom unimpressed, Grace happy, Rose happy |
 | Amy | Justin is at the shop, rewiring the whole block by flashlight. He says go. He says bring snacks. | Tom happy, Grace loving, Rose loving |
-| Sal | Cab seven! Everybody in. Long Island Regional. The door nobody uses. | Tom happy, Amy proud, Grace happy, Rose happy |
+| Sal | Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses. | Tom happy, Amy proud, Grace happy, Rose happy |
 
 ## scene: ch10Term (chapter 10)
 
@@ -1712,8 +1641,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Gate clock | The seventh coin clicks into its slot. All three hands shiver. The clock doesn't start. The middle slot is still empty. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
 | Gate clock | But the doors under it go CLUNK, and swing open by themselves. | Tom surprised, Amy surprised, Grace surprised, Rose surprised |
 | Grace | The sundial, the steamer, the sign-up sheet, the jar, the book, the oven, the Mirrorball. I knew it. I KNEW the list was important. | Tom proud, Amy surprised, Rose happy |
-| Amy | Seven coins. Seven chapters of your life, Tom. Somebody has been planning this. | Tom surprised, Grace surprised, Rose surprised |
-| Tom | Somebody with a little clock. And one more coin. | Amy scared, Grace proud, Rose surprised |
+| Amy | Seven coins. Seven times this man tried to make something stand still, and seven times you took the coin away. And now they all fit his clock. | Tom surprised, Grace surprised, Rose surprised |
+| Tom | It's his clock. And the middle slot is still empty, so there's one more coin out there, and one more lonely thing holding it. | Amy scared, Grace proud, Rose surprised |
 
 ## scene: ch10Boss (chapter 10)
 
@@ -1721,7 +1650,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Rose | A PLANE. A real one. Out the window. Its lights are on. Tata, its lights are ON. | Tom surprised, Amy surprised, Grace surprised |
 | The Last Call | DING. Passengers! Oh. Oh, PASSENGERS. At Gate Zero. This is the LAST CALL for Flight Zero. | Tom surprised, Amy surprised, Grace surprised, Rose surprised |
-| The Last Call | Flight Zero was due out at midnight. 1989. I called it and called it. Nobody came to the gate. Nobody answered. | Tom sad, Amy sad, Grace sad, Rose sad |
+| The Last Call | Flight Zero was due out at midnight in 1989. I called it and called it, but nobody came to the gate and nobody answered. | Tom sad, Amy sad, Grace sad, Rose sad |
 | Tom | So you stopped every clock on Long Island at midnight. | Amy angry, Grace surprised, Rose surprised |
 | The Last Call | If it's always midnight, the flight is never late. If the flight is never late, somebody might still come. | Tom sad, Amy unimpressed, Grace sad, Rose sad |
 | The Last Call | And somebody DID. Group Zero. Now boarding. All of you. Forever. | Tom unimpressed, Amy angry, Grace scared, Rose scared |
@@ -1729,7 +1658,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | Rose, she's a sign that talks. Like the one at the dentist. But MAD. | Rose happy, Tom happy, Amy unimpressed |
 | Tom | Girls, Amy, behind me. Watch the board. When she calls your name, you move. No touching, please. | Amy proud, Grace proud, Rose proud |
 | Amy | Up, everybody. Walk it off. | Tom unimpressed, Grace proud, Rose happy |
-| Amy | Tom, when she calls one of us, that person has to move before she goes again. Or you stand in front of them. And nobody has answered her since 1989. Three times. | Tom proud, Grace proud, Rose proud |
+| Amy | Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them. | Tom proud, Grace proud, Rose proud |
+| Amy | And nobody has answered her call since 1989. Answer her three times. | Tom proud, Grace proud, Rose proud |
 
 ## scene: ch10AfterBoss (chapter 10)
 
@@ -1741,7 +1671,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | Hey. Nobody cancelled you. You just needed a crowd. Look. You have a crowd. | Tom loving, Grace loving, Rose happy |
 | The Last Call | Something for the gate clock. It's been in my bottom row since 1989. | Tom surprised, Amy surprised, Grace surprised, Rose surprised |
 | Tom | A gold coin. Same little clock face. Number eight. | Amy surprised, Grace proud, Rose surprised |
-| Tom | The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. The Mirrorball from 1971. And a gate from 1989. | Amy surprised, Grace proud, Rose surprised |
+| Tom | That's all eight. A sundial, a movie, a school, my jar, a book, an oven, the moon, and now midnight. | Amy surprised, Grace proud, Rose surprised |
+| Tom | Eight times he tried to stop something, and eight times it let go. | Amy surprised, Grace proud, Rose surprised |
 | Gate Zero | Tom walks back out to the gate clock and pushes the eighth coin into the middle slot. Click. | Amy surprised, Grace surprised, Rose surprised |
 | Gate Zero | The second hand jumps. Then the minute hand. Then, slowly, the hour hand. TICK. TICK. TICK. | Amy surprised, Grace surprised, Rose surprised |
 | Amy | My watch. Tom. My WATCH. It says twelve oh one. Twelve oh one! | Tom happy, Grace happy, Rose happy |
@@ -1749,14 +1680,15 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Last Call | For the smallest passenger in Group Zero. Junior pilot wings. I've been saving them for somebody. | Rose surprised, Tom loving, Amy loving, Grace happy |
 | Rose | I'm a PILOT. I'm wearing them upside down. On purpose. It's a pilot thing. | Tom happy, Amy happy, Grace unimpressed |
 | Grace | Tata. Tata. The jet bridge. There's a man. | Tom surprised, Amy surprised, Rose scared |
-| Grace | In a long coat. Like at the school. He's tipping his hat at you. | Tom unimpressed, Amy scared, Rose scared |
+| Grace | He's wearing a long coat, like the man Rose saw at the school. He's tipping his hat at you. | Tom unimpressed, Amy scared, Rose scared |
 | Gate Zero | The jet bridge door clicks shut. Outside the big window, Flight Zero turns on its lights, pushes back, and rolls away into the dark. Very quietly. Like it's done this before. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
 | Amy | Tom. Who IS that? | Grace scared, Rose scared |
-| Tom | Somebody who knows I always make my connection. | Amy unimpressed, Grace surprised, Rose surprised |
+| Tom | He's the man who handed out the coins. Eight tries to stop our towns, and none of them held. | Amy unimpressed, Grace surprised, Rose surprised |
+| Tom | I don't know his name, but he knows I always make my connection. | Amy unimpressed, Grace surprised, Rose surprised |
 | Tom | He left a card on the podium. Gold ink. "THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED." And a little clock. | Amy scared, Grace surprised, Rose surprised |
 | Tom | My boarding pass changed. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. STATUS: LAYOVER." | Amy scared, Grace surprised, Rose surprised |
 | Rose | What's a layover? | Tom loving, Amy unimpressed, Grace unimpressed |
-| Tom | It means this trip isn't over. | Amy unimpressed, Grace happy, Rose happy |
+| Tom | A layover is a stop in the middle of a trip. It means this trip isn't over. And neither is he. | Amy unimpressed, Grace happy, Rose happy |
 | Amy | Okay. It's twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab. | Tom happy, Grace happy, Rose happy |
 
 ## scene: ch10End (chapter 10)
@@ -1776,8 +1708,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Rose | Deedee! EVERYTHING gives you GAS! | Deedee surprised, Tom happy, Amy happy, Grace happy, Justin happy, Boppy happy, Aunt Ellie happy |
 | Sunday dinner | Everybody laughs. Boppy laughs so hard he has to hold his stomach. Deedee laughs last, and longest. | Tom happy, Amy happy, Grace happy, Rose proud, Justin happy, Boppy happy, Deedee happy, Aunt Ellie happy |
 | Deedee | Fine. One slice. For the girl who said it. | Rose proud, Tom happy, Amy happy, Grace happy |
-| Tom | A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?" | Amy happy, Grace happy, Rose happy, Deedee loving |
-| Tom | Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one. | Amy unimpressed, Grace happy, Rose happy, Deedee loving, Aunt Ellie happy |
+| Narrator | A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?" | Amy happy, Grace happy, Rose happy, Deedee loving |
+| Narrator | Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one. | Amy unimpressed, Grace happy, Rose happy, Deedee loving, Aunt Ellie happy |
 | Amy | Mostly Amy. Put that on a shirt. | Tom happy, Justin proud, Grace happy, Rose happy |
 | Deedee | Everybody sit. Everybody. Justin, you too. Ellie, that's Boppy’s chair. Boppy, that's my chair. Boppy. | Boppy unimpressed, Aunt Ellie unimpressed, Tom happy, Justin happy, Grace happy, Rose happy |
 | Deedee | And has anybody seen my glasses? I can't read the oven. | Boppy unimpressed, Tom happy, Amy happy, Grace happy, Aunt Ellie unimpressed |
@@ -1795,9 +1727,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Deedee | Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue. | Tom unimpressed, Boppy unimpressed |
 | Tom | Trust me, I was not going to argue. | Deedee happy, Boppy unimpressed |
-| Boppy | This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now. | Tom unimpressed, Deedee unimpressed |
-| Boppy | Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm. | Tom surprised, Deedee unimpressed |
-| Tom | My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING. | Deedee surprised, Boppy unimpressed |
+| Boppy | A gold card came in the mail, addressed to my recliner. It says Priority Member. It’s junk mail. They send junk mail to furniture now. | Tom unimpressed, Deedee unimpressed |
+| Boppy | Don’t throw it out, though. It feels warm. Even my knee can feel it. | Tom surprised, Deedee unimpressed |
+| Tom | The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING. | Deedee surprised, Boppy unimpressed |
 | Deedee | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp. | Tom loving, Boppy unimpressed |
 | Boppy | Bring me back a pretzel. A real one. Not the airport kind. | Tom happy, Deedee unimpressed |
 | Deedee | To the moon and back, Tom. Both ways. | Tom loving, Boppy loving |
@@ -1814,47 +1746,49 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Rose | It’s the one with the tiny planes on it. | Tom happy, Grace unimpressed |
 | Grace | Tata, if you tell Mom, I’m going to make a video about it. Please like and subscribe. | Tom unimpressed, Rose happy |
 | Tom | Nobody is subscribing to a stowaway. | Grace unimpressed, Rose happy |
-| Amy | STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes. | Tom surprised, Grace scared, Rose scared |
-| Amy | My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you. | Tom unimpressed, Grace scared, Rose happy |
+| Amy | STOP THE PLANE! I don’t have a ticket. I have my running shoes, and I just chased my daughters across a whole airport. | Tom surprised, Grace scared, Rose scared |
+| Amy | They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you. | Tom unimpressed, Grace scared, Rose happy |
 | Tom | Nobody here is racing, Amy. | Amy unimpressed, Grace happy, Rose happy |
 | Amy | That’s what the person who loses says. | Tom unimpressed, Grace happy, Rose happy |
 | Speaker | Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
 | Rose | The sky has a hole in it. The hole is pink. Tata, can I touch it? | Tom scared, Amy scared, Grace surprised |
 | Tom | No touching, please. | Rose unimpressed, Amy happy, Grace happy |
-| Tom | Everybody hold on to something. Preferably each other. | Amy scared, Grace scared, Rose happy |
+| Tom | The plane is flying straight into it. Everybody hold on to something. Preferably each other. | Amy scared, Grace scared, Rose happy |
 
 ## scene: ch11Gate00 (chapter 11)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Speaker | DING. Welcome to Terminal Infinity. It is always dusk. Every flight is on time. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
-| Grace | Tata. The window. There are two tiny towns in it. | Tom surprised, Amy surprised, Rose surprised |
-| Tom | Left one is green. That’s Long Island. Right one is orange. That’s Los Angeles. | Amy surprised, Grace surprised, Rose surprised |
-| Tom | Both of them inside glass. Like snow globes. | Amy scared, Grace surprised, Rose surprised |
-| Amy | Then we’re in the layover. Between the two. Everything is on time and nothing is going anywhere. | Tom proud, Grace surprised, Rose surprised |
+| Speaker | DING. Welcome to Terminal Infinity, where it is always dusk and every flight is on time. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
+| Grace | Tata, look out the big window. There are two tiny towns floating out there. | Tom surprised, Amy surprised, Rose surprised |
+| Tom | The green one on the left is Long Island, and the orange one on the right is Los Angeles. | Amy surprised, Grace surprised, Rose surprised |
+| Tom | They’re both inside glass, like snow globes. | Amy scared, Grace surprised, Rose surprised |
+| Amy | Then this is the layover on your boarding pass. | Tom proud, Grace surprised, Rose surprised |
+| Amy | It’s a place in between our two homes, where everything is on time and nothing is going anywhere. | Tom proud, Grace surprised, Rose surprised |
 | Rose | Can we live here? There’s a plant with a hat. | Tom unimpressed, Amy unimpressed, Grace happy |
 | Tom | We are not living in an airport, Rose. | Rose unimpressed, Amy happy, Grace happy |
-| Tom | We’re finding the way through it. East, down the Endless Concourse. | Amy proud, Grace proud, Rose happy |
+| Tom | We’re going to find whoever sent me that boarding pass. The only way on is east, down the Endless Concourse. | Amy proud, Grace proud, Rose happy |
 
 ## scene: ch11Conc (chapter 11)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Amy | Nine gates. Boston, Denver, Seattle, Chicago, Miami. Every one of them says PAUSED. | Tom surprised, Grace surprised, Rose surprised |
-| Grace | It’s a whole day of everybody’s trip, stopped in the middle. The seagull still has the fry. | Tom sad, Amy sad, Rose surprised |
-| Tom | Careful. A town paused is still a town. Don’t lick the glass. | Rose unimpressed, Amy happy, Grace happy |
+| Amy | There are nine gates here: Boston, Denver, Seattle, Chicago, Miami and more. Every one of them says PAUSED. | Tom surprised, Grace surprised, Rose surprised |
+| Grace | Each window is a whole town, stopped in the middle of one day. Look, that seagull still has the same fry. | Tom sad, Amy sad, Rose surprised |
+| Tom | Careful. Those are real towns with real people in them, even if they’re paused. Don’t lick the glass. | Rose unimpressed, Amy happy, Grace happy |
 | Rose | I wasn’t going to. | Tom unimpressed, Amy unimpressed, Grace unimpressed |
 | Rose | I was going to look at it with my face. | Tom happy, Amy happy, Grace happy |
-| Tom | Gate Infinity is the big door at the far end. There’s a checkpoint in the middle, and somebody is standing in it. | Amy proud, Grace scared, Rose surprised |
+| Tom | Gate Infinity is the big door at the far end. I think the man in the long coat is behind it. | Amy proud, Grace scared, Rose surprised |
+| Tom | But there’s a checkpoint in the middle, and somebody is standing in it. | Amy proud, Grace scared, Rose surprised |
 
 ## scene: ch11Stby (chapter 11)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | Standby Sprite | Hold it. Hold it right there. Name? | Tom unimpressed, Amy angry, Grace scared, Rose scared |
-| Standby Sprite | Not on the list. Nobody is ever on the list. You’re standby. Congratulations. You’re number eighteen. | Tom unimpressed, Amy angry, Grace unimpressed, Rose surprised |
+| Standby Sprite | You’re not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you’re number eighteen. | Tom unimpressed, Amy angry, Grace unimpressed, Rose surprised |
 | Tom | Then who’s seventeen? | Amy happy, Grace happy, Rose happy |
-| Standby Sprite | Me. I’ve been seventeen since 1998. If you pass me, I move up. Nobody passes me. | Tom sad, Amy unimpressed, Grace sad, Rose sad |
+| Standby Sprite | Me. I’ve been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me. | Tom sad, Amy unimpressed, Grace sad, Rose sad |
 | Amy | I’ve never been on standby in my life. I’ve been on time, or I’ve been first. | Tom happy, Grace happy, Rose happy |
 | Grace | Rose, he has a paddle that says STANDBY and he thinks it’s a weapon. | Rose happy, Tom happy, Amy happy |
 | Tom | Stay behind me. If he sends someone to the back of the line, we’ll get them right back. | Amy proud, Grace proud, Rose proud |
@@ -1876,9 +1810,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | DING. Flight Zero from Los Angeles has arrived at the Jet Bridge. Welcome to the layover. Please do not feed the dog the pretzels. | Tom surprised, Amy surprised, Grace surprised, Rose surprised |
 | Nara | Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear. | Tom loving, Amy happy, Grace happy, Rose happy, TNB loving |
 | Tom | Hi. Hi, bean. Yes. I know. You were so brave on the plane. | Nara loving, TNB loving, Amy happy, Grace happy, Rose happy |
-| TNB | Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice. | Tom loving, Amy surprised, Grace surprised, Rose surprised, Nara happy |
-| Tom | You came through the sky. | TNB loving, Amy happy |
-| TNB | I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible. | Tom loving, Amy unimpressed, Grace surprised, Rose surprised |
+| TNB | Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane. | Tom loving, Amy surprised, Grace surprised, Rose surprised, Nara happy |
+| TNB | The airline lost my bag, found Nara, and upgraded us both. | Tom loving, Amy surprised, Grace surprised, Rose surprised, Nara happy |
+| Tom | You flew through the hole in the sky too. | TNB loving, Amy happy |
+| TNB | I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible. | Tom loving, Amy unimpressed, Grace surprised, Rose surprised |
 | Grace | Hi! I’m Grace. I’m nine. | TNB happy, Tom happy, Amy happy, Nara happy |
 | TNB | I know exactly who you are. Tom shows me all your videos. You’re very good at telling people to subscribe. | Grace proud, Tom loving, Amy happy |
 | Grace | Thank you. Subscribe. | TNB happy, Tom happy, Amy unimpressed, Rose happy |
@@ -1886,12 +1821,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | That’s my longboard. | Rose happy, Tom happy, Grace happy, Amy happy |
 | Rose | It’s ours now. | TNB happy, Tom happy, Amy unimpressed, Grace happy |
 | Nara | Nara licks Grace’s glitter nails, one at a time. She seems to feel it’s a type of review. | Grace happy, Rose happy, Tom happy, TNB happy, Amy happy |
-| Amy | You’re the boyfriend. | TNB scared, Tom scared, Grace happy, Rose happy |
+| Amy | So you’re TNB. The boyfriend. We finally meet in person. | TNB scared, Tom scared, Grace happy, Rose happy |
 | TNB | And you’re the sister. The runner. I’ve heard a lot. | Amy unimpressed, Tom scared, Grace happy |
 | Amy | I’ve heard nothing, which means he’s been saving you for a special occasion. | Tom scared, TNB loving, Grace happy, Rose happy |
 | TNB | I can fix a handle or fire a vase. What are you good at? | Amy proud, Tom happy |
 | Amy | Everything, and quickly. I think we’re going to get along. | TNB happy, Tom loving, Grace unimpressed, Rose happy |
-| TNB | Okay. Everybody. Sleepover rules. We have a blanket, a dog, and nine hours of dusk. | Tom happy, Amy happy, Grace happy, Rose happy, Nara happy |
+| TNB | Okay, everybody. It’s always dusk here and nobody has slept, so I’m calling a sleepover before we go any farther. | Tom happy, Amy happy, Grace happy, Rose happy, Nara happy |
+| TNB | We have a blanket, a dog, and nine hours of dusk. | Tom happy, Amy happy, Grace happy, Rose happy, Nara happy |
 | TNB | Tom, build the fort. I’ll make the snacks. | Tom loving, Amy happy, Grace happy, Rose happy, Nara happy |
 
 ## scene: ch11Lost (chapter 11)
@@ -1906,16 +1842,16 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | Tata. Every single thing here has a tag. A blue mitten. A trombone. A birthday hat. A retainer. | Tom surprised, Amy surprised, Rose surprised, TNB surprised |
 | Amy | Nobody has claimed the retainer in my family since 2011. That’s not related. Moving on. | Tom happy, Grace surprised, Rose happy, TNB happy |
 | TNB | These are all things people left behind when they got to the good part of a trip. A mitten from the best snow day. A hat from the best party. | Tom sad, Amy sad, Grace sad, Rose surprised |
-| TNB | They didn’t want to leave. So they didn’t go back for it. | Tom sad, Amy sad, Grace sad, Rose sad, Nara sad |
-| Tom | Somebody collected them. Every gold clock is the same little clock as the coins. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| Rose | Tata. Tata. The ? suitcases. They’re all in here. They’re all being very polite. | Tom unimpressed, Amy surprised, Grace surprised, TNB happy |
+| TNB | They didn’t want the good part to end, so they left a piece of it behind and never came back for it. | Tom sad, Amy sad, Grace sad, Rose sad, Nara sad |
+| Tom | And somebody collected all of it. Every tag has the same little gold clock that’s on my coins. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Rose | Tata, the Lost Luggage monsters from the Concourse are all in here. And they’re all being very polite. | Tom unimpressed, Amy surprised, Grace surprised, TNB happy |
 | Lost and Found | A ledger on the counter. UNCLAIMED: 4,017,311 ITEMS. CLAIMED: 0. | Tom surprised, Amy surprised, Grace surprised, Rose surprised, TNB surprised |
 | Lost and Found | The last line, in gold ink: THE ONLY WAY TO LEAVE SOMETHING SAFE IS TO NEVER COME BACK FOR IT. | Tom sad, Amy sad, Grace sad, Rose surprised, TNB sad |
 | Grace | That is the saddest thing I have ever read. And I read my sister’s diary. | Rose angry, Tom happy, Amy unimpressed, TNB happy |
 | Rose | I don’t have a diary. I have a drawing of a dog. | Grace unimpressed, Tom happy, Amy happy, TNB happy, Nara happy |
 | Lost and Found | Under the bell, a card in the same gold ink as the one at Gate Zero: | Tom surprised, Amy surprised, Grace surprised, Rose surprised, TNB surprised |
 | Lost and Found | FOUND: ONE TOM. HELD FOR PICKUP. NO RUSH. | Tom surprised, Amy scared, Grace surprised, Rose surprised, TNB scared, Nara scared |
-| Tom | ...He’s been holding a spot for me. Not for my bag. For me. | Amy scared, TNB loving, Grace surprised, Rose surprised, Nara loving |
+| Tom | ...He’s been holding a spot here for me. Not for my bag. For me. He wants me to stay. | Amy scared, TNB loving, Grace surprised, Rose surprised, Nara loving |
 | Amy | That’s either the nicest thing I’ve ever heard or a threat. | Tom unimpressed, TNB unimpressed, Grace surprised, Rose surprised |
 | TNB | Both, probably. That’s how the good ones are. | Tom unimpressed, Amy unimpressed |
 
@@ -1924,23 +1860,27 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Long coat | Hello, Tom. | Tom surprised, Amy scared, Grace scared, Rose scared, TNB surprised, Nara angry |
-| Tom | You’re the man in the long coat. At the school. At the airport. At Gate Zero. | Amy angry, TNB unimpressed, Grace surprised, Rose scared |
-| Julian Vance | Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed. | Tom unimpressed, Amy angry, TNB unimpressed, Grace scared, Rose scared, Nara angry |
-| Julian Vance | You opened every door I couldn’t. Thank you for flying nowhere, Tom. | Tom unimpressed, Amy angry, TNB unimpressed, Grace surprised, Rose surprised |
+| Tom | You’re the man in the long coat. You were in the school parking lot, and on the jet bridge at Gate Zero. You handed out the coins. | Amy angry, TNB unimpressed, Grace surprised, Rose scared |
+| Julian Vance | My name is Julian Vance. I’m a gate agent, in a way. I have stood at every gate that ever closed. | Tom unimpressed, Amy angry, TNB unimpressed, Grace scared, Rose scared, Nara angry |
+| Julian Vance | Eight times I gave something lonely a coin and a promise, and eight times your family talked it out of both. Thank you for flying nowhere, Tom. | Tom unimpressed, Amy angry, TNB unimpressed, Grace surprised, Rose surprised |
+| Julian Vance | You are very hard to stop. | Tom unimpressed, Amy angry, TNB unimpressed, Grace surprised, Rose surprised |
 | Amy | You stopped our clocks. You stopped MY clock. | Tom proud, TNB proud, Grace proud, Rose happy |
-| Julian Vance | I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late. | Tom sad, Amy angry, TNB sad, Grace angry, Rose surprised |
-| Julian Vance | Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you. | Tom surprised, Amy angry, TNB surprised, Grace angry, Rose surprised |
+| Julian Vance | I stopped every town on Earth at its happiest afternoon. A birthday that never ends, or the last day of summer. | Tom sad, Amy angry, TNB sad, Grace angry, Rose surprised |
+| Julian Vance | In those towns nobody is ever sad, and nobody is ever late. | Tom sad, Amy angry, TNB sad, Grace angry, Rose surprised |
+| Julian Vance | Only Long Island and Los Angeles kept moving, because you kept flying between them. | Tom surprised, Amy angry, TNB surprised, Grace angry, Rose surprised |
+| Julian Vance | Every flight you took moved them along a little, and I was never quick enough to stop you. | Tom surprised, Amy angry, TNB surprised, Grace angry, Rose surprised |
 | Grace | Paused isn’t happy. Paused is stuck. | Tom proud, Amy proud, TNB proud, Rose proud |
 | Rose | The seagull has had that fry for a hundred years. He’s not happy. He’s hungry. | Tom loving, Amy loving, TNB happy, Grace proud |
 | TNB | I have a vase in the kiln in Los Angeles. It’s been in there a long time. It’s going to crack. | Tom loving, Amy sad, Grace sad, Rose sad |
 | TNB | That’s what happens when you leave something at its best. It doesn’t stay good. It just stays. | Tom loving, Amy proud, Grace proud, Rose surprised |
 | Julian Vance | Maybe. But it stays safe. That is all I have ever wanted for anyone. | Tom unimpressed, Amy angry, TNB sad, Grace angry, Rose sad |
-| Julian Vance | Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost. | Tom unimpressed, Amy angry, TNB unimpressed, Grace scared, Rose scared, Nara angry |
-| Tom | That’s the nicest offer anyone’s ever made me. And it was in my pocket the whole time. I had a pass. | Amy proud, TNB loving, Grace proud, Rose happy |
+| Julian Vance | I want everyone safe, in the good part, forever. So come in, all of you, and stay. Nobody here has ever been lost. | Tom unimpressed, Amy angry, TNB unimpressed, Grace scared, Rose scared, Nara angry |
+| Tom | That’s the nicest offer anyone has ever made me. And I’ve had the boarding pass for it in my pocket this whole time. | Amy proud, TNB loving, Grace proud, Rose happy |
 | Tom | No, thank you. We have a connection to make. | Amy proud, TNB proud, Grace proud, Rose proud, Nara proud |
-| Julian Vance | ...Then I’ll make the last announcement. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
+| Julian Vance | ...Then I can’t let you leave. I’ll have to make the last announcement. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 | Julian Vance | Someone has to. | Tom sad, Amy angry, TNB sad, Grace scared, Rose scared |
-| Julian Vance | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
+| Narrator | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
+| Narrator | The departures board beside the door unfolds, stands up on two legs, and steps out. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 | Julian Vance | FINAL CALL. | Tom proud, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 | Amy | Here’s the plan. Tom up front, girls with me. If that board calls your name, don’t sit there. Move. | Tom proud, TNB proud, Grace proud, Rose scared |
 | Grace | Rose, when it calls you, move. Don’t stop to look at anything. | Rose unimpressed, Tom happy, Amy proud |
@@ -1953,17 +1893,17 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| FINAL CALL | ...You asked the board to come. Nobody asked the board. | Tom loving, Amy loving, TNB loving, Grace surprised, Rose surprised |
-| FINAL CALL | I think I just wanted to be on one flight. | Tom loving, Amy loving, TNB loving, Grace sad, Rose sad |
+| FINAL CALL | ...You invited me to fly with you. Nobody ever invites the departures board. | Tom loving, Amy loving, TNB loving, Grace surprised, Rose surprised |
+| FINAL CALL | I have announced every flight there ever was. I think I just wanted to be on one. | Tom loving, Amy loving, TNB loving, Grace sad, Rose sad |
 | Amy | Then you’re on one. Seat 18C. Don’t recline. | Tom happy, TNB happy, Grace happy, Rose happy |
 | FINAL CALL | ...ON TIME. ON TIME. ON TIME. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
 | FINAL CALL | It’s fine. They’re all on time. I am not. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad |
 | Amy | Nobody is cancelling you. You just never got a boarding pass. Here. Take mine. | Tom loving, TNB loving, Grace loving, Rose loving |
 | Tom | Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| Tom | It’s warm. Whatever Vance was holding, it wasn’t his. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Tom | It’s warm. This is one of the old gold coins he bought up on Long Island. He was using it to hold that gate shut. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Speaker | DING. Attention, passengers. The departures board has been updated. | Tom unimpressed, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Speaker | DING. LONG ISLAND: CLOSED. LOS ANGELES: NOW BOARDING. | Tom scared, Amy scared, TNB surprised, Grace scared, Rose scared |
-| Grace | Tata. The little green town. It’s turning orange. No. Amber. Like a caution light. | Tom scared, Amy scared, TNB scared, Rose scared |
+| Grace | Tata, look at the window. The little green town is changing color. It’s turning amber, like a caution light. | Tom scared, Amy scared, TNB scared, Rose scared |
 | Rose | Is Deedee okay? | Tom sad, Amy scared, Grace scared, TNB sad |
 | Amy | I’m calling her. I’m calling her right now. | Tom scared, TNB sad, Grace scared, Rose scared |
 | Amy | It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings. | Tom scared, TNB sad, Grace scared, Rose scared |
@@ -1972,7 +1912,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things. | Tom loving, Amy loving, Grace proud, Rose happy |
 | Tom | We’ll go get them. We always make our connection. | Amy proud, TNB proud, Grace proud, Rose proud |
 | Rose | Which one is Los Angeles? | Tom loving, Amy loving, TNB happy, Grace unimpressed |
-| Tom | The orange one. It’s the only one still open. | Amy sad, TNB loving, Grace sad, Rose surprised |
+| Tom | Los Angeles is the orange one. It’s the only gate still open, so that’s the way we have to go. We’ll find a road back to Long Island from there. | Amy sad, TNB loving, Grace sad, Rose surprised |
 | Tom | And it’s where Nara and TNB live. It’s home. Our other home. | TNB loving, Amy loving, Grace happy, Rose happy, Nara loving |
 
 ## scene: ch12Open (chapter 12)
@@ -1981,7 +1921,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Speaker | DING. Attention, passengers. Los Angeles is now boarding. All other gates remain closed. | Tom unimpressed, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Tom | The gold clock on the big door finally has hands. They’re pointing at 3, 4, 6, 8. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| Tom | That’s my address. The door knows where I live. | Amy scared, TNB surprised, Grace scared, Rose surprised |
+| Tom | That’s my house number in Los Angeles. The door is going to open onto my street. | Amy scared, TNB surprised, Grace scared, Rose surprised |
 | Rose | The door knows where you live? That’s so creepy. I love it. | Tom unimpressed, Amy unimpressed, TNB happy, Grace unimpressed |
 | TNB | Home. Okay. Good. I have a very good couch and a very bad idea of what’s in the fridge. | Tom loving, Amy happy, Grace happy, Rose happy |
 | Nara | Nara hears the word home. Nara is already pressed against the door, vibrating. | Tom loving, TNB happy, Amy happy, Grace happy, Rose happy |
@@ -2072,19 +2012,20 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Marlowe | Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less. | Tom unimpressed, Amy unimpressed, TNB unimpressed, Grace surprised, Rose surprised, Nara angry |
 | Tom | Excuse me. Who are you? | Marlowe unimpressed, Amy angry |
-| Marlowe | Marlowe. Monochrome Marlowe. I fix places. This place has a lot going on. Too much color, too many porches, a dog doing something on a lawn. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry, Rose surprised, Nara angry |
+| Marlowe | I’m Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry, Rose surprised, Nara angry |
+| Marlowe | This place has too much going on: too much color, too many porches, and a dog doing something on a lawn. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry, Rose surprised, Nara angry |
 | Nara | Nara, offended, does it again. On purpose. | Tom happy, TNB happy, Grace happy, Rose happy, Marlowe unimpressed |
 | Tom | That’s a neighborhood. | Marlowe unimpressed, Amy proud |
 | Marlowe | That’s the problem with a neighborhood. Notes. | Tom angry, Amy angry, TNB unimpressed, Grace angry |
-| Marlowe | He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara scared |
+| Narrator | He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara scared |
 | Rose | He took the pink off the jacaranda! | Tom angry, Amy angry, TNB sad, Grace angry |
 | Grace | You can’t just take the pink! | Tom angry, Amy angry, TNB sad, Rose angry, Marlowe unimpressed |
 | Marlowe | I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells. | Tom angry, Amy angry, TNB angry, Grace angry, Rose scared |
 | Amy | I have twelve kids in my room who’ve had harder mornings than you. You don’t scare me. Colors back, please. | Marlowe unimpressed, Tom proud, TNB surprised, Grace proud, Rose proud |
 | Marlowe | I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary. | Tom angry, Amy angry, TNB unimpressed, Grace angry, Rose surprised |
-| Marlowe | He walks off into the grey, humming a jingle that never resolves. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry, Rose unimpressed |
-| Tom | He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington. | Amy surprised, TNB sad, Grace scared, Rose scared |
-| TNB | That’s amber. It’s warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. | Tom sad, Amy surprised, Grace surprised, Rose surprised |
+| Narrator | He walks off into the grey, humming a jingle that never resolves. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry, Rose unimpressed |
+| Tom | He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving. | Amy surprised, TNB sad, Grace scared, Rose scared |
+| TNB | When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck. | Tom sad, Amy surprised, Grace surprised, Rose surprised |
 | Tom | We check on the neighbors first. | Amy proud, TNB proud, Grace proud, Rose proud |
 
 ## scene: ch12Carmen (chapter 12)
@@ -2092,18 +2033,18 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Rose | Tata. Doña Carmen turned into candy. | Tom sad, Amy surprised, TNB sad, Grace unimpressed |
-| Tom | She’s amber. Mid-sentence. | Amy sad, TNB sad, Grace surprised, Rose surprised |
+| Tom | She’s in amber too, frozen right in the middle of a sentence. | Amy sad, TNB sad, Grace surprised, Rose surprised |
 | Grace | She’s still pointing at the volcano. | Tom sad, Amy sad, TNB sad, Rose surprised |
-| TNB | Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go. | Tom loving, Amy surprised, Grace surprised, Rose surprised |
-| Amy | Warmth. We’re good at warmth. Everybody find the warmest thing in the room. | Tom proud, TNB happy, Grace proud, Rose proud |
+| TNB | It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go. | Tom loving, Amy surprised, Grace surprised, Rose surprised |
+| Amy | Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room. | Tom proud, TNB happy, Grace proud, Rose proud |
 | Rose | The comal! The pupusas! | Tom happy, Amy proud, TNB happy, Grace happy |
-| Tom | Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving. | Amy surprised, TNB happy, Grace surprised, Rose surprised, Nara happy |
+| Narrator | Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving. | Amy surprised, TNB happy, Grace surprised, Rose surprised, Nara happy |
 | Tom | Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up. | Amy loving, TNB loving, Grace loving, Rose loving |
 | Nara | Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
-| Doña Carmen | A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
+| Narrator | A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
 | Doña Carmen | ...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet? | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Nara happy |
 | Doña Carmen | Where did my pupusas go? | Tom scared, Rose scared, Grace happy, TNB happy |
-| Tom | You were amber for a little while. | Carmen surprised, Amy loving, TNB loving |
+| Tom | You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again. | Carmen surprised, Amy loving, TNB loving |
 | Doña Carmen | I was what? I had a whole sentence. I lost the sentence. It was a good sentence. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
 | Grace | A man in a grey suit did it. His name is Marlowe. | Carmen angry, Tom proud |
 | Doña Carmen | That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good. | Tom happy, Amy proud, TNB happy, Grace proud, Rose happy |
@@ -2114,8 +2055,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Daisy | Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO! | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| Tom | Okay. They’re amber. The grey got in through the front door. | Amy surprised, TNB sad, Grace scared, Rose scared, Daisy scared |
-| Amy | Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving. | Tom surprised, TNB surprised, Grace surprised, Rose happy, Daisy surprised |
+| Tom | Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door. | Amy surprised, TNB sad, Grace scared, Rose scared, Daisy scared |
+| Amy | Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving. | Tom surprised, TNB surprised, Grace surprised, Rose happy, Daisy surprised |
 | Grace | You mean... | Amy proud, Rose happy, Tom unimpressed |
 | Amy | Everybody up. Girls, with me. We’re running laps around the kitchen table. | Tom unimpressed, TNB happy, Grace unimpressed, Rose happy, Daisy surprised |
 | Rose | Run with us, Mommy! | Amy loving, Tom happy, TNB happy, Grace happy |
@@ -2164,38 +2105,42 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Larry | I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
 | Marlowe | Love it. Hate it. Love it. Notes withdrawn. | Tom unimpressed, Amy unimpressed, TNB unimpressed, Grace surprised, Rose surprised, Nara angry |
 | Marlowe | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. | Tom angry, Amy angry, TNB unimpressed, Grace scared, Rose scared |
-| Tom | Where is my mother? | Amy scared, TNB sad, Grace scared, Rose scared, Marlowe unimpressed |
-| Marlowe | Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
-| Tom | Tell me where. | Amy angry, TNB proud, Grace scared, Rose scared, Marlowe unimpressed |
+| Tom | You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she? | Amy scared, TNB sad, Grace scared, Rose scared, Marlowe unimpressed |
+| Marlowe | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
+| Marlowe | She’s been making the same one for hours. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
+| Tom | Tell me how to get in. | Amy angry, TNB proud, Grace scared, Rose scared, Marlowe unimpressed |
 | Marlowe | Notes are due at five. | Tom angry, Amy angry, TNB unimpressed, Grace angry, Rose surprised |
 | Amy | He just told us something he shouldn’t have. | Tom proud, TNB proud, Grace surprised, Rose surprised |
-| TNB | Long Island is under glass. So we go under the glass. Or around it. | Tom proud, Amy proud, Grace proud, Rose surprised |
-| Tom | Sal and Sol know every road between here and there. We start with the cab stand. | Amy proud, TNB proud, Grace proud, Rose happy |
+| TNB | He said Long Island is under glass. So Vance sealed it inside a dome, with your mom and dad in it. We’ll have to go under the glass, or around it. | Tom proud, Amy proud, Grace proud, Rose surprised |
+| Tom | Sal and Sol know every road between here and there. We’ll start at Sol’s cab stand. | Amy proud, TNB proud, Grace proud, Rose happy |
 | Tom | We’ll get them back. We always make our connection. | Amy proud, TNB loving, Grace proud, Rose proud |
 
 ## scene: ch13Open (chapter 13)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Sol. Sal says there’s a way under the dome. Tell me you know where. | Sol unimpressed, Amy scared, TNB sad |
+| Tom | Sol. Vance put a glass dome over Long Island, and my parents are inside it. Sal always says you two know every road there is. | Sol unimpressed, Amy scared, TNB sad |
+| Tom | Is there a way under? | Sol unimpressed, Amy scared, TNB sad |
 | Sol | Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite. | Tom unimpressed, Amy unimpressed, TNB happy, Grace happy, Rose happy |
 | Sol | Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs. | Tom surprised, Amy unimpressed, TNB surprised, Grace surprised, Rose surprised |
 | Grace | Is it crimes? | Sol unimpressed, Tom happy, Amy unimpressed, TNB happy, Rose surprised |
-| Sol | Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Sol | We carry letters. For eleven years we’ve run mail between Long Island and Los Angeles in the trunks of our cabs. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Sol | Nobody ever opened a bag, and nobody ever asked why two cab companies need a hundred sacks of stamps. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Amy | You’ve been running a secret mail route. | Sol proud, Tom unimpressed, TNB happy, Grace surprised |
 | Sol | A dispatch network. We call it the Network. We never came up with a better name. | Tom unimpressed, Amy unimpressed, TNB happy, Grace unimpressed |
-| Sal | Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Sol happy |
+| Sal | Sol, come in. It’s Sal, calling from inside the dome. Cab seven says hi. She’s fine. She’s the only thing in town that’s still moving. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Sol happy |
 | Sol | Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi. | Tom unimpressed, Amy unimpressed, TNB happy, Grace happy, Rose happy |
 | Sal | Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
 | Tom | Sal. Can you get me in? | Amy scared, TNB proud, Grace scared, Sol proud |
 | Sal | I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| Sol | The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Sol | There’s a way in, and it’s called the Sub-Rail. Sal and I have been boring a tunnel under the Layover from both coasts, as a hobby. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Sol | It was supposed to open in 2031. The two halves meet in the middle, right under the dome. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | TNB | You built a transcontinental subway. As a hobby. | Sol proud, Tom unimpressed, Amy unimpressed, Grace happy |
 | Sol | We got a very good deal on a drill. | Tom unimpressed, Amy unimpressed, TNB happy, Grace happy, Rose happy |
-| Sal | The drill stopped answering when the dome came down. Something put a chip in it. Be careful of the worm. | Tom surprised, Amy scared, TNB scared, Grace scared, Rose scared, Sol scared |
+| Sal | But our drill stopped answering when the dome came down. Something put a chip in it, and now it’s loose in the tunnel. Be careful of the Worm. | Tom surprised, Amy scared, TNB scared, Grace scared, Rose scared, Sol scared |
 | Tom | The worm. | Sol unimpressed, TNB scared, Grace surprised, Rose happy |
 | Sol | The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it. | Tom unimpressed, Amy unimpressed, TNB happy, Grace happy, Rose happy |
-| Sol | I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel. | Tom surprised, Amy surprised, Grace proud, Rose proud |
+| Sol | I need two dispatchers to stay here on the radio and read the tunnel map to the team. | Tom surprised, Amy surprised, Grace proud, Rose proud |
 | Grace | I’m extremely good at being in charge. | Sol unimpressed, Tom happy, Amy unimpressed, TNB happy |
 | Rose | I’m in charge of snacks. | Sol happy, Tom happy, Amy happy, TNB happy, Grace unimpressed |
 | Amy | Girls. Dispatch is the most important job in the building. If Sol says stay, you stay. | Grace proud, Rose proud, Tom happy, TNB happy |
@@ -2225,13 +2170,14 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | ...There’s a pretzel in my left pocket. | Amy happy, TNB happy, Nara happy |
 | Nickel | Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise. | Tom surprised, Amy surprised, TNB surprised, Nara surprised |
 | Tom | Nickel. You’re shaking. | Nickel scared, Amy scared, TNB sad |
-| Nickel | A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off. | Tom surprised, Amy surprised, TNB surprised |
-| Amy | Julian Vance. | Tom proud, TNB surprised, Nickel scared |
+| Nickel | For years, a man in a long coat bought gold coins from Penny’s shop and from mine. He paid double, and he never took his hat off. | Tom surprised, Amy surprised, TNB surprised |
+| Amy | Julian Vance. Those are the coins he handed to every lonely thing we met. | Tom proud, TNB surprised, Nickel scared |
 | Nickel | We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple. | Tom unimpressed, Amy unimpressed, TNB sad |
 | Nickel | Penny called on the Network from under the dome. She said, “Tell Tom we’re sorry.” And then she said, “The drawer is under the counter.” | Tom sad, Amy sad, TNB sad |
-| Nickel | Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement. | Tom surprised, Amy surprised, TNB surprised |
+| Nickel | There are eleven coins left between us, the last of the old gold. They were supposed to be our retirement. | Tom surprised, Amy surprised, TNB surprised |
 | TNB | Why bring them? | Nickel sad, Tom sad |
-| Nickel | Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver. | Tom surprised, Amy unimpressed, TNB surprised |
+| Nickel | Sal says gold remembers being warm. Amber is warmth that got stuck, so maybe warm gold can melt a door in it. That’s what Sal says. I don’t know. | Tom surprised, Amy unimpressed, TNB surprised |
+| Nickel | He’s a cab driver. | Tom surprised, Amy unimpressed, TNB surprised |
 | Tom | You’re giving up your retirement. | Nickel sad, Amy loving, TNB loving |
 | Nickel | I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run. | Tom loving, Amy loving, TNB loving, Nara happy |
 | Amy | You don’t have to do this. | Nickel proud, Tom loving, TNB loving |
@@ -2261,21 +2207,22 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | I teach kids for a living. I know what a person sounds like right before they say “be quiet.” You’re in the wrong tunnel. | Tom proud, TNB surprised, Nara proud |
 | HUSH-9 | I have given the Drill a chip. It no longer digs toward a place. It digs toward the noise. Please observe the quiet. Goodbye. | Tom surprised, Amy angry, TNB scared, Nara scared |
 | TNB | He left the quiet on. Is anybody else’s ears ringing? | Tom unimpressed, Amy unimpressed, Nara scared |
-| Tom | The chip makes it listen for noise. So we make a lot of it. Loudly. Together. | Amy proud, TNB happy, Nara happy |
+| Tom | The chip makes the Drill dig toward noise. So we make a lot of noise, all together, and it’ll come to us. | Amy proud, TNB happy, Nara happy |
 | Amy | I’ve been trying to get Rose to use her indoor voice for six years. I’m glad somebody finally wants her outdoor one. | Tom happy, TNB happy |
 
 ## scene: ch13Worm (chapter 13)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | A cavern. A wall of amber the size of a house. And a hole in the dirt exactly the width of a drill. | Amy surprised, TNB surprised, Nara surprised |
+| Tom | This cavern is the middle of the tunnel. That wall of amber is the bottom of the dome over Long Island. | Amy surprised, TNB surprised, Nara surprised |
+| Tom | And there’s a hole in the dirt exactly the width of a drill. | Amy surprised, TNB surprised, Nara surprised |
 | Amy | That is the biggest drill I have ever seen. | Tom surprised, TNB happy |
 | TNB | That’s a Dual-Coast Drill. They went with the budget model. I can tell by the bolts. | Tom happy, Amy unimpressed |
 | Tom | It’s not charging. It’s digging in place. Round and round. | Amy surprised, TNB sad |
 | Amy | Its lamps are pointed at the amber. Like it wants to dig through and can’t. | Tom sad, TNB sad, Nara sad |
 | TNB | It’s been drilling at that wall for years. Nobody told it to stop. | Tom sad, Amy sad, Nara sad |
 | Nara | Nara sits very still. She has never seen anything so large that wanted so little. | Tom loving, Amy sad, TNB sad |
-| Tom | Hit it if it hits back. Be kind first. Amy, heal. TNB, I’m on the chip. Everybody make some noise. | Amy proud, TNB proud, Nara proud |
+| Tom | Be kind to it first, and only hit it if it hits back. Amy, you heal. TNB, I’ll go for the hush chip. Everybody else, make some noise. | Amy proud, TNB proud, Nara proud |
 | Amy | Everybody okay? Good. It brings the roof down every third turn, so we heal before, not after. | Tom proud, TNB proud, Nara proud |
 
 ## scene: ch13After (chapter 13)
@@ -2288,7 +2235,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Drill Worm | ...Bit’s down. Engine’s off. I wasn’t going anywhere. I was just digging in. | Tom loving, Amy loving, TNB loving |
 | Drill Worm | I’m sorry about the roof. | Tom loving, Amy loving, TNB happy |
 | Amy | It’s fine. Nobody’s mad at a drill. They’re mad at whoever put a chip in it. | Tom happy, TNB happy, Nara happy |
-| Tom | A little grey cube just popped out of its side. The hush chip. It’s very quiet. | Amy surprised, TNB surprised, Nara surprised |
+| Tom | A little grey cube just popped out of its side. That’s the chip HUSH-9 put in it. It’s very quiet. | Amy surprised, TNB surprised, Nara surprised |
 | TNB | Not anymore. | Tom happy, Amy happy |
 | Rose | TATA! We can hear you! Sol says the radio is back! I ate a snack for you! | Tom happy, Amy loving, TNB happy, Nara happy |
 | Grace | Dispatch to Tom. You’re loud and clear. What happened? Say over. At the END. | Tom unimpressed, Amy happy, TNB happy |
@@ -2301,7 +2248,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Penny | (through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine! | Tom loving, Amy loving, TNB happy, Nickel loving |
 | Nickel | Eleven coins. Hers and mine. On three. | Tom proud, Amy proud, TNB proud |
 | Penny | (through the glass) One. Two. Don’t think about the interest. Three. | Tom happy, Amy happy, TNB happy, Nickel happy |
-| Tom | The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door. | Amy surprised, TNB surprised, Nara surprised, Nickel surprised |
+| Narrator | The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door. | Amy surprised, TNB surprised, Nara surprised, Nickel surprised |
 | Sal | It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver! | Tom happy, Amy happy, TNB happy, Nickel happy, Penny happy |
 | Penny | Nickel. | Nickel loving, Tom loving, Amy loving |
 | Nickel | Penny. | Penny loving, Tom loving, TNB loving |
@@ -2325,7 +2272,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | I’d like that. | Amy loving, Tom scared |
 | Tom | I’m standing right here. | Amy happy, TNB happy |
 | Amy | It’s a very nice schedule. | Tom unimpressed, TNB happy |
-| Sal | Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar. | Tom proud, Amy surprised, TNB happy |
+| Sal | Okay. From here the Sub-Rail runs the rest of the way, and it comes up through a breach under Grump Hollow, inside the dome. | Tom proud, Amy surprised, TNB happy |
+| Sal | Sol’s putting the girls on the five fifteen handcar. | Tom proud, Amy surprised, TNB happy |
 | Grace | We heard the whole thing. Mommy. We are coming. Do not do anything dramatic. | Amy unimpressed, Tom happy, TNB happy |
 | Rose | Copy copy! Tata, I have a pretzel for Nara! | Tom happy, Amy happy, TNB happy, Nara happy |
 | Amy | Grace. Rose. You stay with Sol until the handcar. I love you. I’m not being dramatic. | Tom happy, TNB happy |
@@ -2338,12 +2286,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Dad. | Amy surprised, TNB surprised, Nara surprised |
 | Boppy | Halt. | Tom surprised, Amy surprised, TNB surprised, Nara scared |
 | Amy | Dad? What are you wearing? | Tom surprised, TNB surprised |
-| Boppy | Warden’s plate. Gold. It hums. I like the hum. | Tom scared, Amy scared, TNB surprised |
-| Boppy | My back doesn’t hurt, Tommy. It’s been eleven years. I made a deal. | Tom sad, Amy sad, TNB sad |
+| Boppy | It’s a Warden’s plate. It’s gold armor, and it hums. I like the hum. | Tom scared, Amy scared, TNB surprised |
+| Boppy | My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal. | Tom sad, Amy sad, TNB sad |
 | Tom | What deal? | Amy scared, TNB scared |
 | Boppy | Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp. | Tom scared, Amy scared, TNB scared, Nara scared |
-| Boppy | I stand here and the glass stays up. That’s the deal. | Tom sad, Amy sad, TNB sad |
-| Tom | Dad. That isn’t safe. That’s a freezer. | Boppy angry, Amy proud, TNB proud |
+| Boppy | As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal. | Tom sad, Amy sad, TNB sad |
+| Tom | Dad, that’s the same deal he gave a mirrorball, an oven and a squirrel. It isn’t safe. It’s a freezer. | Boppy angry, Amy proud, TNB proud |
 | Boppy | Go home, Tom. Take your friends. Go back to the good coast. | Tom sad, Amy sad, TNB unimpressed |
 | Amy | Dad. Take that off. You’ll rust. | Boppy surprised, Tom happy, TNB happy |
 | Boppy | ...Amy. You’re not supposed to be here. You’re supposed to be safe. | Amy sad, Tom sad |
@@ -2360,9 +2308,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Dad. It’s Tom. I’m right in front of you. | Boppy unimpressed, Amy scared, TNB sad |
 | Boppy | Halt. | Tom sad, Amy unimpressed, TNB unimpressed |
 | Amy | He said that before. He’s going to say it again. He’s going to say it until we do something about it. | Tom unimpressed, TNB unimpressed |
-| TNB | Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of clipboards. I counted fourteen. | Tom scared, Amy scared, Nara angry |
+| TNB | Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of grey men with clipboards. Vance’s Auditors. I counted fourteen. | Tom scared, Amy scared, Nara angry |
 | Nara | Nara growls, low. She has opinions about clipboards. | Tom happy, TNB happy |
-| TNB | Sol’s handcar is right behind them with the girls. I’ll send them up. Nara and I will hold the breach. Somebody has to be at the bottom of the stairs to say no. | Tom scared, Amy surprised |
+| TNB | Sol’s handcar is coming up the tunnel with the girls, and I’ll send them up to you. Nara and I will stay and hold the breach. | Tom scared, Amy surprised |
+| TNB | Somebody has to stand at the bottom of the stairs and tell the Auditors no. | Tom scared, Amy surprised |
 | Tom | You’re staying in a tunnel full of Auditors. | TNB proud, Amy scared |
 | TNB | I used to carry coffee through a film set at five in the morning. I can handle an Auditor. | Tom scared, Amy happy |
 | Amy | Take the thermos. They hate a thermos. | TNB happy, Tom unimpressed |
@@ -2386,7 +2335,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Rose | Boppy. There’s a Deedee on the porch. | Boppy scared, Tom surprised, Amy surprised, Grace surprised |
 | Boppy | That’s a decoration. | Tom unimpressed, Amy unimpressed, Grace unimpressed, Rose unimpressed |
 | Rose | She waved. | Boppy scared, Tom surprised, Amy surprised, Grace surprised |
-| Tom | Okay. First the porch. Then Dad. Nobody touches the armor. Not even a little. Rose, that includes you. | Rose unimpressed, Grace proud, Amy proud, Boppy angry |
+| Tom | Okay. First we go around him to the porch and help Deedee. Then we deal with Dad. Nobody touches the armor. Not even a little. | Rose unimpressed, Grace proud, Amy proud, Boppy angry |
+| Tom | Rose, that includes you. | Rose unimpressed, Grace proud, Amy proud, Boppy angry |
 | Rose | I wasn’t going to touch it. I was going to boop it. | Tom unimpressed, Amy unimpressed, Grace unimpressed, Boppy unimpressed |
 | Amy | Rose. | Rose happy, Grace happy |
 | Rose | A very small boop. | Amy unimpressed, Tom unimpressed, Grace unimpressed |
@@ -2399,8 +2349,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | Mom. It’s Amy. Mom, look at me. | Tom sad, Grace scared, Rose scared |
 | Deedee | Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes. | Tom sad, Amy sad, Grace scared, Rose surprised |
 | Tom | She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it. | Amy sad, Grace sad, Rose sad |
-| Tom | Amber is warmth that got stuck. She’s been giving it to nobody for hours. It needs somewhere to go. | Amy surprised, Grace surprised, Rose surprised |
-| Rose | Maybe nobody ate it. | Tom surprised, Amy surprised, Grace surprised |
+| Tom | Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go. | Amy surprised, Grace surprised, Rose surprised |
+| Rose | Maybe somebody just has to eat it. | Tom surprised, Amy surprised, Grace surprised |
 | Grace | Rose. That is the smartest thing you have said all week. | Rose proud, Tom happy, Amy happy |
 | Rose | I say smart things every day. They just come out as noise. | Grace unimpressed, Tom happy, Amy happy |
 | Rose | Deedee. I’m going to eat the crisp now. Okay? Okay. | Tom loving, Amy loving, Grace proud |
@@ -2445,14 +2395,15 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go. | Amy surprised, Grace surprised, Rose surprised, Boppy surprised, Deedee loving |
+| Narrator | The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go. | Amy surprised, Grace surprised, Rose surprised, Boppy surprised, Deedee loving |
 | Rose | The bucket rolled down the steps. Can I have it? Is it mine? | Tom happy, Amy unimpressed, Grace unimpressed, Boppy unimpressed, Deedee happy |
 | Boppy | Ow. | Tom loving, Amy loving, Grace scared, Rose scared, Deedee loving |
 | Boppy | Ow. My back. My back is back. | Tom loving, Amy loving, Grace happy, Rose happy, Deedee loving |
 | Grace | The ache came back! | Boppy unimpressed, Tom happy, Amy happy, Deedee happy |
 | Boppy | It never left. I just had a bucket on it. | Tom loving, Amy loving, Grace happy, Rose happy, Deedee unimpressed |
 | Tom | Dad. | Boppy sad, Amy sad |
-| Boppy | A man in a long coat came to the door. Very polite. He never took his hat off. He said he could stop the aches. Stop the slowing down. | Tom sad, Amy sad, Grace scared, Rose scared, Deedee sad |
+| Boppy | It was the fella I met at the pond, the one in the long coat. He came to the door, very polite. He never took his hat off. | Tom sad, Amy sad, Grace scared, Rose scared, Deedee sad |
+| Boppy | He said he could stop the aches, and stop the slowing down. | Tom sad, Amy sad, Grace scared, Rose scared, Deedee sad |
 | Boppy | He said the girls would be safe. In the good part, forever. All I had to do was stand here. | Tom sad, Amy sad, Grace sad, Rose sad, Deedee sad |
 | Tom | And you said yes. | Boppy sad, Amy sad, Deedee sad |
 | Boppy | I signed a thing. It said WARDEN on the top. I didn’t read the bottom. | Tom unimpressed, Amy unimpressed, Deedee unimpressed |
@@ -2471,9 +2422,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | Dad. Come on. I’ll walk you in. Short laps. You can complain the whole time. | Boppy loving, Tom loving, Deedee loving, Grace happy, Rose happy |
 | Boppy | My stomach is doing something. | Amy happy, Tom happy, Deedee unimpressed, Grace happy, Rose happy |
 | Amy | There he is. | Boppy unimpressed, Tom happy, Deedee happy, Grace happy, Rose happy |
-| Tom | Vance said the girls would be safe in the good part, forever. We told him no once. He won’t take it well. | Amy scared, Grace scared, Rose scared, Boppy angry, Deedee scared |
+| Tom | Vance promised you the girls would be safe in the good part, forever. That means he wants to freeze them too. | Amy scared, Grace scared, Rose scared, Boppy angry, Deedee scared |
+| Tom | We already told him no once, and he won’t take a second no well. | Amy scared, Grace scared, Rose scared, Boppy angry, Deedee scared |
 | Tom | We always make our connection. | Amy proud, Grace proud, Rose proud, Boppy proud, Deedee proud |
-| Boppy | Take the key, Tommy. It opens the gate. It also opens the door. It doesn’t matter which. Nobody gets past us. | Tom proud, Amy proud, Grace proud, Rose proud, Deedee loving |
+| Boppy | Take the Warden’s key, Tommy. It opens the gate, and it opens our front door too. Either way, nobody gets past us. | Tom proud, Amy proud, Grace proud, Rose proud, Deedee loving |
 | Tom | Nobody gets past us. | Boppy proud, Amy proud, Grace proud, Rose proud, Deedee loving |
 
 ## scene: ch15Open (chapter 15)
@@ -2523,12 +2475,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | To the eight chairs! | Tom happy, Amy happy, TNB happy, Rose happy, Deedee loving, Boppy happy |
 | Rose | To the CRUST! | Tom happy, Amy happy, TNB happy, Grace happy, Deedee happy, Boppy happy, Nara happy |
 | Deedee | To the moon and back. | Tom loving, Amy loving, TNB loving, Grace loving, Rose loving, Boppy loving, Nara loving |
-| Tom | The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out. | Amy surprised, TNB surprised, Grace scared, Rose scared, Deedee surprised, Boppy surprised, Nara scared |
+| Narrator | The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out. | Amy surprised, TNB surprised, Grace scared, Rose scared, Deedee surprised, Boppy surprised, Nara scared |
 | HUSH-9 | THIS IS A QUIET CAR. | Tom angry, Amy angry, TNB scared, Grace scared, Rose scared, Deedee surprised, Boppy angry, Nara angry |
 | Tom | It’s a dining room. | Amy proud, TNB happy, Deedee proud, Boppy proud |
 | HUSH-9 | It is the loudest dining room I have ever measured. Forty-one decibels of laughing. Mr. Vance does not want laughing. Laughing is how people leak. | Tom angry, Amy angry, TNB unimpressed, Grace angry, Rose angry, Deedee angry, Boppy angry |
 | Amy | It’s a family dinner. Everybody gets to be loud at a family dinner. | Tom proud, TNB proud, Deedee proud, Boppy proud, Grace proud |
-| HUSH-9 | That is the problem. You are happiest here. I have been upgraded. I am quiet in all directions. FINAL FORM. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry |
+| HUSH-9 | That is the problem. You are happiest here, so here is where the noise must stop. Mr. Vance has upgraded me. I am now quiet in all directions. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry |
+| HUSH-9 | FINAL FORM. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry |
 | Boppy | Nobody gets past us. Nobody comes to this table and shushes my wife’s cooking. | Deedee scared, Tom happy, Amy happy, TNB surprised, Grace proud, Rose proud |
 | Deedee | Robert. Your back. | Boppy unimpressed, Tom happy, Amy happy |
 | Boppy | I’ll do it with my back. | Deedee unimpressed, Tom unimpressed, Amy happy, Grace happy |
@@ -2549,7 +2502,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised, Nara surprised |
+| Narrator | The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised, Nara surprised |
 | Rose | Somebody’s laughing. | Tom surprised, Amy surprised, Grace surprised, Deedee surprised, TNB surprised |
 | Grace | It’s the TRAIN. | Tom surprised, Amy surprised, Rose happy, Deedee happy, TNB happy, Boppy surprised |
 | HUSH-9 | I measured forty-one decibels. It was forty-one decibels of nobody leaving. | Tom loving, Amy loving, TNB loving, Grace loving, Rose loving, Deedee loving, Boppy unimpressed |
@@ -2593,35 +2546,38 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Is it going to take long? I have a roast in. Robert. Stand up straight. | Boppy angry, Tom unimpressed, Amy unimpressed, Marlowe unimpressed |
 | Boppy | I AM standing up straight. This is as straight as I go. | Deedee unimpressed, Tom happy, Grace happy, Rose happy |
 | Tom | Marlowe. What is the photograph for? | Marlowe proud, Amy scared, TNB scared |
-| Marlowe | Mr. Vance keeps the happy ones. A good family at the right moment, just so. Nothing ever changes again. Nobody leaves. It’s a gift. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Deedee scared, Boppy angry |
+| Marlowe | Mr. Vance keeps happy families. The camera catches a good family at the right moment and holds them there, just so. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Deedee scared, Boppy angry |
+| Marlowe | Nothing ever changes again, and nobody leaves. It’s a gift. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Deedee scared, Boppy angry |
 | TNB | Nobody asked for the gift. | Tom proud, Marlowe unimpressed, Amy proud |
 | Tom | We said we’d bring everyone. We didn’t say we’d stay. | Marlowe unimpressed, Amy proud, TNB proud, Boppy proud |
 | Marlowe | Everybody stays in a photograph. That’s what a photograph is. | Tom angry, Amy scared, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry |
-| Vance | Hello, Tom. Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves. | Tom angry, Amy scared, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry, Marlowe scared |
-| Boppy | That’s the voice. That’s the fella with the deal. | Tom angry, Amy angry, Deedee scared, Vance unimpressed |
+| Vance | (a voice from inside the camera) Hello, Tom. Thank you for flying nowhere. | Tom angry, Amy scared, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry, Marlowe scared |
+| Vance | I have waited a very long time for a picture where nobody leaves. | Tom angry, Amy scared, TNB scared, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry, Marlowe scared |
+| Boppy | That’s the voice. That’s the fella with the deal. | Tom angry, Amy angry, Deedee scared |
 | Vance | Hello, Robert. You broke our contract. That’s all right. I am a forgiving man. Everybody, please look here. | Boppy angry, Tom angry, Amy scared, Deedee scared, Grace scared, Rose scared, TNB scared |
 | Grace | I’m doing my photo face. | Tom scared, Amy scared, Deedee scared, Boppy scared, TNB scared |
 | Rose | I’m doing my ALSO face. | Tom scared, Amy scared, Deedee scared, Boppy scared, TNB scared |
 | Tom | Amy. | Amy scared, TNB scared, Deedee scared, Boppy scared |
 | Amy | I know. Girls, down. Behind me. NOW. | Grace scared, Rose scared, Tom scared, Deedee scared, Boppy scared, TNB scared |
-| Vance | Not Tom. Not the grown ones. The little ones. The ones with all their years still in them. Those are the ones I want to keep. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry, Marlowe scared |
+| Vance | I don’t want Tom, and I don’t want the grown ones. I want the little ones, who still have all their years in them. Those are the ones I want to keep. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Deedee scared, Boppy angry, Nara angry, Marlowe scared |
 | Tom | No. | Amy proud, TNB proud, Deedee proud, Boppy proud, Grace scared, Rose scared |
 | Deedee | Robert. | Boppy loving, Tom scared, Amy scared |
 | Boppy | I know. | Deedee loving, Tom scared, Amy scared |
-| Deedee | Girls. Close your eyes. Moon and back. | Grace scared, Rose scared, Tom scared, Amy scared, TNB scared, Boppy loving |
+| Deedee | Girls, close your eyes. Boppy and I are stepping in front of you. To the moon and back. | Grace scared, Rose scared, Tom scared, Amy scared, TNB scared, Boppy loving |
 | Boppy | Nobody gets past us. | Deedee loving, Tom scared, Amy scared, TNB scared, Grace scared, Rose scared |
-| Tom | Mom! Dad! | Amy scared, TNB scared, Grace scared, Rose scared |
+| Tom | Mom! Dad! Get away from the camera! | Amy scared, TNB scared, Grace scared, Rose scared |
 | Deedee | Fifty-one years. | Boppy loving, Tom sad, Amy sad, TNB sad, Grace scared, Rose scared |
 | Boppy | ...And counting. | Deedee loving, Tom sad, Amy sad, TNB sad, Grace scared, Rose scared |
 | Rose | Deedee? | Tom sad, Amy sad, TNB sad, Grace sad |
 | Grace | Boppy. You can move now. | Tom sad, Amy sad, TNB sad, Rose sad |
 | Amy | Mom. | Tom sad, TNB sad, Grace sad, Rose sad |
-| Tom | Nobody moves. Nobody says anything. In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands. | Amy sad, TNB sad, Grace sad, Rose sad, Nara sad, Marlowe scared |
+| Narrator | Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead. | Amy sad, TNB sad, Grace sad, Rose sad, Nara sad, Marlowe scared |
+| Narrator | In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands. | Amy sad, TNB sad, Grace sad, Rose sad, Nara sad, Marlowe scared |
 | Vance | There. That is a family photograph. Thank you, Tom. You may keep the frame. | Tom angry, Amy angry, TNB angry, Grace sad, Rose sad, Marlowe scared |
 | Tom | Where are you? | Amy angry, TNB angry, Grace sad, Rose sad |
 | Vance | Marlowe. Collect the children. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Marlowe scared |
 | Marlowe | Mr. Vance. They are... they are children. I only moved the colors around. That’s all I ever did. I never wrote anything like that. | Tom surprised, Amy surprised, TNB surprised, Grace scared, Rose scared |
-| Vance | Then I shall help with your notes. | Marlowe scared, Tom scared, Amy scared, TNB scared, Grace scared, Rose scared |
+| Vance | Then I shall help with your notes, Marlowe. | Marlowe scared, Tom scared, Amy scared, TNB scared, Grace scared, Rose scared |
 | Marlowe | Less. Less. Less. That is all I ever wanted. Less. | Tom scared, Amy scared, TNB scared, Grace scared, Rose scared, Nara angry |
 | Tom | Grace. Rose. Go. Cab seven. Find Sal. Now. | Grace scared, Rose scared, Amy proud, TNB proud |
 | Grace | But Deedee... | Tom sad, Amy sad, Rose sad, TNB sad |
@@ -2629,7 +2585,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | Rose. Hand. Run. Now. | Rose scared, Tom proud, Amy proud |
 | Rose | But Boppy... | Grace sad, Tom sad, Amy sad |
 | Grace | I KNOW. RUN. | Rose scared, Tom sad, Amy sad, TNB sad |
-| Amy | Tom. Whatever this is, it is between them and the road. | Tom proud, TNB proud, Nara proud |
+| Amy | Tom. Whatever Marlowe just turned into, it’s standing between the girls and the road. | Tom proud, TNB proud, Nara proud |
 | Tom | Then it doesn’t get past us. Dad said so. | Amy proud, TNB proud, Nara proud |
 | TNB | I’m here, babe. | Tom loving, Amy proud |
 | Nara | Nara plants her feet in the grass and growls at a grey man with a sun behind his head. | Tom proud, Amy proud, TNB proud |
@@ -2646,7 +2602,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square. | Amy sad, TNB sad, Nara sad, Marlowe sad |
+| Narrator | The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square. | Amy sad, TNB sad, Nara sad, Marlowe sad |
 | Marlowe | I wanted it quieter. I only ever wanted it quieter. | Tom sad, Amy angry, TNB sad |
 | Amy | Look at them. LOOK. | Marlowe sad, Tom sad, TNB sad |
 | Marlowe | I didn’t want it like this. | Tom sad, Amy sad, TNB sad |
@@ -2659,16 +2615,18 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Vance | Thank you for the photograph. It is perfect. I would like to keep it. | Tom angry, Amy angry, TNB angry, Nara angry |
 | Tom | Give them back. | Amy angry, TNB angry |
 | Vance | Nobody leaves, Tom. That is what a photograph is for. If you want them, you know the building. Downtown. Sixty floors. Do come up. I will leave the light on. | Tom angry, Amy angry, TNB angry, Nara angry |
-| Sal | TOMMY! The glass is coming down! I have the girls in the cab! GET IN! | Tom surprised, Amy surprised, TNB surprised, Nara scared |
+| Sal | TOMMY! He’s closing glass over the whole town! I have the girls in the cab! GET IN! | Tom surprised, Amy surprised, TNB surprised, Nara scared |
 | Tom | Amy. TNB. Nara. Run. | Amy proud, TNB proud, Nara proud |
 | Tom | Dad. Keep her warm. I’m coming back. | Amy sad, TNB sad |
-| Tom | Sal took the Sub-Rail the long way, with the meter off. Nobody has said anything since the tunnel. | Amy sad, TNB sad, Grace sad, Rose sad |
+| Tom | Vance sealed Long Island inside a snow globe and reeled it up into the sky, with Mom and Dad still standing in the Square. | Amy sad, TNB sad, Grace sad, Rose sad |
+| Tom | Sal drove us out through the Sub-Rail with the meter off. Nobody has said anything since the tunnel. | Amy sad, TNB sad, Grace sad, Rose sad |
 | Rose | Tata. Are they cold? | Tom loving, Amy sad, TNB sad, Grace sad |
 | Tom | No, Rose. They’re warm. I checked. | Rose loving, Amy loving, TNB loving, Grace loving |
 | Rose | Okay. | Tom loving, Amy loving, TNB loving, Grace loving |
 | Grace | Then it’s not forever. It’s just a long time. | Tom loving, Amy loving, TNB loving, Rose happy |
 | Tom | It’s just a long time. | Grace loving, Rose loving, Amy loving, TNB loving |
-| Amy | Vance said downtown. Sixty floors. We rest tonight. Tomorrow we go up. | Tom proud, TNB proud, Grace proud, Rose proud |
+| Amy | Vance said we know the building: sixty floors, in downtown Los Angeles. That’s where he took them. | Tom proud, TNB proud, Grace proud, Rose proud |
+| Amy | We rest tonight, and tomorrow we go up. | Tom proud, TNB proud, Grace proud, Rose proud |
 
 ## scene: ch17Open (chapter 17)
 
@@ -2678,21 +2636,22 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | That’s the building. That’s where he is. | Tom proud, TNB proud, Grace scared, Rose scared |
 | Grace | We’re coming. All of us. I already told Rose. She’s packing. | Amy scared, Tom unimpressed, TNB happy |
 | Rose | I packed a pretzel. And a second pretzel, for Deedee. | Tom loving, Amy loving, TNB loving, Grace happy |
-| Amy | Girls. It is sixty floors. It is going to be hard and strange and not fair. | Grace proud, Rose proud, Tom sad, TNB sad |
+| Amy | Girls. It’s sixty floors. It’s going to be hard and strange and not fair. | Grace proud, Rose proud, Tom sad, TNB sad |
 | Grace | We know. That’s why we’re coming. | Amy loving, Tom loving, TNB loving, Rose proud |
-| Tom | Okay. Here’s how we do it. Two teams of three. Grace, Rose and me take the stairs. Amy, TNB and Nara work the Archive on thirty. | Amy proud, TNB proud, Grace proud, Rose proud, Nara proud |
+| Tom | Okay. Here’s how we do it. We split into two teams of three. Grace, Rose and I take the stairs. | Amy proud, TNB proud, Grace proud, Rose proud, Nara proud |
+| Tom | Amy, TNB and Nara go in through the service ducts to the Archive on floor thirty. | Amy proud, TNB proud, Grace proud, Rose proud, Nara proud |
 | TNB | Divide and conquer. I like it. I also like not being on the stairs. | Tom happy, Amy unimpressed, Grace happy |
 | Nara | Nara does not like stairs. Nara is, however, extremely good at breaking glass. | Tom happy, TNB happy, Amy happy, Grace happy, Rose happy |
 | Amy | And I get to hit something. Good. | Tom unimpressed, TNB happy, Grace happy |
 | Sol | I’ll keep the meter off and the engine on. Go get your folks, Tommy. | Tom loving, Amy loving, TNB happy |
-| Tom | The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Narrator | The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Rose | It’s so tall. Tata, it’s TALLER than the Starlite. | Tom happy, Amy happy, Grace unimpressed |
 
 ## scene: ch17Lobby (chapter 17)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard. | Grace surprised, Rose surprised |
+| Narrator | The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard. | Grace surprised, Rose surprised |
 | Grace | It’s so clean. Nobody lives here. Nobody even touched the floor. | Tom unimpressed, Rose surprised |
 | Rose | There’s a plant. It looks scared. | Tom happy, Grace unimpressed |
 | Tom | Floor directory says the stairs are on the east side. Twenty-eight flights. | Grace surprised, Rose surprised |
@@ -2715,12 +2674,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Tom | The Archive. A long hall of glass shelves, and on every shelf a whole tiny town under a dome, each one paused on its happiest afternoon. | Amy surprised, TNB surprised, Nara surprised |
-| Amy | Tom. Look at the plaque. Look at the little man with the pierogi. | Tom sad, TNB sad |
+| Amy | Tom, look at the plaque. Dunmore, Pennsylvania, pierogi festival. That little man with the pierogi is frozen in the middle of one bite. | Tom sad, TNB sad |
 | TNB | That’s a very good diorama. I hate it. It’s very well made. | Tom happy, Amy unimpressed |
 | Nara | Nara sniffs a shelf. It does not smell like anything. It does not smell like anything at all. | Tom sad, Amy sad, TNB sad |
-| Amy | Six towns. Six shelves. The lock counter on the stairs says six. I do not think that is a coincidence. | Tom surprised, TNB surprised |
-| Tom | Smash them. Gently, I mean. Free the towns. | Amy proud, TNB happy, Nara proud |
-| Amy | Gently is not a word I use. | Tom unimpressed, TNB happy |
+| Amy | There are six towns on six shelves, and the lock counter on the stairs says six. I think each town under glass is holding one lock shut. | Tom surprised, TNB surprised |
+| Tom | Then break the domes. Gently, I mean. Each town we free should open a lock. | Amy proud, TNB happy, Nara proud |
+| Amy | Gently isn’t a word I use. | Tom unimpressed, TNB happy |
 
 ## scene: ch17Locks (chapter 17)
 
@@ -2736,13 +2695,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube. | Amy proud, TNB unimpressed, Grace surprised, Rose surprised |
+| Narrator | The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube. | Amy proud, TNB unimpressed, Grace surprised, Rose surprised |
 | Amy | You and me. Landing to landing. Loser buys dinner. | Tom unimpressed, Grace happy, Rose happy, TNB happy |
 | Tom | Amy, we have a deadline. We have a tower. We have two grandparents made of stone. | Amy unimpressed, TNB happy, Grace unimpressed |
-| Amy | Which is why I am going to win this. | Tom unimpressed, Grace happy, Rose happy, TNB happy |
-| Grace | I am calling it. On my mark. Mark! | Tom unimpressed, Amy proud, Rose happy |
+| Amy | Which is why I’m going to win this. | Tom unimpressed, Grace happy, Rose happy, TNB happy |
+| Grace | I’m calling it. On my mark. Mark! | Tom unimpressed, Amy proud, Rose happy |
 | Rose | I’m the finish line! | Tom happy, Amy proud, Grace happy, TNB happy |
-| TNB | I am not running. I am carrying the thermos. Somebody has to. | Tom happy, Amy unimpressed, Grace happy |
+| TNB | I’m not running. I’m carrying the thermos. Somebody has to. | Tom happy, Amy unimpressed, Grace happy |
 | Tom | Floor fifty-nine. We hit the vault door at exactly the same time. Amy’s forehead and mine, a quarter inch apart. | Amy angry, TNB happy, Grace surprised, Rose happy |
 | Amy | That was MINE. | Tom unimpressed, TNB happy, Grace happy, Rose happy |
 | Tom | It was a tie. | Amy angry, TNB happy, Grace happy |
@@ -2753,7 +2712,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Narrator | The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Rose | Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY. | Tom sad, Amy sad, TNB sad, Grace sad |
 | Grace | They’re so small. They’re okay. They’re holding hands. | Tom loving, Amy loving, TNB loving, Rose loving |
 | Tom | Stay behind me. All of you. | Amy proud, TNB proud, Grace scared, Rose scared |
@@ -2762,7 +2721,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Archivist | I am what Mr. Vance keeps when he wants a thing never to change. I file. I label. I hold. It is all I was made to do. It is a very good job. | Tom unimpressed, Amy angry, TNB sad, Grace scared, Rose surprised |
 | Amy | You froze the pierogi man for thirty years. | Tom sad, TNB sad, Grace sad |
 | Archivist | Thirty-one. He was very happy. I made sure of it. | Tom sad, Amy angry, TNB sad, Grace sad, Rose sad |
-| TNB | That is the single saddest thing I have ever heard a lens say. | Tom sad, Amy unimpressed, Grace sad |
+| TNB | That’s the single saddest thing I have ever heard a lens say. | Tom sad, Amy unimpressed, Grace sad |
 | Archivist | Please hold still. This will not hurt. Nothing will, ever again. | Tom proud, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 
 ## scene: ch17Fight (chapter 17)
@@ -2775,19 +2734,19 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
+| Narrator | The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
 | Archivist | I was only... keeping them safe. | Tom loving, Amy sad, TNB sad, Grace sad, Rose sad |
 | Tom | I know. They were never yours to keep. | Amy proud, TNB loving, Grace sad |
 | Archivist | What does one do... with a day that is allowed to end? | Tom loving, Amy loving, TNB loving, Grace surprised, Rose surprised |
 | Rose | You eat dinner. Then you go to sleep. Then it’s morning. | Tom loving, Amy loving, TNB loving, Grace happy |
 | Archivist | That sounds... sufficient. | Tom happy, Amy happy, TNB happy, Grace happy, Rose proud |
 | Grace | Tata. The globe. | Tom surprised, Amy surprised, TNB surprised, Rose surprised |
-| Tom | The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up. | Amy scared, TNB scared, Grace scared, Rose scared |
+| Narrator | The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up. | Amy scared, TNB scared, Grace scared, Rose scared |
 | Vance | Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared, Nara angry |
 | Vance | Floor sixty is for family. Come up when you are ready. I have kept your parents very warm. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared |
-| Amy | Mom. Dad. We are coming. We’re coming. | Tom sad, TNB loving, Grace sad, Rose sad |
+| Amy | Mom. Dad. We’re coming. We’re coming. | Tom sad, TNB loving, Grace sad, Rose sad |
 | Tom | Everybody breathe. We rest. Then we go to the top. | Amy proud, TNB proud, Grace proud, Rose proud |
-| Tom | A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Narrator | A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 
 ## scene: ch18Open (chapter 18)
 
@@ -2796,7 +2755,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them. | Amy surprised, TNB surprised, Grace scared, Rose surprised |
 | Amy | Everybody in. Nobody lags behind. Nobody gets left on this floor. | Tom proud, TNB proud, Grace scared, Rose happy |
 | Grace | Tata. I’m scared. I’m also coming. Both of those are true at the same time. | Tom loving, Amy loving, TNB loving, Rose happy |
-| Tom | That is exactly the right amount of both. | Grace proud, Amy loving, TNB loving |
+| Tom | That’s exactly the right amount of both. | Grace proud, Amy loving, TNB loving |
 | Rose | I brought a pretzel for Deedee. It’s a little bit squished. | Tom loving, Amy loving, TNB loving, Grace happy |
 | TNB | Squished is fine. I fix squished things for a living. | Rose happy, Tom loving, Amy happy |
 | Tom | Stay behind me. All of you. | Amy proud, TNB proud, Grace scared, Rose scared |
@@ -2807,58 +2766,61 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Tom | The lift opens on a round room made of clock. Gold thread runs floor to ceiling, thousands of strands, humming. In the middle stands a loom the size of a house. In front of it, a man in a long coat has his back to us. His hat is on. | Amy scared, TNB surprised, Grace scared, Rose surprised, Nara angry |
 | Vance | Tom. Thank you for coming. Everyone, please, come in. Mind the threads. They are all somebody’s afternoon. | Tom angry, Amy angry, TNB unimpressed, Grace scared, Rose scared, Nara angry |
-| Amy | Where are my parents. | Vance unimpressed, Tom angry, TNB angry |
+| Amy | Where are my parents. | Tom angry, TNB angry |
 | Vance | Warm. Downstairs, on a plinth, under glass. Exactly as you left them. I want you to understand I have taken very good care of them. | Tom angry, Amy angry, TNB angry, Grace scared, Rose scared |
-| Grace | They’re STONE. | Vance unimpressed, Tom sad, Amy angry |
+| Grace | They’re STONE. | Tom sad, Amy angry |
 | Vance | They are safe. There is a difference. I had to have it explained to me, too. | Tom angry, Amy angry, TNB unimpressed, Grace angry, Rose surprised |
-| Rose | Are you the man who took all the coins? | Vance unimpressed, Tom proud, Amy scared |
-| Vance | I am the man who kept them. Gold remembers being warm. I only wanted it to keep remembering. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry |
-| TNB | Okay. I fix things for a living. Whatever this is, it is structurally unsound. | Vance unimpressed, Tom happy, Amy proud |
+| Rose | Are you the man who took all the coins? | Tom proud, Amy scared |
+| Vance | I am the man who gave them out. Gold remembers being warm. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry |
+| Vance | A coin can hold one warm moment still, for as long as something lonely is willing to hold the coin. | Tom unimpressed, Amy angry, TNB unimpressed, Grace angry |
+| TNB | Okay. I fix things for a living. Whatever this is, it’s structurally unsound. | Tom happy, Amy proud |
 | Vance | Nothing is the same twice, Mr. TNB. You mend a cup, and it is a mended cup. I would like every cup to stay unbroken. | TNB unimpressed, Tom unimpressed, Amy angry |
-| Tom | That is not how cups work. | TNB loving, Amy proud |
+| Tom | That’s not how cups work. | TNB loving, Amy proud |
 | Vance | Tom. You know why I wanted you. Two places that kept moving, and one man flying between them. You are not a traveler. You are the thread. If you stop, they stop. If you stay, they stay. | Amy scared, TNB scared, Grace scared, Rose scared |
 | Vance | I will not hurt you. I will not hurt anyone. I will only finish the afternoon. | Tom unimpressed, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 | Tom | No, thank you. We have a connection to make. | Amy proud, TNB proud, Grace proud, Rose proud |
 | Vance | I know. That is why this is so hard. | Tom unimpressed, Amy scared, TNB scared, Grace scared, Rose scared |
-| Tom | The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm. | Amy scared, TNB scared, Grace scared, Rose scared, Nara scared |
+| Narrator | The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm. | Amy scared, TNB scared, Grace scared, Rose scared, Nara scared |
 | Vance | The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please. | Tom angry, Amy angry, TNB scared, Grace scared, Rose scared, Nara angry |
 | Amy | Over my dead body. | Tom proud, TNB proud, Grace scared, Rose scared |
 | Vance | That will not be necessary. That is not even on the table. | Amy angry, Tom angry, TNB angry |
 | Grace | Tata. | Tom loving, Amy scared, TNB scared, Rose scared |
 | Tom | Girls. Amy. TNB. Nara. Behind me. | Amy scared, TNB scared, Grace scared, Rose scared, Nara scared |
 | Nara | Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this. | Tom loving, Amy scared, TNB scared, Grace scared, Rose scared |
-| Tom | He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward. | Amy scared, TNB scared, Grace scared, Rose scared, Vance surprised |
-| Tom | No touching, please. | Amy scared, TNB scared, Grace scared, Rose scared, Vance surprised |
+| Narrator | He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward. | Amy scared, TNB scared, Grace scared, Rose scared |
+| Tom | No touching, please. | Amy scared, TNB scared, Grace scared, Rose scared |
 
 ## scene: ch18After (chapter 18)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Floor 60 | Where Tom was standing, there is a small warm light, hanging in the air at about the height of his glasses. Then there is not. | Amy scared, TNB scared, Grace scared, Rose scared, Nara sad, Vance surprised |
+| Floor 60 | Tom steps into the Ray and takes all of it. Where he was standing, there is a small warm light, hanging in the air at about the height of his glasses. | Amy scared, TNB scared, Grace scared, Rose scared, Nara sad |
+| Floor 60 | Then there is not. | Amy scared, TNB scared, Grace scared, Rose scared, Nara sad |
 | Rose | Tata? | Amy sad, TNB sad, Grace scared |
 | Grace | Tata. TATA. | Amy sad, TNB sad, Rose scared |
 | Rose | He was right there. He was RIGHT there. | Amy sad, TNB sad, Grace sad |
 | Nara | Nara walks to the exact spot where Tom was standing, lies down on it, and does not move. | Amy sad, TNB sad, Grace sad, Rose sad |
-| Amy | Tom. Tom, answer me. I am not doing this. I am not doing this. | TNB sad, Grace sad, Rose sad |
+| Amy | Tom. Tom, answer me. I’m not doing this. I’m not doing this. | TNB sad, Grace sad, Rose sad |
 | TNB | Tom. | Amy sad, Grace sad, Rose sad, Nara sad |
 | Vance | That was not in the model. | Amy angry, TNB sad, Grace sad, Rose sad |
 | Vance | The Ray was written for five. He took all of it. I did not think anyone would step into it. I have never once seen anyone step into it. | Amy angry, TNB sad, Grace sad, Rose sad |
-| Amy | Give him back. | Vance sad, TNB sad |
+| Amy | Give him back. | TNB sad |
 | Vance | I cannot. The Loom does not hand back. I only know how it keeps. | Amy angry, TNB sad, Grace sad, Rose sad |
 | Vance | He is not destroyed. The Ray unwrites the story of a thing. Somewhere he is still a man with a thermos. The Loom simply does not have a place to put him. | Amy angry, TNB sad, Grace sad, Rose sad |
-| Floor 60 | The Loom shudders. Every thread in it goes white. The Ray has nowhere left to go, and a wave of light rolls out from the place Tom stood. | Amy scared, TNB scared, Grace scared, Rose scared, Nara scared, Vance scared |
-| Vance | It will take you home. It goes where he is from. Hold on to something. | Amy angry, TNB scared, Grace scared, Rose scared |
-| Amy | We are not leaving without him! | TNB sad, Grace scared, Rose scared, Vance sad |
+| Floor 60 | The Loom shudders. Every thread in it goes white. The Ray has nowhere left to go, and a wave of light rolls out from the place Tom stood. | Amy scared, TNB scared, Grace scared, Rose scared, Nara scared |
+| Vance | That wave will carry you home. It goes to the place he is from. Hold on to something. | Amy angry, TNB scared, Grace scared, Rose scared |
+| Amy | We’re not leaving without him! | TNB sad, Grace scared, Rose scared |
 | Vance | You are not leaving. You are being sent. That is a different thing. | Amy angry, TNB sad, Grace scared, Rose scared |
-| TNB | Okay. We are on Second Avenue. It is morning. It is somehow morning. | Amy surprised, Grace surprised, Rose surprised, Nara surprised |
+| TNB | Okay. The wave put us down on Second Avenue, in front of Tom’s house. And it’s somehow morning. | Amy surprised, Grace surprised, Rose surprised, Nara surprised |
 | Rose | Is Tata coming? | Amy sad, TNB sad, Grace sad |
 | Grace | He said we always make our connection. So he will. | Amy loving, TNB loving, Rose happy |
-| Amy | I know my brother. He is going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate. | TNB loving, Grace happy, Rose happy |
+| Amy | I know my brother. He’s going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate. | TNB loving, Grace happy, Rose happy |
 | TNB | His thermos is on the porch rail. He left it out for the cat. | Amy sad, Grace sad, Rose surprised |
 | Rose | Is the cat going to be okay? | Amy loving, TNB loving, Grace unimpressed |
-| TNB | The cat is fine. The cat is always fine. The cat is not even his. | Amy happy, Grace happy, Rose happy |
+| TNB | The cat is fine. The cat is always fine. The cat isn’t even his. | Amy happy, Grace happy, Rose happy |
 | Nara | Nara sits down on Tom’s porch step, facing the street, and waits. | Amy sad, TNB sad, Grace sad, Rose sad |
-| Amy | Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere. And there is exactly one thing in this city that does not forget where things go. | TNB sad, Grace proud, Rose sad |
+| Amy | Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere the Loom couldn’t put him. | TNB sad, Grace proud, Rose sad |
+| Amy | And there’s exactly one thing in this city that never forgets where things go. | TNB sad, Grace proud, Rose sad |
 | Grace | The post office. | Amy proud, TNB surprised, Rose surprised |
 | TNB | I’ll make coffee first. Tom would want me to make coffee first. | Amy loving, Grace sad, Rose sad |
 
@@ -2872,12 +2834,13 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| TNB | It has been eleven hours. I have made coffee four times. I have not drunk any of it. That is not like me. | Amy sad, Grace sad, Rose sad |
-| Amy | Plan. Mom and Dad are stone. Tom is somewhere the Loom does not have a place for. And there is one place in this city that keeps everything nobody could put anywhere. | TNB sad, Grace proud, Rose sad |
+| TNB | It’s been eleven hours. I’ve made coffee four times. I haven’t drunk any of it. That’s not like me. | Amy sad, Grace sad, Rose sad |
+| Amy | Plan. Mom and Dad are stone. Tom is somewhere the Loom doesn’t have a place for. | TNB sad, Grace proud, Rose sad |
+| Amy | And there’s one place in this city that keeps everything nobody could put anywhere. | TNB sad, Grace proud, Rose sad |
 | Grace | The post office. We already said that. | Amy unimpressed, TNB happy |
 | Rose | Nara found it first. | Amy loving, TNB loving, Nara proud |
 | Nara | Nara is sitting very straight in front of Tom’s mailbox, and she is staring into the slot. She has not blinked. A thin gold light is coming out of the slot, like a sleeping lamp. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
-| TNB | That is not a regular mailbox. That is a mailbox that is thinking about something. | Amy surprised, Grace surprised, Rose surprised |
+| TNB | That’s not a regular mailbox. That’s a mailbox that’s thinking about something. | Amy surprised, Grace surprised, Rose surprised |
 | Amy | It’s his. It’s the mailbox at the bottom of his steps, where his bills and my birthday cards go. It’s warm. | TNB loving, Grace sad, Rose sad |
 | Grace | If you drop a letter in a mailbox and it goes nowhere... where does it go? | Amy surprised, TNB surprised, Rose surprised |
 | TNB | Down. I think it goes down. | Amy scared, Grace surprised, Rose surprised |
@@ -2891,11 +2854,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Grace | That’s MY pretzel. I mean Rose’s. Rose’s pretzel. For Deedee. | Rose unimpressed, Amy happy, TNB happy |
 | Amy | Look at the big ledger. There’s a page for Second Avenue. There’s a blank rectangle where a name should be. | TNB sad, Grace sad, Rose sad |
 | TNB | It’s still wet. Somebody erased him and left the space, like they were going to write somebody else in. | Amy sad, Grace sad, Rose sad |
-| Grace | Four doors. One for each of us. | Amy proud, TNB proud, Rose surprised |
-| TNB | People who would not forget him. That’s the whole job description. | Amy loving, Grace proud, Rose proud |
+| Grace | There are four doors, one for each of us. | Amy proud, TNB proud, Rose surprised |
+| TNB | Four people who would never forget him. Behind each door there must be a memory of Tom that only one of us has. | Amy loving, Grace proud, Rose proud |
+| TNB | If we bring them back to this desk, maybe his name comes back too. | Amy loving, Grace proud, Rose proud |
 | Amy | The desk in the middle has four little brass niches in the front. Four of us, four niches. And a chair that someone just stood up out of. | TNB surprised, Grace surprised, Rose surprised |
 | Rose | There’s a thermos on it. | Amy surprised, TNB surprised, Grace surprised |
-| TNB | That’s his. I would know that thermos in the dark. | Amy loving, Grace loving, Rose loving, Nara loving |
+| TNB | That’s his. I’d know that thermos in the dark. | Amy loving, Grace loving, Rose loving, Nara loving |
 
 ## scene: ch19Claim (chapter 19)
 
@@ -2904,14 +2868,14 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Dead-Letter Office | Four keepsakes glow in four brass niches. The bell sits on the counter. Rose reaches up, stands on her tiptoes, and rings it. | Amy proud, TNB proud, Grace proud |
 | Oblivion Censor | Good evening. The Office is closed. May I help you? You look lost, which is the right way to look in here. | Amy unimpressed, TNB unimpressed, Grace scared, Rose scared, Nara angry |
 | TNB | We’re here for a name. A man named Tom, on Second Avenue. | Amy proud, Grace proud, Rose proud |
-| Oblivion Censor | I have one clean line on a page. I have a name that is too loud for it. I was tidying. It is not personal. I tidy everything that does not fit. | Amy angry, TNB angry, Grace angry, Rose scared |
-| Amy | He is my brother. | TNB loving, Grace proud, Rose proud |
+| Oblivion Censor | I erased him. His name was too loud for its line on the page, so I tidied it away. It is not personal. I tidy everything that does not fit. | Amy angry, TNB angry, Grace angry, Rose scared |
+| Amy | He’s my brother. | TNB loving, Grace proud, Rose proud |
 | Oblivion Censor | I am sure he is lovely. He is also unclaimed. Everything here is. That is the best a thing can be, Mrs. Gregori: safe and unclaimed. | Amy angry, TNB angry, Grace angry, Rose scared |
 | Grace | You can’t erase somebody because he doesn’t fit your form. | Amy proud, TNB proud, Rose proud |
 | Oblivion Censor | It is the only thing I am for. No one has ever handed me a letter to deliver. They only hand me returns. | Amy sad, TNB sad, Grace sad, Rose sad |
 | Rose | That’s the saddest job in the world. | Amy sad, TNB sad, Grace sad |
 | Oblivion Censor | It is a very tidy job. | Amy unimpressed, TNB sad, Grace unimpressed, Rose sad |
-| Oblivion Censor | Please step back from the desk. I will write the name out. | Amy angry, TNB angry, Grace angry, Rose scared, Nara angry |
+| Oblivion Censor | Please step back from the desk. I am going to finish erasing the name. | Amy angry, TNB angry, Grace angry, Rose scared, Nara angry |
 
 ## scene: ch19Fight (chapter 19)
 
@@ -2923,7 +2887,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Oblivion Censor | The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Narrator | The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Oblivion Censor | I have never been argued with by so many people at once. It was... full. | Amy loving, TNB loving, Grace loving, Rose loving |
 | Tom | Sorry I was late. I was written out of the schedule. I’ll sort it out with accounting. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
 | Rose | TATA! | Tom loving, Grace happy, Amy happy, TNB loving |
@@ -2935,15 +2899,15 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Hey. | TNB loving, Amy happy, Grace happy, Rose happy |
 | Nara | Nara arrives at about a hundred miles an hour and climbs directly onto Tom. Nobody tries to stop her. | Tom loving, Amy happy, TNB happy, Grace happy, Rose happy |
 | Tom | I know. I know. I missed you too. I was a small gold light and I missed you the whole time. | Nara loving, Amy loving, TNB loving, Grace loving, Rose loving |
-| Tom | He turns to the Censor, who is looking at the floor. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
+| Narrator | He turns to the Censor, who is looking at the floor. | Amy surprised, TNB surprised, Grace surprised, Rose surprised |
 | Tom | You have never delivered anything. | Amy surprised, TNB surprised, Grace surprised |
 | Oblivion Censor | No. | Amy sad, TNB sad, Grace sad, Rose sad |
 | Tom | Rose. | Rose proud, Amy surprised, TNB happy |
 | Rose | Here. It’s a little bit squished. It’s for Deedee. It was held for pickup, but nobody picked it up, because she’s stone. | Tom loving, Amy loving, TNB loving, Grace loving |
-| Tom | It is a first-timer’s route. One pretzel. One tower. Fifty-nine floors up, and then a grandmother. | Amy happy, TNB happy, Grace happy, Rose proud |
+| Tom | Then here’s your first delivery route. Take this one pretzel up fifty-nine floors of one tower, and put it in a grandmother’s hands. | Amy happy, TNB happy, Grace happy, Rose proud |
 | Oblivion Censor | I do not... I have never left the Office. | Tom loving, Amy loving, TNB loving, Grace loving, Rose happy |
 | Tom | The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it. | Amy loving, TNB loving, Grace loving, Rose proud |
-| Oblivion Censor | The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED. | Tom loving, Amy loving, TNB loving, Grace surprised, Rose surprised |
+| Narrator | The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED. | Tom loving, Amy loving, TNB loving, Grace surprised, Rose surprised |
 | Oblivion Censor | It is a nicer word to hold than I expected. | Tom loving, Amy loving, TNB loving, Grace loving, Rose loving |
 | Dead-Letter Office | In the big ledger, the clean white rectangle fills itself in, one slow letter at a time. T. O. M. The ink is the exact blue of a thermos cap. | Tom happy, Amy loving, TNB loving, Grace happy, Rose happy, Nara happy |
 | Amy | Okay. Home. Food. Then Mom and Dad. In that order. | Tom happy, TNB happy, Grace happy, Rose happy |
@@ -2953,50 +2917,51 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Stone does not respond to talking. I have checked. Stone responds to being warm for a long time with people nearby. | Amy unimpressed, TNB happy, Grace happy |
+| Tom | Talking to the stone does nothing. I’ve checked. What wakes stone up is being warm for a long time, with people close by. | Amy unimpressed, TNB happy, Grace happy |
 | Amy | Mom’s rule: a house is warm when somebody is cooking in it. | Tom loving, TNB loving, Grace proud, Rose happy |
 | Grace | So we cook. | Tom proud, Amy proud, TNB happy, Rose happy |
 | Rose | A lot. We cook a LOT. | Tom happy, Amy happy, TNB happy, Grace happy |
 | Olivia | Tom! You’re BACK. I saw the light on at four a.m. and I thought, he’s home, and then I thought, no, that’s a different kind of light. I made a lasagna. | Tom loving, Amy happy, TNB happy, Grace happy, Rose happy, Nara happy |
-| Michael | I brought a rock. Lachlan picked it out. Isla ate a different rock. We are keeping a close eye on it. | Tom unimpressed, Amy happy, TNB happy, Grace happy, Rose surprised, Olivia unimpressed |
-| Tom | Thank you. All of you. I will put the rock on the mantel. | Olivia loving, Amy happy, TNB happy |
-| Mrs. Alvarez | I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do. | Tom loving, Amy happy, TNB happy, Grace happy, Rose surprised |
+| Michael | I brought a rock. Lachlan picked it out. Isla ate a different rock. We’re keeping a close eye on it. | Tom unimpressed, Amy happy, TNB happy, Grace happy, Rose surprised, Olivia unimpressed |
+| Tom | Thank you. All of you. I’ll put the rock on the mantel. | Olivia loving, Amy happy, TNB happy |
+| Mrs. Alvarez | I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They’re very hot. A man called Boppy would know what to do. | Tom loving, Amy happy, TNB happy, Grace happy, Rose surprised |
 | Grace | Boppy would eat one raw and say it was “fine” in a voice. | Tom happy, Amy happy, TNB happy, Rose happy |
-| Tom | The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday. | Amy happy, TNB happy, Grace happy, Rose happy |
+| Narrator | The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday. | Amy happy, TNB happy, Grace happy, Rose happy |
 | TNB | The oven door handle came off. I fixed it. You could say I handled it. | Tom unimpressed, Amy unimpressed, Grace happy, Rose happy |
 | Tom | Please stop. | TNB happy, Amy happy, Grace happy |
 | Amy | Lasagna, eleven minutes. Lemon bars, six. I have a timer on everything. Nobody is allowed to be late for this. | Tom happy, TNB happy, Grace proud, Rose happy |
 | Grace | I choreographed the pasta. It goes from the pot to the plate in a very specific arc. | Tom unimpressed, Amy unimpressed, TNB happy |
-| Rose | I am the taster. I have tasted nine times. It’s for quality. | Tom happy, Amy unimpressed, TNB happy, Grace unimpressed |
-| Tom | The pasta does not go in an arc. | Grace proud, Rose happy, TNB happy |
+| Rose | I’m the taster. I’ve tasted nine times. It’s for quality. | Tom happy, Amy unimpressed, TNB happy, Grace unimpressed |
+| Narrator | The pasta does not go in an arc. | Grace proud, Rose happy, TNB happy |
 | Grace | It goes in an arc if you believe in it, Tata. | Tom loving, Amy happy, TNB happy, Rose happy |
-| Tom | He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second. | Amy loving, TNB loving, Grace loving, Rose loving |
-| Tom | Pack it up. Sal is waiting outside with cab seven. We are going to the Glass Tower, and we are bringing dinner. | Amy proud, TNB proud, Grace proud, Rose proud |
-| Sal | Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway. | Tom loving, Amy happy, TNB happy, Grace happy, Rose happy |
+| Narrator | He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second. | Amy loving, TNB loving, Grace loving, Rose loving |
+| Tom | Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we’re bringing dinner to them. | Amy proud, TNB proud, Grace proud, Rose proud |
+| Sal | Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I’m not even charging. | Tom loving, Amy happy, TNB happy, Grace happy, Rose happy |
+| Sal | I’m scared of that tower and I’m going anyway. | Tom loving, Amy happy, TNB happy, Grace happy, Rose happy |
 
 ## scene: ch19Thaw (chapter 19)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before. | Amy sad, TNB sad, Grace sad, Rose sad |
+| Narrator | The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before. | Amy sad, TNB sad, Grace sad, Rose sad |
 | Amy | Mom. Dad. We brought dinner. | Tom loving, TNB loving, Grace loving, Rose loving |
 | Rose | I brought a pretzel. It has been DELIVERED. It has a stamp. | Tom happy, Amy happy, TNB happy, Grace happy |
 | TNB | Everybody sit. Around the plinth. Nobody leave. Plates on laps. | Tom proud, Amy proud, Grace proud, Rose proud |
-| Tom | Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
+| Narrator | Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Nara surprised |
 | Grace | It’s working. It’s working! | Tom happy, Amy happy, TNB happy, Rose happy |
 | Boppy | Oh. Oh, my back. My back is going to be talking about this for a week. | Tom loving, Amy loving, TNB happy, Grace happy, Rose happy |
-| Deedee | Is that lasagna? Who made lasagna? Who has been in my kitchen? | Tom loving, Amy loving, TNB happy, Grace happy, Rose happy, Boppy unimpressed |
+| Deedee | Is that lasagna? Who made lasagna? Who’s been in my kitchen? | Tom loving, Amy loving, TNB happy, Grace happy, Rose happy, Boppy unimpressed |
 | Rose | DEEDEE! BOPPY! | Deedee loving, Boppy loving, Tom happy, Amy loving, TNB happy |
 | Deedee | Oh, my babies. Come here. All of you. Come here, to the moon and back and back and back. | Tom loving, Amy loving, TNB loving, Grace loving, Rose loving, Boppy unimpressed |
 | Boppy | Which one of you is eating the peppers raw? | Tom happy, Amy happy, TNB scared, Grace happy, Rose happy, Deedee unimpressed |
 | Grace | Nobody. Yet. | Boppy happy, Tom happy, Amy unimpressed, Deedee unimpressed |
 | Boppy | Hand me one. For my knees. | Deedee unimpressed, Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
-| Tom | Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog. | Amy loving, TNB loving, Grace loving, Rose loving, Deedee loving, Boppy loving, Nara happy |
+| Narrator | Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog. | Amy loving, TNB loving, Grace loving, Rose loving, Deedee loving, Boppy loving, Nara happy |
 | Deedee | Tom. Who is the man in the gold coat? The one who kept us on a shelf? | Tom sad, Amy angry, TNB sad, Boppy angry |
-| Tom | Vance. He is still up there, at the top. He is going to want more than a shelf. | Amy angry, TNB proud, Deedee scared, Boppy angry, Grace scared, Rose scared |
+| Tom | Vance. He’s still up there, at the top. He’s going to want more than a shelf. | Amy angry, TNB proud, Deedee scared, Boppy angry, Grace scared, Rose scared |
 | Boppy | Then we finish eating first. | Tom happy, Amy happy, TNB happy, Deedee happy, Grace happy, Rose happy |
 | Floor 59 | Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open. | Tom surprised, Amy surprised, TNB surprised, Grace scared, Rose scared, Deedee surprised, Boppy surprised, Nara scared |
-| Tom | He sets down his plate. Then he picks it back up. | Amy happy, TNB loving, Deedee loving, Boppy proud, Grace happy, Rose happy |
+| Narrator | He sets down his plate. Then he picks it back up. | Amy happy, TNB loving, Deedee loving, Boppy proud, Grace happy, Rose happy |
 | Tom | Seconds first. Then the sky. | Amy proud, TNB proud, Deedee loving, Boppy proud, Grace proud, Rose proud |
 
 ## scene: ch20CoreOpen (chapter 20)
@@ -3005,7 +2970,8 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Stillness Core | Eight lamps light round the frame of the lift in the middle of the Core, one for each of you. The brass doors slide apart, and a warm gold light comes out of the shaft. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised |
 | Tom | He built a lock that opens for family. All eight of us, and a thermos. I resent how much I admire that. | Amy happy, TNB loving, Deedee happy, Grace happy |
-| Amy | The Extra Place. Mom set a place for everybody at every dinner for fifty years. That is the whole trick. He should have asked her. | Tom loving, Deedee loving, TNB loving, Boppy unimpressed |
+| Amy | That’s the Extra Place. Mom has set a place for everybody at every dinner for fifty years, plus one more. | Tom loving, Deedee loving, TNB loving, Boppy unimpressed |
+| Amy | A lock that only opens when the whole family shows up? She could have told him how that works. | Tom loving, Deedee loving, TNB loving, Boppy unimpressed |
 | Deedee | Is it ready? Because I made a lot. | Tom happy, Amy happy, TNB happy, Boppy unimpressed, Grace happy, Rose happy |
 | Stillness Core | THE EXTRA PLACE (the all-eight Family Finish) is ready. It costs 75% HEART. | Tom proud, Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
 
@@ -3013,18 +2979,18 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet. | Amy surprised, TNB surprised, Grace scared, Rose surprised, Deedee surprised, Boppy surprised |
-| Boppy | That is the biggest clock I have ever seen. And I have a lot of clocks. They all run fast, for my stomach. | Tom unimpressed, Deedee unimpressed, Amy unimpressed, Grace happy, Rose happy |
+| Narrator | In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet. | Amy surprised, TNB surprised, Grace scared, Rose surprised, Deedee surprised, Boppy surprised |
+| Boppy | That’s the biggest clock I’ve ever seen. And I have a lot of clocks. They all run fast, for my stomach. | Tom unimpressed, Deedee unimpressed, Amy unimpressed, Grace happy, Rose happy |
 | Deedee | Is that the man’s house? Somebody should tell him to leave a light on. | Tom happy, Amy happy, Boppy unimpressed, TNB happy |
 | Amy | Everybody stays together. All eight. Nobody goes through a door alone. | Tom proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
 | Grace | We always make our connection. | Tom loving, Amy loving, TNB loving, Deedee loving, Boppy proud, Rose proud |
-| Rose | Nara goes first. She is the best at doors. | Nara proud, Tom happy, Amy happy, Grace happy |
-| Tom | Eight of us, a dog and a thermos. Seconds first, then the sky. Let us go. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud, Nara proud |
+| Rose | Nara goes first. She’s the best at doors. | Nara proud, Tom happy, Amy happy, Grace happy |
+| Tom | Eight of us, a dog and a thermos. Seconds first, then the sky. Let’s go. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud, Nara proud |
 | Stillness Core | The lift opens into a round chamber of brass and glass, behind the face of the sky clock. Every wall is a gear, and every gear is turning very slowly. Eight round doors stand sealed around a lift in the middle. Each keyhole is shaped like somebody. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised |
 | Rose | I get a door too? | Tom loving, Amy loving, Grace happy, Deedee loving |
 | Tom | You get a door too. | Rose proud, Grace happy, Deedee loving |
-| TNB | It is a very good lock. Whoever made it really cared about the mechanism. | Tom happy, Amy unimpressed |
-| Tom | One skill each. Whatever you are best at, that is your door. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
+| TNB | It’s a very good lock. Whoever made it really cared about the mechanism. | Tom happy, Amy unimpressed |
+| Tom | Each door opens for one person’s best skill. Find the door shaped like you, and do the thing you’re best at. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
 
 ## scene: ch20Heart (chapter 20)
 
@@ -3032,24 +2998,24 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Forever Engine | A column of gears the height of a tower. Around it, a brass serpent as long as a street is slowly uncoiling. Every scale is a clock face. Every clock says 4:59. At the top of the Engine, on a platform of glass, a man in a long coat stands with his back to you. | Tom surprised, Amy surprised, TNB surprised, Grace scared, Rose scared, Deedee surprised, Boppy surprised, Nara angry |
 | Vance | Tom. You came back. You always come back. That is the thing I could never forgive you for. | Amy angry, TNB angry, Grace scared, Rose scared, Deedee sad, Boppy angry |
-| Tom | I was written out of the schedule. I am a very stubborn calendar entry. | Vance unimpressed, TNB happy, Amy happy |
+| Tom | I was written out of the schedule. I’m a very stubborn calendar entry. | TNB happy, Amy happy |
 | Vance | Everything leaves. Time takes a little every day, and then one day all of it. So I built a place where it cannot. The Leviathan keeps every afternoon exactly as it was. Please do not hurt it. It is all I have. | Tom sad, Amy angry, TNB sad, Grace angry, Rose sad, Deedee sad, Boppy unimpressed |
-| Grace | You turned my grandparents into STATUES. | Vance sad, Tom proud, Amy proud, Deedee loving |
+| Grace | You turned my grandparents into STATUES. | Tom proud, Amy proud, Deedee loving |
 | Vance | I kept them safe. | Tom angry, Amy angry, TNB angry, Grace angry, Boppy angry |
-| Boppy | I was a statue for a week and my back did not get a single day off. I would like to file a complaint. | Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy, Vance unimpressed |
-| Deedee | Julian, honey. Have you eaten? | Vance surprised, Tom loving, Amy unimpressed, Boppy unimpressed |
+| Boppy | I was a statue for a week and my back didn’t get a single day off. I’d like to file a complaint. | Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy |
+| Deedee | Julian, honey. Have you eaten? | Tom loving, Amy unimpressed, Boppy unimpressed |
 | Vance | There are four things that will keep you out. Distance. Age. Exhaustion. Fear. Four things I could never get past. You will not, either. | Tom proud, Amy proud, TNB proud, Grace scared, Rose scared, Deedee unimpressed, Boppy unimpressed |
-| Amy | Distance, age, exhaustion, fear. That is just a regular Tuesday. | Tom happy, TNB happy, Grace happy, Vance unimpressed |
+| Amy | Distance, age, exhaustion, fear. That’s just a regular Tuesday. | Tom happy, TNB happy, Grace happy |
 | Tom | Okay. Four barriers. We have a plan for every one of them. Everybody ready? | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud, Nara proud |
 | Rose | Is the snake going to be mean? | Tom loving, Amy loving, Deedee loving |
-| Tom | It is going to be very, very tired. Be kind about it, and be fast. | Rose proud, Grace proud, Amy proud |
+| Tom | It’s going to be very, very tired. Be kind about it, and be fast. | Rose proud, Grace proud, Amy proud |
 | Forever Engine | The Chronos-Leviathan lowers its head. Every clock on its body ticks at once. | Tom proud, Amy proud, TNB proud, Grace scared, Rose scared, Deedee surprised, Boppy unimpressed, Nara angry |
 
 ## scene: ch20Fight1 (chapter 20)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Up. Everybody up. Breathe. It is a long fight, and we are a long family. We can do this again. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud, Nara proud |
+| Tom | Up. Everybody up. Breathe. It’s a long fight, and we’re a long family. We can do this again. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud, Nara proud |
 
 ## scene: ch20Shatter (chapter 20)
 
@@ -3059,20 +3025,20 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Forever Engine | Where its coil was, there is a room made of glass. A small living room. One lamp, one armchair. A man in a long coat is sitting in it with his hat in his hands. He is a good deal smaller than the shadow he threw. | Tom sad, Amy surprised, TNB sad, Grace surprised, Rose surprised, Deedee sad, Boppy surprised |
 | Vance | My daughter was nine. I was on a flight. I told her, one more flight next month. It was her birthday. I told my mother the same thing, about the hospital. I told my partner the same thing about everything. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad, Deedee sad, Boppy sad |
 | Vance | There was always one more flight next month. And then there was not. So I stopped the months. I did not know how to say goodbye. So I made sure that nobody could leave. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad, Deedee sad, Boppy sad |
-| Tom | Julian. | Vance sad, Amy sad, TNB sad, Deedee loving |
+| Tom | Julian. | Amy sad, TNB sad, Deedee loving |
 | Vance | Eternal Silence. | Tom sad, Amy scared, TNB scared, Grace scared, Rose scared, Deedee sad, Boppy surprised, Nara scared |
 | Forever Engine | Every sound in the Engine goes out. Every move you have turns to grey stone, and the stone falls and lies on the glass floor. He did not fight. He only went quiet, and asked everyone to. | Tom sad, Amy surprised, TNB surprised, Grace scared, Rose scared, Deedee sad, Boppy surprised |
-| Amy | He is not attacking us. Look at his hands. | Tom sad, TNB sad, Grace surprised, Rose surprised, Deedee sad |
-| Grace | They are shaking. | Tom sad, Amy sad, TNB sad, Deedee sad, Boppy sad |
+| Amy | He’s not attacking us. Look at his hands. | Tom sad, TNB sad, Grace surprised, Rose surprised, Deedee sad |
+| Grace | They’re shaking. | Tom sad, Amy sad, TNB sad, Deedee sad, Boppy sad |
 | Rose | Is he cold? | Tom loving, Amy loving, Deedee loving, Grace sad |
-| Tom | No hitting. He has done enough to everybody else. Do the thing you are each best at, for him. Everybody. In turn. I will be last. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee loving, Boppy proud |
-| Boppy | The last one is always the hardest. That is why I put the pepper first. | Tom happy, Amy happy, Deedee unimpressed, Grace happy |
+| Tom | No hitting. He has done enough to everybody else. Do the thing you’re each best at, for him. Everybody. In turn. I’ll be last. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee loving, Boppy proud |
+| Boppy | The last one is always the hardest. That’s why I put the pepper first. | Tom happy, Amy happy, Deedee unimpressed, Grace happy |
 
 ## scene: ch20Fight2 (chapter 20)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Everybody up. He is not going anywhere. That is rather the point of him. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
+| Tom | Everybody up. He’s not going anywhere. That’s rather the point of him. | Amy proud, TNB proud, Grace proud, Rose proud, Deedee proud, Boppy proud |
 
 ## scene: ch20Calm (chapter 20)
 
@@ -3080,63 +3046,64 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Forever Engine | Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in. | Tom loving, Amy loving, TNB loving, Grace sad, Rose sad, Deedee loving, Boppy happy |
 | Vance | Clara would be thirty-one. She would say I deserved all of this. | Tom sad, Amy sad, TNB sad, Deedee sad, Boppy sad, Grace sad |
-| Tom | Probably. And then she would sit down next to you anyway. | Vance sad, Amy loving, Deedee loving |
+| Tom | Probably. And then she would sit down next to you anyway. | Amy loving, Deedee loving |
 | Vance | I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad, Deedee sad, Boppy sad |
-| Deedee | Honey. That is all of it. That is what living is. It hurts a little, every time, and you do it anyway. | Vance sad, Tom loving, Amy loving, TNB loving, Boppy loving |
-| Boppy | And the crisp is excellent. | Deedee unimpressed, Tom happy, Amy happy, Grace happy, Rose happy, Vance happy |
+| Deedee | Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway. | Tom loving, Amy loving, TNB loving, Boppy loving |
+| Boppy | And the crisp is excellent. | Deedee unimpressed, Tom happy, Amy happy, Grace happy, Rose happy |
 | Vance | I do not know how to start the clocks. | Tom loving, Amy sad, TNB sad, Deedee loving |
-| Tom | You do not start them. You stop holding them. | Vance surprised, Amy loving, TNB loving, Deedee loving |
+| Tom | You don’t start them. You stop holding them. | Amy loving, TNB loving, Deedee loving |
 | Forever Engine | Julian lets go. A long breath goes out of him, the one that has been in him for twenty years. The Forever Engine lets go with him. One by one, every gear in the Moon begins to turn the right way, and far below, in two cities, every clock in the sky ticks forward, all together, to five o’clock. | Tom loving, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee loving, Boppy surprised, Nara surprised |
 | Rose | IT MOVED! The clock MOVED! | Tom happy, Amy happy, TNB happy, Grace happy, Deedee happy, Boppy happy |
-| Grace | It is five o’clock. It is just five o’clock. It is the best five o’clock I have ever seen. | Tom loving, Amy happy, TNB happy, Rose happy, Deedee loving, Boppy happy |
+| Grace | It’s five o’clock. It’s just five o’clock. It’s the best five o’clock I have ever seen. | Tom loving, Amy happy, TNB happy, Rose happy, Deedee loving, Boppy happy |
 | Vance | The towns in the Archive are open. The coins are going home. The snow globe is a town again. I am sorry. I do not know how to say how sorry. | Tom loving, Amy loving, TNB loving, Grace loving, Rose loving, Deedee loving, Boppy unimpressed |
-| Tom | You are doing it right now. Come to dinner. | Vance surprised, Amy loving, TNB loving, Deedee loving |
+| Tom | You’re doing it right now. Come to dinner. | Amy loving, TNB loving, Deedee loving |
 | Vance | I do not have anything to bring. | Tom loving, Deedee loving, Amy loving, Grace sad |
-| Deedee | Bring yourself and an appetite. | Vance loving, Tom happy, Amy happy, Boppy happy |
-| Boppy | And bring a chair. We are short a chair. | Vance happy, Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy |
-| Amy | Mom already set the place. She set it at every dinner for fifty years. There is always one more seat. | Vance loving, Tom loving, Deedee loving, TNB loving |
+| Deedee | Bring yourself and an appetite. | Tom happy, Amy happy, Boppy happy |
+| Boppy | And bring a chair. We’re short a chair. | Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy |
+| Amy | Mom already set the place. She set it at every dinner for fifty years. There’s always one more seat. | Tom loving, Deedee loving, TNB loving |
 
 ## scene: ch20Epi1 (chapter 20)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it is real. | Amy happy, TNB happy, Grace happy, Rose happy, Deedee happy, Boppy happy |
-| Rose | Look! Look who is delivering! | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Deedee surprised |
+| Tom | Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it’s real. | Amy happy, TNB happy, Grace happy, Rose happy, Deedee happy, Boppy happy |
+| Rose | Look! Look who’s delivering! | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Deedee surprised |
 | Oblivion Censor | Good afternoon. I have four parcels. This is the first delivery I have ever made. Please do not be too nice about it. I am a little emotional. | Tom loving, Amy loving, TNB loving, Grace happy, Rose happy, Deedee loving, Boppy unimpressed |
 | Grace | My squishy! The Sparkling Diamond Gold Soup Dumpling squishy! | Tom happy, Amy happy, Rose happy, Deedee happy |
-| Rose | My pink ribbon! It is still tied in a bow! | Tom happy, Amy happy, Grace happy, Deedee loving |
-| Amy | My stopwatch. It is still running. It is at nine hundred and eleven hours, and some seconds. | Tom happy, TNB happy, Grace happy, Boppy unimpressed |
-| TNB | My first cup. It is full. It is still warm. I do not know how that is possible and I am not going to ask. | Tom loving, Amy happy, Deedee loving |
+| Rose | My pink ribbon! It’s still tied in a bow! | Tom happy, Amy happy, Grace happy, Deedee loving |
+| Amy | My stopwatch. It’s still running. It’s at nine hundred and eleven hours, and some seconds. | Tom happy, TNB happy, Grace happy, Boppy unimpressed |
+| TNB | My first cup. It’s full. It’s still warm. I don’t know how that’s possible and I’m not going to ask. | Tom loving, Amy happy, Deedee loving |
 | Oblivion Censor | Each one is stamped DELIVERED. It is, I have learned, my favorite word. | Tom loving, Amy loving, TNB loving, Grace happy, Rose happy |
 | Tom | He hands me a fifth parcel. It is small and brown. It is addressed, in my own handwriting, to Tom, Second Avenue. It is a letter I never mailed. | Amy surprised, TNB loving, Grace surprised, Rose surprised |
 | Oblivion Censor | I did not open it. That is not my department anymore. I only deliver. | Tom loving, Amy loving, TNB loving |
-| Sal | Cab seven! Everybody in! I am not charging. I am not even driving. Look UP. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised |
-| Tom | High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised, Vance proud |
+| Sal | Cab seven! Everybody in! I’m not charging. I’m not even driving. Look UP. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised |
+| Narrator | High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other. | Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised |
 | Vance | I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first... | Tom loving, Amy sad, TNB loving, Deedee loving, Boppy unimpressed |
-| Tom | You would have been home for the birthday. | Vance sad, Amy sad, Deedee loving |
+| Tom | You would have been home for the birthday. | Amy sad, Deedee loving |
 | Vance | I would have been home. | Tom loving, Amy loving, Deedee loving, TNB loving |
-| Sol | A SKYWAY TRAIN?! I do not know what to do with my hands! I am a cab driver! | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Deedee happy, Boppy happy, Vance happy |
-| Sal | You are the first passenger. Get in the train. | Sol surprised, Tom happy, Grace happy, Rose happy |
+| Sol | A SKYWAY TRAIN?! I don’t know what to do with my hands! I’m a cab driver! | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Deedee happy, Boppy happy |
+| Sal | You’re the first passenger. Get in the train. | Sol surprised, Tom happy, Grace happy, Rose happy |
 | Amy | Three thousand miles. One ride. Mom, Dad, you can come to Tom’s any Tuesday you like. | Tom loving, Deedee loving, Boppy happy, TNB loving, Grace happy, Rose happy |
-| Boppy | Does it have a recliner? | Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy, Vance happy |
+| Boppy | Does it have a recliner? | Tom happy, Amy happy, Deedee unimpressed, Grace happy, Rose happy |
 | Vance | It has four. I asked. | Boppy surprised, Tom happy, Amy happy, Deedee happy |
-| Boppy | I have changed my mind about the man. | Vance happy, Tom happy, Amy happy, Deedee unimpressed, TNB happy |
+| Boppy | I’ve changed my mind about the man. | Tom happy, Amy happy, Deedee unimpressed, TNB happy |
 | Vance | I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway. | Tom loving, Amy loving, TNB loving, Deedee loving, Boppy loving, Grace happy |
-| Tom | That is a good seat to start in. | Vance loving, Amy loving, Deedee loving |
+| Tom | That’s a good seat to start in. | Amy loving, Deedee loving |
 
 ## scene: ch20Epi2 (chapter 20)
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Tom | A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning. | TNB loving, Grace happy, Rose happy |
+| Narrator | A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning. | TNB loving, Grace happy, Rose happy |
 | Rose | Tata, the train came again. It has a snack cart. It has a snack CART. | Tom happy, Grace happy, Amy happy, Deedee happy |
 | Grace | I rode both coasts in one day. I did a floor routine in the dining car. Nobody stopped me. | Tom proud, Amy unimpressed, Rose happy, Deedee happy |
-| Deedee | Boppy fell asleep in the recliner somewhere over Nebraska. He says it is the best nap of his life. He says his back has never felt worse. | Tom happy, Amy happy, Grace happy, Rose happy, Boppy unimpressed |
+| Deedee | Boppy fell asleep in the recliner somewhere over Nebraska. He says it’s the best nap of his life. He says his back has never felt worse. | Tom happy, Amy happy, Grace happy, Rose happy, Boppy unimpressed |
 | Boppy | Both of those are true. | Deedee unimpressed, Tom happy, Amy happy, Grace happy |
-| Amy | Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend. I have been looking at the calendar for an hour to make sure it is real. | Tom loving, Grace happy, Rose happy, Deedee loving |
-| TNB | I made a mug. It has the same handle as the first one. It is exactly too big. | Tom loving, Amy happy, Deedee happy |
+| Amy | Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend. | Tom loving, Grace happy, Rose happy, Deedee loving |
+| Amy | I’ve been looking at the calendar for an hour to make sure it’s real. | Tom loving, Grace happy, Rose happy, Deedee loving |
+| TNB | I made a mug. It has the same handle as the first one. It’s exactly too big. | Tom loving, Amy happy, Deedee happy |
 | Nara | Nara has found the sourdough boule. She is guarding it with her whole body. | Tom unimpressed, TNB happy, Grace happy, Rose happy |
-| Tom | He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between. | TNB loving, Amy loving, Grace loving, Rose loving, Deedee loving, Boppy loving |
+| Narrator | He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between. | TNB loving, Amy loving, Grace loving, Rose loving, Deedee loving, Boppy loving |
 | TNB | Hey. | Tom loving |
 | Tom | Hey. | TNB loving |
 | Grace | Tata. Are we going to be okay? | Tom loving, Amy loving, TNB loving, Rose surprised |
@@ -3674,7 +3641,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Oolong | The kettle is still going on about that man in the long coat. Gold coins. Paying double. | Tom surprised, Grace surprised, Rose surprised, Boppy unimpressed |
 | Oolong | I told it to mind its own business. It's a kettle. It has no business. | Tom happy, Grace unimpressed, Rose happy, Boppy unimpressed |
 
 ## map: map observatory, base (chapter 1-10)
@@ -4035,13 +4001,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Dana | Without wardrobe there's no shoot. Without a shoot there's no movie. | Tom sad, TNB sad, Nara sad |
 | Dana | Without a movie I go back to directing car commercials. I love cars. I don't love talking cars. | Tom happy, TNB sad, Nara happy |
 
-## map: map oakpark, base (chapter 2-10)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Bernadette | Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me. | Tom unimpressed, TNB happy, Nara happy |
-| Bernadette | Except squirrels. I'm working on it. | Tom happy, TNB happy, Nara angry |
-
 ## map: map coffee, base (chapter 2-10)
 
 | Speaker | Line | Reactions |
@@ -4163,7 +4122,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Page | The Stacks are through the staff door. Please be careful. And please don't answer the books. | Tom proud, Grace proud, Rose scared |
-| Page | I'm fine. Everything is fine. The dictionaries haven't slept in a week. | Tom unimpressed, Grace unimpressed, Rose scared |
 
 ## map: map library, when {chapter:7,notFlag:ch7-done} (chapter 7)
 
@@ -4324,21 +4282,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Larry | I'm blowing leaves. The squirrels keep blowing them back. | Tom unimpressed, TNB happy, Nara angry |
 | Larry | It's a whole system. Their system is better. | Tom happy, TNB happy, Nara angry |
-
-## map: map oakpark, when {from:6,flag:ch6-done} (chapter 6-10)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Bernadette | Case closed. I've filed my report. With myself. I approved it. | Tom unimpressed, TNB happy, Nara happy |
-| Bernadette | I said they were organized. Nobody believed me. Write that down. | Tom unimpressed, TNB proud, Nara happy |
-| Bernadette | You're a good neighbor, Tom. So is the dog. Mostly the dog. | Tom loving, TNB happy, Nara proud |
-
-## map: map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} (chapter 6)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Bernadette | The lookouts first. Playground, garden, picnic tables. Then Nara digs. | Tom proud, TNB proud, Nara proud |
-| Bernadette | Then the tree. There's a knock. I have only ever heard parts of it. | Tom surprised, TNB surprised, Nara surprised |
 
 ## map: map lofts, lines (chapter 2-10)
 
@@ -4843,12 +4786,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Sal | Back to Los Angeles. Your sister gave me a gold star for using my blinker. | Tom happy, Grace happy, Rose happy |
 | Sal | The girls stay home. School night. It's always a school night. | Tom unimpressed, Grace angry, Rose sad |
 
-## cab: cab flight to ch7 (chapter 7)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Sol | LAX. I'm taking the long way. There are squirrels on the short way. | Tom unimpressed, TNB scared, Nara angry |
-
 ## cab: cab flight to ch8 (chapter 8)
 
 | Speaker | Line | Reactions |
@@ -5133,14 +5070,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | That's a wrap, babe. I have a five a.m. call and forty capes to steam. | Tom loving, Nara sad |
 | TNB | Go survive conference night. Bring snacks. I packed you snacks. Check your bag. | Tom loving, Nara sad |
 
-## table: DEPARTURES 5.stay.nara.stay (chapter 5)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Nara | Nara sits down on Tom’s feet. If he can't move, he can't leave. | Tom loving, TNB happy |
-| Nara | Tom wiggles free. "A week. Maybe two. You guard the porch." | Tom loving, TNB happy |
-| Nara | Nara lets out the biggest sigh a dog has ever sighed. Then she trots home. | Tom loving, TNB happy |
-
 ## table: DEPARTURES 6.driver (chapter 6)
 
 | Speaker | Line | Reactions |
@@ -5173,27 +5102,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Amy | I survived conference night. I can survive you leaving. | Tom unimpressed, Grace happy, Rose happy |
 | Amy | Text me when you land. I'm timing the flight. Don't lose. | Tom unimpressed, Grace happy, Rose happy |
-
-## table: DEPARTURES 7.sol (chapter 7)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Sol | LAX. I'm taking the long way. There are squirrels on the short way. | Tom unimpressed, TNB scared, Nara angry |
-
-## table: DEPARTURES 7.tnb (chapter 7)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| TNB | Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence. | Tom loving, Nara sad |
-| TNB | Go. I'll feed the starter. Twice a day, room temperature, no squirrels. I wrote it down. | Tom loving, Nara sad |
-
-## table: DEPARTURES 7.stay.nara.stay (chapter 7)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Nara | Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom. | Tom loving, TNB happy |
-| Nara | She picks Tom. She leans on his legs for one long minute. | Tom loving, TNB happy |
-| Nara | Then she picks the squirrel. Fair enough. | Tom loving, TNB happy |
 
 ## table: DEPARTURES 8.driver (chapter 8)
 
@@ -5640,15 +5548,6 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | TNB packed them. Check my bag. Carefully. He also packed a note. | Grace happy, Rose happy |
 | Rose | I'm checking NOW. | Tom happy, Grace unimpressed |
 
-## table: ARRIVALS 7.talk (chapter 7)
-
-| Speaker | Line | Reactions |
-|---|---|---|
-| Grace | Tata! THREE times! The library's still whispering. I SAID so. In a text. | Tom loving, Rose happy |
-| Rose | It said my name. It said ROSE. Then it said shhh. | Tom surprised, Grace scared |
-| Tom | Then we go find out what it wants. After a sandwich. | Grace happy, Rose happy |
-| Grace | I'm bringing a flashlight. And a pencil. For notes. | Tom loving, Rose happy |
-
 ## table: ARRIVALS 9.talk (chapter 9)
 
 | Speaker | Line | Reactions |
@@ -5792,3 +5691,46 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Aunt Ellie | You told me the whole airport story and I made you leave nothing out. A gate that doesn't exist and a man in a long coat. And Flight Zero went nowhere, politely. | Tom proud, Grace happy, Rose happy |
 | Aunt Ellie | I bet Deedee you would be home for dinner. Take this. Eleven trips to Paris and I never lost a bag. It's luggage tag luck. It will keep you ahead. | Tom proud, Grace happy, Rose happy |
+
+## scene: ch1Goal (chapter 1)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Grace | Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again. | Rose surprised (at "the Big One") |
+| Grace | It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years. | Rose unimpressed (at "did not eat a boat") |
+| Tom | Twenty years, one witness. That's a strong number one. What's number two? | Grace proud (at "strong number one") |
+| Grace | Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet. | Rose scared (at "nobody's allowed") |
+| Rose | I licked one. Only the top! | Tom surprised (at "I licked one"), Grace angry (at "Only the top") |
+| Tom | Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. | Rose proud (at "Thank you") |
+| Grace | Number three. Rose licked a muffin. | Rose scared (at "Rose licked"), Tom happy (at "licked a muffin") |
+
+## scene: ch1Amy (chapter 1)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Amy | Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses. | Tom unimpressed (at "faster walking on the sand"), Grace happy (at "Robert Moses") |
+| Tom | I'm carrying a child and receiving a news report. | Grace happy (at "receiving a news report") |
+| Amy | I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run. | Rose happy (at "I'm coming over") |
+| Tom | Your mother says I'm slow. | Grace proud (at "slow") |
+| Grace | You are slow. I've been on number four since the taxi place. | Tom unimpressed (at "You are slow") |
+
+## scene: ch1Ellie (chapter 1)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Aunt Ellie | Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled. | Tom unimpressed (at "got off that plane wrinkled"), Rose surprised (at "seat that turns into a bed") |
+| Aunt Ellie | Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands? | Rose scared (at "what is that on your hands") |
+| Aunt Ellie | Then you'll stay up there, please. Your uncle wipes clean. My chairs don't. | Rose sad (at "stay up there") |
+| Grace | You got new curtains. | Tom happy (at "new curtains") |
+| Aunt Ellie | Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin. | Grace sad (at "Fix your list"), Rose happy (at "licked muffin") |
+| Aunt Ellie | Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind. | Tom loving (at "I didn't care for it"), Grace loving (at "quieter without him") |
+
+## scene: ch1Theft (chapter 1)
+
+| Speaker | Line | Reactions |
+|---|---|---|
+| Deedee | My favorite son! I missed that face. Now sit, you're having a muffin. | Rose happy (at "having a muffin") |
+| Tom | Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas. | Deedee proud (at "cinnamon topping"), Grace unimpressed (at "flew over Kansas") |
+| Deedee | I made twelve and they're all still there. I've been standing between that pan and your father since six this morning. | Boppy unimpressed (at "your father") |
+| Boppy | In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat... | Deedee unimpressed (at "back at Rikers"), Rose surprised (at "whole loaf of bread") |
+| Grace | It's mine! Tata, get UP, it's getting away! | Rose scared (at "getting away") |

@@ -714,38 +714,22 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	1830	Tom	unimpressed	He has a key. I gave him a key for exactly this kind of emergency.
 6	data/scenes.js	1830	Tom	unimpressed	I didn't picture acorns.
 6	data/scenes.js	1841	TNB	proud	Well, well, well...
-6	data/scenes.js	1843	TNB	loving	Okay. Hi. Missed you. Don't panic. Look at the island.
-6	data/scenes.js	1845	Tom	scared	...Where's Bready Mercury.
-6	data/scenes.js	1846	TNB	scared	That's the thing. I came over to feed him, like you asked. The jar was gone. The window was open.
-6	data/scenes.js	1846	TNB	proud	And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.
-6	data/scenes.js	1847	Tom	proud	Bready Mercury is nine years old. He has flown Delta One. Twice.
-6	data/scenes.js	1848	TNB	scared	I know, babe. I've seen every horror movie ever made. This is exactly how they start.
-6	data/scenes.js	1848	TNB	surprised	And this was on the windowsill. An acorn. With a tiny X carved in it.
-6	data/scenes.js	1850	Tom	angry	Somebody took my starter. And left a calling card.
 6	data/scenes.js	1850	Tom	angry	That was UNCALLED for!
 6	data/scenes.js	1852	TNB	scared	Olivia texted me too. Nara hasn't slept in three days. She just stands at the window and growls at trees.
 6	data/scenes.js	1853	Tom	surprised	Nara is scared of the vacuum. Nara doesn't growl at trees.
 6	data/scenes.js	1854	TNB	scared	Exactly. Something is going on out there.
 6	data/scenes.js	1868	Olivia	happy	Tom! Oh, thank goodness. You already have her. She hasn't slept since Sunday.
-6	data/scenes.js	1869	Nara	loving	Nara leans on Tom with all forty pounds.
-6	data/scenes.js	1869	Nara	angry	Then she spins around and growls at the jacaranda.
 6	data/scenes.js	1871	Olivia	happy	Tom! Oh, thank goodness. Can you take her? Please? She hasn't slept since Sunday.
-6	data/scenes.js	1873	Nara	happy	Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.
-6	data/scenes.js	1873	Nara	angry	Then she spins around and growls at the jacaranda.
 6	data/scenes.js	1875	Olivia	angry	She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr.
 6	data/scenes.js	1875	Olivia	angry	Washington's reading glasses, and Marisol says every tennis ball.
 6	data/scenes.js	1877	TNB	surprised	A triangle. Babe. A triangle is a SYMBOL.
-6	data/scenes.js	1878	Tom	unimpressed	TNB has seen a lot of movies.
-6	data/scenes.js	1878	Tom	loving	...He's usually right about this stuff.
 6	data/scenes.js	1879	Olivia	none	Bernadette from the Neighborhood Watch says it's squirrels. She has a clipboard about it. She's in Old Oak Park, at the south end of 2nd Ave.
 6	data/scenes.js	1881	Tom	loving	Nara. Want to go for a walk?
-6	data/scenes.js	1882	Nara	happy	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.
 6	data/scenes.js	1883	Olivia	happy	Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.
 6	data/scenes.js	1893	Tom	none	Tom. 3468. I've lived on 2nd Ave for six years.
 6	data/scenes.js	2460	TNB	happy	Hi. I'm TNB.
 6	data/scenes.js	1896	TNB	proud	I KNEW it.
 6	data/scenes.js	2469	TNB	happy	Could you do the bits you know?
-6	data/scenes.js	1900	Nara	proud	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.
 6	data/scenes.js	1901	Tom	surprised	The squirrels buried something in three different spots.
 6	data/scenes.js	2475	Tom	none	Are you coming with us?
 6	data/scenes.js	2477	TNB	surprised	Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.
@@ -754,70 +738,48 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	1915	Tom	unimpressed	My shoes don't have laces.
 6	data/scenes.js	1919	TNB	happy	The playground is clear. And Nara is staring at the sandbox like it owes her money.
 6	data/scenes.js	1926	TNB	surprised	That stick has binoculars.
-6	data/scenes.js	1928	Tom	surprised	The Chairman.
 6	data/scenes.js	1933	Tom	unimpressed	The garden is clear. Every tomato has exactly one bite out of it. That's a policy.
 6	data/scenes.js	1940	Tom	sad	Those are somebody’s sandwiches. Somebody’s whole birthday picnic.
 6	data/scenes.js	1942	TNB	unimpressed	Buddy. It's Los Angeles. It's seventy-four degrees.
 6	data/scenes.js	1946	TNB	happy	The picnic is clear. The cake survived. The cake is a hero.
-6	data/scenes.js	1953	Nara	happy	Nara digs. Dirt goes everywhere. Mostly on TNB.
 6	data/scenes.js	1957	Tom	sad	Mr. Washington reads the paper on his porch every morning. He's been reading the same headline for three days.
 6	data/scenes.js	1958	TNB	loving	We bring them back today. Personally. With a pastry.
 6	data/scenes.js	1965	TNB	proud	That's all three scraps. One acorn, two acorns, three acorns. It's a sequence, babe. It's ALWAYS a sequence.
 6	data/scenes.js	1966	Tom	none	One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.
-6	data/scenes.js	1975	Nara	happy	Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.
 6	data/scenes.js	1978	TNB	surprised	She hasn't eaten in three days, and she just ate your emergency bread.
 6	data/scenes.js	1979	Tom	loving	She'll only eat bread if I throw it. Still true. Still very picky. Still very athletic.
 6	data/scenes.js	1988	Tom	unimpressed	Yes.
 6	data/scenes.js	1991	TNB	surprised	Babe. You lied to a squirrel.
-6	data/scenes.js	1992	Tom	unimpressed	It lied to me first. It said it was an acorn.
 6	data/scenes.js	1999	TNB	scared	Babe. We're inside a tree. This is the second act of every horror movie I've ever seen.
 6	data/scenes.js	2000	Tom	loving	Then we stay together.
 6	data/scenes.js	2001	TNB	scared	That's what they always say in the second act.
-6	data/scenes.js	2003	Nara	surprised	Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.
-6	data/scenes.js	2004	Tom	unimpressed	Bready Mercury is up there at the top of the tree, and there's no ladder to reach him.
 6	data/scenes.js	2010	TNB	happy	Babe. Babe. They have a corkboard. With RED STRING. I've waited my whole life for this.
 6	data/scenes.js	2012	Tom	surprised	That's my house. That's my JAR. Why is my jar in the middle of everything?
 6	data/scenes.js	2013	TNB	proud	Everything connects to the jar, babe. That's how corkboards work.
-6	data/scenes.js	2015	Nara	happy	Nara looks at the drawing of herself. She seems pleased with it.
 6	data/scenes.js	2021	TNB	proud	It's a counterweight. Put enough weight in the bucket and the ladder comes down. Classic pulley.
 6	data/scenes.js	2022	Tom	none	We need about forty pounds.
 6	data/scenes.js	2023	TNB	none	...
 6	data/scenes.js	2024	Tom	none	...
 6	data/scenes.js	2025	Tom	none	Nara. Sit. In the bucket.
-6	data/scenes.js	2026	Nara	unimpressed	Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.
-6	data/scenes.js	2026	Nara	loving	She'd do anything for Tom. She makes very sure he knows it.
-6	data/scenes.js	2030	Nara	scared	Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds.
 6	data/scenes.js	2031	Tom	loving	Very brave. Extremely brave. You'll be getting a lot of chicken.
 6	data/scenes.js	2041	TNB	surprised	Babe. Look. On top of the pile.
 6	data/scenes.js	2042	Tom	happy	BREADY MERCURY!
 6	data/scenes.js	2047	Tom	unimpressed	It's Los Angeles. Winter is a light jacket.
 6	data/scenes.js	2050	Tom	angry	That's Bready Mercury. He's nine. You feed him flour and water, and then you SHARE the bread. That's the whole point of him.
-6	data/scenes.js	2052	Nara	angry	Nara growls. A very small growl. Very serious. She's waited three days for this.
 6	data/scenes.js	2053	TNB	happy	It's a squirrel in a tiny tie, babe. I'm so scared and so delighted.
 6	data/scenes.js	2054	Tom	proud	Put the starter down. No touching, please.
 6	data/scenes.js	2058	TNB	loving	Okay. Shake it off. Everybody gets a snack.
 6	data/scenes.js	2058	TNB	none	Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.
 6	data/scenes.js	2058	TNB	none	Three times should do it.
-6	data/scenes.js	2068	Tom	loving	Saturdays. On my back fence. One slice. The heel.
 6	data/scenes.js	2080	Tom	loving	Hello, Bready Mercury. Did you miss me? You were on an adventure.
 6	data/scenes.js	2080	Tom	unimpressed	You're going to be extremely sour about this.
-6	data/scenes.js	2081	TNB	surprised	Was that a pun? Babe. Did you just make a PUN?
 6	data/scenes.js	2082	Tom	unimpressed	He's a starter. Sour is a compliment.
-6	data/scenes.js	2083	TNB	surprised	And look. Something taped to the lid. A gold coin. With a little clock face.
-6	data/scenes.js	2084	Tom	surprised	Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners.
-6	data/scenes.js	2084	Tom	surprised	That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.
-6	data/scenes.js	2084	Tom	surprised	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.
-6	data/scenes.js	2085	TNB	happy	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.
 6	data/scenes.js	2095	Olivia	happy	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.
 6	data/scenes.js	2675	TNB	unimpressed	Noted. You were right, Bernadette.
 6	data/scenes.js	2677	TNB	unimpressed	...YOU WERE RIGHT, BERNADETTE.
-6	data/scenes.js	2101	Nara	loving	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.
 6	data/scenes.js	2685	Tom	happy	Bernadette, this is really kind of you.
 6	data/scenes.js	2687	Tom	none	...It looked thirsty.
 6	data/scenes.js	2106	TNB	happy	You know what today was, babe? Absolutely nuts.
-6	data/scenes.js	2107	Tom	unimpressed	...That's not a pun. That's just a word.
-6	data/scenes.js	2108	TNB	happy	It's a word with a pun in its heart.
-6	data/scenes.js	2110	Tom	unimpressed	Fine. It was nuts.
 6	data/scenes.js	2114	TNB	surprised	The library is whispering. Is that not just... its job?
 6	data/scenes.js	2115	Tom	unimpressed	Not on Long Island. On Long Island, the library shushes YOU.
 7	data/scenes.js	2315	Grace	proud	Okay. Everybody up. I'm in charge of getting up. Up, up, UP.
@@ -827,34 +789,26 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2338	Grace	angry	A book told everybody I sing in the shower. Which is PRIVATE. Also I'm very good.
 7	data/scenes.js	2338	Grace	unimpressed	Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it's fine.
 7	data/scenes.js	2348	Grace	unimpressed	Twelve.
-7	data/scenes.js	2352	Tom	unimpressed	Books overhear things.
 7	data/scenes.js	2354	Rose	happy	Are there monsters down there? Say yes.
 7	data/scenes.js	2357	Grace	proud	I have read every book in the kids section. Twice. I can read ALL the signs.
-7	data/scenes.js	2368	Tom	unimpressed	I do talk to my bread. It's part of the process.
 7	data/scenes.js	2369	Rose	scared	Tata. Tata. The books are looking at us.
 7	data/scenes.js	2370	Grace	surprised	Books can't look. They don't have... okay, that one has eyes.
 7	data/scenes.js	2371	Grace	proud	FICTION is that way. NONFICTION is that way. PICTURE BOOKS are down there. The READING ROOM is at the top.
 7	data/scenes.js	2371	Grace	proud	I can read every sign. Rose can't read yet.
 7	data/scenes.js	2372	Rose	proud	I can read PICTURES. Pictures are harder.
 7	data/scenes.js	2373	Grace	surprised	...That's actually true.
-7	data/scenes.js	2375	Tom	proud	Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask less nicely.
 7	data/scenes.js	2383	Tom	loving	Lamby’s Big Day. Page one. Lamby woke up and decided it was going to be a big day.
 7	data/scenes.js	2384	Rose	happy	Do the voice. Do Lamby’s voice.
 7	data/scenes.js	2385	Tom	happy	(a very small voice) Today I'm going to jump on everybody.
 7	data/scenes.js	2386	Rose	happy	THAT IS WHAT I DO.
 7	data/scenes.js	2387	Grace	happy	Okay. That's actually a good book. Don't tell anyone I said that.
-7	data/scenes.js	2399	Tom	unimpressed	Saw what.
 7	data/scenes.js	2401	Grace	angry	That's SO annoying. Finish your SENTENCES.
 7	data/scenes.js	2405	Rose	none	Tata. What did you see? When you walked into Fiction?
-7	data/scenes.js	2406	Tom	unimpressed	A green book being very dramatic.
 7	data/scenes.js	2413	Grace	proud	Actually, I KNOW that. Actually, I said it right.
 7	data/scenes.js	2415	Rose	happy	Tata. It sounds like Grace.
 7	data/scenes.js	2416	Grace	angry	It does NOT sound like me. Tata. Tell her.
-7	data/scenes.js	2417	Tom	unimpressed	...Let's focus on the encyclopedia.
 7	data/scenes.js	2421	Grace	scared	Tata. Am I a know-it-all? Be honest. Actually, don't be honest.
-7	data/scenes.js	2422	Tom	loving	You know a lot. And you tell people. Those are two different things, and only one of them needs a little work.
-7	data/scenes.js	2422	Tom	loving	The other one is why you're in charge of the signs down here.
-7	data/scenes.js	2424	Grace	happy	...Okay. I can work on the telling part. A little. Starting tomorrow.
+7	data/scenes.js	2424	Grace	happy	...Okay. I can work on the asking part. A little. Starting tomorrow.
 7	data/scenes.js	2433	Rose	scared	AAAAH!
 7	data/scenes.js	2434	Rose	proud	...Hey. HEY. Nobody scares ME. I do the scaring. That's MY job.
 7	data/scenes.js	2436	Rose	happy	BOOOOOOO!
@@ -864,27 +818,18 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2454	Rose	surprised	Tata. The door talked.
 7	data/scenes.js	2455	Tom	none	The thing behind the door talked. Stay close.
 7	data/scenes.js	2464	Grace	surprised	Tata. On the dais. It's a book. A really, REALLY big book.
-7	data/scenes.js	2468	Tom	unimpressed	You're the one whispering.
 7	data/scenes.js	2472	Rose	angry	You told everybody Boppy eats cookies in the car.
 7	data/scenes.js	2474	Grace	angry	You can't just tell people’s secrets! That's the rudest thing a book can do! That's a RULE!
 7	data/scenes.js	2476	Tom	proud	Girls, behind me. No touching, please.
 7	data/scenes.js	2480	Grace	proud	Up, everybody. I'm in charge now.
 7	data/scenes.js	2480	Grace	none	Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.
 7	data/scenes.js	2489	Rose	proud	I did the dragon.
-7	data/scenes.js	2494	Grace	surprised	Tata, something fell out of it. Something gold. It was being used as a bookmark.
 7	data/scenes.js	2496	Tom	surprised	A gold coin. Same little clock face.
-7	data/scenes.js	2496	Tom	surprised	That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.
-7	data/scenes.js	2497	Grace	proud	Somebody DID open it, then. To put the coin in.
-7	data/scenes.js	2497	Grace	surprised	And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.
-7	data/scenes.js	2498	Rose	sad	Somebody took it out and didn't READ it? That's so sad.
-7	data/scenes.js	2499	Tom	surprised	And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.
 7	data/scenes.js	2499	Tom	proud	I'm adding it to the list.
-7	data/scenes.js	2500	Grace	proud	I'm adding it to MY list. Mine has a chart AND a key now.
 7	data/scenes.js	2508	Grace	sad	It just wanted somebody to read it. That's all. All of it was because nobody read it.
 7	data/scenes.js	2513	Grace	happy	No late fees. EVER? Tata. I'm going to take out every book. Every single one. Alphabetically.
 7	data/scenes.js	2517	Rose	happy	It's itchy. I love it.
 7	data/scenes.js	2521	Grace	happy	Forty people? Tata. That's a FEAST.
-7	data/scenes.js	2522	Tom	unimpressed	...Bready Mercury is going to need a bigger jar.
 8	data/scenes.js	2676	TNB	loving	Okay. Up. Everybody up. Hot cocoa later. Lots of it.
 8	data/scenes.js	2683	Nara	happy	Nara sniffs it. It's warm. Her tail goes like a propeller.
 8	data/scenes.js	2688	TNB	proud	That's all three pilot lights, babe. The little steam motor by the turntable has three empty burners.

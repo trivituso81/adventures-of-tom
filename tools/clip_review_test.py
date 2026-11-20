@@ -45,7 +45,7 @@ with sync_playwright() as pw:
         pg.wait_for_function(READY,timeout=60000)
         rows=pg.evaluate("()=>[...document.querySelectorAll('#crv .crv-row')].map(r=>[r.dataset.id,r.querySelector('.crv-chip').textContent,r.querySelector('[data-crv=play]').disabled])")
         ok([r[0] for r in rows]==IDS and all(r[1]=='ready' and not r[2] for r in rows), f'{layout}: the panel lists the three clips, each ready to play {rows}')
-        ok(not any(pg.evaluate("()=>Object.keys(PAINTED).filter(k=>/^clip_/.test(k)&&PAINTED[k].img&&PAINTED[k].ready&&k!=='clip_mudling_idle')")), f'{layout}: before any PLAY only the Mudling idle loop (on the field) is loaded')
+        ok(not any(pg.evaluate("()=>Object.keys(PAINTED).filter(k=>/^clip_/.test(k)&&PAINTED[k].img&&PAINTED[k].ready&&!/_idle$/.test(k))")), f'{layout}: before any PLAY only idle loops (the monsters on the field: Mudling, Grump, Toad, Log) are loaded')
         pg.evaluate("()=>{ for(const f of B2.foes) f.maxHp=f.hp=99999; }")
         pg.evaluate(SPY)
         # 3. PLAY one clip

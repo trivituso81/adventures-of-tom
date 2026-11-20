@@ -7845,6 +7845,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Went through the list. Fixed: validate.js bad tab Clips and banned word (Clips are video prompts), clip_review_test idle loops, clip_kinds_test (passes on main, it was the test machine's browser), unused_voice check 4 (93 old chapter 1 dialogue clips purged), reaction-index.py (513 rows whose lines were rewritten, and 31 Vance rows, moved to docs/emotion-reactions-stale.tsv), emotion-apply.py (55 chapter 6 and 7 rows moved to docs/emotion-index-lines-stale.tsv, one reworded line remapped), npc-emotion-check.py (line numbers refreshed, two reworded Page lines), the Justin 110-character tag, the Pose Editor manifest. Already on a card: muffin plates and pan (c-heist1), Flight Zero in Gate Zero (c-gatezero), Gridlock Prime staging (c-stagefollow). Made cards: c-ch1leftovers (Amy, Aunt Ellie, Gus and Bean), c-posesizes (size jumps). Dropped, already tracked in claude/battle-build.md: the simple player's Sig Vibes Skills (stage 14 if the balance pass needs it) and the Ruckus gauge in the save file (stage 15). Kitchen side-view mood art: art only, see next-addendum-cutpolish3.md, Tom's call when he wants those drawn."
     }
    ],
    "prompt": {
@@ -7856,7 +7860,8 @@
     "effort": "medium (steps are known)",
     "text": "Go through this list of known problems on main, which was cut out of claude/next.md. For each item fix it, or add a board card for it, or drop it with a one-line reason, then write the result in docs/CHANGES.md. List: the muffin plates stay on the island after the theft (waits on the Art Library entry ch1-kitchen-empty-island) and the muffin pan is a code stand-in; Flight Zero stays painted in the Gate Zero window; Gridlock Prime staging; Gus and Bean show the old glass block; tools/art-library/validate.js fails on clip-rose-strike: bad tab Clips; tools/clip_kinds_test.py (sleep clip ran 0 to 30, wanted 0 to 38) and tools/clip_review_test.py (before any PLAY only the Mudling idle loop is loaded) fail; unused_voice.py check 4 lists 93 lines other sessions replaced; reaction-index.py --check fails on 60 rows (Vance and others); emotion-apply.py fails on 56 pre-existing rows; npc-emotion-check.py fails on 223 rows (lines moved in engine/travel.js and others); in ch1Amy Tom's head sits under the painted Long Island Square arch sign; in the reaction_test case for ch1Ellie Tom and Grace stand up the path away from Aunt Ellie's door; in the kitchen Tom's mood and talking paintings read front-facing when he faces left (art, no side-view mood sheet: claude/next-addendum-cutpolish3.md); size jumps between WALKING poses and the others of Tom, TNB, Justin, Amy and Boppy (Tom saved lines for the walking stand frames, applying them needs a walk bake: claude/next-addendum-cutpolish2.md), and Grace, Rose, Deedee poses are unsized until Tom saves lines; the Pose Editor page's 'in the game now' still shows pre-apply sizes for the 60 applied poses (python3 tools/pose-editor/manifest.py); a Justin line in tools/voice-library/scripts/justin-dialogue.json has a 110-character first tag (shorten before it is made); the simple player rarely picks the second Sig Vibes' shield and ally-buff Skills in short fights; the Ruckus gauge is not in the save file yet (battle stage 15). Do not ask me to review any battle animation. You have my full permission to access the repo."
    },
-   "tag": "knownwrong"
+   "tag": "knownwrong",
+   "after": "nothing for Tom: c-ch1leftovers"
   },
   {
    "id": "c-gatezero",
@@ -8861,6 +8866,70 @@
     "text": "Read CLAUDE.md. Board card c-backlog1: add Send to backlog and a BACKLOG section to board.html as Tom asked in its history."
    },
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-ch1leftovers",
+   "tag": "ch1leftovers",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Chapter 1 staging leftovers: Amy, Aunt Ellie, Gus and Bean",
+   "next": "Ready to start. Fixes three small chapter 1 problems: Tom's head under the Square arch sign in ch1Amy, Tom and Grace standing up the path away from Aunt Ellie's door in ch1Ellie, and Gus and Bean still showing the old glass block.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by c-knownwrong: this item was on the known-wrong list cut out of claude/next.md."
+    }
+   ],
+   "prompt": {
+    "what": "Fix three chapter 1 staging problems found by earlier tests and never fixed, looking at frames in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row C: judging frames by eye)",
+    "effort": "medium (each fix is small)",
+    "text": "Read CLAUDE.md and claude/next-addendum-cutstage1.md, then card c-ch1leftovers in data/board.json. Your first push is the commit board: start c-ch1leftovers. Fix, looking at frames in portrait and landscape before pushing: (1) scene ch1Amy: Tom's head sits under the painted Long Island Square arch sign; move where he stands or the camera framing so his head is clear of the sign. (2) scene ch1Ellie, `python3 tools/reaction_test.py` case ch1Ellie: Tom and Grace stand up the path away from Aunt Ellie's door; place them near her door, reproduce from the tile Tom really stands on. (3) Gus and Bean (Rivituso Row, chapter 14 amber) still show the old glass block: find where `amber` set on them draws the old picture and use the current amber picture (see claude/next-addendum-amberclear1.md and -amber3.md); if it is already correct, say so and say how you checked. Give the build ch1leftovers a docs/CHANGES.md heading, run python3 tools/smoke.py, and set the card's `after` to \"nothing for Tom: end\". You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-posesizes",
+   "tag": "posesizes",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Characters",
+   "title": "Pose sizes: walk bake for the walking stand frames, and unsized Grace, Rose, Deedee poses",
+   "next": "Ready to start. Applies Tom's saved Pose Editor lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (needs a walk bake) so the walking poses stop jumping in size against the other poses. Grace, Rose and Deedee poses stay unsized until Tom saves lines in the Pose Editor.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by c-knownwrong: this item was on the known-wrong list cut out of claude/next.md."
+    }
+   ],
+   "prompt": {
+    "what": "Applies the saved Pose Editor lines for the walking stand frames of five people with a walk bake, so walking poses match the size of their feeling and talking poses.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row C: bake and frame checks)",
+    "effort": "medium (steps are known, frames judged by eye)",
+    "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections), docs/POSE_EDITOR.md and claude/next-addendum-cutpolish2.md, then card c-posesizes in data/board.json. Your first push is the commit board: start c-posesizes. Tom saved lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (data/pose-requests.json); applying them needs a walk bake. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run `python3 tools/pose-editor/manifest.py` so the Pose Editor's 'in the game now' matches, and `python3 tools/pose_editor_test.py`. Grace, Rose and Deedee poses have no saved lines yet: do not size them, and list them on a Tom card (ask: setup) named in the card's `after`, telling him which poses to line in ADMIN > POSE EDITOR. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

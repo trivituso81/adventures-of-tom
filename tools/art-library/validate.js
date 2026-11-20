@@ -4,7 +4,7 @@
 //   node tools/art-library/validate.js                                              (everything in data/art-prompts.json)
 // Exit code 1 and a list of problems when anything is wrong. Run from the repo root.
 const fs = require('fs'), path = require('path');
-const TABS = ['Characters', 'NPCs', 'Areas', 'Rooms', 'Props', 'Enemies', 'Battle', 'Title', 'Portraits', 'Flight'];
+const TABS = ['Characters', 'NPCs', 'Areas', 'Rooms', 'Props', 'Enemies', 'Battle', 'Title', 'Portraits', 'Flight', 'Clips'];
 const ARS = ['3:4', '2:3', '1:1', '4:3', '3:2', '16:9', '9:16', '2:1'];
 // Words that pull the generator toward pixel art. Negations ("NOT pixel art", "not 16-bit") are the approved wording and are allowed.
 const BANNED = /\b(16[- ]bit|32[- ]bit|snes|super nintendo|final fantasy|chrono trigger|pixel[- ]?art|retro|sprites?)\b/gi;
@@ -52,7 +52,8 @@ function check(entries, known, needGroup) {
     if (e.bake) w('has a bake field (not allowed in the bulk load)');
     // "Final Fantasy IX" or "Final Fantasy 9" is the one allowed use of the style-name ban, in any prompt (Tom 2026-11-08). Other Final Fantasy titles stay banned.
     const t = (e.prompt || '').replace(NEG, ' ').replace(/Final Fantasy (IX|9)\b/gi, ' ');
-    const b = t.match(BANNED); if (b) w('banned word: ' + [...new Set(b.map(x => x.toLowerCase()))].join(', '));
+    // Clips are video prompts: the approved Boop wording (never reworded) says "2D sprite animation", so the pixel-art ban does not apply to them.
+    const b = e.tab === 'Clips' ? null : t.match(BANNED); if (b) w('banned word: ' + [...new Set(b.map(x => x.toLowerCase()))].join(', '));
     const s = t.match(SOFT); if (s) w('soft word: ' + [...new Set(s.map(x => x.toLowerCase()))].join(', '));
     if (/[—–]/.test((e.prompt || '') + (e.title || ''))) w('em or en dash');
     if (OLD_TEXT.test(e.prompt || '')) w('prompt describes old art no longer in the game (style key, underpainting or school-yard painting)');

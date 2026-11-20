@@ -1,0 +1,546 @@
+kind	chapter	file	where	speaker	text	listener	mood	at	fx
+scene	2	data/scenes.js	ch2Loft	Tom	I flew three thousand miles to see you... and maybe the starter.	tnb	happy
+scene	2	data/scenes.js	ch2Loft	TNB	Main event. I'll take it.	tom	loving
+scene	2	data/scenes.js	ch2Loft	TNB	Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.	tom	surprised
+scene	2	data/scenes.js	ch2Loft	Tom	All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.	tnb	loving
+scene	2	data/scenes.js	ch2Loft	Tom	My sourdough starter has been alone for a week.	tnb	loving
+scene	2	data/scenes.js	ch2Porch	TNB	Also, your starter was bubbling out of the jar, so I baked a boule with it.	tom	surprised
+scene	2	data/scenes.js	ch2Porch	Tom	I'm proud. As long as you didn't spin it on your pottery wheel.	tnb	happy
+scene	2	data/scenes.js	ch2Porch	Nara	Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.	tnb	happy
+scene	2	data/scenes.js	ch2Porch	Nara	Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.	tom	happy
+scene	2	data/scenes.js	ch2Porch	Nara	She gets the bread. Tom gets a lick.	tnb	loving
+scene	2	data/scenes.js	ch2Starter	TNB	You talk to that jar more than you talk to me.	tom	happy
+scene	2	data/scenes.js	ch2Starter	Tom	The jar gets fifty grams of flour. You get the whole week.	tnb	loving
+scene	2	data/scenes.js	ch2Starter	Tom	...And you steamed my shirts for the flight. You win. You always win.	tnb	proud
+scene	2	data/scenes.js	ch2Starter	Nara	Nara is at the front window, whining. Her tail is down.	tom	surprised
+scene	2	data/scenes.js	ch2Starter	Nara	Nara is at the front window, whining. Her tail is down.	tnb	surprised
+scene	2	data/scenes.js	ch2Smog	TNB	He's been saying that for a while, babe.	tom	scared
+scene	2	data/scenes.js	ch2Smog	Tom	I was startled. Briefly. With dignity.	tnb	happy
+scene	2	data/scenes.js	ch2Smog	TNB	It was a battle plan. You just didn't know it yet.	tom	unimpressed
+scene	2	data/scenes.js	ch2Smog	Tom	Mr. Washington would never say that. The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard.	tnb	proud
+scene	2	data/scenes.js	ch2Odette	TNB	She's made that gumbo every day for fifty years. It's never once been "never done."	tom	sad
+scene	2	data/scenes.js	ch2Odette	Tom	The smog makes people want everything to stay exactly the same forever. That's not a nice afternoon. That's a hostage situation.	tnb	proud
+scene	2	data/scenes.js	ch2Carmen	Nara	Nara sniffs the comal. She sneezes. The smoke smells like the hills.	tom	surprised
+scene	2	data/scenes.js	ch2Carmen	Nara	Nara sniffs the comal. She sneezes. The smoke smells like the hills.	tnb	surprised
+scene	2	data/scenes.js	ch2Source	Nara	Nara presses against Tom’s leg. She's not letting him go anywhere without her.	tom	loving
+scene	2	data/scenes.js	ch2Source	Nara	Nara presses against Tom’s leg. She's not letting him go anywhere without her.	tnb	loving
+scene	2	data/scenes.js	ch2Coyote	Nara	Nara’s hackles go up. She stands right in front of Tom.	tom	loving
+scene	2	data/scenes.js	ch2Coyote	Nara	Nara’s hackles go up. She stands right in front of Tom.	tnb	proud
+scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	tom	surprised
+scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	tnb	scared
+scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	nara	scared
+scene	2	data/scenes.js	ch2Boss	Nara	Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.	tom	loving
+scene	2	data/scenes.js	ch2Boss	Nara	Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.	tnb	happy
+scene	2	data/scenes.js	ch2AfterBoss	Tom	So a man in a long coat plugged those vents on purpose. He wanted this whole city stuck in one afternoon. I'd like to know why.	tnb	surprised
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	tom	happy
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	nara	happy
+scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	tom	happy
+scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	nara	happy
+scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	washington	happy
+scene	2	data/scenes.js	ch2End	Nara	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.	tom	loving
+scene	2	data/scenes.js	ch2End	Nara	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.	tnb	loving
+scene	3	data/scenes.js	ch3Fishing	Deedee	Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.	tom	happy
+scene	3	data/scenes.js	ch3Fishing	Deedee	Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.	grace	happy
+scene	3	data/scenes.js	ch3Fishing	Deedee	Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.	rose	happy
+scene	3	data/scenes.js	ch3Fishing	Boppy	The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.	tom	unimpressed
+scene	3	data/scenes.js	ch3Fishing	Boppy	The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.	grace	surprised
+scene	3	data/scenes.js	ch3Fishing	Boppy	The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.	rose	surprised
+scene	3	data/scenes.js	ch3Fishing	Boppy	The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.	deedee	unimpressed
+scene	3	data/scenes.js	ch3Fishing	Deedee	Nobody believes him.	boppy	angry
+scene	3	data/scenes.js	ch3Fishing	Deedee	Nobody believes him.	tom	happy
+scene	3	data/scenes.js	ch3Fishing	Deedee	Nobody believes him.	grace	happy
+scene	3	data/scenes.js	ch3Fishing	Rose	Boppy, is the Whisker Perch real?	boppy	proud
+scene	3	data/scenes.js	ch3Fishing	Boppy	Real as my heartburn, kiddo.	rose	surprised
+scene	3	data/scenes.js	ch3Fishing	Boppy	Real as my heartburn, kiddo.	tom	unimpressed
+scene	3	data/scenes.js	ch3Fishing	Boppy	Real as my heartburn, kiddo.	grace	unimpressed
+scene	3	data/scenes.js	ch3Tea	The kettle	The kettle whistles, low and long. Oolong leans in to listen.	tom	surprised
+scene	3	data/scenes.js	ch3Tea	The kettle	The kettle whistles, low and long. Oolong leans in to listen.	boppy	surprised
+scene	3	data/scenes.js	ch3Tea	Oolong	The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.	tom	surprised
+scene	3	data/scenes.js	ch3Tea	Oolong	The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.	boppy	surprised
+scene	3	data/scenes.js	ch3Tea	Tom	On Long Island? Nobody here pays double for anything.	oolong	unimpressed
+scene	3	data/scenes.js	ch3Tea	Tom	On Long Island? Nobody here pays double for anything.	boppy	unimpressed
+scene	3	data/scenes.js	ch3Pier	Boppy	That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody!	tom	surprised
+scene	3	data/scenes.js	ch3Pier	Boppy	That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody!	grace	surprised
+scene	3	data/scenes.js	ch3Pier	Boppy	That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody!	rose	happy
+scene	3	data/scenes.js	ch3Sock	Boppy	Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.	tom	happy
+scene	3	data/scenes.js	ch3Sock	Boppy	Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.	grace	happy
+scene	3	data/scenes.js	ch3Sock	Boppy	Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.	rose	happy
+scene	3	data/scenes.js	ch3Wait	Boppy	The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.	grace	unimpressed
+scene	3	data/scenes.js	ch3Wait	Boppy	The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.	rose	surprised
+scene	3	data/scenes.js	ch3Wait	Boppy	The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.	tom	happy
+scene	3	data/scenes.js	ch3Wait	Grace	Sundials can't tell the wrong time. That's not how sundials work.	boppy	unimpressed
+scene	3	data/scenes.js	ch3Wait	Grace	Sundials can't tell the wrong time. That's not how sundials work.	tom	happy
+scene	3	data/scenes.js	ch3Wait	Boppy	That's what I said.	grace	unimpressed
+scene	3	data/scenes.js	ch3Wait	Boppy	That's what I said.	tom	happy
+scene	3	data/scenes.js	ch3Wait	Boppy	That's what I said.	rose	happy
+scene	3	data/scenes.js	ch3Wait	Old reeds	Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.	tom	surprised
+scene	3	data/scenes.js	ch3Wait	Old reeds	Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.	grace	surprised
+scene	3	data/scenes.js	ch3Wait	Old reeds	Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.	rose	surprised
+scene	3	data/scenes.js	ch3Wait	Old reeds	Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.	boppy	unimpressed
+scene	3	data/scenes.js	ch3Snag	Old reeds	The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.	tom	surprised
+scene	3	data/scenes.js	ch3Snag	Old reeds	The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.	grace	surprised
+scene	3	data/scenes.js	ch3Snag	Old reeds	The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.	rose	surprised
+scene	3	data/scenes.js	ch3Snag	Old reeds	The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.	boppy	proud
+scene	3	data/scenes.js	ch3Hollow	Boppy	This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.	tom	surprised
+scene	3	data/scenes.js	ch3Hollow	Boppy	The sundial still says seven o'clock, no matter what time it is.	tom	surprised
+scene	3	data/scenes.js	ch3Hollow	Boppy	This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.	grace	unimpressed
+scene	3	data/scenes.js	ch3Hollow	Boppy	The sundial still says seven o'clock, no matter what time it is.	grace	unimpressed
+scene	3	data/scenes.js	ch3Hollow	Boppy	This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.	rose	surprised
+scene	3	data/scenes.js	ch3Hollow	Boppy	The sundial still says seven o'clock, no matter what time it is.	rose	surprised
+scene	3	data/scenes.js	ch3Hollow	Grace	It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work.	boppy	unimpressed
+scene	3	data/scenes.js	ch3Hollow	Grace	It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work.	tom	happy
+scene	3	data/scenes.js	ch3Hollow	Grace	It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work.	rose	happy
+scene	3	data/scenes.js	ch3Hollow	Boppy	That's what I said.	grace	unimpressed
+scene	3	data/scenes.js	ch3Hollow	Boppy	That's what I said.	tom	happy
+scene	3	data/scenes.js	ch3Hollow	Boppy	That's what I said.	rose	happy
+scene	3	data/scenes.js	ch3Hollow	Rose	Tata! Something shiny is stuck in it!	tom	surprised
+scene	3	data/scenes.js	ch3Hollow	Rose	Tata! Something shiny is stuck in it!	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	Rose	Tata! Something shiny is stuck in it!	boppy	surprised
+scene	3	data/scenes.js	ch3Hollow	Tom	It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	Tom	It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.	rose	surprised
+scene	3	data/scenes.js	ch3Hollow	Tom	It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.	boppy	surprised
+scene	3	data/scenes.js	ch3Hollow	The sundial	Click. The shadow swings all the way around the dial and settles on the right hour.	tom	surprised
+scene	3	data/scenes.js	ch3Hollow	The sundial	Click. The shadow swings all the way around the dial and settles on the right hour.	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	The sundial	Click. The shadow swings all the way around the dial and settles on the right hour.	rose	surprised
+scene	3	data/scenes.js	ch3Hollow	The sundial	Click. The shadow swings all the way around the dial and settles on the right hour.	boppy	surprised
+scene	3	data/scenes.js	ch3Hollow	The spillway	Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.	tom	surprised
+scene	3	data/scenes.js	ch3Hollow	The spillway	Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	The spillway	Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.	rose	surprised
+scene	3	data/scenes.js	ch3Hollow	The spillway	Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.	boppy	proud
+scene	3	data/scenes.js	ch3Hollow	Grace	It MOVED. Shadows don't move like that. I'm writing this down. In pen.	tom	happy
+scene	3	data/scenes.js	ch3Hollow	Grace	It MOVED. Shadows don't move like that. I'm writing this down. In pen.	boppy	happy
+scene	3	data/scenes.js	ch3Hollow	Grace	It MOVED. Shadows don't move like that. I'm writing this down. In pen.	rose	happy
+scene	3	data/scenes.js	ch3Hollow	Tom	Oolong's kettle said a man in a long coat is buying gold coins at Penny's and paying double. And now a gold coin turns up jammed in a sundial.	boppy	surprised
+scene	3	data/scenes.js	ch3Hollow	Tom	Oolong's kettle said a man in a long coat is buying gold coins at Penny's and paying double. And now a gold coin turns up jammed in a sundial.	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	Boppy	Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.	tom	proud
+scene	3	data/scenes.js	ch3Hollow	Boppy	Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.	grace	surprised
+scene	3	data/scenes.js	ch3Hollow	Boppy	Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.	tom	proud
+scene	3	data/scenes.js	ch3Hollow	Boppy	Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.	tom	proud
+scene	3	data/scenes.js	ch3Hollow	Boppy	Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.	grace	proud
+scene	3	data/scenes.js	ch3Hollow	Boppy	Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.	rose	proud
+scene	3	data/scenes.js	ch3Pool	Boppy	He's a FISH, kiddo.	rose	sad
+scene	3	data/scenes.js	ch3Pool	Boppy	He's a FISH, kiddo.	grace	unimpressed
+scene	3	data/scenes.js	ch3Pool	Boppy	He's a FISH, kiddo.	tom	loving
+scene	3	data/scenes.js	ch3AfterBoss	Boppy	Put the date. Put the time. Use the sundial. It works now.	grace	proud
+scene	3	data/scenes.js	ch3AfterBoss	Boppy	Put the date. Put the time. Use the sundial. It works now.	tom	happy
+scene	3	data/scenes.js	ch3AfterBoss	Deep Pool	Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.	tom	loving
+scene	3	data/scenes.js	ch3AfterBoss	Deep Pool	Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.	boppy	loving
+scene	3	data/scenes.js	ch3AfterBoss	Deep Pool	Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.	grace	happy
+scene	3	data/scenes.js	ch3AfterBoss	Deep Pool	Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.	rose	happy
+scene	3	data/scenes.js	ch3End	Boppy	Old Iron-Gill. Forty years, Dee. I TOLD everybody.	deedee	unimpressed
+scene	3	data/scenes.js	ch3End	Boppy	Old Iron-Gill. Forty years, Dee. I TOLD everybody.	tom	happy
+scene	3	data/scenes.js	ch3End	Boppy	Old Iron-Gill. Forty years, Dee. I TOLD everybody.	grace	happy
+scene	3	data/scenes.js	ch3End	Boppy	Old Iron-Gill. Forty years, Dee. I TOLD everybody.	rose	happy
+scene	3	data/scenes.js	ch3End	Grace	I have proof. It's in my notebook. With the time. From a sundial.	deedee	proud
+scene	3	data/scenes.js	ch3End	Grace	I have proof. It's in my notebook. With the time. From a sundial.	boppy	proud
+scene	3	data/scenes.js	ch3End	Grace	I have proof. It's in my notebook. With the time. From a sundial.	tom	happy
+scene	3	data/scenes.js	ch3End	Deedee	Thank you, Rosie. Now. Let me look at him.	rose	proud
+scene	3	data/scenes.js	ch3End	Deedee	Thank you, Rosie. Now. Let me look at him.	boppy	scared
+scene	3	data/scenes.js	ch3End	Deedee	Thank you, Rosie. Now. Let me look at him.	tom	happy
+scene	4	data/scenes.js	ch4Arrive	Tom	You took the train to meet the plane.	tnb	loving
+scene	4	data/scenes.js	ch4Arrive	TNB	I took the train to meet the man. The plane was a bonus.	tom	loving
+scene	4	data/scenes.js	ch4Nara	Nara	A howl from 2nd Ave. Nara has spotted Tom from the porch, two whole blocks away.	tom	happy
+scene	4	data/scenes.js	ch4Nara	Nara	A howl from 2nd Ave. Nara has spotted Tom from the porch, two whole blocks away.	tnb	happy
+scene	4	data/scenes.js	ch4Nara	Nara	She does three laps around Tom, slams into his shins, and leans on him with all forty pounds.	tom	loving
+scene	4	data/scenes.js	ch4Nara	Nara	She does three laps around Tom, slams into his shins, and leans on him with all forty pounds.	tnb	happy
+scene	4	data/scenes.js	ch4Gate	Kiki	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.	tnb	scared
+scene	4	data/scenes.js	ch4Gate	Kiki	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.	tom	surprised
+scene	4	data/scenes.js	ch4Gate	Kiki	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.	nara	scared
+scene	4	data/scenes.js	ch4Gate	Tom	Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.	tnb	scared
+scene	4	data/scenes.js	ch4Gate	Tom	Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.	dana	scared
+scene	4	data/scenes.js	ch4Gate	Tom	Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.	kiki	scared
+scene	4	data/scenes.js	ch4Gate	Nara	Nara is already sniffing the craft services table.	tom	unimpressed
+scene	4	data/scenes.js	ch4Gate	Nara	Nara is already sniffing the craft services table.	tnb	happy
+scene	4	data/scenes.js	ch4Snack	Nara	Nara takes it very gently. Then she inhales it. Then she sits again, in case there's more.	tom	happy
+scene	4	data/scenes.js	ch4Snack	Nara	Nara takes it very gently. Then she inhales it. Then she sits again, in case there's more.	tnb	surprised
+scene	4	data/scenes.js	ch4Snack	Nara	Nara takes it very gently. Then she inhales it. Then she sits again, in case there's more.	toni	loving
+scene	4	data/scenes.js	ch4Fetch	Nara	Nara’s ears go straight up. Something shiny is skittering across New York.	tom	scared
+scene	4	data/scenes.js	ch4Fetch	Nara	Nara’s ears go straight up. Something shiny is skittering across New York.	tnb	surprised
+scene	4	data/scenes.js	ch4Fetch	Nara	Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant.	tom	unimpressed
+scene	4	data/scenes.js	ch4Fetch	Nara	Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant.	tnb	scared
+scene	4	data/scenes.js	ch4Fetch	Nara	She drops something at Tom’s feet. Very proud. Very slobbery.	tom	loving
+scene	4	data/scenes.js	ch4Fetch	Nara	She drops something at Tom’s feet. Very proud. Very slobbery.	tnb	unimpressed
+scene	4	data/scenes.js	ch4Fetch	TNB	Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can't work like this.	tom	unimpressed
+scene	4	data/scenes.js	ch4Fetch	TNB	Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can't work like this.	nara	scared
+scene	4	data/scenes.js	ch4Fetch	Tom	Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.	tnb	proud
+scene	4	data/scenes.js	ch4Fetch	Tom	Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.	nara	proud
+scene	4	data/scenes.js	ch4Clapper	Tom	It's very fast. And very loud.	tnb	happy
+scene	4	data/scenes.js	ch4Clapper	Tom	It's very fast. And very loud.	nara	scared
+scene	4	data/scenes.js	ch4Clapper	TNB	That's every clapper I've ever met.	tom	happy
+scene	4	data/scenes.js	ch4Moth	TNB	Watch the screech, babe. It shuts you right up. No skills.	tom	unimpressed
+scene	4	data/scenes.js	ch4Rig	TNB	Blue, amber, red. And one strip of gaffer tape. Okay, two. Okay, four.	tom	unimpressed
+scene	4	data/scenes.js	ch4Rig	TNB	Blue, amber, red. And one strip of gaffer tape. Okay, two. Okay, four.	nara	happy
+scene	4	data/scenes.js	ch4Rig	Soundstage 7	The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.	tom	surprised
+scene	4	data/scenes.js	ch4Rig	Soundstage 7	The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.	tnb	proud
+scene	4	data/scenes.js	ch4Rig	Soundstage 7	The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.	nara	scared
+scene	4	data/scenes.js	ch4Rig	Tom	You fixed a whole soundstage with tape.	tnb	proud
+scene	4	data/scenes.js	ch4Boss	Tom	You took the rack.	tnb	angry
+scene	4	data/scenes.js	ch4Boss	Nara	Nara growls at the megaphone. Very small growl. Very serious.	tom	proud
+scene	4	data/scenes.js	ch4Boss	Nara	Nara growls at the megaphone. Very small growl. Very serious.	tnb	loving
+scene	4	data/scenes.js	ch4AfterBoss	Stage set	The megaphone hops off the rack and rolls away under the set, muttering about lighting.	tom	happy
+scene	4	data/scenes.js	ch4AfterBoss	Stage set	The megaphone hops off the rack and rolls away under the set, muttering about lighting.	tnb	happy
+scene	4	data/scenes.js	ch4AfterBoss	Stage set	The megaphone hops off the rack and rolls away under the set, muttering about lighting.	nara	surprised
+scene	4	data/scenes.js	ch4AfterBoss	TNB	And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.	tom	surprised
+scene	4	data/scenes.js	ch4AfterBoss	TNB	And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.	nara	surprised
+scene	4	data/scenes.js	ch4AfterBoss	Tom	Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie.	tnb	surprised
+scene	4	data/scenes.js	ch4AfterBoss	Tom	Somebody in a long coat really wants things to stand still.	tnb	surprised
+scene	4	data/scenes.js	ch4AfterBoss	TNB	Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions.	tom	happy
+scene	4	data/scenes.js	ch4End	Dana	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.	tom	happy
+scene	4	data/scenes.js	ch4End	Dana	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.	tnb	proud
+scene	4	data/scenes.js	ch4End	Dana	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.	nara	proud
+scene	4	data/scenes.js	ch4End	Dana	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.	kiki	happy
+scene	4	data/scenes.js	ch4End	Tom	I flew three thousand miles for that pun.	tnb	happy
+scene	4	data/scenes.js	ch4End	Tom	Worth it. Every mile. But for the record? That was a CLOSED set!	tnb	loving
+scene	4	data/scenes.js	ch4End	Tom	Worth it. Every mile. But for the record? That was a CLOSED set!	nara	happy
+scene	4	data/scenes.js	ch4End	Nara	Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.	tom	loving
+scene	4	data/scenes.js	ch4End	Nara	Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.	tnb	loving
+scene	4	data/scenes.js	ch4End	Narrator	A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."	tnb	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	Two coffees. Both mine. Here, have one. That's how much I need you tonight.	tom	unimpressed
+scene	5	data/scenes.js	ch5Arrive	Amy	Two coffees. Both mine. Here, have one. That's how much I need you tonight.	grace	happy
+scene	5	data/scenes.js	ch5Arrive	Tom	You brought me coffee. At night. That's a cry for help.	amy	unimpressed
+scene	5	data/scenes.js	ch5Arrive	Tom	You brought me coffee. At night. That's a cry for help.	grace	happy
+scene	5	data/scenes.js	ch5Arrive	Tom	You brought me coffee. At night. That's a cry for help.	rose	happy
+scene	5	data/scenes.js	ch5Arrive	Amy	It's conference night. Thirty parents at seven o’clock. And the school has lost its mind.	tom	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	It's conference night. Thirty parents at seven o’clock. And the school has lost its mind.	grace	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	It's conference night. Thirty parents at seven o’clock. And the school has lost its mind.	rose	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off.	tom	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off.	grace	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off.	rose	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	On little paper legs. Mrs. Kowalski saw it. She's still upset about it.	grace	surprised
+scene	5	data/scenes.js	ch5Arrive	Amy	On little paper legs. Mrs. Kowalski saw it. She's still upset about it.	rose	happy
+scene	5	data/scenes.js	ch5Arrive	Amy	On little paper legs. Mrs. Kowalski saw it. She's still upset about it.	tom	unimpressed
+scene	5	data/scenes.js	ch5Pruitt	School bell	BRRRRRING. From inside the school. Then again. Then a little one: brring?	tom	surprised
+scene	5	data/scenes.js	ch5Pruitt	School bell	BRRRRRING. From inside the school. Then again. Then a little one: brring?	amy	angry
+scene	5	data/scenes.js	ch5Pruitt	School bell	BRRRRRING. From inside the school. Then again. Then a little one: brring?	grace	scared
+scene	5	data/scenes.js	ch5Pruitt	School bell	BRRRRRING. From inside the school. Then again. Then a little one: brring?	rose	scared
+scene	5	data/scenes.js	ch5Pruitt	School bell	BRRRRRING. From inside the school. Then again. Then a little one: brring?	pruitt	scared
+scene	5	data/scenes.js	ch5Pruitt	Amy	Principal Pruitt, my brother Tom. He's very good in a crisis. He's also very calm about it, which is annoying.	tom	unimpressed
+scene	5	data/scenes.js	ch5Pruitt	Amy	Principal Pruitt, my brother Tom. He's very good in a crisis. He's also very calm about it, which is annoying.	pruitt	happy
+scene	5	data/scenes.js	ch5Pruitt	Amy	Principal Pruitt, my brother Tom. He's very good in a crisis. He's also very calm about it, which is annoying.	grace	happy
+scene	5	data/scenes.js	ch5Pruitt	Principal Pruitt	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.	amy	unimpressed
+scene	5	data/scenes.js	ch5Pruitt	Principal Pruitt	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.	grace	surprised
+scene	5	data/scenes.js	ch5Pruitt	Principal Pruitt	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.	rose	surprised
+scene	5	data/scenes.js	ch5Pruitt	Principal Pruitt	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.	tom	unimpressed
+scene	5	data/scenes.js	ch5Gym	Amy	The Gregori Rule. No throwing at teachers. It's still on the wall.	tom	happy
+scene	5	data/scenes.js	ch5Gym	Amy	The Gregori Rule. No throwing at teachers. It's still on the wall.	grace	happy
+scene	5	data/scenes.js	ch5Gym	Amy	The Gregori Rule. No throwing at teachers. It's still on the wall.	rose	happy
+scene	5	data/scenes.js	ch5Clocks	School bell	BRRRRRING. One bell. Right on time. Then silence. The good kind.	tom	proud
+scene	5	data/scenes.js	ch5Clocks	School bell	BRRRRRING. One bell. Right on time. Then silence. The good kind.	amy	happy
+scene	5	data/scenes.js	ch5Clocks	School bell	BRRRRRING. One bell. Right on time. Then silence. The good kind.	grace	happy
+scene	5	data/scenes.js	ch5Clocks	School bell	BRRRRRING. One bell. Right on time. Then silence. The good kind.	rose	happy
+scene	5	data/scenes.js	ch5Boss	Tom	So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too.	amy	angry
+scene	5	data/scenes.js	ch5Boss	Tom	So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too.	grace	unimpressed
+scene	5	data/scenes.js	ch5Boss	The Red Pen	I did. I made the bells and the clocks wrong so that everybody would be late. Late is late. Points off.	tom	unimpressed
+scene	5	data/scenes.js	ch5Boss	The Red Pen	I did. I made the bells and the clocks wrong so that everybody would be late. Late is late. Points off.	amy	angry
+scene	5	data/scenes.js	ch5AfterBoss	Podium	The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.	amy	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Podium	The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.	tom	happy
+scene	5	data/scenes.js	ch5AfterBoss	Podium	The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.	grace	happy
+scene	5	data/scenes.js	ch5AfterBoss	Podium	The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.	rose	happy
+scene	5	data/scenes.js	ch5AfterBoss	Grace	The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom.	tom	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Grace	The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom.	amy	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Grace	The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom.	rose	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	It's another gold coin, with the same little clock face on it.	amy	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	It's another gold coin, with the same little clock face on it.	grace	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	It's another gold coin, with the same little clock face on it.	rose	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.	amy	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	Every time, it's a gold coin, and something lonely holding on to it.	amy	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.	grace	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	Every time, it's a gold coin, and something lonely holding on to it.	grace	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.	rose	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Tom	Every time, it's a gold coin, and something lonely holding on to it.	rose	surprised
+scene	5	data/scenes.js	ch5AfterBoss	Amy	Whoever it is has very neat tape. Look at those corners.	tom	unimpressed
+scene	5	data/scenes.js	ch5AfterBoss	Amy	Whoever it is has very neat tape. Look at those corners.	grace	happy
+scene	5	data/scenes.js	ch5AfterBoss	Rose	Can we keep it? I'll keep it inside Lamby.	tom	unimpressed
+scene	5	data/scenes.js	ch5AfterBoss	Rose	Can we keep it? I'll keep it inside Lamby.	amy	unimpressed
+scene	5	data/scenes.js	ch5AfterBoss	Rose	Can we keep it? I'll keep it inside Lamby.	grace	unimpressed
+scene	5	data/scenes.js	ch5AfterBoss	Tom	We keep it. In my pocket. Not inside Lamby.	rose	sad
+scene	5	data/scenes.js	ch5AfterBoss	Tom	We keep it. In my pocket. Not inside Lamby.	amy	happy
+scene	5	data/scenes.js	ch5AfterBoss	Tom	We keep it. In my pocket. Not inside Lamby.	grace	happy
+scene	5	data/scenes.js	ch5AfterBoss	Conference night	For two hours, Amy talks to thirty parents. Grace hands out cookies. Rose tells everybody the pen had glasses. Tom stacks chairs and nods calmly.	amy	proud
+scene	5	data/scenes.js	ch5AfterBoss	Conference night	For two hours, Amy talks to thirty parents. Grace hands out cookies. Rose tells everybody the pen had glasses. Tom stacks chairs and nods calmly.	grace	proud
+scene	5	data/scenes.js	ch5AfterBoss	Conference night	For two hours, Amy talks to thirty parents. Grace hands out cookies. Rose tells everybody the pen had glasses. Tom stacks chairs and nods calmly.	rose	proud
+scene	5	data/scenes.js	ch5End	Amy	Thirty conferences. Zero tears. One very well-behaved pen.	tom	happy
+scene	5	data/scenes.js	ch5End	Amy	Thirty conferences. Zero tears. One very well-behaved pen.	grace	happy
+scene	5	data/scenes.js	ch5End	Amy	Thirty conferences. Zero tears. One very well-behaved pen.	rose	happy
+scene	5	data/scenes.js	ch5End	Rose	Tata. Tata. There's a man.	tom	surprised
+scene	5	data/scenes.js	ch5End	Rose	Tata. Tata. There's a man.	amy	surprised
+scene	5	data/scenes.js	ch5End	Rose	Tata. Tata. There's a man.	grace	surprised
+scene	5	data/scenes.js	ch5End	Rose	He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.	tom	scared
+scene	5	data/scenes.js	ch5End	Rose	He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.	amy	surprised
+scene	5	data/scenes.js	ch5End	Rose	He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.	grace	scared
+scene	5	data/scenes.js	ch5End	Tom	...I looked, and there's nobody there now.	rose	surprised
+scene	5	data/scenes.js	ch5End	Tom	...I looked, and there's nobody there now.	grace	scared
+scene	5	data/scenes.js	ch5End	Tom	...I looked, and there's nobody there now.	amy	unimpressed
+scene	5	data/scenes.js	ch5End	Amy	Probably a parent. A late one. There's always a late one.	tom	unimpressed
+scene	5	data/scenes.js	ch5End	Amy	Probably a parent. A late one. There's always a late one.	grace	unimpressed
+scene	5	data/scenes.js	ch5End	Amy	Probably a parent. A late one. There's always a late one.	rose	unimpressed
+scene	5	data/scenes.js	ch5End	Tom	A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.	amy	surprised
+scene	5	data/scenes.js	ch5End	Tom	I'm keeping a list.	amy	surprised
+scene	5	data/scenes.js	ch5End	Tom	A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.	grace	surprised
+scene	5	data/scenes.js	ch5End	Tom	I'm keeping a list.	grace	surprised
+scene	5	data/scenes.js	ch5End	Tom	A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.	rose	scared
+scene	5	data/scenes.js	ch5End	Tom	I'm keeping a list.	rose	scared
+scene	5	data/scenes.js	ch5End	Grace	I'm keeping a list too. Mine has a chart.	tom	happy
+scene	5	data/scenes.js	ch5End	Grace	I'm keeping a list too. Mine has a chart.	amy	happy
+scene	6	data/scenes.js	ch6Kitchen	TNB	Okay. Hi. Missed you. Don't panic. Look at the island.	tom	loving
+scene	6	data/scenes.js	ch6Kitchen	Tom	...Where's Bready Mercury.	tnb	scared
+scene	6	data/scenes.js	ch6Kitchen	TNB	That's the thing. I came over to feed him, like you asked. The jar was gone. The window was open.	tom	scared
+scene	6	data/scenes.js	ch6Kitchen	TNB	And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.	tom	surprised
+scene	6	data/scenes.js	ch6Kitchen	Tom	Bready Mercury is nine years old. He has flown Delta One. Twice.	tnb	loving
+scene	6	data/scenes.js	ch6Kitchen	TNB	I know, babe. I've seen every horror movie ever made. This is exactly how they start.	tom	unimpressed
+scene	6	data/scenes.js	ch6Kitchen	TNB	And this was on the windowsill. An acorn. With a tiny X carved in it.	tom	surprised
+scene	6	data/scenes.js	ch6Kitchen	Tom	Somebody took my starter. And left a calling card.	tnb	scared
+scene	6	data/scenes.js	ch6Nara	Nara	Nara leans on Tom with all forty pounds.	tom	loving
+scene	6	data/scenes.js	ch6Nara	Nara	Nara leans on Tom with all forty pounds.	tnb	happy
+scene	6	data/scenes.js	ch6Nara	Nara	Nara leans on Tom with all forty pounds.	olivia	loving
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	tom	surprised
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	tnb	scared
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	olivia	scared
+scene	6	data/scenes.js	ch6Nara	Nara	Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.	tom	loving
+scene	6	data/scenes.js	ch6Nara	Nara	Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.	tnb	happy
+scene	6	data/scenes.js	ch6Nara	Nara	Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.	olivia	happy
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	tom	surprised
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	tnb	scared
+scene	6	data/scenes.js	ch6Nara	Nara	Then she spins around and growls at the jacaranda.	olivia	scared
+scene	6	data/scenes.js	ch6Nara	Tom	TNB has seen a lot of movies.	tnb	proud
+scene	6	data/scenes.js	ch6Nara	Tom	TNB has seen a lot of movies.	olivia	happy
+scene	6	data/scenes.js	ch6Nara	Tom	...He's usually right about this stuff.	tnb	loving
+scene	6	data/scenes.js	ch6Nara	Tom	...He's usually right about this stuff.	olivia	surprised
+scene	6	data/scenes.js	ch6Nara	Nara	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.	tom	happy
+scene	6	data/scenes.js	ch6Nara	Nara	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.	tnb	happy
+scene	6	data/scenes.js	ch6Nara	Nara	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.	olivia	happy
+scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	tom	surprised
+scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	tnb	surprised
+scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	bernadette	surprised
+scene	6	data/scenes.js	ch6Spy	Tom	The Chairman.	tnb	surprised
+scene	6	data/scenes.js	ch6DigScene	Nara	Nara digs. Dirt goes everywhere. Mostly on TNB.	tom	happy
+scene	6	data/scenes.js	ch6DigScene	Nara	Nara digs. Dirt goes everywhere. Mostly on TNB.	tnb	unimpressed
+scene	6	data/scenes.js	ch6Fetch	Narrator	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	nara	happy
+scene	6	data/scenes.js	ch6Fetch	Narrator	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	tnb	happy
+scene	6	data/scenes.js	ch6Fetch	Nara	Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.	tom	loving
+scene	6	data/scenes.js	ch6Fetch	Nara	Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.	tnb	happy
+scene	6	data/scenes.js	ch6Door	Little door	A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."	tom	surprised
+scene	6	data/scenes.js	ch6Door	Little door	A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."	tnb	surprised
+scene	6	data/scenes.js	ch6Door	Little door	A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."	nara	surprised
+scene	6	data/scenes.js	ch6Door	Little door	"...wait. You're very tall. Are you a squirrel?"	tom	unimpressed
+scene	6	data/scenes.js	ch6Door	Little door	"...wait. You're very tall. Are you a squirrel?"	tnb	scared
+scene	6	data/scenes.js	ch6Door	Little door	"...wait. You're very tall. Are you a squirrel?"	nara	surprised
+scene	6	data/scenes.js	ch6Door	Little door	Running footsteps. Very small ones. Going up.	tom	unimpressed
+scene	6	data/scenes.js	ch6Door	Little door	Running footsteps. Very small ones. Going up.	tnb	surprised
+scene	6	data/scenes.js	ch6Door	Tom	It lied to me first. It said it was an acorn.	tnb	happy
+scene	6	data/scenes.js	ch6Oak	Nara	Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.	tom	surprised
+scene	6	data/scenes.js	ch6Oak	Nara	Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.	tnb	surprised
+scene	6	data/scenes.js	ch6Oak	Tom	Bready Mercury is up there at the top of the tree, and there's no ladder to reach him.	tnb	surprised
+scene	6	data/scenes.js	ch6Oak	Tom	Bready Mercury is up there at the top of the tree, and there's no ladder to reach him.	nara	happy
+scene	6	data/scenes.js	ch6Board	Corkboard	Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.	tom	surprised
+scene	6	data/scenes.js	ch6Board	Corkboard	Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.	tnb	happy
+scene	6	data/scenes.js	ch6Board	Corkboard	Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.	nara	proud
+scene	6	data/scenes.js	ch6Board	Corkboard	In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD.	tom	angry
+scene	6	data/scenes.js	ch6Board	Corkboard	In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD.	tnb	surprised
+scene	6	data/scenes.js	ch6Board	Corkboard	A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.	tom	surprised
+scene	6	data/scenes.js	ch6Board	Corkboard	A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.	tnb	happy
+scene	6	data/scenes.js	ch6Board	Corkboard	Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).	tom	surprised
+scene	6	data/scenes.js	ch6Board	Corkboard	Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).	tnb	proud
+scene	6	data/scenes.js	ch6Board	Nara	Nara looks at the drawing of herself. She seems pleased with it.	tom	happy
+scene	6	data/scenes.js	ch6Board	Nara	Nara looks at the drawing of herself. She seems pleased with it.	tnb	happy
+scene	6	data/scenes.js	ch6Ladder	Nara	Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.	tom	loving
+scene	6	data/scenes.js	ch6Ladder	Nara	Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.	tnb	happy
+scene	6	data/scenes.js	ch6Ladder	Nara	She'd do anything for Tom. She makes very sure he knows it.	tom	loving
+scene	6	data/scenes.js	ch6Ladder	Nara	She'd do anything for Tom. She makes very sure he knows it.	tnb	loving
+scene	6	data/scenes.js	ch6Ladder	Inside the Old Oak	CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor.	tom	surprised
+scene	6	data/scenes.js	ch6Ladder	Inside the Old Oak	CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor.	tnb	proud
+scene	6	data/scenes.js	ch6Ladder	Inside the Old Oak	CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor.	nara	scared
+scene	6	data/scenes.js	ch6Ladder	Nara	Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds.	tom	loving
+scene	6	data/scenes.js	ch6Ladder	Nara	Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds.	tnb	happy
+scene	6	data/scenes.js	ch6Boss	Nara	Nara growls. A very small growl. Very serious. She's waited three days for this.	tom	proud
+scene	6	data/scenes.js	ch6Boss	Nara	Nara growls. A very small growl. Very serious. She's waited three days for this.	tnb	happy
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	...Shared. You shared with me. Three times. Nobody has ever... I'm going to need a minute.	tom	loving
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	...Shared. You shared with me. Three times. Nobody has ever... I'm going to need a minute.	tnb	loving
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	...Shared. You shared with me. Three times. Nobody has ever... I'm going to need a minute.	nara	surprised
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	Take the jar. And... could I maybe have a slice? Sometimes?	tom	loving
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	Take the jar. And... could I maybe have a slice? Sometimes?	tnb	loving
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	Take the jar. And... could I maybe have a slice? Sometimes?	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	Tom	Saturdays. On my back fence. One slice. The heel.	tnb	loving
+scene	6	data/scenes.js	ch6AfterBoss	Tom	Saturdays. On my back fence. One slice. The heel.	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	The heel is the best part.	tom	happy
+scene	6	data/scenes.js	ch6AfterBoss	Chairman Cheeks	The heel is the best part.	tnb	happy
+scene	6	data/scenes.js	ch6AfterBoss	The hoard	Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.	tom	happy
+scene	6	data/scenes.js	ch6AfterBoss	The hoard	Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.	tnb	happy
+scene	6	data/scenes.js	ch6AfterBoss	The hoard	Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	TNB	Was that a pun? Babe. Did you just make a PUN?	tom	proud
+scene	6	data/scenes.js	ch6AfterBoss	TNB	Was that a pun? Babe. Did you just make a PUN?	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	TNB	And look. Something taped to the lid. A gold coin. With a little clock face.	tom	surprised
+scene	6	data/scenes.js	ch6AfterBoss	TNB	And look. Something taped to the lid. A gold coin. With a little clock face.	nara	surprised
+scene	6	data/scenes.js	ch6AfterBoss	Tom	Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners.	tnb	surprised
+scene	6	data/scenes.js	ch6AfterBoss	Tom	That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.	tnb	surprised
+scene	6	data/scenes.js	ch6AfterBoss	Tom	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.	tnb	surprised
+scene	6	data/scenes.js	ch6AfterBoss	Tom	That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	Tom	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.	nara	happy
+scene	6	data/scenes.js	ch6AfterBoss	TNB	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.	tom	unimpressed
+scene	6	data/scenes.js	ch6AfterBoss	TNB	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.	nara	happy
+scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	tom	loving
+scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	tnb	loving
+scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	olivia	loving
+scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	michael	loving
+scene	6	data/scenes.js	ch6End	Tom	...That's not a pun. That's just a word.	tnb	happy
+scene	6	data/scenes.js	ch6End	TNB	It's a word with a pun in its heart.	tom	unimpressed
+scene	6	data/scenes.js	ch6End	Tom	Fine. It was nuts.	tnb	proud
+scene	6	data/scenes.js	ch6End	Tom	Fine. It was nuts.	nara	happy
+scene	6	data/scenes.js	ch6End	Narrator	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	tnb	surprised
+scene	6	data/scenes.js	ch6End	Narrator	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	nara	surprised
+scene	7	data/scenes.js	ch7Arrive	Grace	Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.	tom	happy
+scene	7	data/scenes.js	ch7Arrive	Grace	Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.	rose	happy
+scene	7	data/scenes.js	ch7Arrive	Tom	I got it. The library is whispering.	grace	surprised
+scene	7	data/scenes.js	ch7Arrive	Tom	I got it. The library is whispering.	rose	surprised
+scene	7	data/scenes.js	ch7Arrive	Grace	Not a little bit. ALL the books. At the same time. And they're saying THINGS.	tom	surprised
+scene	7	data/scenes.js	ch7Arrive	Grace	Not a little bit. ALL the books. At the same time. And they're saying THINGS.	rose	scared
+scene	7	data/scenes.js	ch7Arrive	Tom	...That one is true. Everybody knows that one.	rose	surprised
+scene	7	data/scenes.js	ch7Arrive	Tom	...That one is true. Everybody knows that one.	grace	happy
+scene	7	data/scenes.js	ch7Page	Page	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.	tom	surprised
+scene	7	data/scenes.js	ch7Page	Page	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.	grace	proud
+scene	7	data/scenes.js	ch7Page	Page	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.	rose	scared
+scene	7	data/scenes.js	ch7Page	Tom	Books overhear things.	page	scared
+scene	7	data/scenes.js	ch7Page	Tom	Books overhear things.	grace	surprised
+scene	7	data/scenes.js	ch7Stacks	Tom	I do talk to my bread. It's part of the process.	grace	unimpressed
+scene	7	data/scenes.js	ch7Stacks	Tom	I do talk to my bread. It's part of the process.	rose	happy
+scene	7	data/scenes.js	ch7Stacks	Tom	Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask less nicely.	grace	proud
+scene	7	data/scenes.js	ch7Stacks	Tom	Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask less nicely.	rose	happy
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	tom	loving
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	grace	surprised
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	rose	happy
+scene	7	data/scenes.js	ch7Fic	Tom	Saw what.	grace	unimpressed
+scene	7	data/scenes.js	ch7Fic	Tom	Saw what.	rose	surprised
+scene	7	data/scenes.js	ch7Fic	Tom	A green book being very dramatic.	grace	happy
+scene	7	data/scenes.js	ch7Fic	Tom	A green book being very dramatic.	rose	happy
+scene	7	data/scenes.js	ch7Non	Tom	...Let's focus on the encyclopedia.	grace	unimpressed
+scene	7	data/scenes.js	ch7Non	Tom	...Let's focus on the encyclopedia.	rose	happy
+scene	7	data/scenes.js	ch7Non	Tom	You know a lot. And you tell people. Those are two different things, and only one of them needs a little work.	grace	sad
+scene	7	data/scenes.js	ch7Non	Tom	You know a lot. And you tell people. Those are two different things, and only one of them needs a little work.	rose	surprised
+scene	7	data/scenes.js	ch7Non	Tom	The other one is why you're in charge of the signs down here.	grace	proud
+scene	7	data/scenes.js	ch7Non	Tom	The other one is why you're in charge of the signs down here.	rose	happy
+scene	7	data/scenes.js	ch7Non	Grace	...Okay. I can work on the telling part. A little. Starting tomorrow.	tom	loving
+scene	7	data/scenes.js	ch7Non	Grace	...Okay. I can work on the telling part. A little. Starting tomorrow.	rose	unimpressed
+scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	tom	surprised
+scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	grace	surprised
+scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	rose	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	tom	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	grace	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	rose	scared
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	tom	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	grace	scared
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	rose	scared
+scene	7	data/scenes.js	ch7Boss	Tom	You're the one whispering.	grace	scared
+scene	7	data/scenes.js	ch7Boss	Tom	You're the one whispering.	rose	scared
+scene	7	data/scenes.js	ch7AfterBoss	The Reading Room	The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.	tom	loving
+scene	7	data/scenes.js	ch7AfterBoss	The Reading Room	The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.	grace	loving
+scene	7	data/scenes.js	ch7AfterBoss	The Reading Room	The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.	rose	loving
+scene	7	data/scenes.js	ch7AfterBoss	Grace	Tata, something fell out of it. Something gold. It was being used as a bookmark.	tom	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	Tata, something fell out of it. Something gold. It was being used as a bookmark.	rose	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Tom	That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.	grace	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Tom	That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.	rose	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	Somebody DID open it, then. To put the coin in.	tom	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	Somebody DID open it, then. To put the coin in.	rose	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.	tom	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.	rose	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Rose	Somebody took it out and didn't READ it? That's so sad.	tom	sad
+scene	7	data/scenes.js	ch7AfterBoss	Rose	Somebody took it out and didn't READ it? That's so sad.	grace	sad
+scene	7	data/scenes.js	ch7AfterBoss	Tom	And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.	grace	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Tom	And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.	rose	surprised
+scene	7	data/scenes.js	ch7AfterBoss	Grace	I'm adding it to MY list. Mine has a chart AND a key now.	tom	happy
+scene	7	data/scenes.js	ch7AfterBoss	Grace	I'm adding it to MY list. Mine has a chart AND a key now.	rose	unimpressed
+scene	7	data/scenes.js	ch7End	Narrator	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	grace	surprised
+scene	7	data/scenes.js	ch7End	Narrator	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	rose	surprised
+scene	7	data/scenes.js	ch7End	Narrator	"I said yes for you. You're welcome. Bring the starter."	grace	happy
+scene	7	data/scenes.js	ch7End	Narrator	"I said yes for you. You're welcome. Bring the starter."	rose	happy
+scene	7	data/scenes.js	ch7End	Tom	...Bready Mercury is going to need a bigger jar.	grace	happy
+scene	7	data/scenes.js	ch7End	Tom	...Bready Mercury is going to need a bigger jar.	rose	happy
+map	3	data/maps-le.js	map tea, when {chapter:3,flag:ch3-tea}	Oolong	The kettle is still going on about that man in the long coat. Gold coins. Paying double.	tom	surprised
+map	3	data/maps-le.js	map tea, when {chapter:3,flag:ch3-tea}	Oolong	The kettle is still going on about that man in the long coat. Gold coins. Paying double.	grace	surprised
+map	3	data/maps-le.js	map tea, when {chapter:3,flag:ch3-tea}	Oolong	The kettle is still going on about that man in the long coat. Gold coins. Paying double.	rose	surprised
+map	3	data/maps-le.js	map tea, when {chapter:3,flag:ch3-tea}	Oolong	The kettle is still going on about that man in the long coat. Gold coins. Paying double.	boppy	unimpressed
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.	tom	unimpressed
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.	tnb	happy
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.	nara	happy
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Except squirrels. I'm working on it.	tom	happy
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Except squirrels. I'm working on it.	tnb	happy
+map	2-10	data/maps-la.js	map oakpark, base	Bernadette	Except squirrels. I'm working on it.	nara	angry
+map	7	data/maps-le.js	map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page}	Page	I'm fine. Everything is fine. The dictionaries haven't slept in a week.	tom	unimpressed
+map	7	data/maps-le.js	map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page}	Page	I'm fine. Everything is fine. The dictionaries haven't slept in a week.	grace	unimpressed
+map	7	data/maps-le.js	map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page}	Page	I'm fine. Everything is fine. The dictionaries haven't slept in a week.	rose	scared
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	Case closed. I've filed my report. With myself. I approved it.	tom	unimpressed
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	Case closed. I've filed my report. With myself. I approved it.	tnb	happy
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	Case closed. I've filed my report. With myself. I approved it.	nara	happy
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	I said they were organized. Nobody believed me. Write that down.	tom	unimpressed
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	I said they were organized. Nobody believed me. Write that down.	tnb	proud
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	I said they were organized. Nobody believed me. Write that down.	nara	happy
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	tom	loving
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	tnb	happy
+map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	nara	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	tom	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	tnb	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	nara	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	tom	surprised
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	tnb	surprised
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	nara	surprised
+cab	7	engine/travel.js	cab flight to ch7	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	tom	unimpressed
+cab	7	engine/travel.js	cab flight to ch7	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	tnb	scared
+cab	7	engine/travel.js	cab flight to ch7	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	nara	angry
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Nara sits down on Tom’s feet. If he can't move, he can't leave.	tom	loving
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Nara sits down on Tom’s feet. If he can't move, he can't leave.	tnb	happy
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Tom wiggles free. "A week. Maybe two. You guard the porch."	tom	loving
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Tom wiggles free. "A week. Maybe two. You guard the porch."	tnb	happy
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.	tom	loving
+table	5	engine/travel.js	DEPARTURES 5.stay.nara.stay	Nara	Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.	tnb	happy
+table	7	engine/travel.js	DEPARTURES 7.sol	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	tom	unimpressed
+table	7	engine/travel.js	DEPARTURES 7.sol	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	tnb	scared
+table	7	engine/travel.js	DEPARTURES 7.sol	Sol	LAX. I'm taking the long way. There are squirrels on the short way.	nara	angry
+table	7	engine/travel.js	DEPARTURES 7.tnb	TNB	Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.	tom	loving
+table	7	engine/travel.js	DEPARTURES 7.tnb	TNB	Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.	nara	sad
+table	7	engine/travel.js	DEPARTURES 7.tnb	TNB	Go. I'll feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.	tom	loving
+table	7	engine/travel.js	DEPARTURES 7.tnb	TNB	Go. I'll feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.	nara	sad
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom.	tom	loving
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom.	tnb	happy
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	She picks Tom. She leans on his legs for one long minute.	tom	loving
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	She picks Tom. She leans on his legs for one long minute.	tnb	happy
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	Then she picks the squirrel. Fair enough.	tom	loving
+table	7	engine/travel.js	DEPARTURES 7.stay.nara.stay	Nara	Then she picks the squirrel. Fair enough.	tnb	happy
+table	7	engine/travel.js	ARRIVALS 7.talk	Grace	Tata! THREE times! The library's still whispering. I SAID so. In a text.	tom	loving
+table	7	engine/travel.js	ARRIVALS 7.talk	Grace	Tata! THREE times! The library's still whispering. I SAID so. In a text.	rose	happy
+table	7	engine/travel.js	ARRIVALS 7.talk	Rose	It said my name. It said ROSE. Then it said shhh.	tom	surprised
+table	7	engine/travel.js	ARRIVALS 7.talk	Rose	It said my name. It said ROSE. Then it said shhh.	grace	scared
+table	7	engine/travel.js	ARRIVALS 7.talk	Tom	Then we go find out what it wants. After a sandwich.	grace	happy
+table	7	engine/travel.js	ARRIVALS 7.talk	Tom	Then we go find out what it wants. After a sandwich.	rose	happy
+table	7	engine/travel.js	ARRIVALS 7.talk	Grace	I'm bringing a flashlight. And a pencil. For notes.	tom	loving
+table	7	engine/travel.js	ARRIVALS 7.talk	Grace	I'm bringing a flashlight. And a pencil. For notes.	rose	happy
+scene	16	data/scenes-ch16.js	ch16Open	Boppy	That’s the voice. That’s the fella with the deal.	vance	unimpressed
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Amy	Where are my parents.	vance	unimpressed
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Grace	They’re STONE.	vance	unimpressed
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Rose	Are you the man who took all the coins?	vance	unimpressed
+scene	18	data/scenes-ch18.js	ch18Pinnacle	TNB	Okay. I fix things for a living. Whatever this is, it’s structurally unsound.	vance	unimpressed
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	vance	surprised
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	No touching, please.	vance	surprised
+scene	18	data/scenes-ch18.js	ch18After	Floor 60	Tom steps into the Ray and takes all of it. Where he was standing, there is a small warm light, hanging in the air at about the height of his glasses.	vance	surprised
+scene	18	data/scenes-ch18.js	ch18After	Floor 60	Then there is not.	vance	surprised
+scene	18	data/scenes-ch18.js	ch18After	Amy	Give him back.	vance	sad
+scene	18	data/scenes-ch18.js	ch18After	Floor 60	The Loom shudders. Every thread in it goes white. The Ray has nowhere left to go, and a wave of light rolls out from the place Tom stood.	vance	scared
+scene	18	data/scenes-ch18.js	ch18After	Amy	We’re not leaving without him!	vance	sad
+scene	20	data/scenes-ch20.js	ch20Heart	Tom	I was written out of the schedule. I’m a very stubborn calendar entry.	vance	unimpressed
+scene	20	data/scenes-ch20.js	ch20Heart	Grace	You turned my grandparents into STATUES.	vance	sad
+scene	20	data/scenes-ch20.js	ch20Heart	Boppy	I was a statue for a week and my back didn’t get a single day off. I’d like to file a complaint.	vance	unimpressed
+scene	20	data/scenes-ch20.js	ch20Heart	Deedee	Julian, honey. Have you eaten?	vance	surprised
+scene	20	data/scenes-ch20.js	ch20Heart	Amy	Distance, age, exhaustion, fear. That’s just a regular Tuesday.	vance	unimpressed
+scene	20	data/scenes-ch20.js	ch20Shatter	Tom	Julian.	vance	sad
+scene	20	data/scenes-ch20.js	ch20Calm	Tom	Probably. And then she would sit down next to you anyway.	vance	sad
+scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.	vance	sad
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	vance	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Tom	You don’t start them. You stop holding them.	vance	surprised
+scene	20	data/scenes-ch20.js	ch20Calm	Tom	You’re doing it right now. Come to dinner.	vance	surprised
+scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Bring yourself and an appetite.	vance	loving
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And bring a chair. We’re short a chair.	vance	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Amy	Mom already set the place. She set it at every dinner for fifty years. There’s always one more seat.	vance	loving
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	vance	proud
+scene	20	data/scenes-ch20.js	ch20Epi1	Tom	You would have been home for the birthday.	vance	sad
+scene	20	data/scenes-ch20.js	ch20Epi1	Sol	A SKYWAY TRAIN?! I don’t know what to do with my hands! I’m a cab driver!	vance	happy
+scene	20	data/scenes-ch20.js	ch20Epi1	Boppy	Does it have a recliner?	vance	happy
+scene	20	data/scenes-ch20.js	ch20Epi1	Boppy	I’ve changed my mind about the man.	vance	happy
+scene	20	data/scenes-ch20.js	ch20Epi1	Tom	That’s a good seat to start in.	vance	loving
