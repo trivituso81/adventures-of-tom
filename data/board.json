@@ -908,6 +908,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:16:24.362Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -920,7 +924,7 @@
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s10.md, then build stage 11 (bestiary chapters 2 to 4 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s11. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s11 (it moves this card to In progress and links your conversation)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGiZMGgywgmyzdrk4X",
     "opening": "pasted by Tom from the board"
    }
   },
@@ -10864,7 +10868,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEk93mJfgwTJ2d8xWD",
+    "url": "https://claude.ai/code/session_01RXeukEk93mJfgwTJ2d8xWD",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -10880,6 +10884,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-bug01",
@@ -11109,13 +11117,13 @@
    "title": "Fix: Amy's House can be entered early in chapter 1",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Claude fixes this (BUG-08, severity Medium) when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFuf4u6X8rmNNsNzZk",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -11127,6 +11135,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T16:19:22.119Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "tag": "gem-bug08",
@@ -11139,20 +11151,20 @@
     "effort": "medium (one door lock and one clipped NPC)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug08 in data/board.json, history included. Your first push is the commit board: start c-gem-bug08.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-08. What the tester saw: Severity Medium. Where: `Amy's House` (`GREGORI`) Premature Entry Glitch. During the Ch. 1 walk back from `grands` to `The Square`, `GREGORI` is enterable: stepping inside fires a `\"Deedee left the party.\"` banner overlapping Tom's head above an empty `Justin` dialogue box, while an orange-dress NPC stands clipped on top of the right half-wall.\n\nThe tester suggested (a suggestion, not an order): Lock `GREGORI` door during Ch. 1 (or provide a clean locked-door bark) so Ch. 1 never triggers broken `Justin` dialogue or premature party-leave state bugs.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug08, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
    },
-   "start": true
+   "started_at": "2026-11-20T16:20:00+00:00"
   },
   {
    "id": "c-gem-bug09",
    "title": "Fix: sprite and wall clipping glitches in chapter 1 maps",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Claude fixes this (BUG-09, severity Medium) when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGLHALqQpgPazwoAhK",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -11164,6 +11176,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T16:19:15.123Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "tag": "gem-bug09",
@@ -11176,7 +11192,7 @@
     "effort": "medium (several known glitches in a few maps)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug09 in data/board.json, history included. Your first push is the commit board: start c-gem-bug09.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-09. What the tester saw: Severity Medium. Where: Sprite Glitches & Walkmesh / Sign Clipping (`town`, `row`, `hollow`, `taxi`). (1) The Big One idle sprite: Flat grey-and-white horizontal oval plate floats across its hat in idle frames; Tom's failed controller shows a red `X` overlay. (2) Grump Hollow arch: Tan puff sprites overlap the first Mudling's face, and 7 tan puff icons stay floating atop the right `THE SQUARE SHOPS` post after battle. (3) NPC roof/wall clipping: Child NPCs walk onto the walls/roofs of `AUNT ELLIE` (`row`) and `SNAIL MAIL` (`town`), Boppy overlaps the stair railing in `grands`, Sal's cap clips at the top edge of `taxi`, and NPCs clip behind `CATTAIL PIER`.\n\nThe tester suggested (a suggestion, not an order): Clean the stray oval layer off `bigone` idle frames, clear Mudling prop particles after battle, and tighten NPC walkmeshes and building roof collision masks on `town`, `row`, `grands`, and `taxi`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug09, push to main, and write the result and the next step onto the card.\n\nWork in the order listed in the report. Look at screenshots of each place before and after.\n\nYou have my full permission to access the repo."
    },
-   "start": true
+   "started_at": "2026-11-20T16:20:00+00:00"
   },
   {
    "id": "c-gem-bug10",
@@ -12065,6 +12081,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEk93mJfgwTJ2d8xWD",
+   "title": "Fix: losing to The Big One leaves the party stuck",
+   "first": "2026-11-20T16:19:26Z",
+   "last": "2026-11-20T16:19:26Z",
+   "tags": [],
+   "cards": [
+    "c-gem-bug01"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCrr4d842SgVQHPHvS",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T16:07:16Z",
@@ -12279,6 +12305,16 @@
    ],
    "cards": [
     "c-fix-cutpolish5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGiZMGgywgmyzdrk4X",
+   "title": "Battle system stage 11: bestiary chapters 2 to 4 and bosses",
+   "first": "2026-11-20T08:19:40-08:00",
+   "last": "2026-11-20T08:19:40-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s11"
    ]
   },
   {
@@ -13403,8 +13439,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "8b11e4e4e33e5d837375f6e535fcd42c6eeb1016",
- "synced_at": "2026-11-20T16:18:35+00:00",
+ "synced": "c681c75d62cc8001d2c4347e6e1c1719931ed9a9",
+ "synced_at": "2026-11-20T16:20:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
