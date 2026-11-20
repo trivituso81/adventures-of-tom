@@ -1,3 +1,10 @@
+## reports-2026-11-20 (2026-11-20): Rose no longer shows twice when she jumps off Tom's shoulders; Hi, Mom! line shortened; the family reacts in the kitchen scene
+
+Three in-game reports on the chapter 1 kitchen scene (ch1Theft), build gem-polish02.
+
+- r-20261120-091238-jecm (bug), "when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice": the painted hop-off frame of Tom (`tr_hopoff`) has Rose in the air, and her own actor started hopping while that frame was still up. Tom now goes back to his normal pose the moment her actor takes over (`CH1_DISMOUNT`, `data/scenes.js`).
+- r-20261120-091310-jqps (dialogue), "remove 'I missed you too', add ! to the end of Hi Mom": Tom's line is now "Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas." I took "I missed you too" to mean the sentence "I missed yours too." The old recording was purged (docs/PURGED_VOICE.md); the line waits for a new recording and is read by speech until then.
+- r-20261120-091936-yxqb (change), "Tom and the girls should have the apporpriate feelings frames for this scene": 27 new listener reactions for Tom, Grace and Rose on Deedee's and Boppy's lines and Rose's scream (`docs/emotion-reactions.tsv`, rebuilt into `data/emotion-reactions.js`). Moods were my choice; Tom can change any in the Script Editor.
 ## fix-battlelabpagetry-2 (2026-11-20): The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away
 
 Tom (t-battlelabpagetry): "just like in the new chpater select screen, the difficulty toggles should be at the top so it removes an interstital step. / the page should not be the welcome screen. it should be a page like admin with literally every option that will link directly the battle test ( i dont want to have to click more than once assuming im happy with the difficulty default which should be Difficult".

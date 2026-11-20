@@ -217,9 +217,9 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
+   "text": "Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm] Hi, Mom. I missed yours too. [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since I flew over KANSAS!",
+   "script": "[warm] Hi, Mom! [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since I flew over KANSAS!",
    "takeId": "tmwo5n9pbpvz2"
   },
   {

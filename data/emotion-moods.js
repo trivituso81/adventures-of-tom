@@ -1558,7 +1558,7 @@ const EMOTION_MOODS={
 "Tom|He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.": "surprised",
 "Tom|He’s my dad. He wants a lot of arguments.": "unimpressed",
 "Tom|Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.": "happy",
-"Tom|Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.": "happy",
+"Tom|Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.": "happy",
 "Tom|Hi. Hi, bean. Yes. I know. You were so brave on the plane.": "loving",
 "Tom|Hi. Hi. Yes. I know. I was gone FOREVER. It was six days.": "loving",
 "Tom|I KNOW!": "proud",

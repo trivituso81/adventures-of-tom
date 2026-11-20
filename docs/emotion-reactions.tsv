@@ -9587,8 +9587,35 @@ scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. F
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	tom	loving	I didn't care for it	
 scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	grace	loving	quieter without him	
 scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son! I missed that face. Now sit, you're having a muffin.	rose	happy	having a muffin	hop
-scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	deedee	proud	cinnamon topping	
-scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	grace	unimpressed	flew over Kansas	...
+scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	deedee	proud	cinnamon topping	
+scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	grace	unimpressed	flew over Kansas	...
 scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	boppy	unimpressed	your father	...
 scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	deedee	unimpressed	back at Rikers	...
 scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	rose	surprised	whole loaf of bread	!
+scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son! I missed that face. Now sit, you're having a muffin.	tom	loving	missed that face	
+scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son! I missed that face. Now sit, you're having a muffin.	grace	happy	Now sit	
+scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	tom	happy	since six this morning	
+scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	grace	happy	your father	
+scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	rose	happy	still there	
+scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	tom	happy	every door in the place	
+scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	grace	unimpressed	mess hall	...
+scene	1	data/scenes.js	ch1Theft	Rose	AHHH! DEEDEE!	tom	scared		
+scene	1	data/scenes.js	ch1Theft	Rose	AHHH! DEEDEE!	grace	scared		
+scene	1	data/scenes.js	ch1Theft	Deedee	Excuse me! I just washed that floor.	tom	surprised		!
+scene	1	data/scenes.js	ch1Theft	Deedee	Excuse me! I just washed that floor.	grace	surprised		
+scene	1	data/scenes.js	ch1Theft	Deedee	Excuse me! I just washed that floor.	rose	scared		
+scene	1	data/scenes.js	ch1Theft	Deedee	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.	tom	surprised	twelve-cup pan	
+scene	1	data/scenes.js	ch1Theft	Deedee	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.	grace	angry	DISHWASHER	
+scene	1	data/scenes.js	ch1Theft	Deedee	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.	rose	surprised	DISHWASHER	!
+scene	1	data/scenes.js	ch1Theft	Boppy	...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?	tom	surprised	where'd the muffins go	?
+scene	1	data/scenes.js	ch1Theft	Boppy	...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?	grace	unimpressed	hat kept getting taller	...
+scene	1	data/scenes.js	ch1Theft	Deedee	A ball of mud came through the door and took them. Pan and all.	tom	unimpressed	Pan and all	...
+scene	1	data/scenes.js	ch1Theft	Deedee	A ball of mud came through the door and took them. Pan and all.	grace	angry	took them	
+scene	1	data/scenes.js	ch1Theft	Deedee	A ball of mud came through the door and took them. Pan and all.	rose	sad	Pan and all	
+scene	1	data/scenes.js	ch1Theft	Boppy	The mud gets a muffin and I don't?	tom	happy	I don't	
+scene	1	data/scenes.js	ch1Theft	Boppy	The mud gets a muffin and I don't?	grace	unimpressed	muffin	...
+scene	1	data/scenes.js	ch1Theft	Boppy	The mud gets a muffin and I don't?	rose	happy	muffin	hop
+scene	1	data/scenes.js	ch1Theft	Deedee	Girls, sneakers. Tom, hold the door. Hubby, you stay right there.	tom	proud	hold the door	
+scene	1	data/scenes.js	ch1Theft	Deedee	Girls, sneakers. Tom, hold the door. Hubby, you stay right there.	grace	proud	Girls, sneakers	
+scene	1	data/scenes.js	ch1Theft	Deedee	Girls, sneakers. Tom, hold the door. Hubby, you stay right there.	rose	happy	Girls, sneakers	hop
+scene	1	data/scenes.js	ch1Theft	Boppy	Tom, you heard her.	tom	surprised	you heard her	?

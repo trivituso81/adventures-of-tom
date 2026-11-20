@@ -199,3 +199,7 @@ Bernadette got a new personality, new words and her own voice key, so her 19 cha
 ## 2026-11-14 (`ch6s4`): 68 dialogue clips
 
 Chapter 6 was rebuilt to the locked script, so the old wording (old AfterBoss lines, the old Stage 7, Hollow, school yard and call lines) can never play. Full keys in `tools/clip-audit/purge-ch6s4.json` (`speaker|text`), about 2.2 MB, in `data/voice/dialog-ch4.js`, `ch5`, `ch7`, `ch22`, `ch25`, `ch26`, `ch28`. Audio is in git history (the parent of the `ch6s4` commit).
+
+## 2026-11-20 (`reports-2026-11-20`): 1 dialogue clip
+
+Tom report r-20261120-091310-jqps reworded one line in ch1Theft. Purged: `tom|Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.` (dialog-ch1.js).

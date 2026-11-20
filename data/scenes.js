@@ -97,10 +97,10 @@ const CH1_TIN_LINE='Take the pan home to Rivituso Row.';
 const CH1_DISMOUNT=land=>{ const up=()=>{ const r=sceneActor('rose'); return !!(r&&r.seat); }; let at=null;
   return [
     {if:up,then:[
-      {call:()=>{ at=[player.x,player.y]; }}, {pose:'tom',f:'tr_kneel'}, {wait:.22}, {pose:'tom',f:'tr_hopoff'}, {call:()=>snd.whee(true)}, {wait:.18},
+      {call:()=>{ at=[player.x,player.y]; }}, {pose:'tom',f:'tr_kneel'}, {wait:.22}, {pose:'tom',f:'tr_hopoff'}, {call:()=>snd.whee(true)}, {wait:.18}, {pose:'tom'},   // fix-reports (r-20261120-091238-jecm: Rose shown twice): the painted hop-off frame holds Rose in the air, so Tom's frame is dropped the moment her own actor takes over
       {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; r.depthBias=0; }}, {flag:'ride',value:false},
       {hop:'rose',from:()=>at,to:land,time:.3,arc:10,lift:[SHOULDER,0]},
-      {call:()=>{ const r=sceneActor('rose'); r.x=land[0]; r.y=land[1]; r.scr=null; r.lift=0; }}, {pose:'tom'}
+      {call:()=>{ const r=sceneActor('rose'); r.x=land[0]; r.y=land[1]; r.scr=null; r.lift=0; }}
     ]},
     {flag:'ride',value:false}
   ];
@@ -192,7 +192,7 @@ SCENES.ch1Theft=[
   ...CH1_DISMOUNT([8,10]),   // through the door, Rose hops down (cutpolish3: she was taken down in the Square before)
   {face:'rose',dir:'left'},
   {talk:'Deedee',lines:["My favorite son! I missed that face. Now sit, you're having a muffin."]},
-  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."]},
+  {talk:'Tom',lines:["Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."]},
   {talk:'Deedee',lines:["I made twelve and they're all still there. I've been standing between that pan and your father since six this morning."]},
   {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},

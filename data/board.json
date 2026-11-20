@@ -13161,7 +13161,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "next": "Done: the three kitchen-scene reports (Rose shown twice, Hi Mom line, feelings frames) are fixed in build reports-2026-11-20. Tom plays the scene to check.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -13212,12 +13212,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb in build reports-2026-11-20.",
+     "at": "2026-11-20T18:30:00.000Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-20T18:02:04+00:00"
+   "started_at": "2026-11-20T18:02:04+00:00",
+   "after": "t-reports4play"
   },
   {
    "id": "c-idea-implementlisteni",
@@ -14784,6 +14790,25 @@
    "after": "t-battlelabpagetry",
    "auto": true,
    "started_at": "2026-11-20T18:12:44+00:00"
+  },
+  {
+   "id": "t-reports4play",
+   "title": "Play the chapter 1 kitchen scene",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's kitchen (after the Square). Look at: (1) when Rose hops off Tom's shoulders she appears once, never twice; (2) Tom says \"Hi, Mom! Is that the cinnamon topping...\" with no \"I missed yours too\"; (3) Tom, Grace and Rose change faces while Deedee and Boppy talk. Tap All good, or Something is wrong with a note.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-reports-4."
+    }
+   ]
   }
  ],
  "sessions": [
