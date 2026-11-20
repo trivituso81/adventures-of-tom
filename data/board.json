@@ -7601,19 +7601,23 @@
    "title": "Scene staging follow-ups (facing, cut-front, close-up, boss size)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Ready to start. Looks at frames of scenes that were never checked after facing1, cutfront1, close1, cutstage1 and bossbig1 and fixes any person who looks wrong.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Moved off claude/next.md onto the board by c-nextclean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
