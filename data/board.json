@@ -301,7 +301,7 @@
    "created": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": "unknown"
+    "opening": "\"Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md\""
    },
    "history": [
     {
@@ -315,6 +315,10 @@
     {
      "d": "2026-11-19",
      "t": "clipgate2 finished: the gate is usable (34 of 44 rejects flagged, 1 of 23 approved flagged); no longer waiting."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by Tom: \"Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix.\""
     }
    ],
    "prompt": {
