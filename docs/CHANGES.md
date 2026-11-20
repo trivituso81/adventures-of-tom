@@ -1,3 +1,7 @@
+## fix-effectslook (2026-11-20): The Effects page preview shows the full-body person on a map ground, not the dialogue face
+
+Tom (t-effectslook): "the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld". `effects.html` now draws the painted full-body frame the game uses (`STORY_POSES_SRC` sets `<id>emo` and `<id>talk`, cut from the atlas) on a grass and path ground; picking a feeling or talking pose changes the whole body. Squash, hop, pip and wince play on that body. Overworld effects are unchanged and nothing breathes. The page is untagged. Not done: the preview is not a live map with a walking figure, and the pose mirroring to face the listener is not shown.
+
 ## fix-battlelabpagetry (2026-11-20): The Battle Lab page 404 was the site not yet updated; no code change
 
 Tom (11-20, t-battlelabpagetry): "still getting 404".

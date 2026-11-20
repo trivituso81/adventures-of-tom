@@ -13236,7 +13236,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). You should see a face with Squash, Hop, Pip and Wince buttons, then 15 effect cards. Tap Hop: the face jumps. Tap a face in the gallery at the bottom: it appears in the preview. Say which effects you want changed or removed.",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -13249,6 +13249,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld Sent to Claude as card c-fix-effectslook; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:54:43.813Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-effectslook shipped: the preview draws the full-body painted pose on a map ground instead of the face."
     }
    ],
    "waiting_on": "claude"
@@ -14258,6 +14262,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed in fix-effectslook. No pencil reports about the Effects page were open."
     }
    ],
    "prompt": {

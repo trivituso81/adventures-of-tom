@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Effects</title>
 <!-- effects.html (effectslab1, Tom 2026-11-20): every effect people get in the overworld in answer to conversation and feelings, what triggers each, and a live preview.
-     Squash, hop and pip use the game's own curves (engine/life-math.js). The figure is the person's dialogue face, because the full-body paintings load only inside the game. Untagged page. -->
+     Squash, hop and pip use the game's own curves (engine/life-math.js). fix-effectslook (Tom 2026-11-20): the preview draws the person's full-body painted pose (data/story-poses.js atlases) standing on a map ground, not the dialogue face. Untagged page. -->
 <style>
 :root{--bg:#14161c;--card:#1d2029;--ink:#eef0f5;--mute:#9aa1b2;--acc:#ffd34d;--line:#2d3140}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif;padding:0 16px 40px}
@@ -23,12 +23,13 @@ button.on{outline:2px solid var(--acc)}.bar{margin:8px 0}
 <canvas id="stage" width="340" height="300"></canvas>
 <div class="bar"><select id="who"></select> <select id="mood"></select></div>
 <div class="bar" id="btns"></div>
-<div class="mute" id="note">Pick a person, a feeling and an effect. The figure is the dialogue face; in the game the full body does this.</div>
+<div class="mute" id="note">Pick a person, a feeling and an effect. The figure is the full-body painting the game draws on the map; the feeling or talking pose you pick changes the whole body, not only the face.</div>
 </div>
 <h2>Every effect</h2><div id="list"></div>
 <h2>Feelings and talking poses</h2>
-<div class="card"><div class="mute">Tap a face to show it in the preview. Feelings (8) swap the face and the full-body pose; talking poses (5: tell, point, ask, answer, think) do the same for lines with no strong feeling.</div><div class="gal" id="gal"></div></div>
+<div class="card"><div class="mute">Tap a face to show that person in that pose in the preview. Feelings (8) swap the face and the full-body pose; talking poses (5: tell, point, ask, answer, think) do the same for lines with no strong feeling.</div><div class="gal" id="gal"></div></div>
 <script src="engine/life-math.js?v=effectslab1"></script>
+<script src="data/story-poses.js"></script>
 <script src="data/emotion-moods.js"></script><script src="data/npc-emotion-moods.js"></script>
 <script src="data/emotion-reactions.js"></script><script src="data/talk-types.js"></script><script src="data/line-poses.js"></script>
 <script>
@@ -57,9 +58,13 @@ var EFFECTS=[
 ];
 var cur={kind:'squash',t0:0,who:'tom',mood:'happy'},img=new Image(),cv=document.getElementById('stage'),cx=cv.getContext('2d');
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
-function setFace(src){img.onload=null;img.src=src;}
-function faceSrc(){var m=document.getElementById('mood').value;return TALKS.indexOf(m)>=0?'portraits/talk/pose/'+cur.who+'-'+m+'.webp':'portraits/emo/'+cur.who+'-'+m+'.webp';}
-function reload(){cur.who=document.getElementById('who').value;setFace(faceSrc());}
+// The full-body frame the game draws for this person and pose: STORY_POSES_SRC set <id>emo (em_<mood>) or <id>talk (tk_<type>), cut from its atlas.
+var cut=null;
+function reload(){cur.who=document.getElementById('who').value;var m=document.getElementById('mood').value,talk=TALKS.indexOf(m)>=0;
+ var S=typeof STORY_POSES_SRC!=='undefined'&&STORY_POSES_SRC[cur.who+(talk?'talk':'emo')],f=(talk?'tk_':'em_')+m;
+ cut=null;if(!S||!S.atlas.rects[f]){document.getElementById('note').textContent='No full-body painting of '+cur.who+' for '+m+' yet.';return;}
+ document.getElementById('note').textContent='Pick a person, a feeling and an effect. This is the full-body painting the game draws on the map.';
+ var r=S.atlas.rects[f],rows=S.frames[f].length;var im=new Image();im.onload=function(){if(im!==img)return;cut={r:r,rows:rows};};img=im;im.src=S.atlas.src;}
 function play(k){cur.kind=k;cur.t0=performance.now()/1000;[].forEach.call(document.querySelectorAll('#btns button'),function(b){b.classList.toggle('on',b.dataset.k===k);});}
 function init(){
  var w=document.getElementById('who'),m=document.getElementById('mood');
@@ -87,10 +92,13 @@ function draw(){
  else if(k==='wince'){var w=e%(LIFE_WINCE_SEC+.6);if(w<LIFE_WINCE_SEC){s=.95;pip='sweat';pt=w;}}
  else {var p=e%(LIFE_PIP_SEC+.5);if(p<LIFE_PIP_SEC){pip=k;pt=p;if(k==='!')lift=lifeHopLift(p);}}
  cx.clearRect(0,0,340,300);
- cx.fillStyle='#3a4050';cx.fillRect(0,260,340,40);
- if(!img.complete||!img.naturalWidth)return;
- var H=190,W=H*img.naturalWidth/img.naturalHeight,base=262-lift*2;
- cx.save();cx.translate(170,base);cx.scale(s,s);cx.drawImage(img,-W/2,-H,W,H);cx.restore();
+ cx.fillStyle='#4f7a46';cx.fillRect(0,0,340,300);
+ for(var gx=0;gx<340;gx+=40)for(var gy=0;gy<300;gy+=40){cx.fillStyle=((gx+gy)/40)%2?'#548049':'#4a7541';cx.fillRect(gx,gy,40,40);}
+ cx.fillStyle='#b99d6a';cx.fillRect(0,236,340,40);
+ if(!cut||!img.complete||!img.naturalWidth)return;
+ var H=cut.rows*5,W=H*cut.r[2]/cut.r[3],base=262-lift*2;
+ cx.fillStyle='rgba(0,0,0,.25)';cx.beginPath();cx.ellipse(170,264,W*.3,6,0,0,7);cx.fill();
+ cx.save();cx.translate(170,base);cx.scale(s,s);cx.drawImage(img,cut.r[0],cut.r[1],cut.r[2],cut.r[3],-W/2,-H,W,H);cx.restore();
  if(pip){var top=base-H*s,y=top-8-Math.min(10,pt*14),x=170+W*.35;
   if(pip==='sweat'){cx.fillStyle='#7fc4e8';cx.beginPath();cx.ellipse(x,y+4,4,6,0,0,7);cx.fill();}
   else{cx.font='bold 34px system-ui';cx.textAlign='center';cx.fillStyle=pip==='!'?'#c43c2a':'#9fb4e0';cx.fillText(pip,x,y);}}
