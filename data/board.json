@@ -7653,7 +7653,7 @@
    "title": "Board redesign 3: four views, search and the wide layout",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "boardux3",
    "next": "Waits on Board redesign 2 (c-boardux2). Then the board becomes four views with the same names at every screen size (For you, Claude, Chats, Shipped), with a tab bar on the phone, two columns clear of the fold on the open Duo, search, and Shipped grouped by day. After it ships you try the whole redesign once (card t-boarduxtry).",
    "blocks": [
@@ -7689,6 +7689,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardux3: The board is four tabs (For you, Claude, Chats, Shipped) with search, the same at every screen size"
     }
    ],
    "prompt": {
@@ -7700,13 +7704,13 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux3 in data/board.json with its history. Your first push is the commit board: start c-boardux3. Build phase 3 (boardux3) as plan sections 3.1, 3.3 (search and themes) and 5 say, with checks A1 to A6, A12 and A13, and push it as boardux3. Then rewrite card t-boarduxtry's next step to match what you built. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). You have my full permission to access the repo."
    },
-   "after": "t-boarduxtry"
+   "after": "t-boarduxtry",
+   "done": "2026-11-20"
   },
   {
    "id": "t-boarduxtry",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -7735,6 +7739,10 @@
     {
      "d": "2026-11-20",
      "t": "boardux3: the redesign is built. The next step now describes the four tabs, search, Theme button and the two columns."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Board redesign 3: four views, search and the wide layout is done."
     }
    ],
    "first": "Wait for Board redesign 3 to ship (build boardux3)."
@@ -9351,6 +9359,20 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "first": "2026-11-20T09:12:57Z",
+   "last": "2026-11-20T09:34:02Z",
+   "tags": [
+    "boardux3",
+    "itembanner1"
+   ],
+   "cards": [
+    "c-boardux3",
+    "c-itembanner1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
    "title": "An ITEM GAINED banner for items from talks and wins",
    "first": "2026-11-20T09:11:42Z",
@@ -9360,16 +9382,6 @@
    ],
    "cards": [
     "c-itembanner1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
-   "title": "Board redesign 3: four views, search and the wide layout",
-   "first": "2026-11-20T09:12:57Z",
-   "last": "2026-11-20T09:12:57Z",
-   "tags": [],
-   "cards": [
-    "c-boardux3"
    ]
   },
   {
@@ -10456,8 +10468,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "d51857163ca0e203691113be5f375174a827a51a",
- "synced_at": "2026-11-20T09:32:05+00:00",
+ "synced": "fa5727e11628f7a0b4dda3c17bb5c6b2bbb11530",
+ "synced_at": "2026-11-20T09:34:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
