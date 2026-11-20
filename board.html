@@ -64,6 +64,7 @@ code.path{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);bor
 .card .state a{font-weight:700}
 .card .state.quiet{color:var(--prob-text);font-weight:600}
 .bld{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bld a{color:inherit;text-decoration:none;display:inline-block;padding:10px 0}.bld a:active{opacity:.7}
 .bld code{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);border:1px solid var(--btn);border-radius:6px;padding:0 5px;color:var(--text)}
 .sh-bar .bld{margin:0 0 8px}
 .acts{display:flex;align-items:center;gap:6px 10px;margin-top:10px;flex-wrap:wrap}
@@ -424,7 +425,7 @@ function buildOf(c){
   if(mk.length)return {tag:mk[mk.length-1].tag,shipped:false};
   return null;
 }
-const buildHtml=c=>{const b=buildOf(c);return b?'<div class="bld">Build <code>'+esc(b.tag)+'</code>'+(b.shipped?'':' (not shipped yet)')+'</div>':'';};
+const buildHtml=c=>{const b=buildOf(c);return b?'<div class="bld"><a href="builds.html?build='+encodeURIComponent(b.tag)+'">Build <code>'+esc(b.tag)+'</code></a>'+(b.shipped?'':' (not shipped yet)')+'</div>':'';};
 const kickHtml=c=>'<div class="kick"><i style="background:'+(THEME_COL[c.theme]||'#ccc')+'"></i><span class="th">'+esc(c.theme)+'</span>'+(c.lane==='tom'&&c.ask&&c.col!=='done'?'<span class="ak">'+esc(askName(c.ask))+'</span>':'')+'</div>';
 const doText=c=>c.lane==='tom'?c.next:((c.prompt&&c.prompt.what&&c.col!=='done')?c.prompt.what:c.next);
 const days=n=>n+' day'+(n===1?'':'s');

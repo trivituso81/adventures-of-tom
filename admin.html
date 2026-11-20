@@ -33,7 +33,7 @@ h2{font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-
 <script>
 // admin.html (adminhub1): every admin tool except the demo, grouped by what it does. Loads no game code.
 var GROUPS=[
- ['What is next',[['Board','Who has the next move on every open item.','board.html','board']]],
+ ['What is next',[['Board','Who has the next move on every open item.','board.html','board'],['Builds','What was built, what is publishing and what waits on your test. Search every build.','builds.html','builds']]],
  ['Libraries',[['Art Library','Make and approve the game\'s pictures.','art.html'],['Voice Library','Hear and re-record any line in the game.','voices.html'],['Music Library','Hear and re-make any track in the game.','music.html']]],
  ['Story',[['Script Editor','Reword, reorder and play every scene.','script.html']]],
  ['Characters',[['Pose Editor','Size every pose: height, head, chin.','poses.html'],['Head Sizes','Make any head bigger or smaller and see it on the body.','heads.html'],['Portrait Crops','Choose how each face is cropped.','portraits.html'],['Effects','Every effect on people in the overworld, what sets it off, and a preview.','effects.html']]],
@@ -56,20 +56,30 @@ function render(){
     a.id='b-report';a.type='button';
     a.onclick=function(){try{localStorage.setItem(BRP_ON,reportOn()?'0':'1');}catch(e){}render();};
    } else {
-    a=el('a','btn','<b>'+b[0]+'</b><span>'+b[1]+'</span>'+(b[3]==='board'?'<span class="live" id="wait">Counting what waits on you...</span>':''));
+    a=el('a','btn','<b>'+b[0]+'</b><span>'+b[1]+'</span>'+(b[3]==='board'?'<span class="live" id="wait">Counting what waits on you...</span>':'')+(b[3]==='builds'?'<span class="live" id="bnew">Counting builds...</span>':''));
     a.href=b[2];a.id='b-'+b[0].toLowerCase().replace(/ /g,'-');
    }
    grid.appendChild(a);
   });
   m.appendChild(grid);
  });
- waiting();
+ waiting();newer();
 }
 function waiting(){
  fetch('data/board.json?t='+Date.now()).then(function(r){return r.json();}).then(function(d){
   var n=d.cards.filter(function(c){return c.lane==='tom'&&c.col!=='wait'&&c.col!=='done';}).length;
   var e=document.getElementById('wait');if(e)e.textContent=n===0?'Nothing waits on you.':n+(n===1?' card waits':' cards wait')+' on you.';
  }).catch(function(){var e=document.getElementById('wait');if(e)e.textContent='';});
+}
+function newer(){
+ // Builds on the site that are newer than the one this phone last ran (the game saves its build name when it starts).
+ var set=function(t){var e=document.getElementById('bnew');if(e)e.textContent=t;};
+ var mine=ls('aot-build');if(!mine){set('Open the game once on this phone.');return;}
+ fetch('data/build-history.js?t='+Date.now()).then(function(r){return r.text();}).then(function(t){
+  var tags=[];t.split('\n').forEach(function(l){var m=l.match(/^\{\s*"tag"\s*:\s*"([^"]+)"/);if(m)tags.push(m[1]);});
+  var i=tags.indexOf(mine);
+  set(i<0?'This phone\'s build is not in the list.':i===0?'This phone has the newest build.':i+(i===1?' build is':' builds are')+' newer than this phone.');
+ }).catch(function(){set('');});
 }
 render();
 </script>

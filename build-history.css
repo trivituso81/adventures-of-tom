@@ -1,0 +1,85 @@
+/* Build history screen (engine/build-history.js): the game (index.html) and the page builds.html both load this file. */
+#buildlog{position:absolute;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));background:#05070ccc;touch-action:auto}
+#buildlog[hidden]{display:none}
+.bl-panel{position:relative;display:flex;flex-direction:column;width:min(100%,560px);height:100%;max-height:100%;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18;color:#f2e6cc;font-size:13px;overflow:hidden}
+.bl-panel button{font:inherit;touch-action:manipulation}
+.bl-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
+.bl-close{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.bl-status{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid #2c3342;color:#cfd5e2;line-height:1.35}
+.bl-st1{font-size:14px}.bl-st1 b{color:#f3dfa8;font-family:ui-monospace,Menlo,monospace;font-weight:600;word-break:break-all}.bl-st2{margin-top:1px;font-size:12px;color:#aeb6c6}
+.bl-reload{flex:none;min-width:84px;height:44px;padding:0 14px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:13px;letter-spacing:.5px}
+.bl-st3{margin-top:1px;font-size:12px;color:#ff9b8f}.bl-st3.dim{color:#8790a3}
+.bl-views{display:flex;gap:8px;padding:8px 10px;border-bottom:1px solid #2c3342}
+.bl-views button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 8px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font-size:13px}
+.bl-views button[aria-pressed=true]{border-color:#b8914a;background:#3a2f14;color:#f3dfa8}
+.bl-n{padding:1px 7px;border-radius:9px;background:#05070c;color:#f3dfa8;font-size:11px}
+.bl-find{display:grid;gap:8px;padding:8px 10px;border-bottom:1px solid #2c3342;background:#10141d}.bl-find[hidden]{display:none}
+.bl-frow{display:flex;gap:8px}
+.bl-fchips{display:flex;flex-wrap:wrap;gap:6px}.bl-fchips:empty{display:none}
+.bl-fc{min-height:44px;padding:0 12px;border:1px solid #b8914a;border-radius:22px;background:#3a2f14;color:#f3dfa8;font-size:12px}.bl-fc.clear{border-color:#4b5160;background:#232834;color:#f2e6cc}
+.bl-q{flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid #4b5160;border-radius:5px;background:#1b212e;color:#f2e6cc;font:inherit;font-size:16px;-webkit-appearance:none;appearance:none}
+.bl-q::placeholder{color:#8790a3}
+.bl-fbtn{flex:none;height:44px;padding:0 14px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font-size:13px}
+.bl-list{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 8px}
+.bl-dayhead{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:44px;padding:6px 14px;border:0;border-top:1px solid #2c3342;border-bottom:1px solid #2c3342;background:#10141d;color:#f3dfa8;font-size:12px;letter-spacing:.5px;text-align:left}
+.bl-dc{flex:none;color:#aeb6c6;font-size:11px;letter-spacing:0;text-align:right}
+.bl-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 0;min-height:56px;color:inherit;text-decoration:none;padding:9px 14px;border-bottom:1px solid #232a38;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bl-row.sub{padding-left:28px;background:#10141d}
+.bl-row.mine{background:#3a2f1466;box-shadow:inset 3px 0 0 #b8914a}
+.bl-what{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#f2e6cc;font-size:14px;line-height:1.3}
+.bl-chips{display:flex;flex-direction:column;align-items:flex-end;gap:4px;margin-left:8px}
+.bl-chip{padding:2px 8px;border:1px solid;border-radius:10px;font:10px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.5px;white-space:nowrap}
+.bl-chip.pub{border-color:#9d8be0;background:#2a2347;color:#cfc4ff}.bl-chip.live{border-color:#4fae7a;background:#143324;color:#9be3bb}.bl-chip.test{border-color:#d0675a;background:#3a1a18;color:#ffb1a6}.bl-chip.build{border-color:#c79a3a;background:#3a2f14;color:#f3dfa8}.bl-chip.queue{border-color:#4b5160;background:#232834;color:#cfd5e2}
+.bl-meta{grid-column:1/-1;color:#aeb6c6;font:11px/1.35 ui-monospace,Menlo,monospace;word-break:break-all}
+.bl-meta mark,.bl-what mark{background:#b8914a;color:#141924;border-radius:2px}
+.bl-tries{grid-column:1/-1;justify-self:start;min-height:44px;margin:-3px 0 -9px -6px;padding:0 6px;border:0;background:none;color:#d9b45f;font-size:12px;text-align:left}
+.bl-marker{display:flex;align-items:center;gap:10px;min-height:28px;padding:0 14px 0 11px;border-left:3px solid #b8914a;background:#1b212e;color:#f3dfa8;font:11px ui-monospace,Menlo,monospace;letter-spacing:.5px}
+.bl-marker:after{content:"";flex:1;border-top:1px dashed #b8914a}
+.bl-count{padding:8px 14px;color:#aeb6c6;font-size:12px}
+.bl-empty{padding:26px 14px;text-align:center;color:#aeb6c6}.bl-empty.small{padding:14px}
+.bl-more{display:block;width:100%;min-height:44px;border:0;border-bottom:1px solid #232a38;background:none;color:#d9b45f;font-size:12px;text-align:left;padding:0 14px}
+.bl-fk{margin:10px 0 6px}.bl-opts{display:flex;flex-wrap:wrap;gap:8px}
+.bl-opt{min-height:44px;padding:0 12px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font-size:12px}.bl-opt[aria-pressed=true]{border-color:#b8914a;background:#3a2f14;color:#f3dfa8}
+.bl-fbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}.bl-fbar .bl-clear{margin:0}
+.bl-clear{display:block;min-height:44px;margin:10px auto 0;padding:0 16px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8}
+.bl-sheetwrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;background:#05070caa;z-index:5}
+.bl-sheetwrap[hidden]{display:none}
+.bl-sheet{display:flex;flex-direction:column;max-height:88%;border-top:2px solid #b8914a;background:linear-gradient(#1b212e,#141924)}
+.bl-shead{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 14px;border-bottom:1px solid #6d5629;font-size:13px;letter-spacing:1px;color:#f3dfa8}
+.bl-sclose{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.bl-sbody{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px 14px}
+.bl-ssent{margin-bottom:8px;color:#f2e6cc;font-size:15px;line-height:1.4}
+.bl-sl{display:grid;grid-template-columns:78px 1fr;gap:8px;padding:7px 0;border-top:1px solid #232a38;align-items:center}
+.bl-k{color:#8790a3;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.bl-v{min-width:0;color:#cfd5e2;line-height:1.4}.bl-v small{display:block;color:#8790a3;font-size:10px}
+.bl-mono{font-family:ui-monospace,Menlo,monospace;color:#f3dfa8;word-break:break-all}
+.bl-copy,.bl-open{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;padding:0 12px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:12px;text-decoration:none}
+.bl-open{display:flex;width:max-content}
+.bl-other{display:grid;gap:2px;width:100%;min-height:44px;margin:2px 0;padding:6px 10px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;text-align:left;font-size:12px}
+.bl-other small{margin:0;color:#8790a3;font:10px ui-monospace,Menlo,monospace}
+html.landscape .bl-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr);width:min(100%,820px)}
+html.landscape .bl-head{grid-column:1/-1}
+html.landscape .bl-status{grid-column:1;grid-row:2;border-bottom:1px solid #2c3342}
+html.landscape .bl-find{grid-column:2;grid-row:2}
+html.landscape .bl-views{grid-column:1/-1;grid-row:3;padding:4px 10px}
+html.landscape .bl-list{grid-column:1/-1;grid-row:4}
+/* Archive: months are the gold headings, days under them are indented and quieter */
+.bl-mh{background:#1b212e}
+.bl-dh2{padding-left:26px}
+.bl-count.dim{color:#8790a3}.bl-link{min-height:44px;margin-left:8px;padding:0 10px;border:0;background:none;color:#d9b45f;font-size:12px}
+/* builds.html: the same screen as its own page, in the Admin look (no game behind it, no close button) */
+#buildlog.page{position:static;display:block;padding:0;background:none;height:calc(100vh - 66px);height:calc(100dvh - 66px)}
+#buildlog.page .bl-panel{width:min(100%,640px);margin:0 auto;height:100%}
+#buildlog.page .bl-close{display:none}
+#buildlog.page .bl-head{padding:12px 14px}
+/* builds.html in a short wide window (a phone on its side): the same two-column layout the game's landscape uses */
+@media (orientation:landscape) and (max-height:520px){
+#buildlog.page{height:calc(100vh - 56px);height:calc(100dvh - 56px)}
+#buildlog.page .bl-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr);width:min(100%,820px)}
+#buildlog.page .bl-head{grid-column:1/-1;padding:4px 14px}
+#buildlog.page .bl-status{grid-column:1;grid-row:2}
+#buildlog.page .bl-find{grid-column:2;grid-row:2}
+#buildlog.page .bl-views{grid-column:1/-1;grid-row:3;padding:4px 10px}
+#buildlog.page .bl-list{grid-column:1/-1;grid-row:4}
+body > header{height:44px;padding:0 16px}
+}

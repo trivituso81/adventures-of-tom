@@ -109,10 +109,11 @@ startSplash();
   const d=document.createElement('button');
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build idea-implementlisteni';
+  d.textContent='build builds3';
   const build=d.textContent,stamp=()=>{ const w=typeof buildWhenLabel==='function'?buildWhenLabel(build.slice(6)).slice(2):'', duo=typeof duoMode!=='undefined'&&duoMode.device?window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):'';
     d.textContent=build; for(const t of [w,duo]) if(t){ const s=document.createElement('small'); s.textContent=t; d.appendChild(s); } };
   window.BUILD_TAG=build.slice(6);
+  try{ localStorage.setItem('aot-build',build.slice(6)); }catch(e){}   // builds.html (its own page) reads this phone's build from here
   stamp(); window.addEventListener('resize',()=>setTimeout(stamp,60));
   sp.appendChild(d);
   if(typeof buildHistoryWire==='function') buildHistoryWire(d);

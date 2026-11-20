@@ -1,3 +1,13 @@
+## builds3 (2026-11-20): old builds move to an archive by month, search covers every build, and the build history has its own page with a button in Admin
+
+Phase 3 of 3 of `claude/builds-plan.md` (section 6): the section 4 split, section 3.7 in full and section 3.8, checks B11 to B13. The redesign is done; Tom tries it once on card t-buildstry.
+
+- Split (`tools/build_history.py`): `data/build-history.js` keeps the last 7 days and always at least the newest 50 builds. Older builds are in `data/build-archive/<YYYY-MM>.json` with `data/build-archive/index.json` (months and counts). `load` reads both, so `add`, `sync` and `check` work as before; `save` writes both (a file is rewritten only when its text changed).
+- Archive view (third button next to Recent and In the works): every build older than 7 days, month headings (the newest month open), day headings under them (closed), the same rows, tries, sheet and filters. The archive files are read only when Archive is opened or a word is typed in Search (`buildArchiveLoad`); "Could not read the archive." with Try again when they cannot be read.
+- Search covers Recent and Archive together: build name, sentence, theme, card title (when the board is loaded) and the day written "nov 14", "11-14" or "2026-11-14" (matched against the build's own day, not as words).
+- `builds.html`: the same screen as its own page in the Admin look (`engine/build-history.js` draws both; the screen styles moved out of `index.html` into `build-history.css`). It has no close button. This phone's build is read from localStorage `aot-build`, which the game saves at boot (`engine/main.js`); with nothing saved it says "Open the game once on this phone." and shows no marker. `builds.html?build=<name>` opens that build's sheet (an archived build too).
+- `admin.html`: a Builds button in "What is next", under Board, with the line "N builds are newer than this phone." The "Build <name>" label on a play card in `board.html` now opens `builds.html?build=<name>`.
+- Tests: `python3 tools/buildlog_test.py` adds B11 (search by name, sentence, theme, card title, day; across Recent and Archive), B12 (archive not requested until needed; `data/build-history.js` holds nothing older than 7 days beyond the newest 50, checked on the real file), B13 (builds.html saved and unsaved, `?build=`, Admin line), the Archive view and its unreadable case, portrait and landscape.
 ## idea-implementlisteni (2026-11-20): In chapter 1, people who are not talking now listen or think, and the listening pictures are in the Art Library
 
 Tom (11-20, new card c-idea-implementlisteni): "implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes."

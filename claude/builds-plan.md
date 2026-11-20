@@ -238,3 +238,33 @@ What differs from the plan (phase 3 should read these):
 
 Not verified: no one has looked at the screen on a phone, and the GitHub reads were only tried against stubs (this environment has no GitHub token for the page); the first real PUBLISHING chip will show on the next push that has not reached the site yet.
 
+
+### Phase 3, builds3 (2026-11-20, card c-builds3)
+
+Built as the section 6 row says: the section 4 split, section 3.7 in full (Archive, search over everything), section 3.8 (`builds.html`, Admin button, board link) and the docs (repo CLAUDE.md "Build label and build history" and the "Where things live" row). Checks B11 to B13 are in `tools/buildlog_test.py` and pass in portrait and landscape; B14 and all earlier checks still pass. I looked at the Archive (closed and open), search across Recent and Archive, the page saved and unsaved, the archived build's sheet on the page, in portrait and landscape.
+
+What exists now:
+
+| Part | Where |
+|---|---|
+| Split: `data/build-history.js` has the last 7 days and at least the newest 50 (304 of 490 builds today, 58 KB, down from 81 KB); the rest is in `data/build-archive/2026-10.json`, `2026-11.json` and `index.json` | `save` and `load` in `tools/build_history.py` |
+| Archive view, search over everything, `buildArchiveLoad` | `engine/build-history.js` |
+| The page | `builds.html`, styles in `build-history.css` (moved out of the `index.html` style block, which keeps only the welcome chip and menu box) |
+| Admin button with a live line, board label link | `admin.html`, `board.html` |
+
+What differs from the plan (decisions I made):
+
+| # | Plan said | What I did | Why |
+|---|---|---|---|
+| 25 | Archive loads "when Archive is opened or a search is typed" | Same; it reads the index and every month file at once (about 12 small files after a year). Search results fill in when they arrive ("Still reading the older builds...") | Search has to span everything, and a month at a time would miss builds |
+| 26 | Search matches the day written as "nov 14" or "11-14" | Also "2026-11-14". A day in the query is matched against the build's own day (this phone's time zone) and removed from the words | Typing "nov 14" must not match every build with a 14 in it |
+| 27 | Search covers the card title | Only once the board has been read (the sheet and In the works read it); before that the title is not searched | No extra read just for search |
+| 28 | Archive: "all closed except the newest month" | The newest month is open and its days are closed (a tap opens a day); other months closed | Reading of the plan sentence |
+| 29 | Archive holds "every build older than 7 days" | Same, from the live list too (rows older than 7 days among the newest 50 are in both); this phone's build older than 7 days also shows in Recent | One rule for what is Recent and what is Archive |
+| 30 | `builds.html` knows this phone's build from `aot-build` | Same; the game writes it at boot in `engine/main.js` | |
+| 31 | The page "in the Admin look" | Admin colors and header with an "Admin" back link, the same gold panel inside; in a short wide window it uses the game's landscape layout | The panel needs the room in landscape |
+| 32 | Admin live line "N newer than this phone" | "N builds are newer than this phone." / "This phone has the newest build." / "Open the game once on this phone." Counts the site's live list only | Full sentences |
+| 33 | Board "Build <name>" label opens `builds.html?build=<name>` | The whole label (name included) is the link, 44 px tall | |
+| 34 | `board_sync_test` failure noted in phase 1 | Not looked at this phase | Out of scope |
+
+Not verified: no one has looked at the screen on a phone (Tom tries it once, card t-buildstry). The archive reads and `builds.html` were tested against stubs and the repo files; the real site serves the archive only after this push publishes.

@@ -9,9 +9,13 @@
 // it can be read (the saved token is used when there is one), else the site copy. builds2 also reads the pushed list (the same file on main,
 // through the GitHub contents API) so a build that is pushed but not on the site yet shows PUBLISHING, and the last publish run, so a
 // failed publish is named. In the works lists what is being built, queued and waiting on Tom's test, read from the board.
+// builds3: builds older than 7 days are not in BUILD_HISTORY. They are in data/build-archive/<YYYY-MM>.json (index.json lists the months);
+// the Archive view and a typed search read them (buildArchiveLoad), never before. Archive groups them by month, then by day. Search covers
+// Recent and Archive together: build name, sentence, theme, card title and the day ("nov 14", "11-14"). The same script draws the screen as its own
+// page, builds.html (BUILDLOG.page: no close button, always open; this phone's build comes from localStorage 'aot-build', saved by the game at boot).
 
 const BUILDLOG={open:false,fresh:null,el:null,q:'',days:null,tries:{},sheet:null,board:null,recentDays:7,
-  view:'recent',fsheet:false,f:{theme:[],status:[],house:false},gh:'idle',pushed:null,fail:null,boardState:'idle',checkedAt:0,gopen:{},gmore:{},memo:null};
+  view:'recent',fsheet:false,f:{theme:[],status:[],house:false},gh:'idle',pushed:null,fail:null,boardState:'idle',checkedAt:0,gopen:{},gmore:{},memo:null,page:false,arch:null,archState:'idle',amonths:{},adays:{}};
 const BUILD_REPO='trivituso81/adventures-of-tom', BUILD_THEMES=['Story and Dialogue','Tools','Voice Clips','Game Shell','Battle System','Battle Animations','Areas','Characters','Project Ops','No theme'];
 const BUILD_ASKS=['play','pictures','animations','voice','script'];   // the Tom cards that are a test or a look
 
@@ -24,7 +28,8 @@ function buildMemo() {
   for(const r of (BUILDLOG.pushed||[])) if(!liveTags.has(r.tag)&&!pub.has(r.tag)) { pub.add(r.tag); extra.push(r); }
   extra.sort((a,b)=>new Date(b.at)-new Date(a.at));
   const idx={}; live.forEach((r,i)=>{ idx[r.tag]=i; });
-  return BUILDLOG.memo={live,all:extra.concat(live),pub,idx,mineIdx:idx[buildMine()]==null?-1:idx[buildMine()]};
+  const arch=(BUILDLOG.arch||[]).filter(r=>!liveTags.has(r.tag)&&!pub.has(r.tag)).sort((a,b)=>new Date(b.at)-new Date(a.at));
+  return BUILDLOG.memo={live,all:extra.concat(live,arch),pub,idx,mineIdx:idx[buildMine()]==null?-1:idx[buildMine()]};
 }
 function buildInvalidate() { BUILDLOG.memo=null; }
 function buildRows() { return buildMemo().live; }
@@ -60,9 +65,27 @@ function buildMark(text,words) {
   const re=new RegExp('('+words.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','gi');
   return text.split(re).map((p,i)=>i%2?'<mark>'+buildEsc(p)+'</mark>':buildEsc(p)).join('');
 }
-function buildWords() { return BUILDLOG.q.toLowerCase().split(/\s+/).filter(Boolean); }
-function buildHay(r) { return ((r.tag||'')+' '+(r.what||'')+' '+(r.theme||'')).toLowerCase(); }
-function buildMine() { return typeof BUILD_TAG!=='undefined'?BUILD_TAG:''; }
+// The search words, and the days named in it ("nov 14", "11-14", "2026-11-14"), which are matched against the build's own day, not as words.
+const BUILD_MON=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+function buildQuery() {
+  let q=BUILDLOG.q.toLowerCase(); const days=[];
+  q=q.replace(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/g,(m,y,a,b)=>{ days.push(y+'-'+String(a).padStart(2,'0')+'-'+String(b).padStart(2,'0')); return ' '; });
+  q=q.replace(/\b(\d{1,2})-(\d{1,2})\b/g,(m,a,b)=>{ days.push(String(a).padStart(2,'0')+'-'+String(b).padStart(2,'0')); return ' '; });
+  q=q.replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})\b/g,(m,a,b)=>{ days.push(String(BUILD_MON.indexOf(a)+1).padStart(2,'0')+'-'+String(b).padStart(2,'0')); return ' '; });
+  return {words:q.split(/\s+/).filter(Boolean),days};
+}
+function buildWords() { return buildQuery().words; }
+function buildDayStr(r) { const k=buildDayKey(new Date(r.at)); return k.slice(5); }   // "11-14", this phone's day
+function buildHay(r) {
+  const b=BUILDLOG.board&&r.card?BUILDLOG.board.cards.find(c=>c.id===r.card):null;
+  return ((r.tag||'')+' '+(r.what||'')+' '+(r.theme||'')+' '+(b?b.title||'':'')).toLowerCase();
+}
+function buildMatch(r,qy) {
+  if(qy.days.length) { const k=buildDayKey(new Date(r.at)); if(!qy.days.some(d=>d.length>5?d===k:d===k.slice(5))) return false; }
+  if(!qy.words.length) return true;
+  const h=buildHay(r); return qy.words.every(w=>h.includes(w));
+}
+function buildMine() { return typeof BUILD_TAG!=='undefined'?BUILD_TAG:(BUILDLOG.page?buildLs('aot-build'):''); }
 
 // Tries of one card: a fix card's tries (c-fix-x, c-fix-x-2, c-fix-x-3) share one family; parts of one build share their card.
 function buildFamily(r) {
@@ -104,14 +127,14 @@ function buildIsHouse(r,mine) { return r.kind==='house'&&r.tag!==mine; }   // th
 function buildStatusHtml() {
   const rows=buildRows(), m=buildMemo(), mine=buildMine(), idx=m.mineIdx, newer=idx>0?idx:0, np=m.pub.size;
   let line;
-  if(!rows.length) line='';
+  if(!rows.length||!mine) line='';
   else if(idx<0) line='This build is not in the list yet.';
   else if(!newer) line=np?'The newest live build.':'The newest build.';
   else line=newer+(newer===1?' newer build is live.':' newer builds are live.');
   if(np) line+=' '+np+(newer?(np===1?' more is publishing.':' more are publishing.'):(np===1?' build is publishing.':' builds are publishing.'));
   const fail=BUILDLOG.fail?'<div class="bl-st3">The last publish failed at '+buildEsc(buildTime(new Date(BUILDLOG.fail)))+'.</div>':'';
   const no=BUILDLOG.gh==='fail'?'<div class="bl-st3 dim">Could not check GitHub.</div>':'';
-  return '<div class="bl-st" data-act="check"><div class="bl-st1">This phone: <b>'+buildEsc(mine||'unknown')+'</b></div>'+(line?'<div class="bl-st2">'+buildEsc(line.trim())+'</div>':'')+fail+no+'</div>'+
+  return '<div class="bl-st" data-act="check"><div class="bl-st1">'+(mine?'This phone: <b>'+buildEsc(mine)+'</b>':'Open the game once on this phone.')+'</div>'+(line?'<div class="bl-st2">'+buildEsc(line.trim())+'</div>':'')+fail+no+'</div>'+
     (newer?'<button type="button" class="bl-reload" data-act="reload">RELOAD</button>':'');
 }
 
@@ -137,11 +160,13 @@ function buildRowHtml(r,opt) {
 
 function buildListHtml() {
   if(BUILDLOG.view==='works') return buildWorksHtml();
-  const rows=buildAllRows(), mine=buildMine(), words=buildWords();
-  if(words.length) {   // search: one flat list over every build loaded, newest first (the filters apply to it too)
-    const hit=rows.filter(r=>words.every(w=>buildHay(r).includes(w))&&buildFilterPass(r));
-    if(!hit.length) return '<div class="bl-empty">No builds match.<button type="button" class="bl-clear" data-act="clear">Clear search</button></div>';
-    return '<div class="bl-count">'+hit.length+(hit.length===1?' build':' builds')+'</div>'+hit.map(r=>buildRowHtml(r,{dateTime:true,words})).join('');
+  if(BUILDLOG.view==='archive'&&!BUILDLOG.q.trim()) return buildArchiveHtml();
+  const rows=buildAllRows(), mine=buildMine(), qy=buildQuery(), words=qy.words;
+  if(words.length||qy.days.length) {   // search: one flat list over Recent and Archive, newest first (the filters apply to it too)
+    const wait=BUILDLOG.archState==='busy'?'<div class="bl-count dim">Still reading the older builds...</div>':BUILDLOG.archState==='fail'?'<div class="bl-count dim">Could not read the older builds.<button type="button" class="bl-link" data-act="archload">Try again</button></div>':'';
+    const hit=rows.filter(r=>buildMatch(r,qy)&&buildFilterPass(r));
+    if(!hit.length) return wait+'<div class="bl-empty">No builds match.<button type="button" class="bl-clear" data-act="clear">Clear search</button></div>';
+    return '<div class="bl-count">'+hit.length+(hit.length===1?' build':' builds')+'</div>'+wait+hit.map(r=>buildRowHtml(r,{dateTime:true,words})).join('');
   }
   const cut=Date.now()-BUILDLOG.recentDays*864e5, recent=rows.filter(r=>(new Date(r.at).getTime()>=cut||r.tag===mine)&&(r.tag===mine||buildFilterPass(r)));
   const days=[]; for(const r of recent){ const k=buildDayKey(new Date(r.at)); if(!days.includes(k)) days.push(k); }   // newest day first
@@ -168,6 +193,43 @@ function buildListHtml() {
   return out;
 }
 
+// ---- Archive (plan 3.7): builds older than 7 days, by month, then by day. Read only when Archive is opened or a search is typed.
+function buildArchiveLoad(force) {
+  if(!force&&(BUILDLOG.archState==='busy'||BUILDLOG.archState==='ok')) return;
+  BUILDLOG.archState='busy'; if(BUILDLOG.open) buildRenderList();
+  const get=u=>fetch(u,{cache:'no-cache'}).then(r=>{ if(!r.ok) throw new Error(u+' '+r.status); return r.json(); });
+  get('data/build-archive/index.json').then(ix=>Promise.all((ix.months||[]).map(m=>get('data/build-archive/'+m.month+'.json'))))
+    .then(parts=>{ BUILDLOG.arch=[].concat.apply([],parts); BUILDLOG.archState='ok'; })
+    .catch(()=>{ BUILDLOG.archState='fail'; }).then(buildRefresh);
+}
+function buildMonthName(m) { const p=m.split('-').map(Number); return new Date(p[0],p[1]-1,1).toLocaleDateString('en-US',{month:'long',year:'numeric'}); }
+function buildArchiveHtml() {
+  const st=BUILDLOG.archState;
+  if(st==='fail') return '<div class="bl-empty">Could not read the archive.<button type="button" class="bl-clear" data-act="archload">Try again</button></div>';
+  if(st!=='ok') return '<div class="bl-empty">Reading the archive...</div>';
+  const mine=buildMine(), cut=Date.now()-BUILDLOG.recentDays*864e5;
+  const rows=buildAllRows().filter(r=>new Date(r.at).getTime()<cut&&buildFilterPass(r));
+  if(!rows.length) return '<div class="bl-empty">'+(buildFilterCount()?'No builds match.<button type="button" class="bl-clear" data-act="fclear">Clear filters</button>':'No builds older than '+BUILDLOG.recentDays+' days.')+'</div>';
+  const months=[], by={};
+  for(const r of rows) { const k=buildDayKey(new Date(r.at)), m=k.slice(0,7); if(!by[m]) { by[m]={days:[],rows:{}}; months.push(m); } if(!by[m].rows[k]) { by[m].rows[k]=[]; by[m].days.push(k); } by[m].rows[k].push(r); }
+  let out=''; BUILDLOG.newestMonth=months[0];
+  months.forEach((m,mi)=>{
+    const g=by[m], on=BUILDLOG.amonths[m]==null?mi===0:BUILDLOG.amonths[m];
+    const vis=g.days.reduce((n,k)=>n+g.rows[k].filter(r=>BUILDLOG.f.house||!buildIsHouse(r,mine)).length,0);
+    out+='<button type="button" class="bl-dayhead bl-mh" data-act="month" data-month="'+m+'" aria-expanded="'+on+'"><span>'+buildEsc(buildMonthName(m).toUpperCase())+'</span><span class="bl-dc">'+vis+(vis===1?' build':' builds')+' '+(on?'&#9662;':'&#9656;')+'</span></button>';
+    if(!on) return;
+    for(const k of g.days) {
+      const all=g.rows[k], hidden=BUILDLOG.f.house?[]:all.filter(r=>buildIsHouse(r,mine)), shown=all.filter(r=>!hidden.includes(r)), don=!!BUILDLOG.adays[k];
+      const cnt=shown.length+(shown.length===1?' build':' builds')+(hidden.length?', '+hidden.length+' housekeeping hidden':'');
+      out+='<button type="button" class="bl-dayhead bl-dh2" data-act="aday" data-day="'+k+'" aria-expanded="'+don+'"><span>'+buildEsc(buildDayName(k).toUpperCase())+'</span><span class="bl-dc">'+buildEsc(cnt)+' '+(don?'&#9662;':'&#9656;')+'</span></button>';
+      if(!don) continue;
+      if(!shown.length) { out+='<div class="bl-empty small">Only housekeeping builds this day.</div>'; continue; }
+      for(const gr of buildGroups(shown,mine)) out+=buildRowHtml(gr.head,{older:gr.older,key:'a|'+k+'|'+buildFamily(gr.head)+'|'+gr.head.tag});
+    }
+  });
+  return out;
+}
+
 function buildRenderStatus() { const s=BUILDLOG.el&&BUILDLOG.el.querySelector('.bl-status'); if(s) s.innerHTML=buildStatusHtml(); buildRenderChrome(); }
 // The parts around the list that depend on the data: the view buttons (with the In the works count), the Filters button, the chips of applied filters.
 function buildRenderChrome() {
@@ -178,7 +240,8 @@ function buildRenderChrome() {
 function buildViewsHtml() {
   const n=buildWorksCount();
   return '<button type="button" data-act="view" data-view="recent" aria-pressed="'+(BUILDLOG.view==='recent')+'">Recent</button>'+
-    '<button type="button" data-act="view" data-view="works" aria-pressed="'+(BUILDLOG.view==='works')+'">In the works'+(n?' <span class="bl-n">'+n+'</span>':'')+'</button>';
+    '<button type="button" data-act="view" data-view="works" aria-pressed="'+(BUILDLOG.view==='works')+'">In the works'+(n?' <span class="bl-n">'+n+'</span>':'')+'</button>'+
+    '<button type="button" data-act="view" data-view="archive" aria-pressed="'+(BUILDLOG.view==='archive')+'">Archive</button>';
 }
 function buildChipsHtml() {
   const f=BUILDLOG.f, names={pub:'Publishing',live:'Live, not on this phone',phone:'On this phone',test:'Your test'}; let h='';
@@ -340,8 +403,11 @@ function buildAct(t) {
   else if(act==='sclose') { BUILDLOG.sheet=null; buildSheetRender(); }
   else if(act==='day') { BUILDLOG.days[t.dataset.day]=!BUILDLOG.days[t.dataset.day]; buildRenderList(); }
   else if(act==='tries') { BUILDLOG.tries[t.dataset.key]=!BUILDLOG.tries[t.dataset.key]; buildRenderList(); }
-  else if(act==='view') { BUILDLOG.view=t.dataset.view; buildRenderChrome(); buildRenderList(); const l=BUILDLOG.el.querySelector('.bl-list'); if(l) l.scrollTop=0; if(BUILDLOG.view==='works') buildCheck(false); }
+  else if(act==='view') { BUILDLOG.view=t.dataset.view; buildRenderChrome(); buildRenderList(); const l=BUILDLOG.el.querySelector('.bl-list'); if(l) l.scrollTop=0; if(BUILDLOG.view==='works') buildCheck(false); if(BUILDLOG.view==='archive') buildArchiveLoad(false); }
   else if(act==='check') buildCheck(true);
+  else if(act==='archload') buildArchiveLoad(true);
+  else if(act==='month') { const m=t.dataset.month, cur=BUILDLOG.amonths[m]==null?m===BUILDLOG.newestMonth:BUILDLOG.amonths[m]; BUILDLOG.amonths[m]=!cur; buildRenderList(); }
+  else if(act==='aday') { BUILDLOG.adays[t.dataset.day]=!BUILDLOG.adays[t.dataset.day]; buildRenderList(); }
   else if(act==='group') { const k=t.dataset.g, cur=BUILDLOG.gopen[k]==null?(k!=='queued'):BUILDLOG.gopen[k]; BUILDLOG.gopen[k]=!cur; buildRenderList(); }
   else if(act==='more') { BUILDLOG.gmore[t.dataset.g]=!BUILDLOG.gmore[t.dataset.g]; buildRenderList(); }
   else if(act==='filters') { BUILDLOG.fsheet=true; buildFiltersRender(); }
@@ -369,13 +435,13 @@ function buildHistoryBuild() {
     '<div class="bl-find"><div class="bl-frow"><input class="bl-q" type="search" placeholder="Search builds" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search builds"><button type="button" class="bl-fbtn" data-act="filters">Filters</button></div><div class="bl-fchips"></div></div>'+
     '<div class="bl-list"></div></div>';
   el.querySelector('.bl-q').value=BUILDLOG.q;
-  el.querySelector('.bl-q').addEventListener('input',e=>{ BUILDLOG.q=e.target.value; buildRenderList(); });
+  el.querySelector('.bl-q').addEventListener('input',e=>{ BUILDLOG.q=e.target.value; if(BUILDLOG.q.trim()) buildArchiveLoad(false); buildRenderList(); });
   buildRenderStatus(); buildRenderList();
 }
 
 function buildHistoryOpen() {
   if(BUILDLOG.open) return;
-  BUILDLOG.open=true; BUILDLOG.days=null; BUILDLOG.tries={}; BUILDLOG.sheet=null; BUILDLOG.fsheet=false; BUILDLOG.q=''; BUILDLOG.view='recent'; BUILDLOG.f={theme:[],status:[],house:false};
+  BUILDLOG.open=true; BUILDLOG.days=null; BUILDLOG.tries={}; BUILDLOG.amonths={}; BUILDLOG.adays={}; BUILDLOG.sheet=null; BUILDLOG.fsheet=false; BUILDLOG.q=''; BUILDLOG.view='recent'; BUILDLOG.f={theme:[],status:[],house:false};
   if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
   let el=BUILDLOG.el;
   if(!el) {
@@ -391,7 +457,8 @@ function buildHistoryOpen() {
       const t=e.target.closest&&e.target.closest('[data-act]'); if(t&&el.contains(t)) { e.preventDefault(); buildAct(t); }
     });
     el.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.bl-row')) { e.preventDefault(); buildAct(e.target); } });
-    (document.getElementById('stage')||document.body).appendChild(el);
+    if(BUILDLOG.page) el.classList.add('page');
+    (BUILDLOG.page&&document.getElementById('bl-host')||document.getElementById('stage')||document.body).appendChild(el);
   }
   el.hidden=false;
   buildHistoryBuild();
@@ -400,7 +467,7 @@ function buildHistoryOpen() {
 }
 
 function buildHistoryClose() {
-  if(!BUILDLOG.open) return;
+  if(!BUILDLOG.open||BUILDLOG.page) return;   // the page builds.html has nothing to close back to
   BUILDLOG.open=false; BUILDLOG.sheet=null; BUILDLOG.fsheet=false; if(BUILDLOG.el) BUILDLOG.el.hidden=true;
   if(typeof sfx!=='undefined'&&sfx.menuClose) sfx.menuClose();
 }
@@ -409,6 +476,10 @@ function buildHistoryClose() {
 // then closes the list. In the search box typing works as usual (Enter hides the keyboard).
 window.addEventListener('keydown',e=>{
   if(!BUILDLOG.open) return;
+  if(BUILDLOG.page) {   // the page has no game behind it: only Escape works (it closes a sheet, then clears the search), every other key is the browser's
+    if(e.key==='Escape') { if(BUILDLOG.fsheet) { BUILDLOG.fsheet=false; buildFiltersRender(); } else if(BUILDLOG.sheet) { BUILDLOG.sheet=null; buildSheetRender(); } else if(BUILDLOG.q) buildAct({dataset:{act:'clear'}}); }
+    return;
+  }
   e.stopImmediatePropagation();
   const inBox=e.target&&e.target.classList&&e.target.classList.contains('bl-q');
   if(e.key==='Escape') {
@@ -424,6 +495,17 @@ window.addEventListener('keydown',e=>{
   if(['Backspace','Enter','m','M'].includes(e.key)) { if(BUILDLOG.fsheet) { BUILDLOG.fsheet=false; buildFiltersRender(); } else if(BUILDLOG.sheet) { BUILDLOG.sheet=null; buildSheetRender(); } else buildHistoryClose(); }
 },true);
 window.addEventListener('keyup',e=>{ if(BUILDLOG.open) e.stopImmediatePropagation(); },true);
+
+// builds.html: the same screen as its own page (plan 3.8). ?build=<name> opens that build's sheet (read the archive first when the live list lacks it).
+if(document.getElementById('bl-host')) {
+  BUILDLOG.page=true;
+  buildHistoryOpen();
+  const want=new URLSearchParams(location.search).get('build');
+  if(want) {
+    if(buildEntry(want)) buildSheetOpen(want);
+    else { buildArchiveLoad(false); const t0=Date.now(), iv=setInterval(()=>{ if(buildEntry(want)) { clearInterval(iv); buildSheetOpen(want); } else if(BUILDLOG.archState==='fail'||Date.now()-t0>15000) clearInterval(iv); },200); }
+  }
+}
 
 // The menu's build label (markup in index.html, under Time and Coins).
 (function(){

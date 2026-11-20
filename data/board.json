@@ -15133,8 +15133,8 @@
    "fyi": true,
    "theme": "Tools",
    "title": "Try the new build history screen",
-   "first": "Build history redesign 3 has shipped and you have tapped RELOAD on the welcome screen.",
-   "next": "Tap the build label at the top left of the welcome screen. Look at: (1) Recent shows today's builds as sentences you can read, with a line marking this phone; (2) In the works lists what is being built and what waits on your test; (3) type a word in Search and find an older build; (4) tap a build and open its card. Tap All good, or Something is wrong with a note.",
+   "first": "Build history redesign 3 (build builds3) has shipped and you have tapped RELOAD on the welcome screen.",
+   "next": "Open the Admin page and tap Builds (or tap the build label at the top left of the welcome screen). Look at: (1) Recent shows today's builds as sentences you can read, with a gold line marking this phone and chips like LIVE, RELOAD; (2) the In the works button lists what is being built and what waits on your test; (3) type a word in Search (or a day like \"nov 14\") and find an older build; (4) tap the Archive button: months open to days; (5) tap a build and open its card on the board. Tap All good, or Something is wrong with a note.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -15142,6 +15142,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the build history UX audit. It opens when Build history redesign 3 (c-builds3) ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "builds3 built: Archive by month, search over every build, its own page builds.html with an Admin button. What to try is in next."
     }
    ]
   },
