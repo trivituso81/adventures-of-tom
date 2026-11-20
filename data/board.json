@@ -10749,8 +10749,7 @@
    "title": "Rebuild Grace's other slowed lines from your takes",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "tag": "gracevoice-rest",
    "next": "Waits on card t-gracevoice-distort (you tap Send my takes to Claude, then All good). Then rebuilds every Grace story clip the old filter slowed from the take you kept, by exact match only, and says which lines still have no take.",
    "blocks": [],
@@ -10762,6 +10761,18 @@
     {
      "d": "2026-11-20",
      "t": "Made by fix-gracevoice-distort."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Listen to Grace's fixed chapter 1 lines (no re-recording) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -10772,6 +10783,11 @@
     "model": "Claude Sonnet 5.5 (row B: one tool run by exact match, checked by a test)",
     "effort": "medium (run a known tool, verify, push)",
     "text": "Read CLAUDE.md, docs/CHANGES.md section fix-gracevoice-distort, and board cards c-gracevoice-rest and t-gracevoice-distort, history included. Your first push is the commit board: start c-gracevoice-rest. Fetch branch takes (git fetch origin +refs/heads/takes:refs/remotes/origin/takes) and run python3 tools/voice-library/unshrink_grace.py, then --apply: it replaces only game clips that are byte for byte the old Grace filter applied to one of Tom's takes. Never re-filter, guess or hand-edit a clip. Run python3 tools/grace_voice_test.py, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py, and decode a few rebuilt clips in the game to check their length matches the take. If every Grace line is rebuilt, empty the prefixes list in data/takes-wanted.json. List in the CHANGES entry the Grace lines the tool still flags with no take (its pitch list over-counts: a deadpan take can sit low, so name them as to check, not as broken). Build tag gracevoice-rest. You have my full permission to access the repo."
+   },
+   "started_at": "2026-11-20T17:05:34+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukDNJ7iWP5DDvKaTnnD",
+    "opening": "started by START"
    }
   },
   {
@@ -12877,8 +12893,10 @@
    "url": "https://claude.ai/code/session_01RXeukECtrSqT77v9Xp8TsC",
    "title": "Chapter 1 fights: HP only, no Warmth bar",
    "first": "2026-11-20T09:03:55-08:00",
-   "last": "2026-11-20T09:03:55-08:00",
-   "tags": [],
+   "last": "2026-11-20T09:04:16-08:00",
+   "tags": [
+    "board-gempillar"
+   ],
    "cards": [
     "c-gem-pillar-hp"
    ]
@@ -14158,8 +14176,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "85d0782c5a2c320d992cf0336f3c97fbbcfc306f",
- "synced_at": "2026-11-20T17:04:08+00:00",
+ "synced": "35277b3fa564109af948991521bc230e73de87b4",
+ "synced_at": "2026-11-20T17:05:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
