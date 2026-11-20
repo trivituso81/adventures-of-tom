@@ -1595,14 +1595,14 @@
   {
    "id": "c-copydocs",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "copydocs",
    "title": "Copy the Project docs a board card needs into the repo (copydocs)",
    "next": "Done: 18 Project docs copied into claude/ in the repo (the ones CLAUDE.md and open cards name), claude/README.md says how they stay equal, CLAUDE.md says a START run reads them. Pushed as copydocs.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "after": "nothing for Tom: end",
    "prompt": {
     "what": "Makes the Project docs that board cards name (claude/*.md) readable from a conversation started by the START button.",
@@ -1625,12 +1625,17 @@
     {
      "d": "2026-11-20",
      "t": "copydocs: copied handoff-rules, board2-plan, board3-plan, next-addendum-board1/2/3, battle-scope, battle-build, next-addendum-b3s9a, next, cutscene-polish-plan, project-cleanup-plan, story-next, animation-chapter-plan, animation-tool-test-pack1, clip-gate-plan, pose-editor-plan, pose-editor-poseedit2 word for word. Skipped: files named only on Done cards (board-plan, amywin1 patch and handoff, apply_audit.py) and docs these files point to that no card names (battle-architecture, battle-kit-ops, spec, bestiary, story drafts). Rule: the Project stays the original; a session that edits one of these docs writes both."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as copydocs: Board START runs can now read the plan notes: 18 Project docs copied into the repo"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "t-ch1review",
@@ -5714,6 +5719,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
+   "title": "Copy the Project docs a board card needs into the repo (copydocs)",
+   "first": "2026-11-19T18:21:42-08:00",
+   "last": "2026-11-19T18:39:51-08:00",
+   "tags": [
+    "copydocs"
+   ],
+   "cards": [
+    "c-copydocs"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
    "title": "Something is wrong button on test cards (board4)",
    "first": "2026-11-19T18:07:19-08:00",
@@ -5974,16 +5991,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
-   "title": "Copy the Project docs a board card needs into the repo (copydocs)",
-   "first": "2026-11-19T18:21:42-08:00",
-   "last": "2026-11-19T18:21:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-copydocs"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
    "title": "New battle system, stage 9a: the skill card (your testing notes)",
    "first": "2026-11-19T17:00:46-08:00",
@@ -6133,8 +6140,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "c7013746b3c2cc3491470bf66a39a537e769b8d3",
- "synced_at": "2026-11-20T02:39:09+00:00",
+ "synced": "f903af9f6684a402cca725ba321c2df564ca15a5",
+ "synced_at": "2026-11-20T02:40:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
