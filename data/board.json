@@ -859,7 +859,7 @@
    "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built (cutpolish5): breathing, squash, typing bob, listener turn, fx column (hop, pips), 31 chapter 1 reaction rows, Boppy wince as a code stand-in. Not played on a phone; Tom card t-cutpolish5 asks him to watch chapter 1.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -908,6 +908,10 @@
     {
      "d": "2026-11-20",
      "t": "cutpolish5 built by START: see docs/CHANGES.md. Painted pips and Boppy's stomach pose not added to the Art Library (code stand-ins)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cutpolish5: Cutscene people breathe, squash into a new pose and bob while talking, listeners turn to the speaker, reaction pips and hops, chapter 1 reaction rows"
     }
    ],
    "prompt": {
@@ -920,7 +924,8 @@
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
    "tag": "cutpolish5",
-   "after": "t-cutpolish5"
+   "after": "t-cutpolish5",
+   "done": "2026-11-19"
   },
   {
    "id": "c-boardready",
@@ -7764,6 +7769,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGvLGXY41TvdXeV1zA",
+   "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
+   "first": "2026-11-20T07:44:59Z",
+   "last": "2026-11-20T07:55:20Z",
+   "tags": [
+    "cutpolish5"
+   ],
+   "cards": [
+    "c-cutpolish5"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFH1RcLVuFKu9uEo1Q",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "first": "2026-11-20T07:45:10Z",
@@ -7785,16 +7802,6 @@
    ],
    "cards": [
     "c-reports-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGvLGXY41TvdXeV1zA",
-   "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
-   "first": "2026-11-20T07:44:59Z",
-   "last": "2026-11-20T07:44:59Z",
-   "tags": [],
-   "cards": [
-    "c-cutpolish5"
    ]
   },
   {
@@ -8613,8 +8620,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "fa9d0d00340892bba52971ee788d114ee1ef4d35",
- "synced_at": "2026-11-20T07:55:00+00:00",
+ "synced": "55949a2f359c97723f8fa09a1c233569df46f817",
+ "synced_at": "2026-11-20T07:56:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
