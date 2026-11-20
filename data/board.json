@@ -6713,7 +6713,7 @@
    "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "voice",
    "next": "After build fix-ch1starving-3 is published: open ADMIN > VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
    "blocks": [
@@ -6761,6 +6761,14 @@
     {
      "d": "2026-11-20",
      "t": "fix-ch1starving-3: \"[hungry] I'm starving!\" is back in the script (repo copy and Voice Library), the line is listed under Show > New direction, the old take keeps playing. Tom chose: \"Keep it, I'll re-record\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving!  is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
     }
    ],
    "links": [
@@ -6771,8 +6779,7 @@
      ],
      "label": "Tom's line"
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-ch1starving",
@@ -7044,7 +7051,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDZUaRAm9k2zMUUbic",
+    "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
     "opening": "not started"
    },
    "history": [
@@ -7063,6 +7070,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8335,7 +8346,7 @@
    "id": "c-fix-ch1starving-3",
    "tag": "fix-ch1starving-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
@@ -8380,6 +8391,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-ch1starving-3: \"I'm starving!\" is back at the end of Tom's \"Thank you for telling me, Rose\" script, ready for you to re-record"
     }
    ],
    "prompt": {
@@ -8392,7 +8407,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-3 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-3.\n\nTom tested and found problems:\n1. Card t-ch1starving (Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped), ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good. He wrote: I'm starving. should not have been dropped\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:16:40.684Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1starving",
-   "answer": "Keep it, I'll re-record"
+   "answer": "Keep it, I'll re-record",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-oldchecks-voice",
@@ -8675,6 +8691,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
+   "title": "QA for generated pictures, with the results on the card (artgen2)",
+   "first": "2026-11-20T08:42:04Z",
+   "last": "2026-11-20T08:42:04Z",
+   "tags": [],
+   "cards": [
+    "c-artgen2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
    "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
@@ -8984,6 +9010,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
+   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
+   "first": "2026-11-20T00:26:34-08:00",
+   "last": "2026-11-20T00:42:40-08:00",
+   "tags": [
+    "boardwait1",
+    "fix-ch1starving-3"
+   ],
+   "cards": [
+    "c-boardwait1",
+    "c-fix-ch1starving-3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
    "title": "Board redesign 1: an honest header and status",
    "first": "2026-11-19T23:36:20-08:00",
@@ -9014,19 +9054,6 @@
    "tags": [],
    "cards": [
     "c-fix-clipposes"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
-   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
-   "first": "2026-11-20T00:26:34-08:00",
-   "last": "2026-11-20T00:36:09-08:00",
-   "tags": [
-    "boardwait1"
-   ],
-   "cards": [
-    "c-boardwait1",
-    "c-fix-ch1starving-3"
    ]
   },
   {
@@ -9648,8 +9675,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "779f155be5b996259f5a25a479152c08b3cfc839",
- "synced_at": "2026-11-20T08:41:34+00:00",
+ "synced": "94f0c0801316579b453f745a8209664b630468b8",
+ "synced_at": "2026-11-20T08:43:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
