@@ -5537,7 +5537,7 @@
   {
    "id": "c-ch1art3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "tag": "ch1art3",
    "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
@@ -5579,6 +5579,10 @@
     {
      "d": "2026-11-19",
      "t": "Shipped as ch1art3: Grace's list close-up added to ch1Goal ({ch1Reveal:'list'}), looked at in portrait and landscape."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1art3: Grace's list shows as a close-up when she unfolds her paper in the first Square scene"
     }
    ],
    "blocks": [],
@@ -5588,7 +5592,8 @@
     "url": "https://claude.ai/code/session_01RXeukDngKRyJBZ723rMGSb",
     "opening": "not started"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-cutpolish4b",
@@ -6216,8 +6221,10 @@
    "url": "https://claude.ai/code/session_01RXeukDngKRyJBZ723rMGSb",
    "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
    "first": "2026-11-19T19:05:07-08:00",
-   "last": "2026-11-19T19:05:07-08:00",
-   "tags": [],
+   "last": "2026-11-19T19:12:11-08:00",
+   "tags": [
+    "ch1art3"
+   ],
    "cards": [
     "c-ch1art3"
    ]
@@ -6682,8 +6689,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "b8247a68417eee2a1afe42c5c4d71de7e58a06e7",
- "synced_at": "2026-11-20T03:07:48+00:00",
+ "synced": "81d77d3644075bf0ea784880f9a15424321f7eb9",
+ "synced_at": "2026-11-20T03:13:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
