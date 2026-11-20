@@ -8256,8 +8256,8 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
-   "next": "Not installed: the two pictures made do not match the plate. Waits on new pictures that keep the painting exactly and put the plane in the same place.",
+   "col": "wait",
+   "next": "Waits on card t-gatezero-decide. The two pictures made (noplane-v1, plane-v1) are 1248x832 not 1280x896, move the window frames and jet bridge, and the plane is a different jet. After Tom's answer: rebuild the entries or install, per his choice.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -8310,6 +8310,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Ended without shipping: third session found the same two rejected pictures in art/raw/rooms; nothing new to install. Moved behind Tom card t-gatezero-decide.",
+     "at": "2026-11-20T18:00:00Z"
     }
    ],
    "prompt": {
@@ -8322,7 +8327,9 @@
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
    "tag": "gatezero",
-   "started_at": "2026-11-20T17:43:02+00:00"
+   "started_at": "2026-11-20T17:43:02+00:00",
+   "waiting_on": "tom",
+   "after": "t-gatezero-decide"
   },
   {
    "id": "t-gatezeroart",
@@ -13690,6 +13697,34 @@
     "url": "https://claude.ai/code/cse_01RXeukD59Es2YREGQE1ccjc",
     "opening": "started by START"
    }
+  },
+  {
+   "id": "t-gatezero-decide",
+   "title": "Decide how to get a Gate Zero room with the plane removed",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Read the two choices below and tap one. The two pictures made for this room do not match the current Gate Zero painting (wrong size, window frames and jet bridge moved, plane is a different jet), so they cannot be installed. Your answer starts card Install the Gate Zero pictures (gatezero).",
+   "choices": [
+    "Keep the current painting and have Claude remove the painted plane by editing it (Recommended)",
+    "Redo the two pictures in the Art Library with the current painting as a reference picture"
+   ],
+   "leads": [
+    "Card c-gatezero keeps art/gatezero.webp as the base and paints out the Flight Zero in the window in code or by patching the plate; the plane slides over it. No money spent. Your part: one look at the room.",
+    "Card c-gatezero first rewrites the two Art Library entries to use the plate as a reference, then you press Generate and Approve again (about $0.10) before the install."
+   ],
+   "blocks": [
+    "c-gatezero"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by the gatezero session: the two generated pictures were rejected for size and placement."
+    }
+   ]
   }
  ],
  "sessions": [
