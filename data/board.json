@@ -1019,7 +1019,7 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "next": "claude/next.md is 45,000 bytes against its own 20,000 limit and still carries a second, older list of open items and prompts. Put every item that is still wanted on a card, drop the rest, and leave next.md with rules, tests and the push steps only.",
@@ -1033,7 +1033,7 @@
     "text": "Read claude/board2-plan.md section 6, claude/project-cleanup-plan.md and claude/handoff-rules.md, then make the board the only list of open work and cut claude/next.md down. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGYUPLZiib59SQWmGs",
     "opening": "not started"
    },
    "history": [
@@ -1044,13 +1044,16 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "tag": "nextclean",
-   "start": true
+   "tag": "nextclean"
   },
   {
    "id": "c-takes-2337ed",
@@ -1885,7 +1888,7 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
     "opening": "not started"
    },
    "history": [
@@ -1903,6 +1906,29 @@
     "effort": "high (a process has to be redesigned with nothing written to follow)",
     "text": "Read claude/clip-gate-plan.md, claude/animation-chapter-plan.md, claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, and the history of the board cards c-clipreset, c-clipch1remake and c-clipch1fix. Generate nothing and spend no xAI credit in this session. Tom's verdict (11-19 18:10) on the chapter 1 battle clips: \"i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working\". Facts you can check in the repo: Tom rejected 44 of the first 67 clips; the gate flagged 34 of those 44 and 1 of 23 approved, but its pass bar was not met and the plan said stop-loss; clipch1remake then spent $3.66 more (clipgen2 spent $5.34 before it) and the gate approved Grace's guard, which shows praying hands, and held 27 clips. Do five things. 1) Write a plain reflection, a short table: what was tried, what each cost in dollars and in Tom's time, what the evidence says went wrong, and which of my own steps were mistakes (for example, a gate with a vision question that cannot tell a shield from praying hands, and approving by contact sheet). 2) Look in the repo at the painted battle sheets and the engine's own battle poses and animation primitives, and answer one question with evidence: can the generic states (idle, guard, hit, dodge, KO, victory, run) come from those instead of a new video each, and which clips truly need video (the invented moves)? 3) Make the call and write ONE plan for chapter 1: the method, the dollar cost, how many minutes Tom spends, and what is verified by a measured check versus by Tom. 4) Prove it on ONE clip, Grace's guard, spending at most $0.30, and show Tom the result before anything else is made. 5) Put on the board one Tom card with ask decide: choices \"Go with this plan (Recommended)\" and \"Stop making battle clips for chapter 1 and keep the old ones\", one leads line each, blocking one new Claude card that holds the full build prompt. Apply the stop-loss rule: if the one-clip proof misses, stop and say so. No em dashes. Build tag clipreset. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "b-board-clipreset",
+   "tag": "board-clipreset",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "board only: stop the clip remake plan, add the clip reset card",
+   "next": "Done: board only: stop the clip remake plan, add the clip reset card",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-clipreset. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
@@ -1971,15 +1997,17 @@
    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
    "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
    "first": "2026-11-19T17:14:03-08:00",
-   "last": "2026-11-19T18:08:02-08:00",
+   "last": "2026-11-19T18:11:59-08:00",
    "tags": [
     "clipch1remake",
     "clipch1remakea",
-    "board-ch1review"
+    "board-ch1review",
+    "board-clipreset"
    ],
    "cards": [
     "c-clipch1remake",
-    "t-ch1review"
+    "t-ch1review",
+    "c-clipreset"
    ]
   },
   {
@@ -2119,8 +2147,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "50a877946abe7f094c818a01eb94c37397ca0525",
- "synced_at": "2026-11-20T02:08:06+00:00",
+ "synced": "8aa95436aebc15dbd034a548461796954f79580e",
+ "synced_at": "2026-11-20T02:12:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
