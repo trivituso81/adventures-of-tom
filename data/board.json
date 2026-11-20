@@ -10538,7 +10538,7 @@
   {
    "url": "https://claude.ai/code/session_01RXeukEot2oyThJioqaFLjk",
    "title": "Build chapter 2 to the locked script",
-   "first": "2026-11-20T15:36:19Z",
+   "first": "2026-11-20T07:44:14-08:00",
    "last": "2026-11-20T15:36:19Z",
    "tags": [],
    "cards": [
@@ -11782,8 +11782,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a7dec86306fff9ab555b2b8018d686acd175d4a4",
- "synced_at": "2026-11-20T15:40:44+00:00",
+ "synced": "b172028134bbd89635c1e4e3bdc248e1b8831d94",
+ "synced_at": "2026-11-20T15:44:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
