@@ -12813,8 +12813,8 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukHDKjTb9tfnY6bJ9uX",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukHDKjTb9tfnY6bJ9uX",
+    "opening": "started"
    },
    "history": [
     {
@@ -12829,6 +12829,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started."
     }
    ],
    "blocks": [],
