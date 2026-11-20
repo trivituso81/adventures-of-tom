@@ -16420,12 +16420,12 @@
   },
   {
    "id": "t-welcomepage-request",
-   "title": "Paste the welcome page request into the card",
+   "title": "Type the welcome page change you want",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "ask": "setup",
-   "next": "Handed to Claude by Tom: i dont understand what i need to do",
+   "next": "Tap + New card on the board. Type the change you want to the welcome page in one or two sentences (which screen, which button, what it should do). Claude builds it from that card. Nothing else is needed.",
    "blocks": [
     "c-fix-welcomepage-play"
    ],
@@ -16453,6 +16453,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: the request Tom wrote in the other conversation cannot be read from a card session, and his note \"i dont understand what i need to do\" has no change in it. Nothing was changed. Rewrote next: Tom types the change into + New card.",
+     "at": "2026-11-20T21:35:00.000Z"
     }
    ],
    "tag": "t-welcomepage-request",
@@ -16466,7 +16471,8 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-20T21:28:37+00:00"
+   "started_at": "2026-11-20T21:28:37+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "t-voiceauto1rec",
