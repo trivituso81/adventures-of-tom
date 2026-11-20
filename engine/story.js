@@ -297,7 +297,7 @@ const SCENE_OPS={
   // {zoom:1.6,time:.8}: eases the outdoor camera in (above 1) or back out ({zoom:1}) while the scene plays; the camera stays on Tom or the {cam} tile.
   zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; sceneZoomManual=true; },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.8)); setSceneZoom(this.a+(o.zoom-this.a)*ease(u)); return u>=1; }}),
-  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f||o.foe) { a.scenePose={f:o.f,foe:o.foe,end:o.end,dir:o.dir||(o.end?(position(a).x>position(player).x?'left':'right'):'left'),fps:o.fps,mid:o.mid}; if(o.mid&&typeof storyPosesLoad==='function') storyPosesLoad(o.mid); } else { a.scenePose=null; a.lift=0; } }),   // mid: the story sheet owner for an NPC with no member (a painted em_ pose on Deedee)
+  pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f||o.foe) { a.scenePose={f:o.f,foe:o.foe,end:o.end,dir:o.dir||(o.end?(position(a).x>position(player).x?'left':'right'):'left'),fps:o.fps,mid:o.mid,spin:o.spin}; if(o.mid&&typeof storyPosesLoad==='function') storyPosesLoad(o.mid); } else { a.scenePose=null; a.lift=0; } }),   // mid: the story sheet owner for an NPC with no member (a painted em_ pose on Deedee)
   // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
   knock:o=>lazy(()=>{ const a=sceneActor(o.knock),to=scenePos(o.to),fly=o.fly||.42,dl=o.delay||0,arc=o.arc||22; let t=0,from=null,dir='left';
     return {start(){ t=0; storyHold(a); const p=position(a); from=[p.x,p.y]; dir=o.dir||(to[0]<from[0]?'left':'right'); a.move=null; a.scr={x:from[0],y:from[1]}; },
@@ -1078,7 +1078,7 @@ function compileScene(list) {
 }
 // Scene preflight (cutpolish2): every painted sheet a scene will draw is pinned (never released mid-scene) and decoded before its first line, so no pose shows as the
 // small blurry row-string copy. The lists come from the step list itself: speakers, {pose} owners, listeners named in docs/emotion-reactions.tsv for those speakers,
-// spawned monsters, the heist sheet and the party. Pins drop when the scene ends, at a fight and (safety) 6 s after a pin with no scene or map change running.
+// spawned monsters, the muffin-heist sheet and the party. Pins drop when the scene ends, at a fight and (safety) 6 s after a pin with no scene or map change running.
 function scenePreflightIds(list) {
   const ids=new Set(),foes=new Set(),speakers=new Set(); let heist=false;
   const pid=n=>{ n=String(n||'').trim(); if(!n) return null; const k=n.toLowerCase();
@@ -1350,8 +1350,9 @@ b7MonsterTick=function(n,dt) {
   return LE_b7MonsterTick_story(n,dt);
 };
 // Drawing: props an actor carries or wears (STORY_PROPS), and gate branches.
-// The Mudling's pie-heist frames (data/mudling-heist.js, painted, faces LEFT). a.scenePose={f:'mh_spot'|[frames],fps,dir} on a story monster;
-// an array of frames cycles at fps. dir 'right' mirrors it. Returns true when it drew (the caller then skips the plain sprite).
+// The Mudling's muffin-heist frames (data/mudling-heist.js, painted, faces RIGHT; heist1). a.scenePose={f:'mh_look'|[frames],fps,dir,spin} on a story monster;
+// an array of frames cycles at fps. dir 'left' mirrors it. spin: turns per second about the body centre (the rolling mud ball, negative = the other way).
+// Returns true when it drew (the caller then skips the plain sprite).
 // A painted enemy frame for a scene: {pose:'The Big One',foe:'attack3',dir:'left'} (foe: 'stance', 'hurt' or 'attackN'). The painted enemy sheets
 // face RIGHT (data/foes/use.js), so dir 'left' mirrors the frame. Used by drawActor (engine/town-render.js); null when the frame is not there.
 const FOE_POSE_ROWS={};
@@ -1369,12 +1370,14 @@ function mudlingHeistDraw(a,cx,base) {
   const P=a.scenePose,H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!P||!H||!P.f) return false;
   const f=Array.isArray(P.f)?P.f[Math.floor(elapsedTime*(P.fps||6))%P.f.length]:P.f; if(!H.rows[f]) return false;
   const atl=mhAtlas(); if(!atl) return false;
-  const flip=P.dir==='right',key=f+(flip?'R':'L');
+  const flip=P.dir==='left',key=f+(flip?'L':'R');
   if(!MH_ROWS[key]) { const r=paintRows(H.rows[f].slice(),atl,f,false); MH_ROWS[key]=flip?mirrorRows(r):r; }
   const rows=MH_ROWS[key],m=H.meta[f],s=a.mscale||1,w=rows[0].length,h=rows.length,ax=flip?w-m.ax:m.ax;
   const lift=(m.lift+(a.lift||0))*s;
   ellipse(cx,base+1,Math.round(w*s*.42*(1-Math.min(.35,lift/60))),5*s,'#2f493640');
-  drawSprite(rows,H.pal,cx-Math.round(ax*s),Math.round(base-h*s-lift),s);
+  const x0=cx-Math.round(ax*s),y0=Math.round(base-h*s-lift);
+  if(P.spin) { const py=y0+(m.cy||h/2)*s; gfx.save(); gfx.translate(cx,py); gfx.rotate(elapsedTime*P.spin*Math.PI*2); gfx.translate(-cx,-py); drawSprite(rows,H.pal,x0,y0,s); gfx.restore(); }
+  else drawSprite(rows,H.pal,x0,y0,s);
   return true;
 }
 function drawActorExtra(a,cx,top,w,h) {

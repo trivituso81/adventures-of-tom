@@ -10,7 +10,7 @@ fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m, flush=True)
     if not c: fails.append(m)
-ID = 'ch1-mudling-heist2'; OLD = 'ch1-mudling-heist'
+ID = 'ch1-mudling-heist2'; OLD = 'test-mudling'   # any entry with a decision (heist1 removed ch1-mudling-heist)
 def png():
     from PIL import Image
     import io

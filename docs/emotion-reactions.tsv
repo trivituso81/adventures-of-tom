@@ -9568,7 +9568,7 @@ scene	1	data/scenes.js	ch1Goal	Tom	Twenty years, one witness. That's a strong nu
 scene	1	data/scenes.js	ch1Goal	Grace	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.	rose	scared	nobody's allowed	sweat
 scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	tom	surprised	I licked one	?
 scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	grace	angry	Only the top	!
-scene	1	data/scenes.js	ch1Goal	Tom	Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.	rose	proud	Thank you	hop
+scene	1	data/scenes.js	ch1Goal	Tom	Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!	rose	proud	Thank you	hop
 scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	rose	scared	Rose licked	sweat
 scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	tom	happy	licked a muffin	
 scene	1	data/scenes.js	ch1Amy	Amy	Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.	tom	unimpressed	faster walking on the sand	...
@@ -9592,4 +9592,4 @@ scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom. I missed yours too. Is that the cin
 scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	boppy	unimpressed	your father	...
 scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	deedee	unimpressed	back at Rikers	...
 scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	rose	surprised	whole loaf of bread	!
-scene	1	data/scenes.js	ch1Theft	Grace	It's mine! Tata, get UP, it's getting away!	rose	scared	getting away	!
+scene	1	data/scenes.js	ch1Theft	Grace	Tata, get UP, it's getting away!	rose	scared	getting away	!

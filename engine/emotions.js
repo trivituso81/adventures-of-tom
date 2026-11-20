@@ -89,9 +89,11 @@ function emoCueReached() {
   if(typeof DV!=='undefined'&&DV.page===dialog.index&&DV.t0!=null) return n;   // the clip has finished
   return dialog.shown;
 }
+// heist1: a.storyBack (set by a scene, cleared by it) keeps someone turned the way the scene set them: no mood, talk or reaction pose, no listener turn
+// (Boppy keeps his back to the muffin theft in ch1Theft until he asks where the muffins went).
 function emoPose(lid,mood,fx,isSpk) {
   const a=emoActorById(lid);
-  if(!a) return;
+  if(!a||a.storyBack) return;
   if(isSpk) { if(typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.actor=a; } emoFx(a,fx); return; }   // cutpolish5: a row that names the speaker changes the speaker's own pose on a cue word
   if(!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
   emoFx(a,fx);
@@ -153,7 +155,7 @@ function emoApply() {
     if(img) { img.src='portraits/talk/pose/'+lp.id+'-'+lp.face+'.webp?v='+TALKPOSE_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); EMO.mood=lp.f; }
     EMO.talk=lp.f; EMO.id=id;
     const a=emoActorFor(id,dialog.name,dialog.npc);
-    if(a&&!a.scenePose) { if(typeof storyPosesLoad==='function') storyPosesLoad(lp.id); a.scenePose={f:lp.f,mid:lp.id,emo:true}; EMO.actor=a; }
+    if(a&&!a.scenePose&&!a.storyBack) { if(typeof storyPosesLoad==='function') storyPosesLoad(lp.id); a.scenePose={f:lp.f,mid:lp.id,emo:true}; EMO.actor=a; }
     return;
   }
   const tk=id&&typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)?talkFrameOf(id,talkTypeOf(String(dialog.name||'').trim(),text,mood)):null;
@@ -166,7 +168,7 @@ function emoApply() {
     } else if(had) setDialogPortrait(dialog.name);
     EMO.talk=tk; EMO.id=id;
     const a=emoActorFor(id,dialog.name,dialog.npc);
-    if(a&&!a.scenePose) { if(typeof storyPosesLoad==='function') storyPosesLoad(id); a.scenePose={f:tk,mid:id,emo:true}; EMO.actor=a; }
+    if(a&&!a.scenePose&&!a.storyBack) { if(typeof storyPosesLoad==='function') storyPosesLoad(id); a.scenePose={f:tk,mid:id,emo:true}; EMO.actor=a; }
     return;
   }
   if(!mood||!id||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(id)) { if(had) setDialogPortrait(dialog.name); return; }
@@ -175,7 +177,7 @@ function emoApply() {
   if(img) { img.src='portraits/emo/'+id+'-'+mood+'.webp?v='+EMO_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); }
   EMO.mood=mood; EMO.id=id;
   const a=emoActorFor(id,dialog.name,dialog.npc);
-  if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
+  if(a&&!a.scenePose&&!a.storyBack&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
     if(typeof storyPosesLoad==='function') storyPosesLoad(id);
     a.scenePose={f:'em_'+mood,mid:id,emo:true}; EMO.actor=a;
   }
@@ -254,7 +256,7 @@ function emoTurnListeners(spk) {
   if(!lifeOn(spk)||!spk) return;
   const sp=position(spk),line=dialog.index,all=[player].concat(followers,(currentMap&&currentMap.npcs)||[]);
   for(const a of all) {
-    if(!a||a===spk||a.monster||a.seat||a.hidden||a.scenePose||a.stageFaced||a.move||a.amber) continue;
+    if(!a||a===spk||a.monster||a.seat||a.hidden||a.scenePose||a.stageFaced||a.move||a.amber||a.storyBack) continue;
     const t=80+Math.random()*100;
     setTimeout(()=>{ try {
       if(!dialog.active||dialog.index!==line||EMO.spk!==spk||a.scenePose||a.stageFaced||a.move||!lifeOn(a)) return;

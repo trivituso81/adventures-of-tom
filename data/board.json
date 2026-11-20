@@ -6713,7 +6713,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "heist1",
-   "next": "Waits on your approval of the new Mudling sheet (card t-heistart). Then it rebuilds the theft: the Mudling of the fights rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who never turns around. 3 new lines, 1 changed, 1 cut. Script and staging: claude/heist-redo-plan.md.",
+   "next": "Shipped as heist1. The theft is rebuilt with your approved Mudling sheet: it rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who turns around only on \"Wait, where'd the muffins go?\". Next: card t-heist1play (watch it), and card t-heist1voice (takes for the 4 new lines).",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-20",
@@ -6741,6 +6741,10 @@
     {
      "d": "2026-11-20",
      "t": "Started. No note on t-heistart, so the lines go in word for word from section 3."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as heist1: new 6-frame Mudling baked, middle of ch1Theft rebuilt to plan sections 3 and 4, 3 new lines, Grace's line changed, Tom's floor line cut, old heist sheet and old Library entry ch1-mudling-heist purged. Kept lines keep their live wording (ch1retext1 changed some after the plan was written)."
     }
    ],
    "prompt": {
@@ -6752,7 +6756,8 @@
     "model": "Claude Opus 5.5 (row D: you judge this scene by taste, and a miss costs you another review)",
     "effort": "medium (one scene; the script, the beats and the steps are written in the plan)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then cards c-heist1 and t-heistart in data/board.json, history and note included. Build part B (section 7) and push it as heist1. Your first push is the commit board: start c-heist1. Lines go in word for word from section 3, changed only where my note on t-heistart says so. Look at every beat in portrait and landscape before pushing. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-heist1play"
   },
   {
    "id": "t-reportcheck",
@@ -9532,6 +9537,84 @@
     }
    ],
    "first": "Build alvarez shows on the title screen."
+  },
+  {
+   "id": "t-heist1play",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Story and Dialogue",
+   "ask": "play",
+   "fyi": true,
+   "title": "Watch the new muffin theft in Deedee's kitchen",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen (Deedee and Boppy's House), and watch it in portrait, then once in landscape. You should see: 1) the Mudling looks like the Mudling of the fights (matte, brushed); 2) the muffins are in its hands from the lift to the door; 3) the island is bare from the lift on; 4) Boppy keeps his back to the theft until \"Wait, where'd the muffins go?\"; 5) nobody is lying down during a line except Rose's scream; 6) the Mudling is up against the island when it lifts the pan. The 4 new lines are read by the stand-in voice until you record them (card t-heist1voice). All good if it plays like that; Something is wrong with what you saw.",
+   "first": "Wait for Rebuild the muffin theft scene to ship (build heist1).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-heist1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-heist1: Tom's play check of the rebuilt theft (plan section 7 step 6)."
+    }
+   ]
+  },
+  {
+   "id": "t-heist1voice",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Voice Clips",
+   "ask": "voice",
+   "fyi": true,
+   "title": "Make takes for the 4 new lines of the muffin theft",
+   "next": "ADMIN > VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1, Grace 1, Tom 1; the scripts with their tags are already in the script box). Make takes, keep one per line (Tom's is yours to record), then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 4 lines with the stand-in voice.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-heist1"
+   },
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|deedee|Excuse me! I just washed that floor."
+     ],
+     "label": "Deedee's line"
+    },
+    {
+     "to": "voice",
+     "ids": [
+      "d|boppy|...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."
+     ],
+     "label": "Boppy's line"
+    },
+    {
+     "to": "voice",
+     "ids": [
+      "d|grace|Tata, get UP, it's getting away!"
+     ],
+     "label": "Grace's line"
+    },
+    {
+     "to": "voice",
+     "ids": [
+      "d|tom|I'm up. I've been here four minutes."
+     ],
+     "label": "Tom's line"
+    }
+   ],
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-heist1: the 3 new lines and Grace's changed line have no clip yet (Tom's floor line and Grace's old wording were purged)."
+    }
+   ]
   }
  ],
  "sessions": [

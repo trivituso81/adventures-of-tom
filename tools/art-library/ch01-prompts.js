@@ -152,7 +152,7 @@ The exact same painting, same size, same framing, same colors, same light, same 
     prompt: sceneWith('Two small child hands hold up a sheet of lined notebook paper with a neat numbered list in pencil, in a child\'s careful capital letters, spelled exactly like this and nothing else written on the page: "1. BOPPY SAW THE BIG ONE" on the first line, "2. DEEDEE MADE APPLE MUFFINS" on the second, "3. ROSE LICKED A MUFFIN" on the third. A pencil is tucked behind a finger. The paper fills most of the picture. No faces.') },
   { id: 'ch1-phone-on-seat', tab: 'Props', title: 'Chapter 1 close-up: a phone lighting up on a taxi back seat (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
     prompt: plate('A smartphone lying face up on a worn taxi back seat, its screen lit and glowing with a new message that is not readable. A jacket sleeve rests beside it. A purple-grey haze shows through the window beyond.') },
-  // heistart (claude/heist-redo-plan.md section 5): the new Mudling sheet for the kitchen theft, carrying the approved muffin pan. Replaces ch1-mudling-heist in the game once approved (part B).
+  // heistart (claude/heist-redo-plan.md section 5): the new Mudling sheet for the kitchen theft, carrying the approved muffin pan. Installed by heist1 (tools/sprite-bake/bake_mudling_heist.py, art/foes/mudling-heist.webp).
   { id: 'ch1-mudling-heist2', tab: 'Enemies', title: 'Chapter 1: the Mudling steals the muffin pan, sheet of 6 poses (3 x 2)', ar: '3:2', refs: ['art/raw/enemies/enemy-mudling-v2.png', 'art/raw/props/ch1-muffin-pan-v1.png'], group: 'Chapter 1',
     prompt: `IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.
 

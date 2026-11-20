@@ -247,18 +247,32 @@
    "takeId": "gen-f2f80f4888"
   },
   {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "GAH! I'm on the floor. Grace, is that your elbow or mine?",
-   "ctx": "chapter 1 (locked rebuild)",
-   "script": "[real yelp] GAH! [breathless, amazed] I'm on the floor. [polite, laughing at himself] Grace, is that your elbow or mine?"
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Excuse me! I just washed that floor.",
+   "ctx": "chapter 1 (heist1)",
+   "script": "[sharp, offended] Excuse me! [flat, slower] I just WASHED that floor."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming.",
+   "ctx": "chapter 1 (heist1)",
+   "script": "[storytelling, enjoying himself] ...so I say to him, \"Nice hat.\" [mild, casual] He says, \"Thank you.\" [punchline, delighted] And the hat is STEAMING."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "It's mine! Tata, get UP, it's getting away!",
+   "text": "Tata, get UP, it's getting away!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[scared kid] It's MINE! [taking charge, urgent] Tata, get UP, it's getting away!"
+   "script": "[urgent, bossy] Tata, get UP, it's getting AWAY!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'm up. I've been here four minutes.",
+   "ctx": "chapter 1 (heist1)",
+   "script": "[flat, winded] I'm up. [punchline, dry] I've been here four minutes."
   },
   {
    "voice": "deedee",

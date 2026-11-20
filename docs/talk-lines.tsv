@@ -22,7 +22,7 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	91	Tom	unimpressed		Twenty years, one witness. That's a strong number one. What's number two?
 1	data/scenes.js	92	Grace	none	tell	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.
 1	data/scenes.js	93	Rose	happy		I licked one. Only the top!
-1	data/scenes.js	94	Tom	loving		Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.
+1	data/scenes.js	94	Tom	loving		Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!
 1	data/scenes.js	96	Grace	unimpressed		Number three. Rose licked a muffin.
 1	data/scenes.js	106	Amy	happy		Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.
 1	data/scenes.js	107	Tom	unimpressed		I'm carrying a child and receiving a news report.
@@ -47,8 +47,10 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	147	Deedee	proud	tell	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.
 1	data/scenes.js	148	Boppy	angry		In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
 1	data/scenes.js	196	Rose	scared		AHHH! DEEDEE!
-1	data/scenes.js	197	Tom	surprised		GAH! I'm on the floor. Grace, is that your elbow or mine?
-1	data/scenes.js	198	Grace	scared		It's mine! Tata, get UP, it's getting away!
+1	data/scenes.js	216	Deedee	angry		Excuse me! I just washed that floor.
+1	data/scenes.js	234	Boppy	happy		...so I say to him, "Nice hat." He says, "Thank you." And the hat is steaming.
+1	data/scenes.js	198	Grace	scared		Tata, get UP, it's getting away!
+1	data/scenes.js	240	Tom	unimpressed		I'm up. I've been here four minutes.
 1	data/scenes.js	199	Deedee	angry		That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
 1	data/scenes.js	200	Boppy	happy		...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?
 1	data/scenes.js	201	Deedee	none	tell	A ball of mud came through the door and took them. Pan and all.

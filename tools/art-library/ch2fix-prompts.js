@@ -45,26 +45,6 @@ const CAST = [
 ];
 
 const entries = [
-  // r-20261114-100555-mxvd: the heist frames are a cute cartoon blob with a sprout; they must be the Mudling of the fights.
-  { id: 'ch1-mudling-heist', tab: 'Enemies', group: 'Report fixes', ar: '1:1', refs: ['art/raw/enemies/enemy-mudling-v2.png', 'art/raw/enemies/enemy-grump-v3.png'],
-    title: 'Chapter 1: the Mudling steals the crisp, 16 frames 4 x 4, facing left (replaces the cartoon heist frames)',
-    prompt: `IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one square image, nothing else. Generate it now.
-
-ATTACHED IMAGES
-1) The approved painting of the Mudling, a blob of pond mud with eyes and a small green sprout on top, from "The Adventures of Tom", a family role-playing game. Keep this exact creature: the same dripping mud body, the same sprout, colors, eyes and mouth, and above all the same rich painted finish and light. Not a flat cartoon, not a simpler drawing: it must look like the same painting as attachment 1.
-2) The approved painting of the Pond Grump, for the hand-brushed finish only.
-
-PAINT THIS SHEET
-16 poses of the same Mudling in a 4 by 4 grid, read left to right, top row first. Every pose faces to the LEFT of the picture. Each pose fills most of its cell; nothing touches or overlaps the next cell. The same size of creature in every cell.
-Row 1: 1 oozing forward low and flat. 2 oozing forward, a little taller. 3 stopping, eyes wide, spotting something tasty. 4 winding up, leaning back.
-Row 2: 5 charging forward. 6 shoving with its whole body. 7 squeezing tall and thin to fit through a gap. 8 wobbling after the squeeze.
-Row 3: 9 stretching one muddy arm out to reach. 10 grabbing a round metal pie tin full of rhubarb crisp. 11 hugging the pie tin to its body. 12 glancing back over its shoulder, holding the tin.
-Row 4: 13 scurrying away holding the tin. 14 scurrying, the other step. 15 a sneaky giggle, tin held tight. 16 sneaking off on tiptoe, low, tin held tight.
-From pose 10 on, the pie tin of rhubarb crisp is in every pose, held by the Mudling.
-Matte, thick visible brush strokes on the mud, canvas grain, crisp painted edges, no gloss, not a smooth digital render.
-- ${MAGENTA}
-- No words, letters or numbers anywhere.` },
-
   // r-20261114-100352-7v5z: Deedee asks where her reading glasses are while they sit on top of her head.
   { id: 'ch1-deedee-glasses-head', tab: 'Characters', group: 'Report fixes', ar: '2:3', refs: ['art/raw/characters/deedee-hero-ref-v1.png', 'art/raw/characters/deedee-talk-v4.png'],
     title: 'Chapter 1: Deedee looking for the reading glasses that are on top of her head (one full-body pose, for the map and her dialogue face)',
