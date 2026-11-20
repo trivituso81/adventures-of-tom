@@ -928,7 +928,7 @@
    "col": "prog",
    "theme": "Areas",
    "title": "Fix the four chapter 1 pictures you rejected, from your notes",
-   "next": "Rewrite the prompts of ch1-grace-list, ch1-amy-window, ch1-ellie-door and ch1-cab-pulls-away from your reject notes by the smallest change, set them back to draft, and say which chapter 1 entries still have no decision (Mudling with muffins, green Big One with pan, Rose on shoulders had none on 11-19).",
+   "next": "Shipped as ch1art2: Grace's list, Amy's window, Aunt Ellie's door and the cab pulling away have fixed prompts and are back to draft; Rose on shoulders got the same fix (it attached Boppy's picture). Your turn: card t-ch1art2.",
    "prompt": {
     "what": "Fixes the prompts of the four chapter 1 pictures you rejected, using your notes, so you can generate them again.",
     "before": [
@@ -950,12 +950,17 @@
     {
      "d": "2026-11-19",
      "t": "Started in a conversation on Claude Opus 5.5."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Fixed from Tom's notes: the list now names its three lines word for word; Amy, Aunt Ellie and Sal are attached as pictures (none was before). Rose on shoulders fixed the same way. Undecided before this: Mudling with muffins, green Big One with pan, Rose on shoulders."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "tag": "ch1art2"
+   "tag": "ch1art2",
+   "after": "t-ch1art2"
   },
   {
    "id": "c-boardaudit",
@@ -5283,6 +5288,69 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "t-ch1art2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Areas",
+   "ask": "pictures",
+   "title": "Make the seven chapter 1 pictures",
+   "next": "ADMIN > ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start.",
+   "blocks": [
+    "c-ch1art3"
+   ],
+   "done_when": {
+    "art_approved": [
+     "ch1-grace-list",
+     "ch1-amy-window",
+     "ch1-ellie-door",
+     "ch1-cab-pulls-away",
+     "ch1-rose-shoulders",
+     "ch1-mudling-muffins",
+     "ch1-bigone-green-pan"
+    ]
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by ch1art2."
+    }
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-ch1art3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Areas",
+   "tag": "ch1art3",
+   "title": "Install the seven approved chapter 1 pictures in place of the code stand-ins",
+   "next": "Waits on card t-ch1art2 (your approvals). Then replace each chapter 1 stand-in with its approved picture, the way cutpolish4b did, test the scenes in portrait and landscape, push.",
+   "prompt": {
+    "what": "Puts the seven approved chapter 1 pictures (Grace's list, Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One with pan) into the game in place of the code stand-ins.",
+    "before": [
+     "Card t-ch1art2 is done: all seven entries are approved in ADMIN > ART LIBRARY, group Chapter 1."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: no written install steps for these seven, the session works them out from cutpolish4b)",
+    "effort": "medium (each install is small and follows the cutpolish4b pattern)",
+    "text": "Install the seven approved chapter 1 pictures from ADMIN > ART LIBRARY group Chapter 1 (ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins, ch1-bigone-green-pan) in place of their code stand-ins, the way cutpolish4b installed the muffin pan and the phone close-up. Board card c-ch1art3. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by ch1art2."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   }
   }
  ],
  "sessions": [

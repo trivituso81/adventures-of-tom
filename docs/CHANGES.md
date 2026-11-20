@@ -1,3 +1,17 @@
+## ch1art2 (2026-11-19): four rejected chapter 1 pictures (and Rose on shoulders) get fixed prompts and go back to To do
+
+- Art Library, group Chapter 1. Each prompt changed only where Tom's reject note points; everything else is word for word the same. Entries back to draft, `promptRev: 1` so an older edit saved on his phone is dropped.
+
+| Entry | Tom's note | Change |
+|---|---|---|
+| ch1-grace-list | "gibberish - did you specify what should be written?" | It had asked for unreadable scribbles. Now the exact words from the scene (`ch1Goal`): "1. BOPPY SAW THE BIG ONE", "2. DEEDEE MADE APPLE MUFFINS", "3. ROSE LICKED A MUFFIN", in a child's capital letters, nothing else on the page. Dropped the 4th line and the crossed-out line (the scene has 3 items). |
+| ch1-amy-window | "doesnt look like Amy" | No picture of Amy was attached and the text described a different woman (shoulder-length hair, running jacket). Now attaches `amy-hero-v2.png` as attachment 2 and describes her from it. |
+| ch1-ellie-door | "this is not aunt ellie" | Same cause: no picture attached, text said "a tall woman in a pressed cardigan". Now attaches `ellie-hero-v1.png` and describes her from it. |
+| ch1-cab-pulls-away | "doesnt look like Sal" | Sal was not in the prompt or attached. Now attaches `npc-photo-sal-v3.png` and adds one sentence: Sal leans out of the driver's window. Tom in the back window unchanged. |
+| ch1-rose-shoulders (no decision yet, fixed before a wasted generation) | none | Same fault: it attached Boppy's painting for a picture of Tom and Rose, and its text called the attachment the house. Now attaches the house (style), `tom-hero-v2.png` and `rose-hero-v1.png`, and names them in the text. |
+
+- `sceneWith` in tools/art-library/ch01-prompts.js takes an optional list of extra attached pictures; the other Chapter 1 prompts are unchanged (checked). The json was patched from the builder for these four entries only (make-prompts.js still stops in the sandbox on npc-prompts.js).
+
 ## skipchain1 (2026-11-19): SKIP in chapter 1's opening now skips all of scene 1 (the opening and Grace's list)
 
 - Tom (11-19 17:59): "the game is still incorrectly seeing scne 1 as two separate scenes - it should be one secne. when i hit skip it should skip until the whole thing is done".
