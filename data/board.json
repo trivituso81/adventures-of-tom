@@ -8817,7 +8817,7 @@
    "id": "c-backlog1",
    "tag": "backlog1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
    "next": "Shipped as backlog1: Send to backlog in every open card sheet, BACKLOG closed at the bottom, one-tap Add to (lane) to-do.",
@@ -8841,6 +8841,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as backlog1 (e0989a9); board.html is live. Closed by hand: the sync run that would have read the CHANGES heading was cancelled by the next push."
     }
    ],
    "prompt": {
@@ -8851,7 +8855,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Read CLAUDE.md. Board card c-backlog1: add Send to backlog and a BACKLOG section to board.html as Tom asked in its history."
-   }
+   },
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
