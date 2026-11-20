@@ -356,7 +356,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Not started: the locked chapter 2 script is not in the repo, so a START run cannot build from it. Waits on the script files being copied into claude/ (or starting this from a Project conversation). Then: write the chapter 2 teardown, show you the ASK questions, build after you answer.",
+   "next": "Teardown written (claude/ch02-teardown.md). Waiting on Tom's answers to 2 ASK questions in the chapter 2 conversation: (1) replace Nara's built first meeting with locked scene 2, (2) which story moments unlock the Nara and TNB Tombos. Then build to the teardown, test, push as ch2build, stop for Tom's phone play.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-17",
@@ -408,6 +408,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Copied the five story files into claude/ and wrote the chapter 2 teardown. Asked Tom 2 questions in the conversation. No build pushed yet."
     }
    ],
    "prompt": {
