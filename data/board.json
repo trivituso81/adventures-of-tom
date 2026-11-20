@@ -5903,7 +5903,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "After the publish of build skilllist1: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name).",
+   "next": "After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6040,6 +6040,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built fix-skilllist1look: SKILLS rows redesigned with fixed small sizes (name 12px, pictures 13px, Pep 13px); the phone-landscape 21px text rule no longer sets them. b3_test s9ui passes."
     }
    ],
    "prompt": {

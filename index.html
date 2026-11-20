@@ -940,6 +940,14 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv{font-size:14px;padding:5
 /* skilllist1 (Tom 2026-11-19: the name "just a touch too big", "the icons can also be smaller"): in the SKILLS list the name is .86 of the row's size
    (an inner <b>, because the layout rules size every span in a button), the flavor and Pocket pictures 1em instead of 1.35em, the Pep number 1.15em. */
 .b3-sk .b3-snt{font-size:.86em;font-weight:inherit;line-height:1.15}.b3-sk .b3-ico{gap:1px}.b3-sk .b3-ico .bi{width:1em;height:1em}.b3-sk .b3-cost b{font-size:1.15em}
+/* fix-skilllist1look (Tom 2026-11-20: "still looks way too big, all the fonts and icons. kind of needs a redesign"): the SKILLS list is a compact row in fixed sizes,
+   so the phone-landscape rule (21px text on every button) no longer sets them. Name 12px, pictures 13px, Pep pill 12px number over a 7px PEP, thin row. */
+#battle.v2 .b2-btn.b3-sk{padding:4px 8px;gap:5px;min-height:0}
+#battle.v2 .b3-sk .b2-sn,#battle.v2 .b3-sk .b3-snt{font-size:12px;line-height:1.12;letter-spacing:0}
+#battle.v2 .b3-sk .b3-ico .bi{width:13px;height:13px}
+#battle.v2 .b3-sk .b3-cost{font-size:12px;padding:0 6px;gap:2px;border-width:1px}
+#battle.v2 .b3-sk .b3-cost b{font-size:13px}#battle.v2 .b3-sk .b3-cost small{font-size:7px;letter-spacing:.3px}
+html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:10px}html.duo #battle.v2 .b3-sk .b3-ico .bi{width:11px;height:11px}html.duo #battle.v2 .b3-sk .b3-cost{font-size:10px}html.duo #battle.v2 .b3-sk .b3-cost b{font-size:11px}
 .b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
 .b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
 .b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}

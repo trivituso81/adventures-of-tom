@@ -22,6 +22,13 @@
 - In-game pencil reports filed since 2026-11-20T02:43:56Z: none (the 7 open reports on branch inbox are all from 11-14 and none is about these pictures), so none marked done.
 - No game file changed (only the build stamp). Tests: `python3 tools/smoke.py` FAILS: [], board_check.py --push, board_sync_test.py, board_test.py, buildlog_test.py all pass; zero references to the six ids remain in the Library files; the Library page checked in portrait and landscape.
 
+## fix-skilllist1look (2026-11-20): SKILLS list redesigned as thin rows with small fixed text and pictures
+
+- Tom (11-20 on card t-skilllist1look): "still looks way too big, all the fonts and icons. kind of needs a redesign".
+- Cause: skilllist1 only scaled the name by .86 and the pictures by 1em of the button's text size, and on a phone held sideways that size is 21px, so everything stayed big. Now the SKILLS rows (index.html, `.b3-sk` block) use fixed sizes in both layouts: name 12px, flavor and Pocket pictures 13px, Pep number 13px over a 7px PEP, row padding 4px 8px (Duo panel: 10px, 11px pictures). The skill card, the Back button and every other list are unchanged.
+- Looked at: portrait and landscape frames from `python3 tools/b3_test.py s9ui` (passes, FAILS: []). Rows are about half as tall as before; in landscape long names wrap to 2 lines.
+- In-game pencil reports about the SKILLS list since 2026-11-20T03:00:48Z: none, so none marked done.
+
 ## skilllist1 (2026-11-19): SKILLS list names and pictures a little smaller
 
 - Tom (11-19 18:34 and 18:36): "the font in the battle ability list is just a touch too big. will it accommodate the max number of icons?" and "The icons can also be smaller".
