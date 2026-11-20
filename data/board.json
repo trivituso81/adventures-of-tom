@@ -12894,8 +12894,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -12913,6 +12913,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: 1 report(s) on branch inbox."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 2 report(s)."
     }
    ],
    "blocks": [],
@@ -14494,7 +14498,8 @@
    "r-20261120-000931-2yx8",
    "r-20261120-001019-feou",
    "r-20261120-001100-lta1",
-   "r-20261120-091238-jecm"
+   "r-20261120-091238-jecm",
+   "r-20261120-091310-jqps"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -14516,8 +14521,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "1a61f191ba678634b8a99e58f5aae07bb3a7495f",
- "synced_at": "2026-11-20T17:13:13+00:00",
+ "synced": "fcea730b7e0b577557aced72a239c473e4598e03",
+ "synced_at": "2026-11-20T17:13:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
