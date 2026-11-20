@@ -15581,7 +15581,7 @@
    "title": "Play chapter 1 and watch people listen",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
@@ -15592,8 +15592,73 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-listen1-install (build listen1): the 6 listening poses and Sal's are in the game."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: theres no one in the story named Grandma so i cant read this Sent to Claude as card c-fix-listen1-play; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T20:12:16.298Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-fix-listen1-play",
+   "tag": "fix-listen1-play",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Characters",
+   "title": "Fix: Play chapter 1 and watch people listen",
+   "next": "You reported a problem on Play chapter 1 and watch people listen. Claude starts the fix by itself. Latest: theres no one in the story named Grandma so i cant read this",
+   "blocks": [
+    "t-listen1-play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T20:12:15.780Z",
+     "card": "t-listen1-play",
+     "title": "Play chapter 1 and watch people listen",
+     "ask": "play",
+     "words": "theres no one in the story named Grandma so i cant read this",
+     "shot": "",
+     "asked": "Open the game, RELOAD, then CHAPTERS ) Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-listen1-play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-listen1-play.",
+     "at": "2026-11-20T20:12:16.298Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-listen1-play: theres no one in the story named Grandma so i cant read this",
+     "at": "2026-11-20T20:12:16.298Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T20:12:16.298Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play chapter 1 and watch people listen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-listen1-play and t-listen1-play in data/board.json, history included. Your first push is the commit board: start c-fix-listen1-play.\n\nTom tested and found problems:\n1. Card t-listen1-play (Play chapter 1 and watch people listen, ask play). He was asked: Open the game, RELOAD, then CHAPTERS ) Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person. He wrote: theres no one in the story named Grandma so i cant read this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T20:12:15.780Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-listen1-play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-listen1-play, and give the build fix-listen1-play a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-listen1-play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
