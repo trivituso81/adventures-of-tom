@@ -12670,7 +12670,7 @@
    "title": "Play the new chapter 1 opening in the taxi office",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
@@ -12708,8 +12708,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Play the new chapter 1 opening in the taxi office, Fix: Play the new chapter 1 opening in the taxi office is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T17:42:12.368Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-takes-56fb01",
