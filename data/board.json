@@ -892,7 +892,7 @@
   {
    "id": "c-board3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "next": "Built: ask types, decide buttons, hand-back screen, after check, auto reload, START and auto-start. Waits for your one-time setup card (Set up the START button).",
@@ -921,13 +921,18 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board3: Your cards say what to do, answers travel on the card, finished work lands in your queue, and a START button (needs one setup from you)"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "tag": "board3",
-   "after": "t-startsetup"
+   "after": "t-startsetup",
+   "done": "2026-11-19"
   },
   {
    "id": "c-nextclean",
@@ -1082,8 +1087,10 @@
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "first": "2026-11-19T16:34:00-08:00",
-   "last": "2026-11-19T16:34:00-08:00",
-   "tags": [],
+   "last": "2026-11-19T16:42:13-08:00",
+   "tags": [
+    "board3"
+   ],
    "cards": [
     "c-board3"
    ]
@@ -1138,8 +1145,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "7ff32e0ae12242e6c420aee6ba253d6f919bf0bf",
- "synced_at": "2026-11-20T00:34:49+00:00",
+ "synced": "e3911b135ff01208bf7132a87e009866fef7c535",
+ "synced_at": "2026-11-20T00:42:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
