@@ -19,6 +19,12 @@
      "note": "",
      "at": "2026-11-20T16:05:24.168Z",
      "build": "fix-gracevoice-distort"
+    },
+    "tom.hit": {
+     "v": "reject",
+     "note": "The animation needs to be slower, and he should be facing left, not right",
+     "at": "2026-11-20T16:05:47.336Z",
+     "build": "fix-gracevoice-distort"
     }
    },
    "expect": [
@@ -59,7 +65,7 @@
     "deedee.victory",
     "deedee.run"
    ],
-   "updated": "2026-11-20T16:05:24.433Z"
+   "updated": "2026-11-20T16:05:47.540Z"
   }
  },
  "about": "Answers from ADMIN > BATTLE LAB > NEW BATTLE > PAINTED STATES (engine/pose-review.js). Key: fighter.state. v approve or reject."
