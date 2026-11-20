@@ -7932,6 +7932,37 @@
    },
    "after": "t-oldchecks",
    "auto": true
+  },
+  {
+   "id": "c-adminicons1",
+   "title": "Give BOARD and ADMIN their own favicon and Home Screen icon (adminicons1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "adminicons1",
+   "next": "In progress: drawing a generic icon for ADMIN and a different one for BOARD (browser tab icon plus iPhone Home Screen icon), then linking them in admin.html and board.html.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR",
+    "opening": "\"The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by this chat. Tom: \"The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic\""
+    }
+   ],
+   "prompt": {
+    "what": "Draws two generic icon sets, one for ADMIN and one for BOARD, and wires them in as each page's favicon and iPhone Home Screen icon.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: small new build, no written steps)",
+    "effort": "medium (two small pictures and four link lines)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-adminicons1 in data/board.json. Make a generic icon for admin.html and a different one for board.html (favicon 32 and 180 x 180 apple-touch-icon each), link them in each page head, push as adminicons1 (first push: board: start c-adminicons1). You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
