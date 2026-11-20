@@ -8243,7 +8243,7 @@
    "id": "c-fix-cutpolish5",
    "tag": "fix-cutpolish5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
@@ -8265,7 +8265,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFEAHCq9DEF8qGDvCv",
     "opening": "Something is wrong on t-cutpolish5"
    },
    "history": [
@@ -8280,6 +8280,10 @@
     {
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -8292,8 +8296,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish5 and t-cutpolish5 in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish5.\n\nTom tested and found problems:\n1. Card t-cutpolish5 (Watch the chapter 1 scenes for breathing and reactions, ask play). He was asked: Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw. He wrote: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:55.454Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish5 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish5, and give the build fix-cutpolish5 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish5",
-   "auto": true,
-   "start": true
+   "auto": true
   }
  ],
  "sessions": [
@@ -9182,8 +9185,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "47af9154fbfca1ff5be66a6443e5c9ccfb4d4c55",
- "synced_at": "2026-11-20T08:12:05+00:00",
+ "synced": "7ae01f275c38ef9583e118f4b00a5f2594093a13",
+ "synced_at": "2026-11-20T08:19:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
