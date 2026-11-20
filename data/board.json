@@ -9067,7 +9067,7 @@
    "changed": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections)\""
    },
    "history": [
     {
@@ -9081,6 +9081,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started: walk stand apply build (read POSE_EDITOR.md, cutpolish2 addendum)."
     }
    ],
    "prompt": {
