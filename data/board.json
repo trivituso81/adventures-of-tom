@@ -9860,6 +9860,37 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-newcard",
+   "tag": "newcard1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "New card button: type an idea, get a sized Claude prompt",
+   "next": "Building: a New card button on the board. Tom types an idea; the page names the card, picks the theme, sizes the model and effort by the rules in claude/handoff-rules.md, writes the prompt, and starts it by itself when START can run it.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
+    "opening": "\"Design a board feature where I can create a new card on my own\""
+   },
+   "prompt": {
+    "what": "Builds the New card button on the board.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new board feature, steps not written)",
+    "effort": "high (a new tool designed and built in one session)",
+    "text": "Read CLAUDE.md and card c-newcard in data/board.json, then finish what its history describes and push build newcard1. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"Design a board feature where I can create a new card on my own that then creates a Claude prompt with the appropriate model and effort level. Automate as much as possible.\" And: \"Eg, For a new feature idea\"."
+    }
+   ]
   }
  ],
  "sessions": [
