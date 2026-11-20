@@ -16772,46 +16772,6 @@
      "t": "Created by c-keysecrets2."
     }
    ]
-  },
-  {
-   "id": "svc-clip-gen",
-   "tag": "svc-clip-gen-fix",
-   "service": "clip-gen",
-   "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
-   "theme": "Tools",
-   "title": "clip-gen failed",
-   "next": "The clip-gen run failed: finished as skipped. A session has to look at the run log and fix it.",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44823941318",
-   "prompt": {
-    "what": "Finds why the clip-gen run failed and fixes it.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md. The clip-gen GitHub Action failed (finished as skipped). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44823941318, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-20",
-     "t": "clip-gen failed: finished as skipped"
-    },
-    {
-     "d": "2026-11-20",
-     "t": "Re-run failed to start: GitHub answered 403"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-20",
-   "changed": "2026-11-20",
-   "reruns": 1,
-   "rerun_at": "2026-11-20T21:52:08+00:00"
   }
  ],
  "sessions": [
