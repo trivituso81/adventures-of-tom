@@ -13109,7 +13109,7 @@
    "id": "c-reports-4",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
@@ -13123,7 +13123,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEEY5DfFUdRMybmFjx",
     "opening": "not started"
    },
    "history": [
@@ -13155,12 +13155,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T18:01:19.125Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-20T18:02:04+00:00"
   },
   {
    "id": "c-idea-implementlisteni",
@@ -13477,7 +13481,7 @@
    "id": "c-idea-welcomepage",
    "tag": "idea-welcomepage2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Welcome page buttons and chapter list difficulty bar",
    "next": "The chapter list now starts any chapter or BONUS the moment it is tapped, with no Start New warning even when an autosave exists, and the welcome page and top bar changes from the first build stay. Pushed as build idea-welcomepage2; Tom plays it next (card t-welcomepage-play).",
@@ -13538,6 +13542,10 @@
      "d": "2026-11-20",
      "t": "Removed the Start New warning (confirmNew, confirmChapter, confirmPart2, confirmBonus purged); tested with an autosave present for chapter 1, 2, 11 and BONUS (tools/welcome_buttons_test.py). Pushed as build idea-welcomepage2. Hands to Tom card t-welcomepage-play.",
      "at": "2026-11-20T17:54:36.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-welcomepage2: Picking a chapter starts it at once, with no Start New warning"
     }
    ],
    "prompt": {
@@ -13549,7 +13557,8 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-welcomepage in data/board.json, history included. Your first push is the commit board: start c-idea-welcomepage.\n\nTom made this card himself with New card on the board. His words: \"on the welcome page, shrink the width of new game and load so that the buttons fit the amount of text, setting a min width based on the widest button. change reload and admin to icon only buttons. / when clicking New Game and seeing the chapter list, at the top above the chpaters on the left should be the BACK button with icon pointing back. to the right of that should be the Easy, Medium, Hard toggles with VERY brief descriptions so they fit within the width of the frame. when clicking on a chapter, the difficulty interstitial should then no longer be needed\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-welcomepage with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    },
-   "after": "t-welcomepage-play"
+   "after": "t-welcomepage-play",
+   "done": "2026-11-20"
   },
   {
    "id": "t-startmore-setup",
@@ -13877,7 +13886,7 @@
    "title": "Run the Project clean-up inside the Project",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "ask": "setup",
    "next": "Handed to Claude by Tom: I dont want to do this - Claude should",
    "blocks": [
@@ -13899,10 +13908,14 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T18:01:24.105Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukD7sCjzp3NJTWyxHVn",
+    "url": "https://claude.ai/code/cse_01RXeukGRvj5YBSMvPY8Zknj",
     "opening": "unknown"
    },
    "tag": "t-projclean-run",
@@ -13916,7 +13929,7 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. You have my full permission to access the repo."
    },
-   "start": true
+   "started_at": "2026-11-20T18:02:04+00:00"
   },
   {
    "id": "c-idea-searchthrough",
@@ -14384,7 +14397,7 @@
    "id": "c-buildname",
    "tag": "buildname1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Show the build name on Play and report cards",
    "next": "Built as buildname1: a Build line on every Play and report card (preview and the bottom of the details sheet). Tom checks it on card t-buildnametry.",
@@ -14412,9 +14425,14 @@
     {
      "d": "2026-11-20",
      "t": "Built: board.html buildOf and buildHtml, the build is the tag of the Claude card whose `after` is the card (newest shipped wins, not shipped yet is marked, or the card's own `build`), test tools/board_build_test.py. Hands to Tom: t-buildnametry."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as buildname1: Play and report cards on the board name the build they are in"
     }
    ],
-   "after": "t-buildnametry"
+   "after": "t-buildnametry",
+   "done": "2026-11-20"
   },
   {
    "id": "t-buildnametry",
@@ -14890,6 +14908,31 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFTWCwqvD635XFuE71",
+   "title": "Show the build name on Play and report cards",
+   "first": "2026-11-20T09:56:12-08:00",
+   "last": "2026-11-20T10:01:38-08:00",
+   "tags": [
+    "buildname1"
+   ],
+   "cards": [
+    "c-buildname"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
+   "title": "Welcome page buttons and chapter list difficulty bar",
+   "first": "2026-11-20T09:30:02-08:00",
+   "last": "2026-11-20T10:00:48-08:00",
+   "tags": [
+    "idea-welcomepage",
+    "idea-welcomepage2"
+   ],
+   "cards": [
+    "c-idea-welcomepage"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "first": "2026-11-20T09:58:10-08:00",
@@ -14897,16 +14940,6 @@
    "tags": [],
    "cards": [
     "c-gatezero"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFTWCwqvD635XFuE71",
-   "title": "Show the build name on Play and report cards",
-   "first": "2026-11-20T09:56:12-08:00",
-   "last": "2026-11-20T09:56:12-08:00",
-   "tags": [],
-   "cards": [
-    "c-buildname"
    ]
   },
   {
@@ -14919,18 +14952,6 @@
    ],
    "cards": [
     "c-battlelabpage"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
-   "title": "Welcome page buttons and chapter list difficulty bar",
-   "first": "2026-11-20T09:30:02-08:00",
-   "last": "2026-11-20T09:51:01-08:00",
-   "tags": [
-    "idea-welcomepage"
-   ],
-   "cards": [
-    "c-idea-welcomepage"
    ]
   },
   {
@@ -16318,8 +16339,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "dc810b410fbd687247e698ef23be962d142462b0",
- "synced_at": "2026-11-20T18:00:32+00:00",
+ "synced": "bdc9a7d5b7aab15bbf6bc420a385a05d347488c3",
+ "synced_at": "2026-11-20T18:02:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
