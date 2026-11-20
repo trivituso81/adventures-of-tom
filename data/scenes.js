@@ -168,7 +168,7 @@ SCENES.ch1Theft=[
   {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
   {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door; Deedee faces Tom (cutpolish3: people who talk stand side by side and face left or right, never the camera)
-  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:4.4,y:7}},   // twelve muffins on the baking island (stand-in)
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:4.3,y:7.25}},   // twelve muffins on the baking island (stand-in)
   {all:[{walk:'tom',to:routeTo('tom',9,9),speed:.25},{walk:'grace',to:routeTo('grace',10,10),speed:.25},
     {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},

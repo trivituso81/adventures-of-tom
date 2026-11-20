@@ -1961,9 +1961,9 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits fully on the bare table top between the cake stand and the table's right edge, touching neither the stand nor the floor behind. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
    "blocks": [],
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-20",
    "history": [
     {
@@ -2005,6 +2005,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: muffins overlap art Sent to Claude as card c-fix-cutpolish4b-3; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: muffins overlap art. Fix fix-cutpolish4b-3 (card c-fix-cutpolish4b-3): rendered the island at the real zoom, the pan still touched the cake stand base and stood above the table's back edge; moved it to sit fully on the wood."
     }
    ],
    "waiting_on": "claude"

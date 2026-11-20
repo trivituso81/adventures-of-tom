@@ -4,6 +4,11 @@
 - `data/scenes.js` ch1Goal: `{ch1Reveal:'list'}` after the opening beat, where Grace unfolds the notebook paper; A closes it and her first line follows. No dialogue text changed, so no voice clip is silenced.
 - Looked at in portrait and landscape: the close-up and the first dialogue line after pressing A. Not looked at: the whole opening played end to end.
 
+## fix-cutpolish4b-3 (2026-11-20): the muffin pan sits fully inside the table top, clear of the cake stand
+
+- Tom (t-cutpolish4b, third report): "muffins overlap art". Rendered the kitchen island at the real zoom: the pan was still touching the cake stand's base and its back row stood above the table's far edge.
+- `data/scenes.js` ch1Theft: pan prop moved from x 4.4, y 7 to x 4.3, y 7.25. Kept: the pan art, size, the prop, the hide after the grab. Looked at a frame: pan between the stand and the table's right edge, fully on the wood. Nothing else changed.
+
 ## fix-cutpolish4b-2 (2026-11-20): the muffin pan now sits fully on the bare table, clear of the cake stand
 
 - Tom (t-cutpolish4b, second report): "muffins overlay the background art". His screenshot showed the pan still covering the glass cake stand.
