@@ -747,8 +747,8 @@
    "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
-   "next": "Phase 5 of 5 in claude/cutscene-polish-plan.md: breathing and squash, listeners turn to the speaker, listener reaction effects (hop, pips), reaction rows for the rest of chapter 1, Boppy's stomach wince.",
+   "col": "wait",
+   "next": "Stuck: the plan file claude/cutscene-polish-plan.md is not in the repo, so a START session cannot build phase 5. Start it from a conversation that has the Project open (paste the card prompt), or copy the plan and handoff-rules files into the repo under claude/.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -768,6 +768,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stopped without building: claude/handoff-rules.md and claude/cutscene-polish-plan.md are in the claude.ai Project, not in this repo, and the START session cannot read them. Phase 5 (effect sizes, reaction rows, pips, the wince) is written only there, so building it would be a guess."
     }
    ],
    "prompt": {
@@ -779,7 +783,8 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
-   "tag": "cutpolish5"
+   "tag": "cutpolish5",
+   "waiting_on": "tom"
   },
   {
    "id": "c-boardready",
