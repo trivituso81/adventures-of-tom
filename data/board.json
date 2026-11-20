@@ -5530,8 +5530,7 @@
   {
    "id": "c-ch1art3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "theme": "Areas",
    "tag": "ch1art3",
    "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
@@ -5553,11 +5552,15 @@
     {
      "d": "2026-11-20",
      "t": "Narrowed to Grace's list only by fix-ch1art2: the other six pictures were removed from the Art Library because the game has no place to show them."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Chapter 1 pictures: six were not needed, only Grace's list is left is done."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -6610,8 +6613,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "3083925a58718884d29a4c61ba287d1990366c88",
- "synced_at": "2026-11-20T03:01:32+00:00",
+ "synced": "b85f032ec35ac6415aedc3615e24ab093d7c8787",
+ "synced_at": "2026-11-20T03:02:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
