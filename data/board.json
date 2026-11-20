@@ -14183,9 +14183,15 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Open the Battle Lab page on your home screen, Fix: Open the Battle Lab page on your home screen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default Sent to Claude as card c-fix-battlelabpagetry-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T18:12:05.961Z"
     }
    ],
-   "col": "up"
+   "col": "wait",
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-heist1play-5",
@@ -14715,6 +14721,65 @@
    "after": "t-effectslook",
    "auto": true,
    "started_at": "2026-11-20T18:09:24+00:00"
+  },
+  {
+   "id": "c-fix-battlelabpagetry-3",
+   "tag": "fix-battlelabpagetry-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "next": "You reported a problem on Open the Battle Lab page on your home screen. Claude starts the fix by itself. Latest: battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand co",
+   "blocks": [
+    "t-battlelabpagetry"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T18:12:04.862Z",
+     "card": "t-battlelabpagetry",
+     "title": "Open the Battle Lab page on your home screen",
+     "ask": "play",
+     "words": "battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default",
+     "shot": "",
+     "asked": "Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari (wait a minute after this push). You should see the Battle Lab with EASY, MEDIUM, HARD at the top (HARD lit) and every fight below as one button. Tap any fight once: it should start straight away on HARD. If you add it to the home screen, use Share ) Add to Home Screen from that page. All good, or Something is wrong."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-battlelabpagetry"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-battlelabpagetry.",
+     "at": "2026-11-20T18:12:05.960Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-battlelabpagetry: battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default",
+     "at": "2026-11-20T18:12:05.961Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T18:12:05.961Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Open the Battle Lab page on your home screen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-battlelabpagetry-3 and t-battlelabpagetry in data/board.json, history included. Your first push is the commit board: start c-fix-battlelabpagetry-3.\n\nTom tested and found problems:\n1. Card t-battlelabpagetry (Open the Battle Lab page on your home screen, ask play). He was asked: Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari (wait a minute after this push). You should see the Battle Lab with EASY, MEDIUM, HARD at the top (HARD lit) and every fight below as one button. Tap any fight once: it should start straight away on HARD. If you add it to the home screen, use Share ) Add to Home Screen from that page. All good, or Something is wrong. He wrote: battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T18:12:04.862Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-battlelabpagetry to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-battlelabpagetry, and give the build fix-battlelabpagetry-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-battlelabpagetry",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
