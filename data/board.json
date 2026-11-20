@@ -8057,7 +8057,7 @@
    "title": "Pencil tab: send a test report",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game tap the pencil tab, type a note, tap the picture to drop a pin, press SEND. You should see Report sent.",
@@ -8076,8 +8076,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-oldchecks-boppy",
