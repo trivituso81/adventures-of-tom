@@ -7300,12 +7300,12 @@
    "lane": "claude",
    "col": "prog",
    "tag": "boardux1",
-   "next": "Rebuilds the top of the board: a header that fits a phone, a light that says when the board's data is behind, new status words (a normal queue is no longer shown as Stuck in red), and a line saying what changed since you last looked. Cards and layout come in redesign 2 and 3. You test once, after redesign 3.",
+   "next": "Built and pushed as boardux1: one row header with a menu, a sync light and behind bar, the new status words (Needs attention is the only red), Since you last looked, and the new colour tokens. Nothing for you to do: you test once, after redesign 3. Next is Board redesign 2 (c-boardux2).",
    "blocks": [
     "c-boardux2"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
     "opening": "not started"
@@ -7318,6 +7318,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built boardux1 (plan sections 3.2, 3.3 without search and themes, 3.6). Checks A1, A2, A7, A8, A9 and A13 pass; what differs from the plan is in claude/boardux-plan.md, Built section."
     }
    ],
    "prompt": {

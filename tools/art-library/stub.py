@@ -8,7 +8,7 @@ xAI:    POST /v1/images/generations and /v1/images/edits  (Bearer must be 'test'
         video host that does not let a web page keep a copy).
 GitHub: PUT /repos/<o>/<r>/contents/<path>, GET same path (404 until put; data/art-prompts.json is pre-seeded from the repo with sha 'seed'; a PUT to an existing path without the right sha answers 409; GET /files lists everything stored). Calls are logged to /log (GET) for assertions.
 CORS is open so a page on another port can call it."""
-import base64, json, sys, zlib, struct, hashlib
+import base64, json, sys, zlib, struct, hashlib, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 def png(w=96, h=128):
@@ -70,6 +70,12 @@ class H(BaseHTTPRequestHandler):
             return self._send(200, {'status': 'done', 'video': {'url': 'http://%s/video.bin?%s' % (self.headers.get('Host'), rid), 'duration': 3}, 'model': 'stub'})
         if self.path == '/log': return self._send(200, LOG)
         if self.path == '/files': return self._send(200, FILES)
+        if self.path.startswith('/repos/') and '/commits/main' in self.path:   # boardux1: the board's sync light asks for the newest commit on main (STUB_COMMIT_AT, an ISO time; default now)
+            at = os.environ.get('STUB_COMMIT_AT') or time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+            return self._send(200, {'sha': 'stub', 'commit': {'committer': {'date': at}}})
+        if self.path.startswith('/repos/') and '/actions/workflows/board-sync.yml/runs' in self.path:   # STUB_RUNS: JSON list of {conclusion, updated_at}; default one success now
+            runs = json.loads(os.environ['STUB_RUNS']) if os.environ.get('STUB_RUNS') else [{'conclusion': 'success', 'updated_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}]
+            return self._send(200, {'workflow_runs': [dict(r, status='completed') for r in runs]})
         if self.path.startswith('/repos/'):
             p = self.path.split('/contents/', 1)[-1].split('?')[0]
             if p in FILES: return self._send(200, {'sha': FILES[p]['sha'], 'content': FILES[p]['content'], 'path': p})

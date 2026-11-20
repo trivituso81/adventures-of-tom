@@ -1,3 +1,10 @@
+## boardux1 (2026-11-20): The board header fits a phone, says when its data is behind, and a normal queue is no longer red
+
+- Tom (11-19 23:01): "Do a UX and visual design assessment of the kanban page as if it were a standalone kanban app dedicated to this project then create instructions and cards to execute". Plan: `claude/boardux-plan.md` (phase 1 of 3; what differs from the plan is in its Built section).
+- `board.html`: one row header at 382 px (project name, sync light, three dot menu with Game, Admin and the GitHub token; no music controls, no "site copy"); sync light and amber behind bar from the newest commit on main and the board-sync runs; new status words (For you, Coming back to you, Start next, Working now, Queued, Needs attention) with "Stuck" retired and red only on Needs attention; "Since you last looked" line with dots and a tap filter; colour and type tokens from plan 3.6 (every text pair 4.5 to 1 or better, nothing under 12 px).
+- New: `tools/board_shots.py` (five sizes, pictures, A1 and A2), `tools/board_ux1_test.py` (A7, A8, A9, menu, since line). `tools/board_test.py` kept every check, changed the words. `tools/art-library/stub.py` answers the commit and sync-run calls.
+- Board: the four boardux cards (c-boardux1 to c-boardux3, t-boarduxtry) were added in the first push `board: start c-boardux1`; `claude/boardux-plan.md` is the repo copy of the Project doc.
+
 ## nextclean (2026-11-20): the board is now the only list of open work; claude/next.md holds rules, tests and push steps only
 
 Moved every open item of claude/next.md onto the board: new cards c-ch6left, c-stagefollow, c-alvarez, c-knownwrong, c-gatezero, t-gatezeroart and t-oldchecks; the rest were already cards or finished (clip reset, cutscene polish, battle stage 9c, chapter 2, voice, publishing). next.md went from 74,730 to about 43,000 bytes. The Project copy of next.md is not changed (no Project access in a START run): replace it with claude/next.md from the repo.

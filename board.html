@@ -7,113 +7,127 @@
 <meta name="theme-color" content="#14122b">
 <meta name="apple-mobile-web-app-title" content="AoT Board">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-v10.png">
-<title>Board</title>
+<title>Adventures of Tom Board</title>
 <style>
+:root{--bg:#14122b;--surface:#1d1a3d;--card:#211d47;--line:#2c2852;--text:#f4f1ff;--muted:#a9a3d6;--accent:#ffd34d;--on-accent:#241b00;--good:#1f7a4a;--prob:#b4414f;--prob-text:#ff9aa5;--amber:#f2b134;--btn:#3a3566;--well:#0f0d24}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#14122b;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
 body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-header{display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0;background:#14122b;border-bottom:1px solid #2c2852;z-index:5}
-header h1{font-size:20px;margin:0;flex:1}
-a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
+a{color:var(--text);text-decoration:underline}
+header{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;padding:0 8px 0 14px;height:56px;position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+.brand{flex:1 1 auto;min-width:0;line-height:1.1;white-space:nowrap}
+.brand small{display:block;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.brand h1{font-size:20px;margin:0}
+#sync{flex:0 1 auto;min-width:0;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);white-space:nowrap;background:none;border:0;padding:0 4px;min-height:44px;font-weight:500;overflow:hidden}
+#sync span{overflow:hidden;text-overflow:ellipsis}
+#sync i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--muted)}
+#sync.ok i{background:var(--good);box-shadow:0 0 0 2px #2fb06a55}#sync.behind i{background:var(--amber)}
+#menub{flex:none;position:relative;width:44px;padding:0;font-size:22px;line-height:1;background:none;color:var(--text);letter-spacing:1px}
+#menub.rd::after{content:"";position:absolute;top:8px;right:6px;width:10px;height:10px;border-radius:50%;background:var(--prob);border:2px solid var(--bg)}
+#menu{position:fixed;top:calc(58px + env(safe-area-inset-top));right:8px;width:min(330px,calc(100vw - 16px));background:var(--surface);border:1px solid var(--btn);border-radius:14px;padding:6px;display:none;z-index:25;box-shadow:0 10px 30px #0008}
+#menu a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;font-weight:600;text-decoration:none}
+#menu a:active{background:var(--line)}
+#menu .tk{padding:8px 12px 10px;border-top:1px solid var(--line);margin-top:4px}
+#menu .tk b{font-size:14px}
+#menu .tk .row2{display:flex;gap:8px;margin-top:8px}
+#menu .src{padding:0 12px 8px;color:var(--muted);font-size:13px}
+#behind{display:none;background:#3a2d0a;border-bottom:1px solid #7a5d12;color:#ffe9a3;font-size:14px;padding:10px 14px}
+#since{display:none;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:14px;font-weight:500;min-height:44px}
+#since.on{outline:2px solid var(--accent)}
 main{max-width:1680px;margin:0 auto;padding:12px 16px 80px}
-button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:#3a3566;color:#fff;font-weight:600;cursor:pointer}
+button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:var(--btn);color:#fff;font-weight:600;cursor:pointer}
 button:disabled{opacity:.45}
-button.gold{background:#ffd34d;color:#241b00}button.good{background:#2f9e63}button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
-.hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px;white-space:pre-wrap}
-#sum{display:block;width:100%;text-align:left;background:#1d1a3d;border:1px solid #3a3566;border-radius:14px;padding:12px 14px;margin:0 0 10px;font-size:16px;font-weight:600}
-#sum.on{outline:2px solid #ffd34d}
-#sum .red{color:#ff8b97}#sum .amb{color:#ffd34d}
+button.gold{background:var(--accent);color:var(--on-accent)}button.good{background:var(--good)}button.small{min-height:36px;padding:6px 11px;font-size:14px;border-radius:10px}
+.hint{color:var(--muted);font-size:13px}.err{color:var(--prob-text);font-size:13px;white-space:pre-wrap}
+.cnt{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.cnt button{background:var(--surface);border:1px solid var(--btn);border-radius:14px;padding:8px 12px;min-height:44px;font-size:15px;font-weight:600;text-align:left}
+.cnt button b{font-size:18px}
+.cnt button.on{outline:2px solid var(--accent)}
+.cnt button.hot{background:var(--prob);border-color:var(--prob)}
+.cnt button.me b{background:var(--accent);color:var(--on-accent);border-radius:10px;padding:0 8px}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
-.chip{flex:none;font-size:14px;padding:6px 12px;border-radius:16px;border:1px solid #3a3566;background:#0f0d24;color:#d9d4ff;white-space:nowrap;min-height:34px;font-weight:500}
-.chip.on{background:#7b6cff;border-color:#a89dff;color:#fff}
-.lane{background:#1a1738;border:1px solid #2c2852;border-radius:14px;margin:0 0 12px;overflow:hidden}
+.chip{flex:none;font-size:14px;padding:6px 12px;border-radius:16px;border:1px solid var(--btn);background:var(--well);color:#d9d4ff;white-space:nowrap;min-height:34px;font-weight:500}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.lane{background:#1a1738;border:1px solid var(--line);border-radius:14px;margin:0 0 12px;overflow:hidden}
 .lane>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:48px}
 .lane>summary::-webkit-details-marker{display:none}
 .lane>summary .nm{font-weight:700;font-size:17px}
-.lane>summary .cv{flex:1;color:#8f89c4;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lane>summary .ct{background:#2c2852;border-radius:10px;padding:2px 9px;font-size:13px}
-.lane>summary .ct.has{background:#ffd34d;color:#241b00;font-weight:700}
-.lane>summary::after{content:"\25BE";color:#b9b3e6}
+.lane>summary .cv{flex:1;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lane>summary .ct{background:var(--line);border-radius:10px;padding:2px 9px;font-size:13px}
+.lane>summary .ct.has{background:var(--accent);color:var(--on-accent);font-weight:700}
+.lane>summary::after{content:"\25BE";color:var(--muted)}
 .lane:not([open])>summary::after{content:"\25B8"}
 .cols{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 12px 12px;scrollbar-width:none}
-.col{flex:0 0 84%;scroll-snap-align:start;background:#14122b;border:1px solid #2c2852;border-radius:12px;padding:8px;min-height:90px}
-.col h3{margin:2px 4px 8px;font-size:13px;color:#b9b3e6;font-weight:600;display:flex;justify-content:space-between}
-.col .none{color:#6f6a9c;font-size:13px;padding:6px 4px}
-.card{display:block;width:100%;text-align:left;background:#242050;border:1px solid #3a3566;border-radius:12px;padding:10px 12px;margin:0 0 8px;font-weight:400;min-height:0}
+.col{flex:0 0 84%;scroll-snap-align:start;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:90px}
+.col h3{margin:2px 4px 8px;font-size:13px;color:var(--muted);font-weight:600;display:flex;justify-content:space-between}
+.col .none{color:var(--muted);font-size:13px;padding:6px 4px}
+.card{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--btn);border-radius:12px;padding:10px 12px;margin:0 0 8px;font-weight:400;min-height:0}
 .card .t{font-weight:700;font-size:15px;line-height:1.3}
 .card .n{color:#cfc9ff;font-size:13px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
-.tag{font-size:11px;border-radius:9px;padding:2px 8px;color:#10101e;font-weight:700}
-.age{font-size:11px;border-radius:9px;padding:2px 8px;background:#2c2852;color:#d9d4ff}
-.age.amber{background:#6b5a1c;color:#ffe9a3}.age.red{background:#b4414f;color:#fff}
-.blk{font-size:11px;border-radius:9px;padding:2px 8px;background:#b4414f;color:#fff;font-weight:700}
-.blk.soft{background:#3a3566;color:#d9d4ff}
-.wt{font-size:11px;border-radius:9px;padding:2px 8px;background:#3a3566;color:#ffe9a3}
-.card.blocking{border-color:#b4414f}
+.tag{font-size:12px;border-radius:9px;padding:2px 8px;color:#10101e;font-weight:700}
+.age{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff}
+.blk{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--btn);color:#d9d4ff;font-weight:700}
+.wt{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--btn);color:#ffe9a3}
+.card .chg{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle}
 #dim{position:fixed;inset:0;background:rgba(5,4,16,.72);display:none;z-index:20}
-#sheet{position:fixed;left:0;right:0;bottom:0;max-height:90vh;overflow-y:auto;background:#1d1a3d;border-top:2px solid #3a3566;border-radius:18px 18px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));display:none;z-index:21;max-width:760px;margin:0 auto}
+#sheet{position:fixed;left:0;right:0;bottom:0;max-height:90vh;overflow-y:auto;background:var(--surface);border-top:2px solid var(--btn);border-radius:18px 18px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));display:none;z-index:21;max-width:760px;margin:0 auto}
 #sheet h2{font-size:19px;margin:0 0 8px}
-#sheet h4{margin:14px 0 4px;font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+#sheet h4{margin:14px 0 4px;font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 #sheet p{margin:0;font-size:15px}
-#sheet pre{white-space:pre-wrap;word-break:break-word;background:#0f0d24;border:1px solid #3a3566;border-radius:10px;padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace;margin:6px 0}
-#sheet a{color:#ffd34d}
+#sheet pre{white-space:pre-wrap;word-break:break-word;background:var(--well);border:1px solid var(--btn);border-radius:10px;padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace;margin:6px 0}
 #sheet ul,#sheet ol{margin:4px 0;padding-left:20px;font-size:14px}
 .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
-select,input[type=text]{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff}
+select,input[type=text]{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--btn);background:var(--well);color:#fff}
 input[type=text]{width:100%}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--good);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+#toast.bad{background:var(--prob)}
 .sec{margin:0 0 14px}
 .sec>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:8px 2px;cursor:pointer;min-height:44px}
 .sec>summary::-webkit-details-marker{display:none}
 .sec>summary .nm{font-weight:800;font-size:15px;letter-spacing:.05em}
-.sec>summary .ct{background:#2c2852;border-radius:10px;padding:2px 9px;font-size:13px}
-.sec>summary .ct.has{background:#ffd34d;color:#241b00;font-weight:700}
-.sec>summary .cv{flex:1;color:#8f89c4;font-size:12px}
-.sec>summary::after{content:"\25BE";color:#b9b3e6}
+.sec>summary .ct{background:var(--line);border-radius:10px;padding:2px 9px;font-size:13px}
+.sec>summary .ct.has{background:var(--accent);color:var(--on-accent);font-weight:700}
+.sec>summary .ct.hot{background:var(--prob);color:#fff;font-weight:700}
+.sec>summary .cv{flex:1;color:var(--muted);font-size:12px}
+.sec>summary::after{content:"\25BE";color:var(--muted)}
 .sec:not([open])>summary::after{content:"\25B8"}
-.sec .none{color:#6f6a9c;font-size:13px;padding:6px 4px}
-.sec.mine .card{border-color:#ffd34d}
-.cnt{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
-.cnt button{background:#1d1a3d;border:1px solid #3a3566;border-radius:14px;padding:8px 12px;min-height:44px;font-size:15px;font-weight:600;text-align:left}
-.cnt button b{font-size:18px}
-.cnt button.on{outline:2px solid #ffd34d}
-.cnt button.warn b{color:#ff8b97}
-.card .meta2{color:#b9b3e6;font-size:12px;margin-top:6px}
+.sec .none{color:var(--muted);font-size:13px;padding:6px 4px}
+.card .meta2{color:var(--muted);font-size:13px;margin-top:6px}
 .card .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.card .unb{color:#ffd34d;font-size:12px;margin-top:6px;font-weight:600}
-.card .quiet{color:#ff8b97;font-size:12px;margin-top:6px;font-weight:600}
-.card .mdl{display:inline-block;font-size:12px;border-radius:9px;padding:2px 8px;background:#2f9e63;color:#fff;font-weight:700}
+.card .unb{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
+.card .quiet{color:var(--prob-text);font-size:13px;margin-top:6px;font-weight:600}
+.card .mdl{display:inline-block;font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:#d9d4ff;font-weight:700}
 div.card{cursor:pointer}
-.conv{display:block;background:#242050;border:1px solid #3a3566;border-radius:12px;padding:10px 12px;margin:0 0 8px}
+.conv{display:block;background:var(--card);border:1px solid var(--btn);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .conv .t{font-weight:700;font-size:15px;line-height:1.3}
-.conv .m{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center;font-size:12px;color:#b9b3e6}
-.st{font-size:11px;border-radius:9px;padding:2px 8px;font-weight:700;color:#10101e}
-.st.running{background:#7be0a6}.st.you{background:#ffd34d}.st.fin{background:#b6c2d9}
-.conv a{color:#ffd34d;font-weight:700;text-decoration:none;font-size:13px}
-.sub{display:flex;align-items:center;gap:8px;margin:10px 2px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffd34d}
-.sub .ct{background:#2c2852;color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
-.ask{font-size:11px;border-radius:9px;padding:2px 8px;background:#ffd34d;color:#241b00;font-weight:700}
-.big{font-size:20px;font-weight:800;color:#7be0a6;margin:6px 0}
-.ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:#3a3566;border-radius:12px;padding:10px 12px}
+.conv .m{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center;font-size:13px;color:var(--muted)}
+.st{font-size:12px;border-radius:9px;padding:2px 8px;font-weight:700;color:#10101e}
+.st.running{background:#7be0a6}.st.you{background:var(--accent)}.st.fin{background:#b6c2d9}
+.conv a{font-weight:700;font-size:13px}
+.sub{display:flex;align-items:center;gap:8px;margin:10px 2px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
+.sub .ct{background:var(--line);color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
+.ask{font-size:12px;border-radius:9px;padding:2px 8px;background:var(--line);color:var(--text);font-weight:700;border:1px solid var(--btn)}
+.big{font-size:20px;font-weight:800;color:var(--text);margin:6px 0}
+.ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:var(--btn);border-radius:12px;padding:10px 12px}
 .ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
-.ch.rec{background:#2f9e63}.ch.rec small{color:#e8fff2}
+.ch.rec{background:var(--good)}.ch.rec small{color:#e8fff2}
 .rv{display:flex;gap:8px;margin-top:10px}
-.pics{margin:10px 0 0;padding:10px;border:1px solid #3a3566;border-radius:10px;background:#1c1a40}
+.pics{margin:10px 0 0;padding:10px;border:1px solid var(--btn);border-radius:10px;background:#1c1a40}
 .pics h4{margin:0 0 6px}
 .pics .pr{display:flex;gap:8px;font-size:13px;line-height:1.35;margin:3px 0}
 .pics .pr b{flex:0 0 auto;max-width:48%}
 .pics .pr span{flex:1;color:#cfcbe8}
 .pics button.gen{width:100%;margin-top:8px}
-.pics button.gen.armed{background:#ffd34d;color:#241f4e}
+.pics button.gen.armed{background:var(--accent);color:var(--on-accent)}
 .pics .gm{font-size:13px;margin-top:8px;color:#cfcbe8}
-.pics a{color:#ffd34d;font-weight:700}
 .rv button{flex:1;min-height:48px;font-size:15px}
-button.bad{background:#b4414f;color:#fff}
-textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;width:100%;min-height:110px;resize:vertical}
+button.bad{background:var(--prob);color:#fff}
+textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--btn);background:var(--well);color:#fff;width:100%;min-height:110px;resize:vertical}
 .shot{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
-.shot img{max-height:90px;border-radius:8px;border:1px solid #3a3566}
-.fixnext{color:#7be0a6;font-size:12px;margin-top:6px;font-weight:600}
-.what{font-size:17px;font-weight:700;color:#7be0a6;margin:8px 0}
+.shot img{max-height:90px;border-radius:8px;border:1px solid var(--btn)}
+.fixnext{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
+.what{font-size:17px;font-weight:700;color:var(--text);margin:8px 0}
 #lanesView{display:none}
 @media (min-width:860px){
 #secView{display:none}#lanesView{display:block}
@@ -123,20 +137,21 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 </style>
 </head>
 <body>
-<header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><a class="back" href="admin.html">Admin</a><span class="hint" id="upd"></span><span class="hint" id="src"></span></header>
+<header><div class="brand"><small>Adventures of Tom</small><h1>Board</h1></div><button id="sync" type="button" aria-label="Sync status"><i></i><span id="synctxt">Checking...</span></button><button id="menub" type="button" aria-label="Menu" aria-expanded="false">&#8943;</button></header>
+<div id="menu" role="menu"><a href="index.html" id="back">Game</a><a href="admin.html">Admin</a><div class="tk"><b>GitHub token</b><div class="hint" id="tokstate"></div><div class="row2"><input type="text" id="tokin" placeholder="Paste the GitHub token" autocomplete="off"><button class="gold" type="button" id="toksave">Save</button></div></div><div class="src">Data: <span id="src"></span></div></div>
+<div id="behind"></div>
 <main>
-<div id="tokbar" style="display:none;background:#5a1d28;border:1px solid #b4414f;border-radius:14px;padding:12px 14px;margin:0 0 10px"><b>This browser can only look.</b> Buttons here do not save until you paste your GitHub token once (the same token the Art Library uses).<div style="display:flex;gap:8px;margin-top:8px"><input type="text" id="tokin" placeholder="Paste the GitHub token" autocomplete="off"><button class="gold" type="button" id="toksave">Save</button></div></div>
+<button id="since" type="button"></button>
 <div class="cnt" id="sum"></div>
 <div class="chips" id="chips"></div>
 <div id="secView"></div>
 <div id="lanesView"></div>
-<p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). Age turns amber at 3 days and red at 7 without a change.</p>
+<p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). A card is flagged Needs attention when it says it is finished but is still open, a run or START failed, or its conversation has been quiet for 6 hours.</p>
 <p class="err" id="err"></p>
 </main>
 <div id="dim"></div>
 <div id="sheet"></div>
 <div id="toast"></div>
-<script src="engine/admin-music.js?v=adminvol1"></script>
 <script>
 'use strict';
 const Q=new URLSearchParams(location.search);
@@ -150,7 +165,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const lsGet=k=>{try{return localStorage.getItem(k)||'';}catch(e){return '';}};
 const b64t=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i+=0x8000)b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(b);};
 const t64=s=>{const bin=atob(String(s).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);};
-let B=null,sha=null,theme='',only='';   // only: '', mine, ready, run, stuck
+let B=null,sha=null,theme='',only='';   // only: '', mine, ready, run, queued, attn, changed
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const dayNum=s=>{const p=String(s).split('-').map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5);};
 const ageOf=c=>Math.max(0,dayNum(today())-dayNum(c.changed||c.created||today()));
@@ -163,10 +178,10 @@ const HIST=id=>' Board card '+id+'. Read its history first: my notes and answers
 const FIRST=id=>' Your first push is the commit board: start '+id+' (it moves this card to In progress and links your conversation).';
 const withId=c=>{let t=(c.prompt&&c.prompt.text)||'';if(t.indexOf('Read its history first')<0)t+=HIST(c.id);if(t.indexOf('board: start '+c.id)<0)t+=FIRST(c.id);return t;};   // board5: a pasted prompt always claims its card
 const hasTok=()=>!!(lsGet(TOKEN)||Q.get('gh'));
-const NOTOK='This browser has no GitHub token, so it can look but cannot save. Paste the token in the box at the top of the board, then try again.';
+const NOTOK='This browser has no GitHub token, so it can look but cannot save. Open the menu (the three dots at the top right), paste the token there, then try again.';
 const PROJECT='https://claude.ai/project/01a14d08-5251-75c8-a191-5d11f4245788';
 let lastLoad=0;
-let toastT;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
+let toastT;function toast(m,bad){const t=$('toast');t.textContent=m;t.className=(bad||/^(GitHub \d|This browser has no|Could not|This card is gone)/.test(m))?'bad':'';t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
 function ago(iso){if(!iso)return 'no push yet';const m=Math.max(0,Math.round((nowMs()-Date.parse(iso))/6e4));if(m<2)return 'just now';if(m<90)return m+' min ago';const h=Math.round(m/60);if(h<36)return h+' h ago';return Math.round(h/24)+' days ago';}
 
 async function load(){
@@ -179,10 +194,76 @@ async function load(){
   if(!r.ok) throw new Error('Could not load data/board.json ('+r.status+')');
   B=await r.json();sha=null;$('src').textContent='site copy';stamp();
 }
-function stamp(){lastLoad=nowMs();$('upd').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}
-async function reload(){if($('sheet').style.display==='block')return false;try{await load();await loadArt();render();return true;}catch(e){return false;}}
+function stamp(){lastLoad=nowMs();}
+async function reload(){if($('sheet').style.display==='block')return false;try{await load();await loadArt();render();checkSync();return true;}catch(e){return false;}}
 setInterval(reload,60000);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&nowMs()-lastLoad>5000)reload();});
+let hiddenAt=0;
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden'){hiddenAt=nowMs();saveSnap();return;}
+  if(hiddenAt&&nowMs()-hiddenAt>=12e4)loadSince();   // coming back after two minutes or more is a new visit
+  if(nowMs()-lastLoad>5000)reload();else if(B)render();
+});
+window.addEventListener('pagehide',saveSnap);
+
+// ---- boardux1: the sync light (plan claude/boardux-plan.md 3.3). The page cannot know the data is behind from the data alone, so it asks GitHub for the
+// newest commit on main and for the board-sync runs. The board is behind when the last run failed, or the newest commit is more than 15 minutes newer
+// than the last good sync (B.synced_at or the last good run, whichever is later) and has itself been waiting at least 5 minutes for the job.
+const SYNC={t:0,commit:0,okAt:0,fail:false};
+const SYNC_EVERY=5*6e4,SYNC_BEHIND=15*6e4,SYNC_GRACE=5*6e4;
+const ghHdr=()=>{const tok=lsGet(TOKEN);return (tok||Q.get('gh'))?{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'}:{Accept:'application/vnd.github+json'};};
+const clock=ms=>{const d=new Date(ms),t=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});return d.toDateString()===new Date().toDateString()?t:d.toLocaleDateString([],{weekday:'short'})+' '+t;};
+async function checkSync(force){
+  if(!force&&nowMs()-SYNC.t<SYNC_EVERY)return;
+  SYNC.t=nowMs();const base=GH()+'/repos/'+REPO;
+  try{const r=await fetch(base+'/commits/main?t='+nowMs(),{cache:'no-store',headers:ghHdr()});
+    if(r.ok){const j=await r.json(),d=j&&j.commit&&(j.commit.committer||j.commit.author);SYNC.commit=d&&d.date?Date.parse(d.date):0;}}catch(e){}
+  try{const r=await fetch(base+'/actions/workflows/board-sync.yml/runs?per_page=10&t='+nowMs(),{cache:'no-store',headers:ghHdr()});
+    if(r.ok){const j=await r.json(),rs=(j.workflow_runs||[]).filter(x=>x.status==='completed'&&x.conclusion!=='cancelled'&&x.conclusion!=='skipped');
+      SYNC.fail=!!(rs[0]&&rs[0].conclusion==='failure');
+      const ok=rs.find(x=>x.conclusion==='success');SYNC.okAt=ok?Date.parse(ok.updated_at||ok.created_at):0;}}catch(e){}
+  renderSync();
+}
+function syncState(){
+  const at=B&&B.synced_at?Date.parse(B.synced_at):0,ref=Math.max(at||0,SYNC.okAt||0);
+  const behind=SYNC.fail||!!(SYNC.commit&&ref&&SYNC.commit-ref>SYNC_BEHIND&&nowMs()-SYNC.commit>SYNC_GRACE);
+  return {ref,behind,fail:SYNC.fail};
+}
+function renderSync(){
+  if(!B)return;
+  const st=syncState(),el=$('sync'),bar=$('behind');
+  el.className=st.behind?'behind':st.ref?'ok':'';
+  $('synctxt').textContent=st.behind?'Sync behind':st.ref?'Synced '+ago(new Date(st.ref).toISOString()):'Sync unknown';
+  if(st.behind){bar.style.display='block';bar.textContent='The board is behind. '+(st.fail?'The last sync failed'+(st.ref?' and the board was last synced at '+clock(st.ref):''):'Sync stopped'+(st.ref?' at '+clock(st.ref):''))+', so cards below may show as working after they shipped.';}
+  else bar.style.display='none';
+}
+// ---- boardux1: "Since you last looked". The device keeps the board as it stood when you left (column and history length per card); on return the
+// page compares and says what changed. Cards that changed carry a dot. Tapping the line shows only those cards.
+const SNAPK='aot-board-snap';
+let SINCE=null,CH={ids:new Set(),shipped:0,mine:0,started:0};
+const keyOf=c=>c.col+'|'+((c.history||[]).length)+'|'+c.lane;
+function loadSince(){try{const j=JSON.parse(lsGet(SNAPK)||'null');SINCE=j&&j.t&&j.m?j:null;}catch(e){SINCE=null;}}
+function saveSnap(){if(!B)return;try{const m={};B.cards.forEach(c=>{m[c.id]=keyOf(c);});localStorage.setItem(SNAPK,JSON.stringify({t:new Date().toISOString(),m}));}catch(e){}}
+function changes(){
+  const out={ids:new Set(),shipped:0,mine:0,started:0};
+  if(!SINCE||!B)return out;
+  B.cards.forEach(c=>{
+    const old=SINCE.m[c.id];if(old===keyOf(c))return;
+    out.ids.add(c.id);const oc=old?old.split('|')[0]:'';
+    if(c.col==='done'){if(oc!=='done'&&c.lane!=='tom'&&!c.retired)out.shipped++;return;}
+    if(c.lane==='tom'){if(!old||(oc==='wait'&&c.col!=='wait'))out.mine++;return;}
+    if(c.col==='prog'&&oc!=='prog')out.started++;
+  });
+  return out;
+}
+function renderSince(){
+  const el=$('since');CH=changes();
+  if(!SINCE||!B){el.style.display='none';return;}
+  const parts=[];if(CH.shipped)parts.push(CH.shipped+' shipped');if(CH.mine)parts.push(CH.mine+' new for you');if(CH.started)parts.push(CH.started+' started');
+  el.style.display='block';el.className=only==='changed'?'on':'';
+  el.textContent='Since '+clock(Date.parse(SINCE.t))+': '+(parts.length?parts.join(', ')+'.':CH.ids.size?CH.ids.size+' card'+(CH.ids.size===1?'':'s')+' changed.':'nothing changed.');
+}
+function tokbar(){const has=hasTok();$('menub').classList.toggle('rd',!has);$('tokstate').textContent=has?'Saved on this device. Buttons here save to the game.':'This browser can only look. Buttons do not save until you paste your GitHub token once (the same token the Art Library uses).';}
+function menuOpen(v){$('menu').style.display=v?'block':'none';$('menub').setAttribute('aria-expanded',v?'true':'false');}
 
 // ---- derived
 const laneName=id=>(B.lanes.find(l=>l.id===id)||{name:id}).name;
@@ -191,11 +272,39 @@ const themeOk=c=>!theme||c.theme===theme;
 const open=()=>B.cards.filter(c=>c.col!=='done'&&themeOk(c));
 const blockedBy=c=>B.cards.filter(x=>x.col!=='done'&&(x.blocks||[]).includes(c.id));
 const blocksOpen=c=>(c.blocks||[]).map(cardById).filter(x=>x&&x.col!=='done');
-const secYour=()=>open().filter(c=>c.lane==='tom'&&(c.col==='up'||c.col==='prog'));
-const secReady=()=>open().filter(c=>c.lane==='claude'&&c.col==='up');
-const secRun=()=>open().filter(c=>c.col==='prog'&&c.lane!=='tom'&&!c.quiet);
+const QUIET_MS=6*36e5;
 const waitsOnClaude=c=>c.lane==='tom'&&c.col==='wait'&&blockedBy(c).some(k=>k.lane==='claude');   // a tested card waiting on its fix is Claude's move, not stuck
-const secStuck=()=>open().filter(c=>(c.col==='wait'&&!waitsOnClaude(c))||(c.col==='prog'&&c.quiet));
+// boardux1 (plan 3.2): the words the page uses. The data columns keep their ids. "Stuck" is retired: an ordinary queue is never red.
+// Needs attention (Claude and service cards only; Tom's own cards stay under For you with their age): the card says it is finished but is still open,
+// a run failed or START failed, a session ended without shipping, it is In progress with no push for 6 hours (no session link: a day), or it waits on a
+// card that is already finished. Plan difference: "no change for 1 day" applies to Working now cards only, because a card queued behind a long build, or
+// waiting for Tom to press START, is not late, and the plan's own rule is that an ordinary queue is never red.
+function attnWhy(c){
+  if(c.lane==='tom'||c.col==='done')return '';
+  if(c.start_error)return 'START failed last time: '+c.start_error;
+  if(c.service&&c.col==='wait')return 'A run failed: '+String(c.next||'').slice(0,120);
+  const last=(c.history||[]).slice(-1)[0];
+  if(last&&/without shipping/i.test(last.t))return 'A session ended without shipping';
+  if(c.col==='prog'){
+    const w=/^\s*(shipped|done|built)\b/i.exec(c.next||'');
+    if(w)return 'Its note starts with "'+w[1]+'" but the card is still open';
+    if(c.quiet)return 'Quiet for '+quietFor(c)+': the conversation may have stopped';
+    const s=sessionFor(c);
+    if(s?nowMs()-Date.parse(s.last)>=QUIET_MS:ageOf(c)>=1)return 'Quiet for '+quietFor(c)+': the conversation may have stopped';
+  }
+  if(c.col==='wait'&&(c.waiting_on==='tom'||c.waiting_on==='claude')&&!blockedBy(c).length)return 'Waits on a card that is already finished: nothing is holding it';
+  return '';
+}
+function statusOf(c){
+  if(c.col==='done')return 'done';
+  if(c.lane==='tom')return c.col==='wait'?(waitsOnClaude(c)?'back':'queued'):'mine';
+  if(attnWhy(c))return 'attn';
+  if(c.col==='prog'||c.start)return 'run';
+  if(c.col==='wait'||blockedBy(c).length)return 'queued';
+  return 'ready';
+}
+const byStatus=k=>open().filter(c=>statusOf(c)===k);
+const secYour=()=>byStatus('mine'),secBack=()=>byStatus('back'),secReady=()=>byStatus('ready'),secRun=()=>byStatus('run'),secQueued=()=>byStatus('queued'),secAttn=()=>byStatus('attn');
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
 const routineFor=c=>{const p=c.prompt;if(!p)return null;return (B.routines||[]).find(r=>String(p.model||'').startsWith(r.model)&&String(p.effort||'').startsWith(r.effort))||null;};
 const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
@@ -208,27 +317,28 @@ function convState(s){
   return ['fin','Finished'];
 }
 const recentConvs=()=>(B.sessions||[]).filter(s=>nowMs()-Date.parse(s.last)<=3*864e5);
-function ageClass(a){return a>=7?'red':a>=3?'amber':'';}
 function quietFor(c){const s=sessionFor(c);if(!s){const d=Math.max(1,ageOf(c));return d+' day'+(d===1?'':'s');}const h=Math.max(1,Math.floor((nowMs()-Date.parse(s.last))/36e5));return h<24?h+' hour'+(h===1?'':'s'):Math.floor(h/24)+' day'+(Math.floor(h/24)===1?'':'s');}
 
 function cardHtml(c,ctx){
   const a=ageOf(c),bl=blocksOpen(c),tcol=THEME_COL[c.theme]||'#ccc';
   let meta='<span class="tag" style="background:'+tcol+'">'+esc(c.theme)+'</span>';
   if(c.lane==='tom'&&c.ask&&c.col!=='done') meta+='<span class="ask">'+esc(askName(c.ask))+'</span>';
-  if(c.col!=='done') meta+='<span class="age '+ageClass(a)+'">'+a+'d</span>';
-  if(c.start) meta+='<span class="age amber">Starting...</span>';
+  if(c.col!=='done') meta+='<span class="age">'+a+'d</span>';
+  if(c.start) meta+='<span class="age">Starting...</span>';
   if(ctx==='ready'&&c.prompt) meta+='<span class="mdl">'+esc(modelShort(c))+'</span>';
   let extra='';
   if(c.lane==='tom'&&c.col!=='done'&&bl.length) extra+='<div class="unb">Unblocks: '+esc(bl[0].title)+(bl.length>1?' and '+(bl.length-1)+' more':'')+'</div>';
-  if(ctx==='run'||ctx==='stuck'&&c.col==='prog'){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="color:#ffd34d;font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
+  if(ctx==='attn'){const w=attnWhy(c);if(w)extra+='<div class="quiet">'+esc(w)+'</div>';}
+  if(ctx==='run'||(ctx==='attn'&&c.col==='prog')){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
   if(c.lane==='claude'&&c.col!=='done'){const back=blocksOpen(c).filter(x=>x.lane==='tom');if(back.length)extra+='<div class="fixnext">When this ships, you check again: '+esc(back.map(x=>x.title).join('; '))+'</div>';}
-  if(c.quiet) extra+='<div class="quiet">Quiet for '+quietFor(c)+': the conversation may have stopped</div>';
-  if(ctx==='stuck'&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'Waits on: '+esc(by.map(x=>x.title).join('; ')):'Waits on '+esc(laneName(c.waiting_on||'')))+'</div>';}
+  if((ctx==='queued'||ctx==='attn')&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'After: '+esc(by.map(x=>x.title).join('; ')):'Waiting on '+esc(laneName(c.waiting_on||'')))+'</div>';}
+  if((ctx==='queued')&&c.col==='up'){const by=blockedBy(c);extra+='<div class="meta2">After: '+esc(by.map(x=>x.title).join('; '))+'</div>';}
   let row='';
-  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
-  if(c.start_error&&c.col!=='done') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
+  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
+  if(c.start_error&&c.col!=='done'&&ctx!=='attn') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
   if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=picsHtml(c,true)+rvBtns(c.id);
-  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
+  const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
+  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+dot+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
 const rvBtns=id=>'<div class="rv"><button class="good" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
 function convHtml(s){
@@ -237,18 +347,17 @@ function convHtml(s){
 }
 const secOpen={};   // what Tom opened or closed survives the 60 second reload
 document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.sec)secOpen[d.dataset.sec]=d.open;},true);
-function sec(id,name,hint,list,fn,openIt,mine){
+function sec(id,name,hint,list,fn,openIt,mine,hot){
   const body=list.length?list.map(fn).join(''):'<div class="none">Nothing here</div>';
   if(id in secOpen) openIt=secOpen[id];
-  return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
+  return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':hot&&list.length?' hot':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
 }
-function tokbar(){$('tokbar').style.display=hasTok()?'none':'block';}
 function counts(){tokbar();
-  const n={mine:secYour().length,ready:secReady().length,run:secRun().length,stuck:secStuck().length};
-  const b=(k,l,w)=>'<button type="button" data-only="'+k+'" class="'+(only===k?'on ':'')+(w?'warn':'')+'">'+l+' <b>'+n[k]+'</b></button>';
-  $('sum').innerHTML=b('mine','Your move',n.mine>0)+b('ready','Ready to start')+b('run','Running')+b('stuck','Stuck',n.stuck>0);
+  const n={mine:secYour().length,ready:secReady().length,run:secRun().length,queued:secQueued().length,attn:secAttn().length};
+  const b=(k,l,cls)=>'<button type="button" data-only="'+k+'" class="'+(only===k?'on ':'')+(cls||'')+'">'+l+' <b>'+n[k]+'</b></button>';
+  $('sum').innerHTML=b('mine','For you',n.mine?'me':'')+b('ready','Start next')+b('run','Working now')+b('queued','Queued')+b('attn','Needs attention',n.attn?'hot':'');
   const parts=ASKS.map(a=>[secYour().filter(c=>c.ask===a[0]).length,a[0]]).concat([[secYour().filter(c=>!ASKS.some(a=>a[0]===c.ask)).length,'other']]).filter(x=>x[0]).map(x=>x[0]+' '+x[1]);
-  $('sum').setAttribute('data-text','Your move: '+n.mine+(parts.length?' ('+parts.join(', ')+')':'')+'. Ready to start: '+n.ready+'. Running: '+n.run+'. Stuck: '+n.stuck+'.');
+  $('sum').setAttribute('data-text','For you: '+n.mine+(parts.length?' ('+parts.join(', ')+')':'')+'. Start next: '+n.ready+'. Working now: '+n.run+'. Queued: '+n.queued+'. Needs attention: '+n.attn+'.');
 }
 function mineGroups(list){
   if(!list.length)return '<div class="none">Nothing here</div>';
@@ -260,13 +369,16 @@ function mineGroups(list){
   return h;
 }
 function renderSections(){
-  const show=k=>!only||only===k;
+  const show=k=>!only||only==='changed'||only===k;
+  const ch=c=>only!=='changed'||CH.ids.has(c.id);
   const cv=recentConvs();
   let h='';
-  if(show('mine')) h+='<details class="sec mine" data-sec="mine" open><summary><span class="nm">YOUR MOVE</span><span class="ct'+(secYour().length?' has':'')+'">'+secYour().length+'</span><span class="cv">what only you can do, by kind</span></summary>'+mineGroups(secYour())+'</details>';
-  if(show('ready')) h+=sec('ready','READY TO START','Claude can start these',secReady(),c=>cardHtml(c,'ready'),true);
-  if(show('run')) h+=sec('run','RUNNING NOW','in progress',secRun(),c=>cardHtml(c,'run'),true);
-  if(show('stuck')) h+=sec('stuck','STUCK','waiting, or quiet for a day',secStuck(),c=>cardHtml(c,'stuck'),true);
+  if(show('mine')){const m=secYour().filter(ch);h+='<details class="sec mine" data-sec="mine" open><summary><span class="nm">FOR YOU</span><span class="ct'+(m.length?' has':'')+'">'+m.length+'</span><span class="cv">what only you can do, by kind</span></summary>'+mineGroups(m)+'</details>';
+    h+=sec('back','COMING BACK TO YOU','waiting on a Claude fix, then back to you',secBack().filter(ch),c=>cardHtml(c,'back'),false);}
+  if(show('ready')) h+=sec('ready','START NEXT','ready to start',secReady().filter(ch),c=>cardHtml(c,'ready'),true);
+  if(show('run')) h+=sec('run','WORKING NOW','Claude is on these',secRun().filter(ch),c=>cardHtml(c,'run'),true);
+  if(show('queued')) h+=sec('queued','QUEUED','waiting behind another card',secQueued().filter(ch),c=>cardHtml(c,'queued'),true);
+  if(show('attn')) h+=sec('attn','NEEDS ATTENTION','late, failed or stopped',secAttn().filter(ch),c=>cardHtml(c,'attn'),true,false,true);
   if(!only) h+=sec('conv','CONVERSATIONS','last 3 days, newest push first',cv,convHtml,false);
   if(!only) h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);
   if(!only&&!(B.sessions||[]).length) h=h.replace('<div class="none">Nothing here</div></details><details class="sec" data-sec="done"','<div class="none">None recorded yet: the sync job fills this after the next push.</div></details><details class="sec" data-sec="done"');
@@ -282,8 +394,8 @@ function renderLanes(){
     const openN=inLane.filter(c=>c.col!=='done').length;
     const cols=B.columns.filter(col=>col.id!=='done').map(col=>{
       let cs=inLane.filter(c=>c.col===col.id);
-      cs.sort((a,b)=>(col.id==='done'?String(b.done).localeCompare(String(a.done)):ageOf(b)-ageOf(a)));
-      return '<div class="col" data-col="'+col.id+'"><h3><span>'+esc(col.name)+'</span><span>'+cs.length+'</span></h3>'+(cs.length?cs.map(c=>cardHtml(c,l.id==='tom'?'mine':col.id==='up'&&l.id==='claude'?'ready':col.id==='prog'?'run':col.id==='wait'?'stuck':'done')).join(''):'<div class="none">Nothing here</div>')+'</div>';
+      cs.sort((a,b)=>ageOf(b)-ageOf(a));
+      return '<div class="col" data-col="'+col.id+'"><h3><span>'+esc(col.name)+'</span><span>'+cs.length+'</span></h3>'+(cs.length?cs.map(c=>cardHtml(c,statusOf(c))).join(''):'<div class="none">Nothing here</div>')+'</div>';
     }).join('');
     return '<details class="lane" data-lane="'+l.id+'" open><summary><span class="nm">'+esc(l.name)+'</span><span class="cv">'+esc(l.covers)+'</span><span class="ct'+(openN&&l.id==='tom'?' has':'')+'">'+openN+'</span></summary><div class="cols">'+cols+'</div></details>';
   }).join('');
@@ -358,7 +470,7 @@ function rerender(){render();if(cur&&$('sheet').style.display==='block'){const y
 function render(){
   counts();
   $('chips').innerHTML=['All'].concat(B.themes).map(t=>'<button class="chip'+((t==='All'?!theme:theme===t)?' on':'')+'" type="button" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('');
-  renderSections();renderLanes();
+  renderSince();renderSections();renderLanes();renderSync();
 }
 
 // ---- detail sheet
@@ -366,7 +478,7 @@ let cur=null;
 function openSheet(id){
   const c=cardById(id);if(!c)return;cur=id;
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
-  let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age '+ageClass(ageOf(c))+'">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
+  let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
   if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
@@ -542,6 +654,10 @@ function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.st
 
 document.addEventListener('click',e=>{
   const t=e.target;
+  if(!t.closest('#menu')&&!t.closest('#menub'))menuOpen(false);
+  if(t.closest('#menub')){menuOpen($('menu').style.display!=='block');return;}
+  if(t.closest('#sync')){checkSync(true);reload();return;}
+  if(t.closest('#since')){if(CH.ids.size){only=only==='changed'?'':'changed';render();}return;}
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
@@ -557,7 +673,7 @@ document.addEventListener('click',e=>{
   if(t.id==='dim'||t.id==='bclose'){closeSheet();return;}
   if(t.id==='bpaste'){const c=cardById(cur);if(c)copyText(c.paste);return;}
   if(t.id==='bcopy'){const c=cardById(cur);copyText(c?withId(c):$('ptxt').textContent);if(c)markCopied(c.id);return;}
-  if(t.id==='toksave'){const v=$('tokin').value.trim();if(!v){toast('Paste the token first');return;}try{localStorage.setItem(TOKEN,v);}catch(err){toast('This browser would not save it');return;}toast('Token saved');tokbar();reload();return;}
+  if(t.id==='toksave'){const v=$('tokin').value.trim();if(!v){toast('Paste the token first');return;}try{localStorage.setItem(TOKEN,v);}catch(err){toast('This browser would not save it');return;}toast('Token saved');menuOpen(false);tokbar();reload();checkSync(true);return;}
   const chb=t.closest('[data-choice]');
   if(chb){const id=cur,c=cardById(id);if(!c)return;
     if(chb.dataset.choice==='other'){showAct('<input type="text" id="ntxt" placeholder="Your answer"><button class="gold" id="bchgo" type="button">Save my answer</button>');return;}
@@ -584,9 +700,10 @@ document.addEventListener('click',e=>{
   if(t.id==='ngo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type a note first.';return;}
     run('board: note '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c)touch(c,'Tom: '+tx);return d;},'Note saved');return;}
 });
-document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
-load().then(loadArt).then(render).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
-window.__board={get B(){return B;},render,reload};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')menuOpen(false);if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
+loadSince();
+load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);}).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
+window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy};
 </script>
 </body>
 </html>

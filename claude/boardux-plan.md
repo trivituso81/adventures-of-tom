@@ -213,4 +213,25 @@ The cards are in the Project file `claude/boardux-cards.json`, already checked w
 
 ## Built
 
-(Each phase writes what it built here, and anything that differs from this plan.)
+### boardux1 (2026-11-20): the frame and the truth
+
+Sections 3.2, 3.3 (not search or themes) and 3.6, checks A1, A2, A7, A8, A9, A13. Files: `board.html`, `tools/board_shots.py` (new), `tools/board_ux1_test.py` (new), `tools/board_test.py` (new words, same checks), `tools/art-library/stub.py` (two GitHub endpoints for the sync light).
+
+| Built | Notes |
+|---|---|
+| Header | One row at 382 px (56 px tall): "Adventures of Tom" over "Board", the sync light, a three dot menu. The menu holds Game, Admin, the GitHub token box and a "Data: live / site copy" line. Music controls and "site copy" are gone from the header (the admin-music script is no longer loaded on this page). A red dot on the menu button means no token; the old red token bar is gone. |
+| Sync light | Green dot and "Synced 12 min ago", or an amber dot, "Sync behind" and the one-line bar under the header. The page asks GitHub for the newest commit on main and the board-sync runs (every 5 minutes at most, 2 calls). Behind = the last run failed, or the newest commit is more than 15 minutes newer than the last good sync. |
+| Status words | FOR YOU, COMING BACK TO YOU (closed), START NEXT, WORKING NOW, QUEUED (each with "After: <card>"), NEEDS ATTENTION (red, only there). "Stuck" is gone. The wide lanes view keeps its columns but its cards use the same words. |
+| Since you last looked | The device keeps the board as it stood when you left (column and history length per card). On return one line says what changed ("Since 8:43 PM: 1 shipped, 1 new for you, 1 started."); changed cards carry a gold dot; tapping the line shows only those cards. First visit shows no line. |
+| Colour and type | The tokens of 3.6 as CSS variables. Gold only for the one solid action, the active chip or count and the For you count. Green is #1f7a4a (5.3 to 1). Links are white and underlined. Red only for Needs attention, errors and Something is wrong. Nothing under 12 px. A9 is checked by scanning every drawn text and background pair in the browser (phone, wide, menu open, sheet open, behind bar showing). |
+| `tools/board_shots.py` | The five sizes, a picture of the page, of an open sheet and (at 382) of the open menu. |
+
+Differences from the plan, and why:
+
+1. **Needs attention and "no change for 1 day".** The plan says any open card with no change for a day. Taken literally every card queued behind a long build, or waiting for Tom to press START, turns red the next morning, which breaks the plan's own rule that an ordinary queue is never red. Built: the day rule applies to Working now cards only (In progress with no push for 6 hours when a conversation is linked, a day when none is). Other triggers as planned (says Shipped, Done or Built while open; failed run; START failed; session ended without shipping), plus one: a card that waits on a card that is already finished. Tom's own cards stay under For you and keep their age pill.
+2. **Sync light reference time.** The plan compares the newest commit with `synced_at`. The sync job only writes `synced_at` when it moves a card, so a push that moves nothing would turn the light amber 15 minutes later for no reason. Built: the reference is the later of `synced_at` and the last good board-sync run, and a commit younger than 5 minutes is not judged yet.
+3. **Start next** counts only Claude cards in Up next that nothing waits on (a blocked Up next card is Queued, as the table in 3.2 says). The count buttons are still the same boxes (F22 is left for phase 3); there are five now.
+4. **Extra tokens**: `--btn` (#3a3566, neutral buttons and borders), `--well` (#0f0d24, inputs) and `--amber` (the behind light) next to the plan's tokens.
+5. Card age pills are now neutral grey (no amber or red) until phase 2 removes them; the card layout itself is untouched.
+
+Tests: `python3 tools/board_test.py /tmp/board`, `python3 tools/board_artgen_test.py`, `python3 tools/board_ux1_test.py`, `python3 tools/board_shots.py /tmp/boardshots`, `python3 tools/board_sync_test.py`. board_test.py kept every check and changed only the words (For you, Start next, Working now, Queued, Needs attention) and the token check (menu and red dot instead of the red bar).
