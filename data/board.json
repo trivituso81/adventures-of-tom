@@ -10706,6 +10706,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-heist1voice: I don't need to see this card until the muffin theft is actually good",
      "at": "2026-11-20T15:37:44.141Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T17:59:40.218Z"
     }
    ],
    "prompt": {
@@ -10717,7 +10722,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1voice and t-heist1voice in data/board.json, history included. Your first push is the commit board: start c-fix-heist1voice.\n\nTom tested and found problems:\n1. Card t-heist1voice (Make takes for the 2 new lines of the muffin theft, ask voice). He was asked: ADMIN ) VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1; the scripts with their tags are already in the script box). Make takes, keep one per line, then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 2 lines with the stand-in voice. He wrote: I don't need to see this card until the muffin theft is actually good\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:37:43.898Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1voice, and give the build fix-heist1voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-heist1voice"
+   "after": "t-heist1voice",
+   "start": true
   },
   {
    "id": "c-idea-removeall",
