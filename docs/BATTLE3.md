@@ -292,7 +292,7 @@ Calls made in stage 2 (all in data): Zone One Blockade's answer is a standard Cl
 | Tom, Grace, Rose, Deedee: the Basic of their first Sig Vibe; NeeDoh Stretch Pass; The Floor Is Lava! | Stat Leans and ranks (stage 4), Traits and Quirks (stage 5), everything else in the kits |
 | Mudling and Skeeter Swarm, formations `mudling` and `skeeter` | |
 | Turn bar with round dividers, a ghost for the highlighted move and sliding faces; party cards with 10 Pep dots; the new cross (RUCKUS and BAG greyed); tap an enemy or a party card to aim; keys and gamepad | Preview, inspect, Rose Mode pictures (stage 7) |
-| Default animations by shape (strike, cast, throw, give), hit and knock-out looks from existing frames, win and lose; stage 8: body-state clips (idle, guard, hit, dodge, KO, victory), video clip moves, the Big One's clip acts and held wind-ups | Spoken lines for the new moves (none exist yet); the victory card and rewards (stage 15) |
+| Default animations by shape (strike, cast, throw, give), hit and knock-out looks from existing frames, win and lose; stage 8: monster body-state clips; the family's body states are painted poses (clipposes), video clip moves, the Big One's clip acts and held wind-ups | Spoken lines for the new moves (none exist yet); the victory card and rewards (stage 15) |
 
 Pace: `B3_TEMPO` in `engine/b3-play.js` stretches every default move animation (2 since `b3tempo1`: Tom found the first build about 2x too fast).
 
@@ -308,12 +308,28 @@ Files: `data/b3-clips.js` (`B3_BODY_CLIPS`: owner then state to clip id), `engin
 | When the hit shows | On the clip's own impact frame (`impact` in `data/clips/<id>.js`), through the battle clock, so rules and picture cannot drift. A clip with no impact (state kind) lands at `at` of its length (default .5). Several hits are spaced .35 s. Measured: 0 to 17 ms off the impact frame. |
 | Party strike clips | The character first crosses to the monster (`C.reach` places the fist or spray at its near side), plays the clip, then runs home on the mirrored run clip. Foe clips play in place. |
 | Foe wind-up | `wind:'<clip>'` holds that clip's last picture while the foe is charged up. |
-| Body states | `B3_BODY_CLIPS[owner]`: idle, guard (while shielded, in a stance or marked), hit, dodge, ko, victory, run, give, cast; monsters: idle, hit, slip, die, flustered. A missing state falls back to the existing painted pose. |
+| Body states | `B3_BODY_CLIPS[owner]`: monsters idle, hit, slip, die, flustered; the family keep only Rose's victory and the three approved gives (clipposes, 2026-11-19). Every other family body state is a painted pose moved by the game (next section). A missing state falls back to the existing painted pose. |
 | Memory | Only idle loops stay loaded for the whole fight. Other clips are warmed just before use (`b3cWarmBeats`, `b3cWant`, kept 4.5 s) and `paintedTick` releases them 3 s after last use. Peak in a boss fight: 14 to 16 clips. |
 | A clip that is not ready | The move waits up to 2.5 s for it (`B3C.waitMax`), then plays its default animation. The hit still lands. |
 | Pace | `B3_TEMPO` does not stretch clips. |
-| Clips wired | Tom: Lounge Pass Flex, Zone One Blockade. Grace: Soup-Dumpling Squeeze, Cube Pop. Rose: Lamb-Tuck Ankle Tackle, The Floor Is Lava!, Giddyup. Deedee: Windex Spritz, Wet-Floor Hazard, Dust Tsunami. Mudling: bump, throw. The Big One: glare, tail slap, chomp, belly flop, polish. |
-| Tests | `python3 tools/b3_test.py s8` (portrait and landscape: idle loops, impact timing for four members, the Big One's acts, hit/guard/KO, flustered, victory, load fallback). |
+| Clips wired | Deedee: Windex Spritz (her Basic). Mudling: bump, throw. The Big One: glare, tail slap, chomp, belly flop, polish. (Tom's Lounge Pass and Blockade, Grace's Squeeze and Cube Pop, Rose's Tackle, Lava and Giddyup, Deedee's Wet-Floor and Scrub, and every family cast, play the default animation since clipposes; their Library entries are rejected, "never reviewed by Tom".) |
+| Tests | `python3 tools/b3_test.py s8` (portrait and landscape: monster idle loops, the Basic of each member (Deedee's by clip), the Big One's acts, painted states present, flustered, victory, load fallback). |
+
+### Painted body states (clipposes, 2026-11-19; the clip reset, `claude/clip-reset-plan.md`)
+
+`B3_BODY_PAINT[owner][state]` in `data/b3-clips.js` for Tom, Grace, Rose and Deedee: a state drawn from a painted battle frame (`f`, and `f2` for a second picture) at its own size `s` about the feet, with `h` its measured height share. No video, nothing generated. Code: `B3_PAINT`, `b3PaintState`, `b3KoDraw`, `b3GetUp`, `b3GuardDraw` and the draw lines in `b3DrawMember` (`engine/b3-play.js`). +x is away from the monsters.
+
+| State | Pictures | Motion |
+|---|---|---|
+| idle | idle, with idle2 as a fidget | breath; every 5 to 7 s idle2 fades in for .5 s (.07 s fade) |
+| guard | defend | dip, settle, hold with a breath; braced hit pushes 7 px |
+| hit | hurtPose | slide +10 over .12 s, hold .2 s, home over .25 s, flash .08 s, no shake |
+| dodge | windup | slide +14 with a 6 high hop over .14 s, hold .1 s, home over .2 s |
+| ko | hurtPose .3 s, kneel .3 s (three stars), then the knocked-out picture | get up (revive, stand up) plays it backwards in .8 s |
+| victory | celeb and leap | swap every .28 s, 16 high hop (Rose keeps her video) |
+| run | run pair, runFlip on the way home | swap every .11 s in place of the leap picture |
+
+Rules: a pose is never warped; only `s` (so the head matches the standing head) and `h` live in the table. Head rows: `tools/shots/paintstate-headrows.png`. Test: `python3 -I tools/paint_state_test.py` (feet on the ground line, size, slide distances, ko and get up, victory, run, then the Lab row, both layouts). Lab: NEW BATTLE > PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, `engine/b3-lab.js`) plays every state on every fighter in turn.
 
 ## Clips: facts from the animation test (build `clippack1`, 2026-11-18)
 

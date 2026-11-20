@@ -2,8 +2,8 @@
 // data/b3-clips.js — Battle 3 body states and video clips (stage 8, architecture 2.7).
 // B3_BODY_CLIPS[owner][state] is a clip id (data/clips/*.js, made in the Art Library). A state with no entry, or a clip that is not
 // loaded yet, shows the painted frame that B3_BODY (engine/b3-play.js) names, so a missing clip never breaks a fight.
-// States: idle and guard are loops; hit, dodge, give, cast and victory play once; ko plays once and its last picture is held;
-// run is the loop shown while a fighter crosses the field. Monsters add slip (Deedee's wet floor), flustered (held) and die.
+// States here are for monsters (idle, hit, slip, flustered, die) and the kept family clips (Rose's victory, the three gives). The family's other body
+// states are painted poses, see B3_BODY_PAINT below.
 // A MOVE or an ACT switches from the default animation to a clip by its own row: anim:{kind:'clip',clip:'<id>'} in data/b3-kit-<id>.js
 // or data/b3-foes-ch*.js (a clip with no impact frame says where it lands: at:<share of its length>). An act may also name the clip
 // that holds while it is wound up: wind:'<id>'.
@@ -19,8 +19,8 @@ const B3_BODY_PAINT={
           ko:{f:'hurtPose',h:.838,s:.97,f2:'kneel',h2:.778,s2:1}, victory:{f:'celeb',h:.98,s:1,f2:'leap',h2:.97,s2:1}, run:{f:'run',h:1.01,s:1}},
   grace: {idle:{f:'idle2',h:1,s:1}, guard:{f:'defend',h:.878,s:.8}, hit:{f:'hurtPose',h:.967,s:.8}, dodge:{f:'windup',h:.967,s:.78},
           ko:{f:'hurtPose',h:.967,s:.8,f2:'kneel',h2:.833,s2:.78}, victory:{f:'celeb',h:1.056,s:.95,f2:'leap',h2:1.056,s2:.95}, run:{f:'run',h:1,s:1}},
-  rose:  {idle:{f:'idle2',h:1.024,s:1}, guard:{f:'defend',h:.867,s:.85}, hit:{f:'hurtPose',h:.964,s:.85}, dodge:{f:'windup',h:1,s:.85},
-          ko:{f:'hurtPose',h:.964,s:.85,f2:'kneel',h2:.795,s2:.85}, run:{f:'run',h:1,s:1}},
+  rose:  {idle:{f:'idle2',h:1.024,s:1}, guard:{f:'defend',h:.867,s:.9}, hit:{f:'hurtPose',h:.964,s:.9}, dodge:{f:'windup',h:1,s:.9},
+          ko:{f:'hurtPose',h:.964,s:.9,f2:'kneel',h2:.795,s2:.9}, run:{f:'run',h:1,s:1}},
   deedee:{idle:{f:'idle2',h:1.01,s:1}, guard:{f:'defend',h:.899,s:.93}, hit:{f:'hurtPose',h:1,s:.93}, dodge:{f:'windup',h:.96,s:.95},
           ko:{f:'hurtPose',h:1,s:.93,f2:'kneel',h2:.838,s2:.95}, victory:{f:'celeb',h:1.081,s:.95,f2:'leap',h2:1.101,s2:.95}, run:{f:'run',h:1,s:1}}
 };
