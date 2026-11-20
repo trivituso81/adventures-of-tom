@@ -13379,7 +13379,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference.",
@@ -13412,9 +13412,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-effectslook-2 shipped: Wince and the sweat drop removed everywhere. Speed note ('10x speed in the game') not fixed: same code and timings as the page, one example scene needed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-startmore",
@@ -14678,7 +14681,7 @@
    "id": "c-fix-effectslook-2",
    "tag": "fix-effectslook-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -14726,6 +14729,10 @@
     {
      "d": "2026-11-20",
      "t": "Removed Wince (Boppy's line, the effect, the page entry) and the 4 sweat rows. Speed difference page vs game not reproduced: both use engine/life-math.js; needs one example from Tom. Asked on t-effectslook."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook-2: Wince is removed everywhere; the speed difference needs one example"
     }
    ],
    "prompt": {
@@ -14739,7 +14746,8 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "started_at": "2026-11-20T18:09:24+00:00"
+   "started_at": "2026-11-20T18:09:24+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-battlelabpagetry-3",
@@ -14825,6 +14833,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDCjPdhWiTjqaKzKQt",
+   "title": "Fix: Look at the Effects page in Admin",
+   "first": "2026-11-20T18:16:02Z",
+   "last": "2026-11-20T18:16:02Z",
+   "tags": [
+    "fix-effectslook-2"
+   ],
+   "cards": [
+    "c-fix-effectslook-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEEY5DfFUdRMybmFjx",
    "title": "Fix the report backlog (3 open)",
@@ -16732,8 +16752,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "7a27456c58d2b8477b0348568985395c95e31db8",
- "synced_at": "2026-11-20T18:15:43+00:00",
+ "synced": "a509a406b4df040f217e6101877f5250d6ab8513",
+ "synced_at": "2026-11-20T18:17:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
