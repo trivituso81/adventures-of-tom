@@ -1,3 +1,10 @@
+## alvareza (2026-11-20): Casa Alvarez scene: everyone walks into the living room and stays on one spot for the whole scene, nobody on the amber
+
+- Card c-alvarez, part 1 of 2 (Tom 2026-11-12 22:22 on the near1 scenes: "I just want them to be close in a normal way"). Before: in `ch12Alvarez` the six walkers shuffled between lines, some stood on amber figures, Tom ended alone by the door (8,11).
+- `data/scenes-ch12.js`: the scene is staged by hand (`{noHuddle}`, so no automatic huddle). The toddlers Mateo and Sofi are held where they play. Daisy runs down from the kitchen to (4,8) (there she was off screen in landscape and half behind Tony's amber in portrait). The walkers come up the hall one after another, left side first, because the left half of the room is reached only along row 9: Tom (9,7) and Amy (5,7) on both sides of Mrs. Alvarez's amber (7,7), Rose (5,9), Grace (7,9), Nara (9,9), TNB (8,10); everyone faces her. The camera eases to (7,7.9) so the group is on screen in both layouts. Marks: `ALV_MARKS`; a member who is not walking along is skipped.
+- Looked at: all 18 pages in portrait and in landscape with all six (Amy and TNB on the bench): the same spots on every page, nobody on an amber block or straight in front of anyone, all on screen; the walk-in frames; Tom, Grace and Rose alone: same spots. 0 page errors.
+- Not changed: nobody runs the laps Amy calls (no lap animation, same as before). Part 2 (the twelve self-staged scenes from near1) is next on this card.
+
 ## itembanner1 (2026-11-20): An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster
 
 - Card c-itembanner1. Tom (11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained".

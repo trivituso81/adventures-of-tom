@@ -204,8 +204,24 @@ SCENES.ch12Carmen=[
   {flag:'ch12-carmen'}, {call:()=>storyWorld()}
 ];
 
+// Staged by hand (alvarez, Tom 2026-11-12: close to the people the scene is about, nobody overlapping). Narrow house, six people in amber.
+// The toddlers stay where they play. Daisy runs down from the kitchen (there she was off screen in landscape and behind Tony's amber in
+// portrait). The walkers come up the hall one after another and stand in the living room on both sides of Mrs. Alvarez's amber (7,7):
+// off every amber block, nobody straight in front of anybody, everyone facing her. The left side of the room is reached only along row 9,
+// so they go in a fixed order (left side first) instead of the walking line. The camera eases to the middle of the room so everyone is on
+// screen in both layouts. No automatic huddle ({noHuddle}).
+const ALV_MARKS=[['tom',9,7,'left'],['amy',5,7,'right'],['rose',5,9,'right'],['grace',7,9,'left'],['nara',9,9,'left'],['tnb',8,10,'left']];
+const ALV_IN=(()=>{ let run=null; return {start(){   // built when the scene reaches it (state kept in the closure, so the scene list stays plain for JSON scans)
+    const steps=[{cam:[7,7.9],time:1.2}]; let d=0;
+    if(sceneActor('Daisy')) steps.push({seq:[{walk:'Daisy',to:routeTo('Daisy',4,8),speed:.2},{face:'Daisy',dir:'right'}]});
+    for(const [id,x,y,f] of ALV_MARKS) { const a=sceneActor(id); if(!a||a.hidden||(id==='rose'&&a.seat)) continue;
+      steps.push({seq:[{wait:d},{walk:id,to:routeTo(id,x,y),speed:.24},{face:id,dir:f}]}); d+=.4; }
+    run=S.all(...compileScene(steps)); run.start(); },
+  update(dt){ return run.update(dt); }}; })();
 SCENES.ch12Alvarez=[
-  {flag:'ch12-alvarez',value:'pending'},
+  {flag:'ch12-alvarez',value:'pending'}, {noHuddle:true},
+  {call:()=>{ for(const nm of ['Mateo','Sofi']) { const n=sceneActor(nm); if(n) storyHold(n); } }},   // the toddlers stop wandering for the scene
+  ALV_IN,
   {talk:'Daisy',lines:['Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!']},
   {talk:'Tom',lines:['Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.']},
   {talk:'Amy',lines:['Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.']},

@@ -7896,7 +7896,7 @@
    "theme": "Areas",
    "lane": "claude",
    "col": "prog",
-   "next": "Ready to start. Hand-places the walkers in the living room (claude/next-addendum-near1.md) and checks every page in portrait and landscape.",
+   "next": "Part 1 shipped (alvareza): Casa Alvarez staged by hand. Working on part 2: checking the twelve self-staged scenes from the near1 notes for distance.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7920,6 +7920,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part 1 shipped as alvareza: Casa Alvarez staged by hand, all 18 pages looked at in portrait and landscape. A second conversation took this card (the 00:39 one pushed no work). Next: the twelve self-staged scenes."
     }
    ],
    "prompt": {
@@ -7931,7 +7935,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-near1.md. Casa Alvarez (ch12Alvarez): hand-place the six walkers in the living room, look at all 18 pages in portrait and landscape, push; then check the twelve self-staged scenes listed there. You have my full permission to access the repo."
    },
-   "tag": "alvarez"
+   "tag": "alvarez",
+   "after": "nothing for Tom: c-alvarez"
   },
   {
    "id": "c-knownwrong",
