@@ -12803,7 +12803,7 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "b3s12",
    "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
    "blocks": [],
@@ -12844,6 +12844,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped Start again after Stuck twice.",
      "at": "2026-11-20T23:51:22.239Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort high."
     }
    ],
    "prompt": {
@@ -12857,10 +12861,10 @@
    },
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFxcAPTykx1Dr76QGY",
+    "url": "https://claude.ai/code/cse_01RXeukDd6bqhgSvQhL2dQAJ",
     "opening": "started by START"
    },
-   "start": true
+   "started_at": "2026-11-20T23:51:48+00:00"
   },
   {
    "id": "t-gem-canon01play",
@@ -15815,7 +15819,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEUP25DYUQnZmk23ex",
+    "url": "https://claude.ai/code/cse_01RXeukEFveyJjLzGjhxUQUA",
     "opening": "Something is wrong on t-listen1-play"
    },
    "history": [
@@ -15837,6 +15841,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -15850,8 +15858,14 @@
    },
    "after": "t-listen1-play",
    "auto": true,
-   "started_at": "2026-11-20T20:12:55+00:00",
-   "quiet": true
+   "started_at": "2026-11-20T23:51:48+00:00",
+   "rescue": {
+    "at": "2026-11-20T23:51:48+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukEFveyJjLzGjhxUQUA",
+    "prev": "https://claude.ai/code/cse_01RXeukEUP25DYUQnZmk23ex"
+   }
   },
   {
    "id": "c-wanplan",
@@ -17223,7 +17237,7 @@
    "id": "c-itembannerart1",
    "tag": "itembannerart1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Painted pictures for the item gained banners",
    "next": "The item gained banner shows an emoji for each item; report r-20261120-142626-w74f says art is missing for all item banners. Build Art Library entries for a painted picture per item and use them in the banner.",
@@ -17240,7 +17254,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then read report r-20261120-142626-w74f (\"missing art for all item banners\") with python3 tools/reports.py list. The item gained banner (itemBanner in engine/party-banner.js, test tools/itembanner_test.py) shows an emoji icon per item from the items table. Make one painted picture per item through the Art Library (prop art pattern in docs/PROP_ART.md, entries in tools/art-library), show it in the banner in place of the emoji, and keep the emoji only if an item has no picture yet. Remove anything the pictures replace. End with a Tom card that sends him to the Art Library to generate and approve them, then mark the report done. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDaMuHKTt5AAMWpRp4",
     "opening": "not started"
    },
    "history": [
@@ -17252,9 +17266,13 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T23:51:34.297Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Opus 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-20T23:51:48+00:00"
   },
   {
    "id": "t-stuck-b3s12",
@@ -17294,7 +17312,7 @@
    "id": "c-fix-keysecrets2-try-4",
    "tag": "fix-keysecrets2-try-4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17316,7 +17334,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFeUGJNd3JxnfEJ18k",
     "opening": "Something is wrong on t-keysecrets2-try"
    },
    "history": [
@@ -17334,6 +17352,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T23:51:03.615Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -17347,7 +17369,7 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T23:51:48+00:00"
   }
  ],
  "sessions": [
@@ -19660,8 +19682,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "21c71a39977bbfd7e6c94b6a28b04329e959a978",
- "synced_at": "2026-11-20T23:39:01+00:00",
+ "synced": "3d4e8651d78c0175e6bb20bb29e46cde041e5891",
+ "synced_at": "2026-11-20T23:51:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
