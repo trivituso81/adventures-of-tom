@@ -13395,7 +13395,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/index.html, play to a scene where Deedee says \"my favorite son\" to Tom. While she talks she should no longer shake: she lifts 1 pixel twice a second. If another effect still looks too fast, tell me which one and in which scene.",
@@ -13441,9 +13441,12 @@
     {
      "d": "2026-11-20",
      "t": "fix-effectslook-3 shipped: the talking bob flipped 40 times a second (once per typed letter); now two lifts a second."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin, Fix: Look at the Effects page in Admin is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-startmore",
@@ -14970,7 +14973,7 @@
    "id": "c-builds2",
    "tag": "builds2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "auto": true,
    "theme": "Tools",
    "title": "Build history redesign 2: statuses and what is pending",
@@ -14981,7 +14984,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukExaQvGdnDirJdCBFw",
     "opening": "not started"
    },
    "history": [
@@ -14996,6 +14999,10 @@
     {
      "d": "2026-11-20",
      "t": "Redesign 1 shipped as builds1, so this card is set to start by itself (start: true), as the plan says. Read claude/builds-plan.md section 8 first: it lists what phase 1 changed from the plan."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15008,7 +15015,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds2 in data/board.json with its history. Your first push is the commit board: start c-builds2. Build phase 2 (builds2) as the plan's section 6 row says: sections 3.3 and 3.5 and the Filters of section 3.7, with checks B8 to B10. Push it as builds2. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds3 so it starts by itself. Do not build phase 3 yourself. You have my full permission to access the repo."
    },
    "after": "nothing for Tom: c-builds3",
-   "start": true
+   "started_at": "2026-11-20T18:58:33+00:00"
   },
   {
    "id": "c-builds3",
@@ -15094,7 +15101,7 @@
    "id": "c-fix-effectslook-3",
    "tag": "fix-effectslook-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -15138,6 +15145,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook-3: The talking bob no longer shakes the speaker"
     }
    ],
    "prompt": {
@@ -15151,10 +15162,23 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "started_at": "2026-11-20T18:54:02+00:00"
+   "started_at": "2026-11-20T18:54:02+00:00",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFmQjEQBPFWqM9vS6h",
+   "title": "Fix: Look at the Effects page in Admin",
+   "first": "2026-11-20T18:58:01Z",
+   "last": "2026-11-20T18:58:28Z",
+   "tags": [
+    "fix-effectslook-3"
+   ],
+   "cards": [
+    "c-fix-effectslook-3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCZmu9BDyRxwTXwtHu",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -15618,12 +15642,14 @@
    "url": "https://claude.ai/code/session_01RXeukEtzMhZSD8kTMStGnn",
    "title": "Build history redesign 1: readable rows by day",
    "first": "2026-11-20T10:39:46-08:00",
-   "last": "2026-11-20T10:55:59-08:00",
+   "last": "2026-11-20T10:57:23-08:00",
    "tags": [
-    "builds1"
+    "builds1",
+    "board-builds1"
    ],
    "cards": [
-    "c-builds1"
+    "c-builds1",
+    "c-builds2"
    ]
   },
   {
@@ -17114,8 +17140,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "cb970fbb4e7daa6c41261c11ee3cea499a36e6d9",
- "synced_at": "2026-11-20T18:56:43+00:00",
+ "synced": "acbf081afb3be47c94da0d7681a84cc860ba9152",
+ "synced_at": "2026-11-20T18:58:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
