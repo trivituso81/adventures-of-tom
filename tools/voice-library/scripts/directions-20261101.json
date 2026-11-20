@@ -4,9 +4,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)",
+"text": "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!",
 "ctx": "",
-"script": "[weary, relieved] Oof, I'm finally here! [dry, pleased] At least the 6 hours went by fast on Delta One! ;)"
+"script": "[weary, relieved] Oof, I'm finally here! [dry, pleased] At least the 6 hours went by fast on Delta One!"
 },
 {
 "voice": "grace",

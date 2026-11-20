@@ -1714,7 +1714,7 @@ const EMOTION_MOODS={
 "Tom|Okay. Here’s how we do it. We split into two teams of three. Grace, Rose and I take the stairs.": "proud",
 "Tom|On the pottery wheel! That's brilliant. Why have I been doing it with my hands?": "surprised",
 "Tom|One for the fridge. Everybody say ice cream.": "happy",
-"Tom|Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)": "happy",
+"Tom|Oof, I'm finally here! At least the 6 hours went by fast on Delta One!": "happy",
 "Tom|Oof, I'm finally here! Six hours on Delta One and I didn't miss the big day.": "happy",
 "Tom|Or. Forty loaves. Tonight. You're the only oven on 2nd Ave hot enough.": "loving",
 "Tom|Over.": "unimpressed",

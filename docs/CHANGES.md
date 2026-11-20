@@ -1,3 +1,10 @@
+## gem-polish01 (2026-11-20): The taxi opening line no longer shows a text smiley
+
+- Gemini chapter 1 report POLISH-01 (claude/ch1-gemini-tracker.md): Tom's first line at Taxi Co. ended with `;)` in the dialogue box. Still on main, no standing rule against removing it.
+- Changed: `Delta One! ;)` is now `Delta One!` in `data/scenes.js` and the files that copy the line (emotion moods, script index, voice index, emotion and talk line lists, voice harvest and directions).
+- Voice: no re-bake needed. The baked Tom clip reads "six hours ... Delta One!" and never matched this line's text (it has "6" and the smiley), so the line was already on speech synthesis. No clip added or removed.
+- Tests: smoke and the script index rebuild ran; the board_sync_test R5 failure is on main already and is not from this change.
+
 ## gem-polish02 (2026-11-20): Rose's Raspberry battle text says "center stage"
 
 - Gemini chapter 1 report POLISH-02 (claude/ch1-gemini-tracker.md). Still on main at `engine/rose-moves.js` line 1113: "Rose walks to centre stage..." now reads "Rose walks to center stage...".

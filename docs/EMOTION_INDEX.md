@@ -28,7 +28,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 
 | Character | Emotion | Dialogue |
 |---|---|---|
-| Tom | Happy | Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;) |
+| Tom | Happy | Oof, I'm finally here! At least the 6 hours went by fast on Delta One! |
 | Grace | Happy | TATA! You're BACK! |
 | Grace | Happy | We waited for you for a hundred years. |
 | Rose | Happy | A hundred MILLION years! |

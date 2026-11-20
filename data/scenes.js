@@ -20,7 +20,7 @@ SCENES.opening=()=>{
     {wait:.7},
     {step:stretchStep()},
     {face:'tom',dir:'up'},
-    {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)"],voice:[['tom','intro1']]},
+    {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One!"],voice:[['tom','intro1']]},
     {talk:'Sal',lines:["OK Mr. Fancy Pants. Head outside, I think there's a couple of pipsqueaks looking for you."]},
     {cam:null}, {walk:'tom',to:[[8,10],[8,11],[8,12],[8,13],[8,14],[8,15]],speed:.26},
     {call:()=>sfx.doorOut()},
