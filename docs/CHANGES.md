@@ -1,3 +1,10 @@
+## 2026-11-21 (5): Art Library bake, prop-item-solo-g_bsash (`artbake1569`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- prop-item-solo-g_bsash: background keyed from the corner colour rgb(213, 14, 101)
+- prop-item-solo-g_bsash: `bake_item_sheet.py item-solo-g_bsash --grid=1 g_bsash` ran from art/raw/props/prop-item-solo-g_bsash-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## 2026-11-21 (4): Art Library bake, 7 entries (`artbake1563`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
