@@ -21,7 +21,7 @@
 const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending:null,actor:null,result:null,artWait:false,log:[]};
 const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null};
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
-const B3_FOE_LOOK={skeeter:{hover:14}};
+const B3_FOE_LOOK={skeeter:{hover:14},bigone:{size:2.5}};   // size: drawn this many times larger than the usual fit (Tom 2026-11-21: the Big One 2.5x)
 // How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
 // One number: 1 is the old quick pace, 2 is twice as long. The battle speed button (1x / 2x) still halves it for the player.
 const B3_TEMPO=2;
@@ -74,7 +74,7 @@ function b3LayoutFoes() {
   const F=B3.F,fr=F.foes.filter(f=>f.row!=='back'),bk=F.foes.filter(f=>f.row==='back'),n=F.foes.length,want=[0,96,80,68,60][n]||60;
   const fy={1:[264],2:[224,302],3:[218,262,306]},fx={1:[168],2:[184,156],3:[188,158,188]},by={1:[236],2:[214,268]},bx={1:[84],2:[92,70]};
   const place=(f,px,py,k)=>{ const def=b2BattleDef(MONSTERS[f.id]),base=def.scale||3,w=def.sprite[0].length;
-    B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
+    B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)*((B3_FOE_LOOK[f.id]||{}).size||1)}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
   fr.forEach((f,k)=>place(f,(fx[fr.length]||fx[3])[k%3],(fy[fr.length]||fy[3])[k%3],1));
   bk.forEach((f,k)=>place(f,(bx[bk.length]||bx[2])[k%2],(by[bk.length]||by[2])[k%2],.9));
 }

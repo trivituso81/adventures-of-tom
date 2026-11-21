@@ -28944,6 +28944,67 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-night-clean in data/board.json with its history. This is the standing card Night cleanup: it runs every night and never goes to Done. Run python3 tools/night/clean_report.py --out /tmp/clean.json first. Pick ONE bucket tonight by the day of the year (python3 -c \"import datetime;print('ABCD'[datetime.date.today().timetuple().tm_yday%4])\"): A. Files nothing names: remove up to 40 from the report, oldest first, never from the Never touched row below. B. Notes: fold what is still true from finished claude/next-addendum-*.md and plan files into the doc that owns it (docs/ or CLAUDE.md), delete the rest, rebuild claude/INDEX.md with python3 tools/claude_index.py. C. Working agreement: shorten CLAUDE.md and claude/next.md (history and one-off stories go to docs/CHANGES.md or out), under python3 tools/night/rules_check.py; neither file may end the night bigger than it began; never drop a standing rule or a sentence of Tom's. D. Tests: delete a test that has been known_fail for more than 7 nights and tests something that no longer exists; a test of something that still exists goes to a fix card instead. Each bucket ends with python3 tools/smoke.py, the grep for zero references that the purge rule asks for (show the grep in docs/CHANGES.md before deleting anything under tools/ or art/), and a docs/CHANGES.md entry that lists what left. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen, a card in the backlog. Not in this job: voice (report only; tools/clip-audit/unused_voice.py keeps its own rule) and dead code inside engine/ files. Push a build named nightclean-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightclean-MMDD (MM and DD are today's month and day) --base origin/main). If there is nothing to remove tonight, push only the commit night: ran c-night-clean. Your first push is the commit board: start c-night-clean. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-bigone25",
+   "title": "The Big One is drawn 2.5 times bigger in battle (bigone25)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped bigone25: in the new battle (Battle 3) The Big One is drawn 2.5x its old size, set by one number (B3_FOE_LOOK.bigone.size in engine/b3-play.js).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukHG5BVGkK42BxYrdPv",
+    "opening": "\"in battle, the Big One should be 2.5x as a big (estimated). full repo access approved\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: in battle, the Big One should be 2.5x as big (estimated)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as bigone25: Big One drawn 2.5x in Battle 3. b3_test new6 passes; looked at portrait and landscape frames."
+    }
+   ],
+   "prompt": {
+    "what": "Draws The Big One 2.5x bigger in the new battle.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: one number, tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read claude/handoff-rules.md, then check how big The Big One looks in NEW 6: THE BIG ONE (Battle Lab) and adjust B3_FOE_LOOK.bigone.size in engine/b3-play.js to Tom's note (tag bigone25). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "bigone25",
+   "after": "t-bigone25play",
+   "done": "2026-11-21"
+  },
+  {
+   "id": "t-bigone25play",
+   "title": "Look at the bigger Big One in battle, say if 2.5x is right",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > NEW 6: THE BIG ONE. The Big One should fill about a third of the screen, 2.5 times its old size. Use the REPORT tab to say bigger or smaller (bigone25 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"in battle, the Big One should be 2.5x as a big (estimated). full repo access approved\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by bigone25: your phone check of the new size; blocks nothing."
+    }
+   ],
+   "first": "Wait for the publish of build bigone25, then RELOAD on the title."
   }
  ],
  "sessions": [

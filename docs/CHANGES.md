@@ -1,3 +1,9 @@
+## bigone25 (2026-11-21): The Big One is drawn 2.5 times bigger in the new battle
+
+Card c-bigone25. Tom: "in battle, the Big One should be 2.5x as big (estimated)."
+- `engine/b3-play.js`: `B3_FOE_LOOK.bigone.size` = 2.5, multiplied into the monster's drawn scale after the usual fit (`b3LayoutFoes`). Its box, shadow, clips and aim points follow the scale. Other monsters are unchanged; Battle 2 is untouched.
+- `python3 tools/b3_test.py new6` passes; portrait and landscape frames looked at.
+
 ## nightclean (2026-11-21): the nightly cleanup is built: a report of unused files, a check that no standing rule is dropped, Done cards leave the board after 2 days, and the first night's pass removed 14 dead scripts
 
 Card c-nightclean (claude/night-plan.md section 7). Built: `tools/night/clean_report.py` (sizes with change since yesterday, files nothing names, identical files, known_fail rows; report only), `tools/night/rules_check.py` with `tools/night/rules.json` (26 standing rule headings, 19 rule leads and 59 sentences of Tom's taken from main today; called by `tools/smoke.py`), `tools/night/clean_test.py`, Done cards archive after 2 days (`DAYS` in `tools/board_archive.py`, its test updated), and the standing card `c-night-clean` (nightly, tag `nightclean`, builds `nightclean-MMDD`, one bucket a night picked by day of the year). Tests added to `tools/night/tests.json`: `night__clean_test` and the missing `dashboard_test`.
