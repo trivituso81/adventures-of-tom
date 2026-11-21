@@ -23317,11 +23317,25 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-boppy-bigfish: card t-boppy-bigfish-pic closed as all good but the approved picture is not in the repo."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 picture (about $0.06).",
+     "at": "2026-11-21T15:29:07.760Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
     "opening": "unknown"
+   },
+   "gen": {
+    "want": true,
+    "at": "2026-11-21T15:29:07Z",
+    "ids": [
+     "boppy-em-unimpressed"
+    ],
+    "est": 0.06,
+    "mode": "review"
    }
   },
   {
