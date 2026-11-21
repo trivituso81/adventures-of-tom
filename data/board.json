@@ -25336,6 +25336,38 @@
      "t": "Made by anim-grace-squeeze-qxim. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
     }
    ]
+  },
+  {
+   "id": "c-boardsubfold1",
+   "tag": "boardsubfold1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Board: fold and unfold the groups inside For you",
+   "next": "Building boardsubfold1: each group under For you (PLAY AND REPORT, REVIEW PICTURES and the rest) opens and closes with a tap, all open by default.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFNpBVJJ5eFTao3VSz",
+    "opening": "On the board when I am looking under the category for me or you, and they're those subcategories like, for example, play and test, I wanna be able to collapse those subcategories"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"I wanna be able to collapse those subcategories as well, and of course expand them back whenever I want to. but by default they should all be expanded.\" Card logged for audit; Tom asked for it to be processed fully."
+    }
+   ],
+   "prompt": {
+    "what": "Makes the groups inside For you on the Board fold and unfold, open by default.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build in board.html, design worked out in the session)",
+    "effort": "medium (the piece is small)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardsubfold1 in data/board.json. Your first push is the commit board: start c-boardsubfold1. In board.html, mineGroups draws each For you group (PLAY AND REPORT, REVIEW PICTURES and the rest) as a plain heading. Make each group a tap to fold and unfold, open by default, and keep what Tom opened or closed through the page's 60 second reload. Test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
