@@ -20072,6 +20072,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 3 pictures (about $0.15).",
      "at": "2026-11-21T18:47:45.312Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: skipped 3. Spent about $0.00."
     }
    ],
    "gen": {
@@ -20085,10 +20089,28 @@
     "est": 0.15,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T18:48:00Z",
+     "state": "done",
+     "at": "2026-11-21T18:48:01Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44937463561",
-     "n": 0
+     "made": [],
+     "already": [],
+     "skipped": [
+      {
+       "id": "prop-item-solo-amy_chm1",
+       "why": "already approved"
+      },
+      {
+       "id": "prop-item-solo-claytaco",
+       "why": "already approved"
+      },
+      {
+       "id": "prop-item-solo-g_bsash",
+       "why": "already approved"
+      }
+     ],
+     "failed": [],
+     "spent": 0.0,
+     "svc": {}
     }
    },
    "chat": {
