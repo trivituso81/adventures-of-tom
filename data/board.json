@@ -21225,7 +21225,7 @@
    "col": "prog",
    "theme": "Areas",
    "title": "Big One asks about a folding chair; the spot has a bench",
-   "next": "Ready to start. Confirmed: the line is in data/scenes.js ch1AfterBoss and the spot is a 'bench' in data/maps-le.js.",
+   "next": "Shipped as build qa-coh03. Boppy's fishing spot now shows a grey metal folding chair with his thermos on the seat, the bucket on the ground beside it and the rod leaning on the chair back; the wooden bench is painted out of the plate, the foreground layer and the four trail paintings. No new Library picture was needed (the approved chair prop already existed). Waits only on Tom's look: card t-qa-coh03play.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21251,12 +21251,17 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude (qa-coh03): confirmed on main (line at data/scenes.js ch1AfterBoss, bench at data/maps-le.js); canon keeps the chair line. Call: no new Library picture, because a generated chair would still have needed the bench painted out of the plate, and the approved chair prop (art/props/boppy/folding_chair.webp) already exists. tools/hollow_chair.py removes the bench and sets the chair, thermos, bucket and rod down; make_hollow_fg.py rebakes the plate, foreground layer and depth zones; the trail paintings were rebaked from the new plate. Tests: hollow_chair_test.py (new) passes; hollow_trail_test.py has one failure, 'no monster stepped into the fence while chasing', which also fails on untouched upstream; looked at portrait and landscape."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
     "opening": "pasted by Tom from the board"
-   }
+   },
+   "after": "t-qa-coh03play"
   },
   {
    "id": "c-qa-coh04",
@@ -22085,6 +22090,26 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-voiceboard. Waits until you have played chapter 2 (t-ch2play), so no credits go on lines you might still cut."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh03play",
+   "title": "Look at Boppy's folding chair at the pond",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "first": "Build qa-coh03 shows on the title screen.",
+   "next": "Press RELOAD, then CHAPTERS > Chapter 1 and play to Boppy's fishing spot at the east end of Grump Hollow (the muffin wrappers lead there). Check: where the wooden bench was there is now a grey metal folding chair with Boppy's thermos on the seat, his bucket on the ground to its left and his fishing rod leaning on the chair back; no bench is left and the pond edge behind looks like water and mud. After the Big One fight it still asks about the man in the folding chair. All good if it looks right; Something is wrong with what you saw (say if the chair looks pasted on, too dark or too small).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-qa-coh03 when qa-coh03 shipped."
     }
    ]
   }

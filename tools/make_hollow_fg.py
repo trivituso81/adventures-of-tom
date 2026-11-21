@@ -25,6 +25,10 @@ def load(n):
     m = np.array(Image.open(RAW + 'hollow-v3-masks/%s.png' % n).convert('L').resize((PW, PH), Image.NEAREST)) > 127
     return cv2.erode(m.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
 trees, arch, boulders, props = (load(n) for n in ('trees', 'arch', 'boulders', 'props'))
+# qa-coh03: Boppy's fishing spot has his folding chair, not a bench (tools/hollow_chair.py edits the scaled painting and the props mask, never the raw files)
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hollow_chair import fishing_chair
+paint, props = fishing_chair(paint, props)
 # arch board and both tall posts (painting px), one upright object; the rest of the arch mask is the two low fences
 BOARD = np.array([(222, 716), (294, 716), (294, 762), (548, 772), (548, 736), (626, 736), (622, 1004), (548, 1004), (548, 884),
                   (294, 884), (294, 1022), (222, 1022)], np.float32) * [sx, sy]

@@ -278,7 +278,7 @@ const LE_AREAS=[
     pools:[{tile:'water',shore:'mud',cells:[[14,3],[15,3],[16,3],[17,3],[18,3],[19,3],[20,3],[21,3],[9,4],[10,4],[11,4],[12,4],[13,4],[14,4],[15,4],[16,4],[17,4],[18,4],[19,4],[20,4],[21,4],[22,4],[9,5],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5],[16,5],[17,5],[18,5],[19,5],[20,5],[21,5],[22,5],[23,5],[10,6],[11,6],[12,6],[13,6],[14,6],[15,6],[16,6],[17,6],[18,6],[19,6],[20,6],[21,6],[22,6],[23,6],[13,7],[14,7],[15,7],[16,7],[17,7],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],[15,8],[16,8],[17,8],[18,8],[19,8],[20,8],[21,8],[22,8],[23,8],[15,9],[16,9],[17,9],[22,9],[23,9]]}],
     objects:[
       ['bench',3,7,3,2,'Soggy bench','Nobody has sat here since the Grump moved in. The bench misses company.'],
-      ['bench',18,9,4,1,"Boppy's fishing spot",'A thermos, a bucket, one bass. Boppy will tell you it was two feet long. It was not.']],
+      ['bench',18,9,4,1,"Boppy's fishing spot",'A folding chair with a thermos on the seat, a bucket, one bass. Boppy will tell you it was two feet long. It was not.']],
     npcs:[],
     monsterFence:[13,0,23,21],   // hollowtrail1: ordinary monsters stay west of x 13, clear of the boss trigger (x 14 and up, data/scenes.js ch1-spot)
     monsters:MONSTER_SPOTS},
