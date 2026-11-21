@@ -13243,7 +13243,7 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -13323,21 +13323,19 @@
     {
      "d": "2026-11-20",
      "t": "Stuck twice: The rescue started 9:43 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-projclean)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again after Stuck twice.",
+     "at": "2026-11-21T02:57:15.757Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukFawRxemhQq6CzP35C",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
-   "rescue": {
-    "at": "2026-11-20T17:43:02+00:00",
-    "n": 1,
-    "why": "A session ended without shipping",
-    "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
-    "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
-   },
    "started_at": "2026-11-21T02:56:10+00:00",
-   "waiting_on": "tom"
+   "start": true
   },
   {
    "id": "b-board-projclean",
@@ -20311,7 +20309,7 @@
   {
    "id": "t-stuck-projclean",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Project Ops",
    "ask": "unstick",
    "unstick": {
@@ -20331,10 +20329,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: card c-projclean stalled after its rescue"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again.",
+     "at": "2026-11-21T02:57:15.757Z"
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
