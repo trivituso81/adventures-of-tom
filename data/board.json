@@ -27071,7 +27071,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -27087,6 +27087,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T19:51:18.780Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27183,6 +27187,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as guideprompts1a: a script and an Action that write a real prompt for every starter-draft battle animation"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as guideprompts1b: the prompt writer keeps each character's own pronoun, including Nara's \"it\""
     }
    ],
    "prompt": {
@@ -28223,6 +28231,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T11:54:20-08:00",
+   "last": "2026-11-21T11:54:20-08:00",
+   "tags": [],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "first": "2026-11-21T11:25:36-08:00",
+   "last": "2026-11-21T11:54:01-08:00",
+   "tags": [
+    "guideprompts1a",
+    "guideprompts1b"
+   ],
+   "cards": [
+    "c-guideprompts"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
    "title": "Animation note: Tom, Lounge Pass Flex",
    "first": "2026-11-21T09:17:03-08:00",
@@ -28342,18 +28373,6 @@
     "b-board-night",
     "c-nightshift",
     "c-nighttests"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
-   "title": "Write real prompts for 267 starter-draft battle animations",
-   "first": "2026-11-21T11:25:36-08:00",
-   "last": "2026-11-21T11:32:03-08:00",
-   "tags": [
-    "guideprompts1a"
-   ],
-   "cards": [
-    "c-guideprompts"
    ]
   },
   {
@@ -31841,8 +31860,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "4a33e9b8b81039a78e1a891e35868eac83f05645",
- "synced_at": "2026-11-21T19:52:57+00:00",
+ "synced": "9fedf9a2d250d708991a56be13354ce403363e41",
+ "synced_at": "2026-11-21T19:54:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
