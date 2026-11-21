@@ -25013,7 +25013,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -25035,6 +25035,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:28:31.707Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -25203,6 +25207,26 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
+   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
+   "first": "2026-11-21T09:34:32-08:00",
+   "last": "2026-11-21T09:34:32-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-tomgrace"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T09:33:57-08:00",
+   "tags": [],
+   "cards": [
+    "c-guidegen"
    ]
   },
   {
@@ -28615,8 +28639,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ea4165e03442e2f847374823e02ce6c97cce6d08",
- "synced_at": "2026-11-21T17:29:47+00:00",
+ "synced": "c38364fc0e4776a7c1ef67ef577dd5fca277f629",
+ "synced_at": "2026-11-21T17:34:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
