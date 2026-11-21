@@ -1160,6 +1160,7 @@ html.cutscene #minimap-wrap{visibility:hidden}
 html.landscape #party-banner{top:16%;width:min(60%,520px)}
 html.cutscene:not(.talking) #action-wrap{visibility:hidden}   /* cutpolish1: no (A) button or HOLD + SLIDE caption between lines */
 html.cutscene #dpad .dir{visibility:hidden}   /* roofnpc2: the arrows stay hidden for a whole scene, so they no longer flash on between lines */
+html.cutscene #dpad .pad-caption,html.cutscene #dpad .pad-center,html.cutscene #hud-btns{visibility:hidden}   /* qa-bug08: no HOLD + SLIDE, no ! Menu or Save over a scene or the CHAPTER COMPLETE card, so none can be tapped mid-scene */
 html.landscape #cut-ctrl{top:62px}
 html:has(#hud .brand.open) #cut-ctrl{visibility:hidden}   /* gem-bug10: FAST and SKIP never sit over the open quest panel */
 /* HUD: no minimap or door count; save button sits where rotate was. Save popup reuses the quit popup look. */
@@ -2107,13 +2108,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=idea-implementlisteni"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=fix-artgen2look"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=qa-bug08"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=refresh1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=idea-madelot"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=hollowtrail1"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=fix-artgen2look"></script>
+<script src="engine/main.js?v=qa-bug08"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

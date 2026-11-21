@@ -21049,7 +21049,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Map buttons show during cutscenes and the chapter end card",
-   "next": "Ready to start. Screen report.",
+   "next": "Built as qa-bug08: one CSS rule hides HOLD + SLIDE and the ! Menu Save buttons during every scene and the chapter cards.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21075,13 +21075,18 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built qa-bug08: html.cutscene now also hides #hud-btns and the HOLD + SLIDE caption, so they cannot flash between lines or be tapped mid-scene."
     }
    ],
    "started_at": "2026-11-21T03:24:16+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukCmEibxhgdS14awPzw",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-bug08play"
   },
   {
    "id": "c-qa-bug11",
@@ -21829,6 +21834,25 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gatelayer-pics-2 and t-gatelayer-pics in data/board.json, history included. Your first push is the commit board: start c-fix-gatelayer-pics-2.\n\nTom tested and found problems:\n1. Card t-gatelayer-pics (Make and approve 6 gate pictures (Amy's door, open states), ask pictures). He was asked: Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN ) BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report). He wrote: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:26:37.250Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gatelayer-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gatelayer-pics, and give the build fix-gatelayer-pics-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-gatelayer-pics"
+  },
+  {
+   "id": "t-qa-bug08play",
+   "title": "Check the buttons are gone during cutscenes",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then play the Grump Hollow after-boss scene (CHAPTERS > Chapter 1). Check: between lines no HOLD + SLIDE flashes, the top left ! Menu and Save buttons are not on screen during the scene, and they are back when it ends. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by qa-bug08 for Tom to look at."
+    }
+   ]
   }
  ],
  "sessions": [

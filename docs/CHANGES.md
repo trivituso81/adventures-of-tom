@@ -1,3 +1,6 @@
+## qa-bug08 (2026-11-21): no HOLD + SLIDE, ! Menu or Save over a cutscene or the CHAPTER COMPLETE card
+Chapter 1 QA BUG-08 (keysecrets2). Cause: the cutscene class hid the arrows and the A button but not the HOLD + SLIDE caption or the top-left buttons, so the caption showed between lines and the buttons stayed tappable (opening ! let monsters roam). Fix: one CSS rule in `index.html` hides `#hud-btns`, `.pad-caption` and `.pad-center` while `html.cutscene` is set (the class already covers the chapter cards).
+
 ## fix-artgen2look (2026-11-20): the board stops asking for pictures already in the game; the six gate pictures are re-prompted; the school gate stands under the SCHOOL sign
 
 Card c-fix-artgen2look (Tom's two Something is wrong notes, and pencil report r-20261120-185740-5nwp).
