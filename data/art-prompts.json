@@ -31254,8 +31254,18 @@
    "promptRev": 2
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-item-solo-claytaco-v1.png",
+     "date": "2026-11-21",
+     "from": "v2",
+     "at": 1795286381406,
+     "srv": "prop-item-solo-claytaco@20261121T075244",
+     "svc": "xai"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-solo-claytaco",
    "tab": "Props",
