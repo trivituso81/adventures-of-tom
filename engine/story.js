@@ -1310,7 +1310,7 @@ switchMap=function(portal) { LE_switchMap_story(portal); storyArriveFace(); };
 function storyWorld() { if(STORY.mode==='full'&&typeof STORY_WORLD!=='undefined') { for(const f of STORY_WORLD) f(); if(typeof bossSettleAll==='function') bossSettleAll(); } }
 
 // Gates: an area spec can carry gates:[{at:[[x,y],...], cond, name, lines}] that close an exit while `cond` matches (storyMatch conditions).
-// Tom steps back and gets the gate's lines; a fallen branch is drawn across the opening.
+// Tom steps back and gets the gate's lines. The picture of the closed entrance is the gate layer (engine/gate-art.js, data/gate-art.js): `art` names the gate's site.
 function storyGate(map,x,y) {
   if(STORY.mode!=='full') return null;
   for(const g of (map.spec&&map.spec.gates)||[]) if(g.at.some(([a,b])=>a===x&&b===y)&&storyMatch(g.cond||{})) return g;
@@ -1437,29 +1437,6 @@ function drawActorExtra(a,cx,top,w,h) {
 const LE_b7DrawMapFx_story=b7DrawMapFx;
 b7DrawMapFx=function(time) {
   LE_b7DrawMapFx_story(time);
-  for(const g of (currentMap.spec&&currentMap.spec.gates)||[]) {
-    if(!storyMatch(g.cond||{})||STORY.mode!=='full') continue;
-    const xs=g.at.map(p=>p[0]),ys=g.at.map(p=>p[1]),x0=Math.min(...xs)*T-6,x1=(Math.max(...xs)+1)*T+6,y=(Math.min(...ys)+.62+(g.dy||0))*T;   // dy: draw it lower (so a top-edge gate is not under the HUD)
-    if(g.look==='schoolgate') {   // a chain-link school gate across an east or west edge opening
-      const gx=Math.min(...xs)*T+T-8,y0=Math.min(...ys)*T-4,y1=(Math.max(...ys)+1)*T+2;
-      rect(gx-2,y0-10,6,y1-y0+10,'#2b2a26'); rect(gx-1,y0-9,4,y1-y0+8,'#8a8f98');
-      for(let yy=y0;yy<y1;yy+=6) { rect(gx-6,yy,12,1,'#a9adb5'); }
-      rect(gx-9,y0+(y1-y0)/2-6,18,12,'#2b2a26'); rect(gx-8,y0+(y1-y0)/2-5,16,10,'#f4f0e6'); rect(gx-6,y0+(y1-y0)/2-2,12,2,'#d94a3a');
-      continue;
-    }
-    if(g.look==='doors') continue;   // the gate's doors are drawn as their own object (gatedoors), so nothing goes across them
-    if(g.look==='barrier') {   // a sawhorse road barrier with orange and white stripes (LA)
-      rect(x0+2,y-2,3,10,'#2b2a26'); rect(x1-5,y-2,3,10,'#2b2a26');
-      rect(x0,y-7,x1-x0,8,'#2b2a26');
-      for(let x=x0+1;x<x1-1;x+=6) rect(x,y-6,Math.min(3,x1-1-x),6,'#f08a3a');
-      for(let x=x0+4;x<x1-1;x+=6) rect(x,y-6,Math.min(3,x1-1-x),6,'#fff1cb');
-      rect(x0+4,y-12,6,5,'#2b2a26'); rect(x0+5,y-11,4,3,Math.floor(time*2)%2?'#ffd166':'#c8553d');
-      continue;
-    }
-    rect(x0,y-7,x1-x0,14,'#2b1d12'); rect(x0+2,y-5,x1-x0-4,10,'#7a5536'); rect(x0+2,y-5,x1-x0-4,3,'#9a7048');
-    for(let k=0;k<3;k++) { const bx=x0+14+k*(x1-x0-28)/2; rect(bx,y-12,3,8,'#5a3b22'); ellipse(bx+2,y-14,7,5,'#4f7d45'); ellipse(bx+5,y-16,4,3,'#6fa04e'); }
-    rect(x0-2,y-4,4,8,'#c9a27a'); rect(x1-2,y-4,4,8,'#c9a27a');
-  }
   // Story map effects (data/scenes.js STORY_MAPFX): smog, trances, pipes. Drawn in map coordinates over everything.
   if(STORY.mode==='full'&&typeof STORY_MAPFX!=='undefined') for(const f of STORY_MAPFX) f(time);
 };

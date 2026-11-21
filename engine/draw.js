@@ -74,6 +74,8 @@ function draw(time) {
       items.push({kind:'house',value:h,depth:(h.y+h.h)*T});
   }
 
+  if(!hold&&typeof gateArtItems==='function') items.push(...gateArtItems(currentMap));   // engine/gate-art.js: painted gate pictures, behind every actor on or south of them
+
   for(const a of (hold?[]:[...currentMap.npcs,...followers,player]))
     items.push({kind:'actor',value:a,depth:(position(a).y+1+(a.depthBias||0))*T+.2});
 
@@ -83,6 +85,7 @@ function draw(time) {
   for(const item of items) {
     if(item.kind==='object') drawObject(item.value,time);
     else if(item.kind==='house') drawBuilding(item.value,time);
+    else if(item.kind==='gateart') drawGateArt(item.value);
     else if(typeof drawActorSpaced==='function') drawActorSpaced(item.value);
     else drawActor(item.value);
   }

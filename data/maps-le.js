@@ -143,10 +143,10 @@ const LE_AREAS=[
     exits:[[7,2,'hollow',6,20,'up'],[7,3,'hollow',7,20,'up'],[8,2,'hollow',6,20,'up'],[8,3,'hollow',7,20,'up'],[13,25,'row',13,2,'down'],[14,25,'row',14,2,'down'],
       [29,5,'schoolyard',1,8,'right'],[29,6,'schoolyard',1,9,'right'],[28,5,'schoolyard',1,8,'right'],[28,6,'schoolyard',1,9,'right']],
     // Chapter 1: a fallen branch closes the way north until Deedee's crisp is stolen (engine/story.js storyGate).
-    gates:[{at:[[7,2],[7,3],[7,4],[8,2],[8,3],[8,4]],cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
+    gates:[{at:[[7,2],[7,3],[7,4],[8,2],[8,3],[8,4]],art:'town-hollow',cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
       lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Crisp first, Tata. Monsters later."']},
       // The path east to Long Island Elementary (chapter 5) is locked until conference night.
-      {at:[[28,5],[28,6],[29,5],[29,6]],look:'schoolgate',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
+      {at:[[28,5],[28,6],[29,5],[29,6]],art:'town-school',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
         lines:['The path east goes to Long Island Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it\'s the best sign in the whole town.'],
         when:[{chapter:5,lines:['The path east goes to Long Island Elementary. The gate is locked.','Amy has the key. Amy has every key.']}]}],
     objects:[
@@ -217,8 +217,8 @@ const LE_AREAS=[
     exits:[[12,1,'town',12,24,'up'],[13,1,'town',13,24,'up'],[14,1,'town',14,24,'up'],[12,20,'pier',11,1,'down'],[13,20,'pier',12,1,'down'],[14,20,'pier',12,1,'down']],
     // The path south to Cattail Pier (chapter 3) stays closed until Boppy takes everyone fishing.
     // gem-bug08: Amy's door (7,6) stays shut in chapter 1 (nothing there is part of the chapter; going in fired a broken party-leave banner).
-    gates:[{at:[[7,6]],cond:{chapter:1},name:"Amy's House",lines:['The door is locked. A note on it: Amy is out running. Back later. Probably faster than you.']},
-      {at:[[12,20],[13,20],[14,20]],cond:{test:S=>S.chapter<3||(S.chapter===3&&!S.flags['ch3-boppy'])},name:'Pier path',
+    gates:[{at:[[7,6]],art:'row-amyhouse',cond:{chapter:1},name:"Amy's House",lines:['The door is locked. A note on it: Amy is out running. Back later. Probably faster than you.']},
+      {at:[[12,20],[13,20],[14,20]],art:'row-pier',cond:{test:S=>S.chapter<3||(S.chapter===3&&!S.flags['ch3-boppy'])},name:'Pier path',
       lines:['A sign on the fallen branch: CATTAIL PIER. CLOSED FOR THE SEASON. The fish need a break.'],
       when:[{chapter:3,lines:['The path south goes to Cattail Pier.','Going fishing without Boppy? He\'d never, ever let you hear the end of it.']}]}],
     objects:[
@@ -967,9 +967,9 @@ LE_AREAS.push(
     wild:true,
     exits:[[14,21,'town',25,22,'down','curb'],[15,21,'town',25,22,'down','curb'],[14,3,'gatezero',9,12,'up','terrazzo'],[15,3,'gatezero',10,12,'up','terrazzo']],
     // Gate Zero's doors stay shut in chapters 1 to 10 until the seven coins are in (ch10Gate in data/scenes.js opens the coin menu on A, chapter 10 only).
-    gates:[{at:[[14,3],[15,3]],look:'doors',cond:{until:9},name:'Gate Zero doors',
+    gates:[{at:[[14,3],[15,3]],cond:{until:9},name:'Gate Zero doors',
       lines:['The doors are locked tight. Not yet.']},
-      {at:[[14,3],[15,3]],look:'doors',gatelock:true,cond:{chapter:10,notFlag:'ch10-door'},name:'Gate Zero doors',
+      {at:[[14,3],[15,3]],gatelock:true,cond:{chapter:10,notFlag:'ch10-door'},name:'Gate Zero doors',
       lines:['The doors are locked tight. Above them, the big clock is waiting for its coins.']}],
     // Painted plate (art/terminal.webp, engine/plate.js; the painting Tom approved 2026-11-11, tools/make_airport_plates.py). '#' blocks,
     // '.' walks. A tile walks when the floor at its bottom edge (where feet are drawn) is clear. The gate clock stays drawn on top of the

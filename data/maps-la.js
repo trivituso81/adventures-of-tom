@@ -146,11 +146,11 @@ const LA_AREAS=[
     border:{kind:'citywall',open:[[29,10],[29,11],[29,12],[29,13],[0,8],[0,9],[0,10],[0,12],[0,13],[0,14],[0,15],[0,16],[0,17],[0,18],[0,19],[0,20],[0,21],[0,22],[0,23],[29,14],[29,15],[29,16],[29,17],[29,18],[29,19],[29,20],[29,21],[29,22],[29,23],[29,24]]},
     exits:[[2,2,'griffith',11,17,'up','path'],[3,2,'griffith',12,17,'up','path'],[13,24,'jpark',13,1,'down'],[14,24,'jpark',14,1,'down'],[15,24,'jpark',15,1,'down'],[16,24,'jpark',16,1,'down'],[27,7,'studio',1,10,'right'],[28,7,'studio',1,11,'right']],
     // Chapter 2: the trail is closed for smog until Tom and TNB work out where it is coming from.
-    gates:[{at:[[2,2],[3,2]],look:'barrier',dy:.4,cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
+    gates:[{at:[[2,2],[3,2]],art:'blvd-trail',cond:{chapter:2,notFlag:'ch2-source'},name:'Road barrier',
       lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','Somebody added in marker: "This means you, Gary."'],
       when:[{flag:'ch2-smog',lines:['TRAIL CLOSED. SMOG ADVISORY. Please stay indoors.','The neighbors come first. Check on 2nd Ave and Jefferson Boulevard.']}]},
       // The studio lot is a closed set until chapter 4.
-      {at:[[27,7],[28,7]],look:'barrier',dy:.4,cond:{test:S=>S.chapter<4},name:'Studio gate',
+      {at:[[27,7],[28,7]],art:'blvd-studio',cond:{test:S=>S.chapter<4},name:'Studio gate',
         lines:['SUNSET GOLD STUDIOS. CLOSED SET. Crew and talent only.','A guard waves from the booth. Not a hello wave. A no wave.']}],
     objects:[
       // Palms, lamps, pots, benches and the arches are painted; the mask blocks them. Only things you can touch are listed here.
@@ -231,11 +231,11 @@ const LA_AREAS=[
       [13,21,'oakpark',12,20,'down','road'],[14,21,'oakpark',12,20,'down','road'],[15,21,'oakpark',13,20,'down','road'],[16,21,'oakpark',13,20,'down','road'],
       [29,10,'carbarn',1,10,'right','road'],[29,11,'carbarn',1,10,'right','road']],
     // Chapter 6: Old Oak Park (south end of 2nd Ave) is closed for tree trimming until chapter 6, and until Nara is along.
-    gates:[{at:[[13,21],[14,21],[15,21],[16,21]],look:'barrier',dy:-.4,cond:{test:S=>S.chapter<6||(S.chapter===6&&!S.flags['ch6-nara'])},name:'Park barrier',
+    gates:[{at:[[13,21],[14,21],[15,21],[16,21]],art:'jpark-oak',cond:{test:S=>S.chapter<6||(S.chapter===6&&!S.flags['ch6-nara'])},name:'Park barrier',
       lines:['OLD OAK PARK. CLOSED FOR TREE TRIMMING.','Somebody has drawn a very small squirrel on the sign. It\'s wearing a tie.'],
       when:[{chapter:6,flag:'ch6-tnb',lines:['OLD OAK PARK. CLOSED FOR TREE TRIMMING.','TNB: "Babe, we should get Nara first. Olivia and Michael are on 2nd Ave."']}]},
       // Chapter 8: the old Car Barn at the east end of Jefferson Boulevard stays chained shut until the potluck goes cold.
-      {at:[[29,10],[29,11]],look:'schoolgate',cond:{test:S=>S.chapter<8||(S.chapter===8&&!S.flags['ch8-block'])},name:'Car Barn gate',
+      {at:[[29,10],[29,11]],art:'jpark-barn',cond:{test:S=>S.chapter<8||(S.chapter===8&&!S.flags['ch8-block'])},name:'Car Barn gate',
         lines:['DIVISION NINE CAR BARN. Est. 1912. Closed since 1963.','The chain on the gate is cold. Colder than it should be in Los Angeles.']}],
     objects:[
       // Tap spots on painted things (the plate hides every object; each is touched from a walkable tile).
@@ -425,7 +425,7 @@ LA_AREAS.push(
       '...........#############'],
     border:{kind:'studiowall',open:[[12,2],[13,2],[0,16],[0,17],[1,17],[2,17],[3,17],[4,17],[5,17],[6,17],[7,17],[8,17],[9,17],[10,17]]},
     exits:[[9,17,'studio',10,1,'down'],[10,17,'studio',11,1,'down'],[12,2,'stage7',9,15,'up'],[13,2,'stage7',10,15,'up']],
-    gates:[{at:[[12,2],[13,2]],look:'barrier',dy:1,cond:{chapter:4,notFlag:'ch4-sets'},name:'Stage 7 door',
+    gates:[{at:[[12,2],[13,2]],art:'backlot-stage7',cond:{chapter:4,notFlag:'ch4-sets'},name:'Stage 7 door',
       lines:['SOUNDSTAGE 7. The big door is locked from the inside. The red light is on: ROLLING.','Nobody is rolling anything. TNB says the sets come first. The Sprites will wreck the shoot.']}],
     objects:[
       // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
@@ -475,7 +475,7 @@ LA_AREAS.push(
     border:{kind:'studiowall',open:[[9,16],[10,16],[15,3],[16,3]]},
     exits:[[9,16,'backlot',12,3,'down'],[10,16,'backlot',13,3,'down'],[15,3,'stageset',10,12,'up'],[16,3,'stageset',11,12,'up']],
     // The catwalk is up (and the work lights are off) until the rig is fixed: the stairs to the set are shut.
-    gates:[{at:[[15,3],[16,3]],look:'barrier',dy:.9,cond:{chapter:4,notFlag:'ch4-hat'},name:'The catwalk',
+    gates:[{at:[[15,3],[16,3]],art:'stage7-catwalk',cond:{chapter:4,notFlag:'ch4-hat'},name:'The catwalk',
       lines:['The catwalk up to the set is raised. The stairs end in a gap and a very dark drop.','TNB says the light rig runs the catwalk motor. Fix the rig first.']}],
     objects:[
       // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
