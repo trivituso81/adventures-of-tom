@@ -25710,7 +25710,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Made in build anim-deedee-dodge-y4m3. Rose's duck wording on Wan 3.0 (job rev 5, $0.50, run 44958736507) passed every check: she ducks straight down, hands on head, feet planted, nothing off the frame. Next: your card Watch Deedee, Dodge.",
@@ -25856,6 +25856,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-deedee-dodge-y4m3: the duck wording passed on the first video and was baked."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-dodge-y4m3: Deedee's Dodge is a Wan 3.0 video now: she ducks straight down with both hands on her head and stands back up"
     }
    ],
    "prompt": {
@@ -25875,7 +25879,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
     "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -30130,7 +30135,7 @@
    "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanch4",
    "next": "Shipped (wanch4). Rose's Giddyup missed again: more room fixed the top edge, but the jump became a somersault and her hair touches the left edge, so it is not in the game. Deedee's Wet-Floor is now one question for you (card Deedee's Wet-Floor mop: is a lower mop fine?). Both continue in c-wanch5. Spent $0.79 on fal.",
    "blocks": [],
@@ -30160,6 +30165,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch4: Rose's Giddyup missed again (a somersault into the left edge); Deedee's Wet-Floor goes to Tom as a question"
     }
    ],
    "prompt": {
@@ -30172,7 +30181,8 @@
     "effort": "medium (one written change and one question; the route, checks, bake and tests are built)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.10 Built wanch3), then card c-wanch4 in data/board.json with its history and the Tom card that blocked it (t-wanch3-watch: his answer and note). Your first push is the commit board: start c-wanch4. First apply Tom's notes from t-wanch3-watch on the Skeeter's Darting Bite (one change, smallest change). Then: (1) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0, prompt wan-rose-giddyup-v2.txt unchanged): r4 jumped once but her hair was cut at the top edge and her hand left the left edge, so change only pad 0.8 to 0.65 (rev 5), one try, checked by plan 4.4; bake with --fps 24, wire it to the kit row giddyup_tata_launch in data/b3-kit-rose.js. (2) Deedee's Wet-Floor Hazard: three tries missed the same way (the mop head is drawn below her feet row, plus two sweeps on r4), so no fourth prompt: add one Tom card (ask decide, 2 to 4 choices, the first yours ending (Recommended)) asking whether a mop drawn lower than her feet in this three-quarter view is acceptable if it sweeps once, with the r4 evidence; it blocks a new Claude card for the remake. Test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $2 on fal. Build tag wanch4, end with the Tom cards (ask animations for Giddyup if it passes). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanch4-wetfloor"
+   "after": "t-wanch4-wetfloor",
+   "done": "2026-11-21"
   },
   {
    "id": "b-voices-t-ch1voices-334",
@@ -30526,6 +30536,10 @@
     "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
     "effort": "medium (one written change per video; the route, checks, bake and tests are built)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.11 Built wanch4), then card c-wanch5 in data/board.json with its history and the Tom card that blocked it (t-wanch4-wetfloor: his answer and note). Your first push is the commit board: start c-wanch5. The wangen cap counts every dollar ever spent: read the ledger on branch wangen and pass cap = ledger + 2. (1) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): r5 (pad 0.65) made a forward somersault and her hair touched the left edge; the prompt asks for planted feet and also \"leaps up and forward to the left\". One change: new prompt file wan-rose-giddyup-v3.txt equal to v2 with \"leaps up and forward to the left once\" changed to \"leaps straight up once\", rev 6, pad stays 0.65, one try, checked by plan 4.4; if it passes bake with --fps 24 and wire it to the kit row giddyup_tata_launch in data/b3-kit-rose.js. (2) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): follow Tom's answer on t-wanch4-wetfloor. Yes: prompt v2 unchanged, one change pad 0.65 (rev 5), and accept a mop head below her feet row; the other 4.4 checks hold. No: one new MOTION in which the mop never rests on the floor ahead of her, rest of the prompt unchanged, rev 5. Leave it: no Wet-Floor call; retire it in the plan. Bake what passes (--fps 24), wire it to its kit row in data/b3-kit-deedee.js, purge what it replaces. Test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $2 on fal. Build tag wanch5, end with one Tom card (ask animations) for what passed. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGnVk2pzbLKvYJUt9V",
+    "opening": "unknown"
    }
   }
  ],
@@ -31178,6 +31192,39 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGnVk2pzbLKvYJUt9V",
+   "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
+   "first": "2026-11-21T14:54:35-08:00",
+   "last": "2026-11-21T15:24:46-08:00",
+   "tags": [
+    "wanch4"
+   ],
+   "cards": [
+    "c-wanch4",
+    "c-wanch5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T09:18:43-08:00",
+   "last": "2026-11-21T15:23:51-08:00",
+   "tags": [
+    "anim-deedee-scrub-1irj",
+    "anim-deedee-windex-z9p8",
+    "anim-deedee-give-yy1o",
+    "anim-deedee-ko-yes1",
+    "anim-deedee-dodge-y4m3"
+   ],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3",
+    "c-anim-deedee-ko-yes1",
+    "c-anim-deedee-give-yy1o",
+    "c-anim-deedee-windex-z9p8",
+    "c-anim-deedee-scrub-1irj"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
    "title": "Battle videos in bulk: checks and retries inside the Action",
    "first": "2026-11-21T15:20:15-08:00",
@@ -31273,37 +31320,6 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGnVk2pzbLKvYJUt9V",
-   "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
-   "first": "2026-11-21T14:54:35-08:00",
-   "last": "2026-11-21T14:55:21-08:00",
-   "tags": [
-    "wanch4"
-   ],
-   "cards": [
-    "c-wanch4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T14:49:04-08:00",
-   "tags": [
-    "anim-deedee-scrub-1irj",
-    "anim-deedee-windex-z9p8",
-    "anim-deedee-give-yy1o",
-    "anim-deedee-ko-yes1"
-   ],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3",
-    "c-anim-deedee-ko-yes1",
-    "c-anim-deedee-give-yy1o",
-    "c-anim-deedee-windex-z9p8",
-    "c-anim-deedee-scrub-1irj"
    ]
   },
   {
@@ -35164,8 +35180,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "da9d273a4f9a4d67378b94e656ac63936ccb925f",
- "synced_at": "2026-11-21T23:23:36+00:00",
+ "synced": "7e3bb7acea25783a61ebcca48a30a5e82ee45368",
+ "synced_at": "2026-11-21T23:26:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
