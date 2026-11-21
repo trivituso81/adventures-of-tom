@@ -169,6 +169,15 @@ import numpy as _np
 pa = _np.asarray(pf).astype(int); figm = _np.sqrt(((pa - _np.array([255, 0, 255])) ** 2).sum(2)) > 90; ys = _np.where(figm.any(1))[0]
 check('W10 pad: 720x1280, the figure shrunk and centred, sent as first and last frame', pf.size == (720, 1280) and pb['start_image_url'] == pb['end_image_url'] and ys.min() > 100 and 'pad' in o, (pf.size, ys.min(), o[-300:]))
 
+# W11 shift (c-anim-tom-loungepass-fix1): the padded figure moved right, room on the left, 3 percent margin kept on the right
+pxs = _np.where(figm.any(0))[0]
+J = json.load(open(jf)); J['shift-a'] = dict(J['video'], rev=1, pad=.8, shift=.2); json.dump(J, open(jf, 'w'))
+c, o = run(repo, out9, 'shift-a', '--cap', '9')
+sb = S['sent'][-1]['body']; sf = Image.open(io.BytesIO(base64.b64decode(sb['start_image_url'].split(',', 1)[1]))).convert('RGB')
+sa = _np.asarray(sf).astype(int); sm = _np.sqrt(((sa - _np.array([255, 0, 255])) ** 2).sum(2)) > 90; sxs = _np.where(sm.any(0))[0]
+check('W11 shift: 720x1280, the figure moved right with room on the left, right margin at least 3 percent, first and last frame the same',
+      sf.size == (720, 1280) and sxs.min() > pxs.min() + 50 and sxs.max() <= 720 - 21 and sb['start_image_url'] == sb['end_image_url'] and 'shift' in o, (sf.size, pxs.min(), sxs.min(), sxs.max(), o[-300:]))
+
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
 print('ALL PASS' if not fails else '%d FAILED: %s' % (len(fails), ', '.join(fails)))
 sys.exit(1 if fails else 0)

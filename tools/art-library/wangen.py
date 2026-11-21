@@ -82,6 +82,20 @@ def pad_frame(png_bytes, k):
     b = io.BytesIO(); out.save(b, 'PNG'); return b.getvalue()
 
 
+def shift_frame(png_bytes, k):
+    """c-anim-tom-loungepass-fix1: the framed figure moved right by k of the frame width on the same magenta, so a long reach to the left
+    (the family faces left) has room inside the video. Never closer than 3 percent of the width to the right edge. Returns (bytes, px moved)."""
+    from PIL import Image
+    import numpy as np
+    im = Image.open(io.BytesIO(png_bytes)).convert('RGB'); W, H = im.size
+    a = np.asarray(im).astype(int); bgv = np.median(np.concatenate([a[:20, :20].reshape(-1, 3), a[:20, -20:].reshape(-1, 3)]), 0)
+    xs = np.where((np.sqrt(((a - bgv) ** 2).sum(2)) > 90).any(0))[0]
+    dx = round(W * k)
+    if len(xs): dx = max(0, min(dx, W - round(.03 * W) - 1 - int(xs.max())))
+    out = Image.new('RGB', (W, H), tuple(int(v) for v in bgv)); out.paste(im.crop((0, 0, W - dx, H)), (dx, 0))
+    b = io.BytesIO(); out.save(b, 'PNG'); return b.getvalue(), dx
+
+
 def build(job, repo):
     """The request body and the bytes of any framed picture. Images are read from the repo checkout."""
     body = dict(job['input'])
@@ -100,6 +114,8 @@ def build(job, repo):
         W, H = [int(x) for x in job['fit'].split('x')]
         frame, how = fit_frame(open(p, 'rb').read(), (W, H))
         if job.get('pad'): frame, how = pad_frame(frame, float(job['pad'])), how + ', then shrunk to %d%% on the same magenta (pad)' % round(100 * float(job['pad']))
+        if job.get('shift'):
+            frame, dx = shift_frame(frame, float(job['shift'])); how += ', then moved %d px right (shift)' % dx
         say('frame: %s -> %dx%d, %s' % (job['frame'], W, H, how))
         for k in job.get('frame_fields') or ['start_image_url']: body[k] = data_uri(frame)
     return body, frame

@@ -297,7 +297,7 @@
   }
  },
  "tom-loungepass": {
-  "rev": 5,
+  "rev": 6,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -320,7 +320,8 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "pad": 0.65
+  "pad": 0.8,
+  "shift": 0.2
  },
  "tom-blockade": {
   "rev": 2,
