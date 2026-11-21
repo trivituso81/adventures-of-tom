@@ -26921,7 +26921,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGuUS6mkJhboMf4inb",
+    "url": "https://claude.ai/code/session_01RXeukGuUS6mkJhboMf4inb",
     "opening": "not started"
    },
    "history": [
@@ -26950,6 +26950,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28007,7 +28011,7 @@
    "id": "c-reports-8",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Fixed r-20261121-120404-lwe8: the Hollow toad is drawn in front of the foliage. Look at Grump Hollow, upper left, near the bench.",
@@ -28045,13 +28049,18 @@
     {
      "d": "2026-11-21",
      "t": "Fixed r-20261121-120404-lwe8 (toad behind the cutout): the Hollow toad now draws in front of it. Build reports-2026-11-21."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-21: the Hollow's toad is drawn in front of the foliage, not behind it"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-21T20:14:12+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-hitspeed1",
@@ -28144,6 +28153,28 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCazpoWKUkqu97U4wN",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-21T20:15:22Z",
+   "last": "2026-11-21T20:18:19Z",
+   "tags": [
+    "reports-2026-11-21"
+   ],
+   "cards": [
+    "c-reports-8"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGuUS6mkJhboMf4inb",
+   "title": "Night shift: queued cards start by themselves overnight",
+   "first": "2026-11-21T20:17:27Z",
+   "last": "2026-11-21T20:17:27Z",
+   "tags": [],
+   "cards": [
+    "c-nightshift"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
    "title": "Ding sound on the Lounge Pass sparkle",
    "first": "2026-11-21T20:15:28Z",
@@ -28151,16 +28182,6 @@
    "tags": [],
    "cards": [
     "c-anim-tom-loungepass-ding"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCazpoWKUkqu97U4wN",
-   "title": "Fix the report backlog (1 open)",
-   "first": "2026-11-21T20:15:22Z",
-   "last": "2026-11-21T20:15:22Z",
-   "tags": [],
-   "cards": [
-    "c-reports-8"
    ]
   },
   {
@@ -32189,8 +32210,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "83129da34a0fce255661ad663f310ee5126db719",
- "synced_at": "2026-11-21T20:17:13+00:00",
+ "synced": "618da927430eab87e3c29537a028a7f5ca1e43ee",
+ "synced_at": "2026-11-21T20:18:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
