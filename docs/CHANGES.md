@@ -204,6 +204,14 @@ Card c-wanch2, part a. Tom's words on c-idea-tomgrace: "For Tom Grace and Rose a
 | Not made | Skeeter Swarm Darting Bite: full Grok v3 kept the small mosquitoes but the big one darted left, turned side-on and never came back; the one retry (MOTION without "darts forward once and") grew the big one, lost half the swarm and again did not come back. Stop-loss: listed. Its baked v3 file and script tag were removed. |
 | Spend so far | xAI $1.00 (4 videos). fal: see wanch2. |
 | Tests | `video_only_test.py` FAILS [] (V2 now checks the painted-state code is gone), `wanproof_test.py` FAILS [], `b3_test.py s8` FAILS [], `guidegen/build_map_test.py` FAILS [], smoke (portrait and landscape). `board_sync_test.py` has 3 failures that were there before this change (R5 replay and the unstick card). |
+## fix-ch1flight-3 (2026-11-21): no flash of the taxi company between the phone on the seat and the flight
+
+Card c-fix-ch1flight-3. Tom: "there's still a flash of the taxi cab company between the phone on seat and the plane animation start".
+- Cause: after the Chapter 1 card the cab scene faded back in (`{fade:'in'}` in `SCENES.ch1Sunday`), showing the Long Island Taxi Co. map for about a second before the flight began.
+- Fix: that fade-in is removed, so the screen stays black from the cab fade-out; the flight's first step (`flightSteps`, `engine/travel.js`) clears the black as the flight picture appears.
+- Kept: the phone picture under TNB's text, the chapter card, the flight, no goodbyes.
+- Checked: played the scene in the browser (portrait): the flight starts with no map showing and no page errors. Not looked at: landscape frames, python smoke.
+
 ## fix-ch1flight-2 (2026-11-21): the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js
 
 Card c-fix-ch1flight-2 (Gemini's chapter 1 test, C2 FAIL). Checked on main first: `SCENES.ch1Sunday` had lost the edit (a later push overwrote it).

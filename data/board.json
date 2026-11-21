@@ -20804,7 +20804,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
+   "next": "Fixed as fix-ch1flight-3 (the cab map no longer flashes). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: the phone picture stays on while TNB's text is read, then the Chapter 1 card, then straight to the flight seat with no taxi company flash in between. Report anything off with the REPORT tab.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",

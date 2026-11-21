@@ -418,7 +418,7 @@ function flightSteps(dir,talk,arr,photo) {
   // The new chapter's title card (engine/story.js): shown after landing, once Tom is standing in the new area, never before the flight.
   const card=typeof storyArrivalCard==='function'?storyArrivalCard(dir):[];
   return [
-    S.call(()=>{ intro.flight={dir,mode:'board',t:0}; $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
+    S.call(()=>{ intro.flight={dir,mode:'board',t:0}; intro.fade=0; intro.fadeLock=false; /* fix-ch1flight-3: chapter 1's cab scene leaves the screen black; the flight comes up with no map flash */ $('area-name').textContent='In flight'; $('eyebrow').textContent='DELTA ONE / SEAT 1A'; }),
     ...(typeof flightArtReady==='function'&&flightArtReady()?[flightPhase('cabin',2.6)]:[]),   // engine/flight-art.js: seat 1A, a painted beat before takeoff
     flightPhase('takeoff',4),
     S.all(flightPhase('map',8),

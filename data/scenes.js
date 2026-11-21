@@ -435,7 +435,7 @@ SCENES.ch1Sunday=[
   {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone',keep:true}},   // cutpolish4b: the phone lights up on the cab seat; fix-ch1flight: it stays up while TNB's text is read
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
   {ch1RevealEnd:true},
-  {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
+  {card:1,done:true,time:3.4}, {flag:'ch1-done'},   // fix-ch1flight-3: no fade in here; the screen stays black until the flight starts (the cab interior flashed)
   {trip:'west',quiet:true}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
 ];
 
