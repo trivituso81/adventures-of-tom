@@ -1,3 +1,7 @@
+## voicepurge221 (2026-11-21): 221 old dialogue clips that nothing plays were purged
+
+Card c-voicepurge221. Check 4 of `tools/clip-audit/unused_voice.py` listed 221 baked dialogue clips with no scene, harvest line or source (old chapter 1, 3 and 6 lines). Removed with `purge_unused.js` (spec `tools/clip-audit/purge-voicepurge221.json`), Voice Library list rebuilt (221 removed), all four checks 0. List in docs/PURGED_VOICE.md.
+
 ## ch2lessons (2026-11-21): chapter 2 cut by the chapter 1 lessons: 93 lines became 73 (20 cut, 4 rewritten, two orphans fixed), every voice script retagged in Tom's style
 
 Card c-ch2lessons. Tom (2026-11-20): apply the lessons of his day of chapter 1 cuts to chapter 2, which he has not played yet. A fresh reviewer that read only claude/tom-line-edits.md, claude/story-line-rules.md and the 93 lines marked every line KEEP, CUT or REWRITE with a rule number. Claude applied all of it (no line replaced after a cut; each scene was read again and still makes sense).
