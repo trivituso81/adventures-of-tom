@@ -25,7 +25,7 @@ class H(http.server.SimpleHTTPRequestHandler):
 socketserver.TCPServer.allow_reuse_address = True
 srv = socketserver.TCPServer(('127.0.0.1', 0), functools.partial(H, directory=ROOT)); port = srv.server_address[1]
 threading.Thread(target=srv.serve_forever, daemon=True).start()
-URL = 'http://127.0.0.1:%d/battle-guide.html' % port
+URL = 'http://127.0.0.1:%d/battle-guide.html?fast=1' % port   # fast=1: the page looks for an Action's answer every 0.3 s, not every 5 s
 
 # What the data files hold, counted without a browser (node loads them the way tools/b3-sim.js does).
 node = r"""
@@ -40,8 +40,37 @@ want = json.loads(subprocess.run(['node', '-e', node], cwd=ROOT, capture_output=
 board = {'doc': json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8')), 'puts': []}
 # Tom's real notes sent from the guide are on the live board; the stand-in starts without them so the counts below are about this run only.
 board['doc']['cards'] = [c for c in board['doc']['cards'] if not c.get('anim')]
+# guidegen1b: the stand-in GitHub also holds the request file and the branch `guidegen`, and a stand-in of the guide-reconcile Action answers a request
+# the way the real one does (tools/guidegen/reconcile.py with a stand-in model), after one poll that finds nothing.
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'guidegen')); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate'))
+import reconcile as R
+reqs = {'sha': 'r0', 'doc': {'requests': []}, 'puts': []}; answers = {}; polls = {'miss': 0}
+def stand_in_model(system, user):
+    note = user.split("TOM'S NOTE\n", 1)[1].strip().lower(); old = user.split('CURRENT PROMPT\n', 1)[1].split("\n\nTOM'S NOTE", 1)[0]
+    d = {'question': None, 'prompt': None, 'changed_parts': ['MOTION'], 'kept': 'the picture rules and the pose', 'changed': 'one clause in the motion', 'unused': 'nothing'}
+    if 'vague' in note and 'my answer' not in note: d.update(question='What should look different?', changed_parts=[])
+    elif 'break' in note: d['prompt'] = old.replace('smug little smile', 'retro smile').replace('calm', 'retro calm')
+    else:
+        parts = R.split(old); d['prompt'] = '\n\n'.join((t[:-1] + ', looking at the viewer.' if t.endswith('.') else t) if l == 'MOTION' else t for l, t in parts)
+    return json.dumps(d), 0.003
+def run_action(doc):
+    for r in doc['requests']:
+        res = R.reconcile(stand_in_model, r['prompt'], r['note'], {'kind': r['kind'], 'hasVideo': r['hasVideo']})
+        res.update({'id': r['id'], 'at': r['at'], 'note': r['note'], 'basedOn': r['prompt'], 'rev': r['rev'], 'model': 'stand-in'}); answers[R.slug_of(r['id'])] = res
 def github(route):
-    rq = route.request
+    rq = route.request; url = rq.url.split('?')[0]
+    if url.endswith('/contents/data/guide-reconcile.json'):
+        if rq.method == 'GET':
+            return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': reqs['sha'], 'content': base64.b64encode(json.dumps(reqs['doc']).encode()).decode()}))
+        body = json.loads(rq.post_data)
+        if body.get('sha') != reqs['sha']: return route.fulfill(status=409, body='{}')
+        reqs['doc'] = json.loads(base64.b64decode(body['content']).decode()); reqs['puts'].append(body['message']); reqs['sha'] = 'r%d' % len(reqs['puts'])
+        run_action(reqs['doc']); polls['miss'] = 1   # the Action empties the list and answers; the first look finds nothing yet
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': 'n'}}))
+    if '/contents/reconcile/' in url:
+        slug = url.rsplit('/', 1)[1][:-5]
+        if polls['miss'] > 0 or slug not in answers: polls['miss'] = max(0, polls['miss'] - 1); return route.fulfill(status=404, body='{}')
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 'a', 'content': base64.b64encode(json.dumps(answers[slug]).encode()).decode()}))
     if rq.method == 'GET':
         route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 's%d' % len(board['puts']),
             'content': base64.b64encode(json.dumps(board['doc']).encode()).decode()}))
@@ -94,6 +123,8 @@ with sync_playwright() as p:
         pg.wait_for_timeout(200); pg.screenshot(path=os.path.join(out, 'battleguide-%s-anims.png' % name))
         pg.click('#detail [data-anim="body:tom:idle"]'); pg.wait_for_function("document.getElementById('cv')&&document.getElementById('cv').width>10", timeout=30000)
         snap = "(()=>{const c=document.getElementById('cv');const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let s=0,n=0;for(let i=3;i<d.length;i+=4){if(d[i]>0){n++;s=(s+d[i-1]*(i%977))%1e9;}}return [n,s]})()"
+        try: pg.wait_for_function("(()=>{const c=document.getElementById('cv');if(!c)return false;const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;for(let i=3;i<d.length;i+=4)if(d[i]>0)return true;return false})()", timeout=15000)
+        except Exception: pass
         a = pg.evaluate(snap); pg.wait_for_timeout(900); b = pg.evaluate(snap)
         check(name + ': the idle video draws a figure', a[0] > 2000, a)
         check(name + ': the video moves', a != b, (a, b))
@@ -154,6 +185,42 @@ with sync_playwright() as p:
     check('a move with no video says so', 'No video yet' in pg.locator('#stage').inner_text(), pg.locator('#stage').inner_text())
     pg.fill('#ntxt', 'Sliding pod doors closing around the two next to him.'); pg.click('#nsend'); pg.wait_for_selector('#pcopy', timeout=20000)
     ok, why = board_ok(); check('board_check accepts a no-video note', ok, why)
+    pg.click('#bclose')
+    # guidegen1b: a note is folded into the prompt, shown back with what changed, and kept or discarded
+    pg.evaluate("localStorage.setItem('aot-gh-token','x')")
+    pg.goto(URL + '#anims/move:lounge_pass_flex'); pg.wait_for_selector('#gnote')
+    g_old = pg.locator('#gprompt').inner_text()
+    check('a video: the box says What should change and the button Update the prompt', 'what should change' in pg.locator('#gen').inner_text().lower() and pg.locator('#gupd').inner_text().lower() == 'update the prompt')
+    pg.click('#gupd'); check('an empty note is not sent', 'first' in pg.locator('#gerr').inner_text() and not reqs['puts'])
+    pg.fill('#gnote', 'He should look at the viewer and smile.'); pg.click('#gupd'); pg.wait_for_selector('#gnew', timeout=20000)
+    rq1 = reqs['doc']['requests'][-1]
+    check('the tap commits one request with the current prompt, his words and what kind it is', reqs['puts'] == ['guide: reconcile move:lounge_pass_flex'] and rq1['note'].startswith('He should look at the viewer') and rq1['prompt'] == g_old
+          and rq1['hasVideo'] is True and rq1['kind'] == 'family' and rq1['cap'] <= 0.5 and rq1['id'] == 'move:lounge_pass_flex' and rq1['at'], rq1)
+    lines = pg.locator('#glines').inner_text()
+    check('the page shows what was kept, what changed and what could not be used', all(k in lines for k in ('Kept:', 'Changed:', 'Could not use:')), lines)
+    check('the new prompt is shown whole and changed only in MOTION', pg.locator('#gnew').input_value().startswith('IMAGE TO VIDEO REQUEST') and 'looking at the viewer' in pg.locator('#gnew').input_value() and R.check(g_old, pg.locator('#gnew').input_value(), ['MOTION']) == [])
+    pg.screenshot(path=os.path.join(out, 'battleguide-reconcile.png'))
+    pg.fill('#gnew', pg.locator('#gnew').input_value() + ' He does not blink.'); pg.click('#gkeep'); pg.wait_for_selector('#gkept')
+    check('keeping the prompt shows the edited text as the one a video will use', 'He does not blink.' in pg.locator('#gprompt').inner_text() and pg.locator('#gedited').count() == 1)
+    pg.click('#bclose'); pg.reload(); pg.goto(URL + '#anims/move:lounge_pass_flex'); pg.wait_for_selector('#gprompt')
+    check('a kept prompt is still there after a reload', 'He does not blink.' in pg.locator('#gprompt').inner_text() and pg.locator('#gedited').count() == 1)
+    pg.click('#bclose')
+    pg.goto(URL + '#anims/move:suite_door_slide'); pg.wait_for_selector('#gnote')
+    check('no video: the box says Anything to add and the draft shows', 'anything to add' in pg.locator('#gen').inner_text().lower() and 'draft' in pg.locator('#gen').inner_text().lower())
+    pg.click('#gupd'); check('no video and no note: nothing is sent, the draft stays', 'keep the draft' in pg.locator('#gerr').inner_text() and len(reqs['puts']) == 1)
+    pg.fill('#gnote', 'vague'); pg.click('#gupd'); pg.wait_for_selector('#gask', timeout=20000)
+    check('a note that cannot be used gets one plain question, not a prompt', 'What should look different?' in pg.locator('#gres').inner_text() and pg.locator('#gnew').count() == 0)
+    pg.fill('#gans', 'The arm should swing once.'); pg.click('#gask'); pg.wait_for_selector('#gnew', timeout=20000)
+    check('his answer is sent with his note and the question', 'My answer: The arm should swing once.' in reqs['doc']['requests'][-1]['note'] and 'What should look different?' in reqs['doc']['requests'][-1]['note'] and reqs['doc']['requests'][-1]['hasVideo'] is False)
+    pg.click('#gdisc'); check('Discard clears the answer and keeps the draft', pg.locator('#gres').inner_text().strip() == '' and 'draft' in pg.locator('#gen').inner_text().lower())
+    pg.fill('#gnote', 'please break it'); pg.click('#gupd'); pg.wait_for_selector('#gchk', timeout=20000)
+    check('an answer that broke a rule twice is marked Check this one with the reasons', 'check this one' in pg.locator('#gchk').inner_text().lower() and pg.locator('#gchk li').count() >= 1, pg.locator('#gchk').inner_text())
+    for nm, w, h, two in SIZES:
+        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(120)
+        check(nm + ': the answer fits the sheet', pg.evaluate("(()=>{const s=document.getElementById('sheet');return s.scrollWidth<=s.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
+    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.reload(); pg.wait_for_selector('#gnote')
+    pg.fill('#gnote', 'a note'); n_before = len(reqs['puts']); pg.click('#gupd'); pg.wait_for_timeout(300)
+    check('no token: nothing is sent and the page says why', 'token' in pg.locator('#gerr').inner_text().lower() and len(reqs['puts']) == n_before)
     pg.click('#bclose')
     # search
     pg.click('#bsearch')

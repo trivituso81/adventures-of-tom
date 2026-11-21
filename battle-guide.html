@@ -119,6 +119,13 @@ ol.steps li{margin:4px 0}
 .gen .meta .chip{font-weight:600}
 .gen pre.prompt{max-height:none}
 .gen .why{border-left:3px solid var(--accent);padding:2px 0 2px 10px;margin:8px 0;font-size:14px}
+.gen textarea{min-height:84px}
+.gen textarea.big{min-height:300px;font:13px/1.45 ui-monospace,Menlo,monospace}
+.gen .lines p{margin:4px 0;font-size:14px}
+.gen .lines b{color:var(--accent)}
+.gen .q{border:1px solid var(--accent);border-radius:12px;padding:10px 12px;margin:8px 0}
+.gen .chk{border:1px solid var(--prob);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
+.gen .row2{display:flex;gap:8px;margin-top:8px}.gen .row2 button{flex:1}
 .gen .cant{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 /* Two panes: the Duo unfolded (both poses), tablets, desktop. */
 @media (min-width:560px) and (min-height:560px){
@@ -560,6 +567,78 @@ function noteForm(a){
 const SRC_WORDS={job:'The prompt of the Wan job that made this animation',entry:'The prompt of this animation\'s Art Library entry',used:'A prompt written in the Battle Guide',
   'model-draft':'A DRAFT prompt written for this animation: the same person\'s approved prompt, with only the MOTION part new','rule-draft':'A STARTER DRAFT: the same person\'s approved prompt, with only the MOTION part new, built from the move\'s own data'};
 const G=a=>(GUIDE&&GUIDE.anims&&GUIDE.anims[a.id])||null;
+// A prompt Tom accepted or edited by hand, kept in this browser until a video is made from it (guidegen1b).
+let GW={};try{GW=JSON.parse(lsGet('aot-guide-work')||'{}')||{};}catch(e){GW={};}
+const saveGW=()=>{try{localStorage.setItem('aot-guide-work',JSON.stringify(GW));}catch(e){}};
+const workPrompt=a=>(GW[a.id]&&GW[a.id].prompt)||(G(a)&&G(a).prompt)||'';
+const slugOf=id=>id.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+async function ghGetJson(path,ref,tok){
+  const H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
+  const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+path+'?ref='+ref+'&t='+Date.now(),{cache:'no-store',headers:H});
+  if(r.status===404)return null;if(!r.ok)throw new Error('GitHub '+r.status);
+  const j=await r.json();let c=j.content||'';
+  if(!c.replace(/\s/g,'')){const b=await fetch(GH()+'/repos/'+REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:H});if(!b.ok)throw new Error('GitHub '+b.status);c=(await b.json()).content||'';}
+  return {sha:j.sha,doc:JSON.parse(t64(c))};
+}
+// Add a request to a request file on main (the Action that reads it empties it first and does the work; the key stays a repo secret).
+async function ghRequest(path,msg,fn){
+  const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh'))throw new Error('This browser has no GitHub token. Open the Board, tap the three dots and paste it there.');
+  for(let tries=0;;tries++){
+    const g=(await ghGetJson(path,'main',tok))||{sha:null,doc:{requests:[]}};g.doc.requests=g.doc.requests||[];fn(g.doc);
+    const body={message:msg,content:b64t(JSON.stringify(g.doc,null,1)+'\n'),branch:'main'};if(g.sha)body.sha=g.sha;
+    const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(w.status===409&&tries<3)continue;
+    if(!w.ok)throw new Error('GitHub '+w.status);return;
+  }
+}
+async function waitAnswer(file,at,show){   // the Action keeps its answer on the branch guidegen; look every 5 seconds for up to 5 minutes
+  const tok=lsGet(TOKEN),t0=Date.now();
+  while(Date.now()-t0<300000){
+    const g=await ghGetJson(file,'guidegen',tok).catch(()=>null);
+    if(g&&g.doc&&g.doc.at===at)return g.doc;
+    show(Math.round((Date.now()-t0)/1000));
+    await new Promise(r=>setTimeout(r,Q.get('fast')?300:5000));
+  }
+  return null;
+}
+const cleanWords=t=>String(t||'').replace(/\s+/g,' ').replace(/[<>]/g,'').split(String.fromCharCode(8212)).join(', ').trim();
+let GTOK=0;
+async function updatePrompt(extra){
+  const a=PL.a,g=a&&G(a);if(!a||!g)return;
+  const note=cleanWords(extra||($('gnote')||{}).value),btn=$('gupd');
+  if(!note){$('gerr').textContent=g.video?'Write what should change first.':'Type what to add, or keep the draft as it is.';return;}
+  const tok=++GTOK,res=$('gres'),at=new Date().toISOString(),cur=workPrompt(a);
+  btn.disabled=true;btn.textContent='Sending...';$('gerr').textContent='';res.innerHTML='';
+  const alive=()=>GTOK===tok&&PL.a===a&&$('gres');
+  try{
+    await ghRequest('data/guide-reconcile.json','guide: reconcile '+a.id,d=>{d.requests.push({id:a.id,at,note,prompt:cur,hasVideo:!!g.video,kind:g.route==='wan'?'family':'monster',rev:g.promptRev||0,cap:0.1});});
+    if(alive())btn.textContent='Working on it...';
+    const ans=await waitAnswer('reconcile/'+slugOf(a.id)+'.json',at,sec=>{if(alive())$('gres').innerHTML='<p class="hint">Working on it, '+sec+' s. This usually takes under a minute.</p>';});
+    if(!alive())return;
+    btn.disabled=false;btn.textContent='Update the prompt';
+    if(!ans){res.innerHTML='<p class="err">No answer yet after 5 minutes. Tap Update the prompt again, or send Claude the note below.</p>';return;}
+    showAnswer(a,ans,note);
+  }catch(e){if(alive()){btn.disabled=false;btn.textContent='Update the prompt';$('gerr').textContent=e.message;}}
+}
+function showAnswer(a,r,note){
+  const res=$('gres');let h='';
+  if(r.question){
+    h+='<div class="q"><b>One question first</b><p style="margin:6px 0">'+esc(r.question)+'</p><textarea id="gans" placeholder="Your answer"></textarea><button type="button" class="gold" id="gask" style="width:100%;margin-top:8px">Answer and update the prompt</button></div>';
+    res.innerHTML=h;GASK={note,q:r.question};return;
+  }
+  if(r.check)h+='<div class="chk" id="gchk"><b>Check this one.</b> The new prompt broke a rule twice, so read it before you keep it:<ul style="margin:6px 0 0 18px">'+(r.why||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>';
+  h+='<div class="lines" id="glines"><p><b>Kept:</b> '+esc(r.kept||'the rest of the prompt')+'</p><p><b>Changed:</b> '+esc(r.changed||'')+'</p><p><b>Could not use:</b> '+esc(r.unused||'nothing')+'</p></div>';
+  h+='<textarea id="gnew" class="big">'+esc(r.prompt||'')+'</textarea><p class="hint">You can edit this by hand. Nothing is made until you press Generate.</p>';
+  h+='<div class="row2"><button type="button" class="gold" id="gkeep">Keep this prompt</button><button type="button" id="gdisc">Discard</button></div>';
+  res.innerHTML=h;
+}
+let GASK=null;
+function keepPrompt(){
+  const a=PL.a,v=String(($('gnew')||{}).value||'').trim();if(!a||!v)return;
+  GW[a.id]={prompt:v,at:new Date().toISOString(),from:'reconcile'};saveGW();
+  $('gprompt').textContent=v;$('gres').innerHTML='<p class="hint" id="gkept">Kept. This is the prompt a new video of '+esc(a.name)+' will use.</p>';
+  let e=$('gedited');if(!e){e=document.createElement('p');e.className='hint';e.id='gedited';$('gprompt').after(e);}e.textContent='You changed this prompt here ('+GW[a.id].at.slice(0,10)+'). The version above is the one a new video would use.';
+}
 function genBlock(a){
   if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Reload the page.</p></div>';
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
@@ -568,8 +647,18 @@ function genBlock(a){
   h+='<div class="meta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':a.painted?'. This animation is still an old painted pose.':'. This animation has no video yet.')+'</p>';
   if(!g.canMake)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
-  h+='<pre class="prompt" id="gprompt">'+esc(g.prompt)+'</pre></div>';
-  return h;
+  const w=GW[a.id];
+  h+='<pre class="prompt" id="gprompt">'+esc(w?w.prompt:g.prompt)+'</pre>';
+  if(w)h+='<p class="hint" id="gedited">You changed this prompt here ('+esc(w.at.slice(0,10))+'). The version above is the one a new video would use.</p>';
+  {   // the note box shows even when it cannot be made yet: the prompt can still be worked on
+    const tok=!!(lsGet(TOKEN)||Q.get('gh'));
+    h+='<h3>'+(g.video?'What should change':'Anything to add')+'</h3>'
+      +(tok?'':'<p class="err" style="font-size:14px">This browser has no GitHub token, so it cannot send. Open the <a href="board.html">Board</a>, tap the three dots, paste the token there, then come back.</p>')
+      +'<textarea id="gnote" placeholder="'+(g.video?'What should change? For example: he should look at the viewer and smile.':'Optional. For example: she holds the card up and smiles at the viewer.')+'"></textarea>'
+      +'<p class="err" id="gerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gupd" style="width:100%">Update the prompt</button>'
+      +'<p class="hint">'+(g.video?'Your words are folded into the prompt with the smallest change, and you see what was kept and what changed before anything is made.':'Claude folds your words into the draft with the smallest change. Leave it empty to keep the draft as it is.')+'</p><div id="gres"></div>';
+  }
+  return h+'</div>';
 }
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
@@ -698,6 +787,10 @@ document.addEventListener('click',e=>{
   if(t.id==='bplay'){setPlaying(!PL.on);return;}
   if(t.classList.contains('spd')){PL.speed=+t.dataset.s;document.querySelectorAll('.spd').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));return;}
   if(t.id==='nsend'){sendNote();return;}
+  if(t.id==='gupd'){updatePrompt();return;}
+  if(t.id==='gask'){const v=cleanWords(($('gans')||{}).value);if(v&&GASK)updatePrompt(GASK.note+' (Your question: '+GASK.q+' My answer: '+v+')');return;}
+  if(t.id==='gkeep'){keepPrompt();return;}
+  if(t.id==='gdisc'){$('gres').innerHTML='';return;}
   if(t.id==='pcopy'){copyText($('ptext').textContent);return;}
 });
 document.addEventListener('input',e=>{

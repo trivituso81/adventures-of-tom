@@ -1,0 +1,105 @@
+name: guide-reconcile
+
+# guidegen1b. UPDATE THE PROMPT in the Battle Guide (battle-guide.html) commits data/guide-reconcile.json with the message "guide: reconcile <animation id>".
+# That push runs this job: it empties the request list on main BEFORE it pays, folds Tom's note into the animation's prompt with the smallest change
+# (tools/guidegen/reconcile.py: an xAI text model, the repo secret XAI_API_KEY that the clip gate already uses, answers checked in code, a broken answer
+# sent back once, a second failure marked "check this one"), and keeps one answer per animation on the branch `guidegen` (reconcile/<slug>.json; never main,
+# never served). The page reads the answer from there. A request is capped at $0.10 (at most $0.50); a text call costs a fraction of a cent.
+# By hand (workflow_dispatch): `replay: true` replays Tom's chapter 1 REDO notes, the Boop history and notes that cannot be done (plan section 8), capped by `cap`.
+# `dry_run` (default true) calls nothing. The branch `guidegen` is shared with the take and use jobs (guidegen1): they restore it first, never overwrite it.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/guide-reconcile.json']
+  workflow_dispatch:
+    inputs:
+      replay:
+        description: 'true: replay the REDO notes and the Boop history instead of working through data/guide-reconcile.json.'
+        required: false
+        default: 'false'
+      cap:
+        description: 'Replay only: most dollars of text calls. It stops before passing it.'
+        required: false
+        default: '0.6'
+      model:
+        description: 'xAI text model id. Empty: the dearest non-reasoning text model in the list.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'true: list what would be asked, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guidegen
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'guide: reconcile ')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Restore what the guidegen branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/guidegen"
+          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
+            git fetch --depth 1 origin guidegen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
+          fi
+          ls -la "$RUNNER_TEMP/guidegen"
+      - name: Fold the notes into the prompts
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          REPLAY: ${{ inputs.replay }}
+          CAP: ${{ inputs.cap }}
+          MODEL: ${{ inputs.model }}
+          DRY: ${{ inputs.dry_run }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -o pipefail
+          ARGS=(--out "$RUNNER_TEMP/guidegen")
+          [ -n "$MODEL" ] && ARGS+=(--model "$MODEL")
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            if [ "$REPLAY" = "true" ]; then ARGS+=(--replay --cap "${CAP:-0.6}"); else ARGS+=(--requests); fi
+            [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          else
+            ARGS+=(--requests)
+          fi
+          python3 -I tools/guidegen/reconcile.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/reconcile.log"
+          { echo '### guide-reconcile'; echo '```'; tail -60 "$RUNNER_TEMP/reconcile.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the answers on the guidegen branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/guidegen"
+          [ -n "$(ls -A .)" ] || { echo "nothing to save"; exit 0; }
+          # the branch may have moved while this job ran (a take or use job): add to its newest copy, never replace it
+          rm -rf "$RUNNER_TEMP/gg-new"; mkdir "$RUNNER_TEMP/gg-new"
+          if git ls-remote --exit-code --heads "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" guidegen >/dev/null 2>&1; then
+            git -C "$GITHUB_WORKSPACE" fetch --depth 1 origin guidegen
+            git -C "$GITHUB_WORKSPACE" archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/gg-new"
+          fi
+          rm -rf "$RUNNER_TEMP/gg-new/reconcile.tmp"
+          mkdir -p "$RUNNER_TEMP/gg-new/reconcile"
+          [ -d reconcile ] && cp -f reconcile/*.json "$RUNNER_TEMP/gg-new/reconcile/" 2>/dev/null || true
+          [ -f replay.json ] && cp -f replay.json "$RUNNER_TEMP/gg-new/replay.json" || true
+          cd "$RUNNER_TEMP/gg-new"
+          git init -q -b guidegen
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "guidegen: reconcile answers (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" guidegen

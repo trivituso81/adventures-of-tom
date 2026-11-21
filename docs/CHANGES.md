@@ -1,3 +1,7 @@
+## guidegen1b (2026-11-21): the Battle Guide folds your note into an animation's prompt and shows what changed
+
+Card c-guidegen part 2. In the player sheet, a video has a box "What should change" and a no-video animation has "Anything to add"; Update the prompt commits `data/guide-reconcile.json` (message `guide: reconcile <animation id>`) and the `guide-reconcile` Action (`tools/guidegen/reconcile.py`, xAI text model, the existing repo secret XAI_API_KEY, no new key) returns the new prompt plus three plain lines (kept, changed, could not use and why), or one question when the note is contradictory, impossible or says nothing to change. The answer is checked in code first (parts in order, untouched parts identical, 70% of the words kept, length within 20%, one action once, no banned words); a broken answer is sent back once, a second failure is marked Check this one. He can edit the prompt by hand and Keep it (kept in this browser until a video is made). Nothing is generated yet. Tests: `python3 tools/guidegen/guidegen_test.py`, `python3 tools/battle_guide_test.py`. Plan: `claude/guidegen-plan.md`.
+
 <<<<<<< HEAD
 ## anim-rose-give-w5ws (2026-11-21): Rose's Giving (support moves) is a Wan 3.0 video now, made from the same prompt
 
