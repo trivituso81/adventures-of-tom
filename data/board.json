@@ -25065,7 +25065,7 @@
    "id": "c-idea-tomgrace",
    "tag": "idea-tomgrace",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
    "next": "Your idea: For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
@@ -25081,7 +25081,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "New card by Tom on the board"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -25093,6 +25093,11 @@
      "d": "2026-11-21",
      "t": "Sized by the board: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there).",
      "at": "2026-11-21T17:29:59.830Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T17:30:10.819Z"
     }
    ],
    "prompt": {
