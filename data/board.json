@@ -17799,9 +17799,9 @@
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "tag": "startfix1",
-   "next": "Waits on your card Look at the two START tasks (t-startfix-look). Neither Opus medium nor Sonnet high is proven.",
+   "next": "Closed. Sonnet medium START works; Opus and Sonnet high routes stay paused, those cards are pasted by hand.",
    "prompt": {
     "what": "Proves the Opus medium and Sonnet high START tasks after Tom edited them, turns them on and retires the probe cards.",
     "before": [
@@ -17811,7 +17811,7 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and card c-startfix in data/board.json, including its history and Tom's card t-startfix-edit. Your first push is the commit board: start c-startfix. In data/board.json routines remove paused from opus-medium and sonnet-high, and set start: true on the cards c-probe-opus and c-probe-sonnet-high2 (throwaway cards whose only job is the push board: start followed by their own id). Run python3 tools/board_check.py and push. The board job fires each card on its own task. Wait up to 10 minutes (git fetch every minute) for the commits board: start c-probe-opus and board: start c-probe-sonnet-high2 on main. For a route whose commit does not arrive, put paused back on its routines entry with today's date and the reason, write the reason on c-startfix, and add a Tom card naming that route (ask decide or setup, one action); do not try the same thing a third time. Then retire both probe cards (Done, one history line each), write the result on c-startfix, and push the build startfix1 with a docs/CHANGES.md heading ## startfix1 (date): one plain line. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: t-startfix-look",
+   "after": "nothing for Tom: end",
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
@@ -17867,11 +17867,15 @@
     {
      "d": "2026-11-21",
      "t": "board-sync was failing on every push since 17:13 PT: Tom handed t-startfix-look to Claude, so it is a Claude card and this card's after had to name it as one. Fixed by the wanproof session; nothing else changed."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed by t-startfix-look session: Decision by Claude (Tom: steps are unclear): no look at the task pages is needed. START Opus and START Sonnet High stay paused for good. Board START (Sonnet 5.5 medium) is proven and takes every auto card. A card that needs Opus or high effort is started by pasting its prompt (Copy prompt on the card), which has worked every time. Reversible: unpause a route later if wanted."
     }
    ],
    "auto": true,
    "started_at": "2026-11-21T00:52:08+00:00",
-   "waiting_on": "tom"
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-startpause",
@@ -18624,11 +18628,11 @@
   {
    "id": "t-startfix-look",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Project Ops",
    "ask": "setup",
    "title": "Look at the two START tasks that still do not push",
-   "next": "Handed to Claude by Tom: steps are unclear",
+   "next": "Closed: nothing needed from you.",
    "blocks": [
     "c-startfix"
    ],
@@ -18652,6 +18656,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T01:13:07.331Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Decision by Claude (Tom: steps are unclear): no look at the task pages is needed. START Opus and START Sonnet High stay paused for good. Board START (Sonnet 5.5 medium) is proven and takes every auto card. A card that needs Opus or high effort is started by pasting its prompt (Copy prompt on the card), which has worked every time. Reversible: unpause a route later if wanted."
     }
    ],
    "steps": [
@@ -18670,7 +18678,7 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-startfix-look with this note: steps are unclear. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "done": "2026-11-21"
   },
   {
    "id": "t-keysecrets3-try",
