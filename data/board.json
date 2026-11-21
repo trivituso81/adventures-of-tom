@@ -26556,7 +26556,7 @@
    "title": "Watch Rose, Getting hit",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play Getting hit, then tap All good or Something is wrong (say what you saw). You should see her wince and stumble one small step back to the right, then step back into place.",
@@ -26573,8 +26573,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-rose-hit-uy5r. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T19:23:05.723Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
