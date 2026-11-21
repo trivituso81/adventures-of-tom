@@ -4517,7 +4517,9 @@ SCENES.ch9Boss=[
   {battle:'mirrorball',tut:'mirrorball'},
   {if:()=>flag('battle:mirrorball')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.','And honey, nobody has asked her to dance since 1971. Ask her three times.']},
+    {if:()=>B3_CH_ON(9),then:[
+      {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, when she goes dazzled, hit her with Clobber or Racket, that breaks her shine. And shield everyone before the LAST DANCE.','And honey, nobody has asked her to dance since 1971. Be kind about it.']}],else:[
+      {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.','And honey, nobody has asked her to dance since 1971. Ask her three times.']}]},
     {toast:'Face the Mirrorball and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 9. After the boss (won in the scene, or on a retry with A): the moon goes home. A compact, a coin, a boarding pass.

@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8],
+  chapters:[1,2,3,4,5,6,7,8,9],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -170,6 +170,26 @@ const B3_STORY={
       {id:'steam',who:'*',text:'BROIL and Full Furnace leave Old Ironbelly Toasty too. Hit it with Drench while it burns to set off Steam Cloud!, which breaks 2 Composure pips at once.',when:(F)=>F.foes.some(f=>f.id==='ironbelly'&&f.st&&f.st.toasty)},
       {id:'broil',who:'*',text:'BROIL is charging (!!): it hits everyone and sets them Toasty. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/BROIL/.test(f.charge.name||''))},
       {id:'furnace',who:'*',text:'Full Furnace is charging (!!): it hits everyone, sets them Toasty and adds 20% Attack for 2 turns. Shield the family, and save a Drench for after.',when:(F)=>F.foes.some(f=>f.charge&&/Furnace/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 9 (stage 18): Tom, Grace, Rose and Deedee at the Moon Club. ----
+    ch9coat:[
+      {id:'coat',who:'*',text:'The Hanger-On can’t stand Clobber or Drench and shrugs off Sizzle. The Velvet Rope beside it can’t stand Clobber or Racket. Clobber hits both where it hurts.'},
+      {id:'hang',who:'*',text:'Hang On Tight is charging (!!): it hits everyone and slows them. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='coathanger')}
+    ],
+    ch9cards:[
+      {id:'cards',who:'*',text:'The Stuffed Shirt can’t stand Racket or Drench and shrugs off Razzle. The Sore Loser in the Back row can’t stand Sizzle or Razzle and shrugs off Racket.'},
+      {id:'gauche',who:'*',text:'How Gauche! is charging (!!) and hits everyone. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='stuffedshirt')},
+      {id:'cheater',who:'*',text:'Cheater! makes a person the only target their foes can pick for a turn. Shield them, or heal them before the next hit.',when:(F)=>F.party.some(p=>p.st&&p.st.cheater)}
+    ],
+    ch9ball:[
+      {id:'elite',who:'*',text:'The Wallflower is an Elite: 4 Composure pips, and it can’t stand Razzle or Sizzle. It shrugs off Clobber. It starts hugging the wall, so early hits miss more often.'},
+      {id:'petal',who:'*',text:'Petal Storm is charging (!!): it hits everyone and leaves them Dazzled, so crits land harder on them. Break its pips to stop it, or shield the family.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='wallflower')}
+    ],
+    mirrorball:[
+      {id:'peeve',who:'*',text:'The Mirrorball has 7 Composure pips and can’t stand Racket or Clobber. It shrugs off Razzle. Its Facet Spin makes it harder to hit for 2 turns.'},
+      {id:'dazzled',who:'*',text:'Facet Dazzle and Spotlight Solo leave her Dazzled. Hit her with Clobber then to set off Shatter Glitz!, or Racket for Sensory Overload!',when:(F)=>F.foes.some(f=>f.id==='mirrorball'&&f.st&&f.st.dazzled)},
+      {id:'solo',who:'*',text:'Spotlight Solo is charging (!!): it hits one person hard. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Spotlight/.test(f.charge.name||''))},
+      {id:'dance',who:'*',text:'LAST DANCE is charging (!!): it hits the whole family. Shield everyone, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/LAST DANCE/.test(f.charge.name||''))}
     ]
   }
 };
