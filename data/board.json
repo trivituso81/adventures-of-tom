@@ -29672,33 +29672,19 @@
      "d": "2026-11-21",
      "at": "2026-11-21T21:35:47Z",
      "t": "Voice job failed: 0 made, 0 need a human, about 0 credits."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 10 voices (about 578 credits).",
+     "at": "2026-11-21T21:38:58.413Z"
     }
    ],
    "vgen": {
-    "want": false,
-    "at": "2026-11-21T21:26:27Z",
+    "want": true,
+    "at": "2026-11-21T21:38:58Z",
     "n": 10,
     "chars": 1313,
-    "est": 578,
-    "run": {
-     "state": "failed",
-     "at": "2026-11-21T21:35:45Z",
-     "n": 10,
-     "made": [],
-     "failed": [],
-     "needs_human": [],
-     "credits": 0,
-     "chars": 1313,
-     "build": null,
-     "note": "The takes were made but could not be merged: push refused: eads/main': is at 07c8c9af0c98f5be805ba3284f1a1719c9917086 but expected aa0baa73f1eccdf86bb64dfa2c0bccb87115f07d)\nerror: failed to push some refs to 'https://github.com/trivituso81/adventures-of-tom'\n",
-     "unused": [
-      "1. kinds never called: {}",
-      "2. attack pool only reachable as a fallback (every move has its own line): [] (check scenes and Move Lab by hand)",
-      "3. baked battle clips with no live line: 0",
-      "4. dialogue clips not in harvest or source: 0",
-      "5. lines for replaced moves (old animation code still exists): {}"
-     ]
-    }
+    "est": 578
    }
   },
   {
