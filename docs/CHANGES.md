@@ -1,3 +1,9 @@
+## 2026-11-21 (463): Art Library bake, clip-toad-idle (`artbake1537`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-toad-idle: clip `toad-idle` cut from art/raw/clips/clip-toad-idle-v5.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). toad_idle frames 33 frame px 384 344 rows 48 43 sheet (2498, 1580) in memory mb 15.8 (as a grid 17.4) kb 837 dur ms 2750 kind loop impact ms 0 reach [22.0, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## board-startpause (2026-11-20): the two broken START routes are paused instead of failing silently
 
 Every START on the Opus medium and Sonnet high routes died before its first push today (8 runs). `routines[].paused` keeps a route off even when its secret exists (`tools/board_sync.py`, startfix1 note); those cards now show Copy prompt. Proof cards closed as failed; searchthrough, keysecrets3 and keysecrets5 back in Up next; the takes merge restarted on the working Sonnet medium route; repair is card c-startfix.
