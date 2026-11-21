@@ -28072,7 +28072,12 @@
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
     }
    ],
-   "first": "Waits on the card Take me there: a play card opens the game at its spot."
+   "first": "Waits on the card Take me there: a play card opens the game at its spot.",
+   "machine": {
+    "at": "2026-11-21T22:12:24Z",
+    "verdict": "yours",
+    "why": "it is about the 3440 x 1440 wide monitor and how the dashboard controls feel; a test browser cannot judge that screen"
+   }
   },
   {
    "id": "c-dash4",
@@ -28139,7 +28144,12 @@
     }
    ],
    "first": "Waits on the card Admin Dashboard: search and two more layouts.",
-   "fyi": true
+   "fyi": true,
+   "machine": {
+    "at": "2026-11-21T22:12:24Z",
+    "verdict": "yours",
+    "why": "it is about the wide monitor layouts (Art review, Story) and whether search results look right in their panes"
+   }
   },
   {
    "id": "b-board-dashboard",
@@ -29624,14 +29634,6 @@
    "history": [
     {
      "d": "2026-11-21",
-     "t": "Created by the build nightqa (card c-nightqa). Tom (2026-11-19): his role is not QA and not double-checking Claude's work."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "First night run by the build session: 4 oldest play cards (t-alvarezplay, t-ch2play, t-ch6play, t-gatezeroplay) sorted; all 4 are YOURS, none closed."
-    },
-    {
-     "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T21:20:13.196Z"
     },
@@ -29670,6 +29672,11 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T22:12:24Z",
+     "t": "Night run: t-dash3-try and t-dash4-try sorted YOURS (wide monitor, layout look). No play card left to check."
     }
    ],
    "prompt": {
