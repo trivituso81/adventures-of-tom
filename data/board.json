@@ -20648,7 +20648,7 @@
    "id": "c-qa-bug03",
    "tag": "qa-bug03",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
    "next": "Ready to start. Screen report only, not reproduced yet.",
@@ -20677,11 +20677,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
-   "started_at": "2026-11-21T03:23:33+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDjmSjPFCHjQf9v9dq",
+    "url": "",
     "opening": "started by START"
    }
   },
@@ -21759,6 +21762,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as fix-gatelayer-pics-2a: gate pictures: detailed rejects, Amy's door matched to the painted arch, door crop fixed"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as fix-gatelayer-pics-2b: gate pictures round 2: two doors pass, four open states rejected with details and reworded"
     }
    ],
    "prompt": {
@@ -22475,6 +22482,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "first": "2026-11-20T19:35:42-08:00",
+   "last": "2026-11-20T19:53:21-08:00",
+   "tags": [
+    "fix-gatelayer-pics-2a",
+    "fix-gatelayer-pics-2b"
+   ],
+   "cards": [
+    "c-fix-gatelayer-pics-2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
    "title": "Grump Hollow fights show a town pond with a steeple",
    "first": "2026-11-20T19:27:12-08:00",
@@ -22484,18 +22504,6 @@
    ],
    "cards": [
     "c-qa-coh05"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
-   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
-   "first": "2026-11-20T19:35:42-08:00",
-   "last": "2026-11-20T19:47:52-08:00",
-   "tags": [
-    "fix-gatelayer-pics-2a"
-   ],
-   "cards": [
-    "c-fix-gatelayer-pics-2"
    ]
   },
   {
@@ -25042,8 +25050,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8b2ac3222439d04bf28cd2bb3a12621c4cd5b8d5",
- "synced_at": "2026-11-21T03:53:09+00:00",
+ "synced": "6eb9010846d5c1acc403a6b286a93ec6e98451d7",
+ "synced_at": "2026-11-21T03:54:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
