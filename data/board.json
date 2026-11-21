@@ -18054,7 +18054,7 @@
    "id": "c-fix-hollowtrail1-pics",
    "tag": "fix-hollowtrail1-pics",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
@@ -18110,6 +18110,10 @@
     {
      "d": "2026-11-20",
      "t": "Result: guides plus new prompts (part a), pictures made and reviewed. Trail 1 passed (line on the path, about a third of the old size, checked in the game portrait and landscape). Trails 2 to 4 failed a second time: stop-loss. Next session: if Tom says yes, composite trail 2 to 4 wrappers in code from the trail 1 picture at hollow_trail_guide.py SPOTS and install through bake_hollow_trail.py."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-hollowtrail1-pics: Hollow wrapper trail 1 remade and reviewed before Tom sees it; trails 2 to 4 need his OK for a different method"
     }
    ],
    "prompt": {
@@ -18121,7 +18125,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-hollowtrail1-pics and t-hollowtrail1-pics in data/board.json, history included. Your first push is the commit board: start c-fix-hollowtrail1-pics.\n\nTom tested and found problems:\n1. Card t-hollowtrail1-pics (Generate and approve the 4 Hollow wrapper trail paintings, ask pictures). He was asked: Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN ) ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2). He wrote: they all look like shit. did you even review?\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T00:29:25.325Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-hollowtrail1-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-hollowtrail1-pics, and give the build fix-hollowtrail1-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-hollowtrail1-pics"
+   "after": "t-hollowtrail1-pics",
+   "done": "2026-11-20"
   },
   {
    "id": "c-probe-opus",
@@ -19136,6 +19141,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukChbC4gn9f31vtsM1u",
+   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
+   "first": "2026-11-20T16:32:26-08:00",
+   "last": "2026-11-20T17:05:07-08:00",
+   "tags": [
+    "fix-hollowtrail1-picsa",
+    "art",
+    "fix-hollowtrail1-pics"
+   ],
+   "cards": [
+    "c-fix-hollowtrail1-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFoxXD931LCAqGvJbU",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
    "first": "2026-11-20T16:36:43-08:00",
@@ -19165,19 +19184,6 @@
    "tags": [],
    "cards": [
     "c-probe-opus"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukChbC4gn9f31vtsM1u",
-   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
-   "first": "2026-11-20T16:32:26-08:00",
-   "last": "2026-11-20T16:51:49-08:00",
-   "tags": [
-    "fix-hollowtrail1-picsa",
-    "art"
-   ],
-   "cards": [
-    "c-fix-hollowtrail1-pics"
    ]
   },
   {
@@ -21140,8 +21146,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "48a3abf61beb155e24e57ebda322a4c498a4013e",
- "synced_at": "2026-11-21T01:01:03+00:00",
+ "synced": "a2db374f27b1ba3bd52c699c511119b55bf2deb0",
+ "synced_at": "2026-11-21T01:05:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
