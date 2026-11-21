@@ -1,3 +1,7 @@
+## nightclean-1121 (2026-11-21): night cleanup, notes bucket: 3 finished handoff notes folded and removed
+
+Card c-night-clean, bucket B. Removed claude/next-addendum-195.md, -204.md and -208.md (old walk and flight handoffs; their builds are shipped). Kept what is still true in docs/WORKFLOW.md (flight-preview tag is by hand; HERO_HEAD default for Tom's walk). Zero references: `grep -rn "next-addendum-195\|next-addendum-204\|next-addendum-208" .` outside this entry finds nothing. claude/INDEX.md rebuilt. No game files changed.
+
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
 
 Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.

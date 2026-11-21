@@ -29003,6 +29003,11 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:59:39.274Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night run nightclean-1121, bucket B (notes): folded 2 facts into docs/WORKFLOW.md, removed 3 finished handoff notes (next-addendum-195, 204, 208).",
+     "at": "2026-11-21T21:20:00.000Z"
     }
    ],
    "prompt": {

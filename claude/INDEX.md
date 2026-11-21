@@ -303,9 +303,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 
 | File | First line | Date |
 |---|---|---|
-| next-addendum-195.md | Addendum to claude/next.md (2026-11-05 10:40, read right after next.md; fold into next.md at the next rewrite) | 2026-11-05 |
-| next-addendum-204.md | Addendum to claude/next.md (written 2026-11-05 13:20). Fold into next.md next time it is rewritten, then delet | 2026-11-05 |
-| next-addendum-208.md | next-addendum-208 (2026-11-05, updated after cabin install): flight work, read after claude/next.md | 2026-11-05 |
 | next-addendum-ability-rest.md | ABILITY REST: STATUS FIRST (2026-11-06 09:00) | 2026-11-06 |
 | next-addendum-adminmusic1.md | adminmusic1 and adminmusic2 (2026-11-14, main 0d420ef): calm music on every admin screen | 2026-11-14 |
 | next-addendum-airport1.md | next addendum, 2026-11-11 ~17:45 local: airport1 pushed (main 9fb15ab). Read with claude/next.md; folds into i | 2026-11-11 |
