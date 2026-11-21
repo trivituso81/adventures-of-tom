@@ -21084,13 +21084,13 @@
    "id": "c-qa-bug12c",
    "tag": "qa-bug12c",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Characters",
    "title": "Boppy's cap lettering is mirrored on his shocked art",
    "next": "Shipped in qa-bug12c: Boppy's cap writing now reads Paso Robles when a scene mirrors his pose to face left. The paintings and the grin close-up were already right, so no Art Library entry changed.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "prompt": {
     "what": "Works on BUG-12 (c) from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21117,13 +21117,18 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed on main: the Library paintings (mood sheet, grin close-up) read Paso Robles correctly; the reversed writing came from facing1 mirroring his leaning poses when he looks left. Fixed in code (data/pose-unflip.js, paintedUnflip in engine/painted.js) instead of a prompt change, since any mirrored picture would reverse again. Shipped as qa-bug12c. Found his unimpressed pose still wears the old Big Fish cap: card c-boppy-bigfish."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug12c: Boppy's Paso Robles cap reads the right way round when a scene turns him to face left"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug12c\""
    },
-   "after": "t-qa-bug12c-play"
+   "after": "t-qa-bug12c-play",
+   "done": "2026-11-20"
   },
   {
    "id": "t-qa-bug12c-play",
@@ -22801,6 +22806,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
+   "title": "Boppy's cap lettering is mirrored on his shocked art",
+   "first": "2026-11-20T19:28:44-08:00",
+   "last": "2026-11-20T20:12:33-08:00",
+   "tags": [
+    "qa-bug12c"
+   ],
+   "cards": [
+    "c-qa-bug12c",
+    "c-qa-bug12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
    "title": "Item banners as JRPG item definitions",
    "first": "2026-11-20T19:18:42-08:00",
@@ -22926,16 +22944,6 @@
    ],
    "cards": [
     "c-builds3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
-   "title": "Boppy's cap lettering is mirrored on his shocked art",
-   "first": "2026-11-20T19:28:44-08:00",
-   "last": "2026-11-20T19:28:44-08:00",
-   "tags": [],
-   "cards": [
-    "c-qa-bug12c"
    ]
   },
   {
@@ -25391,8 +25399,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "375b97f753b40bae605752bc9bde3f873a8c56e3",
- "synced_at": "2026-11-21T04:09:05+00:00",
+ "synced": "05d812ccdd57e06d1d6c0a03b5494e5ea3d9610a",
+ "synced_at": "2026-11-21T04:13:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
