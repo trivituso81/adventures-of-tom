@@ -18237,7 +18237,7 @@
   {
    "id": "t-startfix-edit",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Project Ops",
    "ask": "setup",
    "title": "Edit the two broken START tasks",
@@ -18256,6 +18256,11 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-startfix: only you can edit these two tasks (they were made over the API; a session cannot edit them)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this.",
+     "at": "2026-11-21T00:51:24.662Z"
     }
    ],
    "steps": [
@@ -18265,7 +18270,8 @@
     "Leave the Trigger row, the Fire URL and the token alone, so the four repo secrets stay valid. If the screen shows a repository list, tick trivituso81/adventures-of-tom there too. Tap Save.",
     "Open claude.ai/code/routines/trig_01B1nPPCmGppfbNM78wz5tMq (the task START Sonnet High). Paste the same text into the prompt box, keep the model on Sonnet 5.5, set the effort to High, do the same repository check, tap Save.",
     "Come back here and tap I did this. The board starts card c-startfix on the working Board START task; it proves both tasks and turns them on."
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-probe-sonnet-high2",
