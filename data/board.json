@@ -16899,7 +16899,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16987,9 +16987,15 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4 Sent to Claude as card c-fix-keysecrets2-try-6; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T00:26:33.652Z"
     }
    ],
-   "after": null
+   "after": null,
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17748,6 +17754,65 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/story-next.md, claude/ch02-teardown.md (the pattern), docs/CHANGES.md entry ch2build, and card c-ch3build in data/board.json with the Tom cards that blocked it (t-ch2play: apply any notes there). Write a chapter 3 teardown list like claude/ch02-teardown.md first, using claude/story-ch03-draft1.md word for word (the build never writes or rewords dialogue), then build it as ch2build was built: scenes in data/scenes.js, tools/ch3_test.py copied from tools/ch2_test.py, tools/ch3_lines_test.py copied from tools/ch2_lines_test.py, voice directions, harvest patch, unused_voice.py at 0, script-convos rows. Where the engine cannot play a direction, build the teardown default and list it for Tom; do not stop to ask. Push to main as ch3build; your first push is the commit board: start c-ch3build. Create the Tom card t-ch3play (ask play) and set after on this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-fix-keysecrets2-try-6",
+   "tag": "fix-keysecrets2-try-6",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "next": "You reported a problem on Try GENERATE VIDEO on one clip. Claude starts the fix by itself. Latest: Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, ar",
+   "blocks": [
+    "t-keysecrets2-try"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T00:26:33.231Z",
+     "card": "t-keysecrets2-try",
+     "title": "Try GENERATE VIDEO on one clip",
+     "ask": "play",
+     "words": "Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4",
+     "shot": "",
+     "asked": "ADMIN ) ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-5). Tap Open in the Art Library below, find clip-toad-idle under Clips ) Chapter 1 and press GENERATE VIDEO (about $0.25). Within 3 to 6 minutes the line under the button should read 'Made and approved' AND the button should go back to saying GENERATE VIDEO (before, it stayed on ASKED, WAITING). All good if both happen. Something is wrong if either does not after 10 minutes: write in the report what the button and the line say."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-keysecrets2-try"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-keysecrets2-try.",
+     "at": "2026-11-21T00:26:33.652Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-keysecrets2-try: Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4",
+     "at": "2026-11-21T00:26:33.652Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-21T00:26:33.652Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Try GENERATE VIDEO on one clip.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-keysecrets2-try-6 and t-keysecrets2-try in data/board.json, history included. Your first push is the commit board: start c-fix-keysecrets2-try-6.\n\nTom tested and found problems:\n1. Card t-keysecrets2-try (Try GENERATE VIDEO on one clip, ask play). He was asked: ADMIN ) ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-5). Tap Open in the Art Library below, find clip-toad-idle under Clips ) Chapter 1 and press GENERATE VIDEO (about $0.25). Within 3 to 6 minutes the line under the button should read 'Made and approved' AND the button should go back to saying GENERATE VIDEO (before, it stayed on ASKED, WAITING). All good if both happen. Something is wrong if either does not after 10 minutes: write in the report what the button and the line say. He wrote: Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T00:26:33.231Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-keysecrets2-try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-keysecrets2-try, and give the build fix-keysecrets2-try-6 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-keysecrets2-try",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
