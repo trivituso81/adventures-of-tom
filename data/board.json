@@ -19390,8 +19390,39 @@
     {
      "d": "2026-11-20",
      "t": "Added by itembannerart1 (card c-itembannerart1). Report r-20261120-142626-w74f: \"missing art for all item banners\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 18 pictures (about $0.90).",
+     "at": "2026-11-21T02:32:26.540Z"
     }
-   ]
+   ],
+   "gen": {
+    "want": true,
+    "at": "2026-11-21T02:32:26Z",
+    "ids": [
+     "prop-item-01",
+     "prop-item-02",
+     "prop-item-03",
+     "prop-item-04",
+     "prop-item-05",
+     "prop-item-06",
+     "prop-item-07",
+     "prop-item-08",
+     "prop-item-09",
+     "prop-item-10",
+     "prop-item-11",
+     "prop-item-12",
+     "prop-item-13",
+     "prop-item-14",
+     "prop-item-15",
+     "prop-item-16",
+     "prop-item-17",
+     "prop-item-18"
+    ],
+    "est": 0.9,
+    "mode": "review"
+   }
   },
   {
    "id": "c-ch2lessons",
