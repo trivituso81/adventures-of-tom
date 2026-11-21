@@ -23607,7 +23607,7 @@
    "title": "Milestone B: play chapter 1 on the new battle",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s15. Then CHAPTERS > Chapter 1 and play to the end (the job scene on Rivituso Row), about 30 minutes. Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, is the Big One too long (it is 7.83 rounds at Rank 1, aimed at 5 to 7), do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 1 on the old battle. Stage 17 shipped without waiting for it (c-b3s17, you asked for it directly); your notes still come first in stage 18 (c-b3s18).",
    "blocks": [],
@@ -23633,9 +23633,15 @@
     {
      "d": "2026-11-21",
      "t": "Stage 18 was started and finished before this card was answered (Tom asked to keep building without testing: \"id prefer not to test and just keep building until we are done\"). This card no longer blocks a Claude card; your notes on it still count at the next milestone."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:43:54.297Z"
     }
    ],
-   "fyi": true
+   "fyi": true,
+   "done": "2026-11-21"
   },
   {
    "id": "c-b3s17",
