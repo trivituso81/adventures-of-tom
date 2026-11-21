@@ -25823,6 +25823,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped Start again after Stuck twice.",
      "at": "2026-11-21T22:43:12.949Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "START is not set up for this model and effort. Use Copy prompt."
     }
    ],
    "prompt": {
@@ -25835,8 +25839,7 @@
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) has no video yet (she slides her idle video). Three Wan 3.0 tries of the sideways lean missed (card history; results deedee-dodge-r2, r3, r4 on branch wangen): her arms ran off the frame every time, and pad 0.8 did not fix it (r4: front hand off the left edge for 25 pictures, and she lunged forward 18% toward the monster). The lean wording is retired for her.\n\nThe try is already staged: Wan job deedee-dodge rev 5 in tools/art-library/wangen-jobs.json, prompt tools/art-library/prompts/wan-deedee-dodge-v4.txt, which is Rose's passed duck prompt (wan-rose-dodge-v2.txt) word for word, with pad 0.8 kept; the same wording and pad passed for Rose and for Tom (anim-rose-dodge-v89r, anim-tom-dodge-ner3). Run it once on the wan-gen Action (gh api repos/trivituso81/adventures-of-tom/actions/workflows/wan-gen.yml/dispatches -f ref=main -f 'inputs[what]=deedee-dodge' -f 'inputs[dry_run]=false' -f 'inputs[cap]=' set to the ledger on branch wangen state.json plus 0.50). Spend at most $0.50. Check every picture against the plan section 4.4 list (feet on one row, whole figure inside the frame, last picture against first under 3 of 255) and run the measured clip gate (judge() in tools/clip-gate/gate.py with measure.py); a clip that fails is not handed to Tom, and a miss is the stop-loss for Wan on her dodge (next would be a different video model, card c-wanch2). If it passes: bake it like Rose's and Tom's dodges (tools/clip-bake/bake_clip.py, kind state, the duck stretch every 2nd picture at 1.5x, figure rows 99.3, data/clips/deedee-dodge.js, art/clips/deedee-dodge.webp, source art/raw/clips/wan-deedee-dodge-v1.mp4), add dodge:'deedee_dodge' to B3_BODY_CLIPS.deedee in data/b3-clips.js, rebuild data/guide-anims.json (node tools/guidegen/build_map.js), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py, python3 tools/wanproof_test.py deedee and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. (B3_BODY_PAINT and tools/paint_state_test.py no longer exist: purged in wanch2a.) Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-21T20:34:46+00:00",
-   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3",
-   "start": true
+   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -29397,13 +29400,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFtfHJc1wXT1SeYg7Y",
+    "url": "https://claude.ai/code/cse_01RXeukEigjD8pfDspFqC329",
     "opening": "not started"
    },
    "nightly": true,
@@ -29456,6 +29459,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:43:57.838Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29471,7 +29478,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-21T22:44:06+00:00"
   },
   {
    "id": "c-bigone25",
@@ -34856,8 +34863,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "237581184282eb743306a1b22c72f875a3f7bbc4",
- "synced_at": "2026-11-21T22:41:26+00:00",
+ "synced": "8d12a2ee8b6f45ad2a9267e09c27dc22b9c0666f",
+ "synced_at": "2026-11-21T22:44:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
