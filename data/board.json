@@ -29096,6 +29096,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night run, bucket B (notes): removed 2 spent handoff notes, folded Grace's head share into docs/CHARACTER_PIPELINE.md. Build nightclean-1121."
     }
    ],
    "prompt": {

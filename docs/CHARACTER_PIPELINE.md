@@ -217,6 +217,8 @@ Same pattern as `docs/JUSTIN_ABILITIES.md` and `docs/ENEMY_SHEETS.md`:
 
 **STYLE KEY v1 APPROVED (Tom, 2026-11-02 11:54): `docs/reference/style_key_v1.png` is THE style key.** For all art regenerated in the new style, head share (top of hair to chin over full height) is about **0.21 to 0.22 for adults and about 0.25 for Grace** (a 6 year old follows Rose's ratio to Grace's, measure it from the first approved Rose hero pose). Attach the key to every character, NPC and monster prompt. The tables below describe the OLD baked art (0.37 walking, 0.43 battle for kids, adult head rows) and stay in force only until a character is regenerated; when Phase C replaces a character, set that character's `*_HEAD_RATIO` from the approved new hero pose after a head row, not from these tables. Real heights stay mandatory. Known scale slips in the key itself (do not copy them): Amy is drawn about 98% of Tom (real 92%), the shopkeeper is shorter than Amy (should be taller), the Mudling's top sits above Grace's knee. Phase C fixes this with a height chart reference image.
 
+Grace's overworld walk head is .28 of her height (Tom, 2026-11-05: real children have a bigger head share than adults; order Tom .242, Grace .28, Rose about .295). One number: `HEAD_SHARE` in `tools/sprite-bake/grace_walk_frames.py`. Rose's .295 stays until Tom says otherwise; Grace's battle art keeps its older head.
+
 **Real height is required.** Before any spec, prompt or bake, Tom must give the person's real height in feet and inches. If it is missing, ask one short question and wait. Never guess it and never read it off a photo.
 
 ### Adults

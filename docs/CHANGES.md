@@ -2,6 +2,10 @@
 
 Card c-guardwin1. Cause: `b3cMemberFrame` (engine/b3-clips.js) chose the guard video before it checked whether the fight was won, so a shield or stance still up at the end kept the guard video on screen and the victory video never played. The win check now comes first. Only Tom had a guard video that could be still up at the end, so he was the only one affected. New check `python3 -I tools/guardwin_test.py` (guard shows while guarding; after the win the victory video plays and the guard video is not drawn, for a shield and for a stance); it fails on the old code and passes now. Not tested on a phone.
 
+## nightclean-1121 (2026-11-21): the nightly cleanup (notes bucket) removed 2 spent handoff notes and kept the one fact still true
+
+Bucket B (day 325). Of 257 `claude/next-addendum-*.md` notes, 154 are named by nothing but the index; only 2 were handoffs that said "fold into next.md, then delete". Removed: `claude/next-addendum-195.md` (a walk fix whose code has since changed to `OW_WALK_CYCLE_TOM=[1,3,2,3]`, nothing true left) and `claude/next-addendum-grace-head.md` (Grace's walk head .28 now in `docs/CHARACTER_PIPELINE.md` section 7). Grep for both names: 0 references outside `claude/INDEX.md`, which was rebuilt. The other 152 hold install steps or open facts and were left for a later night.
+
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
 
 Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.
