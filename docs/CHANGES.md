@@ -1,3 +1,8 @@
+## board-itemart-refs (2026-11-20): board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom
+
+- Ran the fix-itembannerart-pics-3 prompts for the 3 items ($0.18). Results (looked at, fact): Pro Racing Flats came back as plain yellow slippers (the words "almost like a slipper" were taken literally), Tiny Clay Taco as a real taco again (QA 15 of 15 but it is food), Birthday Sash as a ribbon bow again. Fourth miss: stop-loss, no fifth text-only try.
+- Next: Tom sends one photo of each object; c-itemart-refs adds them as shape references and remakes the 3. Tom's words that started this: "Based on the feedback adjust the prompts for the failed images and regenerate".
+
 ## fix-itembannerart-pics-3 (2026-11-20): the 3 item pictures that missed get new prompts and are made again
 
 - Card c-fix-itembannerart-pics-3, on t-itembannerart-pics. Tom: "Based on the feedback adjust the prompts for the failed images and regenerate".
