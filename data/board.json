@@ -26705,7 +26705,7 @@
    "title": "Night shift: queued cards start by themselves overnight",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Tap START. It builds the part every other night job needs: between 11 pm and 3 am the board starts one queued card at a time on Sonnet 5.5 medium (5 a night at most), runs the standing nightly cards first, and writes one card for you each morning, Last night, saying what ran, what shipped and what needs you. It adds a Night shift ON or OFF switch to the board page. Nothing starts at night until this ships.",
    "blocks": [
     "c-nightclean"
@@ -26713,7 +26713,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukG9NpnX87cPECMfzZB",
     "opening": "not started"
    },
    "history": [
@@ -26725,6 +26725,10 @@
      "d": "2026-11-21",
      "t": "Tom said yes in the planning chat (11:32), so Claude set START for him.",
      "at": "2026-11-21T19:33:23.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -26738,14 +26742,14 @@
    },
    "tag": "nightshift",
    "after": "nothing for Tom: c-nightclean",
-   "start": true
+   "started_at": "2026-11-21T19:34:04+00:00"
   },
   {
    "id": "c-nighttests",
    "title": "Night test run: every test, every night, on GitHub",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Tap START. It builds a job on GitHub's machines (no Claude credits, free for a public repo) that runs every test of the game each night at about 3:20 am and compares the result with the night before. A test that newly fails becomes a Claude fix card with the output and the commits to suspect. Today no job runs the tests and 13 fail on main with nobody assigned.",
    "blocks": [
     "c-nightgreen"
@@ -26753,7 +26757,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFpP5APDFFAHcmE8xg",
     "opening": "not started"
    },
    "history": [
@@ -26765,6 +26769,10 @@
      "d": "2026-11-21",
      "t": "Tom said yes in the planning chat (11:32), so Claude set START for him.",
      "at": "2026-11-21T19:33:23.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -26778,7 +26786,7 @@
    },
    "tag": "nighttests",
    "after": "nothing for Tom: c-nightgreen",
-   "start": true
+   "started_at": "2026-11-21T19:34:04+00:00"
   },
   {
    "id": "c-nightclean",
@@ -27220,6 +27228,29 @@
    ],
    "first": "Waits on the card Admin Dashboard: search and two more layouts.",
    "fyi": true
+  },
+  {
+   "id": "b-board-dashboard",
+   "tag": "board-dashboard",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Tools",
+   "title": "seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
+   "next": "Done: seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-dashboard. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -27348,6 +27379,30 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+   "title": "seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
+   "first": "2026-11-21T11:33:57-08:00",
+   "last": "2026-11-21T11:33:57-08:00",
+   "tags": [
+    "board-dashboard"
+   ],
+   "cards": []
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
+   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "first": "2026-11-21T11:27:11-08:00",
+   "last": "2026-11-21T11:33:24-08:00",
+   "tags": [
+    "board-night"
+   ],
+   "cards": [
+    "b-board-night",
+    "c-nightshift",
+    "c-nighttests"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
@@ -27435,18 +27490,6 @@
    ],
    "cards": [
     "c-fix-anim-grace-squeeze-qxim"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
-   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
-   "first": "2026-11-21T11:27:11-08:00",
-   "last": "2026-11-21T11:27:43-08:00",
-   "tags": [
-    "board-night"
-   ],
-   "cards": [
-    "b-board-night"
    ]
   },
   {
@@ -30933,8 +30976,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "62a657ac816a3f97857ce9e7532000cf38948383",
- "synced_at": "2026-11-21T19:32:44+00:00",
+ "synced": "9077e8f839d1b71eadcf2ca26dbe35b9ae97dade",
+ "synced_at": "2026-11-21T19:34:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
