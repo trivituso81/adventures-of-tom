@@ -17360,8 +17360,25 @@
     {
      "d": "2026-11-20",
      "t": "Added by hollowtrail1 (card c-hollowtrail1). Tom: \"we should just rebake the entire area for each variation of muffin papers scattered\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 4 pictures (about $0.20).",
+     "at": "2026-11-21T00:26:56.656Z"
     }
-   ]
+   ],
+   "gen": {
+    "want": true,
+    "at": "2026-11-21T00:26:56Z",
+    "ids": [
+     "area-hollow-trail1",
+     "area-hollow-trail2",
+     "area-hollow-trail3",
+     "area-hollow-trail4"
+    ],
+    "est": 0.2,
+    "mode": "review"
+   }
   },
   {
    "id": "c-hollowtrail2",
