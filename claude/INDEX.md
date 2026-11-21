@@ -102,6 +102,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 
 | File | First line | Date |
 |---|---|---|
+| art-fallback-plan.md | Picture generator fallback: xAI first, WAN after 2 misses (artfallback, 2026-11-21) | 2026-11-21 |
 | art-library-b4.md | Art Library and Music Library status (updated 2026-11-03 11:45, after `gwalk1`, CHANGES 123). READ with claude | 2026-11-03 |
 | art-library-full-build.md | Art Library full build: DONE 2026-11-03 (CHANGES 108 and 109) | 2026-11-03 |
 | art-library-ux.md | Art Library UX assessment and build spec (2026-11-03) | 2026-11-03 |
@@ -590,7 +591,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | closeup-plan.md | Close-up screens: master build plan (2026-11-12 15:35, updated 22:40 PT 11-12) | 2026-11-12 |
 | coin-closeup-spec.md | Coin close-up screen: assessment and build spec (2026-11-12, Tom approved the direction 12:54) | 2026-11-12 |
 | comedy-audition-scene5.md | Scene 5 comedy audition: three takes (2026-11-13) | 2026-11-13 |
-| costs-duo-plan.md | AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21, PLAN, not built) | 2026-11-21 |
+| costs-duo-plan.md | AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21; BUILT as costsduo1, both parts in | 2026-11-21 |
 | cutscene-polish-plan.md | Cutscene polish: repo diagnostic and phased patch spec (cutpolish0, 2026-11-19) | 2026-11-19 |
 | damage-balance.md | Damage balance review (25 Oct 2026, artifact v255) | 2026-11-21 |
 | dc-objects-spec.md | Director's Cut object sheets: spec (item 4, 2026-11-09) | 2026-11-09 |
@@ -602,6 +603,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | grands3d-house.md | Deedee and Boppy's house (map `grands`), clear paths and 3D (`grands3d`, 2026-11-01) | 2026-11-01 |
 | grump-hollow-lettering.md | Grump Hollow: painted lettering pass (written 2026-10-30, revised 16:15) | 2026-10-30 |
 | grump-hollow-redo.md | Grump Hollow redo: prompt and install plan (written 2026-10-30) | 2026-10-30 |
+| guidegen-plan.md | Battle Guide makes and remakes battle videos (guidegen), plan and state | 2026-11-21 |
 | handoff-rules.md | How every next-session prompt is given to Tom (standing rules) | 2026-11-21 |
 | heist-fix5-plan.md | Muffin theft, fix round 5: the Mudling's whole path (plan, 2026-11-20) | 2026-11-20 |
 | heist-redo-plan.md | The muffin theft scene redo (chapter 1, Deedee's kitchen, scene `ch1Theft`) | 2026-11-21 |

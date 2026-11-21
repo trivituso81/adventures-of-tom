@@ -1,3 +1,7 @@
+## board-artfallback (2026-11-21): new card to build the picture fallback rule (xAI first, WAN after 2 misses, stop after 4)
+
+Tom (09:49): "we should use XAI as the default for images, but then if there are more than two failed attempts with XAI, then we should switch the image service to WAN." Approved 09:54. Plan with the five refinements: claude/art-fallback-plan.md. Card c-artfallback (Sonnet 5.5, medium). Board only, no game change.
+
 ## anim-grace-squeeze-qxim (2026-11-21): Grace's Soup-Dumpling Squeeze is an attack now: she pushes the dumpling at the monster with both hands and squeezes it
 
 Card c-anim-grace-squeeze-qxim. Tom (Battle Guide, b3s17a): "This is an attack move, so she needs to hold the squishy out and basically essentially hold it with both hands and kind of push the monster with it and squeeze it while she does so".

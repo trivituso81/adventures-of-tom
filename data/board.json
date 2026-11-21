@@ -25368,6 +25368,41 @@
     "effort": "medium (the piece is small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardsubfold1 in data/board.json. Your first push is the commit board: start c-boardsubfold1. In board.html, mineGroups draws each For you group (PLAY AND REPORT, REVIEW PICTURES and the rest) as a plain heading. Make each group a tap to fold and unfold, open by default, and keep what Tom opened or closed through the page's 60 second reload. Test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-artfallback",
+   "tag": "artfallback1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
+   "next": "Copy the prompt into a new conversation in the Project on Claude Sonnet 5.5, effort medium. It builds the fallback rule in claude/art-fallback-plan.md; no paid pictures are made.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGAuLzLbsY54jqp2Q1",
+    "opening": "\"Can we make a rule when it comes to auto generation of assets and mainly images\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom 09:49: \"we should use XAI as the default for images, but then if there are more than two failed attempts with XAI, then we should switch the image service to WAN.\" Planned with five refinements (count per picture, WAN 2.7 with reference pictures, same prompt on the switch, stop after 2 WAN misses, show the service). Tom 09:54: \"I say go\". Plan: claude/art-fallback-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Sized: Claude Sonnet 5.5 (row B: the steps are written in the plan, tests catch mistakes), effort medium (steps are known). Not auto-started: Tom starts it."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the picture fallback rule: xAI first, WAN after 2 rejected tries on the same picture, a stop and a card for you after 2 WAN misses. Makes no paid pictures.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps in claude/art-fallback-plan.md, tests catch mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-artfallback in data/board.json, history included, and claude/art-fallback-plan.md (the approved rule and the build list). Your first push is the commit board: start c-artfallback.\n\nBuild the picture generator fallback exactly as claude/art-fallback-plan.md says: Art Library pictures go to xAI first; after 2 failed xAI tries on the same entry (counted on the entry's rejects, Tom's rejects of generated results plus generator refusals, never his upload rejects, and old rejects with no service count as xAI) the next try goes to WAN 2.7 on fal with the last prompt word for word and the same reference pictures; after 2 failed WAN tries the entry stops and the run adds a Tom card asking for a reference picture that blocks a Claude remake card. Record the service on every result and reject, show it in the Art Library review, and add the report by service and try number. Reuse the fal code in tools/art-library/wangen.py through one shared module, do not copy it. Pass FAL_KEY to the art-gen Action. Log WAN spend like the other spending Actions (docs/COSTS.md).\n\nMake no paid call: test with the fal stand-in (FAL_QUEUE) and extend tools/art-library/artgen_test.py for every rule in the plan's table. Run python3 tools/smoke.py and the board tests. Add the CLAUDE.md paragraph (artfallback1), the plan's Built section, and a docs/CHANGES.md heading ## artfallback1. Give this card after: a Tom card (ask pictures, fyi true) saying where he will see \"made by xAI\" or \"made by WAN\" in the Art Library the next time he presses Generate. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
