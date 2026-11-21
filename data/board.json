@@ -25013,7 +25013,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
     "opening": "not started"
    },
    "prompt": {
@@ -25032,6 +25032,29 @@
      "t": "Tom, 09:25: \"This UI seems like a good place for me to be able to just regenerate images on the fly using the WAN service... if there's already a video, I need a way to enter my feedback... reconcile that feedback with the existing prompt... and then allows me to regenerate\". New card. Facts found: 46 Wan jobs with prompts exist (Tom, Grace, Rose, Deedee); 278 of 346 animations have no video and most have no prompt; a Wan clip was $0.50 on 11-20. Calls made: no key on the page (requests and Actions); the family on Wan and monsters on xAI as the video plan says; the gate runs on every take; the note card stays as the fallback."
     }
    ]
+  },
+  {
+   "id": "b-board-guidegen",
+   "tag": "board-guidegen",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle System",
+   "title": "new card to make and remake battle videos from the Battle Guide",
+   "next": "Done: new card to make and remake battle videos from the Battle Guide",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guidegen. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -25125,6 +25148,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "first": "2026-11-21T07:31:48-08:00",
+   "last": "2026-11-21T09:26:53-08:00",
+   "tags": [
+    "battleguide1",
+    "board-guidevibe3",
+    "board-guideplanned",
+    "board-guidegen"
+   ],
+   "cards": [
+    "c-battleguide",
+    "c-battleguide2",
+    "b-board-guidevibe3",
+    "b-board-guideplanned",
+    "c-guidegen",
+    "b-board-guidegen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T09:18:43-08:00",
@@ -25136,23 +25179,6 @@
     "c-anim-deedee-give-yy1o",
     "c-anim-deedee-windex-z9p8",
     "c-anim-deedee-scrub-1irj"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
-   "title": "Battle Guide page for the Duo, with animation notes",
-   "first": "2026-11-21T07:31:48-08:00",
-   "last": "2026-11-21T09:22:55-08:00",
-   "tags": [
-    "battleguide1",
-    "board-guidevibe3",
-    "board-guideplanned"
-   ],
-   "cards": [
-    "c-battleguide",
-    "c-battleguide2",
-    "b-board-guidevibe3",
-    "b-board-guideplanned"
    ]
   },
   {
@@ -28531,8 +28557,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "1b1123c168cf276754ba5d64cfed04125f7ad22d",
- "synced_at": "2026-11-21T17:23:33+00:00",
+ "synced": "c54201bfd04caca6329ceff76b7381201f40fbbc",
+ "synced_at": "2026-11-21T17:27:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
