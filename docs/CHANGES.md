@@ -1,3 +1,7 @@
+## projclean1e (2026-11-21): Project docs move: progress and next steps written on card c-projclean (second run paused, 444 docs moved)
+
+- Card c-projclean: 444 Project docs are now in claude/ and gone from the Project (692,867 of 2,000,000 left in use). The card lists the 12 docs still to copy, the compare group, the docs held back on purpose, and steps 6 to 9. Docs only: no game file changed.
+
 ## board-b3s15 (2026-11-20): board only: stage 15 card and handoff notes added
 
 - Tom's request: the stage 15 prompt and its board card. Added card c-b3s15 (Claude Sonnet 5.5, effort high, tag b3s15) in Up next and `claude/next-addendum-b3s14.md` (stage 14 results, what stage 15 must do, tests, git warning). No game file changed.
