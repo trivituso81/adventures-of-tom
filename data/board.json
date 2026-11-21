@@ -19642,14 +19642,14 @@
    "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "ch2lessons",
    "after": "t-ch2play",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
     "opening": "not started"
    },
    "next": "Runs the red pen pass on built chapter 2: a fresh reviewer marks every line KEEP, CUT or REWRITE against your chapter 1 edits (claude/tom-line-edits.md), the cuts and rewrites go into the game, and the lines that referred to cut chapter 1 lines (fingerprints, pencil, page nine) are fixed. Every voice script is retagged in your style (claude/voice-tag-style.md: accent in every bracket, delivery words not character notes, quick, a bracket per beat). Then your chapter 2 play card lists exactly what changed.",
@@ -19669,6 +19669,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"if you just came to some new realizations in this chat, why hasn't the prompt changed\". The prompt now carries the tagging principles itself (sound not personality, extreme, one idea per bracket, a bracket per beat, accent in every bracket) and a brackets-only reviewer check."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     },
     {
      "d": "2026-11-20",
@@ -20188,6 +20192,16 @@
    ],
    "cards": [
     "c-fix-effectslook-3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
+   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
+   "first": "2026-11-20T18:36:01-08:00",
+   "last": "2026-11-20T18:36:01-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch2lessons"
    ]
   },
   {
@@ -22547,8 +22561,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "eef630104f8ddfcf49afab4e7f96cfd9aa99f140",
- "synced_at": "2026-11-21T02:32:08+00:00",
+ "synced": "c46a0992eae7e0fa3ca1e9378159960b294263b6",
+ "synced_at": "2026-11-21T02:36:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
