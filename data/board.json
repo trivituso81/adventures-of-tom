@@ -25325,10 +25325,10 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
-   "next": "Stop-loss on Wan: the new start picture of Rose holding the cushion works and nothing flies in, but Wan fills the whole frame width with lava and pushes the camera in during the bounce. Next try, one change: the video model, Kling 4.0. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "next": "Rescue chose START NEXT: the work is taste work on Opus 5.5 medium and the prompt is already rewritten (model Kling 4.0, start picture rose-cushion). Copy the prompt into a new conversation in the Project.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25419,6 +25419,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue outcome: START NEXT. Two sessions stopped on Wan (rev 1 to 4); the card prompt already carries the one change (Kling 4.0, $0.79 a video, cap 1.50) and the fallback (no lava in the clip, game draws it). Moved to Up next for an Opus 5.5 medium session; no rescue session spends on video."
     }
    ],
    "prompt": {
@@ -25430,7 +25434,6 @@
     "effort": "medium (the story prompt and start picture are done; one change: the model)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md, claude/video-battle-plan.md and claude/next-addendum-rose-lava-xftr.md, then card c-anim-rose-lava-xftr in data/board.json with its history. Your first push is the commit board: start c-anim-rose-lava-xftr.\n\nTom's notes on Rose, The Floor Is Lava!: \"Lava starts to form beneath her. She throws down a couch cushion on top of the lava, and then she jumps on top of the couch cushion, and then jumps up and down a couple of times\" (bouncing onto the enemies is not possible in a clip that stays on one spot). Wan 3.0 missed four times (rev 1 to 4): it fills the whole frame width with lava and pushes the camera in, so she grows to about 1.2x in the bounce. Change only the model: add job rose-lava-kling to tools/art-library/wangen-jobs.json like rose-tackle (kling/v4/image-to-video, 720p, 5 s), start picture art/clips/start/rose-cushion.png, prompt tools/art-library/prompts/wan-rose-lava-v3.txt word for word, start frame only. Check every picture against the plan (section 4.4) and the measured clip gate (head size within 8% of the first picture, nothing entering from an edge) and that the lava stays inside the frame. If it passes, bake it like the current clip (kind strike, every 3rd picture, impact where she lands on the cushion, 1.5x, --fig-rows 83), replace data/clips/rose-lava.js and art/clips/rose-lava.webp, run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. If it misses on size or lava width, do not send another try: make the clip with no lava in the prompt and have the game draw the lava as an effect under her, and tell Tom. The fal ledger is at $49.24, so run wan-gen with cap 50.1 (about $0.79 per video). Spend at most $1.50. Build tag anim-rose-lava-xftr. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T20:48:20+00:00",
    "rescue": {
     "at": "2026-11-21T20:48:20+00:00",
     "n": 1,
