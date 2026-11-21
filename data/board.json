@@ -30098,31 +30098,6 @@
    "done": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44952698631",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
-  },
-  {
    "id": "t-wanch3-watch",
    "title": "Watch the Skeeter Swarm's new Darting Bite video",
    "theme": "Battle Animations",
@@ -30425,6 +30400,31 @@
     "effort": "high (a new automated check and retry loop designed and built in one session)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (sections 4.4, 4.7 to 4.10), then card c-wanbulk in data/board.json with its history (Tom's words). Your first push is the commit board: start c-wanbulk. Build wanbulk: (1) in tools/art-library/wangen.py, after each video, run plan 4.4 checks 3 to 5 as measurements (standing height first against last within 2 percent, feet row within 1 percent of the frame height in every picture, flat magenta background, figure never touches an edge, last picture against first under 3 of 255) and checks 1 and 2 as a vision checklist built the way tools/art-library/artqa.py works (three runs, majority; the motion sentence of the job's prompt is the requirement), written to the job's result on branch wangen; (2) a job that fails only on an edge check is retried once automatically with the next pad from a list in the job file (none, 0.8, 0.65), a job that fails anything else or fails twice is marked stopped and gets one Claude card (Opus 5.5 medium) with the evidence; (3) a job that passes is baked by the bake settings stored on the job (bake_clip.py kind, fps, step, marks found the way clipmarks.py finds them) and wired from a `wire` field on the job, then one Tom card (ask animations) lists every new clip of the run; (4) a Generate all N videos button on a Tom card that lists jobs, which saves the request with a commit the way an art-gen `gen` request does and starts wan-gen, never past the job file's cap. Tests with the stand-in fal server (wangen_test.py) for pass, edge retry, stop and cap; replay the checks on the stored r4 videos of rose-giddyup and deedee-wetfloor on branch wangen and confirm they fail the way plan 4.10 says. A session never makes a paid run; the first paid bulk run is Tom's tap. Build tag wanbulk. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44960640662",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
