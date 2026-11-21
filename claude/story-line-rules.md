@@ -1,4 +1,4 @@
-# Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-21, ch2lessons). Read before writing or fixing any dialogue.
+# Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-21, ch3lessons). Read before writing or fixing any dialogue.
 
 The evidence behind every rule is claude/tom-line-edits.md (each of Tom's edits, before and after). Read both.
 
@@ -33,6 +33,8 @@ Tom's day on chapter 1 was almost all cutting. So before any chapter reaches him
 - Fix every line that refers to a line cut elsewhere (an orphan), in this chapter or a later one.
 - Expect a cut of about one line in five. If the pass cuts almost nothing, it was too gentle: run it again with the table open.
 - Record the counts (lines before, cut, rewritten) in the chapter's CHANGES entry, so the next play shows whether Tom's edits went down.
+- (ch3lessons, 2026-11-21) Lines Tom wrote or saved himself stay through the pass, whatever the reviewer marks (chapter 3's hedge ambush lines, chapter 2's "Poke it. Yes. But maybe just gently."). Only Tom cuts his own lines, on his play. Say in the counts which marks were overruled and why.
+- (ch3lessons) Give the reviewer the earlier chapters as the game plays them now (lines cut there are not in it), so it can find orphans itself. Chapter 3's reviewer found the dent orphan this way.
 
 ## Three tests for every joke line, before Tom sees it
 | Test | Fail means |
@@ -54,5 +56,7 @@ Tom's day on chapter 1 was almost all cutting. So before any chapter reaches him
 - Chapter 1, scene 3. Tom: Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.
 
 ## Known orphans
+- Chapter 3 (fixed 2026-11-21, ch3lessons): Grace no longer says the block has "the round dent, same as the dragonfly one" (chapter 1's "it has a dent" was cut, so no player has heard of a dent). Checked and fine on their own: "second best pencil" (chapter 1 keeps "that's my second best one"), "eleven pages" (chapter 1 keeps Grace's job, chapter 2 keeps "I wrote it down"), "Zipper pocket" (chapter 1's "pocket with the zipper" was cut, but the line needs no setup).
+- Chapter 3 cuts that later chapters may lean on: nobody says on screen that TNB will be told the twos rule or that the dog counts; Boppy's coin is shown going into his hatband by action only ("Nobody's looked at this hat since 1994" is cut); Deedee does not hear about the third block in words (the player saw it). The carry list in claude/story-next.md is updated.
 - Chapter 2 (fixed 2026-11-21, ch2lessons): Grace's text no longer mentions fingerprints or the pencil, and Tom's text no longer says "page nine". Chapter 3's "It came to eleven pages" stands on its own (checked 2026-11-21); it needs no earlier setup.
 - Chapter 2 cuts that later chapters may lean on: "Hills, then bread" now appears once (scene 1); "Sour dough" stays; TNB's "the purple was growing on me" and Tom's "We'll come back" to the grey tree are gone. Chapter 3's locked draft has no callback to any of them (checked 2026-11-21).

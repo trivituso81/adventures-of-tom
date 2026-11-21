@@ -27,6 +27,12 @@ How to tag a line now (do it in this order):
 4. Accented speakers and TNB: repeat the accent or the mellow trio in every bracket.
 5. Read the brackets alone, without the line: if they describe a person rather than a sound, rewrite them.
 
+## Chapter 2: 0 of 73 lines retagged by Tom so far (checked 2026-11-21, ch3lessons)
+**Share: not measurable yet, against chapter 1's 55%.** None of chapter 2 has been voiced (card t-ch2voices waits on t-ch2play), so Tom has had no takes to retag: `tools/voice-library/scripts/zzzz-kept-takes.json` holds no chapter 2 line. The chapter 2 scripts he will judge are the ch2lessons retag in claude/story-ch02-draft4.md. When his chapter 2 takes are kept, count the lines whose brackets he changed and write the share here.
+
+## Chapter 3 retag (ch3lessons, 2026-11-21)
+All 124 lines tagged from scratch by the five steps above, then a fresh reviewer read only the brackets (not the words). It flagged 37 of 392 brackets on 29 lines: 12 described a person (scheming, sly, stubborn, rude, shy, reasonable, agreeable, guilty, bouncing, tasting), 24 were mild (proud, patient, certain, relaxed, calm, gentle, helpful, hopeful, curious, friendly, cheerful), 1 mixed (gentle, firm). All replaced (bragging, lecturing, insisting, refusing, pleading, mumbling, whispering, very casual, very dismissive). Lesson for the next retag: the words that slipped through were the old habits W1 and W2 name, mostly on Boppy and on monsters. Read the brackets alone before the reviewer does. Also: a name in capitals in the spoken words (BOPPY, TOM) was made plain in three lines (pattern 9).
+
 ## The numbers (52 changed lines, Claude's version against Tom's)
 | Measure | Claude | Tom |
 |---|---|---|

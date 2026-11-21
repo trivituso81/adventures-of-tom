@@ -4,6 +4,14 @@ Newest first. Every edit Tom makes to a built line goes here as a before and aft
 
 How rows get here: "Apply my script edits" (docs/SCRIPT_EDITOR.md) and every REPORT note on a dialogue line (`kind: dialogue` on branch inbox; the report id is the source). After each chapter Tom plays, the session that fixes his reports adds his line edits here in the same push.
 
+## Chapter 2, Tom's phone play: 0 edits so far (checked 2026-11-21, ch3lessons)
+
+**Count: 0 dialogue edits against chapter 1's 20.** This is not yet evidence that the lessons worked: Tom has not played chapter 2. Checked 2026-11-21 12:40: card t-ch2play is in his backlog with no note and no answer; branch inbox has no report on a chapter 2 scene filed after ch2build (the only `kind: dialogue` reports on chapter 2 are the 2026-11-14 ones on the old script, below); `data/script-edits.json` is empty. Card c-ch3lessons ran before his play at his request. When he plays chapter 2 and files reports, the session that fixes them adds the rows here under this heading and replaces this count.
+
+| Report | Scene | Before | After | Pattern |
+|---|---|---|---|---|
+| (none yet) | | | | |
+
 ## Chapter 1, Tom's phone play, 2026-11-20 (reports r-20261120-*)
 
 About 20 dialogue edits in one day. 17 were cuts, 4 were rewrites, 0 were requests for more lines. Count them again after chapter 2: the goal is under half.

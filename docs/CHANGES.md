@@ -1,3 +1,56 @@
+## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
+
+Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.
+
+Step 1, Tom's chapter 2 lessons: **0 dialogue edits (chapter 1: 20) and 0 retagged lines (chapter 1: 55%)**, because he has not played or voiced chapter 2 yet (t-ch2play in his backlog with no note; no chapter 2 report on branch inbox since ch2build; `data/script-edits.json` empty; no chapter 2 kept take). Written as such at the top of the chapter 2 sections in claude/tom-line-edits.md and claude/voice-tag-style.md, so a 0 is not read as success. No new pattern from Tom, so no new numbered rule; two process notes added to "The red pen pass" in claude/story-line-rules.md (Tom's own saved lines are never cut by the reviewer; the reviewer gets the earlier chapters as played, to find orphans).
+
+Step 2, red pen pass: a fresh reviewer that read only claude/tom-line-edits.md, claude/story-line-rules.md, chapters 1 and 2 as the game plays them, and the 148 lines marked 27 CUT and 4 REWRITE (marks kept in claude/ch3-redpen.md). Applied all but three: L1, L5, L6 are Tom's saved hedge ambush lines (claude/story-writing-method.md), kept.
+
+| Count | |
+|---|---|
+| Lines before | 148 |
+| Cut | 24 (one in 6.2): Tom 11, Boppy 5, Deedee 3, Grace 2, Rose 2, Amy 1 (Amy no longer speaks in chapter 3) |
+| Rewritten (rule 4) | 4: Tom 1, Grace 1, Boppy 1, Aunt Ellie 1 |
+| Lines now | 124: Boppy 47, Tom 15, Grace 14, Deedee 13, Rose 12, Old Iron-Gill 11, Aunt Ellie 5, Oolong 2, Soggy Sock 2, Snag 2, Tangle 1 |
+| Orphan fixed | Grace's "the round dent, same as the dragonfly one" (chapter 1's dent line was cut). "Second best pencil", "eleven pages" and "Zipper pocket" checked: each stands on what chapters 1 and 2 still play |
+| Names in capitals made plain | 3 (BOPPY twice, TOM once), rule 13 |
+| Action lines changed | 1: scene 2, Tom now sets the second bulb down before Deedee takes the first out of the drawer (his question about the drawer is cut) |
+
+| Scene | Before | After | Rule |
+|---|---|---|---|
+| Scene 1 | Amy (text): She got me six times this week and I didn't scream once. That's one nothing, Brother. | CUT | 8 |
+| Scene 1 | Tom: Oh. Then it's one lemon tree. I owe you an apology for the other ten and a half pages. That was your second best pencil. | Tom: Oh. Then just the lemon tree. Sorry about your pencil. | 7, 16 |
+| Scene 1 | Rose: It's a baby pencil! Hi, baby pencil! | CUT | 7, 16 |
+| Scene 2 | Tom: The hill under the Observatory got up on its feet, Mom. Then it sneezed this out of a pipe. Nara caught it. | CUT | 7 |
+| Scene 2 | Deedee: That came out of a hill's nose, and it's on my counter? Give it here. It's going under the hot water. | CUT | 7 |
+| Scene 2 | Tom: Mom, one more thing from California. Is the flashbulb still in the drawer? | CUT | 1 |
+| Scene 3 | Tom: Dad. The pond fish got big after a flash. So did my hill. | CUT | 7, 10 |
+| Scene 3 | Boppy: Finally. Good news out of an appliance. | CUT | 8 |
+| Scene 3b | Aunt Ellie: That I believe. You're carrying that net very nicely, Tom. Is it for the fish, or for your father? | Aunt Ellie: That I believe. | 6, 16 |
+| Scene 3b | Boppy: It's for the FISH! He's got whiskers out to HERE! | CUT | 7, 8 |
+| Scene 4 | Grace: Tata! You sent him back to the START. | CUT | 16 |
+| Scene 4 | Tom: I know. I like the sneakers. | CUT | 8, 16 |
+| Scene 5 | Tom: He took the whole jar. Dad. Mom is going to be so pleased. | CUT | 7, 8 |
+| Scene 5 | Boppy: She said EMPTY, Tom. She didn't say STOLEN. Everybody up. He went into the marsh. | Boppy: Everybody up! He's taking my peppers into the marsh! | 8 |
+| Scene 6 | Tom: GAH! It has my ankle. And my wrist. And somehow my other wrist. I only stepped OVER it. | CUT | 7 |
+| Scene 7 | Tom: The one that goes with the pond boot? | CUT | 7 |
+| Scene 8 | Boppy: I see that, Grace. I'm saying somebody went to a lot of trouble over a pound and a half. | CUT | 16 |
+| Scene 8 | Tom: That's all of me, Rose. I'm on my toes. There's no more uncle after this. | CUT | 7 |
+| Scene 8 | Grace: Nobody move. I'm measuring. It's one Tata and one Rose high, and it has the round dent, same as the dragonfly one. I need the pencil. | Grace: Nobody move! It's one Tata and one Rose high. I need the pencil! | orphan |
+| Scene 10 | Tom: I had you in second, Dad. I feel terrible. | CUT | 16, 8 |
+| Scene 10 | Rose: Hide it, Boppy! Where nobody looks! Not under Lamby. Lamby's full. | CUT | 8 |
+| Scene 10 | Boppy: Nobody's looked at this hat since 1994. | CUT | 8 |
+| Scene 10 | Boppy: Hang in there, pal. | CUT | 8 |
+| Scene 11 | Deedee: Is that the jar? It's empty. | CUT | 7 |
+| Scene 11 | Grace: Deedee, there's another orange block. This one's got a fish inside, and it's way up over the water. And Boppy found this. | CUT | 7 |
+| Scene 11 | Tom: Twos. Yes, Mom. I'll tell TNB. He's going to ask if Nara counts. | CUT | 10, 8 |
+| Scene 11 | Deedee: The dog counts. | CUT | 10, 8 |
+| Scene 11 | Tom: Start with the sneakers, Dad. | CUT | 8 |
+
+Checks: the three tests on the 4 rewrites (only Tom has the pencil and the job; each line is about someone or something else: Grace's pencil, Deedee's pan, the peppers, the clue; no trait word). Copy check: 0 hits for the 4 new lines against claude/story-check/bank.txt, old.txt (chapter 3's own lines taken out) and data/scenes.js; the 3 new spoken lines were added to old.txt. Voice-script check: the words of all 124 scripts match their lines with the tags stripped.
+
+Step 3, voice scripts: all 124 retagged from scratch by claude/voice-tag-style.md (accent in every bracket for Boppy, Deedee, Aunt Ellie and Oolong, "huge" on Old Iron-Gill, one idea per bracket, [emphasized] before the stressed word). A second fresh reviewer read only the brackets: 37 of 392 flagged (12 describe a person, 24 mild, 1 mixed), all replaced. Recordings the build will need: 124 (Boppy 47, Tom 15, Grace 14, Deedee 13, Rose 12, Old Iron-Gill 11, Aunt Ellie 5, Oolong 2, Soggy Sock 2, Snag 2, Tangle 1).
+
 ## bigone25 (2026-11-21): The Big One is drawn 2.5 times bigger in the new battle
 
 Card c-bigone25. Tom: "in battle, the Big One should be 2.5x as big (estimated)."

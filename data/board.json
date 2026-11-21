@@ -15217,6 +15217,10 @@
     {
      "d": "2026-11-21",
      "t": "ch2lessons shipped: chapter 2 is 73 lines (20 cut, 4 rewritten, voice scripts retagged). This card now lists the changed lines to listen for. Still in your backlog where you parked it."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "c-ch3lessons ran before your play (you started it by hand), so chapter 3 was cut by the chapter 1 lessons and the chapter 2 red pen rules only. Your chapter 2 reports still go into claude/tom-line-edits.md and apply from chapter 4."
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
@@ -18398,10 +18402,10 @@
    "col": "wait",
    "tag": "ch3build",
    "waiting_on": "tom",
-   "next": "Waits on card c-ch3lessons (the chapter 3 script cut by the lessons from your chapter 1 and 2 edits). Then it builds chapter 3 from claude/story-ch03-draft1.md word for word, tests it, pushes it as ch3build and hands you a chapter 3 play card. Chapters 4 to 20 are not written yet (see c-ch4write).",
+   "next": "Builds chapter 3 from claude/story-ch03-draft1.md word for word (124 lines after the ch3lessons cut), tests it, pushes it as ch3build and hands you a chapter 3 play card. Chapters 4 to 20 are not written yet (see c-ch4write).",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -18414,6 +18418,10 @@
     {
      "d": "2026-11-20",
      "t": "Now waits on c-ch3lessons instead of the chapter 2 play directly: the script is cut by the red pen pass before it is built."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "c-ch3lessons shipped (ch3lessons): the script is now 124 lines in claude/story-ch03-draft1.md, voice scripts retagged. Counts and every cut: docs/CHANGES.md ch3lessons."
     }
    ],
    "prompt": {
@@ -20211,7 +20219,7 @@
     "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
     "opening": "not started"
    },
-   "next": "Waits on your chapter 2 play (card t-ch2play). Then it adds your chapter 2 edits to claude/tom-line-edits.md and runs the red pen pass on the locked chapter 3 script before chapter 3 is built, so chapter 3 reaches you already cut by everything you taught in chapters 1 and 2.",
+   "next": "Shipped as ch3lessons: chapter 3's script is cut from 148 to 124 lines (24 cut, 4 rewritten, the dent orphan fixed) and all 124 voice scripts retagged, in claude/story-ch03-draft1.md. Your chapter 2 lessons counted 0 edits because you have not played chapter 2 yet; they will feed chapter 4. Next: card c-ch3build builds it word for word.",
    "history": [
     {
      "d": "2026-11-20",
@@ -20224,6 +20232,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "ch3lessons: 148 lines to 124 (24 cut, 4 rewritten). Reviewer marks applied except Tom's three saved hedge ambush lines, kept. Tag reviewer flagged 37 of 392 brackets, all replaced. Chapter 2 lessons: 0 dialogue edits, 0 retags (t-ch2play not played yet)."
     }
    ],
    "prompt": {

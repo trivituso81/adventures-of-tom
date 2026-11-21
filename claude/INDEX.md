@@ -600,6 +600,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | builds-mock.png | �PNG | 2026-11-21 |
 | builds-plan.md | Build history redesign: UX audit and plan (2026-11-20, PLAN, not built) | 2026-11-20 |
 | cattail-pier-redo.md | Cattail Pier redo: prompt and install plan (written 2026-10-30) | 2026-10-30 |
+| ch3-redpen.md | Chapter 3 red pen pass (ch3lessons, 2026-11-21): the fresh reviewer's marks, kept as evidence | 2026-11-21 |
 | character-pipeline.md | New characters and ability pose sheets: the standard recipe (standing rule, 2026-10-31; art style and proporti | 2026-10-31 |
 | closeup-coinfinds-spec.md | Close-up 2: the seven coin finds, chapters 3 to 9 (2026-11-12 14:51, Tom: "clock was implemented well, how do  | 2026-11-12 |
 | closeup-plan.md | Close-up screens: master build plan (2026-11-12 15:35, updated 22:40 PT 11-12) | 2026-11-12 |
@@ -763,7 +764,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | story-ch02-review-notes.md | Chapter 2 rewrite: review in progress (started 2026-11-16 21:30, version 2 on 2026-11-17 08:00) | 2026-11-16 |
 | story-ch02-sample-loft.md | Chapter 2 sample scene: the loft, version 4 (2026-11-17 13:35). Written by claude/story-method-v2.md: three or | 2026-11-17 |
 | story-ch02.md | Chapter 2: Smog on 2nd Avenue | 2026-11-21 |
-| story-ch03-draft1.md | Chapter 3. LOCKED by Tom 2026-11-17 17:16 ("let's lock it in for 3"). The file name still says draft; the text | 2026-11-17 |
+| story-ch03-draft1.md | Chapter 3. LOCKED by Tom 2026-11-17 17:16, then cut by the red pen pass 2026-11-21 (ch3lessons, card c-ch3less | 2026-11-17 |
 | story-ch03.md | Chapter 3: Old Iron-Gill | 2026-11-21 |
 | story-ch04.md | Chapter 4: Backlot Bedlam | 2026-11-21 |
 | story-ch05.md | Chapter 5: Parent-Teacher Conference of Doom | 2026-11-21 |
@@ -773,7 +774,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | story-check/old.txt | Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One  | 2026-11-21 |
 | story-diagnosis-2026-11-17.md | Why the voice system did not produce a good chapter 2 (diagnosis, 2026-11-17 13:30). Read before any further s | 2026-11-17 |
 | story-engine-capabilities.md | Story engine capabilities (draft 2026-11-17, from claude/next.md; VERIFY against the repo CLAUDE.md and docs b | 2026-11-17 |
-| story-line-rules.md | Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-21, ch2lessons). Read before writing or fixin | 2026-11-21 |
+| story-line-rules.md | Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-21, ch3lessons). Read before writing or fixin | 2026-11-21 |
 | story-method-v2.md | Story writing method v2 (standing, 2026-11-17). Replaces section 5 of claude/voice-studio.md and the steps in  | 2026-11-17 |
 | story-next.md | Story handoff (2026-11-17 18:25, cold read fixes added and final; chapter 1 build done 2026-11-17 night). STAR | 2026-11-17 |
 | story-props-1-oak-stacks.txt | IMAGE REQUEST: ONE SINGLE PROP SPRITE SHEET. Return exactly one image, nothing else. Follow the numbered list  | 2026-11-21 |
