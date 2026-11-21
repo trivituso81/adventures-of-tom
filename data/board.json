@@ -12868,6 +12868,10 @@
     {
      "d": "2026-11-20",
      "t": "Part b pushed as b3s12b: chapter 6 (6 formations, Chairman Cheeks and the Acorn Cache, Lab fights NEW 33 to NEW 38). Chapter 7 still to do; it follows as the final b3s12."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as b3s12b: New battle: the chapter 6 park monsters and Chairman Cheeks join the Battle Lab (stage 12, part b of three)"
     }
    ],
    "prompt": {
@@ -19914,6 +19918,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
+   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
+   "first": "2026-11-20T17:27:52-08:00",
+   "last": "2026-11-20T18:31:21-08:00",
+   "tags": [
+    "b3s12a",
+    "b3s12b"
+   ],
+   "cards": [
+    "c-b3s12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
    "title": "Fix: board saves fail once board.json passes 1 MB",
    "first": "2026-11-20T17:48:44-08:00",
@@ -20115,18 +20132,6 @@
    "tags": [],
    "cards": [
     "c-fix-welcomepage-play"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
-   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
-   "first": "2026-11-20T17:27:52-08:00",
-   "last": "2026-11-20T17:50:49-08:00",
-   "tags": [
-    "b3s12a"
-   ],
-   "cards": [
-    "c-b3s12"
    ]
   },
   {
@@ -22269,8 +22274,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f0b6ef4bef80a94c5a689c2fdea9c163791a80f7",
- "synced_at": "2026-11-21T02:27:09+00:00",
+ "synced": "eef630104f8ddfcf49afab4e7f96cfd9aa99f140",
+ "synced_at": "2026-11-21T02:32:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
