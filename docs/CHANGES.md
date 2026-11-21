@@ -1,3 +1,21 @@
+## dash1 (2026-11-21): the Admin Dashboard page for the wide monitor: Board, game, Battle Guide and Admin side by side
+
+Card c-dash1 (plan `claude/dashboard-plan.md`, drawings `claude/dashboard-mock/`). New page `dashboard.html`, opened from ADMIN > Admin Dashboard (first button in What is next). No existing page changed except `admin.html` (the button) and `tools/admin_hub_test.py`.
+- Four frames of the real pages: Board 1000, game 951 (at 951 x 648 with the Duo layout), Battle Guide 829, Admin 620; Battle layout 520, 1600 (game at 1600 x 900, Duo off), 860, Builds 420. Top bar 44, pane header 40, 8 px gaps, the Board's colours. Builds fills the space under the game until dash2.
+- Links stay in the pane that owns the page (also when a script moves a pane), Ctrl 1 to 4 and a click move the keys (gold frame and KEYS HERE), Change page lists every tool of `admin.html`, Reload, Open in its own tab, Make this pane big (Esc puts it back). Top bar shows the For you and Claude counts, the live build and the token state.
+- The game frame gets the Duo layout without touching the shared `le-duo` setting: the dashboard answers `detectDuo` for that frame only. Ctrl 1 to 4 works from inside the game because the dashboard adds its key listener to each new page before the page's scripts run.
+- `python3 tools/dashboard_test.py` passes at 3440 x 1328 and 3440 x 1440 (screenshots in `tools/shots/dashboard-*.png`). `docs/DASHBOARD.md` and a row in CLAUDE.md "Where things live" written.
+- The first push of this session (`board: start c-dash1`) found `claude/dashboard-plan.md` and `claude/dashboard-mock/` missing from main: the push `guidestatus1-restore` had deleted them (it restored other files from an older base). They were back on main again before this push.
+
+
+
+
+
+
+
+
+
+
 ## reports-2026-11-21 (2026-11-21): the Hollow's toad is drawn in front of the foliage, not behind it
 
 Report r-20261121-120404-lwe8, Tom: "the large toads in the upper left corner should not be behind the cutout in this case".

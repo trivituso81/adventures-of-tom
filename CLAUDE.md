@@ -250,6 +250,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 | Want to change | Look in |
 |---|---|
 | The admin page (every admin tool as grouped buttons) and `index.html?go=welcome-layout\|battle-lab\|block-break-lab` | `admin.html` (https://trivituso81.github.io/adventures-of-tom/admin.html), `battle-lab.html` (the Battle Lab's own address, hands over to `?go=battle-lab`), `splashGoTool` in `engine/splash.js`, `python3 tools/admin_hub_test.py` |
+| The Admin Dashboard: one page for the 3440 x 1440 monitor with the Board, the game, the Battle Guide and Admin side by side (panes, layouts, links that stay in their pane, Ctrl 1 to 4 keys, the Duo layout forced for the game frame only) | `dashboard.html` (ADMIN > Admin Dashboard), `docs/DASHBOARD.md`, plan `claude/dashboard-plan.md`, drawings `claude/dashboard-mock/`, `python3 tools/dashboard_test.py` |
 | A cutscene or story beat | `data/scenes.js` (steps documented at `SCENE_OPS` in `engine/story.js`) |
 | A map, building, room, NPC, NPC dialogue | `data/maps-le.js` (Long Island), `data/maps-la.js` (Los Angeles) |
 | A monster (stats, lines, sprite) | `data/*-monsters.js` (one file per area), numbers in `data/battle2-data.js` |

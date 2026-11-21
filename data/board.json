@@ -27277,7 +27277,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "dash1",
-   "next": "Ready to start: copy the prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds dashboard.html for your 3440 x 1440 monitor: the Board, the game, the Battle Guide and Admin side by side, the All four and Battle layouts, pane buttons, the gold frame that shows which pane has the keyboard, and links that open in the pane that owns the page. Then it hands you the card Try the Admin Dashboard on the wide monitor.",
+   "next": "Built and pushed as build dash1: dashboard.html with the four panes, the All four and Battle layouts, pane buttons, the gold keys frame, Ctrl 1 to 4, links that open in the pane that owns the page, docs/DASHBOARD.md and a test that passes at 3440 x 1328 and 3440 x 1440. Tom's next step is the card Try the Admin Dashboard on the wide monitor (t-dash1-try).",
    "blocks": [
     "t-dash1-try"
    ],
@@ -27311,6 +27311,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built dash1: dashboard.html (Board 1000, game 951 at 951 x 648 with Duo, Battle Guide 829, Admin 620; Battle layout 520, 1600 at 1600 x 900, 860, Builds 420), top bar, pane headers, link routing, Ctrl 1 to 4, tools/dashboard_test.py, docs/DASHBOARD.md, CLAUDE.md row. Hands Tom t-dash1-try."
     }
    ]
   },
@@ -27322,15 +27326,17 @@
    "col": "wait",
    "waiting_on": "claude",
    "ask": "play",
-   "next": "On the MacBook open Chrome at https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard) and make the window full screen on the wide monitor. Paste the GitHub token once in the Board pane (three dots), click through the four panes, play the game with the keyboard, switch Layout to Battle, then press All good, or Something is wrong and say which pane and what you saw. Your notes go to the next card, Admin Dashboard: the strip under the game (c-dash2).",
+   "next": "On the MacBook open Chrome at https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard) and make the window full screen on the wide monitor. Paste the GitHub token once in the Board pane (three dots), click through the four panes, play the game with the keyboard, press Ctrl 1 to 4, switch Layout to Battle, then press All good, or Something is wrong and say which pane and what you saw. Optional last step: install it as its own Chrome app window. Your notes go to the next card, Admin Dashboard: the strip under the game (c-dash2).",
    "steps": [
-    "On the MacBook open Chrome and go to https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard). Make the window full screen on the wide monitor (the green button).",
+    "On the MacBook open Chrome and go to https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard). Make the window full screen on the wide monitor (the green button). You should see four panes side by side: 1 Board, 2 Game, 3 Battle Guide, 4 Admin, and Builds under the game.",
     "In the Board pane open the three dots, paste the GitHub token and press Save. Chrome on the Mac is a new browser, so it has none yet. The top bar should then say GitHub token saved.",
-    "Look across the four panes: Board, Game, Battle Guide, Admin. Nothing should be cut off and nothing should scroll sideways.",
-    "In the Admin pane click Art Library: it should open in that same pane. Use Change page in the pane header to go back to Admin.",
-    "Click the game, then play with the arrow keys and Enter. The game pane should have a gold frame and the tag KEYS HERE. Press Ctrl 1: the frame moves to the Board. Sound starts after your first click in the game.",
-    "In the top bar switch Layout to Battle: the game gets bigger and Builds takes the place of Admin. Switch back to All four.",
-    "Press All good, or Something is wrong and say which pane and what you saw."
+    "Look across the four panes. Nothing should be cut off and nothing should scroll sideways. In the top bar the For you and Claude counts and the live build name should show.",
+    "In the Admin pane click Art Library: it should open in that same pane. Click Change page in that pane's header and choose Admin (every tool) to go back. Click a Board link to the Battle Guide: it should open in pane 3, not in the Board pane.",
+    "Click the game, then play with the arrow keys and Enter. The game pane should have a gold frame and the tag KEYS HERE. Press Ctrl 1: the gold frame moves to the Board; Ctrl 2 moves it back to the game. Sound starts after your first click in the game. If Ctrl and a number switches Mac desktops instead, click the pane to give it the keys, or turn that shortcut off in System Settings > Keyboard > Keyboard Shortcuts > Mission Control.",
+    "Try a pane header button: Make this pane big on the Battle Guide (press Esc to put it back), then Reload this pane.",
+    "In the top bar switch Layout to Battle: the game gets bigger (1600 wide), the Battle Guide stays, and Builds takes the place of Admin. The game does not restart. Switch back to All four.",
+    "Press All good, or Something is wrong and say which pane and what you saw.",
+    "Optional, to run it as its own window: in Chrome open the dashboard, click the three dots at the top right (More), then Cast, save, and share, then Install page as app..., then Install. It opens in its own window with no tabs and sits in Applications under Chrome Apps; drag it to the Dock if you like. Do not choose Create shortcut: that only makes a link that opens a tab."
    ],
    "blocks": [
     "c-dash2"
@@ -27345,6 +27351,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Steps rewritten by the dash1 session to match what was built, with the optional Chrome app window step."
     }
    ],
    "first": "Waits on the card Admin Dashboard: the wide page with four panes."

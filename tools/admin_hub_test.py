@@ -10,7 +10,7 @@ fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-BUTTONS = ['Board', 'Art Library', 'Voice Library', 'Music Library', 'Script Editor', 'Pose Editor', 'Head Sizes', 'Portrait Crops', 'Effects',
+BUTTONS = ['Admin Dashboard', 'Board', 'Art Library', 'Voice Library', 'Music Library', 'Script Editor', 'Pose Editor', 'Head Sizes', 'Portrait Crops', 'Effects',
            'Area Builder', 'Welcome Layout', 'Battle Lab', 'Block Break Lab']
 BATTLE_HREF = 'battle-lab.html'
 web = subprocess.Popen([sys.executable, '-m', 'http.server', str(PORT)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -25,6 +25,7 @@ try:
             txt = pg.inner_text('body')
             for n in BUTTONS: ok(n in txt, '%dpx: button %s' % (w, n))
             ok('Demo' not in txt and 'DEMO' not in txt, '%dpx: no demo' % w)
+            ok(pg.evaluate("document.querySelector('a.btn').id") == 'b-admin-dashboard' and pg.evaluate("document.querySelector('a.btn').getAttribute('href')") == 'dashboard.html', '%dpx: Admin Dashboard is the first button and opens dashboard.html' % w)
             ok(pg.evaluate('document.documentElement.scrollWidth<=innerWidth'), '%dpx: no sideways scroll' % w)
             ok(all(x >= 56 for x in pg.evaluate("[...document.querySelectorAll('.btn')].map(e=>e.offsetHeight)")), '%dpx: buttons 56px or taller' % w)
             ok(not errs, '%dpx: no page errors %s' % (w, errs))

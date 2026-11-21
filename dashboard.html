@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14122b">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-admin-32.png?v=adminicons1">
+<title>Admin Dashboard</title>
+<style>
+/* dash1 (docs/DASHBOARD.md): one page for the 3440 x 1440 monitor. Sizes and colours are the approved drawings in claude/dashboard-mock/. */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b0a18;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+#narrow{display:none;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-size:20px;text-align:center;padding:24px}
+#narrow a{color:#ffd34d;font-weight:700}
+@media(max-width:2999px){#app{display:none!important}#narrow{display:flex}}
+#app{display:flex;flex-direction:column;height:100%}
+#top{flex:none;display:flex;align-items:center;gap:14px;height:44px;padding:0 12px 0 16px;background:#14122b;border-bottom:1px solid #2c2852}
+#top .ttl{display:flex;align-items:baseline;gap:10px}
+#top .ttl b{font-size:17px;font-weight:800}
+#top .ttl span{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#a9a3d6}
+#lay{display:flex;align-items:center;gap:2px;padding:2px;border-radius:10px;background:#0f0d24;border:1px solid #2c2852;margin-left:12px}
+#lay .lb{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6;padding:0 8px 0 10px}
+#lay button{height:32px;padding:0 14px;border-radius:8px;border:0;background:transparent;font-size:13px;font-weight:700}
+#lay button[aria-pressed=true]{background:#ffd34d;color:#241b00}
+.sp{flex:1 1 auto}
+.cnt{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px 0 6px;border-radius:16px;border:1px solid #2c2852;background:#1d1a3d;font-size:13px;font-weight:600}
+.cnt b{min-width:24px;padding:2px 7px;border-radius:11px;background:#2c2852;font-weight:800;text-align:center}
+.cnt.me b{background:#ffd34d;color:#241b00}
+.chip{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:16px;border:1px solid #2c2852;background:#1d1a3d;font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;background:#2fb06a;flex:none}
+.dot.warn{background:#f2b134}
+#panes{position:relative;flex:1 1 auto;min-height:0;display:flex;gap:8px;padding:8px}
+.slot{flex:none;min-width:0;height:100%}
+.slot.last{flex:1 1 0}
+.pane{width:100%;height:100%;display:flex;flex-direction:column;background:#14122b;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px #2c2852}
+.pane.keys{box-shadow:0 0 0 2px #ffd34d}
+.pane.big{position:absolute;left:8px;top:8px;right:8px;bottom:8px;width:auto;height:auto;z-index:20}
+.ph{flex:none;display:flex;align-items:center;gap:10px;height:40px;padding:0 6px 0 10px;background:#1d1a3d;border-bottom:1px solid #2c2852}
+.ph .num{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;color:#fff;font-size:12px;font-weight:800;flex:none}
+.ph .nm{flex:none;white-space:nowrap;font-size:15px;font-weight:700}
+.ph .wh{flex:0 1 auto;min-width:0;font-size:13px;color:#a9a3d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph .kt{display:none;font-size:11px;font-weight:800;letter-spacing:.06em;color:#241b00;background:#ffd34d;border-radius:6px;padding:3px 8px;flex:none}
+.pane.keys .kt{display:block}
+.ph button{flex:none;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border:1px solid #2c2852;border-radius:8px;background:#14122b}
+.ph button.ic{width:32px;padding:0;color:#a9a3d6}
+.ph button.cp{padding:0 10px;font-size:13px;font-weight:600}
+.ph button:hover{border-color:#6a5cff}
+.ph svg,.cp svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.pane iframe{display:block;border:0;background:#0f0d24}
+.pbody{flex:1 1 auto;min-height:0}
+.pbody iframe{width:100%;height:100%}
+.gamewrap{flex:none;display:flex;justify-content:center;background:#0f0d24}
+.strip{flex:1 1 auto;min-height:0;border-top:1px solid #2c2852;background:#14122b}
+.strip iframe{width:100%;height:100%}
+#menu{position:fixed;z-index:50;display:none;width:340px;max-height:calc(100vh - 80px);overflow:auto;background:#1d1a3d;border:1px solid #3a3566;border-radius:12px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+#menu h4{margin:10px 8px 4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6}
+#menu h4:first-child{margin-top:4px}
+#menu button{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:8px;padding:7px 10px;font-size:14px;font-weight:600}
+#menu button:hover,#menu button:focus{background:#2c2852;outline:0}
+</style>
+</head>
+<body>
+<div id="narrow"><div>The Admin Dashboard is made for the wide monitor.</div><a href="admin.html">Open Admin</a></div>
+<div id="app">
+<header id="top">
+ <div class="ttl"><b>Admin Dashboard</b><span>The Adventures of Tom</span></div>
+ <div id="lay"><span class="lb">Layout</span></div>
+ <span class="sp"></span>
+ <button type="button" class="cnt me" id="c-for"><b>-</b>For you</button>
+ <button type="button" class="cnt" id="c-claude"><b>-</b>Claude</button>
+ <div class="chip" id="live"><span class="dot warn"></span><span id="livet">Checking the live build</span></div>
+ <span class="sp"></span>
+ <div class="chip" id="tok"><span class="dot warn"></span><span id="tokt">No GitHub token</span></div>
+</header>
+<main id="panes"></main>
+</div>
+<div id="menu" role="menu"></div>
+<script>
+'use strict';
+// dashboard.html (dash1). Loads no game code itself: four frames of the real pages. All panes are the same origin, so the page can read
+// their documents from outside: it watches clicks and page loads to keep every page in the pane that owns it, and moves the keyboard.
+var PANES=[
+ {n:1,name:'Board',col:'#6a5cff'},
+ {n:2,name:'Game',col:'#2a6fdb'},
+ {n:3,name:'Battle Guide',col:'#1f8f8f'},
+ {n:4,name:'Admin',col:'#8a5cd6'}
+];
+// To add a layout: add a row here (pane widths add to 3400; pane 4 takes what is left) and it appears in the top bar.
+var LAYOUTS=[
+ {id:'all',label:'All four',w:[1000,951,829,620],game:{w:951,h:648,duo:1,size:'Duo open, sideways'},p4:{page:'admin.html',name:'Admin'}},
+ {id:'battle',label:'Battle',w:[520,1600,860,420],game:{w:1600,h:900,duo:0,size:'Desktop wide'},p4:{page:'builds.html',name:'Builds'}}
+];
+var LS_LAYOUT='aot-dash-layout',LS_TOKEN='aot-gh-token';
+var STRIP_PAGE='builds.html';   // until dash2 the Builds page fills the space under the game
+var APP_TITLE=': The Adventures of Tom';
+var cur=LAYOUTS[0],keys=2,bigN=0,built=false,tools=null;
+var P={};   // n -> {n,slot,pane,frame,head fields,cur (last accepted address),explicit (page chosen with Change page)}
+var stripFrame=null;
+function $(id){return document.getElementById(id);}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+var SVG={
+ reload:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>',
+ tab:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+ big:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/></svg>',
+ down:'<svg width="14" height="14" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
+};
+// ---- which pane owns which page (docs/DASHBOARD.md "Links stay home")
+function fileOf(u){var f=u.pathname.split('/').pop();return f||'index.html';}
+function ownerOf(u){
+ var f=fileOf(u);
+ if(f==='board.html')return 1;
+ if(f==='index.html'||f==='battle-lab.html')return 2;
+ if(f==='battle-guide.html')return 3;
+ return 4;
+}
+function sameSite(u){
+ if(u.origin!==location.origin)return false;
+ var dir=location.pathname.replace(/[^\/]*$/,'');
+ return u.pathname.indexOf(dir)===0;
+}
+function absUrl(href,base){try{return new URL(href,base||location.href);}catch(e){return null;}}
+function frameWin(n){try{return P[n].frame.contentWindow;}catch(e){return null;}}
+function frameDoc(n){try{return P[n].frame.contentDocument;}catch(e){return null;}}
+function frameUrl(n){try{var w=frameWin(n);return w&&w.location.href!=='about:blank'?new URL(w.location.href):null;}catch(e){return null;}}
+// ---- keys
+function markKeys(n){
+ keys=n;
+ for(var k in P)P[k].pane.classList.toggle('keys',+k===n);
+}
+function setKeys(n){
+ markKeys(n);
+ var w=frameWin(n);
+ try{if(w)w.focus();}catch(e){try{P[n].frame.focus();}catch(e2){}}
+}
+function onKey(e){
+ if(e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.shiftKey&&/^[1-4]$/.test(e.key)){e.preventDefault();e.stopPropagation();setKeys(+e.key);return;}
+ if(e.key==='Escape'&&bigN){e.preventDefault();e.stopPropagation();makeBig(0);}
+}
+// ---- build the page
+function build(){
+ if(built)return;built=true;
+ var pn=$('panes'),lay=$('lay');
+ LAYOUTS.forEach(function(L){
+  var b=el('button',null,L.label);b.type='button';b.id='lay-'+L.id;b.setAttribute('aria-pressed','false');
+  b.onclick=function(){setLayout(L.id);};lay.appendChild(b);
+ });
+ PANES.forEach(function(p){
+  var o={n:p.n};
+  o.slot=el('div','slot'+(p.n===4?' last':''));
+  o.pane=el('section','pane');o.pane.id='pane'+p.n;
+  var h=el('div','ph');
+  h.innerHTML='<span class="num" style="background:'+p.col+'">'+p.n+'</span><span class="nm"></span><span class="wh"></span><span class="kt">KEYS HERE</span><span class="sp"></span>'+
+   (p.n!==2?'<button type="button" class="cp" data-a="change">Change page '+SVG.down+'</button>':'')+
+   '<button type="button" class="ic" data-a="reload" aria-label="Reload this pane" title="Reload this pane">'+SVG.reload+'</button>'+
+   '<button type="button" class="ic" data-a="tab" aria-label="Open in its own tab" title="Open in its own tab">'+SVG.tab+'</button>'+
+   '<button type="button" class="ic" data-a="big" aria-label="Make this pane big" title="Make this pane big">'+SVG.big+'</button>';
+  o.head=h;o.nm=h.querySelector('.nm');o.wh=h.querySelector('.wh');
+  h.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;headAction(p.n,b.getAttribute('data-a'),b);});
+  o.pane.appendChild(h);
+  if(p.n===2){
+   o.wrap=el('div','gamewrap');o.frame=mkFrame('game');o.wrap.appendChild(o.frame);o.pane.appendChild(o.wrap);
+   o.strip=el('div','strip');stripFrame=mkFrame('under the game');o.strip.appendChild(stripFrame);o.pane.appendChild(o.strip);
+  } else {
+   o.body=el('div','pbody');o.frame=mkFrame(p.name);o.body.appendChild(o.frame);o.pane.appendChild(o.body);
+  }
+  o.frame.addEventListener('load',function(){onFrameLoad(p.n);});
+  watchKeys(o.frame);
+  o.slot.appendChild(o.pane);pn.appendChild(o.slot);P[p.n]=o;
+ });
+ stripFrame.addEventListener('load',function(){attach(stripFrame,4,true);});
+ watchKeys(stripFrame);
+ var saved=ls(LS_LAYOUT);
+ cur=LAYOUTS.filter(function(L){return L.id===saved;})[0]||LAYOUTS[0];
+ applyLayout(true);
+ // The game is the big download, so the other three frames start first.
+ var left=3,started=false;
+ function startGame(){if(started)return;started=true;P[2].cur=gameUrl('index.html');P[2].frame.src=P[2].cur;stripFrame.src=STRIP_PAGE;}
+ [1,3,4].forEach(function(n){
+  var page=n===1?'board.html':n===3?'battle-guide.html':cur.p4.page;
+  P[n].cur=page;P[n].frame.addEventListener('load',function once(){P[n].frame.removeEventListener('load',once);if(--left===0)startGame();});
+  P[n].frame.src=page;
+ });
+ setTimeout(startGame,2500);
+ markKeys(2);
+ document.addEventListener('keydown',onKey,true);window.addEventListener('keydown',onKey,true);
+ document.addEventListener('pointerdown',function(e){if(!e.target.closest('#menu')&&!e.target.closest('[data-a=change]'))closeMenu();},true);
+ window.addEventListener('blur',function(){   // focus moved into a frame (a click there, or Tab)
+  setTimeout(function(){var a=document.activeElement;for(var k in P)if(P[k].frame===a)markKeys(+k);},0);
+ });
+ setInterval(poll,500);poll();
+ liveBuild();setInterval(liveBuild,60000);
+ window.addEventListener('storage',tokenState);
+}
+// Ctrl 1 to 4 must work from inside a frame. The game's title screen stops every key at the window (engine/splash.js, capture phase),
+// so the dashboard's listener has to be on a page's window BEFORE that page's scripts run. A page's window exists as soon as it starts
+// to load, long before its scripts do, so each frame is watched every few milliseconds and the key listener is added to each new page.
+function watchKeys(frame){
+ var last=null;
+ setInterval(function(){
+  try{
+   var w=frame.contentWindow,d=w.document;
+   if(d===last||w.location.href==='about:blank')return;
+   last=d;w.addEventListener('keydown',onKey,true);
+  }catch(e){}
+ },4);
+}
+function mkFrame(title){
+ var f=document.createElement('iframe');f.title=title;f.setAttribute('allow','autoplay; fullscreen; gamepad; clipboard-write');
+ return f;
+}
+function gameUrl(page){
+ var u=new URL(page,location.href);
+ u.searchParams.set('duo',cur.game.duo?'1':'0');
+ return u.pathname.replace(/^.*\//,'')+u.search+u.hash;
+}
+// ---- layout
+function applyLayout(first){
+ var L=cur;
+ PANES.forEach(function(p,i){
+  var o=P[p.n];
+  if(p.n!==4)o.slot.style.width=L.w[i]+'px';
+  o.nm.textContent=p.n===4?L.p4.name:p.name;
+ });
+ var g=L.game;
+ P[2].wrap.style.height=g.h+'px';P[2].frame.style.width=g.w+'px';P[2].frame.style.height=g.h+'px';
+ LAYOUTS.forEach(function(x){$('lay-'+x.id).setAttribute('aria-pressed',String(x.id===L.id));});
+ if(!first)forceDuo(frameWin(2));
+ head();
+}
+function setLayout(id){
+ var L=LAYOUTS.filter(function(x){return x.id===id;})[0];if(!L||L===cur)return;
+ var old=cur;cur=L;lsSet(LS_LAYOUT,id);
+ applyLayout(false);
+ // Pane 4 takes the new layout's page (Admin in All four, Builds in Battle).
+ if(old.p4.page!==L.p4.page){P[4].cur=L.p4.page;P[4].explicit=null;P[4].frame.contentWindow.location.replace(L.p4.page);}
+ if(bigN)makeBig(0);
+ setKeys(keys);
+}
+// The game frame must not use the shared le-duo setting (it would hit every game tab in this browser) and ?duo= is dropped when go= is
+// in the address. So the dashboard answers for the game frame only: it replaces that frame's detectDuo and asks the game to lay out again.
+function forceDuo(w){
+ try{
+  if(!w||typeof w.detectDuo!=='function')return;
+  if(!w.detectDuo.__dash){var f=function(){return !!cur.game.duo;};f.__dash=1;w.detectDuo=f;}
+  if(typeof w.applyLayout==='function')w.applyLayout();
+  w.dispatchEvent(new w.Event('resize'));
+ }catch(e){}
+}
+// ---- frames: links, keys, guard
+function attach(frame,from,isStrip){
+ var w,d;try{w=frame.contentWindow;d=frame.contentDocument;if(!d||!w.location||w.location.href==='about:blank')return;}catch(e){return;}
+ if(d.__dash)return;d.__dash=1;
+ d.addEventListener('click',function(ev){linkClick(ev,from,d);},true);
+ d.addEventListener('pointerdown',function(){closeMenu();if(!isStrip)markKeys(from);},true);
+}
+function linkClick(ev,from,d){
+ if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;
+ var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;
+ if(!a||a.hasAttribute('download'))return;
+ var raw=a.getAttribute('href');
+ if(!raw||raw.charAt(0)==='#'||/^(javascript|mailto|tel):/i.test(raw))return;
+ var u=absUrl(raw,d.baseURI);if(!u)return;
+ if(!sameSite(u)){
+  if(a.target==='_blank')return;       // the browser opens it in a new tab
+  ev.preventDefault();window.open(u.href,'_blank','noopener');return;
+ }
+ var o=ownerOf(u);
+ if(o===from)return;                    // stays in this pane
+ ev.preventDefault();goPane(o,u);
+}
+function goPane(o,u){
+ if(o===2){
+  var c=frameUrl(2);
+  if(c&&fileOf(c)==='index.html'&&fileOf(u)==='index.html'&&!u.search&&!u.hash){setKeys(2);return;}   // already in the game: give it the keys, never restart it
+  u=absUrl(gameUrl(fileOf(u)+u.search+u.hash));
+ }
+ P[o].cur=u.pathname.replace(/^.*\//,'')+u.search+u.hash;P[o].explicit=null;
+ try{P[o].frame.contentWindow.location.href=u.href;}catch(e){P[o].frame.src=u.href;}
+ markKeys(o);
+}
+function onFrameLoad(n){
+ var o=P[n],u=frameUrl(n);
+ if(!u)return;
+ attach(o.frame,n,false);
+ if(n===2){forceDuo(frameWin(2));}
+ // A pane that ends up on another pane's page (a script moved it): send the page home and put this pane back.
+ var landed=u.pathname.replace(/^.*\//,'')+u.search+u.hash;
+ if(sameSite(u)&&ownerOf(u)!==n&&o.explicit!==fileOf(u)){
+  var back=o.cur,keep=u;
+  P[ownerOf(keep)].cur=landed;
+  try{P[ownerOf(keep)].frame.contentWindow.location.href=keep.href;}catch(e){}
+  if(back&&back!==landed)try{o.frame.contentWindow.location.replace(back);}catch(e){}
+  return;
+ }
+ if(o.explicit!==fileOf(u))o.explicit=null;
+ o.cur=landed;
+ head(n);
+}
+function headAction(n,a,btn){
+ var o=P[n];
+ if(a==='reload'){try{o.frame.contentWindow.location.reload();}catch(e){o.frame.src=o.frame.src;}setKeys(n);}
+ else if(a==='tab'){var u=frameUrl(n);var href=u?u.href:o.frame.src;window.open(href,'_blank','noopener');}
+ else if(a==='big'){makeBig(bigN===n?0:n);setKeys(n);}
+ else if(a==='change'){openMenu(n,btn);}
+}
+function makeBig(n){
+ bigN=n;
+ PANES.forEach(function(p){P[p.n].pane.classList.toggle('big',p.n===n);});
+ for(var k in P){var b=P[k].head.querySelector('[data-a=big]');if(b)b.setAttribute('aria-label',(+k===n?'Put this pane back':'Make this pane big'));}
+}
+// ---- Change page menu: every tool of admin.html's GROUPS (read from that page, so it cannot drift)
+var FALLBACK=[['Tools',[['Board',null,'board.html'],['Builds',null,'builds.html'],['Art Library',null,'art.html'],['Voice Library',null,'voices.html'],['Music Library',null,'music.html'],['Script Editor',null,'script.html'],['Battle Guide',null,'battle-guide.html']]]];
+function loadTools(cb){
+ if(tools)return cb();
+ fetch('admin.html?t='+Date.now()).then(function(r){return r.text();}).then(function(t){
+  var m=t.match(/var GROUPS=(\[[\s\S]*?\n\]);/);
+  tools=m?(new Function('return '+m[1]))():FALLBACK;
+ }).catch(function(){tools=FALLBACK;}).then(cb);
+}
+function openMenu(n,btn){
+ var m=$('menu');
+ if(m.style.display==='block'&&m.getAttribute('data-n')===String(n)){closeMenu();return;}
+ loadTools(function(){
+  m.innerHTML='';m.setAttribute('data-n',String(n));
+  [['This dashboard',[['Admin (every tool)',null,'admin.html']]]].concat(tools).forEach(function(g){
+   var items=g[1].filter(function(b){return b[2]&&b[2]!=='dashboard.html';});
+   if(!items.length)return;
+   m.appendChild(el('h4',null,g[0]));
+   items.forEach(function(b){
+    var x=el('button',null,b[0]);x.type='button';x.setAttribute('role','menuitem');x.setAttribute('data-href',b[2]);
+    x.onclick=function(){closeMenu();changePage(n,b[2]);};
+    m.appendChild(x);
+   });
+  });
+  var r=btn.getBoundingClientRect();
+  m.style.display='block';m.style.top=(r.bottom+6)+'px';m.style.left=Math.max(8,Math.min(r.right-340,innerWidth-348))+'px';
+ });
+}
+function closeMenu(){var m=$('menu');if(m)m.style.display='none';}
+function changePage(n,href){
+ var u=absUrl(href);if(!u)return;
+ if(ownerOf(u)===2&&n!==2){goPane(2,u);return;}   // the game pane is the only place for the game and the Battle Lab
+ var o=P[n];o.explicit=fileOf(u);o.cur=href;
+ try{o.frame.contentWindow.location.href=u.href;}catch(e){o.frame.src=href;}
+ setKeys(n);
+}
+// ---- headers, counts, build, token
+function pageName(n){
+ var d=frameDoc(n);if(!d)return '';
+ return String(d.title||'').replace(APP_TITLE,'').replace(/^Admin$/,'Admin');
+}
+function whatShowing(n){
+ var u=frameUrl(n),f=u?fileOf(u):'',d=frameDoc(n),w=P[n].frame.clientWidth;
+ if(n===1&&f==='board.html'){
+  if(w>=860)return 'For you and Claude, side by side';
+  var b=d&&d.querySelector('#tabs button.on');return b?b.textContent.replace(/[0-9]+/g,'').trim():'For you';
+ }
+ if(n===2)return cur.game.size+' · '+(f==='battle-lab.html'?'Battle Lab':'The game');
+ if(n===3&&f==='battle-guide.html'){
+  var h=(u.hash||'').replace(/^#/,'').split('/').filter(Boolean).map(function(s){return s.charAt(0).toUpperCase()+s.slice(1);});
+  return h.join(' · ');
+ }
+ if(n===4&&f==='admin.html')return 'Every tool; a tool opens in this pane';
+ if(n===4&&f==='builds.html')return 'Live';
+ return pageName(n);
+}
+function head(n){
+ var list=n?[n]:[1,2,3,4];
+ list.forEach(function(k){if(P[k]&&P[k].frame.src!==''){var t=whatShowing(k);if(P[k].wh.textContent!==t)P[k].wh.textContent=t;}});
+}
+function poll(){
+ head();
+ var c={for:'#c-for',claude:'#c-claude'};
+ var d=frameDoc(1);
+ for(var v in c){
+  var b=d&&d.querySelector('#tabs button[data-view="'+v+'"] b');
+  if(b)document.querySelector(c[v]+' b').textContent=b.textContent.trim();
+ }
+ tokenState();
+}
+['for','claude'].forEach(function(v){
+ document.addEventListener('DOMContentLoaded',function(){
+  $('c-'+v).onclick=function(){
+   var d=frameDoc(1),b=d&&d.querySelector('#tabs button[data-view="'+v+'"]');
+   if(b)b.click();setKeys(1);
+  };
+ });
+});
+function tokenState(){
+ var has=!!ls(LS_TOKEN);
+ $('tok').querySelector('.dot').className='dot'+(has?'':' warn');
+ $('tokt').textContent=has?'GitHub token saved':'No GitHub token: paste it in the Board pane (three dots)';
+}
+function liveBuild(){
+ fetch('data/build-history.js?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
+  var line=t.split('\n').filter(function(l){return /^\{\s*"tag"/.test(l);})[0];
+  var e=JSON.parse(line.replace(/,\s*$/,''));
+  var when=new Date(e.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  $('livet').innerHTML='Live build <b></b>, '+when;$('livet').querySelector('b').textContent=e.tag;
+  $('live').querySelector('.dot').className='dot';
+ }).catch(function(){$('live').querySelector('.dot').className='dot warn';$('livet').textContent='Could not read the live build';});
+}
+// ---- start
+function start(){if(innerWidth>=3000)build();}
+window.addEventListener('resize',start);
+window.__DASH={P:P,setKeys:setKeys,setLayout:setLayout,keys:function(){return keys;},layout:function(){return cur.id;},big:function(){return bigN;},strip:function(){return stripFrame;}};
+start();
+</script>
+</body>
+</html>
