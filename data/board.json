@@ -25735,7 +25735,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+    "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
     "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
    },
    "history": [
@@ -25835,6 +25835,10 @@
     {
      "d": "2026-11-21",
      "t": "Ended without shipping: nothing paid, nothing made. The one staged Wan try (job deedee-dodge rev 5, Rose's duck wording, about $0.50) was refused by the wan-gen spend cap: the cap counts every dollar ever spent ($52.53 so far), so a run with cap 1 can never pass. Raising the cap was not allowed in this session, so Tom decides. Earlier sessions went quiet probably for the same reason: they ran out before the paid try ever started."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -25846,8 +25850,15 @@
     "effort": "medium (one prompt taken from a version that worked, steps written down)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) has no video yet (she slides her idle video). Three Wan 3.0 tries of the sideways lean missed (card history; results deedee-dodge-r2, r3, r4 on branch wangen): her arms ran off the frame every time, and pad 0.8 did not fix it (r4: front hand off the left edge for 25 pictures, and she lunged forward 18% toward the monster). The lean wording is retired for her.\n\nThe try is already staged: Wan job deedee-dodge rev 5 in tools/art-library/wangen-jobs.json, prompt tools/art-library/prompts/wan-deedee-dodge-v4.txt, which is Rose's passed duck prompt (wan-rose-dodge-v2.txt) word for word, with pad 0.8 kept; the same wording and pad passed for Rose and for Tom (anim-rose-dodge-v89r, anim-tom-dodge-ner3). Run it once on the wan-gen Action (gh api repos/trivituso81/adventures-of-tom/actions/workflows/wan-gen.yml/dispatches -f ref=main -f 'inputs[what]=deedee-dodge' -f 'inputs[dry_run]=false' -f 'inputs[cap]=' set to the ledger on branch wangen state.json plus 0.50). Spend at most $0.50. Check every picture against the plan section 4.4 list (feet on one row, whole figure inside the frame, last picture against first under 3 of 255) and run the measured clip gate (judge() in tools/clip-gate/gate.py with measure.py); a clip that fails is not handed to Tom, and a miss is the stop-loss for Wan on her dodge (next would be a different video model, card c-wanch2). If it passes: bake it like Rose's and Tom's dodges (tools/clip-bake/bake_clip.py, kind state, the duck stretch every 2nd picture at 1.5x, figure rows 99.3, data/clips/deedee-dodge.js, art/clips/deedee-dodge.webp, source art/raw/clips/wan-deedee-dodge-v1.mp4), add dodge:'deedee_dodge' to B3_BODY_CLIPS.deedee in data/b3-clips.js, rebuild data/guide-anims.json (node tools/guidegen/build_map.js), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py, python3 tools/wanproof_test.py deedee and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. (B3_BODY_PAINT and tools/paint_state_test.py no longer exist: purged in wanch2a.) Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T20:34:46+00:00",
-   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3"
+   "started_at": "2026-11-21T22:49:38+00:00",
+   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3",
+   "rescue": {
+    "at": "2026-11-21T22:49:38+00:00",
+    "n": 1,
+    "why": "A session ended without shipping",
+    "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
+    "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
+   }
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -30119,8 +30130,7 @@
    "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "tag": "wanch4",
    "next": "Waits on your card Watch the Skeeter Swarm's new Darting Bite video. Then it remakes Rose's Giddyup with one change (more room in the frame) and asks you one question about Deedee's Wet-Floor mop.",
    "blocks": [],
@@ -30134,6 +30144,10 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch3 for the two videos it could not pass (Giddyup: a new fault with a known fix; Wet-Floor: stop-loss after three misses the same way)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Watch the Skeeter Swarm's new Darting Bite video is done."
     }
    ],
    "prompt": {
@@ -31004,7 +31018,7 @@
    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T14:45:30-08:00",
+   "last": "2026-11-21T14:49:04-08:00",
    "tags": [
     "anim-deedee-scrub-1irj",
     "anim-deedee-windex-z9p8",
@@ -34877,8 +34891,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5f6abd0d145860be4f49a72dcaa00394a5d5a0ff",
- "synced_at": "2026-11-21T22:46:14+00:00",
+ "synced": "368d68c73bfd27c58f874cbd56d804ec60e2c3ad",
+ "synced_at": "2026-11-21T22:49:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
