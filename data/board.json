@@ -29322,13 +29322,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCyeLid5X3G7fCCX31",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -29364,6 +29364,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -29378,8 +29382,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1121"
-   },
-   "started_at": "2026-11-21T21:23:06+00:00"
+   }
   },
   {
    "id": "c-bigone25",
@@ -29994,6 +29997,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDnzg2ftCCDy78SEfB",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "first": "2026-11-21T21:52:59Z",
+   "last": "2026-11-21T21:52:59Z",
+   "tags": [
+    "hollowfencec"
+   ],
+   "cards": [
+    "c-hollowfence"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDJEYAdtfW4Xhm3Sts",
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
@@ -34454,8 +34469,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "425e5177305d573bd585bdd0ad557368737fa244",
- "synced_at": "2026-11-21T21:51:01+00:00",
+ "synced": "8c9427c10b78c9702839aa1b306e3bc3dbe72c3c",
+ "synced_at": "2026-11-21T21:53:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
