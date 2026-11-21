@@ -1,3 +1,5 @@
+## board-ch1voices (2026-11-21): a board card makes chapter 1's 10 missing voices with one tap
+
 ## reports-2026-11-21 (2026-11-21): the phone picture under TNB's text in the chapter 1 cab scene now stays up until the scene closes it
 
 Card c-reports-10, report r-20261121-125831-qvon. Tom: "the car in phone image should still be displayed while TNB is talking".

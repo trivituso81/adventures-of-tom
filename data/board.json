@@ -29529,6 +29529,51 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-ch1voices",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Voice Clips",
+   "ask": "voice",
+   "fyi": true,
+   "title": "Make chapter 1's 10 missing voices (one tap, then listen)",
+   "voices": [
+    "tom|Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
+    "deedee|Excuse me! I just washed that floor.",
+    "boppy|...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming.",
+    "grace|3 wrappers, let's follow them!",
+    "tom|Alright, time for me to head back to LA. Let's head to Sal's!",
+    "rose|One more ride, Tata! To the cab!",
+    "sal|Los Angeles? You got it.",
+    "deedee|Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+    "deedee|Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.",
+    "ellie|Deedee keeps offering me apple muffins. I keep saying yes. That's called manners."
+   ],
+   "blocks": [],
+   "next": "Tap Generate all voices on this card (it shows 10 lines and about 578 ElevenLabs credits; confirm with a second tap). Wait about 20 minutes; this card then says the voices are in the game. Open ADMIN > VOICE LIBRARY with the button below, play the new lines, then tap All good or Something is wrong. The 10 lines: Tom at the kitchen door (Hi, Mom!), Deedee and Boppy in the muffin theft, Grace (3 wrappers), Rose (One more ride), Tom (head back to LA), Sal (Los Angeles? You got it), Deedee twice at her house, Aunt Ellie once.",
+   "links": [
+    {
+     "to": "voice",
+     "ids": {
+      "chapter": 1,
+      "show": "builtin"
+     },
+     "label": "Chapter 1 voices"
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"I just played through chapter 1 and there's still a lot of voices that are not in the game\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added after Tom (13:08): \"I just played through chapter 1 and there's still a lot of voices that are not in the game. Can you comb through the entire chapter... and then create a Kanban card where I can generate all of the voices at once?\" Audit: every chapter 1 scene, NPC, monster and cab line was checked against the baked clips in a real browser; 10 lines have no clip. Deedee's 3 battle barks (greet, crisp, win) also have none but the voice job only makes dialogue lines, and Battle 3 plays no spoken move lines."
+    }
+   ]
   }
  ],
  "sessions": [
