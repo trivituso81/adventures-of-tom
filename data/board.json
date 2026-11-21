@@ -29848,6 +29848,11 @@
      "d": "2026-11-21",
      "t": "Tom handed this to Claude: instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
      "at": "2026-11-21T22:03:51.893Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T22:04:13.669Z"
     }
    ],
    "created": "2026-11-21",
@@ -29862,7 +29867,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-costs2keys with this note: instrutions unclear, eg, \"choose Admin scope\" means nothing to me. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-stale-tests",
