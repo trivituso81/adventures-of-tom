@@ -23798,7 +23798,7 @@
    "title": "Apply Gemini's chapter 1 report to the board",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Applied Gemini's chapter 1 report (claude/ch1-gemini-report.md). Closed 8 Tom cards (C3 to C10 passed). Four failed and now wait on Claude fix cards: c-fix-hollowtrail-play-3 (C1), c-fix-ch1flight-2 (C2), c-fix-itemdefplay (C11), c-fix-qa-bug03-look (C12). Milestone B and A1 are not Gemini's to close: t-milestoneb stays open for Tom.",
    "blocks": [],
    "created": "2026-11-21",
@@ -23837,13 +23837,18 @@
     {
      "d": "2026-11-21",
      "t": "Found while checking C2: the fix-ch1flight scene edit is missing from data/scenes.js on main (engine pieces are present), so the fix card says to re-apply it."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as gem1v: Gemini's chapter 1 test applied to the board: 8 cards closed, 4 fix cards written"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
     "opening": "unknown"
    },
-   "after": "t-milestoneb"
+   "after": "t-milestoneb",
+   "done": "2026-11-21"
   },
   {
    "id": "c-costs1",
@@ -27410,7 +27415,7 @@
    "id": "c-fix-hollowtrail-play-3",
    "tag": "fix-hollowtrail-play-3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -27432,7 +27437,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFoLKSmJfeAAAAP5kf",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27448,6 +27453,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T19:38:48.739Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27461,13 +27470,13 @@
    },
    "after": "t-hollowtrail-play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T19:39:25+00:00"
   },
   {
    "id": "c-fix-ch1flight-2",
    "tag": "fix-ch1flight-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -27489,7 +27498,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFoJq8UAVPg4TrsQtF",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27505,6 +27514,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T19:38:54.374Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27518,13 +27531,13 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T19:39:25+00:00"
   },
   {
    "id": "c-fix-itemdefplay",
    "tag": "fix-itemdefplay",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Read a few item banners on your phone",
@@ -27546,7 +27559,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFZJTWx5PkzG7J3u7h",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27562,6 +27575,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T19:39:08.565Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27575,13 +27592,13 @@
    },
    "after": "t-itemdefplay",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T19:39:25+00:00"
   },
   {
    "id": "c-fix-qa-bug03-look",
    "tag": "fix-qa-bug03-look",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Look for people on roofs in the Square and the Row",
@@ -27603,7 +27620,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCqw1GyaN2utsod3GN",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27619,6 +27636,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T19:39:12.401Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27632,7 +27653,7 @@
    },
    "after": "t-qa-bug03-look",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T19:39:25+00:00"
   }
  ],
  "sessions": [
@@ -27771,6 +27792,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
+   "title": "Apply Gemini's chapter 1 report to the board",
+   "first": "2026-11-21T11:29:09-08:00",
+   "last": "2026-11-21T11:38:27-08:00",
+   "tags": [
+    "gem1v"
+   ],
+   "cards": [
+    "c-gem1v"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
    "title": "Battle Guide: make and remake battle videos from the page",
    "first": "2026-11-21T09:33:57-08:00",
@@ -27879,16 +27912,6 @@
     "c-anim-tom-dodge-ner3",
     "c-wanch2",
     "c-anim-tom-loungepass-fix1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
-   "title": "Apply Gemini's chapter 1 report to the board",
-   "first": "2026-11-21T11:29:09-08:00",
-   "last": "2026-11-21T11:29:09-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem1v"
    ]
   },
   {
@@ -31376,8 +31399,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "61f11c6d7a469175d732f91b2e8a7fadacbfb132",
- "synced_at": "2026-11-21T19:37:33+00:00",
+ "synced": "05677fcbc9550c0f59ed4c872e33dd133da2fa6e",
+ "synced_at": "2026-11-21T19:39:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
