@@ -17687,7 +17687,7 @@
    "id": "c-itembannerart1",
    "tag": "itembannerart1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Painted pictures for the item gained banners",
    "next": "The banner shows a painted picture per item (emoji only while an item has no picture yet), and the 18 item sheets (288 items) are Art Library entries (build itembannerart1). Tom generates and approves them on card t-itembannerart-pics; each approval cuts its sheet into one picture per item by itself.",
@@ -17741,9 +17741,14 @@
     {
      "d": "2026-11-20",
      "t": "Built: ring on the right shows art/items/<id>.webp for items in ITEM_ART (data/item-art.js), emoji for the rest; itemart-items.json (288 notes), itemart-prompts.js (18 sheets of 16, Props > Item pictures), bake_item_sheet.py; tools/itemart_test.py and tools/itembanner_test.py ok. Hands to Tom: t-itembannerart-pics."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itembannerart1: the item gained banner shows a painted picture for each item (18 Art Library sheets, emoji only until a picture is approved)"
     }
    ],
-   "after": "t-itembannerart-pics"
+   "after": "t-itembannerart-pics",
+   "done": "2026-11-20"
   },
   {
    "id": "t-stuck-b3s12",
@@ -19121,7 +19126,7 @@
    "id": "c-reports-6",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-142626-w74f. First note: missing art for all item banners",
@@ -19142,11 +19147,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: 1 report(s) on branch inbox."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "id": "c-bigboard1",
@@ -19732,6 +19742,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGjLjN9fGXpe6ZtFWw",
+   "title": "Painted pictures for the item gained banners",
+   "first": "2026-11-20T17:36:08-08:00",
+   "last": "2026-11-20T17:58:48-08:00",
+   "tags": [
+    "itembannerart1"
+   ],
+   "cards": [
+    "c-itembannerart1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEeg94gABBmqmKonrd",
    "title": "Fix: Look at the Effects page in Admin",
    "first": "2026-11-20T17:55:59Z",
@@ -19880,16 +19902,6 @@
    "tags": [],
    "cards": [
     "c-fix-gatelayer-pics"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGjLjN9fGXpe6ZtFWw",
-   "title": "Painted pictures for the item gained banners",
-   "first": "2026-11-20T17:36:08-08:00",
-   "last": "2026-11-20T17:36:08-08:00",
-   "tags": [],
-   "cards": [
-    "c-itembannerart1"
    ]
   },
   {
@@ -22001,8 +22013,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "44b01f4ddf4350926691b0592ad3ced020eca537",
- "synced_at": "2026-11-21T01:57:32+00:00",
+ "synced": "e8a957e293adae7078f16c9569ab0a835eed3832",
+ "synced_at": "2026-11-21T01:59:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
