@@ -18639,6 +18639,11 @@
      "d": "2026-11-20",
      "t": "Tom handed this to Claude: steps are unclear",
      "at": "2026-11-21T01:12:59.793Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T01:13:07.331Z"
     }
    ],
    "steps": [
@@ -18656,7 +18661,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-startfix-look with this note: steps are unclear. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "t-keysecrets3-try",
