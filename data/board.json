@@ -22750,6 +22750,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
+   "title": "Item banners as JRPG item definitions",
+   "first": "2026-11-20T19:18:42-08:00",
+   "last": "2026-11-20T20:08:21-08:00",
+   "tags": [
+    "itemdef1",
+    "itemdef-css"
+   ],
+   "cards": [
+    "c-itemdef1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFVfSKr5GPp8cLJbDZ",
    "title": "Install the listening poses",
    "first": "2026-11-20T19:40:48Z",
@@ -22773,18 +22786,6 @@
    ],
    "cards": [
     "c-fix-gatelayer-pics-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
-   "title": "Item banners as JRPG item definitions",
-   "first": "2026-11-20T19:18:42-08:00",
-   "last": "2026-11-20T20:01:31-08:00",
-   "tags": [
-    "itemdef1"
-   ],
-   "cards": [
-    "c-itemdef1"
    ]
   },
   {
@@ -25339,8 +25340,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "94e9a7fc5c4d6e57a62692d205f1e68f30675428",
- "synced_at": "2026-11-21T04:04:07+00:00",
+ "synced": "375b97f753b40bae605752bc9bde3f873a8c56e3",
+ "synced_at": "2026-11-21T04:09:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
