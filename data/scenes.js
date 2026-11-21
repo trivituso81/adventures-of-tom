@@ -312,7 +312,7 @@ SCENES.ch1Mudling=[
   {battle:'mudling',tut:'basics',count:3},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
     {call:()=>{ sfx.splat(); }},   // the mud melts into the path
-    {flag:'ch1-trail'},   // hollowtrail1: the nine wrappers are painted into the Hollow (stage 1 painting, HOLLOW_TRAIL), leading up into the clearing
+    {flag:'ch1-trail'},   // hollowtrail1: the nine wrappers lie along the Hollow (stage 1 painting, HOLLOW_TRAIL), the first three leading up into the clearing
     {talk:'Grace',lines:["Nine wrappers. There were twelve. So the one with the pan still has three."]},
     {talk:'Deedee',lines:["Then it has three of my muffins and my pan. Keep walking."]},
     {flag:'ch1-tuts'},
@@ -789,12 +789,15 @@ const STORY_PROPS={
 };
 
 // Grump Hollow muffin wrapper trail (hollowtrail1; Tom's reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx).
-// After the Mudling fight the nine wrappers lead the party through the Hollow in four stages, one painting each (data/hollow-trail.js):
+// fix-gatelayer-pics (Tom: "wny does each trail have 10 wrappers? none of this makes any sense"): the nine wrappers are ONE trail, three to the
+// Skeeter, two to the bench and the top left path, two to the log, two to the fishing spot (tools/sprite-bake/bake_hollow_trail.py WRAPPERS).
+// Grace picks up each leg's wrappers when its monsters are beaten, so stage n's painting shows only those still lying (9, 6, 4, 2).
+// After the Mudling fight the wrappers lead the party through the Hollow in four stages, one painting each (data/hollow-trail.js):
 // 1 up into the clearing (to the Skeeter Swarm), 2 the upper left corner (the Pond Grump by the soggy bench, the Bog Toad on the path above it),
 // 3 the Log Lump in the middle of the clearing, 4 east to Boppy's fishing spot (the boss trigger). A stage ends when all its monsters have been
 // beaten once in chapter 1 (a real win or a POP); the boss scene (ch1-spot) shows stage 4 whatever is left. After chapter 1: the base painting.
 const HOLLOW_TRAIL_STAGES=[['skeeter'],['grump','toad'],['log']];
-const HOLLOW_TRAIL_GOALS=['Goal: the wrappers go on, up to the top left corner by the old bench.','Goal: the wrappers turn back, to the log in the middle of the clearing.','Goal: the wrappers lead east, around the pond, to Boppy’s fishing spot.'];
+const HOLLOW_TRAIL_GOALS=['Goal: Grace picked up 3 wrappers. The other 6 go on, up to the top left corner by the old bench.','Goal: Grace picked up 2 more. The last 4 turn back, to the log in the middle of the clearing.','Goal: 2 wrappers left. They lead east, around the pond, to Boppy’s fishing spot.'];
 function hollowTrailStage() {
   if(typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||!flag('ch1-trail')) return 0;
   if(flag('ch1-spot')) return 4;

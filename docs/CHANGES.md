@@ -1,3 +1,14 @@
+## fix-gatelayer-pics (2026-11-20): the Grump Hollow wrapper trail is one trail of nine small wrappers, placed by script, no generator
+
+Card c-fix-gatelayer-pics. Tom, filed on t-gatelayer-pics a minute after he rejected all four Hollow trail paintings ("way way too big"): "complete and utter failure. stop wasting my time with your lazy bullshit that isnt throught through. why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of this makes any sense."
+
+- Fact (reproduced): the generated paintings had nine wrappers on EACH leg, 36 in all, though the story has nine ("Nine wrappers. There were twelve."), and each was about 80 plate px wide; Tom stands 84. Four tries of the generator missed the same way (the earlier stop-loss on t-hollowtrail1-pics).
+- Change: `tools/sprite-bake/bake_hollow_trail.py` now places the wrappers itself: ONE trail of nine (3 from the gate into the clearing, 2 to the bench and the top left path, 2 to the log, 2 to Boppy's fishing bench), painted liners from `tools/sprite-bake/src/hollow-wrapper-cutouts.png`, 34 plate px wide (on the phone about 20 px wide and 10 tall, narrower than Grace's head; 16 to 26 read as pebbles), toned to the ground with a contact shadow. Stage n shows the wrappers still lying (9, 6, 4, 2): Grace picks up each leg's wrappers when its monsters fall, and the goals say so ("Grace picked up 3 wrappers. The other 6 go on..."). The four paintings are installed now.
+- Decision: t-hollowtrail2-decide (place the trail in code?) taken as its recommended answer and retired; c-hollowtrail2 retired, its check is done here. Tom's play card: t-hollowtrail-play.
+- Purged: Art Library entries `area-hollow-trail1` to `4`, `tools/art-library/hollow-trail-prompts.js`, the four prompts, `hollow_trail_guide.py` and its four guide pictures; the generator line-up code in the bake.
+- The gate pictures of t-gatelayer-pics were never generated; that card goes back to Tom with the same ask.
+- Tests: `python3 tools/hollow_trail_test.py` all passed (nine wrappers, 9/6/4/2 per stage, size, spots, repo files match a fresh bake, stages, goals, fence). Looked at stages 1, 3 and 4 in portrait and landscape with the family next to the wrappers.
+
 ## itembannerart1 (2026-11-20): the item gained banner shows a painted picture for each item (18 Art Library sheets, emoji only until a picture is approved)
 
 Card c-itembannerart1, report r-20261120-142626-w74f ("missing art for all item banners", filed on the ch1AfterBoss cutscene, Hollow, landscape).

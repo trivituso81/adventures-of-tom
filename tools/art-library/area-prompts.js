@@ -178,7 +178,4 @@ la({ id: 'oakpark', num: 'Area 13', name: 'Old Oak Park', tw: 26, th: 22, ar: '1
   signs: 'Exit board: JEFFERSON PARK over the bottom path. Garden sign shaped like a carrot: GARDEN. Dog park sign on the fence: DOG PARK.',
   colors: 'Oak green #5F8A4A, bark brown #7A5A3A, sand #E3C99A, soil #6A4A3A, lawn green #B4C395.', excl: 'No dogs, no cars.' });
 
-// hollowtrail1: the four Grump Hollow muffin wrapper trail paintings (one per story stage).
-entries.push(...require('./hollow-trail-prompts.js').entries);
-
 module.exports = { entries };

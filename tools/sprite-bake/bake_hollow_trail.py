@@ -1,118 +1,110 @@
 #!/usr/bin/env python3
-"""Grump Hollow muffin wrapper trail: install one stage painting (hollowtrail1, 2026-11-20).
+"""Grump Hollow muffin wrapper trail: the four stage paintings (hollowtrail1; remade in fix-gatelayer-pics, Tom 2026-11-20).
 
-Run by the art-bake Action when Tom approves Art Library entry area-hollow-trail<n> (its `bake` field), or by hand:
-    python3 tools/sprite-bake/bake_hollow_trail.py <n>        (n = 1 to 4)
+Tom on the generated trail paintings: "why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of
+this makes any sense." The generator painted nine wrappers PER LEG (36 in all, though the story has nine: "Nine wrappers. There were twelve.")
+and each about as big as a child. So the generator is out: this script places the nine wrappers itself, at a fixed small size, and writes the
+four stage paintings straight onto the live plate. No Art Library entry, no cost.
 
-Input: tools/sprite-bake/src/hollow-trail<n>.png, the generator's copy of the Hollow painting with nine wrappers painted along leg n.
-The generator repaints the whole picture a little (shifted, scaled, a square canvas), so the walk map, exits and cutouts would not fit it.
-So the result is NOT used whole:
-  1. line it up with the live plate art/hollow.webp (ORB features and a RANSAC affine fit, OpenCV);
-  2. keep only what changed inside the strip along leg n (ROUTES below, in map tiles, the same legs the prompts describe);
-  3. paste that, feathered, onto the live plate.
-Everything outside the strip is the live plate pixel for pixel, so art/hollow-fg.webp and PLATE_BEHIND.hollow stay right for every stage.
-Writes art/hollow-trail<n>.webp, rewrites data/hollow-trail.js (every installed stage with a content tag, read by data/scenes.js),
-and a check picture tools/shots/hollow-trail<n>-check.png (left: the plate with the strip outlined, right: the result).
-HOLLOW_TRAIL_OUT=<dir> writes all three under <dir> instead (tests). Exit 1 when the picture cannot be lined up at all.
+The story: the thief dropped nine wrappers on its way through the Hollow, one trail: up from the gate into the clearing, to the old bench and
+the top left path, back to the middle of the clearing, then east to Boppy's fishing spot. Grace picks up the wrappers of each leg once its
+monsters are beaten, so stage n shows the wrappers still lying: stage 1 all nine, stage 2 six, stage 3 four, stage 4 two.
+
+    python3 tools/sprite-bake/bake_hollow_trail.py          (writes art/hollow-trail1..4.webp, data/hollow-trail.js,
+                                                             tools/shots/hollow-trail-check.png: the four stages plus a close up of the gate)
+HOLLOW_TRAIL_OUT=<dir> writes under <dir> instead (tests).
+Wrapper pictures: tools/sprite-bake/src/hollow-wrapper-cutouts.png (ten painted liners cut from the first generated paintings).
 """
-import hashlib, os, re, sys
-import numpy as np
-import cv2
-from PIL import Image
+import hashlib, os, random, sys
+from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PW, PH, TILE = 1536, 1408, 64
-# Each leg as a line through tile centres (x, y). Keep in step with data/scenes.js HOLLOW_TRAIL_STAGES and the prompts hollow-trail<n>.txt.
-ROUTES = {
-    1: [(6.5, 20.0), (6.5, 16.5), (7.8, 14.6), (9.5, 13.2)],               # the gate, up the stone path, into the clearing (Skeeter Swarm 9,13)
-    2: [(9.5, 13.5), (6.5, 12.3), (4.5, 10.8), (6.2, 9.4), (7.0, 7.2)],    # clearing to the soggy bench (Grump 4,11), up the top left path (Toad 7,8)
-    3: [(6.8, 7.6), (8.4, 9.6), (10.0, 10.9), (11.5, 11.5)],               # top left back down to the middle of the clearing (Log 11,11)
-    4: [(11.2, 11.5), (13.0, 11.6), (15.0, 11.3), (16.6, 11.2), (18.6, 10.8)],   # east along the shore path to Boppy's fishing spot (boss trigger x 14+)
-}
-REACH = 2.0 * TILE   # strip half width: generous, the generator never puts things exactly where asked
+PW, PH, TILE = 1536, 1408, 64          # the plate: 64 art px per map tile (the game draws a tile at T=32)
+WIDE = 34                              # wrapper width in plate px (about half a tile): on the phone about 20 px wide and 10 tall, narrower than
+                                       # Grace's head; Tom stands 84 plate px tall. The rejected generated ones were about 80 (as big as a child);
+                                       # 16 to 26 read as pebbles on the phone (the painting is full of pale stones that size)
+# The nine wrappers, in trail order: (leg, x, y) in map tiles, each on open ground. Leg n ends at stage n's monsters
+# (data/scenes.js HOLLOW_TRAIL_STAGES; MONSTER_SPOTS in data/monsters.js).
+WRAPPERS = [
+    (1, 6.45, 19.30), (1, 6.70, 17.55), (1, 7.70, 13.35),   # gate, under the exit board, into the clearing (Skeeter Swarm 9,13)
+    (2, 5.85, 11.95), (2, 6.55, 8.95),                     # to the soggy bench (Pond Grump 4,11), up the top left path (Bog Toad 7,8)
+    (3, 8.55, 9.85), (3, 9.75, 10.75),                      # back down to the middle of the clearing (Log Lump 11,11)
+    (4, 13.40, 11.85), (4, 16.40, 11.45),                   # east along the shore path to Boppy's fishing spot (the boss trigger)
+]
+assert len(WRAPPERS) == 9   # the story's nine
+STAGES = (1, 2, 3, 4)
 
 def out_dir():
     return os.environ.get('HOLLOW_TRAIL_OUT') or ROOT
 
-def corridor(n):
-    m = np.zeros((PH, PW), np.uint8)
-    pts = np.array([((x + .0) * TILE, (y + .0) * TILE) for x, y in ROUTES[n]], np.int32)
-    cv2.polylines(m, [pts], False, 1, thickness=int(REACH * 2))
-    for p in pts: cv2.circle(m, tuple(int(v) for v in p), int(REACH), 1, -1)
-    return m > 0
+def cutouts():
+    a = Image.open(os.path.join(ROOT, 'tools', 'sprite-bake', 'src', 'hollow-wrapper-cutouts.png')).convert('RGBA')
+    al = a.split()[3].point(lambda v: 255 if v > 0 else 0)
+    cols = [x for x in range(a.width) if al.crop((x, 0, x + 1, a.height)).getbbox()]
+    runs, s = [], cols[0]
+    for i in range(1, len(cols) + 1):
+        if i == len(cols) or cols[i] != cols[i - 1] + 1:
+            c = a.crop((s, 0, cols[i - 1] + 1, a.height)); runs.append(c.crop(c.getbbox()))
+            if i < len(cols): s = cols[i]
+    return runs
 
-def line_up(src, base):
-    """Affine fit of src onto base. Returns (warped src at plate size, inliers, scale, note)."""
-    g1 = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY); g2 = cv2.cvtColor(base, cv2.COLOR_RGB2GRAY)
-    orb = cv2.ORB_create(6000)
-    k1, d1 = orb.detectAndCompute(g1, None); k2, d2 = orb.detectAndCompute(g2, None)
-    if d1 is None or d2 is None: return None, 0, 0, 'no features'
-    pairs = cv2.BFMatcher(cv2.NORM_HAMMING).knnMatch(d1, d2, k=2)
-    good = [a for a, b in (p for p in pairs if len(p) == 2) if a.distance < .75 * b.distance]
-    if len(good) < 12: return None, len(good), 0, 'too few matches'
-    a = np.float32([k1[m.queryIdx].pt for m in good]); b = np.float32([k2[m.trainIdx].pt for m in good])
-    # full affine: a 12:11 painting squeezed onto a square canvas is scaled differently across and down
-    M, keep = cv2.estimateAffine2D(a, b, method=cv2.RANSAC, ransacReprojThreshold=4.0, maxIters=5000)
-    if M is None: return None, 0, 0, 'no fit'
-    inl = int(keep.sum()); sx, sy = float(np.hypot(M[0, 0], M[1, 0])), float(np.hypot(M[0, 1], M[1, 1])); sc = (sx + sy) / 2
-    if not (.5 < sx < 2 and .5 < sy < 2 and abs(M[0, 1] * M[1, 0]) < .02 * sx * sy): return None, inl, sc, 'the fit is bent'
-    warped = cv2.warpAffine(src, M, (PW, PH), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE)
-    return warped, inl, sc, 'ok'
+def wrappers_for(stage):
+    return [(x, y) for leg, x, y in WRAPPERS if leg >= stage]
 
-def paste_mask(warped, base, strip):
-    """What changed inside the strip, cleaned and feathered (0..1). Falls back to the whole strip when nearly all of it changed."""
-    a = cv2.GaussianBlur(warped.astype(np.float32), (0, 0), 2.5); b = cv2.GaussianBlur(base.astype(np.float32), (0, 0), 2.5)
-    d = np.sqrt(((a - b) ** 2).sum(2))
-    m = ((d > 38) & strip).astype(np.uint8)
-    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-    m = cv2.dilate(m, np.ones((15, 15), np.uint8))
-    n, lab, st, _ = cv2.connectedComponentsWithStats(m)
-    keep = np.zeros_like(m)
-    for i in range(1, n):
-        if st[i, 4] >= 400: keep[lab == i] = 1
-    keep &= strip.astype(np.uint8)
-    share = keep.sum() / max(1, strip.sum())
-    if share > .6:   # the generator repainted the whole strip: take the strip
-        keep = strip.astype(np.uint8); sigma = 14
-    else:
-        sigma = 5
-    al = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), sigma)
-    al = np.minimum(1, al * 1.6) * strip   # never reach past the strip
-    return al, share
+def place(im, x, y, cut, k):
+    """Paste one small wrapper with its contact shadow, toned to the light of the ground it lies on."""
+    rnd = random.Random(k * 7919 + 13)
+    c = cut.transpose(Image.FLIP_LEFT_RIGHT) if rnd.random() < .5 else cut
+    w = int(round(WIDE * rnd.uniform(.92, 1.08))); h = max(1, int(round(c.height * w / c.width * .9)))   # a little flattened: seen from above
+    c = c.resize((w, h), Image.LANCZOS).rotate(rnd.uniform(-14, 14), resample=Image.BICUBIC, expand=True)
+    cx, cy = x * TILE, y * TILE
+    ground = im.crop((int(cx - 12), int(cy - 6), int(cx + 12), int(cy + 8))).convert('L')
+    from PIL import ImageStat; lum = ImageStat.Stat(ground).mean[0]
+    c = ImageEnhance.Brightness(c).enhance(max(.9, min(1.0, .65 + lum / 300)))   # shaded ground darkens the cream a little
+    c = c.filter(ImageFilter.UnsharpMask(radius=1, percent=60, threshold=2))   # crisp pleats so it reads at phone size
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(sh)
+    d.ellipse([cx - w * .5, cy - h * .1, cx + w * .58, cy + h * .42], fill=(35, 22, 8, 150))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(1.6)))
+    im.alpha_composite(c, (int(round(cx - c.width / 2)), int(round(cy - c.height * .62))))
+
+def bake(base, cuts, stage):
+    im = base.convert('RGBA').copy()
+    for k, (leg, x, y) in enumerate(WRAPPERS):
+        if leg >= stage: place(im, x, y, cuts[(k * 3) % len(cuts)], k)
+    return im.convert('RGB')
 
 def write_index(od):
     found = {}
-    for n in range(1, 5):
+    for n in STAGES:
         f = os.path.join(od, 'art', 'hollow-trail%d.webp' % n)
         if os.path.exists(f): found[n] = 'art/hollow-trail%d.webp?v=ht%s' % (n, hashlib.md5(open(f, 'rb').read()).hexdigest()[:8])
-    body = ('// Grump Hollow muffin wrapper trail paintings (hollowtrail1). Written by tools/sprite-bake/bake_hollow_trail.py when Tom approves an\n'
-            '// Art Library entry area-hollow-trail<n>; never by hand. Stage number -> painting address. A stage with no painting shows the base plate.\n'
+    body = ('// Grump Hollow muffin wrapper trail paintings (hollowtrail1). Written by tools/sprite-bake/bake_hollow_trail.py; never by hand.\n'
+            '// Stage number -> painting address. Stage n shows the wrappers still on the ground (nine in all, picked up leg by leg).\n'
             'const HOLLOW_TRAIL={' + ','.join("%d:'%s'" % (n, s) for n, s in sorted(found.items())) + '};\n')
     p = os.path.join(od, 'data', 'hollow-trail.js'); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(body)
     return found
 
+def check_sheet(od, outs):
+    """The four stages side by side, and a close up of the gate and the first wrappers (the game screenshots show them next to the family)."""
+    W, H = PW // 2, PH // 2; sheet = Image.new('RGB', (W * 2, H * 2 + 420), (24, 24, 24))
+    for i, o in enumerate(outs): sheet.paste(o.resize((W, H), Image.LANCZOS), ((i % 2) * W, (i // 2) * H))
+    crop = outs[0].crop((5 * TILE, 12 * TILE, 11 * TILE, 20 * TILE))   # the gate and the first three wrappers
+    z = 420 / crop.height; crop = crop.resize((int(crop.width * z), 420), Image.LANCZOS)
+    sheet.paste(crop, (0, H * 2))
+    p = os.path.join(od, 'tools', 'shots', 'hollow-trail-check.png'); os.makedirs(os.path.dirname(p), exist_ok=True)
+    sheet.save(p)
+    return p
+
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ('1', '2', '3', '4'): print(__doc__); return 2
-    n = int(sys.argv[1]); od = out_dir()
-    srcp = os.environ.get('HOLLOW_TRAIL_SRC') or os.path.join(ROOT, 'tools', 'sprite-bake', 'src', 'hollow-trail%d.png' % n)
-    src = np.array(Image.open(srcp).convert('RGB')); base = np.array(Image.open(os.path.join(ROOT, 'art', 'hollow.webp')).convert('RGB'))
-    warped, inl, sc, note = line_up(src, base)
-    if warped is None or inl < 25:
-        print('bake_hollow_trail: stage %d could not be lined up with the plate (%s, %d matches): nothing installed' % (n, note, inl)); return 1
-    strip = corridor(n)
-    al, share = paste_mask(warped, base, strip)
-    out = (base * (1 - al[..., None]) + warped * al[..., None]).round().clip(0, 255).astype(np.uint8)
+    od = out_dir(); base = Image.open(os.path.join(ROOT, 'art', 'hollow.webp')).convert('RGB'); cuts = cutouts(); outs = []
     os.makedirs(os.path.join(od, 'art'), exist_ok=True)
-    Image.fromarray(out).save(os.path.join(od, 'art', 'hollow-trail%d.webp' % n), quality=88, method=6)
-    found = write_index(od)
-    view = base.copy(); cs, _ = cv2.findContours(strip.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(view, cs, -1, (255, 0, 0), 3)
-    chk = np.concatenate([view, out], 1)
-    sh = os.path.join(od, 'tools', 'shots'); os.makedirs(sh, exist_ok=True)
-    Image.fromarray(chk).resize((PW, PH // 2)).save(os.path.join(sh, 'hollow-trail%d-check.png' % n))
-    print('bake_hollow_trail: stage %d installed: %d matching points, scale %.3f, %.0f%% of the strip changed; stages now %s'
-          % (n, inl, sc, share * 100, sorted(found)))
+    for n in STAGES:
+        o = bake(base, cuts, n); outs.append(o)
+        o.save(os.path.join(od, 'art', 'hollow-trail%d.webp' % n), quality=88, method=6)
+    found = write_index(od); chk = check_sheet(od, outs)
+    print('bake_hollow_trail: stages %s written, wrappers per stage %s, check %s'
+          % (sorted(found), [len(wrappers_for(n)) for n in STAGES], os.path.relpath(chk, od)))
     return 0
 
 if __name__ == '__main__':
