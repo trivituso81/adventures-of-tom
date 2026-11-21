@@ -27090,6 +27090,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Night shift: queued cards start by themselves overnight is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T20:32:31.165Z"
     }
    ],
    "prompt": {
@@ -27102,7 +27107,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-nightclean in data/board.json with its history. Your first push is the commit board: start c-nightclean. Tom asked for the cleanup every night. Build section 7 exactly as written, steps 1 to 6: tools/night/clean_report.py, tools/night/rules_check.py with tools/night/rules.json taken from main today and called from tools/smoke.py, the 2 day archive in tools/board_archive.py with its two tests, and the standing card c-night-clean (nightly: true, tag nightclean, Sonnet 5.5 medium, theme Project Ops) whose prompt holds the four bucket rotation word for word with the \"Never touched\" row of section 4. Then do tonight's pass yourself as bucket A (at most 40 files, each with zero references by grep, none from the \"Never touched\" row), run smoke, and list what left in docs/CHANGES.md. Before deleting anything under tools/ or art/, show in docs/CHANGES.md the grep that proved it unused. Run python3 tools/night/clean_test.py, the board archive tests, python3 tools/board_check.py and python3 tools/smoke.py. Push build nightclean as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightclean",
-   "after": "nothing for Tom: c-nightqa"
+   "after": "nothing for Tom: c-nightqa",
+   "start": true
   },
   {
    "id": "c-nightqa",
