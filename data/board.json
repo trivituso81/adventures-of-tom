@@ -13114,7 +13114,7 @@
    "id": "c-idea-skippingcut",
    "tag": "idea-skippingcut",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "SKIP passes pictures that only show something",
    "next": "Shipped as idea-skippingcut. Waits only on your phone check (card t-skippingcutplay). Nothing else to build unless you want more pictures marked skippable: say which.",
@@ -13178,6 +13178,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as idea-skippingcut: a new scene step {interstitial:...} finishes at once under SKIP. Marked: Grace's list, Boppy's gold teeth (twice), the phone on the cab seat, the squirrels' corkboard, TNB's acorn, the ch9 lock close-up, the ch13 coins melting the amber, the ch19 pedestal. Item finds, party joins and leaves, item banners and puzzle close-ups are not marked and play in full. No spoken line changed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-skippingcut: SKIP now passes close-up pictures that only show something (Grace's list and similar); item finds and party joins and leaves still play in full"
     }
    ],
    "prompt": {
@@ -13189,7 +13193,8 @@
     "effort": "medium (one behaviour in SKIP, built on the finished skipchain1 change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom's words (card history): \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\".\n\nWhat to build: when the player presses SKIP in a cut scene, skip its interstitials (for example Grace's list). Party members joining and leaving always play in full. Start from the done card c-skipchain1 (docs/CHANGES.md, 'skipchain1'), which made SKIP skip all of chapter 1 scene 1; extend that behaviour to the other cut scenes. Find the skip code, mark the interstitial beats in data/scenes.js using the steps documented at SCENE_OPS in engine/story.js, and leave every spoken line text unchanged (CLAUDE.md rule 5).\n\nTests: run python3 tools/smoke.py, look at the screenshots in tools/shots/ in portrait and landscape, and add a docs/CHANGES.md entry. Follow the build tag and tag bump steps in CLAUDE.md. Write the result and the next step onto this card, then push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-skippingcutplay"
+   "after": "t-skippingcutplay",
+   "done": "2026-11-20"
   },
   {
    "id": "c-projclean",
@@ -18703,6 +18708,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukErmQedwFbjJq3WxTZ",
+   "title": "SKIP passes pictures that only show something",
+   "first": "2026-11-20T16:20:59-08:00",
+   "last": "2026-11-20T16:38:43-08:00",
+   "tags": [
+    "idea-skippingcut"
+   ],
+   "cards": [
+    "c-idea-skippingcut"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFoxXD931LCAqGvJbU",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
    "first": "2026-11-20T16:36:43-08:00",
@@ -18868,16 +18885,6 @@
    ],
    "cards": [
     "c-hollowtrail1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukErmQedwFbjJq3WxTZ",
-   "title": "Skip interstitials in cut scenes; never skip joins/leaves",
-   "first": "2026-11-20T16:20:59-08:00",
-   "last": "2026-11-20T16:20:59-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-skippingcut"
    ]
   },
   {
@@ -20664,8 +20671,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "cb732d870bb7e325519864dfae0b2e3c418fa486",
- "synced_at": "2026-11-21T00:37:54+00:00",
+ "synced": "f9a8bf1125f04f9da16bcc6b0f45d767c07d189a",
+ "synced_at": "2026-11-21T00:39:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
