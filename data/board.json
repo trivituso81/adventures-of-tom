@@ -21949,7 +21949,7 @@
    "col": "done",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
-   "next": "Retired: checked on the new battle (stage 15 shipped as b3s15), none of the five problems exist there. Nothing to fix.",
+   "next": "Retired: checked on the new battle screen (stage 15, b3s15); none of BUG-05, 06, 09, 10 or COH-09 happens there.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -22029,6 +22029,10 @@
     {
      "d": "2026-11-21",
      "t": "Checked BUG-05, 06, 09, 10 and COH-09 on the Battle 3 chapter 1 fights (portrait and landscape, tools/ch1_b3_test.py frames). All gone: BAG reads \"Not yet\" with no count, enemy status tags stack 13 px apart, the victory card has no scrollbar and LEVEL UP! sits inside it, no Raspberry, Defend, Inspect or Tombo text exists in Battle 3, and no Inspect hint names Flashcard Flurry or Red Pen. Retired, no code change."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired, nothing to fix: ran tools/ch1_b3_test.py (portrait and landscape, no failures) and looked at the victory card shots. New battle: BAG is greyed out (no 8 ITEMS count, BUG-05); at most 3 status icons per party card, no stacked pills (BUG-06); the victory card has no scrollbar and nothing past its border (BUG-09); no RASPBERRY arrow, DEFEND tap text or Inspect hint (BUG-10); no Inspect text naming Flashcard Flurry or Red Pen (COH-09). The old screen only plays chapter 1 if Tom picks OLD in ADMIN > Battle system > Story battles; it is being replaced, not fixed."
     }
    ],
    "chat": {
