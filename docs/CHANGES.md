@@ -1,3 +1,15 @@
+## costsduo1 (2026-11-21): AI Costs has a folded and an unfolded iPhone Duo layout
+
+Card c-costsduo1, from Tom's answer "Build it as drawn" on t-costsduo-go. costs.html now picks one of three layouts by width and re-picks when the width changes (unfolding the phone), so no reload is needed. Both parts of the plan (a: pocket, b: open book) went out in this one build.
+
+- Pocket (under 900 px: folded 382 and 466, open upright 669): tabs at the bottom, a filter pill that opens a sheet (Dates, Show; on Ledger also Service, Kind, Subtotal by, tick boxes, CSV), the first Overview screen shows the total, four tiles and the next renewal at 382 x 580, two-line charges, a charge opens in a sheet with its reference, services open as a screen with a back arrow, Totals has a By month / By service list. A finger replaces hover: tap a month bar, the share bar or the running total for the split.
+- Open book (900 to 1,099: open sideways 951): a rail of the four screens, the list on the left half and what was tapped on the right half (a service on Overview and Services; subtotals as tap-to-filter bars plus the charge details on Ledger; the month grid, kind and billed-through on Totals).
+- Desktop (1,100 and up) is unchanged: `tools/costs_test.py` passes. The viewport is now `width=device-width`.
+- Call made: the two parts shipped as one build instead of costsduo1a then costsduo1, because the shared pieces (filter sheet, details, tap in place of hover) are the same code.
+- Test: `tools/costs_duo_test.py` (382 x 580, 466 x 657, 669 x 869, 951 x 648; every screen; no sideways scroll, totals equal the file, no text under 12 px, no tap target under 36 px, tabs, rail, taps, resize 382 to 951 without a reload). Every picture looked at.
+- Purged: `docs/costs-duo-mock.html` (the drawing) and its mentions in docs/COSTS.md and claude/costs-duo-plan.md.
+- Not looked at: a real Duo (a desktop browser with touch emulation was used).
+
 ## 2026-11-21 (2): Art Library bake, prop-gate-row-amyhouse-open (`artbake1553`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

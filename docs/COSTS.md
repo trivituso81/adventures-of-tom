@@ -49,6 +49,14 @@ The Dates and Show controls at the top apply to every screen. "Game tools only" 
 | 3 | Tom's notes from card t-costs1look |
 | 4 | Test with stand-in servers. Never run a paid call from a session |
 
-## iPhone Duo layouts (planned, card c-costsduo1)
+## iPhone Duo layouts (built as costsduo1, 2026-11-21)
 
-The folded and unfolded layouts are designed, not built: `claude/costs-duo-plan.md` (assessment, design, build order, tests) and the drawing `docs/costs-duo-mock.html`.
+One page, three layouts chosen by width (`layout()` in costs.html, re-read on every resize, so unfolding the phone switches it without a reload; `html[data-lay]` and `body[data-lay]` hold it):
+
+| Width | Layout | Duo view |
+|---|---|---|
+| under 900 px | Pocket: one column, four tabs at the bottom, a filter pill (Dates, Show, and on Ledger Service, Kind, Subtotal by, tick boxes), charge details in a sheet from the bottom | Folded (382, 466) and open upright (669) |
+| 900 to 1,099 px | Open book: a rail of the four screens, the list on the left half, what was tapped on the right half (a service, or the subtotals and the charge) | Open sideways (951) |
+| 1,100 px and up | Desktop, as built in costs1 | Desktop browser |
+
+A finger replaces hover: tap a month bar, the share bar or the running total for the split. Same `#/` addresses everywhere. Plan and rules: `claude/costs-duo-plan.md`. Test: `python3 tools/costs_duo_test.py` (four sizes, every screen: no sideways scroll, totals equal the file, no text under 12 px, no tap target under 36 px, first Overview screen, taps, tabs, rail, resize). The desktop test `tools/costs_test.py` passes unchanged.

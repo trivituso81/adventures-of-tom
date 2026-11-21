@@ -23957,9 +23957,14 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built both layouts (pocket and open book) in costs.html, test tools/costs_duo_test.py passes, desktop test unchanged; shipped as costsduo1; drawing deleted."
     }
    ],
-   "started_at": "2026-11-21T16:46:07+00:00"
+   "started_at": "2026-11-21T16:46:07+00:00",
+   "after": "t-costsduo-try"
   },
   {
    "id": "c-anim-tom-loungepass-lf2z",
@@ -24205,6 +24210,25 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-squeeze-qxim in data/board.json with its history. Your first push is the commit board: start c-anim-grace-squeeze-qxim.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) This is an attack move, so she needs to hold the squishy out and basically essentially hold it with both hands and kind of push the monster with it and squeeze it while she does so\n\nThe animation: Grace, Soup-Dumpling Squeeze (move soup_dumpling_squeeze in data/b3-kit-grace.js). Its video is clip grace_squeeze (data/clips/grace-squeeze.js, art/clips/grace-squeeze.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-squeeze-qxim. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-costsduo-try",
+   "title": "Try AI Costs on your Duo, folded and unfolded",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/costs.html on your Duo. Folded: check the first screen shows the total, four tiles and the next renewal, then tap Ledger and a charge (a sheet shows its reference) and the pill at the top (Dates and Show). Unfold it and turn it sideways: check the list is on the left half, a tapped service or charge opens on the right half, and Subtotal by on Ledger shows only the bar you tap. Tap All good, or Something is wrong and say what looked off.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-costsduo1 (build costsduo1)."
+    }
+   ]
   }
  ],
  "sessions": [

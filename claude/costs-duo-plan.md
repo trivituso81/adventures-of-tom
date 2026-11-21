@@ -1,8 +1,8 @@
-# AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21, PLAN, not built)
+# AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21; BUILT as costsduo1, both parts in one push)
 
 Tom (2026-11-21): "Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views, optimizing for the screen area for each of these cases to ensure that most information, the most important information, is surfaced and that findability and navigation is simple and easy".
 
-The page: costs.html (docs/COSTS.md). The design drawing, at the Duo's real sizes, is docs/costs-duo-mock.html (https://trivituso81.github.io/adventures-of-tom/docs/costs-duo-mock.html). On the Duo it fills the screen: folded shows the pocket frames, unfolded sideways the two-pane frames, and the Overview and Ledger tabs switch. A desktop window shows all four frames. Its numbers are typed in.
+The page: costs.html (docs/COSTS.md). The design drawing (docs/costs-duo-mock.html, typed numbers) was deleted in costsduo1 once the real page matched it; git history keeps it.
 
 ## 1. Assessment: what the desktop page does on the Duo today (measured on build costs1icon)
 
@@ -91,7 +91,7 @@ This is the layout that answers "total and subtotal any way I want" best on the 
 | Part | Build name | What |
 |---|---|---|
 | a | costsduo1a | The viewport, the three width tiers, the pocket layout for all four screens and the service screen, the filter sheet, tap in place of hover, the details sheet. Leaves the card In progress |
-| b | costsduo1 | The open book layout for all four screens. Delete docs/costs-duo-mock.html and its mentions when the real page matches it (purge rule) |
+| b | costsduo1 | The open book layout for all four screens. The drawing docs/costs-duo-mock.html was deleted when the real page matched it (purge rule) |
 
 - Keep one page and one script: the layouts are CSS by width plus small render switches (`layout()` returning `pocket`, `book` or `desk`, re-read on resize, because unfolding the phone changes the width while the page is open).
 - The desktop layout must come out the same: `python3 tools/costs_test.py` passes unchanged at 1,440 and 1,280 wide.
