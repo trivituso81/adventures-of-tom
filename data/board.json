@@ -26651,14 +26651,14 @@
    "title": "Battle Guide: show where each new video is in the list",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "guidestatus1",
    "next": "Being built in this conversation: five stage labels on the Animations list (Requested, In line, Making, Checking, Ready to review) in place of VIDEO or NO VIDEO YET while a new video is on its way.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
     "opening": "\"we need some new statuses for these videos\""
    },
    "prompt": {
@@ -26674,6 +26674,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (in chat, 11:17): \"we need some new statuses for these videos that replace No Video yet or Video if a new video is being generated. use up to 5 (fewer is fine) new status names based only on the information you have available from the image service while its processing. basically when im scanning the animations list i need better transparency to where a new video is in the creation process\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
@@ -26804,6 +26808,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T11:26:19-08:00",
+   "tags": [
+    "guidegen1a",
+    "guidegen1b",
+    "guide",
+    "guidegen1"
+   ],
+   "cards": [
+    "c-guidegen",
+    "c-guidestatus"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "first": "2026-11-21T10:57:09-08:00",
@@ -26852,21 +26872,6 @@
    ],
    "cards": [
     "c-buildpill1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
-   "title": "Battle Guide: make and remake battle videos from the page",
-   "first": "2026-11-21T09:33:57-08:00",
-   "last": "2026-11-21T11:07:29-08:00",
-   "tags": [
-    "guidegen1a",
-    "guidegen1b",
-    "guide",
-    "guidegen1"
-   ],
-   "cards": [
-    "c-guidegen"
    ]
   },
   {
@@ -30357,8 +30362,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c587158c9b81e3ae356d73d0fe2a626c66fca6b0",
- "synced_at": "2026-11-21T19:26:13+00:00",
+ "synced": "bc79c6d2446df69398467353db29abecd7f541aa",
+ "synced_at": "2026-11-21T19:26:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
