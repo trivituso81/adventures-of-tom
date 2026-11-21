@@ -20496,7 +20496,7 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
@@ -20516,9 +20516,12 @@
     {
      "d": "2026-11-21",
      "t": "Fix fix-ch1flight shipped: the goodbyes are gone from the chapter 1 cab scene and the phone picture stays up under TNB's text."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Check chapter 1 ends in the flight is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-voiceboard",
@@ -21715,7 +21718,7 @@
    "id": "c-fix-ch1flight",
    "tag": "fix-ch1flight",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -21737,7 +21740,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDnxgPFMumUZDtFZgi",
+    "url": "https://claude.ai/code/session_01RXeukDnxgPFMumUZDtFZgi",
     "opening": "Something is wrong on t-ch1flight"
    },
    "history": [
@@ -21763,6 +21766,14 @@
     {
      "d": "2026-11-21",
      "t": "Fixed in build fix-ch1flight."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-ch1flight: chapter 1's cab scene goes straight from TNB's text to the flight, with the phone picture up while TNB's text is read"
     }
    ],
    "prompt": {
@@ -21776,7 +21787,8 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "started_at": "2026-11-21T03:23:33+00:00"
+   "started_at": "2026-11-21T03:23:33+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-gatelayer-pics-2",
@@ -21955,6 +21967,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDnxgPFMumUZDtFZgi",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "first": "2026-11-21T03:37:36Z",
+   "last": "2026-11-21T03:37:36Z",
+   "tags": [
+    "fix-ch1flight"
+   ],
+   "cards": [
+    "c-fix-ch1flight"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
    "title": "Quest log says Go to it's Sunday after the trip home",
@@ -25030,8 +25054,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "81580bcd94e383109737fb1566cdc3bfd25aea09",
- "synced_at": "2026-11-21T03:36:30+00:00",
+ "synced": "af03f19ac3d95fe8074ae2f0c20d8c5c9ea1809c",
+ "synced_at": "2026-11-21T03:37:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
