@@ -19977,6 +19977,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 picture (about $0.05).",
      "at": "2026-11-21T16:50:17.327Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: 1 were already waiting for your review. Spent about $0.00."
     }
    ],
    "gen": {
@@ -19988,10 +19992,16 @@
     "est": 0.05,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T16:50:28Z",
+     "state": "done",
+     "at": "2026-11-21T16:50:30Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44926730930",
-     "n": 0
+     "made": [],
+     "already": [
+      "prop-item-solo-claytaco"
+     ],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.0
     }
    },
    "chat": {
