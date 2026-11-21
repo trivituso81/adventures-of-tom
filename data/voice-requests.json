@@ -1,4 +1,22 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "tts",
+   "line": "d|deedee|Three.",
+   "voice_id": "nh4f8rul91SCFqbXpyM0",
+   "fallback_ids": [],
+   "text": "[warm Long Island accent, very stern] Three!",
+   "model": "eleven_v4",
+   "stability": 0.5,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[warm Long Island accent, very stern] Three!",
+   "at": 1795229623113,
+   "rid": "r1795229623113-zup"
+  }
+ ],
  "cancel": []
 }
