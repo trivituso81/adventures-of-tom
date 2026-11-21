@@ -173,7 +173,7 @@
   }
  },
  "tom-dodge": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -181,7 +181,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-tom-dodge-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-tom-dodge-v2.txt",
   "frame": "art/clips/start/tom-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -195,7 +195,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "tom-ko": {
   "rev": 1,
@@ -296,7 +297,7 @@
   }
  },
  "tom-loungepass": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -304,7 +305,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-tom-loungepass-v2.txt",
+  "prompt_file": "tools/art-library/prompts/wan-tom-loungepass-v3.txt",
   "frame": "art/clips/start/tom-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -319,7 +320,7 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "pad": 0.9
+  "pad": 0.8
  },
  "tom-blockade": {
   "rev": 2,
