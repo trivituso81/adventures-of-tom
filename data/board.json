@@ -19456,7 +19456,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    }
   },
@@ -19929,7 +19929,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    },
    "chat": {
@@ -22973,11 +22973,25 @@
      "d": "2026-11-21",
      "t": "Reopened by c-boppy-bigfish: 'All good' was pressed but no new picture exists in the repo (art/raw/characters/boppy-em-unimpressed-v1.png still reads Big Fish; entry status draft, no gen run, nothing on branch artgen). Needs Generate, then Approve.",
      "at": "2026-11-21T14:58:07.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 picture (about $0.06).",
+     "at": "2026-11-21T15:28:58.143Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukH1cGognjyXNgAnwyG",
     "opening": "unknown"
+   },
+   "gen": {
+    "want": true,
+    "at": "2026-11-21T15:28:58Z",
+    "ids": [
+     "boppy-em-unimpressed"
+    ],
+    "est": 0.06,
+    "mode": "review"
    }
   },
   {
