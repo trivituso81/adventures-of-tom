@@ -28805,8 +28805,8 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF43ZogLhQidrKWaTM",
-    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md\""
+    "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2)\""
    },
    "history": [
     {
@@ -28829,6 +28829,10 @@
     {
      "d": "2026-11-21",
      "t": "Started in a new conversation. t-wanch2-watch: Tom said all good, no note, so nothing to apply before the three remakes."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Two conversations started this card (session_01RXeukGKwJycJ9se7H7h9VD at 13:01, session_01RXeukF43ZogLhQidrKWaTM at 13:03). The first one keeps it, so no video is paid for twice: session_01RXeukGKwJycJ9se7H7h9VD runs the three remakes (jobs deedee-wetfloor r4, rose-giddyup r4, skeeter-bite r1). The other conversation should stop without dispatching wan-gen or editing wangen-jobs.json."
     }
    ],
    "prompt": {
