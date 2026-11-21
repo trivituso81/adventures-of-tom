@@ -15,7 +15,7 @@
 // page, builds.html (BUILDLOG.page: no close button, always open; this phone's build comes from localStorage 'aot-build', saved by the game at boot).
 
 const BUILDLOG={open:false,fresh:null,el:null,q:'',days:null,tries:{},sheet:null,board:null,recentDays:7,
-  view:'recent',fsheet:false,f:{theme:[],status:[],house:false},gh:'idle',pushed:null,fail:null,boardState:'idle',checkedAt:0,gopen:{},gmore:{},memo:null,page:false,arch:null,archState:'idle',amonths:{},adays:{}};
+  view:'recent',fsheet:false,f:{theme:[],status:[],house:false},gh:'idle',pushed:null,fail:null,boardState:'idle',checkedAt:0,busy:0,updatedAt:0,gopen:{},gmore:{},memo:null,page:false,arch:null,archState:'idle',amonths:{},adays:{}};
 const BUILD_REPO='trivituso81/adventures-of-tom', BUILD_THEMES=['Story and Dialogue','Tools','Voice Clips','Game Shell','Battle System','Battle Animations','Areas','Characters','Project Ops','No theme'];
 const BUILD_ASKS=['play','pictures','animations','voice','script'];   // the Tom cards that are a test or a look
 
@@ -358,18 +358,39 @@ function buildGh(path,raw) {
   return fetch('https://api.github.com/repos/'+BUILD_REPO+path,{cache:'no-store',headers:h}).then(r=>{ if(!r.ok) throw new Error('GitHub '+r.status); return raw?r.text():r.json(); });
 }
 function buildParseList(t) { const rows=[]; for(const line of String(t).split('\n')){ const s=line.trim().replace(/,$/,''); if(s[0]==='{') try{ rows.push(JSON.parse(s)); }catch(e){} } return rows; }
-function buildRefresh() { buildInvalidate(); if(!BUILDLOG.open) return; buildRenderStatus(); buildRenderList(); if(BUILDLOG.sheet) buildSheetRender(); }
+function buildRefresh() { buildInvalidate(); if(!BUILDLOG.open) return; buildRenderStatus(); buildRenderList(); if(BUILDLOG.sheet) buildSheetRender(); buildRenderUpd(); }
+// refresh1: the Refresh button in the header (every tab) and "Updated 4:31 PM" beside it; while a check runs the button reads Checking.
+function buildRenderUpd() {
+  const el=BUILDLOG.el; if(!el) return;
+  const b=el.querySelector('.bl-refresh'), u=el.querySelector('.bl-upd');
+  if(b) { b.disabled=BUILDLOG.busy>0; b.innerHTML=BUILDLOG.busy>0?'Checking&hellip;':'&#8635; Refresh'; }
+  if(u) u.textContent=BUILDLOG.updatedAt?'Updated '+buildTime(new Date(BUILDLOG.updatedAt)):'';
+}
 // force: from the status strip or the first open; otherwise reads at most once in 20 seconds (GitHub allows 60 reads an hour without a token).
 function buildCheck(force) {
   if(!force&&Date.now()-BUILDLOG.checkedAt<20000) return;
   BUILDLOG.checkedAt=Date.now(); BUILDLOG.gh='busy'; if(!BUILDLOG.board) BUILDLOG.boardState='busy';
-  fetch('data/build-history.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{ const rows=buildParseList(t); if(rows.length) { BUILDLOG.fresh=rows; buildRefresh(); } }).catch(()=>{});
+  BUILDLOG.busy=3; buildRenderUpd();
+  const done=()=>{ BUILDLOG.busy=Math.max(0,BUILDLOG.busy-1); if(!BUILDLOG.busy) BUILDLOG.updatedAt=Date.now(); buildRenderUpd(); };
+  fetch('data/build-history.js',{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{ const rows=buildParseList(t); if(rows.length) { BUILDLOG.fresh=rows; buildRefresh(); } }).catch(()=>{}).then(done);
   const pushed=buildGh('/contents/data/build-history.js?ref=main',true).then(t=>{ const rows=buildParseList(t); if(!rows.length) throw new Error('empty'); BUILDLOG.pushed=rows; return true; });
   const runs=buildGh('/actions/workflows/publish.yml/runs?per_page=3',false).then(j=>{ const done=(j.workflow_runs||[]).find(x=>x.status==='completed'); BUILDLOG.fail=done&&done.conclusion==='failure'?(done.updated_at||done.created_at):null; return true; });
-  Promise.all([pushed.catch(()=>false),runs.catch(()=>false)]).then(ok=>{ BUILDLOG.gh=ok[0]&&ok[1]?'ok':'fail'; if(!ok[0]) BUILDLOG.pushed=null; if(!ok[1]) BUILDLOG.fail=null; buildRefresh(); });
+  Promise.all([pushed.catch(()=>false),runs.catch(()=>false)]).then(ok=>{ BUILDLOG.gh=ok[0]&&ok[1]?'ok':'fail'; if(!ok[0]) BUILDLOG.pushed=null; if(!ok[1]) BUILDLOG.fail=null; buildRefresh(); }).then(done);
   buildGh('/contents/data/board.json?ref=main',true).then(t=>JSON.parse(t)).catch(()=>fetch('data/board.json',{cache:'no-store'}).then(r=>{ if(!r.ok) throw new Error('board'); return r.json(); }))
-    .then(b=>{ if(!b||!b.cards) throw new Error('board'); BUILDLOG.board=b; BUILDLOG.boardState='ok'; }).catch(()=>{ if(!BUILDLOG.board) BUILDLOG.boardState='fail'; }).then(buildRefresh);
+    .then(b=>{ if(!b||!b.cards) throw new Error('board'); BUILDLOG.board=b; BUILDLOG.boardState='ok'; }).catch(()=>{ if(!BUILDLOG.board) BUILDLOG.boardState='fail'; }).then(buildRefresh).then(done);
 }
+// refresh1 (Tom 2026-11-20: "does it constantly refresh and update once something is done?"): while the screen is open and in view it
+// checks again by itself, every minute with the saved GitHub token, every 5 minutes without (3 GitHub reads a check; GitHub allows 60
+// an hour without a token). Coming back to the app or the tab checks at once (at most once in 20 seconds).
+const BUILD_AUTO_TOKEN=60000, BUILD_AUTO_NOTOKEN=300000;
+function buildAutoGap() { return buildLs('aot-gh-token')?BUILD_AUTO_TOKEN:BUILD_AUTO_NOTOKEN; }
+function buildAutoTick() {
+  if(!BUILDLOG.open||BUILDLOG.busy||document.visibilityState==='hidden') return;
+  if(Date.now()-BUILDLOG.checkedAt>=buildAutoGap()) buildCheck(true);
+}
+setInterval(buildAutoTick,10000);
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible'&&BUILDLOG.open) buildCheck(false); });
+window.addEventListener('pageshow',e=>{ if(e.persisted&&BUILDLOG.open) buildCheck(false); });
 
 // ---- Filters sheet (plan 3.7): Theme, Status, Show housekeeping
 function buildFiltersHtml() {
@@ -429,7 +450,7 @@ function buildAct(t) {
 function buildHistoryBuild() {
   const el=BUILDLOG.el;
   el.innerHTML='<div class="bl-panel" role="dialog" aria-modal="true" aria-label="Builds">'+
-    '<div class="bl-head"><span>BUILDS</span><button type="button" class="bl-close" data-act="close" aria-label="Close">&#10005;</button></div>'+
+    '<div class="bl-head"><span>BUILDS</span><span class="bl-upd"></span><button type="button" class="bl-refresh" data-act="check" aria-label="Refresh">&#8635; Refresh</button><button type="button" class="bl-close" data-act="close" aria-label="Close">&#10005;</button></div>'+
     '<div class="bl-status"></div>'+
     '<div class="bl-views"></div>'+
     '<div class="bl-find"><div class="bl-frow"><input class="bl-q" type="search" placeholder="Search builds" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search builds"><button type="button" class="bl-fbtn" data-act="filters">Filters</button></div><div class="bl-fchips"></div></div>'+

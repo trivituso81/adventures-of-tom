@@ -18152,45 +18152,6 @@
    "done": "2026-11-20"
   },
   {
-   "id": "c-refresh1",
-   "tag": "refresh1",
-   "lane": "claude",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "Builds screen: Refresh button and checking again by itself",
-   "next": "Add a Refresh button and an Updated time to the Builds screen header on every tab; check again by itself while open (1 minute with the GitHub token, 5 without) and when the app comes back into view.",
-   "blocks": [],
-   "created": "2026-11-20",
-   "changed": "2026-11-20",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEr7TsVB12Hmyn1q2x",
-    "opening": "\"in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button\""
-   },
-   "prompt": {
-    "what": "Adds a Refresh button and automatic re-checks to the Builds screen.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a small screen feature, steps not written)",
-    "effort": "medium (one screen, small change)",
-    "text": "Read CLAUDE.md and card c-refresh1 in data/board.json, then finish what its history describes and push build refresh1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "history": [
-    {
-     "d": "2026-11-20",
-     "t": "Tom: \"in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button\""
-    },
-    {
-     "d": "2026-11-20",
-     "t": "Fact: the screen read the data only when opened, when In the works was tapped (at most every 20 s) and when the status strip was tapped. Nothing updated while it sat open."
-    },
-    {
-     "d": "2026-11-20",
-     "t": "Started: the conversation claimed this card."
-    }
-   ]
-  },
-  {
    "id": "c-clipstuck1",
    "tag": "clipstuck1",
    "lane": "claude",
@@ -18381,6 +18342,69 @@
    "after": "t-keysecrets2-try",
    "auto": true,
    "started_at": "2026-11-21T00:43:52+00:00"
+  },
+  {
+   "id": "c-refresh1",
+   "tag": "refresh1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Builds screen: Refresh button and checking again by itself",
+   "next": "Built as refresh1: Refresh button and Updated time in the Builds header on every tab; checks again by itself while open and when the app comes back. Tom checks it on card t-refresh1-try.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEr7TsVB12Hmyn1q2x",
+    "opening": "\"in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button\""
+   },
+   "prompt": {
+    "what": "Adds a Refresh button and automatic re-checks to the Builds screen.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small screen feature, steps not written)",
+    "effort": "medium (one screen, small change)",
+    "text": "Read CLAUDE.md and card c-refresh1 in data/board.json, then finish what its history describes and push build refresh1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fact: the screen read the data only when opened, when In the works was tapped (at most every 20 s) and when the status strip was tapped. Nothing updated while it sat open."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: engine/build-history.js buildRenderUpd, buildAutoTick (every 10 s it looks; reads again after 1 min with the token, 5 min without), visibilitychange and pageshow re-check; build-history.css .bl-refresh and .bl-upd; tools/buildlog_test.py B15. Hands to Tom: t-refresh1-try."
+    }
+   ],
+   "after": "t-refresh1-try"
+  },
+  {
+   "id": "t-refresh1-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Try the Refresh button on the Builds screen",
+   "next": "ADMIN > BUILDS. At the top right, beside the word BUILDS, you should see Updated and a time, and a Refresh button. Tap In the works, then tap Refresh: it reads Checking for a moment and the Updated time moves to now. Leave the screen open: it checks again by itself (every 5 minutes, or every minute if your GitHub token is saved on this phone). Switch to another app and back: it checks at once. Then press All good, or Something is wrong and say what you saw.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEr7TsVB12Hmyn1q2x",
+    "opening": "made by refresh1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by build refresh1 (card c-refresh1)."
+    }
+   ]
   }
  ],
  "sessions": [

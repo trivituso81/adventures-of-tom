@@ -383,6 +383,38 @@ with sync_playwright() as pw:
             if want_tag=='old-1': pg.screenshot(path=f'{OUT}/{layout}-22-page-sheet-archived.png')
             ctx.close()
         # the Admin page offers Builds with a live line
+        # B15 (refresh1): a Refresh button and "Updated <time>" in the header on every tab; tapping it reads again and In the works shows the new
+        # card; the screen also checks again by itself while open (every minute with a token, 5 without) and when the app comes back into view.
+        ctx=br.new_context(viewport=vp,has_touch=True,timezone_id='America/Los_Angeles',service_workers='block')
+        ctx.add_init_script("try{localStorage.setItem('aot-build','%s')}catch(e){}"%MINE)
+        pg=ctx.new_page(); errs=[]; pg.on('pageerror',lambda e: errs.append(str(e))); routes(pg)
+        cur={'b':BOARD}; reads=[]
+        pg.unroute('**/data/board.json*'); pg.route('**/data/board.json*',lambda r: r.fulfill(status=200,content_type='application/json',body=json.dumps(cur['b'])))
+        pg.on('request',lambda r: reads.append(r.url) if 'board.json' in r.url else None)
+        pg.goto(f'http://127.0.0.1:{port}/builds.html'); pg.wait_for_selector('#buildlog.page .bl-row'); pg.wait_for_timeout(900)
+        for v in ('recent','works','archive'):
+            pg.tap(f'.bl-views [data-view="{v}"]'); pg.wait_for_timeout(300)
+            need(pg.is_visible('.bl-refresh') and pg.inner_text('.bl-upd').startswith('Updated '), f'{layout} B15: Refresh and the time of the last check show on {v} ({pg.inner_text(".bl-upd")!r})')
+        pg.tap('.bl-views [data-view="works"]'); pg.wait_for_timeout(300)
+        newc={'id':'c-refresh-new','lane':'claude','col':'prog','title':'Brand new refresh card','tag':'refreshnew1','theme':'Tools','started_at':at(0,9,0)}
+        cur['b']={**BOARD,'cards':BOARD['cards']+[newc]}
+        GH0=GH['board']; GH['board']=(200,json.dumps(cur['b']))
+        need('Brand new refresh card' not in pg.inner_text('.bl-list'), f'{layout} B15: the new card is not there before Refresh')
+        pg.tap('.bl-refresh'); pg.wait_for_timeout(900)
+        need('Brand new refresh card' in pg.inner_text('.bl-list'), f'{layout} B15: Refresh reads the board again and In the works shows the new card')
+        need(not small(pg), f'{layout} B15: the Refresh button is 44 px or more ({small(pg)})')
+        pg.screenshot(path=f'{OUT}/{layout}-23-page-refresh.png')
+        n0=len(reads); pg.evaluate("()=>{ BUILDLOG.checkedAt=Date.now()-301000; buildAutoTick(); }"); pg.wait_for_timeout(700)
+        need(len(reads)>n0, f'{layout} B15: the screen checks again by itself after 5 minutes without a token')
+        n0=len(reads); pg.evaluate("()=>{ BUILDLOG.checkedAt=Date.now()-61000; buildAutoTick(); }"); pg.wait_for_timeout(500)
+        need(len(reads)==n0, f'{layout} B15: without a token it does not check again after only 1 minute')
+        n0=len(reads); pg.evaluate("()=>{ localStorage.setItem('aot-gh-token','x'); BUILDLOG.checkedAt=Date.now()-61000; buildAutoTick(); }"); pg.wait_for_timeout(700)
+        need(len(reads)>n0, f'{layout} B15: with a token it checks again after 1 minute')
+        n0=len(reads); pg.evaluate("()=>{ BUILDLOG.checkedAt=Date.now()-25000; document.dispatchEvent(new Event('visibilitychange')); }"); pg.wait_for_timeout(700)
+        need(len(reads)>n0, f'{layout} B15: coming back to the app checks again')
+        GH['board']=GH0
+        need(not errs, f'{layout} B15: no page errors {errs[:3]}')
+        ctx.close()
         ctx=br.new_context(viewport=vp,has_touch=True,timezone_id='America/Los_Angeles',service_workers='block')
         ctx.add_init_script("try{localStorage.setItem('aot-build','%s')}catch(e){}"%MINE)
         pg=ctx.new_page(); routes(pg)

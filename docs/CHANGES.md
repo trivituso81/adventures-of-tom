@@ -1,3 +1,11 @@
+## refresh1 (2026-11-20): the Builds screen has a Refresh button and checks again by itself
+
+Card c-refresh1. Tom: "in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button"
+- Fact (before): the screen read its data when opened, when In the works was tapped (at most once in 20 seconds) and when the status strip was tapped. Nothing updated while it sat open, and the strip tap was not visible as a button.
+- Header, every tab (game panel and builds.html): a Refresh button (reads Checking while the reads run) and "Updated <time>" of the last finished check (`buildRenderUpd`, `.bl-refresh`, `.bl-upd`).
+- Automatic: while the screen is open and in view it reads again every minute with the saved GitHub token, every 5 minutes without (3 GitHub reads a check; GitHub allows 60 an hour without a token) (`buildAutoTick`). Coming back to the app or tab reads at once, at most once in 20 seconds (`visibilitychange`, `pageshow`).
+- Test: `python3 tools/buildlog_test.py` new check B15 (button and time on all three tabs, Refresh shows a new board card in In the works, the 1 and 5 minute timers, coming back into view); all passed, portrait and landscape screenshots looked at.
+
 ## keysecrets5 (2026-11-20): the recast and baker pages that asked for a pasted key are retired
 
 Card c-keysecrets5, stage 5 of 5 (plan: `claude/keysecrets-plan.md`). Call made: none of these pages was still needed, so none was moved to an Action; they are deleted (git history keeps them). `grep aot-baker-key` now finds nothing in the repo.

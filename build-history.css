@@ -5,6 +5,11 @@
 .bl-panel button{font:inherit;touch-action:manipulation}
 .bl-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
 .bl-close{width:44px;height:44px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+/* refresh1: Refresh button and the time of the last check, in the header on every tab */
+.bl-upd{flex:1;margin:0 8px;text-align:right;color:#8790a3;font-size:11px;letter-spacing:0;white-space:nowrap}
+.bl-refresh{min-width:96px;height:44px;margin-right:6px;padding:0 10px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:13px;letter-spacing:0}
+.bl-refresh:disabled{opacity:.6}
+#buildlog.page .bl-refresh{margin-right:0}
 .bl-status{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid #2c3342;color:#cfd5e2;line-height:1.35}
 .bl-st1{font-size:14px}.bl-st1 b{color:#f3dfa8;font-family:ui-monospace,Menlo,monospace;font-weight:600;word-break:break-all}.bl-st2{margin-top:1px;font-size:12px;color:#aeb6c6}
 .bl-reload{flex:none;min-width:84px;height:44px;padding:0 14px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font-size:13px;letter-spacing:.5px}
