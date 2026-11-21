@@ -1,3 +1,7 @@
+## board-guidevibe3 (2026-11-21): the Battle Guide's next card now also shows each person's third Vibe, marked as planned
+
+Card c-battleguide2. Tom (09:19): "How come I'm not seeing the third vibe for each character". Fact: the guide shows what the game holds, and the game has 20 of the spec's 30 Vibes; the third of each person is battle stages 19 to 21. Board change only; no page or game file changed.
+
 ## b3s17c (2026-11-21): chapter 4's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
 
 Card c-b3s17, part c. Chapter 4 joins chapters 1 to 3: the Cue Card Crab, the Clapper Snapper, the Boom Mic Moth (with their Extra Extras) and The Director's Cut play on Battle 3 with the bestiary's Vibe Points (8 each, 26 for the boss) and tips for Battle 3 (`ch4crab`, `ch4clapper`, `ch4moth`, `directorscut`): Pet Peeves and Resists, Posterboard Shell, Card Toss and Bleed, Scene One Marker!, Skill Lock (only Pocket Vibe Skills), CUT! (a Break, an interrupt, Blind or Tom's Suite Door Slide stops it) and ACTION! (strip the speed buff). No Warmth bar, no HEART, no Tombo. A win over The Director's Cut sets `kind:directorscut`, so the kind ending plays.

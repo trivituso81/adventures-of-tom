@@ -23811,7 +23811,7 @@
    "col": "wait",
    "waiting_on": "tom",
    "tag": "battleguide2",
-   "next": "Waits on your card Try the Battle Guide on the Duo. Then it applies your notes on the page and adds a See it in a fight button: a move that has no video yet opens a Battle Lab fight where that person uses it, so every move can be watched, not only the 68 videos.",
+   "next": "Waits on your card Try the Battle Guide on the Duo. Then it applies your notes on the page and adds a See it in a fight button: a move that has no video yet opens a Battle Lab fight where that person uses it, so every move can be watched, not only the 68 videos. It also adds each person's third Vibe to the guide, marked as planned and not in the game yet.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -23820,19 +23820,23 @@
     "opening": "not started"
    },
    "prompt": {
-    "what": "Applies your notes on the Battle Guide, then adds See it in a fight: from any move or monster attack in the guide, one tap opens a Battle Lab fight on the new battle where it is used, so moves with no video can be watched too.",
+    "what": "Applies your notes on the Battle Guide, then adds See it in a fight: from any move or monster attack in the guide, one tap opens a Battle Lab fight on the new battle where it is used, so moves with no video can be watched too. It also shows each person's third Vibe from the spec, marked as planned.",
     "before": [
      "Answer the card Try the Battle Guide on the Duo (All good, or Something is wrong with your notes).",
      "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
     ],
     "model": "Claude Sonnet 5.5 (row C: a build where the steps are not written yet; none of the three Fable conditions holds)",
     "effort": "medium (a small piece: one button, one address the game reads, and the notes)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, docs/BATTLE_GUIDE.md and docs/BATTLE3.md (sections Files and Testing), then card c-battleguide2 in data/board.json with its history and the Tom card that blocked it (t-battleguide-try: his answer and note come first). Your first push is the commit board: start c-battleguide2. Part 1: apply Tom's notes on battle-guide.html, each by the smallest change. Part 2: See it in a fight. In the guide, every family move and every monster attack gets a second button beside Play that opens the game at a Battle Lab fight on the new battle with that move used first: add one address the game reads (for example index.html?go=battle-lab with the fight and the move named), start the NEW BATTLE fight whose party holds the move's owner at a Rank that has the move unlocked (for a monster attack: a fight whose formation holds that monster), and have the owner use the move on their first turn, then leave the fight to Tom. Do not build, tune or judge any animation (CLAUDE.md, Battle animations are out of scope for the battle system); this only starts a real fight. Keep the page free of the game engine. Add the checks to tools/battle_guide_test.py, run it, python3 tools/b3_test.py new1, python3 tools/admin_hub_test.py and python3 tools/smoke.py, and look at portrait, landscape and the four Duo sizes. Build tag battleguide2. End with one Tom card (ask play) that says exactly what to tap, and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, docs/BATTLE_GUIDE.md and docs/BATTLE3.md (sections Files and Testing), then card c-battleguide2 in data/board.json with its history and the Tom card that blocked it (t-battleguide-try: his answer and note come first). Your first push is the commit board: start c-battleguide2. Part 1: apply Tom's notes on battle-guide.html, each by the smallest change. Part 2: See it in a fight. In the guide, every family move and every monster attack gets a second button beside Play that opens the game at a Battle Lab fight on the new battle with that move used first: add one address the game reads (for example index.html?go=battle-lab with the fight and the move named), start the NEW BATTLE fight whose party holds the move's owner at a Rank that has the move unlocked (for a monster attack: a fight whose formation holds that monster), and have the owner use the move on their first turn, then leave the fight to Tom. Do not build, tune or judge any animation (CLAUDE.md, Battle animations are out of scope for the battle system); this only starts a real fight. Part 3: the third Vibe. Tom asked (11-21 09:19) why the guide shows two Vibes per person: the game has 20 of the spec's 30 built, the third of each person comes in battle stages 19 to 21. Show each person's third Vibe in the Family tab from claude/battle-spec-v11.md, clearly marked PLANNED, NOT IN THE GAME YET (name, titles, Lean, Trait, moves and Quirks as the spec words them, no Play buttons). Do it with a small generated data file the page loads (a script in tools/ that reads the spec and writes it, since claude/ is not published), never by typing the Vibes into the page; when a third Vibe's real data arrives in data/b3-kit-<id>.js the page must show the real one and drop the planned one by itself. Add a check for both cases to the test. Keep the page free of the game engine. Add the checks to tools/battle_guide_test.py, run it, python3 tools/b3_test.py new1, python3 tools/admin_hub_test.py and python3 tools/smoke.py, and look at portrait, landscape and the four Duo sizes. Build tag battleguide2. End with one Tom card (ask play) that says exactly what to tap, and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Made by battleguide1 as the next card. Reason: 278 of the 346 battle animations have no video yet, and the page cannot play those; a real fight can show them."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom, 09:19: \"How come I'm not seeing the third vibe for each character\". Fact: the guide reads the game's data and the game has 2 of 3 Vibes per person built (20 of 30); the third is battle stages 19 to 21. Added Part 3 to this card: show the third Vibe from the spec, marked planned."
     }
    ]
   },
