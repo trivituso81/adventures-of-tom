@@ -19345,7 +19345,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
     "opening": "not started"
    },
    "next": "Runs the red pen pass on built chapter 2: a fresh reviewer marks every line KEEP, CUT or REWRITE against your chapter 1 edits (claude/tom-line-edits.md), the cuts and rewrites go into the game, and the lines that referred to cut chapter 1 lines (fingerprints, pencil, page nine) are fixed. Then your chapter 2 play card lists exactly what changed.",
@@ -19380,7 +19380,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
     "opening": "not started"
    },
    "next": "Waits on your chapter 2 play (card t-ch2play). Then it adds your chapter 2 edits to claude/tom-line-edits.md and runs the red pen pass on the locked chapter 3 script before chapter 3 is built, so chapter 3 reaches you already cut by everything you taught in chapters 1 and 2.",
@@ -19825,6 +19825,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T18:01:15-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof",
+    "fix-wanproof-watch"
+   ],
+   "cards": [
+    "c-wanproof",
+    "c-fix-wanproof-watch",
+    "c-startfix",
+    "t-startfix-look",
+    "c-wanch1",
+    "c-wanidle",
+    "t-wanch1-fal",
+    "c-ch2lessons",
+    "c-ch3lessons"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
    "first": "2026-11-20T17:40:50-08:00",
@@ -20021,27 +20044,6 @@
    "tags": [],
    "cards": [
     "c-idea-madelot"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T17:31:13-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb",
-    "wanproof",
-    "fix-wanproof-watch"
-   ],
-   "cards": [
-    "c-wanproof",
-    "c-fix-wanproof-watch",
-    "c-startfix",
-    "t-startfix-look",
-    "c-wanch1",
-    "c-wanidle",
-    "t-wanch1-fal"
    ]
   },
   {
@@ -22098,8 +22100,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "168533ef52ab7421e334b54a937b29ce0a8e23c8",
- "synced_at": "2026-11-21T02:00:16+00:00",
+ "synced": "df142e15e28a641daaa59e9b4a3eca4f8ee5b112",
+ "synced_at": "2026-11-21T02:01:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
