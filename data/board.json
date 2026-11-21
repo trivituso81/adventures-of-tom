@@ -21239,7 +21239,7 @@
    "id": "c-qa-coh01",
    "tag": "qa-coh01",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "The Big One's Inspect text describes a frog",
    "next": "Shipped qa-coh01: Inspect text now describes the pond fish.",
@@ -21276,6 +21276,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped qa-coh01: bigone Inspect sentence rewritten for the fish. Nothing for Tom."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh01: The Big One's Inspect text now describes the pond fish, not a croaking frog"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21283,7 +21287,8 @@
     "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
     "opening": "started by START"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-coh02",
@@ -21318,11 +21323,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDomYWFaksqaEKjbZk",
+    "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
     "opening": "started by START"
    }
   },
@@ -21464,7 +21473,7 @@
    "id": "c-qa-coh06",
    "tag": "qa-coh06",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Orange cube replays its first look after the boss",
    "next": "Shipped as qa-coh06: after the Big One, pressing A on the orange cube says one second-look line.",
@@ -21501,6 +21510,10 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed on main, then fixed: after flag ch1-tin the cube plays one Tom line (new line, needs a recording) instead of the first discovery. Pan toast not added (not needed)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh06: after the Big One, the orange cube answers with one second-look line"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21508,7 +21521,8 @@
     "url": "https://claude.ai/code/session_01RXeukGpaW1o4Mr6QMGPE5R",
     "opening": "started by START"
    },
-   "after": "t-qa-coh06play"
+   "after": "t-qa-coh06play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-coh07",
@@ -21543,11 +21557,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDnDXrnG3wwzVJgE4p",
+    "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
     "opening": "started by START"
    }
   },
@@ -21946,6 +21964,50 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
+   "title": "Muffin pan missing from the island before the theft",
+   "first": "2026-11-21T03:30:28Z",
+   "last": "2026-11-21T03:30:28Z",
+   "tags": [],
+   "cards": [
+    "c-qa-coh07"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
+   "title": "Big One's win line has it splash away before its talk",
+   "first": "2026-11-21T03:30:07Z",
+   "last": "2026-11-21T03:30:07Z",
+   "tags": [],
+   "cards": [
+    "c-qa-coh02"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGpaW1o4Mr6QMGPE5R",
+   "title": "Orange cube replays its first look after the boss",
+   "first": "2026-11-21T03:28:56Z",
+   "last": "2026-11-21T03:29:54Z",
+   "tags": [
+    "qa-coh06"
+   ],
+   "cards": [
+    "c-qa-coh06"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
+   "title": "The Big One's Inspect text describes a frog",
+   "first": "2026-11-21T03:28:22Z",
+   "last": "2026-11-21T03:29:41Z",
+   "tags": [
+    "qa-coh01"
+   ],
+   "cards": [
+    "c-qa-coh01"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFuf5FG3gcgaezmc8d",
    "title": "Speaker names switch from capitals mid-scene",
    "first": "2026-11-21T03:29:03Z",
@@ -21956,16 +22018,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGpaW1o4Mr6QMGPE5R",
-   "title": "Orange cube replays its first look after the boss",
-   "first": "2026-11-21T03:28:56Z",
-   "last": "2026-11-21T03:28:56Z",
-   "tags": [],
-   "cards": [
-    "c-qa-coh06"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
    "title": "Rose asks for a piggyback right after the piggyback scene",
    "first": "2026-11-21T03:28:53Z",
@@ -21973,16 +22025,6 @@
    "tags": [],
    "cards": [
     "c-qa-coh04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
-   "title": "The Big One's Inspect text describes a frog",
-   "first": "2026-11-21T03:28:22Z",
-   "last": "2026-11-21T03:28:22Z",
-   "tags": [],
-   "cards": [
-    "c-qa-coh01"
    ]
   },
   {
@@ -24962,8 +25004,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a7cb52ed3a91404ed2c012b42f85b1113f4bfe19",
- "synced_at": "2026-11-21T03:29:21+00:00",
+ "synced": "ed0cab750e7d8c4ba75911026001d146b4d28bdd",
+ "synced_at": "2026-11-21T03:30:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
