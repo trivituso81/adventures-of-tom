@@ -29864,7 +29864,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -29888,6 +29888,18 @@
       "first": 0,
       "hit": 1.433,
       "last": 2.467
+     }
+    },
+    {
+     "n": 2,
+     "file": "art/raw/clips/clip-toad-slam-v3.mp4",
+     "date": "2026-11-21",
+     "from": "clipgen",
+     "at": 1795287592582,
+     "marks": {
+      "first": 0,
+      "hit": 1.133,
+      "last": 2.233
      }
     }
    ],
