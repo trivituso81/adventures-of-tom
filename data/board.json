@@ -23472,7 +23472,7 @@
    "id": "c-costs1",
    "tag": "costs1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "AI Costs page: plans, balances, every charge, the total",
    "next": "ADMIN > AI COSTS (costs.html) is live as build costs1: Overview, Services, Ledger and Totals, with 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
@@ -23508,6 +23508,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"You have full approval to repo access and changes. If you did any work as part of this ensure kanban cards are created\". Taken as yes to publishing the ledger as built (the recommendation put to him). Pushed as build costs1 with cards t-costs1look and c-costs2."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs1: ADMIN ) AI COSTS, a desktop page for what every AI service costs"
     }
    ],
    "after": "t-costs1look",
@@ -23518,7 +23522,8 @@
     "url": "https://claude.ai/code/cse_01RXeukEArp9wiETGrGusDN4",
     "prev": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5"
    },
-   "started_at": "2026-11-21T15:27:53+00:00"
+   "started_at": "2026-11-21T15:27:53+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "t-costs1look",
@@ -23688,6 +23693,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "first": "2026-11-21T07:27:18-08:00",
+   "last": "2026-11-21T07:36:25-08:00",
+   "tags": [
+    "costs1"
+   ],
+   "cards": [
+    "c-costs1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
    "title": "Battle Guide page for the Duo, with animation notes",
    "first": "2026-11-21T07:31:48-08:00",
@@ -23695,16 +23712,6 @@
    "tags": [],
    "cards": [
     "c-battleguide"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
-   "title": "AI Costs page: plans, balances, every charge, the total",
-   "first": "2026-11-21T07:27:18-08:00",
-   "last": "2026-11-21T07:27:18-08:00",
-   "tags": [],
-   "cards": [
-    "c-costs1"
    ]
   },
   {
@@ -27025,8 +27032,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6a7669c11e88e91a165c6ebce3e36dcca45b4a6e",
- "synced_at": "2026-11-21T15:32:27+00:00",
+ "synced": "b47e2bb9605a51e28c8b808be5873eb0d6643e33",
+ "synced_at": "2026-11-21T15:36:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
