@@ -20465,6 +20465,10 @@
     {
      "d": "2026-11-20",
      "t": "Part b pushed as b3s13b: chapter 9 (6 formations, The Mirrorball, Lab fights NEW 51 to NEW 56). Next: chapter 10 as b3s13c."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as b3s13b: New battle: the chapter 9 ballroom monsters and The Mirrorball join the Battle Lab (stage 13, part b of four)"
     }
    ],
    "prompt": {
@@ -22778,6 +22782,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
+   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
+   "first": "2026-11-20T19:03:50-08:00",
+   "last": "2026-11-20T20:27:14-08:00",
+   "tags": [
+    "b3s13a",
+    "b3s13b"
+   ],
+   "cards": [
+    "c-b3s13"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
    "title": "Make and check every chapter 1 battle video",
    "first": "2026-11-20T17:37:42-08:00",
@@ -22871,18 +22888,6 @@
    "cards": [
     "c-fix-itembannerart-pics-2",
     "t-itembannerart-pics"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
-   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
-   "first": "2026-11-20T19:03:50-08:00",
-   "last": "2026-11-20T19:54:21-08:00",
-   "tags": [
-    "b3s13a"
-   ],
-   "cards": [
-    "c-b3s13"
    ]
   },
   {
@@ -25372,8 +25377,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d248c23e5586fa1aefc88fec5a4355f0697f19be",
- "synced_at": "2026-11-21T04:18:31+00:00",
+ "synced": "4697bea5a3fcbc0b5fa430328afd6a9c13fc376f",
+ "synced_at": "2026-11-21T04:28:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
