@@ -30,6 +30,11 @@ CONSTS = [  # (name, file, pattern, folders it tags)
     ('gate V', 'data/gate-art.js', r"const GATE_V='([^']+)'", ('art/gates/',)),
     ('item art V', 'data/item-art.js', r"const ITEM_ART_V='([^']+)'", ('art/items/',)),
 ]
+# portrait1: portraits/<id>.png (the faces in status screens, turn order, battle panels, Battle Guide) are tagged by PORTRAIT_V in
+# data/portrait-ver.js, a stamp of their pixels written by tools/sprite-bake/bake_portraits.py (--stamp rewrites only the stamp).
+# portraits/emo, talk and foes keep their own tags (EMO_V, TALK_V ...), so this matches only the top folder.
+PORTRAIT_FILE = re.compile(r'^portraits/[a-z0-9_]+\.png$')
+PORTRAIT_CONST = ('portrait V', 'data/portrait-ver.js', r"const PORTRAIT_V='([^']+)'")
 
 def literals(tree):
     """path -> set of tags found anywhere in the scanned sources (tree=None: the working tree incl. new files)."""
@@ -57,8 +62,13 @@ def main():
     old, new = literals(BASE), literals(None)
     consts = [(n, f, p, d, const_value(BASE, f, p), const_value(None, f, p)) for n, f, p, d in CONSTS]
     fails, checked = [], 0
+    pov, pnv = const_value(BASE, PORTRAIT_CONST[1], PORTRAIT_CONST[2]), const_value(None, PORTRAIT_CONST[1], PORTRAIT_CONST[2])
     for f in changed:
         k = os.path.normpath(f)
+        if PORTRAIT_FILE.match(f):
+            checked += 1
+            if pov is not None and pov == pnv: fails.append(f'{f} changed but {PORTRAIT_CONST[0]} is still {pov!r} in {PORTRAIT_CONST[1]}: bump it')
+            continue
         if old.get(k):
             checked += 1
             same = new.get(k, set()) & old[k]

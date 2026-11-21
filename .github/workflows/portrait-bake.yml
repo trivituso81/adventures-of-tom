@@ -1,0 +1,66 @@
+name: portrait-bake
+
+# portrait1 (Tom 2026-11-21: "I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and
+# the battle guide"). Saving in ADMIN > PORTRAIT CROPS only commits data/portrait-crops.json; before this job nothing turned the crop into the
+# game's portraits/<id>.png, so a save changed nothing on the phone until a session baked it. Now every push to main that touches the crops,
+# a hero painting or the baker runs tools/sprite-bake/portrait_autobake.py: it bakes the portraits, moves PORTRAIT_V (data/portrait-ver.js,
+# the one stamp every screen uses), logs a build and commits. The `publish` workflow runs after this one (its workflow_run list), because a
+# push made with the Actions token does not start other workflows. Run it by hand from the Actions tab to bake again. Test: python3 tools/portrait_test.py
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/portrait-crops.json'
+      - 'art/raw/characters/*-hero-*.png'
+      - 'tools/sprite-bake/bake_portraits.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portrait-bake
+  cancel-in-progress: false
+
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # The job's own commit touches none of the paths above, so it cannot start itself; this guard is a second one.
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install bake tools
+        run: pip install pillow numpy
+      - name: Bake the portraits, move the stamp
+        run: python3 tools/sprite-bake/portrait_autobake.py | tee /tmp/portraits.txt
+      - name: Tag check
+        run: python3 tools/tag_check.py
+        env:
+          TAG_BASE: HEAD
+      - name: Commit and push
+        run: |
+          if grep -q '^UNCHANGED' /tmp/portraits.txt; then echo "The portraits already match the saved crops."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "portrait-bake: $(grep -m1 '^CHANGED' /tmp/portraits.txt | cut -c1-110) [skip ci]"
+          for i in 1 2 3 4; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            # Someone pushed first (often another crop save). Take the newest main and bake on it again.
+            git reset -q --hard origin/main
+            python3 tools/sprite-bake/portrait_autobake.py | tee /tmp/portraits.txt
+            if grep -q '^UNCHANGED' /tmp/portraits.txt; then echo "Already up to date."; exit 0; fi
+            git add -A
+            git commit -m "portrait-bake: $(grep -m1 '^CHANGED' /tmp/portraits.txt | cut -c1-110) [skip ci]"
+          done
+          echo "::error::Could not push the baked portraits after 4 tries."; exit 1

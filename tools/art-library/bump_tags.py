@@ -52,6 +52,9 @@ def bump_literal(path, old, new):
     return n
 
 def bump_const(name, src, new):
+    if name == 'portrait V':   # portrait1: not a name to choose, a stamp of the pictures' pixels; the baker computes it
+        r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'sprite-bake', 'bake_portraits.py'), '--stamp'], capture_output=True, text=True, cwd=ROOT)
+        return 1 if r.returncode == 0 else 0
     f = os.path.join(ROOT, src)
     txt = open(f, encoding='utf-8').read()
     t2, k = re.subn(CONST_PAT[name], lambda m: m.group(1) + new + m.group(3), txt, count=1)
@@ -97,7 +100,7 @@ def main():
             m = re.match(r"\s+(\S+) changed but (.+?) is still '([^']*)' in (\S+): bump it", line)
             if m:
                 k = bump_const(m.group(2), m.group(4), new)
-                if k: log.append(f'{m.group(2)} {m.group(3)} -> {new} in {m.group(4)}'); progressed = True
+                if k: log.append(f'{m.group(2)} {m.group(3)} -> {"the pictures\' pixel stamp" if m.group(2) == "portrait V" else new} in {m.group(4)}'); progressed = True
         if not progressed:
             print('\n'.join(log)); print(out.strip()); print('bump_tags: nothing more it can fix'); return 1
     print('\n'.join(log)); print('bump_tags: still failing after 6 rounds'); return 1

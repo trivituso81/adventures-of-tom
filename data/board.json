@@ -26158,8 +26158,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Tools",
-   "title": "I saved new portraits in admin - how do I ensure they are",
-   "next": "Your idea: I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
+   "title": "Saved portrait crops reach every screen, automatically",
+   "next": "Built and pushed as idea-savedportraits: the 12 crops you saved are baked into the game, every face now uses one shared version stamp so your phone fetches the new pictures, and a new Action bakes each future Portrait Crops save by itself. Waits only on your look (card t-savedportraits-look).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -26194,6 +26194,11 @@
      "d": "2026-11-21",
      "t": "Session started (Sonnet 5.5, high): checking open cards, then wiring saved portraits.",
      "at": "2026-11-21T18:25:26.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Cause found: the 12 crops Tom saved were never baked into portraits/<id>.png, and each face had a hand-typed cache tag. Fixed with a shared stamp (data/portrait-ver.js), an automatic portrait-bake Action and tests; checked in portrait and landscape. Build idea-savedportraits.",
+     "at": "2026-11-21T18:55:02.000Z"
     }
    ],
    "prompt": {
@@ -26204,7 +26209,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-savedportraits in data/board.json, history included. Your first push is the commit board: start c-idea-savedportraits.\n\nTom made this card himself with New card on the board. His words: \"I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-savedportraits with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-savedportraits-look"
   },
   {
    "id": "t-artfallback-seen",
@@ -26306,6 +26312,30 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-anim-grace-squeeze-qxim and t-anim-grace-squeeze-qxim in data/board.json, history included. Your first push is the commit board: start c-fix-anim-grace-squeeze-qxim.\n\nTom tested and found problems:\n1. Card t-anim-grace-squeeze-qxim (Watch Grace, Soup-Dumpling Squeeze, ask animations). He was asked: Open ADMIN ) BATTLE GUIDE ) Animations ) Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw). He wrote: Left a comment\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T18:48:48.410Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-anim-grace-squeeze-qxim to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-anim-grace-squeeze-qxim, and give the build fix-anim-grace-squeeze-qxim a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-anim-grace-squeeze-qxim"
+  },
+  {
+   "id": "t-savedportraits-look",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Check your new portraits on the menu and turn bar",
+   "next": "Open the game and press RELOAD on the title screen. Open the menu (Party, then Status): the faces should be your new, tighter crops. Then ADMIN > BATTLE LAB > NEW BATTLE, start any fight: the TURN bar across the top and the party panel should show the same new faces. Last, ADMIN > BATTLE GUIDE > Family. All good if every face matches the crop you saved; Something is wrong if any face still looks like the old one. To change a crop later, just save it in ADMIN > PORTRAIT CROPS; it reaches the game by itself in a few minutes.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md ... card c-idea-savedportraits\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by the session that shipped idea-savedportraits.",
+     "at": "2026-11-21T18:55:02.000Z"
+    }
+   ]
   }
  ],
  "sessions": [

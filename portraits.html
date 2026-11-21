@@ -183,7 +183,7 @@ async function save(){
       const g=await gh('GET'); if(!g.ok) throw new Error('GitHub said '+g.status+' reading the crops file.');
       const doc=JSON.parse(b64ToText(g.json.content||'')||'{}'); doc[id]=entry;
       const w=await gh('PUT',{message:'Portrait crop: '+NAMES[id],content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH,sha:g.json.sha});
-      if(w.ok){ saved=doc; delete draft[id]; LS.set('aot-portraits-draft',JSON.stringify(draft)); redraw(); msg(NAMES[id]+' saved. Claude bakes it next.','ok'); return; }
+      if(w.ok){ saved=doc; delete draft[id]; LS.set('aot-portraits-draft',JSON.stringify(draft)); redraw(); msg(NAMES[id]+' saved. The game bakes it by itself (about 2 minutes), then it shows in the Party, Status, turn order and Battle Guide screens.','ok'); return; }
       if(w.status!==409&&w.status!==422) throw new Error('GitHub said '+w.status+' saving.');
     }
     throw new Error('The crops file kept changing. Try again in a minute.');

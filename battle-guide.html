@@ -190,6 +190,7 @@ async function boot(){
     const data=srcs.filter(s=>/^data\/b3-/.test(s));
     if(!data.length) throw new Error('The game page lists no battle data files');
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
+    await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];$('buildline').textContent='Game build '+BUILD;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;}).catch(()=>{});
@@ -292,7 +293,7 @@ function rowHtml(t,id,title,sub,img,right){
   const pic=img?'<img alt="" loading="lazy" src="'+esc(img)+'" onerror="this.outerHTML=\'<span class=ph>'+esc(title.charAt(0))+'</span>\'">':'';
   return '<button type="button" class="row'+(sel===id?' on':'')+'" data-go="'+t+'" data-id="'+esc(id)+'">'+pic+'<span class="t"><b>'+esc(title)+'</b><span>'+sub+'</span></span>'+(right?'<span class="n">'+right+'</span>':'')+'</button>';
 }
-const facePic=id=>B3_CAST[id]?'portraits/'+id+'.png':'portraits/foes/'+id+'.webp';
+const facePic=id=>B3_CAST[id]?'portraits/'+id+'.png?v='+(typeof PORTRAIT_V!=='undefined'?PORTRAIT_V:''):'portraits/foes/'+id+'.webp';   // portrait1: the same stamp the game uses
 function renderList(){
   const L=$('list');let h='';
   if(tab==='rules'){h=RULES.map(r=>rowHtml('rules',r.id,r.title,esc(r.sub))).join('');}

@@ -38,7 +38,7 @@ with sync_playwright() as pw:
         p.goto(URL); p.evaluate("localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-portraits-draft')"); p.reload()
         p.wait_for_function('window.__PC&&window.__PC.ready')
         chips = p.eval_on_selector_all('#chips button', 'b=>b.map(x=>x.dataset.id)')
-        ck(name + ': eight chips', chips == ['tom', 'tnb', 'grace', 'rose', 'amy', 'deedee', 'boppy', 'nara'], chips)
+        ck(name + ': thirteen chips (every id the baker makes)', chips == ['tom', 'tnb', 'grace', 'rose', 'amy', 'deedee', 'boppy', 'nara', 'justin', 'olivia', 'michael', 'jojo', 'ellie'], chips)
         for cid in chips:
             p.click('#chips button[data-id=%s]' % cid)
             c = p.evaluate('__PC.crop()'); ck(name + ': ' + cid + ' loads a square crop in the image', c['s'] > 100 and c['x'] >= 0 and c['y'] >= 0 and c['x'] + c['s'] <= 1024 and c['y'] + c['s'] <= 1536, c)
@@ -50,7 +50,7 @@ with sync_playwright() as pw:
         p.fill('#zoom', '0'); c3 = p.evaluate('__PC.crop()'); ck(name + ': slider far end is the widest crop, clamped inside', c3['s'] > c2['s'] and c3['x'] + c3['s'] <= 1024, c3)
         p.fill('#zoom', '500')
         p.click('#headrow'); p.wait_for_timeout(200)
-        ck(name + ': head row shows eight', p.locator('#row canvas').count() == 8)
+        ck(name + ': head row shows thirteen', p.locator('#row canvas').count() == 13)
         p.screenshot(path=os.path.join(SHOTS, 'portraits-%s.png' % name)); p.click('#headrow')
         p.click('#save'); p.wait_for_function("document.getElementById('msg').textContent.indexOf('saved')>=0", timeout=8000)
         want = p.evaluate('__PC.crop()'); got = STORE['doc'].get('tom')

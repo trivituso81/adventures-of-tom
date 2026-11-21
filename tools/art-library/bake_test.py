@@ -2,8 +2,7 @@
 """Test of the B5 bake step with no real services: python3 tools/art-library/bake_test.py
 Makes a scratch clone of the working tree (so the real repo is never touched), fakes an approved Art Library push (a picture with a crimson
 background under art/raw/ and an entry with a `bake` field), runs tools/art-library/art_bake.py exactly as the workflow does, and checks:
-  the background was keyed from the corner colour; the fake bake script ran; the changed atlas moved ART_V, the changed portrait moved its literal
-  tag, painted.js and main.js moved their own tags, the title stamp changed; a CHANGES entry sits on top; tag_check passes against HEAD;
+  the background was keyed from the corner colour; the fake bake script ran; the changed atlas moved ART_V, the changed portrait moved PORTRAIT_V, painted.js and main.js moved their own tags, the title stamp changed; a CHANGES entry sits on top; tag_check passes against HEAD;
   an approved entry WITHOUT `bake` is left alone; a second run with nothing in art/raw changed does nothing.
 Prints FAILS: [] when everything holds."""
 import json, os, re, shutil, subprocess, sys, tempfile
@@ -20,7 +19,8 @@ try:
     r = sh(ROOT, 'git', 'clone', '-q', '--local', ROOT, W)
     if r.returncode: print(r.stderr); sys.exit(2)
     # bring the uncommitted working-tree files of this feature along
-    for p in ['tools/art-library/art_bake.py', 'tools/art-library/bump_tags.py', 'tools/art-library/make-prompts.js', '.github/workflows/art-bake.yml']:
+    for p in ['tools/art-library/art_bake.py', 'tools/art-library/bump_tags.py', 'tools/art-library/make-prompts.js', '.github/workflows/art-bake.yml',
+              'tools/tag_check.py', 'tools/sprite-bake/bake_portraits.py', 'data/portrait-ver.js', 'engine/menu.js', 'index.html']:   # portrait1: the stamp files travel along
         os.makedirs(os.path.dirname(os.path.join(W, p)), exist_ok=True)
         shutil.copyfile(os.path.join(ROOT, p), os.path.join(W, p))
     for k, v in (('user.name', 'test'), ('user.email', 'test@example.com')): sh(W, 'git', 'config', k, v)
@@ -52,7 +52,7 @@ print('fake bake ok')
          'versions': [{'n': 1, 'file': 'art/raw/enemies/nobake-v1.png', 'date': '2026-11-02', 'from': 'v1'}]}]
     json.dump(doc, open(jp, 'w'), indent=1)
     sh(W, 'git', 'add', '-A'); sh(W, 'git', 'commit', '-qm', 'approve')
-    env = dict(os.environ, GITHUB_RUN_NUMBER='77')
+    env = dict(os.environ, GITHUB_RUN_NUMBER='77', GITHUB_ACTIONS='true')   # board2: bakes run by an Action have no card
     r = sh(W, sys.executable, 'tools/art-library/art_bake.py', '--before', base, env=env)
     out = r.stdout + r.stderr
     check(r.returncode == 0, 'art_bake exit ' + str(r.returncode) + ' ' + out[-800:])
@@ -64,7 +64,7 @@ print('fake bake ok')
     check(src.getpixel((100, 150))[3] == 255, 'figure body was keyed out')
     def read(p): return open(os.path.join(W, p), encoding='utf-8').read()
     check("const ART_V='artbake77'" in read('engine/painted.js'), 'ART_V not moved')
-    check(re.search(r'portraits/tom\.png\?v=artbake77', read('engine/menu.js')) is not None, 'portrait literal tag not moved')
+    check(read('data/portrait-ver.js') != open(os.path.join(ROOT, 'data/portrait-ver.js'), encoding='utf-8').read() and "const PORTRAIT_V='" in read('data/portrait-ver.js'), 'PORTRAIT_V (data/portrait-ver.js) not moved for the changed portrait')   # portrait1: portraits/<id>.png are tagged by one stamp
     check('engine/painted.js?v=artbake77' in read('index.html'), 'painted.js tag not moved')
     check('engine/main.js?v=artbake77' in read('index.html'), 'main.js tag not moved')
     check("build artbake77" in read('engine/main.js'), 'stamp not set')
