@@ -17690,7 +17690,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Painted pictures for the item gained banners",
-   "next": "The item gained banner shows an emoji for each item; report r-20261120-142626-w74f says art is missing for all item banners. Build Art Library entries for a painted picture per item and use them in the banner.",
+   "next": "The banner shows a painted picture per item (emoji only while an item has no picture yet), and the 18 item sheets (288 items) are Art Library entries (build itembannerart1). Tom generates and approves them on card t-itembannerart-pics; each approval cuts its sheet into one picture per item by itself.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17733,8 +17733,17 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fact: the banner printed the emoji as plain text in the top-left corner and left the ring on the right empty (.pb-icon had no style). The game has 288 items. Card history held no notes or answers from Tom beyond the START and Copy prompt taps."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: ring on the right shows art/items/<id>.webp for items in ITEM_ART (data/item-art.js), emoji for the rest; itemart-items.json (288 notes), itemart-prompts.js (18 sheets of 16, Props > Item pictures), bake_item_sheet.py; tools/itemart_test.py and tools/itembanner_test.py ok. Hands to Tom: t-itembannerart-pics."
     }
-   ]
+   ],
+   "after": "t-itembannerart-pics"
   },
   {
    "id": "t-stuck-b3s12",
@@ -19230,6 +19239,73 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "t-itembannerart-pics",
+   "title": "Make and approve 18 item picture sheets (288 items)",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "fyi": true,
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji.",
+   "blocks": [],
+   "done_when": {
+    "art_approved": [
+     "prop-item-01",
+     "prop-item-02",
+     "prop-item-03",
+     "prop-item-04",
+     "prop-item-05",
+     "prop-item-06",
+     "prop-item-07",
+     "prop-item-08",
+     "prop-item-09",
+     "prop-item-10",
+     "prop-item-11",
+     "prop-item-12",
+     "prop-item-13",
+     "prop-item-14",
+     "prop-item-15",
+     "prop-item-16",
+     "prop-item-17",
+     "prop-item-18"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "prop-item-01",
+      "prop-item-02",
+      "prop-item-03",
+      "prop-item-04",
+      "prop-item-05",
+      "prop-item-06",
+      "prop-item-07",
+      "prop-item-08",
+      "prop-item-09",
+      "prop-item-10",
+      "prop-item-11",
+      "prop-item-12",
+      "prop-item-13",
+      "prop-item-14",
+      "prop-item-15",
+      "prop-item-16",
+      "prop-item-17",
+      "prop-item-18"
+     ],
+     "label": "Item pictures (18 sheets)"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by itembannerart1 (card c-itembannerart1). Report r-20261120-142626-w74f: \"missing art for all item banners\"."
+    }
+   ]
   }
  ],
  "sessions": [

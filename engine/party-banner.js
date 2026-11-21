@@ -42,13 +42,23 @@ function partyBanner(id,kind='join',note='') {
 }
 // itembanner1 (Tom 2026-11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means,
 // basically similar to the banner that we get when people join and leave the party, we need a banner ... for that item gained."
-// itemBanner(ids,note): one ITEM GAINED banner (the item's icon and name, a jingle, held until dismissed) in the same queue as the party banners; several items from one
+// itemBanner(ids,note): one ITEM GAINED banner (the item's painted picture or emoji, and its name, a jingle, held until dismissed) in the same queue as the party banners; several items from one
 // source share one banner. note is the second line (the monster's drop line, or the auto-gear note). It waits while a fight is on screen.
 function itemBanner(ids,note='') {
   ids=(Array.isArray(ids)?ids:[ids]).filter(id=>typeof items!=='undefined'&&items[id]);
   if(!ids.length) return;
   const go=()=>{ if(typeof battle!=='undefined'&&battle.active) { setTimeout(go,500); return; } pbQueue.push({kind:'item',ids,note}); if(!pbBusy) pbNext(); };
   go();
+}
+// itembannerart1 (report r-20261120-142626-w74f, "missing art for all item banners"): the banner shows the item's painted picture (art/items/<id>.webp, listed in
+// data/item-art.js once its Art Library sheet is approved and baked) and keeps the item's emoji only for an item with no picture yet or whose file fails to load.
+function pbItemEmoji(id) { const e=document.createElement('span'); e.className='pb-emoji'; e.textContent=items[id].icon; return e; }
+function pbItemIcon(id) {
+  if(typeof ITEM_ART==='undefined'||!ITEM_ART.includes(id)) return pbItemEmoji(id);
+  const im=document.createElement('img'); im.alt=''; im.className='pb-pic'; im.dataset.item=id;
+  im.onerror=()=>im.replaceWith(pbItemEmoji(id));
+  im.src='art/items/'+id+'.webp?v='+ITEM_ART_V;
+  return im;
 }
 function pbItemLine(ids) {
   const n={}; ids.forEach(id=>n[id]=(n[id]||0)+1);
@@ -60,7 +70,8 @@ function pbNext() {
   if(b.kind==='item') {
     const w=pbEl(); w.classList.remove('painted','leave'); w.classList.add('item');
     w.querySelector('.pb-art').removeAttribute('src'); w.querySelector('.pb-face').removeAttribute('src');
-    w.querySelector('.pb-icon').textContent=[...new Set(b.ids)].map(id=>items[id].icon).join('');
+    const ico=w.querySelector('.pb-icon'),uniq=[...new Set(b.ids)];
+    ico.replaceChildren(...uniq.map(pbItemIcon)); ico.classList.toggle('many',uniq.length>1);
     w.querySelector('.pb-line').textContent=pbItemLine(b.ids);
     w.querySelector('.pb-note').textContent=b.note||'';
     w.classList.remove('out'); void w.offsetWidth; w.classList.add('on');

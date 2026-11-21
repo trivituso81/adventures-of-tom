@@ -28,6 +28,7 @@ CONSTS = [  # (name, file, pattern, folders it tags)
     ('prop V', 'engine/prop-art.js', r"const V='([^']+)'", ('art/props/',)),
     ('flight v', 'data/flight-art.js', r'"v":"([^"]+)"', ('art/flight/',)),
     ('gate V', 'data/gate-art.js', r"const GATE_V='([^']+)'", ('art/gates/',)),
+    ('item art V', 'data/item-art.js', r"const ITEM_ART_V='([^']+)'", ('art/items/',)),
 ]
 
 def literals(tree):

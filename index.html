@@ -1148,6 +1148,13 @@ html.cutscene #minimap-wrap{visibility:hidden}
 #party-banner .pb-line{font-size:clamp(14px,4.2vw,22px);font-weight:700;line-height:1.15;text-shadow:0 1px 0 #fff8}
 #party-banner .pb-note{font-size:clamp(10px,2.9vw,14px);line-height:1.3;opacity:.85}
 #party-banner .pb-note:empty{display:none}
+#party-banner .pb-icon{position:absolute;right:4%;bottom:6%;height:84%;aspect-ratio:1;border-radius:50%;border:3px solid #c9a24a;background:radial-gradient(#fffaf0,#fff3d6);display:none;align-items:center;justify-content:center;flex-wrap:wrap;gap:2%;padding:5%;box-sizing:border-box;overflow:hidden}   /* itembannerart1: the item's picture sits in the ring on the right, where a person's face sits on a party banner */
+#party-banner.item .pb-icon{display:flex}
+#party-banner.item .pb-face{display:none}
+#party-banner .pb-pic{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 2px 2px #0004)}
+#party-banner .pb-emoji{font-size:clamp(40px,14vw,76px);line-height:1}
+#party-banner .pb-icon.many .pb-pic{max-width:48%;max-height:48%}
+#party-banner .pb-icon.many .pb-emoji{font-size:clamp(22px,7vw,38px)}
 #party-banner .pb-hint{margin-top:8px;text-align:center;font-size:clamp(11px,3vw,14px);font-weight:700;color:#fff;text-shadow:0 1px 3px #000c;letter-spacing:.04em;animation:pbhint 1.1s ease-in-out infinite alternate}
 @keyframes pbhint{from{opacity:.55}to{opacity:1}}
 html.landscape #party-banner{top:16%;width:min(60%,520px)}
@@ -1659,7 +1666,8 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/menu.js?v=gem-bug05"></script>
 <script src="engine/followers.js?v=ch1retext1"></script>
 <script src="data/party-banners.js?v=partybanner1"></script>
-<script src="engine/party-banner.js?v=itembanner1"></script>
+<script src="data/item-art.js?v=itemart1"></script>
+<script src="engine/party-banner.js?v=itembannerart1"></script>
 <script src="engine/shop.js?v=ch1fix1"></script>
 <script src="engine/audio.js?v=report1"></script>
 <script src="data/lines.js?v=gem-pillar-rhubarb"></script>
@@ -2066,13 +2074,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=idea-implementlisteni"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=wanch1b"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=itembannerart1"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=refresh1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=gem-canon08"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=hollowtrail1"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=wanch1b"></script>
+<script src="engine/main.js?v=itembannerart1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

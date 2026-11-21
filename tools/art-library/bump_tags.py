@@ -18,6 +18,7 @@ CONST_PAT = {  # name -> (regex with one group around the value)
     'prop V': r"(const V=')([^']+)(')",
     'flight v': r'("v":")([^"]+)(")',
     'gate V': r"(const GATE_V=')([^']+)(')",
+    'item art V': r"(const ITEM_ART_V=')([^']+)(')",
 }
 
 def run_check(base):
