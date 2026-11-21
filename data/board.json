@@ -25815,7 +25815,7 @@
    "title": "Watch Grace, Soup-Dumpling Squeeze",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze (Prompt v4), and look at the dumpling: it should have a cute face (dot eyes, rosy cheeks, small smile) and burst into white fluff right when HIT shows, then Grace returns with empty hands. Tap All good or Something is wrong.",
@@ -25850,8 +25850,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Watch Grace, Soup-Dumpling Squeeze is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T19:37:26.765Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-boardsubfold1",
