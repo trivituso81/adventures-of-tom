@@ -24426,7 +24426,7 @@
    "id": "c-anim-rose-victory-vqjc",
    "tag": "anim-rose-victory-vqjc",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Victory",
    "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Remake with wan",
@@ -24452,13 +24452,18 @@
    ],
    "chat": {
     "url": "",
-    "opening": "A note sent from the Battle Guide"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Tom, from the Battle Guide: Remake with wan",
      "at": "2026-11-21T17:07:56.338Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T17:15:04.108Z"
     }
    ],
    "prompt": {
