@@ -21743,7 +21743,7 @@
    "title": "Make and approve the Grump Hollow battle backdrop",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). When the job finishes, open ADMIN > ART LIBRARY > Battle > New backgrounds > 29 Grump Hollow (the button below). It should show a wide still woodland pond: lily pads and a mossy log in dark green water, mossy boulders, ferns and twisted old oaks on the far shore, two big oaks framing the left and right edges, an empty flat brown dirt floor across the bottom third, and NO buildings, church, steeple, houses or dock. APPROVE it if so; REJECT with a note saying what is wrong. After you approve, the game bakes it by itself within a few minutes: start a fight in Grump Hollow (walk into a Skeeter Swarm or Log Lump) and the woods should be behind the fight instead of the town pond.",
@@ -21778,6 +21778,10 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 1 picture, QA: 17 of 17. Spent about $0.05."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: you approved bg-29-grump-hollow in the Art Library."
     }
    ],
    "gen": {
@@ -21808,7 +21812,8 @@
       }
      }
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-qa-coh06",
@@ -28657,8 +28662,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7d841387f7ee2283a0cce9decc4b95be4e63dd8a",
- "synced_at": "2026-11-21T17:45:05+00:00",
+ "synced": "5199d74a38d5c27f1c2dc351bdd8cc7e3fbb10f2",
+ "synced_at": "2026-11-21T17:46:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
