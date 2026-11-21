@@ -20669,7 +20669,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGqHgJ",
     "opening": "\"assess this bug report, ensure the bug/improvement is valid, and add each one to the kanban board\""
    },
    "after": "nothing for Tom: end",
@@ -20686,6 +20686,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: Tom sent a chapter 1 playtest and QA report (build keysecrets2) and asked to check each item and add the valid ones."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
@@ -21066,6 +21070,16 @@
    "cards": [
     "c-gem-pillar-rhubarb",
     "t-rhubarb-scope"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGqHgJ",
+   "title": "Board only: cards from the second chapter 1 QA report",
+   "first": "2026-11-20T19:12:28-08:00",
+   "last": "2026-11-20T19:12:28-08:00",
+   "tags": [],
+   "cards": [
+    "b-board-qa2"
    ]
   },
   {
@@ -23520,8 +23534,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6005a54d5f3d7338e52bd71e4b57b79b2c6712cd",
- "synced_at": "2026-11-21T03:12:08+00:00",
+ "synced": "2e0cf369b20dc2e7c6cddf67b9a0eaa94877e234",
+ "synced_at": "2026-11-21T03:12:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
