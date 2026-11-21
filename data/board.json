@@ -15227,7 +15227,11 @@
      "t": "Taken out of your backlog: chapter 2 is cut and ready, and the chapter 3 build (c-ch3build) now waits on this play. Tom 13:03 asked for the next step to be on the board."
     }
    ],
-   "first": "Nothing: build ch2lessons is pushed."
+   "first": "Nothing: build ch2lessons is pushed.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-fix-effectslook-2",
@@ -18407,7 +18411,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
     "opening": "not started"
    },
    "history": [
@@ -24071,7 +24075,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEuKCzKJrDSyCZjBA2",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -24096,6 +24100,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:57:44.962Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -24235,7 +24243,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHH1EobcNpvW5xn9Nu",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -24269,6 +24277,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:59:12.147Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -27310,7 +27322,7 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Waits on the card Nightly cleanup: files, notes and the working agreement. Then tap START (or leave it to the night shift). It creates the standing card Night QA: each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge (looks, sound, feel, the real phone) stays yours and says why. 24 of your 35 open cards are play cards today.",
    "blocks": [],
    "created": "2026-11-21",
@@ -27332,6 +27344,14 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:59:33.968Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27344,8 +27364,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-nightqa in data/board.json with its history. Your first push is the commit board: start c-nightqa. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Build section 8 exactly as written, steps 1 to 7: the standing card c-night-qa (nightly: true, tag nightqa, Sonnet 5.5 medium, theme Project Ops) whose prompt holds steps 2 to 4 and the limits of step 7 word for word, the `machine` field and the two detail lines in board.html with cases in tools/board_test.py, pictures on branch night under qa/, the Closed for you list in tools/night/lastnight.py, and the rule of step 5 in the board section of CLAUDE.md. Then run the first night yourself on the 4 oldest open play cards and write each result on its card. A check is YES OR NO only when the frames can prove it; when in doubt it is YOURS. Never close a card about how something looks, sounds or feels. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board. Push build nightqa as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightqa",
-   "after": "nothing for Tom: end",
-   "start": true
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-nightgreen",
@@ -27360,7 +27379,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -27416,6 +27435,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreen handoff (conversation ran long after 4 fixes): 8 tests left, evidence per test in claude/next-addendum-nightgreen.md, card prompt rewritten for the rest. Not finished, so the card stays In progress and ships as nightgreen when no row has known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28805,7 +28828,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
+    "url": "https://claude.ai/code/session_01RXeukF43ZogLhQidrKWaTM",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2)\""
    },
    "history": [
@@ -28833,6 +28856,10 @@
     {
      "d": "2026-11-21",
      "t": "Two conversations started this card (session_01RXeukGKwJycJ9se7H7h9VD at 13:01, session_01RXeukF43ZogLhQidrKWaTM at 13:03). The first one keeps it, so no video is paid for twice: session_01RXeukGKwJycJ9se7H7h9VD runs the three remakes (jobs deedee-wetfloor r4, rose-giddyup r4, skeeter-bite r1). The other conversation should stop without dispatching wan-gen or editing wangen-jobs.json."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28852,7 +28879,7 @@
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "The wrapper trail test fails about half the time: an ordinary monster gets into the boss area by Boppy's fishing spot. Find why and fix it so the test passes 10 times in a row.",
    "blocks": [],
    "created": "2026-11-21",
@@ -28876,9 +28903,20 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:59:43.561Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
-   "start": true
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGeYWW1FGGdhn17azt",
+    "opening": "unknown"
+   }
   },
   {
    "id": "svc-voice-gen",
@@ -29003,13 +29041,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
+    "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
     "opening": "not started"
    },
    "nightly": true,
@@ -29024,6 +29062,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:59:39.274Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -29034,8 +29076,7 @@
     "model": "Claude Sonnet 5.5 (standing card, steps in claude/night-plan.md section 7)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-night-clean in data/board.json with its history. This is the standing card Night cleanup: it runs every night and never goes to Done. Run python3 tools/night/clean_report.py --out /tmp/clean.json first. Pick ONE bucket tonight by the day of the year (python3 -c \"import datetime;print('ABCD'[datetime.date.today().timetuple().tm_yday%4])\"): A. Files nothing names: remove up to 40 from the report, oldest first, never from the Never touched row below. B. Notes: fold what is still true from finished claude/next-addendum-*.md and plan files into the doc that owns it (docs/ or CLAUDE.md), delete the rest, rebuild claude/INDEX.md with python3 tools/claude_index.py. C. Working agreement: shorten CLAUDE.md and claude/next.md (history and one-off stories go to docs/CHANGES.md or out), under python3 tools/night/rules_check.py; neither file may end the night bigger than it began; never drop a standing rule or a sentence of Tom's. D. Tests: delete a test that has been known_fail for more than 7 nights and tests something that no longer exists; a test of something that still exists goes to a fix card instead. Each bucket ends with python3 tools/smoke.py, the grep for zero references that the purge rule asks for (show the grep in docs/CHANGES.md before deleting anything under tools/ or art/), and a docs/CHANGES.md entry that lists what left. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen, a card in the backlog. Not in this job: voice (report only; tools/clip-audit/unused_voice.py keeps its own rule) and dead code inside engine/ files. Push a build named nightclean-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightclean-MMDD (MM and DD are today's month and day) --base origin/main). If there is nothing to remove tonight, push only the commit night: ran c-night-clean. Your first push is the commit board: start c-night-clean. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "start": true
+   }
   },
   {
    "id": "c-bigone25",
@@ -29103,9 +29144,90 @@
    ],
    "first": "Wait for the publish of build bigone25, then RELOAD on the title.",
    "done": "2026-11-21"
+  },
+  {
+   "id": "c-reports-10",
+   "tag": "reports-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-125831-qvon. First note: the car in phone image should still be displayed while TNB is talking",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGeYWW1FGGdhn17azt",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "first": "2026-11-21T21:05:12Z",
+   "last": "2026-11-21T21:05:12Z",
+   "tags": [],
+   "cards": [
+    "c-hollowfence"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDZ2Y9kwX2fxKWoyyT",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "first": "2026-11-21T21:04:43Z",
+   "last": "2026-11-21T21:04:43Z",
+   "tags": [],
+   "cards": [
+    "c-hollowfence"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFXKPjn5bpjo2fv4HS",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-21T21:04:25Z",
+   "last": "2026-11-21T21:04:25Z",
+   "tags": [],
+   "cards": [
+    "c-nightqa"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEGxg3wgwH87xzA4v5",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-21T21:03:29Z",
+   "last": "2026-11-21T21:03:29Z",
+   "tags": [],
+   "cards": [
+    "c-nightqa"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-21T21:01:32Z",
+   "last": "2026-11-21T21:01:32Z",
+   "tags": [],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
    "title": "Animation note: Rose, The Floor Is Lava!",
@@ -29571,6 +29693,90 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
+   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
+   "first": "2026-11-21T13:01:46-08:00",
+   "last": "2026-11-21T13:05:44-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanch3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
+   "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
+   "first": "2026-11-21T12:34:23-08:00",
+   "last": "2026-11-21T13:05:04-08:00",
+   "tags": [
+    "ch3lessons"
+   ],
+   "cards": [
+    "c-ch3lessons",
+    "c-ch3build",
+    "t-ch2play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF43ZogLhQidrKWaTM",
+   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
+   "first": "2026-11-21T13:04:11-08:00",
+   "last": "2026-11-21T13:04:11-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanch3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGC1pc5UTHywvnxx7e",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "first": "2026-11-21T13:03:56-08:00",
+   "last": "2026-11-21T13:03:56-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE8vUUrJV7q1RRdLRG",
+   "title": "Admin Dashboard: the strip under the game",
+   "first": "2026-11-21T13:03:17-08:00",
+   "last": "2026-11-21T13:03:17-08:00",
+   "tags": [],
+   "cards": [
+    "c-dash2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T13:02:32-08:00",
+   "last": "2026-11-21T13:02:32-08:00",
+   "tags": [],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHH1EobcNpvW5xn9Nu",
+   "title": "Battle Guide: real-fight button and everything planned",
+   "first": "2026-11-21T13:02:14-08:00",
+   "last": "2026-11-21T13:02:14-08:00",
+   "tags": [],
+   "cards": [
+    "c-battleguide2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEuKCzKJrDSyCZjBA2",
+   "title": "AI Costs fills itself in: balances and job spend",
+   "first": "2026-11-21T12:59:28-08:00",
+   "last": "2026-11-21T12:59:28-08:00",
+   "tags": [],
+   "cards": [
+    "c-costs2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHG5BVGkK42BxYrdPv",
    "title": "The Big One is drawn 2.5 times bigger in battle (bigone25)",
    "first": "2026-11-21T12:50:13-08:00",
@@ -29649,16 +29855,6 @@
    ],
    "cards": [
     "c-win3skip"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
-   "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
-   "first": "2026-11-21T12:34:23-08:00",
-   "last": "2026-11-21T12:34:23-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch3lessons"
    ]
   },
   {
@@ -33277,7 +33473,8 @@
    "r-20261120-192030-2df3",
    "r-20261120-192121-ynen",
    "r-20261121-120404-lwe8",
-   "r-20261121-122202-loak"
+   "r-20261121-122202-loak",
+   "r-20261121-125831-qvon"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -33311,8 +33508,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7999b3d5c0dd15ef7a5b7277c64c71b9130b0e4b",
- "synced_at": "2026-11-21T20:50:55+00:00",
+ "synced": "889fb3355a1989248715a11a283ccc1756ca6d45",
+ "synced_at": "2026-11-21T21:06:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
