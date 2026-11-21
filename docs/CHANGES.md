@@ -1,3 +1,19 @@
+## battleguide1 (2026-11-21): Battle Guide, a reference page for the new battle system that fits the Duo folded and unfolded, with a player for every battle video and a note to Claude on any animation
+
+Card c-battleguide. Tom (11-21 07:15): "create an iPhone Duo folder and unfolded optimized page for the latest version of the battle system... a reference guide for me as i test... a way to preview each animation and provide feedback on the animation directly Claude which opens a new ticket to regenerate the animation based on the feedback." And 07:26: "It's favicon should be something related to the battle system library different from the battle lab favucon."
+
+| Piece | What it is |
+|---|---|
+| Page | `battle-guide.html` (ADMIN > Battle system > Battle Guide). Five tabs: Rules, Family, Monsters, Statuses, Animations, plus Search. No game engine is loaded. |
+| Always the latest | It reads `index.html`, loads the game's own `data/b3-*.js` in the game's order and renders from them: 10 family members, 20 Vibes, 81 moves, 63 monsters, 129 statuses and 3 hazards today. Rule numbers in the Rules tab come from `B3_RULES`. The header shows the game build. |
+| Duo | One column with a bottom tab bar when folded (466 x 657, 678 x 445); list and detail side by side when unfolded (951 x 648, 669 x 869). The switch is both sides at least 560 px, the game's own number (docs/DUO.md). |
+| Animations | 346 listed (body states, family moves, monster attacks and wind-ups); 68 are videos today. A video plays from the same packed picture the game uses (pause, frame slider, 1x, half and quarter speed, the HIT frame marked). A move with no video says so. |
+| Note to Claude | The player has Send to Claude. It saves a Claude card on the board (`c-anim-...`, theme Battle Animations, Opus 5.5 medium, fields `anim` and `notes`) with the full prompt; a second note on the same animation joins the open card. The sent screen shows the five handoff items and Copy prompt. It uses the GitHub token the Board page saved. |
+| Icon | `icon-battleguide-180.png`, `icon-battleguide-32.png`: an open book with a gold star on teal (the Battle Lab's is crossed swords on maroon). |
+| Test | `python3 tools/battle_guide_test.py` (4 Duo sizes, about 1 minute, FAILS: []); pictures `tools/shots/battleguide-*.png`. Facts: `docs/BATTLE_GUIDE.md`. |
+
+Calls made: the third Vibe of each person is not shown because its data is not built; the game's own tips are shown word for word; character one-liners are written in the page (`WHO`) from docs/CANON.md and the spec's headings. Not done: a move with no video cannot be played in the page (it has no animation of its own, only the standard motion); card c-battleguide2 adds a way to see it in a real fight. Nothing in the game changed.
+
 ## costs1 (2026-11-21): ADMIN > AI COSTS, a desktop page for what every AI service costs
 
 Tom: "come up with an admin screen for all the AI services we are connected to, the subscription type i have, what it allows, what my balance is, how much ive spent so far ... a complete history of my spend with dates for each transaction so i can total and subtotal in any way that i want. as well as a final cost total screen ... including with claude".

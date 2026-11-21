@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f2a2e">
+<meta name="apple-mobile-web-app-title" content="AoT Battle Guide">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-battleguide-180.png?v=battleguide1">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-battleguide-32.png?v=battleguide1">
+<title>Adventures of Tom Battle Guide</title>
+<style>
+/* battle-guide.html (battleguide1): the reference guide for the new battle system ("Battle 3"). It loads no game engine. Every number, move,
+   monster and status is read from the game's own data files (the script tags of index.html), so the guide is always the version being played.
+   Layouts: one column with a bottom tab bar (a phone, the Duo folded: 466 x 657 and 678 x 445) and two panes (the Duo unfolded: 951 x 648 and
+   669 x 869, tablets, desktop). The switch is "both sides at least 560 px", the same number the game uses for an unfolded Duo (docs/DUO.md). */
+:root{--bg:#0f1f24;--surface:#16303a;--card:#1a3742;--line:#28505c;--text:#f1fbfa;--muted:#9cc3c4;--accent:#ffd34d;--on-accent:#241b00;--good:#2fb06a;--prob:#b4414f;--prob-text:#ff9aa5;--btn:#2c5b68;--well:#0a161a;
+ --clobber:#f0c27b;--sizzle:#ff8c5a;--drench:#7cc4f2;--razzle:#ffe27a;--racket:#d7a4f5;--support:#8fe3a6}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.45 -apple-system,system-ui,"Segoe UI",sans-serif}
+body{display:flex;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+a{color:var(--text)}
+button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:var(--btn);color:#fff;font-weight:600;cursor:pointer}
+button.gold{background:var(--accent);color:var(--on-accent)}
+button.ghost{background:none;border:1px solid var(--line)}
+button:disabled{opacity:.5}
+header{flex:none;display:flex;align-items:center;gap:8px;padding:0 10px 0 14px;height:54px;border-bottom:1px solid var(--line)}
+header .brand{flex:1 1 auto;min-width:0;line-height:1.1}
+header small{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header h1{font-size:19px;margin:0;white-space:nowrap}
+header a.hb,header button.hb{flex:none;display:flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;font-size:14px}
+#tabs{flex:none;display:flex;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--well);border-top:1px solid var(--line);order:9}
+#tabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;min-height:50px;background:none;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:10px}
+#tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tabs button[aria-selected=true]{color:var(--on-accent);background:var(--accent)}
+#panes{flex:1 1 auto;min-height:0;display:flex;position:relative;overflow:hidden}
+#list,#detail{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#list{flex:1 1 auto;padding:12px 12px 24px}
+#detail{position:absolute;inset:0;background:var(--bg);padding:0 14px 32px;transform:translateX(100%);transition:transform .18s ease;z-index:3}
+#detail.open{transform:none}
+#dback{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;margin:0 -14px 8px;padding:6px 10px;background:var(--bg);border-bottom:1px solid var(--line)}
+#dback button{background:none;padding:6px 10px;color:var(--accent)}
+#dback b{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+h2{font-size:22px;margin:14px 0 6px}
+h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+p{margin:8px 0}
+.hint{color:var(--muted);font-size:14px}
+.err{color:var(--prob-text)}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 8px;min-height:60px;font-weight:500}
+.row.on{outline:2px solid var(--accent)}
+.row img,.row .ph{flex:none;width:44px;height:44px;border-radius:10px;object-fit:cover;object-position:top;background:var(--well)}
+.row .ph{display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--muted)}
+.row .t{flex:1 1 auto;min-width:0}
+.row .t b{display:block;font-size:16px}
+.row .t>span{display:block;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .n{flex:none;font-size:12px;color:var(--muted);text-align:right}
+.grp{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:16px 2px 8px}
+.grp:first-child{margin-top:2px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--well);border:1px solid var(--line);white-space:nowrap}
+.chip i{width:9px;height:9px;border-radius:50%}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.fl-clobber{color:var(--clobber)}.fl-sizzle{color:var(--sizzle)}.fl-drench{color:var(--drench)}.fl-razzle{color:var(--razzle)}.fl-racket{color:var(--racket)}.fl-support{color:var(--support)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 0 10px}
+.card h4{margin:0;font-size:16px}
+.card .k{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card p{margin:6px 0 0;font-size:15px}
+.card .top{display:flex;align-items:flex-start;gap:10px}
+.card .top>div{flex:1 1 auto;min-width:0}
+.play{flex:none;min-width:44px;height:44px;padding:0 12px;border-radius:22px;background:var(--btn);font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.play.vid{background:var(--accent);color:var(--on-accent)}
+.play svg{width:14px;height:14px;fill:currentColor}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.hero{display:flex;gap:14px;align-items:center;margin-top:14px}
+.hero img{flex:none;width:92px;height:92px;border-radius:18px;object-fit:cover;object-position:top;background:var(--well)}
+.hero h2{margin:0}
+.seg{display:flex;gap:6px;margin:10px 0}
+.seg button{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);font-size:14px;padding:8px 6px}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.pips{letter-spacing:2px;color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.stats div{background:var(--well);border-radius:12px;padding:8px;text-align:center}
+.stats b{display:block;font-size:18px}
+.stats span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+input[type=search],textarea{width:100%;font:inherit;color:var(--text);background:var(--well);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+textarea{min-height:92px;resize:vertical}
+#searchbar{flex:none;padding:8px 12px;border-bottom:1px solid var(--line)}
+.anim{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 8px 8px 12px;margin:0 0 8px;min-height:60px}
+.anim .t{flex:1 1 auto;min-width:0}
+.anim .t b{display:block;font-size:15px}
+.anim .t>span{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.badge{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;background:var(--well);border:1px solid var(--line);color:var(--muted)}
+.badge.v{color:#0d2b18;background:var(--good);border-color:var(--good)}
+.badge.n{color:var(--prob-text)}
+.badge.o{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+#dim{position:fixed;inset:0;background:#000a;display:none;z-index:20}
+#sheet{position:fixed;left:0;right:0;bottom:0;max-height:96vh;overflow-y:auto;background:var(--surface);border-radius:18px 18px 0 0;border-top:1px solid var(--line);padding:12px 14px calc(18px + env(safe-area-inset-bottom));display:none;z-index:21}
+#sheet.open,#dim.open{display:block}
+#sheet .sh-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+#sheet .sh-top h2{flex:1 1 auto;min-width:0;margin:0;font-size:19px}
+#stage{position:relative;background:linear-gradient(#17343d 0,#17343d 78%,#0d2228 78%,#0d2228 100%);border-radius:14px;overflow:hidden;display:flex;justify-content:center;align-items:flex-end;height:min(46vh,340px)}
+#stage canvas{max-width:100%;max-height:100%;image-rendering:auto}
+#stage .msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font-size:15px}
+#hitflag{position:absolute;top:10px;right:10px;font-weight:900;font-size:13px;letter-spacing:.08em;padding:4px 9px;border-radius:8px;background:var(--accent);color:var(--on-accent);opacity:0}
+.ctl{display:flex;align-items:center;gap:8px;margin:10px 0}
+.ctl input[type=range]{flex:1 1 auto;min-width:0;accent-color:var(--accent);height:44px}
+.ctl button{padding:8px 12px}
+.ctl .spd[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#000d;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;display:none;z-index:40;max-width:90vw}
+.big{font-size:20px;font-weight:800;margin:6px 0}
+pre.prompt{white-space:pre-wrap;word-break:break-word;background:var(--well);border:1px solid var(--line);border-radius:12px;padding:10px;font:13px/1.4 ui-monospace,Menlo,monospace;max-height:180px;overflow:auto}
+ol.steps{margin:6px 0 6px 20px;padding:0}
+ol.steps li{margin:4px 0}
+#boot{padding:30px 16px;color:var(--muted)}
+/* Two panes: the Duo unfolded (both poses), tablets, desktop. */
+@media (min-width:560px) and (min-height:560px){
+ #tabs{order:0;border-top:0;border-bottom:1px solid var(--line);padding:6px 10px;gap:6px}
+ #tabs button{flex-direction:row;justify-content:center;gap:8px;font-size:13px;min-height:44px}
+ #list{flex:none;width:clamp(230px,34%,340px);border-right:1px solid var(--line)}
+ #detail{position:static;flex:1 1 auto;min-width:0;transform:none;transition:none;padding:0 20px 40px}
+ #dback{display:none}
+ #sheet{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:min(640px,94vw);max-height:94vh;border-radius:18px;border:1px solid var(--line);padding-bottom:18px}
+ #stage{height:min(44vh,360px)}
+ #toast{bottom:24px}
+}
+/* The Duo folded and held sideways (678 x 445): keep the tab bar thin so the list has room. */
+@media (max-height:480px){#tabs button{min-height:40px;flex-direction:row;justify-content:center;gap:6px}#tabs button svg{width:18px;height:18px}header{height:46px}#stage{height:52vh}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><small id="buildline">The new battle system</small><h1>Battle Guide</h1></div>
+ <button class="hb" type="button" id="bsearch" aria-label="Search">Search</button>
+ <a class="hb" href="battle-lab.html" title="Open the Battle Lab">Lab</a>
+ <a class="hb" href="admin.html" title="Back to Admin">Admin</a>
+</header>
+<div id="searchbar" hidden><input type="search" id="q" placeholder="Search moves, monsters, statuses, rules" autocomplete="off"></div>
+<nav id="tabs" role="tablist"></nav>
+<div id="panes"><div id="list"><div id="boot">Loading the game's battle data...</div></div><div id="detail"></div></div>
+<div id="dim"></div><div id="sheet" role="dialog" aria-modal="true"></div><div id="toast"></div>
+<script>
+'use strict';
+// ---------- small helpers ----------
+const Q=new URLSearchParams(location.search);
+const REPO='trivituso81/adventures-of-tom',BOARD='data/board.json',TOKEN='aot-gh-token';
+const PERM=' Attach trivituso81/adventures-of-tom with push access (add_repo).';
+const PROJECT='https://claude.ai/project/01a14d08-5251-75c8-a191-5d11f4245788';
+const GH=()=>(Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lsGet=k=>{try{return localStorage.getItem(k)||'';}catch(e){return '';}};
+const b64t=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i+=0x8000)b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(b);};
+const t64=s=>{const bin=atob(String(s).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);};
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const pct=v=>Math.round(v*100)+'%';
+const cap=s=>String(s).charAt(0).toUpperCase()+String(s).slice(1);
+const words=s=>String(s).replace(/_/g,' ');
+let toastT;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
+const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
+
+// ---------- loading the game's own data ----------
+// The clip files call bclipDefine (engine/clips.js in the game). Here it only keeps the clip's numbers; the picture loads when a clip is played.
+const CLIPS={};            // clip id -> its data, once its file is loaded
+const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
+function bclipDefine(id,D){CLIPS[id]=D;}
+let BUILD='',BOARD_DOC=null;
+function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
+async function boot(){
+  try{
+    const r=await fetch('index.html?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('Could not read the game page ('+r.status+')');
+    const html=await r.text();
+    const srcs=[...html.matchAll(/<script[^>]+src="([^"]+)"/g)].map(m=>m[1]);
+    for(const s of srcs){const m=s.match(/^data\/clips\/([^.?]+)\.js/);if(m)CLIP_SRC[m[1].replace(/-/g,'_')]=s;}
+    const data=srcs.filter(s=>/^data\/b3-/.test(s));
+    if(!data.length) throw new Error('The game page lists no battle data files');
+    for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
+    fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];$('buildline').textContent='Game build '+BUILD;}}).catch(()=>{});
+    fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
+    build();route();
+  }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Reload the page; if it stays, tell Claude.</div>';}
+}
+
+// ---------- what the data says, in plain words ----------
+// A short line on who each person is. The kit itself (Vibes, moves, numbers) comes from data/b3-kit-<id>.js.
+const WHO={
+ tom:['The Designated Uncle','Dry and calm. Video games, sourdough, Delta One flying. He steps in front of the family and takes the hit: "No touching, please."'],
+ grace:['The Nine-Year-Old Triple Threat','Bright and bossy. Squishies, crafts, glitter and a bedazzle gun. She sets monsters up and moves the turn order around.'],
+ rose:['The Six-Year-Old Whirlwind (and both Lambies)','Silly, jumping, booping. Small hits that come fast, and a cozy side that looks after everyone.'],
+ deedee:['The Nurse Matriarch and Home Cook','Energetic, tidy, "to the moon and back". She cleans up the field and keeps the family on their feet.'],
+ tnb:['The Studio Potter and Longboarder','Chill and crafty, pun humor. Clay shields for the family and fast longboard hits.'],
+ nara:['Olivia and Michael\'s Labradoodle','Barks and whines only, never a word. Sticks close to her person and guards the block.'],
+ boppy:['The Rikers Wall','Fishing, spicy peppers, and always an ache to complain about. A wall in front and a mouthful of heat.'],
+ amy:['The Fitness Queen and Classroom General','A caring Special Education teacher, a runner, and competitive. Extra turns from her workouts and a calm hand on the class.'],
+ justin:['The Basement Boss and Night Lineman','Direct and serious, the tallest person in the game. Holds the line and throws voltage.'],
+ olivia:['The Jump-Rope Legend and Working Mom','Quick feet and a full calendar. Fast rope hits and help for whoever needs it.']
+};
+const LEAN_PLAY={guard:'takes hits for the family',striker:'hits hard',tempo:'acts often and moves the turn order',support:'heals and shields'};
+const SLOT={basic:['Basic','rank 1, free, +2 Pep'],s1:['Skill 1',''],s2:['Skill 2',''],cap:['Grand Capstone','']};
+const TARGET={foe:'one monster',all_foes:'every monster',foe_row:'one row of monsters',random_foes:'random monsters',self:'themself',ally:'one family member',adjacent_allies:'the family next to them',
+ family:'the whole family',ko_ally:'a knocked-out family member',family_or_ko:'the family, knocked out or not',ally_pair:'two family members',field:'the field',either:'a monster or a family member'};
+const HITS={one:'one family member',all:'the whole family',self:'itself',marked:'the one it marked',foes:'its own side',attacker:'whoever just hit it',two_random:'two random family members',field:'the field'};
+const TAG={melee:'melee',projectile:'thrown',charge_up:'announced a turn ahead',buff:'buff',ground_sweep:'ground sweep',aoe:'hits everyone',guard_stance:'guard stance'};
+const ROLE={swarmer:'Swarmer',hexer:'Hexer',bruiser:'Bruiser',skirmisher:'Skirmisher',elite:'Elite',boss:'Boss',helper:'Helper'};
+const STATE={idle:'Idle (standing and breathing)',guard:'Guard',hit:'Getting hit',ko:'Knocked out',victory:'Victory',run:'Running in',give:'Giving (support moves)',dodge:'Dodge',slip:'Slipping',flustered:'Flustered',die:'Defeated',cast:'Cast'};
+const flav=f=>{const F=B3_FLAVORS[f]||{name:cap(f)};return '<span class="chip fl-'+esc(f)+'"><i style="background:currentColor"></i>'+esc(F.name)+'</span>';};
+const flavs=a=>(a||[]).map(flav).join('');
+const stName=id=>(B3_STATUS[id]||{}).name||(typeof B3_HAZARDS!=='undefined'&&(B3_HAZARDS[id]||{}).name)||words(id);
+const stLink=id=>'<a href="#glossary/'+esc(id)+'">'+esc(stName(id))+'</a>';
+function rankOf(kind){const U=B3_RULES.rankUnlock;return U[kind]||1;}
+function powerWord(p){if(!p)return '';if(typeof p==='number')return 'power x'+p;const v=B3_RULES.power[p];return cap(p)+' hit (x'+v+')';}
+function unlocks(v){const o={};o[v.trait]='trait';o[v.basic]='basic';['s1','s2','cap'].forEach((k,i)=>{if(v.skills[i])o[v.skills[i]]=k;});['quirkA','quirkB'].forEach((k,i)=>{if(v.quirks[i])o[v.quirks[i]]=k;});return o;}
+function statusesOf(effects){const out=[];(function walk(a){(a||[]).forEach(e=>{if(e&&typeof e==='object'){if(e.id&&(e.op==='status'||e.op==='intercept'||e.op==='taunt'||e.op==='hazard')&&!out.includes(e.id))out.push(e.id);if(Array.isArray(e.effects))walk(e.effects);}});})(effects);return out;}
+
+// ---------- animations: one list for the whole guide ----------
+// An animation is: a body state of someone (idle, hit...), a family move, or a monster act (plus its wind-up). `clip` is its video's id when it has one.
+let ANIMS=[],ANIM_BY={};
+function owners(){return Object.keys(B3_CAST).concat(Object.keys(B3_FOES));}
+const ownerName=id=>(B3_CAST[id]||B3_FOES[id]||{}).name||cap(id);
+function buildAnims(){
+  ANIMS=[];ANIM_BY={};
+  const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
+  const body=id=>{
+    const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{},P=(typeof B3_BODY_PAINT!=='undefined'&&B3_BODY_PAINT[id])||{};
+    const order=['idle','guard','hit','dodge','ko','victory','run','give','slip','flustered','die'];
+    order.concat(Object.keys(C).filter(k=>!order.includes(k))).forEach(st=>{
+      if(C[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:C[st],what:'body state '+st});
+      else if(P[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:null,painted:true,what:'body state '+st});
+    });
+  };
+  Object.keys(B3_CAST).forEach(id=>{body(id);
+    Object.values(B3_SKILLS).filter(s=>s.vibe&&B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===id).forEach(s=>{const a=s.anim||{};
+      add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.kind==='clip'?a.clip:null,shape:a.shape||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});});
+  });
+  Object.values(B3_FOES).forEach(f=>{body(f.id);
+    f.acts.forEach(act=>{const a=act.anim||{};
+      add({id:'act:'+f.id+':'+act.id,owner:f.id,kind:'act',name:act.name,clip:a.kind==='clip'?a.clip:null,what:'act '+act.id+' of '+f.id+' in data/b3-foes-ch'+String(f.ch).padStart(2,'0')+'.js'});
+      if(act.wind) add({id:'wind:'+f.id+':'+act.id,owner:f.id,kind:'wind',name:act.name+' (wind-up)',clip:act.wind,what:'wind-up of act '+act.id+' of '+f.id});});
+  });
+}
+const animsOf=id=>ANIMS.filter(a=>a.owner===id);
+function playBtn(animId,small){const a=ANIM_BY[animId];if(!a)return '';
+  return '<button type="button" class="play'+(a.video?' vid':'')+'" data-anim="'+esc(a.id)+'" aria-label="Animation of '+esc(a.name)+'"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>'+(small?'':(a.video?'Play':'No video'))+'</button>';}
+
+// ---------- the five tabs ----------
+const TABS=[
+ ['rules','Rules','<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M8 7h7M8 11h7"/>'],
+ ['family','Family','<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.5 2.7-6 6-6s6 2.5 6 6M14.5 20c0-2.6 1.2-5 3.5-5s4 2 4 5"/>'],
+ ['monsters','Monsters','<path d="M5 20V10a7 7 0 0114 0v10l-2.3-2-2.4 2-2.3-2-2.3 2-2.4-2z"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/>'],
+ ['glossary','Statuses','<path d="M4 6h16M4 12h16M4 18h10"/>'],
+ ['anims','Animations','<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>']
+];
+let RULES=[],tab='rules',sel='',vibeSel={},glossKind='',animFilter='all';
+function build(){
+  buildAnims();
+  $('tabs').innerHTML=TABS.map(t=>'<button type="button" role="tab" data-tab="'+t[0]+'"><svg viewBox="0 0 24 24">'+t[2]+'</svg>'+t[1]+'</button>').join('');
+  RULES=rulesTopics();
+}
+function route(){
+  const h=decodeURIComponent(location.hash.replace(/^#/,'')),i=h.indexOf('/');
+  const t=i<0?h:h.slice(0,i);tab=TABS.some(x=>x[0]===t)?t:'rules';sel=i<0?'':h.slice(i+1);
+  if(tab==='anims'&&ANIM_BY[sel]){const a=ANIM_BY[sel];sel=a.owner;setTimeout(()=>openPlayer(a.id),50);}   // a card can link straight to one animation: #anims/move:lounge_pass_flex
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab?'true':'false'));
+  renderList();
+  if(!sel&&wide()) sel=firstOf(tab);
+  renderDetail();
+}
+function firstOf(t){return t==='rules'?RULES[0].id:t==='family'?Object.keys(B3_CAST)[0]:t==='monsters'?Object.keys(B3_FOES)[0]:t==='anims'?Object.keys(B3_CAST)[0]:'';}
+let routed=null;
+function go(t,id){const h='#'+t+(id?'/'+encodeURIComponent(id):'');if(location.hash!==h)location.hash=h;routed=location.hash;route();}
+addEventListener('hashchange',()=>{if(location.hash!==routed){routed=location.hash;route();}});
+let wasWide=null;addEventListener('resize',()=>{const w=wide();if(w!==wasWide){wasWide=w;if(typeof B3_RULES!=='undefined')route();}});   // folding or unfolding the Duo fires a resize
+
+function rowHtml(t,id,title,sub,img,right){
+  const pic=img?'<img alt="" loading="lazy" src="'+esc(img)+'" onerror="this.outerHTML=\'<span class=ph>'+esc(title.charAt(0))+'</span>\'">':'';
+  return '<button type="button" class="row'+(sel===id?' on':'')+'" data-go="'+t+'" data-id="'+esc(id)+'">'+pic+'<span class="t"><b>'+esc(title)+'</b><span>'+sub+'</span></span>'+(right?'<span class="n">'+right+'</span>':'')+'</button>';
+}
+const facePic=id=>B3_CAST[id]?'portraits/'+id+'.png':'portraits/foes/'+id+'.webp';
+function renderList(){
+  const L=$('list');let h='';
+  if(tab==='rules'){h=RULES.map(r=>rowHtml('rules',r.id,r.title,esc(r.sub))).join('');}
+  else if(tab==='family'){
+    h='<div class="grp">'+Object.keys(B3_CAST).length+' family members, '+Object.keys(B3_VIBES).length+' Vibes built</div>'+Object.values(B3_CAST).map(c=>rowHtml('family',c.id,c.name,esc(c.vibes.map(v=>B3_VIBES[v].name).join(' + ')),facePic(c.id))).join('');
+  }else if(tab==='monsters'){
+    const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
+    h=Object.keys(by).map(ch=>'<div class="grp">'+(isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+'</div>'+by[ch].map(f=>rowHtml('monsters',f.id,f.name,(ROLE[f.role]||cap(f.role))+(f.pips?', '+f.pips+' pips':'')+' · hates '+((f.peeves||[]).map(p=>B3_FLAVORS[p].name).join(', ')||'nothing'),facePic(f.id))).join('')).join('');
+  }else if(tab==='glossary'){
+    const kinds=[...new Set(Object.values(B3_STATUS).map(s=>s.kind))];
+    h='<div class="chips">'+['',...kinds,'hazard'].map(k=>'<button type="button" class="chip" data-kind="'+k+'" style="min-height:36px;'+(glossKind===k?'background:var(--accent);color:var(--on-accent)':'')+'">'+(k?cap(k)+'s':'All')+'</button>').join('')+'</div>';
+    const rows=glossRows().filter(s=>!glossKind||s.kind===glossKind);
+    h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
+  }else if(tab==='anims'){
+    const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
+    h='<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
+    h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
+    const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
+    h+=Object.keys(by).map(ch=>'<div class="grp">'+(isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+' monsters</div>'+by[ch].map(f=>line(f.id)).join('')).join('');
+  }
+  L.innerHTML=h;
+  const on=L.querySelector('.row.on');if(on&&wide())on.scrollIntoView({block:'nearest'});
+}
+function glossRows(){
+  const a=Object.values(B3_STATUS).map(s=>s);
+  if(typeof B3_HAZARDS!=='undefined')Object.values(B3_HAZARDS).forEach(z=>a.push(Object.assign({kind:'hazard'},z)));
+  return a.sort((x,y)=>x.name.localeCompare(y.name));
+}
+function renderDetail(){
+  const D=$('detail');
+  if(!sel){D.classList.remove('open');D.innerHTML='';return;}
+  let h='',title='';
+  if(tab==='rules'){const r=RULES.find(x=>x.id===sel)||RULES[0];title=r.title;h='<h2>'+esc(r.title)+'</h2>'+r.html();}
+  else if(tab==='family'&&B3_CAST[sel]){title=B3_CAST[sel].name;h=familyHtml(sel);}
+  else if(tab==='monsters'&&B3_FOES[sel]){title=B3_FOES[sel].name;h=foeHtml(sel);}
+  else if(tab==='glossary'){const s=glossRows().find(x=>x.id===sel);if(s){title=s.name;h=statusHtml(s);}}
+  else if(tab==='anims'){title=ownerName(sel)+': animations';h=animsHtml(sel);}
+  if(!h){D.classList.remove('open');D.innerHTML='';return;}
+  D.innerHTML='<div id="dback"><button type="button" data-back="1">&lsaquo; Back</button><b>'+esc(title)+'</b></div>'+h;
+  D.classList.add('open');D.scrollTop=0;
+  document.querySelectorAll('#list .row').forEach(b=>b.classList.toggle('on',b.dataset.id===sel));
+}
+
+// ---------- Rules ----------
+function rulesTopics(){
+  const R=B3_RULES,P=R.pep,C=R.composure,K=R.ruckus,U=R.rankUnlock;
+  const li=a=>'<ul>'+a.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  const T=[];
+  T.push({id:'sheet',title:'Cheat sheet',sub:'The whole system on one screen',html:()=>
+    '<p class="hint">Fact: every number here is read from the game as it is built right now.</p>'
+    +'<table><tr><th>Thing</th><th>What to know</th></tr>'
+    +'<tr><td><b>Your turn</b></td><td>&#9650; BASIC is free and gives +'+P.basic+' Pep. &#9654; SKILLS spend Pep. &#9664; RUCKUS spends the shared gauge. &#9660; BAG is not built yet.</td></tr>'
+    +'<tr><td><b>Pep</b></td><td>Each person has their own, '+P.min+' to '+P.max+', starting at '+P.start+'. Skills cost 2 to 6.</td></tr>'
+    +'<tr><td><b>Turn bar</b></td><td>After a move you wait. Basic waits least, a Capstone most. Faster people come back sooner.</td></tr>'
+    +'<tr><td><b>Flavors</b></td><td>'+['clobber','sizzle','drench','razzle','racket','support'].map(flav).join(' ')+'</td></tr>'
+    +'<tr><td><b>Pet Peeve</b></td><td>A flavor a monster hates: '+R.peeve+'x damage and 1 Composure pip off. Resist: '+R.resist+'x.</td></tr>'
+    +'<tr><td><b>Prime</b></td><td>Sizzle leaves Toasty, Drench leaves Drenched, Razzle leaves Dazzled, for '+R.primeTurns+' of the monster\'s turns.</td></tr>'
+    +'<tr><td><b>Detonation</b></td><td>Hit a Primed monster with the right second flavor: a bonus effect, +'+P.detonation+' Pep, pips off.</td></tr>'
+    +'<tr><td><b>Composure</b></td><td>Elites and bosses have pips. At 0 they are Flustered: sent to the back of the bar and take '+pct(C.flusteredTaken)+' more damage.</td></tr>'
+    +'<tr><td><b>Ruckus</b></td><td>Shared gauge. '+K.doubleTeam+'%: Double Team. '+K.full+'%: Full Family Ruckus.</td></tr>'
+    +'<tr><td><b>Vibes</b></td><td>Each person wears a Main Vibe and a Pocket Vibe, plus 2 Quirks. Vibes rank up 1 to 5 with Vibe Points.</td></tr></table>'
+    +'<h3>Where to play it</h3>'+li(['<b>Battle Lab &gt; NEW BATTLE</b>: '+(typeof B3_LAB!=='undefined'?B3_LAB.length:'the')+' test fights, and VIBES AND RANKS to set loadouts. <a href="battle-lab.html">Open the Battle Lab</a>.',
+      '<b>Story</b>: chapter'+(B3_STORY.chapters.length===1?' ':'s ')+B3_STORY.chapters.join(', ')+' plays on the new battle (ADMIN &gt; Battle system &gt; Story battles).',
+      '<b>In a fight</b>: tap anyone to see everything on them. Tap the i beside a Skill to read it. A first tap on a move previews it, a second tap uses it.'])});
+  T.push({id:'turns',title:'The turn bar',sub:'Who goes next, and why',html:()=>
+    li(['The bar at the top shows who acts next. A round is '+R.round+' ticks, marked by a divider.',
+     'After acting you wait: <b>the move\'s wait x 100 / your Speed</b>. Basic '+R.recovery.basic+', Skill '+R.recovery.s1+', Grand Capstone '+R.recovery.cap+'.',
+     'The family starts '+R.startWait.party+' ticks out and monsters '+R.startWait.foe+', so the family usually moves first.',
+     '<b>Push</b> adds ticks to a monster\'s wait. <b>Pull</b> takes ticks off a family member\'s wait.',
+     'Each further push or pull on the same one inside a round is halved (35, then 17.5, then 8.75).',
+     'A monster move tagged "announced a turn ahead" shows on the bar before it lands. That is your window to shield, heal, or Fluster it.',
+     'One free (granted) action per person per round at most.'])});
+  T.push({id:'pep',title:'Pep',sub:'What moves cost',html:()=>
+    li(['Everyone has their own Pep, '+P.min+' to '+P.max+', and starts each fight at <b>'+P.start+'</b>.',
+     'A Basic costs 0 and gives <b>+'+P.basic+'</b>. Skills cost 2 to 6.',
+     'Setting off a Detonation gives +'+P.detonation+'. Taking a hit for someone gives +'+P.intercept+'.',
+     'From everything except your own Basic you can gain at most <b>+'+P.refundCap+' Pep a round</b>. Extra is lost.',
+     'A discount never takes a Skill below '+P.costFloor+' Pep.',
+     '<b>Pick-Me-Up</b> ('+R.pickMeUp.pep+' Pep, everyone has it) stands a knocked-out family member up at '+pct(R.pickMeUp.hp)+' HP. It shows in SKILLS while someone is down.'])});
+  T.push({id:'flavors',title:'Flavors and Primes',sub:'The five kinds of damage',html:()=>{
+    const pr=['toasty','drenched','dazzled'].map(id=>B3_STATUS[id]).filter(Boolean);
+    return '<table><tr><th>Flavor</th><th>What it is</th><th>Leaves</th></tr>'
+    +[['clobber','Physical'],['sizzle','Heat'],['drench','Water'],['razzle','Light and voltage'],['racket','Noise and scolding'],['support','No damage: heals, shields, help']].map(x=>'<tr><td>'+flav(x[0])+'</td><td>'+x[1]+'</td><td>'+(B3_FLAVORS[x[0]].prime?stLink(B3_FLAVORS[x[0]].prime):'Nothing. It only sets Primes off.')+'</td></tr>').join('')+'</table>'
+    +'<h3>The three Primes</h3>'+pr.map(s=>'<div class="card"><h4>'+esc(s.name)+'</h4><p>'+esc(s.desc)+'</p></div>').join('')
+    +li(['A Prime lasts '+R.primeTurns+' of the monster\'s own turns. A monster can hold more than one.',
+      'A hit that sets a Prime off does not leave its own Prime.',
+      'A two-flavor move plays its first flavor, then its second. Half the damage is each flavor.',
+      'One action sets off at most one Detonation per monster.']);}});
+  T.push({id:'detonations',title:'Detonations',sub:'Prime plus the right second hit',html:()=>{
+    const seen={},rows=[];B3_DETONATIONS.forEach(d=>{const key=d.id;const rec=stName(d.prime)+' + '+B3_FLAVORS[d.flavor].name;if(seen[key]){seen[key].rec.push(rec);}else{seen[key]={d,rec:[rec]};rows.push(seen[key]);}});
+    const fx=d=>{const e=d.effects[0]||{};return e.op==='status'?stLink(e.id):e.op==='strip'?(e.kind==='stance'?'Drops its guard or counter stance':'Strips '+(e.n||1)+' buff'):e.op==='push'?'Pushes it back '+e.n+' ticks':e.op==='splash'?pct(e.share)+' of the hit splashes to the monsters next to it':words(e.op);};
+    return '<p>Each one uses up the Prime, gives the attacker +'+P.detonation+' Pep, and fills the Ruckus gauge '+K.detonation+'%.</p><table><tr><th>Name</th><th>Recipe</th><th>What happens</th><th>Pips</th></tr>'
+     +rows.map(r=>'<tr><td><b>'+esc(r.d.name)+'</b></td><td>'+r.rec.join('<br>or ')+'</td><td>'+fx(r.d)+'</td><td>-'+r.d.pips+'</td></tr>').join('')+'</table>'
+     +'<p><b>Mix</b>: two different family members hitting one monster with two different flavors inside a round. Fills the Ruckus gauge '+K.mix+'%.</p>';}});
+  T.push({id:'composure',title:'Composure and Flustered',sub:'Breaking elites and bosses',html:()=>
+    li(['Elites and bosses have Composure pips (shown under their name).',
+     'A hit with a flavor it hates (Pet Peeve) takes <b>'+C.peeve+' pip</b> per action, not per hit.',
+     'A Detonation takes the pips in its table. Some Skills and Quirks print their own number.',
+     'One action takes at most <b>'+C.capPerAction+' pips</b> from one monster ('+C.capFullRuckus+' for a Full Family Ruckus).',
+     '<b>At 0 pips it is Flustered</b>: it goes behind everyone due in the next '+C.flusterWindow+' ticks, loses the move it was winding up, takes <b>'+pct(C.flusteredTaken)+' more damage</b>, and drops its counters until its next turn.',
+     'Then its pips refill, and it cannot lose pips again until that turn ends. It always gets that turn.',
+     'A Break fills the Ruckus gauge '+K.brk+'%.',
+     'A helper called in mid-fight arrives with '+pct(R.add.hp)+' of its HP and no pips.'])});
+  T.push({id:'damage',title:'Damage, healing and caps',sub:'The maths, briefly',html:()=>
+    '<p><b>Damage = Attack x move power x 100 / (100 + the target\'s Defense) x bonuses.</b></p>'
+    +'<table><tr><th>Power</th><th>x</th></tr>'+Object.keys(R.power).map(k=>'<tr><td>'+cap(k)+'</td><td>'+R.power[k]+'</td></tr>').join('')+'</table>'
+    +li(['A move that hits every monster or a row uses '+pct(R.aoeShare)+' of its power.',
+     'Pet Peeve '+R.peeve+'x. Resist '+R.resist+'x.',
+     'Crits: '+pct(R.crit.rate)+' of the time, x'+R.crit.dmg+'.',
+     'Heals are a share of the target\'s Max HP: tiny '+pct(R.heal.tiny)+', small '+pct(R.heal.small)+', standard '+pct(R.heal.standard)+', party '+pct(R.heal.party)+' each.',
+     'Bonuses of the same kind add. Different kinds multiply.',
+     '<b>Caps</b>: damage bonus +'+pct(R.caps.outBonus)+', damage reduction '+pct(R.caps.reduction)+', evasion '+pct(R.caps.evasion)+', shields '+pct(R.caps.shield)+' of Max HP, Defense cracks on one monster '+pct(R.caps.crack)+'.',
+     'Shields soak damage before HP and last '+R.shieldTurns+' turns unless the Skill says otherwise.'])});
+  T.push({id:'rows',title:'Rows, aim and statuses',sub:'Front, Back and who gets hit',html:()=>
+    li(['Each side has a Front row and a Back row. The family needs at least 1 in Front.',
+     'By default a person stands where their Main Vibe\'s Lean puts them: Support in Back, everyone else in Front.',
+     'Back row takes '+pct(R.backRowClobber)+' less single-target Clobber damage.',
+     'A monster picks its single target by weight: Front '+R.aggro.front+', Back '+R.aggro.back+'. "Eyes On Me" style statuses raise a person\'s weight. A taunt forces the aim.',
+     'Common statuses last '+R.statusTurns+' turns unless their entry says otherwise. A Stun on a boss is a '+R.stunBossTicks+' tick push instead of a lost turn.',
+     'Each unit shows at most 3 status icons. Tap the unit for the full list. The <a href="#glossary">Statuses</a> tab has every one.',
+     'At '+pct(R.lowHp)+' HP or less a person shows the low HP look.'])});
+  T.push({id:'ruckus',title:'Family Ruckus',sub:'The shared gauge and team-ups',html:()=>
+    li(['One gauge for the whole family, 0 to 100%. It keeps its value between fights.',
+     'It fills from: a Mix +'+K.mix+'%, a Detonation +'+K.detonation+'%, each extra hit of a multi-hit move +'+K.extraHit+'%, a Break +'+K.brk+'%.',
+     'On your turn, if the next one on the bar is also family, the pair can spend it in place of the first one\'s move. It costs 0 Pep and does not use the second one\'s turn.'])
+    +'<table><tr><th>Spend</th><th>Name</th><th>What happens</th></tr>'
+    +'<tr><td>'+K.doubleTeam+'%</td><td><b>Double Team</b></td><td>Both use their Main Vibe\'s Basic on one monster at +'+pct(K.doubleTeamPower)+' power. Both flavors count, so the pair can Prime and Detonate alone.</td></tr>'
+    +'<tr><td>'+K.full+'%</td><td><b>Full Family Ruckus</b></td><td>Both fire their best unlocked Main Vibe Skill for free, as one action. It can take '+C.capFullRuckus+' pips.</td></tr></table>'});
+  T.push({id:'vibes',title:'Vibes, Ranks and Quirks',sub:'How the family grows',html:()=>
+    li(['A <b>Vibe</b> is a job: a Trait, a Basic, two Skills, a Grand Capstone and two Quirks.',
+     '<b>Main Vibe</b>: gives its Trait, its Basic, its unlocked Skills and its Lean.',
+     '<b>Pocket Vibe</b>: adds a second Vibe\'s unlocked Skills only (not its Basic or Trait).',
+     '<b>'+R.quirkSlots+' Quirk slots</b>: any Quirks the person has unlocked, from any of their Vibes.',
+     'Set them in the pause menu &gt; VIBES, or Battle Lab &gt; NEW BATTLE &gt; VIBES AND RANKS.',
+     'After every fight everyone earns Vibe Points (VP). The Main Vibe earns all of it, the Pocket Vibe '+pct(R.pocketVp)+'.',
+     'The Battle Lab starts every Vibe at Rank '+R.labRank+'.'])
+    +'<table><tr><th>Rank</th><th>VP</th><th>Unlocks</th></tr>'
+    +R.rankVp.map((vp,i)=>{const r=i+1,u=Object.keys(U).filter(k=>U[k]===r).map(k=>({trait:'Trait',basic:'Basic',s1:'Skill 1',s2:'Skill 2',quirkA:'Quirk A',cap:'Grand Capstone',quirkB:'Quirk B'}[k]));if(R.subtitleRank.includes(r))u.push('new Subtitle');return '<tr><td><b>'+r+(r===R.rankVp.length?' &#9733;':'')+'</b></td><td>'+vp+'</td><td>'+u.join(', ')+'</td></tr>';}).join('')+'</table>'
+    +'<h3>Leans (Main Vibe only)</h3><table>'+Object.values(B3_LEANS).map(l=>'<tr><td><b>'+esc(l.name)+'</b></td><td>'+esc(l.desc)+'</td></tr>').join('')+'</table>'});
+  T.push({id:'tips',title:'What the game tells you',sub:'The tips shown during fights',html:()=>{
+    const t=B3_STORY.tips||{};return '<p class="hint">Fact: these are the tips the game shows in the message line, word for word.</p>'
+     +Object.keys(t).map(k=>'<h3>'+esc(k==='basics'?'First fights':words(k))+'</h3>'+t[k].map(x=>'<div class="card"><p style="margin:0">'+esc(x.text)+'</p></div>').join('')).join('');}});
+  T.push({id:'fights',title:'Test fights',sub:'Every Battle Lab fight',html:()=>
+    '<p>Battle Lab &gt; NEW BATTLE. <a href="battle-lab.html">Open the Battle Lab</a>.</p>'+(typeof B3_LAB!=='undefined'?B3_LAB.map(l=>'<div class="card"><h4>'+esc(l.name)+'</h4><p>'+esc(l.sub||'')+'</p><p class="hint">Party: '+(l.party||[]).map(ownerName).map(esc).join(', ')+(l.level?' · Level '+l.level:'')+'</p></div>').join(''):'')});
+  return T;
+}
+
+// ---------- Family ----------
+function moveCard(kind,label,row,unlock,animId){
+  if(!row) return '';
+  const chips=[];
+  if(row.pep!=null&&kind==='skill') chips.push('<span class="chip">'+(row.slot==='basic'?'Free, +'+B3_RULES.pep.basic+' Pep':row.pep+' Pep')+'</span>');
+  if(kind==='skill'){chips.push(flavs(row.flavor));const pw=powerWord(row.power);if(pw)chips.push('<span class="chip">'+esc(pw)+(row.hits>1?' x'+row.hits+' hits':'')+'</span>');
+    chips.push('<span class="chip">On '+esc(TARGET[row.target]||words(row.target))+'</span>');
+    if(row.rec)chips.push('<span class="chip">Wait '+row.rec+'</span>');}
+  const st=kind==='skill'?statusesOf(row.effects):statusesOf((row.effects||[]).concat(...(row.listen||[]).map(l=>l.effects||[])));
+  return '<div class="card"><div class="top"><div><div class="k">'+esc(label)+(unlock>1?' · unlocks at Rank '+unlock:'')+(row.soon?' · not built yet':'')+'</div><h4>'+esc(row.name)+'</h4></div>'+(animId?playBtn(animId):'')+'</div>'
+    +(chips.length?'<div class="chips">'+chips.join('')+'</div>':'')+'<p>'+esc(row.desc||'')+'</p>'
+    +(st.length?'<p class="hint">Uses: '+st.map(stLink).join(', ')+'</p>':'')+'</div>';
+}
+function familyHtml(id){
+  const c=B3_CAST[id],w=WHO[id]||['',''],vs=c.vibes.map(v=>B3_VIBES[v]);
+  const cur=vibeSel[id]&&B3_VIBES[vibeSel[id]]?vibeSel[id]:vs[0].id,v=B3_VIBES[cur],U=unlocks(v);
+  let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(c.name)+'</h2><div class="hint">'+esc(w[0])+'</div></div></div><p>'+esc(w[1])+'</p>';
+  h+='<p class="hint">Plays as: '+vs.map(x=>'<b>'+esc(x.name)+'</b> '+(LEAN_PLAY[x.lean]||x.lean)).join('; ')+'.</p>';
+  h+='<div class="seg">'+vs.map(x=>'<button type="button" data-vibe="'+x.id+'" aria-pressed="'+(x.id===cur)+'">'+esc(x.name)+'<br><small style="font-weight:500;opacity:.8">'+(x.sig===1?'Main on joining':x.sig===2?'Pocket on joining':'')+'</small></button>').join('')+'</div>';
+  const L=B3_LEANS[v.lean]||{name:cap(v.lean),desc:''};
+  h+='<div class="card"><div class="k">Lean (as Main Vibe)</div><h4>'+esc(L.name)+'</h4><p>'+esc(cap(L.desc))+'.</p><p class="hint">Titles by Rank: '+v.subtitles.map((s,i)=>'Rank '+B3_RULES.subtitleRank[i]+' '+esc(s)).join(' → ')+'</p></div>';
+  h+=moveCard('trait','Trait',B3_TRAITS[v.trait],1);
+  h+='<h3>Moves</h3>'+moveCard('skill','Basic',B3_SKILLS[v.basic],1,'move:'+v.basic);
+  ['s1','s2','cap'].forEach((k,i)=>{const sid=v.skills[i];if(!sid)return;const row=B3_SKILLS[sid];
+    h+=row?moveCard('skill',SLOT[k][0],row,rankOf(k),'move:'+sid):'<div class="card"><div class="k">'+SLOT[k][0]+' · not built yet</div><h4>'+esc((B3_SOON||{})[sid]||words(sid))+'</h4></div>';});
+  h+='<h3>Quirks</h3>'+v.quirks.map((q,i)=>moveCard('quirk','Quirk '+'AB'[i],B3_QUIRKS[q],rankOf(i?'quirkB':'quirkA'))).join('');
+  if(v.counter) h+='<div class="card"><div class="k">Counter</div><h4>'+esc(v.counter.name)+'</h4><p>Counts up to '+v.counter.max+'. It shows as a number on '+esc(c.name)+'\'s portrait, and it comes along when this Vibe is in the Pocket.</p></div>';
+  const body=animsOf(id).filter(a=>a.kind==='state');
+  if(body.length) h+='<h3>Body animations</h3>'+body.map(animRow).join('');
+  h+='<p><button type="button" class="ghost" data-go="anims" data-id="'+id+'">All of '+esc(c.name)+'\'s animations</button></p>';
+  return h;
+}
+
+// ---------- Monsters ----------
+function whenWords(w){if(!w)return '';const a=[];
+  if(w.hpBelow!=null)a.push('below '+pct(w.hpBelow)+' HP');if(w.hpAbove!=null)a.push('above '+pct(w.hpAbove)+' HP');
+  if(w.everyTurn)a.push('every '+w.everyTurn+(w.everyTurn===2?'nd':w.everyTurn===3?'rd':'th')+' turn');if(w.everyRound)a.push('every '+w.everyRound+' rounds');
+  if(w.once)a.push('once a fight');if(w.has)a.push('while it has '+stName(w.has));if(w.lacks)a.push('when it has lost '+stName(w.lacks));if(w.stripped)a.push('after '+stName(w.stripped)+' is stripped');
+  if(w.allyHurt)a.push('when a helper is hurt');if(w.allyId)a.push('while '+ownerName(w.allyId)+' is on the field');if(w.noAllyId)a.push('when '+ownerName(w.noAllyId)+' is gone');if(w.allyAge)a.push('when a helper has been out a while');
+  return a.join(', ');}
+function foeHtml(id){
+  const f=B3_FOES[id];
+  let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(f.name)+'</h2><div class="hint">'+(isNaN(f.ch)?cap(f.ch)+' chapter':'Chapter '+f.ch)+' · '+esc(ROLE[f.role]||f.role)+' · '+cap(f.row)+' row'+(f.noRun?' · no running away':'')+'</div></div></div>';
+  h+='<div class="stats"><div><b>'+f.hp+'</b><span>HP</span></div><div><b>'+f.atk+'</b><span>ATTACK</span></div><div><b>'+f.def+'</b><span>DEFENSE</span></div><div><b>'+f.spd+'</b><span>SPEED</span></div></div>';
+  h+='<table><tr><td><b>Composure</b></td><td>'+(f.pips?'<span class="pips">'+'●'.repeat(f.pips)+'</span> '+f.pips+' pips':'None. It cannot be Flustered.')+'</td></tr>'
+   +'<tr><td><b>Hates (Pet Peeve)</b></td><td>'+(flavs(f.peeves)||'Nothing')+'</td></tr><tr><td><b>Resists</b></td><td>'+(flavs(f.resists)||'Nothing')+'</td></tr>'
+   +((f.start||[]).length?'<tr><td><b>Starts with</b></td><td>'+f.start.map(stLink).join(', ')+'</td></tr>':'')
+   +(f.hp3?'<tr><td><b>HP against a party of 3</b></td><td>'+f.hp3+'</td></tr>':'')+'</table>';
+  h+='<h3>What it does</h3>'+f.acts.map(a=>{const st=statusesOf(a.effects),wn=whenWords(a.when);
+    return '<div class="card"><div class="top"><div><h4>'+esc(a.name)+'</h4></div>'+playBtn('act:'+f.id+':'+a.id)+'</div><div class="chips">'+flavs(a.flavor)+(a.power?'<span class="chip">power x'+a.power+'</span>':'')
+     +'<span class="chip">Hits '+esc(HITS[a.hits]||words(a.hits))+(a.aim==='back'?' in the Back row':'')+'</span><span class="chip">Wait '+a.recovery+'</span>'+(a.tags||[]).map(t=>'<span class="chip">'+esc(TAG[t]||words(t))+'</span>').join('')+'</div>'
+     +(wn?'<p class="hint">When: '+wn+'.</p>':'')+(a.then?'<p class="hint">Sets up: '+esc((f.acts.find(x=>x.id===a.then)||{}).name||words(a.then))+' on its next turn.</p>':'')
+     +(st.length?'<p class="hint">Leaves: '+st.map(stLink).join(', ')+'</p>':'')
+     +(a.wind?'<p style="margin-top:8px">'+playBtn('wind:'+f.id+':'+a.id)+' <span class="hint">its wind-up</span></p>':'')+'</div>';}).join('');
+  const where=Object.values(B3_FORMATIONS).filter(F=>(F.foes||[]).some(x=>x.id===id)),lab=typeof B3_LAB!=='undefined'?B3_LAB.filter(l=>where.some(F=>F.id===l.formation)):[];
+  if(lab.length) h+='<h3>Test it in the Battle Lab</h3>'+lab.map(l=>'<div class="card"><h4>'+esc(l.name)+'</h4><p>'+esc(l.sub||'')+'</p></div>').join('');
+  const body=animsOf(id).filter(a=>a.kind==='state');
+  if(body.length) h+='<h3>Body animations</h3>'+body.map(animRow).join('');
+  return h;
+}
+
+// ---------- Statuses ----------
+function durWords(d){if(!d)return '';const u={turn:' of its own turns',round:' rounds',begin:' (until its turn begins)',srcBegin:' (until the turn of whoever put it on begins)'}[d.unit]||'';return d.n!=null?d.n+u:u;}
+function statusHtml(s){
+  const users=[];
+  Object.values(B3_SKILLS).forEach(k=>{if(statusesOf(k.effects).includes(s.id)){const v=B3_VIBES[k.vibe];users.push('<a href="#family/'+(v?v.owner:'')+'">'+esc((v?ownerName(v.owner)+': ':'')+k.name)+'</a>');}});
+  Object.values(B3_FOES).forEach(f=>{if((f.start||[]).includes(s.id)||f.acts.some(a=>statusesOf(a.effects).includes(s.id)))users.push('<a href="#monsters/'+f.id+'">'+esc(f.name)+'</a>');});
+  return '<h2>'+esc(s.name)+'</h2><div class="chips"><span class="chip">'+esc(cap(s.kind))+'</span>'+(s.group?'<span class="chip">'+esc(cap(s.group))+'</span>':'')+(s.dur?'<span class="chip">Lasts '+esc(durWords(s.dur))+'</span>':'')+(s.uses?'<span class="chip">'+s.uses+' uses, '+s.rounds+' rounds</span>':'')+'</div><p>'+esc(s.desc||'')+'</p>'
+   +(users.length?'<h3>Who uses it</h3><p>'+users.slice(0,24).join(' · ')+'</p>':'');
+}
+
+// ---------- Animations ----------
+function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&c.anim.id===animId&&c.col!=='done');}
+function animRow(a){
+  const k={state:'Body',move:a.vibe||'Move',act:'Attack',wind:'Wind-up'}[a.kind],n=openNotes(a.id).length;
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(a.video?'<span class="badge v">VIDEO</span>':a.painted?'<span class="badge n">OLD PAINTED POSE</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
+}
+function animsHtml(id){
+  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='video')===a.video);
+  let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
+  h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
+  const grp=[['state','Body'],['move','Moves'],['act','Attacks'],['wind','Wind-ups']];
+  grp.forEach(g=>{const r=show.filter(a=>a.kind===g[0]);if(r.length)h+='<h3>'+g[1]+'</h3>'+r.map(animRow).join('');});
+  if(!show.length)h+='<p class="hint">Nothing in this filter.</p>';
+  return h;
+}
+
+// ---------- the player ----------
+// Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
+const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
+function closeSheet(){$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
+function frameAt(D,t){
+  let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
+  let i=0;while(i<D.n-1&&ms>=D.ms[i+1])i++;return i;
+}
+function drawFrame(i){
+  const D=PL.D,cv=$('cv');if(!D||!PL.img||!cv)return;const g=cv.getContext('2d'),r=D.rects[i];
+  g.clearRect(0,0,cv.width,cv.height);g.drawImage(PL.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);
+  const hf=$('hitflag');if(hf)hf.style.opacity=(D.impact!=null&&i>=D.impact&&i<=D.impact+2)?1:0;
+  const sc=$('scrub');if(sc&&document.activeElement!==sc)sc.value=i;
+  const fn=$('fno');if(fn)fn.textContent='Frame '+(i+1)+' of '+D.n+(D.impact!=null?' · hit lands on frame '+(D.impact+1):'');
+}
+function tick(now){
+  if(!PL.on)return;const dt=Math.min(100,now-PL.last);PL.last=now;PL.t+=dt*PL.speed;const L=clipLen(PL.D);if(PL.t>=L)PL.t%=L;
+  drawFrame(frameAt(PL.D,PL.t));PL.raf=requestAnimationFrame(tick);
+}
+function setPlaying(v){PL.on=v;const b=$('bplay');if(b)b.textContent=v?'Pause':'Play';if(v){PL.last=performance.now();PL.raf=requestAnimationFrame(tick);}else cancelAnimationFrame(PL.raf);}
+async function loadClip(id){
+  if(!CLIPS[id]){if(!CLIP_SRC[id])throw new Error('This video is named in the battle data but the game has no file for it yet.');await addScript(CLIP_SRC[id]);}
+  const D=CLIPS[id];if(!D)throw new Error('The clip file did not load.');
+  const img=new Image();await new Promise((ok,no)=>{img.onload=ok;img.onerror=()=>no(new Error('The clip picture did not load.'));img.src=D.src;});
+  return {D,img};
+}
+function noteForm(a){
+  const open=openNotes(a.id),tok=!!(lsGet(TOKEN)||Q.get('gh'));
+  return '<h3>Send Claude a note on this animation</h3>'
+   +(open.length?'<p class="hint">A note is already open on the board: "'+esc(open[0].title)+'". A new note is added to it.</p>':'')
+   +(tok?'':'<p class="err" style="font-size:14px">This browser has no GitHub token, so it cannot send. Open the <a href="board.html">Board</a>, tap the three dots, paste the token there, then come back.</p>')
+   +'<textarea id="ntxt" placeholder="'+(a.video?'What should change? For example: the arm swings twice, it should swing once.':'What should this animation show?')+'"></textarea>'
+   +'<p class="err" id="nerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="nsend" style="width:100%">Send to Claude</button>'
+   +'<p class="hint">It opens a card on the Board for Claude to make this animation again from your note.</p>';
+}
+async function openPlayer(animId){
+  const a=ANIM_BY[animId];if(!a)return;PL.a=a;PL.on=false;cancelAnimationFrame(PL.raf);PL.D=null;PL.img=null;PL.t=0;PL.speed=1;
+  const head='<div class="sh-top"><h2>'+esc(ownerName(a.owner))+': '+esc(a.name)+'</h2><button type="button" class="ghost" id="bclose">Close</button></div>';
+  const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
+  const S=$('sheet');S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
+  if(!a.clip){
+    S.innerHTML=head+stage(a.painted?'This one is still an old painted pose. Its video is not made yet, so there is nothing to play here.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+noteForm(a);
+    return;
+  }
+  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+noteForm(a);
+  try{
+    const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;
+    const cv=$('cv');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;$('scrub').max=r.D.n-1;
+    const m=S.querySelector('#stage .msg');if(m)m.remove();
+    setPlaying(true);
+  }catch(e){const m=S.querySelector('#stage .msg');if(m){m.textContent=e.message;m.classList.add('err');}}
+}
+
+// ---------- a note becomes a card on the board ----------
+// Same save as board.html: read data/board.json from GitHub (through the blob when it is over 1 MB), change it, write it back, try again on a clash.
+async function ghBoard(tok){
+  const H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
+  const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+BOARD+'?ref=main&t='+Date.now(),{cache:'no-store',headers:H});
+  if(!r.ok)throw new Error('GitHub '+r.status);
+  const j=await r.json();let c=j.content||'';
+  if(!c.replace(/\s/g,'')){const b=await fetch(GH()+'/repos/'+REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:H});if(!b.ok)throw new Error('GitHub '+b.status);c=(await b.json()).content||'';}
+  return {sha:j.sha,doc:JSON.parse(t64(c))};
+}
+async function saveBoard(msg,fn){
+  const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh'))throw new Error('This browser has no GitHub token. Open the Board, tap the three dots and paste it there.');
+  for(let tries=0;;tries++){
+    const g=await ghBoard(tok),next=fn(g.doc);
+    const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+BOARD,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:msg,content:b64t(JSON.stringify(next,null,1)+'\n'),branch:'main',sha:g.sha})});
+    if(w.status===409&&tries<3)continue;
+    if(!w.ok)throw new Error('GitHub '+w.status);
+    BOARD_DOC=next;return;
+  }
+}
+const NOTE_MODEL='Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)';
+const NOTE_EFFORT='medium (one animation, starting from the version that exists)';
+function notePrompt(c){
+  const a=c.anim,fam=!!B3_CAST[a.owner],file=a.clip?a.clip.replace(/_/g,'-'):'';
+  return 'Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card '+c.id+' in data/board.json with its history. Your first push is the commit board: start '+c.id+'.\n\n'
+   +'Tom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent '+(c.notes.length===1?'this note':'these notes')+':\n'
+   +c.notes.map((n,i)=>(i+1)+'. ('+n.at.slice(0,10)+(n.build?', game build '+n.build:'')+') '+n.words).join('\n')
+   +'\n\nThe animation: '+a.ownerName+', '+a.name+' ('+a.what+'). '
+   +(a.clip?'Its video is clip '+a.clip+' (data/clips/'+file+'.js, art/clips/'+file+'.webp).':a.painted?'It is still an old painted pose with no video.':'It has no video yet: it plays the standard motion.')
+   +'\n\nMake it again as a video and nothing else: '+(fam?'the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json)':'the monster route of the plan (xAI through the clip-gen Action, entries in tools/art-library/clip-prompts.js)')+'. '
+   +(a.clip?'Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed.':'Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for.')
+   +' Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3.'
+   +' Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape.'
+   +' Build tag '+c.tag+'. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > '+a.ownerName+', play '+a.name+', then All good or Something is wrong; set this card\'s after to it.'+PERM;
+}
+async function sendNote(){
+  const a=PL.a,w=String($('ntxt').value||'').replace(/\s+/g,' ').replace(/[<>]/g,'').split(String.fromCharCode(8212)).join(', ').trim();
+  if(!a)return;if(!w){$('nerr').textContent='Write what you saw first.';return;}
+  const btn=$('nsend');btn.disabled=true;btn.textContent='Sending...';$('nerr').textContent='';
+  const at=new Date().toISOString();let res=null;
+  try{
+    await saveBoard('board: animation note '+a.id,d=>{
+      let c=d.cards.find(k=>k.anim&&k.anim.id===a.id&&k.lane==='claude'&&k.col==='up'&&!k.backlog&&!(k.chat&&k.chat.url)),merged=!!c;
+      if(!c){
+        const slug=(a.clip||a.id.replace(/^[a-z]+:/,'')).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,28),ids=new Set(d.cards.map(k=>k.id)),tags=new Set(d.cards.map(k=>k.tag));
+        let sfx=Date.now().toString(36).slice(-4),id='c-anim-'+slug+'-'+sfx;while(ids.has(id)||tags.has(id.slice(2))){sfx=Math.random().toString(36).slice(2,6);id='c-anim-'+slug+'-'+sfx;}
+        const title=('Animation note: '+ownerName(a.owner)+', '+a.name).slice(0,60).trim();
+        c={id,tag:id.slice(2),lane:'claude',col:'up',theme:'Battle Animations',title,next:'',blocks:[],created:today(),changed:today(),
+           anim:{id:a.id,owner:a.owner,ownerName:ownerName(a.owner),name:a.name,kind:a.kind,clip:a.clip||'',painted:!!a.painted,what:a.what},notes:[],
+           chat:{url:'',opening:'A note sent from the Battle Guide'},history:[],
+           prompt:{what:'Makes the animation '+ownerName(a.owner)+', '+a.name+' again from your note, checks it, and hands it back to you to watch.',before:['Nothing to do first. Your note is on the card.'],model:NOTE_MODEL,effort:NOTE_EFFORT,text:''}};
+        d.cards.push(c);
+      }
+      c.notes.push({at,words:w,build:BUILD});c.changed=today();
+      c.history=(c.history||[]).concat([{d:today(),t:'Tom, from the Battle Guide: '+w,at}]);
+      c.prompt.text=notePrompt(c);
+      c.next='You sent '+(c.notes.length===1?'a note':c.notes.length+' notes')+' on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: '+w.slice(0,160);
+      res={id:c.id,title:c.title,merged,text:c.prompt.text};return d;});
+  }catch(e){btn.disabled=false;btn.textContent='Send to Claude';$('nerr').textContent=e.message+'. Your note was not sent.';return;}
+  setPlaying(false);
+  $('sheet').innerHTML='<div class="sh-top"><h2>Sent to Claude.</h2><button type="button" class="ghost" id="bclose">Close</button></div>'
+   +'<p>'+(res.merged?'Added to the open card':'A new card is on the Board')+': <b>'+esc(res.title)+'</b>.</p>'
+   +'<h3>What the next session will do</h3><p>Make this animation again from your note, check it, and hand it back to you to watch.</p>'
+   +'<h3>Before you paste</h3><ol class="steps"><li>Nothing to do first.</li></ol>'
+   +'<h3>Model</h3><div class="big">Claude Opus 5.5</div><p class="hint">Row D: a battle video you judge by taste.</p>'
+   +'<h3>Effort</h3><div class="big">medium</div><p class="hint">One animation, starting from the version that exists.</p>'
+   +'<h3>The prompt</h3><pre class="prompt" id="ptext">'+esc(res.text)+'</pre>'
+   +'<button type="button" class="gold" id="pcopy" style="width:100%">Copy prompt</button><p><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a> · <a href="board.html">Open the Board</a></p>';
+  if(tab==='anims'||tab==='family'||tab==='monsters')renderDetailKeep();
+}
+function renderDetailKeep(){const D=$('detail'),y=D.scrollTop;renderDetail();D.scrollTop=y;}
+function copyText(x){const ok=()=>toast('Prompt copied');
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));else fall(x,ok);}
+function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Could not copy. Select the text and copy it.');}ta.remove();}
+
+// ---------- search ----------
+function searchList(q){
+  const s=q.toLowerCase(),out=[],hit=(...a)=>a.some(x=>String(x||'').toLowerCase().includes(s));
+  RULES.forEach(r=>{if(hit(r.title,r.sub))out.push(['rules',r.id,r.title,'Rules']);});
+  Object.values(B3_CAST).forEach(c=>{if(hit(c.name))out.push(['family',c.id,c.name,'Family']);});
+  Object.values(B3_VIBES).forEach(v=>{if(hit(v.name,...v.subtitles))out.push(['family',v.owner,v.name,'Vibe of '+ownerName(v.owner),v.id]);});
+  Object.values(B3_SKILLS).forEach(k=>{const v=B3_VIBES[k.vibe];if(v&&hit(k.name,k.desc))out.push(['family',v.owner,k.name,ownerName(v.owner)+' · '+v.name+' · '+k.desc,v.id]);});
+  [B3_TRAITS,B3_QUIRKS].forEach((T,i)=>Object.values(T).forEach(k=>{const v=B3_VIBES[k.vibe];if(v&&hit(k.name,k.desc))out.push(['family',v.owner,k.name,(i?'Quirk':'Trait')+' of '+ownerName(v.owner)+' · '+k.desc,v.id]);}));
+  Object.values(B3_FOES).forEach(f=>{if(hit(f.name)||f.acts.some(a=>hit(a.name)))out.push(['monsters',f.id,f.name,'Monster, chapter '+f.ch]);});
+  glossRows().forEach(x=>{if(hit(x.name,x.desc))out.push(['glossary',x.id,x.name,cap(x.kind)+' · '+(x.desc||'')]);});
+  return out.slice(0,60);
+}
+function renderSearch(q){
+  const r=searchList(q);
+  $('list').innerHTML='<div class="grp">'+r.length+(r.length===60?'+':'')+' results for "'+esc(q)+'"</div>'+r.map(x=>'<button type="button" class="row" data-go="'+x[0]+'" data-id="'+esc(x[1])+'"'+(x[4]?' data-vibe-pick="'+esc(x[4])+'"':'')+'><span class="t"><b>'+esc(x[2])+'</b><span>'+esc(x[3])+'</span></span></button>').join('');
+}
+
+// ---------- taps ----------
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a');if(!t)return;
+  if(t.dataset.tab){$('q').value='';$('searchbar').hidden=true;go(t.dataset.tab,'');return;}
+  if(t.dataset.anim){e.preventDefault();openPlayer(t.dataset.anim);return;}
+  if(t.dataset.go){if(t.dataset.vibePick)vibeSel[t.dataset.id]=t.dataset.vibePick;if($('q').value){$('q').value='';$('searchbar').hidden=true;}go(t.dataset.go,t.dataset.id);return;}
+  if(t.dataset.back){go(tab,'');return;}
+  if(t.dataset.vibe){vibeSel[sel]=t.dataset.vibe;renderDetailKeep();return;}
+  if(t.dataset.kind!=null&&t.classList.contains('chip')){glossKind=t.dataset.kind;renderList();return;}
+  if(t.dataset.af){animFilter=t.dataset.af;renderDetailKeep();return;}
+  if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';renderList();}return;}
+  if(t.id==='bclose'){closeSheet();return;}
+  if(t.id==='bplay'){setPlaying(!PL.on);return;}
+  if(t.classList.contains('spd')){PL.speed=+t.dataset.s;document.querySelectorAll('.spd').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));return;}
+  if(t.id==='nsend'){sendNote();return;}
+  if(t.id==='pcopy'){copyText($('ptext').textContent);return;}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='scrub'&&PL.D){setPlaying(false);const i=+e.target.value;PL.t=PL.D.ms[i]||0;drawFrame(i);}
+  if(e.target.id==='q'){const q=e.target.value.trim();if(q.length>1)renderSearch(q);else renderList();}
+});
+$('dim').addEventListener('click',closeSheet);
+addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+wasWide=wide();boot();
+</script>
+</body>
+</html>
