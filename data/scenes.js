@@ -4098,7 +4098,9 @@ SCENES.ch8Boss=[
   {battle:'ironbelly',tut:'ironbelly'},
   {if:()=>flag('battle:ironbelly')!=='win',then:[
     {heal:true},
-    {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.','What she really wants is for somebody to bake something in her. Do that three times.']},
+    {if:()=>B3_CH_ON(8),then:[
+      {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, when she winds up BROIL, shield everybody. And hit her with a Drench while she\'s burning, it sets her off.','Then somebody bake something in her. That\'s all she wants.']}],else:[
+      {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.','What she really wants is for somebody to bake something in her. Do that three times.']}]},
     {toast:'Face Old Ironbelly and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 10. After the boss (won in the scene, or on a retry with A): forty loaves, a peel and a gold coin.
