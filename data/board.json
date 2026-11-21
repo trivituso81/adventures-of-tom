@@ -21324,10 +21324,10 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Big One's win line has it splash away before its talk",
-   "next": "Ready to start. Confirmed in code: data/monsters.js, The Big One die line.",
+   "next": "Shipped in build qa-coh02: the VICTORY line now reads \"It stops thrashing and blinks up at the shore.\"",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on COH-02 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21354,13 +21354,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Changed the die line in data/monsters.js (not voiced). Build qa-coh02."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
     "opening": "started by START"
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-qa-coh03",

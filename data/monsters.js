@@ -318,7 +318,7 @@ const MONSTERS={
     intro:'Something enormous surfaces. It\'s The Big One. Boppy was right.',
     attacks:['The Big One tail-slaps {t}.','The Big One glares at {t} with both eyes. It hurts somehow.','The Big One splashes a wave over {t}.'],
     special:{name:'Belly Flop',every:3,kind:'all',msg:'The Big One leaps and belly flops on everyone!'},
-    wobble:'The Big One flops...',die:'It flips back into the pond with a splash you can hear from the Square.',
+    wobble:'The Big One flops...',die:'It stops thrashing and blinks up at the shore.',
     rest:['Glub. Nobody saw that.','The pond is deep. I\'ll be in it.'],
     talk:['GLUB. So you\'re the ones Boppy keeps talking about.','I\'ve been in this pond since 1994. I\'ve never been caught. I\'ll never be caught.'],
     again:['Glub. I ate the lure. I feel great.','Round {n}. Bring the old man next time.'],
