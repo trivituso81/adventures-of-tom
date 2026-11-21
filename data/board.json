@@ -17786,9 +17786,9 @@
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "tag": "startfix1",
-   "next": "Waits on your card Edit the two broken START tasks (t-startfix-edit). Then it starts by itself, turns on the two START routes it can prove, and closes.",
+   "next": "Waits on your card Look at the two START tasks (t-startfix-look). Neither Opus medium nor Sonnet high is proven.",
    "prompt": {
     "what": "Proves the Opus medium and Sonnet high START tasks after Tom edited them, turns them on and retires the probe cards.",
     "before": [
@@ -17798,7 +17798,7 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and card c-startfix in data/board.json, including its history and Tom's card t-startfix-edit. Your first push is the commit board: start c-startfix. In data/board.json routines remove paused from opus-medium and sonnet-high, and set start: true on the cards c-probe-opus and c-probe-sonnet-high2 (throwaway cards whose only job is the push board: start followed by their own id). Run python3 tools/board_check.py and push. The board job fires each card on its own task. Wait up to 10 minutes (git fetch every minute) for the commits board: start c-probe-opus and board: start c-probe-sonnet-high2 on main. For a route whose commit does not arrive, put paused back on its routines entry with today's date and the reason, write the reason on c-startfix, and add a Tom card naming that route (ask decide or setup, one action); do not try the same thing a third time. Then retire both probe cards (Done, one history line each), write the result on c-startfix, and push the build startfix1 with a docs/CHANGES.md heading ## startfix1 (date): one plain line. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end",
+   "after": "t-startfix-look",
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
@@ -17846,10 +17846,15 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Result: unpaused both routes and flagged the two probe cards at 00:55 UTC. Opus medium was fired and claimed the probe (conversation qMqQE7bc) but made no push in 10 minutes. Sonnet high was never fired. The two earlier board: start probe commits came from Tom's hand-pasted runs at 00:54 UTC, not START. Both routes are paused again with the reason; not retried a third time. Probes retired. Card t-startfix-look added."
     }
    ],
    "auto": true,
-   "started_at": "2026-11-21T00:52:08+00:00"
+   "started_at": "2026-11-21T00:52:08+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "b-board-startpause",
@@ -18131,14 +18136,14 @@
   {
    "id": "c-probe-opus",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "tag": "probeopus1",
    "title": "Probe: Opus medium START route",
-   "next": "Throwaway probe for c-startfix. Its only job is the first push, board: start c-probe-opus.",
+   "next": "Retired by c-startfix: its only commit came from Tom pasting the prompt by hand, so it did not prove the START route.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "after": "nothing for Tom: end",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDCoc8BuDZqMqQE7bc",
@@ -18161,6 +18166,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by c-startfix. The board: start commit on main came from a hand-pasted run at 00:54 UTC, before the route was turned on, so it proves nothing about START."
     }
    ],
    "prompt": {
@@ -18171,7 +18180,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-opus. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-probe-sonnet-high",
@@ -18343,14 +18353,14 @@
   {
    "id": "c-probe-sonnet-high2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "tag": "probesonnethigh2",
    "title": "Probe: Sonnet high START route, second",
-   "next": "Throwaway probe for c-startfix. Its only job is the first push, board: start c-probe-sonnet-high2.",
+   "next": "Retired by c-startfix: its only commit came from Tom pasting the prompt by hand, so it did not prove the START route.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "after": "nothing for Tom: end",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGHf9rQ5BiGnCpm8zm",
@@ -18369,6 +18379,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by c-startfix. The board: start commit on main came from a hand-pasted run at 00:54 UTC, before the route was turned on, so it proves nothing about START."
     }
    ],
    "prompt": {
@@ -18379,7 +18393,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high2. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-keysecrets2-try-7",
@@ -18588,6 +18603,35 @@
     }
    ],
    "done": "2026-11-20"
+  },
+  {
+   "id": "t-startfix-look",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "ask": "setup",
+   "title": "Look at the two START tasks that still do not push",
+   "next": "Open the run list of the two START tasks on claude.ai and tell what the Opus run qMqQE7bc shows (error text, or nothing). Then tap I did this. Card c-startfix waits on it.",
+   "blocks": [
+    "c-startfix"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFovmpwidf6dk3L6j9",
+    "opening": "created by the startfix session"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-startfix: after your edit, Opus medium started a run but pushed nothing and Sonnet high never started. Only the task pages show why."
+    }
+   ],
+   "steps": [
+    "Open claude.ai/code/routines/trig_01Rqy2yoBNESZFGjQEUroFXQ (START Opus) and open its newest run (about 00:55 UTC on 21 Nov). Note the last line it shows, or that it is empty.",
+    "Open claude.ai/code/routines/trig_01B1nPPCmGppfbNM78wz5tMq (START Sonnet High). Check it lists a run at 00:55 UTC. If none, check the Trigger row is still API and the token was not regenerated by your edit.",
+    "Tap I did this and write what you saw in the note box. The Opus and Sonnet high routes stay paused; Sonnet medium keeps working."
+   ]
   }
  ],
  "sessions": [
@@ -21161,14 +21205,16 @@
    "model": "Claude Opus 5.5",
    "effort": "medium",
    "env": "OPUS_MEDIUM",
-   "enabled": true
+   "enabled": false,
+   "paused": "2026-11-21: after Tom's edit, the first START fire (opus-medium, 00:55 UTC) was claimed but pushed nothing in 10 minutes, and sonnet-high never fired. Fix card c-startfix, Tom card t-startfix-look."
   },
   {
    "id": "sonnet-high",
    "model": "Claude Sonnet 5.5",
    "effort": "high",
    "env": "SONNET_HIGH",
-   "enabled": true
+   "enabled": false,
+   "paused": "2026-11-21: after Tom's edit, the first START fire (opus-medium, 00:55 UTC) was claimed but pushed nothing in 10 minutes, and sonnet-high never fired. Fix card c-startfix, Tom card t-startfix-look."
   }
  ]
 }

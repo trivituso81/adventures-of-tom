@@ -1,3 +1,7 @@
+## startfix1 (2026-11-21): the Opus medium and Sonnet high START routes tried again and are still not proven, so both stay paused
+
+Card c-startfix. Facts: after Tom's edit both routes were turned on at 00:55 UTC and the two probe cards flagged. Opus medium fired and claimed its probe but pushed nothing in 10 minutes; Sonnet high never fired. The earlier probe commits came from hand-pasted runs, so they prove nothing. Both routes are paused again, probes retired, Tom card t-startfix-look added. Nothing in the game changed.
+
 ## fix-hollowtrail1-pics (2026-11-20): Hollow wrapper trail 1 remade and reviewed before Tom sees it; trails 2 to 4 need his OK for a different method
 
 Card c-fix-hollowtrail1-pics. Tom on t-hollowtrail1-pics: "they all look like shit. did you even review?"
