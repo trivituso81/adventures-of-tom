@@ -24083,7 +24083,7 @@
    "id": "c-anim-grace-dodge-p7wh",
    "tag": "anim-grace-dodge-p7wh",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Dodge",
    "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Make",
@@ -24109,13 +24109,18 @@
    ],
    "chat": {
     "url": "",
-    "opening": "A note sent from the Battle Guide"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Tom, from the Battle Guide: Make",
      "at": "2026-11-21T17:02:52.041Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T17:13:56.717Z"
     }
    ],
    "prompt": {
