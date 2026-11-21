@@ -25153,6 +25153,17 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T09:28:44-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
    "title": "Battle Guide page for the Duo, with animation notes",
    "first": "2026-11-21T07:31:48-08:00",
@@ -25198,17 +25209,6 @@
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
-   "title": "Animation note: Tom, Lounge Pass Flex",
-   "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T09:18:34-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-tom-loungepass-lf2z",
-    "c-anim-tom-dodge-ner3"
    ]
   },
   {
@@ -28562,8 +28562,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c54201bfd04caca6329ceff76b7381201f40fbbc",
- "synced_at": "2026-11-21T17:27:27+00:00",
+ "synced": "ea4165e03442e2f847374823e02ce6c97cce6d08",
+ "synced_at": "2026-11-21T17:29:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
