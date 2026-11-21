@@ -175,6 +175,19 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | Bake numbers | idle: whole video every 3rd picture, loop forward only (`--wrap`); run: one stride cycle found by frame likeness, `--wrap`; guard: kind guard with rise and lowering marks; hit, ko: the action stretch every 2nd picture at 1.5x; figure rows Tom 99, Grace 90, Rose 83, Deedee 99.3 |
 | Tests | `wanproof_test.py` W1 to W5 for every fighter with an idle video (idle is the video, standing height = painted battle size within 1 px, feet, jumps, tables and kit clips), `b3_test.py s8` (a state is a video or painted, never both; peak 15 clip pictures held at once in NEW 6, limit 16), `paint_state_test.py` (only the rows still painted) |
 
+### 4.9 Built (wanch2, 2026-11-21): the stop-loss list of wanch1 by a different method
+| Item | Result |
+|---|---|
+| Kling 4.0 on fal | Endpoint `kling/v4/image-to-video` in `wangen-jobs.json` (a job's `endpoint`; inputs `prompt`, `start_image_url`, `end_image_url`, `duration` 5, `resolution` 720p; no aspect, audio, prompt-expansion or seed fields; it returns 24 frames a second with a sound track the bake ignores). $0.157 a second, $0.79 a clip. Bake with `--fps 24` |
+| Cast | Kling made no rings on the first try for all four. Hands left the frame: Grace pad 0.8 passed (r4); Tom, Rose, Deedee filled the frame more, so pad 0.8 still cut the hands and pad 0.65 passed (r3; Deedee's fingertip touches the edge in 3 of 121 pictures, accepted). `B3_BODY_CLIPS[who].cast` |
+| Dodge | Kling kept the feet down (Wan's hop gone) but left the frame twice (r3 open frame, r4 pad 0.8: the head was cut at the edge of the shrunk picture; Kling treats the shrunk picture's edge as the frame). Stop-loss on Kling. Grace's dodge is now Rose's passed duck on Wan (r5, pad 0.8): passed. Tom (anim-tom-dodge-ner3) and Rose already had Wan ducks; Deedee's dodge stays with card c-anim-deedee-dodge-y4m3 |
+| Rose Tackle | Kling r3 one lamb (the Wan fault gone), hand out of the frame; r4 pad 0.65 passed (some pink fringe on the hair in the fastest pictures). Kit row `lamb_tuck_ankle_tackle` plays `rose_tackle` |
+| Missed, listed | Rose Giddyup on Kling: she jumps two or three times, not once, and the cannonball never happens. Deedee Wet-Floor on Kling: the mop head again sweeps below her feet line (two models, the same miss: the words "in front of her feet" read as lower on the screen in this view). Skeeter Bite on full Grok: never settles back to its start pose, twice (v3 darts away side-on; v4 without the dart grows and loses half the swarm) |
+| Monsters on full Grok | Toad Body Slam v3 and Skeeter Whine v3 passed (in frame, lily pad on, the small mosquitoes stay); wired in `data/b3-foes-ch01.js` |
+| Purge (wanch2a) | Painted states gone from the code; see CLAUDE.md "No painted poses in battle" |
+| Spend | fal $11.49 (14 videos: 13 Kling, 1 Wan); xAI $1.00 (4 Grok videos) |
+| What worked as a one-change fix | figure out of the frame on Kling: pad, and for a start picture that fills the frame, pad 0.65; a dodge: the duck wording, not a lean |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

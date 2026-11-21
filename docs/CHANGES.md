@@ -1,3 +1,19 @@
+## wanch2 (2026-11-21): new battle videos: every family member casts a spell, Grace ducks, Rose tackles; three that missed are listed
+
+Card c-wanch2 (parts wanch2a and this). The stop-loss list of wanch1, each by a different method than the one that missed twice. Tom's answer on t-wanch1-watch was All good with no note. Every video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired.
+
+| Video | Method | Result |
+|---|---|---|
+| Cast: Tom, Grace, Rose, Deedee | Kling 4.0 on fal (`kling/v4/image-to-video`, new in `wangen-jobs.json`), prompt files unchanged | No rings (Wan's fault). Grace passed with pad 0.8 (r3 fingertips at the edge); Tom, Rose, Deedee passed with pad 0.65 (pad 0.8 still cut their hands). `B3_BODY_CLIPS[who].cast` |
+| Grace: Dodge | Kling twice, then Rose's passed duck on Wan 3.0 | Kling kept her feet down but left the frame twice (stop-loss on Kling). The duck (Tom 11-21 10:33: "Maybe it should be ducking motion instead"), pad 0.8, passed: `grace_dodge` |
+| Rose: Lamb-Tuck Ankle Tackle | Kling | One lamb (Wan made two). Pad 0.65 after the reaching hand left the frame. Kit row plays `rose_tackle` |
+| Rose: "Giddyup, Tata!" Launch | Kling, one try | Missed: she jumps two or three times and never hugs her knees. Listed |
+| Deedee: Wet-Floor Hazard | Kling, one try | Missed: the mop head sweeps below her feet line, as on Wan. Listed |
+| Bog Toad Body Slam, Skeeter Whine, Skeeter Bite | full Grok (wanch2a) | Slam and Whine passed; Bite missed twice. Listed |
+| Deedee: Dodge | not made here | Card c-anim-deedee-dodge-y4m3 has it (another session) |
+
+Tom's and Rose's dodges already existed (Wan ducks). Spent: fal $11.49 (13 Kling clips, 1 Wan), xAI $1.00. Next: Tom watches the 7 videos (t-wanch2-watch), then c-wanch3 remakes the three that missed. Tests: `wanproof_test.py` FAILS [], `video_only_test.py` FAILS [], `b3_test.py s8` FAILS [] (peak 14 clips), `guidegen/build_map_test.py`, smoke.
+
 ## win3skip (2026-11-21): the WIN NOW button is back in battle screens
 
 Tom: "when the option to auto win is turned on i dont see the corresponding button in batle screens anymore." The button only existed in the old battle screen (Battle 2); Battle 3 had none.

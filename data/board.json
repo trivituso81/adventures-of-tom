@@ -22844,7 +22844,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "wanch2",
-   "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. It also removes the old painted-pose code for good (no longer drawn since idea-tomgrace).",
+   "next": "Shipped (wanch2a, wanch2b, wanch2). Painted battle poses removed from the code. New videos: cast for all four (Kling 4.0), Grace's dodge (a Wan duck), Rose's Lamb-Tuck Ankle Tackle (Kling), the Toad's Body Slam and the Skeeter's Mosquito Whine (full Grok). Missed and listed for c-wanch3: Rose's Giddyup (jumps more than once), Deedee's Wet-Floor (mop below her feet on a second model), the Skeeter's Darting Bite (never settles back, twice). Spent $11.49 on fal and $1.00 on xAI.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -22901,6 +22901,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as wanch2a: the old painted battle poses are gone from the code; the Bog Toad's Body Slam and the Skeeter's Mosquito Whine are videos"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped wanch2: cast (Tom, Grace, Rose, Deedee on Kling 4.0, no rings), Grace dodge (Kling left the frame twice, stop-loss; then Rose's passed duck on Wan, passed), Rose Tackle (Kling, one lamb), Toad Body Slam and Skeeter Whine (full Grok). Missed: Giddyup (repeated jumps), Wet-Floor (mop below the feet line again), Skeeter Bite (no settle, twice). Deedee's dodge left to c-anim-deedee-dodge-y4m3; Tom's and Rose's dodges already existed. Next: t-wanch2-watch, then c-wanch3."
     }
    ],
    "prompt": {
@@ -22913,7 +22917,7 @@
     "effort": "medium (the route, the checks, the bake and the tests are built and written down; this repeats them with another model)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). The painted states are no longer drawn for Tom, Grace, Rose and Deedee (idea-tomgrace: B3_VIDEO_ONLY, b3cStandIn shows one of their videos where a state has none), so purge them completely in wanch2a whatever the video tries give (B3_BODY_PAINT, b3PaintState, b3GuardDraw and B3_GUARD, b3KoDraw painted parts and b3GetUp, B3_PAINT except the dodge slide b3cStandIn uses, the Lab row PAINTED STATES: CHAPTER 1 and its link in battle-lab.html and engine/splash.js, engine/pose-review.js, data/pose-review.json, docs/BATTLE3.md Painted body states; tools/paint_state_test.py is already gone). Keep python3 -I tools/video_only_test.py passing. A new video for a state replaces its stand-in by being listed in B3_BODY_CLIPS or the kit row. Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: c-wanch2"
+   "after": "t-wanch2-watch"
   },
   {
    "id": "c-b3s14",
@@ -28548,6 +28552,65 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-wanch2-watch",
+   "title": "Watch 7 new chapter 1 battle videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations and play these 7 videos once each (about 3 minutes in all): Tom, Grace, Rose and Deedee: Cast; Grace: Dodge; Rose: Lamb-Tuck Ankle Tackle; Monsters: Bog Toad Body Slam and Skeeter Swarm Mosquito Whine. In a fight they replace the stand-ins (the hand-out video for a cast, the sliding standing video for Grace's dodge). Then tap All good, or Something is wrong with which video and what you saw. This unblocks the three that missed (c-wanch3).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE and choose Animations.",
+    "Play Cast for Tom, Grace, Rose and Deedee, Grace's Dodge, Rose's Lamb-Tuck Ankle Tackle, the Bog Toad's Body Slam and the Skeeter Swarm's Mosquito Whine.",
+    "Tap All good, or Something is wrong and say which video and what you saw."
+   ],
+   "blocks": [
+    "c-wanch3"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "wanch2",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanch2. Every video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired."
+    }
+   ]
+  },
+  {
+   "id": "c-wanch3",
+   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanch3",
+   "next": "Waits on your card Watch the new chapter 1 videos. Then it applies your notes and tries Deedee's Wet-Floor, Rose's Giddyup and the Skeeter's Darting Bite once more, each with one named change.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanch2 for the three videos it could not pass."
+    }
+   ],
+   "prompt": {
+    "what": "Applies your notes on the new chapter 1 videos, then tries the three that missed (Deedee's Wet-Floor, Rose's Giddyup, the Skeeter's Bite) once more, one named change each, wires what passes. At most $4.",
+    "before": [
+     "Play the 7 videos on the card Watch the new chapter 1 videos and answer it.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
+    "effort": "medium (the route, the checks, the bake and the tests are built; each video gets one written change)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2), then card c-wanch3 in data/board.json with its history and the Tom card that blocked it (t-wanch2-watch: his answer and note). Your first push is the commit board: start c-wanch3. First apply Tom's notes from t-wanch2-watch (one change per video, smallest change). Then the three that missed in wanch2, one try each, one change each, checked by plan 4.4: (1) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): the mop head sweeps below her feet line on Wan and on Kling; the words \"in front of her feet\" read as lower on the screen, so change only those words to \"beside her feet, level with them\" in a new prompt file wan-deedee-wetfloor-v2.txt. (2) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): she jumps two or three times; drop only the last sentence's \"she hops back to her spot and\" (the second hop) in wan-rose-giddyup-v2.txt. (3) Skeeter Swarm Darting Bite (clip-skeeter-bite): Grok never brings it back to its start pose (twice); make it as a wangen job on Wan 3.0 with the start picture art/clips/start/skeeter.png as both first and last frame (end_image_url forces the return), the MOTION part of the Art Library entry's prompt as written now, fit 640x480. Bake each video that passes (bake_clip.py, --fps 24 for Kling), wire it (B3_BODY_CLIPS, the kit row, or the foe row in data/b3-foes-ch01.js), purge what it replaces, test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $4 on fal. Build tag wanch3, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

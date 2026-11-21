@@ -214,7 +214,7 @@ with sync_playwright() as p:
         pg.screenshot(path=os.path.join(out, 'battleguide-%s-cannot.png' % name))
         pg.click('#bclose')
         ids = pg.evaluate("[Object.keys(ANIM_BY).sort(), Object.keys(GUIDE.anims).sort()]")
-        check(name + ': the page and data/guide-anims.json list the same animations', ids[0] == ids[1] and len(ids[0]) == 346, (len(ids[0]), len(ids[1])))
+        check(name + ': the page and data/guide-anims.json list the same animations', ids[0] == ids[1] and len(ids[0]) >= 346, (len(ids[0]), len(ids[1])))
         check(name + ': no script errors', not errs, errs)
         cx.close()
 

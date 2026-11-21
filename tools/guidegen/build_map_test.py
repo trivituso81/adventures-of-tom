@@ -28,10 +28,10 @@ check('wanch2a: no animation is a painted pose', 'painted' not in c and not any(
 check('every prompt has one MOTION part', all(a['prompt'].count('MOTION:') == 1 for a in A.values()), [i for i, a in A.items() if a['prompt'].count('MOTION:') != 1][:5])
 check('every animation with a video has a real prompt', all(a['promptSource'] in ('job', 'entry', 'used') for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and a['promptSource'] not in ('job', 'entry', 'used')])
 check('every animation with a video says what made it', all(a['madeBy'] for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and not a['madeBy']])
-ALLOWED_JOBS = {'deedee-cast', 'grace-cast', 'rose-cast', 'tom-cast'}
-ALLOWED_ENTRIES = {'deedee-cast', 'grace-cast', 'rose-cast', 'tom-cast', 'tom-give', 'rose-boop', 'rose-sleep'}
-check('jobs that match no animation are only the four shape-level cast jobs', set(D['unmapped']['jobs']) == ALLOWED_JOBS, D['unmapped']['jobs'])
-check('entries that match no animation are the known seven', set(D['unmapped']['entries']) == ALLOWED_ENTRIES, D['unmapped']['entries'])
+ALLOWED_JOBS = set()   # wanch2: the four cast jobs are body state cast videos now
+ALLOWED_ENTRIES = {'tom-give', 'rose-boop', 'rose-sleep'}   # wanch2: the cast entries map to the cast videos
+check('every job matches an animation', set(D['unmapped']['jobs']) == ALLOWED_JOBS, D['unmapped']['jobs'])
+check('entries that match no animation are the known three', set(D['unmapped']['entries']) == ALLOWED_ENTRIES, D['unmapped']['entries'])
 jobs = [a['job'] for a in A.values() if a['job']]
 check('no Wan job is matched by two animations', len(jobs) == len(set(jobs)), [j for j in set(jobs) if jobs.count(j) > 1])
 # a draft keeps the pattern word for word
@@ -62,7 +62,7 @@ check('the monster price is what clipgen.py books', all(abs(a['price'] - round(c
 lp = A['move:lounge_pass_flex']
 check('Lounge Pass Flex: its prompt is its job\'s current rev file, with later tries noted', lp['job'] == 'tom-loungepass' and lp['entry'] == 'clip-tom-loungepass' and lp['promptFile'].endswith('wan-tom-loungepass-v%d.txt' % lp['promptRev']) and lp['laterTries'] == 1 and lp['recipe'] == 'strike1x', {k: lp.get(k) for k in ('job', 'promptFile', 'laterTries', 'recipe', 'madeBy')})
 check('Grace\'s guard maps to the proof job named video', A['body:grace:guard']['job'] == 'video' and A['body:grace:guard']['recipe'] == 'guard')
-check('a stop-lossed move keeps its job and says it has no video', A['move:lamb_tuck_ankle_tackle']['job'] == 'rose-tackle' and not A['move:lamb_tuck_ankle_tackle']['video'])
+check('a stop-lossed move keeps its job and says it has no video', A['move:giddyup_tata_launch']['job'] == 'rose-giddyup' and not A['move:giddyup_tata_launch']['video'])
 check('Mud Flick and Mud Pie share the throw entry', A['act:mudling:mud_flick']['entry'] == 'clip-mudling-throw' and A['act:mudling:mud_pie']['entry'] == 'clip-mudling-throw')
 check('a monster without a start picture cannot be made and says how it will be', not A[next(i for i, a in A.items() if a['owner'] == 'tnb')]['canMake'])
 # overrides
