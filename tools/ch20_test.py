@@ -46,7 +46,7 @@ with sync_playwright() as pw:
     check('opening: the Stillness Core',adv(pg,300,"()=>currentMap.id==='stillcore'&&flag('ch20-open')===true&&!intro.active")); pg.wait_for_timeout(600); shot(pg,'core')
     # a wrong answer then a right one at the first door
     for who in ['tom','grace','rose','amy','deedee','boppy','tnb','nara']:
-        pg.evaluate(f"()=>{{ const o=currentMap.objects.find(o=>o.who==='{who}'); player.x=o.x+1; player.y=o.y+o.h; player.facing='up'; player.move=null; pressAction(); }}"); pg.wait_for_timeout(300)
+        pg.evaluate(f"()=>{{ const o=currentMap.objects.find(o=>o.who==='{who}'); player.x=o.x+1; player.y=o.y+o.h; player.facing='up'; player.move=null; placeFollowers(); pressAction(); }}"); pg.wait_for_timeout(300)
         if who=='tom': shot(pg,'door-prompt')
         ok=pg.evaluate("()=>dialog.active===true")
         # choose the correct option by index (last option may differ): read choice labels from dialog
@@ -59,7 +59,7 @@ with sync_playwright() as pw:
         check(f'door {who} opens',pg.evaluate(f"()=>flag('door-{who}')===true"))
     adv(pg,40,"()=>!intro.active&&!dialog.active")
     check('core open: ff4 and tnb4, nara4 unlocked',pg.evaluate("()=>!!flag('ch20-core')&&!!flag('tombo:ff4')&&!!flag('tombo:tnb4')&&!!flag('tombo:nara4')")); shot(pg,'core-open')
-    pg.evaluate("()=>{ const o=currentMap.objects.find(o=>o.kind==='celift'); player.x=o.x+2; player.y=o.y+o.h; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(300)
+    pg.evaluate("()=>{ const o=currentMap.objects.find(o=>o.kind==='celift'); player.x=o.x+2; player.y=o.y+o.h; player.facing='up'; player.move=null; placeFollowers(); pressAction(); }"); pg.wait_for_timeout(300)
     pg.keyboard.press('Enter')
     check('lift up: Engine, fight 1 begins',adv(pg,400,"()=>battle.active")); pg.wait_for_timeout(1500); shot(pg,'levi-open')
     pg.evaluate("()=>{ B7.speed=3; }")

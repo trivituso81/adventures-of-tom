@@ -27715,6 +27715,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreenk: the chapter 17 test waits for the game instead of guessing times, and gets its real time limit"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreenl: ch20_test part fixed (the test was wrong: it teleported the player and left the followers 33 tiles behind, so each door scene walked the party for 10 s first; the doors, the Core, the lift and the Leviathan fight now pass); the row keeps known_fail (fails from the check shatter scene to Julian on; with flags set the game plays it, so what differs after the real fight is not found). minutes 2 to 20. 1 row still marked known_fail."
     }
    ],
    "prompt": {

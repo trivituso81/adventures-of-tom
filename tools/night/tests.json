@@ -901,8 +901,8 @@
    "id": "ch20_test",
    "cmd": "python3 -I tools/ch20_test.py",
    "group": "g5",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
+   "minutes": 20,
+   "known_fail": "fails from the check shatter scene to Julian on, after the real Leviathan fight (claude/next-addendum-nightgreen.md)"
   },
   {
    "id": "ch4_b3_test",
