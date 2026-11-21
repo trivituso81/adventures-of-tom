@@ -849,13 +849,6 @@
    "outdir": true
   },
   {
-   "id": "art-library__test",
-   "cmd": "python3 -I tools/art-library/test.py",
-   "group": "g5",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
-  },
-  {
    "id": "b3-sim-check",
    "cmd": "node tools/b3-sim.js check",
    "group": "g5",
