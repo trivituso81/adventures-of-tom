@@ -48,6 +48,48 @@
    "text": "I asked a tree for directions.",
    "script": "[fast, dreamy] I asked a tree for directions.",
    "takeId": "tmwpkl0xr19fl"
+  },
+  {
+   "voice": "ellie",
+   "text": "Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.",
+   "script": "[heavy Long Island accent, serene, smug] Deedee keeps offering me apple muffins. I keep saying yes. [heavy Long Island accent, arch, deadpan] ...That's called MANNERS.",
+   "takeId": "gen-6949555e49"
+  },
+  {
+   "voice": "grace",
+   "text": "3 wrappers, let's follow them!",
+   "script": "[bright, bossy, bright, energetic] 3 wrappers, let's follow them!",
+   "takeId": "gen-c41bcd621d"
+  },
+  {
+   "voice": "rose",
+   "text": "One more ride, Tata! To the cab!",
+   "script": "[small, earnest, silly, bright, energetic] One more ride, Tah Tah! To the cab!",
+   "takeId": "gen-d5847f85ff"
+  },
+  {
+   "voice": "sal",
+   "text": "Los Angeles? You got it.",
+   "script": "[quick, friendly] Los Angeles? You got it.",
+   "takeId": "gen-07c74e7074"
+  },
+  {
+   "voice": "deedee",
+   "text": "Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+   "script": "[warm Long Island accent, brisk, fussing] Apple muffins in the oven, dinner on the stove, floors just mopped. [warm Long Island accent, bossy, sweet] Shoes off. [warm Long Island accent, bright, coaxing] Who wants a cookie?",
+   "takeId": "gen-97be5d30cf"
+  },
+  {
+   "voice": "tom",
+   "text": "Alright, time for me to head back to LA. Let's head to Sal's!",
+   "script": "[dry, calm, bright, energetic] Alright, time for me to head back to LA. Let's head to Sal's!",
+   "takeId": "gen-12f78b7a54"
+  },
+  {
+   "voice": "deedee",
+   "text": "Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.",
+   "script": "[warm Long Island accent, stern, warm] Apple muffins is cooling on the counter. Don't touch it. [warm Long Island accent, softening, playful] Okay, one corner.",
+   "takeId": "gen-c6a9eb0577"
   }
  ]
 }

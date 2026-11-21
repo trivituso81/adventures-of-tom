@@ -251,14 +251,16 @@
    "speaker": "Deedee",
    "text": "Excuse me! I just washed that floor.",
    "ctx": "chapter 1 (heist1)",
-   "script": "[sharp, offended] Excuse me! [flat, slower] I just WASHED that floor."
+   "script": "[warm Long Island accent, sharp, offended] Excuse me! [warm Long Island accent, flat, slower] I just WASHED that floor.",
+   "takeId": "gen-d893247002"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming.",
    "ctx": "chapter 1 (heist1)",
-   "script": "[storytelling, enjoying himself] ...so I say to him, \"Nice hat.\" [mild, casual] He says, \"Thank you.\" [punchline, delighted] And the hat is STEAMING."
+   "script": "[thick New York accent, storytelling, enjoying himself] ...so I say to him, \"Nice hat.\" [thick New York accent, mild, casual] He says, \"Thank you.\" [thick New York accent, punchline, delighted] And the hat is STEAMING.",
+   "takeId": "gen-89aa643e65"
   },
   {
    "voice": "deedee",
