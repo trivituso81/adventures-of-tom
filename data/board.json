@@ -24474,8 +24474,7 @@
    "id": "c-anim-tom-loungepass-ding",
    "tag": "anim-tom-loungepass-ding",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Ding sound on the Lounge Pass sparkle",
    "next": "Waits on your card Watch Tom's new Lounge Pass Flex. Then it adds a short cartoon ding that plays when the sparkle shows on the card in Lounge Pass Flex.",
@@ -24490,6 +24489,10 @@
     {
      "d": "2026-11-21",
      "t": "anim-tom-loungepass-fix1 remade the clip: the sparkle is now on baked pictures 9 to 11; the prompt says picture 10."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Watch Tom's new Lounge Pass Flex is done."
     }
    ],
    "prompt": {
@@ -27205,6 +27208,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as guideprompts1b: the prompt writer keeps each character's own pronoun, including Nara's \"it\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as guideprompts1c: the prompt writer no longer turns the game's hit-type labels into props"
     }
    ],
    "prompt": {
@@ -28245,6 +28252,33 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T11:57:57-08:00",
+   "tags": [
+    "clips",
+    "wanch2a"
+   ],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "first": "2026-11-21T11:25:36-08:00",
+   "last": "2026-11-21T11:57:25-08:00",
+   "tags": [
+    "guideprompts1a",
+    "guideprompts1b",
+    "guideprompts1c"
+   ],
+   "cards": [
+    "c-guideprompts"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T11:54:20-08:00",
@@ -28254,19 +28288,6 @@
    ],
    "cards": [
     "c-nightgreen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
-   "title": "Write real prompts for 267 starter-draft battle animations",
-   "first": "2026-11-21T11:25:36-08:00",
-   "last": "2026-11-21T11:54:01-08:00",
-   "tags": [
-    "guideprompts1a",
-    "guideprompts1b"
-   ],
-   "cards": [
-    "c-guideprompts"
    ]
   },
   {
@@ -28285,19 +28306,6 @@
     "c-anim-tom-dodge-ner3",
     "c-wanch2",
     "c-anim-tom-loungepass-fix1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:48:40-08:00",
-   "tags": [
-    "clips",
-    "wanch2a"
-   ],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -31876,8 +31884,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7dd1c444094370bc901b453d138d6800b9f371e4",
- "synced_at": "2026-11-21T19:57:21+00:00",
+ "synced": "fa6f1f6969c9380de89738dfce29b013c71b88e3",
+ "synced_at": "2026-11-21T19:58:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
