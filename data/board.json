@@ -26773,6 +26773,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T11:26:03-08:00",
+   "tags": [
+    "clips"
+   ],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "first": "2026-11-21T11:25:36-08:00",
+   "last": "2026-11-21T11:25:36-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideprompts"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
@@ -26799,18 +26821,6 @@
    ],
    "cards": [
     "c-buildpill1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:07:58-08:00",
-   "tags": [
-    "clips"
-   ],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -30316,8 +30326,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8a4c494ac561e171d0c4635a08b0c31dcf00f99c",
- "synced_at": "2026-11-21T19:25:28+00:00",
+ "synced": "c587158c9b81e3ae356d73d0fe2a626c66fca6b0",
+ "synced_at": "2026-11-21T19:26:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
