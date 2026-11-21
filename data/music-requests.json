@@ -1,0 +1,11 @@
+{
+ "requests": [
+  {
+   "id": "battle",
+   "prompt": "Heroic orchestral pop-rock adventure, energetic, playful, and kinetic, 152 BPM, in G major, instrumental only — crisp dry drum kit with a driving straight-eighth backbeat, prominent upfront melodic electric bassline, agile live viola and cello accompaniment with bright acoustic piano chords and compact brass accents, clean electric guitar and first violins playing a catchy, memorable, hummable single-note main melody in octave unison with complete question-and-answer phrases — high-fidelity live studio recording with a live string section, close-mic'd drums and guitar amplifier, warm analog mix, spirited friendly competition and confident heroism, continuous groove, no organs, no synthesizers, no MIDI timbres, no fade-out, no vocals. Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
+   "len": 90,
+   "model": "music_v2_5",
+   "at": 1795291160389
+  }
+ ]
+}
