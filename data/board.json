@@ -25573,7 +25573,7 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "next": "Shipped in anim-rose-lava-xftr: Kling 4.0 made the video with no lava (the lava try ran off the frame edge), the game draws the lava pool under her. Waiting on your look (card t-anim-rose-lava-xftr-watch).",
@@ -25680,6 +25680,10 @@
     {
      "d": "2026-11-21",
      "t": "Kling 4.0 with the lava in the prompt (job rose-lava-kling, $0.78): story right and size steady, but the lava touched the left edge in 66 of 121 pictures and she turns toward the viewer. Fallback, as the prompt said: the same job with the lava taken out (rose-cushion-kling, prompt wan-rose-cushion-hop-v1.txt, $0.79; Tom OK'd going $0.07 over the $1.50 and raising the cap to cover another session's $1.72 on the shared ledger). It passed: nothing enters from an edge, head within the 8% band by eye, cushion whole. Baked with 10 rows under the feet (the cushion sits lower than her feet) and the game now draws the lava under her (engine/clip-ground.js), in battle and in the Battle Guide. Faults left: she faces the viewer while bouncing, and ends a little turned. Build anim-rose-lava-xftr."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-lava-xftr: Rose's The Floor Is Lava! is a new Kling video (cushion toss, hop, two bounces) and the game draws the lava under her"
     }
    ],
    "prompt": {
@@ -25698,7 +25702,8 @@
     "url": "https://claude.ai/code/cse_01RXeukDLdQ8yhHeC6LQH7N8",
     "prev": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs"
    },
-   "after": "t-anim-rose-lava-xftr-watch"
+   "after": "t-anim-rose-lava-xftr-watch",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-deedee-dodge-y4m3",
@@ -30825,6 +30830,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGC1pc5UTHywvnxx7e",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "first": "2026-11-21T13:03:56-08:00",
+   "last": "2026-11-21T14:15:12-08:00",
+   "tags": [
+    "anim-rose-lava-xftr"
+   ],
+   "cards": [
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
    "title": "Take me there: a play card opens the game at its spot",
    "first": "2026-11-21T14:06:28-08:00",
@@ -30948,16 +30965,6 @@
    ],
    "cards": [
     "c-guardwin1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC1pc5UTHywvnxx7e",
-   "title": "Animation note: Rose, The Floor Is Lava!",
-   "first": "2026-11-21T13:03:56-08:00",
-   "last": "2026-11-21T13:03:56-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-rose-lava-xftr"
    ]
   },
   {
@@ -34692,8 +34699,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "dae73765c1606033c3a6edeee4b0fc62508b2c89",
- "synced_at": "2026-11-21T22:13:10+00:00",
+ "synced": "26df60a36f786de06556e486319edcb2530f8703",
+ "synced_at": "2026-11-21T22:15:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
