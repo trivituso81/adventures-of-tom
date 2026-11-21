@@ -21242,7 +21242,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "The Big One's Inspect text describes a frog",
-   "next": "Ready to start. Confirmed in code: data/battle2-data.js, bigone grumpy.",
+   "next": "Shipped qa-coh01: Inspect text now describes the pond fish.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21272,13 +21272,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped qa-coh01: bigone Inspect sentence rewritten for the fish. Nothing for Tom."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
     "opening": "started by START"
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-qa-coh02",

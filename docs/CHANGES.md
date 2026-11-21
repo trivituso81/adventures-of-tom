@@ -1,3 +1,6 @@
+## qa-coh01 (2026-11-21): The Big One's Inspect text now describes the pond fish, not a croaking frog
+Chapter 1 QA COH-01 (keysecrets2). `data/battle2-data.js` `bigone.grumpy` (the Inspect sentence, not a spoken line, so no clip changes) now reads "The biggest, coldest, muddiest fish in the pond. Twenty years down there, and nobody has stopped to say hello." Canon unchanged: the Big One stays Boppy's fish.
+
 ## qa-bug08 (2026-11-21): no HOLD + SLIDE, ! Menu or Save over a cutscene or the CHAPTER COMPLETE card
 Chapter 1 QA BUG-08 (keysecrets2). Cause: the cutscene class hid the arrows and the A button but not the HOLD + SLIDE caption or the top-left buttons, so the caption showed between lines and the buttons stayed tappable (opening ! let monsters roam). Fix: one CSS rule in `index.html` hides `#hud-btns`, `.pad-caption` and `.pad-center` while `html.cutscene` is set (the class already covers the chapter cards).
 
