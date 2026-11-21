@@ -22790,8 +22790,20 @@
     {
      "d": "2026-11-21",
      "t": "Now first, before the play: Tom (13:06) \"the voices have to go along with the chapter two changes because just reading the script isn't really that useful. I need to hear the voices to know if it really works.\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 70 voices (about 3,239 credits).",
+     "at": "2026-11-21T21:08:51.914Z"
     }
-   ]
+   ],
+   "vgen": {
+    "want": true,
+    "at": "2026-11-21T21:08:51Z",
+    "n": 70,
+    "chars": 7362,
+    "est": 3239
+   }
   },
   {
    "id": "t-qa-coh03play",
