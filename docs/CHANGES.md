@@ -79,22 +79,6 @@ Card c-b3s18, part e. Chapter 10 (the airport, the end of Part 1) joins chapters
 - Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 10 test were not run.
 - Not looked at: any chapter 10 fight in a browser.
 
-## b3s18d (2026-11-21): chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
-
-Card c-b3s18, part d. Chapter 9 (the Moon Club) joins chapters 1 to 8: the Hanger-On, the Sore Loser, the Wallflower and The Mirrorball play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`): Pet Peeves and Resists, Hang On Tight, How Gauche! and Cheater!, the Wallflower's Wall Hug and Petal Storm, Facet Spin, Dazzled with Shatter Glitz! and Sensory Overload!, Spotlight Solo and LAST DANCE. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
-- Scene change: Deedee's coaching after a loss to The Mirrorball has a Battle 3 version (`B3_CH_ON(9)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 9 has no Tombo toast to skip.
-- Left alone on purpose: the Deedee Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
-- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 9 test were not run.
-- Not looked at: any chapter 9 fight in a browser.
-
-## b3s18c (2026-11-21): chapter 8's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
-
-Card c-b3s18, part c. Chapter 8 (the Car Barn) joins chapters 1 to 7: the Wet Blanket, the Draft, the Picky Eater and Old Ironbelly play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`): Pet Peeves and Resists, Dampen Spirits and Why Bother?, Crosswind and Pilot-Light Gust, the Tin Lid and Push It Away, Toasty with Steam Cloud!, BROIL and Full Furnace. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
-- Scene change: TNB's coaching after a loss to Old Ironbelly has a Battle 3 version (`B3_CH_ON(8)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 8 has no Tombo toast to skip.
-- Left alone on purpose: the Tom Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
-- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 8 test were not run.
-- Not looked at: any chapter 8 fight in a browser.
-
 ## guideprompts1a (2026-11-21): a script and an Action that write a real prompt for every starter-draft battle animation
 
 Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it seems generic". 267 of the 346 prompts in the Battle Guide were rule-made starter drafts (every move of one shape got the same canned gesture, so Cartridge Blow read as a spell cast). The model-draft step of claude/guidegen-plan.md 3.1 had never been built.
