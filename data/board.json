@@ -20784,7 +20784,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
+   "next": "Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -27538,6 +27538,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed: the scene edit of fix-ch1flight had been overwritten on main; re-applied (phone picture stays up under TNB's text, quiet trip, no goodbyes). Shipped as fix-ch1flight-2."
     }
    ],
    "prompt": {

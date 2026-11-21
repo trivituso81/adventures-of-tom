@@ -1,3 +1,9 @@
+## fix-ch1flight-2 (2026-11-21): the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js
+
+Card c-fix-ch1flight-2 (Gemini's chapter 1 test, C2 FAIL). Checked on main first: `SCENES.ch1Sunday` had lost the edit (a later push overwrote it).
+- Re-applied: `{ch1Reveal:'phone',keep:true}` (picture stays up under TNB's text), `{ch1RevealEnd:true}` after the text, `{trip:'west',quiet:true}` (no girls or Deedee goodbye, straight to the flight). Nothing else touched.
+- Checked: scene loads in the browser with those steps and no page errors. Not played end to end here (no Python playwright for smoke).
+
 ## guidestatus1-restore2 (2026-11-21): housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes
 
 Card c-guidestatus. Two pushes of mine were rebased badly. guidestatus1 dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b and re-added the purged `art/raw/clips/wan-grace-squeeze-v3.mp4` and its prompt; guidestatus1-restore then reverted 19 files of other sessions (the dashboard plan and mocks, chapter 8 and 9 story fights b3s18c and b3s18d, wangen-jobs.json, voice and script indexes). This push puts every one of those files back exactly as they were before guidestatus1-restore, removes the v3 files again and restores the three notes below guidestatus1.
