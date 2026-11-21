@@ -20384,6 +20384,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukHAM936zjWpzVgYRp9",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-21T03:01:09Z",
+   "last": "2026-11-21T03:01:40Z",
+   "tags": [
+    "board-takes-retire"
+   ],
+   "cards": [
+    "c-takes-ae5d7d"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDp3fYArsNSrkJG75s",
    "title": "Fix: Play the Grump Hollow wrapper trail",
    "first": "2026-11-21T02:58:14Z",
@@ -23144,8 +23156,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e328d5835f05d300b53e3b794d4d5de829add051",
- "synced_at": "2026-11-21T03:00:08+00:00",
+ "synced": "004183ffa64f7a4abd312739af4ea2b710099eba",
+ "synced_at": "2026-11-21T03:01:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
