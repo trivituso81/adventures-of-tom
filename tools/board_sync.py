@@ -12,12 +12,16 @@ Service mode (the same workflow, on a run of clip-gen, art-gen, voice-gen, clip-
 
 board3 (2026-11-19, claude/board3-plan.md): R1 also copies a Tom card's `answer`, and starts an `auto` card at once; R2 knows `clips_reviewed`;
 R11 attention (attn1, claude/attn-plan.md: a flagged card gets one automatic move, a free one or one rescue session);
+R14 night shift (night1, claude/night-plan.md sections 3 to 5: between 11 pm and 3 am one queued card at a time starts by itself, standing `nightly` cards first, and the card Last night is rewritten each morning);
 R9 start (a card with `start: true` is started on the Claude scheduled task for its model and effort, the link lands on the card); R10 note
 (a Tom card finished with a note that blocks nothing gets a Claude card "Your note on: ..."); R8 quiet is 6 hours.
 
 Rules (R1 to R10) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
 import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
+from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'night'))
+import lastnight as night_text   # night1: the text of the card Last night
 import board_archive   # bigboard1: Done cards older than 7 days move to data/board-archive.json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -113,6 +117,11 @@ def tag_matches(card_tag, tag):
     return bool(card_tag) and (tag == card_tag or (tag.startswith(card_tag) and re.fullmatch(r'[a-z]', tag[len(card_tag):] or '-')))
 
 
+def nightly_tag(c, tag):
+    """night1: a standing card (`nightly: true`) ships builds named <tag>-<mmdd>."""
+    return bool(c.get('nightly') and c.get('tag') and re.fullmatch(re.escape(c['tag']) + r'-\d{4}', tag))
+
+
 def r5_session(B, com):
     url = com['session']
     if not url or com['subject'].startswith('board-sync'): return
@@ -130,7 +139,7 @@ def r5_session(B, com):
     for c in B.cards:
         if re.search(r'(?<![\w-])%s(?![\w-])' % re.escape(c['id']), com['subject']): ids.add(c['id'])
         for t in tags + ([ctag] if ctag else []):
-            if tag_matches(c.get('tag'), t): ids.add(c['id'])
+            if tag_matches(c.get('tag'), t) or nightly_tag(c, t): ids.add(c['id'])
     for t in tags + ([ctag] if ctag and ctag != 'board' else []):
         if t not in s['tags']: s['tags'].append(t)
     for i in sorted(ids):
@@ -145,6 +154,12 @@ def r5_session(B, com):
 
 def r3_heading(B, com, tag, desc):
     d = local_date(com['time'])
+    st = next((c for c in B.cards if nightly_tag(c, tag)), None)
+    if st:   # night1: a standing card never goes to Done; the build heading marks the run and returns it to Up next
+        if (st.get('last_run') or {}).get('build') != tag:
+            st['last_run'] = {'date': d, 'build': tag}; st['col'] = 'up'; st.pop('waiting_on', None); st.pop('quiet', None); st.pop('started_at', None); st.pop('start', None)
+            B.hist(st, 'Ran as %s: %s' % (tag, plain(desc)), d); st['history'] = st['history'][-10:]; B.say('standing card %s ran as %s' % (st['id'], tag))
+        return
     exact = B.by_tag(tag)
     if exact:
         if exact['col'] != 'done':
@@ -584,9 +599,109 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
     return B.log
 
 
+
+# ---------------------------------------------------------------- R14 Night shift (night1, claude/night-plan.md sections 3 to 5)
+# Inside the night window one card at a time gets `start: true` (R9 fires it): first standing cards, then fix cards made by a night test, then the oldest
+# queued card whose route is Sonnet 5.5 medium. Never at night: Opus or Fable or a raised effort, a card in the backlog, a card with `night: false`, a card
+# that waits on something open, a paid service run, or a card that asks Tom to judge by taste (no taste work has a Sonnet 5.5 medium route: row D is Opus).
+
+def night_cfg(B):
+    n = B.b.get('night')
+    return n if isinstance(n, dict) and n.get('enabled') else None
+
+
+def night_local(n, now): return now.astimezone(ZoneInfo(n.get('tz', 'America/Los_Angeles')))
+
+
+def night_key(n, now): return (night_local(n, now) - datetime.timedelta(hours=12)).date().isoformat()   # 23:30 and 02:00 are the same night
+
+
+def night_hour(n, now): return night_local(n, now).hour
+
+
+def in_night(n, now):
+    h = night_hour(n, now)
+    return h >= n.get('from', 23) or h <= n.get('to', 3)   # 23:17 to 03:17: the hourly job runs at minute 17
+
+
+def night_ok(B, c):
+    """None when the card may start at night, else the reason it may not."""
+    if c['lane'] != 'claude' or c['col'] != 'up' or not c.get('prompt'): return 'not a queued Claude card'
+    if c.get('backlog'): return 'in the backlog'
+    if c.get('night') is False: return 'opted out'
+    if c.get('service') or c.get('gen') or c.get('vgen'): return 'a paid run'
+    if open_blockers(B, c): return 'waits on an open card'
+    p = c['prompt']
+    if not (str(p.get('model', '')).startswith('Claude Sonnet 5.5') and str(p.get('effort', '')).startswith('medium')): return 'not Sonnet 5.5 medium'
+    r = routine_for(B, c)
+    if not r or not r.get('enabled') or not str(r['model']).startswith('Claude Sonnet 5.5') or r['effort'] != 'medium': return 'no Sonnet 5.5 medium route'
+    return None
+
+
+def night_busy(B):
+    for c in B.cards:
+        if c.get('start') and c['lane'] == 'claude': return True
+        if c['col'] == 'prog' and c['lane'] == 'claude' and c.get('started_at') and not c.get('quiet') and started_by_start(c): return True
+    return False
+
+
+def r14_ran(B, com):
+    """A standing card's run with nothing to do pushes only the commit `night: ran <card id>`."""
+    m = re.match(r'night: ran (\S+)', com['subject'])
+    c = B.get(m.group(1)) if m else None
+    if not c or not c.get('nightly'): return
+    d = local_date(com['time'])
+    if (c.get('last_run') or {}).get('date') == d and not (c.get('last_run') or {}).get('build'): return
+    c['last_run'] = {'date': d, 'build': ''}; c['col'] = 'up'; c.pop('start', None); c.pop('quiet', None); c.pop('started_at', None)
+    B.hist(c, 'Ran: nothing to do.', d); c['history'] = c['history'][-10:]; B.say('standing card %s ran, nothing to do' % c['id'])
+
+
+def r14_night(B, now, night_tests=None):
+    n = night_cfg(B)
+    if not n: return
+    key = night_key(n, now); h = night_hour(n, now)
+    if n.get('to', 3) < h < n.get('from', 23):
+        if h >= n.get('fixes_until', 6) and n.get('reported') != key: r14_report(B, n, key, night_tests)
+    if not in_night(n, now) and not (h < n.get('fixes_until', 6)): return
+    log = n.setdefault('log', {}).setdefault(key, [])
+    for k in [d for d in n['log'] if d < (datetime.date.fromisoformat(key) - datetime.timedelta(days=14)).isoformat()]: del n['log'][k]
+    if len(log) >= n.get('max', 5) or night_busy(B): return
+    ran_tonight = {e['id'] for e in log}
+    pick = None
+    if in_night(n, now):
+        for c in B.cards:
+            if c.get('nightly') and c['id'] not in ran_tonight and (c.get('last_run') or {}).get('date') != key and not night_ok(B, c): pick = (c, 'standing'); break
+    if not pick:
+        for c in B.cards:
+            if str(c.get('fix_of', '')).startswith('night:') and not night_ok(B, c): pick = (c, 'fix'); break
+    if not pick and in_night(n, now):
+        for c in sorted([k for k in B.cards if k.get('lane') == 'claude' and k['col'] == 'up' and not k.get('nightly') and not str(k.get('fix_of', '')).startswith('night:')], key=lambda k: (k.get('created', ''), B.cards.index(k))):
+            if not night_ok(B, c): pick = (c, 'queued'); break
+    if not pick: return
+    c, kind = pick
+    c['start'] = True; B.hist(c, 'Started by the night shift.')
+    log.append({'id': c['id'], 'at': now.isoformat(timespec='seconds'), 'kind': kind}); B.say('night shift starts %s' % c['id'])
+
+
+def r14_report(B, n, key, tests):
+    """The first run after fixes_until rewrites the card Last night. It reopens when something is new and stays Done on a night when nothing happened."""
+    n['reported'] = key
+    r = night_text.lastnight(B.b, key, tests)
+    c = B.get('t-lastnight')
+    if not c:
+        c = {'id': 't-lastnight', 'lane': 'tom', 'col': 'done', 'theme': 'Project Ops', 'title': 'Last night: what the night shift did', 'ask': 'setup', 'fyi': True, 'blocks': [],
+             'next': '', 'done': key, 'chat': {'url': '', 'opening': 'board'}, 'history': []}
+        B.add(c)
+    c['next'] = r['next']; c['sections'] = r['sections']; c['night_key'] = key
+    if r['news']:
+        c['col'] = 'up'; c.pop('done', None); c.pop('waiting_on', None)
+        B.hist(c, 'Night of %s: %s' % (key, r['next'][:160])); c['history'] = c['history'][-10:]; B.say('Last night card rewritten')
+    elif c['col'] != 'done': c['col'] = 'done'; c['done'] = B.today
+
+
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, archive=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, archive=None, night_tests=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now), (archive or {}).get('cards'))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
@@ -597,6 +712,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
         if com['subject'].startswith('board-sync'): continue
         r4_claim(B, com)
         r5_session(B, com)
+        r14_ran(B, com)
         for tag, desc in com['headings']: r3_heading(B, com, tag, desc)
     r7_inbox(B, reports, takes)
     r2_art(B, art)
@@ -606,6 +722,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r12_ghost(B, now)
     r8_quiet(B, now)
     r11_attention(B, now, fire, rerun, shipped_tags)
+    r14_night(B, now, night_tests)
     r9_start(B, fire, now)
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
@@ -700,6 +817,12 @@ def routines_env(data):
     return {r['id']: bool(os.environ.get('CLAUDE_TASK_%s_URL' % r['env']) and os.environ.get('CLAUDE_TASK_%s_TOKEN' % r['env'])) for r in data.get('routines', [])}
 
 
+def night_tests_latest():
+    """tests/latest.json on the branch `night` (written by the night test run, card c-nighttests); None until it exists."""
+    try: return json.loads(sh('git', 'show', 'origin/night:tests/latest.json'))
+    except Exception: return None
+
+
 def load(path): return json.load(open(path, encoding='utf-8'))
 
 
@@ -727,7 +850,7 @@ def main(argv):
         reports, takes = remote_lists()
         before = json.dumps(data, sort_keys=True)
         ap = a.get('archive', board_archive.ARCHIVE); arch = board_archive.load_archive(ap); arch_before = json.dumps(arch, sort_keys=True)
-        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), arch)
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), arch, night_tests_latest())
         if '--dry' not in flags and json.dumps(arch, sort_keys=True) != arch_before: board_archive.save_archive(arch, ap)
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']

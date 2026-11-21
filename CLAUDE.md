@@ -71,7 +71,25 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **bigboard1 (2026-11-20): GitHub sends no content for a file over 1 MiB.** Tom: board saves failed with "JSON.parse: unexpected end of data" because `data/board.json` passed 1,048,576 bytes and the contents API (`GET /repos/.../contents/<path>`) then returns `content: ""`. A page that reads a repo file this way must fall back to `GET /repos/.../git/blobs/<sha>` when `content` is empty (`ghBoard` in `board.html` is the pattern); never treat an empty `content` as an empty file. Done cards more than 7 days old move to `data/board-archive.json` (`tools/board_archive.py`, run by `board_sync.py` R13); `board_check.py`, `build_history.py` and R3 read the stubs, so a tag or id on an archived card still resolves. Never hand-edit the archive. Tests: `python3 tools/board_big_test.py`, `python3 tools/board_archive_test.py`.
 
+**night1 (2026-11-21): the night shift.** Queued Sonnet 5.5 medium cards start by themselves between 11 pm and 3 am (R14); a standing card (`nightly: true`) is never Done and ships `<tag>-<mmdd>` builds; Tom reads the one card Last night (`t-lastnight`). Rules and limits: the section "Night runs" below.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
+
+## Night runs (night1, Tom 2026-11-21: "while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring")
+
+Between 11 pm and 3 am Los Angeles time the board job (`tools/board_sync.py` rule R14, hourly at minute 17) starts queued cards by itself, one at a time, and writes one card for Tom each morning (`t-lastnight`, "Last night", by `tools/night/lastnight.py`). Design: `claude/night-plan.md`. Switch: `night.enabled` in `data/board.json`, the Night shift ON or OFF chip on the board page (two taps). A card opts out with `night: false`. A standing card (`nightly: true`) is started first each night, never goes to Done, and ships builds named `<tag>-<mmdd>` (a `## <tag>-<mmdd>` heading in docs/CHANGES.md sets its `last_run` and returns it to Up next; a run with nothing to do pushes only the commit `night: ran <card id>`; keep its newest 10 history lines).
+
+| Rule | Detail |
+|---|---|
+| Cap | `night.max` starts a night (5), rescues included, one at a time. |
+| Model | Sonnet 5.5 medium only. Never Opus, Fable or a raised effort; a card that needs more goes to Tom's morning card with its Copy prompt. |
+| Never at night | Game dialogue, voice tags, picture, video or music prompts, anything Tom judges by taste. Any paid run (xAI, ElevenLabs, fal): the first paid run is Tom's tap. |
+| Never touched | Voice clips and takes, `art/raw/`, `demo/`, Tom's saved files (`data/welcome-layout.json`, `data/pose-requests.json`, `data/script-edits.json`, `data/script-review.json`, `data/portrait-frame.json`), the branches `inbox`, `takes`, `generated`, `clipgen`, `artgen`, `voicetake`, `guidegen`, a card in the backlog. |
+| Tests | Every night push passes `python3 tools/smoke.py` and the tests of what it touched. |
+| Stop-loss | Two misses the same way: stop, write "ended without shipping" with the reason; the card goes to Tom's morning card. |
+| A red night | A test that newly fails is fixed forward by a fix card that names the commits since it last passed. Never revert a stamped build (it breaks the cache tags and the build history). |
+
+Tests: `python3 tools/board_sync_test.py` (the R14 cases, one per row), `python3 tools/board_test.py /tmp/board`.
 
 ## No breathing in the overworld or scenes (standing rule, Tom 2026-11-20)
 

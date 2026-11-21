@@ -170,6 +170,7 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 #themes button i{flex:none;width:10px;height:10px;border-radius:50%}
 #themes button .n{margin-left:auto;color:var(--muted);font-size:13px}
 #themes button.on{background:var(--line)}
+#nightrow{display:flex;margin:2px 0 8px}#nightb{min-height:44px;border-radius:22px;padding:0 16px;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-weight:600}#nightb.on{color:var(--text);box-shadow:inset 0 0 0 2px var(--good)}#nightb.ask{background:var(--amber);color:#000}
 #tabs{display:flex;gap:6px;position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--bg);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
 #tabs button{flex:1 1 0;min-width:0;background:none;border-radius:12px;padding:0 4px;min-height:48px;font-size:14px;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15}
 #tabs button.on{background:var(--surface);color:var(--text);box-shadow:inset 0 -3px 0 var(--accent)}
@@ -200,6 +201,7 @@ main{padding-bottom:40px}
 <main>
 <button id="since" type="button"></button>
 <div id="tools"><input type="text" id="q" placeholder="Search cards" aria-label="Search cards" autocomplete="off"><button id="themeb" type="button" aria-expanded="false">Theme</button><button id="newb" class="gold" type="button">+ New card</button></div>
+<div id="nightrow"><button id="nightb" type="button" aria-live="polite"></button></div>
 <div id="themes"></div>
 <div id="tabs" role="tablist"></div>
 <div id="views" data-v="for"><section class="view" id="vFor"></section><section class="view" id="vClaude"></section><section class="view" id="vChats"></section><section class="view" id="vShipped"></section><section class="view" id="vBacklog"></section></div>
@@ -706,7 +708,20 @@ function rerender(){render();if(cur&&sheetOpen()&&$('sheet').querySelector('.sh-
 
 function render(){
   counts();
-  renderSince();renderSections();renderSync();
+  renderSince();renderSections();renderSync();renderNight();
+}
+// ---- night1: the Night shift ON or OFF chip (claude/night-plan.md section 5 step 5). Two taps; the second saves `board: night on` or `board: night off`.
+let nightAsk=false;
+function nightOn(){return !!(B.night&&B.night.enabled);}
+function renderNight(){
+  const b=$('nightb');if(!b||!B.night){if(b)b.style.display='none';return;}
+  b.style.display='';b.className=(nightOn()?'on':'')+(nightAsk?' ask':'');
+  b.textContent=nightAsk?(nightOn()?'Tap again to turn Night shift OFF':'Tap again to turn Night shift ON'):'Night shift '+(nightOn()?'ON':'OFF');
+}
+function nightTap(){
+  if(!nightAsk){nightAsk=true;renderNight();setTimeout(()=>{if(nightAsk){nightAsk=false;renderNight();}},6000);return;}
+  nightAsk=false;const want=!nightOn();
+  save('board: night '+(want?'on':'off'),d=>{d.night=d.night||{};d.night.enabled=want;return d;}).then(()=>{toast('Night shift '+(want?'ON':'OFF'));render();}).catch(e=>{toast(e.message);render();});
 }
 
 // ---- detail sheet (boardux2, plan 3.5). Every screen in the sheet has the same three parts: a top (kicker, title, close X), a body that scrolls,
@@ -753,6 +768,7 @@ function openSheet(id){
   const w=open_?attnWhy(c):'';
   if(w) body+='<p class="err" style="font-size:14px;margin-top:10px">Needs attention: '+esc(w)+'</p>';
   else if(c.start_error&&open_) body+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
+  if(c.nightly) body+='<h4>Runs every night</h4><p>Last run '+esc((c.last_run&&c.last_run.date)||'never')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+'.</p>';
   if(open_&&(c.col==='wait'||bb.length)) body+='<h4>Waiting on</h4><p>'+(bb.length?esc(bb.map(x=>dispTitle(x)).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?'. When it ships, this card comes back to you to check again.':'')+'</p>';
   if(bl.length){const back=!tom&&bl.every(x=>x.lane==='tom');
     body+='<h4>'+(tom?'Why it matters':back?'Returns to you when fixed':'Unblocks')+'</h4><p>'+(tom?'It unblocks: ':'')+esc(bl.map(x=>dispTitle(x)).join('; '))+'</p>';}
@@ -1120,6 +1136,7 @@ document.addEventListener('click',e=>{
   const t=e.target;
   if(!t.closest('#menu')&&!t.closest('#menub'))menuOpen(false);
   if(t.closest('#menub')){menuOpen($('menu').style.display!=='block');return;}
+  if(t.closest('#nightb')){nightTap();return;}
   if(t.closest('#sync')){const sb=busyOn($('sync'));Promise.all([checkSync(true),reload()]).finally(()=>busyOff(sb));return;}
   if(t.closest('#since')){if(CH.ids.size){only=only==='changed'?'':'changed';render();}return;}
   const act=t.closest('[data-act]');

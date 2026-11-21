@@ -54,6 +54,9 @@ b['cards'].append({'id': 'svc-clip-gen', 'service': 'clip-gen', 'lane': 'xai', '
 b['cards'].append({'id': 'c-running', 'tag': 'running', 'lane': 'claude', 'col': 'prog', 'theme': 'Tools', 'title': 'A running card', 'next': 'Being built.', 'blocks': [], 'changed': T, 'created': T,
                    'chat': {'url': 'https://claude.ai/code/session_RECENT', 'opening': 'x'}, 'history': [],
                    'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 'Running prompt text.'}})
+b['cards'].append({'id': 'c-standing', 'tag': 'standing', 'nightly': True, 'last_run': {'date': '2026-11-20', 'build': 'standing-1120'}, 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A standing night card',
+                   'next': 'Runs every night.', 'blocks': [], 'changed': T, 'created': T, 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
+b['night'] = {'enabled': True, 'max': 5, 'from': 23, 'to': 3, 'fixes_until': 6, 'tz': 'America/Los_Angeles', 'log': {}}
 b['sessions'] = [
     {'url': 'https://claude.ai/code/session_RECENT', 'title': 'Recent conversation title', 'first': iso(5), 'last': iso(2), 'tags': ['recentbuild'], 'cards': ['t-test1']},
     {'url': quiet_url, 'title': 'Quiet conversation', 'first': iso(40), 'last': iso(30), 'tags': [], 'cards': ['c-quiet']},
@@ -143,6 +146,18 @@ try:
                 cv = pg.eval_on_selector('#vChats', 'e=>e.textContent')
                 if 'Recent conversation title' not in cv or 'Waiting on you' not in cv or 'Open chat' not in cv: fails.append(f'{name}: conversation strip content ' + cv[:120])
                 if 'Quiet conversation' not in cv or 'Ten days old' in cv: fails.append(f'{name}: conversation window wrong')
+                # night1: the Night shift chip (two taps to change), and the standing card's line
+                if pg.inner_text('#nightb') != 'Night shift ON': fails.append(f'{name}: night chip says {pg.inner_text("#nightb")!r}')
+                pg.click('#nightb')
+                if 'Tap again' not in pg.inner_text('#nightb') or stored()['night']['enabled'] is not True: fails.append(f'{name}: one tap on the night chip must only ask')
+                pg.click('#nightb'); pg.wait_for_timeout(500)
+                if stored()['night']['enabled'] is not False or pg.inner_text('#nightb') != 'Night shift OFF': fails.append(f'{name}: second tap did not turn the night shift OFF ({stored()["night"]})')
+                pg.click('#nightb'); pg.click('#nightb'); pg.wait_for_timeout(500)
+                if stored()['night']['enabled'] is not True: fails.append(f'{name}: night shift did not come back ON')
+                if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: night chip makes the page scroll sideways')
+                V(pg, 'claude'); pg.click('.card[data-id="c-standing"] .t'); pg.wait_for_selector('#sheet')
+                if 'Runs every night' not in pg.inner_text('#sheet') or 'Last run 2026-11-20' not in pg.inner_text('#sheet'): fails.append(f'{name}: standing card detail lacks its last run line')
+                pg.keyboard.press('Escape'); pg.wait_for_timeout(200); V(pg, 'for')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=(name != 'portrait'))
                 # tabs: one view at a time, For you first
                 V(pg, 'claude')

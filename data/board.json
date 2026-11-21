@@ -32475,5 +32475,14 @@
    "enabled": false,
    "paused": "2026-11-21: after Tom's edit, the first START fire (opus-medium, 00:55 UTC) was claimed but pushed nothing in 10 minutes, and sonnet-high never fired. Fix card c-startfix, Tom card t-startfix-look."
   }
- ]
+ ],
+ "night": {
+  "enabled": true,
+  "max": 5,
+  "from": 23,
+  "to": 3,
+  "fixes_until": 6,
+  "tz": "America/Los_Angeles",
+  "log": {}
+ }
 }

@@ -1,3 +1,13 @@
+## nightshift (2026-11-21): queued cards start by themselves between 11 pm and 3 am, and Tom reads one card each morning
+
+Card c-nightshift, `claude/night-plan.md` section 5, steps 1 to 7 as written (no rule of the plan changed).
+- `data/board.json`: the `night` object (`enabled`, `max` 5, `from` 23, `to` 3, `fixes_until` 6, `tz` America/Los_Angeles, `log`).
+- `tools/board_sync.py` rule R14 (`r14_night`, `night_ok`, `r14_ran`, `r14_report`): window by Los Angeles clock (`zoneinfo`, so daylight saving is right), cap, one at a time, order standing then night-test fix then oldest queued; never Opus, a raised effort, backlog, `night: false`, an open blocker or a paid run. Standing cards (`nightly: true`): the heading `<tag>-<mmdd>` sets `last_run` and returns the card to Up next; `night: ran <id>` does the same for a run with nothing to do; 10 history lines kept.
+- `tools/night/lastnight.py` writes the card `t-lastnight` (Ran, Shipped, Tests, Closed for you, Needs you, Starts used) at the first run after 06:00; it reopens when something is new and stays Done on a quiet night.
+- `board.html`: Night shift ON or OFF chip (two taps, commits `board: night on` and `board: night off`) and "Runs every night. Last run ..." in a standing card's details.
+- CLAUDE.md section "Night runs" and a board paragraph; the same paragraph in `claude/handoff-rules.md` (the Project copy needs it).
+- Tests: `tools/board_sync_test.py` (new R14 cases, one per row of the plan's table), `tools/board_test.py` (chip and standing card line). `board_check.py` passes. Two older cases already failed before this build and still do (R5 replay of 2026-11-20 and the unstick card check) and `board_test.py` has live-board drift failures (top line counts, copy prompt of the live first ready card).
+
 ## nightgreend (2026-11-21): a Carry-On in Terminal Zero no longer stands inside a bench
 
 Card c-nightgreen, test `terminal_test` (`python3 tools/terminal_test.py`; failed "every monster on reachable floor"). The Carry-On spawn at tile (6,10) is inside the painted blue bench on the left of the terminal (a solid tile no one can walk onto), so a monster stood in furniture. The test was right and the game was wrong.
