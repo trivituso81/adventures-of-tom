@@ -19190,6 +19190,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1e: Grace and Tom fight in Wan videos in every NEW BATTLE fight (idle with breathing, guard, hit, knocked out, victory, run) and Lounge Pass Flex, Soup-Dumpling Squeeze and Crunchy Sugar-Cube Pop are videos"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1f: the Pond Grump, Bog Toad, Log Lump and Skeeter Swarm attack and wind up in videos in NEW 2 to NEW 6"
     }
    ],
    "prompt": {
@@ -19908,7 +19912,11 @@
      }
     }
    },
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-ch2lessons",
@@ -20152,8 +20160,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-192030-2df3, r-20261120-192121-ynen. First note: after Rose says one more ride Tata, she should jump on his shoulders and remain there until he depar",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-192030-2df3. First note: after Rose says one more ride Tata, she should jump on his shoulders and remain there until he depar",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -20204,6 +20212,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 1 report(s)."
     }
    ],
    "blocks": [],
@@ -21784,7 +21796,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -21802,6 +21814,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T03:32:50.118Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -22454,6 +22470,44 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T19:36:07-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c",
+    "wanch1d",
+    "wanch1e",
+    "wanch1f"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "first": "2026-11-20T19:35:42-08:00",
+   "last": "2026-11-20T19:35:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-gatelayer-pics-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "first": "2026-11-20T19:27:52-08:00",
+   "last": "2026-11-20T19:35:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-itembannerart-pics-2",
+    "t-itembannerart-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFPqwb1ZYQTWSoJnuP",
    "title": "Build history redesign 3: archive, search and its own page",
    "first": "2026-11-20T19:13:47Z",
@@ -22483,16 +22537,6 @@
    "tags": [],
    "cards": [
     "c-qa-coh03"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
-   "title": "Fix: Make and approve 18 item picture sheets (288",
-   "first": "2026-11-20T19:27:52-08:00",
-   "last": "2026-11-20T19:27:52-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-itembannerart-pics-2"
    ]
   },
   {
@@ -22560,22 +22604,6 @@
    ],
    "cards": [
     "c-builds2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T19:11:22-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b",
-    "wanch1c",
-    "wanch1d",
-    "wanch1e"
-   ],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -24994,8 +25022,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "fb4e1bedc91ff6c9bd97d7f7471f9fa8e268d8c5",
- "synced_at": "2026-11-21T03:35:03+00:00",
+ "synced": "81580bcd94e383109737fb1566cdc3bfd25aea09",
+ "synced_at": "2026-11-21T03:36:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
