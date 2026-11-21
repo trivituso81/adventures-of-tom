@@ -21694,6 +21694,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as fix-gatelayer-pics-2a: gate pictures: detailed rejects, Amy's door matched to the painted arch, door crop fixed"
     }
    ],
    "prompt": {
@@ -22373,6 +22377,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "first": "2026-11-20T19:35:42-08:00",
+   "last": "2026-11-20T19:47:52-08:00",
+   "tags": [
+    "fix-gatelayer-pics-2a"
+   ],
+   "cards": [
+    "c-fix-gatelayer-pics-2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFNkCr1k6xT3RqhfT1",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-20T19:44:58Z",
@@ -22398,16 +22414,6 @@
    ],
    "cards": [
     "c-wanch1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
-   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
-   "first": "2026-11-20T19:35:42-08:00",
-   "last": "2026-11-20T19:35:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-gatelayer-pics-2"
    ]
   },
   {
@@ -24936,8 +24942,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "042bedc1a351960ccc25b3227da382ea3b50e8e4",
- "synced_at": "2026-11-21T03:41:25+00:00",
+ "synced": "0b1e3f59625018c2abe289730d5c51445bb6b55b",
+ "synced_at": "2026-11-21T03:48:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
