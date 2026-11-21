@@ -359,7 +359,18 @@ const B3_STATUS={
   bookmark_guard:{id:'bookmark_guard',name:'Bookmark Guard',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
     short:'GUARD',color:'#c9a86b',weight:6,desc:'Holding its place in the book: 25% less damage taken until a Break or the end of the stance.'},
   bookmark_mend:{id:'bookmark_mend',name:'Bookmark Mend',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],regen:.05,
-    short:'MEND',color:'#c9a86b',weight:5,desc:'A ribbon of calm: recovers 5% of Max HP at the start of each turn.'}
+    short:'MEND',color:'#c9a86b',weight:5,desc:'A ribbon of calm: recovers 5% of Max HP at the start of each turn.'},
+  // ---- Enemy statuses: chapter 8, Division Nine Car Barn (stage 13a, bestiary v11 section 2) ----
+  crosswind:{id:'crosswind',name:'Crosswind',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'crosswind',v:.20}],flags:[],
+    short:'CROSSWIND',color:'#cfe0e8',weight:4,desc:'Riding a sideways gust: dodges 20% of attacks. It can be stripped.'},
+  tin_lid:{id:'tin_lid',name:'Tin Lunchbox Lid',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#b8bcc4',weight:5,desc:'Hiding behind a tin lunchbox lid: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  why_bother:{id:'why_bother',name:'Why Bother?',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'whyBother',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#9fb2c4',weight:4,desc:'Why even try? 20% less Attack.'},
+  it_touched:{id:'it_touched',name:'It Touched!',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'itTouched',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#d9a8a8',weight:4,desc:'Something touched something else on the plate: 15% less Defense.'},
+  full_furnace:{id:'full_furnace',name:'Full Furnace',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'fullFurnace',v:.20}],flags:[],
+    short:'ATTACK UP',color:'#ff8a4a',weight:5,desc:'The firebox is roaring: 20% more Attack. It can be stripped.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

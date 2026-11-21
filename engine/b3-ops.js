@@ -48,6 +48,10 @@ function b3Who(F,c,to) {
   // unshielded: every family member with no shield on (THE END pushes only those).
   if(to==='randomFrontAlly') { const L=b3Live(F,c.actor.side).filter(o=>b3EffRow(F,o)==='front'); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   if(to==='unshielded') return b3Live(F,b3Other(c.actor.side)).filter(o=>!b3ShieldTotal(o));
+  // Stage 13. frontAllies: every monster standing in Front, the actor included (Members Only).
+  // firstTarget: only the first ally the act reached (Fifty-Two Pickup puts its Pep drain and Fatigue on the first one it hits).
+  if(to==='frontAllies') return b3Live(F,c.actor.side).filter(o=>b3EffRow(F,o)==='front');
+  if(to==='firstTarget') { const t=c.targets[0]; return t&&b3Alive(t)?[t]:[]; }
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -87,6 +91,14 @@ const B3_OPS={
       // (Only what the other side laid: a vessel of the family's own, TNB's Grand Amphora, stays.)
       for(const hz of F.hazards.filter(h=>{ const o=b3Unit(F,h.src); return h.side===c.actor.side&&(!o||o.side!==c.actor.side); })) { F.hazards.splice(F.hazards.indexOf(hz),1); c.stripped=(c.stripped||0)+1;
         c.beats.push({t:'hazardEnd',id:hz.id,side:hz.side,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:null,id:hz.id,hazard:true,g:c.g,c},c.beats); }
+      return;
+    }
+    // kind 'shieldOrBuff' (The Draft's Pilot-Light Gust): takes the biggest shield the target has; with no shield, one buff.
+    if(e.kind==='shieldOrBuff') {
+      for(const t of b3Who(F,c,e.to)) {
+        if(t.shields.length) { const sh=t.shields.slice().sort((a,b)=>b.amt-a.amt)[0]; t.shields.splice(t.shields.indexOf(sh),1); c.stripped=(c.stripped||0)+1;
+          c.beats.push({t:'shieldEnd',tgt:t.key,sh:b3ShieldTotal(t),why:'strip',g:c.g}); b3Fire(F,'shieldEnded',{src:t,tgt:t,by:sh.src,g:c.g},c.beats); }
+        else B3_OPS.strip(F,Object.assign({},c,{tgt:t}),{kind:'buff',to:'target'}); }
       return;
     }
     for(const t of b3Who(F,c,e.to)) {

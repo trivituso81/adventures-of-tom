@@ -267,6 +267,8 @@ function check() {
   require('./b3-check-s11.js')({G,ok,near,play,noCrit});
   // Stage 12's groups: the chapter 5 to 7 bestiary (stage 12a: the school, The Red Pen).
   require('./b3-check-s12.js')({G,ok,near,play,noCrit});
+  // Stage 13's groups: the chapter 8 to 10 and bonus bestiary (stage 13a: the car barn, Old Ironbelly).
+  require('./b3-check-s13.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

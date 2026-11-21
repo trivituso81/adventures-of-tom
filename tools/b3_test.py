@@ -1398,6 +1398,32 @@ def stage12(pg,lab,landscape=False):
         need(any(a.startswith(act) for a in R['acts']),f"{foe} should play {act}: {R['acts'][:8]}")
         caps+=pick(fr,2)
     sheet(caps,6,os.path.join(OUT,'b3-s12'+('-land' if landscape else '')+'.png'),scale=.4)
+def stage13(pg,lab,landscape=False,parts='a'):
+    """Stage 13: chapters 8 to 10 and the bonus chapter. `parts` is the letters of the chapters to play: a = 8, b = 9, c = 10, d = bonus."""
+    S='stage 13'+(' landscape' if landscape else '')+': '; caps=[]
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R_=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    def pick(fr,n): return [R_(fr[i]) for i in sorted(set(int(j*(len(fr)-1)/max(1,n-1)) for j in range(n)))] if fr else []
+    def rush(fid,foe,ix,act,status=None,fast=False):
+        # the first monster of that id is made to take that act first; the rest of the fight is the simple player's
+        fr=[]; R=s11_run(pg,lab,fid,"()=>{ let n=0; for(const f of B3.F.foes) if(f.id==='%s'&&n++===0) { f.actIx=%d; f.maxHp=Math.floor(f.maxHp*1.6); f.hp=f.maxHp; if(%s) f.spd*=1.5; } }"%(foe,ix,'true' if fast else 'false'),fr,every=500,landscape=landscape,tag='s13')
+        need(R['over']=='win',f"{fid} fight ended {R['over']}")
+        if act: need(any(a.startswith(act) for a in R['acts']),f"{foe} should play {act}: {R['acts']}")
+        if status: need(any(x.endswith(':'+status) for x in R['statuses']),f"{foe}'s {act} should put {status} on the screen: {R['statuses'][:8]}")
+        return fr
+    if 'a' in parts:
+        # Chapter 8. Old Ironbelly below half HP: BROIL winds up first, then Full Furnace; the boss itself shows Toasty
+        fr=[]; R=s11_run(pg,lab,'new50',"()=>{ const e=B3.F.foes[0]; e.maxHp*=2; e.hp=Math.floor(e.maxHp*.49); e.actIx=3; }",fr,every=500,landscape=landscape,tag='s13',watch={'toasty':"()=>window.__s11.statuses.some(x=>x.endsWith(':toasty'))"})
+        need(R['over']=='win',f"Old Ironbelly fight ended {R['over']}")
+        need(any(a.startswith('broil') for a in R['acts']) and any(a.startswith('full_furnace') for a in R['acts']),f"BROIL and Full Furnace should both be played: {R['acts'][:10]}")
+        need(any(x.endswith(':toasty') for x in R['statuses']) and any(x.endswith(':full_furnace') for x in R['statuses']),'Toasty and Full Furnace should show as statuses')
+        caps+=pick(fr,6)
+        # The Picky Eater's wind-up is usually Broken by the family's pips, so only the win is checked for it here (the rule test covers the fire).
+        for fid,foe,ix,act,st in (('new49','pickyeater',2,None,None),('new48','thedraft',0,'pilot_light_gust',None),('new47','wetblanket',2,'dampen_spirits','drenched'),('new46','leftover',1,'mystery_tupperware','blind'),('new45','lukewarm',1,'cold_shoulder','slow')):
+            caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('leftover','lukewarm','thedraft','wetblanket')),2)
+    sheet(caps,6,os.path.join(OUT,'b3-s13'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -1405,7 +1431,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1516,6 +1542,11 @@ with sync_playwright() as pw:
         print('b3s12: chapters 5 to 7'); stage12(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage12(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    for part,letters,label in (('s13a','a','chapter 8'),('s13b','b','chapter 9'),('s13c','c','chapter 10'),('s13','d','the bonus chapter')):
+        if part in sys.argv:
+            print('b3'+part+': '+label); stage13(pg,lab,False,letters)
+            pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage13(pg,lab,True,letters)
+            pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)

@@ -132,6 +132,14 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 
 Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at TNB himself; the Kiln Firing, Waymo flash and Baxter Hill waves are standard, standard and heavy at the all-monsters share (the spec prints no tier for the first two); Kiln Glow, Fresh Ride and the e-bike last the common 2 turns; the Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out; Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind; Kintsugi Gold Seam heals once per action for each member and lets a hit of a flavor that has no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!; Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%") and Carving Momentum takes another 10% off a Basic; the "slowest ally" of TAP-Card Transfer is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the TAP-Card extra turn applies to every buff TNB puts on, his own included; Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns; "scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10).
 
+## What stage 13 holds, and what waits
+
+| In (build `b3s13a`, chapter 8) | Waits for |
+|---|---|
+| Chapter 8: `data/b3-foes-ch08.js` (Lukewarm, Leftover, Wet Blanket, The Draft, The Picky Eater, Old Ironbelly), 6 formations (9 VP each, 27 for the boss), Lab fights NEW 45 to NEW 50 (Tom, TNB, Nara, level 19). | Chapters 9 and 10 and the bonus chapter (`b3s13b`, `b3s13c`, `b3s13`), balance (stage 14) |
+| Old Ironbelly as data: BROIL and Full Furnace (Toasty on the family and itself; Full Furnace below 50% HP, plus the `full_furnace` buff), Hot Coal and BROIL fire TNB's clay shields. | |
+| New seams: strip kind `shieldOrBuff`; `b3Who` targets `frontAllies`, `firstTarget`; 5 statuses (crosswind, tin_lid, why_bother, it_touched, full_furnace). | |
+
 ## What stage 12 holds, and what waits
 
 | In (build `b3s12`, chapter 7; stage 12 is complete) | Waits for |

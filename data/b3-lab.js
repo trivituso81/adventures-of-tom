@@ -95,5 +95,17 @@ const B3_LAB=[
   {id:'new43',name:'NEW 43: POP-UP PANIC',sub:'Chapter 7 Elite. Pop-Up Panic has 4 Composure pips, shrugs off Racket and starts coiled (+20% Evasion). A Shusher in Back.',
     party:['tom','grace','rose','boppy'],level:17,formation:'popup',bg:'stacks'},
   {id:'new44',name:'NEW 44: THE UNREAD',sub:'Chapter 7 boss. 7 Composure pips. Below half HP it marks its place (Bookmark Ribbon), then THE END sweeps the whole family and pushes everyone without a shield.',
-    party:['tom','grace','rose','boppy'],level:17,formation:'unread',bg:'readroom'}
+    party:['tom','grace','rose','boppy'],level:17,formation:'unread',bg:'readroom'},
+  {id:'new45',name:'NEW 45: TWO LUKEWARMS',sub:'Chapter 8 fight. Two Lukewarms in Front. Tepid Slosh and Room Temperature drench, Cold Shoulder slows.',
+    party:['tom','tnb','nara'],level:19,formation:'lukewarm',bg:'barn'},
+  {id:'new46',name:'NEW 46: LEFTOVER AND LUKEWARM',sub:'Chapter 8 fight. The Leftover blinds with Mystery Tupperware and slows the Front row with Freezer Burn.',
+    party:['tom','tnb','nara'],level:19,formation:'leftover',bg:'barn'},
+  {id:'new47',name:'NEW 47: WET BLANKET AND LUKEWARM',sub:'Chapter 8 fight. The Wet Blanket lowers Attack with Why Bother? and winds up Dampen Spirits over the whole family.',
+    party:['tom','tnb','nara'],level:19,formation:'wetblanket',bg:'barn'},
+  {id:'new48',name:'NEW 48: THE DRAFT AND LEFTOVER',sub:'Chapter 8 fight. The Draft in Back rides a crosswind (dodges more) and Pilot-Light Gust rips a shield or a buff off one of the family.',
+    party:['tom','tnb','nara'],level:19,formation:'thedraft',bg:'barn'},
+  {id:'new49',name:'NEW 49: THE PICKY EATER',sub:'Chapter 8 Elite. The Picky Eater has 4 Composure pips, shrugs off Clobber and starts behind its Tin Lunchbox Lid. A Draft in Back.',
+    party:['tom','tnb','nara'],level:19,formation:'pickyeater',bg:'barn'},
+  {id:'new50',name:'NEW 50: OLD IRONBELLY',sub:'Chapter 8 boss. 7 Composure pips. BROIL and Full Furnace leave it Toasty: a Drench hit sets off Steam Cloud!. Its Sizzle fires TNB\u2019s clay shields.',
+    party:['tom','tnb','nara'],level:19,formation:'ironbelly',bg:'boiler'}
 ];
