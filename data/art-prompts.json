@@ -14387,7 +14387,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
    "rejects": [
     {
@@ -14401,6 +14401,15 @@
       "p6",
       "p7"
      ]
+    },
+    {
+     "date": "2026-11-21",
+     "note": "way way too big",
+     "from": "v2",
+     "at": 1795225009612,
+     "srv": "area-hollow-trail2@20261121T005221",
+     "qa": 1,
+     "qaFail": []
     }
    ],
    "id": "area-hollow-trail2",
