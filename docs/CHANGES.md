@@ -1,3 +1,9 @@
+## 2026-11-21 (464): Art Library bake, clip-toad-idle (`artbake1540`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-toad-idle: clip `toad-idle` cut from art/raw/clips/clip-toad-idle-v6.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). toad_idle frames 35 frame px 384 328 rows 48 41 sheet (2498, 1540) in memory mb 15.4 (as a grid 17.6) kb 859 dur ms 2917 kind loop impact ms 0 reach [22.0, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## fix-hollowtrail1-picsa (2026-11-20): Grump Hollow wrapper trail prompts redone: small wrappers placed on the right spots, the generator only repaints them
 
 Card c-fix-hollowtrail1-pics, part 1 (part 2 is the review of the new pictures). Tom on t-hollowtrail1-pics: "they all look like shit. did you even review?" His reject notes: "they are about 5x too big" (trail 1), "5x too big, not a clear trail" (trails 2 to 4).
