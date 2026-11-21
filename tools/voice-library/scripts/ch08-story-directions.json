@@ -407,7 +407,8 @@
    "speaker": "Rose",
    "text": "BOO!",
    "ctx": "chapter 8 (new)",
-   "script": "[gleeful, shouting] BOO!"
+   "script": "[scaring, screaming] BOO!",
+   "takeId": "tmwpjuewj7uni"
   },
   {
    "voice": "rose",

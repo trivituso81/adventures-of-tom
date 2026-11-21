@@ -18,6 +18,24 @@
    "text": "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!",
    "script": "[weary, relieved] Oof, I'm finally here! [smirking, bragging] At least the 6 hours went by fast on Delta One!",
    "takeId": "tmwph4l8hwbe4"
+  },
+  {
+   "voice": "tom",
+   "text": "Thanks for the JFK pickup, Sal.",
+   "script": "[casual, calm] Thanks for the JFK pickup, Sal.",
+   "takeId": "tmwphwc3hnwhx"
+  },
+  {
+   "voice": "sal",
+   "text": "You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.",
+   "script": "[thick long island accent, quick, friendly] You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.",
+   "takeId": "tmwphwtxuf5si"
+  },
+  {
+   "voice": "tom",
+   "text": "Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.",
+   "script": "[interrupting] Mom, wait. [informing] Bosses hit in a pattern. [calm, instructing] Watch what he does twice, then go.",
+   "takeId": "tmwphzg13nekx"
   }
  ]
 }

@@ -364,8 +364,8 @@
    "speaker": "Deedee",
    "text": "Then it has three of my muffins and my pan. Keep walking.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, grim, decided] Then it has three of my muffins and my pan. Keep walking.",
-   "takeId": "gen-aac661e422"
+   "script": "[warm Long Island accent, accusatory] Then it has three of my muffins AND my pan. [warm Long Island accent, firm] Keep walking!",
+   "takeId": "tmwpj87gnewa7"
   },
   {
    "voice": "rose",
@@ -380,7 +380,8 @@
    "speaker": "Grace",
    "text": "It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[correcting, patient] It's grey, Rose. Just that one spot. [curious, slower] And that orange cube has a dragonfly in it."
+   "script": "[correcting, patient, quick] It's grey, Rose. [suspicious] And it's just that one spot... [curious, dumbfounded, quick] AND that orange cube has a [emphasized]dragonfly in it.",
+   "takeId": "tmwpjlxpbwnul"
   },
   {
    "voice": "rose",
@@ -429,7 +430,8 @@
    "speaker": "Grace",
    "text": "Deedee, what's that?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[curious] Deedee, what's that?"
+   "script": "Deedee, [astounded] what's that?",
+   "takeId": "tmwpjngbclzho"
   },
   {
    "voice": "deedee",
@@ -444,7 +446,8 @@
    "speaker": "Grace",
    "text": "Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[alarmed] Don't throw it out! [important] It's a clue. I'm starting a new list. [writing, one at a time] Burnt bulb. Grey grass. Orange cube with a dragonfly in it. [firm] I'm writing it in PENCIL."
+   "script": "[exclaiming] It's a clue! [decisive] I'm starting a new list. [analytical, listing] Burnt bulb... Grey grass... Orange cube with a dragonfly in it.",
+   "takeId": "tmwpjsci4ro0m"
   },
   {
    "voice": "tom",
@@ -531,7 +534,8 @@
    "speaker": "The Big One",
    "text": "GLUB! HA! You got me! I see everybody. I never saw you!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[startled, then roaring with laughter] GLUB! HA! You GOT me! [amazed] I see everybody. I never saw YOU!"
+   "script": "[startled, then roaring with laughter] HA! [admitting] You [emphasized]GOT me! [amazed] No one ever surprised me like that before!",
+   "takeId": "tmwpjwyeynjfd"
   },
   {
    "voice": "tom",
@@ -545,7 +549,8 @@
    "speaker": "The Big One",
    "text": "Take the pan. The sneaky one gets this. It's the only thing I've got.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[huge, gentle] Take the pan. The sneaky one gets this. [plain, a little shy] It's the only thing I've got."
+   "script": "[huge, gentle] Take this coin. [conceding]The [emphasized]sneaky-one can have it. [plain, defeated] It's the only thing I've got.",
+   "takeId": "tmwpk194d986q"
   },
   {
    "voice": "rose",
@@ -603,8 +608,8 @@
    "speaker": "Boppy",
    "text": "Now that's real gold. Same as these. Look.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thick New York accent, impressed, slow] Now that's real gold. [thick New York accent, proud] Same as these. Look.",
-   "takeId": "gen-33bc69bfa3"
+   "script": "[deep voice, thick New York accent, impressed] Now that's [thick New York accent, emphasized]real gold. [thick New York accent, showcasing] Same as these. Look!",
+   "takeId": "tmwpk64rjlvfb"
   },
   {
    "voice": "rose",
@@ -641,7 +646,8 @@
    "speaker": "Grace",
    "text": "The fish ate them, Boppy. The last three.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[plain, reporting] The fish ate them, Boppy. The last three."
+   "script": "[flat] The fish ate them, Boppy.",
+   "takeId": "tmwpk7q4hiv8a"
   },
   {
    "voice": "boppy",
@@ -656,8 +662,8 @@
    "speaker": "Deedee",
    "text": "Twelve more. Forty minutes. The first one's still yours.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, brisk, not looking up] Twelve more. Forty minutes. [warm Long Island accent, quieter, plain] The first one's still yours.",
-   "takeId": "gen-f0a50ab922"
+   "script": "[warm Long Island accent, bragging] Give me an hour and we'll have 12 more.",
+   "takeId": "tmwpk9nt8vwd8"
   },
   {
    "voice": "boppy",
@@ -679,7 +685,8 @@
    "speaker": "Tom",
    "text": "I have a job. Yes. Does the job come with a pencil?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[honored, serious] I have a job. Yes. [hopeful] Does the job come with a pencil?"
+   "script": "[fast, serious] On it. [fast, hopeful] Um, can I borrow a pencil?",
+   "takeId": "tmwpkdw1canvy"
   },
   {
    "voice": "grace",

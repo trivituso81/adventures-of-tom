@@ -16258,7 +16258,7 @@
    "theme": "Voice Clips",
    "count": 10,
    "title": "Merge 10 new voice takes",
-   "next": "Merged 2 takes (Tom Delta One line, Deedee flashbulb line) into dialog-ch1.js. Shipped as takes-2026-11-20.",
+   "next": "Merged 15 more takes (12 replaced older clips, 3 new) into dialog-ch1.js. Shipped as takes-2026-11-20b. 26 kept takes were left out: their words no longer match the game.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -16309,11 +16309,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Merged 15 of the 41 unmerged kept takes from branch takes (tag takes-2026-11-20b). 26 skipped: stale words (Tommy/Tom, cut lines)."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "started_at": "2026-11-20T23:58:54+00:00",
    "after": "nothing for Tom: end"
   },

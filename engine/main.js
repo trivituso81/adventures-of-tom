@@ -110,7 +110,7 @@ startSplash();
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
 <<<<<<< HEAD
-  d.textContent='build board-startpause';
+  d.textContent='build takes-2026-11-20b';
 =======
   d.textContent='build fix-listen1-play';
 >>>>>>> a7c1015 (fix-listen1-play: listening test steps say Deedee's kitchen, not Grandma's)

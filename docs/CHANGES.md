@@ -118,6 +118,12 @@ Card c-keysecrets4, stage 4 of 5 (plan: `claude/keysecrets-plan.md`).
 - This push also carries the first rebuild: added Sal "You got it, kid. Head outside...", Tom "Thanks for the JFK pickup, Sal." and Tom "Mom, wait. Bosses hit in a pattern..."; removed Michael "I've got it. Nobody get up." (no longer in the game).
 - Docs: docs/VOICE_LIBRARY.md, CLAUDE.md (No unused voice). Test: `python3 tools/voice-library/rebuild_test.py` (date-only change ignored, added, removed and re-scripted lines detected, workflow filter and commit list).
 
+## takes-2026-11-20b (2026-11-21): merged 15 more voice takes from branch takes
+
+- Card c-takes-987c82. Branch `takes` sessions up to 20261120T224602-cq5 held 41 kept takes not in `data/merged-takes.json`. 15 match the current script word for word and were merged with `merge-local.js` (12 replaced an older clip, 3 new, all in `data/voice/dialog-ch1.js`): Tom "Thanks for the JFK pickup, Sal." and "Mom, wait. Bosses hit in a pattern...", Sal's send-off, Deedee "Then it has three of my muffins...", "Twelve more. Forty minutes...", Grace "It's grey, Rose...", "Deedee, what's that?", "Don't throw it out!...", "The fish ate them, Boppy...", "That's my second best one...", Rose "BOO!", Big One (2 lines), Boppy "Now that's real gold...", Tom "I have a job...". Kept scripts written to `ch01-story-directions.json`, `ch08-story-directions.json`, `zzzz-kept-takes.json` (Grace "That's my second best one" was skipped by the script writer, the clip is in); voice index rebuilt; `merged-takes.json` updated.
+- NOT merged, 26 kept takes: their words no longer match the game (Deedee's "Tommy, ..." lines now read "Tom, ...", the starter and loft lines for Tom, TNB and Michael, Amy's hug line, Deedee's "Group hug" battle line). Playing them would say the old words; they still show as not in game.
+- Not listened to on a phone.
+
 ## takes-2026-11-20 (2026-11-20): merged the 2 new voice takes from branch takes
 
 - Card c-takes-987c82. Branch `takes` session 20261120T211742-sz1 held 8 takes, 2 kept and not in `data/merged-takes.json`: Tom "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!" and Deedee "A flashbulb. It's burnt..." Both match the current script word for word.
