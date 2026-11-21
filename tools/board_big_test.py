@@ -4,7 +4,7 @@ Serves the repo and the stub GitHub (tools/art-library/stub.py, which like GitHu
 serves the file by blob id), with a test board padded past 1 MiB. Checks: the stub really answers the contents call empty; the page reads the board live
 (not the site copy) and shows its cards; I did this saves with no error; the saved file is the whole board plus the change; the blob route was used for the
 read and for the save's re-read; a board under the limit still saves and uses no blob call.
-Also checks the other pages that read a repo file through the contents API (heads, poses, portraits, music, art, script editor, voice take, pose review)
+Also checks the other pages that read a repo file through the contents API (heads, poses, portraits, music, art, script editor, voice take)
 carry the same fallback, by running each one's own read helper against the stub.
 Run: python3 tools/board_big_test.py [outdir]"""
 import base64, json, os, subprocess, sys, tempfile, time, urllib.request
@@ -79,7 +79,7 @@ finally:
 # --- the other readers: each reads a file through the contents API and must go on to the blob when `content` is empty
 def src(path): return open(os.path.join(ROOT, path), encoding='utf-8').read()
 for path, needle in [('board.html', 'async function ghBoard'), ('heads.html', "git/blobs/"), ('poses.html', "git/blobs/"), ('portraits.html', "git/blobs/"), ('music.html', "git/blobs/"),
-                     ('art.html', "git/blobs/"), ('script.html', "git/blobs/"), ('engine/voice-take.js', "git/blobs/"), ('engine/pose-review.js', "git/blobs/"), ('engine/clip-review.js', "git/blobs/")]:
+                     ('art.html', "git/blobs/"), ('script.html', "git/blobs/"), ('engine/voice-take.js', "git/blobs/"), ('engine/clip-review.js', "git/blobs/")]:
     check('%s reads big files by blob id' % path, needle in src(path))
 check('build-history reads the board with the raw media type (no size limit to 100 MB), not the base64 content', "buildGh('/contents/data/board.json?ref=main',true)" in src('engine/build-history.js') and "application/vnd.github.raw'" in src('engine/build-history.js'))
 print('board_big_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))

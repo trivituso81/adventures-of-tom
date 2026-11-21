@@ -8,7 +8,7 @@
 #   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering) and the
 #      dodge, 3 px in the hit and 2 in the victory (a flinch or a cheer may rise onto the toes); the guard hold is at least 4 px lower than the stance and the knock-out ends on the ground (4 px: sitting)
 #   W4 no jump over 2 battle px where a one-shot clip starts or ends against the idle, or where a guard rise starts or a lowering ends
-#   W5 every state with a video has no painted row left (B3_BODY_PAINT), every clip named in B3_BODY_CLIPS and in the kits exists, its run
+#   W5 every clip named in B3_BODY_CLIPS and in the kits exists, its run
 #      loop and its move clips load
 #   P6 the Lab row PROOF: GRACE'S GUARD (VIDEO) as Tom plays it, portrait and landscape (STANDING, GUARD, BRACED HIT, GUARD DOWN three times)
 # Pictures: wanproof-<id>-strip.png (stance, rise, hold, braced hit, lowering, hit, dodge, victory, ko), wanproof-portrait-*.png,
@@ -67,11 +67,10 @@ with sync_playwright() as pw:
     def leave():
         pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(700)
     for who in IDS:
-        T=pg.evaluate("(w)=>({clips:B3_BODY_CLIPS[w]||{},paint:B3_BODY_PAINT[w]||{}})",who)
+        T=pg.evaluate("(w)=>({clips:B3_BODY_CLIPS[w]||{}})",who)
         # W5 the tables
         for st,id in T['clips'].items():
             need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: clip {id} ({st}) is not defined')
-            need(st not in T['paint'],f'W5 {who}: {st} has a video and still a painted row')
         kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&s.anim&&s.anim.kind==='clip').map(s=>s.anim.clip)",who)
         for id in kit: need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: the kit names clip {id}, which is not defined')
         # Battle size today: the painted standing figure, clips switched off for this one measure.
@@ -87,7 +86,6 @@ with sync_playwright() as pw:
         for i in range(8): step(.55); idle.append(M())
         snap()
         need(all(set(m['drawn'])=={'clip'} for m in idle),f"W1 {who}: the stance is not the idle video: {[m['drawn'] for m in idle][:3]}")
-        need(pg.evaluate("(k)=>{ const u=B3.F.party[0]; return !b3PaintState(u,'idle'); }",key),f'W1 {who}: a painted fidget is still live')
         need(abs(idle[0]['h']-S['h'])<=tol,f"W2 {who}: idle standing height {idle[0]['h']/k:.1f} battle px, battle size today {S['h']/k:.1f}")
         feet=lambda ms,what,t=tol: need(all(abs(m['bot']-S['bot'])<=t for m in ms),f"W3 {who} {what}: feet leave the ground row (standing {S['bot']}, saw {[m['bot'] for m in ms]})")
         def jump(a,b,what):   # height and feet 2 battle px; the sides 3 (the idle video's hair sways a little with the breathing)
@@ -178,7 +176,7 @@ with sync_playwright() as pw:
     # An ordinary fight afterwards: Grace's guard is the video (wanch1: every fight).
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; b3Lab(0,{seed:7,party:['grace'],formation:null,foes:[{id:'mudling',row:'front'}]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor",timeout=40000)
-    need(pg.evaluate("()=>!b3PaintState(B3.F.party[0],'guard')&&!!b3cGuardClip(B3.F.party[0])"),'P6 an ordinary fight after the row does not show the guard video')
+    need(pg.evaluate("()=>!!b3cGuardClip(B3.F.party[0])"),'P6 an ordinary fight after the row does not show the guard video')
     need(not errs,f'page errors: {errs[:3]}')
     br.close()
 print('FAILS:',fails)

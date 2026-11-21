@@ -84,7 +84,6 @@ function build(d){
  var byCh={},other=[];
  d.b3.forEach(function(L){var x=/^Chapter (\d+)/.exec(L.sub),a=link(L.name,L.sub,'new&i='+L.i,'f-new'+L.i);
   if(x){(byCh[x[1]]=byCh[x[1]]||[]).push(a);}else{other.push(a);}});
- if(d.b3.length)other.push(link('PAINTED STATES: CHAPTER 1','Each fighter shows every body state, then you approve or reject it.','states','f-states'));
  var nb=Object.keys(byCh).sort(function(a,b){return a-b;}).map(function(c){return ['Chapter '+c,byCh[c]];});
  nb.push(['Other fights and states',other]);
  cat(m,'New battle system',nb);

@@ -2,7 +2,7 @@
 """guidegen1a test: python3 tools/guidegen/build_map_test.py
 Checks data/guide-anims.json (written by tools/guidegen/build_map.js) against the game's own data and the two prompt sources:
 - the file on disk is exactly what the script writes now (a new move, clip or job needs `node tools/guidegen/build_map.js`);
-- 346 animations, 68 with a video, 5 painted, 273 with neither; ids unique; the counts add up;
+- 346 animations, each with a video or none (wanch2a: nothing is painted any more); ids unique; the counts add up;
 - every animation with a video has a real prompt (job, entry or used), never a draft; every prompt has its MOTION part;
 - every Wan job and every Art Library entry matches an animation, except the ones named here (shape-level cast jobs, Rose's boop and nap,
   Tom's give), and no job is matched by two animations;
@@ -23,8 +23,8 @@ def node(*a, env=None):
 r = node('--check'); check('guide-anims.json is current', r.returncode == 0, r.stdout + r.stderr)
 D = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8')); A = D['anims']
 c = D['counts']
-check('the counts match the animations (at least 346; videos and no-video add up)', c['total'] == len(A) >= 346 and c['video'] + c['none'] == c['total'] and c['video'] == sum(a['video'] for a in A.values()) and c['painted'] == sum(1 for a in A.values() if a['painted']), c)
-check('painted ones have no video and the rest add up', sum(1 for a in A.values() if a['painted'] and a['video']) == 0 and sum(a['video'] for a in A.values()) == c['video'])
+check('the counts match the animations (at least 346; videos and no-video add up)', c['total'] == len(A) >= 346 and c['video'] + c['none'] == c['total'] and c['video'] == sum(a['video'] for a in A.values()), c)
+check('wanch2a: no animation is a painted pose', 'painted' not in c and not any('painted' in a for a in A.values()))
 check('every prompt has one MOTION part', all(a['prompt'].count('MOTION:') == 1 for a in A.values()), [i for i, a in A.items() if a['prompt'].count('MOTION:') != 1][:5])
 check('every animation with a video has a real prompt', all(a['promptSource'] in ('job', 'entry', 'used') for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and a['promptSource'] not in ('job', 'entry', 'used')])
 check('every animation with a video says what made it', all(a['madeBy'] for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and not a['madeBy']])

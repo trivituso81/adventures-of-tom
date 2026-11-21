@@ -23,7 +23,7 @@ function loadGame() {
   const ctx = vm.createContext({ Math, JSON, Object, Array, String, Number, Error, console: { log() {}, error() {} } });
   for (const f of files) vm.runInContext(rd(f), ctx, { filename: f });
   const g = n => vm.runInContext('typeof ' + n + '!=="undefined"?' + n + ':null', ctx);
-  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS') || {}, BODY_PAINT: g('B3_BODY_PAINT') || {} };
+  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS') || {}, VIDEO_ONLY: g('B3_VIDEO_ONLY') || [] };
 }
 
 const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
@@ -42,14 +42,15 @@ const BODY_ALIAS = { die: 'defeated' };   // the game's state name -> the entry 
 const JOB_ALIAS = { 'grace-guard': 'video' };   // the guard proof's job is named video (wanproof, before one job per clip)
 
 // ---------- animations, as battle-guide.html buildAnims lists them ----------
+const FAMILY_STATES = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run'];
 function listAnims(G) {
   const A = [];
   const body = id => {
-    const C = G.BODY_CLIPS[id] || {}, P = G.BODY_PAINT[id] || {};
+    const C = G.BODY_CLIPS[id] || {}, VO = G.VIDEO_ONLY.includes(id);   // wanch2a: a video-only member lists every family state; one with no clip has no video yet
     const order = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run', 'give', 'slip', 'flustered', 'die'];
     order.concat(Object.keys(C).filter(k => !order.includes(k))).forEach(st => {
       if (C[st]) A.push({ id: 'body:' + id + ':' + st, owner: id, kind: 'state', state: st, name: STATE[st] || cap(st), clip: C[st], what: 'body state ' + st });
-      else if (P[st]) A.push({ id: 'body:' + id + ':' + st, owner: id, kind: 'state', state: st, name: STATE[st] || cap(st), clip: null, painted: true, what: 'body state ' + st });
+      else if (VO && FAMILY_STATES.includes(st)) A.push({ id: 'body:' + id + ':' + st, owner: id, kind: 'state', state: st, name: STATE[st] || cap(st), clip: null, what: 'body state ' + st });
     });
   };
   Object.keys(G.CAST).forEach(id => {
@@ -268,7 +269,7 @@ function build() {
     const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
     const start = ow.start;
     anims[a.id] = {
-      owner: a.owner, kind: a.kind, name: a.name, state: a.state || undefined, clip: a.clip || null, video: !!clipFile, painted: !!a.painted,
+      owner: a.owner, kind: a.kind, name: a.name, state: a.state || undefined, clip: a.clip || null, video: !!clipFile,
       newClip, route: ow.route, job, entry: ent ? ent.e.id : null, prompt, promptSource: source, promptRev: rev, promptFile,
       madeBy: made ? (made.route === 'wan' ? 'wan job ' + made.job + ' rev ' + made.rev : 'entry clip-' + made.entry + ' v' + made.rev) : null, laterTries: laterTries || undefined, madeNote: madeNote || undefined,
       start, canMake: !!start && ow.figRows != null, missing: !start ? ow.missing : ow.figRows == null ? 'The sprite height (figRows) of ' + ow.name + ' is not known yet, so a take cannot be cut into a clip.' : '',
@@ -280,7 +281,7 @@ function build() {
     jobs: wanJobs.filter(j => !used.jobs.has(j)).sort(),
     entries: Object.keys(S.E).filter(k => !used.entries.has(k)).sort(),
   };
-  const counts = { total: A.length, video: Object.values(anims).filter(x => x.video).length, painted: Object.values(anims).filter(x => x.painted).length };
+  const counts = { total: A.length, video: Object.values(anims).filter(x => x.video).length };
   counts.none = counts.total - counts.video;
   counts.withPrompt = Object.values(anims).filter(x => x.promptSource !== 'rule-draft').length;
   counts.canMake = Object.values(anims).filter(x => x.canMake).length;

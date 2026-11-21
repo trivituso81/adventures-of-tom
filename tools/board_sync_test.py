@@ -120,17 +120,6 @@ bs.service_event(b, 'voice-gen', 'end', needs_human='needs-human.credit: ElevenL
 check('R6: needs-human adds a Tom card', (card(b, 't-svc-voice-gen') or {}).get('lane') == 'tom')
 
 # --- R7 reports and takes, R8 quiet
-# fix-clipposes-2: poses_reviewed closes the card when every state of the run has an answer made since the card was made, and hands rejections on
-def pv(): return {'cards': [dict(id='t-pv', lane='tom', col='up', ask='animations', theme='Battle Animations', title='Watch the poses', next='n', changed='2026-11-20', created='2026-11-20', blocks=['c-pvfix'], done_when={'poses_reviewed': 'ch1'}),
-                            dict(id='c-pvfix', lane='claude', col='wait', waiting_on='tom', theme='Battle Animations', title='Apply notes', next='n', changed='2026-11-20', created='2026-11-20', blocks=[], tag='pvfix')], 'lanes': [], 'sessions': []}
-P = lambda ans: {'runs': {'ch1': {'expect': ['tom.idle', 'tom.hit'], 'answers': ans}}}
-b = pv(); bs.sync(b, [], None, None, None, NOW, poses=P({'tom.idle': {'v': 'approve', 'note': '', 'at': '2026-11-20T16:00:00Z'}}))
-check('poses_reviewed: stays open while a state has no answer', card(b, 't-pv')['col'] == 'up')
-b = pv(); bs.sync(b, [], None, None, None, NOW, poses=P({'tom.idle': {'v': 'approve', 'note': '', 'at': '2026-11-19T16:00:00Z'}, 'tom.hit': {'v': 'approve', 'note': '', 'at': '2026-11-20T16:00:00Z'}}))
-check('poses_reviewed: an answer from before the card was made does not count', card(b, 't-pv')['col'] == 'up')
-b = pv(); bs.sync(b, [], None, None, None, NOW, poses=P({'tom.idle': {'v': 'approve', 'note': '', 'at': '2026-11-20T16:00:00Z'}, 'tom.hit': {'v': 'reject', 'note': 'slides too far', 'at': '2026-11-20T16:01:00Z'}}))
-fx = card(b, 'c-pvfix')
-check('poses_reviewed: closes when all are answered, and the rejection with its note reaches the fix card', card(b, 't-pv')['col'] == 'done' and fx['col'] == 'up' and any('tom.hit: slides too far' in h['t'] for h in fx['history']), (card(b, 't-pv'), fx))
 
 b = {'cards': [dict(id='c-q', tag='q', lane='claude', col='prog', theme='Tools', title='Q', next='n', changed='2026-11-17', blocks=[], chat={'url': 'https://claude.ai/code/session_Q', 'opening': 'x'})],
      'lanes': [], 'sessions': [{'url': 'https://claude.ai/code/session_Q', 'title': 'Q', 'first': '2026-11-17T09:00:00-08:00', 'last': '2026-11-17T09:30:00-08:00', 'tags': [], 'cards': ['c-q']}]}

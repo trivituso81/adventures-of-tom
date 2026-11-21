@@ -247,12 +247,12 @@ function buildAnims(){
   ANIMS=[];ANIM_BY={};
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
   const body=id=>{
-    const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{},P=(typeof B3_BODY_PAINT!=='undefined'&&B3_BODY_PAINT[id])||{};
+    const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{};
     const VO=typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(id);
     const order=['idle','guard','hit','dodge','ko','victory','run','give','slip','flustered','die'];
     order.concat(Object.keys(C).filter(k=>!order.includes(k))).forEach(st=>{
       if(C[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:C[st],what:'body state '+st});
-      else if(P[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:null,painted:!VO,what:'body state '+st});   // idea-tomgrace: a video-only member shows one of their videos there, never the painted pose
+      else if(VO&&['idle','guard','hit','dodge','ko','victory','run'].includes(st)) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:null,what:'body state '+st});   // wanch2a: a video-only member lists every family state; one with no clip shows one of their other videos in a fight
     });
   };
   Object.keys(B3_CAST).forEach(id=>{body(id);
@@ -565,7 +565,7 @@ async function watchProgress(){
 }
 function animRow(a){
   const k={state:'Body',move:a.vibe||'Move',act:'Attack',wind:'Wind-up'}[a.kind],n=openNotes(a.id).length;
-  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':a.painted?'<span class="badge n">OLD PAINTED POSE</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
 }
 function animsHtml(id){
   watchProgress();
@@ -839,7 +839,7 @@ function genBlock(a){
   const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource);
   let h='<div class="gen" id="gen"><h3>Prompt</h3>';
   h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
-  h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':a.painted?'. This animation is still an old painted pose.':'. This animation has no video yet.')+'</p>';
+  h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
   if(!g.canMake)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
   h+='<pre class="prompt" id="gprompt">'+esc(w?w.prompt:g.prompt)+'</pre>';
@@ -865,7 +865,7 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
-    S.innerHTML=head+stage(a.painted?'This one is still an old painted pose. Its video is not made yet, so there is nothing to play here.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
+    S.innerHTML=head+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
     initMake(a);return;
   }
   S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a);
@@ -907,7 +907,7 @@ function notePrompt(c){
    +'Tom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent '+(c.notes.length===1?'this note':'these notes')+':\n'
    +c.notes.map((n,i)=>(i+1)+'. ('+n.at.slice(0,10)+(n.build?', game build '+n.build:'')+') '+n.words).join('\n')
    +'\n\nThe animation: '+a.ownerName+', '+a.name+' ('+a.what+'). '
-   +(a.clip?'Its video is clip '+a.clip+' (data/clips/'+file+'.js, art/clips/'+file+'.webp).':a.painted?'It is still an old painted pose with no video.':'It has no video yet: it plays the standard motion.')
+   +(a.clip?'Its video is clip '+a.clip+' (data/clips/'+file+'.js, art/clips/'+file+'.webp).':'It has no video yet: it plays the standard motion.')
    +'\n\nMake it again as a video and nothing else: '+(fam?'the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json)':'the monster route of the plan (xAI through the clip-gen Action, entries in tools/art-library/clip-prompts.js)')+'. '
    +(a.clip?'Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed.':'Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for.')
    +' Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3.'
@@ -927,7 +927,7 @@ async function sendNote(){
         let sfx=Date.now().toString(36).slice(-4),id='c-anim-'+slug+'-'+sfx;while(ids.has(id)||tags.has(id.slice(2))){sfx=Math.random().toString(36).slice(2,6);id='c-anim-'+slug+'-'+sfx;}
         const title=('Animation note: '+ownerName(a.owner)+', '+a.name).slice(0,60).trim();
         c={id,tag:id.slice(2),lane:'claude',col:'up',theme:'Battle Animations',title,next:'',blocks:[],created:today(),changed:today(),
-           anim:{id:a.id,owner:a.owner,ownerName:ownerName(a.owner),name:a.name,kind:a.kind,clip:a.clip||'',painted:!!a.painted,what:a.what},notes:[],
+           anim:{id:a.id,owner:a.owner,ownerName:ownerName(a.owner),name:a.name,kind:a.kind,clip:a.clip||'',what:a.what},notes:[],
            chat:{url:'',opening:'A note sent from the Battle Guide'},history:[],
            prompt:{what:'Makes the animation '+ownerName(a.owner)+', '+a.name+' again from your note, checks it, and hands it back to you to watch.',before:['Nothing to do first. Your note is on the card.'],model:NOTE_MODEL,effort:NOTE_EFFORT,text:''}};
         d.cards.push(c);

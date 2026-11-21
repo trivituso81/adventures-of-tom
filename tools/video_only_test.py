@@ -3,7 +3,7 @@
 # It wraps drawSprite inside b3DrawMember and records every picture drawn for each fighter in B3_VIDEO_ONLY (data/b3-clips.js).
 #   V1 every moment (stance, low HP, a hit with no hit video, a dodge, a strike, cast, throw and give with no move video, the run, the cheer,
 #      the knock-out, standing up) draws only clip pictures, never a painted battle frame
-#   V2 b3PaintState is null for them in every state (no painted guard, fidget, hit, dodge, knock-out, run or victory)
+#   V2 the painted-state code is gone (wanch2a: no B3_BODY_PAINT, b3PaintState, b3GuardDraw, B3_GUARD, B3_PAINT, b3GetUp)
 #   V3 a whole NEW BATTLE fight with the four of them, played by pressing A until it ends (portrait), then the same in landscape: only clip
 #      pictures are drawn for them
 #   V4 nothing is drawn for them before their idle video is loaded (no painted stand-in while loading)
@@ -54,7 +54,7 @@ with sync_playwright() as pw:
     for who in IDS:
         # V4: from the first frame of the fight, nothing painted (the idle video may still be loading)
         tag('start'); start([who],[{'id':'mudling','row':'front'}]); pg.evaluate("()=>{ window.__slow=0; }")
-        need(all(pg.evaluate("([w,s])=>!b3PaintState(B3.F.party[0],s)",[who,s]) for s in ('idle','guard','hit','dodge','ko','run','victory')),f'V2 {who}: a painted state is live')
+        need(pg.evaluate("()=>['B3_BODY_PAINT','b3PaintState','b3GuardDraw','B3_GUARD','B3_PAINT','b3GetUp','b3LabPaintedStates'].every(n=>{ try { return eval('typeof '+n)==='undefined'; } catch(e) { return true; } })"),f'V2 {who}: painted-state code is still in the game')
         key=pg.evaluate("()=>B3.F.party[0].key")
         pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].idle)",arg=who,timeout=40000)
         for st in ('give','hit','run','victory','ko'):
@@ -66,14 +66,14 @@ with sync_playwright() as pw:
         tag('stance'); step(1); snap()
         tag('low'); pg.evaluate("(k)=>{ const v=B3.view.u[k]; window.__hp=v.hp; v.hp=1; }",key); step(.6); snap(); pg.evaluate("(k)=>{ B3.view.u[k].hp=window.__hp; }",key)
         tag('hit-no-video'); pg.evaluate("(k)=>{ B3P.body[k]={kind:'hit',t0:B3P.t,dur:.4}; }",key); step(.4)
-        tag('dodge'); pg.evaluate("(k)=>{ B3P.body[k]={kind:'dodge',t0:B3P.t,dur:B3_PAINT.dodge.dur}; }",key); step(.15); snap(); step(.4)
+        tag('dodge'); pg.evaluate("(k)=>{ B3P.body[k]={kind:'dodge',t0:B3P.t,dur:B3_DODGE.dur}; }",key); step(.15); snap(); step(.4)
         tag('strike'); pg.evaluate("(k)=>{ const h=b3PartyHome(B3.F.units.find(x=>x.key===k)),z=b3Spot(B3.F.foes[0].key),K=[{t:0,x:h.cx,y:h.base,f:B3_BODY.windup},{t:.2,x:h.cx,y:h.base,f:B3_BODY.windup},{t:.35,x:z.sx,y:z.sb,f:B3_BODY.dash},{t:.36,x:z.sx-8,y:z.sb,f:B3_BODY.strike},{t:.9,x:z.sx-8,y:z.sb,f:B3_BODY.strike},{t:1.2,x:h.cx,y:h.base,f:B3_BODY.idle}]; B3P.body[k]={kind:'path',keys:K,t0:B3P.t,dur:1.2}; }",key)
         step(.6); step(.8)
         for f in ('cast','give','strike'):
             tag('pose-'+f); pg.evaluate("([k,f])=>{ B3P.body[k]={kind:'pose',f:B3_BODY[f],t0:B3P.t,dur:.9}; }",[key,f]); step(.45); f!='strike' and snap(); step(.5)
         tag('cheer'); pg.evaluate("(k)=>{ B3P.cheerKey=k; B3P.cheerAt=null; }",key); step(1); pg.evaluate("()=>{ B3P.cheerKey=null; B3P.cheerAt=null; }")
         tag('ko'); pg.evaluate("(k)=>{ B3.view.u[k].ko=true; B3P.body[k]={kind:'ko',t0:B3P.t,dur:9}; }",key); step(1.2); snap()
-        tag('getup'); pg.evaluate("(k)=>{ B3.view.u[k].ko=false; delete B3P.body[k]; b3GetUp(k,B3P.t); }",key); step(1)
+        tag('getup'); pg.evaluate("(k)=>{ B3.view.u[k].ko=false; delete B3P.body[k]; }",key); step(1)
         need(pg.evaluate("(w)=>(window.__n[w]||0)>0",who),f'V1 {who}: never drawn')
         bad=pg.evaluate("(w)=>window.__bad[w]||[]",who); need(not bad,f'V1/V4 {who}: painted frames drawn: {sorted(set(bad))[:8]}')
         W=sum(i.width for i in strip); S=Image.new('RGB',(W,max(i.height for i in strip)),(20,20,20)); x=0

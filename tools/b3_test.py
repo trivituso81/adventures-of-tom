@@ -1209,8 +1209,8 @@ def stage8(pg,lab,landscape=False):
     need(all(x.endswith(':true') for x in v['idle']),f"every monster's idle loop is loaded when the fight opens: {v['idle']}")
     need(v['loaded']<=10,f"no more than the idle loops plus a few leftovers are loaded at the start (about 10 MB each): {v['loaded']}")
     # the idle loop is what is drawn: the same picture changes over a second
-    a=pg.evaluate("()=>B3.F.party.map(u=>{ const vu=B3.view.u[u.key],id=b3cOf(u.id,'idle'); if(!id) return !!b3PaintState(u,'idle'); b3cWant(id,9000); return bclipReady(id)?!!b3cMemberFrame(u,vu,B3P.t,null)&&!b3PaintState(u,'idle'):'loading'; })")
-    need(all(x is True or x=='loading' for x in a),f'each family member stands in their idle video (wanch1), or a painted pose only while they have none: {a}')
+    a=pg.evaluate("()=>B3.F.party.map(u=>{ const vu=B3.view.u[u.key],id=b3cOf(u.id,'idle'); if(!id) return 'no idle video: '+u.id; b3cWant(id,9000); return bclipReady(id)?!!b3cMemberFrame(u,vu,B3P.t,null):'loading'; })")
+    need(all(x is True or x=='loading' for x in a),f'each family member stands in their idle video (wanch1; wanch2a: there is no painted pose to fall back on): {a}')
     # 1. each family member's Basic lands on its clip's impact frame
     for member in ['tom','grace','rose','deedee']:
         if not turn_of(pg,member,S): continue
@@ -1246,15 +1246,15 @@ def stage8(pg,lab,landscape=False):
     need({'big_glare','swamp_chomp'}<=seen,f'the Big One used Big Glare and Swamp Chomp: {sorted(seen)}')
     print('   Big One acts seen:',sorted(seen))
     caps+=bfr[:6]
-    # 3. body states: the family are painted poses (tools/paint_state_test.py measures them); a monster hit and a Flustered monster are clips
+    # 3. body states: the family are videos only (wanch2a); a monster hit and a Flustered monster are clips
     pg.wait_for_timeout(600)
     st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
-      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>b3cVideoOnly(m)?!b3PaintState(m,s):(b3cOf(m.id,s)===null)===!!b3PaintState(m,s)));   // wanch1: each state is a video or (until it has one) painted, never both; idea-tomgrace: a video-only member is never painted
-      out.vic=B3.F.party.every(m=>b3cVideoOnly(m)?!b3PaintState(m,'victory'):(b3cOf(m.id,'victory')===null)===!!b3PaintState(m,'victory'));
+      out.paint=typeof b3PaintState==='undefined'&&typeof B3_BODY_PAINT==='undefined';   // wanch2a: the painted body states are purged
+      out.vic=B3.F.party.every(m=>b3cVideoOnly(m));   // every family member in this fight is video-only (idea-tomgrace)
       const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
       vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
     print('   states',st2)
-    need(st2['paint'] and st2['vic'],f'every body state of the four fighters is a video or painted, never both and never neither (video-only members: never painted): {st2}')
+    need(st2['paint'] and st2['vic'],f'the painted body states are gone and the four fighters are video-only (wanch2a): {st2}')
     need(st2['foeHit'],f'a monster hit clip is available and drawn: {st2}')
     # Flustered: the held picture, then restore
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))
@@ -1272,7 +1272,7 @@ def stage8(pg,lab,landscape=False):
     print('   end',done)
     need(done['over']=='win','the boss fight was won')
     want=pg.evaluate("()=>B3.F.party.map(u=>!!b3cOf(u.id,'victory'))")
-    need(done['vic']==want,f"the family cheers from their victory videos (painted only for whoever has none yet): {done['vic']} want {want}")
+    need(done['vic']==want,f"the family cheers from their victory videos: {done['vic']} want {want}")
     need(done['peak']<=16,f"no more than 16 clip pictures (about 160 MB) were ever held at once: peak {done['peak']}")
     sheet(caps[:24],4,os.path.join(OUT,'b3-s8'+('-land' if landscape else '')+'.png'),scale=.5)
     f=shot(pg); f.save(os.path.join(OUT,'b3-s8-end-'+('landscape' if landscape else 'portrait')+'.png'))

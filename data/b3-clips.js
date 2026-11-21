@@ -1,23 +1,13 @@
 'use strict';
 // data/b3-clips.js — Battle 3 body states and video clips (stage 8, architecture 2.7).
-// B3_BODY_CLIPS[owner][state] is a clip id (data/clips/*.js, made in the Art Library). A state with no entry, or a clip that is not
-// loaded yet, shows the painted frame that B3_BODY (engine/b3-play.js) names, so a missing clip never breaks a fight.
-// States here are for monsters (idle, hit, slip, flustered, die) and the kept family clips (Rose's victory, the three gives). The family's other body
-// states are painted poses, see B3_BODY_PAINT below.
+// B3_BODY_CLIPS[owner][state] is a clip id (data/clips/*.js, made in the Art Library or by the wan-gen Action). Tom, Grace, Rose and Deedee
+// (B3_VIDEO_ONLY below) show a video in every state: a state with no clip of its own, or a clip not loaded yet, shows one of their other
+// videos (b3cStandIn, engine/b3-clips.js). A monster's state with no clip shows the painted frame that B3_BODY (engine/b3-play.js) names.
 // A MOVE or an ACT switches from the default animation to a clip by its own row: anim:{kind:'clip',clip:'<id>'} in data/b3-kit-<id>.js
 // or data/b3-foes-ch*.js (a clip with no impact frame says where it lands: at:<share of its length>). An act may also name the clip
 // that holds while it is wound up: wind:'<id>'.
-// B3_BODY_PAINT[owner][state] (clipreset, 2026-11-19): a state shown by painted battle frames and the engine's own motion, with no video.
-// f is the frame's name on the owner's battle sprite ('run' is the pair sp.run, with sp.runFlip for the way home); h is that pose's painted
-// height as a share of the standing idle's (measured from the battle sheet); s is the size the pose is drawn at, so that its head matches the
-// standing head (a pose is its own drawing: Grace's guard has a face about 1.25x her standing face, so it is drawn at .8). f2, h2, s2 name the
-// second picture of a state that uses two: ko is hurt then kneel (then the knocked-out picture), victory swaps celeb and leap. idle is the
-// fidget picture (idle2) shown for half a second every 5 to 7 seconds. A state listed here has no row in B3_BODY_CLIPS.
-// Only s and h belong here: a pose is never warped (tools/paint_state_test.py measures them in the real game).
-const B3_BODY_PAINT={
-  grace: {dodge:{f:'windup',h:.967,s:.78}},
-  deedee:{dodge:{f:'windup',h:.96,s:.95}}
-};
+// wanch2a (2026-11-21): the painted body states (B3_BODY_PAINT, the painted guard, fidget, hit, dodge, knock-out, get up, run and victory
+// poses) were purged; Tom's rule "NO PAINTED POSES IN BATTLE" (CLAUDE.md). A new video for a state is listed here and replaces its stand-in.
 const B3_BODY_CLIPS={
   tom:   {dodge:'tom_dodge',idle:'tom_idle',guard:'tom_guard',hit:'tom_hit',ko:'tom_ko',victory:'tom_victory',run:'tom_run'},   // wanch1: Wan 3.0 videos
   grace: {give:'grace_give',idle:'grace_idle',guard:'grace_guard',hit:'grace_hit',ko:'grace_ko',victory:'grace_victory',run:'grace_run'},   // wanch1: Wan 3.0 videos
@@ -31,7 +21,7 @@ const B3_BODY_CLIPS={
   bigone:{idle:'bigone_idle',hit:'bigone_hit',slip:'bigone_slip',flustered:'bigone_flustered',die:'bigone_defeated'}
 };
 // B3_VIDEO_ONLY (idea-tomgrace, Tom 2026-11-21: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ever used in battle.
-// Only new video animations"): these family members never show a painted battle frame. B3_BODY_PAINT rows of theirs are ignored, and any
+// Only new video animations"): these family members never show a painted battle frame. Any
 // moment that has no video of its own shows one of their videos instead (b3cStandIn, engine/b3-clips.js): a reaching move (strike, cast,
 // throw, give) plays their give video, a dodge slides their idle video, a knock-out whose video is not loaded yet holds the deepest wince
 // of their hit video, dimmed, with stars; everything else is the idle, guard or victory video. Until a video is loaded they are not drawn at all.

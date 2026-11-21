@@ -30,7 +30,7 @@ B3_FOES.skeeter={id:'skeeter',name:'Skeeter Swarm',ch:1,role:'hexer',row:'back',
   acts:[
     {id:'darting_bite',name:'Darting Bite',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee'],effects:[]},
     {id:'buzz_cloud',name:'Buzz Cloud',flavor:['support'],power:0,recovery:80,hits:'self',tags:['buff'],anim:{kind:'clip',clip:'skeeter_buzz',at:.6},when:{stripped:'jitterflight'},effects:[{op:'status',id:'jitterflight',to:'self'}]},
-    {id:'mosquito_whine',name:'Mosquito Whine',flavor:['racket'],power:1,recovery:100,hits:'one',tags:['projectile'],effects:[{op:'pep',n:-1,to:'target'},{op:'status',id:'fatigue',to:'target'}]}
+    {id:'mosquito_whine',name:'Mosquito Whine',flavor:['racket'],power:1,recovery:100,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'skeeter_whine',at:.5},effects:[{op:'pep',n:-1,to:'target'},{op:'status',id:'fatigue',to:'target'}]}
   ]};
 B3_FOES.grump={id:'grump',name:'Pond Grump',ch:1,role:'bruiser',row:'front',hp:106,atk:24,def:16,spd:89,pips:0,
   peeves:['razzle','sizzle'],resists:[],start:[],mechanics:[],drop:'hoodie',
@@ -43,7 +43,7 @@ B3_FOES.toad={id:'toad',name:'Bog Toad',ch:1,role:'bruiser',row:'front',hp:106,a
   peeves:['sizzle','razzle'],resists:['drench'],start:[],mechanics:[],drop:'lilyhat',
   acts:[
     {id:'night_croak',name:'Night Croak',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'toad_croak',at:.5},effects:[]},
-    {id:'body_slam',name:'Body Slam',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],effects:[]},
+    {id:'body_slam',name:'Body Slam',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],anim:{kind:'clip',clip:'toad_slam'},effects:[]},
     {id:'tongue_lash',name:'Tongue Lash',flavor:['clobber'],power:1.1,recovery:120,hits:'all',tags:['ground_sweep','aoe','charge_up'],anim:{kind:'clip',clip:'toad_tongue'},wind:'toad_tonguewind',effects:[]}
   ]};
 // Log Lump, the chapter's Elite: 4 Composure pips, one Pet Peeve, and it starts braced.

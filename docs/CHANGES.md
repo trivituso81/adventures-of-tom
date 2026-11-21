@@ -1,3 +1,16 @@
+## wanch2a (2026-11-21): the old painted battle poses are gone from the code; the Bog Toad's Body Slam and the Skeeter's Mosquito Whine are videos
+
+Card c-wanch2, part a. Tom's words on c-idea-tomgrace: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ever used in battle. Only new video animations". The painted states had stopped being drawn for the four in idea-tomgrace; this build removes them from the code (CLAUDE.md purge rule).
+
+| What | Change |
+|---|---|
+| Purged | `B3_BODY_PAINT` (data/b3-clips.js); `b3PaintState`, `B3_GUARD`, `b3GuardDraw`, `b3GetUp`, `b3DrawScaled`, the painted hit, dodge, run, victory, fidget and ko parts of `b3DrawMember` and `b3KoDraw`, `B3P.gd`, `B3P.fidAt`, `B3P.stage` (engine/b3-play.js); the Lab row PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, engine/b3-lab.js), its link in battle-lab.html and engine/splash.js; `engine/pose-review.js`, `data/pose-review.json`, the board rule `poses_reviewed` (tools/board_sync.py and its test); docs/BATTLE3.md "Painted body states" (replaced by "Family body states are videos only"). |
+| Kept | The dodge slide the stand-in uses, renamed `B3_DODGE` and `b3Slide`; `b3KoDraw` for a fighter who is not video-only. |
+| Battle Guide | A video-only member lists all seven family states; one with no video says NO VIDEO YET (the OLD PAINTED POSE badge is gone). `tools/guidegen/build_map.js` writes no `painted` field. |
+| Monster videos (full Grok, prompts word for word, wanch1 stop-loss) | Bog Toad Body Slam (`toad_slam`, v3: stays in the frame, the lily pad stays on) and Skeeter Swarm Mosquito Whine (`skeeter_whine`, v3: the small mosquitoes stay) are wired in data/b3-foes-ch01.js. |
+| Not made | Skeeter Swarm Darting Bite: full Grok v3 kept the small mosquitoes but the big one darted left, turned side-on and never came back; the one retry (MOTION without "darts forward once and") grew the big one, lost half the swarm and again did not come back. Stop-loss: listed. Its baked v3 file and script tag were removed. |
+| Spend so far | xAI $1.00 (4 videos). fal: see wanch2. |
+| Tests | `video_only_test.py` FAILS [] (V2 now checks the painted-state code is gone), `wanproof_test.py` FAILS [], `b3_test.py s8` FAILS [], `guidegen/build_map_test.py` FAILS [], smoke (portrait and landscape). `board_sync_test.py` has 3 failures that were there before this change (R5 replay and the unstick card). |
 ## fix-ch1flight-2 (2026-11-21): the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js
 
 Card c-fix-ch1flight-2 (Gemini's chapter 1 test, C2 FAIL). Checked on main first: `SCENES.ch1Sunday` had lost the edit (a later push overwrote it).

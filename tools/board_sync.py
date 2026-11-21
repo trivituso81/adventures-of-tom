@@ -189,28 +189,6 @@ def r2_clips(B, art, now):
         B.say('done %s (clips reviewed)' % c['id'])
 
 
-def r2_poses(B, poses):
-    """fix-clipposes-2: done_when {"poses_reviewed": "ch1"}: data/pose-review.json (written by the Battle Lab's PAINTED STATES review panel,
-    engine/pose-review.js) has an APPROVE or REJECT, made on or after the day the card was made, for every state that run showed. The card closes and
-    its note lists the rejections with his words, so R1 copies them onto the card it unblocks."""
-    if not poses: return
-    for c in B.cards:
-        w = c.get('done_when')
-        if c['col'] == 'done' or not w or 'poses_reviewed' not in w: continue
-        R = (poses.get('runs') or {}).get(w['poses_reviewed']) or {}
-        exp, ans = R.get('expect') or [], R.get('answers') or {}
-        since = c.get('created') or B.today
-        got = {k: ans[k] for k in exp if k in ans and str(ans[k].get('at', ''))[:10] >= since and ans[k].get('v') in ('approve', 'reject')}
-        if not exp or len(got) < len(exp): continue
-        no = [k for k in exp if got[k]['v'] == 'reject']
-        notes = [k + ': ' + plain(got[k]['note']) for k in exp if got[k].get('note')]
-        c['col'] = 'done'; c['done'] = B.today; c.pop('waiting_on', None)
-        if no or notes:
-            c['note'] = ('Rejected: %s. ' % ', '.join(no) if no else 'Approved every state. ') + ('Notes: %s.' % '; '.join(notes) if notes else 'No notes.')
-        B.hist(c, 'Done by the board: you answered all %d painted states in the Battle Lab. Approved %d, rejected %d%s.' % (len(exp), len(exp) - len(no), len(no), (': ' + ', '.join(no)) if no else ''))
-        B.say('done %s (poses reviewed)' % c['id'])
-
-
 def r2_art(B, art):
     if art is None: return
     for c in B.cards:
@@ -608,7 +586,7 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
 
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, poses=None, archive=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, archive=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now), (archive or {}).get('cards'))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
@@ -623,7 +601,6 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r7_inbox(B, reports, takes)
     r2_art(B, art)
     r2_clips(B, art, now)
-    r2_poses(B, poses)
     r1_unblock(B)
     r10_notes(B)
     r12_ghost(B, now)
@@ -748,10 +725,9 @@ def main(argv):
         commits = collect_commits(data.get('synced'), data.get('synced_at'))
         art = {e['id']: e for e in load(os.path.join(ROOT, 'data', 'art-prompts.json')).get('entries', [])}
         reports, takes = remote_lists()
-        pp = os.path.join(ROOT, 'data', 'pose-review.json'); poses = load(pp) if os.path.exists(pp) else None
         before = json.dumps(data, sort_keys=True)
         ap = a.get('archive', board_archive.ARCHIVE); arch = board_archive.load_archive(ap); arch_before = json.dumps(arch, sort_keys=True)
-        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), poses, arch)
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), arch)
         if '--dry' not in flags and json.dumps(arch, sort_keys=True) != arch_before: board_archive.save_archive(arch, ap)
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']

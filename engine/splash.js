@@ -60,12 +60,11 @@ function splashWire(box) {
 function splashGoTool(name,arg) {
   const n=Number(arg);
   // battle-lab.html (battlelab2): each fight on that page opens straight into the fight on the difficulty it saved: lab = an old
-  // Battle Lab fight (B2_LAB index; the SOLO row opens its fighter picker), new = a NEW BATTLE fight (B3_LAB index), states = PAINTED STATES.
+  // Battle Lab fight (B2_LAB index; the SOLO row opens its fighter picker), new = a NEW BATTLE fight (B3_LAB index).
   const fight={
     'lab':()=>{ if(B2_LAB[n]&&B2_LAB[n].solo) { splash.labPage=0; splashSoloOpen(n); } else splashLab(n); },
     'new':()=>b3LabGo(n)};
   if(name==='lab'||name==='new') { if((name==='lab'?B2_LAB:B3_LAB)[n]) { fight[name](); return; } }
-  if(name==='states'&&typeof b3LabPaintedStates==='function') { b3LabPaintedStates(); return; }
   const tools={
     'welcome-layout':()=>splashEditOpen(),
     'battle-lab':()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); }),

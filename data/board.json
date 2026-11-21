@@ -22828,8 +22828,8 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGvHoJRHbmTxvW7YaR",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1)\""
    },
    "history": [
     {
@@ -22872,6 +22872,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom's dodge is done on Wan as a duck (anim-tom-dodge-ner3), like Rose's; it no longer needs this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session (Opus 5.5, medium): Tom's answer on t-wanch1-watch was All good with no note, so nothing to apply from it. The start commit carried the wrong conversation link by mistake; this is the right one."
     }
    ],
    "prompt": {
@@ -22883,7 +22887,8 @@
     "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
     "effort": "medium (the route, the checks, the bake and the tests are built and written down; this repeats them with another model)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). The painted states are no longer drawn for Tom, Grace, Rose and Deedee (idea-tomgrace: B3_VIDEO_ONLY, b3cStandIn shows one of their videos where a state has none), so purge them completely in wanch2a whatever the video tries give (B3_BODY_PAINT, b3PaintState, b3GuardDraw and B3_GUARD, b3KoDraw painted parts and b3GetUp, B3_PAINT except the dodge slide b3cStandIn uses, the Lab row PAINTED STATES: CHAPTER 1 and its link in battle-lab.html and engine/splash.js, engine/pose-review.js, data/pose-review.json, docs/BATTLE3.md Painted body states; tools/paint_state_test.py is already gone). Keep python3 -I tools/video_only_test.py passing. A new video for a state replaces its stand-in by being listed in B3_BODY_CLIPS or the kit row. Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "nothing for Tom: c-wanch2"
   },
   {
    "id": "c-b3s14",
