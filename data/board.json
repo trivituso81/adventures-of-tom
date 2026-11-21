@@ -23340,6 +23340,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T14:55:18Z",
+   "last": "2026-11-21T15:05:16Z",
+   "tags": [
+    "qa-battle2"
+   ],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
    "title": "Purge the 221 old dialogue clips nothing plays",
    "first": "2026-11-21T14:54:16Z",
@@ -23392,16 +23404,6 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
-   "title": "Old battle screen problems: check them in the new battle",
-   "first": "2026-11-21T14:55:18Z",
-   "last": "2026-11-21T14:55:18Z",
-   "tags": [],
-   "cards": [
-    "c-qa-battle2"
    ]
   },
   {
@@ -26702,8 +26704,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e72b8439bdd4c8729cd530bebb0f7e0b8cc802e8",
- "synced_at": "2026-11-21T15:03:37+00:00",
+ "synced": "f585418ea53f11fba702821b69d12971dfd3e8d8",
+ "synced_at": "2026-11-21T15:06:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
