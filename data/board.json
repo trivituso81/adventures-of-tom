@@ -29938,7 +29938,7 @@
    "id": "c-stale-tests",
    "tag": "staletests1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Repair three tests that already failed on main",
    "blocks": [],
@@ -29982,12 +29982,17 @@
     {
      "d": "2026-11-21",
      "t": "Repaired the three tests (data changed, code was right); build staletests1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as staletests1: three tests that failed on main now follow the data that changed under them"
     }
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-21T22:09:22+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "svc-voice-gen",
@@ -30156,6 +30161,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDLUieFcPSCe8LNEhP",
+   "title": "Repair three tests that already failed on main",
+   "first": "2026-11-21T22:09:52Z",
+   "last": "2026-11-21T22:19:53Z",
+   "tags": [
+    "staletests1"
+   ],
+   "cards": [
+    "c-stale-tests"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFtfHJc1wXT1SeYg7Y",
    "title": "Night cleanup: one bucket of cleanup every night",
    "first": "2026-11-21T22:12:44Z",
@@ -30197,16 +30214,6 @@
    "tags": [],
    "cards": [
     "c-night-qa"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDLUieFcPSCe8LNEhP",
-   "title": "Repair three tests that already failed on main",
-   "first": "2026-11-21T22:09:52Z",
-   "last": "2026-11-21T22:09:52Z",
-   "tags": [],
-   "cards": [
-    "c-stale-tests"
    ]
   },
   {
@@ -34704,8 +34711,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "26df60a36f786de06556e486319edcb2530f8703",
- "synced_at": "2026-11-21T22:15:56+00:00",
+ "synced": "559313a6018d8941d200b6c20deb6c0e689fec55",
+ "synced_at": "2026-11-21T22:20:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
