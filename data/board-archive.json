@@ -1,0 +1,5 @@
+{
+ "version": 1,
+ "about": "Done cards older than 7 days, moved off data/board.json by tools/board_archive.py (bigboard1). One stub per card: id, title, theme, lane, tag, done and the final history line. Never edited by hand.",
+ "cards": []
+}

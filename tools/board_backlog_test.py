@@ -24,7 +24,9 @@ LIVE_PARKED = len([c for c in b['cards'] if c.get('backlog') and c['col'] != 'do
 ENV = {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])}
 rig = None
 def saved():   # what the page wrote, read back from the stub GitHub
-    j = json.load(urllib.request.urlopen(rig.url.split('?gh=')[1] + '/repos/trivituso81/adventures-of-tom/contents/data/board.json'))
+    base = rig.url.split('?gh=')[1] + '/repos/trivituso81/adventures-of-tom/'
+    j = json.load(urllib.request.urlopen(base + 'contents/data/board.json'))
+    if not j['content']: j = json.load(urllib.request.urlopen(base + 'git/blobs/' + j['sha']))   # bigboard1: over 1 MiB the contents call is empty, like GitHub's
     return {c['id']: c for c in json.loads(base64.b64decode(j['content']))['cards']}
 VIEW = {'phone': '#views', 'wide': '#views'}
 HOME = {'t-bk1': 'for', 'c-bk2': 'claude', 'c-bk3': 'claude', 'svc-bk4': 'claude'}   # boardux3: the view each fixture card lives in; parked cards are at the bottom of Shipped

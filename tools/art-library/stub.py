@@ -42,7 +42,7 @@ if os.path.exists(_seed):
 _bp = os.environ.get('STUB_BOARD') or os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'board.json')   # STUB_BOARD: a test board (board2)
 if os.path.exists(_bp):   # board1: the Board page saves data/board.json the same way
     _b = base64.b64encode(open(_bp, 'rb').read()).decode()
-    FILES['data/board.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}
+    FILES['data/board.json'] = {'sha': 'seedboard', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a): pass
     def _send(self, code, obj=None):
@@ -86,7 +86,18 @@ class H(BaseHTTPRequestHandler):
             return self._send(200, {'ref': self.path.split('/git/ref/', 1)[1]}) if self.path.split('/git/ref/heads/', 1)[1].split('?')[0] in REFS else self._send(404, {'message': 'Not Found'})
         if self.path.startswith('/repos/'):
             p = self.path.split('/contents/', 1)[-1].split('?')[0]
-            if p in FILES: return self._send(200, {'sha': FILES[p]['sha'], 'content': FILES[p]['content'], 'path': p})
+            if '/git/blobs/' in self.path:   # bigboard1: the git blob API, which (unlike the contents API) sends a file of any size
+                want = self.path.split('/git/blobs/', 1)[1].split('?')[0]
+                for q, f in FILES.items():
+                    if f['sha'] == want:
+                        LOG.append({'github': 'GET', 'blob': q})
+                        return self._send(200, {'sha': want, 'content': f['content'], 'encoding': 'base64', 'size': len(base64.b64decode(f['content']))})
+                return self._send(404, {'message': 'Not Found'})
+            if p in FILES:
+                # bigboard1: like GitHub, the contents API sends an empty `content` and encoding "none" for a file over 1 MiB (1,048,576 bytes)
+                if len(base64.b64decode(FILES[p]['content'] or '')) > 1048576:
+                    return self._send(200, {'sha': FILES[p]['sha'], 'content': '', 'encoding': 'none', 'size': len(base64.b64decode(FILES[p]['content'])), 'path': p, 'type': 'file'})
+                return self._send(200, {'sha': FILES[p]['sha'], 'content': FILES[p]['content'], 'path': p})
             return self._send(404, {'message': 'Not Found'})
         self._send(404)
     def _body(self):

@@ -43,7 +43,9 @@ N0 = len(b['cards'])
 ENV = {'STUB_COMMIT_AT': isoz(30), 'STUB_RUNS': json.dumps([{'conclusion': 'success', 'updated_at': isoz(12)}])}
 rig = None
 def saved_doc():
-    j = json.load(urllib.request.urlopen(rig.url.split('?gh=')[1] + '/repos/trivituso81/adventures-of-tom/contents/data/board.json'))
+    base = rig.url.split('?gh=')[1] + '/repos/trivituso81/adventures-of-tom/'
+    j = json.load(urllib.request.urlopen(base + 'contents/data/board.json'))
+    if not j['content']: j = json.load(urllib.request.urlopen(base + 'git/blobs/' + j['sha']))   # bigboard1: over 1 MiB the contents call is empty, like GitHub's
     return json.loads(base64.b64decode(j['content']))
 def make(pg, text, shot=None):
     pg.click('#newb'); pg.wait_for_selector('#nctxt', state='visible'); pg.fill('#nctxt', text); pg.wait_for_timeout(150)

@@ -16,6 +16,8 @@ Run: python3 tools/board_check.py [path]
      python3 tools/board_check.py --push <tag> [path]   the build being pushed must be on a card (tag equal, a part of it, or named in a history line)"""
 import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import board_archive   # bigboard1: stubs of Done cards older than 7 days (data/board-archive.json)
 args = sys.argv[1:]
 push_tag = None
 if args[:1] == ['--push']:
@@ -35,14 +37,18 @@ lanes = {l.get('id') for l in d.get('lanes', [])}
 cols = {c.get('id') for c in d.get('columns', [])}
 if cols != {'up', 'prog', 'wait', 'done'}: bad.append('columns must be up, prog, wait, done')
 if 'tom' not in lanes or 'claude' not in lanes: bad.append('lanes tom and claude are required')
+# bigboard1: an archived card is still a card for the checks that look an id or a tag up (blocks, after, a build's tag); its stub is card-shaped.
+ARCH = board_archive.stubs(os.path.join(os.path.dirname(os.path.abspath(path)), 'board-archive.json'))
+for s in ARCH:
+    if s.get('id') in {c.get('id') for c in d.get('cards', [])}: bad.append('archive: %s is on the board and in the archive' % s.get('id'))
 ids = [c.get('id') for c in d.get('cards', [])]
 for i in set(ids):
     if ids.count(i) > 1: bad.append('duplicate card id ' + str(i))
-idset = set(ids)
-idmap = {c.get('id'): c for c in d.get('cards', [])}
+idset = set(ids) | {s.get('id') for s in ARCH}
+idmap = dict({s.get('id'): s for s in ARCH}, **{c.get('id'): c for c in d.get('cards', [])})
 def after_ok(a, data):
     a = str(a)
-    cm = {c.get('id'): c for c in data.get('cards', [])}
+    cm = dict({s.get('id'): s for s in ARCH}, **{c.get('id'): c for c in data.get('cards', [])})
     if a in cm: return cm[a].get('lane') == 'tom' and (cm[a].get('ask') in ASKS or cm[a].get('col') == 'done')
     m = re.fullmatch(r'nothing for Tom: (end|\S+)', a)
     return bool(m) and (m.group(1) == 'end' or (m.group(1) in cm and cm[m.group(1)].get('lane') == 'claude'))
@@ -135,7 +141,7 @@ if push_tag:
     for c in d.get('cards', []):
         if tag_card(c) and c.get('col') != 'done' and c.get('lane') == 'claude' and not push_tag.startswith('board-') and c.get('after') is None:
             bad.append('%s: the build %r is being pushed but the card has no `after`: set it to the Tom card this build hands to you (created in this push, with its ask) or "nothing for Tom: <next Claude card id or end>". Plan: claude/board3-plan.md part C.' % (c.get('id'), push_tag))
-    if not any(on_card(c) for c in d.get('cards', [])) and not push_tag.startswith('board'):
+    if not any(on_card(c) for c in d.get('cards', []) + ARCH) and not push_tag.startswith('board'):
         bad.append('the build %r being pushed is not on any card: add a card with tag %r (or name the build in a history line of the card it belongs to), then push. Plan: claude/board2-plan.md section 4.' % (push_tag, push_tag))
 if bad:
     print('board FAIL:'); [print('  ' + b) for b in bad]; raise SystemExit(1)

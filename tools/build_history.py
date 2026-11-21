@@ -125,8 +125,12 @@ def sync(rows):
 def board_cards():
     p = os.path.join(ROOT, 'data', 'board.json')
     if not os.path.exists(p): return []
-    try: return json.load(open(p, encoding='utf-8')).get('cards', [])
+    try: cards = json.load(open(p, encoding='utf-8')).get('cards', [])
     except ValueError: return []
+    try:   # bigboard1: Done cards older than 7 days live in data/board-archive.json as card-shaped stubs; a build of theirs still finds its card
+        cards = cards + json.load(open(os.path.join(ROOT, 'data', 'board-archive.json'), encoding='utf-8')).get('cards', [])
+    except (OSError, ValueError): pass
+    return cards
 
 
 def find_card(tag, cards):

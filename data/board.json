@@ -19226,7 +19226,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "bigboard1",
-   "next": "Applies the written fix from claude/next-addendum-bigboard1.md to board.html (read big files by blob id), gives every other page that reads a repo file through the contents API the same fallback, archives Done cards older than 7 days to data/board-archive.json, runs every board test and pushes build bigboard1.",
+   "next": "Pushed as bigboard1: board.html reads the board by blob id when GitHub sends no content; eight other pages got the same fallback; Done cards older than 7 days move to data/board-archive.json (nothing is old enough until 2026-11-27). Hands to your tap of the card Tap any save on the board to confirm the error is gone.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -19239,6 +19239,11 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card (board: start c-bigboard1)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "bigboard1 built: board.html fix as written, blob fallback on the heads, poses, portraits, music, art, script, voice-take and pose-review readers, archive tool run by board-sync (R13), tests board_big_test and board_archive_test. Hands to t-bigboard1-tap.",
+     "at": "2026-11-21T02:21:32.000Z"
     }
    ],
    "prompt": {
@@ -19254,7 +19259,8 @@
     "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
     "opening": "\"The board (ADMIN > BOARD) fails every save with\""
    },
-   "started_at": "2026-11-21T01:48:41+00:00"
+   "started_at": "2026-11-21T01:48:41+00:00",
+   "after": "t-bigboard1-tap"
   },
   {
    "id": "c-takes-ae5d7d",
@@ -19520,6 +19526,29 @@
       "d|washington|Nobody needs to go anywhere. Nobody needs to get any older."
      ],
      "label": "Mr. Washington's line"
+    }
+   ]
+  },
+  {
+   "id": "t-bigboard1-tap",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Tap any save on the board to confirm the error is gone",
+   "next": "ADMIN > BOARD on your phone: close the board page and open it again so it loads the new version. Tap this card, then tap All good. A save is what failed before, so All good is the test. All good if the Saved screen opens and no red JSON.parse message shows; if a red message shows, take a screenshot and paste it into a new conversation in the Project.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
+    "opening": "made by c-bigboard1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by c-bigboard1: the build that lets board saves work again (data/board.json passed GitHub's 1 MB read limit)."
     }
    ]
   }

@@ -89,11 +89,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 tools/board_check.py
-          if git diff --quiet data/board.json; then echo "Nothing moved."; exit 0; fi
+          if git diff --quiet data/board.json data/board-archive.json; then echo "Nothing moved."; exit 0; fi
           msg=$(grep -h '^board-sync:' /tmp/msgs.txt | grep -v 'nothing to move' | head -2 | tr '\n' ' ' | cut -c1-200)
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/board.json
+          git add data/board.json data/board-archive.json
           git commit -q -m "${msg:-board-sync: cards moved}"
           for i in 1 2 3 4; do
             if git push origin HEAD:main; then exit 0; fi
@@ -101,8 +101,8 @@ jobs:
             git fetch --depth=100 origin main
             git reset -q --hard origin/main
             GITHUB_TOKEN="${GITHUB_TOKEN}" python3 tools/board_sync.py | tee -a /tmp/msgs.txt
-            if git diff --quiet data/board.json; then echo "Nothing left to move."; exit 0; fi
-            git add data/board.json
+            if git diff --quiet data/board.json data/board-archive.json; then echo "Nothing left to move."; exit 0; fi
+            git add data/board.json data/board-archive.json
             git commit -q -m "${msg:-board-sync: cards moved}"
           done
           echo "::error::Could not push the board after 4 tries."; exit 1

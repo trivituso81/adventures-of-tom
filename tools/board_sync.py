@@ -17,6 +17,8 @@ R9 start (a card with `start: true` is started on the Claude scheduled task for 
 
 Rules (R1 to R10) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
 import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import board_archive   # bigboard1: Done cards older than 7 days move to data/board-archive.json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERM = ' Attach trivituso81/adventures-of-tom with push access (add_repo).'
@@ -63,8 +65,9 @@ def theme_for(text):
 
 
 class Board:
-    def __init__(self, data, today):
+    def __init__(self, data, today, archived=None):
         self.b, self.today, self.log = data, today, []
+        self.arch = archived or []   # bigboard1: stubs of archived Done cards (read only here: a tag on one still counts as a card)
         self.b.setdefault('sessions', [])
         self.b.setdefault('seen', {'reports': [], 'takes': []})
 
@@ -156,6 +159,7 @@ def r3_heading(B, com, tag, desc):
             B.hist(part, 'Part shipped as %s: %s' % (tag, plain(desc)), d); B.say('part shipped %s -> %s' % (tag, part['id']))
         return
     if any('Shipped as %s' % tag in h['t'] for c in B.cards for h in c.get('history', [])): return
+    if any(tag_matches(s.get('tag'), tag) or s.get('id') == 'b-' + tag or any('Shipped as %s' % tag in h['t'] for h in s.get('history', [])) for s in B.arch): return   # bigboard1: the card was archived
     card = {'id': 'b-' + tag, 'tag': tag, 'lane': 'claude', 'col': 'done', 'done': d, 'theme': theme_for(desc),
             'title': plain(desc)[:140], 'next': 'Done: ' + plain(desc)[:300], 'chat': {'url': com['session'], 'opening': 'unknown'},
             'history': [{'d': d, 't': 'Shipped as %s. Added by board-sync because the build had no card.' % tag}]}
@@ -578,9 +582,9 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
 
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, poses=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, poses=None, archive=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
-    B = Board(data, local_date(now))
+    B = Board(data, local_date(now), (archive or {}).get('cards'))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
         want = bool(routines_on.get(r['id'])) and not r.get('paused') if routines_on is not None else None   # startfix1: a paused route stays off even with its secret
         if routines_on is not None and bool(r.get('enabled')) != want:
@@ -603,6 +607,9 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
     B.b['sessions'] = sorted([s for s in B.b['sessions'] if s['last'] >= cutoff], key=lambda s: s['last'], reverse=True)
+    if archive is not None:   # bigboard1 R13: Done cards older than 7 days leave the board for data/board-archive.json (the page reads the board through a 1 MB API)
+        moved = board_archive.archive(B.b, archive, B.today)
+        if moved: B.say('archived %d Done cards older than %d days' % (len(moved), board_archive.DAYS))
     return B.log
 
 
@@ -717,7 +724,9 @@ def main(argv):
         reports, takes = remote_lists()
         pp = os.path.join(ROOT, 'data', 'pose-review.json'); poses = load(pp) if os.path.exists(pp) else None
         before = json.dumps(data, sort_keys=True)
-        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), poses)
+        ap = a.get('archive', board_archive.ARCHIVE); arch = board_archive.load_archive(ap); arch_before = json.dumps(arch, sort_keys=True)
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), poses, arch)
+        if '--dry' not in flags and json.dumps(arch, sort_keys=True) != arch_before: board_archive.save_archive(arch, ap)
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']
             data['synced'] = head; data['synced_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')

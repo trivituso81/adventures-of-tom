@@ -17,6 +17,7 @@ on:
       - 'index.html'
       - '!data/voice-index.json'
       - '!data/board.json'
+      - '!data/board-archive.json'
       - '!data/build-history.js'
       - '!tools/voice-library/harvest.json'
       - '!tools/voice-library/battle-scripts.json'

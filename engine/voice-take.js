@@ -23,7 +23,9 @@ const VT=(function(){
     const tok=LS.get(TOKEN); if(!tok) throw new Error(NOTOKEN);
     let r; try{ r=await fetch(GH()+'/repos/'+OWNER+'/'+REPO+path,{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
     catch(e){ throw new Error('The browser could not reach GitHub. Check the network and try again.'); }
+    // bigboard1: the contents API leaves `content` empty over 1 MB, which read as an empty file; read the blob by id instead (works to 100 MB).
     const txt=await r.text(); let j=null; try{ j=JSON.parse(txt); }catch(e){}
+    if(method==='GET'&&r.ok&&j&&!Array.isArray(j)&&j.sha&&!(j.content||'').replace(/\s/g,'')){ try{ const bb=await fetch(GH()+'/repos/'+OWNER+'/'+REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}}); if(bb.ok) j.content=(await bb.json()).content||''; }catch(e){} }
     return {status:r.status,ok:r.ok,json:j,text:txt.split(tok).join('[token]').slice(0,200)};
   }
   const fail=(g,what)=>new Error(g.status===401||g.status===403?'GitHub refused the token while '+what+' ('+g.status+'). The token needs "Contents: Read and write" on the game repository.':'GitHub said '+g.status+' while '+what+': '+g.text);

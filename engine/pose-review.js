@@ -67,7 +67,9 @@ async function prvPush(){
   for(let tries=0;tries<4;tries++){
     let sha=null,doc={runs:{}};
     try { const g=await fetch(base+'?ref=main&t='+Date.now(),{cache:'no-store',headers:H});
-      if(g.ok){ const j=await g.json(); sha=j.sha; doc=JSON.parse(prvUnB64(j.content||'')||'{}'); }
+      if(g.ok){ const j=await g.json(); sha=j.sha; let c=j.content||'';
+        if(!c.replace(/\s/g,'')&&j.sha){ const bb=await fetch('https://api.github.com/repos/trivituso81/adventures-of-tom/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:H}); if(bb.ok) c=(await bb.json()).content||''; }   // bigboard1: over 1 MB the contents API sends no content; read the blob
+        doc=JSON.parse(prvUnB64(c)||'{}'); }
       else if(g.status!==404){ prvSet('GitHub would not take the answers ('+g.status+'). They are kept on this phone and sent with the next one.'); return; }
     } catch(e) { prvSet('Could not reach GitHub. Your answers are kept on this phone and sent with the next one.'); return; }
     doc.about='Answers from ADMIN > BATTLE LAB > NEW BATTLE > PAINTED STATES (engine/pose-review.js). Key: fighter.state. v approve or reject.';

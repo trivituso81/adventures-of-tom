@@ -215,7 +215,9 @@ function changes(){const o={};for(const id of M.order) if(dirty(id)) o[id]=draft
 async function gh(method,body){
   const tok=LS.get('aot-gh-token'); if(!tok) throw new Error('NOTOKEN');
   const r=await fetch(ghUrl(PATH)+(method==='GET'?'?ref='+GH_BRANCH+'&t='+Date.now():''),{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined});
+// bigboard1: the contents API leaves `content` empty over 1 MB, which read as an empty file; read the blob by id instead (works to 100 MB).
   const txt=await r.text();let j=null;try{j=JSON.parse(txt);}catch(e){}
+  if(method==='GET'&&r.ok&&j&&!Array.isArray(j)&&j.sha&&!(j.content||'').replace(/\s/g,'')){ try{ const bb=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}}); if(bb.ok) j.content=(await bb.json()).content||''; }catch(e){} }
   return {ok:r.ok,status:r.status,json:j};
 }
 function msg(t,c){const e=$('msg');e.textContent=t;e.className=c||'';}
