@@ -24348,7 +24348,7 @@
    "id": "c-anim-tom-dodge-ner3",
    "tag": "anim-tom-dodge-ner3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Tom, Dodge",
    "next": "Shipped anim-tom-dodge-ner3: Tom ducks straight down with both hands on his head and pops back up (Rose's passed duck, his name swapped in). Your card: watch it in the Battle Guide.",
@@ -24416,6 +24416,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-tom-dodge-ner3. Rose's passed duck prompt with only his/he swapped in, pad 0.8; passed plan 4.4 and the measured gate on the first try. $0.50. Tom's painted dodge purged."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-tom-dodge-ner3: Tom's Dodge is a Wan 3.0 video now: he ducks straight down with both hands on his head and pops back up"
     }
    ],
    "prompt": {
@@ -24427,7 +24431,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-dodge-ner3 in data/board.json with its history. Your first push is the commit board: start c-anim-tom-dodge-ner3.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Needs to be generated\n\nThe animation: Tom, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-dodge-ner3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-tom-dodge-ner3-watch"
+   "after": "t-anim-tom-dodge-ner3-watch",
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-tom-dodge-ner3-watch",
@@ -26554,6 +26559,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T11:04:44-08:00",
+   "tags": [
+    "anim-tom-loungepass-lf2z",
+    "anim-tom-dodge-ner3"
+   ],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3",
+    "c-wanch2",
+    "c-anim-tom-loungepass-fix1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "first": "2026-11-21T10:57:09-08:00",
@@ -26585,21 +26606,6 @@
    ],
    "cards": [
     "c-idea-savedportraits"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
-   "title": "Animation note: Tom, Lounge Pass Flex",
-   "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T10:42:14-08:00",
-   "tags": [
-    "anim-tom-loungepass-lf2z"
-   ],
-   "cards": [
-    "c-anim-tom-loungepass-lf2z",
-    "c-anim-tom-dodge-ner3",
-    "c-wanch2",
-    "c-anim-tom-loungepass-fix1"
    ]
   },
   {
@@ -30079,8 +30085,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e21d1292151166b73df0cb207d61b9b5b3d61e55",
- "synced_at": "2026-11-21T19:00:06+00:00",
+ "synced": "d459bc0c14c85c35bce91ab1da0eda0a1ac5cb72",
+ "synced_at": "2026-11-21T19:05:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
