@@ -30480,7 +30480,7 @@
    "title": "Deedee's Wet-Floor mop: is a lower mop fine?",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Look at the picture (link below), then tap one answer. Three videos missed the same way: in this three-quarter view, a mop resting on the floor ahead of Deedee is drawn lower on the screen than her feet, whatever the prompt says. Picture of try 4: https://github.com/trivituso81/adventures-of-tom/blob/main/claude/wanch4/wetfloor-r4.jpg (it also sweeps twice and the mop touches the left edge once). Card c-wanch5 waits on your answer.",
    "steps": [
@@ -30507,8 +30507,15 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch4: Wet-Floor missed the same way three times (Wan, Kling r3, Kling r4), so a fourth prompt waits on this answer."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Yes, a mop drawn lower than her feet is fine if she sweeps once",
+     "at": "2026-11-21T23:34:23.644Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Yes, a mop drawn lower than her feet is fine if she sweeps once"
   },
   {
    "id": "c-wanch5",
