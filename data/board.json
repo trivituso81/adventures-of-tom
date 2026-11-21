@@ -24749,7 +24749,7 @@
    "id": "c-anim-rose-hit-uy5r",
    "tag": "anim-rose-hit-uy5r",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Getting hit",
    "next": "Shipped as anim-rose-hit-uy5r: Wan video with pad 0.65, she stumbles back and stays in frame. Waits on Tom to watch it.",
@@ -24811,6 +24811,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue finished it: rev 5 (pad 0.65, prompt unchanged) stumbles back inside the frame, gate clean, baked; Tom card t-anim-rose-hit-uy5r made."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-hit-uy5r: Rose's Getting hit is a Wan 3.0 video that stumbles back and steps into place, with room in the frame so she stays on screen"
     }
    ],
    "prompt": {
@@ -24830,7 +24834,8 @@
     "prev": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ"
    },
    "started_at": "2026-11-21T18:20:01+00:00",
-   "after": "t-anim-rose-hit-uy5r"
+   "after": "t-anim-rose-hit-uy5r",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-rose-dodge-v89r",
@@ -26559,6 +26564,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEp7AN4783dFHhPrzP",
+   "title": "Animation note: Rose, Getting hit",
+   "first": "2026-11-21T18:23:07Z",
+   "last": "2026-11-21T19:13:34Z",
+   "tags": [
+    "anim-rose-hit-uy5r"
+   ],
+   "cards": [
+    "c-anim-rose-hit-uy5r"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvHoJRHbmTxvW7YaR",
    "title": "Auto-approve pictures that pass QA",
    "first": "2026-11-21T10:53:07-08:00",
@@ -26569,18 +26586,6 @@
    "cards": [
     "c-artgen3",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEp7AN4783dFHhPrzP",
-   "title": "Animation note: Rose, Getting hit",
-   "first": "2026-11-21T18:23:07Z",
-   "last": "2026-11-21T18:23:23Z",
-   "tags": [
-    "anim-rose-hit-uy5r"
-   ],
-   "cards": [
-    "c-anim-rose-hit-uy5r"
    ]
   },
   {
@@ -26680,6 +26685,22 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:13:36-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18"
    ]
   },
   {
@@ -26800,21 +26821,6 @@
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T10:15:45-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17"
-   ],
-   "cards": [
-    "c-b3s17"
    ]
   },
   {
@@ -30222,8 +30228,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a31af495a59565f7b54ed71ccd81821433543759",
- "synced_at": "2026-11-21T19:10:42+00:00",
+ "synced": "ef54c9e6911af614c642e9dc768f2c1c1a7b6fac",
+ "synced_at": "2026-11-21T19:13:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
