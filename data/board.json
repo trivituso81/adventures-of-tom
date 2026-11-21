@@ -23350,6 +23350,10 @@
     {
      "d": "2026-11-21",
      "t": "Part c (b3s17c) shipped: chapter 4 on Battle 3 with Vibe Points and tips; TNB's loss coaching has a Battle 3 second line (unrecorded)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s17c: chapter 4's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -24112,7 +24116,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24125,6 +24129,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:13:56.717Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24166,7 +24174,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24179,6 +24187,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:14:07.511Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24220,7 +24232,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24233,6 +24245,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:14:17.590Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24293,7 +24309,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24306,6 +24322,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:14:31.981Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24963,13 +24983,27 @@
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T08:49:10-08:00",
+   "last": "2026-11-21T09:16:01-08:00",
    "tags": [
     "b3s17a",
-    "b3s17b"
+    "b3s17b",
+    "b3s17c"
    ],
    "cards": [
     "c-b3s17"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+   "title": "Animation note: Grace, Dodge",
+   "first": "2026-11-21T09:15:53-08:00",
+   "last": "2026-11-21T09:15:53-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-grace-dodge-p7wh",
+    "c-anim-grace-give-q4es",
+    "c-anim-grace-squeeze-qxim",
+    "c-anim-grace-cubepop-tvik"
    ]
   },
   {
@@ -28308,8 +28342,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "44dd81a1e4d17dd115ce4544580548a6f2a631ba",
- "synced_at": "2026-11-21T17:06:04+00:00",
+ "synced": "4adceb2a50edf5095c7ad5f98fedada6eef25967",
+ "synced_at": "2026-11-21T17:16:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
