@@ -19963,7 +19963,7 @@
    "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "ch2lessons",
    "after": "t-ch2play",
    "blocks": [],
@@ -20006,6 +20006,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped ch2lessons: reviewer marked 93 lines (69 keep, 20 cut, 4 rewrite), all applied; 70 voice scripts retagged, 14 bracket flags from a second reviewer fixed; apply-scripts.py limits relaxed. unused_voice check 4 still lists 221 old clips from other chapters (same as main): card c-voicepurge221."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as ch2lessons: chapter 2 cut by the chapter 1 lessons: 93 lines became 73 (20 cut, 4 rewritten, two orphans fixed), every voice script retagged in Tom's style"
     }
    ],
    "prompt": {
@@ -20016,7 +20020,8 @@
     "model": "Claude Opus 5.5 (row D: game dialogue and humor, judged by taste)",
     "effort": "medium (a written chapter revised by written rules, not written from scratch)",
     "text": "Read CLAUDE.md, claude/story-next.md, claude/story-line-rules.md (rules 6 to 13, The red pen pass, Known orphans), claude/tom-line-edits.md, claude/voice-tag-style.md, claude/story-ch02-draft4.md and card c-ch2lessons in data/board.json. Chapter 2 is built (ch2build) and Tom has not played it. Tom asked on 2026-11-20 that the lessons from his day of chapter 1 cuts be applied to chapter 2, so this pass may change chapter 2's locked lines. 1) Run the red pen pass: start a separate reviewer agent with fresh context, give it only claude/tom-line-edits.md, claude/story-line-rules.md and the chapter 2 lines, and have it mark every spoken and texted line KEEP, CUT or REWRITE with the rule number. 2) Cut the CUT lines without replacing them unless a scene stops making sense; rewrite REWRITE lines by rule 4; fix the two orphans; keep Tom's own line Poke it. Yes. But maybe just gently. Expect about one line in five cut; if far fewer, run the reviewer again. Run the three tests and the copy check from claude/story-next.md on every new line. 2b) Retag every chapter 2 voice script, kept or new, from scratch by claude/voice-tag-style.md, starting with its WHY section (W1 to W8) and its five-step method. Read 3 of Tom's kept chapter 1 lines per speaker in tools/voice-library/scripts/ch01-story-directions.json first. The core rules: a tag directs the SOUND of the next few words, never the character's personality or thoughts (the character is in the words); push every tag to the extreme because the generator delivers only a fraction of it (disgusted not wary, very flat not level); one idea per bracket, never two directions in one bracket, no multi-word phrases; a new short bracket at the exact word where the sound changes; prefer speech acts (informing, accusatory, taunting, conceding) and audible words (quick, flat, deadpan, sigh, pause, under his breath); quick on joke beats; [emphasized] before the one stressed word, no name in caps; the accent (Deedee warm Long Island accent, Boppy thick New York accent, Amy and Aunt Ellie heavy Long Island accent, Sal thick long island accent) or TNB's mellow, laid-back, low-key in EVERY bracket. Then have a separate fresh reviewer agent read only the brackets of every line, without the words, and flag any bracket that describes a person instead of a sound, is mild, or mixes directions; fix every flag. Relax the two descriptor limits in tools/voice-library/apply-scripts.py that his style breaks (keep the body, prop and sound word check). In CHANGES, show 5 lines before and after the retag. 3) Update claude/story-ch02-draft4.md (repo copy; the Project copy is written by an interactive session) and put the result into the game the way ch2build did: data/scenes.js, voice scripts with tone tags, tools/ch2_lines_test.py, unused_voice.py at 0, script-convos rows, tools/ch2_test.py in portrait and landscape, look at the frames. 4) docs/CHANGES.md heading ## ch2lessons with the counts (lines before, cut, rewritten) and a before and after table, and the count of new lines per speaker that need a recording. 5) Rewrite the next of card t-ch2play so it lists the changed lines to listen for, and add any lesson the pass found to claude/story-line-rules.md. Your first push is the commit board: start c-ch2lessons. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-ch3lessons",
@@ -23562,6 +23567,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
+   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
+   "first": "2026-11-21T00:47:05-08:00",
+   "last": "2026-11-21T01:12:57-08:00",
+   "tags": [
+    "ch2lessons"
+   ],
+   "cards": [
+    "c-ch2lessons"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFovmpwidf6dk3L6j9",
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "first": "2026-11-21T00:54:47Z",
@@ -23598,16 +23615,6 @@
    "cards": [
     "c-fix-itembannerart-pics-4",
     "t-itembannerart-pics"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
-   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
-   "first": "2026-11-21T00:47:05-08:00",
-   "last": "2026-11-21T00:47:05-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch2lessons"
    ]
   },
   {
@@ -26534,8 +26541,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "bb1ae8cdae5f49262e315614c07af9b6febd31e7",
- "synced_at": "2026-11-21T09:06:32+00:00",
+ "synced": "825433a0d0f4e2756f2aabc20ee4776a3babb7f3",
+ "synced_at": "2026-11-21T09:15:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
