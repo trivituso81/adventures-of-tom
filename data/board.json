@@ -19721,10 +19721,8 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Claude remade the 3 pictures with new prompts and they missed a 4th time (Pro Racing Flats came back as slippers, Tiny Clay Taco as a real taco, Birthday Sash as a ribbon bow), so Claude stopped: words alone do not move the generator off its idea of these objects. 1. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and REJECT the 3 new pictures, note: stop-loss, waiting for a reference photo. 2. On your phone find one photo of each: a pair of racing flats (thin-soled racing shoes), a ceramic or clay taco figurine, and a gold pageant sash with a bow. 3. Open a new conversation in the Project on Opus 5.5, effort medium, attach the 3 photos and paste the prompt of card c-itemart-refs (Copy prompt on that card). The other 285 item pictures are approved and in the game; these 3 show their emoji until then.",
-   "blocks": [
-    "c-itemart-refs"
-   ],
+   "next": "Claude changed one phrase each in the 2 prompts that failed and made them again; Claude looked at both and they now read right. 1. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below). 2. Look at the newest picture of each: Pro Racing Flats should be low neon yellow running shoes with laces, a closed heel and a thin sole (not slippers); Birthday Sash should be a wide gold band in a loop with a small gold bow near the bottom (not just a bow); Tiny Clay Taco is the one you passed (taco with a paperclip). 3. APPROVE each that looks right. The game then shows all 288 item pictures in the ITEM GAINED banner. If one is still wrong, press Something is wrong on this card and say which.",
+   "blocks": [],
    "done_when": {
     "art_approved": [
      "prop-item-01",
@@ -19877,6 +19875,10 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 2 pictures, QA: 13 of 15, 12 of 15. Spent about $0.12."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "fix-itembannerart-pics-4: the 2 remade pictures came back right on Claude's look (flats: laced neon yellow running shoes on a thin sole, QA 13 of 15; sash: wide gold loop with a small bow, QA 12 of 15, its failed view lines contradict each other). Card c-itemart-refs retired: no reference photos needed. Back to Tom to approve the 3."
     }
    ],
    "gen": {
@@ -22854,12 +22856,12 @@
    "title": "Item pictures: remake 3 items from Tom's reference photos",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "tag": "itemart-refs",
    "next": "Waits on Tom's 3 photos (card t-itembannerart-pics). Then each of the 3 solo item entries gets its photo as a second reference picture (shape only; the painting style still comes from the house painting) and is made again.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
     "opening": "not started"
@@ -22868,6 +22870,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by fix-itembannerart-pics-3 after the 3 solo pictures missed a 4th time (stop-loss). Tom asked: \"Based on the feedback adjust the prompts for the failed images and regenerate\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by fix-itembannerart-pics-4: Tom asked to adjust the prompt instead (\"We're getting close\"), and the remade flats and sash came back right, so no reference photos are needed."
     }
    ],
    "prompt": {
@@ -22880,7 +22886,7 @@
     "text": "Read CLAUDE.md, docs/ITEM_ART.md and cards c-itemart-refs and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-itemart-refs. Tom attached 3 photos: racing flats, a clay taco figurine, a gold pageant sash with a bow. Save each as a reference picture in the repo and add it as the second entry of `refs` on prop-item-solo-amy_chm1, prop-item-solo-claytaco and prop-item-solo-g_bsash (tools/art-library/itemart-prompts.js, then node tools/art-library/itemart-prompts.js). Change one thing only: add one line to the solo prompt saying the second attached picture shows the object's shape and the first shows the painting style; keep the SOLO_NOTE words from fix-itembannerart-pics-3, except the flats note drops \"so each shoe looks almost like a slipper\" (it came back as slippers). Run the art-gen Action for those 3 ids (cap 0.5), look at the 3 results yourself against the card's checks, and only then hand them to Tom: rewrite t-itembannerart-pics next to say what to look at. Ship as itemart-refs. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-itembannerart-pics",
-   "waiting_on": "tom"
+   "done": "2026-11-21"
   },
   {
    "id": "t-boppy-bigfish-pic",
@@ -23072,7 +23078,7 @@
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Make and approve 18 item picture sheets (288",
-   "next": "You reported a problem on Make and approve 18 item picture sheets (288 items). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt",
+   "next": "Flats and sash prompts changed one phrase each and remade ($0.12); t-itembannerart-pics goes back to Tom to approve the 3 pictures when this build ships.",
    "blocks": [
     "t-itembannerart-pics"
    ],
@@ -23112,6 +23118,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Changed one phrase in the flats and sash notes, made those 2 again ($0.12), looked at both: they read right. Retired c-itemart-refs. Shipped as fix-itembannerart-pics-4."
     }
    ],
    "prompt": {

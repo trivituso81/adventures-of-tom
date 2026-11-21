@@ -1,3 +1,10 @@
+## fix-itembannerart-pics-4 (2026-11-21): the last 2 item pictures (racing flats, birthday sash) remade with one phrase changed each; all 3 are ready for your review
+
+- Tom (card t-itembannerart-pics): "2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt". The Tiny Clay Taco passed (QA 15 of 15), so it was not touched.
+- Smallest change, from the QA lines: the flats came back as slippers (no laces, open heel), so "so each shoe looks almost like a slipper" became "laced up like a running shoe with a closed heel"; the sash came back as a big crossed bow, so "a big gold bow" became "a small gold bow". Everything else in both notes, and the solo prompt, kept word for word (`SOLO_NOTE` in `tools/art-library/itemart-prompts.js`, promptRev 2).
+- Made the 2 again through the board (commit `board: generate t-itembannerart-pics`, $0.12). Looked at (fact): the flats are low neon yellow laced running shoes on a thin sole (QA 13 of 15: paint style, sole "not paper-thin"); the sash is a wide gold band in a loop with a small bow near the bottom (QA 12 of 15: paint style, plus "laid flat" and "three-quarter view", which contradict each other). The paint-style line was also raised on the taco's earlier runs and on approved sheets, so it is not a reason to hold them.
+- Card c-itemart-refs (reference photos) retired: no photos are needed now. No in-game report was filed since 08:38. Nothing in the game changes until Tom approves; the 3 items show their emoji until then.
+
 ## projclean1 (2026-11-21): Project docs move finished: working notes live in the repo's claude/ folder, the Project keeps four mirrors
 
 - Card c-projclean: copied project-instructions.md, status.md and build-plan.md into claude/ word for word; 28 compare-group docs matched the repo copy and were deleted from the Project; story-build.md takes the Project text (one missing period).
