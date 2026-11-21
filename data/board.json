@@ -16974,12 +16974,12 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-6). Tap Open in the Art Library, find clip-toad-idle under Clips > Chapter 1. Under the button you should now see a line starting 'Last press, <time>: Made and approved' (your last press at 00:25 UTC did make and approve v6). No new press is needed; each press costs about $0.26. All good if you see that line. Something is wrong if you do not: write what the button and the lines under it say.",
+   "next": "Closed at Tom's request: \"Close this you're wasting my money!\" Nothing more to try; the last press (v6) did make and approve clip-toad-idle.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17080,10 +17080,15 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Close this you're wasting my money! Sent to Claude as card c-fix-keysecrets2-try-7; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T00:43:36.922Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired: Tom asked to close this card (\"Close this you're wasting my money!\"). No build, no new press."
     }
    ],
    "after": null,
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -18284,14 +18289,12 @@
    "id": "c-fix-keysecrets2-try-7",
    "tag": "fix-keysecrets2-try-7",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
-   "next": "You reported a problem on Try GENERATE VIDEO on one clip. Claude starts the fix by itself. Latest: Close this you're wasting my money!",
-   "blocks": [
-    "t-keysecrets2-try"
-   ],
+   "next": "Retired without a build: Tom asked to close the card.",
+   "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "reports": [
@@ -18328,6 +18331,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired without a build: Tom said \"Close this you're wasting my money!\". Nothing was generated and nothing was spent. Both cards closed."
     }
    ],
    "prompt": {
@@ -18341,7 +18348,8 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-21T00:43:52+00:00"
+   "started_at": "2026-11-21T00:43:52+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-refresh1",
