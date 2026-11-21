@@ -26220,6 +26220,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18d pushed: chapter 9 on Battle 3 (tips, Vibe Points, retry line)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18d: chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -27383,6 +27387,40 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T11:35:03-08:00",
+   "tags": [
+    "clips"
+   ],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:34:24-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17",
+    "b3s18a",
+    "b3s18b",
+    "b3s18c",
+    "board-night",
+    "b3s18d"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18",
+    "b-board-night"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
    "title": "seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
    "first": "2026-11-21T11:33:57-08:00",
@@ -27404,27 +27442,6 @@
     "b-board-night",
     "c-nightshift",
     "c-nighttests"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:32:36-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17",
-    "b3s18a",
-    "b3s18b",
-    "b3s18c",
-    "board-night"
-   ],
-   "cards": [
-    "c-b3s17",
-    "c-b3s18",
-    "b-board-night"
    ]
   },
   {
@@ -27494,18 +27511,6 @@
    ],
    "cards": [
     "c-fix-anim-grace-squeeze-qxim"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:26:03-08:00",
-   "tags": [
-    "clips"
-   ],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -30980,8 +30985,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "9077e8f839d1b71eadcf2ca26dbe35b9ae97dade",
- "synced_at": "2026-11-21T19:34:04+00:00",
+ "synced": "de07b6d02f91b9d56080d9170b4eda7038eb4d3e",
+ "synced_at": "2026-11-21T19:35:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
