@@ -19330,7 +19330,7 @@
    "title": "Play check: locked gates sit behind Tom and the party",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "build": "idea-searchthrough",
@@ -19342,8 +19342,14 @@
     {
      "d": "2026-11-20",
      "t": "Added by idea-searchthrough (card c-idea-searchthrough)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T02:58:27.450Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-hollowtrail2-decide",
