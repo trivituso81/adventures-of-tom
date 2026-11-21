@@ -906,7 +906,7 @@ function stageShooOut() {
     const search=real=>{ const prev=new Map([[key(p.x,p.y),null]]),q=[p]; let goal=null,best=null,bd=far(p)+.5;
       for(let i=0;i<q.length&&i<3000&&!goal;i++) { const c=q[i];
         for(const [dx,dy] of [[0,-1],[-1,0],[1,0],[0,1]]) { const x=c.x+dx,y=c.y+dy,k=key(x,y);
-          if(prev.has(k)||!walkable(map,x,y)||map.npcNoGo.has(k)||(n.monster&&typeof b7Fenced==='function'&&b7Fenced(x,y))||(real&&!canOccupy(map,x,y,n))) continue;   // hollowfence: an ordinary monster cleared out of a scene never goes into the monster fence (extras are never bosses) prev.set(k,c);
+          if(prev.has(k)||!walkable(map,x,y)||map.npcNoGo.has(k)||(n.monster&&typeof b7Fenced==='function'&&b7Fenced(x,y))||(real&&!canOccupy(map,x,y,n))) continue; prev.set(k,c);   // hollowfence: an ordinary monster cleared out of a scene never goes into the monster fence (extras are never bosses)
           if(!map.portals.has(k)&&canOccupy(map,x,y,n)) { if(!stageInZone({x,y})) { goal={x,y}; break; } const d=far({x,y}); if(d>bd) { bd=d; best={x,y}; } }
           q.push({x,y}); } }
       goal=goal||best; if(!goal) return null;
