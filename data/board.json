@@ -23027,6 +23027,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T21:40:01-08:00",
+   "last": "2026-11-20T23:01:11-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b",
+    "projclean2a",
+    "projclean2b",
+    "projclean1c"
+   ],
+   "cards": [
+    "c-projclean",
+    "b-projclean2a",
+    "b-projclean2b"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCf5dxEs5Zj4xH87pM",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-20T22:55:41Z",
@@ -23036,23 +23054,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T22:35:59-08:00",
-   "tags": [
-    "projclean1a",
-    "projclean1b",
-    "projclean2a",
-    "projclean2b"
-   ],
-   "cards": [
-    "c-projclean",
-    "b-projclean2a",
-    "b-projclean2b"
    ]
   },
   {
@@ -25762,8 +25763,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "400a24f3185e4c902a6b5fdfb2acddfa23ef465a",
- "synced_at": "2026-11-21T06:36:38+00:00",
+ "synced": "28a88283c58ca16ca0fdd60a31563ebcdeb36c89",
+ "synced_at": "2026-11-21T07:02:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
