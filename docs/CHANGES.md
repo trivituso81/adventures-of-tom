@@ -1,3 +1,7 @@
+## fix-anim-grace-squeeze-qxima (2026-11-21): Grace's Soup-Dumpling Squeeze prompt v4: the dumpling has a cute face and bursts on the hit (video being made)
+
+Card c-fix-anim-grace-squeeze-qxim, part a. Tom (Battle Guide note, 18:51): "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have." Prompt `tools/art-library/prompts/wan-grace-squeeze-v4.txt`, Wan job `grace-squeeze` rev 4; the video follows in build fix-anim-grace-squeeze-qxim.
+
 ## idea-savedportraits (2026-11-21): Your saved portrait crops now reach the Party, Status, turn order, battle panels and Battle Guide, and every future save does it by itself
 
 Card c-idea-savedportraits. Tom's words: "I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide"
