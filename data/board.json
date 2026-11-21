@@ -27099,6 +27099,11 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:32:31.165Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session started (Sonnet 5.5, scheduled run).",
+     "at": "2026-11-21T20:40:00.000Z"
     }
    ],
    "prompt": {
