@@ -23768,29 +23768,6 @@
    "done": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44920088169",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21"
-  },
-  {
    "id": "c-costs1icon",
    "tag": "costs1icon",
    "lane": "claude",
@@ -25672,6 +25649,29 @@
      "t": "Made by anim-grace-cubepop-tvik. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
     }
    ]
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44934396303",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
