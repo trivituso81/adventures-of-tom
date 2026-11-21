@@ -22758,7 +22758,7 @@
   {
    "id": "t-itemdefplay",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -22779,9 +22779,12 @@
     {
      "d": "2026-11-21",
      "t": "Gemini's chapter 1 test: FAIL. items read: Mud Pie, Lily Pad Hat (landscape), Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin (KEY ITEM), Bark Slab (Cookie unreachable because Deedee stayed in the active party and never stood in her kitchen as a townsperson); Dragonfly Coin auto-dismissed mid-fade-in before full opacity, and Pond Hoodie (\"Wear it: +18 HP, +4 GRIT, +1 COOL.\") and Bark Slab (\"Wear it: +5 POW.\") cite obsolete Battle 2 stats. Sent to Claude as card c-fix-itemdefplay; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Read a few item banners on your phone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-wanch1-watch",
@@ -27168,6 +27171,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenc: quest_test fixed (the test was stale: banner holding input, flags wipe restarting the intro, old bare-place wording); known_fail removed. 9 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenc: the quest tracker test knows about the party banner, the kept flags and the \"Go to\" wording"
     }
    ],
    "prompt": {
@@ -27762,7 +27769,7 @@
    "id": "c-fix-itemdefplay",
    "tag": "fix-itemdefplay",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Read a few item banners on your phone",
@@ -27821,6 +27828,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed: Wear it lines no longer name Battle 2 stats (Pond Hoodie, Bark Slab, Boppy's Cap and all stat-only gear), banner dismiss guard 800 ms. Cookie: expectation outdated, Deedee is in her kitchen only while not in the party. Build fix-itemdefplay."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-itemdefplay: item banners no longer name old battle stats, and a banner can't close half faded in"
     }
    ],
    "prompt": {
@@ -27834,7 +27845,8 @@
    },
    "after": "t-itemdefplay",
    "auto": true,
-   "started_at": "2026-11-21T20:17:12+00:00"
+   "started_at": "2026-11-21T20:17:12+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-qa-bug03-look",
@@ -28291,6 +28303,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEPoSEs3hccRneDav9",
+   "title": "Fix: Read a few item banners on your phone",
+   "first": "2026-11-21T20:24:44Z",
+   "last": "2026-11-21T20:24:44Z",
+   "tags": [
+    "fix-itemdefplay"
+   ],
+   "cards": [
+    "c-fix-itemdefplay"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
    "title": "Ding sound on the Lounge Pass sparkle",
    "first": "2026-11-21T20:15:28Z",
@@ -28693,6 +28717,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T11:54:20-08:00",
+   "last": "2026-11-21T12:25:27-08:00",
+   "tags": [
+    "nightgreena",
+    "nightgreenb",
+    "nightgreenc"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T12:19:13-08:00",
@@ -28724,19 +28762,6 @@
    "tags": [],
    "cards": [
     "c-hitspeed1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T11:54:20-08:00",
-   "last": "2026-11-21T12:07:02-08:00",
-   "tags": [
-    "nightgreena",
-    "nightgreenb"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -32375,8 +32400,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ae2c826dd9f04a56ba4b786d8f8f4f330e40a7d5",
- "synced_at": "2026-11-21T20:24:36+00:00",
+ "synced": "8cb18f16b5f202c83d0ffc9917338604905c943b",
+ "synced_at": "2026-11-21T20:26:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
