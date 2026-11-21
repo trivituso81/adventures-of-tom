@@ -19247,7 +19247,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19292,6 +19292,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images Sent to Claude as card c-fix-gatelayer-pics-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T03:26:38.038Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 6 pictures, QA: 15 of 15, 15 of 15, 12 of 15, 14 of 15, 11 of 15, 11 of 15. Spent about $0.44."
     }
    ],
    "chat": {
@@ -19312,10 +19316,123 @@
     "est": 0.3,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T03:48:22Z",
+     "state": "done",
+     "at": "2026-11-21T03:49:40Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44862957113",
-     "n": 6
+     "made": [
+      "prop-gate-row-amyhouse",
+      "prop-gate-row-amyhouse-open",
+      "prop-gate-town-school-open",
+      "prop-gate-jpark-barn-open",
+      "prop-gate-backlot-stage7-open",
+      "prop-gate-blvd-studio-open"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.44,
+     "qa": {
+      "prop-gate-row-amyhouse": {
+       "file": "results/prop-gate-row-amyhouse/20261121T034841.png",
+       "yes": 15,
+       "of": 15,
+       "failed": []
+      },
+      "prop-gate-row-amyhouse-open": {
+       "file": "results/prop-gate-row-amyhouse-open/20261121T034843.png",
+       "yes": 15,
+       "of": 15,
+       "failed": []
+      },
+      "prop-gate-town-school-open": {
+       "file": "results/prop-gate-town-school-open/20261121T034847.png",
+       "yes": 12,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered look, not hand-painted with soft shading."
+        },
+        {
+         "id": "p5",
+         "q": "Do the grey steel posts with a top rail span the full width of the lane and appear a little taller than a person?",
+         "why": "Gate appears much taller than a person, not matching lane proportions."
+        },
+        {
+         "id": "p8",
+         "q": "Are the posts, gate design, parts, materials, colors, proportions and size matching the locked state version exactly except for the open state and absence of chain/padlock?",
+         "why": "Proportions and height do not match the locked reference exactly."
+        }
+       ]
+      },
+      "prop-gate-jpark-barn-open": {
+       "file": "results/prop-gate-jpark-barn-open/20261121T034917.png",
+       "yes": 14,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered, not hand-painted with brush texture."
+        }
+       ]
+      },
+      "prop-gate-blvd-studio-open": {
+       "file": "results/prop-gate-blvd-studio-open/20261121T034925.png",
+       "yes": 11,
+       "of": 15,
+       "failed": [
+        {
+         "id": "p2",
+         "q": "Is the barrier arm raised straight up and standing upright?",
+         "why": "Arm is not raised straight up; both posts have vertical striped poles only."
+        },
+        {
+         "id": "p7",
+         "q": "Are the two posts about two people wide apart?",
+         "why": "Posts are much farther apart than two people wide."
+        },
+        {
+         "id": "p8",
+         "q": "Are the posts about waist high?",
+         "why": "Posts are taller than waist high relative to typical scale."
+        },
+        {
+         "id": "p9",
+         "q": "Is the raised arm about as tall as a person?",
+         "why": "No raised arm present to assess height."
+        }
+       ]
+      },
+      "prop-gate-backlot-stage7-open": {
+       "file": "results/prop-gate-backlot-stage7-open/20261121T034923.png",
+       "yes": 11,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered look with thick outlines, not hand-painted soft shading."
+        },
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains 'ROLLING' sign text not requested in prompt."
+        },
+        {
+         "id": "p6",
+         "q": "Is there a round red warning lamp above the doors that is switched off with dark red glass and no glow?",
+         "why": "Lamp is glowing red, not switched off with dark glass."
+        },
+        {
+         "id": "p7",
+         "q": "Is there no sign present on or near the object?",
+         "why": "Sign with text is present above the doors."
+        }
+       ]
+      }
+     }
     }
    },
    "waiting_on": "claude"
