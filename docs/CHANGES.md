@@ -1,3 +1,12 @@
+## guideprompts1 (2026-11-21): every battle animation in the Battle Guide now has a prompt written for that move
+
+Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it seems generic".
+- `data/guide-prompts.json` holds 267 model-written prompts (family 70, monsters 197) that replace the rule-made starter drafts; `data/guide-anims.json` was rebuilt, so the Battle Guide shows them as written by the model. Jobs, entries and used prompts are untouched: the 79 animations that already had a real prompt are the same.
+- Cartridge Blow now reads: he brings a game cartridge out from behind his back, raises it to his mouth, and blows into it once. (Before: both palms thrust forward as if casting a spell.)
+- Every prompt keeps the approved shape (the part before MOTION word for word, two to four sentences, once, without repeating, a held pose) and passed the code checks. Cost of the three paid runs about $0.41 of text calls, no video made.
+- Looked at: Cartridge Blow and 14 sampled prompts (family and monsters). Not looked at: all 267 one by one; each video you make from the guide is the check, and Update the prompt on the page changes one.
+- `python3 tools/guidegen/build_map_test.py` now counts model drafts as drafts. One check there already failed before this build and still does: "Lounge Pass Flex: its prompt is its job's current rev file" (the tom-loungepass job is at rev 6 and the guide picks v3); not touched here.
+
 ## buildpill2 (2026-11-21): the build name is a tappable pill in the Battle Guide header and on the Board cards and card details
 
 Card c-buildpill2. Tom (11:53): "in the battle guide, remove the build name from above the page title and put it to the right of the title, in a our standard build pill treatment, click/tap should open the existing build modal." And (11:55): "in the kanban board, the build name treatment should be the in the pill as well, and displayed more prominently in both the board card and the card details in any relevant card".

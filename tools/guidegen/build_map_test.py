@@ -41,10 +41,10 @@ for i, a in A.items():
         head = D['owners'][a['owner']]['patternHead'].strip()
         if not a['prompt'].startswith(head[:200]) or a['prompt'][:a['prompt'].index('MOTION:')].strip() != head: bad.append(i)
 check('every draft keeps its pattern before MOTION word for word', not bad, bad[:5])
-fam = [a for a in A.values() if a['route'] == 'wan' and a['promptSource'] == 'rule-draft']
+fam = [a for a in A.values() if a['route'] == 'wan' and a['promptSource'] in ('rule-draft', 'model-draft')]
 check('a family draft keeps the three parts and the facing', fam and all('WHAT THIS IS' in a['prompt'] and 'CAMERA AND BACKGROUND' in a['prompt'] and 'facing left' in a['prompt'] and 'magenta' in a['prompt'] for a in fam))
 check('Tom\'s draft says his, Grace\'s says her', 'his starting relaxed stance' in A['move:suite_door_slide']['prompt'] and 'her starting relaxed stance' in A['move:glitter_brush_flick']['prompt'], A.get('move:glitter_brush_flick', {}).get('prompt', '')[-300:])
-mon = [a for a in A.values() if a['route'] == 'xai' and a['promptSource'] == 'rule-draft']
+mon = [a for a in A.values() if a['route'] == 'xai' and a['promptSource'] in ('rule-draft', 'model-draft')]
 check('a monster draft keeps its parts and ends with the length line', mon and all('Length about 3 seconds' in a['prompt'] and 'CAMERA AND BACKGROUND' in a['prompt'] for a in mon))
 # start pictures
 check('start pictures named exist', all(os.path.exists(os.path.join(ROOT, o['start'])) for o in D['owners'].values() if o['start']))
