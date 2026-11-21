@@ -23227,7 +23227,7 @@
    "title": "Purge the 221 old dialogue clips nothing plays",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "voicepurge221",
    "blocks": [],
    "created": "2026-11-21",
@@ -23250,6 +23250,10 @@
     {
      "d": "2026-11-21",
      "t": "Purged the 221 unplayed dialogue clips (build voicepurge221); unused_voice.py checks 1 to 5 all 0, Voice Library list rebuilt (221 removed)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voicepurge221: 221 old dialogue clips that nothing plays were purged"
     }
    ],
    "prompt": {
@@ -23265,7 +23269,8 @@
     "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
     "opening": "unknown"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "t-boppy-bigfish-pic2",
@@ -23331,6 +23336,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
+   "title": "Purge the 221 old dialogue clips nothing plays",
+   "first": "2026-11-21T14:54:16Z",
+   "last": "2026-11-21T15:02:36Z",
+   "tags": [
+    "voicepurge221"
+   ],
+   "cards": [
+    "c-voicepurge221"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE8781SNzn92J31EC6",
    "title": "Old battle screen problems: check them in the new battle",
    "first": "2026-11-21T15:01:07Z",
@@ -23381,16 +23398,6 @@
    "tags": [],
    "cards": [
     "c-qa-battle2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
-   "title": "Purge the 221 old dialogue clips nothing plays",
-   "first": "2026-11-21T14:54:16Z",
-   "last": "2026-11-21T14:54:16Z",
-   "tags": [],
-   "cards": [
-    "c-voicepurge221"
    ]
   },
   {
@@ -26691,8 +26698,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2b5f86d3e3e3e14d4392844668b1916fe87d63e2",
- "synced_at": "2026-11-21T15:01:49+00:00",
+ "synced": "e72b8439bdd4c8729cd530bebb0f7e0b8cc802e8",
+ "synced_at": "2026-11-21T15:03:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
