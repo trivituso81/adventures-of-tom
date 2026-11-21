@@ -29662,7 +29662,7 @@
   {
    "id": "t-ch1voices",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
@@ -29721,6 +29721,11 @@
      "d": "2026-11-21",
      "at": "2026-11-21T21:42:21Z",
      "t": "Voice job done: 10 made, 0 need a human, about 0 credits (build voices-t-ch1voices-334)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T22:01:59.861Z"
     }
    ],
    "vgen": {
@@ -29759,7 +29764,8 @@
       "5. lines for replaced moves (old animation code still exists): {}"
      ]
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-ch1voices",
