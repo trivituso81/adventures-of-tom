@@ -20633,7 +20633,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
     "opening": "not started"
    },
    "next": "Builds a Generate all N voices button on your voice cards, like Generate all N pictures. One tap makes a take for every line on the card that has no clip, and a GitHub job merges the takes into the game and pushes them, with no session in between. Then the card asks you to listen. The first card it makes is chapter 2's 73 lines, and that card waits until you have played chapter 2, so no credits go on lines you might still cut.",
@@ -21045,6 +21045,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
+   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
+   "first": "2026-11-20T18:36:01-08:00",
+   "last": "2026-11-20T19:09:14-08:00",
+   "tags": [
+    "board-voiceboard"
+   ],
+   "cards": [
+    "c-ch2lessons",
+    "c-voiceboard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGcWDU2BzMyfE8qWxv",
    "title": "Fix: Make and approve 18 item picture sheets (288",
    "first": "2026-11-20T18:58:39-08:00",
@@ -21122,16 +21135,6 @@
    "tags": [],
    "cards": [
     "c-fix-artgen2look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
-   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
-   "first": "2026-11-20T18:36:01-08:00",
-   "last": "2026-11-20T18:36:01-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch2lessons"
    ]
   },
   {
@@ -23480,8 +23483,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "63df60d9b906f7197bfb31ec0cb6a786354ffdc3",
- "synced_at": "2026-11-21T03:09:00+00:00",
+ "synced": "49eaf50a824f7cd81f5783b818b088c614756f82",
+ "synced_at": "2026-11-21T03:10:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
