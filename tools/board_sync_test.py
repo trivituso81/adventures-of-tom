@@ -88,6 +88,18 @@ check('R2: a draft entry keeps the card open', card(b, 't-pics')['col'] == 'up')
 bs.sync(b, [], {'p1': {'status': 'approved'}, 'p2': {'status': 'rejected'}, 'p3': {'status': 'approved'}}, None, None, NOW)
 check('R2: all decided (one rejected) closes the card and lists both', card(b, 't-pics')['col'] == 'done' and 'Rejected: p2' in card(b, 't-pics')['history'][-1]['t'])
 
+# --- fix-artgen2look: a pictures card whose Art Library links are all approved is already in the game
+LK = lambda *ids: [{'to': 'art', 'ids': list(ids), 'label': 'x'}]
+b = {'cards': [dict(id='t-have', lane='tom', col='up', ask='pictures', theme='Tools', title='Art to make', next='n', changed='2026-11-19', blocks=[], links=LK('h1'), backlog={'at': '2026-11-19', 'from': 'up'}),
+               dict(id='t-half', lane='tom', col='up', ask='pictures', theme='Tools', title='Two', next='n', changed='2026-11-19', blocks=[], links=LK('h1', 'h2')),
+               dict(id='t-look', lane='tom', col='up', ask='pictures', theme='Tools', title='Look', next='n', changed='2026-11-19', blocks=['c-z'], links=LK('h1')),
+               dict(id='t-play', lane='tom', col='up', ask='play', theme='Tools', title='Play', next='n', changed='2026-11-19', blocks=[], links=LK('h1'))], 'lanes': [], 'sessions': []}
+bs.sync(b, [], {'h1': {'status': 'approved'}, 'h2': {'status': 'draft'}}, None, None, NOW)
+check('artgen2look: all linked pictures approved closes a pictures card (backlog flag dropped)', card(b, 't-have')['col'] == 'done' and 'backlog' not in card(b, 't-have') and 'already in the game' in card(b, 't-have')['history'][-1]['t'])
+check('artgen2look: one linked picture not approved keeps it open', card(b, 't-half')['col'] == 'up')
+check('artgen2look: a pictures card that blocks Claude work waits for Tom', card(b, 't-look')['col'] == 'up')
+check('artgen2look: a card that is not a pictures ask is left alone', card(b, 't-play')['col'] == 'up')
+
 # --- R6 service runs
 b = {'cards': [], 'lanes': [], 'sessions': []}
 bs.service_event(b, 'clip-gen', 'start', 'making chapter 2 clips', 'https://run/1', today='2026-11-19')

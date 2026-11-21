@@ -46,7 +46,7 @@ STATES = [
     ('town-hollow', 21, {'ns-invite': 1}, 'locked'), ('town-hollow', 21, {'ns-fled': 1}, 'locked'),
 ]
 # every exit tile the Nine Scoops gates must close (chapter 21, flags as listed): [map, x, y, flags]
-NS_EXITS = [('row', x, 20, {}) for x in (12, 13, 14)] + [('town', x, y, {}) for x in (28, 29) for y in (5, 6)] + \
+NS_EXITS = [('row', x, 20, {}) for x in (12, 13, 14)] + [('town', x, 8, {}) for x in (27, 28, 29)] + \
            [('town', x, y, {'ns-invite': 1}) for x in (7, 8) for y in (2, 3)] + [('town', x, y, {'ns-fled': 1}) for x in (7, 8) for y in (2, 3)]
 # closed entrances that are not part of this layer: Gate Zero's doors are inside the terminal (a building interior) and are their own object
 NO_ART_OK = {('terminal', 'Gate Zero doors')}

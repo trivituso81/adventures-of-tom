@@ -17,7 +17,7 @@ const GATE_V='gatelayer1';
 const GATE_HAVE=['backlot-stage7-locked','blvd-studio-locked','blvd-trail-locked','jpark-barn-locked','jpark-oak-locked','row-pier-locked','stage7-catwalk-locked','town-hollow-locked','town-school-locked'];
 const GATE_ART={
   'town-hollow':     {map:'town',     rect:[7,3,2,2],         fit:1.15, states:['locked']},
-  'town-school':     {map:'town',     rect:[28,5,2,2],        fit:.9,   states:['locked','open']},
+  'town-school':     {map:'town',     rect:[27.85,8,1.55,1.7], fit:.66,   states:['locked','open']},   // under the SCHOOL sign, between its posts (Tom 11-20 report 5nwp)
   'row-pier':        {map:'row',      rect:[12,20,3,1],       fit:1.05, states:['locked']},
   'row-amyhouse':    {map:'row',      rect:[6,4.45,2.1,2.1], fill:true, states:['locked','open']},
   'blvd-trail':      {map:'blvd',     rect:[1.9,2,2.2,1.5],   fit:1.2,  states:['locked']},

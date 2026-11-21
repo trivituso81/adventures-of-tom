@@ -25,9 +25,10 @@ def selection():
     q = lambda e, n=0: ids(artqa.questions_for(e, e['prompt'], n))
     ok(q(E('a', prompt='A plain red ball on a table')) == ['f_one', 'f_paint', 'f_text'], 'a plain prompt: one, paint, text: %s' % q(E('a', prompt='A plain red ball on a table')))
     ok('f_bg' in q(E('a', prompt='on a flat magenta background')), 'a prompt that names a background gets f_bg')
-    ok('f_crop' in q(E('a', prompt='One large full body character')) and 'f_anat' in q(E('a', prompt='One large full body character')), 'a character gets f_crop and f_anat')
+    ok('f_crop' in q(E('a', tab='Characters', prompt='One large full body character')) and 'f_anat' in q(E('a', tab='Characters', prompt='One large full body character')), 'a character gets f_crop and f_anat')
     ok('f_count' in q(E('a', prompt='A 3 x 3 walking sheet')) and 'f_count' in q(E('a', prompt='a grid of cells')) and 'f_count' in q(E('a', prompt='Draw 4 poses')), 'a number or a grid gets f_count')
-    ok('f_same' in q(E('a'), 1) and 'f_same' not in q(E('a'), 0), 'f_same only when references were sent')
+    ok('f_same' in q(E('a', tab='Characters'), 1) and 'f_same' not in q(E('a', tab='Characters'), 0), 'f_same only when references were sent')
+    ok('f_same' not in q(E('a', prompt='A gate, no people, two people wide'), 1) and 'f_anat' not in q(E('a', prompt='A gate, no people, two people wide'), 1), 'no character questions on an object tab (Props)')
     ok('f_paint' not in q(E('a', tab='Clips')), 'no f_paint on the Clips tab')
 
 def stubs():
@@ -45,7 +46,7 @@ def judging():
     j = artqa.Judge('test', 'http://127.0.0.1:%d' % PORT); m = j.pick()
     ok(m == 'stub-vision-non-reasoning', 'the model pick: cheapest with image input that is not a reasoning one (%s)' % m)
     cache = TMP + '/cache'
-    e = E('x', prompt='A cat character on a flat magenta background. FAIL:f_bg FLAKY:f_text MISS:f_anat')
+    e = E('x', tab='Characters', prompt='A cat character on a flat magenta background. FAIL:f_bg FLAKY:f_text MISS:f_anat')
     n0 = len(log())
     qa = artqa.qa_picture(j, e, e['prompt'], png(), [png('blue')], cache)
     it = {i['id']: i for i in qa['items']}

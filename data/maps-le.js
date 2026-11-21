@@ -146,7 +146,7 @@ const LE_AREAS=[
     gates:[{at:[[7,2],[7,3],[7,4],[8,2],[8,3],[8,4]],art:'town-hollow',cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
       lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Crisp first, Tata. Monsters later."']},
       // The path east to Long Island Elementary (chapter 5) is locked until conference night.
-      {at:[[28,5],[28,6],[29,5],[29,6]],art:'town-school',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
+      {at:[[27,8],[28,8],[29,8]],art:'town-school',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
         lines:['The path east goes to Long Island Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it\'s the best sign in the whole town.'],
         when:[{chapter:5,lines:['The path east goes to Long Island Elementary. The gate is locked.','Amy has the key. Amy has every key.']}]}],
     objects:[

@@ -33,6 +33,7 @@ FIXED = [
     ('f_anat', 'Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?'),
 ]
 FIXED_Q = dict(FIXED)
+OBJECT_TABS = {'Props', 'Areas', 'Rooms', 'Title'}
 SUBJECT = re.compile(r'\b(character|creature|monster|prop|sheet|sprite|pose|poses|figure|person|people|portrait|object|enemy|boss|man|woman|girl|boy|child|kid|animal|dog|cat)\b', re.I)
 BODY = re.compile(r'\b(person|people|character|creature|monster|enemy|boss|face|man|woman|girl|boy|child|kid|animal|hands?|portrait)\b', re.I)
 COUNT = re.compile(r'(\b\d+\s*[x×]\s*\d+\b|\bgrid\b|\b(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|twelve)\s+(?:poses|cells|frames|items|panels|rows|columns|pictures)\b)', re.I)
@@ -52,8 +53,11 @@ def questions_for(entry, prompt, n_refs):
     if re.search(r'background', p, re.I): out.append(('f_bg', FIXED_Q['f_bg']))
     if SUBJECT.search(p): out.append(('f_crop', FIXED_Q['f_crop']))
     if COUNT.search(p): out.append(('f_count', FIXED_Q['f_count']))
-    if n_refs: out.append(('f_same', FIXED_Q['f_same']))
-    if BODY.search(p): out.append(('f_anat', FIXED_Q['f_anat']))
+    # fix-artgen2look: the object tabs hold no character, so the character questions only made false fails there (a gate was failed for
+    # "No character or creature in prompt or image" because its reference was the area painting).
+    who = (entry.get('tab') or '') not in OBJECT_TABS
+    if n_refs and who: out.append(('f_same', FIXED_Q['f_same']))
+    if BODY.search(p) and who: out.append(('f_anat', FIXED_Q['f_anat']))
     return out
 
 

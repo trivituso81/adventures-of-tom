@@ -8631,7 +8631,7 @@
    "title": "Art to make: Young Boppy Van Cortlandt '70",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "fyi": true,
    "next": "Open Admin > Art Library, find the entry Young Boppy Van Cortlandt '70 (boppy-young-hero), press Generate, then Approve or Reject. Report with the REPORT tab if something looks wrong.",
@@ -8658,6 +8658,10 @@
     {
      "d": "2026-11-20",
      "t": "The \"optional\" note moved to its own First line so the card opens on the action (boardux2)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Closed by fix-artgen2look: Young Boppy's hero is already in the game (boppy-young-hero, approved 2026-11-12 from the painting you made). Tom: \"you need to like check to see if an image is in the game before you tell me I need to generate it\". The board now closes a pictures card whose pictures are all approved and refuses a card that tells you to generate an approved picture."
     }
    ],
    "links": [
@@ -8669,11 +8673,8 @@
      "label": "Young Boppy Van Cortlandt '70"
     }
    ],
-   "backlog": {
-    "at": "2026-11-20",
-    "from": "up"
-   },
-   "first": "Optional, only when you feel like it."
+   "first": "Optional, only when you feel like it.",
+   "done": "2026-11-20"
   },
   {
    "id": "t-cutpolish5",
@@ -9614,7 +9615,7 @@
    "theme": "Tools",
    "ask": "pictures",
    "title": "Look at the QA results on a real pictures card",
-   "next": "ADMIN > BOARD, open a card that needs pictures (for example Art to make: Young Boppy Van Cortlandt '70). Tap Generate all, tap again to confirm. When the job finishes the card shows each picture with a QA score and what failed. Open each in the Art Library and APPROVE or REJECT as usual. All good if the QA lines matched what you saw; Something is wrong with what it missed or wrongly flagged. This starts card Auto-approve pictures that pass QA (artgen3).",
+   "next": "Young Boppy was my mistake: his hero is already in the game, so I closed that card, and the board now closes a pictures card whose pictures are all approved and refuses one that tells you to generate an approved picture. Look at QA on the six gate pictures instead: open ADMIN > BOARD, card Make and approve 6 gate pictures, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, that card shows each picture with its QA score and the lines that failed. Gates are no longer asked the character questions (same character, faces and hands), which wrongly failed four of the last six. Compare each QA line with what you see when you APPROVE or REJECT. All good if QA flagged what you would reject and passed what you would approve; Something is wrong with what it missed or wrongly flagged. This starts card Auto-approve pictures that pass QA (artgen3).",
    "blocks": [
     "c-artgen3"
    ],
@@ -9632,15 +9633,24 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy Sent to Claude as card c-fix-artgen2look; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude (fix-artgen2look): Tom wrote \"you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy\". Right: boppy-young-hero was approved on 11-12 and this card still sent you to make it. Fixed: card t-oldchecks-boppy closed; board_sync closes a pictures card whose linked pictures are all approved; board_check refuses a card that tells you to generate approved pictures. This card now points at the gate pictures, which really are still to make."
     }
    ],
    "links": [
     {
      "to": "art",
      "ids": [
-      "boppy-young-hero"
+      "prop-gate-row-amyhouse",
+      "prop-gate-row-amyhouse-open",
+      "prop-gate-town-school-open",
+      "prop-gate-jpark-barn-open",
+      "prop-gate-blvd-studio-open",
+      "prop-gate-backlot-stage7-open"
      ],
-     "label": "Young Boppy Van Cortlandt '70"
+     "label": "Story gates (6, made again)"
     }
    ],
    "waiting_on": "claude"
@@ -9714,6 +9724,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: a conversation took the prompt (Opus 5.5 medium)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped fix-artgen2look: the board closes and refuses pictures cards whose pictures are already approved (t-oldchecks-boppy closed), gate prompts rewritten after \"All failed\", QA stops asking character questions of objects, school gate moved under the SCHOOL sign (report 5nwp). Back to Tom: t-artgen2look and t-gatelayer-pics."
     }
    ],
    "prompt": {
@@ -19190,7 +19204,7 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Your note on this card was about the Grump Hollow wrappers, not these gate pictures. The wrappers are fixed (build fix-gatelayer-pics): to look at them, open the card Play the Grump Hollow wrapper trail. This card is still the gate pictures, which have not been made yet: open ADMIN > BOARD, this card, tap Generate all 6 pictures (two taps, about $0.30). When the job finishes, tap Open in the Art Library on this card. Six entries have a new picture: Amy's House door locked and open, and the open state of the school gate, Car Barn gate, Studio gate and Stage 7 doors. APPROVE one that shows that door or gate in that state with nothing else on the flat magenta background (no people, no words); REJECT with a note if not. Each approve bakes it into the game by itself.",
+   "next": "Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN > BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report).",
    "blocks": [],
    "done_when": {
     "art_approved": [
@@ -19249,6 +19263,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: All failed Sent to Claude as card c-fix-artgen2look; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T02:34:42.830Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude (fix-artgen2look): Tom wrote \"All failed\". Looked at the six: open states drawn as different gates (school and Car Barn still padlocked), words added (OPEN on the studio arm, GREGORI on Amy's door), Amy's door unlike the painted one. Prompts rewritten (locked picture or door crop attached, no chain or padlock when open, no words unless asked), the six saved as rejected with his note. Pencil report r-20261120-185740-5nwp (\"the locked fence icon needs to be within the area underneath the School sign\") fixed in the same build: the school gate picture and its blocked tiles moved under the sign."
     }
    ],
    "chat": {

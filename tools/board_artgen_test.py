@@ -62,7 +62,7 @@ try:
         rows = pg.eval_on_selector_all('#sheet .pics .pr', 'e=>e.map(x=>x.textContent)')
         if len(rows) != len(ids): fails.append('rows %d, want %d: %s' % (len(rows), len(ids), rows))
         for r in rows[:2]:
-            if 'Ready to make' not in r: fails.append('row not ready: ' + r)
+            if 'Ready to make' not in r and 'will be made again' not in r: fails.append('row not ready: ' + r)
         if not any('Approved' in r for r in rows): fails.append('no Approved row')
         if waiting and not any('Waiting for' in r for r in rows): fails.append('no Waiting for row: %s' % rows)
         btn = pg.inner_text('#sheet button.gen')
@@ -96,8 +96,8 @@ try:
         # a card whose run has QA
         pg.click('.card[data-id="t-pics-qa"] .t'); pg.wait_for_selector('#sheet .pics .qa')
         q = pg.inner_text('#sheet .pics')
-        for want in ('QA 11 of 12', 'Failed: Does the background match what the prompt asks for? (there is a floor line)', 'QA not run: the spend cap would be passed', 'QA has not been checked against your decisions yet'):
-            if want not in q: fails.append('QA run lacks "%s": %s' % (want, q[-400:]))
+        for want in ('QA 11 of 12', 'Failed: Does the background match what the prompt asks for? (there is a floor line)', 'QA not run: the spend cap would be passed', 'QA has not been checked against your decisions yet|QA so far: agreed with you on'):
+            if not any(w in q for w in want.split('|')): fails.append('QA run lacks "%s": %s' % (want, q[-400:]))
         imgs = pg.eval_on_selector_all('#sheet .pics .qa img', 'e=>e.map(x=>x.getAttribute("src"))')
         if imgs[0] != 'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/artgen/results/x/a.png': fails.append('thumbnail address ' + str(imgs))
         if pg.get_attribute('#sheet .pics .qa a', 'href') != 'art.html?review=' + two[0]['id']: fails.append('thumbnail link')

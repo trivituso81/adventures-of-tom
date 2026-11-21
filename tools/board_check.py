@@ -130,6 +130,18 @@ for c in d['cards']:
         for k, name in LIBS.items():
             if name in c.get('next', '').upper() and k not in have:
                 bad.append('%s: its next step sends you to the %s but the card has no link to it (add `links: [{to: "%s", ids: [...], label: "..."}]`)' % (n, name.title(), k))
+# fix-artgen2look (Tom 2026-11-20: "you need to like check to see if an image is in the game before you tell me I need to generate it"):
+# an open pictures card that blocks nothing, or that tells him to Generate, must name at least one Art Library entry that is not approved yet; one whose pictures are all approved is refused.
+ARTP = next((p for p in (os.path.join(os.path.dirname(os.path.abspath(path)), 'art-prompts.json'), os.path.join(HERE, '..', 'data', 'art-prompts.json')) if os.path.exists(p)), None)
+if ARTP:
+    ART_ST = {e.get('id'): e.get('status') for e in json.load(open(ARTP, encoding='utf-8')).get('entries', [])}
+    for c in d['cards']:
+        if c.get('lane') != 'tom' or c.get('col') == 'done' or c.get('ask') != 'pictures': continue
+        if c.get('blocks') and 'generate' not in str(c.get('next') or '').lower(): continue   # a verdict card that only asks him to look
+        pics = list((c.get('done_when') or {}).get('art_approved') or [])
+        pics += [i for l in c.get('links') or [] if isinstance(l, dict) and l.get('to') == 'art' and isinstance(l.get('ids'), list) for i in l['ids'] if i not in pics]
+        if pics and all(ART_ST.get(i) == 'approved' for i in pics):
+            bad.append('%s: asks for pictures that are already in the game (%s approved in the Art Library); close it or point it at entries still to make' % (c.get('id'), ', '.join(pics)))
 if push_tag:
     def on_card(c):
         t = c.get('tag')

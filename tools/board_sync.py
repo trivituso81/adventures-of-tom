@@ -225,6 +225,25 @@ def r2_art(B, art):
         t = 'Done by the board: you approved %s in the Art Library.' % ', '.join(ok) if not no else \
             'Done by the board: you decided every picture. Approved: %s. Rejected: %s.' % (', '.join(ok) or 'none', ', '.join(no))
         B.hist(c, t); B.say('done %s (art decided)' % c['id'])
+    # fix-artgen2look (Tom 2026-11-20: "you need to like check to see if an image is in the game before you tell me I need to generate it"):
+    # an open pictures card with no done_when that blocks nothing and whose Art Library links are all approved already has its pictures, so it closes itself.
+    for c in B.cards:
+        if c['col'] == 'done' or c.get('lane') != 'tom' or c.get('ask') != 'pictures' or (c.get('done_when') or {}).get('art_approved'): continue
+        if c.get('blocks'): continue   # a card that blocks Claude work waits for Tom's verdict, not for the pictures (t-artgen2look)
+        ids = art_link_ids(c)
+        if not ids or any((art.get(i) or {}).get('status') != 'approved' for i in ids): continue
+        c['col'] = 'done'; c['done'] = B.today; c.pop('waiting_on', None); c.pop('backlog', None)
+        B.hist(c, 'Done by the board: already in the game (%s approved in the Art Library), nothing to make.' % ', '.join(ids))
+        B.say('done %s (art already approved)' % c['id'])
+
+
+def art_link_ids(c):
+    """Every Art Library id a card names: done_when.art_approved plus the ids of its art links."""
+    ids = list((c.get('done_when') or {}).get('art_approved') or [])
+    for l in c.get('links') or []:
+        if isinstance(l, dict) and l.get('to') == 'art' and isinstance(l.get('ids'), list):
+            ids += [i for i in l['ids'] if i not in ids]
+    return ids
 
 
 def r1_unblock(B):

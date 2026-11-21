@@ -48,19 +48,21 @@ const GATES = [
   { id: 'row-amyhouse', ar: '1:1', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, locked (Row, chapter 1)',
     where: 'Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front.',
     what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch, the same red wooden door with two gold hinges and gold ring knocker, same size and shape, door shut. Add a small handwritten paper note taped to the door at eye height, with a tiny doodle of a running shoe on it and no words. The three stone steps below the door are NOT part of the picture.',
-    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.' },
+    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.',
+    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
   { id: 'row-amyhouse-open', ar: '1:1', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, unlocked and open (Row, chapter 2 on)',
     where: 'Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front.',
     what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch and the same red wooden door with its two gold hinges and gold ring knocker, but the door is swung open inward about half way, showing a warm golden lit hallway inside with a hint of a coat hook and a rug. No note on the door. The three stone steps below the door are NOT part of the picture.',
-    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.' },
+    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.',
+    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
   // gatelayer1: the open state of the gates that swing or lift.
   { id: 'town-school-open', ar: '1:1', area: 'the Square', file: 'art/town.webp', title: 'School gate, open (Square east lane, chapter 5 on)',
     where: 'The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign.',
-    what: 'A chain link school gate swung wide open: the same grey steel posts with a top rail, the gate leaf swung back flat against the post on one side, the thick chain hanging loose from the gate with the big brass padlock open and dangling on it. No sign, no words.',
+    what: 'A chain link school gate swung wide open: the same grey steel posts with a top rail, the gate leaf swung back flat against the post on one side. No chain and no padlock anywhere. No sign, no words.',
     size: 'The posts span the full width of the lane, about two people wide, and are a little taller than a person. Nothing stands in the middle of the lane.' },
   { id: 'jpark-barn-open', ar: '1:1', area: 'Jefferson Park', file: 'art/jpark.webp', title: 'Car Barn gate, open (Jefferson Park east edge, chapter 8 on)',
     where: 'Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening is the side street at the far edge of the picture, beyond the green CAR BARN arch.',
-    what: 'A tall old black iron double gate between two weathered stone posts, both gate leaves swung wide open and standing at an angle, the heavy chain hanging loose and the padlock open and dangling. The frost is gone. The riveted metal plate on the left leaf reads exactly: DIVISION NINE CAR BARN',
+    what: 'A tall old black iron double gate between two weathered stone posts, both gate leaves swung wide open and standing at an angle. No chain and no padlock anywhere. The frost is gone. The riveted metal plate on the left leaf reads exactly: DIVISION NINE CAR BARN',
     size: 'The stone posts span the full width of the side street, about two people wide, and are taller than a person. The gap between the open leaves is clear.' },
   { id: 'blvd-studio-open', ar: '3:2', area: 'the Downtown plaza', file: 'art/blvd.webp', title: 'Studio gate arm, raised (Downtown, chapter 4 on)',
     where: 'The Downtown plaza is a sunny city square of shops, palms and lamps. The opening is the paved road at the far upper corner that passes under the green STUDIO arch, next to the checkered cab building.',
@@ -72,11 +74,17 @@ const GATES = [
     size: 'It fills the whole hangar doorway, about two people wide, and is about three people tall.' },
 ];
 
+// fix-artgen2look (Tom 2026-11-21 on the first six made by the board: "All failed"): an open state attaches its own approved locked picture as
+// picture 2 so the generator paints that same gate (the six came back as different gates, two still chained and padlocked), Amy's door attaches
+// a crop of the real painted door, and a picture with no lettering forbids every word (the generator had added OPEN and GREGORI).
+const ref2 = g => g.ref2 || (g.id.endsWith('-open') && !g.id.startsWith('row-amyhouse') ? `art/raw/props/prop-gate-${g.id.replace(/-open$/, '')}-v1.png` : '');
+const says2 = g => g.ref2says || 'The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.';
+
 function prompt(g) {
   return `IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.
 
-ATTACHED IMAGE
-1) The current painting of ${g.area}, from "The Adventures of Tom", a family role-playing game. ${g.where} Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.
+ATTACHED IMAGE${ref2(g) ? 'S' : ''}
+1) The current painting of ${g.area}, from "The Adventures of Tom", a family role-playing game. ${g.where} Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.${ref2(g) ? '\n2) ' + says2(g) : ''}
 
 PAINT THIS ONE OBJECT
 ${g.what}
@@ -86,7 +94,7 @@ RULES
 - Centered, complete, fully inside the picture with a clear margin, crisp clean edges.
 - Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.
 - No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.
-- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.
+- ${/reads exactly/.test(g.what) ? 'Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.' : 'No letters, words or numbers anywhere, not even the names on the signs in the painting.'}
 - Family friendly for children aged 6 and up.`;
 }
 
@@ -94,7 +102,7 @@ const stateOf = g => (g.id.endsWith('-open') ? 'open' : 'locked');
 const siteOf = g => g.id.replace(/-open$/, '');
 const entries = GATES.map(g => ({
   id: `prop-gate-${g.id}`, tab: 'Props', title: `Story gate: ${g.title}`,
-  ar: g.ar, refs: [g.file], prompt: prompt(g),
+  ar: g.ar, refs: ref2(g) ? [g.file, ref2(g)] : [g.file], prompt: prompt(g),
   bake: { script: 'bake_gate_art.py', args: [siteOf(g), stateOf(g)], src: `tools/sprite-bake/src/gate-${siteOf(g)}-${stateOf(g)}.png`, key: 'corner' },
 }));
 if (require.main === module) {
