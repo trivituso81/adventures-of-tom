@@ -26799,7 +26799,7 @@
   {
    "id": "t-savedportraits-look",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -26817,8 +26817,14 @@
      "d": "2026-11-21",
      "t": "Made by the session that shipped idea-savedportraits.",
      "at": "2026-11-21T18:55:02.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:33.955Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-artgen3try",
