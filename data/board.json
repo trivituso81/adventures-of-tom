@@ -30229,6 +30229,29 @@
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "b-board-nightgreen2",
+   "tag": "board-nightgreen2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Game Shell",
+   "title": "nightgreen handoff 2, 11 of 12 tests fixed or retired, the last one is ch20_test",
+   "next": "Done: nightgreen handoff 2, 11 of 12 tests fixed or retired, the last one is ch20_test",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30925,9 +30948,9 @@
   },
   {
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
-   "title": "Fix the 13 tests that already fail",
+   "title": "Fix the last failing test (ch20_test)",
    "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T14:38:10-08:00",
+   "last": "2026-11-21T14:39:15-08:00",
    "tags": [
     "nightgreene",
     "nightgreenf",
@@ -30936,10 +30959,12 @@
     "nightgreeni",
     "nightgreenj",
     "nightgreenk",
-    "nightgreenl"
+    "nightgreenl",
+    "board-nightgreen2"
    ],
    "cards": [
-    "c-nightgreen"
+    "c-nightgreen",
+    "b-board-nightgreen2"
    ]
   },
   {
@@ -34796,8 +34821,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "005ed7c2c33b0b1e5553335e448db4fd5262182a",
- "synced_at": "2026-11-21T22:38:50+00:00",
+ "synced": "15a916559788016557cbf5773cd052d607c61e42",
+ "synced_at": "2026-11-21T22:40:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
