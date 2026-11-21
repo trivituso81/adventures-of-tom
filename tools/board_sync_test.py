@@ -452,5 +452,19 @@ r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/
 check('board_check accepts an unstick card', r.returncode == 0, r.stdout[-300:])
 
 
+# --- ghost1: a START card whose conversation never pushed goes back to Up next
+GH = dict(history=[{'d': '2026-11-20', 't': 'Started by START on Claude Sonnet 5.5, effort high.'}], started_at='2026-11-20T14:00:00+00:00', quiet=None)
+b = board(qc('c-g1', chat={'url': 'https://claude.ai/code/cse_AAA', 'opening': 'x'}, **GH),
+          qc('c-g2', chat={'url': 'https://claude.ai/code/cse_BBB', 'opening': 'x'}, **GH),
+          qc('c-g3', chat={'url': 'https://claude.ai/code/cse_CCC', 'opening': 'x'}, **dict(GH, started_at='2026-11-20T14:50:00+00:00')),
+          qc('c-g4', chat={'url': 'https://claude.ai/code/session_DDD', 'opening': 'x'}, history=[{'d': '2026-11-20', 't': 'Started: the conversation claimed this card.'}], started_at='2026-11-20T14:00:00+00:00', quiet=None))
+b['sessions'] = [{'url': 'https://claude.ai/code/session_BBB', 'title': 't', 'first': '2026-11-20T14:05:00+00:00', 'last': '2026-11-20T14:05:00+00:00', 'tags': [], 'cards': ['c-g2']}]
+fires.clear(); A(b)
+check('ghost1: START card with no push after 30 minutes goes back to Up next', card(b, 'c-g1')['col'] == 'up' and 'started_at' not in card(b, 'c-g1') and 'Not running' in card(b, 'c-g1')['history'][-1]['t'])
+check('ghost1: a START card whose conversation pushed (cse_ vs session_ link) stays In progress', card(b, 'c-g2')['col'] == 'prog')
+check('ghost1: a START card under 30 minutes old stays In progress', card(b, 'c-g3')['col'] == 'prog')
+check('ghost1: a card claimed by hand (not START) is left alone', card(b, 'c-g4')['col'] == 'prog')
+
+
 print('board_sync_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))
 sys.exit(1 if fails else 0)

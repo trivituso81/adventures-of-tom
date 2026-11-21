@@ -18733,6 +18733,30 @@
    ],
    "prompt": "",
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-ghost1",
+   "tag": "ghost1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Board: stop showing START cards as In progress when nothing is running",
+   "next": "Built as ghost1: a card the job started with START goes back to Up next when its conversation has pushed nothing in 30 minutes. First run moves c-b3s12, c-itembannerart1, c-idea-madelot and c-hollowtrail2, which showed In progress with no conversation behind them.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "done": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCoFX44DPtEdpaTz4Q",
+    "opening": "\"Our board system is really having major issues right now.\""
+   },
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"many tasks are marked as working that I have a feeling are not actually working. I've been waiting for hours.\" Found: START marks a card In progress when it fires the task, and the Opus medium and Sonnet high tasks never start a conversation. Also board-sync failed on every push from 17:11 to 17:25 PT because a session left an invalid card (board_check refused it)."
+    }
+   ]
   }
  ],
  "sessions": [

@@ -30,6 +30,7 @@ RESCUE_QUIET_HOURS = 2   # attn1: a card started by START runs unattended and fi
 RESCUES_PER_DAY = 4      # attn1: caps Sonnet use when many cards stall at once; the rest wait for the next day, oldest first
 RESCUES_PER_CARD = 1     # attn1: stop-loss rule, a second stall becomes a Stuck twice card for Tom
 TOM_NOTE_HOURS = 6       # attn1: no rescue while Tom wrote a note on the card this recently
+GHOST_MIN = 30          # ghost1: a card the job started with START whose conversation has not pushed anything this long is not running
 RERUN_GRACE_MIN = 30     # attn1: a re-run service job that has not reported back after this long counts as failed again
 HISTORY_LINE = 'Board card %s. Read its history first: my notes and answers are there.'
 
@@ -350,6 +351,29 @@ def r9_start(B, fire, now=None):
         B.hist(c, 'Started by START on %s, effort %s.' % (r['model'], r['effort'])); B.say('started %s' % c['id'])
 
 
+def sid(url):
+    """The id body of a conversation link (a START link is cse_<body>, its pushes carry session_<body>)."""
+    m = re.search(r'(?:session|cse)_(\w+)', url or '')
+    return m.group(1) if m else None
+
+
+def r12_ghost(B, now):
+    """ghost1 (2026-11-20): START marks a card In progress when it fires the task, not when the conversation shows up. A route that
+    never starts left cards saying In progress for hours. A START-started card whose conversation has pushed nothing after GHOST_MIN
+    minutes goes back to Up next, so the board shows only what is really running."""
+    seen = {sid(s['url']) for s in B.b['sessions']}
+    for c in B.cards:
+        if c['col'] != 'prog' or c['lane'] != 'claude' or c.get('rescue') or not c.get('started_at'): continue
+        if not any(str(h.get('t', '')).startswith('Started by START') for h in c.get('history', [])): continue
+        body = sid((c.get('chat') or {}).get('url'))
+        if body and body in seen: continue
+        if now - parse_iso(c['started_at']) < datetime.timedelta(minutes=GHOST_MIN): continue
+        c['col'] = 'up'; c.pop('started_at', None); c.pop('quiet', None); c.pop('waiting_on', None)
+        c['chat'] = {'url': '', 'opening': (c.get('chat') or {}).get('opening') or 'started by START'}
+        B.hist(c, 'Not running: START fired the task but its conversation pushed nothing in %d minutes. Back to Up next. Use Copy prompt or START again.' % GHOST_MIN)
+        B.say('ghost %s back to Up next' % c['id'])
+
+
 def started_by_start(c):
     return any(str(h.get('t', '')).startswith('Started by START') for h in c.get('history', [])) or bool(c.get('rescue'))
 
@@ -572,6 +596,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r2_poses(B, poses)
     r1_unblock(B)
     r10_notes(B)
+    r12_ghost(B, now)
     r8_quiet(B, now)
     r11_attention(B, now, fire, rerun, shipped_tags)
     r9_start(B, fire, now)

@@ -1,3 +1,12 @@
+## ghost1 (2026-11-20): the board no longer shows START cards as In progress when no conversation is running
+
+Card c-ghost1. Tom (11-20): "many tasks are marked as working that I have a feeling are not actually working. I've been waiting for hours."
+
+- Cause 1: `board_sync.py` R9 moves a card to In progress when it fires the START task, not when the conversation shows up. The Opus medium and Sonnet high tasks never start a conversation (see c-startfix), so c-b3s12, c-itembannerart1 and c-idea-madelot sat In progress for 1h40m with nothing behind them. The only backstop was the 2 hour quiet flag.
+- Cause 2: from 17:11 to 17:25 PT every `board-sync` run failed at `board_check.py` because a session left an invalid card (t-startfix-look, c-startfix `after`), so nothing moved for 14 minutes. Already fixed by the sessions that left it.
+- Fix: new rule R12 (`r12_ghost`): a START-started card whose conversation has pushed nothing after 30 minutes goes back to Up next with a history line. Tests in `tools/board_sync_test.py`.
+- Two older tests in `board_sync_test.py` fail on a clean main too (R5 replay of today, unstick card check); not touched here.
+
 ## fix-wanproof-watch (2026-11-20): PROOF: GRACE'S GUARD (VIDEO) is now the first box on the NEW BATTLE list
 
 Card c-fix-wanproof-watch. Tom (11-20, on t-wanproof-watch): "i cant find this within the new battle lab UI".
