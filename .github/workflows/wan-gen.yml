@@ -1,6 +1,6 @@
 name: wan-gen
 
-# wanproof (claude/video-battle-plan.md section 4). Makes ONE picture or ONE video on fal.ai (tools/art-library/wangen.py): `start` is
+# wanproof (claude/video-battle-plan.md section 4); wanch1: a list of jobs per run, up to 3 at once. Makes pictures and videos on fal.ai (tools/art-library/wangen.py): `start` is
 # Grace's large left-facing start picture (Nano Banana 2.1), `video` is her guard video (Wan 3.0). What is sent is written in
 # tools/art-library/wangen-jobs.json. MANUAL ONLY (workflow_dispatch); it never runs on a push. Needs the repo secret FAL_KEY (never printed).
 # It changes nothing on main. Results, the fal answers and the money ledger go to branch `wangen` (never merged, never served); each run
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       what:
-        description: 'start (the start picture) or video (the guard video).'
+        description: 'Jobs in tools/art-library/wangen-jobs.json: one name, a comma list, or wildcards (tom-*). Up to 3 run at once.'
         required: true
         default: 'start'
       cap:
@@ -33,7 +33,7 @@ concurrency:
 jobs:
   gen:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 170
     steps:
       - uses: actions/checkout@v4
         with:

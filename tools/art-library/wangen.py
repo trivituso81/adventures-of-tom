@@ -2,7 +2,11 @@
 """wanproof: makes one picture or one video on fal.ai for the Wan video route (claude/video-battle-plan.md section 4). Run by the GitHub
 Action `wan-gen` (.github/workflows/wan-gen.yml). MANUAL ONLY. The key is the repo secret FAL_KEY and is never printed.
 
-  python3 -I tools/art-library/wangen.py --what start|video [--cap 2] [--dry-run] [--out DIR] [--repo DIR]
+  python3 -I tools/art-library/wangen.py --what JOB[,JOB...|tom-*] [--parallel 3] [--cap 2] [--dry-run] [--out DIR] [--repo DIR]
+
+wanch1: --what takes a list of jobs (names, comma separated, or wildcards); up to 3 are sent and waited on at once (--parallel).
+The ledger and the cap are shared: a job books its estimate under a lock before its call leaves, so jobs running together never pass
+the cap. Each job keeps its own pending record, so a cut-off run picks every unfinished call up again with no second charge.
 
 What is sent is written down in tools/art-library/wangen-jobs.json (one job per `what`): the fal endpoint, the prompt file, the pictures
 (repo paths, sent as data URIs) and the settings. A retry is a change to that file (one change, a higher `rev`), pushed to main first,
@@ -168,78 +172,126 @@ def result_url(job, res):
     return ((res.get('images') or [{}])[0]).get('url')
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--what', required=True); ap.add_argument('--cap', type=float, default=2.0); ap.add_argument('--dry-run', action='store_true')
-    ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
-    a = ap.parse_args()
-    jobs = load_jobs(a.repo)
-    if a.what not in jobs: raise SystemExit('no job named %r in wangen-jobs.json (there are: %s)' % (a.what, ', '.join(jobs)))
-    job, rev = jobs[a.what], jobs[a.what]['rev']
-    os.makedirs(a.out, exist_ok=True)
-    stf = os.path.join(a.out, 'state.json')
-    state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
+def pick(jobs, spec):
+    """The job names a --what asks for: one name, a comma list, or wildcards (tom-*). Order kept, no repeats."""
+    import fnmatch
+    out = []
+    for part in [x.strip() for x in spec.split(',') if x.strip()]:
+        hit = [n for n in jobs if not n.startswith('_') and fnmatch.fnmatchcase(n, part)] if any(c in part for c in '*?[') else [part]
+        if not hit: raise SystemExit('no job matches %r in wangen-jobs.json' % part)
+        for n in hit:
+            if n not in jobs or n.startswith('_'): raise SystemExit('no job named %r in wangen-jobs.json (there are: %s)' % (n, ', '.join(k for k in jobs if not k.startswith('_'))))
+            if n not in out: out.append(n)
+    return out
 
-    def save():
-        json.dump(state, open(stf + '.tmp', 'w'), indent=1); os.replace(stf + '.tmp', stf)
 
-    report = {'what': a.what, 'rev': rev, 'endpoint': job['endpoint'], 'dry_run': a.dry_run, 'cap': a.cap, 'spent_before': round(state['spent'], 4)}
-    rf = os.path.join(a.out, 'wangen-report.json')
-    body, frame = build(job, a.repo)
+def run_one(what, job, a, state, lock, save, fal, key, log):
+    """One job, start to finish. Returns (exit code, report). The ledger (state) is shared by every job of the run: the cap check and the
+    booking of the estimate happen together under the lock, before the call is sent, so jobs running at once can never pass the cap."""
+    rev = job['rev']
+    report = {'what': what, 'rev': rev, 'endpoint': job['endpoint'], 'dry_run': a.dry_run, 'cap': a.cap}
+    try: body, frame = build(job, a.repo)
+    except SystemExit as x: report['error'] = str(x); log(str(x)); return 2, report
     est = estimate(job)
-    say('job %s rev %d on %s, estimate $%.2f; ledger so far $%.2f of the $%.2f cap' % (a.what, rev, job['endpoint'], est, state['spent'], a.cap))
-    say('request: ' + json.dumps(shown(body))[:3000])
+    with lock: report['spent_before'] = round(state['spent'], 4)
+    log('job rev %d on %s, estimate $%.2f; ledger so far $%.2f of the $%.2f cap' % (rev, job['endpoint'], est, state['spent'], a.cap))
+    log('request: ' + json.dumps(shown(body))[:3000])
     ext = 'mp4' if job['kind'] == 'video' else 'png'
-    res_file = os.path.join(a.out, '%s-r%d.%s' % (a.what, rev, ext))
-    done = [c for c in state['calls'] if c['what'] == a.what and c['rev'] == rev and c.get('file')]
-    pend = state['pending'].get(a.what)
-    if pend and pend.get('rev') != rev: say('dropping a pending request of an older rev: %s' % pend['rid']); state['pending'].pop(a.what); pend = None
-    key = os.environ.get('FAL_KEY', '')
-    fal = Fal(key, os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
-    live = None
+    res_file = os.path.join(a.out, '%s-r%d.%s' % (what, rev, ext))
+    with lock:
+        done = [c for c in state['calls'] if c['what'] == what and c['rev'] == rev and c.get('file')]
+        pend = state['pending'].get(what)
+        if pend and pend.get('rev') != rev: log('dropping a pending request of an older rev: %s' % pend['rid']); state['pending'].pop(what); pend = None; save()
     if key:
         try:
             live = fal.price(job['endpoint'])
             if live:
-                say('live fal price: $%s per %s' % (live[0], live[1]))
+                log('live fal price: $%s per %s' % (live[0], live[1]))
                 if job['kind'] == 'video' and live[1] and live[1].startswith('second'): est = max(est, round(live[0] * float(job['input']['duration']), 4))
                 elif live[1] in ('image', 'images', 'video', 'videos'): est = max(est, live[0])
-        except Stop as x: report['error'] = str(x); json.dump(report, open(rf, 'w'), indent=1); say('STOP:', x); return 2
+        except Stop as x: report['error'] = str(x); log('STOP: %s' % x); return 2, report
     report['estimate'] = est
     if done and os.path.exists(os.path.join(a.out, os.path.basename(done[-1]['file']))):
-        report['already'] = done[-1]['file']; json.dump(report, open(rf, 'w'), indent=1)
-        say('rev %d of %s is already made (%s). Nothing sent. Raise rev in wangen-jobs.json for a new try.' % (rev, a.what, done[-1]['file'])); return 0
-    if not pend and state['spent'] + est > a.cap + 1e-9:
-        report['error'] = 'cap'; json.dump(report, open(rf, 'w'), indent=1)
-        say('REFUSED: $%.2f spent + $%.2f estimate is over the $%.2f cap. Nothing sent.' % (state['spent'], est, a.cap)); return 3
+        report['already'] = done[-1]['file']
+        log('rev %d of %s is already made (%s). Nothing sent. Raise rev in wangen-jobs.json for a new try.' % (rev, what, done[-1]['file'])); return 0, report
     if a.dry_run:
-        report['would_send'] = shown(body); json.dump(report, open(rf, 'w'), indent=1)
-        say('DRY RUN: nothing sent, nothing spent.%s' % (' Key checked: fal accepted it.' if key else ' (no FAL_KEY in this run: key not checked)')); return 0
-    if not key: raise SystemExit('Repo secret FAL_KEY is empty or missing.')
+        with lock: over = not pend and state['spent'] + est > a.cap + 1e-9
+        if over: report['error'] = 'cap'; log('REFUSED: $%.2f spent + $%.2f estimate is over the $%.2f cap. Nothing sent.' % (state['spent'], est, a.cap)); return 3, report
+        report['would_send'] = shown(body)
+        log('DRY RUN: nothing sent, nothing spent.%s' % (' Key checked: fal accepted it.' if key else ' (no FAL_KEY in this run: key not checked)')); return 0, report
+    if not key: report['error'] = 'Repo secret FAL_KEY is empty or missing.'; log(report['error']); return 2, report
     try:
         if not pend:
-            pend = fal.send(job['endpoint'], body); pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
-            state['pending'][a.what] = pend; state['spent'] = round(state['spent'] + est, 4)
-            state['calls'].append({'what': a.what, 'rev': rev, 'rid': pend['rid'], 'est': est, 'at': pend['at']}); save()
-            say('sent, request %s' % pend['rid'])
-        else: say('picking up request %s sent earlier (no new charge)' % pend['rid'])
+            with lock:
+                if state['spent'] + est > a.cap + 1e-9:
+                    report['error'] = 'cap'; log('REFUSED: $%.2f spent + $%.2f estimate is over the $%.2f cap. Nothing sent.' % (state['spent'], est, a.cap)); return 3, report
+                state['spent'] = round(state['spent'] + est, 4); save()   # booked before the call leaves, so a parallel job sees it
+            try: pend = fal.send(job['endpoint'], body)
+            except Stop:
+                with lock: state['spent'] = round(state['spent'] - est, 4); save()   # never accepted: nothing charged
+                raise
+            pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+            with lock:
+                state['pending'][what] = pend
+                state['calls'].append({'what': what, 'rev': rev, 'rid': pend['rid'], 'est': est, 'at': pend['at']}); save()
+            log('sent, request %s' % pend['rid'])
+        else: log('picking up request %s sent earlier (no new charge)' % pend['rid'])
         res = fal.wait(pend)
-        json.dump(res, open(os.path.join(a.out, '%s-r%d.json' % (a.what, rev)), 'w'), indent=1)
+        json.dump(res, open(os.path.join(a.out, '%s-r%d.json' % (what, rev)), 'w'), indent=1)
         url = result_url(job, res)
         if not url: raise Stop('the answer has no %s: %s' % (job['kind'], json.dumps(res)[:300]))
         data = fal.download(url)
         open(res_file, 'wb').write(data)
-        if frame: open(os.path.join(a.out, '%s-r%d-frame.png' % (a.what, rev)), 'wb').write(frame)
-        for c in state['calls']:
-            if c['rid'] == pend['rid']: c['file'] = os.path.basename(res_file)
-        state['pending'].pop(a.what, None); save()
-        report.update(file=os.path.basename(res_file), bytes=len(data), rid=pend['rid'], spent_after=state['spent'])
-        say('DONE: %s (%d KB). Ledger $%.2f of $%.2f.' % (os.path.basename(res_file), len(data) // 1024, state['spent'], a.cap))
+        if frame: open(os.path.join(a.out, '%s-r%d-frame.png' % (what, rev)), 'wb').write(frame)
+        with lock:
+            for c in state['calls']:
+                if c['rid'] == pend['rid']: c['file'] = os.path.basename(res_file)
+            state['pending'].pop(what, None); save()
+            report.update(file=os.path.basename(res_file), bytes=len(data), rid=pend['rid'], spent_after=state['spent'])
+        log('DONE: %s (%d KB). Ledger $%.2f of $%.2f.' % (os.path.basename(res_file), len(data) // 1024, state['spent'], a.cap))
     except Stop as x:
-        if isinstance(x, Gone): state['pending'].pop(a.what, None); save()
-        report['error'] = str(x); json.dump(report, open(rf, 'w'), indent=1); say('STOP:', x); return 2
-    json.dump(report, open(rf, 'w'), indent=1)
-    return 0
+        if isinstance(x, Gone):
+            with lock: state['pending'].pop(what, None); save()
+        report['error'] = str(x); log('STOP: %s' % x); return 2, report
+    return 0, report
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--what', required=True, help='a job name, a comma list of names, or wildcards (tom-*)')
+    ap.add_argument('--cap', type=float, default=2.0); ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--parallel', type=int, default=3, help='jobs sent at once (1 to 3)')
+    ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
+    a = ap.parse_args()
+    jobs = load_jobs(a.repo)
+    names = pick(jobs, a.what)
+    os.makedirs(a.out, exist_ok=True)
+    stf = os.path.join(a.out, 'state.json')
+    state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    lock = threading.RLock()
+
+    def save():
+        with lock: json.dump(state, open(stf + '.tmp', 'w'), indent=1); os.replace(stf + '.tmp', stf)
+
+    key = os.environ.get('FAL_KEY', '')
+    fal = Fal(key, os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
+    say('%d job(s): %s; up to %d at once; ledger $%.2f of the $%.2f cap' % (len(names), ', '.join(names), max(1, min(3, a.parallel)), state['spent'], a.cap))
+
+    def one(n):
+        tag = '[%s]' % n if len(names) > 1 else ''
+        return run_one(n, jobs[n], a, state, lock, save, fal, key, lambda m: say(*((tag, m) if tag else (m,))))
+
+    with ThreadPoolExecutor(max_workers=max(1, min(3, a.parallel, len(names)))) as ex:
+        res = list(ex.map(one, names))
+    codes = [c for c, _ in res]; reps = [r for _, r in res]
+    rf = os.path.join(a.out, 'wangen-report.json')
+    if len(names) == 1: json.dump(reps[0], open(rf, 'w'), indent=1)
+    else: json.dump({'jobs': reps, 'spent_after': state['spent'], 'cap': a.cap}, open(rf, 'w'), indent=1)
+    for c, r in res:
+        if len(names) > 1: say('%-24s %s' % (r['what'], 'made ' + r['file'] if r.get('file') else 'already made' if r.get('already') else 'dry run ok' if c == 0 else 'FAILED: ' + str(r.get('error'))[:160]))
+    return 3 if 3 in codes and all(c in (0, 3) for c in codes) else max(codes)
 
 
 if __name__ == '__main__':

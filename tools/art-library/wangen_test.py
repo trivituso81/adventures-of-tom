@@ -4,7 +4,8 @@
 Checks: W1 dry run sends nothing; W2 a real run sends once, waits, downloads, books the estimate; W3 the same rev is never sent twice;
 W4 the cap refuses a call that would pass it; W5 a request left pending is picked up with no second send; W6 a refused key stops before
 any send and the key is never printed; W7 the video frame is exactly 720x1280 and sent as both first and last frame; W8 a failed
-request (COMPLETED with error) is reported, not saved as a result."""
+request (COMPLETED with error) is reported, not saved as a result; W9 (wanch1) a list of jobs (names and wildcards) runs up to 3 at once on one
+ledger, and the cap stops exactly the job that would pass it."""
 import os, sys, json, shutil, subprocess, tempfile, threading, base64, io
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -43,7 +44,7 @@ class H(BaseHTTPRequestHandler):
             if S['pending_status'] > 0: S['pending_status'] -= 1; return self.j(200, {'status': 'IN_PROGRESS'})
             return self.j(200, {'status': 'COMPLETED', **({'error': 'model failed'} if S['fail'] else {})})
         if '/requests/' in self.path:
-            rid = self.path.rsplit('/', 1)[1]
+            rid = self.path.rsplit('/', 1)[1]; S['live'] = max(0, S.get('live', 0) - 1)
             if 'wan' in self.path: return self.j(200, {'video': {'url': base + '/files/%s.mp4' % rid}, 'seed': 81, 'duration': 5})
             return self.j(200, {'images': [{'url': base + '/files/%s.png' % rid}], 'description': ''})
         if self.path.startswith('/files/'):
@@ -59,7 +60,7 @@ class H(BaseHTTPRequestHandler):
         n = int(self.headers.get('Content-Length') or 0); body = json.loads(self.rfile.read(n) or b'{}')
         if not self.auth(): return self.j(401, {'detail': 'bad key'})
         ep = self.path.strip('/'); owner_app = '/'.join(ep.split('/')[:2]); rid = 'r%d' % (len(S['sent']) + 1)
-        S['sent'].append({'ep': ep, 'body': body})
+        S['sent'].append({'ep': ep, 'body': body}); S['live'] = S.get('live', 0) + 1; S['peak'] = max(S.get('peak', 0), S['live'])
         self.j(200, {'request_id': rid, 'status': 'IN_QUEUE', 'status_url': base + '/%s/requests/%s/status' % (owner_app, rid), 'response_url': base + '/%s/requests/%s' % (owner_app, rid)})
 
 
@@ -141,6 +142,23 @@ check('W8 a failed request is reported and nothing is saved as a result', c == 2
 S['fail'] = False
 c, o = run(repo, out, 'start', '--dry-run', '--cap', '9', key='')
 check('W1 dry run with no key: says so, exit 0', c == 0 and 'key not checked' in o, o[-200:])
+
+# W9 a list of jobs at once (wanch1): three videos picked by a wildcard, a fourth by name; cap lets two through
+J = json.load(open(jf))
+for n in ('lt-a', 'lt-b', 'lt-c', 'lt-d'): J[n] = dict(J['video'], rev=1)
+json.dump(J, open(jf, 'w'))
+out9 = os.path.join(tmp, 'out9'); S['pending_status'] = 0; S['live'] = 0; S['peak'] = 0
+n0 = len(S['sent']); c, o = run(repo, out9, 'lt-*', '--cap', '1.0')
+st = json.load(open(os.path.join(out9, 'state.json')))
+made = sorted(f for f in os.listdir(out9) if f.endswith('.mp4'))
+check('W9 wildcard picks 4 jobs; the cap lets exactly 2 through and refuses the rest; ledger 1.00', len(S['sent']) == n0 + 2 and len(made) == 2 and abs(st['spent'] - 1.0) < 1e-9 and c == 3 and o.count('REFUSED') == 2, (len(S['sent']) - n0, made, st['spent'], c, o[-700:]))
+rep = json.load(open(os.path.join(out9, 'wangen-report.json')))
+check('W9 report lists every job', [r['what'] for r in rep['jobs']] == ['lt-a', 'lt-b', 'lt-c', 'lt-d'], rep)
+n0 = len(S['sent']); c, o = run(repo, out9, 'lt-c,lt-d,lt-a', '--cap', '9')
+check('W9 a comma list sends the two not made yet and skips the made one', len(S['sent']) == n0 + 2 and 'already made' in o and c == 0, o[-500:])
+check('W9 at most 3 requests waited on at once', S['peak'] <= 3, S['peak'])
+c, o = run(repo, out9, 'nope-*', '--dry-run')
+check('W9 a wildcard that matches nothing stops', c != 0 and 'no job matches' in o, o[-200:])
 
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
 print('ALL PASS' if not fails else '%d FAILED: %s' % (len(fails), ', '.join(fails)))
