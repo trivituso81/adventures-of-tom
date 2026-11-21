@@ -27111,6 +27111,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreena: the Art Library check no longer fails on gate and item pictures that carry a bake field"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreenb: sw_test fixed (the test was stale: it hard-coded data/monsters.js?v=size1, the live tag is qa-coh02; its cold-load wait widened); known_fail removed. 10 rows still marked known_fail."
     }
    ],
    "prompt": {

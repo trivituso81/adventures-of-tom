@@ -14,6 +14,9 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 SHOTS = os.path.join(HERE, 'shots'); os.makedirs(SHOTS, exist_ok=True)
 LOG = []; OVERRIDE = {}   # LOG: (path?query, status) per server response; OVERRIDE: path -> bytes (served with a fresh Last-Modified)
 
+import re
+MON_TAG = re.search(r'data/monsters\.js\?v=([A-Za-z0-9_.-]+)', open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()).group(1)   # the game's current tag, so the test never goes stale
+
 class H(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
     def send_response(self, code, message=None):
@@ -63,7 +66,7 @@ with sync_playwright() as pw:
     pg, reqs1, sw1 = load('cold', 3000)
     pg.wait_for_function('()=>navigator.serviceWorker&&navigator.serviceWorker.controller', timeout=60000)
     last, stable, t0 = -1, 0, time.time()
-    while stable < 5 and time.time() - t0 < 300:   # wait until the worker has finished saving
+    while stable < 10 and time.time() - t0 < 300:   # wait until the worker has finished saving (15 s without a new file; 7.5 s once missed 10 late prop images)
         n = len(cached(pg)); stable = stable + 1 if n == last else 0; last = n; time.sleep(1.5)
     saved = set(cached(pg))
     want = {u for u in reqs1 if not u.split('?')[0].endswith(('/', '.html')) and not u.startswith('/icon')}   # the browser fetches the home-screen icon itself, sometimes past the worker
@@ -89,9 +92,9 @@ with sync_playwright() as pw:
     pg.evaluate('()=>window.__LE.toggleLayout()')
 
     # 6. RELOAD button: fetch with cache:'reload' reaches the server, a plain fetch does not
-    LOG.clear(); pg.evaluate("()=>fetch('data/monsters.js?v=size1',{cache:'reload'}).then(r=>r.status)"); time.sleep(0.5)
-    check("6a fetch with cache:'reload' goes to the server", any(p == '/data/monsters.js?v=size1' and c == 200 for p, c in LOG), LOG[:2])
-    LOG.clear(); pg.evaluate("()=>fetch('data/monsters.js?v=size1').then(r=>r.status)"); time.sleep(0.5)
+    LOG.clear(); pg.evaluate("()=>fetch('data/monsters.js?v=%s',{cache:'reload'}).then(r=>r.status)" % MON_TAG); time.sleep(0.5)
+    check("6a fetch with cache:'reload' goes to the server", any(p == '/data/monsters.js?v=' + MON_TAG and c == 200 for p, c in LOG), LOG[:2])
+    LOG.clear(); pg.evaluate("()=>fetch('data/monsters.js?v=%s').then(r=>r.status)" % MON_TAG); time.sleep(0.5)
     check('6b plain fetch of the same file does not', not any(p.startswith('/data/monsters.js') for p, c in LOG), LOG[:2])
     pg.close()
 
@@ -113,7 +116,7 @@ with sync_playwright() as pw:
     pg.close()
 
     # 4. bumped tag: downloads fresh; the old copy is deleted later
-    OVERRIDE['/index.html'] = src('index.html').replace('data/monsters.js?v=size1', 'data/monsters.js?v=size2').encode()
+    OVERRIDE['/index.html'] = src('index.html').replace('data/monsters.js?v=' + MON_TAG, 'data/monsters.js?v=size2').encode()
     pg, reqs4, sw4 = load('bumped', 3000)
     check('4a bumped tag: the new file downloads and runs', pg.evaluate('()=>window.__swtest') == 'changed' and ('/data/monsters.js?v=size2', 200) in LOG)
     time.sleep(16)   # the worker deletes old copies at most every 15 s; the next save triggers it

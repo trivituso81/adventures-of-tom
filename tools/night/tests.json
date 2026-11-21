@@ -1294,8 +1294,7 @@
    "id": "sw_test",
    "cmd": "python3 -I tools/sw_test.py",
    "group": "g6",
-   "minutes": 2,
-   "known_fail": "checks 3 and 4a fail (claude/next.md)"
+   "minutes": 2
   },
   {
    "id": "tomhouse_test",

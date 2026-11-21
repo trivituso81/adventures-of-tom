@@ -1,3 +1,8 @@
+## nightgreenb (2026-11-21): the service worker test reads the game's live tag instead of the old ?v=size1
+
+Card c-nightgreen, test `sw_test` (checks 3 and 4a failed). The test replaced `data/monsters.js?v=size1` in a copy of index.html, but the game's tag for that file is now `qa-coh02`, so the replace matched nothing, the "bumped tag" page never asked for a new file, and 4a and 4b failed (3 passed on a rerun). The worker was right; the test was stale.
+- `tools/sw_test.py`: reads the current tag of `data/monsters.js` from index.html (`MON_TAG`) for checks 3, 4 and 6. One cold-load run missed 10 late prop images with a 7.5 s quiet window, so the wait for the worker to finish saving is now 15 s of no new file.
+- `tools/night/tests.json`: `known_fail` removed from `sw_test`. Four full runs: three clean, one flake of check 1 and 2a that the wider window removed (a fifth run clean). Nothing in the game changed.
 ## guideprompts1 (2026-11-21): every battle animation in the Battle Guide now has a prompt written for that move
 
 Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it seems generic".
