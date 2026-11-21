@@ -21303,7 +21303,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-pic: generate and approve the new unimpressed pose. Then a session rebakes his mood frames and faces and ships boppy-bigfish.",
