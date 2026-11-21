@@ -2,7 +2,7 @@
 """Test for dashboard.html (dash1, dash2: the strip under the game). Run from the repo root: python3 tools/dashboard_test.py
 Own server on 8873; screenshots in tools/shots/dashboard-*.png (look at them: 3440 x 1328 is a maximized Chrome window,
 3440 x 1440 is macOS full screen). Plan: claude/dashboard-plan.md. Docs: docs/DASHBOARD.md."""
-import os, sys, re, subprocess, time
+import os, sys, re, json, subprocess, time
 from playwright.sync_api import sync_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
@@ -30,18 +30,37 @@ def gsize(pg): return pg.evaluate("[__DASH.P[2].frame.clientWidth,__DASH.P[2].fr
 def geval(pg, code): return pg.evaluate("(c)=>__DASH.P[2].frame.contentWindow.eval(c)", code)
 def settle(pg, ms=900): pg.wait_for_timeout(ms)
 
+def real_board(): return json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8'))
+def open_jump_cards(board):
+    """The open Tom play cards that carry a jump (the same rule as the strip and the Board pane: not Done, not Waiting, not in the backlog)."""
+    return [c for c in board['cards'] if c.get('lane') == 'tom' and c.get('ask') == 'play' and c.get('col') not in ('done', 'wait') and not c.get('backlog') and c.get('jump')]
+def wait_landed(pg, j, timeout=180000):
+    """Wait until the game is at the place a jump names: the fight is on screen, or the chapter is up (and the map and flags, when named)."""
+    if 'fight' in j: cond = "typeof B3==='object'&&B3.active===true&&!!B3.F&&splash.active===false"
+    else:
+        cond = "typeof STORY==='object'&&STORY.mode==='full'&&STORY.chapter===%s&&splash.active===false&&!!__LE.map" % j['chapter']
+        if j.get('map'): cond += "&&__LE.map.id===%s" % json.dumps(j['map'])
+        for f in j.get('flags') or []: cond += "&&!!flag(%s)" % json.dumps(f)
+    pg.wait_for_function("(c)=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval(c)===true}catch(e){return false}}", arg=cond, timeout=timeout)
+    pg.wait_for_timeout(1200)
+
 def strip_geometry(pg, tag, H, errs):
     """dash2: the strip under the game, as drawn; every screen size; the layouts' columns."""
     ok(not pg.is_visible('#nb'), '%s: no newer-build bar while the game is on the newest build' % tag)
     cols = pg.evaluate("getComputedStyle(document.getElementById('sg')).gridTemplateColumns.split(' ').length")
     ok(cols == 3 and not pg.is_visible('#sc4'), '%s: All four: the strip has three columns' % tag)
     inside = lambda c, ids: pg.evaluate("(a)=>a[1].every(i=>document.getElementById('sc'+a[0]).contains(document.getElementById('s-'+i)))", [c, ids])
-    ok(inside(1, ['sizes', 'story', 'diff', 'mrow']) and inside(2, ['chap', 'fights']) and inside(3, ['keys']), '%s: sizes, story battles, difficulty, mute and report sit in column 1; chapters and fights in column 2; keyboard help in column 3' % tag)
+    ok(inside(1, ['sizes', 'story', 'diff', 'mrow']) and inside(2, ['chap', 'fights']) and inside(3, ['next', 'keys']), '%s: sizes, story battles, difficulty, mute and report sit in column 1; chapters and fights in column 2; Next for you and the keyboard help in column 3' % tag)
+    ok(pg.evaluate("document.getElementById('s-next').getBoundingClientRect().top<document.getElementById('s-keys').getBoundingClientRect().top") and 'next for you, from the board' in pg.inner_text('#s-next').lower(), '%s: Next for you sits above the keyboard help, with its heading as drawn' % tag)
+    want_n = min(3, len(open_jump_cards(real_board())))
+    ok(pg.evaluate("document.querySelectorAll('#nl .nc').length") == want_n and pg.evaluate("[...document.querySelectorAll('#nl .nc .go')].every(b=>b.textContent.trim()==='Take me there')"), '%s: Next for you lists the open play cards that have a jump, at most three (%d), each with Take me there' % (tag, want_n))
+    ok(pg.evaluate("getComputedStyle(document.getElementById('nl')).flexDirection") == 'column', '%s: All four: the Next for you cards are stacked' % tag)
     labels = pg.evaluate("[...document.querySelectorAll('#s-sizes .sb')].map(b=>b.textContent)")
     ok(labels == ['Duo folded, upright466 x 657', 'Duo folded, sideways678 x 445', 'Duo open, sideways951 x 648', 'Duo open, upright669 x 869', 'Desktop wide1600 x 900'], '%s: the five screen sizes are listed (%s)' % (tag, labels))
     ok(pg.evaluate("document.getElementById('sz-os').getAttribute('aria-pressed')") == 'true', '%s: Duo open, sideways is the one in use' % tag)
     ok(pg.evaluate("document.querySelectorAll('#s-chap .sb').length") == 21 and pg.inner_text('#ch-B') == 'BONUS', '%s: chapters 1 to 20 and BONUS' % tag)
-    ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 5 and 'Show all 27 test fights' in pg.inner_text('#ft-more'), '%s: five test fights, then Show all 27 test fights' % tag)
+    n3 = len(json.load(open(os.path.join(ROOT, 'data', 'battle-lab-index.json')))['b3'])
+    ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 5 and ('Show all %d test fights' % n3) in pg.inner_text('#ft-more'), '%s: five test fights, then Show all %d test fights' % (tag, n3))
     ok(pg.inner_text('#ft-new0') == 'NEW 1: TWO MUDLINGS', '%s: test fights carry the names from data/battle-lab-index.json' % tag)
     ok(pg.evaluate("document.querySelectorAll('#s-story .sb').length") == 3 and pg.evaluate("document.querySelectorAll('#s-diff .sb').length") == 3 and 'Keyboard.' in pg.inner_text('#s-keys'), '%s: Story battles and Difficulty have three choices each, the keyboard help is there' % tag)
     ok(box(pg, '#pane2 .strip')[1] >= box(pg, '#pane2 .gamewrap')[1] + 648, '%s: the strip sits under the game' % tag)
@@ -71,8 +90,9 @@ def strip_geometry(pg, tag, H, errs):
     ok(gsize(pg) == [1600, 900] and not ({'duo', 'tablet', 'duofold'} & set(gcls(pg))), '%s: Desktop wide: the game is 1600 x 900 with the Duo off (%s)' % (tag, gcls(pg)))
     ok('duo=0' in geval(pg, "location.search") and 'duo=1' not in geval(pg, "location.search"), '%s: Desktop wide: the game address follows to ?duo=0 (%s)' % (tag, geval(pg, "location.search")))
     cols = pg.evaluate("getComputedStyle(document.getElementById('sg')).gridTemplateColumns.split(' ').length")
-    ok(cols == 4 and pg.is_visible('#sc4') and pg.evaluate("document.getElementById('sc4').contains(document.getElementById('s-keys'))"), '%s: Battle layout: the strip has four columns, keyboard help in the last' % tag)
-    ok(inside(1, ['sizes']) and inside(2, ['story', 'diff', 'mrow', 'chap']) and inside(3, ['fights']), '%s: Battle layout: sizes, then story/difficulty/mute/chapters, then fights' % tag)
+    ok(cols == 4 and pg.is_visible('#sc4') and pg.evaluate("document.getElementById('sc4').contains(document.getElementById('s-next'))"), '%s: Battle layout: the strip has four columns, Next for you in the last' % tag)
+    ok(pg.evaluate("getComputedStyle(document.getElementById('nl')).flexDirection") == 'row', '%s: Battle layout: the Next for you cards sit side by side' % tag)
+    ok(inside(1, ['sizes', 'keys']) and inside(2, ['story', 'diff', 'mrow', 'chap']) and inside(3, ['fights']), '%s: Battle layout: sizes and the keyboard help, then story/difficulty/mute/chapters, then fights' % tag)
     ok(abs(box(pg, '#pane2 .strip')[3] - (H - 44 - 16 - 40 - 900)) <= 1 or box(pg, '#pane2 .strip')[3] >= 280, '%s: Battle layout: the strip is %d tall' % (tag, box(pg, '#pane2 .strip')[3]))
     ok(pg.evaluate("(()=>{var e=document.getElementById('sg');return e.scrollWidth<=e.clientWidth})()"), '%s: Battle layout: the strip does not scroll sideways' % tag)
     pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-battle-%d.png' % H), clip={'x': 528, 'y': 44, 'width': 1620, 'height': H - 44})
@@ -81,6 +101,69 @@ def strip_geometry(pg, tag, H, errs):
     pg.click('#lay-all'); settle(pg, 2500)
     ok(pg.evaluate("__DASH.layout()") == 'all' and pg.evaluate("__DASH.size()") == 'os' and gsize(pg) == [951, 648], '%s: back to All four: Duo open, sideways again' % tag)
     ok(not errs, '%s: no page errors in the strip tests %s' % (tag, errs[:3]))
+
+def standin_card(i, title, theme, **kw):
+    c = {'id': 't-standin-%s' % i, 'title': title, 'theme': theme, 'lane': 'tom', 'col': 'up', 'ask': 'play', 'fyi': True, 'next': 'Open the game and look at %s.' % title,
+         'created': '2026-11-21', 'changed': '2026-11-21', 'history': [{'d': '2026-11-21', 't': 'stand-in'}]}
+    c.update(kw); return c
+def take_me_there(pg, ctx, errs, board_standin):
+    """dash3: each open Tom play card of the real board lands the game on its named place; a stand-in board with three cards (a chapter with a map and a flag, a test fight, a
+    chapter), a phone card and cards that must not be listed: the strip lists three, Take me there works from the strip and from the Board pane."""
+    real = real_board(); cards = open_jump_cards(real)
+    ok(len(cards) >= 1, 'dash3: the real board has at least one open Tom play card with a jump (%s)' % [c['id'] for c in cards])
+    ok(not [c['id'] for c in real['cards'] if c.get('lane') == 'tom' and c.get('ask') == 'play' and c.get('col') not in ('done', 'wait') and not c.get('backlog') and not c.get('jump') and c.get('where') != 'phone' and c['id'] not in ('t-dash3-try', 't-dash4-try')],
+       'dash3: every open Tom play card has a jump or the mark where phone (the two dashboard cards need neither)')
+    for c in cards:
+        j = c['jump']
+        pg.evaluate("(j)=>__DASH.take(j)", j); wait_landed(pg, j)
+        if 'fight' in j:
+            names = {('new', e['i']): e['name'] for e in json.load(open(os.path.join(ROOT, 'data', 'battle-lab-index.json')))['b3']}
+            ok(names[('new', j['i'])] in pg.inner_text('#pane2 .wh') and pg.evaluate("document.getElementById('ft-new%d')?document.getElementById('ft-new%d').classList.contains('on'):true" % (j['i'], j['i'])), 'dash3: real card %s: the game is in the named test fight (%s)' % (c['id'], pg.inner_text('#pane2 .wh')))
+            party = geval(pg, "B3.F.party.map(u=>u.id).join(',')")
+            ok(c['id'] != 't-guardwinplay' or 'tom' in party.split(','), 'dash3: real card %s: Tom is in the party (%s)' % (c['id'], party))
+        else:
+            ok(geval(pg, "STORY.chapter") == j['chapter'], 'dash3: real card %s: the game is in chapter %s' % (c['id'], j['chapter']))
+            if j.get('map'): ok(geval(pg, "__LE.map.id") == j['map'], 'dash3: real card %s: the game is on map %s' % (c['id'], j['map']))
+        ok(pg.evaluate("__DASH.keys()") == 2, 'dash3: real card %s: the game has the keys' % c['id'])
+    # --- stand-in board
+    a = standin_card('a', 'Look at the observatory landing', 'Areas', jump={'chapter': 2, 'map': 'observatory', 'flags': ['dash3test']})
+    bb = standin_card('b', 'Win the pond fight', 'Battle System', jump={'fight': 'new', 'i': 2})
+    cc = standin_card('c', 'Walk chapter 3 from the start', 'Story and Dialogue', jump={'chapter': 3})
+    ph = standin_card('p', 'Feel the touch controls', 'Game Shell', where='phone')
+    d4 = standin_card('d', 'A fourth card is not listed', 'Tools', jump={'chapter': 4})
+    wt = standin_card('w', 'A waiting card is not listed', 'Tools', jump={'chapter': 5}, col='wait', waiting_on='claude')
+    bk = standin_card('k', 'A parked card is not listed', 'Tools', jump={'chapter': 6}, backlog={'at': 1, 'from': 'up'})
+    ship = {'id': 'c-standin-ship', 'title': 'Built the landing', 'theme': 'Areas', 'lane': 'claude', 'col': 'done', 'done': '2026-11-21', 'tag': 'standin-1', 'after': a['id'], 'next': 'done', 'created': '2026-11-21', 'changed': '2026-11-21', 'history': []}
+    board_standin[0] = {'version': 1, 'themes': real['themes'], 'columns': real['columns'], 'lanes': real['lanes'], 'cards': [ph, a, bb, cc, d4, wt, bk, ship], 'sessions': [], 'seen': {}, 'night': {}}
+    pg.evaluate("__DASH.reloadBoard()"); pg.wait_for_function("document.querySelectorAll('#nl .nc').length===3", timeout=20000)
+    ids = pg.evaluate("[...document.querySelectorAll('#nl .nc')].map(n=>n.getAttribute('data-id'))")
+    ok(ids == [a['id'], bb['id'], cc['id']], 'dash3: the strip lists the first three open play cards that have a jump, in board order, and skips the phone, fourth, waiting and parked cards (%s)' % ids)
+    ok('build standin-1' in pg.inner_text('#nl .nc:nth-child(1)').lower() and 'areas' in pg.inner_text('#nl .nc:nth-child(1)').lower() and 'play and report' in pg.inner_text('#nl .nc:nth-child(1)').lower(), 'dash3: a strip card shows its theme, Play and report, and the build that hands it to you')
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-next-1328.png'), clip={'x': 1008, 'y': 700, 'width': 960, 'height': 628})
+    pg.click('#nl .nc:nth-child(1) .go'); wait_landed(pg, a['jump'])
+    ok(geval(pg, "__LE.map.id") == 'observatory' and geval(pg, "!!flag('dash3test')") and geval(pg, "STORY.chapter") == 2, 'dash3: Take me there from the strip puts the game on the named map in the named chapter with its flag set (%s)' % geval(pg, "__LE.map.id"))
+    ok('observatory' in pg.inner_text('#pane2 .wh') and pg.evaluate("__DASH.keys()") == 2, 'dash3: the pane header names the place and the game has the keys')
+    pg.click('#nl .nc:nth-child(2) .go'); wait_landed(pg, bb['jump'])
+    ok('NEW 3: POND GRUMP AND MUDLING' in pg.inner_text('#pane2 .wh') and 'ON SCREEN' in pg.inner_text('#ft-new2'), 'dash3: Take me there from the strip opens the named test fight and marks it ON SCREEN')
+    pg.click('#nl .nc:nth-child(3) .go'); wait_landed(pg, cc['jump'])
+    ok(geval(pg, "STORY.chapter") == 3, 'dash3: Take me there from the strip opens the named chapter')
+    # --- the Board pane: Take me there on the card, only inside the dashboard; On your phone on the phone card
+    pg.evaluate("__DASH.P[1].frame.contentWindow.location.reload()")
+    bf = pg.frame_locator('#pane1 iframe')
+    bf.locator('.card[data-id="%s"]' % cc['id']).first.wait_for(timeout=30000)
+    ok(bf.locator('[data-act=goto]').count() == 4 and bf.locator('.card[data-id="%s"] [data-act=goto]' % ph['id']).count() == 0, 'dash3: the Board pane shows Take me there on every open play card that has a jump (4) and not on the phone card')
+    ok(bf.locator('.card[data-id="%s"] .onphone' % ph['id']).count() == 1 and 'on your phone' in bf.locator('.card[data-id="%s"] .onphone' % ph['id']).inner_text().lower(), 'dash3: the phone card shows On your phone')
+    ok(bf.locator('.card[data-id="%s"] [data-act=goto]' % wt['id']).count() == 0 and bf.locator('.card[data-id="%s"] [data-act=goto]' % bk['id']).count() == 0, 'dash3: a waiting or parked card has no Take me there')
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-board-take-1328.png'), clip={'x': 8, 'y': 44, 'width': 1000, 'height': 700})
+    bf.locator('.card[data-id="%s"] [data-act=goto]' % bb['id']).click(); wait_landed(pg, bb['jump'])
+    ok('NEW 3: POND GRUMP AND MUDLING' in pg.inner_text('#pane2 .wh') and pg.evaluate("__DASH.keys()") == 2, 'dash3: Take me there on the card in the Board pane opens the named test fight and gives the game the keys')
+    bf.locator('.card[data-id="%s"] [data-act=goto]' % a['id']).click(); wait_landed(pg, a['jump'])
+    ok(geval(pg, "__LE.map.id") == 'observatory', 'dash3: Take me there on the card in the Board pane puts the game on the named map')
+    # --- the Board on its own (not in the dashboard): On your phone shows, Take me there does not
+    solo = ctx.new_page(); solo.goto(base + 'board.html'); solo.locator('.card[data-id="%s"]' % ph['id']).first.wait_for(timeout=30000)
+    ok(solo.locator('[data-act=goto]').count() == 0 and solo.locator('.onphone').count() == 1, 'dash3: the Board on its own has no Take me there, and still shows On your phone')
+    solo.close()
+    board_standin[0] = None; pg.evaluate("__DASH.reloadBoard()")
 
 web = subprocess.Popen([sys.executable, '-m', 'http.server', str(PORT)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 time.sleep(2)
@@ -95,6 +178,11 @@ try:
                 if standin[0]: body = body.replace('const BUILD_HISTORY=[\n', 'const BUILD_HISTORY=[\n' + standin[0] + '\n', 1)
                 route.fulfill(response=r, body=body)
             ctx.route(lambda u: 'data/build-history.js?t=' in u, hist)
+            board_standin = [None]   # a stand-in data/board.json for the strip and the Board pane (both fetch data/board.json?t=)
+            def brd(route):
+                if board_standin[0] is None: route.continue_(); return
+                route.fulfill(status=200, content_type='application/json', body=json.dumps(board_standin[0]))
+            ctx.route(lambda u: 'data/board.json?t=' in u, brd)
             pg.on('pageerror', lambda e: errs.append(str(e)))
             tag = '%dpx' % H
             pg.goto(base + 'dashboard.html'); wait_loaded(pg)
@@ -302,17 +390,21 @@ try:
                 # --- new battle test fights: index.html?go=new&i=N in the game pane
                 pg.click('#ft-new1')
                 pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('typeof B3===\"object\"&&!!B3.F&&splash.active===false')===true}catch(e){return false}}", timeout=180000); settle(pg, 1500)
+                pg.wait_for_function("()=>document.querySelector('#pane2 .wh').textContent.indexOf('NEW 2: MUDLING AND SKEETER')>=0", timeout=20000)
                 ok('NEW 2: MUDLING AND SKEETER' in pg.inner_text('#pane2 .wh'), 'a test fight opens in the game pane and the header names it (%s)' % pg.inner_text('#pane2 .wh'))
                 ok(pg.evaluate("[...document.querySelectorAll('#fl .sb.ft.on')].map(b=>b.id)") == ['ft-new1'] and 'ON SCREEN' in pg.inner_text('#ft-new1'), 'the fight on screen is marked ON SCREEN, only that one')
                 ok('duo' in gcls(pg) and 'tablet' in gcls(pg) and gsize(pg) == [951, 648] and 'go=' not in geval(pg, "location.search") and 'duo=1' in geval(pg, "location.search"), 'the fight opened by go= keeps the Duo layout and its address keeps ?duo=1 (the address trap) (%s)' % geval(pg, "location.search"))
                 ok(pg.evaluate("__DASH.keys()") == 2, 'a test fight gives the game the keys')
                 pg.click('#ft-more'); settle(pg, 400)
-                ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 54 and 'old battle lab fights' in pg.inner_text('#fl').lower(), 'Show all lists the 27 new fights and the 27 old Battle Lab fights')
+                idx = json.load(open(os.path.join(ROOT, 'data', 'battle-lab-index.json')))
+                ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == len(idx['b3']) + len(idx['b2']) and 'old battle lab fights' in pg.inner_text('#fl').lower(), 'Show all lists the %d new fights and the %d old Battle Lab fights' % (len(idx['b3']), len(idx['b2'])))
                 pg.click('#ft-lab0')
-                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('splash.active===false')===true&&document.querySelector('#fl .sb.ft.on')!==null}catch(e){return document.querySelector('#fl .sb.ft.on')!==null}}", timeout=180000); settle(pg, 1500)
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow,b=document.getElementById('ft-lab0');try{return w.eval('splash.active===false')===true&&!!b&&b.classList.contains('on')}catch(e){return false}}", timeout=180000); settle(pg, 1500)
                 ok(pg.evaluate("[...document.querySelectorAll('#fl .sb.ft.on')].map(b=>b.id)") == ['ft-lab0'], 'an old Battle Lab fight opens too and is the one marked')
                 pg.click('#ft-more'); settle(pg, 300)
                 ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 5, 'Show the first five folds the list again')
+                # --- dash3: Take me there
+                take_me_there(pg, ctx, errs, board_standin)
                 # --- Report: opens the game's pencil tab; says so when the tab is off
                 pg.evaluate("localStorage.removeItem('aot-report');localStorage.removeItem('aot-gh-token')")
                 pg.click('#report'); settle(pg, 400)

@@ -1,4 +1,4 @@
-# Admin Dashboard (dash1 and dash2, 2026-11-21)
+# Admin Dashboard (dash1 to dash3, 2026-11-21)
 
 `dashboard.html` is one page made for Tom's wide monitor (3440 x 1440) in Chrome on his MacBook Pro. It shows the Board, the game, the Battle Guide and the Admin tools side by side, so he can act on a change and check it without switching pages. Plan and Tom's words: `claude/dashboard-plan.md`. Approved drawings: `claude/dashboard-mock/` (the `.html` files hold every drawn size and colour). Cards c-dash1 to c-dash4.
 
@@ -30,9 +30,29 @@ Part of `dashboard.html` itself (not a frame): it reaches into the game frame fr
 | Report | Opens the game's pencil tab (`brpOpen`) and gives the game the keys. When the Report tab is off (ADMIN > Report tab) it says so under the buttons. |
 | Jump to a chapter | 1 to 20 and BONUS (Nine Scoops). From the title screen it calls the game's own `splashGo(chapterJump(n))`, the same call as the title's chapter list; from anywhere else it first starts the game fresh (a clean state is the only safe start) and runs the same call when the title is up. A chapter the game cannot open yet (`splashBuilt`) is dimmed. The chapter the game is in has a gold ring. Part 2 chapter 11 is the test jump (as if Part 1 were done), not "from your clear data". |
 | New battle test fights | The `b3` list of `data/battle-lab-index.json`: the first five, then Show all 27 test fights, which also lists the old Battle Lab fights (`b2`) under their own heading. A click opens `index.html?go=new&i=N` (`go=lab` for an old fight) in the game pane. The fight on screen is marked ON SCREEN and named in the pane header. |
-| Keyboard help | The text from the drawing (All four: third column; Battle: fourth column, where dash3's Next for you column will sit beside it). |
+| Keyboard help | The text from the drawing (All four: third column under Next for you; Battle: first column under the screen sizes). |
 
 Which part sits in which column is the layout's `place` list; moving a part keeps its state.
+
+## Take me there (dash3)
+
+A Tom card with ask play can say where the game should be for the check. `tools/board_check.py` holds the shape; the strip and the Board act on it.
+
+| Field | Meaning |
+|---|---|
+| `jump: {chapter: N}` | N is 1 to 20 or "B" (the bonus). The game's own chapter jump, the same call as the strip's chapter buttons. |
+| `jump: {chapter: N, map: "id", flags: ["a", "b"]}` | The chapter jump, then (once the chapter is up) the game is put on that map (`__LE.go`) with those story flags set (`setFlag`). `map` is a key of the game's `worlds`; `flags` is a list of names. Not for "B". |
+| `jump: {fight: "new", i: N}` | A test fight: N is an `i` of `data/battle-lab-index.json` (b3 for new, b2 for `"lab"`). The same `index.html?go=` address as the strip's fight list, so the fight is marked ON SCREEN. |
+| `where: "phone"` | The check needs touch, sound timing or speed (the dashboard runs Chrome, the phone runs Safari). The Board shows On your phone on the card; the dashboard offers no Take me there. A card with it has no `jump`. |
+| neither | A card whose spot the game cannot open, or a check of the dashboard itself. |
+
+| Where it shows | Rule |
+|---|---|
+| Strip, Next for you | The first three open play cards (Tom's, not Done, not Waiting, not in the backlog) that carry a `jump`, in board order, each with its theme, Play and report, the build that hands it to you (the Board's own rule) and Take me there. The list is read from `data/board.json` on the site every 60 seconds. All four: column 3 above the keyboard help, cards stacked. Battle: column 4, cards side by side. With none it says "No open play card has a place to take you to." |
+| Board pane | Take me there on the card (list and details) when the Board runs inside the dashboard (`window.parent.__DASH.take`); the Board on its own never shows it. On your phone shows in both. |
+| What it does | `__DASH.take(jump)` (`takeMeThere` in `dashboard.html`): starts the game fresh the way the chapter buttons and fight list do, gives it the keys and, for a map, waits until the chapter is up before placing the game. It never reloads the game by itself. |
+
+Proof: `python3 tools/dashboard_test.py` takes the jump of every open play card of the real `data/board.json` and checks the game's chapter, map or test fight (for t-guardwinplay also that Tom is in the party), then a stand-in board with three jump cards and cards that must not be listed (phone, fourth, waiting, parked) checks the strip and the Board pane. A new jump is proven the same way before it is kept.
 
 ## Links stay home
 
@@ -83,8 +103,8 @@ Add a row to `LAYOUTS` in `dashboard.html`: `id`, `label`, `w` (four pane widths
 
 ## Tests
 
-`python3 tools/dashboard_test.py` (own server on 8873; screenshots `tools/shots/dashboard-1328.png`, `dashboard-1440.png`, `dashboard-battle-1328.png`, `dashboard-narrow.png`, and for the strip `dashboard-strip-<height>.png`, `dashboard-strip-upright-<height>.png`, `dashboard-strip-battle-<height>.png`, `dashboard-strip-bar-1328.png`, `dashboard-strip-fight-1328.png`). The strip's checks (dash2): at both heights, the drawn parts and columns, every screen size (frame size, the layout the game picks, centred, the strip below, no sideways scroll, `le-duo` untouched, the address carries `?duo=`), Desktop wide switching to the Battle layout with four strip columns; at 3440 x 1328, Story battles and Difficulty, Mute (also through a reload), the newer-build bar with a stand-in newer build (a newer housekeeping build must not raise it, the game must not reload by itself, Reload game must reload it with the size and keys kept), a chapter jump from the title and from the middle of the game, BONUS, a new test fight and an old one with the ON SCREEN mark, Show all, and Report with the tab off and on. It also checks, at 3440 x 1328 and 3440 x 1440: four panes load with no page error, every size above, no sideways scroll in the page or any pane, counts and live build, link routing (Board to Battle Guide, Admin tool in pane 4, Board link from pane 4, game link without restart, Battle Lab, `go=` trap, other site, a script that moves a pane), Change page, Reload, Make big, Open in its own tab, Ctrl 1 to 4 from the page and from inside the game, an arrow key moving the title menu, the Battle layout and that it survives a reload. `python3 tools/admin_hub_test.py` checks the new Admin button.
+`python3 tools/dashboard_test.py` (own server on 8873; screenshots `tools/shots/dashboard-1328.png`, `dashboard-1440.png`, `dashboard-battle-1328.png`, `dashboard-narrow.png`, and for the strip `dashboard-strip-<height>.png`, `dashboard-strip-upright-<height>.png`, `dashboard-strip-battle-<height>.png`, `dashboard-strip-bar-1328.png`, `dashboard-strip-fight-1328.png`). The strip's checks (dash2): at both heights, the drawn parts and columns, every screen size (frame size, the layout the game picks, centred, the strip below, no sideways scroll, `le-duo` untouched, the address carries `?duo=`), Desktop wide switching to the Battle layout with four strip columns; at 3440 x 1328, Story battles and Difficulty, Mute (also through a reload), the newer-build bar with a stand-in newer build (a newer housekeeping build must not raise it, the game must not reload by itself, Reload game must reload it with the size and keys kept), a chapter jump from the title and from the middle of the game, BONUS, a new test fight and an old one with the ON SCREEN mark, Show all, and Report with the tab off and on. It also checks, at 3440 x 1328 and 3440 x 1440: four panes load with no page error, every size above, no sideways scroll in the page or any pane, counts and live build, link routing (Board to Battle Guide, Admin tool in pane 4, Board link from pane 4, game link without restart, Battle Lab, `go=` trap, other site, a script that moves a pane), Change page, Reload, Make big, Open in its own tab, Ctrl 1 to 4 from the page and from inside the game, an arrow key moving the title menu, the Battle layout and that it survives a reload. dash3 adds: every open play card's jump from the real board lands the game (chapter, map or test fight), the stand-in board's three cards in the strip (order, build line, skipped phone, fourth, waiting and parked cards), Take me there from the strip and from the Board pane, On your phone, and the Board on its own showing no Take me there; screenshots `dashboard-next-1328.png`, `dashboard-board-take-1328.png`. `python3 tools/admin_hub_test.py` checks the new Admin button.
 
 ## Next
 
-dash3 (Next for you with Take me there, in the strip's last column), dash4 (search, Art review and Story layouts). Plan sections of the same names.
+dash4 (search, Art review and Story layouts). Plan section of the same name.

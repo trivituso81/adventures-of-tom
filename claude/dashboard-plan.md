@@ -111,7 +111,7 @@ As drawn. It replaces the Builds page under the game.
 | Jump to a chapter | 1 to 20 and BONUS, by the game's own chapter select (`chapterJump`). |
 | New battle test fights | The `b3` list of `data/battle-lab-index.json` (first five, then Show all, which also lists the old Lab's `b2` fights); a click opens `index.html?go=new&i=N` (or `go=lab`) in the game pane. The one on screen is marked. |
 | Mute game, Report | Mute silences this pane only and is not saved. Report opens the game's pencil tab (it needs the Report tab on). |
-| Next for you | Not in dash2: the third column shows the keyboard help only. dash3 adds it. |
+| Next for you | Not in dash2: the third column shows the keyboard help only. Built in dash3 (below). |
 | Test | Extend `tools/dashboard_test.py`: each size, the bar appears with a stand-in newer build, a chapter jump, a test fight, mute. `python3 tools/smoke.py` because the game changes. |
 
 ## dash3: Take me there

@@ -15285,7 +15285,8 @@
     "at": "2026-11-21T21:15:34Z",
     "verdict": "yours",
     "why": "it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
-   }
+   },
+   "where": "phone"
   },
   {
    "id": "c-fix-effectslook-2",
@@ -28007,7 +28008,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "dash3",
-   "next": "Waits on the card Admin Dashboard: the strip under the game. Then a play card can carry the place to check, and Take me there in the dashboard puts the game at that spot in one click. Every open play card gets its place, or the mark On your phone when the check needs touch, sound or speed. Then it hands you the card Try the game strip and Take me there.",
+   "next": "Shipped as dash3: a play card can carry the place to check, the strip lists the next three in Next for you with Take me there, and the Board shows it on the card inside the dashboard. You try it on the card Try the game strip and Take me there.",
    "blocks": [
     "t-dash3-try"
    ],
@@ -28045,6 +28046,14 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by the dash3 session. Tom's prompt had no notes to apply (nothing on the card beyond the prompt)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as build dash3. A Tom play card can carry jump ({chapter}, {chapter, map, flags} or {fight, i}) or where: \"phone\"; board_check.py checks the shape. The strip has Next for you (first three open play cards with a jump, Take me there each) in column 3 (All four) and column 4 (Battle, side by side); the keyboard help moved under the screen sizes in Battle. The Board shows Take me there on the card only inside the dashboard, and On your phone everywhere. Backfill: t-guardwinplay jump {fight new, i 0} (NEW 1 has Tom in the party; proven in the game), t-ch2play where phone (real voice takes and gaps between lines are sound timing), the two dashboard cards need neither; six parked backlog play cards were not touched. tools/dashboard_test.py and tools/board_check.py pass; the test also took data/battle-lab-index.json's now 66 fights instead of 27. Rule added to the board section of CLAUDE.md (claude/handoff-rules.md untouched)."
     }
    ]
   },
@@ -28056,15 +28065,17 @@
    "col": "wait",
    "waiting_on": "claude",
    "ask": "play",
-   "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and press Take me there on one play card. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
+   "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and in Next for you press Take me there on the card Win a fight while Tom is guarding and check he celebrates. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
    "steps": [
     "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html).",
     "Under the game, look at the gold bar at the top of the strip. It stays hidden while the game is the newest build. When a newer build is live it says so and shows Reload game; the game never reloads by itself. Press Reload game only if the bar appears.",
     "Press each of the five Screen sizes once (four Duo poses and Desktop wide): the game should change to that size and stay playable. Desktop wide switches the dashboard to the Battle layout. Go back to Duo open, sideways.",
-    "Press chapter 1 under Jump to a chapter (from the title it opens at once, from mid-game it restarts the game at that chapter), then one of the New battle test fights. The game should open each one, and ON SCREEN under the strip should name it.",
-    "Try Story battles (Old, Chapter, New) and Difficulty. Try Mute game: it silences only the game pane, not your computer, and it is not saved. Sound in the game needs one click inside the game first.",
+    "Press chapter 1 under Jump to a chapter (from the title it opens at once, from mid-game it restarts the game at that chapter), then one of the New battle test fights. The game should open each one, and ON SCREEN next to the fight should name it.",
+    "Try Story battles (Old, By chapter, New) and Difficulty. Try Mute game: it silences only the game pane, not your computer, and it is not saved. Sound in the game needs one click inside the game first.",
     "Turn on the Report tab in the game, then press Report in the strip: it should open the pencil report. With the tab off, the button says so.",
-    "When the card Next for you has shipped, press Take me there on one play card: the game should be at the place that card asks you to check.",
+    "In the third column of the strip, find Next for you, from the board. It lists up to three open play cards that have a place to check. Press Take me there on Win a fight while Tom is guarding and check he celebrates: the game should open the test fight NEW 1: TWO MUDLINGS with Tom in the party, the fight marked ON SCREEN and the game pane holding the gold frame. If that card is no longer listed (you already finished it), the column says no open play card has a place to take you to; skip this step.",
+    "In the Board pane (pane 1), open For you, Play and report: the same card has its own Take me there button, and pressing it does the same. The card Play chapter 2 on your phone and report shows On your phone instead, because it needs sound timing: the dashboard offers no Take me there for it.",
+    "Switch Layout to Battle: Next for you moves to the fourth column of the strip and its cards sit side by side; the keyboard help is under the screen sizes. Switch back to All four.",
     "Press All good, or Something is wrong and say which control and what you saw."
    ],
    "blocks": [
@@ -28080,6 +28091,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Steps rewritten by the dash3 session to match what dash2 and dash3 built: the strip, Next for you and Take me there on the card and in the Board pane, On your phone."
     }
    ],
    "first": "Waits on the card Take me there: a play card opens the game at its spot.",
@@ -29620,6 +29635,10 @@
     "at": "2026-11-22T00:00:00Z",
     "verdict": "yours",
     "why": "it is whether the victory celebration looks right after a guard (a pose and animation), which a test browser cannot judge"
+   },
+   "jump": {
+    "fight": "new",
+    "i": 0
    }
   },
   {

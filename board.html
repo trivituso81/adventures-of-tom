@@ -63,6 +63,9 @@ code.path{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);bor
 .card .state{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .state a{font-weight:700}
 .card .state.quiet{color:var(--prob-text);font-weight:600}
+.jmp{margin-top:8px}
+.jmp button{min-height:36px}
+.onphone{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
 .bld{margin-top:7px;display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden}
 .bld a.bpill{flex:0 1 auto;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;padding:4px 12px;border:1px solid;border-radius:14px;font:700 14px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.3px;text-transform:none;text-decoration:none}
 .bld a.bpill:active{opacity:.7}
@@ -427,6 +430,15 @@ function linkList(c){
   return out;
 }
 const linksHtml=c=>{const l=linkList(c);return l.length?'<div class="links">'+l.map(x=>'<a class="lnk" href="'+esc(x.href)+'">Open in the '+LIBNAME[x.to]+(x.label?': '+esc(x.label):'')+'</a>').join('')+'</div>':'';};
+// dash3 (docs/DASHBOARD.md "Take me there"): a Tom play card with `where: "phone"` shows On your phone (the check needs touch, sound timing or speed);
+// one with a `jump` shows Take me there, but only when this page runs inside the Admin Dashboard, whose game pane it puts at the spot.
+const inDash=()=>{try{return window.parent!==window&&!!window.parent.__DASH&&typeof window.parent.__DASH.take==='function';}catch(e){return false;}};
+const jumpHtml=c=>{
+  if(!c||c.lane!=='tom'||c.ask!=='play'||c.col==='done'||c.col==='wait'||c.backlog)return '';
+  if(c.where==='phone')return '<div class="jmp"><span class="onphone">On your phone</span></div>';
+  if(c.jump&&inDash())return '<div class="jmp"><button class="ob small" type="button" data-act="goto" data-id="'+esc(c.id)+'">Take me there</button></div>';
+  return '';
+};
 // ---- boardux2 (plan 3.4): the card. Kicker (theme dot, theme, and for Tom's cards the ask), title, what to do (Tom: the instruction, with any
 // precondition on its own "First:" line; Claude: what it builds), at most one state line, at most one solid button.
 const reEsc=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -493,7 +505,7 @@ function cardHtml(c,ctx){
   const first=c.lane==='tom'&&c.first&&c.col!=='done'?'<div class="first">First: '+withPaths(c.first)+'</div>':'';
   const tom=c.lane==='tom';
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'">'+kickHtml(c)+'<div class="t">'+esc(dispTitle(c))+dot+'</div>'+buildHtml(c)+first
-    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
+    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c)+jumpHtml(c):'')+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
 }
 // On a card in the list: All good is an outline button (it is undone for 8 seconds), Something is wrong a text button, one row that never wraps.
 const rvBtns=id=>'<div class="rvrow"><button class="ob" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
@@ -755,7 +767,7 @@ function openSheet(id){
     const where=(String(c.next||'').match(PATHRE)||[])[0];   // the screen to go to, on its own line above the instruction
     body+='<h4>What to do</h4>'+(c.first&&open_?'<p class="first">First: '+withPaths(c.first)+'</p>':'')+(where&&open_?'<p class="where"><code class="path">'+esc(where)+'</code></p>':'');
     body+=(c.steps||[]).length?'<p>'+withPaths(c.next)+'</p><ol class="todo">'+c.steps.map(x=>'<li>'+withPaths(x)+'</li>').join('')+'</ol>':todoHtml(c.next);
-    body+=linksHtml(c)+picsHtml(c,false)+voicesHtml(c,false);
+    body+=linksHtml(c)+jumpHtml(c)+picsHtml(c,false)+voicesHtml(c,false);
     if(c.paste) body+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
     if(isReview(c)&&c.col!=='wait') body+='<p class="hint" style="margin-top:10px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
   }else{
@@ -1146,6 +1158,7 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='restart'){restartCard(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='goto'){const c=cardById(act.dataset.id);if(c&&c.jump&&inDash())window.parent.__DASH.take(c.jump);e.stopPropagation();return;}
   if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='gen'){genTap(act.dataset.id,act.dataset.mode);e.stopPropagation();return;}
   if(act&&act.dataset.act==='vgen'){vgenTap(act.dataset.id);e.stopPropagation();return;}

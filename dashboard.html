@@ -89,6 +89,17 @@ button{font:inherit;color:inherit;cursor:pointer}
 .sb.ft .on{font-size:11px;font-weight:800;letter-spacing:.05em;color:#241b00;background:#ffd34d;border-radius:6px;padding:2px 7px}
 .lk{height:36px;padding:0;border:0;background:none;color:#f4f1ff;font-size:13px;font-weight:600;text-decoration:underline;text-align:left}
 .sh{margin:6px 0 2px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6}
+.nl{display:flex;flex-direction:column;gap:8px}
+.nl.row8{flex-direction:row}
+.nc{flex:1 1 0;min-width:0;background:#211d47;border:1px solid #2c2852;border-radius:12px;padding:10px 12px}
+.nc .k{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6}
+.nc .k i{width:9px;height:9px;border-radius:50%;flex:none}
+.nc .t{font-size:15px;font-weight:700;line-height:1.3;margin-top:4px;color:#f4f1ff}
+.nc .bd{font-size:12px;color:#a9a3d6;margin-top:4px}
+.nc .go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:36px;margin-top:8px;border-radius:10px;border:0;background:#3a3566;color:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.nc .go:hover{background:#4a4480}
+.nc .go svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.nn{font-size:13px;line-height:1.45;color:#a9a3d6}
 .kh{font-size:13px;line-height:1.45;color:#a9a3d6}
 .kh b{color:#f4f1ff}
 .note{font-size:12px;color:#f2b134;margin-top:6px;min-height:0}
@@ -136,9 +147,9 @@ var SIZES=[
 ];
 var LAYOUTS=[
  {id:'all',label:'All four',w:[1000,951,829,620],size:'os',p4:{page:'admin.html',name:'Admin'},
-  cols:'290px 310px minmax(0,1fr)',place:[['sizes','story','diff','mrow'],['chap','fights'],['keys']]},
+  cols:'290px 310px minmax(0,1fr)',place:[['sizes','story','diff','mrow'],['chap','fights'],['next','keys']]},
  {id:'battle',label:'Battle',w:[520,1600,860,420],size:'dw',p4:{page:'builds.html',name:'Builds'},
-  cols:'300px 330px 330px minmax(0,1fr)',place:[['sizes'],['story','diff','mrow','chap'],['fights'],['keys']]}
+  cols:'300px 330px 330px minmax(0,1fr)',nextRow:true,place:[['sizes','keys'],['story','diff','mrow','chap'],['fights'],['next']]}
 ];
 var LS_LAYOUT='aot-dash-layout',LS_TOKEN='aot-gh-token';
 var APP_TITLE=': The Adventures of Tom';
@@ -241,7 +252,7 @@ function build(){
   setTimeout(function(){var a=document.activeElement;for(var k in P)if(P[k].frame===a)markKeys(+k);},0);
  });
  setInterval(poll,500);poll();
- liveBuild();setInterval(liveBuild,60000);
+ liveBuild();setInterval(liveBuild,60000);loadBoard();setInterval(loadBoard,60000);
  window.addEventListener('storage',tokenState);
 }
 // Ctrl 1 to 4 must work from inside a frame. The game's title screen stops every key at the window (engine/splash.js, capture phase),
@@ -499,16 +510,78 @@ function gameReady(f){   // wait for the title screen of the game that is loadin
   else if(Date.now()-t0>120000)clearInterval(iv);
  },100);
 }
-function jumpChapter(n){
+function jumpChapter(n,then){
  var run=function(){
   gEval(n==='B'?"splashGo(typeof beginBonus==='function'?beginBonus:beginOpening)":"splashGo(function(){chapterJump("+n+")})");
   what={text:n==='B'?'Bonus: Nine Scoops':'Chapter '+n,ch:n};setKeys(2);stripState();head(2);
+  if(then)afterChapter(n,then);
  };
  if(gameAtTitle()){run();return;}
  pendingReady=run;gameNav('index.html',null);
 }
 function startFight(kind,i,name){
  gameNav('index.html?go='+kind+'&i='+i,{text:name,fight:kind+i});
+}
+// ---- dash3: Take me there. A play card's `jump` (docs/DASHBOARD.md "Take me there", checked by tools/board_check.py) is one of
+//   {chapter:N}                       the game's own chapter jump (N 1 to 20, or "B" for the bonus), as the strip's chapter buttons do
+//   {chapter:N, map:'id', flags:[..]} the same, then the game is put on that map (`__LE.go`) with those story flags set (`setFlag`)
+//   {fight:'new'|'lab', i:N}          a test fight of data/battle-lab-index.json (b3 for new, b2 for lab), as the strip's fight list does
+function afterChapter(n,then){   // wait until the chapter is up (the title is gone and the game has a map), then place the game
+ var t0=Date.now(),iv=setInterval(function(){
+  var up=gEval("typeof STORY==='object'&&STORY.mode==='full'&&STORY.chapter==="+n+"&&!splash.active&&!!__LE.map");
+  if(up===true){
+   clearInterval(iv);
+   setTimeout(function(){
+    var code='';
+    if(then.map)code+="__LE.go("+JSON.stringify(String(then.map))+");";
+    (then.flags||[]).forEach(function(f){code+="setFlag("+JSON.stringify(String(f))+");";});
+    gEval(code);
+    what={text:'Chapter '+n+(then.map?', '+then.map:''),ch:n};stripState();head(2);
+   },700);
+  }else if(Date.now()-t0>60000)clearInterval(iv);
+ },200);
+}
+function takeMeThere(j){
+ if(!j||typeof j!=='object')return false;
+ if(j.fight){
+  var kind=j.fight==='lab'?'lab':'new',list=(kind==='lab'?(labIndex&&labIndex.b2):(labIndex&&labIndex.b3))||[],e=list.filter(function(x){return x.i===j.i;})[0];
+  startFight(kind,j.i,e?e.name:'Test fight '+j.i);return true;
+ }
+ if(j.chapter!=null){jumpChapter(j.chapter,(j.map||(j.flags&&j.flags.length))?j:null);return true;}
+ return false;
+}
+// Next for you: the first three open play cards of the board's For you list that carry a `jump` (data/board.json, read from the site)
+var BOARD=null,THEME_COL={'Voice Clips':'#ff9bd1','Battle Animations':'#ffb86b','Battle System':'#ff8b97','Areas':'#7be0a6','Characters':'#ffe27a','Story and Dialogue':'#a89dff','Game Shell':'#7fd4ff','Tools':'#c9a5ff','Project Ops':'#b6c2d9'};
+function nextCards(){
+ if(!BOARD)return [];
+ return (BOARD.cards||[]).filter(function(c){return c.lane==='tom'&&c.ask==='play'&&c.col!=='done'&&c.col!=='wait'&&!c.backlog&&c.jump&&typeof c.jump==='object';}).slice(0,3);
+}
+function buildOfCard(c){   // the same rule as board.html buildOf: the newest shipped Claude card that hands this card to Tom, else the card's own build
+ var cs=BOARD.cards||[],mk=cs.filter(function(x){return x.after===c.id&&x.tag&&x.lane==='claude';});
+ var sh=mk.filter(function(x){return x.col==='done';}).sort(function(a,b){return String(a.done||'').localeCompare(String(b.done||''));});
+ if(sh.length)return sh[sh.length-1].tag;
+ if(c.build)return c.build;
+ return mk.length?mk[mk.length-1].tag:'';
+}
+function renderNext(){
+ var nl=$('nl');if(!nl)return;
+ nl.className='nl'+(cur.nextRow?' row8':'');nl.innerHTML='';
+ var list=nextCards();
+ if(!BOARD){nl.appendChild(el('div','nn')).textContent='Reading the board...';return;}
+ if(!list.length){nl.appendChild(el('div','nn')).textContent='No open play card has a place to take you to.';return;}
+ list.forEach(function(c){
+  var d=el('div','nc');d.setAttribute('data-id',c.id);
+  var k=el('div','k','<i></i><span></span>');k.firstChild.style.background=THEME_COL[c.theme]||'#ccc';k.lastChild.textContent=c.theme+' \u00b7 Play and report';
+  var t=el('div','t');t.textContent=c.title;
+  d.appendChild(k);d.appendChild(t);
+  var b=buildOfCard(c);if(b){var bd=el('div','bd');bd.textContent='Build '+b;d.appendChild(bd);}
+  var g=el('button','go','Take me there <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>');g.type='button';
+  g.onclick=function(){takeMeThere(c.jump);};
+  d.appendChild(g);nl.appendChild(d);
+ });
+}
+function loadBoard(){
+ fetch('data/board.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){BOARD=j;renderNext();}).catch(function(){});
 }
 function reloadGame(){
  what=null;
@@ -568,6 +641,7 @@ function buildStrip(root){
  s5.appendChild(g5);
  // test fights
  var s6=sec('fights','New battle test fights');s6.appendChild(el('div','col')).id='fl';
+ var s8=sec('next','Next for you, from the board');s8.appendChild(el('div','nl')).id='nl';
  var s7=sec('keys');
  s7.appendChild(el('div','kh','<b>Keyboard.</b> Ctrl 1 to 4 moves the keys to a pane; the pane with the gold frame has them. Arrows or WASD, Enter, M and L play the game while its frame is gold. A controller plays the game as well.'));
  fetch('data/battle-lab-index.json?t='+Date.now()).then(function(r){return r.json();}).then(function(j){labIndex=j;renderFights();}).catch(function(){$('fl').textContent='Could not read the list of test fights.';});
@@ -580,6 +654,7 @@ function placeStrip(){
   d.style.display=ids.length?'':'none';
   ids.forEach(function(id){d.appendChild(SEC[id]);});
  }
+ renderNext();
 }
 function renderFights(){
  if(!labIndex)return;
@@ -671,7 +746,7 @@ function stripState(){
 // ---- start
 function start(){if(innerWidth>=3000)build();}
 window.addEventListener('resize',start);
-window.__DASH={P:P,setKeys:setKeys,setLayout:setLayout,setSize:setSize,keys:function(){return keys;},layout:function(){return cur.id;},size:function(){return curSize.id;},big:function(){return bigN;},strip:function(){return strip;},live:function(){return BH;},muted:function(){return muted;}};
+window.__DASH={P:P,setKeys:setKeys,setLayout:setLayout,setSize:setSize,keys:function(){return keys;},layout:function(){return cur.id;},size:function(){return curSize.id;},big:function(){return bigN;},strip:function(){return strip;},live:function(){return BH;},muted:function(){return muted;},take:takeMeThere,next:nextCards,reloadBoard:loadBoard,setBoard:function(b){BOARD=b;renderNext();}};
 start();
 </script>
 </body>

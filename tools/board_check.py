@@ -12,6 +12,9 @@ boardux2 (plan claude/boardux-plan.md 3.7): a new or changed open card's title i
 looks like a build name: it has a digit or a hyphen, or it is written in brackets); an open Tom card's next step does not start with "After": that
 precondition goes in the optional field `first` and `next` starts with the action. "New or changed" (the title, or the next step) is judged against origin/main when the file checked
 is the repo's data/board.json and git can read origin/main; otherwise every open card is checked.
+dash3 (docs/DASHBOARD.md "Take me there"): `jump` and `where` are only for a Tom card with ask play. `where` is "phone" (a check that needs touch, sound timing or speed;
+the board shows On your phone and the dashboard offers no Take me there), and a card with it has no `jump`. `jump` is {chapter: 1 to 20 or "B", map?: a map id (the dashboard test proves it opens),
+flags?: [story flag names]} or {fight: "new"|"lab", i: an `i` of data/battle-lab-index.json (b3 for new, b2 for lab)}; exactly one of chapter or fight, and map and flags only with chapter.
 Run: python3 tools/board_check.py [path]
      python3 tools/board_check.py --push <tag> [path]   the build being pushed must be on a card (tag equal, a part of it, or named in a history line)"""
 import json, os, re, sys
@@ -142,6 +145,37 @@ if ARTP:
         pics += [i for l in c.get('links') or [] if isinstance(l, dict) and l.get('to') == 'art' and isinstance(l.get('ids'), list) for i in l['ids'] if i not in pics]
         if pics and all(ART_ST.get(i) == 'approved' for i in pics):
             bad.append('%s: asks for pictures that are already in the game (%s approved in the Art Library); close it or point it at entries still to make' % (c.get('id'), ', '.join(pics)))
+# dash3: the shape of `jump` and `where` on a Tom play card
+def _lab_index():
+    for p in (os.path.join(os.path.dirname(os.path.abspath(path)), 'battle-lab-index.json'), os.path.join(HERE, '..', 'data', 'battle-lab-index.json')):
+        if os.path.exists(p): return json.load(open(p, encoding='utf-8'))
+    return {}
+LAB = _lab_index()
+for c in d['cards']:
+    n = c.get('id')
+    if 'jump' not in c and 'where' not in c: continue
+    if not (c.get('lane') == 'tom' and c.get('ask') == 'play'): bad.append('%s: `jump` and `where` are only for a Tom card with ask play' % n); continue
+    if 'where' in c:
+        if c['where'] != 'phone': bad.append('%s: where is "phone" or absent' % n)
+        if 'jump' in c: bad.append('%s: a card marked where "phone" has no jump (the dashboard offers no Take me there for it)' % n)
+    j = c.get('jump')
+    if 'jump' not in c: continue
+    if not isinstance(j, dict): bad.append('%s: jump is an object like {"chapter": 2} or {"fight": "new", "i": 0}' % n); continue
+    extra = set(j) - {'chapter', 'map', 'flags', 'fight', 'i'}
+    if extra: bad.append('%s: jump has unknown keys %s' % (n, sorted(extra))); continue
+    if ('chapter' in j) == ('fight' in j): bad.append('%s: jump has exactly one of chapter or fight' % n); continue
+    if 'chapter' in j:
+        ch = j['chapter']
+        if not ((isinstance(ch, int) and not isinstance(ch, bool) and 1 <= ch <= 20) or ch == 'B'): bad.append('%s: jump chapter is 1 to 20 or "B"' % n)
+        if 'i' in j: bad.append('%s: jump i goes with fight, not chapter' % n)
+        if 'map' in j and not (isinstance(j['map'], str) and re.fullmatch(r'[a-z0-9_-]+', j['map'])): bad.append('%s: jump map is a map id such as "observatory" (tools/dashboard_test.py takes every card\'s jump in the real game and fails on a map the game does not have)' % n)
+        if 'flags' in j and not (isinstance(j['flags'], list) and j['flags'] and all(isinstance(x, str) and x for x in j['flags'])): bad.append('%s: jump flags is a non-empty list of story flag names' % n)
+        if ch == 'B' and ('map' in j or 'flags' in j): bad.append('%s: the bonus jump takes no map or flags' % n)
+    else:
+        if j['fight'] not in ('new', 'lab'): bad.append('%s: jump fight is "new" or "lab"' % n)
+        elif not (isinstance(j.get('i'), int) and not isinstance(j.get('i'), bool) and j['i'] in {e.get('i') for e in LAB.get('b3' if j['fight'] == 'new' else 'b2', [])}):
+            bad.append('%s: jump i %r is not a test fight of data/battle-lab-index.json (%s)' % (n, j.get('i'), 'b3' if j['fight'] == 'new' else 'b2'))
+        if 'map' in j or 'flags' in j: bad.append('%s: map and flags go with chapter, not fight' % n)
 if push_tag:
     def on_card(c):
         t = c.get('tag')
