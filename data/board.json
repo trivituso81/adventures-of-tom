@@ -19126,6 +19126,43 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-bigboard1",
+   "title": "Fix: board saves fail once board.json passes 1 MB",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "bigboard1",
+   "next": "Applies the written fix from claude/next-addendum-bigboard1.md to board.html (read big files by blob id), gives every other page that reads a repo file through the contents API the same fallback, archives Done cards older than 7 days to data/board-archive.json, runs every board test and pushes build bigboard1.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: the board fails every save with JSON.parse: unexpected end of data at line 1 column 1. Cause: data/board.json passed GitHub's 1 MB contents-API limit (1,053,363 bytes, 452 cards), so the API returns empty content.",
+     "at": "2026-11-21T01:48:41.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card (board: start c-bigboard1)."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes board saves that fail because data/board.json is over GitHub's 1 MB contents-API limit, and keeps the board small afterwards.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix across several files)",
+    "effort": "medium (the fix is written in the doc; the rest is a grep and an archive script with tests)",
+    "text": "Read claude/next-addendum-bigboard1.md and claude/handoff-rules.md, then apply the board.html fix exactly as written there, give every other page that reads a repo file through the contents API the blob fallback, archive Done cards older than 7 days to data/board-archive.json without breaking tools/board_sync.py, board_check.py or bump_tags.py, run every board test in tools/, and push build bigboard1 with a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo). Board card c-bigboard1. Read its history first: my notes and answers are there. Your first push is the commit board: start c-bigboard1 (it moves this card to In progress and links your conversation)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
+    "opening": "\"The board (ADMIN > BOARD) fails every save with\""
+   },
+   "started_at": "2026-11-21T01:48:41+00:00"
   }
  ],
  "sessions": [
