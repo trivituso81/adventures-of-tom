@@ -25993,7 +25993,7 @@
    "title": "Watch Grace, Crunchy Sugar-Cube Pop",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Crunchy Sugar-Cube Pop, then tap All good or Something is wrong (say what you saw).",
@@ -26014,8 +26014,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-grace-cubepop-tvik. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:49:59.869Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "svc-voice-gen",
