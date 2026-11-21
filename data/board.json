@@ -31110,6 +31110,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDNW2RnjgvVnihPBGN",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T14:56:38-08:00",
+   "last": "2026-11-21T14:56:38-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "first": "2026-11-21T14:55:50Z",
@@ -35019,8 +35029,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "53c6216179047468502030caab00592edec50b64",
- "synced_at": "2026-11-21T22:55:40+00:00",
+ "synced": "1bbcec2f962da60944803d961c300b3348eecfda",
+ "synced_at": "2026-11-21T22:57:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
