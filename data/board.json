@@ -24966,6 +24966,29 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "b-board-guideplanned",
+   "tag": "board-guideplanned",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle System",
+   "title": "the Battle Guide's next card now shows everything planned but not built, marked PLANNED",
+   "next": "Done: the Battle Guide's next card now shows everything planned but not built, marked PLANNED",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guideplanned. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -25059,6 +25082,37 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T09:18:43-08:00",
+   "last": "2026-11-21T09:23:16-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3",
+    "c-anim-deedee-ko-yes1",
+    "c-anim-deedee-give-yy1o",
+    "c-anim-deedee-windex-z9p8",
+    "c-anim-deedee-scrub-1irj"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "first": "2026-11-21T07:31:48-08:00",
+   "last": "2026-11-21T09:22:55-08:00",
+   "tags": [
+    "battleguide1",
+    "board-guidevibe3",
+    "board-guideplanned"
+   ],
+   "cards": [
+    "c-battleguide",
+    "c-battleguide2",
+    "b-board-guidevibe3",
+    "b-board-guideplanned"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
@@ -25070,35 +25124,6 @@
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
-   "title": "Battle Guide page for the Duo, with animation notes",
-   "first": "2026-11-21T07:31:48-08:00",
-   "last": "2026-11-21T09:20:33-08:00",
-   "tags": [
-    "battleguide1",
-    "board-guidevibe3"
-   ],
-   "cards": [
-    "c-battleguide",
-    "c-battleguide2",
-    "b-board-guidevibe3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T09:18:43-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3",
-    "c-anim-deedee-ko-yes1",
-    "c-anim-deedee-give-yy1o",
-    "c-anim-deedee-windex-z9p8",
-    "c-anim-deedee-scrub-1irj"
    ]
   },
   {
@@ -28463,8 +28488,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "138898ea758008f6c7634c279d0d803a6d610d7e",
- "synced_at": "2026-11-21T17:22:03+00:00",
+ "synced": "1b1123c168cf276754ba5d64cfed04125f7ad22d",
+ "synced_at": "2026-11-21T17:23:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
