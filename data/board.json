@@ -26703,6 +26703,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as guidestatus1: the Battle Guide list shows where each new video is: Requested, In line, Making, Checking, Ready to review"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "guidestatus1-restore: put back three CHANGES entries and the Grace squeeze v3 purge that the guidestatus1 push undid by mistake."
     }
    ],
    "after": "nothing for Tom: end",

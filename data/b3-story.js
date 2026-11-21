@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9],
+  chapters:[1,2,3,4,5,6,7],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -150,46 +150,6 @@ const B3_STORY={
       {id:'page',who:'*',text:'Turn Back the Page is charging (!!): it throws one person far back on the turn bar. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Turn Back/.test(f.charge.name||''))},
       {id:'ribbon',who:'*',text:'Bookmark Ribbon: it takes 25% less damage and heals a little for 2 turns. Strip the guard, or save your big hits for after it fades.',when:(F)=>F.foes.some(f=>f.st&&f.st.bookmark_guard)},
       {id:'end',who:'*',text:'THE END is charging (!!): it hits everyone, slows them, and pushes back anyone without a shield. Shield the whole family.',when:(F)=>F.foes.some(f=>f.charge&&/THE END/.test(f.charge.name||''))}
-    ],
-    // ---- Chapter 8 (stage 18): Tom, TNB and Nara at the Car Barn. ----
-    ch8blanket:[
-      {id:'blanket',who:'*',text:'The Wet Blanket can’t stand Sizzle or Clobber and shrugs off Drench. The Lukewarm beside it can’t stand Sizzle or Razzle and shrugs off Drench too, so skip Drench here.'},
-      {id:'dampen',who:'*',text:'Dampen Spirits is charging (!!): it tires and drenches everyone. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='wetblanket')},
-      {id:'bother',who:'*',text:'Why Bother? cuts a person’s Attack by 20% for 2 turns. Shield them, or knock out the Wet Blanket to stop more.',when:(F)=>F.party.some(p=>p.st&&p.st.why_bother)}
-    ],
-    ch8draft:[
-      {id:'draft',who:'*',text:'The Draft hides in the Back row behind Crosswind, so it is harder to hit. It can’t stand Sizzle or Razzle and shrugs off Racket. The Leftover in front can’t stand Sizzle or Clobber.'},
-      {id:'gust',who:'*',text:'Pilot-Light Gust strips a shield or a buff off one person. Knock out the Draft before you spend turns setting up shields.'}
-    ],
-    ch8picky:[
-      {id:'elite',who:'*',text:'The Picky Eater is an Elite: 4 Composure pips, and it can’t stand Racket or Drench. It shrugs off Clobber. Its Tin Lid takes 25% off every hit while it is up.'},
-      {id:'push',who:'*',text:'Push It Away is charging (!!): it takes a Pep, tires one person and shoves them back on the turn bar. Interrupt it, or shield them.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='pickyeater')}
-    ],
-    ironbelly:[
-      {id:'peeve',who:'*',text:'Old Ironbelly has 7 Composure pips and can’t stand Drench. It shrugs off Sizzle, so a Drench Skill hurts it most and Sizzle is wasted.'},
-      {id:'steam',who:'*',text:'BROIL and Full Furnace leave Old Ironbelly Toasty too. Hit it with Drench while it burns to set off Steam Cloud!, which breaks 2 Composure pips at once.',when:(F)=>F.foes.some(f=>f.id==='ironbelly'&&f.st&&f.st.toasty)},
-      {id:'broil',who:'*',text:'BROIL is charging (!!): it hits everyone and sets them Toasty. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/BROIL/.test(f.charge.name||''))},
-      {id:'furnace',who:'*',text:'Full Furnace is charging (!!): it hits everyone, sets them Toasty and adds 20% Attack for 2 turns. Shield the family, and save a Drench for after.',when:(F)=>F.foes.some(f=>f.charge&&/Furnace/.test(f.charge.name||''))}
-    ],
-    // ---- Chapter 9 (stage 18): Tom, Grace, Rose and Deedee at the Moon Club. ----
-    ch9coat:[
-      {id:'coat',who:'*',text:'The Hanger-On can’t stand Clobber or Drench and shrugs off Sizzle. The Velvet Rope beside it can’t stand Clobber or Racket. Clobber hits both where it hurts.'},
-      {id:'hang',who:'*',text:'Hang On Tight is charging (!!): it hits everyone and slows them. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='coathanger')}
-    ],
-    ch9cards:[
-      {id:'cards',who:'*',text:'The Stuffed Shirt can’t stand Racket or Drench and shrugs off Razzle. The Sore Loser in the Back row can’t stand Sizzle or Razzle and shrugs off Racket.'},
-      {id:'gauche',who:'*',text:'How Gauche! is charging (!!) and hits everyone. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='stuffedshirt')},
-      {id:'cheater',who:'*',text:'Cheater! makes a person the only target their foes can pick for a turn. Shield them, or heal them before the next hit.',when:(F)=>F.party.some(p=>p.st&&p.st.cheater)}
-    ],
-    ch9ball:[
-      {id:'elite',who:'*',text:'The Wallflower is an Elite: 4 Composure pips, and it can’t stand Razzle or Sizzle. It shrugs off Clobber. It starts hugging the wall, so early hits miss more often.'},
-      {id:'petal',who:'*',text:'Petal Storm is charging (!!): it hits everyone and leaves them Dazzled, so crits land harder on them. Break its pips to stop it, or shield the family.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='wallflower')}
-    ],
-    mirrorball:[
-      {id:'peeve',who:'*',text:'The Mirrorball has 7 Composure pips and can’t stand Racket or Clobber. It shrugs off Razzle. Its Facet Spin makes it harder to hit for 2 turns.'},
-      {id:'dazzled',who:'*',text:'Facet Dazzle and Spotlight Solo leave her Dazzled. Hit her with Clobber then to set off Shatter Glitz!, or Racket for Sensory Overload!',when:(F)=>F.foes.some(f=>f.id==='mirrorball'&&f.st&&f.st.dazzled)},
-      {id:'solo',who:'*',text:'Spotlight Solo is charging (!!): it hits one person hard. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Spotlight/.test(f.charge.name||''))},
-      {id:'dance',who:'*',text:'LAST DANCE is charging (!!): it hits the whole family. Shield everyone, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/LAST DANCE/.test(f.charge.name||''))}
     ]
   }
 };

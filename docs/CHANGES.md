@@ -1,20 +1,6 @@
-## board-dashboard (2026-11-21): seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved
+## guidestatus1-restore (2026-11-21): housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake
 
-Tom (10:56): "design a view for my extra wide monitor (3440x1440) when im using chrome... view the battle guide, admin panel, kanban board, and maybe even the game all at the same time". He saw two to-scale drawings and said (11:19): "ok looks good, create the kanban cards we need ot execute this properly".
-
-| Card | What |
-|---|---|
-| c-dash1 (Up next) | `dashboard.html`: four panes, the All four and Battle layouts, pane buttons, the keyboard frame, links that open in the pane that owns the page. Sonnet 5.5, high. |
-| t-dash1-try | Tom tries it on the monitor and pastes the GitHub token once in Chrome on the Mac. Blocks c-dash2. |
-| c-dash2 | The strip under the game: newer build bar with Reload game, screen sizes, jumps, Story battles, Difficulty, Mute, Report. Sonnet 5.5, high. |
-| c-dash3 | Take me there: a play card carries its place; On your phone for checks that need the phone. Sonnet 5.5, high. |
-| t-dash3-try | Tom tries the strip and Take me there. Blocks c-dash4, which then starts by itself. |
-| c-dash4 | Search across cards, builds, the Battle Guide and tools; the Art review and Story layouts. Sonnet 5.5, medium, auto. |
-| t-dash4-try | Tom tries search and the two layouts. |
-
-- Plan, the facts proven with the real pages side by side at 3440 wide, and the traps found: `claude/dashboard-plan.md`. Drawings and their markup: `claude/dashboard-mock/`.
-- Decisions taken from his "looks good" (the four recommended options): pane order Board, Game, Battle Guide, fourth pane; the game starts at the Duo open size; Admin is the fourth pane; a look, text or rules check in the dashboard counts as All good, touch, sound and speed stay phone checks.
-- Board and notes only; no page or game file changed.
+Card c-guidestatus. The guidestatus1 push was rebased badly: it dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b (put back below guidestatus1, where they were), and re-added `art/raw/clips/wan-grace-squeeze-v3.mp4` and `tools/art-library/prompts/wan-grace-squeeze-v3.txt`, which fix-anim-grace-squeeze-qxim had purged (v4 replaced them). No game file changed.
 
 ## guideprompts1a (2026-11-21): a script and an Action that write a real prompt for every starter-draft battle animation
 
@@ -22,24 +8,6 @@ Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it
 - `tools/guidegen/draft.py`: for each animation whose prompt is a starter draft it asks the xAI text model (repo secret XAI_API_KEY, same client and model pick as reconcile.py) for a new MOTION from the move's own data, three approved examples and, for a monster, its LOOK. Everything before MOTION and a monster's closing tail are copied in code. Each answer is checked in code (two to four sentences, how many times, "Without repeating", held pose, pronoun, no sound, camera, left or right, banned words or dashes), a broken one is sent back once, a second failure is left as the starter draft and listed.
 - `.github/workflows/guide-draft.yml`: manual only, inputs `ids`, `cap` (default $1.00), `dry_run` (default true). The result is kept as `guide-prompts.json` on the branch `guidegen`; a second run adds to it.
 - Nothing paid was run in this build, no prompt of the game changed. Test: `python3 tools/guidegen/draft_test.py` (stand-in xAI, no key).
-
-## b3s18d (2026-11-21): chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
-
-Card c-b3s18, part d. Chapter 9 (the Moon Club) joins chapters 1 to 8: the Hanger-On, the Sore Loser, the Wallflower and The Mirrorball play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`): Pet Peeves and Resists, Hang On Tight, How Gauche! and Cheater!, the Wallflower's Wall Hug and Petal Storm, Facet Spin, Dazzled with Shatter Glitz! and Sensory Overload!, Spotlight Solo and LAST DANCE. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
-- Scene change: Deedee's coaching after a loss to The Mirrorball has a Battle 3 version (`B3_CH_ON(9)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 9 has no Tombo toast to skip.
-- Left alone on purpose: the Deedee Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
-- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 9 test were not run.
-- Not looked at: any chapter 9 fight in a browser.
-
-## b3s18c (2026-11-21): chapter 8's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
-
-Card c-b3s18, part c. Chapter 8 (the Car Barn) joins chapters 1 to 7: the Wet Blanket, the Draft, the Picky Eater and Old Ironbelly play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`): Pet Peeves and Resists, Dampen Spirits and Why Bother?, Crosswind and Pilot-Light Gust, the Tin Lid and Push It Away, Toasty with Steam Cloud!, BROIL and Full Furnace. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
-- Scene change: TNB's coaching after a loss to Old Ironbelly has a Battle 3 version (`B3_CH_ON(8)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 8 has no Tombo toast to skip.
-- Left alone on purpose: the Tom Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
-- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 8 test were not run.
-- Not looked at: any chapter 8 fight in a browser.
-
-## board-night (2026-11-21): board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)
 
 ## guidestatus1 (2026-11-21): the Battle Guide list shows where each new video is: Requested, In line, Making, Checking, Ready to review
 
@@ -49,6 +17,41 @@ Card c-guidestatus. Tom (11:17): "when im scanning the animations list i need be
 - `tools/guidegen/progress.py` writes `status.json` on branch `guidegen` (through `keep.py`, merged by animation); `falq.Fal.wait` reports each status; `wan-gen` and `clip-gen` turn it on (`GUIDE_STATUS=1`); Use this one marks the take `used`.
 - A video requested before this build was running with the old job code: it shows REQUESTED until its take is READY TO REVIEW.
 - Tests: `tools/battle_guide_test.py` (stage labels, the filter, a stage moving by itself, four Duo sizes), `tools/guidegen/take_test.py` T6, `wangen_test.py`, `artgen_test.py` (falq is shared). Not seen on the phone yet.
+
+## fix-anim-grace-squeeze-qxim (2026-11-21): Grace's Soup-Dumpling Squeeze: the dumpling has a cute face and bursts into fluff on the hit
+
+Card c-fix-anim-grace-squeeze-qxim (from t-anim-grace-squeeze-qxim). Tom on the card: "Left a comment". The comment, his Battle Guide note (18:51): "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have."
+| | |
+|---|---|
+| Kept | Every word of `wan-grace-squeeze-v3.txt` outside the MOTION clauses his note names, the start picture, every Wan setting, the bake shape (strike, every 3rd picture, 1.5x, figure 90 rows) |
+| Changed | MOTION: the squishy gets "with a cute face of two black dot eyes, rosy cheeks and a tiny smile"; "until it squishes flat" became "until it bursts apart in a puff of white fluff"; "She lets it puff back up, tucks it back into her hoodie pocket and returns" became "She lowers her empty hands and returns" (a burst toy cannot go back in the pocket) |
+- Why not the Battle Guide's own answer: the reconcile Action's edit (branch guidegen) said the dumpling explodes and then puffs back up and is tucked away, which contradicts itself.
+- Video: wan-gen run 44938307197, $0.50. Source `art/raw/clips/wan-grace-squeeze-v4.mp4` (v3 video and prompt removed), baked pictures 18 to 144, the hit at picture 108 where the dumpling bursts (43 pictures, 2.9 s in the game, hit at 2.0 s).
+- Checks: same girl and outfit; standing height 1,035 px first, 1,037 last; feet on row 1,153 in every picture; nearest edge 14 px (the fluff); the fluff is gone before the last picture. Looked at in the Battle Guide player in portrait and landscape: HIT shows on the burst, Prompt v4.
+- Tests: `b3_test.py s8` FAILS []. `data/guide-anims.json` rebuilt.
+- No in-game pencil report was filed since 18:48.
+- Tom's card: t-anim-grace-squeeze-qxim.
+
+## board-night (2026-11-21): board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)
+
+Tom (11:00): "I feel more could be done with automated tasks that you and i design together to get work done overnight." Tom (11:09): "i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it". Design: `claude/night-plan.md` (new; index rebuilt). Board change and that plan only; no page, tool or game file changed, and nothing is scheduled yet.
+| Card | Starts | Model, effort |
+|---|---|---|
+| c-nightshift, Night shift: queued cards start by themselves overnight | START now | Sonnet 5.5, medium |
+| c-nighttests, Night test run: every test, every night, on GitHub | START now | Sonnet 5.5, medium |
+| c-nightclean, Nightly cleanup: files, notes and the working agreement | START once c-nightshift ships | Sonnet 5.5, medium |
+| c-nightqa, Night QA: the test browser plays your check cards | START once c-nightclean ships | Sonnet 5.5, medium |
+| c-nightgreen, Fix the 13 tests that already fail | Copy prompt once c-nighttests ships | Sonnet 5.5, high |
+| c-nightrefactor, Nightly refactoring, one small piece a night | Copy prompt once c-nightgreen ships and 7 nights pass with no failing test | Sonnet 5.5, high |
+- Checked: `python3 tools/board_check.py` ok; the board page opened locally in portrait shows both Up next cards under Start next with START and Sonnet 5.5, medium.
+
+## b3s18b (2026-11-21): chapter 7's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part b. Chapter 7 (the Library) joins chapters 1 to 6: the Cliffhanger, the Know-It-All, Pop-Up Panic and The Unread play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch7cliff`, `ch7know`, `ch7pop`, `unread`): Pet Peeves and Resists, To Be Continued..., SHHH! and Skill Lock, Well, Technically and Actually..., Big Reveal, Turn Back the Page, the Bookmark Ribbon and THE END. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: the Pick the Rhubarb toast is skipped under Battle 3 (`B3_CH_ON(7)`). Grace's coaching after a loss to The Unread has a Battle 3 version: the first line is the same so its clip still plays, the second line is new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old line.
+- Left alone on purpose: the Grace Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 7 test were not run.
+- Not looked at: any chapter 7 fight in a browser.
 
 ## buildpill1 (2026-11-21): the build name on the Builds screen is a status-colored pill
 

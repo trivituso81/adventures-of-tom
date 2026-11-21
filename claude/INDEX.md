@@ -197,15 +197,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 |---|---|---|
 | cutscene-polish/cut_natural_run.py | Read-only diagnostic: plays chapter 1 scenes on the current main the way a player would (no SKIP, no FAST), | 2026-11-21 |
 
-## dashboard-mock
-
-| File | First line | Date |
-|---|---|---|
-| dashboard-mock/layout-1-all-four.html | <!doctype html><meta charset="utf-8"><style>body{margin:0}</style><div style="width: 3440px; height: 1440px; b |  |
-| dashboard-mock/layout-1-all-four.jpg | ���� JFIF      �� C  |  |
-| dashboard-mock/layout-2-battle.html | <!doctype html><meta charset="utf-8"><style>body{margin:0}</style><div style="width: 3440px; height: 1440px; b |  |
-| dashboard-mock/layout-2-battle.jpg | ���� JFIF      �� C  |  |
-
 ## deedee
 
 | File | First line | Date |
@@ -604,7 +595,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | costs-duo-plan.md | AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21; BUILT as costsduo1, both parts in | 2026-11-21 |
 | cutscene-polish-plan.md | Cutscene polish: repo diagnostic and phased patch spec (cutpolish0, 2026-11-19) | 2026-11-19 |
 | damage-balance.md | Damage balance review (25 Oct 2026, artifact v255) | 2026-11-21 |
-| dashboard-plan.md | Admin Dashboard plan (board-dashboard, 2026-11-21) | 2026-11-21 |
 | dc-objects-spec.md | Director's Cut object sheets: spec (item 4, 2026-11-09) | 2026-11-09 |
 | emotions.md | Emotions (Tom 2026-11-05 23:43) | 2026-11-05 |
 | enemy-sheets.md | Enemy animation sheets: what Tom sends and what to do with it (2026-10-29) | 2026-10-29 |
