@@ -13426,14 +13426,17 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFom7Aamq1fxhQ57th",
+    "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
-   "started_at": "2026-11-21T02:58:24+00:00",
-   "quiet": true
+   "started_at": "2026-11-21T02:58:24+00:00"
   },
   {
    "id": "b-board-projclean",
@@ -22929,6 +22932,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T21:40:01-08:00",
+   "last": "2026-11-20T21:40:01-08:00",
+   "tags": [],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "first": "2026-11-20T21:22:44Z",
@@ -25598,8 +25611,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "38700dbe8982bac9cf206f2bb99879537fc4a4c8",
- "synced_at": "2026-11-21T05:36:08+00:00",
+ "synced": "d242a15872b3628236639d536c01dfff4798f8e4",
+ "synced_at": "2026-11-21T05:40:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
