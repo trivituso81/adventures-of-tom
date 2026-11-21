@@ -40,6 +40,10 @@ want = json.loads(subprocess.run(['node', '-e', node], cwd=ROOT, capture_output=
 board = {'doc': json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8')), 'puts': []}
 # Tom's real notes sent from the guide are on the live board; the stand-in starts without them so the counts below are about this run only.
 board['doc']['cards'] = [c for c in board['doc']['cards'] if not c.get('anim')]
+# pointers from other cards to the removed note cards go too
+_ids = {c['id'] for c in board['doc']['cards']}
+for c in board['doc']['cards']:
+    if c.get('blocks'): c['blocks'] = [x for x in c['blocks'] if x in _ids or not x.startswith('c-anim-')]
 # guidegen1b: the stand-in GitHub also holds the request file and the branch `guidegen`, and a stand-in of the guide-reconcile Action answers a request
 # the way the real one does (tools/guidegen/reconcile.py with a stand-in model), after one poll that finds nothing.
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'guidegen')); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate'))

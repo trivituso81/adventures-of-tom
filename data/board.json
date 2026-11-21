@@ -22679,8 +22679,10 @@
    "col": "wait",
    "waiting_on": "tom",
    "tag": "wanch2",
-   "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. When every family state is a video, the painted poses are removed for good.",
-   "blocks": [],
+   "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. When every family state is a video, the painted poses are removed for good.",
+   "blocks": [
+    "c-anim-tom-dodge-ner3"
+   ],
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
@@ -22695,6 +22697,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom, from the Battle Guide on Grace, Dodge (2026-11-21, build b3s17a): \"Make\". Card c-anim-grace-dodge-p7wh was retired into this one: Wan already missed the dodge twice, so it waits for the Kling 4 test here."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide (2026-11-21, build b3s17a), on Tom's Dodge: \"Needs to be generated\" (also \"Make\" on Grace, Rose and Deedee's Dodge). Card c-anim-tom-dodge-ner3 waits on this card: Wan cannot do the dodge (two misses the same way on Grace), so the dodges are made here on Kling 4."
     },
     {
      "d": "2026-11-21",
@@ -24041,10 +24047,10 @@
    "id": "c-anim-tom-loungepass-lf2z",
    "tag": "anim-tom-loungepass-lf2z",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Tom, Lounge Pass Flex",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something",
+   "next": "Shipped anim-tom-loungepass-lf2z: Lounge Pass Flex is a new Wan video from your note (card up, smile and wink at you, a sparkle on its top right corner, then a snooty limp-wrist swat at the monster). The ding sound is card c-anim-tom-loungepass-ding. Your card: watch it in the Battle Guide.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24083,6 +24089,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-tom-loungepass-lf2z. Prompt v2 changed only MOTION (hold up, look at the viewer, smile, sparkle on the top right corner, snooty swat) and allowed the card's sparkle in the camera line; start picture, settings and the rest kept. Wan run 44929359366, $0.50. Plan 4.4 passed except the card corner touching the video's left edge for pictures 93 to 95, which the bake (every 4th from 12) skips; measured gate no flags. A pad retry was refused by the shared cap and a higher cap was not allowed in this session. The ding sound is a game sound, card c-anim-tom-loungepass-ding."
     }
    ],
    "prompt": {
@@ -24093,16 +24103,72 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-lf2z in data/board.json with its history. Your first push is the commit board: start c-anim-tom-loungepass-lf2z.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something, like in a cartoon in the top right corner of the card, and then he should, and like sort of a fancy lady like way, swat the monster with the card like he's being extra snooty\n\nThe animation: Tom, Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js). Its video is clip tom_loungepass (data/clips/tom-loungepass.js, art/clips/tom-loungepass.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-loungepass-lf2z. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-anim-tom-loungepass-lf2z-watch",
+   "done": "2026-11-21"
+  },
+  {
+   "id": "t-anim-tom-loungepass-lf2z-watch",
+   "title": "Watch Tom's new Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then tap All good or Something is wrong. You should see him hold the card up by his face, smile and wink at you, a sparkle on the card's top right corner, then chin up and a snooty limp-wrist swat toward the monster. There is no ding yet (card c-anim-tom-loungepass-ding adds it after your All good).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom.",
+    "Play Lounge Pass Flex.",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [
+    "c-anim-tom-loungepass-ding"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-tom-loungepass-lf2z",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-tom-loungepass-lf2z. The clip passed plan 4.4 and the measured gate on every picture the game plays."
+    }
+   ]
+  },
+  {
+   "id": "c-anim-tom-loungepass-ding",
+   "tag": "anim-tom-loungepass-ding",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Battle Animations",
+   "title": "Ding sound on the Lounge Pass sparkle",
+   "next": "Waits on your card Watch Tom's new Lounge Pass Flex. Then it adds a short cartoon ding that plays when the sparkle shows on the card in Lounge Pass Flex.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-tom-loungepass-lf2z from Tom's note (\"a little like ding sound with like a sparkle\"). The video is silent by rule, so the ding is a game sound effect timed to the sparkle (video pictures 66 to 78, baked pictures 13 to 17 of clip tom_loungepass)."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a short cartoon ding sound to Tom's Lounge Pass Flex, timed to the sparkle on the card, then hands it back to you to hear.",
+    "before": [
+     "Watch Lounge Pass Flex on your card first and tap All good (this card starts after that)."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small code change whose steps are not written yet, tests catch mistakes)",
+    "effort": "medium (one sound in one move)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-anim-tom-loungepass-ding in data/board.json with its history, and the Tom card that blocked it. Your first push is the commit board: start c-anim-tom-loungepass-ding.\n\nTom asked for a little cartoon \"ding\" when the sparkle shows on the lounge pass card in Tom's move Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js, clip tom_loungepass in data/clips/tom-loungepass.js; the sparkle is on video pictures 66 to 78, baked pictures 13 to 17). Do not touch the video. Find how the new battle plays sounds (b3Sfx in engine/b3-play.js, the sfx table) and how a clip move can fire something at a given picture, and play one short bright ding when baked picture 14 is on screen, in the new battle and in the Battle Guide player. Use an existing ding or chime sound if one exists, otherwise a short synthesized one in the same sfx table. Run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Build tag anim-tom-loungepass-ding. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
    "id": "c-anim-tom-dodge-ner3",
    "tag": "anim-tom-dodge-ner3",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Animation note: Tom, Dodge",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Needs to be generated",
+   "next": "Not made: Wan 3.0 already missed the dodge twice the same way (Grace, wanch1: she turns to the viewer and hops sideways, feet off the ground), and Tom's dodge prompt is the same prompt. A third Wan try would repeat it. Next try is a different video model (Kling 4 on fal), which is card c-wanch2. When c-wanch2 makes the family dodges, this card closes with it.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24141,6 +24207,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stopped at the stop-loss, nothing shipped from this card in anim-tom-loungepass-lf2z's session. Checked grace-dodge r1 and r2 on branch wangen: both turn toward the viewer and hop sideways with the feet off the ground, after r2 added \"both feet stay flat on the ground and never lift\". Tom's job tom-dodge uses the same prompt, so no Wan video was made and nothing was spent. Waits on c-wanch2 (Kling 4 for every family dodge). Tom's note \"Needs to be generated\" is copied there."
     }
    ],
    "prompt": {
@@ -24151,7 +24221,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-dodge-ner3 in data/board.json with its history. Your first push is the commit board: start c-anim-tom-dodge-ner3.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Needs to be generated\n\nThe animation: Tom, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-dodge-ner3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-anim-grace-dodge-p7wh",
