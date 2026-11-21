@@ -1,3 +1,14 @@
+## clipstuck1a (2026-11-20): Art Library clips: the button no longer sticks on ASKED, WAITING, every video plays on its card, REDO with a note
+
+Tom (16:32): "why are you tricking me into spending money by keeping the button label as asked, waiting when it's approved. and there's no way for me to review the video".
+
+- Cause (fact): `clipPoll` in `engine/art-clips.js` redrew the card (refreshItem) before `clipAskedSet(left)` removed the press, so the redraw still read the press as pending and showed ASKED, WAITING under "Made and approved"; nothing redrew it again. Seven fix rounds (fix-keysecrets2-try to -7) worked on reading the report instead. git log shows each press made and approved a clip in 1 to 2 minutes (toad v1 to v6).
+- Fix: pending presses are cleared first, then finished cards are redrawn; an approved clip's entry is read again from GitHub so its new video shows without a reload.
+- Review: `clipMadeList` puts every video in `versions` on the card, newest first, playable in place, the newest marked "in the game". A REDO box saves a rejection with Tom's note (`clipRedo`, the same record as Battle Lab REDO). The old "Approved: <file list>" line is gone.
+- Not changed: a single GENERATE VIDEO press still auto-approves (card c-clipstuck1, part 3).
+- Tests: keysecrets2_test.py passes; the toad card looked at at 390 x 844 (6 videos, REDO asks for a note first).
+- Board: Tom card t-clipstuck1 added.
+
 ## refresh1 (2026-11-20): the Builds screen has a Refresh button and checks again by itself
 
 Card c-refresh1. Tom: "in the builds screen, in the works tab (or other relevant tabs) does it constantly refresh and update once something is done? if not can we add a refresh button"

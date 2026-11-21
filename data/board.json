@@ -18163,7 +18163,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
-   "next": "Fix the ASKED, WAITING button that never clears; show every GitHub-made version on the clip's Art Library card with REVIEW; a single GENERATE VIDEO press waits for Tom's review instead of auto-approving (GENERATE CHAPTER keeps auto-approve). No video is generated.",
+   "next": "Parts 1 and 2 shipped as clipstuck1a (button fixed, every video plays on the card with REDO). Left: part 3, a single GENERATE VIDEO press waits for Tom instead of auto-approving.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -18183,6 +18183,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "clipstuck1a shipped by a parallel session (session_01RXeukeXUMa3dmbsoRVSk657e, the chat that diagnosed the bug): parts 1 and 2 are DONE in engine/art-clips.js. clipPoll clears pending presses before redrawing (no more stuck ASKED, WAITING); every made video plays on the card newest first, the newest marked in the game; a REDO box saves a rejection with a note; the entry re-reads after an approval. The session on this card does ONLY part 3: a single GENERATE VIDEO press is gated but held for Tom (not approved), and the card says so. Do not rewrite clipMadeList or the poll fix."
     }
    ],
    "prompt": {
@@ -18194,7 +18198,7 @@
     "effort": "medium (three known changes in one area)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-clipstuck1 in data/board.json. Your first push is the commit board: start c-clipstuck1. Build clipstuck1 as the card's next says, run tools/art-library/clip_lib_test.py and the stub test, look at the clip card at 390 x 844, bump tags, add a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "t-clipstuck1"
   },
   {
    "id": "t-skippingcutplay",
@@ -18416,6 +18420,34 @@
     {
      "d": "2026-11-20",
      "t": "Made by build refresh1 (card c-refresh1)."
+    }
+   ]
+  },
+  {
+   "id": "t-clipstuck1",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Watch the toad idle videos on its card",
+   "next": "ADMIN > ART LIBRARY: close it and open it again from the home-screen app. Tap Open in the Art Library below. On the toad card, tap v6 (marked in the game) to watch it. Looks right: All good. Not right: write what is wrong in the box under the videos and tap REDO. Do not press GENERATE VIDEO.",
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "clip-toad-idle"
+     ],
+     "label": "the toad idle card"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by clipstuck1a."
     }
    ]
   }
