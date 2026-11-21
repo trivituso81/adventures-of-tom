@@ -19592,7 +19592,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19602,6 +19602,10 @@
      "d": "2026-11-20",
      "t": "Tom approved generating 18 pictures (about $0.90).",
      "at": "2026-11-21T02:32:26.540Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 18 pictures, QA: 18 of 18, 18 of 18, 16 of 18, 17 of 18, 16 of 18, 17 of 18, 18 of 18, 18 of 18, 18 of 18, 18 of 18, 17 of 18, 16 of 18, 17 of 18, 18 of 18, 18 of 18, 16 of 16, 17 of 18, 16 of 18. Spent about $1.12."
     }
    ],
    "gen": {
@@ -19630,10 +19634,217 @@
     "est": 0.9,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T02:33:53Z",
+     "state": "done",
+     "at": "2026-11-21T02:38:02Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44856447268",
-     "n": 18
+     "made": [
+      "prop-item-02",
+      "prop-item-01",
+      "prop-item-03",
+      "prop-item-04",
+      "prop-item-06",
+      "prop-item-05",
+      "prop-item-07",
+      "prop-item-09",
+      "prop-item-08",
+      "prop-item-10",
+      "prop-item-11",
+      "prop-item-12",
+      "prop-item-13",
+      "prop-item-15",
+      "prop-item-14",
+      "prop-item-16",
+      "prop-item-18",
+      "prop-item-17"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 1.12,
+     "qa": {
+      "prop-item-02": {
+       "file": "results/prop-item-02/20261121T023413.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-01": {
+       "file": "results/prop-item-01/20261121T023421.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-03": {
+       "file": "results/prop-item-03/20261121T023422.png",
+       "yes": 16,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Numbers 10, 11, 12 visible on clock face"
+        },
+        {
+         "id": "p9",
+         "q": "Are items 5 through 10 all big round gold coins standing on edge at a tilt, each with a beaded rim and a different stamped design in the middle?",
+         "why": "Coins 9-10 not on edge at tilt; clock has numbers"
+        }
+       ]
+      },
+      "prop-item-04": {
+       "file": "results/prop-item-04/20261121T023453.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains numbers on stopwatch face and signature on pass"
+        }
+       ]
+      },
+      "prop-item-06": {
+       "file": "results/prop-item-06/20261121T023501.png",
+       "yes": 16,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "contains visible text and numbers not asked for"
+        },
+        {
+         "id": "p6",
+         "q": "Is the fourth object a purple velvet coat with a satin collar and one big button shown laid flat?",
+         "why": "coat has fur collar and multiple buttons"
+        }
+       ]
+      },
+      "prop-item-05": {
+       "file": "results/prop-item-05/20261121T023502.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Visible text on page 1 and number 7 on item 16"
+        }
+       ]
+      },
+      "prop-item-07": {
+       "file": "results/prop-item-07/20261121T023529.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-09": {
+       "file": "results/prop-item-09/20261121T023542.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-08": {
+       "file": "results/prop-item-08/20261121T023547.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-10": {
+       "file": "results/prop-item-10/20261121T023606.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-11": {
+       "file": "results/prop-item-11/20261121T023621.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains a visible '1' numeral on the star"
+        }
+       ]
+      },
+      "prop-item-12": {
+       "file": "results/prop-item-12/20261121T023626.png",
+       "yes": 16,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Visible '10' numeral and Nike logo not asked for"
+        },
+        {
+         "id": "p10",
+         "q": "Is cell 6 a bright green frog slicker with webbed pockets and eyes on the hood laid flat?",
+         "why": "Frog is a full frog figure, not a slicker laid flat"
+        }
+       ]
+      },
+      "prop-item-13": {
+       "file": "results/prop-item-13/20261121T023654.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Visible numbers on stopwatch and watch"
+        }
+       ]
+      },
+      "prop-item-14": {
+       "file": "results/prop-item-14/20261121T023704.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-15": {
+       "file": "results/prop-item-15/20261121T023701.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "prop-item-16": {
+       "file": "results/prop-item-16/20261121T023733.png",
+       "yes": 16,
+       "of": 16,
+       "failed": []
+      },
+      "prop-item-18": {
+       "file": "results/prop-item-18/20261121T023743.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Visible numbers 1-12 on clock face and TAXI text on photo"
+        }
+       ]
+      },
+      "prop-item-17": {
+       "file": "results/prop-item-17/20261121T023748.png",
+       "yes": 16,
+       "of": 18,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Visible numbers 41 and readable text on multiple items"
+        },
+        {
+         "id": "p8",
+         "q": "Is the third item a tiny clay taco with speckled glaze?",
+         "why": "Taco has paperclip but no speckled glaze, not clay-like"
+        }
+       ]
+      }
+     }
     }
    }
   },
