@@ -20241,7 +20241,7 @@
    "title": "Play the Grump Hollow wrapper trail",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which. LOOK AGAIN: walk into the middle clearing before the Log Lump: no fishing-spot scene should start. Beat the Log: Grace says the line and four wrappers lead east.",
@@ -20290,13 +20290,19 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Play the Grump Hollow wrapper trail, Fix: Play the Grump Hollow wrapper trail, Fix: Play the Grump Hollow wrapper trail is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:40:27.323Z"
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-madelot-play",
