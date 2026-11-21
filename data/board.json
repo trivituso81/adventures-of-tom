@@ -19145,7 +19145,7 @@
    "title": "Make and check every chapter 1 battle video",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanch1",
    "next": "Shipped (wanch1a to wanch1h, wanch1). All four family members fight in Wan 3.0 videos in every NEW BATTLE fight: idle with the breathing in it, guard, hit, knock-out, victory, run, plus 6 of their 12 rejected moves; the Pond Grump, Bog Toad, Log Lump and Skeeter Swarm attack and wind up in videos. Stop-loss list (left out, painted or default until c-wanch2): every dodge, every cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor, the Toad's Body Slam, the Skeeter's Bite and Whine. Spent $22.95 on fal and $1.59 on xAI.",
    "blocks": [],
@@ -19207,6 +19207,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped wanch1 (parts a to h). 41 Wan videos made (Grace 13, Tom 11, Rose 11, Deedee 11 with retries) and 20 Grok monster clips; each checked picture by picture against plan 4.4. Stop-loss (two misses the same way): dodge (she hops, feet leave the ground) and cast (glowing rings) on Grace, so not made for the others; Deedee ko floats above the ground twice; Rose Tackle (a second lamb) and Giddyup (a ring appeared), Deedee Wet-Floor (the mop dips below her feet); Toad Body Slam leaps out of the frame; Skeeter Bite and Whine lose the small mosquitoes. Next: Tom watches NEW 1 to NEW 6 (t-wanch1-watch), then c-wanch2."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanch1: chapter 1 battles are videos: the whole family idles with breathing, guards, gets hit, falls, cheers and runs on Wan 3.0, plus Rose's knock-out and Deedee's victory; the stop-loss list goes to c-wanch2"
     }
    ],
    "prompt": {
@@ -19219,7 +19223,8 @@
     "effort": "medium (the recipe is written and proven: the wan-gen Action, the start picture, the checks in plan 4.4, the bake and the guard playback; this repeats it per state)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanch1 in data/board.json with its history and the Tom card that blocked it (t-wanch1-fal). Your first push is the commit board: start c-wanch1. Scope, chapter 1 only: (1) every family battle state still in B3_BODY_PAINT (data/b3-clips.js) for Tom, Grace, Rose and Deedee: idle as a video loop with the breathing in it, guard, hit, dodge, ko, victory and run (Grace's guard exists: grace_guard); (2) the family's own chapter 1 moves whose Grok clips Tom rejected (data/art-prompts.json, group Chapter 1, status rejected, his REDO notes); keep the clips he approved; (3) the wind-ups and attacks of the chapter 1 monsters still on painted frames. Family clips on Wan 3.0 through the wan-gen Action only, never grok-imagine-video-1.5-lite; monsters on xAI Grok lite with the clip-gen route and the Mudling idle prompt pattern. First make start pictures for Tom, Rose and Deedee exactly as Grace's was made (tools/art-library/wangen-jobs.json start job with their hero; check facing, mirror if it comes back facing right). Extend wan-gen to take a list of clip jobs per run and run up to 3 at once, ledger and cap unchanged. Every prompt is BOOP_APPROVED with only the MOTION part changed (tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Every clip goes through the checks in plan 4.4 before Tom sees anything; a miss gets one retry with one change; a second miss the same way is the stop-loss for that clip: leave it out and list it for Tom. Spend at most $35 on fal and $3 on xAI. Bake each clip, wire it into B3_BODY_CLIPS so the real NEW BATTLE fights use it, and purge each painted state it replaces in the same change (CLAUDE.md purge rule; the code breath goes when that fighter's idle video is in). Ship in parts per character (wanch1a, wanch1b, ...), each tested in portrait and landscape (python3 tools/b3_test.py s8, tools/wanproof_test.py extended to every clip kind, tools/smoke.py). Build tag wanch1. End with one Tom card (ask animations): watch NEW 1 to NEW 6 once. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanch1-watch"
+   "after": "t-wanch1-watch",
+   "done": "2026-11-20"
   },
   {
    "id": "t-gatelayer-pics",
@@ -22314,7 +22319,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
     "opening": "not started"
    },
    "history": [
@@ -22857,6 +22862,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T20:43:47-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c",
+    "wanch1d",
+    "wanch1e",
+    "wanch1f",
+    "wanch1g",
+    "wanch1h",
+    "wanch1"
+   ],
+   "cards": [
+    "c-wanch1",
+    "c-wanch2",
+    "t-wanch1-watch"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
    "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
    "first": "2026-11-20T19:03:50-08:00",
@@ -22868,25 +22895,6 @@
    ],
    "cards": [
     "c-b3s13"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T20:17:40-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b",
-    "wanch1c",
-    "wanch1d",
-    "wanch1e",
-    "wanch1f",
-    "wanch1g",
-    "wanch1h"
-   ],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -25453,8 +25461,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c9f27885f2cd5fa85231927b22371de967385111",
- "synced_at": "2026-11-21T04:43:03+00:00",
+ "synced": "ee6da2ed7466159c40458a4c9a2e6c0969f19ca5",
+ "synced_at": "2026-11-21T04:44:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
