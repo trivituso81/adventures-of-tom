@@ -19876,7 +19876,7 @@
     }
    ],
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T08:43:39Z",
     "ids": [
      "prop-item-solo-amy_chm1",
@@ -19885,75 +19885,10 @@
     "est": 0.1,
     "mode": "review",
     "run": {
-     "state": "done",
-     "at": "2026-11-21T07:52:59Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44882215155",
-     "made": [
-      "prop-item-solo-g_bsash",
-      "prop-item-solo-claytaco",
-      "prop-item-solo-amy_chm1"
-     ],
-     "already": [],
-     "skipped": [],
-     "failed": [],
-     "spent": 0.18,
-     "qa": {
-      "prop-item-solo-g_bsash": {
-       "file": "results/prop-item-solo-g_bsash/20261121T075242.png",
-       "yes": 11,
-       "of": 15,
-       "failed": [
-        {
-         "id": "f_paint",
-         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
-         "why": "Glossy 3D render, not hand-painted with brushwork"
-        },
-        {
-         "id": "p3",
-         "q": "Is the sash shown as one long wide band sewn into a big loop laid flat?",
-         "why": "Not laid flat as a loop; it's a crossed decorative bow"
-        },
-        {
-         "id": "p4",
-         "q": "Does the whole long loop of the sash show?",
-         "why": "Not a full visible loop laid flat"
-        },
-        {
-         "id": "p10",
-         "q": "Is the sash shown in a three-quarter view from slightly above?",
-         "why": "Not three-quarter view from above; more frontal"
-        }
-       ]
-      },
-      "prop-item-solo-claytaco": {
-       "file": "results/prop-item-solo-claytaco/20261121T075244.png",
-       "yes": 15,
-       "of": 15,
-       "failed": []
-      },
-      "prop-item-solo-amy_chm1": {
-       "file": "results/prop-item-solo-amy_chm1/20261121T075249.png",
-       "yes": 12,
-       "of": 15,
-       "failed": [
-        {
-         "id": "f_paint",
-         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
-         "why": "appears as 3D render, not hand-painted"
-        },
-        {
-         "id": "p2",
-         "q": "Are the shoes low and light running shoes?",
-         "why": "looks like slippers, not running shoes"
-        },
-        {
-         "id": "p5",
-         "q": "Do the shoes have a flat sole as thin as a sheet of paper?",
-         "why": "soles are thick, not paper-thin"
-        }
-       ]
-      }
-     }
+     "state": "running",
+     "at": "2026-11-21T08:44:08Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44886235305",
+     "n": 2
     }
    },
    "chat": {
