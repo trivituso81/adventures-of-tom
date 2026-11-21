@@ -19209,7 +19209,7 @@
    "title": "Make and approve 6 gate pictures (Amy's door, open states)",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "fyi": true,
    "next": "Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN > BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report).",
@@ -19279,6 +19279,11 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Look at the QA results on a real pictures card, Fix: Make and approve 6 gate pictures (Amy's door, open is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images Sent to Claude as card c-fix-gatelayer-pics-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T03:26:38.038Z"
     }
    ],
    "chat": {
@@ -19474,7 +19479,8 @@
       }
      }
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "t-gatelayer-play",
@@ -21749,6 +21755,58 @@
    "after": "t-ch1flight",
    "auto": true,
    "started_at": "2026-11-21T03:23:33+00:00"
+  },
+  {
+   "id": "c-fix-gatelayer-pics-2",
+   "tag": "fix-gatelayer-pics-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "next": "You reported a problem on Make and approve 6 gate pictures (Amy's door, open states). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images",
+   "blocks": [
+    "t-gatelayer-pics"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T03:26:37.250Z",
+     "card": "t-gatelayer-pics",
+     "title": "Make and approve 6 gate pictures (Amy's door, open states)",
+     "ask": "pictures",
+     "words": "reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images",
+     "shot": "",
+     "asked": "Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN ) BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-gatelayer-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-gatelayer-pics.",
+     "at": "2026-11-21T03:26:38.038Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-gatelayer-pics: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images",
+     "at": "2026-11-21T03:26:38.038Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make and approve 6 gate pictures (Amy's door, open states).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gatelayer-pics-2 and t-gatelayer-pics in data/board.json, history included. Your first push is the commit board: start c-fix-gatelayer-pics-2.\n\nTom tested and found problems:\n1. Card t-gatelayer-pics (Make and approve 6 gate pictures (Amy's door, open states), ask pictures). He was asked: Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN ) BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report). He wrote: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:26:37.250Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gatelayer-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gatelayer-pics, and give the build fix-gatelayer-pics-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-gatelayer-pics"
   }
  ],
  "sessions": [
