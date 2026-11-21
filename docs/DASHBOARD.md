@@ -1,4 +1,4 @@
-# Admin Dashboard (dash1, 2026-11-21)
+# Admin Dashboard (dash1 and dash2, 2026-11-21)
 
 `dashboard.html` is one page made for Tom's wide monitor (3440 x 1440) in Chrome on his MacBook Pro. It shows the Board, the game, the Battle Guide and the Admin tools side by side, so he can act on a change and check it without switching pages. Plan and Tom's words: `claude/dashboard-plan.md`. Approved drawings: `claude/dashboard-mock/` (the `.html` files hold every drawn size and colour). Cards c-dash1 to c-dash4.
 
@@ -13,8 +13,26 @@ Open it from ADMIN > Admin Dashboard (first button in What is next) or at https:
 | Page size | Fixed 3440 wide. Height follows the window (1328 maximized, 1440 macOS full screen); panes take the height that is left and scroll inside, the page itself never scrolls. Pane 4 takes whatever width is left of 3400, so a few pixels of scrollbar cannot push the page sideways. Narrower than 3000: one line, "The Admin Dashboard is made for the wide monitor", and a link to Admin; no frames load. |
 | Sizes | Top bar 44 tall. 8 px around and between panes. Pane header 40 tall. Colours are the Board's. |
 | Pane header | Number, name, what is showing, KEYS HERE tag, Change page (every tool of `admin.html`'s `GROUPS`, read from that page when the menu opens so it cannot drift; not on the game pane), Reload this pane, Open in its own tab, Make this pane big (grows over the neighbours; Esc or the same button puts it back). |
-| Under the game | The Builds page (`builds.html`) fills the space under the game until dash2 replaces it. |
+| Under the game | The strip (dash2, below). It replaced the Builds page that filled this space in dash1; Builds is pane 4 in the Battle layout. |
 | Top bar | Layout switch; For you and Claude counts (read from the Board's own tab numbers, a click shows that tab in pane 1); the live build (newest entry of `data/build-history.js`, re-read every 60 seconds); GitHub token saved or missing (`aot-gh-token`). Search comes in dash4. |
+
+## The strip under the game (dash2)
+
+Part of `dashboard.html` itself (not a frame): it reaches into the game frame from outside because every pane is the same origin. As drawn in `claude/dashboard-mock/`. The strip is at least 280 tall and its columns scroll inside it; a game size taller than the space pushes the strip down and the game pane scrolls.
+
+| Part | What it does |
+|---|---|
+| Newer build bar | 48 tall, on top of the strip, shown only when the site's newest real build (`data/build-history.js`, read every 60 seconds, builds with `kind: house` skipped) is newer than the build the game frame runs (`BUILD_TAG` in the frame; older than it, or not in the list at all). It says "A newer build is live: NAME, TIME. This pane is still on NAME." with Reload game, which calls the game's own `splashReload()` (the title screen's RELOAD: it re-downloads every script, then reloads on a fresh address; saves are kept). The game is never reloaded by itself. |
+| Screen size of this pane | Duo folded upright 466 x 657, Duo folded sideways 678 x 445, Duo open sideways 951 x 648 (the default of All four), Duo open upright 669 x 869, Desktop wide 1600 x 900 (picking it switches to the Battle layout, which starts on it; picking a Duo size inside the Battle layout stays there). The game is centred in its pane. The Duo layout is forced for the game frame only (below). |
+| Story battles | Old, By chapter, New: the same `aot-b3-story` setting as `admin.html`; the game reads it every time (`b3sMode`), and a change made in the Admin pane shows here within half a second. |
+| Difficulty | EASY, MEDIUM, HARD: the game's own `b7SetDiff` (so Rose Mode spends and gears as the title screen's toggle does), which saves `aot-diff`; when the game frame is not the game, the setting is written directly. The marked one is read from the running game. |
+| Mute game | Silences this game frame only and is never saved. Every game sound reaches the output through an audio node `connect()` call, so the dashboard puts one gain node of its own in front of each audio output of the frame (`installMute`, installed as the new page starts, so it also holds after a reload of the game); spoken lines still run but at volume 0, so the game's timing does not change. The button says Unmute game while muted. |
+| Report | Opens the game's pencil tab (`brpOpen`) and gives the game the keys. When the Report tab is off (ADMIN > Report tab) it says so under the buttons. |
+| Jump to a chapter | 1 to 20 and BONUS (Nine Scoops). From the title screen it calls the game's own `splashGo(chapterJump(n))`, the same call as the title's chapter list; from anywhere else it first starts the game fresh (a clean state is the only safe start) and runs the same call when the title is up. A chapter the game cannot open yet (`splashBuilt`) is dimmed. The chapter the game is in has a gold ring. Part 2 chapter 11 is the test jump (as if Part 1 were done), not "from your clear data". |
+| New battle test fights | The `b3` list of `data/battle-lab-index.json`: the first five, then Show all 27 test fights, which also lists the old Battle Lab fights (`b2`) under their own heading. A click opens `index.html?go=new&i=N` (`go=lab` for an old fight) in the game pane. The fight on screen is marked ON SCREEN and named in the pane header. |
+| Keyboard help | The text from the drawing (All four: third column; Battle: fourth column, where dash3's Next for you column will sit beside it). |
+
+Which part sits in which column is the layout's `place` list; moving a part keeps its state.
 
 ## Links stay home
 
@@ -43,9 +61,9 @@ Sound starts only after a first click inside the game frame (browser rule, nothi
 
 ## The game frame and the Duo layout
 
-The game decides its layout from the page size and `detectDuo` (`engine/audio.js`). The dashboard must not use `le-duo` in `localStorage` (it would hit every game tab in this browser). `?duo=1` in the address works for the first load, but `engine/splash.js` drops the whole query string when `go=` is in it. So the dashboard puts `?duo=1` or `?duo=0` in the address for the first load and, on every page load in the game frame, replaces that frame's `detectDuo` with one that answers for the layout and asks the game to lay out again (`forceDuo`). Nothing else is changed in the game. The game frame loads after the other three, because the title screen waits for about 51 MB of scripts.
+The game decides its layout from the page size and `detectDuo` (`engine/audio.js`). The dashboard must not use `le-duo` in `localStorage` (it would hit every game tab in this browser). `?duo=1` in the address works for the first load, but `engine/splash.js` drops the whole query string when `go=` is in it. So the dashboard puts `?duo=1` or `?duo=0` in the address for the first load and, on every page load in the game frame and every time the size changes, replaces that frame's `detectDuo` with one that answers for the chosen screen size (Duo on for the four Duo sizes, off for Desktop wide) and asks the game to lay out again (`forceDuo`). It also writes the true `?duo=` back into the frame's address (`duoAddress`), so the game's own RELOAD, which reloads the frame's current address, lays out right from the first frame even after `go=` removed the query. Nothing else is changed in the game. The game frame loads after the other three, because the title screen waits for about 51 MB of scripts.
 
-Proven in `tools/dashboard_test.py`: `html` gets `tablet duo landscape` at 951 x 648; the Battle layout has none of them at 1600 x 900; `le-duo` is never set; `index.html?go=` keeps the Duo layout.
+Proven in `tools/dashboard_test.py`: `html` gets `tablet duo landscape` at 951 x 648, `duo tablet` upright at 669 x 869, `duofold` at 466 x 657 and `duofold landscape` at 678 x 445; the Battle layout has none of them at 1600 x 900; `le-duo` is never set; `index.html?go=` (a chapter-less link and a test fight from the strip) keeps the Duo layout and the address keeps the right `?duo=`.
 
 ## Facts and limits
 
@@ -61,12 +79,12 @@ Open the dashboard in Chrome, then More (the three dots at the top right) > Cast
 
 ## How to add a layout
 
-Add a row to `LAYOUTS` in `dashboard.html`: `id`, `label`, `w` (four pane widths; the first three are exact, pane 4 takes the rest, together 3400), `game` (`w`, `h`, `duo` 1 or 0, `size` as named in the header) and `p4` (page and name of pane 4). The top bar shows it by itself. Extend `tools/dashboard_test.py` with its widths.
+Add a row to `LAYOUTS` in `dashboard.html`: `id`, `label`, `w` (four pane widths; the first three are exact, pane 4 takes the rest, together 3400), `size` (the id of the game's screen size it starts on, a row of `SIZES`), `p4` (page and name of pane 4), `cols` (the strip's grid columns) and `place` (which strip parts sit in each column: `sizes`, `story`, `diff`, `mrow`, `chap`, `fights`, `keys`). The top bar shows it by itself. To add a screen size, add a row to `SIZES` (`id`, `label`, `w`, `h`, `duo`); the strip lists it by itself. Extend `tools/dashboard_test.py` with its widths.
 
 ## Tests
 
-`python3 tools/dashboard_test.py` (own server on 8873; screenshots `tools/shots/dashboard-1328.png`, `dashboard-1440.png`, `dashboard-battle-1328.png`, `dashboard-narrow.png`). It checks, at 3440 x 1328 and 3440 x 1440: four panes load with no page error, every size above, no sideways scroll in the page or any pane, counts and live build, link routing (Board to Battle Guide, Admin tool in pane 4, Board link from pane 4, game link without restart, Battle Lab, `go=` trap, other site, a script that moves a pane), Change page, Reload, Make big, Open in its own tab, Ctrl 1 to 4 from the page and from inside the game, an arrow key moving the title menu, the Battle layout and that it survives a reload. `python3 tools/admin_hub_test.py` checks the new Admin button.
+`python3 tools/dashboard_test.py` (own server on 8873; screenshots `tools/shots/dashboard-1328.png`, `dashboard-1440.png`, `dashboard-battle-1328.png`, `dashboard-narrow.png`, and for the strip `dashboard-strip-<height>.png`, `dashboard-strip-upright-<height>.png`, `dashboard-strip-battle-<height>.png`, `dashboard-strip-bar-1328.png`, `dashboard-strip-fight-1328.png`). The strip's checks (dash2): at both heights, the drawn parts and columns, every screen size (frame size, the layout the game picks, centred, the strip below, no sideways scroll, `le-duo` untouched, the address carries `?duo=`), Desktop wide switching to the Battle layout with four strip columns; at 3440 x 1328, Story battles and Difficulty, Mute (also through a reload), the newer-build bar with a stand-in newer build (a newer housekeeping build must not raise it, the game must not reload by itself, Reload game must reload it with the size and keys kept), a chapter jump from the title and from the middle of the game, BONUS, a new test fight and an old one with the ON SCREEN mark, Show all, and Report with the tab off and on. It also checks, at 3440 x 1328 and 3440 x 1440: four panes load with no page error, every size above, no sideways scroll in the page or any pane, counts and live build, link routing (Board to Battle Guide, Admin tool in pane 4, Board link from pane 4, game link without restart, Battle Lab, `go=` trap, other site, a script that moves a pane), Change page, Reload, Make big, Open in its own tab, Ctrl 1 to 4 from the page and from inside the game, an arrow key moving the title menu, the Battle layout and that it survives a reload. `python3 tools/admin_hub_test.py` checks the new Admin button.
 
 ## Next
 
-dash2 (the strip under the game: newer-build bar, screen sizes, chapter and test fight jumps, Story battles, Difficulty, Mute, Report), dash3 (Take me there), dash4 (search, Art review and Story layouts). Plan sections of the same names.
+dash3 (Next for you with Take me there, in the strip's last column), dash4 (search, Art review and Story layouts). Plan sections of the same names.

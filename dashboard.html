@@ -50,9 +50,48 @@ button{font:inherit;color:inherit;cursor:pointer}
 .pane iframe{display:block;border:0;background:#0f0d24}
 .pbody{flex:1 1 auto;min-height:0}
 .pbody iframe{width:100%;height:100%}
+.gbody{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}
 .gamewrap{flex:none;display:flex;justify-content:center;background:#0f0d24}
-.strip{flex:1 1 auto;min-height:0;border-top:1px solid #2c2852;background:#14122b}
-.strip iframe{width:100%;height:100%}
+.gamewrap iframe{flex:none}
+/* dash2: the strip under the game (drawn in claude/dashboard-mock/). A game taller than the space pushes the strip down and the pane scrolls. */
+.strip{flex:1 0 280px;min-height:0;display:flex;flex-direction:column;border-top:1px solid #2c2852;background:#14122b}
+#nb{flex:none;display:none;align-items:center;gap:10px;height:48px;padding:0 8px 0 14px;background:#3a2d0a;border-bottom:1px solid #7a5d12;color:#ffe9a3;font-size:14px}
+#nb.on{display:flex}
+#nb .dot{background:#f2b134}
+#nbt{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#nbb svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#nbb{flex:none;display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:10px;border:0;background:#ffd34d;color:#241b00;font-size:14px;font-weight:700}
+.sg{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;display:grid;gap:16px;padding:14px;align-content:start}
+.sc{min-width:0}
+.sc>.sec+.sec{margin-top:16px}
+.sl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6;margin:0 0 8px}
+.col{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;gap:6px}
+.sb{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;border:1px solid #3a3566;background:#0f0d24;color:#f4f1ff;border-radius:10px;font-size:14px;font-weight:600;text-align:left}
+.sb[aria-pressed=true]{background:#ffd34d;border-color:#ffd34d;color:#241b00}
+.sb:hover{border-color:#6a5cff}
+.sb[aria-pressed=true]:hover{border-color:#ffd34d}
+.sb.sz{width:100%;height:40px;padding:0 12px;justify-content:flex-start}
+.sb.sz .a{flex:1 1 auto}
+.sb.sz .b{font-size:13px;font-weight:500;color:#a9a3d6}
+.sb.sz[aria-pressed=true] .b{color:#241b00}
+.sb.sg3{flex:1 1 0;height:40px;font-weight:700}
+.sb.ac{flex:1 1 0;height:40px}
+.sb svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.chg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.chg .sb{height:36px;border-radius:9px;padding:0;font-weight:700}
+.chg .sb.bonus{font-size:10px}
+.chg .sb.here{border-color:#ffd34d;color:#ffd34d}
+.chg .sb.dis{opacity:.4;cursor:default}
+.sb.ft{width:100%;height:38px;padding:0 12px;font-size:13px;justify-content:flex-start}
+.sb.ft .a{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb.ft.on{border-color:#ffd34d}
+.sb.ft .on{font-size:11px;font-weight:800;letter-spacing:.05em;color:#241b00;background:#ffd34d;border-radius:6px;padding:2px 7px}
+.lk{height:36px;padding:0;border:0;background:none;color:#f4f1ff;font-size:13px;font-weight:600;text-decoration:underline;text-align:left}
+.sh{margin:6px 0 2px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6}
+.kh{font-size:13px;line-height:1.45;color:#a9a3d6}
+.kh b{color:#f4f1ff}
+.note{font-size:12px;color:#f2b134;margin-top:6px;min-height:0}
 #menu{position:fixed;z-index:50;display:none;width:340px;max-height:calc(100vh - 80px);overflow:auto;background:#1d1a3d;border:1px solid #3a3566;border-radius:12px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
 #menu h4{margin:10px 8px 4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6}
 #menu h4:first-child{margin-top:4px}
@@ -87,16 +126,27 @@ var PANES=[
  {n:4,name:'Admin',col:'#8a5cd6'}
 ];
 // To add a layout: add a row here (pane widths add to 3400; pane 4 takes what is left) and it appears in the top bar.
+// size = the game's screen size when the layout is chosen (an id of SIZES); cols = the strip's columns; place = which strip parts sit in which column.
+var SIZES=[
+ {id:'fu',label:'Duo folded, upright',w:466,h:657,duo:1},
+ {id:'fs',label:'Duo folded, sideways',w:678,h:445,duo:1},
+ {id:'os',label:'Duo open, sideways',w:951,h:648,duo:1},
+ {id:'ou',label:'Duo open, upright',w:669,h:869,duo:1},
+ {id:'dw',label:'Desktop wide',w:1600,h:900,duo:0}
+];
 var LAYOUTS=[
- {id:'all',label:'All four',w:[1000,951,829,620],game:{w:951,h:648,duo:1,size:'Duo open, sideways'},p4:{page:'admin.html',name:'Admin'}},
- {id:'battle',label:'Battle',w:[520,1600,860,420],game:{w:1600,h:900,duo:0,size:'Desktop wide'},p4:{page:'builds.html',name:'Builds'}}
+ {id:'all',label:'All four',w:[1000,951,829,620],size:'os',p4:{page:'admin.html',name:'Admin'},
+  cols:'290px 310px minmax(0,1fr)',place:[['sizes','story','diff','mrow'],['chap','fights'],['keys']]},
+ {id:'battle',label:'Battle',w:[520,1600,860,420],size:'dw',p4:{page:'builds.html',name:'Builds'},
+  cols:'300px 330px 330px minmax(0,1fr)',place:[['sizes'],['story','diff','mrow','chap'],['fights'],['keys']]}
 ];
 var LS_LAYOUT='aot-dash-layout',LS_TOKEN='aot-gh-token';
-var STRIP_PAGE='builds.html';   // until dash2 the Builds page fills the space under the game
 var APP_TITLE=': The Adventures of Tom';
-var cur=LAYOUTS[0],keys=2,bigN=0,built=false,tools=null;
+var cur=LAYOUTS[0],curSize=SIZES[2],keys=2,bigN=0,built=false,tools=null;
+var BH=[],SEC={},muted=false,what=null,pendingWhat=null,pendingReady=null,chBuilt=null,labIndex=null,showAll=false,noteT=0;
+var LS_STORY='aot-b3-story',LS_DIFF='aot-diff';
 var P={};   // n -> {n,slot,pane,frame,head fields,cur (last accepted address),explicit (page chosen with Change page)}
-var stripFrame=null;
+var strip=null;
 function $(id){return document.getElementById(id);}
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
 function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
@@ -161,8 +211,9 @@ function build(){
   h.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;headAction(p.n,b.getAttribute('data-a'),b);});
   o.pane.appendChild(h);
   if(p.n===2){
-   o.wrap=el('div','gamewrap');o.frame=mkFrame('game');o.wrap.appendChild(o.frame);o.pane.appendChild(o.wrap);
-   o.strip=el('div','strip');stripFrame=mkFrame('under the game');o.strip.appendChild(stripFrame);o.pane.appendChild(o.strip);
+   o.gbody=el('div','gbody');
+   o.wrap=el('div','gamewrap');o.frame=mkFrame('game');o.wrap.appendChild(o.frame);o.gbody.appendChild(o.wrap);
+   o.strip=el('div','strip');strip=o.strip;buildStrip(o.strip);o.gbody.appendChild(o.strip);o.pane.appendChild(o.gbody);
   } else {
    o.body=el('div','pbody');o.frame=mkFrame(p.name);o.body.appendChild(o.frame);o.pane.appendChild(o.body);
   }
@@ -170,14 +221,13 @@ function build(){
   watchKeys(o.frame);
   o.slot.appendChild(o.pane);pn.appendChild(o.slot);P[p.n]=o;
  });
- stripFrame.addEventListener('load',function(){attach(stripFrame,4,true);});
- watchKeys(stripFrame);
  var saved=ls(LS_LAYOUT);
  cur=LAYOUTS.filter(function(L){return L.id===saved;})[0]||LAYOUTS[0];
+ curSize=sizeById(cur.size);
  applyLayout(true);
  // The game is the big download, so the other three frames start first.
  var left=3,started=false;
- function startGame(){if(started)return;started=true;P[2].cur=gameUrl('index.html');P[2].frame.src=P[2].cur;stripFrame.src=STRIP_PAGE;}
+ function startGame(){if(started)return;started=true;P[2].cur=gameUrl('index.html');P[2].frame.src=P[2].cur;}
  [1,3,4].forEach(function(n){
   var page=n===1?'board.html':n===3?'battle-guide.html':cur.p4.page;
   P[n].cur=page;P[n].frame.addEventListener('load',function once(){P[n].frame.removeEventListener('load',once);if(--left===0)startGame();});
@@ -204,6 +254,7 @@ function watchKeys(frame){
    var w=frame.contentWindow,d=w.document;
    if(d===last||w.location.href==='about:blank')return;
    last=d;w.addEventListener('keydown',onKey,true);
+   if(frame===P[2].frame)installMute(w);
   }catch(e){}
  },4);
 }
@@ -211,9 +262,10 @@ function mkFrame(title){
  var f=document.createElement('iframe');f.title=title;f.setAttribute('allow','autoplay; fullscreen; gamepad; clipboard-write');
  return f;
 }
+function sizeById(id){return SIZES.filter(function(x){return x.id===id;})[0]||SIZES[2];}
 function gameUrl(page){
  var u=new URL(page,location.href);
- u.searchParams.set('duo',cur.game.duo?'1':'0');
+ u.searchParams.set('duo',curSize.duo?'1':'0');
  return u.pathname.replace(/^.*\//,'')+u.search+u.hash;
 }
 // ---- layout
@@ -224,15 +276,25 @@ function applyLayout(first){
   if(p.n!==4)o.slot.style.width=L.w[i]+'px';
   o.nm.textContent=p.n===4?L.p4.name:p.name;
  });
- var g=L.game;
- P[2].wrap.style.height=g.h+'px';P[2].frame.style.width=g.w+'px';P[2].frame.style.height=g.h+'px';
  LAYOUTS.forEach(function(x){$('lay-'+x.id).setAttribute('aria-pressed',String(x.id===L.id));});
+ placeStrip();
+ applySize(first);
+}
+// The game's screen size: the frame and the box around it take the size; the Duo layout is forced for this frame only (forceDuo).
+function applySize(first){
+ var g=curSize;
+ P[2].wrap.style.height=g.h+'px';P[2].frame.style.width=g.w+'px';P[2].frame.style.height=g.h+'px';
  if(!first)forceDuo(frameWin(2));
- head();
+ stripState();head();
+}
+function setSize(id){
+ var z=sizeById(id);if(z.id!==id)return;
+ if(z.id==='dw'&&cur.id!=='battle'){setLayout('battle');return;}   // Desktop wide is the Battle layout
+ curSize=z;applySize(false);
 }
 function setLayout(id){
  var L=LAYOUTS.filter(function(x){return x.id===id;})[0];if(!L||L===cur)return;
- var old=cur;cur=L;lsSet(LS_LAYOUT,id);
+ var old=cur;cur=L;lsSet(LS_LAYOUT,id);curSize=sizeById(L.size);
  applyLayout(false);
  // Pane 4 takes the new layout's page (Admin in All four, Builds in Battle).
  if(old.p4.page!==L.p4.page){P[4].cur=L.p4.page;P[4].explicit=null;P[4].frame.contentWindow.location.replace(L.p4.page);}
@@ -244,17 +306,29 @@ function setLayout(id){
 function forceDuo(w){
  try{
   if(!w||typeof w.detectDuo!=='function')return;
-  if(!w.detectDuo.__dash){var f=function(){return !!cur.game.duo;};f.__dash=1;w.detectDuo=f;}
+  if(!w.detectDuo.__dash){var f=function(){return !!curSize.duo;};f.__dash=1;w.detectDuo=f;}
   if(typeof w.applyLayout==='function')w.applyLayout();
   w.dispatchEvent(new w.Event('resize'));
+  duoAddress(w);
+ }catch(e){}
+}
+// The game's address carries the size too (index.html?duo=1): the splash drops the query when go= is in it, and a size change leaves an old
+// one behind, so keep it true; then a reload of the game (its own RELOAD) lays out right from the first frame.
+function duoAddress(w){
+ try{
+  if(fileOf(new URL(w.location.href))!=='index.html')return;
+  var q=new URLSearchParams(w.location.search);
+  if(q.get('duo')===(curSize.duo?'1':'0'))return;
+  q.set('duo',curSize.duo?'1':'0');
+  w.history.replaceState(null,'',w.location.pathname+'?'+q.toString()+w.location.hash);
  }catch(e){}
 }
 // ---- frames: links, keys, guard
-function attach(frame,from,isStrip){
+function attach(frame,from){
  var w,d;try{w=frame.contentWindow;d=frame.contentDocument;if(!d||!w.location||w.location.href==='about:blank')return;}catch(e){return;}
  if(d.__dash)return;d.__dash=1;
  d.addEventListener('click',function(ev){linkClick(ev,from,d);},true);
- d.addEventListener('pointerdown',function(){closeMenu();if(!isStrip)markKeys(from);},true);
+ d.addEventListener('pointerdown',function(){closeMenu();markKeys(from);},true);
 }
 function linkClick(ev,from,d){
  if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;
@@ -285,7 +359,7 @@ function onFrameLoad(n){
  var o=P[n],u=frameUrl(n);
  if(!u)return;
  attach(o.frame,n,false);
- if(n===2){forceDuo(frameWin(2));}
+ if(n===2){gameLoaded(frameWin(2),u);}
  // A pane that ends up on another pane's page (a script moved it): send the page home and put this pane back.
  var landed=u.pathname.replace(/^.*\//,'')+u.search+u.hash;
  if(sameSite(u)&&ownerOf(u)!==n&&o.explicit!==fileOf(u)){
@@ -358,7 +432,7 @@ function whatShowing(n){
   if(w>=860)return 'For you and Claude, side by side';
   var b=d&&d.querySelector('#tabs button.on');return b?b.textContent.replace(/[0-9]+/g,'').trim():'For you';
  }
- if(n===2)return cur.game.size+' · '+(f==='battle-lab.html'?'Battle Lab':'The game');
+ if(n===2)return curSize.label+' · '+(f==='battle-lab.html'?'Battle Lab':what?what.text:'The game');
  if(n===3&&f==='battle-guide.html'){
   var h=(u.hash||'').replace(/^#/,'').split('/').filter(Boolean).map(function(s){return s.charAt(0).toUpperCase()+s.slice(1);});
   return h.join(' · ');
@@ -372,7 +446,7 @@ function head(n){
  list.forEach(function(k){if(P[k]&&P[k].frame.src!==''){var t=whatShowing(k);if(P[k].wh.textContent!==t)P[k].wh.textContent=t;}});
 }
 function poll(){
- head();
+ head();stripState();
  var c={for:'#c-for',claude:'#c-claude'};
  var d=frameDoc(1);
  for(var v in c){
@@ -396,17 +470,208 @@ function tokenState(){
 }
 function liveBuild(){
  fetch('data/build-history.js?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
-  var line=t.split('\n').filter(function(l){return /^\{\s*"tag"/.test(l);})[0];
-  var e=JSON.parse(line.replace(/,\s*$/,''));
+  var lines=t.split('\n').filter(function(l){return /^\{\s*"tag"/.test(l);});
+  BH=lines.map(function(l){try{return JSON.parse(l.replace(/,\s*$/,''));}catch(x){return null;}}).filter(Boolean);
+  var e=BH[0];
   var when=new Date(e.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
   $('livet').innerHTML='Live build <b></b>, '+when;$('livet').querySelector('b').textContent=e.tag;
   $('live').querySelector('.dot').className='dot';
+  stripState();
  }).catch(function(){$('live').querySelector('.dot').className='dot warn';$('livet').textContent='Could not read the live build';});
+}
+// ---- dash2: the strip under the game
+// What the strip does to the game it reaches from outside (same origin): chapter jumps and test fights start the game fresh, the way its own
+// title screen does; Difficulty uses the game's own b7SetDiff; Story battles is the same setting as admin.html; Mute and Report act on the frame.
+function gEval(code){try{var w=frameWin(2);return w?w.eval(code):undefined;}catch(e){return undefined;}}
+function gameFile(){var u=frameUrl(2);return u?fileOf(u):'';}
+function gameAtTitle(){return gameFile()==='index.html'&&gEval("typeof splash==='object'&&splash.active===true&&typeof splashGo==='function'")===true;}
+function gameTag(){return gameFile()==='index.html'?gEval("typeof BUILD_TAG==='string'?BUILD_TAG:''")||'':'';}
+// Start the game on a new address (the Duo size rides along in the address and is also forced by forceDuo), then give it the keys.
+function gameNav(rel,w){
+ pendingWhat=w||null;
+ var u=gameUrl(rel);P[2].cur=u;
+ try{frameWin(2).location.replace(absUrl(u).href);}catch(e){P[2].frame.src=u;}
+ setKeys(2);
+}
+function gameReady(f){   // wait for the title screen of the game that is loading, then run f
+ var t0=Date.now(),iv=setInterval(function(){
+  if(gameAtTitle()){clearInterval(iv);f();}
+  else if(Date.now()-t0>120000)clearInterval(iv);
+ },100);
+}
+function jumpChapter(n){
+ var run=function(){
+  gEval(n==='B'?"splashGo(typeof beginBonus==='function'?beginBonus:beginOpening)":"splashGo(function(){chapterJump("+n+")})");
+  what={text:n==='B'?'Bonus: Nine Scoops':'Chapter '+n,ch:n};setKeys(2);stripState();head(2);
+ };
+ if(gameAtTitle()){run();return;}
+ pendingReady=run;gameNav('index.html',null);
+}
+function startFight(kind,i,name){
+ gameNav('index.html?go='+kind+'&i='+i,{text:name,fight:kind+i});
+}
+function reloadGame(){
+ what=null;
+ if(gameFile()==='index.html'&&gEval("typeof splashReload==='function'")===true){gEval("splashReload()");}   // the title screen's own RELOAD
+ else{try{frameWin(2).location.reload();}catch(e){P[2].frame.src=P[2].frame.src;}}
+ setKeys(2);
+}
+function gameLoaded(w,u){
+ forceDuo(w);installMute(w);
+ what=pendingWhat;pendingWhat=null;
+ if(pendingReady){var f=pendingReady;pendingReady=null;gameReady(f);}
+ stripState();head(2);
+}
+function newestLive(){for(var i=0;i<BH.length;i++)if(BH[i].kind!=='house')return {e:BH[i],i:i};return null;}
+function buildWatch(){
+ var nb=$('nb'),mine=gameTag(),n=newestLive(),show=false;
+ if(mine&&n&&n.e.tag!==mine){
+  var idx=-1;for(var i=0;i<BH.length;i++)if(BH[i].tag===mine){idx=i;break;}
+  show=idx<0||idx>n.i;   // the game's build is older than the newest real build (housekeeping builds never count)
+  if(show){
+   var when=new Date(n.e.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+   var t='A newer build is live: '+n.e.tag+', '+when+'. This pane is still on '+mine+'.';
+   if($('nbt').getAttribute('data-t')!==t){$('nbt').setAttribute('data-t',t);$('nbt').innerHTML='<b></b> <span></span>';$('nbt').firstChild.textContent='A newer build is live:';$('nbt').lastChild.textContent=t.slice(t.indexOf(':')+2);}
+  }
+ }
+ nb.classList.toggle('on',show);
+}
+function sbtn(cls,html,fn,id){var b=el('button','sb '+cls,html);b.type='button';b.setAttribute('aria-pressed','false');if(id)b.id=id;b.onclick=fn;return b;}
+function sec(id,label){var d=el('div','sec');d.id='s-'+id;if(label)d.appendChild(el('div','sl',label));SEC[id]=d;return d;}
+var ICON={mute:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M17 9l4 6"/><path d="M21 9l-4 6"/></svg>',report:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/></svg>',reload:'<svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>'};
+function buildStrip(root){
+ var nb=el('div',null,'<span class="dot"></span><span id="nbt"></span>');nb.id='nb';
+ var rb=sbtn('',ICON.reload+'Reload game',reloadGame,'nbb');rb.className='';rb.removeAttribute('aria-pressed');nb.appendChild(rb);
+ root.appendChild(nb);
+ var sg=el('div','sg');sg.id='sg';
+ for(var c=1;c<=4;c++){var d=el('div','sc');d.id='sc'+c;sg.appendChild(d);}
+ root.appendChild(sg);
+ // screen sizes
+ var s1=sec('sizes','Screen size of this pane'),l1=el('div','col');
+ SIZES.forEach(function(z){var b=sbtn('sz','<span class="a">'+z.label+'</span><span class="b">'+z.w+' x '+z.h+'</span>',function(){setSize(z.id);},'sz-'+z.id);l1.appendChild(b);});
+ s1.appendChild(l1);
+ // story battles (admin.html's setting) and difficulty (battle-lab.html's setting)
+ var s2=sec('story','Story battles'),r2=el('div','row');
+ [['old','Old'],['chapter','By chapter'],['new','New']].forEach(function(o){r2.appendChild(sbtn('sg3',o[1],function(){lsSet(LS_STORY,o[0]);stripState();},'story-'+o[0]));});
+ s2.appendChild(r2);
+ var s3=sec('diff','Difficulty'),r3=el('div','row');
+ [['rose','EASY'],['grace','MEDIUM'],['director','HARD']].forEach(function(o){r3.appendChild(sbtn('sg3',o[1],function(){setDiff(o[0]);},'diff-'+o[0]));});
+ s3.appendChild(r3);
+ var s4=sec('mrow'),r4=el('div','row');
+ r4.appendChild(sbtn('ac',ICON.mute+'<span id="mutet">Mute game</span>',function(){setMute(!muted);},'mute'));
+ r4.appendChild(sbtn('ac',ICON.report+'Report',doReport,'report'));
+ s4.appendChild(r4);s4.appendChild(el('div','note')).id='note';
+ // chapters
+ var s5=sec('chap','Jump to a chapter'),g5=el('div','chg');
+ for(var n=1;n<=20;n++)(function(n){g5.appendChild(sbtn('',''+n,function(){if(!this.classList.contains('dis'))jumpChapter(n);},'ch-'+n));})(n);
+ g5.appendChild(sbtn('bonus','BONUS',function(){jumpChapter('B');},'ch-B'));
+ s5.appendChild(g5);
+ // test fights
+ var s6=sec('fights','New battle test fights');s6.appendChild(el('div','col')).id='fl';
+ var s7=sec('keys');
+ s7.appendChild(el('div','kh','<b>Keyboard.</b> Ctrl 1 to 4 moves the keys to a pane; the pane with the gold frame has them. Arrows or WASD, Enter, M and L play the game while its frame is gold. A controller plays the game as well.'));
+ fetch('data/battle-lab-index.json?t='+Date.now()).then(function(r){return r.json();}).then(function(j){labIndex=j;renderFights();}).catch(function(){$('fl').textContent='Could not read the list of test fights.';});
+}
+// Which parts sit in which column is the layout's (LAYOUTS place); moving a part keeps its state.
+function placeStrip(){
+ var sg=$('sg');sg.style.gridTemplateColumns=cur.cols;
+ for(var c=1;c<=4;c++){
+  var d=$('sc'+c),ids=cur.place[c-1]||[];
+  d.style.display=ids.length?'':'none';
+  ids.forEach(function(id){d.appendChild(SEC[id]);});
+ }
+}
+function renderFights(){
+ if(!labIndex)return;
+ var fl=$('fl');fl.innerHTML='';
+ var b3=labIndex.b3||[],b2=labIndex.b2||[],list=showAll?b3:b3.slice(0,5);
+ function row(kind,e){
+  var b=sbtn('ft','<span class="a"></span>',function(){startFight(kind,e.i,e.name);},'ft-'+kind+e.i);
+  b.firstChild.textContent=e.name;b.setAttribute('data-f',kind+e.i);fl.appendChild(b);
+ }
+ list.forEach(function(e){row('new',e);});
+ if(showAll&&b2.length){fl.appendChild(el('div','sh','Old Battle Lab fights'));b2.forEach(function(e){row('lab',e);});}
+ var more=el('button','lk',showAll?'Show the first five':'Show all '+b3.length+' test fights');more.type='button';more.id='ft-more';
+ more.onclick=function(){showAll=!showAll;renderFights();stripState();};fl.appendChild(more);
+}
+function setDiff(id){
+ if(gameFile()==='index.html'&&gEval("typeof b7SetDiff==='function'")===true)gEval("b7SetDiff('"+id+"')");
+ else lsSet(LS_DIFF,id);
+ stripState();
+}
+function curDiff(){
+ var v=gameFile()==='index.html'?gEval("typeof B7==='object'?B7.diff:''"):'';
+ if(!v)v=ls(LS_DIFF);
+ return v==='rose'||v==='director'?v:'grace';
+}
+// Mute silences this game frame only and is not saved. Every sound goes to the browser's output through an audio node connect() call, so
+// each connection to the output goes through one gain node of ours instead; spoken lines keep their timing but play at volume 0.
+function installMute(w){
+ try{
+  if(!w||w.__dashMute)return;w.__dashMute=1;w.__muteGains=[];
+  var AN=w.AudioNode&&w.AudioNode.prototype;
+  if(AN&&AN.connect&&!AN.connect.__dash){
+   var oc=AN.connect;
+   AN.connect=function(dest){
+    try{
+     if(dest&&w.AudioDestinationNode&&dest instanceof w.AudioDestinationNode){
+      var ctx=dest.context;
+      if(!ctx.__mg){ctx.__mg=ctx.createGain();ctx.__mg.gain.value=muted?0:1;oc.call(ctx.__mg,dest);w.__muteGains.push(ctx.__mg);}
+      oc.call(this,ctx.__mg);return dest;
+     }
+    }catch(e){}
+    return oc.apply(this,arguments);
+   };
+   AN.connect.__dash=1;
+  }
+  var SS=w.SpeechSynthesis&&w.SpeechSynthesis.prototype;
+  if(SS&&SS.speak&&!SS.speak.__dash){
+   var os=SS.speak;
+   SS.speak=function(u){try{if(muted&&u)u.volume=0;}catch(e){}return os.apply(this,arguments);};
+   SS.speak.__dash=1;
+  }
+ }catch(e){}
+}
+function setMute(m){
+ muted=!!m;
+ var w=frameWin(2);
+ try{(w.__muteGains||[]).forEach(function(g){g.gain.value=muted?0:1;});}catch(e){}
+ stripState();
+}
+function say(t){var n=$('note');if(!n)return;n.textContent=t;clearTimeout(noteT);noteT=setTimeout(function(){n.textContent='';},6000);}
+function doReport(){
+ if(gameFile()!=='index.html'||gEval("typeof brpOpen==='function'")!==true){say('The game is not showing a page with the Report tab.');return;}
+ if(gEval("brpOn()")!==true){say('The Report tab is off. Turn it on in Admin > Report tab.');return;}
+ gEval("brpOpen()");setKeys(2);
+}
+function press(id,on){var b=$(id);if(b)b.setAttribute('aria-pressed',String(!!on));}
+function stripState(){
+ if(!built||!strip)return;
+ buildWatch();
+ SIZES.forEach(function(z){press('sz-'+z.id,z.id===curSize.id);});
+ var sm=ls(LS_STORY);sm=sm==='old'||sm==='new'?sm:'chapter';
+ ['old','chapter','new'].forEach(function(k){press('story-'+k,k===sm);});
+ var d=curDiff();['rose','grace','director'].forEach(function(k){press('diff-'+k,k===d);});
+ press('mute',muted);$('mutet').textContent=muted?'Unmute game':'Mute game';
+ // the chapter the game is in, and which chapters it can open
+ var here=gameFile()==='index.html'?gEval("typeof STORY==='object'&&STORY.mode==='full'?STORY.chapter:0")||0:0;
+ if(!chBuilt&&gameAtTitle()){
+  var a=[];for(var n=1;n<=20;n++)a.push(gEval("typeof splashBuilt==='function'?!!splashBuilt("+n+"):true")!==false);
+  chBuilt=a;
+ }
+ for(var n2=1;n2<=20;n2++){var b=$('ch-'+n2);if(!b)continue;b.classList.toggle('dis',!!chBuilt&&!chBuilt[n2-1]);b.title=chBuilt&&!chBuilt[n2-1]?'Chapter '+n2+' is still being built.':'';b.classList.toggle('here',here===n2||(what&&what.ch===n2));}
+ var cf=what&&what.fight;
+ [].forEach.call(strip.querySelectorAll('.sb.ft'),function(b){
+  var on=b.getAttribute('data-f')===cf,chip=b.querySelector('.on');
+  b.classList.toggle('on',on);
+  if(on&&!chip){chip=el('span','on','ON SCREEN');b.appendChild(chip);}
+  if(!on&&chip)chip.remove();
+ });
 }
 // ---- start
 function start(){if(innerWidth>=3000)build();}
 window.addEventListener('resize',start);
-window.__DASH={P:P,setKeys:setKeys,setLayout:setLayout,keys:function(){return keys;},layout:function(){return cur.id;},big:function(){return bigN;},strip:function(){return stripFrame;}};
+window.__DASH={P:P,setKeys:setKeys,setLayout:setLayout,setSize:setSize,keys:function(){return keys;},layout:function(){return cur.id;},size:function(){return curSize.id;},big:function(){return bigN;},strip:function(){return strip;},live:function(){return BH;},muted:function(){return muted;}};
 start();
 </script>
 </body>

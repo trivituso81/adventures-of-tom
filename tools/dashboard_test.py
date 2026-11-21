@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test for dashboard.html (dash1). Run from the repo root: python3 tools/dashboard_test.py
+"""Test for dashboard.html (dash1, dash2: the strip under the game). Run from the repo root: python3 tools/dashboard_test.py
 Own server on 8873; screenshots in tools/shots/dashboard-*.png (look at them: 3440 x 1328 is a maximized Chrome window,
 3440 x 1440 is macOS full screen). Plan: claude/dashboard-plan.md. Docs: docs/DASHBOARD.md."""
 import os, sys, re, subprocess, time
@@ -20,9 +20,67 @@ def put(pg, n, html):
     pg.evaluate("([n,h])=>{var d=__DASH.P[n].frame.contentDocument;var o=d.getElementById('__t');if(o)o.remove();var w=d.createElement('div');w.id='__t';w.style.cssText='position:fixed;left:8px;top:8px;z-index:99999;background:#fff;padding:6px';w.innerHTML=h;d.body.appendChild(w);}", [n, html])
     return pg.frame_locator('#pane%d iframe' % n).locator('#__t a')
 def wait_loaded(pg, timeout=60000):
-    pg.wait_for_function("()=>[1,2,3,4].every(n=>{try{var w=__DASH.P[n].frame.contentWindow;return w.document.readyState==='complete'&&w.location.href!=='about:blank'}catch(e){return false}})&&__DASH.strip().contentDocument&&__DASH.strip().contentDocument.readyState==='complete'", timeout=timeout)
+    pg.wait_for_function("()=>[1,2,3,4].every(n=>{try{var w=__DASH.P[n].frame.contentWindow;return w.document.readyState==='complete'&&w.location.href!=='about:blank'}catch(e){return false}})&&__DASH.strip()&&document.querySelectorAll('#fl .sb').length>0", timeout=timeout)
     pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('typeof splash==\"object\"&&splash.active')===true}catch(e){return false}}", timeout=120000)
     pg.wait_for_timeout(2500)
+
+
+def gcls(pg): return pg.evaluate("__DASH.P[2].frame.contentDocument.documentElement.className").split()
+def gsize(pg): return pg.evaluate("[__DASH.P[2].frame.clientWidth,__DASH.P[2].frame.clientHeight]")
+def geval(pg, code): return pg.evaluate("(c)=>__DASH.P[2].frame.contentWindow.eval(c)", code)
+def settle(pg, ms=900): pg.wait_for_timeout(ms)
+
+def strip_geometry(pg, tag, H, errs):
+    """dash2: the strip under the game, as drawn; every screen size; the layouts' columns."""
+    ok(not pg.is_visible('#nb'), '%s: no newer-build bar while the game is on the newest build' % tag)
+    cols = pg.evaluate("getComputedStyle(document.getElementById('sg')).gridTemplateColumns.split(' ').length")
+    ok(cols == 3 and not pg.is_visible('#sc4'), '%s: All four: the strip has three columns' % tag)
+    inside = lambda c, ids: pg.evaluate("(a)=>a[1].every(i=>document.getElementById('sc'+a[0]).contains(document.getElementById('s-'+i)))", [c, ids])
+    ok(inside(1, ['sizes', 'story', 'diff', 'mrow']) and inside(2, ['chap', 'fights']) and inside(3, ['keys']), '%s: sizes, story battles, difficulty, mute and report sit in column 1; chapters and fights in column 2; keyboard help in column 3' % tag)
+    labels = pg.evaluate("[...document.querySelectorAll('#s-sizes .sb')].map(b=>b.textContent)")
+    ok(labels == ['Duo folded, upright466 x 657', 'Duo folded, sideways678 x 445', 'Duo open, sideways951 x 648', 'Duo open, upright669 x 869', 'Desktop wide1600 x 900'], '%s: the five screen sizes are listed (%s)' % (tag, labels))
+    ok(pg.evaluate("document.getElementById('sz-os').getAttribute('aria-pressed')") == 'true', '%s: Duo open, sideways is the one in use' % tag)
+    ok(pg.evaluate("document.querySelectorAll('#s-chap .sb').length") == 21 and pg.inner_text('#ch-B') == 'BONUS', '%s: chapters 1 to 20 and BONUS' % tag)
+    ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 5 and 'Show all 27 test fights' in pg.inner_text('#ft-more'), '%s: five test fights, then Show all 27 test fights' % tag)
+    ok(pg.inner_text('#ft-new0') == 'NEW 1: TWO MUDLINGS', '%s: test fights carry the names from data/battle-lab-index.json' % tag)
+    ok(pg.evaluate("document.querySelectorAll('#s-story .sb').length") == 3 and pg.evaluate("document.querySelectorAll('#s-diff .sb').length") == 3 and 'Keyboard.' in pg.inner_text('#s-keys'), '%s: Story battles and Difficulty have three choices each, the keyboard help is there' % tag)
+    ok(box(pg, '#pane2 .strip')[1] >= box(pg, '#pane2 .gamewrap')[1] + 648, '%s: the strip sits under the game' % tag)
+    ok(box(pg, '#pane2 .strip')[3] >= 280, '%s: the strip is at least 280 tall (%d)' % (tag, box(pg, '#pane2 .strip')[3]))
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-%d.png' % H), clip={'x': 1008, 'y': 44, 'width': 960, 'height': H - 44})
+    # --- every size: the frame, the box around it, the layout the game picks for it
+    want = {'fu': ([466, 657], {'duofold'}, {'duo', 'tablet', 'landscape'}), 'fs': ([678, 445], {'duofold', 'landscape'}, {'duo', 'tablet'}),
+            'ou': ([669, 869], {'duo', 'tablet'}, {'duofold', 'landscape'}), 'os': ([951, 648], {'duo', 'tablet', 'landscape'}, {'duofold'})}
+    for sid in ('fu', 'fs', 'ou', 'os'):
+        pg.click('#sz-' + sid); settle(pg)
+        size, has, hasnt = want[sid]; c = gcls(pg)
+        ok(gsize(pg) == size, '%s: size %s: the game frame is %s (%s)' % (tag, sid, size, gsize(pg)))
+        ok(has <= set(c) and not (hasnt & set(c)), '%s: size %s: the game lays out for it (%s)' % (tag, sid, c))
+        ok(pg.evaluate("document.getElementById('sz-%s').getAttribute('aria-pressed')" % sid) == 'true' and pg.evaluate("document.querySelectorAll('#s-sizes .sb[aria-pressed=true]').length") == 1, '%s: size %s is the only one marked' % (tag, sid))
+        ok(box(pg, '#pane2 .gamewrap')[3] == size[1], '%s: size %s: the box around the game is %d tall' % (tag, sid, size[1]))
+        fb = pg.evaluate("(()=>{var r=__DASH.P[2].frame.getBoundingClientRect(),p=document.getElementById('pane2').getBoundingClientRect();return [r.left-p.left,p.right-r.right]})()")
+        ok(abs(fb[0] - fb[1]) <= 1, '%s: size %s: the game is centred in its pane (%s)' % (tag, sid, fb))
+        ok(box(pg, '#pane2 .strip')[1] >= box(pg, '#pane2 .gamewrap')[1] + size[1] and box(pg, '#pane2 .strip')[3] >= 280, '%s: size %s: the strip sits under the game, %d tall' % (tag, sid, box(pg, '#pane2 .strip')[3]))
+        ok(pg.evaluate("(()=>{var g=document.querySelector('#pane2 .gbody');return g.scrollWidth<=g.clientWidth})()") and pg.evaluate("(()=>{var w=__DASH.P[2].frame.contentWindow;return w.document.documentElement.scrollWidth<=w.innerWidth})()"), '%s: size %s: nothing scrolls sideways' % (tag, sid))
+        ok({'fu': 'Duo folded, upright', 'fs': 'Duo folded, sideways', 'ou': 'Duo open, upright', 'os': 'Duo open, sideways'}[sid] in pg.inner_text('#pane2 .wh'), '%s: size %s: the pane header names it' % (tag, sid))
+        ok(pg.evaluate("localStorage.getItem('le-duo')") is None, '%s: size %s: le-duo is still not set' % (tag, sid))
+        if sid == 'ou': pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-upright-%d.png' % H))
+    ok(geval(pg, "location.search").count('duo=1') == 1, '%s: the game frame address carries ?duo=1 (%s)' % (tag, geval(pg, "location.search")))
+    # --- Desktop wide is the Battle layout; a Duo size picked inside it stays in it
+    pg.click('#sz-dw'); settle(pg, 2500)
+    ok(pg.evaluate("__DASH.layout()") == 'battle' and [box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3, 4)] == [520, 1600, 860, 420], '%s: Desktop wide switches to the Battle layout' % tag)
+    ok(gsize(pg) == [1600, 900] and not ({'duo', 'tablet', 'duofold'} & set(gcls(pg))), '%s: Desktop wide: the game is 1600 x 900 with the Duo off (%s)' % (tag, gcls(pg)))
+    ok('duo=0' in geval(pg, "location.search") and 'duo=1' not in geval(pg, "location.search"), '%s: Desktop wide: the game address follows to ?duo=0 (%s)' % (tag, geval(pg, "location.search")))
+    cols = pg.evaluate("getComputedStyle(document.getElementById('sg')).gridTemplateColumns.split(' ').length")
+    ok(cols == 4 and pg.is_visible('#sc4') and pg.evaluate("document.getElementById('sc4').contains(document.getElementById('s-keys'))"), '%s: Battle layout: the strip has four columns, keyboard help in the last' % tag)
+    ok(inside(1, ['sizes']) and inside(2, ['story', 'diff', 'mrow', 'chap']) and inside(3, ['fights']), '%s: Battle layout: sizes, then story/difficulty/mute/chapters, then fights' % tag)
+    ok(abs(box(pg, '#pane2 .strip')[3] - (H - 44 - 16 - 40 - 900)) <= 1 or box(pg, '#pane2 .strip')[3] >= 280, '%s: Battle layout: the strip is %d tall' % (tag, box(pg, '#pane2 .strip')[3]))
+    ok(pg.evaluate("(()=>{var e=document.getElementById('sg');return e.scrollWidth<=e.clientWidth})()"), '%s: Battle layout: the strip does not scroll sideways' % tag)
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-battle-%d.png' % H), clip={'x': 528, 'y': 44, 'width': 1620, 'height': H - 44})
+    pg.click('#sz-ou'); settle(pg, 1500)
+    ok(pg.evaluate("__DASH.layout()") == 'battle' and gsize(pg) == [669, 869] and 'duo' in gcls(pg), '%s: a Duo size picked in the Battle layout stays in it' % tag)
+    pg.click('#lay-all'); settle(pg, 2500)
+    ok(pg.evaluate("__DASH.layout()") == 'all' and pg.evaluate("__DASH.size()") == 'os' and gsize(pg) == [951, 648], '%s: back to All four: Duo open, sideways again' % tag)
+    ok(not errs, '%s: no page errors in the strip tests %s' % (tag, errs[:3]))
 
 web = subprocess.Popen([sys.executable, '-m', 'http.server', str(PORT)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 time.sleep(2)
@@ -31,13 +89,19 @@ try:
         b = p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None)
         for H in (1328, 1440):
             ctx = b.new_context(viewport={'width': 3440, 'height': H}); pg = ctx.new_page(); errs = []
+            standin = ['']   # one extra line put at the top of data/build-history.js when the dashboard asks for it (its fetch has ?t=)
+            def hist(route):
+                r = route.fetch(); body = r.text()
+                if standin[0]: body = body.replace('const BUILD_HISTORY=[\n', 'const BUILD_HISTORY=[\n' + standin[0] + '\n', 1)
+                route.fulfill(response=r, body=body)
+            ctx.route(lambda u: 'data/build-history.js?t=' in u, hist)
             pg.on('pageerror', lambda e: errs.append(str(e)))
             tag = '%dpx' % H
             pg.goto(base + 'dashboard.html'); wait_loaded(pg)
             # --- four panes load and sit at the drawn sizes
             for n, name in ((1, 'board.html'), (2, 'index.html'), (3, 'battle-guide.html'), (4, 'admin.html')):
                 ok(fr(pg, n) == name, '%s: pane %d shows %s' % (tag, n, name))
-            ok(fr(pg, 2) == 'index.html' and pg.evaluate("__DASH.strip().contentWindow.location.pathname.split('/').pop()") == 'builds.html', '%s: Builds fills the space under the game' % tag)
+            ok(fr(pg, 2) == 'index.html' and pg.locator('#pane2 .strip #sg').count() == 1 and pg.locator('#pane2 .strip iframe').count() == 0, '%s: the strip (not the Builds page) is under the game' % tag)
             ok(not errs, '%s: no page errors %s' % (tag, errs[:3]))
             ok(box(pg, '#top')[3] == 44, '%s: top bar is 44 tall' % tag)
             ok([box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3, 4)] == [1000, 951, 829, 620], '%s: pane widths 1000, 951, 829, 620 (%s)' % (tag, [box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3, 4)]))
@@ -54,7 +118,7 @@ try:
             ok(pg.evaluate("document.documentElement.scrollWidth<=innerWidth"), '%s: the dashboard does not scroll sideways' % tag)
             for n in (1, 2, 3, 4):
                 ok(pg.evaluate("(n)=>{var w=__DASH.P[n].frame.contentWindow,e=w.document.documentElement;return e.scrollWidth<=w.innerWidth}", n), '%s: pane %d does not scroll sideways' % (tag, n))
-            ok(pg.evaluate("(()=>{var w=__DASH.strip().contentWindow,e=w.document.documentElement;return e.scrollWidth<=w.innerWidth})()"), '%s: the strip does not scroll sideways' % tag)
+            ok(pg.evaluate("(()=>{var e=document.getElementById('sg');return e.scrollWidth<=e.clientWidth})()"), '%s: the strip does not scroll sideways' % tag)
             # --- each page lays itself out for its pane
             ok(pg.evaluate("__DASH.P[1].frame.contentDocument.getElementById('views').getAttribute('data-v')") in ('for', 'claude') and pg.evaluate("getComputedStyle(__DASH.P[1].frame.contentDocument.getElementById('views')).display") == 'grid', '%s: the Board shows For you and Claude side by side' % tag)
             # --- top bar: counts, live build, token
@@ -72,6 +136,7 @@ try:
             ok(pg.inner_text('#pane2 .nm') == 'Game' and 'Duo open, sideways' in pg.inner_text('#pane2 .wh'), '%s: game header names its size' % tag)
             ok(pg.locator('#pane2 [data-a=change]').count() == 0 and all(pg.locator('#pane%d [data-a=change]' % n).count() == 1 for n in (1, 3, 4)), '%s: Change page on every pane except the game' % tag)
             pg.screenshot(path=os.path.join(SHOTS, 'dashboard-%d.png' % H))
+            strip_geometry(pg, tag, H, errs)
             if H == 1328:
                 # --- links stay home
                 a = put(pg, 1, '<a href="battle-guide.html#family/tom">guide</a>'); a.click(); pg.wait_for_timeout(1500)
@@ -171,6 +236,92 @@ try:
                 pg.click('#lay-all'); pg.wait_for_timeout(2500)
                 ok(pg.evaluate("__DASH.P[2].frame.clientWidth") == 951 and 'duo' in pg.evaluate("__DASH.P[2].frame.contentDocument.documentElement.className").split() and fr(pg, 4) == 'admin.html', 'back to All four: Duo size and Admin return')
                 ok(pg.evaluate("localStorage.getItem('le-duo')") is None, 'le-duo was never set')
+
+                # ================= dash2: what the strip does to the game =================
+                st = lambda: pg.evaluate("localStorage.getItem('aot-b3-story')")
+                # --- Story battles: the admin.html setting
+                pg.click('#story-new'); settle(pg, 700)
+                ok(st() == 'new' and pg.evaluate("document.getElementById('story-new').getAttribute('aria-pressed')") == 'true', 'Story battles: New is saved as aot-b3-story and marked')
+                pg.click('#story-old'); settle(pg, 700)
+                ok(st() == 'old' and pg.evaluate("document.getElementById('story-new').getAttribute('aria-pressed')") == 'false', 'Story battles: Old is saved and New is unmarked')
+                pg.evaluate("localStorage.setItem('aot-b3-story','new')"); settle(pg, 1200)
+                ok(pg.evaluate("document.getElementById('story-new').getAttribute('aria-pressed')") == 'true', 'Story battles: a change made elsewhere (the Admin pane) shows in the strip')
+                pg.click('#story-chapter'); settle(pg, 500)
+                ok(geval(pg, "b3sMode()") == 'chapter', 'Story battles: the game reads the same setting (b3sMode)')
+                # --- Difficulty: the game's own b7SetDiff and the shared aot-diff
+                pg.click('#diff-director'); settle(pg, 700)
+                ok(geval(pg, "B7.diff") == 'director' and pg.evaluate("localStorage.getItem('aot-diff')") == 'director' and pg.evaluate("document.getElementById('diff-director').getAttribute('aria-pressed')") == 'true', 'Difficulty: HARD sets the running game (B7.diff) and aot-diff')
+                pg.click('#diff-grace'); settle(pg, 700)
+                ok(geval(pg, "B7.diff") == 'grace' and pg.evaluate("document.getElementById('diff-director').getAttribute('aria-pressed')") == 'false', 'Difficulty: MEDIUM sets it back')
+                # --- Mute: this pane only, not saved
+                geval(pg, "unlockAudio()"); settle(pg, 400)
+                ok(geval(pg, "(window.__muteGains||[]).length")>=1 and geval(pg, "sound.ctx.__mg!==undefined"), 'Mute: the game audio goes through the dashboard\'s gain node (%s)' % geval(pg, "(window.__muteGains||[]).length"))
+                pg.click('#mute'); settle(pg, 300)
+                ok(geval(pg, "sound.ctx.__mg.gain.value") == 0 and pg.evaluate("__DASH.muted()") and pg.inner_text('#mutet') == 'Unmute game', 'Mute game: the game is silent and the button says Unmute game')
+                ok(not pg.evaluate("Object.keys(localStorage).some(k=>/mute/i.test(k))"), 'Mute is not saved')
+                if geval(pg, "typeof SpeechSynthesisUtterance==='function'&&'speechSynthesis' in window"):
+                    ok(geval(pg, "(()=>{var u=new SpeechSynthesisUtterance('x');u.volume=1;speechSynthesis.speak(u);speechSynthesis.cancel();return u.volume})()") == 0, 'Mute: a spoken line is spoken at volume 0')
+                # --- the newer-build bar (the stand-in lines go through the dashboard's own fetch)
+                pg.evaluate("__DASH.P[2].frame.contentWindow.__mark=5")
+                mine = geval(pg, "BUILD_TAG")
+                standin[0] = '{"tag":"zz-housestandin","at":"2099-01-01T12:00:00-08:00","what":"x","kind":"house"}'
+                pg.evaluate("liveBuild()"); settle(pg, 1200)
+                ok(not pg.is_visible('#nb'), 'a newer housekeeping build does not raise the bar')
+                standin[0] = '{"tag":"zz-standin","at":"2099-01-01T12:00:00-08:00","what":"x"}'
+                pg.evaluate("liveBuild()"); settle(pg, 1500)
+                ok(pg.is_visible('#nb') and box(pg, '#nb')[3] == 48, 'a newer real build raises the bar, 48 tall')
+                txt = pg.inner_text('#nbt')
+                ok(txt.startswith('A newer build is live: zz-standin, ') and txt.endswith('This pane is still on %s.' % mine) and re.search(r'\d{1,2}:\d{2}', txt), 'the bar names the newer build, its time and the build the pane is on (%s)' % txt)
+                ok(pg.inner_text('#nbb') == 'Reload game', 'the bar has Reload game')
+                pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-bar-1328.png'), clip={'x': 1008, 'y': 44, 'width': 960, 'height': 1284})
+                pg.wait_for_timeout(4000)
+                ok(pg.evaluate("__DASH.P[2].frame.contentWindow.__mark") == 5, 'the game is never reloaded by itself while the bar is up')
+                pg.click('#nbb')
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.__mark===undefined&&w.eval('typeof splash==\"object\"&&splash.active')===true}catch(e){return false}}", timeout=120000); settle(pg, 2500)
+                ok(geval(pg, "BUILD_TAG") == mine and 'duo' in gcls(pg) and gsize(pg) == [951, 648], 'Reload game reloads the game, which comes back at its size with the Duo layout')
+                ok(pg.evaluate("__DASH.keys()") == 2, 'Reload game gives the game the keys')
+                ok('duo=1' in geval(pg, "location.search"), 'the reloaded game keeps ?duo=1 in its address (%s)' % geval(pg, "location.search"))
+                geval(pg, "unlockAudio()"); settle(pg, 400)
+                ok(geval(pg, "sound.ctx.__mg.gain.value") == 0, 'Mute holds through a reload of the game')
+                pg.click('#mute'); settle(pg, 300)
+                ok(geval(pg, "sound.ctx.__mg.gain.value") == 1 and pg.inner_text('#mutet') == 'Mute game', 'Unmute brings the sound back')
+                standin[0] = ''; pg.evaluate("liveBuild()"); settle(pg, 1200)
+                ok(not pg.is_visible('#nb'), 'the bar goes away when the game is on the newest build')
+                # --- jump to a chapter: from the title, then from the middle of the game
+                ok(pg.evaluate("document.querySelectorAll('#s-chap .sb.dis').length") == 0, 'every chapter the game can open is enabled')
+                pg.click('#ch-2')
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('STORY.mode===\"full\"&&STORY.chapter===2&&splash.active===false')===true}catch(e){return false}}", timeout=60000)
+                ok(True, 'Jump to chapter 2 starts chapter 2 (the game\'s own chapterJump)')
+                ok('Chapter 2' in pg.inner_text('#pane2 .wh') and 'here' in (pg.get_attribute('#ch-2', 'class') or ''), 'the header and the chapter button say chapter 2 (%s)' % pg.inner_text('#pane2 .wh'))
+                pg.evaluate("__DASH.P[2].frame.contentWindow.__mark=6")
+                pg.click('#ch-3')
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.__mark===undefined&&w.eval('STORY.mode===\"full\"&&STORY.chapter===3&&splash.active===false')===true}catch(e){return false}}", timeout=180000)
+                ok(gsize(pg) == [951, 648] and 'duo' in gcls(pg) and pg.evaluate("__DASH.keys()") == 2, 'Jump to chapter 3 from the middle of the game: the game starts fresh, the chapter opens, size and keys hold')
+                pg.click('#ch-B'); settle(pg, 6000)
+                ok(geval(pg, "splash.active") is False and 'Nine Scoops' in pg.inner_text('#pane2 .wh'), 'BONUS opens Nine Scoops (%s)' % pg.inner_text('#pane2 .wh'))
+                # --- new battle test fights: index.html?go=new&i=N in the game pane
+                pg.click('#ft-new1')
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('typeof B3===\"object\"&&!!B3.F&&splash.active===false')===true}catch(e){return false}}", timeout=180000); settle(pg, 1500)
+                ok('NEW 2: MUDLING AND SKEETER' in pg.inner_text('#pane2 .wh'), 'a test fight opens in the game pane and the header names it (%s)' % pg.inner_text('#pane2 .wh'))
+                ok(pg.evaluate("[...document.querySelectorAll('#fl .sb.ft.on')].map(b=>b.id)") == ['ft-new1'] and 'ON SCREEN' in pg.inner_text('#ft-new1'), 'the fight on screen is marked ON SCREEN, only that one')
+                ok('duo' in gcls(pg) and 'tablet' in gcls(pg) and gsize(pg) == [951, 648] and 'go=' not in geval(pg, "location.search") and 'duo=1' in geval(pg, "location.search"), 'the fight opened by go= keeps the Duo layout and its address keeps ?duo=1 (the address trap) (%s)' % geval(pg, "location.search"))
+                ok(pg.evaluate("__DASH.keys()") == 2, 'a test fight gives the game the keys')
+                pg.click('#ft-more'); settle(pg, 400)
+                ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 54 and 'old battle lab fights' in pg.inner_text('#fl').lower(), 'Show all lists the 27 new fights and the 27 old Battle Lab fights')
+                pg.click('#ft-lab0')
+                pg.wait_for_function("()=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval('splash.active===false')===true&&document.querySelector('#fl .sb.ft.on')!==null}catch(e){return document.querySelector('#fl .sb.ft.on')!==null}}", timeout=180000); settle(pg, 1500)
+                ok(pg.evaluate("[...document.querySelectorAll('#fl .sb.ft.on')].map(b=>b.id)") == ['ft-lab0'], 'an old Battle Lab fight opens too and is the one marked')
+                pg.click('#ft-more'); settle(pg, 300)
+                ok(pg.evaluate("document.querySelectorAll('#fl .sb.ft').length") == 5, 'Show the first five folds the list again')
+                # --- Report: opens the game's pencil tab; says so when the tab is off
+                pg.evaluate("localStorage.removeItem('aot-report');localStorage.removeItem('aot-gh-token')")
+                pg.click('#report'); settle(pg, 400)
+                ok('Report tab is off' in pg.inner_text('#note'), 'Report with the Report tab off says so (%s)' % pg.inner_text('#note'))
+                pg.evaluate("localStorage.setItem('aot-report','1')")
+                pg.click('#report'); settle(pg, 1200)
+                ok(geval(pg, "brp.open") is True and pg.evaluate("__DASH.keys()") == 2, 'Report opens the game\'s pencil tab and gives it the keys')
+                geval(pg, "brpClose()"); pg.evaluate("localStorage.removeItem('aot-report')")
+                pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-fight-1328.png'), clip={'x': 1008, 'y': 44, 'width': 960, 'height': 1284})
                 ok(not errs, 'no page errors in the whole run %s' % errs[:3])
             ctx.close()
         # --- narrower than 3000: one line and a link to Admin

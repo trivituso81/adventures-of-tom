@@ -27890,7 +27890,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "dash2",
-   "next": "Waits on your card Try the Admin Dashboard on the wide monitor. Then it applies your notes and builds the strip under the game: the bar that tells you a newer build is live with Reload game, the screen sizes (four Duo poses and Desktop wide), jump to a chapter or a test fight, Story battles, Difficulty, Mute and Report. The next card, Take me there, follows it without a check from you.",
+   "next": "Built and pushed as dash2: the strip under the game (newer-build bar with Reload game, five screen sizes, jump to a chapter or a test fight, Story battles, Difficulty, Mute, Report), tested at 3440 x 1328 and 3440 x 1440 (272 checks pass). Not built: the Next for you column, which is c-dash3. Your look at it is on the card Try the game strip and Take me there.",
    "blocks": [
     "c-dash3"
    ],
@@ -27928,6 +27928,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by the dash2 session. Tom answered t-dash1-try with All good and no written note, so there are no notes to apply."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as build dash2. Tom's answer to t-dash1-try was All good with no note, so nothing was changed in the first try. Added the strip under the game as drawn, without Next for you (c-dash3). Duo size is forced for the game frame only and survives go= in the address; the game never reloads by itself. tools/dashboard_test.py 272 pass. tools/smoke.py passes except board_sync_test (duplicate card id t-lastnight), which fails the same way on untouched main and belongs to c-nightgreen."
     }
    ]
   },
@@ -27978,10 +27982,12 @@
    "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and press Take me there on one play card. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
    "steps": [
     "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html).",
-    "Under the game, press each Screen size once: the game should change to that size and stay playable. Go back to Duo open, sideways.",
-    "Press chapter 1 under Jump to a chapter, then one of the New battle test fights. The game should open each one.",
-    "Under Next for you, press Take me there on one card: the game should be at the place that card asks you to check.",
-    "Try Mute game, then Report.",
+    "Under the game, look at the gold bar at the top of the strip. It stays hidden while the game is the newest build. When a newer build is live it says so and shows Reload game; the game never reloads by itself. Press Reload game only if the bar appears.",
+    "Press each of the five Screen sizes once (four Duo poses and Desktop wide): the game should change to that size and stay playable. Desktop wide switches the dashboard to the Battle layout. Go back to Duo open, sideways.",
+    "Press chapter 1 under Jump to a chapter (from the title it opens at once, from mid-game it restarts the game at that chapter), then one of the New battle test fights. The game should open each one, and ON SCREEN under the strip should name it.",
+    "Try Story battles (Old, Chapter, New) and Difficulty. Try Mute game: it silences only the game pane, not your computer, and it is not saved. Sound in the game needs one click inside the game first.",
+    "Turn on the Report tab in the game, then press Report in the strip: it should open the pencil report. With the tab off, the button says so.",
+    "When the card Next for you has shipped, press Take me there on one play card: the game should be at the place that card asks you to check.",
     "Press All good, or Something is wrong and say which control and what you saw."
    ],
    "blocks": [
