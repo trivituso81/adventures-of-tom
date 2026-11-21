@@ -19815,7 +19815,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19853,6 +19853,10 @@
      "d": "2026-11-20",
      "t": "Claude (fix-itembannerart-pics-2) asked for the 2 redo sheets only (about $0.10), on Tom's words \"make sure you only regenerate those than failed\". The 18 first sheets are not made again.",
      "at": "2026-11-21T03:35:08Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 2 pictures, QA: 15 of 16, 15 of 16. Spent about $0.12."
     }
    ],
    "gen": {
@@ -19865,10 +19869,43 @@
     "est": 0.1,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T03:35:34Z",
+     "state": "done",
+     "at": "2026-11-21T03:36:17Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44861903466",
-     "n": 2
+     "made": [
+      "prop-item-redo-1",
+      "prop-item-redo-2"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.12,
+     "qa": {
+      "prop-item-redo-1": {
+       "file": "results/prop-item-redo-1/20261121T033602.png",
+       "yes": 15,
+       "of": 16,
+       "failed": [
+        {
+         "id": "p8",
+         "q": "Is the seventh object a pair of neon pro racing flats with paper-thin soles and plain sides?",
+         "why": "shows soccer cleats with swoosh logo and thick soles"
+        }
+       ]
+      },
+      "prop-item-redo-2": {
+       "file": "results/prop-item-redo-2/20261121T033603.png",
+       "yes": 15,
+       "of": 16,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Signature visible on hard hat."
+        }
+       ]
+      }
+     }
     }
    },
    "waiting_on": "claude"
