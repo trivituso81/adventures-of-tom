@@ -17786,7 +17786,7 @@
    "promptRev": 3
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -17832,6 +17832,20 @@
       "f_text",
       "p6",
       "p7"
+     ]
+    },
+    {
+     "date": "2026-11-21",
+     "note": "As per qa",
+     "from": "v1",
+     "at": 1795286708895,
+     "srv": "prop-gate-backlot-stage7-open@20261121T035439",
+     "svc": "xai",
+     "qa": 0.8,
+     "qaFail": [
+      "f_paint",
+      "p8",
+      "p10"
      ]
     }
    ],
