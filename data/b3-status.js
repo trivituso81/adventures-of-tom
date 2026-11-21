@@ -392,7 +392,14 @@ const B3_STATUS={
   both_armrests:{id:'both_armrests',name:'Both Armrests Claimed',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
     short:'GUARD',color:'#9aa7b8',weight:5,desc:'Both armrests, no apologies: takes 25% less damage. Panic Boil! or a Break ends it.'},
   boarding_group:{id:'boarding_group',name:'Boarding Group Nine',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'boardingGroup',v:.20}],flags:[],
-    short:'ATTACK UP',color:'#e8c25a',weight:5,desc:'Group Nine is called: 20% more Attack for a turn. It can be stripped.'}
+    short:'ATTACK UP',color:'#e8c25a',weight:5,desc:'Group Nine is called: 20% more Attack for a turn. It can be stripped.'},
+  // Stage 13d: the bonus chapter, Nine Scoops.
+  blue_ice:{id:'blue_ice',name:'Blue-Ice Glaze',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#8fd3ff',weight:5,desc:'A hard blue glaze of ice: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  scoop_pass:{id:'scoop_pass',name:'Scoop Pass',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'scoopPass',v:.15}],flags:[],
+    short:'DEF UP',color:'#ffd6e8',weight:4,desc:'A fresh scoop passed along: 15% more Defense.'},
+  frosted_lid:{id:'frosted_lid',name:'Frosted Lid',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25},{stat:'def',kind:'frostedLid',v:.15}],flags:[],
+    short:'GUARD',color:'#cfeaff',weight:6,desc:'The tub lid frosts over: takes 25% less damage and has 15% more Defense. Panic Boil! or a Break ends it.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

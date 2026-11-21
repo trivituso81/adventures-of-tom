@@ -1,3 +1,13 @@
+## b3s13 (2026-11-20): New battle: the Nine Scoops monsters and Brain Freeze join the Battle Lab (stage 13 complete)
+
+- Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This last part is the bonus chapter, built from `claude/bestiary-v11.md`: Sprinkle Gremlin, Slushie Slug (Elite), Cone Head and the boss Brain Freeze in `data/b3-foes-ch11bonus.js`, with four formations (10 VP each, 30 for the boss). The foe ids match the old `MONSTERS` ids in `data/bonus-nine-scoops.js` (gremlin, slushslug, conehead, brainfreeze), so a Lab fight never crashes the old tables.
+- Lab: NEW 63 to NEW 66 (Tom, Grace and Rose at level 12, the chapter 5 baseline; the Square backdrop because the bonus chapter has no creamery picture, my call).
+- Brain Freeze as data: Frosted Lid goes up once below 50% HP (Guard Stance, 25% less damage, plus +15% Defense, 2 turns), then Deep Freeze (wind-up, all three Drenched and Slow). Ice-Cube Pitch winds up and Stuns one target; Temple Throb winds up and Fatigues all three. A Break cancels each wind-up.
+- Two small seams: the act condition `allyHurt` (the act is usable only while another monster is below full HP) and the target `lowestOtherAlly`, both for Cone Head's Scoop Pass, which heals the lowest other monster 20% and gives it +15% Defense.
+- Three new statuses (blue_ice, scoop_pass, frosted_lid). The Slushie Slug starts in Blue-Ice Glaze (25% less damage); it resists Drench.
+- No picture or clip work, no voice lines added. Balance is stage 14.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s13.js`, bonus section; 2154 checks, FAILS: []); the four new Lab fights each 100 simulated, all won, 0 errors; `python3 tools/b3_test.py s13` (portrait and landscape). Stage 13 is done: chapters 8, 9, 10 and the bonus are in the Battle Lab (b3s13a, b3s13b, b3s13c, b3s13).
+
 ## wanch1 (2026-11-20): chapter 1 battles are videos: the whole family idles with breathing, guards, gets hit, falls, cheers and runs on Wan 3.0, plus Rose's knock-out and Deedee's victory; the stop-loss list goes to c-wanch2
 
 Card c-wanch1 (last part; parts a to h above). This part: Rose's knock-out retry 2 (seated 2.8% above the feet line, was 5%) and Deedee's victory retry 2 (picture shrunk to 80% inside the video: her spread hands stay in the frame) are baked and wired; their painted rows are purged. Wan-gen run 44865404539 ($3).

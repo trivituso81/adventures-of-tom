@@ -52,7 +52,19 @@ Rules for every stage's session:
 | 10 | Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) Sig Vibes (42 lines), Lab fight NEW 10 (Tom, Amy, Justin, Olivia). All 10 characters now have both Sig Vibes | Pushed 2026-11-20 | `b3s10` | Nothing is asked. |
 | 11 | Bestiary chapters 2 to 4 with their bosses: 15 regular monsters, The Big Shake, Old Iron-Gill, The Director's Cut, 17 formations, chapter 2's explicit stat blocks, Lab fights NEW 11 to NEW 27. New seams: `surfaces`, `stopByIntercept`, op `row`, summon `ifNoFront`, Skill Lock, 14 statuses | Pushed 2026-11-20 | `b3s11` | Nothing is asked. |
 | 12 | Bestiary chapters 5 to 7 with their bosses: 16 monsters and adds, The Red Pen, Chairman Cheeks, The Unread, 17 formations, Lab fights NEW 28 to NEW 44. Pushed in three parts (`b3s12a` chapter 5, `b3s12b` chapter 6, `b3s12` chapter 7). New seams: act field `starts`, conditions `noAllyId` and `allyAge`, targets `randomFrontAlly` and `unshielded`, ops `eat` and `hpLoss`, foe field `onKo`, flag `foeTaunt`, 22 statuses | Pushed 2026-11-20 | `b3s12` | Nothing is asked. |
-| 13 to 23 | See architecture section 5 | Not started | | |
+| 13 | Bestiary chapters 8 to 10 and the bonus chapter with their bosses: 22 monsters, Old Ironbelly, The Mirrorball, The Last Call, Brain Freeze, 22 formations, Lab fights NEW 45 to NEW 66. Pushed in four parts (`b3s13a` chapter 8, `b3s13b` chapter 9, `b3s13c` chapter 10, `b3s13` the bonus). New seams: strip kind `shieldOrBuff`, targets `frontAllies`, `firstTarget` and `lowestOtherAlly`, act condition `allyHurt`, 23 statuses | Pushed 2026-11-20 | `b3s13` | Nothing is asked. |
+| 14 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 13 results (facts)
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 2154, FAILS: []. 337 more than stage 12, in `tools/b3-check-s13.js` (new, one section per chapter): the bestiary rows and numbers of chapters 8 to 10 and the bonus, `hp3`/`hp4`, formation VP, the 22 Lab fights, the 23 statuses, and each act played from its wind-up to its rider (Full Furnace, Members Only, Cheater!, Facet Spin and Shatter Glitz!, GATE CLOSED, FINAL BOARDING, Scoop Pass, Blue-Ice Glaze, Frosted Lid, Deep Freeze). |
+| Simulator, 100 fights each, plain player | `new45` to `new66`: all won, 0 errors. Rounds to win: chapter 8 normal 1.9 to 2.4, The Picky Eater 5.3, Old Ironbelly 5.1; chapter 9 normal 1.2 to 2.1, The Wallflower 5.65, The Mirrorball 3.8; chapter 10 normal 1.9 to 2.9, The Armrest Hog 2.9, The Last Call 4.6; bonus Gremlins 2.9, Cone Heads 3.0, Slushie Slug 4.3, Brain Freeze 4.2. Normal fights are short and every boss except Old Ironbelly (5.1) is under the 5 to 7 target: stage 14 owns balance, nothing was retuned. |
+| `python3 tools/b3_test.py s13a`, `s13b`, `s13c`, `s13` | FAILS: [] each (portrait then landscape): the boss specials on screen (Toasty and Full Furnace, Facet Dazzle and LAST DANCE, the Mark and FINAL BOARDING, Ice-Cube Pitch and the Frosted Lid) and one rushed fight per other monster. Frames looked at: `tools/shots/b3-s13.png`, `b3-s13-land.png`. |
+| `tools/smoke.py` | Only `board_sync_test` R5 fails, as on unmodified main (not this work). |
+| `unused_voice.py` | No line or clip added. |
+| Tom's phone | Not played, not asked for. |
 
 ## Stage 12 results (facts)
 
@@ -189,6 +201,11 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | 12 | Cheek Stuffer's Snack Snatch takes 1 Pep from its target. The Know-It-All's and Peanut Gallery's riders last 2 turns; Skill Lock 1 turn; Leaf Camo and Coiled Paper Spring are +20% Evasion for 2 turns. | 1 or 3 turns. |
 | 12 | The Unread's Bookmark Ribbon comes first below 50% HP (Guard 25% and Mend 5%), then Dead-Quiet and THE END in the rotation. THE END's Slow and push both skip a family member whose shield held (a shield blocks the rider); Boppy at high HP cannot be pushed (Speed Hold). | Slow lands through a shield. |
 | 12 | Party and backdrop per chapter: 5 Tom, Grace, Rose, Amy level 12 (classroom, cafetorium); 6 Tom, TNB, Nara level 14 (park, oak crown); 7 Tom, Grace, Rose, Boppy level 17 (stacks, reading room). VP: 12 / 6 / 9 per fight, bosses 30 / 30 / 27. | Other parties; other VP. |
+| 13 | Party, level and backdrop per chapter: 8 Tom, TNB, Nara level 19 (barn, boiler room); 9 Tom, Grace, Rose, Deedee level 22 (the dome); 10 Tom, Grace, Rose, Amy level 25 (the terminal); the bonus Tom, Grace, Rose level 12, the Square (the bonus chapter has no creamery picture). VP per fight 9 / 9 / 8 / 10, bosses 27 / 27 / 26 / 30. | Other parties; a painted creamery backdrop. |
+| 13 | Boarding Group Nine's "it gains +20% Attack" puts the bonus on the monster for 1 turn (it can be stripped). "Cheater!" is a 1-turn status that makes the family target the putter (`foeTaunt`). | The bonus on the Marked ally; a different taunt length. |
+| 13 | Old Ironbelly's BROIL and Hot Coal fire TNB's clay shields (Fired Glaze); Full Furnace is the one act below 50% HP. | Shields soak the fire. |
+| 13 | Brain Freeze's Frosted Lid goes up once below 50% HP (Guard Stance 25% plus +15% Defense, 2 turns; Panic Boil! or a Break ends it). Deep Freeze is also below 50%. | Frosted Lid every time it is below half; Deep Freeze at any HP. |
+| 13 | Cone Head's Scoop Pass is only usable while another monster is hurt; it heals the lowest other monster 20% and gives it +15% Defense for 2 turns, and Cone Head heals no one else. The Slushie Slug starts in Blue-Ice Glaze (25% less damage, 2 turns). | A heal on Cone Head itself; Blue-Ice Glaze every round. |
 | 11 | "Opens round 1" is a `once` act on the monster's first turn, not a wait of 0. | Starts at 0 on the bar. |
 | 11 | Chapter 2 has 5 normal formations (the bestiary's VP table counts 6 fights). The Boat Angler answer to Iron-Gill's dive waits for Boppy's third Vibe. | A sixth formation; a stand-in answer now. |
 | 11 | Skill Lock on a family member blocks only the Pocket Vibe Skills (Boom Mic Moth's Mic Feedback, 1 turn). | Blocks all Skills. |
@@ -327,20 +344,20 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 13)
+## Next conversation (stage 14)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 12 are in `claude/next-addendum-b3s12.md`; where it and this file differ, it wins until stage 13 folds it in.
+Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 13 are in `claude/next-addendum-b3s13.md`; where it and this file differ, it wins until stage 14 folds it in.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 13: the bestiary for chapters 8 to 10 and the bonus chapter with their bosses (`claude/bestiary-v11.md`, architecture section 5), and Lab fights for each formation and boss (NEW 45 on), pushed by chapter as `b3s13a`, `b3s13b`, `b3s13c` and the final `b3s13`. |
+| 1 | What it will do | Builds stage 14: the balance pass on Part 1. Data only, no engine file changed. It measures every Lab fight in the simulator first (NEW 1 to NEW 66), then retunes monster HP, Attack, Defense, Speed, pips and act power until every Part 1 boss takes 5 to 7 rounds for the plain player and normal fights stay short; before and after tables go in `docs/BATTLE3.md` and the Project notes. Board card c-b3s14. |
 | 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
-| 3 | Model | Claude Sonnet 5.5 (row C). |
-| 4 | Effort level | High (boss mechanics that the acts cannot express). |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s12.md, then build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system. Stage 12 (docs/CHANGES.md b3s12a, b3s12b, b3s12; claude/next-addendum-b3s12.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-s13.js, Lab fights NEW 45 on). Work in parts so a stalled session loses at most one chapter: push chapter 8 as b3s13a, chapter 9 as b3s13b, chapter 10 as b3s13c, the bonus chapter as the final b3s13, each after its monsters, formations, boss and Lab fights pass node tools/b3-sim.js check. Board card c-b3s13. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s13 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo).` |
+| 3 | Model | Claude Sonnet 5.5 (row C: the numbers to change are found in the session, no engine work). |
+| 4 | Effort level | Medium (the architecture sets medium; it is data and the simulator checks every change). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14 (the balance pass on Part 1: chapters 1 to 10 and the bonus chapter) of the new battle system. Data only: change no engine file. First run node tools/b3-sim.js with a fight id and 100 as the run count (for example node tools/b3-sim.js new6 100) for every Lab fight new1 to new66 and keep the before table. Then change monster rows (HP, Attack, Defense, Speed, pips, act power) one change at a time, starting from what is closest, until every boss fight (new6, new16, new21, new27, new32, new38, new44, new50, new56, new62, new66) takes 5 to 7 rounds for the plain player and normal fights stay short. Keep bestiary-v11 as the starting point and record each number you changed in docs/BATTLE3.md. Run node tools/b3-sim.js check and python3 tools/b3_test.py s13 before each push. Board card c-b3s14. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s14 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo).` |
 
-If a session fails stage 13 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 14 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
-Facts the next session needs are in `claude/next-addendum-b3s12.md` and `docs/handoff/b3s12.md`.
+Facts the next session needs are in `claude/next-addendum-b3s13.md` and `docs/handoff/b3s13.md`.
 
 Each stage ends by updating the stage board above, writing `docs/handoff/<tag>.md` in the repo, and updating item -8 in `claude/next.md`.

@@ -20445,7 +20445,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "b3s13",
-   "next": "Builds stage 13: the bestiary for chapters 8 to 10 and the bonus chapter with their bosses, and Lab fights for each formation and boss (NEW 45 on). Pushed in parts b3s13a, b3s13b, b3s13c and the final b3s13.",
+   "next": "Stage 13 is complete (b3s13a, b3s13b, b3s13c, b3s13): the monsters, formations, bosses and Lab fights NEW 45 to NEW 66 of chapters 8 to 10 and the bonus chapter. Nothing is asked of Tom. The next step is c-b3s14 (the balance pass).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -20486,6 +20486,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as b3s13c: New battle: the chapter 10 airport monsters and The Last Call join the Battle Lab (stage 13, part c of four)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part d shipped as b3s13: the bonus chapter (4 formations, Brain Freeze, Lab fights NEW 63 to NEW 66). Stage 13 is complete: chapters 8 to 10 and the bonus are in the Battle Lab (NEW 45 to NEW 66), 2154 rule checks pass, browser tests pass in portrait and landscape. Next: card c-b3s14, the balance pass."
     }
    ],
    "prompt": {
@@ -20497,7 +20501,7 @@
     "effort": "high (boss mechanics that the acts cannot express need their own functions)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s12.md, then build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system. Stage 12 (docs/CHANGES.md b3s12a, b3s12b, b3s12; claude/next-addendum-b3s12.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-s13.js, Lab fights NEW 45 on). Work in parts so a stalled session loses at most one chapter: push chapter 8 as b3s13a, chapter 9 as b3s13b, chapter 10 as b3s13c, the bonus chapter as the final b3s13, each after its monsters, formations, boss and Lab fights pass `node tools/b3-sim.js check`. Board card c-b3s13. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s13 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end",
+   "after": "nothing for Tom: c-b3s14",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
     "opening": "pasted by Tom from the board"
@@ -22338,6 +22342,34 @@
     "effort": "medium (the route, the checks, the bake and the tests are built and written down; this repeats them with another model)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). When every family body state is a video, purge the painted states completely in the same change (B3_BODY_PAINT, B3_PAINT, b3PaintState, b3GuardDraw, b3KoDraw painted parts, the Lab row PAINTED STATES: CHAPTER 1, data/pose-review.json, tools/paint_state_test.py, docs/BATTLE3.md Painted body states). Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-b3s14",
+   "title": "Battle system stage 14: balance pass",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Builds stage 14: the balance pass on Part 1. Data only, no engine file changed. Measures every Lab fight in the simulator (NEW 1 to NEW 66), then retunes monster rows until every Part 1 boss takes 5 to 7 rounds for the plain player.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "prompt": {
+    "what": "Builds stage 14 of the new battle system: the balance pass on Part 1, data only, so every Part 1 boss takes 5 to 7 rounds for the plain player and normal fights stay short.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the numbers to change are found in the session, no engine work)",
+    "effort": "medium (the architecture sets medium; it is data and the simulator checks every change)",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14 (the balance pass on Part 1: chapters 1 to 10 and the bonus chapter) of the new battle system. Data only: change no engine file. First run node tools/b3-sim.js with a fight id and 100 as the run count (for example node tools/b3-sim.js new6 100) for every Lab fight new1 to new66 and keep the before table. Then change monster rows (HP, Attack, Defense, Speed, pips, act power) one change at a time, starting from what is closest, until every boss fight (new6, new16, new21, new27, new32, new38, new44, new50, new56, new62, new66) takes 5 to 7 rounds for the plain player and normal fights stay short. Keep bestiary-v11 as the starting point and record each number you changed in docs/BATTLE3.md. Run node tools/b3-sim.js check and python3 tools/b3_test.py s13 before each push. Board card c-b3s14. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s14 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by b3s13: stage 14 follows stage 13."
+    }
+   ],
+   "tag": "b3s14",
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

@@ -131,5 +131,13 @@ const B3_LAB=[
   {id:'new61',name:'NEW 61: THE ARMREST HOG',sub:'Chapter 10 Elite. The Armrest Hog has 4 Composure pips, shrugs off Sizzle and starts with both armrests claimed. A Jet Lag in Back.',
     party:['tom','grace','rose','amy'],level:25,formation:'armresthog',bg:'term'},
   {id:'new62',name:'NEW 62: THE LAST CALL',sub:'Chapter 10 boss. 7 Composure pips. Boarding Group Nine marks a Back-row ally and GATE CLOSED slams them next turn with Skill Lock.',
-    party:['tom','grace','rose','amy'],level:25,formation:'lastcall',bg:'term'}
+    party:['tom','grace','rose','amy'],level:25,formation:'lastcall',bg:'term'},
+  {id:'new63',name:'NEW 63: THE GREMLINS',sub:'Bonus chapter. Three Sprinkle Gremlins in Front, all of them Dazzling with sprinkles.',
+    party:['tom','grace','rose'],level:12,formation:'gremlin',bg:'pond'},
+  {id:'new64',name:'NEW 64: THE CONE HEADS',sub:'Bonus chapter. A Gremlin in Front and two Cone Heads in Back. Scoop Pass heals the hurt one, so pick who goes down first.',
+    party:['tom','grace','rose'],level:12,formation:'conehead',bg:'pond'},
+  {id:'new65',name:'NEW 65: THE SLUSHIE SLUG',sub:'Bonus chapter Elite. The Slushie Slug has 4 Composure pips, shrugs off Drench and starts behind its Blue-Ice Glaze. A Cone Head in Back.',
+    party:['tom','grace','rose'],level:12,formation:'slushslug',bg:'pond'},
+  {id:'new66',name:'NEW 66: BRAIN FREEZE',sub:'Bonus chapter boss. 6 Composure pips. Below half HP it puts up the Frosted Lid and winds up Deep Freeze.',
+    party:['tom','grace','rose'],level:12,formation:'brainfreeze',bg:'pond'}
 ];

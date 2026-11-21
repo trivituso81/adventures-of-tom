@@ -51,6 +51,8 @@ function b3Who(F,c,to) {
   // Stage 13. frontAllies: every monster standing in Front, the actor included (Members Only).
   // firstTarget: only the first ally the act reached (Fifty-Two Pickup puts its Pep drain and Fatigue on the first one it hits).
   if(to==='frontAllies') return b3Live(F,c.actor.side).filter(o=>b3EffRow(F,o)==='front');
+  // lowestOtherAlly: the hurt ally with the lowest share of HP that is not the actor (Cone Head's Scoop Pass).
+  if(to==='lowestOtherAlly') return b3Live(F,c.actor.side).filter(o=>o!==c.actor).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
   if(to==='firstTarget') { const t=c.targets[0]; return t&&b3Alive(t)?[t]:[]; }
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);

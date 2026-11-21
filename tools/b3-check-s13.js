@@ -276,4 +276,66 @@ module.exports=function(T) {
   noCrit(()=>{ const {F,e}=lc(); e.hp=Math.floor(e.maxHp*.5); e.actIx=e.D.acts.findIndex(a=>a.id==='final_boarding'); ok(pick(F,e,true).act.id==='final_boarding','at 50% HP FINAL BOARDING is next in the list');
     F.acting=e; turn(F,e,2); ok(e.charge&&e.charge.id==='final_boarding','it is announced one turn ahead'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3);
     ok(F.party.every((p,i)=>p.hp<hp0[i]&&p.st.fatigue&&p.st.fatigue.n===2),'then it hits all four and gives each Fatigue for 2 turns'); });
+  // ====================== Bonus chapter: Nine Scoops (stage 13, final part) ======================
+  const PB=['tom','grace','rose'];
+  const mkB=(foes,o)=>NF(Object.assign({party:PB,level:12,seed:11,foes},o||{}));
+  const ROWSB=[
+    ['gremlin','swarmer','front',148,37,22,107,0,['sizzle','drench'],[]],['slushslug','elite','front',410,51,35,92,4,['sizzle','razzle'],['drench']],
+    ['conehead','hexer','back',194,42,25,107,0,['sizzle','racket'],[]],['brainfreeze','boss','front',680,55,32,104,6,['sizzle','razzle'],['drench']]];
+  for(const [id,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWSB) { const D=FOES[id];
+    ok(D&&D.ch==='bonus'&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
+    ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
+  ok(FOES.brainfreeze.hp4===910&&FOES.brainfreeze.noRun,'Brain Freeze prints 910 for a party of 4 and cannot be run from');
+  { const hpOf=party=>NF({party,level:12,seed:3,foes:[{id:'brainfreeze',row:'front'}]}).foes[0].maxHp;
+    ok(hpOf(PB)===680&&hpOf([...PB,'deedee'])===910,'Brain Freeze: 680 for 3, 910 for 4'); }
+  const FMB={gremlin:10,conehead:10,slushslug:10,brainfreeze:30};
+  for(const k of Object.keys(FMB)) ok(FORM[k]&&FORM[k].ch==='bonus'&&FORM[k].vp===FMB[k],'formation '+k+' is the bonus chapter and pays '+FMB[k]+' VP');
+  ok(J(FORM.gremlin.foes.map(f=>f.id))===J(['gremlin','gremlin','gremlin'])&&J(FORM.conehead.foes)===J([{id:'gremlin',row:'front'},{id:'conehead',row:'back'},{id:'conehead',row:'back'}]),'the three-monster formations match section 4');
+  { const labs=LAB.filter(l=>/^new6[3-6]$/.test(l.id));
+    ok(labs.length===4&&labs.every(l=>FORM[l.formation]&&FORM[l.formation].ch==='bonus'),'Lab fights new63 to new66 each run a real bonus chapter formation');
+    ok(labs.every(l=>l.level===12&&J(l.party)===J(PB)),'each uses level 12, Tom, Grace and Rose (the chapter 5 baseline)'); }
+  for(const id of ['blue_ice','scoop_pass','frosted_lid'])
+    ok(ST[id]&&ST[id].desc&&ST[id].short&&ST[id].color&&!/—/.test(ST[id].desc),id+' is a complete status row');
+  ok(ST.blue_ice.kind==='stance'&&ST.frosted_lid.kind==='stance'&&ST.scoop_pass.kind==='buff','Blue-Ice Glaze and Frosted Lid are stances; Scoop Pass is a buff');
+  { const F=mkB([{id:'slushslug',row:'front'}]),e=F.foes[0]; ok(!!e.st.blue_ice&&near(sum(e,'reduce'),.25,1e-9),'The Slushie Slug starts behind its Blue-Ice Glaze (25% less damage taken)'); }
+
+  const riderB=(foe,actId,fn,row)=>noCrit(()=>{ const F=mkB([{id:foe,row:row||'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id===actId);
+    e.charge=A.tags.includes('charge_up')?A:null; e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; const b=turn(F,e,2); fn(F,e,b); });
+  riderB('gremlin','sprinkle_flick',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Sprinkle Flick is a plain hit'));
+  riderB('gremlin','sugar_hop',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Sugar Hop is a plain hit'));
+  riderB('gremlin','sprinkle_spray',(F)=>ok(F.party.every(p=>p.st.dazzled&&p.st.dazzled.n===2),'Sprinkle Spray Dazzles all three for 2 turns'));
+  riderB('slushslug','syrup_ooze',(F)=>ok(F.party.some(p=>p.st.drenched&&p.st.drenched.n===2),'Syrup Ooze gives Drenched for 2 turns'));
+  riderB('slushslug','slush_sneeze',(F)=>ok(F.party.some(p=>p.st.slow&&p.st.slow.n===2),'Slush Sneeze gives Slow for 2 turns'));
+  noCrit(()=>{ const F=mkB([{id:'slushslug',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='slush_rush'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='slush_rush'&&!F.party.some(p=>p.st.slow),'Slush Rush is announced first and does nothing yet');
+    F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.slow&&p.st.slow.n===1),'it lands next turn: Slow for 1 turn on all three'); });
+  riderB('conehead','waffle_poke',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Waffle Poke is a plain hit'),'back');
+  riderB('conehead','mint_chip_drip',(F)=>ok(F.party.some(p=>p.st.drenched&&p.st.drenched.n===2),'Mint-Chip Drip gives Drenched for 2 turns'),'back');
+  // Scoop Pass: only when another monster is hurt; heals the hurt one 20% of Max HP and gives it +15% Defense
+  noCrit(()=>{ const F=mkB([{id:'conehead',row:'back'},{id:'gremlin',row:'front'}]),e=F.foes.find(f=>f.id==='conehead'),g=F.foes.find(f=>f.id==='gremlin'),A=e.D.acts.find(a=>a.id==='scoop_pass');
+    ok(!G('b3ActOk')(F,e,A),'with nobody hurt, Cone Head cannot use Scoop Pass');
+    g.hp=Math.floor(g.maxHp*.5); ok(G('b3ActOk')(F,e,A),'with the Gremlin hurt it can');
+    e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=g.hp,eh=e.hp; turn(F,e,2);
+    ok(g.hp-hp0===Math.round(g.maxHp*.2)||Math.abs(g.hp-hp0-g.maxHp*.2)<=1,'it heals the hurt Gremlin 20% of its Max HP: '+(g.hp-hp0)+' of '+g.maxHp);
+    ok(g.st.scoop_pass&&g.st.scoop_pass.n===2&&near(off(g,'scoop_pass','def'),1.15,.005),'and gives it +15% Defense for 2 turns'); ok(e.hp===eh&&!e.st.scoop_pass,'Cone Head heals no one but the hurt one'); });
+  // Brain Freeze
+  const bf=()=>{ const F=mkB([{id:'brainfreeze',row:'front'}]),e=F.foes[0]; for(const p of F.party) { p.hp=p.maxHp=Math.max(p.maxHp,700); p.pep=8; } return {F,e}; };
+  noCrit(()=>{ const {F,e}=bf(); const A=e.D.acts.find(a=>a.id==='frost_breath'); e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; turn(F,e,2); ok(F.party.some(p=>p.st.slow&&p.st.slow.n===2),'Frost Breath gives Slow for 2 turns'); });
+  noCrit(()=>{ const {F,e}=bf(); const A=e.D.acts.find(a=>a.id==='cold_shoulder'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const b=turn(F,e,2); ok(b.some(x=>x.t==='hit'),'Cold Shoulder is a plain hit'); });
+  noCrit(()=>{ const {F,e}=bf(); const seen=[]; e.hp=Math.floor(e.maxHp*.6); for(let i=0;i<8;i++) seen.push(pick(F,e).act.id); ok(!seen.includes('frosted_lid')&&!seen.includes('deep_freeze'),'above half HP there is no Frosted Lid and no Deep Freeze: '+seen); });
+  noCrit(()=>{ const {F,e}=bf(); e.hp=Math.floor(e.maxHp*.5); const first=pick(F,e,true).act.id; ok(first==='frosted_lid','at half HP the Frosted Lid goes up first (once): '+first);
+    F.acting=e; turn(F,e,2); ok(e.st.frosted_lid&&e.st.frosted_lid.n===2,'Frosted Lid goes on Brain Freeze for 2 turns');
+    ok(near(sum(e,'reduce'),.25,1e-9)&&near(off(e,'frosted_lid','def'),1.15,.005),'it is Guard Stance (25% less damage) plus +15% Defense');
+    ok(pick(F,e,true).act.id!=='frosted_lid','and it is used only once in the fight'); });
+  noCrit(()=>{ const {F,e}=bf(); e.hp=Math.floor(e.maxHp*.5); e.uses.frosted_lid=1; e.actIx=e.D.acts.findIndex(a=>a.id==='deep_freeze'); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='deep_freeze','Deep Freeze is announced one turn ahead'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]&&p.st.drenched&&p.st.slow&&p.st.slow.n===2),'it hits all three, Drenches and Slows them for 2 turns'); });
+  noCrit(()=>{ const {F,e}=bf(); const A=e.D.acts.find(a=>a.id==='ice_cube_pitch'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='ice_cube_pitch'&&!F.party.some(p=>p.st.stun),'Ice-Cube Pitch is announced first and does nothing yet');
+    F.acting=e; turn(F,e,3); const t=F.party.find(p=>p.st.stun); ok(t&&t.st.stun.n===1,'it Stuns its one target for 1 turn'); });
+  noCrit(()=>{ const {F,e}=bf(); const A=e.D.acts.find(a=>a.id==='ice_cube_pitch'); e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; turn(F,e,2);
+    for(const p of F.party) addShield(F,p,3000,{src:p}); F.acting=e; turn(F,e,3); ok(!F.party.some(p=>p.st.stun),'a shield that soaks the Ice-Cube Pitch stops the Stun'); });
+  noCrit(()=>{ const {F,e}=bf(); const A=e.D.acts.find(a=>a.id==='temple_throb'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='temple_throb','Temple Throb is announced first'); F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.fatigue&&p.st.fatigue.n===2),'then it gives all three Fatigue for 2 turns'); });
+  noCrit(()=>{ const {F,e}=bf(); e.charge=e.D.acts.find(a=>a.id==='ice_cube_pitch'); loseCharge(F,e); ok(!e.charge,'an interrupt cancels the Ice-Cube Pitch'); });
 };

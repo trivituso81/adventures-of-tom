@@ -150,6 +150,11 @@ Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at 
 | Chapter 10: `data/b3-foes-ch10.js` (Carry-On, Jet Lag, The Long Line, The Unclaimed, The Armrest Hog, The Last Call), 6 formations (8 VP each, 26 for the boss), Lab fights NEW 57 to NEW 62 (Tom, Grace, Rose, Amy, level 25, the terminal). | The bonus chapter (`b3s13`) |
 | The Last Call as data: Boarding Group Nine then GATE CLOSED (the Big Glare and Swamp Chomp pattern: `then`, `after`, `hits:'marked'`), FINAL BOARDING below 50% HP. 4 statuses (bin_drop, middle_seat, both_armrests, boarding_group). | |
 
+| In (build `b3s13`, the bonus chapter; stage 13 is complete) | Waits for |
+|---|---|
+| Bonus chapter: `data/b3-foes-ch11bonus.js` (Sprinkle Gremlin, Slushie Slug, Cone Head, Brain Freeze), 4 formations (10 VP each, 30 for the boss), Lab fights NEW 63 to NEW 66 (Tom, Grace, Rose, level 12, the Square backdrop). | Balance of chapters 6 to 10 and the bonus (stage 14) |
+| Brain Freeze as data: Frosted Lid below 50% HP, once (Guard Stance plus +15% Defense), Deep Freeze below 50% HP. Cone Head's Scoop Pass needs a hurt monster (`allyHurt`) and heals and shields the lowest other one (`lowestOtherAlly`). The Slushie Slug starts in Blue-Ice Glaze. 3 statuses (blue_ice, scoop_pass, frosted_lid), 1 condition, 1 target. | |
+
 ## What stage 12 holds, and what waits
 
 | In (build `b3s12`, chapter 7; stage 12 is complete) | Waits for |

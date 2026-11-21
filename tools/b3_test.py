@@ -1448,6 +1448,18 @@ def stage13(pg,lab,landscape=False,parts='a'):
         caps+=pick(fr,4)
         for fid,foe,ix,act,st in (('new61','armresthog',0,None,None),('new60','unclaimed',0,'carousel_spin','slow'),('new59','longline',1,'step_back_behind_yellow',None),('new58','jetlag',1,'three_am_glare','blind'),('new57','carryon',1,'overhead_bin_drop','bin_drop')):
             caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('carryon','jetlag','longline','unclaimed')),2)
+    if 'd' in parts:
+        # Bonus chapter. Brain Freeze: Temple Throb winds up (fatigue), then below half HP the Frosted Lid and Deep Freeze
+        fr=[]; R=s11_run(pg,lab,'new66',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*1.3); e.hp=e.maxHp; e.actIx=3; e.spd*=1.5; }",fr,every=500,landscape=landscape,tag='s13')
+        need(R['over']=='win',f"Brain Freeze fight ended {R['over']}")
+        need(any(a.startswith('ice_cube_pitch') for a in R['acts']),f"Ice-Cube Pitch should be played: {R['acts'][:10]}")
+        caps+=pick(fr,6)
+        fr=[]; R=s11_run(pg,lab,'new66',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*2.2); e.hp=Math.floor(e.maxHp*.49); e.spd*=1.5; }",fr,every=500,landscape=landscape,tag='s13')
+        need(R['over']=='win',f"Brain Freeze (low HP) fight ended {R['over']}")
+        need(any(a.startswith('frosted_lid') for a in R['acts']) and any(x.endswith(':frosted_lid') for x in R['statuses']),f"Frosted Lid should be played and shown below half HP: {R['acts'][:10]} {R['statuses'][:8]}")
+        caps+=pick(fr,4)
+        for fid,foe,ix,act,st in (('new65','slushslug',0,None,None),('new64','conehead',1,'mint_chip_drip','drenched'),('new63','gremlin',2,'sprinkle_spray','dazzled')):
+            caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('gremlin','conehead')),2)
     sheet(caps,6,os.path.join(OUT,'b3-s13'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
