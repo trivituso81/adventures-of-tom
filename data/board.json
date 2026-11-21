@@ -26262,7 +26262,7 @@
    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
    "title": "Animation note: Tom, Lounge Pass Flex",
    "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T10:35:50-08:00",
+   "last": "2026-11-21T10:42:14-08:00",
    "tags": [
     "anim-tom-loungepass-lf2z"
    ],
@@ -29760,8 +29760,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f4b39cbae2bc73ab2c7e104a9b581d5cd606d470",
- "synced_at": "2026-11-21T18:41:30+00:00",
+ "synced": "70d9bef727eba65a64cb5ffbc34ee51d702d0872",
+ "synced_at": "2026-11-21T18:42:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
