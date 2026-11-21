@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one road barrier arm gate visible?",
+  "Is the barrier arm raised straight up and standing upright?",
+  "Are there two short posts, one at each side?",
+  "Are the posts and arm red and white striped?",
+  "Is the sign on the arm missing?",
+  "Is nothing crossing the road?",
+  "Are the two posts about two people wide apart?",
+  "Are the posts about waist high?",
+  "Is the raised arm about as tall as a person?",
+  "Is there a small soft contact shadow directly under the object?"
+ ]
+}

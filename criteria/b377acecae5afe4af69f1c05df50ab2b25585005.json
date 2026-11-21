@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one doorway shown?",
+  "Is the door red?",
+  "Does the door have two long gold hinges?",
+  "Does the door have a gold ring knocker?",
+  "Is the door set inside a pale stone arch?",
+  "Is the door shut?",
+  "Is there a small handwritten paper note taped to the door at eye height?",
+  "Does the note show a tiny doodle of a running shoe?",
+  "Is the arch about 5 units wide by 6 units tall in proportion?",
+  "Is the entire object centered with a clear margin around it?"
+ ]
+}

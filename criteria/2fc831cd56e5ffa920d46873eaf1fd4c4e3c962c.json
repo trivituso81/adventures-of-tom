@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Is the first item a stack of white cue cards with a clapperboard icon and one card raised?",
+  "Is the second item an old yellowed hall pass slip with a brass paper clip?",
+  "Is the third item a pair of big white pearl earrings with gold posts?",
+  "Is the fourth item a pair of rhinestone cat-eye reading glasses with a glittery chain?",
+  "Is the fifth item a stack of fine white china plates with a gold rim and a tiny painted rose?",
+  "Is the sixth item a silver folding hand fan opened wide?",
+  "Is the seventh item a leather luggage tag with a brass buckle and a travel sticker?",
+  "Is the eighth item a small juice box with a straw and a cartoon fruit icon?",
+  "Is the ninth item a dinosaur bandage with a green T. rex pattern that is partly peeled open?"
+ ]
+}

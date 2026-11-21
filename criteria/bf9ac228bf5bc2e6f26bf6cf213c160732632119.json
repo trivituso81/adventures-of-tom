@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one pair of racing flats shown?",
+  "Are the shoes low and light running shoes?",
+  "Are the shoes a solid neon yellow color?",
+  "Do the shoes have no stripes, marks or patterns on the uppers?",
+  "Do the shoes have a flat sole as thin as a sheet of paper?",
+  "Are the shoes laced up like a running shoe?",
+  "Do the shoes have a closed heel?",
+  "Is the pair of shoes seen from the side?",
+  "Is the pair of shoes shown from a three-quarter view from slightly above?",
+  "Does the pair of shoes fill about 70 percent of the picture with at least 12 percent empty margin on every side?"
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "requirements": [
+  "Is there exactly one single object visible?",
+  "Is the object a road barrier arm gate that is raised?",
+  "Are there two short red and white striped posts, one on each side?",
+  "Is there a long red and white striped arm lifted straight up and standing upright from the left post?",
+  "Is the arm positioned as tall as a person?",
+  "Are the two posts about waist high and spaced about two people wide apart?",
+  "Does the object have a small soft contact shadow directly under it?",
+  "Is the object centered with a clear margin around it and fully inside the picture?",
+  "Are the object edges crisp and clean?"
+ ]
+}

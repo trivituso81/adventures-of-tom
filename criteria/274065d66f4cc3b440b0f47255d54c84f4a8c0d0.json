@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 3 columns by 3 rows with 9 separate items and nothing else?",
+  "Is each of the 9 items placed in the correct order reading left to right then top to bottom?",
+  "Does every item sit completely inside its own cell with at least 12 percent empty margin on all four sides?",
+  "Do no objects touch or cross any cell boundary or overlap any other object?",
+  "Is the skate wax a small rough pale yellow bar showing scuffs and deep grooves on its top and edges?",
+  "Is the second item a tiny clay taco sculpture with a visible paperclip stuck in it?",
+  "Is the third item a round flat golden pupusa with melting cheese at the edge and a side of slaw on a small plate?",
+  "Is the fourth item an oat milk latte in a plain cup showing a heart shape in the foam?",
+  "Is the fifth item a gold medal on a bright ribbon that has a simple zigzag crack stamped on the medal?",
+  "Is the computer chip shown as a small dark chip broken cleanly in half with gold traces visible along the crack?"
+ ]
+}

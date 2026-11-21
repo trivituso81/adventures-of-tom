@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object visible?",
+  "Is the object a tall old black iron double gate between two weathered stone posts?",
+  "Are both gate leaves swung wide open and standing at an angle?",
+  "Is there no chain and no padlock visible anywhere on the gate?",
+  "Does the riveted metal plate on the left leaf read exactly \"DIVISION NINE CAR BARN\"?",
+  "Do the stone posts span the full width of the side street opening and appear taller than a person?",
+  "Is the gap between the open gate leaves clear with nothing blocking it?",
+  "Is the object centered with a clear margin around all edges and fully inside the picture?",
+  "Is there a small soft contact shadow directly under the object?",
+  "Are there no people, animals, characters, scenery, ground patch, border, frame or caption visible?"
+ ]
+}

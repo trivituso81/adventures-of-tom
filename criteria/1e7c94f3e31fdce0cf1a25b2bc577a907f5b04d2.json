@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is the image exactly a 4x4 grid of 16 separate items with nothing else shown?",
+  "Is each of the 16 items centered in its own cell with at least 12 percent empty margin on all sides?",
+  "Does nothing touch or cross any cell edge and do no objects overlap?",
+  "Are the 16 items shown in exactly the order listed in the prompt from left to right and top to bottom?",
+  "Is every item from the provided list of 16 present exactly once with no substitutions, additions or omissions?",
+  "Are the cushioned sneakers shown as a clean white pair with triple thick soles?",
+  "Is the cozy cardigan shown laid flat?",
+  "Is the cotton robe shown folded?",
+  "Is the meet day leotard shown laid flat?",
+  "Is the podium warmup jacket shown laid flat?"
+ ]
+}

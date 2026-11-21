@@ -1,0 +1,13 @@
+{
+ "requirements": [
+  "Is there exactly one object shown with nothing else?",
+  "Are there only two grey steel posts and a top rail with the space between them completely empty?",
+  "Is there no chain anywhere in the image?",
+  "Is there no padlock anywhere in the image?",
+  "Is there no sign anywhere in the image?",
+  "Do the posts span approximately the full width of the lane and appear a little taller than a person?",
+  "Is nothing standing in the middle of the lane between the posts?",
+  "Is the object centered with a clear margin around it and fully inside the picture?",
+  "Is there a small soft contact shadow directly under the object?"
+ ]
+}

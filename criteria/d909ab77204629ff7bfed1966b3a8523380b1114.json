@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Does the first item appear to be a shiny red metal kazoo with a small round hole?",
+  "Is the second item a round gold star sticker that looks slightly curled at one corner?",
+  "Does the third item show a pair of over-ear headphones with a coiled cable?",
+  "Is the fourth item a cream-colored apron with visible flour handprints on the pockets?",
+  "Does the fifth item show a pair of cream flip-flop slippers with a small gold crest?",
+  "Is the sixth item a grey game controller with a coiled cable and a visibly worn A button?",
+  "Does the seventh item appear as a sparkly headband featuring a crown of rhinestones?",
+  "Is the eighth item a pink and purple leotard shown laid flat with thin straps?",
+  "Does the ninth item show shiny glitter leggings laid flat that appear to leave a trail of sparkle?"
+ ]
+}

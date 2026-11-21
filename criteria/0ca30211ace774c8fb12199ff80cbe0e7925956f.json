@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 separate items with no borders, labels or numbers?",
+  "Are there exactly 16 complete centered objects, one in each grid cell?",
+  "Does each object fill about 70 percent of its cell with at least 12 percent empty margin on every side?",
+  "Do nothing touch or cross any cell edge and do no objects overlap?",
+  "Is the first item a round red and white fishing bobber with a thin line wrapped around it?",
+  "Is the second item a clear spool of fishing line wrapped neatly on a red spool?",
+  "Is the third item a smooth pale silvery curved driftwood stick with a knot?",
+  "Is the fourth item a sealed glass jar of pickled red peppers with a cloth lid tied with string?",
+  "Are items 5 through 10 all big round gold coins standing on edge at a tilt, each with a beaded rim and a different stamped design in the middle?",
+  "Is the eleventh item a slightly crumpled clipboard sheet of paper showing lines of tiny blurred squiggles and one bold highlighted line?"
+ ]
+}

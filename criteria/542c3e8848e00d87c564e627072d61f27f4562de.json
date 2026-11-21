@@ -1,0 +1,13 @@
+{
+ "requirements": [
+  "Is there exactly one object visible in the image?",
+  "Is the object a tiny clay sculpture of a taco?",
+  "Is the taco shown as handmade pottery with a speckled glaze appearance?",
+  "Is there a paperclip visibly stuck in the taco?",
+  "Is the object centered in the image?",
+  "Does the object fill approximately 70 percent of the picture?",
+  "Is there at least 12 percent empty margin visible on every side of the object?",
+  "Is the object shown in a three-quarter view from slightly above?",
+  "Is the object complete with no other items or elements present?"
+ ]
+}

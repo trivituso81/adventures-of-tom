@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object visible?",
+  "Is the object a chain link school gate in an opened state with the gate leaf swung toward the viewer?",
+  "Does the gate leaf hang at an angle from the right post leaving the space between the two posts completely empty?",
+  "Are there no chain and no padlock visible anywhere on the gate?",
+  "Do the two posts span approximately the full width of a lane that is about two people wide and are they a little taller than a person?",
+  "Is nothing standing in the middle of the lane between the posts?",
+  "Is the entire object centered with a clear margin around it and fully contained inside the picture frame?",
+  "Is there a small soft contact shadow directly under the object?",
+  "Are the proportions, size, design, parts, materials and colors of the gate identical to the locked version shown in the attached reference image?",
+  "Is the camera angle identical to the locked version shown in the attached reference image?"
+ ]
+}

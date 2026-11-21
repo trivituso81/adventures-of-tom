@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single figure of Sal shown?",
+  "Is Sal standing in a full body pose from head to shoes?",
+  "Is Sal facing the viewer at a slight three-quarter angle turned toward the left?",
+  "Are Sal's eyes directed toward the left side of the picture?",
+  "Is Sal's head tipped slightly forward?",
+  "Are both of Sal's hands loosely clasped in front at the waist?",
+  "Does Sal have a small attentive smile with mouth closed?",
+  "Are Sal's eyebrows slightly raised?",
+  "Does the figure fill about 85 percent of the picture height and appear centered?",
+  "Is there an even empty margin all around the figure?"
+ ]
+}

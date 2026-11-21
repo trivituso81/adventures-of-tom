@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one object shown?",
+  "Is the object a gold sparkly birthday sash?",
+  "Is the sash shown as one long wide band sewn into a big loop laid flat?",
+  "Does the whole long loop of the sash show?",
+  "Is there a big gold bow tied on the band near the bottom of the loop?",
+  "Does the long band fill most of the picture?",
+  "Is the sash centered in the image?",
+  "Does the sash occupy about 70 percent of the picture?",
+  "Is there at least 12 percent empty margin on every side around the sash?",
+  "Is the sash shown in a three-quarter view from slightly above?"
+ ]
+}

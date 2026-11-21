@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Are the 16 items arranged left to right and top to bottom in the exact order listed in the prompt?",
+  "Does each item sit centered in its own cell with at least 12 percent empty margin on every side?",
+  "Do no items touch or cross any cell edges or overlap with any other item?",
+  "Is the first item an oat milk latte in a cup with a heart in the foam?",
+  "Is the second item a gold medal on a ribbon showing a cracked-ground icon?",
+  "Is the fourth item a round traffic light glowing bright green with a black rim and short cable?",
+  "Is the eighth item a wrapped birthday present in purple paper with a gold ribbon and bow?",
+  "Is the fourteenth item a white shirt with puffy fuzzy cuffs shown laid flat?",
+  "Is the sixteenth item a gold sparkly birthday sash with a big gold bow shown draped?"
+ ]
+}

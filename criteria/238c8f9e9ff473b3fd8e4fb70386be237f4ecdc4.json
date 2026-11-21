@@ -1,0 +1,13 @@
+{
+ "requirements": [
+  "Is there exactly one object visible?",
+  "Are both gate leaves swung toward the viewer and hanging at an angle from the posts?",
+  "Is the space between the two posts completely clear from post to post with no gate blocking it?",
+  "Is there no chain or padlock visible anywhere on the gate?",
+  "Is the riveted metal plate attached only to the left gate leaf?",
+  "Are the stone posts taller than a person and spanning about two people in width?",
+  "Is the entire object centered with a clear margin around it and fully inside the picture?",
+  "Is there a small soft contact shadow directly under the object?",
+  "Are the gate leaves open such that the gap between them is clear?"
+ ]
+}

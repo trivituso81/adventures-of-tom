@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 items?",
+  "Are there exactly 16 distinct objects with one in each grid cell?",
+  "Are the 16 objects arranged left to right and top to bottom in the exact order given in the list?",
+  "Is each object complete, centered in its cell, and filling about 70 percent of the cell?",
+  "Does each object have at least 12 percent empty margin on every side with nothing touching or crossing any cell edge?",
+  "Do no objects overlap with each other?",
+  "Is the first item a folded tan pier vest with more pockets?",
+  "Is the second item a grey heated seat cushion with a cord and a warm glow?",
+  "Is the third item an open tackle box showing three layers of lures with a few red peppers in a corner?",
+  "Is the sixth item a big wooden pepper mill shaped like a small cannon with a pepper cloud coming out?"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 3 columns by 3 rows showing exactly 9 distinct objects?",
+  "Is the first object a big round gold coin standing on its edge at a tilt with a round kickball stamped in the middle and a beaded rim?",
+  "Is the second object a purple velvet coat with a smooth satin collar and one single big button laid flat?",
+  "Is the third object a pair of matte black over-ear noise-cancelling headphones with a headband and big padded ear cups?",
+  "Is the fourth object a bright green empty rain slicker with webbed pockets and two round frog eyes on the hood laid flat?",
+  "Is the fifth object a pair of fluffy white and pale blue cloud-shaped slippers with puffy tops and no faces?",
+  "Is the sixth object a teal race singlet with a plain white bib pinned on the chest laid flat?",
+  "Is the seventh object a pair of neon pro racing flats with paper-thin soles and plain sides?",
+  "Is the eighth object a sporty wristwatch with a bright strap and a plain face showing only tick marks?",
+  "Is the ninth object a silver crescent moon locket on a chain that is open showing a tiny heart inside?"
+ ]
+}

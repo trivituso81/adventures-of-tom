@@ -1,0 +1,12 @@
+{
+ "requirements": [
+  "Is there exactly one complete pair of pro racing flats shown?",
+  "Are the shoes centered and filling about 70 percent of the picture?",
+  "Is there at least 12 percent empty margin on every side around the shoes?",
+  "Are the shoes shown in a three-quarter view from slightly above?",
+  "Do the shoes have neon coloring?",
+  "Do the shoes have paper-thin soles?",
+  "Do the shoes have plain sides with no logo or swoosh visible?",
+  "Is the entire background a flat solid magenta with no magenta inside the shoes?"
+ ]
+}

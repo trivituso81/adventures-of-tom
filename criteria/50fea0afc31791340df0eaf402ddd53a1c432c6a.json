@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one tiny taco figurine shown?",
+  "Is the taco centered and filling about 70 percent of the picture with empty margin on all sides?",
+  "Does the taco appear to be made of solid glazed pottery with a hard shiny cream glaze?",
+  "Are there small brown speckles visible on the cream glaze?",
+  "Is the taco shell and filling made from the same smooth glazed clay material?",
+  "Does the filling consist of a few rounded bumps that are glazed green and red?",
+  "Is a silver paperclip visibly stuck into the top of the taco?",
+  "Is the entire object clearly depicted as a clay ornament rather than real food?",
+  "Is the view a three-quarter angle from slightly above?",
+  "Are there no people, hands, faces, or any additional objects present?"
+ ]
+}

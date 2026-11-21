@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object filling the image edge to edge?",
+  "Is the object a round-topped red wooden door with two long gold hinges and a gold ring knocker set in a pale stone arch?",
+  "Is the door swung open inward about halfway?",
+  "Is a warm golden lit hallway visible inside the open doorway with a hint of a coat hook and a rug?",
+  "Are there no three stone steps visible below the door?",
+  "Is the pale stone arch touching the top and both sides of the image?",
+  "Is the door sill touching the bottom of the image?",
+  "Is the image centered with the object fully inside and with a clear margin around it?",
+  "Are the edges of the object crisp and clean?",
+  "Is there no note on the door?"
+ ]
+}

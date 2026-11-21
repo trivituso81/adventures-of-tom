@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Does the first item show a purple satin crew jacket laid flat with a plain gold patch on the back?",
+  "Does the second item show a paper with nine neat lines, circled bubbles all in the same column, and a large question mark at the bottom?",
+  "Does the third item show a laminated card with a hole, a lanyard string, a plain blue stripe, and a signature scribble?",
+  "Does the fourth item show a round sparkly glitter glue bottle cap with a drip of pink glitter glue?",
+  "Does the fifth item show a bright red rubber ball with a shiny highlight and a pale seam line?",
+  "Does the sixth item show a gold stopwatch with a crown button, round white face with tick marks, and a short chain?",
+  "Does the seventh item show a bright green t-shirt laid flat with a snail icon on the chest?",
+  "Does the eighth item show a single acorn with a cap on top and a tiny carved X on its side?",
+  "Does the ninth item show a small jar of thick amber tree sap with a slow drip stretching from the lid?"
+ ]
+}

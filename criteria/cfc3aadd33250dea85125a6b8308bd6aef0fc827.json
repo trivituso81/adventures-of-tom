@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 separate square cells with no borders or labels?",
+  "Is the grid filled left to right and top to bottom in the exact order of the 16 listed items?",
+  "Does each of the 16 cells contain exactly one complete centered object with at least 12 percent empty margin on every side?",
+  "Do nothing in any cell touch or cross a cell edge or overlap another object?",
+  "Is cell 1 a gold medal on a silk ribbon with a little bow?",
+  "Is cell 2 a white chalk bag with a drawstring and a dusty cloud of chalk powder?",
+  "Is cell 3 a red white and blue leotard laid flat?",
+  "Is cell 4 a round enamel pin with a big gold star in the middle and a gold border?",
+  "Is cell 5 a cream lamb plush with a tiny red cape standing?",
+  "Is cell 6 a bright green frog slicker with webbed pockets and eyes on the hood laid flat?"
+ ]
+}

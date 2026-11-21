@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object visible?",
+  "Is the object a chain link school gate swung wide open with the gate leaf flat against the post on one side?",
+  "Are there no chain and no padlock visible anywhere on the gate?",
+  "Are there no signs visible anywhere on the gate?",
+  "Do the grey steel posts with a top rail span the full width of the lane and appear a little taller than a person?",
+  "Is nothing standing in the middle of the lane?",
+  "Is the entire object centered with a clear margin around it and fully inside the picture?",
+  "Are the posts, gate design, parts, materials, colors, proportions and size matching the locked state version exactly except for the open state and absence of chain/padlock?",
+  "Is there only a small soft contact shadow directly under the object and no other ground patch?",
+  "Are there no people, animals or characters visible anywhere?"
+ ]
+}

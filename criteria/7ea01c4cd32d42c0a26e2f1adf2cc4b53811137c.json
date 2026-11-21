@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single painting shown?",
+  "Are there exactly nine empty paper muffin wrappers visible on the ground?",
+  "Do the muffin wrappers form a loose trail from the top left of the muddy clearing down and to the right?",
+  "Is the first muffin wrapper positioned at the top left corner of the big muddy clearing where the narrow path emerges from the trees?",
+  "Is the last muffin wrapper positioned in the exact middle of the clearing?",
+  "Are the muffin wrappers spaced evenly without overlapping?",
+  "Are the muffin wrappers large and about the size of a grown-up's head?",
+  "Are the muffin wrappers cream and pale golden brown in color?",
+  "Are the muffin wrappers crumpled and flattened with visible cake crumbs?",
+  "Are the muffin wrappers each showing a smear of mud?"
+ ]
+}

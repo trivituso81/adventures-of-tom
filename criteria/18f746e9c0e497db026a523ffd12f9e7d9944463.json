@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single figure of Rose shown?",
+  "Is the figure shown in a full body pose from the top of the head to the shoes?",
+  "Is the figure standing and alone?",
+  "Is the figure facing the viewer at a slight three-quarter angle turned toward the left?",
+  "Are the eyes directed toward the left as if listening to someone off-screen?",
+  "Is the head tipped slightly forward?",
+  "Are both hands loosely clasped in front at the waist?",
+  "Is the mouth closed in a small attentive smile?",
+  "Are the eyebrows a little raised?",
+  "Does the figure fill about 85 percent of the picture height and appear centered?"
+ ]
+}

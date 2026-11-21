@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 items with no borders, labels or numbers?",
+  "Are there precisely 16 distinct objects, one centered in each grid cell?",
+  "Does each object fill about 70% of its cell with at least 12% empty margin on all sides?",
+  "Do no objects touch or cross any cell edges or overlap with each other?",
+  "Is the first item in the top-left cell a single flat pressed old book page that is cream-colored with faint brown edges?",
+  "Is the second item a thick green hardcover novel with a plain gold stripe on the spine, standing slightly open?",
+  "Is the third item a pair of round reading glasses with thin gold frames?",
+  "Is the fourth item a folded red pop-up card open to show a small paper dragon popping out?",
+  "Is the fifth item a shiny gold rounded-rectangle library card with a signature scribble and a little sparkle?",
+  "Is the sixth item a purple knit sweater laid flat with a small cream finger-to-lips icon on the chest?"
+ ]
+}

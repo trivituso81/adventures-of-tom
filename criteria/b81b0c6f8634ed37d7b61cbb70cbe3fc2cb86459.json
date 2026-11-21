@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single painting of Boppy?",
+  "Is Boppy shown full body from head to shoes?",
+  "Is Boppy standing and alone in the image?",
+  "Is Boppy facing the viewer at a slight three-quarter angle?",
+  "Is Boppy in the exact unimpressed pose: leaning on one hip with one hand on the hip?",
+  "Are Boppy's eyes half closed and his mouth turned down?",
+  "Is Boppy's fishing rod over his shoulder?",
+  "Is the thick white mustache clearly visible on Boppy?",
+  "Does the figure fill about 85 percent of the picture height and is it centered?",
+  "Is there an even empty margin all around the figure?"
+ ]
+}

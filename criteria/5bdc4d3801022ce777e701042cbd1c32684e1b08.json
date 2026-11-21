@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one object shown?",
+  "Is the object a tall old black iron double gate between two weathered stone posts?",
+  "Are both gate leaves swung wide open and standing at an angle?",
+  "Is a heavy chain hanging loose with an open padlock dangling?",
+  "Do the stone posts span about two people wide and are they taller than a person?",
+  "Is there a clear gap between the open gate leaves?",
+  "Is the object centered with a clear margin around it and fully inside the picture?",
+  "Are the edges of the object crisp and clean?",
+  "Is there only a small soft contact shadow directly under the object with no ground patch or other scenery?",
+  "Is the image free of any people, animals, characters, scenery, border, frame or caption?"
+ ]
+}

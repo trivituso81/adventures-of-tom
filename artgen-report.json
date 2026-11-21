@@ -1,0 +1,33 @@
+[
+ {
+  "card": "t-gatelayer-pics",
+  "state": "done",
+  "estimate": 0,
+  "cap": 1.0,
+  "dry_run": false,
+  "made": [],
+  "already": [
+   "prop-gate-town-school-open",
+   "prop-gate-jpark-barn-open",
+   "prop-gate-blvd-studio-open",
+   "prop-gate-backlot-stage7-open"
+  ],
+  "skipped": [],
+  "failed": [],
+  "spent": 0.0
+ },
+ {
+  "card": "t-itembannerart-pics",
+  "state": "done",
+  "estimate": 0,
+  "cap": 1.0,
+  "dry_run": false,
+  "made": [],
+  "already": [
+   "prop-item-solo-claytaco"
+  ],
+  "skipped": [],
+  "failed": [],
+  "spent": 0.0
+ }
+]

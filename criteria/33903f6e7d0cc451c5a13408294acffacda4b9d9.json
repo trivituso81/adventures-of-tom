@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single doorway shown filling the image edge to edge?",
+  "Does the stone arch touch the top and both sides of the image?",
+  "Does the bottom of the door sill touch the bottom edge of the image?",
+  "Is the door a round-topped red wooden door with two long gold hinges and a gold ring knocker?",
+  "Is the door closed?",
+  "Is there a small handwritten paper note taped to the door at eye height?",
+  "Does the note show a tiny doodle of a running shoe and no words?",
+  "Are there three stone steps visible below the door?",
+  "Is the image centered with the object fully inside and a clear margin around it?",
+  "Are there any people, animals, characters, scenery, ground patch, border or frame visible?"
+ ]
+}

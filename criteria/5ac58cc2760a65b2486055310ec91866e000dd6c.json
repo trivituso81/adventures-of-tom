@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one object shown?",
+  "Is the object a round-topped red wooden door with two long gold hinges and a gold ring knocker set in a pale stone arch?",
+  "Is the door swung open inward about halfway?",
+  "Is a warm golden lit hallway visible inside the open doorway with a hint of a coat hook and a rug?",
+  "Is the arch a little taller than it is wide with proportions about 5 wide to 6 tall?",
+  "Is the image centered with the complete object fully inside the picture and a clear margin around it?",
+  "Is there a small soft contact shadow directly under the object?",
+  "Are there no people, animals or characters visible?",
+  "Is there no scenery, ground patch, border or frame visible?",
+  "Is there no note on the door?"
+ ]
+}
