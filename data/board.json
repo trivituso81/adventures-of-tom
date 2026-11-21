@@ -18219,10 +18219,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by idea-skippingcut: your phone check; blocks nothing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T00:46:50.646Z"
     }
    ],
-   "col": "up",
-   "first": "Wait for the build idea-skippingcut to be published, then RELOAD on the title."
+   "col": "done",
+   "first": "Wait for the build idea-skippingcut to be published, then RELOAD on the title.",
+   "done": "2026-11-20"
   },
   {
    "id": "t-startfix-edit",
