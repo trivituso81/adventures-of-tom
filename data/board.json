@@ -29448,13 +29448,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGzkghj5rCZRHTUQAf",
     "opening": "not started"
    },
    "nightly": true,
@@ -29520,6 +29520,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T23:20:46.823Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29535,7 +29539,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-21T23:20:59+00:00"
   },
   {
    "id": "c-bigone25",
@@ -30403,6 +30407,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T23:17:53.940Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -30415,7 +30423,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (sections 4.4, 4.7 to 4.10), then card c-wanbulk in data/board.json with its history (Tom's words). Your first push is the commit board: start c-wanbulk. Build wanbulk: (1) in tools/art-library/wangen.py, after each video, run plan 4.4 checks 3 to 5 as measurements (standing height first against last within 2 percent, feet row within 1 percent of the frame height in every picture, flat magenta background, figure never touches an edge, last picture against first under 3 of 255) and checks 1 and 2 as a vision checklist built the way tools/art-library/artqa.py works (three runs, majority; the motion sentence of the job's prompt is the requirement), written to the job's result on branch wangen; (2) a job that fails only on an edge check is retried once automatically with the next pad from a list in the job file (none, 0.8, 0.65), a job that fails anything else or fails twice is marked stopped and gets one Claude card (Opus 5.5 medium) with the evidence; (3) a job that passes is baked by the bake settings stored on the job (bake_clip.py kind, fps, step, marks found the way clipmarks.py finds them) and wired from a `wire` field on the job, then one Tom card (ask animations) lists every new clip of the run; (4) a Generate all N videos button on a Tom card that lists jobs, which saves the request with a commit the way an art-gen `gen` request does and starts wan-gen, never past the job file's cap. Tests with the stand-in fal server (wangen_test.py) for pass, edge retry, stop and cap; replay the checks on the stored r4 videos of rose-giddyup and deedee-wetfloor on branch wangen and confirm they fail the way plan 4.10 says. A session never makes a paid run; the first paid bulk run is Tom's tap. Build tag wanbulk. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
     "opening": "pasted by Tom from the board"
    }
   },
@@ -31079,6 +31087,16 @@
    ],
    "cards": [
     "c-costsduo1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
+   "title": "Battle videos in bulk: checks and retries inside the Action",
+   "first": "2026-11-21T15:20:15-08:00",
+   "last": "2026-11-21T15:20:15-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanbulk"
    ]
   },
   {
@@ -35058,8 +35076,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d8d6f8f52f7aa5a11e75bbbb269d96163bd2242b",
- "synced_at": "2026-11-21T23:18:36+00:00",
+ "synced": "84b304d409396481a478248a48d048ed04e33294",
+ "synced_at": "2026-11-21T23:21:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
