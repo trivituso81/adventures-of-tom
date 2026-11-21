@@ -272,7 +272,7 @@
   }
  },
  "tom-cast": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -290,8 +290,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.8,
-  "why": "wanch2: Grace's cast passed on Kling 4.0 with pad 0.8 (grace-cast r4: no rings, inside the frame); made the same way, prompt file unchanged"
+  "pad": 0.65,
+  "why": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed"
  },
  "tom-loungepass": {
   "rev": 6,
@@ -719,7 +719,7 @@
   }
  },
  "rose-cast": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -737,8 +737,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.8,
-  "why": "wanch2: Grace's cast passed on Kling 4.0 with pad 0.8 (grace-cast r4: no rings, inside the frame); made the same way, prompt file unchanged"
+  "pad": 0.65,
+  "why": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed"
  },
  "rose-tackle": {
   "rev": 4,
@@ -985,7 +985,7 @@
   }
  },
  "deedee-cast": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -1003,8 +1003,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.8,
-  "why": "wanch2: Grace's cast passed on Kling 4.0 with pad 0.8 (grace-cast r4: no rings, inside the frame); made the same way, prompt file unchanged"
+  "pad": 0.65,
+  "why": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed"
  },
  "deedee-wetfloor": {
   "rev": 3,
