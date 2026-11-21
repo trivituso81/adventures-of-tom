@@ -16541,7 +16541,7 @@
   {
    "id": "c-keysecrets5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets5",
    "title": "Recast and baker pages: key boxes",
@@ -16550,8 +16550,8 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDJbNJJjjxvpDs5pHU",
-    "opening": "not started"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Settles the last pages that ask for an API key (recast-deedee.html, recast-justin.html, the baker templates under tools/).",
@@ -16579,6 +16579,11 @@
     {
      "d": "2026-11-20",
      "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:27:34.633Z"
     }
    ]
   },
