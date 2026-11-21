@@ -13335,7 +13335,7 @@
    "next": "Part done 2026-11-21 (second run, builds projclean1a, 1b, 1c, 1d): 444 Project docs copied word for word into claude/, confirmed on origin/main by size, and deleted from the Project. Project size 1,438,803 at the start, 692,867 after the last delete (67 docs left, 4 of them the permanent mirrors handoff-rules.md, next.md, canon-addendum.md, build-plan.md). STILL TO DO: (1) 12 docs never copied because a safeguard stopped the copy agent (not the content): tombo-review.md, adventures_of_tom_ability_revamp_plan.md, adventures-of-tom-ability-revamp.md, kit-recipe.md, CHANGES.md, status.md, ability-revamp-brief.md, voice-baker-scripts.txt, voice-baking.md, battle-design.md, portrait-style.md, project-instructions.md; copy each to the same path in claude/ (claude/CHANGES.md may clash with docs/CHANGES.md only by name, it is a different folder), push, confirm size on origin, delete from the Project. (2) The compare group: the Project docs that are already in claude/ on origin (animation-chapter-plan, animation-tool-test-pack1, battle-build, bestiary-v10.1, story-next, story-ch02-draft4, story-line-rules, story-engine-capabilities, next-addendum-ch1rebuild1, next-addendum-b3s12, next-addendum-b3s13, voice-tag-style, tom-line-edits, keysecrets-plan, video-battle-plan, story-build, pose-editor-plan, pose-editor-poseedit2, the 12 anim-test v2/v3 clip prompts): write the Project text to /tmp, diff it against the repo file; if equal delete from the Project; if different the Project text wins and overwrites the repo file first. Never delete the 4 mirrors. (3) Held in the Project, name on the final card: monster-codex-build.md (a safety classifier stopped the write, do not retry it), 46_tomhouse_geometry.json (only a script rebuild exists, no byte check), battle-background-prompts.txt (171 KB, assembled by script, unverified: re-read it against the repo copy before deleting), comedy-bible.md, story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md (full street address), costs1-handoff.md (personal spending ledger), dialogue-clarity-rewrite.json and next-addendum-michael.md (classifier stops). (4) Steps 6 to 9: tools/claude_index.py for claude/INDEX.md, rewrite claude/README.md, the no-new-Project-docs rule in CLAUDE.md and claude/handoff-rules.md (repo and Project mirror), `!/claude/` in .github/workflows/publish.yml next to `!/art/raw/`, a last project_info sweep, then the final push `## projclean1` and the Tom card t-projinstr2 (ask setup, fyi true). Rules: forks cannot start forks; a fork that copies must be told 'YOUR ONLY TASK ... no git, no deletes, no board changes'; push each part under a NEW build name (next: projclean1e, then 1f ...); rebase with `git rebase --onto origin/main <base>` in the shallow clone. A Sonnet 5.5 copy agent was stopped by safeguards on 2026-11-21 while copying the docs in (1): run the next session on Claude Opus 5.5, effort medium, and copy the docs in (1) first. Runs only in a conversation inside the Project.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "prompt": {
     "what": "Moves every Project doc except four into the repo's claude/ folder, deletes each from the Project only after it is confirmed on GitHub, and adds the rules that stop the Project filling up again.",
@@ -13450,6 +13450,10 @@
     {
      "d": "2026-11-21",
      "t": "Second run, parts 1c and 1d: 179 more docs copied, confirmed on origin by size and deleted from the Project (444 in all; Project size 692,867 of 2,000,000). A Sonnet 5.5 copy agent was stopped by safeguards with 12 docs left; the next run uses Opus 5.5. Card stays In progress."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1e: Project docs move: progress and next steps written on card c-projclean (second run paused, 444 docs moved)"
     }
    ],
    "chat": {
@@ -23062,6 +23066,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T21:40:01-08:00",
+   "last": "2026-11-20T23:15:06-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b",
+    "projclean2a",
+    "projclean2b",
+    "projclean1c",
+    "projclean1d",
+    "projclean1e"
+   ],
+   "cards": [
+    "c-projclean",
+    "b-projclean2a",
+    "b-projclean2b"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
    "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
    "first": "2026-11-20T21:51:25-08:00",
@@ -23086,25 +23110,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T23:11:13-08:00",
-   "tags": [
-    "projclean1a",
-    "projclean1b",
-    "projclean2a",
-    "projclean2b",
-    "projclean1c",
-    "projclean1d"
-   ],
-   "cards": [
-    "c-projclean",
-    "b-projclean2a",
-    "b-projclean2b"
    ]
   },
   {
@@ -25828,8 +25833,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "567b2d9e775659c03134a576aca2e8d7c5eaacc9",
- "synced_at": "2026-11-21T07:14:19+00:00",
+ "synced": "5af59e9be91ea88ca895f0623a16a591d630bb4d",
+ "synced_at": "2026-11-21T07:15:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
