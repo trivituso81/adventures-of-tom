@@ -21000,8 +21000,14 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-08, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T03:24:13.942Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-qa-bug11",
