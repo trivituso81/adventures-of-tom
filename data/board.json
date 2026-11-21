@@ -25353,7 +25353,7 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "next": "Rescue chose START NEXT: the work is taste work on Opus 5.5 medium and the prompt is already rewritten (model Kling 4.0, start picture rose-cushion). Copy the prompt into a new conversation in the Project.",
@@ -25383,7 +25383,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
+    "url": "",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25451,6 +25451,11 @@
     {
      "d": "2026-11-21",
      "t": "Rescue outcome: START NEXT. Two sessions stopped on Wan (rev 1 to 4); the card prompt already carries the one change (Kling 4.0, $0.79 a video, cap 1.50) and the fallback (no lava in the clip, game draws it). Moved to Up next for an Opus 5.5 medium session; no rescue session spends on video."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T20:59:56.612Z"
     }
    ],
    "prompt": {
