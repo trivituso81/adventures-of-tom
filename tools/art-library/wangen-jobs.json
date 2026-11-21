@@ -1220,5 +1220,26 @@
    "seed": 81
   },
   "why": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry. Result r1: passed, baked as skeeter_bite."
+ },
+ "rose-cushion-kling": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "kling/v4/image-to-video",
+  "est_per_s": {
+   "720p": 0.157,
+   "1080p": 0.235
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-cushion-hop-v1.txt",
+  "frame": "art/clips/start/rose-cushion.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "duration": 5
+  },
+  "pad": 0.8,
+  "why": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)"
  }
 }

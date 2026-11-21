@@ -238,6 +238,7 @@ function build() {
     if (!fam && !(made && made.route === 'wan' && made.job === job)) job = null;   // wanch3: a monster has a Wan job only when that job made its clip (skeeter-bite)
     if (job) used.jobs.add(job);
     if (clipFile && !made && ent && ((S.artBy[ent.e.id] || {}).status === 'approved')) made = { route: 'xai', entry: ent.key, rev: 1 };   // baked before the stamps existed: the approved entry made it
+    if (fam && made && made.route === 'wan' && made.job !== job && S.jobs[made.job]) { job = made.job; used.jobs.add(job); }   // rose-lava-xftr: the job that made the clip the game plays now (rose-cushion-kling for rose_lava) wins over the job named like the clip
     // 2 the prompt
     let prompt = '', source = '', rev = 0, promptFile = null, laterTries = 0, madeNote = '';
     const ov = over[a.id];

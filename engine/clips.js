@@ -35,6 +35,7 @@ function bclipDefine(id,D) {
   paintedAtlas('clip_'+id,D.src,rects,D.k);
   for(let i=0;i<D.n;i++) { const rows=paintRows(Array(D.h).fill(blank),'clip_'+id,i,false);
     rows._clip=true; rows._ft={dx:D.feet[i][0],w:D.feet[i][1]};   // where the shadow goes (feetOf, engine/battle-draw.js): measured by the baker
+    if(D.below) rows._below=D.below;   // rose-lava-xftr: the frame reaches this many rows under the feet line (bake_clip.py --below); Battle 3 lowers it
     frames.push(rows); }
   BCLIPS[id]=Object.assign({id,frames,kind:'strike'},D);
 }

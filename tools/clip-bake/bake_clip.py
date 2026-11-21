@@ -32,6 +32,10 @@ picture). Frame numbers count the video's own frames from 0.
   --fig-rows      how many sprite rows tall the STANDING figure is in the owner's battle idle frame (Rose 83), so the
                   clip is drawn exactly as tall as the painted battle sprite and follows BATTLE_SIZE with it
   --speed         playback speed (1.5 = one and a half times faster than the video)
+  --below         ROWS: (rose-lava-xftr) room kept under the standing feet line, for something the video draws in front of and below her
+                  feet (Rose's couch cushion). Written as D.below; the game lowers the frame by that many rows (engine/clips.js rows._below)
+  --ground        lava:F0:F1:F2: (rose-lava-xftr) the game draws a lava pool under the fighter (engine/clip-ground.js): it starts to
+                  spread at video frame F0, is full at F1 and is gone at F2. Written as D.ground {kind, from, full, to} in clip ms
   --k             atlas pixels per sprite row (4: the standing figure is fig-rows x 4 pixels tall)
 The first kept frame must be the standing pose: its outline sets the figure's height, feet line and middle.
 """
@@ -120,6 +124,7 @@ def main():
     ap.add_argument('--fig-rows', type=float, required=True); ap.add_argument('--speed', type=float, default=1)
     ap.add_argument('--k', type=int, default=4); ap.add_argument('--fps', type=float, default=30)
     ap.add_argument('--stamp', default=''); ap.add_argument('--tag', default='clip0'); ap.add_argument('--quality', type=int, default=86); ap.add_argument('--sheet', default='')
+    ap.add_argument('--below', type=int, default=0); ap.add_argument('--ground', default='')
     A = ap.parse_args()
     root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     tmp = tempfile.mkdtemp()
@@ -148,7 +153,8 @@ def main():
     u = np.zeros(keyed[0].shape[:2], bool)
     for k in keyed: u |= k[..., 3] > 40
     ys, xs = np.where(u)
-    if ys.max() + 1 > feet + 2 * px_per_row: print('note: something reaches below the standing feet line; it is cut off')
+    if ys.max() + 1 > feet + (2 + A.below) * px_per_row: print('note: something reaches below the standing feet line (and --below); it is cut off')
+    feet = feet + A.below * px_per_row           # --below: the frame reaches that many rows under the feet line
     half = max(mid - xs.min(), xs.max() + 1 - mid) + px_per_row      # same room left and right of the middle
     W = int(np.ceil(2 * half / px_per_row)); W += W % 2
     H = int(np.ceil((feet - ys.min()) / px_per_row)) + 1
@@ -183,6 +189,14 @@ def main():
     D = dict(owner=A.owner, src=f'art/clips/{A.id}.webp?v={A.tag}', k=A.k, w=W, h=H, n=n, rects=rects, ms=ms,
              dur=round(sum(durs)), kind=A.kind, impact=ii, reach=reach, feet=feet_info)
     if A.kind != 'strike': del D['impact'], D['reach']
+    if A.below:
+        D['below'] = int(A.below)
+        if 'reach' in D: D['reach'][1] = float(round(D['reach'][1] - A.below, 1))   # reach stays measured from the feet line
+    if A.ground:
+        gk, *gf = A.ground.split(':'); gf = [int(x) for x in gf]
+        if gk != 'lava' or len(gf) != 3 or not (gf[0] <= gf[1] <= gf[2]): sys.exit('--ground must be lava:F0:F1:F2 with F0 <= F1 <= F2')
+        at = lambda f: round(sum(d for p, d in zip(picks, durs) if p < f))   # clip ms when video frame f comes up
+        D['ground'] = dict(kind=gk, **{k: at(f) for k, f in zip(('from', 'full', 'to'), gf)})
     if A.kind == 'guard': D['rise'], D['lower'] = rise_i, lower_i   # the hold is pictures rise..lower-1 (engine/b3-clips.js b3cGuardFrame)
     if A.wrap: D['wrap'] = 1                     # the game plays this loop forward only (engine/clips.js bclipLoopFrame): something falls or turns in it
     # src carries its own cache tag: tools/tag_check.py reads it and bump_tags.py moves it when the picture changes

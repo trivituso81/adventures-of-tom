@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
+
+MOTION: CUSHION HOP
+She gasps, tosses the couch cushion she is holding down onto the floor at her feet, and hops onto the cushion with both feet. She bounces up and down on the cushion twice with her arms up, giggling. Without bouncing again, she hops off as the cushion disappears, and she holds her starting relaxed stance.

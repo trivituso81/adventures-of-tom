@@ -25576,7 +25576,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
-   "next": "Rescue chose START NEXT: the work is taste work on Opus 5.5 medium and the prompt is already rewritten (model Kling 4.0, start picture rose-cushion). Copy the prompt into a new conversation in the Project.",
+   "next": "Shipped in anim-rose-lava-xftr: Kling 4.0 made the video with no lava (the lava try ran off the frame edge), the game draws the lava pool under her. Waiting on your look (card t-anim-rose-lava-xftr-watch).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25676,6 +25676,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:59:56.612Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Kling 4.0 with the lava in the prompt (job rose-lava-kling, $0.78): story right and size steady, but the lava touched the left edge in 66 of 121 pictures and she turns toward the viewer. Fallback, as the prompt said: the same job with the lava taken out (rose-cushion-kling, prompt wan-rose-cushion-hop-v1.txt, $0.79; Tom OK'd going $0.07 over the $1.50 and raising the cap to cover another session's $1.72 on the shared ledger). It passed: nothing enters from an edge, head within the 8% band by eye, cushion whole. Baked with 10 rows under the feet (the cushion sits lower than her feet) and the game now draws the lava under her (engine/clip-ground.js), in battle and in the Battle Guide. Faults left: she faces the viewer while bouncing, and ends a little turned. Build anim-rose-lava-xftr."
     }
    ],
    "prompt": {
@@ -25693,7 +25697,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukDLdQ8yhHeC6LQH7N8",
     "prev": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs"
-   }
+   },
+   "after": "t-anim-rose-lava-xftr-watch"
   },
   {
    "id": "c-anim-deedee-dodge-y4m3",
@@ -30113,6 +30118,30 @@
     }
    ],
    "done": "2026-11-21"
+  },
+  {
+   "id": "t-anim-rose-lava-xftr-watch",
+   "title": "Watch Rose's new The Floor Is Lava!",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then tap All good or Something is wrong. Now: she gasps, a lava pool spreads under her (drawn by the game), she tosses the cushion on it, hops on and bounces with her arms up, then hops off as the lava goes. She turns toward the viewer while bouncing.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Rose.",
+    "Play The Floor Is Lava!",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-rose-lava-xftr. The video (Kling 4.0, no lava) passed the edge and size checks; the lava is drawn by the game under her."
+    }
+   ],
+   "fyi": true
   }
  ],
  "sessions": [

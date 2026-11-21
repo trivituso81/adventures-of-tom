@@ -217,6 +217,7 @@ async function boot(){
     const data=srcs.filter(s=>/^data\/b3-/.test(s));
     if(!data.length) throw new Error('The game page lists no battle data files');
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
+    for(const s of srcs) if(/^engine\/clip-ground\.js/.test(s)) await addScript(s).catch(()=>{});   // rose-lava-xftr: the game's ground effects (lava) for the player
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
@@ -697,9 +698,11 @@ function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
   let i=0;while(i<D.n-1&&ms>=D.ms[i+1])i++;return i;
 }
+// rose-lava-xftr: what the game draws on the ground under the fighter while this clip plays (engine/clip-ground.js, loaded from the game page)
+function groundAt(g,D,ms){if(D&&D.ground&&typeof bclipGround==='function')bclipGround(g,D,ms,D.w*D.k/2,(D.h-(D.below||0))*D.k,D.k);}
 function drawFrame(i){
   const D=PL.D,cv=$('cv');if(!D||!PL.img||!cv)return;const g=cv.getContext('2d'),r=D.rects[i];
-  g.clearRect(0,0,cv.width,cv.height);g.drawImage(PL.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);
+  g.clearRect(0,0,cv.width,cv.height);groundAt(g,D,D.ms[i]);g.drawImage(PL.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);
   const hf=$('hitflag');if(hf)hf.style.opacity=(D.impact!=null&&i>=D.impact&&i<=D.impact+2)?1:0;
   const sc=$('scrub');if(sc&&document.activeElement!==sc)sc.value=i;
   const fn=$('fno');if(fn)fn.textContent='Frame '+(i+1)+' of '+D.n+(D.impact!=null?' · hit lands on frame '+(D.impact+1):'');
@@ -875,7 +878,7 @@ function mpStart(items){MP.items=items;MP.on=true;MP.last=performance.now();canc
 function mpTick(now){
   if(!MP.on)return;const dt=Math.min(100,now-MP.last);MP.last=now;
   MP.items=MP.items.filter(it=>document.body.contains(it.cv));
-  MP.items.forEach(it=>{it.t+=dt;const L=clipLen(it.D);if(it.t>=L)it.t%=L;const g=it.cv.getContext('2d'),r=it.D.rects[frameAt(it.D,it.t)];g.clearRect(0,0,it.cv.width,it.cv.height);g.drawImage(it.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);});
+  MP.items.forEach(it=>{it.t+=dt;const L=clipLen(it.D);if(it.t>=L)it.t%=L;const g=it.cv.getContext('2d'),r=it.D.rects[frameAt(it.D,it.t)];g.clearRect(0,0,it.cv.width,it.cv.height);groundAt(g,it.D,it.D.ms[frameAt(it.D,it.t)]);g.drawImage(it.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);});
   if(MP.items.length)MP.raf=requestAnimationFrame(mpTick);else MP.on=false;
 }
 async function ghGetB64(path,ref){

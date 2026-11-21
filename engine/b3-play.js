@@ -429,7 +429,7 @@ function b3KoDraw(u,sp,cx,base,t,koE) {
 function b3GuardShown(key) { const u=b3Unit(B3.F,key); return !!(u&&b3cGuardClip(u)&&b3cGuarding(u)); }
 function b3DrawMember(u,t,picked) {
   const sp=BATTLE_SPRITES[u.id],home=b3PartyHome(u),vu=B3.view.u[u.key],A=B3P.body[u.key];
-  let cx=home.cx,base=home.base,fk=B3_BODY.idle,flash=false,hop=0,CF=null;
+  let cx=home.cx,base=home.base,fk=B3_BODY.idle,flash=false,hop=0,CF=null,gnd=null;
   if(vu.ko) {
     const KF=b3cMemberFrame(u,vu,t,A);   // a knock-out clip plays once and its last picture is held (engine/b3-clips.js)
     if(KF) { const w=KF[0].length*sp.scale,h=KF.length*sp.scale,ft=feetOf(KF);
@@ -454,7 +454,7 @@ function b3DrawMember(u,t,picked) {
     // A move played by a clip: run over to the monster, play the clip where they stand, run home.
     const e=t-B.t0,cd=B.C.dur/1000,ease=q=>{ q=Math.max(0,Math.min(1,q)); return q*q*(3-2*q); },R=b3cGet(u.id,'run');
     if(e<B.T0) { const s=ease(e/B.T0); cx=home.cx+(B.jx-home.cx)*s; base=home.base+(B.jy-home.base)*s; if(R) CF=bclipLoopFrame(R,e*1000); else fk=B3_BODY.dash; }
-    else if(e<B.T0+cd+.12) { cx=B.jx; base=B.jy; CF=b3cOnce(B.C,(e-B.T0)*1000); }
+    else if(e<B.T0+cd+.12) { cx=B.jx; base=B.jy; CF=b3cOnce(B.C,(e-B.T0)*1000); if(B.C.ground) gnd=[B.C,(e-B.T0)*1000]; }
     else { const s=ease((e-B.T0-cd-.12)/Math.max(.01,B.back)); cx=B.jx+(home.cx-B.jx)*s; base=B.jy+(home.base-B.jy)*s; if(B.back&&s<1) { if(R) CF=b3cMirror(bclipLoopFrame(R,e*1000)); else fk=B3_BODY.dash; } }
   } else if(B&&B.kind==='pose') fk=B.f;
   else if(B&&B.kind==='hit'&&B.guard) { const e=t-B.t0; cx+=Math.round(7*Math.sin(Math.min(1,e/B.dur)*Math.PI)*(1-e/B.dur)*2); flash=e<.08; }   // braced in the guard video: pushed back half a step, feet sliding home
@@ -473,9 +473,10 @@ function b3DrawMember(u,t,picked) {
     else if(B&&B.kind==='path'&&fk===B3_BODY.strike) { const K=B.keys,e=t-B.t0; let i=0; while(i<K.length-2&&e>=K[i+1].t) i++; while(i>0&&K[i-1].f===B3_BODY.strike) i--; reach=true; r0=B.t0+K[i].t; }
     CF=b3cStandIn(u,vu,t,reach,r0); fk=B3_BODY.idle; }
   if(VO&&!CF) { b3MemberMarks(u,t,picked,base-(sp.idle.length*sp.scale),cx); return; }
-  const frame=CF||sp[fk]||sp.idle,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
+  const frame=CF||sp[fk]||sp.idle,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame),bl=(frame._below||0)*sp.scale;
+  if(gnd) bclipGround(gfx,gnd[0],gnd[1],cx,base,sp.scale);   // rose-lava-xftr: the lava pool the game draws under her (engine/clip-ground.js)
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
-  const x=Math.round(cx-w/2),y=Math.round(base-h-hop);
+  const x=Math.round(cx-w/2),y=Math.round(base-h+bl-hop);
   const idle=fk===B3_BODY.idle&&!CF&&!(B3_BODY_CLIPS[u.id]||{}).idle,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
   activeKneelCut=frame===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
   if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }

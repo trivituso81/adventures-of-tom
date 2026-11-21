@@ -40,7 +40,7 @@ const b3cOnce=(C,ms)=>bclipFrameAt(C,Math.max(0,Math.min(ms,C.dur)));
 // The same frame turned to face the other way (a runner coming home). Cached on the frame; keeps the shadow's place.
 function b3cMirror(fr) {
   if(fr._mir) return fr._mir;
-  const m=mirrorRows(fr); m._clip=true; if(fr._ft) m._ft={dx:-fr._ft.dx,w:fr._ft.w};
+  const m=mirrorRows(fr); m._clip=true; if(fr._ft) m._ft={dx:-fr._ft.dx,w:fr._ft.w}; if(fr._below) m._below=fr._below;
   return fr._mir=m;
 }
 // Where a clip fighter stands to land a move on a monster: the clip's leading point (a fist, a spray) on the monster's near side.
