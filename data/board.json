@@ -16873,10 +16873,8 @@
    "lane": "tom",
    "col": "up",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE. The first box at the top is PROOF: GRACE'S GUARD (VIDEO): tap it. Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
-   "blocks": [
-    "c-wanidle"
-   ],
+   "next": "Optional now. Open ADMIN > BATTLE LAB > NEW BATTLE; the first box is PROOF: GRACE'S GUARD (VIDEO). Watch it once if you want to see the look before the chapter 1 videos are made. Nothing waits on this card.",
+   "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
@@ -16900,18 +16898,22 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch Grace's guard video once (1 minute) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\" Nothing waits on this card any more; c-wanch1 goes ahead after the fal credit."
     }
-   ]
+   ],
+   "fyi": true
   },
   {
    "id": "c-wanidle",
    "title": "Grace's idle, hit and one own move as Wan videos",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "done",
    "tag": "wanidle",
-   "next": "Waits on your verdict on the guard proof (card Watch Grace's guard video once). Then it makes three more Wan 3.0 videos of Grace from the same start picture (idle with breathing, hit, one own move with a held prop), checks each against the list before you see it, and shows them in the proof row. About $1.50.",
+   "next": "Retired (11-20 17:29): folded into c-wanch1, which makes every chapter 1 video at once.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16923,6 +16925,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanproof: claude/video-battle-plan.md section 5 step 1. Nothing in section 5 is approved until the guard proof is All good."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired: Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\" Covered by c-wanch1."
     }
    ],
    "prompt": {
@@ -16934,7 +16940,8 @@
     "model": "Claude Opus 5.5 (row D: video prompts you judge by taste, and a miss costs generation money)",
     "effort": "medium (the Action, the bake, the guard playback and the checks exist; three new MOTION parts and the idle and hit playback follow them)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanidle in data/board.json with its history and the answer on card t-wanproof-watch. Your first push is the commit board: start c-wanidle. Make Grace's idle with breathing, hit and one own move with a held prop as Wan 3.0 videos with the wan-gen Action, from art/clips/start/grace-hero.png, each prompt BOOP_APPROVED with only the MOTION part changed (the guard prompt in tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Run each through the checks in section 4.4 before Tom sees anything; a miss gets one retry with one change, a second miss the same way is the stop-loss. Spend at most $3.00 on fal and nothing on xAI. Bake them, play them in the Lab row PROOF: GRACE'S GUARD (VIDEO) only, test portrait and landscape (tools/wanproof_test.py extended), and do not remove any painted state yet. Build tag wanidle. End with a Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-wanproof-watch",
@@ -18770,6 +18777,68 @@
      "t": "Tom: \"many tasks are marked as working that I have a feeling are not actually working. I've been waiting for hours.\" Found: START marks a card In progress when it fires the task, and the Opus medium and Sonnet high tasks never start a conversation. Also board-sync failed on every push from 17:11 to 17:25 PT because a session left an invalid card (board_check refused it)."
     }
    ]
+  },
+  {
+   "id": "t-wanch1-fal",
+   "title": "Add $30 to fal.ai for the chapter 1 videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "next": "The chapter 1 videos cost about $30 on fal.ai and about $9 is left of the $10 you loaded. Add $30 so the run cannot stop halfway. Then tap I did this. This unblocks Make and check every chapter 1 battle video (c-wanch1).",
+   "steps": [
+    "Open fal.ai and sign in. Open Billing (your account menu, top right).",
+    "Add $30 of credit. The balance should show about $39.",
+    "Tap I did this on this card."
+   ],
+   "blocks": [
+    "c-wanch1"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "opening": "\"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\" fal has about $9.35 left (the plan's $10 minus 65 cents for the proof)."
+    }
+   ]
+  },
+  {
+   "id": "c-wanch1",
+   "title": "Make and check every chapter 1 battle video",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanch1",
+   "next": "Waits on your card Add $30 to fal.ai. Then it makes every chapter 1 battle video that is still a painted pose or a clip you rejected, checks every one against the plan's list before you see it, puts them in the real NEW BATTLE fights and removes the painted poses they replace. About 40 family videos on Wan 3.0 (about $30) and about 15 monster clips on Grok lite (about $2).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\""
+    }
+   ],
+   "prompt": {
+    "what": "Makes every chapter 1 battle video that is still painted or rejected (family on Wan 3.0 through fal, monsters on Grok lite through xAI), checks each before you see it, wires them into the NEW BATTLE fights and purges the painted poses they replace. About $32.",
+    "before": [
+     "Add $30 to fal.ai (card Add $30 to fal.ai for the chapter 1 videos) and tap I did this.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts you judge by taste, and a miss costs generation money)",
+    "effort": "medium (the recipe is written and proven: the wan-gen Action, the start picture, the checks in plan 4.4, the bake and the guard playback; this repeats it per state)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanch1 in data/board.json with its history and the Tom card that blocked it (t-wanch1-fal). Your first push is the commit board: start c-wanch1. Scope, chapter 1 only: (1) every family battle state still in B3_BODY_PAINT (data/b3-clips.js) for Tom, Grace, Rose and Deedee: idle as a video loop with the breathing in it, guard, hit, dodge, ko, victory and run (Grace's guard exists: grace_guard); (2) the family's own chapter 1 moves whose Grok clips Tom rejected (data/art-prompts.json, group Chapter 1, status rejected, his REDO notes); keep the clips he approved; (3) the wind-ups and attacks of the chapter 1 monsters still on painted frames. Family clips on Wan 3.0 through the wan-gen Action only, never grok-imagine-video-1.5-lite; monsters on xAI Grok lite with the clip-gen route and the Mudling idle prompt pattern. First make start pictures for Tom, Rose and Deedee exactly as Grace's was made (tools/art-library/wangen-jobs.json start job with their hero; check facing, mirror if it comes back facing right). Extend wan-gen to take a list of clip jobs per run and run up to 3 at once, ledger and cap unchanged. Every prompt is BOOP_APPROVED with only the MOTION part changed (tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Every clip goes through the checks in plan 4.4 before Tom sees anything; a miss gets one retry with one change; a second miss the same way is the stop-loss for that clip: leave it out and list it for Tom. Spend at most $35 on fal and $3 on xAI. Bake each clip, wire it into B3_BODY_CLIPS so the real NEW BATTLE fights use it, and purge each painted state it replaces in the same change (CLAUDE.md purge rule; the code breath goes when that fighter's idle video is in). Ship in parts per character (wanch1a, wanch1b, ...), each tested in portrait and landscape (python3 tools/b3_test.py s8, tools/wanproof_test.py extended to every clip kind, tools/smoke.py). Build tag wanch1. End with one Tom card (ask animations): watch NEW 1 to NEW 6 once. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
