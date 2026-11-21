@@ -28367,7 +28367,7 @@
    "id": "c-reports-9",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-122202-loak. First note: the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching ",
@@ -28410,13 +28410,18 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-21T20:31:47+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "t-hitspeed1-try",
@@ -32793,8 +32798,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ee111a601a4b31efaeff30710beac5c006b5ea30",
- "synced_at": "2026-11-21T20:37:30+00:00",
+ "synced": "94af77ef96397fe7abd7e816ef76f5b37b9da00b",
+ "synced_at": "2026-11-21T20:38:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
