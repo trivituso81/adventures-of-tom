@@ -26177,12 +26177,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: Tom asked to keep building without tests (\"id prefer not to test and just keep building until we are done\"), so stage 18 starts before Milestone C is answered. Browser chapter tests and the long smoke run are skipped; the fast checks (simulator, board, tags) still run."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part b3s18a pushed: chapter 6 on Battle 3 (tips, Vibe Points, Tombo toasts, retry line). No browser tests, by Tom's request."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
     "opening": "\"i'd prefer not to test and just keep building until we are done\""
-   }
+   },
+   "after": "nothing for Tom: c-b3s18"
   },
   {
    "id": "t-milestonec",

@@ -2463,7 +2463,7 @@ SCENES.ch6Kitchen=[
   {talk:'Tom',lines:[`Together. Hold on, Bready Mercury. We're coming!`]},
   {party:{lock:['tom','tnb']}},
   {flag:'tombo:tnb2'},   // Red Line Transfer unlocks here (chapter 6)
-  {toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2},
+  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2}],else:[]},
   {toast:'Goal: out to 2nd Ave. Find Olivia, Michael and Nara.',time:4.5}
 ];
 // 3. 2nd Ave: Nara growls at the jacaranda, Olivia and Michael list what is missing, Bernadette saw a flash (story-ch06.md scene 3).
@@ -2496,7 +2496,7 @@ SCENES.ch6Nara=[
   {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.6},   // she is at the end of the street before he finishes the word, and looks back and barks
   {talk:'Olivia',lines:[`Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.`]},
   {flag:'tombo:nara2'},   // Tug of War unlocks here (chapter 6)
-  {toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2},
+  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2}],else:[]},
   {toast:'Goal: Old Oak Park, through the south end of 2nd Ave.',time:4.5}
 ];
 // 4. Old Oak Park: Bernadette's briefing, then the picnic tables: the grey circle, the block, the round hole, the bulb in her bag (story-ch06.md scene 4).
@@ -2743,7 +2743,9 @@ SCENES.ch6Boss=[
   {battle:'chairman',tut:'chairman'},
   {if:()=>flag('battle:chairman')!=='win',then:[
     {heal:true},
-    {talk:'TNB',lines:[`Okay. Shake it off. Everybody gets a snack.`,`Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.`,`Three times should do it.`]},
+    {if:()=>B3_CH_ON(6),then:[
+      {talk:'TNB',lines:[`Okay. Shake it off. Everybody gets a snack.`,`Babe, when he calls in an acorn pile, knock it out before he eats it. It pays us back and takes a bite out of him.`,`Then we go again. You've got this.`]}],else:[
+      {talk:'TNB',lines:[`Okay. Shake it off. Everybody gets a snack.`,`Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.`,`Three times should do it.`]}]},
     {toast:'Face Chairman Cheeks and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 13. After the boss (won in the scene, or on a retry with A): Bready Mercury comes home, with a gold coin glued to his bottom (story-ch06.md scene 13).

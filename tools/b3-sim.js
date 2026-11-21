@@ -273,6 +273,7 @@ function check() {
   require('./b3-check-s15.js')({G,ok,near,play,noCrit});
   // Stage 17's groups: chapters 2 to 5 on Battle 3 (data/b3-story.js; the page side is tested by tools/ch2_b3_test.py to ch5_b3_test.py).
   require('./b3-check-s17.js')({G,ok,near,play,noCrit});
+  require('./b3-check-s18.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

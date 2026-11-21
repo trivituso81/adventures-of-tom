@@ -9,8 +9,8 @@ module.exports=function(T) {
   const {G,ok}=T;
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),J=x=>JSON.stringify(x);
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
-  const EXPECT=[1,2,3,4,5];   // the chapters on the Battle 3 list at this build; each stage 17 part adds one
-  ok(J(S.chapters)===J(EXPECT),'the Battle 3 story list is '+J(EXPECT)+' (found '+J(S.chapters)+')');
+  const EXPECT=[1,2,3,4,5];   // stage 17's chapters; stage 18 adds 6 to 10 and the bonus chapter (tools/b3-check-s18.js)
+  ok(J(S.chapters.slice(0,5))===J(EXPECT),'the Battle 3 story list starts '+J(EXPECT)+' (found '+J(S.chapters)+')');
   const scenes=read('data/scenes.js');
   // Chapter of a position in scenes.js: the last `// CHAPTER n:` heading before it.
   const heads=[...scenes.matchAll(/^\/\/ CHAPTER (\d+):/gm)].map(m=>({n:+m[1],at:m.index}));
@@ -18,7 +18,7 @@ module.exports=function(T) {
 
   // 1. Every fight a switched chapter's scenes start has a Battle 3 fight, tips for its `tut`, and its flag is read the same way
   const steps=[...scenes.matchAll(/\{battle:(?:'([a-z0-9]+)'|\(\)=>findMonster\('([a-z0-9]+)'\)),tut:'([a-z0-9]+)'(?:,count:(\d))?/g)].map(m=>({ch:chapterAt(m.index),id:m[1]||m[2],tut:m[3],count:m[4]?+m[4]:0}));
-  for(const n of S.chapters.filter(c=>c>=2)) {
+  for(const n of S.chapters.filter(c=>c>=2&&c<=5)) {
     const mine=steps.filter(s=>s.ch===n);
     ok(mine.length>=4,'chapter '+n+' has its story fights found in the scenes ('+mine.length+')');
     for(const s of mine) {
@@ -34,7 +34,7 @@ module.exports=function(T) {
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)
   const SPOTS={2:['LA_MONSTER_SPOTS'],3:['MARSH_MONSTER_SPOTS','SUNDIAL_MONSTER_SPOTS'],4:['BACKLOT_MONSTER_SPOTS','STAGE7_MONSTER_SPOTS','STAGESET_MONSTER_SPOTS'],5:['SCHOOL_MONSTER_SPOTS','CAFE_MONSTER_SPOTS']};
   const dfiles=fs.readdirSync(path.join(ROOT,'data')).filter(f=>/monsters\.js$/.test(f)).map(f=>read('data/'+f)).join('\n');
-  for(const n of S.chapters.filter(c=>c>=2)) for(const name of SPOTS[n]||[]) {
+  for(const n of S.chapters.filter(c=>c>=2&&c<=5)) for(const name of SPOTS[n]||[]) {
     const m=dfiles.match(new RegExp('const '+name+'=\\[(.*?)\\];'));
     ok(!!m,'chapter '+n+': '+name+' found');
     if(m) { const ids=[...m[1].matchAll(/\['([a-z0-9]+)'/g)].map(x=>x[1]);
@@ -42,7 +42,7 @@ module.exports=function(T) {
 
   // 3. Vibe Points: formations pay the bestiary's number, bosses its boss number, and a chapter's story path adds up
   const BOSS={2:['bigshake',30],3:['irongill',27],4:['directorscut',26],5:['redpen',30]},NORMAL={2:10,3:9,4:8,5:12};
-  for(const n of S.chapters.filter(c=>c>=2)) {
+  for(const n of S.chapters.filter(c=>c>=2&&c<=5)) {
     ok(FORMS[BOSS[n][0]].vp===BOSS[n][1],'chapter '+n+' boss pays '+BOSS[n][1]+' VP (bestiary section 5)');
     const forms=Object.values(FORMS).filter(f=>f.ch===n&&f.id!==BOSS[n][0]);
     ok(forms.length>=4&&forms.every(f=>f.vp===NORMAL[n]),'chapter '+n+' normal formations pay '+NORMAL[n]+' VP each ('+forms.length+' formations)');

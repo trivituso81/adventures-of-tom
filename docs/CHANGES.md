@@ -9,6 +9,14 @@
 
 - Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
 
+## b3s18a (2026-11-21): chapter 6's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part a. Chapter 6 (Old Oak Park) joins chapters 1 to 5: the Peanut Gallery, the Twig Spy, the Cheek Stuffer and Chairman Cheeks play on Battle 3 with the bestiary's Vibe Points (6 each, 30 for the boss) and tips for Battle 3 (`ch6gallery`, `ch6spy`, `ch6stuffer`, `chairman`): Pet Peeves and Resists, Standing Boo-vation, Leaf Camo and Stakeout Mark, Snack Snatch, the Acorn Cache and Cheek Slam. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: the two Tombo toasts of chapter 6 (Red Line Transfer, Tug of War) are skipped under Battle 3 (`B3_CH_ON(6)`). TNB's coaching after a loss to Chairman Cheeks has a Battle 3 version: the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines.
+- Left alone on purpose: the Nara Signature Tool toast that lists a WARMTH number (it is an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (new file `tools/b3-check-s18.js` for chapters 6 to 10 and the bonus chapter), `unused_voice.py` 0 on all checks. Tom asked for no browser tests this stage, so `tools/ch6_b3_test.py` was not written or run and `smoke.py` was not run.
+- Not looked at: any chapter 6 fight in a browser.
+
 ## guidegen1 (2026-11-21): the Battle Guide can make a video, show it next to the one in the game, and put it in the game
 
 Card c-guidegen part 3 (plan `claude/guidegen-plan.md`, facts `docs/BATTLE_GUIDE.md` "Making a video from the guide"). Nothing paid was run in this session: every test used a stand-in fal, a stand-in xAI and synthetic videos; the first real generation is Tom's tap.

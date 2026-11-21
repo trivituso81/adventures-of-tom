@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5],
+  chapters:[1,2,3,4,5,6],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -111,6 +111,24 @@ const B3_STORY={
       {id:'seeme',who:'*',text:'SEE ME is charging (!!): whoever it circles can only use single-target attacks on the pen, and a hard hit is coming. Tom’s Suite Door Slide takes it, or break its pips.',when:(F)=>F.foes.some(f=>f.charge&&/SEE ME/.test(f.charge.name))},
       {id:'grading',who:'*',text:'Strict Grading: 30% less damage taken, and every hit on it is answered with Points Off. A Mix (two different people, two different flavors, in one round) or a Break ends it.',when:(F)=>F.foes.some(f=>f.st&&f.st.strict_grading)},
       {id:'final',who:'*',text:'Final Grade is charging (!!) and hits everyone. Shield the family or break its pips to cancel it.',when:(F)=>F.foes.some(f=>f.charge&&/Final Grade/.test(f.charge.name))}
+    ],
+    // ---- Chapter 6 (stage 18): Tom, TNB and Nara in Old Oak Park. ----
+    ch6gallery:[
+      {id:'gallery',who:'*',text:'The Peanut Gallery stands in the Back row and can’t stand Racket or Sizzle. It shrugs off Clobber. The Acorn Agent in front can’t stand Racket or Drench.'},
+      {id:'boo',who:'*',text:'Standing Boo-vation is charging (!!): it tires the whole family, so everyone waits longer after each move. Shield them, or knock the Gallery out first.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='peanutgallery')}
+    ],
+    ch6spy:[
+      {id:'spy',who:'*',text:'The Twig Spy hides in the Back row behind Leaf Camo, so it is harder to hit. It can’t stand Sizzle or Razzle and shrugs off Racket.'},
+      {id:'mark',who:'*',text:'Stakeout Mark makes the marked person easier to crit for 2 turns. Shield them, or take the Spy out first.',when:(F)=>F.party.some(p=>p.st&&p.st.stakeout_mark)}
+    ],
+    ch6stuffer:[
+      {id:'elite',who:'*',text:'Cheek Stuffer is an Elite: 4 Composure pips, and it can’t stand Drench or Racket. It shrugs off Clobber, so reach for Drench or Racket to break its pips.'},
+      {id:'snatch',who:'*',text:'Snack Snatch is charging (!!): it takes a Pep from one person and stuffs its cheeks for +20% Defense. Interrupt it, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='cheekstuffer')}
+    ],
+    chairman:[
+      {id:'boss',who:'*',text:'Chairman Cheeks can’t stand Drench or Sizzle and shrugs off Racket. His Executive Monocle gives him more Crit and Atk for 3 turns, so strip it or steal it if you can.'},
+      {id:'cache',who:'*',text:'He calls an Acorn Cache into the Back row. Knock it out before he eats it on his second turn: it gives everyone a Pep and takes a bite out of him. Left alone, it makes him hit harder.',when:(F)=>F.foes.some(f=>f.id==='acorncache')},
+      {id:'slam',who:'*',text:'Cheek Slam is charging (!!): it hits one person hard. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='chairman'&&/Slam/.test(f.charge.name||''))}
     ]
   }
 };
