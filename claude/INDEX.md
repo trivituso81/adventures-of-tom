@@ -121,7 +121,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | battle-background-prompts.txt | FILE: 01-pond-town | 2026-11-21 |
 | battle-background-spec.md | LITTLE ELSEWHERE: BATTLE BACKGROUND SPEC | 2026-11-21 |
 | battle-build.md | The Adventures of Tom: new battle system, build tracker | 2026-11-21 |
-| battle-design.md | LITTLE ELSEWHERE: COMPLETE BATTLE SYSTEM DESIGN BIBLE | 2026-11-20 |
+| battle-design.md | LITTLE ELSEWHERE: COMPLETE BATTLE SYSTEM DESIGN BIBLE | 2026-11-21 |
 | battle-fix-prompts-index.txt | PROMPT PACK: battle animation fixes | 2026-11-21 |
 | battle-kit-ops.md | The Adventures of Tom: the 210 kit lines sorted into "ops" or "custom" (2026-11-18) | 2026-11-18 |
 | battle-revamp-next.md | BATTLE REVAMP: where it stands and the one next job (updated 2026-11-18 08:00) | 2026-11-18 |
@@ -179,6 +179,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | ch02-teardown.md | Chapter 2 teardown list (2026-11-20). Nothing in the game has been changed yet. | 2026-11-20 |
 | ch08-build.md | Chapter 8 build tracker (Forty Loaves by Six) | 2026-11-21 |
 | ch1-gemini-tracker.md | 1. Master Issue, Bug & Improvement Tracker | 2026-11-21 |
+| ch1-gemini-verify.md | Chapter 1 verification run: task brief for an AI tester |  |
 | ch1-qa-keysecrets2.md | Chapter 1 QA report (build keysecrets2): check against main | 2026-11-21 |
 | ch11-proposal.md | C11 proposal: Chapter 11, The Layover Between Worlds (start of PART 2) | 2026-11-21 |
 
@@ -312,6 +313,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-b3s12.md | Stage 13 facts (written by the b3s12 session, 2026-11-20) | 2026-11-20 |
 | next-addendum-b3s13.md | Stage 14 facts (written by the b3s13 session, 2026-11-20) | 2026-11-20 |
 | next-addendum-b3s14.md | Stage 15 facts (written 2026-11-20 after stage 14 shipped) | 2026-11-20 |
+| next-addendum-b3s15.md | Addendum: stage 15 (b3s15, 2026-11-21). Where it and claude/battle-build.md differ, this wins. | 2026-11-21 |
 | next-addendum-b3s9a.md | Battle 3, stage 9: where it stands after b3s9a (2026-11-19) | 2026-11-19 |
 | next-addendum-b3s9b.md | Battle 3, stage 9: where it stands after b3s9b (2026-11-19) | 2026-11-19 |
 | next-addendum-b3s9c.md | Battle 3, stage 10: where it stands after b3s9c (2026-11-20) | 2026-11-20 |
@@ -561,13 +563,13 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | 46_tomhouse_art_corrections.md | Area 46 art corrections for the next image pass | 2026-11-21 |
 | 46_tomhouse_geometry_review.md | Area 46 Tom's House: geometry review (proposal, not implemented) | 2026-11-21 |
 | CHANGES-archive.md | Changes archive (versions up to 189) | 2026-11-21 |
-| CHANGES.md | Changes | 2026-11-20 |
+| CHANGES.md | Changes | 2026-11-21 |
 | README.md | claude/: Claude's working notes (projclean1, 2026-11-21) | 2026-11-21 |
-| ability-revamp-brief.md | Adventures of Tom: Ability Revamp Brief | 2026-11-20 |
+| ability-revamp-brief.md | Adventures of Tom: Ability Revamp Brief | 2026-11-21 |
 | admin-ux-plan.md | Admin area UX plan (2026-11-12, PLAN, not built) | 2026-11-12 |
 | adminhub-plan.md | Admin hub: one address for the board, one for all admin tools (adminhub plan, 2026-11-19) | 2026-11-19 |
-| adventures-of-tom-ability-revamp.md | Adventures of Tom: The Ability Revamp | 2026-11-20 |
-| adventures_of_tom_ability_revamp_plan.md | Adventures of Tom: Complete Ability Revamp & Design Plan | 2026-11-20 |
+| adventures-of-tom-ability-revamp.md | Adventures of Tom: The Ability Revamp | 2026-11-21 |
+| adventures_of_tom_ability_revamp_plan.md | Adventures of Tom: Complete Ability Revamp & Design Plan | 2026-11-21 |
 | approved-install-table-11-08.md | Approved Art Library entries: install table (2026-11-08, main at ddabfb0) | 2026-11-08 |
 | arrivals-plan.md | Per-chapter arrivals (Tom approved 26 Oct 23:16). BUILT AND LIVE 2026-10-27 (v283, 1793072531-5df0) | 2026-10-27 |
 | assessment-2026-11-08.md | Game assessment, 2026-11-08 (main at 17f8eed, build tombo11) | 2026-11-08 |
@@ -604,7 +606,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | heist-redo-plan.md | The muffin theft scene redo (chapter 1, Deedee's kitchen, scene `ch1Theft`) | 2026-11-21 |
 | ipad-mode.md | iPad mode (`tab1`, 2026-11-02, 97c6439 on main, CHANGES (106)) | 2026-11-02 |
 | keysecrets-plan.md | Stop pasting API keys (keysecrets), plan and state | 2026-11-21 |
-| kit-recipe.md | Recipe: build one character's Option 3 Primary kit (phases 3c, 3d, 4) | 2026-11-20 |
+| kit-recipe.md | Recipe: build one character's Option 3 Primary kit (phases 3c, 3d, 4) | 2026-11-21 |
 | la-areas-qc-2026-11-05.md | Los Angeles area paintings: check of the six approved Library pictures (2026-11-05) | 2026-11-05 |
 | missing-baker-tools.md | Missing Baker tools (built 2026-10-27, rebuilt against game v332 the same evening) | 2026-10-27 |
 | move-review.md | Move review round 2 (2026-10-24, build 1792878363) | 2026-10-24 |
@@ -802,15 +804,15 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | tombo-five-status.md | Tombo five changes: status (2026-10-27, game NOT published, live stays v319) | 2026-10-27 |
 | tombo-moves-feedback.md | Tombo moves with Grace and Rose: Tom's feedback (26 Oct 2026, 22:08), to build next | 2026-11-21 |
 | tombo-prop-sheets.md | Tombo prop sheets (started 2026-10-30, COMPLETE 2026-10-30) | 2026-10-30 |
-| tombo-review.md | Tombo review: build spec for Task T (APPROVED by Tom 24 Oct 2026, 19:12) | 2026-11-20 |
+| tombo-review.md | Tombo review: build spec for Task T (APPROVED by Tom 24 Oct 2026, 19:12) | 2026-11-21 |
 
 ## voice
 
 | File | First line | Date |
 |---|---|---|
-| voice-baker-scripts.txt | 0	[warm, sincere, a little dry] Honestly? Great take. Really. [soft chuckle] Chef's kiss. | 2026-11-20 |
+| voice-baker-scripts.txt | 0	[warm, sincere, a little dry] Honestly? Great take. Really. [soft chuckle] Chef's kiss. | 2026-11-21 |
 | voice-baker-v2-build.md | Voice Baker v2: build instructions | 2026-11-21 |
-| voice-baking.md | Voice baking | 2026-11-20 |
+| voice-baking.md | Voice baking | 2026-11-21 |
 | voice-generation-plan.md | Plan: a job that makes one take for every unrecorded line (written voicelearn4, 2026-11-18; BUILT in voicegen1 | 2026-11-18 |
 | voice-humor-brief-gemini.md | AoT Voice & Humor Calibration Brief | 2026-11-21 |
 | voice-learn/model.py | import json,re,collections | 2026-11-21 |

@@ -23347,6 +23347,59 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-gem1v",
+   "title": "Run Gemini's chapter 1 test and save its report",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "next": "1. Download the brief: https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/claude/ch1-gemini-verify.md (the same file Claude sent you in chat, ch1-gemini-verify.md). 2. Give it to Gemini with this line: Follow this brief exactly and return the report in section 6 format. 3. Save Gemini's report as a file. 4. On card c-gem1v (Apply Gemini's chapter 1 report) tap Copy prompt, paste it into a new Claude conversation and attach the report file. That card closes the 13 chapter 1 cards Gemini passes and writes fix cards for the ones it fails.",
+   "blocks": [
+    "c-gem1v"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEtwdNGKn2hdVy2Wox",
+    "opening": "\"Create a list of kanban cards that are pending me for verifying\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-gem1brief: the brief claude/ch1-gemini-verify.md covers the 14 chapter 1 cards waiting on Tom (C1 to C12, Milestone B, optional A1). Tom: \"I want to give it to Gemini task to test each one as it plays through the entirety of chapter 1\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem1v",
+   "tag": "gem1v",
+   "title": "Apply Gemini's chapter 1 report to the board",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Waits on Tom's card t-gem1v (Gemini plays chapter 1 with the brief and Tom attaches the report). Then this session closes the passed cards and writes fix cards for the failed ones.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "prompt": {
+    "what": "Turns Gemini's chapter 1 report into board changes: passed cards close, failed ones get fix cards.",
+    "before": [
+     "Have Gemini play chapter 1 with claude/ch1-gemini-verify.md (card t-gem1v) and save its report as a file.",
+     "Attach that report file to the new conversation."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps, board_check catches mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem1v in data/board.json, history included, and the brief claude/ch1-gemini-verify.md. Your first push is the commit board: start c-gem1v.\n\nThe attached file is Gemini's chapter 1 verification report, made from that brief. Save it into the repo as claude/ch1-gemini-report.md. For each row of its section 6.2: PASS closes that Tom card (move it to Done with a history line quoting Gemini's evidence); FAIL writes a Claude fix card (fix: true, Sonnet 5.5 medium, the failed checklist line and what Gemini saw in reports) and the Tom card waits on it; BLOCKED or CANNOT JUDGE leaves the Tom card open with a history line saying why. Milestone B (t-milestoneb): add Gemini's ratings and fight log as a history line and a note for c-b3s17, but leave t-milestoneb open, because it is Tom's own judgment. A1 (t-wanch1-watch): same as Milestone B, leave it open. Section 7 issues: check each one against current main in code or on screen first, then make one Claude card per confirmed issue. Rebuild claude/INDEX.md with python3 tools/claude_index.py, run python3 tools/board_check.py, add a docs/CHANGES.md entry headed ## gem1v, bump tags with bump_tags.py gem1v --base origin/main, push to main, and set after on this card.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-gem1brief with Tom's card t-gem1v."
+    }
+   ]
   }
  ],
  "sessions": [
