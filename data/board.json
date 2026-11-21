@@ -22981,6 +22981,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T21:40:01-08:00",
+   "last": "2026-11-20T22:20:25-08:00",
+   "tags": [
+    "projclean1a"
+   ],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
    "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
    "first": "2026-11-20T21:51:25-08:00",
@@ -23015,16 +23027,6 @@
    ],
    "cards": [
     "c-keysecrets2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T21:40:01-08:00",
-   "tags": [],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -25697,8 +25699,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "b010dcd4754d615bddeb832b78769f6b60cad216",
- "synced_at": "2026-11-21T06:03:46+00:00",
+ "synced": "12134b5d5562ec8e3993bb454f1078ee976466e8",
+ "synced_at": "2026-11-21T06:21:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
