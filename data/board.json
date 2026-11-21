@@ -24234,6 +24234,55 @@
      "t": "Added by c-costsduo1 (build costsduo1)."
     }
    ]
+  },
+  {
+   "id": "c-anim-grace-cubepop-tvik",
+   "tag": "anim-grace-cubepop-tvik",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Animation note: Grace, Crunchy Sugar-Cube Pop",
+   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: She should essentially punch the monster with it. And it should be neon blue",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "anim": {
+    "id": "move:crunchy_sugar_cube_pop",
+    "owner": "grace",
+    "ownerName": "Grace",
+    "name": "Crunchy Sugar-Cube Pop",
+    "kind": "move",
+    "clip": "grace_cubepop",
+    "painted": false,
+    "what": "move crunchy_sugar_cube_pop in data/b3-kit-grace.js"
+   },
+   "notes": [
+    {
+     "at": "2026-11-21T17:06:29.422Z",
+     "words": "She should essentially punch the monster with it. And it should be neon blue",
+     "build": "b3s17a"
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "A note sent from the Battle Guide"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide: She should essentially punch the monster with it. And it should be neon blue",
+     "at": "2026-11-21T17:06:29.422Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes the animation Grace, Crunchy Sugar-Cube Pop again from your note, checks it, and hands it back to you to watch.",
+    "before": [
+     "Nothing to do first. Your note is on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one animation, starting from the version that exists)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-cubepop-tvik in data/board.json with its history. Your first push is the commit board: start c-anim-grace-cubepop-tvik.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) She should essentially punch the monster with it. And it should be neon blue\n\nThe animation: Grace, Crunchy Sugar-Cube Pop (move crunchy_sugar_cube_pop in data/b3-kit-grace.js). Its video is clip grace_cubepop (data/clips/grace-cubepop.js, art/clips/grace-cubepop.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-cubepop-tvik. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Crunchy Sugar-Cube Pop, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
