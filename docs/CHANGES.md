@@ -1,3 +1,7 @@
+## guardwin1 (2026-11-21): Tom now does the victory celebration when a fight is won while his guard is up, instead of staying in the guard pose
+
+Card c-guardwin1. Cause: `b3cMemberFrame` (engine/b3-clips.js) chose the guard video before it checked whether the fight was won, so a shield or stance still up at the end kept the guard video on screen and the victory video never played. The win check now comes first. Only Tom had a guard video that could be still up at the end, so he was the only one affected. New check `python3 -I tools/guardwin_test.py` (guard shows while guarding; after the win the victory video plays and the guard video is not drawn, for a shield and for a stance); it fails on the old code and passes now. Not tested on a phone.
+
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
 
 Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.

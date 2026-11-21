@@ -109,7 +109,8 @@ function b3cKoStandIn(u,t,e) { const H=b3cGet(u.id,'hit',8000),I=H?null:b3cGet(u
   return H?b3cOnce(H,Math.min(e*1000,H.dur*.5)):I?bclipFrameAt(I,0):null; }
 // The picture of a family member's clip right now, or null (draw the painted frame). e0 is the time the body started this state.
 function b3cMemberFrame(u,vu,t,B) {
-  const GC=!vu.ko&&b3cGuardClip(u),gon=GC&&b3cGuarding(u);
+  const cheering=!vu.ko&&(B3P.cheer||B3P.cheerKey===u.key);   // a won fight: the victory video beats a guard that is still up (guardwin1)
+  const GC=!vu.ko&&!cheering&&b3cGuardClip(u),gon=GC&&b3cGuarding(u);
   if(GC&&(!B||(B.kind==='hit'&&B.guard))&&(b3cGuardActive(GC,u.key,gon,t)||!b3cOf(u.id,'idle'))) { b3cWant(GC.id,9000); if(bclipReady(GC.id)) return b3cGuardFrame(GC,u.key,gon,t); }   // not loaded yet: the idle video below until it is
   if(vu.ko) { const C=b3cGet(u.id,'ko',8000); if(!C) return null; return b3cOnce(C,B&&B.kind==='ko'?(t-B.t0)*1000:C.dur); }   // plays from the moment they went down, then holds its last picture
   if(B&&B.kind==='cs') { const C=BCLIPS[B.id]; b3cWant(B.id,3000); return C&&bclipReady(B.id)?b3cOnce(C,(t-B.t0)*1000):null; }

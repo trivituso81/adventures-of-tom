@@ -29175,6 +29175,66 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-guardwin1",
+   "title": "Tom celebrates after a win even if he was guarding",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Building: the victory video now beats a guard that is still up, so Tom celebrates like the others.",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEVoamc3mY7qoyhDK6",
+    "opening": "\"if Tom is guarding when the battle ends victoriously, he should move into the battle celebration animation\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: if Tom is guarding when the battle ends victoriously, he should move into the battle celebration animation just like the others and not stay in guard pose."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card. Cause found: b3cMemberFrame (engine/b3-clips.js) checked the guard video before the win check, so a guard still up at the end kept showing."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes Tom staying in guard pose after a win.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: one cause, one test)",
+    "effort": "medium (one function, one test)",
+    "text": "Read claude/handoff-rules.md, then fix Tom staying in the guard video when a fight is won (tag guardwin1): in b3cMemberFrame the victory video must beat a guard still up; test with tools/guardwin_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "guardwin1",
+   "after": "t-guardwinplay"
+  },
+  {
+   "id": "t-guardwinplay",
+   "title": "Win a fight while Tom is guarding and check he celebrates",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "RELOAD on the title, open ADMIN > BATTLE LAB > NEW BATTLE, put Tom in the party, press his Guard, then finish the last monster while the guard is still up. Tom should switch to his victory celebration like the others. Report with the REPORT tab if he stays in the guard pose (guardwin1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"if Tom is guarding when the battle ends victoriously\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by guardwin1: your phone check of the guard-then-win fix; blocks nothing."
+    }
+   ],
+   "first": "After the publish of build guardwin1 (a minute or two after the push)."
   }
  ],
  "sessions": [
