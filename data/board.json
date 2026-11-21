@@ -22738,6 +22738,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T07:31:49.715Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude started the fix: reading the 3 QA results and adjusting only the failed prompts."
     }
    ],
    "prompt": {
