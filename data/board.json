@@ -26156,7 +26156,7 @@
    "id": "c-idea-savedportraits",
    "tag": "idea-savedportraits",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Saved portrait crops reach every screen, automatically",
    "next": "Built and pushed as idea-savedportraits: the 12 crops you saved are baked into the game, every face now uses one shared version stamp so your phone fetches the new pictures, and a new Action bakes each future Portrait Crops save by itself. Waits only on your look (card t-savedportraits-look).",
@@ -26199,6 +26199,10 @@
      "d": "2026-11-21",
      "t": "Cause found: the 12 crops Tom saved were never baked into portraits/<id>.png, and each face had a hand-typed cache tag. Fixed with a shared stamp (data/portrait-ver.js), an automatic portrait-bake Action and tests; checked in portrait and landscape. Build idea-savedportraits.",
      "at": "2026-11-21T18:55:02.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as idea-savedportraits: Your saved portrait crops now reach the Party, Status, turn order, battle panels and Battle Guide, and every future save does it by itself"
     }
    ],
    "prompt": {
@@ -26210,7 +26214,8 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-savedportraits in data/board.json, history included. Your first push is the commit board: start c-idea-savedportraits.\n\nTom made this card himself with New card on the board. His words: \"I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-savedportraits with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-savedportraits-look"
+   "after": "t-savedportraits-look",
+   "done": "2026-11-21"
   },
   {
    "id": "t-artfallback-seen",
@@ -26462,6 +26467,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
+   "title": "Saved portrait crops reach every screen, automatically",
+   "first": "2026-11-21T10:25:32-08:00",
+   "last": "2026-11-21T10:55:02-08:00",
+   "tags": [
+    "idea-savedportraits"
+   ],
+   "cards": [
+    "c-idea-savedportraits"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
    "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
    "first": "2026-11-21T10:53:26-08:00",
@@ -26527,16 +26544,6 @@
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
-   "title": "I saved new portraits in admin - how do I ensure they are",
-   "first": "2026-11-21T10:25:32-08:00",
-   "last": "2026-11-21T10:25:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-savedportraits"
    ]
   },
   {
@@ -29973,8 +29980,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6c2cd04838786745cfdd259e797a3aeb9e2cc59f",
- "synced_at": "2026-11-21T18:53:43+00:00",
+ "synced": "084841879642e1be30d14c166dc0a309092a32e0",
+ "synced_at": "2026-11-21T18:55:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
