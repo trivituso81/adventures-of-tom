@@ -26181,6 +26181,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18a pushed: chapter 6 on Battle 3 (tips, Vibe Points, Tombo toasts, retry line). No browser tests, by Tom's request."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18a: chapter 6's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -26702,12 +26706,13 @@
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:13:36-08:00",
+   "last": "2026-11-21T11:22:07-08:00",
    "tags": [
     "b3s17a",
     "b3s17b",
     "b3s17c",
-    "b3s17"
+    "b3s17",
+    "b3s18a"
    ],
    "cards": [
     "c-b3s17",
@@ -30239,8 +30244,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ef54c9e6911af614c642e9dc768f2c1c1a7b6fac",
- "synced_at": "2026-11-21T19:13:42+00:00",
+ "synced": "443182539a4e7fb884b72691b31f90243c7f0a0c",
+ "synced_at": "2026-11-21T19:23:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
