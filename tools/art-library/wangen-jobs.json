@@ -807,7 +807,7 @@
    "duration": 5
   },
   "pad": 0.8,
-  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad."
+  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65."
  },
  "deedee-idle": {
   "rev": 1,
@@ -1026,7 +1026,7 @@
    "duration": 5
   },
   "pad": 0.8,
-  "why": "wanch3: on Wan and on Kling r3 the mop head swept below her feet line; the words \"in front of her feet\" read as lower on the screen in this view. One change: \"beside her feet, level with them\" (v2 prompt). Same model, picture, frame, pad."
+  "why": "wanch3: on Wan and on Kling r3 the mop head swept below her feet line; the words \"in front of her feet\" read as lower on the screen in this view. One change: \"beside her feet, level with them\" (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): same miss a third time (mop head 114 px below the feet row) and two sweeps; stop-loss on wording."
  },
  "deedee-scrub": {
   "rev": 2,
@@ -1219,6 +1219,6 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "why": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry."
+  "why": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry. Result r1: passed, baked as skeeter_bite."
  }
 }

@@ -28,7 +28,7 @@ B3_FOES.mudling={id:'mudling',name:'Mudling',ch:1,role:'swarmer',row:'front',hp:
 B3_FOES.skeeter={id:'skeeter',name:'Skeeter Swarm',ch:1,role:'hexer',row:'back',hp:78,atk:21,def:14,spd:99,pips:0,
   peeves:['drench','racket'],resists:[],start:['jitterflight'],mechanics:[],drop:'honey',
   acts:[
-    {id:'darting_bite',name:'Darting Bite',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee'],effects:[]},
+    {id:'darting_bite',name:'Darting Bite',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee'],anim:{kind:'clip',clip:'skeeter_bite'},effects:[]},
     {id:'buzz_cloud',name:'Buzz Cloud',flavor:['support'],power:0,recovery:80,hits:'self',tags:['buff'],anim:{kind:'clip',clip:'skeeter_buzz',at:.6},when:{stripped:'jitterflight'},effects:[{op:'status',id:'jitterflight',to:'self'}]},
     {id:'mosquito_whine',name:'Mosquito Whine',flavor:['racket'],power:1,recovery:100,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'skeeter_whine',at:.5},effects:[{op:'pep',n:-1,to:'target'},{op:'status',id:'fatigue',to:'target'}]}
   ]};

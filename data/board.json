@@ -29081,7 +29081,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "wanch3",
-   "next": "In progress: Tom answered all good with no notes, so only the three remakes run (Wet-Floor, Giddyup, Skeeter Bite), one named change each.",
+   "next": "Shipped (wanch3). The Skeeter Swarm's Darting Bite is a video now (Wan 3.0, start picture as first and last frame). Missed: Rose's Giddyup (one jump now, but her hair and hand leave the frame; next try pad 0.65) and Deedee's Wet-Floor (the mop dips below her feet a third time; it needs your decision first). Both go to c-wanch4. Spent $1.72 on fal.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -29122,6 +29122,10 @@
     {
      "d": "2026-11-21",
      "t": "session_01RXeukF43ZogLhQidrKWaTM ended without shipping: the card was started twice, and the first conversation (session_01RXeukGKwJycJ9se7H7h9VD) had already pushed the three jobs and dispatched wan-gen run 44949779174. Nothing paid or changed here; chat link set back to the first conversation."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped wanch3: Skeeter Bite passed on Wan 3.0 (first and last frame the start picture, the entry prompt word for word), wired to darting_bite. Giddyup Kling r4 (second hop dropped): one jump, but hair cut at the top edge and the hand leaves the left edge; next one change pad 0.65. Wet-Floor Kling r4 (\"beside her feet, level with them\"): mop head still 114 px below the feet row and two sweeps, third miss the same way, stop-loss on wording. Spent $1.72 on fal (ledger $50.96). Next: t-wanch3-watch, then c-wanch4."
     }
    ],
    "prompt": {
@@ -29133,7 +29137,8 @@
     "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
     "effort": "medium (the route, the checks, the bake and the tests are built; each video gets one written change)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2), then card c-wanch3 in data/board.json with its history and the Tom card that blocked it (t-wanch2-watch: his answer and note). Your first push is the commit board: start c-wanch3. First apply Tom's notes from t-wanch2-watch (one change per video, smallest change). Then the three that missed in wanch2, one try each, one change each, checked by plan 4.4: (1) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): the mop head sweeps below her feet line on Wan and on Kling; the words \"in front of her feet\" read as lower on the screen, so change only those words to \"beside her feet, level with them\" in a new prompt file wan-deedee-wetfloor-v2.txt. (2) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): she jumps two or three times; drop only the last sentence's \"she hops back to her spot and\" (the second hop) in wan-rose-giddyup-v2.txt. (3) Skeeter Swarm Darting Bite (clip-skeeter-bite): Grok never brings it back to its start pose (twice); make it as a wangen job on Wan 3.0 with the start picture art/clips/start/skeeter.png as both first and last frame (end_image_url forces the return), the MOTION part of the Art Library entry's prompt as written now, fit 640x480. Bake each video that passes (bake_clip.py, --fps 24 for Kling), wire it (B3_BODY_CLIPS, the kit row, or the foe row in data/b3-foes-ch01.js), purge what it replaces, test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $4 on fal. Build tag wanch3, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-wanch3-watch"
   },
   {
    "id": "c-hollowfence",
@@ -29854,6 +29859,65 @@
    "changed": "2026-11-21",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "t-wanch3-watch",
+   "title": "Watch the Skeeter Swarm's new Darting Bite video",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations, choose Monsters, Skeeter Swarm, and play Darting Bite once (a few seconds). The big mosquito jabs its nose forward once and settles back while the small ones stay around it. Then tap All good, or Something is wrong with what you saw. This unblocks c-wanch4 (Rose's Giddyup and Deedee's Wet-Floor).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE and choose Animations.",
+    "Choose Monsters, Skeeter Swarm, and play Darting Bite.",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [
+    "c-wanch4"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "wanch3",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanch3. The video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired."
+    }
+   ]
+  },
+  {
+   "id": "c-wanch4",
+   "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanch4",
+   "next": "Waits on your card Watch the Skeeter Swarm's new Darting Bite video. Then it remakes Rose's Giddyup with one change (more room in the frame) and asks you one question about Deedee's Wet-Floor mop.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanch3 for the two videos it could not pass (Giddyup: a new fault with a known fix; Wet-Floor: stop-loss after three misses the same way)."
+    }
+   ],
+   "prompt": {
+    "what": "Applies your note on the Skeeter's bite, remakes Rose's Giddyup once with more room in the frame, and turns Deedee's Wet-Floor into one question for you. At most $2.",
+    "before": [
+     "Watch the Skeeter's Darting Bite on the card Watch the Skeeter Swarm's new Darting Bite video and answer it.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: video clips you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one written change and one question; the route, checks, bake and tests are built)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.10 Built wanch3), then card c-wanch4 in data/board.json with its history and the Tom card that blocked it (t-wanch3-watch: his answer and note). Your first push is the commit board: start c-wanch4. First apply Tom's notes from t-wanch3-watch on the Skeeter's Darting Bite (one change, smallest change). Then: (1) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0, prompt wan-rose-giddyup-v2.txt unchanged): r4 jumped once but her hair was cut at the top edge and her hand left the left edge, so change only pad 0.8 to 0.65 (rev 5), one try, checked by plan 4.4; bake with --fps 24, wire it to the kit row giddyup_tata_launch in data/b3-kit-rose.js. (2) Deedee's Wet-Floor Hazard: three tries missed the same way (the mop head is drawn below her feet row, plus two sweeps on r4), so no fourth prompt: add one Tom card (ask decide, 2 to 4 choices, the first yours ending (Recommended)) asking whether a mop drawn lower than her feet in this three-quarter view is acceptable if it sweeps once, with the r4 evidence; it blocks a new Claude card for the remake. Test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $2 on fal. Build tag wanch4, end with the Tom cards (ask animations for Giddyup if it passes). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

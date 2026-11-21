@@ -188,6 +188,14 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | Spend | fal $11.49 (14 videos: 13 Kling, 1 Wan); xAI $1.00 (4 Grok videos) |
 | What worked as a one-change fix | figure out of the frame on Kling: pad, and for a start picture that fills the frame, pad 0.65; a dodge: the duck wording, not a lean |
 
+### 4.10 Built (wanch3, 2026-11-21): the three that missed in wanch2, one try each
+| Video | One change | Result |
+|---|---|---|
+| Skeeter Darting Bite | Full Grok to Wan 3.0 (job `skeeter-bite` r1): the start picture `art/clips/start/skeeter.png` as first AND last frame, fit 640x480, 480p, 3 s, the Art Library entry's prompt (promptRev 3) word for word | PASSED. One jab (nose out at video frames 31 to 33), the ten small mosquitoes stay, never touches an edge, last frame against first 0.47 of 255. A small white impact burst at the nose (frames 37 to 43) is removed by the bake's key. Baked 0 to 66 step 3, impact 33, 1.5x: `skeeter_bite`, wired to `darting_bite` in data/b3-foes-ch01.js. The forced last frame fixed Grok's no-return |
+| Rose Giddyup | Kling r4: the last sentence loses "she hops back to her spot and" | MISSED, new fault. The repeated jumps are gone (one jump, knees tucked, lands, returns). But at the top of the jump her hair is cut flat by the top edge (video frames 66 to 72) and her waving hand leaves the left edge (frames 12 to 15, 51). Next one change, by wanch2 evidence (rose-tackle, casts): pad 0.65 instead of 0.8 |
+| Deedee Wet-Floor | Kling r4: "in front of her feet" to "beside her feet, level with them" | MISSED, the same way a third time. The mop head still drops 114 px (9% of the frame) below her feet row, and it sweeps out to the left edge twice (frames 52 to 56 and 76 to 80). Words about the feet line do not move it: in this three-quarter view any mop on the floor ahead of her is drawn lower on the screen. Stop-loss on prompt wording. Next: a decision for Tom, not a fourth prompt (card t-wanch3-wetfloor) |
+| Spend | fal $1.72 (ledger $49.24 to $50.96) | |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

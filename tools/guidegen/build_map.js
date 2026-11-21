@@ -230,12 +230,13 @@ function build() {
       ent = Object.values(S.E).find(x => x.owner === a.owner && x.nameNorm === nm && x.wind === (a.kind === 'wind')) || null;
     }
     const entKey = ent ? ent.key : key;
-    let job = fam && entKey ? (S.jobs[entKey] ? entKey : JOB_ALIAS[entKey] && S.jobs[JOB_ALIAS[entKey]] ? JOB_ALIAS[entKey] : null) : null;
-    if (job) used.jobs.add(job);
+    let job = entKey ? (S.jobs[entKey] ? entKey : JOB_ALIAS[entKey] && S.jobs[JOB_ALIAS[entKey]] ? JOB_ALIAS[entKey] : null) : null;
     if (ent) used.entries.add(ent.key);
     const clipFile = a.clip && exists('data/clips/' + dash(a.clip) + '.js');
     const stampInfo = clipFile ? S.stamps[dash(a.clip)] : null;
     let made = madeBy(stampInfo);
+    if (!fam && !(made && made.route === 'wan' && made.job === job)) job = null;   // wanch3: a monster has a Wan job only when that job made its clip (skeeter-bite)
+    if (job) used.jobs.add(job);
     if (clipFile && !made && ent && ((S.artBy[ent.e.id] || {}).status === 'approved')) made = { route: 'xai', entry: ent.key, rev: 1 };   // baked before the stamps existed: the approved entry made it
     // 2 the prompt
     let prompt = '', source = '', rev = 0, promptFile = null, laterTries = 0, madeNote = '';
