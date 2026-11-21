@@ -1,9 +1,3 @@
-## fix-ch1flight-2 (2026-11-21): the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js
-
-Card c-fix-ch1flight-2 (Gemini's chapter 1 test, C2 FAIL). Checked on main first: `SCENES.ch1Sunday` had lost the edit (a later push overwrote it).
-- Re-applied: `{ch1Reveal:'phone',keep:true}` (picture stays up under TNB's text), `{ch1RevealEnd:true}` after the text, `{trip:'west',quiet:true}` (no girls or Deedee goodbye, straight to the flight). Nothing else touched.
-- Checked: scene loads in the browser with those steps and no page errors. Not played end to end here (no Python playwright for smoke).
-
 ## guidestatus1-restore2 (2026-11-21): housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes
 
 Card c-guidestatus. Two pushes of mine were rebased badly. guidestatus1 dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b and re-added the purged `art/raw/clips/wan-grace-squeeze-v3.mp4` and its prompt; guidestatus1-restore then reverted 19 files of other sessions (the dashboard plan and mocks, chapter 8 and 9 story fights b3s18c and b3s18d, wangen-jobs.json, voice and script indexes). This push puts every one of those files back exactly as they were before guidestatus1-restore, removes the v3 files again and restores the three notes below guidestatus1.
@@ -59,13 +53,15 @@ Tom had Gemini play chapter 1 with the brief `claude/ch1-gemini-verify.md`; its 
 - Section 7 checked against main: X-03 (LOAD IT? in the Save modal) and X-04 (TURN label clipped in portrait) were not reproduced (the Save popup has no LOAD IT? button; the TURN label is whole in a 430x860 Battle 3 frame), so no card.
 - Board and notes only: no game file changed.
 
-## b3s18 (2026-11-21): stage 18 closes: chapters 6 to 10 play on the new battle; the bonus chapter waits
+## nighttests (2026-11-21): every test of the game runs each night on GitHub, and a test that newly fails becomes a fix card
 
-Card c-b3s18. Chapters 6 to 10 (Old Oak Park, the Library, the Car Barn, the Moon Club, the airport) run their story fights and map monsters on Battle 3 behind the same switch (BY CHAPTER, default), pushed as `b3s18a` to `b3s18e`. Docs: `docs/BATTLE3.md` "What stage 18 holds" (the battle 2 reference table by kind, what was built, the bonus chapter facts), `docs/handoff/b3s18.md`, `claude/next-addendum-b3s18.md`, `claude/battle-build.md` (stage board, results, calls, next conversation).
-- Not switched: the bonus chapter (Nine Scoops). Its two Brain Freeze fights end at half HP with results `flee` and `shell` in battle 2 code that Battle 3 cannot yet express, so it stays on battle 2; board card `c-b3s18bonus` builds the seams and switches it.
-- Test file change: `tools/b3_story_test.py` moved its "not switched yet" cases from chapter 6 to chapter 11 (pool 1350 split 800 and 550, level floor 25). It was not run.
-- Not run, by Tom's request: browser chapter tests, `smoke.py`, `b3_story_test.py`. Run: `node tools/b3-sim.js check`, `unused_voice.py`.
-- Board: Tom's next card is Milestone D (`t-milestoned`, play chapters 6 to 10).
+Card c-nighttests, plan `claude/night-plan.md` section 6. Tom (11-21): "tasks ... that execute, test, file cleanup, code cleanup and refactoring" while he sleeps.
+- `tools/night/tests.json`: one row per test (210 rows: every `*_test.py` and `test.py` under tools/, `smoke.py`, `b3-sim.js check`, `validate.js`), six groups balanced by estimated minutes, 11 rows `known_fail` from the failing list in `claude/next.md`, 4 scripts in `skip` with a reason. `tools/night/seed.py` made it (`--rebalance` redoes the groups).
+- `tools/night/manifest_check.py` (called from `tools/smoke.py`): fails when a test script is in neither the rows nor `skip`.
+- `tools/night/run_tests.py <group>`: one row after another, time limit twice its minutes, a failing row is run again once (passes the second time = flaky, never a card), `FAILS: [..]` counts as a failure even with exit 0, paid keys removed from the environment.
+- `.github/workflows/night-tests.yml`: cron `23 11 * * *` (3:23 am in winter), `workflow_dispatch` (inputs `group`, `only`), 6 machines at once (`fail-fast: false`, 4 hours each), no paid secret, then the `report` job.
+- `tools/night/report.py`: writes `tests/<date>.json` and `tests/latest.json` on the orphan branch `night` (never merge it), compares with the night before and adds one Sonnet 5.5 medium fix card `c-nt-<test id>` (`fix_of: night:<id>`) per test that newly fails with no open card; the first night is a baseline and adds no cards.
+- Test: `python3 tools/night/night_test.py` (made-up manifest with a passing, a failing, a flaky and a known-failing row; the diff; the card passes `board_check.py`; a full report against a local remote).
 
 ## guidestatus1-restore (2026-11-21): housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake
 
@@ -78,6 +74,22 @@ Card c-b3s18, part e. Chapter 10 (the airport, the end of Part 1) joins chapters
 - Left alone on purpose: the Rose Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
 - Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 10 test were not run.
 - Not looked at: any chapter 10 fight in a browser.
+
+## b3s18d (2026-11-21): chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part d. Chapter 9 (the Moon Club) joins chapters 1 to 8: the Hanger-On, the Sore Loser, the Wallflower and The Mirrorball play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`): Pet Peeves and Resists, Hang On Tight, How Gauche! and Cheater!, the Wallflower's Wall Hug and Petal Storm, Facet Spin, Dazzled with Shatter Glitz! and Sensory Overload!, Spotlight Solo and LAST DANCE. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: Deedee's coaching after a loss to The Mirrorball has a Battle 3 version (`B3_CH_ON(9)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 9 has no Tombo toast to skip.
+- Left alone on purpose: the Deedee Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 9 test were not run.
+- Not looked at: any chapter 9 fight in a browser.
+
+## b3s18c (2026-11-21): chapter 8's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part c. Chapter 8 (the Car Barn) joins chapters 1 to 7: the Wet Blanket, the Draft, the Picky Eater and Old Ironbelly play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`): Pet Peeves and Resists, Dampen Spirits and Why Bother?, Crosswind and Pilot-Light Gust, the Tin Lid and Push It Away, Toasty with Steam Cloud!, BROIL and Full Furnace. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: TNB's coaching after a loss to Old Ironbelly has a Battle 3 version (`B3_CH_ON(8)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 8 has no Tombo toast to skip.
+- Left alone on purpose: the Tom Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 8 test were not run.
+- Not looked at: any chapter 8 fight in a browser.
 
 ## guideprompts1a (2026-11-21): a script and an Action that write a real prompt for every starter-draft battle animation
 

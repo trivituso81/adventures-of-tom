@@ -56,8 +56,7 @@ Rules for every stage's session:
 | 14 | Balance pass on Part 1 (data only), plus the Rank 2 and Rank 5 follow-up | Pushed 2026-11-20 | `b3s14`, `b3s14b` | Nothing is asked. |
 | 15 | Story switch, chapter 1: ADMIN switch (OLD, BY CHAPTER, NEW), chapter 1's fights on Battle 3, level and Vibe Point migration, Ruckus as a save field, Vibe Points and a victory card, late joiners' loadouts on recruit, new tips, no Warmth in chapter 1 | Pushed 2026-11-21 | `b3s15` | Milestone B: Chapter Select > Chapter 1, play it on the new battle (about 30 minutes). |
 | 17 | Story switch, chapters 2 to 5: chapters 2 to 5's 16 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 16 fights, the kind flag on a boss win, one chapter test each | Pushed 2026-11-21 | `b3s17a`, `b3s17b`, `b3s17c`, `b3s17` | Milestone C: play chapters 2 to 5 (card t-milestonec). |
-| 18 | Story switch, chapters 6 to 10: chapters 6 to 10's 20 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 20 fights, five Battle 3 retry lines. The bonus chapter is NOT switched (its Brain Freeze fights are bespoke battle 2 code, see `docs/BATTLE3.md` "The bonus chapter is not switched") | Pushed 2026-11-21 (chapters 6 to 10) | `b3s18a`, `b3s18b`, `b3s18c`, `b3s18d`, `b3s18e`, `b3s18` | Milestone D: play chapters 6 to 10 (card t-milestoned). The bonus chapter is card c-b3s18bonus. |
-| 16, 19 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
+| 16, 18 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
 
 ## Stage 15 results (facts)
 
@@ -76,25 +75,6 @@ Rules for every stage's session:
 | Tests | `node tools/b3-sim.js check` CHECKS 2668, FAILS []; `tools/ch2_b3_test.py` to `ch5_b3_test.py` in both layouts, no page errors, every fight on Battle 3, no Warmth words, tips once each, Vibe Points paid; `tools/b3_story_test.py` passes (one step flaked after a long run, passes alone); `unused_voice.py` 0 on all checks; smoke fails only `board_sync_test` R5 (known). |
 | Vibe Points | Main Vibe Points per chapter on the required path: chapter 2 is 60, chapter 3 54, chapter 4 50, chapter 5 66 (the pocket Vibe earns half). |
 | Not looked at | The chapter 2 to 5 fights as Tom plays them: Milestone C. |
-
-## Stage 18 results (facts)
-
-| Item | Result |
-|---|---|
-| Built | `B3_STORY.chapters=[1,...,10]`, tips for 20 fights, no new fight rows, five Battle 3 retry lines (TNB ch6 and ch8, Grace ch7, Deedee ch9, Amy ch10), four Tombo toasts skipped under Battle 3, `tools/b3-check-s18.js`. `docs/BATTLE3.md` "What stage 18 holds" (reference table by kind, what it builds, the bonus chapter facts, tests). |
-| Tests | `node tools/b3-sim.js check` CHECKS 3271, FAILS []; `unused_voice.py` 0 on checks 1, 3, 4. Tom asked for no browser tests ("id prefer not to test and just keep building until we are done"): no chapter 6 to 10 test was written, `smoke.py` and `b3_story_test.py` were not run (the story test's "not switched yet" cases were moved from chapter 6 to chapter 11 by reading, not by running). |
-| Vibe Points | Main Vibe Points per chapter on the required path: chapter 6 is 48, chapter 7 54, chapter 8 54, chapter 9 54, chapter 10 50 (the pocket Vibe earns half). |
-| Not looked at | Every chapter 6 to 10 fight in a browser: Milestone D. |
-| Incident | An upstream commit removed chapters 8 and 9 from `main` shortly after `b3s18c` and `b3s18d` landed (a restore by another session); `b3s18e` put them back. Another session left merge conflict markers in `data/board.json`; fixed in its own commit. |
-
-## Calls made in stage 18 that Tom has not confirmed
-
-| Call | Why | Undo |
-|---|---|---|
-| The bonus chapter (Nine Scoops) is not switched | Its two Brain Freeze fights end at half HP with results `flee` and `shell` and spawn adds, all in battle 2 code that Battle 3 has no seam for; switching would stall the chapter, and a mixed chapter would need a level floor and a sash status first. Nothing could be tested this stage | Card c-b3s18bonus builds the seams and switches it |
-| Browser tests skipped for all five chapters | Tom's message of 2026-11-21 11:12 | Run `tools/ch2_b3_test.py` style tests for chapters 6 to 10 (copy `ch5_b3_test.py`) if a Milestone D note reports a stall |
-| The same retry-line and Tombo-toast pattern as stage 17 | Old lines name Warmth, Tombos and elements that do not exist on Battle 3 | The `else` branch is the old line |
-| `b3_story_test.py` moved to chapter 11 for "not switched yet" | Chapter 6 is now switched | Edit the six numbers back if chapter 11 behaves differently |
 
 ## Calls made in stage 17 that Tom has not confirmed
 
@@ -406,18 +386,18 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (the bonus chapter, then stage 19)
+## Next conversation (stage 18)
 
-Follows `claude/handoff-rules.md`. Facts for stage 18 are in `claude/next-addendum-b3s18.md` and `docs/handoff/b3s18.md`; where they and this file differ, they win until the next stage folds them in. Stage 16 (Tombo skins) is skipped on purpose for now.
+Follows `claude/handoff-rules.md`. Facts for stage 17 are in `claude/next-addendum-b3s17.md` and `docs/handoff/b3s17.md`; where they and this file differ, they win until stage 18 folds them in. Stage 16 (Tombo skins) is skipped on purpose for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions. A stage 16 card can be made when Tom wants it.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Switches the bonus chapter (Nine Scoops, chapter 21) to Battle 3: the seams its Brain Freeze fights need, then the chapter on the list with tips and a chapter test. Board card c-b3s18bonus. |
-| 2 | Before you paste | Play chapters 6 to 10 on the new battle (Milestone D, card t-milestoned on the board) and press All good or Something is wrong on it. |
-| 3 | Model | Claude Sonnet 5.5 (row C: a design inside the rules code that is not written yet; none of the three Fable conditions holds). |
-| 4 | Effort level | High (new engine seams in a default-on path, and a chapter test is needed). |
-| 5 | Prompt | The prompt is the `prompt.text` of card c-b3s18bonus in `data/board.json` (copy it from ADMIN > BOARD). |
+| 1 | What it will do | Builds stage 18: chapters 6 to 10 and the bonus chapter's story fights on Battle 3 behind the same switch, with VP, tips and a chapter test each. Board card c-b3s18. |
+| 2 | Before you paste | Play chapters 2 to 5 on the new battle (Milestone C, card t-milestonec on the board) and press All good or Something is wrong on it. |
+| 3 | Model | Claude Sonnet 5.5 (row C: a build across several files, the recipe written in stage 17; none of the three Fable conditions holds). |
+| 4 | Effort level | High (large: six chapters of scene references and six chapter tests). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s17.md, then build stage 18 of the new battle system: the story switch for chapters 6 to 10 and the bonus chapter. First read the Milestone C card (t-milestonec) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then, one chapter per push (b3s18a chapter 6, b3s18b chapter 7, b3s18c chapter 8, b3s18d chapter 9, b3s18e chapter 10, b3s18 the bonus chapter), do what stage 17 did: list every battle 2 reference in the chapter's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 17 table before changing it, add the chapter to B3_STORY.chapters, give its fights Vibe Points and Battle 3 tips in data/b3-story.js, make its Tombo toasts and retry lines B3_CH_ON(n)-aware, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select with tools/b3_chapter_lib.py, modeled on tools/ch5_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touch, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s18. Your first push is the commit board: start c-b3s18. When it ships, create the next Milestone card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo).` |
 
-If a session fails this card the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5. Stage 19 (third Vibes) follows once the bonus chapter and Milestone D are done.
+If a session fails stage 18 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
 Each stage ends by updating the stage board above and writing `docs/handoff/<tag>.md` in the repo.
