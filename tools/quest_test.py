@@ -14,10 +14,16 @@ def shot(pg,n): pg.screenshot(path=os.path.join(SHOTS,f'quest-{n}.png'))
 def check(name,ok):
     print(('ok   ' if ok else 'FAIL ')+name)
     if not ok: fails.append(name)
-def skip_intro(pg,n=500):
+def skip_intro(pg,n=700):
+    # Press Enter until nothing has been active for 1.5 s in a row: after the chapter jump a party banner ("Rose joined the party!",
+    # it holds all input, engine/party-banner.js) comes first and the chapter's intro scene starts a moment after it is dismissed.
+    calm=0
     for i in range(n):
-        if not pg.evaluate("()=>intro.active||dialog.active||!!transition"): return True
-        pg.keyboard.press('Enter'); pg.wait_for_timeout(80)
+        busy=pg.evaluate("()=>intro.active||dialog.active||!!transition||(typeof partyBannerHeld==='function'&&partyBannerHeld())")
+        calm=0 if busy else calm+1
+        if calm>=19: return True
+        if busy: pg.keyboard.press('Enter')
+        pg.wait_for_timeout(80)
     return False
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
@@ -27,8 +33,8 @@ with sync_playwright() as pw:
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; window.__LE.chapterJump(5); }"); pg.wait_for_timeout(2500)
     skip_intro(pg); pg.wait_for_timeout(1500); skip_intro(pg)
-    # baseline: a goal with three parts, nothing done yet
-    pg.evaluate("()=>{ STORY.flags={}; STORY.flags.goal='clear the Art room, the Music room and the Gym (top). After each, set its hallway clock to 7:00.'; STORY.flags.goalCh=5; STORY.flags.goalLog=[{c:5,t:'Long Island Elementary, through the gate at the east end of the Square.'},{c:5,t:'into the school (the front doors, at the top).'}]; }"); pg.wait_for_timeout(700)
+    # baseline: a goal with three parts, nothing done yet (a COPY of the flags: a new object is a fresh baseline for the tracker, but an empty one restarts the chapter's intro scene, which hides the quest button)
+    pg.evaluate("()=>{ STORY.flags=Object.assign({},STORY.flags); for(const k of ['ch5-art','ch5-music','ch5-gym','ch5-done']) delete STORY.flags[k]; STORY.flags.goal='clear the Art room, the Music room and the Gym (top). After each, set its hallway clock to 7:00.'; STORY.flags.goalCh=5; STORY.flags.goalLog=[{c:5,t:'Long Island Elementary, through the gate at the east end of the Square.'},{c:5,t:'into the school (the front doors, at the top).'}]; }"); pg.wait_for_timeout(700)
     t=lambda s: pg.evaluate("(s)=>document.querySelector(s).textContent",s)
     check('tracker shows chapter',t('#qt-eyebrow').startswith('CH 5'))
     check('tracker shows next step, capitalised, first sentence only',t('#qt-text')=='Clear the Art room, the Music room and the Gym (top).')
@@ -42,7 +48,8 @@ with sync_playwright() as pw:
     # open the log
     pg.click('#hud .brand'); pg.wait_for_timeout(300)
     check('log open with checklist and completed list',pg.evaluate("()=>!document.getElementById('objective').hidden&&document.querySelectorAll('.q-subs li').length===3&&document.querySelectorAll('.q-subs li.done').length===1&&document.querySelectorAll('.q-done li').length===2"))
-    check('completed list newest first',pg.evaluate("()=>document.querySelector('.q-done li:first-child span:last-child').textContent.startsWith('Into the school')"))
+    # questPhrase (engine/story.js) turns a bare place into an instruction: "Go into the school", "Go to the Cafetorium"
+    check('completed list newest first',pg.evaluate("()=>document.querySelector('.q-done li:first-child span:last-child').textContent.startsWith('Go into the school')"))
     shot(pg,'3-open')
     pg.click('#hud .brand'); pg.wait_for_timeout(300)
     check('tap again closes',pg.evaluate("()=>document.getElementById('objective').hidden"))
@@ -51,7 +58,7 @@ with sync_playwright() as pw:
     check('done flash shows the finished step with a check',pg.evaluate("()=>document.getElementById('qt-text').textContent.startsWith('✓ Clear the Art room')"))
     shot(pg,'4-flash')
     pg.wait_for_timeout(1700)
-    check('then the new step, pulsing',t('#qt-text')=='The Cafetorium, at the east end of the hall.' and pg.evaluate("()=>document.querySelector('#hud .brand').classList.contains('obj-new')"))
+    check('then the new step, pulsing',t('#qt-text')=='Go to the Cafetorium, at the east end of the hall.' and pg.evaluate("()=>document.querySelector('#hud .brand').classList.contains('obj-new')"))
     check('no pips on a single step',pg.evaluate("()=>document.querySelectorAll('#qt-pips i').length===0"))
     shot(pg,'5-new')
     pg.click('#hud .brand'); pg.wait_for_timeout(300)

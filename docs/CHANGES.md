@@ -1,3 +1,10 @@
+## nightgreenc (2026-11-21): the quest tracker test knows about the party banner, the kept flags and the "Go to" wording
+
+Card c-nightgreen, test `quest_test` (`python3 tools/quest_test.py`). The tracker itself works; three things in the test were stale:
+- After the chapter jump the game shows "Rose joined the party!" and that banner holds all input until dismissed (`engine/party-banner.js`), so the test's clicks never reached the page. `skip_intro` now presses Enter until nothing has been active for 1.5 s (banner, then the chapter's intro scene).
+- The baseline wiped `STORY.flags`, which restarts the chapter's intro scene and hides the quest button. It now copies the flags (a new object is still a fresh baseline for the tracker) and clears only the Art, Music, Gym and done flags.
+- `questPhrase` turns a bare place into an instruction, so the log now reads "Go into the school" and the tracker "Go to the Cafetorium, at the east end of the hall." Two expectations updated.
+- `tools/night/tests.json`: `known_fail` removed from `quest_test`. All 16 checks pass. Nothing in the game changed.
 ## fix-itemdefplay (2026-11-21): item banners no longer name old battle stats, and a banner can't close half faded in
 
 Gemini ch1 run, C11 (card t-itemdefplay): "On the Dragonfly Coin (KEY ITEM) banner ... the card began fading in over the map ... and auto-dismissed mid-fade-in" and "IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats ... Wear it: +18 HP, +4 GRIT, +1 COOL" (Pond Hoodie), "Wear it: +5 POW" (Bark Slab); related X-07, Boppy's Cap "GRIT +10%".

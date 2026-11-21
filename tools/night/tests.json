@@ -765,8 +765,7 @@
    "id": "quest_test",
    "cmd": "python3 -I tools/quest_test.py",
    "group": "g4",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
+   "minutes": 2
   },
   {
    "id": "report_test",
