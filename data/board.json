@@ -22541,6 +22541,29 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "b-projclean2b",
+   "tag": "projclean2b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Game Shell",
+   "title": "Project docs move: build name 2a put on its card, no files copied",
+   "next": "Done: Project docs move: build name 2a put on its card, no files copied",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as projclean2b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -23019,15 +23042,17 @@
    "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T22:34:16-08:00",
+   "last": "2026-11-20T22:35:59-08:00",
    "tags": [
     "projclean1a",
     "projclean1b",
-    "projclean2a"
+    "projclean2a",
+    "projclean2b"
    ],
    "cards": [
     "c-projclean",
-    "b-projclean2a"
+    "b-projclean2a",
+    "b-projclean2b"
    ]
   },
   {
@@ -25737,8 +25762,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "86c7221fbd410b57382cb69204b47b1dbe9fdac2",
- "synced_at": "2026-11-21T06:34:56+00:00",
+ "synced": "400a24f3185e4c902a6b5fdfb2acddfa23ef465a",
+ "synced_at": "2026-11-21T06:36:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
