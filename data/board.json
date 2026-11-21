@@ -21291,11 +21291,15 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T07:25:58.505Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started: checking the em_unimpressed frame on current main."
     }
    ],
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukHDMDjx8dfDTwZjaC6",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    }
   },
   {
