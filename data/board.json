@@ -27696,6 +27696,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreenj: the chapter clip review test is taken off the known failures: it already passes"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreenk: ch17_test fixed (the test was wrong in two timing spots: a fixed 300 ms wait for the opening flag, and A pressed while the previous scene still played); known_fail removed; minutes 2 to 5 (measured 205 s). 1 row still marked known_fail: ch20_test."
     }
    ],
    "prompt": {

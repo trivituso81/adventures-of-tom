@@ -1134,8 +1134,7 @@
    "id": "ch17_test",
    "cmd": "python3 -I tools/ch17_test.py",
    "group": "g6",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
+   "minutes": 5
   },
   {
    "id": "ch2_b3_test",

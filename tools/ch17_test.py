@@ -14,6 +14,7 @@ def adv(pg,n=400,stop=None):
         if stop and pg.evaluate(stop): return True
         pg.keyboard.press('Enter'); pg.wait_for_timeout(90)
     return False
+def idle(pg,n=200): return adv(pg,n,"()=>!dialog.active&&!intro.active&&!transition&&!player.move")   # a scene whose flag is set can still be playing (a slow browser): press A only when it is over
 def shot(pg,n): pg.screenshot(path=os.path.join(SHOTS,f'ch17-{n}.png'))
 def check(name,ok):
     print(('ok   ' if ok else 'FAIL ')+name)
@@ -26,7 +27,9 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; window.__LE.chapterJump(17); }"); pg.wait_for_timeout(2500)
     check('starts at the cab stand',pg.evaluate("()=>currentMap.id==='lacab'&&STORY.chapter===16"))
     check('girls wait as NPCs',pg.evaluate("()=>worlds.lacab.npcs.filter(n=>n.girlAtHome).length===2"))
-    pg.evaluate("()=>{ talkToDriver(currentMap.npcs.find(n=>n.name==='Sol')); }"); pg.wait_for_timeout(300)
+    pg.evaluate("()=>{ talkToDriver(currentMap.npcs.find(n=>n.name==='Sol')); }")
+    try: pg.wait_for_function("()=>flag('ch17-open')==='pending'",timeout=5000)   # the scene system starts the scene a moment after the tap (about 0.4 s), so wait for the flag, not for a fixed time
+    except Exception: pass
     check('Sol starts chapter 17',pg.evaluate("()=>flag('ch17-open')==='pending'"))
     check('opening ends at the boulevard',adv(pg,300,"()=>flag('ch17-open')===true&&!dialog.active&&!intro.active")); pg.wait_for_timeout(800); shot(pg,'blvd')
     check('chapter 17, on blvd',pg.evaluate("()=>STORY.chapter===17&&currentMap.id==='blvd'"))
@@ -62,11 +65,13 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }"); pg.wait_for_timeout(600); shot(pg,'shelves-landscape')
     pg.evaluate("()=>{ layout.mode='portrait'; applyLayout(); }"); pg.wait_for_timeout(400)
     # back to the stairs: everyone regroups
+    idle(pg)
     pg.evaluate("()=>{ player.x=1; player.y=5; player.facing='left'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
     pg.keyboard.press('Enter'); pg.wait_for_timeout(200)
     check('back at the stairs',adv(pg,80,"()=>currentMap.id==='towerstairs'&&!intro.active&&!dialog.active")); pg.wait_for_timeout(500)
     check('final team: Tom Grace Rose Amy',pg.evaluate("()=>party.length===4&&['tom','grace','rose','amy'].every(i=>party.some(p=>p.id===i))&&STORY.bench.includes('tnb')&&STORY.bench.includes('nara')"))
     check('no girl NPCs left on the landing',pg.evaluate("()=>worlds.towerstairs.npcs.filter(n=>n.girlAtHome).length===0"))
+    idle(pg)
     pg.evaluate("()=>{ player.x=11; player.y=3; player.facing='up'; player.move=null; pressAction(); }"); pg.wait_for_timeout(400)
     check('race starts',adv(pg,60,"()=>CH17FX.race!==null")); pg.wait_for_timeout(2500); shot(pg,'race')
     check('race ends in the vault',adv(pg,400,"()=>flag('ch17-race')===true")); pg.wait_for_timeout(600); shot(pg,'vault')
