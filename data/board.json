@@ -23353,7 +23353,7 @@
    "title": "Run Gemini's chapter 1 test and save its report",
    "theme": "Project Ops",
    "lane": "tom",
-   "col": "up",
+   "col": "prog",
    "ask": "setup",
    "next": "1. Download the brief: https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/claude/ch1-gemini-verify.md (the same file Claude sent you in chat, ch1-gemini-verify.md). 2. Give it to Gemini with this line: Follow this brief exactly and return the report in section 6 format. 3. Save Gemini's report as a file. 4. On card c-gem1v (Apply Gemini's chapter 1 report) tap Copy prompt, paste it into a new Claude conversation and attach the report file. That card closes the 13 chapter 1 cards Gemini passes and writes fix cards for the ones it fails.",
    "blocks": [
@@ -23369,6 +23369,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-gem1brief: the brief claude/ch1-gemini-verify.md covers the 14 chapter 1 cards waiting on Tom (C1 to C12, Milestone B, optional A1). Tom: \"I want to give it to Gemini task to test each one as it plays through the entirety of chapter 1\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -23488,6 +23492,16 @@
    "tags": [],
    "cards": [
     "c-qa-battle2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEtwdNGKn2hdVy2Wox",
+   "title": "Run Gemini's chapter 1 test and save its report",
+   "first": "2026-11-21T07:24:25-08:00",
+   "last": "2026-11-21T07:24:25-08:00",
+   "tags": [],
+   "cards": [
+    "t-gem1v"
    ]
   },
   {
@@ -26788,8 +26802,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "365ea8232ed32380a7f7a28d5c5434aef970f203",
- "synced_at": "2026-11-21T15:14:20+00:00",
+ "synced": "a199f5f4c37663711db0bb2013e8e20cb58858f2",
+ "synced_at": "2026-11-21T15:25:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
