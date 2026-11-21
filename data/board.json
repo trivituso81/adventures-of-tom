@@ -9629,7 +9629,7 @@
    "id": "c-fix-artgen2look",
    "tag": "fix-artgen2look",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the QA results on a real pictures card",
@@ -9661,7 +9661,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCoFX44DPtEdpaTz4Q",
+    "url": "",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -9685,6 +9685,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-gatelayer-pics: All failed",
      "at": "2026-11-21T02:34:42.830Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T02:54:58.216Z"
     }
    ],
    "prompt": {
