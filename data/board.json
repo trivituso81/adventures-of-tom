@@ -26626,7 +26626,7 @@
    "title": "Try making a battle video in the Battle Guide",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom. Make one new video for Zone One Blockade (has a video, change one thing) and one for Suite Door Slide (no video yet), $0.50 each, about $1.00 in all. Then tap All good or Something is wrong here. Build guidegen1.",
@@ -26646,8 +26646,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by guidegen1 (card c-guidegen). Every test used stand-ins, so the first real paid video is your tap on step 3. A video costs $0.50 (Wan 3.0, the family); a monster costs $0.07. Use this one changes the game; Keep the old one changes nothing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T19:38:35.745Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-buildpill1",
