@@ -14960,11 +14960,11 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Chapter 3 (card c-ch3build) is built after this.",
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Your notes become lessons for chapter 3 (card c-ch3lessons), then chapter 3 is built (card c-ch3build).",
    "blocks": [
-    "c-ch3build"
+    "c-ch3lessons"
    ],
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "created": "2026-11-20",
    "history": [
     {
@@ -14979,9 +14979,13 @@
     {
      "d": "2026-11-21",
      "t": "Now blocks c-ch3build: chapter 3 is built after you play chapter 2."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Now comes after c-ch2lessons (the red pen pass on chapter 2) and blocks c-ch3lessons, which turns your chapter 2 notes into lessons for chapter 3. Still in your backlog where you parked it."
     }
    ],
-   "first": "Wait for the publish of build ch2build.",
+   "first": "Wait for the publish of build ch2lessons (chapter 2 with the chapter 1 lessons applied).",
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
@@ -18117,10 +18121,10 @@
    "col": "wait",
    "tag": "ch3build",
    "waiting_on": "tom",
-   "next": "Waits on your chapter 2 play (card t-ch2play). Then it builds chapter 3 from the locked script claude/story-ch03-draft1.md the same way chapter 2 was built, tests it, pushes it as ch3build and hands you a chapter 3 play card. Chapters 4 to 20 are not written yet (see c-ch4write).",
+   "next": "Waits on card c-ch3lessons (the chapter 3 script cut by the lessons from your chapter 1 and 2 edits). Then it builds chapter 3 from claude/story-ch03-draft1.md word for word, tests it, pushes it as ch3build and hands you a chapter 3 play card. Chapters 4 to 20 are not written yet (see c-ch4write).",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -18129,16 +18133,20 @@
     {
      "d": "2026-11-21",
      "t": "Added after Tom asked how to continue past chapter 2: one chapter per build, each waits on your play of the one before."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Now waits on c-ch3lessons instead of the chapter 2 play directly: the script is cut by the red pen pass before it is built."
     }
    ],
    "prompt": {
     "what": "Builds chapter 3 from the locked script, tests it start to finish in portrait and landscape, then stops for Tom's phone play.",
     "before": [
-     "Play chapter 2 and report with the REPORT tab (card t-ch2play)."
+     "Nothing to do first: card c-ch3lessons runs before this one."
     ],
     "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
     "effort": "medium (steps are known)",
-    "text": "Read CLAUDE.md, claude/story-next.md, claude/ch02-teardown.md (the pattern), docs/CHANGES.md entry ch2build, and card c-ch3build in data/board.json with the Tom cards that blocked it (t-ch2play: apply any notes there). Write a chapter 3 teardown list like claude/ch02-teardown.md first, using claude/story-ch03-draft1.md word for word (the build never writes or rewords dialogue), then build it as ch2build was built: scenes in data/scenes.js, tools/ch3_test.py copied from tools/ch2_test.py, tools/ch3_lines_test.py copied from tools/ch2_lines_test.py, voice directions, harvest patch, unused_voice.py at 0, script-convos rows. Where the engine cannot play a direction, build the teardown default and list it for Tom; do not stop to ask. Push to main as ch3build; your first push is the commit board: start c-ch3build. Create the Tom card t-ch3play (ask play) and set after on this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/story-next.md, claude/ch02-teardown.md (the pattern), docs/CHANGES.md entry ch2build, and card c-ch3build in data/board.json with the Tom cards that blocked it (c-ch3lessons already applied your chapter 2 notes to the script). Write a chapter 3 teardown list like claude/ch02-teardown.md first, using claude/story-ch03-draft1.md word for word (the build never writes or rewords dialogue), then build it as ch2build was built: scenes in data/scenes.js, tools/ch3_test.py copied from tools/ch2_test.py, tools/ch3_lines_test.py copied from tools/ch2_lines_test.py, voice directions, harvest patch, unused_voice.py at 0, script-convos rows. Where the engine cannot play a direction, build the teardown default and list it for Tom; do not stop to ask. Push to main as ch3build; your first push is the commit board: start c-ch3build. Create the Tom card t-ch3play (ask play) and set after on this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -19324,6 +19332,73 @@
      "t": "Added by itembannerart1 (card c-itembannerart1). Report r-20261120-142626-w74f: \"missing art for all item banners\"."
     }
    ]
+  },
+  {
+   "id": "c-ch2lessons",
+   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "tag": "ch2lessons",
+   "after": "t-ch2play",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "next": "Runs the red pen pass on built chapter 2: a fresh reviewer marks every line KEEP, CUT or REWRITE against your chapter 1 edits (claude/tom-line-edits.md), the cuts and rewrites go into the game, and the lines that referred to cut chapter 1 lines (fingerprints, pencil, page nine) are fixed. Then your chapter 2 play card lists exactly what changed.",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added in the planning chat where Tom asked how the chapter 1 work will carry into chapter 2: \"i spent all day today tweaking, cutting, and rewording chapter 1 dialogie\". Tom's 20 chapter 1 edits were saved to claude/tom-line-edits.md and turned into rules 6 to 13 and the red pen pass in claude/story-line-rules.md (board-lessons1)."
+    }
+   ],
+   "prompt": {
+    "what": "Cuts and rewrites chapter 2's built dialogue by the lessons from your chapter 1 edits, puts it in the game, tests it, and hands you the chapter 2 play with the changed lines listed.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: game dialogue and humor, judged by taste)",
+    "effort": "medium (a written chapter revised by written rules, not written from scratch)",
+    "text": "Read CLAUDE.md, claude/story-next.md, claude/story-line-rules.md (rules 6 to 13, The red pen pass, Known orphans), claude/tom-line-edits.md, claude/story-ch02-draft4.md and card c-ch2lessons in data/board.json. Chapter 2 is built (ch2build) and Tom has not played it. Tom asked on 2026-11-20 that the lessons from his day of chapter 1 cuts be applied to chapter 2, so this pass may change chapter 2's locked lines. 1) Run the red pen pass: start a separate reviewer agent with fresh context, give it only claude/tom-line-edits.md, claude/story-line-rules.md and the chapter 2 lines, and have it mark every spoken and texted line KEEP, CUT or REWRITE with the rule number. 2) Cut the CUT lines without replacing them unless a scene stops making sense; rewrite REWRITE lines by rule 4; fix the two orphans; keep Tom's own line Poke it. Yes. But maybe just gently. Expect about one line in five cut; if far fewer, run the reviewer again. Run the three tests and the copy check from claude/story-next.md on every new line. 3) Update claude/story-ch02-draft4.md (repo copy; the Project copy is written by an interactive session) and put the result into the game the way ch2build did: data/scenes.js, voice scripts with tone tags, tools/ch2_lines_test.py, unused_voice.py at 0, script-convos rows, tools/ch2_test.py in portrait and landscape, look at the frames. 4) docs/CHANGES.md heading ## ch2lessons with the counts (lines before, cut, rewritten) and a before and after table, and the count of new lines per speaker that need a recording. 5) Rewrite the next of card t-ch2play so it lists the changed lines to listen for, and add any lesson the pass found to claude/story-line-rules.md. Your first push is the commit board: start c-ch2lessons. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-ch3lessons",
+   "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "ch3lessons",
+   "after": "nothing for Tom: c-ch3build",
+   "blocks": [
+    "c-ch3build"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "next": "Waits on your chapter 2 play (card t-ch2play). Then it adds your chapter 2 edits to claude/tom-line-edits.md and runs the red pen pass on the locked chapter 3 script before chapter 3 is built, so chapter 3 reaches you already cut by everything you taught in chapters 1 and 2.",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added in the planning chat \"i spent all day today tweaking, cutting, and rewording chapter 1 dialogie\": each chapter's script gets the red pen pass, with the previous chapter's edits added first, before it is built."
+    }
+   ],
+   "prompt": {
+    "what": "Saves your chapter 2 edits as lessons, then cuts and rewrites the chapter 3 script by every lesson so far, before chapter 3 is built.",
+    "before": [
+     "Play chapter 2 and report every line you would change with the REPORT tab (card t-ch2play)."
+    ],
+    "model": "Claude Opus 5.5 (row D: game dialogue and humor, judged by taste)",
+    "effort": "medium (a written chapter revised by written rules)",
+    "text": "Read CLAUDE.md, claude/story-next.md, claude/story-line-rules.md, claude/tom-line-edits.md, claude/story-ch03-draft1.md and card c-ch3lessons in data/board.json with the Tom card t-ch2play (its note and answer). 1) Add Tom's chapter 2 line edits to claude/tom-line-edits.md: every REPORT on branch inbox with kind dialogue on a ch2 scene (python3 tools/reports.py list, and the dialog who and text in each report), plus anything in t-ch2play's note, as before and after rows with the pattern; count them against chapter 1's 20 and write the count at the top of the section. Fold any new pattern into claude/story-line-rules.md as a numbered rule with Tom's example. 2) Run the red pen pass from claude/story-line-rules.md on the whole chapter 3 script with a separate fresh reviewer agent, cut and rewrite by its marks, fix orphans of lines cut in chapters 1 and 2 (the pencil stub and the eleven pages lean on cut lines), and run the three tests and the copy check. 3) Save the result in claude/story-ch03-draft1.md with the counts at the top. Do not build chapter 3: card c-ch3build builds it word for word next. Push to main as ch3lessons (heading ## ch3lessons in docs/CHANGES.md); your first push is the commit board: start c-ch3lessons. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
