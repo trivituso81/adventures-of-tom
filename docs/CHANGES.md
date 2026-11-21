@@ -115,6 +115,15 @@ Card c-artfallback. Tom (11-21 09:49): "we should use XAI as the default for ima
 | Library | "made by xAI" or "made by WAN (try n)" on each result and in the review; a banner on a stopped entry; `svc` and `try` written next to approve and reject. |
 | Report | `python3 tools/art-library/artsvc_report.py`: approved, rejected, refused and share approved, by service and try number. |
 | Tests | `artgen_test.py` section 7 (every row of the plan's rule table, the ladder in `art.html` run in node, stand-in xAI and fal, stop cards checked by `board_check.py`), `wangen_test.py` and `artgen_lib_test.py` still pass. No paid call was made; the first real WAN picture is Tom's tap. |
+## anim-rose-hit-uy5r (2026-11-21): Rose's Getting hit is a Wan 3.0 video that stumbles back and steps into place, with room in the frame so she stays on screen
+
+Card c-anim-rose-hit-uy5r (rescue session). Tom's note (Battle Guide, build b3s17a): "Should be flinching backwards".
+- One change from the stop-loss tries: job `rose-hit` rev 5, `pad: 0.65` (start picture shrunk to 65% inside the frame); prompt `tools/art-library/prompts/wan-rose-hit-v3.txt` unchanged (rev 4 was pad 0.8, both ran off the right edge).
+- Video: wan-gen, `art/raw/clips/wan-rose-hit-v2.mp4` (720 x 1280, 150 pictures). Plan 4.4: she winces and stumbles one step back to the right, then steps back into place and holds the stance; same girl; flat magenta; no picture touches the left or right edge (0 of 150). Measured clip gate (`hit_no_stumble` and the rest): no flags.
+- Bake: pictures 20 to 110 (the first kept picture is the standing pose, which sets her middle; then the stumble and the step back into place), every 2nd, 46 pictures at 1.5x, kind state, figure 83 rows. A first try starting at 28 (already mid-stumble) put her 4.5 battle px off the idle; starting at 20 fixed it. `data/clips/rose-hit.js`, `art/clips/rose-hit.webp`. Purged: `art/raw/clips/wan-rose-hit-v1.mp4`.
+- `tools/wanproof_test.py`: the hit's feet limit is 3 battle px (was 2): a step back lifts a foot 2.8. Rose passes it (FAILS []). `b3_test.py s8` passes. `battle_guide_test.py` and `board_sync_test.py` show the board_check failures already on main (R5 replay, unstick card, no-video note), none from this build.
+- Spend: $0.50 on fal (one video; ledger 33.1).
+- Tom card: t-anim-rose-hit-uy5r.
 
 ## anim-tom-loungepass-lf2z (2026-11-21): Tom's Lounge Pass Flex is a new video: he holds the card up, smiles at you, it sparkles, then he swats the monster with it like a snooty fancy lady
 

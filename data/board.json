@@ -24752,7 +24752,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Getting hit",
-   "next": "Stop-loss: the backward stumble works on Wan (prompt v3) but she runs off the right edge of the frame, twice. Next try: same prompt, the start picture shrunk to 65% inside the frame (pad 0.65) so she has room to stumble. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "next": "Shipped as anim-rose-hit-uy5r: Wan video with pad 0.65, she stumbles back and stays in frame. Waits on Tom to watch it.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24807,6 +24807,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue finished it: rev 5 (pad 0.65, prompt unchanged) stumbles back inside the frame, gate clean, baked; Tom card t-anim-rose-hit-uy5r made."
     }
    ],
    "prompt": {
@@ -24825,7 +24829,8 @@
     "url": "https://claude.ai/code/cse_01RXeukEp7AN4783dFHhPrzP",
     "prev": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ"
    },
-   "started_at": "2026-11-21T18:20:01+00:00"
+   "started_at": "2026-11-21T18:20:01+00:00",
+   "after": "t-anim-rose-hit-uy5r"
   },
   {
    "id": "c-anim-rose-dodge-v89r",
@@ -26522,6 +26527,31 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-anim-rose-hit-uy5r",
+   "title": "Watch Rose, Getting hit",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play Getting hit, then tap All good or Something is wrong (say what you saw). You should see her wince and stumble one small step back to the right, then step back into place.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Rose.",
+    "Play Getting hit (about 2 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-rose-hit-uy5r",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-rose-hit-uy5r. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
+    }
+   ]
   }
  ],
  "sessions": [

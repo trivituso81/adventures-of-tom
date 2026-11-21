@@ -6,7 +6,7 @@
 #   W2 the idle video's standing height is the fighter's battle size today (the painted standing figure, measured in the same fight with
 #      the clips switched off) within 1 battle px
 #   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering) and the
-#      dodge, 2 px in the hit and the victory (a flinch or a cheer may rise onto the toes); the guard hold is at least 4 px lower than the stance and the knock-out ends on the ground (4 px: sitting)
+#      dodge, 3 px in the hit and 2 in the victory (a flinch or a cheer may rise onto the toes); the guard hold is at least 4 px lower than the stance and the knock-out ends on the ground (4 px: sitting)
 #   W4 no jump over 2 battle px where a one-shot clip starts or ends against the idle, or where a guard rise starts or a lowering ends
 #   W5 every state with a video has no painted row left (B3_BODY_PAINT), every clip named in B3_BODY_CLIPS and in the kits exists, its run
 #      loop and its move clips load
@@ -119,7 +119,7 @@ with sync_playwright() as pw:
             ie=min(len(low)-2,int(lw/1000*30))   # the step where the lowering ends and the idle video takes over
             for i in range(max(0,ie-2),min(len(low)-1,ie+4)): jump(low[i],low[i+1],'where the lowering ends and the idle starts (step %d)'%i)
         # one-shot states
-        for st,ftol in (('hit',2*tol),('dodge',tol),('victory',2*tol)):   # a flinch may rock onto the toes (Rose's: 1.5 battle px)
+        for st,ftol in (('hit',3*tol),('dodge',tol),('victory',2*tol)):   # a flinch may rock onto the toes (Rose's: 1.5 battle px); a stumble back lifts a foot (Rose's: 2.8)
             if not T['clips'].get(st): continue
             pg.evaluate("(id)=>b3cWant(id,20000)",T['clips'][st]); pg.wait_for_function("(id)=>bclipReady(id)",arg=T['clips'][st],timeout=40000)
             a=M()
