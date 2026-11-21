@@ -30379,7 +30379,7 @@
    "title": "Battle videos in bulk: checks and retries inside the Action",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "wanbulk",
    "next": "Builds the video version of artgen2/artgen3: the wan-gen Action checks each video itself (plan 4.4 measures plus a vision checklist), tries the known one-change fixes on its own, and stops at two misses. Then a whole chapter of battle videos is one board button, and Opus is needed only for a real stop-loss.",
    "blocks": [],
@@ -30389,6 +30389,11 @@
     {
      "d": "2026-11-21",
      "t": "Tom (14:51, during c-wanch4): \"Why do we have to do an opus prompt for every individual animation? This seems wasteful of my Claude usage. Can we do a bulk generation ?\" Fact: wangen.py already runs a list of jobs 3 at once; what costs Opus sessions is the by-eye check and one retry round per session. This card moves the check and the known retries into the Action."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T23:17:53.940Z"
     }
    ],
    "prompt": {
@@ -30399,6 +30404,10 @@
     "model": "Claude Sonnet 5.5 (row C: a tool feature whose steps are not written yet; no prompt or taste call is made, the checks are measurements and an existing vision checklist pattern)",
     "effort": "high (a new automated check and retry loop designed and built in one session)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (sections 4.4, 4.7 to 4.10), then card c-wanbulk in data/board.json with its history (Tom's words). Your first push is the commit board: start c-wanbulk. Build wanbulk: (1) in tools/art-library/wangen.py, after each video, run plan 4.4 checks 3 to 5 as measurements (standing height first against last within 2 percent, feet row within 1 percent of the frame height in every picture, flat magenta background, figure never touches an edge, last picture against first under 3 of 255) and checks 1 and 2 as a vision checklist built the way tools/art-library/artqa.py works (three runs, majority; the motion sentence of the job's prompt is the requirement), written to the job's result on branch wangen; (2) a job that fails only on an edge check is retried once automatically with the next pad from a list in the job file (none, 0.8, 0.65), a job that fails anything else or fails twice is marked stopped and gets one Claude card (Opus 5.5 medium) with the evidence; (3) a job that passes is baked by the bake settings stored on the job (bake_clip.py kind, fps, step, marks found the way clipmarks.py finds them) and wired from a `wire` field on the job, then one Tom card (ask animations) lists every new clip of the run; (4) a Generate all N videos button on a Tom card that lists jobs, which saves the request with a commit the way an art-gen `gen` request does and starts wan-gen, never past the job file's cap. Tests with the stand-in fal server (wangen_test.py) for pass, edge retry, stop and cap; replay the checks on the stored r4 videos of rose-giddyup and deedee-wetfloor on branch wangen and confirm they fail the way plan 4.10 says. A session never makes a paid run; the first paid bulk run is Tom's tap. Build tag wanbulk. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
    }
   },
   {
