@@ -22720,9 +22720,9 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds the chapter 1 switch; Milestone B (your play test) follows.",
+   "next": "Shipped as b3s15: chapter 1's story fights play on Battle 3 behind ADMIN > Battle system > Story battles (OLD still plays chapter 1 on the same save). Open: the Big One takes 7.83 rounds at Rank 1 (target 5 to 7), Rose Mode's emergency muffin is not ported, NEW beyond chapter 1 is unfinished. Milestone B is yours (t-milestoneb); stage 17 (c-b3s17) waits on it.",
    "blocks": [],
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "created": "2026-11-20",
    "tag": "b3s15",
    "prompt": {
@@ -22750,12 +22750,17 @@
     {
      "d": "2026-11-20",
      "t": "Found conflict markers on main (board-sync commit 25f41e6) that stopped engine/main.js loading; fixed alone in build fix-conflictmarks before stage 15 code goes on top."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "b3s15 built: story switch, chapter 1 on Battle 3, VP and level migration, Ruckus in the save, victory card with VP, late joiners' loadouts, new tips. Tests: b3-sim check 2205 with no fails, b3_story_test 52 ok, ch1_b3_test portrait and landscape, b3_test s4 s7 s9c s10. Milestone B card t-milestoneb created; stage 17 card c-b3s17 waits on it."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDsC4h8a7k5HsZNDTs",
     "opening": "unknown"
-   }
+   },
+   "after": "t-milestoneb"
   },
   {
    "id": "b-board-b3s15",
@@ -23142,6 +23147,58 @@
    },
    "after": "t-itembannerart-pics",
    "done": "2026-11-21"
+  },
+  {
+   "id": "t-milestoneb",
+   "title": "Milestone B: play chapter 1 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s15. Then CHAPTERS > Chapter 1 and play to the end (the job scene on Rivituso Row), about 30 minutes. Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, is the Big One too long (it is 7.83 rounds at Rank 1, aimed at 5 to 7), do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 1 on the old battle. Stage 17 (c-b3s17) waits on your notes.",
+   "blocks": [
+    "c-b3s17"
+   ],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s15 session: Milestone B, Tom plays chapter 1 on the new battle."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s17",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Waits on t-milestoneb (Milestone B, your play test of chapter 1). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "tag": "b3s17",
+   "prompt": {
+    "what": "Stage 17 of the new battle system: chapters 2 to 5's story fights run on Battle 3 behind the same switch, with Vibe Points, new tips and a start to finish test per chapter.",
+    "before": [
+     "Play chapter 1 on the new battle: card t-milestoneb on the board (CHAPTERS > Chapter 1), then press All good or Something is wrong on it."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build across several files with the steps not yet written; none of the three Fable conditions holds)",
+    "effort": "high (large: four chapters of scene references and four chapter tests)",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s15.md, then build stage 17 of the new battle system: the story switch for chapters 2 to 5. First read the Milestone B card (t-milestoneb) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then list every battle 2 reference in chapters 2 to 5's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 15 table, and replace only those. Then, following docs/handoff/b3s15.md: add chapters 2 to 5 to B3_STORY.chapters one chapter at a time (b3s17a chapter 2, b3s17b chapter 3, b3s17c chapter 4, b3s17 chapter 5), give each chapter's fights Vibe Points and rewritten Battle 3 tips in data/b3-story.js, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select, modeled on tools/ch1_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touched and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s17. Your first push is the commit board: start c-b3s17. When it ships, create the Milestone C card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s15 session as the next card. Stage 16 (Tombo skins) is skipped for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions."
+    }
+   ]
   }
  ],
  "sessions": [
