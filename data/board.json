@@ -12918,7 +12918,7 @@
   {
    "id": "t-gem-bug01play",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle System",
    "ask": "play",
    "fyi": true,
@@ -12927,7 +12927,7 @@
    "first": "Wait for the gem-bug01 build to publish, then RELOAD on the title.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "started by c-gem-bug01"
@@ -12941,12 +12941,27 @@
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-20T16:46:24.779Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Checked by the night QA: after a lost fight Deedee heals everyone and speaks, the Big One fight restarts by itself, and the third try (a win) plays the after-boss scene, in portrait, landscape and the Duo size. Pictures on branch night.",
+     "at": "2026-11-21T22:30:00Z"
     }
    ],
-   "backlog": {
-    "at": "2026-11-20",
-    "from": "up"
-   }
+   "machine": {
+    "at": "2026-11-21T22:30:00Z",
+    "verdict": "pass",
+    "saw": "After a lost fight Deedee said her line (\"Up, up. Everybody up. Deedee will make it better.\") and the Big One fight started again at once with no button pressed; a loss, a loss, then a win ran the after-boss scene, in portrait, landscape and the Duo size. The result was set the way the game sets it after a real loss; the real fight screen was not played.",
+    "shots": [
+     "qa/t-gem-bug01play/2026-11-21/portrait-deedee-retry-1.png",
+     "qa/t-gem-bug01play/2026-11-21/portrait-after.png",
+     "qa/t-gem-bug01play/2026-11-21/landscape-deedee-retry-1.png",
+     "qa/t-gem-bug01play/2026-11-21/landscape-after.png",
+     "qa/t-gem-bug01play/2026-11-21/duo-deedee-retry-1.png",
+     "qa/t-gem-bug01play/2026-11-21/duo-after.png"
+    ]
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-b3s12",
@@ -29527,6 +29542,11 @@
      "d": "2026-11-21",
      "at": "2026-11-21T21:23:19Z",
      "t": "Night run: t-stagefollowplay, t-milestonec, t-milestoned sorted YOURS. t-gem-bug01play (lose to the Big One, retry starts by itself) is a yes or no fact but this run could not find the retry code path in time; left unmarked for the next night."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Second run the same evening, by hand: t-gem-bug01play checked and closed (a fact: Deedee speaks and the Big One fight restarts after a loss; frames in portrait, landscape and Duo size on branch night). The other three of its first 4 stay Tom's.",
+     "at": "2026-11-21T22:30:00Z"
     }
    ],
    "prompt": {
