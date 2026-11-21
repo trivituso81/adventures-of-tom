@@ -291,6 +291,7 @@ function actorLife(a,posKey) {
 }
 // The pip floats over the head: '!', '?', '...' are small painted-style bubble text.
 function drawLifePip(pip,pt,cx,top,k) {
+  if(typeof partyBannerHeld==='function'&&partyBannerHeld()) return;   // qa-bug02: no speech pips over a banner
   const y=Math.round(top-6*k-Math.min(10,pt*14)),x=Math.round(cx+8*k);
   if(typeof BUBBLE!=='undefined'&&BUBBLE.text) BUBBLE.text(pip,x,y,pip==='!'?'#c43c2a':'#4a5a7a',1.6);
 }

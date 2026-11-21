@@ -20895,7 +20895,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Item banner: tiny icon, empty circle, prompt on the border",
-   "next": "Ready to start. The painted pictures are covered by card t-itembannerart-pics (itembannerart1 shipped after the tested build).",
+   "next": "Shipped as qa-bug02: item picture fills the ring, prompt on a dark pill, speech pips hidden during a banner. Waiting on Tom play card t-qa-bug02-play.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20921,13 +20921,18 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed on main (picture small in ring, prompt hard to read); fixed layout in qa-bug02."
     }
    ],
    "started_at": "2026-11-21T03:23:33+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGbQzVNxbtCiq6WdE8",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-bug02-play"
   },
   {
    "id": "c-qa-bug03",
@@ -22004,6 +22009,25 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug12."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug02-play",
+   "title": "Look at the item banner again",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then pick up Mud Pie (or any item). Check: the picture fills the circle, 'Tap or press A to continue' sits on a dark pill under the card, and no [...] bubble shows while the banner is up. Press All good, or Something is wrong.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-bug02."
     }
    ]
   }
