@@ -1,0 +1,41 @@
+{
+ "group": "Chapter 1",
+ "cap": 0.3,
+ "dry_run": false,
+ "queued": [
+  "clip-skeeter-bite"
+ ],
+ "made": [
+  "clip-skeeter-bite"
+ ],
+ "approved": [
+  "clip-skeeter-bite"
+ ],
+ "waiting": [],
+ "still": [],
+ "held": [],
+ "failed": [],
+ "blocked": [],
+ "redoWaiting": [
+  "clip-tom-cast",
+  "clip-tom-loungepass",
+  "clip-tom-blockade",
+  "clip-grace-give",
+  "clip-grace-cast",
+  "clip-grace-squeeze",
+  "clip-grace-cubepop",
+  "clip-rose-victory",
+  "clip-rose-give",
+  "clip-rose-cast",
+  "clip-rose-tackle",
+  "clip-rose-lava",
+  "clip-rose-giddyup",
+  "clip-deedee-give",
+  "clip-deedee-cast",
+  "clip-deedee-windex",
+  "clip-deedee-wetfloor",
+  "clip-deedee-scrub"
+ ],
+ "spent": 0.25,
+ "estimate": 0.25
+}
