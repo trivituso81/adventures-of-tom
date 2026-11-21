@@ -54,7 +54,7 @@ function b3LabPaintedStates(opt) {
     steps.push({fn:()=>{ guardOff(); const h=b3PartyHome(U()); walk(h.cx,B3_LAB_STAGE.cx,h.base,B3_LAB_STAGE.base); },sec:.75},
       {fn:()=>{ delete P.body[key()]; P.stage={key:key(),cx:B3_LAB_STAGE.cx,base:B3_LAB_STAGE.base}; },sec:.05});
     for(const st of S) {
-      if(st.guard&&!b3PaintState(U(),'guard')) continue;
+      if(!b3PaintState(U(),{braced:'guard',getup:'ko'}[st.k]||st.k)) continue;   // wanch1: only the states still painted (the others are videos now)
       const rk=id+'.'+st.k; expect.push(rk);
       const show=()=>{ word(st.label); st.play(); };
       steps.push({fn:show,sec:st.sec,end:st.end,review:{key:rk,who:nm,label:st.label,again:cb=>{ show(); later(()=>{ if(st.end) st.end(); cb(); },st.again||st.sec); }}});

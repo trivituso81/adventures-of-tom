@@ -15,18 +15,16 @@
 // fidget picture (idle2) shown for half a second every 5 to 7 seconds. A state listed here has no row in B3_BODY_CLIPS.
 // Only s and h belong here: a pose is never warped (tools/paint_state_test.py measures them in the real game).
 const B3_BODY_PAINT={
-  tom:   {idle:{f:'idle2',h:.99,s:1}, guard:{f:'defend',h:.879,s:.95}, hit:{f:'hurtPose',h:.838,s:.97}, dodge:{f:'windup',h:.909,s:1},
-          ko:{f:'hurtPose',h:.838,s:.97,f2:'kneel',h2:.778,s2:1}, victory:{f:'celeb',h:.98,s:1,f2:'leap',h2:.97,s2:1}, run:{f:'run',h:1.01,s:1}},
-  grace: {idle:{f:'idle2',h:1,s:1}, guard:{f:'defend',h:.878,s:.8}, hit:{f:'hurtPose',h:.967,s:.8}, dodge:{f:'windup',h:.967,s:.78},
-          ko:{f:'hurtPose',h:.967,s:.8,f2:'kneel',h2:.833,s2:.78}, victory:{f:'celeb',h:1.056,s:.95,f2:'leap',h2:1.056,s2:.95}, run:{f:'run',h:1,s:1}},
+  tom:   {dodge:{f:'windup',h:.909,s:1}},
+  grace: {dodge:{f:'windup',h:.967,s:.78}},
   rose:  {idle:{f:'idle2',h:1.024,s:1}, guard:{f:'defend',h:.867,s:.9}, hit:{f:'hurtPose',h:.964,s:.9}, dodge:{f:'windup',h:1,s:.9},
           ko:{f:'hurtPose',h:.964,s:.9,f2:'kneel',h2:.795,s2:.9}, run:{f:'run',h:1,s:1}},
   deedee:{idle:{f:'idle2',h:1.01,s:1}, guard:{f:'defend',h:.899,s:.93}, hit:{f:'hurtPose',h:1,s:.93}, dodge:{f:'windup',h:.96,s:.95},
           ko:{f:'hurtPose',h:1,s:.93,f2:'kneel',h2:.838,s2:.95}, victory:{f:'celeb',h:1.081,s:.95,f2:'leap',h2:1.101,s2:.95}, run:{f:'run',h:1,s:1}}
 };
 const B3_BODY_CLIPS={
-  tom:   {},
-  grace: {give:'grace_give'},
+  tom:   {idle:'tom_idle',guard:'tom_guard',hit:'tom_hit',ko:'tom_ko',victory:'tom_victory',run:'tom_run'},   // wanch1: Wan 3.0 videos
+  grace: {give:'grace_give',idle:'grace_idle',guard:'grace_guard',hit:'grace_hit',ko:'grace_ko',victory:'grace_victory',run:'grace_run'},   // wanch1: Wan 3.0 videos
   rose:  {victory:'rose_victory',give:'rose_give'},
   deedee:{give:'deedee_give'},
   mudling:{idle:'mudling_idle',hit:'mudling_hit',slip:'mudling_slip',die:'mudling_defeated'},

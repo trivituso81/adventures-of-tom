@@ -1206,11 +1206,11 @@ def stage8(pg,lab,landscape=False):
     pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); }")
     start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.evaluate(S8_TRACE); pg.wait_for_timeout(900 if not landscape else 4500)
     v=s8(pg); caps.append(R(shot(pg)))
-    need(all(x.endswith(':true') for x in v['idle']),f"every monster's idle loop is loaded when the fight opens (the family stand in painted poses): {v['idle']}")
+    need(all(x.endswith(':true') for x in v['idle']),f"every monster's idle loop is loaded when the fight opens: {v['idle']}")
     need(v['loaded']<=10,f"no more than the idle loops plus a few leftovers are loaded at the start (about 10 MB each): {v['loaded']}")
     # the idle loop is what is drawn: the same picture changes over a second
-    a=pg.evaluate("()=>{ const u=B3.F.party[1],vu=B3.view.u[u.key]; const f1=b3cMemberFrame(u,vu,B3P.t,null),f2=b3cMemberFrame(u,vu,B3P.t+1.1,null); return {c1:!f1&&!f2,paint:!!b3PaintState(u,'idle')&&b3cOf(u.id,'idle')===null}; }")
-    need(a['c1'] and a['paint'],f'a family member stands in a painted pose, not an idle clip (clipposes): {a}')
+    a=pg.evaluate("()=>B3.F.party.map(u=>{ const vu=B3.view.u[u.key],id=b3cOf(u.id,'idle'); if(!id) return !!b3PaintState(u,'idle'); b3cWant(id,9000); return bclipReady(id)?!!b3cMemberFrame(u,vu,B3P.t,null)&&!b3PaintState(u,'idle'):'loading'; })")
+    need(all(x is True or x=='loading' for x in a),f'each family member stands in their idle video (wanch1), or a painted pose only while they have none: {a}')
     # 1. each family member's Basic lands on its clip's impact frame
     for member in ['tom','grace','rose','deedee']:
         if not turn_of(pg,member,S): continue
@@ -1222,7 +1222,8 @@ def stage8(pg,lab,landscape=False):
         key=pg.evaluate('(m)=>B3.F.party.find(u=>u.id===m).key',member)
         first=[h for h in H if any(c['who']==key and c['imp'] is not None for c in h['cur'])]
         need(len(H)>=1,f'{member}: the Basic should land a hit: {H[:2]}')
-        if member!='deedee': need(not first,f'{member}: the Basic is the default animation, not a clip (only Deedee has one): {H[:2]}')   # clipposes
+        hasclip=pg.evaluate("(m)=>{ const v=B3_VIBES[B3_CAST[m].vibes[0]]; return Object.values(B3_SKILLS).some(s=>s.vibe===v.id&&s.slot==='basic'&&s.anim&&s.anim.kind==='clip'); }",member)   # wanch1: the kit row says
+        if not hasclip: need(not first,f'{member}: the Basic has no clip in its kit row, yet one played: {H[:2]}')
         else: need(len(first)>=1,f'{member}: the Basic should be played by its clip and show a hit: {H[:2]}')
         if first:
             c=[c for c in first[0]['cur'] if c['who']==key][0]; d=first[0]['t']-(c['t0']+c['T0'])-c['imp']
@@ -1248,12 +1249,12 @@ def stage8(pg,lab,landscape=False):
     # 3. body states: the family are painted poses (tools/paint_state_test.py measures them); a monster hit and a Flustered monster are clips
     pg.wait_for_timeout(600)
     st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
-      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>b3cOf(m.id,s)===null&&!!b3PaintState(m,s)));
-      out.vic=B3.F.party.every(m=>m.id==='rose'?!!b3cOf(m.id,'victory'):(b3cOf(m.id,'victory')===null&&!!b3PaintState(m,'victory')));
+      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>(b3cOf(m.id,s)===null)===!!b3PaintState(m,s)));   // wanch1: each state is a video or (until it has one) painted, never both
+      out.vic=B3.F.party.every(m=>(b3cOf(m.id,'victory')===null)===!!b3PaintState(m,'victory'));
       const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
       vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
     print('   states',st2)
-    need(st2['paint'] and st2['vic'],f'the four fighters have painted idle, guard, hit, dodge, ko and run (and victory, Rose keeps her clip): {st2}')
+    need(st2['paint'] and st2['vic'],f'every body state of the four fighters is a video or painted, never both and never neither: {st2}')
     need(st2['foeHit'],f'a monster hit clip is available and drawn: {st2}')
     # Flustered: the held picture, then restore
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))
@@ -1270,7 +1271,8 @@ def stage8(pg,lab,landscape=False):
     done=pg.evaluate("""()=>({over:B3.F.over,vic:B3.F.party.map(u=>{ const f=b3cMemberFrame(u,B3.view.u[u.key],B3P.t,B3P.body[u.key]); return !!f&&!!f._clip; }),die:!!(B3P.fa.f0&&B3P.fa.f0.die!=null),loaded:b3cLoaded(),peak:B3C.peak})""")
     print('   end',done)
     need(done['over']=='win','the boss fight was won')
-    need(done['vic']==[False,False,True,False],f"the family cheers: Rose from her victory clip, the others from painted poses: {done['vic']}")
+    want=pg.evaluate("()=>B3.F.party.map(u=>!!b3cOf(u.id,'victory'))")
+    need(done['vic']==want,f"the family cheers from their victory videos (painted only for whoever has none yet): {done['vic']} want {want}")
     need(done['peak']<=16,f"no more than 16 clip pictures (about 160 MB) were ever held at once: peak {done['peak']}")
     sheet(caps[:24],4,os.path.join(OUT,'b3-s8'+('-land' if landscape else '')+'.png'),scale=.5)
     f=shot(pg); f.save(os.path.join(OUT,'b3-s8-end-'+('landscape' if landscape else 'portrait')+'.png'))

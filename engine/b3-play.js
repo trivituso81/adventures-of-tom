@@ -41,7 +41,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{},stage:null}); }
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{},stage:null}); if(typeof B3C!=='undefined') B3C.gs={}; }   // wanch1: guard clip state starts fresh with the fight's clock
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -386,7 +386,7 @@ function b3DrawFoe(f,t,picked) {
   const cr=b3cFoeFrame(f,A,vu,t),CFr=cr?cr.fr:null;   // a clip picture, when this monster has one for what it is doing and it is loaded
   if(CFr) R=CFr;
   const w=R[0].length*sc,h=R.length*sc,sw=R0[0].length*sc;
-  const bob=hov&&!dying?Math.round(Math.sin(t*3+f.slot*1.7)*2)-hov:0,breath=dying||hov||CFr?0:(.5+.5*Math.sin(t*1.7+f.slot*1.7))*.008;
+  const bob=hov&&!dying?Math.round(Math.sin(t*3+f.slot*1.7)*2)-hov:0,breath=dying||hov||CFr||(B3_BODY_CLIPS[f.id]||{}).idle?0:(.5+.5*Math.sin(t*1.7+f.slot*1.7))*.008;   // wanch1: no code breath for a fighter with an idle video (its breathing is in the video)
   const dx=A.lunge?(A.lunge.tx-L.px-sw*.5)*lq:0,dy=A.lunge?(A.lunge.ty-L.py)*lq-lq*10:0;
   const shake=t<A.shakeUntil?rand(-4,4):0,lean=holding&&!A.lunge&&!CFr?8:0,sway=fl&&!shake&&!CFr?Math.round(Math.sin(t*4.5+f.slot)*2):0;
   const x=Math.round(L.px-w/2+dx+shake-lean+sway),y=Math.round(L.py-h+bob+dy-(dc?0:dq*30));
@@ -511,7 +511,7 @@ function b3DrawMember(u,t,picked) {
   const stand=CF||PF||sp[fk]||sp.idle,frame=gp||stand,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
   const x=Math.round(cx-w/2),y=Math.round(base-h-hop);
-  const idle=fk===B3_BODY.idle&&!CF&&!PF,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
+  const idle=fk===B3_BODY.idle&&!CF&&!PF&&!(B3_BODY_CLIPS[u.id]||{}).idle,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
   activeKneelCut=frame===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
   if(GD) {
     if(GD.ghost) { const o=GD.pose?stand:sp[B3_BODY_PAINT[u.id].guard.f],ow=o[0].length*sp.scale,oh=o.length*sp.scale;

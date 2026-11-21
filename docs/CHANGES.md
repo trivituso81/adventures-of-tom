@@ -1,3 +1,17 @@
+## wanch1e (2026-11-20): Grace and Tom fight in Wan videos in every NEW BATTLE fight (idle with breathing, guard, hit, knocked out, victory, run) and Lounge Pass Flex, Soup-Dumpling Squeeze and Crunchy Sugar-Cube Pop are videos
+
+Card c-wanch1 (part e). Videos: wan-gen runs 44853113780, 44854296875 and 44854331690 (Wan 3.0, 720p, 5 s). Each one checked against plan 4.4 before baking (contact sheet of every 5th picture plus measures: height first against last, feet row, frame edges, background, last against first).
+| Fighter | In the game now (B3_BODY_CLIPS) | Left out (stop-loss or retry) |
+|---|---|---|
+| Grace | idle (loop, forward only, 4.2 s, the breathing and a blink in it), guard (the proof video, now in every fight), hit, ko, victory, run (one stride cycle), Soup-Dumpling Squeeze (retry 2 squeezes), Crunchy Sugar-Cube Pop (retry 2 crushes) | dodge: hopped sideways twice (stop-loss); cast: glowing rings twice (stop-loss); ko is in but floats 6 battle px above the ground when seated, so it is made once more (one change: "sinks straight down ... right where she stood") |
+| Tom | idle, guard, hit, ko, victory, run, Lounge Pass Flex (he shows the card at arm's length; Tom's note "presenting the item") | dodge and cast: not made (the same prompts missed twice on Grace); Zone One Blockade: his hands went past the frame edge (85 pictures), made once more (one change: elbows bent) |
+- Painted rows purged in the same change: `B3_BODY_PAINT.grace` and `.tom` keep only `dodge`. The code breath (`b3-play.js`, family and monsters) is skipped for any fighter with an idle video (`B3_BODY_CLIPS[id].idle`). The Lab row PAINTED STATES: CHAPTER 1 now shows only the states still painted.
+- Engine (`engine/b3-clips.js`): a guard video works in every fight (`b3cGuardClip` reads `B3_BODY_CLIPS`); once the lowering ends the idle video takes over (`b3cGuardActive`); the guard video is kept loaded only while the fighter guards; the guard clock resets with each fight (`b3PlayReset`).
+- Kits: `lounge_pass_flex` (tom_loungepass, cast shape), `soup_dumpling_squeeze` (grace_squeeze), `crunchy_sugar_cube_pop` (grace_cubepop) play from their clips; the hit lands on the impact picture (b3_test s8: 0.0 to 0.016 s off).
+- Bakes (`bake_clip.py`, figure rows Grace 90, Tom 99, sources `art/raw/clips/wan-<who>-<clip>-v<rev>.mp4`, stamps in each `data/clips/*.js`). Memory per clip 4 to 13 MB; NEW 6 peaked at 12 clip pictures held at once (limit 16).
+- Tests: `tools/wanproof_test.py` extended to every clip kind (W1 to W5 per fighter: the idle is the video, standing height equals the painted battle size within 1 px, feet on the ground row through idle, guard, hit, victory and ko, no jump over 2 px where a clip starts or ends, tables and kit clips present and loading; P6 the proof row): grace and tom pass except Grace's seated ko (being remade). `b3_test.py s8` (each body state is a video or painted, never both; a Basic with a clip lands on its impact frame) and `paint_state_test.py` (only the rows still painted) updated and pass, portrait and landscape.
+- Monster check (part d) results: croak, slam, bite and whine remade by clip-gen run 44854697368; checked in part f.
+
 ## fix-itembannerart-pics (2026-11-20): item pictures: only the 18 cells that missed are made again, on 2 small redo sheets
 
 Card c-fix-itembannerart-pics (from t-itembannerart-pics). Tom, after the first 18 item sheets were made: "fix only those that failed".

@@ -1,15 +1,18 @@
-# wanproof (claude/video-battle-plan.md 4.5): the Lab row PROOF: GRACE'S GUARD (VIDEO) in the real game, portrait and landscape.
-# Usage (repo root): python3 -I tools/wanproof_test.py        prints FAILS: [] when all pass, about 1 minute
-# Env: CHROMIUM = chromium binary (optional), OUT = folder for the pictures (default tools/shots).
-# It measures the battle picture itself (the canvas, with Grace drawn and not drawn), like tools/paint_state_test.py. Fails on:
-#   P1 the clip grace_guard is not loaded, is not kind guard, or another Grace clip is loaded in the row
-#   P2 her standing height in the row is off her battle size today (the painted standing figure in an ordinary Lab fight) by more than 1 battle px
-#   P3 the feet leave the standing ground row (1 battle px) at stance, through the rise, in the hold, in a braced hit, in the lowering, back at stance
-#   P4 a jump of more than 2 battle px where the rise starts or where the lowering ends (the outline before and after)
-#   P5 the painted guard, the painted fidget or the code breath shows in the row; or B3_BODY_PAINT / B3_BODY_CLIPS changed for Grace
-#   P6 the row, played as Tom plays it, in portrait and in landscape: starts Grace alone against one Mudling, shows GUARD, BRACED HIT,
-#      GUARD DOWN three times, returns to the list; an ordinary fight afterwards shows the painted guard again; no page errors
-# Pictures: wanproof-strip.png (stance, rise, hold, braced hit, lowering, stance), wanproof-portrait-*.png, wanproof-landscape-*.png.
+# wanproof (claude/video-battle-plan.md 4.5), extended by wanch1 to every family clip kind in the real NEW BATTLE fights, portrait and landscape.
+# Usage (repo root): python3 -I tools/wanproof_test.py [ids]     prints FAILS: [] when all pass. ids: comma list of fighters (default: every
+# family member with an idle video in B3_BODY_CLIPS). Env: CHROMIUM (optional), OUT = folder for the pictures (default tools/shots).
+# It measures the battle picture itself (the canvas, with the fighter drawn and not drawn). For each fighter, alone against one Mudling:
+#   W1 the idle is the video (every picture drawn in the stance is a clip picture), and no code breath or painted fidget is left for them
+#   W2 the idle video's standing height is the fighter's battle size today (the painted standing figure, measured in the same fight with
+#      the clips switched off) within 1 battle px
+#   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering), the hit,
+#      the dodge and the victory (2 px there: a cheer may rise onto the toes) and the knock-out ends on the ground (4 px: sitting)
+#   W4 no jump over 2 battle px where a one-shot clip starts or ends against the idle, or where a guard rise starts or a lowering ends
+#   W5 every state with a video has no painted row left (B3_BODY_PAINT), every clip named in B3_BODY_CLIPS and in the kits exists, its run
+#      loop and its move clips load
+#   P6 the Lab row PROOF: GRACE'S GUARD (VIDEO) as Tom plays it, portrait and landscape (STANDING, GUARD, BRACED HIT, GUARD DOWN three times)
+# Pictures: wanproof-<id>-strip.png (stance, rise, hold, braced hit, lowering, hit, dodge, victory, ko), wanproof-portrait-*.png,
+# wanproof-landscape-*.png.
 import threading, http.server, socketserver, functools, os, sys, io, json
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -44,6 +47,7 @@ SETUP="""()=>{ if(window.__u) { window.__slow=1; return; }
 def crop_of(pg,key):
     b=pg.evaluate("(k)=>window.__box(k)",key); r=pg.evaluate("()=>{ const r=document.getElementById('battle-canvas').getBoundingClientRect(); return [r.x,r.y,r.width]; }")
     k=r[2]/1152*2; return (int(r[0]*2+b[0]*k),int(r[1]*2+b[1]*k),int(r[0]*2+(b[0]+b[2])*k),int(r[1]*2+(b[1]+b[3])*k))
+IDS=[x for x in (sys.argv[1].split(',') if len(sys.argv)>1 else []) if x]
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -51,70 +55,103 @@ with sync_playwright() as pw:
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e)))
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3LabGuardProof',timeout=180000); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; }")
-    T0=pg.evaluate("()=>JSON.stringify([B3_BODY_PAINT.grace,B3_BODY_CLIPS.grace])")
+    if not IDS: IDS=pg.evaluate("()=>['tom','grace','rose','deedee'].filter(i=>(B3_BODY_CLIPS[i]||{}).idle)")
     def step(dt):
         while dt>1e-6:
             c=min(1/30,dt); pg.evaluate("(dt)=>window.__step(dt)",c); dt-=c
-    # Battle size today: the painted standing Grace in an ordinary Lab fight against one Mudling.
-    pg.evaluate("()=>b3Lab(0,{seed:7,party:['grace'],formation:null,foes:[{id:'mudling',row:'front'}]})")
-    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor",timeout=40000); pg.wait_for_timeout(2500)
-    pg.evaluate(SETUP); pg.evaluate("()=>{ window.__slow=0; B3_PAINT.fidget.on=false; }"); key=pg.evaluate("()=>B3.F.party[0].key")
-    M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
-    step(1); S=M(); k=pg.evaluate("()=>window.__k")
-    need(not any(d=='clip' for d in S['drawn']),f'an ordinary fight draws a clip for Grace: {S["drawn"]}')
-    pg.evaluate("()=>{ window.__slow=1; B3_PAINT.fidget.on=true; }"); pg.click('#b3-exit'); pg.wait_for_timeout(800)
-    # The row, driven by the test.
-    pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; b3LabGuardProof({manual:true}); }")
-    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&bclipReady('grace_guard')",timeout=40000); pg.wait_for_timeout(1200)
-    pg.evaluate("()=>{ window.__slow=0; }"); key=pg.evaluate("()=>B3.F.party[0].key")
-    info=pg.evaluate("""()=>({party:B3.F.party.map(u=>u.id),foes:B3.F.foes.map(f=>f.id),kind:(BCLIPS.grace_guard||{}).kind,rise:BCLIPS.grace_guard.rise,lower:BCLIPS.grace_guard.lower,n:BCLIPS.grace_guard.n,
-      loaded:Object.keys(PAINTED).filter(i=>/^clip_grace/.test(i)&&PAINTED[i].img),paint:[b3PaintState(B3.F.party[0],'guard'),b3PaintState(B3.F.party[0],'idle')]})""")
-    need(info['party']==['grace'] and info['foes']==['mudling'],f'P6 the row is not Grace alone against one Mudling: {info}')
-    need(info['kind']=='guard' and info['loaded']==['clip_grace_guard'],f'P1 the clip is not loaded as the only Grace clip, or not kind guard: {info}')
-    need(info['paint']==[None,None],f'P5 the painted guard or fidget is still live in the row: {info["paint"]}')
-    strip=[]; box=crop_of(pg,key)
-    def snap(): strip.append(shot(pg).crop(box))
-    tol=k*1.01
-    st=[M() for _ in range(2)]; snap()
-    need(all(set(m['drawn'])=={'clip'} for m in st),f'P5 the standing picture is not the video: {st[0]["drawn"]}')
-    need(abs(st[0]['h']-S['h'])<=tol,f'P2 standing height {st[0]["h"]/k:.1f} battle px, battle size today {S["h"]/k:.1f} (more than 1 px off)')
-    need(abs(st[0]['bot']-S['bot'])<=tol,f'P3 standing feet row {st[0]["bot"]} against the painted {S["bot"]}')
-    step(2); st2=M(); need(abs(st2['h']-st[0]['h'])<1 and abs(st2['top']-st[0]['top'])<1,f'P5 the standing picture moves on its own (breath or fidget): {st[0]} {st2}')
-    feet=lambda ms,what: need(all(abs(m['bot']-S['bot'])<=tol for m in ms),f"P3 {what}: feet leave the ground row (standing {S['bot']}, saw {[m['bot'] for m in ms]})")
-    def jump(a,b,what):
-        d=max(abs(a[x]-b[x]) for x in ('l','r','top','bot'))/k
-        need(d<=2,f'P4 {what}: the outline jumps {d:.1f} battle px ({a} -> {b})')
-    # rise: the guard goes up
-    pg.evaluate("()=>{ const F=B3.F,g=F.party[0]; b3AddStatus(F,g,'guard_stance',{n:3}); b3ViewSync(); b3Render(); }")
-    rise=[]
-    for i in range(30): step(1/30); rise.append(M()); (i in (8,16)) and snap()
-    jump(st2,rise[0],'where the rise starts'); feet(rise,'rise')
-    hold=[]
-    for i in range(10): step(.3); hold.append(M())
-    snap(); feet(hold,'hold')
-    need(min(m['top'] for m in hold)>st[0]['top']+10*k,f'P6 the hold is not a crouch: top {[m["top"] for m in hold]} standing {st[0]["top"]}')
-    need(pg.evaluate("(k)=>b3GuardShown(k)",key),'P6 b3GuardShown is false while the video guard is up')
-    pg.evaluate("(k)=>{ B3P.body[k]={kind:'hit',guard:true,t0:B3P.t,dur:.4}; }",key); hit=[]
-    for i in range(12): step(1/30); hit.append(M()); (i==3) and snap()
-    need(all(set(m['drawn'])=={'clip'} for m in hit),f'P5 a braced hit draws something other than the video: {[m["drawn"] for m in hit]}')
-    push=max((m['l']+m['r'])/2 for m in hit)-(hit[0]['l']+hit[0]['r'])/2; need(push>=3*k,f'P6 the braced hit does not nudge her back: {push/k:.1f} battle px')
-    feet(hit,'braced hit'); step(.3)
-    # lowering
-    pg.evaluate("()=>{ const F=B3.F,g=F.party[0]; b3EndStatus(F,g,'guard_stance'); b3ViewSync(); b3Render(); }")
-    low=[]
-    for i in range(45): step(1/30); low.append(M()); (i in (10,20)) and snap()
-    feet(low,'lowering'); snap()
-    end=low[-1]
-    need(abs(end['h']-st[0]['h'])<=tol and abs(end['top']-st[0]['top'])<=tol,f'P6 not back to the standing picture after the lowering: {end} {st[0]}')
-    lw=pg.evaluate("()=>{ const C=BCLIPS.grace_guard; return [C.ms[C.lower],C.dur]; }")
-    i_end=max(i for i in range(len(low)) if (i+1)/30*1000<lw[1]-lw[0]+1)   # the last step still in the lowering
-    for i in range(max(0,i_end-1),min(len(low)-1,i_end+3)): jump(low[i],low[i+1],'where the lowering ends (step %d)'%i)
-    print('   standing',round(st[0]['h']/k,1),'battle px (painted',round(S['h']/k,1),') hold top +',round((min(m['top'] for m in hold)-st[0]['top'])/k,1),'push',round(push/k,1))
-    w,h=strip[0].size; Sx=Image.new('RGB',(w*len(strip),h))
-    for i,f in enumerate(strip): Sx.paste(f,(i*w,0))
-    Sx.save(os.path.join(OUT,'wanproof-strip.png'))
-    need(pg.evaluate("()=>JSON.stringify([B3_BODY_PAINT.grace,B3_BODY_CLIPS.grace])")==T0,'P5 B3_BODY_PAINT or B3_BODY_CLIPS changed for Grace')
-    pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(800)
+    def fight(who):
+        pg.evaluate("(w)=>{ splash.active=false; document.getElementById('splash').hidden=true; b3Lab(0,{seed:7,party:[w],formation:null,foes:[{id:'mudling',row:'front'}]}); }",who)
+        pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor",timeout=40000); pg.wait_for_timeout(1500)
+        pg.evaluate(SETUP); pg.evaluate("()=>{ window.__slow=0; window.__g=false; if(!window.__bg){ window.__bg=b3cGuarding; b3cGuarding=u=>window.__g===null?window.__bg(u):!!window.__g; } }")   # the test raises and lowers the guard itself (a Vibe may start a fighter in a stance)
+        return pg.evaluate("()=>B3.F.party[0].key")
+    def leave():
+        pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(700)
+    for who in IDS:
+        T=pg.evaluate("(w)=>({clips:B3_BODY_CLIPS[w]||{},paint:B3_BODY_PAINT[w]||{}})",who)
+        # W5 the tables
+        for st,id in T['clips'].items():
+            need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: clip {id} ({st}) is not defined')
+            need(st not in T['paint'],f'W5 {who}: {st} has a video and still a painted row')
+        kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&s.anim&&s.anim.kind==='clip').map(s=>s.anim.clip)",who)
+        for id in kit: need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: the kit names clip {id}, which is not defined')
+        # Battle size today: the painted standing figure, clips switched off for this one measure.
+        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={}; }",who)
+        key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
+        step(.5); S=M(); k=pg.evaluate("()=>window.__k"); tol=k*1.01
+        leave(); pg.evaluate("(w)=>{ B3_BODY_CLIPS[w]=window.__keep; }",who)
+        key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
+        pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].idle)",arg=who,timeout=40000); step(.2)
+        strip=[]; box=crop_of(pg,key)
+        def snap(): strip.append(shot(pg).crop(box))
+        idle=[]
+        for i in range(8): step(.55); idle.append(M())
+        snap()
+        need(all(set(m['drawn'])=={'clip'} for m in idle),f"W1 {who}: the stance is not the idle video: {[m['drawn'] for m in idle][:3]}")
+        need(pg.evaluate("(k)=>{ const u=B3.F.party[0]; return !b3PaintState(u,'idle'); }",key),f'W1 {who}: a painted fidget is still live')
+        need(abs(idle[0]['h']-S['h'])<=tol,f"W2 {who}: idle standing height {idle[0]['h']/k:.1f} battle px, battle size today {S['h']/k:.1f}")
+        feet=lambda ms,what,t=tol: need(all(abs(m['bot']-S['bot'])<=t for m in ms),f"W3 {who} {what}: feet leave the ground row (standing {S['bot']}, saw {[m['bot'] for m in ms]})")
+        def jump(a,b,what):   # height and feet 2 battle px; the sides 3 (the idle video's hair sways a little with the breathing)
+            d=max(abs(a[x]-b[x]) for x in ('top','bot'))/k; e=max(abs(a[x]-b[x]) for x in ('l','r'))/k
+            need(d<=2 and e<=3,f'W4 {who} {what}: the outline jumps {max(d,e):.1f} battle px')
+        feet(idle,'idle loop')
+        base=idle[-1]
+        # guard
+        if pg.evaluate("(w)=>{ const id=(B3_BODY_CLIPS[w]||{}).guard; return !!id&&BCLIPS[id]&&BCLIPS[id].kind==='guard'; }",who):
+            pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].guard)",arg=who,timeout=40000)
+            pg.evaluate("()=>{ window.__g=true; }")
+            rise=[]
+            for i in range(30): step(1/30); rise.append(M()); (i==16) and snap()
+            jump(base,rise[0],'where the guard rise starts'); feet(rise,'guard rise')
+            hold=[]
+            for i in range(8): step(.3); hold.append(M())
+            feet(hold,'guard hold'); need(min(m['top'] for m in hold)>base['top']+6*k,f"W3 {who}: the guard hold is not lower than the stance: {[m['top'] for m in hold]} {base['top']}")
+            need(pg.evaluate("(k)=>b3GuardShown(k)",key),f'W1 {who}: b3GuardShown is false while the video guard is up')
+            pg.evaluate("(k)=>{ B3P.body[k]={kind:'hit',guard:true,t0:B3P.t,dur:.4}; }",key); hit=[]
+            for i in range(12): step(1/30); hit.append(M()); (i==3) and snap()
+            need(all(set(m['drawn'])=={'clip'} for m in hit),f'W1 {who}: a braced hit draws something other than the video')
+            feet(hit,'braced hit'); step(.3)
+            pg.evaluate("()=>{ window.__g=false; }")
+            low=[]
+            for i in range(75): step(1/30); low.append(M())
+            feet(low,'guard lowering')
+            need(set(low[-1]['drawn'])=={'clip'} and abs(low[-1]['h']-base['h'])<=2*tol,f"W4 {who}: not back to the idle video after the lowering: {low[-1]}")
+            lw=pg.evaluate("(w)=>{ const C=BCLIPS[B3_BODY_CLIPS[w].guard]; return C.dur-C.ms[C.lower]; }",who)
+            ie=min(len(low)-2,int(lw/1000*30))   # the step where the lowering ends and the idle video takes over
+            for i in range(max(0,ie-2),min(len(low)-1,ie+4)): jump(low[i],low[i+1],'where the lowering ends and the idle starts (step %d)'%i)
+        # one-shot states
+        for st,ftol in (('hit',tol),('dodge',tol),('victory',2*tol)):
+            if not T['clips'].get(st): continue
+            pg.evaluate("(id)=>b3cWant(id,20000)",T['clips'][st]); pg.wait_for_function("(id)=>bclipReady(id)",arg=T['clips'][st],timeout=40000)
+            a=M()
+            if st=='victory': pg.evaluate("(k)=>{ B3P.cheerKey=k; B3P.cheerAt=null; }",key)
+            else: pg.evaluate("([k,s])=>b3cBodyClip(k,s)",[key,st])
+            dur=pg.evaluate("(id)=>BCLIPS[id].dur/1000",T['clips'][st]); ms=[]
+            n=int(dur*30)+8
+            for i in range(n): step(1/30); ms.append(M()); (i==n//2) and snap()
+            need(all('clip' in m['drawn'] for m in ms),f'W1 {who} {st}: not drawn from the video')
+            jump(a,ms[0],f'where the {st} clip starts')
+            if st!='victory': feet(ms,st,ftol); jump(ms[int(dur*30)-1],ms[min(len(ms)-1,int(dur*30)+2)],f'where the {st} clip ends')
+            else: feet(ms[-3:],'victory (held pose)',ftol)
+            if st=='victory': pg.evaluate("()=>{ B3P.cheerKey=null; B3P.cheerAt=null; }"); step(.5)
+        if T['clips'].get('ko'):
+            pg.evaluate("(id)=>b3cWant(id,20000)",T['clips']['ko']); pg.wait_for_function("(id)=>bclipReady(id)",arg=T['clips']['ko'],timeout=40000)
+            pg.evaluate("(k)=>{ B3.view.u[k].ko=true; B3P.body[k]={kind:'ko',t0:B3P.t,dur:99}; }",key); ko=[]
+            for i in range(60): step(1/30); ko.append(M())
+            snap(); need(all(set(m['drawn'])=={'clip'} for m in ko[2:]),f'W1 {who} ko: not drawn from the video')
+            need(abs(ko[-1]['bot']-S['bot'])<=4*k,f"W3 {who} ko: does not end on the ground ({ko[-1]['bot']} against {S['bot']})")
+            need(ko[-1]['h']<S['h']*.85,f"W3 {who} ko: does not end down low ({ko[-1]['h']/k:.1f} battle px)")
+            pg.evaluate("(k)=>{ B3.view.u[k].ko=false; delete B3P.body[k]; }",key); step(.3)
+        for id in [T['clips'].get('run')]+kit:
+            if not id: continue
+            pg.evaluate("(id)=>b3cWant(id,20000)",id)
+            try: pg.wait_for_function("(id)=>bclipReady(id)",arg=id,timeout=40000)
+            except Exception: fails.append(f'W5 {who}: clip {id} does not load')
+        print('  ',who,'standing',round(idle[0]['h']/k,1),'battle px (painted',round(S['h']/k,1),')')
+        w,h=strip[0].size; Sx=Image.new('RGB',(w*len(strip),h))
+        for i,f in enumerate(strip): Sx.paste(f,(i*w,0))
+        Sx.save(os.path.join(OUT,f'wanproof-{who}-strip.png'))
+        leave()
+    pg.evaluate("()=>{ window.__g=null; }")
     # P6: the row as Tom plays it, portrait then landscape
     for land in (False,True):
         tag='landscape' if land else 'portrait'
@@ -138,10 +175,10 @@ with sync_playwright() as pw:
         ws=pg.evaluate("()=>window.__words")
         need(sum(1 for x in ws if x=='GRACE: GUARD')==3 and sum(1 for x in ws if x=='GRACE: BRACED HIT')==3 and sum(1 for x in ws if x=='GRACE: GUARD DOWN')==3,f'P6 not three rounds ({tag}): {ws}')
         need(pg.evaluate("()=>B3C.over")==None,f'P6 the row left its clip table behind ({tag})')
-    # An ordinary fight afterwards: the painted guard again.
+    # An ordinary fight afterwards: Grace's guard is the video (wanch1: every fight).
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; b3Lab(0,{seed:7,party:['grace'],formation:null,foes:[{id:'mudling',row:'front'}]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor",timeout=40000)
-    need(pg.evaluate("()=>!!b3PaintState(B3.F.party[0],'guard')&&!b3cGuardClip(B3.F.party[0])"),'P6 an ordinary fight after the row does not show the painted guard')
+    need(pg.evaluate("()=>!b3PaintState(B3.F.party[0],'guard')&&!!b3cGuardClip(B3.F.party[0])"),'P6 an ordinary fight after the row does not show the guard video')
     need(not errs,f'page errors: {errs[:3]}')
     br.close()
 print('FAILS:',fails)
