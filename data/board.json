@@ -26337,6 +26337,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18e pushed: chapter 10 on Battle 3 (tips, Vibe Points, Tombo toast, retry line). Chapters 8 and 9 were put back in the same push after an upstream restore removed them."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18e: chapter 10's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -27136,7 +27140,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -27158,6 +27162,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T19:36:48.535Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -27796,6 +27804,41 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+   "title": "Admin Dashboard: the wide page with four panes",
+   "first": "2026-11-21T11:33:57-08:00",
+   "last": "2026-11-21T11:40:22-08:00",
+   "tags": [
+    "board-dashboard"
+   ],
+   "cards": [
+    "c-dash1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:39:57-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17",
+    "b3s18a",
+    "b3s18b",
+    "b3s18c",
+    "board-night",
+    "b3s18d",
+    "b3s18e"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18",
+    "b-board-night"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
    "title": "Apply Gemini's chapter 1 report to the board",
    "first": "2026-11-21T11:29:09-08:00",
@@ -27842,38 +27885,6 @@
    "cards": [
     "c-wanch2"
    ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:34:24-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17",
-    "b3s18a",
-    "b3s18b",
-    "b3s18c",
-    "board-night",
-    "b3s18d"
-   ],
-   "cards": [
-    "c-b3s17",
-    "c-b3s18",
-    "b-board-night"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
-   "title": "seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
-   "first": "2026-11-21T11:33:57-08:00",
-   "last": "2026-11-21T11:33:57-08:00",
-   "tags": [
-    "board-dashboard"
-   ],
-   "cards": []
   },
   {
    "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
@@ -31403,8 +31414,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "05677fcbc9550c0f59ed4c872e33dd133da2fa6e",
- "synced_at": "2026-11-21T19:39:29+00:00",
+ "synced": "9f25e3b3f65a54e752501e971eefb20ef798a637",
+ "synced_at": "2026-11-21T19:40:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
