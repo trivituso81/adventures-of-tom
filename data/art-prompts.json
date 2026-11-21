@@ -14341,9 +14341,22 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "they are about 5x too big",
+     "from": "v1",
+     "at": 1795220911395,
+     "srv": "area-hollow-trail1@20261121T002347",
+     "qa": 0.875,
+     "qaFail": [
+      "p2",
+      "p8"
+     ]
+    }
+   ],
    "id": "area-hollow-trail1",
    "tab": "Areas",
    "group": "Grump Hollow",
@@ -27050,7 +27063,7 @@
      "at": 1795219850015,
      "marks": {
       "first": 0,
-      "last": 3.0
+      "last": 3
      }
     }
    ],
