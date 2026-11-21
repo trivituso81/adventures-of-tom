@@ -362,6 +362,13 @@ function b7MonsterTick(n,dt) {
   if(n.alert>0) n.alert-=dt;
   n.mt=(n.mt||0)-dt; if(n.mt>0) return;
   if(b7IsBoss(n)) { n.mt=1; return; }
+  if(n.still) {   // a monster fixed on its spot (the Log Lump): no wandering, no chase; coming within 2 tiles forces the fight
+    const px0=player.move?player.move.tx:player.x,py0=player.move?player.move.ty:player.y;
+    const rest0=now<n.defeatedUntil;
+    n.chasing=false; n.mt=.1;
+    if(!rest0&&now>=B7.noEngage&&now>=(n.chaseOff||0)&&!transition&&!dialog.active&&!intro.active&&!menuOpen&&!shopOpen&&!battle.active&&b7Dist(n,px0,py0)<=2) b7Engage(n);
+    return;
+  }
   const resting=now<n.defeatedUntil;
   const px=player.move?player.move.tx:player.x,py=player.move?player.move.ty:player.y;
   const dist=b7Dist(n,px,py);

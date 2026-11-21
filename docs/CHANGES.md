@@ -1,3 +1,9 @@
+## reports-2026-11-21b (2026-11-21): the Log Lump stays at the end of the wrappers and the fight starts when you walk up to it
+
+Tom's report r-20261121-122202-loak: "the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching it will force the interaction".
+- `engine/world.js`: the Hollow's Log Lump gets `still`. `engine/feel.js` (`b7MonsterTick`): a `still` monster never wanders or chases, and Tom coming within 2 tiles starts its fight (same lines, same overlevel rule). It stays on its spot (11, 11), where leg 2's wrappers end.
+- Tested in a real browser: it stayed on (11, 11) after 6 seconds, and walking to (9, 11) opened its dialogue. No page errors.
+
 ## wanch2 (2026-11-21): new battle videos: every family member casts a spell, Grace ducks, Rose tackles; three that missed are listed
 
 Card c-wanch2 (parts wanch2a and this). The stop-loss list of wanch1, each by a different method than the one that missed twice. Tom's answer on t-wanch1-watch was All good with no note. Every video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired.

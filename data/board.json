@@ -28370,7 +28370,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-122202-loak. First note: the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching ",
+   "next": "Fixed r-20261121-122202-loak (Log Lump stays put at the end of the wrappers; walking up to it starts the fight). Look at it on the phone in Grump Hollow.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -28402,12 +28402,17 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Log Lump fixed on its spot, fight starts on approach (reports-2026-11-21b)."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-21T20:31:47+00:00"
+   "started_at": "2026-11-21T20:31:47+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "t-hitspeed1-try",
