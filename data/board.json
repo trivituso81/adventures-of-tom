@@ -23741,6 +23741,37 @@
      "t": "Made by battleguide1 as the next card. Reason: 278 of the 346 battle animations have no video yet, and the page cannot play those; a real fight can show them."
     }
    ]
+  },
+  {
+   "id": "c-costsduoplan",
+   "tag": "costsduoplan",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Plan the AI Costs layout for the iPhone Duo",
+   "next": "In this session: look at the AI Costs page at the Duo's folded and unfolded sizes, design a layout for each, and make the cards that start the build.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+    "opening": "\"Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views\""
+   },
+   "prompt": {
+    "what": "Assesses the AI Costs page on the iPhone Duo and designs folded and unfolded layouts.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a design Tom judges by eye)",
+    "effort": "medium (one page, sizes known)",
+    "text": "Read CLAUDE.md, docs/COSTS.md and card c-costsduoplan in data/board.json, then finish what its history describes and push build costsduoplan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views, optimizing for the screen area for each of these cases to ensure that most information, the most important information, is surfaced and that findability and navigation is simple and easy once you've done this, create the necessary Kanban cards to kick off this process via the board\""
+    }
+   ]
   }
  ],
  "sessions": [
