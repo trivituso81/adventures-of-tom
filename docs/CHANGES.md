@@ -1,3 +1,10 @@
+## b3s17b (2026-11-21): chapter 3's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s17, part b. Chapter 3 joins chapters 1 and 2: the Soggy Socks, the Tangle and the Bobber, the Snag and Old Iron-Gill play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch3sock`, `ch3tangle`, `ch3snag`, `irongill`): Pet Peeves, Resists, the wind-ups (Squelch, Big Knot, Undertow, Pepper Belch, Deep Dive), the Sock Iron-Gill hides behind, Toasty and Steam Cloud!. No Warmth bar, no HEART, no Tombo. A win over Iron-Gill sets `kind:irongill`, so the kind ending plays.
+- Scene changes: the "New Tombo: You Hold the Net" toast is skipped on Battle 3 (the flag stays). Boppy's coaching after a loss has a Battle 3 version (`B3_CH_ON(3)`); its first line is the same as before so the recorded clip still plays, the second line is new and not recorded yet (it plays by speech synthesis and shows under No clip yet in the Voice Library). OLD keeps the old line.
+- Tests: `tools/ch3_b3_test.py` in portrait and landscape (12 steps from Chapter Select to home; every fight on Battle 3, no Warmth words, tips shown once each, Vibe Points paid), `tools/b3-check-s17.js` (chapters 1 to 3), `unused_voice.py` 0 on all checks. `tools/b3_chapter_lib.py` now presses Enter through a close-up inside a scene.
+- Not looked at: the chapter 4 and 5 fights (next parts).
+
 ## costsduoplan (2026-11-21): AI Costs on the iPhone Duo: assessment, design and a drawing to open on the phone
 
 Card c-costsduoplan. Tom: "Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views ... create the necessary Kanban cards to kick off this process via the board".

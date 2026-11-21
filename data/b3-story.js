@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2],
+  chapters:[1,2,3],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -52,6 +52,27 @@ const B3_STORY={
       {id:'pips',who:'*',text:'The Big Shake has 6 Composure pips and hates Drench and Razzle. Each hit of those flavors takes a pip, and at zero it is Flustered and loses its plan.'},
       {id:'quake',who:'*',text:'It’s winding up a ground sweep that hits everyone. A shield on each person soaks it, or break its pips to cancel it.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='bigshake')},
       {id:'guard',who:'*',text:'Below half HP it braces in Faultline Guard: 25% less damage and a small heal each turn. A Break ends the stance, and a Skill that strips buffs ends the heal.',when:(F)=>F.foes.some(f=>f.st&&f.st.faultline_guard)}
+    ],
+    // ---- Chapter 3 (stage 17b): Tom, Grace, Rose and Boppy at the marsh and the pier. ----
+    ch3sock:[
+      {id:'peeve',who:'boppy',text:'Boppy’s turn. Tap a Sock (or press I): it can’t stand Sizzle or Razzle, and it shrugs off Drench, so a Drench Skill would be wasted.'},
+      {id:'squelch',who:'*',text:'A Sock is winding up Squelch (!! on its card), a slow bite on one of you. Heal or shield that person, or interrupt it.',when:(F)=>F.foes.some(f=>f.charge)}
+    ],
+    ch3tangle:[
+      {id:'peeves',who:'*',text:'Two kinds of monster, two sets of Pet Peeves. Tap each one: the Tangle can’t stand Sizzle or Racket, the Bobber can’t stand Drench or Clobber.'},
+      {id:'knot',who:'*',text:'The Tangle is winding up Big Knot: Slow and Fatigue on one person. It has no Composure pips to break, so interrupt it or shield that person.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='tangle')},
+      {id:'bob',who:'*',text:'The Bobber’s Choppy Bob dodges 20% of attacks. A Skill that strips a buff takes it off.',when:(F)=>F.foes.some(f=>f.st&&f.st.choppy_bob)}
+    ],
+    ch3snag:[
+      {id:'elite',who:'*',text:'The Snag is an Elite: 4 Composure pips, and it can’t stand Sizzle. Each Sizzle hit takes a pip, and at zero it is Flustered. It shrugs off Drench.'},
+      {id:'timber',who:'*',text:'Sunken Timber takes 25% off every hit. A Break ends it, so aim your Sizzle hits at the pips first.',when:(F)=>F.foes.some(f=>f.st&&f.st.sunken_timber)},
+      {id:'tow',who:'*',text:'The Snag is charging Undertow (!!): it drenches one person and pushes them back on the turn bar. A Break or an interrupt cancels it, or shield that person.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='snag')}
+    ],
+    irongill:[
+      {id:'pips',who:'*',text:'Old Iron-Gill has 6 Composure pips and can’t stand Clobber or Razzle. It dives every third turn, so save a Break for the dive.'},
+      {id:'dive',who:'*',text:'It dived to the Back row behind a Soggy Sock and is charging Deep Dive on everyone. A Break or an interrupt cancels it, or knock out the Sock to pull Iron-Gill back to the Front.',when:(F)=>F.foes.some(f=>f.id==='irongill'&&f.row==='back')},
+      {id:'belch',who:'*',text:'Pepper Belch is charging (!!). It scorches everyone, so shield the family first and heal right after.',when:(F)=>F.foes.some(f=>f.charge&&/Belch/.test(f.charge.name))},
+      {id:'steam',who:'*',text:'The belch left Iron-Gill Toasty. A Drench hit sets that off as a Steam Cloud!',when:(F)=>F.foes.some(f=>f.id==='irongill'&&f.st&&f.st.toasty)}
     ]
   }
 };

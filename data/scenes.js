@@ -1027,7 +1027,7 @@ SCENES.ch3Pier=[
   {talk:'Boppy',lines:['Tom holds the tackle box. I cast. The fish comes. Nobody talks. That\'s the system.']},
   {talk:'Tom',lines:['I\'ve got the tackle box in one hand and the big net in the other. I\'m ready.']},
   {flag:'tombo:boppy1'},
-  {toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, it is inside ▲ ATTACK.',time:3.6},
+  {if:()=>!B3_CH_ON(3),then:[{toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[]},
   {call:()=>sfx.whoosh()}, {wait:1.4},
   {talk:'Boppy',lines:['...Any minute now.']},
   {wait:1.2},
@@ -1185,7 +1185,9 @@ SCENES.ch3Pool=[
   {battle:'irongill',tut:'irongill'},
   {if:()=>flag('battle:irongill')!=='win',then:[
     {heal:true},
-    {talk:'Boppy',lines:['Headcount. One, two, three, four. Good.','He belches every third turn, Tom. Heal right after. When he dives, hit the water hard, or do our Tombo.']},
+    {if:()=>B3_CH_ON(3),then:[
+      {talk:'Boppy',lines:['Headcount. One, two, three, four. Good.','He dives every third turn, Tom. Break his pips, or knock out the sock he hides behind. And heal right after the belch.']}],else:[
+      {talk:'Boppy',lines:['Headcount. One, two, three, four. Good.','He belches every third turn, Tom. Heal right after. When he dives, hit the water hard, or do our Tombo.']}]},
     {toast:'Face Old Iron-Gill and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 11. After Iron-Gill (won in the scene, or on a retry with A): the jar comes back, the coin shakes loose for Boppy, catch and

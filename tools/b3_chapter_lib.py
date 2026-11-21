@@ -55,8 +55,11 @@ def win(tag):
     fights.append(r); return r
 def run(stop,tag,n=900,expect=None):
     """Play scenes with Enter until `stop` is true; every fight that starts is auto-played and checked."""
+    closeups=0
     while True:
         r=adv(stop,n,tag)
+        if r=='closeup' and closeups<30:   # a close-up inside a scene (a reveal, a boss entrance): Enter moves it on, then the scene goes on
+            closeups+=1; pg.wait_for_timeout(1200); pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
         if r=='battle':
             f=win(tag); k=f['tut']
             check(f"{tag}: fight {'+'.join(f['foes'])} ended on Battle 3 and the victory card showed",f['ended'] and f['v3'] and f['card'])
