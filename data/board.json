@@ -10154,6 +10154,11 @@
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "where the family stands, who is hidden and whether the group reads right are composition a person judges"
    }
   },
   {
@@ -26824,6 +26829,11 @@
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "it asks whether fights are fun, the pace feels right and the family moves feel like them; a test browser cannot judge that"
    }
   },
   {
@@ -28430,6 +28440,11 @@
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "it asks whether fights are fun and the pace is right across five chapters; that is taste, though a stalled fight is a fact worth a fix card if Tom reports one"
    }
   },
   {
@@ -29502,6 +29517,11 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T21:23:19Z",
+     "t": "Night run: t-stagefollowplay, t-milestonec, t-milestoned sorted YOURS. t-gem-bug01play (lose to the Big One, retry starts by itself) is a yes or no fact but this run could not find the retry code path in time; left unmarked for the next night."
     }
    ],
    "prompt": {
