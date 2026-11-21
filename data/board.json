@@ -24363,7 +24363,7 @@
    "id": "c-anim-tom-loungepass-fix1",
    "tag": "anim-tom-loungepass-fix1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "fix": true,
    "title": "Fix: Tom, Lounge Pass Flex (quick take-out, long swat)",
@@ -24374,7 +24374,7 @@
      "card": "t-anim-tom-loungepass-lf2z-watch"
     }
    ],
-   "next": "Not made yet. Your note worked (quick take-out, long arm out), but twice his arm and the card ran off the left edge of the video. Next try places him right of centre so the arm has room. The game keeps the current Lounge Pass clip until then.",
+   "next": "Shipped anim-tom-loungepass-fix1: quick take-out and sparkle, then most of the clip is his arm out and the snooty swat. Your card: watch it again in the Battle Guide.",
    "anim": {
     "id": "move:lounge_pass_flex",
     "owner": "tom",
@@ -24403,6 +24403,10 @@
     {
      "d": "2026-11-21",
      "t": "Ended without shipping (stop-loss, two misses the same way). Prompt v3 (wan-tom-loungepass-v3.txt) made the take-out quick and the outstretched arm long, as Tom asked, but on rev 4 (pad 0.8) and rev 5 (pad 0.65) the arm and card ran past the left edge of the video for 12 to 17 pictures; the model stretches the arm to the frame edge whatever the scale. Neither showed the snooty chin-up face of the lf2z clip. Spent $1.00 of $2.50. Next: a different method, not a third pad: a wangen option that places the figure right of centre, then one try with v3 unchanged."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom (11:27): \"yes\" to the recommended try. Shipped anim-tom-loungepass-fix1: one change, the figure placed right of centre (wangen shift 0.2); prompt v3 and pad 0.8 kept. Passed plan 4.4 (no edge touched) and the measured gate. Bake runs the take-out at 2x and the arm and swat at 1x. $0.50."
     }
    ],
    "prompt": {
@@ -24417,16 +24421,18 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
     "opening": "unknown"
-   }
+   },
+   "after": "t-anim-tom-loungepass-lf2z-watch",
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-tom-loungepass-lf2z-watch",
    "title": "Watch Tom's new Lounge Pass Flex",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then tap All good or Something is wrong. You should see him hold the card up by his face, smile and wink at you, a sparkle on the card's top right corner, then chin up and a snooty limp-wrist swat toward the monster. There is no ding yet (card c-anim-tom-loungepass-ding adds it after your All good).",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then tap All good or Something is wrong. Now: he pulls the card out quickly, flashes it up with a smile and a sparkle, then holds his arm straight out with the card for most of the clip and flicks it down in a limp-wrist swat. No ding yet (card c-anim-tom-loungepass-ding adds it after your All good).",
    "steps": [
     "Open ADMIN > BATTLE GUIDE > Animations > Tom.",
     "Play Lounge Pass Flex.",
@@ -24437,7 +24443,7 @@
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "build": "anim-tom-loungepass-lf2z",
+   "build": "anim-tom-loungepass-fix1",
    "history": [
     {
      "d": "2026-11-21",
@@ -24447,9 +24453,12 @@
      "d": "2026-11-21",
      "t": "Tom (in chat, 10:33): \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\" Fix card c-anim-tom-loungepass-fix1 remakes it; this card comes back after.",
      "at": "2026-11-21T18:33:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Back to you after anim-tom-loungepass-fix1 (your note: quick take-out and sparkle, mostly the arm out and the swat)."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-anim-tom-loungepass-ding",
@@ -24467,6 +24476,10 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-tom-loungepass-lf2z from Tom's note (\"a little like ding sound with like a sparkle\"). The video is silent by rule, so the ding is a game sound effect timed to the sparkle (video pictures 66 to 78, baked pictures 13 to 17 of clip tom_loungepass)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "anim-tom-loungepass-fix1 remade the clip: the sparkle is now on baked pictures 9 to 11; the prompt says picture 10."
     }
    ],
    "prompt": {
@@ -24476,7 +24489,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a small code change whose steps are not written yet, tests catch mistakes)",
     "effort": "medium (one sound in one move)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-anim-tom-loungepass-ding in data/board.json with its history, and the Tom card that blocked it. Your first push is the commit board: start c-anim-tom-loungepass-ding.\n\nTom asked for a little cartoon \"ding\" when the sparkle shows on the lounge pass card in Tom's move Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js, clip tom_loungepass in data/clips/tom-loungepass.js; the sparkle is on video pictures 66 to 78, baked pictures 13 to 17). Do not touch the video. Find how the new battle plays sounds (b3Sfx in engine/b3-play.js, the sfx table) and how a clip move can fire something at a given picture, and play one short bright ding when baked picture 14 is on screen, in the new battle and in the Battle Guide player. Use an existing ding or chime sound if one exists, otherwise a short synthesized one in the same sfx table. Run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Build tag anim-tom-loungepass-ding. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-anim-tom-loungepass-ding in data/board.json with its history, and the Tom card that blocked it. Your first push is the commit board: start c-anim-tom-loungepass-ding.\n\nTom asked for a little cartoon \"ding\" when the sparkle shows on the lounge pass card in Tom's move Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js, clip tom_loungepass in data/clips/tom-loungepass.js; the sparkle is on baked pictures 9 to 11 of the anim-tom-loungepass-fix1 clip). Do not touch the video. Find how the new battle plays sounds (b3Sfx in engine/b3-play.js, the sfx table) and how a clip move can fire something at a given picture, and play one short bright ding when baked picture 10 is on screen, in the new battle and in the Battle Guide player. Use an existing ding or chime sound if one exists, otherwise a short synthesized one in the same sfx table. Run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Build tag anim-tom-loungepass-ding. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
