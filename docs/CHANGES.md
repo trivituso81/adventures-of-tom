@@ -1,3 +1,15 @@
+## anim-grace-cubepop-tvik (2026-11-21): Grace's Crunchy Sugar-Cube Pop is a punch now, with a neon blue cube
+
+Card c-anim-grace-cubepop-tvik. Tom (Battle Guide, b3s17a): "She should essentially punch the monster with it. And it should be neon blue".
+| | |
+|---|---|
+| Kept | Everything in `wan-grace-cubepop-v2.txt` the note does not name (the three parts, the pocket, the cube shape, crushing it so it squishes out between her fingers, the grin, opening her hand, tucking it away, the return), the start picture, every Wan setting, the bake shape (strike, every 3rd picture, 1.5x, figure 90 rows) |
+| Changed | The two things the note names, nothing else. Colour: "clear" became "neon blue". Gesture: "holds it out toward the left in one hand at chest height and closes her fingers tight around it once" became "grips it in one fist and punches it forward toward the left once at chest height" (`wan-grace-cubepop-v3.txt`, job `grace-cubepop` rev 3) |
+- Video: wan-gen run 44929359366, $0.50. Source `art/raw/clips/wan-grace-cubepop-v3.mp4` (v2 removed), baked pictures 18 to 132, the hit at picture 69 where the punch lands (39 pictures, 2.6 s in the game, hit at 1.1 s).
+- Plan 4.4 checks: neon blue cube, one straight punch to the left, the cube bursts into blue goo in her fist, she opens her hand and returns; same girl; standing height 1,037 px first and last; feet on row 1,153 in all 150 pictures; last against first 1.04 of 255. Edge: a few flying goo drops cross the left edge of the video in 8 pictures (never her hand or body); the bake box cuts them, so none shows in the game. Clip gate (measured part): no flags.
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py` FAILS [], smoke (its board_sync_test fails the same two checks on main before these builds). Looked at in the Battle Guide player at the hit, portrait and landscape.
+- Tom's card: t-anim-grace-cubepop-tvik.
+
 ## anim-deedee-scrub-1irj (2026-11-21): Deedee's "Hand Me My Glasses" Scrub brushes longer, arm out toward the monster
 
 Card c-anim-deedee-scrub-1irj. Tom (Battle Guide, b3s17a): "Longer brushing, outward towards monster".
