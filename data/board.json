@@ -30252,6 +30252,29 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "b-board-nightgreen3",
+   "tag": "board-nightgreen3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle Animations",
+   "title": "next.md no longer says the two clip tests fail",
+   "next": "Done: next.md no longer says the two clip tests fail",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30950,7 +30973,7 @@
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the last failing test (ch20_test)",
    "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T14:39:15-08:00",
+   "last": "2026-11-21T14:40:45-08:00",
    "tags": [
     "nightgreene",
     "nightgreenf",
@@ -30960,11 +30983,13 @@
     "nightgreenj",
     "nightgreenk",
     "nightgreenl",
-    "board-nightgreen2"
+    "board-nightgreen2",
+    "board-nightgreen3"
    ],
    "cards": [
     "c-nightgreen",
-    "b-board-nightgreen2"
+    "b-board-nightgreen2",
+    "b-board-nightgreen3"
    ]
   },
   {
@@ -34821,8 +34846,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "15a916559788016557cbf5773cd052d607c61e42",
- "synced_at": "2026-11-21T22:40:23+00:00",
+ "synced": "237581184282eb743306a1b22c72f875a3f7bbc4",
+ "synced_at": "2026-11-21T22:41:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
