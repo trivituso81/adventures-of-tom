@@ -25230,7 +25230,7 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "next": "Stop-loss: the lava and couch cushion story works on Wan, but she shrinks mid-clip and the cushion flies in from off screen, twice. Next try: a new start picture of Rose already holding the cushion. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
@@ -25290,6 +25290,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stuck twice: The rescue started 10:20 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-anim-rose-lava-xftr)."
     }
    ],
    "prompt": {
@@ -25308,7 +25312,8 @@
     "url": "https://claude.ai/code/cse_01RXeukH6RFk6itLJhVJ4MmH",
     "prev": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ"
    },
-   "started_at": "2026-11-21T18:20:01+00:00"
+   "started_at": "2026-11-21T18:20:01+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-anim-deedee-dodge-y4m3",
@@ -27275,7 +27280,7 @@
    "title": "Admin Dashboard: the wide page with four panes",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "dash1",
    "next": "Built and pushed as build dash1: dashboard.html with the four panes, the All four and Battle layouts, pane buttons, the gold keys frame, Ctrl 1 to 4, links that open in the pane that owns the page, docs/DASHBOARD.md and a test that passes at 3440 x 1328 and 3440 x 1440. Tom's next step is the card Try the Admin Dashboard on the wide monitor (t-dash1-try).",
    "blocks": [
@@ -27315,16 +27320,20 @@
     {
      "d": "2026-11-21",
      "t": "Built dash1: dashboard.html (Board 1000, game 951 at 951 x 648 with Duo, Battle Guide 829, Admin 620; Battle layout 520, 1600 at 1600 x 900, 860, Builds 420), top bar, pane headers, link routing, Ctrl 1 to 4, tools/dashboard_test.py, docs/DASHBOARD.md, CLAUDE.md row. Hands Tom t-dash1-try."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as dash1: the Admin Dashboard page for the wide monitor: Board, game, Battle Guide and Admin side by side"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-dash1-try",
    "title": "Try the Admin Dashboard on the wide monitor",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "next": "On the MacBook open Chrome at https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard) and make the window full screen on the wide monitor. Paste the GitHub token once in the Board pane (three dots), click through the four panes, play the game with the keyboard, press Ctrl 1 to 4, switch Layout to Battle, then press All good, or Something is wrong and say which pane and what you saw. Optional last step: install it as its own Chrome app window. Your notes go to the next card, Admin Dashboard: the strip under the game (c-dash2).",
    "steps": [
@@ -27355,6 +27364,10 @@
     {
      "d": "2026-11-21",
      "t": "Steps rewritten by the dash1 session to match what was built, with the optional Chrome app window step."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Admin Dashboard: the wide page with four panes is done."
     }
    ],
    "first": "Waits on the card Admin Dashboard: the wide page with four panes."
@@ -28164,6 +28177,34 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-stuck-anim-rose-lava-xftr",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-anim-rose-lava-xftr",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Animation note: Rose, The Floor Is Lava!",
+   "next": "Card c-anim-rose-lava-xftr (Animation note: Rose, The Floor Is Lava!) stalled again after its one automatic rescue. The rescue started 10:20 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-anim-rose-lava-xftr"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: card c-anim-rose-lava-xftr stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -28565,6 +28606,18 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukENcVcQVhhPrujzn5F",
+   "title": "Admin Dashboard: the wide page with four panes",
+   "first": "2026-11-21T12:21:01-08:00",
+   "last": "2026-11-21T12:21:01-08:00",
+   "tags": [
+    "dash1"
+   ],
+   "cards": [
+    "c-dash1"
    ]
   },
   {
@@ -32235,8 +32288,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "dcef1d6c976fdca95cc17a7941d41a05e89e6de6",
- "synced_at": "2026-11-21T20:19:50+00:00",
+ "synced": "55c770eea55909f5cdee6131b811942eee9ddfe8",
+ "synced_at": "2026-11-21T20:21:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
