@@ -16563,7 +16563,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukG9K6Rpr6n2qBhKfoJ",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -16597,6 +16597,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T00:27:34.633Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -16922,7 +16926,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -17019,10 +17023,13 @@
     {
      "d": "2026-11-21",
      "t": "Fix c-fix-keysecrets2-try-6: the job approved every press; the page now keeps the last answer on the device so reopening shows it."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
     }
    ],
-   "after": null,
-   "waiting_on": "claude"
+   "after": null
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17441,7 +17448,7 @@
    "title": "Check the Grump Hollow wrapper trail paintings in the game",
    "theme": "Areas",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "tag": "hollowtrail2",
    "auto": true,
    "next": "Waits on card c-fix-hollowtrail1-pics (Tom rejected all 4 Hollow trail paintings, so nothing was installed). After the fix ships and Tom approves new paintings, run this card: check wrappers, play the Hollow by stage, hand Tom the play card.",
@@ -17449,7 +17456,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCgn5xppFJZVi1wrbt",
+    "url": "https://claude.ai/code/cse_01RXeukGdeRiJxyFzrD5h7pB",
     "opening": "not started"
    },
    "history": [
@@ -17473,6 +17480,18 @@
      "d": "2026-11-21",
      "t": "Run ended without shipping: Tom rejected all 4 paintings (area-hollow-trail1 to 4, 'they all look like shit'), so there is nothing to install or check. Card moved to Waiting behind c-fix-hollowtrail1-pics.",
      "at": "2026-11-21T00:40:00+00:00"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Generate and approve the 4 Hollow wrapper trail paintings is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -17484,8 +17503,7 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and docs/AREA_PAINTINGS.md section \"Story stage paintings: Grump Hollow's muffin wrapper trail\", then card c-hollowtrail2 in data/board.json with its history and the notes on card t-hollowtrail1-pics. Your first push is the commit board: start c-hollowtrail2. For every approved entry area-hollow-trail1 to 4: check that its painting art/hollow-trailN.webp (N = the stage number) and its line in data/hollow-trail.js exist (if the art-bake Action did not install one, copy its newest approved art/raw/areas file to tools/sprite-bake/src/hollow-trailN.png and run python3 tools/sprite-bake/bake_hollow_trail.py N), then look at the check picture it writes (tools/shots/hollow-trailN-check.png) and the result next to the plate: count the wrappers (nine, all inside the strip, on open ground, not on a bench, a sign or the water); if wrappers were dropped because they lie outside the strip, widen or bend that stage's ROUTES line in the bake script by the smallest change and bake again. Then play it: python3 tools/hollow_trail_test.py must pass, and with the chapter 1 jump walk the Hollow at each stage (beat the monsters with the test helpers) and look at portrait and landscape screenshots: the right painting per stage, no seam around the strip, the monsters on the trail. Push build hollowtrail2 with a docs/CHANGES.md heading, create the Tom card t-hollowtrail2-play (ask play: start chapter 1 from chapter select, win the Mudling fight at the Hollow gate, follow the wrappers to each monster and on to Boppy's fishing spot) and set this card's after to it. A rejected painting stays out; say which. Spend nothing on xAI. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T00:30:08+00:00",
-   "waiting_on": "claude"
+   "started_at": "2026-11-21T00:31:59+00:00"
   },
   {
    "id": "c-itembannerart1",
@@ -17713,7 +17731,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -17725,6 +17743,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T00:27:46.585Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -17855,7 +17877,7 @@
    "id": "c-fix-keysecrets2-try-6",
    "tag": "fix-keysecrets2-try-6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17903,6 +17925,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped fix-keysecrets2-try-6: last answer to a press is kept on the device."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-6: the answer to GENERATE VIDEO stays on the card after the page is closed"
     }
    ],
    "prompt": {
@@ -17916,7 +17942,8 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-21T00:27:05+00:00"
+   "started_at": "2026-11-21T00:27:05+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-hollowtrail1-pics",
@@ -17944,7 +17971,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCgn5xppFJZVi1wrbt",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -17988,7 +18015,7 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
     "opening": "not started"
    },
    "history": [
@@ -18020,7 +18047,7 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
     "opening": "not started"
    },
    "history": [
@@ -18041,6 +18068,29 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukHFTiVfku9KBW5f7sz",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-21T00:31:55Z",
+   "last": "2026-11-21T00:31:55Z",
+   "tags": [
+    "fix-keysecrets2-try-6"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try-6"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCgn5xppFJZVi1wrbt",
+   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
+   "first": "2026-11-21T00:31:10Z",
+   "last": "2026-11-21T00:31:10Z",
+   "tags": [],
+   "cards": [
+    "c-fix-hollowtrail1-pics",
+    "c-hollowtrail2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
    "title": "Build chapter 2 to the locked script",
@@ -18561,6 +18611,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
+   "title": "Fix the START tasks for Opus medium and Sonnet high",
+   "first": "2026-11-20T16:30:19-08:00",
+   "last": "2026-11-20T16:31:50-08:00",
+   "tags": [
+    "board-startfix"
+   ],
+   "cards": [
+    "c-startfix",
+    "c-probe-opus",
+    "c-probe-sonnet-high"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGLHALqQpgPazwoAhK",
    "title": "Fix: sprite and wall clipping glitches in chapter 1 maps",
    "first": "2026-11-20T16:20:42Z",
@@ -18570,6 +18634,26 @@
    ],
    "cards": [
     "c-gem-bug09"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDhtanvcF1mSR4hV1C",
+   "title": "Search through all instances in the overworld maps (not",
+   "first": "2026-11-20T16:30:40-08:00",
+   "last": "2026-11-20T16:30:40-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-searchthrough"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG9K6Rpr6n2qBhKfoJ",
+   "title": "Recast and baker pages: key boxes",
+   "first": "2026-11-20T16:30:36-08:00",
+   "last": "2026-11-20T16:30:36-08:00",
+   "tags": [],
+   "cards": [
+    "c-keysecrets5"
    ]
   },
   {
@@ -20434,8 +20518,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "c1ef74cef3a67a94556d53f9abb6a65820a8ec28",
- "synced_at": "2026-11-21T00:30:08+00:00",
+ "synced": "cd7791797f0e5521205be2ff2b922d23a33a5e1a",
+ "synced_at": "2026-11-21T00:32:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
