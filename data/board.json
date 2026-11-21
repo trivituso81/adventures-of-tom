@@ -24501,7 +24501,7 @@
    "id": "c-anim-rose-dodge-v89r",
    "tag": "anim-rose-dodge-v89r",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Dodge",
    "next": "Made in build anim-rose-dodge-v89r. Made as a Wan 3.0 video (the family route): a duck straight down with her hands on her head, written in the pattern of her approved clips. Second try passed (one change: the picture shrunk to 80% so her hands stay in the frame). Two known small faults are named in docs/CHANGES.md. Booked $1.00. Next: your card Watch Rose, Dodge.",
@@ -24547,6 +24547,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-rose-dodge-v89r. Made as a Wan 3.0 video (the family route): a duck straight down with her hands on her head, written in the pattern of her approved clips. Second try passed (one change: the picture shrunk to 80% so her hands stay in the frame). Two known small faults are named in docs/CHANGES.md. Booked $1.00."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-dodge-v89r: Rose's Dodge is a Wan 3.0 video now: she ducks straight down with her hands on her head and pops back up"
     }
    ],
    "prompt": {
@@ -24558,7 +24562,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-dodge-v89r in data/board.json with its history. Your first push is the commit board: start c-anim-rose-dodge-v89r.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Make\n\nThe animation: Rose, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-dodge-v89r. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-rose-dodge-v89r"
+   "after": "t-anim-rose-dodge-v89r",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-rose-victory-vqjc",
@@ -25878,6 +25883,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
+   "title": "Animation note: Rose, Getting hit",
+   "first": "2026-11-21T09:18:57-08:00",
+   "last": "2026-11-21T10:17:50-08:00",
+   "tags": [
+    "anim-rose-victory-vqjc",
+    "anim-rose-give-w5ws",
+    "anim-rose-dodge-v89r"
+   ],
+   "cards": [
+    "c-anim-rose-hit-uy5r",
+    "c-anim-rose-dodge-v89r",
+    "c-anim-rose-victory-vqjc",
+    "c-anim-rose-give-w5ws",
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
@@ -25985,23 +26008,6 @@
    ],
    "cards": [
     "c-guidegen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
-   "title": "Animation note: Rose, Getting hit",
-   "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T09:57:43-08:00",
-   "tags": [
-    "anim-rose-victory-vqjc",
-    "anim-rose-give-w5ws"
-   ],
-   "cards": [
-    "c-anim-rose-hit-uy5r",
-    "c-anim-rose-dodge-v89r",
-    "c-anim-rose-victory-vqjc",
-    "c-anim-rose-give-w5ws",
-    "c-anim-rose-lava-xftr"
    ]
   },
   {
@@ -29359,8 +29365,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "229719f7b8694ed2f4adc081b1ec92b1fd910ede",
- "synced_at": "2026-11-21T18:16:27+00:00",
+ "synced": "10d7ddb9208304167f8a4d42bef5bf7dbb2e1e10",
+ "synced_at": "2026-11-21T18:18:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
