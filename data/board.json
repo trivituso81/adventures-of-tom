@@ -23334,7 +23334,7 @@
    "title": "Replace two lines in this Project's instructions",
    "theme": "Project Ops",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "setup",
    "fyi": true,
    "next": "In claude.ai, open the Little Elsewhere Project, then its instructions. 1) In section 2, replace the sentence 'Copies and working notes are in this Project under claude/ (build-plan.md, canon-addendum.md, status.md, next.md).' with: 'Working notes live in the repo under claude/ (index: claude/INDEX.md); the Project keeps only handoff-rules.md, next.md, canon-addendum.md and build-plan.md, mirrored in both places; never create a new Project doc.' 2) In the STOP-LOSS RULE, replace 'check the Project docs' with 'check the repo claude/ folder'. Save. Nothing else changes.",
@@ -23345,8 +23345,14 @@
     {
      "d": "2026-11-21",
      "t": "Added by projclean1 (card c-projclean)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this.",
+     "at": "2026-11-21T18:58:46.227Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-projdelete",
