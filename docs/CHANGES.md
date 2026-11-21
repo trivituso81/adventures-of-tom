@@ -1,3 +1,17 @@
+## fix-anim-grace-squeeze-qxim (2026-11-21): Grace's Soup-Dumpling Squeeze: the dumpling has a cute face and bursts into fluff on the hit
+
+Card c-fix-anim-grace-squeeze-qxim (from t-anim-grace-squeeze-qxim). Tom on the card: "Left a comment". The comment, his Battle Guide note (18:51): "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have."
+| | |
+|---|---|
+| Kept | Every word of `wan-grace-squeeze-v3.txt` outside the MOTION clauses his note names, the start picture, every Wan setting, the bake shape (strike, every 3rd picture, 1.5x, figure 90 rows) |
+| Changed | MOTION: the squishy gets "with a cute face of two black dot eyes, rosy cheeks and a tiny smile"; "until it squishes flat" became "until it bursts apart in a puff of white fluff"; "She lets it puff back up, tucks it back into her hoodie pocket and returns" became "She lowers her empty hands and returns" (a burst toy cannot go back in the pocket) |
+- Why not the Battle Guide's own answer: the reconcile Action's edit (branch guidegen) said the dumpling explodes and then puffs back up and is tucked away, which contradicts itself.
+- Video: wan-gen run 44938307197, $0.50. Source `art/raw/clips/wan-grace-squeeze-v4.mp4` (v3 video and prompt removed), baked pictures 18 to 144, the hit at picture 108 where the dumpling bursts (43 pictures, 2.9 s in the game, hit at 2.0 s).
+- Checks: same girl and outfit; standing height 1,035 px first, 1,037 last; feet on row 1,153 in every picture; nearest edge 14 px (the fluff); the fluff is gone before the last picture. Looked at in the Battle Guide player in portrait and landscape: HIT shows on the burst, Prompt v4.
+- Tests: `b3_test.py s8` FAILS []. `data/guide-anims.json` rebuilt.
+- No in-game pencil report was filed since 18:48.
+- Tom's card: t-anim-grace-squeeze-qxim.
+
 ## board-night (2026-11-21): board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)
 
 Tom (11:00): "I feel more could be done with automated tasks that you and i design together to get work done overnight." Tom (11:09): "i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it". Design: `claude/night-plan.md` (new; index rebuilt). Board change and that plan only; no page, tool or game file changed, and nothing is scheduled yet.

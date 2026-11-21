@@ -25811,10 +25811,11 @@
    "col": "wait",
    "ask": "animations",
    "fyi": true,
-   "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw).",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze (Prompt v4), and look at the dumpling: it should have a cute face (dot eyes, rosy cheeks, small smile) and burst into white fluff right when HIT shows, then Grace returns with empty hands. Tap All good or Something is wrong.",
    "steps": [
     "Open ADMIN > BATTLE GUIDE > Animations > Grace.",
-    "Play Soup-Dumpling Squeeze (about 3 seconds; the 1/2 button slows it down).",
+    "Play Soup-Dumpling Squeeze (about 3 seconds; the 1/2 button slows it down). The label under the player says Prompt v4.",
+    "Look at the dumpling's face, and that it bursts into fluff when HIT shows.",
     "Tap All good, or Something is wrong and say what you saw."
    ],
    "blocks": [],
@@ -25834,6 +25835,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Left a comment Sent to Claude as card c-fix-anim-grace-squeeze-qxim; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T18:48:49.425Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix shipped in fix-anim-grace-squeeze-qxim: new video (prompt v4) with a cute-faced dumpling that bursts into fluff on the hit, from your Battle Guide note \"The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have.\""
     }
    ],
    "waiting_on": "claude"
@@ -26365,7 +26370,7 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
-   "next": "You reported a problem on Watch Grace, Soup-Dumpling Squeeze. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Left a comment",
+   "next": "Shipped (fix-anim-grace-squeeze-qxim): video v4, cute-faced dumpling that bursts on the hit. Back to Tom on t-anim-grace-squeeze-qxim.",
    "blocks": [
     "t-anim-grace-squeeze-qxim"
    ],
@@ -26409,6 +26414,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as fix-anim-grace-squeeze-qxima: Grace's Soup-Dumpling Squeeze prompt v4: the dumpling has a cute face and bursts on the hit (video being made)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Your words on the card were \"Left a comment\"; the comment itself was the Battle Guide note of 18:51 (data/guide-reconcile.json). The automatic prompt edit for it contradicted itself (the dumpling burst, then puffed back up and went into her pocket), so Claude wrote prompt v4 by hand: cute face added, squishes flat changed to bursts into fluff, pocket ending changed to empty hands. One Wan video, $0.50. No pencil reports were filed."
     }
    ],
    "prompt": {
