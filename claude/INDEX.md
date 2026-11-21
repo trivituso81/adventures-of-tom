@@ -482,6 +482,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-nara42.md | next-addendum nara42 (2026-11-11 ~16:30, main b3c1a02) | 2026-11-11 |
 | next-addendum-near1.md | near1 (2026-11-12 22:22 to ~23:40 PT, main 487a58e): the party walks up to the person a scene is about; benche | 2026-11-12 |
 | next-addendum-nextchap1.md | nextchap1 (2026-11-12 ~18:30, main 3943bcb): no chapter says the next chapter is "still being built" | 2026-11-12 |
+| next-addendum-nightgreen.md | nightgreen: what is known (session of 2026-11-21, parts a to d shipped) | 2026-11-21 |
 | next-addendum-notingame.md | next addendum: Voice Library "Not in game yet" filter (2026-11-09, main at 3d38760, tag notingame1) | 2026-11-09 |
 | next-addendum-nowalk.md | No walking in battle (Tom 11-06 07:18, `noWalk1`, CHANGES 340, pushed) | 2026-11-21 |
 | next-addendum-npc-ff9.md | NPC hero prompts, Final Fantasy IX style (Tom 2026-11-09 00:01; main at d772b95) | 2026-11-09 |
@@ -505,6 +506,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-react2.md | react2 (2026-11-12, main 982c8d6): chapter 1 listener reaction pilot WIRED | 2026-11-12 |
 | next-addendum-reacttime1.md | reacttime1 (2026-11-13 22:30, main 139f3aa): reactions fire at the cue words; moods and reactions for the new  | 2026-11-13 |
 | next-addendum-roofnpc.md | roofnpc1, roofnpc2, roselets1, partybanner1 (2026-11-18, main f3f7870, 418cfe7, 37f066f, f54df57): Gemini's vi | 2026-11-18 |
+| next-addendum-rose-lava-xftr.md | Rose, The Floor Is Lava!: stop-loss on Wan, next is Kling 4.0 (card c-anim-rose-lava-xftr, 2026-11-21) | 2026-11-21 |
 | next-addendum-rose.md | next-addendum-rose.md (2026-11-06, `rose1`, CHANGES 318, main 42b5ffa or later) | 2026-11-06 |
 | next-addendum-row-cutouts.md | Row v4 cutout masks: check (2026-11-06 ~14:00 PT) | 2026-11-06 |
 | next-addendum-scriptconvo1.md | scriptconvo1 (2026-11-15, main 8f1ed28): Script Editor conversations and Workshop, all seven steps of claude/s | 2026-11-15 |
