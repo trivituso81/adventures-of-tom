@@ -21431,7 +21431,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Muffin pan missing from the island before the theft",
-   "next": "Ready to start. Screen report on a build from before or around the heist redo (c-heist1).",
+   "next": "Fix written: the pan shows on the island from entry. Waiting on the play check card t-qa-coh07play.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21461,13 +21461,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed on main (island drawn bare until the scene set the pan prop). Fixed in qa-coh07: scenePropsDraw draws the pan on map grands in chapter 1 until flag ch1-theft."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-coh07play"
   },
   {
    "id": "c-qa-txt03",
@@ -21966,6 +21971,25 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug01."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh07play",
+   "title": "Look at the muffin pan when you walk into Deedee's house",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's House. Check: the twelve-cup muffin pan is on the kitchen island the moment Tom walks in, before Deedee speaks, and the Mudling still takes it in the scene. Portrait and landscape. Report anything off with Something is wrong.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-coh07."
     }
    ]
   }
