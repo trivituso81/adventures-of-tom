@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-20",
+ "updated": "2026-11-21",
  "timezone": "America/Los_Angeles",
  "about": "Every charge is taken from a receipt in email. Dates and times are Pacific time. Amounts are US dollars.",
  "services": [
@@ -711,6 +711,15 @@
    "amount": 0.08,
    "what": "Art Library pictures made on WAN 2.7 by the art-gen Action ()",
    "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44937343154"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-21",
+   "amount": 0.5,
+   "what": "wan-gen Action: deedee-dodge",
+   "source": "wan-gen run",
+   "at": "2026-11-21T22:55:13Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44958736507"
   }
  ],
  "balances": [
