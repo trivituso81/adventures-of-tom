@@ -20052,6 +20052,37 @@
     }
    ],
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-reports-7",
+   "tag": "reports-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-184534-ict4. First note: Should go straight from tnb's text to the airport animation",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -22738,7 +22769,8 @@
    "r-20261120-144521-mv3p",
    "r-20261120-144624-06ax",
    "r-20261120-144644-77qd",
-   "r-20261120-144650-ae66"
+   "r-20261120-144650-ae66",
+   "r-20261120-184534-ict4"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -22772,8 +22804,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c46a0992eae7e0fa3ca1e9378159960b294263b6",
- "synced_at": "2026-11-21T02:36:47+00:00",
+ "synced": "0e0efab426e06917e75e4963c6747b06acc43561",
+ "synced_at": "2026-11-21T02:49:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
