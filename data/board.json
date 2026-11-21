@@ -21144,7 +21144,7 @@
    "id": "c-qa-bug12c",
    "tag": "qa-bug12c",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's cap lettering is mirrored on his shocked art",
    "next": "Ready to start. Screen report.",
@@ -21164,8 +21164,17 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-12 (c), after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T03:25:51.385Z"
     }
-   ]
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   }
   },
   {
    "id": "c-qa-coh01",
