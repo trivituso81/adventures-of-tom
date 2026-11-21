@@ -1,3 +1,9 @@
+## nightgreena (2026-11-21): the Art Library check no longer fails on gate and item pictures that carry a bake field
+
+Card c-nightgreen, test `art-library__validate` (`node tools/art-library/validate.js`). It failed with 41 problems, not only the clip-rose-strike one the old note named: 39 entries (14 story gates, 18 item sheets, 2 item redos, 3 solo items, one background) carry a `bake` field on purpose, and 2 solo item ids use an underscore because they are game item ids (`amy_chm1`, `g_bsash`). The game was right; the check was wrong.
+- `tools/art-library/validate.js`: the "no bake field" rule applies only to a new module (`--module`), where it guards the bulk load; the built json may carry `bake`. The id pattern allows an underscore.
+- `tools/night/tests.json`: `known_fail` removed from `art-library__validate`. It passes (1123 entries, OK). Nothing in the game changed.
+
 ## guideprompts1b (2026-11-21): the prompt writer keeps each character's own pronoun, including Nara's "it"
 
 Card c-guideprompts. The first full run wrote 258 of 267 prompts for $0.27; nine came back as "check this one": eight were Nara (the starter says "From its starting relaxed stance" and the model wrote him or her) and one was a TNB move.

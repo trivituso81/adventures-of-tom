@@ -26,12 +26,12 @@ function oldArt(r) {
   return false;
 }
 const OLD_TEXT = /\bstyle key\b|\bunderpainting\b|school[- ]yard painting/i;
-function check(entries, known, needGroup) {
+function check(entries, known, needGroup, moduleMode) {
   const bad = [], ids = new Set();
   const produced = new Set([...known, ...entries.map(e => e.id)]);
   for (const e of entries) {
     const w = m => bad.push(e.id + ': ' + m);
-    if (!/^[a-z0-9][a-z0-9-]*$/.test(e.id || '')) w('bad id');
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(e.id || '')) w('bad id');
     if (ids.has(e.id)) w('duplicate id'); ids.add(e.id);
     if (!TABS.includes(e.tab)) w('bad tab ' + e.tab);
     if (!e.title || e.title.length < 5) w('no title');
@@ -49,7 +49,8 @@ function check(entries, known, needGroup) {
         if (oldArt(r)) w('old art no longer in the game: ' + r);
       }
     }
-    if (e.bake) w('has a bake field (not allowed in the bulk load)');
+    // `bake` is only forbidden on a new module's entries (the bulk load); gate and item pictures in the built json carry one by design (nightgreena).
+    if (moduleMode && e.bake) w('has a bake field (not allowed in the bulk load)');
     // "Final Fantasy IX" or "Final Fantasy 9" is the one allowed use of the style-name ban, in any prompt (Tom 2026-11-08). Other Final Fantasy titles stay banned.
     const t = (e.prompt || '').replace(NEG, ' ').replace(/Final Fantasy (IX|9)\b/gi, ' ');
     // Clips are video prompts: the approved Boop wording (never reworded) says "2D sprite animation", so the pixel-art ban does not apply to them.
@@ -67,7 +68,7 @@ if (mi > 0) {
   entries = require(path.resolve(process.argv[mi + 1])).entries;
   if (fs.existsSync('data/art-prompts.json')) for (const e of JSON.parse(fs.readFileSync('data/art-prompts.json', 'utf8')).entries) known.add(e.id);
 } else entries = JSON.parse(fs.readFileSync('data/art-prompts.json', 'utf8')).entries;
-const bad = check(entries, known, mi <= 0);   // modules do not carry `group` (groups.js adds it in make-prompts.js), so only the built json is checked for it
+const bad = check(entries, known, mi <= 0, mi > 0);   // modules do not carry `group` (groups.js adds it in make-prompts.js), so only the built json is checked for it
 const per = {}; for (const e of entries) per[e.tab] = (per[e.tab] || 0) + 1;
 if (mi <= 0) { const gs = {}; for (const e of entries) (gs[e.tab] = gs[e.tab] || new Set()).add(e.group); console.log('groups per tab', JSON.stringify(Object.fromEntries(Object.entries(gs).map(([k, v]) => [k, v.size])))); }
 console.log(entries.length + ' entries', JSON.stringify(per));

@@ -1101,8 +1101,7 @@
    "id": "art-library__validate",
    "cmd": "node tools/art-library/validate.js",
    "group": "g6",
-   "minutes": 1,
-   "known_fail": "validate.js fails on clip-rose-strike (claude/next.md)"
+   "minutes": 1
   },
   {
    "id": "battle_guide_test",
