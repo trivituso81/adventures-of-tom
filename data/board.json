@@ -9629,7 +9629,7 @@
    "id": "c-fix-artgen2look",
    "tag": "fix-artgen2look",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the QA results on a real pictures card",
@@ -9666,6 +9666,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Back to Up next (ghost1 session): the prompt was copied but no conversation has pushed anything for it. Use Copy prompt again."
     }
    ],
    "prompt": {
@@ -14178,7 +14182,7 @@
    "title": "Run the Project clean-up inside the Project",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "ask": "setup",
    "next": "Open a new conversation inside the Little Elsewhere Project, paste the prompt from card c-projclean (Sonnet 5.5, effort medium) and approve push access if asked. It picks up where the last run stopped (about 490 docs left).",
    "blocks": [
@@ -14220,6 +14224,10 @@
     {
      "d": "2026-11-20",
      "t": "First run inside the Project moved 174 docs. The rest needs one or two more runs from the same prompt."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by the ghost1 session (Tom: \"fix it now\"): duplicate of c-projclean, which holds the work and the prompt (about 490 Project docs left)."
     }
    ],
    "chat": {
@@ -14237,7 +14245,8 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-20T18:02:04+00:00"
+   "started_at": "2026-11-20T18:02:04+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-searchthrough",
@@ -15720,7 +15729,7 @@
    "id": "c-reports-5",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-142626-w74f. First note: missing art for all item banners",
@@ -15816,6 +15825,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 1 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by the ghost1 session (Tom: \"fix it now\"): the one report left (missing item banner art) was handed to c-itembannerart1, which is running. Nothing else open here."
     }
    ],
    "blocks": [],
@@ -15823,7 +15836,7 @@
    "changed": "2026-11-20",
    "started_at": "2026-11-20T22:52:33+00:00",
    "after": "t-reports5-play",
-   "quiet": true
+   "done": "2026-11-20"
   },
   {
    "id": "t-listen1-play",
@@ -16301,7 +16314,7 @@
    "id": "c-takes-987c82",
    "tag": "takes-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 10,
    "title": "Merge 10 new voice takes",
@@ -16360,13 +16373,18 @@
     {
      "d": "2026-11-21",
      "t": "Merged 15 of the 41 unmerged kept takes from branch takes (tag takes-2026-11-20b). 26 skipped: stale words (Tommy/Tom, cut lines)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by the ghost1 session (Tom: \"fix it now\"): shipped as takes-2026-11-20b (15 takes merged). The 26 left out have stale words and are not wanted until their lines are rerecorded."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "started_at": "2026-11-20T23:58:54+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "t-keysecrets1-try",
