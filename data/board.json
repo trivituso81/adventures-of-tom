@@ -16894,7 +16894,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16978,10 +16978,13 @@
     {
      "d": "2026-11-21",
      "t": "Fix fix-keysecrets2-try-5 shipped: the job had made and approved the video; the page left the button on ASKED, WAITING. It now clears it."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
     }
    ],
-   "after": null,
-   "waiting_on": "claude"
+   "after": null
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17645,7 +17648,7 @@
    "id": "c-fix-keysecrets2-try-5",
    "tag": "fix-keysecrets2-try-5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17689,6 +17692,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-5: the button no longer stays on ASKED, WAITING after the video is made and approved"
     }
    ],
    "prompt": {
@@ -17702,10 +17709,23 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-21T00:16:54+00:00"
+   "started_at": "2026-11-21T00:16:54+00:00",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDt51R5Z1SbJNU4qdq",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-21T00:22:35Z",
+   "last": "2026-11-21T00:22:35Z",
+   "tags": [
+    "fix-keysecrets2-try-5"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try-5"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFzARn9vLzhxvD8GmY",
    "title": "Merge 2 new voice takes",
@@ -20076,8 +20096,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "66963a25c04483710ebddc43b7e395023e0fa408",
- "synced_at": "2026-11-21T00:21:46+00:00",
+ "synced": "e60ea4d9e401577f3c7c0f19fa797ce5779a0fed",
+ "synced_at": "2026-11-21T00:23:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
