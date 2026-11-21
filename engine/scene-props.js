@@ -11,6 +11,8 @@ const SPK={};   // kind -> draw(P,time)
 function scenePropSet(id,kind,o) { const P=SCENE_PROPS[id]||(SCENE_PROPS[id]={id,kind:kind||'strip',show:false,u:1}); if(kind) P.kind=kind; Object.assign(P,o||{}); return P; }
 function scenePropsClear() { for(const k of Object.keys(SCENE_PROPS)) delete SCENE_PROPS[k]; }
 function scenePropsDraw(map,time) {
+  // qa-coh07: the twelve-cup pan sits on Deedee's island from the moment Tom walks in, until the scene's own pan takes over (flag ch1-theft).
+  if(map.id==='grands'&&typeof storyMatch==='function'&&storyMatch({chapter:1,notFlag:'ch1-theft'})&&!SCENE_PROPS.muffinpan&&SPK.muffinpan) { ctx.save(); SPK.muffinpan({x:4.3,y:7.25,s:1.3},time); ctx.restore(); }
   for(const P of Object.values(SCENE_PROPS)) { if(!P.show||P.map!==map.id) continue; const d=SPK[P.kind]; if(d) { ctx.save(); d(P,time); ctx.restore(); } }
 }
 const spTile=(a)=>{ const p=position(a); return {x:p.x,y:p.y}; };
