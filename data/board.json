@@ -29637,7 +29637,7 @@
     "ellie|Deedee keeps offering me apple muffins. I keep saying yes. That's called manners."
    ],
    "blocks": [],
-   "next": "Tap Generate all voices on this card (it shows 10 lines and about 578 ElevenLabs credits; confirm with a second tap). Wait about 20 minutes; this card then says the voices are in the game. Open ADMIN > VOICE LIBRARY with the button below, play the new lines, then tap All good or Something is wrong. The 10 lines: Tom at the kitchen door (Hi, Mom!), Deedee and Boppy in the muffin theft, Grace (3 wrappers), Rose (One more ride), Tom (head back to LA), Sal (Los Angeles? You got it), Deedee twice at her house, Aunt Ellie once.",
+   "next": "The voice job did not finish (The takes were made but could not be merged: push refused: eads/main': is at 07c8c9af0c98f5be805ba3284f1a1719c9917086 but expected aa0baa73f1eccdf86bb64dfa2c0bccb87115f07d)\nerror: failed to push some refs to 'https://github.com/trivituso81/adventures-of-tom'\n). Nothing needed from you: tap Generate all again to retry, or leave it.",
    "links": [
     {
      "to": "voice",
@@ -29663,6 +29663,11 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 10 voices (about 578 credits).",
      "at": "2026-11-21T21:26:27.670Z"
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T21:35:47Z",
+     "t": "Voice job failed: 0 made, 0 need a human, about 0 credits."
     }
    ],
    "vgen": {
@@ -29672,9 +29677,23 @@
     "chars": 1313,
     "est": 578,
     "run": {
-     "state": "running",
-     "at": "2026-11-21T21:28:17Z",
-     "n": 10
+     "state": "failed",
+     "at": "2026-11-21T21:35:45Z",
+     "n": 10,
+     "made": [],
+     "failed": [],
+     "needs_human": [],
+     "credits": 0,
+     "chars": 1313,
+     "build": null,
+     "note": "The takes were made but could not be merged: push refused: eads/main': is at 07c8c9af0c98f5be805ba3284f1a1719c9917086 but expected aa0baa73f1eccdf86bb64dfa2c0bccb87115f07d)\nerror: failed to push some refs to 'https://github.com/trivituso81/adventures-of-tom'\n",
+     "unused": [
+      "1. kinds never called: {}",
+      "2. attack pool only reachable as a fallback (every move has its own line): [] (check scenes and Move Lab by hand)",
+      "3. baked battle clips with no live line: 0",
+      "4. dialogue clips not in harvest or source: 0",
+      "5. lines for replaced moves (old animation code still exists): {}"
+     ]
     }
    }
   },
