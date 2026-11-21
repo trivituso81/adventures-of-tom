@@ -22510,6 +22510,29 @@
     "opening": "\"Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14\""
    },
    "done": "2026-11-20"
+  },
+  {
+   "id": "b-projclean2a",
+   "tag": "projclean2a",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Game Shell",
+   "title": "Project docs move paused at a safe point: progress and next steps written on card c-projclean",
+   "next": "Done: Project docs move paused at a safe point: progress and next steps written on card c-projclean",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as projclean2a. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -22988,13 +23011,15 @@
    "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T22:29:46-08:00",
+   "last": "2026-11-20T22:34:16-08:00",
    "tags": [
     "projclean1a",
-    "projclean1b"
+    "projclean1b",
+    "projclean2a"
    ],
    "cards": [
-    "c-projclean"
+    "c-projclean",
+    "b-projclean2a"
    ]
   },
   {
@@ -25704,8 +25729,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "01ea4e0a4534a41430cb33928cc8e155d078492b",
- "synced_at": "2026-11-21T06:30:27+00:00",
+ "synced": "86c7221fbd410b57382cb69204b47b1dbe9fdac2",
+ "synced_at": "2026-11-21T06:34:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
