@@ -29597,7 +29597,12 @@
      "t": "Added by guardwin1: your phone check of the guard-then-win fix; blocks nothing."
     }
    ],
-   "first": "After the publish of build guardwin1 (a minute or two after the push)."
+   "first": "After the publish of build guardwin1 (a minute or two after the push).",
+   "machine": {
+    "at": "2026-11-22T00:00:00Z",
+    "verdict": "yours",
+    "why": "it is whether the victory celebration looks right after a guard (a pose and animation), which a test browser cannot judge"
+   }
   },
   {
    "id": "c-night-qa",
@@ -29656,6 +29661,11 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-22T00:00:00Z",
+     "t": "Night run: t-guardwinplay sorted YOURS (celebration pose vs guard pose is a look). t-dash3-try and t-dash4-try wait on unshipped cards, not checked."
     }
    ],
    "prompt": {
