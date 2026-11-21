@@ -20892,7 +20892,7 @@
    "id": "c-qa-bug02",
    "tag": "qa-bug02",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Item banner: tiny icon, empty circle, prompt on the border",
    "next": "Shipped as qa-bug02: item picture fills the ring, prompt on a dark pill, speech pips hidden during a banner. Waiting on Tom play card t-qa-bug02-play.",
@@ -20925,6 +20925,10 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed on main (picture small in ring, prompt hard to read); fixed layout in qa-bug02."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug02: item banners: the picture fills its circle, the prompt sits on a dark pill below the card, speech pips hide while a banner is up"
     }
    ],
    "started_at": "2026-11-21T03:23:33+00:00",
@@ -20932,7 +20936,8 @@
     "url": "https://claude.ai/code/cse_01RXeukGbQzVNxbtCiq6WdE8",
     "opening": "started by START"
    },
-   "after": "t-qa-bug02-play"
+   "after": "t-qa-bug02-play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-bug03",
@@ -22039,6 +22044,28 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGbQzVNxbtCiq6WdE8",
+   "title": "Item banner: tiny icon, empty circle, prompt on the border",
+   "first": "2026-11-21T03:32:24Z",
+   "last": "2026-11-21T03:32:24Z",
+   "tags": [
+    "qa-bug02"
+   ],
+   "cards": [
+    "c-qa-bug02"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
+   "title": "Signs cut off at the top and under the skip buttons",
+   "first": "2026-11-21T03:27:49Z",
+   "last": "2026-11-21T03:31:37Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug11"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
    "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
    "first": "2026-11-21T03:28:15Z",
@@ -22114,16 +22141,6 @@
    "tags": [],
    "cards": [
     "c-qa-txt03"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
-   "title": "Signs cut off at the top and under the skip buttons",
-   "first": "2026-11-21T03:27:49Z",
-   "last": "2026-11-21T03:27:49Z",
-   "tags": [],
-   "cards": [
-    "c-qa-bug11"
    ]
   },
   {
@@ -25083,8 +25100,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7480be495acfbe2ed7ca65145b1a7efdb69383e3",
- "synced_at": "2026-11-21T03:31:27+00:00",
+ "synced": "5e1b5005354e738fda8e70a131173775ca9496e4",
+ "synced_at": "2026-11-21T03:32:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
