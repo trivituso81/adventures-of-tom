@@ -30,6 +30,6 @@ Added 2026-11-20 by board-gemcards (written in both places): ch1-gemini-tracker.
 
 Added 2026-11-20 by idea-implementlisteni (written in both places): next-addendum-listen1.md (install steps for card c-listen1-install).
 
-Added 2026-11-20 by board-lessons1 (written in both places): tom-line-edits.md filled with Tom's chapter 1 edits; story-line-rules.md gains rules 6 to 13 and the red pen pass (card c-ch2lessons names both).
+Added 2026-11-20 by board-lessons1 (written in both places): tom-line-edits.md filled with Tom's chapter 1 edits; story-line-rules.md gains rules 6 to 13 and the red pen pass (card c-ch2lessons names both). Also new: voice-tag-style.md (Tom's tagging habits from 52 retagged chapter 1 lines).
 
 Added 2026-11-20 by wanplan (written in both places): video-battle-plan.md (battle animation by video: why WAN was dropped, API routes, the Grace guard proof plan); canon-addendum.md (copied from the Project with the new section Battle animation, because CLAUDE.md now names it); clip-reset-plan.md marked superseded.

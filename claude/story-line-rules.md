@@ -19,7 +19,7 @@ The evidence behind every rule is claude/tom-line-edits.md (each of Tom's edits,
 10. **No setup lines for later chapters.** A line must earn its place in this scene. If its only job is to plant something for a later chapter (fingerprints, "Why pencil?"), it goes. If a later chapter needs it, that chapter sets it up in its own scene.
 11. **Kids are real kids.** Grace and Rose say what a 9 and a 6 year old say: scared, bossy, gross, excited, simple words. Poop is funny. They do not signpost the mystery or speak in themes ("Because I don't know what any of it means yet"). Monsters and bosses speak in concrete words, not abstractions.
 12. **Use the family's real word for the real thing** (muffin wrappers, not papers).
-13. **Voice tags carry the voice.** Sal always has a heavy Long Island accent tag. Never capitalize a name for emphasis (TOM reads as "tomb"); use a tag. Every Tom line gets a tone tag; TNB stays mellow.
+13. **Voice tags carry the voice; the full guide is claude/voice-tag-style.md (Tom's 52 retagged chapter 1 lines).** Sal always has a heavy Long Island accent tag. Never capitalize a name for emphasis (TOM reads as "tomb"); use a tag. Every Tom line gets a tone tag; TNB stays mellow.
 
 ## The red pen pass (added 2026-11-20). Run it on every chapter before Tom sees or plays it.
 Tom's day on chapter 1 was almost all cutting. So before any chapter reaches him, a separate reviewer (a fresh agent that did not write the lines) reads claude/tom-line-edits.md and then every line of the chapter, and marks each one KEEP, CUT or REWRITE with the rule number. Then:
