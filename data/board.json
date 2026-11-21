@@ -20698,7 +20698,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDRBkPQu5XdZQN2bXK",
+    "url": "https://claude.ai/code/session_01RXeukDRBkPQu5XdZQN2bXK",
     "opening": "not started"
    },
    "next": "Builds a Generate all N voices button on your voice cards, like Generate all N pictures. One tap makes a take for every line on the card that has no clip, and a GitHub job merges the takes into the game and pushes them, with no session in between. Then the card asks you to listen. The first card it makes is chapter 2's 73 lines, and that card waits until you have played chapter 2, so no credits go on lines you might still cut.",
@@ -20715,6 +20715,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -20799,7 +20803,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -20817,6 +20821,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T03:26:02.292Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -20868,11 +20876,15 @@
      "d": "2026-11-21",
      "t": "Session started on this card.",
      "at": "2026-11-21T03:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:30:00.000Z",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD8oFaGoJktxUZTkgW",
+    "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
     "opening": "started by START"
    }
   },
@@ -21046,7 +21058,7 @@
    "id": "c-qa-bug08",
    "tag": "qa-bug08",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Map buttons show during cutscenes and the chapter end card",
    "next": "Built as qa-bug08: one CSS rule hides HOLD + SLIDE and the ! Menu Save buttons during every scene and the chapter cards.",
@@ -21079,6 +21091,10 @@
     {
      "d": "2026-11-21",
      "t": "Built qa-bug08: html.cutscene now also hides #hud-btns and the HOLD + SLIDE caption, so they cannot flash between lines or be tapped mid-scene."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug08: no HOLD + SLIDE, ! Menu or Save over a cutscene or the CHAPTER COMPLETE card"
     }
    ],
    "started_at": "2026-11-21T03:24:16+00:00",
@@ -21086,7 +21102,8 @@
     "url": "https://claude.ai/code/cse_01RXeukCmEibxhgdS14awPzw",
     "opening": "started by START"
    },
-   "after": "t-qa-bug08play"
+   "after": "t-qa-bug08play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-bug11",
@@ -21121,11 +21138,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEwnnCwJ83eXvyeWJD",
+    "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
     "opening": "started by START"
    }
   },
@@ -21398,10 +21419,14 @@
     {
      "d": "2026-11-20",
      "t": "Session started (Opus 5.5): checking COH-05 against current main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh05\""
    }
   },
@@ -21857,6 +21882,58 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
+   "title": "Signs cut off at the top and under the skip buttons",
+   "first": "2026-11-21T03:27:49Z",
+   "last": "2026-11-21T03:27:49Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug11"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCmEibxhgdS14awPzw",
+   "title": "Map buttons show during cutscenes and the chapter end card",
+   "first": "2026-11-21T03:27:27Z",
+   "last": "2026-11-21T03:27:27Z",
+   "tags": [
+    "qa-bug08"
+   ],
+   "cards": [
+    "c-qa-bug08"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
+   "title": "Quest log says Go to it's Sunday after the trip home",
+   "first": "2026-11-21T03:27:19Z",
+   "last": "2026-11-21T03:27:19Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug01"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFfYFwHSAhwB1uc8J7",
+   "title": "Stray bar pictures on Rivituso Row in the departure scene",
+   "first": "2026-11-21T03:25:23Z",
+   "last": "2026-11-21T03:27:16Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDRBkPQu5XdZQN2bXK",
+   "title": "Make voices from the board and save them to the game",
+   "first": "2026-11-21T03:27:05Z",
+   "last": "2026-11-21T03:27:05Z",
+   "tags": [],
+   "cards": [
+    "c-voiceboard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
    "title": "Inspect prompt says boppy's in lowercase",
    "first": "2026-11-21T03:26:33Z",
@@ -21864,16 +21941,6 @@
    "tags": [],
    "cards": [
     "c-qa-txt04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFfYFwHSAhwB1uc8J7",
-   "title": "Stray bar pictures on Rivituso Row in the departure scene",
-   "first": "2026-11-21T03:25:23Z",
-   "last": "2026-11-21T03:25:23Z",
-   "tags": [],
-   "cards": [
-    "c-qa-bug04"
    ]
   },
   {
@@ -22250,6 +22317,26 @@
    ],
    "cards": [
     "c-builds3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "first": "2026-11-20T19:27:52-08:00",
+   "last": "2026-11-20T19:27:52-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-itembannerart-pics-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
+   "title": "Grump Hollow fights show a town pond with a steeple",
+   "first": "2026-11-20T19:27:12-08:00",
+   "last": "2026-11-20T19:27:12-08:00",
+   "tags": [],
+   "cards": [
+    "c-qa-coh05"
    ]
   },
   {
@@ -24741,8 +24828,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "024c24a48cdb28f0d184674714fd6168bd33e740",
- "synced_at": "2026-11-21T03:26:40+00:00",
+ "synced": "66e54226be6a2365bea745fda1862dfc9d435992",
+ "synced_at": "2026-11-21T03:28:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
