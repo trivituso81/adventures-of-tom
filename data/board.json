@@ -17752,6 +17752,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
+   "title": "Build chapter 2 to the locked script",
+   "first": "2026-11-20T17:45:06Z",
+   "last": "2026-11-21T00:23:43Z",
+   "tags": [
+    "ch2build",
+    "board-ch3card"
+   ],
+   "cards": [
+    "c-ch2build"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDt51R5Z1SbJNU4qdq",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-21T00:22:35Z",
@@ -18049,18 +18062,6 @@
    ],
    "cards": [
     "c-fix-battlelabpagetry-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
-   "title": "Build chapter 2 to the locked script",
-   "first": "2026-11-20T17:45:06Z",
-   "last": "2026-11-20T18:05:27Z",
-   "tags": [
-    "ch2build"
-   ],
-   "cards": [
-    "c-ch2build"
    ]
   },
   {
@@ -20133,8 +20134,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "e60ea4d9e401577f3c7c0f19fa797ce5779a0fed",
- "synced_at": "2026-11-21T00:23:18+00:00",
+ "synced": "2559b45b2a5d5771f0d7f9b29a153130e0d772d4",
+ "synced_at": "2026-11-21T00:24:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
