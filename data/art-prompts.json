@@ -31219,8 +31219,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-item-solo-amy_chm1-v1.png",
+     "date": "2026-11-21",
+     "from": "v3",
+     "at": 1795286375385,
+     "srv": "prop-item-solo-amy_chm1@20261121T084427",
+     "svc": "xai"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-solo-amy_chm1",
    "tab": "Props",
