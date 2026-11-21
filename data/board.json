@@ -19199,6 +19199,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1g: three leftover script tags of the removed monster clips taken out of index.html"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1h: Rose and Deedee fight in Wan videos too (idle with breathing, guard, hit, run), The Floor Is Lava!, the Glasses Scrub and Zone One Blockade are videos, Grace's knock-out sits on the ground"
     }
    ],
    "prompt": {
@@ -22806,6 +22810,25 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T20:17:40-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c",
+    "wanch1d",
+    "wanch1e",
+    "wanch1f",
+    "wanch1g",
+    "wanch1h"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
    "title": "Boppy's cap lettering is mirrored on his shocked art",
    "first": "2026-11-20T19:28:44-08:00",
@@ -22914,24 +22937,6 @@
    "tags": [],
    "cards": [
     "c-reports-5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T19:38:40-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b",
-    "wanch1c",
-    "wanch1d",
-    "wanch1e",
-    "wanch1f",
-    "wanch1g"
-   ],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -25399,8 +25404,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "05d812ccdd57e06d1d6c0a03b5494e5ea3d9610a",
- "synced_at": "2026-11-21T04:13:17+00:00",
+ "synced": "d248c23e5586fa1aefc88fec5a4355f0697f19be",
+ "synced_at": "2026-11-21T04:18:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
