@@ -22886,7 +22886,7 @@
    "title": "Approve Boppy's unimpressed pose in his Paso Robles cap",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). When the job finishes, open ADMIN > ART LIBRARY > Characters > Report fixes > Boppy unimpressed WITH his mustache (the button below). It should show Boppy alone on magenta, leaning on one hip with one hand on the hip, eyelids half closed, mouth turned down, fishing rod over his shoulder, thick white mustache, and his cap reading Paso Robles (not Big Fish). APPROVE it if so; REJECT with a note saying what is wrong. Approving unblocks Claude card c-boppy-bigfish, which puts the new pose into his story scenes and his unimpressed dialogue face.",
    "blocks": [
@@ -22907,13 +22907,19 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by boppy-bigfisha (card c-boppy-bigfish): the entry's first reference was the old hero painting in the Big Fish cap; it now uses boppy-hero-v2, which wears Paso Robles."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T08:43:08.719Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-boppy-bigfish",
