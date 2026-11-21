@@ -20234,13 +20234,13 @@
    "title": "Play the Grump Hollow wrapper trail",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -20271,13 +20271,18 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Play the Grump Hollow wrapper trail, Fix: Play the Grump Hollow wrapper trail is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's chapter 1 test: FAIL. Leg 1: 4 wrappers, from \"THE SQUARE SHOPS\" gate to top-left bench before Bog Toad; Leg 2: 4 wrappers (Leg 1 cleared), from below top-left bench to middle clearing; Leg 3: blocked pre-boss twice because walking into the middle clearing toward Log Lump triggered Stop 9's pond scene early, and beating Log Lump post-boss gave no Grace line or new wrappers (also no \"Goal: ...\" popups appeared on any leg; Pond Grump changed nothing); Grace's words: \"3 wrappers, let's follow them!\" Sent to Claude as card c-fix-hollowtrail-play-3; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "t-madelot-play",
@@ -20776,12 +20781,12 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
    "blocks": [],
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "created": "2026-11-21",
    "history": [
     {
@@ -20800,8 +20805,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Check chapter 1 ends in the flight is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's chapter 1 test: FAIL. Sal said \"Tom! Cab seven is at your service. Where to?\" (TO THE AIRPORT / JUST VISITING) and \"Los Angeles? You got it.\", faded to \"A PHONE ON THE SEAT\" (CONTINUE) with no TNB text shown, showed \"CHAPTER 1 COMPLETE\" / \"THE SOUP DUMPLING PROTOCOL\", then returned inside Long Island Taxi Co. for full goodbyes from Sal, Grace (\"Pie!\"), Rose (\"Bye Tata! Save me the... never mind, pie!\"), Tom, and Deedee (\"Take a sweater, honey. I packed one. It's in the bag.\") before LEAVING LONG ISLAND takeoff, LONG ISLAND > LOS ANGELES map, and LOS ANGELES landing (no cabin seat stage). Sent to Claude as card c-fix-ch1flight-2; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-voiceboard",
@@ -21456,7 +21466,7 @@
    "title": "Look at Boppy's cap when he turns left",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's kitchen (the muffin theft). When Boppy is shocked or points while facing left, his cap should say Paso Robles the right way round, not backwards. Report anything off with the REPORT tab.",
@@ -21467,8 +21477,13 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug12c (build qa-bug12c)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Whenever Boppy faced left, looked shocked, or pointed during the kitchen theft scene, his cap read \"Paso Robles\" left-to-right (not mirrored) on both his map sprite and dialogue portrait, with crisp talk-start frames. Screenshots: c3_boppy_left, c3_boppy_shocked, c3_boppy_pointing."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-boppy-bigfish",
@@ -22502,7 +22517,7 @@
    "title": "Check the buttons are gone during cutscenes",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then play the Grump Hollow after-boss scene (CHAPTERS > Chapter 1). Check: between lines no HOLD + SLIDE flashes, the top left ! Menu and Save buttons are not on screen during the scene, and they are back when it ends. Report anything off with the REPORT tab.",
@@ -22513,15 +22528,20 @@
     {
      "d": "2026-11-21",
      "t": "Made by qa-bug08 for Tom to look at."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Throughout the entire after-boss scene (including between dialogue lines after Rose's \"BOO!\"), no \"HOLD + SLIDE\" label flashed and top-left !, Menu, and Save stayed off screen, returning immediately when free movement resumed. Screenshots: c4_mid1_coin_float, c4_mid2_between_lines, c4_mid3_coin_overlay, c4_post_scene_hud."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-qa-coh06play",
    "title": "Check the orange cube after the boss",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then play Grump Hollow past the Big One (CHAPTERS > Chapter 1). After the after-boss scene, walk back to the orange cube by the pond and press A. You should see only Tom saying: \"Still stuck. The fish got the pan out, but the cube won't budge.\" Report anything off with the REPORT tab.",
@@ -22532,15 +22552,20 @@
     {
      "d": "2026-11-21",
      "t": "Made by qa-coh06 for Tom to look at."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Facing the orange cube after the boss (A · Inspect Orange block) and pressing A showed only one box spoken by TOM: \"Still stuck. The fish got the pan out, but the cube won't budge.\" with no other speaker or second box. Screenshots: c5_orange_cube_tom."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-bug12play",
    "title": "Check the Menu button near the Cookie counter",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, go into Deedee and Boppy's House. Tap the Cookie counter so Tom starts walking to it, and tap the Menu icon (top left) before he arrives. Expected: the Menu opens and the counter is not inspected. Report anything off with the REPORT tab.",
@@ -22551,8 +22576,13 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug12."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Tapping the Cookie counter from ~4 steps away and clicking Menu before Tom arrived opened Menu, stopped Tom's walk immediately, and opened no \"A cookie jar labeled DO NOT...\" box before or after closing; Save behaved identically. Screenshots: c6_menu_walk_cancel, c6_save_walk_cancel."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-qa-bug02-play",
@@ -22584,7 +22614,7 @@
    "title": "Check the Inspect prompt at Boppy's pond",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, go to Grump Hollow and walk up to Boppy's fishing spot by the pond. Check: the prompt at the bottom reads A · Inspect Boppy's fishing spot with a capital B (it used to say boppy's). Names like The Hush Library still start with a lowercase the: A · Inspect the ... Report anything off with the REPORT tab.",
@@ -22595,15 +22625,20 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-txt04."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Boppy's spot prompt read \"A · Inspect Boppy's fishing spot\" (capital B) and pressing A showed \"A folding chair with a thermos on the seat, a bucket, one bass. Boppy will tell you it was two feet long. It was not.\"; \"the\" prompts stayed lowercase (\"A · Inspect the oven\" in Crumb Bakery; \"A · Inspect the other bench\" on Rivituso Row). Screenshots: c7_boppys_spot_prompt, c7_boppys_spot_text, c7_the_oven_prompt, c7_the_other_bench_prompt."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-qa-bug01play",
    "title": "Check the quest log after the trip home",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to the return home scene (Deedee's house, it is Sunday). Tap the ! button. You should see \"It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\" (no \"Go to it's\"). If it still reads wrong, press Something is wrong.",
@@ -22614,15 +22649,20 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug01."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: After the Stop 11 home scene (\"Alright, time for me to head back to LA. Let's head to Sal's!\"), ! read \"It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\" (did not start with \"Go to\"). Screenshots: c8_stop11_questlog."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-qa-coh07play",
    "title": "Look at the muffin pan when you walk into Deedee's house",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's House. Check: the twelve-cup muffin pan is on the kitchen island the moment Tom walks in, before Deedee speaks, and the Mudling still takes it in the scene. Portrait and landscape. Report anything off with Something is wrong.",
@@ -22633,8 +22673,13 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-coh07."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: portrait: 12-cup (3x4) muffin pan with 12 muffins was on the kitchen island on frame 1 before dialogue, lifted over the Big Mudling's head leaving two crumbs, with no pan/muffins left afterward; landscape: same 12-cup pan on frame 1, clean lift leaving crumbs and empty island afterward, with Deedee's head and the island fully visible without edge clipping. Screenshots: c9_portrait_frame1, c9_portrait_lift, c9_portrait_after, c9_landscape_frame1, c9_landscape_after."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-ch2voices",
@@ -22676,25 +22721,30 @@
    "title": "Look at Boppy's folding chair at the pond",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "first": "Build qa-coh03 shows on the title screen.",
    "next": "Press RELOAD, then CHAPTERS > Chapter 1 and play to Boppy's fishing spot at the east end of Grump Hollow (the muffin wrappers lead there). Check: where the wooden bench was there is now a grey metal folding chair with Boppy's thermos on the seat, his bucket on the ground to its left and his fishing rod leaning on the chair back; no bench is left and the pond edge behind looks like water and mud. After the Big One fight it still asks about the man in the folding chair. All good if it looks right; Something is wrong with what you saw (say if the chair looks pasted on, too dark or too small).",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by c-qa-coh03 when qa-coh03 shipped."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Grey metal folding chair stood cleanly with no wooden bench or pond-edge smear, thermos on seat, bucket on ground to the left, fishing rod leaning on chair back, natural scale and shading next to characters, and THE BIG ONE said \"The man in the folding chair. Will he be back?\" Screenshots: c10_pre_boss_spot, c10_post_boss_spot, c10_bigone_chair_line."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-itemdefplay",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -22702,7 +22752,7 @@
    "next": "Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "started by c-itemdef1"
@@ -22711,8 +22761,13 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-itemdef1: your play check of the new item banners. Replaces t-qa-bug02-play."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's chapter 1 test: FAIL. items read: Mud Pie, Lily Pad Hat (landscape), Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin (KEY ITEM), Bark Slab (Cookie unreachable because Deedee stayed in the active party and never stood in her kitchen as a townsperson); Dragonfly Coin auto-dismissed mid-fade-in before full opacity, and Pond Hoodie (\"Wear it: +18 HP, +4 GRIT, +1 COOL.\") and Bark Slab (\"Wear it: +5 POW.\") cite obsolete Battle 2 stats. Sent to Claude as card c-fix-itemdefplay; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-wanch1-watch",
@@ -22750,6 +22805,10 @@
      "d": "2026-11-21",
      "t": "Tom: all good.",
      "at": "2026-11-21T18:48:13.052Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini did not run A1 (NOT RUN: clicking ADMIN on the live game was blocked by its browser safety check). Nothing to apply; Tom had already marked this card all good."
     }
    ],
    "done": "2026-11-21"
@@ -22887,7 +22946,7 @@
    "title": "Look for people on roofs in the Square and the Row",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab.",
@@ -22898,8 +22957,13 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug03."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's chapter 1 test: FAIL. In The Square (Stop 2), two townspeople stood directly on top of the SNAIL MAIL sign (nobody walked onto KETTLE COTTAGE's roof); on Rivituso Row (Stop 3), the brown-haired NPC walked onto the right edge of Aunt Ellie's House. Sent to Claude as card c-fix-qa-bug03-look; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-b3s14b",
@@ -23486,6 +23550,10 @@
     {
      "d": "2026-11-21",
      "t": "Stage 17 was started and shipped before this card was answered (Tom asked for it directly). This card now blocks stage 18 (c-b3s18) with t-milestonec."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini played chapter 1 on build voicepurge221 (claude/ch1-gemini-report.md). Ratings: Q1 5/5 · Q2 4/5 · Q3 4/5 · Q4 5/5 (6 rounds, 0 KOs) · Q5 5/5 · Q6 4/5 · Q7 4/5. Fights: #1 3 Mudlings (Mudling A, Mudling B, Mudling C - 60 HP each), Grump Hollow (gate), 3 rounds, 0 KOs, ~3.0 min | #2 Bog Toad (106 HP), Skeeter Swarm (78 HP, Jitterflight), Grump Hollow (top left), 3 rounds, 0 KOs, ~2.0 min | #3 Pond Grump, Mudling, Grump Hollow (near middle clearing), 3 rounds, 0 KOs, ~2.0 min | #4 The Big One (610 HP, 6 Composure pips, Muffin-Tin Crown), Grump Hollow (east pond), 6 rounds, 0 KOs, ~4.0 min | #5 Log Lump (166 HP, 4 Composure pips, Mossy Brace), Skeeter Swarm (78 HP), Grump Hollow (middle clearing, post-boss), 3 rounds, 0 KOs, ~2.0 min. These are an AI tester's mechanics notes, not your judgment: this card stays open for you."
     }
    ]
   },
@@ -23549,6 +23617,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as b3s17: chapter 5's story fights now run on the new battle (BY CHAPTER); stage 17 is complete: chapters 2 to 5 play on Battle 3"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's Milestone B notes (build voicepurge221, full text in claude/ch1-gemini-report.md section 6.3): Q1 5/5 · Q2 4/5 · Q3 4/5 · Q4 5/5 (6 rounds, 0 KOs) · Q5 5/5 · Q6 4/5 · Q7 4/5. The Big One took exactly 6 rounds with 0 knock-outs. Fights: #1 3 Mudlings (Mudling A, Mudling B, Mudling C - 60 HP each), Grump Hollow (gate), 3 rounds, 0 KOs, ~3.0 min | #2 Bog Toad (106 HP), Skeeter Swarm (78 HP, Jitterflight), Grump Hollow (top left), 3 rounds, 0 KOs, ~2.0 min | #3 Pond Grump, Mudling, Grump Hollow (near middle clearing), 3 rounds, 0 KOs, ~2.0 min | #4 The Big One (610 HP, 6 Composure pips, Muffin-Tin Crown), Grump Hollow (east pond), 6 rounds, 0 KOs, ~4.0 min | #5 Log Lump (166 HP, 4 Composure pips, Mossy Brace), Skeeter Swarm (78 HP), Grump Hollow (middle clearing, post-boss), 3 rounds, 0 KOs, ~2.0 min. Things to act on: Q2, the opening gate fight at 1x speed felt slightly slow between multi-enemy turns (2x was right). Q3, in portrait the TURN label at the top edge looked cut in half (X-04; not reproduced on main at 430x860 in tools/b3_test.py s4, so it may depend on the phone shape). Q6, the BAG shows Not YET with no note on when it unlocks. Q7/X-07, equipment cards still show old Battle 2 stat names (GRIT, COOL, POW), now a fix card from the C11 FAIL. Tom's own Milestone B judgment is still open on t-milestoneb."
     }
    ],
    "chat": {
@@ -23692,7 +23764,7 @@
    "title": "Run Gemini's chapter 1 test and save its report",
    "theme": "Project Ops",
    "lane": "tom",
-   "col": "prog",
+   "col": "done",
    "ask": "setup",
    "next": "1. Download the brief: https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/claude/ch1-gemini-verify.md (the same file Claude sent you in chat, ch1-gemini-verify.md). 2. Give it to Gemini with this line: Follow this brief exactly and return the report in section 6 format. 3. Save Gemini's report as a file. 4. On card c-gem1v (Apply Gemini's chapter 1 report) tap Copy prompt, paste it into a new Claude conversation and attach the report file. That card closes the 13 chapter 1 cards Gemini passes and writes fix cards for the ones it fails.",
    "blocks": [
@@ -23712,8 +23784,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom attached Gemini's report; c-gem1v applied it (claude/ch1-gemini-report.md)."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-gem1v",
@@ -23722,7 +23799,7 @@
    "theme": "Project Ops",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on Tom's card t-gem1v (Gemini plays chapter 1 with the brief and Tom attaches the report). Then this session closes the passed cards and writes fix cards for the failed ones.",
+   "next": "Applied Gemini's chapter 1 report (claude/ch1-gemini-report.md). Closed 8 Tom cards (C3 to C10 passed). Four failed and now wait on Claude fix cards: c-fix-hollowtrail-play-3 (C1), c-fix-ch1flight-2 (C2), c-fix-itemdefplay (C11), c-fix-qa-bug03-look (C12). Milestone B and A1 are not Gemini's to close: t-milestoneb stays open for Tom.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -23744,12 +23821,29 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Report saved as claude/ch1-gemini-report.md. Rows: 8 PASS (C3 to C10) closed; 4 FAIL (C1, C2, C11, C12) each got a fix card (fix, Sonnet 5.5 medium, auto) and its Tom card waits on it; no BLOCKED or CANNOT JUDGE."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Milestone B: ratings and fight log added to t-milestoneb (left open) and as a note on c-b3s17 and c-b3s18. A1 was NOT RUN by Gemini; t-wanch1-watch was already done by Tom."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Section 7 checked against main. Folded into the fix cards of the same fault (no second card): X-06 into C1 (cause in the ch1-spot trigger), X-01 and X-02 into C12 (noGoRoof tiles), X-07 into C11 (Battle 2 stat names). Not a bug: X-05 (Grace says 3 wrappers with 4 on the ground is Tom's wording). Not confirmed, no card: X-03 (the Save popup has no LOAD IT? button; the LOAD IT? two-tap confirm is on the Menu LOAD tab and its code reads correctly; could not reproduce in a headless run) and X-04 (TURN label fully visible in a portrait Battle 3 frame at 430x860). Tell Tom to say so if either still happens on his phone."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Found while checking C2: the fix-ch1flight scene edit is missing from data/scenes.js on main (engine pieces are present), so the fix card says to re-apply it."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
     "opening": "unknown"
-   }
+   },
+   "after": "t-milestoneb"
   },
   {
    "id": "c-costs1",
@@ -26230,6 +26324,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as b3s18d: chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini's Milestone B notes are on t-milestoneb and c-b3s17 (6 rounds for The Big One, 0 knock-outs, ratings 5/4/4/5/5/4/4). Tom's own answer on t-milestoneb still comes first."
     }
    ],
    "chat": {
@@ -27301,6 +27399,210 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-fix-hollowtrail-play-3",
+   "tag": "fix-hollowtrail-play-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "next": "Gemini's chapter 1 test failed Play the Grump Hollow wrapper trail (C1). Claude starts the fix by itself. Latest: Leg 1: 4 wrappers, from \"THE SQUARE SHOPS\" gate to top-left bench before Bog Toad; Leg 2: 4 wrappers (Leg 1 cleared), from below top-left bench to middle cleari",
+   "blocks": [
+    "t-hollowtrail-play"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T19:37:49.000Z",
+     "card": "t-hollowtrail-play",
+     "title": "Play the Grump Hollow wrapper trail",
+     "ask": "play",
+     "words": "Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C1). * Card C1 (t-hollowtrail-play): * Failed expected item 1: - [ ] After the Log Lump: Grace says the same line again; 4 new wrappers lead east to Boppy's fishing spot. The earlier legs are no longer shown. * What I saw instead: On two separate runs (initial run and Save Slot 2 replay), walking into the middle clearing toward Log Lump triggered Stop 9's east-pond cutscene before Log Lump could be fought (with 3 wrappers visible toward the east pond during the cutscene); when Log Lump was fought right after the boss in Stop 10, Grace spoke no line and the 4 ground wrappers behind Tom did not clear or update. * Screenshot: c1_leg3_early_pond_trigger, c1_postboss_loglump * Failed expected item 2: - [ ] The goal popups match: after leg 1 \"Goal: follow the muffin wrappers up to the top left corner...\", then \"...to the middle of the clearing, to the Log Lump.\", then \"...east, around the pond, to Boppy's fishing spot.\" * What I saw instead: No on-screen \"Goal: ...\" popup banner appeared after any leg; goals updated silently inside the ! quest log (▸ Follow the muffin wrappers up to the top left corner. The Hollow's monsters are awake now. after Leg 1, and ▸ Follow the wrappers to the middle of the clearing, to the Log Lump. after Leg 2). * Screenshot: c1_leg1_map, c1_leg2_map Related issues from the same run, checked against main: X-06 is the same fault (confirmed in code: the ch1-spot trigger in data/scenes.js covers x 14 to 22 and needs only flag ch1-tuts, not ch1-beat:log, so walking toward the Log Lump in the middle clearing starts Boppy's fishing spot scene early; that sets ch1-spot, and ch1-fol-log needs notFlag ch1-spot, so Grace's line and the third leg of wrappers never come, and the later Log Lump fight shows nothing). X-05 (Grace says 3 wrappers while 4 lie on the ground) is not a bug: it is Tom's own wording, kept on purpose. The Goal popups: storySetGoal runs for legs 2 and 3 (HOLLOW_TRAIL_GOALS in data/scenes.js) but Gemini saw no popup on screen, only the quest log text; there is no popup for leg 1 at all (the goal after the Mudling fight comes from elsewhere).",
+     "shot": "",
+     "asked": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Gemini's chapter 1 report, card c-gem1v"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-gem1v from Gemini's chapter 1 report (C1 FAIL on t-hollowtrail-play)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini saw: Leg 1: 4 wrappers, from \"THE SQUARE SHOPS\" gate to top-left bench before Bog Toad; Leg 2: 4 wrappers (Leg 1 cleared), from below top-left bench to middle clearing; Leg 3: blocked pre-boss twice because walking into the middle clearing toward Log Lump triggered Stop 9's pond scene early, and beating Log Lump post-boss gave no Grace line or new wrappers (also no \"Goal: ...\" popups appeared on any leg; Pond Grump changed nothing); Grace's words: \"3 wrappers, let's follow them!\""
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems Gemini found on Play the Grump Hollow wrapper trail.",
+    "before": [
+     "Nothing to do first. Gemini's report is on the card and in the repo."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from a test report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-hollowtrail-play-3 and t-hollowtrail-play in data/board.json, history included. Your first push is the commit board: start c-fix-hollowtrail-play-3.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C1 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-hollowtrail-play (Play the Grump Hollow wrapper trail, ask play). He was asked: RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which. Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C1). * Card C1 (t-hollowtrail-play): * Failed expected item 1: - [ ] After the Log Lump: Grace says the same line again; 4 new wrappers lead east to Boppy's fishing spot. The earlier legs are no longer shown. * What I saw instead: On two separate runs (initial run and Save Slot 2 replay), walking into the middle clearing toward Log Lump triggered Stop 9's east-pond cutscene before Log Lump could be fought (with 3 wrappers visible toward the east pond during the cutscene); when Log Lump was fought right after the boss in Stop 10, Grace spoke no line and the 4 ground wrappers behind Tom did not clear or update. * Screenshot: c1_leg3_early_pond_trigger, c1_postboss_loglump * Failed expected item 2: - [ ] The goal popups match: after leg 1 \"Goal: follow the muffin wrappers up to the top left corner...\", then \"...to the middle of the clearing, to the Log Lump.\", then \"...east, around the pond, to Boppy's fishing spot.\" * What I saw instead: No on-screen \"Goal: ...\" popup banner appeared after any leg; goals updated silently inside the ! quest log (▸ Follow the muffin wrappers up to the top left corner. The Hollow's monsters are awake now. after Leg 1, and ▸ Follow the wrappers to the middle of the clearing, to the Log Lump. after Leg 2). * Screenshot: c1_leg1_map, c1_leg2_map Related issues from the same run, checked against main: X-06 is the same fault (confirmed in code: the ch1-spot trigger in data/scenes.js covers x 14 to 22 and needs only flag ch1-tuts, not ch1-beat:log, so walking toward the Log Lump in the middle clearing starts Boppy's fishing spot scene early; that sets ch1-spot, and ch1-fol-log needs notFlag ch1-spot, so Grace's line and the third leg of wrappers never come, and the later Log Lump fight shows nothing). X-05 (Grace says 3 wrappers while 4 lie on the ground) is not a bug: it is Tom's own wording, kept on purpose. The Goal popups: storySetGoal runs for legs 2 and 3 (HOLLOW_TRAIL_GOALS in data/scenes.js) but Gemini saw no popup on screen, only the quest log text; there is no popup for leg 1 at all (the goal after the Mudling fight comes from elsewhere).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-hollowtrail-play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-hollowtrail-play, and give the build fix-hollowtrail-play-3 a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-hollowtrail-play",
+   "auto": true
+  },
+  {
+   "id": "c-fix-ch1flight-2",
+   "tag": "fix-ch1flight-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "next": "Gemini's chapter 1 test failed Check chapter 1 ends in the flight (C2). Claude starts the fix by itself. Latest: Sal said \"Tom! Cab seven is at your service. Where to?\" (TO THE AIRPORT / JUST VISITING) and \"Los Angeles? You got it.\", faded to \"A PHONE ON THE SEAT\" (CONTINU",
+   "blocks": [
+    "t-ch1flight"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T19:37:49.000Z",
+     "card": "t-ch1flight",
+     "title": "Check chapter 1 ends in the flight",
+     "ask": "play",
+     "words": "Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C2). * Card C2 (t-ch1flight): * Failed expected item 1: - [ ] The screen fades; a picture of a phone lighting up on the cab seat appears, and it stays on screen while TNB's text is shown: hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over. * What I saw instead: After Sal said \"Los Angeles? You got it.\", the screen faded to the cab-seat phone illustration captioned \"A PHONE ON THE SEAT\" with only a CONTINUE button; TNB's text message never appeared on that screen or anywhere before landing. * Screenshot: c2_phone_no_text * Failed expected item 2: - [ ] Then the flight plays straight on: seat, takeoff, map, landing. * What I saw instead: After \"CHAPTER 1 COMPLETE\" / \"THE SOUP DUMPLING PROTOCOL\", the game went back inside Long Island Taxi Co. before starting the flight, and when the flight finally played it showed LEAVING LONG ISLAND (takeoff) -> LONG ISLAND > LOS ANGELES (map, where Tom spoke \"Lie flat, warm nuts, no sibling clipboards. Why does that feel suspicious?\" at 0H 17M TO GO) -> LOS ANGELES (landing), with no cabin seat shot. * Screenshot: c2_taxi_goodbyes, c2_flight_takeoff, c2_flight_map, c2_la_landing * Failed expected item 3: - [ ] No dialogue from Grace, Rose or Deedee (no goodbyes) anywhere between TNB's text and the landing. No stop or walk in the Square. * What I saw instead: Between the \"CHAPTER 1 COMPLETE\" card and the plane takeoff, a multi-box goodbye scene played inside Long Island Taxi Co. with Sal (\"Airport. You've got the look of a man who packed light.\" / \"Girls, back to the house. Your grandmother has pie. That's not a rumor.\"), Grace (\"Pie!\"), Rose (\"Bye Tata! Save me the... never mind, pie!\"), Tom (\"Great. I just got outcompeted by pie.\" / \"Enjoy it, you two. Save me a slice.\"), and Deedee (\"Los Angeles is too bright for me. Everything shines and nobody has a sweater.\" / \"Take a sweater, honey. I packed one. It's in the bag.\"). * Screenshot: c2_taxi_goodbyes Checked against main: the fix-ch1flight scene edit is NOT in data/scenes.js. SCENES.ch1Sunday still has {interstitial:{ch1Reveal:'phone'}} with no keep:true and no ch1RevealEnd, and ends with {trip:'west'} with no quiet:true, although docs/CHANGES.md lists fix-ch1flight. The engine pieces exist (tripSteps(dir,quiet) in engine/travel.js, keep in data/closeup-ch1.js), so the scene edit was lost or overwritten by a later push. Re-apply it, then play it in the browser from the chapter 1 end to confirm TNB's text shows over the phone picture and the flight follows with no goodbyes.",
+     "shot": "",
+     "asked": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Gemini's chapter 1 report, card c-gem1v"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-gem1v from Gemini's chapter 1 report (C2 FAIL on t-ch1flight)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini saw: Sal said \"Tom! Cab seven is at your service. Where to?\" (TO THE AIRPORT / JUST VISITING) and \"Los Angeles? You got it.\", faded to \"A PHONE ON THE SEAT\" (CONTINUE) with no TNB text shown, showed \"CHAPTER 1 COMPLETE\" / \"THE SOUP DUMPLING PROTOCOL\", then returned inside Long Island Taxi Co. for full goodbyes from Sal, Grace (\"Pie!\"), Rose (\"Bye Tata! Save me the... never mind, pie!\"), Tom, and Deedee (\"Take a sweater, honey. I packed one. It's in the bag.\") before LEAVING LONG ISLAND takeoff, LONG ISLAND > LOS ANGELES map, and LOS ANGELES landing (no cabin seat stage)."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems Gemini found on Check chapter 1 ends in the flight.",
+    "before": [
+     "Nothing to do first. Gemini's report is on the card and in the repo."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from a test report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-ch1flight-2 and t-ch1flight in data/board.json, history included. Your first push is the commit board: start c-fix-ch1flight-2.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C2 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-ch1flight (Check chapter 1 ends in the flight, ask play). He was asked: Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab. Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C2). * Card C2 (t-ch1flight): * Failed expected item 1: - [ ] The screen fades; a picture of a phone lighting up on the cab seat appears, and it stays on screen while TNB's text is shown: hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over. * What I saw instead: After Sal said \"Los Angeles? You got it.\", the screen faded to the cab-seat phone illustration captioned \"A PHONE ON THE SEAT\" with only a CONTINUE button; TNB's text message never appeared on that screen or anywhere before landing. * Screenshot: c2_phone_no_text * Failed expected item 2: - [ ] Then the flight plays straight on: seat, takeoff, map, landing. * What I saw instead: After \"CHAPTER 1 COMPLETE\" / \"THE SOUP DUMPLING PROTOCOL\", the game went back inside Long Island Taxi Co. before starting the flight, and when the flight finally played it showed LEAVING LONG ISLAND (takeoff) -> LONG ISLAND > LOS ANGELES (map, where Tom spoke \"Lie flat, warm nuts, no sibling clipboards. Why does that feel suspicious?\" at 0H 17M TO GO) -> LOS ANGELES (landing), with no cabin seat shot. * Screenshot: c2_taxi_goodbyes, c2_flight_takeoff, c2_flight_map, c2_la_landing * Failed expected item 3: - [ ] No dialogue from Grace, Rose or Deedee (no goodbyes) anywhere between TNB's text and the landing. No stop or walk in the Square. * What I saw instead: Between the \"CHAPTER 1 COMPLETE\" card and the plane takeoff, a multi-box goodbye scene played inside Long Island Taxi Co. with Sal (\"Airport. You've got the look of a man who packed light.\" / \"Girls, back to the house. Your grandmother has pie. That's not a rumor.\"), Grace (\"Pie!\"), Rose (\"Bye Tata! Save me the... never mind, pie!\"), Tom (\"Great. I just got outcompeted by pie.\" / \"Enjoy it, you two. Save me a slice.\"), and Deedee (\"Los Angeles is too bright for me. Everything shines and nobody has a sweater.\" / \"Take a sweater, honey. I packed one. It's in the bag.\"). * Screenshot: c2_taxi_goodbyes Checked against main: the fix-ch1flight scene edit is NOT in data/scenes.js. SCENES.ch1Sunday still has {interstitial:{ch1Reveal:'phone'}} with no keep:true and no ch1RevealEnd, and ends with {trip:'west'} with no quiet:true, although docs/CHANGES.md lists fix-ch1flight. The engine pieces exist (tripSteps(dir,quiet) in engine/travel.js, keep in data/closeup-ch1.js), so the scene edit was lost or overwritten by a later push. Re-apply it, then play it in the browser from the chapter 1 end to confirm TNB's text shows over the phone picture and the flight follows with no goodbyes.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1flight to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1flight, and give the build fix-ch1flight-2 a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-ch1flight",
+   "auto": true
+  },
+  {
+   "id": "c-fix-itemdefplay",
+   "tag": "fix-itemdefplay",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Read a few item banners on your phone",
+   "next": "Gemini's chapter 1 test failed Read a few item banners on your phone (C11). Claude starts the fix by itself. Latest: items read: Mud Pie, Lily Pad Hat (landscape), Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin (KEY ITEM), Bark Slab (Cookie unreachable because Deedee stayed in",
+   "blocks": [
+    "t-itemdefplay"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T19:37:49.000Z",
+     "card": "t-itemdefplay",
+     "title": "Read a few item banners on your phone",
+     "ask": "play",
+     "words": "Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C11). * Card C11 (t-itemdefplay): * Failed expected item 1 (Steps / Scope): Read at least five different banners, including one KEY ITEM (Dragonfly Coin) and the Cookie. * What I saw instead: Six banners were captured (Mud Pie, Lily Pad Hat, Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin, Bark Slab), but Cookie could not be obtained at Stop 11 or Stop 12 because Deedee remained in Tom's active 4-person party (Menu > PARTY) and never stood in her kitchen or on Rivituso Row as a townsperson NPC. * Screenshot: c11_stop11_kitchen_no_deedee_npc * Failed expected item 2: - [ ] Then an IN BATTLE section and an IN STORY section. and - [ ] Tap or press A to continue inside the card. * What I saw instead: On the Dragonfly Coin (KEY ITEM) banner in the Stop 9 after-boss scene, the card began fading in over the map (showing the dragonfly coin square icon, Dragonfly Coin, KEY ITEM, and italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\") and auto-dismissed mid-fade-in before reaching full opacity or waiting for Tap or press A to continue. * Screenshot: c11_dragonflycoin_fade * Failed expected item 3: - [ ] Text reads well: no line cut off, nothing overlapping, no placeholder text. For each banner write the item name and say whether each line is clear and whether the jokes land (Tom asked: \"Something is wrong if any line is wrong, unclear or not funny (say which item)\"). Copy any line you flag word for word. * What I saw instead (per-banner line & humor audit across all 6 banners read): 1. Mud Pie (RECOVERY ITEM, Portrait): Picture in top-left square; italic \"Mostly mud. Some pie. Rose insists.\"; IN BATTLE: \"Use it: Heals 32 HP. Works outside fights too.\"; IN STORY: \"None. It's a snack. A good one.\"; footer \"The Mudling left a mud pie behind. Rose put it in a pocket.\"; \"Tap or press A to continue\" inside card. Clear and funny; jokes land cleanly. 2. Lily Pad Hat (KEEPSAKE CHARM, Landscape): Picture in left square (briefly blank on first fade-in frame before icon appeared); italic \"Slid off a Bog Toad. Still damp. Grace says it's a crown.\"; IN BATTLE: \"Wear it: Heals 5% HP each turn.\"; IN STORY: \"None. It just quietly helps.\"; footer \"A lily pad slid off the toad's head. It's a hat now. Grace claimed it instantly.\"; \"Tap or press A to continue\" inside card. Clear and funny; fits Grace well. 3. Pond Hoodie (OUTFIT, Portrait) - FLAGGED: Italic \"The Grump dropped it. It smells like the pond. He wants it back.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"The Grump left a soggy green hoodie behind. It went in a pocket.\" are funny, but IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats - exact flagged line: Wear it: +18 HP, +4 GRIT, +1 COOL. 4. Boppy's Lost Lure (KEEPSAKE CHARM, Portrait): Picture in top-left square; italic \"Twenty years in a fish’s lip. Still shiny. Boppy will want to hear about this.\"; IN BATTLE: \"Wear it: Coins from fights +25%.\"; IN STORY: \"Bring it home. Boppy's told everyone about the one that got away. For twenty years.\"; footer \"Boppy's lost lure fell out of its lip. Twenty years late. Still shiny.\"; \"Tap or press A to continue\" inside card. Every line is clear and lands well. 5. Dragonfly Coin (KEY ITEM, Portrait) - FLAGGED: Italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\" is clear, but the banner auto-dismissed mid-fade-in before IN BATTLE, IN STORY, and Tap or press A to continue could be read on the card. 6. Bark Slab (SIGNATURE TOOL, Portrait) - FLAGGED: Italic \"Came off a Log Lump. Heavy, mossy, and surprisingly good at stopping things.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"A slab of bark came loose. Sturdy. It went in a pocket, barely.\" read nicely, but IN BATTLE uses an obsolete Battle 2 stat (POW) that also contradicts the defensive \"good at stopping things\" description - exact flagged line: Wear it: +5 POW. * Screenshot: c11_pondhoodie, c11_dragonflycoin_fade, c11_barkslab Related issue X-07 (confirmed in code): Boppy's Cap shows Keepsake Charm GRIT +10% in Menu > ITEMS (data/party.js bcap perk stat grit). Same fault as the Pond Hoodie and Bark Slab lines: equipment still uses the old Battle 2 stats (hp, grit, cool, pow in data/party.js) and Battle 3 has no such stats, so rewrite every Wear it line (bonusText, data/item-defs.js) to what the equipment does in Battle 3, in plain words that fit each item's joke. For the Cookie: Gemini could not get it because Deedee stays in the active party in the kitchen at stop 11. Decide yourself whether the cookie must be reachable another way or the expectation is outdated; say which in the history line, do not ask Tom. The Dragonfly Coin banner closing before full opacity is a real fault to fix.",
+     "shot": "",
+     "asked": "Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Gemini's chapter 1 report, card c-gem1v"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-gem1v from Gemini's chapter 1 report (C11 FAIL on t-itemdefplay)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini saw: items read: Mud Pie, Lily Pad Hat (landscape), Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin (KEY ITEM), Bark Slab (Cookie unreachable because Deedee stayed in the active party and never stood in her kitchen as a townsperson); Dragonfly Coin auto-dismissed mid-fade-in before full opacity, and Pond Hoodie (\"Wear it: +18 HP, +4 GRIT, +1 COOL.\") and Bark Slab (\"Wear it: +5 POW.\") cite obsolete Battle 2 stats."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems Gemini found on Read a few item banners on your phone.",
+    "before": [
+     "Nothing to do first. Gemini's report is on the card and in the repo."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from a test report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-itemdefplay and t-itemdefplay in data/board.json, history included. Your first push is the commit board: start c-fix-itemdefplay.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C11 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-itemdefplay (Read a few item banners on your phone, ask play). He was asked: Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item). Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C11). * Card C11 (t-itemdefplay): * Failed expected item 1 (Steps / Scope): Read at least five different banners, including one KEY ITEM (Dragonfly Coin) and the Cookie. * What I saw instead: Six banners were captured (Mud Pie, Lily Pad Hat, Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin, Bark Slab), but Cookie could not be obtained at Stop 11 or Stop 12 because Deedee remained in Tom's active 4-person party (Menu > PARTY) and never stood in her kitchen or on Rivituso Row as a townsperson NPC. * Screenshot: c11_stop11_kitchen_no_deedee_npc * Failed expected item 2: - [ ] Then an IN BATTLE section and an IN STORY section. and - [ ] Tap or press A to continue inside the card. * What I saw instead: On the Dragonfly Coin (KEY ITEM) banner in the Stop 9 after-boss scene, the card began fading in over the map (showing the dragonfly coin square icon, Dragonfly Coin, KEY ITEM, and italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\") and auto-dismissed mid-fade-in before reaching full opacity or waiting for Tap or press A to continue. * Screenshot: c11_dragonflycoin_fade * Failed expected item 3: - [ ] Text reads well: no line cut off, nothing overlapping, no placeholder text. For each banner write the item name and say whether each line is clear and whether the jokes land (Tom asked: \"Something is wrong if any line is wrong, unclear or not funny (say which item)\"). Copy any line you flag word for word. * What I saw instead (per-banner line & humor audit across all 6 banners read): 1. Mud Pie (RECOVERY ITEM, Portrait): Picture in top-left square; italic \"Mostly mud. Some pie. Rose insists.\"; IN BATTLE: \"Use it: Heals 32 HP. Works outside fights too.\"; IN STORY: \"None. It's a snack. A good one.\"; footer \"The Mudling left a mud pie behind. Rose put it in a pocket.\"; \"Tap or press A to continue\" inside card. Clear and funny; jokes land cleanly. 2. Lily Pad Hat (KEEPSAKE CHARM, Landscape): Picture in left square (briefly blank on first fade-in frame before icon appeared); italic \"Slid off a Bog Toad. Still damp. Grace says it's a crown.\"; IN BATTLE: \"Wear it: Heals 5% HP each turn.\"; IN STORY: \"None. It just quietly helps.\"; footer \"A lily pad slid off the toad's head. It's a hat now. Grace claimed it instantly.\"; \"Tap or press A to continue\" inside card. Clear and funny; fits Grace well. 3. Pond Hoodie (OUTFIT, Portrait) - FLAGGED: Italic \"The Grump dropped it. It smells like the pond. He wants it back.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"The Grump left a soggy green hoodie behind. It went in a pocket.\" are funny, but IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats - exact flagged line: Wear it: +18 HP, +4 GRIT, +1 COOL. 4. Boppy's Lost Lure (KEEPSAKE CHARM, Portrait): Picture in top-left square; italic \"Twenty years in a fish’s lip. Still shiny. Boppy will want to hear about this.\"; IN BATTLE: \"Wear it: Coins from fights +25%.\"; IN STORY: \"Bring it home. Boppy's told everyone about the one that got away. For twenty years.\"; footer \"Boppy's lost lure fell out of its lip. Twenty years late. Still shiny.\"; \"Tap or press A to continue\" inside card. Every line is clear and lands well. 5. Dragonfly Coin (KEY ITEM, Portrait) - FLAGGED: Italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\" is clear, but the banner auto-dismissed mid-fade-in before IN BATTLE, IN STORY, and Tap or press A to continue could be read on the card. 6. Bark Slab (SIGNATURE TOOL, Portrait) - FLAGGED: Italic \"Came off a Log Lump. Heavy, mossy, and surprisingly good at stopping things.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"A slab of bark came loose. Sturdy. It went in a pocket, barely.\" read nicely, but IN BATTLE uses an obsolete Battle 2 stat (POW) that also contradicts the defensive \"good at stopping things\" description - exact flagged line: Wear it: +5 POW. * Screenshot: c11_pondhoodie, c11_dragonflycoin_fade, c11_barkslab Related issue X-07 (confirmed in code): Boppy's Cap shows Keepsake Charm GRIT +10% in Menu > ITEMS (data/party.js bcap perk stat grit). Same fault as the Pond Hoodie and Bark Slab lines: equipment still uses the old Battle 2 stats (hp, grit, cool, pow in data/party.js) and Battle 3 has no such stats, so rewrite every Wear it line (bonusText, data/item-defs.js) to what the equipment does in Battle 3, in plain words that fit each item's joke. For the Cookie: Gemini could not get it because Deedee stays in the active party in the kitchen at stop 11. Decide yourself whether the cookie must be reachable another way or the expectation is outdated; say which in the history line, do not ask Tom. The Dragonfly Coin banner closing before full opacity is a real fault to fix.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itemdefplay to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itemdefplay, and give the build fix-itemdefplay a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-itemdefplay",
+   "auto": true
+  },
+  {
+   "id": "c-fix-qa-bug03-look",
+   "tag": "fix-qa-bug03-look",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix: Look for people on roofs in the Square and the Row",
+   "next": "Gemini's chapter 1 test failed Look for people on roofs in the Square and the Row (C12). Claude starts the fix by itself. Latest: In The Square (Stop 2), two townspeople stood directly on top of the SNAIL MAIL sign (nobody walked onto KETTLE COTTAGE's roof); on Rivituso Row (Stop 3), the b",
+   "blocks": [
+    "t-qa-bug03-look"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T19:37:49.000Z",
+     "card": "t-qa-bug03-look",
+     "title": "Look for people on roofs in the Square and the Row",
+     "ask": "play",
+     "words": "Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C12). * Card C12 (t-qa-bug03-look): * Failed expected item 1: - [ ] Nobody walks onto the SNAIL MAIL sign. * What I saw instead: During the 1-minute Square watch at Stop 2 (Check 1 / 0s), two townspeople (the brown-haired boy and straw-hat boy) stood directly on top of the SNAIL MAIL sign. * Screenshot: c12_square_0s_snailmail * Failed expected item 2: - [ ] Nobody walks onto the edge of Aunt Ellie's House. * What I saw instead: On Rivituso Row at Stop 3 (0s check), the brown-haired NPC walked directly onto the right wall/edge of Aunt Ellie's House. * Screenshot: c12_row_0s_ellie_edge Related issues from the same run: X-01 (a brown-haired boy NPC walked onto the snail weathervane on the SNAIL MAIL roof, screenshot c12_square_weathervane) and X-02 (a purple-haired NPC walked onto the SCHOOL sign plaque, screenshot c12_square_check5) are the same fault. Checked against main: qa-bug03 added only the tiles an NPC reached in a 25 second run to noGoRoof in the town and row maps (data/maps-le.js, tools/npc_roof_tiles.py), so a longer watch finds more. Run a long headless watch (several minutes, several seeds) of the town and row, list every tile where an NPC stands on a sign, roof, weathervane, plaque or house edge, add them all to noGoRoof, and re-run until a 5 minute watch finds none. Also confirm the SNAIL MAIL sign case that Gemini saw at 0 s.",
+     "shot": "",
+     "asked": "Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Gemini's chapter 1 report, card c-gem1v"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-gem1v from Gemini's chapter 1 report (C12 FAIL on t-qa-bug03-look)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Gemini saw: In The Square (Stop 2), two townspeople stood directly on top of the SNAIL MAIL sign (nobody walked onto KETTLE COTTAGE's roof); on Rivituso Row (Stop 3), the brown-haired NPC walked onto the right edge of Aunt Ellie's House."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems Gemini found on Look for people on roofs in the Square and the Row.",
+    "before": [
+     "Nothing to do first. Gemini's report is on the card and in the repo."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from a test report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-qa-bug03-look and t-qa-bug03-look in data/board.json, history included. Your first push is the commit board: start c-fix-qa-bug03-look.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C12 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-qa-bug03-look (Look for people on roofs in the Square and the Row, ask play). He was asked: Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab. Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C12). * Card C12 (t-qa-bug03-look): * Failed expected item 1: - [ ] Nobody walks onto the SNAIL MAIL sign. * What I saw instead: During the 1-minute Square watch at Stop 2 (Check 1 / 0s), two townspeople (the brown-haired boy and straw-hat boy) stood directly on top of the SNAIL MAIL sign. * Screenshot: c12_square_0s_snailmail * Failed expected item 2: - [ ] Nobody walks onto the edge of Aunt Ellie's House. * What I saw instead: On Rivituso Row at Stop 3 (0s check), the brown-haired NPC walked directly onto the right wall/edge of Aunt Ellie's House. * Screenshot: c12_row_0s_ellie_edge Related issues from the same run: X-01 (a brown-haired boy NPC walked onto the snail weathervane on the SNAIL MAIL roof, screenshot c12_square_weathervane) and X-02 (a purple-haired NPC walked onto the SCHOOL sign plaque, screenshot c12_square_check5) are the same fault. Checked against main: qa-bug03 added only the tiles an NPC reached in a 25 second run to noGoRoof in the town and row maps (data/maps-le.js, tools/npc_roof_tiles.py), so a longer watch finds more. Run a long headless watch (several minutes, several seeds) of the town and row, list every tile where an NPC stands on a sign, roof, weathervane, plaque or house edge, add them all to noGoRoof, and re-run until a 5 minute watch finds none. Also confirm the SNAIL MAIL sign case that Gemini saw at 0 s.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-qa-bug03-look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-qa-bug03-look, and give the build fix-qa-bug03-look a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-qa-bug03-look",
+   "auto": true
   }
  ],
  "sessions": [

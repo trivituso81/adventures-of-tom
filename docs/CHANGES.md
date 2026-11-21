@@ -1,3 +1,20 @@
+## gem1v (2026-11-21): Gemini's chapter 1 test applied to the board: 8 cards closed, 4 fix cards written
+
+Tom had Gemini play chapter 1 with the brief `claude/ch1-gemini-verify.md`; its report is saved as `claude/ch1-gemini-report.md` (build voicepurge221, MEDIUM, landed in Los Angeles, 1:04 in game).
+
+| Gemini row | Tom card | Result on the board |
+|---|---|---|
+| C3 to C10 | t-qa-bug12c-play, t-qa-bug08play, t-qa-coh06play, t-bug12play, t-qa-txt04-play, t-qa-bug01play, t-qa-coh07play, t-qa-coh03play | PASS: moved to Done with Gemini's evidence in the history |
+| C1 | t-hollowtrail-play | FAIL: c-fix-hollowtrail-play-3 (includes X-06; X-05 is Tom's own wording, not a bug) |
+| C2 | t-ch1flight | FAIL: c-fix-ch1flight-2 (the fix-ch1flight scene edit is missing from `data/scenes.js` on main) |
+| C11 | t-itemdefplay | FAIL: c-fix-itemdefplay (includes X-07, old Battle 2 stat names on equipment) |
+| C12 | t-qa-bug03-look | FAIL: c-fix-qa-bug03-look (includes X-01 and X-02) |
+| M-B | t-milestoneb | Ratings 5/4/4/5/5/4/4 and the fight log added to its history and to c-b3s17 and c-b3s18; left open for Tom |
+| A1 | t-wanch1-watch | NOT RUN by Gemini; already done by Tom |
+
+- Section 7 checked against main: X-03 (LOAD IT? in the Save modal) and X-04 (TURN label clipped in portrait) were not reproduced (the Save popup has no LOAD IT? button; the TURN label is whole in a 430x860 Battle 3 frame), so no card.
+- Board and notes only: no game file changed.
+
 ## guidestatus1-restore (2026-11-21): housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake
 
 Card c-guidestatus. The guidestatus1 push was rebased badly: it dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b (put back below guidestatus1, where they were), and re-added `art/raw/clips/wan-grace-squeeze-v3.mp4` and `tools/art-library/prompts/wan-grace-squeeze-v3.txt`, which fix-anim-grace-squeeze-qxim had purged (v4 replaced them). No game file changed.

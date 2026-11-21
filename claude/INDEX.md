@@ -179,6 +179,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | ch01-teardown.md | Chapter 1 teardown list (2026-11-17 evening). Nothing in the game has been changed yet. | 2026-11-17 |
 | ch02-teardown.md | Chapter 2 teardown list (2026-11-20). Nothing in the game has been changed yet. | 2026-11-20 |
 | ch08-build.md | Chapter 8 build tracker (Forty Loaves by Six) | 2026-11-21 |
+| ch1-gemini-report.md | Chapter 1 Verification Report — The Adventures of Tom |  |
 | ch1-gemini-tracker.md | 1. Master Issue, Bug & Improvement Tracker | 2026-11-21 |
 | ch1-gemini-verify.md | Chapter 1 verification run: task brief for an AI tester | 2026-11-21 |
 | ch1-qa-keysecrets2.md | Chapter 1 QA report (build keysecrets2): check against main | 2026-11-21 |
