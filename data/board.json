@@ -20298,8 +20298,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-185740-5nwp. First note: the locked fence icon needs to be within the area underneath the School sign",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-185740-5nwp, r-20261120-192030-2df3, r-20261120-192121-ynen. First note: the locked fence icon needs to be within the area underneath the School sign",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -20342,6 +20342,10 @@
     {
      "d": "2026-11-21",
      "t": "Report r-20261120-185740-5nwp (\"the locked fence icon needs to be within the area underneath the School sign\") left open: the gate's blocked tiles and exit sit above the sign in the painting, so moving it means moving the exit and walk mask too. Needs a session with the image tools (this run had a broken Pillow)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
@@ -20647,7 +20651,7 @@
    "title": "Make voices from the board and save them to the game",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "voiceboard1",
    "auto": true,
    "after": "nothing for Tom: end",
@@ -20655,7 +20659,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
+    "url": "https://claude.ai/code/cse_01RXeukDRBkPQu5XdZQN2bXK",
     "opening": "not started"
    },
    "next": "Builds a Generate all N voices button on your voice cards, like Generate all N pictures. One tap makes a take for every line on the card that has no clip, and a GitHub job merges the takes into the game and pushes them, with no session in between. Then the card asks you to listen. The first card it makes is chapter 2's 73 lines, and that card waits until you have played chapter 2, so no credits go on lines you might still cut.",
@@ -20668,6 +20672,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T03:23:07.412Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -20679,7 +20687,7 @@
     "effort": "medium (the pattern to copy is written: artgen1 in board.html and CLAUDE.md)",
     "text": "Read CLAUDE.md (artgen1, keysecrets1, No unused voice, Build label), docs/VOICE_LIBRARY.md (Takes are made on GitHub, Phone clip exports, Rebuild the index), claude/next-addendum-voicegen2.md, tools/voice-learn/GENERATION_JOB_PLAN.md, .github/workflows/voice-gen.yml, tools/voice-learn/voicegen.py, tools/voice-library/merge-local.js, and the artgen1 code in board.html (the gen button and its board: generate commit) and .github/workflows/art-gen.yml. Card c-voiceboard in data/board.json. Build voiceboard1: (1) A Tom card with ask voice can carry `voices` (a list of 'voice|exact text' keys) or `voice_chapter` (a chapter number); the board page shows Generate all N voices (about X credits, from voicegen2's 0.44 credits per character) with a second tap to confirm, the same as Generate all N pictures, and saves `vgen` on the card with a commit whose subject is board: vgen followed by the card id. (2) That commit starts voice-gen for exactly those lines that have no clip (add a `lines` or `chapter` input to voicegen.py and voice-gen.yml; keep dry_run defaulting to true for a manual run, and a cap on characters per run). (3) When voice-gen finishes, a merge step in the same workflow (or a second Action) merges every new export from branch generated into data/voice/dialog-ch*.js with merge-local.js as docs/VOICE_LIBRARY.md says, runs python3 tools/voice-library/rebuild.py and python3 tools/clip-audit/unused_voice.py, writes a docs/CHANGES.md entry with a new build name (voices- plus the card id plus a run number) and runs python3 tools/art-library/bump_tags.py for it, fetches and rebases, and pushes to main; needs-human lines are listed on the card, not merged. It writes `vgen.run` on the card (made, failed, credits) and the card's next becomes: listen in ADMIN > VOICE LIBRARY (links to the lines), All good or Something is wrong. (4) Make the first such card: t-ch2voices, ask voice, voice_chapter 2 (chapter 2's 73 lines, see the ch2lessons entry in docs/CHANGES.md), waiting until t-ch2play is done so no credits go on lines Tom may still cut. Never run the paid job in this session: test with a stand-in ElevenLabs and a dry run (tools/voice-library/voicetake_test.py and the artgen tests are the pattern), add tools/voiceboard_test.py (board page in portrait and landscape, the button, the commit, the merge on a fake export), and run python3 tools/board_test.py /tmp/board, python3 tools/board_check.py, tools/smoke.py. Push to main as voiceboard1; your first push is the commit board: start c-voiceboard. Set after on this card to t-ch2voices. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-21T03:23:33+00:00"
   },
   {
    "id": "b-board-qa2",
@@ -20782,7 +20790,7 @@
    "id": "c-qa-bug01",
    "tag": "qa-bug01",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Quest log says Go to it's Sunday after the trip home",
    "next": "Ready to start. Confirmed in code: questPhrase in engine/story.js skips \"It's\" only with a capital I, and the toast in SCENES.ch1End (data/scenes.js) starts with a lowercase \"it's\" after \"Goal: \".",
@@ -20807,15 +20815,23 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T03:23:14.473Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-21T03:23:33+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukD8oFaGoJktxUZTkgW",
+    "opening": "started by START"
+   }
   },
   {
    "id": "c-qa-bug02",
    "tag": "qa-bug02",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Item banner: tiny icon, empty circle, prompt on the border",
    "next": "Ready to start. The painted pictures are covered by card t-itembannerart-pics (itembannerart1 shipped after the tested build).",
@@ -20840,15 +20856,23 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T03:23:22.704Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-21T03:23:33+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukGbQzVNxbtCiq6WdE8",
+    "opening": "started by START"
+   }
   },
   {
    "id": "c-qa-bug03",
    "tag": "qa-bug03",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
    "next": "Ready to start. Screen report only, not reproduced yet.",
@@ -20873,9 +20897,17 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T03:23:30.061Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-21T03:23:33+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukDjmSjPFCHjQf9v9dq",
+    "opening": "started by START"
+   }
   },
   {
    "id": "c-qa-bug04",
@@ -21374,7 +21406,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGPY7Epbtv1rgdkxsq",
+    "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
     "opening": "Something is wrong on t-hollowtrail-play"
    },
    "history": [
@@ -21396,6 +21428,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -21415,7 +21451,7 @@
    "id": "c-fix-ch1flight",
    "tag": "fix-ch1flight",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -21437,7 +21473,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDnxgPFMumUZDtFZgi",
     "opening": "Something is wrong on t-ch1flight"
    },
    "history": [
@@ -21455,6 +21491,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-21T03:22:50.834Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -21468,10 +21508,20 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T03:23:33+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "first": "2026-11-21T03:22:40Z",
+   "last": "2026-11-21T03:22:40Z",
+   "tags": [],
+   "cards": [
+    "c-fix-hollowtrail-play-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDp3fYArsNSrkJG75s",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -24289,7 +24339,9 @@
    "r-20261120-144644-77qd",
    "r-20261120-144650-ae66",
    "r-20261120-184534-ict4",
-   "r-20261120-185740-5nwp"
+   "r-20261120-185740-5nwp",
+   "r-20261120-192030-2df3",
+   "r-20261120-192121-ynen"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -24323,8 +24375,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "72a10a45d8c9e84537915ec266ff9b3088e33f4e",
- "synced_at": "2026-11-21T03:19:27+00:00",
+ "synced": "abf1414688564841c14385c58eade260f520bc71",
+ "synced_at": "2026-11-21T03:23:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
