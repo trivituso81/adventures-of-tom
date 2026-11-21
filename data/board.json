@@ -26565,13 +26565,22 @@
     {
      "d": "2026-11-21",
      "t": "Stage 18 was started and finished before this card was answered (Tom asked to keep building without testing: \"id prefer not to test and just keep building until we are done\"). This card no longer blocks a Claude card; your notes on it still count at the next milestone."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-21T20:44:25.464Z"
     }
    ],
    "chat": {
     "url": "",
     "opening": "unknown"
    },
-   "fyi": true
+   "fyi": true,
+   "backlog": {
+    "at": "2026-11-21",
+    "from": "up"
+   }
   },
   {
    "id": "t-anim-rose-dodge-v89r",
