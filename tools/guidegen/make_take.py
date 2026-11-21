@@ -19,6 +19,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate')); sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))
 import recipe as RC
+sys.path.insert(0, os.path.join(ROOT, 'tools'))
+import costlog   # costs2: the one writer of data/costs.json
 
 
 def _existing():
@@ -101,12 +103,15 @@ def main(argv=None):
     G = RC.load()
     base = os.path.dirname(os.path.abspath(a.results))
     key = os.environ.get('XAI_API_KEY') or None
+    gate_spent = 0.0
     for r in rows:
         if r.get('video') and not os.path.isabs(r['video']): r['video'] = os.path.join(base, r['video'])
         t = process(r, state, G, a.state, key=key, cap=a.cap, use_gate=not a.no_gate)
         say('%s take %d: %s%s' % (r['anim'], t['n'], t['status'], ' | ' + t['gate']['words'] if t['gate'] else ''))
-        open(sf, 'w', encoding='utf-8').write(jdump(state))
+        open(sf, 'w', encoding='utf-8').write(jdump(state)); gate_spent += (t.get('gate') or {}).get('spent', 0.0) or 0.0
     open(sf, 'w', encoding='utf-8').write(jdump(state))
+    # costs2: the gate's look check on the new takes is xAI vision money (the videos themselves were logged by the clip-gen step that made them)
+    costlog.log_from_env([{'service': 'xai', 'amount': gate_spent, 'what': 'Battle Guide takes: clip gate look checks on %d take%s' % (len(rows), '' if len(rows) == 1 else 's'), 'source': 'clip-gen run (guide takes)'}])
     return 0
 
 

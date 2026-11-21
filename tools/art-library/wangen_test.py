@@ -64,8 +64,9 @@ class H(BaseHTTPRequestHandler):
         self.j(200, {'request_id': rid, 'status': 'IN_QUEUE', 'status_url': base + '/%s/requests/%s/status' % (owner_app, rid), 'response_url': base + '/%s/requests/%s' % (owner_app, rid)})
 
 
+ENVX = {}   # costs2: extra environment for a run (COSTS_LOG_REPO)
 def run(repo, out, what, *extra, key=KEY):
-    env = dict(os.environ, FAL_QUEUE=URL, FAL_API=URL, WANGEN_POLL='0.05')
+    env = dict(os.environ, FAL_QUEUE=URL, FAL_API=URL, WANGEN_POLL='0.05'); env.update(ENVX)
     env.pop('FAL_KEY', None)
     if key: env['FAL_KEY'] = key
     p = subprocess.run([sys.executable, '-I', os.path.join(repo, 'tools', 'art-library', 'wangen.py'), '--what', what, '--out', out, '--repo', repo] + list(extra), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, env=env)
@@ -177,6 +178,20 @@ sb = S['sent'][-1]['body']; sf = Image.open(io.BytesIO(base64.b64decode(sb['star
 sa = _np.asarray(sf).astype(int); sm = _np.sqrt(((sa - _np.array([255, 0, 255])) ** 2).sum(2)) > 90; sxs = _np.where(sm.any(0))[0]
 check('W11 shift: 720x1280, the figure moved right with room on the left, right margin at least 3 percent, first and last frame the same',
       sf.size == (720, 1280) and sxs.min() > pxs.min() + 50 and sxs.max() <= 720 - 21 and sb['start_image_url'] == sb['end_image_url'] and 'shift' in o, (sf.size, pxs.min(), sxs.min(), sxs.max(), o[-300:]))
+
+# W12 (costs2): a real run logs what it booked to usage in data/costs.json (service fal), and a dry run logs nothing
+sys.path.insert(0, os.path.join(ROOT, 'tools')); import costs_fixture as fx
+os.makedirs(os.path.join(repo, 'tools'), exist_ok=True); shutil.copy(os.path.join(ROOT, 'tools', 'costlog.py'), os.path.join(repo, 'tools', 'costlog.py'))
+bare = fx.make_remote(tempfile.mkdtemp()); cw = fx.clone(bare, os.path.join(tmp, 'costs-clone'))
+ENVX.update(COSTS_LOG_REPO=cw); out12 = os.path.join(tmp, 'out12')
+c, o = run(repo, out12, 'start', '--dry-run')
+check('W12 a dry run logs nothing', c == 0 and len(fx.main_costs(bare)['usage']) == 1, o)
+c, o = run(repo, out12, 'start')
+cu = fx.main_costs(bare)['usage']
+check('W12 a real run logs its booking to usage: one fal row of the estimate', c == 0 and len(cu) == 2 and cu[-1]['service'] == 'fal' and abs(cu[-1]['amount'] - .15) < 1e-9 and 'wan-gen Action' in cu[-1]['what'] and cu[-1]['at'], (c, o[-300:], cu))
+c, o = run(repo, out12, 'start')
+check('W12 the same job run again (already made, nothing booked) logs nothing more', len(fx.main_costs(bare)['usage']) == 2, (o[-200:], fx.main_costs(bare)['usage']))
+ENVX.clear()
 
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
 print('ALL PASS' if not fails else '%d FAILED: %s' % (len(fails), ', '.join(fails)))

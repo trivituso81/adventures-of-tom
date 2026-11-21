@@ -62,6 +62,7 @@ jobs:
     timeout-minutes: 120
     env:
       CI: 'true'
+      COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json on main
     steps:
       - uses: actions/checkout@v4
         with:
@@ -75,6 +76,7 @@ jobs:
             /data/costs.json
             /data/board-archive.json
             /tools/art-library/
+            /tools/costlog.py
             /tools/clip-gate/vision.py
             /.github/
       - uses: actions/setup-python@v5

@@ -63,6 +63,7 @@ jobs:
     timeout-minutes: 240
     env:
       CI: 'true'
+      COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json on main
     steps:
       - uses: actions/checkout@v4
         with:

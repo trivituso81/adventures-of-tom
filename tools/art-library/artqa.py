@@ -218,6 +218,10 @@ def replay(repo_root, n, cap, runs, out):
     res = {'n': N, 'spent': round(j.spent, 2), 'model': j.model, 'asked': asked, 'no': no, 'clean': clean, 'rows': rows}
     os.makedirs(out, exist_ok=True)
     json.dump(res, open(os.path.join(out, 'artqa-replay.json'), 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+    try:   # costs2: the replay's xAI vision money goes to usage in data/costs.json (a no-op unless COSTS_LOG_REPO is set, as the art-gen Action does)
+        sys.path.insert(0, os.path.join(HERE, '..')); import costlog
+        costlog.log_from_env([{'service': 'xai', 'amount': j.spent, 'what': 'art-gen Action: QA replay on %d approved pictures' % N, 'source': 'art-gen run (artqa replay)'}])
+    except Exception as x: print('warning: could not log the spend:', str(x)[:200])
     return res
 
 

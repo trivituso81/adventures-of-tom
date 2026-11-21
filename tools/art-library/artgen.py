@@ -22,11 +22,13 @@ artfallback1 (2026-11-21, claude/art-fallback-plan.md): the service is chosen pe
 failed tries the next goes to WAN 2.7 on fal (the same prompt, the same reference pictures) through falq.py (the queue code shared with wangen.py); after 2
 failed WAN tries the entry stops (state `stopped`) and the run adds one Tom card (a reference picture) that blocks one Claude remake card. A failed try is
 Tom's reject of a result, or a refusal or error with no picture (written here as a reject with `auto`); his rejects of his own uploads (`up`) never count, and
-a reject with no `svc` is an xAI one. Every result and reject records `svc` and `try`. A WAN run is also logged to `usage` in data/costs.json.
+a reject with no `svc` is an xAI one. Every result and reject records `svc` and `try`. Each run's spend (xAI and WAN) is logged to `usage` in data/costs.json by tools/costlog.py (costs2).
 Env for fal: FAL_KEY (never printed), FAL_QUEUE and FAL_API (test stand-ins)."""
 import os, sys, re, json, time, base64, argparse, datetime, subprocess, threading, hashlib, concurrent.futures
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import falq
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+import costlog   # costs2: the one writer of data/costs.json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODEL = 'grok-imagine-image-2.0'
@@ -508,11 +510,15 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
             def add(b): rep['stop_cards'] = add_stop_cards(b, [d2by[i] for i in cand], repo.root, today)
             try: repo.update_board('board: art-gen stopped %s' % ', '.join(cand), add)
             except Exception as x: say('warning: could not add the stop cards: ' + str(x)[:200])
-        if spend['wan'] > 0:
-            ids_w = [i for i, v in rep['svc'].items() if v == 'wan']
-            def logu(d): d.setdefault('usage', []).append({'service': 'fal', 'date': today, 'amount': round(spend['wan'], 2), 'what': 'Art Library pictures made on WAN 2.7 by the art-gen Action (%s)' % ', '.join(ids_w), 'source': 'art-gen run' + (' ' + url if url else '')})
-            try: repo.update_file('data/costs.json', 'costs: art-gen WAN spend logged [skip ci]', lambda: json.load(open(os.path.join(repo.root, 'data', 'costs.json'), encoding='utf-8')), logu)
-            except Exception as x: say('warning: could not log the WAN spend: ' + str(x)[:200])
+        # costs2: both services are logged through tools/costlog.py (one row per service, never twice for one run)
+        ids_w = [i for i, v in rep['svc'].items() if v == 'wan']; ids_x = [i for i, v in rep['svc'].items() if v == 'xai']
+        src = 'art-gen run' + (' ' + url if url else '')
+        rows = [{'service': 'fal', 'date': today, 'amount': spend['wan'], 'what': 'Art Library pictures made on WAN 2.7 by the art-gen Action (%s)' % ', '.join(ids_w), 'source': src},
+                {'service': 'xai', 'date': today, 'amount': spend['total'] - spend['wan'], 'what': 'Art Library pictures and their QA checks made on xAI by the art-gen Action (%s)' % ', '.join(ids_x), 'source': src}]
+        for r in rows:
+            if url: r['run'] = url
+        try: costlog.log_usage(repo.root, rows, remote=repo.remote, msg='costs: art-gen spend logged [skip ci]')
+        except Exception as x: say('warning: could not log the spend: ' + str(x)[:200])
     def finish():
         rep['spent'] = round(spend['total'], 2)
         if rep['failed'] and not rep['made']: rep['state'] = 'failed'

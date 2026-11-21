@@ -27,6 +27,7 @@ def money(v): return ('-$' if v < 0 else '$') + '{:,.2f}'.format(abs(v))
 def tot(rows): return round(sum(t['amount'] for t in rows), 2)
 ALL = tot(T); GAME = tot([t for t in T if S[t['service']]['scope'] == 'game']); NOV = tot([t for t in T if t['date'][:7] == '2026-11'])
 XAI = tot([t for t in T if t['service'] == 'xai']); XAINOV = tot([t for t in T if t['service'] == 'xai' and t['date'][:7] == '2026-11'])
+FALEST = round(tot([t for t in T if t['service'] == 'fal']) - sum(u['amount'] for u in D['usage'] if u['service'] == 'fal' and u.get('unit') != 'credits'), 2)
 srv = subprocess.Popen([sys.executable, os.path.join(HERE, 'serve.py'), '8096'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); time.sleep(2)
 H = 'http://127.0.0.1:8096/costs.html?today=2026-11-20'
 def txt(pg, sel): return pg.inner_text(sel).replace('\n', '').strip()
@@ -100,7 +101,7 @@ try:
         if '$31.42' not in pg.inner_text('#view'): fails.append('recorded balance not shown')
         pg.screenshot(path=out + '/service-xai.png')
         pg.goto(H + '#/service/fal'); pg.wait_for_selector('dl.kv')
-        if 'About $9.85' not in pg.inner_text('#view'): fails.append('fal estimate (paid less logged use) not shown')
+        if 'About ' + money(FALEST) not in pg.inner_text('#view'): fails.append('fal estimate (paid less logged use) not shown: wanted About %s' % money(FALEST))   # costs2: the jobs add use rows, so the figure is worked out from the file
         # add a charge on this computer
         pg.click('#add'); pg.fill('#dlg input[name=amount]', '20'); pg.fill('#dlg input[name=what]', 'Test renewal'); pg.screenshot(path=out + '/add.png'); pg.click('#dlg button.gold')
         pg.goto(H + '#/ledger'); pg.wait_for_selector('#ltotal')

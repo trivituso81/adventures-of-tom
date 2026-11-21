@@ -380,6 +380,7 @@ def main():
     xai = Xai(key, os.environ.get('XAI_BASE', 'https://api.x.ai'))
     state = json.load(open(out)) if os.path.exists(out) else {'model': None, 'spent': 0.0, 'calls': 0, 'tokens': {'in': 0, 'out': 0}, 'clips': {}}
     model = want or state.get('model')
+    spent0 = state.get('spent', 0.0)   # costs2: this run's share of the ledger kept on the clipgate branch
     if not dry and not model:
         m = pick_model(xai.models())
         model = m['id']
@@ -444,6 +445,12 @@ def main():
             c['flags'] = sorted(q for q, v in c['verdict'].items() if not v['yes'])
     json.dump(state, open(out, 'w'), indent=1)
     print('DONE calls %d spent $%.3f tokens in %d out %d' % (state['calls'], state['spent'], state['tokens']['in'], state['tokens']['out']))
+    if not dry:   # costs2: the run's xAI vision money goes to usage in data/costs.json (a no-op unless COSTS_LOG_REPO is set, as the clip-gate Action does)
+        try:
+            sys.path.insert(0, os.path.join(HERE, '..'))
+            import costlog
+            costlog.log_from_env([{'service': 'xai', 'amount': state['spent'] - spent0, 'what': 'clip-gate Action: vision look checks on %s' % (group or 'clips'), 'source': 'clip-gate run'}])
+        except Exception as x: print('warning: could not log the spend:', str(x)[:200])
 
 
 if __name__ == '__main__':

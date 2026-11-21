@@ -38,16 +38,51 @@ The Dates and Show controls at the top apply to every screen. "Game tools only" 
 
 ## What a browser keeps (not in the repo)
 
-"Add a charge" and "Record the balance" save to this browser only (localStorage `aot-costs-local`). They count in the totals on that computer and are marked "Added on this computer". A session files them into data/costs.json when Tom says what he added.
+"Add a charge" and "Record the balance" save to this browser only (localStorage `aot-costs-local`). They count in the totals on that computer and are marked "Added on this computer". A session files them into data/costs.json when Tom says what he added (as a `balances` row, which the page then turns into a moving estimate).
 
-## Next: costs2 (card c-costs2)
+## How the page fills itself in (built as costs2, 2026-11-21, card c-costs2)
 
-| # | Step |
+Tom's notes on the first look (card t-costs1look): "all good", so nothing in the page's layout or wording changed for them.
+
+| Part | What it does | Where |
+|---|---|---|
+| Balances, once a day | The `costs-sync` Action (06:23 Pacific in winter) reads what each service says is left and writes `balances` rows. One row a day per service: a second read the same day replaces the first, a row filed by hand never is replaced. A read spends nothing. By hand it is a dry run unless `dry_run` is `false` | `.github/workflows/costs-sync.yml`, `tools/costs_sync.py` |
+| Spend, every run | Every Action that spends calls `tools/costlog.py` at the end and appends rows to `usage`: art-gen (xAI pictures and their QA checks, WAN on fal), clip-gen (xAI videos and the gate's look checks), the Battle Guide take step of clip-gen (gate look checks), clip-gate (xAI vision), voice-gen and the board's voice job (ElevenLabs credits), wan-gen (fal), the QA replay of art-gen | `tools/costlog.py`, the jobs' own scripts |
+| The estimate | A balance read earlier, less the dollar use logged after it, shown as "About $X" until the next read. With no read balance a prepaid service whose log is complete shows paid less logged use. A credits row (ElevenLabs) is shown as credits and never taken off a dollar figure | `balanceOf` in `costs.html` |
+| A balance that cannot be read | A dated note on the service page, filed once, and a line under Needs a look until a balance is read | `costs_sync.py`, `flags()` in `costs.html` |
+
+### What each service lets a job read (facts from the providers' docs, 2026-11-21)
+
+| Service | Reads a balance with | Secret | State |
+|---|---|---|---|
+| ElevenLabs | `GET /v1/user/subscription` (the call `voicegen.py` already makes): credits left = `character_limit` less `character_count` | `ELEVENLABS_API_KEY` (set) | Works with the repo's key |
+| fal | `GET https://api.fal.ai/v1/account/billing?expand=credits`. fal's docs say this needs an **admin scope** key; an API scope key is answered 401 or 403 | `FAL_ADMIN_KEY`, else `FAL_KEY` | Unknown until the first run: the job notes it on the fal page if the key is refused |
+| xAI | `GET https://management-api.x.ai/v1/billing/teams/{team}/prepaid/balance`. Needs a **Management key** and the team id; the inference key `XAI_API_KEY` cannot read it. The total is in US cents and the docs' examples show it **negative** when credit is left; the job shows its size as dollars. This sign is an inference from examples: check the first live figure against the xAI console | `XAI_MANAGEMENT_KEY`, `XAI_TEAM_ID` | Not set: skipped. Until then the xAI figure is the last balance recorded, less the use logged after it |
+
+### The ledger rows
+
+| Field of a `usage` row | Meaning |
 |---|---|
-| 1 | A `costs-sync` Action, once a day: read ElevenLabs credits (`/v1/user/subscription`, the same call as `tools/voice-learn/voicegen.py`) with the repo secret and write a read balance into `balances`. Do the same for fal and xAI only if their APIs give a balance to the keys the repo has; if not, say so on the card |
-| 2 | Every Action that spends (art-gen, clip-gen, clip-gate, voice-gen, wan-gen) appends what the run cost to `usage`, so the estimate of a prepaid balance becomes paid less logged use for all of them (artfallback1, 2026-11-21: art-gen already appends its WAN pictures to `usage` as service `fal`, the estimate booked per run; xAI picture spend and the other Actions are still to do) |
-| 3 | Tom's notes from card t-costs1look |
-| 4 | Test with stand-in servers. Never run a paid call from a session |
+| `service`, `date` (Pacific), `at` (UTC time), `amount`, `what`, `source` | As before. `amount` keeps four decimals |
+| `unit` | `credits` for ElevenLabs (credits are spent from the plan, not bought, so they are never dollars). Absent means dollars |
+| `run` | The Actions run URL. A row with the same `run`, `service` and `what` is never written twice, so a retried step cannot double count |
+
+A `balances` row the job writes carries `read: true` (its own rows, so a repeat the same day replaces them); a note it writes carries `job: true`.
+
+`services[].usage_logged_from` is the day from which the game's log holds ALL of a service's use (xai: 2026-11-21, the day every Action began logging). A read balance on or after that day is turned into a moving estimate. `usage_complete` is the same claim from the start (fal).
+
+### How `costlog.py` writes
+
+It fetches the newest main (depth 1), changes `data/costs.json` as read from THAT commit, builds a commit with git plumbing (temporary index, `write-tree --missing-ok`, `commit-tree`) and pushes it to main with `[skip ci]`. The job's own checkout (HEAD, index, working files, its output folder) is never touched, and a partial clone does not fetch every blob. A push refused because main moved is retried from a fresh fetch, 8 times. It does nothing unless `COSTS_LOG_REPO` names a git checkout (each spending workflow sets it to the workspace); tests and sessions leave it unset, so no session can write a spend row by accident. `art-gen` calls `log_usage` itself on its own checkout.
+
+### Not covered, on purpose
+
+- `voice-take` (Voice Library takes) and `music-gen` spend ElevenLabs credits and do not log: the daily balance read already shows the credits left, and a take is a few hundred characters.
+- Spend before 2026-11-21 stays as filed from change notes (`usage_logged_from` marks the day the log became complete).
+
+### Tests
+
+`python3 tools/costs2_test.py` (stand-in git remotes including a partial clone, stand-in ElevenLabs, fal and xAI servers, the page on a desktop and a Duo-width window, and a wiring check of every spending job and workflow), `python3 tools/costs_test.py`, `python3 tools/costs_duo_test.py`, `python3 tools/art-library/artgen_test.py`, `python3 tools/art-library/wangen_test.py` (W12), `python3 -I tools/voice-learn/voicegen_test.py` (the credits row). Three tests already failed on main before costs2 and still do for the same reasons: `clipgen_test.py` (a video file its harness expects is not made), `vision_test.py` (clip `clip-tom-guard` is no longer in the data) and one voicegen check that counts 258 lines (the list is shorter now).
 
 ## iPhone Duo layouts (built as costsduo1, 2026-11-21)
 

@@ -45,6 +45,10 @@ def check_audio(raw, script, th=3):
             return dict(extra=5, missing=0, wrong=0, flag=True, said='looped looped looped looped looped')
     return dict(extra=0, missing=0, wrong=0, flag=False, said=script)
 ''')
+# costs2: the job logs its credits to usage in data/costs.json on main (a stand-in remote; COSTS_LOG_REPO is how the Action opts in)
+sys.path.insert(0, os.path.join(ROOT, 'tools')); import costs_fixture as fx
+cbare = fx.make_remote(tempfile.mkdtemp(prefix='vgc-')); ccl = fx.clone(cbare, os.path.join(work, 'costs-clone'))
+env['COSTS_LOG_REPO'] = ccl
 runner = os.path.join(work, 'run.py')
 open(runner, 'w').write(f'''
 import sys, runpy
@@ -68,6 +72,7 @@ def check(name, ok, why=''):
 rc, o = run(['--out', out, '--limit', '5', '--dry-run'])
 check('dry run exits 0 and says nothing was sent', rc == 0 and 'nothing was sent' in o, o[-300:])
 check('dry run made no request', len(CALLS) == 0)
+check('dry run logged no spend', len(fx.main_costs(cbare)['usage']) == 1)
 check('dry run counts 258 lines when limit is 0', '258' in run(['--out', out, '--limit', '0', '--dry-run'])[1])
 # 2 real run, 5 lines, different voices; one flagged once
 first = None
@@ -102,6 +107,8 @@ check('report counts', r['summary']['clips_made'] == 4 and r['summary']['needs_h
 exp_chars = sum(len(t) for t in sent_texts)
 check('report characters sent matches the requests', r['summary']['characters_sent'] == exp_chars, (r['summary']['characters_sent'], exp_chars))
 check('report credits used matches what the stand-in counted', r['summary'].get('credits_used_by_this_run') == exp_chars, r['summary'])
+cu = fx.main_costs(cbare)['usage']
+check('costs2: the run logged its credits as one ElevenLabs row (unit credits, the subscription\'s own count)', len(cu) == 2 and cu[-1]['service'] == 'elevenlabs' and cu[-1]['unit'] == 'credits' and cu[-1]['amount'] == exp_chars and 'voice-gen Action' in cu[-1]['what'], cu)
 # 3 second run skips done and failed
 n0 = len(CALLS)
 rc, o = run(['--out', out, '--limit', '5'])

@@ -383,8 +383,10 @@ def fallback_e2e():
         ok(rep['svc'] == {'fb-new': 'xai', 'fb-x1': 'xai', 'fb-up': 'xai', 'fb-x2': 'wan', 'fb-x2n': 'wan', 'fb-old': 'wan'}, 'the report says which service made each picture')
         cj = main_file(remote, 'data/costs.json')[0]
         u = [x for x in cj['usage'] if 'WAN' in x['what']]
-        ok(len(cj['usage']) == 2 and len(u) == 1 and u[0]['service'] == 'fal' and abs(u[0]['amount'] - round(.10 + artgen.WAN_EST * 2, 2)) < 1e-9 and 'fb-x2' in u[0]['what'] and u[0]['date'], 'WAN spend is logged to the usage list of data/costs.json (once, service fal): %s' % u)
-        ok(len(cj['usage']) == 2 and cj['usage'][0]['what'] == 'earlier', 'earlier usage rows are kept')
+        ok(len(cj['usage']) == 3 and len(u) == 1 and u[0]['service'] == 'fal' and abs(u[0]['amount'] - round(.10 + artgen.WAN_EST * 2, 2)) < 1e-9 and 'fb-x2' in u[0]['what'] and u[0]['date'], 'WAN spend is logged to the usage list of data/costs.json (once, service fal): %s' % u)
+        ux = [x for x in cj['usage'] if x['service'] == 'xai']   # costs2: the xAI pictures and their QA checks are logged too, one row, never zero
+        ok(len(ux) == 1 and ux[0]['amount'] > 0 and 'xAI' in ux[0]['what'] and 'fb-new' in ux[0]['what'] and ux[0]['date'] and ux[0]['at'], 'xAI spend is logged to the usage list too (once, service xai): %s' % ux)
+        ok(cj['usage'][0]['what'] == 'earlier', 'earlier usage rows are kept')
         # --- Tom rejects fb-x2's WAN result: that is WAN failure 1, so the next try is WAN try 2 (his reject carries svc and try as art.html writes them)
         sh('git', 'fetch', '-q', 'origin', 'main', cwd=work); sh('git', 'reset', '-q', '--hard', 'origin/main', cwd=work)
         doc = json.load(open(work + '/data/art-prompts.json'))

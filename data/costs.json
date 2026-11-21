@@ -140,9 +140,10 @@
    "balance_unit": "usd",
    "balance_kind": "Dollars of prepaid credit left.",
    "gaps": [
-    "The balance has not been read. Only the xAI console shows it.",
-    "Pictures made by pressing Generate in the Art Library are not written to any log in the repo, so the use recorded here is far below the real use."
-   ]
+    "Use before 2026-11-21 is only partly in the log: pictures made from the Art Library on a device key in the first weeks were not written anywhere. From that day every Action that spends on xAI (art-gen, clip-gen, clip-gate and its look checks) writes its run to the log.",
+    "A daily balance read needs a Management key and the team id as repo secrets (XAI_MANAGEMENT_KEY, XAI_TEAM_ID). Without them the figure here is the last balance recorded, less the use logged after it."
+   ],
+   "usage_logged_from": "2026-11-21"
   },
   {
    "id": "xpremium",
@@ -229,9 +230,9 @@
    ],
    "console": "https://elevenlabs.io/app/subscription",
    "console_name": "ElevenLabs subscription page",
-   "keys": "Repo secret ELEVENLABS_API_KEY for the voice-gen Action. The Voice and Music Library keep a key on each device.",
+   "keys": "Repo secret ELEVENLABS_API_KEY for the voice-gen and costs-sync Actions. The Voice and Music Library keep a key on each device.",
    "balance_unit": "credits",
-   "balance_kind": "Credits left this month. Only ElevenLabs knows the figure. The next build (card c-costs2) reads it each day with the repo's key.",
+   "balance_kind": "Credits left this month, read once a day by the costs-sync job with the repo's ELEVENLABS_API_KEY.",
    "gaps": [
     "Invoice UIRDNETR-0008 (between Oct 29 and Nov 3) has no receipt email. It may be a zero invoice or a missing charge."
    ]
@@ -261,7 +262,7 @@
    "history": [],
    "console": "https://fal.ai/dashboard/billing",
    "console_name": "fal dashboard, Billing",
-   "keys": "Repo secret FAL_KEY.",
+   "keys": "Repo secret FAL_KEY. The daily balance read needs an admin scope key: repo secret FAL_ADMIN_KEY (fal answers an API scope key with 401).",
    "balance_unit": "usd",
    "balance_kind": "Dollars of prepaid credit left.",
    "usage_complete": true,

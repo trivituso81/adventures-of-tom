@@ -31,6 +31,8 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..', 'guidegen'))
 import progress   # guidestatus1
 import clipmarks  # noqa: E402
+sys.path.insert(0, os.path.join(HERE, '..'))
+import costlog    # noqa: E402  costs2: the one writer of data/costs.json
 
 CLIP_RATE = {'grok-imagine-video-1.5': {'480p': .08, '720p': .14, '1080p': .25}, 'grok-imagine-video-1.5-lite': {'480p': .02, '720p': .03, '1080p': .14}}   # dollars per second, same table as engine/art-clips.js
 CHAIN = re.compile(r'^art/raw/([a-z]+)/([a-z0-9-]+)-v\d+\.png$')
@@ -422,6 +424,8 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, a.par)) as ex:
         list(ex.map(work, queue))
     report['spent'] = round(spend['total'], 2)
+    if not a.dry_run:   # costs2: what the run cost goes to usage in data/costs.json (videos sent and the gate's vision questions)
+        costlog.log_from_env([{'service': 'xai', 'amount': spend['total'], 'what': 'clip-gen Action: %d video%s sent (%d approved, %d held by the gate, %d failed)' % (len(report['approved']) + len(report['held']) + len(report['still']) + len(report['failed']), '' if len(report['approved']) + len(report['held']) + len(report['still']) + len(report['failed']) == 1 else 's', len(report['approved']), len(report['held']), len(report['failed'])), 'source': 'clip-gen run'}])
     if guide_rows: json.dump({'results': guide_rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
     json.dump(report, open(rf, 'w'), indent=1)
     say('DONE. approved %d, held by the gate %d, need you %d, failed %d, spent about $%.2f' % (len(report['approved']), len(report['held']), len(report['still']), len(report['failed']), spend['total']))

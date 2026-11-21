@@ -47,6 +47,8 @@ jobs:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ')"
     runs-on: ubuntu-latest
     timeout-minutes: 170
+    env:
+      COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json on main
     steps:
       - uses: actions/checkout@v4
         with:

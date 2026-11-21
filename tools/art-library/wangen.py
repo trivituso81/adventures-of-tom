@@ -24,6 +24,7 @@ the fal answer (<what>-r<rev>.json), wangen-report.json, state.json.
 Env: FAL_KEY, FAL_QUEUE (stand-in for tests; default https://queue.fal.run), FAL_API (default https://api.fal.ai), WANGEN_POLL."""
 import os, sys, io, json, time, base64, argparse, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))   # costs2: tools/costlog.py
 from falq import say, Stop, KeyRefused, Gone, data_uri, shown, Fal, apply_live, POLL_S, POLL_MAX_S   # artfallback1: the fal queue code is shared with artgen.py
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -250,6 +251,15 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     return 0 if all(not r.get('error') for r in rows) else 2
 
 
+def log_run_spend(state, spent0, a, names):
+    """costs2: what this run booked on fal (the estimate, or fal's live unit price when that is higher) goes to usage in data/costs.json."""
+    if a.dry_run: return
+    try:
+        import costlog
+        costlog.log_from_env([{'service': 'fal', 'amount': state['spent'] - spent0, 'what': 'wan-gen Action: %s' % ', '.join(names)[:200], 'source': 'wan-gen run'}])
+    except Exception as x: say('warning: could not log the spend: ' + str(x)[:200])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
@@ -267,6 +277,7 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     stf = os.path.join(a.out, 'state.json')
     state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
+    spent0 = state['spent']   # costs2: the ledger on the wangen branch is cumulative; this run's share is the difference
     import threading
     from concurrent.futures import ThreadPoolExecutor
     lock = threading.RLock()
@@ -279,7 +290,9 @@ def main():
     if a.requests:
         fal = Fal(os.environ.get('FAL_KEY', ''), os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
         say('guide requests; ledger $%.2f' % state['spent'])
-        return run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
+        rc = run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
+        log_run_spend(state, spent0, a, ['guide requests'])
+        return rc
     say('%d job(s): %s; up to %d at once; ledger $%.2f of the $%.2f cap' % (len(names), ', '.join(names), max(1, min(3, a.parallel)), state['spent'], a.cap))
 
     def one(n):
@@ -289,6 +302,7 @@ def main():
     with ThreadPoolExecutor(max_workers=max(1, min(3, a.parallel, len(names)))) as ex:
         res = list(ex.map(one, names))
     codes = [c for c, _ in res]; reps = [r for _, r in res]
+    log_run_spend(state, spent0, a, names)
     rf = os.path.join(a.out, 'wangen-report.json')
     if len(names) == 1: json.dump(reps[0], open(rf, 'w'), indent=1)
     else: json.dump({'jobs': reps, 'spent_after': state['spent'], 'cap': a.cap}, open(rf, 'w'), indent=1)

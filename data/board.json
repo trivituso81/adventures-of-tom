@@ -24249,7 +24249,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "AI Costs fills itself in: balances and job spend",
-   "next": "Waits on card t-costs1look. Then build the steps in docs/COSTS.md, section Next: a daily job that reads the ElevenLabs balance, and every paying job writing what its run cost into the ledger.",
+   "next": "Built as costs2 (docs/COSTS.md, How the page fills itself in). Done: the daily costs-sync Action (ElevenLabs balance with the repo key; fal and xAI only if the repo has an admin fal key and an xAI Management key with team id), and art-gen, clip-gen, clip-gate, voice-gen and wan-gen each log their run's spend. Tom's notes on t-costs1look were all good. Nothing paid was run. Next: Tom's optional card t-costs2keys.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -24283,8 +24283,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built costs2: costs-sync Action (balances), tools/costlog.py (every paying job logs its run), page shows a moving estimate. Tom's t-costs1look note was all good, so no page changes from it. Tested with stand-in servers only. Three tests (clipgen_test, vision_test, one voicegen check) already failed on main; card c-stale-tests holds them. fal and xAI balance reads need keys the repo may not have: card t-costs2keys."
     }
-   ]
+   ],
+   "after": "t-costs2keys"
   },
   {
    "id": "c-battleguide",
@@ -29708,6 +29713,60 @@
     }
    ],
    "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
+  },
+  {
+   "id": "t-costs2keys",
+   "title": "Optional: add fal and xAI keys for balance reads",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "fyi": true,
+   "blocks": [],
+   "next": "Optional, about 5 minutes. Skip it and nothing breaks: ElevenLabs is read by itself, fal shows paid less logged use, and xAI shows the last balance you tell Claude less the use logged since. 1) fal: open https://fal.ai/dashboard/keys, press Create key, choose the Admin scope, copy it. Open GitHub, repo trivituso81/adventures-of-tom, Settings, Secrets and variables, Actions, New repository secret. Name FAL_ADMIN_KEY, paste the key, Add secret. 2) xAI: open https://console.x.ai, Settings. Create a Management key (your account needs the Management Keys permission on the Users page) and copy it, and copy the Team ID on the same page. Add two repository secrets the same way: XAI_MANAGEMENT_KEY and XAI_TEAM_ID. 3) GitHub, Actions, costs-sync, Run workflow, set dry_run to false, press Run. When it finishes open https://trivituso81.github.io/adventures-of-tom/costs.html#/services: fal and xAI should show a balance read today. If a service still says Not read yet, its card says why under Needs a look on the Overview.",
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with build costs2: the daily balance job can only read fal and xAI with keys their docs require."
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
+  },
+  {
+   "id": "c-stale-tests",
+   "tag": "staletests1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Repair three tests that already failed on main",
+   "blocks": [],
+   "next": "Repair clipgen_test.py, vision_test.py and the 258-line check in voicegen_test.py, which failed on main before costs2 for data reasons, not code reasons.",
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "prompt": {
+    "what": "Brings three tests that fail on main back to green by fixing what each one assumes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause of each failure is known only in outline)",
+    "effort": "medium (three small, separate causes)",
+    "text": "Read CLAUDE.md, then repair three tests that fail on main for data reasons. 1) tools/art-library/clipgen_test.py stops at generation() with FileNotFoundError for out1/videos/clip-tom-give-rev0.mp4. 2) tools/clip-gate/vision_test.py fails because the clip id clip-tom-guard is no longer in data/art-prompts.json (KeyError), so its 6-call and spend checks fail. 3) tools/voice-learn/voicegen_test.py: the check 'dry run counts 258 lines when limit is 0' fails because the list of lines with no clip is shorter now. For each, work out whether the test or the code is wrong; change a test only to follow data that legitimately changed (count the lines from the index in the test instead of hard-coding 258), never to hide a real fault. Do not run any paid call. Run each repaired test and tools/smoke.py, add a docs/CHANGES.md entry named staletests1, and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Found by costs2: these three tests fail the same way on untouched main."
+    }
+   ],
    "created": "2026-11-21",
    "changed": "2026-11-21"
   }

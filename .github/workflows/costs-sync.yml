@@ -1,0 +1,56 @@
+name: costs-sync
+
+# costs2 (card c-costs2). Once a day, reads what each AI service says is left and writes it to `balances` in data/costs.json (tools/costs_sync.py), so the
+# AI Costs page shows a real figure and not only paid less logged use. A read spends nothing. Services whose key cannot read a balance get a dated note on
+# their page instead (fal needs an admin scope key, xAI a Management key and team id). The commit goes to main with [skip ci]; nothing else changes.
+# Secrets used when they are set: ELEVENLABS_API_KEY, FAL_ADMIN_KEY (else FAL_KEY), XAI_MANAGEMENT_KEY and XAI_TEAM_ID. None is printed.
+# By hand: dry_run true (the default) reads and prints and writes nothing. The scheduled run writes.
+
+on:
+  schedule:
+    - cron: '23 14 * * *'   # 6:23 am Pacific in winter, 7:23 in summer
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'true: read and print, write nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: costs-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /data/costs.json
+            /tools/costs_sync.py
+            /tools/costlog.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Read the balances
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          FAL_ADMIN_KEY: ${{ secrets.FAL_ADMIN_KEY }}
+          XAI_MANAGEMENT_KEY: ${{ secrets.XAI_MANAGEMENT_KEY }}
+          XAI_TEAM_ID: ${{ secrets.XAI_TEAM_ID }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--root "$GITHUB_WORKSPACE")
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${DRY:-true}" != "false" ]; then ARGS+=(--dry-run); fi
+          python3 -I tools/costs_sync.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/sync.log"
+          { echo '### costs-sync'; echo '```'; tail -30 "$RUNNER_TEMP/sync.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

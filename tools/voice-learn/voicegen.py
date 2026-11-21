@@ -291,6 +291,13 @@ def main():
         summary['credits_used_by_this_run'] = after['used'] - before['used']
     json.dump({'summary': summary, 'lines': rep}, open(os.path.join(a.out, 'report-' + time.strftime('%Y%m%d-%H%M%S') + '.json'), 'w'), ensure_ascii=False, indent=1)
     print(json.dumps(summary, indent=1))
+    # costs2: ElevenLabs credits spent go to usage in data/costs.json (unit credits: shown on the service page, never added to a dollar total). The credits are the
+    # change in the subscription's count when the key could read it, else the characters sent at the measured 0.44 credits per character (voiceboard.CREDITS_PER_CHAR).
+    try:
+        sys.path.insert(0, os.path.join(HERE, '..')); import costlog
+        cr = summary.get('credits_used_by_this_run')
+        costlog.log_from_env([{'service': 'elevenlabs', 'unit': 'credits', 'amount': cr if cr else round(sent * 0.44), 'what': 'voice-gen Action: %d line%s tried, %d characters sent%s' % (len(rep), '' if len(rep) == 1 else 's', sent, '' if cr else ' (credits estimated at 0.44 a character)'), 'source': 'voice-gen run'}])
+    except Exception as x: print('warning: could not log the spend:', str(x)[:200])
     return 1 if aborted and not clips else 0
 
 

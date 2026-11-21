@@ -1339,6 +1339,13 @@
    "cmd": "python3 -I tools/guardwin_test.py",
    "group": "g1",
    "minutes": 3
+  },
+  {
+   "id": "costs2_test",
+   "cmd": "python3 -I tools/costs2_test.py",
+   "group": "g4",
+   "minutes": 3,
+   "outdir": true
   }
  ]
 }
