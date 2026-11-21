@@ -20801,7 +20801,7 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
@@ -20833,8 +20833,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: there's still a flash of the taxi cab company between the phone on seat and the plane animation start Sent to Claude as card c-fix-ch1flight-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T20:43:32.124Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-voiceboard",
@@ -28699,6 +28705,65 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-fix-ch1flight-3",
+   "tag": "fix-ch1flight-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "next": "You reported a problem on Check chapter 1 ends in the flight. Claude starts the fix by itself. Latest: there's still a flash of the taxi cab company between the phone on seat and the plane animation start",
+   "blocks": [
+    "t-ch1flight"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T20:43:31.509Z",
+     "card": "t-ch1flight",
+     "title": "Check chapter 1 ends in the flight",
+     "ask": "play",
+     "words": "there's still a flash of the taxi cab company between the phone on seat and the plane animation start",
+     "shot": "",
+     "asked": "Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS ) Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1flight"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-ch1flight.",
+     "at": "2026-11-21T20:43:32.124Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-ch1flight: there's still a flash of the taxi cab company between the phone on seat and the plane animation start",
+     "at": "2026-11-21T20:43:32.124Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-21T20:43:32.124Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Check chapter 1 ends in the flight.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1flight-3 and t-ch1flight in data/board.json, history included. Your first push is the commit board: start c-fix-ch1flight-3.\n\nTom tested and found problems:\n1. Card t-ch1flight (Check chapter 1 ends in the flight, ask play). He was asked: Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS ) Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab. He wrote: there's still a flash of the taxi cab company between the phone on seat and the plane animation start\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T20:43:31.509Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1flight to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1flight, and give the build fix-ch1flight-3 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-ch1flight",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
