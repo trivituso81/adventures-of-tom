@@ -24137,7 +24137,7 @@
    "id": "c-anim-grace-give-q4es",
    "tag": "anim-grace-give-q4es",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Giving (support moves)",
    "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Redo with wan",
@@ -24163,13 +24163,18 @@
    ],
    "chat": {
     "url": "",
-    "opening": "A note sent from the Battle Guide"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Tom, from the Battle Guide: Redo with wan",
      "at": "2026-11-21T17:03:34.442Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T17:14:07.511Z"
     }
    ],
    "prompt": {
