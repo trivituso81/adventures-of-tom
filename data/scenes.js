@@ -1672,7 +1672,9 @@ SCENES.ch4Boss=[
   {battle:'directorscut',tut:'directorscut'},
   {if:()=>flag('battle:directorscut')!=='win',then:[
     {heal:true},
-    {talk:'TNB',lines:['Back to one, everybody. Touch-ups.','Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times.']},
+    {if:()=>B3_CH_ON(4),then:[
+      {talk:'TNB',lines:['Back to one, everybody. Touch-ups.','Babe, when it winds up CUT, have Tom step in front, or break its pips to cancel it. Then we tell it great take.']}],else:[
+      {talk:'TNB',lines:['Back to one, everybody. Touch-ups.','Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times.']}]},
     {toast:'Face The Director’s Cut and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 10. After the boss (won in the scene, or on a retry with A): the megaphone is told "great take", gives its award to TNB for best costumes.

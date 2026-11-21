@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3],
+  chapters:[1,2,3,4],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -73,6 +73,25 @@ const B3_STORY={
       {id:'dive',who:'*',text:'It dived to the Back row behind a Soggy Sock and is charging Deep Dive on everyone. A Break or an interrupt cancels it, or knock out the Sock to pull Iron-Gill back to the Front.',when:(F)=>F.foes.some(f=>f.id==='irongill'&&f.row==='back')},
       {id:'belch',who:'*',text:'Pepper Belch is charging (!!). It scorches everyone, so shield the family first and heal right after.',when:(F)=>F.foes.some(f=>f.charge&&/Belch/.test(f.charge.name))},
       {id:'steam',who:'*',text:'The belch left Iron-Gill Toasty. A Drench hit sets that off as a Steam Cloud!',when:(F)=>F.foes.some(f=>f.id==='irongill'&&f.st&&f.st.toasty)}
+    ],
+    // ---- Chapter 4 (stage 17c): Tom, TNB and Nara on the backlot. ----
+    ch4crab:[
+      {id:'shell',who:'*',text:'The Cue Card Crab is an Elite: 4 Composure pips, and it can’t stand Drench or Racket. It shrugs off Clobber. Its Posterboard Shell takes 25% off every hit until a Break.'},
+      {id:'cards',who:'*',text:'The crab is charging Card Toss (!!): it hits everyone and leaves them Bleeding. Shield the family, or break its pips to cancel it.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='cuecrab')},
+      {id:'bleed',who:'*',text:'Bleed ticks a little damage every turn. A heal or a cleanse stops it.',when:(F)=>F.party.some(p=>p.st&&p.st.bleed)}
+    ],
+    ch4clapper:[
+      {id:'peeve',who:'*',text:'The Clapper Snapper can’t stand Sizzle or Razzle. The Extra Extra beside it can’t stand Racket or Razzle, so Razzle hits both.'},
+      {id:'scene',who:'*',text:'Scene One, Marker! pulls another monster forward on the turn bar, so it acts sooner. Keep an eye on the bar.',when:(F)=>F.round>=2}
+    ],
+    ch4moth:[
+      {id:'moth',who:'*',text:'The Boom Mic Moth hovers in the Back row and dodges 20% of attacks. It can’t stand Drench or Clobber, and it shrugs off Racket.'},
+      {id:'lock',who:'*',text:'Mic Feedback puts Skill Lock on someone: for a turn their Pocket Vibe Skills are off. Their Basic and Main Vibe Skills still work.',when:(F)=>F.party.some(p=>p.st&&p.st.skill_lock)}
+    ],
+    directorscut:[
+      {id:'pips',who:'*',text:'The Director’s Cut has 6 Composure pips and can’t stand Razzle or Sizzle. It shrugs off Racket.'},
+      {id:'cut',who:'*',text:'CUT! is charging (!!): a stun and a hard push on one person. Tom’s Suite Door Slide takes it, a Break or an interrupt cancels it, and Blind makes it miss.',when:(F)=>F.foes.some(f=>f.charge&&/CUT/.test(f.charge.name))},
+      {id:'action',who:'*',text:'ACTION! called Extra Extras and sped everything up 15%. Knock out the Extras, or strip the speed buff.',when:(F)=>F.foes.some(f=>f.st&&f.st.action_speed)}
     ]
   }
 };

@@ -1,3 +1,10 @@
+## b3s17c (2026-11-21): chapter 4's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s17, part c. Chapter 4 joins chapters 1 to 3: the Cue Card Crab, the Clapper Snapper, the Boom Mic Moth (with their Extra Extras) and The Director's Cut play on Battle 3 with the bestiary's Vibe Points (8 each, 26 for the boss) and tips for Battle 3 (`ch4crab`, `ch4clapper`, `ch4moth`, `directorscut`): Pet Peeves and Resists, Posterboard Shell, Card Toss and Bleed, Scene One Marker!, Skill Lock (only Pocket Vibe Skills), CUT! (a Break, an interrupt, Blind or Tom's Suite Door Slide stops it) and ACTION! (strip the speed buff). No Warmth bar, no HEART, no Tombo. A win over The Director's Cut sets `kind:directorscut`, so the kind ending plays.
+- Scene change: TNB's coaching after a loss has a Battle 3 version (`B3_CH_ON(4)`); the first line is the same as before so its clip still plays, the second line is new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old line.
+- Tests: `tools/ch4_b3_test.py` in portrait and landscape (11 steps from Chapter Select to the studio; every fight on Battle 3, no Warmth words, tips once each, Vibe Points paid), `tools/b3-check-s17.js` (chapters 1 to 4), `unused_voice.py` 0 on all checks. `tools/b3_story_test.py` failed once on its "a save made on Battle 3 loads with the switch on Old" step after a long run and passed on every re-run on its own; the chapter 1 scene fight in that step had not started after 30 seconds (an intro card was still up). Not changed.
+- Not looked at: the chapter 5 fights (last part).
+
 ## costsduo1 (2026-11-21): AI Costs has a folded and an unfolded iPhone Duo layout
 
 Card c-costsduo1, from Tom's answer "Build it as drawn" on t-costsduo-go. costs.html now picks one of three layouts by width and re-picks when the width changes (unfolding the phone), so no reload is needed. Both parts of the plan (a: pocket, b: open book) went out in this one build.
