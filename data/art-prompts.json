@@ -17658,8 +17658,20 @@
    "group": "Story gates"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-gate-blvd-studio-open-v1.png",
+     "date": "2026-11-21",
+     "from": "v1",
+     "at": 1795286361251,
+     "srv": "prop-gate-blvd-studio-open@20261121T072843",
+     "svc": "xai",
+     "qa": 1,
+     "qaFail": []
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-20",
