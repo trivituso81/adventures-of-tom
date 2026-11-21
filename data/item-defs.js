@@ -94,7 +94,12 @@ const ITEM_STORY={
 // A type name, where the one worked out from the fields is wrong for the item.
 const ITEM_TYPE={ present:'Key Item', nsinvites:'Key Item', nsbanner:'Key Item', fridgephoto:'Key Item' };
 // An IN BATTLE line, where the one worked out from the fields is not enough.
-const ITEM_BATTLE={ nspepper:'Throw it: 90 damage. It burns through an ICE SHELL like a Cozy hit.' };
+// itemdefplay (Gemini ch1 C11): Battle 3 has no gear stats (no HP, GRIT, COOL, POW from what is worn), so a Wear it line may not name one.
+const ITEM_BATTLE={ nspepper:'Throw it: 90 damage. It burns through an ICE SHELL like a Cozy hit.',
+  hoodie:'Wear it: Doesn’t change a fight. Smells like the pond, and the Grump would still like it back.',
+  barkslab:'Wear it: Doesn’t change a fight. It’s heavy, mossy and very sure of itself.',
+  bcap:'Wear it: Doesn’t change a fight. Boppy says it’s for luck, and he’d know.' };
+const ITEM_BATTLE_OLDSTATS='Wear it: Doesn’t change a fight yet. It looks great, though.';
 
 // The IN STORY line for every item without its own line, by kind.
 const ITEM_STORY_KIND={
@@ -141,6 +146,7 @@ const itemDefEnd=s=>s&&!/[.!?]$/.test(s)?s+'.':s;
 function itemDefBattle(id) {
   const it=items[id];
   if(ITEM_BATTLE[id]) return ITEM_BATTLE[id];
+  if(it.slot&&(it.stats||(it.perk&&it.perk.stat))) return ITEM_BATTLE_OLDSTATS;   // old Battle 2 stats (hp, pow, grit, warmth, cool, pep) mean nothing in Battle 3
   if(it.slot) { const b=typeof bonusText==='function'?bonusText(it):''; return b?'Wear it: '+itemDefEnd(b):'Wear it. It looks great. That’s all.'; }
   const fx=typeof effectText==='function'?effectText(it).replace(/^Battle: /,''):'';
   if(fx) {

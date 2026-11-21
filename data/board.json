@@ -22763,7 +22763,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Read a few item banners on your phone",
-   "next": "Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
+   "next": "Open the game, press RELOAD on the title, load chapter 1. Get the Cookie from Deedee in her kitchen before she joins your party (she only stands there while she is not in it). Then beat a monster that drops something. Look at: Pond Hoodie and Bark Slab now say they don't change a fight (no +POW or +GRIT), the Dragonfly Coin banner stays fully visible until you tap, and every banner still has picture, type chip, italic line, IN BATTLE, IN STORY. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -27813,6 +27813,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed: Wear it lines no longer name Battle 2 stats (Pond Hoodie, Bark Slab, Boppy's Cap and all stat-only gear), banner dismiss guard 800 ms. Cookie: expectation outdated, Deedee is in her kitchen only while not in the party. Build fix-itemdefplay."
     }
    ],
    "prompt": {

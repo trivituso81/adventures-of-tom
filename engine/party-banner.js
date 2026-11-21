@@ -10,7 +10,7 @@
 // bannerhold1 (Tom 2026-11-19): a banner HOLDS the game. While one is on screen nothing else can be done: the world, scenes and dialogue wait, every
 // key, tap and pad button is swallowed, until the player dismisses it (tap, A, Enter, Space, Escape, any gamepad A or B). Queued banners each need
 // their own dismiss. PB_MIN keeps the press that ended the line before it from dismissing the banner by accident.
-const PB_MIN=450;    // ms a banner ignores dismissal after it appears
+const PB_MIN=800;    // ms a banner ignores dismissal after it appears (itemdefplay: longer than the 350 ms fade-in, so a late press can never close it half faded)
 const PB_GAP=400;    // ms between one dismiss and the next banner
 const pbQueue=[];
 let pbBusy=false, pbShown=false, pbAt=0, pbTimer=0;

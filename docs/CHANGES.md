@@ -1,3 +1,11 @@
+## fix-itemdefplay (2026-11-21): item banners no longer name old battle stats, and a banner can't close half faded in
+
+Gemini ch1 run, C11 (card t-itemdefplay): "On the Dragonfly Coin (KEY ITEM) banner ... the card began fading in over the map ... and auto-dismissed mid-fade-in" and "IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats ... Wear it: +18 HP, +4 GRIT, +1 COOL" (Pond Hoodie), "Wear it: +5 POW" (Bark Slab); related X-07, Boppy's Cap "GRIT +10%".
+- `data/item-defs.js`: Battle 3 reads no worn gear stats, so every Wear it line of a piece that only had old stats or a stat perk now says it doesn't change a fight yet (`ITEM_BATTLE_OLDSTATS`); the Pond Hoodie, Bark Slab and Boppy's Cap have their own joke lines in `ITEM_BATTLE`. Lines for other perks (heals, coins, immunities) are unchanged; I did not check that Battle 3 plays those.
+- `engine/party-banner.js`: `PB_MIN` 450 to 800 ms. The fade-in is 350 ms, so a press landing just after it could close the card before it read. I could not reproduce Gemini's exact auto-dismiss; this is the likely cause.
+- Cookie (decision): the expectation was outdated, not the game. Deedee stands in her kitchen only while she is not in the party; the cookie is reachable then (before recruiting her, or after she leaves). Card t-itemdefplay now says so.
+- Not changed: the Menu > ITEMS line for Boppy's Cap still shows the Battle 2 stat (Battle 2 still runs chapters 5 to 10). In-game pencil report r-20261121-120404-lwe8 is about toads, not this, left open.
+- `tools/itemdef_test.py`: waits longer than 800 ms before presses; new D7 fails if a Wear it line names a Battle 2 stat. Passed.
 ## anim-deedee-dodge-y4m3a (2026-11-21): Deedee's Dodge: one more Wan video ordered, the same prompt with her figure at 80% of the frame (video being made)
 
 Card c-anim-deedee-dodge-y4m3, part a. Wan job `deedee-dodge` rev 4: prompt `wan-deedee-dodge-v3.txt` word for word, one change `pad: 0.8` (the change that kept her spread hands inside the frame on her victory). The video and the bake follow in build anim-deedee-dodge-y4m3.

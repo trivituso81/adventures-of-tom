@@ -72,17 +72,19 @@ with sync_playwright() as pw:
         for i in SHOW_KINDS:
             pg.evaluate("id=>{ pbItem.pages=[[id,1]]; pbItem.at=0; pbItem.note=id==='cookie'?'It went in a pocket.':''; pbItemPage(); }",i); pg.wait_for_timeout(250)
             tiles.append(Image.open(io.BytesIO(pg.screenshot())))
-        pg.wait_for_timeout(500); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
+        pg.wait_for_timeout(900); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
         cols=3 if name=='portrait' else 2; tw,th=tiles[0].size; sheet=Image.new('RGB',(tw*cols,th*((len(tiles)+cols-1)//cols)),'white')
         for k,t in enumerate(tiles): sheet.paste(t,((k%cols)*tw,(k//cols)*th))
         sheet.save(os.path.join(SHOTS,f'itemdef-{name}.png'))
         # D6 pages
         PG="()=>{ const w=document.getElementById('party-banner'); return w.classList.contains('on')?[w.querySelector('.pb-name').textContent,w.querySelector('.pb-page').textContent,w.querySelector('.pb-ihint').textContent]:null; }"
-        pg.evaluate("()=>grantItem(['dragonflycoin','juice','juice'])"); pg.wait_for_timeout(800)
-        a=pg.evaluate(PG); pg.wait_for_timeout(300); pg.keyboard.press('Enter'); pg.wait_for_timeout(60)
+        pg.evaluate("()=>grantItem(['dragonflycoin','juice','juice'])"); pg.wait_for_timeout(900)
+        a=pg.evaluate(PG); pg.wait_for_timeout(400); pg.keyboard.press('Enter'); pg.wait_for_timeout(60)
         pg.keyboard.press('Enter'); pg.wait_for_timeout(60); held_early=pg.evaluate("()=>partyBannerHeld()")   # a second press right after the page turn is ignored (PB_MIN)
-        b=pg.evaluate(PG); pg.wait_for_timeout(600); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
+        b=pg.evaluate(PG); pg.wait_for_timeout(900); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
         check(f'D6 {name}: page 1 of 2, then page 2 with the count, then closed',a and a[0]=='Dragonfly Coin' and a[1]=='1 of 2' and 'next item' in a[2] and b and b[0]=='Juice Box x2' and b[1]=='2 of 2' and 'continue' in b[2] and held_early and not pg.evaluate("()=>partyBannerHeld()"),(a,b))
+    bad=pg.evaluate("()=>Object.keys(items).filter(id=>items[id].slot&&!(items[id].perk&&items[id].perk.immune)&&/\\b(POW|GRIT|WARMTH|COOL|PEP)\\b|\\+\\d+ HP/.test(itemDef(id).battle))")
+    check('D7 no Wear it line names a Battle 2 stat (itemdefplay)',not bad,bad[:5])
     check('no page errors',not errs,errs[:3])
     br.close()
 print('FAILED' if fails else 'PASSED'); raise SystemExit(1 if fails else 0)
