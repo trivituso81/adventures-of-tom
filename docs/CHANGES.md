@@ -1,3 +1,10 @@
+## 2026-11-21 (7): Art Library bake, clip-skeeter-bite, clip-skeeter-whine (`artbake1573`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-skeeter-bite: clip `skeeter-bite` cut from art/raw/clips/clip-skeeter-bite-v4.mp4 (24 pictures a second; video frames 0 to 72, every 2, hit at frame 10; 37 pictures kept; played at 1.5x). skeeter_bite frames 37 frame px 560 368 rows 70 46 sheet (997, 6251) in memory mb 24.9 (as a grid 30.5) kb 997 dur ms 2056 kind strike impact ms 278 reach [28.2, 21.4]
+- clip-skeeter-whine: clip `skeeter-whine` cut from art/raw/clips/clip-skeeter-whine-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, state; 37 pictures kept; played at 1.5x). skeeter_whine frames 37 frame px 544 376 rows 68 47 sheet (2455, 2415) in memory mb 23.7 (as a grid 30.3) kb 957 dur ms 2056 kind state impact ms 0 reach [22.2, 21.0]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## portraits2 (2026-11-21): Portraits baked from your saved crops: rose (made by the portrait-bake Action)
 
 - Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
