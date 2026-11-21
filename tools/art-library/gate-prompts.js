@@ -60,22 +60,25 @@ const GATES = [
   // gatelayer1: the open state of the gates that swing or lift.
   { id: 'town-school-open', ar: '1:1', area: 'the Square', file: 'art/town.webp', title: 'School gate, open (Square east lane, chapter 5 on)',
     where: 'The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign.',
-    what: 'A chain link school gate swung wide open: the same grey steel posts with a top rail, the gate leaf swung back flat against the post on one side. No chain and no padlock anywhere. No sign, no words.',
+    what: 'The same chain link school gate, opened: the gate leaf is swung toward the viewer and hangs at an angle from the right post, so the space between the two posts is empty and shows only background. No chain and no padlock anywhere. No sign, no words.',
     size: 'The posts span the full width of the lane, about two people wide, and are a little taller than a person. Nothing stands in the middle of the lane.' },
   { id: 'jpark-barn-open', ar: '1:1', area: 'Jefferson Park', file: 'art/jpark.webp', title: 'Car Barn gate, open (Jefferson Park east edge, chapter 8 on)',
     where: 'Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening is the side street at the far edge of the picture, beyond the green CAR BARN arch.',
-    what: 'A tall old black iron double gate between two weathered stone posts, both gate leaves swung wide open and standing at an angle. No chain and no padlock anywhere. The frost is gone. The riveted metal plate on the left leaf reads exactly: DIVISION NINE CAR BARN',
+    what: 'A tall old black iron double gate between two weathered stone posts, both gate leaves swung toward the viewer and hanging at an angle from their stone posts, so the space between the posts is clear from post to post. No chain and no padlock anywhere. The frost is gone. The riveted metal plate on the left leaf reads exactly: DIVISION NINE CAR BARN',
     size: 'The stone posts span the full width of the side street, about two people wide, and are taller than a person. The gap between the open leaves is clear.' },
   { id: 'blvd-studio-open', ar: '3:2', area: 'the Downtown plaza', file: 'art/blvd.webp', title: 'Studio gate arm, raised (Downtown, chapter 4 on)',
     where: 'The Downtown plaza is a sunny city square of shops, palms and lamps. The opening is the paved road at the far upper corner that passes under the green STUDIO arch, next to the checkered cab building.',
-    what: 'A road barrier arm gate raised: two short red and white striped posts, one at each side of the road, and the long red and white striped arm lifted straight up and standing upright from the left post. The sign that was on the arm is gone. Nothing crosses the road.',
+    what: 'A road barrier arm gate raised: two short red and white striped posts, one at each side of the road, and the long red and white striped arm still hinged to the top of the left post but pointing straight up at the sky. The sign that was on the arm is gone. Nothing crosses the road.',
     size: 'The two posts are as far apart as the road gap, about two people wide, and are about waist high. The raised arm is about as tall as a person.' },
   { id: 'backlot-stage7-open', ar: '3:2', area: 'the studio backlot', file: 'art/backlot.webp', title: 'Stage 7 doors, open (Backlot, chapter 4 on)',
     where: 'The Backlot is a movie studio street of fake western and city sets. The opening is the big open hangar doorway at the far end of the street, under the STAGE 7 lettering.',
-    what: 'A pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, slid wide apart to both sides so the middle of the doorway is open and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above is switched off: dark red glass, no glow. No sign.',
+    what: 'A pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, each door slid most of the way to its side, so the open middle takes up about half of the doorway and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above stays as it is. No sign.',
     size: 'It fills the whole hangar doorway, about two people wide, and is about three people tall.' },
 ];
 
+// fix-gatelayer-pics-2 (2026-11-21): with the locked picture attached the four open states came back still shut or barely ajar (school gate
+// unchanged, Car Barn and Stage 7 a narrow gap) and the studio arm vanished, so each open state now says how far it opens and where the moved
+// part hangs. The Stage 7 lamp-off ask missed twice (lit both times), so it is dropped (stop-loss): the lamp stays as in the locked picture.
 // fix-artgen2look (Tom 2026-11-21 on the first six made by the board: "All failed"): an open state attaches its own approved locked picture as
 // picture 2 so the generator paints that same gate (the six came back as different gates, two still chained and padlocked), Amy's door attaches
 // a crop of the real painted door, and a picture with no lettering forbids every word (the generator had added OPEN and GREGORI).
