@@ -24564,6 +24564,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue session started: finishing it (rev 5, prompt unchanged, pad 0.65)."
     }
    ],
    "prompt": {
