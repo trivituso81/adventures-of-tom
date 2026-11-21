@@ -20075,7 +20075,7 @@
     }
    ],
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T18:47:45Z",
     "ids": [
      "prop-item-solo-amy_chm1",
@@ -20083,7 +20083,13 @@
      "prop-item-solo-g_bsash"
     ],
     "est": 0.15,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T18:48:00Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44937463561",
+     "n": 0
+    }
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
