@@ -21602,7 +21602,7 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
    "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
@@ -21635,11 +21635,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
-   "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGjA53ZzZnyFQNd8R4",
+    "url": "",
     "opening": "started by START"
    }
   },
@@ -25168,8 +25171,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "29c732ffcdef395369ca15ef9a5a6a256323d653",
- "synced_at": "2026-11-21T03:54:40+00:00",
+ "synced": "169e99023422d7553c27c921b9c437e6a0f2e15a",
+ "synced_at": "2026-11-21T03:56:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
