@@ -19834,6 +19834,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T18:06:24-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof",
+    "fix-wanproof-watch"
+   ],
+   "cards": [
+    "c-wanproof",
+    "c-fix-wanproof-watch",
+    "c-startfix",
+    "t-startfix-look",
+    "c-wanch1",
+    "c-wanidle",
+    "t-wanch1-fal",
+    "c-ch2lessons",
+    "c-ch3lessons"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGRvj5YBSMvPY8Zknj",
    "title": "Run the Project clean-up inside the Project",
    "first": "2026-11-20T18:04:42Z",
@@ -19867,29 +19890,6 @@
     "c-fix-gatelayer-pics",
     "t-gatelayer-pics",
     "t-hollowtrail-play"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T18:01:15-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb",
-    "wanproof",
-    "fix-wanproof-watch"
-   ],
-   "cards": [
-    "c-wanproof",
-    "c-fix-wanproof-watch",
-    "c-startfix",
-    "t-startfix-look",
-    "c-wanch1",
-    "c-wanidle",
-    "t-wanch1-fal",
-    "c-ch2lessons",
-    "c-ch3lessons"
    ]
   },
   {
@@ -22133,8 +22133,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d2d328e0aa77483d0d4799d6981a1778f7f46896",
- "synced_at": "2026-11-21T02:03:25+00:00",
+ "synced": "d466426c50a357a6747d698b6925abe59c7bc856",
+ "synced_at": "2026-11-21T02:07:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
