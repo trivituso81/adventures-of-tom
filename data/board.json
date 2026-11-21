@@ -12860,6 +12860,10 @@
     {
      "d": "2026-11-20",
      "t": "Part a pushed as b3s12a: chapter 5 (5 formations, The Red Pen, Lab fights NEW 28 to NEW 32). Chapters 6 and 7 still to do; they follow as b3s12b and b3s12."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as b3s12a: New battle: the chapter 5 school monsters and The Red Pen join the Battle Lab (stage 12, part a of three)"
     }
    ],
    "prompt": {
@@ -19637,6 +19641,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
+   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
+   "first": "2026-11-20T17:27:52-08:00",
+   "last": "2026-11-20T17:50:49-08:00",
+   "tags": [
+    "b3s12a"
+   ],
+   "cards": [
+    "c-b3s12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
    "title": "Fix: board saves fail once board.json passes 1 MB",
    "first": "2026-11-20T17:48:44-08:00",
@@ -19805,16 +19821,6 @@
    ],
    "cards": [
     "c-fix-heist1play-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
-   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
-   "first": "2026-11-20T17:27:52-08:00",
-   "last": "2026-11-20T17:27:52-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s12"
    ]
   },
   {
@@ -21857,8 +21863,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "091f6a665f9826548d16af0648e03ae1712bbca5",
- "synced_at": "2026-11-21T01:48:51+00:00",
+ "synced": "2779712bff287e470cb1ab28de91aece424490a8",
+ "synced_at": "2026-11-21T01:51:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
