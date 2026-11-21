@@ -29645,8 +29645,20 @@
     {
      "d": "2026-11-21",
      "t": "Added after Tom (13:08): \"I just played through chapter 1 and there's still a lot of voices that are not in the game. Can you comb through the entire chapter... and then create a Kanban card where I can generate all of the voices at once?\" Audit: every chapter 1 scene, NPC, monster and cab line was checked against the baked clips in a real browser; 10 lines have no clip. Deedee's 3 battle barks (greet, crisp, win) also have none but the voice job only makes dialogue lines, and Battle 3 plays no spoken move lines."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 10 voices (about 578 credits).",
+     "at": "2026-11-21T21:26:27.670Z"
     }
-   ]
+   ],
+   "vgen": {
+    "want": true,
+    "at": "2026-11-21T21:26:27Z",
+    "n": 10,
+    "chars": 1313,
+    "est": 578
+   }
   },
   {
    "id": "b-board-ch1voices",
