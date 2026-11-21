@@ -14229,7 +14229,7 @@
    "id": "c-idea-searchthrough",
    "tag": "idea-searchthrough",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Search through all instances in the overworld maps (not",
    "next": "Your idea: search through all instances in the overworld maps (not dungeons or building interiors) for blocked entrances like this and propose a more elegant solution. for example in this case, i propose a separ... Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
@@ -14244,8 +14244,8 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDmbpsMacaXDkG1DFx",
-    "opening": "New card by Tom on the board"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -14278,6 +14278,11 @@
     {
      "d": "2026-11-20",
      "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:27:58.471Z"
     }
    ],
    "prompt": {
