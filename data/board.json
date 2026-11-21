@@ -16871,7 +16871,7 @@
    "title": "Watch Grace's guard video once (1 minute)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Optional now. Open ADMIN > BATTLE LAB > NEW BATTLE; the first box is PROOF: GRACE'S GUARD (VIDEO). Watch it once if you want to see the look before the chapter 1 videos are made. Nothing waits on this card.",
    "blocks": [],
@@ -16902,9 +16902,15 @@
     {
      "d": "2026-11-20",
      "t": "Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\" Nothing waits on this card any more; c-wanch1 goes ahead after the fal credit."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T01:33:35.482Z"
     }
    ],
-   "fyi": true
+   "fyi": true,
+   "done": "2026-11-20"
   },
   {
    "id": "c-wanidle",
