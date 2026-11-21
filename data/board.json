@@ -25000,6 +25000,38 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-guidegen",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "tag": "guidegen1",
+   "next": "Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high. It adds to the Battle Guide player: a prompt for every animation, your note merged into that prompt and shown back to you with what changed, a Generate button with the price, and the new video beside the old one with Use this one, Try again, Keep the old one.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds video making into the Battle Guide: every animation gets a prompt, your note is merged into it and shown back with what was kept and changed, Generate makes the video on Wan (family) or xAI (monsters), and you pick the new take or the old one.",
+    "before": [
+     "Nothing to do first.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new tool where the steps are not written yet; none of the three Fable conditions holds)",
+    "effort": "high (a new tool designed and built in one session: three parts, two Actions and a prompt step to prove before money is spent)",
+    "text": "Read CLAUDE.md (No painted poses in battle; Fix a miss with the smallest change; Image and video prompts: clean, each thing once; keysecrets1), claude/handoff-rules.md, claude/video-battle-plan.md, docs/BATTLE_GUIDE.md and claude/keysecrets-plan.md, then card c-guidegen in data/board.json with its history. Your first push is the commit board: start c-guidegen. Tom's request (11-21 09:25), in his words: \"This UI seems like a good place for me to be able to just regenerate images on the fly using the WAN service. whether it's if there is no video present, I can just generate the video assuming that this part of the application has reference to exactly what the animation should look like and thus provide a prompt to the service, and then if there's already a video, I need a way to enter my feedback and then reconcile that feedback. I need you then to reconcile that feedback with the existing prompt, making sure that what I put in makes sense and seamlessly integrates with the prompt and then allows me to regenerate\" (by image he means video too). Build it in the Battle Guide player (battle-guide.html), with no key on the page: every tap is a request committed to the repo that an Action fulfils, the pattern of data/clip-requests.json and data/art-requests.json. Write the plan first in claude/guidegen-plan.md, then build in this order and push each part as it passes its test (guidegen1a, guidegen1b, then guidegen1). Part 1, the prompt of every animation. Facts on 11-21: tools/art-library/wangen-jobs.json holds 46 Wan video jobs with prompt files for Tom, Grace, Rose and Deedee only; monsters' prompts are entries in tools/art-library/clip-prompts.js; 278 of the 346 animations in the guide have no video, and most of those have no prompt. Give the guide one generated file that maps each animation id of the guide (body, move, act, wind) to its job or entry, its prompt text, its start picture and its price, written by a script in tools/ from those two sources. An animation with no prompt gets a DRAFT prompt written by the same reconcile step as Part 2, from the move's own data (name, desc, flavor, shape, what it does to whom), claude/battle-animation-list-ch1-v11.md where it has a row, and the approved prompt of the same person as the pattern, changing only the MOTION part. A family member with no start picture yet cannot be generated: the player says so and what is missing. Part 2, reconcile. In the player: with a video, a box What should change; with no video, the draft prompt and an optional box Anything to add. The tap Update the prompt commits a request; an Action reads the current prompt and his words and returns the new prompt plus three short plain lines: what was kept, what was changed, and anything in his note that it could not use and why (a note that contradicts itself or the move, or asks for something a video cannot show, is answered with one plain question in place of a prompt). It must follow the smallest-change rule: start from the prompt that made the current clip, change only what the note names, say each thing once, keep the lines that hold the picture steady, never change model, length and method in one step. The page shows the new prompt and the three lines; Tom can edit the prompt by hand. Work out which text model the Action calls with a secret the repo already has (check what wan-gen, clip-gate and art-gen use; do not ask Tom for a new key unless none can do it, and then make one Tom setup card with exact steps). Test the reconcile step on the Boop history in CLAUDE.md and on the REDO notes in tools/clip-gate/review-ch1.json before it goes near a paid call, and put the results in the plan. Part 3, generate. The tap Generate this video shows the price first (Wan 3.0, 5 seconds at 720p was $0.50 on 11-20) and takes a second tap. Family goes through wan-gen (give it a requests input like clip-gen's), monsters through clip-gen. The run is capped per request and by the ledger; the first paid run is Tom's tap, a session only does dry runs. Each result goes through the clip gate; the player then shows the new take beside the current one with the gate's result in plain words, and three buttons: Use this one (bake it, point the move or state at it with anim kind clip, purge what it replaces, raise promptRev or rev), Try again with a note (back to Part 2), Keep the old one. A second miss the same way on one animation stops the loop and offers Ask Claude, which is today's Send to Claude note card; keep that button in the player as the fallback. Show per animation: prompt version, takes made, dollars spent. Keep the guide free of the game engine and working at the four Duo sizes. Tests: extend tools/battle_guide_test.py with a stand-in GitHub and stand-in Actions for all three parts; run tools/art-library/clipgen_test.py, the wan-gen dry run, python3 tools/b3_test.py s8 and python3 tools/smoke.py. Write docs/BATTLE_GUIDE.md and the facts in claude/guidegen-plan.md. End with one Tom card (ask animations) that names one animation with a video and one without to try, tap by tap, and set this card's after to it. Build tag guidegen1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, 09:25: \"This UI seems like a good place for me to be able to just regenerate images on the fly using the WAN service... if there's already a video, I need a way to enter my feedback... reconcile that feedback with the existing prompt... and then allows me to regenerate\". New card. Facts found: 46 Wan jobs with prompts exist (Tom, Grace, Rose, Deedee); 278 of 346 animations have no video and most have no prompt; a Wan clip was $0.50 on 11-20. Calls made: no key on the page (requests and Actions); the family on Wan and monsters on xAI as the video plan says; the gate runs on every take; the note card stays as the fallback."
+    }
+   ]
   }
  ],
  "sessions": [

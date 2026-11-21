@@ -1,3 +1,7 @@
+## board-guidegen (2026-11-21): new card to make and remake battle videos from the Battle Guide
+
+Card c-guidegen. Tom (09:25): generate a missing video, or give feedback on one, have it merged into the prompt and regenerate, all from the Battle Guide. The card holds the full prompt (Sonnet 5.5, high). Board change only; no page or game file changed.
+
 ## board-guideplanned (2026-11-21): the Battle Guide's next card now shows everything planned but not built, marked PLANNED
 
 Card c-battleguide2. Tom (09:21): "Can you do the same thing with anything else that's planned but not built yet". The card's prompt gained Part 4 (unbuilt moves, the BAG, Tombo skins, which chapters are on the new battle, Part 2 monsters, missing rules, a What is coming topic), its effort went from medium to high, and its title changed. Board change only; no page or game file changed.
