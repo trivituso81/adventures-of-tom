@@ -22462,6 +22462,38 @@
      "t": "Added with c-qa-bug03."
     }
    ]
+  },
+  {
+   "id": "c-b3s14b",
+   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Re-measure every Part 1 boss with Vibes at Rank 2 and Rank 5 and fix any boss that leaves 5 to 7 rounds, data only. Then run the s13 browser test.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "prompt": {
+    "what": "Finishes stage 14: re-measures the Part 1 bosses at Rank 2 and Rank 5 and runs the s13 browser test. Data only.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the numbers to change are found in the session, no engine work)",
+    "effort": "medium (the architecture sets medium; it is data and the simulator checks every change)",
+    "text": "Read claude/battle-build.md, claude/next-addendum-b3s13.md and the b3s14 entry in docs/CHANGES.md. Run node tools/b3-sim.js with --rank=2 and --rank=5 and 100 runs on every boss fight (new6, new16, new21, new27, new32, new38, new44, new50, new56, new62, new66). Where a boss leaves 5 to 7 rounds, change HP only, one change at a time, and record the number in docs/BATTLE3.md. Run node tools/b3-sim.js check and python3 tools/b3_test.py s13 before each push. Board card c-b3s14b. Your first push is the commit board: start c-b3s14b. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added: c-b3s14 shipped b3s14 but its history lists two open items (not re-measured at Rank 2/5; browser test s13 not run). Tom re-sent the stage 14 prompt, so this card carries them."
+    }
+   ],
+   "tag": "b3s14b",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+    "opening": "\"Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14\""
+   }
   }
  ],
  "sessions": [
