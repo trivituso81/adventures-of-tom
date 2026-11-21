@@ -1,3 +1,10 @@
+## fix-qa-bug03-look (2026-11-21): Townsfolk in the Square and the Row stay off every roof, sign, weathervane and house edge, checked by a 5 minute watch
+
+- Gemini's chapter 1 run (build voicepurge221, C12 FAIL): "two townspeople (the brown-haired boy and straw-hat boy) stood directly on top of the SNAIL MAIL sign" at 0 s, "the brown-haired NPC walked directly onto the right wall/edge of Aunt Ellie's House", plus X-01 (snail weathervane) and X-02 (SCHOOL sign plaque).
+- Facts: qa-bug03 only listed tiles reached in a 25 second run. A headless watch (the game's own `updateNPCs`, 10 runs of 300 simulated seconds per map) still reached 21 more tiles in `town` and 16 in `row` where painted foreground covers more than 2% of the feet box (weathervane, sign brackets, SCHOOL plaque, house edges). Pip also started on the weathervane tile (4,12), which is the "at 0 s" case.
+- Change: all 21 and 16 tiles added to `noGoRoof` (`town`, `row`, `data/maps-le.js`); Pip's start moved from (4,12) to (3,12).
+- Test: after the change a watch of 40 runs of 300 simulated seconds (200 minutes per map) reaches 53 tiles in `town` and 25 in `row`, none with more than 2% foreground; every starting tile is clear too. No in-game pencil reports were open.
+
 ## wanch2a (2026-11-21): the old painted battle poses are gone from the code; the Bog Toad's Body Slam and the Skeeter's Mosquito Whine are videos
 
 Card c-wanch2, part a. Tom's words on c-idea-tomgrace: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ever used in battle. Only new video animations". The painted states had stopped being drawn for the four in idea-tomgrace; this build removes them from the code (CLAUDE.md purge rule).

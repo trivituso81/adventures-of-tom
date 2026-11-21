@@ -22961,7 +22961,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab.",
+   "next": "Open the game, RELOAD (build fix-qa-bug03-look), go to the Square and Rivituso Row and watch the townsfolk for a minute each. Look at: nobody stands on the SNAIL MAIL sign or its weathervane, the SCHOOL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Pip now starts one step right of the weathervane. Report anything off with the REPORT tab.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -22973,6 +22973,10 @@
     {
      "d": "2026-11-21",
      "t": "Gemini's chapter 1 test: FAIL. In The Square (Stop 2), two townspeople stood directly on top of the SNAIL MAIL sign (nobody walked onto KETTLE COTTAGE's roof); on Rivituso Row (Stop 3), the brown-haired NPC walked onto the right edge of Aunt Ellie's House. Sent to Claude as card c-fix-qa-bug03-look; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix shipped in build fix-qa-bug03-look (c-fix-qa-bug03-look): 37 more roof, sign and edge tiles are off limits to townsfolk and Pip no longer starts on the weathervane; a 200 minute headless watch per map finds none."
     }
    ],
    "waiting_on": "claude"
@@ -27700,6 +27704,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-qa-bug03-look: noGoRoof extended (21 town, 16 row tiles), Pip moved off the weathervane tile; 40 x 300 s watch finds none."
     }
    ],
    "prompt": {
