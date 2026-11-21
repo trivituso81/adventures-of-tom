@@ -16887,7 +16887,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16962,9 +16962,15 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: STILL NOT WORKING! / Bog Toad: waiting in place (idle loop) video clipApproved / Start picture (first frame of the video, made from the battle sprite) / toad.png / Prompt tap to read or edit / IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else. / WHAT THIS IS / A short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature. / LOOK (must hold in every moment of the clip) / - The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo. / - The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else. / CAMERA AND BACKGROUND (strict) / - Locked camera. No zoom, no pan, no tilt, no cuts, no shake. / - The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times. / - The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right). / - The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects. / - Silent. No voice, no music, no sound effects. / MOTION: IDLE LOOP / The creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves. / Length about 3 seconds. Family friendly for ages 6 and up. / ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen). / Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4 / Rejected before: 2 (notes are saved for Claude) Sent to Claude as card c-fix-keysecrets2-try-5; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T00:16:11.691Z"
     }
    ],
-   "after": null
+   "after": null,
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17548,6 +17554,65 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-fix-keysecrets2-try-5",
+   "tag": "fix-keysecrets2-try-5",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "next": "You reported a problem on Try GENERATE VIDEO on one clip. Claude starts the fix by itself. Latest: STILL NOT WORKING! / Bog Toad: waiting in place (idle loop) video clipApproved / Start picture (first frame of the video, made from the battle sprite) / toad.pn",
+   "blocks": [
+    "t-keysecrets2-try"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T00:16:10.231Z",
+     "card": "t-keysecrets2-try",
+     "title": "Try GENERATE VIDEO on one clip",
+     "ask": "play",
+     "words": "STILL NOT WORKING! / Bog Toad: waiting in place (idle loop) video clipApproved / Start picture (first frame of the video, made from the battle sprite) / toad.png / Prompt tap to read or edit / IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else. / WHAT THIS IS / A short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature. / LOOK (must hold in every moment of the clip) / - The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo. / - The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else. / CAMERA AND BACKGROUND (strict) / - Locked camera. No zoom, no pan, no tilt, no cuts, no shake. / - The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times. / - The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right). / - The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects. / - Silent. No voice, no music, no sound effects. / MOTION: IDLE LOOP / The creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves. / Length about 3 seconds. Family friendly for ages 6 and up. / ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen). / Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4 / Rejected before: 2 (notes are saved for Claude)",
+     "shot": "",
+     "asked": "ADMIN ) ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-4). Tap Open in the Art Library below, find clip-toad-idle under Clips ) Chapter 1 and press GENERATE VIDEO (about $0.25). The line under the button should read 'Asked N min ago... (last job report on GitHub: HH:MM, read by api)' and change to 'Made and approved' within 3 to 6 minutes. All good if it reaches 'Made and approved'. Something is wrong if it does not after 10 minutes: write in the report what the line says, including the HH:MM and 'read by' words."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-keysecrets2-try"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-keysecrets2-try.",
+     "at": "2026-11-21T00:16:11.691Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-keysecrets2-try: STILL NOT WORKING! / Bog Toad: waiting in place (idle loop) video clipApproved / Start picture (first frame of the video, made from the battle sprite) / toad.png / Prompt tap to read or edit / IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else. / WHAT THIS IS / A short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature. / LOOK (must hold in every moment of the clip) / - The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo. / - The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else. / CAMERA AND BACKGROUND (strict) / - Locked camera. No zoom, no pan, no tilt, no cuts, no shake. / - The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times. / - The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right). / - The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects. / - Silent. No voice, no music, no sound effects. / MOTION: IDLE LOOP / The creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves. / Length about 3 seconds. Family friendly for ages 6 and up. / ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen). / Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4 / Rejected before: 2 (notes are saved for Claude)",
+     "at": "2026-11-21T00:16:11.691Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-21T00:16:11.691Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Try GENERATE VIDEO on one clip.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-keysecrets2-try-5 and t-keysecrets2-try in data/board.json, history included. Your first push is the commit board: start c-fix-keysecrets2-try-5.\n\nTom tested and found problems:\n1. Card t-keysecrets2-try (Try GENERATE VIDEO on one clip, ask play). He was asked: ADMIN ) ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-4). Tap Open in the Art Library below, find clip-toad-idle under Clips ) Chapter 1 and press GENERATE VIDEO (about $0.25). The line under the button should read 'Asked N min ago... (last job report on GitHub: HH:MM, read by api)' and change to 'Made and approved' within 3 to 6 minutes. All good if it reaches 'Made and approved'. Something is wrong if it does not after 10 minutes: write in the report what the line says, including the HH:MM and 'read by' words. He wrote: STILL NOT WORKING! / Bog Toad: waiting in place (idle loop) video clipApproved / Start picture (first frame of the video, made from the battle sprite) / toad.png / Prompt tap to read or edit / IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else. / WHAT THIS IS / A short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature. / LOOK (must hold in every moment of the clip) / - The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo. / - The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else. / CAMERA AND BACKGROUND (strict) / - Locked camera. No zoom, no pan, no tilt, no cuts, no shake. / - The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times. / - The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right). / - The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects. / - Silent. No voice, no music, no sound effects. / MOTION: IDLE LOOP / The creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves. / Length about 3 seconds. Family friendly for ages 6 and up. / ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen). / Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4 / Rejected before: 2 (notes are saved for Claude)\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T00:16:10.231Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-keysecrets2-try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-keysecrets2-try, and give the build fix-keysecrets2-try-5 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-keysecrets2-try",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
