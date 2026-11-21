@@ -1373,7 +1373,19 @@ def stage12(pg,lab,landscape=False):
     fr=[]; R=s11_run(pg,lab,'new28',None,fr,every=500,landscape=landscape,tag='s12')
     need(R['over']=='win',f"Pop Quiz fight ended {R['over']}")
     caps+=pick(fr,2)
-    sheet(caps,5,os.path.join(OUT,'b3-s12'+('-land' if landscape else '')+'.png'),scale=.4)
+    # Chapter 6. Chairman Cheeks: it is the 4th round, so he calls an Acorn Cache into Back on his first turn; below 50% HP The Big Stash winds up
+    fr=[]; R=s11_run(pg,lab,'new38',"()=>{ B3.F.round=4; B3.F.foes[0].turns=3; B3.F.foes[0].hp=Math.floor(B3.F.foes[0].maxHp*.9); }",fr,every=500,landscape=landscape,tag='s12',watch={'cache':"()=>window.__s11.summons.includes('acorncache')"})
+    need(R['over']=='win',f"Chairman Cheeks fight ended {R['over']}")
+    need('acorncache' in R['summons'],f"Stash for Winter should call an Acorn Cache: {R['summons']}")
+    need(any(a.startswith('stash_for_winter') or a.startswith('stash_eat') for a in R['acts']),f"Stash for Winter should be played: {R['acts'][:8]}")
+    caps+=pick(fr,6)
+    for fid,foe,ix,act in (('new37','cheekstuffer',2,'snack_snatch'),('new36','twigspy',1,'stakeout_mark'),('new35','peanutgallery',1,'cheap_seat_heckle'),('new34','stickysap',2,'sap_flow'),('new33','acornagent',2,'code_red')):
+        # two Acorn Agents at speed 999 would act again and again before the family; only the first one is rushed, and not for the plain pair
+        fr=[]; R=s11_run(pg,lab,fid,"()=>{ let n=0; for(const f of B3.F.foes) if(f.id==='%s'&&n++===0) { f.actIx=%d; if('%s'!=='acornagent') f.spd=999; } }"%(foe,ix,foe),fr,every=500,landscape=landscape,tag='s12')
+        need(R['over']=='win',f"{fid} fight ended {R['over']}")
+        need(any(a.startswith(act) for a in R['acts']),f"{foe} should play {act}: {R['acts'][:8]}")
+        caps+=pick(fr,2)
+    sheet(caps,6,os.path.join(OUT,'b3-s12'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']

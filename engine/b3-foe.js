@@ -12,7 +12,8 @@
 //   3. the next act in printed order that passes its `when`
 // Counter acts (hits:'attacker') and follow-ups (after:'...') are never picked from the list.
 const B3_FOE_HITS=['one','all','self','marked','attacker','two_random','two_adjacent','fastest','foes','field'];
-const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns'];
+// Stage 12: allyId / noAllyId (a monster of that id stands on its side / none does), allyAge:N (with allyId: the one this monster called has stood for N of its turns).
+const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns','allyId','noAllyId','allyAge'];
 function b3ActOk(F,e,A) {
   const W=A.when||{};
   // Classroom Lights-Out Reset (`noAoe`): for a while it cannot use an act that reaches every family member.
@@ -23,6 +24,9 @@ function b3ActOk(F,e,A) {
   if(W.hpBelow!=null&&!(e.hp<=e.maxHp*W.hpBelow)) return false;
   if(W.hpAbove!=null&&!(e.hp>e.maxHp*W.hpAbove)) return false;
   if(W.once&&e.uses[A.id]) return false;
+  if(W.allyId&&!b3Live(F,e.side).some(o=>o.id===W.allyId&&o!==e)) return false;
+  if(W.noAllyId&&b3Live(F,e.side).some(o=>o.id===W.noAllyId)) return false;
+  if(W.allyAge&&!b3Live(F,e.side).some(o=>o.id===W.allyId&&o.addedBy===e.key&&e.turns-o.addedTurn>=W.allyAge)) return false;
   if(W.everyTurn&&e.turns-(e.lastUse[A.id]||0)<W.everyTurn) return false;
   // "Every 3 rounds": ready at every 3rd divider (rounds 4, 7, 10...). "X-round wait": X dividers since it was last used.
   if(W.everyRound&&Math.floor((F.round-1)/W.everyRound)<=(e.everyUsed[A.id]||0)) return false;
@@ -34,7 +38,7 @@ function b3FoePick(F,e,peek) {
   if(e.charge) return {act:e.charge,fire:true};
   const acts=e.D.acts;
   for(const A of acts) if(b3Listed(A)&&A.when&&A.when.once&&b3ActOk(F,e,A)) return {act:A,fire:false};
-  const every=A=>!!(A.when&&(A.when.everyTurn||A.when.everyRound));
+  const every=A=>!!(A.when&&(A.when.everyTurn||A.when.everyRound||A.when.allyAge));
   for(const A of acts) if(b3Listed(A)&&every(A)&&!A.when.once&&b3ActOk(F,e,A)) return {act:A,fire:false};
   for(let i=0;i<acts.length;i++) {
     const k=(e.actIx+i)%acts.length,A=acts[k];

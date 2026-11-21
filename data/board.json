@@ -12809,7 +12809,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "b3s12",
-   "next": "Part a (chapter 5: Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread, The Red Pen, Lab fights NEW 28 to NEW 32) is built and passes the checks: pushed as b3s12a. Next: part b, chapter 6 (Old Oak Park: five monsters, the Acorn Cache add and Chairman Cheeks, Lab fights from NEW 33), pushed as b3s12b, then part c, chapter 7 (the library: five monsters and The Unread), pushed as the final b3s12. Work from claude/bestiary-v11.md and docs/handoff/b3s12a.md.",
+   "next": "Parts a (chapter 5, b3s12a) and b (chapter 6: Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer, Acorn Cache, Chairman Cheeks, Lab fights NEW 33 to NEW 38, b3s12b) are built and pass the checks. Next: part c, chapter 7 (the library: Shusher, Dog-Ear, The Cliffhanger, The Know-It-All, Pop-Up Panic and The Unread, Lab fights from NEW 39), pushed as the final b3s12. Work from claude/bestiary-v11.md and docs/handoff/b3s12b.md.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12864,6 +12864,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as b3s12a: New battle: the chapter 5 school monsters and The Red Pen join the Battle Lab (stage 12, part a of three)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part b pushed as b3s12b: chapter 6 (6 formations, Chairman Cheeks and the Acorn Cache, Lab fights NEW 33 to NEW 38). Chapter 7 still to do; it follows as the final b3s12."
     }
    ],
    "prompt": {

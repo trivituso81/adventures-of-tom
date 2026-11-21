@@ -593,7 +593,8 @@ function b3CheckData() {
       if(A.then&&!D.acts.some(x=>x.id===A.then&&x.after===A.id)) bad.push(wa+': its follow-up must say after:\''+A.id+'\'');
       if(A.hits==='marked'&&!D.acts.some(x=>x.then===A.id&&x.effects.some(e=>e.op==='mark'))) bad.push(wa+': hits the Marked ally, but no act Marks for it');
       if(A.hits==='attacker'&&A.recovery!==0) bad.push(wa+': a counter act has Recovery 0');
-      effects(wa,A.effects); } }
+      effects(wa,A.effects); }
+    if(D.onKo) effects(w+' onKo',D.onKo); }
   for(const id in B3_FORMATIONS) for(const f of B3_FORMATIONS[id].foes) if(!B3_FOES[f.id]) bad.push('formation '+id+': unknown foe '+f.id);
   return bad;
 }

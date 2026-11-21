@@ -71,5 +71,17 @@ const B3_LAB=[
   {id:'new31',name:'NEW 31: DODGEBALL DREAD',sub:'Chapter 5 Elite. Dodgeball Dread has 4 Composure pips, shrugs off Clobber and starts bouncing (dodges more). A Tardy Bell in Back.',
     party:['tom','grace','rose','amy'],level:12,formation:'dodgeball',bg:'classroom'},
   {id:'new32',name:'NEW 32: THE RED PEN',sub:'Chapter 5 boss. 6 Composure pips. At 55% HP it raises Strict Grading: 30% less damage and Points Off on every hit, until a Mix or a Break ends it.',
-    party:['tom','grace','rose','amy'],level:12,formation:'redpen',bg:'cafe'}
+    party:['tom','grace','rose','amy'],level:12,formation:'redpen',bg:'cafe'},
+  {id:'new33',name:'NEW 33: TWO ACORN AGENTS',sub:'Chapter 6 fight. Two Acorn Agents in Front. Code Red! speeds up one of them.',
+    party:['tom','tnb','nara'],level:14,formation:'acornagent',bg:'park'},
+  {id:'new34',name:'NEW 34: STICKY SAP AND ACORN AGENT',sub:'Chapter 6 fight. Sticky Sap drenches and slows, and winds up a Sap Flow over the whole family.',
+    party:['tom','tnb','nara'],level:14,formation:'stickysap',bg:'park'},
+  {id:'new35',name:'NEW 35: ACORN AGENT AND PEANUT GALLERY',sub:'Chapter 6 fight. The Peanut Gallery in Back heckles Attack down and winds up a Standing Boo-vation.',
+    party:['tom','tnb','nara'],level:14,formation:'peanutgallery',bg:'park'},
+  {id:'new36',name:'NEW 36: ACORN AGENT AND TWIG SPY',sub:'Chapter 6 fight. The Twig Spy in Back hides in leaf camo and marks the family for more crits.',
+    party:['tom','tnb','nara'],level:14,formation:'twigspy',bg:'park'},
+  {id:'new37',name:'NEW 37: CHEEK STUFFER',sub:'Chapter 6 Elite. The Cheek Stuffer has 4 Composure pips and shrugs off Clobber. Snack Snatch takes a Pep and stuffs its cheeks for more Defense. A Peanut Gallery in Back.',
+    party:['tom','tnb','nara'],level:14,formation:'cheekstuffer',bg:'park'},
+  {id:'new38',name:'NEW 38: CHAIRMAN CHEEKS',sub:'Chapter 6 boss. 6 Composure pips. Every 3 rounds he calls an Acorn Cache to the Back row and eats it on his 2nd turn after unless the family knocks it out first.',
+    party:['tom','tnb','nara'],level:14,formation:'chairman',bg:'canopy'}
 ];

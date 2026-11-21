@@ -134,6 +134,12 @@ Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at 
 
 ## What stage 12 holds, and what waits
 
+| In (build `b3s12b`, chapter 6) | Waits for |
+|---|---|
+| Chapter 6: `data/b3-foes-ch06.js` (Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer, Acorn Cache, Chairman Cheeks), 6 formations (6 VP each, 30 for the boss), Lab fights NEW 33 to NEW 38 (Tom, TNB, Nara, level 14). | Chapter 7 (`b3s12`) |
+| Chairman Cheeks as data: Stash for Winter (`stash_for_winter` when `noAllyId:'acorncache'` and `everyRound:3`; `stash_eat` when `allyId:'acorncache'` and `allyAge:2`), Acorn Cache `onKo` feedback, The Big Stash below 50%. | |
+| New seams: conditions `noAllyId`, `allyAge`; targets `randomFrontAlly`, `unshielded`; ops `eat`, `hpLoss`; foe field `onKo`; 7 statuses. | |
+
 | In (build `b3s12a`, chapter 5; chapters 6 and 7 follow as `b3s12b` and `b3s12`) | Waits for |
 |---|---|
 | Chapter 5: `data/b3-foes-ch05.js` (Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread, The Red Pen), 5 formations (12 VP each, 30 for the boss), Lab fights NEW 28 to NEW 32 (Tom, Grace, Rose, Amy, level 12). | Chapters 8 to 10 and the bonus chapter (stage 13). |

@@ -1,3 +1,12 @@
+## b3s12b (2026-11-20): New battle: the chapter 6 park monsters and Chairman Cheeks join the Battle Lab (stage 12, part b of three)
+
+- Tom (11-20): "build stage 12 (bestiary chapters 5 to 7 with their bosses)", in parts. This part is chapter 6, Old Oak Park, from `claude/bestiary-v11.md`: Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer (Elite), the Acorn Cache add and the boss Chairman Cheeks (660 HP for 3, 880 for 4), 6 formations (6 VP each, 30 for the boss), in `data/b3-foes-ch06.js`.
+- Lab: NEW 33 to NEW 38 (Tom, TNB and Nara at level 14; the park backdrop, the oak crown for the boss).
+- Stash for Winter is two acts with one name: every 3rd round, when no cache stands, he calls an Acorn Cache into Back (150 printed HP, 0 pips, 0 VP); on his 2nd turn after the call he eats it (15% HP back, Winter Hoard +25% Atk and Def for 2 turns). If the family knocks the cache out first, every family member gains 1 Pep and he takes 10% of his Max HP as flat damage (never the last point) and loses 1 Composure pip, inside the 3-pip cap of that action.
+- New seams: act conditions `noAllyId`, `allyAge` (read in `b3ActOk`, `b3FoePick`); targets `randomFrontAlly` and `unshielded` (ready for The Unread); ops `eat` and `hpLoss`; summon records `addedBy` and `addedTurn`; foe row field `onKo` (run by `b3KoCheck`, validated in the data check).
+- Seven new statuses (leaf_camo, code_red, cheap_seat, stakeout_mark, snack_stash, executive_monocle, winter_hoard).
+- No picture or clip work, no voice lines added.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s12.js`, chapter 6 section; FAILS: []); the six new Lab fights each 100 simulated, all won, 0 errors (Chairman Cheeks 3.3 rounds; normal fights 1.9 to 2.4, Cheek Stuffer 4.3); `python3 tools/b3_test.py s12` (portrait and landscape).
 ## bigboard1 (2026-11-20): board saves work again; the board reads big files by blob id and old Done cards move to an archive
 
 Card c-bigboard1. Tom: "The board (ADMIN > BOARD) fails every save with 'JSON.parse: unexpected end of data at line 1 column 1'."

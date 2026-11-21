@@ -327,7 +327,22 @@ const B3_STATUS={
     on:{mix:{carrier:'target',consume:true,effects:[]}},
     short:'GRADING',color:'#e0687a',weight:5,desc:'Red pen out: takes 30% less damage, and every hit on it is answered with Points Off. A Mix, Panic Boil! or a Break ends it.'},
   points_off:{id:'points_off',name:'Points Off',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'pointsOff',v:-.15}],flags:[],
-    short:'ATK DOWN',color:'#e0687a',weight:4,desc:'Points taken off: 15% less Attack.'}
+    short:'ATK DOWN',color:'#e0687a',weight:4,desc:'Points taken off: 15% less Attack.'},
+  // ---- Enemy statuses: chapter 6, Old Oak Park (stage 12b, bestiary v11 section 2) ----
+  leaf_camo:{id:'leaf_camo',name:'Leaf Camo',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'leafCamo',v:.20}],flags:[],
+    short:'CAMO',color:'#8fc77a',weight:4,desc:'Hidden in a coat of leaves: dodges 20% of attacks. It can be stripped.'},
+  code_red:{id:'code_red',name:'Code Red',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'spd',kind:'codeRed',v:.15}],flags:[],
+    short:'SPEED UP',color:'#ff8f7a',weight:4,desc:'\u201cCode red!\u201d: 15% faster for 1 turn. It can be stripped.'},
+  cheap_seat:{id:'cheap_seat',name:'Cheap Seat Heckle',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'cheapSeat',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#d9b27a',weight:4,desc:'Heckled from the cheap seats: 15% less Attack.'},
+  stakeout_mark:{id:'stakeout_mark',name:'Stakeout Mark',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'critTaken',kind:'stakeout',v:.20}],flags:[],
+    short:'WATCHED',color:'#e8c07a',weight:4,desc:'Someone is watching from the branches: attacks against this family member crit 20 points more often.'},
+  snack_stash:{id:'snack_stash',name:'Snack Stash',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'snackStash',v:.20}],flags:[],
+    short:'DEF UP',color:'#d9b27a',weight:4,desc:'Cheeks stuffed with stolen snacks: 20% more Defense. It can be stripped.'},
+  executive_monocle:{id:'executive_monocle',name:'Executive Monocle',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[{stat:'crit',kind:'monocle',v:.20},{stat:'atk',kind:'monocle',v:.20}],flags:[],
+    short:'MONOCLE',color:'#f2d36b',weight:6,desc:'A very expensive monocle: 20% more Crit Rate and 20% more Attack. It can be stripped or stolen.'},
+  winter_hoard:{id:'winter_hoard',name:'Winter Hoard',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'hoard',v:.25},{stat:'def',kind:'hoard',v:.25}],flags:[],
+    short:'HOARD',color:'#d9a15a',weight:6,desc:'A belly full of stash: 25% more Attack and Defense. It can be stripped or stolen.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

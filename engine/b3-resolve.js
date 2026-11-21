@@ -170,6 +170,9 @@ function b3KoCheck(F,c) {
     for(const v of F.units) for(const id of Object.keys(v.st)) if(v.st[id].unit==='srcBegin'&&v.st[id].src===u.key) { delete v.st[id]; c.beats.push({t:'statusEnd',tgt:v.key,id,g:c.g}); }
     c.beats.push({t:'ko',tgt:u.key,g:c.g});
     b3Fire(F,'ko',{src:c.actor,tgt:u,g:c.g},c.beats);
+    // Helper feedback (bestiary 1.1): a monster with an `onKo` row (the Acorn Cache) answers its own knock-out, unless it was eaten. The ops
+    // run as the helper; the pips it takes off a boss go into this action's ledger, so they count inside the 3-pip cap.
+    if(u.side==='foe'&&u.D&&u.D.onKo&&!u.eaten) b3RunEffects(F,{F,actor:u,src:u,tgt:null,targets:[u],hit:[],beats:c.beats,g:c.g,detonated:{},reacted:{},tags:['helper'],outExtra:{},ledger:c.ledger||(c.ledger={})},u.D.onKo);
   }
 }
 // ---------- Composure and Break (spec 2.7) ----------

@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -44,6 +44,10 @@ function b3Who(F,c,to) {
   // (Scene One, Marker! pulls one other monster forward).
   if(to==='otherAllies') return b3Live(F,c.actor.side).filter(o=>o!==c.actor);
   if(to==='randomOtherAlly') { const L=b3Live(F,c.actor.side).filter(o=>o!==c.actor); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
+  // Stage 12. randomFrontAlly: one monster standing in Front, picked by the fight's own dice, the actor included (Code Red!).
+  // unshielded: every family member with no shield on (THE END pushes only those).
+  if(to==='randomFrontAlly') { const L=b3Live(F,c.actor.side).filter(o=>b3EffRow(F,o)==='front'); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
+  if(to==='unshielded') return b3Live(F,b3Other(c.actor.side)).filter(o=>!b3ShieldTotal(o));
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -159,10 +163,24 @@ const B3_OPS={
   summon(F,c,e) {
     if(e.ifNoFront&&b3Live(F,c.actor.side).some(o=>o.row!=='back')) return;
     for(let i=0;i<(e.n||1);i++) { const u=b3Summon(F,e.id,e.row,e.hp); if(!u) break;
+      u.addedBy=c.actor.key; u.addedTurn=c.actor.turns;   // who called it and on which of that monster's turns (a condition `allyAge` reads it)
       c.beats.push({t:'summon',src:c.actor.key,tgt:u.key,id:u.id,name:u.name,row:u.row,hp:u.hp,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); }
   },
   // row: a monster changes its own row (Old Iron-Gill's Inlet Submerge and Deep Dive). `row` is 'front' or 'back'. Moving family members
   // between rows is a different thing (the trade, spec 2.1) and is not done here.
+  // eat (Chairman Cheeks, Stash for Winter): the named monster of the actor's own side is swallowed. It is knocked out for good with no
+  // answer of its own (`eaten` skips its `onKo` row), so it pays no helper feedback.
+  eat(F,c,e) {
+    for(const o of b3Live(F,c.actor.side)) if(o.id===e.id&&o!==c.actor) { o.eaten=true; o.hp=0; }
+    b3KoCheck(F,c);
+  },
+  // hpLoss (helper feedback, bestiary 1.1): the target loses this share of its Max HP as flat damage: no flavor, no modifiers, no shield,
+  // never enough to knock it out (it stops at 1 HP, like bounced damage).
+  hpLoss(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
+      const n=Math.min(t.hp-1,Math.round(t.maxHp*e.pct)); if(n<=0) continue;
+      t.hp-=n; c.beats.push({t:'hit',tgt:t.key,dmg:n,hp:t.hp,g:c.g}); }
+  },
   row(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(t.side!=='foe'||t.row===e.row) continue;
       t.row=e.row; b3Reslot(F);

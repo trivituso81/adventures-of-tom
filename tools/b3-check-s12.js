@@ -2,14 +2,15 @@
 // Chapter 5: Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread (Elite), The Red Pen (boss) and Lab fights new28 to new32.
 // New pieces it covers: the chapter 5 statuses, the act field `starts` (Strict Grading's repeat count), a counter act that only answers
 // while a status stands (Points Off), Strict Grading ending on a Mix, a Break or a stance strip, Amy's Lights-Out Reset against Final Grade,
-// and SEE ME (`foeTaunt`). Chapters 6 and 7 are added to this file by their own parts (b3s12b, b3s12).
+// and SEE ME (`foeTaunt`). Chapter 6 (stage 12b): Old Oak Park, Chairman Cheeks and the Acorn Cache: `randomFrontAlly`, `summon` with printed HP,
+// the conditions `noAllyId` and `allyAge`, the ops `eat` and `hpLoss`, helper feedback (`onKo`), Executive Monocle. Chapter 7 is added by its own part (b3s12).
 // `node tools/b3-sim.js check` runs it after the file for stage 11.
 'use strict';
 module.exports=function(T) {
   const {G,ok,near,noCrit}=T;
   const NF=G('b3NewFight'),FOES=G('B3_FOES'),FORM=G('B3_FORMATIONS'),ST=G('B3_STATUS'),LAB=G('B3_LAB'),SK=G('B3_SKILLS'),
     add=G('b3AddStatus'),foeTurn=G('b3FoeTurn'),pick=G('b3FoePick'),loseCharge=G('b3LoseCharge'),act=G('b3Act'),options=G('b3Options'),
-    stat=G('b3Stat'),sum=G('b3Sum'),blank=G('b3CheckData'),J=x=>JSON.stringify(x);
+    stat=G('b3Stat'),sum=G('b3Sum'),crit=G('b3CritChance'),blank=G('b3CheckData'),J=x=>JSON.stringify(x);
   const bad=J(blank().filter(x=>!/\bt_/.test(x)));
   ok(bad==='[]','the data check is clean with the chapter 5 monsters in: '+bad);
   const P5=['tom','grace','rose','amy'];
@@ -124,5 +125,107 @@ module.exports=function(T) {
   ok(FOES.redpen.acts.filter(a=>a.hits==='attacker').length===1&&FOES.redpen.acts.find(a=>a.hits==='attacker').recovery===0,'Points Off is a counter act with Recovery 0');
   ok(J(FOES.redpen.acts.find(a=>a.id==='strict_grading_first').when)===J({once:true,hpBelow:.55})&&FOES.redpen.acts.find(a=>a.id==='strict_grading').when.everyTurn===3,'Strict Grading’s two rows: once at 55% HP, then every 3rd turn');
 
+
+  // ====================== Chapter 6: Old Oak Park (stage 12b) ======================
+  const P6=['tom','tnb','nara'];
+  const mk6=(foes,o)=>NF(Object.assign({party:P6,level:14,seed:11,foes},o||{}));
+  const ROWS6=[
+    ['acornagent',6,'swarmer','front',185,44,26,109,0,['racket','drench'],[]],['stickysap',6,'bruiser','front',328,57,34,99,0,['sizzle','clobber'],['drench']],
+    ['peanutgallery',6,'hexer','back',242,49,29,109,0,['racket','sizzle'],['clobber']],['twigspy',6,'skirmisher','back',228,55,27,125,0,['sizzle','razzle'],['racket']],
+    ['cheekstuffer',6,'elite','front',513,60,40,94,4,['drench','racket'],['clobber']],['acorncache',6,'helper','back',150,0,26,109,0,['clobber','sizzle'],[]],
+    ['chairman',6,'boss','front',660,65,37,106,6,['drench','sizzle'],['racket']]];
+  for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS6) { const D=FOES[id];
+    ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists])); }
+  ok(FOES.acorncache.acts.length===0,'the Acorn Cache never attacks (no acts)');
+  ok(FOES.chairman.hp4===880&&FOES.chairman.noRun,'Chairman Cheeks prints 880 for a party of 4 and cannot be run from');
+  { const hp6=(party)=>NF({party,level:14,seed:3,foes:[{id:'chairman',row:'front'}]}).foes[0].maxHp; ok(hp6(P6)===660&&hp6([...P6,'grace'])===880,'Chairman Cheeks: 660 for 3, 880 for 4'); }
+  const FM6={acornagent:[6,6],stickysap:[6,6],peanutgallery:[6,6],twigspy:[6,6],cheekstuffer:[6,6],chairman:[6,30]};
+  for(const k of Object.keys(FM6)) ok(FORM[k]&&FORM[k].ch===FM6[k][0]&&FORM[k].vp===FM6[k][1],'formation '+k+' is chapter 6 and pays '+FM6[k][1]+' VP');
+  ok(J(FORM.stickysap.foes)===J([{id:'stickysap',row:'front'},{id:'acornagent',row:'front'}])&&J(FORM.cheekstuffer.foes)===J([{id:'cheekstuffer',row:'front'},{id:'peanutgallery',row:'back'}]),'two of the formations match section 4');
+  { const labs=LAB.filter(l=>/^new3[3-8]$/.test(l.id));
+    ok(labs.length===6&&labs.every(l=>FORM[l.formation]&&FORM[l.formation].ch===6),'Lab fights new33 to new38 each run a real chapter 6 formation');
+    ok(labs.every(l=>l.level===14&&J(l.party)===J(P6)&&(l.id==='new38'?l.bg==='canopy':l.bg==='park')),'each uses level 14, Tom, TNB and Nara, the park (the boss: the oak crown)'); }
+  for(const id of ['leaf_camo','code_red','cheap_seat','stakeout_mark','snack_stash','executive_monocle','winter_hoard'])
+    ok(ST[id]&&ST[id].desc&&ST[id].short&&ST[id].color&&!/—/.test(ST[id].desc),id+' is a complete status row');
+
+  // ---------- Starting statuses ----------
+  { const F=mk6([{id:'twigspy',row:'front'}]); ok(!!F.foes[0].st.leaf_camo&&near(sum(F.foes[0],'eva'),.20,1e-9),'Twig Spy starts in Leaf Camo (+20% Evasion)'); }
+  { const F=mk6([{id:'chairman',row:'front'}]),e=F.foes[0]; ok(e.st.executive_monocle&&e.st.executive_monocle.n===3,'Chairman Cheeks starts with the Executive Monocle for 3 turns');
+    ok(near(sum(e,'crit'),.20,1e-9)&&near(stat(e,'atk')/(delete e.st.executive_monocle,stat(e,'atk')),1.2,.005),'it is +20% Crit Rate and +20% Attack'); }
+
+  // ---------- The plain acts ----------
+  const rider6=(foe,actId,fn,row)=>noCrit(()=>{ const F=mk6([{id:foe,row:row||'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id===actId);
+    e.charge=A.tags.includes('charge_up')?A:null; e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; const b=turn(F,e,2); fn(F,e,b); });
+  noCrit(()=>{ const F=mk6([{id:'acornagent',row:'front'},{id:'acornagent',row:'front'}]),a=F.foes[0],b2=F.foes[1],A=a.D.acts.find(x=>x.id==='code_red'); a.actIx=2; F.acting=a;
+    const hp0=F.party.map(p=>p.hp); const b=turn(F,a,2);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]),'Code Red! hits the whole family');
+    const got=F.foes.filter(f=>f.st.code_red); ok(got.length===1&&got[0].st.code_red.n===1,'and exactly one Front monster gets +15% Speed for 1 turn');
+    ok(near(stat(got[0],'spd')/(()=>{ const s=got[0].st.code_red; delete got[0].st.code_red; const v=stat(got[0],'spd'); got[0].st.code_red=s; return v; })(),1.15,.005),'a real +15%'); });
+  noCrit(()=>{ const F=mk6([{id:'acornagent',row:'back'},{id:'stickysap',row:'front'}]); const a=F.foes[0]; F.acting=a;
+    const o=G('B3_OPS'),c={F,actor:a,src:a,beats:[],g:'a',targets:[],hit:[],detonated:{},reacted:{},tags:[],outExtra:{},ledger:{}};
+    const seen={}; for(let i=0;i<30;i++) for(const u of G('b3Who')(F,c,'randomFrontAlly')) seen[u.id]=true;
+    ok(J(Object.keys(seen))===J(['stickysap']),'randomFrontAlly picks only monsters standing in Front: '+J(Object.keys(seen))); });
+  rider6('acornagent','pebble_toss',(F,e,b)=>ok(F.party.some(p=>p.st.blind),'Pebble Toss blinds its target'));
+  rider6('stickysap','resin_drip',(F,e,b)=>ok(F.party.some(p=>p.st.drenched),'Resin Drip Drenches'));
+  rider6('stickysap','bark_glue',(F,e,b)=>ok(F.party.some(p=>p.st.slow),'Bark Glue Slows'));
+  noCrit(()=>{ const F=mk6([{id:'stickysap',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='sap_flow'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='sap_flow'&&!F.party.some(p=>p.st.slow),'Sap Flow is announced first'); F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.slow),'then slows all three'); });
+  rider6('peanutgallery','cheap_seat_heckle',(F,e,b)=>{ const t=F.party.find(p=>p.st.cheap_seat); ok(t&&t.st.cheap_seat.n===2&&near(ratio(t,'cheap_seat'),.85,.005),'Cheap Seat Heckle: -15% Attack for 2 turns'); },'back');
+  noCrit(()=>{ const F=mk6([{id:'peanutgallery',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='standing_boovation'); e.charge=A; F.acting=e; turn(F,e,2); ok(F.party.every(p=>p.st.fatigue),'Standing Boo-vation: Fatigue on all three'); });
+  rider6('twigspy','stakeout_mark',(F,e,b)=>{ const t=F.party.find(p=>p.st.stakeout_mark); ok(t&&near(sum(t,'critTaken'),.20,1e-9),'Stakeout Mark: +20% Crit Rate on attacks against the target');
+    ok(crit(e,t,{})>crit(e,F.party.find(p=>p!==t),{}),'and an attack on it really crits more often'); },'back');
+  noCrit(()=>{ const F=mk6([{id:'twigspy',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='leaf_storm'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2); ok(F.party.every((p,i)=>p.hp<hp0[i]),'Leaf Storm hits all three'); });
+  rider6('cheekstuffer','crumb_spray',(F,e,b)=>ok(F.party.some(p=>p.st.blind),'Crumb Spray blinds'));
+  noCrit(()=>{ const F=mk6([{id:'cheekstuffer',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='snack_snatch'); e.charge=A; e.aimLock=null; F.acting=e; F.party.forEach(p=>p.pep=5);
+    const b=turn(F,e,2); const t=b.find(x=>x.t==='pep'&&x.n<0);
+    ok(t&&F.party.find(p=>p.key===t.tgt).pep===4,'Snack Snatch takes 1 Pep'); ok(e.st.snack_stash&&near(stat(e,'def')/(()=>{ const s=e.st.snack_stash; delete e.st.snack_stash; const v=stat(e,'def'); e.st.snack_stash=s; return v; })(),1.2,.005),'and the Cheek Stuffer gets +20% Defense'); });
+
+  // ---------- The Acorn Cache and Stash for Winter ----------
+  const chair=o=>{ const F=mk6([{id:'chairman',row:'front'}],o),e=F.foes[0]; e.hp=e.maxHp=9999; e.peeves=[]; e.resists=[]; for(const p of F.party) { p.hp=p.maxHp=Math.max(p.maxHp,900); p.pep=3; } return {F,e}; };
+  const cache=F=>F.foes.find(f=>f.id==='acorncache'&&!f.ko);
+  noCrit(()=>{ const {F,e}=chair(); F.round=3; e.turns=3; e.actIx=3; ok(!pick(F,e,true)||pick(F,e,true).act.id!=='stash_for_winter','not before the 4th round (every 3 rounds)');
+    F.round=4; ok(pick(F,e,true).act.id==='stash_for_winter','at the 4th round it calls a cache first');
+    F.acting=e; const b=turn(F,e,4); const c=cache(F);
+    ok(c&&c.row==='back'&&c.maxHp===150&&c.hp===150&&c.pips===0,'the cache arrives in Back with its own printed 150 HP (not half), and 0 pips: '+J(c&&[c.row,c.maxHp,c.pips]));
+    ok(c.add&&c.addedBy===e.key&&c.addedTurn===4,'it knows who called it and when');
+    ok(b.some(x=>x.t==='summon'&&x.id==='acorncache'),'the screen sees it arrive');
+    F.round=7; e.actIx=0; for(const t of [5,6]) { e.turns=t; const P=pick(F,e,true); ok(!P||P.act.id!=='stash_for_winter','while a cache stands he calls no second one (turn '+t+')'); } });
+  noCrit(()=>{ const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F);
+    ok(c&&F.foes.every(f=>f.id!=='acorncache'||!f.ko),'the cache stands'); e.turns=5; let P=pick(F,e,true); ok(!P||P.act.id!=='stash_eat','one turn after the call he does not eat it yet');
+    e.turns=6; P=pick(F,e,true); ok(P&&P.act.id==='stash_eat','on his 2nd turn after the call he eats it, ahead of his other acts');
+    e.hp=Math.floor(e.maxHp*.5); const pips0=e.pips,pep0=F.party.map(p=>p.pep),hp0=e.hp; F.acting=e; const b=turn(F,e,6);
+    ok(c.ko&&c.eaten&&!cache(F),'the cache is gone, eaten');
+    ok(e.hp>hp0&&near(e.hp-hp0,Math.round(e.maxHp*.15),2),'he heals 15% of his Max HP: '+hp0+' to '+e.hp);
+    ok(e.st.winter_hoard&&e.st.winter_hoard.n===2&&near(sum(e,'atk'),.45,1e-9)||near(stat(e,'atk')/(()=>{ const s=e.st.winter_hoard; delete e.st.winter_hoard; const v=stat(e,'atk'); e.st.winter_hoard=s; return v; })(),1.25,.01),'and gets Winter Hoard (+25% Attack and Defense, 2 turns)');
+    ok(e.pips===pips0&&F.party.every((p,i)=>p.pep===pep0[i]),'an eaten cache pays no feedback: no pip lost, no Pep given'); });
+  // knocked out first: +1 Pep for the family, 10% of Max HP flat, 1 pip
+  SK.t12_kill={id:'t12_kill',vibe:'tom_flier',slot:'s1',name:'Test kill',pep:0,flavor:['clobber'],power:'standard',hits:1,target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{add:50}}]};
+  noCrit(()=>{ const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F),tom=F.party.find(p=>p.id==='tom');
+    c.hp=1; const pep0=F.party.map(p=>p.pep),hp0=e.hp,pips0=e.pips; go(F,tom,'t12_clobber',c.key);
+    ok(c.ko&&!c.eaten,'the family knocks the cache out');
+    ok(F.party.every((p,i)=>p.pep===pep0[i]+1||(p===tom&&p.pep>=pep0[i])),'every family member gains +1 Pep: '+J(F.party.map(p=>p.pep))+' from '+J(pep0));
+    ok(e.hp===hp0-Math.round(e.maxHp*.10),'Chairman Cheeks takes 10% of his Max HP as flat damage: '+hp0+' to '+e.hp);
+    ok(e.pips===pips0-1,'and loses 1 Composure pip: '+pips0+' to '+e.pips); });
+  noCrit(()=>{ // the pip counts inside the 3-pip cap of the action: a Pet Peeve and a Detonation already took 3
+    const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F),tom=F.party.find(p=>p.id==='tom'); c.hp=1; e.peeves=[]; const c0={F,actor:tom,src:tom,beats:[],g:'a',targets:[e],hit:[],detonated:{},reacted:{},tags:[],outExtra:{},ledger:{}};
+    G('b3Pips')(c0,e,3); G('b3Pips')(c0,e,1); // 4 would be paid... the cap is 3
+    G('b3PayLedger')(F,c0); ok(e.pips===6-3,'the 3-pip cap holds for one action: '+e.pips); });
+  noCrit(()=>{ const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F),tom=F.party.find(p=>p.id==='tom'); c.hp=1; e.hp=5; go(F,tom,'t12_clobber',c.key);
+    ok(e.hp>=1&&!e.ko,'the feedback never knocks the boss out: it stops at 1 HP ('+e.hp+')'); });
+  noCrit(()=>{ const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F); F.acting=c; c.turns=1; let thrown=null,b=null;
+    try { b=foeTurn(F,c); } catch(err) { thrown=err; } ok(!thrown&&!b.some(x=>x.t==='act'),'a cache that gets a turn does nothing and does not break: '+(thrown&&thrown.message)); });
+  noCrit(()=>{ // knocked out, then the next round he may call a fresh one
+    const {F,e}=chair(); F.round=4; e.turns=4; F.acting=e; turn(F,e,4); const c=cache(F),tom=F.party.find(p=>p.id==='tom'); c.hp=1; go(F,tom,'t12_clobber',c.key);
+    F.round=7; e.turns=5; e.actIx=0; ok(pick(F,e,true).act.id==='stash_for_winter','with the first cache gone, he calls another at the next 3rd round'); });
+  // The Big Stash: below 50% HP, a party-wide wind-up
+  noCrit(()=>{ const {F,e}=chair(); e.hp=Math.floor(e.maxHp*.6); e.actIx=e.D.acts.findIndex(a=>a.id==='the_big_stash'); ok(pick(F,e,true).act.id!=='the_big_stash','above 50% HP there is no Big Stash');
+    e.hp=Math.floor(e.maxHp*.45); ok(pick(F,e,true).act.id==='the_big_stash','below 50% HP it is next in the list');
+    e.charge=e.D.acts.find(a=>a.id==='the_big_stash'); const hp0=F.party.map(p=>p.hp); turn(F,e,5); ok(F.party.every((p,i)=>p.hp<hp0[i]),'The Big Stash hits all three'); });
+  noCrit(()=>{ const {F,e}=chair(); const A=e.D.acts.find(a=>a.id==='acorn_volley'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2);
+    ok(F.party.filter((p,i)=>p.hp<hp0[i]).length>=1,'Acorn Volley hits (two random allies; the same one may take both)'); });
+  noCrit(()=>{ // the Monocle is a buff the party can strip
+    const {F,e}=chair(); const o=G('B3_OPS'),tom=F.party[0]; const c={F,actor:tom,src:tom,beats:[],g:'a',targets:[e],hit:[],detonated:{},reacted:{},tags:[],outExtra:{},ledger:{}};
+    o.strip(F,c,{kind:'buff',all:true,to:'target'}); ok(!e.st.executive_monocle,'a buff strip takes the Executive Monocle off'); });
+  delete SK.t12_kill;
   for(const k of ['t12_clobber','t12_racket','t12_sizzle','t12_multi']) delete SK[k];
 };
