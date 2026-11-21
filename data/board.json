@@ -20207,7 +20207,7 @@
     "c-ch3build"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
     "opening": "not started"
@@ -20217,6 +20217,10 @@
     {
      "d": "2026-11-20",
      "t": "Added in the planning chat \"i spent all day today tweaking, cutting, and rewording chapter 1 dialogie\": each chapter's script gets the red pen pass, with the previous chapter's edits added first, before it is built."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom started this by hand (11-21 12:32) before playing chapter 2 (t-ch2play is still in his backlog with no note): his chapter 2 lessons will be counted as of today."
     }
    ],
    "prompt": {
