@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6],
+  chapters:[1,2,3,4,5,6,7],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -129,6 +129,27 @@ const B3_STORY={
       {id:'boss',who:'*',text:'Chairman Cheeks can’t stand Drench or Sizzle and shrugs off Racket. His Executive Monocle gives him more Crit and Atk for 3 turns, so strip it or steal it if you can.'},
       {id:'cache',who:'*',text:'He calls an Acorn Cache into the Back row. Knock it out before he eats it on his second turn: it gives everyone a Pep and takes a bite out of him. Left alone, it makes him hit harder.',when:(F)=>F.foes.some(f=>f.id==='acorncache')},
       {id:'slam',who:'*',text:'Cheek Slam is charging (!!): it hits one person hard. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='chairman'&&/Slam/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 7 (stage 18): Tom, Grace, Rose and Boppy in the Library. ----
+    ch7cliff:[
+      {id:'cliff',who:'*',text:'The Cliffhanger stands in front and can’t stand Sizzle or Racket. It shrugs off Clobber. The Shusher in the Back row can’t stand Razzle or Sizzle.'},
+      {id:'tbc',who:'*',text:'To Be Continued... is charging (!!): it hits everyone and slows them. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='cliffhanger')},
+      {id:'shhh',who:'*',text:'SHHH! locked a Skill: that person can only use basic moves for 2 turns. Knock out the Shusher in the Back row to stop more of them.',when:(F)=>F.party.some(p=>p.st&&p.st.skill_lock)}
+    ],
+    ch7know:[
+      {id:'ears',who:'*',text:'The Dog-Ear can’t stand Drench or Sizzle and shrugs off Racket. The Know-It-All in the Back row can’t stand Racket or Razzle and shrugs off Sizzle.'},
+      {id:'tech',who:'*',text:'Well, Technically is charging (!!): it tires the whole family and gives the Know-It-All +20% Defense. Interrupt it, or shield everyone.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='knowitall')},
+      {id:'actually',who:'*',text:'Actually... cuts a person’s Defense by 20% for 2 turns. Shield them, or knock out the Know-It-All to stop more.',when:(F)=>F.party.some(p=>p.st&&p.st.actually)}
+    ],
+    ch7pop:[
+      {id:'elite',who:'*',text:'Pop-Up Panic is an Elite: 4 Composure pips, and it can’t stand Clobber or Razzle. It shrugs off Racket. It starts coiled, so early hits miss more often.'},
+      {id:'reveal',who:'*',text:'Big Reveal is charging (!!) and hits everyone. Break its pips to stop it, or shield the family.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='popup')}
+    ],
+    unread:[
+      {id:'pips',who:'*',text:'The Unread has 7 Composure pips and can’t stand Racket or Sizzle. It shrugs off Clobber, so Racket and Sizzle break it fastest.'},
+      {id:'page',who:'*',text:'Turn Back the Page is charging (!!): it throws one person far back on the turn bar. Shield them, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Turn Back/.test(f.charge.name||''))},
+      {id:'ribbon',who:'*',text:'Bookmark Ribbon: it takes 25% less damage and heals a little for 2 turns. Strip the guard, or save your big hits for after it fades.',when:(F)=>F.foes.some(f=>f.st&&f.st.bookmark_guard)},
+      {id:'end',who:'*',text:'THE END is charging (!!): it hits everyone, slows them, and pushes back anyone without a shield. Shield the whole family.',when:(F)=>F.foes.some(f=>f.charge&&/THE END/.test(f.charge.name||''))}
     ]
   }
 };

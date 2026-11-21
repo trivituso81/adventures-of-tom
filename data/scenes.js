@@ -3592,7 +3592,9 @@ SCENES.ch7Boss=[
   {battle:'unread',tut:'unread'},
   {if:()=>flag('battle:unread')!=='win',then:[
     {heal:true},
-    {talk:'Grace',lines:['Up, everybody. I\'m in charge now.','Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.']},
+    {if:()=>B3_CH_ON(7),then:[
+      {talk:'Grace',lines:['Up, everybody. I\'m in charge now.','Tata, when it winds up THE END, shield everybody. And when it hides behind the Bookmark Ribbon, wait it out or strip the guard. Then somebody should just read it. Out loud.']}],else:[
+      {talk:'Grace',lines:['Up, everybody. I\'m in charge now.','Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.']}]},
     {toast:'Face The Unread and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 8. After the boss (story-ch07.md scene 9; won in the scene, or on a retry with A): the coin is the book's first bookmark. Tom tells the book what the coin
@@ -3774,7 +3776,7 @@ SCENES.ch7End=[
   {flag:'tombo:deedee2'},   // Pick the Rhubarb unlocks here (chapter 7)
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2},
+  {if:()=>!B3_CH_ON(7),then:[{toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2}],else:[]},
   {toast:'Chapter 7 complete! Long Island is yours to explore.',time:6}
 ];
 TRIGGERS.push(

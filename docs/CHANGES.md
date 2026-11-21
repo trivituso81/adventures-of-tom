@@ -39,6 +39,14 @@ Card c-buildpill1. Tom (11-21): "in the builds screen, the build name must be mo
 - clip-skeeter-whine: clip `skeeter-whine` cut from art/raw/clips/clip-skeeter-whine-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, state; 37 pictures kept; played at 1.5x). skeeter_whine frames 37 frame px 544 376 rows 68 47 sheet (2455, 2415) in memory mb 23.7 (as a grid 30.3) kb 957 dur ms 2056 kind state impact ms 0 reach [22.2, 21.0]
 - Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
 
+## b3s18b (2026-11-21): chapter 7's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part b. Chapter 7 (the Library) joins chapters 1 to 6: the Cliffhanger, the Know-It-All, Pop-Up Panic and The Unread play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch7cliff`, `ch7know`, `ch7pop`, `unread`): Pet Peeves and Resists, To Be Continued..., SHHH! and Skill Lock, Well, Technically and Actually..., Big Reveal, Turn Back the Page, the Bookmark Ribbon and THE END. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: the Pick the Rhubarb toast is skipped under Battle 3 (`B3_CH_ON(7)`). Grace's coaching after a loss to The Unread has a Battle 3 version: the first line is the same so its clip still plays, the second line is new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old line.
+- Left alone on purpose: the Grace Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 7 test were not run.
+- Not looked at: any chapter 7 fight in a browser.
+
 ## portraits2 (2026-11-21): Portraits baked from your saved crops: rose (made by the portrait-bake Action)
 
 - Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
