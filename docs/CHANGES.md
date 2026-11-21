@@ -1,3 +1,9 @@
+## qa-coh04 (2026-11-21): Rose no longer asks for a piggyback on the street right after the piggyback scene
+
+Card c-qa-coh04 (chapter 1 QA COH-04, build keysecrets2). Confirmed on main: "Tata, piggyback?" was one of Rose's follower lines (`engine/followers.js`) and came up in free walking after the Rivituso Row departure scene (flag `ch1-job`).
+- Change: Rose has a story variant (`when`) that drops that one line once `ch1-job` is set. Before the flag she says all three lines. No spoken line was reworded, so no clip is silenced.
+- Checked in the running game: before the flag her lines are 3, after it 2 (rock, slime). No visual change. The Python smoke run could not start in this environment (browser version mismatch), so it was not run.
+
 <<<<<<< HEAD
 ## qa-coh06 (2026-11-21): after the Big One, the orange cube answers with one second-look line
 Chapter 1 QA COH-06 (keysecrets2), card c-qa-coh06. Confirmed on main: pressing A on the Boppy's pond cube after the fight replayed the first discovery. Now, once flag `ch1-tin` is set, it plays one Tom line ("Still stuck. The fish got the pan out, but the cube won't budge."). New line, so it waits for a recording. The pan toast was not added (the pan is not a bag item and the scene shows it). Change: `after` on the ch1 spot in `engine/amber-spots.js`.

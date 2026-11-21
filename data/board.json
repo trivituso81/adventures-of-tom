@@ -21382,7 +21382,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Rose asks for a piggyback right after the piggyback scene",
-   "next": "Ready to start. Confirmed: \"Tata, piggyback?\" is one of Rose's follower lines in engine/followers.js, used everywhere.",
+   "next": "Shipped as qa-coh04: Rose drops \"Tata, piggyback?\" after flag ch1-job; checked in the running game (3 lines before, 2 after).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21417,13 +21417,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed on main, fixed in qa-coh04: Rose's follower lines lose \"Tata, piggyback?\" once ch1-job is set. No line reworded."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
     "opening": "started by START"
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-qa-coh05",

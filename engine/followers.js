@@ -8,6 +8,8 @@ const followers=[
   makeFollower(grace,["Tata, can we go to the bakery again?","I named the Grump. His name is Kevin.","Are we there yet? Where's there?"]),
   makeFollower(rose,["I found a rock. It's a pet now.","Tata, the slime looked at me funny.","Tata, piggyback?"])
 ];
+// qa-coh04: once the piggyback scene (ch1-job) has played, "Tata, piggyback?" is not asked again on the street.
+followers[1].when=[{flag:'ch1-job',lines:["I found a rock. It's a pet now.","Tata, the slime looked at me funny."]}];
 
 // Followers walk the trail of tiles Tom has just left, so he can turn around and walk back through them.
 const trail=[];

@@ -110,7 +110,7 @@ startSplash();
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
 <<<<<<< HEAD
-  d.textContent='build qa-coh06';
+  d.textContent='build qa-coh04';
 =======
   d.textContent='build qa-coh01';
 >>>>>>> origin/main
