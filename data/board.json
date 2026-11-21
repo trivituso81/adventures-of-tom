@@ -25911,7 +25911,7 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25929,6 +25929,11 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T18:23:11.660Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session started (Sonnet 5.5, high): checking open cards, then wiring saved portraits.",
+     "at": "2026-11-21T18:25:26.000Z"
     }
    ],
    "prompt": {
