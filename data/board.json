@@ -19735,56 +19735,23 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Make and approve 18 item picture sheets (288, Fix: Make and approve 18 item picture sheets (288 is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 3 pictures (about $0.15).",
+     "at": "2026-11-21T05:39:14.392Z"
     }
    ],
    "gen": {
-    "want": false,
-    "at": "2026-11-21T03:35:08Z",
+    "want": true,
+    "at": "2026-11-21T05:39:14Z",
     "ids": [
-     "prop-item-redo-1",
-     "prop-item-redo-2"
+     "prop-item-solo-amy_chm1",
+     "prop-item-solo-claytaco",
+     "prop-item-solo-g_bsash"
     ],
-    "est": 0.1,
-    "mode": "review",
-    "run": {
-     "state": "done",
-     "at": "2026-11-21T03:36:17Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44861903466",
-     "made": [
-      "prop-item-redo-1",
-      "prop-item-redo-2"
-     ],
-     "already": [],
-     "skipped": [],
-     "failed": [],
-     "spent": 0.12,
-     "qa": {
-      "prop-item-redo-1": {
-       "file": "results/prop-item-redo-1/20261121T033602.png",
-       "yes": 15,
-       "of": 16,
-       "failed": [
-        {
-         "id": "p8",
-         "q": "Is the seventh object a pair of neon pro racing flats with paper-thin soles and plain sides?",
-         "why": "shows soccer cleats with swoosh logo and thick soles"
-        }
-       ]
-      },
-      "prop-item-redo-2": {
-       "file": "results/prop-item-redo-2/20261121T033603.png",
-       "yes": 15,
-       "of": 16,
-       "failed": [
-        {
-         "id": "f_text",
-         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
-         "why": "Signature visible on hard hat."
-        }
-       ]
-      }
-     }
-    }
+    "est": 0.15,
+    "mode": "review"
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
