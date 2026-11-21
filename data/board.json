@@ -17873,7 +17873,7 @@
    "id": "c-idea-madelot",
    "tag": "idea-madelot",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Chapter 1 subtitles now match your new voice clips",
    "next": "Shipped as idea-madelot: 8 chapter 1 subtitles reworded to what your baked clips say (Tom pencil line, Deedee twelve more, Big One x2, Grace x4). 26 older kept takes left alone (6 already in the game, 20 stale). New tool tools/voice-library/retext_audit.py finds the next mismatches; merge-local.js now warns when a take's words differ. Waiting on your play check (t-madelot-play).",
@@ -17933,6 +17933,10 @@
      "d": "2026-11-20",
      "t": "Learned from branch takes (1,177 takes, 512 kept): Tom edits the words in the script box while tuning, the take stays keyed to the old subtitle. Transcribed the 512 kept takes and 351 baked clips (Whisper base.en, small.en on each difference). 8 lines reworded to the clip, 26 older kept takes left alone, 2 looped clips handed to Tom (t-madelot-rerecord). Shipped as idea-madelot.",
      "at": "2026-11-21T02:06:45.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-madelot: chapter 1 subtitles now say what Tom's new voice clips say (8 lines), and a tool that finds the next ones"
     }
    ],
    "prompt": {
@@ -17944,7 +17948,8 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-madelot in data/board.json, history included. Your first push is the commit board: start c-idea-madelot.\n\nTom made this card himself with New card on the board. His words: \"i made a lot of updates to the voiceclips / 1) learn from what i did or tell me what info you need to do so / 2) update the text to match the new voiceclips\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-madelot with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-madelot-play"
+   "after": "t-madelot-play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-startfix",
@@ -19883,6 +19888,41 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGdRYLmrQ3KvdjxXB8",
+   "title": "Chapter 1 subtitles now match your new voice clips",
+   "first": "2026-11-20T17:34:21-08:00",
+   "last": "2026-11-20T18:16:35-08:00",
+   "tags": [
+    "idea-madelot"
+   ],
+   "cards": [
+    "c-idea-madelot"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T18:16:06-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof",
+    "fix-wanproof-watch"
+   ],
+   "cards": [
+    "c-wanproof",
+    "c-fix-wanproof-watch",
+    "c-startfix",
+    "t-startfix-look",
+    "c-wanch1",
+    "c-wanidle",
+    "t-wanch1-fal",
+    "c-ch2lessons",
+    "c-ch3lessons"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDCjPdhWiTjqaKzKQt",
    "title": "Fix: Look at the Effects page in Admin",
    "first": "2026-11-20T18:16:02Z",
@@ -19906,29 +19946,6 @@
     "c-reports-4",
     "c-reports-2",
     "c-reports-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T18:14:21-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb",
-    "wanproof",
-    "fix-wanproof-watch"
-   ],
-   "cards": [
-    "c-wanproof",
-    "c-fix-wanproof-watch",
-    "c-startfix",
-    "t-startfix-look",
-    "c-wanch1",
-    "c-wanidle",
-    "t-wanch1-fal",
-    "c-ch2lessons",
-    "c-ch3lessons"
    ]
   },
   {
@@ -20156,16 +20173,6 @@
    ],
    "cards": [
     "c-idea-searchthrough"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGdRYLmrQ3KvdjxXB8",
-   "title": "I made a lot of updates to the voiceclips",
-   "first": "2026-11-20T17:34:21-08:00",
-   "last": "2026-11-20T17:34:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-madelot"
    ]
   },
   {
@@ -22222,8 +22229,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6fbf57656ce69c1098140135f09d3ba304e0ed08",
- "synced_at": "2026-11-21T02:15:02+00:00",
+ "synced": "c60914ac9769c23c4ed0aca79948e3c9f077ca59",
+ "synced_at": "2026-11-21T02:16:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
