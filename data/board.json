@@ -23326,6 +23326,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukE8781SNzn92J31EC6",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T15:01:07Z",
+   "last": "2026-11-21T15:01:07Z",
+   "tags": [],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH1cGognjyXNgAnwyG",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "first": "2026-11-21T14:58:07Z",
@@ -26676,8 +26686,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2d77eea9ec78d66be83de58d44122bfe711f70f0",
- "synced_at": "2026-11-21T14:58:13+00:00",
+ "synced": "2b5f86d3e3e3e14d4392844668b1916fe87d63e2",
+ "synced_at": "2026-11-21T15:01:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
