@@ -4,7 +4,7 @@ This file wins over claude/clip-reset-plan.md, claude/clip-gate-plan.md and clau
 
 Tom (11-20 12:11): "I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses."
 
-STATUS (wanproof, 2026-11-20): the proof in section 4 is BUILT. Spent $0.65 of the $2.00 cap on fal (start picture $0.15, one guard video $0.50; booked at the estimates). Every check in 4.4 passed on the first video. Waiting on Tom: card t-wanproof-watch (watch ADMIN > BATTLE LAB > NEW BATTLE > PROOF: GRACE'S GUARD (VIDEO) once). Built notes: section 4.7.
+STATUS (wanch1, 2026-11-20): chapter 1 built on this route, see 4.8. Earlier (wanproof): the proof in section 4 is BUILT. Spent $0.65 of the $2.00 cap on fal (start picture $0.15, one guard video $0.50; booked at the estimates). Every check in 4.4 passed on the first video. Waiting on Tom: card t-wanproof-watch (watch ADMIN > BATTLE LAB > NEW BATTLE > PROOF: GRACE'S GUARD (VIDEO) once). Built notes: section 4.7.
 
 ## 1. The rule (Tom's words, also in CLAUDE.md and claude/canon-addendum.md)
 
@@ -163,6 +163,17 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | Engine | `engine/b3-clips.js`: `B3C.over` (one fight's own clip table), `b3cGuardClip`, `b3cGuardFrame` (rise once, hold forward and back, lowering once, then the first picture). The painted guard, the painted fidget and the code breath step aside in that fight only (`b3PaintState`). `B3_BODY_PAINT` and `B3_BODY_CLIPS` are unchanged, so every other fight still shows the painted guard (removed later by the purge in section 5) |
 | Lab row | `b3LabGuardProof` in `engine/b3-lab.js`: Grace alone against one Mudling, STANDING, then GUARD, BRACED HIT, GUARD DOWN three times, then the list |
 | Game checks | `tools/wanproof_test.py` P1 to P6, portrait and landscape: standing 126.5 battle px against her painted 126.5; feet within 1 px through rise, hold, braced hit and lowering; no jump over 2 px where the rise starts or the lowering ends; braced hit nudges 4.8 px. FAILS: []. Also `b3_test.py s8`, `paint_state_test.py`, `clip_test.py`, `clip_kinds_test.py`, smoke |
+
+### 4.8 Built (wanch1, 2026-11-20): chapter 1, all four family members and the other chapter 1 monsters
+| Item | Result |
+|---|---|
+| Tooling | `wangen.py` takes a list of jobs (names, comma list, wildcards) and runs up to 3 at once on one ledger and cap; a job may carry `pad` (start picture shrunk inside the frame, for wide or high moves). Start pictures for Tom, Rose, Deedee made like Grace's (Rose mirrored: came back facing right) |
+| Spend | fal ledger $23.60 in all ($22.95 in wanch1: 3 start pictures, 41 videos with retries); xAI $1.59 (20 monster clips) |
+| In the game (B3_BODY_CLIPS) | Tom, Grace: idle, guard, hit, ko, victory, run. Rose: idle, guard, hit, ko, run (victory: her approved Grok clip). Deedee: idle, guard, hit, victory, run. Moves: Lounge Pass Flex, Zone One Blockade, Soup-Dumpling Squeeze, Crunchy Sugar-Cube Pop, The Floor Is Lava!, Hand Me My Glasses Scrub. Monsters: Grump grumble, splash, slap and its wind-up; Toad croak, tongue and its wind-up; Log roll, jab, Timber! and its wind-up; Skeeter idle and Buzz Cloud |
+| Stop-loss (two misses the same way) | dodge (Wan hops sideways, feet leave the ground; not made for the others), cast (Wan adds glowing rings even with prompt expansion off; not made for the others), Deedee ko (seated 5 to 6% above the feet line twice), Rose Tackle (a second lamb) and Giddyup (a lasso ring), Deedee Wet-Floor (the mop dips below the feet line), Toad Body Slam (leaps out of the frame), Skeeter Bite and Whine (the small mosquitoes vanish). Next try: a different model (card c-wanch2) |
+| What worked as a one-change fix | knock-out: "sinks straight down to sit on the ground right where she stood" (Grace 4% to 1.5%, Rose 5% to 2.8%); a prop action that did not happen: name it as the event ("squeezes it hard once between her palms until it squishes flat"); hands leaving the frame: `pad: 0.8` (Deedee victory) |
+| Bake numbers | idle: whole video every 3rd picture, loop forward only (`--wrap`); run: one stride cycle found by frame likeness, `--wrap`; guard: kind guard with rise and lowering marks; hit, ko: the action stretch every 2nd picture at 1.5x; figure rows Tom 99, Grace 90, Rose 83, Deedee 99.3 |
+| Tests | `wanproof_test.py` W1 to W5 for every fighter with an idle video (idle is the video, standing height = painted battle size within 1 px, feet, jumps, tables and kit clips), `b3_test.py s8` (a state is a video or painted, never both; peak 15 clip pictures held at once in NEW 6, limit 16), `paint_state_test.py` (only the rows still painted) |
 
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.

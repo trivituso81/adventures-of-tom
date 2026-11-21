@@ -17,14 +17,14 @@
 const B3_BODY_PAINT={
   tom:   {dodge:{f:'windup',h:.909,s:1}},
   grace: {dodge:{f:'windup',h:.967,s:.78}},
-  rose:  {dodge:{f:'windup',h:1,s:.9}, ko:{f:'hurtPose',h:.964,s:.9,f2:'kneel',h2:.795,s2:.9}},
-  deedee:{dodge:{f:'windup',h:.96,s:.95}, ko:{f:'hurtPose',h:1,s:.93,f2:'kneel',h2:.838,s2:.95}, victory:{f:'celeb',h:1.081,s:.95,f2:'leap',h2:1.101,s2:.95}}
+  rose:  {dodge:{f:'windup',h:1,s:.9}},
+  deedee:{dodge:{f:'windup',h:.96,s:.95}, ko:{f:'hurtPose',h:1,s:.93,f2:'kneel',h2:.838,s2:.95}}
 };
 const B3_BODY_CLIPS={
   tom:   {idle:'tom_idle',guard:'tom_guard',hit:'tom_hit',ko:'tom_ko',victory:'tom_victory',run:'tom_run'},   // wanch1: Wan 3.0 videos
   grace: {give:'grace_give',idle:'grace_idle',guard:'grace_guard',hit:'grace_hit',ko:'grace_ko',victory:'grace_victory',run:'grace_run'},   // wanch1: Wan 3.0 videos
-  rose:  {victory:'rose_victory',give:'rose_give',idle:'rose_idle',guard:'rose_guard',hit:'rose_hit',run:'rose_run'},   // wanch1: Wan 3.0 videos (victory: the Grok clip Tom approved)
-  deedee:{give:'deedee_give',idle:'deedee_idle',guard:'deedee_guard',hit:'deedee_hit',run:'deedee_run'},   // wanch1: Wan 3.0 videos
+  rose:  {victory:'rose_victory',give:'rose_give',idle:'rose_idle',guard:'rose_guard',hit:'rose_hit',ko:'rose_ko',run:'rose_run'},   // wanch1: Wan 3.0 videos (victory: the Grok clip Tom approved)
+  deedee:{give:'deedee_give',idle:'deedee_idle',guard:'deedee_guard',hit:'deedee_hit',victory:'deedee_victory',run:'deedee_run'},   // wanch1: Wan 3.0 videos
   mudling:{idle:'mudling_idle',hit:'mudling_hit',slip:'mudling_slip',die:'mudling_defeated'},
   grump:{idle:'grump_idle'},
   toad:{idle:'toad_idle'},

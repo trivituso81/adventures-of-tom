@@ -1,3 +1,18 @@
+## wanch1 (2026-11-20): chapter 1 battles are videos: the whole family idles with breathing, guards, gets hit, falls, cheers and runs on Wan 3.0, plus Rose's knock-out and Deedee's victory; the stop-loss list goes to c-wanch2
+
+Card c-wanch1 (last part; parts a to h above). This part: Rose's knock-out retry 2 (seated 2.8% above the feet line, was 5%) and Deedee's victory retry 2 (picture shrunk to 80% inside the video: her spread hands stay in the frame) are baked and wired; their painted rows are purged. Wan-gen run 44865404539 ($3).
+| Fighter | Videos in every NEW BATTLE fight | Still painted or default (stop-loss, card c-wanch2) |
+|---|---|---|
+| Tom | idle, guard, hit, ko, victory, run; Lounge Pass Flex, Zone One Blockade | dodge, cast |
+| Grace | idle, guard, hit, ko, victory, run; Soup-Dumpling Squeeze, Crunchy Sugar-Cube Pop | dodge, cast |
+| Rose | idle, guard, hit, ko, run, victory (her approved clip); The Floor Is Lava! | dodge, cast; Lamb-Tuck Ankle Tackle (a second lamb appeared), "Giddyup, Tata!" Launch (a lasso ring appeared) |
+| Deedee | idle, guard, hit, victory, run; "Hand Me My Glasses" Scrub | dodge, cast, ko (floats above the ground twice); Wet-Floor Hazard (the mop dips below her feet) |
+| Monsters | Grump: grumble, splash, slap and wind-up; Toad: croak, tongue and wind-up; Log: roll, jab, Timber! and wind-up; Skeeter: idle, Buzz Cloud | Toad Body Slam, Skeeter Darting Bite and Mosquito Whine |
+- Spend: fal $22.95 (cap $35), xAI $1.59 (cap $3).
+- Tests this part: `wanproof_test.py rose,deedee` FAILS [], `b3_test.py s8` FAILS [] (peak 15 clip pictures in NEW 6, limit 16), smoke.
+- Plan notes: `claude/video-battle-plan.md` 4.8 (repo copy and Project). docs/BATTLE3.md "Painted body states" says what is still painted.
+- Tom's card: t-wanch1-watch (play NEW 1 to NEW 6 once). Next Claude card: c-wanch2 (the stop-loss list on a different video model, then the full purge of the painted states).
+
 ## b3s13c (2026-11-20): New battle: the chapter 10 airport monsters and The Last Call join the Battle Lab (stage 13, part c of four)
 
 - Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This part is chapter 10, built from `claude/bestiary-v11.md`: Carry-On, Jet Lag, The Long Line, The Unclaimed, The Armrest Hog (Elite) and the boss The Last Call in `data/b3-foes-ch10.js`, with six formations (8 VP each, 26 for the boss).
