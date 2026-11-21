@@ -17811,7 +17811,7 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and card c-startfix in data/board.json, including its history and Tom's card t-startfix-edit. Your first push is the commit board: start c-startfix. In data/board.json routines remove paused from opus-medium and sonnet-high, and set start: true on the cards c-probe-opus and c-probe-sonnet-high2 (throwaway cards whose only job is the push board: start followed by their own id). Run python3 tools/board_check.py and push. The board job fires each card on its own task. Wait up to 10 minutes (git fetch every minute) for the commits board: start c-probe-opus and board: start c-probe-sonnet-high2 on main. For a route whose commit does not arrive, put paused back on its routines entry with today's date and the reason, write the reason on c-startfix, and add a Tom card naming that route (ask decide or setup, one action); do not try the same thing a third time. Then retire both probe cards (Done, one history line each), write the result on c-startfix, and push the build startfix1 with a docs/CHANGES.md heading ## startfix1 (date): one plain line. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startfix-look",
+   "after": "nothing for Tom: t-startfix-look",
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
@@ -17863,6 +17863,10 @@
     {
      "d": "2026-11-21",
      "t": "Result: unpaused both routes and flagged the two probe cards at 00:55 UTC. Opus medium was fired and claimed the probe (conversation qMqQE7bc) but made no push in 10 minutes. Sonnet high was never fired. The two earlier board: start probe commits came from Tom's hand-pasted runs at 00:54 UTC, not START. Both routes are paused again with the reason; not retried a third time. Probes retired. Card t-startfix-look added."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "board-sync was failing on every push since 17:13 PT: Tom handed t-startfix-look to Claude, so it is a Claude card and this card's after had to name it as one. Fixed by the wanproof session; nothing else changed."
     }
    ],
    "auto": true,
