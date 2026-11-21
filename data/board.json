@@ -25312,6 +25312,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped Start again after Stuck twice.",
      "at": "2026-11-21T20:31:08.663Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "START is not set up for this model and effort. Use Copy prompt."
     }
    ],
    "prompt": {
@@ -25323,8 +25327,7 @@
     "effort": "medium (the story prompt works; one method change: the start picture)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-lava-xftr in data/board.json with its history. Your first push is the commit board: start c-anim-rose-lava-xftr.\n\nTom's notes on Rose, The Floor Is Lava!: \"Lava starts to form beneath her. She throws down a couch cushion on top of the lava, and then she jumps on top of the couch cushion, and then jumps up and down a couple of times\" (the second note, bouncing onto the enemies, is not possible in a clip that stays on one spot). Prompt v2 (tools/art-library/prompts/wan-rose-lava-v2.txt, job rose-lava rev 2 and 3) tells the story right, but Wan shrinks her to 0.67x to 0.79x while she is on the cushion and brings the cushion in from outside the frame. Change the method, not the story: (1) a new start picture, job start-rose-cushion, Nano Banana 2.1 edit of art/raw/characters/rose-hero-v1.png with the prompt of start-rose plus one line: she holds a big square cream couch cushion in both arms in front of her; check it like the other start pictures (facing left, same girl, flat magenta, mirror if it faces right); (2) job rose-lava rev 4 from that picture, start frame only, prompt v3 = v2 with the cushion already in her arms (\"she tosses the couch cushion she is holding down onto the lava\") and \"a small pool\" of lava. Check every picture against the plan (section 4.4) and the measured clip gate (size within 8%, nothing entering from an edge). If it passes, bake it like the current clip (kind strike, every 3rd picture, impact where she lands on the cushion, 1.5x, --fig-rows 83), replace data/clips/rose-lava.js and art/clips/rose-lava.webp, run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. Spend at most $1.50. Build tag anim-rose-lava-xftr. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T18:20:01+00:00",
-   "start": true
+   "started_at": "2026-11-21T18:20:01+00:00"
   },
   {
    "id": "c-anim-deedee-dodge-y4m3",
@@ -26939,7 +26942,7 @@
    "title": "Night shift: queued cards start by themselves overnight",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Tap START. It builds the part every other night job needs: between 11 pm and 3 am the board starts one queued card at a time on Sonnet 5.5 medium (5 a night at most), runs the standing nightly cards first, and writes one card for you each morning, Last night, saying what ran, what shipped and what needs you. It adds a Night shift ON or OFF switch to the board page. Nothing starts at night until this ships.",
    "blocks": [
     "c-nightclean"
@@ -26980,6 +26983,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightshift: queued cards start by themselves between 11 pm and 3 am, and Tom reads one card each morning"
     }
    ],
    "prompt": {
@@ -26993,7 +27000,8 @@
    },
    "tag": "nightshift",
    "after": "nothing for Tom: c-nightclean",
-   "started_at": "2026-11-21T20:14:12+00:00"
+   "started_at": "2026-11-21T20:14:12+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-nighttests",
@@ -27053,7 +27061,7 @@
    "title": "Nightly cleanup: files, notes and the working agreement",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on the card Night shift: queued cards start by themselves overnight. Then tap START (or leave it: the night shift starts it that night). It builds a nightly report of files nothing uses, a check that no standing rule or sentence of yours is ever dropped from the working agreement, moves Done cards off the board after 2 days instead of 7, and creates the standing card Night cleanup, which runs every night: one of four buckets a night (unused files, old notes, a shorter working agreement, dead tests). Voice clips, approved art sources and your saved files are never touched.",
    "blocks": [
     "c-nightqa"
@@ -27068,6 +27076,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Night shift: queued cards start by themselves overnight is done."
     }
    ],
    "prompt": {
@@ -27080,7 +27092,6 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-nightclean in data/board.json with its history. Your first push is the commit board: start c-nightclean. Tom asked for the cleanup every night. Build section 7 exactly as written, steps 1 to 6: tools/night/clean_report.py, tools/night/rules_check.py with tools/night/rules.json taken from main today and called from tools/smoke.py, the 2 day archive in tools/board_archive.py with its two tests, and the standing card c-night-clean (nightly: true, tag nightclean, Sonnet 5.5 medium, theme Project Ops) whose prompt holds the four bucket rotation word for word with the \"Never touched\" row of section 4. Then do tonight's pass yourself as bucket A (at most 40 files, each with zero references by grep, none from the \"Never touched\" row), run smoke, and list what left in docs/CHANGES.md. Before deleting anything under tools/ or art/, show in docs/CHANGES.md the grep that proved it unused. Run python3 tools/night/clean_test.py, the board archive tests, python3 tools/board_check.py and python3 tools/smoke.py. Push build nightclean as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightclean",
-   "waiting_on": "claude",
    "after": "nothing for Tom: c-nightqa"
   },
   {
@@ -28301,7 +28312,7 @@
    "id": "c-reports-9",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-122202-loak. First note: the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching ",
@@ -28315,7 +28326,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGMUb6GmCUSv3dZxdj",
     "opening": "not started"
    },
    "history": [
@@ -28332,12 +28343,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:31:17.717Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-21T20:31:47+00:00"
   },
   {
    "id": "t-hitspeed1-try",
@@ -28366,9 +28381,86 @@
      "t": "Made by build hitspeed1 (card c-hitspeed1)."
     }
    ]
+  },
+  {
+   "id": "t-lastnight",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "title": "Last night: what the night shift did",
+   "ask": "setup",
+   "fyi": true,
+   "blocks": [],
+   "next": "Night of 2026-11-21. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Try the Battle Guide on the Duo; Try the Admin Dashboard on the wide monitor; Try the game strip and Take me there; Milestone D: play chapters 6 to 10 on the new battle. Starts used: 0 of 5.",
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Night of 2026-11-21: Night of 2026-11-21. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Try "
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "sections": [
+    [
+     "Ran",
+     [
+      "nothing started"
+     ]
+    ],
+    [
+     "Shipped",
+     [
+      "nothing"
+     ]
+    ],
+    [
+     "Tests",
+     [
+      "no test run yet (it is built by card c-nighttests)"
+     ]
+    ],
+    [
+     "Closed for you",
+     [
+      "nothing"
+     ]
+    ],
+    [
+     "Needs you",
+     [
+      "Try the Battle Guide on the Duo",
+      "Try the Admin Dashboard on the wide monitor",
+      "Try the game strip and Take me there",
+      "Milestone D: play chapters 6 to 10 on the new battle"
+     ]
+    ],
+    [
+     "Starts used",
+     [
+      "0 of 5"
+     ]
+    ]
+   ],
+   "night_key": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGuUS6mkJhboMf4inb",
+   "title": "Night shift: queued cards start by themselves overnight",
+   "first": "2026-11-21T20:17:27Z",
+   "last": "2026-11-21T20:30:02Z",
+   "tags": [
+    "nightshift"
+   ],
+   "cards": [
+    "c-nightshift"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEPoSEs3hccRneDav9",
    "title": "Fix: Read a few item banners on your phone",
@@ -28403,16 +28495,6 @@
    ],
    "cards": [
     "c-reports-8"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGuUS6mkJhboMf4inb",
-   "title": "Night shift: queued cards start by themselves overnight",
-   "first": "2026-11-21T20:17:27Z",
-   "last": "2026-11-21T20:17:27Z",
-   "tags": [],
-   "cards": [
-    "c-nightshift"
    ]
   },
   {
@@ -32470,8 +32552,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5779524a9113accf4a0d6f856da7a61786184e11",
- "synced_at": "2026-11-21T20:29:49+00:00",
+ "synced": "aad2a800dab3739b1d27f92e8bc37a00b0d74b07",
+ "synced_at": "2026-11-21T20:31:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -32504,6 +32586,7 @@
   "to": 3,
   "fixes_until": 6,
   "tz": "America/Los_Angeles",
-  "log": {}
+  "log": {},
+  "reported": "2026-11-21"
  }
 }
