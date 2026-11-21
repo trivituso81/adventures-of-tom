@@ -9661,7 +9661,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFpmswtfed1tngHAER",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -9690,6 +9690,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T02:54:58.216Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: a conversation took the prompt (Opus 5.5 medium)."
     }
    ],
    "prompt": {
