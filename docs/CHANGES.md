@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 ## qa-coh06 (2026-11-21): after the Big One, the orange cube answers with one second-look line
 Chapter 1 QA COH-06 (keysecrets2), card c-qa-coh06. Confirmed on main: pressing A on the Boppy's pond cube after the fight replayed the first discovery. Now, once flag `ch1-tin` is set, it plays one Tom line ("Still stuck. The fish got the pan out, but the cube won't budge."). New line, so it waits for a recording. The pan toast was not added (the pan is not a bag item and the scene shows it). Change: `after` on the ch1 spot in `engine/amber-spots.js`.
+=======
+## qa-coh01 (2026-11-21): The Big One's Inspect text now describes the pond fish, not a croaking frog
+Chapter 1 QA COH-01 (keysecrets2). `data/battle2-data.js` `bigone.grumpy` (the Inspect sentence, not a spoken line, so no clip changes) now reads "The biggest, coldest, muddiest fish in the pond. Twenty years down there, and nobody has stopped to say hello." Canon unchanged: the Big One stays Boppy's fish.
+>>>>>>> origin/main
 
 ## qa-bug08 (2026-11-21): no HOLD + SLIDE, ! Menu or Save over a cutscene or the CHAPTER COMPLETE card
 Chapter 1 QA BUG-08 (keysecrets2). Cause: the cutscene class hid the arrows and the A button but not the HOLD + SLIDE caption or the top-left buttons, so the caption showed between lines and the buttons stayed tappable (opening ! let monsters roam). Fix: one CSS rule in `index.html` hides `#hud-btns`, `.pad-caption` and `.pad-center` while `html.cutscene` is set (the class already covers the chapter cards).

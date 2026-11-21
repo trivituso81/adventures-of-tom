@@ -1100,7 +1100,7 @@ const B2_GRUMP={
   fogwisp:{goal:140,grumpy:'They pump it in, and then they open the doors. Every single time.',likes:B2_SET_LIKES},
   cuecrab:{goal:220,grumpy:'It holds up every line, and nobody has ever said "nice handwriting."',likes:B2_SET_LIKES},
   directorscut:{goal:380,grumpy:'Forty years of bad takes went through it. Nobody has ever once said "great take."',likes:['tnb.wardrobe','tnb.quickchange','tnb.metro','nara.puppy','tom.starter']},
-  bigone:{goal:350,grumpy:'The biggest, coldest, muddiest one. Nobody has laughed at its croaks in a hundred years.',likes:B2_HOLLOW_LIKES},
+  bigone:{goal:350,grumpy:'The biggest, coldest, muddiest fish in the pond. Twenty years down there, and nobody has stopped to say hello.',likes:B2_HOLLOW_LIKES},
   _hollow:{goal:120,grumpy:'Cold, muddy, and nobody laughs at its croaks.',likes:B2_HOLLOW_LIKES},
   _la:{goal:120,grumpy:'Stuck in LA traffic, lonely, or overheated.',likes:B2_LA_LIKES}
 };
