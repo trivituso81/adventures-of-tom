@@ -24474,7 +24474,7 @@
    "id": "c-anim-tom-loungepass-ding",
    "tag": "anim-tom-loungepass-ding",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Ding sound on the Lounge Pass sparkle",
    "next": "Waits on your card Watch Tom's new Lounge Pass Flex. Then it adds a short cartoon ding that plays when the sparkle shows on the card in Lounge Pass Flex.",
@@ -24498,6 +24498,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:13:31.335Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -24509,7 +24513,11 @@
     "effort": "medium (one sound in one move)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-anim-tom-loungepass-ding in data/board.json with its history, and the Tom card that blocked it. Your first push is the commit board: start c-anim-tom-loungepass-ding.\n\nTom asked for a little cartoon \"ding\" when the sparkle shows on the lounge pass card in Tom's move Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js, clip tom_loungepass in data/clips/tom-loungepass.js; the sparkle is on baked pictures 9 to 11 of the anim-tom-loungepass-fix1 clip). Do not touch the video. Find how the new battle plays sounds (b3Sfx in engine/b3-play.js, the sfx table) and how a clip move can fire something at a given picture, and play one short bright ding when baked picture 10 is on screen, in the new battle and in the Battle Guide player. Use an existing ding or chime sound if one exists, otherwise a short synthesized one in the same sfx table. Run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Build tag anim-tom-loungepass-ding. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-21T20:14:12+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukDbVsJeQieoJ7VeKSu",
+    "opening": "started by START"
+   }
   },
   {
    "id": "c-anim-tom-dodge-ner3",
@@ -25302,7 +25310,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Rescue chose START NEXT: the one remaining step is a paid Wan try (pad 0.8, at most $1) that is judged by looking at it, which is Opus work, not a rescue. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25370,6 +25378,10 @@
     {
      "d": "2026-11-21",
      "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stuck twice: The rescue started 10:10 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-anim-deedee-dodge-y4m3)."
     }
    ],
    "prompt": {
@@ -25388,7 +25400,8 @@
     "url": "https://claude.ai/code/cse_01RXeukCkMPGRX9c6YtKLA2C",
     "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
    },
-   "started_at": "2026-11-21T18:10:35+00:00"
+   "started_at": "2026-11-21T18:10:35+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -26913,7 +26926,7 @@
    "title": "Night shift: queued cards start by themselves overnight",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Tap START. It builds the part every other night job needs: between 11 pm and 3 am the board starts one queued card at a time on Sonnet 5.5 medium (5 a night at most), runs the standing nightly cards first, and writes one card for you each morning, Last night, saying what ran, what shipped and what needs you. It adds a Night shift ON or OFF switch to the board page. Nothing starts at night until this ships.",
    "blocks": [
     "c-nightclean"
@@ -26921,7 +26934,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGuUS6mkJhboMf4inb",
     "opening": "not started"
    },
    "history": [
@@ -26946,6 +26959,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:13:36.649Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -26959,7 +26976,7 @@
    },
    "tag": "nightshift",
    "after": "nothing for Tom: c-nightclean",
-   "start": true
+   "started_at": "2026-11-21T20:14:12+00:00"
   },
   {
    "id": "c-nighttests",
@@ -27707,7 +27724,7 @@
    "id": "c-fix-itemdefplay",
    "tag": "fix-itemdefplay",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Read a few item banners on your phone",
@@ -27729,7 +27746,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFZJTWx5PkzG7J3u7h",
+    "url": "",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27749,6 +27766,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -27761,8 +27782,7 @@
     "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-itemdefplay and t-itemdefplay in data/board.json, history included. Your first push is the commit board: start c-fix-itemdefplay.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C11 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-itemdefplay (Read a few item banners on your phone, ask play). He was asked: Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item). Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C11). * Card C11 (t-itemdefplay): * Failed expected item 1 (Steps / Scope): Read at least five different banners, including one KEY ITEM (Dragonfly Coin) and the Cookie. * What I saw instead: Six banners were captured (Mud Pie, Lily Pad Hat, Pond Hoodie, Boppy's Lost Lure, Dragonfly Coin, Bark Slab), but Cookie could not be obtained at Stop 11 or Stop 12 because Deedee remained in Tom's active 4-person party (Menu > PARTY) and never stood in her kitchen or on Rivituso Row as a townsperson NPC. * Screenshot: c11_stop11_kitchen_no_deedee_npc * Failed expected item 2: - [ ] Then an IN BATTLE section and an IN STORY section. and - [ ] Tap or press A to continue inside the card. * What I saw instead: On the Dragonfly Coin (KEY ITEM) banner in the Stop 9 after-boss scene, the card began fading in over the map (showing the dragonfly coin square icon, Dragonfly Coin, KEY ITEM, and italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\") and auto-dismissed mid-fade-in before reaching full opacity or waiting for Tap or press A to continue. * Screenshot: c11_dragonflycoin_fade * Failed expected item 3: - [ ] Text reads well: no line cut off, nothing overlapping, no placeholder text. For each banner write the item name and say whether each line is clear and whether the jokes land (Tom asked: \"Something is wrong if any line is wrong, unclear or not funny (say which item)\"). Copy any line you flag word for word. * What I saw instead (per-banner line & humor audit across all 6 banners read): 1. Mud Pie (RECOVERY ITEM, Portrait): Picture in top-left square; italic \"Mostly mud. Some pie. Rose insists.\"; IN BATTLE: \"Use it: Heals 32 HP. Works outside fights too.\"; IN STORY: \"None. It's a snack. A good one.\"; footer \"The Mudling left a mud pie behind. Rose put it in a pocket.\"; \"Tap or press A to continue\" inside card. Clear and funny; jokes land cleanly. 2. Lily Pad Hat (KEEPSAKE CHARM, Landscape): Picture in left square (briefly blank on first fade-in frame before icon appeared); italic \"Slid off a Bog Toad. Still damp. Grace says it's a crown.\"; IN BATTLE: \"Wear it: Heals 5% HP each turn.\"; IN STORY: \"None. It just quietly helps.\"; footer \"A lily pad slid off the toad's head. It's a hat now. Grace claimed it instantly.\"; \"Tap or press A to continue\" inside card. Clear and funny; fits Grace well. 3. Pond Hoodie (OUTFIT, Portrait) - FLAGGED: Italic \"The Grump dropped it. It smells like the pond. He wants it back.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"The Grump left a soggy green hoodie behind. It went in a pocket.\" are funny, but IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats - exact flagged line: Wear it: +18 HP, +4 GRIT, +1 COOL. 4. Boppy's Lost Lure (KEEPSAKE CHARM, Portrait): Picture in top-left square; italic \"Twenty years in a fish’s lip. Still shiny. Boppy will want to hear about this.\"; IN BATTLE: \"Wear it: Coins from fights +25%.\"; IN STORY: \"Bring it home. Boppy's told everyone about the one that got away. For twenty years.\"; footer \"Boppy's lost lure fell out of its lip. Twenty years late. Still shiny.\"; \"Tap or press A to continue\" inside card. Every line is clear and lands well. 5. Dragonfly Coin (KEY ITEM, Portrait) - FLAGGED: Italic \"Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.\" is clear, but the banner auto-dismissed mid-fade-in before IN BATTLE, IN STORY, and Tap or press A to continue could be read on the card. 6. Bark Slab (SIGNATURE TOOL, Portrait) - FLAGGED: Italic \"Came off a Log Lump. Heavy, mossy, and surprisingly good at stopping things.\", IN STORY: \"None. It's for wearing, and it's working.\", and footer \"A slab of bark came loose. Sturdy. It went in a pocket, barely.\" read nicely, but IN BATTLE uses an obsolete Battle 2 stat (POW) that also contradicts the defensive \"good at stopping things\" description - exact flagged line: Wear it: +5 POW. * Screenshot: c11_pondhoodie, c11_dragonflycoin_fade, c11_barkslab Related issue X-07 (confirmed in code): Boppy's Cap shows Keepsake Charm GRIT +10% in Menu > ITEMS (data/party.js bcap perk stat grit). Same fault as the Pond Hoodie and Bark Slab lines: equipment still uses the old Battle 2 stats (hp, grit, cool, pow in data/party.js) and Battle 3 has no such stats, so rewrite every Wear it line (bonusText, data/item-defs.js) to what the equipment does in Battle 3, in plain words that fit each item's joke. For the Cookie: Gemini could not get it because Deedee stays in the active party in the kitchen at stop 11. Decide yourself whether the cookie must be reachable another way or the expectation is outdated; say which in the history line, do not ask Tom. The Dragonfly Coin banner closing before full opacity is a real fault to fix.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itemdefplay to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itemdefplay, and give the build fix-itemdefplay a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-itemdefplay",
-   "auto": true,
-   "started_at": "2026-11-21T19:39:25+00:00"
+   "auto": true
   },
   {
    "id": "c-fix-qa-bug03-look",
@@ -27990,7 +28010,7 @@
    "id": "c-reports-8",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-120404-lwe8. First note: the large toads in the upper left corner should not be behind the cutout in this case",
@@ -28004,7 +28024,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCazpoWKUkqu97U4wN",
     "opening": "not started"
    },
    "history": [
@@ -28016,12 +28036,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:13:41.948Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-21T20:14:12+00:00"
   },
   {
    "id": "c-hitspeed1",
@@ -28053,6 +28077,34 @@
     "effort": "medium (one known change plus a test)",
     "text": "Read CLAUDE.md and card c-hitspeed1 in data/board.json, then finish what its history describes and push build hitspeed1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-stuck-anim-deedee-dodge-y4m3",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-anim-deedee-dodge-y4m3",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Animation note: Deedee, Dodge",
+   "next": "Card c-anim-deedee-dodge-y4m3 (Animation note: Deedee, Dodge) stalled again after its one automatic rescue. The rescue started 10:10 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-anim-deedee-dodge-y4m3"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: card c-anim-deedee-dodge-y4m3 stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -28422,6 +28474,16 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
+   "title": "Hit animations in a fight match the Battle Guide speed",
+   "first": "2026-11-21T12:14:08-08:00",
+   "last": "2026-11-21T12:14:08-08:00",
+   "tags": [],
+   "cards": [
+    "c-hitspeed1"
    ]
   },
   {
@@ -32072,8 +32134,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5caaad345968310f39f96f90dd30832573900f89",
- "synced_at": "2026-11-21T20:07:38+00:00",
+ "synced": "af1163ae09fd64e80fb6a40c28da183a7b52d43a",
+ "synced_at": "2026-11-21T20:14:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
