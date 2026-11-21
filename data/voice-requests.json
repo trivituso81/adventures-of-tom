@@ -1,4 +1,19 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "sts",
+   "line": "d|tom|Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "fallback_ids": [],
+   "stability": 0.5,
+   "similarity": 0.85,
+   "label": "my read",
+   "script": "(recording)",
+   "at": 1795229331319,
+   "rid": "r1795229331319-eso",
+   "audio": "in/r1795229331319-eso.mp4",
+   "mime": "audio/mp4"
+  }
+ ],
  "cancel": []
 }
