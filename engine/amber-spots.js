@@ -11,7 +11,9 @@ const AMBER_SPOTS=[
     lines:[['rose','The grass is Boppy color!'],
       ['grace','It\'s grey, Rose. And it\'s just that one spot. And that orange cube has a dragonfly in it.'],
       ['rose','He\'s stuck! Tata, get him out!'],
-      ['tom','It\'s the size of a plum. I carried a suitcase through two airports this morning.']]},
+      ['tom','It\'s the size of a plum. I carried a suitcase through two airports this morning.']],
+    // qa-coh06: once the pan is back (flag ch1-tin) a press is a short second look, not the first discovery again.
+    after:{flag:'ch1-tin',lines:[['tom','Still stuck. The fish got the pan out, but the cube won\'t budge.']]}},
   // Chapter 2, the grey lemon tree on the Griffith trail (GRIFFITH_SPOT, SCENES.ch2Lemon): the trunk (row 7) and the dirt circle (row 8).
   {id:'ch2',map:'griffith',name:'Orange block',show:()=>STORY.chapter>=2&&!flag('bb-griffith'),found:'ch2-lemon',solid:[[3,7],[4,7],[3,8],[4,8]],
     lines:[['tnb','Babe, look at that tree. It\'s grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.'],
@@ -65,7 +67,7 @@ function amberSpotSync() {
 // Press A facing a spot: replay the found lines of whoever is here. Before the family has found it (the scene has not played), A plays
 // only the first line, said by the person who says it in the scene (gem-canon08: it used to open a plain dialog headed "Orange block").
 function amberSpotPress(sp) {
-  const rows=flag(sp.found)?sp.lines:sp.lines.slice(0,1);
+  const rows=sp.after&&flag(sp.after.flag)?sp.after.lines:flag(sp.found)?sp.lines:sp.lines.slice(0,1);
   const steps=rows.filter(([id])=>amberSpotWith(id)).map(([id,text])=>({talk:AMBER_SPOT_SPEAKER[id]||id,lines:[text]}));
   if(!steps.length) return false;
   playScene(steps);

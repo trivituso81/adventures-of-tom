@@ -21442,7 +21442,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Orange cube replays its first look after the boss",
-   "next": "Ready to start. Screen report.",
+   "next": "Shipped as qa-coh06: after the Big One, pressing A on the orange cube says one second-look line.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21468,13 +21468,18 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed on main, then fixed: after flag ch1-tin the cube plays one Tom line (new line, needs a recording) instead of the first discovery. Pan toast not added (not needed)."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGpaW1o4Mr6QMGPE5R",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-coh06play"
   },
   {
    "id": "c-qa-coh07",
@@ -21881,6 +21886,25 @@
     {
      "d": "2026-11-21",
      "t": "Made by qa-bug08 for Tom to look at."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh06play",
+   "title": "Check the orange cube after the boss",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then play Grump Hollow past the Big One (CHAPTERS > Chapter 1). After the after-boss scene, walk back to the orange cube by the pond and press A. You should see only Tom saying: \"Still stuck. The fish got the pan out, but the cube won't budge.\" Report anything off with the REPORT tab.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by qa-coh06 for Tom to look at."
     }
    ]
   }
