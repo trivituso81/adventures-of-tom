@@ -1,0 +1,113 @@
+{
+ "pending": {},
+ "held": {
+  "clip-rose-ko": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-ko-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-guard": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-guard-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-idle": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-idle-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-hit": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-hit-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-dodge": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-dodge-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-ko": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-ko-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-victory": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-victory-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-cast": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-cast-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-loungepass": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-loungepass-rev1.mp4",
+   "rev": 1
+  },
+  "clip-grace-idle": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-grace-idle-rev1.mp4",
+   "rev": 1
+  },
+  "clip-tom-blockade": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-tom-blockade-rev1.mp4",
+   "rev": 1
+  },
+  "clip-grace-hit": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-grace-hit-rev1.mp4",
+   "rev": 1
+  },
+  "clip-grace-dodge": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-grace-dodge-rev1.mp4",
+   "rev": 1
+  },
+  "clip-grace-ko": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-grace-ko-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-idle": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-idle-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-guard": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-guard-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-hit": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-hit-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-dodge": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-dodge-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-tackle": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-tackle-rev1.mp4",
+   "rev": 1
+  },
+  "clip-rose-giddyup": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-rose-giddyup-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-idle": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-idle-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-guard": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-guard-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-hit": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-hit-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-dodge": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-dodge-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-ko": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-ko-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-victory": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-victory-rev1.mp4",
+   "rev": 1
+  },
+  "clip-deedee-wetfloor": {
+   "file": "/home/runner/work/_temp/clipgen/videos/clip-deedee-wetfloor-rev1.mp4",
+   "rev": 1
+  }
+ }
+}
