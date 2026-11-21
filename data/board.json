@@ -29076,7 +29076,7 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
@@ -29105,6 +29105,10 @@
     {
      "d": "2026-11-21",
      "t": "Night run, bucket B (notes): removed 2 spent handoff notes, folded Grace's head share into docs/CHARACTER_PIPELINE.md. Build nightclean-1121."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ran as nightclean-1121: the nightly cleanup (notes bucket) removed 2 spent handoff notes and kept the one fact still true"
     }
    ],
    "prompt": {
@@ -29115,6 +29119,10 @@
     "model": "Claude Sonnet 5.5 (standing card, steps in claude/night-plan.md section 7)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-night-clean in data/board.json with its history. This is the standing card Night cleanup: it runs every night and never goes to Done. Run python3 tools/night/clean_report.py --out /tmp/clean.json first. Pick ONE bucket tonight by the day of the year (python3 -c \"import datetime;print('ABCD'[datetime.date.today().timetuple().tm_yday%4])\"): A. Files nothing names: remove up to 40 from the report, oldest first, never from the Never touched row below. B. Notes: fold what is still true from finished claude/next-addendum-*.md and plan files into the doc that owns it (docs/ or CLAUDE.md), delete the rest, rebuild claude/INDEX.md with python3 tools/claude_index.py. C. Working agreement: shorten CLAUDE.md and claude/next.md (history and one-off stories go to docs/CHANGES.md or out), under python3 tools/night/rules_check.py; neither file may end the night bigger than it began; never drop a standing rule or a sentence of Tom's. D. Tests: delete a test that has been known_fail for more than 7 nights and tests something that no longer exists; a test of something that still exists goes to a fix card instead. Each bucket ends with python3 tools/smoke.py, the grep for zero references that the purge rule asks for (show the grep in docs/CHANGES.md before deleting anything under tools/ or art/), and a docs/CHANGES.md entry that lists what left. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen, a card in the backlog. Not in this job: voice (report only; tools/clip-audit/unused_voice.py keeps its own rule) and dead code inside engine/ files. Push a build named nightclean-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightclean-MMDD (MM and DD are today's month and day) --base origin/main). If there is nothing to remove tonight, push only the commit night: ran c-night-clean. Your first push is the commit board: start c-night-clean. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "last_run": {
+    "date": "2026-11-21",
+    "build": "nightclean-1121"
    }
   },
   {
@@ -29293,6 +29301,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-21T21:01:32Z",
+   "last": "2026-11-21T21:10:24Z",
+   "tags": [
+    "nightclean-1121"
+   ],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGoS3M47tHQV8dfmdj",
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
    "first": "2026-11-21T21:07:44Z",
@@ -29340,16 +29360,6 @@
    "tags": [],
    "cards": [
     "c-nightqa"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
-   "title": "Night cleanup: one bucket of cleanup every night",
-   "first": "2026-11-21T21:01:32Z",
-   "last": "2026-11-21T21:01:32Z",
-   "tags": [],
-   "cards": [
-    "c-night-clean"
    ]
   },
   {
@@ -33644,8 +33654,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "b5629707df128af2165c9488ab09908041ad9abb",
- "synced_at": "2026-11-21T21:10:02+00:00",
+ "synced": "b72644b02b70af85ff66176d64d52e64d2c92a17",
+ "synced_at": "2026-11-21T21:11:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
