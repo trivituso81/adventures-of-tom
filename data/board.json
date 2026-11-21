@@ -16433,7 +16433,7 @@
   {
    "id": "c-keysecrets3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets3",
    "title": "Voice and Script takes through repo secrets",
@@ -16442,8 +16442,8 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukG6s15YdeBxdeMM7bk",
-    "opening": "not started"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Adds an Action that makes ElevenLabs takes from a request file and moves the Voice Library and Script Editor buttons to it.",
@@ -16471,6 +16471,11 @@
     {
      "d": "2026-11-20",
      "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:27:18.564Z"
     }
    ]
   },
@@ -17395,7 +17400,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    }
   },
