@@ -13434,6 +13434,14 @@
     {
      "d": "2026-11-20",
      "t": "Second run: projclean1a and projclean1b pushed (267 docs copied, confirmed, deleted from the Project). Stopped at a safe point because the conversation got long; card stays In progress."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean2a: progress and next steps written on this card (second run paused at a safe point)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean2b: build name fix, no files copied"
     }
    ],
    "chat": {

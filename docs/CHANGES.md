@@ -1,3 +1,7 @@
+## projclean2b (2026-11-21): Project docs move: build name 2a put on its card, no files copied
+
+- Card c-projclean: the previous push named build projclean2a before it was on the card; this push records it. No game file changed.
+
 ## projclean2a (2026-11-21): Project docs move paused at a safe point: progress and next steps written on card c-projclean
 
 - Card c-projclean: 267 Project docs are now in claude/ and gone from the Project; the card lists what is left and the rules for the next run. No game file changed.
