@@ -1,0 +1,11 @@
+EDIT THE ATTACHED IMAGE. Attach the approved Long Island Town Square painting to this message first. It is the master. This is a mechanical cutout edit, not a redraw: do not repaint, restyle, improve, resize, move, crop, mirror or re-compose anything. Output exactly the same canvas size and aspect ratio as the attached image, with every kept object at exactly the same position, scale, colors and detail as in the master, so that this result lines up with the master pixel for pixel when laid over it. Generate the image now. Do not make a plan, diagram or description.
+
+THE EDIT: TREES AND HEDGES ONLY
+KEEP: every tree (trunk, branches, full leaf canopy and the small patch of grass or soil directly under its trunk), including the three stand-alone plaza trees, the big tree beside the east opening with its reaching branch, and every tree along the borders of the picture, and every tall hedge or bush whose top rises above a person's head. Keep each at its exact master position and size.
+EVERYTHING ELSE becomes flat magenta: all buildings and roofs, cobbles, fountain, benches, lamps, signs, boards, fences, flowers, props, sky and grass.
+Where a canopy overlaps something, keep the full canopy and show the magenta behind it.
+
+BACKGROUND RULE
+Everything not kept is replaced with ONE perfectly flat, uniform, pure magenta fill, exactly #FF00FF, with no gradient, no texture, no shadow, no glow, no outline, no vignette. Kept objects have crisp, clean, hard edges directly against the magenta, with no magenta fringe, halo or soft feathering, and no cast shadow on the magenta. Do not add new objects, text, borders, labels or frames. Do not keep any ground, cobble, grass, wall or sky unless it is listed as kept below.
+
+Deliver the single edited image itself.

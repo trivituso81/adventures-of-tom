@@ -1,0 +1,29 @@
+DOWNTOWN LA EDIT 3: UNIQUE SIGNS (attach the latest DTLA image and use this prompt)
+
+EDIT THE ATTACHED IMAGE. Change ONLY the eight shop signs listed below. Everything else stays exactly the same, pixel for pixel: all eight buildings, awnings, doors, windows, the three clear walkways between the south-row buildings, lamp posts, skyline, hills, Angels Flight, the taco truck, the taxi, the Metro canopy, the plaza, and the three green exit boards (GRIFFITH PARK, STUDIO LOT, JEFFERSON PARK stay exactly as they are). Output the same size as the attached image (1347 x 1167 px), PNG, painted to all four edges, no border or watermark. Coordinates are pixels in the attached image, off by up to 20 px at most.
+
+THE PROBLEM
+Right now all eight shops use the same dark green board with the same serif lettering, like a uniform sticker applied to every building. Remove those eight green boards completely (paint the wall, stone or brick that was behind each) and replace each with a sign that belongs to ITS OWN building: made of the same material, from the same era, in a lettering style chosen for that business. No two signs may share a style, color scheme or letter shape. They must feel painted, built or installed by different people over different decades.
+
+RULES FOR ALL EIGHT
+- Spell every word exactly as written. Use the case that suits the style, but every letter must be clear and readable on a small phone screen. Letters are large and bold enough to read at a glance.
+- Keep each sign in the same place as the board it replaces (centers listed below), at least 20 px above the highest part of the awning below it, never overlapping a door, awning or lamp. A sign may cover part of the lowest row of windows or wall.
+- No other words, numbers, logos or tiny text. No new objects other than what each sign needs (bulbs, a bracket, chains, a small icon where listed).
+- Same lighting as the rest of the painting: warm golden-hour light from the upper left, glowing where the sign is lit.
+
+THE EIGHT SIGNS
+1. Golden Hour Coffee, center (277, 372), red brick building with a green and red striped awning. Warm gold-leaf lettering painted on the glass transom window above the door and across the top of the shop window: GOLDEN HOUR in an elegant gold serif with a thin dark outline, COFFEE beneath it in smaller spaced capitals. Keep the steaming cup neon above it. No board.
+2. Ramen Ramen, center (480, 372), brick building with red lanterns. A neon tube sign: RAMEN RAMEN in glowing red and pink rounded neon tubing on a dark backing box bolted to the brick, with a soft red glow on the wall around it. Keep the glowing bowl above it.
+3. The Starlite, center (770, 390), the movie palace. Tall art deco block letters reading STARLITE on the existing red marquee panel, white and gold letters with a ring of small round marquee bulbs around the panel, lit and glowing, in the glamorous Broadway-theater style. Keep the red marquee shape and sunburst.
+4. Nickel's, center (1042, 372), sage green and cream stone building. Individual raised brass letters mounted directly on the stone above the awning, like an old 1920s shop or bank: NICKEL'S (apostrophe between L and S) in polished brass capitals with a soft shadow behind each letter. No board. Keep the gold coin hanging sign.
+5. Backlot Wardrobe, center (228, 851), dark red-brown brick loft with a purple awning. A weathered painted ghost sign directly on the brick wall: BACKLOT in huge faded cream and white old-time block capitals, WARDROBE beneath it in a smaller brush script, slightly worn and chipped like paint that has been there for sixty years. No board.
+6. TNB's Loft, center (528, 851), tan stone building with a navy awning. A hand-made wooden sign hanging from two short chains under a small black wrought-iron bracket: TNB'S LOFT in friendly rounded hand-painted cream lettering on a navy blue wooden board with a rough hand-carved edge, and one tiny painted clay pot or vase beside the words, like a potter's studio sign. Keep it modest in size.
+7. The Grand Tower, center (825, 872), green and cream art deco tower. Geometric art deco lettering reading THE GRAND TOWER in polished gold metal letters set on a dark green marble panel inset into the stone portal above the entrance, with a stepped deco border and a small chevron on each end. Elegant, symmetrical, formal.
+8. Angel City Cab Co., center (1152, 860), cream building with a black and white checkered band. Bold retro 1950s taxi-company lettering painted directly on the checkered band: ANGEL CITY in big black rounded capitals with a thin yellow outline and CAB CO. beneath in yellow with a black outline. A small round halo above the word ANGEL. No board.
+
+CHECK BEFORE YOU FINISH
+1. Does every sign look different in material, color and letter style, and look like it belongs to its building?
+2. Is every word spelled exactly: GOLDEN HOUR COFFEE, RAMEN RAMEN, STARLITE, NICKEL'S, BACKLOT WARDROBE, TNB'S LOFT, THE GRAND TOWER, ANGEL CITY CAB CO.?
+3. Are the walkways, lamps, exits, taco truck, taxi, skyline and everything else unchanged?
+
+OUTPUT: one image, 1347 x 1167 px.

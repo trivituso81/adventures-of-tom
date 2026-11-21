@@ -1,0 +1,22 @@
+CATTAIL PIER: STENCIL PROMPTS
+Send these in the SAME chat that made the approved Cattail Pier painting, one at a time, only after Claude has sent you the walk map and cutout plan and you approved them. Send the results back to Claude with no words. Claude uses them only to know where to cut; the game uses the pixels of your original painting.
+
+=== STENCIL 1: TREES AND TALL PLANTS ===
+Make a cutout mask of the pier painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground; every bush taller than a person; the tall cattails and beach grass clumps that rise above a person's waist.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: sand, road, boardwalk, water, the shack, rocks, fences, posts, boards, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Where a canopy overlaps something else, keep the full canopy. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 2: POSTS, BOARDS AND SIGNS ===
+Make a cutout mask of the pier painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: the two green exit boards (RIVITUSO / ROW and WHISPERING / MARSH) with both posts down to the ground; the fish-shaped REEL'S / BAIT sign; every tall pier railing post and mooring post with its rope, down to where it meets the deck or the water.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 3: SHACK ROOF, EAVES AND AWNING ===
+Make a cutout mask of the pier painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY the upper part of the bait shack: the whole roof with its shingles and moss, the fish weathervane, any chimney, the eaves, the striped awning, and the nets and buoys hanging from the eaves. Cut the shack straight across just below its eaves and awning.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: lower walls, door, counter, ground, boardwalk, water, trees, posts, boards, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 4: TALL PROPS ===
+Make a cutout mask of the pier painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY these props, each whole from top to where it touches the ground or deck: Boppy's bench with the thermos; the barrels, the worm barrel and the minnow tank; the stacked crates and the lobster trap; the folding stool, bucket and tackle box on the platform; any tall rock taller than a person's knee.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.

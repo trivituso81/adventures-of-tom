@@ -1,0 +1,116 @@
+PROMPT PACK: battle animation fixes
+One text file per sheet. Each file is a complete prompt for ONE character (or one monster) and covers a series of poses that are the frames of an animation.
+Attach the existing reference sprite or sheet for that character when you run the prompt. Naming: A = party reaction sheets, B = enemy frames, C = move-specific poses, D = freeze-fix beats.
+Audit issue #6 (Director's Cut similarity) is not an art problem and has no sheet. The two false positives (deedee beanie_master, grace3) have no sheet either.
+
+A-amy-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | amy: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-boppy-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | boppy: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-deedee-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | deedee: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-grace-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | grace: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-justin-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | justin: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-nara-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | nara: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-rose-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | rose: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-tnb-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | tnb: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+A-tom-battle-states.txt | fixes #1 no party hit reaction, #3 victory/KO/flee/defeat are one-size | tom: 12 frames, hit x2, KO x3, victory x4, flee x2 (one more cell is defeat)
+B-acornagent-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | acornagent: 8 frames
+B-acorncache-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | acorncache: 8 frames
+B-armresthog-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | armresthog: 8 frames
+B-bigone-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | bigone: 8 frames
+B-bigshake-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | bigshake: 8 frames
+B-bobber-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | bobber: 8 frames
+B-boommoth-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | boommoth: 8 frames
+B-brainfreeze-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | brainfreeze: 8 frames
+B-carryon-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | carryon: 8 frames
+B-censor-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | censor: 8 frames
+B-chairman-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | chairman: 8 frames
+B-cheekstuffer-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | cheekstuffer: 8 frames
+B-clapper-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | clapper: 8 frames
+B-cliffhanger-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | cliffhanger: 8 frames
+B-coathanger-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | coathanger: 8 frames
+B-conehead-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | conehead: 8 frames
+B-coyote-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | coyote: 8 frames
+B-cuecrab-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | cuecrab: 8 frames
+B-curator-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | curator: 8 frames
+B-deadletter-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death, deadletter has no painted frames | deadletter: 10 frames
+B-directorscut-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | directorscut: 8 frames
+B-dodgeball-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | dodgeball: 8 frames
+B-dogear-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | dogear: 8 frames
+B-drillworm-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | drillworm: 8 frames
+B-extra-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | extra: 8 frames
+B-finalcall-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | finalcall: 8 frames
+B-fogwisp-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | fogwisp: 8 frames
+B-glitterglue-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | glitterglue: 8 frames
+B-gremlin-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | gremlin: 8 frames
+B-greynote-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | greynote: 8 frames
+B-gridlock-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | gridlock: 8 frames
+B-gridlockprime-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | gridlockprime: 8 frames
+B-grump-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | grump: 8 frames
+B-hush9final-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | hush9final: 8 frames
+B-hushling-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | hushling: 8 frames
+B-ironbelly-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | ironbelly: 8 frames
+B-irongill-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | irongill: 8 frames
+B-jetlag-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | jetlag: 8 frames
+B-julian-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | julian: 8 frames
+B-knowitall-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | knowitall: 8 frames
+B-lastcall-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | lastcall: 8 frames
+B-leftover-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | leftover: 8 frames
+B-leviathan-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | leviathan: 8 frames
+B-log-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | log: 8 frames
+B-longline-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | longline: 8 frames
+B-lostluggage-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | lostluggage: 8 frames
+B-lukewarm-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | lukewarm: 8 frames
+B-marlowe16-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | marlowe16: 8 frames
+B-mirrorball-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | mirrorball: 8 frames
+B-mudling-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | mudling: 8 frames
+B-paperweight-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | paperweight: 8 frames
+B-pausesprite-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | pausesprite: 8 frames
+B-peanutgallery-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | peanutgallery: 8 frames
+B-pickyeater-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | pickyeater: 8 frames
+B-popquiz-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | popquiz: 8 frames
+B-popup-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | popup: 8 frames
+B-redeye-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | redeye: 8 frames
+B-redpen-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | redpen: 8 frames
+B-rubberstamp-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | rubberstamp: 8 frames
+B-shusher-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | shusher: 8 frames
+B-signalfault-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | signalfault: 8 frames
+B-skeeter-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | skeeter: 8 frames
+B-slushslug-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | slushslug: 8 frames
+B-smoglet-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | smoglet: 8 frames
+B-snag-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | snag: 8 frames
+B-soggysock-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | soggysock: 8 frames
+B-soreloser-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | soreloser: 8 frames
+B-standbysprite-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | standbysprite: 8 frames
+B-stickysap-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | stickysap: 8 frames
+B-stuffedshirt-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | stuffedshirt: 8 frames
+B-tangle-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | tangle: 8 frames
+B-tarblob-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | tarblob: 8 frames
+B-tardybell-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | tardybell: 8 frames
+B-thedraft-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | thedraft: 8 frames
+B-tickets-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | tickets: 8 frames
+B-toad-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | toad: 8 frames
+B-turnstile-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | turnstile: 8 frames
+B-twigspy-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | twigspy: 8 frames
+B-twinlens-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | twinlens: 8 frames
+B-unclaimed-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | unclaimed: 8 frames
+B-unread-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | unread: 8 frames
+B-vance-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | vance: 8 frames
+B-velvetrope-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | velvetrope: 8 frames
+B-wallflower-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | wallflower: 8 frames
+B-warden-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | warden: 8 frames
+B-wetblanket-enemy-frames.txt | fixes #2 every enemy attack is the same lunge, one idle frame, shrink-and-flash death | wetblanket: 8 frames
+C-boppy-move-poses-a.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | boppy part a: cap_swat grumble patient_angler recliner_reservation headcount_again lockdown everybody_waits
+C-boppy-move-poses-b.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | boppy part b: pepper_breath seeds_of_trouble mild_for_company nineteen_seventy five_alarm_jar fish_ult xc_ult
+C-nara-move-poses-a.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | nara part a: jump_up puppy_eyes tennis_ball_fetch dont_leave_me just_one_bite counter_surfer stranger_alert
+C-nara-move-poses-b.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | nara part b: doodle_fluff shake_everyone not_leaving happy_puddle food_inspector squirrel_ult pack_ult
+C-tom-move-poses-a.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | tom part a: button_mash defend starter_splash sourdough_snob overpriced_gadget noise_canceling seat_1a
+C-tom-move-poses-b.txt | fixes #5 uneven pose budget (Nara 7 poses for 14 moves, Tom reuses DEFEND), and the freezes in #4 for the moves marked below | tom part b: flashcard_flurry konami_code skincare_10 kanji_strike know_it_all delta_ult cart_ult
+D-amy-amy3-tombo-knock-it-off-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.0 to 1.4 second quiet stretch (not viewed by eye). Draw Amy as a LITTLE KID (about 8 years old, same hair and face as her adult reference, kid proportions, kid pajamas). | amy3 (Tombo: Knock It Off!): 6 beats
+D-boppy-boppy1-dc-tombo-quiet-on-cattail-pier-beats.txt | fixes #4 mid-move freeze: Verified 1.0 to 2.0 second hold on "SHHH!" with a fishing pose frozen. | boppy1_dc (Tombo: Quiet on Cattail Pier): 6 beats
+D-deedee-deedee1-tombo-wine-and-gossip-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.0 to 1.4 second quiet stretch (not viewed by eye). | deedee1 (Tombo: Wine and Gossip): 6 beats
+D-rose-bedtime-story-beats.txt | fixes #4 mid-move freeze: The move freezes 3.8 seconds on one frame of Tom and the girls holding a storybook. | bedtime_story: 6 beats
+D-rose-rose1-dc-tombo-that-cloud-is-lamby-beats.txt | fixes #4 mid-move freeze: The Tombo holds 2.2 seconds with Rose sitting still on Tom's shoulders beneath a thought bubble. | rose1_dc (Tombo: That Cloud Is Lamby): 6 beats
+D-rose-rose3-tombo-headphones-in-the-dark-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.0 to 1.4 second quiet stretch (not viewed by eye). | rose3 (Tombo: Headphones in the Dark): 6 beats
+D-tnb-mug-toss-beats.txt | fixes #4 mid-move freeze: The mug sits on the enemy for 1.25 seconds with only a small label. | mug_toss: 6 beats
+D-tnb-throw-down-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.1 to 1.4 second quiet stretch (not viewed by eye). | throw_down: 6 beats
+D-tnb-tnb3-tombo-cone-six-across-the-miles-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.0 to 1.4 second quiet stretch (not viewed by eye). | tnb3 (Tombo: Cone Six Across the Miles): 6 beats
+D-tom-ff1-and-ff4-family-finishes-sleepover-at-tom-s-the-extra-place-beats.txt | fixes #4 mid-move freeze: Detector flagged a 1.0 to 1.4 second quiet stretch in ff1 and ff4 (not viewed by eye). | ff1 and ff4 (Family Finishes: Sleepover at Tom's, The Extra Place): 6 beats

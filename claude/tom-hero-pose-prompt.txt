@@ -1,0 +1,47 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER REFERENCE PICTURE. Return exactly one image, nothing else.
+
+ATTACH ALL 3 PHOTOS OF TOM: the full body photo (lavender polo) and both face close-ups.
+
+WHAT THIS IS
+The master reference picture of Tom for "The Adventures of Tom", a family role-playing game. Tom is the hero, a calm, dry-humored uncle in his forties. The attached photos show the real Tom. Match his face, hair, beard, build and coloring closely, as a warm caricature. This picture becomes the reference for every other sheet of him, so it must be the most detailed and the most "him". His default expression is a relaxed, wry, friendly smile, one eyebrow a touch higher than the other, like he is about to say something dry.
+
+TOM'S LOOK (match this exactly)
+- Hair: very short, tidy, dark brown hair with gray at the sides and temples, cut close (about half an inch on top). A high rounded forehead with a receding hairline at the temples and thinning at the crown. Do not add hair, do not make it longer or fuller.
+- Beard: a full, short, neatly trimmed beard joined to the mustache. Dark brown on the mustache and upper cheeks, salt and pepper gray at the chin and jaw.
+- Face: broad rounded oval, full cheeks, warm light olive skin with rosy cheeks, thick dark eyebrows, dark brown eyes with smile creases at the outer corners, medium straight nose slightly broad at the tip, a wide easy smile showing the top teeth, medium ears close to the head.
+- Build: medium height, solid and slightly stocky, broad shoulders, a soft middle, relaxed posture.
+- Outfit (a new everyday outfit for the game, replacing the polo in the full body photo):
+  - A heather navy blue crew-neck short-sleeved graphic t-shirt, worn untucked, with a large vintage screen-print on the chest: a retro two-handed game controller (generic, cream-gray body, a plus-shaped directional pad on the left, one red button and one mustard yellow button on the right) with a small red heart floating above it. The print is cream, red and mustard yellow with a slightly faded vintage texture. No words, no letters, no logos, no brand names anywhere on the shirt. The back of the shirt is plain navy.
+  - Washed charcoal-gray slim straight-leg jeans with light fading at the thighs and knees, and a black braided belt (take the exact jeans color and fit from the full body photo).
+  - White low-top leather sneakers with white laces, white soles and a black curved side accent, no readable brand text (take the shape from the full body photo).
+  - A smartwatch with a small square face and a gray-green woven band on his left wrist (the viewer's right side in a front view), as in the full body photo.
+- Hands empty, nothing held. No glasses, no hat, no bag, no phone.
+
+PHOTO FIDELITY
+- The attached photos show the real person: 1 full body photo and 2 face close-up(s). Use every one of them.
+- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.
+- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.
+- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.
+- The OUTFIT, shoes, jewelry and accessories are the new outfit described under TOM'S LOOK above (graphic tee, jeans, sneakers, watch). Draw every detail of that description exactly: every color, print, trim, seam and button. Do not simplify or invent clothing details, and do not copy the lavender polo from the photo.
+- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit. (Here the hair is a little shorter in the full body photo; use the close-ups for hair length.)
+- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.
+- Do not copy the photo background, shadows or lighting color cast. Only the person.
+
+THE PICTURE (strict)
+- One single image, one character, no grid, no cells. Portrait orientation, about 1024 x 1536 pixels (use the largest portrait size your tool offers).
+- Full body, head to feet in the frame, with empty margin above his head and below his feet.
+- Standing neutral and relaxed, weight even on both feet, feet flat on the ground and fully visible, body turned a little (three-quarter view) toward the viewer, face turned to the viewer, clear and readable, hands relaxed at his sides.
+- The highest detail of the set: hair and beard strands, skin, the shirt print, denim fading, sneaker stitching.
+- Background: one flat solid color, pure magenta #FF00FF, filling the whole image. No magenta anywhere on Tom. No magenta glow, spill, tint or fringe on his edges, hair or beard strands. No borders, labels, captions, titles or text.
+- Draw ONLY Tom. No ground shadow, no effects, no props, no other people.
+
+ART STYLE
+- A hand-painted digital caricature illustration of a real person, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photo.
+- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, rich saturated warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add props, text or a second figure. If anything is unclear, draw Tom as described, standing relaxed, smiling.

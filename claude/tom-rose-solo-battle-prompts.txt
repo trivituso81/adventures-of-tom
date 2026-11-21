@@ -1,0 +1,131 @@
+SOLO BATTLE SHEET PROMPTS v2 (2026-11-01): Tom alone and Rose alone, 16 frames each, with fixed head and body proportions (section 7 of docs/CHARACTER_PIPELINE.md). Copy one whole prompt at a time, attach the reference picture (and a finished ride sheet as a second picture if you have one).
+
+=====
+TOM
+=====
+
+IMAGE REQUEST: ONE SINGLE CHARACTER BATTLE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of Tom (picture 1). If a ride sheet or any finished sheet of Tom is attached too (picture 2), it shows the exact face, head size and painting style to keep: match it.
+
+WHAT THIS IS
+The standard battle pose sheet for a family role-playing game with hand-painted caricature character art. The character is Tom, a calm, dry-humored grown man, the hero. Draw Tom EXACTLY like the reference in every frame: same face, hair, clothes, colors, proportions, art style and level of detail. Tom is shown ALONE: nobody is riding on or standing next to Tom.
+
+ART STYLE
+- A hand-painted digital caricature illustration of a real person, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head, a small body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The exact head size is fixed in HEAD AND BODY PROPORTIONS below and overrides any other size guess. The face keeps a clear likeness of the real person in the reference picture.
+- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, rich saturated warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+
+REFERENCE FIDELITY
+- The attached reference picture shows the real person as a painted game character. Use every attached picture.
+- The FACE must be a faithful likeness of the face in the reference: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, skin tone, and any facial hair. Exaggerate only the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.
+- The HAIR must match the reference exactly: color, length, parting, volume, texture and how it falls.
+- The BODY must match the reference: build, shoulder width, arm and leg proportions, posture. Keep the hands and feet small.
+- The OUTFIT, shoes, jewelry and accessories must match the reference exactly: every color, print, pattern, trim, seam and button. Do not simplify or invent clothing details.
+
+HEAD AND BODY PROPORTIONS (fixed numbers; the most important size rule after the face lock)
+- Standing height from the soles of the shoes to the top of the hair is 200 px. The head, measured from the top of the hair to the bottom of the chin, is 86 px, which is 43 percent of the height. A huge caricature head on a smallish body, so the whole figure is only about 2.3 heads tall.
+- The head is the SAME size in every one of the 16 frames. Never shrink it to fit an action pose, never enlarge it for a close-up, never let perspective, leaning, jumping or crouching change it. If a pose makes the figure shorter or wider, only the body changes. The hair volume and outfit stay the same too.
+- Do not make the body bigger or the head smaller to look more realistic. Hands and feet stay small.
+
+FACE LOCK (the most important rule of this sheet)
+- Before drawing each frame, look at the reference again and copy the face from it. The face must be instantly recognisable as the person in the picture in every single frame: same eyes, nose, mouth, brows, hairline, beard and head shape. Expressions change as the frame says; the face never does.
+- Tom's face stays visible and turned toward the off-screen opponent on the left in every frame, except where a frame says the head is bowed or thrown back.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024. If your tool offers a different size, keep exactly 4 columns and 4 rows.
+- Exactly 16 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- Tom FACES LEFT in every frame (side or three-quarter view from slightly above, a hero facing an off-screen opponent in a family-friendly fantasy game, off to the left).
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. Pink clothes must stay clearly pink, never magenta. No magenta glow, spill, tint or fringe on the edges or hair. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell, exactly the sizes in HEAD AND BODY PROPORTIONS. Never rescale per frame; crouched poses get shorter, lunges get wider. Feet on the ground rest on one horizontal line about 24 px above the cell bottom.
+- Draw ONLY Tom. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.
+
+THE 16 FRAMES (each clearly different from the others)
+1. IDLE A: battle stance, feet shoulder width apart, knees slightly bent, hands loose, a calm dry expression aimed at the off-screen opponent, one eyebrow a little raised.
+2. IDLE B: the same stance a moment later, chest risen with a breath, one hand tugging the hem of his t-shirt.
+3. WALK A: striding left, near foot forward, opposite arm swinging.
+4. WALK B: the opposite step.
+5. HIP: standing, hands on hips, chin lifted, a deadpan unimpressed look.
+6. ACT: right arm extended to the left, palm up, presenting something, a small proud wry smile.
+7. ATTACK WIND-UP: body twisted away from the off-screen opponent, arm cocked back, weight on the back leg, eyes narrowed.
+8. ATTACK SWING: follow-through, lunging far forward to the left, arm at full extension, front knee bent, mouth open in a shout.
+9. SPREAD: feet planted, both arms flung wide, chest out, chin up, announcing something.
+10. GUARD: crouched low, forearms crossed in front of chest and face, chin tucked.
+11. HURT: flinching, body knocked back and leaning right, head thrown back, eyes squeezed shut, one foot lifted.
+12. LOW HEALTH: kneeling on one knee, hand on knee, head hanging, a black eye around the visible eye, tired grimace.
+13. KNOCKED OUT: down on hands and knees facing left, head bowed, eyes shut, a black eye, rounded back, defeated slump.
+14. CHEER A: victory, one fist pumped high, other hand on hip, big grin.
+15. CHEER B: both fists overhead, laughing, heels lifted.
+16. SIGNATURE (DEFEND): a protective guard stance. Stepping forward and planting his feet wide, one arm held out straight to the side like a barrier, the other hand raised with the palm facing out like a stop sign toward the off-screen opponent, jaw set, a stern calm look.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Tom in the pose described, keep the face exactly like the picture and keep the head size exactly as stated.
+
+=====
+ROSE
+=====
+
+IMAGE REQUEST: ONE SINGLE CHARACTER BATTLE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of Rose (picture 1). If a ride sheet or any finished sheet of Rose is attached too (picture 2), it shows the exact face, head size and painting style to keep: match it.
+
+WHAT THIS IS
+The standard battle pose sheet for a family role-playing game with hand-painted caricature character art. The character is Rose, a silly, bouncy 6-year-old girl. Draw Rose EXACTLY like the reference in every frame: same face, hair, clothes, colors, proportions, art style and level of detail. Rose is shown ALONE: nobody is riding on or standing next to Rose.
+
+ART STYLE
+- A hand-painted digital caricature illustration of a real person, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head, a small body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The exact head size is fixed in HEAD AND BODY PROPORTIONS below and overrides any other size guess. The face keeps a clear likeness of the real person in the reference picture.
+- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, rich saturated warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+
+REFERENCE FIDELITY
+- The attached reference picture shows the real person as a painted game character. Use every attached picture.
+- The FACE must be a faithful likeness of the face in the reference: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, skin tone, and any facial hair. Exaggerate only the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.
+- The HAIR must match the reference exactly: color, length, parting, volume, texture and how it falls.
+- The BODY must match the reference: build, shoulder width, arm and leg proportions, posture. Keep the hands and feet small.
+- The OUTFIT, shoes, jewelry and accessories must match the reference exactly: every color, print, pattern, trim, seam and button. Do not simplify or invent clothing details.
+
+HEAD AND BODY PROPORTIONS (fixed numbers; the most important size rule after the face lock)
+- Standing height from the soles of the shoes to the top of the hair is 164 px. The head, measured from the top of the hair to the bottom of the chin, is 71 px, which is 43 percent of the height. A huge caricature head on a smallish body, so the whole figure is only about 2.3 heads tall. She is a small child: her height is about 82 percent of Tom's 200 px, and her head is about 82 percent the size of Tom's 86 px head. She has a small child's body, small hands and small feet. Never make her look older or taller.
+- The head is the SAME size in every one of the 16 frames. Never shrink it to fit an action pose, never enlarge it for a close-up, never let perspective, leaning, jumping or crouching change it. If a pose makes the figure shorter or wider, only the body changes. The hair volume and outfit stay the same too.
+- Do not make the body bigger or the head smaller to look more realistic. Hands and feet stay small.
+
+FACE LOCK (the most important rule of this sheet)
+- Before drawing each frame, look at the reference again and copy the face from it. The face must be instantly recognisable as the person in the picture in every single frame: same eyes, nose, mouth, brows, hairline and head shape. Expressions change as the frame says; the face never does.
+- Rose's face stays visible and turned toward the off-screen opponent on the left in every frame, except where a frame says the head is bowed or thrown back.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024. If your tool offers a different size, keep exactly 4 columns and 4 rows.
+- Exactly 16 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- Rose FACES LEFT in every frame (side or three-quarter view from slightly above, a hero facing an off-screen opponent in a family-friendly fantasy game, off to the left).
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. Pink clothes must stay clearly pink, never magenta. No magenta glow, spill, tint or fringe on the edges or hair. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell, exactly the sizes in HEAD AND BODY PROPORTIONS. Never rescale per frame; crouched poses get shorter, lunges get wider. Feet on the ground rest on one horizontal line about 24 px above the cell bottom.
+- Draw ONLY Rose. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.
+
+THE 16 FRAMES (each clearly different from the others)
+1. IDLE A: battle stance, feet apart, knees slightly bent, hands loose at her sides, bright eager expression aimed at the off-screen opponent, ready to bounce.
+2. IDLE B: the same stance a moment later, up on her toes in a little bounce, one hand tugging the hem of her dress, a cheeky grin.
+3. WALK A: skipping left, near foot forward, opposite arm swinging high.
+4. WALK B: the opposite skip, body a little higher off the ground.
+5. HIP: standing, both hands on her hips, chin lifted, a bossy little pout.
+6. ACT: right arm extended to the left, palm up, offering something, a small proud smile.
+7. ATTACK WIND-UP: body crouched and twisted away from the off-screen opponent, both arms swung back, weight on the back leg, cheeks puffed, eyes narrowed.
+8. ATTACK SWING: a big forward jump-lunge to the left, both arms thrust forward, one knee bent high, mouth open in a joyful shout.
+9. SPREAD: feet planted, both arms flung wide, chest out, chin up, announcing something with a huge grin.
+10. GUARD: crouched low, forearms crossed in front of chest and face, chin tucked, one eye peeking over her arms.
+11. HURT: startled, leaning back a little, both hands up, eyes wide, one foot lifted, a surprised little oh.
+12. LOW HEALTH: kneeling on one knee, hand on knee, head down, tired and sleepy, a tired little pout.
+13. KNOCKED OUT: sitting on the ground facing left, legs out in front, head drooping and eyes closed as if taking a nap, arms relaxed in her lap.
+14. CHEER A: victory, one fist pumped high, other hand on hip, big gap-toothed grin.
+15. CHEER B: both arms overhead, laughing, jumping with her feet off the ground.
+16. SIGNATURE (SILLY): standing, thumbs in her ears and fingers wiggling, tongue stuck far out in a big raspberry, eyes crossed, knees bent, leaning toward the off-screen opponent.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Rose in the pose described, keep the face exactly like the picture and keep the head size exactly as stated.

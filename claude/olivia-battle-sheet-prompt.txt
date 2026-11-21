@@ -1,0 +1,44 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER BATTLE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the Olivia hero pose image (the full-body painted picture in the fruit-print dress). It is the reference for her face, hair and outfit. If you also attach the close-up photo of her face, use it to keep her face accurate.
+
+WHAT THIS IS
+Battle poses for "The Adventures of Tom", a family role-playing game with a classic 16-bit JRPG feel (Final Fantasy VI, Chrono Trigger) and hand-painted character sprites. The character is Olivia, a quick, bright, warm journalist mom who fights with facts, a loud voice and mom reflexes. The attached image is the reference for Olivia. Draw her EXACTLY like the reference in every frame: same face (warm brown eyes, light freckles, wide smile with top teeth), same long wavy honey-blonde hair parted on her left, same dress, same flats, same colors, proportions, art style and level of detail.
+
+HER OUTFIT (must match the reference in every frame)
+A cream colored knee-length flowing dress printed all over with small scattered fruit: strawberries, lemons, oranges, cherries, watermelon slices, peaches, purple grapes and little green leaves. Round neckline, loose bodice, wide flowing bell sleeves ending just past the elbow, and a two-tiered gathered skirt ending just above the knee. The sleeves and skirt swing with her movement. Bare legs. Dark brown ballet flats with a small gold medallion on each toe. No jewelry, no bag, no watch.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024. If your tool offers a different size, keep exactly 4 columns and 4 rows.
+- Exactly 16 frames, one per cell, filled left to right, top to bottom, in the order of the numbered list below.
+- Same character at the same scale in every cell. Standing Olivia is about 195 pixels tall. She gets shorter when crouched or kneeling and wider when lunging, but never rescale her per frame.
+- Every frame sits fully inside its cell with at least 10 percent empty margin on every side. Nothing touches or crosses a cell edge or overlaps a neighbouring cell.
+- In every frame where her feet are on the ground, the soles rest on the same horizontal line, about 24 pixels above the bottom of the cell.
+- Olivia faces LEFT (toward the viewer's left) in every frame, in a side or three-quarter view from slightly above, like a party member in a 16-bit battle scene facing an enemy off to the left.
+- Background: one flat solid color, pure magenta #FF00FF, filling the whole image. No magenta anywhere on Olivia. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Draw ONLY Olivia. Her hands are empty in every frame, even where a pose looks like holding something. No props, no ground shadow, dust, speed lines, sparkles, stars, motion blur or any effect floating outside her body (effects are added in the game, so show everything through her pose and face alone). No monster, no other people, no text, no word balloons.
+
+ART STYLE
+- Hand-painted 16-bit JRPG sprite look matching the reference exactly: soft painted shading, no thick outlines, light friendly caricature proportions, detailed painted fabric so the fruit print reads, clean readable silhouette.
+- Soft key light from the upper left, shadow on the lower right, warm slightly desaturated painterly palette. All 16 frames share one look and one lighting direction.
+- Family friendly for children aged 6 and up.
+
+THE 16 FRAMES (each must look clearly different from the others)
+1. IDLE A: battle stance facing left, feet shoulder width apart, knees slightly bent, hands loose and open at her sides, a bright alert smile aimed at the enemy, eyebrows up.
+2. IDLE B: the same stance a moment later, chest risen with a breath, one hand tucking a strand of hair behind her ear, eyes still on the enemy, the smile a little wry.
+3. WALK A: striding toward the left, left foot forward, right arm swinging, hands empty, skirt swinging, a quick purposeful walking face.
+4. WALK B: the opposite step, right foot forward, left arm swinging, chin lifted.
+5. HIP: standing, both hands on her hips with elbows out, chin lifted, one eyebrow raised, an "I am waiting" mom look, one foot slightly forward.
+6. ACT: right arm raised and extended to the left with the palm open, as if presenting something, left hand near her chest, a proud delighted expression with raised eyebrows, like a reporter revealing a story.
+7. WIND-UP: body twisted away from the enemy, right arm cocked far back over her shoulder with a clenched fist, weight on the back leg, eyes narrowed, lips pressed tight.
+8. SWING: follow-through, body lunging far forward to the left, right arm swung down and out across her body at full extension with an open hand, front knee bent, hair and sleeves flying back, mouth open in a shout.
+9. SPREAD: feet planted, both arms flung wide to the sides with open palms so the bell sleeves spread out, chest out, chin up, mouth wide open as if announcing something to the whole street.
+10. GUARD: crouched low, feet wide, both forearms crossed in front of her chest and face to block, chin tucked, eyes narrowed, jaw set.
+11. HURT: flinching, body knocked back and leaning away to the right with her head thrown back, one arm flung out, eyes squeezed shut, mouth open in a yelp, one foot lifted, hair swung forward over her face.
+12. LOW HEALTH: kneeling on one knee with the skirt draped over it, one hand pressed on her knee, the other hand pushing her hair back off her forehead, head hanging, a black eye around the visible eye, a tired grimace.
+13. KNOCKED OUT: down on her hands and knees facing left, head bowed low, eyes shut, a black eye and a bruised look, back rounded, hair hanging down, a defeated slump.
+14. CHEER A: victory, right fist pumped high, left hand on her hip, one foot forward, a huge grin.
+15. CHEER B: both fists up overhead, mouth open in a laugh, chest out, heels lifted off the ground, hair bouncing.
+16. MOM YELL: her signature pose. Body leaning forward toward the left, feet planted wide, both hands cupped around her mouth like a megaphone, eyes wide, eyebrows high, mouth wide open, shouting as loud as she can for Michael from across the yard.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Olivia in the pose described.

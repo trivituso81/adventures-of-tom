@@ -1,0 +1,22 @@
+LONG ISLAND ELEMENTARY (SCHOOLYARD): STENCIL PROMPTS
+Send these in the SAME chat that made the approved schoolyard painting, one at a time, only after Claude has sent you the walk map and cutout plan and you approved them. Send the results back to Claude with no words. Claude uses them only to know where to cut; the game uses the pixels of your original painting.
+
+=== STENCIL 1: TREES AND TALL PLANTS ===
+Make a cutout mask of the school painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every tree, with its full leaf canopy, branches and trunk down to where the trunk meets the ground, and every hedge or bush taller than a person.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: the school, paving, asphalt, grass, wood chips, low flower beds, fences, lamps, cars, playground, signs, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Where a canopy overlaps something else, keep the full canopy. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 2: LAMPS, FLAGPOLE AND EXIT BOARD ===
+Make a cutout mask of the school painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every lamp post from its lantern down to its base, the flagpole with its flag and rope down to its base, and the green exit board (LONG ISLAND / SQUARE) with both posts down to the ground.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 3: SCHOOL ROOF, CUPOLA AND PORTICO ===
+Make a cutout mask of the school painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY the upper part of the school: the whole roof and its edge, the cupola with its bell and clock, roof vents and chimneys, the eaves, and the entrance portico roof with its columns and the LONG ISLAND / ELEMENTARY letters. Cut the building straight across just below the eaves, keeping the portico columns whole down to the ground.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: lower walls, windows, doors, paving, grass, trees, lamps, cars, playground, props. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 4: CARS, PLAYGROUND AND TALL PROPS ===
+Make a cutout mask of the school painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY these, each whole from top to where it touches the ground: the three parked cars; the swing set, the slide with its tower, the tetherball pole; the bike rack with the old bike; the pickup bench and the playground bench; the playground fence and its gate posts.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.

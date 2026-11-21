@@ -1,0 +1,299 @@
+POSE SHEET PROMPTS: Tom, extra poses (9 prompts, 5 poses each, 45 poses).
+Each prompt starts at a line of equals signs. Copy one whole prompt at a time into the image generator and attach the reference picture. Run them in order. Drop each finished sheet back into the chat.
+
+============================================================
+SHEET 1 OF 9: CONTROLLER AND FINAL BOSS
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. HOLD: standing, both hands in front of the chest gripping a retro game controller (cream-gray body, plus-shaped D-pad on the left, one red and one mustard yellow button on the right), thumbs on the buttons, head tilted down at it, a tense focused squint.
+2. ANNOYED: same stance, one arm stretched forward holding the same controller out at arm's length by its middle, the other hand on the hip, head tipped back, a flat deadpan stare of disbelief.
+3. THROW WIND-UP: body twisted away from the left, throwing arm cocked far back with the same controller gripped like a baseball, weight on the back leg, eyes narrowed at a target to the left.
+4. THROW FOLLOW-THROUGH: lunging far forward to the left, throwing arm at full extension with an empty open hand (the controller has just left it), back leg trailing, mouth open in a shout.
+5. ARMS WIDE: feet planted wide, both arms flung out to the sides, hands empty, chest out, head thrown back laughing, a big triumphant boss-level cackle.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 2 OF 9: STARTER SPLASH
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. CARRY: striding left, a large glass jar of bubbly pale sourdough starter with a loose lid cradled in both arms against the chest, leaning slightly back for the weight, determined face.
+2. RAISE: standing, the same jar held high overhead in both hands, chin up, eyes on the jar, a solemn ceremonial look.
+3. LID POP: jar held at chest height, one thumb flicking the lid off, the lid caught mid-flip just above the jar, foamy starter swelling up over the rim, a wince of anticipation.
+4. SPLASH: lunging far to the left, the jar tipped forward in both outstretched hands, a thick glob of starter streaming out of it in an arc, mouth open yelling.
+5. GOO: standing, both forearms flung up in defense, the face and torso splattered with thick pale dripping starter, eyes squeezed shut, a grimace.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 3 OF 9: PROUD, LIFT, LECTURE AND UNBOX
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. PROUD: standing, both hands on the hips, chest out, chin level, a calm quietly satisfied smile.
+2. FLING: one arm thrown out sideways to the left with an open empty hand, as if tossing something away, body leaning into it, a smirk.
+3. LIFT: knees bent, both hands lifting a heavy cast-iron pot with a lid up to chest height, a strained grunt, back straight.
+4. FINGER UP: one index finger raised high beside the head, the other hand on the hip, one eyebrow raised, head tipped back, a smug 'um, actually' expression.
+5. UNBOX: crouched slightly, both hands peeling clear plastic film off a sleek matte-black boxed gadget held in front of the body, tongue tip showing in concentration, delighted eyes.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 4 OF 9: FLASHCARD, BRUSH, HEADPHONES, MASK AND SHADE
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. FLICK: standing sideways, one arm extended with the wrist snapped, a small cream flashcard with a red stripe along the top just leaving the fingertips, the other hand holding a fan of more cards close to the chest, a smug look.
+2. BRUSH: lunging left, one arm sweeping a large calligraphy brush through the air in a broad stroke with the tip pointing left, the other arm back for balance, a focused look.
+3. HEADPHONES: standing relaxed, big over-ear headphones on the head, one finger pressed against the side of an ear cup, eyes closed, chin lifted, serene.
+4. LED MASK: standing relaxed, a full upper-face LED mask strapped over the eyes and nose, the mask glowing red, hands loose at the sides, chin lifted, serene.
+5. SHADE: standing, one arm raised, the hand gripping the pull tab of a pale plastic airplane window shade panel and pulling it downward, the other hand on the hip, a smug satisfied look.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 5 OF 9: POPCORN MOVIE NIGHT
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. SIT WITH BOWL: seated in a low sit with knees bent as if on a couch (draw no furniture), a large bowl of popcorn held in the lap with both hands, relaxed, content.
+2. SPOOK: same seated pose, the bowl gripped tight to the chest, eyes wide, mouth a tight small O, head pulled back, startled.
+3. SCREAM: mid-air jump, knees tucked, both arms flung up, the popcorn bowl just let go and tumbling above the hands with popcorn spilling out, mouth wide open screaming.
+4. COWER: crouched low and hunched, both hands covering the face, elbows tucked in, shoulders up.
+5. FROZEN: standing rigid in a wide stance, arms stiff at the sides, fists clenched, eyes huge, mouth open in a silent scream.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 6 OF 9: BOWL THROW, STARTLED, POINT, FLOOR SIT, LYING FLAT
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. BOWL THROW: lunging to the left, both arms flung forward releasing a large bowl of popcorn into the air ahead, popcorn flying out of it, wide-eyed shout.
+2. STARTLED: standing, both hands raised palms out at shoulder height, leaning backward, eyes wide, mouth open.
+3. POINT: one arm straight out to the left with the index finger pointing, the other hand on the hip, head turned toward the target, a stern 'you, over there' look.
+4. FLOOR SIT: seated on the ground with legs crossed, back straight, forearms resting on the thighs with both hands open palms-up in the lap as if ready to hold something small (draw nothing in the lap), a soft warm smile.
+5. LYING FLAT: lying on the back, body fully horizontal, feet toward the left, legs straight, hands folded on the stomach, eyes closed, peaceful.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 7 OF 9: CARTWHEEL FAIL, ROPE, STIRRUP AND STRAIN
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. CARTWHEEL WOBBLE: mid cartwheel attempt, one hand planted on the ground, legs kicked up crooked in a wobbly V, body askew, eyes wide in alarm.
+2. FACE DOWN: lying flat on the stomach, face pressed to the ground, arms spread, legs straight, one shoe toe turned up, completely limp.
+3. ROPE LEAN: leaning far back with heels dug in, both fists gripping a short length of thick rope pulled taut toward the left and ending in a knot inside the frame, teeth gritted.
+4. STIRRUP: crouched low with the back straight, both hands laced together palms-up in front of the knees to make a step for someone to stand on, eyes looking up ahead, ready.
+5. STRAIN: standing hunched, both fists clenched at the chest, eyes squeezed shut, teeth gritted, shoulders raised, a few painted sweat beads on the forehead.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 8 OF 9: TOAST, PLATES AND THE START OF A STRETCH
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. TOAST: standing, one arm raised holding a ceramic mug up at shoulder height toward the left, a small warm smile, eyes on the mug.
+2. PLATE STACK: wide stance, both arms out in front holding a tall wobbling stack of plain white dinner plates at chest height, the stack leaning, eyes wide, arms trembling.
+3. STRETCH TIRED (faces the viewer): standing, shoulders slumped, arms hanging, head drooped to one side, heavy-lidded, worn out.
+4. STRETCH START (faces the viewer): arms lifting from the sides up to shoulder height, chest beginning to rise, eyes closing.
+5. STRETCH FULL (faces the viewer): both arms stretched straight overhead with fingers interlaced and palms up, back arched, chin up, eyes shut, mouth wide in a big yawn.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.
+
+============================================================
+SHEET 9 OF 9: THE REST OF THE STRETCH (all face the viewer)
+============================================================
+
+IMAGE REQUEST: ONE POSE SHEET. Return exactly one image, nothing else.
+
+ATTACH: the reference picture of the character (or the character photo) so the look carries over.
+
+WHAT THIS IS
+Five extra action frames of the same character as the reference, for a family role-playing game. Draw the character EXACTLY like the reference in every frame: same face, clothes, colors, proportions, art style, level of detail and head size. Only the poses, actions and objects below are new. Do not redesign anything about the character.
+
+THE SHEET (strict)
+- One row of 5 equal cells, 400 x 500 pixels each, so the full image is 2000 x 500. If your tool offers a different size, keep exactly 5 equal cells in a single row.
+- Exactly 5 frames, one per cell, left to right in the numbered order below.
+- The character FACES LEFT in every frame (side or three-quarter view), unless a frame says it faces the viewer.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character or objects. No magenta glow, spill or fringe. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Standing feet rest on one horizontal line about 30 pixels above the cell bottom. Ground poses rest on that same line.
+- Draw ONLY the character plus the objects a frame names. Objects are drawn in the same painted style as the character and appear only when held by or touching the character. No other people, no text, no word balloons, no shadows, no dust, no motion lines, no sparkles, no glow effects.
+- All objects are generic: no brand names, no logos, no readable letters.
+- Each of the 5 frames must be clearly different from the others. Strong, readable, exaggerated silhouettes.
+
+THE 5 FRAMES
+1. STRETCH SIDE: one arm arched overhead, torso bending sideways away from it, the other hand on the hip, eyes closed, relieved.
+2. STRETCH CRACK: fingers laced out in front, palms pushed outward, elbows straight, a wince of satisfaction as the knuckles crack.
+3. STRETCH NECK: head tilted far to one side, one hand on top of the head pulling gently, the other arm relaxed, eyes closed, a wince.
+4. STRETCH EXHALE: arms dropping to the sides, shoulders falling, cheeks puffed, a big breath out, eyes closed.
+5. STRETCH FRESH: standing tall and loose, shoulders back, bright rested eyes, a small confident smile, one hand smoothing down the front of the clothes.
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw the pose as described.

@@ -1,0 +1,22 @@
+AREA STYLE BLOCK (rewritten 2026-11-01 after Tom found the original Square kit; this wording is TESTED, it is the wording that produced Tom's liked Square painting)
+
+Copy these three blocks word for word into every area prompt. Change only the building list, layout, props and the palette hex values (from the area record JSON). Do not paraphrase them: an earlier paraphrase written the same day was untested and is withdrawn.
+
+--- STYLE AND CAMERA (verbatim) ---
+Original late-1990s / early-2000s pre-rendered fantasy RPG background art, watercolor and ink, not 16-bit tile art. Fixed elevated three-quarter camera looking diagonally into the scene, approximately 35 degrees downward, showing building fronts, roofs, and walkable paving together. Rich painted depth; strong but delicate brown-black ink edges; visible handmade paper grain; warm saturated pigments and brush texture; soft baked shadows; slight atmospheric haze and gentle vignette. No photorealism, plastic 3D appearance, or top-down floor-plan look. Keep the same camera across the entire uninterrupted scene.
+
+--- LIGHT AND COLORS (shape verbatim, hex values from the area record) ---
+Warm golden key light #FFE1A0, muted lilac accent #C8A5DC; cream paving #EED8B5; leafy sage #608775; light green ground #B4C395; terracotta architecture #CF7954; shadows #716351. Natural broken ink lines and granular watercolor on roofs, brick, wood, foliage and stone. Paint a clear darker contact shadow under buildings and props, with an open sunlit walkable center.
+
+--- STRICT EXCLUSIONS (verbatim, then add area-specific bans) ---
+No people, no dogs, no sprites, no monsters. No text or logos painted on signs, doors, awnings or buildings, because game text will be overlaid separately. No typography anywhere in the output. No numbered targets, diamonds, colored tiles, tactical-map layout, title card, frame, contact sheet, process page, palette chart, mockup or other secondary material.
+
+Never use "16-bit era" or "storybook" as a positive style word (the old area prompts did, and the generator returned a game-sprite look).
+
+--- REASSESSMENT (2026-11-01 21:35, after comparing the kit prompt with the liked painting The_Square_Area_01_Corrected_1920x1664.png) ---
+Fact: the liked painting does NOT show what the style words ask for. No ink edges, no paper grain, no haze, no vignette. It is a smooth, glossy, saturated digital painting. The generator obeyed the structure (8 buildings in order, roof colors, taxi, benches, lamps, no people, no text, three-quarter camera, light from upper left) and supplied its own default polished rendering for the style.
+Meaning: the look came from (a) the generator's default rendering, (b) a fresh chat with no 16-bit context, (c) no positive retro words. The style paragraph mostly did not steer it. One success is one sample, so the verbatim block stays as the baseline, but it is not a guarantee.
+Risk kept in the block: "late-1990s / early-2000s pre-rendered RPG" and "not 16-bit" are era words. They did not hurt this roll; if a future area comes back retro, these are the first words to remove.
+Recommendation for every remaining area: in the fresh chat, ATTACH the liked Square painting as a style reference (it is a painting, so the kit's warning about the flat layout PNG does not apply) and add this line under STYLE AND CAMERA: "The attached image is a style reference only. Match its rendering, brushwork, lighting, color saturation and level of detail exactly. Do not copy its layout, buildings, fountain or props." This is the most reliable way to keep all areas looking like one town.
+Hypothesis to check (Tom): if the generator is ChatGPT, its saved Memory or custom instructions may mention 16-bit or SNES from earlier game work and leak into fresh chats. Settings, Personalization, Memory: delete any 16-bit or pixel entries.
+Square-specific mismatches in the liked painting (fix at install or by edit, not by a new render): fountain sits at center, not just left of center; only one signpost (east) instead of north, south and east; no wish coin or marigold pot visible.

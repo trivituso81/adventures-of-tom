@@ -1,0 +1,13 @@
+EDIT THE ATTACHED IMAGE. It is the painted town square of a small Long Island town, in a rich hand-painted style. Make a clean GROUND version of it for a compositing tool that layers objects over the ground. Keep the painting style, lighting, palette, camera, canvas size and the cobblestone texture exactly as they are. Everything not listed under REMOVE stays exactly where it is and exactly as it is, pixel for pixel as closely as you can: the eight buildings with their doors, windows, roofs, awnings and signs, the closed fences and the shopfront street.
+
+REMOVE completely, and repaint the ground that was under and behind each one so the cobbles, grass and paths run on unbroken:
+- every tree and bush that stands on or beside the plaza, and every tree canopy that overhangs ground (leave the dense tree rows at the far outer edges of the picture only if they sit outside the walkable area)
+- both iron lamp posts
+- the large fountain (replace it with plain continuous cobbles)
+- both benches and their flower planters, all barrels and flower pots
+- the three exit boards and all their posts
+- the parked yellow taxi
+
+The ground where each removed object stood must match the surrounding cobbles or grass in color, texture and lighting, with no ghost outlines, shadows or stains left behind. The three exits stay open and the worn trails stay where they are.
+
+Do not add anything new. No people, no animals, no new text. Output the same canvas size as the attached image, painted to all four edges.

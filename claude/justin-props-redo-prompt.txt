@@ -1,0 +1,37 @@
+IMAGE REQUEST: ONE SINGLE PROP SPRITE SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.
+
+WHAT THIS IS
+A prop sheet for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger). This is the sheet for the character Justin (an electrician who also loves watching sports and is refinishing his basement): it holds 5 standalone battle props that will be cut out and used in his attack animations. They are placed on top of a painted battle scene, so each one must stand out clearly from a painted background.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.
+- Exactly 5 objects, one per cell, filled left to right, top to bottom, in the order of the numbered list below. The final cells (numbers 6 to 16) must stay completely empty and transparent, with no number.
+- Each object is drawn complete, centered in its own cell, fully inside it, with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.
+- Scale every object to fill about 70 to 80 percent of its cell (its longest side), regardless of its real-world size. Small things are enlarged to the same footprint. Tall objects (the drywall sheet) fill the cell height.
+- Background: fully transparent (PNG with alpha). No grid lines, no borders, no frames, no cell backgrounds, no checkerboard pattern. If your tool cannot output transparency, fill the entire background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere inside the objects.
+- In the top-left corner of every cell, put a small plain white pixel-font number (with a thin dark outline) matching the list number. These numbers are a guide only and will be cropped off. Do not put any other labels, captions or titles on the sheet. There is no text on any prop itself.
+
+ART STYLE
+- 32-bit era high-detail pixel art (late SNES, Saturn, PlayStation quality): rich shading, 16 to 24 colors per object, clean readable silhouettes, no anti-aliasing blur, no gradients that break the pixel look, no outlines thicker than one pixel.
+- A crisp one-pixel darker rim around each object's outer edge and a faint lighter highlight along its top edge, so it pops on a painted background.
+- Soft key light from the upper left on every object, with shadow on the lower right of each form. Warm, slightly desaturated painterly palette, but each object keeps its natural colors. All objects share one consistent look, one lighting direction and one level of detail.
+- Seen from the front, very slightly from above, like objects in an SNES battle scene, unless the list says otherwise.
+- Fun, friendly and a little silly. Family friendly for children aged 6 and up: nothing gory, scary or grim.
+- Native pixel-art resolution only: draw at roughly 128 x 128 pixels per cell and upscale by a whole number (2x) with nearest-neighbor, so pixels stay hard-edged and square.
+- Do not draw a ground shadow. At most a tiny soft contact shadow directly under an object that rests on the floor.
+
+HARD RULES
+- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the 5 objects described, one per numbered cell. Never substitute, swap in or add other objects, even ones that seem more typical, more common or related to the same theme. If a description is unusual, draw it as written. Every cell must match its numbered description.
+-- Props only. No people, no characters, no hands, no faces on anything.
+- No text, letters, numbers or logos anywhere on any prop.
+- A first attempt at this sheet came back with the wrong objects. These are NOT wanted anywhere on the sheet: drills, extension cords, buckets, putty knives, ladders, TVs, couches, wire nuts, or any tool. Draw only the 5 objects in the list.
+- No real brands, logos, trademarks, team names, team colors that copy a real team, or copyrighted characters.
+- Do not add extra objects, decorations, sparkle bursts, motion lines, glows or effects beyond what the list describes. Small details the list names (a crack, a flake, a screw head, a puff of dust) are fine.
+- Do not skip, merge or reorder any item.
+
+THE 5 OBJECTS (cell number: name, what to draw)
+1. Basement wall, intact: a free-standing section of an old finished basement wall, seen from the front, about as tall as it is wide. Pale beige-grey painted drywall with faint scuffs and one slightly darker rectangular patch of old paint, a plain wooden baseboard strip along the bottom, a plain white electrical outlet with a two-hole faceplate low on the left, and a thin visible edge on the right side showing the wall's thickness. The wall is solid and undamaged, with no cracks.
+2. Drywall sheet: a tall, narrow, flat sheet of drywall standing upright, seen from the front, about three times as tall as it is wide, plain pale beige-white with a faint paper texture, a thin visible edge on the right side, and exactly four dark screw heads pressed into the face, one near each corner, set in from the edges. Nothing else on it.
+3. Drywall chunk: one jagged, broken piece of beige drywall, roughly triangular, with its brown paper face on top and the white chalky core visible along the torn edges. Seen from slightly above, lying flat.
+4. Splintered stud: one broken piece of a wooden two-by-four, one end snapped off in long jagged pale-wood splinters, the other end cut square, light pine wood grain, lying diagonally, seen from slightly above.
+5. Dust puff: a soft round cloud of beige-grey dust made of three or four overlapping puffy lobes, lighter on the upper left and darker on the lower right, with a few tiny specks flying off its edge. No face.

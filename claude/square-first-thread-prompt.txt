@@ -1,0 +1,39 @@
+Create the actual environment painting for Area 01, The Square, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas slightly wider than tall, designed for a final 1920 x 1664 pixel plate (30 columns x 26 rows at 64 pixels per tile). If your image tool cannot produce those exact dimensions, create the highest-resolution closest-aspect scene and do not claim pixel-perfect map accuracy.
+
+STYLE AND CAMERA
+Original late-1990s / early-2000s pre-rendered fantasy RPG background art, watercolor and ink, not 16-bit tile art. Fixed elevated three-quarter camera looking diagonally into the scene, approximately 35 degrees downward, showing building fronts, roofs, and walkable paving together. Rich painted depth; strong but delicate brown-black ink edges; visible handmade paper grain; warm saturated pigments and brush texture; soft baked shadows; slight atmospheric haze and gentle vignette. No photorealism, plastic 3D appearance, or top-down floor-plan look. Keep the same camera across the entire uninterrupted scene.
+
+SETTING
+A friendly, small Long Island town square on a clear, warm afternoon. Golden sunlight from the upper left, faint lilac reflected light in shaded areas, subtle coastal breeze. Cream-colored paving, old brick, mature leafy trees, small wooden fences, colorful flowers, and personal, slightly imperfect details. Small-town coziness, not a fantasy palace or grand metropolis. The entire composition needs readable open space for RPG character sprites, with pathways across the square.
+
+ARCHITECTURE: EXACTLY EIGHT DISTINCT BUILDINGS
+Four modest storefront buildings along the NORTH side, left to right:
+1. Crumb Bakery: terracotta roof, pale honey walls, striped bakery awning, warm baked-goods window. Door faces the plaza.
+2. The Hush Library: dusty lavender roof, light cream walls, narrow tall windows and quiet brass book motifs. Door faces the plaza.
+3. Sprout House: muted green roof, sage walls, greenhouse-like windows, ferns and hanging foliage. Door faces the plaza.
+4. Penny's Pockets: coral-red roof, pale butter walls, cheerful shop window with practical gear and snacks. Door faces the plaza. This is the town's main equipment and provisions shop.
+
+Four buildings along the SOUTH side, left to right:
+5. Snail Mail: slate-blue roof, parchment walls, old-fashioned mail slots and post-box details. Entrance faces the lower pedestrian lane.
+6. Kettle Cottage: amber-brown roof, blush plaster walls, a small chimney and cozy tea-shop details. Entrance faces the lower pedestrian lane.
+7. Moon Club: blue-gray roof, pale gray walls, faded celestial metalwork suggesting a once-fashionable observatory lounge. Entrance faces the lower pedestrian lane.
+8. Long Island Taxi Co.: warm yellow-ochre roof, ivory walls, tiny dispatch office. Entrance faces the lower pedestrian lane; a single small yellow taxi is parked near its front door.
+
+There must be exactly eight fully recognizable buildings, with none replaced by a clock tower, town hall, mansion, gazebo, maze, or park. Keep the two rows of four in the same left-to-right order. Every building must have a visible ground-level entrance and a short accessible approach.
+
+SPATIAL COMPOSITION
+A central paved crossroads is the dominant walking area. A modest circular stone Wish Fountain sits just left of the overall center and slightly above the central horizontal walkway. A narrower northern pedestrian lane runs up between the first and second buildings toward the TOP edge. A southern lane continues toward the BOTTOM edge near the central-right side. A broad eastbound lane reaches the RIGHT edge. Two wide east-west walking bands cross the scene, linking the shops and lower buildings. Keep at least one character-width of unobstructed paving along every route; foliage, fountains, hedges, vehicles, and benches stay outside those lanes. The playable square should feel explorable rather than like a formal symmetrical garden.
+
+SPECIFIC SMALL STORY PROPS
+Near the fountain: a small town notice and a wish coin. Left of the fountain: a wooden bench meant for important sitting. Across the plaza: a sun-warmed bench, colorful planters named after the same plant, a little shop direction sign, a north trail sign, a south neighborhood sign, and an east school sign. Beside Penny's: a pot of marigolds. Beside Taxi Co.: one modest yellow taxi, not a street full of vehicles. Around the outer edges: dense summer trees and occasional fences that convincingly block travel, without blocking the three exit routes. Use individual, handmade, slightly whimsical details, not generic repeated hedgerows.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, muted lilac accent #C8A5DC; cream paving #EED8B5; leafy sage #608775; light green ground #B4C395; terracotta architecture #CF7954; shadows #716351. Natural broken ink lines and granular watercolor on roofs, brick, wood, foliage and stone. Paint a clear darker contact shadow under buildings and props, with an open sunlit walkable center.
+
+STRICT EXCLUSIONS
+No people, no dogs, no sprites, no monsters. No text or logos painted on signs, doors, awnings or buildings, because game text will be overlaid separately. No typography anywhere in the output. No numbered targets, diamonds, colored tiles, tactical-map layout, giant fountain complex, pond, bridges, formal garden maze, or water features besides the one small fountain. No title card, frame, contact sheet, process page, palette chart, mockup or other secondary material.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

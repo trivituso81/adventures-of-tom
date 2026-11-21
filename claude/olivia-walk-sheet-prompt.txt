@@ -1,0 +1,41 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER WALK SHEET. Return exactly one image, nothing else.
+
+ATTACH: the Olivia hero pose image (the full-body painted picture in the fruit-print dress). It is the reference for her face, hair and outfit. If you also attach the close-up photo of her face, use it to keep her face accurate.
+
+WHAT THIS IS
+Walking frames for the town exploration screens of "The Adventures of Tom", a family role-playing game with a classic 16-bit JRPG feel (Final Fantasy VI, Chrono Trigger) and hand-painted character sprites. The character is Olivia, a quick, bright, warm journalist mom. The attached image is the reference for Olivia. Draw her EXACTLY like the reference in every frame: same face (warm brown eyes, light freckles, wide smile with top teeth), same long wavy honey-blonde hair parted on her left, same dress, same colors, proportions, art style and level of detail.
+
+HER OUTFIT (must match the reference in every frame, front, back and side)
+A cream colored knee-length flowing dress printed all over with small scattered fruit: strawberries, lemons, oranges, cherries, watermelon slices, peaches, purple grapes and little green leaves. Round neckline, loose relaxed bodice, wide flowing bell sleeves ending just past the elbow, and a two-tiered gathered skirt that ends just above the knee and sways a little with each step. Bare legs. Dark brown ballet flats with a small gold medallion on each toe. No trousers, no blouse, no belt, no watch, no jewelry, no bag. From behind, show the same fruit print on the back of the dress and the back of her hair.
+
+THE SHEET (strict)
+- A grid of 3 columns by 3 rows of square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows.
+- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the order of the numbered list below.
+- Row 1 shows Olivia facing DOWN, toward the viewer. Row 2 shows her facing UP, away from the viewer, so we see her back and the back of her hair. Row 3 shows her in profile facing LEFT.
+- Camera: the classic top-down role-playing game field view, slightly from above, like a character walking around a town map.
+- Same character at the same scale in every cell. Standing Olivia is about 180 pixels tall. Never rescale her per frame.
+- Every frame sits fully inside its cell with at least 10 percent empty margin on every side. Nothing touches or crosses a cell edge or overlaps a neighbouring cell.
+- In every frame the soles of her feet rest on the same horizontal line, about 24 pixels above the bottom of the cell, except where a foot is lifted mid-step.
+- Background: one flat solid color, pure magenta #FF00FF, filling the whole image. No magenta anywhere on Olivia. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Draw ONLY Olivia. Her hands are empty in every frame. No ground shadow, dust, sparkles, speed lines, motion blur or any effect, no props, no text, no other people.
+
+ART STYLE
+- Hand-painted 16-bit JRPG sprite look matching the reference exactly: soft painted shading, no thick outlines, light friendly caricature proportions, detailed painted fabric so the fruit print reads, clean readable silhouette.
+- Soft key light from the upper left, shadow on the lower right, warm slightly desaturated painterly palette. All 9 frames share one look and one lighting direction.
+- Family friendly for children aged 6 and up.
+
+WALK RULES
+Arms swing opposite to the legs. The two STEP frames of each row are mirror images of each other in leg and arm position. The STAND frame is a neutral relaxed stance with both feet together and arms hanging at her sides. Her hair, sleeves and skirt sway a little with each step.
+
+THE 9 FRAMES (each must look clearly different from the others)
+1. DOWN STAND: facing the viewer, relaxed, feet together, arms at her sides, eyes forward, her warm smile.
+2. DOWN STEP A: facing the viewer, the foot on the viewer's right steps forward and down, the arm on the viewer's left swings forward, body bobbing slightly lower.
+3. DOWN STEP B: facing the viewer, the foot on the viewer's left steps forward and down, the arm on the viewer's right swings forward.
+4. UP STAND: seen from behind, the back of her head and long blonde hair, shoulders, feet together, arms at her sides.
+5. UP STEP A: seen from behind, the foot on the viewer's left steps forward (away from us), the arm on the viewer's right swings forward.
+6. UP STEP B: seen from behind, the foot on the viewer's right steps forward, the arm on the viewer's left swings forward.
+7. SIDE STAND: profile facing left, feet together, arms at her sides, a relaxed pleasant face.
+8. SIDE STEP A: profile facing left, front leg stretched forward with the heel down, back leg trailing with the heel lifted, the near arm swinging back and the far arm swinging forward.
+9. SIDE STEP B: profile facing left, the passing moment of the stride: legs close together, the back foot lifted off the ground with a bent knee, body slightly higher, the near arm swinging forward and the far arm swinging back.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Olivia in the pose described.

@@ -1,0 +1,18 @@
+SUNDIAL HOLLOW: STENCIL PROMPTS
+Send these in the SAME chat that made the approved Sundial Hollow painting, one at a time, only after Claude has sent you the walk map and cutout plan and you approved them. Send the results back to Claude with no words. Claude uses them only to know where to cut; the game uses the pixels of your original painting.
+Note for the install: the stone channel is painted dry on purpose. The game draws the flowing water over it until the story drains it, and keeps the crossing blocked until then.
+
+=== STENCIL 1: TREES AND TALL PLANTS ===
+Make a cutout mask of the clearing painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every tree, with its full leaf canopy, branches, trunk and big roots down to where they meet the ground; every bush or fern clump taller than a person; the tall cattails around the pool.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: path, moss, clearing, channel, pool, boulders, standing stones, sundial, bench, the exit board. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Where a canopy overlaps something else, keep the full canopy. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 2: SUNDIAL, STANDING STONES AND BOULDERS ===
+Make a cutout mask of the clearing painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: the sundial with its pointer and the upper step of its base (not the lowest flat step), every standing stone, and every mossy boulder taller than a person's knee, each whole down to where it meets the ground.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 3: EXIT BOARD AND BENCH ===
+Make a cutout mask of the clearing painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: the green exit board (WHISPERING / MARSH) with both posts down to the ground, the stone bench, and any tall glowing mushroom clump.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.

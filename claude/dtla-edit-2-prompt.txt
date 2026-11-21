@@ -1,0 +1,47 @@
+DOWNTOWN LA EDIT 2 (attach the latest DTLA image and use this prompt)
+
+EDIT THE ATTACHED IMAGE. Keep its painting style, golden-hour light, skyline, hills and observatory, Angels Flight, murals, boulevard, bus shelter, palms and all eight buildings exactly as they are. Make ONLY changes 1 to 4 below. Output the same size as the attached image (1347 x 1167 px), PNG, painted to all four edges, no border or watermark. All coordinates are pixels in the attached image, off by up to 20 px at most.
+
+1. OPEN THE THREE WALKWAYS (MOST IMPORTANT: DO THIS FIRST, DO NOT SKIP IT)
+A person must be able to walk from the boulevard sidewalk (y 585 to 640) straight down to the plaza (y 1000 and below) between the south-row buildings. Right now the gaps are tiny, full of fire escapes and lamps, and a stone retaining wall (y 640 to 700) closes the top of each.
+- Walkway A: between Backlot Wardrobe and TNB's Loft, about x 380 to 435.
+- Walkway B: between TNB's Loft and The Grand Tower, about x 638 to 695.
+- Walkway C: between The Grand Tower and Angel City Cab Co., about x 955 to 1010.
+- Each walkway is AT LEAST 55 px wide. Slide the buildings sideways by up to 30 px to make room (Angel City Cab Co. to the right, Backlot Wardrobe to the left). Do not resize or redesign any building.
+- Each runs in a straight line from the sidewalk down to the plaza, paved with the same sandstone as the plaza, perfectly flat: no steps, no curb, no gate. Cut the stone retaining wall open at the top of each walkway so the paving flows from the sidewalk into the walkway.
+- Completely empty: no lamps, plants, planters, trash cans, crates, ladders, signs, banners or wires inside them. Fire escapes may stay only flat on the wall face, reaching no more than 8 px into a walkway. Only soft building shadow on the floor. The whole floor is visible from top to bottom.
+- Move the lamp posts that stand in or beside the walkways (at about (385, 905), (655, 900), (690, 860), (960, 880) and (985, 905)) forward and out of the way: re-place each in front of the nearest building facade at the curb line (y about 1015), at least 20 px outside the walkway edge.
+- Keep a clear corridor from the three walkways straight down the middle of the plaza to the south exit.
+
+2. ADD THREE CLEAR EXITS WITH BOARDS (all open, no gates or barriers, open ground beneath each board so a character can walk under it)
+Exit board style: deep forest green face (about #2F4A35), thin gold inner line, thin carved wood frame, cream-gold hand-painted capitals (about #F2E6B8) with a thin dark green outline, bold slightly rounded signwriter lettering, spelled exactly letter by letter, text filling about 85 percent of the face width.
+- SOUTH (bottom center, x 520 to 800): replace what is there with a stone arch gate on two stone posts with globe lights (posts at x 545 and x 775, feet at y 1130), wide stone steps and a street continuing off the bottom edge, and a green board on the arch (center (660, 1060), 270 x 80 px, face 235 x 55). It reads JEFFERSON PARK on one line with a bold cream-gold DOWN ARROW on each side of the words: [down arrow] JEFFERSON PARK [down arrow].
+- NORTHWEST (top-left): wide stone steps (x 15 to 120) climbing from the sidewalk (y 440) up to a stone gate arch at about y 220, then a trail into the palms. A green board high on two stone posts, center (70, 150), 190 x 70 px, face 165 x 48. It reads GRIFFITH on line one and PARK on line two.
+- EAST: a green board on a tall steel pole standing on the boulevard south sidewalk at x 1290 (foot y 640), hanging out over the end of the road at center (1230, 455), 230 x 70 px, face 200 x 50. It reads STUDIO LOT with a bold cream-gold RIGHT ARROW on each side of the words. The road stays open beneath it.
+
+3. LETTER THE SHOPS
+Give every shop a lettered board in the same hand-painted style (dark brown, deep green or navy board with cream lettering, face about 180 x 48 px), centered above its door and awning, bottom edge at least 20 px above the highest part of the awning below it, never overlapping a door, awning or lamp. A board may cover the lowest row of windows. The existing coffee cup, ramen bowl and coin signs may stay.
+1. GOLDEN HOUR on line one, COFFEE on line two
+2. RAMEN on line one, RAMEN on line two
+3. STARLITE on one line, painted directly on the blank marquee panel
+4. NICKEL'S on one line (apostrophe between L and S)
+5. BACKLOT on line one, WARDROBE on line two
+6. TNB'S on line one, LOFT on line two
+7. THE GRAND on line one, TOWER on line two
+8. ANGEL CITY on line one, CAB CO. on line two
+No other words, numbers or logos anywhere except those in this prompt.
+
+4. PROPS
+- Add a teal and orange taco truck with a striped awning and the single word TACOS on its side, parked on the south lane of the boulevard at about x 700 to 860, y 515 to 585, facing the viewer, same angle as everything else.
+- Add a yellow checkered taxi on the plaza in front of Angel City Cab Co. at about x 1090 to 1200, y 1030 to 1100.
+- Remove the green railed stairwell at about (230, 1105) and put paving and a planter there. On the one at about (1120, 1100), add a green canopy over the stairs with a white M roundel and the word METRO.
+
+DO NOT: move or redesign any other building, add people or animals, add vehicles in the traffic lanes other than the taco truck, add gates or barriers, change the skyline, or add anything inside the three walkways.
+
+CHECK BEFORE YOU FINISH
+1. Can a person walk from the sidewalk under the boulevard to the plaza through each of the three gaps without touching anything?
+2. Is the stone wall cut open at the top of each walkway, and are the lamps gone from them?
+3. Do three exit boards exist, and does the south one show a down arrow on each side of JEFFERSON PARK?
+4. Is every shop lettered, and are the taco truck and taxi present?
+
+OUTPUT: one image, 1347 x 1167 px.

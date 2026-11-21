@@ -1,0 +1,13 @@
+[
+{"t":"d","voice":"tom","text":"I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.","script":"[dry, proud] I brought you a sourdough loaf. Baked it yesterday. [deadpan] It flew here on my lap."},
+{"t":"d","voice":"deedee","text":"Tom, you're skin and bones. Sit. The crisp needs ten minutes on the counter.","script":"[warm, fussing] Tom, you're skin and bones. [brisk, firm] Sit. The crisp needs ten minutes on the counter."},
+{"t":"d","voice":"grace","text":"Deedee. They're on your head.","script":"[flat, patient] Deedee. They're on your head."},
+{"t":"d","voice":"rose","text":"Deedee! A mud blob is taking your PIE!","script":"[alarmed, breathless] Deedee! [shrill, urgent] A mud blob is taking your PIE!"},
+{"t":"d","voice":"boppy","text":"I'd come, but the stomach. Bring me back that fish.","script":"[gruff, pained] I'd come, but... the stomach. [brighter, gruff] Bring me back that fish."},
+{"t":"d","voice":"tnb","text":"Also, your starter was bubbling out of the jar, so I baked a boule with it. Don't be mad.","script":"[easy, sheepish] Also, your starter was bubbling out of the jar, so I baked a boule with it. [quick, coaxing] Don't be mad."},
+{"t":"b","voice":"amy","text":"Coming through! Hydrate later!","script":"[breathless, brisk] Coming through! Hydrate later!"},
+{"t":"b","voice":"justin","text":"MY FOOT! WHO TOUCHED MY FOOT?!","script":"[yelping, outraged] MY FOOT! [furious, bellowing] WHO TOUCHED MY FOOT?!"},
+{"t":"b","voice":"rose","text":"Piggyback pounce! Giddyup!","script":"[giggly, bossy] Piggyback pounce! Giddyup!"},
+{"t":"d","voice":"grump","text":"Grrrumble. You're standing in my puddle.","script":"[low, gravelly] Grrrumble. [cranky, offended] You're standing in my puddle."},
+{"t":"d","voice":"grump","text":"I've been doing push-ups in the pond.","script":"[gravelly, boastful] I've been doing push-ups in the pond."}
+]

@@ -1,0 +1,10 @@
+EDIT THE ATTACHED IMAGE. Attach the approved Long Island Town Square painting to this message first. It is the master. This is a mechanical cutout edit, not a redraw: do not repaint, restyle, improve, resize, move, crop, mirror or re-compose anything. Output exactly the same canvas size and aspect ratio as the attached image, with every kept object at exactly the same position, scale, colors and detail as in the master, so that this result lines up with the master pixel for pixel when laid over it. Generate the image now. Do not make a plan, diagram or description.
+
+THE EDIT: LAMPS, FOUNTAIN, EXIT BOARDS AND STREET PROPS ONLY
+KEEP: both iron lamp posts and their lanterns; the entire fountain (basin, rim, moss, water, coins, column, upper bowl and the water plume); both benches and the flower planters in the plaza; all three green exit boards with all of their posts, arrows and brackets; the parked yellow taxi; and every loose prop standing on the ground in front of the shops (bread cart, book cart, barrels, crates, sacks, small tables and chairs, chalkboard easel, red mailbox, blue drop box, tripod telescope, tool cart, potted plants and flower pots standing on the cobbles). Keep each at its exact master position and size, including the small contact shadow directly under it.
+EVERYTHING ELSE becomes flat magenta: buildings and roofs, cobbles, grass, trees and hedges, fences, walls and sky.
+
+BACKGROUND RULE
+Everything not kept is replaced with ONE perfectly flat, uniform, pure magenta fill, exactly #FF00FF, with no gradient, no texture, no shadow, no glow, no outline, no vignette. Kept objects have crisp, clean, hard edges directly against the magenta, with no magenta fringe, halo or soft feathering, and no cast shadow on the magenta. Do not add new objects, text, borders, labels or frames. Do not keep any ground, cobble, grass, wall or sky unless it is listed as kept below.
+
+Deliver the single edited image itself.

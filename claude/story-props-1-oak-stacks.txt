@@ -1,0 +1,44 @@
+IMAGE REQUEST: ONE SINGLE PROP SPRITE SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.
+
+WHAT THIS IS
+A prop sheet for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger). This sheet holds 12 standalone map objects for Old Oak Park and the Stacks. They are things the player walks up to and presses a button on. They will be cut out and placed on top of a painted game map, so each one must stand out clearly from a painted background.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.
+- Exactly 12 objects, one per cell, filled left to right, top to bottom, in the order of the numbered list below. The final cells (numbers 13 to 16) must stay completely empty and transparent, with no number.
+- Each object is drawn complete, centered in its own cell, fully inside it, with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.
+- Scale every object to fill about 70 to 80 percent of its cell, regardless of its real-world size. Small things are enlarged to the same footprint.
+- Background: fully transparent (PNG with alpha). No grid lines, no borders, no frames, no cell backgrounds, no checkerboard pattern. If your tool cannot output transparency, fill the entire background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere inside the objects.
+- In the top-left corner of every cell, put a small plain white pixel-font number (with a thin dark outline) matching the list number. These numbers are a guide only and will be cropped off. Do not put any other labels, captions or titles on the sheet. The only text allowed is the text that is part of the prop itself, spelled exactly as given in the list.
+
+ART STYLE
+- 32-bit era high-detail pixel art (late SNES, Saturn, PlayStation quality): rich shading, 16 to 24 colors per object, clean readable silhouettes, no anti-aliasing blur, no gradients that break the pixel look, no outlines thicker than one pixel.
+- A crisp one-pixel darker rim around each object's outer edge and a faint lighter highlight along its top edge, so it pops on a painted background.
+- Make these read at a glance: slightly more saturated and a little higher contrast than a normal background object, and give the part the player touches (a switch, a knocker, a lens, a hole, a lock) the brightest accent color on the object.
+- Soft key light from the upper left on every object, with shadow on the lower right of each form. Warm, slightly desaturated painterly palette, but each object keeps its natural colors. All objects share one consistent look, one lighting direction and one level of detail.
+- Three-quarter view from slightly above, like objects seen on an SNES overworld map, unless the list says "seen from the front".
+- Fun, friendly and a little silly. Family friendly for children aged 6 and up: nothing gory, scary or grim.
+- Native pixel-art resolution only: draw at roughly 128 x 128 pixels per cell and upscale by a whole number (2x) with nearest-neighbor, so pixels stay hard-edged and square.
+- Do not draw a ground shadow. At most a tiny soft contact shadow directly under an object that rests on the floor.
+
+HARD RULES
+- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the 12 objects described, one per numbered cell. Never substitute, swap in or add other objects, even ones that seem more typical, more common or related to the same theme. If a description is unusual, draw it as written. Every cell must match its numbered description.
+- Where the list says "identical to cell N", the object must match that cell exactly in shape, size, outline and the position of every part, and only the change the list names may differ. These pairs are swapped in the game when something happens, so they must line up.
+- Props only. No people, no characters, no hands. The only faces allowed are the pairs of cartoon eyes in cells 8, 9 and 10, and nothing else on those objects has a face.
+- No real brands, logos, trademarks or copyrighted characters.
+- Do not add extra objects, decorations, sparkle bursts, motion lines, glows, smoke or effects beyond what the list describes. Small details the list names (a flame, a wisp of steam, a glint) are fine.
+- Do not skip, merge or reorder any item.
+
+THE 12 OBJECTS (cell number: name, what to draw)
+1. Fresh dirt mound, sandbox: a small rounded pile of pale yellow play sand with a few brown acorn shells around its base and one small round paw print pressed into the top. It sits on an irregular patch of its own pale sand, about 1.5 times the mound width, with soft ragged edges so it blends into a painted map.
+2. Fresh dirt mound, garden: a small rounded pile of dark brown garden soil with one crushed green tomato leaf at its side and one small round paw print pressed into the top. It sits on an irregular patch of its own dark soil, about 1.5 times the mound width, with soft ragged edges.
+3. Fresh dirt mound, lawn: a small rounded pile of medium brown dirt with torn green grass tufts around its base and one small round paw print pressed into the top. It sits on an irregular patch of green lawn, about 1.5 times the mound width, with soft ragged edges.
+4. Dug hole, sandbox: a round hole dug into pale yellow play sand, the dark opening clearly visible from above, a ring of flung sand around its rim and one acorn cap lying beside it. Same sand patch size and color as cell 1, with no mound.
+5. Dug hole, garden: a round hole dug into dark brown garden soil, the dark opening clearly visible from above, loose soil flung around its rim and one small acorn lying beside it. Same soil patch size and color as cell 2, with no mound.
+6. Dug hole, lawn: a round hole dug into a green lawn, the dark opening clearly visible from above, a ring of brown dirt and torn grass tufts around its rim. Same lawn patch size and color as cell 3, with no mound.
+7. Little oak door: a small round wooden door of dark weathered planks with iron strap hinges and a heavy iron latch bar across it, a big brass acorn-shaped knocker hanging in the center. It is set into a section of rough gnarled tree bark about twice the door width, with a few small roots curling at the base. The door is closed. Seen from the front.
+8. Fiction bookcase: a tall dark wood bookcase with three shelves packed with books, spines in purple, deep red, teal and gold, a small toy dragon sitting on the top shelf and one book tipped slightly out of line. Between two books on the middle shelf, a pair of small round cartoon eyes peeks out of the dark gap. Only the eyes, no other face parts. Seen from the front.
+9. Nonfiction bookcase: the same bookcase shape and size as cell 8 but in lighter oak wood, three shelves packed with books, spines in tan, olive, navy and brick red. One fat book has a small drawn potato on its spine and one book has a tiny drawn volcano on its spine. Between two books on the middle shelf, a pair of small round cartoon eyes peeks out of the dark gap. Only the eyes, no other face parts. Seen from the front.
+10. Picture Books low shelf: a short, wide, low wooden shelf at child height, picture books standing with their bright covers facing out, lined up in rainbow order (red, orange, yellow, green, blue, purple). The covers show only simple shapes (a sun, a star, a moon, a round blob), no text. Between two books, a pair of small round cartoon eyes peeks out of the dark gap. Only the eyes, no other face parts. Seen from the front.
+11. Story time chair: a large wooden rocking chair with curved rockers and a thick cushion in warm red and cream, a woven basket of picture books beside it, and one picture book lying open on the cushion with colorful pages.
+12. Reading Room doors: a pair of tall dark wooden double doors with an arched top and brass trim. Above them a small brass plate reading READING ROOM in capital letters. In the center, a brass lock shaped like a card catalog drawer, with a tiny label holder and a keyhole. The doors are closed, with a thin line of warm green lamp light showing under the gap. Seen from the front.

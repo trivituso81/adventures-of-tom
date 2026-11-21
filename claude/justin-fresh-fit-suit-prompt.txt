@@ -1,0 +1,48 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER ANIMATION SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.
+
+WHAT THIS IS
+An animation sheet for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger) but painted. This sheet is the "Fresh Fit" attack of the character Justin, a very tall electrician who loves fashion. In the attack he strides in wearing his everyday clothes, does a quick outfit change, and shows off a flashy high-fashion suit. 16 frames, read left to right, top to bottom, will play as an animation.
+
+THE CHARACTER (use the attached reference image of Justin if one is attached, and match his face, hair, build and proportions exactly; otherwise use this)
+Justin is a tall, slim man, the tallest person in the game (6 foot 5), drawn as a friendly painted caricature: slightly large expressive head, short spiky brown hair, light stubble, big warm grin, long legs. Everyday clothes (frames 1 to 5): a light grey short-sleeved work shirt, blue jeans, white sneakers, a brown leather tool belt at the hips.
+
+THE SUIT (frames 7 to 16, identical in every frame)
+A bold, flamboyant, head-to-toe Italian luxury fashion suit: a tailored double-breasted jacket and matching trousers in rich emerald green jacquard with a subtle woven pattern, gold buttons, a red and green stripe running down the outside of each trouser leg and along each jacket cuff, a cream silk shirt with a big floppy bow at the collar, glossy black leather loafers with a gold buckle across the top, and round gold-rimmed sunglasses with tinted lenses. Sunglasses: not on yet in frame 7, on his face in frames 8 to 14, held in his hand in frame 15, and pushed up on top of his head in frame 16. The suit must look exactly the same in every suit frame: same colors, same stripes, same buttons.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.
+- Exactly 16 frames, one per cell, in the order of the numbered list below.
+- Justin faces LEFT in every frame unless the list says otherwise. He stands about 200 pixels tall (head to feet) in a 256 pixel cell. His feet rest at the same height in every cell (the bottom of the shoes about 20 pixels above the cell's bottom edge), so the frames line up when played as an animation. He is centered horizontally in his cell.
+- Each frame is fully inside its cell with clear empty space around the figure. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.
+- Background: one flat solid color, pure magenta #FF00FF, filling the entire image, with no grid lines, no borders, no cell frames, no ground, no floor, no shadows and no gradient. Use no magenta, pink or purple anywhere on the character.
+- No numbers, labels, captions or titles anywhere on the sheet.
+
+ART STYLE
+- Painted no-outline caricature, soft painterly shading, warm slightly desaturated palette, soft key light from the upper left, matching the look of a painted family video game. Clean readable silhouettes against the flat magenta. No black outlines.
+- The same face, hair, body proportions and level of detail in every frame, so the 16 frames read as one person.
+- Fun, friendly and a little silly. Family friendly for children aged 6 and up.
+
+HARD RULES
+- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the 16 frames described, one per numbered cell, in that order. Do not skip, merge, reorder or add frames.
+- Justin only. No other people, no animals, no furniture, no props other than what the list names. No wardrobe rack, no mirror, no garment bag, no clothes on hangers, no suitcase.
+- The outfit change is shown only by Justin's own body and clothes. Do not draw sparkles, flashes, light bursts, smoke puffs, stars, glows, motion lines or any effect. The game adds those.
+- No real brands, logos, monograms, interlocking letters or trademarks anywhere on the clothes, shoes, glasses or belt. No text on anything.
+- Frames 1 to 5 show only everyday clothes. Frame 6 is the swap. Frames 7 to 16 show only the green suit. Never mix the two outfits except in frame 6.
+
+THE 16 FRAMES (cell number: pose)
+1. Runway walk, stride A: everyday clothes, walking left with a confident swagger, chin up, left leg forward, arms swinging loosely, smug half smile.
+2. Runway walk, stride B: everyday clothes, same walk, opposite leg forward, opposite arm forward.
+3. Stop: everyday clothes, feet planted together, standing tall, one hand raised palm out like "hold on", eyebrows raised, a cocky smile.
+4. Collar flick: everyday clothes, one hand flicking up the collar of his grey shirt, head tilted back slightly, eyes half closed, very pleased with himself.
+5. Finger snap: everyday clothes, right arm raised high above his head with a finger snap, left hand on his hip, eyes closed, big grin.
+6. The swap: Justin mid-spin, arms crossed over his chest, eyes squeezed shut, body turned three quarters away so he is slightly blurred by the spin. His upper body is already in the green jacket and silk bow shirt, his legs are still in jeans and sneakers. This is the only frame where both outfits appear.
+7. Reveal: now fully in the green suit, no sunglasses yet, arms held slightly out from his sides, chest out, eyes opening wide, a delighted "ta-da" grin, looking down at his own outfit.
+8. Shades on: sunglasses on, right hand pushing the bridge of the sunglasses up his nose, left hand tugging his jacket hem straight, chin lifted.
+9. Hip pose: sunglasses on, one hand in his trouser pocket, hip popped to one side, other hand resting on his jacket lapel, chin up, a cool smirk.
+10. Turn: sunglasses on, turning his back toward us in a slow runway turn, the back of the green jacket and the stripe down the trousers clearly visible, head turned so we see his profile.
+11. Bow fix: sunglasses on, facing left, both hands fluffing the floppy cream bow at his collar, head tilted, a smug pout.
+12. Cuff pull: sunglasses on, pulling down the cuff of one jacket sleeve with the other hand, elbow bent, looking at the cuff with a proud half smile.
+13. Pocket shrug: sunglasses on, both hands tucked into his trouser pockets, shoulders raised in a casual shrug, head tipped to one side, the gold buckle on his loafers visible.
+14. Look back: sunglasses on, walking away to the left but looking back over his right shoulder toward the viewer, one eyebrow raised above the glasses, a knowing smile.
+15. Shades off: facing left, one hand lifting the sunglasses off his face and holding them away from his body by the arm, eyes now visible, one eyebrow raised.
+16. Wink and strut: sunglasses pushed up on top of his head, mid-strut walking left with a big confident stride, jacket flaring open, one eye winking at the viewer, a finger pointing forward like a pistol.

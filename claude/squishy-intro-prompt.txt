@@ -1,0 +1,28 @@
+IMAGE REQUEST: ONE SINGLE PROP IMAGE. Return exactly one image, nothing else.
+
+WHAT THIS IS
+A hero prop for "The Adventures of Tom", a family role-playing game with a painted, realistic caricature look (not pixel art). The prop is Grace's treasured limited-edition squishy toy: a sparkling diamond gold dumpling. In the opening scene she holds it up and shows it off, so it must read clearly even when it is only about 90 pixels tall on a phone screen.
+
+THE OBJECT
+A squishy toy shaped like a Chinese soup dumpling (xiaolongbao): a plump, round, slightly flattened body with a pinched, pleated knot on top. About 18 crisp pleats spiral up from the sides and gather into a small twisted nub at the top center.
+- Material: polished, shiny metallic gold, like a luxury collectible toy. Warm yellow-gold in the lights, deeper amber in the shadows. It still looks soft and squishy: gently rounded, with a few soft dimples pressed into the body.
+- Diamonds: set into the body are about 12 to 15 faceted diamond gems of different sizes, clear and icy white with tiny rainbow flashes (pink, blue, mint). A larger diamond sits in the top knot like a crown jewel. Each gem has one bright star-shaped glint.
+- Face: a tiny, sweet kawaii face on the front: two small closed happy arc eyes, rosy pink blush circles, and a small smile. Keep it cute and simple, the way a real squishy toy is.
+- Sparkle: three or four small four-point sparkle stars floating just outside the edge of the dumpling. Nothing else.
+- Size: the dumpling is about the size of a child's two cupped hands.
+
+VIEW AND LIGHT
+Three-quarter view from slightly above, the whole dumpling visible and centered. Soft key light from the upper left, with a gentle warm shadow on the lower right of the form. A faint rim light along the top edge so it pops off any background. Warm, rich, painterly colors.
+
+FRAMING
+- Square image, 1024 x 1024 pixels.
+- The dumpling and its sparkles fill about 75 percent of the image, centered, with even empty margin on every side. Nothing touches the edge.
+- Background: fully transparent (PNG with alpha). No floor, no shadow on the ground, no glow halo that extends to the edges. If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the dumpling.
+
+STYLE
+Painted caricature game art, glossy and detailed, clean silhouette, no outlines thicker than a thin darker edge. Fun, friendly and a little luxurious. Family friendly for children aged 6 and up.
+
+DO NOT ADD
+No hands, no people, no pillow, no plate, no steamer basket, no chopsticks, no sauce. No text, letters, numbers, logos, labels or watermarks. No pixel-art look. No second dumpling.
+
+OUTPUT: one image, 1024 x 1024 px, PNG with transparent background.

@@ -1,0 +1,26 @@
+IMAGE REQUEST: ONE SINGLE IMAGE made of two square panels side by side. Return exactly one image, nothing else.
+
+WHAT THIS IS
+A close-up face portrait for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger). It is the close-up shown during a battle move called HUMAN EYES, where Nara, a black curly Labradoodle, stares at a monster with eerily human eyes. The joke is that her eyes look completely human, and a little too knowing.
+
+THE IMAGE (strict)
+- Two square panels side by side, each 1024 x 1024 pixels, so the full image is 2048 x 1024 pixels. If your tool offers a different size, keep exactly two equal square panels side by side and use the largest size available.
+- LEFT PANEL (panel 1): Nara's face, eyes wide open. RIGHT PANEL (panel 2): the exact same drawing, identical in every way, except her eyes are fully closed in a calm blink (smooth closed eyelids with short dark lashes).
+- Each panel shows the head only, facing straight toward the viewer, centered, filling about 85 percent of the panel, fully inside it with a margin on every side. Nothing crosses the middle line between panels.
+- Background: fully transparent (PNG with alpha). No frames, borders, grid lines or checkerboard. If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the drawing.
+- No text, labels, numbers or captions anywhere.
+
+THE FACE
+- A 40-pound black Labradoodle: dense, tight, glossy black curls covering the head and the long drooping ears, with a slightly messy curly fringe over the forehead. A broad snout with a big shiny wet black nose, a few light whiskers, and a calm closed mouth with a tiny bit of pink tongue showing at the corner.
+- HUMAN EYES: this is the most important part. Instead of dark dog eyes, she has real human-style eyes: clearly visible white sclera on both sides, a round warm brown iris with a black pupil and a small bright highlight, upper and lower eyelids, and expressive human-looking eyebrows that are slightly raised, giving a calm, knowing, deadpan stare. The eyes are large and sit naturally in her black curly face. Keep them realistic human eyes, not cartoon dog eyes and not anime eyes.
+- Expression: calm, steady, a little too intelligent. Friendly and funny, never scary or creepy.
+
+ART STYLE
+- 32-bit era high-detail pixel art (late SNES, Saturn, PlayStation quality): rich shading, 24 to 32 colors, clean readable silhouette, no anti-aliasing blur, no outlines thicker than one pixel. A crisp one-pixel darker rim around the outer edge.
+- Soft key light from the upper left, shadow on the lower right. Black fur shown with deep blue-gray highlights so the curls read clearly. Warm, slightly desaturated palette.
+- Native pixel-art resolution only: draw at roughly 256 x 256 pixels per panel and upscale by a whole number (4x) with nearest-neighbor, so pixels stay hard-edged and square.
+- Family friendly for children aged 6 and up.
+
+HARD RULES
+- Exactly two panels, same drawing, eyes open then eyes closed. Do not add a body, collar, tag, hands, people, background scenery, effects, sparkles or glows.
+- No real brands or copyrighted characters.

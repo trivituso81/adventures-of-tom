@@ -1,0 +1,48 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER BATTLE SHEET. Return exactly one image, nothing else.
+
+ATTACH: (1) the hero pose picture of Tom (the reference), (2) the best face close-up photo of Tom.
+
+WHAT THIS IS
+Battle frames for "The Adventures of Tom", a family role-playing game. The character is Tom, a calm, dry-humored uncle who protects his family like a bodyguard. The attached hero pose is the reference for Tom. Draw him EXACTLY like the reference in every frame: same face, hair, beard, clothes, shirt print, colors, proportions, art style, level of detail. The other attached photo is a close-up of the real person's face. Keep the face as faithful to it as the hero pose is, in every frame, including from the side where hair and ears show.
+
+TOM'S LOOK (same as the reference)
+Very short dark brown hair with gray at the sides, receding at the temples, thin at the crown. Full short salt and pepper beard. Heather navy crew-neck graphic t-shirt, untucked, with a retro game controller and a small red heart printed on the chest in cream, red and mustard yellow. Washed charcoal-gray slim jeans, black braided belt, white low-top sneakers with a black side accent, a smartwatch with a gray-green band on his left wrist. Hands empty in every frame.
+
+ART STYLE
+- A hand-painted digital caricature illustration of a real person, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photo.
+- Warm golden light from the upper left, a soft warm glow on the skin, a gentle rim light, rich saturated warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited color palette, no flat cartoon shading, no anime style.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of equal square cells, 256 x 256 pixels each, so the full image is 1024 x 1024. If your tool offers a different size, keep exactly 4 columns and 4 rows of equal square cells.
+- Exactly 16 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- Tom FACES LEFT in every frame (side or three-quarter view from slightly above, a hero facing an enemy on the left).
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere in the character. No magenta glow, spill, tint or fringe on the character's edges, hair or beard strands. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or overlaps a neighbour.
+- Same scale in every cell. Feet on the ground rest on one horizontal line about 24 pixels above the cell bottom.
+- Draw ONLY Tom. Hands empty. No effects, shadows, dust, motion lines, sparkles, props, other people, text or word balloons.
+- Same head size, same hair volume and same outfit in every frame. The head is never redrawn smaller or larger from frame to frame.
+
+THE 16 FRAMES (each clearly different from the others)
+1. IDLE A: battle stance, feet shoulder width apart, knees slightly bent, hands loose, calm dry expression aimed at the enemy, one eyebrow a little raised.
+2. IDLE B: the same stance a moment later, chest risen with a breath, one hand tugging the hem of his t-shirt.
+3. WALK A: striding left, near foot forward, opposite arm swinging.
+4. WALK B: the opposite step.
+5. HIP: standing, hands on hips, chin lifted, a deadpan unimpressed look.
+6. ACT: right arm extended to the left, palm up, presenting something, a small proud wry smile.
+7. WIND-UP: body twisted away from the enemy, arm cocked back, weight on the back leg, eyes narrowed.
+8. SWING: follow-through, lunging far forward to the left, arm at full extension, front knee bent, mouth open in a shout.
+9. SPREAD: feet planted, both arms flung wide, chest out, chin up, announcing something.
+10. GUARD: crouched low, forearms crossed in front of chest and face, chin tucked.
+11. HURT: flinching, body knocked back and leaning right, head thrown back, eyes squeezed shut, one foot lifted.
+12. LOW HEALTH: kneeling on one knee, hand on knee, head hanging, a black eye around the visible eye, tired grimace.
+13. KNOCKED OUT: down on hands and knees facing left, head bowed, eyes shut, a black eye, rounded back, defeated slump.
+14. CHEER A: victory, one fist pumped high, other hand on hip, big grin.
+15. CHEER B: both fists overhead, laughing, heels lifted.
+16. SIGNATURE (DEFEND): the bodyguard stance. Stepping forward and planting his feet wide, one arm held out straight to the side like a barrier, the other hand raised with the palm facing out toward the enemy, jaw set, a stern, calm look that says "No touching, please."
+
+Family friendly for ages 6 and up.
+
+NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or invent props. If anything is unclear, draw Tom in the pose described.

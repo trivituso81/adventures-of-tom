@@ -1,0 +1,59 @@
+Create the actual environment painting for the Long Island Town Square, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet or project update. Attach nothing: this is a fresh image.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame outdoor painting, landscape, aspect ratio 15:13 (designed for a final 1920 x 1664 pixel plate). Highest resolution you can produce, razor sharp, fine crisp detail everywhere, no blur, no upscaled softness. No border, frame, title, labels, caption, grid, UI, inset view or white margin. If you cannot make 15:13, make the nearest landscape ratio and keep a margin of trees and fence on every side except the three exits so it can be trimmed.
+
+STYLE AND CAMERA
+Richly detailed hand-painted environment art, realistic materials and believable full-size architecture, like high-end concept art for a premium adventure game. Smooth soft shading, warm golden light from the upper left, deep saturated but natural color, delicate fine texture on stone, tile, wood, leaves and cobbles. No thick black outlines. These are real full-size buildings and a real town, not a miniature, not a toy, not a diorama, not a model. No blocky low-resolution look, no visible grid, no repeating tile pattern, no flat vector look.
+Camera: one fixed elevated three-quarter view looking down at about 45 degrees, straight on from the south, so the plaza floor is clearly visible, every building shows its roof from above and its front wall with door, windows and sign. Same camera and same scale over the whole picture.
+
+SETTING
+The town square of Long Island on a warm late afternoon: a wide open plaza of pale sandy flagstone cobbles with one large wishing fountain at the center, eight small themed shops facing each other in two rows (four along the top, four along the bottom), flower beds, two benches, two iron lamp posts, and leafy trees and hedges framing every edge. Cozy, lived in, friendly, a little bit magical. No people, no animals.
+
+SPATIAL COMPOSITION (positions are fractions of the picture: x from the left edge, y from the top edge)
+- TOP ROW of four shops, front doors facing south, door bottoms at y 30 percent. Door centers at x 15, 38, 62 and 85 percent. Each shop is about 17 percent of the picture wide and occupies y 4 to 30 percent. Left to right: CRUMB BAKERY, HUSH LIBRARY, SPROUT HOUSE, PENNY'S POCKETS.
+- BOTTOM ROW of four shops, front doors facing south, door bottoms at y 73 percent. Door centers at the same x: 15, 38, 62 and 85 percent. Each occupies y 51 to 73 percent. Left to right: SNAIL MAIL, KETTLE COTTAGE, MOON CLUB, TAXI CO.
+- THE PLAZA between the rows (y 30 to 51 percent) is wide open cobbles, kept clear so small characters about as tall as a front door can walk everywhere. Each door has at least one door-width of clear cobble below its step.
+- FOUNTAIN: the biggest, brightest object in the picture. Centered at x 38 percent, filling x 27 to 48 percent and y 31 to 50 percent. A wide round pale limestone basin with a thick rim and mossy base, clear turquoise water with ripples and a few small gold coins glinting, a carved stone center column with a smaller second bowl, and a tall plume of water arcing and falling back into the basin. No statue, no figure, no animal, no plaque. Leave a clear ring of open cobble at least 5 percent of the picture width around the basin on all sides. The whole fountain, shadow included, stays inside its own space and touches no other object.
+- BENCHES: one wooden bench with a flower planter at x 12 to 26 percent, y 36 to 45 percent; one at x 62 to 76 percent, y 36 to 45 percent.
+- LAMP POSTS: two tall black iron lamp posts with warm glass lanterns, one with its foot at x 26 percent, y 50 percent; one with its foot at x 59 percent, y 50 percent. Each has a visible base on the cobbles with open ground around it.
+- PLAZA TREES: three stand-alone broad trees with visible trunks and visible bases, feet at x 5 percent y 42 percent, x 94 percent y 47 percent, x 73 percent y 34 percent. Each canopy is a clear separate shape with a gap of sky-lit ground or cobble around it, and never overlaps a shop wall or door.
+- SHOPFRONT STREET: a cobbled street runs east to west along y 77 to 85 percent in front of the bottom row.
+- THREE EXITS, all open and clear, and the ONLY ways out of the picture:
+  1. NORTH: wide stone steps at x 23 to 30 percent climbing to the top edge, between the Bakery and the Library. Two tall wooden posts stand just outside the steps and carry a high green board (see signs).
+  2. SOUTH: a cobbled street at x 47 to 53 percent running down to the bottom edge, between Kettle Cottage and Moon Club. Two tall iron posts stand just outside it and carry a high green board.
+  3. EAST: a cobbled opening on the right edge at y 35 to 42 percent, reached from the plaza. A tall green board on two tall posts stands above it.
+  Every other edge is closed with dense trees, hedges, wooden fences, stone walls and boulders so that no other path appears to leave the picture. Between neighbouring shops there are only short narrow gaps that end in a garden gate, hedge or wall.
+- Keep the ground continuous and unbroken under and around everything.
+
+THE EIGHT SHOPS: each has its own architecture, built around what it is for, and its own sign made of that shop's materials, mounted flat on the front wall centered above the door with about 3 percent of picture height of bare wall between the sign and the door frame, never touching the door, awning, roof emblem or lamp. Sign faces are large and generous (at least 60 percent of the shop's width, tall enough that each letter is easy to read at a glance on a small phone), letters bold, evenly spaced, perfectly spelled, in capitals, painted exactly as written below. The sign and the building look like one designed object.
+1. CRUMB BAKERY (top left, orange tile roof). Warm brick and cream plaster, a tall brick oven chimney with a curl of smoke, a big arched window full of loaves and pastries, a striped red and cream awning, a wooden bread cart and flour sacks by the step. SIGN: a giant wooden baker's peel (long paddle) with white icing lettering in plump swirly cursive-style capitals reading CRUMB on the first line and BAKERY on the second.
+2. HUSH LIBRARY (top, purple slate roof). Pale stone with a small tower, tall arched windows, a carved stone owl on the roof ridge, stacked book cart by the door, lanterns. SIGN: a carved stone open book with thin gold-leaf Roman capitals reading HUSH on the first line and LIBRARY on the second.
+3. SPROUT HOUSE (top, green copper roof). A glass greenhouse front with white iron frame, a giant copper watering can on the roof, climbing vines, crates of seedlings and potted plants outside. SIGN: an iron trellis arch grown over with living leafy vines, organic hand-lettered capitals reading SPROUT on the first line and HOUSE on the second.
+4. PENNY'S POCKETS (top right, red tile roof). A red and gold emporium, a giant brass coin hanging on the roof corner, a striped shop awning, barrels and crates of goods, bags and baskets on display. SIGN: a theatrical marquee with round glowing bulbs around the edge, bold circus wood-type capitals reading PENNY'S on the first line and POCKETS on the second.
+5. SNAIL MAIL (bottom left, slate blue roof). A small post office whose roof curls up into a big spiral snail shell, a huge brass letter slot beside the door, a red mailbox and a blue drop box, a pigeon-hole window. SIGN: a giant perforated postage stamp with a stamped border, typewriter capitals reading SNAIL on the first line and MAIL on the second.
+6. KETTLE COTTAGE (bottom, terracotta roof). A pink-cream tea cottage with a giant steaming copper kettle on the roof, a round teacup-shaped window, small round tables with teapots and a chalkboard menu easel outside. SIGN: a hanging teacup-and-saucer shaped sign painted like a Victorian tea tin, cobalt blue with gold, ornate capitals reading KETTLE on the first line and COTTAGE on the second.
+7. MOON CLUB (bottom, deep navy roof). A round brass-domed observatory building with a rooftop telescope, a gold crescent moon and a brass armillary globe on the roof, a tall sky-watching telescope on a tripod beside the door, star-shaped lanterns. SIGN: a polished brass crescent plaque with Art Deco capitals whose letter O is a perfect circle, small constellation dots between the words, reading MOON on the first line and CLUB on the second.
+8. TAXI CO. (bottom right, golden yellow roof). A 1950s corrugated-metal garage with a wide roll-up bay, a roof-mounted light box, a checker-stripe awning, tires and a tool cart, and one parked yellow taxi at the right (the only vehicle). SIGN: a chrome-edged glowing light-box with speedy slanted block capitals reading TAXI on the first line and CO. on the second.
+Roof colors, building footprints and door positions must stay exactly as listed above so the shops read as eight different silhouettes.
+
+EXIT BOARDS (a green system, clearly different from the shop signs): each is a deep forest green board about 12 percent of the picture wide and 6 percent tall with a thin gold inner line, mounted HIGH on TWO TALL posts (posts at least 12 percent of picture height), perfectly straight, bold cream capitals, nothing hanging in front of them, trails continuing past them off the picture.
+- NORTH board in carved rough wood on two tall rough timber posts: GRUMP on the first line, HOLLOW on the second.
+- SOUTH board as an enamel street-name sign on two tall black iron posts: RIVITUSO on the first line, ROW on the second.
+- EAST board in painted schoolhouse block capitals on two tall wooden posts, one line only: SCHOOL.
+
+BUILT FOR 3D CUTOUTS (important)
+- Tall things have clean closed silhouettes against what is behind them: roofs, chimneys, roof props, awnings, tree canopies, lamp posts, fountain, exit boards and posts.
+- Every tree, lamp post, bench, planter, barrel, cart, mailbox, exit post and the fountain has a visible base sitting on plain cobble or grass with open ground around it, about 40 pixels at plate scale.
+- Trees and shops never overlap each other: leave a thin gap of ground or light between any canopy and any roof or wall.
+- Awnings and eaves cast a soft, light shadow on the wall and ground, never a hard black shape. Cast shadows fall toward the lower right, low contrast.
+- No fog, haze, glow bloom or lens effects crossing between objects. Keep edges crisp.
+- Do not use pure magenta or hot pink (#FF00FF) in any flower, cloth or object anywhere.
+
+LIGHT AND COLORS
+Warm golden afternoon sun from the upper left (#FFD7A0), cool soft blue shadow fill (#7FB3C9). Pale sandy flagstone plaza (#E3CDA0), leafy natural greens (#4F7A3A to #86A64A), terracotta, slate blue, plum, copper green, brick red and golden yellow roofs, turquoise fountain water (#4FB8C4), warm cream plaster and honey stone walls. Window glass glints amber. Flower beds in coral, yellow, white, lavender and orange. Natural hand-painted brush texture throughout.
+
+STRICT EXCLUSIONS
+No people, no animals, no birds, no characters, no vehicles other than the one parked yellow taxi. No text anywhere except the eleven sign words above, spelled exactly. No watermark, logo or caption. No extra buildings, no extra doors, no extra exits, no closed gates, no title card, frame, contact sheet, palette chart, mockup or process page. No oversized foreground objects blocking the plaza.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

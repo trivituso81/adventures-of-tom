@@ -1,0 +1,112 @@
+DOWNTOWN LA, FRESH PAINTING (PASS 1 OF 2). No attachment needed.
+
+Paint one new image of Downtown Los Angeles for a family RPG, in the same style as the rest of the game: a 16-bit era storybook look grown into rich hand-painted detail, warm golden-hour light from the upper left, long soft shadows falling to the lower right, glowing shop windows and street lights just coming on, saturated but not neon. Cozy and a little magical, but unmistakably a BIG CITY. No people, no animals.
+
+CANVAS
+- 1920 x 1664 px, landscape (15:13), PNG. Painted to all four edges: no frame, border, vignette, letterbox bars, caption or watermark.
+- Coordinates are pixels from the top left corner. 1 tile = 64 px. Positions may be off by up to 64 px, never more. If your output size differs, scale every number in proportion.
+
+CAMERA (strict)
+- One fixed three-quarter view from the south, pitched about 35 degrees down, in PARALLEL (orthographic) projection, like a classic 16-bit RPG city.
+- Every vertical edge is perfectly vertical. Parallel lines stay parallel. No vanishing points, no wide-angle or fisheye distortion, no tilt-shift blur, no rotation, no diagonal streets. Streets running east to west are perfectly horizontal; paths running north to south are perfectly vertical.
+- Every building shows its flat FRONT facade facing the viewer plus a shallow roof band above it. No side walls. Every prop and vehicle uses the same angle.
+- Nothing is sliced by a canvas edge except the distant skyline at the top and the exits listed below.
+
+WHAT MAKES IT DOWNTOWN LA (not a small town)
+- Tall facades: 4 to 7 floors, with compact floors (about 48 px each) so they fit. Dense, close, historic stone and brick street walls with fire escapes, rooftop water tanks and AC units.
+- A real skyline behind the north row (see SKYLINE).
+- Hard city ground: concrete and sandstone paving, painted crosswalks, steel traffic signal poles, bus stop, street vendors, scooters, murals. Modern slim black steel street lights, NOT old-fashioned gas lamps.
+- A plaza of hard paving, not a garden. No grid of little trees and flower boxes.
+
+LAYOUT (strict grid; footprints are 320 px wide; the facade fills the full 320 px, cornice may overhang 16 px)
+The DOOR LINE is the y where a front door meets the paving. Building art rises from the door line and never above the listed top limit.
+North row (doors face south onto the boulevard):
+1. GOLDEN HOUR COFFEE: x 320 to 640, door center x 480, door line y 512. Red brick, 5 floors, rooftop water tank, green and red-striped awning, cafe chairs. Roof top no higher than y 80.
+2. RAMEN RAMEN: x 640 to 960, door center x 800, door line y 512. Brick, 6 floors, red awning, a glowing steaming-bowl sign, paper lanterns. Roof top no higher than y 80.
+3. THE STARLITE (Broadway-style movie palace): x 1024 to 1344, door center x 1184, door line y 576. Cream stone deco, 5 floors, sunburst above a glowing red marquee. Roof top no higher than y 140.
+4. NICKEL'S (general shop): x 1408 to 1728, door center x 1568, door line y 576. Sage green and cream stone, 5 floors, teal awning, a gold coin hanging sign. Roof top no higher than y 140.
+The 64 px gaps (x 960 to 1024 and x 1344 to 1408) are closed alleys: a painted mural wall, a fire escape, a dumpster. Not walkable.
+South row (doors face the viewer, onto the plaza walk below; roofs sit just under the boulevard):
+5. BACKLOT WARDROBE: x 128 to 448, door center x 288, door line y 1216. Dark red-brown brick loft, 4 floors, rooftop water tank, purple awning, a costume rack in the window. Roof top no lower than y 840 (never higher).
+6. TNB'S LOFT: x 576 to 896, door center x 736, door line y 1280. Tan stone, 5 floors, dark navy awning, plants and pottery in the window. Roof top y 840 or lower.
+7. THE GRAND TOWER: x 1024 to 1344, door center x 1184, door line y 1280. Blue-grey stone and teal deco tower, stepped crown, green glass bays, a small blinking red light on top. 7 floors. Roof or crown top y 780 or lower.
+8. ANGEL CITY CAB CO.: x 1408 to 1728, door center x 1568, door line y 1344. Cream stone, checkered taxi band, 4 floors, rooftop water tank, gold awning. Roof top y 840 or lower.
+
+SKYLINE (top of the picture, behind the north row)
+Fill the area above and between the north-row roofs, from x 330 to the right edge, with a dense downtown Los Angeles skyline of 7 to 9 towers in golden-hour haze: a stepped-pyramid civic tower with a flagpole, a tall glass tower with a stepped crown, a slender glass tower with a thin spire, a cylindrical glass tower with a ring at its top, an art deco tower with a stepped cap, a dark boxy office slab, and a few mid-rise towers. Glass catches the orange sunset, windows glow, antennas and red blinking lights. Distant towers fade into purple-gold haze. The tallest run off the top edge. No text or logos on any tower. Only in the top-left corner (x 0 to 330, y 0 to 200) keep the Griffith Park hills, sunset and palms above the gate.
+
+TOP-RIGHT HILLSIDE: ANGELS FLIGHT
+In the top-right corner (x 1740 to 1920, y 140 to 560), a steep grassy and stone hillside with a short funicular railway: two small orange and black cars on parallel tracks, one near the top and one near the bottom, a little arched station at the bottom (y 520 to 576) and a small station at the top. Behind a low iron fence. Not walkable, no text.
+
+GROUND (flat, level, readable)
+- Boulevard from the left edge to the right edge. North sidewalk y 512 to 640 (red painted curb at y 640), road y 640 to 768 with a yellow double center line at y 704 and striped crosswalks at about x 150 and x 1700, boulevard south sidewalk y 768 to 840. A manhole cover or two in the road. No cars in the lanes. The left end of the road dead-ends into the stone hillside wall and a striped barricade (no text); the right end continues off the picture.
+- Plaza walk below the south row, y 1216 to 1472, continuing south to the exit. Hard sandstone paving with a subtle inlaid geometric pattern.
+- 64 px of clear paving in front of every door line: no planter, lamp, bench, sign or vendor there.
+
+THREE WALKWAYS FROM THE BOULEVARD TO THE PLAZA (critical: the player must be able to walk from the top half to the bottom half)
+- Walkway 1: between Backlot Wardrobe and TNB's Loft, x 448 to 576.
+- Walkway 2: between TNB's Loft and The Grand Tower, x 896 to 1024.
+- Walkway 3: between The Grand Tower and Angel City Cab Co., x 1344 to 1408.
+- Each runs straight from the boulevard south sidewalk (y 840) to the plaza (y 1216 and below), the full width listed, paved in the same sandstone, perfectly flat, no steps, no curb, no gate.
+- Completely clear: no walls, hedges, trees, planters, trash cans, dumpsters, crates, signs, benches, vendor carts, banners, street lights or fire escapes in them. Only soft building shadow across the floor. Every street light stands against a building front at the front curb, at least 20 px outside a walkway edge.
+- Also keep a clear corridor along the west edge (x 64 to 128, from y 840 to y 1216) and a clear corridor in the middle of the plaza from the walkways to the south exit.
+
+PASS-THROUGH OBJECTS (a character about 100 px tall will later walk UNDER these, so each needs open space beneath it and a visible floor)
+- Storefront awnings on all eight shops: lowest edge at least 110 px above the paving, nothing hanging below it.
+- The Starlite marquee over its entrance, and the Metro entrance canopy.
+- A glass-and-steel pedestrian SKYBRIDGE across walkway 2, joining TNB's Loft and The Grand Tower at the third floor: a band about 56 px tall at y 1010 to 1066, underside at least 220 px above the paving, floor of the walkway fully visible beneath it.
+- The three green exit boards on tall posts (see EXITS), with open ground beneath.
+- Five palms with slim trunks (no wider than 40 px), fronds starting at least 150 px above the base, bases on sidewalk planters at about (992, 600), (1376, 600), (160, 830), (1760, 620), (1536, 1570).
+- Thin steel signal mast arms reaching over the road from poles at the four boulevard corners (arms no thicker than 10 px).
+- RULES: no pass-through object may span a whole street or walkway, and every walkway and road stays visible beneath it. Show a strip of at least 40 px of visible ground behind and under each one. Do not paint hanging leaves, banners or dark shadows across the walking surface.
+
+THREE EXITS (each a deliberate way out continuing off the picture, drawn open and clear: no closed gate, barrier or lock)
+- NORTHWEST: wide stone steps x 192 to 320 from y 448 up to a stone gate arch at y 192, then a trail into palms and hills. Two stout stone posts at x 160 and x 352 hold a green board high above (center (256, 104), 240 x 96 px including frame, face 210 x 64).
+- SOUTH: wide steps and a street x 768 to 1024 leaving the bottom edge from y 1472, crosswalk stripes, a tree-lined road continuing off the picture. Two tall stone posts with globe lights at x 736 and x 1056 (feet y 1500) hold a green board high above (center (896, 1380), 330 x 100 px, face 300 x 68).
+- EAST: the boulevard south sidewalk (y 768 to 896) and road continue off the right edge. A green board on two tall steel posts at x 1744 and x 1888, feet at y 900, board center (1816, 720), 300 x 100 px, face 270 x 68.
+- Exit boards: deep forest green face (about #2F4A35) with a thin gold inner line, cream-gold lettering (about #F2E6B8) with a thin dark green outline, thin carved wood frame.
+
+EDGES
+- Left and right edges: a low stone retaining wall with planters and a few lamps, painted to the edge, no building sliced by an edge. Bottom edge outside the south exit: low walls, hedges and a row of small trees (y 1540 to 1664), no sliced roofs.
+
+PLAZA CONTENTS (hardscape, nothing in the walkway corridors)
+- A large abstract red sculpture on a low stone base at about (420, 1480), base no wider than 160 px.
+- Low concrete seating steps and benches along the plaza edges, concrete planters with a few trees in square grates, at most 8 trees total in the plaza, none in the corridors.
+- A hot dog cart at about (240, 1390) on the plaza walk in front of Backlot Wardrobe (not in the 64 px door zone), a bus shelter with bench and glass roof at about (1640, 800) on the boulevard south sidewalk, a street vendor umbrella cart near (1100, 1450).
+- A teal and orange taco truck with a striped awning and the single word TACOS on its side, parked at the boulevard's south curb, on the road lane only (x 1344 to 1536, y 690 to 770); keep the sidewalk and walkway 3 clear.
+- A yellow checkered taxi parked on the plaza in front of Angel City Cab Co. at about x 1560 to 1720, y 1380 to 1470.
+- The Metro entrance: green iron railing, a canopy, stairs going down, at x 1280 to 1472, y 1408 to 1536, with the word METRO on the canopy.
+- Small city details against building fronts and curbs only: parking meters, newspaper boxes, bike racks, a scooter rack, a fire hydrant. Murals (abstract color shapes, no letters) on the alley walls. Steel traffic signals at the four boulevard corners.
+
+LETTERING (hand-painted signwriter style that belongs in the painting: bold, slightly rounded capitals, a little irregular like brush work, a thin lighter highlight on the top edge of the letters, a soft shadow underneath, lit from the upper left; ALL CAPITALS; spell every word exactly, letter by letter; the text fills about 85 percent of the face width and never touches the frame. Generators draw small boards too small, so make every board face generous and clearly legible on a phone.)
+Shop fascia boards: flat, straight on, face about 260 x 70 px, centered over each door, bottom edge at least 30 px above the highest part of the door or awning below, never overlapping a door, awning or lamp:
+1. GOLDEN HOUR / COFFEE  2. RAMEN / RAMEN  3. STARLITE (one line, on the marquee)  4. NICKEL'S (one line, apostrophe between L and S)  5. BACKLOT / WARDROBE  6. TNB'S / LOFT  7. THE GRAND / TOWER  8. ANGEL CITY / CAB CO.  9. METRO (one line, on the canopy)
+Exit boards: GRIFFITH / PARK (two lines, northwest). JEFFERSON PARK (one line, south) with a bold cream-gold DOWN ARROW on each side of the words, so it reads [down arrow] JEFFERSON PARK [down arrow]. STUDIO LOT (one line, east) with a bold RIGHT ARROW on each side of the words.
+Taco truck: TACOS.
+No other words, numbers, logos, banners, billboards, arrows or tiny text anywhere. No freestanding notice signs or ads.
+
+DO NOT ADD: people, animals, vehicles in the traffic lanes, extra doors, extra exits, closed gates, building side walls, fog hiding the ground, gas lamps, any text not listed.
+
+SELF-CHECK
+1. All vertical edges vertical, all streets perfectly horizontal or vertical?
+2. Every building fully inside the canvas, facades 4 to 7 floors, skyline visible behind the north row?
+3. Door centers match the x values above, signs spelled exactly and 30 px clear of doors?
+4. Three walkways completely clear and visible from the boulevard to the plaza?
+5. Exactly three paths leave the picture, and the south board shows a down arrow on each side?
+6. Open ground visible under every awning, board, canopy, skybridge and palm?
+
+OUTPUT: one image, 1920 x 1664 px.
+
+
+=============================================================
+PASS 2 (RUN AFTER YOU APPROVE PASS 1): CLEAN GROUND PLATE
+Attach the approved Pass 1 image and use this prompt.
+=============================================================
+
+EDIT THE ATTACHED IMAGE. Keep composition, camera, colors, buildings, street layout, vehicles, lettering and size pixel-for-pixel identical (same canvas, nothing shifted or rescaled), with ONLY these removals. Paint what would be behind each one (facade wall, windows, doorway, sidewalk, road, steps, sky):
+1. All five palms (trunks, fronds, shadows).
+2. All eight storefront awnings: paint a plain facade, storefront windows and door frame. Keep the fascia sign boards.
+3. The three green exit boards with their posts, and the stone gate arch over the northwest steps: paint open steps, street and trail.
+4. The Metro canopy (keep the railing and stair opening), the bus shelter roof (keep the bench), the Starlite marquee (paint a plain doorway), the skybridge (paint the two plain building walls and the open walkway floor), and the thin signal mast arms over the road.
+Do not change, add or recolor anything else.
+OUTPUT: one image, same size as Pass 1.

@@ -1,0 +1,110 @@
+DOWNTOWN LA CUTOUT LAYERS: THREE PROMPTS
+
+Why: the game draws the painting flat. To walk BEHIND things, it needs each tall object as its own cutout on a flat magenta background, in exactly the same place as the painting. Send the three prompts one at a time, each with the latest DTLA painting attached (the one with Angel City on the north row and Nickel's on the south row). Three short prompts work better than one long one. Send the three results back with no words and I will install them.
+
+What I do with them: the results only serve as masks. I line each one up with the original painting and cut the objects out of the original, so any small drift or repaint in the generator does not change the look of the game.
+
+PROMPT A: PLAZA PLANTS (attach the latest DTLA image)
+
+EDIT THE ATTACHED IMAGE. It is a finished painting of Downtown Los Angeles for a video game. Do NOT repaint or restyle anything. Output the same size as the attached image (1347 x 1168 px), PNG, same framing, nothing shifted, nothing resized.
+
+THE TASK: make a CUTOUT LAYER. Keep ONLY the objects listed below, exactly as painted: same pixels, same position, same size, same colors, same light. Fill EVERYTHING ELSE with flat pure magenta (#FF00FF), one solid color, no gradient, no shadow, no glow, no outline, no texture. Magenta must appear nowhere on the objects themselves.
+
+RULES
+- Cut each object out cleanly along its own edge. Include all of it, from its highest point down to where it touches the ground (trunks, pots, feet, posts). Do not include the ground, paving, road, wall, sky or buildings around it, except where the list says the building part itself is the object.
+- Where an object is partly hidden by another listed object, keep both as painted.
+- Boxes are pixel boxes in the attached image (left,top to right,bottom), off by up to 20 px. Each box holds one object; cut out only the object inside it.
+- Add nothing. Do not redraw, fix, sharpen or improve any object. If an object is not where the box says, find it nearby.
+- No text, border, watermark or caption.
+
+KEEP ONLY THESE 12 OBJECTS (everything else magenta):
+1. Palm tree in the bottom-left corner, crown, trunk and its stone planter (0,1026 to 158,1167)
+2. Stone planter with red and yellow flowers (165,1045 to 240,1110)
+3. Potted palm in a stone pot (289,1028 to 352,1138)
+4. Stone planter with red flowers (342,1063 to 413,1130)
+5. Leafy bush, upper, left of the Jefferson Park arch (463,1028 to 547,1096)
+6. Big leafy bush, lower, left of the arch (443,1096 to 570,1167)
+7. Leafy bush, upper, right of the arch (791,1028 to 856,1096)
+8. Big leafy bush, lower, right of the arch (783,1096 to 870,1167)
+9. Stone planter with red flowers (884,1049 to 957,1115)
+10. Potted palm in a stone pot (988,1028 to 1052,1138)
+11. Small stone planter with a bush, right side (1205,1094 to 1257,1152)
+12. Palm tree in the bottom-right corner, crown, trunk and base (1240,1026 to 1347,1167)
+
+CHECK: is the background one flat magenta everywhere else? Are all 12 objects whole, with trunks and pots, unchanged? OUTPUT: one image, 1347 x 1168 px.
+
+
+PROMPT B: STREET FURNITURE AND OVERHANGS (attach the latest DTLA image)
+
+EDIT THE ATTACHED IMAGE. It is a finished painting of Downtown Los Angeles for a video game. Do NOT repaint or restyle anything. Output the same size as the attached image (1347 x 1168 px), PNG, same framing, nothing shifted, nothing resized.
+
+THE TASK: make a CUTOUT LAYER. Keep ONLY the objects listed below, exactly as painted: same pixels, same position, same size, same colors, same light. Fill EVERYTHING ELSE with flat pure magenta (#FF00FF), one solid color, no gradient, no shadow, no glow, no outline, no texture. Magenta must appear nowhere on the objects themselves.
+
+RULES
+- Cut each object out cleanly along its own edge. Include all of it, from its highest point down to where it touches the ground (trunks, pots, feet, posts). Do not include the ground, paving, road, wall, sky or buildings around it, except where the list says the building part itself is the object.
+- Where an object is partly hidden by another listed object, keep both as painted.
+- Boxes are pixel boxes in the attached image (left,top to right,bottom), off by up to 20 px. Each box holds one object; cut out only the object inside it.
+- Add nothing. Do not redraw, fix, sharpen or improve any object. If an object is not where the box says, find it nearby.
+- No text, border, watermark or caption.
+
+KEEP ONLY THESE OBJECTS (everything else magenta):
+Lamp posts (the whole post: glowing lantern head, pole, black base):
+1. lamp post, (113,333 to 147,462)
+2. lamp post, (128,378 to 162,502)
+3. lamp post, (360,378 to 394,502)
+4. lamp post, (556,382 to 590,460)
+5. lamp post, (671,373 to 704,502)
+6. lamp post, (878,388 to 911,502)
+7. lamp post, (67,887 to 101,1021)
+8. lamp post, (322,887 to 356,1021)
+9. lamp post, (395,887 to 429,1021)
+10. lamp post, (686,887 to 720,1019)
+11. lamp post, (943,894 to 977,1019)
+12. lamp post, (1294,890 to 1327,1019)
+Awnings and marquee (the fabric or marquee itself, not the wall or windows under it):
+13. Golden Hour Coffee striped awning (175,383 to 341,424)
+14. Ramen Ramen red awning (387,383 to 565,422)
+15. Starlite marquee, red panel with bulbs, and the sunburst above it (648,295 to 879,420)
+16. Angel City Cab Co. gold awning (942,406 to 1146,439)
+17. Backlot Wardrobe purple awning (116,872 to 326,918)
+18. TNB's Loft navy awning (429,873 to 626,916)
+19. Nickel's teal awning (1042,867 to 1256,918)
+Street objects:
+20. Teal and orange taco truck, whole (502,460 to 666,546)
+21. Glass bus shelter with its roof, posts and bench (549,547 to 643,621)
+22. Trash can (523,577 to 546,626)   23. Blue mailbox (658,579 to 685,626)   24. Yellow fire hydrant (920,574 to 946,628)
+25. Black trash bin (1026,577 to 1051,628)   26. Green scooter (1054,565 to 1093,628)   27. Bike racks (1100,574 to 1142,628)
+28. Three short grey bollards (359,593 to 373,619), (466,593 to 484,619), (489,595 to 507,619)
+29. Jefferson Park arch: green board, both stone posts and both glowing globe lamps (537,984 to 796,1103)
+30. Griffith Park gate: green board and both stone posts with their lamps (10,156 to 167,257)
+31. Metro entrance green canopy with the white M sign (1066,1044 to 1187,1122)
+
+CHECK: is the background one flat magenta everywhere else? Are all objects whole and unchanged? OUTPUT: one image, 1347 x 1168 px.
+
+
+PROMPT C: ROOFTOPS AND SCREEN EDGES (attach the latest DTLA image)
+
+EDIT THE ATTACHED IMAGE. It is a finished painting of Downtown Los Angeles for a video game. Do NOT repaint or restyle anything. Output the same size as the attached image (1347 x 1168 px), PNG, same framing, nothing shifted, nothing resized.
+
+THE TASK: make a CUTOUT LAYER. Keep ONLY the objects listed below, exactly as painted: same pixels, same position, same size, same colors, same light. Fill EVERYTHING ELSE with flat pure magenta (#FF00FF), one solid color, no gradient, no shadow, no glow, no outline, no texture. Magenta must appear nowhere on the objects themselves.
+
+RULES
+- Cut each object out cleanly along its own edge. Include all of it, from its highest point down to where it touches the ground (trunks, pots, feet, posts). Do not include the ground, paving, road, wall, sky or buildings around it, except where the list says the building part itself is the object.
+- Where an object is partly hidden by another listed object, keep both as painted.
+- Boxes are pixel boxes in the attached image (left,top to right,bottom), off by up to 20 px. Each box holds one object; cut out only the object inside it.
+- Add nothing. Do not redraw, fix, sharpen or improve any object. If an object is not where the box says, find it nearby.
+- No text, border, watermark or caption.
+
+KEEP ONLY THESE OBJECTS (everything else magenta). These stand over the south sidewalk (y 585 to 640), so keep the part of each that rises above the building roof line:
+1. Wooden water tank on legs, on the red brick Backlot Wardrobe roof (166,584 to 222,666)
+2. Palm tree growing on that same roof (232,575 to 302,640)
+3. Two roof gardens (leafy bushes) on the tan TNB's Loft roof (445,603 to 505,640) and (516,603 to 596,640)
+4. Leafy bush on the green Grand Tower's left roof edge (712,596 to 758,640)
+5. The Grand Tower crown: the stepped green art deco top with the red beacon, from the beacon down to the roof line (765,539 to 892,638)
+6. Rooftop pipes and vents on the right shoulder of the Grand Tower (885,603 to 912,642)
+7. Leafy bush on the Nickel's roof, left (1115,596 to 1165,640)
+8. Wooden water tank on legs on the Nickel's roof (1167,609 to 1247,675)
+9. Tall palm trees and bushes along the right edge of the picture, crowns and trunks, from y 690 to 1010 (1288,484 to 1347,709)
+10. Palm trees and leafy bushes along the left edge, from y 840 to 1140 (0,589 to 123,800)
+
+CHECK: is the background one flat magenta everywhere else? Are the tanks, crown and palms whole and unchanged? OUTPUT: one image, 1347 x 1168 px.

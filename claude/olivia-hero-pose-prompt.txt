@@ -1,0 +1,38 @@
+IMAGE REQUEST: ONE SINGLE CHARACTER REFERENCE PICTURE. Return exactly one image, nothing else.
+
+ATTACH TWO PHOTOS: (1) the full-body photo of Olivia in the patterned dress, (2) the close-up of her face. Photo 2 is the face reference and wins for everything above the neck. Photo 1 is the outfit and body reference. Ignore every other person and the baby in the photos; draw Olivia alone.
+
+WHAT THIS IS
+The master reference picture of Olivia for "The Adventures of Tom", a family role-playing game with a classic 16-bit JRPG feel (Final Fantasy VI, Chrono Trigger) and hand-painted character sprites. This picture becomes the reference for every other sheet of her, so it must be the most detailed and the most recognizably HER. A friend who knows Olivia must recognize her instantly.
+
+WHO SHE IS
+Olivia, late thirties, a TV journalist and mom of two little kids. Quick, bright, warm, always mid-thought. Her default expression is the exact smile in the close-up photo: a big open friendly grin showing her top teeth, eyes crinkled a little, eyebrows relaxed, like she just spotted you across a room.
+
+HER FACE (copy the close-up photo as closely as the painted style allows)
+- Hair: long, past the shoulders, soft loose waves, honey blonde that is darker golden brown near the roots and lighter golden blonde through the lengths and ends. Parted on her left (the viewer's right), so a long sweep of hair falls across her forehead toward the viewer's left and frames that side of her face. The hair hangs over the front of both shoulders. No bangs.
+- Face shape: oval with soft full cheeks and a gently rounded chin. Forehead medium height.
+- Skin: fair with a warm golden tan, pink flushed cheeks, and a light scatter of small freckles across the nose and upper cheeks.
+- Eyes: warm medium brown, almond shaped, with long dark lashes and a soft happy squint when she smiles. Eyebrows a shade darker than her hair, naturally arched, medium thickness.
+- Nose: small and straight with a slightly rounded tip.
+- Mouth: wide warm smile, top teeth showing, soft pink lips, small smile lines at the corners.
+- Keep her real proportions. This is a light caricature, not a cartoon: the head may be a little larger than life and the eyes a little brighter, but every feature listed here must stay where it is on her face and look like the photo.
+
+HER OUTFIT (copy the dress in the full-body photo exactly, except for the print)
+- A cream colored, knee-length, loose flowing dress. Round neckline. Fitted through the shoulders, then a loose relaxed bodice. Wide, long, flowing bell sleeves that end just past the elbow in a soft wide opening (they drape and swing). A two-tiered gathered skirt: a short upper tier at the hip, then a fuller gathered lower tier that ends just above the knee and swings.
+- THE PRINT: the photo shows a Halloween print. REPLACE IT with a playful all-over FRUIT print on the same cream background at the same scale: small scattered strawberries, lemons, oranges, cherries on stems, watermelon slices, peaches, bunches of purple grapes and little green leaves, evenly scattered in every direction like a children's picture-book pattern. No pumpkins, ghosts, bats, webs, stars or moons anywhere.
+- Bare legs. Dark brown ballet flats with a small round gold medallion on each toe.
+- No jewelry, no bag, no phone, no watch, no hair bow, no other props. Hands empty, nothing held.
+
+THE PICTURE (strict)
+- One single image, one character, no grid, no cells. Portrait orientation, about 1024 x 1536 pixels (use the largest portrait size your tool offers).
+- Full body, head to feet in the frame, with empty margin above her head and below her feet.
+- Standing neutral and relaxed, weight even on both feet, feet flat on the ground, body turned a little (three-quarter view) toward the viewer, face turned to the viewer, clear and readable, hands relaxed at her sides. Smiling as in the close-up photo.
+- Background: one flat solid color, pure magenta #FF00FF, filling the whole image. No magenta anywhere on Olivia. No borders, labels, captions, titles or text.
+- Draw ONLY Olivia. No ground shadow, no effects, no props, no other people, no baby.
+
+ART STYLE
+- Hand-painted 16-bit JRPG character sprite look (Final Fantasy VI, Chrono Trigger concept-art feel) with a light friendly caricature flavor. Soft painted shading, no thick black outlines (at most a thin darker rim where it helps the silhouette). Detailed painted fabric so the fruit print reads clearly.
+- Soft key light from the upper left, shadow on the lower right, warm slightly desaturated painterly palette.
+- Family friendly for children aged 6 and up.
+
+NEVER substitute. Do not change the dress shape, do not keep any Halloween motif, do not add props, text or a second figure. If anything is unclear, draw Olivia as described, standing relaxed, smiling like the close-up photo.

@@ -1,0 +1,12 @@
+EDIT THE ATTACHED IMAGE. Attach the approved Long Island Town Square painting to this message first. It is the master. This is a mechanical cutout edit, not a redraw: do not repaint, restyle, improve, resize, move, crop, mirror or re-compose anything. Output exactly the same canvas size and aspect ratio as the attached image, with every kept object at exactly the same position, scale, colors and detail as in the master, so that this result lines up with the master pixel for pixel when laid over it. Generate the image now. Do not make a plan, diagram or description.
+
+THE EDIT: BUILDING TOPS ONLY (the parts a character walks behind or under)
+For each of the eight shops, KEEP only the upper part: the full roof (all tiles, slopes, ridges, dormers and skylights), chimneys, every roof prop and emblem (the oven chimney and smoke, the owl, the tower, the giant watering can, the brass coin, the snail-shell spiral, the copper kettle and steam, the observatory dome with telescope, crescent moon and brass globe, the roof light box), the eaves and gutters, and every awning, canopy or overhang above a door or window, plus the bracket-mounted sign boards that hang forward of the wall.
+Cut each shop at the eave line: below the eaves and awnings the wall, door, windows, steps and ground become flat magenta. Keep the underside of each awning and eave exactly as painted.
+EVERYTHING ELSE becomes flat magenta: all lower walls, doors, windows, steps, flat wall signs, cobbles, grass, trees, fountain, benches, lamps, boards, props and sky.
+Keep all eight shop tops in one image at their exact master positions.
+
+BACKGROUND RULE
+Everything not kept is replaced with ONE perfectly flat, uniform, pure magenta fill, exactly #FF00FF, with no gradient, no texture, no shadow, no glow, no outline, no vignette. Kept objects have crisp, clean, hard edges directly against the magenta, with no magenta fringe, halo or soft feathering, and no cast shadow on the magenta. Do not add new objects, text, borders, labels or frames. Do not keep any ground, cobble, grass, wall or sky unless it is listed as kept below.
+
+Deliver the single edited image itself.

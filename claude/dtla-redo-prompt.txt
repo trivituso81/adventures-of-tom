@@ -1,0 +1,106 @@
+DOWNTOWN LA REDO: PASS 1 (THE MAIN PAINTING)
+
+Paint one new image of Downtown Los Angeles for a family RPG, in a 16-bit era storybook style grown up into rich painted detail. Hand-painted brush texture, warm golden-hour light from the upper left, long soft shadows falling to the lower right, glowing shop windows and street lamps just coming on. Same mood as a cozy city at sunset, saturated but not neon. No people and no animals.
+
+CANVAS
+- 1920 x 1664 px, landscape (15:13), PNG. Painted to all four edges: no frame, border, vignette, letterbox bars, caption or watermark.
+- All coordinates are pixels from the top left corner. 1 tile = 64 px. Anything may be off by up to 32 px, never more. If your output size differs, scale every number in proportion.
+
+CAMERA (the most important rule, the old painting got this wrong)
+- One fixed three-quarter view from the south, camera pitched about 35 degrees down, in PARALLEL (orthographic) projection, like a classic 16-bit RPG city.
+- Every vertical edge is perfectly vertical. Parallel lines stay parallel. Nothing converges toward a vanishing point. No wide-angle or fisheye distortion, no tilt-shift blur, no rotation, no diagonal streets.
+- Streets that run east to west are perfectly horizontal on the canvas. Streets and paths that run north to south are perfectly vertical.
+- Every building, prop and vehicle uses this same angle. Each building shows its flat FRONT facade facing the viewer and its roof top as a shallow band above it. Do NOT show side walls, so neighbors never read as angled.
+- Nothing may be cut off by a canvas edge unless it is a street or path that deliberately continues off the picture (the three exits below). Every building, tree, water tank and sign is fully inside the canvas. The edges are closed by low walls, hedges and palms (see EDGES).
+
+LAYOUT (a strict grid; buildings sit exactly on these footprints)
+Every building footprint is 320 px wide. The facade fills the full 320 px (a cornice may overhang up to 16 px). The DOOR LINE is the y where the front door meets the sidewalk. Building art rises from the door line, never above the maximum height listed (so nothing runs into the top edge or into the boulevard).
+
+North row (front doors face south onto the boulevard):
+1. GOLDEN HOUR COFFEE: x 320 to 640, door center x 480, door line y 512. Warm red brick, three floors, rooftop water tank, green and red-striped awning, cafe chairs. Max height 440.
+2. RAMEN RAMEN: x 640 to 960, door center x 800, door line y 512. Brick, four floors, red awning, steaming bowl sign, lanterns. Max height 440.
+3. THE STARLITE (Broadway-style movie palace): x 1024 to 1344, door center x 1184, door line y 576. Cream stone, ornate deco facade, sunburst over a glowing red marquee. Max height 440.
+4. NICKEL'S (a general shop): x 1408 to 1728, door center x 1568, door line y 576. Sage green and cream stone, two floors, teal awning, a gold coin hanging sign. Max height 440.
+The gaps between buildings (x 960 to 1024 and x 1344 to 1408) are narrow dead-end alleys closed by a fence, dumpsters or a fire escape. They are not walkable.
+
+South row (front doors face the viewer, onto the paved plaza walk below them; the roofs sit just under the boulevard):
+5. BACKLOT WARDROBE: x 128 to 448, door center x 288, door line y 1216. Dark red-brown brick loft, three floors, rooftop water tank, purple awning, a rack of costumes in the window. Roof top must be at y 840 or lower on the canvas (max height 376).
+6. TNB'S LOFT: x 576 to 896, door center x 736, door line y 1280. Tan stone loft, three floors, dark navy awning, plants and pottery in the window. Max height 440.
+7. THE GRAND TOWER: x 1024 to 1344, door center x 1184, door line y 1280. Blue-grey stone and teal deco tower with green glass bays, drawn as a tall five-floor facade with a stepped crown and a small blinking red light on top. Max height 440.
+8. ANGEL CITY CAB CO.: x 1408 to 1728, door center x 1568, door line y 1344. Cream stone with a checkered taxi band, two floors, rooftop water tank, gold awning. Max height 504.
+Between the south-row buildings there is nothing but sidewalk planters and lamps (x 448 to 576 and x 896 to 1024 are open sidewalk, x 1344 to 1408 is open).
+
+GROUND (all must read clearly, level and flat)
+- The boulevard: an east-west street from the left edge to x 1856. North sidewalk y 512 to 640 (red painted curb line at y 640), asphalt road y 640 to 768 with a yellow double center line at y 704 and a crosswalk near x 1700, boulevard south sidewalk y 768 to 840. Wide and clear, no cars parked in the lanes.
+- West sidewalk: a vertical sidewalk x 64 to 128 from the boulevard (y 840) down to the plaza walk (y 1216), running along the west edge of Backlot Wardrobe.
+- Plaza walk (below the south row): open paved ground y 1216 to 1472 in front of the south row, continuing to y 1536 around the Metro entrance, and a plaza x 640 to 1280 down to the south exit.
+- Keep 64 px of clear paving in front of every door line: no planter, lamp, bench or sign in that zone.
+
+THREE EXITS (each must look like a deliberate way out that continues off the picture, drawn OPEN and clear: no closed gate, barrier or lock, the game adds those itself)
+- NORTHWEST: wide stone steps x 192 to 320 climbing from y 448 up to a stone gate arch at y 192, then a trail disappearing into palms and hills. Two stout stone posts at x 160 and x 352 hold a green board high above the steps (board center (256, 104), 240 px wide x 96 px tall including a thin carved wood frame, face 210 x 64). The steps stay clear under it.
+- SOUTH: a street and wide steps x 768 to 1024 leaving the bottom edge from y 1472, with a trail of crosswalk stripes and a tree-lined road continuing off the picture. Two tall stone posts at x 736 and x 1056 (feet at y 1500) hold a green board high above (board center (896, 1380), 300 px wide x 100 px tall, face 270 x 68). The road stays clear and visible under it.
+- EAST: a service street leaving the right edge at y 768 to 896 (x 1792 to 1920), with an open iron gate pulled aside, a guard booth beside it at about (1830, 700), and a green board high on two posts at x 1760 and x 1888 (board center (1824, 640), 288 px wide x 100 px tall, face 258 x 68). The street under the board stays clear.
+- Exit boards: deep forest green face (about #2F4A35), thin gold inner line, cream-gold lettering (about #F2E6B8) with a thin dark green outline. No other path touches any canvas edge.
+
+EDGES (so nothing is cut off)
+- Left and right edges: a continuous low stone retaining wall with planters, palms and lamp posts, wall top about 90 px tall, painted to the edge. No building is cut by the left or right edge.
+- Top edge: behind the north-row roofs, a hazy distant skyline of towers and hills, fully drawn and fading to warm sky, with at least 24 px of sky above the tallest roof element.
+- Bottom edge (outside the south exit): low walls, hedges and a row of small trees along y 1540 to 1664, no cut-off roofs.
+
+OBJECTS AT FIXED SPOTS (center points, tolerance 32 px)
+- Taco truck, painted in teal and orange with a striped awning: parked at the south curb, x 1344 to 1536, y 704 to 896, facing the viewer.
+- Bus shelter with a bench and a glass roof: x 1536 to 1664, y 768 to 896, on the south sidewalk.
+- Metro entrance: a green iron railing and a canopy over stairs going down, x 1280 to 1472, y 1408 to 1536, with the word METRO on the canopy.
+- Yellow checkered taxi: parked in front of Angel City Cab Co., x 1600 to 1728, y 1344 to 1472.
+- A fire hydrant at about (1360, 780), a hot dog cart near (400, 980), about ten slim iron lamp posts along the sidewalks (shafts no wider than 20 px, each with a clear base), planters, street trees in square grates.
+- Six palms with bases on sidewalk planters at about (992, 600), (1376, 600), (160, 830), (960, 830), (1760, 620), (1536, 1570).
+
+PASS-THROUGH OBJECTS (a game character about 100 px tall will walk behind these, so they must be easy to separate from the ground)
+- Palms: a slim trunk (no wider than 40 px) with a clear, fully visible base on a planter, fronds starting at least 150 px above the base. Show paving behind and under every palm.
+- Storefront awnings: the lowest edge at least 110 px above the paving. Nothing hangs below it.
+- The three exit boards, the Metro canopy, the bus shelter roof and the Starlite marquee: each stands on clearly visible ground with open space beneath it. Nothing is painted across the walking surface under them.
+- Show a strip of at least 40 px of visible paving behind and under each of these objects. Do not paint leaves, shadows darker than 40 percent or hanging items over walkable ground.
+
+LETTERING (hand-painted signwriter style that belongs in the painting: bold, slightly rounded capitals, a little irregular like brush work, a thin lighter highlight on the top edge of the letters and a soft shadow underneath, lit from the upper left; ALL CAPITALS; spell every word exactly, letter by letter; both lines the same letter height; text fills about 85 percent of the face width and never touches the frame)
+Shop fascia boards: a flat straight-on board centered over each door, face about 240 x 64 px, bottom edge at least 30 px above the highest part of the door or awning below it, never overlapping a door, awning or lamp.
+1. GOLDEN HOUR / COFFEE
+2. RAMEN / RAMEN
+3. STARLITE (one line, on the marquee)
+4. NICKEL'S (one line, apostrophe between L and S)
+5. BACKLOT / WARDROBE
+6. TNB'S / LOFT
+7. THE GRAND / TOWER
+8. ANGEL CITY / CAB CO.
+9. METRO (one line, on the canopy)
+Exit boards: GRIFFITH / PARK (northwest), JEFFERSON / PARK (south), STUDIO / LOT (east).
+Taco truck lettering: TACOS (one word, on the side).
+No other words, numbers, logos, banners, arrows, flourishes or tiny text anywhere, and no freestanding notice signs, ads or billboards.
+
+DO NOT ADD: people, animals, other vehicles, extra doors, extra exits, gates that are closed, side walls on buildings, fog that hides the ground, any text not listed.
+
+SELF-CHECK BEFORE YOU FINISH
+1. Are all vertical edges vertical and all streets perfectly horizontal or vertical?
+2. Is every building fully inside the canvas, with no building sliced by an edge?
+3. Do the eight door centers match the x values above, and does each sit on its door line?
+4. Is every sign spelled exactly as listed, and is it at least 30 px clear of its door?
+5. Do exactly three paths leave the picture (northwest steps, south street, east service street)?
+6. Is the ground visible under and behind every palm, awning, board, canopy and shelter?
+
+OUTPUT: one image, 1920 x 1664 px.
+
+
+=============================================================
+PASS 2 (RUN ONLY AFTER YOU APPROVE PASS 1): THE CLEAN GROUND PLATE
+Attach the approved Pass 1 image and use this prompt.
+=============================================================
+
+EDIT THE ATTACHED IMAGE. Keep it pixel-for-pixel identical in composition, camera, colors, buildings, street layout, vehicles, lamps and lettering, with ONLY these removals. Output 1920 x 1664 px, PNG, same canvas, nothing shifted or rescaled by even one pixel.
+
+REMOVE completely, and paint what would be behind each one (facade wall, windows, sidewalk, road, steps, sky):
+1. All six palms (trunks, fronds and shadows): paint paving, planter or street where they stood.
+2. All eight storefront awnings: paint a plain facade, the storefront windows and door frame behind each. Keep the fascia sign boards.
+3. The three green exit boards and their posts, and the stone gate arch over the northwest steps: paint open steps, street and trail where they stood.
+4. The Metro canopy (keep the railing and stair opening), the bus shelter roof (keep the bench), and the Starlite marquee (paint a plain doorway there).
+
+Do not change anything else. Do not add anything. Do not move, soften or recolor any other pixel.
+OUTPUT: one image, 1920 x 1664 px.

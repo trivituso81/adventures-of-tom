@@ -1,0 +1,18 @@
+WHISPERING MARSH: STENCIL PROMPTS
+Send these in the SAME chat that made the approved Whispering Marsh painting, one at a time, only after Claude has sent you the walk map and cutout plan and you approved them. Send the results back to Claude with no words. Claude uses them only to know where to cut; the game uses the pixels of your original painting.
+Note for the install: the game draws the old reeds that block the top left path until the story opens it; the painting leaves the path open.
+
+=== STENCIL 1: REEDS, CATTAILS AND TREES ===
+Make a cutout mask of the marsh painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every clump of tall reeds or cattails that rises above a person's waist, the two very tall old reed clumps at the top left path, every tree and the twisted dead tree, each down to where it meets the water or ground.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF: water, lily pads, boardwalks, grass, low plants, posts, boards, stumps, the rowboat. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 2: POSTS AND EXIT BOARDS ===
+Make a cutout mask of the marsh painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: the two green exit boards (CATTAIL / PIER and SUNDIAL / HOLLOW) with both posts down to the ground; every boardwalk post and mooring post that rises above the planks, with its rope, down to where it meets the planks or water.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.
+
+=== STENCIL 3: STUMPS AND TALL PROPS ===
+Make a cutout mask of the marsh painting you just made. Do not repaint, restyle, move, resize or crop anything. Same canvas size and framing, every kept object at exactly the same position and size, so it lines up with your painting when laid over it.
+KEEP ONLY: every mossy stump taller than a person's knee, the half-sunken rowboat, and any rock taller than a person's knee, each whole down to where it meets the water or ground.
+EVERYTHING ELSE becomes one flat, uniform, pure magenta #FF00FF. No gradient, no texture, no shadow, no glow, no outline. Kept objects keep crisp, clean edges directly against the magenta, with no fringe or halo. Add nothing, no text or border. Deliver the image itself.

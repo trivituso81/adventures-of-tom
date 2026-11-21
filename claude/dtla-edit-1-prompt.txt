@@ -1,0 +1,53 @@
+DOWNTOWN LA EDIT 1 (attach the current DTLA image and use this prompt)
+
+EDIT THE ATTACHED IMAGE. It is the painted Downtown Los Angeles of a family RPG, in a 16-bit era storybook style with warm golden-hour light. Keep the painting style, lighting, palette and camera angle exactly as they are. Make ONLY the changes listed under A to E. Everything else stays exactly the same: the eight buildings and their signs, the Griffith Park gate and steps, the Metro entrance, the boulevard, the crosswalks, the palms not mentioned below, the plaza, the benches and planters.
+
+CANVAS
+- Output the same size as the attached image (1347 x 1167 px), PNG, painted to all four edges, no border, vignette or watermark.
+- All coordinates below are pixels from the top left corner of the attached image. Anything may be off by up to 20 px, never more.
+
+A. FIX THE SOUTH EXIT SIGN
+The green arch board over the steps at the bottom center currently reads DOWNTOWN. Change it to read: JEFFERSON PARK (one line, all capitals, spelled exactly letter by letter), with one bold DOWN ARROW on each side of the words, so the face reads: [down arrow] JEFFERSON PARK [down arrow].
+- Keep the arch, the stone posts and globe lamps, and the green board colors. You may make the board face a little taller and wider (up to 260 x 52 px) so the words and both arrows fit without crowding. Arrows are cream-gold with a thin dark green outline, about 30 px tall, pointing straight down, the same color as the lettering.
+- Lettering style: hand-painted signwriter lettering: bold, slightly rounded capitals, a little irregular like brush work, a thin lighter highlight on the top edge and a soft shadow underneath, lit from the upper left, cream-gold paint (about #F2E6B8) with a thin dark green outline. No other words or arrows.
+- Keep the steps and the crosswalk below the arch clear and open.
+
+B. OPEN THREE WALKWAYS FROM THE BOULEVARD TO THE PLAZA (most important)
+The player must be able to walk from the north half of the picture (the boulevard and the south sidewalk just below it) to the plaza in the south half. Right now the gaps between the south-row buildings are blocked by walls, bushes, trees, lamps and fire escapes. Turn each gap into a clear paved walkway:
+- Walkway 1: between Backlot Wardrobe and TNB's Loft, x 362 to 430.
+- Walkway 2: between TNB's Loft and The Grand Tower, x 644 to 722.
+- Walkway 3: between The Grand Tower and Angel City Cab Co., x 937 to 1025.
+- Each walkway runs straight north to south from the sidewalk below the boulevard (y about 500) down to the plaza (y about 790), the full width listed, paved with the same sandstone paving as the plaza, perfectly flat, no steps, no curb, no gate.
+- REMOVE everything standing inside the three walkways: stone walls, retaining walls, hedges, bushes, trees, palms, planters, trash cans, dumpsters, crates, signs, benches, banners, and every lamp post. Fire escapes may stay only if painted flat against the building wall and never reaching more than 8 px into the walkway.
+- The walkway floor must be fully visible from top to bottom, with only soft building shadow across it.
+- Where the walkway meets the sidewalk below the boulevard (y 480 to 530) and the plaza (y 780 to 810), the paving is continuous, with no wall, planter or hedge across the opening.
+- MOVE each removed lamp post forward and out of the way: re-place it in front of the nearest building facade, standing at the front curb line (y about 790), at least 20 px outside the walkway edge, so it no longer blocks any path. Lamp posts at about (378, 690), (655, 700), (700, 740), (950, 740) and (975, 690) are the ones to move. Move any banner that hung on them with the post.
+- Leave all other lamp posts, and the 64 px of clear paving in front of every door, as they are.
+- Keep the buildings themselves unchanged: same positions, sizes, colors and signs.
+
+C. MAKE IT A BIG CITY: DOWNTOWN LA SKYLINE BEHIND THE NORTH ROW
+It feels like a small town. Replace the palm and hill backdrop that fills the top of the picture behind the north-row buildings (from the roof lines up to the top edge, x 340 to 1347) with a dense downtown Los Angeles skyline of skyscrapers, lit by the same golden-hour light:
+- 6 to 8 towers of different heights and styles, standing behind the north row so only their upper parts show above and between the roofs: a tall glass tower with a stepped crown, a slender needle-top tower, a cylindrical glass tower with a ring at the top, a stone art deco tower with a pyramid cap, a boxy dark glass office slab, and two or three shorter mid-rise towers. Glass faces catch the orange sunset, windows glow warm, rooftop antennas, a few blinking red lights.
+- The tallest towers run up past the top edge of the picture. A hazy purple-gold atmosphere softens the farthest ones. They are drawn in the SAME three-quarter angle as the buildings in front, with straight vertical edges.
+- Keep the Griffith Park hills, sunset and palms only in the top-left corner (x 0 to 330, y 0 to 200) above the gate, as they are now.
+- The towers sit behind the north-row buildings. Do not change the north-row buildings, their roofs or their water tanks. Do not add any text, logos or signs on the towers.
+
+D. MORE URBAN STREET DETAIL (small additions, nothing blocking a path)
+- Replace about half of the palms in the south plaza (the bottom third) with paved plaza, street trees in square grates and low concrete planters, so the south half feels urban instead of like a garden. Keep the Metro entrance, the arch steps, the central round planter and the benches.
+- Add traffic signals on poles at the four corners of the boulevard crossings, a few parking meters, newspaper boxes, bike racks and a manhole cover in the road, all small and standing against building fronts or at curbs, never inside the three walkways and never in front of a door.
+- Add a mural (abstract color shapes, no letters) on the blank wall of the north-row alley gaps, and a few more fire escapes on the building fronts.
+- Keep the boulevard wide and clear. No vehicles in the traffic lanes.
+
+E. TWO MISSING PROPS
+- A teal and orange taco truck with a striped awning and the single word TACOS on its side, parked at the curb of the boulevard's south lane at about x 1060 to 1240, y 415 to 490, facing the viewer, same angle as everything else.
+- A yellow checkered taxi parked on the plaza in front of Angel City Cab Co. at about x 1180 to 1290, y 790 to 860, facing the viewer.
+
+DO NOT: move or resize any building, change any existing sign text, add people or animals, add any other text, add gates or barriers, or add anything inside the three walkways.
+
+CHECK BEFORE YOU FINISH
+1. Can a person walk from the sidewalk under the boulevard to the plaza through each of the three gaps without touching anything?
+2. Does the arch read JEFFERSON PARK with a down arrow on each side?
+3. Do skyscrapers now rise behind the north row?
+4. Are the taco truck and taxi present?
+
+OUTPUT: one image, 1347 x 1167 px.

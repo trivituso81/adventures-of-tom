@@ -1,0 +1,54 @@
+Create the actual environment painting for Area 04, Cattail Pier, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+OUTPUT
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.
+
+STYLE AND CAMERA
+A richly detailed, polished hand-painted digital illustration of a small fishing pier on a bay, like premium mobile game environment art. Smooth blended brushwork, glossy highlights on the sparkling water, wet wood, buoys and the shack roof, saturated jewel-toned colors, crisp clean silhouettes, fine detail on every surface. Fixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the yard, the shack, the pier and the water together. Same camera across the whole uninterrupted scene. No photorealism, no plastic 3D look, no top-down floor plan, no visible pixels, no thick black outlines.
+
+SCALE AND CAMERA DISTANCE (important)
+This is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire pier, yard and shack fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:
+- A grown-up person standing on a path would be only about one fifteenth of the picture height.
+- Paths are about two people wide, about one twelfth of the picture width.
+- The exit boards are about one seventh of the picture width.
+- The bait shack is about one fifth of the picture width; the bench is about one twelfth of the picture width; the rowboat about one eighth.
+
+SETTING
+A sunny Long Island bay with a little wooden fishing pier, on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, sparkles on calm blue-green water. Sandy dirt yard, beach grass, cattails, rocks, weathered wood, rope and fishing gear. Peaceful, salty and cozy.
+
+THIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST
+A character must be able to walk from either entrance to the shack door, the bench and the end of the pier. No fence, crate, rock or prop may wall off a route. Every path is at least two character-widths wide.
+- NORTH ENTRANCE: a sandy dirt road enters from the TOP edge at the center.
+- The road opens into a WIDE SANDY YARD across the upper third of the picture.
+- WEST ENTRANCE: from the yard a dirt road runs to the LEFT edge, about one quarter of the way down.
+- THE BAIT SHACK stands FREESTANDING on the right side of the yard, with sandy ground on every side so you can walk all the way around it. Its door and counter face the yard.
+- THE PIER: a wide wooden boardwalk, wide enough for two people side by side, runs from the middle of the yard straight DOWN the center into the water and ends in a broad square wooden platform about two thirds of the way down. Low rope railings and posts line its edges; the walking surface is open.
+- The lower third of the picture is open water around the platform.
+- No other exits: wherever the yard nears the right edge or the water edge, it ends in beach grass, rocks and a low fence.
+- Barrels, crates, traps and the bench sit beside the paths, never in them.
+
+LANDMARKS AND PROPS
+- Bait shack (REEL'S BAIT), strongly themed so it reads as a bait shop with no sign: a weathered blue-gray clapboard shack with a mossy shingle roof, fishing nets and colorful buoys hanging on its walls, a striped awning over a little bait counter window, a bubbling minnow tank and a worm barrel by the counter, a lobster trap and crates stacked at its side, a fish-shaped weathervane on the roof.
+- Boppy's bench (left side of the yard, facing the water): a weathered wooden bench with a thermos on it.
+- On the pier platform: a tackle box, a bucket, a coil of rope and a folding stool where Boppy fishes.
+- A small wooden rowboat tied to the platform with a rope, floating in the water beside it.
+- Cattails and beach grass along the shore, mooring posts standing in the water, a seagull-free sky.
+
+SIGNS: DESIGN AND LETTER EACH ONE YOURSELF
+ALL CAPITALS, two centered lines, large and easy to read, spelled exactly as written, letter by letter. Signs never cover a door, awning or lamp.
+1. Shack sign REEL'S / BAIT (R-E-E-L, apostrophe, S; B-A-I-T): a carved wooden board shaped like a big fish, mounted on the shack front above the awning, letters painted in sea blue and white.
+EXIT BOARDS: two matching green boards with carved cream-gold letters, both the same design and height, each hung HIGH between two tall wooden posts like an archway over its road, the board's bottom edge well above head height, the road open underneath.
+2. North: over the north road, a little below the top edge: RIVITUSO / ROW (R-I-V-I-T-U-S-O; R-O-W).
+3. West: over the west road, a little in from the left edge: WHISPERING / MARSH (W-H-I-S-P-E-R-I-N-G; M-A-R-S-H).
+These three signs are the only words in the image. No other signs, notices, chalkboards or price tags.
+
+LAYERING (the game cuts trees, posts, boards, the shack roof and tall props out as separate layers)
+Sand, grass and boardwalk continue unbroken under and behind every tree, post, barrel, crate and the shack eaves. Every tall object has a clear visible base with ground or deck showing behind it. Crisp clean silhouettes on tree canopies, posts, boards and the roof edge. Nothing floats.
+
+LIGHT AND COLORS
+Warm golden key light #FFE1A0, lilac accent in shade #C8A5DC, warm sand #E3C99A, weathered wood #9C7A55, bay water #3F8E96, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under the shack, posts and props, an open sunlit yard and pier.
+
+STRICT EXCLUSIONS
+No people, no animals, no birds, no fish visible, no monsters. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the three signs. No other buildings, no cars, no other boats. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.
+
+Deliver the single environment painting itself. Do not replace the painting with a description of it.

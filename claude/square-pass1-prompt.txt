@@ -1,0 +1,86 @@
+LONG ISLAND TOWN SQUARE, FRESH PAINTING. No attachment needed.
+
+Paint one new image of the painted town square of a family RPG, in a hand-painted storybook style: three-quarter top-down view, warm afternoon sun from the upper left, hand-painted brush texture, fine detail. Pale sandy cream paving, leafy green trees, big colorful tiled roofs, flowers in wooden barrels and planters. Sharp and high resolution. No people, no animals.
+
+CANVAS
+- 1920 x 1664 px, landscape (15:13), PNG. Painted to all four edges: no frame, border, vignette, letterbox bars, caption or watermark.
+- Coordinates are pixels from the top left corner. Positions may be off by up to 64 px, never more. If your output size differs, scale every number in proportion.
+
+CAMERA
+- One fixed three-quarter top-down view, the same angle for every building, tree, prop and vehicle. Vertical edges stay vertical. Each building shows its front wall with the door and windows at the bottom and a large roof slope above it, with dormers and chimneys.
+
+LAYOUT (strict grid; each footprint is 320 px wide; the facade fills the full 320 px)
+Two rows of four buildings face each other across a wide cobbled plaza. The DOOR LINE is the y where a front door meets the cobbles.
+North row (doors face south, door line y 500, building art rises to about y 120 at the highest):
+1. CRUMB BAKERY: x 128 to 448, door center x 288.
+2. HUSH LIBRARY: x 576 to 896, door center x 736.
+3. SPROUT HOUSE: x 1024 to 1344, door center x 1184.
+4. PENNY'S POCKETS: x 1472 to 1792, door center x 1632.
+South row (doors face the viewer, door line y 1215, roofs start at about y 850, tall roof features no higher than y 790):
+5. SNAIL MAIL: x 128 to 448, door center x 288.
+6. KETTLE COTTAGE: x 576 to 896, door center x 736.
+7. MOON CLUB: x 1024 to 1344, door center x 1184.
+8. TAXI CO.: x 1472 to 1792, door center x 1632.
+The gaps between buildings (x 448 to 576, x 896 to 1024, x 1344 to 1472 in both rows) are 128 px wide. Only two gaps are open: the north steps (x 448 to 576, north row) and the south street (x 896 to 1024, south row). Every other gap is closed with a hedge, fence, trees and flower beds, not walkable.
+
+GROUND (flat, level, readable)
+- Pale sandy cream flagstones and cobbles in large, soft, low-contrast painted forms (never a fine repeated texture), light and even in tone so every object stands out against them.
+- The plaza fills y 500 to 850 between the rows. A cobbled east-west shopfront street runs along the south row at y 1280 to 1408, its two ends closed with hedges.
+- Keep 64 px of clear open cobble directly below every door step: no planter, lamp, bench, sign or prop there.
+- Two wooden benches with flower planters on the plaza: left at x 225 to 500, y 600 to 750; right at x 1190 to 1450, y 600 to 750.
+- A few barrels, flower pots, low hedges and small wooden fences as props against the building fronts.
+- Two tall iron lamp posts, warmly glowing, standing alone on the plaza with feet at about (500, 840) and (1130, 840).
+
+THE EIGHT BUILDINGS: EACH A FUN, UNIQUE DESIGN FROM ITS OWN THEME (MOST IMPORTANT)
+Every building is designed around what happens inside it, with its own architecture, height, roofline, wall material, props and personality, and its sign is part of that same design, like a row of lovingly designed storefronts. A visitor can tell what each shop is from its silhouette alone. No two buildings share a roof shape, wall material or sign.
+1. CRUMB BAKERY (warm orange-brown brick): a huge brick bread-oven chimney puffing soft smoke, a window full of golden loaves and pastries, a striped awning, flour sacks and a wooden bread cart by the door. SIGN: a giant wooden baker's bread peel (long-handled paddle) mounted flat above the door like a banner, the words piped on in thick white icing in bouncy, plump, swirly cursive pastry lettering. Two lines: CRUMB / BAKERY.
+2. HUSH LIBRARY (plum purple stone): a tall stone library with a round stone tower corner, tall arched windows glowing warm, a carved stone owl on the roof peak beside a gold open-book emblem, ivy on the walls. SIGN: letters carved into a great pale stone open book set into the facade above the door, the carved letters filled with gold leaf, in quiet, thin, widely spaced classical Roman capitals. Two lines: HUSH / LIBRARY.
+3. SPROUT HOUSE (leaf green): a glass-and-white-iron greenhouse with a domed glass roof glowing from inside, stacked terracotta pots, a giant copper watering can by the door, vines climbing the frame. SIGN: lettering made of living twisting green vines with tiny leaves and little pink blossoms, growing along a curved white iron trellis arch above the door, in loose, organic, hand-grown letterforms. Two lines: SPROUT / HOUSE.
+4. PENNY'S POCKETS (red and gold): a theatrical old-fashioned emporium with a scalloped canopy, a giant brass coin on a bracket (no writing on it), curtained display windows full of bags, hats and trinkets, a stepped gabled facade. SIGN: a theater-style marquee board outlined with a ring of glowing round bulbs, bold circus-poster wood-type lettering in gold, red and cream with a black drop shadow. The apostrophe sits between Y and S. Two lines: PENNY'S / POCKETS.
+5. SNAIL MAIL (slate blue): a quirky post office with a giant spiral snail shell on its roof, a brass mail slot, a red mailbox and a blue drop box beside the door, a bicycle leaning on the wall, parcels on the step. SIGN: a giant postage stamp with perforated edges above the door, the words rubber-stamped across it like a postmark in worn, slightly crooked typewriter-style capitals in ink blue, with wavy cancellation lines (lines only). Two lines: SNAIL / MAIL.
+6. KETTLE COTTAGE (terracotta): a cozy terracotta-tiled cottage with a huge copper kettle on the roof that steams, a round teacup-shaped window, little outdoor tea tables, a leaning chimney. SIGN: a hanging sign shaped like a big china teacup and saucer, with delicate curly Victorian tea-tin lettering in cobalt blue on white porcelain with a gold rim. Two lines: KETTLE / COTTAGE.
+7. MOON CLUB (deep navy): a round observatory with a brass dome roof, a telescope poking out, a gold crescent moon and a brass globe, tiny gold stars on the dark walls. SIGN: a polished brass crescent-moon-shaped plaque above the door with glowing gold lettering like constellations, thin geometric Art Deco capitals made of lines and star dots, the two O letters drawn as perfect circles. Two lines: MOON / CLUB.
+8. TAXI CO. (golden yellow): a retro 1950s garage and dispatch office with a flat roof, a long checkerboard band, a big roof-top light box, chrome trim, a wall of tires, a fuel pump, and one parked yellow taxi on the plaza in front (not blocking the door, out of the 64 px door zone). SIGN: a chrome-edged rectangular light-box with heavy, bold, speedy italic block letters in black on glowing yellow with checker strips top and bottom. A period after CO. Two lines: TAXI / CO.
+Sign rules: all eight use clearly different lettering styles (pastry cursive, carved Roman, living vines, circus wood-type, rubber-stamp typewriter, Victorian tea-tin, geometric Art Deco, speedy italic block), different board shapes, materials and colors, so they never look like one sign repeated. Each sign is centered over its door in a box about 300 x 150 px, bottom edge at least 30 px above the highest part of the door frame or awning, never covering a door, awning or roof emblem, drawn straight on and level. Letters at least 38 px tall with thick strokes and strong contrast, readable when the picture is shrunk to 40 percent. Spell every word exactly, letter by letter, ALL CAPITALS. No extra words, numbers or tiny text anywhere.
+
+THE FOUNTAIN (IMPORTANT, PAINT IT FIRST AND MAKE IT BIG)
+One large three-tier wishing fountain is the centerpiece and the biggest, brightest object in the square. All of its art lies inside the box x 512 to 928, y 520 to 840 (about 410 px wide, 320 px tall). Pale cream limestone that clearly contrasts with the cobbles, glowing in the golden light, readable at a glance even when the whole picture is shrunk to a phone screen.
+- Bottom: a wide round basin about 410 px across, thick scalloped rim, mossy stone at the base, clear turquoise water with ripples and a few gold coins glinting under the surface.
+- Middle: a carved stone column with a second, smaller bowl.
+- Top: a third small bowl with a plume of water arcing out and falling back, the water tip at y 520, no higher.
+- No statue, no figure, no animal, no plaque, no text. Flowers only as a low ring that stays visibly separate from the rim.
+- Nothing else touches the fountain. Keep 40 px of open cobble all around it. Soft contact shadow to the lower right, 32 px at most.
+
+THE THREE EXITS (the only ways out; paint all three open and clear, no gate or barrier)
+- North: the stone steps between the Bakery and the Library (x 448 to 576) leave the top edge. Two stout posts just outside the steps (x 416 and x 608, feet at about y 150) hold the north board, board x 368 to 656, y 8 to 136.
+- South: the street between Kettle Cottage and Moon Club (x 896 to 1024) runs from the plaza south to the bottom edge. Two tall black iron posts just outside it (x 880 and x 1040, feet at about y 1600) hold the south board mounted HIGH on them, board x 816 to 1104, y 1382 to 1510, so the street passes beneath it.
+- East: the cobbled opening in the right edge (y 576 to 704). Two tall wooden posts on its north side (x about 1700 and 1890, feet at about y 572) hold the east board floating above the opening at about y 430 to 550. It may overlap the lower right wall of Penny's Pockets but never its door (x 1600 to 1664) or its sign.
+- A worn cobble or dirt trail visibly continues off the picture at each exit.
+Everything else is closed: a continuous wooden fence with dense trees and bushes along the whole left edge, the right edge above and below the east opening, the bottom edge outside the south exit and the top edge outside the north exit. No cobbled path may run off the picture anywhere else.
+Exit boards: deep forest green face (about #2F4A35) with a thin gold inner line, cream-gold lettering, face about 230 x 70 px or larger, letters at least 34 px tall, each frame matching its setting, so they read as exits and stay distinct from the shop signs.
+9. North, GRUMP / HOLLOW: a rough-hewn wooden trail board, letters carved and painted cream. Two lines.
+10. South, RIVITUSO / ROW: a street-name style enamel board on tall black iron posts, cream serif capitals. Two lines.
+11. East, SCHOOL: a painted wooden board on tall wooden posts, bold cream block capitals in one line, like old schoolhouse signage.
+
+LAYERING RULES (for cutting the painting into layers so a small figure can walk BEHIND tall objects)
+1. Ground is one continuous layer. Every cobble, path, grass patch and street is fully painted behind and under every upright object. Where a tree trunk, lamp post, sign post, bench or the fountain stands, the ground around its base is visible on all sides.
+2. Keep at least a 40 px strip of clearly visible walkable ground directly behind every tall object's base (trunks, lamp posts, sign posts).
+3. Tree canopies may overhang the plaza edges by up to 60 px but must never cover a door, a sign, the fountain, an exit or the 64 px of cobble in front of a door. Every tree has a clear, tall trunk showing its base on the ground, and a canopy with a clean closed silhouette and a slightly darker rim, so foliage never blends into the ground.
+4. Every upright object has a crisp, closed silhouette with strong value or color separation from what is behind it. No fuzzy edges, no glow bleeding onto neighbors, no haze, no depth blur.
+5. Keep objects separate: at least 24 px of clear space between any two upright objects (a lamp never touches a tree canopy; the fountain touches nothing; signs do not touch each other).
+6. Each building reads as clear layers: a hard horizontal base line where the front wall meets the ground; the wall with its door and windows; an eave or awning band; the roof on top. Chimneys, emblems and finials stand clear of each other. Awnings and eaves cast only a small soft shadow on the wall, never a dark shadow across a door or path.
+7. Shadows on the ground are soft, short and low contrast, falling to the lower right, so the ground stays clean when an object is cut away. No dark baked shadows across paths or doors. No dark corners.
+8. Storefront awnings and canopies have open ground visible beneath them and nothing hanging below their lower edge.
+9. About 12 trees in total: dense rows along the top, left and right edges and below the south row, plus three medium trees standing alone on the plaza at about (90, 700), (1810, 790) and (1400, 560). Each stand-alone tree has at least 100 px of clear ground on each side and a canopy no wider than 220 px.
+
+DO NOT ADD
+People, animals, extra buildings, extra doors, extra paths, extra freestanding signs or notice boards, closed gates, fog hiding the ground, any text or logos other than the eleven signs above, watermarks, borders.
+
+SELF-CHECK
+1. Crisp, richly painted, natural warm daylight, sandy paving, leafy greens, not toy-like and not neon?
+2. All vertical edges vertical, big roof slopes on every building, same camera for everything?
+3. Eight clearly different building silhouettes and eight clearly different sign styles, all words spelled exactly?
+4. Fountain big, bright and untouched? Exactly three paths leave the picture?
+5. Open ground visible under every awning, board, tree and lamp?
+
+OUTPUT: one image, 1920 x 1664 px, sharp and high resolution.

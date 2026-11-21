@@ -1,0 +1,25 @@
+AREA PROMPT TEMPLATE (rewritten 2026-11-01 22:05 ET; model prompt is claude/square-spec-prompt.txt v3)
+
+For Claude, not for Tom. Tom pastes the finished prompt and never edits it.
+
+HOW AN AREA IS RUN
+1. One FRESH chat per area, one complete prompt, no attachment.
+2. NEVER REQUEST EDITS FROM THE GENERATOR (Tom, 2026-11-01). No review-and-edit message, no lettering second pass, no "edit the image you just made". If the render misses, Claude fixes the full prompt and Tom runs it fresh in a new chat. Small placement misses are fixed at install (docs/AREA_PAINTINGS.md, claude/area-paintings.md), not by the generator.
+3. NAVIGATION RULE (Tom, 2026-11-01): every area must be walkable. Freestanding narrow buildings, a wide alley between every pair, a way around every building, every exit connected to every door. Check each render for a continuous route before installing.
+4. Stop-loss: two renders that miss the same way means stop and rethink (project instructions section 1).
+
+PROMPT SKELETON (blocks in this order, same headings as claude/square-spec-prompt.txt)
+1. Opening line: "Create the actual environment painting for Area NN, <name>, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update."
+2. OUTPUT: one full-frame painting, no border, title, labels, grid, pins, UI, insets or white page; plate size in px; closest aspect if the tool cannot hit it.
+3. STYLE AND CAMERA: copy the paragraph from claude/square-spec-prompt.txt (it describes the look Tom liked). Never use 16-bit, retro, pixel, sprite, SNES or era words.
+4. SETTING: place, time, light, mood, ground and vegetation.
+5. NAVIGATION COMES FIRST: building width (about one sixth of the image width for a row of four), "no two buildings touch", each alley named by the two buildings it runs between and the lanes or edges it links, back paths behind rows, which edges have exits, props beside paths never in them.
+6. ARCHITECTURE: exact building count. Each building's THEME BUILT INTO THE ARCHITECTURE (shape, roofline, windows, trim, materials) plus roof and wall colors, so it reads with no sign. No two silhouettes alike.
+7. SIGNS: the generator designs and letters each sign in the same image: one line per sign with exact words (ALL CAPS, two lines) and its themed shape and material. Exit boards HIGH on two tall posts, bottom edge above head height and above fences and hedges, beside the lane. "These are the only words in the image". Never blank boards. Spelling table: claude/area-paintings.md.
+8. CENTRAL FEATURE AND PROPS: large central feature with open paving around it; one sentence per prop; no freestanding signs except exit boards.
+9. LAYERING: ground unbroken under and behind everything, visible bases, crisp silhouettes.
+10. LIGHT AND COLORS: hex values from the area record.
+11. STRICT EXCLUSIONS: no people, live animals, monsters, extra words, buildings touching, map look, plus area bans.
+12. Closing line: "Deliver the single environment painting itself. Do not replace the painting with a description of it."
+
+AREAS STILL TO PROMPT: pier, reeds, sundial, schoolyard, then row and hollow if Tom wants them in this style.

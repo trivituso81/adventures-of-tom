@@ -1,0 +1,9 @@
+Addendum to claude/next.md (written 2026-11-05 13:20). Fold into next.md next time it is rewritten, then delete this file.
+
+## DONE 11-05 13:15: Tom's head sized to his hero picture (204 `walk11`, pushed ee4cffb; smoke IDS=tom,grace,rose FAILS [], tag_check ok)
+- Tom (12:46): wants the proportion of docs/reference/tom_hero_ref_20261105.png (head .243 of height measured, .242 in the code). Tom (12:52): the FRONT head is the master; back and side heads must be exactly the front's size.
+- Done in tools/sprite-bake/bake_tom_walk_v4.py (HERO_HEAD is ON by default now; `HERO_HEAD=0` restores frames as painted): front head x1.129 tall (painted .220 share, not the .2107 the old code assumed; the earlier 12:46 preview used 1.196 and was about 6 percent too big), back head x.917 (same ear-to-ear width, 64 px in the atlas), side head x.986 (same hair-top-to-chin height, 91 px). Constants `CUT_PX`, `EAR_PX` were measured on the stand frames at tom_walk_frames scale and checked on a guide-line render. Tom's real height unchanged (front stand 42 rows; back 41.4, side 42.8 from the painted bodies). A no-change rebake reproduced the repo files byte for byte first.
+- Preview pictures were shown to Tom. He has NOT yet seen it on his phone. Ask one line: does Tom look right next to Grace and Rose now?
+- OPEN QUESTION for Tom (asked 12:46, unanswered): Grace's walk head is .25 (spec) while Rose's old art is about .295; Tom's head is now .242. Recommended raising Grace to about .29 or leaving it. `GRACE_HEAD_SHARE` env / `HEAD_SHARE` in grace_walk_frames.py, one number. Do not change until Tom says.
+- Tags: 204 `walk11` (engine/painted.js ART_V, index.html tom-hires.js and painted.js). CHANGES top is 204, next number 205.
+- Note: the earlier 12:46 walk heads in next.md ("head size .24 on his walk heads" verdict pending) is this change.

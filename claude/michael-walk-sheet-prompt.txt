@@ -1,0 +1,59 @@
+IMAGE REQUEST: ONE WALK SHEET OF A DAD CARRYING HIS TWO CHILDREN IN HIS ARMS IN ALL 9 FRAMES. Return exactly one image, nothing else.
+
+THE SUBJECT IS NOT ONE PERSON. THE SUBJECT IS A GROUP OF THREE, LOCKED TOGETHER: Michael, a very tall dad, with his baby daughter Isla sitting on his left forearm and his 4 year old son Lachlan sitting on his right forearm, both held against his chest. In all 9 frames Michael is carrying both children. A frame in which Michael's arms are empty, or in which a child is standing on the ground, walking beside him, missing, sitting on his shoulders, riding on his back, or in a carrier, is WRONG and must not be drawn. There is no pose in this sheet where his hands are free. Both children appear in every single cell.
+
+ATTACH: labelled photos of three real people: Michael, Lachlan and Isla.
+
+HOW MICHAEL HOLDS THE CHILDREN (identical in every frame)
+- Isla, the 1 year old baby girl, sits on Michael's LEFT forearm. His left arm is bent at the elbow, forearm level like a shelf under her bottom, his left hand holding her back or side. Her body rests against the left side of his chest, her head beside his left shoulder, her legs curled against him.
+- Lachlan, the 4 year old boy, sits on Michael's RIGHT forearm the same way: right arm bent, forearm under his bottom, right hand holding his back or side. His body rests against the right side of Michael's chest, his head beside Michael's right shoulder, his legs dangling in front.
+- Both children's heads are at Michael's shoulder height. Their faces are fully visible.
+- Where this lands in each row: when Michael faces the viewer, Isla is on the viewer's RIGHT and Lachlan on the viewer's LEFT. When Michael is seen from behind, Isla is on the viewer's LEFT and Lachlan on the viewer's RIGHT, both heads showing past his shoulders. When Michael faces left in profile, Isla is on the near side in front of his chest and Lachlan on the far side, partly behind her but still clearly visible.
+- Because both arms are full, his arms never swing. Only his legs move. The children stay in exactly the same place on his chest in all 9 frames.
+
+SIZES (strict, in a 256 x 256 pixel cell)
+- Michael is 6 foot 4, the tallest adult in the game. Standing, he is about 205 pixels tall from the top of his cap to the soles of his feet. Never rescale him per frame.
+- Michael's head, top of cap to chin, is about 68 pixels: an oversized caricature head about one third of his height.
+- Lachlan's head, top of hair to chin, is about 55 pixels (80 percent of Michael's head). His whole figure, head to toes, is about 120 pixels.
+- Isla's head, top of hair to chin, is about 50 pixels (75 percent of Michael's head). Her whole figure, head to toes, is about 95 pixels.
+- Both children have big caricature heads on small bodies. Their faces are large and readable, never tiny.
+- All three head sizes and figure sizes stay identical in all 9 frames.
+
+PHOTO FIDELITY (applies to each of the three people separately, from that person's own labelled photos)
+- Each person's face, hair, skin tone, build and outfit come only from that person's own photos. Use every attached photo.
+- The FACE must be a faithful likeness of that person's face photo: exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth (or toothless baby smile), eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, glasses or facial hair. Exaggerate only the head size and the expression, never the features. Do not beautify, age up or age down any face. Isla must look like the exact baby in her photos, Lachlan like the exact boy in his, and Michael like the exact man in his. No generic faces.
+- The HAIR must match that person's photos exactly: color, length, parting, volume, texture, how it falls. Where Michael's cap hides his hair, keep only what shows at the sides and back under the cap. His navy cap stays on in every frame, from the front, back and side.
+- The OUTFIT, shoes, bows and accessories must match that person's photos exactly: every color, print, pattern, trim and logo. If a lower half is not in any photo: Michael wears plain dark blue jeans and plain light grey sneakers; Lachlan plain navy shorts and small white sneakers; Isla bottoms matching her top and soft white socks. Never invent a new accessory, hairstyle or color.
+- Each person's face, hair and outfit are exactly the same from the front, from behind and from the side.
+- Do not copy the photo backgrounds, shadows or lighting. Only the three people.
+
+ART STYLE
+- A hand-painted digital caricature illustration of real people, shown full body. Semi-realistic painterly rendering with smooth soft shading, glossy highlights on skin and hair, and finely painted hair strands. Clothing prints and patterns are drawn in clear detail.
+- Caricature proportions for Michael: oversized head about one third of body height, slim body, small hands and feet, large expressive eyes, warm slightly exaggerated expression. Caricature proportions for the children: oversized head a little under half of body height, small body, small hands and feet. Every face keeps a clear likeness of the real person.
+- Warm golden light from the upper left, soft warm glow on the skin, gentle rim light, rich saturated warm colors.
+- Clean soft edges. No thick or black outlines.
+- NOT pixel art, NOT retro game art. No pixelation, no dithering, no limited palette, no flat cartoon shading, no anime style.
+
+THE SHEET (strict)
+- A grid of 3 columns by 3 rows of equal square cells, 256 x 256 pixels each, so the full image is 768 x 768. If your tool offers a different size, keep exactly 3 columns and 3 rows of equal square cells.
+- Exactly 9 frames, one per cell, filled left to right, top to bottom, in the numbered order below. Every cell contains Michael carrying both children.
+- Row 1: Michael facing DOWN, toward the viewer. Row 2: Michael facing UP, away from the viewer, showing the back of his cap and shirt with the two children's heads showing past his shoulders. Row 3: Michael in profile facing LEFT.
+- Camera: a character turnaround at chest height, full body, straight on for rows 1 and 2, true side profile for row 3. No top-down angle.
+- Every frame sits fully inside its cell with at least 10 percent empty margin on every side. Nothing touches a cell edge or overlaps a neighbouring cell.
+- In every frame the soles of Michael's feet rest on the same horizontal line, about 24 pixels above the bottom of the cell, except where a foot is lifted mid-step.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the three people, no magenta glow, spill or fringe on edges or hair. No grid lines, borders, cell backgrounds, numbers, labels, captions or titles.
+- Draw ONLY Michael and the two children in his arms. No effects, no ground shadow, dust, motion lines, sparkles, props, other people, text or word balloons.
+- Family friendly for ages 6 and up.
+
+THE 9 FRAMES (each clearly different in the legs; the arms and children are identical in all of them)
+1. DOWN STAND: facing the viewer, feet together, carrying Isla on his left forearm (viewer's right) and Lachlan on his right forearm (viewer's left), both children against his chest, his big warm smile from the photo, all three faces toward the viewer.
+2. DOWN STEP A: same as frame 1, both children in his arms, but the foot on the viewer's right steps forward and down.
+3. DOWN STEP B: same as frame 1, both children in his arms, but the foot on the viewer's left steps forward and down.
+4. UP STAND: seen from behind, feet together, the back of his cap, head and shirt; Isla's head and shoulders show past his left side (viewer's left) and Lachlan's past his right side (viewer's right), both children still in his arms, looking back over his shoulders at the viewer.
+5. UP STEP A: same as frame 4, both children in his arms, but the foot on the viewer's left steps forward away from us.
+6. UP STEP B: same as frame 4, both children in his arms, but the foot on the viewer's right steps forward away from us.
+7. SIDE STAND: profile facing left, feet together, cap brim pointing left; Isla on the near forearm in front of his chest, fully visible, Lachlan on the far forearm partly behind her, head and body clearly visible; both children in his arms.
+8. SIDE STEP A: same as frame 7, both children in his arms, but the front leg is forward with the heel down and the back leg trails with the heel lifted.
+9. SIDE STEP B: same as frame 7, both children in his arms, but legs close together, the back foot lifted with a bent knee, body slightly higher.
+
+FINAL CHECK BEFORE YOU OUTPUT: count the children in each of the 9 cells. Each cell must show exactly two children in Michael's arms and no children anywhere else. If any cell shows Michael with empty arms, or a child on the ground, redraw that cell. Do not add frames, merge frames, repeat a pose, or invent props.

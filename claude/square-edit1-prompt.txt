@@ -1,0 +1,12 @@
+EDIT THE ATTACHED IMAGE. It is a painted small-town square with eight shops, a fountain, three exits and trees. Keep the painting style, lighting, palette, camera, buildings, signs, lettering, fountain, trees, lamps, benches, taxi and everything else exactly as they are, pixel for pixel as closely as you can. Make only the three changes below. Coordinates are pixels from the top left of the attached image (about 1347 x 1167); anything may be off by up to 30 px. Output the same aspect ratio at the largest size the tool allows, never smaller than the attached image.
+
+A. OPEN THE EAST EXIT CLEARLY
+The cobbled plaza must open wide to the right edge between about y 400 and y 540, right under the SCHOOL board. Remove the bushes and fence pieces in that stretch and paint cobbles running all the way to the right edge, with a worn cobble or dirt trail visibly continuing off the picture beyond a natural gap in the trees. The opening is at least 130 px tall and completely clear (no bush, fence, gate or barrier). The fence and trees stay closed above and below it.
+
+B. RAISE THE SCHOOL BOARD
+Keep the SCHOOL board exactly as it is, but mount it HIGH on two taller wooden posts: make the posts about 90 px taller, with their feet at the top edge of the opening (about y 405) and the board hanging about 90 px higher than now, so the open cobbles are fully visible beneath it. The board may overlap the wall of Penny's Pockets slightly but never its door or its sign.
+
+C. RAISE THE RIVITUSO ROW BOARD
+Keep the RIVITUSO ROW board exactly as it is, but make its two black iron posts about 80 px taller and move the board up on them so it is mounted high, its bottom edge about 110 px above the post feet. The feet stay where they are (about y 1157). The cobble path between and beneath the posts stays fully visible and clear down to the bottom edge.
+
+Do not add anything new. No people, no animals, no new text. Do not change any other sign, building, tree or prop.

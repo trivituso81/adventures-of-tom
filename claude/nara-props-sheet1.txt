@@ -1,0 +1,44 @@
+IMAGE REQUEST: ONE SINGLE PROP SPRITE SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly. This is sheet 1 of 2 for Nara and holds 15 props. Cell 16 stays empty.
+
+WHAT THIS IS
+A prop sheet for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger). The props are for animations of Nara, a black curly Labradoodle, and will be cut out and used in battle scenes.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.
+- Objects are filled left to right, top to bottom, in the order of the numbered list below. Any cells after the last number must stay completely empty and transparent, with no number.
+- Each object is drawn complete, centered in its own cell, fully inside it, with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.
+- Scale every object to fill about 70 to 80 percent of its cell, regardless of its real-world size. Big things (trees, benches) are shown as compact icon-sized versions with all their key details still readable. Small things are enlarged to the same footprint.
+- Background: fully transparent (PNG with alpha). No grid lines, no borders, no frames, no cell backgrounds, no checkerboard pattern. If your tool cannot output transparency, fill the entire background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere inside the objects.
+- In the top-left corner of every cell that holds an object, put a small plain white pixel-font number (with a thin dark outline) matching the list number. These numbers are a guide only and will be cropped off. Do not put any other labels, captions or titles on the sheet. The only text allowed is the text that is part of the prop itself, spelled exactly as given in the list.
+
+ART STYLE
+- 32-bit era high-detail pixel art (late SNES, Saturn, PlayStation quality): rich shading, 16 to 24 colors per object, clean readable silhouettes, no anti-aliasing blur, no gradients that break the pixel look, no outlines thicker than one pixel.
+- A crisp one-pixel darker rim around each object's outer edge and a faint lighter highlight along its top edge, so it pops on a painted background.
+- Soft key light from the upper left on every object, with shadow on the lower right of each form. Warm, slightly desaturated painterly palette, but each object keeps its natural colors. All objects share one consistent look, one lighting direction and one level of detail.
+- Three-quarter view from slightly above, like objects seen in an SNES battle scene, unless the list says otherwise. Fun, friendly and a little silly. Family friendly for children aged 6 and up: nothing gory, scary or grim.
+- Native pixel-art resolution only: draw at roughly 128 x 128 pixels per cell and upscale by a whole number (2x) with nearest-neighbor, so pixels stay hard-edged and square.
+- Do not draw a ground shadow. At most a tiny soft contact shadow directly under an object that rests on the floor.
+
+HARD RULES
+- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the objects described, one per numbered cell. Never substitute, swap in or add other objects, even ones that seem more typical, more common or related to the same theme. If a description is unusual, draw it as written. Every cell must match its numbered description.
+- Props only. No people, no hands, no faces on anything unless the list says the object has a face. No creatures except the ones listed.
+- No real brands, logos, trademarks or copyrighted characters.
+- Do not add extra objects, decorations, sparkle bursts, motion lines, glows, smoke or effects beyond what the list describes. Small details the list names (a wisp of steam, a glint, a drip) are fine.
+- Do not skip, merge or reorder any item.
+
+THE 15 OBJECTS (cell number: name, what to draw)
+1. Gold coins: three shiny gold coins, one lying flat and two leaning against it, each with a simple star stamped in the middle.
+2. Muddy paw print: one large dog paw print in dark brown mud, flat, seen from straight above, with four toe pads, one big heel pad and a few small mud splatters around it.
+3. Tennis ball: a single bright neon yellow-green tennis ball with fuzzy texture and a curved white seam.
+4. Sandwich on a plate: a tall sandwich (golden bread, green lettuce, red tomato slice) on a round white plate. Whole and untouched.
+5. Bitten sandwich on a plate: the same sandwich on the same round white plate, but with one big round bite taken out of the upper right corner so you can see the layers inside. A few crumbs on the plate.
+6. Happy puddle: a small pale blue puddle of water on the ground, a wobbly oval shape seen from slightly above, with a white shine streak and two tiny ripples. Just the puddle, no ground drawn around it.
+7. Fancy covered dish: a shiny silver dome food cover (cloche) with a curly gold handle on a gold-rimmed white serving plate, and a small gold crown sitting on top of the handle. Looks very expensive.
+8. Homemade covered dish: a plain speckled brown ceramic casserole dish with a lid and two little handles, wrapped with a red and white checkered cloth tied in a knot, with a small wisp of warm steam rising from under the lid. Looks cozy and humble.
+9. HOMEMADE stamp mark: a round red rubber-stamp ink mark, slightly uneven like a real stamp, with the word HOMEMADE in capital letters in the middle and a small heart under the word. Flat, no object holding it.
+10. Oak tree: a big, wide old oak tree with a thick brown trunk and a full round canopy of green leaves, compact icon version, with one thick low branch sticking out to the left.
+11. Park bench: a green-painted wooden park bench with slats on the seat and back and black iron armrests and legs.
+12. Acorns: three brown acorns with tan caps, one lying on its side, grouped together.
+13. Oak leaves: five oak leaves with rounded lobes, two orange, two golden yellow and one green, loosely scattered together.
+14. Pile of tennis balls: a small heap of seven neon yellow-green tennis balls with white seams, stacked in a pyramid.
+15. Golden crumb: one single crumb of golden-brown sourdough bread, chunky and irregular, drawn big, with one tiny glint on its top edge.

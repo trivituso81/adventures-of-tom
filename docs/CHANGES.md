@@ -1,3 +1,8 @@
+## projclean1c (2026-11-21): Project docs moved into the repo: 118 more docs copied into claude/ (third part of the second run)
+
+- Card c-projclean: copied 118 more Project docs word for word to the same path in claude/ (area QC notes, tom, olivia and justin character prompts, square and area kits, nara and boppy prompts, ability feedback notes, voice and battle notes). No game file changed.
+- Not byte-checked against the Project text: claude/battle-background-prompts.txt (171 KB, assembled by a script from the shared blocks); it stays in the Project until compared.
+
 ## projclean2b (2026-11-21): Project docs move: build name 2a put on its card, no files copied
 
 - Card c-projclean: the previous push named build projclean2a before it was on the card; this push records it. No game file changed.
