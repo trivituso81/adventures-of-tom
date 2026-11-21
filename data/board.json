@@ -13442,6 +13442,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as projclean2b: build name fix, no files copied"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1d: Project docs moved into the repo: 61 more docs copied into claude/ (fourth part of the second run)"
     }
    ],
    "chat": {
@@ -23012,6 +23016,25 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T21:40:01-08:00",
+   "last": "2026-11-20T23:11:13-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b",
+    "projclean2a",
+    "projclean2b",
+    "projclean1c",
+    "projclean1d"
+   ],
+   "cards": [
+    "c-projclean",
+    "b-projclean2a",
+    "b-projclean2b"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
    "title": "Fix the report backlog (22 open)",
    "first": "2026-11-20T22:55:38Z",
@@ -23024,24 +23047,6 @@
     "c-reports-2",
     "c-reports-3",
     "c-reports-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFByJyxLbrgovhZzou",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T21:40:01-08:00",
-   "last": "2026-11-20T23:01:11-08:00",
-   "tags": [
-    "projclean1a",
-    "projclean1b",
-    "projclean2a",
-    "projclean2b",
-    "projclean1c"
-   ],
-   "cards": [
-    "c-projclean",
-    "b-projclean2a",
-    "b-projclean2b"
    ]
   },
   {
@@ -25763,8 +25768,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "28a88283c58ca16ca0fdd60a31563ebcdeb36c89",
- "synced_at": "2026-11-21T07:02:02+00:00",
+ "synced": "bcecfb85f332e3ab4c8c062e171e028727cd9ea8",
+ "synced_at": "2026-11-21T07:12:19+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
