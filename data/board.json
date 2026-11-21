@@ -18641,7 +18641,7 @@
   {
    "id": "t-keysecrets3-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "voice",
    "fyi": true,
@@ -18668,9 +18668,15 @@
     {
      "d": "2026-11-20",
      "t": "Created by c-keysecrets3 when it shipped."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T01:10:56.592Z"
     }
    ],
-   "prompt": ""
+   "prompt": "",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
