@@ -8,7 +8,7 @@ module.exports=function(T) {
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),NF=G('b3NewFight'),J=x=>JSON.stringify(x);
 
   // 1. The data: chapter 1 is on the list, and every story fight is a real fight
-  ok(J(S.chapters)==='[1]','chapter 1 is the only chapter on the Battle 3 list');
+  ok(S.chapters.includes(1),'chapter 1 is on the Battle 3 list (stage 17 holds the rest: tools/b3-check-s17.js)');
   ok(S.maxParty===4,'a story fight takes four at most');
   for(const k in S.fights) { const F=S.fights[k];
     ok(F.foes.length>=1&&F.foes.length<=3&&F.foes.every(f=>FOES[f.id]&&(f.row==='front'||f.row==='back')),'story fight '+k+' names real monsters, three at most (the Front row holds three)');

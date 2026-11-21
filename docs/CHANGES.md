@@ -1,3 +1,10 @@
+## b3s17a (2026-11-21): chapter 2's story fights now run on the new battle (BY CHAPTER), with Vibe Points and new tips
+
+Card c-b3s17, part a. Chapter 2 joins chapter 1 in `B3_STORY.chapters`: the two Smoglets (new row `smoglet2`, 10 VP), the Ticket Flurry, the Coyote and The Big Shake play on Battle 3 with the bestiary's Vibe Points (10 each, 30 for the boss) and tips written for Battle 3 (`ch2lawn`, `ch2flurry`, `ch2coyote`, `bigshake`; no Warmth, no HEART, no Tombo). OLD still plays chapter 2 on battle 2 on the same save.
+- Two calls made: (1) `b3sEnd` sets the `kind:<boss>` flag on a boss win from chapter 2 on, because chapters 3 to 5's after-boss scenes branch on it and Battle 3 has no Warmth bar to set it (chapter 1 is unchanged, so Milestone B is not disturbed). (2) The two chapter 2 "New Tombo" toasts are skipped on Battle 3 (`B3_CH_ON(n)` replaces `B3_CH1_ON` in `data/scenes.js`); the Tombo flags stay, Tombos return in stage 16.
+- Test: `tools/ch2_b3_test.py` (portrait and landscape, shared helpers in `tools/b3_chapter_lib.py`; checks per fight: Battle 3, no Warmth words, tips shown once each, Vibe Points paid). Simulator checks: `tools/b3-check-s17.js` (2323 checks, none fail). `tools/b3_story_test.py` moved to chapter 6 for "not switched".
+- Not looked at: the chapter 3 to 5 fights (parts b, c and the last push).
+
 ## costs1icon (2026-11-21): the AI Costs page has its own browser tab icon
 
 Card c-costs1icon. Tom: "Give it a unique favicon". The page used the Admin gear. It now has a gold receipt with a dollar sign on the admin icons' dark background: `icon-costs-32.png` (browser tab) and `icon-costs-180.png` (home screen), drawn by `tools/make_costs_icon.py`. `tools/costs_test.py` checks the page links both and that they differ from the Admin icon (FAILS: []).

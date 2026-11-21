@@ -169,6 +169,31 @@ Shares stage 15 does not touch: chapters 2 to 20 (`ch2` onward, `data/ch20-battl
 | Balance (fact) | A new save is at Rank 1 in chapter 1 and the plain player takes 7.83 rounds against the Big One at Rank 1 (5.78 at Rank 2); the target is 5 to 7. Left unchanged, for Milestone B to judge on the phone. |
 | Not ported | Rose Mode's emergency muffin (`b7Pie`) has no Battle 3 form. |
 
+## What stage 17 holds: chapters 2 to 5's story switch (builds `b3s17a` to `b3s17`)
+
+### Chapters 2 to 5's battle 2 references, by kind (listed before any change, 2026-11-21)
+
+Fact: every place chapters 2 to 5's scenes and map monsters touch battle 2. Lines are in `data/scenes.js` unless named (ch2 442 to 901, ch3 902 to 1403, ch4 1404 to 1879, ch5 1880 to 2389). "Share" is what stage 17 replaces; everything else stays as it is.
+
+| Kind | Where | What it does with battle 2 | Stage 17 |
+|---|---|---|---|
+| Start a fight | Ch2: `ch2Smog` 531 `{battle:()=>findMonster('smoglet'),tut:'ch2lawn',count:2}`, `ch2Flurry` 567 `tickets`, `ch2Coyote` 578 `coyote`, `ch2Boss` 619 `bigshake` | Story `battle` op starts battle 2 | Routed by the one door (`startBattle`). Two Smoglets is the `smoglet` formation |
+| Start a fight | Ch3: `ch3Sock` 1077 `soggysock`, `ch3Tangle` 1090 `tangle`, `ch3Snag` 1118 `snag`, `ch3Pool` 1185 `irongill` | Same | Routed |
+| Start a fight | Ch4: `ch4Crab` 1556 `cuecrab`, `ch4Clapper` 1569 `clapper`, `ch4Moth` 1583 `boommoth`, `ch4Boss` 1670 `directorscut` | Same | Routed |
+| Start a fight | Ch5: `ch5Bell` 2070 `tardybell`, `ch5Glue` 2084 `glitterglue`, `ch5Dodge` 2105 `dodgeball`, `ch5Boss` 2156 `redpen` | Same | Routed |
+| Start a fight | Map monsters: `LA_MONSTER_SPOTS` (smoglet, tickets, coyote, gridlock, tarblob, bigshake), `MARSH_MONSTER_SPOTS` and `SUNDIAL_MONSTER_SPOTS` (soggysock, bobber, tangle, snag, irongill), `BACKLOT_`, `STAGE7_`, `STAGESET_MONSTER_SPOTS` (cuecrab, clapper, boommoth, extra, fogwisp, directorscut), `SCHOOL_` and `CAFE_MONSTER_SPOTS` (popquiz, tardybell, glitterglue, dodgeball, redpen) in `data/*-monsters.js`; `engine/overworld.js:149` `startBattle(npc)` | Touching a monster | Routed (one door). Every one of these 22 ids has a Battle 3 formation (`B3_FORMATIONS`) |
+| Read a result | Flags `battle:smoglet`, `battle:tickets`, `battle:coyote`, `battle:bigshake`, `battle:soggysock`, `battle:tangle`, `battle:snag`, `battle:irongill`, `battle:cuecrab`, `battle:clapper`, `battle:boommoth`, `battle:directorscut`, `battle:tardybell`, `battle:glitterglue`, `battle:dodgeball`, `battle:redpen`. Read by `CH2_LOST` (449), line 533, `CH3_AFTER` (1064), `CH4_AFTER` (1414), `CH5_AFTER` (1891), the retry blocks (1186, 1671, 2157) and the triggers `ch2-after`, `ch3-after`, `ch4-after`, `ch5-after` (701, 1278, 1762, 2264) | Set by the story op from `B2.result`, and for bosses by `b3sEnd` | Unchanged: Battle 3 already writes `B2.result` and the boss flag |
+| Read a result | `{heal:true}` after a loss (449, 533, 1065, 1187, 1415, 1672, 1892, 2158) | Full HP for the party | Kept as is |
+| Read a result | The Warmth result `flag('kind:<id>')` read by `ch3AfterBoss` (1198, Iron-Gill), `ch4AfterBoss` (1680, The Director's Cut), `ch5AfterBoss` (2166, The Red Pen) and `bossKind` (`engine/boss-finale.js` 66, 101, 173: the kind or plain face and effects of every boss finale). Battle 2 sets it in `b2RewardsData` (`engine/battle2.js:1472`) for a monster the Warmth bar sent home | Picks the kind ending or the "Fine. FINE." ending | **Replaced.** Battle 3 has no Warmth bar, so `b3sEnd` sets `kind:<boss id>` on every boss win and the kind ending plays, as chapter 1's after-boss scene always does (retired card c-gem-pillar-hp: kindness plays in the scene after a boss reaches 0 HP). The plain ending stays for OLD |
+| Read a result | Rewards: `b2RewardsData` and `b7ShowCard` | Battle 2's victory card | Already done by `b3sAward` (stage 15): XP, coins, drop, Vibe Points, card |
+| Unlock a Tombo | Flags `tombo:nara1` (501), `tombo:tnb1` (529), `tombo:boppy1` (1029), `tombo:amy1` (1925), `tombo:grace2` (2004) | Unlock Sit. Paw. Treat., Popcorn Jump, You Hold the Net, I Called It!, Uncle Spotter Toss | Flags stay. Tombos return as skins in stage 16 |
+| Unlock a Tombo | Toasts at 502, 530, 1030, 1927, 2005 | Name battle 2 menu rows (▲ ATTACK, 50% HEART) | Shown under OLD only (`B3_CH_ON(n)`), as chapter 1's two were |
+| Tutorial | `TUTORIALS` (`engine/story.js` 1543 to 1577: `b2TutTip`, `b2TipAim`, `b7AfterRender` glow): `ch2lawn` 874, `ch2flurry` 881, `ch2coyote` 884, `bigshake` 895, `ch3snag` 1381, `irongill` 1383, `ch3sock` 1389, `ch3tangle` 1395, `ch4crab` 1861, `ch4clapper` 1866, `ch4moth` 1869, `directorscut` 1872, `ch5bell` 2353, `ch5glue` 2359, `ch5dodge` 2362, `redpen` 2365 | Tips about Warmth, COMPLIMENT, PUPPY DOG EYES, HEART, Tombo rows, Aftershock, the clog, the glow | Replaced for Battle 3 by `B3_STORY.tips` under the same 16 keys. OLD keeps these |
+| Tutorial | Spoken retry coaching after a loss: Boppy at 1188 ("or do our Tombo"), TNB at 1673 ("Popcorn Jump. Or just tell it GREAT TAKE. Three times."), Amy at 2159 ("somebody tell it that its handwriting is nice") | Tell the player to use a Tombo or to compliment the monster | Under Battle 3 each plays a new line that names real Battle 3 moves; the old line plays under OLD. The new lines have no recording yet (Voice Library, No clip yet) |
+| Not a battle 2 reference | `{toast:'... Signature Tool ... WARMTH +7'}` (1721) and `WARMTH +6` (2207): an item stat shown in the menu; `bossFrame('bigshake','calm')` (634): a painted pose in a scene | Item stats and scene poses | Left alone (Warmth is a gear stat the menu still shows; the pose is a picture) |
+
+Shares stage 17 does not touch: chapters 6 to 20 (`ch6` onward, `data/ch20-battle.js`, `engine/benchcall.js`), Battle Lab, and every battle 2 file. Under OLD chapters 2 to 5 play exactly as before.
+
 ## What stage 9b holds, and what waits
 
 | In (build `b3s9b`) | Waits for |

@@ -2,8 +2,8 @@
 // data/scenes.js — Cutscene scripts for engine/story.js (step reference at SCENE_OPS there).
 // A scene is an array of steps, or a function returning one (it runs when the scene starts, so it can use where things are).
 const SCENES={};
-// b3s15: true while the switch sends chapter 1's story fights to Battle 3 (engine/b3-story.js). Battle 2's Tombo rows do not exist there.
-const B3_CH1_ON=()=>typeof b3sChapterOn==='function'&&b3sChapterOn(1);
+// b3s15, b3s17: true while the switch sends chapter n's story fights to Battle 3 (engine/b3-story.js). Battle 2's Tombo rows do not exist there.
+const B3_CH_ON=n=>typeof b3sChapterOn==='function'&&b3sChapterOn(n);
 
 // The opening (START NEW): Tom stretches inside Long Island Taxi Co., Sal sends him out, he steps out alone, Grace and Rose shout TATA!!! and run in from the west,
 // jump on him for a hug, Rose climbs onto his shoulders, Grace shows off her squishy (painted poses), then both join the party.
@@ -121,7 +121,7 @@ SCENES.ch1Goal=[
   {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {interstitial:{ch1Reveal:'list'}},   // Grace holds up the finished list: the close-up (ch1art3), A to continue. Only after her third item (Tom report r-20261120-000755-3h9p)
-  {if:()=>!B3_CH1_ON(),then:[{toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[]},   // b3s15: the Tombo rows are battle 2's; the flags above still set
+  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[]},   // b3s15: the Tombo rows are battle 2's; the flags above still set
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
   // Tom (with Rose still on his shoulders, cutpolish3) and Grace walk out onto the open plaza path toward the Rivituso Row arch, so control comes back
   // on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18). Rose rides along; she hops down in the kitchen.
@@ -286,7 +286,7 @@ SCENES.ch1Theft=[
   {call:()=>{ intro.endTrail=[[12,10],[11,10],[10,10],[9,10],[8,10]]; }},
   {wait:1.2},
   {flag:'tombo:deedee1'},
-  {if:()=>!B3_CH1_ON(),then:[{toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3}],else:[]},
+  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3}],else:[]},
   {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5},
   {call:()=>queueToast('Goal: follow the muddy trail to Grump Hollow, north of the Square.',4.5)}   // pops up once (roofnpc2, Gemini audit: players stalled at the front gate)
 ];
@@ -499,7 +499,7 @@ SCENES.ch2Porch=[
   {join:'nara'},
   {call:()=>{ grantItem('naraball'); if(typeof heartTrace==='function') { heartTrace('nara-meet'); setFlag('met-nara'); } }},
   {flag:'tombo:nara1'},
-  {toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, it is inside ▲ ATTACK.',time:3.6},
+  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[]},
   {toast:'Goal: the smog is coming down 2nd Ave. Walk toward Mr. Washington’s porch.',time:4.5}
 ];
 // Scene 3. 2nd Avenue: Mr. Washington is stuck on one greeting; two Smoglets; one fight.
@@ -527,7 +527,7 @@ SCENES.ch2Smog=[
   {talk:'Smoglet',lines:["Ahem. There's two of us."]},
   {talk:'Tom',lines:["We can do this! I've done this one time."]},
   {flag:'tombo:tnb1'},
-  {toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6},
+  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6}],else:[]},
   {battle:()=>findMonster('smoglet'),tut:'ch2lawn',count:2},
   {despawn:'Smoglet'}, {despawn:'Smoglet B'},
   {if:()=>flag('battle:smoglet')!=='win',then:[{heal:true},{toast:'Everyone is healed. Try again: walk back toward Mr. Washington’s porch.',time:5}],else:[]},

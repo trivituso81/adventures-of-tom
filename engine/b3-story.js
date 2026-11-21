@@ -115,6 +115,10 @@ function b3sEnd(result) {
   }
   if(result==='lose'&&typeof showToast==='function') showToast(regionOf(currentMap)==='la'?'Ouch. The taco truck downtown fixes everything.':'Ouch. Visit the wish fountain to recover.',3.2);
   if(npc&&npc.monster&&STORY.mode==='full'&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,win?'win':'lose');
+  // Battle 3 has no Warmth bar, so the kind ending is not earned in the fight: a boss that reaches 0 HP gets the kind ending in the scene after
+  // (retired card c-gem-pillar-hp). Chapter 1 is left as Milestone B has it (its scene is kind already). Battle 2 sets this flag when the Warmth bar sends a boss home; the after-boss scenes of chapters 3 to 5
+  // (data/scenes.js) and the boss finales (engine/boss-finale.js bossKind) read it, so a win here sets it and the plain ending stays for OLD.
+  if(win&&npc&&npc.monster&&STORY.mode==='full'&&STORY.chapter>=2&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('kind:'+npc.monster,(flag('kind:'+npc.monster)||0)+1);
   if(typeof renderMenu==='function') renderMenu();
   // A short breather before map monsters can engage again (engine/feel.js b7AfterBattle, which reads battle 2's config, so done here).
   if(typeof B7!=='undefined') { B7.auto=false; clearTimeout(B7.autoTimer); if(typeof b7SetClose==='function') b7SetClose(); const T=$('b7-tools'); if(T) T.hidden=true; B7.noEngage=performance.now()+3500; }
