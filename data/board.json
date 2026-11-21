@@ -21109,13 +21109,13 @@
    "id": "c-qa-bug11",
    "tag": "qa-bug11",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "Signs cut off at the top and under the skip buttons",
-   "next": "Ready to start. The \"slider\" the tester saw above the SCHOOL sign is the locked fence picture; that part is report r-20261120-185740-5nwp on card c-reports-7, not this card.",
+   "next": "Retired: not reproduced on current main, nothing changed.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on BUG-11 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21142,13 +21142,20 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired, no code change. On main the top signs (HOLLOW, LONG ISLAND SQUARE) show whole with a margin in portrait and landscape; the \"slider\" over SCHOOL was the locked fence picture, already moved under the sign (fix-artgen2look); there is no zoom slider in the game; FAST and SKIP are hidden while the ! panel is open (gem-bug10) and the ! Menu Save buttons are hidden in cutscenes (qa-bug08). Not confirmed: FAST and SKIP over a sign in a zoomed cutscene (the cutscene camera moves, so any picture can sit under them); a pencil report from that screen reopens it.",
+     "at": "2026-11-21T04:00:00.000Z"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-21",
+   "retired": true
   },
   {
    "id": "c-qa-bug12",
