@@ -24773,7 +24773,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Rescue chose START NEXT: the one remaining step is a paid Wan try (pad 0.8, at most $1) that is judged by looking at it, which is Opus work, not a rescue. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -24798,7 +24798,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCkMPGRX9c6YtKLA2C",
+    "url": "https://claude.ai/code/session_01RXeukCkMPGRX9c6YtKLA2C",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24833,6 +24833,10 @@
      "d": "2026-11-21",
      "t": "Rescue outcome START NEXT: nothing half done to finish; the next step is one paid Wan try with the figure at 80% (job deedee-dodge rev 4, pad 0.8) judged by taste, so the card goes to Up next for an Opus 5.5 medium session. Prompt unchanged: it already holds both misses.",
      "at": "2026-11-21T18:20:00+00:00"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -25425,7 +25429,7 @@
    "id": "c-boardsubfold1",
    "tag": "boardsubfold1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Board: fold and unfold the groups inside For you",
    "next": "Built boardsubfold1: under For you on the board, tap a group's name (PLAY AND REPORT and the rest) to fold it, tap again to open it. All start open. Folded groups stay folded until the page is closed.",
@@ -25445,6 +25449,10 @@
     {
      "d": "2026-11-21",
      "t": "Pushed boardsubfold1: each For you group folds and unfolds, open by default; tested in portrait and landscape."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as boardsubfold1: on the board, each group under For you folds and unfolds with a tap, all open by default"
     }
    ],
    "prompt": {
@@ -25455,7 +25463,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small build in board.html, design worked out in the session)",
     "effort": "medium (the piece is small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardsubfold1 in data/board.json. Your first push is the commit board: start c-boardsubfold1. In board.html, mineGroups draws each For you group (PLAY AND REPORT, REVIEW PICTURES and the rest) as a plain heading. Make each group a tap to fold and unfold, open by default, and keep what Tom opened or closed through the page's 60 second reload. Test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-artfallback",
@@ -25667,6 +25676,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCkMPGRX9c6YtKLA2C",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T18:14:02Z",
+   "last": "2026-11-21T18:14:10Z",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGtj38istztwz8E76R",
    "title": "AI Costs on the Duo: folded and unfolded layouts",
    "first": "2026-11-21T16:49:30Z",
@@ -25756,6 +25775,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFNpBVJJ5eFTao3VSz",
+   "title": "Board: fold and unfold the groups inside For you",
+   "first": "2026-11-21T10:05:51-08:00",
+   "last": "2026-11-21T10:13:52-08:00",
+   "tags": [
+    "boardsubfold1"
+   ],
+   "cards": [
+    "c-boardsubfold1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
    "title": "Animation note: Grace, Dodge",
    "first": "2026-11-21T09:15:53-08:00",
@@ -25822,16 +25853,6 @@
    ],
    "cards": [
     "c-artfallback"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFNpBVJJ5eFTao3VSz",
-   "title": "Board: fold and unfold the groups inside For you",
-   "first": "2026-11-21T10:05:51-08:00",
-   "last": "2026-11-21T10:05:51-08:00",
-   "tags": [],
-   "cards": [
-    "c-boardsubfold1"
    ]
   },
   {
@@ -29234,8 +29255,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2841987356f9ff2c4d9ec6f36f1ec814471c9e34",
- "synced_at": "2026-11-21T18:13:13+00:00",
+ "synced": "2c66c9d3976c0218294990fba4e9d88ad76776db",
+ "synced_at": "2026-11-21T18:14:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
