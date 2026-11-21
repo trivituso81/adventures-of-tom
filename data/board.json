@@ -23908,7 +23908,7 @@
    "id": "c-costsduo1",
    "tag": "costsduo1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "theme": "Tools",
    "title": "AI Costs on the Duo: folded and unfolded layouts",
@@ -23961,10 +23961,15 @@
     {
      "d": "2026-11-21",
      "t": "Built both layouts (pocket and open book) in costs.html, test tools/costs_duo_test.py passes, desktop test unchanged; shipped as costsduo1; drawing deleted."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costsduo1: AI Costs has a folded and an unfolded iPhone Duo layout"
     }
    ],
    "started_at": "2026-11-21T16:46:07+00:00",
-   "after": "t-costsduo-try"
+   "after": "t-costsduo-try",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-tom-loungepass-lf2z",
@@ -24236,8 +24241,10 @@
    "url": "https://claude.ai/code/session_01RXeukGtj38istztwz8E76R",
    "title": "AI Costs on the Duo: folded and unfolded layouts",
    "first": "2026-11-21T16:49:30Z",
-   "last": "2026-11-21T16:49:30Z",
-   "tags": [],
+   "last": "2026-11-21T17:05:31Z",
+   "tags": [
+    "costsduo1"
+   ],
    "cards": [
     "c-costsduo1"
    ]
@@ -27668,8 +27675,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a589712f511cac907b7aa438eb924404a08553fc",
- "synced_at": "2026-11-21T16:49:54+00:00",
+ "synced": "44dd81a1e4d17dd115ce4544580548a6f2a631ba",
+ "synced_at": "2026-11-21T17:06:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
