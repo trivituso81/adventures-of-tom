@@ -1,3 +1,12 @@
+## artgen3 (2026-11-21): a second button on a pictures card approves what passes QA for you
+
+- The board's pictures card has Generate and auto-approve what passes QA (`gen.mode: "auto"`, workflow input `auto`, `artgen.py --auto`) with the rule in plain words above it.
+- `artgen.auto_verdict`: approved by the job only when QA ran 3 times, every must-pass (`hold`) check that was asked is yes, the score reaches the policy threshold (0.9), the entry has no earlier reject and no `own`. Anything else waits for review as before, with its reason on the card (`gen.run.held`).
+- An approval writes the file `art/raw/<tab>/<id>-v<k>.png` and the entry record (`from: artgen`, `qa`, `qaFail`, `srv`, `svc`, `try`) in one commit on main, starts art-bake with the files, and makes entries that waited on it in the same run.
+- Board card lines: Approved by QA (11 of 12) with Not this one; the record line counts pictures you rejected that QA would have approved. The Art Library offers NOT THIS ONE (a reject with a note) on a picture the job approved. `board_sync` r2_art names who approved what.
+- Tests: `tools/art-library/artgen3_test.py`, `board_artgen_test.py`, `board_sync_test.py`. Nothing was sent to xAI.
+- Also: shortened the title of c-b3s18 (it stopped board_check).
+
 ## fix-anim-grace-squeeze-qxima (2026-11-21): Grace's Soup-Dumpling Squeeze prompt v4: the dumpling has a cute face and bursts on the hit (video being made)
 
 Card c-fix-anim-grace-squeeze-qxim, part a. Tom (Battle Guide note, 18:51): "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have." Prompt `tools/art-library/prompts/wan-grace-squeeze-v4.txt`, Wan job `grace-squeeze` rev 4; the video follows in build fix-anim-grace-squeeze-qxim.

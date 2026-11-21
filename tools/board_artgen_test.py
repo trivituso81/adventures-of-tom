@@ -37,6 +37,11 @@ b['cards'] += [tc('t-pics', 'Pictures test card', done_when={'art_approved': ids
                   gen={'want': False, 'ids': [two[0]['id'], two[1]['id']], 'run': {'state': 'done', 'at': '2026-11-20T02:00:00Z', 'made': [two[0]['id'], two[1]['id']], 'already': [], 'skipped': [], 'failed': [], 'spent': 0.2,
                        'qa': {two[0]['id']: {'file': 'results/x/a.png', 'yes': 11, 'of': 12, 'failed': [{'id': 'f_bg', 'q': 'Does the background match what the prompt asks for?', 'why': 'there is a floor line'}]},
                               two[1]['id']: {'file': 'results/x/b.png', 'skipped': 'the spend cap would be passed: kept without QA'}}}}),
+               tc('t-pics-auto', 'Pictures auto card', done_when={'art_approved': [two[0]['id'], two[1]['id']]}),
+               tc('t-pics-autodone', 'Pictures auto done card', done_when={'art_approved': [two[0]['id'], two[1]['id']]},
+                  gen={'want': False, 'ids': [two[0]['id'], two[1]['id']], 'mode': 'auto', 'run': {'state': 'done', 'at': '2026-11-20T03:00:00Z', 'made': [two[0]['id'], two[1]['id']], 'already': [], 'skipped': [], 'failed': [], 'spent': 0.2, 'auto': True,
+                       'approved': [{'id': two[0]['id'], 'file': 'art/raw/props/x-v1.png', 'yes': 11, 'of': 12}], 'held': [{'id': two[1]['id'], 'why': 'a must-pass check said no (f_text)'}],
+                       'qa': {two[0]['id']: {'file': 'results/x/a.png', 'yes': 11, 'of': 12, 'failed': []}, two[1]['id']: {'file': 'results/x/b.png', 'yes': 9, 'of': 12, 'failed': [{'id': 'f_text', 'q': 'Is the picture free of letters?', 'why': 'a sign'}]}}}}),
                tc('t-pics-wait', 'Pictures waiting card', col='wait', waiting_on='claude', fyi=False, done_when={'art_approved': [two[0]['id']]}), ]
 b['cards'].append({'id': 'c-pics-claude', 'tag': 'picsclaude', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'The Claude card the pictures wait on', 'next': 'Ready.', 'blocks': ['t-pics-wait'], 'changed': T, 'created': T,
                    'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 'Prompt.'}})
@@ -65,16 +70,16 @@ try:
             if 'Ready to make' not in r and 'will be made again' not in r: fails.append('row not ready: ' + r)
         if not any('Approved' in r for r in rows): fails.append('no Approved row')
         if waiting and not any('Waiting for' in r for r in rows): fails.append('no Waiting for row: %s' % rows)
-        btn = pg.inner_text('#sheet button.gen')
+        btn = pg.inner_text('#sheet button.gen:not([data-mode])')
         if btn != 'Generate all %d pictures (about $%.2f)' % (N, EST): fails.append('button text ' + btn)
         if pg.evaluate("document.querySelector('#sheet .pics').getBoundingClientRect().top") > pg.evaluate("document.querySelector('#sheet h4:nth-of-type(2)').getBoundingClientRect().top") + 400: fails.append('section is not near the top of the sheet')
         pg.screenshot(path=f'{out}/board-artgen-sheet.png')
         puts = lambda: [l for l in json.load(urllib.request.urlopen('http://127.0.0.1:8094/log')) if l.get('github') == 'PUT']
         n0 = len(puts())
-        pg.click('#sheet button.gen'); pg.wait_for_timeout(300)
-        if 'Tap again to confirm' not in pg.inner_text('#sheet button.gen'): fails.append('first tap did not arm: ' + pg.inner_text('#sheet button.gen'))
+        pg.click('#sheet button.gen:not([data-mode])'); pg.wait_for_timeout(300)
+        if 'Tap again to confirm' not in pg.inner_text('#sheet button.gen:not([data-mode])'): fails.append('first tap did not arm: ' + pg.inner_text('#sheet button.gen:not([data-mode])'))
         if len(puts()) != n0: fails.append('the first tap saved something')
-        pg.click('#sheet button.gen'); pg.wait_for_timeout(900)
+        pg.click('#sheet button.gen:not([data-mode])'); pg.wait_for_timeout(900)
         pl = puts()
         if len(pl) != n0 + 1 or pl[-1]['msg'] != 'board: generate t-pics': fails.append('second tap commit: %s' % [x['msg'] for x in pl[n0:]])
         g = card('t-pics').get('gen') or {}
@@ -83,7 +88,7 @@ try:
         if not h.startswith('Tom approved generating %d pictures (about $%.2f)' % (N, EST)) or '—' in h or '<' in h: fails.append('history line: ' + h)
         st = pg.inner_text('#sheet .pics')
         if 'Started. The pictures are made for you' not in st: fails.append('no Started text: ' + st[-200:])
-        if not pg.is_disabled('#sheet button.gen') or 'Asked' not in pg.inner_text('#sheet button.gen'): fails.append('button not disabled after the tap')
+        if not pg.is_disabled('#sheet button.gen:not([data-mode])') or 'Asked' not in pg.inner_text('#sheet button.gen:not([data-mode])'): fails.append('button not disabled after the tap')
         pg.screenshot(path=f'{out}/board-artgen-started.png'); pg.click('#bclose')
         # a finished run
         pg.click('.card[data-id="t-pics-done"] .t'); pg.wait_for_selector('#sheet .pics')
@@ -102,11 +107,32 @@ try:
         if imgs[0] != 'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/artgen/results/x/a.png': fails.append('thumbnail address ' + str(imgs))
         if pg.get_attribute('#sheet .pics .qa a', 'href') != 'art.html?review=' + two[0]['id']: fails.append('thumbnail link')
         pg.screenshot(path=f'{out}/board-artgen-qa.png'); pg.click('#bclose')
+        # artgen3: the second button
+        pg.click('.card[data-id="t-pics-auto"] .t'); pg.wait_for_selector('#sheet .pics')
+        sp = pg.inner_text('#sheet .pics')
+        if 'every must-pass check is yes and at least 9 of 10 checks pass. The rest wait for you.' not in sp: fails.append('the rule line is missing: ' + sp[-300:])
+        ab = pg.inner_text('#sheet button.gen[data-mode=auto]')
+        if not ab.startswith('Generate and auto-approve what passes QA (about $'): fails.append('auto button text ' + ab)
+        n1 = len(puts())
+        pg.click('#sheet button.gen[data-mode=auto]'); pg.wait_for_timeout(300)
+        if 'Tap again to confirm' not in pg.inner_text('#sheet button.gen[data-mode=auto]') or len(puts()) != n1: fails.append('first auto tap did not just arm')
+        pg.click('#sheet button.gen[data-mode=auto]'); pg.wait_for_timeout(900)
+        ga = card('t-pics-auto').get('gen') or {}
+        if not (ga.get('want') is True and ga.get('mode') == 'auto') or puts()[-1]['msg'] != 'board: generate t-pics-auto': fails.append('auto tap wrote: %s' % ga)
+        ha = card('t-pics-auto')['history'][-1]['t']
+        if 'auto-approving the ones that pass QA' not in ha or '—' in ha or '<' in ha: fails.append('auto history line: ' + ha)
+        pg.screenshot(path=f'{out}/board-artgen-auto.png'); pg.click('#bclose')
+        pg.click('.card[data-id="t-pics-autodone"] .t'); pg.wait_for_selector('#sheet .pics .qa')
+        ad = pg.inner_text('#sheet .pics')
+        for want in ('Approved by QA: ' + two[0]['id'] + ' (11 of 12)', 'Waits for you: ' + two[1]['id'] + ', a must-pass check said no (f_text)', 'Approved by QA (11 of 12)', 'Not this one'):
+            if want not in ad: fails.append('auto run lacks "%s": %s' % (want, ad[-500:]))
+        if pg.get_attribute('#sheet .pics .qa a[href^="art.html?open="]', 'href') != 'art.html?open=' + two[0]['id']: fails.append('Not this one link')
+        pg.screenshot(path=f'{out}/board-artgen-autodone.png'); pg.click('#bclose')
         # a card in Waiting
         pg.evaluate("openSheet('t-pics-wait')")
         if pg.query_selector('#sheet .pics'):
-            wb = pg.inner_text('#sheet button.gen')
-            if not wb.startswith('Waiting on') or 'The Claude card the pictures wait on' not in wb or not pg.is_disabled('#sheet button.gen'): fails.append('waiting card button: ' + wb)
+            wb = pg.inner_text('#sheet button.gen:not([data-mode])')
+            if not wb.startswith('Waiting on') or 'The Claude card the pictures wait on' not in wb or not pg.is_disabled('#sheet button.gen:not([data-mode])'): fails.append('waiting card button: ' + wb)
         else: fails.append('waiting card has no pictures section')
         pg.click('#bclose')
         open('/tmp/board_artgen_after.json', 'w').write(json.dumps(stored()))

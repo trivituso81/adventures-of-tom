@@ -88,6 +88,12 @@ check('R2: a draft entry keeps the card open', card(b, 't-pics')['col'] == 'up')
 bs.sync(b, [], {'p1': {'status': 'approved'}, 'p2': {'status': 'rejected'}, 'p3': {'status': 'approved'}}, None, None, NOW)
 check('R2: all decided (one rejected) closes the card and lists both', card(b, 't-pics')['col'] == 'done' and 'Rejected: p2' in card(b, 't-pics')['history'][-1]['t'])
 
+# --- artgen3: pictures approved by the art-gen job say so
+b = {'cards': [dict(id='t-q', lane='tom', col='up', theme='Areas', title='Pass', next='n', changed='2026-11-19', blocks=[], done_when={'art_approved': ['q1', 'q2', 'q3']})], 'lanes': [], 'sessions': []}
+bs.sync(b, [], {'q1': {'status': 'approved', 'versions': [{'n': 0, 'from': 'artgen'}]}, 'q2': {'status': 'approved', 'versions': [{'n': 0, 'from': 'artgen'}, {'n': 1, 'from': 'review'}]}, 'q3': {'status': 'approved', 'versions': [{'n': 0, 'from': 'review'}]}}, None, None, NOW)
+t = card(b, 't-q')['history'][-1]['t']
+check('artgen3: the history line names who approved what (q1 by QA, q2 and q3 by Tom)', card(b, 't-q')['col'] == 'done' and 'Approved by QA: q1.' in t and 'Approved by you: q2, q3.' in t and '\u2014' not in t, t)
+
 # --- fix-artgen2look: a pictures card whose Art Library links are all approved is already in the game
 LK = lambda *ids: [{'to': 'art', 'ids': list(ids), 'label': 'x'}]
 b = {'cards': [dict(id='t-have', lane='tom', col='up', ask='pictures', theme='Tools', title='Art to make', next='n', changed='2026-11-19', blocks=[], links=LK('h1'), backlog={'at': '2026-11-19', 'from': 'up'}),

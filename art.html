@@ -90,7 +90,7 @@ header{padding:10px 28px}
 }
 /* Review viewer (uxart1): one picture at a time, fit to screen, pinch to zoom, decide at the bottom */
 #rv{position:fixed;inset:0;z-index:40;background:#0f0d24;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
-#rv[hidden]{display:none}
+#rv[hidden],.rvb[hidden]{display:none}
 .rvtop{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid #2c2852;background:#14122b}
 .rvtop .rvt{flex:1;min-width:0;line-height:1.25}.rvtop .rvt b,.rvtop .rvt span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rvtop .rvt span{font-size:12px;color:#b9b3e6}
@@ -140,7 +140,7 @@ header{padding:10px 28px}
 <div class="rvmain"><div id="rvstage"><img id="rvimg" alt=""></div>
 <div class="rvside"><div class="hint" id="rvcount"></div><div id="rvchips"></div><div class="hint" id="rvhist"></div><div id="rvqa" hidden></div><div class="hint" id="rvmsg"></div>
 <input type="text" id="rvnote" placeholder="Note for Claude (needed to reject): what is wrong, what to change" autocomplete="off" aria-label="Note for Claude">
-<div class="rvbtns"><button class="bad rvb" id="rvno">REJECT</button><button class="good rvb" id="rvok">APPROVE</button></div></div></div>
+<div class="rvbtns"><button class="bad rvb" id="rvauto" hidden>NOT THIS ONE</button><button class="bad rvb" id="rvno">REJECT</button><button class="good rvb" id="rvok">APPROVE</button></div></div></div>
 </div>
 <div id="toast"></div>
 <script src="engine/admin-music.js?v=adminvol1"></script>
@@ -561,6 +561,7 @@ function rvDraw(){
   $('rvnote').value=NOTES[id]||'';
   const m=MSG[id]; $('rvmsg').textContent=m&&m.err?m.text:''; $('rvmsg').className=m&&m.err?'err':'hint';
   $('rvok').disabled=$('rvno').disabled=!r;
+  const av=autoVersion(e); $('rvauto').hidden=!(av&&!r); if(av&&!r) $('rvsub').textContent+=' · approved by QA ('+(av.qa!=null?Math.round(av.qa*100)+'%':'scored')+')';
   $('rvp').disabled=$('rvn').disabled=RV.q.length<2;
 }
 // artgen2: the QA the art-gen job ran on a picture it made (r.qa, carried in by artgenImport): failed lines first, passed lines folded
@@ -584,6 +585,21 @@ const svcLabel=r=>{ const v=svcOf(r); return v?'made by '+SVC_NAME[v]+(r.try?' (
 const svcRec=r=>r&&r.up?{up:true}:r&&r.svc?{svc:r.svc,try:r.try||0}:{svc:'xai'};
 function rvGo(d){ if(RV.q.length<2) return; RV.i=(RV.i+d+RV.q.length)%RV.q.length; RV.v=0; rvDraw(); }
 function rvVer(d){ const n=(RES[rvId()]||[]).length, v=RV.v+d; if(v<0||v>=n) return; RV.v=v; rvDraw(); }
+// artgen3: a picture the art-gen job approved for Tom (version from 'artgen') has no result on this phone, so REJECT is offered here as NOT THIS ONE: the same reject record, carrying the version's service, try and QA
+const autoVersion=e=>{ const v=(e.versions||[]).slice().sort((a,b)=>(a.n||0)-(b.n||0)).pop(); return e.status==='approved'&&v&&v.from==='artgen'?v:null; };
+async function notThisOne(){
+  const id=rvId(), e=ENTRY[id], v=e&&autoVersion(e); if(!v) return;
+  const note=($('rvnote').value||'').trim(); NOTES[id]=note;
+  if(!note) return setMsg(id,'Type a note for Claude first: what is wrong or what to change.',true), $('rvnote').focus();
+  if(!LS.get('aot-gh-token')) return setMsg(id,'Close this, open Setup at the top of the page and paste the GitHub token first.',true);
+  if(!confirm('Reject the picture QA approved for '+rowLabel(e)+'? It will be made again.')) return;
+  try{
+    const today=new Date().toISOString().slice(0,10), at=Date.now(), rec=Object.assign({date:today,note,from:'review',at,file:v.file},v.srv?{srv:v.srv}:{},v.svc?{svc:v.svc,try:v.try||0}:{svc:'xai'},v.qa!=null?{qa:v.qa,qaFail:v.qaFail||[]}:{});
+    await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(rec); x.status='rejected'; },'Art Library: '+id+' rejected after QA approved it, note saved');
+    e.rejects=(e.rejects||[]).concat([rec]); e.status='rejected'; NOTES[id]='';
+    toast('Rejected. Your note is saved for Claude.'); refreshItem(id); computeStates(); rvDraw();
+  }catch(err){ setMsg(id,String(err.message||err),true); }
+}
 async function rvDecide(kind){
   const id=rvId(), rs=RES[id]||[], r=rs[RV.v]; if(!r) return;
   NOTES[id]=$('rvnote').value;
@@ -594,7 +610,7 @@ async function rvDecide(kind){
   if(RV.mode==='queue'){ rvClose(); toast('Queue cleared. Nothing else is waiting on you.'); } else rvDraw();
 }
 $('rvx').onclick=rvClose; $('rvp').onclick=()=>rvGo(-1); $('rvn').onclick=()=>rvGo(1);
-$('rvok').onclick=()=>rvDecide('ok'); $('rvno').onclick=()=>rvDecide('no');
+$('rvauto').onclick=notThisOne; $('rvok').onclick=()=>rvDecide('ok'); $('rvno').onclick=()=>rvDecide('no');
 $('rvnote').addEventListener('input',()=>{ const id=rvId(); if(id) NOTES[id]=$('rvnote').value; });
 $('rvchips').addEventListener('click',e=>{ const b=e.target.closest('[data-vi]'); if(b){ RV.v=+b.dataset.vi; rvDraw(); } });
 $('rvopen').onclick=()=>{ const w=waitingIds(); if(!w.length) return toast('Nothing is waiting on you.'); rvOpen(w[0],0); };

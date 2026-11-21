@@ -7415,7 +7415,7 @@
    "col": "prog",
    "tag": "artgen3",
    "auto": true,
-   "next": "Waits on QA for generated pictures (artgen2) and your look at its results. Then it adds the second button, Generate and auto-approve what passes QA: a picture is approved for you only when every must-pass check is yes and the score reaches the threshold; the rest wait for you.",
+   "next": "Built and waiting on the push to land. Your try of the new button is the card Try the auto-approve button on a pictures card.",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-21",
@@ -7447,6 +7447,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built artgen3: a second button on every pictures card, Generate and auto-approve what passes QA. A picture is approved by the job only when QA ran 3 times, every must-pass check is yes, the score is 0.9 or more, the entry has no earlier reject of yours and no photo of your own. Entries waiting on an approved picture are made in the same run, and art-bake is started with the approved files. Nothing was sent to xAI. Notes in claude/artgen-plan.md Built."
     }
    ],
    "prompt": {
@@ -7458,7 +7462,8 @@
     "effort": "medium (the rule, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 6), then card c-artgen3 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen3 exactly as the plan says and push it as artgen3. Your first push is the commit board: start c-artgen3. Spend nothing on xAI. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T18:41:28+00:00"
+   "started_at": "2026-11-21T18:41:28+00:00",
+   "after": "t-artgen3try"
   },
   {
    "id": "c-cardlinks1",
@@ -26069,7 +26074,7 @@
   },
   {
    "id": "c-b3s18",
-   "title": "Battle system stage 18: chapters 6 to 10 and the bonus chapter story switch",
+   "title": "Battle stage 18: chapters 6 to 10 and bonus story switch",
    "theme": "Battle System",
    "lane": "claude",
    "col": "wait",
@@ -26349,6 +26354,29 @@
      "d": "2026-11-21",
      "t": "Made by the session that shipped idea-savedportraits.",
      "at": "2026-11-21T18:55:02.000Z"
+    }
+   ]
+  },
+  {
+   "id": "t-artgen3try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "pictures",
+   "fyi": true,
+   "title": "Try the auto-approve button on a pictures card",
+   "next": "No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN > BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "started by c-artgen3"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-artgen3 (artgen3 shipped)."
     }
    ]
   }

@@ -584,14 +584,16 @@ const ARTGEN_RAW=()=> (Q.get('artgen')||'https://raw.githubusercontent.com/trivi
 function qaHtml(run){
   const qa=run.qa||{},ids=Object.keys(qa);if(!ids.length)return '';
   return ids.map(id=>{const v=qa[id],e=ART&&ART[id],t=e?shortT(e.title):id;
-    const body=v.yes!=null?'<div class="qs">QA '+v.yes+' of '+v.of+'</div>'+((v.failed||[]).length?(v.failed||[]).map(f=>'<div class="qf">Failed: '+esc(f.q)+(f.why?' ('+esc(f.why)+')':'')+'</div>').join(''):'<div>Nothing failed.</div>'):'<div>QA not run: '+esc(v.skipped||'no reason given')+'</div>';
+    const ap=(run.approved||[]).find(x=>x.id===id);
+    const body=(ap?'<div class="qs">Approved by QA ('+ap.yes+' of '+ap.of+') <a href="art.html?open='+esc(id)+'">Not this one</a></div>':'')+(v.yes!=null?'<div class="qs">QA '+v.yes+' of '+v.of+'</div>'+((v.failed||[]).length?(v.failed||[]).map(f=>'<div class="qf">Failed: '+esc(f.q)+(f.why?' ('+esc(f.why)+')':'')+'</div>').join(''):'<div>Nothing failed.</div>'):'<div>QA not run: '+esc(v.skipped||'no reason given')+'</div>');
     return '<div class="qa"><a href="art.html?review='+esc(id)+'"><img alt="'+esc(t)+'" src="'+esc(ARTGEN_RAW()+(v.file||''))+'" loading="lazy"></a><div><b>'+esc(t)+'</b>'+body+'</div></div>';}).join('');
 }
 // artgen2: QA against Tom's own decisions, worked out from data/art-prompts.json the way tools/art-library/artqa_report.py does
 function qaLine(){
   if(!ART)return '';let ok=0,n=0;const thr=.9;
   Object.values(ART).forEach(e=>[['a',e.versions],['r',e.rejects]].forEach(([k,rs])=>(rs||[]).forEach(r=>{if(r.qa==null)return;n++;const pass=+r.qa>=thr&&!(r.qaFail||[]).some(x=>/^f_/.test(x));if((k==='a')===pass)ok++;})));
-  return n?'QA so far: agreed with you on '+ok+' of '+n+' pictures':'QA has not been checked against your decisions yet';
+  let bad=0;Object.values(ART).forEach(e=>(e.rejects||[]).forEach(r=>{if(r.qa!=null&&+r.qa>=thr&&!(r.qaFail||[]).some(x=>/^f_/.test(x)))bad++;}));
+  return n?'QA so far: agreed with you on '+ok+' of '+n+' pictures'+(bad?'. You rejected '+bad+' that QA would have approved.':''):'QA has not been checked against your decisions yet';
 }
 function picsHtml(c,compact){
   if(!hasPics(c))return '';
@@ -604,12 +606,17 @@ function picsHtml(c,compact){
   if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' picture'+((run.n||n)===1?'':'s')+'...';
   else if(c.col==='wait'){const by=blockedBy(c);why='Waiting on: '+(by.length?by.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
   else if(!n)why='Nothing to make right now.';
-  const arm=GENARM===c.id;
+  const arm=GENARM===c.id,arm2=GENARM===c.id+'|auto';
   h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="gen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+money(est)+')':'Generate all '+n+' picture'+(n===1?'':'s')+' (about '+money(est)+')')+'</button>';
+  // artgen3: the second button. The rule is in plain words right above it.
+  if(!why&&!compact)h+='<div class="gm">A picture is approved for you only when every must-pass check is yes and at least 9 of 10 checks pass. The rest wait for you.</div>'
+    +'<button type="button" class="gen'+(arm2?' armed':'')+'" data-act="gen" data-mode="auto" data-id="'+esc(c.id)+'">'+(arm2?'Tap again to confirm: make '+n+' and auto-approve what passes (about '+money(est)+')':'Generate and auto-approve what passes QA (about '+money(est)+')')+'</button>';
   if(busy)h+='<div class="gm">'+(g.want?'Started. The pictures are made for you (about a minute each). This card shows them when they are ready.':'The job is running. This card shows the pictures when they are ready.')+'</div>';
   if(!busy&&run.state&&run.state!=='running'){
     const ids=(run.made||[]).concat(run.already||[]).filter(id=>rows.some(r=>r.id===id));
     h+='<div class="gm"><b>Last run: '+(run.state==='done'?'finished':'failed')+'</b> (spent about '+money(+run.spent||0)+')'
+      +(run.approved&&run.approved.length?'<br>Approved by QA: '+esc(run.approved.map(x=>x.id+' ('+x.yes+' of '+x.of+')').join(', ')):'')
+      +(run.held&&run.held.length?run.held.map(x=>'<br>Waits for you: '+esc(x.id)+', '+esc(x.why)).join(''):'')
       +(run.made&&run.made.length?'<br>Made: '+esc(run.made.join(', ')):'')
       +(run.already&&run.already.length?'<br>Already waiting: '+esc(run.already.join(', ')):'')
       +(run.skipped||[]).map(x=>'<br>Skipped '+esc(x.id)+': '+esc(x.why)).join('')
@@ -619,13 +626,14 @@ function picsHtml(c,compact){
   }
   return h+'</div>';
 }
-function genTap(id){
+function genTap(id,mode){
   const c=cardById(id);if(!c||!hasPics(c))return;
   const mk=picRows(c).filter(r=>r.state==='make');if(!mk.length)return;
-  if(GENARM!==id){GENARM=id;rerender();clearTimeout(genTap.h);genTap.h=setTimeout(()=>{if(GENARM===id){GENARM='';rerender();}},4000);return;}
+  mode=mode==='auto'?'auto':'review';const arm=mode==='auto'?id+'|auto':id;
+  if(GENARM!==arm){GENARM=arm;rerender();clearTimeout(genTap.h);genTap.h=setTimeout(()=>{if(GENARM===arm){GENARM='';rerender();}},4000);return;}
   GENARM='';clearTimeout(genTap.h);
   const ids=mk.map(r=>r.id),est=mk.reduce((a,r)=>a+r.cost,0);
-  save('board: generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.gen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),ids,est:+est.toFixed(2),mode:'review'};touch(z,'Tom approved generating '+ids.length+' picture'+(ids.length===1?'':'s')+' (about '+money(est)+').');}return d;})
+  save('board: generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.gen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),ids,est:+est.toFixed(2),mode};touch(z,'Tom approved generating '+ids.length+' picture'+(ids.length===1?'':'s')+(mode==='auto'?' and auto-approving the ones that pass QA':'')+' (about '+money(est)+').');}return d;})
     .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
 }
 
@@ -1108,7 +1116,7 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='restart'){restartCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
-  if(act&&act.dataset.act==='gen'){genTap(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='gen'){genTap(act.dataset.id,act.dataset.mode);e.stopPropagation();return;}
   if(act&&act.dataset.act==='vgen'){vgenTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}

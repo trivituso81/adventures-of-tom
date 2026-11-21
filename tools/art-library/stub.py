@@ -154,6 +154,8 @@ class H(BaseHTTPRequestHandler):
                 LOG.append({'xai': self.path, 'refused': True, 'prompt': b['prompt'][:80]}); return self._send(400, {'error': 'content policy'})
             LOG.append({'xai': self.path, 'refs': len(b.get('images') or []), 'prompt': b['prompt'][:80], 'ar': b.get('aspect_ratio'), 'res': b.get('resolution'), 'refhash': [hashlib.sha1(i['url'].split(',', 1)[-1].encode()).hexdigest()[:10] for i in (b.get('images') or [])]})
             return self._send(200, {'data': [{'b64_json': base64.b64encode(png()).decode(), 'mime_type': 'image/png'}]})
+        if self.path.startswith('/repos/') and self.path.endswith('/dispatches'):   # artgen3: the art-bake dispatch
+            LOG.append({'dispatch': self.path, 'inputs': (b or {}).get('inputs')}); return self._send(204)
         self._send(404)
     def do_PUT(self):
         if os.environ.get('STUB_PUT_DELAY'): time.sleep(float(os.environ['STUB_PUT_DELAY']))   # tapfb1: a slow GitHub, so a test can see the busy spinner

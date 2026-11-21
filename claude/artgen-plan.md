@@ -192,3 +192,10 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 - Not measured: rejected pictures (none are kept), so only false alarms are known. The record of QA against Tom's decisions starts with the next generated pictures. The replay judges with the newest reference versions, not the ones used at approval time.
 - Project copy: a session with the Project must write this section to claude/artgen-plan.md there too.
 
+### artgen3 (2026-11-21, Sonnet 5.5): built as section 6 says, with these differences
+
+- Files: `tools/art-library/artgen.py` (`auto_verdict`, `Repo.approve_picture`, `dispatch_bake`, the loop that makes entries that became ready), `art-gen.yml` (input `auto`, `GITHUB_TOKEN` for the bake dispatch), `stub.py` (dispatch endpoint), `artgen3_test.py`, board.html, art.html, `tools/board_sync.py` (r2_art).
+- Differences: the mode comes from the card (`gen.mode`), so the workflow needs no flag for a tap; the `auto` input is for hand runs. The version record also carries `svc` and `try`; `srv` is the result's key (`<id>@<stamp>`), the same as an imported result's. "Not this one" is a new button in the Library review (`#rvauto`) because an auto-approved picture has no result on the phone to REJECT; it writes the same reject record (with the version's service, try and QA). The record line on the card adds the count of pictures Tom rejected that QA would have approved. `skipped` no longer lists a picture that waited on a reference and was made later in the run.
+- Not changed: threshold 0.9, hold list (f_same stays advisory).
+- Measured: nothing; no xAI call was made. The first paid auto run is Tom's tap (card t-artgen3try). The Project copy of this file needs the same section.
+- Pre-existing test failures seen, not from this build: `board_test.py` (c-startme start button timed out) and four `board_sync_test.py` checks (R5 replay, two board_check cases). c-b3s18's long title was fixed because it stopped board_check.

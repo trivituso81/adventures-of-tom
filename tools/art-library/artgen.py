@@ -104,6 +104,28 @@ class Repo:
             say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
         raise RuntimeError('could not push the change to %s 8 times' % rel)
 
+    def approve_picture(self, i, png, prompt, extra, msg):
+        """artgen3: approve a picture the way decide('ok') does in the Library: file art/raw/<tab>/<id>-v<k>.png (k = highest n plus 1, raised while the file exists)
+        and the entry's prompt, status and a versions record, in ONE commit on the newest main (retried). Returns (path, n)."""
+        for attempt in range(8):
+            self.sync()
+            doc = self.entries(); e = next((x for x in doc['entries'] if x['id'] == i), None)
+            if e is None: raise RuntimeError('no entry ' + i)
+            slug = (e.get('tab') or 'misc').lower()
+            k = max([0] + [v.get('n') or 0 for v in (e.get('versions') or [])]) + 1
+            while os.path.exists(os.path.join(self.root, 'art', 'raw', slug, '%s-v%d.png' % (i, k))): k += 1
+            path = 'art/raw/%s/%s-v%d.png' % (slug, i, k)
+            os.makedirs(os.path.dirname(os.path.join(self.root, path)), exist_ok=True)
+            open(os.path.join(self.root, path), 'wb').write(png)
+            e['prompt'] = prompt; e['status'] = 'approved'
+            e.setdefault('versions', []).append(dict({'n': k - 1, 'file': path, 'date': datetime.date.today().isoformat(), 'from': 'artgen', 'at': int(time.time() * 1000)}, **extra))
+            open(self.data, 'w', encoding='utf-8').write(jdump(doc))
+            self.git('add', path, 'data/art-prompts.json')
+            self.git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m', msg)
+            if self.git('push', self.remote, 'HEAD:main', check=False).returncode == 0: return path, k - 1
+            say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
+        raise RuntimeError('could not push the approval of %s 8 times' % i)
+
     def update_board(self, msg, fn):
         """Re-read the newest main, let fn(board) change it, commit and push (retried against a main that moved)."""
         return self.update_file('data/board.json', msg, self.load_board, fn)
@@ -225,6 +247,31 @@ def classify(doc, ids, has, results, force=()):
     return out
 
 
+def auto_verdict(e, qa, policy):
+    """artgen3: (True, '') when a picture may be approved for Tom, else (False, why). ALL must hold: QA ran in full (3 runs), every hold question that was asked is yes,
+    the score reaches the threshold, the entry has no earlier rejection (once he has rejected it his eye decides) and no `own`."""
+    if e.get('own'): return False, 'needs your photo'
+    if e.get('rejects'): return False, 'you rejected this entry before, so your eye decides it'
+    if not qa or 'yes' not in qa: return False, 'no QA score'
+    if qa.get('runs') != 3: return False, 'QA ran %s of 3 times' % qa.get('runs')
+    items = qa.get('items') or []
+    if not items: return False, 'no QA checks'
+    bad = [i['id'] for i in items if i['id'] in policy.get('hold', []) and not i['yes']]
+    if bad: return False, 'a must-pass check said no (%s)' % ', '.join(bad)
+    if qa.get('score', 0) < policy.get('threshold', 0.9): return False, 'score %d of %d is under the threshold' % (qa['yes'], qa['of'])
+    return True, ''
+
+
+def dispatch_bake(files):
+    """A push made with the Action's own token starts nothing, so art-bake is started by workflow_dispatch with the approved files."""
+    import requests
+    tok = os.environ.get('GITHUB_TOKEN') or os.environ.get('GH_TOKEN'); repo = os.environ.get('GITHUB_REPOSITORY')
+    if not tok or not repo: say('no token or repository: the bake was not started (the next art-bake run bakes the newest push)'); return False
+    r = requests.post('%s/repos/%s/actions/workflows/art-bake.yml/dispatches' % (os.environ.get('GITHUB_API_URL', 'https://api.github.com'), repo), headers={'Authorization': 'Bearer ' + tok, 'Accept': 'application/vnd.github+json'}, json={'ref': 'main', 'inputs': {'files': ','.join(files)}}, timeout=60)
+    say('art-bake dispatch: HTTP %d %s' % (r.status_code, '' if r.status_code == 204 else r.text[:200]))
+    return r.status_code == 204
+
+
 class Stop(Exception): pass
 
 
@@ -309,7 +356,7 @@ def money(x):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--card', default=''); ap.add_argument('--ids', default=''); ap.add_argument('--cap', type=float, default=0.0)
-    ap.add_argument('--par', type=int, default=3); ap.add_argument('--no-qa', action='store_true'); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true'); ap.add_argument('--requests', action='store_true')
+    ap.add_argument('--par', type=int, default=3); ap.add_argument('--no-qa', action='store_true'); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true'); ap.add_argument('--requests', action='store_true'); ap.add_argument('--auto', action='store_true')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'artgen-out')); ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
     a = ap.parse_args()
     repo = Repo(a.repo, os.environ.get('ARTGEN_REMOTE', 'origin'))
@@ -409,9 +456,11 @@ def add_stop_cards(board, entries, root, today):
 
 def do_card(a, repo, cid, override, results, key, reqs=None):
     doc = repo.entries()
+    auto = bool(getattr(a, 'auto', False))
     if reqs is None:
         board = repo.load_board(); card = next(c for c in board['cards'] if c['id'] == cid)
         ids = card_ids(card, override)
+        if (card.get('gen') or {}).get('mode') == 'auto': auto = True
     else:
         ids = apply_requests(doc, reqs)
     cl = classify(doc, ids, repo.has, results, force=ids if reqs is not None else ())
@@ -427,7 +476,7 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
     for e in make: say('  %s  %s try %d  %d references  %s' % (e['id'], 'WAN' if svc_of(e) == 'wan' else 'xAI', rows[e['id']]['try'], len(e.get('refs') or []), money(cost_of(e, svc_of(e)))))
     skipped = [{'id': r['id'], 'why': r['why']} for r in cl if r['state'] != 'make' and r['state'] != 'made']
     already = [r['id'] for r in cl if r['state'] == 'made']
-    rep = {'card': cid or '(requests)', 'state': 'done', 'estimate': round(est, 2), 'cap': cap, 'dry_run': a.dry_run, 'made': [], 'already': already, 'skipped': skipped, 'failed': [], 'spent': 0.0, 'svc': {}}
+    rep = {'card': cid or '(requests)', 'auto': auto, 'approved': [], 'held': [], 'state': 'done', 'estimate': round(est, 2), 'cap': cap, 'dry_run': a.dry_run, 'made': [], 'already': already, 'skipped': skipped, 'failed': [], 'spent': 0.0, 'svc': {}}
     if a.dry_run: say('dry run: nothing sent'); return rep
     url = run_url()
     def mark_running(b):
@@ -472,11 +521,14 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
             c = next(x for x in b['cards'] if x['id'] == cid); g = c.setdefault('gen', {})
             g['want'] = False
             g['run'] = {'state': rep['state'], 'at': now_iso(), 'run': url, 'made': rep['made'], 'already': already, 'skipped': skipped, 'failed': rep['failed'], 'spent': rep['spent'], 'svc': rep['svc']}
+            if auto: g['run']['auto'] = True; g['run']['approved'] = rep['approved']; g['run']['held'] = rep['held']
             if rep.get('qa'): g['run']['qa'] = rep['qa']
             if rep.get('qa_note'): g['run']['qa_note'] = rep['qa_note']
             bits = []
             if rep['made']: bits.append('made %d picture%s' % (len(rep['made']), '' if len(rep['made']) == 1 else 's'))
             if 'wan' in rep['svc'].values(): bits.append('%d on WAN' % list(rep['svc'].values()).count('wan'))
+            if rep['approved']: bits.append('%d approved by QA (%s)' % (len(rep['approved']), ', '.join('%d of %d' % (x['yes'], x['of']) for x in rep['approved'])))
+            if rep['held']: bits.append('%d waiting for your review' % len(rep['held']))
             if already: bits.append('%d were already waiting for your review' % len(already))
             if skipped: bits.append('skipped %d' % len(skipped))
             if rep['failed']: bits.append('%d failed' % len(rep['failed']))
@@ -524,6 +576,7 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
             judge = artqa.Judge(key, os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
         except BaseException as x:
             judge = None; rep['qa_note'] = 'QA did not start: ' + str(x)[:150]; say('warning:', rep['qa_note'])
+    policy = artqa.load_policy() if auto and judge else {}
     say('preflight ok')
 
     def refuse(e, svc, tr, why):
@@ -597,6 +650,22 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
                     try: repo.branch_save(a.out)
                     except Exception as x: say('warning: ' + str(x))
                 say(i, artqa.short(qa) if 'yes' in qa else 'no QA: ' + str(qa.get('skipped')))
+            if auto:   # artgen3: approved by the Action only when every rule holds; anything else waits for Tom as in phase 1
+                try:
+                    cur = next((x for x in repo.entries()['entries'] if x['id'] == i), e)
+                    ok, why = auto_verdict(cur, results[-1].get('qa') if results[-1]['id'] == i else None, policy)
+                    if ok:
+                        q = results[-1]['qa'] if results[-1]['id'] == i else qa
+                        with lock:
+                            path, n = repo.approve_picture(i, png, (e.get('prompt') or '').strip(), dict({'qa': q['score'], 'qaFail': [x['id'] for x in q['items'] if not x['yes']], 'srv': results[-1]['key'] if results[-1]['id'] == i else next(r['key'] for r in results if r['id'] == i)}, **{'svc': svc, 'try': tr}), 'art: %s approved by QA (%d of %d) [skip ci]' % (i, q['yes'], q['of']))
+                            rep['approved'].append({'id': i, 'file': path, 'yes': q['yes'], 'of': q['of']})
+                        say(i, 'APPROVED by QA as', path)
+                    else:
+                        with lock: rep['held'].append({'id': i, 'why': why})
+                        say(i, 'waits for your review:', why)
+                except Exception as x:
+                    with lock: rep['held'].append({'id': i, 'why': 'could not approve: ' + str(x)[:150]})
+                    say(i, 'could not approve:', str(x)[:200])
         except (Stop, falq.KeyRefused) as x:
             (stop_wan if svc == 'wan' else stop).set(); rep['failed'].append({'id': i, 'why': str(x)}); say(i, 'STOP:', x)
         except (Refused, falq.Refusal, falq.Gone) as x:   # a refusal or an error with no picture: a failed try, written to the entry as a reject
@@ -604,8 +673,21 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
         except Exception as x:
             rep['failed'].append({'id': i, 'why': str(x)[:300]}); say(i, 'FAILED:', str(x)[:300])
     results[:] = prune(a.out, results, doc)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, a.par)) as ex:
-        list(ex.map(work, make))
+    attempted = set()
+    while make:
+        attempted |= {e['id'] for e in make}
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, a.par)) as ex:
+            list(ex.map(work, make))
+        if not (auto and rep['approved']): break
+        # artgen3: entries that waited on a picture approved just now are ready: make them in the same run (the cap still stops it)
+        doc = repo.entries(); by = {x['id']: x for x in doc['entries']}
+        cl = classify(doc, ids, repo.has, results, force=ids if reqs is not None else ())
+        for r in cl: rows.setdefault(r['id'], r); rows[r['id']] = r
+        make = [by[r['id']] for r in cl if r['state'] == 'make' and r['id'] not in attempted]
+        if make: say('now ready: ' + ', '.join(e['id'] for e in make))
+    skipped[:] = [x for x in skipped if x['id'] not in rep['made']]   # a picture that waited on a reference and was made later in the run is not skipped
+    if rep['approved']:
+        dispatch_bake([x['file'] for x in rep['approved']])
     return finish()
 
 

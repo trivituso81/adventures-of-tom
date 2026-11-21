@@ -30,6 +30,10 @@ on:
         description: 'Most dollars sent to xAI in this run (0 = twice the estimate, at least 1).'
         required: false
         default: '0'
+      auto:
+        description: 'artgen3: true = approve what passes QA for Tom (the same as the card''s second button). Empty: the card''s own mode.'
+        required: false
+        default: 'false'
       replay:
         description: 'artgen2: a number N above 0 judges the N newest approved pictures with the QA (no pictures made; costs real xAI money up to cap, default 1.5) and prints how often each question says no.'
         required: false
@@ -114,6 +118,8 @@ jobs:
           DRY: ${{ inputs.dry_run }}
           EVENT: ${{ github.event_name }}
           REQ: ${{ inputs.requests }}
+          AUTO: ${{ inputs.auto }}
+          GITHUB_TOKEN: ${{ github.token }}
           MSG: ${{ github.event.head_commit.message }}
         run: |
           set -o pipefail
@@ -122,6 +128,7 @@ jobs:
             if [ "$REQ" = "true" ]; then ARGS+=(--requests --cap "${CAP:-0}"); else ARGS+=(--card "$CARD" --cap "${CAP:-0}"); fi
             [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
             [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+            [ "$AUTO" = "true" ] && ARGS+=(--auto)
           elif [[ "$MSG" == "art: generate "* ]]; then
             ARGS+=(--requests)
           fi

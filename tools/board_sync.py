@@ -222,8 +222,15 @@ def r2_art(B, art):
         undecided = [i for i in ids if st[i] not in ('approved', 'rejected')]
         if undecided or not ok and not no: continue
         c['col'] = 'done'; c['done'] = B.today; c.pop('waiting_on', None)
-        t = 'Done by the board: you approved %s in the Art Library.' % ', '.join(ok) if not no else \
-            'Done by the board: you decided every picture. Approved: %s. Rejected: %s.' % (', '.join(ok) or 'none', ', '.join(no))
+        # artgen3: a newest version made by the art-gen job (from artgen) was approved by QA, not by Tom
+        newest = lambda i: max((art[i].get('versions') or [{}]), key=lambda v: v.get('n') or 0)
+        byqa = [i for i in ok if newest(i).get('from') == 'artgen']; bytom = [i for i in ok if i not in byqa]
+        who = 'Approved by QA: %s. Approved by you: %s.' % (', '.join(byqa), ', '.join(bytom) or 'none')
+        if not byqa:
+            t = 'Done by the board: you approved %s in the Art Library.' % ', '.join(ok) if not no else \
+                'Done by the board: you decided every picture. Approved: %s. Rejected: %s.' % (', '.join(ok) or 'none', ', '.join(no))
+        else:
+            t = 'Done by the board: every picture is approved. %s' % who if not no else 'Done by the board: every picture is decided. %s Rejected: %s.' % (who, ', '.join(no))
         B.hist(c, t); B.say('done %s (art decided)' % c['id'])
     # fix-artgen2look (Tom 2026-11-20: "you need to like check to see if an image is in the game before you tell me I need to generate it"):
     # an open pictures card with no done_when that blocks nothing and whose Art Library links are all approved already has its pictures, so it closes itself.
