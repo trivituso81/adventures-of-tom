@@ -434,8 +434,7 @@ SCENES.ch1Sunday=[
   {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone'}},   // cutpolish4b: the phone lights up on the cab seat
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
   {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
-  {save:true},
-  {toast:'Chapter 1 complete! Long Island is yours to explore.',time:6}
+  {trip:'west'}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
 ];
 
 // ======================================================================================================

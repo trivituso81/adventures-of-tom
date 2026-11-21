@@ -1,3 +1,9 @@
+## reports-2026-11-20 (2026-11-21): Chapter 1 now goes straight from TNB's text into the airport run
+
+- Report r-20261120-184534-ict4 (bug, ch1Sunday): "Should go straight from tnb's text to the airport animation". The cab scene used to end with the chapter 1 card, a toast and Tom standing in the Square, and the airport run only started when he talked to Sal again.
+- `SCENES.ch1Sunday` now ends with a new scene step `{trip:'west'}` (`SCENE_OPS.trip`, `engine/story.js`) that plays the whole airport run (`tripSteps`, split out of `startTrip` in `engine/travel.js`): the girls' goodbye with Sal, then cabin, takeoff, map, landing, and chapter 2 starts in Los Angeles. The save happens on landing, as for every other flight. The "Chapter 1 complete" toast is gone with the scene's own save.
+- Tested in a browser: cab scene, then cabin, takeoff, map, landing, Los Angeles, no page errors.
+
 ## b3s12 (2026-11-20): New battle: the chapter 7 library monsters and The Unread join the Battle Lab (stage 12 complete)
 
 - Tom (11-20): "build stage 12 (bestiary chapters 5 to 7 with their bosses)". The final part is chapter 7, the library, from `claude/bestiary-v11.md`: Shusher, Dog-Ear, The Cliffhanger, The Know-It-All, Pop-Up Panic (Elite) and the boss The Unread (1230 HP for 4, 920 for 3), 6 formations (9 VP each, 27 for the boss), in `data/b3-foes-ch07.js`. With `b3s12a` and `b3s12b`, stage 12 now holds chapters 5 to 7.

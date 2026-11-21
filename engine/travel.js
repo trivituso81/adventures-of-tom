@@ -345,7 +345,7 @@ function runScene(steps) {
   clearInput();
 }
 
-function startTrip(n,dir) {
+function tripSteps(dir) {   // the whole airport run as steps; startTrip plays it, and a scene can chain it ({trip:'west'}, SCENE_OPS)
   if(typeof flightArtLoad==='function') flightArtLoad();
   const steps=[],d=departureNow(),arr=arrivalNow(dir);
   if(dir==='west') {
@@ -380,8 +380,9 @@ function startTrip(n,dir) {
   if(customScript) steps.push(...d.script());
   if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
   steps.push(...flightSteps(dir,d.flight,arr,d.photo));
-  runScene(steps);
+  return steps;
 }
+function startTrip(n,dir) { runScene(tripSteps(dir)); }
 
 // ---------- Flight cutscene ----------
 function flightPhase(mode,dur) {
