@@ -19707,7 +19707,7 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Open ADMIN > BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it.",
+   "next": "Nothing to tap to make them: Claude made the 3 pictures again with new prompts. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon yellow running shoes, one smooth color, no letters, stripes or logo, soles as thin as paper, like slippers; (2) Tiny Clay Taco: one shiny cream pottery ornament with brown speckles, the filling only glazed green and red bumps, a silver paperclip in it, not real food; (3) Birthday Sash: a long wide gold sparkly band in a loop with a big gold bow on it, the band bigger than the bow. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it.",
    "blocks": [],
    "done_when": {
     "art_approved": [
@@ -19832,6 +19832,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Based on the feedback adjust the prompts for the failed images and regenerate Sent to Claude as card c-fix-itembannerart-pics-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T07:29:04.975Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-itembannerart-pics-3: on Tom's words \"Based on the feedback adjust the prompts for the failed images and regenerate\", Claude rewrote only the 3 solo notes (flats had a JC logo, stripes and normal soles; taco was real food in a shell; sash was a ribbon and bow; QA called taco and sash a 3D render) and added one simpler-brushwork line for solo pictures, then made the 3 again (about $0.18)."
     }
    ],
    "gen": {
@@ -22780,6 +22784,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-itembannerart-pics-3: the 3 solo prompts rewritten, to be made again."
     }
    ],
    "prompt": {

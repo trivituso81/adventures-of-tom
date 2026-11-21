@@ -1,3 +1,10 @@
+## fix-itembannerart-pics-3 (2026-11-20): the 3 item pictures that missed get new prompts and are made again
+
+- Card c-fix-itembannerart-pics-3, on t-itembannerart-pics. Tom: "Based on the feedback adjust the prompts for the failed images and regenerate".
+- Looked at the 3 solo pictures (fact): Pro Racing Flats had a "JC" logo, stripes and normal soles; Tiny Clay Taco was filling in a shell, food rather than pottery; Birthday Sash was a ribbon with a bow, no long band. QA called the taco and the sash a 3D render.
+- Changed only the 3 solo prompts (`SOLO_NOTE` in tools/art-library/itemart-prompts.js): each note now describes the shape to paint (flats: one smooth color, sole as thin as paper, seen from the side; taco: one glazed clay ornament, filling is glazed bumps; sash: a long wide gold band in a loop, bow on it). One STYLE line added for solo pictures: broad color areas, few strokes, no airbrushed finish. Kept: the rest of the prompt, the reference picture, the redo sheets' notes (approved). promptRev 1 on all 3, so the pictures are made again.
+- No report was filed since the card was made (reports.py list: 0 open).
+
 ## projclean1f (2026-11-21): Project docs moved into the repo: the last 10 large docs copied into claude/ (ability revamp plans, battle design, old changes and status notes)
 
 - Card c-projclean: copied word for word to the same path in claude/: adventures-of-tom-ability-revamp.md, adventures_of_tom_ability_revamp_plan.md, battle-design.md, ability-revamp-brief.md, CHANGES.md (the old October change log, not docs/CHANGES.md), tombo-review.md, kit-recipe.md, voice-baker-scripts.txt, voice-baking.md, portrait-style.md. Docs only: no game file changed.

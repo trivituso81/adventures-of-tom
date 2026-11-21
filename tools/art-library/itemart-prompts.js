@@ -28,7 +28,7 @@ ${solo ? '- One object only, complete and centered, filling about 70 percent of 
 STYLE
 - Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.
 - No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.
-- Three-quarter view from slightly above, unless the list says laid flat or standing.${solo ? '' : ' All objects share one lighting direction and one level of detail.'} Family friendly for children aged 6 and up.
+${solo ? '- Paint it as simply as the attached picture: broad areas of color and a few soft visible strokes, not fine detail, not a smooth airbrushed finish.\n' : ''}- Three-quarter view from slightly above, unless the list says laid flat or standing.${solo ? '' : ' All objects share one lighting direction and one level of detail.'} Family friendly for children aged 6 and up.
 
 RULES
 - ${solo ? 'Draw exactly this one object and nothing else.' : `Draw exactly the ${n} objects in the list, one per cell, and never substitute, add or skip one.`} Where a list entry is unusual, draw it as written.
@@ -71,6 +71,15 @@ const RPER = 9;
 // Stop-loss: the note is not reworded a third time; the method changes instead. Each is one object alone in its own picture (`prop-item-solo-<id>`,
 // the same note, cut with --grid=1), and its redo sheet's bake skips its cell (`-`), so the redo sheets are approved for their other cells.
 const SOLO = new Set(['amy_chm1', 'claytaco', 'g_bsash']);
+// fix-itembannerart-pics-3 (2026-11-20). Tom: "Based on the feedback adjust the prompts for the failed images and regenerate". The solo pictures
+// missed again: the flats had a letter logo, stripes and normal soles; the taco was filling in a shell (food, not pottery) and the sash a ribbon
+// with a bow, and QA called both a 3D render. Only these notes change (the redo sheets' notes stay, those sheets are approved), each describing the
+// shape to paint instead of what to avoid, plus one STYLE line for solo pictures (simpler brushwork, for the 3D render call).
+const SOLO_NOTE = {
+  amy_chm1: 'A pair of racing flats: low, light running shoes in solid neon yellow, each upper one smooth color with no stripes, marks or patterns, on a flat sole as thin as a sheet of paper, so each shoe looks almost like a slipper. Seen from the side.',
+  claytaco: 'A tiny taco figurine made of glazed pottery, like a little ceramic ornament: one solid piece of fired clay under a hard shiny cream glaze with small brown speckles, the shell and the filling the same smooth glazed clay (the filling is a few rounded bumps glazed green and red), with a silver paperclip stuck into the top. Clearly a clay ornament, not food.',
+  g_bsash: 'A gold sparkly birthday sash: one long, wide band of glittery gold fabric sewn into a big loop like a pageant sash, laid flat so the whole long loop shows, with a big gold bow tied on the band near the bottom of the loop. The long band fills most of the picture; the bow is one part of it.',
+};
 
 const sheets = [];
 for (let i = 0; i < ITEMS.length; i += PER) sheets.push(ITEMS.slice(i, i + PER));
@@ -91,10 +100,10 @@ for (let i = 0; i < REDO.length; i += RPER) {
   });
 }
 for (const r of REDO.filter(r => SOLO.has(r.item.id))) {
-  const it = { id: r.item.id, name: r.item.name, note: r.note };
+  const it = { id: r.item.id, name: r.item.name, note: SOLO_NOTE[r.item.id] };
   entries.push({
     id: `prop-item-solo-${it.id}`, tab: 'Props', group: 'Item pictures',
-    title: `Item picture: ${it.name} alone (missed on sheet ${r.sheet} and on its redo sheet)`,
+    title: `Item picture: ${it.name} alone (missed on sheet ${r.sheet}, its redo sheet and its first solo picture)`,
     ar: '1:1', refs: [REF_KEY], prompt: sheetPrompt([it], true, true),
     bake: { script: 'bake_item_sheet.py', args: [`item-solo-${it.id}`, '--grid=1', it.id], src: `tools/sprite-bake/src/items/item-solo-${it.id}.png`, key: 'corner' },
   });
@@ -119,4 +128,4 @@ if (require.main === module) {
   fs.writeFileSync(out, JSON.stringify(doc, null, 1) + '\n');
   console.log('item picture entries in', out + ':', entries.length, changed.length ? '\n  ' + changed.join('\n  ') : '(no prompt changes)');
 }
-module.exports = { entries, ITEMS, sheetPrompt, PER, REDO, SOLO };
+module.exports = { entries, ITEMS, sheetPrompt, PER, REDO, SOLO, SOLO_NOTE };
