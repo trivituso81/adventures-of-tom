@@ -22840,7 +22840,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
     "opening": "not started"
    },
    "history": [
@@ -22958,6 +22958,29 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-conflictmarks. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
+  },
+  {
+   "id": "b-board-itemart-refs",
+   "tag": "board-itemart-refs",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom",
+   "next": "Done: board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-itemart-refs. Added by board-sync because the build had no card."
     }
    ],
    "blocks": [],
@@ -23385,6 +23408,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "first": "2026-11-20T23:35:37-08:00",
+   "last": "2026-11-20T23:56:20-08:00",
+   "tags": [
+    "fix-itembannerart-pics-3",
+    "board-itemart-refs"
+   ],
+   "cards": [
+    "c-fix-itembannerart-pics-3",
+    "c-itemart-refs"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEFveyJjLzGjhxUQUA",
    "title": "Fix: Play chapter 1 and watch people listen",
    "first": "2026-11-20T23:54:00Z",
@@ -23406,18 +23443,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
-   "title": "Fix: Make and approve 18 item picture sheets (288",
-   "first": "2026-11-20T23:35:37-08:00",
-   "last": "2026-11-20T23:51:05-08:00",
-   "tags": [
-    "fix-itembannerart-pics-3"
-   ],
-   "cards": [
-    "c-fix-itembannerart-pics-3"
    ]
   },
   {
@@ -26235,8 +26260,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2bff5bafa82e008682ee2efe969916f98a17b76f",
- "synced_at": "2026-11-21T07:51:47+00:00",
+ "synced": "3968776752e3bbd1c6d473c9bd8440dc8b01c082",
+ "synced_at": "2026-11-21T07:57:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
