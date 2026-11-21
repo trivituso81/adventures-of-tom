@@ -28678,7 +28678,7 @@
    "title": "Watch 7 new chapter 1 battle videos",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE GUIDE > Animations and play these 7 videos once each (about 3 minutes in all): Tom, Grace, Rose and Deedee: Cast; Grace: Dodge; Rose: Lamb-Tuck Ankle Tackle; Monsters: Bog Toad Body Slam and Skeeter Swarm Mosquito Whine. In a fight they replace the stand-ins (the hand-out video for a cast, the sliding standing video for Grace's dodge). Then tap All good, or Something is wrong with which video and what you saw. This unblocks the three that missed (c-wanch3).",
    "steps": [
@@ -28696,8 +28696,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch2. Every video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:47:45.022Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanch3",
