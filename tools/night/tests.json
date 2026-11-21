@@ -1265,8 +1265,7 @@
    "id": "rooms_test",
    "cmd": "python3 -I tools/rooms_test.py",
    "group": "g6",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md (tomsuite)"
+   "minutes": 3
   },
   {
    "id": "skip_interstitial_test",
