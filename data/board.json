@@ -29091,12 +29091,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Cause: monsters' home was set on their first tick, after the Mudling scene had moved them. placeMonsters now sets home to the placed spot. hollow_trail_test passed 10 runs in a row. Build hollowfence."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGoS3M47tHQV8dfmdj",
     "opening": "unknown"
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "svc-voice-gen",
