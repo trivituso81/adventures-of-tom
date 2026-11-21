@@ -19492,7 +19492,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    }
   },
@@ -20001,7 +20001,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    },
    "chat": {
@@ -23960,6 +23960,55 @@
     }
    ],
    "started_at": "2026-11-21T16:46:07+00:00"
+  },
+  {
+   "id": "c-anim-tom-loungepass-lf2z",
+   "tag": "anim-tom-loungepass-lf2z",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "anim": {
+    "id": "move:lounge_pass_flex",
+    "owner": "tom",
+    "ownerName": "Tom",
+    "name": "Lounge Pass Flex",
+    "kind": "move",
+    "clip": "tom_loungepass",
+    "painted": false,
+    "what": "move lounge_pass_flex in data/b3-kit-tom.js"
+   },
+   "notes": [
+    {
+     "at": "2026-11-21T16:59:54.985Z",
+     "words": "He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something, like in a cartoon in the top right corner of the card, and then he should, and like sort of a fancy lady like way, swat the monster with the card like he's being extra snooty",
+     "build": "b3s17a"
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "A note sent from the Battle Guide"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide: He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something, like in a cartoon in the top right corner of the card, and then he should, and like sort of a fancy lady like way, swat the monster with the card like he's being extra snooty",
+     "at": "2026-11-21T16:59:54.985Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes the animation Tom, Lounge Pass Flex again from your note, checks it, and hands it back to you to watch.",
+    "before": [
+     "Nothing to do first. Your note is on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one animation, starting from the version that exists)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-lf2z in data/board.json with its history. Your first push is the commit board: start c-anim-tom-loungepass-lf2z.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something, like in a cartoon in the top right corner of the card, and then he should, and like sort of a fancy lady like way, swat the monster with the card like he's being extra snooty\n\nThe animation: Tom, Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js). Its video is clip tom_loungepass (data/clips/tom-loungepass.js, art/clips/tom-loungepass.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-loungepass-lf2z. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
