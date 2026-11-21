@@ -1323,6 +1323,18 @@
    "cmd": "python3 -I tools/b3_skip_test.py",
    "group": "g6",
    "minutes": 1
+  },
+  {
+   "id": "night__clean_test",
+   "cmd": "python3 -I tools/night/clean_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "dashboard_test",
+   "cmd": "python3 -I tools/dashboard_test.py",
+   "group": "g6",
+   "minutes": 2
   }
  ]
 }

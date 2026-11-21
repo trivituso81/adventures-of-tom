@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'night'))
 import lastnight as night_text   # night1: the text of the card Last night
-import board_archive   # bigboard1: Done cards older than 7 days move to data/board-archive.json
+import board_archive   # bigboard1: Done cards older than 2 days move to data/board-archive.json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERM = ' Attach trivituso81/adventures-of-tom with push access (add_repo).'
@@ -727,7 +727,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
     B.b['sessions'] = sorted([s for s in B.b['sessions'] if s['last'] >= cutoff], key=lambda s: s['last'], reverse=True)
-    if archive is not None:   # bigboard1 R13: Done cards older than 7 days leave the board for data/board-archive.json (the page reads the board through a 1 MB API)
+    if archive is not None:   # bigboard1 R13: Done cards older than 2 days leave the board for data/board-archive.json (the page reads the board through a 1 MB API)
         moved = board_archive.archive(B.b, archive, B.today)
         if moved: B.say('archived %d Done cards older than %d days' % (len(moved), board_archive.DAYS))
     return B.log

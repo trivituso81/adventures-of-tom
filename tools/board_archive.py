@@ -4,7 +4,7 @@
 Why: GitHub's contents API sends no content for a file over 1 MB, and the phone reads the board through that API; the board reached 1.05 MB two days
 after it was made (about 220 cards a day). board.html now reads big files by blob id, and this keeps the file from growing without end.
 
-What moves: a card in column done whose `done` date is more than 7 days ago, unless
+What moves: a card in column done whose `done` date is more than 2 days ago (nightclean, 2026-11-21: was 7; 538 of 592 cards were Done and the file was 1.5 MB), unless
   - an open card names it (its `blocks` or `after`), or it names an open card (`blocks`, `after`): the board page reads those links for the
     "Build <name>" line and the hand-back screen, so both ends stay on the board;
   - it is a card with a `note` Tom wrote that board-sync has not turned into a card yet (`note_seen` not set).
@@ -12,7 +12,7 @@ What is kept in the archive, one stub per card (card-shaped, so the tools can tr
 and `history` holding only the card's final history line. Nothing else (the prompt, the reports and the long history are the bulk of the bytes).
 
 Who calls it: tools/board_sync.py at the end of every run (the hourly job), so the board shrinks by itself; by hand:
-    python3 tools/board_archive.py [--days 7] [--today YYYY-MM-DD] [--dry] [--board data/board.json] [--archive data/board-archive.json]
+    python3 tools/board_archive.py [--days 2] [--today YYYY-MM-DD] [--dry] [--board data/board.json] [--archive data/board-archive.json]
 Everything that looks cards up by id or tag (board_sync.py R3, board_check.py, build_history.py) also reads the stubs, so a tag on an archived card
 still counts as "on a card"."""
 import datetime, json, os, sys
@@ -21,8 +21,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BOARD = os.path.join(ROOT, 'data', 'board.json')
 ARCHIVE = os.path.join(ROOT, 'data', 'board-archive.json')
-DAYS = 7
-ABOUT = ('Done cards older than 7 days, moved off data/board.json by tools/board_archive.py (bigboard1). One stub per card: id, title, theme, lane, tag, done and the '
+DAYS = 2
+ABOUT = ('Done cards older than 2 days, moved off data/board.json by tools/board_archive.py (bigboard1). One stub per card: id, title, theme, lane, tag, done and the '
          'final history line. Never edited by hand.')
 
 
@@ -75,7 +75,7 @@ def archivable(data, today, days=DAYS):
     for c in cards:
         if c.get('col') != 'done' or c.get('backlog') or not c.get('done') or c['id'] in held: continue
         try:
-            if datetime.date.fromisoformat(c['done']) >= cutoff: continue   # exactly 7 days old is not yet "older than 7 days"
+            if datetime.date.fromisoformat(c['done']) >= cutoff: continue   # exactly 2 days old is not yet "older than 2 days"
         except ValueError:
             continue
         if c.get('note') and not c.get('note_seen'): continue

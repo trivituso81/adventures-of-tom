@@ -1,3 +1,17 @@
+## nightclean (2026-11-21): the nightly cleanup is built, and the first pass removed 6 unused tool scripts
+
+Card c-nightclean, `claude/night-plan.md` section 7, steps 1 to 6 (no rule of the plan changed).
+- `tools/night/clean_report.py`: sizes with change since the last report, files nothing names (161 today), identical files (15 groups), tests `known_fail` over 7 nights. No AI, no network. `known_since` on a `tests.json` row sets the age; none is recorded yet, so the count is 0 for now.
+- `tools/night/rules_check.py` and `tools/night/rules.json`: 26 standing headings and 54 quoted sentences of CLAUDE.md and `claude/handoff-rules.md`, taken from main today. `tools/smoke.py` runs it; a cleanup can shorten the story around a rule, never drop the rule or Tom's words.
+- `tools/board_archive.py`: Done cards leave the board after 2 days (was 7). `tools/board_archive_test.py` updated (the edge case is now 2 days).
+- Standing card `c-night-clean` (nightly, tag `nightclean`, Sonnet 5.5 medium): one bucket a night, A to D by days since 2026-11-21 modulo 4, with the "Never touched" row in its prompt.
+- Tests: `python3 tools/night/clean_test.py` (new, in `tools/night/tests.json`; also added the missing row for `dashboard_test`), `board_archive_test.py`.
+- Tonight's pass, bucket A. The report listed 161 files; 118 have no reference anywhere by `git grep -IF` of the file name and of the name without extension. Of those, 104 are art files in `art/props/` and `art/closeup/` (names are built at run time by prefix) and 8 are `tools/art-library/tombo-split/dc-*.js` (loaded by directory listing): all left alone. Removed 6 tools scripts, none from the "Never touched" row:
+  - proof: `for f in blvd_behind_shots row_behind_shots town_behind_shots cut_grace_from_ai cut_grace_hero baked_extract; do git grep -IF "$f"; done` printed nothing outside the files themselves (each also checked with its extension).
+  - `tools/blvd_behind_shots.py`, `tools/row_behind_shots.py`, `tools/town_behind_shots.py` (one-off screenshot checks of old map plates), `tools/cut_grace_from_ai.py`, `tools/cut_grace_hero.py` (one-off cutters), `tools/clip-audit/baked_extract.js` (a byte-identical copy of `dump_clips.js` with a path of another machine).
+  - Not touched though unnamed: bakers `bake_*.py` and `sheet_loose.py` (imported by name), `tools/art-library/*-prompts.js` (read by the Library page).
+  - Voice: report only.
+
 ## win3skip (2026-11-21): the WIN NOW button is back in battle screens
 
 Tom: "when the option to auto win is turned on i dont see the corresponding button in batle screens anymore." The button only existed in the old battle screen (Battle 2); Battle 3 had none.

@@ -88,5 +88,8 @@ if bt.returncode: fails.append('board_sync_test: '+bt.stdout.strip()[-400:])
 # nighttests: a test script that is not in tools/night/tests.json (or its skip list) fails here, so a new test cannot be forgotten.
 nm=subprocess.run([sys.executable,os.path.join(HERE,'night','manifest_check.py')],capture_output=True,text=True); print(nm.stdout.strip())
 if nm.returncode: fails.append(nm.stdout.strip()[:400])
+# nightclean: no standing rule or sentence of Tom's is ever dropped from CLAUDE.md or claude/handoff-rules.md (tools/night/rules.json).
+rk=subprocess.run([sys.executable,os.path.join(HERE,'night','rules_check.py')],capture_output=True,text=True); print(rk.stdout.strip()[:600])
+if rk.returncode: fails.append(rk.stdout.strip()[:400])
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)

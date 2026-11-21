@@ -28508,6 +28508,39 @@
    },
    "after": "nothing for Tom: end",
    "done": "2026-11-21"
+  },
+  {
+   "id": "c-night-clean",
+   "title": "Night cleanup",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Runs every night by itself (the night shift starts it first). One of four buckets a night: A unused files, B old notes, C a shorter working agreement, D dead tests. Never touches voice clips, approved art sources or your saved files. You read the result on the card Last night.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by c-nightclean as the standing card Night cleanup (claude/night-plan.md section 7). Bucket A was done by hand in the build nightclean."
+    }
+   ],
+   "prompt": {
+    "what": "Runs one cleanup bucket each night (unused files, old notes, a shorter working agreement, dead tests) with the safety rules of the night shift.",
+    "before": [
+     "Nothing: the night shift starts it."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written, smoke and the rules check catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (section \"Night runs\"), claude/night-plan.md sections 4 and 7, then card c-night-clean in data/board.json with its history. Your first push is the commit board: start c-night-clean (a night with nothing to do pushes only night: ran c-night-clean). Run python3 tools/night/clean_report.py --json /tmp/clean.json first and read it. Do exactly ONE bucket tonight, chosen by the number of days since 2026-11-21 (tonight of the first pass was 0) modulo 4: 0 is A, 1 is B, 2 is C, 3 is D. A. Files nothing names: remove up to 40 files from the report, oldest first, each only after git grep -F of its file name and its name without extension finds zero references outside itself (a folder loaded by a directory listing, such as tools/art-library/tombo-split, is not unused). An art file is removed only when no data, engine, tool or page file builds its name. B. Notes: fold what is still true from finished claude/next-addendum-*.md and plan files into the doc that owns it (docs/ or CLAUDE.md), delete the rest, rebuild claude/INDEX.md with python3 tools/claude_index.py. C. Working agreement: shorten CLAUDE.md and claude/next.md (history and one-off stories go to docs/CHANGES.md or out) while python3 tools/night/rules_check.py passes; neither file may end the night bigger than it began; the same text goes in the Project mirror note for claude/next.md. D. Tests: delete a test that has been known_fail in tools/night/tests.json for more than 7 nights (known_since) and tests something that no longer exists; a test of something that still exists goes to a fix card instead. Never touched: voice clips and takes (data/voice*, data/voice-clips.js), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake and guidegen, a card in the backlog. Never at night: game dialogue, voice tags, picture, video or music prompts, anything Tom judges by taste, any paid run. Every bucket ends with: the grep that proves zero references shown in docs/CHANGES.md before anything under tools/ or art/ is deleted, python3 tools/smoke.py, python3 tools/night/clean_test.py and python3 tools/board_check.py, a docs/CHANGES.md entry headed ## nightclean-MMDD (month and day, for example nightclean-1122) that lists what left, and python3 tools/art-library/bump_tags.py nightclean-MMDD (month and day, for example nightclean-1122) --base origin/main. Keep the newest 10 history lines on this card. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightclean",
+   "nightly": true,
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
