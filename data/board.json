@@ -22719,7 +22719,7 @@
    "title": "Battle system stage 15: chapter 1 story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s15: chapter 1's story fights play on Battle 3 behind ADMIN > Battle system > Story battles (OLD still plays chapter 1 on the same save). Open: the Big One takes 7.83 rounds at Rank 1 (target 5 to 7), Rose Mode's emergency muffin is not ported, NEW beyond chapter 1 is unfinished. Milestone B is yours (t-milestoneb); stage 17 (c-b3s17) waits on it.",
    "blocks": [],
    "changed": "2026-11-21",
@@ -22754,13 +22754,18 @@
     {
      "d": "2026-11-21",
      "t": "b3s15 built: story switch, chapter 1 on Battle 3, VP and level migration, Ruckus in the save, victory card with VP, late joiners' loadouts, new tips. Tests: b3-sim check 2205 with no fails, b3_story_test 52 ok, ch1_b3_test portrait and landscape, b3_test s4 s7 s9c s10. Milestone B card t-milestoneb created; stage 17 card c-b3s17 waits on it."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3s15: chapter 1's story fights now play on the new battle system, with a switch in ADMIN to go back to the old one"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDsC4h8a7k5HsZNDTs",
     "opening": "unknown"
    },
-   "after": "t-milestoneb"
+   "after": "t-milestoneb",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-b3s15",
@@ -23539,6 +23544,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
+   "title": "Battle system stage 15: chapter 1 story switch",
+   "first": "2026-11-20T23:19:07-08:00",
+   "last": "2026-11-21T01:05:42-08:00",
+   "tags": [
+    "fix-conflictmarks",
+    "b3s15"
+   ],
+   "cards": [
+    "c-b3s15"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvrXMy9bmj4dWhBLZ",
    "title": "Fix: Make and approve 18 item picture sheets (288",
    "first": "2026-11-21T00:41:46-08:00",
@@ -23692,18 +23710,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
-   "title": "Battle system stage 15: chapter 1 story switch",
-   "first": "2026-11-20T23:19:07-08:00",
-   "last": "2026-11-20T23:43:27-08:00",
-   "tags": [
-    "fix-conflictmarks"
-   ],
-   "cards": [
-    "c-b3s15"
    ]
   },
   {
@@ -26497,8 +26503,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "385fa39a58951baeac3b7eadd10f72fc88da7f33",
- "synced_at": "2026-11-21T08:52:54+00:00",
+ "synced": "bb1ae8cdae5f49262e315614c07af9b6febd31e7",
+ "synced_at": "2026-11-21T09:06:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
