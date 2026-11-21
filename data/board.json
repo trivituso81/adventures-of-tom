@@ -24792,10 +24792,10 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
-   "next": "Stop-loss: the lava and couch cushion story works on Wan, but she shrinks mid-clip and the cushion flies in from off screen, twice. Next try: a new start picture of Rose already holding the cushion. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "next": "Ready for an Opus 5.5 session (effort medium): make a new start picture of Rose already holding the couch cushion, then remake the clip from it. The full prompt is on the card.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24852,6 +24852,11 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue chose START NEXT: the work is taste work on a paid video (Opus 5.5) and the stopped session's lessons are already in the prompt (Wan shrinks her and brings the cushion in from off screen; fix is a start picture with the cushion in her arms). Card moved to Up next, prompt unchanged.",
+     "at": "2026-11-21T18:30:00+00:00"
     }
    ],
    "prompt": {
