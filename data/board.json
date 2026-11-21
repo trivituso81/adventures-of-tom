@@ -19297,6 +19297,10 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 6 pictures, QA: 15 of 15, 15 of 15, 12 of 15, 14 of 15, 11 of 15, 11 of 15. Spent about $0.44."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 4 pictures, QA: 11 of 15, 10 of 15, 13 of 14, 12 of 15. Spent about $0.30."
     }
    ],
    "chat": {
@@ -19317,10 +19321,114 @@
     "est": 0.3,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T03:53:48Z",
+     "state": "done",
+     "at": "2026-11-21T03:54:50Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44863386521",
-     "n": 4
+     "made": [
+      "prop-gate-town-school-open",
+      "prop-gate-blvd-studio-open",
+      "prop-gate-jpark-barn-open",
+      "prop-gate-backlot-stage7-open"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.3,
+     "qa": {
+      "prop-gate-town-school-open": {
+       "file": "results/prop-gate-town-school-open/20261121T035408.png",
+       "yes": 11,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered metallic texture, not hand-painted with soft shading."
+        },
+        {
+         "id": "p2",
+         "q": "Is the object a chain link school gate in an opened state with the gate leaf swung toward the viewer?",
+         "why": "Gate is closed, not opened or swung toward viewer."
+        },
+        {
+         "id": "p3",
+         "q": "Does the gate leaf hang at an angle from the right post leaving the space between the two posts completely empty?",
+         "why": "Gate leaf not swung; space between posts not empty."
+        },
+        {
+         "id": "p4",
+         "q": "Are there no chain and no padlock visible anywhere on the gate?",
+         "why": "Chain and padlock are visible on the gate."
+        }
+       ]
+      },
+      "prop-gate-blvd-studio-open": {
+       "file": "results/prop-gate-blvd-studio-open/20261121T035409.png",
+       "yes": 10,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered, not hand-painted with brush texture"
+        },
+        {
+         "id": "p2",
+         "q": "Is the barrier arm raised and pointing straight up at the sky?",
+         "why": "Arm is horizontal, not raised straight up"
+        },
+        {
+         "id": "p7",
+         "q": "Are the two posts about two people wide apart?",
+         "why": "Posts much wider than two people apart"
+        },
+        {
+         "id": "p8",
+         "q": "Are the posts about waist high?",
+         "why": "Posts taller than waist high"
+        },
+        {
+         "id": "p9",
+         "q": "Is the raised arm about as tall as a person?",
+         "why": "Raised arm not shown; proportions incorrect"
+        }
+       ]
+      },
+      "prop-gate-jpark-barn-open": {
+       "file": "results/prop-gate-jpark-barn-open/20261121T035411.png",
+       "yes": 13,
+       "of": 14,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered with hard edges, not hand-painted with soft shading."
+        }
+       ]
+      },
+      "prop-gate-backlot-stage7-open": {
+       "file": "results/prop-gate-backlot-stage7-open/20261121T035439.png",
+       "yes": 12,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "Photorealistic 3D render, not hand-painted with soft shading and brush texture."
+        },
+        {
+         "id": "p8",
+         "q": "Does the object fill the whole hangar doorway and appear about three people tall?",
+         "why": "Does not fill whole hangar doorway or match scale/lighting of reference 1."
+        },
+        {
+         "id": "p10",
+         "q": "Is there a small soft contact shadow directly under the object?",
+         "why": "No visible small soft contact shadow under the object."
+        }
+       ]
+      }
+     }
     }
    },
    "waiting_on": "claude"
