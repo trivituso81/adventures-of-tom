@@ -17674,6 +17674,19 @@
       "f_paint",
       "p8"
      ]
+    },
+    {
+     "date": "2026-11-21",
+     "note": "As per qa",
+     "from": "v1",
+     "at": 1795286683297,
+     "srv": "prop-gate-jpark-barn-open@20261121T072849",
+     "svc": "xai",
+     "qa": 0.857,
+     "qaFail": [
+      "f_paint",
+      "p8"
+     ]
     }
    ],
    "id": "prop-gate-jpark-barn-open",
