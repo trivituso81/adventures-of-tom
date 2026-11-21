@@ -20880,12 +20880,18 @@
     {
      "d": "2026-11-20",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T05:26:55.632Z"
     }
    ],
    "chat": {
     "url": "",
     "opening": "started by START"
-   }
+   },
+   "start": true
   },
   {
    "id": "c-qa-bug04",
