@@ -21222,7 +21222,7 @@
    "id": "c-qa-coh03",
    "tag": "qa-coh03",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "Big One asks about a folding chair; the spot has a bench",
    "next": "Shipped as build qa-coh03. Boppy's fishing spot now shows a grey metal folding chair with his thermos on the seat, the bucket on the ground beside it and the rod leaning on the chair back; the wooden bench is painted out of the plate, the foreground layer and the four trail paintings. No new Library picture was needed (the approved chair prop already existed). Waits only on Tom's look: card t-qa-coh03play.",
@@ -21255,13 +21255,18 @@
     {
      "d": "2026-11-20",
      "t": "Claude (qa-coh03): confirmed on main (line at data/scenes.js ch1AfterBoss, bench at data/maps-le.js); canon keeps the chair line. Call: no new Library picture, because a generated chair would still have needed the bench painted out of the plate, and the approved chair prop (art/props/boppy/folding_chair.webp) already exists. tools/hollow_chair.py removes the bench and sets the chair, thermos, bucket and rod down; make_hollow_fg.py rebakes the plate, foreground layer and depth zones; the trail paintings were rebaked from the new plate. Tests: hollow_chair_test.py (new) passes; hollow_trail_test.py has one failure, 'no monster stepped into the fence while chasing', which also fails on untouched upstream; looked at portrait and landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh03: Boppy's fishing spot shows his folding chair, not a wooden bench"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
     "opening": "pasted by Tom from the board"
    },
-   "after": "t-qa-coh03play"
+   "after": "t-qa-coh03play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-coh04",
@@ -22648,6 +22653,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
+   "title": "Big One asks about a folding chair; the spot has a bench",
+   "first": "2026-11-20T19:28:37-08:00",
+   "last": "2026-11-20T19:59:52-08:00",
+   "tags": [
+    "qa-coh03"
+   ],
+   "cards": [
+    "c-qa-coh03"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
    "title": "Fix: Make and approve 18 item picture sheets (288",
    "first": "2026-11-20T19:27:52-08:00",
@@ -22745,16 +22762,6 @@
    "tags": [],
    "cards": [
     "c-qa-bug12c"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
-   "title": "Big One asks about a folding chair; the spot has a bench",
-   "first": "2026-11-20T19:28:37-08:00",
-   "last": "2026-11-20T19:28:37-08:00",
-   "tags": [],
-   "cards": [
-    "c-qa-coh03"
    ]
   },
   {
@@ -25220,8 +25227,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "99da7b39571729481bb05137ab74cbcd166cbdbb",
- "synced_at": "2026-11-21T03:57:41+00:00",
+ "synced": "e4b862b9eac3ab4a1b9eea658c33e149b82918ab",
+ "synced_at": "2026-11-21T04:00:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
