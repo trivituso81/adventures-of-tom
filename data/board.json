@@ -19074,7 +19074,7 @@
     "opening": "unknown"
    },
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T02:32:18Z",
     "ids": [
      "prop-gate-row-amyhouse",
@@ -19085,7 +19085,13 @@
      "prop-gate-backlot-stage7-open"
     ],
     "est": 0.3,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T02:32:33Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44856447268",
+     "n": 6
+    }
    }
   },
   {
