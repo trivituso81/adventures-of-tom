@@ -422,13 +422,18 @@ SCENES.ch1Job=[
   {talk:'Grace',lines:["Okay, that's my second best one. Don't lose it."]},   // she thinks, then takes a pencil from behind her ear
   {call:()=>sfx.pickup()},
   {talk:'Rose',lines:["One more ride, Tata! To the cab!"]},
+  // report r-20261120-192030-2df3: she jumps up onto his shoulders (the opening's kneel, lift, cheer) and rides until the cab (ch1Sunday clears `ride`)
+  {pose:'tom',f:'tr_kneel'}, {wait:.3},
+  {hop:'rose',from:()=>{ const a=sceneActor('rose'); return [a.x,a.y]; },to:()=>[player.x,player.y],time:.5,arc:22,lift:[0,SHOULDER]},
+  {call:()=>{ const r=sceneActor('rose'); r.x=player.x; r.y=player.y; r.scr={x:player.x,y:player.y}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; r.depthBias=-.05; sfx.giggle(); }}, {flag:'ride'},
+  {pose:'tom',f:'tr_lift'}, {wait:.4}, {pose:'tom',f:'tr_cheer'}, {wait:.4}, {pose:'tom'},
   {toast:'Goal: Cab 7, at the Square. Talk to Sal.',time:4}
 ];
 // 8b. The Square: one lap with Rose on his shoulders, a fade for the second, the cab, TNB's text on the seat (Tom does not read it).
 SCENES.ch1Sunday=[
   {flag:'ch1-sunday'},
   {talk:'Sal',lines:["Los Angeles? You got it."]},
-  {sfx:'doorOut'}, {wait:.6},
+  {sfx:'doorOut'}, {call:()=>{ const r=sceneActor('rose'); if(r){ r.seat=false; r.noShadow=false; r.depthBias=0; r.lift=0; r.scr=null; } }}, {flag:'ride',value:false}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
   {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone'}},   // cutpolish4b: the phone lights up on the cab seat
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},

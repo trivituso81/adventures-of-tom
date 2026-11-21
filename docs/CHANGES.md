@@ -1,3 +1,8 @@
+## reports-2026-11-20 (2026-11-21): Rose jumps on Tom's shoulders after "One more ride" and rides until the cab
+
+- Report r-20261120-192030-2df3 (Tom: "after Rose says one more ride Tata, she should jump on his shoulders and remain there until he departs via Sal's"): `ch1Job` now plays the opening's kneel, lift and cheer with Rose hopping up and sets the `ride` flag; `ch1Sunday` clears it at the cab door. Earlier this run: `ch1Sunday` goes straight into the airport run (r-20261120-184534-ict4).
+- Checked in a browser: scene ran, `ride` flag set and Rose seated, no errors. Not checked: smoke.py full run, landscape. Open: r-20261120-185740-5nwp (school gate position) still needs the image tools.
+
 ## b3s13 (2026-11-20): New battle: the Nine Scoops monsters and Brain Freeze join the Battle Lab (stage 13 complete)
 
 - Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This last part is the bonus chapter, built from `claude/bestiary-v11.md`: Sprinkle Gremlin, Slushie Slug (Elite), Cone Head and the boss Brain Freeze in `data/b3-foes-ch11bonus.js`, with four formations (10 VP each, 30 for the boss). The foe ids match the old `MONSTERS` ids in `data/bonus-nine-scoops.js` (gremlin, slushslug, conehead, brainfreeze), so a Lab fight never crashes the old tables.
