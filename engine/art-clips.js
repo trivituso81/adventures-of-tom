@@ -88,6 +88,8 @@ async function clipPoll(){
     // repAt is NaN when the phone cannot read the report's time: then the report counts when it names this clip (the job replaces the file on every run)
     const mine=rep&&rep.mode==='requests'&&(repAt!==repAt||repAt>=p.at-120000)&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
     if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video'+(rep?' (last job report on GitHub: '+(isNaN(repAt)?'time unreadable':new Date(repAt).toLocaleTimeString())+', read by '+src+')':' (this phone could not read the job report just now; it tries again)')+'; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
+    // This press is answered: take it off the waiting list BEFORE the entry is redrawn, or the redraw still sees it waiting and keeps the button on ASKED, WAITING (fix-keysecrets2-try-5)
+    clipAskedSet(clipAskedGet().filter(q=>q.at!==p.at));
     const why=(rep.failed||[]).find(x=>x.id==='*');
     for(const id of p.ids||[]){
       const f=(rep.failed||[]).find(x=>x.id===id)||why, h=(rep.held||[]).find(x=>x.id===id), b=(rep.blocked||[]).find(x=>x.id===id), s=(rep.skipped||[]).find(x=>x.id===id);
