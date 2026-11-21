@@ -763,7 +763,7 @@
   "why": "wanch2: Kling r3 has one lamb (the Wan fault is gone) but her reaching hand left the left edge at the lunge; one change: pad 0.65 (was 0.8)"
  },
  "rose-lava": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -771,12 +771,11 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-lava-v2.txt",
-  "frame": "art/clips/start/rose-hero.png",
+  "prompt_file": "tools/art-library/prompts/wan-rose-lava-v3.txt",
+  "frame": "art/clips/start/rose-cushion.png",
   "fit": "720x1280",
   "frame_fields": [
-   "start_image_url",
-   "end_image_url"
+   "start_image_url"
   ],
   "input": {
    "resolution": "720p",
@@ -1176,6 +1175,24 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
+  }
+ },
+ "start-rose-cushion": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-cushion-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/rose-hero-v1.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
   }
  }
 }

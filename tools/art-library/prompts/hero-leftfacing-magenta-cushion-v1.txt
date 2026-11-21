@@ -1,0 +1,17 @@
+IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.
+
+ATTACH: the hero picture of the character (the reference). Nothing else.
+
+WHAT THIS IS
+The same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.
+
+WHAT TO CHANGE (only these four things)
+1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.
+2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.
+3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.
+4. PROP: she holds a big square cream couch cushion in both arms in front of her, instead of arms loose at the sides.
+
+EDGES
+Crisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props other than the cushion, no other people.
+
+Family friendly for ages 6 and up.
