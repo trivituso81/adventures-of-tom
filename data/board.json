@@ -27449,7 +27449,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFoLKSmJfeAAAAP5kf",
+    "url": "https://claude.ai/code/session_01RXeukFoLKSmJfeAAAAP5kf",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27469,6 +27469,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27510,7 +27514,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFoJq8UAVPg4TrsQtF",
+    "url": "https://claude.ai/code/session_01RXeukFoJq8UAVPg4TrsQtF",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27530,6 +27534,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27632,7 +27640,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCqw1GyaN2utsod3GN",
+    "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27652,6 +27660,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27666,9 +27678,62 @@
    "after": "t-qa-bug03-look",
    "auto": true,
    "started_at": "2026-11-21T19:39:25+00:00"
+  },
+  {
+   "id": "b-guidestatus1-restore2",
+   "tag": "guidestatus1-restore2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Game Shell",
+   "title": "housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes",
+   "next": "Done: housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidestatus1-restore2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
+   "title": "Fix: Look for people on roofs in the Square and the Row",
+   "first": "2026-11-21T19:42:50Z",
+   "last": "2026-11-21T19:42:50Z",
+   "tags": [],
+   "cards": [
+    "c-fix-qa-bug03-look"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFoLKSmJfeAAAAP5kf",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "first": "2026-11-21T19:42:45Z",
+   "last": "2026-11-21T19:42:45Z",
+   "tags": [],
+   "cards": [
+    "c-fix-hollowtrail-play-3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFoJq8UAVPg4TrsQtF",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "first": "2026-11-21T19:42:38Z",
+   "last": "2026-11-21T19:42:38Z",
+   "tags": [],
+   "cards": [
+    "c-fix-ch1flight-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAHcmE8xg",
    "title": "Night test run: every test, every night, on GitHub",
@@ -27804,6 +27869,35 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T11:41:06-08:00",
+   "tags": [
+    "guidegen1a",
+    "guidegen1b",
+    "guide",
+    "guidegen1",
+    "guidestatus1",
+    "guidestatus1-restore",
+    "fix-anim-grace-squeeze-qxim",
+    "board-night",
+    "b3s18b",
+    "guidestatus1-restore2",
+    "board-dashboard",
+    "b3s18d",
+    "b3s18c"
+   ],
+   "cards": [
+    "c-guidegen",
+    "c-guidestatus",
+    "b-board-night",
+    "c-b3s18",
+    "c-fix-anim-grace-squeeze-qxim",
+    "b-board-dashboard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
    "title": "Admin Dashboard: the wide page with four panes",
    "first": "2026-11-21T11:33:57-08:00",
@@ -27848,30 +27942,6 @@
    ],
    "cards": [
     "c-gem1v"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
-   "title": "Battle Guide: make and remake battle videos from the page",
-   "first": "2026-11-21T09:33:57-08:00",
-   "last": "2026-11-21T11:35:49-08:00",
-   "tags": [
-    "guidegen1a",
-    "guidegen1b",
-    "guide",
-    "guidegen1",
-    "guidestatus1",
-    "guidestatus1-restore",
-    "fix-anim-grace-squeeze-qxim",
-    "board-night",
-    "b3s18b"
-   ],
-   "cards": [
-    "c-guidegen",
-    "c-guidestatus",
-    "b-board-night",
-    "c-b3s18",
-    "c-fix-anim-grace-squeeze-qxim"
    ]
   },
   {
@@ -31414,8 +31484,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "9f25e3b3f65a54e752501e971eefb20ef798a637",
- "synced_at": "2026-11-21T19:40:48+00:00",
+ "synced": "900b9e53092a29745d26274fee296729fc2d9730",
+ "synced_at": "2026-11-21T19:43:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
