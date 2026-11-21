@@ -27888,7 +27888,7 @@
    "title": "Admin Dashboard: the strip under the game",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "dash2",
    "next": "Built and pushed as dash2: the strip under the game (newer-build bar with Reload game, five screen sizes, jump to a chapter or a test fight, Story battles, Difficulty, Mute, Report), tested at 3440 x 1328 and 3440 x 1440 (272 checks pass). Not built: the Next for you column, which is c-dash3. Your look at it is on the card Try the game strip and Take me there.",
    "blocks": [
@@ -27932,15 +27932,20 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as build dash2. Tom's answer to t-dash1-try was All good with no note, so nothing was changed in the first try. Added the strip under the game as drawn, without Next for you (c-dash3). Duo size is forced for the game frame only and survives go= in the address; the game never reloads by itself. tools/dashboard_test.py 272 pass. tools/smoke.py passes except board_sync_test (duplicate card id t-lastnight), which fails the same way on untouched main and belongs to c-nightgreen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as dash2: the Admin Dashboard has its strip under the game: a bar that says when a newer build is live, five screen sizes, chapter and test fight jumps, Story battles, Difficulty, Mute and Report"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-dash3",
    "title": "Take me there: a play card opens the game at its spot",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "tag": "dash3",
    "next": "Waits on the card Admin Dashboard: the strip under the game. Then a play card can carry the place to check, and Take me there in the dashboard puts the game at that spot in one click. Every open play card gets its place, or the mark On your phone when the check needs touch, sound or speed. Then it hands you the card Try the game strip and Take me there.",
    "blocks": [
@@ -27967,9 +27972,12 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Admin Dashboard: the strip under the game is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-dash3-try",
@@ -30375,6 +30383,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE8vUUrJV7q1RRdLRG",
+   "title": "Admin Dashboard: the strip under the game",
+   "first": "2026-11-21T13:03:17-08:00",
+   "last": "2026-11-21T13:30:07-08:00",
+   "tags": [
+    "dash2"
+   ],
+   "cards": [
+    "c-dash2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEuKCzKJrDSyCZjBA2",
    "title": "AI Costs fills itself in: balances and job spend",
    "first": "2026-11-21T12:59:28-08:00",
@@ -30466,16 +30486,6 @@
    "tags": [],
    "cards": [
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE8vUUrJV7q1RRdLRG",
-   "title": "Admin Dashboard: the strip under the game",
-   "first": "2026-11-21T13:03:17-08:00",
-   "last": "2026-11-21T13:03:17-08:00",
-   "tags": [],
-   "cards": [
-    "c-dash2"
    ]
   },
   {
@@ -34220,8 +34230,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ba4db48190cb02d5eea8d17e71a0ee148480e2e2",
- "synced_at": "2026-11-21T21:29:31+00:00",
+ "synced": "baa0af340a030013d47fa2f162093c6a3b3779be",
+ "synced_at": "2026-11-21T21:30:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
