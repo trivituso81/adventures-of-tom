@@ -17559,7 +17559,7 @@
    "id": "c-fix-keysecrets2-try-5",
    "tag": "fix-keysecrets2-try-5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17581,7 +17581,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDt51R5Z1SbJNU4qdq",
     "opening": "Something is wrong on t-keysecrets2-try"
    },
    "history": [
@@ -17599,6 +17599,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-21T00:16:11.691Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -17612,7 +17616,7 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T00:16:54+00:00"
   }
  ],
  "sessions": [
@@ -19974,8 +19978,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "1a38d95336aa3b2e769c913f1baa7ac770a67a02",
- "synced_at": "2026-11-21T00:08:16+00:00",
+ "synced": "a50e453520763405af0d60efc2c7589c7b2c12cc",
+ "synced_at": "2026-11-21T00:16:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
