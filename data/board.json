@@ -23371,7 +23371,7 @@
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Stage 17 is pushed in four parts (b3s17a chapter 2, b3s17b chapter 3, b3s17c chapter 4, b3s17 chapter 5). Chapters 2 to 5 play on the new battle behind ADMIN > Battle system > Story battles (OLD still plays them on battle 2). Open: three new retry lines are unrecorded; the Signature Tool toasts still say WARMTH (item stats). Milestone C is yours (t-milestonec); stage 18 (c-b3s18) waits on it.",
    "blocks": [],
    "changed": "2026-11-21",
@@ -23422,13 +23422,18 @@
     {
      "d": "2026-11-21",
      "t": "Final part (b3s17) shipped: chapter 5 on Battle 3 with Vibe Points and tips; Amy's loss coaching has a Battle 3 second line (unrecorded). Created the Milestone C card t-milestonec and the next Claude card c-b3s18."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3s17: chapter 5's story fights now run on the new battle (BY CHAPTER); stage 17 is complete: chapters 2 to 5 play on Battle 3"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
     "opening": "unknown"
    },
-   "after": "t-milestonec"
+   "after": "t-milestonec",
+   "done": "2026-11-21"
   },
   {
    "id": "c-voicepurge221",
@@ -25839,6 +25844,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T10:15:45-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17"
+   ],
+   "cards": [
+    "c-b3s17"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFNpBVJJ5eFTao3VSz",
    "title": "Board: fold and unfold the groups inside For you",
    "first": "2026-11-21T10:05:51-08:00",
@@ -25979,20 +25999,6 @@
     "b-board-guideplanned",
     "c-guidegen",
     "b-board-guidegen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T09:16:01-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c"
-   ],
-   "cards": [
-    "c-b3s17"
    ]
   },
   {
@@ -29319,8 +29325,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2c66c9d3976c0218294990fba4e9d88ad76776db",
- "synced_at": "2026-11-21T18:14:15+00:00",
+ "synced": "229719f7b8694ed2f4adc081b1ec92b1fd910ede",
+ "synced_at": "2026-11-21T18:16:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
