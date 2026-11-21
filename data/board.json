@@ -13328,7 +13328,7 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -13466,13 +13466,18 @@
     {
      "d": "2026-11-21",
      "t": "Third run on Opus 5.5: the last 12 docs copied (forks), 28 compare-group docs found equal and deleted from the Project, rules, index and publish change shipped as projclean1. Two deletes refused by the permission check: card t-projdelete."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as projclean1: Project docs move finished: working notes live in the repo's claude/ folder, the Project keeps four mirrors"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHJeCgoaH585hZBtik",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
-   "started_at": "2026-11-21T02:58:24+00:00"
+   "started_at": "2026-11-21T02:58:24+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-projclean",
@@ -22932,18 +22937,30 @@
    "next": "voice-gen is running",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44881212857",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFyaTPSweQedLP1aeE",
     "opening": "service run"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "voice-gen started."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-21",
+   "rescue": {
+    "at": "2026-11-21T08:02:03+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukFyaTPSweQedLP1aeE",
+    "prev": ""
+   },
+   "started_at": "2026-11-21T08:02:03+00:00"
   },
   {
    "id": "b-fix-conflictmarks",
@@ -23450,6 +23467,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHJeCgoaH585hZBtik",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T23:22:37-08:00",
+   "last": "2026-11-21T00:01:21-08:00",
+   "tags": [
+    "projclean1f",
+    "projclean1"
+   ],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDpgN44Gv34Chmyg4V",
    "title": "Fix: Make and approve 18 item picture sheets (288",
    "first": "2026-11-20T23:35:37-08:00",
@@ -23485,18 +23515,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHJeCgoaH585hZBtik",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T23:22:37-08:00",
-   "last": "2026-11-20T23:48:09-08:00",
-   "tags": [
-    "projclean1f"
-   ],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -26302,8 +26320,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3968776752e3bbd1c6d473c9bd8440dc8b01c082",
- "synced_at": "2026-11-21T07:57:01+00:00",
+ "synced": "0edb5acbe4b7f63895253a43229cf37cf8d3e4c1",
+ "synced_at": "2026-11-21T08:02:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
