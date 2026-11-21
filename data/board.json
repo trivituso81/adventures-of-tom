@@ -21379,8 +21379,14 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), TXT-03, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T03:25:00.189Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-qa-txt04",
