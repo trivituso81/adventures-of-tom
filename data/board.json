@@ -23404,6 +23404,95 @@
      "t": "Added by board-gem1brief with Tom's card t-gem1v."
     }
    ]
+  },
+  {
+   "id": "c-costs1",
+   "tag": "costs1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "next": "Built as costs1: ADMIN > AI COSTS (costs.html) with Overview, Services, Ledger and Totals, and 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+    "opening": "\"come up with an admin screen for all the AI services we are connected to\""
+   },
+   "prompt": {
+    "what": "Builds the AI Costs admin page and files the charges from receipts.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new admin tool, designed in the session)",
+    "effort": "high (a new tool designed and built in one session)",
+    "text": "Read CLAUDE.md, docs/COSTS.md and card c-costs1 in data/board.json, then finish what its history describes and push build costs1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"come up with an admin screen for all the AI services we are connected to, the subscription type i have, what it allows, what my balance is, how much ive spent so far ... a complete history of my spend with dates for each transaction so i can total and subtotal in any way that i want. as well as a final cost total screen ... including with claude ... optmized only for landscape on desktop browser ... it should alos have a unique URL.\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: costs.html, data/costs.json (8 services, 29 charges read from Apple, Google Play, Stripe and Orb receipts in his email), the AI Costs button on admin.html, docs/COSTS.md, tools/costs_test.py (FAILS: []). Balances of xAI and ElevenLabs are not read yet (card c-costs2). Hands to Tom: t-costs1look."
+    }
+   ],
+   "after": "t-costs1look"
+  },
+  {
+   "id": "t-costs1look",
+   "title": "Look at the AI Costs page on your desktop",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "build": "costs1",
+   "next": "On your desktop browser open https://trivituso81.github.io/adventures-of-tom/costs.html (or ADMIN > AI COSTS). Check the Overview total, open Ledger and press Subtotal by Month, open Totals and click one figure in the table, then open the Claude service. Say what is wrong or missing. Your notes go to the next build, \"AI Costs fills itself in: balances and job spend\".",
+   "blocks": [
+    "c-costs2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-costs1 (build costs1). Your notes go to card c-costs2, the AI Costs page that fills itself in."
+    }
+   ]
+  },
+  {
+   "id": "c-costs2",
+   "tag": "costs2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Tools",
+   "title": "AI Costs fills itself in: balances and job spend",
+   "next": "Waits on card t-costs1look. Then build the steps in docs/COSTS.md, section Next: a daily job that reads the ElevenLabs balance, and every paying job writing what its run cost into the ledger.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "prompt": {
+    "what": "Makes the AI Costs page read balances by itself and log what each job spends, and applies your notes from the first look.",
+    "before": [
+     "Finish card t-costs1look (Look at the AI Costs page on your desktop)."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new Action and changes to five jobs, design partly written)",
+    "effort": "high (several jobs and their tests)",
+    "text": "Read CLAUDE.md, docs/COSTS.md and the cards c-costs2 and t-costs1look in data/board.json, then build costs2 as the section \"Next: costs2\" in docs/COSTS.md describes, including Tom's notes on t-costs1look. Test with stand-in servers and never run a paid call. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-costs1. No chat yet."
+    }
+   ]
   }
  ],
  "sessions": [
