@@ -1,4 +1,5 @@
 [
+{"tag":"cutfront1","at":"2026-11-14T08:54:44-08:00","what":"Painted cutouts no longer cover people standing in front of them","card":"b-cutfront1","theme":"Game Shell"},
 {"tag":"closebtn1","at":"2026-11-14T08:51:36-08:00","what":"Close-up reveal button says CONTINUE, not A  CONTINUE","card":"b-closebtn1","theme":"Game Shell"},
 {"tag":"coinart2","at":"2026-11-14T08:48:30-08:00","what":"The approved chapter 3 and 4 pose sheets installed as painted cutscene poses","card":"b-coinart2","theme":"Story and Dialogue"},
 {"tag":"questicon1","at":"2026-11-14T08:41:08-08:00","what":"The quest ! icon closes the open quest frame on a second tap (phone touch handling)","card":"b-questicon1","theme":"Game Shell"},

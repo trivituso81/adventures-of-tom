@@ -1,3 +1,10 @@
+## 2026-11-21 (2): Art Library bake, prop-gate-row-amyhouse-open (`artbake1553`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- prop-gate-row-amyhouse-open: background keyed from the corner colour rgb(208, 10, 122)
+- prop-gate-row-amyhouse-open: `bake_gate_art.py row-amyhouse open` ran from art/raw/props/prop-gate-row-amyhouse-open-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## 2026-11-21 (1): Art Library bake, prop-gate-row-amyhouse, prop-gate-row-amyhouse-open (`artbake1552`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
