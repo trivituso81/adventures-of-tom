@@ -28558,6 +28558,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T12:19:13-08:00",
+   "last": "2026-11-21T12:19:13-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
    "title": "Hit animations in a fight match the Battle Guide speed",
    "first": "2026-11-21T12:14:08-08:00",
@@ -32215,8 +32225,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "618da927430eab87e3c29537a028a7f5ca1e43ee",
- "synced_at": "2026-11-21T20:18:31+00:00",
+ "synced": "dcef1d6c976fdca95cc17a7941d41a05e89e6de6",
+ "synced_at": "2026-11-21T20:19:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
