@@ -25461,6 +25461,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFNpBVJJ5eFTao3VSz",
+   "title": "Board: fold and unfold the groups inside For you",
+   "first": "2026-11-21T10:05:51-08:00",
+   "last": "2026-11-21T10:05:51-08:00",
+   "tags": [],
+   "cards": [
+    "c-boardsubfold1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
    "title": "Animation note: Grace, Dodge",
    "first": "2026-11-21T09:15:53-08:00",
@@ -28901,8 +28911,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d1ee7a96233422b9220bc73c917029f4a8687e25",
- "synced_at": "2026-11-21T18:02:13+00:00",
+ "synced": "ad0f65862671a0a196ed22a77de16ba022595332",
+ "synced_at": "2026-11-21T18:06:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
