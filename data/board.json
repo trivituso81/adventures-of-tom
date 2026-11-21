@@ -20853,13 +20853,13 @@
    "id": "c-qa-bug03",
    "tag": "qa-bug03",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
    "next": "Shipped as qa-bug03 (roof-edge tiles added to the Square and Row no-go lists). Waits for Tom to look.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "prompt": {
     "what": "Works on BUG-03 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -20899,14 +20899,23 @@
     {
      "d": "2026-11-21",
      "t": "Shipped qa-bug03: 6 tiles added in the Square and 8 on the Row where townsfolk reached a roof edge. Boppy railing in grands not reproduced, left open."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug03: Townsfolk in the Square and the Row no longer stand on roof edges"
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukG2EwxznnZ2UoseGRC",
+    "url": "https://claude.ai/code/session_01RXeukG2EwxznnZ2UoseGRC",
     "opening": "started by START"
    },
    "started_at": "2026-11-21T05:27:44+00:00",
-   "after": "t-qa-bug03-look"
+   "after": "t-qa-bug03-look",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-bug04",
@@ -22465,6 +22474,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukG2EwxznnZ2UoseGRC",
+   "title": "People walk on roofs and signs in the Square and the Row",
+   "first": "2026-11-21T05:35:27Z",
+   "last": "2026-11-21T05:35:40Z",
+   "tags": [
+    "qa-bug03"
+   ],
+   "cards": [
+    "c-qa-bug03"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEKCcEXQqe68a9DEqQ",
    "title": "Old battle screen problems: check them in the new battle",
@@ -25616,8 +25637,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7f9991c5b74b78a1a8f7b9244bbb191c5e8960d6",
- "synced_at": "2026-11-21T05:32:51+00:00",
+ "synced": "38700dbe8982bac9cf206f2bb99879537fc4a4c8",
+ "synced_at": "2026-11-21T05:36:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
