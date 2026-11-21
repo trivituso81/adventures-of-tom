@@ -20473,6 +20473,10 @@
     {
      "d": "2026-11-20",
      "t": "Part c pushed as b3s13c: chapter 10 (6 formations, The Last Call, Lab fights NEW 57 to NEW 62). Next: the bonus chapter as the final b3s13."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as b3s13c: New battle: the chapter 10 airport monsters and The Last Call join the Battle Lab (stage 13, part c of four)"
     }
    ],
    "prompt": {
@@ -22789,10 +22793,11 @@
    "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
    "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
    "first": "2026-11-20T19:03:50-08:00",
-   "last": "2026-11-20T20:27:14-08:00",
+   "last": "2026-11-20T20:42:23-08:00",
    "tags": [
     "b3s13a",
-    "b3s13b"
+    "b3s13b",
+    "b3s13c"
    ],
    "cards": [
     "c-b3s13"
@@ -25381,8 +25386,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "4697bea5a3fcbc0b5fa430328afd6a9c13fc376f",
- "synced_at": "2026-11-21T04:28:01+00:00",
+ "synced": "c9f27885f2cd5fa85231927b22371de967385111",
+ "synced_at": "2026-11-21T04:43:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
