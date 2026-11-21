@@ -19873,6 +19873,10 @@
     {
      "d": "2026-11-21",
      "t": "fix-itembannerart-pics-4: on Tom's words \"2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt\", Claude changed one phrase in each of the 2 failed notes (flats: \"so each shoe looks almost like a slipper\" became \"laced up like a running shoe with a closed heel\"; sash: \"a big gold bow\" became \"a small gold bow\") and asked for those 2 pictures again (about $0.10). The taco passed and is not made again."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 2 pictures, QA: 13 of 15, 12 of 15. Spent about $0.12."
     }
    ],
    "gen": {
@@ -19885,10 +19889,58 @@
     "est": 0.1,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T08:44:08Z",
+     "state": "done",
+     "at": "2026-11-21T08:44:41Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44886235305",
-     "n": 2
+     "made": [
+      "prop-item-solo-amy_chm1",
+      "prop-item-solo-g_bsash"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.12,
+     "qa": {
+      "prop-item-solo-amy_chm1": {
+       "file": "results/prop-item-solo-amy_chm1/20261121T084427.png",
+       "yes": 13,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D render, not hand-painted"
+        },
+        {
+         "id": "p5",
+         "q": "Do the shoes have a flat sole as thin as a sheet of paper?",
+         "why": "thick soles, not paper-thin"
+        }
+       ]
+      },
+      "prop-item-solo-g_bsash": {
+       "file": "results/prop-item-solo-g_bsash/20261121T084431.png",
+       "yes": 12,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "Glossy 3D render, not hand-painted"
+        },
+        {
+         "id": "p2",
+         "q": "Is the sash laid flat with the whole long loop visible?",
+         "why": "Not laid flat; shown as looped sash"
+        },
+        {
+         "id": "p8",
+         "q": "Is the sash viewed from a three-quarter angle from slightly above?",
+         "why": "Top-down flat view, not three-quarter"
+        }
+       ]
+      }
+     }
     }
    },
    "chat": {
