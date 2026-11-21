@@ -19722,7 +19722,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid.",
@@ -19808,6 +19808,11 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Make and approve 18 item picture sheets (288 is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: some failed. make sure you only regenerate those than failed and approve those where nothing failed Sent to Claude as card c-fix-itembannerart-pics-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T03:14:13.990Z"
     }
    ],
    "gen": {
@@ -20048,7 +20053,8 @@
       }
      }
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-ch2lessons",
@@ -20692,6 +20698,58 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics-2",
+   "tag": "fix-itembannerart-pics-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "next": "You reported a problem on Make and approve 18 item picture sheets (288 items). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: some failed. make sure you only regenerate those than failed and approve those where nothing failed",
+   "blocks": [
+    "t-itembannerart-pics"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T03:14:13.163Z",
+     "card": "t-itembannerart-pics",
+     "title": "Make and approve 18 item picture sheets (288 items)",
+     "ask": "pictures",
+     "words": "some failed. make sure you only regenerate those than failed and approve those where nothing failed",
+     "shot": "",
+     "asked": "Open ADMIN ) BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-itembannerart-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-itembannerart-pics.",
+     "at": "2026-11-21T03:14:13.990Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-itembannerart-pics: some failed. make sure you only regenerate those than failed and approve those where nothing failed",
+     "at": "2026-11-21T03:14:13.990Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make and approve 18 item picture sheets (288 items).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-2 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-2.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid. He wrote: some failed. make sure you only regenerate those than failed and approve those where nothing failed\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:14:13.163Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-itembannerart-pics"
   }
  ],
  "sessions": [
