@@ -20910,10 +20910,10 @@
    "id": "c-qa-bug03",
    "tag": "qa-bug03",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
-   "next": "Ready to start. Screen report only, not reproduced yet.",
+   "next": "Not reproduced on main (2026-11-21). Needs a pencil report (REPORT tab in the game) taken on the spot, naming the person and place; then fix. Do not widen noGoRoof blindly.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20939,6 +20939,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session ended without shipping: roofnpc2's noGoRoof still matches tools/npc_roof_tiles.py on current main (town 82 of 82, row 52 of 49, 0 missing). 2,400 ticks of real wandering in town and row put no townsperson on a roof tile. Tiles with 20 to 48 percent foreground cover (Moss, Dot, Pip in town; Gus, Bean in row) are drawn behind the foreground, which is depth-correct and can look like walking onto a sign. No code changed.",
+     "at": "2026-11-21T04:00:00Z"
     }
    ],
    "started_at": "2026-11-21T03:23:33+00:00",
