@@ -27479,6 +27479,33 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up."
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-skeeter-idle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Skeeter Swarm: waiting in place (idle loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/skeeter.png"
+   ],
+   "clip": {
+    "id": "skeeter-idle",
+    "owner": "skeeter",
+    "start": "art/clips/start/skeeter.png",
+    "model": "grok-imagine-video-1.5",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.6,
+    "step": 2,
+    "speed": 1,
+    "kind": "loop",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The wings flutter. The small mosquitoes hover and bob a little around the big one and stay close, the same number of them; nothing flies away. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -28066,6 +28093,72 @@
    "ar": "2:3",
    "refs": [
     "art/raw/characters/grace-hero-v1.png"
+   ],
+   "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/clips/clipstart-tom-v1.png",
+     "date": "2026-11-20",
+     "from": "wangen",
+     "at": 1795225679080
+    }
+   ],
+   "rejects": [],
+   "id": "clipstart-tom",
+   "tab": "Clips",
+   "group": "Tom",
+   "title": "Tom: large left-facing start picture on magenta (the first and last frame of his Wan videos; made on fal Nano Banana 2.1 by the wan-gen Action, facing left as it came back)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png"
+   ],
+   "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/clips/clipstart-rose-v1.png",
+     "date": "2026-11-20",
+     "from": "wangen",
+     "at": 1795225679080
+    }
+   ],
+   "rejects": [],
+   "id": "clipstart-rose",
+   "tab": "Clips",
+   "group": "Rose",
+   "title": "Rose: large left-facing start picture on magenta (the first and last frame of her Wan videos; made on fal Nano Banana 2.1 by the wan-gen Action, then mirrored because it came back facing right)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/clips/clipstart-deedee-v1.png",
+     "date": "2026-11-20",
+     "from": "wangen",
+     "at": 1795225679080
+    }
+   ],
+   "rejects": [],
+   "id": "clipstart-deedee",
+   "tab": "Clips",
+   "group": "Deedee",
+   "title": "Deedee: large left-facing start picture on magenta (the first and last frame of her Wan videos; made on fal Nano Banana 2.1 by the wan-gen Action, facing left as it came back)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/deedee-hero-v1.png"
    ],
    "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.\n"
   },
@@ -29324,6 +29417,403 @@
     "k": 8
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DEFEATED\nThe creature wobbles once, closes its eyes and tips over slowly onto its back, its arms flopping out to the sides. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. It stays lying on its back and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grump-grumble",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Pond Grump: Puddle Grumble (grumbles) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grump.png"
+   ],
+   "clip": {
+    "id": "grump-grumble",
+    "owner": "grump",
+    "start": "art/clips/start/grump.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 36.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: GRUMBLE\nThe creature puffs out its cheeks and throat and grumbles once with a deep scowl, its belly shaking, while its base stays put. The moss and slime hanging from its body stay attached. Without repeating the grumble, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grump-splash",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Pond Grump: Bog Splash (flings pond water) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grump.png"
+   ],
+   "clip": {
+    "id": "grump-splash",
+    "owner": "grump",
+    "start": "art/clips/start/grump.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 36.3,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: SPLASH THROW\nThe creature swings one heavy arm back and flings it forward once at head height, as if splashing a handful of pond water, while its base stays put. The moss and slime hanging from its body stay attached. Without repeating the throw, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grump-slapwind",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Pond Grump: Soggy Slap wind-up (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grump.png"
+   ],
+   "clip": {
+    "id": "grump-slapwind",
+    "owner": "grump",
+    "start": "art/clips/start/grump.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 36.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WIND-UP\nThe creature leans back, lifts one heavy arm high behind its head and scowls once, getting ready to slap. The moss and slime hanging from its body stay attached. It holds that leaning-back, arm-raised pose and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grump-slap",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Pond Grump: Soggy Slap video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grump.png"
+   ],
+   "clip": {
+    "id": "grump-slap",
+    "owner": "grump",
+    "start": "art/clips/start/grump.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 36.3,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: SOGGY SLAP\nThe creature leans forward and swings one heavy arm down and forward once in a big slap, while its base stays put. The moss and slime hanging from its body stay attached. Without repeating the slap, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-toad-croak",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Bog Toad: Night Croak (big croak) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/toad.png"
+   ],
+   "clip": {
+    "id": "toad-croak",
+    "owner": "toad",
+    "start": "art/clips/start/toad.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 39.2,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BIG CROAK\nThe creature puffs its throat out into a big round bubble and croaks once with its mouth wide open, while its feet stay put. The lily pad stays on its head. Without repeating the croak, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-toad-slam",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Bog Toad: Body Slam video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/toad.png"
+   ],
+   "clip": {
+    "id": "toad-slam",
+    "owner": "toad",
+    "start": "art/clips/start/toad.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 39.2,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BODY SLAM\nThe creature crouches and throws its whole body forward in one heavy slam, landing back on the same spot. The lily pad stays on its head. Without repeating the slam, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-toad-tonguewind",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Bog Toad: Tongue Lash wind-up (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/toad.png"
+   ],
+   "clip": {
+    "id": "toad-tonguewind",
+    "owner": "toad",
+    "start": "art/clips/start/toad.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 39.2,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WIND-UP\nThe creature crouches low, puffs out its cheeks and narrows its eyes once, getting ready to lash out. The lily pad stays on its head. It holds that low, puffed-up pose and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-toad-tongue",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Bog Toad: Tongue Lash video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/toad.png"
+   ],
+   "clip": {
+    "id": "toad-tongue",
+    "owner": "toad",
+    "start": "art/clips/start/toad.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 39.2,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: TONGUE LASH\nThe creature opens its mouth wide, shoots its long pink tongue straight out forward low along the ground once, and pulls it back in, while its feet stay put. The lily pad stays on its head. Without repeating the lash, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-log-roll",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Log Lump: Low Roll video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/log.png"
+   ],
+   "clip": {
+    "id": "log-roll",
+    "owner": "log",
+    "start": "art/clips/start/log.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 34.9,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: LOW ROLL\nThe creature rocks back, then rolls forward a short way along the ground once and rocks back to the same spot. The moss, the mushrooms and the leaf sprouts on top stay attached. Without repeating the roll, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-log-jab",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Log Lump: Branch Jab video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/log.png"
+   ],
+   "clip": {
+    "id": "log-jab",
+    "owner": "log",
+    "start": "art/clips/start/log.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 34.9,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BRANCH JAB\nThe creature tips its top forward and jabs the tall branch stub on its top forward once in one quick poke, while its base stays put. The moss, the mushrooms and the leaf sprouts on top stay attached. Without repeating the jab, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-log-timberwind",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Log Lump: Timber! wind-up (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/log.png"
+   ],
+   "clip": {
+    "id": "log-timberwind",
+    "owner": "log",
+    "start": "art/clips/start/log.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 34.9,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WIND-UP\nThe creature leans back slowly and narrows its angry eyes once, getting ready to topple forward. The moss, the mushrooms and the leaf sprouts on top stay attached. It holds that leaning-back pose and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-log-timber",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Log Lump: Timber! video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/log.png"
+   ],
+   "clip": {
+    "id": "log-timber",
+    "owner": "log",
+    "start": "art/clips/start/log.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 34.9,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: TIMBER\nThe creature tips forward and falls flat onto its front once like a falling tree. The moss, the mushrooms and the leaf sprouts on top stay attached. Then it pushes itself back up into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-skeeter-bite",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Skeeter Swarm: Darting Bite video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/skeeter.png"
+   ],
+   "clip": {
+    "id": "skeeter-bite",
+    "owner": "skeeter",
+    "start": "art/clips/start/skeeter.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.6,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite. The small mosquitoes stay close around the big one, the same number of them. Without repeating the bite, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-skeeter-whine",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Skeeter Swarm: Mosquito Whine (loud buzz) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/skeeter.png"
+   ],
+   "clip": {
+    "id": "skeeter-whine",
+    "owner": "skeeter",
+    "start": "art/clips/start/skeeter.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: LOUD WHINE\nThe big mosquito lifts its head and beats its wings very fast once in one loud whine, while the small mosquitoes jitter in place. The small mosquitoes stay close around the big one, the same number of them. Without repeating the whine, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-skeeter-buzz",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Skeeter Swarm: Buzz Cloud (the swarm regroups) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/skeeter.png"
+   ],
+   "clip": {
+    "id": "skeeter-buzz",
+    "owner": "skeeter",
+    "start": "art/clips/start/skeeter.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: REGROUP\nThe small mosquitoes swirl once in a tight circle around the big mosquito. The small mosquitoes stay close around the big one, the same number of them. Then they settle back into their places and it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
   }
  ]
 }

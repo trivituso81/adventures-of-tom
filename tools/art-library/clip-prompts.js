@@ -79,7 +79,7 @@ const PEOPLE = [
     ['wetfloor', 'Wet-Floor Hazard (mop swipe)', 0, 'MOTION: MOP SWIPE\nFrom her starting relaxed stance, she grips a short mop in both hands and swipes its head across the floor just in front of her feet once, in one wide sweep. Without repeating the sweep, she tucks the mop behind her back. ' + BACK('she', 'her')],
     ['scrub', '"Hand Me My Glasses" Scrub (glasses on, brush scrub)', 0, 'MOTION: GLASSES ON, BRUSH SCRUB\nFrom her starting relaxed stance, she slides a pair of small thin-framed reading glasses onto her nose with one hand, then grips a scrub brush in one hand and scrubs it forward once at chest height in one firm stroke. Without repeating the stroke, she tucks the brush behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip.']]],
 ];
-const NAME = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', mudling: 'Mudling', bigone: 'The Big One' };
+const NAME = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', mudling: 'Mudling', bigone: 'The Big One', grump: 'Pond Grump', toad: 'Bog Toad', log: 'Log Lump', skeeter: 'Skeeter Swarm' };
 const clipOf = (o, key, rows, kind, foe) => {
   const c = { id: o + '-' + key, owner: o, start: 'art/clips/start/' + o + '.png', model: LITE, res: '480p', dur: 3, figRows: rows };
   if (kind === 'loop' || kind === 'calm') Object.assign(c, { step: 1, speed: .3, calm: .875, kind: 'loop' });   // the clipfoes1 idle numbers: the baker picks the calmest stretch (guards: the held braced pose)
@@ -126,6 +126,27 @@ const FOES = [
     ['slip', 'slips on the wet floor', 'state', 1, 'MOTION: SLIP\nThe creature\'s feet skid out from under it once, it tips backward with its arms flailing and sits down hard.%P Then it pushes itself back up into the pose of the attached picture' + STILL],
     ['flustered', 'Flustered (slumped, held pose)', 'state', 1, 'MOTION: FLUSTERED\nThe creature sags once, its shoulders drooping and its big eyes going dizzy and half closed, and it slumps down into a tired, wobbly sit.%P It stays slumped like that' + STILL],
     ['defeated', 'defeated (held pose)', 'state', 1, 'MOTION: DEFEATED\nThe creature wobbles once, closes its eyes and tips over slowly onto its back, its arms flopping out to the sides.%P It stays lying on its back' + STILL]]],
+  // wanch1 (card c-wanch1): the attacks and wind-ups of the other chapter 1 monsters (B3_FOES in data/b3-foes-ch01.js), the same pattern
+  // as the Mudling's and The Big One's (LOOK_FOE, one MOTION each, settle or hold). Their idles were made before (clipfoes1).
+  ['grump', 36.3, ' The moss and slime hanging from its body stay attached.', [
+    ['grumble', 'Puddle Grumble (grumbles)', 'state', 0, 'MOTION: GRUMBLE\nThe creature puffs out its cheeks and throat and grumbles once with a deep scowl, its belly shaking, while its base stays put.%P Without repeating the grumble, ' + SETTLE],
+    ['splash', 'Bog Splash (flings pond water)', 'strike', 0, 'MOTION: SPLASH THROW\nThe creature swings one heavy arm back and flings it forward once at head height, as if splashing a handful of pond water, while its base stays put.%P Without repeating the throw, ' + SETTLE],
+    ['slapwind', 'Soggy Slap wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature leans back, lifts one heavy arm high behind its head and scowls once, getting ready to slap.%P It holds that leaning-back, arm-raised pose' + STILL],
+    ['slap', 'Soggy Slap', 'strike', 0, 'MOTION: SOGGY SLAP\nThe creature leans forward and swings one heavy arm down and forward once in a big slap, while its base stays put.%P Without repeating the slap, ' + SETTLE]]],
+  ['toad', 39.2, ' The lily pad stays on its head.', [
+    ['croak', 'Night Croak (big croak)', 'state', 0, 'MOTION: BIG CROAK\nThe creature puffs its throat out into a big round bubble and croaks once with its mouth wide open, while its feet stay put.%P Without repeating the croak, ' + SETTLE],
+    ['slam', 'Body Slam', 'strike', 1, 'MOTION: BODY SLAM\nThe creature crouches and throws its whole body forward in one heavy slam, landing back on the same spot.%P Without repeating the slam, ' + SETTLE],
+    ['tonguewind', 'Tongue Lash wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature crouches low, puffs out its cheeks and narrows its eyes once, getting ready to lash out.%P It holds that low, puffed-up pose' + STILL],
+    ['tongue', 'Tongue Lash', 'strike', 0, 'MOTION: TONGUE LASH\nThe creature opens its mouth wide, shoots its long pink tongue straight out forward low along the ground once, and pulls it back in, while its feet stay put.%P Without repeating the lash, ' + SETTLE]]],
+  ['log', 34.9, ' The moss, the mushrooms and the leaf sprouts on top stay attached.', [
+    ['roll', 'Low Roll', 'strike', 1, 'MOTION: LOW ROLL\nThe creature rocks back, then rolls forward a short way along the ground once and rocks back to the same spot.%P Without repeating the roll, ' + SETTLE],
+    ['jab', 'Branch Jab', 'strike', 0, 'MOTION: BRANCH JAB\nThe creature tips its top forward and jabs the tall branch stub on its top forward once in one quick poke, while its base stays put.%P Without repeating the jab, ' + SETTLE],
+    ['timberwind', 'Timber! wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature leans back slowly and narrows its angry eyes once, getting ready to topple forward.%P It holds that leaning-back pose' + STILL],
+    ['timber', 'Timber!', 'strike', 1, 'MOTION: TIMBER\nThe creature tips forward and falls flat onto its front once like a falling tree.%P Then it pushes itself back up into the pose of the attached picture' + STILL]]],
+  ['skeeter', 41.6, ' The small mosquitoes stay close around the big one, the same number of them.', [
+    ['bite', 'Darting Bite', 'strike', 1, 'MOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite.%P Without repeating the bite, ' + SETTLE],
+    ['whine', 'Mosquito Whine (loud buzz)', 'state', 1, 'MOTION: LOUD WHINE\nThe big mosquito lifts its head and beats its wings very fast once in one loud whine, while the small mosquitoes jitter in place.%P Without repeating the whine, ' + SETTLE],
+    ['buzz', 'Buzz Cloud (the swarm regroups)', 'state', 1, 'MOTION: REGROUP\nThe small mosquitoes swirl once in a tight circle around the big mosquito.%P Then they settle back into their places and ' + SETTLE]]],
 ];
 for (const [o, rows, parts, list] of FOES)
   for (const [key, label, kind, falls, motion] of list)
@@ -153,6 +174,7 @@ const entries = [
     ['grump', 'Pond Grump', 36.3, 'The moss and slime hanging from its body sway a little and stay attached. The frown stays. The arms and feet stay where they are; drips wobble a little but nothing falls off or lands on the ground.'],
     ['toad', 'Bog Toad', 39.2, 'The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground.'],
     ['log', 'Log Lump', 34.9, 'The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground.'],
+    ['skeeter', 'Skeeter Swarm', 41.6, 'The wings flutter. The small mosquitoes hover and bob a little around the big one and stay close, the same number of them; nothing flies away.'],   // wanch1: its first idle (the same text as the Log's, its own parts)
     ['bigone', 'The Big One', 41.1, 'The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground.'],
   ].map(([o, name, rows, parts]) => { const fix = o !== 'bigone'; return { id: 'clip-' + o + '-idle', tab: 'Clips', group: 'Chapter 1', title: name + ': waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/' + o + '.png'],
     clip: Object.assign({ id: o + '-idle', owner: o, start: 'art/clips/start/' + o + '.png', model: G15, res: '480p', dur: 3, figRows: rows, step: 1, speed: .3, calm: .875, kind: 'loop', k: 8 },

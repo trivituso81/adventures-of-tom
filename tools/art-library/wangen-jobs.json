@@ -96,5 +96,972 @@
    "num_images": 1,
    "output_format": "png"
   }
+ },
+ "tom-idle": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-idle-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-guard": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-guard-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-hit": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-hit-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-dodge": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-dodge-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-ko": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-ko-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-victory": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-victory-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-run": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-run-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-cast": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-cast-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-loungepass": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-loungepass-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "tom-blockade": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-tom-blockade-v1.txt",
+  "frame": "art/clips/start/tom-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-idle": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-idle-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-hit": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-hit-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-dodge": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-dodge-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-ko": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-ko-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-victory": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-victory-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-run": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-run-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-cast": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-cast-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-squeeze": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-squeeze-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "grace-cubepop": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-grace-cubepop-v1.txt",
+  "frame": "art/clips/start/grace-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-idle": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-idle-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-guard": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-guard-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-hit": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-hit-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-dodge": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-dodge-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-ko": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-ko-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-run": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-run-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-cast": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-cast-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-tackle": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-tackle-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-lava": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-lava-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "rose-giddyup": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-idle": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-idle-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-guard": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-guard-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-hit": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-hit-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-dodge": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-dodge-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-ko": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-ko-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-victory": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-victory-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-run": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-run-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-cast": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-cast-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-wetfloor": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-wetfloor-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
+ },
+ "deedee-scrub": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-deedee-scrub-v1.txt",
+  "frame": "art/clips/start/deedee-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  }
  }
 }

@@ -118,7 +118,8 @@ def page_run(br, name, vp, nocors, video):
 # clipch1 (clipposes: the family's idle, guard, hit, dodge, ko, run and victory are painted poses now, so only their moves remain): the chapter 1 entries after the first seven, all on the cheap model, 3 s, 7 cents each
 CH1 = [f'clip-{o}-{k}:grok-imagine-video-1.5-lite:3:0.07' for o, ks in (('tom', 'give cast loungepass blockade'), ('grace', 'give cast squeeze cubepop'),
        ('rose', 'victory give cast tackle lava giddyup'), ('deedee', 'give cast windex wetfloor scrub'), ('mudling', 'bump throw windup hit slip defeated'),
-       ('bigone', 'glare tailslap chomp flopwindup bellyflop polish hit slip flustered defeated')) for k in ks.split()]
+       ('bigone', 'glare tailslap chomp flopwindup bellyflop polish hit slip flustered defeated'),
+       ('grump', 'grumble splash slapwind slap'), ('toad', 'croak slam tonguewind tongue'), ('log', 'roll jab timberwind timber'), ('skeeter', 'bite whine buzz')) for k in ks.split()]   # wanch1: the other chapter 1 monsters
 def study_run(br, video):
     """A study video (clip.test, clipstudy1). No marks or speed rows; APPROVE with no marks saves the video only."""
     SID = 'clip-rose-boop'; web, stub = servers(False, video)
@@ -128,7 +129,7 @@ def study_run(br, video):
         pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-gh-token','test'); }")
         pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
         ids = pg.evaluate("()=>DATA.entries.filter(e=>e.clip).map(e=>e.id+':'+e.clip.model+':'+e.clip.dur+':'+clipCost(e).toFixed(2))")
-        ok(ids == ['clip-rose-boop:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'] + [f'clip-{o}-idle:grok-imagine-video-1.5:3:0.25' for o in ('grump', 'toad', 'log', 'bigone')] + CH1, f'study: the clip entries with their models, lengths and prices {ids}')
+        ok(ids == ['clip-rose-boop:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'] + [f'clip-{o}-idle:grok-imagine-video-1.5:3:0.25' for o in ('grump', 'toad', 'log', 'skeeter', 'bigone')] + CH1, f'study: the clip entries with their models, lengths and prices {ids}')
         pg.evaluate("()=>{ ENTRY['clip-rose-boop'].clip.test=true; paintList(); }")   # no study entry is left: the Boop entry is flagged as one for this run
         if not pg.locator(f'[data-toggle="{SID}"]').count(): pg.click('[data-grp="Clips|Rose"]')
         if not pg.locator(f'.card[data-id="{SID}"]').count(): pg.click(f'[data-toggle="{SID}"]')
