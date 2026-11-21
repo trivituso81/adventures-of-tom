@@ -20990,6 +20990,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGaYe7UufYgejbmA1E",
+   "title": "board-audit1120: today's 167 builds all have cards; 22 no-build and duplicate cards marked retired so Shipped lists only real shipments",
+   "first": "2026-11-20T19:06:22-08:00",
+   "last": "2026-11-20T19:06:22-08:00",
+   "tags": [
+    "board-audit1120"
+   ],
+   "cards": []
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
    "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
    "first": "2026-11-20T19:03:50-08:00",
@@ -23413,8 +23423,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3db9bcd364d49d421d44408090630a2d22b840a3",
- "synced_at": "2026-11-21T03:05:30+00:00",
+ "synced": "91f42525c86030c375faf0bc94a4cf9388066ef2",
+ "synced_at": "2026-11-21T03:07:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
