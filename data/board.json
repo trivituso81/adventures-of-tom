@@ -25210,6 +25210,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
+   "title": "Animation note: Rose, Getting hit",
+   "first": "2026-11-21T09:18:57-08:00",
+   "last": "2026-11-21T09:36:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-rose-hit-uy5r",
+    "c-anim-rose-dodge-v89r",
+    "c-anim-rose-victory-vqjc",
+    "c-anim-rose-give-w5ws",
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
    "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
    "first": "2026-11-21T09:34:32-08:00",
@@ -25272,20 +25286,6 @@
     "c-anim-deedee-give-yy1o",
     "c-anim-deedee-windex-z9p8",
     "c-anim-deedee-scrub-1irj"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
-   "title": "Animation note: Rose, Getting hit",
-   "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T09:21:16-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-rose-hit-uy5r",
-    "c-anim-rose-dodge-v89r",
-    "c-anim-rose-victory-vqjc",
-    "c-anim-rose-give-w5ws",
-    "c-anim-rose-lava-xftr"
    ]
   },
   {
@@ -28639,8 +28639,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c38364fc0e4776a7c1ef67ef577dd5fca277f629",
- "synced_at": "2026-11-21T17:34:35+00:00",
+ "synced": "78a9e77374bfda8b6bfdf19606108f86390c8ad9",
+ "synced_at": "2026-11-21T17:36:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
