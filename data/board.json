@@ -18442,7 +18442,7 @@
   {
    "id": "t-clipstuck1",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "animations",
    "fyi": true,
@@ -18464,8 +18464,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by clipstuck1a."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T00:49:36.923Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
