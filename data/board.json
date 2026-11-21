@@ -20946,7 +20946,7 @@
    "id": "c-qa-bug07",
    "tag": "qa-bug07",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Grace's skill name cut off on her STAMPS card",
    "next": "Ready to start. Screen report.",
@@ -20966,8 +20966,15 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-07, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: battle issues out of scope",
+     "at": "2026-11-21T03:24:02.912Z"
     }
-   ]
+   ],
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-qa-bug08",
