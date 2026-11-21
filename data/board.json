@@ -2191,12 +2191,17 @@
     {
      "d": "2026-11-20",
      "t": "Read the note on t-pagessource. Tom's Pages source is already GitHub Actions, so that card was retired with no action for him. Nothing else needed; card closed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to do, answered on t-pagessource."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-20",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-follow1play",
@@ -7182,6 +7187,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Not needed any more: no painted pose is tuned. Replaced by the video route (claude/video-battle-plan.md, card c-wanproof)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: not needed, replaced by the video route."
     }
    ],
    "prompt": {
@@ -7193,7 +7202,8 @@
     "effort": "medium (small edits of known numbers)",
     "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes, Tom's answers in data/pose-review.json (run ch1: one APPROVE or REJECT with an optional note per fighter.state) and docs/BATTLE3.md section Painted body states. Fix each rejected state by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. A rejection with no note: ask Tom one short question on his card. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-bannerhold1",
@@ -8999,6 +9009,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by boardwait1: nothing to fix; the card it was for is retired. Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to fix (Tom: no bugs past chapter 1 for now)."
     }
    ],
    "prompt": {
@@ -9011,7 +9025,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks-voice and t-oldchecks-voice in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks-voice.\n\nTom tested and found problems:\n1. Card t-oldchecks-voice (Voices: record the old voice gaps, ask voice). He was asked: Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude. He wrote: I don't wanna deal with any bugs past chapter 1 right now\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:09.380Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks-voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks-voice, and give the build fix-oldchecks-voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-oldchecks-voice",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-fix-cutpolish5",
@@ -9319,6 +9334,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by boardwait1 session: Tom tapped Something is wrong at 08:44:20 UTC, about 40 seconds before build fix-ch1starving-3 finished publishing (08:45 UTC), so his phone still had the old Voice Library, the one that deleted \"I'm starving!\" when he left the box. The live page now has the fix (checked on the site). Nothing to change in code."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: report crossed with build fix-ch1starving-3."
     }
    ],
    "prompt": {
@@ -9331,7 +9350,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-4 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-4.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end, ask voice). He was asked: After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take. He wrote: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:44:20.065Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-4 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1starving",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "b-board-starving4",
@@ -10543,6 +10563,10 @@
     {
      "d": "2026-11-20",
      "t": "Done by the board: the backlog is empty."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: its fixes shipped under c-reports-2 (reports-2026-11-20); duplicate."
     }
    ],
    "blocks": [],
@@ -10550,7 +10574,8 @@
    "changed": "2026-11-20",
    "started_at": "2026-11-20T15:35:40+00:00",
    "after": "nothing for Tom: c-fix-gracevoice-distort",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "theme": "Tools",
@@ -12206,6 +12231,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired, already fixed on main: heist1 dropped \"It's mine!\" (line became \"Tata, get UP, it's getting away!\"), then fixheist1play cut Grace's floor line from the scene entirely (docs/PURGED_VOICE.md). Nothing left to change; no clip lost."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: already fixed on main."
     }
    ],
    "tag": "gem-polish04",
@@ -12219,7 +12248,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish04 in data/board.json, history included. Your first push is the commit board: start c-gem-polish04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-04. What the tester saw: Where: `grands` (Grace Heist Line). `\"It's mine! Tata, get UP, it's getting away!\"` , `\"It's mine!\"` sounds like her squishy rather than the muffins.\n\nThe tester suggested (a suggestion, not an order): Clarify to `\"Hey, those are OUR muffins! Tata, get UP, it's getting away!\"`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish04, push to main, and write the result and the next step onto the card.\n\nThe heist was redone (claude/heist-redo-plan.md, docs/CHANGES.md heist1). Check current main first; the line may already be different. A changed spoken line loses its baked clip: say so.\n\nYou have my full permission to access the repo."
    },
    "after": "nothing for Tom: end",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-polish05",
@@ -12336,8 +12366,13 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, CANON-10. The tester marked this Keeper (positive): kept here as a reminder for the cards on the ending scenes (CANON-05 and CANON-07), closed because there is nothing to fix."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: a keeper note, nothing to build."
     }
-   ]
+   ],
+   "retired": true
   },
   {
    "id": "c-gem-pillar-hp",
@@ -12370,6 +12405,10 @@
     {
      "d": "2026-11-20",
      "t": "Checked on main a105cb2: chapter 1 still runs battle 2, which still shows the Warmth bar and the WARMTH command. Not changed there: battle 2 is replaced, not fixed. Battle 3 (v11) already wins by HP only, kindness plays after 0 HP. Covered by stage 15 (chapter 1 switch) and stage 23 (purge of Kindness in battle) of the architecture; stage 15 has no board card yet, so the report is written into claude/battle-build.md Owed for stage 15 (repo and Project). Retired."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: covered by battle system stage 15."
     }
    ],
    "tag": "gem-pillar-hp",
@@ -12382,7 +12421,8 @@
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-hp in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-hp.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Win Condition & Enemy Bars\" row of the battle table (1.2). What the tester saw: Observed in the live build: Dual `HP` + pink `WARMTH` bar (`0/90` on Mudling, `0/350` on The Big One) with `◀ WARMTH` menu command (`\"make it laugh\"`, `\"Cheer it up with RASPBERRY, Peekaboo, Rhubarb Crisp, MOON & BACK\"`). Locked target: Pure v10 HP depletion only. Zero `Warmth` bars, zero `likes` lists, zero non-violent praise/kindness buttons (empathy beats play in post-0-HP cutscenes).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-hp, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-pillar-rhubarb",
@@ -12778,6 +12818,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Answered by the card Battle video route (wanplan): your report \"These need to be video animations, not frames\" became the standing rule, and the way back to video is claude/video-battle-plan.md. Nothing painted is fixed. If this card's own conversation is still open it should stop."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: answered by the video route card (wanplan)."
     }
    ],
    "prompt": {
@@ -12791,7 +12835,8 @@
    },
    "after": "t-clipposes",
    "started_at": "2026-11-20T18:00:30+00:00",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-gem-bug01play",
@@ -13018,13 +13063,18 @@
     {
      "d": "2026-11-20",
      "t": "Retired, nothing to merge: checked every take on branch takes (175 in 3 sessions) against data/merged-takes.json. All 136 takes Tom kept in session 20261120T170347-1wa were already merged; the only unmerged ones are takes he did not keep, which are never merged. No voice file changed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to merge."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T18:00:30+00:00",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-fix-gem-canon01play",
@@ -14147,6 +14197,10 @@
     {
      "d": "2026-11-20",
      "t": "Result: FAILED. Both START runs on the Opus 5.5 medium route died before their first push (no board: start commit). Route paused; repair is card c-startfix."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: probe that failed; repair was c-startfix."
     }
    ],
    "prompt": {
@@ -14163,7 +14217,8 @@
     "url": "https://claude.ai/code/cse_01RXeukFHVwjKQBeCwxKQYQg",
     "opening": "started by START"
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-startmore-sonnet",
@@ -14197,6 +14252,10 @@
     {
      "d": "2026-11-20",
      "t": "Result: FAILED. Both START runs on the Sonnet 5.5 high route died before their first push (no board: start commit). Route paused; repair is card c-startfix."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: probe that failed; repair was c-startfix."
     }
    ],
    "prompt": {
@@ -14213,7 +14272,8 @@
     "url": "https://claude.ai/code/cse_01RXeukH1HRtSTSFx8aZvjz1",
     "opening": "started by START"
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-gatezero-decide",
@@ -14712,6 +14772,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired: Tom's welcome page request came in as pencil report r-20261120-130739-tr1a (\"the choose how to play frame width should be shrunken so that it fits only new game load and the two icon buttons. it should remain centered.\"), built as welcomefit1 under c-reports-5."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: the request came in as report tr1a and shipped there."
     }
    ],
    "prompt": {
@@ -14726,7 +14790,8 @@
    "after": "t-welcomepage-play",
    "auto": true,
    "started_at": "2026-11-20T17:53:24+00:00",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-fix-battlelabpagetry",
@@ -16968,6 +17033,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired to Done: duplicate of c-idea-skippingcut, which holds Tom's words and the build."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: duplicate of c-idea-skippingcut."
     }
    ],
    "prompt": {
@@ -16979,7 +17048,8 @@
     "effort": "low (a lookup)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingscene in data/board.json, history included. Your first push is the commit board: start c-idea-skippingscene.\n\nTom made this card himself with New card on the board. His words: \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-wanproof-watch",
@@ -17050,6 +17120,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired: Tom (17:29): \"Now, can you just record and review all of the videos we needed for everything that's in scope for the battle animations for chapter 1?\" Covered by c-wanch1."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: folded into c-wanch1."
     }
    ],
    "prompt": {
@@ -17062,7 +17136,8 @@
     "effort": "medium (the Action, the bake, the guard playback and the checks exist; three new MOTION parts and the idle and hit playback follow them)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanidle in data/board.json with its history and the answer on card t-wanproof-watch. Your first push is the commit board: start c-wanidle. Make Grace's idle with breathing, hit and one own move with a held prop as Wan 3.0 videos with the wan-gen Action, from art/clips/start/grace-hero.png, each prompt BOOP_APPROVED with only the MOTION part changed (the guard prompt in tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Run each through the checks in section 4.4 before Tom sees anything; a miss gets one retry with one change, a second miss the same way is the stop-loss. Spend at most $3.00 on fal and nothing on xAI. Bake them, play them in the Lab row PROOF: GRACE'S GUARD (VIDEO) only, test portrait and landscape (tools/wanproof_test.py extended), and do not remove any painted state yet. Build tag wanidle. End with a Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-fix-wanproof-watch",
@@ -17754,6 +17829,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by fix-gatelayer-pics: the trail paintings are baked by script and checked in the game there (portrait and landscape, hollow_trail_test); Tom's play card is t-hollowtrail-play."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: closed by fix-gatelayer-pics."
     }
    ],
    "prompt": {
@@ -17767,7 +17846,8 @@
    },
    "started_at": "2026-11-21T01:32:02+00:00",
    "after": "t-hollowtrail-play",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-itembannerart1",
@@ -18429,6 +18509,10 @@
     {
      "d": "2026-11-21",
      "t": "Retired by c-startfix. The board: start commit on main came from a hand-pasted run at 00:54 UTC, before the route was turned on, so it proves nothing about START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
     }
    ],
    "prompt": {
@@ -18440,7 +18524,8 @@
     "effort": "medium",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-opus. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "done": "2026-11-21"
+   "done": "2026-11-21",
+   "retired": true
   },
   {
    "id": "c-probe-sonnet-high",
@@ -18470,6 +18555,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired by c-startfix. A throwaway task made from the session, with only the add_repo first line in its prompt, pushed board: start c-probe-sonnet-high (cb177c2). It did not run on the real START Sonnet High task; c-probe-sonnet-high2 does."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
     }
    ],
    "prompt": {
@@ -18481,7 +18570,8 @@
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-clipstuck1",
@@ -18642,6 +18732,10 @@
     {
      "d": "2026-11-21",
      "t": "Retired by c-startfix. The board: start commit on main came from a hand-pasted run at 00:54 UTC, before the route was turned on, so it proves nothing about START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
     }
    ],
    "prompt": {
@@ -18653,7 +18747,8 @@
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high2. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "done": "2026-11-21"
+   "done": "2026-11-21",
+   "retired": true
   },
   {
    "id": "c-fix-keysecrets2-try-7",
@@ -18705,6 +18800,10 @@
     {
      "d": "2026-11-21",
      "t": "Retired without a build: Tom said \"Close this you're wasting my money!\". Nothing was generated and nothing was spent. Both cards closed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: Tom asked to close it."
     }
    ],
    "prompt": {
@@ -18719,7 +18818,8 @@
    "after": "t-keysecrets2-try",
    "auto": true,
    "started_at": "2026-11-21T00:43:52+00:00",
-   "done": "2026-11-21"
+   "done": "2026-11-21",
+   "retired": true
   },
   {
    "id": "c-refresh1",
@@ -19500,12 +19600,17 @@
     {
      "d": "2026-11-20",
      "t": "Done by the board: the backlog is empty."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: same report as c-reports-5, which handed it to c-itembannerart1; duplicate."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-bigboard1",
@@ -19595,13 +19700,18 @@
      "d": "2026-11-21",
      "t": "Retired: the take on branch takes (Grace, \"I've been nine for SIX hours.\") was already merged by build ch1clips8 (its fingerprint is in data/merged-takes.json). Nothing pushed except this note. 25 older kept takes are stale lines and stay unmerged.",
      "at": "2026-11-21T03:30:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: already merged by ch1clips8; duplicate."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-21T02:56:10+00:00",
-   "done": "2026-11-21"
+   "done": "2026-11-21",
+   "retired": true
   },
   {
    "id": "t-itembannerart-pics",
