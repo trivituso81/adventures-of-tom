@@ -23568,6 +23568,37 @@
      "t": "Added with c-costs1. No chat yet."
     }
    ]
+  },
+  {
+   "id": "c-battleguide",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "battleguide1",
+   "next": "Claude is building it now: a reference page for the new battle system (rules, every family member and their Vibes, monsters, statuses), sized for the iPhone Duo folded and unfolded, where each animation can be played and a note on it becomes a Claude card.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"In the same way that we created the kanban page, create an iPhone Duo folder and unfolded optimized page\""
+   },
+   "prompt": {
+    "what": "Builds the Battle Guide page (battle-guide.html) and its board cards.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Fable 5.2 (the conversation Tom opened; no hand-off needed)",
+    "effort": "medium (one page built from the battle data that exists)",
+    "text": "This card is being worked in the conversation that made it. Nothing to paste. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, 07:15: \"create an iPhone Duo folder and unfolded optimized page for the latest version of the battle system... a reference guide for me as i test... a way to preview each animation and provide feedback on the animation directly Claude which opens a new ticket to regenerate the animation based on the feedback.\" 07:26: \"It's favicon should be something related to the battle system library different from the battle lab favucon\"."
+    }
+   ]
   }
  ],
  "sessions": [
