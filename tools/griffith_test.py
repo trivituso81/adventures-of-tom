@@ -17,7 +17,7 @@ def check(name,ok):
     if not ok: fails.append(name)
 def skip_intro(pg,n=500):
     for i in range(n):
-        if not pg.evaluate("()=>intro.active||dialog.active||!!transition"): return True
+        if not pg.evaluate("()=>intro.active||dialog.active||!!transition||partyBannerHeld()"): return True
         pg.keyboard.press('Enter'); pg.wait_for_timeout(80)
     return False
 def stand(pg,x,y,dir='up'):
@@ -44,17 +44,17 @@ with sync_playwright() as pw:
     r=pg.evaluate(REACH); print(r)
     pg.evaluate("()=>{ currentMap.npcs=currentMap.npcs.filter(n=>!n.monster); }")   # park the monsters: standing next to one starts a battle
     check('every object touchable',not r['badObjects']); check('every monster stands on a reachable tile',not r['badStands'])
-    for n,(x,y,d) in {'spawn':(11,19,'up'),'steps':(12,17,'up'),'sign':(13,12,'down'),'bench':(16,16,'up'),'fault':(12,10,'right'),'tarsign':(13,6,'right'),'lookout':(16,3,'right'),'westslope':(4,7,'up'),'east':(21,12,'right')}.items():
+    for n,(x,y,d) in {'spawn':(11,17,'up'),'steps':(12,17,'up'),'sign':(8,9,'left'),'bench':(16,16,'up'),'fault':(13,10,'right'),'tarsign':(17,8,'right'),'lookout':(20,3,'right'),'westslope':(4,7,'up'),'east':(19,12,'right')}.items():
         stand(pg,x,y,d); shot(pg,n)
     # landscape
     pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(600); stand(pg,12,12,'up'); shot(pg,'landscape')
     pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(600)
     # real key presses: up the trail from the spawn, then back down the south exit to the Boulevard
-    skip_intro(pg); stand(pg,11,19,'up')
+    skip_intro(pg); stand(pg,11,17,'up')
     for k in range(3): pg.keyboard.down('ArrowUp'); pg.wait_for_timeout(400); pg.keyboard.up('ArrowUp')
     pg.wait_for_timeout(300); print('up',pg.evaluate("()=>[player.x,player.y,currentMap.id,!!dialog.active,!!intro.active,!!transition,!!(window.battle&&battle.active)]"))
-    check('walked up the trail',pg.evaluate("()=>player.y<=17&&player.y>=12")); shot(pg,'walk-up')
-    stand(pg,11,20,'down')
+    check('walked up the trail',pg.evaluate("()=>player.y<=15&&player.y>=10")); shot(pg,'walk-up')
+    stand(pg,11,17,'down')
     for k in range(3): pg.keyboard.down('ArrowDown'); pg.wait_for_timeout(400); pg.keyboard.up('ArrowDown')
     pg.wait_for_timeout(2000); print('down',pg.evaluate("()=>[player.x,player.y,currentMap.id,!!dialog.active,!!intro.active,!!transition]")); skip_intro(pg)
     check('south exit leads to the Boulevard',pg.evaluate("()=>currentMap.id==='blvd'"))

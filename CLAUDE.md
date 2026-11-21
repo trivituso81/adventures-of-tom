@@ -73,6 +73,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **night1 (2026-11-21): the night shift.** Queued Sonnet 5.5 medium cards start by themselves between 11 pm and 3 am (R14); a standing card (`nightly: true`) is never Done and ships `<tag>-<mmdd>` builds; Tom reads the one card Last night (`t-lastnight`). Rules and limits: the section "Night runs" below.
 
+**nightqa1 (2026-11-21): no yes or no checks for Tom.** Tom (2026-11-19): his role is not QA. A session never hands Tom a play card for a yes or no fact (a button is on screen, a scene ends, a fight restarts): it tests the fact itself and puts the frames in docs/CHANGES.md. A play card is only for what a person must judge (looks, sound, feel, timing, the real phone). The standing card Night QA (`c-night-qa`, plan `claude/night-plan.md` section 8) is the backstop: it plays up to 4 play cards a night, closes a pass with `machine {verdict pass}`, files a fix card for a fail, marks the rest `machine {verdict yours}`. Test: `python3 tools/board_test.py /tmp/board`.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## Night runs (night1, Tom 2026-11-21: "while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring")

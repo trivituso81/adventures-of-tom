@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
+
+MOTION: GIDDYUP LAUNCH
+From her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and leaps up and forward to the left once, hugging her knees in a tight cannonball at the top of the jump, and lands on her feet. Without jumping again, she returns to her starting relaxed stance.

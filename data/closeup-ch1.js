@@ -17,6 +17,6 @@ SCENE_OPS.ch1Reveal=o=>lazy(()=>{
     update(){ return o.keep?(done||!closeup.busy):done; }};
 });
 SCENE_OPS.ch1RevealEnd=o=>lazy(()=>{
-  return {start(){ if(closeup.active&&closeup.reveal) { closeup.busy=false; closeupRevealEnd(); } },
+  return {start(){ if(closeup.active&&closeup.reveal) { closeup.busy=false; closeupRevealEnd(true); } },
     update(){ return !closeup.active; }};
 });

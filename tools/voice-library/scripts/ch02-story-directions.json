@@ -154,7 +154,8 @@
    "speaker": "Mr. Washington",
    "text": "Morning, Tom! Back from your folks? How's your mama?",
    "ctx": "chapter 2 (ch2lessons)",
-   "script": "[thick Louisiana drawl, very cheerful, loud] Morning, Tom! [thick Louisiana drawl, asking] Back from your folks? [thick Louisiana drawl, very cheerful] How's your mama?"
+   "script": "[older African American man, warm Louisiana drawl, thick Louisiana drawl, very cheerful, loud] Morning, Tom! [older African American man, warm Louisiana drawl, thick Louisiana drawl, asking] Back from your folks? [older African American man, warm Louisiana drawl, thick Louisiana drawl, very cheerful] How's your mama?",
+   "takeId": "gen-9627fc976c"
   },
   {
    "voice": "tom",
@@ -448,7 +449,8 @@
    "speaker": "Mr. Washington",
    "text": "Glad to hear it. Tell her I said hello.",
    "ctx": "chapter 2 (ch2lessons)",
-   "script": "[thick Louisiana drawl, very relaxed] Glad to hear it. [thick Louisiana drawl, very cheerful] Tell her I said hello."
+   "script": "[older African American man, warm Louisiana drawl, thick Louisiana drawl, very relaxed] Glad to hear it. [older African American man, warm Louisiana drawl, thick Louisiana drawl, very cheerful] Tell her I said hello.",
+   "takeId": "gen-516e517e06"
   },
   {
    "voice": "carmen",

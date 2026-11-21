@@ -788,14 +788,14 @@
   "pad": 0.8
  },
  "rose-giddyup": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
    "720p": 0.157,
    "1080p": 0.235
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -807,7 +807,7 @@
    "duration": 5
   },
   "pad": 0.8,
-  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
+  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad."
  },
  "deedee-idle": {
   "rev": 1,
@@ -1007,14 +1007,14 @@
   "why": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed"
  },
  "deedee-wetfloor": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
    "720p": 0.157,
    "1080p": 0.235
   },
-  "prompt_file": "tools/art-library/prompts/wan-deedee-wetfloor-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-deedee-wetfloor-v2.txt",
   "frame": "art/clips/start/deedee-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -1026,7 +1026,7 @@
    "duration": 5
   },
   "pad": 0.8,
-  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
+  "why": "wanch3: on Wan and on Kling r3 the mop head swept below her feet line; the words \"in front of her feet\" read as lower on the screen in this view. One change: \"beside her feet, level with them\" (v2 prompt). Same model, picture, frame, pad."
  },
  "deedee-scrub": {
   "rev": 2,
@@ -1194,5 +1194,31 @@
    "num_images": 1,
    "output_format": "png"
   }
+ },
+ "skeeter-bite": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-skeeter-bite-v1.txt",
+  "frame": "art/clips/start/skeeter.png",
+  "fit": "640x480",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "4:3",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "why": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry."
  }
 }

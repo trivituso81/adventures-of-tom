@@ -303,7 +303,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 
 | File | First line | Date |
 |---|---|---|
-| next-addendum-195.md | Addendum to claude/next.md (2026-11-05 10:40, read right after next.md; fold into next.md at the next rewrite) | 2026-11-05 |
 | next-addendum-204.md | Addendum to claude/next.md (written 2026-11-05 13:20). Fold into next.md next time it is rewritten, then delet | 2026-11-05 |
 | next-addendum-208.md | next-addendum-208 (2026-11-05, updated after cabin install): flight work, read after claude/next.md | 2026-11-05 |
 | next-addendum-ability-rest.md | ABILITY REST: STATUS FIRST (2026-11-06 09:00) | 2026-11-06 |
@@ -441,7 +440,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-gclips9.md | gclips9 (2026-11-12 16:43 to ~17:20, main 1fb17a1): phone clip export merged, newer than claude/next.md | 2026-11-12 |
 | next-addendum-girls-greeting.md | Girls greeting hug (Tom 2026-11-06 09:45) | 2026-11-06 |
 | next-addendum-grace-abilities.md | Grace's approved abilities and objects: INSTALLED (2026-11-06, CHANGES 316 and 317, tags gab1) | 2026-11-06 |
-| next-addendum-grace-head.md | Addendum to claude/next.md (written 2026-11-05 ~16:10 local). Fold into next.md next time it is rewritten, the | 2026-11-05 |
 | next-addendum-gracevoice.md | Grace voice takes and Voice Library cleanup (Tom 2026-11-09, gracevoice1 7065998, retired1 be442d2) | 2026-11-09 |
 | next-addendum-griffith-cutouts.md | Griffith Park v2: INSTALLED 2026-11-06 (CHANGES 389, tag `griffith2`, push 6526c17) | 2026-11-06 |
 | next-addendum-hats1.md | hats1 (2026-11-10, main at e08e563): NPC hero prompts, hats only for work or personality | 2026-11-10 |

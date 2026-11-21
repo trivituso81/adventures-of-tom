@@ -33,6 +33,8 @@ b['cards'].append({'id': 'c-rescuing', 'tag': 'rescuing', 'lane': 'claude', 'col
                    'rescue': {'at': iso(1), 'n': 1, 'why': 'Quiet', 'url': 'https://claude.ai/code/session_RESC', 'prev': ''}, 'chat': {'url': 'https://claude.ai/code/session_RESC', 'opening': 'rescue'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
 b['cards'].append({'id': 'c-stalled', 'tag': 'stalled', 'lane': 'claude', 'col': 'wait', 'waiting_on': 'tom', 'theme': 'Tools', 'title': 'A stalled card', 'next': 'Waits behind a card for you.', 'blocks': [], 'changed': T, 'created': T,
                    'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
+b['cards'] += [tomcard('t-qa-yours', 'QA yours card', 'Look at the thing.', ask='play', fyi=True, machine={'at': iso(1), 'verdict': 'yours', 'why': 'how the joke times is for a person'}),
+               tomcard('t-qa-pass', 'QA pass card', 'Check the button.', ask='play', fyi=True, col='done', machine={'at': iso(1), 'verdict': 'pass', 'saw': 'the button is on screen in all three sizes', 'shots': ['qa/t-qa-pass/2026-11-21/portrait.png']})]   # nightqa1
 b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target], 'play'), tomcard('t-test2', 'Test card two', 'Do the second thing.', ask='pictures', fyi=True),
                tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
                tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
@@ -208,6 +210,11 @@ try:
                 if 'I did this' in s or 'Claude takes this' in s: fails.append('test card sheet still offers I did this or Claude takes this (retired by board4)')
                 if not pg.query_selector('#sheet .sh-bar [data-act=good]') or pg.query_selector('#sheet .sh-body [data-act=good]'): fails.append('boardux2: All good / Something is wrong must sit in the action bar, outside the part that scrolls')
                 pg.screenshot(path=f'{out}/board-sheet.png'); pg.click('#bclose')
+                pg.click('.card[data-id="t-qa-yours"] .t'); pg.wait_for_selector('#sheet.open'); sq = pg.inner_text('#sheet')   # nightqa1
+                if 'needs your eyes' not in sq.lower() or 'how the joke times' not in sq: fails.append('nightqa1: a card the night QA called yours does not say Needs your eyes and why')
+                pg.click('#bclose'); pg.evaluate("openSheet('t-qa-pass')"); sp = pg.inner_text('#sheet')
+                if 'checked by the night qa' not in sp.lower() or 'on screen in all three sizes' not in sp or not pg.query_selector('#sheet a[href*="/blob/night/qa/t-qa-pass/"]'): fails.append('nightqa1: a passed card does not show what the night QA saw and its picture link')
+                pg.click('#bclose')
                 pg.click('.card[data-id="t-test6"]'); pg.wait_for_selector('#bdid'); pg.click('#bmore')
                 s = pg.inner_text('#sheet')
                 for want_btn in ('I did this', 'Claude takes this', 'Not needed', 'Note'):
