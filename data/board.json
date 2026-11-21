@@ -24602,7 +24602,7 @@
    "id": "c-anim-rose-give-w5ws",
    "tag": "anim-rose-give-w5ws",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Giving (support moves)",
    "next": "Made in build anim-rose-give-w5ws. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the measured clip gate on the first video. Booked $0.50. Next: your card Watch Rose, Giving (support moves).",
@@ -24648,6 +24648,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-rose-give-w5ws. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the measured clip gate on the first video. Booked $0.50."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-give-w5ws: Rose's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
     }
    ],
    "prompt": {
@@ -24659,7 +24663,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-give-w5ws in data/board.json with its history. Your first push is the commit board: start c-anim-rose-give-w5ws.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Rose, Giving (support moves) (body state give). Its video is clip rose_give (data/clips/rose-give.js, art/clips/rose-give.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-give-w5ws. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Giving (support moves), then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-rose-give-w5ws"
+   "after": "t-anim-rose-give-w5ws",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-rose-lava-xftr",
@@ -25373,9 +25378,10 @@
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T09:55:20-08:00",
+   "last": "2026-11-21T09:56:55-08:00",
    "tags": [
-    "anim-rose-victory-vqjc"
+    "anim-rose-victory-vqjc",
+    "anim-rose-give-w5ws"
    ],
    "cards": [
     "c-anim-rose-hit-uy5r",
@@ -28806,8 +28812,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "681e1a6e5c4f140a045ea44fcf7c3695d851b4f0",
- "synced_at": "2026-11-21T17:55:55+00:00",
+ "synced": "51fc3779f86330066dd4ac97e1f2aa0265c7c5f0",
+ "synced_at": "2026-11-21T17:57:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
