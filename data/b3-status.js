@@ -370,7 +370,20 @@ const B3_STATUS={
   it_touched:{id:'it_touched',name:'It Touched!',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'itTouched',v:-.15}],flags:[],
     short:'DEF DOWN',color:'#d9a8a8',weight:4,desc:'Something touched something else on the plate: 15% less Defense.'},
   full_furnace:{id:'full_furnace',name:'Full Furnace',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'fullFurnace',v:.20}],flags:[],
-    short:'ATTACK UP',color:'#ff8a4a',weight:5,desc:'The firebox is roaring: 20% more Attack. It can be stripped.'}
+    short:'ATTACK UP',color:'#ff8a4a',weight:5,desc:'The firebox is roaring: 20% more Attack. It can be stripped.'},
+  // Stage 13b: chapter 9, the Rose Dome Ballroom.
+  members_only:{id:'members_only',name:'Members Only',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'membersOnly',v:.15}],flags:[],
+    short:'DEF UP',color:'#c9a24a',weight:4,desc:'Behind the velvet rope: 15% more Defense. It can be stripped.'},
+  hmph:{id:'hmph',name:'Hmph.',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'hmph',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#b9a3c9',weight:4,desc:'Looked down on: 15% less Defense.'},
+  gauche:{id:'gauche',name:'How Gauche!',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'gauche',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#c9a3b9',weight:4,desc:'Mortified in front of everyone: 15% less Attack.'},
+  cheater:{id:'cheater',name:'Cheater!',kind:'debuff',group:'mental',dur:{n:1,unit:'turn'},mods:[],flags:['foeTaunt'],
+    short:'CHEATER!',color:'#d9604a',weight:6,desc:'Called out as a cheater: single-target attacks can only go at the monster that said it.'},
+  wall_hug:{id:'wall_hug',name:'Wall Hug',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'wallHug',v:.20}],flags:[],
+    short:'WALL HUG',color:'#a8c9a0',weight:4,desc:'Pressed flat against the wall: dodges 20% of attacks. It can be stripped.'},
+  facet_spin:{id:'facet_spin',name:'Facet Spin',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'facetSpin',v:.25}],flags:[],
+    short:'FACET SPIN',color:'#e8e8ff',weight:5,desc:'Spinning so her mirrors throw every hit off: dodges 25% of attacks. Shatter Glitz! strips it.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

@@ -140,6 +140,11 @@ Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at 
 | Old Ironbelly as data: BROIL and Full Furnace (Toasty on the family and itself; Full Furnace below 50% HP, plus the `full_furnace` buff), Hot Coal and BROIL fire TNB's clay shields. | |
 | New seams: strip kind `shieldOrBuff`; `b3Who` targets `frontAllies`, `firstTarget`; 5 statuses (crosswind, tin_lid, why_bother, it_touched, full_furnace). | |
 
+| In (build `b3s13b`, chapter 9) | Waits for |
+|---|---|
+| Chapter 9: `data/b3-foes-ch09.js` (Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower, The Mirrorball), 6 formations (9 VP each, 27 for the boss), Lab fights NEW 51 to NEW 56 (Tom, Grace, Rose, Deedee, level 22, the dome). | Chapter 10 and the bonus chapter (`b3s13c`, `b3s13`) |
+| The Mirrorball as data: Facet Spin (start), Facet Dazzle and Spotlight Solo leave her Dazzled, LAST DANCE below 50% HP. Members Only (`frontAllies`), Fifty-Two Pickup (`firstTarget`) and "Cheater!" (`foeTaunt`). 6 statuses (members_only, hmph, gauche, cheater, wall_hug, facet_spin). | |
+
 ## What stage 12 holds, and what waits
 
 | In (build `b3s12`, chapter 7; stage 12 is complete) | Waits for |

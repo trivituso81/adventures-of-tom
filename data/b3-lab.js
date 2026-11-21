@@ -107,5 +107,17 @@ const B3_LAB=[
   {id:'new49',name:'NEW 49: THE PICKY EATER',sub:'Chapter 8 Elite. The Picky Eater has 4 Composure pips, shrugs off Clobber and starts behind its Tin Lunchbox Lid. A Draft in Back.',
     party:['tom','tnb','nara'],level:19,formation:'pickyeater',bg:'barn'},
   {id:'new50',name:'NEW 50: OLD IRONBELLY',sub:'Chapter 8 boss. 7 Composure pips. BROIL and Full Furnace leave it Toasty: a Drench hit sets off Steam Cloud!. Its Sizzle fires TNB\u2019s clay shields.',
-    party:['tom','tnb','nara'],level:19,formation:'ironbelly',bg:'boiler'}
+    party:['tom','tnb','nara'],level:19,formation:'ironbelly',bg:'boiler'},
+  {id:'new51',name:'NEW 51: TWO VELVET ROPES',sub:'Chapter 9 fight. Two Velvet Ropes in Front. Members Only gives the Front monsters 15% more Defense and Not On The List pushes someone back.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'velvetrope',bg:'dome'},
+  {id:'new52',name:'NEW 52: STUFFED SHIRT AND VELVET ROPE',sub:'Chapter 9 fight. The Stuffed Shirt lowers Defense with Hmph. and winds up How Gauche! over the whole family.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'stuffedshirt',bg:'dome'},
+  {id:'new53',name:'NEW 53: THE HANGER-ON AND VELVET ROPE',sub:'Chapter 9 fight. The Hanger-On slows with 1971 Coat Cling and winds up Hang On Tight over the whole family.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'coathanger',bg:'dome'},
+  {id:'new54',name:'NEW 54: STUFFED SHIRT AND SORE LOSER',sub:'Chapter 9 fight. The Sore Loser in Back bleeds with Card Flick, calls Cheater! to force the family\u2019s aim, and scatters Fifty-Two Pickup.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'soreloser',bg:'dome'},
+  {id:'new55',name:'NEW 55: THE WALLFLOWER',sub:'Chapter 9 Elite. The Wallflower has 4 Composure pips, shrugs off Clobber and starts hugging the wall (dodges more). A Sore Loser in Back.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'wallflower',bg:'dome'},
+  {id:'new56',name:'NEW 56: THE MIRRORBALL',sub:'Chapter 9 boss. 7 Composure pips. Her own glare leaves her Dazzled: a Clobber hit sets off Shatter Glitz! and a Racket hit sets off Sensory Overload!.',
+    party:['tom','grace','rose','deedee'],level:22,formation:'mirrorball',bg:'dome'}
 ];

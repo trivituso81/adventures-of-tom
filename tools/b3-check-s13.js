@@ -1,4 +1,5 @@
 // tools/b3-check-s13.js — Battle 3 rule tests for stage 13: the bestiary for chapters 8 to 10 and the bonus chapter.
+// Stage 13b: chapter 9, the Rose Dome Ballroom: Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower (Elite), The Mirrorball (boss), Lab fights new51 to new56.
 // Stage 13a: chapter 8, Division Nine Car Barn: Lukewarm, Leftover, Wet Blanket, The Draft, The Picky Eater (Elite), Old Ironbelly (boss),
 // Lab fights new45 to new50. New piece: the strip kind `shieldOrBuff` (Pilot-Light Gust). Old Ironbelly's heat against TNB's clay shields.
 // `node tools/b3-sim.js check` runs it after the file for stage 12.
@@ -117,4 +118,87 @@ module.exports=function(T) {
     for(const p of F.party) { addShield(F,p,300,{src:tnb,clay:true}); for(const sh of p.shields) sh.stone=.2; }
     e.actIx=e.D.acts.findIndex(a=>a.id==='broil'); F.acting=e; turn(F,e,2); F.acting=e; turn(F,e,3);
     ok(F.party.every(p=>p.shields.some(s=>s.glaze)),'BROIL fires every clay shield the family has into Fired Glaze'); });
+
+  // ====================== Chapter 9: the Rose Dome Ballroom (stage 13b) ======================
+  const P9=['tom','grace','rose','deedee'];
+  const mk9=(foes,o)=>NF(Object.assign({party:P9,level:22,seed:11,foes},o||{}));
+  const ROWS9=[
+    ['velvetrope',9,'swarmer','front',273,63,34,112,0,['clobber','racket'],[]],['stuffedshirt',9,'bruiser','front',483,81,44,102,0,['racket','drench'],['razzle']],
+    ['coathanger',9,'bruiser','front',483,81,44,102,0,['clobber','drench'],['sizzle']],['soreloser',9,'hexer','back',357,70,38,112,0,['sizzle','razzle'],['racket']],
+    ['wallflower',9,'elite','front',756,85,53,96,4,['razzle','sizzle'],['clobber']],['mirrorball',9,'boss','front',1590,93,48,109,7,['racket','clobber'],['razzle']]];
+  for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS9) { const D=FOES[id];
+    ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
+    ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
+  ok(FOES.mirrorball.hp3===1190&&FOES.mirrorball.noRun,'The Mirrorball prints 1,190 for a party of 3 and cannot be run from');
+  { const hpOf=party=>NF({party,level:22,seed:3,foes:[{id:'mirrorball',row:'front'}]}).foes[0].maxHp;
+    ok(hpOf(P9)===1590&&hpOf(P9.slice(0,3))===1190,'The Mirrorball: 1,590 for 4, 1,190 for 3'); }
+  const FM9={velvetrope:9,stuffedshirt:9,coathanger:9,soreloser:9,wallflower:9,mirrorball:27};
+  for(const k of Object.keys(FM9)) ok(FORM[k]&&FORM[k].ch===9&&FORM[k].vp===FM9[k],'formation '+k+' is chapter 9 and pays '+FM9[k]+' VP');
+  ok(J(FORM.soreloser.foes)===J([{id:'stuffedshirt',row:'front'},{id:'soreloser',row:'back'}])&&J(FORM.wallflower.foes)===J([{id:'wallflower',row:'front'},{id:'soreloser',row:'back'}]),'the two formations with The Sore Loser match section 4');
+  { const labs=LAB.filter(l=>/^new5[1-6]$/.test(l.id));
+    ok(labs.length===6&&labs.every(l=>FORM[l.formation]&&FORM[l.formation].ch===9),'Lab fights new51 to new56 each run a real chapter 9 formation');
+    ok(labs.every(l=>l.level===22&&J(l.party)===J(P9)&&l.bg==='dome'),'each uses level 22, Tom, Grace, Rose and Deedee, the dome'); }
+  for(const id of ['members_only','hmph','gauche','cheater','wall_hug','facet_spin'])
+    ok(ST[id]&&ST[id].desc&&ST[id].short&&ST[id].color&&!/—/.test(ST[id].desc),id+' is a complete status row');
+  ok(ST.cheater.group==='mental'&&ST.cheater.flags.includes('foeTaunt')&&ST.facet_spin.kind==='buff'&&ST.wall_hug.kind==='buff'&&ST.members_only.kind==='buff','Cheater! is Mental and a foe-taunt; Facet Spin, Wall Hug and Members Only are buffs (they can be stripped)');
+  { const F=mk9([{id:'wallflower',row:'front'}]),e=F.foes[0]; ok(!!e.st.wall_hug&&near(sum(e,'eva'),.20,1e-9),'The Wallflower starts hugging the wall (+20% Evasion)'); }
+  { const F=mk9([{id:'mirrorball',row:'front'}]),e=F.foes[0]; ok(!!e.st.facet_spin&&near(sum(e,'eva'),.25,1e-9),'The Mirrorball starts in a Facet Spin (+25% Evasion)'); }
+
+  const rider9=(foe,actId,fn,row,extra)=>noCrit(()=>{ const F=mk9([{id:foe,row:row||'front'}].concat(extra||[])),e=F.foes[0],A=e.D.acts.find(a=>a.id===actId);
+    e.charge=A.tags.includes('charge_up')?A:null; e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; const b=turn(F,e,2); fn(F,e,b); });
+  rider9('velvetrope','rope_lash',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Rope Lash is a plain hit'));
+  rider9('velvetrope','not_on_the_list',(F,e,b)=>ok(b.some(x=>x.t==='push'&&x.n>0&&x.n<=15),'“Not On The List” pushes its target back on the turn bar'));
+  // Members Only: +15% Defense for the Front monsters, the actor included, and not the Back ones
+  noCrit(()=>{ const F=mk9([{id:'velvetrope',row:'front'},{id:'stuffedshirt',row:'front'},{id:'soreloser',row:'back'}]),e=F.foes.find(f=>f.id==='velvetrope'),A=e.D.acts.find(a=>a.id==='members_only'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    const vr=F.foes.find(f=>f.id==='velvetrope'),ss=F.foes.find(f=>f.id==='stuffedshirt'),sl=F.foes.find(f=>f.id==='soreloser'); ok(vr.st.members_only&&ss.st.members_only&&!sl.st.members_only,'Members Only gives the monsters in Front Members Only (itself too) and leaves the Back row alone');
+    ok(near(off(ss,'members_only','def'),1.15,.005),'it is +15% Defense: '+off(ss,'members_only','def')); });
+  rider9('stuffedshirt','hmph',(F)=>{ const t=F.party.find(p=>p.st.hmph); ok(t&&t.st.hmph.n===2&&near(off(t,'hmph','def'),.85,.005),'“Hmph.”: -15% Defense for 2 turns'); });
+  noCrit(()=>{ const F=mk9([{id:'stuffedshirt',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='how_gauche'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='how_gauche'&&!F.party.some(p=>p.st.gauche),'How Gauche! is announced first and does nothing yet');
+    F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.gauche&&p.st.gauche.n===2&&near(off(p,'gauche','atk'),.85,.005)),'it lands next turn: -15% Attack for 2 turns on all four'); });
+  rider9('coathanger','coat_cling',(F)=>{ const t=F.party.find(p=>p.st.slow); ok(t&&t.st.slow.n===2,'1971 Coat Cling gives Slow for 2 turns'); });
+  noCrit(()=>{ const F=mk9([{id:'coathanger',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='hang_on_tight'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='hang_on_tight','Hang On Tight is announced first');
+    F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.slow&&p.st.slow.n===1),'then it Slows all four for 1 turn'); });
+  rider9('soreloser','card_flick',(F)=>ok(F.party.some(p=>p.st.bleed),'Card Flick gives Bleed'),'back');
+  // Cheater!: Mental, 1 turn, points single-target moves at the Sore Loser
+  noCrit(()=>{ const F=mk9([{id:'soreloser',row:'back'},{id:'stuffedshirt',row:'front'}]),e=F.foes.find(f=>f.id==='soreloser'),A=e.D.acts.find(a=>a.id==='cheater'); e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; turn(F,e,2);
+    const t=F.party.find(p=>p.st.cheater); ok(t&&t.st.cheater.n===1,'“Cheater!” puts Cheater! on its target for 1 turn');
+    const O=G('b3Options')(F,t,SK[t.basic]); ok(O.length===1&&O[0].key===e.key,'the one it names can only aim single-target moves at The Sore Loser'); });
+  // Fifty-Two Pickup: hits everyone, the Pep drain and Fatigue land on one
+  noCrit(()=>{ const F=mk9([{id:'soreloser',row:'back'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='fifty_two_pickup'); e.actIx=e.D.acts.indexOf(A); F.acting=e;
+    const hp0=F.party.map(p=>p.hp),pep0=F.party.map(p=>p.pep); for(const p of F.party) p.pep=5; const pe=F.party.map(p=>p.pep); const b=turn(F,e,2);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]),'Fifty-Two Pickup hits all four');
+    const hit=F.party.filter(p=>p.st.fatigue); ok(hit.length===1&&F.party.filter((p,i)=>p.pep<pe[i]).length===1&&hit[0].pep===5-1,'only the first target loses 1 Pep and gets Fatigue: '+hit.length); });
+  // The Wallflower
+  rider9('wallflower','sorry',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'“Sorry!” is a plain hit'));
+  noCrit(()=>{ const F=mk9([{id:'wallflower',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='do_not_look'); e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; delete e.st.wall_hug; turn(F,e,2);
+    const t=F.party.find(p=>p.st.blind); ok(t&&t.st.blind.n===1,'“Do Not Look At Me” blinds its target for 1 turn'); ok(e.st.wall_hug&&e.st.wall_hug.n===2,'and Wall Hug goes up again on The Wallflower (2 turns)'); });
+  noCrit(()=>{ const F=mk9([{id:'wallflower',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='petal_storm'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='petal_storm','Petal Storm is announced first'); F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.dazzled&&p.st.dazzled.n===2),'then it Dazzles all four for 2 turns'); });
+
+  // ---------- The Mirrorball ----------
+  const mb=()=>{ const F=mk9([{id:'mirrorball',row:'front'}]),e=F.foes[0]; for(const p of F.party) { p.hp=p.maxHp=Math.max(p.maxHp,900); p.pep=8; } return {F,e}; };
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='facet_dazzle'); e.aimLock=null; F.acting=e; delete e.st.facet_spin; turn(F,e,2);
+    const t=F.party.find(p=>p.st.blind); ok(t&&t.st.blind.n===1,'Facet Dazzle blinds its target for 1 turn');
+    ok(e.st.facet_spin&&e.st.facet_spin.n===2,'puts Facet Spin up again on her'); ok(e.st.dazzled&&e.st.dazzled.n===2,'and leaves The Mirrorball herself Dazzled for 2 turns'); });
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='facet_dazzle'); F.acting=e; turn(F,e,2);
+    const g=F.party.find(p=>p.id==='grace'); e.peeves=['clobber']; const pips0=e.pips; const b=go(F,g,'t13_clobber',e.key);
+    ok(b.some(x=>x.t==='detonate'&&x.id==='shatter_glitz'),'a Clobber hit on her Dazzled sets off Shatter Glitz!'); ok(!e.st.facet_spin,'which strips her Facet Spin');
+    ok(pips0-e.pips===2,'and takes 2 pips (1 for the Detonation, 1 for the Clobber Pet Peeve): '+pips0+' to '+e.pips); });
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='facet_dazzle'); F.acting=e; turn(F,e,2);
+    const g=F.party.find(p=>p.id==='tom'); e.peeves=['racket']; const pips0=e.pips; const b=go(F,g,'t13_racket',e.key);
+    ok(b.some(x=>x.t==='detonate'&&x.id==='sensory_overload'),'a Racket hit on her Dazzled sets off Sensory Overload!'); ok(pips0-e.pips===2,'and takes 2 pips with the Racket Pet Peeve: '+pips0+' to '+e.pips); });
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='chain_swing'); F.acting=e; turn(F,e,2); ok(!e.st.dazzled,'Chain Swing and Glitter Beam leave her cool: the opening is only Facet Dazzle and Spotlight Solo'); });
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='glitter_beam'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2);
+    ok(F.party.every((p,i)=>p.hp<hp0[i])&&!e.st.dazzled,'Glitter Beam hits all four and does nothing else'); });
+  noCrit(()=>{ const {F,e}=mb(); e.actIx=e.D.acts.findIndex(a=>a.id==='spotlight_solo'); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='spotlight_solo'&&!e.st.dazzled,'Spotlight Solo is announced one turn ahead and does nothing yet');
+    F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3); ok(F.party.filter((p,i)=>p.hp<hp0[i]).length===1&&e.st.dazzled&&e.st.dazzled.n===2,'then it hits one and leaves her Dazzled (2 turns)'); });
+  noCrit(()=>{ const {F,e}=mb(); e.hp=Math.floor(e.maxHp*.6); const seen=new Set(); for(let i=0;i<10;i++) { const P=pick(F,e); seen.add(P.act.id); }
+    ok(!seen.has('last_dance'),'above half HP there is no LAST DANCE'); });
+  noCrit(()=>{ const {F,e}=mb(); e.hp=Math.floor(e.maxHp*.5); e.actIx=e.D.acts.findIndex(a=>a.id==='last_dance'); ok(pick(F,e,true).act.id==='last_dance','at 50% HP LAST DANCE is next in the list');
+    F.acting=e; turn(F,e,2); ok(e.charge&&e.charge.id==='last_dance','it is announced one turn ahead'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]),'then it hits all four'); });
+  noCrit(()=>{ const {F,e}=mb(); e.charge=e.D.acts.find(a=>a.id==='spotlight_solo'); loseCharge(F,e); ok(!e.charge,'an interrupt cancels Spotlight Solo'); });
 };

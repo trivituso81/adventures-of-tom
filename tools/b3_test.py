@@ -1423,6 +1423,19 @@ def stage13(pg,lab,landscape=False,parts='a'):
         # The Picky Eater's wind-up is usually Broken by the family's pips, so only the win is checked for it here (the rule test covers the fire).
         for fid,foe,ix,act,st in (('new49','pickyeater',2,None,None),('new48','thedraft',0,'pilot_light_gust',None),('new47','wetblanket',2,'dampen_spirits','drenched'),('new46','leftover',1,'mystery_tupperware','blind'),('new45','lukewarm',1,'cold_shoulder','slow')):
             caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('leftover','lukewarm','thedraft','wetblanket')),2)
+    if 'b' in parts:
+        # Chapter 9. The Mirrorball: Facet Dazzle blinds one and leaves her Dazzled; at low HP LAST DANCE winds up
+        fr=[]; R=s11_run(pg,lab,'new56',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*1.3); e.hp=e.maxHp; e.actIx=1; }",fr,every=500,landscape=landscape,tag='s13',watch={'dazzled':"()=>window.__s11.statuses.some(x=>x.endsWith(':dazzled'))"})
+        need(R['over']=='win',f"The Mirrorball fight ended {R['over']}")
+        need(any(a.startswith('facet_dazzle') for a in R['acts']),f"Facet Dazzle should be played: {R['acts'][:10]}")
+        need(any(x.endswith(':facet_spin') for x in R['statuses']) and any(x.endswith(':dazzled') for x in R['statuses']),f"Facet Spin and Dazzled should show as statuses: {R['statuses'][:10]}")
+        caps+=pick(fr,6)
+        fr=[]; R=s11_run(pg,lab,'new56',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*2.2); e.hp=Math.floor(e.maxHp*.49); e.actIx=4; e.spd*=1.5; }",fr,every=500,landscape=landscape,tag='s13')
+        need(R['over']=='win',f"The Mirrorball (low HP) fight ended {R['over']}")
+        need(any(a.startswith('last_dance') for a in R['acts']),f"LAST DANCE should be played below half HP: {R['acts'][:10]}")
+        caps+=pick(fr,4)
+        for fid,foe,ix,act,st in (('new55','wallflower',1,None,None),('new54','soreloser',1,'cheater','cheater'),('new53','coathanger',1,'coat_cling','slow'),('new52','stuffedshirt',0,'hmph','hmph'),('new51','velvetrope',1,'not_on_the_list',None)):
+            caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('velvetrope','soreloser','stuffedshirt','coathanger')),2)
     sheet(caps,6,os.path.join(OUT,'b3-s13'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}

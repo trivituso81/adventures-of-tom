@@ -1,3 +1,12 @@
+## b3s13b (2026-11-20): New battle: the chapter 9 ballroom monsters and The Mirrorball join the Battle Lab (stage 13, part b of four)
+
+- Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This part is chapter 9, built from `claude/bestiary-v11.md`: Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower (Elite) and the boss The Mirrorball in `data/b3-foes-ch09.js`, with six formations (9 VP each, 27 for the boss).
+- Lab: NEW 51 to NEW 56, one fight for every formation and the boss (Tom, Grace, Rose and Deedee at level 22; the dome backdrop).
+- The Mirrorball as data: she starts in a Facet Spin (+25% Evasion buff); Facet Dazzle and Spotlight Solo leave her Dazzled, so a Clobber hit sets off Shatter Glitz! (strips Facet Spin) and a Racket hit sets off Sensory Overload!, both already built; LAST DANCE only below 50% HP. 1,590 HP for 4, 1,190 for 3.
+- No new engine seams: Members Only uses `frontAllies` and Fifty-Two Pickup uses `firstTarget` (both added in b3s13a); "Cheater!" is a Mental status with the existing `foeTaunt` flag, the same one SEE ME uses. Six new statuses (members_only, hmph, gauche, cheater, wall_hug, facet_spin).
+- No picture or clip work (every act uses `anim:{kind:'default'}`), no voice lines added.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s13.js`, chapter 9 section; FAILS: []); the six new Lab fights each 100 simulated, all won, 0 errors (The Wallflower 5.7 rounds, The Mirrorball 3.8, normal fights 1.2 to 2.1); `python3 tools/b3_test.py s13b` (portrait and landscape). Chapter 10 and the bonus chapter follow as b3s13c and b3s13.
+
 ## wanch1h (2026-11-20): Rose and Deedee fight in Wan videos too (idle with breathing, guard, hit, run), The Floor Is Lava!, the Glasses Scrub and Zone One Blockade are videos, Grace's knock-out sits on the ground
 
 Card c-wanch1 (part h). Videos: wan-gen runs 44859585429 and 44859840350 (18 clips, $9). Checked against plan 4.4 before baking.
