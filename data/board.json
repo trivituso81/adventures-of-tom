@@ -24120,11 +24120,59 @@
    "done": "2026-11-21"
   },
   {
+   "id": "c-anim-tom-loungepass-fix1",
+   "tag": "anim-tom-loungepass-fix1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "fix": true,
+   "title": "Fix: Tom, Lounge Pass Flex (quick take-out, long swat)",
+   "reports": [
+    {
+     "at": "2026-11-21T18:33:00Z",
+     "words": "Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it",
+     "card": "t-anim-tom-loungepass-lf2z-watch"
+    }
+   ],
+   "next": "Remakes Lounge Pass Flex from your note: the take-out and sparkle quick, most of the clip his arm out straight and the snooty swat.",
+   "anim": {
+    "id": "move:lounge_pass_flex",
+    "owner": "tom",
+    "ownerName": "Tom",
+    "name": "Lounge Pass Flex",
+    "kind": "move",
+    "clip": "tom_loungepass",
+    "painted": false,
+    "what": "move lounge_pass_flex in data/b3-kit-tom.js"
+   },
+   "blocks": [
+    "t-anim-tom-loungepass-lf2z-watch"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (in chat, 10:33), on the anim-tom-loungepass-lf2z clip: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\"",
+     "at": "2026-11-21T18:33:00Z"
+    }
+   ],
+   "prompt": {
+    "what": "Remakes Tom, Lounge Pass Flex from your second note, checks it, and hands it back to you to watch.",
+    "before": [
+     "Nothing to do first. Your note is on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one prompt edited from a version that nearly worked)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-fix1 in data/board.json with its history and reports. Your first push is the commit board: start c-anim-tom-loungepass-fix1.\n\nTom's note on the clip made in anim-tom-loungepass-lf2z: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\". Start from tools/art-library/prompts/wan-tom-loungepass-v2.txt (job tom-loungepass in tools/art-library/wangen-jobs.json) and change only what the note names. Make it on Wan 3.0 through the wan-gen Action, check every picture against plan section 4.4, run the clip gate, bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Spend at most $2.50. Build tag anim-tom-loungepass-fix1. Set after to t-anim-tom-loungepass-lf2z-watch and rewrite its next to what to look at again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "t-anim-tom-loungepass-lf2z-watch",
    "title": "Watch Tom's new Lounge Pass Flex",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then tap All good or Something is wrong. You should see him hold the card up by his face, smile and wink at you, a sparkle on the card's top right corner, then chin up and a snooty limp-wrist swat toward the monster. There is no ding yet (card c-anim-tom-loungepass-ding adds it after your All good).",
    "steps": [
@@ -24142,8 +24190,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-tom-loungepass-lf2z. The clip passed plan 4.4 and the measured gate on every picture the game plays."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom (in chat, 10:33): \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\" Fix card c-anim-tom-loungepass-fix1 remakes it; this card comes back after.",
+     "at": "2026-11-21T18:33:00Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-anim-tom-loungepass-ding",
@@ -24199,6 +24253,11 @@
      "at": "2026-11-21T17:01:27.031Z",
      "words": "Needs to be generated",
      "build": "b3s17a"
+    },
+    {
+     "at": "2026-11-21T18:33:00Z",
+     "words": "But Roses dodge came out good. Maybe it should be ducking motion instead.",
+     "build": "anim-tom-loungepass-lf2z"
     }
    ],
    "chat": {
@@ -24227,6 +24286,11 @@
     {
      "d": "2026-11-21",
      "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom (in chat, 10:33): \"But Roses dodge came out good. Maybe it should be ducking motion instead.\" Making it on Wan as a duck in the pattern of Rose's passed dodge.",
+     "at": "2026-11-21T18:33:00Z"
     }
    ],
    "prompt": {
