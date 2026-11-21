@@ -28792,8 +28792,8 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2)\""
    },
    "history": [
     {
@@ -28808,6 +28808,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T21:00:06.287Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session (Opus 5.5, medium) started. Tom's answer on t-wanch2-watch was All good with no note, so nothing to apply from it."
     }
    ],
    "prompt": {
