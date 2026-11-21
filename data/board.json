@@ -23010,7 +23010,7 @@
    "title": "Look for people on roofs in the Square and the Row",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD (build fix-qa-bug03-look), go to the Square and Rivituso Row and watch the townsfolk for a minute each. Look at: nobody stands on the SNAIL MAIL sign or its weathervane, the SCHOOL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Pip now starts one step right of the weathervane. Report anything off with the REPORT tab.",
@@ -23033,8 +23033,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Look for people on roofs in the Square and the Row is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:43:49.837Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-b3s14b",
