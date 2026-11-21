@@ -325,6 +325,201 @@
    "i": 26,
    "name": "NEW 27: THE DIRECTOR’S CUT",
    "sub": "Chapter 4 boss. 6 Composure pips. At 60% HP it shouts ACTION! and calls Extra Extras. CUT! stuns and pushes one of the family."
+  },
+  {
+   "i": 27,
+   "name": "NEW 28: TWO POP QUIZZES",
+   "sub": "Chapter 5 fight. Two Pop Quizzes in Front. Trick Question and Pencils Down! sap Attack and Pep."
+  },
+  {
+   "i": 28,
+   "name": "NEW 29: POP QUIZ AND TARDY BELL",
+   "sub": "Chapter 5 fight. The Tardy Bell in Back slows and pushes with You’re Late!"
+  },
+  {
+   "i": 29,
+   "name": "NEW 30: POP QUIZ AND GLITTER GLUE",
+   "sub": "Chapter 5 fight. The Glitter Glue in Back pastes the floor and blinds one of the family with a Glitter Burst."
+  },
+  {
+   "i": 30,
+   "name": "NEW 31: DODGEBALL DREAD",
+   "sub": "Chapter 5 Elite. Dodgeball Dread has 4 Composure pips, shrugs off Clobber and starts bouncing (dodges more). A Tardy Bell in Back."
+  },
+  {
+   "i": 31,
+   "name": "NEW 32: THE RED PEN",
+   "sub": "Chapter 5 boss. 6 Composure pips. At 55% HP it raises Strict Grading: 30% less damage and Points Off on every hit, until a Mix or a Break ends it."
+  },
+  {
+   "i": 32,
+   "name": "NEW 33: TWO ACORN AGENTS",
+   "sub": "Chapter 6 fight. Two Acorn Agents in Front. Code Red! speeds up one of them."
+  },
+  {
+   "i": 33,
+   "name": "NEW 34: STICKY SAP AND ACORN AGENT",
+   "sub": "Chapter 6 fight. Sticky Sap drenches and slows, and winds up a Sap Flow over the whole family."
+  },
+  {
+   "i": 34,
+   "name": "NEW 35: ACORN AGENT AND PEANUT GALLERY",
+   "sub": "Chapter 6 fight. The Peanut Gallery in Back heckles Attack down and winds up a Standing Boo-vation."
+  },
+  {
+   "i": 35,
+   "name": "NEW 36: ACORN AGENT AND TWIG SPY",
+   "sub": "Chapter 6 fight. The Twig Spy in Back hides in leaf camo and marks the family for more crits."
+  },
+  {
+   "i": 36,
+   "name": "NEW 37: CHEEK STUFFER",
+   "sub": "Chapter 6 Elite. The Cheek Stuffer has 4 Composure pips and shrugs off Clobber. Snack Snatch takes a Pep and stuffs its cheeks for more Defense. A Peanut Gallery in Back."
+  },
+  {
+   "i": 37,
+   "name": "NEW 38: CHAIRMAN CHEEKS",
+   "sub": "Chapter 6 boss. 6 Composure pips. Every 3 rounds he calls an Acorn Cache to the Back row and eats it on his 2nd turn after unless the family knocks it out first."
+  },
+  {
+   "i": 38,
+   "name": "NEW 39: DOG-EAR AND SHUSHER",
+   "sub": "Chapter 7 fight. The Shusher in Back locks a Skill (SHHH!) and winds up a Hush Hour."
+  },
+  {
+   "i": 39,
+   "name": "NEW 40: TWO DOG-EARS",
+   "sub": "Chapter 7 fight. Page Nip bleeds, Corner Fold lowers Defense, Hard Crease sweeps the Front row."
+  },
+  {
+   "i": 40,
+   "name": "NEW 41: THE CLIFFHANGER AND SHUSHER",
+   "sub": "Chapter 7 fight. Plot Twist! pushes someone back 20 ticks; To Be Continued... slows the whole family."
+  },
+  {
+   "i": 41,
+   "name": "NEW 42: DOG-EAR AND THE KNOW-IT-ALL",
+   "sub": "Chapter 7 fight. The Know-It-All lowers Defense and winds up a Well, Technically."
+  },
+  {
+   "i": 42,
+   "name": "NEW 43: POP-UP PANIC",
+   "sub": "Chapter 7 Elite. Pop-Up Panic has 4 Composure pips, shrugs off Racket and starts coiled (+20% Evasion). A Shusher in Back."
+  },
+  {
+   "i": 43,
+   "name": "NEW 44: THE UNREAD",
+   "sub": "Chapter 7 boss. 7 Composure pips. Below half HP it marks its place (Bookmark Ribbon), then THE END sweeps the whole family and pushes everyone without a shield."
+  },
+  {
+   "i": 44,
+   "name": "NEW 45: TWO LUKEWARMS",
+   "sub": "Chapter 8 fight. Two Lukewarms in Front. Tepid Slosh and Room Temperature drench, Cold Shoulder slows."
+  },
+  {
+   "i": 45,
+   "name": "NEW 46: LEFTOVER AND LUKEWARM",
+   "sub": "Chapter 8 fight. The Leftover blinds with Mystery Tupperware and slows the Front row with Freezer Burn."
+  },
+  {
+   "i": 46,
+   "name": "NEW 47: WET BLANKET AND LUKEWARM",
+   "sub": "Chapter 8 fight. The Wet Blanket lowers Attack with Why Bother? and winds up Dampen Spirits over the whole family."
+  },
+  {
+   "i": 47,
+   "name": "NEW 48: THE DRAFT AND LEFTOVER",
+   "sub": "Chapter 8 fight. The Draft in Back rides a crosswind (dodges more) and Pilot-Light Gust rips a shield or a buff off one of the family."
+  },
+  {
+   "i": 48,
+   "name": "NEW 49: THE PICKY EATER",
+   "sub": "Chapter 8 Elite. The Picky Eater has 4 Composure pips, shrugs off Clobber and starts behind its Tin Lunchbox Lid. A Draft in Back."
+  },
+  {
+   "i": 49,
+   "name": "NEW 50: OLD IRONBELLY",
+   "sub": "Chapter 8 boss. 7 Composure pips. BROIL and Full Furnace leave it Toasty: a Drench hit sets off Steam Cloud!. Its Sizzle fires TNB’s clay shields."
+  },
+  {
+   "i": 50,
+   "name": "NEW 51: TWO VELVET ROPES",
+   "sub": "Chapter 9 fight. Two Velvet Ropes in Front. Members Only gives the Front monsters 15% more Defense and Not On The List pushes someone back."
+  },
+  {
+   "i": 51,
+   "name": "NEW 52: STUFFED SHIRT AND VELVET ROPE",
+   "sub": "Chapter 9 fight. The Stuffed Shirt lowers Defense with Hmph. and winds up How Gauche! over the whole family."
+  },
+  {
+   "i": 52,
+   "name": "NEW 53: THE HANGER-ON AND VELVET ROPE",
+   "sub": "Chapter 9 fight. The Hanger-On slows with 1971 Coat Cling and winds up Hang On Tight over the whole family."
+  },
+  {
+   "i": 53,
+   "name": "NEW 54: STUFFED SHIRT AND SORE LOSER",
+   "sub": "Chapter 9 fight. The Sore Loser in Back bleeds with Card Flick, calls Cheater! to force the family’s aim, and scatters Fifty-Two Pickup."
+  },
+  {
+   "i": 54,
+   "name": "NEW 55: THE WALLFLOWER",
+   "sub": "Chapter 9 Elite. The Wallflower has 4 Composure pips, shrugs off Clobber and starts hugging the wall (dodges more). A Sore Loser in Back."
+  },
+  {
+   "i": 55,
+   "name": "NEW 56: THE MIRRORBALL",
+   "sub": "Chapter 9 boss. 7 Composure pips. Her own glare leaves her Dazzled: a Clobber hit sets off Shatter Glitz! and a Racket hit sets off Sensory Overload!."
+  },
+  {
+   "i": 56,
+   "name": "NEW 57: TWO CARRY-ONS",
+   "sub": "Chapter 10 fight. Two Carry-Ons in Front. Overhead Bin Drop lowers Defense and Sizer Frame Check rattles the whole family."
+  },
+  {
+   "i": 57,
+   "name": "NEW 58: CARRY-ON AND JET LAG",
+   "sub": "Chapter 10 fight. Jet Lag in Back blinds with 3 AM Glare and winds up Three-Hour Time Diff over the whole family."
+  },
+  {
+   "i": 58,
+   "name": "NEW 59: THE LONG LINE AND JET LAG",
+   "sub": "Chapter 10 fight. The Long Line pushes someone back with Step Back Behind Yellow and winds up Random Screening."
+  },
+  {
+   "i": 59,
+   "name": "NEW 60: THE UNCLAIMED AND CARRY-ON",
+   "sub": "Chapter 10 fight. The Unclaimed spins, thuds and winds up Excess Baggage on one of the family."
+  },
+  {
+   "i": 60,
+   "name": "NEW 61: THE ARMREST HOG",
+   "sub": "Chapter 10 Elite. The Armrest Hog has 4 Composure pips, shrugs off Sizzle and starts with both armrests claimed. A Jet Lag in Back."
+  },
+  {
+   "i": 61,
+   "name": "NEW 62: THE LAST CALL",
+   "sub": "Chapter 10 boss. 7 Composure pips. Boarding Group Nine marks a Back-row ally and GATE CLOSED slams them next turn with Skill Lock."
+  },
+  {
+   "i": 62,
+   "name": "NEW 63: THE GREMLINS",
+   "sub": "Bonus chapter. Three Sprinkle Gremlins in Front, all of them Dazzling with sprinkles."
+  },
+  {
+   "i": 63,
+   "name": "NEW 64: THE CONE HEADS",
+   "sub": "Bonus chapter. A Gremlin in Front and two Cone Heads in Back. Scoop Pass heals the hurt one, so pick who goes down first."
+  },
+  {
+   "i": 64,
+   "name": "NEW 65: THE SLUSHIE SLUG",
+   "sub": "Bonus chapter Elite. The Slushie Slug has 4 Composure pips, shrugs off Drench and starts behind its Blue-Ice Glaze. A Cone Head in Back."
+  },
+  {
+   "i": 65,
+   "name": "NEW 66: BRAIN FREEZE",
+   "sub": "Bonus chapter boss. 6 Composure pips. Below half HP it puts up the Frosted Lid and winds up Deep Freeze."
   }
  ]
 }

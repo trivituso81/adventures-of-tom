@@ -30,6 +30,7 @@
 // Battle Lab: EXIT shows), auto (true: the simple player picks every move, for tests), hpPct and mods (tests), onEnd(result),
 // loadouts ({id: loadout}: each member's Vibes, Quirks, VP and row, engine/b3-progress.js) or rank (every Vibe at that Rank),
 // award(F) (called once on a win; returns the line the win screen adds, for example the Vibe Points earned).
+// first (the Battle Guide's "See it in a fight": a move or a monster act to open with, see b3FirstSet), keepLoadout (member ids whose loadout Rose Mode leaves as given).
 // Story fights add onTurn(unit) (a tip when a family member's turn opens) and beforeEnd(result, go) (called on CONTINUE after a win; the
 // story shows its victory card and calls go() to close the fight).
 function b3Start(cfg) {
@@ -39,10 +40,11 @@ function b3Start(cfg) {
   let loadouts=cfg.loadouts;
   if(!cfg.plain&&typeof b7Diff==='function'&&b7Diff().pictures&&(loadouts||cfg.rank)) {
     const src=loadouts||{}; loadouts={};
-    for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));
+    for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=(cfg.keepLoadout||[]).includes(id)&&src[id]?src[id]:b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));   // keepLoadout: the Battle Guide's "See it in a fight" needs this member's Vibe as set
   }
   B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,rows:cfg.rows,
     loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
+  b3FirstSet();
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
   B3.view.bar=b3BarSnap(B3.F,null,0);
   clearBattleQueue(); clearInput();
@@ -76,6 +78,31 @@ function b3End(result) {
   const cb=B3.cfg&&B3.cfg.onEnd; if(cb) cb(result);
 }
 
+// ---------- "See it in a fight" (cfg.first, set by engine/b3-lab.js from index.html?go=new&i=<fight>&move=<skill id> or &act=<monster id>:<act id>) ----------
+// {kind:'move', owner, move}: that family member uses that Skill on their first turn (their Pep is raised to its cost if it is short).
+// {kind:'act', foe, act}: the first monster with that id uses that act on its first turn, or the wind-up that leads to it (a follow-up that
+// hits whoever the wind-up Marked cannot start by itself). Either way it only starts the fight: the rules, the numbers and every animation are the fight's own.
+// The one who opens stands first on the turn bar (wait 0), so the fight begins with the move and nobody has to take other turns first.
+function b3FirstSet() {
+  const f=B3.cfg.first; if(!f) return;
+  if(f.kind==='move') { const u=B3.F.party.find(x=>x.id===f.owner); if(u) u.wait=0; else B3.cfg.first=null; return; }
+  const e=B3.F.foes.find(x=>x.id===f.foe),A=e&&e.D.acts.find(a=>a.id===f.act);
+  B3.cfg.first=null;
+  if(!A||A.hits==='attacker') return;   // a counter act answers a hit: it cannot open a fight
+  const w=e.D.acts.find(a=>a.then===A.id);
+  e.force=w?w.id:A.id; e.wait=0;
+}
+function b3FirstTurn(u) {
+  const f=B3.cfg.first; if(!f||f.kind!=='move'||u.id!==f.owner) return false;
+  B3.cfg.first=null;
+  const F=B3.F,S=B3_SKILLS[f.move]; if(!S||!(u.basic===S.id||u.skills.includes(S.id))) return false;
+  const O=b3Options(F,u,S).find(o=>!o.no); if(!O) return false;
+  const c=b3Cost(F,u,S,O); if(u.pep<c) u.pep=Math.min(B3_RULES.pep.max,c);
+  if(!b3CanUse(F,u,S).ok) return false;
+  b3Say(u.name+' opens with '+S.name+'.');
+  return b3Commit(S.id,O.key);
+}
+
 // ---------- The turn flow ----------
 const b3Over=()=>!!B3.F.over;
 function b3Flow() {
@@ -88,6 +115,7 @@ function b3Flow() {
     const u=N.unit;
     if(u.side==='foe') { b3Play(b3FoeTurn(B3.F,u),()=>{ if(!B3.active) return; if(b3Over()) b3Finish(); else b3Flow(); }); return; }
     B3.actor=u;
+    if(B3.cfg.first&&b3FirstTurn(u)) return;   // the Battle Guide's "See it in a fight": this member opens with the move asked for, then the fight is the player's
     if(B3.cfg.auto) { const rk=B3.cfg.autoRuckus?b3AutoRuckus(B3.F,u):null; if(rk) { b3Commit('ruckus:'+rk.kind,rk.target); return; } const p=b3Auto(B3.F,u); b3Commit(p.skill,p.target); return; }
     b3Open('cross');
     if(B3.cfg.onTurn) B3.cfg.onTurn(u);   // story fights: the tip for this turn (engine/b3-story.js)

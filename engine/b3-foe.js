@@ -6,6 +6,7 @@
 // floor, the party's reactions. Waiting for their bosses: phases and phase lines (chapter 20), helper links and feedback (13, 15, 20).
 //
 // The order a foe picks in (no randomness except who it aims at):
+//   0. e.force (the Battle Lab's "See it in a fight" address only): that act, once
 //   1. a forced act: the act it wound up last turn (a Marked follow-up is one of these), then a once-in-the-fight act whose
 //      moment has come ("once at 50% HP")
 //   2. an "every N turns" or "every N rounds" act that is due (the count starts again after the act fires)
@@ -38,6 +39,8 @@ const b3Listed=A=>!A.after&&A.hits!=='attacker';
 function b3FoePick(F,e,peek) {
   if(e.charge) return {act:e.charge,fire:true};
   const acts=e.D.acts;
+  // `e.force` (an act id, set only by the Battle Lab's "See it in a fight" address, engine/b3-ui.js b3FirstSet): the act it uses this turn, whatever its `when`.
+  if(e.force) { const A=acts.find(x=>x.id===e.force); if(!peek) e.force=null; if(A) return {act:A,fire:false}; }
   for(const A of acts) if(b3Listed(A)&&A.when&&A.when.once&&b3ActOk(F,e,A)) return {act:A,fire:false};
   const every=A=>!!(A.when&&(A.when.everyTurn||A.when.everyRound||A.when.allyAge));
   for(const A of acts) if(b3Listed(A)&&every(A)&&!A.when.once&&b3ActOk(F,e,A)) return {act:A,fire:false};

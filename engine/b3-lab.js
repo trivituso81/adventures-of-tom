@@ -6,8 +6,32 @@
 function b3Lab(i,opt) {
   const L=B3_LAB[i]; if(!L) return;
   const vp=(B3_FORMATIONS[L.formation]||{}).vp||0;
-  b3Start(Object.assign({lab:true,party:L.party.slice(),level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
-    loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack,ruckus:b3LabRuckus(),onRuckus:b3LabRuckusSave},opt||{}));
+  const cfg=Object.assign({lab:true,party:L.party.slice(),level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
+    loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack,ruckus:b3LabRuckus(),onRuckus:b3LabRuckusSave},opt||{});
+  if(cfg.first) b3LabFirst(cfg);
+  b3Start(cfg);
+}
+// "See it in a fight" (the Battle Guide's second button beside Play): index.html?go=new&i=<fight index in B3_LAB>&move=<skill id>   or   &act=<monster id>:<act id>.
+// b3LabFirstOpt turns those two words into cfg.first; b3LabFirst makes the move usable on the first turn: its owner must be in the fight, the move's Vibe
+// the Main Vibe (a Basic needs that; a Skill only needs Main or Pocket, so a Vibe already in the Pocket stays there) and that Vibe at the Rank that unlocks the move's slot.
+// Nothing else changes: the rest of the loadouts are the Lab's book as it is. A request that does not fit the fight (owner or monster not in it) starts the fight plainly.
+function b3LabFirstOpt(q) {
+  if(!q) return null;
+  if(q.move&&B3_SKILLS[q.move]&&B3_VIBES[B3_SKILLS[q.move].vibe]) return {first:{kind:'move',owner:B3_VIBES[B3_SKILLS[q.move].vibe].owner,move:q.move}};
+  const a=String(q.act||'').split(':');
+  if(a.length===2&&B3_FOES[a[0]]) return {first:{kind:'act',foe:a[0],act:a[1]}};
+  return null;
+}
+function b3LabFirst(cfg) {
+  const f=cfg.first;
+  if(f.kind!=='move') return;
+  const S=B3_SKILLS[f.move],V=S&&B3_VIBES[S.vibe];
+  if(!V||!cfg.party.includes(V.owner)||!b3HasKit(V.owner)) { cfg.first=null; return; }
+  const L=b3FixLoadout(V.owner,cfg.loadouts[V.owner]);
+  if(S.slot==='basic'||(L.main!==V.id&&L.pocket!==V.id)) b3SetMain(V.owner,L,V.id);
+  const need=B3_RULES.rankUnlock[S.slot]||1;
+  if(b3VibeRank(L,V.id)<need) { L.vp[V.id]=B3_RULES.rankVp[need-1]; if(L.pool) L.pool.total=Math.max(L.pool.total,b3VibeTotal(V.owner,L)); }
+  cfg.loadouts[V.owner]=L; cfg.keepLoadout=(cfg.keepLoadout||[]).concat(V.owner);
 }
 // The Family Ruckus gauge keeps its value between Lab fights (spec 2.10), on this device. A saved game keeps its own (stage 15 joins them).
 const B3_RUCKUS_KEY='aot-b3-ruckus';

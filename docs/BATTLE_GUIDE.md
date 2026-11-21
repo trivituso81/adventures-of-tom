@@ -1,4 +1,4 @@
-# Battle Guide (build `battleguide1`, 2026-11-21)
+# Battle Guide (builds `battleguide1` and `battleguide2`, 2026-11-21)
 
 `battle-guide.html`, ADMIN > Battle system > Battle Guide. Tom's reference for the new battle system ("Battle 3", docs/BATTLE3.md) while he tests, and the place he plays a battle animation and sends Claude a note on it.
 
@@ -15,6 +15,41 @@
 The page loads no engine. `boot()` reads `index.html`, takes its `data/b3-*.js` script tags in order and adds them to the page, so the guide is whatever the game is. Clip data files (`data/clips/<id>.js`) call `bclipDefine`; the page has its own one-line version and loads a clip's file and picture only when it is played.
 
 When the data gains a value the page has no plain words for, it shows the raw word with underscores removed. Add the words to the tables at the top of the script: `TARGET`, `HITS`, `TAG`, `ROLE`, `STATE`, `LEAN_PLAY`, `whenWords`. A new family member gets a line in `WHO`.
+
+## See it in a fight (battleguide2)
+
+Every family move (Basic, Skills, Capstone) and every monster attack has an **In a fight** button beside Play. It opens the game at a Battle Lab fight on the new battle with that move used first, then the fight is the player's. It starts a real fight and judges nothing: no animation is built, tuned or reviewed by it (CLAUDE.md, battle animations are out of scope for the battle system).
+
+| Part | What it does | Where |
+|---|---|---|
+| The address | `index.html?go=new&i=<Battle Lab fight number>&move=<move id>` or `&act=<monster id>:<act id>` (`go=new` and `i` already existed: battle-lab.html uses them) | `splashGoTool` in `engine/splash.js` passes `move` and `act` to `b3LabFirstOpt` in `engine/b3-lab.js` |
+| Which fight | The page picks the first `B3_LAB` fight whose family holds the move's owner; for an attack, the first fight whose formation holds that monster (`fightMove`, `fightAct` in the page). A monster that only appears called in by another (Acorn Cache) has no fight, so no button. A reaction ("hits whoever just hit it") has no button: it cannot go first | `battle-guide.html` |
+| The owner can use it | `b3LabFirst` makes the move usable: the move's Vibe becomes Main when the move is a Basic or the Vibe is in neither slot (a Vibe already in the Pocket stays there), and that Vibe is raised to the Rank that unlocks the move's slot (`B3_RULES.rankUnlock`, VP from `B3_RULES.rankVp`). Nothing else in the Lab's loadouts changes; Rose Mode keeps these loadouts (`cfg.keepLoadout`) | `engine/b3-lab.js` |
+| First turn | `cfg.first` goes to `b3FirstSet` (the owner starts with wait 0 so they are first on the bar) and `b3FirstTurn` (on their first turn it uses the move on the first allowed target, tops Pep up to its cost if needed, and clears itself, so it happens once) | `engine/b3-ui.js` |
+| A monster attack | `b3FoePick` takes `e.force` once: the monster starts at wait 0 and uses that act. An attack that is the second half of a wind-up (`then`) starts with the wind-up, so the attack follows on its next turn | `engine/b3-foe.js` |
+| Not a fit | An owner or monster not in the fight, or a move that cannot be used, starts the fight plainly with `cfg.first` cleared | |
+
+## Planned, not built yet (battleguide2)
+
+Everything the battle plan has and the game does not is shown in one look: a dashed gold border, the badge **PLANNED**, and the words *not in the game yet*. It never has a Play or In a fight button and is never mixed with what can be tested: planned monsters are under their own Chapter heading below the built ones, a planned Vibe is a dashed button after the person's real Vibes, and the Rules tab has the topic **What is coming**. Search has a **Planned** chip beside All; Planned alone lists every planned thing (with no words typed) or only the planned ones that match.
+
+**Where the list comes from.** `claude/` is not published on the game's site, so `python3 tools/guide_planned.py` reads the plan documents and writes `data/guide-planned.json`; the page loads that file and never types a planned thing itself. The script stops when a document no longer says what a row quotes (`anchors`), reads all 30 Vibes whole (it stops if any is missing a Trait, Basic, three Skills, two Quirks or three titles) and records a hash of each source (`--check` fails when one changed: run the script again).
+
+| Planned item | Built from | The game's side it is compared with |
+|---|---|---|
+| The 10 third Vibes (name, titles, Lean, Trait, Basic, Skills with Pep and Rank, Quirks with Rank, as the spec words them) | `claude/battle-spec-v11.md` section 3 (30 Vibes) | The Vibes in `B3_CAST` (matched by name for that person) |
+| 26 monsters and bosses of chapters 11 to 20 (stats, Pet Peeves, resists, notes and every act as the bestiary words them) | `claude/bestiary-v11.md` section 2. v11 replaces `bestiary-v10.1.md` (the old name in the card): the chapters, ids and numbers differ | `B3_FOES` (by monster id). The four bonus-chapter monsters are already in the game, so they are not listed |
+| Moves a kit names that have no row yet | the game itself: `B3_SOON` and each Vibe's `skills` list (empty today) | `B3_SKILLS` |
+| BAG command and Run; knocked-out members stand up at 1 HP after a win; gear counts in fights | `claude/battle-architecture.md` (gap table rows 25, 26, 30, 31 and section 4.2), `claude/battle-spec-v11.md` section 2.9; the game: the BAG button says Not yet, `b3sEnd` hands HP back as a share | Keys the rules would gain (`B3_RULES.bag`, `winStandHp`, `gear`) or a global (`B3_GEAR`) |
+| Tombo skins on the Full Family Ruckus (stage 16) | `claude/battle-architecture.md` section 3 and stage 16; `docs/BATTLE3.md` (Tombo toasts) | `B3_SKINS` or `B3_RULES.skins` |
+| Casual Mode | `claude/battle-spec-v11.md` section 1 | A Vibe named Casual or Freelancer, `B3_RULES.casual` |
+| Helper links, the Twin Lenses stances, boss phase lines, picking the four again in the last fight, the Part 1 monsters coming back | `claude/bestiary-v11.md` sections 1.1, 3, 6 and chapters 14, 17, 20; `claude/battle-spec-v11.md` section 2.1 | A chapter (13, 17, 14, 20) in `B3_STORY.chapters` |
+| Chapters 11 to 20 and the bonus chapter (which play on the new battle and which do not) | `claude/bestiary-v11.md` chapter headings; `B3_STORY.chapters` is what plays on the new battle today | `B3_STORY.chapters` |
+| Stages 16, 19 to 21, 22 and 23 in plan order | `claude/battle-architecture.md` section 5 (stages 1 to 15, 17 and 18 are built) | Same rules as the rows above; stage 23 is done when no `engine/battle2*` script is in `index.html` |
+
+Also read, and nothing taken from them that the rows above do not hold: `claude/battle-build.md` (the open items in it that name something not built are Boppy's third Vibe, Tom's Cake and TNB's Kintsugi enchantments and TNB's Spooked status, all of them part of the third Vibes) and the Not built columns of `docs/BATTLE3.md`. Not listed on purpose: animations (the guide's NO VIDEO YET already says it), and anything that has no source line in a plan document.
+
+**How an item drops out by itself.** Each item carries a `when` rule (`any`, `all`, `vibeName`, `vibeCount`, `allVibes`, `vibeMatch`, `foe`, `chapter`, `rules`, `global`, `noScript`). `built()` in the page checks it against the game's own `data/b3-*.js` (and `index.html` for `noScript`) every time the guide opens, so a third Vibe in a person's `data/b3-kit-<id>.js`, a monster in `data/b3-foes-*.js` or a chapter in `B3_STORY.chapters` makes the planned one disappear and the real one show, with no change to the page or to `data/guide-planned.json`. Run the script again only to tidy the file or after a plan document changed. A session that adds something the plan listed: check the rule it carries still means "built" (the `when` is in the JSON); a new planned thing that the plan documents gain goes into `FEATURES` or `STAGES` in `tools/guide_planned.py` with its source line.
 
 ## Layouts (docs/DUO.md sizes)
 
@@ -82,5 +117,7 @@ The jobs write a stage with `tools/guidegen/progress.py` (`mark`, on only when `
 **Tests.** `python3 tools/guidegen/build_map_test.py` (the file), `python3 tools/guidegen/guidegen_test.py` (reconcile and its checks), `python3 tools/guidegen/take_test.py` (wangen and clipgen request modes against stand-ins, takes, the branch keeper, use on a copy of the repo), `python3 tools/battle_guide_test.py` (the page at the four Duo sizes with a stand-in GitHub and stand-in Actions). A session never runs a paid generation: Wan requests with `dry:true` plan only.
 
 ## Test
+
+**battleguide2 additions** (same command): the generator (ten third Vibes whole and none in the game, 26 planned monsters none in the game, stages in order, no em dash, `--check` passes and fails when a source hash is wrong); each size (an In a fight button on each of Tom's four moves with the address, his PLANNED Vibe with no Play or fight button, it fits the page); the planned monsters, What is coming, the cheat sheet's BAG line; Search with Planned and All; the drop-by-itself cases (a third Vibe, a monster, chapter 11 and the BAG rule added to the game's data through the page's own requests: the planned items go and the real ones show); and the game opened at the address for a move and for a monster attack, checking the owner opens with the move and the monster uses the attack first. Look at `battleguide-*-planned-vibe.png`, `battleguide-planned-monster.png` and `battleguide-coming.png`.
 
 `python3 tools/battle_guide_test.py [outdir]` (needs CHROMIUM and PLAYWRIGHT_BROWSERS_PATH as for the other page tests; about 1 minute): the four sizes, counts against the data files, a video that moves, the no-video message, notes saved through a stand-in GitHub and accepted by `tools/board_check.py`, search. Look at `battleguide-*.png`.

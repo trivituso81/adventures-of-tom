@@ -141,6 +141,18 @@ ol.steps li{margin:4px 0}
 .gen .row3{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 .gen .stopbox{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 .gen .cant{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
+/* PLANNED look (battleguide2): one look for everything the plan has and the game does not yet: dashed gold border, the PLANNED badge, and the words "not in the game yet".
+   Never used for anything that can be tested today. Items come from data/guide-planned.json (tools/guide_planned.py) and drop out by themselves when the game's data gains them. */
+.plan{border:1px dashed #d9b84a!important;background:#1b2b2d!important}
+.pbadge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:#2e2808;border:1px dashed #d9b84a;color:#ffd34d;white-space:nowrap}
+.pbanner{border:1px dashed #d9b84a;background:#241f0c;border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14px}
+.pbanner b{color:#ffd34d}
+.seg button.planbtn{border-style:dashed;border-color:#d9b84a}
+.seg button.planbtn[aria-pressed=true]{border-style:solid}.seg button.planbtn[aria-pressed=true] small{color:var(--on-accent)!important}
+.acts{flex:none;display:flex;gap:6px;align-items:center}
+a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(--text);text-decoration:none;font-weight:700}
+#sflt{display:flex;gap:6px;margin:8px 0 0}#sflt .chip{min-height:36px;cursor:pointer;font:inherit;font-size:13px;font-weight:700}
+#sflt .chip[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 /* Two panes: the Duo unfolded (both poses), tablets, desktop. */
 @media (min-width:560px) and (min-height:560px){
  #tabs{order:0;border-top:0;border-bottom:1px solid var(--line);padding:6px 10px;gap:6px}
@@ -163,7 +175,7 @@ ol.steps li{margin:4px 0}
  <a class="hb" href="battle-lab.html" title="Open the Battle Lab">Lab</a>
  <a class="hb" href="admin.html" title="Back to Admin">Admin</a>
 </header>
-<div id="searchbar" hidden><input type="search" id="q" placeholder="Search moves, monsters, statuses, rules" autocomplete="off"></div>
+<div id="searchbar" hidden><input type="search" id="q" placeholder="Search moves, monsters, statuses, rules" autocomplete="off"><div id="sflt"><button type="button" class="chip" data-sf="all" aria-pressed="true">All</button><button type="button" class="chip" data-sf="plan" aria-pressed="false">Planned</button></div></div>
 <nav id="tabs" role="tablist"></nav>
 <div id="panes"><div id="list"><div id="boot">Loading the game's battle data...</div></div><div id="detail"></div></div>
 <div id="dim"></div><div id="sheet" role="dialog" aria-modal="true"></div><div id="toast"></div>
@@ -192,7 +204,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
-let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null;   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
+let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
 async function boot(){
   try{
@@ -201,6 +213,7 @@ async function boot(){
     const html=await r.text();
     const srcs=[...html.matchAll(/<script[^>]+src="([^"]+)"/g)].map(m=>m[1]);
     for(const s of srcs){const m=s.match(/^data\/clips\/([^.?]+)\.js/);if(m)CLIP_SRC[m[1].replace(/-/g,'_')]=s;}
+    INDEX_SRCS=srcs;
     const data=srcs.filter(s=>/^data\/b3-/.test(s));
     if(!data.length) throw new Error('The game page lists no battle data files');
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
@@ -208,6 +221,7 @@ async function boot(){
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;}).catch(()=>{});
+    PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
     build();route();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Reload the page; if it stays, tell Claude.</div>';}
 }
@@ -274,6 +288,89 @@ const animsOf=id=>ANIMS.filter(a=>a.owner===id);
 function playBtn(animId,small){const a=ANIM_BY[animId];if(!a)return '';
   return '<button type="button" class="play'+(a.video?' vid':'')+'" data-anim="'+esc(a.id)+'" aria-label="Animation of '+esc(a.name)+'"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>'+(small?'':(a.video?'Play':'No video'))+'</button>';}
 
+// ---------- planned, not built yet (battleguide2) ----------
+// data/guide-planned.json lists what the battle plan has and the game does not (written by tools/guide_planned.py from the plan documents). Each item carries a `when` rule that
+// says "the game has it now"; PLAN is the items whose rule does not hold yet, so a third Vibe, a monster, a chapter or a feature drops out of the guide by itself when the game's own
+// data files gain it. B3_SOON (moves the kits name that have no row yet) is read from the game and added the same way. Nothing planned has a Play or a fight button.
+let PLAN=[];
+const norm=x=>String(x||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+function built(w){
+  if(!w)return false;
+  if(w.any)return w.any.some(built);
+  if(w.all)return w.all.every(built);
+  if(w.vibeName){const c=B3_CAST[w.vibeName[0]];return !!c&&c.vibes.some(v=>norm(B3_VIBES[v].name)===norm(w.vibeName[1]));}
+  if(w.vibeCount){const c=B3_CAST[w.vibeCount[0]];return !!c&&c.vibes.length>=w.vibeCount[1];}
+  if(w.allVibes)return Object.values(B3_CAST).every(c=>c.vibes.length>=w.allVibes);
+  if(w.vibeMatch){const re=new RegExp(w.vibeMatch,'i');return Object.values(B3_VIBES).some(v=>re.test(v.name));}
+  if(w.foe)return !!B3_FOES[w.foe];
+  if(w.chapter!=null)return (B3_STORY.chapters||[]).includes(w.chapter);
+  if(w.rules)return B3_RULES[w.rules]!=null&&B3_RULES[w.rules]!==false;
+  if(w.global)return /^[A-Za-z_]\w*$/.test(w.global)&&new Function('return typeof '+w.global+'!=="undefined"')();
+  if(w.noScript)return !INDEX_SRCS.some(x=>x.indexOf(w.noScript)===0);
+  return false;
+}
+function soonItems(){   // a move a kit names that has no row in the game yet
+  const out=[],S=(typeof B3_SOON!=='undefined'&&B3_SOON)||{};
+  Object.values(B3_VIBES).forEach(v=>(v.skills||[]).forEach(sid=>{if(sid&&!B3_SKILLS[sid])out.push({id:'soon:'+sid,kind:'soon',owner:v.owner,vibe:v.name,name:S[sid]||words(sid)});}));
+  return out;
+}
+function planBuild(){PLAN=((PLAN_DOC&&PLAN_DOC.items)||[]).filter(i=>!built(i.when)).concat(soonItems());}
+const planOf=kind=>PLAN.filter(i=>i.kind===kind);
+const pbadge='<span class="pbadge">PLANNED</span>';
+const pbanner=(txt)=>'<div class="pbanner">'+pbadge+' <b>Not in the game yet.</b> '+txt+'</div>';
+const stageWords=st=>!st?'':/^\d/.test(st)?'Comes in battle stage '+st+'.':st==='bonus'?'Comes with the bonus chapter.':'No battle stage owns it yet.';
+const pf=f=>{const k=String(f).toLowerCase();return B3_FLAVORS[k]?flav(k):'<span class="chip">'+esc(f)+'</span>';};
+function planCard(label,name,chips,desc){return '<div class="card plan"><div class="k">'+esc(label)+'</div><h4>'+esc(name)+'</h4>'+(chips&&chips.length?'<div class="chips">'+chips.join('')+'</div>':'')+(desc?'<p>'+esc(desc)+'</p>':'')+'</div>';}
+function plannedVibeHtml(P){
+  const L=B3_LEANS[P.lean]||{name:cap(P.lean),desc:''};
+  let h=pbanner('This is the third Vibe in the battle spec. '+stageWords(P.stage)+' Worded as the spec words it; nothing here can be played or tested.');
+  h+='<div class="card plan"><div class="k">Lean (as Main Vibe)</div><h4>'+esc(L.name)+'</h4><p>'+esc(cap(L.desc))+'.</p><p class="hint">Titles by Rank: '+(P.subtitles||[]).map((x,i)=>'Rank '+B3_RULES.subtitleRank[i]+' '+esc(x)).join(' → ')+'</p></div>';
+  h+=planCard('Trait',P.trait.name,[],P.trait.desc);
+  h+='<h3>Moves</h3>'+planCard('Basic',P.basic.name,['<span class="chip">Free, +'+P.basic.gain+' Pep</span>',pf(P.basic.flavor)],P.basic.desc);
+  P.skills.forEach(k=>{h+=planCard(SLOT[k.slot][0]+' · unlocks at Rank '+k.rank,k.name,['<span class="chip">'+k.pep+' Pep</span>',pf(k.flavor)],k.desc);});
+  h+='<h3>Quirks</h3>'+P.quirks.map(q=>planCard('Quirk '+q.slot.toUpperCase()+' · unlocks at Rank '+q.rank,q.name,[],q.desc)).join('');
+  return h;
+}
+function plannedFoeHtml(P){
+  const nums=P.hp!=null;
+  let h='<div class="hero"><span class="ph" style="width:92px;height:92px;border-radius:18px;background:var(--well);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:var(--muted)">'+esc(P.name.charAt(0))+'</span><div><h2>'+esc(P.name)+'</h2><div class="hint">'+(P.ch===21?'Bonus chapter':'Chapter '+P.ch)+' · '+esc(P.role||'')+(P.row?' · '+esc(P.row)+' row':'')+(P.noRun?' · no running away':'')+'</div></div></div>';
+  h+=pbanner('Numbers and moves as the bestiary words them (claude/bestiary-v11.md); the built version may differ. '+stageWords(P.stage)+(P.working?' The name is a working name.':''));
+  if(nums){h+='<div class="stats"><div><b>'+P.hp+'</b><span>HP</span></div><div><b>'+P.atk+'</b><span>ATTACK</span></div><div><b>'+P.def+'</b><span>DEFENSE</span></div><div><b>'+P.spd+'</b><span>SPEED</span></div></div>';
+    h+='<table><tr><td><b>Composure</b></td><td>'+(P.pips?'<span class="pips">'+'●'.repeat(P.pips)+'</span> '+P.pips+' pips':'None. It cannot be Flustered.')+'</td></tr>'
+     +'<tr><td><b>Hates (Pet Peeve)</b></td><td>'+((P.peeves||[]).map(pf).join('')||esc(P.stance||'Nothing'))+'</td></tr><tr><td><b>Resists</b></td><td>'+((P.resists||[]).map(pf).join('')||'Nothing')+'</td></tr>'
+     +(P.start?'<tr><td><b>Starts with</b></td><td>'+esc(P.start)+'</td></tr>':'')+(P.hpNote?'<tr><td><b>HP note</b></td><td>'+esc(P.hpNote)+'</td></tr>':'')
+     +(P.reward?'<tr><td><b>Story reward</b></td><td>'+esc(P.reward)+'</td></tr>':'')+(P.drop?'<tr><td><b>Drop</b></td><td>'+esc(P.drop)+'</td></tr>':'')+'</table>';}
+  if((P.notes||[]).length)h+='<h3>How it fights</h3><ul>'+P.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>';
+  if((P.acts||[]).length)h+='<h3>What it does</h3>'+P.acts.map(a=>planCard('Act',a.name,[pf(a.flavor),/^\d/.test(a.power)?'<span class="chip">power '+esc(a.power)+'</span>':'','<span class="chip">Hits '+esc(a.hits)+'</span>',a.rec?'<span class="chip">Wait '+a.rec+'</span>':''].concat((a.tags||[]).map(t=>'<span class="chip">'+esc(words(t))+'</span>')).filter(Boolean),a.effect)).join('');
+  return h;
+}
+function comingHtml(){
+  const st=planOf('stage'),ft=planOf('feature'),ch=planOf('chapter'),vb=planOf('vibe'),so=planOf('soon'),fo=planOf('foe');
+  if(!PLAN.length)return pbanner('Nothing.')+'<p>Every item on the plan list is in the game now.</p>';
+  let h=pbanner('Everything on this page is in the plan and not in the game yet. None of it can be tested. Each item drops off this list by itself when the game gains it.');
+  h+='<p class="hint">Fact: the list is built from the battle spec, the bestiary, the architecture plan and the Battle 3 notes by tools/guide_planned.py (see docs/BATTLE_GUIDE.md).</p>';
+  if(st.length)h+='<h3>The stages that are left, in order</h3>'+st.map(x=>'<div class="card plan"><div class="k">Stage '+esc(x.n)+'</div><h4>'+esc(x.name)+'</h4><p>'+esc(x.plain)+'</p></div>').join('');
+  if(ch.length||B3_STORY.chapters){
+    h+='<h3>Which chapters play on the new battle</h3><table><tr><th>Chapter</th><th>Plays on</th></tr>'
+     +'<tr><td><b>'+B3_STORY.chapters.join(', ')+'</b></td><td>The new battle (built).</td></tr>'
+     +ch.map(c=>'<tr class="plan"><td><b>'+(c.n===21?'Bonus':c.n)+'</b>: '+esc(c.name)+'</td><td>'+pbadge+' '+(c.n===21?'Its four monsters are in the game data, but the chapter plays on the old battle until its story card moves it ('+esc(c.card||'no card yet')+').':fo.filter(f=>f.ch===c.n).length+' monsters and bosses are planned, in the Monsters tab. The chapter is not built.')+'</td></tr>').join('')+'</table>';
+  }
+  if(vb.length)h+='<h3>Third Vibes</h3><p>Every person gets a third Vibe in stages 19 to 21. Tap a name to read it in the Family tab.</p><div class="chips">'+vb.map(v=>'<a class="chip plan" href="#family/'+esc(v.owner)+'" data-pv="'+esc(v.id)+'">'+esc(ownerName(v.owner))+': '+esc(v.name)+'</a>').join('')+'</div>';
+  if(fo.length)h+='<h3>Part 2 monsters</h3><p>'+fo.length+' monsters and bosses of chapters 11 to 20 are planned. They are in the Monsters tab under their chapter.</p>';
+  if(so.length)h+='<h3>Moves a kit names that are not built</h3>'+so.map(x=>planCard(ownerName(x.owner)+' · '+x.vibe,x.name,[],'')).join('');
+  if(ft.length)h+='<h3>Rules and features</h3>'+ft.map(x=>'<div class="card plan"><div class="k">'+esc(stageWords(x.stage).replace(/\.$/,''))+'</div><h4>'+esc(x.name)+'</h4><p>'+esc(x.plain)+'</p></div>').join('');
+  return h;
+}
+
+// ---------- fights: "See it in a fight" (battleguide2) ----------
+// The game page opens a Battle Lab fight on the new battle with the move used first (index.html?go=new&i=<fight>&move=<move id> or &act=<monster id>:<act id>, engine/b3-lab.js b3LabFirst).
+// For a move: the first Lab fight whose family holds its owner (the game sets the Vibe and Rank so the move is usable). For a monster act: the first fight whose formation holds that monster.
+const labIndex=test=>typeof B3_LAB==='undefined'?-1:B3_LAB.findIndex(test);
+function fightMove(sid){const S=B3_SKILLS[sid],V=S&&B3_VIBES[S.vibe];if(!V)return '';const i=labIndex(l=>(l.party||[]).includes(V.owner));return i<0?'':'index.html?go=new&i='+i+'&move='+encodeURIComponent(sid);}
+function fightAct(fid,aid){const f=B3_FOES[fid],a=f&&f.acts.find(x=>x.id===aid);if(!a||a.hits==='attacker')return '';
+  const i=labIndex(l=>{const F=B3_FORMATIONS[l.formation];return !!F&&(F.foes||[]).some(x=>x.id===fid);});return i<0?'':'index.html?go=new&i='+i+'&act='+encodeURIComponent(fid+':'+aid);}
+const fightBtn=(href,what)=>href?'<a class="play fight" href="'+esc(href)+'" aria-label="See '+esc(what)+' in a fight" title="Opens the game at a Battle Lab fight on the new battle. '+esc(what)+' is used first.">In a fight</a>':'';
+
 // ---------- the five tabs ----------
 const TABS=[
  ['rules','Rules','<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M8 7h7M8 11h7"/>'],
@@ -284,7 +381,7 @@ const TABS=[
 ];
 let RULES=[],tab='rules',sel='',vibeSel={},glossKind='',animFilter='all';
 function build(){
-  buildAnims();
+  buildAnims();planBuild();
   $('tabs').innerHTML=TABS.map(t=>'<button type="button" role="tab" data-tab="'+t[0]+'"><svg viewBox="0 0 24 24">'+t[2]+'</svg>'+t[1]+'</button>').join('');
   RULES=rulesTopics();
 }
@@ -310,12 +407,15 @@ function rowHtml(t,id,title,sub,img,right){
 const facePic=id=>B3_CAST[id]?'portraits/'+id+'.png?v='+(typeof PORTRAIT_V!=='undefined'?PORTRAIT_V:''):'portraits/foes/'+id+'.webp';   // portrait1: the same stamp the game uses
 function renderList(){
   const L=$('list');let h='';
-  if(tab==='rules'){h=RULES.map(r=>rowHtml('rules',r.id,r.title,esc(r.sub))).join('');}
+  if(tab==='rules'){h=RULES.map(r=>r.plan?rowHtml('rules',r.id,r.title,esc(r.sub),'',pbadge).replace('class="row','class="row plan'):rowHtml('rules',r.id,r.title,esc(r.sub))).join('');}
   else if(tab==='family'){
-    h='<div class="grp">'+Object.keys(B3_CAST).length+' family members, '+Object.keys(B3_VIBES).length+' Vibes built</div>'+Object.values(B3_CAST).map(c=>rowHtml('family',c.id,c.name,esc(c.vibes.map(v=>B3_VIBES[v].name).join(' + ')),facePic(c.id))).join('');
+    const pvs=id=>planOf('vibe').filter(v=>v.owner===id);
+    h='<div class="grp">'+Object.keys(B3_CAST).length+' family members, '+Object.keys(B3_VIBES).length+' Vibes built'+(planOf('vibe').length?', '+planOf('vibe').length+' planned':'')+'</div>'+Object.values(B3_CAST).map(c=>rowHtml('family',c.id,c.name,esc(c.vibes.map(v=>B3_VIBES[v].name).join(' + '))+pvs(c.id).map(v=>' + '+esc(v.name)+' (planned)').join(''),facePic(c.id))).join('');
   }else if(tab==='monsters'){
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
     h=Object.keys(by).map(ch=>'<div class="grp">'+(isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+'</div>'+by[ch].map(f=>rowHtml('monsters',f.id,f.name,(ROLE[f.role]||cap(f.role))+(f.pips?', '+f.pips+' pips':'')+' · hates '+((f.peeves||[]).map(p=>B3_FLAVORS[p].name).join(', ')||'nothing'),facePic(f.id))).join('')).join('');
+    const pf0=planOf('foe'),pch=[...new Set(pf0.map(f=>f.ch))].sort((a,b)=>a-b);
+    h+=pch.map(ch=>'<div class="grp">'+(ch===21?'Bonus chapter':'Chapter '+ch)+' · '+pbadge+' not in the game yet</div>'+pf0.filter(f=>f.ch===ch).map(f=>rowHtml('monsters',f.id,f.name,esc((f.role||'')+(f.pips?', '+f.pips+' pips':'')+(f.peeves&&f.peeves.length?' · hates '+f.peeves.join(', '):'')),'',pbadge).replace('class="row','class="row plan')).join('')).join('');
   }else if(tab==='glossary'){
     const kinds=[...new Set(Object.values(B3_STATUS).map(s=>s.kind))];
     h='<div class="chips">'+['',...kinds,'hazard'].map(k=>'<button type="button" class="chip" data-kind="'+k+'" style="min-height:36px;'+(glossKind===k?'background:var(--accent);color:var(--on-accent)':'')+'">'+(k?cap(k)+'s':'All')+'</button>').join('')+'</div>';
@@ -344,6 +444,7 @@ function renderDetail(){
   if(tab==='rules'){const r=RULES.find(x=>x.id===sel)||RULES[0];title=r.title;h='<h2>'+esc(r.title)+'</h2>'+r.html();}
   else if(tab==='family'&&B3_CAST[sel]){title=B3_CAST[sel].name;h=familyHtml(sel);}
   else if(tab==='monsters'&&B3_FOES[sel]){title=B3_FOES[sel].name;h=foeHtml(sel);}
+  else if(tab==='monsters'&&planOf('foe').some(x=>x.id===sel)){const P=planOf('foe').find(x=>x.id===sel);title=P.name+' (planned)';h=plannedFoeHtml(P);}
   else if(tab==='glossary'){const s=glossRows().find(x=>x.id===sel);if(s){title=s.name;h=statusHtml(s);}}
   else if(tab==='anims'){title=ownerName(sel)+': animations';h=animsHtml(sel);}
   if(!h){D.classList.remove('open');D.innerHTML='';return;}
@@ -360,7 +461,7 @@ function rulesTopics(){
   T.push({id:'sheet',title:'Cheat sheet',sub:'The whole system on one screen',html:()=>
     '<p class="hint">Fact: every number here is read from the game as it is built right now.</p>'
     +'<table><tr><th>Thing</th><th>What to know</th></tr>'
-    +'<tr><td><b>Your turn</b></td><td>&#9650; BASIC is free and gives +'+P.basic+' Pep. &#9654; SKILLS spend Pep. &#9664; RUCKUS spends the shared gauge. &#9660; BAG is not built yet.</td></tr>'
+    +'<tr><td><b>Your turn</b></td><td>&#9650; BASIC is free and gives +'+P.basic+' Pep. &#9654; SKILLS spend Pep. &#9664; RUCKUS spends the shared gauge. &#9660; BAG '+(PLAN.some(i=>i.id==='feature:bag')?'is planned, not in the game yet (the button is greyed out).':'opens the bag.')+'</td></tr>'
     +'<tr><td><b>Pep</b></td><td>Each person has their own, '+P.min+' to '+P.max+', starting at '+P.start+'. Skills cost 2 to 6.</td></tr>'
     +'<tr><td><b>Turn bar</b></td><td>After a move you wait. Basic waits least, a Capstone most. Faster people come back sooner.</td></tr>'
     +'<tr><td><b>Flavors</b></td><td>'+['clobber','sizzle','drench','razzle','racket','support'].map(flav).join(' ')+'</td></tr>'
@@ -371,7 +472,8 @@ function rulesTopics(){
     +'<tr><td><b>Ruckus</b></td><td>Shared gauge. '+K.doubleTeam+'%: Double Team. '+K.full+'%: Full Family Ruckus.</td></tr>'
     +'<tr><td><b>Vibes</b></td><td>Each person wears a Main Vibe and a Pocket Vibe, plus 2 Quirks. Vibes rank up 1 to 5 with Vibe Points.</td></tr></table>'
     +'<h3>Where to play it</h3>'+li(['<b>Battle Lab &gt; NEW BATTLE</b>: '+(typeof B3_LAB!=='undefined'?B3_LAB.length:'the')+' test fights, and VIBES AND RANKS to set loadouts. <a href="battle-lab.html">Open the Battle Lab</a>.',
-      '<b>Story</b>: chapter'+(B3_STORY.chapters.length===1?' ':'s ')+B3_STORY.chapters.join(', ')+' plays on the new battle (ADMIN &gt; Battle system &gt; Story battles).',
+      '<b>Story</b>: chapter'+(B3_STORY.chapters.length===1?' ':'s ')+B3_STORY.chapters.join(', ')+' plays on the new battle (ADMIN &gt; Battle system &gt; Story battles).'+(planOf('chapter').length?' The rest is planned: see <a href="#rules/coming">What is coming</a>.':''),
+      '<b>From this guide</b>: the In a fight button beside a move or a monster attack opens the game at a test fight on the new battle with that move used first.',
       '<b>In a fight</b>: tap anyone to see everything on them. Tap the i beside a Skill to read it. A first tap on a move previews it, a second tap uses it.'])});
   T.push({id:'turns',title:'The turn bar',sub:'Who goes next, and why',html:()=>
     li(['The bar at the top shows who acts next. A round is '+R.round+' ticks, marked by a divider.',
@@ -453,6 +555,7 @@ function rulesTopics(){
      +Object.keys(t).map(k=>'<h3>'+esc(k==='basics'?'First fights':words(k))+'</h3>'+t[k].map(x=>'<div class="card"><p style="margin:0">'+esc(x.text)+'</p></div>').join('')).join('');}});
   T.push({id:'fights',title:'Test fights',sub:'Every Battle Lab fight',html:()=>
     '<p>Battle Lab &gt; NEW BATTLE. <a href="battle-lab.html">Open the Battle Lab</a>.</p>'+(typeof B3_LAB!=='undefined'?B3_LAB.map(l=>'<div class="card"><h4>'+esc(l.name)+'</h4><p>'+esc(l.sub||'')+'</p><p class="hint">Party: '+(l.party||[]).map(ownerName).map(esc).join(', ')+(l.level?' · Level '+l.level:'')+'</p></div>').join(''):'')});
+  T.push({id:'coming',title:'What is coming',sub:'Planned, not in the game yet',plan:true,html:comingHtml});
   return T;
 }
 
@@ -465,22 +568,24 @@ function moveCard(kind,label,row,unlock,animId){
     chips.push('<span class="chip">On '+esc(TARGET[row.target]||words(row.target))+'</span>');
     if(row.rec)chips.push('<span class="chip">Wait '+row.rec+'</span>');}
   const st=kind==='skill'?statusesOf(row.effects):statusesOf((row.effects||[]).concat(...(row.listen||[]).map(l=>l.effects||[])));
-  return '<div class="card"><div class="top"><div><div class="k">'+esc(label)+(unlock>1?' · unlocks at Rank '+unlock:'')+(row.soon?' · not built yet':'')+'</div><h4>'+esc(row.name)+'</h4></div>'+(animId?playBtn(animId):'')+'</div>'
+  return '<div class="card"><div class="top"><div><div class="k">'+esc(label)+(unlock>1?' · unlocks at Rank '+unlock:'')+(row.soon?' · '+pbadge+' not in the game yet':'')+'</div><h4>'+esc(row.name)+'</h4></div>'+(animId?'<span class="acts">'+playBtn(animId)+(kind==='skill'?fightBtn(fightMove(animId.replace(/^move:/,'')),row.name):'')+'</span>':'')+'</div>'
     +(chips.length?'<div class="chips">'+chips.join('')+'</div>':'')+'<p>'+esc(row.desc||'')+'</p>'
     +(st.length?'<p class="hint">Uses: '+st.map(stLink).join(', ')+'</p>':'')+'</div>';
 }
 function familyHtml(id){
   const c=B3_CAST[id],w=WHO[id]||['',''],vs=c.vibes.map(v=>B3_VIBES[v]);
+  const pv=planOf('vibe').filter(x=>x.owner===id),pc=pv.find(x=>x.id===vibeSel[id]);
   const cur=vibeSel[id]&&B3_VIBES[vibeSel[id]]?vibeSel[id]:vs[0].id,v=B3_VIBES[cur],U=unlocks(v);
   let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(c.name)+'</h2><div class="hint">'+esc(w[0])+'</div></div></div><p>'+esc(w[1])+'</p>';
   h+='<p class="hint">Plays as: '+vs.map(x=>'<b>'+esc(x.name)+'</b> '+(LEAN_PLAY[x.lean]||x.lean)).join('; ')+'.</p>';
-  h+='<div class="seg">'+vs.map(x=>'<button type="button" data-vibe="'+x.id+'" aria-pressed="'+(x.id===cur)+'">'+esc(x.name)+'<br><small style="font-weight:500;opacity:.8">'+(x.sig===1?'Main on joining':x.sig===2?'Pocket on joining':'')+'</small></button>').join('')+'</div>';
+  h+='<div class="seg">'+vs.map(x=>'<button type="button" data-vibe="'+x.id+'" aria-pressed="'+(!pc&&x.id===cur)+'">'+esc(x.name)+'<br><small style="font-weight:500;opacity:.8">'+(x.sig===1?'Main on joining':x.sig===2?'Pocket on joining':'')+'</small></button>').join('')+pv.map(x=>'<button type="button" class="planbtn" data-vibe="'+esc(x.id)+'" aria-pressed="'+(!!pc&&pc.id===x.id)+'">'+esc(x.name)+'<br><small style="font-weight:700;color:#ffd34d">PLANNED</small></button>').join('')+'</div>';
+  if(pc)return h+plannedVibeHtml(pc)+'<p><button type="button" class="ghost" data-go="anims" data-id="'+id+'">All of '+esc(c.name)+'\'s animations</button></p>';
   const L=B3_LEANS[v.lean]||{name:cap(v.lean),desc:''};
   h+='<div class="card"><div class="k">Lean (as Main Vibe)</div><h4>'+esc(L.name)+'</h4><p>'+esc(cap(L.desc))+'.</p><p class="hint">Titles by Rank: '+v.subtitles.map((s,i)=>'Rank '+B3_RULES.subtitleRank[i]+' '+esc(s)).join(' → ')+'</p></div>';
   h+=moveCard('trait','Trait',B3_TRAITS[v.trait],1);
   h+='<h3>Moves</h3>'+moveCard('skill','Basic',B3_SKILLS[v.basic],1,'move:'+v.basic);
   ['s1','s2','cap'].forEach((k,i)=>{const sid=v.skills[i];if(!sid)return;const row=B3_SKILLS[sid];
-    h+=row?moveCard('skill',SLOT[k][0],row,rankOf(k),'move:'+sid):'<div class="card"><div class="k">'+SLOT[k][0]+' · not built yet</div><h4>'+esc((B3_SOON||{})[sid]||words(sid))+'</h4></div>';});
+    h+=row?moveCard('skill',SLOT[k][0],row,rankOf(k),'move:'+sid):'<div class="card plan"><div class="k">'+SLOT[k][0]+' · '+pbadge+' not in the game yet</div><h4>'+esc((typeof B3_SOON!=='undefined'&&B3_SOON||{})[sid]||words(sid))+'</h4></div>';});
   h+='<h3>Quirks</h3>'+v.quirks.map((q,i)=>moveCard('quirk','Quirk '+'AB'[i],B3_QUIRKS[q],rankOf(i?'quirkB':'quirkA'))).join('');
   if(v.counter) h+='<div class="card"><div class="k">Counter</div><h4>'+esc(v.counter.name)+'</h4><p>Counts up to '+v.counter.max+'. It shows as a number on '+esc(c.name)+'\'s portrait, and it comes along when this Vibe is in the Pocket.</p></div>';
   const body=animsOf(id).filter(a=>a.kind==='state');
@@ -505,7 +610,7 @@ function foeHtml(id){
    +((f.start||[]).length?'<tr><td><b>Starts with</b></td><td>'+f.start.map(stLink).join(', ')+'</td></tr>':'')
    +(f.hp3?'<tr><td><b>HP against a party of 3</b></td><td>'+f.hp3+'</td></tr>':'')+'</table>';
   h+='<h3>What it does</h3>'+f.acts.map(a=>{const st=statusesOf(a.effects),wn=whenWords(a.when);
-    return '<div class="card"><div class="top"><div><h4>'+esc(a.name)+'</h4></div>'+playBtn('act:'+f.id+':'+a.id)+'</div><div class="chips">'+flavs(a.flavor)+(a.power?'<span class="chip">power x'+a.power+'</span>':'')
+    return '<div class="card"><div class="top"><div><h4>'+esc(a.name)+'</h4></div><span class="acts">'+playBtn('act:'+f.id+':'+a.id)+fightBtn(fightAct(f.id,a.id),f.name+'\'s '+a.name)+'</span></div><div class="chips">'+flavs(a.flavor)+(a.power?'<span class="chip">power x'+a.power+'</span>':'')
      +'<span class="chip">Hits '+esc(HITS[a.hits]||words(a.hits))+(a.aim==='back'?' in the Back row':'')+'</span><span class="chip">Wait '+a.recovery+'</span>'+(a.tags||[]).map(t=>'<span class="chip">'+esc(TAG[t]||words(t))+'</span>').join('')+'</div>'
      +(wn?'<p class="hint">When: '+wn+'.</p>':'')+(a.then?'<p class="hint">Sets up: '+esc((f.acts.find(x=>x.id===a.then)||{}).name||words(a.then))+' on its next turn.</p>':'')
      +(st.length?'<p class="hint">Leaves: '+st.map(stLink).join(', ')+'</p>':'')
@@ -965,7 +1070,19 @@ function copyText(x){const ok=()=>toast('Prompt copied');
 function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Could not copy. Select the text and copy it.');}ta.remove();}
 
 // ---------- search ----------
+let sFilter='all';
+function planHits(q){
+  const s=q.toLowerCase(),out=[],hit=(...a)=>!s||a.some(x=>String(x||'').toLowerCase().includes(s));
+  PLAN.forEach(i=>{
+    if(i.kind==='vibe'){if(hit(i.name,...(i.subtitles||[]),i.trait&&i.trait.name,i.basic&&i.basic.name,...i.skills.map(k=>k.name),...i.quirks.map(k=>k.name)))out.push(['family',i.owner,i.name,'Third Vibe of '+ownerName(i.owner),i.id,1]);}
+    else if(i.kind==='foe'){if(hit(i.name,...(i.acts||[]).map(a=>a.name)))out.push(['monsters',i.id,i.name,'Monster, '+(i.ch===21?'bonus chapter':'chapter '+i.ch),'',1]);}
+    else if(i.kind==='soon'){if(hit(i.name,i.vibe))out.push(['family',i.owner,i.name,'Move of '+ownerName(i.owner)+' · '+i.vibe,'',1]);}
+    else if(hit(i.name,i.plain))out.push(['rules','coming',i.name,i.kind==='stage'?'Battle stage '+i.n:cap(i.kind),'',1]);
+  });
+  return out;
+}
 function searchList(q){
+  if(sFilter==='plan')return planHits(q);
   const s=q.toLowerCase(),out=[],hit=(...a)=>a.some(x=>String(x||'').toLowerCase().includes(s));
   RULES.forEach(r=>{if(hit(r.title,r.sub))out.push(['rules',r.id,r.title,'Rules']);});
   Object.values(B3_CAST).forEach(c=>{if(hit(c.name))out.push(['family',c.id,c.name,'Family']);});
@@ -974,12 +1091,13 @@ function searchList(q){
   [B3_TRAITS,B3_QUIRKS].forEach((T,i)=>Object.values(T).forEach(k=>{const v=B3_VIBES[k.vibe];if(v&&hit(k.name,k.desc))out.push(['family',v.owner,k.name,(i?'Quirk':'Trait')+' of '+ownerName(v.owner)+' · '+k.desc,v.id]);}));
   Object.values(B3_FOES).forEach(f=>{if(hit(f.name)||f.acts.some(a=>hit(a.name)))out.push(['monsters',f.id,f.name,'Monster, chapter '+f.ch]);});
   glossRows().forEach(x=>{if(hit(x.name,x.desc))out.push(['glossary',x.id,x.name,cap(x.kind)+' · '+(x.desc||'')]);});
-  return out.slice(0,60);
+  return out.slice(0,60).concat(planHits(q));
 }
 function renderSearch(q){
-  const r=searchList(q);
-  $('list').innerHTML='<div class="grp">'+r.length+(r.length===60?'+':'')+' results for "'+esc(q)+'"</div>'+r.map(x=>'<button type="button" class="row" data-go="'+x[0]+'" data-id="'+esc(x[1])+'"'+(x[4]?' data-vibe-pick="'+esc(x[4])+'"':'')+'><span class="t"><b>'+esc(x[2])+'</b><span>'+esc(x[3])+'</span></span></button>').join('');
+  const r=searchList(q),n=r.filter(x=>!x[5]).length;
+  $('list').innerHTML='<div class="grp">'+(sFilter==='plan'?r.length+' planned, not in the game yet'+(q?' for "'+esc(q)+'"':''):n+(n>=60?'+':'')+' results for "'+esc(q)+'"'+(r.length>n?' and '+(r.length-n)+' planned':''))+'</div>'+r.map(x=>'<button type="button" class="row'+(x[5]?' plan':'')+'" data-go="'+x[0]+'" data-id="'+esc(x[1])+'"'+(x[4]?' data-vibe-pick="'+esc(x[4])+'"':'')+'><span class="t"><b>'+esc(x[2])+'</b><span>'+esc(x[3])+'</span></span>'+(x[5]?'<span class="n">'+pbadge+'</span>':'')+'</button>').join('');
 }
+function doSearch(){const q=$('q').value.trim();if(q.length>1||sFilter==='plan')renderSearch(q);else renderList();}
 
 // ---------- taps ----------
 document.addEventListener('click',e=>{
@@ -989,9 +1107,11 @@ document.addEventListener('click',e=>{
   if(t.dataset.go){if(t.dataset.vibePick)vibeSel[t.dataset.id]=t.dataset.vibePick;if($('q').value){$('q').value='';$('searchbar').hidden=true;}go(t.dataset.go,t.dataset.id);return;}
   if(t.dataset.back){go(tab,'');return;}
   if(t.dataset.vibe){vibeSel[sel]=t.dataset.vibe;renderDetailKeep();return;}
+  if(t.dataset.pv){e.preventDefault();const o=t.dataset.pv.split(':')[1];vibeSel[o]=t.dataset.pv;go('family',o);return;}
+  if(t.dataset.sf){sFilter=t.dataset.sf;document.querySelectorAll('#sflt .chip').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));doSearch();return;}
   if(t.dataset.kind!=null&&t.classList.contains('chip')){glossKind=t.dataset.kind;renderList();return;}
   if(t.dataset.af){animFilter=t.dataset.af;renderDetailKeep();return;}
-  if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';renderList();}return;}
+  if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';sFilter='all';document.querySelectorAll('#sflt .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sf==='all'?'true':'false'));renderList();}return;}
   if(t.id==='bclose'){closeSheet();return;}
   if(t.id==='bplay'){setPlaying(!PL.on);return;}
   if(t.classList.contains('spd')){PL.speed=+t.dataset.s;document.querySelectorAll('.spd').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));return;}
@@ -1012,7 +1132,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('input',e=>{
   if(e.target.id==='scrub'&&PL.D){setPlaying(false);const i=+e.target.value;PL.t=PL.D.ms[i]||0;drawFrame(i);}
-  if(e.target.id==='q'){const q=e.target.value.trim();if(q.length>1)renderSearch(q);else renderList();}
+  if(e.target.id==='q')doSearch();
 });
 $('dim').addEventListener('click',closeSheet);
 addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});

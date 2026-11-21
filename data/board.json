@@ -24427,7 +24427,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "battleguide2",
-   "next": "Waits on your card Try the Battle Guide on the Duo. Then it applies your notes, adds a See it in a fight button for moves with no video, and shows everything planned but not built yet (third Vibes, unbuilt moves, the BAG, Tombo skins, later chapters' monsters, what is coming next), marked PLANNED.",
+   "next": "Built as battleguide2: In a fight on every move and monster attack (opens a Battle Lab fight on the new battle with it used first), the ten third Vibes, 26 Part 2 monsters, What is coming and a Planned filter in Search, all marked PLANNED and read from data/guide-planned.json, which drops each item by itself when the game gains it. Waits on your card Try In a fight and the PLANNED items in the Battle Guide (t-battleguide2-try).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24470,8 +24470,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleguide2. Part 1: no notes (Tom: all good on t-battleguide-try). Part 2: In a fight on every move and attack, game side b3LabFirst, b3FirstTurn and e.force, checked in a real browser for one move and one attack. Part 3 and 4: tools/guide_planned.py writes data/guide-planned.json (10 third Vibes, 26 Part 2 monsters, 10 features, 4 stages, 11 chapters), the page drops each item when the game's data gains it (tested for a Vibe, a monster, a chapter and the BAG rule). Also regenerated the stale data/battle-lab-index.json (27 of 66 fights). Not done: nothing animated was built or judged."
     }
-   ]
+   ],
+   "after": "t-battleguide2-try"
   },
   {
    "id": "c-costsduoplan",
@@ -29954,6 +29959,33 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-battleguide2-try",
+   "title": "Try In a fight and the PLANNED items in the Battle Guide",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open ADMIN > Battle system > Battle Guide (tap the green build chip at the top: it should read battleguide2; if not, close the page and open it again). Family > Tom > Frequent Flier: tap In a fight beside Zone One Blockade. The game opens a Battle Lab fight and the message line says Tom opens with Zone One Blockade; then the fight is yours. Then press All good, or Something is wrong and say what you saw.",
+   "steps": [
+    "Open ADMIN > Battle system > Battle Guide. Tap the green chip at the top: the build should read battleguide2.",
+    "Family > Tom: next to each move there is Play and a gold-outlined In a fight. Tap In a fight beside Zone One Blockade. The game opens a Battle Lab fight on the new battle; Tom goes first and the message line says Tom opens with Zone One Blockade. Play on or go back to the guide.",
+    "Back in the guide: Monsters > Mudling > Wobble > In a fight. The Mudling attacks first with Wobble, then the fight is yours.",
+    "Family > Tom: the third button, Star Baker (dashed gold, marked PLANNED), shows the third Vibe from the spec. It has no Play or In a fight button. Do the same for Grace or anyone else.",
+    "Monsters: scroll to the bottom for the Chapter 11 to Chapter 20 groups marked PLANNED. Rules > What is coming lists the stages left, which chapters play on the new battle and the rest. Search > Planned lists only planned things.",
+    "Press All good, or Something is wrong and say which screen and what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with battleguide2 (card c-battleguide2)."
+    }
+   ]
   }
  ],
  "sessions": [

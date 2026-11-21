@@ -7,9 +7,13 @@ Opens battle-guide.html (ADMIN > BATTLE GUIDE) at the four iPhone Duo page sizes
 - a video animation plays (the picture changes between frames) and a move with no video says so;
 - a note on an animation saves a complete Claude card on the board that tools/board_check.py accepts (GitHub is a stand-in);
   a second note on the same animation is added to that card; a browser with no token saves nothing and says why;
-- search finds a move, a monster and a status.
+- search finds a move, a monster and a status;
+- battleguide2: every family move and monster attack has an In a fight button whose address opens the game at a Battle Lab fight on the new battle with that move used first (the game is
+  opened for one move and one attack); the planned things (ten third Vibes, the Part 2 monsters, features, stages, chapters) show with the PLANNED look and no Play or fight button, come only
+  from data/guide-planned.json, are found by the Planned filter in Search, and drop out of the guide by themselves when the game's own data gains the real thing (a third Vibe, a monster, a chapter,
+  a rule); tools/guide_planned.py writes the file, reads every one of the 30 Vibes whole and says when a plan document changed since.
 Saves pictures in outdir (default tools/shots). Prints FAILS: []."""
-import base64, functools, http.server, json, os, socketserver, subprocess, sys, tempfile, threading
+import base64, functools, http.server, json, os, re, socketserver, subprocess, sys, tempfile, threading
 from playwright.sync_api import sync_playwright
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, 'shots'); os.makedirs(out, exist_ok=True)
@@ -39,11 +43,12 @@ want = json.loads(subprocess.run(['node', '-e', node], cwd=ROOT, capture_output=
 
 board = {'doc': json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8')), 'puts': []}
 # Tom's real notes sent from the guide are on the live board; the stand-in starts without them so the counts below are about this run only.
-board['doc']['cards'] = [c for c in board['doc']['cards'] if not c.get('anim')]
+_note = lambda i: '-anim-' in str(i) or str(i).startswith(('c-anim', 't-anim'))   # a note from the guide, its fix cards and their Tom cards
+board['doc']['cards'] = [c for c in board['doc']['cards'] if not c.get('anim') and not _note(c.get('id', ''))]
 # pointers from other cards to the removed note cards go too
 _ids = {c['id'] for c in board['doc']['cards']}
 for c in board['doc']['cards']:
-    if c.get('blocks'): c['blocks'] = [x for x in c['blocks'] if x in _ids or not x.startswith('c-anim-')]
+    if c.get('blocks'): c['blocks'] = [x for x in c['blocks'] if x in _ids or not _note(x)]
 # guidegen1b: the stand-in GitHub also holds the request file and the branch `guidegen`, and a stand-in of the guide-reconcile Action answers a request
 # the way the real one does (tools/guidegen/reconcile.py with a stand-in model), after one poll that finds nothing.
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'guidegen')); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate'))
@@ -165,7 +170,7 @@ with sync_playwright() as p:
         ready(pg)
         check(name + ': no sideways scroll', pg.evaluate("document.documentElement.scrollWidth<=innerWidth"))
         for tab, n in (('family', want['cast']), ('monsters', want['foes']), ('glossary', want['status'])):
-            pg.click('#tabs [data-tab=%s]' % tab); got = pg.locator('#list .row').count()
+            pg.click('#tabs [data-tab=%s]' % tab); got = pg.locator('#list .row:not(.plan)').count()
             check('%s: %s lists %d' % (name, tab, n), got == n, got)
         pg.click('#tabs [data-tab=family]')
         if two:
@@ -176,7 +181,18 @@ with sync_playwright() as p:
             check(name + ': detail closed until a tap', not pg.evaluate("document.getElementById('detail').classList.contains('open')"))
         pg.click('#list .row[data-id=tom]'); pg.wait_for_selector('#detail .hero h2')
         check(name + ': Tom opens', pg.locator('#detail .hero h2').inner_text() == 'Tom')
-        check(name + ': Tom has 2 Vibes and his moves', pg.locator('#detail .seg button').count() == 2 and pg.locator('#detail .card').count() >= 8)
+        check(name + ': Tom has 2 Vibes and his moves', pg.locator('#detail .seg button:not(.planbtn)').count() == 2 and pg.locator('#detail .card').count() >= 8)
+        # battleguide2 Part 2: an In a fight button on every move, and its address
+        fl = pg.eval_on_selector_all('#detail a.play.fight', 'a=>a.map(x=>x.getAttribute("href"))')
+        check(name + ': every move of Tom has an In a fight button with the game address', len(fl) == 4 and all(re.match(r'^index\.html\?go=new&i=\d+&move=[a-z0-9_]+$', h) for h in fl), fl)
+        # Part 3: his third Vibe is there, marked, with no Play or fight button
+        check(name + ': Tom shows one PLANNED Vibe button after his two', pg.locator('#detail .seg button.planbtn').count() == 1 and 'PLANNED' in pg.locator('#detail .seg button.planbtn').inner_text())
+        pg.click('#detail .seg button.planbtn'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
+        check(name + ': the planned Vibe says PLANNED and not in the game yet, and has name, titles, Lean, Trait, moves and Quirks', 'PLANNED' in dt and 'Not in the game yet' in dt and all(k in dt for k in ('Star Baker', 'LEAN', 'Titles by Rank', 'TRAIT', 'Sheet-Pan Bribe', 'QUIRK A', 'QUIRK B')), dt[:400])
+        check(name + ': the planned Vibe has no Play and no fight button', pg.locator('#detail .play').count() == 0 and pg.locator('#detail a.fight').count() == 0)
+        check(name + ': the planned Vibe fits the page', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
+        pg.screenshot(path=os.path.join(out, 'battleguide-%s-planned-vibe.png' % name))
+        pg.click('#detail .seg button:not(.planbtn)')
         pg.wait_for_timeout(250); pg.screenshot(path=os.path.join(out, 'battleguide-%s-tom.png' % name))
         if not two:
             pg.click('#dback button'); pg.wait_for_timeout(250)
@@ -406,6 +422,104 @@ with sync_playwright() as p:
     for q, tab_ in (('Konami', 'family'), ('Big One', 'monsters'), ('Toasty', 'glossary')):
         pg.fill('#q', q); pg.wait_for_timeout(150)
         check('search finds ' + q, pg.locator('#list .row[data-go=%s]' % tab_).count() > 0)
+    # ---- battleguide2: the planned list, the generator, the filter, the game's address ----
+    P = json.load(open(os.path.join(ROOT, 'data', 'guide-planned.json'), encoding='utf-8')); items = P['items']; DASH = chr(8212)
+    pv = [i for i in items if i['kind'] == 'vibe']; pfoe = [i for i in items if i['kind'] == 'foe']; pst = [i for i in items if i['kind'] == 'stage']
+    gnode = r"""
+const fs=require('fs'),vm=require('vm');const html=fs.readFileSync('index.html','utf8');
+const srcs=[...html.matchAll(/src="(data\/b3-[^"?]*)/g)].map(m=>m[1]);const ctx={console};vm.createContext(ctx);
+let code='';for(const s of srcs)code+=fs.readFileSync(s,'utf8').replace(/^'use strict';/,'')+'\n;';
+code+='globalThis.OUT={vibes:Object.values(B3_VIBES).map(v=>[v.owner,v.name]),foes:Object.keys(B3_FOES),owners:Object.keys(B3_CAST)};';
+vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
+    game = json.loads(subprocess.run(['node', '-e', gnode], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
+    nrm = lambda x: re.sub(r'[^a-z0-9]+', '', str(x).lower())
+    check('generator: ten third Vibes, one list entry each, none of them in the game', len(pv) == 10 and not [v for v in pv if any(o == v['owner'] and nrm(n) == nrm(v['name']) for o, n in game['vibes'])] and sorted(v['owner'] for v in pv) == sorted(game['owners']), [(v['owner'], v['name']) for v in pv])
+    check('generator: every third Vibe is whole (3 titles, Lean, Trait, Basic, 3 Skills with Rank 1, 2 and 4, 2 Quirks)', all(len(v['subtitles']) == 3 and v['lean'] in ('guard', 'striker', 'tempo', 'support') and v['trait']['desc'] and v['basic']['desc'] and [k['rank'] for k in v['skills']] == [1, 2, 4] and len(v['quirks']) == 2 and v['when'] for v in pv))
+    check('generator: no planned monster is in the game, and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes']] and len(pfoe) >= 26 and all(i.get('when') for i in items))
+    check('generator: the stage list is 16, 19 to 21, 22 and 23 in order', [x['n'] for x in pst] == ['16', '19 to 21', '22', '23'], [x['n'] for x in pst])
+    check('generator: no em dash anywhere in the file', DASH not in open(os.path.join(ROOT, 'data', 'guide-planned.json'), encoding='utf-8').read())
+    r = subprocess.run([sys.executable, os.path.join(HERE, 'guide_planned.py'), '--check'], capture_output=True, text=True, cwd=ROOT)
+    check('generator: --check says the file is up to date', r.returncode == 0, r.stdout + r.stderr)
+    bad = json.loads(json.dumps(P)); bad['sources']['claude/battle-spec-v11.md'] = 'deadbeef'; tmp = tempfile.NamedTemporaryFile('w', suffix='.json', delete=False, encoding='utf-8'); json.dump(bad, tmp); tmp.close()
+    r = subprocess.run([sys.executable, '-c', 'import sys;sys.path.insert(0,%r);import guide_planned as g;g.OUT=%r;sys.argv=["g","--check"];g.main()' % (HERE, tmp.name)], capture_output=True, text=True, cwd=ROOT)
+    check('generator: --check fails and names the document when a source changed', r.returncode == 1 and 'battle-spec-v11.md' in r.stdout, r.stdout + r.stderr); os.unlink(tmp.name)
+
+    cx = br.new_context(viewport={'width': 951, 'height': 648}, device_scale_factor=1); pg = cx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+    base = URL.split('?')[0]
+    def at(h):
+        pg.goto(base + '#' + h); pg.wait_for_function("document.querySelectorAll('#list .row').length>3 && document.querySelector('#detail h2, #detail .hero')", timeout=60000); pg.wait_for_timeout(250)
+    # Part 4: the monsters of Part 2, the What is coming topic, the cheat sheet, the planned look
+    pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
+    check('monsters: the planned monsters are listed after the built ones, each with the PLANNED badge', pg.locator('#list .row.plan').count() == len(pfoe) and all('PLANNED' in t for t in pg.eval_on_selector_all('#list .row.plan', 'e=>e.map(x=>x.innerText)')))
+    check('monsters: chapters 11 to 20 each have a PLANNED heading', all(('chapter %d' % n) in pg.locator('#list').inner_text().lower() for n in range(11, 21)))
+    pg.click('#list .row.plan >> nth=0'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
+    check('a planned monster shows its numbers and acts as the bestiary words them, with no Play and no fight button', 'Not in the game yet' in dt and 'HP' in dt and 'WHAT IT DOES' in dt.upper() and pg.locator('#detail .play').count() == 0 and pg.locator('#detail a.fight').count() == 0, dt[:300])
+    pg.screenshot(path=os.path.join(out, 'battleguide-planned-monster.png'))
+    at('rules/coming'); dt = pg.locator('#detail').inner_text()
+    dl = dt.lower()
+    check('What is coming lists the stages left in order, the chapters, the third Vibes and the features', all(k in dl for k in ('stage 16', 'stage 22', 'stage 23', 'casual mode', 'bag command and run', 'third vibes', 'which chapters play on the new battle')) and dl.index('stage 16') < dl.index('stage 22') < dl.index('stage 23'), dt[:500])
+    check('What is coming fits the page', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
+    pg.screenshot(path=os.path.join(out, 'battleguide-coming.png'))
+    at('rules/sheet'); check('the cheat sheet says the BAG is planned, not in the game yet', 'planned, not in the game yet' in pg.locator('#detail').inner_text())
+    check('the rules list marks What is coming as PLANNED and nothing else', pg.locator('#list .row.plan').count() == 1)
+    # search: the Planned filter
+    pg.click('#bsearch'); pg.click('#sflt [data-sf=plan]'); pg.wait_for_timeout(200)
+    n_plan = pg.locator('#list .row.plan').count()
+    check('search, Planned filter with no words: lists every planned thing and only planned things', n_plan >= len(pv) + len(pfoe) and pg.locator('#list .row:not(.plan)').count() == 0, n_plan)
+    pg.fill('#q', 'Star Baker'); pg.wait_for_timeout(200)
+    check('search, Planned filter finds a third Vibe', pg.locator('#list .row.plan').count() >= 1 and 'PLANNED' in pg.locator('#list .row.plan').first.inner_text())
+    pg.fill('#q', 'Konami'); pg.wait_for_timeout(200)
+    check('search, Planned filter leaves out what is in the game', pg.locator('#list .row').count() == 0)
+    pg.click('#sflt [data-sf=all]'); pg.fill('#q', 'Konami'); pg.wait_for_timeout(200)
+    check('search, All finds Konami with no planned badge on it', pg.locator('#list .row[data-go=family]:not(.plan)').count() > 0)
+    pg.fill('#q', 'Star Baker'); pg.wait_for_timeout(200)
+    check('search, All also shows the planned third Vibe, marked', pg.locator('#list .row.plan[data-go=family]').count() >= 1)
+    pg.click('#list .row.plan[data-go=family] >> nth=0'); pg.wait_for_timeout(300)
+    check('tapping a planned search result opens that planned Vibe', 'Not in the game yet' in pg.locator('#detail').inner_text() and 'Star Baker' in pg.locator('#detail').inner_text())
+    check('the guide still loads no game engine', not [x for x in pg.evaluate("[...document.scripts].map(s=>s.src)") if '/engine/' in x])
+    check('planned pages: no script errors', not errs, errs)
+    cx.close()
+
+    # drop by itself: the game's own data gains the real thing (a third Vibe, a monster, a chapter, the BAG rule); the planned item goes and the real one shows
+    cx = br.new_context(viewport={'width': 951, 'height': 648}); gains = {
+        'data/b3-kit-tom.js': "B3_VIBES.starbaker=Object.assign({},B3_VIBES[B3_CAST.tom.vibes[0]],{id:'starbaker',name:'Star Baker',sig:0});B3_CAST.tom.vibes.push('starbaker');",
+        'data/b3-foes-ch10.js': "B3_FOES.finalcall=Object.assign({},B3_FOES.mudling,{id:'finalcall',name:'FINAL CALL',ch:11});",
+        'data/b3-story.js': "B3_STORY.chapters.push(11);",
+        'data/b3-rules.js': "B3_RULES.bag=true;"}
+    def gain(route):
+        u = route.request.url.split('?')[0].split('/', 3)[3]; r = route.fetch(); route.fulfill(response=r, body=r.text() + '\n;' + gains[u])
+    for f in gains: cx.route('**/' + f + '*', gain)
+    pg = cx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto(URL + '#family/tom'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3 && document.querySelector('#detail .seg')", timeout=60000)
+    check('the game gains Tom\'s third Vibe: the planned one drops out and the real one is a normal button', pg.locator('#detail .seg button.planbtn').count() == 0 and pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and 'Star Baker' in pg.locator('#detail .seg').inner_text() and 'PLANNED' not in pg.locator('#detail .seg').inner_text(), pg.locator('#detail .seg').inner_text())
+    check('the game gains it: the Family list stops saying planned for Tom', '(planned)' not in pg.locator('#list .row[data-id=tom]').inner_text() and '(planned)' in pg.locator('#list .row[data-id=grace]').inner_text())
+    pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
+    check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len(pfoe) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and 'FINAL CALL' in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
+    pg.goto(URL + '#rules/coming'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
+    check('the game gains chapter 11 and the BAG: What is coming drops both and keeps the rest', 'airport the family is diverted to' not in dt.lower() and 'bag command and run' not in dt.lower() and 'casual mode' in dt.lower() and 'tunnel under the dome' in dt.lower(), dt[:300])
+    pg.goto(URL + '#rules/sheet'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250)
+    check('the game gains the BAG rule: the cheat sheet says the BAG opens the bag', 'opens the bag' in pg.locator('#detail').inner_text())
+    check('gains: no script errors', not errs, errs); cx.close()
+
+    # Part 2, the game side: the address from the guide opens a Battle Lab fight on the new battle with the move used first
+    cx = br.new_context(viewport={'width': 466, 'height': 657}); pg = cx.new_page(); pg.goto(URL + '#family/tom'); pg.wait_for_selector('#detail a.fight', timeout=60000)
+    mhref = pg.eval_on_selector_all('#detail a.fight', 'a=>a.map(x=>x.getAttribute("href"))')[1]
+    pg.goto(URL + '#monsters/mudling'); pg.wait_for_selector('#detail a.fight', timeout=60000)
+    ahref = pg.eval_on_selector_all('#detail a.fight', 'a=>a.map(x=>x.getAttribute("href"))')[0]
+    root = URL.split('/battle-guide')[0] + '/'
+    for what, href in (('a family move', mhref), ('a monster attack', ahref)):
+        g = cx.new_page(); gerr = []; g.on('pageerror', lambda e: gerr.append(str(e))); g.goto(root + href)
+        g.wait_for_function("typeof B3!=='undefined'&&B3.active&&B3.F", timeout=180000); g.evaluate("()=>{B7.speed=3}")
+        try: g.wait_for_function("()=>B3.log.some(x=>/opens with/.test(x))||B3.F.foes.some(f=>Object.keys(f.uses).length)", timeout=90000)
+        except Exception: pass
+        res = g.evaluate("()=>({log:B3.log.slice(-6),uses:B3.F.foes.map(f=>[f.id,f.uses]),party:B3.F.party.map(u=>u.id)})")
+        if what == 'a family move':
+            mv = re.search(r'move=([a-z0-9_]+)', href).group(1)
+            check('the game opens the fight with the owner using the move first (' + mv + ')', any('opens with' in x for x in res['log']) and not any(any(u[1].values()) for u in res['uses']), res)
+        else:
+            act = href.split('act=')[1].replace('%3A', ':').split(':')[1]
+            check('the game opens the fight with the monster using the attack first (' + act + ')', any(act in u[1] or any(act in k for k in u[1]) for u in res['uses']), res)
+        check(what + ': the game shows no script error', not gerr, gerr); g.close()
     cx.close(); br.close()
 srv.shutdown()
 print('FAILS:', fails)
