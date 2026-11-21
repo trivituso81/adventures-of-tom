@@ -14244,8 +14244,8 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukDhtanvcF1mSR4hV1C",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-searchthrough\""
    },
    "history": [
     {
@@ -14283,6 +14283,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T00:27:58.471Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by hand with Copy prompt in a new conversation on Claude Sonnet 5.5, effort high."
     }
    ],
    "prompt": {
