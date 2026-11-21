@@ -24928,7 +24928,7 @@
    "title": "Try AI Costs on your Duo, folded and unfolded",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/costs.html on your Duo. Folded: check the first screen shows the total, four tiles and the next renewal, then tap Ledger and a charge (a sheet shows its reference) and the pill at the top (Dates and Show). Unfold it and turn it sideways: check the list is on the left half, a tapped service or charge opens on the right half, and Subtotal by on Ledger shows only the bar you tap. Tap All good, or Something is wrong and say what looked off.",
@@ -24939,8 +24939,14 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-costsduo1 (build costsduo1)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:19.635Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-grace-cubepop-tvik",
