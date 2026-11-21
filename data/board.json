@@ -19171,6 +19171,38 @@
     "opening": "\"The board (ADMIN > BOARD) fails every save with\""
    },
    "started_at": "2026-11-21T01:48:41+00:00"
+  },
+  {
+   "id": "c-takes-ae5d7d",
+   "tag": "takes-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -21860,11 +21892,13 @@
    "takes/20261120T224102-yg8/part-001.json",
    "takes/20261120T224102-yg8/state.json",
    "takes/20261120T224602-cq5/part-001.json",
-   "takes/20261120T224602-cq5/state.json"
+   "takes/20261120T224602-cq5/state.json",
+   "takes/20261121T015156-llm/part-001.json",
+   "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2779712bff287e470cb1ab28de91aece424490a8",
- "synced_at": "2026-11-21T01:51:33+00:00",
+ "synced": "5be416baa1c56fc73a148269ea58ebaa56a35e87",
+ "synced_at": "2026-11-21T01:52:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
