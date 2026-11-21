@@ -21449,8 +21449,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked by the board: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T03:25:11.048Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-itemdef1",
