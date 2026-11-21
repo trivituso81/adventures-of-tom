@@ -17422,7 +17422,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: not the painted door (different door shape, color and hardware), and the generator painted the word GREGORI on it. The reference crop and the game rectangle also took in the shoe shelf and window beside the door; both are now exactly the stone arch.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-row-amyhouse/20261121T023258.png",
@@ -17435,12 +17435,12 @@
    "id": "prop-gate-row-amyhouse",
    "tab": "Props",
    "title": "Story gate: Amy's front door, locked (Row, chapter 1)",
-   "ar": "1:1",
+   "ar": "3:4",
    "refs": [
     "art/row.webp",
     "art/raw/props/gate-row-amyhouse-door-ref.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Rivituso Row, from \"The Adventures of Tom\", a family role-playing game. Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.\n\nPAINT THIS ONE OBJECT\nThat same doorway, painted as a drop in replacement of the reference: the same pale stone arch, the same red wooden door with two gold hinges and gold ring knocker, same size and shape, door shut. Add a small handwritten paper note taped to the door at eye height, with a tiny doodle of a running shoe on it and no words. The three stone steps below the door are NOT part of the picture.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Rivituso Row, from \"The Adventures of Tom\", a family role-playing game. Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) A crop of exactly that doorway, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.\n\nPAINT THIS ONE OBJECT\nThat same doorway, painted as a drop in replacement of the reference: the same pale stone arch, the same red wooden door with two gold hinges and gold ring knocker, same size and shape, door shut. Add a small handwritten paper note taped to the door at eye height, with a tiny doodle of a running shoe on it and no words. Paint only the stone arch and the door inside it: no wall, window, shelf, steps or sign beside, above or below it.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. Seen straight on, the arch is a little taller than it is wide, about 5 wide to 6 tall, the same proportions as the attached crop.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
    "bake": {
     "script": "bake_gate_art.py",
     "args": [
@@ -17450,7 +17450,8 @@
     "src": "tools/sprite-bake/src/gate-row-amyhouse-locked.png",
     "key": "corner"
    },
-   "group": "Story gates"
+   "group": "Story gates",
+   "promptRev": 1
   },
   {
    "status": "draft",
@@ -17458,7 +17459,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: not the painted door (different arch, door and hardware), and it filled the picture edge to edge with no margin, so it could not be cut out cleanly.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-row-amyhouse-open/20261121T023254.png",
@@ -17471,12 +17472,12 @@
    "id": "prop-gate-row-amyhouse-open",
    "tab": "Props",
    "title": "Story gate: Amy's front door, unlocked and open (Row, chapter 2 on)",
-   "ar": "1:1",
+   "ar": "3:4",
    "refs": [
     "art/row.webp",
     "art/raw/props/gate-row-amyhouse-door-ref.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Rivituso Row, from \"The Adventures of Tom\", a family role-playing game. Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.\n\nPAINT THIS ONE OBJECT\nThat same doorway, painted as a drop in replacement of the reference: the same pale stone arch and the same red wooden door with its two gold hinges and gold ring knocker, but the door is swung open inward about half way, showing a warm golden lit hallway inside with a hint of a coat hook and a rug. No note on the door. The three stone steps below the door are NOT part of the picture.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Rivituso Row, from \"The Adventures of Tom\", a family role-playing game. Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) A crop of exactly that doorway, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.\n\nPAINT THIS ONE OBJECT\nThat same doorway, painted as a drop in replacement of the reference: the same pale stone arch and the same red wooden door with its two gold hinges and gold ring knocker, but the door is swung open inward about half way, showing a warm golden lit hallway inside with a hint of a coat hook and a rug. No note on the door. Paint only the stone arch and the door inside it: no wall, window, shelf, steps or sign beside, above or below it.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. Seen straight on, the arch is a little taller than it is wide, about 5 wide to 6 tall, the same proportions as the attached crop.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
    "bake": {
     "script": "bake_gate_art.py",
     "args": [
@@ -17486,7 +17487,8 @@
     "src": "tools/sprite-bake/src/gate-row-amyhouse-open.png",
     "key": "corner"
    },
-   "group": "Story gates"
+   "group": "Story gates",
+   "promptRev": 1
   },
   {
    "status": "draft",
@@ -17494,7 +17496,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: a different gate from the approved locked school gate, still chained and padlocked although it should be open, a 3D rendered look instead of painted, and posts far too tall and too close together.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-town-school-open/20261121T023255.png",
@@ -17533,7 +17535,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: a different gate from the approved locked Car Barn gate, still chained and padlocked although it should be open, a 3D rendered look with thick outlines, and grass and dirt painted under the posts.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-jpark-barn-open/20261121T023329.png",
@@ -17573,7 +17575,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: the word OPEN painted on the arm (no words were asked for), a detached extra post, posts much taller than waist high, and a ground shadow band; not the approved locked studio gate.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-blvd-studio-open/20261121T023326.png",
@@ -17615,7 +17617,7 @@
    "rejects": [
     {
      "date": "2026-11-20",
-     "note": "Tom on the board card: \"All failed\"",
+     "note": "Tom on the board card: \"All failed\". Details: a STAGE 7 sign painted (no sign was asked for), the red warning lamp lit although it should be off, and a 3D rendered look that does not match the approved locked Stage 7 doors.",
      "from": "review",
      "at": 1795230606026,
      "file": "results/prop-gate-backlot-stage7-open/20261121T023333.png",
@@ -17637,7 +17639,7 @@
     "art/backlot.webp",
     "art/raw/props/prop-gate-backlot-stage7-v1.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of the studio backlot, from \"The Adventures of Tom\", a family role-playing game. The Backlot is a movie studio street of fake western and city sets. The opening is the big open hangar doorway at the far end of the street, under the STAGE 7 lettering. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nA pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, slid wide apart to both sides so the middle of the doorway is open and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above is dark. No sign.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It fills the whole hangar doorway, about two people wide, and is about three people tall.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of the studio backlot, from \"The Adventures of Tom\", a family role-playing game. The Backlot is a movie studio street of fake western and city sets. The opening is the big open hangar doorway at the far end of the street, under the STAGE 7 lettering. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nA pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, slid wide apart to both sides so the middle of the doorway is open and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above is switched off: dark red glass, no glow. No sign.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. It fills the whole hangar doorway, about two people wide, and is about three people tall.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
    "bake": {
     "script": "bake_gate_art.py",
     "args": [
@@ -17647,7 +17649,8 @@
     "src": "tools/sprite-bake/src/gate-backlot-stage7-open.png",
     "key": "corner"
    },
-   "group": "Story gates"
+   "group": "Story gates",
+   "promptRev": 1
   },
   {
    "status": "approved",

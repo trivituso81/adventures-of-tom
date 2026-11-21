@@ -45,16 +45,18 @@ const GATES = [
     what: 'A steel catwalk bridge section hoisted up on two chains and hanging at a steep angle, with the foot of a metal stair below it ending in an empty dark gap. A yellow and black hazard chain is strung across the gap and a small sign hangs on the chain reading exactly: CATWALK OFFLINE',
     size: 'It spans the full width of the stairs, about two people wide, and is about two people tall.' },
   // gatelayer1: the locked and open pictures of Amy's front door (the painted door is the whole doorway, stone arch and red leaf; the picture replaces it exactly).
-  { id: 'row-amyhouse', ar: '1:1', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, locked (Row, chapter 1)',
+  // fix-gatelayer-pics-2: the crop and GATE_ART rect are exactly the arch (they had taken in the shoe shelf and window), and the picture has a margin
+  // (the bake trims to the drawn arch; "edge to edge" fought the margin rule).
+  { id: 'row-amyhouse', ar: '3:4', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, locked (Row, chapter 1)',
     where: 'Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front.',
-    what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch, the same red wooden door with two gold hinges and gold ring knocker, same size and shape, door shut. Add a small handwritten paper note taped to the door at eye height, with a tiny doodle of a running shoe on it and no words. The three stone steps below the door are NOT part of the picture.',
-    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.',
-    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
-  { id: 'row-amyhouse-open', ar: '1:1', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, unlocked and open (Row, chapter 2 on)',
+    what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch, the same red wooden door with two gold hinges and gold ring knocker, same size and shape, door shut. Add a small handwritten paper note taped to the door at eye height, with a tiny doodle of a running shoe on it and no words. Paint only the stone arch and the door inside it: no wall, window, shelf, steps or sign beside, above or below it.',
+    size: 'Seen straight on, the arch is a little taller than it is wide, about 5 wide to 6 tall, the same proportions as the attached crop.',
+    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A crop of exactly that doorway, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
+  { id: 'row-amyhouse-open', ar: '3:4', area: 'Rivituso Row', file: 'art/row.webp', title: 'Amy\'s front door, unlocked and open (Row, chapter 2 on)',
     where: 'Rivituso Row is a garden lane of cottages and cobbled paths. The door to paint is the front door of the cream and red timber cottage with the gold GREGORI sign: a round topped red wooden door with two long gold hinges and a gold ring knocker, set in a pale stone arch, with three stone steps in front.',
-    what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch and the same red wooden door with its two gold hinges and gold ring knocker, but the door is swung open inward about half way, showing a warm golden lit hallway inside with a hint of a coat hook and a rug. No note on the door. The three stone steps below the door are NOT part of the picture.',
-    size: 'It fills the whole picture edge to edge so it can sit exactly over the real door: the stone arch touches the top and sides, the door sill touches the bottom.',
-    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A close crop of that real door, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
+    what: 'That same doorway, painted as a drop in replacement of the reference: the same pale stone arch and the same red wooden door with its two gold hinges and gold ring knocker, but the door is swung open inward about half way, showing a warm golden lit hallway inside with a hint of a coat hook and a rug. No note on the door. Paint only the stone arch and the door inside it: no wall, window, shelf, steps or sign beside, above or below it.',
+    size: 'Seen straight on, the arch is a little taller than it is wide, about 5 wide to 6 tall, the same proportions as the attached crop.',
+    ref2: 'art/raw/props/gate-row-amyhouse-door-ref.png', ref2says: 'A crop of exactly that doorway, cut from the painting. Paint exactly this doorway: the same stone arch, the same red door, hinges and knocker, the same colors and brushwork.' },
   // gatelayer1: the open state of the gates that swing or lift.
   { id: 'town-school-open', ar: '1:1', area: 'the Square', file: 'art/town.webp', title: 'School gate, open (Square east lane, chapter 5 on)',
     where: 'The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign.',
@@ -70,7 +72,7 @@ const GATES = [
     size: 'The two posts are as far apart as the road gap, about two people wide, and are about waist high. The raised arm is about as tall as a person.' },
   { id: 'backlot-stage7-open', ar: '3:2', area: 'the studio backlot', file: 'art/backlot.webp', title: 'Stage 7 doors, open (Backlot, chapter 4 on)',
     where: 'The Backlot is a movie studio street of fake western and city sets. The opening is the big open hangar doorway at the far end of the street, under the STAGE 7 lettering.',
-    what: 'A pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, slid wide apart to both sides so the middle of the doorway is open and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above is dark. No sign.',
+    what: 'A pair of enormous dark grey riveted steel soundstage sliding doors with yellow and black hazard stripes along the bottom, slid wide apart to both sides so the middle of the doorway is open and shows a dark soundstage interior with a few warm work lights. The round red warning lamp above is switched off: dark red glass, no glow. No sign.',
     size: 'It fills the whole hangar doorway, about two people wide, and is about three people tall.' },
 ];
 

@@ -19,7 +19,7 @@ const GATE_ART={
   'town-hollow':     {map:'town',     rect:[7,3,2,2],         fit:1.15, states:['locked']},
   'town-school':     {map:'town',     rect:[27.85,8,1.55,1.7], fit:.66,   states:['locked','open']},   // under the SCHOOL sign, between its posts (Tom 11-20 report 5nwp)
   'row-pier':        {map:'row',      rect:[12,20,3,1],       fit:1.05, states:['locked']},
-  'row-amyhouse':    {map:'row',      rect:[6,4.45,2.1,2.1], fill:true, states:['locked','open']},
+  'row-amyhouse':    {map:'row',      rect:[5.94,4.45,1.78,2.14], fill:true, states:['locked','open']},   // exactly the stone arch (fix-gatelayer-pics-2)
   'blvd-trail':      {map:'blvd',     rect:[1.9,2,2.2,1.5],   fit:1.2,  states:['locked']},
   'blvd-studio':     {map:'blvd',     rect:[26.9,6.8,2.4,1],  states:['locked','open']},
   'jpark-oak':       {map:'jpark',    rect:[13,21,4,1],       fit:1.1,  states:['locked']},
