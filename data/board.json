@@ -25060,6 +25060,50 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-idea-tomgrace",
+   "tag": "idea-tomgrace",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
+   "next": "Your idea: For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "idea": {
+    "at": "2026-11-21T17:29:59.830Z",
+    "words": "For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations",
+    "shot": "",
+    "row": "D",
+    "rule": "Claude Opus 5.5, medium"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom made this card on the board: For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations",
+     "at": "2026-11-21T17:29:59.830Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Sized by the board: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there).",
+     "at": "2026-11-21T17:29:59.830Z"
+    }
+   ],
+   "prompt": {
+    "what": "Works on your idea: For Tom Grace and Rose and Deedee ensure that no old painted.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: judged by taste)",
+    "effort": "medium (a small piece, starting from what is there)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-tomgrace in data/board.json, history included. Your first push is the commit board: start c-idea-tomgrace.\n\nTom made this card himself with New card on the board. His words: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\"\n\nThe board sized this from his words alone: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nTom judges this by taste. Read docs/CANON.md first, and docs/tom-edits.tsv for any dialogue. Pictures and videos are made only in the Art Library, and their prompts follow the prompt rules in CLAUDE.md. Start from what is there and change only what he names. Test it, look at it in portrait and landscape, and push build idea-tomgrace with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
