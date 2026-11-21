@@ -25713,7 +25713,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
-   "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
+   "next": "Waiting on one decision from Tom: allow the wan-gen cap to be set to 53.1 (total spent so far $52.53 plus this one $0.50 try). The staged try is job deedee-dodge rev 5 (Rose's duck wording, figure at 80%). Nothing else is blocking it.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25831,6 +25831,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping: nothing paid, nothing made. The one staged Wan try (job deedee-dodge rev 5, Rose's duck wording, about $0.50) was refused by the wan-gen spend cap: the cap counts every dollar ever spent ($52.53 so far), so a run with cap 1 can never pass. Raising the cap was not allowed in this session, so Tom decides. Earlier sessions went quiet probably for the same reason: they ran out before the paid try ever started."
     }
    ],
    "prompt": {
