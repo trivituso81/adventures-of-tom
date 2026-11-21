@@ -6,6 +6,13 @@
    "len": 90,
    "model": "music_v2_5",
    "at": 1795291160389
+  },
+  {
+   "id": "levelup",
+   "prompt": "A bright level-up sting, four seconds. A quick rising glockenspiel and harp arpeggio with a sparkling bell on top, a small trumpet flourish and a warm final chord that rings and decays. Cheerful, proud, a little cheeky. Instrumental only, no vocals. A short musical sting that starts immediately and ends cleanly on its final note. Rich, detailed, modern production. Family-friendly adventure game score.",
+   "len": 4,
+   "model": "music_v2_5",
+   "at": 1795291420656
   }
  ]
 }
