@@ -19194,6 +19194,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1f: the Pond Grump, Bog Toad, Log Lump and Skeeter Swarm attack and wind up in videos in NEW 2 to NEW 6"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1g: three leftover script tags of the removed monster clips taken out of index.html"
     }
    ],
    "prompt": {
@@ -22505,14 +22509,15 @@
    "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
    "title": "Make and check every chapter 1 battle video",
    "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T19:36:07-08:00",
+   "last": "2026-11-20T19:38:40-08:00",
    "tags": [
     "wanch1a",
     "wanch1b",
     "wanch1c",
     "wanch1d",
     "wanch1e",
-    "wanch1f"
+    "wanch1f",
+    "wanch1g"
    ],
    "cards": [
     "c-wanch1"
@@ -25054,8 +25059,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "af03f19ac3d95fe8074ae2f0c20d8c5c9ea1809c",
- "synced_at": "2026-11-21T03:37:46+00:00",
+ "synced": "93c65b6054109ac19f405e0800da27f28ae82be1",
+ "synced_at": "2026-11-21T03:39:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
