@@ -27470,6 +27470,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreene: griffith_test fixed (the test was stale: the Griffith plate was repainted, so it stood the player inside rock at (11,19) and did not clear the party banner); known_fail removed. 7 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreene: the Griffith Park test follows the repainted trail map"
     }
    ],
    "prompt": {
@@ -29845,6 +29849,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T13:02:32-08:00",
+   "last": "2026-11-21T13:12:00-08:00",
+   "tags": [
+    "nightgreene"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
    "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
    "first": "2026-11-21T12:34:23-08:00",
@@ -29908,16 +29924,6 @@
    "tags": [],
    "cards": [
     "c-dash2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T13:02:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -33672,8 +33678,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "50c0c6f0ea32626b84e412e5271a6a0951ce3fd1",
- "synced_at": "2026-11-21T21:11:48+00:00",
+ "synced": "abf245c7a2c8d55b24b8a75d90be26a1caefde54",
+ "synced_at": "2026-11-21T21:13:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
