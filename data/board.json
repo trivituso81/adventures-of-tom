@@ -24493,6 +24493,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Watch Tom's new Lounge Pass Flex is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T20:13:31.335Z"
     }
    ],
    "prompt": {
@@ -24503,7 +24508,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small code change whose steps are not written yet, tests catch mistakes)",
     "effort": "medium (one sound in one move)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-anim-tom-loungepass-ding in data/board.json with its history, and the Tom card that blocked it. Your first push is the commit board: start c-anim-tom-loungepass-ding.\n\nTom asked for a little cartoon \"ding\" when the sparkle shows on the lounge pass card in Tom's move Lounge Pass Flex (move lounge_pass_flex in data/b3-kit-tom.js, clip tom_loungepass in data/clips/tom-loungepass.js; the sparkle is on baked pictures 9 to 11 of the anim-tom-loungepass-fix1 clip). Do not touch the video. Find how the new battle plays sounds (b3Sfx in engine/b3-play.js, the sfx table) and how a clip move can fire something at a given picture, and play one short bright ding when baked picture 10 is on screen, in the new battle and in the Battle Guide player. Use an existing ding or chime sound if one exists, otherwise a short synthesized one in the same sfx table. Run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Build tag anim-tom-loungepass-ding. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-anim-tom-dodge-ner3",
