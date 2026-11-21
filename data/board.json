@@ -26143,8 +26143,7 @@
    "title": "Battle stage 18: chapters 6 to 10 and bonus story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "next": "Waits on t-milestonec (Milestone C, your play test of chapters 2 to 5). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
    "blocks": [],
    "changed": "2026-11-21",
@@ -26163,11 +26162,15 @@
     {
      "d": "2026-11-21",
      "t": "Created by the b3s17 session as the next card, after Milestone C."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: Tom asked to keep building without tests (\"id prefer not to test and just keep building until we are done\"), so stage 18 starts before Milestone C is answered. Browser chapter tests and the long smoke run are skipped; the fast checks (simulator, board, tags) still run."
     }
    ],
    "chat": {
-    "url": "",
-    "opening": "unknown"
+    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+    "opening": "\"i'd prefer not to test and just keep building until we are done\""
    }
   },
   {
