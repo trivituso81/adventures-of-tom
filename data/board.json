@@ -21665,7 +21665,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Inspect prompt says boppy's in lowercase",
-   "next": "Ready to start. Confirmed in code: engine/draw.js lowercases every thing's name in the hint (t.value.name.toLowerCase()), so every proper name is affected.",
+   "next": "Built and pushed as qa-txt04: the Inspect prompt keeps a name's capital letters. Waiting for Tom to look at the pond prompt.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21695,13 +21695,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed still present on main, fixed in engine/draw.js (lowercase only a leading The, A or An). Pushed as qa-txt04."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-txt04-play"
   },
   {
    "id": "c-qa-battle2",
@@ -22043,6 +22048,25 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug02."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-txt04-play",
+   "title": "Check the Inspect prompt at Boppy's pond",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, go to Grump Hollow and walk up to Boppy's fishing spot by the pond. Check: the prompt at the bottom reads A · Inspect Boppy's fishing spot with a capital B (it used to say boppy's). Names like The Hush Library still start with a lowercase the: A · Inspect the ... Report anything off with the REPORT tab.",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-txt04."
     }
    ]
   }

@@ -148,7 +148,7 @@ function updateUI(now) {
       hint='A \u00b7 Shop at the counter: buy and sell';
       caption='SHOP';
     } else if(t.kind==='object') {
-      hint='A \u00b7 Inspect '+t.value.name.toLowerCase();
+      hint='A \u00b7 Inspect '+t.value.name.replace(/^(The|A|An)\s/,function(m){return m.toLowerCase();});
       caption='LOOK';
     } else {
       hint=t.value.kind==='enter'
