@@ -21725,6 +21725,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as itemdef1: every item banner reads like a JRPG item definition: picture, name and type, description, In battle, In story"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itemdef-css: a rebase during the itemdef1 push dropped the banner's styles and the data/item-defs.js tag from index.html (and the updated tools/itembanner_test.py); this build puts them back."
     }
    ],
    "prompt": {

@@ -17,7 +17,8 @@ errs=[]; fails=[]
 def check(name,ok):
     print(('ok   ' if ok else 'FAIL ')+name)
     if not ok: fails.append(name)
-TXT="()=>{ const w=document.getElementById('party-banner'); return w&&w.classList.contains('on')?[w.classList.contains('item'),w.querySelector('.pb-line').textContent,w.querySelector('.pb-note').textContent,w.querySelector('.pb-icon').textContent||w.querySelector('.pb-icon').querySelectorAll('img').length]:null; }"
+# itemdef1: an item banner is an item definition (.pb-item); [is item, title line, note, tile content]. Several items are pages of one banner.
+TXT="()=>{ const w=document.getElementById('party-banner'); if(!w||!w.classList.contains('on')) return null; const it=w.classList.contains('item'); return it?[true,'Got '+w.querySelector('.pb-name').textContent,w.querySelector('.pb-inote').textContent,w.querySelector('.pb-tile').innerHTML]:[false,w.querySelector('.pb-line').textContent,w.querySelector('.pb-note').textContent,'']; }"
 def dismiss(pg):
     pg.wait_for_timeout(600); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
 with sync_playwright() as pw:
@@ -38,7 +39,8 @@ with sync_playwright() as pw:
         pg.screenshot(path=os.path.join(SHOTS,f'itembanner-{name}.png'))
         dismiss(pg); check(name+': Enter dismisses, game free',not pg.evaluate("()=>partyBannerHeld()"))
         pg.evaluate("()=>{ grantItem(['juice','juice','cookie']); partyBanner('grace','join'); }"); pg.wait_for_timeout(700)
-        t=pg.evaluate(TXT); check(name+': several items on one banner',bool(t) and t[0] and 'x2' in t[1])
+        t=pg.evaluate(TXT); check(name+': several items on one banner (page 1 shows the pair)',bool(t) and t[0] and 'x2' in t[1])
+        dismiss(pg); t=pg.evaluate(TXT); check(name+': A turns to the second item on the same banner',bool(t) and t[0] and 'Cookie' in t[1])
         dismiss(pg); t=pg.evaluate(TXT); check(name+': party banner queued behind it',bool(t) and not t[0] and 'Grace' in t[1])
         dismiss(pg); check(name+': all dismissed',not pg.evaluate("()=>partyBannerHeld()"))
     pg.evaluate("()=>{ battle.active=true; itemBanner(['cookie'],'drop'); }"); pg.wait_for_timeout(1200)
@@ -51,7 +53,7 @@ with sync_playwright() as pw:
     ctx=pg.context
     ctx.route('**/art/items/cookie.webp*',lambda r: r.fulfill(status=200,content_type='image/png',body=PNG))
     ctx.route('**/art/items/juice.webp*',lambda r: r.fulfill(status=404,body=''))
-    ICON="()=>{ const w=document.getElementById('party-banner'); const i=w.querySelector('.pb-icon'); return {shown:getComputedStyle(i).display!=='none',pics:[...i.querySelectorAll('img')].map(x=>[x.dataset.item,x.naturalWidth,x.getAttribute('src')]),emoji:[...i.querySelectorAll('.pb-emoji')].map(x=>x.textContent),face:getComputedStyle(w.querySelector('.pb-face')).display}; }"
+    ICON="()=>{ const w=document.getElementById('party-banner'); const i=w.querySelector('.pb-tile'); return {shown:getComputedStyle(i).display!=='none',pics:[...i.querySelectorAll('img')].map(x=>[x.dataset.item,x.naturalWidth,x.getAttribute('src')]),emoji:[...i.querySelectorAll('.pb-emoji')].map(x=>x.textContent),face:getComputedStyle(w.querySelector('.pb-face')).display}; }"
     for name,(w,h) in {'portrait':(390,844),'landscape':(844,390)}.items():
         pg.set_viewport_size({'width':w,'height':h}); pg.wait_for_timeout(600)
         pg.evaluate("()=>{ ITEM_ART.splice(0,ITEM_ART.length,'cookie','juice'); grantItem('cookie'); }"); pg.wait_for_timeout(900)
@@ -63,9 +65,9 @@ with sync_playwright() as pw:
         check(name+': a picture that fails to load falls back to the emoji',t['shown'] and not t['pics'] and len(t['emoji'])==1 and t['emoji'][0]!='')
         dismiss(pg)
         pg.evaluate("()=>{ grantItem(['cookie','roll']); }"); pg.wait_for_timeout(900)
-        t=pg.evaluate(ICON)
-        check(name+': two items on one banner mix a picture and an emoji',len(t['pics'])==1 and len(t['emoji'])==1)
-        pg.screenshot(path=os.path.join(SHOTS,f'itembanner-art-mixed-{name}.png')); dismiss(pg)
+        t1=pg.evaluate(ICON); pg.screenshot(path=os.path.join(SHOTS,f'itembanner-art-mixed-{name}.png')); dismiss(pg); t2=pg.evaluate(ICON)
+        check(name+': two items on one banner: page 1 the picture, page 2 the emoji',len(t1['pics'])==1 and not t1['emoji'] and not t2['pics'] and len(t2['emoji'])==1)
+        dismiss(pg)
         pg.evaluate("()=>{ ITEM_ART.splice(0,ITEM_ART.length); grantItem('cookie'); }"); pg.wait_for_timeout(900)
         t=pg.evaluate(ICON)
         check(name+': an item not in ITEM_ART keeps its emoji',not t['pics'] and len(t['emoji'])==1)

@@ -1,3 +1,7 @@
+## itemdef-css (2026-11-20): the item definition banner's look and words are back (itemdef1 lost them on the way in)
+
+Card c-itemdef1. While itemdef1 was rebased onto a busy main, the conflict step kept main's `index.html` and `tools/itembanner_test.py`, so the live build had the new banner code with no styles and without `data/item-defs.js`. This puts back the banner styles, the `data/item-defs.js` script tag (after `data/item-art.js`, whose newer tag is kept) and the test. No other change.
+
 ## fix-gatelayer-pics-2 (2026-11-21): gate pictures checked by Claude: three ready for Tom, three rewritten to a method that works
 
 Card c-fix-gatelayer-pics-2 (parts a and b above). Tom on t-gatelayer-pics: "reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images".
