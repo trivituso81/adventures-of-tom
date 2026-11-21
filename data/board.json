@@ -24208,7 +24208,7 @@
    "id": "c-anim-grace-give-q4es",
    "tag": "anim-grace-give-q4es",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Giving (support moves)",
    "next": "Made in build anim-grace-give-q4es. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Grace, Giving (support moves).",
@@ -24254,6 +24254,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-grace-give-q4es. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the clip gate on the first video ($0.50)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-grace-give-q4es: Grace's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
     }
    ],
    "prompt": {
@@ -24265,7 +24269,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-give-q4es in data/board.json with its history. Your first push is the commit board: start c-anim-grace-give-q4es.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Redo with wan\n\nThe animation: Grace, Giving (support moves) (body state give). Its video is clip grace_give (data/clips/grace-give.js, art/clips/grace-give.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-give-q4es. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Giving (support moves), then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-grace-give-q4es"
+   "after": "t-anim-grace-give-q4es",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-grace-squeeze-qxim",
@@ -25276,6 +25281,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+   "title": "Animation note: Grace, Dodge",
+   "first": "2026-11-21T09:15:53-08:00",
+   "last": "2026-11-21T09:47:42-08:00",
+   "tags": [
+    "anim-grace-give-q4es"
+   ],
+   "cards": [
+    "c-anim-grace-dodge-p7wh",
+    "c-anim-grace-give-q4es",
+    "c-anim-grace-squeeze-qxim",
+    "c-anim-grace-cubepop-tvik",
+    "c-wanch2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T09:18:43-08:00",
@@ -25352,19 +25373,6 @@
     "b-board-guideplanned",
     "c-guidegen",
     "b-board-guidegen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
-   "title": "Animation note: Grace, Dodge",
-   "first": "2026-11-21T09:15:53-08:00",
-   "last": "2026-11-21T09:17:07-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-grace-dodge-p7wh",
-    "c-anim-grace-give-q4es",
-    "c-anim-grace-squeeze-qxim",
-    "c-anim-grace-cubepop-tvik"
    ]
   },
   {
@@ -28705,8 +28713,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5199d74a38d5c27f1c2dc351bdd8cc7e3fbb10f2",
- "synced_at": "2026-11-21T17:46:56+00:00",
+ "synced": "4aa2212e099de7766ed567ec6a18df494b5168f6",
+ "synced_at": "2026-11-21T17:49:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
