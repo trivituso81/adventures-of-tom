@@ -150,6 +150,8 @@ class H(BaseHTTPRequestHandler):
                 ims = b.get('images') if isinstance(b, dict) else None
                 ok = ok and isinstance(ims, list) and 1 <= len(ims) <= 5 and all(i.get('type') == 'image_url' and str(i.get('url', '')).startswith('data:') for i in ims)
             if not ok: return self._send(400, {'error': 'bad request shape'})
+            if 'REFUSE' in str(b.get('prompt')):   # artfallback1: a generator refusal (content policy): HTTP 400 and no picture
+                LOG.append({'xai': self.path, 'refused': True, 'prompt': b['prompt'][:80]}); return self._send(400, {'error': 'content policy'})
             LOG.append({'xai': self.path, 'refs': len(b.get('images') or []), 'prompt': b['prompt'][:80], 'ar': b.get('aspect_ratio'), 'res': b.get('resolution'), 'refhash': [hashlib.sha1(i['url'].split(',', 1)[-1].encode()).hexdigest()[:10] for i in (b.get('images') or [])]})
             return self._send(200, {'data': [{'b64_json': base64.b64encode(png()).decode(), 'mime_type': 'image/png'}]})
         self._send(404)

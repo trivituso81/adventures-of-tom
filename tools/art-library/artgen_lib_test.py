@@ -24,7 +24,7 @@ async def main():
     open(folder + '/results/%s/20261120T010000.png' % ID, 'wb').write(png()); open(folder + '/results/%s/20261120T010000.png' % OLD, 'wb').write(png())
     now = int(time.time() * 1000)
     prompts = {e['id']: e for e in json.load(open(ROOT + '/data/art-prompts.json'))['entries']}
-    idx = {'results': [{'key': ID + '@20261120T010000', 'id': ID, 'file': 'results/%s/20261120T010000.png' % ID, 't': now, 'prompt': prompts[ID]['prompt'], 'refs': prompts[ID]['refs'], 'card': 't-heistart', 'cost': .06,
+    idx = {'results': [{'key': ID + '@20261120T010000', 'id': ID, 'file': 'results/%s/20261120T010000.png' % ID, 't': now, 'prompt': prompts[ID]['prompt'], 'refs': prompts[ID]['refs'], 'card': 't-heistart', 'cost': .06, 'svc': 'wan', 'try': 1,
                         'qa': {'score': .667, 'yes': 2, 'of': 3, 'model': 'm', 'runs': 3, 'spent': .01, 'items': [{'id': 'f_bg', 'q': 'Does the background match?', 'kind': 'fixed', 'yes': False, 'why': 'a floor line'}, {'id': 'f_one', 'q': 'Is this one single image?', 'kind': 'fixed', 'yes': True, 'why': ''}, {'id': 'p1', 'q': 'Is there a red hat?', 'kind': 'prompt', 'yes': True, 'why': ''}]}},
                        {'key': OLD + '@20261120T010000', 'id': OLD, 'file': 'results/%s/20261120T010000.png' % OLD, 't': 1, 'prompt': 'p', 'refs': [], 'card': 'x', 'cost': .04}]}
     # the second record is older than any decision of its entry only if that entry has a decision; make sure by checking the repo data
@@ -47,6 +47,8 @@ async def main():
             qt = await pg.inner_text('#rvqa')
             ok('QA 2 of 3' in qt and 'Does the background match? (a floor line)' in qt and 'Passed (2)' in qt, 'the review viewer shows the QA: score, failed line with reason, passed folded: %s' % qt.replace('\n', ' | '))
             ok(await pg.evaluate("()=>{const q=document.getElementById('rvqa').getBoundingClientRect(),n=document.getElementById('rvok').getBoundingClientRect();return n.bottom<=innerHeight+1&&q.height<=100}"), 'the QA block is short and APPROVE stays on the screen at 390x844')
+            ok('made by WAN (try 1)' in await pg.inner_text('#rvsub'), 'artfallback1: the review shows which service made the picture: %s' % await pg.inner_text('#rvsub'))
+            ok('made by WAN (try 1)' in await pg.evaluate("(id)=>renderCard(ENTRY[id])", ID) and 'Stopped after 4 tries' not in await pg.evaluate("(id)=>renderCard(ENTRY[id])", ID), 'and so does the entry\'s result list in the Library')
             await pg.screenshot(path=SHOTS + '/artgen-lib-review.png')
             if old_dec:
                 ok(await pg.evaluate("(id)=>(RES[id]||[]).length", OLD) == 0, 'a picture older than the entry\'s last decision is not imported')
@@ -58,6 +60,7 @@ async def main():
             e = next(x for x in doc['entries'] if x['id'] == ID)
             ok(e['status'] == 'approved' and e['versions'][-1].get('srv') == ID + '@20261120T010000' and e['versions'][-1]['from'] == 'v1', 'APPROVE writes srv on the version record: %s' % e['versions'][-1])
             ok(e['versions'][-1].get('qa') == .667 and e['versions'][-1].get('qaFail') == ['f_bg'], 'and the QA score and the failed question ids (the record of QA against Tom): %s' % {k: e['versions'][-1].get(k) for k in ('qa', 'qaFail')})
+            ok(e['versions'][-1].get('svc') == 'wan' and e['versions'][-1].get('try') == 1, 'artfallback1: the approval records the service and try: %s' % {k: e['versions'][-1].get(k) for k in ('svc', 'try')})
             # reload: nothing is imported twice
             await pg.goto(base); await pg.wait_for_selector('#tabs .tab'); await pg.wait_for_timeout(1200)
             ok(await pg.evaluate("(id)=>(RES[id]||[]).length", ID) == 1, 'a second visit does not import it again')

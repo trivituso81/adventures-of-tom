@@ -77,7 +77,7 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 
 tmp = tempfile.mkdtemp()
 repo = os.path.join(tmp, 'repo'); out = os.path.join(tmp, 'out')
-for rel in ['tools/art-library/wangen.py', 'tools/art-library/wangen-jobs.json', 'tools/art-library/prompts/hero-leftfacing-magenta-v1.txt', 'tools/art-library/prompts/wan-grace-guard-v1.txt', 'art/raw/characters/grace-hero-v1.png']:
+for rel in ['tools/art-library/wangen.py', 'tools/art-library/falq.py', 'tools/art-library/wangen-jobs.json', 'tools/art-library/prompts/hero-leftfacing-magenta-v1.txt', 'tools/art-library/prompts/wan-grace-guard-v1.txt', 'art/raw/characters/grace-hero-v1.png']:
     os.makedirs(os.path.dirname(os.path.join(repo, rel)), exist_ok=True); shutil.copy(os.path.join(ROOT, rel), os.path.join(repo, rel))
 
 # W1 dry run

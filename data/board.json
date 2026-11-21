@@ -25596,13 +25596,13 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
-   "next": "Copy the prompt into a new conversation in the Project on Claude Sonnet 5.5, effort medium. It builds the fallback rule in claude/art-fallback-plan.md; no paid pictures are made.",
+   "next": "Built and tested without a paid call. The first WAN picture is made by your next Generate on a picture with 2 earlier rejects; see your card Look for made by xAI or WAN in the Art Library.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
-    "opening": "\"Can we make a rule when it comes to auto generation of assets and mainly images\""
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-artfallback in data/board.json\""
    },
    "history": [
     {
@@ -25616,6 +25616,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Claude (artfallback1): built the fallback exactly as claude/art-fallback-plan.md says: xAI tries 1 and 2, WAN 2.7 on fal for the next 2 with the last prompt word for word and the same references, then the entry stops and the run adds one Tom card (a reference picture) that blocks one Claude remake card. Shared fal module tools/art-library/falq.py (wangen.py imports it), svc and try on every result and reject, \"made by xAI\" or \"made by WAN\" in the Art Library, report tools/art-library/artsvc_report.py, FAL_KEY passed to art-gen, WAN spend logged to data/costs.json. Tested with the stand-ins only. One open fact: the fal input fields for wan/v2.7 could not be read here, so a first real call may need a one-line fix (a 422 about the request shape counts no try). Details: claude/art-fallback-plan.md Built."
     }
    ],
    "prompt": {
@@ -25626,7 +25630,8 @@
     "model": "Claude Sonnet 5.5 (row B: written steps in claude/art-fallback-plan.md, tests catch mistakes)",
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-artfallback in data/board.json, history included, and claude/art-fallback-plan.md (the approved rule and the build list). Your first push is the commit board: start c-artfallback.\n\nBuild the picture generator fallback exactly as claude/art-fallback-plan.md says: Art Library pictures go to xAI first; after 2 failed xAI tries on the same entry (counted on the entry's rejects, Tom's rejects of generated results plus generator refusals, never his upload rejects, and old rejects with no service count as xAI) the next try goes to WAN 2.7 on fal with the last prompt word for word and the same reference pictures; after 2 failed WAN tries the entry stops and the run adds a Tom card asking for a reference picture that blocks a Claude remake card. Record the service on every result and reject, show it in the Art Library review, and add the report by service and try number. Reuse the fal code in tools/art-library/wangen.py through one shared module, do not copy it. Pass FAL_KEY to the art-gen Action. Log WAN spend like the other spending Actions (docs/COSTS.md).\n\nMake no paid call: test with the fal stand-in (FAL_QUEUE) and extend tools/art-library/artgen_test.py for every rule in the plan's table. Run python3 tools/smoke.py and the board tests. Add the CLAUDE.md paragraph (artfallback1), the plan's Built section, and a docs/CHANGES.md heading ## artfallback1. Give this card after: a Tom card (ask pictures, fyi true) saying where he will see \"made by xAI\" or \"made by WAN\" in the Art Library the next time he presses Generate. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-artfallback-seen"
   },
   {
    "id": "b-board-artfallback",
@@ -25957,6 +25962,41 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-savedportraits in data/board.json, history included. Your first push is the commit board: start c-idea-savedportraits.\n\nTom made this card himself with New card on the board. His words: \"I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-savedportraits with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-artfallback-seen",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "pictures",
+   "fyi": true,
+   "title": "Look for made by xAI or WAN in the Art Library",
+   "next": "Nothing is needed now. The next time you press Generate on a picture in ADMIN > ART LIBRARY, each result shows \"made by xAI (try 1)\" or \"made by WAN (try 1)\" under the picture in the entry's list and at the top of the full-screen review. The four open story gates (Props tab, Story gates) have already missed 2 or more times on xAI, so their next try goes to WAN: open one with the button below, press Generate, and look for \"made by WAN\". If WAN misses twice, the entry shows \"Stopped after 4 tries\" and a card asks you for a reference picture.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by c-artfallback"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-artfallback (artfallback1 shipped)."
+    }
+   ],
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "prop-gate-town-school-open",
+      "prop-gate-jpark-barn-open",
+      "prop-gate-blvd-studio-open",
+      "prop-gate-backlot-stage7-open"
+     ],
+     "label": "Open the four open gates"
+    }
+   ]
   }
  ],
  "sessions": [

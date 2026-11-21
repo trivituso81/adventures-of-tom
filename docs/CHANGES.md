@@ -1,3 +1,14 @@
+## artfallback1 (2026-11-21): Art Library pictures go to xAI first, to WAN after 2 misses, and stop after 4
+
+Card c-artfallback. Tom (11-21 09:49): "we should use XAI as the default for images, but then if there are more than two failed attempts with XAI, then we should switch the image service to WAN." Plan: claude/art-fallback-plan.md (its Built section lists the decisions).
+| | |
+|---|---|
+| Rule | Counted on the entry's `rejects`: 2 xAI failures, then WAN 2.7 on fal with the last prompt word for word and the same reference pictures, then after 2 WAN failures the entry stops. A failure is Tom's reject of a result or a generator refusal or error with no picture; his own upload rejects never count; old rejects with no `svc` count as xAI. |
+| Built | `plan_service` and the `stopped` state in `artgen.py`; the fal queue code moved to one shared module `tools/art-library/falq.py` (`wangen.py` imports it, nothing copied); `svc` and `try` on every result and reject; refusals written to the entry as `auto` rejects; one Tom card and one Claude card per stopped entry (`t-artstop-<id>`, `c-artstop-<id>`); `FAL_KEY` passed to the `art-gen` Action; WAN spend appended to `usage` in `data/costs.json`. |
+| Library | "made by xAI" or "made by WAN (try n)" on each result and in the review; a banner on a stopped entry; `svc` and `try` written next to approve and reject. |
+| Report | `python3 tools/art-library/artsvc_report.py`: approved, rejected, refused and share approved, by service and try number. |
+| Tests | `artgen_test.py` section 7 (every row of the plan's rule table, the ladder in `art.html` run in node, stand-in xAI and fal, stop cards checked by `board_check.py`), `wangen_test.py` and `artgen_lib_test.py` still pass. No paid call was made; the first real WAN picture is Tom's tap. |
+
 ## anim-tom-loungepass-lf2z (2026-11-21): Tom's Lounge Pass Flex is a new video: he holds the card up, smiles at you, it sparkles, then he swats the monster with it like a snooty fancy lady
 
 Card c-anim-tom-loungepass-lf2z. Tom's note (Battle Guide, build b3s17a): "He should hold it up and look to the viewer and smile, and there should be like a little like ding sound with like a sparkle or reflection of light or something, like in a cartoon in the top right corner of the card, and then he should, and like sort of a fancy lady like way, swat the monster with the card like he's being extra snooty".

@@ -28,3 +28,30 @@ Decision made here: rejects already on entries before this build have no `svc` a
 5. Costs: append WAN calls to the costs `usage` log like the other spending Actions (docs/COSTS.md row 2).
 6. Tests: extend `tools/art-library/artgen_test.py` (ladder: 0, 1, 2 xAI rejects, 1 and 2 WAN rejects, upload rejects ignored, refusal counts, old rejects without `svc` count as xAI, stop state) with a fal stand-in (`FAL_QUEUE` env, as `wangen_test.py` does). No paid call in the session: the first real WAN picture is Tom's tap.
 7. Docs: a CLAUDE.md paragraph (artfallback1) under artgen2, a docs/CHANGES.md entry, this file's Built section.
+
+## Built (artfallback1, 2026-11-21, card c-artfallback)
+
+Built as the plan says, with these decisions where the plan left a choice. No paid call was made; every test uses the stand-in xAI (`stub.py`) and a stand-in fal queue (`FAL_QUEUE`, `FAL_API`) in `tools/art-library/artgen_test.py`.
+
+| Plan item | What was built |
+|---|---|
+| 1 Chooser, fal client, stop state | `plan_service(entry)` in `artgen.py` (2 xAI tries, then WAN, then stop); `classify` returns `stopped` ("Stopped after 4 tries: needs your reference picture") and a `svc` and `try` on every make row. The fal queue code (price, send, poll, download, errors, key scrubbing) moved out of `wangen.py` into `tools/art-library/falq.py`; `wangen.py` and `artgen.py` both import it, nothing is copied. WAN calls: `fal-ai/wan/v2.7/edit` with the references as data addresses, `fal-ai/wan/v2.7/text-to-image` with none, the last prompt word for word, `num_images` 1, and for text-to-image an `image_size` from the entry's shape (long side 1024). The live fal price is read before each call and the higher of it and the $0.08 estimate is booked and counted against the run's cap. The picture fal returns (often a JPEG) is kept as a real PNG. |
+| 2 `art.html` | `svcPlan` (same rule, tested against the Python in node), "made by xAI" or "made by WAN (try n)" on each result in the entry and in the review, `svc` and `try` (or `up` for his own upload) written next to every approve and reject, the stopped banner on a stopped entry. |
+| 3 Stop cards | When an entry is stopped (found stopped when asked for, or stopped by this run's own failures) the run adds `t-artstop-<id>` (ask pictures, link to the entry, `done_when.art_approved`, blocks the Claude card) and `c-artstop-<id>` (Opus 5.5 medium, row D, waits on Tom). Ids are fixed per entry, so never a second pair; the archive is checked too. The cards pass `tools/board_check.py`. |
+| 4 Action | `art-gen.yml` passes `FAL_KEY`, and checks out `data/costs.json` and `data/board-archive.json`. |
+| 5 Costs | A run that spent on WAN appends one row to `usage` in `data/costs.json` (service fal, the estimate booked, the entry ids, the run address). Fact: no other Action appends to `usage` yet (COSTS.md row 2 is still open), so this is the first; xAI spend is not logged by this build. |
+| 6 Tests | `artgen_test.py` section 7: the ladder for 0, 1, 2 xAI rejects, 1 and 2 WAN rejects, upload rejects ignored, refusals counted, old rejects with no service counted as xAI, the stop and `genreset`; the same cases in `art.html` via node; end to end through the stand-ins. Report: `tools/art-library/artsvc_report.py` (by service and try number). |
+
+Decisions made here (the plan did not say):
+
+| Question | Decision |
+|---|---|
+| What counts as a "generator refusal or error with no picture" | An xAI or fal answer that is a 4xx other than the key (401, 403) and a rate limit (429), or an answer with no picture. A 5xx, a timeout, a missing or refused key, or fal saying the request body does not fit its schema (a 422 whose detail lists fields) never counts: nothing was judged about the prompt, so burning a try would be wrong. Those runs report the failure and write nothing to the entry. |
+| How a refusal is recorded | A reject on the entry with `auto: true`, `from: "gen"`, `svc`, `try`, a note, and the time as `gat` (not `at`), so it counts as a failed try but is never read as Tom's decision on a picture (the Library's "waiting for review" logic only reads `at`). |
+| Tom's own uploads | New reject records of an upload carry `up: true` and never count. Rejects of uploads made before this build have no marker and cannot be told apart, so they count as xAI. |
+| How a stopped entry starts again | The remake card's session sets the entry's `genreset` to the current time in milliseconds; only failures after it count. |
+| Try number | `try` is the try within the service (xAI 1 or 2, WAN 1 or 2), so the report has four rows. Records with no `try` are numbered by their place among the entry's records of that service, so old xAI rows run past 2 in the report. |
+| What the stop card asks Tom | UPLOAD MY OWN on the entry and APPROVE: approving saves the picture under `art/raw`, where the Claude card can read it (a picture left unapproved lives only in his browser). |
+
+Open fact for the first real WAN picture (Tom's tap): the fal input schema of `wan/v2.7/edit` and `wan/v2.7/text-to-image` could not be read in this session (the page fetch needed approval nobody gave), so the body fields are the ones the other fal image models use (`prompt`, `image_urls`, `num_images`, `image_size`). If fal answers 422 with a field list, the run reports it as a bug and counts no try; the fix is one change to `wan_make` in `artgen.py`.
+

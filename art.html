@@ -104,6 +104,7 @@ header{padding:10px 28px}
 #rvchips button.on{background:#7b6cff;border-color:#a89dff}
 #rvchips button.ap{border-color:#2f9e63}#rvchips button.rj{border-color:#b4414f}
 #rvnote{margin:6px 0 8px;padding:10px 12px}
+  .chip.c-svc{background:#2a2540;color:#cfcbe8}
 #rvqa{max-height:96px;overflow:auto;font-size:12px;line-height:1.35;margin:0 0 6px;color:#cfcbe8}#rvqa b{color:#fff}#rvqa .qf{color:#ff9aa6;margin-top:2px}#rvqa summary{cursor:pointer;color:#9fe3b9}#rvqa .qp{color:#9fe3b9;margin-top:2px}
 .rvbtns{display:flex;gap:10px}.rvbtns button{flex:1;min-height:54px;font-size:17px;letter-spacing:.02em}
 #rvmsg{min-height:18px;margin:2px 0}
@@ -272,6 +273,7 @@ function renderCard(e){
   const apr=n=>(e.versions||[]).some(v=>v.from==='v'+n), rjc=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
   return '<div class="card" data-id="'+id+'">'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
+  (svcPlan(e).svc==='stop'&&e.status!=='approved'?'<div class="blk">Stopped after 4 tries: needs your reference picture. Two tries on xAI and two on WAN missed, so the job will not make it again by itself. Upload your own picture below (UPLOAD MY OWN) and approve it, and Claude remakes this one from it.</div>':'')+
   (inGame(e)?'<div class="ingame">In game, not approved: the game shows '+esc(inGame(e))+' now. That picture was never approved here. Approving this entry clears the flag (Claude then installs the approved picture).</div>':'')+
   ownHtml(e,id)+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
@@ -281,7 +283,7 @@ function renderCard(e){
   '<label class="ownadd" style="margin:0" title="Use your own picture instead of generating one. It goes through the same approve or reject step.">UPLOAD MY OWN<input type="file" accept="image/*" data-upl="'+id+'" style="display:none"></label></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
   (rs.length?'<div class="hint">Tap a picture to see it large, then approve or reject.</div>':'')+
-  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt="Result v'+r.n+'"><span>v'+r.n+'</span>'+(r.up?' <span class="chip c-wait">my upload</span>':'')+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+' <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div>'+
+  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt="Result v'+r.n+'"><span>v'+r.n+'</span>'+(r.up?' <span class="chip c-wait">my upload</span>':' <span class="chip c-svc">'+esc(svcLabel(r))+'</span>')+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+' <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div>'+
   ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
 }
@@ -519,14 +521,14 @@ async function decide(kind,resKey,btn){
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
       setMsg(id,'Saving the prompt...');
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); },'Art Library: '+id+' approved (v'+k+')');
-      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); delete EDITS[id]; saveEdits();
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},svcRec(r),qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},svcRec(r),qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); delete EDITS[id]; saveEdits();
       MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen'+(clipChapterGroup(e.group)?' and open ADMIN > BATTLE LAB > '+e.group.toUpperCase()+' REVIEW':'')+'.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
-      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{},svcRec(r),qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{},svcRec(r),qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
     refreshItem(id); return true;
@@ -550,6 +552,7 @@ function rvDraw(){
   const left=RV.q.filter(x=>ST[x]==='wait').length;
   $('rvcount').textContent=RV.mode==='queue'?(RV.i+1)+' of '+RV.q.length+' in this queue · '+left+' still waiting on you':'Not in the waiting queue';
   const r=rs[RV.v]; if(r&&!e.clip) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
+  if(r&&!e.clip&&svcLabel(r)) $('rvsub').textContent+=' · '+svcLabel(r);
   clipRvDraw(e,r);
   const ap=x=>x.gh?x.state==='approved':(e.versions||[]).some(v=>v.from==='v'+x.n), rj=x=>x.gh?x.state==='rejected':(e.rejects||[]).some(v=>v.from==='v'+x.n);
   $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x)?'ap ':rj(x)?'rj ':'')+'">'+(x.label||'v'+x.n)+(ap(x)?' approved':rj(x)?' rejected':x.gh&&x.state==='waiting'?' waiting':'')+'</button>').join('');
@@ -570,6 +573,15 @@ function rvQa(r){
 }
 // artgen2: what decide() writes next to a decision on a picture that was judged: the score and which questions failed (data/art-prompts.json is the record of QA against Tom)
 const qaRec=r=>r&&r.qa&&r.qa.items?{qa:r.qa.score,qaFail:r.qa.items.filter(i=>!i.yes).map(i=>i.id)}:{};
+// artfallback1: which service made a picture and which try it was. Tries 1 and 2 go to xAI, the next 2 to WAN (tools/art-library/artgen.py plan_service is the same rule),
+// then the entry stops. A result or a reject with no service was made on xAI; a picture of Tom's own (r.up) has none. svcRec is what decide() writes next to a decision.
+// svcplan:begin
+const SVC_NAME={xai:'xAI',wan:'WAN'};
+function svcPlan(e){ const reset=+(e.genreset||0), rs=(e.rejects||[]).filter(r=>!r.up&&(!reset||+(r.at||r.gat||0)>reset)); const x=rs.filter(r=>(r.svc||'xai')==='xai').length, w=rs.filter(r=>r.svc==='wan').length; if(w>=2) return {svc:'stop',try:0,xai:x,wan:w}; if(x>=2) return {svc:'wan',try:w+1,xai:x,wan:w}; return {svc:'xai',try:x+1,xai:x,wan:w}; }
+// svcplan:end
+const svcOf=r=>r&&!r.up?(r.svc||'xai'):'';
+const svcLabel=r=>{ const v=svcOf(r); return v?'made by '+SVC_NAME[v]+(r.try?' (try '+r.try+')':''):''; };
+const svcRec=r=>r&&r.up?{up:true}:r&&r.svc?{svc:r.svc,try:r.try||0}:{svc:'xai'};
 function rvGo(d){ if(RV.q.length<2) return; RV.i=(RV.i+d+RV.q.length)%RV.q.length; RV.v=0; rvDraw(); }
 function rvVer(d){ const n=(RES[rvId()]||[]).length, v=RV.v+d; if(v<0||v>=n) return; RV.v=v; rvDraw(); }
 async function rvDecide(kind){
@@ -649,7 +661,7 @@ async function artgenImport(manual){
     const ds=[].concat(e.versions||[],e.rejects||[]); if((r.t||0)<=Math.max(0,...ds.map(x=>+x.at||0))){ seen.push(r.key); continue; }
     try{
       const ir=await fetch(ARTGEN_BASE()+r.file,{cache:'no-store'}); if(!ir.ok) continue;
-      await addResult(r.id,await ir.blob(),r.prompt,r.refs||[],Object.assign({t:r.t,srv:r.key},r.qa&&r.qa.items?{qa:r.qa}:{})); seen.push(r.key); n++;
+      await addResult(r.id,await ir.blob(),r.prompt,r.refs||[],Object.assign({t:r.t,srv:r.key},r.svc?{svc:r.svc,try:r.try||0}:{},r.qa&&r.qa.items?{qa:r.qa}:{})); seen.push(r.key); n++;
     }catch(err){ console.warn('artgen import failed',r.key,err); }
   }
   LS.set('aot-artgen-seen',JSON.stringify(seen.slice(-500)));

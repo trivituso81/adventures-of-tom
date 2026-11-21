@@ -45,7 +45,7 @@ The Dates and Show controls at the top apply to every screen. "Game tools only" 
 | # | Step |
 |---|---|
 | 1 | A `costs-sync` Action, once a day: read ElevenLabs credits (`/v1/user/subscription`, the same call as `tools/voice-learn/voicegen.py`) with the repo secret and write a read balance into `balances`. Do the same for fal and xAI only if their APIs give a balance to the keys the repo has; if not, say so on the card |
-| 2 | Every Action that spends (art-gen, clip-gen, clip-gate, voice-gen, wan-gen) appends what the run cost to `usage`, so the estimate of a prepaid balance becomes paid less logged use for all of them |
+| 2 | Every Action that spends (art-gen, clip-gen, clip-gate, voice-gen, wan-gen) appends what the run cost to `usage`, so the estimate of a prepaid balance becomes paid less logged use for all of them (artfallback1, 2026-11-21: art-gen already appends its WAN pictures to `usage` as service `fal`, the estimate booked per run; xAI picture spend and the other Actions are still to do) |
 | 3 | Tom's notes from card t-costs1look |
 | 4 | Test with stand-in servers. Never run a paid call from a session |
 

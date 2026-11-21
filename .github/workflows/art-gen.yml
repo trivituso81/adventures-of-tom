@@ -3,7 +3,9 @@ name: art-gen
 # artgen1. Makes every picture of a board card on xAI when Tom taps "Generate all" on the card (tools/art-library/artgen.py). The page saves
 # data/board.json with the commit message "board: generate <card id>"; this workflow runs on that push only (every other push skips it without
 # a checkout). It never approves anything: the pictures wait on branch `artgen` (never merged, never served) and the Art Library imports them
-# for Tom's APPROVE or REJECT. Needs the repo secret XAI_API_KEY (never printed). Sessions can run it by hand (workflow_dispatch, dry_run true
+# for Tom's APPROVE or REJECT. Needs the repo secret XAI_API_KEY (never printed).
+# artfallback1: after 2 misses on xAI a picture's next try goes to WAN 2.7 on fal (repo secret FAL_KEY, never printed; claude/art-fallback-plan.md); the run also writes generator
+# refusals to the entries, adds the stop cards and logs WAN spend to data/costs.json. Sessions can run it by hand (workflow_dispatch, dry_run true
 # by default); the first paid run is Tom's tap. art/raw is NOT checked out (it holds every approved picture); a reference picture is read with `git show HEAD:<path>`,
 # which fetches just that file. Plan: claude/artgen-plan.md.
 
@@ -66,6 +68,8 @@ jobs:
             /data/art-prompts.json
             /data/board.json
             /data/art-requests.json
+            /data/costs.json
+            /data/board-archive.json
             /tools/art-library/
             /tools/clip-gate/vision.py
             /.github/
@@ -103,6 +107,7 @@ jobs:
         if: ${{ inputs.replay == '' || inputs.replay == '0' }}
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
           CARD: ${{ inputs.card }}
           IDS: ${{ inputs.ids }}
           CAP: ${{ inputs.cap }}

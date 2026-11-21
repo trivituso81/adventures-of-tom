@@ -23,19 +23,11 @@ the fal answer (<what>-r<rev>.json), wangen-report.json, state.json.
 
 Env: FAL_KEY, FAL_QUEUE (stand-in for tests; default https://queue.fal.run), FAL_API (default https://api.fal.ai), WANGEN_POLL."""
 import os, sys, io, json, time, base64, argparse, datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from falq import say, Stop, KeyRefused, Gone, data_uri, shown, Fal, apply_live, POLL_S, POLL_MAX_S   # artfallback1: the fal queue code is shared with artgen.py
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
-POLL_S = float(os.environ.get('WANGEN_POLL') or 5)
-POLL_MAX_S = 20 * 60
-
-
-def say(*a):
-    print(time.strftime('%H:%M:%S'), *a, flush=True)
-
-
-class Stop(Exception): pass
-class Gone(Stop): pass   # the request is dead (fal reported an error): its pending record is dropped; the ledger keeps the estimate
 
 
 def load_jobs(repo):
@@ -90,10 +82,6 @@ def pad_frame(png_bytes, k):
     b = io.BytesIO(); out.save(b, 'PNG'); return b.getvalue()
 
 
-def data_uri(png):
-    return 'data:image/png;base64,' + base64.b64encode(png).decode()
-
-
 def build(job, repo):
     """The request body and the bytes of any framed picture. Images are read from the repo checkout."""
     body = dict(job['input'])
@@ -115,69 +103,6 @@ def build(job, repo):
         say('frame: %s -> %dx%d, %s' % (job['frame'], W, H, how))
         for k in job.get('frame_fields') or ['start_image_url']: body[k] = data_uri(frame)
     return body, frame
-
-
-def shown(body):
-    return {k: ('<data uri, %d KB>' % (len(v) * 3 // 4 // 1024) if isinstance(v, str) and v.startswith('data:') else
-                ['<data uri, %d KB>' % (len(x) * 3 // 4 // 1024) for x in v] if isinstance(v, list) and v and str(v[0]).startswith('data:') else v)
-            for k, v in body.items()}
-
-
-class Fal:
-    def __init__(self, key, queue, api):
-        import requests
-        self.key, self.queue, self.api, self.s = key, queue.rstrip('/'), api.rstrip('/'), requests.Session()
-        self.hdr = {'Authorization': 'Key ' + key, 'Content-Type': 'application/json'}
-
-    def clean(self, t):
-        return str(t).replace(self.key, '[key]')[:400] if self.key else str(t)[:400]
-
-    def price(self, endpoint):
-        """The live unit price (free call; also proves the key works). Returns (unit_price, unit) or None."""
-        r = self.s.get(self.api + '/v1/models/pricing', params={'endpoint_id': endpoint}, headers=self.hdr, timeout=30)
-        if r.status_code in (401, 403): raise Stop('fal refused the key (%d): %s' % (r.status_code, self.clean(r.text)))
-        if not r.ok: say('price lookup said %d: %s' % (r.status_code, self.clean(r.text))); return None
-        p = (r.json().get('prices') or [None])[0]
-        return (float(p['unit_price']), p.get('unit')) if p else None
-
-    def send(self, endpoint, body):
-        for tr in range(4):
-            r = self.s.post(self.queue + '/' + endpoint, headers=self.hdr, data=json.dumps(body), timeout=180)
-            if r.status_code in (429, 503) and tr < 3: time.sleep(int(r.headers.get('Retry-After') or 5)); continue   # not accepted: nothing charged
-            break
-        if r.status_code in (401, 403): raise Stop('fal refused the key (%d): %s' % (r.status_code, self.clean(r.text)))
-        if not r.ok: raise Stop('fal said %d: %s' % (r.status_code, self.clean(r.text)))
-        j = r.json()
-        if not j.get('request_id'): raise Stop('fal gave no request id: ' + self.clean(r.text))
-        return {'rid': j['request_id'], 'status_url': j['status_url'], 'response_url': j['response_url']}
-
-    def wait(self, pend):
-        t0 = time.time()
-        while time.time() - t0 < POLL_MAX_S:
-            try: r = self.s.get(pend['status_url'], headers=self.hdr, timeout=60)
-            except Exception: time.sleep(POLL_S); continue
-            if r.status_code in (401, 403): raise Stop('fal refused the key while waiting (%d); the request is kept: run again' % r.status_code)
-            j = r.json() if r.ok else {}
-            if j.get('status') == 'COMPLETED':
-                if j.get('error'): raise Gone('fal could not make it: %s' % self.clean(j.get('error')))
-                break
-            time.sleep(POLL_S)
-        else: raise Stop('not ready after 20 minutes; the request is kept: run again (no new charge)')
-        r = self.s.get(pend['response_url'], headers=self.hdr, timeout=120)
-        if not r.ok: raise Stop('fal result said %d: %s' % (r.status_code, self.clean(r.text)))
-        return r.json()
-
-    def download(self, url):
-        if url.startswith('data:'): return base64.b64decode(url.split(',', 1)[1])
-        last = None
-        for tr in range(5):
-            try:
-                r = self.s.get(url, timeout=300)
-                if r.ok and len(r.content) > 1000: return r.content
-                last = 'HTTP %d, %d bytes' % (r.status_code, len(r.content))
-            except Exception as x: last = str(x)[:150]
-            time.sleep(2 + 3 * tr)
-        raise Stop('could not download the result (%s); the request is kept: run again (no new charge)' % last)
 
 
 def result_url(job, res):
@@ -220,8 +145,7 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
             live = fal.price(job['endpoint'])
             if live:
                 log('live fal price: $%s per %s' % (live[0], live[1]))
-                if job['kind'] == 'video' and live[1] and live[1].startswith('second'): est = max(est, round(live[0] * float(job['input']['duration']), 4))
-                elif live[1] in ('image', 'images', 'video', 'videos'): est = max(est, live[0])
+                est = apply_live(est, live, job['kind'], job['input'].get('duration'))
         except Stop as x: report['error'] = str(x); log('STOP: %s' % x); return 2, report
     report['estimate'] = est
     if done and os.path.exists(os.path.join(a.out, os.path.basename(done[-1]['file']))):
