@@ -29838,12 +29838,12 @@
    "id": "t-costs2keys",
    "title": "Optional: add fal and xAI keys for balance reads",
    "theme": "Tools",
-   "lane": "claude",
+   "lane": "tom",
    "col": "up",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Handed to Claude by Tom: instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
+   "next": "Optional, about 10 minutes. Skip it and nothing breaks: ElevenLabs is read by itself, fal and xAI show the last balance recorded less the use logged since. What this does: the daily job can only read your fal and xAI balances with a second, more powerful kind of key (a password that is allowed to see billing, not only to make pictures). PART 1, fal. 1) Open https://fal.ai/dashboard/keys and sign in. 2) Press the Create key button. 3) The form has a Scope choice with two options, API and ADMIN. Pick ADMIN (the one that is allowed to see billing); give it any name, such as costs. 4) Press Create, then copy the long key shown (it is shown once). 5) Open https://github.com/trivituso81/adventures-of-tom/settings/secrets/actions and press New repository secret. 6) Name: FAL_ADMIN_KEY. Secret: paste the key. Press Add secret. PART 2, xAI. 1) Open https://console.x.ai and sign in. 2) In the left menu open Management Keys (if you do not see it, your account may lack permission: skip xAI, fal alone is fine). 3) Create a Management key, copy it. Copy the Team ID shown on the same page. 4) On the same GitHub secrets page add two secrets: Name XAI_MANAGEMENT_KEY (paste the key) and Name XAI_TEAM_ID (paste the Team ID). PART 3. Open https://github.com/trivituso81/adventures-of-tom/actions/workflows/costs-sync.yml, press Run workflow, set dry_run to false, press the green Run workflow button. When it turns green open https://trivituso81.github.io/adventures-of-tom/costs.html#/services: fal and xAI should each say balance read today. If one still says Not read yet, the Needs a look list on the Overview page says why. If a console looks different from these steps, stop and tell Claude on the board what you see; nothing is lost.",
    "chat": {
     "url": "",
     "opening": "board"
@@ -29862,22 +29862,15 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:13.669Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Claude rewrote the steps in plain words (scope explained, exact buttons and links) after Tom's note: 'choose Admin scope means nothing to me'. Nothing was set up; keys are Tom's to add.",
+     "at": "2026-11-21T22:20:00.000Z"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "tag": "t-costs2keys",
-   "note": "instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
-   "prompt": {
-    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
-    "effort": "medium (a handed-over card is usually one piece of work)",
-    "text": "Read claude/handoff-rules.md. Tom handed you board card t-costs2keys with this note: instrutions unclear, eg, \"choose Admin scope\" means nothing to me. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "start": true
+   "changed": "2026-11-21"
   },
   {
    "id": "c-stale-tests",
