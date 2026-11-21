@@ -13458,6 +13458,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1f: Project docs moved into the repo: the last 10 large docs copied into claude/ (ability revamp plans, battle design, old changes and status notes)"
     }
    ],
    "chat": {
@@ -23337,6 +23341,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHJeCgoaH585hZBtik",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T23:22:37-08:00",
+   "last": "2026-11-20T23:48:09-08:00",
+   "tags": [
+    "projclean1f"
+   ],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
    "title": "Battle system stage 15: chapter 1 story switch",
    "first": "2026-11-20T23:19:07-08:00",
@@ -23379,16 +23395,6 @@
    "tags": [],
    "cards": [
     "c-fix-itembannerart-pics-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHJeCgoaH585hZBtik",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T23:22:37-08:00",
-   "last": "2026-11-20T23:22:37-08:00",
-   "tags": [],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -26159,8 +26165,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "9384d1924899bbca2ed5dfdf5d9c8952c26fab67",
- "synced_at": "2026-11-21T07:44:08+00:00",
+ "synced": "ff5f3b1ee9658b5676771dbbf95d18f6ba24b564",
+ "synced_at": "2026-11-21T07:49:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
