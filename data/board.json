@@ -22749,8 +22749,7 @@
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "tag": "wanch2",
    "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. It also removes the old painted-pose code for good (no longer drawn since idea-tomgrace).",
    "blocks": [
@@ -22786,6 +22785,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom's words from c-idea-tomgrace: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\". idea-tomgrace made the painted states unreachable for the four (B3_VIDEO_ONLY, video stand-ins) and retired tools/paint_state_test.py, so the purge no longer waits on every video passing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Watch the chapter 1 fights in videos (NEW 1 to NEW 6) is done."
     }
    ],
    "prompt": {
@@ -29869,8 +29872,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c7a19e5c8485c3c934469b3d506b52b0e50dd306",
- "synced_at": "2026-11-21T18:45:06+00:00",
+ "synced": "cc6e67752a5dd9bbdac90d3dc350499ec42b5f9b",
+ "synced_at": "2026-11-21T18:48:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
