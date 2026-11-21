@@ -18281,7 +18281,7 @@
   {
    "id": "c-probe-sonnet-high2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "tag": "probesonnethigh2",
    "title": "Probe: Sonnet high START route, second",
@@ -18292,12 +18292,17 @@
    "after": "nothing for Tom: end",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Throwaway probe added by c-startfix for the real START Sonnet High task. Retired in the same build."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:51:55.219Z"
     }
    ],
    "prompt": {
