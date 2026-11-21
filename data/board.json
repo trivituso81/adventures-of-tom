@@ -28640,6 +28640,34 @@
     "effort": "medium (the route, the checks, the bake and the tests are built; each video gets one written change)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2), then card c-wanch3 in data/board.json with its history and the Tom card that blocked it (t-wanch2-watch: his answer and note). Your first push is the commit board: start c-wanch3. First apply Tom's notes from t-wanch2-watch (one change per video, smallest change). Then the three that missed in wanch2, one try each, one change each, checked by plan 4.4: (1) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): the mop head sweeps below her feet line on Wan and on Kling; the words \"in front of her feet\" read as lower on the screen, so change only those words to \"beside her feet, level with them\" in a new prompt file wan-deedee-wetfloor-v2.txt. (2) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): she jumps two or three times; drop only the last sentence's \"she hops back to her spot and\" (the second hop) in wan-rose-giddyup-v2.txt. (3) Skeeter Swarm Darting Bite (clip-skeeter-bite): Grok never brings it back to its start pose (twice); make it as a wangen job on Wan 3.0 with the start picture art/clips/start/skeeter.png as both first and last frame (end_image_url forces the return), the MOTION part of the Art Library entry's prompt as written now, fit 640x480. Bake each video that passes (bake_clip.py, --fps 24 for Kling), wire it (B3_BODY_CLIPS, the kit row, or the foe row in data/b3-foes-ch01.js), purge what it replaces, test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $4 on fal. Build tag wanch3, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-hollowfence",
+   "tag": "hollowfence",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "up",
+   "next": "The wrapper trail test fails about half the time: an ordinary monster gets into the boss area by Boppy's fishing spot. Find why and fix it so the test passes 10 times in a row.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "auto": true,
+   "prompt": {
+    "what": "Finds why a Grump Hollow monster sometimes crosses the boss fence, fixes it, proves it with 10 test runs.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix whose cause is not known yet)",
+    "effort": "medium (a small area, one test shows it)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-hollowfence in data/board.json. Your first push is the commit board: start c-hollowfence.\n\npython3 tools/hollow_trail_test.py fails about half the time (2 of 4 runs on 2026-11-21, build 6068b7f): 'no monster stepped into the fence while chasing' and once 'every ordinary Hollow monster starts west of the fence (x<13)'. The Grump Hollow monster fence (monsterFence [13,0,23,21], b7Fenced) is meant to keep ordinary monsters out of the boss area by Boppy's fishing spot; sometimes one gets past x 13, or starts there. Run the test 10 times to measure, find why (a chase step, a respawn, a home position or a test timing problem), fix the cause so 10 runs in a row pass, run python3 tools/smoke.py, add a docs/CHANGES.md entry headed ## hollowfence, bump tags with bump_tags.py hollowfence --base origin/main, push to main, and set after on this card (a Tom play card only if something on screen changed).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Found while checking the status of the four Gemini fix cards (Tom: \"can you check the status of each fix?\"): hollow_trail_test failed 2 of 4 runs on the fence check; the wrapper fix itself passed."
+    }
+   ]
   }
  ],
  "sessions": [
