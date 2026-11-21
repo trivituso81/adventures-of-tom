@@ -22876,6 +22876,10 @@
     {
      "d": "2026-11-21",
      "t": "Session (Opus 5.5, medium): Tom's answer on t-wanch1-watch was All good with no note, so nothing to apply from it. The start commit carried the wrong conversation link by mistake; this is the right one."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as wanch2a: the old painted battle poses are gone from the code; the Bog Toad's Body Slam and the Skeeter's Mosquito Whine are videos"
     }
    ],
    "prompt": {
@@ -27955,10 +27959,23 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T11:46:00-08:00",
+   "tags": [
+    "clips",
+    "wanch2a"
+   ],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:44:17-08:00",
+   "last": "2026-11-21T11:45:26-08:00",
    "tags": [
     "b3s17a",
     "b3s17b",
@@ -28029,18 +28046,6 @@
    ],
    "cards": [
     "c-gem1v"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:35:03-08:00",
-   "tags": [
-    "clips"
-   ],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -31571,8 +31576,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "75623ceabec2ecc213d81b0b36b7fe1e710bb157",
- "synced_at": "2026-11-21T19:44:51+00:00",
+ "synced": "2cebccc72dc89b0a2b646ec48c091322a6796f54",
+ "synced_at": "2026-11-21T19:46:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
