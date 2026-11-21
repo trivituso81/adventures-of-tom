@@ -18333,8 +18333,19 @@
    "group": "New backgrounds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/battle/bg-29-grump-hollow-v1.png",
+     "date": "2026-11-21",
+     "from": "v1",
+     "at": 1795283174101,
+     "srv": "bg-29-grump-hollow@20261121T054025",
+     "qa": 1,
+     "qaFail": []
+    }
+   ],
    "rejects": [],
    "id": "bg-29-grump-hollow",
    "tab": "Battle",
