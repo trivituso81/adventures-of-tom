@@ -23322,6 +23322,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b (b3s17b) shipped: chapter 3 on Battle 3 with Vibe Points and tips; Boppy's loss coaching has a Battle 3 second line (unrecorded)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s17b: chapter 3's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -23893,7 +23897,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGtj38istztwz8E76R",
+    "url": "https://claude.ai/code/session_01RXeukGtj38istztwz8E76R",
     "opening": "started by START"
    },
    "prompt": {
@@ -23929,12 +23933,26 @@
     {
      "d": "2026-11-21",
      "t": "Session started on Claude Sonnet 5.5 (medium): building costsduo1a then costsduo1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T16:46:07+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGtj38istztwz8E76R",
+   "title": "AI Costs on the Duo: folded and unfolded layouts",
+   "first": "2026-11-21T16:49:30Z",
+   "last": "2026-11-21T16:49:30Z",
+   "tags": [],
+   "cards": [
+    "c-costsduo1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFEh2f6cJwL5RzcCLG",
    "title": "Old battle screen problems: check them in the new battle",
@@ -24013,6 +24031,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T08:49:10-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b"
+   ],
+   "cards": [
+    "c-b3s17"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
    "title": "AI Costs page: plans, balances, every charge, the total",
    "first": "2026-11-21T07:27:18-08:00",
@@ -24026,18 +24057,6 @@
     "c-costs1",
     "c-costs1icon",
     "c-costsduoplan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T08:09:08-08:00",
-   "tags": [
-    "b3s17a"
-   ],
-   "cards": [
-    "c-b3s17"
    ]
   },
   {
@@ -27360,8 +27379,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "25827cfaef2cdca0df6c9a7aa2bd97ae52cfe19e",
- "synced_at": "2026-11-21T16:46:09+00:00",
+ "synced": "a589712f511cac907b7aa438eb924404a08553fc",
+ "synced_at": "2026-11-21T16:49:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
