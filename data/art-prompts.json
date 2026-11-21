@@ -17511,7 +17511,7 @@
    "group": "Story gates"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -17562,6 +17562,19 @@
      "from": "claude",
      "at": 1795233383749,
      "file": "results/prop-gate-town-school-open/20261121T035408.png"
+    },
+    {
+     "date": "2026-11-21",
+     "note": "As per qa",
+     "from": "v1",
+     "at": 1795286514571,
+     "srv": "prop-gate-town-school-open@20261121T072848",
+     "svc": "xai",
+     "qa": 0.857,
+     "qaFail": [
+      "f_paint",
+      "p6"
+     ]
     }
    ],
    "id": "prop-gate-town-school-open",
