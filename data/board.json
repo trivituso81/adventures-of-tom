@@ -24763,7 +24763,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Two Wan tries missed the same way (her arms leave the frame). Next: one more Wan try with the figure shrunk to 80% inside the video, the change that kept her spread hands in frame on her victory. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
@@ -24788,7 +24788,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+    "url": "https://claude.ai/code/cse_01RXeukCkMPGRX9c6YtKLA2C",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24809,6 +24809,10 @@
     {
      "d": "2026-11-21",
      "t": "Ended without shipping (stop-loss, $1.00 spent, nothing handed to Tom). Retry 1 (wan-deedee-dodge-v2.txt, \"away to the right\" taken out): feet stayed down, but she ducked forward to the left, toward the monster, and her arm left the frame. Retry 2 (v3, one change: \"back to the right\"): right direction, feet down, but her flung arms ran off both edges and Wan drew a small object flying past. Arms out of the frame twice the same way. Next try below: same v3 prompt, figure shrunk to 80% inside the video (pad 0.8)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -24819,13 +24823,21 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one change to a prompt that nearly worked)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) is still the old painted pose. Two Wan 3.0 tries missed (card history): retry 1 ducked forward to the left and her arm left the frame; retry 2 (prompt tools/art-library/prompts/wan-deedee-dodge-v3.txt, \"leans her upper body back to the right\") went the right way with her feet planted, but her flung arms ran off both edges of the video and Wan drew a small object flying past her (results deedee-dodge-r2.mp4 and r3.mp4 on branch wangen).\n\nMake one more video on the family route (wan-gen Action, tools/art-library/wangen-jobs.json) with one change: job deedee-dodge rev 4, the same v3 prompt word for word, plus \"pad\": 0.8 (the change that kept her spread hands inside the frame on her victory, deedee-victory). Check every picture against the plan section 4.4 list and run the measured clip gate (judge() in tools/clip-gate/gate.py) before Tom sees anything; a clip that fails is not handed to him. If the flying object comes back and crosses her, that is a miss: stop and say so. Spend at most $1. Bake it (tools/clip-bake/bake_clip.py, kind state, figure rows 99.3, data/clips/deedee-dodge.js), point B3_BODY_CLIPS.deedee.dodge at it and remove Deedee's dodge row from B3_BODY_PAINT (purge rule), run python3 tools/b3_test.py s8, python3 tools/paint_state_test.py, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "rescue": {
+    "at": "2026-11-21T18:10:35+00:00",
+    "n": 1,
+    "why": "A session ended without shipping",
+    "url": "https://claude.ai/code/cse_01RXeukCkMPGRX9c6YtKLA2C",
+    "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
+   },
+   "started_at": "2026-11-21T18:10:35+00:00"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
    "tag": "anim-deedee-ko-yes1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Knocked out",
    "next": "Made in build anim-deedee-ko-yes1. Her already-paid second Wan knock-out video sits as close to the ground as Rose's approved one by the same measure, so it was baked at $0. Passed plan 4.4 and the clip gate. Her painted knock-out is purged. Next: your card Watch Deedee, Knocked out.",
@@ -24871,6 +24883,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-deedee-ko-yes1. Her already-paid second Wan knock-out video sits as close to the ground as Rose's approved one by the same measure, so it was baked at $0. Passed plan 4.4 and the clip gate. Her painted knock-out is purged. Next: your card Watch Deedee, Knocked out."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-ko-yes1: Deedee's knock-out is a video now: she wobbles and sits down on the ground"
     }
    ],
    "prompt": {
@@ -24882,13 +24898,14 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-ko-yes1 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-ko-yes1.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Make\n\nThe animation: Deedee, Knocked out (body state ko). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-ko-yes1. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Knocked out, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-deedee-ko-yes1"
+   "after": "t-anim-deedee-ko-yes1",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-deedee-give-yy1o",
    "tag": "anim-deedee-give-yy1o",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Giving (support moves)",
    "next": "Made in build anim-deedee-give-yy1o. Made again on Wan 3.0, prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, Giving (support moves).",
@@ -24934,6 +24951,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-deedee-give-yy1o. Made again on Wan 3.0, prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, Giving (support moves)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-give-yy1o: Deedee's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
     }
    ],
    "prompt": {
@@ -24945,13 +24966,14 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-give-yy1o in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-give-yy1o.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Deedee, Giving (support moves) (body state give). Its video is clip deedee_give (data/clips/deedee-give.js, art/clips/deedee-give.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-give-yy1o. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Giving (support moves), then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-deedee-give-yy1o"
+   "after": "t-anim-deedee-give-yy1o",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-deedee-windex-z9p8",
    "tag": "anim-deedee-windex-z9p8",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Windex Spritz",
    "next": "Made in build anim-deedee-windex-z9p8. Made again on Wan 3.0, prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, Windex Spritz.",
@@ -24997,6 +25019,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-deedee-windex-z9p8. Made again on Wan 3.0, prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, Windex Spritz."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-windex-z9p8: Deedee's Windex Spritz is a Wan 3.0 video now, made from the same prompt"
     }
    ],
    "prompt": {
@@ -25008,13 +25034,14 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-windex-z9p8 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-windex-z9p8.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Deedee, Windex Spritz (move windex_spritz in data/b3-kit-deedee.js). Its video is clip deedee_windex (data/clips/deedee-windex.js, art/clips/deedee-windex.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-windex-z9p8. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Windex Spritz, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-deedee-windex-z9p8"
+   "after": "t-anim-deedee-windex-z9p8",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-deedee-scrub-1irj",
    "tag": "anim-deedee-scrub-1irj",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, \"Hand Me My Glasses\" Scrub",
    "next": "Made in build anim-deedee-scrub-1irj. One prompt change for your note: she reaches the brush far out toward the monster and scrubs back and forth three times (was one stroke). Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, \"Hand Me My Glasses\" Scrub.",
@@ -25060,6 +25087,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-deedee-scrub-1irj. One prompt change for your note: she reaches the brush far out toward the monster and scrubs back and forth three times (was one stroke). Passed plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Deedee, \"Hand Me My Glasses\" Scrub."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-scrub-1irj: Deedee's \"Hand Me My Glasses\" Scrub brushes longer, arm out toward the monster"
     }
    ],
    "prompt": {
@@ -25071,7 +25102,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-scrub-1irj in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-scrub-1irj.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Longer brushing, outward towards monster\n\nThe animation: Deedee, \"Hand Me My Glasses\" Scrub (move hand_me_my_glasses_scrub in data/b3-kit-deedee.js). Its video is clip deedee_scrub (data/clips/deedee-scrub.js, art/clips/deedee-scrub.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-scrub-1irj. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play \"Hand Me My Glasses\" Scrub, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-deedee-scrub-1irj"
+   "after": "t-anim-deedee-scrub-1irj",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-guidevibe3",
@@ -25663,6 +25695,25 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T09:18:43-08:00",
+   "last": "2026-11-21T10:09:54-08:00",
+   "tags": [
+    "anim-deedee-scrub-1irj",
+    "anim-deedee-windex-z9p8",
+    "anim-deedee-give-yy1o",
+    "anim-deedee-ko-yes1"
+   ],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3",
+    "c-anim-deedee-ko-yes1",
+    "c-anim-deedee-give-yy1o",
+    "c-anim-deedee-windex-z9p8",
+    "c-anim-deedee-scrub-1irj"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGAuLzLbsY54jqp2Q1",
    "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
    "first": "2026-11-21T10:07:31-08:00",
@@ -25730,20 +25781,6 @@
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T09:44:18-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3",
-    "c-anim-deedee-ko-yes1",
-    "c-anim-deedee-give-yy1o",
-    "c-anim-deedee-windex-z9p8",
-    "c-anim-deedee-scrub-1irj"
    ]
   },
   {
@@ -29125,8 +29162,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "b0401fd3d91ec73aee44720b1e8a4baaa08030ac",
- "synced_at": "2026-11-21T18:08:33+00:00",
+ "synced": "5be63615661ef107ccea79a00094ae61edeac4c0",
+ "synced_at": "2026-11-21T18:10:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
