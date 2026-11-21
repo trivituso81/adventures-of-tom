@@ -27189,7 +27189,7 @@
    "title": "Write real prompts for 267 starter-draft battle animations",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "guideprompts1",
    "next": "Shipped as guideprompts1 (parts 1a, 1b, 1c and the final build are on main). All 267 starter drafts now have a prompt written for the move; no video was made. Nothing is left to do on this card.",
    "blocks": [],
@@ -27219,6 +27219,10 @@
     {
      "d": "2026-11-21",
      "t": "Built draft.py and the guide-draft Action; Cartridge Blow first ($0.002), then all 267 ($0.27), two fixes from reading the output (Nara pronoun, hit-type labels used as props), 267 of 267 written for about $0.41 in all. Applied to data/guide-prompts.json and rebuilt data/guide-anims.json. No video was made."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideprompts1: every battle animation in the Battle Guide now has a prompt written for that move"
     }
    ],
    "prompt": {
@@ -27230,7 +27234,8 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md (Fix a miss with the smallest change; Image and video prompts: clean, each thing once; keysecrets1), claude/handoff-rules.md and claude/guidegen-plan.md (sections 3.1 and 8), then this card in data/board.json. Your first push is the commit board: start c-guideprompts. Facts on 11-21: in data/guide-anims.json 267 of 346 animations carry a rule-made starter draft (promptSource rule-draft): the same canned MOTION for every move of a shape, so Cartridge Blow (blows into a cartridge, dust puff) reads as a spell cast. The loader in tools/guidegen/build_map.js already reads data/guide-prompts.json and shows entries with source model-draft, but nothing writes that file. Build tools/guidegen/draft.py (reuse reconcile.py: split, check, xai_ask, pick_text_model, the cap pattern) and a manual Action guide-draft. For each rule-draft animation it asks the xAI text model for a real MOTION from the move's own data (name, desc, flavor, shape, target, effects, listRow body and engine text, the row of claude/battle-animation-list-ch1-v11.md), keeping everything before MOTION word for word, two sentences, the gesture named once with its count, ending in a held pose, props out from behind the back and back again, no sound or camera, no banned words, no em dashes. Check each answer in code, send a broken one back once, mark a second failure check and leave the starter draft. Write results to data/guide-prompts.json (anims id -> prompt, source model-draft, rev 0), never over a job, entry or used prompt. Run order: dry run, then Cartridge Blow alone, read its prompt, then the rest with cap 1.00 (the reconcile replay cost $0.045 for 24 prompts). Rebuild data/guide-anims.json with node tools/guidegen/build_map.js, run python3 tools/guidegen/build_map_test.py and guidegen_test.py, add the docs/CHANGES.md entry guideprompts1, and write the next card. Never generate a video in this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-dash1",
@@ -28363,6 +28368,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "first": "2026-11-21T11:25:36-08:00",
+   "last": "2026-11-21T12:05:27-08:00",
+   "tags": [
+    "guideprompts1a",
+    "guideprompts1b",
+    "guideprompts1c",
+    "guideprompts1"
+   ],
+   "cards": [
+    "c-guideprompts"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEgMLyk7xoZixcTVhF",
    "title": "Build name pill: Battle Guide header and Board cards",
    "first": "2026-11-21T12:00:05-08:00",
@@ -28385,20 +28405,6 @@
    ],
    "cards": [
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
-   "title": "Write real prompts for 267 starter-draft battle animations",
-   "first": "2026-11-21T11:25:36-08:00",
-   "last": "2026-11-21T11:57:25-08:00",
-   "tags": [
-    "guideprompts1a",
-    "guideprompts1b",
-    "guideprompts1c"
-   ],
-   "cards": [
-    "c-guideprompts"
    ]
   },
   {
@@ -32008,8 +32014,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "681cfc570614b37a9f692835717b8be4a5f8df2b",
- "synced_at": "2026-11-21T20:04:45+00:00",
+ "synced": "2f39a71f90aa754ebc6451701b5479219a9d7e3a",
+ "synced_at": "2026-11-21T20:06:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
