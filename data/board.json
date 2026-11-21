@@ -17774,7 +17774,7 @@
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "tag": "startfix1",
    "next": "Waits on your card Edit the two broken START tasks (t-startfix-edit). Then it starts by itself, turns on the two START routes it can prove, and closes.",
    "prompt": {
@@ -17790,7 +17790,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
+    "url": "https://claude.ai/code/cse_01RXeukFovmpwidf6dk3L6j9",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -17818,10 +17818,22 @@
     {
      "d": "2026-11-20",
      "t": "Routes stay paused. Moved to Waiting behind Tom's card t-startfix-edit (the two edits); the session after it proves both routes, unpauses them and retires the probe cards."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Edit the two broken START tasks is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "waiting_on": "tom",
-   "auto": true
+   "auto": true,
+   "started_at": "2026-11-21T00:52:08+00:00"
   },
   {
    "id": "b-board-startpause",
@@ -18070,6 +18082,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as fix-hollowtrail1-picsa: Grump Hollow wrapper trail prompts redone: small wrappers placed on the right spots, the generator only repaints them"
     }
    ],
    "prompt": {
@@ -19031,6 +19047,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukChbC4gn9f31vtsM1u",
+   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
+   "first": "2026-11-20T16:32:26-08:00",
+   "last": "2026-11-20T16:51:49-08:00",
+   "tags": [
+    "fix-hollowtrail1-picsa",
+    "art"
+   ],
+   "cards": [
+    "c-fix-hollowtrail1-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukeXUMa3dmbsoRVSk657e",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
    "first": "2026-11-20T16:46:20-08:00",
@@ -19112,16 +19141,6 @@
    ],
    "cards": [
     "c-gem-bug08"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukChbC4gn9f31vtsM1u",
-   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
-   "first": "2026-11-20T16:32:26-08:00",
-   "last": "2026-11-20T16:32:26-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-hollowtrail1-pics"
    ]
   },
   {
@@ -21010,8 +21029,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "22d7230d300185f1b583f802e175f97d88b5a2cd",
- "synced_at": "2026-11-21T00:47:08+00:00",
+ "synced": "2808fe717e69827bb8b6eceac3f3cb814edeba4e",
+ "synced_at": "2026-11-21T00:52:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
