@@ -41,6 +41,8 @@ b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it
                tomcard('t-test6', 'Test setup six', 'Paste the secret.', ask='setup', fyi=True), tomcard('t-test7', 'Test setup seven', 'Set the thing.', ask='setup', fyi=True),
                tomcard('t-test8', 'Test script eight', 'Read the scene.', ask='script', fyi=True),
                tomcard('t-test9', 'Test play nine', 'Chapter select > Chapter 1, look at the <kitchen>.', ask='play', fyi=True, theme='Areas'),
+               tomcard('t-qapass', 'QA pass card', 'Open the kitchen.', ask='play', fyi=True, machine={'at': '2026-11-21T09:00:00Z', 'verdict': 'pass', 'saw': 'The door button was on screen in all three sizes.', 'shots': ['qa/t-qapass/2026-11-21/portrait.png']}),
+               tomcard('t-qayours', 'QA yours card', 'Listen to the joke.', ask='play', fyi=True, machine={'at': '2026-11-21T09:00:00Z', 'verdict': 'yours', 'why': 'The timing of a joke is for a person to judge.'}),
                {'id': 'c-startme', 'tag': 'startme', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A startable card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
                 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')},
                {'id': 'c-opuscard', 'tag': 'opuscard', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'An Opus card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
@@ -157,7 +159,16 @@ try:
                 if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: night chip makes the page scroll sideways')
                 V(pg, 'claude'); pg.click('.card[data-id="c-standing"] .t'); pg.wait_for_selector('#sheet')
                 if 'Runs every night' not in pg.inner_text('#sheet') or 'Last run 2026-11-20' not in pg.inner_text('#sheet'): fails.append(f'{name}: standing card detail lacks its last run line')
-                pg.keyboard.press('Escape'); pg.wait_for_timeout(200); V(pg, 'for')
+                pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+                for qid, want in (('t-qapass', ('Checked by the night QA', 'door button was on screen', 'Picture 1')), ('t-qayours', ('Needs your eyes', 'timing of a joke'))):
+                    V(pg, 'for'); pg.fill('#q', ''); pg.wait_for_timeout(100)
+                    el = pg.query_selector(f'.card[data-id="{qid}"] .t')
+                    if not el: fails.append(f'{name}: {qid} not on the board'); continue
+                    el.click(); pg.wait_for_selector('#sheet'); tx = pg.inner_text('#sheet')
+                    for w_ in want:
+                        if w_.lower() not in tx.lower(): fails.append(f'{name}: {qid} detail lacks {w_!r}')
+                    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+                V(pg, 'for')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=(name != 'portrait'))
                 # tabs: one view at a time, For you first
                 V(pg, 'claude')

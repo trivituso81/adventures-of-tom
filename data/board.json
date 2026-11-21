@@ -29021,6 +29021,39 @@
    "start": true
   },
   {
+   "id": "c-night-qa",
+   "title": "Night QA: the test browser plays your check cards",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Standing card. Each night the night shift plays up to 4 of your play and report cards in a test browser (portrait, landscape, Duo size). A yes or no check that passes is closed for you with the pictures; a failure becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "nightly": true,
+   "tag": "nightqa",
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the build nightqa (card c-nightqa). Tom (2026-11-19): his role is not QA and not double-checking Claude's work."
+    }
+   ],
+   "prompt": {
+    "what": "Plays up to 4 of Tom's play and report cards each night in a test browser, closes the ones a browser can prove, and marks the rest as needing his eyes.",
+    "before": [
+     "Read the card c-night-qa history; nothing to wait for."
+    ],
+    "model": "Claude Sonnet 5.5 (standing card, steps in claude/night-plan.md section 8)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open cards in the tom lane with ask play and no machine field, oldest first (a backlog card counts; checking it moves nothing of Tom's except closing it on a pass). If there are none, push only the commit night: ran c-night-qa. 2. For each card read next, first and the history, and sort it. YES OR NO: a fact a test browser can see (a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts). YOURS: how something looks, sounds or feels, the timing of a joke, anything about the real phone, the Duo's fold, touch or audio. When in doubt it is YOURS. Never close a card about how something looks, sounds or feels. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at every frame; a check is YES OR NO only when the frames can prove it. Push the pictures to branch night under qa/<card id>/<date>/. Pass: move the card to Done with machine {at, verdict: \"pass\", saw, shots} (shots are the paths under qa/ on branch night) and the history line \"Checked by the night QA: <what was seen>\". Fail: write what Something is wrong writes today, a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium, full prompt), and Tom's card waits behind it. 4. YOURS: set machine {at, verdict: \"yours\", why} on the card so it is not looked at again; the card stays Tom's and its details show Needs your eyes. 5. Limits, say them plainly: the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch and cannot see the Duo's fold. Model: Sonnet 5.5 medium only. No paid service runs. Never touched: voice clips and takes, art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). A night with only YOURS marks and no pictures still ships a build; a night with nothing to check pushes only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Run python3 tools/board_check.py before pushing. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "c-bigone25",
    "title": "The Big One is drawn 2.5 times bigger in battle (bigone25)",
    "theme": "Battle System",
