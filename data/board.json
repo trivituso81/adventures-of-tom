@@ -21907,7 +21907,7 @@
    "id": "c-fix-gatelayer-pics-2",
    "tag": "fix-gatelayer-pics-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
@@ -21930,7 +21930,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-gatelayer-pics"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -21942,6 +21942,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-gatelayer-pics: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images",
      "at": "2026-11-21T03:26:38.038Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T03:32:50.118Z"
     }
    ],
    "prompt": {
