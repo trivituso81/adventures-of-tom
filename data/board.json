@@ -28466,6 +28466,43 @@
     ]
    ],
    "night_key": "2026-11-21"
+  },
+  {
+   "id": "c-win3skip",
+   "title": "WIN NOW button in the new battle screen (win3skip)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "next": "Added the WIN NOW button to Battle 3 fights (it only existed in the old Battle 2 screen). Shows top right when OPTIONS > WIN NOW BUTTON is ON, real fights only. Nothing for Tom.",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "tag": "win3skip",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDyzD2bbZPcXjRqR7W",
+    "opening": "\"when the option to auto win is turned on i dont see the corresponding button in batle screens anymore.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "New card. Tom: \"when the option to auto win is turned on i dont see the corresponding button in batle screens anymore.\" Cause: the button only lived in the Battle 2 screen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as win3skip: the WIN NOW button is back in battle screens"
+    }
+   ],
+   "prompt": {
+    "what": "WIN NOW in Battle 3.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B)",
+    "effort": "medium (steps known)",
+    "text": "Done in this session. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
