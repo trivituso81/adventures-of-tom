@@ -29896,10 +29896,16 @@
     {
      "d": "2026-11-21",
      "t": "Found by costs2: these three tests fail the same way on untouched main."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T22:04:16.973Z"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21"
+   "changed": "2026-11-21",
+   "start": true
   },
   {
    "id": "svc-voice-gen",
