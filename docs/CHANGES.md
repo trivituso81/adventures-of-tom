@@ -1,3 +1,9 @@
+## hollowfence (2026-11-21): Grump Hollow monsters no longer slip past the boss fence after a story scene
+
+- Cause (facts, measured by printing each monster's spot and home): a monster's `home` was set lazily on its first tick (`engine/feel.js` `b7MonsterTick`). The Mudling scene moves the other monsters around first (story staging), so Skeeter and Grump took their staged spot as home (for example Skeeter at 9,9 instead of 9,13). Wander and chase ranges are measured from home, so a displaced monster could stand or wander in places the fence test did not expect.
+- Fix: `placeMonsters` (`engine/world.js`) sets `home` to the placed spot, so monsters walk back to their own spot after a scene. Nothing on the fence itself changed.
+- Checked: `python3 tools/hollow_trail_test.py` 10 runs in a row.
+
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
 
 Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.

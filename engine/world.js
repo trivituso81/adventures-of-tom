@@ -147,6 +147,7 @@ function placeMonsters(map,spots) {
     if(d.owScale) mon.mscale=d.owScale;   // a monster drawn smaller on the map (Acorn Agent)
     if(map.id==='hollow'&&id==='toad') mon.plateTop=true;   // r-20261121-120404-lwe8: the Hollow's toad sits under the painted foliage; it is drawn in front of the cutout, not behind it
     if(map.id==='hollow'&&id==='log') mon.still=true;   // r-20261121-122202-loak: the Log Lump waits at the end of the second leg of wrappers; it never wanders or chases, and walking up to it starts the fight
+    mon.home={x,y};   // hollowfence: home is the placed spot, not wherever a story scene had moved the monster by its first tick (engine/feel.js b7MonsterTick used to set it then)
     mon.monster=id; mon.roam=0; mon.tier=0; mon.maxHp=d.hp; mon.defeatedUntil=0;
     mon.spot=id+'@'+x+','+y;   // stable name for this placed monster, used by saves (monstersFallenSave)
     map.npcs.push(mon);
