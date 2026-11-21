@@ -128,14 +128,16 @@ const FOES = [
     ['defeated', 'defeated (held pose)', 'state', 1, 'MOTION: DEFEATED\nThe creature wobbles once, closes its eyes and tips over slowly onto its back, its arms flopping out to the sides.%P It stays lying on its back' + STILL]]],
   // wanch1 (card c-wanch1): the attacks and wind-ups of the other chapter 1 monsters (B3_FOES in data/b3-foes-ch01.js), the same pattern
   // as the Mudling's and The Big One's (LOOK_FOE, one MOTION each, settle or hold). Their idles were made before (clipfoes1).
+  // Retries after Claude's check, one change each: croak (a soap bubble came out: 'like a balloon'), slam (it leapt out of the frame and the lily
+  // pad flew off: the base stays put, FOE_ONCE), bite and whine (the small mosquitoes vanished: 'keep circling close around it').
   ['grump', 36.3, ' The moss and slime hanging from its body stay attached.', [
     ['grumble', 'Puddle Grumble (grumbles)', 'state', 0, 'MOTION: GRUMBLE\nThe creature puffs out its cheeks and throat and grumbles once with a deep scowl, its belly shaking, while its base stays put.%P Without repeating the grumble, ' + SETTLE],
     ['splash', 'Bog Splash (flings pond water)', 'strike', 0, 'MOTION: SPLASH THROW\nThe creature swings one heavy arm back and flings it forward once at head height, as if splashing a handful of pond water, while its base stays put.%P Without repeating the throw, ' + SETTLE],
     ['slapwind', 'Soggy Slap wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature leans back, lifts one heavy arm high behind its head and scowls once, getting ready to slap.%P It holds that leaning-back, arm-raised pose' + STILL],
     ['slap', 'Soggy Slap', 'strike', 0, 'MOTION: SOGGY SLAP\nThe creature leans forward and swings one heavy arm down and forward once in a big slap, while its base stays put.%P Without repeating the slap, ' + SETTLE]]],
   ['toad', 39.2, ' The lily pad stays on its head.', [
-    ['croak', 'Night Croak (big croak)', 'state', 0, 'MOTION: BIG CROAK\nThe creature puffs its throat out into a big round bubble and croaks once with its mouth wide open, while its feet stay put.%P Without repeating the croak, ' + SETTLE],
-    ['slam', 'Body Slam', 'strike', 1, 'MOTION: BODY SLAM\nThe creature crouches and throws its whole body forward in one heavy slam, landing back on the same spot.%P Without repeating the slam, ' + SETTLE],
+    ['croak', 'Night Croak (big croak)', 'state', 0, 'MOTION: BIG CROAK\nThe creature puffs its throat out round and big like a balloon and croaks once with its mouth wide open, while its feet stay put.%P Without repeating the croak, ' + SETTLE],
+    ['slam', 'Body Slam', 'strike', 0, 'MOTION: BODY SLAM\nThe creature crouches and throws its whole body forward in one heavy slam, landing back on the same spot.%P Without repeating the slam, ' + SETTLE],
     ['tonguewind', 'Tongue Lash wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature crouches low, puffs out its cheeks and narrows its eyes once, getting ready to lash out.%P It holds that low, puffed-up pose' + STILL],
     ['tongue', 'Tongue Lash', 'strike', 0, 'MOTION: TONGUE LASH\nThe creature opens its mouth wide, shoots its long pink tongue straight out forward low along the ground once, and pulls it back in, while its feet stay put.%P Without repeating the lash, ' + SETTLE]]],
   ['log', 34.9, ' The moss, the mushrooms and the leaf sprouts on top stay attached.', [
@@ -144,8 +146,8 @@ const FOES = [
     ['timberwind', 'Timber! wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature leans back slowly and narrows its angry eyes once, getting ready to topple forward.%P It holds that leaning-back pose' + STILL],
     ['timber', 'Timber!', 'strike', 1, 'MOTION: TIMBER\nThe creature tips forward and falls flat onto its front once like a falling tree.%P Then it pushes itself back up into the pose of the attached picture' + STILL]]],
   ['skeeter', 41.6, ' The small mosquitoes stay close around the big one, the same number of them.', [
-    ['bite', 'Darting Bite', 'strike', 1, 'MOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite.%P Without repeating the bite, ' + SETTLE],
-    ['whine', 'Mosquito Whine (loud buzz)', 'state', 1, 'MOTION: LOUD WHINE\nThe big mosquito lifts its head and beats its wings very fast once in one loud whine, while the small mosquitoes jitter in place.%P Without repeating the whine, ' + SETTLE],
+    ['bite', 'Darting Bite', 'strike', 1, 'MOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite, while the small mosquitoes keep circling close around it.%P Without repeating the bite, ' + SETTLE],
+    ['whine', 'Mosquito Whine (loud buzz)', 'state', 1, 'MOTION: LOUD WHINE\nThe big mosquito lifts its head and beats its wings very fast once in one loud whine, while the small mosquitoes keep circling close around it.%P Without repeating the whine, ' + SETTLE],
     ['buzz', 'Buzz Cloud (the swarm regroups)', 'state', 1, 'MOTION: REGROUP\nThe small mosquitoes swirl once in a tight circle around the big mosquito.%P Then they settle back into their places and ' + SETTLE]]],
 ];
 for (const [o, rows, parts, list] of FOES)

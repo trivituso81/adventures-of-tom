@@ -1,3 +1,12 @@
+## wanch1d (2026-11-20): the monster clips checked by eye; four made again with one change each
+
+Card c-wanch1 (part d). clip-gen run 44853328032 made and the gate passed all 16 monster clips ($1.31). Claude's check of every picture: 12 pass (Pond Grump grumble, splash, slap wind-up, slap; Bog Toad tongue wind-up, tongue; Log Lump roll, jab, Timber! wind-up, Timber!; Skeeter Swarm idle and Buzz Cloud). Four were set back to rejected with the reason and get one change each in `clip-prompts.js`:
+| Clip | Miss | The one change |
+|---|---|---|
+| toad croak | the throat came out as a separate soap bubble | "puffs its throat out round and big like a balloon" |
+| toad slam | it leaps out of the top of the frame and the lily pad flies off | the base stays put (the FOE_ONCE header instead of FOE_FREE) |
+| skeeter bite, skeeter whine | the small mosquitoes vanish halfway | "while the small mosquitoes keep circling close around it" |
+
 ## wanch1c (2026-11-20): one retry each for four of Grace's videos, one change each (video jobs only)
 
 Card c-wanch1 (part c). Grace's first 9 Wan videos (wan-gen run 44853113780, $4.50) checked against plan 4.4: idle, hit, ko, victory, run pass. Four miss, each retried once with one change:
