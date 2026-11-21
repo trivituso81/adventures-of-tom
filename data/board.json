@@ -21348,13 +21348,19 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Approve Boppy's unimpressed pose in his Paso Robles cap is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T14:51:48.904Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHDMDjx8dfDTwZjaC6",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-pic"
+   "after": "t-boppy-bigfish-pic",
+   "start": true
   },
   {
    "id": "c-qa-coh01",
