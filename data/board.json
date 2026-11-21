@@ -23415,9 +23415,9 @@
    "next": "Built as costs1: ADMIN > AI COSTS (costs.html) with Overview, Services, Ledger and Totals, and 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+    "url": "https://claude.ai/code/cse_01RXeukEArp9wiETGrGusDN4",
     "opening": "\"come up with an admin screen for all the AI services we are connected to\""
    },
    "prompt": {
@@ -23437,9 +23437,21 @@
     {
      "d": "2026-11-20",
      "t": "Built: costs.html, data/costs.json (8 services, 29 charges read from Apple, Google Play, Stripe and Orb receipts in his email), the AI Costs button on admin.html, docs/COSTS.md, tools/costs_test.py (FAILS: []). Balances of xAI and ElevenLabs are not read yet (card c-costs2). Hands to Tom: t-costs1look."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
-   "after": "t-costs1look"
+   "after": "t-costs1look",
+   "rescue": {
+    "at": "2026-11-21T15:27:53+00:00",
+    "n": 1,
+    "why": "Its note starts with Shipped but the card is open",
+    "url": "https://claude.ai/code/cse_01RXeukEArp9wiETGrGusDN4",
+    "prev": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5"
+   },
+   "started_at": "2026-11-21T15:27:53+00:00"
   },
   {
    "id": "t-costs1look",
@@ -23571,6 +23583,16 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "first": "2026-11-21T07:27:18-08:00",
+   "last": "2026-11-21T07:27:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-costs1"
    ]
   },
   {
@@ -26891,8 +26913,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a199f5f4c37663711db0bb2013e8e20cb58858f2",
- "synced_at": "2026-11-21T15:25:01+00:00",
+ "synced": "ded48b5ac042b1f59410e9bd98595ced22d868ab",
+ "synced_at": "2026-11-21T15:27:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
