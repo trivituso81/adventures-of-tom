@@ -493,7 +493,7 @@ function stateLine(c,ctx){
 function actsHtml(c,ctx){
   if(c.col==='done')return '';
   if(ctx==='backlog')return '<button class="gold addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
-  if(isReview(c)&&(c.col==='up'||c.col==='prog'))return picsHtml(c,true)+voicesHtml(c,true)+'<div class="acts">'+rvBtns(c.id)+'</div>';
+  if(isReview(c)&&(c.col==='up'||c.col==='prog'))return picsHtml(c,true)+voicesHtml(c,true)+wanHtml(c,true)+'<div class="acts">'+rvBtns(c.id)+'</div>';
   if(c.lane==='claude'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')){
     const st=startable(c),solid=st?'':(ctx==='queued'?'ob':'gold');
     return '<div class="acts">'+(st?'<button class="small gold" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button><button class="small tb" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>':'<button class="small '+solid+'" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>')+'<span class="mdl">'+esc(modelShort(c))+'</span></div>';
@@ -580,7 +580,7 @@ const SPEND_PER=.04,SPEND_REF=.01,CHAINRE=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d
 const picIds=c=>(c.done_when&&c.done_when.art_approved)||[];
 const hasPics=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&c.ask==='pictures'&&picIds(c).length>0;
 async function loadArt(){
-  await loadVidx();
+  await loadVidx();await loadWjobs();
   if(!B||!B.cards.some(hasPics)||ART)return;
   try{const r=await fetch((Q.get('prompts')||'data/art-prompts.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok){const d=await r.json();ART={};d.entries.forEach(e=>{ART[e.id]=e;});}}catch(e){}
 }
@@ -716,6 +716,59 @@ function vgenTap(id){
   save('board: vgen '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.vgen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),n,chars,est:cred};touch(z,'Tom approved generating '+n+' voice'+(n===1?'':'s')+' (about '+cred.toLocaleString('en-US')+' credits).');}return d;})
     .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
 }
+// ---- wanbulk: Generate all N videos on a Tom card with `wan: {jobs: [job names], cap?}` (claude/video-battle-plan.md 4.12). Lists the jobs of tools/art-library/wangen-jobs.json that are
+// left to make (a job the last run merged, stopped or passed is not listed again) and one button; the page saves `wgen` on the card with the message "board: wan generate <id>"; the wan-gen Action
+// makes, checks, bakes and wires them (tools/art-library/wanbulk.py) and writes wgen.run. The estimate is the job file's seconds x price, a retry of an edge miss can add one more video per job.
+let WJOBS=null,WGENARM='';
+const hasWan=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&((c.wan||{}).jobs||[]).length>0;
+async function loadWjobs(){
+  if(!B||!B.cards.some(hasWan)||WJOBS)return;
+  try{const r=await fetch((Q.get('wjobs')||'tools/art-library/wangen-jobs.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok)WJOBS=await r.json();}catch(e){}
+}
+const wMoney=x=>'$'+(Math.round(x*100)/100).toFixed(2);
+function wanLeft(c){
+  const run=((c.wgen||{}).run)||{},done=new Set([].concat(run.merged||[],run.passed_not_baked||[],(run.stopped||[]).map(s=>s.what),run.already||[]));
+  return (c.wan.jobs||[]).filter(j=>WJOBS&&WJOBS[j]&&!done.has(j));
+}
+function wanEst(names){return names.reduce((a,n)=>{const j=WJOBS[n],i=j.input||{};return a+(j.est_per_s?(j.est_per_s[i.resolution]||0)*(+i.duration||0):(+j.est||0));},0);}
+function wanCap(c){const b=(WJOBS&&WJOBS._bulk)||{};return Math.min(+((c.wan||{}).cap)||+b.cap||20,+b.cap||20);}
+function wanHtml(c,compact){
+  if(!hasWan(c))return '';
+  if(!WJOBS)return '<div class="pics"><h4>Videos on this card</h4><div class="gm">Loading the job list...</div></div>';
+  const g=c.wgen||{},run=g.run||{},left=wanLeft(c),n=left.length,est=wanEst(left),cap=wanCap(c);
+  const stale=run.state==='running'&&run.at&&(Date.now()-Date.parse(run.at))>3*3600e3;
+  const busy=g.want||(run.state==='running'&&!stale);
+  let h='<div class="pics"><h4>Videos on this card</h4><div class="gm" style="margin:0">'+(n?n+' video'+(n===1?'':'s')+' left to make: '+left.map(esc).join(', '):'Every video of this card is made.')+'</div>';
+  let why='';
+  if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' video'+((run.n||n)===1?'':'s')+'...';
+  else if(c.col==='wait'){const by2=blockedBy(c);why='Waiting on: '+(by2.length?by2.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
+  else if(!n)why='Nothing to make right now.';
+  const arm=WGENARM===c.id,txt=wMoney(est);
+  h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="wgen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+txt+', at most '+wMoney(cap)+')':'Generate all '+n+' video'+(n===1?'':'s')+' (about '+txt+')')+'</button>';
+  if(!why)h+='<div class="gm">The job checks each video itself. A video that only touches the edge is made once more with a smaller picture (up to one more video each, inside the '+wMoney(cap)+' cap). A video that fails anything else is stopped and written up on a card for Claude. Passed videos are put in the game for you.</div>';
+  if(busy)h+='<div class="gm">'+(g.want?'Started. The videos are made, checked and put into the game for you (about 5 to 15 minutes each, 3 at a time). A card tells you when to watch.':'The job is running. A card tells you when to watch.')+'</div>';
+  if(!busy&&run.state&&run.state!=='running'&&!compact){
+    h+='<div class="gm"><b>Last run: '+(run.state==='done'?'finished':'failed')+'</b>'+(run.spent!=null?' (about '+wMoney(+run.spent)+')':'')
+      +'<br>Passed and in the game: '+(run.merged||[]).length+(run.build?' (build '+esc(run.build)+')':'')
+      +((run.retried||[]).length?'<br>Made again with a smaller picture: '+run.retried.map(esc).join(', '):'')
+      +((run.passed_not_baked||[]).length?'<br>Passed but not put in the game ('+run.passed_not_baked.length+'): '+run.passed_not_baked.map(esc).join(', '):'')
+      +(run.stopped||[]).map(x=>'<br>Stopped '+esc(x.what)+': '+esc(x.why)).join('')
+      +((run.capped||[]).length?'<br>Left for the next tap (the cap): '+run.capped.map(esc).join(', '):'')
+      +((run.unchecked||[]).length?'<br>Kept, not yet checked: '+run.unchecked.map(esc).join(', '):'')
+      +(run.errors||[]).map(x=>'<br>Failed '+esc(x.what)+': '+esc(x.why)).join('')
+      +Object.keys(run.bake_failed||{}).map(k=>'<br>Could not put '+esc(k)+' in the game: '+esc(run.bake_failed[k])).join('')+'</div>';
+  }
+  return h+'</div>';
+}
+function wgenTap(id){
+  const c=cardById(id);if(!c||!hasWan(c)||!WJOBS)return;
+  const left=wanLeft(c);if(!left.length)return;
+  if(WGENARM!==id){WGENARM=id;rerender();clearTimeout(wgenTap.h);wgenTap.h=setTimeout(()=>{if(WGENARM===id){WGENARM='';rerender();}},4000);return;}
+  WGENARM='';clearTimeout(wgenTap.h);
+  const n=left.length,est=wanEst(left);
+  save('board: wan generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.wgen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),n,est:Math.round(est*100)/100};touch(z,'Tom approved generating '+n+' video'+(n===1?'':'s')+' (about '+wMoney(est)+').');}return d;})
+    .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
+}
 function rerender(){render();if(cur&&sheetOpen()&&$('sheet').querySelector('.sh-body')&&$('sheet').dataset.kind==='card'){const b=$('sheet').querySelector('.sh-body'),y=b.scrollTop,m=moreOpen;openSheet(cur);moreOpen=m;if(m)toggleMore(true);$('sheet').querySelector('.sh-body').scrollTop=y;}}
 
 function render(){
@@ -767,7 +820,7 @@ function openSheet(id){
     const where=(String(c.next||'').match(PATHRE)||[])[0];   // the screen to go to, on its own line above the instruction
     body+='<h4>What to do</h4>'+(c.first&&open_?'<p class="first">First: '+withPaths(c.first)+'</p>':'')+(where&&open_?'<p class="where"><code class="path">'+esc(where)+'</code></p>':'');
     body+=(c.steps||[]).length?'<p>'+withPaths(c.next)+'</p><ol class="todo">'+c.steps.map(x=>'<li>'+withPaths(x)+'</li>').join('')+'</ol>':todoHtml(c.next);
-    body+=linksHtml(c)+jumpHtml(c)+picsHtml(c,false)+voicesHtml(c,false);
+    body+=linksHtml(c)+jumpHtml(c)+picsHtml(c,false)+voicesHtml(c,false)+wanHtml(c,false);
     if(c.paste) body+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
     if(isReview(c)&&c.col!=='wait') body+='<p class="hint" style="margin-top:10px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
   }else{
@@ -1162,6 +1215,7 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='gen'){genTap(act.dataset.id,act.dataset.mode);e.stopPropagation();return;}
   if(act&&act.dataset.act==='vgen'){vgenTap(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='wgen'){wgenTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
   if(t.id==='wpick'){$('wshot').click();return;}

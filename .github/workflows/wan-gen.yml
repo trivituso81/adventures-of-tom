@@ -11,13 +11,26 @@ name: wan-gen
 # --requests (the same job; $0.50 a video, at most $1 a request, at most $10 a day for the guide). The requests are taken off main before anything is paid,
 # each video is judged by the clip gate and cut as a preview (tools/guidegen/make_take.py, secret XAI_API_KEY for the look check) and kept as a TAKE on the
 # branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-use Action).
+#
+# wanbulk (claude/video-battle-plan.md 4.12): Generate all N videos on a Tom board card commits data/board.json with the message "board: wan generate <card id>"; that push
+# (or a manual run with `card`) runs wangen.py --bulk: every job of the card is made (3 at once, never past the cap), measured and look-checked (secret XAI_API_KEY),
+# a job that failed only the edge check is made once more with a smaller picture, one that fails anything else is stopped with a Claude card, one that passes is baked
+# and wired and merged into main as one build wanbulk-<card>-<run>, and a Tom card lists the new clips. Results stay on branch `wangen`.
 
 on:
   push:
     branches: [main]
-    paths: ['data/wan-requests.json']
+    paths: ['data/wan-requests.json', 'data/board.json']
   workflow_dispatch:
     inputs:
+      card:
+        description: 'wanbulk: a board card id with a `wan` job list: make, check, bake and wire all its jobs (takes the place of `what`).'
+        required: false
+        default: ''
+      bulk_cap:
+        description: 'wanbulk: most dollars this run may add to the ledger (empty: the card asks, never above `_bulk.cap` in the job file).'
+        required: false
+        default: ''
       what:
         description: 'Jobs in tools/art-library/wangen-jobs.json: one name, a comma list, or wildcards (tom-*). Up to 3 run at once.'
         required: true
@@ -44,7 +57,7 @@ concurrency:
 
 jobs:
   gen:
-    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ')"
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ') || startsWith(github.event.head_commit.message, 'board: wan generate ')"
     runs-on: ubuntu-latest
     timeout-minutes: 170
     env:
@@ -57,8 +70,24 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests pillow numpy
-      - name: Install the video tools for the Battle Guide takes (the runner has no ffmpeg)
-        if: ${{ github.event_name == 'push' || inputs.requests == 'true' }}
+      - name: Work out what this run is (jobs, guide requests, or a bulk card)
+        id: mode
+        env:
+          MSG: ${{ github.event.head_commit.message }}
+          EVENT: ${{ github.event_name }}
+          REQ: ${{ inputs.requests }}
+          CARD_IN: ${{ inputs.card }}
+        run: |
+          mode=jobs; card=""
+          if [ "$EVENT" = "push" ]; then
+            first="${MSG%%$'\n'*}"
+            if [[ "$first" == "board: wan generate "* ]]; then mode=bulk; card="${first#board: wan generate }"; else mode=guide; fi
+          elif [ "$REQ" = "true" ]; then mode=guide
+          elif [ -n "$CARD_IN" ]; then mode=bulk; card="$CARD_IN"
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"; echo "card=$card" >> "$GITHUB_OUTPUT"; echo "mode: $mode card: $card"
+      - name: Install the video tools for guide takes and bulk checks (the runner has no ffmpeg)
+        if: ${{ steps.mode.outputs.mode != 'jobs' }}
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
@@ -77,20 +106,28 @@ jobs:
           GUIDE_STATUS: '1'   # guidestatus1: tools/guidegen/progress.py writes status.json on branch guidegen
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}   # wanbulk: the look checks (never printed)
           WHAT: ${{ inputs.what }}
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}
-          GUIDE: ${{ github.event_name == 'push' || inputs.requests == 'true' }}
+          MODE: ${{ steps.mode.outputs.mode }}
+          CARD: ${{ steps.mode.outputs.card }}
+          BULK_CAP: ${{ inputs.bulk_cap }}
+          GUIDE: ${{ steps.mode.outputs.mode == 'guide' }}
         run: |
           set -o pipefail
           ARGS=(--what "$WHAT" --cap "${CAP:-2}" --out "$RUNNER_TEMP/wangen")
           [ "$GUIDE" = "true" ] && ARGS=(--requests --out "$RUNNER_TEMP/wangen")
+          if [ "$MODE" = "bulk" ]; then
+            ARGS=(--bulk --card "$CARD" --out "$RUNNER_TEMP/wangen")
+            [ -n "$BULK_CAP" ] && ARGS+=(--cap "$BULK_CAP")
+          fi
           [ "$DRY" = "true" ] && ARGS+=(--dry-run)
           if [ "$DRY" != "true" ] && [ -z "$FAL_KEY" ]; then echo "Repo secret FAL_KEY is empty or missing."; exit 2; fi
           python3 -I tools/art-library/wangen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
           { echo '### wan-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Make the takes (clip gate and preview) for the Battle Guide
-        if: ${{ (github.event_name == 'push' || inputs.requests == 'true') && inputs.dry_run != 'true' && always() }}
+        if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         run: |
@@ -104,7 +141,7 @@ jobs:
           python3 -I tools/guidegen/make_take.py --results "$RUNNER_TEMP/wangen/guide-results.json" --state "$RUNNER_TEMP/guidegen" 2>&1 | tee "$RUNNER_TEMP/take.log"
           { echo '### guide takes'; echo '```'; tail -30 "$RUNNER_TEMP/take.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Keep the takes on the guidegen branch
-        if: ${{ (github.event_name == 'push' || inputs.requests == 'true') && inputs.dry_run != 'true' && always() }}
+        if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

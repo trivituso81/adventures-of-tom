@@ -30397,7 +30397,7 @@
    "lane": "claude",
    "col": "up",
    "tag": "wanbulk",
-   "next": "Builds the video version of artgen2/artgen3: the wan-gen Action checks each video itself (plan 4.4 measures plus a vision checklist), tries the known one-change fixes on its own, and stops at two misses. Then a whole chapter of battle videos is one board button, and Opus is needed only for a real stop-loss.",
+   "next": "Built. A Tom card with a `wan` job list has Generate all N videos; the wan-gen Action makes the jobs, measures and look-checks each video, retries an edge-only miss once with a smaller picture, stops anything else with an Opus card, and bakes and wires what passes. Nothing was paid for in the session. The first real use is c-wanch5 (Rose Giddyup and Deedee Wet-Floor).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -30414,6 +30414,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built (wanbulk): wanqa.py (the checks), wanbake.py (bake and wire from the job), wanbulk.py (the run), wangen.py --bulk and --replay-checks, wan-gen.yml (starts on the commit board: wan generate <id>), board.html (Generate all N videos on a card with `wan`), board_check.py (shape of wan), wangen-jobs.json (_bulk: cap 20, pads none 0.8 0.65; airborne on rose-giddyup; returns false on the four knock-outs). Tests: wanbulk_test.py (pass, edge retry, stop, cap, bake and wire, cards, second tap), wangen_test.py W1 to W13, board_wan_test.py. Replay of the stored r4 videos: rose-giddyup fails the edge check only, deedee-wetfloor fails feet (9.5 percent) and edge, as plan 4.10 says. Replay of all 46 final videos: 12 pass every measurement, 32 fail at least one (feet 23, edge 11), see plan 4.12. No paid run was made; the first paid bulk run is Tom's tap."
     }
    ],
    "prompt": {
@@ -30424,7 +30428,8 @@
     "model": "Claude Sonnet 5.5 (row C: a tool feature whose steps are not written yet; no prompt or taste call is made, the checks are measurements and an existing vision checklist pattern)",
     "effort": "high (a new automated check and retry loop designed and built in one session)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (sections 4.4, 4.7 to 4.10), then card c-wanbulk in data/board.json with its history (Tom's words). Your first push is the commit board: start c-wanbulk. Build wanbulk: (1) in tools/art-library/wangen.py, after each video, run plan 4.4 checks 3 to 5 as measurements (standing height first against last within 2 percent, feet row within 1 percent of the frame height in every picture, flat magenta background, figure never touches an edge, last picture against first under 3 of 255) and checks 1 and 2 as a vision checklist built the way tools/art-library/artqa.py works (three runs, majority; the motion sentence of the job's prompt is the requirement), written to the job's result on branch wangen; (2) a job that fails only on an edge check is retried once automatically with the next pad from a list in the job file (none, 0.8, 0.65), a job that fails anything else or fails twice is marked stopped and gets one Claude card (Opus 5.5 medium) with the evidence; (3) a job that passes is baked by the bake settings stored on the job (bake_clip.py kind, fps, step, marks found the way clipmarks.py finds them) and wired from a `wire` field on the job, then one Tom card (ask animations) lists every new clip of the run; (4) a Generate all N videos button on a Tom card that lists jobs, which saves the request with a commit the way an art-gen `gen` request does and starts wan-gen, never past the job file's cap. Tests with the stand-in fal server (wangen_test.py) for pass, edge retry, stop and cap; replay the checks on the stored r4 videos of rose-giddyup and deedee-wetfloor on branch wangen and confirm they fail the way plan 4.10 says. A session never makes a paid run; the first paid bulk run is Tom's tap. Build tag wanbulk. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "nothing for Tom: c-wanch5"
   },
   {
    "id": "t-anim-deedee-dodge-y4m3",
@@ -30510,7 +30515,7 @@
    "lane": "claude",
    "col": "up",
    "tag": "wanch5",
-   "next": "Waits on your card Deedee's Wet-Floor mop: is a lower mop fine? Then one Giddyup try (she leaps straight up instead of forward) and the Wet-Floor remake your answer picks. At most $2.",
+   "next": "Waits on your card Deedee's Wet-Floor mop: is a lower mop fine? Then writes the one-change job for Giddyup and for Wet-Floor (your answer picks it) with their bake and wire settings, and a Tom card Generate all 2 videos: you tap it, the Action makes and checks them and puts what passes in the game. At most $2. No paid run in the session.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -30518,17 +30523,21 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch4. Giddyup r5 missed (somersault, hair on the left edge; edge miss twice). Wet-Floor waits on t-wanch4-wetfloor. Both in one session to save a second Opus session."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rewritten by wanbulk: the session no longer runs wangen.py by hand. It writes the one change and the bake and wire settings and creates the Tom card that holds the Generate all button (the Action checks, retries once, bakes and wires). Model and effort unchanged (Opus 5.5, medium: a video prompt Tom judges by eye)."
     }
    ],
    "prompt": {
-    "what": "Remakes Rose's Giddyup once with her jumping straight up, and Deedee's Wet-Floor the way you chose, checks both, puts what passes in the game. At most $2.",
+    "what": "Writes the one change for Rose's Giddyup and for Deedee's Wet-Floor (the way you chose) with their bake and wire settings, and hands you one Generate button. The Action makes, checks, retries the edge miss once and puts what passes in the game. At most $2.",
     "before": [
      "Answer the card Deedee's Wet-Floor mop: is a lower mop fine?",
      "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
     ],
     "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
-    "effort": "medium (one written change per video; the route, checks, bake and tests are built)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.11 Built wanch4), then card c-wanch5 in data/board.json with its history and the Tom card that blocked it (t-wanch4-wetfloor: his answer and note). Your first push is the commit board: start c-wanch5. The wangen cap counts every dollar ever spent: read the ledger on branch wangen and pass cap = ledger + 2. (1) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): r5 (pad 0.65) made a forward somersault and her hair touched the left edge; the prompt asks for planted feet and also \"leaps up and forward to the left\". One change: new prompt file wan-rose-giddyup-v3.txt equal to v2 with \"leaps up and forward to the left once\" changed to \"leaps straight up once\", rev 6, pad stays 0.65, one try, checked by plan 4.4; if it passes bake with --fps 24 and wire it to the kit row giddyup_tata_launch in data/b3-kit-rose.js. (2) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): follow Tom's answer on t-wanch4-wetfloor. Yes: prompt v2 unchanged, one change pad 0.65 (rev 5), and accept a mop head below her feet row; the other 4.4 checks hold. No: one new MOTION in which the mop never rests on the floor ahead of her, rest of the prompt unchanged, rev 5. Leave it: no Wet-Floor call; retire it in the plan. Bake what passes (--fps 24), wire it to its kit row in data/b3-kit-deedee.js, purge what it replaces. Test with python3 -I tools/wanproof_test.py, python3 -I tools/video_only_test.py, python3 tools/b3_test.py s8 and tools/smoke.py (portrait and landscape). Spend at most $2 on fal. Build tag wanch5, end with one Tom card (ask animations) for what passed. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "effort": "medium (one written change per video; the route, the checks, the retry, the bake and the tests are built by wanbulk)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.11 Built wanch4), then card c-wanch5 in data/board.json with its history and the Tom card that blocked it (t-wanch4-wetfloor: his answer and note). Your first push is the commit board: start c-wanch5. The wangen cap counts every dollar ever spent: read the ledger on branch wangen and pass cap = ledger + 2. Read claude/video-battle-plan.md section 4.12 (wanbulk) too: the wan-gen Action now makes, checks, retries and bakes by itself, so this session pays for nothing and runs nothing; do not run wangen.py for real. (1) Rose's \"Giddyup, Tata!\" Launch (job rose-giddyup, Kling 4.0): r5 (pad 0.65) made a forward somersault and her hair touched the left edge; the prompt asks for planted feet and also \"leaps up and forward to the left\". One change: new prompt file wan-rose-giddyup-v3.txt equal to v2 with \"leaps up and forward to the left once\" changed to \"leaps straight up once\", rev 6, pad stays 0.65, `airborne` stays true. (2) Deedee's Wet-Floor Hazard (job deedee-wetfloor, Kling 4.0): follow Tom's answer on t-wanch4-wetfloor. Yes: prompt v2 unchanged, one change pad 0.65 (rev 5), and give the job `skip_checks: [\"feet\"]` or `limits: {\"feet\": the mop head's measured depth below her feet row as a fraction of the frame height, rounded up}` with a `why` that says the mop head may sit below her feet row (the other 4.4 checks hold). No: one new MOTION in which the mop never rests on the floor ahead of her, rest of the prompt unchanged, rev 5. Leave it: no Wet-Floor job; retire it in the plan. For each job you keep, add `bake` and `wire` to its entry in tools/art-library/wangen-jobs.json: copy the bake settings (kind, fps 24, step, speed, fig_rows) from the header comment of the clip the job replaces (data/clips/rose-giddyup.js, data/clips/deedee-wetfloor.js; if the clip does not exist yet, use the settings of the neighbouring clip of the same owner and say so), and wire it to its kit row (giddyup_tata_launch in data/b3-kit-rose.js; the Wet-Floor row in data/b3-kit-deedee.js) as {\"move\": {\"file\", \"id\", \"shape\"}} (tools/art-library/wanbake.py describes both fields). Create ONE Tom card (ask animations, `wan: {\"jobs\": [the jobs you kept], \"cap\": 2}`, blocks nothing, fyi true, title Generate the new videos) and set `after` on c-wanch5 to its id: the button on it is the first paid bulk run, Tom's tap. Test with python3 tools/board_check.py, python3 tools/art-library/wanbulk_test.py and python3 tools/board_wan_test.py; the game tests of the merge run on the next card. Build tag wanch5. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGnVk2pzbLKvYJUt9V",

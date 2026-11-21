@@ -145,6 +145,29 @@ if ARTP:
         pics += [i for l in c.get('links') or [] if isinstance(l, dict) and l.get('to') == 'art' and isinstance(l.get('ids'), list) for i in l['ids'] if i not in pics]
         if pics and all(ART_ST.get(i) == 'approved' for i in pics):
             bad.append('%s: asks for pictures that are already in the game (%s approved in the Art Library); close it or point it at entries still to make' % (c.get('id'), ', '.join(pics)))
+# wanbulk: the shape of `wan` (the list of videos behind Generate all N videos) and `wgen` (the tap and the run's answer) on a Tom card
+def _wan_jobs():
+    for p in (os.path.join(os.path.dirname(os.path.abspath(path)), '..', 'tools', 'art-library', 'wangen-jobs.json'), os.path.join(HERE, 'art-library', 'wangen-jobs.json')):
+        if os.path.exists(p): return json.load(open(p, encoding='utf-8'))
+    return None
+WJ = _wan_jobs()
+for c in d['cards']:
+    n = c.get('id')
+    if 'wgen' in c and 'wan' not in c: bad.append('%s: `wgen` is only for a card with a `wan` job list' % n)
+    if 'wan' not in c: continue
+    w = c['wan']
+    if c.get('lane') != 'tom' or c.get('ask') != 'animations': bad.append('%s: `wan` is only for a Tom card with ask animations (the Generate all videos button)' % n); continue
+    if not (isinstance(w, dict) and isinstance(w.get('jobs'), list) and w['jobs'] and all(isinstance(j, str) for j in w['jobs'])): bad.append('%s: wan.jobs is a list of job names from tools/art-library/wangen-jobs.json (not empty)' % n); continue
+    if len(set(w['jobs'])) != len(w['jobs']): bad.append('%s: wan.jobs names a job twice' % n)
+    if WJ is not None:
+        sys.path.insert(0, os.path.join(HERE, 'art-library'))
+        try: import wanbake
+        except Exception: wanbake = None
+        for j in w['jobs']:
+            if j not in WJ or j.startswith('_'): bad.append('%s: wan.jobs names %r, which is not a job in wangen-jobs.json' % (n, j)); continue
+            for p in (wanbake.check_spec(WJ[j]) if wanbake else []): bad.append('%s: job %s: %s' % (n, j, p))
+        top = float((WJ.get('_bulk') or {}).get('cap', 20))
+        if 'cap' in w and not (isinstance(w['cap'], (int, float)) and 0 < w['cap'] <= top): bad.append('%s: wan.cap is a number above 0 and at most the job file\'s _bulk.cap (%s)' % (n, top))
 # dash3: the shape of `jump` and `where` on a Tom play card
 def _lab_index():
     for p in (os.path.join(os.path.dirname(os.path.abspath(path)), 'battle-lab-index.json'), os.path.join(HERE, '..', 'data', 'battle-lab-index.json')):

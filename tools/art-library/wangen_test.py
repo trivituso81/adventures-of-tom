@@ -5,7 +5,7 @@ Checks: W1 dry run sends nothing; W2 a real run sends once, waits, downloads, bo
 W4 the cap refuses a call that would pass it; W5 a request left pending is picked up with no second send; W6 a refused key stops before
 any send and the key is never printed; W7 the video frame is exactly 720x1280 and sent as both first and last frame; W8 a failed
 request (COMPLETED with error) is reported, not saved as a result; W9 (wanch1) a list of jobs (names and wildcards) runs up to 3 at once on one
-ledger, and the cap stops exactly the job that would pass it."""
+ledger, and the cap stops exactly the job that would pass it; W13 (wanbulk) the bulk run: wanbulk_test.py."""
 import os, sys, json, shutil, subprocess, tempfile, threading, base64, io
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -192,6 +192,10 @@ check('W12 a real run logs its booking to usage: one fal row of the estimate', c
 c, o = run(repo, out12, 'start')
 check('W12 the same job run again (already made, nothing booked) logs nothing more', len(fx.main_costs(bare)['usage']) == 2, (o[-200:], fx.main_costs(bare)['usage']))
 ENVX.clear()
+
+# W13 (wanbulk): the bulk run (pass, edge retry, stop, cap, bake and wire, the board cards, the stored r4 videos) is tested in wanbulk_test.py with real ffmpeg videos; it runs here too
+p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'wanbulk_test.py')], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+check('W13 wanbulk_test.py (bulk pass, edge retry, stop, cap) ends ALL PASS', p.returncode == 0 and 'ALL PASS' in p.stdout, p.stdout[-800:])
 
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
 print('ALL PASS' if not fails else '%d FAILED: %s' % (len(fails), ', '.join(fails)))

@@ -205,6 +205,17 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | Spend | fal $0.785 (ledger $53.03 to $53.81; $0.50 of the rise before it was another session's Deedee dodge) | |
 | Tom's question (14:51) | "Why do we have to do an opus prompt for every individual animation?" Fact: wangen.py already runs job lists 3 at once; the Opus cost is the by-eye check plus one retry round per session. Card c-wanbulk moves the 4.4 checks and the known retries into the Action | |
 
+### 4.12 Built (wanbulk, 2026-11-21): the Action checks, retries, bakes and wires; one board button for a list of videos
+Tom (14:51): "Why do we have to do an opus prompt for every individual animation? This seems wasteful of my Claude usage. Can we do a bulk generation ?"
+| Step | What happens |
+|---|---|
+| Tap | A Tom card with `wan: {jobs, cap}` shows Generate all N videos (two taps; commit `board: wan generate <id>`). The `wan-gen` Action sets `wgen.want` false before any spend and makes the jobs 3 at a time inside the cap (the card's, never above `_bulk.cap` in `wangen-jobs.json`, 20 dollars) |
+| Measure | `tools/art-library/wanqa.py`: standing height first against last within 2 percent; feet row within 1 percent of the frame height in every picture (a jump: first and last only, `airborne`); background far from the figure flat magenta; figure never touches an edge; last against first under 3 of 255. `returns: false` (a held end pose), `skip_checks` and `limits` need a `why` on the job |
+| Look | Only when every measurement passed or only the edge failed: a vision checklist as `artqa.py` (three runs, majority): one question per sentence of the job prompt's MOTION part, plus same person |
+| Verdict | Passed: baked by the job's `bake` settings and wired from its `wire` field, one commit `wanbulk-<card>-<run>`, one Tom watch card listing every new clip. Edge only: made once more with the next pad of `_bulk.pads` (none, 0.8, 0.65). Anything else or a second miss: stopped, one Claude card `c-wanstop-<job>-r<rev>` (Opus 5.5, medium) with the numbers and the look answers; nothing is sent again at that rev, Claude raises `rev` by one change and Tom taps again. Cap reached: left for the next tap. No check key: kept, checked again free |
+| Replay (free) | `python3 -I tools/art-library/wangen.py --replay-checks rose-giddyup-r4,deedee-wetfloor-r4 --out <folder with the videos>`: giddyup r4 fails the edge check only; wet-floor r4 fails feet (9.5 percent) and edge, as 4.10 says. Of the 46 videos (final rev of each job) on branch `wangen`, 12 pass every measurement as they are, 32 fail at least one (feet 23, edge 11, background 8, ends 6, height 2; mostly the feet rule at 1 percent, which Deedee's approved idle breaks at 2.7 percent), 2 files are unreadable. The plan's numbers are kept; loosen a job with `limits` and a `why`, or change `LIMITS` in `wanqa.py` on evidence |
+| Not done | No real fal call and no real bump_tags run in a session; the first paid bulk run is Tom's tap. Every video already made is at its final rev, so the first real use is a card that lists new jobs (c-wanch5's two) |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

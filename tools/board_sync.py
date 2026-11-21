@@ -629,7 +629,7 @@ def night_ok(B, c):
     if c['lane'] != 'claude' or c['col'] != 'up' or not c.get('prompt'): return 'not a queued Claude card'
     if c.get('backlog'): return 'in the backlog'
     if c.get('night') is False: return 'opted out'
-    if c.get('service') or c.get('gen') or c.get('vgen'): return 'a paid run'
+    if c.get('service') or c.get('gen') or c.get('vgen') or c.get('wgen'): return 'a paid run'
     if open_blockers(B, c): return 'waits on an open card'
     p = c['prompt']
     if not (str(p.get('model', '')).startswith('Claude Sonnet 5.5') and str(p.get('effort', '')).startswith('medium')): return 'not Sonnet 5.5 medium'

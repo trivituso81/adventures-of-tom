@@ -21,7 +21,18 @@ and picked up again by the next run (no second charge).
 Output in OUT: the result (<what>-r<rev>.png or .mp4), the exact framed picture that was sent for a video (video-r<rev>-frame.png),
 the fal answer (<what>-r<rev>.json), wangen-report.json, state.json.
 
-Env: FAL_KEY, FAL_QUEUE (stand-in for tests; default https://queue.fal.run), FAL_API (default https://api.fal.ai), WANGEN_POLL."""
+wanbulk (2026-11-21, claude/video-battle-plan.md 4.12): a whole list of videos from one board button.
+  python3 -I tools/art-library/wangen.py --bulk [--card ID | --what JOB,JOB] [--cap 20] [--dry-run] [--no-vision] [--out DIR] [--repo DIR]
+  python3 -I tools/art-library/wangen.py --replay-checks rose-giddyup:4:0.8,deedee-wetfloor:4:0.8 [--out DIR]
+--bulk with a card (the card with `wgen.want`, or --card): the card's `wan.jobs` are made up to 3 at once. After each video wanqa.py runs plan 4.4 as
+measurements (height, feet, background, edge, ends) and a vision checklist (three runs, majority; xAI, repo secret XAI_API_KEY). A job that fails ONLY the edge
+check is made once more with the next smaller pad of its `pads` list (the job file's `_bulk.pads`: none, 0.8, 0.65); anything else, or a second miss, STOPS the
+job (nothing is sent again for that rev) and adds one Claude card (Opus 5.5, medium) with the evidence. A job that passes is baked by the `bake` settings on the job
+(wanbake.py, tools/clip-bake/bake_clip.py), wired from its `wire` field, and merged into main as one build `wanbulk-<card>-<run>`; one Tom card (ask animations)
+lists every new clip. The run's own cap is the card's `wan.cap`, never above `_bulk.cap` in the job file (retries count; a call that would pass it is refused and the
+job is left for the next tap). Results per job: <job>-r<rev>-result.json in OUT (branch `wangen`). Without a card (--what) it makes and checks and writes the results only.
+--replay-checks judges videos already in OUT (names like rose-giddyup-r4, the .mp4 in OUT), measurements only, free; exit 1 when one fails.
+Env: FAL_KEY, XAI_API_KEY (vision), XAI_BASE (stand-in), FAL_QUEUE (stand-in for tests; default https://queue.fal.run), FAL_API (default https://api.fal.ai), WANGEN_POLL."""
 import os, sys, io, json, time, base64, argparse, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))   # costs2: tools/costlog.py
@@ -251,17 +262,39 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     return 0 if all(not r.get('error') for r in rows) else 2
 
 
-def log_run_spend(state, spent0, a, names):
-    """costs2: what this run booked on fal (the estimate, or fal's live unit price when that is higher) goes to usage in data/costs.json."""
+def log_run_spend(state, spent0, a, names, extra=None):
+    """costs2: what this run booked on fal (the estimate, or fal's live unit price when that is higher) goes to usage in data/costs.json.
+    wanbulk: `extra` rows (the xAI money of the vision checks) go with it."""
     if a.dry_run: return
     try:
         import costlog
-        costlog.log_from_env([{'service': 'fal', 'amount': state['spent'] - spent0, 'what': 'wan-gen Action: %s' % ', '.join(names)[:200], 'source': 'wan-gen run'}])
+        costlog.log_from_env([{'service': 'fal', 'amount': state['spent'] - spent0, 'what': 'wan-gen Action: %s' % ', '.join(names)[:200], 'source': 'wan-gen run'}] + [r for r in (extra or []) if r.get('amount')])
     except Exception as x: say('warning: could not log the spend: ' + str(x)[:200])
+
+
+def replay_checks(a, jobs):
+    """wanbulk: the measurements of plan 4.4 on videos already made (free). One line per check; the job's `returns` and `airborne` flags are honoured."""
+    import re, wanqa
+    bad = 0
+    for stem in [x.strip() for x in a.replay_checks.split(',') if x.strip()]:
+        m = re.fullmatch(r'(.+?)(?:-a\d+)?-r(\d+)', stem)
+        job = jobs.get(m.group(1)) if m else None
+        path = os.path.join(a.out, stem + '.mp4')
+        if job is None or not os.path.exists(path): say('%s: no job or no video in %s' % (stem, a.out)); bad += 1; continue
+        skip = wanqa.skips(job); me = wanqa.measure(path, bool(job.get('airborne')), job.get('limits'))
+        f = wanqa.fails(me, None, skip)
+        say('%s: %s' % (stem, 'every measurement passes' if not f else 'FAILS ' + ', '.join(f)))
+        for c in me['checks']: say('   %-6s %s  %s%s' % (c['id'], 'ok  ' if c['ok'] else 'FAIL', c['say'], '  (not owed by this job)' if c['id'] in skip else ''))
+        bad += bool(f)
+    return 1 if bad else 0
 
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--bulk', action='store_true', help='wanbulk: make, check, bake and wire the jobs of a board card (--card) or of --what')
+    ap.add_argument('--card', default='', help='--bulk: the board card with the `wan` job list (its `wgen.want` is the tap)')
+    ap.add_argument('--no-vision', action='store_true', help='--bulk: tests only, the look checks are skipped and count as passed')
+    ap.add_argument('--replay-checks', default='', help='measure videos already in --out (names like rose-giddyup-r4, comma list); free')
     ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
     ap.add_argument('--requests', action='store_true', help='guidegen1: work through data/wan-requests.json (what the Battle Guide asked for) instead of --what')
     ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
@@ -271,9 +304,12 @@ def main():
     ap.add_argument('--parallel', type=int, default=3, help='jobs sent at once (1 to 3)')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
     a = ap.parse_args()
+    a.cap_set = any(x.startswith('--cap') for x in sys.argv[1:])
     jobs = load_jobs(a.repo)
-    if not a.requests and not a.what: ap.error('give --what or --requests')
-    names = [] if a.requests else pick(jobs, a.what)
+    if a.replay_checks: return replay_checks(a, jobs)
+    if a.bulk and not a.card and not a.what: ap.error('--bulk needs --card or --what')
+    if not a.bulk and not a.requests and not a.what: ap.error('give --what or --requests')
+    names = [] if (a.requests or a.bulk) else pick(jobs, a.what)
     os.makedirs(a.out, exist_ok=True)
     stf = os.path.join(a.out, 'state.json')
     state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
@@ -293,6 +329,10 @@ def main():
         rc = run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
         log_run_spend(state, spent0, a, ['guide requests'])
         return rc
+    if a.bulk:
+        import wanbulk
+        rc = wanbulk.run(a, jobs, state, lock, save, fal, key, spent0)
+        save(); return rc
     say('%d job(s): %s; up to %d at once; ledger $%.2f of the $%.2f cap' % (len(names), ', '.join(names), max(1, min(3, a.parallel)), state['spent'], a.cap))
 
     def one(n):

@@ -16,6 +16,10 @@
   {
    "script": "tools/art-library/make-prompts.js",
    "why": "rewrites data/art-prompts.json, not a check (its failure in a sandbox is listed in claude/next.md)"
+  },
+  {
+   "script": "tools/art-library/wanbulk_test.py",
+   "why": "run inside tools/art-library/wangen_test.py (W13), which owns the row"
   }
  ],
  "tests": [
@@ -634,7 +638,7 @@
    "id": "art-library__wangen_test",
    "cmd": "python3 -I tools/art-library/wangen_test.py",
    "group": "g4",
-   "minutes": 1
+   "minutes": 5
   },
   {
    "id": "b3-sim-check",
@@ -1335,6 +1339,13 @@
    "cmd": "python3 -I tools/winnow_test.py",
    "group": "g6",
    "minutes": 1
+  },
+  {
+   "id": "board_wan_test",
+   "cmd": "python3 -I tools/board_wan_test.py",
+   "group": "g2",
+   "minutes": 1,
+   "outdir": true
   }
  ]
 }

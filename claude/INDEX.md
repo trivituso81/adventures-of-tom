@@ -852,6 +852,6 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 
 | File | First line | Date |
 |---|---|---|
-| wanch4/giddyup-r5-top.jpg | ���� JFIF      �� C 				 |  |
-| wanch4/giddyup-r5.jpg | ���� JFIF      �� C 				 |  |
-| wanch4/wetfloor-r4.jpg | ���� JFIF      �� C 				 |  |
+| wanch4/giddyup-r5-top.jpg | ���� JFIF      �� C 				 | 2026-11-21 |
+| wanch4/giddyup-r5.jpg | ���� JFIF      �� C 				 | 2026-11-21 |
+| wanch4/wetfloor-r4.jpg | ���� JFIF      �� C 				 | 2026-11-21 |
