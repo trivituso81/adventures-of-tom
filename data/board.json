@@ -25710,7 +25710,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25818,6 +25818,11 @@
     {
      "d": "2026-11-21",
      "t": "Stuck twice: The rescue started 12:34 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-anim-deedee-dodge-y4m3)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped Start again after Stuck twice.",
+     "at": "2026-11-21T22:43:12.949Z"
     }
    ],
    "prompt": {
@@ -25831,14 +25836,7 @@
    },
    "started_at": "2026-11-21T20:34:46+00:00",
    "after": "nothing for Tom: c-anim-deedee-dodge-y4m3",
-   "rescue": {
-    "at": "2026-11-21T20:34:46+00:00",
-    "n": 1,
-    "why": "A session ended without shipping",
-    "url": "https://claude.ai/code/cse_01RXeukDaMeZbDPDpEFyVFNY",
-    "prev": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej"
-   },
-   "waiting_on": "tom"
+   "start": true
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -30205,7 +30203,7 @@
   {
    "id": "t-stuck-anim-deedee-dodge-y4m3-2",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "unstick",
    "unstick": {
@@ -30225,10 +30223,16 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-sync: card c-anim-deedee-dodge-y4m3 stalled after its rescue"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped Start again.",
+     "at": "2026-11-21T22:43:12.950Z"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21"
+   "changed": "2026-11-21",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-nightgreen2",
