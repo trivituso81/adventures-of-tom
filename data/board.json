@@ -22973,7 +22973,7 @@
    "title": "Approve Boppy's unimpressed pose in his Paso Robles cap",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). The first tap on 11-21 made no picture: the only file for Boppy's unimpressed pose is still the old Big Fish one. When the job finishes, open the Art Library button below. It should show Boppy alone on magenta, half-closed eyelids, mustache, fishing rod over his shoulder, cap reading Paso Robles (not Big Fish). APPROVE it if so, REJECT with a note if not. Approving unblocks c-boppy-bigfish.",
    "blocks": [
@@ -23018,6 +23018,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 1 picture, QA: 17 of 17. Spent about $0.07."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T16:46:44.741Z"
     }
    ],
    "chat": {
@@ -23052,7 +23057,8 @@
       }
      }
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-boppy-bigfish",
