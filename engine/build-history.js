@@ -138,6 +138,10 @@ function buildStatusHtml() {
     (newer?'<button type="button" class="bl-reload" data-act="reload">RELOAD</button>':'');
 }
 
+// The build name as a pill (buildpill1): the same pill style as the status chips, colored by the build's status
+// (pub purple, test red, live green; Being built amber and Queued grey on the In the works tab).
+function buildNamePill(text,cls,w) { return '<span class="bl-chip bl-name '+cls+'">'+(w?buildMark(text,w):buildEsc(text))+'</span>'; }
+function buildNameClass(r) { const s=buildStat(r); return s.pub?'pub':s.test?'test':'live'; }
 function buildChips(r) {
   const s=buildStat(r); let h='';
   if(s.pub) h+='<span class="bl-chip pub">PUBLISHING</span>'; else if(s.newer) h+='<span class="bl-chip live">LIVE, RELOAD</span>';
@@ -146,9 +150,9 @@ function buildChips(r) {
 }
 function buildRowHtml(r,opt) {
   const d=new Date(r.at), mine=buildMine(), w=opt.words||[];
-  const meta=[buildMark(r.tag,w)]; if(r.theme) meta.push(buildMark(r.theme,w)); meta.push(buildEsc(opt.dateTime?buildDateTime(d):buildTime(d)));
+  const meta=[]; if(r.theme) meta.push(buildMark(r.theme,w)); meta.push(buildEsc(opt.dateTime?buildDateTime(d):buildTime(d)));
   const main='<div class="bl-row'+(r.tag===mine?' mine':'')+(opt.sub?' sub':'')+'" role="button" tabindex="0" data-act="sheet" data-tag="'+buildEsc(r.tag)+'">'+
-    '<span class="bl-what">'+buildMark(r.what||r.tag,w)+'</span>'+buildChips(r)+
+    buildNamePill(r.tag,buildNameClass(r),w)+buildChips(r)+'<span class="bl-what">'+buildMark(r.what||r.tag,w)+'</span>'+
     '<span class="bl-meta">'+meta.join(' &middot; ')+'</span>';
   let tries='';
   if(opt.older&&opt.older.length) {
@@ -292,16 +296,16 @@ function buildWorksGroup(key,title,rows,openDefault) {
 }
 function buildWorksHtml() {
   const m=buildMemo(), b=BUILDLOG.board;
-  const cardRow=(c,meta,chip)=>'<a class="bl-row" href="board.html?card='+encodeURIComponent(c.id)+'"><span class="bl-what">'+buildEsc(c.title||c.id)+'</span>'+(chip?'<span class="bl-chips"><span class="bl-chip '+chip[0]+'">'+chip[1]+'</span></span>':'')+'<span class="bl-meta">'+meta.map(buildEsc).join(' &middot; ')+'</span></a>';
-  const pubRows=buildAllRows().filter(r=>m.pub.has(r.tag)).map(r=>'<div class="bl-row" role="button" tabindex="0" data-act="sheet" data-tag="'+buildEsc(r.tag)+'"><span class="bl-what">'+buildEsc(r.what||r.tag)+'</span><span class="bl-chips"><span class="bl-chip pub">PUBLISHING</span></span><span class="bl-meta">'+buildEsc(r.tag)+' &middot; pushed '+buildEsc(buildWhen(r.at))+', usually live in 4 min</span></div>');
+  const cardRow=(c,tag,meta,chip)=>'<a class="bl-row" href="board.html?card='+encodeURIComponent(c.id)+'">'+buildNamePill(tag||'no build name yet',tag?chip[0]:'queue')+(chip?'<span class="bl-chips"><span class="bl-chip '+chip[0]+'">'+chip[1]+'</span></span>':'')+'<span class="bl-what">'+buildEsc(c.title||c.id)+'</span><span class="bl-meta">'+meta.map(buildEsc).join(' &middot; ')+'</span></a>';
+  const pubRows=buildAllRows().filter(r=>m.pub.has(r.tag)).map(r=>'<div class="bl-row" role="button" tabindex="0" data-act="sheet" data-tag="'+buildEsc(r.tag)+'">'+buildNamePill(r.tag,'pub')+'<span class="bl-chips"><span class="bl-chip pub">PUBLISHING</span></span><span class="bl-what">'+buildEsc(r.what||r.tag)+'</span><span class="bl-meta">pushed '+buildEsc(buildWhen(r.at))+', usually live in 4 min</span></div>');
   let h=buildWorksGroup('pub','Publishing now',pubRows,true);
   if(!b) return h+(BUILDLOG.boardState==='fail'?'<div class="bl-empty">Could not read the board.<button type="button" class="bl-clear" data-act="check">Try again</button></div>':'<div class="bl-empty">Reading the board...</div>');
-  const built=buildBoardCards('built').sort((x,y)=>String(y.started_at||'').localeCompare(String(x.started_at||''))).map(c=>{ const st=buildStarted(c); return cardRow(c,[c.tag||'no build name yet',c.theme||'No theme'].concat(st?['started '+st]:[]),['build','BUILDING']); });
+  const built=buildBoardCards('built').sort((x,y)=>String(y.started_at||'').localeCompare(String(x.started_at||''))).map(c=>{ const st=buildStarted(c); return cardRow(c,c.tag,[c.theme||'No theme'].concat(st?['started '+st]:[]),['build','BUILDING']); });
   const test=buildBoardCards('test').sort((x,y)=>String(y.changed||'').localeCompare(String(x.changed||''))).map(c=>{
     const tag=buildTomBuild(c), e=tag?buildEntry(tag):null, s=e?buildStat(e):null;
     const where=!tag?'build not named yet':!e?'build not found':s.pub?'still publishing':s.newer?'reload first':'on this phone';
-    return cardRow(c,tag?[tag,where]:[where],['test','YOUR TEST']); });
-  const queued=buildBoardCards('queued').map(c=>cardRow(c,[c.tag||'no build name yet',c.theme||'No theme',c.col==='wait'?'waiting':'up next'],['queue','QUEUED']));
+    return cardRow(c,tag,[where],['test','YOUR TEST']); });
+  const queued=buildBoardCards('queued').map(c=>cardRow(c,c.tag,[c.theme||'No theme',c.col==='wait'?'waiting':'up next'],['queue','QUEUED']));
   return h+buildWorksGroup('built','Being built now',built,true)+buildWorksGroup('test','Waiting on your test',test,true)+buildWorksGroup('queued','Queued',queued,false);
 }
 

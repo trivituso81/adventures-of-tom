@@ -26504,7 +26504,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Builds screen: the build name is a status-colored pill",
-   "next": "Making the build name the prominent first line of every Builds row, in a pill in the same style as PUBLISHING and BUILDING, colored by the build's status.",
+   "next": "Built as buildpill1: every Builds row starts with the build name in a pill, colored by status. Tom checks it on card t-buildpill-try.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -26525,8 +26525,13 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status.\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built: engine/build-history.js buildNamePill, buildNameClass, cardRow; build-history.css .bl-chip.bl-name; tools/buildlog_test.py B16. Purple publishing, red your test, green live, amber being built, grey queued. Hands to Tom: t-buildpill-try."
     }
-   ]
+   ],
+   "after": "t-buildpill-try"
   },
   {
    "id": "b-portraits2",
@@ -26579,8 +26584,35 @@
      "t": "Tom: all good.",
      "at": "2026-11-21T19:23:05.723Z"
     }
+<<<<<<< HEAD
    ],
    "done": "2026-11-21"
+=======
+   ]
+  },
+  {
+   "id": "t-buildpill-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Look at the build name pills on the Builds screen",
+   "next": "ADMIN > BUILDS (reload the game first if it says newer builds are live). On Recent, each row should start with the build name in a rounded pill: purple while publishing, green when live, red when it is your test. Tap In the works: building rows are amber and queued rows grey. Then press All good, or Something is wrong and say what you saw.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFsxNwWgaqBLsffjnE",
+    "opening": "made by buildpill1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by build buildpill1 (card c-buildpill1)."
+    }
+   ]
+>>>>>>> 968fc2d (buildpill1: the build name on the Builds screen is a status-colored pill)
   }
  ],
  "sessions": [

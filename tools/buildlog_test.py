@@ -136,12 +136,17 @@ with sync_playwright() as pw:
         r0=pg.locator('.bl-row').first
         kids=r0.evaluate("e=>[...e.children].map(c=>c.className)")
         meta=r0.locator('.bl-meta').inner_text()
-        need(kids[0]=='bl-what' and kids[-1]=='bl-meta', f'{layout} B3: the sentence comes first, then (a status chip), then the small line ({kids})')
-        need(re.fullmatch(r'gem-x · Story and Dialogue · 11:50 AM',meta) is not None, f'{layout} B3: small line is name, theme, time ({meta!r})')
+        need('bl-name' in kids[0] and 'bl-what' in kids and kids[-1]=='bl-meta' and kids.index('bl-what')>0, f'{layout} B3: the build name pill comes first, then (a status chip), the sentence, then the small line ({kids})')
+        need(r0.locator('.bl-name').inner_text()=='gem-x', f'{layout} B3: the pill carries the build name')
+        need(re.fullmatch(r'Story and Dialogue · 11:50 AM',meta) is not None, f'{layout} B3: small line is theme, time ({meta!r})')
         lines=r0.locator('.bl-what').evaluate("e=>Math.round(e.getBoundingClientRect().height/parseFloat(getComputedStyle(e).lineHeight))") if layout=='portrait' else 2
         need(lines<=2, f'{layout} B3: the sentence is cut after two lines ({lines} lines)')
-        chips=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chip')].map(c=>c.innerText).join('+'))")
+        chips=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chips .bl-chip')].map(c=>c.innerText).join('+'))")
         need(chips==['gem-x:LIVE, RELOAD','fix-foo-3:LIVE, RELOAD',MINE+':YOUR TEST','plainbuild:','fix-bar-3:'], f'{layout} B8: chips are LIVE, RELOAD above this phone, YOUR TEST on its build, none below ({chips})')
+        # B16 (buildpill1): the build name is a pill in the chip style, colored by status (pub purple, test red, live green), bigger than the chips
+        pills=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>e.dataset.tag+':'+e.querySelector('.bl-name').className.replace('bl-chip bl-name ',''))")
+        need(pills==['gem-x:live','fix-foo-3:live',MINE+':test','plainbuild:live','fix-bar-3:live'], f'{layout} B16: name pill color follows status ({pills})')
+        need(pg.evaluate("()=>{ const n=document.querySelector('.bl-name'), c=document.querySelector('.bl-chips .bl-chip'); const a=getComputedStyle(n), b=getComputedStyle(c); return a.borderColor===b.borderColor&&a.backgroundColor===b.backgroundColor&&parseFloat(a.fontSize)>parseFloat(b.fontSize)&&parseInt(a.fontWeight)>=600; }"), f'{layout} B16: the pill uses the chip colors with a larger bold name')
 
         # B4: the marker sits directly above this phone's build
         need(pg.evaluate("()=>{ const m=document.querySelectorAll('.bl-marker'); if(m.length!==1) return false; const n=m[0].nextElementSibling; return n.classList.contains('bl-row')&&n.classList.contains('mine'); }"), f'{layout} B4: one marker, directly above this phone\'s build')
@@ -294,8 +299,8 @@ with sync_playwright() as pw:
         GH['pushed']=(200,HIST_PUSHED); reopen(pg)
         st=pg.inner_text('.bl-status')
         need('4 newer builds are live. 1 more is publishing.' in st, f'{layout} B8: the strip counts the publishing build ({st!r})')
-        first=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.slice(0,2).map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chip')].map(c=>c.innerText).join('+'))")
-        need(first==['pub-new:PUBLISHING','gem-x:LIVE, RELOAD'] and pg.locator('.bl-chip.pub').count()==1, f'{layout} B8: the pushed build is first with a PUBLISHING chip ({first})')
+        first=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.slice(0,2).map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chips .bl-chip')].map(c=>c.innerText).join('+'))")
+        need(first==['pub-new:PUBLISHING','gem-x:LIVE, RELOAD'] and pg.locator('.bl-chips .bl-chip.pub').count()==1, f'{layout} B8: the pushed build is first with a PUBLISHING chip ({first})')
         need(pg.evaluate("()=>{ const m=document.querySelector('.bl-marker'); return !!m&&m.nextElementSibling.classList.contains('mine'); }"), f'{layout} B8: the marker still sits above this phone\'s build')
         pg.screenshot(path=f'{OUT}/{layout}-11-publishing.png')
         pg.tap('.bl-row[data-tag="pub-new"] .bl-what'); pg.wait_for_timeout(300)
@@ -303,7 +308,7 @@ with sync_playwright() as pw:
         pg.tap('.bl-dwrap .bl-sclose'); pg.wait_for_timeout(200)
         GH['pushed']=(500,'{}'); reopen(pg)
         st=pg.inner_text('.bl-status')
-        need(pg.locator('.bl-chip.pub').count()==0 and 'Could not check GitHub.' in st and 'publishing' not in st, f'{layout} B8: GitHub unreachable shows no PUBLISHING chip and says so ({st!r})')
+        need(pg.locator('.bl-chips .bl-chip.pub').count()==0 and 'Could not check GitHub.' in st and 'publishing' not in st, f'{layout} B8: GitHub unreachable shows no PUBLISHING chip and says so ({st!r})')
         pg.screenshot(path=f'{OUT}/{layout}-12-nogithub.png')
         # B9: the last publish run failed
         GH['pushed']=(200,HIST); GH['runs']=(200,json.dumps({'workflow_runs':[{'status':'in_progress','conclusion':None,'updated_at':at(0,11,59)},{'status':'completed','conclusion':'failure','updated_at':at(0,11,58)},{'status':'completed','conclusion':'success','updated_at':at(0,11,0)}]})); reopen(pg)
@@ -320,8 +325,10 @@ with sync_playwright() as pw:
         need(len(rows)==1+3+2 and rows[0].startswith('pub-new|') and 'pushed' in rows[0] and 'usually live in 4 min' in rows[0], f'{layout} B10: publishing row, three building rows and "N more", two test rows ({len(rows)} rows)')
         need(rows[1].startswith('board.html?card=c-b4|') and 'build4' in rows[1] and 'started 9:14 AM' in rows[1], f'{layout} B10: a building row names the card, build and start time ({rows[1]!r})')
         need(any('more' in b for b in pg.eval_on_selector_all('.bl-more',"els=>els.map(e=>e.innerText)")), f'{layout} B10: more than three rows show N more')
+        wp=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>(e.querySelector('.bl-chips .bl-chip')||{}).innerText+':'+e.querySelector('.bl-name').className.replace('bl-chip bl-name ',''))")
+        need(all(x.split(':')[0].split(',')[0].lower().replace('your test','test').replace('publishing','pub').replace('building','build').replace('queued','queue')==x.split(':')[1] for x in wp), f'{layout} B16: In the works pills match their status chip ({wp})')
         tt=[r for r in rows if r.startswith('board.html?card=t-')]
-        need(len(tt)==2 and any('fix-foo-3 · reload first' in t for t in tt) and any(MINE+' · on this phone' in t for t in tt) and not any('t-decide' in t for t in tt), f'{layout} B10: test rows say reload first or on this phone, a decide card is left out ({tt})')
+        need(len(tt)==2 and any('fix-foo-3' in t and 'reload first' in t for t in tt) and any(MINE in t and 'on this phone' in t for t in tt) and not any('t-decide' in t for t in tt), f'{layout} B10: test rows say reload first or on this phone, a decide card is left out ({tt})')
         need(not small(pg), f'{layout} B1: In the works is 44 px or more ({small(pg)})')
         pg.screenshot(path=f'{OUT}/{layout}-14-works.png')
         pg.tap('.bl-more'); pg.wait_for_timeout(200)

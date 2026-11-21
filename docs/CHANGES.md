@@ -1,3 +1,10 @@
+## buildpill1 (2026-11-21): the build name on the Builds screen is a status-colored pill
+
+Card c-buildpill1. Tom (11-21): "in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status."
+- Every row on Recent, Archive, search and In the works now starts with the build name in a pill, the same pill style as PUBLISHING and BUILDING but larger and bold. The color follows the build's status: purple publishing, red your test, green live, amber being built, grey queued (a queued card with no build name yet shows "no build name yet" in grey). The status chip stays on the right.
+- The small line under the sentence no longer repeats the build name (it was the first item there); it shows theme and time.
+- `engine/build-history.js` (`buildNamePill`, `buildNameClass`, `buildRowHtml`, `cardRow` in `buildWorksHtml`), `build-history.css` (`.bl-chip.bl-name`). Test: `python3 tools/buildlog_test.py` now checks the pill order, color per status and size (B16), FAILS [].
+- Looked at portrait and landscape screenshots of Recent and In the works. Not seen on the phone yet.
 ## 2026-11-21 (7): Art Library bake, clip-skeeter-bite, clip-skeeter-whine (`artbake1573`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
