@@ -21428,7 +21428,7 @@
    "id": "c-qa-coh07",
    "tag": "qa-coh07",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Muffin pan missing from the island before the theft",
    "next": "Fix written: the pan shows on the island from entry. Waiting on the play check card t-qa-coh07play.",
@@ -21465,6 +21465,10 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed on main (island drawn bare until the scene set the pan prop). Fixed in qa-coh07: scenePropsDraw draws the pan on map grands in chapter 1 until flag ch1-theft."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh07: the twelve-cup muffin pan sits on Deedee's island from the moment Tom walks in"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21472,7 +21476,8 @@
     "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
     "opening": "started by START"
    },
-   "after": "t-qa-coh07play"
+   "after": "t-qa-coh07play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-txt03",
@@ -21996,6 +22001,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
+   "title": "Muffin pan missing from the island before the theft",
+   "first": "2026-11-21T03:30:28Z",
+   "last": "2026-11-21T03:39:23Z",
+   "tags": [
+    "qa-coh07"
+   ],
+   "cards": [
+    "c-qa-coh07"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDnxgPFMumUZDtFZgi",
    "title": "Fix: Check chapter 1 ends in the flight",
    "first": "2026-11-21T03:37:36Z",
@@ -22087,16 +22104,6 @@
    ],
    "cards": [
     "c-qa-coh04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
-   "title": "Muffin pan missing from the island before the theft",
-   "first": "2026-11-21T03:30:28Z",
-   "last": "2026-11-21T03:30:28Z",
-   "tags": [],
-   "cards": [
-    "c-qa-coh07"
    ]
   },
   {
@@ -25083,8 +25090,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "93c65b6054109ac19f405e0800da27f28ae82be1",
- "synced_at": "2026-11-21T03:39:20+00:00",
+ "synced": "ce4c6233961dc760f3f0d3952adbbbee3b98e32f",
+ "synced_at": "2026-11-21T03:40:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
