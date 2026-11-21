@@ -23510,16 +23510,20 @@
    "col": "up",
    "ask": "play",
    "build": "costs1",
-   "next": "On your desktop browser open https://trivituso81.github.io/adventures-of-tom/costs.html (or ADMIN > AI COSTS). Check the Overview total, open Ledger and press Subtotal by Month, open Totals and click one figure in the table, then open the Claude service. Say what is wrong or missing. Your notes go to the next build, \"AI Costs fills itself in: balances and job spend\".",
+   "next": "On your desktop browser open https://trivituso81.github.io/adventures-of-tom/costs.html (or ADMIN > AI COSTS). Check the Overview total, open Ledger and press Subtotal by Month, open Totals and click one figure in the table, then open the Claude service. The browser tab should show a gold receipt with a dollar sign, not the Admin gear. Say what is wrong or missing. Your notes go to the next build, \"AI Costs fills itself in: balances and job spend\".",
    "blocks": [
     "c-costs2"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added with c-costs1 (build costs1). Your notes go to card c-costs2, the AI Costs page that fills itself in."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Build costs1icon adds the page's own tab icon to this check."
     }
    ]
   },
@@ -23612,6 +23616,38 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-costs1icon",
+   "tag": "costs1icon",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "AI Costs page gets its own browser tab icon",
+   "next": "In this session: a gold receipt with a dollar sign replaces the Admin gear as the AI Costs page icon. Tom sees it on card t-costs1look.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+    "opening": "\"Give it a unique favicon\""
+   },
+   "prompt": {
+    "what": "Gives the AI Costs page its own browser tab icon.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are on this card)",
+    "effort": "low (two picture files and one line)",
+    "text": "Read CLAUDE.md and card c-costs1icon in data/board.json, then finish what its history describes and push build costs1icon. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"Give it a unique favicon\"."
+    }
+   ],
+   "after": "t-costs1look"
   }
  ],
  "sessions": [
