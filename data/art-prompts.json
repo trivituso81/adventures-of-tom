@@ -17734,8 +17734,24 @@
    "promptRev": 3
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-gate-backlot-stage7-open-v1.png",
+     "date": "2026-11-21",
+     "from": "v1",
+     "at": 1795286368488,
+     "srv": "prop-gate-backlot-stage7-open@20261121T035439",
+     "svc": "xai",
+     "qa": 0.8,
+     "qaFail": [
+      "f_paint",
+      "p8",
+      "p10"
+     ]
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-20",
