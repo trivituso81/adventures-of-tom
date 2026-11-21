@@ -8,7 +8,8 @@ Report r-20261120-142626-w74f, "missing art for all item banners". The ITEM GAIN
 | 18 sheet entries `prop-item-01` to `prop-item-18` (Art Library > Props > Item pictures), 16 items each, flat magenta background | `tools/art-library/itemart-prompts.js` (`node tools/art-library/itemart-prompts.js` adds or refreshes them in `data/art-prompts.json`; approved prompts are never reworded) |
 | Cutting an approved sheet into `art/items/<id>.webp` and rewriting the list | `tools/sprite-bake/bake_item_sheet.py` (run by the art-bake Action from the entry's `bake` field; by hand with `<sheet> <id>...`, add `--check` for a contact sheet in `tools/shots/`) |
 | The list of items that have a picture, and its cache tag | `data/item-art.js` (`ITEM_ART`, `ITEM_ART_V`) |
-| Drawing it | ring on the right of the banner, `.pb-icon` in `index.html`; `pbItemIcon` in `engine/party-banner.js` |
+| Drawing it | the square tile at the top left of the item definition banner (itemdef1), `.pb-tile` in `index.html`; `pbItemIcon` in `engine/party-banner.js` |
+| The words around it (type, description, IN BATTLE, IN STORY) | `data/item-defs.js`, `docs/ITEM_DEFS.md` |
 
 An item that is not in `ITEM_ART`, or whose file fails to load, shows its emoji (`items[id].icon`), which the menus, shops and bag still use.
 

@@ -18,7 +18,11 @@ const PB_NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',bo
 function pbEl() {
   let w=document.getElementById('party-banner'); if(w) return w;
   w=document.createElement('div'); w.id='party-banner'; w.setAttribute('role','status'); w.setAttribute('aria-live','polite');
-  w.innerHTML='<div class="pb-card"><img class="pb-art" alt=""><img class="pb-face" alt=""><div class="pb-icon"></div><div class="pb-words"><div class="pb-line"></div><div class="pb-note"></div></div></div><div class="pb-hint">Tap or press A to continue</div>';
+  w.innerHTML='<div class="pb-card"><img class="pb-art" alt=""><img class="pb-face" alt=""><div class="pb-words"><div class="pb-line"></div><div class="pb-note"></div></div>'+
+    '<div class="pb-item"><div class="pb-head"><span class="pb-tag">ITEM GAINED</span><span class="pb-page"></span></div><div class="pb-tile"></div>'+
+    '<div class="pb-title"><div class="pb-name"></div><div class="pb-type"></div></div><div class="pb-desc"></div>'+
+    '<dl class="pb-rows"><dt>IN BATTLE</dt><dd class="pb-battle"></dd><dt>IN STORY</dt><dd class="pb-story"></dd></dl><div class="pb-inote"></div><div class="pb-ihint"></div></div></div>'+
+    '<div class="pb-hint">Tap or press A to continue</div>';
   (document.getElementById('game')||document.body).appendChild(w);
   return w;
 }
@@ -42,8 +46,10 @@ function partyBanner(id,kind='join',note='') {
 }
 // itembanner1 (Tom 2026-11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means,
 // basically similar to the banner that we get when people join and leave the party, we need a banner ... for that item gained."
-// itemBanner(ids,note): one ITEM GAINED banner (the item's painted picture or emoji, and its name, a jingle, held until dismissed) in the same queue as the party banners; several items from one
-// source share one banner. note is the second line (the monster's drop line, or the auto-gear note). It waits while a fight is on screen.
+// itemBanner(ids,note): one ITEM GAINED banner in the same queue as the party banners, held until dismissed, with a jingle; several items from one
+// source share one banner. note is the source's line (the monster's drop line, the auto-gear note). It waits while a fight is on screen.
+// itemdef1 (Tom 2026-11-20): the banner reads like a JRPG item definition: picture, name and type, a short description, IN BATTLE and IN STORY
+// (itemDef in data/item-defs.js). Several items from one source are pages of the same banner: tap or A turns to the next item, the last one closes it.
 function itemBanner(ids,note='') {
   ids=(Array.isArray(ids)?ids:[ids]).filter(id=>typeof items!=='undefined'&&items[id]);
   if(!ids.length) return;
@@ -60,9 +66,20 @@ function pbItemIcon(id) {
   im.src='art/items/'+id+'.webp?v='+ITEM_ART_V;
   return im;
 }
-function pbItemLine(ids) {
-  const n={}; ids.forEach(id=>n[id]=(n[id]||0)+1);
-  return 'Got '+Object.keys(n).map(id=>items[id].name+(n[id]>1?' x'+n[id]:'')).join(', ')+'!';
+let pbItem=null;   // the item banner on screen: {pages:[[id,count]...], at, note}
+function pbItemPage() {
+  const w=pbEl(),[id,n]=pbItem.pages[pbItem.at],last=pbItem.at===pbItem.pages.length-1;
+  const d=typeof itemDef==='function'?itemDef(id):{name:items[id].name,type:'',desc:items[id].desc||'',battle:'',story:''};
+  w.querySelector('.pb-tile').replaceChildren(pbItemIcon(id));
+  w.querySelector('.pb-name').textContent=d.name+(n>1?' x'+n:'');
+  w.querySelector('.pb-type').textContent=d.type;
+  w.querySelector('.pb-desc').textContent=d.desc;
+  w.querySelector('.pb-battle').textContent=d.battle;
+  w.querySelector('.pb-story').textContent=d.story;
+  w.querySelector('.pb-page').textContent=pbItem.pages.length>1?(pbItem.at+1)+' of '+pbItem.pages.length:'';
+  w.querySelector('.pb-inote').textContent=pbItem.at===0?pbItem.note:'';
+  w.querySelector('.pb-ihint').textContent=last?'Tap or press A to continue':'Tap or press A for the next item';
+  pbAt=performance.now();
 }
 function pbNext() {
   const b=pbQueue.shift(); if(!b) { pbBusy=false; return; }
@@ -70,16 +87,16 @@ function pbNext() {
   if(b.kind==='item') {
     const w=pbEl(); w.classList.remove('painted','leave'); w.classList.add('item');
     w.querySelector('.pb-art').removeAttribute('src'); w.querySelector('.pb-face').removeAttribute('src');
-    const ico=w.querySelector('.pb-icon'),uniq=[...new Set(b.ids)];
-    ico.replaceChildren(...uniq.map(pbItemIcon)); ico.classList.toggle('many',uniq.length>1);
-    w.querySelector('.pb-line').textContent=pbItemLine(b.ids);
-    w.querySelector('.pb-note').textContent=b.note||'';
+    const n=new Map(); b.ids.forEach(id=>n.set(id,(n.get(id)||0)+1));
+    pbItem={pages:[...n.entries()],at:0,note:b.note||''};
+    pbItemPage();
     w.classList.remove('out'); void w.offsetWidth; w.classList.add('on');
     pbShown=true; pbAt=performance.now();
     if(typeof clearInput==='function') clearInput();
     try { pbSound.item(); } catch(e) {}
     return;
   }
+  pbItem=null;
   const w=pbEl(),name=PB_NAMES[b.id],key=b.kind+'-'+b.id;
   w.classList.remove('item');
   const has=typeof PARTY_BANNERS!=='undefined'&&PARTY_BANNERS.includes(key);
@@ -98,7 +115,13 @@ function pbNext() {
 // Dismiss the banner on screen (ignored in its first PB_MIN ms). The next queued banner follows after PB_GAP; with none queued the game is free at once.
 function partyBannerDismiss() {
   if(!pbShown||performance.now()-pbAt<PB_MIN) return false;
-  pbShown=false;
+  if(pbItem&&pbItem.at<pbItem.pages.length-1) {   // itemdef1: the next item of the same banner
+    pbItem.at++; pbItemPage();
+    try { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); } catch(e) {}
+    if(typeof clearInput==='function') clearInput();
+    return true;
+  }
+  pbShown=false; pbItem=null;
   const w=pbEl(); w.classList.add('out'); w.classList.remove('on');
   try { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); } catch(e) {}
   if(typeof clearInput==='function') clearInput();
@@ -116,4 +139,4 @@ function partyBannerHeld() { return pbBusy||pbShown||pbQueue.length>0; }   // tr
   for(const t of ['pointerdown','pointerup','mousedown','mouseup','touchstart','touchmove','contextmenu']) window.addEventListener(t,e=>{ if(partyBannerHeld()) stop(e); },{capture:true,passive:false});
   for(const t of ['touchend','click']) window.addEventListener(t,e=>{ if(!partyBannerHeld()) return; stop(e); partyBannerDismiss(); },{capture:true,passive:false});
 })();
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{itemBanner,partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{itemBanner,itemDef:typeof itemDef==='function'?itemDef:null,partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });

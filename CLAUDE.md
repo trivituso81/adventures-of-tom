@@ -260,6 +260,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 | Music tracks, their prompts, makes and merges | `tools/music-library/tracks.json` (prompts), `music.html` (ADMIN > MUSIC LIBRARY), `docs/MUSIC_LIBRARY.md`, `engine/music-clips.js` (what plays where) |
 | A closed entrance (locked gate, door, barrier on an outdoor map): its pictures and when they show | `data/gate-art.js`, `engine/gate-art.js`, `art/gates/`, gate entries in `tools/art-library/gate-prompts.js`, `docs/GATE_ART.md`, `python3 tools/gate_art_test.py` |
 | The painted picture of an item in the ITEM GAINED banner (18 Art Library sheets, one picture per item, emoji until approved) | `tools/art-library/itemart-items.json`, `itemart-prompts.js`, `tools/sprite-bake/bake_item_sheet.py`, `data/item-art.js`, `art/items/`, `docs/ITEM_ART.md`, `python3 tools/itemart_test.py` |
+| The words of an ITEM GAINED banner (type, description, IN BATTLE, IN STORY; several items are pages of one banner) | `data/item-defs.js` (`itemDef`, `ITEM_STORY`), `docs/ITEM_DEFS.md`, `python3 tools/itemdef_test.py` |
 | How big a map painting must be, how outdoor maps zoom to fill the phone screen | `docs/MAP_SIZES.md` |
 
 ## Debug handle
