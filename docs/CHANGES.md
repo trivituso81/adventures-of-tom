@@ -1,3 +1,41 @@
+## guidestatus1-restore2 (2026-11-21): housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes
+
+Card c-guidestatus. Two pushes of mine were rebased badly. guidestatus1 dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b and re-added the purged `art/raw/clips/wan-grace-squeeze-v3.mp4` and its prompt; guidestatus1-restore then reverted 19 files of other sessions (the dashboard plan and mocks, chapter 8 and 9 story fights b3s18c and b3s18d, wangen-jobs.json, voice and script indexes). This push puts every one of those files back exactly as they were before guidestatus1-restore, removes the v3 files again and restores the three notes below guidestatus1.
+
+## board-dashboard (2026-11-21): seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved
+
+Tom (10:56): "design a view for my extra wide monitor (3440x1440) when im using chrome... view the battle guide, admin panel, kanban board, and maybe even the game all at the same time". He saw two to-scale drawings and said (11:19): "ok looks good, create the kanban cards we need ot execute this properly".
+
+| Card | What |
+|---|---|
+| c-dash1 (Up next) | `dashboard.html`: four panes, the All four and Battle layouts, pane buttons, the keyboard frame, links that open in the pane that owns the page. Sonnet 5.5, high. |
+| t-dash1-try | Tom tries it on the monitor and pastes the GitHub token once in Chrome on the Mac. Blocks c-dash2. |
+| c-dash2 | The strip under the game: newer build bar with Reload game, screen sizes, jumps, Story battles, Difficulty, Mute, Report. Sonnet 5.5, high. |
+| c-dash3 | Take me there: a play card carries its place; On your phone for checks that need the phone. Sonnet 5.5, high. |
+| t-dash3-try | Tom tries the strip and Take me there. Blocks c-dash4, which then starts by itself. |
+| c-dash4 | Search across cards, builds, the Battle Guide and tools; the Art review and Story layouts. Sonnet 5.5, medium, auto. |
+| t-dash4-try | Tom tries search and the two layouts. |
+
+- Plan, the facts proven with the real pages side by side at 3440 wide, and the traps found: `claude/dashboard-plan.md`. Drawings and their markup: `claude/dashboard-mock/`.
+- Decisions taken from his "looks good" (the four recommended options): pane order Board, Game, Battle Guide, fourth pane; the game starts at the Duo open size; Admin is the fourth pane; a look, text or rules check in the dashboard counts as All good, touch, sound and speed stay phone checks.
+- Board and notes only; no page or game file changed.
+
+## b3s18d (2026-11-21): chapter 9's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part d. Chapter 9 (the Moon Club) joins chapters 1 to 8: the Hanger-On, the Sore Loser, the Wallflower and The Mirrorball play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`): Pet Peeves and Resists, Hang On Tight, How Gauche! and Cheater!, the Wallflower's Wall Hug and Petal Storm, Facet Spin, Dazzled with Shatter Glitz! and Sensory Overload!, Spotlight Solo and LAST DANCE. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: Deedee's coaching after a loss to The Mirrorball has a Battle 3 version (`B3_CH_ON(9)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 9 has no Tombo toast to skip.
+- Left alone on purpose: the Deedee Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 9 test were not run.
+- Not looked at: any chapter 9 fight in a browser.
+
+## b3s18c (2026-11-21): chapter 8's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
+
+Card c-b3s18, part c. Chapter 8 (the Car Barn) joins chapters 1 to 7: the Wet Blanket, the Draft, the Picky Eater and Old Ironbelly play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`): Pet Peeves and Resists, Dampen Spirits and Why Bother?, Crosswind and Pilot-Light Gust, the Tin Lid and Push It Away, Toasty with Steam Cloud!, BROIL and Full Furnace. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
+- Scene change: TNB's coaching after a loss to Old Ironbelly has a Battle 3 version (`B3_CH_ON(8)`): the first line is the same so its clip still plays, the next two lines are new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old lines. Chapter 8 has no Tombo toast to skip.
+- Left alone on purpose: the Tom Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
+- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 8 test were not run.
+- Not looked at: any chapter 8 fight in a browser.
+
 ## gem1v (2026-11-21): Gemini's chapter 1 test applied to the board: 8 cards closed, 4 fix cards written
 
 Tom had Gemini play chapter 1 with the brief `claude/ch1-gemini-verify.md`; its report is saved as `claude/ch1-gemini-report.md` (build voicepurge221, MEDIUM, landed in Los Angeles, 1:04 in game).

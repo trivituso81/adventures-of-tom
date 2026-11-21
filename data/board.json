@@ -26829,7 +26829,7 @@
     },
     {
      "d": "2026-11-21",
-     "t": "guidestatus1-restore: put back three CHANGES entries and the Grace squeeze v3 purge that the guidestatus1 push undid by mistake."
+     "t": "guidestatus1-restore2: undid guidestatus1-restore (it reverted 19 files of other sessions by a bad rebase) and put back the three CHANGES notes and the v3 purge."
     }
    ],
    "after": "nothing for Tom: end",

@@ -399,7 +399,7 @@
   }
  },
  "grace-dodge": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -417,7 +417,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
+  "why": "wanch2: Kling r3 kept her feet down (the Wan hop is gone) but her hair and arm left the right edge of the frame; one change: pad 0.8",
+  "pad": 0.8
  },
  "grace-ko": {
   "rev": 2,
@@ -493,7 +494,7 @@
   }
  },
  "grace-cast": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -511,7 +512,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
+  "why": "wanch2: Kling r3 made no rings (the Wan fault is gone) but her fingertips touched the left edge in the hold; one change: pad 0.8",
+  "pad": 0.8
  },
  "grace-squeeze": {
   "rev": 4,
@@ -740,7 +742,7 @@
   }
  },
  "rose-tackle": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -758,8 +760,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.8,
-  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
+  "pad": 0.65,
+  "why": "wanch2: Kling r3 has one lamb (the Wan fault is gone) but her reaching hand left the left edge at the lunge; one change: pad 0.65 (was 0.8)"
  },
  "rose-lava": {
   "rev": 3,
