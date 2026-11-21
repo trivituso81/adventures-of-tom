@@ -18138,7 +18138,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-opus. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-probe-sonnet-high",
@@ -18333,7 +18334,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high2. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-fix-keysecrets2-try-7",
@@ -21048,16 +21050,14 @@
    "model": "Claude Opus 5.5",
    "effort": "medium",
    "env": "OPUS_MEDIUM",
-   "enabled": false,
-   "paused": "2026-11-20: every START on this route died before its first push (8 runs today). Fix card c-startfix."
+   "enabled": true
   },
   {
    "id": "sonnet-high",
    "model": "Claude Sonnet 5.5",
    "effort": "high",
    "env": "SONNET_HIGH",
-   "enabled": false,
-   "paused": "2026-11-20: every START on this route died before its first push (8 runs today). Fix card c-startfix."
+   "enabled": true
   }
  ]
 }
