@@ -1,3 +1,48 @@
+## anim-deedee-scrub-1irj (2026-11-21): Deedee's "Hand Me My Glasses" Scrub brushes longer, arm out toward the monster
+
+Card c-anim-deedee-scrub-1irj. Tom (Battle Guide, b3s17a): "Longer brushing, outward towards monster".
+| | |
+|---|---|
+| Kept | The rev 1 Wan prompt word for word except one MOTION phrase, the start picture `art/clips/start/deedee-hero.png`, every setting (720p, 9:16, 5 s, first frame only so the glasses stay on), the bake shape (strike, every 3rd picture, 1.5x, figure 99.3 rows) |
+| Changed | "scrubs it forward to the left once in one firm stroke at chest height. Without repeating the stroke," became "reaches it far out forward to the left at chest height, and scrubs back and forth three times in long firm strokes. Without scrubbing again," (`tools/art-library/prompts/wan-deedee-scrub-v2.txt`, job deedee-scrub rev 2) |
+- Video: wan-gen run 44930655300, $0.50. Source `art/raw/clips/wan-deedee-scrub-v2.mp4`, baked pictures 9 to 132, hit at 81 (42 pictures, 2.8 s in the game; was 1 stroke, 2.0 s). Her arm stays out toward the monster for about 1.3 s while the brush goes out and back three times.
+- Plan 4.4: glasses on her own eyes, a scrub brush, same woman and style; standing height the same first and last; feet within 0.8% of the frame height; background flat, cutout clean, never touches an edge. Measured clip gate: pass. Rev 1 files purged (`wan-deedee-scrub-v1.mp4`, `wan-deedee-scrub-v1.txt`).
+- Tom's card: t-anim-deedee-scrub-1irj.
+
+## anim-deedee-windex-z9p8 (2026-11-21): Deedee's Windex Spritz is a Wan 3.0 video now, made from the same prompt
+
+Card c-anim-deedee-windex-z9p8. Tom (Battle Guide, b3s17a): "Remake with wan".
+| | |
+|---|---|
+| Kept | The prompt of the approved Grok clip clip-deedee-windex, word for word (now `tools/art-library/prompts/wan-deedee-windex-v1.txt`), and the bake shape (strike with a hit picture, 1.5x, figure 99.3 rows) |
+| Changed | Only what the note names: the video model (Wan 3.0 on fal instead of grok-imagine-video-1.5-lite) and with it the family route's start picture and settings (`art/clips/start/deedee-hero.png`, 720p, 9:16, 5 s, same first and last frame) |
+- Video: wan-gen run 44930655300, $0.50. Source `art/raw/clips/wan-deedee-windex-v1.mp4`, baked pictures 21 to 117 every 3rd, hit at 69 where the mist leaves the nozzle (33 pictures, 2.2 s). First cut ended at 105 with her hand still on her hip; recut to 117 so it ends in her stance.
+- Plan 4.4: a blue spray bottle from behind her back, one squeeze with a small mist, tucked away; same woman and style; height and feet unchanged throughout; last picture against first 0.96 of 255; cutout clean. Measured clip gate: pass.
+- The Art Library entry clip-deedee-windex is set to rejected with Tom's note (as anim-grace-give-q4es did), so the art-bake job does not cut the old Grok video over the new one.
+- Tom's card: t-anim-deedee-windex-z9p8.
+
+## anim-deedee-give-yy1o (2026-11-21): Deedee's Giving (support moves) is a Wan 3.0 video now, made from the same prompt
+
+Card c-anim-deedee-give-yy1o. Tom (Battle Guide, b3s17a): "Remake with wan".
+| | |
+|---|---|
+| Kept | The prompt of the approved Grok clip clip-deedee-give, word for word (now `tools/art-library/prompts/wan-deedee-give-v1.txt`), and the bake shape (kind state, every 2nd picture, 1.5x, figure 99.3 rows) |
+| Changed | Only what the note names: the video model (Wan 3.0 instead of Grok lite) and with it the family route's start picture and settings (`art/clips/start/deedee-hero.png`, 720p, 9:16, 5 s, same first and last frame) |
+- Video: wan-gen run 44930655300, $0.50. Source `art/raw/clips/wan-deedee-give-v1.mp4`, baked pictures 18 to 84 (34 pictures, 1.5 s).
+- Plan 4.4: one open palm held out to the left, pulled back, still; same woman and style; height and feet unchanged; last against first 0.96 of 255; cutout clean, hand never reaches the edge. Measured clip gate: pass.
+- The Art Library entry clip-deedee-give is set to rejected with Tom's note, so the art-bake job does not cut the old Grok video over the new one.
+- Tom's card: t-anim-deedee-give-yy1o.
+
+## anim-deedee-ko-yes1 (2026-11-21): Deedee's knock-out is a video now: she wobbles and sits down on the ground
+
+Card c-anim-deedee-ko-yes1. Tom (Battle Guide, b3s17a): "Make".
+- No new video was paid for. Her second Wan knock-out video from wanch1 (job deedee-ko rev 2, prompt `wan-deedee-ko-v2.txt`, already paid) was measured again the way Rose's approved knock-out was: her lowest drawn point sits 32 px of 1,280 (2.5%) above her standing feet, Rose's 28 px (2.2%). wanch1 had counted it as floating; by the same measure it is level with the clip Tom approved, and it shows a drawn shadow under her, as Rose's does.
+- Plan 4.4: dizzy, a wobble, sinks straight down to sit on the ground with eyes closed and head drooping, held; same woman and style; background flat (a slight tint shift, keyed out clean: 28 stray pixels in 1.26 million); never touches an edge. Measured clip gate (ko: no hop, does not fall forward): pass.
+- Bake: `art/raw/clips/wan-deedee-ko-v2.mp4`, pictures 34 to 112 every 2nd (40 pictures, 1.8 s), `data/clips/deedee-ko.js`. `B3_BODY_CLIPS.deedee.ko` points at it; her painted ko row (hurt pose, kneel) is purged from `B3_BODY_PAINT`. Deedee's dodge is now her only painted state.
+- Deedee, Dodge (card c-anim-deedee-dodge-y4m3): two Wan tries, $1.00, not handed to Tom (stop-loss). Retry 1 (prompt without "away to the right") kept her feet down but she ducked forward to the left and her arm left the frame; retry 2 (one change: "back to the right") went the right way, feet down, but her flung arms ran off both edges and Wan drew a small object flying past. Arms out of the frame twice is the stop-loss. Next: the same prompt with the figure shrunk to 80% inside the video (`pad`, the change that kept her spread hands in frame on her victory); written on the card.
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py`, smoke. Looked at in the Battle Guide player, portrait and landscape. Spend this session: $2.50 on fal (ledger $30.60).
+- Tom's card: t-anim-deedee-ko-yes1.
+
 ## board-artfallback (2026-11-21): new card to build the picture fallback rule (xAI first, WAN after 2 misses, stop after 4)
 
 Tom (09:49): "we should use XAI as the default for images, but then if there are more than two failed attempts with XAI, then we should switch the image service to WAN." Approved 09:54. Plan with the five refinements: claude/art-fallback-plan.md. Card c-artfallback (Sonnet 5.5, medium). Board only, no game change.

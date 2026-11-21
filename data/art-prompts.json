@@ -28596,7 +28596,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28610,7 +28610,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "Tom (Battle Guide, b3s17a): \"Remake with wan\". Replaced by the Wan 3.0 video wan-deedee-give-v1 (card c-anim-deedee-give-yy1o); prompt kept word for word",
+     "from": "anim-deedee-give-yy1o",
+     "at": 1795283394692,
+     "rev": 0
+    }
+   ],
    "id": "clip-deedee-give",
    "tab": "Clips",
    "group": "Chapter 1",
@@ -28706,7 +28714,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28721,7 +28729,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "Tom (Battle Guide, b3s17a): \"Remake with wan\". Replaced by the Wan 3.0 video wan-deedee-windex-v1 (card c-anim-deedee-windex-z9p8); prompt kept word for word",
+     "from": "anim-deedee-windex-z9p8",
+     "at": 1795283394692,
+     "rev": 0
+    }
+   ],
    "id": "clip-deedee-windex",
    "tab": "Clips",
    "group": "Chapter 1",
