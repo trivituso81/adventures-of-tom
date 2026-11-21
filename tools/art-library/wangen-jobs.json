@@ -669,7 +669,7 @@
   }
  },
  "rose-ko": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -677,7 +677,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-ko-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-ko-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -743,7 +743,7 @@
   }
  },
  "rose-tackle": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -765,7 +765,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "rose-lava": {
   "rev": 1,
@@ -793,7 +794,7 @@
   }
  },
  "rose-giddyup": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -815,7 +816,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "deedee-idle": {
   "rev": 1,
@@ -918,7 +920,7 @@
   }
  },
  "deedee-ko": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -926,7 +928,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-deedee-ko-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-deedee-ko-v2.txt",
   "frame": "art/clips/start/deedee-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -942,7 +944,7 @@
   }
  },
  "deedee-victory": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -963,7 +965,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "deedee-run": {
   "rev": 1,
@@ -1016,7 +1019,7 @@
   }
  },
  "deedee-wetfloor": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -1038,7 +1041,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "deedee-scrub": {
   "rev": 1,

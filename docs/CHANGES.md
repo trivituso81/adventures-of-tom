@@ -1,3 +1,19 @@
+## wanch1h (2026-11-20): Rose and Deedee fight in Wan videos too (idle with breathing, guard, hit, run), The Floor Is Lava!, the Glasses Scrub and Zone One Blockade are videos, Grace's knock-out sits on the ground
+
+Card c-wanch1 (part h). Videos: wan-gen runs 44859585429 and 44859840350 (18 clips, $9). Checked against plan 4.4 before baking.
+| Fighter | Now a video | Not yet |
+|---|---|---|
+| Rose | idle, guard, hit, run, The Floor Is Lava! (points at the floor, hops, points a warning; Tom's note "shouldnt just be her jumping") | ko floats 5% above the ground: remade with the change that fixed Grace's; Lamb-Tuck Ankle Tackle (her hand left the frame) and "Giddyup, Tata!" Launch (her hair left the top of the frame): remade with the picture shrunk to 80% inside the video (`pad`); dodge and cast not made (stop-loss on Grace) |
+| Deedee | idle, guard, hit, run, "Hand Me My Glasses" Scrub (small thin reading glasses, her own eyes, a scrub brush; Tom's notes "clown glasses", "rolling pin") | ko floats 6%: remade as Rose's; victory (her spread hands left the frame) and Wet-Floor Hazard (the mop head touched the frame edge): remade with `pad`; dodge and cast not made |
+| Tom | Zone One Blockade (retry 2, elbows bent: his palms stay inside the frame except the fingertips for 13 pictures) | |
+| Grace | ko retry 2 ("sinks straight down ... right where she stood"): seated 1.5% of the frame above the standing feet line (was 4%) | |
+- Painted rows purged: Rose keeps only dodge and ko, Deedee dodge, ko and victory (until their videos pass).
+- Accepted with a known small fault: Rose's hit rocks her onto her toes for 1.5 battle px (1.4% of the frame, the plan allows 1%); the test allows 2 px in a hit.
+- `wangen.py`: a job may carry `pad` (the start picture shrunk inside the 720 x 1280 frame); test W10. W9 no longer depends on which jobs the cap let through first (it was flaky).
+- Engine: a guard video that is still loading shows the idle video instead of the painted standing picture (`b3cMemberFrame`).
+- Fixed: index.html carried Grace's guard script tag twice (a rebase in wanch1g).
+- Tests: `wanproof_test.py` (all four, W1 to W5 and P6; the painted baseline is measured with the code breath off) FAILS []; `b3_test.py s8` (peak 14 clip pictures) and `paint_state_test.py` FAILS [], portrait and landscape.
+
 ## qa-bug12c (2026-11-21): Boppy's Paso Robles cap reads the right way round when a scene turns him to face left
 Chapter 1 QA BUG-12 (c) (keysecrets2): on Boppy's shocked pose and the BOPPY'S GOLD TEETH close-up the cap lettering looked garbled or mirrored.
 - Checked on main (facts): the paintings are right. The Art Library mood sheet (boppy-emotions, baked to art/chars/boppyemo-story.webp and portraits/emo/boppy-*.webp) and the grin close-up (ch1-boppy-grin-v1, art/closeup/ch1-grin.webp, drawn as painted by closeupReveal) all read "Paso Robles". The fault is facing1 (2026-11-14): `scenePoseDraw` mirrors a leaning mood or talking painting so the person faces who they look at, and Boppy's surprised, scared, proud and loving poses and his tell, point and answer poses lean right, so whenever he looks left his cap writing is drawn backwards (facing1 had listed it as known). A new prompt could not fix this, so no Art Library entry was changed.

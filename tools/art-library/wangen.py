@@ -78,6 +78,18 @@ def fit_frame(png_bytes, size):
     return b.getvalue(), how
 
 
+def pad_frame(png_bytes, k):
+    """wanch1: the framed picture shrunk to k of its size, centred, on the same magenta, so a wide or high move has room inside the video
+    (arms spread, a jump, a long reach). The figure's proportions do not change; the bake sizes the clip by its first picture anyway."""
+    from PIL import Image
+    import numpy as np
+    im = Image.open(io.BytesIO(png_bytes)).convert('RGB'); W, H = im.size
+    a = np.asarray(im).astype(int); bg = tuple(int(v) for v in np.median(np.concatenate([a[:20, :20].reshape(-1, 3), a[:20, -20:].reshape(-1, 3)]), 0))
+    out = Image.new('RGB', (W, H), bg); w, h = round(W * k), round(H * k)
+    out.paste(im.resize((w, h), Image.LANCZOS), ((W - w) // 2, (H - h) // 2))
+    b = io.BytesIO(); out.save(b, 'PNG'); return b.getvalue()
+
+
 def data_uri(png):
     return 'data:image/png;base64,' + base64.b64encode(png).decode()
 
@@ -99,6 +111,7 @@ def build(job, repo):
         if not os.path.exists(p): raise SystemExit('start picture %s is not in the repo (it is committed after its checks)' % job['frame'])
         W, H = [int(x) for x in job['fit'].split('x')]
         frame, how = fit_frame(open(p, 'rb').read(), (W, H))
+        if job.get('pad'): frame, how = pad_frame(frame, float(job['pad'])), how + ', then shrunk to %d%% on the same magenta (pad)' % round(100 * float(job['pad']))
         say('frame: %s -> %dx%d, %s' % (job['frame'], W, H, how))
         for k in job.get('frame_fields') or ['start_image_url']: body[k] = data_uri(frame)
     return body, frame

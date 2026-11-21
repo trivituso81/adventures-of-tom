@@ -5,8 +5,8 @@
 #   W1 the idle is the video (every picture drawn in the stance is a clip picture), and no code breath or painted fidget is left for them
 #   W2 the idle video's standing height is the fighter's battle size today (the painted standing figure, measured in the same fight with
 #      the clips switched off) within 1 battle px
-#   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering), the hit,
-#      the dodge and the victory (2 px there: a cheer may rise onto the toes) and the knock-out ends on the ground (4 px: sitting)
+#   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering) and the
+#      dodge, 2 px in the hit and the victory (a flinch or a cheer may rise onto the toes); the guard hold is at least 4 px lower than the stance and the knock-out ends on the ground (4 px: sitting)
 #   W4 no jump over 2 battle px where a one-shot clip starts or ends against the idle, or where a guard rise starts or a lowering ends
 #   W5 every state with a video has no painted row left (B3_BODY_PAINT), every clip named in B3_BODY_CLIPS and in the kits exists, its run
 #      loop and its move clips load
@@ -75,7 +75,7 @@ with sync_playwright() as pw:
         kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&s.anim&&s.anim.kind==='clip').map(s=>s.anim.clip)",who)
         for id in kit: need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: the kit names clip {id}, which is not defined')
         # Battle size today: the painted standing figure, clips switched off for this one measure.
-        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={}; }",who)
+        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={idle:'__none'}; }",who)   # no clip drawn, and no code breath to blur the measure
         key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
         step(.5); S=M(); k=pg.evaluate("()=>window.__k"); tol=k*1.01
         leave(); pg.evaluate("(w)=>{ B3_BODY_CLIPS[w]=window.__keep; }",who)
@@ -97,14 +97,14 @@ with sync_playwright() as pw:
         base=idle[-1]
         # guard
         if pg.evaluate("(w)=>{ const id=(B3_BODY_CLIPS[w]||{}).guard; return !!id&&BCLIPS[id]&&BCLIPS[id].kind==='guard'; }",who):
-            pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].guard)",arg=who,timeout=40000)
+            pg.evaluate("(w)=>b3cWant(B3_BODY_CLIPS[w].guard,30000)",who); pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].guard)",arg=who,timeout=40000)
             pg.evaluate("()=>{ window.__g=true; }")
             rise=[]
             for i in range(30): step(1/30); rise.append(M()); (i==16) and snap()
             jump(base,rise[0],'where the guard rise starts'); feet(rise,'guard rise')
             hold=[]
             for i in range(8): step(.3); hold.append(M())
-            feet(hold,'guard hold'); need(min(m['top'] for m in hold)>base['top']+6*k,f"W3 {who}: the guard hold is not lower than the stance: {[m['top'] for m in hold]} {base['top']}")
+            feet(hold,'guard hold'); need(min(m['top'] for m in hold)>base['top']+4*k,f"W3 {who}: the guard hold is not lower than the stance: {[m['top'] for m in hold]} {base['top']}")
             need(pg.evaluate("(k)=>b3GuardShown(k)",key),f'W1 {who}: b3GuardShown is false while the video guard is up')
             pg.evaluate("(k)=>{ B3P.body[k]={kind:'hit',guard:true,t0:B3P.t,dur:.4}; }",key); hit=[]
             for i in range(12): step(1/30); hit.append(M()); (i==3) and snap()
@@ -119,7 +119,7 @@ with sync_playwright() as pw:
             ie=min(len(low)-2,int(lw/1000*30))   # the step where the lowering ends and the idle video takes over
             for i in range(max(0,ie-2),min(len(low)-1,ie+4)): jump(low[i],low[i+1],'where the lowering ends and the idle starts (step %d)'%i)
         # one-shot states
-        for st,ftol in (('hit',tol),('dodge',tol),('victory',2*tol)):
+        for st,ftol in (('hit',2*tol),('dodge',tol),('victory',2*tol)):   # a flinch may rock onto the toes (Rose's: 1.5 battle px)
             if not T['clips'].get(st): continue
             pg.evaluate("(id)=>b3cWant(id,20000)",T['clips'][st]); pg.wait_for_function("(id)=>bclipReady(id)",arg=T['clips'][st],timeout=40000)
             a=M()

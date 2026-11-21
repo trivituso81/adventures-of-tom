@@ -99,7 +99,7 @@ function b3cGuardActive(C,key,on,t) { const G=B3C.gs[key]; if(on||(G&&G.on)) ret
 // The picture of a family member's clip right now, or null (draw the painted frame). e0 is the time the body started this state.
 function b3cMemberFrame(u,vu,t,B) {
   const GC=!vu.ko&&b3cGuardClip(u),gon=GC&&b3cGuarding(u);
-  if(GC&&(!B||(B.kind==='hit'&&B.guard))&&(b3cGuardActive(GC,u.key,gon,t)||!b3cOf(u.id,'idle'))) { b3cWant(GC.id,9000); return bclipReady(GC.id)?b3cGuardFrame(GC,u.key,gon,t):null; }
+  if(GC&&(!B||(B.kind==='hit'&&B.guard))&&(b3cGuardActive(GC,u.key,gon,t)||!b3cOf(u.id,'idle'))) { b3cWant(GC.id,9000); if(bclipReady(GC.id)) return b3cGuardFrame(GC,u.key,gon,t); }   // not loaded yet: the idle video below until it is
   if(vu.ko) { const C=b3cGet(u.id,'ko',8000); if(!C) return null; return b3cOnce(C,B&&B.kind==='ko'?(t-B.t0)*1000:C.dur); }   // plays from the moment they went down, then holds its last picture
   if(B&&B.kind==='cs') { const C=BCLIPS[B.id]; b3cWant(B.id,3000); return C&&bclipReady(B.id)?b3cOnce(C,(t-B.t0)*1000):null; }
   if(B) return null;   // a painted pose or a path is playing

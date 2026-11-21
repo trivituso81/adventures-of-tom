@@ -154,11 +154,20 @@ made = sorted(f for f in os.listdir(out9) if f.endswith('.mp4'))
 check('W9 wildcard picks 4 jobs; the cap lets exactly 2 through and refuses the rest; ledger 1.00', len(S['sent']) == n0 + 2 and len(made) == 2 and abs(st['spent'] - 1.0) < 1e-9 and c == 3 and o.count('REFUSED') == 2, (len(S['sent']) - n0, made, st['spent'], c, o[-700:]))
 rep = json.load(open(os.path.join(out9, 'wangen-report.json')))
 check('W9 report lists every job', [r['what'] for r in rep['jobs']] == ['lt-a', 'lt-b', 'lt-c', 'lt-d'], rep)
-n0 = len(S['sent']); c, o = run(repo, out9, 'lt-c,lt-d,lt-a', '--cap', '9')
+notmade = [n for n in ('lt-a', 'lt-b', 'lt-c', 'lt-d') if not any(m.startswith(n + '-') for m in made)]; one = [n for n in ('lt-a', 'lt-b', 'lt-c', 'lt-d') if n not in notmade][0]   # which two the cap let through depends on thread order
+n0 = len(S['sent']); c, o = run(repo, out9, ','.join(notmade + [one]), '--cap', '9')
 check('W9 a comma list sends the two not made yet and skips the made one', len(S['sent']) == n0 + 2 and 'already made' in o and c == 0, o[-500:])
 check('W9 at most 3 requests waited on at once', S['peak'] <= 3, S['peak'])
 c, o = run(repo, out9, 'nope-*', '--dry-run')
 check('W9 a wildcard that matches nothing stops', c != 0 and 'no job matches' in o, o[-200:])
+
+# W10 pad (wanch1): the frame stays 720x1280, the figure is smaller and centred
+J = json.load(open(jf)); J['pad-a'] = dict(J['video'], rev=1, pad=.8); json.dump(J, open(jf, 'w'))
+n0 = len(S['sent']); c, o = run(repo, out9, 'pad-a', '--cap', '9')
+pb = S['sent'][-1]['body']; pf = Image.open(io.BytesIO(base64.b64decode(pb['start_image_url'].split(',', 1)[1]))).convert('RGB')
+import numpy as _np
+pa = _np.asarray(pf).astype(int); figm = _np.sqrt(((pa - _np.array([255, 0, 255])) ** 2).sum(2)) > 90; ys = _np.where(figm.any(1))[0]
+check('W10 pad: 720x1280, the figure shrunk and centred, sent as first and last frame', pf.size == (720, 1280) and pb['start_image_url'] == pb['end_image_url'] and ys.min() > 100 and 'pad' in o, (pf.size, ys.min(), o[-300:]))
 
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
 print('ALL PASS' if not fails else '%d FAILED: %s' % (len(fails), ', '.join(fails)))
