@@ -19991,7 +19991,7 @@
   {
    "id": "t-madelot-play",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -20009,9 +20009,15 @@
      "d": "2026-11-20",
      "t": "Added by c-idea-madelot.",
      "at": "2026-11-21T02:06:45.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T02:56:07.432Z"
     }
    ],
-   "first": "Wait for build idea-madelot to reach your phone (reload once)."
+   "first": "Wait for build idea-madelot to reach your phone (reload once).",
+   "done": "2026-11-20"
   },
   {
    "id": "t-madelot-rerecord",
