@@ -19702,7 +19702,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19757,6 +19757,10 @@
      "d": "2026-11-20",
      "t": "Tom approved generating 3 pictures (about $0.15).",
      "at": "2026-11-21T05:39:14.392Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 3 pictures, QA: 13 of 14, 14 of 15, 10 of 13. Spent about $0.18."
     }
    ],
    "gen": {
@@ -19770,10 +19774,66 @@
     "est": 0.15,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T05:39:27Z",
+     "state": "done",
+     "at": "2026-11-21T05:40:06Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44871864239",
-     "n": 3
+     "made": [
+      "prop-item-solo-g_bsash",
+      "prop-item-solo-amy_chm1",
+      "prop-item-solo-claytaco"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.18,
+     "qa": {
+      "prop-item-solo-claytaco": {
+       "file": "results/prop-item-solo-claytaco/20261121T053946.png",
+       "yes": 13,
+       "of": 14,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "Appears as 3D render, not hand-painted"
+        }
+       ]
+      },
+      "prop-item-solo-g_bsash": {
+       "file": "results/prop-item-solo-g_bsash/20261121T053945.png",
+       "yes": 14,
+       "of": 15,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "appears as glossy 3D render, not hand-painted"
+        }
+       ]
+      },
+      "prop-item-solo-amy_chm1": {
+       "file": "results/prop-item-solo-amy_chm1/20261121T053946.png",
+       "yes": 10,
+       "of": 13,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Yellow 'JC' logo visible on shoe"
+        },
+        {
+         "id": "p6",
+         "q": "Do the shoes have paper-thin soles?",
+         "why": "Soles appear normal thickness, not paper-thin"
+        },
+        {
+         "id": "p7",
+         "q": "Do the shoes have plain sides with no logo or swoosh visible?",
+         "why": "'JC' logo visible on side"
+        }
+       ]
+      }
+     }
     }
    },
    "chat": {
