@@ -27095,6 +27095,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreena: art-library__validate fixed (the test was wrong: bake fields and underscore item ids are legitimate in the built json); known_fail removed. 11 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreena: the Art Library check no longer fails on gate and item pictures that carry a bake field"
     }
    ],
    "prompt": {
@@ -28238,8 +28242,10 @@
    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T11:54:20-08:00",
-   "last": "2026-11-21T11:54:20-08:00",
-   "tags": [],
+   "last": "2026-11-21T11:56:39-08:00",
+   "tags": [
+    "nightgreena"
+   ],
    "cards": [
     "c-nightgreen"
    ]
@@ -31864,8 +31870,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "9fedf9a2d250d708991a56be13354ce403363e41",
- "synced_at": "2026-11-21T19:54:43+00:00",
+ "synced": "7dd1c444094370bc901b453d138d6800b9f371e4",
+ "synced_at": "2026-11-21T19:57:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
