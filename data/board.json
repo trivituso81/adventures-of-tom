@@ -16945,8 +16945,8 @@
     }
    ],
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "opening": "\"im confused. was this done?\""
    },
    "history": [
     {
@@ -16963,6 +16963,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T21:50:22.277Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by the wanproof session (Tom 17:08: \"im confused. was this done?\"). The row exists but is 29th of 31 on the NEW BATTLE list, under all 27 fights; moving it to the top."
     }
    ],
    "prompt": {
