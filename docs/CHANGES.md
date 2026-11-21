@@ -1,4 +1,14 @@
 <<<<<<< HEAD
+## anim-rose-give-w5ws (2026-11-21): Rose's Giving (support moves) is a Wan 3.0 video now, made from the same prompt
+
+Card c-anim-rose-give-w5ws. Tom, from the Battle Guide: "Remake with wan".
+- Kept: the prompt of the approved Grok clip, word for word (`clip-rose-give` in `data/art-prompts.json`, now `tools/art-library/prompts/wan-rose-give-v1.txt`): one open hand reached forward at chest height, palm up, once, then back to the stance and held.
+- Changed: the video model (Wan 3.0 on fal, 720 x 1280, 5 s, job `rose-give` rev 1) and so the start picture (her large left-facing hero `art/clips/start/rose-hero.png`), sent as first and last frame as Grace's Wan give.
+- Checks (plan 4.4): reads as a hand-over, palm up, then back; the same girl; standing height last 0.999 of first, feet on the same row in every picture; flat magenta, no halo, never touches an edge; ends where it began. Measured clip gate: no flags. The vision part needs the xAI key and was not run.
+- Bake: video pictures 22 to 92, every 2nd, 36 pictures at 1.5x (1.6 s), `data/clips/rose-give.js`, `art/clips/rose-give.webp`, source `art/raw/clips/wan-rose-give-v1.mp4`. The Grok entry `clip-rose-give` is set to rejected with the reason, so the art-bake job does not cut the old video over this one.
+- Spend: wan-gen run 44929736650, booked $0.50 (live price $0.23).
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py` FAILS [], smoke; portrait and landscape looked at.
+
 ## anim-rose-victory-vqjc (2026-11-21): Rose's Victory is a Wan 3.0 video now, made from the same prompt
 
 Card c-anim-rose-victory-vqjc. Tom, from the Battle Guide: "Remake with wan".
