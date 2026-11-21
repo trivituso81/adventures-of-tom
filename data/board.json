@@ -29649,7 +29649,7 @@
     "ellie|Deedee keeps offering me apple muffins. I keep saying yes. That's called manners."
    ],
    "blocks": [],
-   "next": "The voice job did not finish (The takes were made but could not be merged: push refused: eads/main': is at 07c8c9af0c98f5be805ba3284f1a1719c9917086 but expected aa0baa73f1eccdf86bb64dfa2c0bccb87115f07d)\nerror: failed to push some refs to 'https://github.com/trivituso81/adventures-of-tom'\n). Nothing needed from you: tap Generate all again to retry, or leave it.",
+   "next": "Listen to the new voices. Open ADMIN > VOICE LIBRARY with the button below (Show: No clip yet is now empty for these lines; use Built-in clip). Play a few. Tap All good if they sound right, or Something is wrong and say which line and what you heard.",
    "links": [
     {
      "to": "voice",
@@ -29685,6 +29685,11 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 10 voices (about 578 credits).",
      "at": "2026-11-21T21:38:58.413Z"
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T21:42:21Z",
+     "t": "Voice job done: 10 made, 0 need a human, about 0 credits (build voices-t-ch1voices-334)."
     }
    ],
    "vgen": {
@@ -29694,9 +29699,34 @@
     "chars": 1313,
     "est": 578,
     "run": {
-     "state": "running",
-     "at": "2026-11-21T21:40:53Z",
-     "n": 10
+     "state": "done",
+     "at": "2026-11-21T21:42:20Z",
+     "n": 10,
+     "made": [
+      "deedee|Excuse me! I just washed that floor.",
+      "tom|Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
+      "boppy|...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming.",
+      "ellie|Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.",
+      "grace|3 wrappers, let's follow them!",
+      "rose|One more ride, Tata! To the cab!",
+      "sal|Los Angeles? You got it.",
+      "deedee|Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+      "tom|Alright, time for me to head back to LA. Let's head to Sal's!",
+      "deedee|Apple muffins is cooling on the counter. Don't touch it. Okay, one corner."
+     ],
+     "failed": [],
+     "needs_human": [],
+     "credits": 0,
+     "chars": 1313,
+     "build": "voices-t-ch1voices-334",
+     "note": "",
+     "unused": [
+      "1. kinds never called: {}",
+      "2. attack pool only reachable as a fallback (every move has its own line): [] (check scenes and Move Lab by hand)",
+      "3. baked battle clips with no live line: 0",
+      "4. dialogue clips not in harvest or source: 0",
+      "5. lines for replaced moves (old animation code still exists): {}"
+     ]
     }
    }
   },
