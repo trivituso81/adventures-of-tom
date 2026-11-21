@@ -20781,7 +20781,7 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Fixed again as fix-ch1flight-2 (the first fix had been overwritten). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
@@ -20809,9 +20809,12 @@
     {
      "d": "2026-11-21",
      "t": "Gemini's chapter 1 test: FAIL. Sal said \"Tom! Cab seven is at your service. Where to?\" (TO THE AIRPORT / JUST VISITING) and \"Los Angeles? You got it.\", faded to \"A PHONE ON THE SEAT\" (CONTINUE) with no TNB text shown, showed \"CHAPTER 1 COMPLETE\" / \"THE SOUP DUMPLING PROTOCOL\", then returned inside Long Island Taxi Co. for full goodbyes from Sal, Grace (\"Pie!\"), Rose (\"Bye Tata! Save me the... never mind, pie!\"), Tom, and Deedee (\"Take a sweater, honey. I packed one. It's in the bag.\") before LEAVING LONG ISLAND takeoff, LONG ISLAND > LOS ANGELES map, and LOS ANGELES landing (no cabin seat stage). Sent to Claude as card c-fix-ch1flight-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-voiceboard",
@@ -26277,7 +26280,7 @@
    "title": "Battle stage 18: chapters 6 to 10 and bonus story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Chapters 6 to 10 are on Battle 3 behind the BY CHAPTER switch (pushed b3s18a to b3s18). The bonus chapter was not switched; that is card c-b3s18bonus. Your card t-milestoned is the play test of chapters 6 to 10.",
    "blocks": [],
    "changed": "2026-11-21",
@@ -26348,13 +26351,18 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18 pushed: stage 18 docs and board. Chapters 6 to 10 are on Battle 3. The bonus chapter is not switched (Brain Freeze's flee and shell results are battle 2 code), so card c-b3s18bonus was created. After: t-milestoned."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3s18: stage 18 closes: chapters 6 to 10 play on the new battle; the bonus chapter waits"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
     "opening": "\"i'd prefer not to test and just keep building until we are done\""
    },
-   "after": "t-milestoned"
+   "after": "t-milestoned",
+   "done": "2026-11-21"
   },
   {
    "id": "t-milestonec",
@@ -27502,7 +27510,7 @@
    "id": "c-fix-ch1flight-2",
    "tag": "fix-ch1flight-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -27552,6 +27560,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed: the scene edit of fix-ch1flight had been overwritten on main; re-applied (phone picture stays up under TNB's text, quiet trip, no goodbyes). Shipped as fix-ch1flight-2."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-ch1flight-2: the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js"
     }
    ],
    "prompt": {
@@ -27565,7 +27577,8 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "started_at": "2026-11-21T19:39:25+00:00"
+   "started_at": "2026-11-21T19:39:25+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-itemdefplay",
@@ -27771,6 +27784,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFoJq8UAVPg4TrsQtF",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "first": "2026-11-21T19:42:38Z",
+   "last": "2026-11-21T19:44:12Z",
+   "tags": [
+    "fix-ch1flight-2"
+   ],
+   "cards": [
+    "c-fix-ch1flight-2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
    "title": "Fix: Look for people on roofs in the Square and the Row",
    "first": "2026-11-21T19:42:50Z",
@@ -27788,16 +27813,6 @@
    "tags": [],
    "cards": [
     "c-fix-hollowtrail-play-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFoJq8UAVPg4TrsQtF",
-   "title": "Fix: Check chapter 1 ends in the flight",
-   "first": "2026-11-21T19:42:38Z",
-   "last": "2026-11-21T19:42:38Z",
-   "tags": [],
-   "cards": [
-    "c-fix-ch1flight-2"
    ]
   },
   {
@@ -27935,6 +27950,30 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:44:17-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17",
+    "b3s18a",
+    "b3s18b",
+    "b3s18c",
+    "board-night",
+    "b3s18d",
+    "b3s18e",
+    "b3s18"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18",
+    "b-board-night"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
    "title": "Battle Guide: make and remake battle videos from the page",
    "first": "2026-11-21T09:33:57-08:00",
@@ -27973,29 +28012,6 @@
    ],
    "cards": [
     "c-dash1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:39:57-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17",
-    "b3s18a",
-    "b3s18b",
-    "b3s18c",
-    "board-night",
-    "b3s18d",
-    "b3s18e"
-   ],
-   "cards": [
-    "c-b3s17",
-    "c-b3s18",
-    "b-board-night"
    ]
   },
   {
@@ -31550,8 +31566,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "900b9e53092a29745d26274fee296729fc2d9730",
- "synced_at": "2026-11-21T19:43:23+00:00",
+ "synced": "75623ceabec2ecc213d81b0b36b7fe1e710bb157",
+ "synced_at": "2026-11-21T19:44:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
