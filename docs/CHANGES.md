@@ -1,3 +1,10 @@
+## guideprompts1a (2026-11-21): a script and an Action that write a real prompt for every starter-draft battle animation
+
+Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it seems generic". 267 of the 346 prompts in the Battle Guide were rule-made starter drafts (every move of one shape got the same canned gesture, so Cartridge Blow read as a spell cast). The model-draft step of claude/guidegen-plan.md 3.1 had never been built.
+- `tools/guidegen/draft.py`: for each animation whose prompt is a starter draft it asks the xAI text model (repo secret XAI_API_KEY, same client and model pick as reconcile.py) for a new MOTION from the move's own data, three approved examples and, for a monster, its LOOK. Everything before MOTION and a monster's closing tail are copied in code. Each answer is checked in code (two to four sentences, how many times, "Without repeating", held pose, pronoun, no sound, camera, left or right, banned words or dashes), a broken one is sent back once, a second failure is left as the starter draft and listed.
+- `.github/workflows/guide-draft.yml`: manual only, inputs `ids`, `cap` (default $1.00), `dry_run` (default true). The result is kept as `guide-prompts.json` on the branch `guidegen`; a second run adds to it.
+- Nothing paid was run in this build, no prompt of the game changed. Test: `python3 tools/guidegen/draft_test.py` (stand-in xAI, no key).
+
 ## guidestatus1 (2026-11-21): the Battle Guide list shows where each new video is: Requested, In line, Making, Checking, Ready to review
 
 Card c-guidestatus. Tom (11:17): "when im scanning the animations list i need better transparency to where a new video is in the creation process".

@@ -1,0 +1,78 @@
+name: guide-draft
+
+# guideprompts1. Writes a real MOTION for every Battle Guide animation that still has a rule-made starter draft (tools/guidegen/draft.py: an xAI text
+# model, the repo secret XAI_API_KEY that the clip gate and guide-reconcile already use, every answer checked in code, a broken answer sent back once).
+# Manual only. `ids` (comma list, empty = all starter drafts), `cap` (most dollars, it stops before passing it), `dry_run` (default true: asks nothing).
+# The result is kept as guide-prompts.json on the branch `guidegen` (never main, never served); a session copies it into data/guide-prompts.json and
+# rebuilds data/guide-anims.json. A second run adds to the first run's file. Test: python3 tools/guidegen/draft_test.py. Shares the branch with
+# guide-reconcile and the take and use jobs; tools/guidegen/keep.py lays this job's file over its newest copy.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'Comma list of animation ids (for example move:cartridge_blow). Empty: every animation that has a starter draft and no model draft yet.'
+        required: false
+        default: ''
+      cap:
+        description: 'Most dollars of text calls. It stops before passing it.'
+        required: false
+        default: '1.0'
+      model:
+        description: 'xAI text model id. Empty: the dearest non-reasoning text model in the list.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'true: list what would be asked, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guidegen
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: mkdir -p "$RUNNER_TEMP/guidegen"
+      - name: Fetch the prompts written so far
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --depth 1 origin guidegen 2>/dev/null && git show FETCH_HEAD:guide-prompts.json > "$RUNNER_TEMP/before.json" 2>/dev/null || rm -f "$RUNNER_TEMP/before.json"
+          ls "$RUNNER_TEMP"
+      - name: Write the prompts
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          IDS: ${{ inputs.ids }}
+          CAP: ${{ inputs.cap }}
+          MODEL: ${{ inputs.model }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--out "$RUNNER_TEMP/guidegen" --cap "${CAP:-1.0}")
+          [ -f "$RUNNER_TEMP/before.json" ] && ARGS+=(--existing "$RUNNER_TEMP/before.json")
+          [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+          [ -n "$MODEL" ] && ARGS+=(--model "$MODEL")
+          [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          python3 -I tools/guidegen/draft.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/draft.log"
+          { echo '### guide-draft'; echo '```'; tail -80 "$RUNNER_TEMP/draft.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the prompts on the guidegen branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f "$RUNNER_TEMP/guidegen/guide-prompts.json" ] || { echo "nothing to save"; exit 0; }
+          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/guidegen" --msg "guidegen: draft prompts (run ${{ github.run_id }}) [skip ci]"
