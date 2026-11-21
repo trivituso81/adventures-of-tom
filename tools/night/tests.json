@@ -1217,8 +1217,7 @@
    "id": "griffith_test",
    "cmd": "python3 -I tools/griffith_test.py",
    "group": "g6",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
+   "minutes": 2
   },
   {
    "id": "heads_test",

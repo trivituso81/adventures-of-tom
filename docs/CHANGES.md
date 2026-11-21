@@ -1,3 +1,9 @@
+## nightgreene (2026-11-21): the Griffith Park test follows the repainted trail map
+
+Card c-nightgreen, test `griffith_test` (`python3 tools/griffith_test.py`; failed "walked up the trail" and "south exit leads to the Boulevard"). The test was wrong and the game was right: the Griffith plate was repainted (`griffith2`), the spawn is now (11,17), the south exit is on row 18 and rows 19 to 21 are solid rock, but the test still stood the player at (11,19), inside rock, and never cleared the party banner that holds input after `chapterJump`.
+- `tools/griffith_test.py`: `skip_intro` also waits for `partyBannerHeld()`; the walk starts at the map's spawn (11,17); the trail check expects the player in the clearing (rows 10 to 15, where the trail ends); the exit check starts at (11,17) and walks down onto the row 18 exit; the screenshot spots are moved onto walkable tiles beside their signs and rocks.
+- `tools/night/tests.json`: `known_fail` removed from `griffith_test`. Passes twice in a row (about 35 seconds). Nothing in the game changed.
+
 ## guardwin1 (2026-11-21): Tom now does the victory celebration when a fight is won while his guard is up, instead of staying in the guard pose
 
 Card c-guardwin1. Cause: `b3cMemberFrame` (engine/b3-clips.js) chose the guard video before it checked whether the fight was won, so a shield or stance still up at the end kept the guard video on screen and the victory video never played. The win check now comes first. Only Tom had a guard video that could be still up at the end, so he was the only one affected. New check `python3 -I tools/guardwin_test.py` (guard shows while guarding; after the win the victory video plays and the guard video is not drawn, for a shield and for a stance); it fails on the old code and passes now. Not tested on a phone.
