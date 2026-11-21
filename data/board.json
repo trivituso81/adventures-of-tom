@@ -21154,7 +21154,7 @@
    "id": "c-qa-bug12",
    "tag": "qa-bug12",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
    "next": "Fix pushed (build qa-bug12). Tom plays to check; BUG-12 (b) Boppy blocky has no cause yet.",
@@ -21191,6 +21191,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed BUG-12 (a): Menu and Save taps cancel a pending tap-walk (engine/draw.js hudTapStopsWorld). (b) not reproduced; (c) is card c-qa-bug12c."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug12: tapping the Menu or Save button cancels a pending tap-walk, so it can no longer inspect the Cookie counter instead"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21198,7 +21202,8 @@
     "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
     "opening": "started by START"
    },
-   "after": "t-bug12play"
+   "after": "t-bug12play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-bug12c",
@@ -21384,7 +21389,7 @@
    "id": "c-qa-coh04",
    "tag": "qa-coh04",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Rose asks for a piggyback right after the piggyback scene",
    "next": "Shipped as qa-coh04: Rose drops \"Tata, piggyback?\" after flag ch1-job; checked in the running game (3 lines before, 2 after).",
@@ -21426,6 +21431,10 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed on main, fixed in qa-coh04: Rose's follower lines lose \"Tata, piggyback?\" once ch1-job is set. No line reworded."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh04: Rose no longer asks for a piggyback on the street right after the piggyback scene"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21433,7 +21442,8 @@
     "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
     "opening": "started by START"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-coh05",
@@ -21993,6 +22003,30 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
+   "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
+   "first": "2026-11-21T03:28:15Z",
+   "last": "2026-11-21T03:31:21Z",
+   "tags": [
+    "qa-bug12"
+   ],
+   "cards": [
+    "c-qa-bug12"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
+   "title": "Rose asks for a piggyback right after the piggyback scene",
+   "first": "2026-11-21T03:28:53Z",
+   "last": "2026-11-21T03:30:48Z",
+   "tags": [
+    "qa-coh04"
+   ],
+   "cards": [
+    "c-qa-coh04"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
    "title": "Muffin pan missing from the island before the theft",
    "first": "2026-11-21T03:30:28Z",
@@ -22044,26 +22078,6 @@
    "tags": [],
    "cards": [
     "c-qa-txt03"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
-   "title": "Rose asks for a piggyback right after the piggyback scene",
-   "first": "2026-11-21T03:28:53Z",
-   "last": "2026-11-21T03:28:53Z",
-   "tags": [],
-   "cards": [
-    "c-qa-coh04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
-   "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
-   "first": "2026-11-21T03:28:15Z",
-   "last": "2026-11-21T03:28:15Z",
-   "tags": [],
-   "cards": [
-    "c-qa-bug12"
    ]
   },
   {
@@ -25033,8 +25047,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ed0cab750e7d8c4ba75911026001d146b4d28bdd",
- "synced_at": "2026-11-21T03:30:46+00:00",
+ "synced": "7480be495acfbe2ed7ca65145b1a7efdb69383e3",
+ "synced_at": "2026-11-21T03:31:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
