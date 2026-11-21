@@ -27674,6 +27674,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreeni: clip_kinds_test taken off the known failures (it already passes, 3 runs in a row; the b3s8 break was fixed by a later build). 3 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreeni: the clip kinds test is taken off the known failures: it already passes"
     }
    ],
    "prompt": {
@@ -29793,24 +29797,13 @@
   },
   {
    "id": "svc-voice-gen",
-   "tag": "svc-voice-gen-fix",
    "service": "voice-gen",
-   "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "lane": "elevenlabs",
+   "col": "prog",
    "theme": "Tools",
-   "title": "voice-gen failed",
-   "next": "The voice-gen run failed: finished as failure. A session has to look at the run log and fix it.",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44951549236",
-   "prompt": {
-    "what": "Finds why the voice-gen run failed and fixes it.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md. The voice-gen GitHub Action failed (finished as failure). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44951549236, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44952698631",
    "chat": {
     "url": "",
     "opening": "service run"
@@ -29818,7 +29811,7 @@
    "history": [
     {
      "d": "2026-11-21",
-     "t": "voice-gen failed: finished as failure"
+     "t": "voice-gen started."
     }
    ],
    "blocks": [],
@@ -30436,12 +30429,13 @@
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T13:35:40-08:00",
+   "last": "2026-11-21T13:39:48-08:00",
    "tags": [
     "nightgreene",
     "nightgreenf",
     "nightgreeng",
-    "nightgreenh"
+    "nightgreenh",
+    "nightgreeni"
    ],
    "cards": [
     "c-nightgreen"
@@ -34282,8 +34276,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "23734f294ffd1c3ea0a362ac23a39693feda451b",
- "synced_at": "2026-11-21T21:39:07+00:00",
+ "synced": "f55d2b53dfa9213fe66a7bd3e473beb69159dbce",
+ "synced_at": "2026-11-21T21:40:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
