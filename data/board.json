@@ -25710,10 +25710,10 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
-   "next": "Waiting on one decision from Tom: allow the wan-gen cap to be set to 53.1 (total spent so far $52.53 plus this one $0.50 try). The staged try is job deedee-dodge rev 5 (Rose's duck wording, figure at 80%). Nothing else is blocking it.",
+   "next": "Waiting on Tom's card t-cap-deedee-dodge-y4m3: allow the wan-gen cap to be set to 53.1 ($52.53 spent so far plus the one $0.50 try). The staged try is job deedee-dodge rev 5 (Rose's duck wording, figure at 80%). On Allow, run it once with cap 53.1 and follow the card prompt.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25839,6 +25839,11 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue outcome BACK TO YOU: the only blocker is the spend cap, which counts all money ever spent and refuses the $0.50 try. Added Tom card t-cap-deedee-dodge-y4m3 (decide); this card waits behind it.",
+     "at": "2026-11-21T23:00:00+00:00"
     }
    ],
    "prompt": {
@@ -25858,7 +25863,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
     "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -30333,6 +30339,34 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-cap-deedee-dodge-y4m3",
+   "title": "Allow one $0.50 Wan try for Deedee's Dodge (cap $53.10)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Tap one answer below. Card c-anim-deedee-dodge-y4m3 waits on it: the wan-gen spend cap counts every dollar ever spent ($52.53 so far), so its one staged try (Deedee ducking, about $0.50) cannot run unless the cap is set to $53.10. Nothing is spent until a session runs the try.",
+   "choices": [
+    "Allow the $0.50 try, cap $53.10 (Recommended)",
+    "Do not spend; leave Deedee's dodge on the idle slide"
+   ],
+   "leads": [
+    "Card c-anim-deedee-dodge-y4m3 runs the one Wan try with cap $53.10, checks it, bakes it if it passes, and sends you a play card to watch Deedee's Dodge. Cost: up to $0.50.",
+    "Card c-anim-deedee-dodge-y4m3 is retired; no money is spent and Deedee's dodge keeps sliding her idle video."
+   ],
+   "blocks": [
+    "c-anim-deedee-dodge-y4m3"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by the rescue of c-anim-deedee-dodge-y4m3: the staged try was refused by the spend cap and raising it is Tom's call."
+    }
+   ]
   }
  ],
  "sessions": [
