@@ -22390,7 +22390,7 @@
    "title": "Battle system stage 14: balance pass",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s14. Open: re-measure bosses with Vibes at Rank 2 and 5.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -22429,6 +22429,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped b3s14: eight short bosses lengthened to 5.6 to 6.3 plain-player rounds by raising HP only; all checks pass. Not re-measured at Rank 2/5; browser test s13 not run."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s14: New battle: balance pass on Part 1, eight short bosses lengthened to 5 to 7 rounds (stage 14 complete)"
     }
    ],
    "tag": "b3s14",
@@ -22437,7 +22441,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "t-qa-bug03-look",
@@ -22461,6 +22466,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
+   "title": "Battle system stage 14: balance pass",
+   "first": "2026-11-21T05:31:48Z",
+   "last": "2026-11-21T05:40:34Z",
+   "tags": [
+    "b3s14"
+   ],
+   "cards": [
+    "c-b3s14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG2EwxznnZ2UoseGRC",
    "title": "People walk on roofs and signs in the Square and the Row",
    "first": "2026-11-21T05:35:27Z",
@@ -22480,16 +22497,6 @@
    "tags": [],
    "cards": [
     "c-qa-battle2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
-   "title": "Battle system stage 14: balance pass",
-   "first": "2026-11-21T05:31:48Z",
-   "last": "2026-11-21T05:31:48Z",
-   "tags": [],
-   "cards": [
-    "c-b3s14"
    ]
   },
   {
@@ -25633,8 +25640,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d242a15872b3628236639d536c01dfff4798f8e4",
- "synced_at": "2026-11-21T05:40:27+00:00",
+ "synced": "0561a9d85fa4ee0e4f15a780b812a8382dd42e7c",
+ "synced_at": "2026-11-21T05:41:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
