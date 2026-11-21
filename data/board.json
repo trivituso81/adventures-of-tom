@@ -18201,7 +18201,7 @@
    "id": "c-clipstuck1",
    "tag": "clipstuck1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
    "next": "Built as clipstuck1: a single GENERATE VIDEO press is made and checked, then waits for Tom's REVIEW (a chapter press still approves by itself); every GitHub-made version of a clip has REVIEW on its Art Library card. No video was generated.",
@@ -18236,6 +18236,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as clipstuck1: part 3 plus REVIEW on every GitHub-made version (built on top of clipstuck1a). A single GENERATE VIDEO press is held for Tom (made, checked, not approved); GENERATE CHAPTER keeps auto-approve. No video generated."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as clipstuck1: a single GENERATE VIDEO press waits for Tom's review; every GitHub-made version has REVIEW on the clip's card"
     }
    ],
    "prompt": {
@@ -18247,7 +18251,8 @@
     "effort": "medium (three known changes in one area)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-clipstuck1 in data/board.json. Your first push is the commit board: start c-clipstuck1. Build clipstuck1 as the card's next says, run tools/art-library/clip_lib_test.py and the stub test, look at the clip card at 390 x 844, bump tags, add a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-clipstuck1-review"
+   "after": "t-clipstuck1-review",
+   "done": "2026-11-20"
   },
   {
    "id": "t-skippingcutplay",
@@ -19113,6 +19118,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFoxXD931LCAqGvJbU",
+   "title": "GENERATE VIDEO: fix stuck button and let Tom review",
+   "first": "2026-11-20T16:36:43-08:00",
+   "last": "2026-11-20T17:00:08-08:00",
+   "tags": [
+    "clipstuck1"
+   ],
+   "cards": [
+    "c-clipstuck1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGHf9rQ5BiGnCpm8zm",
    "title": "Probe: Sonnet high START route, second",
    "first": "2026-11-20T16:54:56-08:00",
@@ -19205,16 +19222,6 @@
    ],
    "cards": [
     "c-idea-skippingcut"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFoxXD931LCAqGvJbU",
-   "title": "GENERATE VIDEO: fix stuck button and let Tom review",
-   "first": "2026-11-20T16:36:43-08:00",
-   "last": "2026-11-20T16:36:43-08:00",
-   "tags": [],
-   "cards": [
-    "c-clipstuck1"
    ]
   },
   {
@@ -21115,8 +21122,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "f33f5a630c9fc0036a88f16103bd7aed92d92079",
- "synced_at": "2026-11-21T00:55:34+00:00",
+ "synced": "48a3abf61beb155e24e57ebda322a4c498a4013e",
+ "synced_at": "2026-11-21T01:01:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
