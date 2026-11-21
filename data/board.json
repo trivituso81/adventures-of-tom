@@ -25593,7 +25593,7 @@
    "id": "c-artfallback",
    "tag": "artfallback1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
    "next": "Built and tested without a paid call. The first WAN picture is made by your next Generate on a picture with 2 earlier rejects; see your card Look for made by xAI or WAN in the Art Library.",
@@ -25620,6 +25620,10 @@
     {
      "d": "2026-11-21",
      "t": "Claude (artfallback1): built the fallback exactly as claude/art-fallback-plan.md says: xAI tries 1 and 2, WAN 2.7 on fal for the next 2 with the last prompt word for word and the same references, then the entry stops and the run adds one Tom card (a reference picture) that blocks one Claude remake card. Shared fal module tools/art-library/falq.py (wangen.py imports it), svc and try on every result and reject, \"made by xAI\" or \"made by WAN\" in the Art Library, report tools/art-library/artsvc_report.py, FAL_KEY passed to art-gen, WAN spend logged to data/costs.json. Tested with the stand-ins only. One open fact: the fal input fields for wan/v2.7 could not be read here, so a first real call may need a one-line fix (a 422 about the request shape counts no try). Details: claude/art-fallback-plan.md Built."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artfallback1: Art Library pictures go to xAI first, to WAN after 2 misses, and stop after 4"
     }
    ],
    "prompt": {
@@ -25631,7 +25635,8 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-artfallback in data/board.json, history included, and claude/art-fallback-plan.md (the approved rule and the build list). Your first push is the commit board: start c-artfallback.\n\nBuild the picture generator fallback exactly as claude/art-fallback-plan.md says: Art Library pictures go to xAI first; after 2 failed xAI tries on the same entry (counted on the entry's rejects, Tom's rejects of generated results plus generator refusals, never his upload rejects, and old rejects with no service count as xAI) the next try goes to WAN 2.7 on fal with the last prompt word for word and the same reference pictures; after 2 failed WAN tries the entry stops and the run adds a Tom card asking for a reference picture that blocks a Claude remake card. Record the service on every result and reject, show it in the Art Library review, and add the report by service and try number. Reuse the fal code in tools/art-library/wangen.py through one shared module, do not copy it. Pass FAL_KEY to the art-gen Action. Log WAN spend like the other spending Actions (docs/COSTS.md).\n\nMake no paid call: test with the fal stand-in (FAL_QUEUE) and extend tools/art-library/artgen_test.py for every rule in the plan's table. Run python3 tools/smoke.py and the board tests. Add the CLAUDE.md paragraph (artfallback1), the plan's Built section, and a docs/CHANGES.md heading ## artfallback1. Give this card after: a Tom card (ask pictures, fyi true) saying where he will see \"made by xAI\" or \"made by WAN\" in the Art Library the next time he presses Generate. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-artfallback-seen"
+   "after": "t-artfallback-seen",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-artfallback",
@@ -26112,6 +26117,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
+   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
+   "first": "2026-11-21T10:11:10-08:00",
+   "last": "2026-11-21T10:31:41-08:00",
+   "tags": [
+    "artfallback1"
+   ],
+   "cards": [
+    "c-artfallback"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
@@ -26207,16 +26224,6 @@
    "tags": [],
    "cards": [
     "c-idea-tomgrace"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
-   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
-   "first": "2026-11-21T10:11:10-08:00",
-   "last": "2026-11-21T10:11:10-08:00",
-   "tags": [],
-   "cards": [
-    "c-artfallback"
    ]
   },
   {
@@ -29608,8 +29615,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8550be69d0e80ed40150e568099eba6c0ea635bc",
- "synced_at": "2026-11-21T18:30:18+00:00",
+ "synced": "719e82c2cf992c6db88debcb48506c5f6e390456",
+ "synced_at": "2026-11-21T18:32:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
