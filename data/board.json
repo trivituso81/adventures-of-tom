@@ -23564,7 +23564,7 @@
    "title": "Battle Guide page for the Duo, with animation notes",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "battleguide1",
    "next": "Built and pushed. The page is ADMIN > Battle system > Battle Guide. Your card Try the Battle Guide on the Duo says what to look at.",
    "blocks": [],
@@ -23595,9 +23595,14 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as build battleguide1: battle-guide.html with five tabs (Rules, Family, Monsters, Statuses, Animations) read from the game's own battle data, one column folded and two panes unfolded, a player for the 68 battle videos, Send to Claude on any animation (it makes a c-anim card, Opus 5.5 medium), its own icon (open book with a star), a link in Admin, tools/battle_guide_test.py (FAILS: []), docs/BATTLE_GUIDE.md. Not done: a move with no video cannot be played in the page; that is card c-battleguide2. tools/board_sync_test.py fails 2 checks on main before this build too (R5 replay, unstick card); not touched."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleguide1: Battle Guide, a reference page for the new battle system that fits the Duo folded and unfolded, with a player for every battle video and a note to Claude on any animation"
     }
    ],
-   "after": "t-battleguide-try"
+   "after": "t-battleguide-try",
+   "done": "2026-11-21"
   },
   {
    "id": "svc-voice-gen",
@@ -23799,6 +23804,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "first": "2026-11-21T07:31:48-08:00",
+   "last": "2026-11-21T07:45:31-08:00",
+   "tags": [
+    "battleguide1"
+   ],
+   "cards": [
+    "c-battleguide"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
    "title": "AI Costs page: plans, balances, every charge, the total",
    "first": "2026-11-21T07:27:18-08:00",
@@ -23809,16 +23826,6 @@
    "cards": [
     "c-costs1",
     "c-costs1icon"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
-   "title": "Battle Guide page for the Duo, with animation notes",
-   "first": "2026-11-21T07:31:48-08:00",
-   "last": "2026-11-21T07:31:48-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleguide"
    ]
   },
   {
@@ -27139,8 +27146,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3e731a108f3e1a006ad70e22f49a739d113114da",
- "synced_at": "2026-11-21T15:42:57+00:00",
+ "synced": "6c1d84e4928bd46b7fbd9e4556cc3d21ae499e0d",
+ "synced_at": "2026-11-21T15:46:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
