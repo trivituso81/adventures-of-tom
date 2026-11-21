@@ -1,0 +1,19 @@
+Draw the character in the attached pictures as one battle move sheet.
+
+Picture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the object in the hands, and the front of the shirt change, as each frame says.
+
+One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.
+
+In every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.
+
+The move: Disconnected Controller. The game controller printed on the front of his shirt pops off and becomes a real object in his hands. The controller he holds looks exactly like the one on his shirt in pictures 1 to 4: same shape, colors and details, now solid and three-dimensional. From frame 2 on, his shirt is plain navy with nothing on the front, and the rest of the shirt is unchanged.
+
+Row 1:
+1. Looking down at the controller on his shirt, tapping it twice with two fingers, calm curious face. The controller is still on the shirt.
+2. The controller pops off the shirt and floats a hand's width in front of his chest. Both hands come up to catch it, eyebrows raised. His shirt is now plain navy.
+3. Holding the controller in both hands at chest height, thumbs on the buttons, pressing one button hard, staring down at it, mouth flat.
+
+Row 2:
+4. Holding the controller out at arm's length in one hand, giving it a small shake, frowning at it, unimpressed.
+5. Wind-up: the controller in one hand pulled back behind the shoulder, weight on the back leg, eyes narrowed.
+6. Throw: the arm swung fully forward, the controller just leaving the open fingers, front knee bent, a dry satisfied look.

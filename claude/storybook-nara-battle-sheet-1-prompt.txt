@@ -1,0 +1,19 @@
+Draw the dog in the attached picture as a battle sheet.
+
+Copy the attached picture as exactly as possible in every frame: the same dog, face, eyes, fur color, curls, body size and build, head size compared to the body, ears, tail, collar if she has one, linework, painting style and level of detail. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One dog per cell, the same size in every cell, paws on the same ground line, nothing touching a cell edge. No toys, balls or objects. No grid lines, numbers, text, effects or shadows.
+
+In every frame the dog faces the left edge of the picture in a three-quarter view: the chest turned partly toward the viewer, both eyes visible, the nose pointing left.
+
+Row 1:
+1. Ready. Standing on all four legs, legs straight, weight even. Ears forward, tail raised. Mouth open, tongue showing a little, eyes bright and looking left.
+2. Ready, panting. The same as frame 1, but the chest is lifted slightly, the mouth is open wider with the tongue hanging out, and the tail is swung to the other side.
+3. Stubborn sit. Sitting upright on her haunches, front legs straight. Chin raised, head turned slightly away from the left, toward the viewer. Mouth closed, eyes half closed.
+4. Paw offer. Sitting upright. The front paw nearest the viewer lifted and held straight out toward the left at chest height. Head tilted to one side, mouth open in a happy pant.
+
+Row 2:
+5. Play bow. Front legs stretched forward flat on the ground, chest and chin low near the ground. Back legs straight, rear end high in the air, tail raised high. Ears forward, eyes locked on the left.
+6. Leap. In mid-air, all four paws off the ground, the body stretched long toward the left. Front legs reaching forward, back legs kicked out behind. Ears flying back, mouth wide open.
+7. Jump up. Standing up on the two back legs only, body upright. Both front paws raised and pushed forward toward the left at head height, as if landing on someone's chest. Tail wagging high, mouth open in a big happy pant.
+8. Brace. All four legs spread wide apart and planted, knees bent, body low. Head lowered below the shoulders, eyes looking up toward the left. Ears flat back, mouth closed.

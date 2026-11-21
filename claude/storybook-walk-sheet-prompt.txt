@@ -1,0 +1,20 @@
+Draw the character in the attached picture as a walk sheet.
+
+Copy the attached picture as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, linework, painting style and level of detail. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. No grid lines, numbers, text or shadows.
+
+Row 1, body and face pointed straight at the viewer:
+1. Standing still. Feet together, both flat on the ground. Arms hanging straight at the sides.
+2. Walking toward the viewer. The foot on the viewer's left steps forward, toward the viewer. The arm on the viewer's right swings forward. The other arm swings back.
+3. Walking toward the viewer. The foot on the viewer's right steps forward, toward the viewer. The arm on the viewer's left swings forward. The other arm swings back.
+
+Row 2, body pointed straight away from the viewer, only the back of the head and body visible, no face:
+4. Standing still. Feet together, both flat on the ground. Arms hanging straight at the sides.
+5. Walking away from the viewer. The foot on the viewer's left steps forward, away from the viewer. The arm on the viewer's right swings forward. The other arm swings back.
+6. Walking away from the viewer. The foot on the viewer's right steps forward, away from the viewer. The arm on the viewer's left swings forward. The other arm swings back.
+
+Row 3, a full side view, the body turned 90 degrees so the character faces the left edge of the picture in all three cells, only one eye visible:
+7. Standing still. Feet together, both flat on the ground. Arms hanging straight at the sides.
+8. Mid-stride. The front leg reaches forward with the heel touching the ground and the toes up. The back leg is behind with only the toes touching the ground and the heel lifted. The arm nearest the viewer swings back, the far arm swings forward.
+9. Legs passing. The supporting leg is straight under the body with the foot flat. The other leg is lifted beside it, knee bent, foot off the ground. The arm nearest the viewer swings forward, the far arm swings back.

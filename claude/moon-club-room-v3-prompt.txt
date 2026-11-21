@@ -1,0 +1,74 @@
+# IMAGE REQUEST: ONE SINGLE ILLUSTRATION
+
+Return exactly one image, nothing else. No reference images are needed.
+
+## WHAT THIS IS
+
+A hand-painted fantasy environment illustration of **the Moon Club**, a faded, once-glamorous supper club hidden behind an observatory, for *The Adventures of Tom*, a family role-playing game.
+
+The environment should look as though it belongs in **Final Fantasy IX**: a whimsical, richly imagined fairy-tale world with theatrical architecture, charmingly exaggerated proportions, intricate decorative details, warm nostalgic lighting, and the distinctive hand-painted aesthetic of classic Final Fantasy IX backgrounds.
+
+This is **one complete, walkable interior game map**, painted as a single cohesive illustration. The room is painted EMPTY: the game adds its own furniture, objects, characters and monsters afterward, so the floor stays completely clear.
+
+## ART STYLE: FINAL FANTASY IX
+
+Recreate the visual language of the hand-painted, pre-rendered environments and illustrated concept art of **Final Fantasy IX**, particularly its ornate interiors, theatrical towns, and atmospheric fantasy architecture.
+
+- **Whimsical storybook fantasy:** A richly detailed, hand-painted environment with slightly exaggerated architecture, playful asymmetry, gently distorted proportions, and a magical, lived-in quality. Everything should feel lovingly designed, tactile, and full of personality.
+- **Painterly rendering:** Visible, confident brushwork; chunky brushed shading in a few clear tonal families; delicate painted highlights; rich surface textures; and a traditional watercolor-and-gouache illustration sensibility. Avoid overly smooth digital gradients.
+- **Expressive contours:** Dark brown and deep plum contour accents around important architectural details and decorative elements. Contours should feel hand-drawn and integrated into the painting, not like uniform comic-book outlines.
+- **Rich, warm colors:** Deep jewel tones, honeyed golds, aged brass, burgundy velvet, midnight blue shadows, creamy marble, and warm amber highlights. Saturated but harmonious, with atmospheric color variation and an inviting fairy-tale warmth.
+- **Fantasy architecture:** Slightly oversized doors, curved woodwork, ornate brass trim, sculptural pillars, decorative arches, and gently irregular craftsmanship. The room should feel like a charming, eccentric establishment from the world of Final Fantasy IX, rather than a historically accurate 1970s interior.
+- **Warm golden illumination:** Soft golden light from the upper left, gentle amber glow around wall sconces, luminous edges on polished brass, and subtle cool violet-blue shadows. Rich painted ambient occlusion where walls meet the floor.
+- **Intricate environmental storytelling:** Scratched parquet, tarnished brass, faded gilding, and dusty marble, with a fine layer of dust on the floor edges and wall ledges and a few faint cobwebs in the upper corners, suggest a once-splendid venue that has slowly fallen into disuse. Magical atmosphere without overt magical effects.
+- **Visual clarity:** Every built-in feature should have a readable silhouette and sufficient contrast against the floor. Fine ornamental detail must never compromise navigation or spatial readability.
+
+**Important:** The illustration should resemble a beautifully painted Final Fantasy IX game background, not a modern 3D reconstruction of one.
+
+NOT pixel art. NOT modern retro pixel graphics. NOT photorealistic. NOT a 3D render. NOT anime cel shading. NOT flat cartoon art. NOT vector illustration. No pixelation, dithering, or artificially limited color palette.
+
+## CAMERA
+
+- A fixed, elevated three-quarter perspective, looking diagonally downward at approximately 35 degrees, reminiscent of the carefully composed pre-rendered exploration backgrounds of Final Fantasy IX.
+- One consistent camera angle across the whole room. No fisheye distortion, no changing viewpoints, no top-down floor plan.
+- The back wall and parts of the side walls are visible, and the floor fills most of the picture.
+- Landscape 4:3 (target 1920 x 1408 pixels). Full bleed, edge to edge, no border or frame.
+- A standing adult would be about one-eleventh of the picture height.
+
+## THE ROOM: SIMPLE PLACEMENT
+
+One plain rectangular room, seen from the front. Plastered walls with wood wainscot below, and ONE flat parquet floor running from wall to wall. Exactly these features, in these places:
+
+1. **Back wall, left:** a recessed arched alcove with a drawn-back burgundy velvet curtain on each side and warm brass trim. Bare wall inside it. This is the coat check.
+2. **Back wall, center:** tall double doors in an ornate carved arch with aged brass trim and celestial ornaments, standing wide open. The opening beyond is simply dim blue-black shadow.
+3. **Back wall, right:** a gently curved corner of paneled wall with a brass wall sconce. This is the card corner.
+4. **Left wall:** an open arched doorway with a simple stone surround, clear and unobstructed.
+5. **Right wall:** one sculptural pillar with a plain flat face at chest height, and one small arched window high on the wall with dim frosted blue glass.
+
+Add a second sculptural pillar beside the card corner. Two pillars in total.
+
+**Floor:** warm, aged, dusty, matte parquet, with one large faded eight-point compass star in a thin ring inlaid at the center. The floor is completely clear and open from the back wall to the bottom edge of the picture, from the left wall to the right wall. Even mid-tone brightness, no reflections, no light patches.
+
+**Walls and lighting:** brass wall sconces with a soft amber glow, burgundy velvet drapery, arched niches and wainscot paneling, and subtle moon, star and observatory-inspired ornaments worked into the arches, door frames and metalwork. Purely decorative.
+
+## COLOR PALETTE AND LIGHTING
+
+Use these colors as a foundation, with painterly variation:
+
+- Dusty gold: `#D9B06A` for gilded details, aged brass, golden highlights.
+- Velvet burgundy: `#6E2A3A` for curtains and drapery.
+- Marble cream: `#E5DCCB` for stone pillars, decorative surfaces, pale plaster.
+- Midnight blue: `#2F3A5F` for cool shadows, recesses, atmospheric depth.
+- Warm lamplight: `#FFE1A0` for glowing sconces and highlights.
+
+Add muted plum, warm chestnut, antique copper, emerald green and subtle violet shadow tones for the rich, illustrated Final Fantasy IX palette. A late-afternoon golden glow, warm highlights, cool shadows, a soft nostalgic atmosphere. Avoid extreme darkness: the floor and doorways stay clearly visible.
+
+## PAINTING QUALITY
+
+A finished, high-quality, hand-painted environment plate for a classic fantasy role-playing game: the whimsical charm of Final Fantasy IX, exaggerated yet believable fantasy architecture, expressive hand-painted contours, confident brush shading, tactile surface detail without clutter, a warm inviting atmosphere with subtle mystery, and strong depth with coherent perspective. Timeless, storybook-like, gently magical, family friendly for ages 6 and up.
+
+## KEEP OUT
+
+No characters, animals or creatures. No furniture or loose objects of any kind. No text, letters, numbers or signs. No frame, border, black bars or inset images. No magical effects.
+
+**One image. One room. One consistent camera. An empty floor.**

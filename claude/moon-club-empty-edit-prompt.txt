@@ -1,0 +1,19 @@
+Edit the attached painting of the Moon Club, a hand-painted fantasy interior in the style of a classic Final Fantasy IX background. Keep the painting exactly as it is: the same camera, the same layout, the same walls, arches, doors, railings, pillars, built-in shelving, wall sconces and wall lamps, the same carpets, runners and rugs, the same marble and parquet floors, the same colors, the same warm lighting and the same painterly brushwork.
+
+Change only this: remove every loose, freestanding object, and paint the floor or carpet that would be underneath each one, continuing the same pattern and the same light, so that every floor is continuous and completely clear.
+
+Remove all of these:
+- every potted palm
+- the three standing oval mirrors on brass stands
+- the coat-check counter with its book and bell, and the coat rail with its hangers
+- every chair, stool, bench and small side table, including the lamps and candle lamps standing on tables
+- the bar counter with its bottles and globe, and the stools along it
+- both round green card tables
+- the grand piano and its bench
+- the jukebox
+- the large gold-framed mirror
+- the brass rope posts and red ropes
+- the small carved wooden stand near the hall wall
+- the brass plaque on the hall wall (leave a plain flat wall panel in its place)
+
+Do not add anything. No people, no creatures, no text, no new objects, no frame. Return exactly one image, the same size as the attached painting.

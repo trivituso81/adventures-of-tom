@@ -1,0 +1,49 @@
+# Deedee lines still in the OLD voice after the 11-06 merge (45)
+
+Tom: Voice Library, Show > Old voice shows these. Make a take for each, Use it, Export phone clips.
+
+- battle: Come on, honey. Deedee hasn't missed a dance floor in fifty years. One, two, three.
+- battle: Shoes off, everybody! Floors just mopped! Let's DANCE!
+- battle: Room for one more? Deedee brings cookies, hugs, and love to the moon and back!
+- battle: Girls! I love you to the moon and back!
+- battle: Who wants rhubarb crisp? Everyone wants rhubarb crisp.
+- dialogue: On her BIRTHDAY. Boppy, did you hear that?
+- dialogue: I had them. I had them a MINUTE ago.
+- dialogue: Hold on, honey. Let me read the cake box first. It has to say dairy free. Where are my glasses.
+- dialogue: To the moon and back, Rosie. The MOON. And BACK.
+- dialogue: Cake is on the counter. Dairy free. I read the box nine times. With my glasses.
+- dialogue: Not today, honey. Book club at four. We're reading the same book as last month. Nobody finished it.
+- dialogue: Not yet, honey. I'm still deciding on earrings. Come back with the invitation.
+- dialogue: Not this time, honey. Somebody has to start Sunday dinner. Every clock in my kitchen says midnight and the roast doesn't care.
+- dialogue: Nobody believes him.
+- dialogue: There they are! Well? Did anybody catch anything?
+- dialogue: Nobody believed you.
+- dialogue: Did he.
+- dialogue: Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.
+- dialogue: I love you all to the moon and back. Now eat.
+- dialogue: Not this time, honey. I have three pies in and Boppy needs somebody to go fishing with. Take the girls.
+- dialogue: Not tonight, honey. I made a plate for the teachers. Somebody has to keep Boppy away from it.
+- dialogue: Not one pepper for me either. Peppers give me gas.
+- dialogue: Who told you that.
+- dialogue: Tata is on thin ice.
+- dialogue: Hand me my glasses. I want to look at him properly. Where ARE my glasses.
+- dialogue: Thank you, Rosie. Now. Let me look at him.
+- dialogue: Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice.
+- dialogue: Found my glasses. They were in the fridge. Don't ask. Who wants a cookie?
+- dialogue: All right, all right. The pies need me anyway. Come back for a cookie.
+- dialogue: Now hold on, Tommy. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?
+- dialogue: Wonderful! Everybody hold hands. Tommy, you too. To the moon and back, here we come.
+- dialogue: Oh, honey. Somebody has to stay and mind the house. Who's it going to be?
+- dialogue: Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.
+- dialogue: I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach.
+- dialogue: ...So they are. Don't say anything.
+- dialogue: Dairy free. Good. Now. Rose. Come here, sweetheart. Deedee's got you.
+- dialogue: Cold doesn't beat cold, Tommy. Warm beats cold. Always has. Ask any nurse.
+- dialogue: He's a guest, Boppy. Sit. He can sit next to you. You could use the cold on that knee.
+- dialogue: The tomatoes are coming in. You're going home with forty.
+- dialogue: Boppy says he's not feeling good. Boppy also won't stop fishing.
+- dialogue: A little glass of wine with dinner. Just one. Nurse's orders.
+- dialogue: Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.
+- dialogue: I packed cookies. They're in my purse. The purse is at home. We go back.
+- dialogue: When we get home I'm making a big dinner. Nobody argue.
+- dialogue: Not today, honey. The cake is in the oven and the oven doesn't care that it's a birthday.

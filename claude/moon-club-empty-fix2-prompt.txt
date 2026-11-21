@@ -1,0 +1,15 @@
+# IMAGE REQUEST: ONE SINGLE ILLUSTRATION (REFERENCE ATTACHED)
+
+Return exactly one image, nothing else.
+
+The attached picture is a hand-painted painting of **the Moon Club**, a faded, once-glamorous supper club, in the style of a classic **Final Fantasy IX** background: whimsical, richly detailed, hand-painted, with warm golden lighting and expressive brushwork. Keep the painting exactly as it is: the same camera, the same layout, the same walls, arches, pillars, railings, doorways, wall panels, wall sconces and wall lamps, the same carpets, runners and rugs, the same marble and parquet floors, the same colors and the same painterly style. Not pixel art, not photorealistic, not a 3D render.
+
+Change only this: remove the few loose objects that are still in the painting, and paint the floor or carpet that was under each one, continuing the same pattern and the same light, so the floor is continuous and clear.
+
+Remove all of these:
+- every potted plant and palm in a brass pot: the one in the top left corner by the framed picture, the one just right of the tall silver double doors, the one at the top right near the tall windows, the one cut by the lower left edge, and any other potted plant
+- the long wooden coat-check counter in the top left room (keep the shelving on the wall behind it)
+- the curved bar counter in the top right room, together with all four red stools in front of it (keep the shelving and arched cabinet on the wall behind it)
+- the arched brass plaque on the wall of the long hall (leave a plain flat wall panel in its place)
+
+Do not change anything else. Do not add anything. No people, no creatures, no text, no new objects, no frame. Return exactly one image, the same size as the attached painting.

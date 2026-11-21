@@ -1,0 +1,19 @@
+Draw the two men in the attached pictures greeting each other, as a pose sheet.
+
+Attached first: the man who stands on the LEFT in every frame. Attached second: the man who stands on the RIGHT in every frame. Copy both pictures as exactly as possible in every frame: the same faces, bodies, head sizes compared to their bodies, hair, clothes, colors, linework, painting style and level of detail. Keep their real height difference the same in every frame. Only the poses change. Do not add, remove or redesign anything.
+
+One image, a grid of 4 columns by 2 rows of equal cells, each cell wider than it is tall (3 wide by 2 tall), on a flat solid magenta #FF00FF background. Both men together in every cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, hearts, effects or shadows.
+
+In every frame the camera sees them from the side: the man on the left faces right, the man on the right faces left, so they face each other. Both faces stay visible in a three-quarter view toward the viewer. The moment is sweet, warm and family friendly.
+
+Row 1:
+1. Spotting each other. Standing a step apart. Both turned toward each other, arms relaxed at their sides. Both smiling wide, eyebrows raised, happy to see each other.
+2. Hug. Standing close, arms wrapped around each other's backs. Chins resting near each other's shoulders, eyes closed, warm smiles.
+3. Leaning in. Still close, each with one hand resting on the other's upper arm. Both leaning their heads in toward each other, eyes half closed, small smiles.
+4. Peck. A quick, gentle kiss: lips lightly touching, eyes closed, heads slightly tilted. Each with one hand on the other's upper arm. Bodies a small gap apart.
+
+Row 2:
+5. Blushing. Heads pulled back a little, still facing each other. Both with rosy pink blush across the cheeks. Shy closed-mouth smiles, eyes glancing down.
+6. Bashful laugh. Both with rosy blushing cheeks. The man on the left rubs the back of his neck with one hand. The man on the right covers a laugh with the back of one hand. Both looking at each other, eyes crinkled.
+7. Holding hands. Standing side by side, the near hands joined between them, the other arms relaxed. Both turned slightly toward the viewer, faint blush on both, calm happy smiles.
+8. Forehead touch. Standing close, foreheads gently touching, eyes closed, both hands of each resting on the other's shoulders. Soft smiles, faint blush on both.

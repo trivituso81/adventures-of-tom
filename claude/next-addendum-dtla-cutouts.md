@@ -1,0 +1,7 @@
+# DTLA plaza: INSTALLED 2026-11-06 (CHANGES 393, `dtla12`, push 3c7286b). Status and layout: claude/next.md section 0d.
+
+- Sources are in the repo now: `art/raw/areas/blvd-v4/` (painting.png 1347 x 1168, mask-trees, mask-lamps, mask-buildings, mask-props, mask-front). No need for Tom to re-attach anything.
+- Rebuild: `python3 tools/make_blvd_fg.py` (plate, `art/blvd-fg.webp`, prints `PLATE_BEHIND.blvd`; writes tools/shots/blvd-pieces.json and blvd-pieces.png), then `python3 tools/make_blvd_mask.py` (prints the plateMask rows, overlay tools/shots/blvd-mask.png). Paste both by hand; then blvd_test, reach_test blvd, smoke, bump tags.
+- Mask fixes built into the cutter: lamps mask subtracted from trees, buildings and front (it owns the 3 arches); top row split at x 400, 626, 968, 1188; lamp behind the GRAND spire clipped by the buildings mask; invented pot at (683..741, 879..953) dropped; the CABS pot that sat 25 px off is fitted automatically.
+- Walk map choices: col 8 alley closed (pot and bollard make it a dead end); GRAND tower tiles on the top plaza blocked (rows 10 to 13); bench below the col 22 alley blocks only its east half; paving under the wardrobe bench (row 22) kept open as the only way along the bottom.
+- Open: no Metro entrance is painted, so the ch13 Metro stairs are an invisible touch spot at (28,22). If Tom notices, offer a small overlay prop (Art Library) for it.

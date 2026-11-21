@@ -1,0 +1,36 @@
+IMAGE REQUEST: ONE BATTLE SHEET, 6 FRAMES. Return exactly one image, nothing else.
+
+ATTACH: (1) the hero picture of the character (the reference), (2) the finished 8-frame battle sheet of the same character (the match sheet).
+
+WHAT THIS IS
+More battle frames for a family role-playing game. This sheet must look like it was painted at the same time as the attached 8-frame sheet. Match it exactly: the same face, the same head size compared to the body, the same hair, clothes, shoes, colors, lighting, figure size and painting style. Draw the person EXACTLY as in the hero picture. Do not redesign, restyle or simplify anything.
+
+ART STYLE
+- A hand-painted digital caricature of a real person, full body, matching both attached pictures.
+- Semi-realistic painterly rendering, smooth soft shading, glossy highlights on skin and hair, finely painted hair strands, clothing prints drawn clearly.
+- Oversized head, slim body, small hands and feet, large expressive eyes, a clear likeness of the person in the picture.
+- Warm golden light from the upper left, a gentle rim light, rich warm colors.
+- Clean soft edges. No thick or black outlines.
+- Not pixel art, not 16-bit. No pixelation, no dithering, no flat cartoon shading, no anime style.
+
+THE SHEET (strict)
+- A grid of 3 columns by 2 rows of equal square cells, 320 x 320 pixels each, so the full image is 960 x 640. If your tool offers a different size, keep exactly 3 columns and 2 rows of equal square cells.
+- Exactly 6 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- The character FACES LEFT in every frame, in a three-quarter view from slightly above, the same angle as the 8-frame sheet.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No grid lines, borders, numbers, labels or text.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or a neighbour.
+- The figure is the same size as on the 8-frame sheet. Feet rest on one horizontal ground line about 28 pixels above the cell bottom.
+- Draw only the character. Hands empty. No effects, shadows, dust, motion lines, sparkles, props or other people.
+- The head is the same size in every frame and matches the attached pictures.
+
+THE 6 FRAMES (each clearly different from the others)
+1. FLINCH: startled, body leaning back to the right, head pulled back, eyes squeezed shut, one foot lifted off the ground.
+2. TIRED: down on one knee, one hand resting on the knee, head lowered, out of breath, a weary but determined face.
+3. NAP: sitting slumped on the ground with legs stretched out to the left, leaning back on one hand, head tilted, eyes closed, dizzy and sleepy.
+4. CHEER A: celebrating, one fist pumped high, the other hand on the hip, a big grin.
+5. CHEER B: both fists overhead, laughing, up on the toes.
+6. SIGNATURE: a bold power pose that fits this person's personality, feet planted wide, confident expression, clearly different from every other frame on both sheets.
+
+Family friendly for ages 6 and up.
+
+Do not add frames, merge frames, repeat a pose or invent props. If anything is unclear, draw the pose described.

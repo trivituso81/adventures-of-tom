@@ -1,0 +1,176 @@
+# IMAGE REQUEST: ONE SINGLE ILLUSTRATION
+
+Return exactly one image, nothing else.
+
+## WHAT THIS IS
+
+A hand-painted fantasy environment illustration of **the Moon Club**, a faded, once-glamorous supper club hidden behind an observatory, for *The Adventures of Tom*, a family role-playing game.
+
+The environment should look as though it belongs in **Final Fantasy IX**: a whimsical, richly imagined fairy-tale world with theatrical architecture, charmingly exaggerated proportions, intricate decorative details, warm nostalgic lighting, and the distinctive hand-painted aesthetic of classic Final Fantasy IX backgrounds.
+
+This is **one complete, walkable interior game map**, painted as a single cohesive illustration. The game overlays its own characters, monsters, and interactive objects, so the environment must remain entirely unpopulated, with generous open floor space.
+
+**IMPORTANT, EMPTY ROOM:** This image is the room itself, painted as an empty shell. All loose furniture and freestanding objects are painted separately and placed into this room afterward. Paint only the architecture and the built-in fixtures described below. Where loose objects will later stand, paint clean, continuous, empty floor. Do not paint any furniture, plants, mirrors, stands, tables, chairs, booths, counters, rope posts or lamps that stand or hang free of the walls.
+
+## ART STYLE — FINAL FANTASY IX
+
+Recreate the visual language of the hand-painted, pre-rendered environments and illustrated concept art of **Final Fantasy IX**, particularly its ornate interiors, theatrical towns, and atmospheric fantasy architecture.
+
+- **Whimsical storybook fantasy:** A richly detailed, hand-painted environment with slightly exaggerated architecture, playful asymmetry, gently distorted proportions, and a magical, lived-in quality. Everything should feel lovingly designed, tactile, and full of personality.
+- **Painterly rendering:** Visible, confident brushwork; chunky brushed shading in a few clear tonal families; delicate painted highlights; rich surface textures; and a traditional watercolor-and-gouache illustration sensibility. Avoid overly smooth digital gradients.
+- **Expressive contours:** Dark brown and deep plum contour accents around important architectural details and decorative elements. Contours should feel hand-drawn and integrated into the painting, not like uniform comic-book outlines.
+- **Rich, warm colors:** Deep jewel tones, honeyed golds, aged brass, burgundy velvet, midnight blue shadows, creamy marble, and warm amber highlights. Saturated but harmonious, with atmospheric color variation and an inviting fairy-tale warmth.
+- **Fantasy architecture:** Slightly oversized doors, curved woodwork, ornate brass trim, sculptural pillars, decorative arches, and gently irregular craftsmanship. The room should feel like a charming, eccentric establishment from the world of Final Fantasy IX, rather than a historically accurate 1970s interior.
+- **Warm golden illumination:** Soft golden light from the upper left, gentle amber glow around wall sconces, luminous edges on polished brass, and subtle cool violet-blue shadows. Rich painted ambient occlusion where walls meet the floor.
+- **Intricate environmental storytelling:** Scratched parquet, tarnished brass, faded gilding, and dusty marble, with a fine layer of dust on the floor edges and wall ledges and a few faint cobwebs in the upper corners, suggest a once-splendid venue that has slowly fallen into disuse (fifty years of dust, but still beautiful). Magical atmosphere without overt magical effects.
+- **Visual clarity:** Every built-in feature should have a readable silhouette and sufficient contrast against the floor. Fine ornamental detail must never compromise navigation or spatial readability.
+
+**Important:** The illustration should resemble a beautifully painted Final Fantasy IX game background, not a modern 3D reconstruction of one.
+
+NOT pixel art. NOT modern retro pixel graphics. NOT photorealistic. NOT a 3D render. NOT anime cel shading. NOT flat cartoon art. NOT vector illustration. No pixelation, dithering, or artificially limited color palette.
+
+## CAMERA AND COMPOSITION
+
+- A fixed, elevated three-quarter perspective, looking diagonally downward at approximately 35 degrees, reminiscent of the carefully composed pre-rendered exploration backgrounds of Final Fantasy IX.
+- One consistent camera angle and perspective across the entire room. No fisheye distortion, no changing viewpoints, and no conventional top-down floor-plan presentation.
+- The back wall and portions of the side walls are visible, establishing the room's architecture, but the walkable floor occupies most of the illustration.
+- Compose the environment as a complete, uninterrupted interior, with all important architecture visible simultaneously.
+- Maintain a consistent gameplay scale throughout. A standing adult character would be approximately two map tiles tall, or about one-eleventh of the image height.
+- The intended map is **30 x 22 tiles**, corresponding to a final gameplay plate of **1920 x 1408 pixels**, approximately 1.36:1.
+- Use a 4:3 landscape composition as the closest standard aspect ratio, carefully arranging the room to support cropping or resizing to the target dimensions without losing essential architecture.
+- Full bleed, edge to edge. No borders, margins, decorative framing, or external background.
+
+## THE PLACE — THE MOON CLUB
+
+The Moon Club is a forgotten supper club concealed behind an old observatory. Once an extravagant gathering place for astronomers, eccentric aristocrats, performers, and adventurous travelers, it now stands quiet and dusty.
+
+Imagine a forgotten ballroom somewhere between the theatrical grandeur of Alexandria, the eccentric charm of Lindblum, and the atmospheric, hand-painted interiors of Final Fantasy IX.
+
+The venue retains subtle traces of its original 1971 supper-club identity, but these are reinterpreted through a whimsical fantasy aesthetic: ornate brass fittings, decorative marble, curved woodwork, and romantic celestial motifs.
+
+The overall mood is **faded grandeur, gentle mystery, warmth, nostalgia, and fairy-tale adventure**. It should feel like a place where a magical story might unfold, while remaining grounded, welcoming, and family friendly.
+
+### Spatial layout
+
+The room consists of one continuous walkable interior with four recognizable zones. In every zone, paint only the architecture and built-in fixtures named here, and leave the floor in front of them empty.
+
+**Top left — Coat check**
+
+A recessed alcove in the back wall with a framed arch, a drawn-back burgundy velvet curtain on each side, an empty coat-rail niche with bare wall behind it, and warm brass edging. The alcove has a plain wooden floor continuous with the main floor. Paint NO counter, NO coat rail, NO hangers and NO coats, and NO rope posts in or in front of it. Those are painted separately. Leave a wide empty strip of floor directly in front of the alcove.
+
+The arch should feel charmingly oversized and theatrical, with the gently exaggerated proportions of Final Fantasy IX architecture.
+
+**Top center — Dome entrance**
+
+Tall, imposing double doors lead into the observatory's Dome.
+
+The doors are set into the back wall and framed by an ornate arch, aged brass trim, celestial ornamentation, and softly illuminated stonework.
+
+Their proportions are slightly exaggerated, creating a strong fairy-tale focal point. They must read as a clear, accessible passage, with the doorway visibly open, and a hint of the dome's starry blue night beyond.
+
+**Top right — Card room**
+
+A cozy corner of the room defined by a gently curved wall with a wainscot panel and a low built-in wall ledge, lit by a brass wall sconce. Paint NO tables and NO chairs. Leave a generous area of clear floor in this corner for two card tables and their chairs to be placed afterward.
+
+**Center and bottom — Grand ballroom**
+
+A large, open parquet dance floor dominates the center and lower half of the room.
+
+The parquet is made of warm, aged timber, with visible painted wood grain, slightly uneven coloration, worn varnish, and a large faded celestial star motif embedded in the floor. The varnish is worn and dusty, never mirror-like: no reflections of the room, no light streaks, no glowing spots on the floor.
+
+The star should be decorative and architectural, not glowing or magical.
+
+The dance floor must remain entirely empty and unobstructed, providing the main area for gameplay. Paint no rugs, no furniture, no shadows of objects that are not there.
+
+## BUILT-IN ARCHITECTURE TO PAINT
+
+Include all of the following, carefully integrated into the room:
+
+- **Two sculptural pillars:** Curved stonework, aged gilding, and celestial ornamentation, one on the right side of the room and one near the left side, each with a clearly visible base meeting the floor. Leave one plain flat face on the right pillar, at chest height, with nothing mounted on it (a plaque will be added afterward).
+- **East window:** One tall arched window high on the east (right) side wall, with a thin thread of pale silver moonlight coming through it, cool and faint, not a spotlight and not a glow on the floor.
+- **Wall sconces:** Warm brass wall sconces fixed to the walls and pillars, with soft amber glow around each one.
+- **Velvet drapery and arches:** Built-in wall drapery, arched niches and wainscot paneling along the walls.
+- **Celestial detailing:** Subtle moon, star, and observatory-inspired ornamental shapes worked into the architecture, door frames, parquet, and metalwork. These are purely decorative, never collectibles or interactive markers.
+
+Do NOT paint any of these, they are painted separately: freestanding mirrors or empty mirror stands, potted palms, velvet booths, sofas, tables, chairs, the coat-check counter, coat rails, rope posts, hanging lamps and chandeliers, lamps on tables, rugs, or any plaque.
+
+Every built-in feature must have a crisp, recognizable silhouette and a visible relationship to the floor.
+
+## DOORS, EXITS, AND WALKABILITY
+
+The illustration is a functional exploration map, not simply an atmospheric interior painting.
+
+**Required exits:**
+
+1. **Left edge:** A clearly visible open doorway in the left wall leading back to the observatory. The doorway must be unobstructed, fully inside the composition, and visually distinct from the surrounding wall.
+2. **Top center:** The tall, brass-trimmed double doors leading into the Dome. They must appear open and accessible, not sealed shut or concealed.
+
+**Walkability requirements:**
+
+- The floor must form one continuous, believable navigable surface from wall to wall, with nothing standing on it.
+- Maintain clear walking lanes at least two map tiles wide, approximately one-tenth of the image width.
+- Preserve a generous open route between the left doorway and the Dome doors.
+- Keep the central parquet dance floor wide open.
+- No raised platforms, stairs, railings, or decorative barriers that divide the room.
+- Maintain enough negative space for characters and objects to be overlaid without visual confusion.
+- Do not paint navigation grids, tile outlines, paths, or gameplay markers.
+
+The room should look elegantly empty while remaining immediately readable as a traversable Final Fantasy IX-style exploration environment.
+
+## COLOR PALETTE AND LIGHTING
+
+Use the following colors as a foundation, interpreted with painterly variation rather than rigid digital fills:
+
+- Dusty gold: `#D9B06A` — gilded details, aged brass, golden highlights.
+- Velvet burgundy: `#6E2A3A` — curtains, drapery.
+- Marble cream: `#E5DCCB` — stone pillars, decorative surfaces, pale plaster.
+- Midnight blue: `#2F3A5F` — cool shadows, recesses, atmospheric depth.
+- Warm lamplight: `#FFE1A0` — glowing sconces, highlights.
+
+Add muted plum, warm chestnut, antique copper, emerald green, and subtle violet shadow tones to achieve the rich, illustrated fantasy palette associated with Final Fantasy IX.
+
+The lighting should evoke a late-afternoon golden glow filtering into an old, enchanted interior.
+
+Maintain warm highlights, cool shadows, rich contrast, and a soft nostalgic atmosphere. Avoid extreme darkness: the floor, doorways, and gameplay routes must remain clearly visible. Floor brightness is mid-value and even across the room, with no dark corners and no vignette.
+
+## PAINTING QUALITY
+
+The final illustration should feel like a finished, high-quality, hand-painted environment plate created for a classic fantasy role-playing game.
+
+Prioritize:
+
+- The distinctive whimsical charm and illustrated environmental richness of Final Fantasy IX.
+- Exaggerated yet believable fantasy architecture.
+- Expressive hand-painted contours and confident brush shading.
+- Intricate, tactile surface detail without visual clutter.
+- A warm, inviting atmosphere with subtle mystery.
+- Strong depth, coherent perspective, and clear architecture.
+- A beautiful balance of elaborate environmental detail and open navigable floor space.
+
+The scene should feel timeless, storybook-like, and gently magical, rather than overtly supernatural or technologically futuristic.
+
+## STRICT EXCLUSIONS
+
+**No characters of any kind.** No people, animals, creatures, monsters, silhouettes, statues resembling characters, or humanoid figures. The game renders all characters separately.
+
+**No loose objects of any kind.** No furniture, plants, mirrors, stands, tables, chairs, booths, counters, rope posts, rugs, or lamps standing or hanging free of the walls. No treasure chests, coins, keys, gems, potions, floating objects, glowing pickups, or gameplay markers.
+
+**No text whatsoever.** No words, letters, numbers, logos, signage, labels, clock numerals, or written markings.
+
+No title card, frame, border, black bars, white margins, vignette bars, contact sheet, mockup, palette chart, inset illustrations, or secondary images.
+
+No dramatic magical effects, particle effects, glowing portals, or supernatural phenomena that could interfere with gameplay readability.
+
+No photographic textures, realistic 3D materials, overly polished CGI lighting, or modern architectural design.
+
+Family friendly for ages 6 and up.
+
+## FINAL DIRECTION
+
+Create **exactly one complete illustration** of the Moon Club as a richly detailed, whimsical, hand-painted Final Fantasy IX-style interior exploration map, painted as an empty room.
+
+The result should combine the nostalgic charm of a forgotten supper club with the ornate fantasy architecture, exaggerated proportions, painterly brushwork, warm golden illumination, and magical storybook atmosphere of Final Fantasy IX.
+
+Above all, preserve the **functional, continuous, open, completely empty gameplay floor**, the specified spatial arrangement, the two accessible exits, and every built-in architectural feature.
+
+**One image. One room. One consistent camera. No characters. No text. No loose objects. No reference images required.**

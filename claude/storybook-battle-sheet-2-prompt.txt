@@ -1,0 +1,17 @@
+Draw more battle frames of the character in the attached pictures.
+
+Attached first: the character's picture. Attached second: their finished 8-frame battle sheet. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, linework, painting style, level of detail, viewing angle and figure size. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell and the same size as on the 8-frame sheet, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows.
+
+In every frame the character faces the left edge of the picture in a three-quarter view: the chest turned partly toward the viewer, both eyes visible, the nose pointing left.
+
+Row 1:
+1. Startled. Upper body leaning back to the right. Head pulled back. Eyes squeezed shut, mouth open in an O. Both hands raised in front of the chest, palms out. The front (left) foot lifted off the ground.
+2. Tired. Kneeling on the back (right) knee, the front foot flat on the ground with the knee bent. One hand resting on the raised knee, the other arm hanging down. Head lowered, mouth open, breathing hard.
+3. Dizzy. Sitting on the ground with both legs stretched out straight toward the left. Leaning back on one straight arm, palm flat on the ground behind. Head tilted to one side, eyes closed, mouth in a small wavy line.
+
+Row 2:
+4. Cheer. Standing, feet apart. The arm nearest the viewer punched straight up, fist closed. The other fist on the hip. Big open-mouth grin.
+5. Big cheer. Up on the toes, heels off the ground. Both arms straight up above the head, fists closed. Head tipped back slightly, laughing with the mouth wide open.
+6. Power pose. Feet planted very wide, knees slightly bent. The arm nearest the viewer stretched forward to the left, pointing with the index finger. The other fist on the hip. Chin down, eyebrows lowered, a confident closed-mouth smile.

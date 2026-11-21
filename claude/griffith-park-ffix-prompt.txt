@@ -1,0 +1,226 @@
+Create the actual environment painting for **Area 10, Griffith Park**, from *The Adventures of Tom*, a whimsical family role-playing game. The environment must combine the fairy-tale visual language of **Final Fantasy IX** with the warmth, charm, and hand-painted craftsmanship of its illustrated concept art.
+
+Generate the finished environment painting itself. Do not create a plan, presentation, diagram, infographic, example sheet, or project update.
+
+## OUTPUT
+
+One standalone, edge-to-edge, full-frame environmental painting.
+
+Landscape canvas, 1536 × 1408 pixels. If that exact size is unavailable, use the closest landscape aspect ratio at the highest available resolution.
+
+No border, title, labels, captions, grid, pins, UI, inset views, or white page.
+
+## ART DIRECTION: FINAL FANTASY IX
+
+Paint this environment as though it belongs in the world of **Final Fantasy IX**, inspired by the game's original hand-drawn environmental concept art, illustrated world maps, and whimsical pre-rendered backgrounds.
+
+The visual style should feel like a beautifully illustrated fairy-tale adventure, combining believable natural environments with charming exaggeration, expressive shapes, and the distinctive painterly atmosphere of a classic Japanese fantasy RPG.
+
+**Core artistic characteristics:**
+
+- **Hand-painted illustration:** Visible, confident brushwork throughout. Broad painterly strokes for terrain and large forms, smaller textured strokes for grass, foliage, rocks, wood, and fine environmental details.
+- **Expressive shapes:** Slightly exaggerated silhouettes, rounded and irregular rock formations, gently twisting tree trunks, oversized clusters of foliage, and subtly whimsical natural forms.
+- **Rich painted color:** Deep, warm, layered colors with contrasting cool shadows. Colors should feel carefully mixed by hand, not digitally generated or mechanically blended.
+- **Illustrated contours:** Fine, irregular dark brown and muted charcoal contour lines selectively define important silhouettes, rocks, tree trunks, wooden signs, and architectural details. Avoid thick, uniform cartoon outlines.
+- **Chunky brushed shading:** Simplified but expressive shading in a few distinct tonal groups, with visible transitions between light, midtone, and shadow.
+- **Fairy-tale atmosphere:** A slightly magical, storybook interpretation of the real world. Familiar California scenery should feel inviting, mysterious, and full of personality without becoming an entirely fantastical landscape.
+- **Traditional finish:** Matte gouache, watercolor, and opaque painted textures on subtly grained paper or canvas. Organic edges, layered pigment, occasional dry-brush texture, and no glossy digital surfaces.
+- **Environmental storytelling:** The setting should suggest that a memorable adventure could happen here, even though no characters or creatures are visible.
+
+The final result should resemble a richly detailed, hand-illustrated environment from a classic PlayStation-era fantasy RPG, **not a modern 3D remake, photorealistic landscape, generic anime background, or polished digital concept render**.
+
+## CAMERA AND COMPOSITION
+
+Use a fixed elevated three-quarter camera looking down at approximately 35 degrees, showing the ground, trails, tree trunks, rocks, and environmental landmarks together.
+
+The perspective should evoke the navigable, hand-painted environments of Final Fantasy IX, where the world feels like a miniature theatrical setting full of carefully composed scenery.
+
+Maintain one consistent camera angle across the entire uninterrupted scene.
+
+The environment must read as an explorable game location rather than an overhead map, architectural illustration, or flat diagram.
+
+## SCALE AND CAMERA DISTANCE: MOST IMPORTANT RULE
+
+This is a **whole game area viewed from high above and far away**, not a close-up illustration.
+
+The entire playable environment must fit comfortably within the image, with generous open ground and clearly connected walking routes.
+
+A grown-up character standing on a path would be approximately one fifteenth of the picture height. Walking paths should be approximately two characters wide. The main exit board should occupy approximately one seventh of the picture width.
+
+Props, signs, trees, and rock formations must remain appropriately small relative to the environment. The one deliberate exception is Griffith Observatory, which is a large, clear landmark (see below).
+
+The composition should feel like a complete, explorable Final Fantasy IX field screen, with the player character able to move naturally between foreground, middle ground, and background.
+
+**Do not zoom in. Do not create an intimate scenic vignette. Preserve the wide environmental scale.**
+
+## SETTING: GRIFFITH PARK, LOS ANGELES
+
+Depict a fictionalized, fairy-tale interpretation of Griffith Park at golden hour, preserving the recognizable character of Southern California while translating its forms into the whimsical visual language of Final Fantasy IX.
+
+The landscape contains dusty golden hillsides, pale rocky walking trails, dry chaparral, sagebrush, agave, yucca, sycamores, and California oak trees.
+
+Golden grass grows in expressive, hand-painted tufts. Tree trunks twist gently, with rounded, irregular canopies and individually suggested clusters of foliage. Boulders have exaggerated but believable forms, painted with warm highlights and cool violet-grey shadows.
+
+The terrain is rugged but welcoming: a sunlit wilderness that feels peaceful at first glance, yet quietly mysterious.
+
+A field of ancient black tar pits occupies the upper-right portion of the environment. Their surfaces are thick, glossy-dark in appearance but painted with matte pigments, showing subtle ripples, occasional bubbles, and faint atmospheric shimmer. The pits should feel strange and slightly enchanted, without becoming glowing magical portals.
+
+The world should suggest that small, mischievous smog creatures might hide among the rocks and brush, but **no creatures should actually appear**.
+
+## GRIFFITH OBSERVATORY: THE HERO LANDMARK
+
+Griffith Observatory is the signature landmark of this area and must be **instantly recognizable at a glance**.
+
+- **Placement:** On top of a rounded golden hill in the upper-left quadrant, roughly one third of the way in from the left edge and close to the top of the picture. It sits on the near ridge directly above the end of the western trail, not on a faraway mountain.
+- **Size:** The whole building spans approximately one fifth of the picture width. It is clearly larger than any tree canopy in the upper half of the scene.
+- **Recognizable form:** A long, low, symmetrical white Art Deco building. One large central dome in pale copper-green, flanked by two smaller matching domes on short towers at each end, joined by a low white colonnaded wing. A small paved terrace with a low wall in front.
+- **Clarity:** Crisp, clean hand-painted silhouette with fine brown contour lines, fully opaque, sharp and in focus. No haze, fog, or atmospheric fading over it. Its white walls catch the warm golden light from the upper left and glow cream-gold, with soft lilac shadows on the right side.
+- **Sky behind it:** Paint the Observatory against open, clear sky so its domes stand out. No trees, rocks, or ridgelines overlap its silhouette.
+- **Style:** It is painted in the same Final Fantasy IX storybook style as the rest of the scene: slightly charming and simplified, not an architectural rendering.
+- **No lettering:** The building carries no visible words, signs, or symbols.
+
+## WALKABLE GAME ENVIRONMENT: NAVIGATION FIRST
+
+The environment must function as a believable, fully traversable RPG field.
+
+All walkable routes must remain visually clear, continuous, and sufficiently wide for a small game character.
+
+Use the following composition:
+
+**Foreground:** A broad, dusty entrance trail enters from the BOTTOM edge near the center. The trail passes beneath a raised wooden exit arch labeled DOWNTOWN. The foreground contains scattered dry grass, small stones, and low chaparral, with enough clear ground for a character to enter naturally.
+
+**Middle ground:** The main trail opens into a large, sunlit dusty clearing occupying the central area of the image. This clearing is the primary navigational hub and must remain generously open. A fallen sycamore log, sagebrush, agave, and small boulders provide environmental character without obstructing movement.
+
+**The Observatory trail (most important path in the scene):** From the upper-left corner of the central clearing, a wide, pale, sunlit trail climbs to the Observatory.
+
+- It is the **brightest and widest branch** leaving the clearing, the same width as the main entrance trail, painted in light dusty cream that contrasts clearly with the golden grass on both sides.
+- It climbs the western slope in **two or three gentle switchbacks**, every turn fully visible, with no gaps where the trail disappears.
+- **No tree canopy, trunk, boulder, or bush ever covers or overlaps it.** Trees grow beside it, never over it.
+- Small rounded stones and a few rusty fence posts line its outer edge so the route reads as a deliberate, maintained trail.
+- It ends on the small terrace directly in front of the Observatory, so the eye travels in one unbroken line from the clearing up to the domes.
+- The GRIFFITH PARK trailhead sign stands at the exact point where this trail leaves the clearing, beside the trail and facing the viewer, marking the start of the climb.
+
+**Second branch (tar pits and lookout):** A narrower, plainer trail leaves the upper-right side of the clearing toward a rocky lookout and the tar pit area. It is clearly secondary to the Observatory trail.
+
+**Upper right:** A broad field of black tar pits, surrounded by rocky earth and sparse brush. A small wooden warning post marked TAR stands beside the safe trail. The tar is an environmental hazard, not a walking surface. A continuous safe trail must remain visible around its accessible edge.
+
+**Upper left:** The Observatory hill, with California oaks, golden grasses, chaparral, and scattered rocks on its slopes, all kept clear of the trail and of the building's silhouette.
+
+**Background:** Layered hills, sparse trees, rocky ridgelines, and softly painted atmospheric depth behind and beside the Observatory. The top edge is enclosed by natural terrain rather than another exit.
+
+The left, right, and top edges are closed by thick brush, boulders, trees, and hillside terrain. The Observatory terrace is a destination inside the area, not an exit.
+
+**There is only one external exit: DOWNTOWN at the bottom of the scene.**
+
+Every landmark must be reachable from the central clearing. Trees, logs, signs, rocks, and vegetation must never form accidental barriers across paths.
+
+## LANDMARKS AND ENVIRONMENTAL PROPS
+
+Include these elements, all painted in the Final Fantasy IX environmental style:
+
+- Griffith Observatory on its hill, large and clear, as described above.
+- A charming, slightly weathered wooden trailhead sign at the start of the Observatory trail.
+- A raised wooden exit arch over the foreground trail.
+- A small wooden warning post beside the tar pits.
+- A prominent rocky lookout with an irregular, storybook silhouette.
+- Clusters of agave, yucca, sagebrush, and dry chaparral.
+- Twisting California oaks and a few sycamores.
+- A fallen sycamore log beside, not across, the main trail.
+- Scattered dry boulders, small stones, and exposed rock.
+- A few rusty, weathered fence posts.
+- Black tar pits with subtle bubbles and dark painted reflections.
+
+Props should be charmingly stylized but restrained in size. Their designs should feel handmade, slightly irregular, and integrated into the landscape.
+
+Avoid excessive clutter. The walkable ground is more important than decorative detail.
+
+## SIGNS AND LETTERING
+
+All lettering must be clearly readable, in ALL CAPITALS, and spelled exactly as specified.
+
+The typography should resemble hand-painted or carved lettering appropriate to a whimsical Final Fantasy IX village or wilderness environment.
+
+**Exit arch: DOWNTOWN**
+
+A green wooden board with carved cream-gold letters, suspended high between two tall, weathered wooden posts. The bottom edge of the board must be well above character head height, leaving the entire trail visibly open beneath it.
+
+**Trailhead sign: GRIFFITH PARK**
+
+A rustic wooden sign standing where the Observatory trail leaves the central clearing, with large, clear, hand-painted lettering. One end of the board is cut into a pointed arrow shape aimed up the Observatory trail.
+
+**Tar warning post: TAR**
+
+A small wooden warning post near the edge of the tar field, with the single word TAR.
+
+These are the only words permitted anywhere in the image.
+
+No additional text, symbols resembling letters, logos, notices, or decorative inscriptions.
+
+## LAYERING AND ENVIRONMENTAL STRUCTURE
+
+Construct the scene as a cohesive illustrated environment with clearly distinguishable foreground, middle-ground, and background elements.
+
+Ground, trails, grass, and terrain must continue naturally beneath and behind trees, signs, fence posts, and other raised objects.
+
+Every tall object must have a clearly visible base and a convincing contact shadow.
+
+Tree canopies, trunks, signboards, posts, large rocks, and the Observatory should have clean but hand-painted silhouettes that can be isolated as separate game layers if needed.
+
+Avoid floating objects, ambiguous intersections, tangled silhouettes, or props that visually merge into the ground.
+
+Maintain natural overlap and depth while preserving readability.
+
+## LIGHTING AND COLOR PALETTE
+
+Use the warm, nostalgic lighting characteristic of Final Fantasy IX's most inviting outdoor environments.
+
+A strong but soft golden-hour light enters from the upper left, illuminating tree canopies, rocks, grasses, dusty trails, and the white walls of the Observatory.
+
+Shadows fall gently toward the lower right, painted in warm brown, muted violet, and cool slate-grey tones.
+
+The center clearing and the Observatory trail should be the brightest and most welcoming areas, with darker and more mysterious colors toward the tar pits and wooded boundaries. The sunlit Observatory is the brightest point in the upper half of the picture.
+
+**Primary palette:**
+
+- Golden sunlight: #FFE1A0
+- Warm dry grass: #D8B66A
+- Dusty walking trails: #C8A37A
+- Chaparral sage: #7E8F63
+- Deep tar black: #2A2628
+- Weathered rock grey: #9A9585
+- Soft lilac shadow accents: #C8A5DC
+- Warm earth shadows: #716351
+
+These colors are artistic anchors, not flat digital fills. Blend them through layered, textured brushwork, allowing warm and cool pigments to interact.
+
+Use atmospheric perspective sparingly, preserving the clarity and saturation of a classic hand-painted RPG environment. Never let atmospheric haze soften the Observatory.
+
+## STRICT EXCLUSIONS
+
+No people, animals, monsters, or character silhouettes.
+
+No treasure chests, keys, coins, switches, collectibles, or interactive item markers.
+
+No buildings, cars, roads, parking lots, or water, except Griffith Observatory.
+
+No modern urban infrastructure, except Griffith Observatory and its small terrace.
+
+No grid, colored tiles, diamonds, numbered markers, navigational overlays, or diagrammatic map appearance.
+
+No photorealism, 3D rendering, plastic materials, glossy CGI, airbrushed gradients, pixel art, or modern game-engine aesthetics.
+
+No excessive black outlines, oversized props, giant foreground objects, or dramatic close-up composition.
+
+No title card, decorative border, frame, contact sheet, palette chart, or supplementary illustration.
+
+## FINAL ARTISTIC PRIORITY
+
+The image must succeed simultaneously as:
+
+1. **A beautiful Final Fantasy IX-inspired environment painting**, with whimsical proportions, expressive contours, warm storybook color, and visible traditional brushwork.
+2. **A coherent Griffith Park landscape**, recognizably Southern Californian despite its fantasy-RPG interpretation, anchored by a large, clear, instantly recognizable Griffith Observatory.
+3. **A functional walkable game area**, with an open central clearing, an obvious bright trail climbing from the clearing to the Observatory, clear connected secondary trails, one obvious external exit, and unobstructed access to every landmark.
+
+Prioritize the charm, visual storytelling, and painterly craftsmanship of Final Fantasy IX without sacrificing navigational clarity or environmental scale.
+
+**Deliver the single finished environment painting itself, not a description of the painting.**

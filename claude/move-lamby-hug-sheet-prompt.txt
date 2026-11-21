@@ -1,0 +1,24 @@
+Draw the character in the attached pictures as one battle move sheet.
+
+Picture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the objects in the hands change.
+
+One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.
+
+In every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.
+
+The two plush lambs. BOTH lambs appear in ALL SIX frames, and both are FULLY VISIBLE in every frame: neither lamb is ever hidden behind her body, arm, head, hair or the other lamb. They are the same size (each about as big as her head) and must look clearly different from each other:
+- LAMBY is old and well loved: wool gone dingy grey-beige and matted flat in places, a faded square patch stitched on its tummy, one ear worn thin and droopy, one button eye a different color from the other, a faded pink bow tie that is loose and crooked.
+- BACKUP LAMBY is new: bright clean white fluffy wool, both ears perky, two matching shiny black button eyes, a crisp bright pink bow tie.
+Never make them look alike and never merge them into one shape. When she holds them close to her body, both lambs sit on the side of her body that faces the viewer, side by side, LAMBY in front nearest the viewer and BACKUP LAMBY just beside it, both faces showing.
+
+The move: Lamby Hug.
+
+Row 1:
+1. Walking, one lamb in each hand held up by her shoulders, LAMBY (dingy, patched, droopy ear) and BACKUP LAMBY (bright white, perky ears), both fully visible, a sweet smile.
+2. Standing, holding both lambs out in front of her side by side with a small gap between them, kissing LAMBY on the top of its matted head, BACKUP LAMBY fully visible next to it.
+3. Holding both lambs up to her cheek on the side of her face that faces the viewer, LAMBY pressed against her cheek in front and BACKUP LAMBY right beside it, both lamb faces and bodies fully visible, eyes closed, a big happy smile.
+
+Row 2:
+4. Arms out wide, LAMBY dangling a little floppily from one hand and BACKUP LAMBY held up neatly in the other, both fully visible, about to give a big hug, mouth open.
+5. Pushing both lambs forward in a squishy hug, one in each hand with a gap between them, LAMBY squashed flat and droopy, BACKUP LAMBY puffed out and fluffy, both fully visible, leaning in, eyes squeezed shut.
+6. Hugging both lambs to the front of her chest with both arms wrapped low around them, the two lambs side by side facing the viewer, LAMBY in front with its patched tummy and crooked bow tie showing and BACKUP LAMBY beside it with its bright pink bow tie showing, both fully visible above her arms, swaying, a dreamy smile.

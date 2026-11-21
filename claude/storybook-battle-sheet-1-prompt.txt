@@ -1,0 +1,19 @@
+Draw the character in the attached picture as a battle sheet.
+
+Copy the attached picture as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, linework, painting style and level of detail. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows.
+
+In every frame the character faces the left edge of the picture in a three-quarter view: the chest turned partly toward the viewer, both eyes visible, the nose pointing left.
+
+Row 1:
+1. Ready. Feet apart at shoulder width, knees slightly bent. Arms bent a little, hands open and loose at hip height. Looking left, mouth closed in a small smile.
+2. Ready, breathing in. The same as frame 1, but the chest and shoulders are raised slightly and the hand nearest the viewer is open with the palm facing forward.
+3. Hands on hips. Standing straight, feet apart. Both fists resting on the hips, elbows pointing out. Chin raised. Eyebrows raised, mouth flat.
+4. Offering. Feet apart. The arm nearest the viewer stretched straight out to the left at chest height, palm facing up. The other arm relaxed at the side. Smiling.
+
+Row 2:
+5. Wind-up. Upper body twisted to the right, away from the left edge. The arm nearest the viewer pulled back behind the body, elbow bent. Weight on the back (right) leg, front knee bent. Eyes narrowed, mouth closed.
+6. Lunge. The front (left) leg stepped far forward with the knee bent deeply, the back leg straight behind. Body leaning forward to the left. The arm nearest the viewer reaching fully forward to the left at shoulder height. Mouth wide open.
+7. Arms wide. Feet planted wide apart, legs straight. Both arms stretched straight out to the sides at shoulder height, palms open. Chest pushed forward, chin up, mouth open in a big smile.
+8. Guard. Crouched low, both knees bent deeply. Both forearms crossed in an X in front of the chest and face. Chin tucked down, eyes looking over the forearms, mouth closed.

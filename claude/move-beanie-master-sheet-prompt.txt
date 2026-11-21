@@ -1,0 +1,19 @@
+Draw the character in the attached pictures as one battle move sheet.
+
+Picture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose, the expression and the stink cloud change, as each frame says.
+
+One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. The stink cloud is painted in the same style as the character and stays inside its own cell.
+
+In every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she turns away or looks back.
+
+The move: Beanie Master. She calls a very stinky fart a "beanie". It is a silly, harmless family joke: a funny cartoon stink cloud, a sickly green-yellow with soft swirls and a few wavy stink lines, painted solid and opaque so it never blends into the magenta background. No people or objects are damaged. The joke is in her face and body, not the cloud. The cloud is new in frame 3 and grows from there. It is small in frame 3 and fills the space behind her by frame 6. It is never pink, purple or magenta.
+
+Row 1:
+1. Walking forward, a hand on her stomach, a puzzled frown. No cloud yet.
+2. Stopped, both hands on her stomach, eyes wide, lips pressed tight. No cloud yet.
+3. Turned away, glancing back over her shoulder, eyebrows raised, a guilty look. A small green-yellow stink puff has just appeared behind her.
+
+Row 2:
+4. Both hands clapped over her mouth, eyes wide, mid "oh my!" A bigger swirling stink cloud billows behind her.
+5. Waving one hand in front of her face, the other hand over her mouth, an embarrassed giggle. The big cloud drifts around her with wavy stink lines.
+6. Hands clasped at her chest, cheeks pink, a sheepish grin, shoulders raised. The cloud is large, soft and starting to thin out behind her.

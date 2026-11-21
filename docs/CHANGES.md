@@ -1,3 +1,8 @@
+## projclean1b (2026-11-21): Project docs moved into the repo: 115 more docs copied into claude/ (second part of the second run)
+
+- Card c-projclean: copied 115 more Project docs word for word to the same path in claude/ (art prompts, area and room kits, storybook and move sheet prompts, addenda, canon addenda). No game file changed.
+- Left in the Project on purpose, not copied: next-addendum-michael.md (the write was stopped by a safety classifier); the held docs listed under projclean1a.
+
 ## projclean1a (2026-11-21): Project docs moved into the repo: 151 docs copied into claude/ (first part of the second run)
 
 - Card c-projclean: the repo is now the one home for Claude working docs; the Project keeps only four mirrors. This part copied 151 Project docs word for word to the same path in claude/ (story, dialogue, next-addendum, tone and voice notes, the story bible, CHANGES-archive). No game file changed.

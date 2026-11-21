@@ -1,0 +1,61 @@
+# IMAGE REQUEST: ONE SINGLE ILLUSTRATION (REFERENCE ATTACHED)
+
+Return exactly one image, nothing else.
+
+## WHAT THIS IS
+
+The attached picture is the existing painting of **the Moon Club**, a faded, once-glamorous supper club hidden up the stairs behind an old observatory, for *The Adventures of Tom*, a family role-playing game. It is the reference for the layout, the architecture, the colors, the lighting and the painting style.
+
+Paint **the same room again, as an empty room.** The layout, the camera and the look stay exactly as in the attached picture. The only change is that every loose, freestanding object is removed, and the floor or carpet that was under it is painted in, continuing the same pattern and the same light. The game adds its own furniture and objects afterward, so every floor must be continuous, clear and open.
+
+The result should look as though it belongs in **Final Fantasy IX**: a whimsical, richly imagined fairy-tale world with theatrical architecture, charmingly exaggerated proportions, intricate decorative details, warm nostalgic lighting, and the distinctive hand-painted aesthetic of classic Final Fantasy IX backgrounds.
+
+## KEEP EXACTLY AS IN THE ATTACHED PICTURE
+
+- The same camera: a fixed, elevated three-quarter view looking diagonally downward, with the same framing, edge to edge.
+- The same layout: the Coat Check room at the top left, the Card Room at the top right, the narrow corridor with the runner and the tall silver double doors at the top center, the long marble hall across the middle with its doorway at the left and its tall windows at the right, and the large round parquet hall at the bottom with its crescent and star inlay.
+- All the architecture: walls, wall panels, arches, doorways, pillars, the railings around the round hall, the built-in shelving on the back walls, the windows.
+- All the wall-mounted lights and sconces, with the same warm glow.
+- All the carpets, runners and rugs that lie flat on the floor, with their exact shapes and patterns, including the red crescent rug in the top left room and the red carpet in the top right room, which keeps the same size and the same curved edge. The marble and parquet floors keep the same patterns.
+- The same colors, the same warm golden lighting and pools of lamplight on the floor, and the same painterly brushwork.
+
+## REMOVE THESE LOOSE OBJECTS, AND PAINT THE FLOOR UNDER THEM
+
+Remove every one of these. Check the whole picture, corner to corner, so that none is left behind:
+
+- **every potted plant and palm in a brass pot, without exception.** There are about fourteen, including: the corner of the top left room by the framed picture; both sides of the tall silver double doors; beside the tall windows at the top right; the ones along the long hall; the ones around the round parquet hall; the ones at the left and right edges. Remove every plant, large or small, whole or cut by the picture edge.
+- **the long wooden coat-check counter** in the top left room, with its book and bell (keep the shelving on the wall behind it)
+- **the curved bar counter** in the top right room, with its bottles, its globe, and **every red stool** in front of it (keep the shelving and the arched cabinet on the wall behind it)
+- **the brass plaque** on the wall of the long hall (leave a plain flat wall panel in its place)
+- the three standing oval mirrors on brass stands
+- the coat rail with its hangers
+- every chair, stool, bench, sofa and armchair
+- every small side table, and every lamp or candle lamp standing on a table
+- both round green card tables
+- the grand piano and its bench
+- the jukebox
+- the large gold-framed mirror standing by the round hall
+- the brass rope posts and red ropes
+- the small carved wooden stand near the hall wall
+
+Where an object is removed, the floor, carpet, runner or rug beneath it is painted as a clean, continuous surface with no shadow or mark left behind. When you finish, the only things standing on the floors are the fixed railings around the round hall. Everything else is clear.
+
+## ART STYLE: FINAL FANTASY IX (UNCHANGED FROM THE REFERENCE)
+
+Recreate the visual language of the hand-painted, pre-rendered environments and illustrated concept art of **Final Fantasy IX**, particularly its ornate interiors, theatrical towns, and atmospheric fantasy architecture.
+
+- **Whimsical storybook fantasy:** A richly detailed, hand-painted environment with slightly exaggerated architecture, playful asymmetry, gently distorted proportions, and a magical, lived-in quality.
+- **Painterly rendering:** Visible, confident brushwork; chunky brushed shading in a few clear tonal families; delicate painted highlights; rich surface textures; and a traditional watercolor-and-gouache illustration sensibility. Avoid overly smooth digital gradients.
+- **Expressive contours:** Dark brown and deep plum contour accents around important architectural details and decorative elements, hand-drawn and integrated into the painting.
+- **Rich, warm colors:** Deep jewel tones, honeyed golds, aged brass, burgundy velvet, midnight blue shadows, creamy marble, and warm amber highlights.
+- **Fantasy architecture:** Slightly oversized doors, curved woodwork, ornate brass trim, sculptural pillars, decorative arches, and gently irregular craftsmanship.
+- **Warm golden illumination:** Soft golden light, gentle amber glow around wall sconces, luminous edges on polished brass, and subtle cool violet-blue shadows.
+- **Environmental storytelling:** Tarnished brass, faded gilding and dusty marble suggest a once-splendid venue that has slowly fallen into disuse.
+
+NOT pixel art. NOT photorealistic. NOT a 3D render. NOT anime cel shading. NOT flat cartoon art. NOT vector illustration.
+
+## OUTPUT
+
+One image, landscape, the same shape and size as the attached picture (target 1920 x 1408 pixels), full bleed, edge to edge. No characters, animals or creatures. No text, letters, numbers or signs. No frame, border, black bars or inset images. Do not add any object that is not in the attached picture.
+
+**One image. The same room. Empty floors.**

@@ -1,0 +1,38 @@
+IMAGE REQUEST: ONE BATTLE SHEET, 8 FRAMES. Return exactly one image, nothing else.
+
+ATTACH: the hero picture of the character (the reference). Nothing else.
+
+WHAT THIS IS
+Battle frames for a family role-playing game. Draw the person in the attached picture EXACTLY as they are in every frame: the same face, the same head size compared to the body, the same hair, clothes, shoes, colors, proportions and painting style. Do not redesign, restyle or simplify anything.
+
+ART STYLE
+- A hand-painted digital caricature of a real person, full body, matching the attached picture.
+- Semi-realistic painterly rendering, smooth soft shading, glossy highlights on skin and hair, finely painted hair strands, clothing prints drawn clearly.
+- Oversized head, slim body, small hands and feet, large expressive eyes, a clear likeness of the person in the picture.
+- Warm golden light from the upper left, a gentle rim light, rich warm colors.
+- Clean soft edges. No thick or black outlines.
+- Not pixel art, not 16-bit. No pixelation, no dithering, no flat cartoon shading, no anime style.
+
+THE SHEET (strict)
+- A grid of 4 columns by 2 rows of equal square cells, 320 x 320 pixels each, so the full image is 1280 x 640. If your tool offers a different size, keep exactly 4 columns and 2 rows of equal square cells.
+- Exactly 8 frames, one per cell, filled left to right, top to bottom, in the numbered order below.
+- The character FACES LEFT in every frame, in a three-quarter view from slightly above, like a hero facing an opponent on the left.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No grid lines, borders, numbers, labels or text.
+- Each frame sits fully inside its cell with at least 10 percent margin. Nothing touches a cell edge or a neighbour.
+- Same scale in every cell. Feet rest on one horizontal ground line about 28 pixels above the cell bottom.
+- Draw only the character. Hands empty. No effects, shadows, dust, motion lines, sparkles, props or other people.
+- The head is the same size in every frame and matches the attached picture.
+
+THE 8 FRAMES (each clearly different from the others)
+1. IDLE A: ready stance, feet shoulder width apart, knees slightly bent, hands loose, alert friendly expression aimed left.
+2. IDLE B: the same stance a moment later, chest risen with a breath, shoulders slightly higher, one hand relaxed open.
+3. HIP: standing tall, both hands on hips, chin lifted, a playful unimpressed look.
+4. ACT: near arm extended to the left, palm up, offering or presenting something, a small proud smile.
+5. WIND-UP: body twisted away to the right, arm pulled back, weight on the back leg, eyes narrowed, about to spring.
+6. SWING: follow-through, lunging far forward to the left, arm at full reach, front knee bent, mouth open in a shout.
+7. SPREAD: feet planted, both arms flung wide, chest out, chin up, announcing something big.
+8. GUARD: crouched low, forearms crossed in front of the chest and face, chin tucked, determined.
+
+Family friendly for ages 6 and up.
+
+Do not add frames, merge frames, repeat a pose or invent props. If anything is unclear, draw the pose described.

@@ -1,0 +1,19 @@
+Draw the girl in the first attached picture holding the toy in the second attached picture, as a pose sheet.
+
+Attached first: the girl. Attached second: the toy. Copy both pictures as exactly as possible in every frame: the same girl, face, body, head size compared to the body, hair, clothes, colors, linework, painting style and level of detail, and the same toy with the same shape, colors and details. The toy is the size of her two cupped hands in every frame. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. Pink clothing stays clearly pink, never magenta. The toy appears only in her hands or arms, never floating. No other objects. No grid lines, numbers, text, effects, sparkles or shadows.
+
+In every frame the body and face point straight at the viewer.
+
+Row 1:
+1. Hiding it. Standing, feet together. Both hands behind her back, the toy hidden and not visible. Shoulders raised, chin tucked, eyes looking up at the viewer, a sly closed-mouth grin.
+2. Reveal. Both hands swung out in front of her at waist height, holding the toy cupped in both palms. Leaning forward slightly, eyebrows raised, mouth open in an excited "look!"
+3. Showing off. Up on her toes. Both arms raised straight above her head, holding the toy up high in both hands. Chin up, eyes on the toy, a huge open-mouth smile.
+4. Look closer. Both arms stretched straight out toward the viewer at chest height, the toy held in both palms and facing the viewer, fully visible. Head tilted, a proud smile.
+
+Row 2:
+5. Treasured. Feet together. The toy hugged against her chest with both arms wrapped around it. Eyes closed, cheek resting on top of it, a soft happy smile.
+6. Gentle squeeze. The toy held at chest height in both hands, both thumbs pressing gently into its front. Eyes on the toy, lips pressed together in concentration.
+7. Careful! Body turned a little to one side, the toy pulled in close to her chest with both hands. The free elbow raised as a shield. Eyebrows raised, one finger of a hand pointing up in warning, mouth open mid-word.
+8. Ready to go. Standing, feet apart. The toy tucked under one arm against her side. The other hand raised in a small wave. A bright closed-mouth smile.

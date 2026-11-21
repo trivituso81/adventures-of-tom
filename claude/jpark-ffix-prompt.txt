@@ -1,0 +1,325 @@
+Create the actual environment painting for **Area 09, Jefferson Park**, from *The Adventures of Tom*, a whimsical family role-playing game inspired by the hand-painted fantasy world of **Final Fantasy IX (FFIX)**. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.
+
+## OUTPUT
+
+One standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.
+
+Landscape canvas, 1920 × 1536 pixels. If the tool cannot produce that exact size, use the closest landscape aspect ratio at the highest available resolution.
+
+The finished image must look like a playable location from a lost, beautifully illustrated PlayStation-era Final Fantasy IX adventure, reimagined with modern painting resolution and detail.
+
+## ART DIRECTION: FINAL FANTASY IX
+
+Paint Jefferson Park as though it belongs in the world of **Final Fantasy IX**, drawing specifically from the game's richly illustrated pre-rendered environments, whimsical architectural design, hand-painted backgrounds, and fairy-tale atmosphere.
+
+The visual language should combine:
+
+- **FFIX environmental painting:** The intricate, painterly backgrounds of Alexandria, Lindblum, and Treno, with warm nostalgic lighting, richly textured architecture, whimsical details, and the feeling of a handcrafted fantasy storybook.
+- **Stylized architecture:** Slightly exaggerated roof pitches, gently crooked chimneys, rounded corners, expressive doorways, oversized roof eaves, charming asymmetry, and buildings with individual personality. The underlying architecture must remain recognizable as 1910 Los Angeles Craftsman bungalows and neighborhood storefronts.
+- **Hand-painted surfaces:** Visible brush strokes, chunky brushed shading in a few clear tonal values, dark warm-brown contour accents around important architectural forms, layered color, and subtle texture resembling traditional gouache and watercolor over pencil.
+- **Rich FFIX color:** Deep saturated colors balanced against warm cream, amber, dusty lavender, muted teal, moss green, and golden sunlight. Shadows should contain cool violet and blue tones rather than simply darkened local colors.
+- **Whimsical storybook charm:** Slightly exaggerated proportions and playful details, but a believable, lived-in neighborhood. Every building should feel like a distinctive location with its own history and personality.
+- **Soft theatrical lighting:** Warm golden sunlight from the upper left, luminous highlights along roof edges and foliage, softly painted atmospheric shadows, and subtle ambient color bouncing between nearby surfaces.
+
+The painting should feel lovingly illustrated rather than mechanically constructed.
+
+Use confident dark contour lines selectively to define doors, windows, rooflines, steps, signs, and architectural details. Avoid thick uniform outlines around every object.
+
+The final result must look like a **high-resolution, traditionally painted Final Fantasy IX game background**, not a modern 3D game environment, realistic architectural visualization, or pixel-art recreation.
+
+No visible pixels, low-resolution textures, polygonal geometry, glossy materials, airbrushed gradients, photorealism, or plastic-looking surfaces.
+
+## CAMERA AND COMPOSITION
+
+Use a fixed elevated three-quarter camera looking down into the environment at approximately 35 degrees, similar to the carefully composed exploration backgrounds in Final Fantasy IX.
+
+Show building fronts, rooftops, streets, sidewalks, gardens, and walkable ground together.
+
+The camera must remain consistent across the entire uninterrupted scene.
+
+This is a complete, navigable RPG neighborhood, not a close-up illustration of a few buildings.
+
+### SCALE AND CAMERA DISTANCE: CRITICAL
+
+The camera is positioned high above and far away, showing the entire neighborhood at once.
+
+The scale must resemble a wide FFIX exploration environment rather than a close-up character scene.
+
+A grown-up character standing on a path would be approximately one fifteenth of the image height. Paths should be approximately two character-widths wide. Each exit board should occupy approximately one seventh of the picture width.
+
+Buildings must remain relatively small within the overall composition, with generous visible walkable ground.
+
+Do not zoom in on storefronts, porches, or individual props.
+
+Maintain enough space around the buildings for characters to explore the environment.
+
+## SETTING: JEFFERSON PARK, LOS ANGELES
+
+Jefferson Park is a warm, close-knit Los Angeles neighborhood, featuring early-1900s Craftsman bungalows, small family-owned shops, purple jacaranda trees, palms, lawns, and charming residential streets.
+
+Reimagine the neighborhood through the visual imagination of Final Fantasy IX.
+
+This is still Los Angeles, not a medieval European village. Preserve its recognizable Craftsman architecture, neighborhood storefronts, stucco walls, bungalow porches, palm trees, and Southern California identity.
+
+The fantasy influence should come from the painting style, architectural exaggeration, intricate craftsmanship, and atmospheric storytelling rather than introducing castles, magical technology, or unrelated fantasy structures.
+
+The neighborhood feels slightly crowded, wonderfully imperfect, warm, and inhabited.
+
+Roofs are subtly irregular, storefronts have characterful shapes, wooden details are lovingly painted, and jacaranda blossoms form lush, expressive clouds of purple.
+
+The atmosphere should suggest a peaceful afternoon in a beloved RPG town, where every house and shop might contain a memorable story.
+
+## WORLD LAYOUT: NAVIGATION COMES FIRST
+
+This is a walkable RPG game map. Navigation is the highest priority.
+
+A character must be able to walk from every exit to every door and landmark, and all the way around every building.
+
+No building, fence, tree, decorative object, or prop may block a necessary route.
+
+Every path must be at least two character-widths wide.
+
+The entire neighborhood must fit into one coherent, continuous scene.
+
+### Street layout
+
+A wide north-south street runs straight down the center of the environment from the TOP edge to the BOTTOM edge.
+
+There is a sidewalk along each side.
+
+The street connects three exits:
+
+- TOP: DOWNTOWN
+- BOTTOM: OLD OAK PARK
+- RIGHT: CAR BARN, reached by a side road branching east.
+
+There is no exit on the left edge.
+
+The street network must be clear, visually continuous, and fully navigable.
+
+### Commercial district: upper portion
+
+A row of four small neighborhood shops occupies the upper portion of the environment, arranged as a charming commercial cluster along Jefferson Boulevard.
+
+Each shop must be a separate, freestanding building with visible walkable space between it and its neighbors.
+
+1. **Odette's Creole Kitchen:** A warm yellow restaurant with a whimsical purple roof, a large cooking-pot sign, and a colorful hand-painted wall mural. Slightly rounded roof edges and expressive architectural detailing give it the personality of a memorable FFIX tavern, while remaining recognizably a neighborhood Creole restaurant.
+2. **Pupuseria La Ceiba:** A cream-and-blue Salvadoran restaurant with a leafy hanging sign, a roll-down metal grille, and modest decorative trim. Its shape is cozy and inviting, with gently exaggerated proportions and richly painted stucco.
+3. **The Board Room:** A pale-blue skateboard shop with an orange awning and a large skateboard mural. The building should feel playful and youthful, with slightly asymmetrical windows and a characterful roofline.
+4. **Very Green Juice:** A small white-and-green juice shop with a leaf emblem, fresh green accents, and charming painted wooden details. Its silhouette is compact and distinctive.
+
+### Residential district: lower portion
+
+Four homes occupy the lower part of the environment, each freestanding and separated by navigable paths.
+
+1. **Tom's House (lower left):** It should feel welcoming, modest, and quietly important, like the protagonist's home in a Final Fantasy IX village. This house is painted from a real house and its exterior is FIXED. Paint it with the same FFIX brushwork, contours and golden light as everything else, but do NOT restyle, recolor, add to or exaggerate its design. Every feature below must appear exactly as described, and nothing else may be added to it:
+   - **Walls:** smooth greige stucco (warm gray-beige, about #B8AE9C in light, lilac-gray in shade). Not wood siding, not shingles, not white, not tan.
+   - **Roof:** a single-story Craftsman with a low-pitched dark charcoal roof with wide eaves. Not purple, not brown, not orange.
+   - **Chimney:** one dark chimney (matching the roof tone), not brick red, not crooked.
+   - **Porch gable:** a front-facing porch gable with exposed rafter tails under the eaves and chunky wooden knee braces in the gable corners.
+   - **Porch columns:** square stucco columns in the same greige as the walls, not tapered wood, not stone.
+   - **Front door:** a natural warm-honey stained wood front door, flanked by tall glass sidelights on both sides. Not painted yellow or gold.
+   - **Front window:** one large front window with teal-painted window sash and white plantation shutters visible inside the glass.
+   - **Planting:** clumps of spiky flax plants (tall bronze-green and burgundy blade leaves) along the front of the porch, a neat green front lawn, and one lemon tree visible beside or behind the house.
+   - **Not on this house:** no colored awning, no flower mural, no rocking chairs, no wood siding, no shutters on the outside of the windows, no stone foundation, no house number, no second sign.
+2. **Jordan and Sam's House:** A dark, nearly black modern house flip with crisp white trim. Its modern geometry contrasts with the older Craftsman houses, but it is still illustrated with the same whimsical FFIX brushwork, warm lighting, and subtly softened proportions.
+3. **Casa Alvarez:** A lively orange Craftsman bungalow with a teal front door, laundry line, bicycles, and many chairs crowded onto the porch. The home should overflow with personality and lovingly painted everyday details, like a bustling family residence in a classic RPG town.
+4. **Dakota and Ryan's House:** A clean white modern house flip with dark trim, restrained architectural details, and a tidy garden. Keep its modern character while integrating it into the same painterly fantasy world.
+
+Every building must have clearly visible ground around it and sufficient walkable clearance along its sides and behind it.
+
+## ENVIRONMENTAL DETAILS
+
+Add carefully placed neighborhood props that enrich the world without obstructing movement:
+
+- Lush purple jacaranda trees with thick, expressive clusters of blossoms.
+- A few tall palms with individually painted fronds.
+- Warm green lawns with irregular patches of golden grass.
+- Small lemon trees with bright yellow fruit.
+- A wooden bus bench.
+- Painted neighborhood mailboxes.
+- Slightly ornate street lamps with a subtle FFIX storybook silhouette.
+- Low hedges, flower beds, stepping stones, and garden edging.
+- Worn sidewalks with delicate cracks and warm painted highlights.
+- Small porch steps, railings, wooden fences, and handcrafted architectural trim.
+
+Give props the slightly exaggerated, lovingly illustrated proportions associated with Final Fantasy IX.
+
+Use little touches of visual storytelling: a crooked mailbox, an uneven roofline, a particularly lush flowering tree, or a porch overflowing with domestic detail.
+
+Do not add new major landmarks or structures.
+
+The overall composition must remain open, readable, and navigable.
+
+## SIGNS: DESIGN AND LETTER EACH ONE
+
+All lettering must be hand-painted, clearly legible, and integrated naturally into the FFIX-inspired environment.
+
+Use ALL CAPITAL LETTERS.
+
+Letter every sign exactly as written below.
+
+Signs must not cover doors, awnings, windows, or lamps.
+
+### Shop signs
+
+- CREOLE: accompanied by a cooking-pot emblem.
+- PUPUSAS: accompanied by a leaf emblem.
+- SKATE: accompanied by a skateboard emblem.
+- JUICE: accompanied by a green leaf emblem.
+
+### House name signs (family last names, NOT house numbers)
+
+Each house shows the family's LAST NAME, never a street number. No digits appear anywhere on any house.
+
+| House | Exact text | Letters | Sign design (each in that house's own materials) |
+|---|---|---|---|
+| Tom's House | RIVITUSO | R I V I T U S O (8) | A plain rectangular natural-wood plank with a thin dark frame; dark charcoal letters. |
+| Jordan and Sam's black flip | NOVAK | N O V A K (5) | A slim matte white rectangular panel; crisp black modern letters. |
+| Casa Alvarez | ALVAREZ | A L V A R E Z (7) | A hand-painted teal wooden board with a cream border; cream letters. |
+| Dakota and Ryan's white flip | WESTON | W E S T O N (6) | A slim matte black rectangular panel; crisp white modern letters. |
+
+Rules for house name signs:
+- Mounted HIGH on the front-facing porch gable or upper front wall, above the porch roof line, never on the lower wall, door, porch railing, steps, mailbox or a post.
+- Flat and facing the viewer straight on, not tilted or foreshortened.
+- Large: letters at least 48 px tall, text filling about 85% of the sign face width.
+- Clear gap of at least 40 px between the bottom of the sign and the top of any door or window.
+- One sign per house. No second plate, number or mailbox lettering.
+
+### Exit boards
+
+| Exit | Exact text | Letters |
+|---|---|---|
+| North road | DOWNTOWN | D O W N T O W N (8) |
+| South road | OLD OAK PARK | O L D, space, O A K, space, P A R K (3 + 3 + 4) |
+| East side road | CAR BARN | C A R, space, B A R N (3 + 4) |
+
+The exit boards should resemble charming FFIX town-direction signs: weathered green wooden boards with carved cream-gold letters, ornamental edges, and subtle handcrafted irregularity.
+
+Each exit board is suspended HIGH between two tall wooden posts, forming an archway over the road.
+
+EXIT BOARD HEIGHT AND PLACEMENT (CRITICAL):
+- The posts are tall: each post is at least four times the height of a grown-up character (about 400 px tall on the 1536 px canvas).
+- The bottom edge of each board sits at least two and a half character heights (about 260 px) above the road surface, clearly higher than every front door and higher than the shop awnings.
+- The road, sidewalks and open air remain completely visible underneath each board.
+- Each board, both its posts and the posts' feet are fully inside the picture, with clear margin from the edge:
+  - DOWNTOWN: the top of the board is 120 to 180 px below the top edge of the picture. The road continues visibly above and beyond it to the top edge.
+  - OLD OAK PARK: the posts stand where the central street leaves the residential district, about two thirds of the way down the picture; the whole board sits between y 880 and y 1100. The road continues visibly below it to the bottom edge. It never sits in the bottom quarter of the picture.
+  - CAR BARN: the posts stand on the east side road at least 100 px in from the right edge; the side road continues visibly past them to the right edge.
+- Every board faces the viewer straight on with its face flat and parallel to the picture.
+
+These are the only words or numbers permitted in the image. No additional signs, notices, advertisements, price tags, logos, or incidental lettering.
+
+## PAINTING TECHNIQUE
+
+The image must have the texture and visual richness of an original illustrated Final Fantasy IX background.
+
+### Brushwork
+
+Broad, visible brush strokes establish streets, lawns, walls, and rooftops.
+
+Short, directional strokes describe jacaranda blossoms, palm fronds, wood grain, bricks, roof shingles, and ornamental trim.
+
+Use chunky, painterly shadows in a few clear tonal groups, rather than smooth computer-generated gradients.
+
+Build rich local colors from layered warm and cool brush strokes.
+
+Allow subtle pencil-like construction lines and dark warm contour accents to remain visible in selected architectural details.
+
+### Forms and proportions
+
+Favor slightly exaggerated storybook shapes over rigid realism.
+
+Rooflines may gently curve or tilt. Chimneys can be a little oversized. Doorways can feel rounded and inviting. Windows may be subtly irregular.
+
+Maintain consistent perspective, convincing structural construction, and functional architecture.
+
+The exaggeration must enhance the environment's charm without compromising its navigation or readability.
+
+### Surface finish
+
+All surfaces are matte, resembling gouache and oil paint on lightly textured illustration board.
+
+Use fine canvas grain across the entire image.
+
+Painted edges should be slightly irregular and human-made, not mechanically perfect.
+
+No glossy highlights, procedural textures, hyperrealistic materials, or smooth digital-render surfaces.
+
+## LAYERING AND GAME ASSET READABILITY
+
+This environment will be used in a game where trees, lamps, boards, and roofs may be separated into individual layers.
+
+Paving, ground, and grass must continue visually underneath and behind every tree, lamp, bench, signpost, and roof eave.
+
+Every tall object must have a clearly visible base connected to the ground.
+
+Preserve clear, readable silhouettes for tree canopies, street lamps, signboards, and roof edges.
+
+Avoid merging neighboring objects into confusing painted masses.
+
+Use small, precise brush strokes around silhouette boundaries.
+
+Nothing may appear to float.
+
+## LIGHTING AND COLOR PALETTE
+
+The scene takes place on a warm Southern California afternoon, illuminated by the soft, nostalgic golden light of Final Fantasy IX.
+
+The key light enters from the upper left, casting long, softly painted shadows toward the lower right.
+
+Sunlit paths and the central street remain open and visually welcoming.
+
+Use the following palette as the foundation:
+
+- Golden sunlight: #FFE1A0
+- Cool lilac shade: #C8A5DC
+- Warm shadow brown: #716351
+- Jacaranda purple: #8A6AB0
+- Stucco cream: #F2E6D0
+- Craftsman orange: #D9A05A
+- Painted teal: #2F8A8A
+- Lawn green: #B4C395
+
+Enrich these colors with the deep, layered, jewel-like warmth of FFIX's painted environments.
+
+Let lavender and blue tones appear inside shadows. Let amber light catch roof edges, steps, wooden trim, and individual clusters of flowers.
+
+Use darker contact shadows beneath buildings, porches, benches, and trees to ground everything.
+
+The lighting should feel theatrical, gentle, and nostalgic, like an afternoon remembered from childhood.
+
+## STRICT EXCLUSIONS
+
+No people, animals, or monsters.
+
+No treasure chests, items, keys, coins, switches, collectibles, or interactive markers.
+
+No cars, buses, bicycles being ridden, or other vehicles. Stationary bicycles are permitted only as decorative props at Casa Alvarez.
+
+No magical portals, crystals, spells, fantasy creatures, floating islands, castles, or steampunk machinery.
+
+No grid, colored tiles, diamonds, numbered markers, minimap, or diagram appearance.
+
+No title card, frame, contact sheet, reference sheet, or palette chart.
+
+No pixel art, low-resolution PlayStation textures, polygonal models, or retro rendering artifacts.
+
+No photorealism, 3D-rendered look, glossy surfaces, or sterile architectural visualization.
+
+No house numbers, street numbers or digits anywhere in the picture. No street-name signs.
+
+No exit board low over the road, cut off by an edge, or placed in the bottom quarter of the picture.
+
+## FINAL PRIORITIES
+
+In order of importance:
+
+1. **Complete walkable game environment:** The entire neighborhood is visible, with three clear road exits, eight separate buildings, and uninterrupted pedestrian routes.
+2. **Authentic Final Fantasy IX atmosphere:** Rich hand-painted environmental illustration, whimsical architecture, warm storybook charm, and nostalgic RPG worldbuilding.
+3. **Correct camera and scale:** Elevated three-quarter perspective, distant camera, small buildings and props, generous walkable ground.
+4. **Distinctive Jefferson Park identity:** Los Angeles Craftsman homes, neighborhood shops, jacaranda trees, palms, and recognizable Southern California character.
+5. **Precise landmarks and signage:** All eight buildings have their specified visual features, Tom's House matches its fixed exterior feature by feature (greige stucco, dark roof and chimney, porch gable with exposed rafters and knee braces, square stucco columns, honey wood door with glass sidelights, teal-sash window with plantation shutters, flax), every house shows its family last name high on the gable, every exit board hangs high and fully inside the picture, and every required sign is spelled correctly: CREOLE, PUPUSAS, SKATE, JUICE, RIVITUSO, NOVAK, ALVAREZ, WESTON, DOWNTOWN, OLD OAK PARK, CAR BARN.
+6. **Beautiful traditional painting:** Visible brushwork, expressive contours, layered colors, matte surfaces, and golden afternoon light.
+
+**Deliver the single finished environmental painting itself. Do not replace it with a description, explanation, concept sheet, or layout diagram.**

@@ -1,0 +1,95 @@
+Paint one finished environment painting of a cozy family neighborhood lane for a whimsical family role-playing game. Deliver the painting itself, not a plan, description, diagram or concept sheet.
+
+OUTPUT
+One edge-to-edge landscape painting, 1536 x 1408 px (12:11). If that size is unavailable, use the closest landscape ratio at the highest resolution. No border, title, caption, label, grid, UI, inset or white margin. The whole canvas is one continuous, explorable place.
+
+TEXT IN THE IMAGE (MOST IMPORTANT)
+The painting contains exactly five signs and no other writing anywhere. Each sign shows only the words below, in ALL CAPITALS, spelled exactly, letter by letter:
+
+| Sign | Exact text | Lines | Letters |
+|---|---|---|---|
+| Gregori house sign | "GREGORI" | 1 | G R E G O R I (7) |
+| Rivituso house sign | "RIVITUSO" | 1 | R I V I T U S O (8) |
+| Aunt Ellie house sign | "AUNT ELLIE" | 1 | A U N T, space, E L L I E (4 + 5) |
+| North exit board | "LONG ISLAND" over "SQUARE" | 2 | L O N G, space, I S L A N D / S Q U A R E |
+| South exit board | "CATTAIL" over "PIER" | 2 | C A T T A I L / P I E R |
+
+Rules for all five signs:
+- Every sign faces the viewer straight on, its face flat and parallel to the picture, never turned sideways, seen from behind, tilted away or foreshortened.
+- Every sign is large: lettering at least 48 px tall, the text filling about 85% of the sign face width, never touching the frame.
+- Each sign has a simple flat face. Decoration (flowers, stars, a fish, a gold frame) stays on the border or ends of the sign, never between, behind or over the letters.
+- Lettering is bold, slightly rounded hand-painted capitals with even spacing, a thin light highlight on the top edge of the letters and a soft shadow under them, lit from the upper left. Strong contrast between letters and face.
+- No sign overlaps a door, window, lamp, roof edge or tree. House signs sit on the wall centered above the front door, with a clear gap of at least 30 px between the bottom of the sign and the top of the door frame.
+- Every sign is fully inside the picture and not hidden by any roof, canopy or object.
+- Each house sign is made in that house's own materials and shape (see each house). The two exit boards match each other.
+
+ART DIRECTION
+In the style of the hand-drawn watercolor and ink artwork of Final Fantasy IX: a lovingly illustrated location from a classic Japanese fantasy role-playing game, nostalgic, magical, charming, slightly exaggerated, full of personality.
+- Traditional hand-painted watercolor and gouache look, visible organic brushwork, layered pigment, softly textured surfaces.
+- Expressive dark brown and sepia contour lines on rooflines, windows, doors, timber frames, fences and silhouettes; stronger lines on major silhouettes, delicate ink on ornament.
+- Chunky painterly shading in a few clear tonal groups, not smooth digital gradients.
+- Rich warm colors, luminous golden highlights, soft lavender shadows, subtle watercolor color variation.
+- Slightly imperfect hand-drawn geometry, ornate but readable detail, like a premium illustrated background.
+Final Fantasy IX environmental proportions: translate the character design philosophy of large heads, compact bodies, sturdy shoes and expressive faces into the architecture: oversized expressive roofs, compact walls, substantial wooden foundations, large welcoming doors, slightly exaggerated windows. Chimneys may curve gently, roof ridges may bow, beams may be irregular, details may be playfully oversized. Each home should feel like a distinct character with its own personality, just as the party members in Final Fantasy IX have immediately recognizable silhouettes. Preserve the homes' established architectural identities while introducing fantasy-storybook exaggeration. The result should resemble a richly detailed, hand-painted background from a classic fantasy role-playing game.
+Avoid photorealism, realistic architectural rendering, shiny plastic 3D, glossy mobile-game look, generic medieval buildings, extreme anime cel shading, pixel art and flat vector art.
+
+CAMERA
+Fixed elevated three-quarter view looking down at about 35 degrees from the bottom of the picture toward the top. Roofs, house fronts, gardens and paths all visible, one consistent perspective. It should feel like an explorable Final Fantasy IX village location, not a decorative illustration of buildings with inaccessible surroundings. Every house faces the viewer: its front door, front wall and name sign face the bottom of the picture.
+
+SETTING
+A cozy residential lane on Long Island, transformed through the romantic fairy-tale visual language of Final Fantasy IX, still recognizably a warm, lived-in Long Island family neighborhood, rendered with the charm, whimsy and handcrafted detail of a fantasy RPG village. Clear warm summer afternoon. Golden sunlight from the upper left, long soft shadows toward the lower right, lilac ambient light in the shade. Honey-cream cobblestone paths, slightly irregular and individually painted, wind between lush lawns, vegetable gardens, flower beds, timber fences and mature leafy trees; moss and small flowers grow only along path edges. Trees have rounded, expressive canopies with layered brushwork, dark ink accents and sunlight on leaf clusters. Lanterns, windows, chimneys, roof ornaments and garden details have the charming, handcrafted quality of a classic illustrated fantasy village. Everything feels welcoming, nostalgic, magical and unmistakably inhabited. Exactly three modest family homes. No mansions.
+
+WALKABLE MAP (NAVIGATION COMES FIRST)
+A player must be able to walk from either exit to every front door and completely around every house.
+- Every house is freestanding, fully inside the picture, about one quarter of the image width, with a continuous cobblestone path on all four sides, including behind it.
+- At least one full path width of cobblestones between every house and the image edge. No two buildings touch.
+- No fence, deck, garden bed, tree or decoration blocks a path. Benches, lamps, bicycles, planters sit beside paths.
+- Every front door connects to the main lane by a short cobbled approach. Paths behind each home rejoin the main lane on both sides.
+- A main cobblestone lane loops through the center, connecting all three homes. Paths feel naturally curved and organically laid, as in a whimsical Final Fantasy IX town, but stay wide and unambiguous, readable even under roofs and canopies.
+
+NORTH EXIT: Wide, slightly worn stone steps climb from the central lane to the TOP edge, just right of center. The north exit board stands over these steps about 120 to 180 px below the top edge, so the whole board, both posts and the steps above it are inside the picture.
+SOUTH EXIT: A cobblestone path runs from the main lane to the BOTTOM edge at the center. The south exit board stands over this path where it leaves the main lane, about two thirds of the way down the picture (around y 940). The path continues visibly under and beyond the board to the bottom edge.
+No other exits. Paths near the left, right and top edges curve back or end visibly before fences, hedges and trees.
+
+EXIT BOARDS (both identical in design and size)
+A wide deep forest green wooden board (about #2F4A35), face about 320 x 110 px, thin carved wooden frame with a thin gold inner line. It hangs high between two tall decorative iron posts that form an archway over the path, the posts' feet clearly standing on the ground on either side of the path. The bottom of the board is well above head height and higher than the front doors. Open air and path visible underneath. The lettered face faces the viewer. Lettering: cream-gold paint (about #F2E6B8) with a thin dark green outline, two centered lines of equal letter height.
+North board: "LONG ISLAND" / "SQUARE". South board: "CATTAIL" / "PIER".
+
+1. THE GREGORI HOME (UPPER LEFT)
+A lively young family's two-story storybook house: oversized gently sloping roof, playful slightly asymmetrical silhouette, large welcoming windows. Warm cream plaster walls with hand-painted texture, rose-red timber framing and window trim, irregular terracotta shingles with slightly curved eaves and ink detail. The house has the expressive charm of a lively young RPG party member translated into architecture: bright, welcoming, energetic and full of small personal details. Bright red front door with oversized brass hinges and a rounded stone doorstep. A large hand-built wooden deck along one side, charmingly imperfect boards and chunky posts, with the path running all the way around it. A visible basement window well. A painted mural of flowers and stars on one side wall.
+Family details: a gymnastics mat and small balance beam on the lawn; a chalk hopscotch of plain squares on a side path; two children's bicycles and a scooter beside the front steps; a running-shoe rack and a small sports net on the porch; a violin case on a porch bench; a stuffed toy lamb in the front window.
+NAME SIGN: a wide rectangular hand-painted wooden board with rounded corners, mounted on the front wall centered above the red door (30 px gap above the door frame). Cream-white painted face, small painted flowers and stars only in the corners. Bold rose-red letters with a thin dark brown outline, one line: "GREGORI".
+
+2. THE RIVITUSO HOME (UPPER RIGHT)
+The grandparents' welcoming home, centered on cooking, gardening and family traditions. A warm-brown cottage with a generous, gently sagging storybook roof, sturdy, affectionate and comforting silhouette, like a wise and generous elder character from Final Fantasy IX, oversized timber beams. Rich warm-brown timber and cream plaster walls, thick irregular terracotta shingles. A tall, slightly crooked rounded chimney with delicate curls of pale baking smoke. A deep covered porch with chunky wooden pillars and two wooden rocking chairs. Large rounded kitchen windows with warm light, shutters with cut-out crescent moons and stars. A side door reached from the surrounding path. A walkable path runs down its right side.
+Garden: fresh pies cooling on the kitchen windowsill; an abundant vegetable and flower garden beside the house with oversized leaves; tall sunflowers; a friendly handcrafted scarecrow; a tomato trellis; a raised bed of red and green chili peppers; fishing rods and a plain tackle box leaning by the side door; earthenware pots and woven baskets by the porch. All beds stay outside the walking routes.
+OPEN GATE: a clearly visible wooden garden gate swung fully open toward the garden, so the garden is entered straight from the lane and the gate blocks nothing.
+NAME SIGN: a long flat carved wooden board shaped like a rolling pin, with a round handle at each end, mounted on the front wall centered above the front door (30 px gap above the door frame). The lettering sits on the flat light-wood middle section; one end handle carries a small carved fish. Bold dark burned-in letters, one line: "RIVITUSO".
+
+3. AUNT ELLIE'S HOME (LOWER LEFT OF CENTER)
+A glamorous great-aunt who loves Parisian elegance. A narrow, graceful plum-purple townhouse with a dramatically curved Paris-style mansard roof of decorative slate shingles, elegant, theatrical and slightly eccentric, like a refined fantasy-world aristocrat. Deep plum plaster walls with watercolor variation, tall French windows with dark shutters, an ornate curling wrought-iron balcony, flower boxes overflowing with blossoms, a striped awning above the entrance, a teal arched front door with polished brass trim, elegant moldings and small gold accents.
+Details: a tiny café table for one beside the entrance, a refined hat stand near the door, a long silk scarf fluttering from the balcony rail, neat small flower pots by the entrance. Romantic and refined, not a shop or palace.
+NAME SIGN: a wide horizontal oval enamel plaque, wide enough for both words on one line, mounted on the front wall centered above the teal door and below the awning edge, clear of the awning and door (30 px gap above the door frame). Deep plum enamel face with a thin gold frame. Bright gold letters with a thin dark outline, one line: "AUNT ELLIE".
+
+ENVIRONMENT
+Two rustic wooden benches beside the main lane. Iron street lamps with curved necks and softly glowing amber lanterns. Flower beds with oversized storybook blossoms. Low wooden fences with irregular posts. Small hedges, lush summer gardens, mature trees around the outer edges. Moss, grass and tiny wildflowers between stones at path edges. Painted shutters, aged brass hardware, hand-carved ornament. Every yard has an open gap to the paths; all garden gates look welcoming. No freestanding signs other than the two exit boards. No fantasy creatures, magical objects or floating things: the fantasy comes from the painting, proportions, craftsmanship and atmosphere.
+
+LAYERING (for game cutouts)
+Paths, grass and soil continue behind and under everything raised, with about 40 px of visible ground behind tall objects. Trees have clear trunks and ground contact. Lamps and exit-board posts have clear bases. Roofs, porches, canopies and boards have crisp outer silhouettes with enough separation to cut them out. Dark contact shadows under buildings, trees, fences and props. Nothing floats.
+
+PALETTE
+The nostalgic, luminous warmth of a Final Fantasy IX watercolor environment. Golden sunlight #FFE1A0, lilac shadow #C8A5DC, honey-cream paving #EED8B5, sage green #608775, light-green lawns #B4C395, terracotta roofs #CF7954, warm brown shadows #716351. Jewel accents of rose red, plum, teal, deep forest green and muted gold. Luminous highlights on windows, roof edges, leaves and metalwork, subtle pigment granulation, painterly color transitions. Peaceful, affectionate, nostalgic, quietly magical. Imagine a beloved Final Fantasy IX village location on a perfect summer afternoon, reinterpreted as a Long Island neighborhood filled with family memories.
+
+EXCLUSIONS
+No people, figures or characters. No animals or creatures. No vehicles. No treasure chests, keys, coins, switches or game markers. No other buildings or structures that could read as a fourth home. No ponds, rivers, bridges or mazes. No floating objects or disconnected paths. No blocked entrances or closed-off perimeters. No house touching another house or the edge. No floor-plan look, grid, tiles or markers. No modern plastic 3D rendering, photorealism, glossy mobile-game look, pixel art or generic anime screenshot look. No title, border, inset or palette chart. No house numbers, logos, labels on objects, or any writing other than the five signs.
+
+FINAL CHECK
+1. Exactly three freestanding houses: Gregori upper left, Rivituso upper right, Aunt Ellie lower left of center, all facing the viewer.
+2. Continuous cobblestone path around every house; both exits connect to every front door.
+3. North steps reach the top edge; south path reaches the bottom edge.
+4. Five signs, all facing the viewer, large and readable: GREGORI, RIVITUSO, AUNT ELLIE, LONG ISLAND / SQUARE, CATTAIL / PIER. Read each one letter by letter against the table.
+5. No sign touches a door; both exit boards fully inside the picture, high on posts with the path open beneath.
+6. Rivituso garden gate visibly open.
+7. The whimsical proportions, dark ink contours, chunky painterly shading and watercolor charm of Final Fantasy IX.
+
+Deliver the single finished environment painting itself.

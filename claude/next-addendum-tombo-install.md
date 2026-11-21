@@ -1,0 +1,18 @@
+# Tombo frame install (Tom 11-07 09:30: "Implement approved Tombo frames"; scope answer: split-sheet Tombos first)
+
+STATUS: nothing installed yet. Session 11-07 only investigated and cloned. No repo change was made.
+
+## What is approved (Art Library `data/art-prompts.json`, status approved, all three pieces)
+Split sets (Tom sheet + partner sheet + objects sheet, 6 frames each, objects 4 x 3): amy2 (Ymamot Creation), amy3, boppy1, boppy2, deedee2, deedee3, nara1, rose3, tnb1 (Popcorn Jump). Raw files `art/raw/characters/tombo-<id>-<tom|partner|objects>-v1.png` (person sheets 1248 x 832, 3 x 2 cells; objects 1152 x 864).
+Pair sheets (one image, both people, 6 frames, objects separate): grace1, grace2, grace3, rose1, rose2, amy1, deedee1 (+ objects for grace1 to 3, rose1, rose2, deedee1). Do these AFTER the split sets.
+Not ready (drafts): boppy3, nara2, nara3, tnb2, tnb3, ff1 to ff3 objects, all DC (`-dc`) sets.
+
+## Findings
+- Every Tombo is still the old code-drawn animation: LAST `B2_TOMBO_ANIM.<id>` in engine/battle2-kind.js (tnb1 starts ~line 696). Tom and partner are drawn by `pathOf(fxT/fxP, ...)` returning `{cx, base, frame, ...}` with frames from `BATTLE_SPRITES` (e.g. `TP.bowlsit`, `TP.scream`). Props are `PROPART.draw('tombo/<slug>')` from the old 138 baked props in `art/props/tombo` (retiring them is a separate later job).
+- Existing frame pipeline to copy: ability installs. Cutter `tools/sprite-bake/ability_frames_<id>.py` (key magenta via `walk_sheet_frames._key`, label cells, crop, size to the character's battle 'ready' height by the median upright frame), baker `bake_<id>.py` packs an atlas into `art/chars/<id>-ab.webp` + `data/<id>-hires.js` `ab:{...}`, registered with `paintedAtlas('<id>Ab', ...)` in `data/<id>-hires-use.js` and turned into frames `sp['ab_<move>_<n>']` in `data/<id>-hires-battle.js`; moves then use `f:'ab_x_1'` keys. A full character rebake is heavy and not byte-identical.
+- Plan (my call): do NOT touch the per-character bakes. Add one standalone Tombo atlas: cutter `tools/sprite-bake/tombo_frames.py` (reuses `_frames`/`_rs`/`_key`; size each person by the same median-upright rule against that person's battle 'ready' height; sitting or crouch frames are scaled by the same factor, never alone), baker writes `art/tombo/<id>.webp` + `data/tombo-frames.js` (rects per frame `tb_<id>_tom_1..6`, `_p_1..6`, objects `ob_<id>_1..8` keyed to alpha), loaded on demand through `paintedAtlas` (lazy). Add a helper that turns a frame into a `sp`-style frame object the way `data/tnb-hires-battle.js` does. Then rewrite each anim's two `pathOf` blocks to switch frames at the existing beats (P table), keep the voice timing, and replace `PROPART.draw('tombo/...')` calls with the new object cutouts. Painted frames as painted (CLAUDE.md): no head or body resizing beyond the single scale factor.
+- Pilot first: tnb1 (6 + 6 frames, 6 objects: popcorn bowl, popcorn pieces, rust velvet couch, mustard pillow, movie screen, villain standee). Existing beats: bowlsit, spook, scream (jump 84 px), cower, proud, kiss.
+- Per Tombo tests: `python3 tools/tombo_test.py <partner>`, `cross_test.py`, `smoke.py`, `tag_check.py`, `unused_voice.py` (0). Look at frames in portrait and landscape. Bump ART_V and tags, CHANGES entry, purge replaced code and old props only for the Tombos installed (grep 0).
+- One push per 3 to 4 Tombos. Say what the phone should show.
+
+## Open question for Tom (one line, only if it matters): the sheets are one painting per person per Tombo, so each frame replaces the person's whole body for that beat (no walking in or out in the sheet); the existing run in and run home stay as the old run frames.

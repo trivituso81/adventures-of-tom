@@ -1,0 +1,17 @@
+Draw more battle frames of the dog in the attached pictures.
+
+Attached first: the dog's picture. Attached second: her finished 8-frame battle sheet. Copy them as exactly as possible in every frame: the same dog, face, eyes, fur color, curls, body size and build, head size compared to the body, ears, tail, collar if she has one, linework, painting style, level of detail, viewing angle and figure size. Only the pose changes. Do not add, remove or redesign anything.
+
+One image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One dog per cell, the same size in every cell and the same size as on the 8-frame sheet, nothing touching a cell edge. No toys, balls or objects. No grid lines, numbers, text, effects or shadows.
+
+In every frame the dog faces the left edge of the picture in a three-quarter view: the chest turned partly toward the viewer, both eyes visible, the nose pointing left.
+
+Row 1:
+1. Startled. Body jumping backward to the right, front paws lifted off the ground, back legs bent. Ears pinned flat back. Eyes squeezed shut, mouth closed tight.
+2. Tired. Lying flat on her belly, front legs stretched forward, chin resting on the ground between the front paws. Eyes looking up toward the left, eyebrows raised. Mouth closed.
+3. Dizzy. Lying on her side, back toward the viewer's right, all four legs stretched out loosely toward the left. Head resting on the ground, eyes closed, tongue hanging out of the side of the mouth.
+
+Row 2:
+4. Bark. Sitting upright. Head lifted slightly, mouth wide open in a bark. Ears up, tail sweeping on the ground.
+5. Happy hop. In mid-air in a small bounce, all four paws just off the ground and tucked under the body. Tail straight up, ears flopping up, mouth wide open in a big happy pant.
+6. Belly up. Rolled onto her back, belly facing the viewer. All four legs bent and up in the air, paws loose. Head upside down on the ground, mouth open, tongue out, eyes looking at the viewer.
