@@ -20986,11 +20986,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:24:16+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFfYFwHSAhwB1uc8J7",
+    "url": "https://claude.ai/code/session_01RXeukFfYFwHSAhwB1uc8J7",
     "opening": "started by START"
    }
   },
@@ -21538,11 +21542,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukERbpzoKk8xp5jCbYB",
+    "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
     "opening": "started by START"
    }
   },
@@ -21810,6 +21818,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
+   "title": "Inspect prompt says boppy's in lowercase",
+   "first": "2026-11-21T03:26:33Z",
+   "last": "2026-11-21T03:26:33Z",
+   "tags": [],
+   "cards": [
+    "c-qa-txt04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFfYFwHSAhwB1uc8J7",
+   "title": "Stray bar pictures on Rivituso Row in the departure scene",
+   "first": "2026-11-21T03:25:23Z",
+   "last": "2026-11-21T03:25:23Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug04"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -24675,8 +24703,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "20318f508bd01b683e8e70c34365f90aae246447",
- "synced_at": "2026-11-21T03:25:16+00:00",
+ "synced": "024c24a48cdb28f0d184674714fd6168bd33e740",
+ "synced_at": "2026-11-21T03:26:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
