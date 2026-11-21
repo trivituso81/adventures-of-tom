@@ -280,6 +280,7 @@ const LE_AREAS=[
       ['bench',3,7,3,2,'Soggy bench','Nobody has sat here since the Grump moved in. The bench misses company.'],
       ['bench',18,9,4,1,"Boppy's fishing spot",'A thermos, a bucket, one bass. Boppy will tell you it was two feet long. It was not.']],
     npcs:[],
+    monsterFence:[13,0,23,21],   // hollowtrail1: ordinary monsters stay west of x 13, clear of the boss trigger (x 14 and up, data/scenes.js ch1-spot)
     monsters:MONSTER_SPOTS},
 
   // ---------- Chapter 3: Cattail Pier (south of Rivituso Row) and the Whispering Marsh (west of the pier) ----------

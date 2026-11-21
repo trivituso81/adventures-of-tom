@@ -340,9 +340,7 @@ const SCENE_OPS={
   trace:o=>S.call(()=>heartTrace(o.trace)),
   // A "Goal: ..." toast is a quest update: it is stored silently (no popup, nothing waits on it) and the location label
   // pulses until the player taps it (watchObjective below). Every other toast shows as before.
-  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { const prev=flag('goal'),nt=o.toast.slice(6);
-    if(prev&&prev!==nt) { const Lg=Array.isArray(flag('goalLog'))?flag('goalLog').slice():[]; Lg.push({c:flag('goalCh')||STORY.chapter,t:prev}); setFlag('goalLog',Lg.slice(-80)); }
-    setFlag('goal',nt); setFlag('goalCh',STORY.chapter); refreshObjective(); return; } return; /* scene toasts are silent: objectives pulse the label, nothing pops up */ }),
+  toast:o=>S.call(()=>{ if(/^Goal: /.test(o.toast)) { storySetGoal(o.toast); return; } return; /* scene toasts are silent: objectives pulse the label, nothing pops up */ }),
   sfx:o=>S.call(()=>{ const f=sfx[o.sfx]; if(f) f(); }),
   say:o=>S.call(()=>say(o.say[0],o.say[1],o.say[2])),
   save:o=>S.call(()=>saveGame('auto',true)),
@@ -1647,6 +1645,12 @@ saveSummary=function(sv) {
 };
 
 
+// A new goal ("Goal: ..." text): the old one moves to the Completed list. Used by the toast step and by map events (hollowtrail1).
+function storySetGoal(text) {
+  const prev=flag('goal'),nt=String(text).replace(/^Goal: /,'');
+  if(prev&&prev!==nt) { const Lg=Array.isArray(flag('goalLog'))?flag('goalLog').slice():[]; Lg.push({c:flag('goalCh')||STORY.chapter,t:prev}); setFlag('goalLog',Lg.slice(-80)); }
+  setFlag('goal',nt); setFlag('goalCh',STORY.chapter); refreshObjective();
+}
 // ---------- Quest tracker (top left HUD) ----------
 // The HUD frame is a permanent quest tracker: chapter title, the next step, and progress pips for multi-part steps.
 // Tap it to open the quest log: the current step with a checklist of its parts, then every finished step with a check mark.

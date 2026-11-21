@@ -159,6 +159,7 @@ function buildArea(spec) {
   for(const k of ['tag','eyebrow','hint','wild']) if(spec[k]!==undefined) map[k]=spec[k];
   map.spawn={...spec.spawn};
   map.spec=spec;
+  map.monsterFence=spec.monsterFence||null;   // a box ordinary monsters never enter (engine/feel.js b7Fenced)
   paths(map,spec.paths||[]);
   for(const t of spec.tiles||[]) paths(map,t.rects,t.tile);
   if(spec.plateMask) spec.plateMask.forEach((row,y)=>{ for(let x=0;x<row.length;x++) if(row[x]!=='#') tile(map,x,y,'path'); });
@@ -200,6 +201,7 @@ function monsterFall(n,force) {
   if(!n||n.scripted) return;
   if(!force&&typeof bossStays==='function'&&bossStays(n)) return;
   n.defeatedUntil=0; n.chasing=false; n.alert=0; n.move=null;
+  if(!force&&typeof storyMonsterFell==='function') storyMonsterFell(n);   // a beaten map monster can move the story on (Grump Hollow's wrapper trail, data/scenes.js)
   for(const m of Object.values(worlds)) { const i=m.npcs.indexOf(n); if(i>=0) { m.npcs.splice(i,1); (m.fallen=m.fallen||[]).push(n); return; } }
 }
 // A boss beaten in the story never comes back to fight (Tom, report r-20261114-102058-62ho): it stays in its finished state

@@ -52,6 +52,25 @@ The final Square from Tom may use dark brown boards with cream lettering (the ge
 9. `docs/CHANGES.md` entry (top), commit, `git pull --rebase origin main`, push to `main` (conflicts hit CHANGES.md and index.html every time: keep both sides).
 10. Tell Tom in a table which areas are live and which need a redo (with the one thing to fix). Do not say anything is live until it is pushed.
 
+## Story stage paintings: Grump Hollow's muffin wrapper trail (hollowtrail1, 2026-11-20)
+
+Tom (reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx): "we should just rebake the entire area for each variation of muffin papers scattered"; the nine wrappers lead the party "through the square, then the upper left corner of the screen, then towards the log who should by default be in the center of the screen, then finally to the right"; the trail leads to each monster BEFORE the boss trigger.
+
+| Stage | Painting (Art Library entry) | Wrappers lead | Monsters that end it | Shown while |
+|---|---|---|---|---|
+| 0 | `art/hollow.webp` (base) | none | | before the Mudling fight, and after chapter 1 |
+| 1 | `area-hollow-trail1` | from the gate up the stone path into the clearing | Skeeter Swarm (9,13) | flag `ch1-trail` (set in `ch1Mudling` after the fight) |
+| 2 | `area-hollow-trail2` | to the soggy bench, up the top left path | Pond Grump (4,11) and Bog Toad (7,8) | stage 1 monsters beaten |
+| 3 | `area-hollow-trail3` | down to the middle of the clearing | Log Lump (11,11) | stage 2 monsters beaten |
+| 4 | `area-hollow-trail4` | east to Boppy's fishing spot (boss trigger, x 14 and up) | the Big One | stage 3 beaten, or `ch1-spot` played |
+
+- Which stage shows: `hollowTrailStage()` in `data/scenes.js` (flags `ch1-beat:<monster>`, set by `storyMonsterFell` from `monsterFall` on a won fight or a POP). Each new stage sets the next goal. The trail does not lock the boss: it only leads.
+- How a stage painting is drawn: `PLATE_VARIANT.hollow` (engine/plate.js `plateVariant`) returns the address from `HOLLOW_TRAIL` (`data/hollow-trail.js`); a stage with no painting shows the base. A swap keeps the old painting until the new one is decoded.
+- Monsters: `MONSTER_SPOTS` (data/monsters.js) in trail order, and the Hollow's `monsterFence: [13,0,23,21]` (data/maps-le.js) keeps ordinary monsters out of the boss trigger, wandering or chasing (engine/feel.js `b7Fenced`).
+- The prompts (`tools/art-library/prompts/areas/hollow-trail<n>.txt`, entries in `tools/art-library/hollow-trail-prompts.js`, run it with node to refresh only these entries) attach the painting the plate is made from (`art/raw/areas/area-hollow-v4.png`) and ask for the same painting with nine wrappers along one leg (the pattern of the approved kitchen edit `ch1-kitchen-empty-island`).
+- Install is automatic on APPROVE: the art-bake Action runs `tools/sprite-bake/bake_hollow_trail.py <n>`. It lines the picture up with `art/hollow.webp` (OpenCV feature fit), keeps only what changed inside the strip along that leg (`ROUTES`, 2 tiles either side), pastes it feathered onto the live plate, writes `art/hollow-trail<n>.webp` and `data/hollow-trail.js`, and a check picture `tools/shots/hollow-trail<n>-check.png`. Outside the strip every pixel is the live plate, so `plateMask`, exits, `art/hollow-fg.webp` and `PLATE_BEHIND.hollow` stay right for all stages. Wrappers painted outside the strip are dropped: look at the check picture.
+- Test: `python3 tools/hollow_trail_test.py` (bake with stand-in pictures, then the stages, the swap, the fence and the Mudling scene in the game).
+
 ## Where the prompts and history are
 Project docs: `claude/square-redo.md`, `claude/square-lettering.md` (Square v2 prompt with lettering, raised boards, closed dead ends, higher south board), `claude/rivituso-row-redo.md`, `claude/rivituso-row-lettering.md`, `claude/grump-hollow-redo.md`, `claude/cattail-pier-redo.md` (SUPERSEDED: asks for blank boards; rewrite with painted lettering). Reference images from Tom: `docs/reference/town_v2_from_tom.png`, `row_v2_from_tom.png`, `hollow_v2_from_tom.png`, `town_v3_lettered_from_tom.png`. Repo history: `docs/CHANGES.md` entries for 2026-10-30 (Square, Row, Hollow).
 

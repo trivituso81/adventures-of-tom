@@ -82,7 +82,7 @@ function plateFocus(map) {
   const keep=new Set([...PLATE_RECENT.slice(0,PLATE_KEEP),...plateFocus.queue]);
   for(const k in PLATES) if(!keep.has(k)) plateDrop(PLATES[k]);
 }
-function plateDrop(p) { if(!p.img&&!p.fgImg) return; p.img=null; p.ready=false; p.failed=false; p.tries=0; p.fgImg=null; }
+function plateDrop(p) { if(!p.img&&!p.fgImg) return; p.img=null; p.ready=false; p.failed=false; p.tries=0; p.fgImg=null; p.swap=null; }
 // Load one queued neighbour at a time, and only once the current map's painting is on screen, so a neighbour never slows the map you are on.
 function platePump(map) {
   const cur=map&&PLATES[map.id];
@@ -91,10 +91,31 @@ function platePump(map) {
   const q=plateFocus.queue; if(!q) return;
   while(q.length) { const p=PLATES[q.shift()]; if(p&&!p.img&&!p.failed) { plateLoad(p); return; } }
 }
+// hollowtrail1: a map can show another painting of itself by story stage (Grump Hollow's muffin wrapper trail, data/scenes.js).
+// PLATE_VARIANT[map id]() returns the painting's address, or null for the base painting. A change while the map is on screen keeps
+// the old painting until the new one is decoded, so there is never a blank frame; a painting that fails to load leaves the old one up.
+const PLATE_VARIANT={};
+function plateVariant(map,p) {
+  const f=PLATE_VARIANT[map.id]; if(!f) return;
+  if(!p.baseSrc) p.baseSrc=p.src;
+  p.bad=p.bad||{};
+  if(p.failed&&p.src!==p.baseSrc) { p.bad[p.src]=1; p.failed=false; p.tries=0; p.img=null; }   // a stage painting that will not load: the base painting instead
+  let want=f()||p.baseSrc; if(p.bad[want]) want=p.baseSrc;
+  if(!p.img) { p.src=want; p.swap=null; return; }
+  if(p.src===want) { p.swap=null; return; }
+  if(!p.swap||p.swap.src!==want) {
+    const im=new Image(),sw={src:want,im,ok:false,bad:false}; p.swap=sw;
+    im.onload=()=>{ const fin=()=>{ sw.ok=true; }; if(im.decode) im.decode().then(fin,fin); else fin(); };
+    im.onerror=()=>{ sw.bad=true; p.bad[want]=1; };
+    im.src=want;
+  }
+  if(p.swap.ok) { p.img=p.swap.im; p.src=want; p.ready=true; p.swap=null; }
+}
 function plateFor(map) {
   const p=map&&PLATES[map.id];
   if(!p) return null;
   plateFocus(map);
+  plateVariant(map,p);
   plateLoad(p);
   platePump(map);
   return p.ready?p:null;

@@ -14341,6 +14341,90 @@
    "group": "Grump Hollow"
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "area-hollow-trail1",
+   "tab": "Areas",
+   "group": "Grump Hollow",
+   "title": "Grump Hollow, muffin wrapper trail 1 of 4: nine wrappers up the stone path into the clearing (attach the listed picture)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/areas/area-hollow-v4.png"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is on the stone path just inside the gate, under the green exit board. The rest climb the path and curve into the lower left part of the big muddy clearing. The last one is a little left of the middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "bake": {
+    "script": "bake_hollow_trail.py",
+    "args": [
+     "1"
+    ],
+    "src": "tools/sprite-bake/src/hollow-trail1.png"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "area-hollow-trail2",
+   "tab": "Areas",
+   "group": "Grump Hollow",
+   "title": "Grump Hollow, muffin wrapper trail 2 of 4: nine wrappers to the top left corner by the old bench (attach the listed picture)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/areas/area-hollow-v4.png"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is in the lower left part of the big muddy clearing. The rest run left and up to the old soggy wooden bench in the top left nook, then up the narrow path that leads into the trees at the top left corner of the clearing. The last one is where that narrow path ends.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "bake": {
+    "script": "bake_hollow_trail.py",
+    "args": [
+     "2"
+    ],
+    "src": "tools/sprite-bake/src/hollow-trail2.png"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "area-hollow-trail3",
+   "tab": "Areas",
+   "group": "Grump Hollow",
+   "title": "Grump Hollow, muffin wrapper trail 3 of 4: nine wrappers to the middle of the clearing (attach the listed picture)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/areas/area-hollow-v4.png"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is at the top left corner of the big muddy clearing, where the narrow path comes out of the trees. The rest run down and to the right across the clearing. The last one is in the exact middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "bake": {
+    "script": "bake_hollow_trail.py",
+    "args": [
+     "3"
+    ],
+    "src": "tools/sprite-bake/src/hollow-trail3.png"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "area-hollow-trail4",
+   "tab": "Areas",
+   "group": "Grump Hollow",
+   "title": "Grump Hollow, muffin wrapper trail 4 of 4: nine wrappers east to Boppy's fishing spot (attach the listed picture)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/areas/area-hollow-v4.png"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "bake": {
+    "script": "bake_hollow_trail.py",
+    "args": [
+     "4"
+    ],
+    "src": "tools/sprite-bake/src/hollow-trail4.png"
+   }
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -26417,28 +26501,6 @@
    "versions": [
     {
      "n": 0,
-     "file": "art/raw/props/ch1-muffin-papers-v1.png",
-     "date": "2026-11-19",
-     "from": "v1",
-     "at": 1795127961066
-    }
-   ],
-   "rejects": [],
-   "id": "ch1-muffin-papers",
-   "tab": "Props",
-   "title": "Chapter 1: nine crumpled paper muffin liners scattered on muddy ground (one object group)",
-   "ar": "1:1",
-   "refs": [
-    "art/hollow.webp"
-   ],
-   "group": "Chapter 1",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nNine crumpled paper muffin liners, cream and pale brown, scattered loosely in a small group, a few crumbs in them and a little mud on some. Exactly nine liners, easy to count, none overlapping.\n- Exactly ONE object, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
      "file": "art/raw/props/ch1-grace-list-v1.png",
      "date": "2026-11-20",
      "from": "v2",
@@ -26966,7 +27028,7 @@
      "at": 1795211734416,
      "marks": {
       "first": 0,
-      "last": 3.0
+      "last": 3
      }
     },
     {
@@ -26977,7 +27039,7 @@
      "at": 1795218032021,
      "marks": {
       "first": 0,
-      "last": 3.0
+      "last": 3
      }
     },
     {

@@ -39,7 +39,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install bake tools
-        run: pip install pillow numpy scipy
+        run: pip install pillow numpy scipy opencv-python-headless   # opencv: bake_hollow_trail.py lines a trail painting up with the Hollow plate (hollowtrail1)
       - name: Video tools (only when a clip video was approved)
         run: |
           # a ready-made ffmpeg from pip (seconds); installing it with apt took about 6 minutes

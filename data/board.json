@@ -17263,7 +17263,7 @@
    "col": "prog",
    "theme": "Areas",
    "title": "Grump Hollow muffin wrapper trail",
-   "next": "Tom wants the nine muffin wrappers to lead the party through Grump Hollow in four stages (the Square, the upper left, the log in the screen centre, then the right), one area painting per stage, with each monster placed on the trail before the boss trigger. Reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx.",
+   "next": "Build hollowtrail1: four Grump Hollow trail paintings are waiting in the Art Library, the game shows each one by story stage once approved, and the monsters now sit along the trail, clear of the boss trigger. Next: Tom generates and approves the four paintings (t-hollowtrail1-pics), then c-hollowtrail2 checks them in the game.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17293,8 +17293,78 @@
     {
      "d": "2026-11-20",
      "t": "Session started: plan the four Grump Hollow trail paintings, the code that picks one per story stage, and monster spots before the boss trigger."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built hollowtrail1: Art Library entries area-hollow-trail1 to 4 (installed automatically on APPROVE by tools/sprite-bake/bake_hollow_trail.py), stage code in data/scenes.js, monsters moved onto the trail with a fence over the boss trigger, the code-drawn wrapper prop and its art purged. \"Through the square\" read as the Hollow's big square clearing entered from THE SQUARE SHOPS gate (the wrappers only exist after the Mudling fight in the Hollow). The trail leads, it does not lock the boss. Reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx done. Also removed conflict markers that takes-2026-11-20b left in index.html, engine/main.js and docs/CHANGES.md."
+    }
+   ],
+   "after": "t-hollowtrail1-pics"
+  },
+  {
+   "id": "t-hollowtrail1-pics",
+   "title": "Generate and approve the 4 Hollow wrapper trail paintings",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "next": "Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN > ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2).",
+   "blocks": [
+    "c-hollowtrail2"
+   ],
+   "done_when": {
+    "art_approved": [
+     "area-hollow-trail1",
+     "area-hollow-trail2",
+     "area-hollow-trail3",
+     "area-hollow-trail4"
+    ]
+   },
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFa4MdDrAtR4RY9gAw",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by hollowtrail1 (card c-hollowtrail1). Tom: \"we should just rebake the entire area for each variation of muffin papers scattered\"."
     }
    ]
+  },
+  {
+   "id": "c-hollowtrail2",
+   "title": "Check the Grump Hollow wrapper trail paintings in the game",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "hollowtrail2",
+   "auto": true,
+   "next": "Waits on Tom's approvals of the 4 trail paintings. Then it checks each installed painting (nine wrappers, inside the strip, no seam), plays the Hollow stage by stage in portrait and landscape, and hands Tom a play card.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by hollowtrail1 (card c-hollowtrail1). Steps and tests: docs/AREA_PAINTINGS.md \"Story stage paintings\"."
+    }
+   ],
+   "prompt": {
+    "what": "Checks the four Grump Hollow wrapper trail paintings you approved, now installed in the game, fixes any that lost wrappers, plays the Hollow stage by stage, then gives you a card to play it.",
+    "before": [
+     "Finish the card Generate and approve the 4 Grump Hollow wrapper trail paintings (approve or reject each one)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the install is automatic and the check steps and tests are written in docs/AREA_PAINTINGS.md)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and docs/AREA_PAINTINGS.md section \"Story stage paintings: Grump Hollow's muffin wrapper trail\", then card c-hollowtrail2 in data/board.json with its history and the notes on card t-hollowtrail1-pics. Your first push is the commit board: start c-hollowtrail2. For every approved entry area-hollow-trail1 to 4: check that its painting art/hollow-trailN.webp (N = the stage number) and its line in data/hollow-trail.js exist (if the art-bake Action did not install one, copy its newest approved art/raw/areas file to tools/sprite-bake/src/hollow-trailN.png and run python3 tools/sprite-bake/bake_hollow_trail.py N), then look at the check picture it writes (tools/shots/hollow-trailN-check.png) and the result next to the plate: count the wrappers (nine, all inside the strip, on open ground, not on a bench, a sign or the water); if wrappers were dropped because they lie outside the strip, widen or bend that stage's ROUTES line in the bake script by the smallest change and bake again. Then play it: python3 tools/hollow_trail_test.py must pass, and with the chapter 1 jump walk the Hollow at each stage (beat the monsters with the test helpers) and look at portrait and landscape screenshots: the right painting per stage, no seam around the strip, the monsters on the trail. Push build hollowtrail2 with a docs/CHANGES.md heading, create the Tom card t-hollowtrail2-play (ask play: start chapter 1 from chapter select, win the Mudling fight at the Hollow gate, follow the wrappers to each monster and on to Boppy's fishing spot) and set this card's after to it. A rejected painting stays out; say which. Spend nothing on xAI. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "c-itembannerart1",

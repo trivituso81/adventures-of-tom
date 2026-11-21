@@ -1,3 +1,20 @@
+## hollowtrail1 (2026-11-20): Grump Hollow muffin wrapper trail: four paintings to make in the Art Library, monsters moved onto the trail and away from the boss
+
+Tom's reports, card c-hollowtrail1:
+- r-20261120-140805-mhzt "should be nine muffin wrappers not papers. also this graphic looks terrible - im starting to think we should just rebake the entire area for each variation of muffin papers scattered"
+- r-20261120-141016-j0za "the muffin wrappers should at first lead the party through the square, then the upper left corner of the screen, then towards the log who should by default be in the center of the screen, then finally to the right. i think we need a variation of the area art for each"
+- r-20261120-141209-58bx "all of the positions of the monsters are wrong - we can have them near the boss area because it will create a conflict. the muffin wrapper trail should lead the party to each monster BEFORE they reach the boss trigger area"
+
+What changed:
+- Four Art Library entries, Areas tab, group Grump Hollow: `area-hollow-trail1` to `4` (prompts `tools/art-library/prompts/areas/hollow-trail<n>.txt`, entries `tools/art-library/hollow-trail-prompts.js`). Each attaches the painting the plate is made from and asks for the same painting with nine wrappers along one leg: 1 the gate up into the clearing, 2 the soggy bench and the top left path, 3 the middle of the clearing, 4 east to Boppy's fishing spot. "Through the square" is read as the Hollow's big square clearing, entered from THE SQUARE SHOPS gate: the wrappers only exist after the Mudlings eat the muffins in the Hollow, so none can lie in the Square map.
+- APPROVE installs it: the art-bake Action runs `tools/sprite-bake/bake_hollow_trail.py <n>` (lines the picture up with `art/hollow.webp`, keeps only the strip along the leg, writes `art/hollow-trail<n>.webp` and `data/hollow-trail.js`). The walk map, exits and cutouts never move. The Action now also installs opencv-python-headless.
+- The game shows the painting for the stage (`hollowTrailStage`, `PLATE_VARIANT.hollow` in data/scenes.js; `plateVariant` in engine/plate.js swaps with no blank frame and falls back to the base painting). Stage 1 starts after the Mudling fight (flag `ch1-trail`); a stage ends when its monsters are beaten once (Skeeter; Grump and Toad; Log), the boss scene shows stage 4. Each new stage sets the next goal. The trail leads, it does not lock the boss. Until a stage's painting is approved the base painting shows.
+- Monsters in trail order (`MONSTER_SPOTS`): Mudling (7,16) at the gate, Skeeter (9,13) in the clearing, Grump (4,11) by the soggy bench, Toad (7,8) on the path above it, Log (11,11) in the middle (was 7,10). The Hollow's `monsterFence` (x 13 and up) keeps ordinary monsters out of the boss trigger whether wandering or chasing (engine/feel.js `b7Fenced`; the Skeeter used to sit at 13,12 beside it).
+- Purged the code-drawn wrapper prop: `SPK.papers`, its preload, the scene step, `art/props/ch1/papers.webp`, `art/raw/props/ch1-muffin-papers-v1.png`, entry `ch1-muffin-papers` (now in retired-ids.json) and its line in bake_closeup_ch1.py.
+- `storySetGoal` (engine/story.js) is the goal step's body, now shared with map events.
+- Test: `python3 tools/hollow_trail_test.py` (all passed: bake with stand-in pictures for all four stages, then stages, goals, swap, fallback, fence and the Mudling scene in the game). Smoke passed apart from the tag check before the bump and board_sync_test R5, which fails the same way on main without this change.
+- Not done here: the four paintings themselves (Tom's card t-hollowtrail1-pics), and checking them in the game once installed (card c-hollowtrail2).
+
 ## 2026-11-21 (463): Art Library bake, clip-toad-idle (`artbake1537`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
@@ -8,18 +25,15 @@
 
 Every START on the Opus medium and Sonnet high routes died before its first push today (8 runs). `routines[].paused` keeps a route off even when its secret exists (`tools/board_sync.py`, startfix1 note); those cards now show Copy prompt. Proof cards closed as failed; searchthrough, keysecrets3 and keysecrets5 back in Up next; the takes merge restarted on the working Sonnet medium route; repair is card c-startfix.
 
-<<<<<<< HEAD
 ## fix-keysecrets2-try-4 (2026-11-20): the page reads the video job's report through the GitHub API, not the 5 minute cached copy
 
 Card c-fix-keysecrets2-try-4. Tom (t-keysecrets2-try): "i followed your instructions and its been hanging for 45 minutes".
 - Fact: the job finished fast again. Request `clip: generate clip-toad-idle` 23:38 UTC, video made and approved 23:39:59, report on branch `clipgen` names `clip-toad-idle` under `approved`. So the page was the part that did not show it.
 - Likely cause (not reproduced; no Safari here): the page read the report from raw.githubusercontent.com, which a phone or GitHub may keep for 5 minutes (`cache-control: max-age=300`) and which this app cannot bust with a query. Fix: `clipPoll` now reads `clipgen-report.json` from the GitHub API with the token (never cached), raw only as the fallback. The waiting line now also says the time of the last report it read and which way it read it, so a report from Tom shows what the phone saw.
 - Tag `art-clips.js?v=fix-keysecrets2-try-4` in art.html (the service worker keeps `?v=` files cache-first, so it must move). `keysecrets2_test.py` passes (it uses the stand-in server, so the API path is covered only by the fallback; the real API call is untested).
-=======
 ## fix-listen1-play (2026-11-20): the listening test steps named "Grandma's"; they now say Deedee's kitchen
 
 Card c-fix-listen1-play. Tom (t-listen1-play): "theres no one in the story named Grandma so i cant read this". The game was fine; the steps on his card were wrong. They now say: play Deedee's kitchen (Boppy's bread story and the mud ball), then Boppy's fishing spot (the grey patch). Nothing in the game changed. Not looked at: the listening poses themselves (Tom's check).
->>>>>>> a7c1015 (fix-listen1-play: listening test steps say Deedee's kitchen, not Grandma's)
 
 ## 2026-11-20 (462): Art Library bake, clip-toad-idle (`artbake1536`, made by the art-bake Action)
 
@@ -1279,7 +1293,6 @@ Card c-reports, Tom's seven open art reports installed from the approved entries
 - Result: 43 Chapter 1 clips are back under To do with promptRev 1 (list: `python3 -I tools/art-library/clipgen.py --dry-run`); no approved clip changed except the Log idle.
 - Tests: gate_test (new: whole-stretch idle, wrap plays forward only, wrap END), vision_test (header_for now checked on the Big One and Log idles), grab_test, clip_lib_test, clip_test, clip_batch_test, replay (exits 0; lists the Log idle as missed because it is fixed): pass. clip_kinds_test and clip_review_test fail the same way before and after this change (pre-existing); smoke passes except board_sync_test's "refuses a build whose card has no after", which uses c-board3 and broke when board-sync closed that card (pre-existing, not touched here).
 
-
 ## amywin1 (2026-11-19): Chapter 1, Rivituso Row: Amy leans out of her upstairs window, and the party walks off the steps before she talks
 
 - Tom (11-19 16:45, screenshot of the scene): "Amy can't be seen - shouldn't her head be peering out of a window? Why did the party stop when hidden by a sign".
@@ -1627,7 +1640,6 @@ Not done: new clips are not loudness levelled (they sit at a different level fro
 - `tools/voice-learn/GENERATION_JOB_PLAN.md`: plan for a manual GitHub Action that makes one checked take for each of the 258 lines with no clip. 28,384 characters to send, about 29,700 with regenerates; about 1 credit per character, v4 rate unconfirmed. Not built, not run, no ElevenLabs spending, no key needed yet.
 - Tests: guard on all 922 takes (live and from cache), lint on 11,023 scripts, `python3 tools/smoke.py`.
 
-
 ## b3s5a (2026-11-18): New battle, stage 5a: Traits, Quirks and Grand Capstones for the first Vibes of Tom, Grace, Rose and Deedee
 
 - Stage 5a of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Story fights still use the old battle and nothing in it changed. Stage 5 is split in two: 5b does the same for the second Vibes (Gamer Geek, Craft Artist, Cozy Rosie, Registered Nut).
@@ -1792,7 +1804,6 @@ No dialogue was changed. Tests: ch1Theft and ch1Goal frames (reaction_test, port
 - CLAUDE.md: new standing rule "Fix a miss with the smallest change" (start from the closest version that worked, change only what the note names, one change per try). The prompt rule from clipboop2 is rewritten around the approved prompt; its "49 words" yardstick is gone.
 - Tests: `tools/art-library/clip_lib_test.py`, `tools/clip_test.py`, `tools/smoke.py`. Not done: the old chop test (`clip-rose-strike` and its two study entries) is still in the repo; it is the next session's one task.
 
-
 ## roofnpc1 (2026-11-18): chapter 1 scene 1 fixes from Gemini's video audit: Rose rides into Grace's list, the party walks onto the plaza, no townsfolk on roofs
 
 Tom sent Gemini's audit of a recording of chapter 1 scene 1 (the opening and Grace's list). What each finding got:
@@ -1846,7 +1857,6 @@ No dialogue was changed. Tests: two full runs of the opening and ch1Goal (portra
 - This needs the full video model (`grok-imagine-video-1.5`): the xAI documentation lists pinned frames (`last_frame`, `keyframes`) for that model only. About $0.19 a video instead of $0.07.
 - Library: an entry's `clip.keys` and `clip.last` are sent as `keyframes` and `last_frame`; the card shows them under "Pinned pictures" and the price counts them (`engine/art-clips.js`). `tools/clip-bake/make_start.py --pose` makes a pinned picture from any painted frame at the start picture's scale and spot (`art/clips/keys/rose-boop-jab.png`). The hands-on-hips ending is gone from the video (it was what wiggled).
 - Tests: `tools/art-library/clip_lib_test.py` (75 checks; the test stand-in for the video service checks the pinned pictures' shape), `tools/smoke.py`. NOT tested against the real video service: nobody here has an xAI key, so the first GENERATE is the test of the request itself.
-
 
 ## clipboop2 (2026-11-18): Rose's Boop video prompt is now two short lines: one sharp finger jab at shoulder height, then hands on hips
 
@@ -2509,7 +2519,6 @@ Still open: es1t and fmss (facing, could not reproduce), ux5f and kviv (voice ta
 - Looked at: contact sheet (four poses each, feet whole) and ch2Starter on the map (TNB tk_tell, Tom tk_ask, TNB tk_answer on pages 2 to 4, moods kept elsewhere).
 - NOT done: Amy, Justin, Aunt Ellie and Olivia (no approved talking sheet yet; they keep mood poses); Grace and Rose on a chapter 1 scene; landscape; Duo; phone. The bake also rewrote art/chars/pipemo-story.webp and data/npc-poses.js slightly; both reverted (unrelated).
 
-
 ## clips11 (2026-11-14): Tom's 80 chapter 3 Voice Library takes merged, DONE, nothing heard on a phone
 - Merged `local-clips-pending_9.json` (made 2026-11-14T15:03Z) with merge-local.js: 80 dialogue takes (Boppy 31, Tom 14, Deedee 12, Grace 11, Rose 8, The Big One 2, Oolong 2). All 80 are new keys in data/voice/dialog-ch28.js (chapter 3 story lines). No battle clips, none replaced.
 - All 80 takes are newer than their script rewrites (retake.json `ats`); one line (Oolong) has no rewrite entry.
@@ -2562,7 +2571,6 @@ Still open: es1t and fmss (facing, could not reproduce), ux5f and kviv (voice ta
 - Chapter 2: listener reactions are switched ON (`python3 tools/reaction-apply.py 1 2`; was chapter 1 only). The 114 new story lines (tools/voice-library/scripts/ch02-story-directions.json; not in the game scenes yet) are tagged ahead of the story build: 106 cast speaker moods, 3 townsfolk moods (Miss Odette, Dona Carmen; docs/npc-emotion-lines.tsv), reactions with cue words on 109 lines. Their rows name the script file as `file` (the checks need the exact text somewhere) and the scene id as `where`; the lemon tree scene is filed as `ch2Lemon` (rename the rows if the scene gets another id). Moods and reactions are keyed by speaker and exact text, so they apply the moment the chapter 2 story is installed with the same words. The 55 lines kept from the live chapter 2 have cue words too. Live chapter 2 lines that the new story removes or rewords keep their old rows, with no cue (they react at line start) until the story build removes them.
 - New test: tools/reaction_timing_test.py (sound on; per page, when each listener's pose appeared and how far the line had got; `SHOTS=1` keeps a frame before and after the first cue).
 - Tested: 291 reactions over ch1Theft, ch1Mudling, ch1Skeeter, ch1Grump, ch1Spot, ch1Pond, ch1AfterBoss, ch1End, ch2Porch, ch2Smog, ch2End: none shown before its cue; the only two not shown are Tom and Grace on Rose's mud blob line (they are lying knocked over, a story pose wins). Frames looked at in portrait (kitchen, dinner) and landscape (ch1Goal, ch1Mudling). In `opening` the hug and ride choreography holds everyone's pose, so most reactions there do not show (as before). NOT done: nothing heard or seen on a phone; other chapters have no cue words (their reactions are still off); docs/REACTION_INDEX.md not rebuilt (the checker still stops on the 32 old Vance rows).
-
 
 ## clips11 (2026-11-13): Tom's 79 re-takes merged (chapter 1 and 3 retakes, 34 new chapter 2 takes)
 - Merged `local-clips-pending_8.json` (made 2026-11-14T05:15Z, takes 05:02 to 05:14Z, all after the voicetags4 rewrite) with merge-local.js: 79 dialogue takes (Tom 21, TNB 14, Deedee 9, Rose 9, Grace 8, Big One 8, Boppy 7, Doña Carmen 2, Miss Odette 1). 45 replaced an existing clip (44 in dialog-ch28.js, 1 in dialog-ch3.js); 34 are new keys in dialog-ch28.js (chapter 2 lines that had no clip). No battle clips. Dialogue lines with no clip: 343 to 309.
@@ -2763,7 +2771,6 @@ Still open: es1t and fmss (facing, could not reproduce), ux5f and kviv (voice ta
 - Fix: the three rules now hide on `ch11-closed`, `ch12-clear`, `ch13-clear` (data/scenes-p2.js, data/scenes-ch12.js, data/scenes-ch13.js).
 - Why the tests missed it: the fake win in tools/boss_stage_test.py and tools/reaction_test.py did not rerun the world rules. It now calls `storyWorld()` after setting the win flag.
 - Tested: ch11, ch12, ch13 cases, portrait, before (boss on 0 after-scene pages) and after (boss on screen until it leaves or settles). Looked at the chapter 12 frames (bus signals, drives right, fades). Not looked at: chapter 11 and 13 ending frames, landscape, chapters 14 to 20.
-
 
 ## 2026-11-13 (introzoom1): the chapter 1 intro keeps one zoom the whole way (tag introzoom1)
 - Tom: in the chapter 1 intro the camera zoomed out after the first talk, then zoomed back in at a different zoom.
@@ -3187,7 +3194,6 @@ Still open: es1t and fmss (facing, could not reproduce), ux5f and kviv (voice ta
 | Deedee | 20 | reworded | Boppy fell asleep in the recliner somewhere over Nebraska. He says it is the best nap of his life. He says his back has never felt worse. | Boppy fell asleep in the recliner somewhere over Nebraska. He says it's the best nap of his life. He says his back has never felt worse. |
 | Amy | 20 | reworded | Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend. I have been looking at the calendar for an hour to make sure it is real. | Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend. / I've been looking at the calendar for an hour to make sure it's real. |
 | TNB | 20 | reworded | I made a mug. It has the same handle as the first one. It is exactly too big. | I made a mug. It has the same handle as the first one. It's exactly too big. |
-
 
 ## 2026-11-12 (pets1): no dog for Tom or TNB; Chester the family cat (tag pets1)
 - Tom 2026-11-12: Tom and TNB never had a dog and do not have one; Tom and Amy had a cat named Chester growing up; the only pet ownership in the game is Nara, owned by Olivia and Michael. Scanned every dialogue, NPC, toast and narration string in data/ and engine/ (after dialogclear1) for dog, cat, puppy, pet, Chester and possessives on Nara.
@@ -5912,7 +5918,6 @@ Tom approved Deedee's abilities and objects. Fact: all 14 fx sheets (`art/raw/ch
 - Text: about 45 tutorial tips, toasts and hints rewritten (no more "◀ TOMBO"; RASPBERRY, PEP TALK now point at WARMTH); stale "SILLY" names in hints fixed. Icon `x_tombo` renamed `x_warmth`.
 - New `tools/cross_test.py [--shots]`: prints every move and Tombo by list, checks one list each, fires a Warmth move and a Tombo through the menu. Tags: `warmth1` (battle2-ui, feel, story, battle-pictures, battle-icons, battle-emoji, battle2-data, scenes, scenes-ch12, scenes-ch14, bonus-nine-scoops, ch20-battle), stamp `build warmth1`. Tested: smoke FAILS [], cross_test FAILS [], portrait and landscape shots looked at.
 
-
 ## 2026-11-05 (276): Art Library: Square fix card also raises the exit boards (`sqfix2`)
 - Tom 19:38: "now we just have to get the signs higher". `area-square-fix` prompt gets a third edit: the three green exit boards go higher on longer posts, bottom edge about at the shops' eaves.
 
@@ -6192,7 +6197,6 @@ Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kep
 ## 2026-11-05 (222): Tom's new body for the profile passing pose (`walk16`)
 - Tom (14:18): "use this body for pass". art/raw/characters/tom-body-side-pass-v2.png (headless profile, faces right, mirrored like the others) replaces `tom-body-side-pass.png` for `w_left_pass` in tools/sprite-bake/tom_walk_frames.py. It goes through the same profile placement as the stand (collar bottom at the front's collar height, same head, 85 px forward, neck sloping into the collar), so the pass frame is 1661 frame px (42.0 rows) like the stand. The old pass body file is no longer used.
 
-
 ## 2026-11-05 (221): Tom's new profile head (nape trimmed) and a more forward head in the standing profile (`walk15`)
 - Tom (14:08): the head position is right in the strides; in the standing profile the head should sit more forward; use his new head picture (art/raw/characters/tom-head-side-v3.png, no neck, nape trimmed on a slant).
 - Fact: v3 is the v2 painting pixel for pixel with the back of the neck cut away, so `_side_head()` in tools/sprite-bake/tom_walk_frames.py takes the v3 outline above row 1000 and the v2 neck below it, the neck's back edge continuing the v3 nape line straight down (no seam, checked at 8x). Standing and passing profile frames use `SIDE_FWD_STAND` 85 frame px forward (strides stay at `SIDE_FWD` 40). Collar height, scale and head size from 218 are unchanged; every front and side frame is still 1661 frame px.
@@ -6212,12 +6216,10 @@ Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kep
 - Looked at: `node tools/art-library/validate.js` (389 entries OK), the module check, and the full text of the Mudling, Leviathan and Slushie Slug prompts. No picture has been generated from the new text yet.
 - Lever if the first new sheets still come out smooth (STOP-LOSS applies after two): the NPC lesson (CHANGES 206), paint the enemy inside the area picture first, then cut it out on magenta.
 
-
 ## 2026-11-05 (218): Tom's profile collar at the front's height, head more forward, neck sloping into the collar (`walk14`)
 - Tom (14:00): "the bottom of the collar on the front view should be the same height as the bottom of the collar on the profile view", the profile head shifted more forward, the neck to slope together seamlessly.
 - Fact: the side body was painted at a different scale and the head sat on the old neck stump, so the profile figure was 44.7 rows against the front's 42.0. Now (tools/sprite-bake/tom_walk_frames.py `_side_frame`): each side body is scaled uniformly so collar bottom to feet equals the front's (1228 frame px), the collar bottom sits at the front's collar height (433), the profile head (his picture, hair top to chin 402 as before) sits 40 frame px more forward (`SIDE_FWD`), the neck is sheared so it leans with the head and ends in the collar, the shirt is drawn over the neck and the body's own neck skin above the collar is removed. Result: front, side stand, both strides and the passing pose are all 1661 frame px (42.0 rows), back is 41.9.
 - The picture's flat skin shelf behind the neck is left as drawn.
-
 
 ## 2026-11-05 (217): Flight landing and takeoff screens read as one scene: LA skyline cleaned, foreground strips off (`flight9`)
 - Tom (13:48, two preview screenshots): "there is some strange dissonance between the stacked clips" on the Long Island and Los Angeles takeoff and landing screens.
@@ -6238,7 +6240,6 @@ Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kep
 ## 2026-11-05 (214): NPC chain follows the approved takes (Pip, Moss, Dot)
 - Tom approved scene v3 and cut v2 for Pip, Moss and Dot. The cut entry now chains off scene v3, and the three walk entries chain off cut v2 (they said v1). `APPROVED_TAKE` in `tools/art-library/npc-prompts.js` holds the pick per group (default v1); the walk prompts read it.
 - No prompt text changed. 389 entries, validate.js OK, JS output matches the json for every NPC entry. No game files or `?v=` tags touched.
-
 
 ## 2026-11-05 (213): Juice bar, boards, Tom's house, Tom's suite, Casa, Creole, Pupuseria, Jordan and Sam, Dakota walk maps from Tom's Area Builder exports (`rmmask6`)
 - Tom (13:32) sent exports for juicebar, boards, tomhouse, tomsuite, casa, creole, pupuseria, jordansam and dakota (chapter 20 view, all Los Angeles rooms). Only `data/maps-la.js` changed (plateMask lines).
@@ -6263,7 +6264,6 @@ Tom: "revise all the other bosses accordingly". 19 boss prompts (Old Big One kep
 - Skipped because an object footprint already blocks the tile, so the furniture stays solid: cinema 7, lacab 7, loftlobby 11, lofts 4, tower 8.
 - Three object footprint edits, forced by Tom's marks (rooms_test "every object touchable" failed without them): (1) cinema, The big screen grew from 3 to 4 rows (5,1,6,4) because Tom blocked the row in front of it, (7,4) and (8,4), so nothing could touch it; it is now touched from row 5. (2) tower, Standing desk shrank from 3 to 2 rows (11,1,4,2), opening (11,3) and (12,3) as he marked. (3) tower, Dining table shrank from x9 w4 to x9 w3, opening (12,4) to (12,6), the path to the desk. The tower armchair still covers (13,6), (13,8), (14,8); left as is.
 - Checks: reach_test on all five (0 fails), rooms_test cinema lacab loftlobby lofts tower (FAILS []), overlays looked at (cinema's painting is art/starlite.webp; tools/mask_overlay.py looks for art/<id>.webp, so the cinema overlay needed a temporary link, removed again), smoke. Tom taps Clear all edits on the five maps.
-
 
 ## 2026-11-05 (209): Coffee shop, ramen bar, Nickels and Wardrobe walk maps from Tom's Area Builder exports (`rmmask4`)
 - Tom (13:12) sent exports for coffee, ramen, nickels and wardrobe (chapter 20 view). Applied: coffee blocked (5,11) and (10,11); ramen (2,11) and (11,11) opened (13,8 to 13,10 and 4,6 to 4,10 were already open or blocked by objects); nickels blocked (5,11) and (10,11); wardrobe (5,6) and (1,10) opened.
@@ -6815,7 +6815,6 @@ Tom: lines like "Little silver door" (Ch 9, ch9Luna) showed "no voice yet" and c
 
 - Tom (11-03): "I'd like to do all the walking poses of all characters before doing any other poses."
 - docs/CHARACTER_PIPELINE.md section 3 and 5 now say: every character gets an approved hero pose and walk before anyone gets a battle, ability or other pose sheet. The hero pose stays first because the walk copies it. Same rule written into the Project's claude/next.md.
-
 
 ## 2026-11-03 (121): Grace's new painted walk is in the game (`gwalk1`)
 
@@ -7752,7 +7751,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - engine/splash.js tag is `?v=heads3` (it carries both the `heads2` heights and the `solo1` changes).
 - Tested: `smoke.py`; atlas addresses listed in the page. Stamp `build heads3`.
 
-
 ## 2026-11-01 (day, 43): Stampcard is one screen: grid, detail drawer, pin to compare (`stampgrid1`)
 
 - Tom (08:55) approved the revamp in `claude/stampcard-revamp.md`. The STAMPS tab used to be 14 full rows (about six phone screens). It is now one screen in portrait: a strip, a Core row (Basic, Signature), Path A (gold) and Path B (blue) side by side with six chips each, and a drawer under the grid. No data or save changes.
@@ -8249,7 +8247,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - Walk map: the whole plaza is open now (only the base of each object is blocked, 1 or 2 tiles); the Grand Tower crown tiles and the road beside it are open. Reachability test 0 fails with no NPC-pluggable chokepoints left.
 - Not made walkable (painted as walls, slopes, fences or building faces): the west and east edges beside the south row, the north row facades, the Angels Flight hillside, rooftops. Files: `engine/plate.js?v=behind7`, `data/maps-la.js?v=dtla5`. blvd_test and smoke pass. Not played on phone.
 
-
 ## 2026-10-31 (morning, 2): Bedazzle Blast: a small step forward, not a walk across
 
 - Tom (09:28): same as Open Strings. Grace steps about 64 px left of her own spot, fires the rhinestone gun from there, and steps back; timeline 6.7 s (was 7.35 s). Gems still fly to the row. Tag `?v=gx4` on grace-moves.js. Tests: kit_test grace bedazzle_blast (frames looked at), smoke IDS=grace.
@@ -8376,7 +8373,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - Story actors (scripted) are untouched. Saves still see fallen monsters (`findMonster`, `allMonsters`). A save reloaded from the title screen rebuilds the world, so every monster is back.
 - The monster update loop now iterates a copy of the list so a monster leaving mid-frame cannot skip another.
 - Test: new `tools/monster_gone_test.py` (real battle win, wait in the area, leave, re-enter, instant-win path), plus both smoke runs, 0 fails. Build stamp `build gone1`. Not played on phone yet; the live site was not checked from here.
-
 
 ## 2026-10-31 (night, 24): victory celebration a little slower
 
@@ -8595,13 +8591,10 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - Tom: replace any other jump animations with the new Burpee Blitz jump. In `data/amy-hires-extra-use.js` the stock frame `jump` is now the painted arms-up pose (`s13_bjump`, was `s12_jump`), and `bjump` is the same frame, so Burpee Blitz, Gold-Star Recess, Pop Quiz, Negative Split and anything else that asks Amy for `jump` get it. The old `s12_jump` art is still baked in `AMY_HIRES_X.bs` but unused. Her `leap` (sprint) pose is a different frame and was left alone.
 - Cache tag `amy-hires-extra-use.js?v=bj2`. Tests: kit_test amy burpee_blitz, kettlebell_swing, goldstar_recess, false_start, negative_split, pop_quiz (frames looked at), smoke IDS=amy clean, in-page check that `BATTLE_SPRITES.amy.jump` is the new frame.
 
-
-
 ## 2026-10-30 (night, 4): build stamp shows the build name
 
 - The title-screen stamp (bottom left, `engine/main.js`) now reads `build walk3` (was a fixed `build ride 6`) so Tom can say which copy his phone runs. Change the word on any push that Tom needs to confirm. `?v=walk3` on main.js.
 - Square walk-behind re-verified with real key presses: Tom walks across row 9 behind the fountain top and is hidden by the bowl and jets; he walks to (26,10), (24,10), (23,10) under the east tree canopy and is hidden. Tom's 10:00 phone screenshot still showed the old build (GitHub Pages serves files with a 10 minute cache and the home-screen app keeps old pages); RELOAD on the title screen clears it.
-
 
 ## 2026-10-30 (night, 4): Burpee Blitz: new painted final jump
 
@@ -9099,7 +9092,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - The circle on the left is the main button: tap to STAMP (shows the SP cost), and once stamped a cyan "+" badge means tap to POLISH. UNDO, REMIX and SWAP are small buttons beside the move name. Remix is not folded into the circle: it is rare (Lv 28+) and spends a ticket, so it keeps a small confirm button.
 - `b8Row` in `engine/progress.js`, `.sc-*` styles in `index.html`; cache tag `progress.js?v=stamps2`. Smoke FAILS: []. Not yet seen on Tom's phone.
 
-
 ## 2026-10-29: Dizzy stars over knocked-out characters line up with the new sprites and get the painted star style
 - Tom: "in chapter 2 when people have stars over their head it's not aligning correctly because we changed the character sprites, and the star style should match the updated style of the game." The stars are the dizzy ring over a character at 0 HP (`koDizzy` in `engine/battle-draw.js`, used in every fight). It found the head as "the top six rows of the sprite", which was right for the old kneeling pose and wrong for the new painted KO poses (lying on the back, head to one side), so the ring floated off to the side or above the feet.
 - Fix: new `KO_HEAD` table in `engine/battle-draw.js` with the measured head position of each painted KO pose (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara), as [column, top row] on the sprite as authored; the family are mirrored in the fight and Nara is not, and the code accounts for that. A pose with no entry still falls back to the old top-rows guess. A NEW KO POSE NEEDS ITS HEAD ADDED TO `KO_HEAD`.
@@ -9407,8 +9399,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - Objects re-laid: Juice bar counter (3,3,5,1), Wheatgrass beds (1,2,2,4), new Herb table (1,6) with one new unvoiced line, Fern (8,2), Supplement shelf (9,3,2,4). Sage moved behind the counter to (5,2), where the painting's keeper stands; her lines are NOT changed (clips still match).
 - Engine: a counter object with `across:true` lets A talk to whoever stands directly behind it (`facingTarget` in `engine/battle-draw.js`), so Sage can be talked to across the counter. Only the juice bar counter uses it.
 - Checks: new `tools/juicebar_test.py` 0 fails (objects touchable, Sage across the counter, all three mat tiles exit, walls hold), smoke, bg_test, jpark_test, taxi_test, shop_test 0 fails. Portrait and landscape shots looked at.
-
-
 
 ## 2026-10-29: Ramen Ramen is painted (Area 39, map id `ramen`)
 - New `art/ramen.webp` (Tom's painting, 768 x 576 = 12 x 9 tiles at 64 px) registered as `PLATES.ramen` (`?v=20261029`, interior actor scale 1.98). Map size unchanged; the old tile-drawn shop is gone.
@@ -9881,7 +9871,6 @@ Tom: every new clip repeated its phrase twice. Cause: the retry check in the Voi
 - Still to come from Tom: voices.json from the baker's Battle tab (57 lines: Deedee's 44 in the new voice, TNB's 8 new moves, 5 contraction fixes). Until then Deedee's battle lines play her previous voice.
 - Tests: tools/smoke.py FAILS: []; harvest page load with all 18 dialogue files, no page errors.
 
-
 ## 2026-10-28: Part 2, Chapter 16 "The Amber Eclipse"
 - Walking into the Square after chapter 15 starts chapter 16: the family photograph. Marlowe at a box camera, Vance's voice, the lens charging, the amber beam at Grace and Rose, Deedee and Boppy stepping in front (arms locked, "Fifty-one years." / "...And counting.") and turning to stone. Vance "helps with Marlowe's notes". Grace takes Rose and runs for Cab 7.
 - Marlowe Transformed (level 23, `marlowe16`): Shake-style boss for Tom, Amy, TNB and Nara. Overexposure on everyone every third turn (telegraphed), Grey Notes and an eclipse shield below half HP (2 Chatter, Splash or Kinetic hits or a Tombo break it, otherwise Total Eclipse). No kind route.
@@ -10108,7 +10097,6 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 
 ## Painted enemies, batch 2: Big Shake, Tar Pit Blob, Gridlock, Canyon Coyote, Ticket Flurry, Smoglet (2026-10-29)
 - Same pipeline as batch 1 (bake_foe.py, data/foes/use.js). Big Shake is a boss (6 frames). New in bake_foe.py: thin gap second-row detection, DROP_GREY for stray specks (Tar Pit Blob). tools/foes_test.py now covers all 12 (0 fails); smoke 0 fails.
-
 
 ## Schoolyard painted plate (2026-10-29)
 - Map `schoolyard` (Long Island Elementary, ch5) is now a painted plate: art/schoolyard.webp (24 x 18 tiles at 64 px, from 07_schoolyard_final.png), PLATES entry, plateMask in data/maps-le.js. The old paths and tiles lists are gone.

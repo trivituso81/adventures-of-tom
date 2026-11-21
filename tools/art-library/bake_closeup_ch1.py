@@ -1,5 +1,5 @@
 """Bakes the approved chapter 1 Library pictures (art/raw/props/ch1-*, art/raw/characters/ch1-boppy-grin-v1.png).
-Writes art/closeup/ch1-phone.webp (the phone on the cab seat), art/closeup/ch1-list.webp (Grace's list), art/props/ch1/pan_full, pan_empty, papers.webp (trimmed, transparent), ch1-coin.webp (512, transparent), ch1-grin.webp (head and shoulders of Boppy, transparent),
+Writes art/closeup/ch1-phone.webp (the phone on the cab seat), art/closeup/ch1-list.webp (Grace's list), art/props/ch1/pan_full, pan_empty.webp (trimmed, transparent), ch1-coin.webp (512, transparent), ch1-grin.webp (head and shoulders of Boppy, transparent),
 and art/props/hollow/ch1_block.webp, ch1_bulb.webp, ch1_spot.webp, ch1_spot_nobulb.webp (trimmed, transparent). Magenta-ish background is keyed from the edge."""
 import os, numpy as np, cv2
 from PIL import Image
@@ -44,9 +44,9 @@ sc=512/max(bb[2]-bb[0],bb[3]-bb[1])
 for n,im in (('ch1_spot',sp),('ch1_spot_nobulb',nb)):
     c=im.crop(bb); c.resize((round(c.width*sc),round(c.height*sc)),Image.LANCZOS).save('art/props/hollow/%s.webp'%n,quality=92,method=6)
 print('spot picture %dx%d, block centre %.4f,%.4f of the picture, block width %.4f'%(round((bb[2]-bb[0])*sc),round((bb[3]-bb[1])*sc),((xs.min()+xs.max())/2-bb[0])/(bb[2]-bb[0]),((ys.min()+ys.max())/2-bb[1])/(bb[3]-bb[1]),(xs.max()-xs.min())/(bb[2]-bb[0])))
-# cutpolish4b: the muffin pan (full and empty), the muffin papers and the phone on the cab seat
+# cutpolish4b: the muffin pan (full and empty) and the phone on the cab seat (the muffin papers were replaced by the Grump Hollow trail paintings, hollowtrail1)
 os.makedirs('art/props/ch1',exist_ok=True)
-for n,src in (('pan_full','ch1-muffin-pan'),('pan_empty','ch1-muffin-pan-empty'),('papers','ch1-muffin-papers')):
+for n,src in (('pan_full','ch1-muffin-pan'),('pan_empty','ch1-muffin-pan-empty')):
     p=trim(key(RAW+'/props/'+newest(src)+'.png')); sc=512/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/ch1/%s.webp'%n,quality=92,method=6)
 Image.open(RAW+'/props/'+newest('ch1-phone-on-seat')+'.png').convert('RGB').save('art/closeup/ch1-phone.webp',quality=90,method=6)
 # ch1art3: Grace's list on notebook paper, a full square painting like the phone

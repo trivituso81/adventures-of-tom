@@ -312,11 +312,11 @@ SCENES.ch1Mudling=[
   {battle:'mudling',tut:'basics',count:3},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
     {call:()=>{ sfx.splat(); }},   // the mud melts into the path
-    {prop:'papers',kind:'papers',set:{map:'hollow',x:9,y:16}},   // nine muffin wrappers left in the reeds (r-20261120-140805-mhzt: wrappers, not papers)
+    {flag:'ch1-trail'},   // hollowtrail1: the nine wrappers are painted into the Hollow (stage 1 painting, HOLLOW_TRAIL), leading up into the clearing
     {talk:'Grace',lines:["Nine wrappers. There were twelve. So the one with the pan still has three."]},
     {talk:'Deedee',lines:["Then it has three of my muffins and my pan. Keep walking."]},
     {flag:'ch1-tuts'},
-    {toast:'Goal: head east, around the pond, to Boppy’s fishing spot. The Hollow’s monsters are awake now.',time:5}])
+    {toast:'Goal: follow the muffin wrappers up into the clearing. The Hollow’s monsters are awake now.',time:5}])
 ];
 
 // 5. Boppy's fishing spot: the grey patch and the orange block with the dragonfly. Tom pulls and fails; Deedee lifts the bulb with a tissue.
@@ -787,6 +787,29 @@ const STORY_PROPS={
   // The painted muffin pan held in front of a Mudling (fix-cutpolish4b: the code-drawn heap of four looked terrible).
   muffins(cx,y,a) { PROPART.draw('ch1/pan_full',cx,y+9,{w:18}); }   // fix-reports5 (r-20261120-140511-a306: "apple muffins are covering the mud blob's face"): smaller and lower, held at its belly
 };
+
+// Grump Hollow muffin wrapper trail (hollowtrail1; Tom's reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx).
+// After the Mudling fight the nine wrappers lead the party through the Hollow in four stages, one painting each (data/hollow-trail.js):
+// 1 up into the clearing (to the Skeeter Swarm), 2 the upper left corner (the Pond Grump by the soggy bench, the Bog Toad on the path above it),
+// 3 the Log Lump in the middle of the clearing, 4 east to Boppy's fishing spot (the boss trigger). A stage ends when all its monsters have been
+// beaten once in chapter 1 (a real win or a POP); the boss scene (ch1-spot) shows stage 4 whatever is left. After chapter 1: the base painting.
+const HOLLOW_TRAIL_STAGES=[['skeeter'],['grump','toad'],['log']];
+const HOLLOW_TRAIL_GOALS=['Goal: the wrappers go on, up to the top left corner by the old bench.','Goal: the wrappers turn back, to the log in the middle of the clearing.','Goal: the wrappers lead east, around the pond, to Boppy’s fishing spot.'];
+function hollowTrailStage() {
+  if(typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||!flag('ch1-trail')) return 0;
+  if(flag('ch1-spot')) return 4;
+  for(let i=0;i<HOLLOW_TRAIL_STAGES.length;i++) if(!HOLLOW_TRAIL_STAGES[i].every(m=>flag('ch1-beat:'+m))) return i+1;
+  return 4;
+}
+PLATE_VARIANT.hollow=()=>{ const n=hollowTrailStage(); return n&&typeof HOLLOW_TRAIL!=='undefined'&&HOLLOW_TRAIL[n]||null; };
+// Called by monsterFall (engine/world.js) when a map monster is beaten (a won fight or a POP).
+function storyMonsterFell(n) {
+  if(!n||!n.monster||typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||currentMap.id!=='hollow'||!flag('ch1-trail')) return;
+  const was=hollowTrailStage();
+  setFlag('ch1-beat:'+n.monster,true);
+  const now=hollowTrailStage();
+  if(now>was&&HOLLOW_TRAIL_GOALS[now-2]) storySetGoal(HOLLOW_TRAIL_GOALS[now-2]);   // the quest label pulses with the next leg
+}
 
 // Story effects drawn on the map (engine/story.js, in map coordinates): chapter 2's purple smog, the trance swirls
 // over the neighbors, and the Observatory pipes in Griffith Park.

@@ -350,6 +350,10 @@ function b7Overlevel(n) {
 const b7Dist=(a,x,y)=>Math.abs(a.x-x)+Math.abs(a.y-y);
 // Monsters never step onto a doorway or a map exit.
 const b7Exit=(x,y)=>!!(currentMap.portals&&currentMap.portals.has(key(x,y)));
+// A map's monsterFence [x0,y0,x1,y1] is a box ordinary monsters never step into, wandering or chasing (hollowtrail1: Grump Hollow keeps them
+// out of the boss trigger at Boppy's fishing spot, Tom report r-20261120-141209-58bx).
+const b7Fenced=(x,y)=>{ const f=currentMap.monsterFence; return !!f&&x>=f[0]&&y>=f[1]&&x<=f[2]&&y<=f[3]; };
+const b7NoStep=(x,y)=>b7Exit(x,y)||b7Fenced(x,y);
 function b7MonsterTick(n,dt) {
   const now=performance.now();
   if(!n.home) n.home={x:n.x,y:n.y};
@@ -366,7 +370,7 @@ function b7MonsterTick(n,dt) {
     if(!n.chasing) { n.chasing=true; n.alert=.9; n.facing=directionTo(px-n.x,py-n.y); if(sfx.look) sfx.look(); n.mt=.5; return; }
     n.duration=B7_MON.chaseStep;
     const steps=Object.keys(DIR).map(d=>({d,x:n.x+DIR[d].x,y:n.y+DIR[d].y}))
-      .filter(c=>Math.abs(c.x-n.home.x)+Math.abs(c.y-n.home.y)<=B7_MON.leash&&!b7Exit(c.x,c.y))
+      .filter(c=>Math.abs(c.x-n.home.x)+Math.abs(c.y-n.home.y)<=B7_MON.leash&&!b7NoStep(c.x,c.y))
       .sort((a,b)=>b7Dist(a,px,py)-b7Dist(b,px,py));
     for(const c of steps) { if(b7Dist(c,px,py)>=dist) break; if(startMove(n,c.d)) break; }
     n.mt=.05; return;
@@ -375,12 +379,12 @@ function b7MonsterTick(n,dt) {
   n.duration=B7_MON.wanderStep;
   const away=b7Dist(n,n.home.x,n.home.y);
   if(away>B7_MON.radius) {
-    const steps=Object.keys(DIR).map(d=>({d,x:n.x+DIR[d].x,y:n.y+DIR[d].y})).sort((a,b)=>b7Dist(a,n.home.x,n.home.y)-b7Dist(b,n.home.x,n.home.y));
+    const steps=Object.keys(DIR).map(d=>({d,x:n.x+DIR[d].x,y:n.y+DIR[d].y})).filter(c=>!b7Fenced(c.x,c.y)).sort((a,b)=>b7Dist(a,n.home.x,n.home.y)-b7Dist(b,n.home.x,n.home.y));
     for(const c of steps) if(startMove(n,c.d)) break;
     n.mt=.2; return;
   }
   if(!resting&&Math.random()<.55) {
-    const opts=Object.keys(DIR).filter(d=>b7Dist({x:n.x+DIR[d].x,y:n.y+DIR[d].y},n.home.x,n.home.y)<=B7_MON.radius&&!b7Exit(n.x+DIR[d].x,n.y+DIR[d].y));
+    const opts=Object.keys(DIR).filter(d=>b7Dist({x:n.x+DIR[d].x,y:n.y+DIR[d].y},n.home.x,n.home.y)<=B7_MON.radius&&!b7NoStep(n.x+DIR[d].x,n.y+DIR[d].y));
     if(opts.length) startMove(n,pick(opts));
   }
   n.mt=resting?2:1+Math.random()*1.6;
