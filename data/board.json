@@ -24123,7 +24123,7 @@
    "id": "c-anim-tom-loungepass-fix1",
    "tag": "anim-tom-loungepass-fix1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "fix": true,
    "title": "Fix: Tom, Lounge Pass Flex (quick take-out, long swat)",
@@ -24155,6 +24155,10 @@
      "d": "2026-11-21",
      "t": "Tom (in chat, 10:33), on the anim-tom-loungepass-lf2z clip: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\"",
      "at": "2026-11-21T18:33:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24165,6 +24169,10 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one prompt edited from a version that nearly worked)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-fix1 in data/board.json with its history and reports. Your first push is the commit board: start c-anim-tom-loungepass-fix1.\n\nTom's note on the clip made in anim-tom-loungepass-lf2z: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\". Start from tools/art-library/prompts/wan-tom-loungepass-v2.txt (job tom-loungepass in tools/art-library/wangen-jobs.json) and change only what the note names. Make it on Wan 3.0 through the wan-gen Action, check every picture against plan section 4.4, run the clip gate, bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Spend at most $2.50. Build tag anim-tom-loungepass-fix1. Set after to t-anim-tom-loungepass-lf2z-watch and rewrite its next to what to look at again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+    "opening": "unknown"
    }
   },
   {
@@ -24231,7 +24239,7 @@
    "id": "c-anim-tom-dodge-ner3",
    "tag": "anim-tom-dodge-ner3",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Tom, Dodge",
    "next": "Not made: Wan 3.0 already missed the dodge twice the same way (Grace, wanch1: she turns to the viewer and hops sideways, feet off the ground), and Tom's dodge prompt is the same prompt. A third Wan try would repeat it. Next try is a different video model (Kling 4 on fal), which is card c-wanch2. When c-wanch2 makes the family dodges, this card closes with it.",
@@ -24291,6 +24299,10 @@
      "d": "2026-11-21",
      "t": "Tom (in chat, 10:33): \"But Roses dodge came out good. Maybe it should be ducking motion instead.\" Making it on Wan as a duck in the pattern of Rose's passed dodge.",
      "at": "2026-11-21T18:33:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24301,8 +24313,7 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-dodge-ner3 in data/board.json with its history. Your first push is the commit board: start c-anim-tom-dodge-ner3.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Needs to be generated\n\nThe animation: Tom, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-dodge-ner3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-anim-grace-dodge-p7wh",
@@ -25451,7 +25462,7 @@
    "id": "c-idea-tomgrace",
    "tag": "idea-tomgrace",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "No painted frames in battle for Tom, Grace, Rose, Deedee",
    "next": "Shipped as build idea-tomgrace: in the new battle these four never show an old painted frame. A move or state with no video of its own shows one of their videos (give video for moves, idle video for the dodge, the hit video while a knock-out video loads). Real videos for those moments come from c-wanch2 and the dodge cards. Battle 2 (chapters 5 to 10) is not covered until those chapters move to the new battle.",
@@ -25500,6 +25511,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped idea-tomgrace: B3_VIDEO_ONLY (tom, grace, rose, deedee). Painted frames that were still drawn: dodge, low HP, a hit or knock-out before its video loaded, every move with no video, the standing picture while the idle loads. Each now shows one of their videos, or nothing until loaded. New test tools/video_only_test.py: 0 painted frames in every moment and in a whole fight of the four, portrait and landscape. Handed to Tom on t-wanch1-watch."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as idea-tomgrace: Tom, Grace, Rose and Deedee never show an old painted frame in the new battle; a moment with no video of its own shows one of their videos"
     }
    ],
    "prompt": {
@@ -25511,7 +25526,8 @@
     "effort": "medium (a small piece, starting from what is there)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-tomgrace in data/board.json, history included. Your first push is the commit board: start c-idea-tomgrace.\n\nTom made this card himself with New card on the board. His words: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\"\n\nThe board sized this from his words alone: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nTom judges this by taste. Read docs/CANON.md first, and docs/tom-edits.tsv for any dialogue. Pictures and videos are made only in the Art Library, and their prompts follow the prompt rules in CLAUDE.md. Start from what is there and change only what he names. Test it, look at it in portrait and landscape, and push build idea-tomgrace with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanch1-watch"
+   "after": "t-wanch1-watch",
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-grace-give-q4es",
@@ -26198,6 +26214,33 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T10:35:50-08:00",
+   "tags": [
+    "anim-tom-loungepass-lf2z"
+   ],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3",
+    "c-wanch2",
+    "c-anim-tom-loungepass-fix1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
+   "title": "No painted frames in battle for Tom, Grace, Rose, Deedee",
+   "first": "2026-11-21T09:34:32-08:00",
+   "last": "2026-11-21T10:35:21-08:00",
+   "tags": [
+    "idea-tomgrace"
+   ],
+   "cards": [
+    "c-idea-tomgrace"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
    "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
    "first": "2026-11-21T10:11:10-08:00",
@@ -26236,20 +26279,6 @@
    "tags": [],
    "cards": [
     "c-idea-savedportraits"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
-   "title": "Animation note: Tom, Lounge Pass Flex",
-   "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T10:19:25-08:00",
-   "tags": [
-    "anim-tom-loungepass-lf2z"
-   ],
-   "cards": [
-    "c-anim-tom-loungepass-lf2z",
-    "c-anim-tom-dodge-ner3",
-    "c-wanch2"
    ]
   },
   {
@@ -26295,16 +26324,6 @@
     "c-anim-grace-squeeze-qxim",
     "c-anim-grace-cubepop-tvik",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
-   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
-   "first": "2026-11-21T09:34:32-08:00",
-   "last": "2026-11-21T10:11:23-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-tomgrace"
    ]
   },
   {
@@ -29696,8 +29715,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "719e82c2cf992c6db88debcb48506c5f6e390456",
- "synced_at": "2026-11-21T18:32:35+00:00",
+ "synced": "93d959dbb5f4c61b2cc7451b36b177998740d0e0",
+ "synced_at": "2026-11-21T18:36:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
