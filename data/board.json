@@ -24675,6 +24675,55 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-give-yy1o in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-give-yy1o.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Deedee, Giving (support moves) (body state give). Its video is clip deedee_give (data/clips/deedee-give.js, art/clips/deedee-give.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-give-yy1o. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Giving (support moves), then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-anim-deedee-windex-z9p8",
+   "tag": "anim-deedee-windex-z9p8",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Animation note: Deedee, Windex Spritz",
+   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Remake with wan",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "anim": {
+    "id": "move:windex_spritz",
+    "owner": "deedee",
+    "ownerName": "Deedee",
+    "name": "Windex Spritz",
+    "kind": "move",
+    "clip": "deedee_windex",
+    "painted": false,
+    "what": "move windex_spritz in data/b3-kit-deedee.js"
+   },
+   "notes": [
+    {
+     "at": "2026-11-21T17:10:41.217Z",
+     "words": "Remake with wan",
+     "build": "b3s17a"
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "A note sent from the Battle Guide"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide: Remake with wan",
+     "at": "2026-11-21T17:10:41.217Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes the animation Deedee, Windex Spritz again from your note, checks it, and hands it back to you to watch.",
+    "before": [
+     "Nothing to do first. Your note is on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one animation, starting from the version that exists)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-windex-z9p8 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-windex-z9p8.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Deedee, Windex Spritz (move windex_spritz in data/b3-kit-deedee.js). Its video is clip deedee_windex (data/clips/deedee-windex.js, art/clips/deedee-windex.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-windex-z9p8. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Windex Spritz, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
