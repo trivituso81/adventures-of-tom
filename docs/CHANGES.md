@@ -1,3 +1,10 @@
+## boppy-bigfisha (2026-11-20): Boppy's unimpressed pose prompt now uses his Paso Robles reference, back under To do in the Art Library
+
+- Card c-boppy-bigfish. Checked on main (fact): art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp still show the retired Big Fish cap. They come from Art Library entry boppy-em-unimpressed (v1), whose attachment 1 was boppy-hero-ref-v1, the old hero painting in the Big Fish cap; attachment 2 (boppy-emotions-v6) already wears Paso Robles.
+- Changed one thing: attachment 1 is now art/raw/characters/boppy-hero-v2.png (Paso Robles cap, same mustache, vest, rod and basket as his mood sheet). Prompt text kept word for word. promptRev 1, status back to draft, so the entry is under To do.
+- Tom card t-boppy-bigfish-pic: generate and approve. Then c-boppy-bigfish rebakes his mood frames and faces (ships as boppy-bigfish). No game picture changed in this build.
+- Found, not fixed: `node tools/art-library/make-prompts.js` fails on main (npc-prompts.js line 15, a colour lookup gets undefined), so data/art-prompts.json was patched for this one entry only.
+
 ## projclean1e (2026-11-21): Project docs move: progress and next steps written on card c-projclean (second run paused, 444 docs moved)
 
 - Card c-projclean: 444 Project docs are now in claude/ and gone from the Project (692,867 of 2,000,000 left in use). The card lists the 12 docs still to copy, the compare group, the docs held back on purpose, and steps 6 to 9. Docs only: no game file changed.

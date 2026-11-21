@@ -21231,18 +21231,18 @@
    "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Ready to start. Rewrite one Art Library prompt so the cap reads Paso Robles, then hand it to Tom to generate.",
+   "next": "Waiting on Tom card t-boppy-bigfish-pic: generate and approve the new unimpressed pose. Then a session rebakes his mood frames and faces and ships boppy-bigfish.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-20",
    "prompt": {
-    "what": "Replaces the retired Big Fish cap on Boppy's unimpressed mood pose with his Paso Robles cap.",
+    "what": "Installs Tom's approved Paso Robles unimpressed pose into Boppy's story scenes and his unimpressed dialogue face.",
     "before": [
-     "Nothing to do first."
+     "Generate and approve the picture on card t-boppy-bigfish-pic (ADMIN > BOARD)."
     ],
-    "model": "Claude Opus 5.5 (row D: a picture prompt Tom judges by eye)",
-    "effort": "medium (one Art Library entry, written from a prompt that worked)",
-    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included. Your first push is the commit board: start c-boppy-bigfish.\n\nBoppy's unimpressed mood pose still wears the old Big Fish cap; the rest of his art wears the Paso Robles cap (Big Fish was retired, docs/CHANGES.md: \"the Big Fish cap is gone from the game\"). It shows in story scenes (art/chars/boppyemo-story.webp frame em_unimpressed) and his unimpressed dialogue face (portraits/emo/boppy-unimpressed.webp). Source: Art Library entry boppy-em-unimpressed-v1 (art/raw/characters/boppy-em-unimpressed-v1.png), merged into his mood sheet.\n\nFIRST confirm it still shows on current main. If so, its prompt is tools/art-library/ch2fix-prompts.js, id boppy-em-unimpressed (references boppy-hero-ref-v1.png and boppy-emotions-v6.png; first look at which cap each reference wears, since the cap usually comes from the references). Make the smallest change that gives the Paso Robles cap (a reference that wears it, or one added sentence), raise its promptRev and put it back under To do. Images only in the Art Library: Tom presses Generate. Hand it to Tom with a pictures card linked to the entry. Once he approves, rebake his mood frames and faces (emotion_frames.py, bake_emotion_faces.py, bake_story_poses.py), measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py), bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## boppy-bigfish, push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Sonnet 5.5 (row B: written bake steps, tests and frames catch mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included, and Tom card t-boppy-bigfish-pic (his note and answer). Your first push is the commit board: start c-boppy-bigfish.\n\nTom approved a new Art Library picture for entry boppy-em-unimpressed (Boppy's unimpressed mood pose, now in the Paso Robles cap instead of the retired Big Fish cap). Install it. First confirm the newest approved file art/raw/characters/boppy-em-unimpressed-vN.png (the highest N) reads Paso Robles and has his mustache (look at it). tools/sprite-bake/emotion_frames.py already takes the newest -v file for Boppy's cell 7 (REPLACE). Rebake: python3 tools/sprite-bake/emotion_frames.py boppy, python3 tools/sprite-bake/bake_emotion_faces.py boppy, python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run it in the background), then the head chin check (CHECK=/tmp/chin.png python3 tools/sprite-bake/emotion_chin.py boppy, look at it). Measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py) so the cap writing is not mirrored when he faces left. Look at art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp: both must read Paso Robles. Grep for any leftover Big Fish art reference and purge it. Run python3 tools/smoke.py and look at the shots. Add a docs/CHANGES.md entry headed ## boppy-bigfish, bump the tags with python3 tools/art-library/bump_tags.py boppy-bigfish --base origin/main, set after on the card to \"nothing for Tom: end\", push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -21257,12 +21257,17 @@
     {
      "d": "2026-11-20",
      "t": "Session started: checking the em_unimpressed frame on current main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Confirmed on main: the em_unimpressed frame and the unimpressed face both read Big Fish. Cause: the entry's attachment 1 was boppy-hero-ref-v1 (Big Fish cap); attachment 2 (boppy-emotions-v6) already wears Paso Robles. Smallest change: attachment 1 is now boppy-hero-v2 (Paso Robles, same mustache, vest, rod and basket), prompt text unchanged, promptRev 1, entry back under To do. Handed to Tom on t-boppy-bigfish-pic. Note: tools/art-library/make-prompts.js fails on main (npc-prompts.js line 15), so data/art-prompts.json was patched for this one entry."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHDMDjx8dfDTwZjaC6",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
-   }
+   },
+   "after": "t-boppy-bigfish-pic"
   },
   {
    "id": "c-qa-coh01",
@@ -22745,6 +22750,40 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-3 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-3.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it. He wrote: Based on the feedback adjust the prompts for the failed images and regenerate\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T07:29:04.044Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-3 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-itembannerart-pics"
+  },
+  {
+   "id": "t-boppy-bigfish-pic",
+   "title": "Approve Boppy's unimpressed pose in his Paso Robles cap",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). When the job finishes, open ADMIN > ART LIBRARY > Characters > Report fixes > Boppy unimpressed WITH his mustache (the button below). It should show Boppy alone on magenta, leaning on one hip with one hand on the hip, eyelids half closed, mouth turned down, fishing rod over his shoulder, thick white mustache, and his cap reading Paso Robles (not Big Fish). APPROVE it if so; REJECT with a note saying what is wrong. Approving unblocks Claude card c-boppy-bigfish, which puts the new pose into his story scenes and his unimpressed dialogue face.",
+   "blocks": [
+    "c-boppy-bigfish"
+   ],
+   "done_when": {
+    "art_approved": [
+     "boppy-em-unimpressed"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "boppy-em-unimpressed"
+     ],
+     "label": "Boppy unimpressed pose"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by boppy-bigfisha (card c-boppy-bigfish): the entry's first reference was the old hero painting in the Big Fish cap; it now uses boppy-hero-v2, which wears Paso Robles."
+    }
+   ]
   }
  ],
  "sessions": [

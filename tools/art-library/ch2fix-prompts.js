@@ -70,7 +70,9 @@ The grey grass patch of attachment 2, seen from the same high, angled view as at
 ${ART}` },
 
   // r-20261114-100734-1a2w: Boppy's unimpressed mood frame lost his mustache; this one frame replaces cell 8 of his mood strip.
-  { id: 'boppy-em-unimpressed', tab: 'Characters', group: 'Report fixes', ar: '2:3', refs: ['art/raw/characters/boppy-hero-ref-v1.png', 'art/raw/characters/boppy-emotions-v6.png'],
+  // boppy-bigfish (2026-11-20): attachment 1 was boppy-hero-ref-v1, which wears the retired Big Fish cap, so v1 came back with Big Fish. It is now boppy-hero-v2
+  // (Paso Robles cap, same mustache, vest, rod and basket as the mood sheet). Prompt text unchanged; promptRev 1 puts the entry back under To do.
+  { id: 'boppy-em-unimpressed', promptRev: 1, tab: 'Characters', group: 'Report fixes', ar: '2:3', refs: ['art/raw/characters/boppy-hero-v2.png', 'art/raw/characters/boppy-emotions-v6.png'],
     title: 'Boppy unimpressed WITH his mustache (one full-body pose; replaces the 8th frame of his emotion sheet)',
     prompt: pose('Boppy, a grandfather in his sixties', [HERO('Boppy'), 'The approved emotion sheet of Boppy. Copy the LAST pose (unimpressed: leaning on one hip, one hand on the hip, eyes half closed, mouth turned down, his fishing rod over his shoulder).'],
       'Copy the last pose of attachment 2 exactly: unimpressed, leaning on one hip, one hand on the hip, eyelids half closed, mouth turned down, the fishing rod over his shoulder.',

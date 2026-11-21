@@ -110,7 +110,7 @@ startSplash();
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
 <<<<<<< HEAD
-  d.textContent='build projclean1e';
+  d.textContent='build boppy-bigfisha';
 =======
   d.textContent='build projclean1e';
 >>>>>>> 7cbde07 (projclean1e: write progress and next steps on card c-projclean)
