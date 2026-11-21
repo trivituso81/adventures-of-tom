@@ -20487,7 +20487,7 @@
    "title": "Make voices from the board and save them to the game",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "voiceboard1",
    "auto": true,
    "after": "t-ch2voices",
@@ -20521,6 +20521,10 @@
      "d": "2026-11-21",
      "at": "2026-11-21T04:00:00Z",
      "t": "Built voiceboard1: the Generate all N voices button (board.html), tools/voice-learn/voiceboard.py and the voice-gen Action (a push \"board: vgen <card id>\" makes the takes and merges them into the game on main). Never run paid in a session. First card: t-ch2voices (chapter 2), waiting on t-ch2play."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as voiceboard1: Generate all N voices on the board: one tap makes the voices and puts them in the game"
     }
    ],
    "prompt": {
@@ -20532,7 +20536,8 @@
     "effort": "medium (the pattern to copy is written: artgen1 in board.html and CLAUDE.md)",
     "text": "Read CLAUDE.md (artgen1, keysecrets1, No unused voice, Build label), docs/VOICE_LIBRARY.md (Takes are made on GitHub, Phone clip exports, Rebuild the index), claude/next-addendum-voicegen2.md, tools/voice-learn/GENERATION_JOB_PLAN.md, .github/workflows/voice-gen.yml, tools/voice-learn/voicegen.py, tools/voice-library/merge-local.js, and the artgen1 code in board.html (the gen button and its board: generate commit) and .github/workflows/art-gen.yml. Card c-voiceboard in data/board.json. Build voiceboard1: (1) A Tom card with ask voice can carry `voices` (a list of 'voice|exact text' keys) or `voice_chapter` (a chapter number); the board page shows Generate all N voices (about X credits, from voicegen2's 0.44 credits per character) with a second tap to confirm, the same as Generate all N pictures, and saves `vgen` on the card with a commit whose subject is board: vgen followed by the card id. (2) That commit starts voice-gen for exactly those lines that have no clip (add a `lines` or `chapter` input to voicegen.py and voice-gen.yml; keep dry_run defaulting to true for a manual run, and a cap on characters per run). (3) When voice-gen finishes, a merge step in the same workflow (or a second Action) merges every new export from branch generated into data/voice/dialog-ch*.js with merge-local.js as docs/VOICE_LIBRARY.md says, runs python3 tools/voice-library/rebuild.py and python3 tools/clip-audit/unused_voice.py, writes a docs/CHANGES.md entry with a new build name (voices- plus the card id plus a run number) and runs python3 tools/art-library/bump_tags.py for it, fetches and rebases, and pushes to main; needs-human lines are listed on the card, not merged. It writes `vgen.run` on the card (made, failed, credits) and the card's next becomes: listen in ADMIN > VOICE LIBRARY (links to the lines), All good or Something is wrong. (4) Make the first such card: t-ch2voices, ask voice, voice_chapter 2 (chapter 2's 73 lines, see the ch2lessons entry in docs/CHANGES.md), waiting until t-ch2play is done so no credits go on lines Tom may still cut. Never run the paid job in this session: test with a stand-in ElevenLabs and a dry run (tools/voice-library/voicetake_test.py and the artgen tests are the pattern), add tools/voiceboard_test.py (board page in portrait and landscape, the button, the commit, the merge on a fake export), and run python3 tools/board_test.py /tmp/board, python3 tools/board_check.py, tools/smoke.py. Push to main as voiceboard1; your first push is the commit board: start c-voiceboard. Set after on this card to t-ch2voices. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T03:23:33+00:00"
+   "started_at": "2026-11-21T03:23:33+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "b-board-qa2",
@@ -22005,6 +22010,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDRBkPQu5XdZQN2bXK",
+   "title": "Make voices from the board and save them to the game",
+   "first": "2026-11-21T03:27:05Z",
+   "last": "2026-11-21T03:51:03Z",
+   "tags": [
+    "voiceboard1"
+   ],
+   "cards": [
+    "c-voiceboard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
    "title": "Fix: Play the Grump Hollow wrapper trail",
    "first": "2026-11-21T03:22:40Z",
@@ -22178,16 +22195,6 @@
    "tags": [],
    "cards": [
     "c-qa-bug04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDRBkPQu5XdZQN2bXK",
-   "title": "Make voices from the board and save them to the game",
-   "first": "2026-11-21T03:27:05Z",
-   "last": "2026-11-21T03:27:05Z",
-   "tags": [],
-   "cards": [
-    "c-voiceboard"
    ]
   },
   {
@@ -25100,8 +25107,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0b1e3f59625018c2abe289730d5c51445bb6b55b",
- "synced_at": "2026-11-21T03:48:38+00:00",
+ "synced": "71b84c291ff5509ba3df0b9a59cc7d0601fb9599",
+ "synced_at": "2026-11-21T03:51:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
