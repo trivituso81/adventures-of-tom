@@ -24773,10 +24773,10 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
-   "next": "Two Wan tries missed the same way (her arms leave the frame). Next: one more Wan try with the figure shrunk to 80% inside the video, the change that kept her spread hands in frame on her victory. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "next": "Rescue chose START NEXT: the one remaining step is a paid Wan try (pad 0.8, at most $1) that is judged by looking at it, which is Opus work, not a rescue. Start it from the prompt below on Opus 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24828,6 +24828,11 @@
      "d": "2026-11-21",
      "t": "Rescue session started (board: start).",
      "at": "2026-11-21T18:15:00+00:00"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue outcome START NEXT: nothing half done to finish; the next step is one paid Wan try with the figure at 80% (job deedee-dodge rev 4, pad 0.8) judged by taste, so the card goes to Up next for an Opus 5.5 medium session. Prompt unchanged: it already holds both misses.",
+     "at": "2026-11-21T18:20:00+00:00"
     }
    ],
    "prompt": {
