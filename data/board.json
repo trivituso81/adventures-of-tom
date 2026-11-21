@@ -21817,6 +21817,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session ended without shipping: stage 15 (chapter 1 moves to the new battle) is not built yet (stage 14, c-b3s14, is still Up next), so there is no new battle screen to check. Stays in Up next; start it after stage 15 ships."
     }
    ],
    "chat": {
