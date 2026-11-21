@@ -13432,7 +13432,8 @@
     "url": "https://claude.ai/code/session_01RXeukFom7Aamq1fxhQ57th",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
-   "started_at": "2026-11-21T02:58:24+00:00"
+   "started_at": "2026-11-21T02:58:24+00:00",
+   "quiet": true
   },
   {
    "id": "b-board-projclean",
@@ -20146,7 +20147,7 @@
    "id": "c-reports-7",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-192030-2df3. First note: after Rose says one more ride Tata, she should jump on his shoulders and remain there until he depar",
@@ -20208,6 +20209,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
@@ -20221,7 +20226,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukDShHS5hzBFR7kD3R4",
     "prev": "https://claude.ai/code/cse_01RXeukGZNTTnrivTmMf1GZU"
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-ch1clips8",
@@ -20847,7 +20853,7 @@
    "id": "c-qa-bug03",
    "tag": "qa-bug03",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
    "next": "Ready to start. Screen report only, not reproduced yet.",
@@ -20885,13 +20891,17 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T05:26:55.632Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukG2EwxznnZ2UoseGRC",
     "opening": "started by START"
    },
-   "start": true
+   "started_at": "2026-11-21T05:27:44+00:00"
   },
   {
    "id": "c-qa-bug04",
@@ -25516,8 +25526,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0ccf17c44c67d03aaf96b6b080294eb4e94d367a",
- "synced_at": "2026-11-21T04:57:27+00:00",
+ "synced": "39602721a3f19f3875bd67d9a00d929b522bd7f3",
+ "synced_at": "2026-11-21T05:27:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
