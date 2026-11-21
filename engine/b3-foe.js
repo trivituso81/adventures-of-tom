@@ -183,6 +183,7 @@ function b3ActUsed(F,e,A) {
 // One enemy turn. Returns its beats; the state is final when it returns.
 function b3FoeTurn(F,e) {
   const beats=[];
+  if(b3ScriptTurn(F,e,beats)) return beats;   // a story fight's scripted end (engine/b3-script.js)
   // A monster that dived (`surfaces`) and lost its wound-up Deep Dive to an interrupt or a Break comes back up as its turn begins.
   if(e.D.surfaces&&e.row==='back'&&!e.charge) { e.row='front'; b3Reslot(F); beats.push({t:'row',tgt:e.key,row:'front',g:'pre'}); }
   const P=b3FoePick(F,e);

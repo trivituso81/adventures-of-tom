@@ -42,7 +42,7 @@ function b3Start(cfg) {
     const src=loadouts||{}; loadouts={};
     for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=(cfg.keepLoadout||[]).includes(id)&&src[id]?src[id]:b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));   // keepLoadout: the Battle Guide's "See it in a fight" needs this member's Vibe as set
   }
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,rows:cfg.rows,
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,rows:cfg.rows,setup:cfg.setup,
     loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
   b3FirstSet();
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
@@ -151,6 +151,7 @@ function b3Finish() {
   // A win may pay something (Vibe Points in the Battle Lab): the line it returns is said on the win screen.
   if(win) { if(B3.cfg.award&&!B3.awarded) { B3.awarded=true; B3.won=B3.cfg.award(B3.F)||''; }
     B3P.cheer=true; B3P.cheerAt=null; for(const m of B3.F.party) b3cWant(b3cOf(m.id,'victory'),9000); b3Sfx('win'); b3Word('YOU WIN!','#ffe27a'); b3Say('The family wins! '+(B3.won?B3.won+' ':'')+'Tap CONTINUE.'); }
+  else if(B3.F.over!=='lose') { b3Sfx('thud'); b3Word(B3.F.endWord||'THE END','#aee6ff'); b3Say((B3.F.endLine||'The fight ends here.')+' Tap CONTINUE.'); }   // a scripted end (engine/b3-script.js): flee, shell
   else { b3Sfx('lose'); b3Word('KNOCKED OUT','#ff9a8a'); b3Say('Everyone is knocked out. Tap CONTINUE.'); }
   B3.ui='done'; battle.state='command'; b3Render();
 }
@@ -249,7 +250,7 @@ function b3CostPill(c,free) { return '<span class="b3-cost'+(c?'':' free')+'"><b
 function b3FlavorChips(S) { return S.flavor.map(f=>'<span class="b2-el" style="color:'+B3_FLAVORS[f].color+'">'+B3_FLAVORS[f].name.toUpperCase()+'</span>').join(''); }
 function b3RenderCmd() {
   const box=$('b3-cmd'),u=B3.actor; if(!box) return;
-  if(B3.ui==='done') { box.innerHTML='<div class="b2-list"><button type="button" class="b2-btn sel b3-go" data-done="1"><span>CONTINUE</span><em>'+(B3.F.over==='win'?b2Esc(B3.won||'You won this fight.'):'You lost this fight.')+'</em></button></div>'; return; }
+  if(B3.ui==='done') { box.innerHTML='<div class="b2-list"><button type="button" class="b2-btn sel b3-go" data-done="1"><span>CONTINUE</span><em>'+(B3.F.over==='win'?b2Esc(B3.won||'You won this fight.'):B3.F.over==='lose'?'You lost this fight.':b2Esc(B3.F.endLine||'The fight is over.'))+'</em></button></div>'; return; }
   const cmdOn=battle.state==='command'&&u;
   if(!cmdOn||B3.ui==='cross'||B3.ui==='busy') {
     const rk=Math.round(B3.view.ruckus||0),pu=u||B3.F.party.find(p=>p.key===B3.turnOf)||B3.F.party[0],off=cmdOn?'':' off',img=b2Portrait(pu.id),nS=b3SkillRows(pu).length;

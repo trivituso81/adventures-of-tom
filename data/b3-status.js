@@ -399,7 +399,16 @@ const B3_STATUS={
   scoop_pass:{id:'scoop_pass',name:'Scoop Pass',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'scoopPass',v:.15}],flags:[],
     short:'DEF UP',color:'#ffd6e8',weight:4,desc:'A fresh scoop passed along: 15% more Defense.'},
   frosted_lid:{id:'frosted_lid',name:'Frosted Lid',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25},{stat:'def',kind:'frostedLid',v:.15}],flags:[],
-    short:'GUARD',color:'#cfeaff',weight:6,desc:'The tub lid frosts over: takes 25% less damage and has 15% more Defense. Panic Boil! or a Break ends it.'}
+    short:'GUARD',color:'#cfeaff',weight:6,desc:'The tub lid frosts over: takes 25% less damage and has 15% more Defense. Panic Boil! or a Break ends it.'},
+  // Stage 18 bonus (b3s18bonusa): the two statuses the Nine Scoops story fights need. The rules that hand them out are in engine/b3-script.js.
+  // Frozen: Brain Freeze's cold. The holder loses every turn until it runs out (the `frozen` flag, engine/b3-resolve.js b3BeginTurn); it is not spent by one skipped turn like a Stun.
+  frozen:{id:'frozen',name:'Frozen',kind:'debuff',group:null,dur:{n:9,unit:'turn'},mods:[],flags:['frozen'],
+    short:'FROZEN',color:'#aee6ff',weight:9,desc:'Frozen solid, mid boo. Loses every turn until it thaws.'},
+  // Birthday Girl: Grace's Birthday Sash (the item `g_bsash`). The story layer puts it on her as a fight begins, for her first 2 turns.
+  // Battle 2's version: Power, Warmth, Grit and Cool up, Pep up, crits up. Here: 75% more Attack, 50% more Defense, 25% more crit chance, every Skill costs 1 less Pep (never below 1).
+  birthday_girl:{id:'birthday_girl',name:'Birthday Girl',kind:'buff',group:null,dur:{n:2,unit:'turn'},
+    mods:[{stat:'atk',kind:'sash',v:.75},{stat:'def',kind:'sash',v:.50},{stat:'crit',kind:'sash',v:.25},{stat:'cost',kind:'sash',v:-1}],flags:[],
+    short:'BDAY',color:'#ffd24a',weight:5,desc:'Gold and sparkly. For her first 2 turns Grace has 75% more Attack, 50% more Defense, 25% more crit chance, and every Skill costs 1 less Pep.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

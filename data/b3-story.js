@@ -211,3 +211,34 @@ const B3_STORY={
     ]
   }
 };
+
+// ---- Stage 18 bonus (b3s18bonusa): the bonus chapter, Nine Scoops (chapter 21, data/bonus-nine-scoops.js) ----
+// `setup` is what a scripted story fight carries on top of its formation, keyed by the scene step's `tut`. The rules read foeHp, start,
+// midpoint and adds (engine/b3-script.js explains each); the story layer (engine/b3-story.js) reads `vp`, the Main Vibe's pay for a win,
+// and puts Grace's Birthday Sash on her at the start of every fight she wears it in (`start` is filled in there from her equipment).
+// Vibe Points for the chapter (bestiary section 5: a chapter pays 90, so a script with fewer normal fights scales their number): the four
+// normal fights pay 15 each and Brain Freeze's win pays 30 (4 x 15 + 30 = 90). The first two runs at Brain Freeze end in `flee` and `shell`,
+// not wins, so they pay nothing.
+B3_STORY.setup={
+  nsGremlin:{vp:15}, nsSlug:{vp:15}, nsCone:{vp:15}, nsGarden:{vp:15},
+  // Run 1 at the pond: at half HP the lid slams, Rose freezes mid boo, a Deep Freeze hits everyone, and the family runs (result 'flee').
+  nsBoss1:{midpoint:{foe:'brainfreeze',at:.5,hold:.45,result:'flee',word:'RUN!',line:'Brain Freeze wins this one. The family runs for it.',steps:[
+    {say:'Brain Freeze slams its lid shut. ICE SHELL! Nothing gets through. Not even a Double Team.',word:'ICE SHELL',color:'#aee6ff',sfx:'thud'},
+    {say:'BRAIN FREEZE! Rose freezes solid. Mid boo.',word:'FROZEN',color:'#aee6ff',sfx:'stun',status:{id:'frozen',to:'rose',n:9}},
+    {say:'DEEP FREEZE! The cold hits everyone at once.',sfx:'thud',hurt:{to:'party',pct:.35,leave:1,flavor:'drench'}},
+    {say:'Nothing works. Not Double Teams. Not hugs. Not raspberries.'},
+    {say:'Tom: Grace. Grab Rose. We’re LEAVING.',sfx:'run'}]}},
+  // Run 2: the lid slams at half HP again, but Rose is spicy now and stays thawed; the fight ends (result 'shell') and the pond scene takes over.
+  nsBoss1b:{midpoint:{foe:'brainfreeze',at:.5,hold:.45,result:'shell',word:'ICE SHELL',line:'The ICE SHELL holds. Time for a different idea.',steps:[
+    {say:'Brain Freeze slams its lid shut. ICE SHELL! Nothing gets through.',word:'ICE SHELL',color:'#aee6ff',sfx:'thud'},
+    {say:'BRAIN FREEZE! It aims the cold at Rose...',sfx:'stun'},
+    {say:'Rose: Not this time! I ate a pepper. Half a pepper. The hose flinched.',sfx:'raspberry'},
+    {say:'The ICE SHELL holds. Nothing gets through. Not Double Teams. Not peppers. Not yet.'}]}},
+  // Phase 2: Brain Freeze starts at half HP (Frosted Lid and Deep Freeze are open to him at once), and every third round from the third
+  // two Sprinkle Gremlins at most skitter out of the freezer. This is the fight that is won.
+  nsBoss2:{vp:30,foeHp:{brainfreeze:.5},adds:{foe:'brainfreeze',id:'gremlin',row:'front',first:3,every:3,maxLive:2}}
+};
+// A chapter that does not follow the story's order. The Character Level floor and the Vibe Point pool (`finished` chapters' worth, 135 each) a
+// save in it gets. `levelFloor` stops at chapter 10 and `finished` would count 20 chapters, so chapter 21 would start at level 25 with every Vibe
+// at mastery; the bonus chapter starts everyone at level 5 (b6Prep(5)) and a little over Rank 2.
+B3_STORY.bonus={21:{level:5,finished:1}};

@@ -154,7 +154,8 @@ function b3Show(b) {
     b3Pop(b.tgt,'BACK UP!','#9be39a'); b3Sfx('heal'); b3Say(b3Name(b.tgt)+' is back in the fight with '+b.hp+' HP.');
   }
   else if(b.t==='standUp') { vu.ko=false; vu.hp=b.hp; delete B3P.body[b.tgt]; }
-  else if(b.t==='skip') { b3Pop(b.who,'STUNNED','#f2d36b'); b3Say(b3Name(b.who)+' is stunned and loses the turn.'); }
+  else if(b.t==='skip') { const fz=B3.F&&b3HasFlag(b3Unit(B3.F,b.who),'frozen'); b3Pop(b.who,fz?'FROZEN':'STUNNED',fz?'#aee6ff':'#f2d36b'); b3Say(b3Name(b.who)+(fz?' is frozen solid and loses the turn.':' is stunned and loses the turn.')); }
+  else if(b.t==='script') { if(b.word) b3Word(b.word,b.color||'#fff1cb'); if(b.sfx) b3Sfx(b.sfx); b3Say(b.text); }
   else if(b.t==='intercept') { b3Pop(b.src,'STEPS IN','#c9d8f0',{sc:2}); b3Say(b3Name(b.src)+' steps in for '+b3Name(b.tgt)+'.'); }
   else if(b.t==='react') {
     // A reaction begins: its owner strikes a pose and sends the answer across; the hit itself follows in the same group of beats.
@@ -241,7 +242,7 @@ function b3Show(b) {
 function b3Play(beats,done) {
   const i=beats.findIndex(b=>b.t==='act'||b.t==='telegraph'),lead=i<0?beats:beats.slice(0,i),rest=i<0?[]:beats.slice(i);
   let wait=0;
-  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='ruckusSpend') wait+=.9; }
+  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
   if(!rest.length) { b3After(wait+.05,done); return; }
   // A Family Ruckus spend is one action with two moves in it: the second move's `act` beat is marked part2 and plays after the first.
   const segs=[]; let cur=[]; for(const b of rest) { if(b.t==='act'&&b.part2&&cur.length) { segs.push(cur); cur=[]; } cur.push(b); } segs.push(cur);

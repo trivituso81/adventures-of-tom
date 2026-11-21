@@ -7,7 +7,7 @@
 // A fight is one plain object F (b3NewFight). Every rules function takes F, so many fights can run side by side.
 //   F.units   every unit; F.party and F.foes are the two sides. A unit's `key` (p0..p3, f0..f4) names it in beats.
 //   F.clock   ticks since the fight began; F.round is the 100-tick window the clock is in (1 first).
-//   F.over    null, 'win' or 'lose'.
+//   F.over    null, 'win' or 'lose'; a scripted story fight (cfg.setup.midpoint, engine/b3-script.js) can end with its own result such as 'flee' or 'shell'.
 // The rules never show anything. They return BEATS: plain rows saying what happened (hit, prime, detonate, push, pep,
 // status, ko...). engine/b3-play.js plays them; the simulator ignores them.
 
@@ -112,7 +112,8 @@ const b3Other=side=>side==='party'?'foe':'party';
 //      loadouts ({id: loadout}: Main and Pocket Vibe, Quirks, VP and row per member, engine/b3-progress.js; a member left out
 //      gets a fresh loadout with every Vibe at `rank`, 1 when that is left out too),
 //      rows ({id:'front' or 'back'}: overrides where a family member stands; left out = their loadout's row, else by Lean),
-//      hpPct (tests: the party starts at this share of its HP), hpShare ({id: share}: story fights, one share per member), plain (tests: see b3PartyUnit).
+//      hpPct (tests: the party starts at this share of its HP), hpShare ({id: share}: story fights, one share per member), plain (tests: see b3PartyUnit),
+//      setup (a story fight's scripted extras: foe start HP, statuses to begin with, a scripted midpoint, adds on a timer: engine/b3-script.js).
 function b3NewFight(cfg) {
   const seed=cfg.seed==null?Math.floor(Math.random()*2147483647):cfg.seed;
   const F={cfg,seed,rng:seed|0,clock:0,round:1,over:null,acting:null,priSeq:0,stamp:1,turnLog:[],hazards:[],reactions:[],reactSeq:0,later:[],opening:[],
@@ -134,6 +135,7 @@ function b3NewFight(cfg) {
   for(const u of F.units) u.wait=b3WaitFor(F,u,B3_RULES.startWait[u.side],true);
   for(const f of F.foes) for(const id of f.D.start) b3AddStatus(F,f,id,{src:f});
   b3Fire(F,'battleStart',{g:'pre'},F.opening);
+  b3SetupStart(F);   // a story fight's own start: HP shares, an HP floor, statuses a member begins with (engine/b3-script.js)
   return F;
 }
 function b3CheckOver(F) {

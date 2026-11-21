@@ -50,8 +50,15 @@ function b3sBegin(npc,opts,plan) {
   const fighters=b3sFighters(),levels={},hpShare={},loadouts={};
   for(const p of fighters) { levels[p.id]=p.level; hpShare[p.id]=p.maxHp?Math.max(0,Math.min(1,p.hp/p.maxHp)):1; loadouts[p.id]=b3MemberLoadout(p); }
   B3S.tut=opts.tut&&B3_STORY.tips[opts.tut]?{key:opts.tut,done:{}}:null;
+  // A scripted story fight (B3_STORY.setup, engine/b3-script.js) carries its extras in `setup`; `vp` is the story's own number and the rules never read it.
+  const S0=opts.tut&&B3_STORY.setup&&B3_STORY.setup[opts.tut];
+  let setup=S0?Object.assign({},S0):null;
+  if(setup) { delete setup.vp; plan=Object.assign({},plan,S0.vp!=null?{vp:S0.vp}:null); }
+  // The Birthday Sash (chapter 21): Grace wears it, so the first two turns of her fight are the Birthday Girl's. The story decides who qualifies; the rules apply what they are given.
+  const sashed=fighters.some(p=>p.id==='grace')&&typeof grace!=='undefined'&&grace.equipment&&items[grace.equipment.Sash]&&items[grace.equipment.Sash].sash;
+  if(sashed) { setup=setup||{}; setup.start=Object.assign({},setup.start,{grace:[{id:'birthday_girl',n:2}]}); }
   B3S.fight={npc,plan,ids:fighters.map(p=>p.id)}; B3S.card=null; B3S.levelled={};
-  b3Start({party:fighters.map(p=>p.id),levels,hpShare,loadouts,formation:plan.formation,foes:plan.foes,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
+  b3Start({party:fighters.map(p=>p.id),levels,hpShare,loadouts,formation:plan.formation,foes:plan.foes,setup:setup&&Object.keys(setup).length?setup:undefined,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
     ruckus:B3S.ruckus,onRuckus:v=>{ B3S.ruckus=Math.max(0,Math.min(100,Math.round(v||0))); },
     award:b3sAward,beforeEnd:b3sShowCard,onTurn:b3sTip,onEnd:b3sEnd});
 }
@@ -106,7 +113,7 @@ function b3sShowCard(result,go) { const R=B3S.card; if(!R||typeof b7ShowCard!=='
 function b3sEnd(result) {
   const S=B3S.fight; B3S.fight=null; B3S.tut=null; if(!S) return;
   const npc=S.npc,F=B3.F,win=result==='win';
-  B2.result=win?'win':'lose';   // the story's {battle} step and the boss flag below read it
+  B2.result=win?'win':result==='lose'?'lose':result;   // the story's {battle} step and the boss flag below read it; a scripted end (engine/b3-script.js) is 'flee' or 'shell', as battle 2 wrote them
   // HP goes back to the real members as a share of their own Max HP (a level up refills it, as in battle 2).
   for(const id of S.ids) {
     const mem=memberById(id),u=F&&F.party.find(p=>p.id===id);
@@ -114,7 +121,7 @@ function b3sEnd(result) {
     else if(u) mem.hp=win&&B3S.levelled&&B3S.levelled[id]?mem.maxHp:u.hp<=0?0:Math.max(1,Math.round(mem.maxHp*u.hp/u.maxHp));
   }
   if(result==='lose'&&typeof showToast==='function') showToast(regionOf(currentMap)==='la'?'Ouch. The taco truck downtown fixes everything.':'Ouch. Visit the wish fountain to recover.',3.2);
-  if(npc&&npc.monster&&STORY.mode==='full'&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,win?'win':'lose');
+  if(npc&&npc.monster&&STORY.mode==='full'&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,win?'win':'lose');   // (the story's battle op sets this too, from B2.result)
   // Battle 3 has no Warmth bar, so the kind ending is not earned in the fight: a boss that reaches 0 HP gets the kind ending in the scene after
   // (retired card c-gem-pillar-hp). Chapter 1 is left as Milestone B has it (its scene is kind already). Battle 2 sets this flag when the Warmth bar sends a boss home; the after-boss scenes of chapters 3 to 5
   // (data/scenes.js) and the boss finales (engine/boss-finale.js bossKind) read it, so a win here sets it and the plain ending stays for OLD.
@@ -138,9 +145,9 @@ loadGame=function(slot) {
 // The Character Level and Vibe Point floors for the chapter reached. Idempotent: a member already at or above a floor is left alone.
 function b3sMigrate(chapter) {
   if(!b3sFull()) return;
-  const ch=chapter||STORY.chapter||1,finished=Math.max(0,ch-1);
+  const ch=chapter||STORY.chapter||1,B=B3_STORY.bonus&&B3_STORY.bonus[ch],finished=B?B.finished:Math.max(0,ch-1);   // a bonus chapter has its own floors (data/b3-story.js)
   if(b3sChapterOn(ch)) {
-    const fl=B3_STORY.levelFloor[Math.min(ch,B3_STORY.levelFloor.length-1)]||1;
+    const fl=B?B.level:B3_STORY.levelFloor[Math.min(ch,B3_STORY.levelFloor.length-1)]||1;
     for(const m of ALL_MEMBERS()) if(m.level<fl) { b6SetTotal(m,(fl-1)*B6.xpPerLevel); b6Refresh(m,true); }
     if(typeof b6Badge==='function') b6Badge();
   }

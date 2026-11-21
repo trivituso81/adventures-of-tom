@@ -64,6 +64,8 @@ function b3BeginTurn(F,u,beats) {
     for(let i=F.turnLog.length-2;i>=0;i--) { const k=F.turnLog[i]; if(k===u.key) { dbl=true; break; } const w=b3Unit(F,k); if(w&&w.side==='party') break; }
     if(dbl) { b3Fire(F,'foeDoubleTurn',{src:u,tgt:u,g:'pre'},beats); b3RunReactions(F,beats); } }
   b3RunLater(F,u,beats);
+  // Frozen: every turn is lost until the status runs out (it counts down in b3EndTurn like any turn-length status).
+  if(b3Alive(u)&&b3HasFlag(u,'frozen')&&!b3HasFlag(u,'skipTurn')) { beats.push({t:'skip',who:u.key,g:'pre'}); b3EndTurn(F,u,B3_RULES.forecast,beats); return false; }
   if(b3Alive(u)&&b3HasFlag(u,'skipTurn')) {
     for(const id of Object.keys(u.st)) if(B3_STATUS[id].flags.includes('skipTurn')) { b3EndStatus(F,u,id,'used'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
     if(u.flusterTurn) return true;   // "A foe always gets that turn": the Stun is spent and the turn is not lost
@@ -152,6 +154,7 @@ function b3Hurt(F,c,t,dmg,info) {
   if(left>=t.hp&&t.hp>0) { held=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('survive')&&!t.st[i].spent); if(held) { t.st[held].spent=true; left=t.hp-1; }
     // "Gold Like My Teeth" (Boppy, stage 9c, `custom:'goldTeeth'`): once a battle a lethal hit leaves him on 1 HP, and he gains Pep.
     else if(t.custom&&t.custom.goldTeeth&&!t.used.goldTeeth) { t.used.goldTeeth=true; gold=t.custom.goldTeeth; held='gold_teeth'; left=t.hp-1; } }
+  if(t.hpFloor!=null&&left>t.hp-t.hpFloor) left=Math.max(0,t.hp-t.hpFloor);   // a scripted monster's HP never falls below its floor (cfg.setup.midpoint.hold)
   t.hp=Math.max(0,t.hp-left);
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;

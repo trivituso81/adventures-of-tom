@@ -31,6 +31,7 @@ function b3RoundStart(F,beats) {
   // (A vessel, TNB's Grand Amphora, breaks when its rounds run out: engine/b3-custom.js b3VesselExpire.)
   for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); if(B3_HAZARDS[hz.id].vessel) b3VesselExpire(F,hz,beats); }
   b3Fire(F,'roundStart',{},beats);
+  b3ScriptRound(F,beats);   // adds out of the freezer (engine/b3-script.js)
 }
 // Move the clock to the next turn and say whose it is. Round dividers crossed on the way are started first.
 function b3Tick(F,beats) {

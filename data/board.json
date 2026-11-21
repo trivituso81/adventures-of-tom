@@ -28674,12 +28674,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part 1 (b3s18bonusa) built: engine/b3-script.js (scripted midpoint with results flee and shell, boss starting HP, adds on a timer), the Frozen and Birthday Girl statuses, B3_STORY.setup, the chapter 21 level and Vibe Point floors; node tools/b3-sim.js check 3329, FAILS []. Tom's Milestone D card (t-milestoned) has no note or answer (it is in the backlog); this session went ahead on his explicit instruction."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
     "opening": "unknown"
-   }
+   },
+   "after": "nothing for Tom: c-b3s18bonus"
   },
   {
    "id": "c-buildpill2",
