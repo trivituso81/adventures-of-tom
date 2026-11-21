@@ -23746,7 +23746,7 @@
    "id": "c-costsduoplan",
    "tag": "costsduoplan",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Plan the AI Costs layout for the iPhone Duo",
    "next": "The plan is claude/costs-duo-plan.md and the drawing is docs/costs-duo-mock.html (build costsduoplan). Tom answers card t-costsduo-go, and his answer starts the build card c-costsduo1.",
@@ -23774,9 +23774,14 @@
     {
      "d": "2026-11-21",
      "t": "Measured the live page at the Duo's sizes (folded: shrunk to 30%, table text 4.2 px), wrote the assessment and the design (pocket layout under 900 px, two panes at the fold for 900 to 1,099 px, desktop unchanged), drew four frames at the real sizes in a page that fills the Duo's screen. Hands to Tom: t-costsduo-go, which starts c-costsduo1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costsduoplan: AI Costs on the iPhone Duo: assessment, design and a drawing to open on the phone"
     }
    ],
-   "after": "t-costsduo-go"
+   "after": "t-costsduo-go",
+   "done": "2026-11-21"
   },
   {
    "id": "t-costsduo-go",
@@ -23922,10 +23927,11 @@
    "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
    "title": "AI Costs page: plans, balances, every charge, the total",
    "first": "2026-11-21T07:27:18-08:00",
-   "last": "2026-11-21T08:33:36-08:00",
+   "last": "2026-11-21T08:39:39-08:00",
    "tags": [
     "costs1",
-    "costs1icon"
+    "costs1icon",
+    "costsduoplan"
    ],
    "cards": [
     "c-costs1",
@@ -27265,8 +27271,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ee1b64b7580365b3dadf02f5ead9eb9ea65dfe82",
- "synced_at": "2026-11-21T16:34:13+00:00",
+ "synced": "172106764fb381ff7a0eba5ef6a04a923484d771",
+ "synced_at": "2026-11-21T16:40:19+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
