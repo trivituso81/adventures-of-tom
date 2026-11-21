@@ -27115,6 +27115,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenb: sw_test fixed (the test was stale: it hard-coded data/monsters.js?v=size1, the live tag is qa-coh02; its cold-load wait widened); known_fail removed. 10 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenb: the service worker test reads the game's live tag instead of the old ?v=size1"
     }
    ],
    "prompt": {
@@ -28372,6 +28376,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T11:54:20-08:00",
+   "last": "2026-11-21T12:07:02-08:00",
+   "tags": [
+    "nightgreena",
+    "nightgreenb"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
    "title": "Write real prompts for 267 starter-draft battle animations",
    "first": "2026-11-21T11:25:36-08:00",
@@ -28409,18 +28426,6 @@
    ],
    "cards": [
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T11:54:20-08:00",
-   "last": "2026-11-21T11:56:39-08:00",
-   "tags": [
-    "nightgreena"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -32018,8 +32023,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2f39a71f90aa754ebc6451701b5479219a9d7e3a",
- "synced_at": "2026-11-21T20:06:03+00:00",
+ "synced": "5caaad345968310f39f96f90dd30832573900f89",
+ "synced_at": "2026-11-21T20:07:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
