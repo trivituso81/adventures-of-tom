@@ -21949,7 +21949,7 @@
    "col": "done",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
-   "next": "Retired: checked on the new battle screen (chapter 1 plays on it since b3s15); none of the 5 problems exist there.",
+   "next": "Retired: checked on the new battle (stage 15 shipped as b3s15), none of the five problems exist there. Nothing to fix.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -22025,6 +22025,10 @@
     {
      "d": "2026-11-21",
      "t": "Retired, nothing to fix. Ran tools/ch1_b3_test.py and looked at the new battle and victory screenshots (portrait). BUG-05: the new BAG shows 'Not yet', no count. BUG-06: one status pill (BLOCKADE) fits, no stacking or clipped text. BUG-09: the victory card has no scrollbar and nothing past its border. BUG-10 and COH-09: the old hint and Inspect texts (Tap an enemy, B to Inspect, Flashcard Flurry or Red Pen) are not in Battle 3. Landscape and the pills on an enemy with two statuses were not looked at."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Checked BUG-05, 06, 09, 10 and COH-09 on the Battle 3 chapter 1 fights (portrait and landscape, tools/ch1_b3_test.py frames). All gone: BAG reads \"Not yet\" with no count, enemy status tags stack 13 px apart, the victory card has no scrollbar and LEVEL UP! sits inside it, no Raspberry, Defend, Inspect or Tombo text exists in Battle 3, and no Inspect hint names Flashcard Flurry or Red Pen. Retired, no code change."
     }
    ],
    "chat": {

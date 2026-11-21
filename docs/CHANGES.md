@@ -1,3 +1,9 @@
+## qa-battle2 (2026-11-21): old battle screen problems checked on the new battle; none exist there, nothing changed
+
+- Card c-qa-battle2 (chapter 1 QA report, build keysecrets2). Ran `tools/ch1_b3_test.py` in portrait and landscape and looked at the battle and victory card frames, and searched the Battle 3 files for the old texts.
+- BUG-05 (BAG count): Battle 3 shows BAG as "Not yet", no count. BUG-06 (status pills): statuses stack 13 px apart over the head; the one shown fit. BUG-09 (victory card): no scrollbar, LEVEL UP! inside the card. BUG-10 (Raspberry arrow, Defend and Inspect copy, Tombo icon): none of that text or those buttons exists in Battle 3. COH-09 (Inspect names Flashcard Flurry and Red Pen): no such hint in Battle 3.
+- Not looked at: several status tags at once on one enemy (the code stacks them; none came up in the test fights). No game file changed.
+
 ## voicepurge221 (2026-11-21): 221 old dialogue clips that nothing plays were purged
 
 Card c-voicepurge221. Check 4 of `tools/clip-audit/unused_voice.py` listed 221 baked dialogue clips with no scene, harvest line or source (old chapter 1, 3 and 6 lines). Removed with `purge_unused.js` (spec `tools/clip-audit/purge-voicepurge221.json`), Voice Library list rebuilt (221 removed), all four checks 0. List in docs/PURGED_VOICE.md.
