@@ -25710,7 +25710,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Waiting on Tom's card t-cap-deedee-dodge-y4m3: allow the wan-gen cap to be set to 53.1 ($52.53 spent so far plus the one $0.50 try). The staged try is job deedee-dodge rev 5 (Rose's duck wording, figure at 80%). On Allow, run it once with cap 53.1 and follow the card prompt.",
@@ -25735,7 +25735,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
+    "url": "https://claude.ai/code/session_01RXeukDb8nJiDxwzg1FfJQi",
     "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
    },
    "history": [
@@ -25844,6 +25844,10 @@
      "d": "2026-11-21",
      "t": "Rescue outcome BACK TO YOU: the only blocker is the spend cap, which counts all money ever spent and refuses the $0.50 try. Added Tom card t-cap-deedee-dodge-y4m3 (decide); this card waits behind it.",
      "at": "2026-11-21T23:00:00+00:00"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -25863,8 +25867,7 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukDb8nJiDxwzg1FfJQi",
     "prev": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm"
-   },
-   "waiting_on": "tom"
+   }
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -30370,6 +30373,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDb8nJiDxwzg1FfJQi",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T22:52:28Z",
+   "last": "2026-11-21T22:52:28Z",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGGyEECCXsuQCBdtY6",
    "title": "Repair three tests that already failed on main",
@@ -34948,8 +34961,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "43fda10986ec528b56864b16cbb5fc2064550ae7",
- "synced_at": "2026-11-21T22:51:07+00:00",
+ "synced": "63e72ca5329e1e93d7c1d3c360516a1c9df722cd",
+ "synced_at": "2026-11-21T22:53:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
