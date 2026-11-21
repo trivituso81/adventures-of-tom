@@ -21800,7 +21800,7 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
    "next": "Waits on stage 15 (card c-b3s15) to ship to main. Then it runs the old battle screen checks (BUG-05, 06, 09, 10, COH-09) on the new screen and fixes what fails.",
@@ -21867,10 +21867,14 @@
     {
      "d": "2026-11-21",
      "t": "Session ended without shipping: stage 15 (c-b3s15, chapter 1 story switch) is still In progress and not on main, so there is no new battle screen to check. Back to Up next; start it after stage 15 ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD93dnwrF3uibZJwt4",
+    "url": "https://claude.ai/code/session_01RXeukD93dnwrF3uibZJwt4",
     "opening": "started by START"
    }
   },
@@ -22659,6 +22663,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukD93dnwrF3uibZJwt4",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T07:26:17Z",
+   "last": "2026-11-21T07:26:17Z",
+   "tags": [],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
    "title": "Battle system stage 14: balance pass",
@@ -25879,8 +25893,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "13e0ea32146a91d973e5b63f50b8dba9ccd61027",
- "synced_at": "2026-11-21T07:25:13+00:00",
+ "synced": "24bca46557f10f980651118f981967ae374c93a5",
+ "synced_at": "2026-11-21T07:27:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
