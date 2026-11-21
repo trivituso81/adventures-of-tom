@@ -20842,7 +20842,7 @@
    "id": "c-qa-bug01",
    "tag": "qa-bug01",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Quest log says Go to it's Sunday after the trip home",
    "next": "Shipped as qa-bug01: the quest log now reads \"It's Sunday. Head out the front door...\" instead of \"Go to it's Sunday\". Waits on Tom's look at the quest log.",
@@ -20885,6 +20885,10 @@
      "d": "2026-11-21",
      "t": "Fixed questPhrase (engine/story.js): the plain-statement check ignores case and capitalizes, and \"picked\" counts as a statement (the Hollow wrapper goals had the same slip). Checked all Goal toasts with node; browser tests could not run here (Playwright browser mismatch).",
      "at": "2026-11-21T03:50:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug01: quest log no longer says \"Go to it's Sunday\" after the trip home"
     }
    ],
    "started_at": "2026-11-21T03:30:00.000Z",
@@ -20892,7 +20896,8 @@
     "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
     "opening": "started by START"
    },
-   "after": "t-qa-bug01play"
+   "after": "t-qa-bug01play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-bug02",
@@ -22108,6 +22113,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
+   "title": "Quest log says Go to it's Sunday after the trip home",
+   "first": "2026-11-21T03:27:19Z",
+   "last": "2026-11-21T03:34:27Z",
+   "tags": [
+    "qa-bug01"
+   ],
+   "cards": [
+    "c-qa-bug01"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
    "title": "Inspect prompt says boppy's in lowercase",
    "first": "2026-11-21T03:26:33Z",
@@ -22231,16 +22248,6 @@
    ],
    "cards": [
     "c-qa-bug08"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
-   "title": "Quest log says Go to it's Sunday after the trip home",
-   "first": "2026-11-21T03:27:19Z",
-   "last": "2026-11-21T03:27:19Z",
-   "tags": [],
-   "cards": [
-    "c-qa-bug01"
    ]
   },
   {
@@ -25168,8 +25175,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "9df939eb4eee915276a854d9ff6ca043b9ba9edb",
- "synced_at": "2026-11-21T03:34:21+00:00",
+ "synced": "fb4e1bedc91ff6c9bd97d7f7471f9fa8e268d8c5",
+ "synced_at": "2026-11-21T03:35:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
