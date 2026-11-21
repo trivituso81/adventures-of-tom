@@ -146,7 +146,7 @@ const FOES = [
     ['timberwind', 'Timber! wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature leans back slowly and narrows its angry eyes once, getting ready to topple forward.%P It holds that leaning-back pose' + STILL],
     ['timber', 'Timber!', 'strike', 1, 'MOTION: TIMBER\nThe creature tips forward and falls flat onto its front once like a falling tree.%P Then it pushes itself back up into the pose of the attached picture' + STILL]]],
   ['skeeter', 41.6, ' The small mosquitoes stay close around the big one, the same number of them.', [
-    ['bite', 'Darting Bite', 'strike', 1, 'MOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite, while the small mosquitoes keep circling close around it.%P Without repeating the bite, ' + SETTLE],
+    ['bite', 'Darting Bite', 'strike', 1, 'MOTION: DARTING BITE\nThe big mosquito jabs its long nose forward once in one quick bite, while the small mosquitoes keep circling close around it.%P Without repeating the bite, ' + SETTLE],
     ['whine', 'Mosquito Whine (loud buzz)', 'state', 1, 'MOTION: LOUD WHINE\nThe big mosquito lifts its head and beats its wings very fast once in one loud whine, while the small mosquitoes keep circling close around it.%P Without repeating the whine, ' + SETTLE],
     ['buzz', 'Buzz Cloud (the swarm regroups)', 'state', 1, 'MOTION: REGROUP\nThe small mosquitoes swirl once in a tight circle around the big mosquito.%P Then they settle back into their places and ' + SETTLE]]],
 ];
@@ -155,6 +155,8 @@ for (const [o, rows, parts, list] of FOES)
     CH1.push(entry(o, key, label, rows, kind, (falls ? FOE_FREE : FOE_ONCE) + motion.replace('%P', parts) + END(3), true));
 // wanch2 (stop-loss of wanch1, Tom's prompt 2026-11-21): the Toad's Body Slam and the Skeeter's Bite and Whine missed twice the same way on LITE,
 // so the next try is the full model G15 with the prompt word for word (a different method, not a third rewrite). Listed in REMAKE below too.
+// The Bite's first G15 video (v3) kept the small mosquitoes but the big one darted left, turned side-on and never came back: its one retry
+// drops "darts forward once and" from MOTION (one change), the rest word for word.
 const FULL = ['clip-toad-slam', 'clip-skeeter-bite', 'clip-skeeter-whine'];
 for (const e of CH1) if (FULL.includes(e.id)) e.clip.model = G15;
 const entries = [

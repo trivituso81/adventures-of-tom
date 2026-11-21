@@ -30177,7 +30177,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: TIMBER\nThe creature tips forward and falls flat onto its front once like a falling tree. The moss, the mushrooms and the leaf sprouts on top stay attached. Then it pushes itself back up into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -30212,7 +30212,7 @@
      "marks": {
       "first": 0,
       "hit": 0.567,
-      "last": 3.0
+      "last": 3
      }
     }
    ],
@@ -30230,6 +30230,13 @@
      "from": "wanch1",
      "at": 1795230723496,
      "rev": 1
+    },
+    {
+     "date": "2026-11-21",
+     "note": "wanch2 check (full model, v3): the small mosquitoes stay now, but the big one darts left, turns side-on and never comes back to its start pose",
+     "from": "wanch2",
+     "at": 1795288052031,
+     "rev": 2
     }
    ],
    "id": "clip-skeeter-bite",
@@ -30252,8 +30259,8 @@
     "speed": 1.5,
     "k": 8
    },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DARTING BITE\nThe big mosquito darts forward once and jabs its long nose forward in one quick bite, while the small mosquitoes keep circling close around it. The small mosquitoes stay close around the big one, the same number of them. Without repeating the bite, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.",
-   "promptRev": 2
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DARTING BITE\nThe big mosquito jabs its long nose forward once in one quick bite, while the small mosquitoes keep circling close around it. The small mosquitoes stay close around the big one, the same number of them. Without repeating the bite, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n",
+   "promptRev": 3
   },
   {
    "status": "approved",
@@ -30288,7 +30295,7 @@
      "at": 1795287587621,
      "marks": {
       "first": 0,
-      "last": 3.0
+      "last": 3
      }
     }
    ],
