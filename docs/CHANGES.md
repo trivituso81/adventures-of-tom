@@ -1,3 +1,21 @@
+## board-dashboard (2026-11-21): seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved
+
+Tom (10:56): "design a view for my extra wide monitor (3440x1440) when im using chrome... view the battle guide, admin panel, kanban board, and maybe even the game all at the same time". He saw two to-scale drawings and said (11:19): "ok looks good, create the kanban cards we need ot execute this properly".
+
+| Card | What |
+|---|---|
+| c-dash1 (Up next) | `dashboard.html`: four panes, the All four and Battle layouts, pane buttons, the keyboard frame, links that open in the pane that owns the page. Sonnet 5.5, high. |
+| t-dash1-try | Tom tries it on the monitor and pastes the GitHub token once in Chrome on the Mac. Blocks c-dash2. |
+| c-dash2 | The strip under the game: newer build bar with Reload game, screen sizes, jumps, Story battles, Difficulty, Mute, Report. Sonnet 5.5, high. |
+| c-dash3 | Take me there: a play card carries its place; On your phone for checks that need the phone. Sonnet 5.5, high. |
+| t-dash3-try | Tom tries the strip and Take me there. Blocks c-dash4, which then starts by itself. |
+| c-dash4 | Search across cards, builds, the Battle Guide and tools; the Art review and Story layouts. Sonnet 5.5, medium, auto. |
+| t-dash4-try | Tom tries search and the two layouts. |
+
+- Plan, the facts proven with the real pages side by side at 3440 wide, and the traps found: `claude/dashboard-plan.md`. Drawings and their markup: `claude/dashboard-mock/`.
+- Decisions taken from his "looks good" (the four recommended options): pane order Board, Game, Battle Guide, fourth pane; the game starts at the Duo open size; Admin is the fourth pane; a look, text or rules check in the dashboard counts as All good, touch, sound and speed stay phone checks.
+- Board and notes only; no page or game file changed.
+
 ## guideprompts1a (2026-11-21): a script and an Action that write a real prompt for every starter-draft battle animation
 
 Card c-guideprompts. Tom (11-21): "why is this the prompt for cartridge blow, it seems generic". 267 of the 346 prompts in the Battle Guide were rule-made starter drafts (every move of one shape got the same canned gesture, so Cartridge Blow read as a spell cast). The model-draft step of claude/guidegen-plan.md 3.1 had never been built.

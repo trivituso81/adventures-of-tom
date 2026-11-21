@@ -26977,6 +26977,249 @@
     "text": "Read CLAUDE.md (Fix a miss with the smallest change; Image and video prompts: clean, each thing once; keysecrets1), claude/handoff-rules.md and claude/guidegen-plan.md (sections 3.1 and 8), then this card in data/board.json. Your first push is the commit board: start c-guideprompts. Facts on 11-21: in data/guide-anims.json 267 of 346 animations carry a rule-made starter draft (promptSource rule-draft): the same canned MOTION for every move of a shape, so Cartridge Blow (blows into a cartridge, dust puff) reads as a spell cast. The loader in tools/guidegen/build_map.js already reads data/guide-prompts.json and shows entries with source model-draft, but nothing writes that file. Build tools/guidegen/draft.py (reuse reconcile.py: split, check, xai_ask, pick_text_model, the cap pattern) and a manual Action guide-draft. For each rule-draft animation it asks the xAI text model for a real MOTION from the move's own data (name, desc, flavor, shape, target, effects, listRow body and engine text, the row of claude/battle-animation-list-ch1-v11.md), keeping everything before MOTION word for word, two sentences, the gesture named once with its count, ending in a held pose, props out from behind the back and back again, no sound or camera, no banned words, no em dashes. Check each answer in code, send a broken one back once, mark a second failure check and leave the starter draft. Write results to data/guide-prompts.json (anims id -> prompt, source model-draft, rev 0), never over a job, entry or used prompt. Run order: dry run, then Cartridge Blow alone, read its prompt, then the rest with cap 1.00 (the reconcile replay cost $0.045 for 24 prompts). Rebuild data/guide-anims.json with node tools/guidegen/build_map.js, run python3 tools/guidegen/build_map_test.py and guidegen_test.py, add the docs/CHANGES.md entry guideprompts1, and write the next card. Never generate a video in this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "nothing for Tom: c-guideprompts"
+  },
+  {
+   "id": "c-dash1",
+   "title": "Admin Dashboard: the wide page with four panes",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "dash1",
+   "next": "Ready to start: copy the prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds dashboard.html for your 3440 x 1440 monitor: the Board, the game, the Battle Guide and Admin side by side, the All four and Battle layouts, pane buttons, the gold frame that shows which pane has the keyboard, and links that open in the pane that owns the page. Then it hands you the card Try the Admin Dashboard on the wide monitor.",
+   "blocks": [
+    "t-dash1-try"
+   ],
+   "after": "t-dash1-try",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds the Admin Dashboard page as you approved it: four panes showing the real Board, game, Battle Guide and Admin pages, two layouts, and the top bar. The strip under the game, Take me there and search come in the next three cards.",
+    "before": [
+     "Nothing to do first.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new admin page where the code steps are not written; none of the three Fable conditions holds)",
+    "effort": "high (a new page, link and keyboard handling across four frames, and a new test, in one session)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/dashboard-plan.md, and look at the two pictures in claude/dashboard-mock/ (layout-1-all-four.jpg first; the .html files beside them hold every drawn size and colour). Then read card c-dash1 in data/board.json with its history. Your first push is the commit board: start c-dash1. Build the section \"dash1: the page and its four panes\" of the plan exactly, at the sizes in \"The layout\" and as the pictures show; mind the section \"Traps found while reading the code\". Change no existing page except admin.html (the new button) and its test. Until dash2 the Builds page fills the space under the game. Write tools/dashboard_test.py as the plan lists and look at its screenshots at 3440 x 1328 and 3440 x 1440. After the publish, load the live dashboard.html and confirm all four panes show; if GitHub Pages will not show pages in frames, write that on the card and stop. Write docs/DASHBOARD.md and the CLAUDE.md row. The card you ship hands Tom the card t-dash1-try (it exists, waiting): rewrite its steps to match what you built, and add as an optional last step how to run the page as its own Chrome app window on a Mac, with the menu words checked against the current Chrome. Build name dash1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ]
+  },
+  {
+   "id": "t-dash1-try",
+   "title": "Try the Admin Dashboard on the wide monitor",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "next": "On the MacBook open Chrome at https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard) and make the window full screen on the wide monitor. Paste the GitHub token once in the Board pane (three dots), click through the four panes, play the game with the keyboard, switch Layout to Battle, then press All good, or Something is wrong and say which pane and what you saw. Your notes go to the next card, Admin Dashboard: the strip under the game (c-dash2).",
+   "steps": [
+    "On the MacBook open Chrome and go to https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard). Make the window full screen on the wide monitor (the green button).",
+    "In the Board pane open the three dots, paste the GitHub token and press Save. Chrome on the Mac is a new browser, so it has none yet. The top bar should then say GitHub token saved.",
+    "Look across the four panes: Board, Game, Battle Guide, Admin. Nothing should be cut off and nothing should scroll sideways.",
+    "In the Admin pane click Art Library: it should open in that same pane. Use Change page in the pane header to go back to Admin.",
+    "Click the game, then play with the arrow keys and Enter. The game pane should have a gold frame and the tag KEYS HERE. Press Ctrl 1: the frame moves to the Board. Sound starts after your first click in the game.",
+    "In the top bar switch Layout to Battle: the game gets bigger and Builds takes the place of Admin. Switch back to All four.",
+    "Press All good, or Something is wrong and say which pane and what you saw."
+   ],
+   "blocks": [
+    "c-dash2"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+    "opening": "\"design a view for my extra wide monitor (3440x1440) when im using chrome\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "first": "Waits on the card Admin Dashboard: the wide page with four panes."
+  },
+  {
+   "id": "c-dash2",
+   "title": "Admin Dashboard: the strip under the game",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "dash2",
+   "next": "Waits on your card Try the Admin Dashboard on the wide monitor. Then it applies your notes and builds the strip under the game: the bar that tells you a newer build is live with Reload game, the screen sizes (four Duo poses and Desktop wide), jump to a chapter or a test fight, Story battles, Difficulty, Mute and Report. The next card, Take me there, follows it without a check from you.",
+   "blocks": [
+    "c-dash3"
+   ],
+   "after": "nothing for Tom: c-dash3",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Applies your notes from the first try, then builds the strip under the game as drawn: the newer build bar with Reload game, the screen sizes, the chapter and test fight jumps, Story battles, Difficulty, Mute and Report.",
+    "before": [
+     "Answer the card Try the Admin Dashboard on the wide monitor (All good, or Something is wrong with your notes).",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build that reaches into the game from the dashboard, steps not written; none of the three Fable conditions holds)",
+    "effort": "high (several controls, each needs its own way into the running game, and the Duo size must be forced for one frame only)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/dashboard-plan.md, and look at the two pictures in claude/dashboard-mock/ (layout-1-all-four.jpg first; the .html files beside them hold every drawn size and colour). Read docs/DASHBOARD.md and docs/DUO.md, then cards c-dash2 and t-dash1-try in data/board.json (Tom's answer and note on t-dash1-try come first). Your first push is the commit board: start c-dash2. Part 1: apply his notes, each by the smallest change. Part 2: build the section \"dash2: the strip under the game\" of the plan as the pictures show it, without the Next for you column (that is c-dash3). Mind the two Duo traps in the plan: force the size for the game frame only, never through the shared le-duo setting, and make it survive an address with go= in it. Never reload the game by itself. Extend tools/dashboard_test.py as the plan lists, run python3 tools/smoke.py because the game changes, and look at the screenshots. Update docs/DASHBOARD.md. Nothing is handed to Tom by this card (after is \"nothing for Tom: c-dash3\"): add what he should look at to the steps of t-dash3-try. Build name dash2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "waiting_on": "tom"
+  },
+  {
+   "id": "c-dash3",
+   "title": "Take me there: a play card opens the game at its spot",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "dash3",
+   "next": "Waits on the card Admin Dashboard: the strip under the game. Then a play card can carry the place to check, and Take me there in the dashboard puts the game at that spot in one click. Every open play card gets its place, or the mark On your phone when the check needs touch, sound or speed. Then it hands you the card Try the game strip and Take me there.",
+   "blocks": [
+    "t-dash3-try"
+   ],
+   "after": "t-dash3-try",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Adds the place to check to play cards, the Take me there button in the dashboard, and the mark On your phone for checks that need the phone. Fills in every open play card.",
+    "before": [
+     "Nothing to do first: this card opens when the card Admin Dashboard: the strip under the game is done.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new card field, its checks and a way to place the game, steps not written; none of the three Fable conditions holds)",
+    "effort": "high (the spot of every open play card has to be worked out from its text and proven in the game)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/dashboard-plan.md, and look at the two pictures in claude/dashboard-mock/ (layout-1-all-four.jpg first; the .html files beside them hold every drawn size and colour). Read docs/DASHBOARD.md, then card c-dash3 in data/board.json. Your first push is the commit board: start c-dash3. Build the section \"dash3: Take me there\" of the plan: the jump field and the where field on Tom's play cards, the Next for you column in the strip as drawn, Take me there on the card when the Board runs inside the dashboard, the checks in tools/board_check.py, and the rule in the board section of CLAUDE.md (repo file only; do not edit claude/handoff-rules.md). Fill in every open Tom play card in the same push, reading each card's next step to find its spot, and prove each jump lands on the named place before you keep it; a card whose spot the game cannot open gets no jump. Extend tools/dashboard_test.py, run python3 tools/board_check.py and python3 tools/smoke.py. The card you ship hands Tom the card t-dash3-try (it exists, waiting): rewrite its steps to match what dash2 and dash3 built. Build name dash3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "t-dash3-try",
+   "title": "Try the game strip and Take me there",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and press Take me there on one play card. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
+   "steps": [
+    "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html).",
+    "Under the game, press each Screen size once: the game should change to that size and stay playable. Go back to Duo open, sideways.",
+    "Press chapter 1 under Jump to a chapter, then one of the New battle test fights. The game should open each one.",
+    "Under Next for you, press Take me there on one card: the game should be at the place that card asks you to check.",
+    "Try Mute game, then Report.",
+    "Press All good, or Something is wrong and say which control and what you saw."
+   ],
+   "blocks": [
+    "c-dash4"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+    "opening": "\"design a view for my extra wide monitor (3440x1440) when im using chrome\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "first": "Waits on the card Take me there: a play card opens the game at its spot."
+  },
+  {
+   "id": "c-dash4",
+   "title": "Admin Dashboard: search and two more layouts",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "dash4",
+   "next": "Waits on your card Try the game strip and Take me there, then starts by itself. It applies your notes, adds the search box in the top bar (cards, builds, the Battle Guide, tools, chapters and test fights; a result opens in its own pane), and the Art review and Story layouts. Then it hands you the card Try search and the new layouts.",
+   "blocks": [
+    "t-dash4-try"
+   ],
+   "after": "t-dash4-try",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Applies your notes, then adds search across cards, builds, the Battle Guide and the tools, and two more layouts: Art review and Story.",
+    "before": [
+     "Answer the card Try the game strip and Take me there (All good, or Something is wrong with your notes). This card then starts by itself; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a feature of an existing admin page; none of the three Fable conditions holds)",
+    "effort": "medium (the plan names what is searched and where each result opens, and the page and its test already exist)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/dashboard-plan.md, and look at the two pictures in claude/dashboard-mock/ (layout-1-all-four.jpg first; the .html files beside them hold every drawn size and colour). Read docs/DASHBOARD.md, then cards c-dash4 and t-dash3-try in data/board.json (Tom's answer and note on t-dash3-try come first). Your first push is the commit board: start c-dash4. Part 1: apply his notes, each by the smallest change. Part 2: build the section \"dash4: search and two more layouts\" of the plan: the search box in the top bar as drawn (also Cmd K), and the Art review and Story layouts; check each page's own breakpoints before fixing the pane widths, and keep the pane order. Extend tools/dashboard_test.py as the plan lists, look at the screenshots, update docs/DASHBOARD.md. The card you ship hands Tom the card t-dash4-try (it exists, waiting): rewrite its steps to match what you built. Build name dash4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "waiting_on": "tom",
+   "auto": true
+  },
+  {
+   "id": "t-dash4-try",
+   "title": "Try search and the new layouts",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Press Cmd K and search for a card, a build, a monster and a tool; each result should open in its own pane. Then switch Layout to Art review and to Story. Press All good, or Something is wrong and say what you searched for or which layout, and what you saw.",
+   "steps": [
+    "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html).",
+    "Press Cmd K (or click the search box in the top bar). Search for a word from a card, then a build name, then a monster, then a tool such as Voice. Press Enter on each: it should open in the pane it belongs to.",
+    "In the top bar switch Layout to Art review, then to Story. Nothing should be cut off.",
+    "Press All good, or Something is wrong and say what you searched for or which layout, and what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE23jQCtQvuETPe6or",
+    "opening": "\"design a view for my extra wide monitor (3440x1440) when im using chrome\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    }
+   ],
+   "first": "Waits on the card Admin Dashboard: search and two more layouts.",
+   "fyi": true
   }
  ],
  "sessions": [
