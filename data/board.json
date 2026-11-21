@@ -25710,7 +25710,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25735,7 +25735,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDaMeZbDPDpEFyVFNY",
+    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
     "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
    },
    "history": [
@@ -25827,6 +25827,10 @@
     {
      "d": "2026-11-21",
      "t": "START is not set up for this model and effort. Use Copy prompt."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -30987,6 +30991,25 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T09:18:43-08:00",
+   "last": "2026-11-21T14:45:30-08:00",
+   "tags": [
+    "anim-deedee-scrub-1irj",
+    "anim-deedee-windex-z9p8",
+    "anim-deedee-give-yy1o",
+    "anim-deedee-ko-yes1"
+   ],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3",
+    "c-anim-deedee-ko-yes1",
+    "c-anim-deedee-give-yy1o",
+    "c-anim-deedee-windex-z9p8",
+    "c-anim-deedee-scrub-1irj"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the last failing test (ch20_test)",
    "first": "2026-11-21T13:02:32-08:00",
@@ -31493,25 +31516,6 @@
     "c-anim-grace-squeeze-qxim",
     "c-anim-grace-cubepop-tvik",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T10:09:54-08:00",
-   "tags": [
-    "anim-deedee-scrub-1irj",
-    "anim-deedee-windex-z9p8",
-    "anim-deedee-give-yy1o",
-    "anim-deedee-ko-yes1"
-   ],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3",
-    "c-anim-deedee-ko-yes1",
-    "c-anim-deedee-give-yy1o",
-    "c-anim-deedee-windex-z9p8",
-    "c-anim-deedee-scrub-1irj"
    ]
   },
   {
@@ -34863,8 +34867,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8d12a2ee8b6f45ad2a9267e09c27dc22b9c0666f",
- "synced_at": "2026-11-21T22:44:08+00:00",
+ "synced": "5f6abd0d145860be4f49a72dcaa00394a5d5a0ff",
+ "synced_at": "2026-11-21T22:46:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
