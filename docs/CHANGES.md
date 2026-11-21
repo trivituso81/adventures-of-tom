@@ -1,3 +1,62 @@
+## ch2lessons (2026-11-21): chapter 2 cut by the chapter 1 lessons: 93 lines became 73 (20 cut, 4 rewritten, two orphans fixed), every voice script retagged in Tom's style
+
+Card c-ch2lessons. Tom (2026-11-20): apply the lessons of his day of chapter 1 cuts to chapter 2, which he has not played yet. A fresh reviewer that read only claude/tom-line-edits.md, claude/story-line-rules.md and the 93 lines marked every line KEEP, CUT or REWRITE with a rule number. Claude applied all of it (no line replaced after a cut; each scene was read again and still makes sense).
+
+| Count | |
+|---|---|
+| Lines before | 93 (9 scenes) |
+| Cut | 20 (one in 4.7): Tom 11, TNB 7, the Big Shake 1, Doña Carmen 1 |
+| Rewritten (rule 4, from what the character wants) | 4: Tom 3, Grace 1 |
+| Lines now | 73 (70 distinct recordings; Mr. Washington's greeting repeats 4 times) |
+| Kept as Tom wrote it | "Poke it. Yes. But maybe just gently." |
+
+| Scene | Before | After | Rule |
+|---|---|---|---|
+| Scene 1 | Tom: Ha! It WOULD. Okay. Your turn. Toast. | CUT | 7, 9 |
+| Scene 1 | Tom: That is a very purple sky. Okay. Hills first. Then bread. | CUT | 7 |
+| Scene 2 | Tom: Ha! I am. Right after we gently poke a cloud. | CUT | 7, 8 |
+| Scene 3 | TNB: Babe. He's stuck. You're just keeping him company. | CUT | 7 |
+| Scene 3 | TNB: Huh. So that's a monster. Smaller than I pictured. | CUT | 7 |
+| Scene 4 | Tom: It's coming out of the Observatory. But the Observatory's so nice. | Tom: Oh, Observatory. Not you. | 7 (rule 4 rewrite) |
+| Scene 4 | TNB: It's always the nice ones. | CUT | 8 |
+| Scene 5 | Tom: Denied? | CUT | 7 |
+| Scene 5 | Tom: She's standing on my feet. Both of them. I'm going to hold very still. | CUT | 7 |
+| Scene 6 | Tom: Excuse me. Sorry. I had to check. | CUT | 2, 7 |
+| Scene 6 | Tom: Thank you, Nara. A burnt flashbulb. Grace has one just like it on her clue list. | CUT | 7 |
+| Scene 6 | Tom (text, to Grace): Grace, I'm on the job. There's a lemon stuck in an orange block up here, and Nara just found a burnt flashbulb next to it. I wrote it all down. It's on page nine. | Tom (text, to Grace): Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down. | 10 (orphan "page nine") |
+| Scene 6 | Grace (text): Tata, step away from the block. You left fingerprints on the last one. Send me a picture with the lemon AND the bulb in it. I'm writing them both down. In pencil. | Grace (text): Tata, don't touch it! Send me a picture of both. And don't let Nara lick it. | 10 (orphan "fingerprints", "In pencil") |
+| Scene 6 | Tom: Picture taken. Not touching. I'm two feet back. Two and a half. | CUT | 8 |
+| Scene 7 | Tom: GAH! I've picked up Nara. I don't remember deciding to. | Tom: GAH! I've got you, Nara. We're fine. We're both fine. | 7 (rule 4 rewrite) |
+| Scene 7 | TNB: Well, well, well... look who's up. | CUT | 13 |
+| Scene 7 | The Big Shake: RUMBLE. Stay back. I shake. | CUT | 2, 7 |
+| Scene 8 | Tom: Ha! I'm keeping that too. | CUT | 8 |
+| Scene 8 | TNB: Sky's blue again. Shame. The purple was growing on me. | CUT | 7, 8 |
+| Scene 8 | Tom: Still grey. Sorry, tree. We'll come back. | CUT | 10, 8 |
+| Scene 9 | Tom: A second sentence! Welcome back, Mr. Washington. | CUT | 7 |
+| Scene 9 | TNB: You said it. I was there. | CUT | 7 |
+| Scene 9 | Doña Carmen: Then I wasn't feeling well. | CUT | 8 |
+| Scene 9 | TNB: Hills, then bread. | CUT | 8 |
+
+The rewrites, checked by the three tests (no other character could say them unchanged; each cares about someone else: the Observatory, Grace's case, the evidence, Nara; no trait word) and the copy check (0 hits against bank.txt and old.txt; the only hits against the game are the old line each replaces). The two orphans are gone: Grace's text no longer mentions fingerprints or the pencil (both cut from chapter 1), and Tom's text no longer plants "page nine" for chapter 3.
+
+**Retag.** All 70 voice scripts were written again from scratch by claude/voice-tag-style.md (WHY W1 to W8, the five-step method), after reading Tom's kept chapter 1 lines for Tom, TNB and Grace in tools/voice-library/scripts/ch01-story-directions.json: a tag directs the sound of the next words, pushed to the extreme, one idea per bracket, a new bracket where the sound turns, quick on jokes, [emphasized] before the stressed word. TNB carries "mellow, laid-back, low-key" in every bracket. The accent goes in every bracket for Mr. Washington (thick Louisiana drawl), Miss Odette (thick Louisiana Creole accent) and Doña Carmen (heavy Salvadoran accent); chapter 2 has none of the Long Island speakers. A second fresh reviewer read only the brackets and flagged 14 (mild words, two directions in one bracket, Tom too bright); all 14 were fixed. Five before and after:
+
+| Line | Before (ch2build) | After (ch2lessons) |
+|---|---|---|
+| Tom, scene 1 | [agreeing at once, earnest] Poke it. Yes. [small, concerned for the cloud] But maybe just GENTLY. | [agreeing, quick] Poke it. Yes. [pause] [hesitant, softer] But maybe just [emphasized] gently. |
+| Tom, scene 3 | [uneasy, careful] She's... [flat, certain] CONSISTENTLY well. | [hesitant, slow] She's... [pause] [very very deadpan] [emphasized] consistently well. |
+| Smoglet, scene 3 | [wet cough, then flat and rude] Ahem. You're in my way. | [wet cough] Ahem. [rude, very flat] You're in my way. |
+| TNB, scene 1 | [mellow, mild interest] huh. [punchline, level] that'd tip the scales. | [mellow, laid-back, low-key, pause] huh. [mellow, laid-back, low-key, deadpan] that'd tip the scales. |
+| Doña Carmen, scene 9 | [flat, final] I never said that. | [heavy Salvadoran accent, very dismissive] I never said that. |
+
+tools/voice-library/apply-scripts.py: three limits Tom's own tagging breaks were removed (at most 2 descriptors per bracket, at most 2 words per descriptor, and the bracket count by line length, which 21 of his 95 kept chapter 1 scripts break), and "sigh" left the sound-noun list because Tom writes it himself. The body, prop and sound word check stays. All 70 chapter 2 scripts pass it.
+
+**Recordings needed (none of chapter 2 was recorded before either):** 70 lines: Tom 31, TNB 20, Doña Carmen 4, the Big Shake 4, Miss Odette 3, Mr. Washington 2, Smoglet 2, Ticket Flurry 2, Canyon Coyote 1, Grace 1. Card t-ch2voices makes them with one tap after t-ch2play.
+
+In the game: data/scenes.js (chapter 2 talk steps cut or reworded; no stage directions changed), tools/voice-library/scripts/ch02-story-directions.json, claude/story-ch02-draft4.md (repo copy, header and voice scripts rewritten), docs/script-convos.tsv (ch2Boss row follows its new first line; purposes written for the three chapter 2 conversations that had none), data/script-index.json and the Voice Library list rebuilt. Lessons added to claude/story-line-rules.md (rules 14 to 16).
+
+Tests: tools/ch2_lines_test.py ok (73 of 73). tools/ch2_test.py in portrait and landscape: all 19 story checks pass, frames looked at (every rewritten line on screen); its one fail is a 404 for bgs/29-grump-hollow.webp, the Grump Hollow battle background that waits on Tom's approval (qa-coh05), present on main before this build. unused_voice.py: checks 1, 2, 3 and 5 at 0; check 4 lists 221 old dialogue clips nothing plays (chapters 1, 3 and 6 rebuilds), the same 221 as on main before this build and none from chapter 2; left for card c-voicepurge221 so this build stays on its card.
+
 ## b3s15 (2026-11-21): chapter 1's story fights now play on the new battle system, with a switch in ADMIN to go back to the old one
 
 - Build: stage 15 of the new battle system ("Battle 3"). Plain list of chapter 1's old-battle references by kind: `docs/BATTLE3.md` "What stage 15 holds". Only chapter 1's share was replaced.

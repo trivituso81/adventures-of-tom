@@ -8,8 +8,11 @@ Battle ('b') entries replace or add the 'voice|text' entry in tools/voice-librar
 battle-scripts.json. The older files are never touched, so the script a baked clip was made with stays on record.
 
 Every script is checked against claude/voice-rules.md and the v4 tag rules (2026-11-01): spoken words equal the line
-text (Tah Tah, spelled-out numbers, stretched vowels and added ellipses allowed), no em dashes, tag count by length
-(1 tag up to 4 words, 2 up to 14, 3 beyond), at most 2 descriptors per tag, and no body, prop or sound-noun words.
+text (Tah Tah, spelled-out numbers, stretched vowels and added ellipses allowed), no em dashes, at least one tag, and no
+body, prop or sound-noun words. ch2lessons (2026-11-21) removed three limits Tom's own tagging breaks (claude/voice-tag-style.md):
+at most 2 descriptors per tag, at most 2 words per descriptor (his accent brackets, 'heavy Long Island accent, taunting, quick'),
+and the tag count by length (he places a new bracket at every beat: 21 of his 95 kept chapter 1 scripts broke it).
+'sigh' left the sound-noun list: it is a delivery word Tom writes himself ('[sigh, resigned, quick]').
 Usage (repo root): python3 tools/voice-library/apply-scripts.py <scripts.json> [tag]   (add --check to validate only, writing nothing)
 Then: python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js
 """
@@ -18,7 +21,7 @@ TAG = re.compile(r'\[([^\]]*)\]')
 BAD = {'standing','grinning','pacing','pointing','shrugging','hands','hand','arms','arm','finger','fingers','hips','foot',
        'mouth','eyes','eye','head','shoulders','leaning','sitting','slumping','bouncing','hopping','leaping','clutching',
        'tapping','wiggling','waving','swinging','holding','tossing','flicking','rummaging','patting','wagging','pointing',
-       'beat','chime','gunshot','yelp','groan','gasp','sigh','laugh','applause','music','grin','smile','nod',
+       'beat','chime','gunshot','yelp','groan','gasp','laugh','applause','music','grin','smile','nod',
        'ladder','couch','tv','screen','stopwatch','kettlebell','pliers','toolbox','sledgehammer','drill','flashlight'}
 def words(s): return re.sub(r'[^a-z0-9]+',' ',s.lower()).split()
 def canon(s):
@@ -30,14 +33,8 @@ def check(text, script):
     if '—' in script: errs.append('em dash')
     tags = [t for t in TAG.findall(script) if not re.fullmatch(r'\s*(short|long) pause\s*',t,re.I)]; spoken = TAG.sub('', script)   # pause tags sit outside the tag limit
     if canon(spoken) != canon(text): errs.append('words differ: %r' % ' '.join(canon(spoken)))
-    n = len(words(text)); limit = 1 if n <= 4 else 2 if n <= 14 else 3
-    if len(tags) > limit: errs.append('%d tags on %d words (max %d)' % (len(tags), n, limit))
     if not tags: errs.append('no tag')
     for t in tags:
-        parts = [p.strip() for p in t.split(',')]
-        if len(parts) > 2: errs.append('tag has %d descriptors: [%s]' % (len(parts), t))
-        for p in parts:
-            if len(p.split()) > 2: errs.append('descriptor over 2 words: %r' % p)
         for w in words(t):
             if w in BAD: errs.append('body, prop or sound word %r in [%s]' % (w, t))
     return errs

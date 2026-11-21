@@ -1,4 +1,4 @@
-# Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-20 18:30). Read before writing or fixing any dialogue.
+# Line rules from Tom's notes on chapters 1 and 2 (updated 2026-11-21, ch2lessons). Read before writing or fixing any dialogue.
 
 The evidence behind every rule is claude/tom-line-edits.md (each of Tom's edits, before and after). Read both.
 
@@ -20,6 +20,11 @@ The evidence behind every rule is claude/tom-line-edits.md (each of Tom's edits,
 11. **Kids are real kids.** Grace and Rose say what a 9 and a 6 year old say: scared, bossy, gross, excited, simple words. Poop is funny. They do not signpost the mystery or speak in themes ("Because I don't know what any of it means yet"). Monsters and bosses speak in concrete words, not abstractions.
 12. **Use the family's real word for the real thing** (muffin wrappers, not papers).
 13. **Voice tags carry the voice; the full guide is claude/voice-tag-style.md (Tom's 52 retagged chapter 1 lines).** Sal always has a heavy Long Island accent tag. Never capitalize a name for emphasis (TOM reads as "tomb"); use a tag. Every Tom line gets a tone tag; TNB stays mellow.
+
+### Added 2026-11-21 from the chapter 2 red pen pass (ch2lessons: 20 of 93 cut, 4 rewritten)
+14. **One laugh line per chapter for Tom, at most.** Chapter 2 had Tom say "Ha!" at three different puns (scene 1, 2 and 8); all three were cut. A pun lands on its own; the listener does not need Tom to laugh at it.
+15. **A repeated politeness is a gimmick by the third time.** "Excuse me" opened four of Tom's lines in three scenes; the one said to an object (the block) was cut. Keep it where it is aimed at someone who can hear it (the Big Shake).
+16. **A gag ends on its last beat, and nobody explains it.** After Mr. Washington's third identical greeting, TNB's "He's stuck. You're just keeping him company" explained the joke and was cut; after Doña Carmen's "I never said that", two more lines arguing it were cut. Endings again: scene 8 lost its last three lines and chapter 2 now ends on Nara's crumbs (action), not on a callback line.
 
 ## The red pen pass (added 2026-11-20). Run it on every chapter before Tom sees or plays it.
 Tom's day on chapter 1 was almost all cutting. So before any chapter reaches him, a separate reviewer (a fresh agent that did not write the lines) reads claude/tom-line-edits.md and then every line of the chapter, and marks each one KEEP, CUT or REWRITE with the rule number. Then:
@@ -44,10 +49,10 @@ Tom's day on chapter 1 was almost all cutting. So before any chapter reaches him
 
 ## Lines as they now stand
 - Chapter 2, scene 1. Tom: Poke it. Yes. But maybe just gently.
-- Voice script: [agreeing at once, earnest] Poke it. Yes. [small, concerned for the cloud] But maybe just GENTLY.
+- Voice script (ch2lessons retag): [agreeing, quick] Poke it. Yes. [pause] [hesitant, softer] But maybe just [emphasized] gently.
 - Chapter 1, scene 3. Deedee: My favorite son! I missed that face. Now sit, you're having a muffin.
 - Chapter 1, scene 3. Tom: Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.
 
-## Known orphans in chapter 2 after the chapter 1 cuts (2026-11-20)
-- Scene 6, Grace's text: "You left fingerprints on the last one... In pencil." Both the fingerprints line and "Why pencil?" were cut from chapter 1, so this text refers to nothing.
-- Scene 6, Tom's text: "It's on page nine" only sets up chapter 3's eleven pages (rule 10).
+## Known orphans
+- Chapter 2 (fixed 2026-11-21, ch2lessons): Grace's text no longer mentions fingerprints or the pencil, and Tom's text no longer says "page nine". Chapter 3's "It came to eleven pages" stands on its own (checked 2026-11-21); it needs no earlier setup.
+- Chapter 2 cuts that later chapters may lean on: "Hills, then bread" now appears once (scene 1); "Sour dough" stays; TNB's "the purple was growing on me" and Tom's "We'll come back" to the grey tree are gone. Chapter 3's locked draft has no callback to any of them (checked 2026-11-21).

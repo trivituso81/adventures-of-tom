@@ -1,636 +1,496 @@
 {
- "tag": "20261120ch2",
+ "tag": "20261121ch2",
  "chapter": 2,
  "lines": [
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Hey, babe. You've got your news face on.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, amused] hey, babe. [light teasing] you've got your news face on."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, greeting] hey, babe. [mellow, laid-back, low-key, teasing] you've got your news face on."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I do have news. But you go first. I can wait.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[bursting, holding it in] I DO have news. [gracious, strained] But you go first. I can wait."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[blurting, fast] I [emphasized] DO have news. [very strained] But you go first. [pause] [tight, quick] I can wait."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Sure. So I got up this morning, and I was thinking about toast...",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[easy, unhurried] sure. so i got up this morning, [drifting] and i was thinking about toast..."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, slow] sure. so i got up this morning, [mellow, laid-back, low-key, trailing off] and i was thinking about toast..."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[blurting, loud] A FISH was wearing my mom's muffin pan. [flat, amazed] As a crown. [mortified, laughing at himself] I'm so sorry. Please. [strained] Toast."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[blurting, very fast] A [emphasized] FISH was wearing my mom's muffin pan. [very flat] As a crown. [pause] [sheepish, quick] I'm so sorry. Please. [strained] Toast."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "No, yours wins. How big a fish?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, interested] no, yours wins. how big a fish?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, conceding] no, yours wins. [mellow, laid-back, low-key, very curious] how big a fish?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Big. No, sorry. TAXI big.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[careful] Big. [quick self-correction] No, sorry. TAXI big."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[informing, flat] Big. [quick, correcting] No, sorry. [emphasized] TAXI big."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Huh. That'd tip the scales.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, mild interest] huh. [punchline, level] that'd tip the scales."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Ha! It WOULD. Okay. Your turn. Toast.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[delighted laugh] Ha! It WOULD. [composing himself] Okay. Your turn. Toast."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, pause] huh. [mellow, laid-back, low-key, deadpan] that'd tip the scales."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out of bread.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, unhurried, telling a story] right. toast. so i look out the window to see what kind of day it is, [tossed off] the sky's purple, [punchline, mildly troubled] and it turns out we're out of bread."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, resuming] right. toast. [mellow, laid-back, low-key, slow] so i look out the window to see what kind of day it is, [mellow, laid-back, low-key, tossed off] the sky's purple, [mellow, laid-back, low-key, very troubled] and it turns out we're out of bread."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Go back one.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[quick, alert] Go back one."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[sharp, very fast] Go back one."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "The window?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, sincere] the window?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, very confused] the window?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The PURPLE.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[loud] The PURPLE."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[exasperated] The [emphasized] PURPLE."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Oh. Yeah. All day. It's coming off the hills. The bread's the real problem.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[easy, unbothered] oh. yeah. all day. it's coming off the hills. [punchline, level] the bread's the real problem."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "That is a very purple sky. Okay. Hills first. Then bread.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[stunned, careful] That is a VERY purple sky. [composing himself, businesslike] Okay. Hills first. Then bread."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, deadpan] oh. yeah. all day. [mellow, laid-back, low-key, informing] it's coming off the hills. [mellow, laid-back, low-key, very serious] the bread's the real problem."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Hills, then bread. I figure we walk up and poke it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, agreeable] hills, then bread. [quietly keen] i figure we walk up and poke it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, agreeing] hills, then bread. [mellow, laid-back, low-key, suggesting] i figure we walk up and poke it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Poke it. Yes. But maybe just gently.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[agreeing at once, earnest] Poke it. Yes. [small, concerned for the cloud] But maybe just GENTLY."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[agreeing, quick] Poke it. Yes. [pause] [hesitant, softer] But maybe just [emphasized] gently."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Nara's already on it. She's been barking at it from your porch since breakfast.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, amused] nara's already on it. she's been barking at it from your porch since breakfast."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, informing] nara's already on it. [mellow, laid-back, low-key, chuckling] she's been barking at it from your porch since breakfast."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Then we're her backup.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[dry, laughing at himself] Then we're her BACKUP."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[deadpan, quick] Then we're her [emphasized] backup."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Nara, no jumping. Hello. Yes. Hello. That's my whole face. Thank you.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[firm, fond] Nara, no jumping. [giving in, muffled] Hello. Yes. Hello. [calm, official] That's my whole face. Thank you."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[firm, loud] Nara, no jumping. [muffled] Hello. Yes. Hello. [very flat, informing] That's my whole face. [deadpan] Thank you."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "No. This isn't that kind of stick. This is a work stick.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[gentle, firm] No. This isn't that kind of stick. [formal, serious] This is a WORK stick."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[firm, quick] No. This isn't that kind of stick. [very serious, announcing] This is a [emphasized] work stick."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "She thinks you're sticking around.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, level] she thinks you're [punchline, light touch] sticking around."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Ha! I am. Right after we gently poke a cloud.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[delighted laugh] Ha! I am. [bright] Right after we GENTLY poke a cloud."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, deadpan] she thinks you're [mellow, laid-back, low-key, quick] sticking around."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Huh. Now it's between us and the bread.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, mildly troubled] huh. [punchline, level] now it's between us and the bread."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, pause] huh. [mellow, laid-back, low-key, very troubled] now it's between us and the bread."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Okay. Work stick. This is what you're for.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[steadying himself] Okay. Work stick. [resolute, slightly unsure] This is what you're for."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[bracing, quick] Okay. Work stick. [announcing, very serious] This is what you're for."
   },
   {
    "voice": "washington",
    "speaker": "Mr. Washington",
    "text": "Morning, Tom! Back from your folks? How's your mama?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm Louisiana drawl, cheerful] Morning, Tom! Back from your folks? How's your mama?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[thick Louisiana drawl, very cheerful, loud] Morning, Tom! [thick Louisiana drawl, asking] Back from your folks? [thick Louisiana drawl, very cheerful] How's your mama?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Morning, Mr. Washington. She's well, thank you.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm] Morning, Mr. Washington. She's well, thank you."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[flat, greeting] Morning, Mr. Washington. [informing, quick] She's well, thank you."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Still well! Thank you.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm, a little puzzled] Still well! Thank you."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[confused, quick] Still well! [very flat] Thank you."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "She's... consistently well.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[uneasy, careful] She's... [flat, certain] CONSISTENTLY well."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "Babe. He's stuck. You're just keeping him company.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, quiet] babe. he's stuck. [punchline, fond] you're just keeping him company."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[hesitant, slow] She's... [pause] [very very deadpan] [emphasized] consistently well."
   },
   {
    "voice": "mudling",
    "speaker": "Smoglet",
    "text": "Ahem. You're in my way.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[wet cough, then flat and rude] Ahem. You're in my way."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[wet cough] Ahem. [rude, very flat] You're in my way."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Okay. So. You coughed on Mr. Washington's porch. He sweeps that porch every MORNING.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[tight, controlled] Okay. [beat] So. [clipped, formal, indignant for his neighbor] You coughed on Mr. Washington's porch. He sweeps that porch every MORNING."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "Huh. So that's a monster. Smaller than I pictured.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, mild interest] huh. so that's a monster. [punchline, level] smaller than i pictured."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[tight, slow] Okay. [pause] So. [accusatory, quick] You coughed on Mr. Washington's porch. [outraged] He sweeps that porch every [emphasized] MORNING."
   },
   {
    "voice": "mudling",
    "speaker": "Smoglet",
    "text": "Ahem. There's two of us.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[wet cough, flat] Ahem. There's two of us."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[wet cough] Ahem. [taunting, flat] There's two of us."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "We can do this! I've done this one time.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[rallying, bright] We can do this! [quick, quieter] I've done this one time."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[rallying, loud] We can do this! [muttering, quick] I've done this one time."
   },
   {
    "voice": "odette",
    "speaker": "Miss Odette",
    "text": "This gumbo is perfect. Doesn't need a thing.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, dreamy, not herself] This gumbo is perfect. Doesn't need a thing."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[thick Louisiana Creole accent, dazed] This gumbo is perfect. [thick Louisiana Creole accent, droning] Doesn't need a thing."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "She's never said that. Last week she sent a bowl back to herself.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, low] she's never said that. [punchline, level] last week she sent a bowl back to herself."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, informing] she's never said that. [mellow, laid-back, low-key, deadpan] last week she sent a bowl back to herself."
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "Everything's fine. Everything's fine.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, dreamy] Everything's fine. Everything's fine."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[heavy Salvadoran accent, dazed] Everything's fine. [heavy Salvadoran accent, droning] Everything's fine."
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "Perfect. You cook so well, Tom.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, dreamy] Perfect. You cook so well, Tom."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[heavy Salvadoran accent, dazed] Perfect. [heavy Salvadoran accent, very flat] You cook so well, Tom."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Did you hear that? She said I cook WELL.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[thrilled, hushed] Did you hear that? She said I cook WELL."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[whispering, awed] Did you hear that? [astounded, quick] She said I cook [emphasized] WELL."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "She's in the smog, babe.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, gentle] she's in the smog, babe."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, very flat] she's in the smog, babe."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I know. I'm keeping it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[decided] I know. [pleased with himself] I'm keeping it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[conceding, quick] I know. [very smug] I'm keeping it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "It's coming out of the Observatory. But the Observatory's so nice.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[dismayed] It's coming out of the Observatory. [hurt on its behalf] But the Observatory's so NICE."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "It's always the nice ones.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, knowing] [punchline] it's always the nice ones."
+   "text": "Oh, Observatory. Not you.",
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[dismayed, slow] Oh, Observatory. [pause] [heartbroken, quiet] Not you."
   },
   {
    "voice": "skeeter",
    "speaker": "Ticket Flurry",
    "text": "No parking Saturdays. Noon to two. You parked.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[papery, clerk reading a form] No parking Saturdays. Noon to two. You parked."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[reciting, fast] No parking Saturdays. Noon to two. [accusatory, very flat] You parked."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I was in New York on Saturday. I still have my boarding pass.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[formal, indignant] I was in New York on Saturday. [precise] I still have my BOARDING pass."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[indignant, fast] I was in New York on Saturday. [informing, very precise] I still have my [emphasized] boarding pass."
   },
   {
    "voice": "skeeter",
    "speaker": "Ticket Flurry",
    "text": "Denied.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[papery, flat] Denied."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Denied?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, baffled, quiet, falling tone] Denied?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[very very flat, final] Denied."
   },
   {
    "voice": "grump",
    "speaker": "Canyon Coyote",
    "text": "Dog. Run with us. We never sit.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[low, eager] Dog. Run with us. We never sit."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "She's standing on my feet. Both of them. I'm going to hold very still.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[quiet, amazed] She's standing on my feet. Both of them. [careful, for her sake] I'm going to hold very still."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[low, growling] Dog. [eager, fast] Run with us. [taunting] We never sit."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Easy. She's spoken for. You want the rest of my soda?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[low, slow, friendly] easy. [level] she's spoken for. [offering] you want the rest of my soda?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, slow] easy. [mellow, laid-back, low-key, informing] she's spoken for. [mellow, laid-back, low-key, offering] you want the rest of my soda?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's the block. From the pond. The dragonfly was in one just like it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[hushed, certain] That's the block. From the pond. The dragonfly was in one just like it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[hushed, slow] That's the block. From the pond. [informing, quick] The dragonfly was in one just like it."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "You didn't mention a dragonfly.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, mild] you didn't mention a dragonfly."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, very flat] you didn't mention a dragonfly."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The fish took up a lot of the story.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[sheepish, laughing at himself] The FISH took up a lot of the story."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Excuse me. Sorry. I had to check.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[a little embarrassed, to the block] Excuse me. Sorry. I had to check."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[sheepish, quick] The [emphasized] fish took up a lot of the story."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "It's not glass. It's not resin. I don't like it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, thinking] it's not glass. it's not resin. [quieter, flatter than usual] i don't like it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, slow] it's not glass. it's not resin... [mellow, laid-back, low-key, very flat] i don't like it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "You don't like it? You liked the talking cloud.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[surprised, curious] You don't like it? [amused] You liked the talking CLOUD."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[astounded, quick] You don't like it? [accusatory] You liked the talking [emphasized] cloud."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "The cloud made sense.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, sincere] [punchline] the cloud made sense."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, deadpan] the cloud made sense."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Thank you, Nara. A burnt flashbulb. Grace has one just like it on her clue list.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm, formal] Thank you, Nara. [quiet] A burnt flashbulb. [realizing] Grace has one just like it on her clue list."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Grace, I'm on the job. There's a lemon stuck in an orange block up here, and Nara just found a burnt flashbulb next to it. I wrote it all down. It's on page nine.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[earnest, official] Grace, I'm on the JOB. [careful, listing] There's a lemon stuck in an orange block up here, and Nara just found a burnt flashbulb next to it. [proud] I wrote it all down. [punchline, tossed off] It's on page NINE."
+   "text": "Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.",
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[informing, very flat] Grace, reporting in. [quick, listing] There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. [deadpan] I wrote it down."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "Tata, step away from the block. You left fingerprints on the last one. Send me a picture with the lemon AND the bulb in it. I'm writing them both down. In pencil.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[bossy, small teacher] Tata, step AWAY from the block. [flat, accusing] You left fingerprints on the last one. [brisk] Send me a picture with the lemon AND the bulb in it. I'm writing them both down. [firm] In PENCIL."
+   "text": "Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.",
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[bossy, loud] Tata, don't touch it! [ordering, quick] Send me a picture of both. [very stern] And don't let Nara lick it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Picture taken. Not touching. I'm two feet back. Two and a half.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[instant, serious, taking an order] Picture taken. Not touching. I'm two feet back. [correcting himself] Two and a half."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "GAH! I've picked up Nara. I don't remember deciding to.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[real yelp] GAH! [breathless, laughing at himself] I've picked up Nara. I don't remember deciding to."
+   "text": "GAH! I've got you, Nara. We're fine. We're both fine.",
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[shrieking] GAH! [breathless, fast] I've got you, Nara. We're fine. [shaky, high] We're both fine."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "RUMBLE. A flash woke me up. Now everybody runs.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[huge, deep, slow] RUMBLE. A flash woke me up. [sad] Now everybody runs."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "Well, well, well... look who's up.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[slow, amused, mellow] well, well, well... look who's up."
-  },
-  {
-   "voice": "bigone",
-   "speaker": "The Big Shake",
-   "text": "RUMBLE. Stay back. I shake.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[huge, deep, warning] RUMBLE. Stay back. I shake."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[huge, very deep] RUMBLE. [accusatory, slow] A flash woke me up. [very sad] Now everybody runs."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me. You're wearing the Observatory. Please don't drop it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[formal, worried for the building] Excuse me. You're wearing the OBSERVATORY. [earnest] Please don't drop it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[urgent, quick] Excuse me. [informing, very flat] You're wearing the [emphasized] Observatory. [pleading] Please don't drop it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me. Mr. Shake. How are you doing?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[gentle, a little out of breath] Excuse me. Mr. Shake. [sincere] How are you doing?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[out of breath, soft] Excuse me. Mr. Shake. [pause] [hushed, asking] How are you doing?"
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "RUMBLE. ...Nobody asks. They just run.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[huge, deep, surprised] RUMBLE. [quiet] ...Nobody asks. They just run."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[huge, astounded] RUMBLE. [very quiet, slow] ...Nobody asks. [very sad] They just run."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, easy] i don't run. i've been sleeping on you every sunday. [sincere] sorry. i thought you were a hill."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, informing] i don't run. i've been sleeping on you every sunday. [mellow, laid-back, low-key, very apologetic] sorry. i thought you were a hill."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "RUMBLE. That was you? You snore.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[huge, deep, pleased] RUMBLE. That was you? [punchline, flat] You snore."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[huge, astounded] RUMBLE. That was you? [accusatory, very flat] You snore."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Yeah. That's fair.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[easy, amused] yeah. that's fair."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, conceding] yeah. that's fair."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "My pipe itches. Hold on. Hh... HHH...",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[huge, deep, building to a sneeze] My pipe itches. Hold on. Hh... HHH..."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[huge, complaining] My pipe itches. [urgent, quick] Hold on. [sneezing] Hh... HHH..."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Yes. I saw. Very good. May I?",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm, formal] Yes. I saw. Very good. [asking nicely] May I?"
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[very flat, quick] Yes. I saw. Very good. [pause] [asking, soft] May I?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Gold. And there's a lemon stamped on it.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[quiet, careful] Gold. And there's a lemon stamped on it."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[hushed, amazed] Gold. [informing, quick] And there's a lemon stamped on it."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Huh. Sour dough.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, level] huh. [punchline, light touch] sour dough."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Ha! I'm keeping that too.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[delighted laugh] Ha! I'm keeping that too."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "Sky's blue again. Shame. The purple was growing on me.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, looking up] sky's blue again. shame. [punchline, level] the purple was growing on me."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Still grey. Sorry, tree. We'll come back.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[small, sorry for it] Still grey. Sorry, tree. [promising] We'll come back."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[mellow, laid-back, low-key, pause] huh. [mellow, laid-back, low-key, deadpan] sour dough."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "She's well, Mr. Washington.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm, braced] She's well, Mr. Washington."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[bracing, very flat] She's well, Mr. Washington."
   },
   {
    "voice": "washington",
    "speaker": "Mr. Washington",
    "text": "Glad to hear it. Tell her I said hello.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[warm, easy] Glad to hear it. Tell her I said hello."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "A second sentence! Welcome back, Mr. Washington.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[delighted, relieved] A SECOND sentence! Welcome back, Mr. Washington."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[thick Louisiana drawl, very relaxed] Glad to hear it. [thick Louisiana drawl, very cheerful] Tell her I said hello."
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "Tom! Who turned my pupusas? They're all wrong.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[sharp, scolding] Tom! Who turned my pupusas? They're all WRONG."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[heavy Salvadoran accent, sharp, loud] Tom! [heavy Salvadoran accent, accusatory] Who turned my pupusas? [heavy Salvadoran accent, disgusted] They're all [emphasized] wrong."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "You told me I cook well.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[hopeful] You told me I cook well."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[pleading, quick] You told me I cook [emphasized] well."
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "I never said that.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[flat, final] I never said that."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "You said it. I was there.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, certain] you said it. i was there."
-  },
-  {
-   "voice": "carmen",
-   "speaker": "Doña Carmen",
-   "text": "Then I wasn't feeling well.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[dry, final] [punchline] Then I wasn't feeling well."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[heavy Salvadoran accent, very dismissive] I never said that."
   },
   {
    "voice": "odette",
    "speaker": "Miss Odette",
    "text": "Sit down, both of you. This gumbo needs salt and you two need lunch.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[commanding, warm] Sit down, both of you. This gumbo needs salt and you two need lunch."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[thick Louisiana Creole accent, commanding] Sit down, both of you. [thick Louisiana Creole accent, complaining, quick] This gumbo needs salt [thick Louisiana Creole accent, informing] and you two need lunch."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "We were going to get bread.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[apologetic] We were going to get bread."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[sheepish, quick] We were going to get bread."
   },
   {
    "voice": "odette",
    "speaker": "Miss Odette",
    "text": "I have bread. Sit.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[commanding] I have bread. Sit."
-  },
-  {
-   "voice": "tnb",
-   "speaker": "TNB",
-   "text": "Hills, then bread.",
-   "ctx": "chapter 2 (locked build)",
-   "script": "[mellow, content] [punchline] hills, then bread."
+   "ctx": "chapter 2 (ch2lessons)",
+   "script": "[thick Louisiana Creole accent, very firm] I have bread. [thick Louisiana Creole accent, commanding] Sit."
   }
  ]
 }

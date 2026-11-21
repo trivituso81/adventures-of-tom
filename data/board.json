@@ -15157,12 +15157,12 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Your notes become lessons for chapter 3 (card c-ch3lessons), then chapter 3 is built (card c-ch3build). When this is done, card t-ch2voices (make chapter 2's voices with one tap) opens for you.",
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. Lines still read in a computer voice (none of chapter 2 is recorded). Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). Your notes become lessons for chapter 3 (card c-ch3lessons). When this is done, card t-ch2voices (make chapter 2's 70 voices with one tap) opens for you.",
    "blocks": [
     "c-ch3lessons",
     "t-ch2voices"
    ],
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "created": "2026-11-20",
    "history": [
     {
@@ -15181,9 +15181,13 @@
     {
      "d": "2026-11-20",
      "t": "Now comes after c-ch2lessons (the red pen pass on chapter 2) and blocks c-ch3lessons, which turns your chapter 2 notes into lessons for chapter 3. Still in your backlog where you parked it."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "ch2lessons shipped: chapter 2 is 73 lines (20 cut, 4 rewritten, voice scripts retagged). This card now lists the changed lines to listen for. Still in your backlog where you parked it."
     }
    ],
-   "first": "Wait for the publish of build ch2lessons (chapter 2 with the chapter 1 lessons applied).",
+   "first": "Nothing: build ch2lessons is pushed.",
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
@@ -19969,7 +19973,7 @@
     "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
     "opening": "not started"
    },
-   "next": "Runs the red pen pass on built chapter 2: a fresh reviewer marks every line KEEP, CUT or REWRITE against your chapter 1 edits (claude/tom-line-edits.md), the cuts and rewrites go into the game, and the lines that referred to cut chapter 1 lines (fingerprints, pencil, page nine) are fixed. Every voice script is retagged in your style (claude/voice-tag-style.md: accent in every bracket, delivery words not character notes, quick, a bracket per beat). Then your chapter 2 play card lists exactly what changed.",
+   "next": "Done in ch2lessons. Next: Tom plays chapter 2 (t-ch2play).",
    "history": [
     {
      "d": "2026-11-20",
@@ -20001,7 +20005,7 @@
     },
     {
      "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
+     "t": "Shipped ch2lessons: reviewer marked 93 lines (69 keep, 20 cut, 4 rewrite), all applied; 70 voice scripts retagged, 14 bracket flags from a second reviewer fixed; apply-scripts.py limits relaxed. unused_voice check 4 still lists 221 old clips from other chapters (same as main): card c-voicepurge221."
     }
    ],
    "prompt": {
@@ -23204,6 +23208,33 @@
      "t": "Created by the b3s15 session as the next card. Stage 16 (Tombo skins) is skipped for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions."
     }
    ]
+  },
+  {
+   "id": "c-voicepurge221",
+   "title": "Purge the 221 old dialogue clips nothing plays",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "up",
+   "tag": "voicepurge221",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "next": "unused_voice.py check 4 lists 221 baked dialogue clips that no scene, harvest line or source plays (old chapter 1, 3 and 6 lines: Bready Mercury, the squirrel narrator, Bernadette and others). Found by ch2lessons; it was the same on main before. Purge them so the Voice Library and the bake lists stop showing them.",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by ch2lessons: the No unused voice rule needs check 4 at 0, and these clips predate that build."
+    }
+   ],
+   "prompt": {
+    "what": "Removes the 221 baked dialogue clips that nothing in the game plays, so they stop showing in the Voice Library.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (a mechanical purge by the documented recipe)",
+    "text": "Read CLAUDE.md (No unused voice) and docs/PURGED_VOICE.md. Run python3 tools/clip-audit/unused_voice.py: check 4 lists about 221 dialogue clips not in harvest or source. For each, confirm by grep that no scene, map, harvest line or source plays its text (a line that is live elsewhere is a harvest bug: fix the harvest instead of purging). Write a purge spec like tools/clip-audit/purge-ch2build.json, run node tools/clip-audit/purge_unused.js with the spec and --apply, rebuild with python3 tools/voice-library/rebuild.py, get all four checks to 0, record the list in docs/PURGED_VOICE.md and docs/CHANGES.md (## voicepurge221), bump tags, push. Your first push is the commit board: start c-voicepurge221. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
