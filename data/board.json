@@ -21767,7 +21767,7 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
    "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
@@ -21817,13 +21817,16 @@
     {
      "d": "2026-11-21",
      "t": "Session ended without shipping: stage 15 (chapter 1 moves to the new battle) is not built yet (stage 14, c-b3s14, is still Up next), so there is no new battle screen to check. Stays in Up next; start it after stage 15 ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGi3bbmoniU1eP4LyD",
+    "url": "",
     "opening": "started by START"
-   },
-   "started_at": "2026-11-21T05:30:04+00:00"
+   }
   },
   {
    "id": "c-itemdef1",
@@ -22468,7 +22471,7 @@
    "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s14b. Open: Big Shake, Iron-Gill and Old Ironbelly run under 5 rounds at Rank 5; left as is.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -22490,6 +22493,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped b3s14b: bosses re-measured at Rank 2 (all 5 to 7) and Rank 5 (3 under 5); no numbers changed; browser test s13 passes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s14b: New battle: balance pass follow-up, bosses checked at Rank 2 and Rank 5, no numbers changed"
     }
    ],
    "tag": "b3s14b",
@@ -22497,7 +22504,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
     "opening": "\"Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14\""
-   }
+   },
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
@@ -22973,6 +22981,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
+   "first": "2026-11-20T21:51:25-08:00",
+   "last": "2026-11-20T22:03:02-08:00",
+   "tags": [
+    "b3s14b"
+   ],
+   "cards": [
+    "c-b3s14b",
+    "c-b3s14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukELMZXjj5p7XhpH4Rn",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-20T22:01:15Z",
@@ -22982,16 +23003,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
-   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
-   "first": "2026-11-20T21:51:25-08:00",
-   "last": "2026-11-20T21:51:25-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s14b"
    ]
   },
   {
@@ -25686,8 +25697,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "43b5c49d55429454e72618500fa2275319c5bb4e",
- "synced_at": "2026-11-21T05:52:08+00:00",
+ "synced": "b010dcd4754d615bddeb832b78769f6b60cad216",
+ "synced_at": "2026-11-21T06:03:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
