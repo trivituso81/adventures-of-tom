@@ -21087,10 +21087,10 @@
    "col": "prog",
    "theme": "Characters",
    "title": "Boppy's cap lettering is mirrored on his shocked art",
-   "next": "Ready to start. Screen report.",
+   "next": "Shipped in qa-bug12c: Boppy's cap writing now reads Paso Robles when a scene mirrors his pose to face left. The paintings and the grin close-up were already right, so no Art Library entry changed.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on BUG-12 (c) from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21113,11 +21113,66 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Confirmed on main: the Library paintings (mood sheet, grin close-up) read Paso Robles correctly; the reversed writing came from facing1 mirroring his leaning poses when he looks left. Fixed in code (data/pose-unflip.js, paintedUnflip in engine/painted.js) instead of a prompt change, since any mirrored picture would reverse again. Shipped as qa-bug12c. Found his unimpressed pose still wears the old Big Fish cap: card c-boppy-bigfish."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug12c\""
+   },
+   "after": "t-qa-bug12c-play"
+  },
+  {
+   "id": "t-qa-bug12c-play",
+   "title": "Look at Boppy's cap when he turns left",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's kitchen (the muffin theft). When Boppy is shocked or points while facing left, his cap should say Paso Robles the right way round, not backwards. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-bug12c (build qa-bug12c)."
+    }
+   ]
+  },
+  {
+   "id": "c-boppy-bigfish",
+   "tag": "boppy-bigfish",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Characters",
+   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
+   "next": "Ready to start. Rewrite one Art Library prompt so the cap reads Paso Robles, then hand it to Tom to generate.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "prompt": {
+    "what": "Replaces the retired Big Fish cap on Boppy's unimpressed mood pose with his Paso Robles cap.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a picture prompt Tom judges by eye)",
+    "effort": "medium (one Art Library entry, written from a prompt that worked)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included. Your first push is the commit board: start c-boppy-bigfish.\n\nBoppy's unimpressed mood pose still wears the old Big Fish cap; the rest of his art wears the Paso Robles cap (Big Fish was retired, docs/CHANGES.md: \"the Big Fish cap is gone from the game\"). It shows in story scenes (art/chars/boppyemo-story.webp frame em_unimpressed) and his unimpressed dialogue face (portraits/emo/boppy-unimpressed.webp). Source: Art Library entry boppy-em-unimpressed-v1 (art/raw/characters/boppy-em-unimpressed-v1.png), merged into his mood sheet.\n\nFIRST confirm it still shows on current main. If so, its prompt is tools/art-library/ch2fix-prompts.js, id boppy-em-unimpressed (references boppy-hero-ref-v1.png and boppy-emotions-v6.png; first look at which cap each reference wears, since the cap usually comes from the references). Make the smallest change that gives the Paso Robles cap (a reference that wears it, or one added sentence), raise its promptRev and put it back under To do. Images only in the Art Library: Tom presses Generate. Hand it to Tom with a pictures card linked to the entry. Once he approves, rebake his mood frames and faces (emotion_frames.py, bake_emotion_faces.py, bake_story_poses.py), measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py), bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## boppy-bigfish, push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Found by c-qa-bug12c while checking Boppy's cap lettering: his em_unimpressed frame says Big Fish."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": ""
    }
   },
   {

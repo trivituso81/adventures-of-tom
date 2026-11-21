@@ -77,6 +77,19 @@ function paintedTintPixels(g,w,h,rowRange,k,hex,mode,tintFn) {
   }
   g.putImageData(im,0,y0);
 }
+// qa-bug12c: on a mirrored frame, paint each POSE_UNFLIP box (data/pose-unflip.js) from the unmirrored painting at its mirrored place,
+// only where the mirrored figure is drawn (source-atop), so writing on clothes reads correctly and the silhouette stays mirrored.
+function paintedUnflip(g,A,R,p,cw) {
+  const U=typeof POSE_UNFLIP!=='undefined'&&typeof p.a==='string'&&POSE_UNFLIP[p.a]&&POSE_UNFLIP[p.a][p.f]; if(!U) return;
+  g.globalCompositeOperation='source-atop';
+  for(const [x,y,w,h] of U) {   // the box edges fade out over F pixels so no seam shows on the cap
+    const t=document.createElement('canvas'); t.width=w; t.height=h; const tg=t.getContext('2d'); tg.drawImage(A.img,R[0]+x,R[1]+y,w,h,0,0,w,h);
+    try { const d=tg.getImageData(0,0,w,h),q=d.data,F=5;
+      for(let j=0;j<h;j++) for(let i=0;i<w;i++) { const e=Math.min(i+.5,w-i-.5,j+.5,h-j-.5); if(e<F) q[(j*w+i)*4+3]*=e/F; }
+      tg.putImageData(d,0,0); } catch(e) {}   // a tainted canvas (file://) keeps the hard edge
+    g.drawImage(t,cw-x-w,y); }
+  g.globalCompositeOperation='source-over';
+}
 // The painted frame for these rows at the current outfit tint and flash, cached per rows array. Null if not ready.
 function paintedCanvas(rows,flash) {
   const p=rows._paint; if(!p) return null;
@@ -94,6 +107,7 @@ function paintedCanvas(rows,flash) {
   if(p.flip) { g.translate(cw,0); g.scale(-1,1); }
   g.drawImage(A.img,R[0],R[1],R[2],R[3],R[4]||0,R[5]||0,R[2],R[3]);
   g.setTransform(1,0,0,1,0,0);
+  if(p.flip) paintedUnflip(g,A,R,p,cw);   // qa-bug12c: lettering (Boppy's cap) reads the right way round on a mirrored story pose
   if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,cw,ch); g.globalCompositeOperation='source-over'; }
   else if(t&&t.rows) paintedTintPixels(g,cw,ch,A.tintFrac?[A.tintFrac[0]*ch/A.k,A.tintFrac[1]*ch/A.k]:t.rows,A.k,t.color,A.tintMode,A.tintFn);
   cache.set(key,c); paintedKeep(c,cache,key);
