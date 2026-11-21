@@ -464,7 +464,7 @@ function stateLine(c,ctx){
 function actsHtml(c,ctx){
   if(c.col==='done')return '';
   if(ctx==='backlog')return '<button class="gold addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
-  if(isReview(c)&&(c.col==='up'||c.col==='prog'))return picsHtml(c,true)+'<div class="acts">'+rvBtns(c.id)+'</div>';
+  if(isReview(c)&&(c.col==='up'||c.col==='prog'))return picsHtml(c,true)+voicesHtml(c,true)+'<div class="acts">'+rvBtns(c.id)+'</div>';
   if(c.lane==='claude'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')){
     const st=startable(c),solid=st?'':(ctx==='queued'?'ob':'gold');
     return '<div class="acts">'+(st?'<button class="small gold" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button><button class="small tb" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>':'<button class="small '+solid+'" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button>')+'<span class="mdl">'+esc(modelShort(c))+'</span></div>';
@@ -550,6 +550,7 @@ const SPEND_PER=.04,SPEND_REF=.01,CHAINRE=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d
 const picIds=c=>(c.done_when&&c.done_when.art_approved)||[];
 const hasPics=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&c.ask==='pictures'&&picIds(c).length>0;
 async function loadArt(){
+  await loadVidx();
   if(!B||!B.cards.some(hasPics)||ART)return;
   try{const r=await fetch((Q.get('prompts')||'data/art-prompts.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok){const d=await r.json();ART={};d.entries.forEach(e=>{ART[e.id]=e;});}}catch(e){}
 }
@@ -622,6 +623,61 @@ function genTap(id){
   save('board: generate '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.gen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),ids,est:+est.toFixed(2),mode:'review'};touch(z,'Tom approved generating '+ids.length+' picture'+(ids.length===1?'':'s')+' (about '+money(est)+').');}return d;})
     .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
 }
+
+// ---- voiceboard1: Generate all voices from the card. A Tom card with ask voice and `voices` (list of 'voice|exact text') or `voice_chapter` (a chapter number)
+// shows the lines with no clip and one button; the page saves `vgen` on the card with the message "board: vgen <id>"; the voice-gen Action (tools/voice-learn/voiceboard.py)
+// makes the takes, merges them into the game on main and writes vgen.run. Same filter as tools/voice-learn/voicegen.py candidates(). 0.44 credits per character (voicegen2).
+let VIDX=null,VGENARM='';
+const VCREDITS=.44,VCAP=12000,vCredits=n=>Math.round(n*VCREDITS).toLocaleString('en-US');
+const hasVoices=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&c.ask==='voice'&&((c.voices||[]).length>0||!!c.voice_chapter);
+async function loadVidx(){
+  if(!B||!B.cards.some(hasVoices)||VIDX)return;
+  try{const r=await fetch((Q.get('vindex')||'data/voice-index.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok){const d=await r.json();VIDX=d.items||[];}}catch(e){}
+}
+function voiceLines(c){
+  const keys=new Set(c.voices||[]),ch=c.voice_chapter,seen=new Set(),out=[];
+  (VIDX||[]).forEach(it=>{
+    if(it.t!=='d'||(it.f||0)>=0||it.nv||!it.s)return;
+    const k=it.v+'|'+it.x;if(seen.has(k))return;
+    if(keys.has(k)||(ch&&(it.c||[]).includes(ch))){seen.add(k);out.push(it);}
+  });
+  return out;
+}
+function voicesHtml(c,compact){
+  if(!hasVoices(c))return '';
+  if(!VIDX)return '<div class="pics"><h4>Voices on this card</h4><div class="gm">Loading the voice list...</div></div>';
+  const g=c.vgen||{},run=g.run||{},items=voiceLines(c),n=items.length,chars=items.reduce((a,i)=>a+i.s.length,0);
+  const by={};items.forEach(i=>{by[i.v]=(by[i.v]||0)+1;});
+  const stale=run.state==='running'&&run.at&&(Date.now()-Date.parse(run.at))>3*3600e3;
+  const busy=g.want||(run.state==='running'&&!stale);
+  let h='<div class="pics"><h4>Voices on this card</h4><div class="gm" style="margin:0">'+(n?n+' line'+(n===1?'':'s')+' with no clip yet ('+Object.keys(by).sort((a,b)=>by[b]-by[a]).map(v=>esc(v)+' '+by[v]).join(', ')+')':'Every line of this card has a clip.')+'</div>';
+  let why='';
+  if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' voice'+((run.n||n)===1?'':'s')+'...';
+  else if(c.col==='wait'){const by2=blockedBy(c);why='Waiting on: '+(by2.length?by2.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
+  else if(!n)why='Nothing to make right now.';
+  const arm=VGENARM===c.id,cred=vCredits(Math.min(chars,VCAP));
+  h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="vgen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+cred+' credits)':'Generate all '+n+' voice'+(n===1?'':'s')+' (about '+cred+' credits)')+'</button>';
+  if(!why&&chars>VCAP)h+='<div class="gm">One run sends at most '+VCAP.toLocaleString('en-US')+' characters; tap again afterwards for the rest.</div>';
+  if(busy)h+='<div class="gm">'+(g.want?'Started. The voices are made and put into the game for you (about 15 to 25 minutes for a chapter). This card tells you when to listen.':'The job is running. This card tells you when to listen.')+'</div>';
+  if(!busy&&run.state&&run.state!=='running'&&!compact){
+    h+='<div class="gm"><b>Last run: '+(run.state==='done'?'finished':'failed')+'</b>'
+      +(run.credits!=null?' (about '+Math.round(run.credits).toLocaleString('en-US')+' credits)':'')
+      +'<br>Made and in the game: '+(run.made||[]).length+(run.build?' (build '+esc(run.build)+')':'')
+      +((run.needs_human||[]).length?'<br>Could not make ('+run.needs_human.length+'): '+run.needs_human.map(k=>esc(k.slice(0,80))).join('; '):'')
+      +(run.failed||[]).map(x=>'<br>Failed '+esc(String(x.id).slice(0,80))+': '+esc(x.why)).join('')
+      +(run.note?'<br>'+esc(run.note):'')+'</div>';
+  }
+  return h+'</div>';
+}
+function vgenTap(id){
+  const c=cardById(id);if(!c||!hasVoices(c)||!VIDX)return;
+  const items=voiceLines(c);if(!items.length)return;
+  if(VGENARM!==id){VGENARM=id;rerender();clearTimeout(vgenTap.h);vgenTap.h=setTimeout(()=>{if(VGENARM===id){VGENARM='';rerender();}},4000);return;}
+  VGENARM='';clearTimeout(vgenTap.h);
+  const n=items.length,chars=items.reduce((a,i)=>a+i.s.length,0),cred=Math.round(Math.min(chars,VCAP)*VCREDITS);
+  save('board: vgen '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.vgen={want:true,at:new Date().toISOString().replace(/\.\d+Z$/,'Z'),n,chars,est:cred};touch(z,'Tom approved generating '+n+' voice'+(n===1?'':'s')+' (about '+cred.toLocaleString('en-US')+' credits).');}return d;})
+    .then(()=>{toast('Started');rerender();}).catch(e=>{toast(e.message);rerender();});
+}
 function rerender(){render();if(cur&&sheetOpen()&&$('sheet').querySelector('.sh-body')&&$('sheet').dataset.kind==='card'){const b=$('sheet').querySelector('.sh-body'),y=b.scrollTop,m=moreOpen;openSheet(cur);moreOpen=m;if(m)toggleMore(true);$('sheet').querySelector('.sh-body').scrollTop=y;}}
 
 function render(){
@@ -660,7 +716,7 @@ function openSheet(id){
     const where=(String(c.next||'').match(PATHRE)||[])[0];   // the screen to go to, on its own line above the instruction
     body+='<h4>What to do</h4>'+(c.first&&open_?'<p class="first">First: '+withPaths(c.first)+'</p>':'')+(where&&open_?'<p class="where"><code class="path">'+esc(where)+'</code></p>':'');
     body+=(c.steps||[]).length?'<p>'+withPaths(c.next)+'</p><ol class="todo">'+c.steps.map(x=>'<li>'+withPaths(x)+'</li>').join('')+'</ol>':todoHtml(c.next);
-    body+=linksHtml(c)+picsHtml(c,false);
+    body+=linksHtml(c)+picsHtml(c,false)+voicesHtml(c,false);
     if(c.paste) body+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
     if(isReview(c)&&c.col!=='wait') body+='<p class="hint" style="margin-top:10px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
   }else{
@@ -1048,6 +1104,7 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='restart'){restartCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='gen'){genTap(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='vgen'){vgenTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
   if(t.id==='wpick'){$('wshot').click();return;}

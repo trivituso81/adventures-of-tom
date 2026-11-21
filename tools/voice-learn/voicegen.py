@@ -2,6 +2,8 @@
 """voicegen1: makes one checked ElevenLabs take for each voice line that has no clip yet.
 Plan: tools/voice-learn/GENERATION_JOB_PLAN.md (copy of claude/voice-generation-plan.md in the Project).
 
+voiceboard1 (2026-11-21): --lines-file and --chapter narrow the job to the lines of a board card (tools/voice-learn/voiceboard.py).
+
 Usage (repo root):
   python3 -I tools/voice-learn/voicegen.py [--voices tom,tnb] [--limit 5] [--dry-run] [--out DIR]
                                            [--max-chars 35000] [--retry-failed] [--no-guard]
@@ -147,6 +149,8 @@ def main():
     ap.add_argument('--out', default=os.path.join(ROOT, 'generated'))
     ap.add_argument('--max-chars', type=int, default=35000)
     ap.add_argument('--retry-failed', action='store_true')
+    ap.add_argument('--lines-file', default='', help='voiceboard1: a JSON list of "voice|exact text" keys; only those lines are made')
+    ap.add_argument('--chapter', type=int, default=0, help='voiceboard1: only the lines that play in this chapter')
     ap.add_argument('--no-guard', action='store_true', help='test only: skip the transcript check')
     a = ap.parse_args()
 
@@ -159,6 +163,12 @@ def main():
         if unknown:
             print('no unrecorded lines for voice(s):', ', '.join(sorted(unknown)))
         cands = [i for i in cands if i['v'] in want]
+    if a.chapter:
+        cands = [i for i in cands if a.chapter in (i.get('c') or [])]
+    if a.lines_file:
+        keep = set(json.load(open(a.lines_file, encoding='utf-8')))
+        cands = [i for i in cands if key_of(i) in keep]
+        print('lines asked for:', len(keep), '; of those with no clip:', len(cands))
     os.makedirs(a.out, exist_ok=True)
     have = done_keys(a.out)
     nh_path = os.path.join(a.out, 'needs-human.json')

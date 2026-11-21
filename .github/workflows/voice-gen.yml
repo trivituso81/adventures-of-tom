@@ -7,9 +7,29 @@ name: voice-gen
 # tools/voice-library/merge-local.js reads), report-*.json, needs-human.json and needs-human.txt. A normal session merges it.
 # Each run first restores what the branch holds, so lines already made are not made (or paid for) again.
 
+# voiceboard1 (2026-11-21): the board page's Generate all N voices button saves `vgen` on a Tom card with the commit "board: vgen <card id>"; that push runs
+# this workflow with tools/voice-learn/voiceboard.py, which makes the card's takes AND merges them into the game on main (no session in between), then writes
+# vgen.run on the card. By hand: input `card` does the same (dry_run true by default); input `chapter` limits the plain job to one chapter's lines.
+# The cap on characters per run is `max_chars` (default 12000 for a card run, 35000 for the plain job). Test: python3 tools/voiceboard_test.py
+
 on:
+  push:
+    branches: [main]
+    paths: ['data/board.json']
   workflow_dispatch:
     inputs:
+      card:
+        description: 'voiceboard1: a board card id with `voices` or `voice_chapter`: make its takes and merge them into the game.'
+        required: false
+        default: ''
+      chapter:
+        description: 'voiceboard1: only the lines that play in this chapter number (the plain job, nothing merged). Empty: no filter.'
+        required: false
+        default: ''
+      max_chars:
+        description: 'Most characters sent to ElevenLabs in this run (0: 12000 for a card, 35000 otherwise).'
+        required: false
+        default: '0'
       voices:
         description: 'Voice ids, comma separated (tom,tnb,deedee). Empty: every voice.'
         required: false
@@ -36,6 +56,7 @@ concurrency:
 
 jobs:
   gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: vgen ')"
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -45,6 +66,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Restore what the generated branch already holds
         run: |
           mkdir -p "$RUNNER_TEMP/generated"
@@ -53,19 +77,20 @@ jobs:
             git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/generated"
           fi
           ls -la "$RUNNER_TEMP/generated"
-      - name: Install the transcript check
-        if: ${{ inputs.dry_run != 'true' }}
+      - name: Install the transcript check and ffmpeg (a card run merges too)
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true' }}
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
           ffmpeg -version | head -1
           command -v ffmpeg
-          pip install requests numpy soundfile sherpa-onnx
+          pip install requests numpy soundfile sherpa-onnx pillow playwright
+          python3 -m playwright install --with-deps chromium   # unused_voice.py (a card run) harvests the game in a browser
           mkdir -p "$RUNNER_TEMP/vl/asr/tiny"
           curl -fsSL -o "$RUNNER_TEMP/whisper.tar.bz2" https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.en.tar.bz2
           tar -xjf "$RUNNER_TEMP/whisper.tar.bz2" -C "$RUNNER_TEMP/vl/asr/tiny"
           ls "$RUNNER_TEMP/vl/asr/tiny/sherpa-onnx-whisper-tiny.en"
-      - name: Make the takes
+      - name: Make the takes (a card run also merges them into the game and pushes to main)
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           VL_WORK: ${{ runner.temp }}/vl
@@ -73,18 +98,39 @@ jobs:
           LIMIT: ${{ inputs.limit }}
           DRY: ${{ inputs.dry_run }}
           RETRY: ${{ inputs.retry_failed }}
+          CARD: ${{ inputs.card }}
+          CHAPTER: ${{ inputs.chapter }}
+          MAXC: ${{ inputs.max_chars }}
+          EVENT: ${{ github.event_name }}
+          MSG: ${{ github.event.head_commit.message }}
         run: |
           set -o pipefail
-          ARGS="--out $RUNNER_TEMP/generated --limit ${LIMIT:-5}"
-          [ -n "$VOICES" ] && ARGS="$ARGS --voices $VOICES"
-          [ "$DRY" = "true" ] && ARGS="$ARGS --dry-run"
-          [ "$RETRY" = "true" ] && ARGS="$ARGS --retry-failed"
-          if [ "$DRY" != "true" ] && [ -z "$ELEVENLABS_API_KEY" ]; then echo "Repo secret ELEVENLABS_API_KEY is empty or missing."; exit 2; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$EVENT" != "workflow_dispatch" ]; then
+            # a push: "board: vgen <card id>" (the page's Generate all N voices); the card id is the first word after the prefix
+            CARD="$(printf '%s' "$MSG" | head -1 | sed -E 's/^board: vgen +//; s/ .*$//')"
+            DRY=false
+          fi
+          if [ "$DRY" != "true" ] && [ -z "$ELEVENLABS_API_KEY" ] && [ -z "$CARD" ]; then echo "Repo secret ELEVENLABS_API_KEY is empty or missing."; exit 2; fi
           python3 -I tools/voice-learn/lint_tags.py || echo "lint_tags lists scripts over the limit (voicegen skips them)"
-          python3 -I tools/voice-learn/voicegen.py $ARGS 2>&1 | tee "$RUNNER_TEMP/run.log"
+          if [ -n "$CARD" ]; then
+            ARGS="--card $CARD --out $RUNNER_TEMP/generated"
+            [ "$DRY" = "true" ] && ARGS="$ARGS --dry-run"
+            [ -n "$MAXC" ] && [ "$MAXC" != "0" ] && ARGS="$ARGS --max-chars $MAXC"
+            python3 -I tools/voice-learn/voiceboard.py $ARGS 2>&1 | tee "$RUNNER_TEMP/run.log"
+          else
+            ARGS="--out $RUNNER_TEMP/generated --limit ${LIMIT:-5}"
+            [ -n "$VOICES" ] && ARGS="$ARGS --voices $VOICES"
+            [ -n "$CHAPTER" ] && ARGS="$ARGS --chapter $CHAPTER"
+            [ -n "$MAXC" ] && [ "$MAXC" != "0" ] && ARGS="$ARGS --max-chars $MAXC"
+            [ "$DRY" = "true" ] && ARGS="$ARGS --dry-run"
+            [ "$RETRY" = "true" ] && ARGS="$ARGS --retry-failed"
+            python3 -I tools/voice-learn/voicegen.py $ARGS 2>&1 | tee "$RUNNER_TEMP/run.log"
+          fi
           { echo '### voice-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Save the output on the generated branch
-        if: ${{ inputs.dry_run != 'true' && always() }}
+      - name: Save the output on the generated branch (the plain job; a card run saves it itself)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.card == '' && inputs.dry_run != 'true' && always() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -97,7 +143,7 @@ jobs:
           git commit -q -m "voicegen: takes, reports and needs-human list (run ${{ github.run_id }}) [skip ci]"
           git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" generated
       - name: Keep a copy as a workflow artifact
-        if: ${{ inputs.dry_run != 'true' && always() }}
+        if: ${{ always() && (github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true') }}
         uses: actions/upload-artifact@v4
         with:
           name: voice-gen-output

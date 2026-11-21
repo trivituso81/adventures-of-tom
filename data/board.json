@@ -15112,9 +15112,10 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Your notes become lessons for chapter 3 (card c-ch3lessons), then chapter 3 is built (card c-ch3build).",
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Your notes become lessons for chapter 3 (card c-ch3lessons), then chapter 3 is built (card c-ch3build). When this is done, card t-ch2voices (make chapter 2's voices with one tap) opens for you.",
    "blocks": [
-    "c-ch3lessons"
+    "c-ch3lessons",
+    "t-ch2voices"
    ],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -20489,7 +20490,7 @@
    "col": "prog",
    "tag": "voiceboard1",
    "auto": true,
-   "after": "nothing for Tom: end",
+   "after": "t-ch2voices",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20515,6 +20516,11 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T04:00:00Z",
+     "t": "Built voiceboard1: the Generate all N voices button (board.html), tools/voice-learn/voiceboard.py and the voice-gen Action (a push \"board: vgen <card id>\" makes the takes and merges them into the game on main). Never run paid in a session. First card: t-ch2voices (chapter 2), waiting on t-ch2play."
     }
    ],
    "prompt": {
@@ -21958,6 +21964,41 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-coh07."
+    }
+   ]
+  },
+  {
+   "id": "t-ch2voices",
+   "lane": "tom",
+   "col": "wait",
+   "theme": "Voice Clips",
+   "title": "Make chapter 2's voices (one tap, then listen)",
+   "ask": "voice",
+   "voice_chapter": 2,
+   "fyi": true,
+   "blocks": [],
+   "next": "Tap Generate all voices on this card (it shows how many lines have no clip yet and about how many ElevenLabs credits; confirm with a second tap). Wait about 20 minutes; this card then says the voices are in the game. Open ADMIN > VOICE LIBRARY with the button below, play a few chapter 2 lines, then tap All good or Something is wrong.",
+   "links": [
+    {
+     "to": "voice",
+     "ids": {
+      "chapter": 2,
+      "show": "builtin"
+     },
+     "label": "Chapter 2 voices"
+    }
+   ],
+   "waiting_on": "tom",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-voiceboard. Waits until you have played chapter 2 (t-ch2play), so no credits go on lines you might still cut."
     }
    ]
   }
