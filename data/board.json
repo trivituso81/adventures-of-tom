@@ -30222,7 +30222,7 @@
    "title": "Watch Rose's new The Floor Is Lava!",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then tap All good or Something is wrong. Now: she gasps, a lava pool spreads under her (drawn by the game), she tosses the cushion on it, hops on and bounces with her arms up, then hops off as the lava goes. She turns toward the viewer while bouncing.",
    "steps": [
@@ -30237,9 +30237,15 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-rose-lava-xftr. The video (Kling 4.0, no lava) passed the edge and size checks; the lava is drawn by the game under her."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T22:50:07.853Z"
     }
    ],
-   "fyi": true
+   "fyi": true,
+   "done": "2026-11-21"
   },
   {
    "id": "t-stuck-anim-deedee-dodge-y4m3-2",
