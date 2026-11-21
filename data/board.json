@@ -17652,7 +17652,7 @@
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "startfix1",
    "next": "Every board START on the Opus medium and Sonnet high routes died before its first push on 2026-11-20 (cards c-startmore-opus, c-startmore-sonnet, c-idea-searchthrough, c-keysecrets3, c-keysecrets5). Sonnet medium (Board START) works. Both routes are paused (routines[].paused in data/board.json) so cards show Copy prompt instead of failing silently.",
    "prompt": {
@@ -17668,13 +17668,18 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
-    "opening": "Needs attention sweep"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by the Needs attention sweep after the second round of silent START deaths."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:27:46.585Z"
     }
    ]
   },
