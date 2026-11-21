@@ -23998,7 +23998,7 @@
    "title": "Look at the AI Costs page on your desktop",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "build": "costs1",
    "next": "On your desktop browser open https://trivituso81.github.io/adventures-of-tom/costs.html (or ADMIN > AI COSTS). Check the Overview total, open Ledger and press Subtotal by Month, open Totals and click one figure in the table, then open the Claude service. The browser tab should show a gold receipt with a dollar sign, not the Admin gear. Say what is wrong or missing. Your notes go to the next build, \"AI Costs fills itself in: balances and job spend\".",
@@ -24015,8 +24015,14 @@
     {
      "d": "2026-11-21",
      "t": "Build costs1icon adds the page's own tab icon to this check."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:00.032Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-costs2",
