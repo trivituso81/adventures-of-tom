@@ -26463,6 +26463,37 @@
      "t": "Made by guidegen1 (card c-guidegen). Every test used stand-ins, so the first real paid video is your tap on step 3. A video costs $0.50 (Wan 3.0, the family); a monster costs $0.07. Use this one changes the game; Keep the old one changes nothing."
     }
    ]
+  },
+  {
+   "id": "c-buildpill1",
+   "tag": "buildpill1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Builds screen: the build name is a status-colored pill",
+   "next": "Making the build name the prominent first line of every Builds row, in a pill in the same style as PUBLISHING and BUILDING, colored by the build's status.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFsxNwWgaqBLsffjnE",
+    "opening": "\"in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status.\""
+   },
+   "prompt": {
+    "what": "Makes the build name a status-colored pill on the Builds screen.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small screen change, steps not written)",
+    "effort": "medium (one screen, small change)",
+    "text": "Read CLAUDE.md and card c-buildpill1 in data/board.json, then finish what its history describes and push build buildpill1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status.\""
+    }
+   ]
   }
  ],
  "sessions": [
