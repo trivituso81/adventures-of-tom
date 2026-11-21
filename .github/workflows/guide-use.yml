@@ -1,0 +1,86 @@
+name: guide-use
+
+# guidegen1. USE THIS ONE in the Battle Guide (battle-guide.html) commits data/guide-use.json with the message "guide: use <animation id>".
+# That push runs this job: it empties the request list on main, then tools/guidegen/use_take.py puts the take Tom chose into the game (cuts the clip,
+# points the animation at it, removes what it replaces, records the prompt), the build is named and tagged, committed to main and published.
+# Everything a take is made of lives on the branch `guidegen` (never main, never served). Nothing here calls a paid service.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/guide-use.json']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: guideuse
+  cancel-in-progress: false
+
+jobs:
+  use:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'guide: use ')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tools
+        run: |
+          pip install pillow numpy scipy opencv-python-headless
+          if ! command -v ffmpeg >/dev/null; then pip install imageio-ffmpeg && sudo ln -sf "$(python3 -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg; fi
+      - name: Restore the takes from the guidegen branch
+        run: |
+          mkdir -p "$RUNNER_TEMP/guidegen"
+          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
+            git fetch --depth 1 origin guidegen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
+          fi
+      - name: Use the takes
+        id: use
+        run: |
+          set -o pipefail
+          TAG="guideuse-${GITHUB_RUN_ID}"
+          python3 -I tools/guidegen/use_take.py --state "$RUNNER_TEMP/guidegen" --tag "$TAG" 2>&1 | tee "$RUNNER_TEMP/use.log" || true
+          { echo '### guide-use'; echo '```'; tail -40 "$RUNNER_TEMP/use.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - name: Name the build and move the cache tags
+        run: |
+          python3 tools/guidegen/use_take.py --changes "$RUNNER_TEMP/guidegen/use-report.json" --tag "${{ steps.use.outputs.tag }}" || true
+          if [ -z "$(git status --porcelain -- . ':!data/guide-use.json')" ]; then echo "nothing to ship"; exit 0; fi
+          python3 tools/art-library/bump_tags.py "${{ steps.use.outputs.tag }}" --base HEAD
+      - name: Commit and push
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "nothing to commit"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "guide-use: ${{ steps.use.outputs.tag }}, takes chosen in the Battle Guide are in the game [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main && git push origin HEAD:main && exit 0
+            git rebase --abort || true
+            sleep 5
+          done
+          echo "push failed 5 times"; exit 1
+      - name: Keep the report on the guidegen branch
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f "$RUNNER_TEMP/guidegen/use-report.json" ] || exit 0
+          mkdir -p "$RUNNER_TEMP/keep" && cp "$RUNNER_TEMP/guidegen/use-report.json" "$RUNNER_TEMP/keep/"
+          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/keep" --msg "guidegen: use report (run ${{ github.run_id }}) [skip ci]"
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches -f ref=main

@@ -6,8 +6,16 @@ name: wan-gen
 # It changes nothing on main. Results, the fal answers and the money ledger go to branch `wangen` (never merged, never served); each run
 # restores that branch first, so the $ cap counts every call ever made and a finished or pending call is never paid for twice.
 # A Claude session checks the result and commits what passes to main itself.
+#
+# guidegen1: GENERATE THIS VIDEO in the Battle Guide commits data/wan-requests.json with the message "wan: generate <animation id>"; that push runs this job with
+# --requests (the same job; $0.50 a video, at most $1 a request, at most $10 a day for the guide). The requests are taken off main before anything is paid,
+# each video is judged by the clip gate and cut as a preview (tools/guidegen/make_take.py, secret XAI_API_KEY for the look check) and kept as a TAKE on the
+# branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-use Action).
 
 on:
+  push:
+    branches: [main]
+    paths: ['data/wan-requests.json']
   workflow_dispatch:
     inputs:
       what:
@@ -22,6 +30,10 @@ on:
         description: 'true: show the request and the cost, check the key (free), send nothing, spend nothing.'
         required: false
         default: 'true'
+      requests:
+        description: 'guidegen1: true = work through data/wan-requests.json (what the Battle Guide asked for) instead of the jobs in `what`.'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -32,6 +44,7 @@ concurrency:
 
 jobs:
   gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ')"
     runs-on: ubuntu-latest
     timeout-minutes: 170
     steps:
@@ -42,6 +55,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests pillow numpy
+      - name: Install the video tools for the Battle Guide takes (the runner has no ffmpeg)
+        if: ${{ github.event_name == 'push' || inputs.requests == 'true' }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          pip install scipy opencv-python-headless
       - name: Restore what the wangen branch already holds
         run: |
           mkdir -p "$RUNNER_TEMP/wangen"
@@ -56,13 +75,37 @@ jobs:
           WHAT: ${{ inputs.what }}
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}
+          GUIDE: ${{ github.event_name == 'push' || inputs.requests == 'true' }}
         run: |
           set -o pipefail
           ARGS=(--what "$WHAT" --cap "${CAP:-2}" --out "$RUNNER_TEMP/wangen")
+          [ "$GUIDE" = "true" ] && ARGS=(--requests --out "$RUNNER_TEMP/wangen")
           [ "$DRY" = "true" ] && ARGS+=(--dry-run)
           if [ "$DRY" != "true" ] && [ -z "$FAL_KEY" ]; then echo "Repo secret FAL_KEY is empty or missing."; exit 2; fi
           python3 -I tools/art-library/wangen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
           { echo '### wan-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Make the takes (clip gate and preview) for the Battle Guide
+        if: ${{ (github.event_name == 'push' || inputs.requests == 'true') && inputs.dry_run != 'true' && always() }}
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/guidegen"
+          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
+            git fetch --depth 1 origin guidegen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
+          fi
+          [ -f "$RUNNER_TEMP/wangen/guide-results.json" ] || { echo "no guide results"; exit 0; }
+          python3 -I tools/guidegen/make_take.py --results "$RUNNER_TEMP/wangen/guide-results.json" --state "$RUNNER_TEMP/guidegen" 2>&1 | tee "$RUNNER_TEMP/take.log"
+          { echo '### guide takes'; echo '```'; tail -30 "$RUNNER_TEMP/take.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the takes on the guidegen branch
+        if: ${{ (github.event_name == 'push' || inputs.requests == 'true') && inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f "$RUNNER_TEMP/guidegen/takes.json" ] || { echo "no takes to keep"; exit 0; }
+          rm -rf "$RUNNER_TEMP/guidegen/reconcile" "$RUNNER_TEMP/guidegen/replay.json"   # other jobs own these; only takes go back
+          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/guidegen" --msg "guidegen: takes (run ${{ github.run_id }}) [skip ci]"
       - name: Keep the results and the ledger on the wangen branch
         if: ${{ inputs.dry_run != 'true' && always() }}
         env:

@@ -53,16 +53,76 @@ def stand_in_model(system, user):
     note = user.split("TOM'S NOTE\n", 1)[1].strip().lower(); old = user.split('CURRENT PROMPT\n', 1)[1].split("\n\nTOM'S NOTE", 1)[0]
     d = {'question': None, 'prompt': None, 'changed_parts': ['MOTION'], 'kept': 'the picture rules and the pose', 'changed': 'one clause in the motion', 'unused': 'nothing'}
     if 'vague' in note and 'my answer' not in note: d.update(question='What should look different?', changed_parts=[])
-    elif 'break' in note: d['prompt'] = old.replace('smug little smile', 'retro smile').replace('calm', 'retro calm')
+    elif 'nochange' in note: d.update(prompt=old, changed_parts=[], unused='The clip length is fixed by the video model.')
+    elif 'break' in note: d['prompt'] = old.replace('MOTION:', 'MOTION: retro', 1)
     else:
-        parts = R.split(old); d['prompt'] = '\n\n'.join((t[:-1] + ', looking at the viewer.' if t.endswith('.') else t) if l == 'MOTION' else t for l, t in parts)
+        add = ', looking at the viewer.' if 'looking at the viewer' not in old else ', and he nods once.' if 'nods once' not in old else ', then he is still.'
+        parts = R.split(old); d['prompt'] = '\n\n'.join((t[:-1] + add if t.endswith('.') else t) if l == 'MOTION' else t for l, t in parts)
     return json.dumps(d), 0.003
 def run_action(doc):
     for r in doc['requests']:
         res = R.reconcile(stand_in_model, r['prompt'], r['note'], {'kind': r['kind'], 'hasVideo': r['hasVideo']})
         res.update({'id': r['id'], 'at': r['at'], 'note': r['note'], 'basedOn': r['prompt'], 'rev': r['rev'], 'model': 'stand-in'}); answers[R.slug_of(r['id'])] = res
+# guidegen1 (part 3): the stand-in GitHub also serves the branch guidegen (takes.json, take files, use-report.json) and takes the three request files. The stand-in
+# Actions answer from takes made earlier by the real tools/guidegen/make_take.py on synthetic videos (two polls find nothing first).
+import copy, math, re, shutil
+from PIL import Image, ImageDraw
+import make_take as MT, recipe as RC
+GD = RC.load(); BR = tempfile.mkdtemp(prefix='guidebranch-')   # BR is the stand-in's copy of the branch
+def synth(path, still=False):
+    d = tempfile.mkdtemp()
+    for i in range(120):
+        im = Image.new('RGB', (720, 1280), (255, 0, 255)); g = ImageDraw.Draw(im); ext = 0 if still or i < 20 or i >= 60 else int(300 * math.sin(math.pi * (i - 20) / 40))
+        g.ellipse((300, 200, 420, 340), fill=(224, 172, 140)); g.rectangle((290, 340, 430, 800), fill=(60, 90, 160)); g.rectangle((290, 800, 355, 1100), fill=(40, 40, 60)); g.rectangle((365, 800, 430, 1100), fill=(40, 40, 60)); g.rectangle((430, 380, 440 + ext, 480 + ext // 3), fill=(224, 172, 140))
+        im.save('%s/%03d.png' % (d, i))
+    r = subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '24', '-i', d + '/%03d.png', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', path], capture_output=True, text=True); assert r.returncode == 0, r.stderr
+    shutil.rmtree(d)
+VID = os.path.join(BR, 'src.mp4'); synth(VID)
+def g_ok(entry, vid, marks, key, cap): return {'hold': False, 'reasons': [], 'faults': [], 'vision_ran': True, 'spent': 0.0}
+def g_hold(entry, vid, marks, key, cap): return {'hold': True, 'reasons': ['the figure moves off its spot'], 'faults': ['drift'], 'vision_ran': True, 'spent': 0.0}
+SNAP = {}; _st = {'anims': {}, 'spent': 0.0}
+def prep(anim, n, gate, **kw):
+    r = {'anim': anim, 'take': n, 'video': VID, 'prompt': 'the prompt of take %d' % n, 'promptRev': 1, 'route': 'xai' if anim.startswith('act:') else 'wan', 'cost': .07 if anim.startswith('act:') else .5}; r.update(kw)
+    MT.process(r, _st, GD, BR, gate_fn=gate); SNAP[(anim, n)] = copy.deepcopy(_st['anims'][anim])
+prep('move:lounge_pass_flex', 1, g_ok); prep('move:lounge_pass_flex', 2, g_hold, note='He should smile and nod.')
+prep('act:skeeter:darting_bite', 1, g_ok)
+prep('move:suite_door_slide', 1, g_hold); prep('move:suite_door_slide', 2, g_hold)   # already stopped: two held takes with the same fault
+STATE = {'anims': {'move:suite_door_slide': copy.deepcopy(SNAP[('move:suite_door_slide', 2)])}, 'spent': 1.0}
+RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/wan-requests.json', 'data/clip-requests.json', 'data/guide-use.json')}
+ACT = {'pending': [], 'miss': 0, 'use': None, 'usemiss': 0, 'fail': set()}
+def action_takes(doc):
+    for r in doc['requests']:
+        a, n = (r['anim'], r['take']) if 'anim' in r else (r['guide']['anim'], r['guide']['take']); ACT['pending'].append((a, n)); ACT['miss'] = 2
+def action_use(doc):
+    ok, bad = [], []
+    for r in doc['requests']:
+        (bad if r['anim'] in ACT['fail'] else ok).append({'anim': r['anim'], 'name': 'x', 'rev': 'rev 2', 'notes': []} if r['anim'] not in ACT['fail'] else {'anim': r['anim'], 'why': 'the baker failed: no pictures'})
+    ACT['use'] = {'at': 'now', 'reqs': [r['at'] for r in doc['requests']], 'tag': 'guideuse-1', 'done': ok, 'failed': bad}; ACT['usemiss'] = 1
+def jfile(doc): return json.dumps({'sha': 'g1', 'content': base64.b64encode(json.dumps(doc).encode()).decode()})
 def github(route):
-    rq = route.request; url = rq.url.split('?')[0]
+    rq = route.request; url = rq.url.split('?')[0]; mpath = re.search(r'/contents/(.+)$', url); path = mpath.group(1) if mpath else ''
+    if path in RQ:
+        f = RQ[path]
+        if rq.method == 'GET': return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': f['sha'], 'content': base64.b64encode(json.dumps(f['doc']).encode()).decode()}))
+        body = json.loads(rq.post_data)
+        if body.get('sha') != f['sha']: return route.fulfill(status=409, body='{}')
+        doc = json.loads(base64.b64decode(body['content']).decode()); f['puts'].append({'msg': body['message'], 'doc': doc}); f['sha'] = 'q%d' % len(f['puts'])
+        (action_use if path.endswith('guide-use.json') else action_takes)(doc)
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': 'n'}}))
+    if path == 'takes.json':
+        if ACT['miss'] > 0: ACT['miss'] -= 1
+        elif ACT['pending']:
+            for a, n in ACT['pending']: STATE['anims'][a] = copy.deepcopy(SNAP[(a, n)])
+            ACT['pending'] = []
+        if not STATE['anims']: return route.fulfill(status=404, body='{}')
+        return route.fulfill(status=200, content_type='application/json', body=jfile(STATE))
+    if path.startswith('takes/'):
+        fp = os.path.join(BR, path)
+        if not os.path.exists(fp): return route.fulfill(status=404, body='{}')
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 'f', 'content': base64.b64encode(open(fp, 'rb').read()).decode()}))
+    if path == 'use-report.json':
+        if ACT['usemiss'] > 0 or not ACT['use']: ACT['usemiss'] = max(0, ACT['usemiss'] - 1); return route.fulfill(status=404, body='{}')
+        return route.fulfill(status=200, content_type='application/json', body=jfile(ACT['use']))
     if url.endswith('/contents/data/guide-reconcile.json'):
         if rq.method == 'GET':
             return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': reqs['sha'], 'content': base64.b64encode(json.dumps(reqs['doc']).encode()).decode()}))
@@ -219,12 +279,96 @@ with sync_playwright() as p:
     pg.click('#gdisc'); check('Discard clears the answer and keeps the draft', pg.locator('#gres').inner_text().strip() == '' and 'draft' in pg.locator('#gen').inner_text().lower())
     pg.fill('#gnote', 'please break it'); pg.click('#gupd'); pg.wait_for_selector('#gchk', timeout=20000)
     check('an answer that broke a rule twice is marked Check this one with the reasons', 'check this one' in pg.locator('#gchk').inner_text().lower() and pg.locator('#gchk li').count() >= 1, pg.locator('#gchk').inner_text())
+    pg.fill('#gnote', 'nochange please'); pg.click('#gupd'); pg.wait_for_selector('#gnochange', timeout=20000)
+    check('a note no wording can carry shows what could not be used and offers nothing to keep', 'length' in pg.locator('#glines').inner_text() and pg.locator('#gkeep').count() == 0 and pg.locator('#gnew').count() == 0)
+    pg.fill('#gnote', 'please break it'); pg.click('#gupd'); pg.wait_for_selector('#gchk', timeout=20000)
     for nm, w, h, two in SIZES:
         pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(120)
         check(nm + ': the answer fits the sheet', pg.evaluate("(()=>{const s=document.getElementById('sheet');return s.scrollWidth<=s.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
     pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.reload(); pg.wait_for_selector('#gnote')
     pg.fill('#gnote', 'a note'); n_before = len(reqs['puts']); pg.click('#gupd'); pg.wait_for_timeout(300)
     check('no token: nothing is sent and the page says why', 'token' in pg.locator('#gerr').inner_text().lower() and len(reqs['puts']) == n_before)
+    pg.click('#bclose')
+    # guidegen1 (part 3): Generate (price first, second tap), the take beside the current video, Use / Try again / Keep
+    pg.evaluate("localStorage.setItem('aot-gh-token','x')")
+    pg.goto(URL + '#anims/move:lounge_pass_flex'); pg.wait_for_selector('#ggen')
+    check('Generate shows the price on the button', '$0.50' in pg.locator('#ggen').inner_text(), pg.locator('#ggen').inner_text())
+    pg.wait_for_function("document.getElementById('gtk').textContent.indexOf('0')>0", timeout=20000)
+    check('the per-animation line shows takes made and dollars spent', pg.locator('#gtk').inner_text() == 'Takes made: 0' and pg.locator('#gsp').inner_text() == 'Spent: $0.00' and 'Prompt v' in pg.locator('#gmeta').inner_text(), pg.locator('#gmeta').inner_text())
+    pg.click('#ggen'); pg.wait_for_selector('#gconfbox')
+    check('the first tap only asks: it says what it will spend and sends nothing', 'This spends $0.50' in pg.locator('#gconfbox').inner_text() and not RQ['data/wan-requests.json']['puts'], pg.locator('#gconfbox').inner_text())
+    pg.click('#gcan'); check('Cancel sends nothing and clears the question', pg.locator('#gconfbox').count() == 0 and not RQ['data/wan-requests.json']['puts'])
+    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000)
+    wp = RQ['data/wan-requests.json']['puts']; r1 = wp[0]['doc']['requests'][-1] if wp else {}
+    check('the second tap commits one Wan request with the kept prompt, the start picture and a cap', len(wp) == 1 and wp[0]['msg'] == 'wan: generate move:lounge_pass_flex' and r1.get('slug') == 'move-lounge-pass-flex' and r1.get('take') == 1
+          and 'He does not blink.' in r1.get('prompt', '') and r1.get('start') == 'art/clips/start/tom-hero.png' and 0.5 <= r1.get('cap', 0) <= 1 and r1.get('at'), wp)
+    pg.wait_for_selector('#gtakecard', timeout=60000); pg.wait_for_function("(()=>{const n=document.getElementById('cvn'),c=document.getElementById('cvc');const dr=x=>{if(!x||x.width<10)return false;const d=x.getContext('2d').getImageData(0,0,x.width,x.height).data;for(let i=3;i<d.length;i+=4)if(d[i]>0)return true;return false};return dr(n)&&dr(c)})()", timeout=60000)
+    check('the take shows beside the current video and both draw', pg.locator('#cvn').count() == 1 and pg.locator('#cvc').count() == 1 and 'Now in the game' in pg.locator('#gtakecard').inner_text())
+    check('the gate says its result in plain words', 'nothing wrong' in pg.locator('#ggate').inner_text().lower() and 'hold' not in (pg.locator('#ggate').get_attribute('class') or ''), pg.locator('#ggate').inner_text())
+    check('the three buttons are there', [pg.locator(x).count() for x in ('#guse', '#gtry', '#gold')] == [1, 1, 1])
+    check('the line shows 1 take and the money spent so far', pg.locator('#gtk').inner_text() == 'Takes made: 1' and pg.locator('#gsp').inner_text() == 'Spent: $0.50', pg.locator('#gmeta').inner_text())
+    pg.screenshot(path=os.path.join(out, 'battleguide-take.png'))
+    for nm, w, h, two in SIZES:
+        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(120)
+        check(nm + ': the take comparison fits the sheet', pg.evaluate("(()=>{const s=document.getElementById('sheet'),c=document.getElementById('gtakecard').getBoundingClientRect(),r=s.getBoundingClientRect();return s.scrollWidth<=s.clientWidth+1&&c.right<=r.right+1&&c.left>=r.left-1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
+    pg.set_viewport_size({'width': 466, 'height': 657}); pg.wait_for_timeout(600); pg.wait_for_selector('#gtakecard')   # folding the Duo re-draws the page (route)
+    pg.click('#gtry'); check('Try again with a note sends the person to the note box', 'what was wrong' in pg.locator('#gmsg').inner_text().lower() and pg.evaluate("document.activeElement.id==='gnote'"))
+    pg.fill('#gnote', 'He should smile and nod.'); pg.click('#gupd')
+    try: pg.wait_for_selector('#gnew', timeout=20000)
+    except Exception: print('DEBUG', repr(pg.locator('#gres').inner_text()), repr(pg.locator('#gerr').inner_text()), reqs['puts'][-2:], list(answers)); raise
+    pg.click('#gkeep'); pg.wait_for_selector('#gkept')
+    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000)
+    r2 = RQ['data/wan-requests.json']['puts'][-1]['doc']['requests'][-1]
+    check('the second try is take 2 and carries the note', r2['take'] == 2 and r2['note'].startswith('He should smile') and r2['promptRev'] is not None, r2)
+    pg.wait_for_function("document.querySelector('#ggate')&&document.querySelector('#gtakecard h3').textContent.indexOf('Take 2')>=0", timeout=60000)
+    check('a take the gate held says so in the warning colour', 'hold' in (pg.locator('#ggate').get_attribute('class') or '') and 'flags' in pg.locator('#ggate').inner_text(), pg.locator('#ggate').inner_text())
+    pg.click('#gtry'); pg.fill('#gnote', 'He should smile and nod.'); pg.click('#gupd'); pg.wait_for_selector('#gnew', timeout=20000); pg.click('#gkeep'); pg.wait_for_selector('#gkept')
+    n_puts = len(RQ['data/wan-requests.json']['puts']); pg.click('#ggen'); pg.wait_for_selector('#gstop', timeout=20000)
+    check('a third try with nearly the same note stops, sends nothing and offers Ask Claude', len(RQ['data/wan-requests.json']['puts']) == n_puts and 'nearly the same' in pg.locator('#gstop').inner_text() and 'Two tries missed' in pg.locator('#ntxt').input_value(), pg.locator('#gstop').inner_text())
+    pg.screenshot(path=os.path.join(out, 'battleguide-stop.png'))
+    pg.click('#bclose')
+    # two takes held for the same fault: the stop shows by itself, with no Generate possible
+    pg.goto(URL + '#anims/move:suite_door_slide'); pg.wait_for_selector('#gstop', timeout=20000)
+    check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
+    pg.click('#ggen'); pg.wait_for_selector('#gstop'); check('Generate on a stopped animation sends nothing', not [x for x in RQ['data/wan-requests.json']['puts'] if 'suite_door_slide' in x['msg']])
+    pg.click('#bclose')
+    # Use this one: a question first, then a request, then the answer of the job
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]'); pg.wait_for_selector('#gtakecard', timeout=30000)
+    pg.wait_for_function("document.querySelector('#gtakecard h3').textContent.indexOf('Take 2')>=0")
+    check('opening the sheet again shows the latest take', 'take 2' in pg.locator('#gtakecard h3').inner_text().lower(), pg.locator('#gtake').inner_text())
+    pg.click('#guse'); pg.wait_for_selector('#guseyes')
+    check('Use this one asks first and says it changes the game', 'changes the game' in pg.locator('#guseconf').inner_text() and not RQ['data/guide-use.json']['puts'])
+    pg.click('#guseyes'); pg.wait_for_selector('#gused', timeout=30000)
+    up = RQ['data/guide-use.json']['puts']; ur = up[0]['doc']['requests'][-1] if up else {}
+    check('Use commits the take number and the prompt it was made from', len(up) == 1 and up[0]['msg'] == 'guide: use move:lounge_pass_flex' and ur.get('take') == 2 and ur.get('prompt') == 'the prompt of take 2' and ur.get('at'), up)
+    check('the page says it is in the game and what to do next', 'in the game now' in pg.locator('#gused').inner_text().lower() and 'reload' in pg.locator('#gused').inner_text().lower(), pg.locator('#gused').inner_text())
+    pg.click('#bclose')
+    ACT['fail'].add('move:lounge_pass_flex'); ACT['use'] = None
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]')
+    try: pg.wait_for_selector('#guse', timeout=30000)
+    except Exception: print('DEBUG2', repr(pg.locator('#gtake').inner_text()), pg.locator('#gmeta').inner_text(), GKEPT_DEBUG if False else ''); raise
+    pg.click('#guse'); pg.click('#guseyes')
+    try: pg.wait_for_selector('#gusefail', timeout=30000)
+    except Exception: print('DEBUG', pg.locator('#gtake').inner_text(), ACT['use'], RQ['data/guide-use.json']['puts'][-1:]); raise
+    check('a use that failed says why and says nothing changed', 'baker failed' in pg.locator('#gusefail').inner_text() and 'nothing in the game changed' in pg.locator('#gusefail').inner_text().lower(), pg.locator('#gusefail').inner_text())
+    pg.click('#bclose')
+    # Keep the old one
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]'); pg.wait_for_selector('#gold', timeout=30000); pg.click('#gold')
+    check('Keep the old one leaves the take on file and stops the players', 'Left as it is' in pg.locator('#gleft').inner_text() and pg.locator('#cvn').count() == 0)
+    pg.click('#bclose')
+    # a monster goes to the other request file
+    pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
+    check('a monster animation shows its own price', '$0.07' in pg.locator('#ggen').inner_text(), pg.locator('#ggen').inner_text())
+    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gtakecard', timeout=60000)
+    cp = RQ['data/clip-requests.json']['puts']; cr = cp[0]['doc']['requests'][-1] if cp else {}
+    check('a monster request goes to the clip-gen request file with a guide field, not the Library', len(cp) == 1 and cp[0]['msg'] == 'clip: generate guide act:skeeter:darting_bite' and cr.get('id') == 'guide-act-skeeter-darting-bite-t1'
+          and cr['guide']['anim'] == 'act:skeeter:darting_bite' and cr['guide']['take'] == 1 and cr['guide']['clip']['owner'] == 'skeeter' and cr['guide']['clip']['model'] == 'grok-imagine-video-1.5-lite' and cr['guide']['clip']['kind'] == 'strike' and cr['cap'] <= 0.5, cp)
+    check('a monster with no video has a standard-motion side to compare', 'standard motion' in pg.locator('#gtakecard').inner_text().lower() or 'Now in the game' in pg.locator('#gtakecard').inner_text())
+    pg.click('#bclose')
+    # no token
+    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
+    n_all = sum(len(f['puts']) for f in RQ.values()); pg.click('#ggen'); pg.wait_for_timeout(200)
+    check('no token: Generate sends nothing and says why', 'token' in pg.locator('#gmsg').inner_text().lower() and sum(len(f['puts']) for f in RQ.values()) == n_all)
     pg.click('#bclose')
     # search
     pg.click('#bsearch')

@@ -25532,7 +25532,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "guidegen1",
-   "next": "Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high. It adds to the Battle Guide player: a prompt for every animation, your note merged into that prompt and shown back to you with what changed, a Generate button with the price, and the new video beside the old one with Use this one, Try again, Keep the old one.",
+   "next": "Shipped as guidegen1 (parts guidegen1a, guidegen1b and guidegen1 are all on main). Nothing is left to do on this card. Your test is the card Try making a battle video in the Battle Guide.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25575,9 +25575,13 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as guidegen1b: the Battle Guide folds your note into an animation's prompt and shows what changed"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part 3 shipped as guidegen1: the Battle Guide makes a video from the prompt (price shown first, second tap to spend), shows the take next to the one in the game with the clip gate's words, and puts it in the game on Use this one. Tests used stand-ins only; nothing paid was run. Tom's test is card t-guidegen-try."
     }
    ],
-   "after": "nothing for Tom: c-guidegen"
+   "after": "t-guidegen-try"
   },
   {
    "id": "b-board-guidegen",
@@ -26429,6 +26433,34 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-artgen3 (artgen3 shipped)."
+    }
+   ]
+  },
+  {
+   "id": "t-guidegen-try",
+   "title": "Try making a battle video in the Battle Guide",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom. Make one new video for Zone One Blockade (has a video, change one thing) and one for Suite Door Slide (no video yet), $0.50 each, about $1.00 in all. Then tap All good or Something is wrong here. Build guidegen1.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom, then tap Zone One Blockade (it has a video).",
+    "Under the video, in the box What should change, type one change you want (for example: he plants the sign a little slower), then tap Update the prompt. Read Kept, Changed and Could not use, then tap Keep this prompt.",
+    "Tap Generate this video ($0.50), then Yes, spend $0.50. Wait about 5 minutes; you can close the screen and come back, the page picks it up.",
+    "When Take 1 appears next to the video now in the game, read the gate's line under it, then tap Keep the old one (nothing in the game changes), or Use this one if you like the new take better.",
+    "Go back to the Tom list and tap Suite Door Slide (no video yet). Tap Generate this video ($0.50), then Yes, spend $0.50, and wait for the take.",
+    "Tap Use this one if you like it, or Try again with a note. Then tap All good here, or Something is wrong and say what happened."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "guidegen1",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by guidegen1 (card c-guidegen). Every test used stand-ins, so the first real paid video is your tap on step 3. A video costs $0.50 (Wan 3.0, the family); a monster costs $0.07. Use this one changes the game; Keep the old one changes nothing."
     }
    ]
   }

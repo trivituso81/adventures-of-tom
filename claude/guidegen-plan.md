@@ -82,4 +82,22 @@ guidegen1a (Part 1: the file, the script, the page shows the prompt and why it c
 
 ## 8. Results
 
-(filled in as the parts are built)
+**Part 1 (guidegen1a, pushed fb0877f).** `data/guide-anims.json`: 346 animations (68 video, 5 painted, 278 none), 79 with a real prompt, the rest with a draft that keeps the person's approved prompt and changes only MOTION. Unmapped on purpose and listed: four cast jobs and seven entries (deedee-cast, grace-cast, rose-boop, rose-cast, rose-sleep, tom-cast, tom-give).
+
+**Part 2 (guidegen1b, pushed 2cf608a), real replay on 2026-11-21.** Model `grok-4.20-0309-non-reasoning` (the dearest non-reasoning xAI text model; the existing `XAI_API_KEY`, nothing new asked of Tom). 24 notes replayed (Tom's chapter 1 REDO notes and the Boop history), cost $0.0447 of a $0.48 cap.
+
+| Outcome | Count | Cases |
+|---|---|---|
+| New prompt accepted by the checks | 6 | deedee-wetfloor, grace-cast, grump-idle, rose-lava, toad-idle, tom-loungepass |
+| One plain question back (vague, contradictory or impossible note) | 13 | the vague notes, Boop with sound, Boop camera, Boop both ways, log-idle, deedee-cast, deedee-scrub and others |
+| Prompt came back unchanged (no wording can carry the note) | 5 | Boop pointed at the viewer, Boop three reaches, tom-give, grace-cubepop, tom-cast |
+
+The five unchanged answers first showed as "check this one"; they are now their own outcome (`nochange`: the page shows what could not be used and offers nothing to keep). No answer broke the smallest-change rule after the one resend. Not re-run with the real model after the `nochange` fix (stand-in tests cover it).
+
+**Part 3 (guidegen1).** Built and tested against stand-ins only; nothing paid was run (`dry:true`, stand-in fal and xAI). The first real paid take is Tom's tap on the Tom card the session ends with. Facts worth knowing:
+- The take is cut by `tools/guidegen/recipe.py` with the same baker as the game (`bake_clip.py`), in a scratch copy, so the preview Tom sees is the clip the game would play.
+- The gate on a take is `hold.py` as the clip-gen Action uses it; its vision part needs `XAI_API_KEY`, so it runs only in the Actions. Where the gate cannot run, the take says so in words.
+- Two jobs write the same branch at once (a Wan take and a reconcile answer): `tools/guidegen/keep.py` lays each job's files over the newest copy and pushes with a lease, retrying.
+- The Wan `guide_days` counter caps guide spending at $10 a day; a request past it comes back as a refused take with words.
+- Pre-existing failures that are not from this work: `python3 tools/board_sync_test.py` R5 and `python3 tools/art-library/clipgen_test.py` (`clip-tom-give-rev0.mp4` missing); both fail on the commit before guidegen1.
+

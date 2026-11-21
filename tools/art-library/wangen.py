@@ -193,15 +193,57 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
     return 0, report
 
 
+def run_guide_requests(a, jobs, state, lock, save, fal, key):
+    """guidegen1: what UPDATE/GENERATE in the Battle Guide asked for (data/wan-requests.json: {anim, slug, take, at, prompt, promptRev, start, pad?, cap?}).
+    The requests are taken off main first (before any spend), each one is one Wan video made with the proven settings of the `tom-idle` job (720p, 5 s,
+    seed 81, first and last frame = the start picture), capped by its own `cap` (at most $1) and by the day cap shared by every guide request
+    (state['guide_days'], default $10 a day). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
+    import copy, types
+    sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue
+    doc = gqueue.load('data/wan-requests.json', a.repo)
+    reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
+    say('%d guide request(s) found' % len(reqs))
+    if reqs and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
+    rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+    for r in reqs:
+        what = 'guide-%s-t%d' % (r['slug'], r['take'])
+        job = copy.deepcopy(jobs[a.template]); job.update(rev=1, frame=r['start'])
+        job.pop('pad', None)
+        if r.get('pad'): job['pad'] = float(r['pad'])
+        pdir = os.path.join(a.out, 'prompts'); os.makedirs(pdir, exist_ok=True)
+        pf = os.path.join(pdir, what + '.txt'); open(pf, 'w', encoding='utf-8').write(r['prompt'].strip() + '\n'); job['prompt_file'] = pf
+        est = estimate(job); dry = a.dry_run or bool(r.get('dry'))      # a request with dry:true asks for the plan only (a session never pays)
+        with lock:
+            day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
+            if not dry and used + est > a.day_cap + 1e-9:
+                rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); continue
+            ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0); ns.dry_run = dry
+        code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
+        row = {'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'note': r.get('note', ''), 'cost': est if rep.get('file') else 0}
+        if rep.get('file'):
+            row['video'] = os.path.join(a.out, rep['file'])
+            with lock: day[today] = round(day.get(today, 0.0) + est, 4); save()
+        elif not dry: row['error'] = rep.get('error') or 'the video was not made'
+        else: continue
+        rows.append(row)
+    json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
+    return 0 if all(not r.get('error') for r in rows) else 2
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--what', required=True, help='a job name, a comma list of names, or wildcards (tom-*)')
+    ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
+    ap.add_argument('--requests', action='store_true', help='guidegen1: work through data/wan-requests.json (what the Battle Guide asked for) instead of --what')
+    ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
+    ap.add_argument('--no-take', action='store_true', help='--requests: leave the request list as it is (tests)')
+    ap.add_argument('--day-cap', type=float, default=10.0, help='--requests: most dollars of guide videos a day')
     ap.add_argument('--cap', type=float, default=2.0); ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--parallel', type=int, default=3, help='jobs sent at once (1 to 3)')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
     a = ap.parse_args()
     jobs = load_jobs(a.repo)
-    names = pick(jobs, a.what)
+    if not a.requests and not a.what: ap.error('give --what or --requests')
+    names = [] if a.requests else pick(jobs, a.what)
     os.makedirs(a.out, exist_ok=True)
     stf = os.path.join(a.out, 'state.json')
     state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
@@ -214,6 +256,10 @@ def main():
 
     key = os.environ.get('FAL_KEY', '')
     fal = Fal(key, os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
+    if a.requests:
+        fal = Fal(os.environ.get('FAL_KEY', ''), os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
+        say('guide requests; ledger $%.2f' % state['spent'])
+        return run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
     say('%d job(s): %s; up to %d at once; ledger $%.2f of the $%.2f cap' % (len(names), ', '.join(names), max(1, min(3, a.parallel)), state['spent'], a.cap))
 
     def one(n):

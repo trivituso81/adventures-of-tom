@@ -21,7 +21,7 @@ import json, os, re, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
-sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate'))
+sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-gate'))
 
 BANNED = ['16-bit', '32-bit', 'snes', 'super nintendo', 'pixel art', 'retro', 'sprite', 'final fantasy', 'chrono trigger']
 HEAD_PARTS = ('WHAT THIS IS', 'LOOK', 'CAMERA AND BACKGROUND')
@@ -40,13 +40,14 @@ Rules (all of them):
 6. Keep at least 70% of the current words of any part you change, and keep that part within 20% of its length.
 7. Never use these words: 16-bit, 32-bit, SNES, Super Nintendo, pixel art, retro, Final Fantasy, Chrono Trigger. Do not add the word sprite.
 8. Plain words, no em dashes.
+9. When the prompt already says what the note asks for, or the note is about something no wording can change (how long the whole clip is, a fault of the video model itself, the figure drifting), do NOT stretch the rules to change something anyway. Send the current prompt back word for word, put an empty list in changed_parts, and say in "unused" in one plain line why nothing changed.
 
 If the note cannot be carried, do NOT guess. Ask ONE short plain question instead of writing a prompt, when the note contradicts itself or the current prompt, asks for something a silent locked-camera clip cannot show (sound, a camera move, a second character, a different face or outfit), or says only that it is bad or unclear with nothing to change ("complete fail", "I don't know what this is").
 
 Reply with JSON only:
 {"question": null or "one short plain question",
  "prompt": "the complete new prompt, every part, or null when you ask a question",
- "changed_parts": ["MOTION"],   (labels of the parts you changed: MOTION, WHAT THIS IS, LOOK, CAMERA AND BACKGROUND)
+ "changed_parts": ["MOTION"],   (labels of the parts you changed: MOTION, WHAT THIS IS, LOOK, CAMERA AND BACKGROUND; an empty list when nothing changed)
  "kept": "one plain line: what stayed the same",
  "changed": "one plain line: what changed and why it carries his note",
  "unused": "one plain line: any part of his note you could not use and why, or \\"nothing\\""}"""
@@ -158,6 +159,9 @@ def reconcile(ask, old, note, ctx=None):
         if r['question'] and not r['prompt']:
             return {'ok': True, 'question': r['question'], 'prompt': None, 'kept': '', 'changed': '', 'unused': r['unused'], 'check': False, 'why': [], 'spent': round(spent, 4), 'tries': tries}
         if not r['prompt']: why = ['no prompt and no question were given']; continue
+        if r['prompt'].strip() == old.strip():   # nothing to change: the prompt already says it, or no wording can carry the note. Honest, not a failure, and not worth a second paid try.
+            reason = r['unused'] if r['unused'] and r['unused'].lower() != 'nothing' else 'The prompt already says what the note asks for, or it is about something no wording can change.'
+            return {'ok': True, 'question': None, 'nochange': True, 'prompt': old, 'kept': 'The whole prompt.', 'changed': 'Nothing in the prompt changed.', 'unused': reason, 'check': False, 'why': [], 'spent': round(spent, 4), 'tries': tries}
         why = check(old, r['prompt'], r['claimed'], ctx.get('kind', 'family'))
         if not why:
             return {'ok': True, 'question': None, 'prompt': r['prompt'], 'kept': r['kept'], 'changed': r['changed'], 'unused': r['unused'], 'check': False, 'why': [], 'spent': round(spent, 4), 'tries': tries}
@@ -202,26 +206,13 @@ def jdump(d): return json.dumps(d, indent=1, ensure_ascii=False) + '\n'
 
 
 def load_requests(root=ROOT):
-    try: return json.load(open(os.path.join(root, 'data', 'guide-reconcile.json'), encoding='utf-8'))
-    except (OSError, ValueError): return {'requests': []}
+    import gqueue as Q
+    return Q.load('data/guide-reconcile.json', root)
 
 
 def take_requests(ats, root=ROOT, remote='origin'):
-    """Remove the requests with these `at` stamps from data/guide-reconcile.json on main (retried against a main that moved)."""
-    def git(*a, check=True):
-        p = subprocess.run(['git', '-C', root] + list(a), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-        if check and p.returncode: raise RuntimeError('git %s failed: %s' % (' '.join(a[:2]), p.stdout[-300:]))
-        return p
-    for k in range(8):
-        git('fetch', '--depth', '1', remote, 'main'); git('checkout', '-q', '-B', 'main', 'FETCH_HEAD'); git('reset', '-q', '--hard', 'FETCH_HEAD')
-        doc = load_requests(root); doc['requests'] = [r for r in doc.get('requests') or [] if r.get('at') not in ats]
-        open(os.path.join(root, 'data', 'guide-reconcile.json'), 'w', encoding='utf-8').write(jdump(doc))
-        git('add', 'data/guide-reconcile.json')
-        if not git('status', '--porcelain', '--', 'data/guide-reconcile.json', check=False).stdout.strip(): return
-        git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m', 'guide: reconcile requests taken [skip ci]')
-        if git('push', remote, 'HEAD:main', check=False).returncode == 0: return
-        say('push refused, trying again (%d)' % (k + 1)); time.sleep(3 + 2 * k)
-    raise RuntimeError('could not push the emptied request list 8 times')
+    import gqueue as Q
+    return Q.take('data/guide-reconcile.json', ats, root, remote, 'guide: reconcile requests taken [skip ci]')
 
 
 def slug_of(anim_id): return re.sub(r'[^a-z0-9]+', '-', anim_id.lower()).strip('-')

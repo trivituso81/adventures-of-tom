@@ -126,6 +126,13 @@ ol.steps li{margin:4px 0}
 .gen .q{border:1px solid var(--accent);border-radius:12px;padding:10px 12px;margin:8px 0}
 .gen .chk{border:1px solid var(--prob);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 .gen .row2{display:flex;gap:8px;margin-top:8px}.gen .row2 button{flex:1}
+.gen .conf,.gen .take{border:1px solid var(--accent);border-radius:12px;padding:10px 12px;margin:8px 0}
+.gen .cmp{display:flex;gap:8px;margin:8px 0}.gen .cmp>div{flex:1 1 0;min-width:0}.gen .cmp .lab{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.gen .cmp .box{background:linear-gradient(#17343d 0,#17343d 78%,#0d2228 78%,#0d2228 100%);border-radius:12px;display:flex;justify-content:center;align-items:flex-end;height:min(34vh,260px);overflow:hidden}
+.gen .cmp canvas{max-width:100%;max-height:100%}
+.gen .gate{font-size:14px;margin:6px 0}.gen .gate.hold{color:var(--prob-text)}
+.gen .row3{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.gen .stopbox{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 .gen .cant{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 /* Two panes: the Duo unfolded (both poses), tablets, desktop. */
 @media (min-width:560px) and (min-height:560px){
@@ -532,7 +539,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){MP.on=false;GCUR.tok++;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -619,7 +626,7 @@ async function updatePrompt(extra){
     if(!alive())return;
     btn.disabled=false;btn.textContent='Update the prompt';
     if(!ans){res.innerHTML='<p class="err">No answer yet after 5 minutes. Tap Update the prompt again, or send Claude the note below.</p>';return;}
-    showAnswer(a,ans,note);
+    LASTNOTE[a.id]=note;showAnswer(a,ans,note);
   }catch(e){if(alive()){btn.disabled=false;btn.textContent='Update the prompt';$('gerr').textContent=e.message;}}
 }
 function showAnswer(a,r,note){
@@ -630,23 +637,166 @@ function showAnswer(a,r,note){
   }
   if(r.check)h+='<div class="chk" id="gchk"><b>Check this one.</b> The new prompt broke a rule twice, so read it before you keep it:<ul style="margin:6px 0 0 18px">'+(r.why||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>';
   h+='<div class="lines" id="glines"><p><b>Kept:</b> '+esc(r.kept||'the rest of the prompt')+'</p><p><b>Changed:</b> '+esc(r.changed||'')+'</p><p><b>Could not use:</b> '+esc(r.unused||'nothing')+'</p></div>';
+  if(r.nochange){res.innerHTML=h+'<p class="hint" id="gnochange">Nothing in the prompt changed, so there is nothing to keep. Try different words, or send Claude the note below.</p>';return;}
   h+='<textarea id="gnew" class="big">'+esc(r.prompt||'')+'</textarea><p class="hint">You can edit this by hand. Nothing is made until you press Generate.</p>';
   h+='<div class="row2"><button type="button" class="gold" id="gkeep">Keep this prompt</button><button type="button" id="gdisc">Discard</button></div>';
   res.innerHTML=h;
 }
-let GASK=null;
+let GASK=null;const LASTNOTE={};
 function keepPrompt(){
   const a=PL.a,v=String(($('gnew')||{}).value||'').trim();if(!a||!v)return;
-  GW[a.id]={prompt:v,at:new Date().toISOString(),from:'reconcile'};saveGW();
+  GW[a.id]={prompt:v,at:new Date().toISOString(),from:'reconcile',note:LASTNOTE[a.id]||''};saveGW();
   $('gprompt').textContent=v;$('gres').innerHTML='<p class="hint" id="gkept">Kept. This is the prompt a new video of '+esc(a.name)+' will use.</p>';
   let e=$('gedited');if(!e){e=document.createElement('p');e.className='hint';e.id='gedited';$('gprompt').after(e);}e.textContent='You changed this prompt here ('+GW[a.id].at.slice(0,10)+'). The version above is the one a new video would use.';
+}
+// ---------- making a video, comparing it, using it (guidegen1) ----------
+// Every tap is a request committed to the repo; an Action does the work with the repo's secrets and keeps the take on the branch guidegen.
+const genWords=g=>g.route==='wan'?'Wan 3.0, 5 seconds at 720p':'xAI Grok lite, 3 seconds at 480p';
+const money=v=>'$'+(+v||0).toFixed(2);
+let GT=null;const GCUR={a:null,t:null,tok:0};
+let GTR={};try{GTR=JSON.parse(lsGet('aot-guide-tries')||'{}')||{};}catch(e){GTR={};}      // per animation: the notes of the tries made so far
+let GPEND={};try{GPEND=JSON.parse(lsGet('aot-guide-pend')||'{}')||{};}catch(e){GPEND={};}  // a request sent and not answered yet: {anim:{n,at}}
+let GKEPT={};try{GKEPT=JSON.parse(lsGet('aot-guide-kept')||'{}')||{};}catch(e){GKEPT={};}   // takes Tom decided to leave: {anim:[n,...]}
+const saveLS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+async function loadTakes(){
+  try{const g=await ghGetJson('takes.json','guidegen',lsGet(TOKEN));GT=g?g.doc:{anims:{}};}catch(e){GT=GT||{anims:{}};}
+  return GT;
+}
+const takesOf=a=>(GT&&GT.anims&&GT.anims[a.id])||{takes:[],spent:0,stop:false};
+const nextTake=a=>Math.max(0,...takesOf(a).takes.map(t=>t.n),(GPEND[a.id]||{}).n||0)+1;
+function showStats(a){
+  const A=takesOf(a),k=$('gtk'),s=$('gsp');if(k)k.textContent='Takes made: '+A.takes.length;if(s)s.textContent='Spent: '+money(A.spent);
+}
+function words3(t){return new Set(String(t||'').toLowerCase().split(/[^a-z]+/).filter(w=>w.length>2));}
+function overlap(x,y){const a=words3(x),b=words3(y);if(!a.size||!b.size)return 0;let i=0;a.forEach(w=>{if(b.has(w))i++;});return i/(a.size+b.size-i);}
+function stopFor(a,note){   // two misses the same way: the gate held the last two takes for one fault, or two tries in a row carry nearly the same note
+  const A=takesOf(a);if(A.stop)return A.stopWhy||'The clip gate held the last two takes for the same fault.';
+  const tr=GTR[a.id]||[],prev=tr[tr.length-1];
+  if(note&&prev&&prev.note&&overlap(note,prev.note)>=0.5)return 'This note says nearly the same thing as the one for the last try, so a third try is likely to miss the same way.';
+  return '';
+}
+function stopHtml(a,why){return '<div class="stopbox" id="gstop"><b>Stop here.</b> '+esc(why)+' Making another one will cost money and probably miss again. Send Claude a note below: it will look at the takes and change the cause, not the wording.</div>';}
+function fillStopNote(a){const el=$('ntxt');if(!el||el.value)return;const tr=GTR[a.id]||[];el.value='Two tries missed the same way.'+tr.slice(-2).map((x,i)=>' Try '+x.n+' note: '+x.note+'.').join('');}
+function askGen(){
+  const a=PL.a,g=a&&G(a);if(!g)return;const m=$('gmsg');m.textContent='';
+  if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
+  const why=stopFor(a,(GW[a.id]&&GW[a.id].note)||'');
+  if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
+  const cap=g.route==='wan'?1:0.15;
+  $('gconf').innerHTML='<div class="conf" id="gconfbox"><p><b>This spends '+money(g.price)+'.</b> One video from the prompt above ('+esc(genWords(g))+'). The most this try can spend is '+money(cap)+'.</p><div class="row2"><button type="button" class="gold" id="ggo">Yes, spend '+money(g.price)+'</button><button type="button" id="gcan">Cancel</button></div></div>';
+}
+async function doGen(){
+  const a=PL.a,g=a&&G(a);if(!g)return;const note=(GW[a.id]&&GW[a.id].note)||'',n=nextTake(a),at=new Date().toISOString(),prompt=workPrompt(a);
+  const why=stopFor(a,note);if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
+  const box=$('gconf');box.innerHTML='<p class="hint">Sending the request...</p>';
+  const slug=g.slug||slugOf(a.id);
+  try{
+    if(g.route==='wan')await ghRequest('data/wan-requests.json','wan: generate '+a.id,d=>{d.requests.push({anim:a.id,slug,take:n,at,prompt,promptRev:g.promptRev||0,start:g.start,pad:g.pad||undefined,cap:+(g.price*1.2).toFixed(2),note});});
+    else{
+      const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};
+      await ghRequest('data/clip-requests.json','clip: generate guide '+a.id,d=>{d.requests.push({id:'guide-'+slug+'-t'+n,prompt,promptRev:g.promptRev||0,cap:0.15,at,guide:{anim:a.id,take:n,note,clip:{id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows}}});});
+    }
+  }catch(e){box.innerHTML='';$('gmsg').textContent=e.message+'. Nothing was sent.';return;}
+  (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);
+  GPEND[a.id]={n,at};saveLS('aot-guide-pend',GPEND);if(GW[a.id]){delete GW[a.id].note;saveGW();}
+  box.innerHTML='';waitTake(a,n,at);
+}
+async function waitTake(a,n,at){
+  const tok=++GCUR.tok,t0=Date.parse(at)||Date.now(),el=$('gtake');
+  const alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake');
+  while(alive()&&Date.now()-t0<30*60000){
+    await loadTakes();const t=takesOf(a).takes.find(x=>x.n===n);
+    if(t){delete GPEND[a.id];saveLS('aot-guide-pend',GPEND);if(alive()){showStats(a);showTake(a,t);}return;}
+    if(alive())$('gtake').innerHTML='<p class="hint" id="gwait">Making take '+n+', '+Math.round((Date.now()-t0)/1000)+' s. A video takes 3 to 8 minutes; you can close this and come back, it keeps going.</p>';
+    await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
+  }
+  if(alive())$('gtake').innerHTML='<p class="err">No video after 30 minutes. Open the Actions tab on GitHub is not needed: tell Claude, or send the note below.</p>';
+}
+// two small players share one clock
+const MP={on:false,items:[],last:0,raf:0};
+function mpStart(items){MP.items=items;MP.on=true;MP.last=performance.now();cancelAnimationFrame(MP.raf);MP.raf=requestAnimationFrame(mpTick);}
+function mpTick(now){
+  if(!MP.on)return;const dt=Math.min(100,now-MP.last);MP.last=now;
+  MP.items=MP.items.filter(it=>document.body.contains(it.cv));
+  MP.items.forEach(it=>{it.t+=dt;const L=clipLen(it.D);if(it.t>=L)it.t%=L;const g=it.cv.getContext('2d'),r=it.D.rects[frameAt(it.D,it.t)];g.clearRect(0,0,it.cv.width,it.cv.height);g.drawImage(it.img,r[0],r[1],r[2],r[3],r[4],r[5],r[2],r[3]);});
+  if(MP.items.length)MP.raf=requestAnimationFrame(mpTick);else MP.on=false;
+}
+async function ghGetB64(path,ref){
+  const tok=lsGet(TOKEN),H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
+  const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+path+'?ref='+ref+'&t='+Date.now(),{cache:'no-store',headers:H});if(!r.ok)throw new Error('GitHub '+r.status);
+  const j=await r.json();let c=j.content||'';
+  if(!c.replace(/\s/g,'')){const b=await fetch(GH()+'/repos/'+REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:H});if(!b.ok)throw new Error('GitHub '+b.status);c=(await b.json()).content||'';}
+  return c.replace(/\s/g,'');
+}
+async function loadTakeClip(t){
+  const js=t64(await ghGetB64(t.js,'guidegen')),wb=atob(await ghGetB64(t.img,'guidegen'));let D=null;
+  new Function('bclipDefine',js)((id,d)=>{D=d;});if(!D)throw new Error('The take file did not hold a clip.');
+  const u8=new Uint8Array(wb.length);for(let i=0;i<wb.length;i++)u8[i]=wb.charCodeAt(i);
+  const img=new Image();await new Promise((ok,no)=>{img.onload=ok;img.onerror=()=>no(new Error('The take picture did not load.'));img.src=URL.createObjectURL(new Blob([u8],{type:'image/webp'}));});
+  return {D,img};
+}
+async function showTake(a,t){
+  GCUR.a=a;GCUR.t=t;const el=$('gtake');if(!el)return;const A=takesOf(a);
+  if((GKEPT[a.id]||[]).includes(t.n)){el.innerHTML='<p class="hint" id="gleft">Take '+t.n+' is on file; you chose to leave the current video as it is.</p>';return;}
+  if(t.status==='failed'){el.innerHTML='<div class="take" id="gtakecard"><h3>Take '+t.n+' did not come back</h3><p>'+esc(t.why||'The generator made no video.')+' Spent '+money(t.cost)+'.</p><p class="hint">Tap Generate this video to try again.</p></div>';return;}
+  if(t.status==='still'){el.innerHTML='<div class="take" id="gtakecard"><h3>Take '+t.n+' hardly moves</h3><p>'+esc(t.why)+' It cost '+money(t.cost)+'. Change the prompt (write what to add above, then Update the prompt) and try again.</p></div>';return;}
+  const hold=t.gate&&t.gate.hold;
+  let h='<div class="take" id="gtakecard"><h3>Take '+t.n+' ('+money(t.cost)+')</h3><div class="cmp"><div><div class="lab">'+(a.clip?'Now in the game':'Now: standard motion')+'</div><div class="box"><canvas id="cvc" width="2" height="2"></canvas></div></div><div><div class="lab">New take</div><div class="box"><canvas id="cvn" width="2" height="2"></canvas></div></div></div>'
+    +'<p class="gate'+(hold?' hold':'')+'" id="ggate">'+esc((t.gate&&t.gate.words)||'The clip gate did not run on this take.')+'</p>'
+    +'<p class="hint">'+t.frames+' pictures, '+t.kb+' KB, cut as '+esc(t.words)+'. This is exactly how the game would play it.'+(t.note?' Made with your note: '+esc(t.note):'')+'</p>'
+    +'<div class="row3"><button type="button" class="gold" id="guse">Use this one</button><button type="button" id="gtry">Try again with a note</button><button type="button" id="gold">Keep the old one</button></div><div id="guseconf"></div></div>';
+  el.innerHTML=h;const items=[];
+  try{const r=await loadTakeClip(t);if(GCUR.t!==t||!$('cvn'))return;const cv=$('cvn');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;items.push({cv,D:r.D,img:r.img,t:0});}
+  catch(e){const c=$('cvn');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px">'+esc(e.message)+'</div>';}
+  if(a.clip){try{const r=await loadClip(a.clip);const cv=$('cvc');if(cv){cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;items.push({cv,D:r.D,img:r.img,t:0});}}catch(e){}}
+  else{const c=$('cvc');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px;text-align:center">No video yet</div>';}
+  if(items.length)mpStart(items);
+}
+function askUse(){
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;
+  if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
+  $('guseconf').innerHTML='<div class="conf"><p><b>This changes the game.</b> '+(a.clip?'Take '+t.n+' replaces the current video of '+esc(a.name)+'; the old one is removed from the game (Git keeps it).':'Take '+t.n+' becomes the video of '+esc(a.name)+'.')+' It costs nothing and takes a few minutes.</p><div class="row2"><button type="button" class="gold" id="guseyes">Yes, use it</button><button type="button" id="gusecan">Cancel</button></div></div>';
+}
+async function doUse(){
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const at=new Date().toISOString(),box=$('guseconf');box.innerHTML='<p class="hint">Sending...</p>';
+  try{await ghRequest('data/guide-use.json','guide: use '+a.id,d=>{d.requests.push({anim:a.id,take:t.n,at,prompt:t.prompt||workPrompt(a)});});}
+  catch(e){box.innerHTML='<p class="err">'+esc(e.message)+'. Nothing was changed.</p>';return;}
+  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake');
+  while(alive()&&Date.now()-t0<20*60000){
+    const g=await ghGetJson('use-report.json','guidegen',lsGet(TOKEN)).catch(()=>null);
+    if(g&&g.doc&&(g.doc.reqs||[]).includes(at)){
+      const ok=(g.doc.done||[]).find(x=>x.anim===a.id),bad=(g.doc.failed||[]).find(x=>x.anim===a.id);
+      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+t.n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight.</p></div>'
+        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Send Claude a note below.</div>';
+      return;
+    }
+    if(alive())box.innerHTML='<p class="hint" id="guseWait">Putting it in the game, '+Math.round((Date.now()-t0)/1000)+' s. This takes about 3 to 6 minutes.</p>';
+    await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
+  }
+  if(alive())box.innerHTML='<p class="err">No answer after 20 minutes. Tell Claude, or send the note below.</p>';
+}
+function tryAgain(){
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
+  $('gmsg').textContent='Write what was wrong with take '+t.n+' in the box above, tap Update the prompt, keep the new prompt, then Generate again.';
+}
+function keepOld(){
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;(GKEPT[a.id]=GKEPT[a.id]||[]).push(t.n);saveLS('aot-guide-kept',GKEPT);MP.on=false;
+  $('gtake').innerHTML='<p class="hint" id="gleft">Left as it is. Take '+t.n+' stays on file ('+money(t.cost)+' spent).</p>';
+}
+async function initMake(a){
+  GCUR.tok++;MP.on=false;if(!$('gtake'))return;
+  const tok=GCUR.tok;await loadTakes();if(GCUR.tok!==tok||PL.a!==a||!$('gtake'))return;showStats(a);
+  const A=takesOf(a),last=A.takes[A.takes.length-1],pend=GPEND[a.id];
+  if(pend&&!A.takes.find(x=>x.n===pend.n)){waitTake(a,pend.n,pend.at);return;}
+  if(A.stop&&$('ghow')){$('gtake').innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
+  if(last)showTake(a,last);
 }
 function genBlock(a){
   if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Reload the page.</p></div>';
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
   const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource);
   let h='<div class="gen" id="gen"><h3>Prompt</h3>';
-  h+='<div class="meta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span></div>';
+  h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':a.painted?'. This animation is still an old painted pose.':'. This animation has no video yet.')+'</p>';
   if(!g.canMake)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
@@ -660,6 +810,10 @@ function genBlock(a){
       +'<p class="err" id="gerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gupd" style="width:100%">Update the prompt</button>'
       +'<p class="hint">'+(g.video?'Your words are folded into the prompt with the smallest change, and you see what was kept and what changed before anything is made.':'Claude folds your words into the draft with the smallest change. Leave it empty to keep the draft as it is.')+'</p><div id="gres"></div>';
   }
+  if(g.canMake){
+    h+='<h3>Make a video</h3><p class="hint" id="ghow">One try makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>'
+      +'<p class="err" id="gmsg" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="ggen" style="width:100%">Generate this video ($'+g.price.toFixed(2)+')</button><div id="gconf"></div><div id="gtake"></div>';
+  }
   return h+'</div>';
 }
 async function openPlayer(animId){
@@ -670,9 +824,10 @@ async function openPlayer(animId){
   const S=$('sheet');S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
     S.innerHTML=head+stage(a.painted?'This one is still an old painted pose. Its video is not made yet, so there is nothing to play here.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
-    return;
+    initMake(a);return;
   }
   S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a);
+  initMake(a);
   try{
     const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;
     const cv=$('cv');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;$('scrub').max=r.D.n-1;
@@ -793,6 +948,14 @@ document.addEventListener('click',e=>{
   if(t.id==='gask'){const v=cleanWords(($('gans')||{}).value);if(v&&GASK)updatePrompt(GASK.note+' (Your question: '+GASK.q+' My answer: '+v+')');return;}
   if(t.id==='gkeep'){keepPrompt();return;}
   if(t.id==='gdisc'){$('gres').innerHTML='';return;}
+  if(t.id==='ggen'){askGen();return;}
+  if(t.id==='gcan'){$('gconf').innerHTML='';return;}
+  if(t.id==='ggo'){doGen();return;}
+  if(t.id==='guse'){askUse();return;}
+  if(t.id==='gusecan'){$('guseconf').innerHTML='';return;}
+  if(t.id==='guseyes'){doUse();return;}
+  if(t.id==='gtry'){tryAgain();return;}
+  if(t.id==='gold'){keepOld();return;}
   if(t.id==='pcopy'){copyText($('ptext').textContent);return;}
 });
 document.addEventListener('input',e=>{

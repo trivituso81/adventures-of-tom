@@ -6,7 +6,7 @@ name: guide-reconcile
 # sent back once, a second failure marked "check this one"), and keeps one answer per animation on the branch `guidegen` (reconcile/<slug>.json; never main,
 # never served). The page reads the answer from there. A request is capped at $0.10 (at most $0.50); a text call costs a fraction of a cent.
 # By hand (workflow_dispatch): `replay: true` replays Tom's chapter 1 REDO notes, the Boop history and notes that cannot be done (plan section 8), capped by `cap`.
-# `dry_run` (default true) calls nothing. The branch `guidegen` is shared with the take and use jobs (guidegen1): they restore it first, never overwrite it.
+# `dry_run` (default true) calls nothing. The branch `guidegen` is shared with the take and use jobs (guidegen1); tools/guidegen/keep.py lays this job's files over its newest copy.
 
 on:
   push:
@@ -51,14 +51,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
-      - name: Restore what the guidegen branch already holds
-        run: |
-          mkdir -p "$RUNNER_TEMP/guidegen"
-          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
-            git fetch --depth 1 origin guidegen
-            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
-          fi
-          ls -la "$RUNNER_TEMP/guidegen"
+      - run: mkdir -p "$RUNNER_TEMP/guidegen"
       - name: Fold the notes into the prompts
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
@@ -84,22 +77,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cd "$RUNNER_TEMP/guidegen"
-          [ -n "$(ls -A .)" ] || { echo "nothing to save"; exit 0; }
-          # the branch may have moved while this job ran (a take or use job): add to its newest copy, never replace it
-          rm -rf "$RUNNER_TEMP/gg-new"; mkdir "$RUNNER_TEMP/gg-new"
-          if git ls-remote --exit-code --heads "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" guidegen >/dev/null 2>&1; then
-            git -C "$GITHUB_WORKSPACE" fetch --depth 1 origin guidegen
-            git -C "$GITHUB_WORKSPACE" archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/gg-new"
-          fi
-          rm -rf "$RUNNER_TEMP/gg-new/reconcile.tmp"
-          mkdir -p "$RUNNER_TEMP/gg-new/reconcile"
-          [ -d reconcile ] && cp -f reconcile/*.json "$RUNNER_TEMP/gg-new/reconcile/" 2>/dev/null || true
-          [ -f replay.json ] && cp -f replay.json "$RUNNER_TEMP/gg-new/replay.json" || true
-          cd "$RUNNER_TEMP/gg-new"
-          git init -q -b guidegen
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -q -m "guidegen: reconcile answers (run ${{ github.run_id }}) [skip ci]"
-          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" guidegen
+          [ -n "$(ls -A "$RUNNER_TEMP/guidegen" 2>/dev/null)" ] || { echo "nothing to save"; exit 0; }
+          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/guidegen" --msg "guidegen: reconcile answers (run ${{ github.run_id }}) [skip ci]"

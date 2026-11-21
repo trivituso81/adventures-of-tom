@@ -23,8 +23,8 @@ def node(*a, env=None):
 r = node('--check'); check('guide-anims.json is current', r.returncode == 0, r.stdout + r.stderr)
 D = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8')); A = D['anims']
 c = D['counts']
-check('346 animations, 68 videos, 5 painted, 278 without a video', (c['total'], c['video'], c['painted'], c['none']) == (346, 68, 5, 278) and len(A) == 346, c)
-check('painted ones have no video and the rest add up', sum(1 for a in A.values() if a['painted'] and a['video']) == 0 and sum(a['video'] for a in A.values()) == 68)
+check('the counts match the animations (at least 346; videos and no-video add up)', c['total'] == len(A) >= 346 and c['video'] + c['none'] == c['total'] and c['video'] == sum(a['video'] for a in A.values()) and c['painted'] == sum(1 for a in A.values() if a['painted']), c)
+check('painted ones have no video and the rest add up', sum(1 for a in A.values() if a['painted'] and a['video']) == 0 and sum(a['video'] for a in A.values()) == c['video'])
 check('every prompt has one MOTION part', all(a['prompt'].count('MOTION:') == 1 for a in A.values()), [i for i, a in A.items() if a['prompt'].count('MOTION:') != 1][:5])
 check('every animation with a video has a real prompt', all(a['promptSource'] in ('job', 'entry', 'used') for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and a['promptSource'] not in ('job', 'entry', 'used')])
 check('every animation with a video says what made it', all(a['madeBy'] for a in A.values() if a['video']), [i for i, a in A.items() if a['video'] and not a['madeBy']])
@@ -60,7 +60,7 @@ e = {'clip': {'model': D['routes']['xai']['model'], 'res': D['routes']['xai']['r
 check('the monster price is what clipgen.py books', all(abs(a['price'] - round(clipgen.cost(e), 2)) < 1e-9 for a in A.values() if a['route'] == 'xai'), (clipgen.cost(e)))
 # the prompt that made a clip
 lp = A['move:lounge_pass_flex']
-check('Lounge Pass Flex: made by rev 1, so its prompt is the rev 1 file, with one later try noted', lp['job'] == 'tom-loungepass' and lp['entry'] == 'clip-tom-loungepass' and lp['promptFile'].endswith('wan-tom-loungepass-v1.txt') and lp['laterTries'] == 1 and lp['recipe'] == 'strike1x', {k: lp.get(k) for k in ('job', 'promptFile', 'laterTries', 'recipe', 'madeBy')})
+check('Lounge Pass Flex: its prompt is its job\'s current rev file, with later tries noted', lp['job'] == 'tom-loungepass' and lp['entry'] == 'clip-tom-loungepass' and lp['promptFile'].endswith('wan-tom-loungepass-v%d.txt' % lp['promptRev']) and lp['laterTries'] == 1 and lp['recipe'] == 'strike1x', {k: lp.get(k) for k in ('job', 'promptFile', 'laterTries', 'recipe', 'madeBy')})
 check('Grace\'s guard maps to the proof job named video', A['body:grace:guard']['job'] == 'video' and A['body:grace:guard']['recipe'] == 'guard')
 check('a stop-lossed move keeps its job and says it has no video', A['move:lamb_tuck_ankle_tackle']['job'] == 'rose-tackle' and not A['move:lamb_tuck_ankle_tackle']['video'])
 check('Mud Flick and Mud Pie share the throw entry', A['act:mudling:mud_flick']['entry'] == 'clip-mudling-throw' and A['act:mudling:mud_pie']['entry'] == 'clip-mudling-throw')

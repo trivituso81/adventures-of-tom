@@ -14,7 +14,8 @@ def check(name, ok, detail=''):
     if not ok: fails.append(name)
 
 G = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
-FAM = G['move:lounge_pass_flex']['prompt']; MON = G['act:skeeter:darting_bite']['prompt']
+# frozen copies (tools/guidegen/fixtures): the live prompts change whenever Tom's notes are folded in, the rules under test do not
+FAM = open(os.path.join(HERE, 'fixtures', 'family-prompt.txt'), encoding='utf-8').read().strip(); MON = open(os.path.join(HERE, 'fixtures', 'monster-prompt.txt'), encoding='utf-8').read().strip()
 check('a family prompt splits into preamble, three parts in order', [l for l, _ in R.split(FAM)] == ['PREAMBLE', 'WHAT THIS IS', 'CAMERA AND BACKGROUND', 'MOTION'], [l for l, _ in R.split(FAM)])
 check('a monster prompt has LOOK too and a tail', [l for l, _ in R.split(MON)] == ['PREAMBLE', 'WHAT THIS IS', 'LOOK', 'CAMERA AND BACKGROUND', 'MOTION', 'TAIL'], [l for l, _ in R.split(MON)])
 
@@ -52,6 +53,10 @@ a = scripted(js(prompt=FAM.replace('smug little smile', 'retro smile')), js(prom
 check('a second failure is marked check this one and keeps the last answer', not r['ok'] and r['check'] and r['tries'] == 2 and r['prompt'] and r['why'], r)
 a = scripted('not json at all', js(prompt=GOOD)); r = R.reconcile(a, FAM, 'x note', {})
 check('a reply that is not JSON is sent back once', r['ok'] and r['tries'] == 2 and 'JSON' in a.calls[1])
+a = scripted(js(prompt=FAM, changed_parts=[], unused='The clip length is fixed by the video model; no wording changes it.')); r = R.reconcile(a, FAM, 'should be a longer animation', {})
+check('a note no wording can carry returns the prompt unchanged, says why, and is not retried or marked', r['ok'] and r.get('nochange') and r['prompt'] == FAM and 'length' in r['unused'] and r['tries'] == 1 and not r['check'] and r['changed'] == 'Nothing in the prompt changed.', r)
+a = scripted(js(prompt=FAM, changed_parts=['MOTION'], changed='it now says it')); r = R.reconcile(a, FAM, 'one poke only', {})
+check('a prompt sent back unchanged while claiming a change is still nochange, with a plain reason', r['ok'] and r.get('nochange') and 'already says' in r['unused'], r)
 a = scripted(js(question='Do you want her to cast with both hands or one?', prompt=None, changed_parts=[])); r = R.reconcile(a, FAM, 'make it better', {})
 check('a question instead of a prompt comes back as a question with no prompt', r['ok'] and r['question'].endswith('?') and r['prompt'] is None and r['tries'] == 1, r)
 a = scripted(js(question=None, prompt=GOOD)); r = R.reconcile(a, FAM, 'x', {})

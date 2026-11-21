@@ -24,7 +24,7 @@ asks for one entry (its prompt as on Tom's screen replaces the entry's own for t
 group. The queue is emptied BEFORE the first paid call, so a second run can never pay twice. The report carries `at`, `asked`, `approved`,
 `held`, `still`, `failed`, `blocked`, `skipped`; the Action keeps it on branch `clipgen` and the Art Library page reads it.
 Output: OUT/clipgen-report.json."""
-import os, sys, re, json, time, hashlib, base64, argparse, datetime, subprocess, threading, concurrent.futures
+import os, sys, re, json, time, hashlib, base64, argparse, datetime, subprocess, threading, concurrent.futures, shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -237,6 +237,11 @@ def request_queue(doc, repo, reqs):
         if e['id'] not in [q['id'] for q in queue]: queue.append(e)
     for r in reqs:
         if isinstance(r.get('cap'), (int, float)) and r['cap'] > 0: caps.append(float(r['cap']))
+        if r.get('guide'):   # guidegen1: one take of a monster animation asked for in the Battle Guide. It has no Library entry to approve: the video is kept as a take (tools/guidegen/make_take.py).
+            g = r['guide']; c = g['clip']
+            add({'id': r['id'], 'status': 'todo', 'group': 'Guide', 'prompt': r.get('prompt', ''), 'promptRev': r.get('promptRev', 0), '_guide': g, '_at': r.get('at'),
+                 'clip': {'id': c['id'], 'owner': c['owner'], 'kind': c['kind'], 'start': c['start'], 'model': c['model'], 'res': c['res'], 'dur': c['dur'], 'figRows': c.get('figRows')}})
+            asked.append(r['id']); continue
         if r.get('id'):
             e = by.get(r['id']); asked.append(r['id'])
             if not e or not e.get('clip') or e['clip'].get('test'): notes.append({'id': r['id'], 'why': 'no such video entry', 'kind': 'skipped'}); continue
@@ -336,6 +341,7 @@ def main():
     say('preflight ok')
 
     clock = threading.Lock()
+    guide_rows = []
 
     def work(e):
         id_, rev = e['id'], e.get('promptRev') or 0
@@ -367,6 +373,10 @@ def main():
                 open(vid, 'wb').write(data)
                 state['held'][id_] = {'file': vid, 'rev': rev, 'ph': ph}; state['pending'].pop(id_, None); save_state()   # paid for and kept
                 report['made'].append(id_); say(id_, 'video in (%d KB)' % (len(data) // 1024))
+            if e.get('_guide'):   # guidegen1: keep the video as a take; the marks, the gate and the preview are made by make_take.py
+                g = e['_guide']; os.makedirs(os.path.join(a.out, 'guide'), exist_ok=True); keep = os.path.join(a.out, 'guide', id_ + '.mp4'); shutil.copyfile(vid, keep)
+                guide_rows.append({'anim': g['anim'], 'take': g['take'], 'video': keep, 'prompt': (e.get('prompt') or '').strip(), 'promptRev': e.get('promptRev', 0), 'route': 'xai', 'cost': round(cost(e), 4), 'at': e.get('_at'), 'note': g.get('note', '')})
+                state['held'].pop(id_, None); save_state(); return
             gate_note = None
             kind = e['clip'].get('kind', 'strike')
             try: marks = clipmarks.auto_marks(vid, kind)
@@ -403,10 +413,12 @@ def main():
             stop.set(); report['failed'].append({'id': id_, 'why': str(x)}); say(id_, 'STOP:', x)
         except Exception as x:
             report['failed'].append({'id': id_, 'why': str(x)[:300]}); say(id_, 'FAILED:', str(x)[:300])
+            if e.get('_guide'): guide_rows.append({'anim': e['_guide']['anim'], 'take': e['_guide']['take'], 'prompt': (e.get('prompt') or '').strip(), 'promptRev': e.get('promptRev', 0), 'route': 'xai', 'cost': 0, 'at': e.get('_at'), 'error': str(x)[:300]})
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, a.par)) as ex:
         list(ex.map(work, queue))
     report['spent'] = round(spend['total'], 2)
+    if guide_rows: json.dump({'results': guide_rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
     json.dump(report, open(rf, 'w'), indent=1)
     say('DONE. approved %d, held by the gate %d, need you %d, failed %d, spent about $%.2f' % (len(report['approved']), len(report['held']), len(report['still']), len(report['failed']), spend['total']))
     for h in report['held']: say('  held %s: %s' % (h['id'], ' | '.join(h['reasons'])[:300]))

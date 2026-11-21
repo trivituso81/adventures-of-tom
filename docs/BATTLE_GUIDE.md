@@ -45,6 +45,30 @@ Send to Claude writes `data/board.json` on `main` through GitHub with the token 
 
 A second note on an animation whose card is still Up next and not started is added to that card and its prompt is rewritten. The commit is `board: animation note <anim id>`. A session working such a card follows the card's prompt and the standing rules in CLAUDE.md (No painted poses in battle, Fix a miss with the smallest change).
 
+## Making a video from the guide (guidegen1, card c-guidegen)
+
+Open an animation (Animations tab). Under the player the sheet shows its prompt, what it came from, what a try costs and what is missing; no key is ever typed on the page. Every tap is a request committed to `main` with the token the Board saved (`aot-gh-token`); a GitHub Action reads it with the repo secret and answers on the branch `guidegen` (never merged, never served), which the page reads every 5 seconds.
+
+| Step | What the page does | Request file and message | Action | Where the answer is |
+|---|---|---|---|---|
+| The prompt | shows the animation's prompt: its job or entry prompt when it has a video, otherwise a DRAFT (the same person's approved prompt with only MOTION new). Someone with no start picture says what is missing and cannot be made | `data/guide-anims.json`, built by `node tools/guidegen/build_map.js` (346 animations) | none | the file |
+| Update the prompt | a note ("What should change" with a video, "Anything to add" without) is folded into the prompt with the smallest change; Kept / Changed / Could not use are shown; a question comes back when the note is vague or contradicts itself; a note no wording can carry says so | `data/guide-reconcile.json`, `guide: reconcile <id>` | `guide-reconcile`, xAI text model, secret `XAI_API_KEY`, about a cent | `reconcile/<slug>.json` |
+| Generate this video | shows the price on the button; the first tap asks ("This spends $0.50"), the second sends. A family member goes to Wan 3.0 (5 s, 720p, $0.50, cap $1 a request, $10 a day for the guide); a monster goes to xAI Grok lite (3 s, 480p, $0.07, cap $0.15) | `data/wan-requests.json`, `wan: generate <id>`; monsters `data/clip-requests.json`, `clip: generate guide <id>` (a request with a `guide` field) | `wan-gen` (secret `FAL_KEY`) or `clip-gen` (`XAI_API_KEY`), then `tools/guidegen/make_take.py` | `takes.json`, `takes/<slug>/t<n>.mp4 .js .webp` |
+| Compare | the new take plays next to the clip now in the game (or "No video yet"), cut exactly as the game would play it, with the clip gate's words (`hold.py`: measured checks, then the vision questions that hold) | none | none | none |
+| Use this one | asks first ("This changes the game"), then sends | `data/guide-use.json`, `guide: use <id>` | `guide-use` (`tools/guidegen/use_take.py`) | `use-report.json`, the commit on `main`, the build `guideuse-<run>` |
+| Try again with a note | goes to the note box; the next Generate carries the note | as Generate | as Generate | as Generate |
+| Keep the old one | leaves the take on file, changes nothing | none | none | none |
+
+The Action never approves a take. A take is `new`, `still` (the video hardly moves, so there is nothing to cut) or `failed` (nothing came back; no charge). Per animation the sheet shows the prompt version, takes made and dollars spent (`takes.json`).
+
+**Stop rule.** Generate refuses, sends nothing and offers the note box to Claude when the last two takes were held by the clip gate for the same fault (`stop` in `takes.json`, set by `make_take.py`; a take that passes clears it) or when the new try's note shares half its words with the note of the try before (the page, `stopFor`). Two misses the same way is the stop-loss in CLAUDE.md.
+
+**What Use this one changes** (`use_take.py`, no paid call): the take's video is kept as `art/raw/clips/wan-<job>-v<rev>.mp4` (family; the job in `tools/art-library/wangen-jobs.json` goes to rev + 1 with the prompt in `tools/art-library/prompts/wan-<job>-v<rev>.txt`) or `art/raw/clips/clip-<id>-v<n>.mp4` (monster; a new version of the entry in `data/art-prompts.json`, `promptRev` raised, status approved, a new entry when it had none); `tools/clip-bake/bake_clip.py` cuts `data/clips/<clip>.js` and `art/clips/<clip>.webp` by the recipe of its kind (`tools/guidegen/recipe.json`); the `<script>` tag goes into `index.html`; a body state is named in `B3_BODY_CLIPS` and its painted row leaves `B3_BODY_PAINT` (No painted poses in battle); a move or attack row gets `anim:{kind:'clip',clip:'<clip>'}` and a wind-up row `wind:'<clip>'` (`data/b3-kit-*.js`, `data/b3-foes-ch*.js`); `data/guide-prompts.json` records the prompt used (source `used`); `data/guide-anims.json` is rebuilt; `docs/CHANGES.md` gets the heading; `bump_tags.py` moves the cache tags; the job pushes to `main` and starts the publish. The player then shows the new clip and the guide says to press RELOAD on the title screen.
+
+**Keeping `data/guide-anims.json` fresh.** It is generated from the game's data, so any session that adds or changes a move, a monster act or a clip runs `node tools/guidegen/build_map.js` in the same push (`--check` says when it is stale; `tools/guidegen/build_map_test.py` fails when it is).
+
+**Tests.** `python3 tools/guidegen/build_map_test.py` (the file), `python3 tools/guidegen/guidegen_test.py` (reconcile and its checks), `python3 tools/guidegen/take_test.py` (wangen and clipgen request modes against stand-ins, takes, the branch keeper, use on a copy of the repo), `python3 tools/battle_guide_test.py` (the page at the four Duo sizes with a stand-in GitHub and stand-in Actions). A session never runs a paid generation: Wan requests with `dry:true` plan only.
+
 ## Test
 
 `python3 tools/battle_guide_test.py [outdir]` (needs CHROMIUM and PLAYWRIGHT_BROWSERS_PATH as for the other page tests; about 1 minute): the four sizes, counts against the data files, a video that moves, the no-video message, notes saved through a stand-in GitHub and accepted by `tools/board_check.py`, search. Look at `battleguide-*.png`.

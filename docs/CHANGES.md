@@ -1,3 +1,16 @@
+## guidegen1 (2026-11-21): the Battle Guide can make a video, show it next to the one in the game, and put it in the game
+
+Card c-guidegen part 3 (plan `claude/guidegen-plan.md`, facts `docs/BATTLE_GUIDE.md` "Making a video from the guide"). Nothing paid was run in this session: every test used a stand-in fal, a stand-in xAI and synthetic videos; the first real generation is Tom's tap.
+- **Generate this video** (page): the button shows the price ($0.50 Wan 3.0 for the family, $0.07 xAI Grok lite for monsters); the first tap asks, the second commits a request (`data/wan-requests.json`, message `wan: generate <id>`, or `data/clip-requests.json` with a `guide` field, message `clip: generate guide <id>`). Caps: $1 a request, $10 a day for the guide (`guide_days` on the Wan ledger), $0.15 a monster request.
+- **The takes** (`tools/guidegen/make_take.py`, run by `wan-gen` and `clip-gen` after the video is made): marks from the video, the clip gate (`hold.py`), a preview cut exactly as the game plays it, all kept on branch `guidegen` (`takes.json`, `takes/<slug>/t<n>.*`). The Action approves nothing. `tools/guidegen/keep.py` adds to the newest copy of the branch so two jobs never overwrite each other.
+- **Compare** (page): the take plays next to the clip now in the game with the gate's words; Use this one, Try again with a note, Keep the old one. Per animation the sheet shows the prompt version, takes made and dollars spent.
+- **Use this one** (`guide-use` Action, `tools/guidegen/use_take.py`, request file `data/guide-use.json`, message `guide: use <id>`): cuts the clip, adds the script tag, points the row (`B3_BODY_CLIPS`, `anim:{kind:'clip'}` or `wind:`), removes the painted pose it replaces, raises the Wan job rev (family) or the Library entry's promptRev (monster), records the prompt (`data/guide-prompts.json`), rebuilds `data/guide-anims.json`, names the build `guideuse-<run>`, pushes to `main` and starts the publish.
+- **Stop rule**: the last two takes held by the gate for one fault, or two tries with nearly the same note, stop Generate and offer the note to Claude.
+- Also in this push (guidegen1b follow-up): a note no wording can carry comes back as `nochange` instead of "check this one" (`reconcile.py`, page); `data/wan-requests.json` and `data/guide-use.json` join the publish paths-ignore; `tools/guidegen/fixtures/` freeze the two prompts the reconcile tests use.
+- Tests: `tools/guidegen/take_test.py`, `guidegen_test.py`, `build_map_test.py`, `tools/battle_guide_test.py` (the page at the four Duo sizes, FAILS []), `tools/art-library/wangen_test.py` (ALL PASS), `python3 tools/b3_test.py s8` (FAILS []), `board_check.py`. Not mine and failing on main before this push: `tools/board_sync_test.py` (R5 and the board4 line), `tools/art-library/clipgen_test.py` (`clip-tom-give-rev0.mp4` missing).
+- Real replay of the reconcile step (guidegen1b, 2026-11-21): 24 notes, $0.0447 of a $0.48 cap; 6 new prompts, 13 questions, 5 unchanged (now `nochange`).
+- Not seen on the phone yet.
+
 ## anim-tom-dodge-ner3 (2026-11-21): Tom's Dodge is a Wan 3.0 video now: he ducks straight down with both hands on his head and pops back up
 
 Card c-anim-tom-dodge-ner3. Tom, from the Battle Guide: "Needs to be generated"; then in chat (10:33): "But Roses dodge came out good. Maybe it should be ducking motion instead."
