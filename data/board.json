@@ -26907,7 +26907,7 @@
    "title": "Night shift: queued cards start by themselves overnight",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Tap START. It builds the part every other night job needs: between 11 pm and 3 am the board starts one queued card at a time on Sonnet 5.5 medium (5 a night at most), runs the standing nightly cards first, and writes one card for you each morning, Last night, saying what ran, what shipped and what needs you. It adds a Night shift ON or OFF switch to the board page. Nothing starts at night until this ships.",
    "blocks": [
     "c-nightclean"
@@ -26915,7 +26915,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukG9NpnX87cPECMfzZB",
+    "url": "",
     "opening": "not started"
    },
    "history": [
@@ -26931,6 +26931,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -26943,8 +26947,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 5), then card c-nightshift in data/board.json with its history. Your first push is the commit board: start c-nightshift. Build section 5 exactly as written, steps 1 to 7: the `night` object in data/board.json, rule R14 in tools/board_sync.py with its cases in tools/board_sync_test.py, standing cards (`nightly: true`, builds named with the tag, a hyphen and the month and day), the card t-lastnight written by tools/night/lastnight.py, the Night shift chip and the standing card lines in board.html, and the section \"Night runs\" in CLAUDE.md taken from section 4 of the plan. Change no rule of the plan without writing why on the card. Nothing may start at night that section 4 forbids: test each row of that table. Run python3 tools/board_sync_test.py, python3 tools/board_check.py and python3 tools/board_test.py /tmp/board, look at the board page in portrait and landscape, then push build nightshift as CLAUDE.md says. In the closing lines tell Tom that the Project copy of claude/handoff-rules.md needs the paragraph you added to the repo copy, and quote it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightshift",
-   "after": "nothing for Tom: c-nightclean",
-   "started_at": "2026-11-21T19:34:04+00:00"
+   "after": "nothing for Tom: c-nightclean"
   },
   {
    "id": "c-nighttests",
@@ -27885,7 +27888,7 @@
    "id": "c-buildpill2",
    "tag": "buildpill2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Build name pill: Battle Guide header and Board cards",
    "next": "Built as buildpill2: the Battle Guide header shows the build as a pill right of the title (tap opens its details), and Board cards and card details show it as the same pill, larger. Tom checks it on card t-buildpill2-try.",
@@ -27917,9 +27920,14 @@
     {
      "d": "2026-11-21",
      "t": "Built: battle-guide.html (header pill, narrow layout), board.html buildPillOf and buildHtml, tools/board_build_test.py. Hands to Tom: t-buildpill2-try."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as buildpill2: the build name is a tappable pill in the Battle Guide header and on the Board cards and card details"
     }
    ],
-   "after": "t-buildpill2-try"
+   "after": "t-buildpill2-try",
+   "done": "2026-11-21"
   },
   {
    "id": "t-buildpill2-try",
@@ -28323,8 +28331,10 @@
    "url": "https://claude.ai/code/session_01RXeukEgMLyk7xoZixcTVhF",
    "title": "Build name pill: Battle Guide header and Board cards",
    "first": "2026-11-21T12:00:05-08:00",
-   "last": "2026-11-21T12:00:05-08:00",
-   "tags": [],
+   "last": "2026-11-21T12:03:27-08:00",
+   "tags": [
+    "buildpill2"
+   ],
    "cards": [
     "c-buildpill2"
    ]
@@ -31962,8 +31972,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0ad7ffc7609a6ed91e8c531610d080fb9f323df3",
- "synced_at": "2026-11-21T20:00:39+00:00",
+ "synced": "c33af6e12b9e0899ec66c70d1025185e2fb2d206",
+ "synced_at": "2026-11-21T20:04:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
