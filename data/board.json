@@ -12929,7 +12929,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCqWhhmWq22mmU3UZD",
     "opening": "started by c-gem-bug01"
    },
    "history": [
@@ -27640,6 +27640,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenf: grands_walk_test fixed (the test was stale: the room was repainted, the sofa aisle is closed, the dining table moved east and an east lane opened; three touches stood on unreachable tiles); known_fail removed. 6 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenf: the grandparents' house walk test follows the repainted room"
     }
    ],
    "prompt": {
@@ -29089,7 +29093,7 @@
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "The wrapper trail test fails about half the time: an ordinary monster gets into the boss area by Boppy's fishing spot. Find why and fix it so the test passes 10 times in a row.",
    "blocks": [],
    "created": "2026-11-21",
@@ -29129,13 +29133,18 @@
     {
      "d": "2026-11-21",
      "t": "Cause: monsters' home was set on their first tick, after the Mudling scene had moved them. placeMonsters now sets home to the placed spot. hollow_trail_test passed 10 runs in a row. Build hollowfence."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as hollowfence: Grump Hollow monsters no longer slip past the boss fence after a story scene"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGoS3M47tHQV8dfmdj",
     "opening": "unknown"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "svc-voice-gen",
@@ -29512,7 +29521,7 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
@@ -29551,6 +29560,10 @@
      "d": "2026-11-21",
      "t": "Second run the same evening, by hand: t-gem-bug01play checked and closed (a fact: Deedee speaks and the Big One fight restarts after a loss; frames in portrait, landscape and Duo size on branch night). The other three of its first 4 stay Tom's.",
      "at": "2026-11-21T22:30:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ran: nothing to do."
     }
    ],
    "prompt": {
@@ -29562,7 +29575,10 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open Tom cards with ask play and no `machine` field, oldest first, backlog included (checking a parked card moves nothing of Tom's except closing it on a pass). 2. For each card: read `next`, `first` and the history, and sort it. YES OR NO (a fact a test browser can see: a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts) or YOURS (how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch, or audio). When in doubt it is YOURS. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Pictures go to branch night under qa/CARDID/DATE/. Pass: the card goes to Done with machine: {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT WAS SEEN\". It is listed under Closed for you on the Last night card. Fail: what Something is wrong does today: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium), and Tom's card waits behind it. 4. YOURS: machine: {at, verdict: \"yours\", why: WHY} so it is not looked at again; the card stays Tom's and its details show \"Needs your eyes: WHY\". Limits (also printed on the Last night card): the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never close a card about how something looks, sounds or feels. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. No paid run of any service. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T21:23:06+00:00"
+   "last_run": {
+    "date": "2026-11-21",
+    "build": ""
+   }
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -29654,9 +29670,68 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "b-board-nightqa2",
+   "tag": "board-nightqa2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Areas",
+   "title": "the night QA closed one more of your play cards, t-gem-bug01play, with pictures",
+   "next": "Done: the night QA closed one more of your play cards, t-gem-bug01play, with pictures",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCqWhhmWq22mmU3UZD",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightqa2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCqWhhmWq22mmU3UZD",
+   "title": "Lose to The Big One on purpose and check you are not stuck",
+   "first": "2026-11-21T21:24:25Z",
+   "last": "2026-11-21T21:24:25Z",
+   "tags": [
+    "board-nightqa2"
+   ],
+   "cards": [
+    "t-gem-bug01play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG1HQd3n5MYHm5T8Ba",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "first": "2026-11-21T21:17:04Z",
+   "last": "2026-11-21T21:23:38Z",
+   "tags": [
+    "hollowfence"
+   ],
+   "cards": [
+    "c-hollowfence"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFnYZ6EPr9NbJWrwDh",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-21T21:23:19Z",
+   "last": "2026-11-21T21:23:19Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-qa"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukG23YgrNLwpd1VDRJY",
    "title": "Fix the report backlog (1 open)",
@@ -30213,6 +30288,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T13:02:32-08:00",
+   "last": "2026-11-21T13:25:24-08:00",
+   "tags": [
+    "nightgreene",
+    "nightgreenf"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukeStaZ",
    "title": "Make chapter 1's 10 missing voices (one tap, then listen)",
    "first": "2026-11-21T13:22:21-08:00",
@@ -30223,18 +30311,6 @@
    ],
    "cards": [
     "t-ch1voices"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T13:12:00-08:00",
-   "tags": [
-    "nightgreene"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -34055,8 +34131,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "abdb15f9e99ec2977771b8b5d2414213a373db74",
- "synced_at": "2026-11-21T21:23:06+00:00",
+ "synced": "2e8d3696dc8ecedeb918812530597560a1ce76d1",
+ "synced_at": "2026-11-21T21:26:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
