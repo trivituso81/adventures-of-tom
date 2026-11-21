@@ -14341,7 +14341,7 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "rejected",
+   "status": "draft",
    "versions": [],
    "rejects": [
     {
@@ -14363,19 +14363,20 @@
    "title": "Grump Hollow, muffin wrapper trail 1 of 4: nine wrappers up the stone path into the clearing (attach the listed picture)",
    "ar": "1:1",
    "refs": [
-    "art/raw/areas/area-hollow-v4.png"
+    "art/raw/areas/hollow-trail1-guide.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is on the stone path just inside the gate, under the green exit board. The rest climb the path and curve into the lower left part of the big muddy clearing. The last one is a little left of the middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is on the stone path just inside the gate, under the green exit board. The rest climb the path and curve into the lower left part of the big muddy clearing. The last one is a little left of the middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
    "bake": {
     "script": "bake_hollow_trail.py",
     "args": [
      "1"
     ],
     "src": "tools/sprite-bake/src/hollow-trail1.png"
-   }
+   },
+   "promptRev": 1
   },
   {
-   "status": "rejected",
+   "status": "draft",
    "versions": [],
    "rejects": [
     {
@@ -14397,19 +14398,20 @@
    "title": "Grump Hollow, muffin wrapper trail 2 of 4: nine wrappers to the top left corner by the old bench (attach the listed picture)",
    "ar": "1:1",
    "refs": [
-    "art/raw/areas/area-hollow-v4.png"
+    "art/raw/areas/hollow-trail2-guide.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is in the lower left part of the big muddy clearing. The rest run left and up to the old soggy wooden bench in the top left nook, then up the narrow path that leads into the trees at the top left corner of the clearing. The last one is where that narrow path ends.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is in the lower left part of the big muddy clearing. The rest run left and up to the old soggy wooden bench in the top left nook, then up the narrow path that leads into the trees at the top left corner of the clearing. The last one is where that narrow path ends.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
    "bake": {
     "script": "bake_hollow_trail.py",
     "args": [
      "2"
     ],
     "src": "tools/sprite-bake/src/hollow-trail2.png"
-   }
+   },
+   "promptRev": 1
   },
   {
-   "status": "rejected",
+   "status": "draft",
    "versions": [],
    "rejects": [
     {
@@ -14430,19 +14432,20 @@
    "title": "Grump Hollow, muffin wrapper trail 3 of 4: nine wrappers to the middle of the clearing (attach the listed picture)",
    "ar": "1:1",
    "refs": [
-    "art/raw/areas/area-hollow-v4.png"
+    "art/raw/areas/hollow-trail3-guide.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is at the top left corner of the big muddy clearing, where the narrow path comes out of the trees. The rest run down and to the right across the clearing. The last one is in the exact middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is at the top left corner of the big muddy clearing, where the narrow path comes out of the trees. The rest run down and to the right across the clearing. The last one is in the exact middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
    "bake": {
     "script": "bake_hollow_trail.py",
     "args": [
      "3"
     ],
     "src": "tools/sprite-bake/src/hollow-trail3.png"
-   }
+   },
+   "promptRev": 1
   },
   {
-   "status": "rejected",
+   "status": "draft",
    "versions": [],
    "rejects": [
     {
@@ -14463,16 +14466,17 @@
    "title": "Grump Hollow, muffin wrapper trail 4 of 4: nine wrappers east to Boppy's fishing spot (attach the listed picture)",
    "ar": "1:1",
    "refs": [
-    "art/raw/areas/area-hollow-v4.png"
+    "art/raw/areas/hollow-trail4-guide.png"
    ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
    "bake": {
     "script": "bake_hollow_trail.py",
     "args": [
      "4"
     ],
     "src": "tools/sprite-bake/src/hollow-trail4.png"
-   }
+   },
+   "promptRev": 1
   },
   {
    "status": "approved",

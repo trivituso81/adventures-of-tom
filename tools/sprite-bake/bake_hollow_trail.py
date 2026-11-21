@@ -27,7 +27,7 @@ ROUTES = {
     1: [(6.5, 20.0), (6.5, 16.5), (7.8, 14.6), (9.5, 13.2)],               # the gate, up the stone path, into the clearing (Skeeter Swarm 9,13)
     2: [(9.5, 13.5), (6.5, 12.3), (4.5, 10.8), (6.2, 9.4), (7.0, 7.2)],    # clearing to the soggy bench (Grump 4,11), up the top left path (Toad 7,8)
     3: [(6.8, 7.6), (8.4, 9.6), (10.0, 10.9), (11.5, 11.5)],               # top left back down to the middle of the clearing (Log 11,11)
-    4: [(11.2, 11.5), (13.0, 11.6), (15.0, 11.3), (16.6, 11.2)],           # east along the shore path toward Boppy's fishing spot (boss trigger x 14+)
+    4: [(11.2, 11.5), (13.0, 11.6), (15.0, 11.3), (16.6, 11.2), (18.6, 10.8)],   # east along the shore path to Boppy's fishing spot (boss trigger x 14+)
 }
 REACH = 2.0 * TILE   # strip half width: generous, the generator never puts things exactly where asked
 

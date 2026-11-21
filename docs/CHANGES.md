@@ -1,3 +1,11 @@
+## fix-hollowtrail1-picsa (2026-11-20): Grump Hollow wrapper trail prompts redone: small wrappers placed on the right spots, the generator only repaints them
+
+Card c-fix-hollowtrail1-pics, part 1 (part 2 is the review of the new pictures). Tom on t-hollowtrail1-pics: "they all look like shit. did you even review?" His reject notes: "they are about 5x too big" (trail 1), "5x too big, not a clear trail" (trails 2 to 4).
+- Fact, from looking at the four pictures: each wrapper was about 2.6 map tiles wide (as big as the soggy bench), which the prompt itself asked for ("each about the size of a grown-up's head"). Trails 2, 3 and 4 were a 3 x 3 block in nearly the same spot, not a line along their leg; trail 2 put one on a boulder. The QA passed them 14 to 15 of 16: it has no question about size. Nobody looked at them before they reached Tom.
+- Changed: `tools/art-library/hollow_trail_guide.py` pastes nine small wrappers (0.6 tile wide, a fifth of the old size, cut from the first pictures) on open ground along each leg and writes `art/raw/areas/hollow-trail<n>-guide.png`; the four entries attach that instead of the bare painting (`hollow-trail-prompts.js`, promptRev 1). Prompts: "already pasted ... as a guide", "repaint each ... keep every wrapper exactly where it is and exactly as small", the head-size and "spaced evenly" sentences removed. Kept: the header, the leg sentences, the wrapper description, KEEP.
+- `bake_hollow_trail.py` ROUTES leg 4 now reaches Boppy's fishing bench (18.6, 10.8), so the last wrappers are not cut off.
+- Checked: all 36 spots sit inside their leg's strip; the guides baked into the game in portrait and landscape (stand-in, not pushed); `hollow_trail_test.py` passed.
+
 ## clipstuck1a (2026-11-20): Art Library clips: the button no longer sticks on ASKED, WAITING, every video plays on its card, REDO with a note
 
 Tom (16:32): "why are you tricking me into spending money by keeping the button label as asked, waiting when it's approved. and there's no way for me to review the video".

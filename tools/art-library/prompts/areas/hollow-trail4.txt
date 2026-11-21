@@ -1,13 +1,13 @@
 IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.
 
 ATTACHED IMAGE
-1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from "The Adventures of Tom", a family role-playing game.
+1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from "The Adventures of Tom", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.
 
 PAINT THIS ONE PICTURE
-The exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.
+The exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.
 
 THE WRAPPERS
-Each wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.
+Each wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.
 
 KEEP
 Everything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.
