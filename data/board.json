@@ -25808,7 +25808,7 @@
    "title": "Watch Grace, Soup-Dumpling Squeeze",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze (Prompt v4), and look at the dumpling: it should have a cute face (dot eyes, rosy cheeks, small smile) and burst into white fluff right when HIT shows, then Grace returns with empty hands. Tap All good or Something is wrong.",
@@ -25839,9 +25839,12 @@
     {
      "d": "2026-11-21",
      "t": "Fix shipped in fix-anim-grace-squeeze-qxim: new video (prompt v4) with a cute-faced dumpling that bursts into fluff on the hit, from your Battle Guide note \"The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have.\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Watch Grace, Soup-Dumpling Squeeze is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-boardsubfold1",
@@ -26366,7 +26369,7 @@
    "id": "c-fix-anim-grace-squeeze-qxim",
    "tag": "fix-anim-grace-squeeze-qxim",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
@@ -26418,6 +26421,10 @@
     {
      "d": "2026-11-21",
      "t": "Your words on the card were \"Left a comment\"; the comment itself was the Battle Guide note of 18:51 (data/guide-reconcile.json). The automatic prompt edit for it contradicted itself (the dumpling burst, then puffed back up and went into her pocket), so Claude wrote prompt v4 by hand: cute face added, squishes flat changed to bursts into fluff, pocket ending changed to empty hands. One Wan video, $0.50. No pencil reports were filed."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-anim-grace-squeeze-qxim: Grace's Soup-Dumpling Squeeze: the dumpling has a cute face and bursts into fluff on the hit"
     }
    ],
    "prompt": {
@@ -26429,7 +26436,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-anim-grace-squeeze-qxim and t-anim-grace-squeeze-qxim in data/board.json, history included. Your first push is the commit board: start c-fix-anim-grace-squeeze-qxim.\n\nTom tested and found problems:\n1. Card t-anim-grace-squeeze-qxim (Watch Grace, Soup-Dumpling Squeeze, ask animations). He was asked: Open ADMIN ) BATTLE GUIDE ) Animations ) Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw). He wrote: Left a comment\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T18:48:48.410Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-anim-grace-squeeze-qxim to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-anim-grace-squeeze-qxim, and give the build fix-anim-grace-squeeze-qxim a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-grace-squeeze-qxim"
+   "after": "t-anim-grace-squeeze-qxim",
+   "done": "2026-11-21"
   },
   {
    "id": "t-savedportraits-look",
@@ -27047,6 +27055,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
+   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
+   "first": "2026-11-21T10:53:26-08:00",
+   "last": "2026-11-21T11:28:35-08:00",
+   "tags": [
+    "fix-anim-grace-squeeze-qxima",
+    "fix-anim-grace-squeeze-qxim"
+   ],
+   "cards": [
+    "c-fix-anim-grace-squeeze-qxim"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
    "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
    "first": "2026-11-21T11:27:11-08:00",
@@ -27139,18 +27160,6 @@
     "c-anim-tom-dodge-ner3",
     "c-wanch2",
     "c-anim-tom-loungepass-fix1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
-   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
-   "first": "2026-11-21T10:53:26-08:00",
-   "last": "2026-11-21T10:56:53-08:00",
-   "tags": [
-    "fix-anim-grace-squeeze-qxima"
-   ],
-   "cards": [
-    "c-fix-anim-grace-squeeze-qxim"
    ]
   },
   {
@@ -30613,8 +30622,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e4945e6cc2e89e052ab3ef5e1d7f2242c9217ff4",
- "synced_at": "2026-11-21T19:28:18+00:00",
+ "synced": "94c2899717441b4691b20fc9e78599d362a0cc7b",
+ "synced_at": "2026-11-21T19:28:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
