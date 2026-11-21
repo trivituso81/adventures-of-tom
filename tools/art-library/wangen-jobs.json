@@ -1,5 +1,5 @@
 {
- "_about": "wanproof (claude/video-battle-plan.md section 4): the two fal calls of the Grace guard proof, read by tools/art-library/wangen.py (Action wan-gen). A retry is ONE change here with rev raised by 1, pushed before the run. Prompts are files, used word for word. wanch1: one job per start picture (start-<who>) and per clip (<who>-<state or move>); the Action takes a list or wildcards.",
+ "_about": "wanproof (claude/video-battle-plan.md section 4): the two fal calls of the Grace guard proof, read by tools/art-library/wangen.py (Action wan-gen). A retry is ONE change here with rev raised by 1, pushed before the run. Prompts are files, used word for word. wanch1: one job per start picture (start-<who>) and per clip (<who>-<state or move>); the Action takes a list or wildcards. wanch2: a job may use kling/v4/image-to-video (Kling 4.0 on fal, $0.157 a second at 720p) with the same frame fields.",
  "start": {
   "rev": 1,
   "kind": "image",
@@ -398,13 +398,12 @@
   }
  },
  "grace-dodge": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
-  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
-   "480p": 0.05,
-   "720p": 0.1,
-   "1080p": 0.15
+   "720p": 0.157,
+   "1080p": 0.235
   },
   "prompt_file": "tools/art-library/prompts/wan-grace-dodge-v2.txt",
   "frame": "art/clips/start/grace-hero.png",
@@ -415,12 +414,9 @@
   ],
   "input": {
    "resolution": "720p",
-   "aspect_ratio": "9:16",
-   "duration": 5,
-   "audio": false,
-   "enable_prompt_expansion": true,
-   "seed": 81
-  }
+   "duration": 5
+  },
+  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
  },
  "grace-ko": {
   "rev": 2,
@@ -496,13 +492,12 @@
   }
  },
  "grace-cast": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
-  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
-   "480p": 0.05,
-   "720p": 0.1,
-   "1080p": 0.15
+   "720p": 0.157,
+   "1080p": 0.235
   },
   "prompt_file": "tools/art-library/prompts/wan-grace-cast-v1.txt",
   "frame": "art/clips/start/grace-hero.png",
@@ -513,12 +508,9 @@
   ],
   "input": {
    "resolution": "720p",
-   "aspect_ratio": "9:16",
-   "duration": 5,
-   "audio": false,
-   "enable_prompt_expansion": false,
-   "seed": 81
-  }
+   "duration": 5
+  },
+  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
  },
  "grace-squeeze": {
   "rev": 4,
@@ -747,13 +739,12 @@
   }
  },
  "rose-tackle": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
-  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
-   "480p": 0.05,
-   "720p": 0.1,
-   "1080p": 0.15
+   "720p": 0.157,
+   "1080p": 0.235
   },
   "prompt_file": "tools/art-library/prompts/wan-rose-tackle-v1.txt",
   "frame": "art/clips/start/rose-hero.png",
@@ -764,13 +755,10 @@
   ],
   "input": {
    "resolution": "720p",
-   "aspect_ratio": "9:16",
-   "duration": 5,
-   "audio": false,
-   "enable_prompt_expansion": true,
-   "seed": 81
+   "duration": 5
   },
-  "pad": 0.8
+  "pad": 0.8,
+  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
  },
  "rose-lava": {
   "rev": 3,
@@ -799,13 +787,12 @@
   "pad": 0.8
  },
  "rose-giddyup": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
-  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
-   "480p": 0.05,
-   "720p": 0.1,
-   "1080p": 0.15
+   "720p": 0.157,
+   "1080p": 0.235
   },
   "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v1.txt",
   "frame": "art/clips/start/rose-hero.png",
@@ -816,13 +803,10 @@
   ],
   "input": {
    "resolution": "720p",
-   "aspect_ratio": "9:16",
-   "duration": 5,
-   "audio": false,
-   "enable_prompt_expansion": true,
-   "seed": 81
+   "duration": 5
   },
-  "pad": 0.8
+  "pad": 0.8,
+  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
  },
  "deedee-idle": {
   "rev": 1,
@@ -1024,13 +1008,12 @@
   }
  },
  "deedee-wetfloor": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
-  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
-   "480p": 0.05,
-   "720p": 0.1,
-   "1080p": 0.15
+   "720p": 0.157,
+   "1080p": 0.235
   },
   "prompt_file": "tools/art-library/prompts/wan-deedee-wetfloor-v1.txt",
   "frame": "art/clips/start/deedee-hero.png",
@@ -1041,13 +1024,10 @@
   ],
   "input": {
    "resolution": "720p",
-   "aspect_ratio": "9:16",
-   "duration": 5,
-   "audio": false,
-   "enable_prompt_expansion": true,
-   "seed": 81
+   "duration": 5
   },
-  "pad": 0.8
+  "pad": 0.8,
+  "why": "wanch2: Wan 3.0 missed twice the same way (wanch1 stop-loss); same prompt file, start picture, frame and length on Kling 4.0 (Kling has no aspect, audio, prompt-expansion or seed fields: the 720x1280 frame sets 9:16, it returns silent video)"
  },
  "deedee-scrub": {
   "rev": 2,

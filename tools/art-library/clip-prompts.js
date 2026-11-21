@@ -153,6 +153,10 @@ const FOES = [
 for (const [o, rows, parts, list] of FOES)
   for (const [key, label, kind, falls, motion] of list)
     CH1.push(entry(o, key, label, rows, kind, (falls ? FOE_FREE : FOE_ONCE) + motion.replace('%P', parts) + END(3), true));
+// wanch2 (stop-loss of wanch1, Tom's prompt 2026-11-21): the Toad's Body Slam and the Skeeter's Bite and Whine missed twice the same way on LITE,
+// so the next try is the full model G15 with the prompt word for word (a different method, not a third rewrite). Listed in REMAKE below too.
+const FULL = ['clip-toad-slam', 'clip-skeeter-bite', 'clip-skeeter-whine'];
+for (const e of CH1) if (FULL.includes(e.id)) e.clip.model = G15;
 const entries = [
   { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
@@ -187,7 +191,7 @@ const entries = [
 // REMAKE (clipch1fix): rejected clips whose fault was the generator drifting (size, feet, a zoom), not the prompt (claude/clip-gate-plan.md
 // section 2). Their prompt stays word for word, but they are made again: the run below raises promptRev once above the last rejection's rev,
 // which is what the clip-gen Action and GENERATE CHAPTER wait for. Once remade, the id may stay listed: nothing happens until a new rejection.
-const REMAKE = [];
+const REMAKE = FULL;   // wanch2: the three FULL entries, prompts unchanged
 if (require.main === module) {
   const out = 'data/art-prompts.json', doc = JSON.parse(fs.readFileSync(out, 'utf8'));
   for (const e of entries) {
