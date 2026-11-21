@@ -19856,14 +19856,20 @@
     }
    ],
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T03:35:08Z",
     "ids": [
      "prop-item-redo-1",
      "prop-item-redo-2"
     ],
     "est": 0.1,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T03:35:34Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44861903466",
+     "n": 2
+    }
    },
    "waiting_on": "claude"
   },
