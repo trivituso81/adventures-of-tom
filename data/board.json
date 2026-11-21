@@ -20324,6 +20324,10 @@
     {
      "d": "2026-11-20",
      "t": "Part a pushed as b3s13a: chapter 8 (6 formations, Old Ironbelly, Lab fights NEW 45 to NEW 50). Next: chapter 9 as b3s13b."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as b3s13a: New battle: the chapter 8 car barn monsters and Old Ironbelly join the Battle Lab (stage 13, part a of four)"
     }
    ],
    "prompt": {
@@ -22486,6 +22490,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
+   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
+   "first": "2026-11-20T19:03:50-08:00",
+   "last": "2026-11-20T19:54:21-08:00",
+   "tags": [
+    "b3s13a"
+   ],
+   "cards": [
+    "c-b3s13"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
    "first": "2026-11-20T19:35:42-08:00",
@@ -22672,16 +22688,6 @@
     "board-audit1120"
    ],
    "cards": []
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
-   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
-   "first": "2026-11-20T19:03:50-08:00",
-   "last": "2026-11-20T19:03:50-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s13"
-   ]
   },
   {
    "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
@@ -25054,8 +25060,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6eb9010846d5c1acc403a6b286a93ec6e98451d7",
- "synced_at": "2026-11-21T03:54:01+00:00",
+ "synced": "29c732ffcdef395369ca15ef9a5a6a256323d653",
+ "synced_at": "2026-11-21T03:54:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
