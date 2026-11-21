@@ -27614,6 +27614,11 @@
     {
      "d": "2026-11-21",
      "t": "Gemini saw: In The Square (Stop 2), two townspeople stood directly on top of the SNAIL MAIL sign (nobody walked onto KETTLE COTTAGE's roof); on Rivituso Row (Stop 3), the brown-haired NPC walked onto the right edge of Aunt Ellie's House."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T19:39:12.401Z"
     }
    ],
    "prompt": {
@@ -27626,7 +27631,8 @@
     "text": "Read CLAUDE.md. You can read only the repo, not the Project docs; Gemini's report is in the repo at claude/ch1-gemini-report.md. Read cards c-fix-qa-bug03-look and t-qa-bug03-look in data/board.json, history included. Your first push is the commit board: start c-fix-qa-bug03-look.\n\nGemini tested chapter 1 for Tom and found a problem (read its row C12 in section 6.2, its FAIL Breakdowns entry and section 7 of claude/ch1-gemini-report.md):\n1. Card t-qa-bug03-look (Look for people on roofs in the Square and the Row, ask play). He was asked: Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab. Gemini wrote: Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221, verdict FAIL on C12). * Card C12 (t-qa-bug03-look): * Failed expected item 1: - [ ] Nobody walks onto the SNAIL MAIL sign. * What I saw instead: During the 1-minute Square watch at Stop 2 (Check 1 / 0s), two townspeople (the brown-haired boy and straw-hat boy) stood directly on top of the SNAIL MAIL sign. * Screenshot: c12_square_0s_snailmail * Failed expected item 2: - [ ] Nobody walks onto the edge of Aunt Ellie's House. * What I saw instead: On Rivituso Row at Stop 3 (0s check), the brown-haired NPC walked directly onto the right wall/edge of Aunt Ellie's House. * Screenshot: c12_row_0s_ellie_edge Related issues from the same run: X-01 (a brown-haired boy NPC walked onto the snail weathervane on the SNAIL MAIL roof, screenshot c12_square_weathervane) and X-02 (a purple-haired NPC walked onto the SCHOOL sign plaque, screenshot c12_square_check5) are the same fault. Checked against main: qa-bug03 added only the tiles an NPC reached in a 25 second run to noGoRoof in the town and row maps (data/maps-le.js, tools/npc_roof_tiles.py), so a longer watch finds more. Run a long headless watch (several minutes, several seeds) of the town and row, list every tile where an NPC stands on a sign, roof, weathervane, plaque or house edge, add them all to noGoRoof, and re-run until a 5 minute watch finds none. Also confirm the SNAIL MAIL sign case that Gemini saw at 0 s.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T19:37:49.000Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-qa-bug03-look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-qa-bug03-look, and give the build fix-qa-bug03-look a docs/CHANGES.md heading; the entry quotes Gemini's words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-qa-bug03-look",
-   "auto": true
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
