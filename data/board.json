@@ -25892,7 +25892,7 @@
    "id": "c-idea-savedportraits",
    "tag": "idea-savedportraits",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "I saved new portraits in admin - how do I ensure they are",
    "next": "Your idea: I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
@@ -25908,7 +25908,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "New card by Tom on the board"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -25920,6 +25920,11 @@
      "d": "2026-11-21",
      "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session).",
      "at": "2026-11-21T18:22:59.600Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T18:23:11.660Z"
     }
    ],
    "prompt": {
