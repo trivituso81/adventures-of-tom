@@ -19853,66 +19853,10 @@
     "est": 0.15,
     "mode": "review",
     "run": {
-     "state": "done",
-     "at": "2026-11-21T05:40:06Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44871864239",
-     "made": [
-      "prop-item-solo-g_bsash",
-      "prop-item-solo-amy_chm1",
-      "prop-item-solo-claytaco"
-     ],
-     "already": [],
-     "skipped": [],
-     "failed": [],
-     "spent": 0.18,
-     "qa": {
-      "prop-item-solo-claytaco": {
-       "file": "results/prop-item-solo-claytaco/20261121T053946.png",
-       "yes": 13,
-       "of": 14,
-       "failed": [
-        {
-         "id": "f_paint",
-         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
-         "why": "Appears as 3D render, not hand-painted"
-        }
-       ]
-      },
-      "prop-item-solo-g_bsash": {
-       "file": "results/prop-item-solo-g_bsash/20261121T053945.png",
-       "yes": 14,
-       "of": 15,
-       "failed": [
-        {
-         "id": "f_paint",
-         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
-         "why": "appears as glossy 3D render, not hand-painted"
-        }
-       ]
-      },
-      "prop-item-solo-amy_chm1": {
-       "file": "results/prop-item-solo-amy_chm1/20261121T053946.png",
-       "yes": 10,
-       "of": 13,
-       "failed": [
-        {
-         "id": "f_text",
-         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
-         "why": "Yellow 'JC' logo visible on shoe"
-        },
-        {
-         "id": "p6",
-         "q": "Do the shoes have paper-thin soles?",
-         "why": "Soles appear normal thickness, not paper-thin"
-        },
-        {
-         "id": "p7",
-         "q": "Do the shoes have plain sides with no logo or swoosh visible?",
-         "why": "'JC' logo visible on side"
-        }
-       ]
-      }
-     }
+     "state": "running",
+     "at": "2026-11-21T07:52:26Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44882215155",
+     "n": 3
     }
    },
    "chat": {
