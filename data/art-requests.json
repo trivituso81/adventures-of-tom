@@ -1,0 +1,12 @@
+{
+ "requests": [
+  {
+   "id": "area-hollow-trail1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: nine empty paper muffin wrappers lie on the ground in a loose trail. The first wrapper is on the stone path just inside the gate, under the green exit board. The rest climb the path and curve into the lower left part of the big muddy clearing. The last one is a little left of the middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. They are large and easy to see, each about the size of a grown-up's head, and exactly nine of them, easy to count, none overlapping, spaced evenly like a trail of breadcrumbs. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "refs": [
+    "art/raw/areas/area-hollow-v4.png"
+   ],
+   "at": 1795220582608
+  }
+ ]
+}
