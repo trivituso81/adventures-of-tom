@@ -25403,6 +25403,29 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-artfallback in data/board.json, history included, and claude/art-fallback-plan.md (the approved rule and the build list). Your first push is the commit board: start c-artfallback.\n\nBuild the picture generator fallback exactly as claude/art-fallback-plan.md says: Art Library pictures go to xAI first; after 2 failed xAI tries on the same entry (counted on the entry's rejects, Tom's rejects of generated results plus generator refusals, never his upload rejects, and old rejects with no service count as xAI) the next try goes to WAN 2.7 on fal with the last prompt word for word and the same reference pictures; after 2 failed WAN tries the entry stops and the run adds a Tom card asking for a reference picture that blocks a Claude remake card. Record the service on every result and reject, show it in the Art Library review, and add the report by service and try number. Reuse the fal code in tools/art-library/wangen.py through one shared module, do not copy it. Pass FAL_KEY to the art-gen Action. Log WAN spend like the other spending Actions (docs/COSTS.md).\n\nMake no paid call: test with the fal stand-in (FAL_QUEUE) and extend tools/art-library/artgen_test.py for every rule in the plan's table. Run python3 tools/smoke.py and the board tests. Add the CLAUDE.md paragraph (artfallback1), the plan's Built section, and a docs/CHANGES.md heading ## artfallback1. Give this card after: a Tom card (ask pictures, fyi true) saying where he will see \"made by xAI\" or \"made by WAN\" in the Art Library the next time he presses Generate. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-board-artfallback",
+   "tag": "board-artfallback",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Areas",
+   "title": "new card to build the picture fallback rule (xAI first, WAN after 2 misses, stop after 4)",
+   "next": "Done: new card to build the picture fallback rule (xAI first, WAN after 2 misses, stop after 4)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGAuLzLbsY54jqp2Q1",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-artfallback. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -25493,6 +25516,18 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGAuLzLbsY54jqp2Q1",
+   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
+   "first": "2026-11-21T10:07:31-08:00",
+   "last": "2026-11-21T10:07:31-08:00",
+   "tags": [
+    "board-artfallback"
+   ],
+   "cards": [
+    "c-artfallback"
    ]
   },
   {
@@ -28946,8 +28981,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ad0f65862671a0a196ed22a77de16ba022595332",
- "synced_at": "2026-11-21T18:06:26+00:00",
+ "synced": "b0401fd3d91ec73aee44720b1e8a4baaa08030ac",
+ "synced_at": "2026-11-21T18:08:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
