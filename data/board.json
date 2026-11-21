@@ -21321,7 +21321,7 @@
    "id": "c-qa-coh05",
    "tag": "qa-coh05",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "Grump Hollow fights show a town pond with a steeple",
    "next": "Ready to start. Confirmed: battleBackdrop in engine/battle-draw.js falls back to 'pond' for every Long Island map that is not named.",
@@ -21341,8 +21341,17 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-05, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T03:25:19.403Z"
     }
-   ]
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   }
   },
   {
    "id": "c-qa-coh06",
