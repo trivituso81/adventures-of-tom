@@ -17966,6 +17966,70 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-hollowtrail1-pics and t-hollowtrail1-pics in data/board.json, history included. Your first push is the commit board: start c-fix-hollowtrail1-pics.\n\nTom tested and found problems:\n1. Card t-hollowtrail1-pics (Generate and approve the 4 Hollow wrapper trail paintings, ask pictures). He was asked: Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN ) ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2). He wrote: they all look like shit. did you even review?\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T00:29:25.325Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-hollowtrail1-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-hollowtrail1-pics, and give the build fix-hollowtrail1-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-hollowtrail1-pics"
+  },
+  {
+   "id": "c-probe-opus",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "tag": "probeopus1",
+   "title": "Probe: Opus medium START route",
+   "next": "Throwaway probe for c-startfix. Its only job is the first push, board: start c-probe-opus.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Throwaway probe added by c-startfix to prove this START route. Retired in the same build."
+    }
+   ],
+   "prompt": {
+    "what": "Proves this START route reaches its first push.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-opus. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-probe-sonnet-high",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "tag": "probesonnethigh1",
+   "title": "Probe: Sonnet high START route",
+   "next": "Throwaway probe for c-startfix. Its only job is the first push, board: start c-probe-sonnet-high.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Throwaway probe added by c-startfix to prove this START route. Retired in the same build."
+    }
+   ],
+   "prompt": {
+    "what": "Proves this START route reaches its first push.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "high",
+    "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
