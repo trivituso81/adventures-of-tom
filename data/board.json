@@ -22442,6 +22442,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEKCcEXQqe68a9DEqQ",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T05:32:16Z",
+   "last": "2026-11-21T05:32:16Z",
+   "tags": [],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
    "title": "Battle system stage 14: balance pass",
    "first": "2026-11-21T05:31:48Z",
@@ -25582,8 +25592,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "fc0d592af6894573440f7b5710db21a329056942",
- "synced_at": "2026-11-21T05:32:11+00:00",
+ "synced": "7f9991c5b74b78a1a8f7b9244bbb191c5e8960d6",
+ "synced_at": "2026-11-21T05:32:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
