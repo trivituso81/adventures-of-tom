@@ -26499,6 +26499,29 @@
      "t": "Tom: \"in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status.\""
     }
    ]
+  },
+  {
+   "id": "b-portraits2",
+   "tag": "portraits2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Tools",
+   "title": "Portraits baked from your saved crops: rose (made by the portrait-bake Action)",
+   "next": "Done: Portraits baked from your saved crops: rose (made by the portrait-bake Action)",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as portraits2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30166,8 +30189,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "34df14824d484c22ad5cdcfcfdd85921f03d8013",
- "synced_at": "2026-11-21T19:08:34+00:00",
+ "synced": "a31af495a59565f7b54ed71ccd81821433543759",
+ "synced_at": "2026-11-21T19:10:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
