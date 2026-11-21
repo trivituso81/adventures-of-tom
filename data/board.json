@@ -19293,7 +19293,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "history": [
     {
      "d": "2026-11-20",
@@ -19364,6 +19364,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: 2 were already waiting for your review. Spent about $0.00."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 4 pictures (about $0.24).",
+     "at": "2026-11-21T07:28:11.176Z"
     }
    ],
    "chat": {
@@ -19371,27 +19376,16 @@
     "opening": "unknown"
    },
    "gen": {
-    "want": false,
-    "at": "2026-11-21T05:38:59Z",
+    "want": true,
+    "at": "2026-11-21T07:28:11Z",
     "ids": [
-     "prop-gate-row-amyhouse",
-     "prop-gate-row-amyhouse-open"
+     "prop-gate-town-school-open",
+     "prop-gate-jpark-barn-open",
+     "prop-gate-blvd-studio-open",
+     "prop-gate-backlot-stage7-open"
     ],
-    "est": 0.12,
-    "mode": "review",
-    "run": {
-     "state": "done",
-     "at": "2026-11-21T05:39:24Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44871864239",
-     "made": [],
-     "already": [
-      "prop-gate-row-amyhouse",
-      "prop-gate-row-amyhouse-open"
-     ],
-     "skipped": [],
-     "failed": [],
-     "spent": 0
-    }
+    "est": 0.24,
+    "mode": "review"
    }
   },
   {
