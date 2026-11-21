@@ -269,8 +269,10 @@ function closeupReveal(img,label,onDone,v,opts) {
   (im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>setTimeout(go,30));
   return true;
 }
-function closeupRevealEnd() {
+// A picture kept up under spoken lines ({ch1Reveal,keep:true}) is closed only by the scene (closeupRevealEnd(true) from ch1RevealEnd), never by a tap or A press (report r-20261121-125831-qvon).
+function closeupRevealEnd(byScene) {
   if(!closeup.active||!closeup.reveal||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  if(closeup.keep&&byScene!==true) return;
   const after=closeup.done; closeup.done=null; if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
   closeupClose(()=>{ closeup.reveal=false; closeup.keep=false; if(after) after(); });
 }
