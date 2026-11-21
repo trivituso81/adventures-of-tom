@@ -26918,7 +26918,7 @@
    "title": "Night test run: every test, every night, on GitHub",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Tap START. It builds a job on GitHub's machines (no Claude credits, free for a public repo) that runs every test of the game each night at about 3:20 am and compares the result with the night before. A test that newly fails becomes a Claude fix card with the output and the commits to suspect. Today no job runs the tests and 13 fail on main with nobody assigned.",
    "blocks": [
     "c-nightgreen"
@@ -26946,6 +26946,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nighttests: every test of the game runs each night on GitHub, and a test that newly fails becomes a fix card"
     }
    ],
    "prompt": {
@@ -26959,7 +26963,8 @@
    },
    "tag": "nighttests",
    "after": "nothing for Tom: c-nightgreen",
-   "started_at": "2026-11-21T19:34:04+00:00"
+   "started_at": "2026-11-21T19:34:04+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-nightclean",
@@ -27034,7 +27039,7 @@
    "title": "Fix the 13 tests that already fail",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on the card Night test run: every test, every night, on GitHub. Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. 13 tests fail on main today and are marked as known failures, so the night run does not raise them. This card finds out for each whether the test or the game is wrong and fixes or removes it, so that a night with no failing test means the game works. Nightly refactoring waits on this.",
    "blocks": [
     "c-nightrefactor"
@@ -27049,6 +27054,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Night test run: every test, every night, on GitHub is done."
     }
    ],
    "prompt": {
@@ -27062,7 +27071,6 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1, 6 and 10) and the line \"Pre-existing test failures on main\" in claude/next.md, then card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Read tests/latest.json on branch night for the output of each test marked known_fail in tools/night/tests.json. Take them one at a time, cheapest first. For each: reproduce it, decide whether the test or the game is wrong, and fix the one that is wrong; a test of something that no longer exists (the old chapter 1 scenes, a retired page) is deleted by the purge rule; then remove its known_fail and push that part with its own build name (nightgreena, nightgreenb and so on) and docs/CHANGES.md entry. A test that needs a paid key or a missing input goes to the skip list with the reason. Apply the stop-loss per test: two tries that miss the same way, write what you found on the card and move to the next. When the conversation has run long, stop, list what is left in the card's next step, and give Tom the prompt for the rest by the five items of claude/handoff-rules.md. The card ships as nightgreen when no row is left with known_fail. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
-   "waiting_on": "claude",
    "after": "nothing for Tom: c-nightrefactor"
   },
   {
@@ -27809,6 +27817,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAhcmE8xg",
+   "title": "Night test run: every test, every night, on GitHub",
+   "first": "2026-11-21T19:48:49Z",
+   "last": "2026-11-21T19:48:49Z",
+   "tags": [
+    "nighttests"
+   ],
+   "cards": [
+    "c-nighttests"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
    "title": "Fix: Look for people on roofs in the Square and the Row",
    "first": "2026-11-21T19:42:50Z",
@@ -27980,7 +28000,7 @@
    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:46:00-08:00",
+   "last": "2026-11-21T11:48:40-08:00",
    "tags": [
     "clips",
     "wanch2a"
@@ -31594,8 +31614,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d6cf0454d928cc01c67b5b0580677cf3485654c7",
- "synced_at": "2026-11-21T19:47:54+00:00",
+ "synced": "1dfe899aeb580e26a6593ddc768e52a955bcfe46",
+ "synced_at": "2026-11-21T19:49:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
