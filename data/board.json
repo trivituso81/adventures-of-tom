@@ -27003,7 +27003,7 @@
    "title": "Admin Dashboard: the wide page with four panes",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "dash1",
    "next": "Ready to start: copy the prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds dashboard.html for your 3440 x 1440 monitor: the Board, the game, the Battle Guide and Admin side by side, the All four and Battle layouts, pane buttons, the gold frame that shows which pane has the keyboard, and links that open in the pane that owns the page. Then it hands you the card Try the Admin Dashboard on the wide monitor.",
    "blocks": [
@@ -27014,7 +27014,7 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Builds the Admin Dashboard page as you approved it: four panes showing the real Board, game, Battle Guide and Admin pages, two layouts, and the top bar. The strip under the game, Take me there and search come in the next three cards.",
@@ -27030,6 +27030,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T19:36:48.535Z"
     }
    ]
   },
