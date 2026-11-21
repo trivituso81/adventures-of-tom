@@ -20,162 +20,197 @@
  ],
  "tests": [
   {
-   "id": "b3_test",
-   "cmd": "python3 -I tools/b3_test.py",
+   "id": "amber_test",
+   "cmd": "python3 -I tools/amber_test.py",
    "group": "g1",
-   "minutes": 60
-  },
-  {
-   "id": "memgrace_test",
-   "cmd": "python3 -I tools/memgrace_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "night__night_test",
-   "cmd": "python3 -I tools/night/night_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "portraits_test",
-   "cmd": "python3 -I tools/portraits_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "readroom_test",
-   "cmd": "python3 -I tools/readroom_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "schoolyard_test",
-   "cmd": "python3 -I tools/schoolyard_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "solo_test",
-   "cmd": "python3 -I tools/solo_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "stillcore_test",
-   "cmd": "python3 -I tools/stillcore_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "sync_test",
-   "cmd": "python3 -I tools/sync_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "tomhouse_walk_test",
-   "cmd": "python3 -I tools/tomhouse_walk_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "townsfolk_test",
-   "cmd": "python3 -I tools/townsfolk_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "voice-library__retext_audit_test",
-   "cmd": "python3 -I tools/voice-library/retext_audit_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
-   "id": "voiceboard_test",
-   "cmd": "python3 -I tools/voiceboard_test.py",
-   "group": "g1",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "amyhouse_walk_test",
-   "cmd": "python3 -I tools/amyhouse_walk_test.py",
+   "id": "amy_scenes_test",
+   "cmd": "python3 -I tools/amy_scenes_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "b3_test",
+   "cmd": "python3 -I tools/b3_test.py",
+   "group": "g1",
+   "minutes": 70
+  },
+  {
+   "id": "board_newcard_test",
+   "cmd": "python3 -I tools/board_newcard_test.py",
+   "group": "g1",
+   "minutes": 1,
+   "outdir": true
+  },
+  {
+   "id": "board_ux1_test",
+   "cmd": "python3 -I tools/board_ux1_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "bready_test",
+   "cmd": "python3 -I tools/bready_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "cut_life_test",
+   "cmd": "python3 -I tools/cut_life_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "effects_test",
+   "cmd": "python3 -I tools/effects_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "foes_test",
+   "cmd": "python3 -I tools/foes_test.py",
+   "group": "g1",
+   "minutes": 1,
+   "outdir": true
+  },
+  {
+   "id": "gatezero_plane_test",
+   "cmd": "python3 -I tools/gatezero_plane_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "music-library__test",
+   "cmd": "python3 -I tools/music-library/test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "olivia_battle_test",
+   "cmd": "python3 -I tools/olivia_battle_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "pose_unflip_test",
+   "cmd": "python3 -I tools/pose_unflip_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "reach_test",
+   "cmd": "python3 -I tools/reach_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "voice-library__rebuild_test",
+   "cmd": "python3 -I tools/voice-library/rebuild_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "welcome_layout_test",
+   "cmd": "python3 -I tools/welcome_layout_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "admin_music_test",
+   "cmd": "python3 -I tools/admin_music_test.py",
    "group": "g2",
    "minutes": 2
+  },
+  {
+   "id": "art-library__artgen3_test",
+   "cmd": "python3 -I tools/art-library/artgen3_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "art-library__artgen_lib_test",
+   "cmd": "python3 -I tools/art-library/artgen_lib_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "art-library__artgen_test",
+   "cmd": "python3 -I tools/art-library/artgen_test.py",
+   "group": "g2",
+   "minutes": 1
   },
   {
    "id": "art-library__artqa_test",
    "cmd": "python3 -I tools/art-library/artqa_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "art-library__keysecrets2_test",
-   "cmd": "python3 -I tools/art-library/keysecrets2_test.py",
+   "id": "art-library__clip_lib_test",
+   "cmd": "python3 -I tools/art-library/clip_lib_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "art-library__wangen_test",
-   "cmd": "python3 -I tools/art-library/wangen_test.py",
-   "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "battle_sound_test",
-   "cmd": "python3 -I tools/battle_sound_test.py",
-   "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "board_artgen_test",
-   "cmd": "python3 -I tools/board_artgen_test.py",
+   "id": "blockbreak_test",
+   "cmd": "python3 -I tools/blockbreak_test.py",
    "group": "g2",
    "minutes": 2,
    "outdir": true
   },
   {
-   "id": "board_sync_test",
-   "cmd": "python3 -I tools/board_sync_test.py",
+   "id": "board_artgen_test",
+   "cmd": "python3 -I tools/board_artgen_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "boilerroom_test",
-   "cmd": "python3 -I tools/boilerroom_test.py",
+   "id": "board_tap_test",
+   "cmd": "python3 -I tools/board_tap_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "carbarn_test",
-   "cmd": "python3 -I tools/carbarn_test.py",
+   "id": "board_ux2_test",
+   "cmd": "python3 -I tools/board_ux2_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "ch13_test",
-   "cmd": "python3 -I tools/ch13_test.py",
+   "id": "ch14_test",
+   "cmd": "python3 -I tools/ch14_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "ch18_test",
-   "cmd": "python3 -I tools/ch18_test.py",
+   "id": "ch15_test",
+   "cmd": "python3 -I tools/ch15_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 5
   },
   {
-   "id": "ch2_lines_test",
-   "cmd": "python3 -I tools/ch2_lines_test.py",
+   "id": "ch4_b3_test",
+   "cmd": "python3 -I tools/ch4_b3_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 5
   },
   {
-   "id": "ch5_school_test",
-   "cmd": "python3 -I tools/ch5_school_test.py",
+   "id": "clip-gate__gate_test",
+   "cmd": "python3 -I tools/clip-gate/gate_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
+  },
+  {
+   "id": "clip-gate__grab_test",
+   "cmd": "python3 -I tools/clip-gate/grab_test.py",
+   "group": "g2",
+   "minutes": 1
   },
   {
    "id": "clip_kinds_test",
@@ -184,68 +219,76 @@
    "minutes": 2
   },
   {
-   "id": "closeup_ch1_test",
-   "cmd": "python3 -I tools/closeup_ch1_test.py",
+   "id": "closeup_ch19_test",
+   "cmd": "python3 -I tools/closeup_ch19_test.py",
    "group": "g2",
    "minutes": 2
   },
   {
-   "id": "closeup_ch7_story_test",
-   "cmd": "python3 -I tools/closeup_ch7_story_test.py",
+   "id": "crown_jar_test",
+   "cmd": "python3 -I tools/crown_jar_test.py",
    "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "concourse_test",
-   "cmd": "python3 -I tools/concourse_test.py",
-   "group": "g2",
-   "minutes": 2
+   "minutes": 3
   },
   {
    "id": "crown_test",
    "cmd": "python3 -I tools/crown_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 3
+  },
+  {
+   "id": "cut_natural_test",
+   "cmd": "python3 -I tools/cut_natural_test.py",
+   "group": "g2",
+   "minutes": 18,
+   "outdir": true
   },
   {
    "id": "fault_test",
    "cmd": "python3 -I tools/fault_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "gate00_test",
-   "cmd": "python3 -I tools/gate00_test.py",
+   "id": "foreverheart_test",
+   "cmd": "python3 -I tools/foreverheart_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "gate_art_test",
+   "cmd": "python3 -I tools/gate_art_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "gatezero_test",
+   "cmd": "python3 -I tools/gatezero_test.py",
    "group": "g2",
    "minutes": 2
   },
   {
-   "id": "gem_canon08_test",
-   "cmd": "python3 -I tools/gem_canon08_test.py",
+   "id": "gem_polish06_test",
+   "cmd": "python3 -I tools/gem_polish06_test.py",
    "group": "g2",
    "minutes": 2
   },
   {
-   "id": "guidegen__build_map_test",
-   "cmd": "python3 -I tools/guidegen/build_map_test.py",
+   "id": "grace_voice_test",
+   "cmd": "python3 -I tools/grace_voice_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "heights_test",
-   "cmd": "python3 -I tools/heights_test.py",
+   "id": "grands_walk_test",
+   "cmd": "python3 -I tools/grands_walk_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "itemdef_test",
-   "cmd": "python3 -I tools/itemdef_test.py",
-   "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "lab_exit_test",
-   "cmd": "python3 -I tools/lab_exit_test.py",
+   "id": "memgrace_test",
+   "cmd": "python3 -I tools/memgrace_test.py",
    "group": "g2",
    "minutes": 2
   },
@@ -253,54 +296,48 @@
    "id": "memrose_test",
    "cmd": "python3 -I tools/memrose_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "oak_test",
-   "cmd": "python3 -I tools/oak_test.py",
+   "id": "reaction_timing_test",
+   "cmd": "python3 -I tools/reaction_timing_test.py",
    "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "pose_editor_test",
-   "cmd": "python3 -I tools/pose_editor_test.py",
-   "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "recruit_justin_test",
-   "cmd": "python3 -I tools/recruit_justin_test.py",
-   "group": "g2",
-   "minutes": 2
-  },
-  {
-   "id": "script_convo_test",
-   "cmd": "python3 -I tools/script_convo_test.py",
-   "group": "g2",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "stacks_test",
-   "cmd": "python3 -I tools/stacks_test.py",
+   "id": "readroom_test",
+   "cmd": "python3 -I tools/readroom_test.py",
    "group": "g2",
    "minutes": 2
   },
   {
-   "id": "studio_test",
-   "cmd": "python3 -I tools/studio_test.py",
+   "id": "recruit_olivia_test",
+   "cmd": "python3 -I tools/recruit_olivia_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "skip_chain_test",
+   "cmd": "python3 -I tools/skip_chain_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
+   "id": "stage7_test",
+   "cmd": "python3 -I tools/stage7_test.py",
    "group": "g2",
    "minutes": 2
   },
   {
-   "id": "talkgap_test",
-   "cmd": "python3 -I tools/talkgap_test.py",
+   "id": "subdepot_test",
+   "cmd": "python3 -I tools/subdepot_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "towerlobby_test",
-   "cmd": "python3 -I tools/towerlobby_test.py",
+   "id": "tomhouse_walk_test",
+   "cmd": "python3 -I tools/tomhouse_walk_test.py",
    "group": "g2",
    "minutes": 2
   },
@@ -308,33 +345,19 @@
    "id": "video_only_test",
    "cmd": "python3 -I tools/video_only_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 4
   },
   {
    "id": "voice-library__send_takes_test",
    "cmd": "python3 -I tools/voice-library/send_takes_test.py",
    "group": "g2",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "wanproof_test",
-   "cmd": "python3 -I tools/wanproof_test.py",
+   "id": "voice-library__voicetake_test",
+   "cmd": "python3 -I tools/voice-library/voicetake_test.py",
    "group": "g2",
-   "minutes": 10,
-   "outdir": true
-  },
-  {
-   "id": "welcome_buttons_test",
-   "cmd": "python3 -I tools/welcome_buttons_test.py",
-   "group": "g2",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "admin_music_test",
-   "cmd": "python3 -I tools/admin_music_test.py",
-   "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "areas_test",
@@ -343,160 +366,170 @@
    "minutes": 2
   },
   {
-   "id": "art-library__bake_test",
-   "cmd": "python3 -I tools/art-library/bake_test.py",
+   "id": "art-library__clip_batch_test",
+   "cmd": "python3 -I tools/art-library/clip_batch_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "art-library__keysecrets_test",
-   "cmd": "python3 -I tools/art-library/keysecrets_test.py",
+   "id": "art-library__clipgen_test",
+   "cmd": "python3 -I tools/art-library/clipgen_test.py",
    "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "b3_story_test",
-   "cmd": "python3 -I tools/b3_story_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "bg_test",
-   "cmd": "python3 -I tools/bg_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "board_backlog_test",
-   "cmd": "python3 -I tools/board_backlog_test.py",
-   "group": "g3",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "board_tap_test",
-   "cmd": "python3 -I tools/board_tap_test.py",
+   "id": "art-library__clipstuck1_test",
+   "cmd": "python3 -I tools/art-library/clipstuck1_test.py",
    "group": "g3",
-   "minutes": 2,
+   "minutes": 1
+  },
+  {
+   "id": "art-library__keysecrets2_test",
+   "cmd": "python3 -I tools/art-library/keysecrets2_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "b3_skip_test",
+   "cmd": "python3 -I tools/b3_skip_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "board_sync_test",
+   "cmd": "python3 -I tools/board_sync_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "board_test",
+   "cmd": "python3 -I tools/board_test.py",
+   "group": "g3",
+   "minutes": 3,
    "outdir": true
   },
   {
-   "id": "boppy_wind_test",
-   "cmd": "python3 -I tools/boppy_wind_test.py",
+   "id": "camera_clamp_test",
+   "cmd": "python3 -I tools/camera_clamp_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "cardlinks_test",
    "cmd": "python3 -I tools/cardlinks_test.py",
    "group": "g3",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "ch14_test",
-   "cmd": "python3 -I tools/ch14_test.py",
+   "id": "ch11_test",
+   "cmd": "python3 -I tools/ch11_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "ch19_test",
-   "cmd": "python3 -I tools/ch19_test.py",
+   "id": "ch18_test",
+   "cmd": "python3 -I tools/ch18_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 5
+  },
+  {
+   "id": "ch1_b3_test",
+   "cmd": "python3 -I tools/ch1_b3_test.py",
+   "group": "g3",
+   "minutes": 5,
+   "outdir": true
+  },
+  {
+   "id": "ch20_test",
+   "cmd": "python3 -I tools/ch20_test.py",
+   "group": "g3",
+   "minutes": 10,
+   "known_fail": "fails from the check shatter scene to Julian on, after the real Leviathan fight (claude/next-addendum-nightgreen.md)"
   },
   {
    "id": "ch2_test",
    "cmd": "python3 -I tools/ch2_test.py",
    "group": "g3",
-   "minutes": 2,
+   "minutes": 5,
    "outdir": true
   },
   {
-   "id": "ch6return_test",
-   "cmd": "python3 -I tools/ch6return_test.py",
+   "id": "closeup_ch17_test",
+   "cmd": "python3 -I tools/closeup_ch17_test.py",
    "group": "g3",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 1
   },
   {
-   "id": "clip_test",
-   "cmd": "python3 -I tools/clip_test.py",
+   "id": "closeup_ch1_test",
+   "cmd": "python3 -I tools/closeup_ch1_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "closeup_ch2_test",
-   "cmd": "python3 -I tools/closeup_ch2_test.py",
+   "id": "closeup_ch5_test",
+   "cmd": "python3 -I tools/closeup_ch5_test.py",
+   "group": "g3",
+   "minutes": 3
+  },
+  {
+   "id": "closeup_ch8_test",
+   "cmd": "python3 -I tools/closeup_ch8_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "gem_bug08_test",
+   "cmd": "python3 -I tools/gem_bug08_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "griffith_test",
+   "cmd": "python3 -I tools/griffith_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "closeup_ch7_test",
-   "cmd": "python3 -I tools/closeup_ch7_test.py",
+   "id": "guardwin_test",
+   "cmd": "python3 -I tools/guardwin_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "costs_duo_test",
-   "cmd": "python3 -I tools/costs_duo_test.py",
+   "id": "guidegen__build_map_test",
+   "cmd": "python3 -I tools/guidegen/build_map_test.py",
    "group": "g3",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "cut_life_test",
-   "cmd": "python3 -I tools/cut_life_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "cut_natural_test",
-   "cmd": "python3 -I tools/cut_natural_test.py",
-   "group": "g3",
-   "minutes": 8,
-   "outdir": true
-  },
-  {
-   "id": "flight_test",
-   "cmd": "python3 -I tools/flight_test.py",
-   "group": "g3",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "gate_art_test",
-   "cmd": "python3 -I tools/gate_art_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "gem_polish06_test",
-   "cmd": "python3 -I tools/gem_polish06_test.py",
-   "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "guidegen__draft_test",
    "cmd": "python3 -I tools/guidegen/draft_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "hollow_chair_test",
-   "cmd": "python3 -I tools/hollow_chair_test.py",
+   "id": "guidegen__guidegen_test",
+   "cmd": "python3 -I tools/guidegen/guidegen_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "jojo_test",
-   "cmd": "python3 -I tools/jojo_test.py",
+   "id": "guidegen__take_test",
+   "cmd": "python3 -I tools/guidegen/take_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "linegap_test",
-   "cmd": "python3 -I tools/linegap_test.py",
+   "id": "jpark_test",
+   "cmd": "python3 -I tools/jpark_test.py",
+   "group": "g3",
+   "minutes": 4
+  },
+  {
+   "id": "marsh_test",
+   "cmd": "python3 -I tools/marsh_test.py",
    "group": "g3",
    "minutes": 2
   },
@@ -507,172 +540,156 @@
    "minutes": 2
   },
   {
-   "id": "oakpark_test",
-   "cmd": "python3 -I tools/oakpark_test.py",
+   "id": "oak_test",
+   "cmd": "python3 -I tools/oak_test.py",
+   "group": "g3",
+   "minutes": 3
+  },
+  {
+   "id": "pose_editor_test",
+   "cmd": "python3 -I tools/pose_editor_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "schoolyard_test",
+   "cmd": "python3 -I tools/schoolyard_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "pose_unflip_test",
-   "cmd": "python3 -I tools/pose_unflip_test.py",
+   "id": "skip_interstitial_test",
+   "cmd": "python3 -I tools/skip_interstitial_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "recruit_olivia_test",
-   "cmd": "python3 -I tools/recruit_olivia_test.py",
+   "id": "stageset_test",
+   "cmd": "python3 -I tools/stageset_test.py",
    "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "script_editor_test",
-   "cmd": "python3 -I tools/script_editor_test.py",
-   "group": "g3",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "stacks_walk_test",
-   "cmd": "python3 -I tools/stacks_walk_test.py",
-   "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "subchamber_test",
    "cmd": "python3 -I tools/subchamber_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "tap_test",
-   "cmd": "python3 -I tools/tap_test.py",
+   "id": "terminal_test",
+   "cmd": "python3 -I tools/terminal_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
+   "id": "tombo_test",
+   "cmd": "python3 -I tools/tombo_test.py",
+   "group": "g3",
+   "minutes": 5
+  },
+  {
+   "id": "townsfolk_test",
+   "cmd": "python3 -I tools/townsfolk_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "towerpinnacle_test",
-   "cmd": "python3 -I tools/towerpinnacle_test.py",
+   "id": "voice-library__keysecrets3_test",
+   "cmd": "python3 -I tools/voice-library/keysecrets3_test.py",
    "group": "g3",
    "minutes": 2
   },
   {
-   "id": "voice-learn__voicegen_test",
-   "cmd": "python3 -I tools/voice-learn/voicegen_test.py",
+   "id": "wanproof_test",
+   "cmd": "python3 -I tools/wanproof_test.py",
    "group": "g3",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "voice-library__starving_test",
-   "cmd": "python3 -I tools/voice-library/starving_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "welcome_layout_test",
-   "cmd": "python3 -I tools/welcome_layout_test.py",
-   "group": "g3",
-   "minutes": 2
-  },
-  {
-   "id": "admin_hub_test",
-   "cmd": "python3 -I tools/admin_hub_test.py",
+   "id": "art-library__bake_test",
+   "cmd": "python3 -I tools/art-library/bake_test.py",
    "group": "g4",
    "minutes": 2
   },
   {
-   "id": "airport_test",
-   "cmd": "python3 -I tools/airport_test.py",
+   "id": "art-library__keysecrets_test",
+   "cmd": "python3 -I tools/art-library/keysecrets_test.py",
    "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "art-library__artgen3_test",
-   "cmd": "python3 -I tools/art-library/artgen3_test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "art-library__clip_batch_test",
-   "cmd": "python3 -I tools/art-library/clip_batch_test.py",
-   "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "art-library__review_test",
    "cmd": "python3 -I tools/art-library/review_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "backlot_test",
-   "cmd": "python3 -I tools/backlot_test.py",
+   "id": "art-library__upload_test",
+   "cmd": "python3 -I tools/art-library/upload_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "blockbreak_test",
-   "cmd": "python3 -I tools/blockbreak_test.py",
+   "id": "art-library__wangen_test",
+   "cmd": "python3 -I tools/art-library/wangen_test.py",
    "group": "g4",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 1
   },
   {
-   "id": "board_big_test",
-   "cmd": "python3 -I tools/board_big_test.py",
+   "id": "b3-sim-check",
+   "cmd": "node tools/b3-sim.js check",
    "group": "g4",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 1
   },
   {
-   "id": "board_test",
-   "cmd": "python3 -I tools/board_test.py",
+   "id": "blvd_test",
+   "cmd": "python3 -I tools/blvd_test.py",
    "group": "g4",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 4
   },
   {
-   "id": "bready_test",
-   "cmd": "python3 -I tools/bready_test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "ch11_test",
-   "cmd": "python3 -I tools/ch11_test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "ch15_test",
-   "cmd": "python3 -I tools/ch15_test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "ch1_b3_test",
-   "cmd": "python3 -I tools/ch1_b3_test.py",
+   "id": "buildlog_test",
+   "cmd": "python3 -I tools/buildlog_test.py",
    "group": "g4",
    "minutes": 2,
    "outdir": true
   },
   {
-   "id": "ch3_b3_test",
-   "cmd": "python3 -I tools/ch3_b3_test.py",
+   "id": "carbarn_test",
+   "cmd": "python3 -I tools/carbarn_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "ch7_test",
-   "cmd": "python3 -I tools/ch7_test.py",
+   "id": "ch13_test",
+   "cmd": "python3 -I tools/ch13_test.py",
    "group": "g4",
-   "minutes": 6,
-   "outdir": true
+   "minutes": 4
   },
   {
-   "id": "clip-gate__gate_test",
-   "cmd": "python3 -I tools/clip-gate/gate_test.py",
+   "id": "ch16_test",
+   "cmd": "python3 -I tools/ch16_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 7
+  },
+  {
+   "id": "ch19_test",
+   "cmd": "python3 -I tools/ch19_test.py",
+   "group": "g4",
+   "minutes": 9
+  },
+  {
+   "id": "ch2_b3_test",
+   "cmd": "python3 -I tools/ch2_b3_test.py",
+   "group": "g4",
+   "minutes": 1
+  },
+  {
+   "id": "clip_test",
+   "cmd": "python3 -I tools/clip_test.py",
+   "group": "g4",
+   "minutes": 1
   },
   {
    "id": "closeup_ch13_test",
@@ -681,82 +698,76 @@
    "minutes": 2
   },
   {
-   "id": "closeup_ch4_story_test",
-   "cmd": "python3 -I tools/closeup_ch4_story_test.py",
+   "id": "closeup_ch9_test",
+   "cmd": "python3 -I tools/closeup_ch9_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "closeup_ch8_test",
-   "cmd": "python3 -I tools/closeup_ch8_test.py",
+   "id": "closeup_test",
+   "cmd": "python3 -I tools/closeup_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 3
+  },
+  {
+   "id": "costs2_test",
+   "cmd": "python3 -I tools/costs2_test.py",
+   "group": "g4",
+   "minutes": 3,
+   "outdir": true
   },
   {
    "id": "costs_test",
    "cmd": "python3 -I tools/costs_test.py",
    "group": "g4",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "deadletter_test",
-   "cmd": "python3 -I tools/deadletter_test.py",
+   "id": "heads_test",
+   "cmd": "python3 -I tools/heads_test.py",
    "group": "g4",
    "minutes": 2
   },
   {
-   "id": "flightzero_test",
-   "cmd": "python3 -I tools/flightzero_test.py",
+   "id": "heights_test",
+   "cmd": "python3 -I tools/heights_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "gatezero_plane_test",
-   "cmd": "python3 -I tools/gatezero_plane_test.py",
+   "id": "hollow_chair_test",
+   "cmd": "python3 -I tools/hollow_chair_test.py",
    "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "grace_voice_test",
-   "cmd": "python3 -I tools/grace_voice_test.py",
-   "group": "g4",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "guidegen__guidegen_test",
-   "cmd": "python3 -I tools/guidegen/guidegen_test.py",
-   "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "hollow_trail_test",
    "cmd": "python3 -I tools/hollow_trail_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "jpark_test",
-   "cmd": "python3 -I tools/jpark_test.py",
+   "id": "itemart_test",
+   "cmd": "python3 -I tools/itemart_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "madelot_test",
-   "cmd": "python3 -I tools/madelot_test.py",
+   "id": "itembanner_test",
+   "cmd": "python3 -I tools/itembanner_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "monster_gone_test",
-   "cmd": "python3 -I tools/monster_gone_test.py",
+   "id": "night__clean_test",
+   "cmd": "python3 -I tools/night/clean_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "olivia_battle_test",
-   "cmd": "python3 -I tools/olivia_battle_test.py",
+   "id": "pier_test",
+   "cmd": "python3 -I tools/pier_test.py",
    "group": "g4",
    "minutes": 2
   },
@@ -764,11 +775,24 @@
    "id": "quest_test",
    "cmd": "python3 -I tools/quest_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "report_test",
-   "cmd": "python3 -I tools/report_test.py",
+   "id": "recruit_justin_test",
+   "cmd": "python3 -I tools/recruit_justin_test.py",
+   "group": "g4",
+   "minutes": 3
+  },
+  {
+   "id": "script_convo_test",
+   "cmd": "python3 -I tools/script_convo_test.py",
+   "group": "g4",
+   "minutes": 2,
+   "outdir": true
+  },
+  {
+   "id": "script_editor_test",
+   "cmd": "python3 -I tools/script_editor_test.py",
    "group": "g4",
    "minutes": 2,
    "outdir": true
@@ -777,166 +801,150 @@
    "id": "script_play_test",
    "cmd": "python3 -I tools/script_play_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 5
   },
   {
-   "id": "stage7_test",
-   "cmd": "python3 -I tools/stage7_test.py",
+   "id": "solo_test",
+   "cmd": "python3 -I tools/solo_test.py",
    "group": "g4",
    "minutes": 2
   },
   {
-   "id": "subdepot_test",
-   "cmd": "python3 -I tools/subdepot_test.py",
+   "id": "stampgrid_test",
+   "cmd": "python3 -I tools/stampgrid_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "terminal_test",
-   "cmd": "python3 -I tools/terminal_test.py",
+   "id": "studio_test",
+   "cmd": "python3 -I tools/studio_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
+  },
+  {
+   "id": "tap_test",
+   "cmd": "python3 -I tools/tap_test.py",
+   "group": "g4",
+   "minutes": 5
+  },
+  {
+   "id": "towerpinnacle_test",
+   "cmd": "python3 -I tools/towerpinnacle_test.py",
+   "group": "g4",
+   "minutes": 1
   },
   {
    "id": "towershelves_test",
    "cmd": "python3 -I tools/towershelves_test.py",
    "group": "g4",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "voice-library__keysecrets3_test",
-   "cmd": "python3 -I tools/voice-library/keysecrets3_test.py",
+   "id": "towerstairs_test",
+   "cmd": "python3 -I tools/towerstairs_test.py",
+   "group": "g4",
+   "minutes": 1
+  },
+  {
+   "id": "voice-library__retext_audit_test",
+   "cmd": "python3 -I tools/voice-library/retext_audit_test.py",
    "group": "g4",
    "minutes": 2
   },
   {
-   "id": "voice-library__test",
-   "cmd": "python3 -I tools/voice-library/test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "winnow_test",
-   "cmd": "python3 -I tools/winnow_test.py",
-   "group": "g4",
-   "minutes": 2
-  },
-  {
-   "id": "amber_test",
-   "cmd": "python3 -I tools/amber_test.py",
+   "id": "art-library__validate",
+   "cmd": "node tools/art-library/validate.js",
    "group": "g5",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 1
   },
   {
-   "id": "art-library__artgen_lib_test",
-   "cmd": "python3 -I tools/art-library/artgen_lib_test.py",
+   "id": "b3_story_test",
+   "cmd": "python3 -I tools/b3_story_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 6
   },
   {
-   "id": "art-library__clip_lib_test",
-   "cmd": "python3 -I tools/art-library/clip_lib_test.py",
+   "id": "backlot_test",
+   "cmd": "python3 -I tools/backlot_test.py",
    "group": "g5",
-   "minutes": 2
-  },
-  {
-   "id": "art-library__clipgen_test",
-   "cmd": "python3 -I tools/art-library/clipgen_test.py",
-   "group": "g5",
-   "minutes": 3,
-   "outdir": true
-  },
-  {
-   "id": "b3-sim-check",
-   "cmd": "node tools/b3-sim.js check",
-   "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "banner_hold_test",
    "cmd": "python3 -I tools/banner_hold_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "blvd_test",
-   "cmd": "python3 -I tools/blvd_test.py",
+   "id": "bg_test",
+   "cmd": "python3 -I tools/bg_test.py",
+   "group": "g5",
+   "minutes": 1
+  },
+  {
+   "id": "boppy_wind_test",
+   "cmd": "python3 -I tools/boppy_wind_test.py",
    "group": "g5",
    "minutes": 2
-  },
-  {
-   "id": "board_build_test",
-   "cmd": "python3 -I tools/board_build_test.py",
-   "group": "g5",
-   "minutes": 2,
-   "outdir": true
-  },
-  {
-   "id": "board_ux1_test",
-   "cmd": "python3 -I tools/board_ux1_test.py",
-   "group": "g5",
-   "minutes": 2
-  },
-  {
-   "id": "buildlog_test",
-   "cmd": "python3 -I tools/buildlog_test.py",
-   "group": "g5",
-   "minutes": 2,
-   "outdir": true
   },
   {
    "id": "ch11b_test",
    "cmd": "python3 -I tools/ch11b_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "ch16_test",
-   "cmd": "python3 -I tools/ch16_test.py",
+   "id": "ch2_lines_test",
+   "cmd": "python3 -I tools/ch2_lines_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "ch20_test",
-   "cmd": "python3 -I tools/ch20_test.py",
+   "id": "ch3_b3_test",
+   "cmd": "python3 -I tools/ch3_b3_test.py",
    "group": "g5",
-   "minutes": 20,
-   "known_fail": "fails from the check shatter scene to Julian on, after the real Leviathan fight (claude/next-addendum-nightgreen.md)"
+   "minutes": 5
   },
   {
-   "id": "ch4_b3_test",
-   "cmd": "python3 -I tools/ch4_b3_test.py",
+   "id": "ch5_b3_test",
+   "cmd": "python3 -I tools/ch5_b3_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 5
   },
   {
-   "id": "clip-gate__grab_test",
-   "cmd": "python3 -I tools/clip-gate/grab_test.py",
+   "id": "ch5_school_test",
+   "cmd": "python3 -I tools/ch5_school_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 3
+  },
+  {
+   "id": "ch6return_test",
+   "cmd": "python3 -I tools/ch6return_test.py",
+   "group": "g5",
+   "minutes": 5,
+   "outdir": true
+  },
+  {
+   "id": "clip-gate__vision_test",
+   "cmd": "python3 -I tools/clip-gate/vision_test.py",
+   "group": "g5",
+   "minutes": 1
   },
   {
    "id": "clip_review_test",
    "cmd": "python3 -I tools/clip_review_test.py",
    "group": "g5",
-   "minutes": 5
-  },
-  {
-   "id": "closeup_ch17_test",
-   "cmd": "python3 -I tools/closeup_ch17_test.py",
-   "group": "g5",
    "minutes": 2
   },
   {
-   "id": "closeup_ch4_test",
-   "cmd": "python3 -I tools/closeup_ch4_test.py",
+   "id": "closeup_ch2_test",
+   "cmd": "python3 -I tools/closeup_ch2_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "closeup_ch9_test",
-   "cmd": "python3 -I tools/closeup_ch9_test.py",
+   "id": "closeup_ch4_story_test",
+   "cmd": "python3 -I tools/closeup_ch4_story_test.py",
    "group": "g5",
    "minutes": 2
   },
@@ -944,90 +952,95 @@
    "id": "cross_test",
    "cmd": "python3 -I tools/cross_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "dome_test",
-   "cmd": "python3 -I tools/dome_test.py",
+   "id": "dashboard_test",
+   "cmd": "python3 -I tools/dashboard_test.py",
    "group": "g5",
    "minutes": 2
   },
   {
-   "id": "foes_test",
-   "cmd": "python3 -I tools/foes_test.py",
+   "id": "deadletter_test",
+   "cmd": "python3 -I tools/deadletter_test.py",
    "group": "g5",
-   "minutes": 2,
-   "outdir": true
+   "minutes": 1
   },
   {
-   "id": "gatezero_test",
-   "cmd": "python3 -I tools/gatezero_test.py",
+   "id": "gate00_test",
+   "cmd": "python3 -I tools/gate00_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "grands_walk_test",
-   "cmd": "python3 -I tools/grands_walk_test.py",
+   "id": "itemdef_test",
+   "cmd": "python3 -I tools/itemdef_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "guidegen__take_test",
-   "cmd": "python3 -I tools/guidegen/take_test.py",
+   "id": "jojo_test",
+   "cmd": "python3 -I tools/jojo_test.py",
    "group": "g5",
-   "minutes": 2
-  },
-  {
-   "id": "itemart_test",
-   "cmd": "python3 -I tools/itemart_test.py",
-   "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "justin_test",
    "cmd": "python3 -I tools/justin_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "marsh_test",
-   "cmd": "python3 -I tools/marsh_test.py",
+   "id": "kit_test",
+   "cmd": "python3 -I tools/kit_test.py",
+   "group": "g5",
+   "minutes": 1
+  },
+  {
+   "id": "linegap_test",
+   "cmd": "python3 -I tools/linegap_test.py",
+   "group": "g5",
+   "minutes": 3
+  },
+  {
+   "id": "madelot_test",
+   "cmd": "python3 -I tools/madelot_test.py",
+   "group": "g5",
+   "minutes": 1
+  },
+  {
+   "id": "night__night_test",
+   "cmd": "python3 -I tools/night/night_test.py",
    "group": "g5",
    "minutes": 2
   },
   {
-   "id": "moonclub_test",
-   "cmd": "python3 -I tools/moonclub_test.py",
+   "id": "portrait_test",
+   "cmd": "python3 -I tools/portrait_test.py",
    "group": "g5",
-   "minutes": 2
-  },
-  {
-   "id": "pier_test",
-   "cmd": "python3 -I tools/pier_test.py",
-   "group": "g5",
-   "minutes": 2
-  },
-  {
-   "id": "reach_test",
-   "cmd": "python3 -I tools/reach_test.py",
-   "group": "g5",
-   "minutes": 2
+   "minutes": 3
   },
   {
    "id": "room_scale_test",
    "cmd": "python3 -I tools/room_scale_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 9
   },
   {
-   "id": "skip_chain_test",
-   "cmd": "python3 -I tools/skip_chain_test.py",
+   "id": "stacks_test",
+   "cmd": "python3 -I tools/stacks_test.py",
    "group": "g5",
    "minutes": 2
   },
   {
-   "id": "stageset_test",
-   "cmd": "python3 -I tools/stageset_test.py",
+   "id": "stacks_walk_test",
+   "cmd": "python3 -I tools/stacks_walk_test.py",
+   "group": "g5",
+   "minutes": 2
+  },
+  {
+   "id": "stillcore_test",
+   "cmd": "python3 -I tools/stillcore_test.py",
    "group": "g5",
    "minutes": 2
   },
@@ -1038,56 +1051,57 @@
    "minutes": 2
   },
   {
-   "id": "tombo_test",
-   "cmd": "python3 -I tools/tombo_test.py",
+   "id": "talkgap_test",
+   "cmd": "python3 -I tools/talkgap_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "towerstairs_test",
-   "cmd": "python3 -I tools/towerstairs_test.py",
+   "id": "tomhouse_test",
+   "cmd": "python3 -I tools/tomhouse_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
+  },
+  {
+   "id": "voice-learn__voicegen_test",
+   "cmd": "python3 -I tools/voice-learn/voicegen_test.py",
+   "group": "g5",
+   "minutes": 1
   },
   {
    "id": "voice-library__pending_test",
    "cmd": "python3 -I tools/voice-library/pending_test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "voice-library__trail_test",
-   "cmd": "python3 -I tools/voice-library/trail_test.py",
+   "id": "voice-library__test",
+   "cmd": "python3 -I tools/voice-library/test.py",
    "group": "g5",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "amy_scenes_test",
-   "cmd": "python3 -I tools/amy_scenes_test.py",
+   "id": "voiceboard_test",
+   "cmd": "python3 -I tools/voiceboard_test.py",
+   "group": "g5",
+   "minutes": 2,
+   "outdir": true
+  },
+  {
+   "id": "admin_hub_test",
+   "cmd": "python3 -I tools/admin_hub_test.py",
    "group": "g6",
    "minutes": 2
   },
   {
-   "id": "art-library__artgen_test",
-   "cmd": "python3 -I tools/art-library/artgen_test.py",
+   "id": "airport_test",
+   "cmd": "python3 -I tools/airport_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "art-library__clipstuck1_test",
-   "cmd": "python3 -I tools/art-library/clipstuck1_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "art-library__upload_test",
-   "cmd": "python3 -I tools/art-library/upload_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "art-library__validate",
-   "cmd": "node tools/art-library/validate.js",
+   "id": "amyhouse_walk_test",
+   "cmd": "python3 -I tools/amyhouse_walk_test.py",
    "group": "g6",
    "minutes": 1
   },
@@ -1099,28 +1113,41 @@
    "outdir": true
   },
   {
+   "id": "battle_sound_test",
+   "cmd": "python3 -I tools/battle_sound_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
    "id": "board_archive_test",
    "cmd": "python3 -I tools/board_archive_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "board_newcard_test",
-   "cmd": "python3 -I tools/board_newcard_test.py",
+   "id": "board_backlog_test",
+   "cmd": "python3 -I tools/board_backlog_test.py",
    "group": "g6",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "board_ux2_test",
-   "cmd": "python3 -I tools/board_ux2_test.py",
+   "id": "board_big_test",
+   "cmd": "python3 -I tools/board_big_test.py",
    "group": "g6",
-   "minutes": 2,
+   "minutes": 1,
    "outdir": true
   },
   {
-   "id": "camera_clamp_test",
-   "cmd": "python3 -I tools/camera_clamp_test.py",
+   "id": "board_build_test",
+   "cmd": "python3 -I tools/board_build_test.py",
+   "group": "g6",
+   "minutes": 1,
+   "outdir": true
+  },
+  {
+   "id": "boilerroom_test",
+   "cmd": "python3 -I tools/boilerroom_test.py",
    "group": "g6",
    "minutes": 2
   },
@@ -1128,125 +1155,122 @@
    "id": "ch12_test",
    "cmd": "python3 -I tools/ch12_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 3
   },
   {
    "id": "ch17_test",
    "cmd": "python3 -I tools/ch17_test.py",
    "group": "g6",
+   "minutes": 9
+  },
+  {
+   "id": "ch7_test",
+   "cmd": "python3 -I tools/ch7_test.py",
+   "group": "g6",
+   "minutes": 5,
+   "outdir": true
+  },
+  {
+   "id": "closeup_ch4_test",
+   "cmd": "python3 -I tools/closeup_ch4_test.py",
+   "group": "g6",
+   "minutes": 2
+  },
+  {
+   "id": "closeup_ch7_story_test",
+   "cmd": "python3 -I tools/closeup_ch7_story_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
+   "id": "closeup_ch7_test",
+   "cmd": "python3 -I tools/closeup_ch7_test.py",
+   "group": "g6",
    "minutes": 5
-  },
-  {
-   "id": "ch2_b3_test",
-   "cmd": "python3 -I tools/ch2_b3_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "ch5_b3_test",
-   "cmd": "python3 -I tools/ch5_b3_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "clip-gate__vision_test",
-   "cmd": "python3 -I tools/clip-gate/vision_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "closeup_ch19_test",
-   "cmd": "python3 -I tools/closeup_ch19_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "closeup_ch5_test",
-   "cmd": "python3 -I tools/closeup_ch5_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "closeup_test",
-   "cmd": "python3 -I tools/closeup_test.py",
-   "group": "g6",
-   "minutes": 4
   },
   {
    "id": "coinfinds_test",
    "cmd": "python3 -I tools/coinfinds_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "crown_jar_test",
-   "cmd": "python3 -I tools/crown_jar_test.py",
+   "id": "concourse_test",
+   "cmd": "python3 -I tools/concourse_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "effects_test",
-   "cmd": "python3 -I tools/effects_test.py",
+   "id": "costs_duo_test",
+   "cmd": "python3 -I tools/costs_duo_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1,
+   "outdir": true
   },
   {
-   "id": "foreverheart_test",
-   "cmd": "python3 -I tools/foreverheart_test.py",
+   "id": "dome_test",
+   "cmd": "python3 -I tools/dome_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "gem_bug08_test",
-   "cmd": "python3 -I tools/gem_bug08_test.py",
+   "id": "flight_test",
+   "cmd": "python3 -I tools/flight_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 2,
+   "outdir": true
   },
   {
-   "id": "griffith_test",
-   "cmd": "python3 -I tools/griffith_test.py",
+   "id": "flightzero_test",
+   "cmd": "python3 -I tools/flightzero_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "heads_test",
-   "cmd": "python3 -I tools/heads_test.py",
+   "id": "gem_canon08_test",
+   "cmd": "python3 -I tools/gem_canon08_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 3
   },
   {
-   "id": "itembanner_test",
-   "cmd": "python3 -I tools/itembanner_test.py",
+   "id": "lab_exit_test",
+   "cmd": "python3 -I tools/lab_exit_test.py",
    "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "kit_test",
-   "cmd": "python3 -I tools/kit_test.py",
-   "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "memamy_test",
    "cmd": "python3 -I tools/memamy_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "music-library__test",
-   "cmd": "python3 -I tools/music-library/test.py",
+   "id": "monster_gone_test",
+   "cmd": "python3 -I tools/monster_gone_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
+   "id": "moonclub_test",
+   "cmd": "python3 -I tools/moonclub_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
+   "id": "oakpark_test",
+   "cmd": "python3 -I tools/oakpark_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
+   "id": "portraits_test",
+   "cmd": "python3 -I tools/portraits_test.py",
    "group": "g6",
    "minutes": 2
   },
   {
-   "id": "portrait_test",
-   "cmd": "python3 -I tools/portrait_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "reaction_timing_test",
-   "cmd": "python3 -I tools/reaction_timing_test.py",
+   "id": "report_test",
+   "cmd": "python3 -I tools/report_test.py",
    "group": "g6",
    "minutes": 2,
    "outdir": true
@@ -1258,83 +1282,59 @@
    "minutes": 3
   },
   {
-   "id": "skip_interstitial_test",
-   "cmd": "python3 -I tools/skip_interstitial_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
    "id": "smoke",
    "cmd": "python3 tools/smoke.py",
    "group": "g6",
-   "minutes": 4
-  },
-  {
-   "id": "stampgrid_test",
-   "cmd": "python3 -I tools/stampgrid_test.py",
-   "group": "g6",
-   "minutes": 2
+   "minutes": 6
   },
   {
    "id": "sw_test",
    "cmd": "python3 -I tools/sw_test.py",
    "group": "g6",
+   "minutes": 5
+  },
+  {
+   "id": "sync_test",
+   "cmd": "python3 -I tools/sync_test.py",
+   "group": "g6",
    "minutes": 2
   },
   {
-   "id": "tomhouse_test",
-   "cmd": "python3 -I tools/tomhouse_test.py",
+   "id": "towerlobby_test",
+   "cmd": "python3 -I tools/towerlobby_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
    "id": "towervault_test",
    "cmd": "python3 -I tools/towervault_test.py",
    "group": "g6",
-   "minutes": 2
+   "minutes": 1
   },
   {
-   "id": "voice-library__rebuild_test",
-   "cmd": "python3 -I tools/voice-library/rebuild_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "voice-library__voicetake_test",
-   "cmd": "python3 -I tools/voice-library/voicetake_test.py",
-   "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "b3_skip_test",
-   "cmd": "python3 -I tools/b3_skip_test.py",
+   "id": "voice-library__starving_test",
+   "cmd": "python3 -I tools/voice-library/starving_test.py",
    "group": "g6",
    "minutes": 1
   },
   {
-   "id": "night__clean_test",
-   "cmd": "python3 -I tools/night/clean_test.py",
+   "id": "voice-library__trail_test",
+   "cmd": "python3 -I tools/voice-library/trail_test.py",
    "group": "g6",
    "minutes": 1
   },
   {
-   "id": "dashboard_test",
-   "cmd": "python3 -I tools/dashboard_test.py",
+   "id": "welcome_buttons_test",
+   "cmd": "python3 -I tools/welcome_buttons_test.py",
    "group": "g6",
-   "minutes": 2
-  },
-  {
-   "id": "guardwin_test",
-   "cmd": "python3 -I tools/guardwin_test.py",
-   "group": "g1",
-   "minutes": 3
-  },
-  {
-   "id": "costs2_test",
-   "cmd": "python3 -I tools/costs2_test.py",
-   "group": "g4",
-   "minutes": 3,
+   "minutes": 2,
    "outdir": true
+  },
+  {
+   "id": "winnow_test",
+   "cmd": "python3 -I tools/winnow_test.py",
+   "group": "g6",
+   "minutes": 1
   }
  ]
 }

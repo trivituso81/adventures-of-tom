@@ -27506,6 +27506,11 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as nighttests: every test of the game runs each night on GitHub, and a test that newly fails becomes a fix card"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built and pushed (build nighttests). First real run 44942942208: 197 of 210 rows ran in 306 measured minutes; g3 crashed on a folder (fixed), g1 with b3_test hit the 4 hour limit (b3_test moved to its own estimate of 70 minutes and the groups rebalanced). 79 rows fail on main today, saved as the baseline: a fix card is made only for a test that passed the night before. Build nighttestsb pushes the fix; the next night run is the second real run.",
+     "at": "2026-11-21T23:53:02.000Z"
     }
    ],
    "prompt": {

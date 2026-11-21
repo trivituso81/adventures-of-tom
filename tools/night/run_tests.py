@@ -21,7 +21,7 @@ if not env0.get('CHROMIUM'):
 for k in ('XAI_API_KEY', 'ELEVENLABS_API_KEY', 'FAL_KEY'): env0.pop(k, None)   # never a paid key in a night test
 shots = os.path.join(root, 'tools', 'shots')
 def pics():
-    return {f: os.path.getmtime(os.path.join(shots, f)) for f in os.listdir(shots)} if os.path.isdir(shots) else {}
+    return {f: os.path.getmtime(os.path.join(shots, f)) for f in os.listdir(shots) if os.path.isfile(os.path.join(shots, f))} if os.path.isdir(shots) else {}
 def once(r):
     od = os.path.join('/tmp/night', r['id']); os.makedirs(od, exist_ok=True)
     cmd = r['cmd'] + (' ' + od if r.get('outdir') else '')
