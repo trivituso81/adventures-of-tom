@@ -15187,7 +15187,7 @@
    "title": "Play chapter 2 on your phone and report",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4.",
    "blocks": [
@@ -15228,14 +15228,17 @@
     {
      "d": "2026-11-21",
      "t": "Waits on t-ch2voices now: Tom (13:06) wants to hear the voices to judge chapter 2, not read the script."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
     "opening": "unknown"
-   },
-   "waiting_on": "tom"
+   }
   },
   {
    "id": "c-fix-effectslook-2",
@@ -29192,7 +29195,7 @@
    "title": "Tom celebrates after a win even if he was guarding",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Building: the victory video now beats a guard that is still up, so Tom celebrates like the others.",
    "blocks": [],
    "changed": "2026-11-21",
@@ -29209,6 +29212,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card. Cause found: b3cMemberFrame (engine/b3-clips.js) checked the guard video before the win check, so a guard still up at the end kept showing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guardwin1: Tom now does the victory celebration when a fight is won while his guard is up, instead of staying in the guard pose"
     }
    ],
    "prompt": {
@@ -29221,7 +29228,8 @@
     "text": "Read claude/handoff-rules.md, then fix Tom staying in the guard video when a fight is won (tag guardwin1): in b3cMemberFrame the victory video must beat a guard still up; test with tools/guardwin_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "guardwin1",
-   "after": "t-guardwinplay"
+   "after": "t-guardwinplay",
+   "done": "2026-11-21"
   },
   {
    "id": "t-guardwinplay",
@@ -29764,20 +29772,10 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
-   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
-   "first": "2026-11-21T13:01:46-08:00",
-   "last": "2026-11-21T13:05:44-08:00",
-   "tags": [],
-   "cards": [
-    "c-wanch3"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
    "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
    "first": "2026-11-21T12:34:23-08:00",
-   "last": "2026-11-21T13:05:04-08:00",
+   "last": "2026-11-21T13:07:04-08:00",
    "tags": [
     "ch3lessons"
    ],
@@ -29791,7 +29789,29 @@
    "url": "https://claude.ai/code/session_01RXeukF43ZogLhQidrKWaTM",
    "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
    "first": "2026-11-21T13:04:11-08:00",
-   "last": "2026-11-21T13:04:11-08:00",
+   "last": "2026-11-21T13:06:56-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanch3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEVoamc3mY7qoyhDK6",
+   "title": "Tom celebrates after a win even if he was guarding",
+   "first": "2026-11-21T13:06:14-08:00",
+   "last": "2026-11-21T13:06:14-08:00",
+   "tags": [
+    "guardwin1"
+   ],
+   "cards": [
+    "c-guardwin1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
+   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
+   "first": "2026-11-21T13:01:46-08:00",
+   "last": "2026-11-21T13:05:44-08:00",
    "tags": [],
    "cards": [
     "c-wanch3"
@@ -33579,8 +33599,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "889fb3355a1989248715a11a283ccc1756ca6d45",
- "synced_at": "2026-11-21T21:06:05+00:00",
+ "synced": "168c875140cf3e3271f4c281082f33bf425eaf11",
+ "synced_at": "2026-11-21T21:07:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
