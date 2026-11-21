@@ -1,3 +1,12 @@
+## idea-skippingcut (2026-11-20): SKIP now passes close-up pictures that only show something (Grace's list and similar); item finds and party joins and leaves still play in full
+
+Card c-idea-skippingcut (merged with c-idea-skippingscene). Tom (11-20): "When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped", and "any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well".
+- Cause: SKIP already ran a scene to its end, but a close-up picture waits for a tap, so a skip stopped on it (Grace's list in chapter 1 scene 1 is one).
+- New scene step `{interstitial:<step>}` (`SCENE_OPS.interstitial`, engine/story.js, documented at SCENE_OPS). It plays the wrapped step as written; while SKIP is on it finishes at once. No spoken line changed.
+- Marked in data/scenes.js, scenes-ch13.js, scenes-ch19.js (pictures that show something and give nothing): Grace's list (ch1Goal), Boppy's gold teeth (ch1, twice), the phone on the cab seat (ch1), the squirrels' corkboard and the acorn held up by TNB (ch6), the close-up of the dome door lock (ch9), the eleven coins melting the amber (ch13), setting down a keepsake on the pedestal (ch19).
+- Not marked, on purpose (they stay in full under SKIP): every item find (coins, badges, bulbs, hat, binder, coffees, photo for the plane, jar, crock), party join and leave banners and the item banner, close-ups that are puzzles to play, and choices and fights.
+- Test: `python3 -I tools/skip_interstitial_test.py` (wrapped picture skipped; same picture opens with SKIP off; an item reveal still opens under SKIP; a party join banner still shows; Grace's list is wrapped); `tools/closeup_ch13_test.py` now finds the wrapped step; `tools/skip_chain_test.py` still passes.
+
 ## fix-keysecrets2-try-6 (2026-11-21): the answer to GENERATE VIDEO stays on the card after the page is closed
 
 Card c-fix-keysecrets2-try-6. Tom (t-keysecrets2-try): "Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4".

@@ -355,6 +355,10 @@ const SCENE_OPS={
   seq:o=>S.seq(...compileScene(o.seq)),
   if:o=>lazy(()=>{ const ok=typeof o.if==='function'?o.if():!!flag(o.if); return S.seq(...compileScene((ok?o.then:o.else)||[])); })
 };
+// {interstitial:<any step>} (skipint1, Tom 2026-11-20): a picture or beat the story can do without when the player presses SKIP (Grace's list, a close-up that only shows
+// something). Normally it plays the wrapped step exactly as written; while SKIP is on (engine/skip.js `cut.skip`) it finishes at once. NEVER wrap an item find
+// (a coin, a badge, anything the party gains) or a party join or leave: those always play in full. Wrapped steps keep every spoken line unchanged.
+SCENE_OPS.interstitial=o=>lazy(()=>(typeof cut!=='undefined'&&cut.skip)?S.call(()=>{}):S.seq(...compileScene([o.interstitial])));
 // {hopwalk:'Big Mudling',to:[[x,y],..],per:.2,reach:.75,arc:7,sq:.07,snd:'splat',hits:[{who:'rose',r:1.5,run:[steps]}]} (fix-heist1play-5): travels in short hops, one hop
 // per `reach` tiles (`per` seconds per tile in the air), squashing on each landing (a.squash 1 to 0 over `sq` s, drawn by mudlingHeistDraw) and playing `snd` on each landing.
 // The painted frame faces the way it travels (scenePose.dir) unless face:false. hits: when the hopper comes within r tiles of `who` the steps in `run` start (a knock on

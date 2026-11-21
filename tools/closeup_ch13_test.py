@@ -22,7 +22,7 @@ def adv(pg,stop,n=300):
     return False
 def setup(pg):
     pg.evaluate("()=>{ currentMap=worlds.subchamber; player.x=6; player.y=6; player.move=null; player.facing='right'; placeFollowers(); camera.snap=true; storyWorld(); setFlag('ch13-clear',true); delete STORY.flags['ch13-melt']; delete STORY.flags['ch13-melted']; }"); pg.wait_for_timeout(500)
-    pg.evaluate("()=>{ const a=SCENES.ch13After(); const s=a.findIndex(x=>x.spawn&&x.spawn.name==='Nickel'), e=a.findIndex(x=>x.closeupWatch); SCENES.cuTest13=()=>SCENES.ch13After().slice(s,e+3); playScene('cuTest13'); }")
+    pg.evaluate("()=>{ const a=SCENES.ch13After(); const s=a.findIndex(x=>x.spawn&&x.spawn.name==='Nickel'), e=a.findIndex(x=>x.closeupWatch||(x.interstitial&&x.interstitial.closeupWatch)); SCENES.cuTest13=()=>SCENES.ch13After().slice(s,e+3); playScene('cuTest13'); }")
 def shot(pg,n): pg.screenshot(path=os.path.join(SHOTS,f'cu13-{n}.png'))
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}

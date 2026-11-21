@@ -13116,8 +13116,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Story and Dialogue",
-   "title": "Skip interstitials in cut scenes; never skip joins/leaves",
-   "next": "Build: when SKIP passes a cut scene, skip its interstitials too (Grace's list). Party joins and leaves are never skipped. Copy the prompt on this card into a new conversation in the Project on Claude Sonnet 5.5, effort medium.",
+   "title": "SKIP passes pictures that only show something",
+   "next": "Shipped as idea-skippingcut. Waits only on your phone check (card t-skippingcutplay). Nothing else to build unless you want more pictures marked skippable: say which.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13174,6 +13174,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-skippingcut: a new scene step {interstitial:...} finishes at once under SKIP. Marked: Grace's list, Boppy's gold teeth (twice), the phone on the cab seat, the squirrels' corkboard, TNB's acorn, the ch9 lock close-up, the ch13 coins melting the amber, the ch19 pedestal. Item finds, party joins and leaves, item banners and puzzle close-ups are not marked and play in full. No spoken line changed."
     }
    ],
    "prompt": {
@@ -13184,7 +13188,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet, the session must find where the beats are)",
     "effort": "medium (one behaviour in SKIP, built on the finished skipchain1 change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom's words (card history): \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\".\n\nWhat to build: when the player presses SKIP in a cut scene, skip its interstitials (for example Grace's list). Party members joining and leaving always play in full. Start from the done card c-skipchain1 (docs/CHANGES.md, 'skipchain1'), which made SKIP skip all of chapter 1 scene 1; extend that behaviour to the other cut scenes. Find the skip code, mark the interstitial beats in data/scenes.js using the steps documented at SCENE_OPS in engine/story.js, and leave every spoken line text unchanged (CLAUDE.md rule 5).\n\nTests: run python3 tools/smoke.py, look at the screenshots in tools/shots/ in portrait and landscape, and add a docs/CHANGES.md entry. Follow the build tag and tag bump steps in CLAUDE.md. Write the result and the next step onto this card, then push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-skippingcutplay"
   },
   {
    "id": "c-projclean",
@@ -18152,6 +18157,30 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-clipstuck1 in data/board.json. Your first push is the commit board: start c-clipstuck1. Build clipstuck1 as the card's next says, run tools/art-library/clip_lib_test.py and the stub test, look at the clip card at 390 x 844, bump tags, add a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "t-skippingcutplay",
+   "title": "Check SKIP skips Grace's list but not party banners",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "ask": "play",
+   "fyi": true,
+   "next": "START NEW and press SKIP » at the top right in the opening. Grace's list picture should not appear, and you should land on the Square with Grace's and Rose's JOIN banners one after the other, each waiting for your tap. Report with the REPORT tab if the list picture still shows or a banner is missing (idea-skippingcut is the build to name).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by idea-skippingcut: your phone check; blocks nothing."
+    }
+   ],
+   "col": "up",
+   "first": "Wait for the build idea-skippingcut to be published, then RELOAD on the title."
   }
  ],
  "sessions": [

@@ -118,7 +118,7 @@ SCENES.ch1Goal=[
   {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!"]},
   {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
-  {ch1Reveal:'list'},   // Grace holds up the finished list: the close-up (ch1art3), A to continue. Only after her third item (Tom report r-20261120-000755-3h9p)
+  {interstitial:{ch1Reveal:'list'}},   // Grace holds up the finished list: the close-up (ch1art3), A to continue. Only after her third item (Tom report r-20261120-000755-3h9p)
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
   // Tom (with Rose still on his shoulders, cutpolish3) and Grace walk out onto the open plaza path toward the Rivituso Row arch, so control comes back
@@ -403,7 +403,7 @@ SCENES.ch1End=()=>[
   {call:()=>sfx.pickup()},   // Deedee tucks the flashbulb, still in its tissue, into the back of the kitchen drawer
   {talk:'Rose',lines:["Boppy! Your fish is REAL! He's CAR size and he gave me money!"]},
   {talk:'Boppy',lines:["Now that's real gold. Same as these. Look."]},
-  {ch1Reveal:'grin'},   // he grins and taps a back tooth
+  {interstitial:{ch1Reveal:'grin'}},   // he grins and taps a back tooth
   {talk:'Rose',lines:["You've got money in your TEETH!"]},
   {talk:'Boppy',lines:["Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look."]},
   {talk:'Rose',lines:["Under Lamby! Nobody looks under Lamby!"]},
@@ -431,7 +431,7 @@ SCENES.ch1Sunday=[
   {talk:'Sal',lines:["Los Angeles? You got it."]},
   {sfx:'doorOut'}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
-  {call:()=>sfx.ding()}, {ch1Reveal:'phone'},   // cutpolish4b: the phone lights up on the cab seat
+  {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone'}},   // cutpolish4b: the phone lights up on the cab seat
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
   {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
   {save:true},
@@ -1219,7 +1219,7 @@ SCENES.ch3AfterBoss=()=>[
   {talk:'Old Iron-Gill',lines:['And take this. It\'s been itching my mustache all day.']},
   {call:()=>{ const b=findMonster('irongill'); if(b) b.carry=null; sfx.coin&&sfx.coin(); }}, {wait:.5},
   {ch3Reveal:'coin'},
-  {ch1Reveal:'grin'},
+  {interstitial:{ch1Reveal:'grin'}},
   {talk:'Boppy',lines:['Gold like my teeth, with a fish on it! I got one! Cozy Rosie, I got one!']},
   {give:'fishcoin'}, {ch3Reveal:'hat'},
   {talk:'Rose',lines:['Boppy got treasure! Now your mouth matches your hat!']},
@@ -2456,7 +2456,7 @@ SCENES.ch6Kitchen=[
   {call:()=>sfx.pickup()},   // TNB points at the flour: tiny footprints run across it to the windowsill
   {talk:'TNB',lines:[`He had help, babe. Four toes in front and five in back. I looked it up. Those are squirrel feet.`]},
   {talk:'Tom',lines:[`A squirrel took our starter? He's nine years old! He's flown Delta One twice!`]},
-  {ch6Reveal:'acorn'},   // TNB holds up the acorn from the windowsill, a tiny X carved in it
+  {interstitial:{ch6Reveal:'acorn'}},   // TNB holds up the acorn from the windowsill, a tiny X carved in it
   {talk:'TNB',lines:[`And it left this. I've seen every horror movie ever made, babe, and this is how they all start.`]},
   {talk:'Tom',lines:[`That was UNCALLED for!`],voice:[['tom','hurt',1,'That was UNCALLED for!']]},
   {talk:'TNB',lines:[`The window was open, so it isn't breaking and entering. It's baking and entering.`]},
@@ -2695,7 +2695,7 @@ SCENES.ch6Oak=[
 SCENES.ch6Board=[
   {flag:'ch6-board'},
   {talk:'TNB',lines:[`Babe. Babe. They have a corkboard. With RED STRING. I've waited my whole life for this.`]},
-  {ch6Reveal:'board'},
+  {interstitial:{ch6Reveal:'board'}},
   {talk:'Tom',lines:[`There's an X on every porch on 2nd Avenue. And there's a drawing of Nara. It says "THREAT LEVEL: VERY HIGH."`]},
   {hearts:'nara'},   // Nara looks at the drawing of herself. Her tail wags.
   {talk:'TNB',lines:[`She likes it. They got her good side.`]},
@@ -4492,7 +4492,7 @@ SCENES.ch9Dance=[
 // 7. The moonbeam reaches the lock: the Dome doors open.
 SCENES.ch9Door=[
   {flag:'ch9-door'},
-  {closeupWatch:'ch9'},
+  {interstitial:{closeupWatch:'ch9'}},
   {call:()=>{ sfx.levelChime(); }}, {wait:.8},
   {talk:'Dome doors',lines:['The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.']},
   {call:()=>{ ch9OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
