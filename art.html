@@ -143,7 +143,7 @@ header{padding:10px 28px}
 </div>
 <div id="toast"></div>
 <script src="engine/admin-music.js?v=adminvol1"></script>
-<script src="engine/art-clips.js?v=fix-keysecrets2-try-5"></script>
+<script src="engine/art-clips.js?v=fix-keysecrets2-try-6"></script>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
 // GENERATE (keysecrets1) does not call xAI from this device: it commits data/art-requests.json ("art: generate <id>") and the art-gen Action makes the picture
@@ -701,6 +701,7 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   setupOpen(!LS.get('aot-gh-token'));   // fold the setup and spend cards once the GitHub token is saved (pictures and videos are made on GitHub: the token is all this page needs)
   { const P=pendGet(); for(const p of P) if(!MSG[p.id]) MSG[p.id]={text:'Asked earlier. Waiting for GitHub to make it...',err:false}; if(P.length&&!POLL) POLL=setTimeout(pollPending,2000); }
   { for(const p of clipAskedGet()) for(const id of p.ids||[]) if(!MSG[id]) MSG[id]={text:'Asked earlier. Waiting for GitHub to make the video...',err:false}; if(clipAskedGet().length&&!CLIP_POLL) CLIP_POLL=setTimeout(clipPoll,2000); }
+  clipLastRestore();
   paintList(); scrollTo(0,UI.sy[UI.tab]||0);
   { const rv=(Q.get('review')||'').split(',').map(x=>x.trim()).filter(Boolean); if(rv.length) reviewIds(rv); const op=(Q.get('open')||'').split(',').map(x=>x.trim()).filter(Boolean); if(op.length) openIds(op); }
 })();

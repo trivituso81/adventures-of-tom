@@ -85,6 +85,7 @@ try:
         pg.wait_for_function("id=>/approved/.test((MSG[id]||{}).text||'')", arg=ID, timeout=20000)
         ok(pg.evaluate("id=>ENTRY[id].status", ID) == 'approved' and not pg.evaluate("id=>MSG[id].err", ID), 'approved: the card says made and approved, the game is cutting it')
         ok(pg.evaluate("id=>document.querySelector('.card[data-id=\"'+id+'\"] [data-gen]').textContent", ID) != 'ASKED, WAITING', 'once approved the button is not stuck on ASKED, WAITING')
+        ok('approved' in pg.evaluate("id=>(JSON.parse(localStorage.getItem('aot-clip-last')||'{}')[id]||{}).text||''", ID), 'the answer is kept on the device for the next time the page opens')
         pg.wait_for_function("id=>/gate held/.test((MSG[id]||{}).text||'')", arg=OTHER, timeout=20000)
         ok('never comes back' in pg.evaluate("id=>MSG[id].text", OTHER) and pg.evaluate("id=>MSG[id].err", OTHER), 'held: the gate\'s reason is on the card')
         ok(pg.evaluate("()=>JSON.parse(localStorage.getItem('aot-clip-asked')||'[]').length") == 0, 'nothing is pending any more')

@@ -1,3 +1,10 @@
+## fix-keysecrets2-try-6 (2026-11-21): the answer to GENERATE VIDEO stays on the card after the page is closed
+
+Card c-fix-keysecrets2-try-6. Tom (t-keysecrets2-try): "Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4".
+- Fact: the job worked every time (runs of 23:38, 00:09 and 00:25 UTC each approved `clip-toad-idle`; v6 was made at 00:28). The line Tom saw is the permanent list of approved files, not the answer to his press. The answer ("Made and approved") lived only in the open page, so reopening it showed only the list.
+- Fix (a recommendation, not proven on a phone): `clipPoll` now saves each answer on the device (`aot-clip-last`) and the page shows it on reopening as "Last press, <time>: Made and approved...". Tag `art-clips.js?v=fix-keysecrets2-try-6`. `keysecrets2_test.py` has a new check.
+- Not done: nothing else changed. Each press makes another version (about $0.26); five or six versions of the Toad idle now exist.
+
 ## fix-keysecrets2-try-5 (2026-11-21): the button no longer stays on ASKED, WAITING after the video is made and approved
 
 Card c-fix-keysecrets2-try-5. Tom (t-keysecrets2-try): "STILL NOT WORKING!" with the page text "ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now".

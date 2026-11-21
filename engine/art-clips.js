@@ -57,6 +57,11 @@ const clipAskedSet=a=>LS.set(CLIP_ASKED,JSON.stringify(a));
 // A report time such as 2026-11-20T21:55:07.098388+00:00 (six fraction digits) is cut to milliseconds so every browser reads it; NaN when it cannot be read.
 const clipTs=t=>t?Date.parse(String(t).replace(/(\.\d{3})\d+/,'$1')):NaN;
 let CLIP_POLL=0;
+// The last answer to a press is kept on this device (fix-keysecrets2-try-6), so closing and reopening the page still shows 'Made and approved' (or why not) instead of only the list of approved files.
+const CLIP_LAST='aot-clip-last';
+const clipLastGet=()=>{ try{ return JSON.parse(LS.get(CLIP_LAST)||'{}')||{}; }catch(x){ return {}; } };
+function clipLastSave(id,m){ const a=clipLastGet(); a[id]={text:m.text,err:!!m.err,at:Date.now()}; LS.set(CLIP_LAST,JSON.stringify(a)); }
+function clipLastRestore(){ const a=clipLastGet(); for(const id in a) if(!MSG[id]&&a[id]&&a[id].text) MSG[id]={text:'Last press, '+new Date(a[id].at).toLocaleString()+': '+a[id].text,err:a[id].err}; }
 const clipAsked=id=>clipAskedGet().some(p=>(p.ids||[]).includes(id));
 const clipCap=n=>Math.min(CLIP_HARD_CAP,Math.max(1,Math.ceil(n*1.2)));
 async function clipReqSend(req){
@@ -102,7 +107,7 @@ async function clipPoll(){
       else if(s) m={text:'Skipped: '+s.why,err:true};
       else if((rep.queued||[]).includes(id)) m={text:'The job ended before this one was done. Press GENERATE VIDEO again; a video already paid for is not charged twice.',err:true};
       else continue;
-      MSG[id]=m; if(ENTRY[id]) refreshItem(id);
+      MSG[id]=m; clipLastSave(id,m); if(ENTRY[id]) refreshItem(id);
     }
     if(p.group){ const n=(p.ids||[]).filter(i=>(rep.approved||[]).includes(i)).length; clipBatchSay(p.group,'Finished: '+n+' of '+(p.ids||[]).length+' clip(s) approved by the job'+((rep.failed||[]).length?'; '+rep.failed.length+' failed':'')+((rep.held||[]).length?'; '+rep.held.length+' held by the gate':'')+((rep.still||[]).length?'; '+rep.still.length+' hardly move':'')+'. Spent about $'+(+rep.spent||0).toFixed(2)+'. The game is cutting the approved ones now (about 3 minutes, then a RELOAD on the title screen; they show in Battle Lab > '+p.group.toUpperCase()+' REVIEW).',(rep.failed||[]).length>0||(rep.held||[]).length>0||(rep.still||[]).length>0); }
   }

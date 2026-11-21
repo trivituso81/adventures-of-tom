@@ -16927,7 +16927,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-5). Tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 and press GENERATE VIDEO (about $0.25). Within 3 to 6 minutes the line under the button should read 'Made and approved' AND the button should go back to saying GENERATE VIDEO (before, it stayed on ASKED, WAITING). All good if both happen. Something is wrong if either does not after 10 minutes: write in the report what the button and the line say.",
+   "next": "ADMIN > ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-6). Tap Open in the Art Library, find clip-toad-idle under Clips > Chapter 1. Under the button you should now see a line starting 'Last press, <time>: Made and approved' (your last press at 00:25 UTC did make and approve v6). No new press is needed; each press costs about $0.26. All good if you see that line. Something is wrong if you do not: write what the button and the lines under it say.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17015,6 +17015,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4 Sent to Claude as card c-fix-keysecrets2-try-6; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T00:26:33.652Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix c-fix-keysecrets2-try-6: the job approved every press; the page now keeps the last answer on the device so reopening shows it."
     }
    ],
    "after": null,
@@ -17895,6 +17899,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped fix-keysecrets2-try-6: last answer to a press is kept on the device."
     }
    ],
    "prompt": {
