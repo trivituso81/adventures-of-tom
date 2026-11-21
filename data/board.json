@@ -22705,6 +22705,10 @@
     {
      "d": "2026-11-21",
      "t": "anim-deedee-ko-yes1: Deedee's knock-out is a video now (her wanch1 rev 2 video measured level with Rose's approved one), so it leaves this list. Deedee's dodge has its own card c-anim-deedee-dodge-y4m3: on Wan her feet stayed down (Grace's fault did not happen); the repeated miss is her arms leaving the frame, next try with pad 0.8."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
     }
    ],
    "prompt": {
@@ -24211,6 +24215,10 @@
     {
      "d": "2026-11-21",
      "t": "Stopped at the stop-loss, nothing shipped from this card in anim-tom-loungepass-lf2z's session. Checked grace-dodge r1 and r2 on branch wangen: both turn toward the viewer and hop sideways with the feet off the ground, after r2 added \"both feet stay flat on the ground and never lift\". Tom's job tom-dodge uses the same prompt, so no Wan video was made and nothing was spent. Waits on c-wanch2 (Kling 4 for every family dodge). Tom's note \"Needs to be generated\" is copied there."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
     }
    ],
    "prompt": {
@@ -24948,6 +24956,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
     }
    ],
    "prompt": {
