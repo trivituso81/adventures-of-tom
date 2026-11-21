@@ -22568,6 +22568,33 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-b3s15",
+   "title": "Battle system stage 15: chapter 1 story switch",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds the chapter 1 switch; Milestone B (your play test) follows.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "tag": "b3s15",
+   "prompt": {
+    "what": "Builds stage 15 of the new battle system: chapter 1's story fights run on Battle 3 behind a switch in ADMIN (OLD still works), with save migration, Vibe Points on a victory card and no Warmth bar in chapter 1.",
+    "before": [
+     "Nothing to do first. Milestone B (your play test of chapter 1) comes after this stage."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build across several engine files with the steps not yet written; not Fable, since none of the three conditions in the logic's step 2 holds)",
+    "effort": "high (large, with the scene reference list and save migration to work out; nothing written to follow)",
+    "text": "Read claude/battle-build.md, claude/next-addendum-b3s13.md and claude/next-addendum-b3s14.md, then build stage 15 of the new battle system: the story switch for chapter 1. First list every battle 2 reference in chapter 1's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md, and replace only chapter 1's share. Then build: a switch in ADMIN (NEW or OLD battle for story fights, OLD must still play chapter 1 on the same save), chapter 1's story fights on Battle 3, level and Vibe Point migration for existing saves, the Ruckus gauge as a save field, story fights paying Vibe Points with a victory card, a late joiner's loadout created when the story recruits them, rewritten battle tips, and no Warmth bar or WARMTH command in any chapter 1 fight. Push in parts if needed (b3s15a, b3s15b, then b3s15). Run node tools/b3-sim.js check, python3 tools/b3_test.py for what you touched, python3 tools/smoke.py and a chapter 1 start to finish test from Chapter Select in portrait and landscape (look at the frames) before each push. Never ask me to review an animation. Board card c-b3s15. Your first push is the commit board: start c-b3s15. When it ships, create the Milestone B card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added after c-b3s14 and c-b3s14b shipped: stage 15 follows stage 14. Tom asked for the stage 15 prompt and its card. Build board-b3s15 adds this card and claude/next-addendum-b3s14.md."
+    }
+   ]
   }
  ],
  "sessions": [

@@ -1,3 +1,7 @@
+## board-b3s15 (2026-11-20): board only: stage 15 card and handoff notes added
+
+- Tom's request: the stage 15 prompt and its board card. Added card c-b3s15 (Claude Sonnet 5.5, effort high, tag b3s15) in Up next and `claude/next-addendum-b3s14.md` (stage 14 results, what stage 15 must do, tests, git warning). No game file changed.
+
 ## projclean1d (2026-11-21): Project docs moved into the repo: 61 more docs copied into claude/ (fourth part of the second run)
 
 - Card c-projclean: copied 61 more Project docs word for word to the same path in claude/ (area, tombo, ability, status and plan notes, the 46_tomhouse set, baker status notes). No game file changed.
