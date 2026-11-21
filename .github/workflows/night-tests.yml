@@ -1,0 +1,82 @@
+name: night-tests
+
+# nighttests (Tom 2026-11-21, claude/night-plan.md section 6). Every test of the game, every night at about 3:20 am Los Angeles time
+# (11:23 UTC is 3:23 in winter; GitHub's clock ignores daylight saving). tools/night/tests.json lists the rows in 6 groups; one machine per group runs
+# its rows one after another (tools/night/run_tests.py). The last job (tools/night/report.py) writes the night's result to the orphan branch `night`
+# (never merge it) and adds one Claude fix card per test that newly fails. No paid secret is given to this job: no XAI_API_KEY, ELEVENLABS_API_KEY, FAL_KEY.
+# By hand: gh api repos/trivituso81/adventures-of-tom/actions/workflows/night-tests.yml/dispatches -f ref=main  (inputs `group` to run one group, `only` for comma separated row ids)
+# Tests: python3 tools/night/night_test.py
+
+on:
+  schedule:
+    - cron: '23 11 * * *'
+  workflow_dispatch:
+    inputs:
+      group:
+        description: 'One group (g1 to g6); empty runs all six'
+        required: false
+        default: ''
+      only:
+        description: 'Comma separated row ids to run (empty runs the whole group)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: night-tests
+  cancel-in-progress: false
+
+jobs:
+  group:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [g1, g2, g3, g4, g5, g6]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 100
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install the browser, ffmpeg and the Python packages the tests use
+        run: |
+          pip install -q playwright pillow numpy scipy
+          python -m playwright install --with-deps chromium
+          sudo apt-get install -y -q ffmpeg
+      - name: Run the group
+        if: ${{ github.event.inputs.group == '' || github.event.inputs.group == matrix.group }}
+        run: python3 tools/night/run_tests.py ${{ matrix.group }} --out "$RUNNER_TEMP/out" ${{ github.event.inputs.only != '' && format('--only {0}', github.event.inputs.only) || '' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: night-${{ matrix.group }}
+          path: ${{ runner.temp }}/out
+          if-no-files-found: ignore
+
+  report:
+    needs: group
+    if: ${{ always() && github.event.inputs.only == '' && github.event.inputs.group == '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 100
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/results
+      - name: Write the night's result and the fix cards
+        run: python3 -I tools/night/report.py --results "$RUNNER_TEMP/results" --out "$RUNNER_TEMP/night-branch"

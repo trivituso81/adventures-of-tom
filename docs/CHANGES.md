@@ -1,3 +1,13 @@
+## nighttests (2026-11-21): every test of the game runs each night on GitHub, and a test that newly fails becomes a fix card
+
+Card c-nighttests, plan `claude/night-plan.md` section 6. Tom (11-21): "tasks ... that execute, test, file cleanup, code cleanup and refactoring" while he sleeps.
+- `tools/night/tests.json`: one row per test (210 rows: every `*_test.py` and `test.py` under tools/, `smoke.py`, `b3-sim.js check`, `validate.js`), six groups balanced by estimated minutes, 11 rows `known_fail` from the failing list in `claude/next.md`, 4 scripts in `skip` with a reason. `tools/night/seed.py` made it (`--rebalance` redoes the groups).
+- `tools/night/manifest_check.py` (called from `tools/smoke.py`): fails when a test script is in neither the rows nor `skip`.
+- `tools/night/run_tests.py <group>`: one row after another, time limit twice its minutes, a failing row is run again once (passes the second time = flaky, never a card), `FAILS: [..]` counts as a failure even with exit 0, paid keys removed from the environment.
+- `.github/workflows/night-tests.yml`: cron `23 11 * * *` (3:23 am in winter), `workflow_dispatch` (inputs `group`, `only`), 6 machines at once (`fail-fast: false`, 4 hours each), no paid secret, then the `report` job.
+- `tools/night/report.py`: writes `tests/<date>.json` and `tests/latest.json` on the orphan branch `night` (never merge it), compares with the night before and adds one Sonnet 5.5 medium fix card `c-nt-<test id>` (`fix_of: night:<id>`) per test that newly fails with no open card; the first night is a baseline and adds no cards.
+- Test: `python3 tools/night/night_test.py` (made-up manifest with a passing, a failing, a flaky and a known-failing row; the diff; the card passes `board_check.py`; a full report against a local remote).
+
 ## fix-qa-bug03-look (2026-11-21): Townsfolk in the Square and the Row stay off every roof, sign, weathervane and house edge, checked by a 5 minute watch
 
 - Gemini's chapter 1 run (build voicepurge221, C12 FAIL): "two townspeople (the brown-haired boy and straw-hat boy) stood directly on top of the SNAIL MAIL sign" at 0 s, "the brown-haired NPC walked directly onto the right wall/edge of Aunt Ellie's House", plus X-01 (snail weathervane) and X-02 (SCHOOL sign plaque).

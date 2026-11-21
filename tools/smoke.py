@@ -85,5 +85,8 @@ if bc.returncode: fails.append(bc.stdout.strip()[:400])
 # Board (board2): the sync job's rules replayed on the real commits of 2026-11-19 (claude/board2-plan.md section 4).
 bt=subprocess.run([sys.executable,os.path.join(HERE,'board_sync_test.py')],capture_output=True,text=True); print(bt.stdout.strip().splitlines()[-1] if bt.stdout.strip() else bt.stderr.strip()[:300])
 if bt.returncode: fails.append('board_sync_test: '+bt.stdout.strip()[-400:])
+# nighttests: a test script that is not in tools/night/tests.json (or its skip list) fails here, so a new test cannot be forgotten.
+nm=subprocess.run([sys.executable,os.path.join(HERE,'night','manifest_check.py')],capture_output=True,text=True); print(nm.stdout.strip())
+if nm.returncode: fails.append(nm.stdout.strip()[:400])
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)
