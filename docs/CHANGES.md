@@ -1,3 +1,12 @@
+## costsduoplan (2026-11-21): AI Costs on the iPhone Duo: assessment, design and a drawing to open on the phone
+
+Card c-costsduoplan. Tom: "Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views ... create the necessary Kanban cards to kick off this process via the board".
+
+- Assessment (measured on the live page): the desktop layout is fixed at 1,280 wide, so the folded Duo shows it at 30% (table text 4.2 px, filter buttons 9 px tall), open upright at 52%, open sideways at 74%. The split of a month and the reason behind "Confirm amount" only show on hover.
+- Design, in `claude/costs-duo-plan.md`: one page, three layouts by width. Pocket (under 900 px): one column, the total, four tiles and the next renewals on the first screen, four tabs at the bottom, two-line charges, details in a sheet. Open book (900 to 1,099 px, the Duo open sideways): two panes that meet at the fold, the list on the left and what was tapped on the right; on Ledger the charges sit beside their subtotals. Desktop unchanged.
+- Drawing: `docs/costs-duo-mock.html`, four frames at the real sizes with typed numbers. On the Duo it fills the screen and follows fold and unfold; Overview and Ledger switch. It is deleted when the real page matches it.
+- Nothing in costs.html changed. Cards: Tom's decide card t-costsduo-go starts the build card c-costsduo1 (Sonnet 5.5, medium) by itself.
+
 ## b3s17a (2026-11-21): chapter 2's story fights now run on the new battle (BY CHAPTER), with Vibe Points and new tips
 
 Card c-b3s17, part a. Chapter 2 joins chapter 1 in `B3_STORY.chapters`: the two Smoglets (new row `smoglet2`, 10 VP), the Ticket Flurry, the Coyote and The Big Shake play on Battle 3 with the bestiary's Vibe Points (10 each, 30 for the boss) and tips written for Battle 3 (`ch2lawn`, `ch2flurry`, `ch2coyote`, `bigshake`; no Warmth, no HEART, no Tombo). OLD still plays chapter 2 on battle 2 on the same save.

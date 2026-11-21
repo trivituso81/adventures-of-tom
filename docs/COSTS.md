@@ -48,3 +48,7 @@ The Dates and Show controls at the top apply to every screen. "Game tools only" 
 | 2 | Every Action that spends (art-gen, clip-gen, clip-gate, voice-gen, wan-gen) appends what the run cost to `usage`, so the estimate of a prepaid balance becomes paid less logged use for all of them |
 | 3 | Tom's notes from card t-costs1look |
 | 4 | Test with stand-in servers. Never run a paid call from a session |
+
+## iPhone Duo layouts (planned, card c-costsduo1)
+
+The folded and unfolded layouts are designed, not built: `claude/costs-duo-plan.md` (assessment, design, build order, tests) and the drawing `docs/costs-duo-mock.html`.

@@ -179,7 +179,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | ch02-teardown.md | Chapter 2 teardown list (2026-11-20). Nothing in the game has been changed yet. | 2026-11-20 |
 | ch08-build.md | Chapter 8 build tracker (Forty Loaves by Six) | 2026-11-21 |
 | ch1-gemini-tracker.md | 1. Master Issue, Bug & Improvement Tracker | 2026-11-21 |
-| ch1-gemini-verify.md | Chapter 1 verification run: task brief for an AI tester |  |
+| ch1-gemini-verify.md | Chapter 1 verification run: task brief for an AI tester | 2026-11-21 |
 | ch1-qa-keysecrets2.md | Chapter 1 QA report (build keysecrets2): check against main | 2026-11-21 |
 | ch11-proposal.md | C11 proposal: Chapter 11, The Layover Between Worlds (start of PART 2) | 2026-11-21 |
 
@@ -590,6 +590,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | closeup-plan.md | Close-up screens: master build plan (2026-11-12 15:35, updated 22:40 PT 11-12) | 2026-11-12 |
 | coin-closeup-spec.md | Coin close-up screen: assessment and build spec (2026-11-12, Tom approved the direction 12:54) | 2026-11-12 |
 | comedy-audition-scene5.md | Scene 5 comedy audition: three takes (2026-11-13) | 2026-11-13 |
+| costs-duo-plan.md | AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21, PLAN, not built) | 2026-11-21 |
 | cutscene-polish-plan.md | Cutscene polish: repo diagnostic and phased patch spec (cutpolish0, 2026-11-19) | 2026-11-19 |
 | damage-balance.md | Damage balance review (25 Oct 2026, artifact v255) | 2026-11-21 |
 | dc-objects-spec.md | Director's Cut object sheets: spec (item 4, 2026-11-09) | 2026-11-09 |

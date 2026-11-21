@@ -23749,7 +23749,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Plan the AI Costs layout for the iPhone Duo",
-   "next": "In this session: look at the AI Costs page at the Duo's folded and unfolded sizes, design a layout for each, and make the cards that start the build.",
+   "next": "The plan is claude/costs-duo-plan.md and the drawing is docs/costs-duo-mock.html (build costsduoplan). Tom answers card t-costsduo-go, and his answer starts the build card c-costsduo1.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -23770,6 +23770,72 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"Assess the user experience and come up with an idea for supplemental design that supports layout for iPhone duo folded and unfolded views, optimizing for the screen area for each of these cases to ensure that most information, the most important information, is surfaced and that findability and navigation is simple and easy once you've done this, create the necessary Kanban cards to kick off this process via the board\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Measured the live page at the Duo's sizes (folded: shrunk to 30%, table text 4.2 px), wrote the assessment and the design (pocket layout under 900 px, two panes at the fold for 900 to 1,099 px, desktop unchanged), drew four frames at the real sizes in a page that fills the Duo's screen. Hands to Tom: t-costsduo-go, which starts c-costsduo1."
+    }
+   ],
+   "after": "t-costsduo-go"
+  },
+  {
+   "id": "t-costsduo-go",
+   "title": "Approve the AI Costs layout for the Duo",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "On your Duo open https://trivituso81.github.io/adventures-of-tom/docs/costs-duo-mock.html . It is a drawing with typed numbers, and only Overview and Ledger are drawn. Folded: you see the pocket layout, and the Overview and Ledger tabs at the bottom switch. Unfold it and turn it sideways: it changes to two panes that meet at the fold, the list on the left and what you tapped on the right. Held upright while open, it shows the folded drawing with spare room below; the build fills that room (tiles four across, more on each row). Then tap one answer. Your answer starts the card \"AI Costs on the Duo: folded and unfolded layouts\" by itself.",
+   "choices": [
+    "Build it as drawn (Recommended)",
+    "Build it with the changes in my note"
+   ],
+   "leads": [
+    "Card c-costsduo1 builds both layouts into the real AI Costs page as the drawing and claude/costs-duo-plan.md show, folded first, and then gives you a card to try it on the Duo. The desktop layout does not change.",
+    "Card c-costsduo1 builds both layouts with the changes you type in the note on this card. Your note wins over the plan where they differ."
+   ],
+   "blocks": [
+    "c-costsduo1"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-costsduoplan (build costsduoplan) with the drawing and the plan."
+    }
+   ]
+  },
+  {
+   "id": "c-costsduo1",
+   "tag": "costsduo1",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "auto": true,
+   "theme": "Tools",
+   "title": "AI Costs on the Duo: folded and unfolded layouts",
+   "next": "Waits on card t-costsduo-go (Approve the AI Costs layout for the Duo). Then build the pocket layout (folded) and the open book layout (unfolded sideways) into costs.html as claude/costs-duo-plan.md describes, folded first.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "prompt": {
+    "what": "Builds the folded and unfolded iPhone Duo layouts into the AI Costs page, from the approved drawing and plan.",
+    "before": [
+     "Answer card t-costsduo-go (Approve the AI Costs layout for the Duo)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design, the build order and the tests are written in the plan)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, docs/COSTS.md, claude/costs-duo-plan.md and the cards c-costsduo1 and t-costsduo-go in data/board.json (Tom's answer and note are in the history). Build the iPhone Duo layouts of costs.html as the plan describes and as docs/costs-duo-mock.html draws them: the pocket layout first (push as costsduo1a), then the open book layout (push as costsduo1). The desktop layout must not change, so tools/costs_test.py must still pass. Add tools/costs_duo_test.py as the plan lists and look at every picture at 382 x 580, 466 x 657, 669 x 869 and 951 x 648. When the real page matches the drawing, delete docs/costs-duo-mock.html. Finish with a Tom card (ask play) to try it on the Duo folded and unfolded. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-costsduoplan. No chat yet."
     }
    ]
   }

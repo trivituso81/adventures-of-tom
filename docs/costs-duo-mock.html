@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><meta name="theme-color" content="#14122b"><title>AI Costs on the iPhone Duo: design mock (costsduo plan)</title>
+<style>
+/* Design mock for claude/costs-duo-plan.md (costsduoplan). Not the real page: the numbers are typed in. A desktop window shows all four frames. On the Duo one frame fills the screen: folded shows the pocket frames, unfolded sideways the two-pane frames, and tapping Overview or Ledger switches between them. Four frames at the Duo's real sizes: folded 382 x 580, open sideways 951 x 648. */
+:root{--bg:#14122b;--rail:#100e24;--surface:#1b1839;--raised:#231f4a;--line:#2e2a58;--soft:#252149;--text:#f4f1ff;--muted:#aaa4d8;--faint:#8079b3;--accent:#ffd34d;--warn:#fab219;
+--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--num:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--ui:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#77759a;font:15px/1.35 var(--ui);color:var(--text);padding:20px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.dev{background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.fold{width:382px;height:580px}.open{width:951px;height:648px;flex-direction:row}
+.num{font-variant-numeric:tabular-nums lining-nums}.m{color:var(--muted)}.f{color:var(--faint)}.s{font-size:13px}
+.dot{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.hd{display:flex;align-items:center;gap:8px;padding:10px 14px 8px;flex:none}
+.hd h1{font:600 20px/1.1 var(--ui);margin:0;margin-right:auto}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border:1px solid var(--line);border-radius:18px;background:var(--surface);font-size:13px;white-space:nowrap}
+.pill b{font-weight:500}.pill i{font-style:normal;color:var(--faint)}
+.ic{width:36px;height:36px;border:1px solid var(--line);border-radius:18px;background:var(--surface);display:grid;place-items:center;flex:none}
+.body{flex:1;overflow:hidden;padding:0 14px}
+.card{background:var(--surface);border:1px solid var(--soft);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.big{font:500 44px/1 var(--num);margin:4px 0 2px}.big small{font-size:.5em;color:var(--muted)}
+.tape{display:flex;gap:2px;height:10px;border-radius:3px;overflow:hidden;margin:10px 0 2px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.tile{background:var(--surface);border:1px solid var(--soft);border-radius:12px;padding:9px 12px}
+.tile .v{font:500 22px/1.15 var(--num)}
+.row{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 0;border-bottom:1px solid var(--soft)}
+.row:last-child{border:0}.row .a{margin-left:auto;font-weight:500;white-space:nowrap}
+.row .t{min-width:0}.row .t div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h2{font:600 15px/1.2 var(--ui);margin:0 0 4px;display:flex;justify-content:space-between;align-items:baseline}
+.h2 a{color:var(--accent);font-weight:500;font-size:13px}
+.tabs{flex:none;display:grid;grid-template-columns:repeat(4,1fr);background:var(--rail);border-top:1px solid var(--soft);height:58px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;color:var(--faint)}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab.on{color:var(--accent)}
+.grp{display:flex;justify-content:space-between;align-items:center;background:#1f1b42;margin:0 -14px;padding:8px 14px;font-weight:600;border-bottom:1px solid var(--line)}
+.grp div span{font-weight:400;color:var(--faint);margin-left:6px;font-size:13px}
+.sum{flex:none;display:flex;align-items:center;justify-content:space-between;background:var(--raised);border-top:1px solid var(--line);padding:9px 14px}
+.sum b{font:500 20px/1 var(--num)}
+.tag{font-size:12px;border:1px solid #6b5a1e;color:var(--warn);border-radius:9px;padding:0 6px;margin-left:6px}
+.chk{width:20px;height:20px;border:1.5px solid var(--faint);border-radius:5px;flex:none}.chk.on{background:var(--accent);border-color:var(--accent)}
+/* open */
+.rail{width:64px;background:var(--rail);border-right:1px solid var(--soft);display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:4px;flex:none}
+.rail .tab{width:56px;height:56px;border-radius:10px}.rail .tab.on{background:var(--raised)}
+.pane{display:flex;flex-direction:column;min-width:0}.pl{width:calc(50% - 64px);flex:none}.pr{flex:1;border-left:1px solid var(--soft);background:#17142f}
+.hinge{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed rgba(255,211,77,.45);pointer-events:none}
+.hinge::after{content:"fold";position:absolute;top:4px;left:5px;font-size:10px;color:rgba(255,211,77,.7)}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px;font-size:13px}
+.seg span{flex:1;text-align:center;padding:7px 4px;border-radius:8px;color:var(--muted);white-space:nowrap}.seg span.on{background:var(--raised);color:var(--text)}
+.hb{display:grid;grid-template-columns:118px 1fr 78px;gap:8px;align-items:center;min-height:36px}
+.hb i{display:block;height:12px;border-radius:0 4px 4px 0}
+.kv{display:grid;grid-template-columns:104px 1fr;gap:5px 10px;font-size:13.5px;margin:0}.kv dt{color:var(--muted)}.kv dd{margin:0}
+.cap{position:absolute;right:8px;bottom:66px;font-size:10px;color:var(--faint)}
+@media (max-width:1099px){body{padding:0;gap:0;background:var(--bg)}.dev{width:100vw;height:100dvh}.dev:not(.show){display:none}}
+</style></head><body>
+
+<!-- 1. folded, Overview -->
+<div class="dev fold" id="f1">
+ <div class="hd"><h1>AI Costs</h1><span class="pill"><b>All time</b><i>Everything</i></span><span class="ic">+</span></div>
+ <div class="body">
+  <div class="card"><div class="m s">Paid for AI since Jul 30, 2026</div><div class="big num">$975<small>.44</small></div>
+   <div class="tape"><span style="flex:470;background:var(--s1)"></span><span style="flex:149;background:var(--s2)"></span><span style="flex:140;background:var(--s3)"></span><span style="flex:15;background:var(--s4)"></span><span style="flex:191;background:var(--s5)"></span><span style="flex:10;background:var(--s6)"></span></div>
+   <div class="m s">29 charges. Claude is 48% of it. Tap the bar for the split.</div></div>
+  <div class="tiles">
+   <div class="tile"><div class="m s">November so far</div><div class="v num">$583.98</div></div>
+   <div class="tile"><div class="m s">Next charge, Nov 26</div><div class="v num">$249.99</div></div>
+   <div class="tile"><div class="m s">Plans each month</div><div class="v num">$478.98</div></div>
+   <div class="tile"><div class="m s">Needs a look</div><div class="v num" style="color:var(--warn)">11</div></div>
+  </div>
+  <div class="card" style="padding-bottom:4px"><div class="h2">Coming up <a>All 4</a></div>
+   <div class="row"><span class="dot" style="background:var(--s1)"></span><div class="t"><div>Claude</div><div class="m s">Nov 26, Ultra</div></div><span class="a num">$249.99</span></div>
+   <div class="row"><span class="dot" style="background:var(--s4)"></span><div class="t"><div>X Premium</div><div class="m s">Dec 4</div></div><span class="a num">$30.00</span></div>
+  </div>
+ </div>
+ <div class="tabs"><div class="tab on"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="9" rx="1.5"/><rect x="13" y="4" width="7" height="5" rx="1.5"/><rect x="13" y="11" width="7" height="9" rx="1.5"/><rect x="4" y="15" width="7" height="5" rx="1.5"/></svg>Overview</div><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="6" rx="2"/><rect x="4" y="13" width="16" height="6" rx="2"/></svg>Services</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>Ledger</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg>Totals</div></div>
+</div>
+
+<!-- 2. folded, Ledger, subtotal by month -->
+<div class="dev fold" id="f2">
+ <div class="hd"><h1>Ledger</h1><span class="pill"><b>By month</b><i>All time</i></span><span class="ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f4f1ff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></span></div>
+ <div class="body">
+  <div class="grp"><div>November 2026<span>15 charges</span></div><span class="num">$583.98</span></div>
+  <div class="row"><span class="dot" style="background:var(--s6)"></span><div class="t"><div>fal.ai</div><div class="m s">Nov 20, Credit top-up</div></div><span class="a num">$10.00</span></div>
+  <div class="row"><span class="dot" style="background:var(--s2)"></span><div class="t"><div>Google AI (Gemini)</div><div class="m s">Nov 14, Ultra (20 TB), first month</div></div><span class="a num">$99.99</span></div>
+  <div class="row"><span class="dot" style="background:var(--s3)"></span><div class="t"><div>xAI API</div><div class="m s">Nov 14, API credit top-up</div></div><span class="a num">$20.00</span></div>
+  <div class="row"><span class="dot" style="background:var(--s2)"></span><div class="t"><div>Google AI (Gemini)</div><div class="m s">Nov 13, Pro (5 TB), monthly</div></div><span class="a num">$19.99</span></div>
+  <div class="row"><span class="dot" style="background:var(--s5)"></span><div class="t"><div>ElevenLabs</div><div class="m s">Nov 12, Pro plan, monthly</div></div><span class="a num">$99.00</span></div>
+  <div class="row"><span class="dot" style="background:var(--s1)"></span><div class="t"><div>Claude<span class="tag">Confirm</span></div><div class="m s">Nov 4, Usage credits (100)</div></div><span class="a num">$90.00</span></div>
+  <div class="row"><span class="dot" style="background:var(--s3)"></span><div class="t"><div>xAI API</div><div class="m s">Nov 9, API credit top-up</div></div><span class="a num">$20.00</span></div>
+ </div>
+ <div class="sum"><span class="m s">29 charges shown</span><b class="num">$975.44</b></div>
+ <div class="tabs"><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="9" rx="1.5"/><rect x="13" y="4" width="7" height="5" rx="1.5"/><rect x="13" y="11" width="7" height="9" rx="1.5"/><rect x="4" y="15" width="7" height="5" rx="1.5"/></svg>Overview</div><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="6" rx="2"/><rect x="4" y="13" width="16" height="6" rx="2"/></svg>Services</div><div class="tab on"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>Ledger</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg>Totals</div></div>
+</div>
+
+<!-- 3. open sideways, Overview: glance on the left half, the tapped service on the right half -->
+<div class="dev open" id="f3">
+ <div class="rail"><div class="tab on"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="9" rx="1.5"/><rect x="13" y="4" width="7" height="5" rx="1.5"/><rect x="13" y="11" width="7" height="9" rx="1.5"/><rect x="4" y="15" width="7" height="5" rx="1.5"/></svg>Overview</div><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="6" rx="2"/><rect x="4" y="13" width="16" height="6" rx="2"/></svg>Services</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>Ledger</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg>Totals</div></div>
+ <div class="pane pl">
+  <div class="hd"><h1>AI Costs</h1><span class="pill"><b>All time</b><i>Everything</i></span><span class="ic">+</span></div>
+  <div class="body">
+   <div class="card"><div class="m s">Paid for AI since Jul 30, 2026</div><div class="big num">$975<small>.44</small></div>
+    <div class="tape"><span style="flex:470;background:var(--s1)"></span><span style="flex:149;background:var(--s2)"></span><span style="flex:140;background:var(--s3)"></span><span style="flex:15;background:var(--s4)"></span><span style="flex:191;background:var(--s5)"></span><span style="flex:10;background:var(--s6)"></span></div></div>
+   <div class="tiles">
+    <div class="tile"><div class="m s">November so far</div><div class="v num">$583.98</div></div>
+    <div class="tile"><div class="m s">Next charge, Nov 26</div><div class="v num">$249.99</div></div>
+    <div class="tile"><div class="m s">Plans each month</div><div class="v num">$478.98</div></div>
+    <div class="tile"><div class="m s">Needs a look</div><div class="v num" style="color:var(--warn)">11</div></div>
+   </div>
+   <div class="card" style="padding-bottom:4px"><div class="h2">Every service <span class="f s" style="font-weight:400">tap one, it opens on the right</span></div>
+    <div class="row" style="background:var(--raised);margin:0 -8px;padding:6px 8px;border-radius:8px;border:0"><span class="dot" style="background:var(--s1)"></span><div class="t"><div>Claude</div><div class="m s">Ultra, $249.99 a month</div></div><span class="a num">$469.99</span></div>
+    <div class="row"><span class="dot" style="background:var(--s5)"></span><div class="t"><div>ElevenLabs</div><div class="m s">Pro, $99.00 a month</div></div><span class="a num">$191.00</span></div>
+    <div class="row"><span class="dot" style="background:var(--s2)"></span><div class="t"><div>Google AI (Gemini)</div><div class="m s">Ultra, $99.99 a month</div></div><span class="a num">$149.45</span></div>
+   </div>
+  </div>
+ </div>
+ <div class="pane pr">
+  <div class="hd"><span class="dot" style="background:var(--s1)"></span><h1>Claude</h1><span class="pill"><b>Billing page</b></span></div>
+  <div class="body">
+   <div class="tiles" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="tile"><div class="m s">Paid</div><div class="v num">$469.99</div></div>
+    <div class="tile"><div class="m s">Balance</div><div class="v" style="font-size:18px;line-height:27px">Plan limits</div></div>
+    <div class="tile"><div class="m s">Next, Nov 26</div><div class="v num">$249.99</div></div>
+   </div>
+   <div class="card"><div class="h2">The plan</div><dl class="kv"><dt>Plan</dt><dd>Ultra (bought as Max 20x)</dd><dt>Billed through</dt><dd>Apple App Store</dd><dt>Since</dt><dd>Oct 26, 2026</dd></dl></div>
+   <div class="card"><div class="h2">What it allows <a>All 4</a></div><div class="s">Ten times the Pro plan's usage every week, with no five-hour limit on a verified account.</div><div class="f s">support.claude.com, read Nov 20</div></div>
+   <div class="card" style="padding-bottom:4px"><div class="h2">Charges <a>5 in the ledger</a></div>
+    <div class="row"><div class="t"><div>Usage credits (100)<span class="tag">Confirm</span></div><div class="m s">Nov 4, Apple App Store</div></div><span class="a num">$90.00</span></div>
+    <div class="row"><div class="t"><div>Usage credits (100)<span class="tag">Confirm</span></div><div class="m s">Nov 4, Apple App Store</div></div><span class="a num">$90.00</span></div>
+   </div>
+  </div>
+ </div>
+ <div class="hinge"></div>
+</div>
+
+<!-- 4. open sideways, Ledger: charges on the left half, subtotals and the tapped charge on the right half -->
+<div class="dev open" id="f4">
+ <div class="rail"><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="9" rx="1.5"/><rect x="13" y="4" width="7" height="5" rx="1.5"/><rect x="13" y="11" width="7" height="9" rx="1.5"/><rect x="4" y="15" width="7" height="5" rx="1.5"/></svg>Overview</div><div class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="6" rx="2"/><rect x="4" y="13" width="16" height="6" rx="2"/></svg>Services</div><div class="tab on"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>Ledger</div><div class="tab"><svg viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></svg>Totals</div></div>
+ <div class="pane pl">
+  <div class="hd"><h1>Ledger</h1><span class="pill"><b>All time</b><i>Everything</i></span><span class="ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f4f1ff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></span></div>
+  <div class="body">
+   <div class="grp"><div>November 2026<span>15 charges</span></div><span class="num">$583.98</span></div>
+   <div class="row"><span class="chk"></span><span class="dot" style="background:var(--s6)"></span><div class="t"><div>fal.ai</div><div class="m s">Nov 20, Credit top-up</div></div><span class="a num">$10.00</span></div>
+   <div class="row" style="background:var(--raised);margin:0 -8px;padding:6px 8px;border-radius:8px;border:0"><span class="chk"></span><span class="dot" style="background:var(--s2)"></span><div class="t"><div>Google AI (Gemini)</div><div class="m s">Nov 14, Ultra (20 TB), first month</div></div><span class="a num">$99.99</span></div>
+   <div class="row"><span class="chk on"></span><span class="dot" style="background:var(--s3)"></span><div class="t"><div>xAI API</div><div class="m s">Nov 14, API credit top-up</div></div><span class="a num">$20.00</span></div>
+   <div class="row"><span class="chk"></span><span class="dot" style="background:var(--s2)"></span><div class="t"><div>Google AI (Gemini)</div><div class="m s">Nov 13, Pro (5 TB), monthly</div></div><span class="a num">$19.99</span></div>
+   <div class="row"><span class="chk"></span><span class="dot" style="background:var(--s5)"></span><div class="t"><div>ElevenLabs</div><div class="m s">Nov 12, Pro plan, monthly</div></div><span class="a num">$99.00</span></div>
+   <div class="row"><span class="chk on"></span><span class="dot" style="background:var(--s3)"></span><div class="t"><div>xAI API</div><div class="m s">Nov 9, API credit top-up</div></div><span class="a num">$20.00</span></div>
+   <div class="row"><span class="chk"></span><span class="dot" style="background:var(--s3)"></span><div class="t"><div>xAI API</div><div class="m s">Nov 7, API credit top-up</div></div><span class="a num">$20.00</span></div>
+  </div>
+  <div class="sum"><span class="s" style="color:var(--accent)">2 ticked: $40.00</span><b class="num">$975.44</b></div>
+ </div>
+ <div class="pane pr">
+  <div class="hd" style="padding-bottom:10px"><div class="seg" style="flex:1"><span>Service</span><span class="on">Month</span><span>Week</span><span>Kind</span><span>Paid through</span></div></div>
+  <div class="body">
+   <div class="card"><div class="h2">Subtotals by month <span class="f s" style="font-weight:400">tap one to show only it</span></div>
+    <div class="hb"><span>November</span><i style="width:100%;background:var(--s1)"></i><b class="num" style="text-align:right;font-weight:500">$583.98</b></div>
+    <div class="hb"><span>October</span><i style="width:62%;background:var(--s1)"></i><b class="num" style="text-align:right;font-weight:500">$361.48</b></div>
+    <div class="hb"><span>September</span><i style="width:1.5%;background:var(--s1)"></i><b class="num" style="text-align:right;font-weight:500">$4.99</b></div>
+    <div class="hb"><span>August</span><i style="width:1.5%;background:var(--s1)"></i><b class="num" style="text-align:right;font-weight:500">$4.99</b></div>
+    <div class="hb"><span>July</span><i style="width:3.5%;background:var(--s1)"></i><b class="num" style="text-align:right;font-weight:500">$20.00</b></div>
+   </div>
+   <div class="card"><div class="h2">Google AI (Gemini) <span class="num" style="font:500 20px/1 var(--num)">$99.99</span></div>
+    <dl class="kv"><dt>What it was</dt><dd>Google AI Ultra (20 TB), first month</dd><dt>When</dt><dd>Nov 14, 2026, 8:12 pm</dd><dt>Kind</dt><dd>Plan</dd><dt>Paid through</dt><dd>Google Play</dd><dt>Reference</dt><dd>SOP.3317-1988-3775-51847</dd><dt>Source</dt><dd>Receipt email</dd></dl></div>
+  </div>
+ </div>
+ <div class="hinge"></div>
+</div>
+<script>
+// Which frame shows on a phone: by width (under 900 the pocket frames, else the two-pane frames) and by the tab last tapped.
+var screen2='overview';
+function pick(){var open=innerWidth>=900,id=open?(screen2==='ledger'?'f4':'f3'):(screen2==='ledger'?'f2':'f1');document.querySelectorAll('.dev').forEach(function(d){d.classList.toggle('show',d.id===id);});}
+document.addEventListener('click',function(e){var t=e.target.closest('.tab');if(!t)return;var n=t.textContent.trim().toLowerCase();if(n==='overview'||n==='ledger'){screen2=n;pick();}});
+addEventListener('resize',pick);pick();
+</script>
+</body></html>
