@@ -26645,6 +26645,37 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md (Fix a miss with the smallest change; Image and video prompts: clean, each thing once; keysecrets1), claude/handoff-rules.md and claude/guidegen-plan.md (sections 3.1 and 8), then this card in data/board.json. Your first push is the commit board: start c-guideprompts. Facts on 11-21: in data/guide-anims.json 267 of 346 animations carry a rule-made starter draft (promptSource rule-draft): the same canned MOTION for every move of a shape, so Cartridge Blow (blows into a cartridge, dust puff) reads as a spell cast. The loader in tools/guidegen/build_map.js already reads data/guide-prompts.json and shows entries with source model-draft, but nothing writes that file. Build tools/guidegen/draft.py (reuse reconcile.py: split, check, xai_ask, pick_text_model, the cap pattern) and a manual Action guide-draft. For each rule-draft animation it asks the xAI text model for a real MOTION from the move's own data (name, desc, flavor, shape, target, effects, listRow body and engine text, the row of claude/battle-animation-list-ch1-v11.md), keeping everything before MOTION word for word, two sentences, the gesture named once with its count, ending in a held pose, props out from behind the back and back again, no sound or camera, no banned words, no em dashes. Check each answer in code, send a broken one back once, mark a second failure check and leave the starter draft. Write results to data/guide-prompts.json (anims id -> prompt, source model-draft, rev 0), never over a job, entry or used prompt. Run order: dry run, then Cartridge Blow alone, read its prompt, then the rest with cap 1.00 (the reconcile replay cost $0.045 for 24 prompts). Rebuild data/guide-anims.json with node tools/guidegen/build_map.js, run python3 tools/guidegen/build_map_test.py and guidegen_test.py, add the docs/CHANGES.md entry guideprompts1, and write the next card. Never generate a video in this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-guidestatus",
+   "title": "Battle Guide: show where each new video is in the list",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "tag": "guidestatus1",
+   "next": "Being built in this conversation: five stage labels on the Animations list (Requested, In line, Making, Checking, Ready to review) in place of VIDEO or NO VIDEO YET while a new video is on its way.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"we need some new statuses for these videos\""
+   },
+   "prompt": {
+    "what": "Adds stage labels to the Battle Guide's Animations list so you can see where each new video is.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row C)",
+    "effort": "low (one page and three small job hooks)",
+    "text": "Read CLAUDE.md and card c-guidestatus in data/board.json. Your first push is the commit board: start c-guidestatus. In battle-guide.html, replace VIDEO or NO VIDEO YET on an Animations row while a new video is being made with up to five stages taken only from what the request files and the video services report (docs/BATTLE_GUIDE.md). Build tag guidestatus1. Run python3 tools/battle_guide_test.py and python3 tools/guidegen/take_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (in chat, 11:17): \"we need some new statuses for these videos that replace No Video yet or Video if a new video is being generated. use up to 5 (fewer is fine) new status names based only on the information you have available from the image service while its processing. basically when im scanning the animations list i need better transparency to where a new video is in the creation process\""
+    }
+   ]
   }
  ],
  "sessions": [
