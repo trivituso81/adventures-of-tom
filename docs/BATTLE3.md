@@ -216,6 +216,65 @@ Shares stage 17 does not touch: chapters 6 to 20 (`ch6` onward, `data/ch20-battl
 | `unused_voice.py` | 0 on all checks after each part. |
 | Smoke | Fails only `board_sync_test` R5 (known, not from this stage). |
 
+## What stage 18 holds: chapters 6 to 10's story switch (builds `b3s18a` to `b3s18e`; the bonus chapter waits)
+
+### Chapters 6 to 10 and the bonus chapter's battle 2 references, by kind (listed before any change, 2026-11-21)
+
+Fact: every place these chapters' scenes and map monsters touch battle 2. Lines are in `data/scenes.js` unless named (ch6 2396 to 3222, ch7 3223 to 3911, ch8 3912 to 4310, ch9 4311 to 4787, ch10 4788 on; the bonus chapter is `data/bonus-nine-scoops.js`). "Share" is what stage 18 replaces; everything else stays as it is.
+
+| Kind | Where | What it does with battle 2 | Stage 18 |
+|---|---|---|---|
+| Start a fight | Ch6: 2582 `peanutgallery` (`ch6gallery`), 2600 `twigspy` (`ch6spy`), 2617 `cheekstuffer` (`ch6stuffer`), 2743 `chairman` (`chairman`) | Story `battle` op starts battle 2 | Routed by the one door (`startBattle`); each monster already had a formation |
+| Start a fight | Ch7: 3501 `cliffhanger`, 3521 `knowitall`, 3542 `popup`, 3590 `unread` (keys `ch7cliff`, `ch7know`, `ch7pop`, `unread`) | Same | Routed |
+| Start a fight | Ch8: 4002 `wetblanket`, 4015 `thedraft`, 4029 `pickyeater`, 4094 `ironbelly` (keys `ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`) | Same | Routed |
+| Start a fight | Ch9: 4420 `coathanger`, 4438 `soreloser`, 4458 `wallflower`, 4511 `mirrorball` (keys `ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`) | Same | Routed |
+| Start a fight | Ch10: 4868 `longline`, 4883 `unclaimed`, 4899 `armresthog`, 4954 `lastcall` (keys `ch10sec`, `ch10bag`, `ch10lounge`, `lastcall`) | Same | Routed |
+| Start a fight | Map monsters: `OAKPARK_`, `OAK_` and `CROWN_MONSTER_SPOTS` (ch6), `STACKS_` and `READROOM_` (ch7), `BARN_` and `BOILER_` (ch8), `CLUB_` and `DOME_` (ch9), `TERM_` and `GATE_MONSTER_SPOTS` (ch10) | Visible encounters start battle 2 | Routed; `tools/b3-check-s18.js` checks each spot list has a formation for every monster in it |
+| Read a result | Flags `battle:chairman`, `battle:unread`, `battle:ironbelly`, `battle:mirrorball`, `battle:lastcall`, read by each boss's retry (`flag(...)!=='win'` then `{heal:true}`) | The story `battle` op sets the flag from `B2.result` (`engine/story.js` 335); bosses also by `b3sEnd` | Already set by `b3sEnd` (stage 15) |
+| Read a result | `flag('kind:<boss>')` read by `ch6AfterBoss` (`kind:chairman`, three places), `ch7AfterBoss` (`kind:unread`), `ch8AfterBoss` (`kind:ironbelly`), `ch9AfterBoss` (`kind:mirrorball`), `ch10AfterBoss` (`kind:lastcall`) and `bossKind` (`engine/boss-finale.js`) | Battle 2 sets it when the Warmth bar sends a boss home | `b3sEnd` already sets `kind:<boss>` on a boss win from chapter 2 on (stage 17); the flag names equal the monster ids |
+| Unlock a Tombo | Flags `tombo:tnb2` and `tombo:nara2` (ch6, Red Line Transfer and Tug of War), `tombo:deedee2` (ch7, Pick the Rhubarb), `tombo:rose2` and `tombo:amy2` (ch10, Seat 1A Stowaway and Wing Walk). Chapters 8 and 9 have none | Unlock Tombos | Flags stay. Tombos return as skins in stage 16 (not built) |
+| Unlock a Tombo | Toasts at 2466, 2499 (ch6), 3775 (ch7), 4857 (ch10) name battle 2 menu rows ("50% HEART") | Tell the player about a Tombo | Shown under OLD only (`B3_CH_ON(n)`) |
+| Tutorial | `TUTORIALS` rows in `data/scenes.js` near each chapter's end (battle 2: Warmth, HEART, Tombo, elements named Splash, Cozy, Sparkle) | Per-fight tips | Replaced under Battle 3 by `B3_STORY.tips` (same keys) |
+| Tutorial | Spoken retry coaching after a loss: TNB (ch6, "Three times should do it"), Grace (ch7, "Mystery, Chatter. Adventure, Kinetic ... Three times"), TNB (ch8, "Splash moves cool her down, Cozy moves stoke her up"), Deedee (ch9, "Ask her three times"), Amy (ch10, "Answer her three times") | Teach battle 2 (Warmth three times, element names, Kinetic) | Under Battle 3 each plays a new line naming what Battle 3 asks; the first line of each is the old text so its clip still plays |
+| Not a battle 2 reference | `{toast:'... Signature Tool ... WARMTH +n'}` in chapters 6 to 10: an item stat shown in the menu | Item stats | Left alone |
+| Not switched | Bonus chapter (`data/bonus-nine-scoops.js`, chapter 21): seven scripted fights (`nsGremlin`, `nsSlug`, `nsCone`, `nsBoss1`, `nsGarden`, `nsBoss2`, `nsBoss1b`) | Battle 2 with its own bespoke code | See "The bonus chapter is not switched" below |
+
+Shares stage 18 does not touch: chapters 11 to 20 (`engine/benchcall.js`, `data/ch20-battle.js`), the bonus chapter, Battle Lab and every battle 2 file. Under OLD chapters 6 to 10 play exactly as before.
+
+### What stage 18 builds (builds `b3s18a` chapter 6, `b3s18b` chapter 7, `b3s18c` chapter 8, `b3s18d` chapter 9, `b3s18e` chapter 10)
+
+| Part | What it does |
+|---|---|
+| Switch | `B3_STORY.chapters=[1,...,10]` (`data/b3-story.js`). BY CHAPTER plays chapters 1 to 10 on Battle 3, OLD plays them all on battle 2 on the same save, NEW is unchanged. |
+| Fights | The 20 scripted story fights and every map monster of chapters 6 to 10 already had formations (stage 11 to 13). No new fight rows. Vibe Points per fight are the bestiary's: chapter 6 is 6 and 30 (boss), chapter 7 is 9 and 27, chapter 8 is 9 and 27, chapter 9 is 9 and 27, chapter 10 is 8 and 26. |
+| Tips | `B3_STORY.tips`: one tip per family turn, once each, for 20 fights (`ch6gallery`, `ch6spy`, `ch6stuffer`, `chairman`, `ch7cliff`, `ch7know`, `ch7pop`, `unread`, `ch8blanket`, `ch8draft`, `ch8picky`, `ironbelly`, `ch9coat`, `ch9cards`, `ch9ball`, `mirrorball`, `ch10sec`, `ch10bag`, `ch10lounge`, `lastcall`). They name Pet Peeves, Resists, and the wind-up on screen (!!), with a condition so a tip about a status or wind-up shows only when it is on screen. At least two per fight, 240 characters at most, no battle 2 word, no em dash. |
+| Kind ending | Unchanged from stage 17: `b3sEnd` sets `kind:<boss>` on a boss win; each of the five boss flags equals the monster id the after-boss scene reads. |
+| Tombo toasts | The four "New Tombo" toasts of chapters 6, 7 and 10 show under OLD only. The Tombo flags stay. |
+| Scene lines | Five loss-retry coaching lines have a Battle 3 version under `B3_CH_ON(n)`: TNB (ch6, ch8), Grace (ch7), Deedee (ch9), Amy (ch10). The first line of each is the old text, so its recorded clip still plays; the new lines are not recorded and play by speech synthesis (Voice Library, No clip yet). |
+| Left alone | The Signature Tool toasts with a WARMTH number (item stats). |
+
+### The bonus chapter is not switched (call made in stage 18)
+
+Fact: the bonus chapter's two Brain Freeze fights are bespoke battle 2 code, not a plain fight. Adding chapter 21 to `B3_STORY.chapters` would send them to Battle 3 and the story would stall. What blocks it:
+
+| Item | Where | What Battle 3 lacks |
+|---|---|---|
+| Midpoint ends the fight early | `b2CheckPhase` and `b2BossTurn` overrides (`data/bonus-nine-scoops.js` 318 to 345): at half HP the lid slams (ICE SHELL), HP stops falling, the fight ends with result `shell` (second run) or `flee` (first run: Rose frozen mid Boo, a Deep Freeze on everyone) | A way for a scripted fight to end at an HP point with a named result other than win or lose; `b3sEnd` writes only `win` or `lose` to `B2.result` |
+| Scenes read those results | `B2.result==='flee'` (line 738) and `B2.result==='shell'` (line 890), then `flag('kind:brainfreeze')` (line 931) | The `flee` and `shell` branches, and a kind ending that Warmth no longer earns |
+| Two bespoke fights | Phase 2 starts at half HP; a retry fight `nsBoss2`; Brain Freeze's adds (Sprinkle Gremlins out of the freezer) and Deep Freeze on everyone | Starting HP for a boss, adds on a timer, a Rose frozen status |
+| Party and rewards | Tom, Grace and Rose at level 5 (`b6Prep(5)`); Grace's sash as a status at the start of a fight; Birthday Wish (Tom's special) and the Squishy Delivery and Double-Decker Airplane Tombos | Bonus-chapter kit rows; the sash status; a level floor for chapter 21 (`levelFloor` ends at chapter 10 and `Math.min(ch, last)` would give level 25) |
+| Four plain fights | `nsGremlin`, `nsSlug`, `nsCone`, `nsGarden` have formations (`gremlin`, `slushslug`, `conehead`) and set `battle:<id>` through the story op | Nothing new, but they ship with the boss: the chapter cannot mix two battle systems without a level floor and a sash |
+
+The follow-up is card `c-b3s18bonus` (tag `b3s18bonus`).
+
+### Stage 18 tests and numbers
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS 3271, FAILS [] (2668 after stage 17). `tools/b3-check-s18.js` (new): chapter order, every scripted fight of 6 to 10 has a formation and tips, every tips key is used, map monster lists have formations, VP per chapter, tips have no battle 2 word and no em dash. `tools/b3-check-s17.js` now covers chapters 2 to 5 only; its tip and toast checks run over every switched chapter. |
+| Browser tests | Not run: Tom asked for no testing this stage ("id prefer not to test and just keep building until we are done"). `tools/ch6_b3_test.py` to `ch10_b3_test.py` were not written. `tools/smoke.py` was not run. `tools/b3_story_test.py` was edited but not run: its "not switched yet" cases moved from chapter 6 to chapter 11 (pool 1350 split 800 and 550, level floor 25). |
+| `unused_voice.py` | 0 on checks 1, 3 and 4 after each part. |
+
 ## What stage 9b holds, and what waits
 
 | In (build `b3s9b`) | Waits for |

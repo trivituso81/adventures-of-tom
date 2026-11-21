@@ -59,6 +59,14 @@ Tom had Gemini play chapter 1 with the brief `claude/ch1-gemini-verify.md`; its 
 - Section 7 checked against main: X-03 (LOAD IT? in the Save modal) and X-04 (TURN label clipped in portrait) were not reproduced (the Save popup has no LOAD IT? button; the TURN label is whole in a 430x860 Battle 3 frame), so no card.
 - Board and notes only: no game file changed.
 
+## b3s18 (2026-11-21): stage 18 closes: chapters 6 to 10 play on the new battle; the bonus chapter waits
+
+Card c-b3s18. Chapters 6 to 10 (Old Oak Park, the Library, the Car Barn, the Moon Club, the airport) run their story fights and map monsters on Battle 3 behind the same switch (BY CHAPTER, default), pushed as `b3s18a` to `b3s18e`. Docs: `docs/BATTLE3.md` "What stage 18 holds" (the battle 2 reference table by kind, what was built, the bonus chapter facts), `docs/handoff/b3s18.md`, `claude/next-addendum-b3s18.md`, `claude/battle-build.md` (stage board, results, calls, next conversation).
+- Not switched: the bonus chapter (Nine Scoops). Its two Brain Freeze fights end at half HP with results `flee` and `shell` in battle 2 code that Battle 3 cannot yet express, so it stays on battle 2; board card `c-b3s18bonus` builds the seams and switches it.
+- Test file change: `tools/b3_story_test.py` moved its "not switched yet" cases from chapter 6 to chapter 11 (pool 1350 split 800 and 550, level floor 25). It was not run.
+- Not run, by Tom's request: browser chapter tests, `smoke.py`, `b3_story_test.py`. Run: `node tools/b3-sim.js check`, `unused_voice.py`.
+- Board: Tom's next card is Milestone D (`t-milestoned`, play chapters 6 to 10).
+
 ## guidestatus1-restore (2026-11-21): housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake
 
 Card c-guidestatus. The guidestatus1 push was rebased badly: it dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b (put back below guidestatus1, where they were), and re-added `art/raw/clips/wan-grace-squeeze-v3.mp4` and `tools/art-library/prompts/wan-grace-squeeze-v3.txt`, which fix-anim-grace-squeeze-qxim had purged (v4 replaced them). No game file changed.

@@ -23533,9 +23533,7 @@
    "col": "up",
    "ask": "play",
    "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s15. Then CHAPTERS > Chapter 1 and play to the end (the job scene on Rivituso Row), about 30 minutes. Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, is the Big One too long (it is 7.83 rounds at Rank 1, aimed at 5 to 7), do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 1 on the old battle. Stage 17 shipped without waiting for it (c-b3s17, you asked for it directly); your notes still come first in stage 18 (c-b3s18).",
-   "blocks": [
-    "c-b3s18"
-   ],
+   "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
    "chat": {
@@ -23554,8 +23552,13 @@
     {
      "d": "2026-11-21",
      "t": "Gemini played chapter 1 on build voicepurge221 (claude/ch1-gemini-report.md). Ratings: Q1 5/5 · Q2 4/5 · Q3 4/5 · Q4 5/5 (6 rounds, 0 KOs) · Q5 5/5 · Q6 4/5 · Q7 4/5. Fights: #1 3 Mudlings (Mudling A, Mudling B, Mudling C - 60 HP each), Grump Hollow (gate), 3 rounds, 0 KOs, ~3.0 min | #2 Bog Toad (106 HP), Skeeter Swarm (78 HP, Jitterflight), Grump Hollow (top left), 3 rounds, 0 KOs, ~2.0 min | #3 Pond Grump, Mudling, Grump Hollow (near middle clearing), 3 rounds, 0 KOs, ~2.0 min | #4 The Big One (610 HP, 6 Composure pips, Muffin-Tin Crown), Grump Hollow (east pond), 6 rounds, 0 KOs, ~4.0 min | #5 Log Lump (166 HP, 4 Composure pips, Mossy Brace), Skeeter Swarm (78 HP), Grump Hollow (middle clearing, post-boss), 3 rounds, 0 KOs, ~2.0 min. These are an AI tester's mechanics notes, not your judgment: this card stays open for you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stage 18 was started and finished before this card was answered (Tom asked to keep building without testing: \"id prefer not to test and just keep building until we are done\"). This card no longer blocks a Claude card; your notes on it still count at the next milestone."
     }
-   ]
+   ],
+   "fyi": true
   },
   {
    "id": "c-b3s17",
@@ -26275,7 +26278,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on t-milestonec (Milestone C, your play test of chapters 2 to 5). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "next": "Chapters 6 to 10 are on Battle 3 behind the BY CHAPTER switch (pushed b3s18a to b3s18). The bonus chapter was not switched; that is card c-b3s18bonus. Your card t-milestoned is the play test of chapters 6 to 10.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -26341,13 +26344,17 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as b3s18e: chapter 10's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part b3s18 pushed: stage 18 docs and board. Chapters 6 to 10 are on Battle 3. The bonus chapter is not switched (Brain Freeze's flee and shell results are battle 2 code), so card c-b3s18bonus was created. After: t-milestoned."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
     "opening": "\"i'd prefer not to test and just keep building until we are done\""
    },
-   "after": "nothing for Tom: c-b3s18"
+   "after": "t-milestoned"
   },
   {
    "id": "t-milestonec",
@@ -26357,21 +26364,24 @@
    "col": "up",
    "ask": "play",
    "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s17. Then CHAPTERS > Chapter 2, and play each of chapters 2, 3, 4 and 5 to its last scene (about 30 minutes each; Chapter Select lets you jump). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, do the tips on the message line tell you what to do (one per turn, once each), is each boss (The Big Shake, Old Iron-Gill, The Director's Cut, The Red Pen) 5 to 7 rounds, does the kind ending still play after each boss, do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays these chapters on the old battle. Stage 18 (c-b3s18) waits on your notes.",
-   "blocks": [
-    "c-b3s18"
-   ],
+   "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
    "history": [
     {
      "d": "2026-11-21",
      "t": "Created by the b3s17 session: Milestone C, Tom plays chapters 2 to 5 on the new battle."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stage 18 was started and finished before this card was answered (Tom asked to keep building without testing: \"id prefer not to test and just keep building until we are done\"). This card no longer blocks a Claude card; your notes on it still count at the next milestone."
     }
    ],
    "chat": {
     "url": "",
     "opening": "unknown"
-   }
+   },
+   "fyi": true
   },
   {
    "id": "t-anim-rose-dodge-v89r",
@@ -27705,6 +27715,58 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-milestoned",
+   "title": "Milestone D: play chapters 6 to 10 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s18 or a later name. Then CHAPTERS > Chapter 6, and play each of chapters 6, 7, 8, 9 and 10 to its last scene (about 30 minutes each; Chapter Select lets you jump). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, do the tips on the message line tell you what to do (one per turn, once each), is each boss (Chairman Cheeks, The Unread, Old Ironbelly, The Mirrorball, The Last Call) 5 to 7 rounds, does the kind ending still play after each boss, do the retry lines after a loss make sense. These chapters were built without browser tests, so say plainly if a fight stalls or a scene does not continue. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays these chapters on the old battle. The bonus chapter card (c-b3s18bonus) waits on your notes.",
+   "blocks": [
+    "c-b3s18bonus"
+   ],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s18 session: Milestone D, Tom plays chapters 6 to 10 on the new battle."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   }
+  },
+  {
+   "id": "c-b3s18bonus",
+   "title": "Battle system: the bonus chapter on the new battle",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Waits on t-milestoned (Milestone D, your play test of chapters 6 to 10). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "tag": "b3s18bonus",
+   "prompt": {
+    "what": "Switch the bonus chapter (Nine Scoops) to Battle 3: first the seams its Brain Freeze fights need (a scripted midpoint with the results flee and shell, boss starting HP, adds, Rose frozen, the sash, a level floor), then the chapter on the list with tips and a chapter test.",
+    "before": [
+     "Play chapters 6 to 10 on the new battle: card t-milestoned on the board (CHAPTERS > Chapter 6 to Chapter 10), then press All good or Something is wrong on it."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a design inside the rules code that is not written yet; none of the three Fable conditions holds)",
+    "effort": "high (new engine seams in a default-on path, and a chapter test is needed)",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s18.md, then docs/BATTLE3.md \"The bonus chapter is not switched\", and switch the bonus chapter (Nine Scoops, chapter 21, data/bonus-nine-scoops.js) to Battle 3 behind the same switch. First read the Milestone D card (t-milestoned) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Two pushes. b3s18bonusa: the Battle 3 seams the Brain Freeze fights need, in data and rules, never in a scene: a scripted midpoint that ends a fight at an HP point with the result flee (first run: Rose frozen mid Boo, a Deep Freeze on everyone) or shell (second run), a starting HP for a boss (phase 2 starts at half HP), adds from the freezer on a timer, a Rose frozen status, Grace's sash status at the start of a fight, a level floor for chapter 21 (levelFloor ends at chapter 10, so Math.min would give level 25; Tom, Grace and Rose are level 5 there), and Vibe Points for the chapter. Test each seam with node tools/b3-sim.js check. b3s18bonus: add 21 to B3_STORY.chapters, give nsGremlin, nsSlug, nsCone, nsBoss1, nsGarden, nsBoss2 and nsBoss1b tips in data/b3-story.js, make the Tombos ready toast and the retry lines B3_CH_ON(21)-aware, keep OLD working on the same save, no Warmth bar or WARMTH command. Write tools/ns_b3_test.py from Chapter Select with tools/b3_chapter_lib.py, modeled on tools/ch5_b3_test.py (portrait and landscape, look at the frames), and run it before the second push: a broken Brain Freeze midpoint stalls the chapter. Also run node tools/b3-sim.js check and python3 tools/clip-audit/unused_voice.py. Never ask me to review an animation. Board card c-b3s18bonus. Your first push is the commit board: start c-b3s18bonus. When it ships, create the next Milestone card for me (ask play, after of this card) and set this card's after to it. Push with a fast cherry-pick landing (docs/handoff/b3s18.md) and check main afterwards. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s18 session: the bonus chapter was not switched in stage 18 because its Brain Freeze fights end at half HP with results flee and shell in battle 2 code."
+    }
+   ]
   }
  ],
  "sessions": [
