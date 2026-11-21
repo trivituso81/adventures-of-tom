@@ -26305,6 +26305,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as fix-anim-grace-squeeze-qxima: Grace's Soup-Dumpling Squeeze prompt v4: the dumpling has a cute face and bursts on the hit (video being made)"
     }
    ],
    "prompt": {
@@ -26467,6 +26471,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T10:57:09-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
+   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
+   "first": "2026-11-21T10:53:26-08:00",
+   "last": "2026-11-21T10:56:53-08:00",
+   "tags": [
+    "fix-anim-grace-squeeze-qxima"
+   ],
+   "cards": [
+    "c-fix-anim-grace-squeeze-qxim"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
    "title": "Saved portrait crops reach every screen, automatically",
    "first": "2026-11-21T10:25:32-08:00",
@@ -26476,16 +26502,6 @@
    ],
    "cards": [
     "c-idea-savedportraits"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
-   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
-   "first": "2026-11-21T10:53:26-08:00",
-   "last": "2026-11-21T10:53:26-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-anim-grace-squeeze-qxim"
    ]
   },
   {
@@ -29980,8 +29996,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "084841879642e1be30d14c166dc0a309092a32e0",
- "synced_at": "2026-11-21T18:55:53+00:00",
+ "synced": "6fc2e1c04977f60474d06db7d00115071e42013c",
+ "synced_at": "2026-11-21T18:57:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
