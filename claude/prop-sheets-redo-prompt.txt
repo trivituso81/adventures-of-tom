@@ -1,0 +1,43 @@
+IMAGE REQUEST: ONE SINGLE PROP SPRITE SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.
+
+WHAT THIS IS
+A prop sheet for "The Adventures of Tom", a family role-playing game in the style of a 16-bit Super Nintendo game (Final Fantasy VI, Chrono Trigger). This is a redo sheet that holds 14 standalone battle props that will be cut out and used in animations.
+
+THE SHEET (strict)
+- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.
+- Exactly 14 objects, one per cell, filled left to right, top to bottom, in the order of the numbered list below. The final cells (numbers 15 and 16) must stay completely empty and transparent, with no number.
+- Each object is drawn complete, centered in its own cell, fully inside it, with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.
+- Scale every object to fill about 70 to 80 percent of its cell, regardless of its real-world size. Big things (buildings, vehicles, furniture) are shown as compact icon-sized versions with all their key details still readable. Small things are enlarged to the same footprint.
+- Background: fully transparent (PNG with alpha). No grid lines, no borders, no frames, no cell backgrounds, no checkerboard pattern. If your tool cannot output transparency, fill the entire background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere inside the objects.
+- In the top-left corner of every cell, put a small plain white pixel-font number (with a thin dark outline) matching the list number. These numbers are a guide only and will be cropped off. Do not put any other labels, captions or titles on the sheet. The only text allowed is the text that is part of the prop itself, spelled exactly as given in the list.
+
+ART STYLE
+- 32-bit era high-detail pixel art (late SNES, Saturn, PlayStation quality): rich shading, 16 to 24 colors per object, clean readable silhouettes, no anti-aliasing blur, no gradients that break the pixel look, no outlines thicker than one pixel.
+- A crisp one-pixel darker rim around each object's outer edge and a faint lighter highlight along its top edge, so it pops on a painted background.
+- Soft key light from the upper left on every object, with shadow on the lower right of each form. Warm, slightly desaturated painterly palette, but each object keeps its natural colors. All objects share one consistent look, one lighting direction and one level of detail.
+- Three-quarter view from slightly above, like objects seen in an SNES battle scene. Fun, friendly and a little silly. Family friendly for children aged 6 and up: nothing gory, scary or grim.
+- Native pixel-art resolution only: draw at roughly 128 x 128 pixels per cell and upscale by a whole number (2x) with nearest-neighbor, so pixels stay hard-edged and square.
+- Do not draw a ground shadow. At most a tiny soft contact shadow directly under an object that rests on the floor.
+
+HARD RULES
+- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the 14 objects described, one per numbered cell. Never substitute, swap in or add other objects, even ones that seem more typical, more common or related to the same theme. If a description is unusual, draw it as written. Every cell must match its numbered description.
+- Props only. No people, no characters, no hands, no faces on anything unless the list says the object has a face. No creatures except the ones listed.
+- No real brands, logos, trademarks or copyrighted characters.
+- Do not add extra objects, decorations, sparkle bursts, motion lines, glows, smoke or effects beyond what the list describes. Small details the list names (a wisp of steam, a drip, a glint) are fine.
+- Do not skip, merge or reorder any item.
+
+THE 14 OBJECTS (cell number: name, what to draw)
+1. Retro console: chunky grey 16-bit-style game console with an open cartridge slot and a small green power light.
+2. Ghost pepper: single wrinkly ghost pepper in bright orange-red (not pale, not cream, not yellow) with a green stem.
+3. Fire alarm: red wall fire alarm pull station with a PULL handle.
+4. Cardigan: grey knit cardigan with buttons, draped as if just taken off.
+5. Finish arch: wooden-framed race finish arch with a banner reading FINISH and a ribbon across the bottom.
+6. Race bib: white paper race bib with the number 70 in big black digits and four safety pins.
+7. Longboard: wooden longboard skateboard with ORANGE wheels and teal grip tape.
+8. Painted curb: section of sidewalk curb with a bright red painted line along it.
+9. Rocking platform: wobbly wooden platform balanced on a curved rocker base, tilted.
+10. Spirit level: yellow spirit level with a green bubble in the center.
+11. Clay wedge: wedge of grey clay with finger marks.
+12. Brick kiln: front-loading brick pottery kiln with a round dial, a vent pipe and a heavy door with a latch.
+13. Stoneware mugs: three speckled stoneware mugs in earth tones, grouped together.
+14. Street signs: green street sign reading BAXTER ST on a pole, with a yellow diamond hill warning sign below it.

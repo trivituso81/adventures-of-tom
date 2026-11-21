@@ -1,3 +1,8 @@
+## projclean1d (2026-11-21): Project docs moved into the repo: 61 more docs copied into claude/ (fourth part of the second run)
+
+- Card c-projclean: copied 61 more Project docs word for word to the same path in claude/ (area, tombo, ability, status and plan notes, the 46_tomhouse set, baker status notes). No game file changed.
+- Not copied: monster-codex-build.md (a safety classifier stopped the write) and 46_tomhouse_geometry.json (it could only be rebuilt by script, not copied byte for byte); both stay in the Project.
+
 ## projclean1c (2026-11-21): Project docs moved into the repo: 118 more docs copied into claude/ (third part of the second run)
 
 - Card c-projclean: copied 118 more Project docs word for word to the same path in claude/ (area QC notes, tom, olivia and justin character prompts, square and area kits, nara and boppy prompts, ability feedback notes, voice and battle notes). No game file changed.
