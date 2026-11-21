@@ -19164,6 +19164,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1d: the monster clips checked by eye; four made again with one change each"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1e: Grace and Tom fight in Wan videos in every NEW BATTLE fight (idle with breathing, guard, hit, knocked out, victory, run) and Lounge Pass Flex, Soup-Dumpling Squeeze and Crunchy Sugar-Cube Pop are videos"
     }
    ],
    "prompt": {
@@ -21045,6 +21049,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T19:11:22-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c",
+    "wanch1d",
+    "wanch1e"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
    "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
    "first": "2026-11-20T18:36:01-08:00",
@@ -21220,21 +21240,6 @@
     "c-reports-4",
     "c-reports-2",
     "c-reports-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T18:13:31-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b",
-    "wanch1c",
-    "wanch1d"
-   ],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -23483,8 +23488,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "49eaf50a824f7cd81f5783b818b088c614756f82",
- "synced_at": "2026-11-21T03:10:18+00:00",
+ "synced": "6005a54d5f3d7338e52bd71e4b57b79b2c6712cd",
+ "synced_at": "2026-11-21T03:12:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
