@@ -1,0 +1,123 @@
+{
+ "takes": [
+  {
+   "rid": "r1795228414043-gqv",
+   "kind": "history",
+   "line": "history",
+   "label": "new take",
+   "script": "",
+   "at": 1795228438537,
+   "file": "history/r1795228414043-gqv.json",
+   "items": 0
+  },
+  {
+   "rid": "r1795229331319-eso",
+   "kind": "sts",
+   "line": "d|tom|Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
+   "label": "my read",
+   "script": "(recording)",
+   "at": 1795229354380,
+   "file": "takes/r1795229331319-eso.mp3",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "sec": 7.2,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229373966-7k4",
+   "kind": "sts",
+   "line": "d|tom|Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
+   "label": "my read",
+   "script": "(recording)",
+   "at": 1795229395526,
+   "file": "takes/r1795229373966-7k4.mp3",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "sec": 5.7,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229416373-yel",
+   "kind": "sts",
+   "line": "d|tom|Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
+   "label": "my read",
+   "script": "(recording)",
+   "at": 1795229442007,
+   "file": "takes/r1795229416373-yel.mp3",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "sec": 6.8,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229503990-dq0",
+   "kind": "sts",
+   "line": "d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!",
+   "label": "my read",
+   "script": "(recording)",
+   "at": 1795229525249,
+   "file": "takes/r1795229503990-dq0.mp3",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "sec": 9.5,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229623113-zup",
+   "kind": "tts",
+   "line": "d|deedee|Three.",
+   "label": "new take",
+   "script": "[warm Long Island accent, very stern] Three!",
+   "at": 1795229641864,
+   "file": "takes/r1795229623113-zup.mp3",
+   "voice_id": "nh4f8rul91SCFqbXpyM0",
+   "sec": 1.3,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229650271-dsi",
+   "kind": "tts",
+   "line": "d|grace|Nine wrappers. There were twelve. So the one with the pan still has three.",
+   "label": "new take",
+   "script": "[bright, bossy] Nine wrappers. There were twelve. So the one with the pan still has three.",
+   "at": 1795229666603,
+   "file": "takes/r1795229650271-dsi.mp3",
+   "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+   "sec": 5.0,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229650272-iw5",
+   "kind": "tts",
+   "line": "d|tom|Alright, time for me to head back to LA. Let's head to Sal's!",
+   "label": "new take",
+   "script": "[dry, calm, bright, energetic] Alright, time for me to head back to LA. Let's head to Sal's!",
+   "at": 1795229666603,
+   "file": "takes/r1795229650272-iw5.mp3",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "sec": 4.0,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229650273-vno",
+   "kind": "tts",
+   "line": "d|rose|One more ride, Tata! To the cab!",
+   "label": "new take",
+   "script": "[small, earnest, silly, bright, energetic] One more ride, Tah Tah! To the cab!",
+   "at": 1795229667484,
+   "file": "takes/r1795229650273-vno.mp3",
+   "voice_id": "ocZQ262SsZb9RIxcQBOj",
+   "sec": 3.0,
+   "tries": 1
+  },
+  {
+   "rid": "r1795229650274-5el",
+   "kind": "tts",
+   "line": "d|sal|Los Angeles? You got it.",
+   "label": "new take",
+   "script": "[quick, friendly] Los Angeles? You got it.",
+   "at": 1795229667484,
+   "file": "takes/r1795229650274-5el.mp3",
+   "voice_id": "gcJ5PkVgShIxtP5HgbZK",
+   "sec": 2.1,
+   "tries": 1
+  }
+ ],
+ "failed": []
+}
