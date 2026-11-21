@@ -28678,6 +28678,10 @@
     {
      "d": "2026-11-21",
      "t": "Part 1 (b3s18bonusa) built: engine/b3-script.js (scripted midpoint with results flee and shell, boss starting HP, adds on a timer), the Frozen and Birthday Girl statuses, B3_STORY.setup, the chapter 21 level and Vibe Point floors; node tools/b3-sim.js check 3329, FAILS []. Tom's Milestone D card (t-milestoned) has no note or answer (it is in the backlog); this session went ahead on his explicit instruction."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18bonusa: Battle 3 can run a scripted story fight (midpoint end, boss starting HP, adds, Frozen, the sash); the bonus chapter is not switched yet"
     }
    ],
    "chat": {
@@ -31070,6 +31074,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
+   "title": "Battle system: the bonus chapter on the new battle",
+   "first": "2026-11-21T14:50:19-08:00",
+   "last": "2026-11-21T15:12:23-08:00",
+   "tags": [
+    "b3s18bonusa"
+   ],
+   "cards": [
+    "c-b3s18bonus"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
    "title": "Old battle screen problems: check them in the new battle",
    "first": "2026-11-21T14:55:18Z",
@@ -31145,16 +31161,6 @@
    ],
    "cards": [
     "c-wanch4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
-   "title": "Battle system: the bonus chapter on the new battle",
-   "first": "2026-11-21T14:50:19-08:00",
-   "last": "2026-11-21T14:50:22-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s18bonus"
    ]
   },
   {
@@ -35034,8 +35040,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "1bbcec2f962da60944803d961c300b3348eecfda",
- "synced_at": "2026-11-21T22:57:20+00:00",
+ "synced": "613994112ec0a128fbe5d508dcb7c4f516fd3830",
+ "synced_at": "2026-11-21T23:13:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
