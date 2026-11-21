@@ -17790,7 +17790,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFovmpwidf6dk3L6j9",
+    "url": "https://claude.ai/code/session_01RXeukFovmpwidf6dk3L6j9",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -17830,6 +17830,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "auto": true,
@@ -18112,7 +18116,7 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDCoc8BuDZqMqQE7bc",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -18128,6 +18132,10 @@
     {
      "d": "2026-11-20",
      "t": "Probe session started on Claude Opus 5.5 (medium) and made its first push, board: start c-probe-opus. Nothing else done, as asked."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -18138,8 +18146,7 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-opus. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "start": true
+   }
   },
   {
    "id": "c-probe-sonnet-high",
@@ -18312,7 +18319,7 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGHf9rQ5BiGnCpm8zm",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -18324,6 +18331,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T00:51:55.219Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -18334,8 +18345,7 @@
     "model": "Claude Sonnet 5.5",
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this route works. Your only job is the first push: the commit board: start c-probe-sonnet-high2. Push it to main and stop. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "start": true
+   }
   },
   {
    "id": "c-fix-keysecrets2-try-7",
@@ -18513,6 +18523,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFovmpwidf6dk3L6j9",
+   "title": "Fix the START tasks for Opus medium and Sonnet high",
+   "first": "2026-11-21T00:54:47Z",
+   "last": "2026-11-21T00:55:05Z",
+   "tags": [],
+   "cards": [
+    "c-startfix"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukF5PRXLtbQ2GyKcQ6M",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -19050,6 +19070,26 @@
    "tags": [],
    "cards": [
     "c-gem-pillar-rhubarb"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGHf9rQ5BiGnCpm8zm",
+   "title": "Probe: Sonnet high START route, second",
+   "first": "2026-11-20T16:54:56-08:00",
+   "last": "2026-11-20T16:54:56-08:00",
+   "tags": [],
+   "cards": [
+    "c-probe-sonnet-high2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDCoc8BuDZqMqQE7bc",
+   "title": "Probe: Opus medium START route",
+   "first": "2026-11-20T16:54:00-08:00",
+   "last": "2026-11-20T16:54:00-08:00",
+   "tags": [],
+   "cards": [
+    "c-probe-opus"
    ]
   },
   {
@@ -21035,8 +21075,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "2808fe717e69827bb8b6eceac3f3cb814edeba4e",
- "synced_at": "2026-11-21T00:52:08+00:00",
+ "synced": "f33f5a630c9fc0036a88f16103bd7aed92d92079",
+ "synced_at": "2026-11-21T00:55:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
