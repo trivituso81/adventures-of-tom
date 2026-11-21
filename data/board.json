@@ -9255,11 +9255,21 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA, first night: sorted as YOURS (not closed): half of it is how the kitchen and park scenes read sideways, which is a look; the Chairman hop to the picnic tables is a fact but sits on the same play-through. No browser run was needed to sort it.",
+     "at": "2026-11-21T22:00:00Z"
     }
    ],
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T22:00:00Z",
+    "verdict": "yours",
+    "why": "half of it is how the kitchen and park scenes read sideways, which is a look; the Chairman hop to the picnic tables is a fact but sits on the same play-through"
    }
   },
   {
@@ -9947,12 +9957,22 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA, first night: sorted as YOURS (not closed): the card asks whether the family stands around the amber and is on screen in both layouts, 'if it looks right': a look. No browser run was needed to sort it.",
+     "at": "2026-11-21T22:00:00Z"
     }
    ],
    "first": "Build alvarez shows on the title screen.",
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T22:00:00Z",
+    "verdict": "yours",
+    "why": "the card asks whether the family stands around the amber and is on screen in both layouts, 'if it looks right': a look"
    }
   },
   {
@@ -10130,12 +10150,22 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA, first night: sorted as YOURS (not closed): three staging checks (hidden behind Kettle Cottage, who stands beside whom, one person per column): how a group looks on screen is yours to judge. No browser run was needed to sort it.",
+     "at": "2026-11-21T22:00:00Z"
     }
    ],
    "first": "After the publish of build stagefollow, press RELOAD on the title.",
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T22:00:00Z",
+    "verdict": "yours",
+    "why": "three staging checks (hidden behind Kettle Cottage, who stands beside whom, one person per column): how a group looks on screen is yours to judge"
    }
   },
   {
@@ -12918,6 +12948,11 @@
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-20T16:46:24.779Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA, first night: a yes or no fact (the fight restarts by itself after a loss, the BOO scene plays) but no test browser run was made for it tonight, so it is not closed and has no machine field; the next night looks at it first.",
+     "at": "2026-11-21T22:00:00Z"
     }
    ],
    "backlog": {
@@ -29011,6 +29046,44 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-night-clean in data/board.json with its history. This is the standing card Night cleanup: it runs every night and never goes to Done. Run python3 tools/night/clean_report.py --out /tmp/clean.json first. Pick ONE bucket tonight by the day of the year (python3 -c \"import datetime;print('ABCD'[datetime.date.today().timetuple().tm_yday%4])\"): A. Files nothing names: remove up to 40 from the report, oldest first, never from the Never touched row below. B. Notes: fold what is still true from finished claude/next-addendum-*.md and plan files into the doc that owns it (docs/ or CLAUDE.md), delete the rest, rebuild claude/INDEX.md with python3 tools/claude_index.py. C. Working agreement: shorten CLAUDE.md and claude/next.md (history and one-off stories go to docs/CHANGES.md or out), under python3 tools/night/rules_check.py; neither file may end the night bigger than it began; never drop a standing rule or a sentence of Tom's. D. Tests: delete a test that has been known_fail for more than 7 nights and tests something that no longer exists; a test of something that still exists goes to a fix card instead. Each bucket ends with python3 tools/smoke.py, the grep for zero references that the purge rule asks for (show the grep in docs/CHANGES.md before deleting anything under tools/ or art/), and a docs/CHANGES.md entry that lists what left. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen, a card in the backlog. Not in this job: voice (report only; tools/clip-audit/unused_voice.py keeps its own rule) and dead code inside engine/ files. Push a build named nightclean-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightclean-MMDD (MM and DD are today's month and day) --base origin/main). If there is nothing to remove tonight, push only the commit night: ran c-night-clean. Your first push is the commit board: start c-night-clean. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "start": true
+  },
+  {
+   "id": "c-night-qa",
+   "title": "Night QA: the test browser plays your check cards",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Standing card. Each night the night shift plays up to 4 of your play cards in a test browser. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "nightly": true,
+   "tag": "nightqa",
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the build nightqa (card c-nightqa). Tom (2026-11-19): his role is not QA and not double-checking Claude's work."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built by nightqa. First night: 4 oldest open play cards sorted; 3 YOURS, 1 left for the next night (see t-gem-bug01play).",
+     "at": "2026-11-21T22:00:00Z"
+    }
+   ],
+   "prompt": {
+    "what": "Checks Tom's play cards each night in a test browser: closes the yes or no ones that pass with pictures, turns failures into fix cards, and marks what only a person can judge.",
+    "before": [
+     "Read the card c-night-qa history; nothing to wait for."
+    ],
+    "model": "Claude Sonnet 5.5 (standing card, steps in claude/night-plan.md section 8)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Take up to 4 open Tom cards (lane tom, ask play, no `machine` field), oldest first, backlog cards included (a parked card moves nothing of Tom's except closing on a pass). For each card read `next`, `first` and the history and sort it. YES OR NO: a fact a test browser can see (a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts). YOURS: how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch or audio. When in doubt it is YOURS. Never close a card about how something looks, sounds or feels. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Put the pictures on branch night under qa/CARD-ID/DATE/ (never merge it). Pass: the card goes to Done with machine {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT-WAS-SEEN\". Fail: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium) and Tom's card waits behind it. YOURS: machine {at, verdict: \"yours\", why} so it is not looked at again; the card stays Tom's and its details show Needs your eyes. Limits, to say plainly on the card Last night: the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never paid runs, never Opus. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Run python3 tools/board_check.py before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "c-bigone25",

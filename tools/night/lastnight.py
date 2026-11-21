@@ -14,6 +14,7 @@ def lastnight(B, key, tests=None):
     nxt = (datetime.date.fromisoformat(key) + datetime.timedelta(days=1)).isoformat()
     days = (key, nxt)
     ran, shipped, closed = [], [], []
+    yours = [c['title'] for c in B['cards'] if (c.get('machine') or {}).get('verdict') == 'yours' and str((c['machine'].get('at') or ''))[:10] in days]
     for e in (night.get('log') or {}).get(key, []):
         c = cards.get(e['id'])
         if not c: ran.append('%s: gone from the board' % e['id']); continue
@@ -35,6 +36,7 @@ def lastnight(B, key, tests=None):
     used = len((night.get('log') or {}).get(key, []))
     secs = [('Ran', ran or ['nothing started']), ('Shipped', shipped or ['nothing']), ('Tests', [tl] if tl else ['no test run yet (it is built by card c-nighttests)']),
             ('Closed for you', closed or ['nothing']), ('Needs you', needs or ['nothing']), ('Starts used', ['%d of %d' % (used, night.get('max', 0))])]
+    if closed or yours: secs.insert(4, ('Night QA limits', ['the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo\'s fold']))
     text = 'Night of %s. ' % key + ' '.join('%s: %s.' % (h, '; '.join(x).rstrip('.')) for h, x in secs)
     news = bool(ran or shipped or closed or needs)
     return {'next': text[:1500], 'sections': secs, 'news': news}

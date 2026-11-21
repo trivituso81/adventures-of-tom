@@ -33,6 +33,8 @@ b['cards'].append({'id': 'c-rescuing', 'tag': 'rescuing', 'lane': 'claude', 'col
                    'rescue': {'at': iso(1), 'n': 1, 'why': 'Quiet', 'url': 'https://claude.ai/code/session_RESC', 'prev': ''}, 'chat': {'url': 'https://claude.ai/code/session_RESC', 'opening': 'rescue'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
 b['cards'].append({'id': 'c-stalled', 'tag': 'stalled', 'lane': 'claude', 'col': 'wait', 'waiting_on': 'tom', 'theme': 'Tools', 'title': 'A stalled card', 'next': 'Waits behind a card for you.', 'blocks': [], 'changed': T, 'created': T,
                    'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
+b['cards'] += [tomcard('t-qa-pass', 'QA passed card', 'Checked.', ask='play', fyi=True, machine={'at': iso(2), 'verdict': 'pass', 'saw': 'The button was on screen in all three sizes.', 'shots': ['https://example.com/a.png']}),
+               tomcard('t-qa-yours', 'QA yours card', 'Look at it.', ask='play', fyi=True, machine={'at': iso(2), 'verdict': 'yours', 'why': 'how it looks and sounds is yours to judge'})]
 b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target], 'play'), tomcard('t-test2', 'Test card two', 'Do the second thing.', ask='pictures', fyi=True),
                tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
                tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
@@ -157,7 +159,14 @@ try:
                 if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: night chip makes the page scroll sideways')
                 V(pg, 'claude'); pg.click('.card[data-id="c-standing"] .t'); pg.wait_for_selector('#sheet')
                 if 'Runs every night' not in pg.inner_text('#sheet') or 'Last run 2026-11-20' not in pg.inner_text('#sheet'): fails.append(f'{name}: standing card detail lacks its last run line')
-                pg.keyboard.press('Escape'); pg.wait_for_timeout(200); V(pg, 'for')
+                pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+                for cid, want in (('t-qa-pass', 'Checked by the night QA'), ('t-qa-yours', 'Needs your eyes: ')):   # nightqa: the two machine lines
+                    V(pg, 'for'); pg.click(f'.card[data-id="{cid}"] .t'); pg.wait_for_selector('#sheet')
+                    sheet = pg.inner_text('#sheet')
+                    if cid == 't-qa-pass' and ('Checked by the night QA' not in sheet or 'The button was on screen' not in sheet or pg.locator('#sheet a:has-text("Picture 1")').count() != 1): fails.append(f'{name}: night QA pass lines missing')
+                    if cid == 't-qa-yours' and ('Needs your eyes' not in sheet or 'looks and sounds' not in sheet): fails.append(f'{name}: night QA yours line missing')
+                    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+                V(pg, 'for')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=(name != 'portrait'))
                 # tabs: one view at a time, For you first
                 V(pg, 'claude')

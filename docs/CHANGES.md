@@ -1,3 +1,9 @@
+## nightqa (2026-11-21): the night QA exists: a standing card that sorts Tom's play cards each night, two detail lines on the board, a rule that stops yes or no checks being handed to him
+
+Card c-nightqa (plan claude/night-plan.md section 8). Added the standing card `c-night-qa` (nightly, tag nightqa, Sonnet 5.5 medium; its prompt holds the sorting steps and the limits), the lines "Checked by the night QA" (with picture links) and "Needs your eyes" in a card's details in `board.html` (cases in `tools/board_test.py`), the Night QA limits line on the Last night card (`tools/night/lastnight.py`; its Closed for you list was already there), and the rule "no yes or no checks for Tom" in CLAUDE.md.
+
+First night, by hand, on the 4 oldest open play cards: 3 sorted YOURS and left open with a reason (t-ch6play, t-alvarezplay, t-stagefollowplay: all are about how a scene or a group of people looks). t-gem-bug01play is a yes or no fact (the fight restarts by itself after a loss) but no browser run was made for it, so nothing was closed and it is the first card for the next night. No test browser pictures were made, so branch `night` has no qa/ folder yet. Tests: `board_check.py` ok; `board_sync_test.py` has 4 failures that also fail on main before this change (R5 replay, rescue attention count, unstick and Last night checks); `board_test.py` passes the new night QA lines and still fails the top-line Queued count by one (live card t-heist1voice, same before this change).
+
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
 
 Card c-ch3lessons, started by Tom by hand before he has played chapter 2. Nothing in the game changed: card c-ch3build builds claude/story-ch03-draft1.md word for word next.
