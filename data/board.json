@@ -21253,7 +21253,7 @@
    "id": "c-qa-coh03",
    "tag": "qa-coh03",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "Big One asks about a folding chair; the spot has a bench",
    "next": "Ready to start. Confirmed: the line is in data/scenes.js ch1AfterBoss and the spot is a 'bench' in data/maps-le.js.",
@@ -21273,8 +21273,17 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-03, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T03:25:37.228Z"
     }
-   ]
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   }
   },
   {
    "id": "c-qa-coh04",
