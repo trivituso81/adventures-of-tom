@@ -1,3 +1,12 @@
+## fix-hollowtrail1-pics (2026-11-20): Hollow wrapper trail 1 remade and reviewed before Tom sees it; trails 2 to 4 need his OK for a different method
+
+Card c-fix-hollowtrail1-pics. Tom on t-hollowtrail1-pics: "they all look like shit. did you even review?"
+- Fact: with the guides of part a (fix-hollowtrail1-picsa), the four pictures were made again (request push, about $0.25, branch `artgen` 00:52 UTC) and Claude looked at each, and at each baked into the game, before handing anything back.
+- Trail 1: passed. Nine wrappers in one line, four on the stone path under the exit board and five up into the clearing; about a third of the old size (the generator drew them a little bigger than the guide); checked in the game in portrait and landscape (not installed: Tom approves).
+- Trails 2, 3 and 4: failed a second time the same way (big wrappers in a block on open dirt; trail 2 none up the top left path). Stop-loss: no third prompt. Recommendation on Tom's card: place those wrappers in code, cut from trail 1's painted wrappers, at the exact spots (`hollow_trail_guide.py` SPOTS), installed by the same bake. Waiting on his answer.
+- No in-game pencil report was filed since 00:29 UTC (`tools/reports.py list`: one open, r-20261120-142626-w74f, item banners, another card).
+- Tests: hollow_trail_test passed; smoke passed apart from board_sync_test R5 and keysecrets_test, which fail the same way on main.
+
 ## clipstuck1 (2026-11-20): a single GENERATE VIDEO press waits for Tom's review; every GitHub-made version has REVIEW on the clip's card
 
 Card c-clipstuck1, on top of clipstuck1a. Tom (16:32): "why are you tricking me into spending money by keeping the button label as asked, waiting when it's approved. and there's no way for me to review the video".

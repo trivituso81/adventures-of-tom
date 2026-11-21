@@ -17435,7 +17435,7 @@
    "lane": "tom",
    "col": "done",
    "ask": "pictures",
-   "next": "Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN > ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2).",
+   "next": "Open ADMIN > ART LIBRARY, Areas tab, group Grump Hollow, and look only at the newest picture of area-hollow-trail1 (made 2026-11-21 00:52). It should show nine small cream wrappers in one line: four on the stone path under THE SQUARE SHOPS board, five going up into the clearing toward the Skeeter. APPROVE it if the size and the line look right, REJECT with a note if not. Do not approve the newest pictures of area-hollow-trail2, 3 or 4: they failed my review. In the note on this card, answer one thing: may I place the wrappers for trails 2, 3 and 4 in code, cut from the painted wrappers of trail 1, at the exact spots (no generator, no cost)?",
    "blocks": [
     "c-hollowtrail2"
    ],
@@ -17475,6 +17475,14 @@
     {
      "d": "2026-11-20",
      "t": "Done by the board: you decided every picture. Approved: none. Rejected: area-hollow-trail1, area-hollow-trail2, area-hollow-trail3, area-hollow-trail4."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude (fix-hollowtrail1-pics) looked at all four first pictures: wrappers about 2.6 tiles wide (the prompt asked for head sized) and trails 2 to 4 a 3 x 3 block. Rewrote the prompts to repaint small wrappers already pasted at the right spots, made the four again (about $0.25) and reviewed them before you: trail 1 is a clean line and installs right in portrait and landscape; trails 2, 3 and 4 came back big and in a block again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Cannot fix without Tom: trails 2, 3 and 4 missed twice the same way (the generator moves and enlarges the wrappers on open dirt; it kept them only where the stone path guides it). A third prompt would waste money. The one thing needed: your OK to place those wrappers in code from trail 1's painted wrappers, at the exact spots."
     }
    ],
    "gen": {
@@ -18050,7 +18058,7 @@
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
-   "next": "You reported a problem on Generate and approve the 4 Hollow wrapper trail paintings. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: they all look like shit. did you even review?",
+   "next": "Shipped as fix-hollowtrail1-pics: trail 1 remade and reviewed; trails 2 to 4 wait on Tom's answer on t-hollowtrail1-pics (place them in code).",
    "blocks": [
     "t-hollowtrail1-pics"
    ],
@@ -18098,6 +18106,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as fix-hollowtrail1-picsa: Grump Hollow wrapper trail prompts redone: small wrappers placed on the right spots, the generator only repaints them"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Result: guides plus new prompts (part a), pictures made and reviewed. Trail 1 passed (line on the path, about a third of the old size, checked in the game portrait and landscape). Trails 2 to 4 failed a second time: stop-loss. Next session: if Tom says yes, composite trail 2 to 4 wrappers in code from the trail 1 picture at hollow_trail_guide.py SPOTS and install through bake_hollow_trail.py."
     }
    ],
    "prompt": {
