@@ -20863,9 +20863,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session started on this card.",
+     "at": "2026-11-21T03:30:00.000Z"
     }
    ],
-   "started_at": "2026-11-21T03:23:33+00:00",
+   "started_at": "2026-11-21T03:30:00.000Z",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukD8oFaGoJktxUZTkgW",
     "opening": "started by START"
