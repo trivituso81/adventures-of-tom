@@ -28129,7 +28129,7 @@
    "id": "c-hitspeed1",
    "tag": "hitspeed1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Hit animations in a fight match the Battle Guide speed",
    "next": "Built as hitspeed1: in a fight one frame may count up to 0.1 s (the Guide's own cap), so getting-hit clips no longer play in slow motion on a slow phone. Tom watches a hit on card t-hitspeed1-try.",
@@ -28148,6 +28148,10 @@
     {
      "d": "2026-11-21",
      "t": "Measured: a hit clip plays exactly as long as the Guide shows it on a fast computer (Rose 2044 ms) but stretches to 1.5x with a slowed CPU, because the game counted at most 0.05 s per frame. The cap is now 0.1 s in a fight. Hands to Tom: t-hitspeed1-try."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as hitspeed1: getting-hit animations in a fight keep real-time speed on a slow phone"
     }
    ],
    "prompt": {
@@ -28159,7 +28163,8 @@
     "effort": "medium (one known change plus a test)",
     "text": "Read CLAUDE.md and card c-hitspeed1 in data/board.json, then finish what its history describes and push build hitspeed1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-hitspeed1-try"
+   "after": "t-hitspeed1-try",
+   "done": "2026-11-21"
   },
   {
    "id": "t-stuck-anim-deedee-dodge-y4m3",
@@ -28750,6 +28755,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
+   "title": "Hit animations in a fight match the Battle Guide speed",
+   "first": "2026-11-21T12:14:08-08:00",
+   "last": "2026-11-21T12:27:43-08:00",
+   "tags": [
+    "hitspeed1"
+   ],
+   "cards": [
+    "c-hitspeed1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T11:54:20-08:00",
@@ -28785,16 +28802,6 @@
    ],
    "cards": [
     "c-dash1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
-   "title": "Hit animations in a fight match the Battle Guide speed",
-   "first": "2026-11-21T12:14:08-08:00",
-   "last": "2026-11-21T12:14:08-08:00",
-   "tags": [],
-   "cards": [
-    "c-hitspeed1"
    ]
   },
   {
@@ -32433,8 +32440,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8cb18f16b5f202c83d0ffc9917338604905c943b",
- "synced_at": "2026-11-21T20:26:04+00:00",
+ "synced": "3916577f8b5ca58faff7a97062c8fbce555d3d42",
+ "synced_at": "2026-11-21T20:28:19+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
