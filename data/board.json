@@ -24474,7 +24474,7 @@
    "id": "c-anim-tom-loungepass-ding",
    "tag": "anim-tom-loungepass-ding",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Ding sound on the Lounge Pass sparkle",
    "next": "Waits on your card Watch Tom's new Lounge Pass Flex. Then it adds a short cartoon ding that plays when the sparkle shows on the card in Lounge Pass Flex.",
@@ -24510,6 +24510,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped build anim-tom-loungepass-ding: sfx ding (data/b3-sfx.js) fires on clip picture 10 of Lounge Pass Flex."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-tom-loungepass-ding: a short ding plays on the sparkle of Tom's Lounge Pass Flex"
     }
    ],
    "prompt": {
@@ -24526,7 +24530,8 @@
     "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
     "opening": "started by START"
    },
-   "after": "t-anim-tom-loungepass-ding-hear"
+   "after": "t-anim-tom-loungepass-ding-hear",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-tom-dodge-ner3",
@@ -28238,9 +28243,52 @@
    "anim": {
     "id": "move:lounge_pass_flex"
    }
+  },
+  {
+   "id": "c-reports-9",
+   "tag": "reports-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-122202-loak. First note: the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching ",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
+   "title": "Ding sound on the Lounge Pass sparkle",
+   "first": "2026-11-21T20:15:28Z",
+   "last": "2026-11-21T20:22:36Z",
+   "tags": [
+    "anim-tom-loungepass-ding"
+   ],
+   "cards": [
+    "c-anim-tom-loungepass-ding"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCazpoWKUkqu97U4wN",
    "title": "Fix the report backlog (1 open)",
@@ -28261,16 +28309,6 @@
    "tags": [],
    "cards": [
     "c-nightshift"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
-   "title": "Ding sound on the Lounge Pass sparkle",
-   "first": "2026-11-21T20:15:28Z",
-   "last": "2026-11-21T20:15:28Z",
-   "tags": [],
-   "cards": [
-    "c-anim-tom-loungepass-ding"
    ]
   },
   {
@@ -32287,7 +32325,8 @@
    "r-20261120-185740-5nwp",
    "r-20261120-192030-2df3",
    "r-20261120-192121-ynen",
-   "r-20261121-120404-lwe8"
+   "r-20261121-120404-lwe8",
+   "r-20261121-122202-loak"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -32321,8 +32360,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "55c770eea55909f5cdee6131b811942eee9ddfe8",
- "synced_at": "2026-11-21T20:21:06+00:00",
+ "synced": "49a4eb8d96431db944170245b751e86ba302bed9",
+ "synced_at": "2026-11-21T20:23:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
