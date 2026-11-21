@@ -1,3 +1,9 @@
+## nightgreend (2026-11-21): a Carry-On in Terminal Zero no longer stands inside a bench
+
+Card c-nightgreen, test `terminal_test` (`python3 tools/terminal_test.py`; failed "every monster on reachable floor"). The Carry-On spawn at tile (6,10) is inside the painted blue bench on the left of the terminal (a solid tile no one can walk onto), so a monster stood in furniture. The test was right and the game was wrong.
+- `data/terminal-monsters.js`: that Carry-On spawn moves to (6,8), open floor just above the bench. The other seven spawns are unchanged.
+- `tools/night/tests.json`: `known_fail` removed from `terminal_test`. All checks pass (reachable objects, monsters, wing triggers, exits, Gate Zero return). Look: the first Carry-On in the Terminal now waits above the left bench.
+
 ## hitspeed1 (2026-11-21): getting-hit animations in a fight keep real-time speed on a slow phone
 
 Card c-hitspeed1. Tom (11-21): "the speed of the getting hit animations in the battle guide look good but in the game they are too slow - can they match the guide?"
