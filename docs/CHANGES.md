@@ -1,3 +1,11 @@
+## 2026-11-21 (6): Art Library bake, clip-toad-slam, clip-skeeter-bite, clip-skeeter-whine (`artbake1570`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-toad-slam: clip `toad-slam` cut from art/raw/clips/clip-toad-slam-v3.mp4 (24 pictures a second; video frames 0 to 54, every 2, hit at frame 28; 28 pictures kept; played at 1.5x). toad_slam frames 28 frame px 576 392 rows 72 49 sheet (2310, 1565) in memory mb 14.5 (as a grid 25.3) kb 725 dur ms 1556 kind strike impact ms 778 reach [30.1, 4.6]
+- clip-skeeter-bite: clip `skeeter-bite` cut from art/raw/clips/clip-skeeter-bite-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, hit at frame 14; 37 pictures kept; played at 1.5x). skeeter_bite frames 37 frame px 640 352 rows 80 44 sheet (2314, 2532) in memory mb 23.4 (as a grid 33.3) kb 951 dur ms 2056 kind strike impact ms 389 reach [33.2, 20.9]
+- clip-skeeter-whine: clip `skeeter-whine` cut from art/raw/clips/clip-skeeter-whine-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, state; 37 pictures kept; played at 1.5x). skeeter_whine frames 37 frame px 544 376 rows 68 47 sheet (2455, 2415) in memory mb 23.7 (as a grid 30.3) kb 957 dur ms 2056 kind state impact ms 0 reach [22.2, 21.0]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## artgen3 (2026-11-21): a second button on a pictures card approves what passes QA for you
 
 - The board's pictures card has Generate and auto-approve what passes QA (`gen.mode: "auto"`, workflow input `auto`, `artgen.py --auto`) with the rule in plain words above it.
