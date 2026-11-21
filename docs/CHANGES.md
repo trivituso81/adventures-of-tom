@@ -1,3 +1,8 @@
+## reports-2026-11-21 (2026-11-21): the Hollow's toad is drawn in front of the foliage, not behind it
+
+Report r-20261121-120404-lwe8, Tom: "the large toads in the upper left corner should not be behind the cutout in this case".
+- `engine/world.js` (`placeMonsters`): the toad in Grump Hollow gets `plateTop`, so the painted foliage cutout no longer pulls over it (same flag the Mudling used on the baking island).
+- Looked at: Grump Hollow in landscape after the change, the toad sits clear of the leaves. Not looked at: the toad while it wanders to other tiles.
 ## nightgreenb (2026-11-21): the service worker test reads the game's live tag instead of the old ?v=size1
 
 Card c-nightgreen, test `sw_test` (checks 3 and 4a failed). The test replaced `data/monsters.js?v=size1` in a copy of index.html, but the game's tag for that file is now `qa-coh02`, so the replace matched nothing, the "bumped tag" page never asked for a new file, and 4a and 4b failed (3 passed on a rerun). The worker was right; the test was stale.

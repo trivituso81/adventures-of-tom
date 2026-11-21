@@ -145,6 +145,7 @@ function placeMonsters(map,spots) {
     const d=MONSTERS[id];
     const mon=actor(d.name,x,y,'moss',[]);
     if(d.owScale) mon.mscale=d.owScale;   // a monster drawn smaller on the map (Acorn Agent)
+    if(map.id==='hollow'&&id==='toad') mon.plateTop=true;   // r-20261121-120404-lwe8: the Hollow's toad sits under the painted foliage; it is drawn in front of the cutout, not behind it
     mon.monster=id; mon.roam=0; mon.tier=0; mon.maxHp=d.hp; mon.defeatedUntil=0;
     mon.spot=id+'@'+x+','+y;   // stable name for this placed monster, used by saves (monstersFallenSave)
     map.npcs.push(mon);

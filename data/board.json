@@ -28010,7 +28010,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-120404-lwe8. First note: the large toads in the upper left corner should not be behind the cutout in this case",
+   "next": "Fixed r-20261121-120404-lwe8: the Hollow toad is drawn in front of the foliage. Look at Grump Hollow, upper left, near the bench.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -28041,12 +28041,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed r-20261121-120404-lwe8 (toad behind the cutout): the Hollow toad now draws in front of it. Build reports-2026-11-21."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-21T20:14:12+00:00"
+   "started_at": "2026-11-21T20:14:12+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-hitspeed1",
