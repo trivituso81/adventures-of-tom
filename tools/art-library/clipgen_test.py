@@ -138,12 +138,13 @@ def generation():
             ok(e.get('status') == 'approved' and v.get('file', '').startswith('art/raw/clips/%s-v' % i) and v['file'].endswith('.mp4') and v.get('marks'), '%s approved with marks %s' % (i, v.get('marks')))
             show = sh('git', '--git-dir', remote, 'cat-file', '-e', 'main:' + v['file']); ok(show.returncode == 0, '%s: the video file is on main' % i)
             ok(set(v) >= {'n', 'file', 'date', 'from', 'at', 'marks'} and v['n'] == int(v['file'].rsplit('-v', 1)[1][:-4]) - 1, '%s: version record has n, file, date, from, at, marks (n one below the file number)' % i)
+        GIVE_REV = E['clip-tom-give'].get('promptRev') or 0   # the video is kept under the entry's own promptRev (clipgen.py), which moves when its prompt is rewritten
         mk = lambda i: E[i]['versions'][-1]['marks']
         ok(set(mk('clip-tom-loungepass')) == {'first', 'hit', 'last'} and 1.2 < mk('clip-tom-loungepass')['hit'] < 1.8, 'a strike has first, hit and last, the hit near the limb\'s full reach')
         ok(set(mk('clip-tom-cast')) == {'first', 'last'} and set(mk('clip-grump-idle')) == {'first', 'last'}, 'a state and a loop have first and last only')
         ok(E['clip-tom-give'].get('status') == 'draft' and not E['clip-tom-give'].get('versions'), 'the video that never moves is NOT approved')
         rep = json.load(open(out + '/clipgen-report.json'))
-        ok(rep['still'] == ['clip-tom-give'] and os.path.exists(out + '/videos/clip-tom-give-rev0.mp4'), 'it is listed for Tom and the paid video is kept')
+        ok(rep['still'] == ['clip-tom-give'] and os.path.exists(out + '/videos/clip-tom-give-rev%d.mp4' % GIVE_REV), 'it is listed for Tom and the paid video is kept')
         ok([b['id'] for b in rep['blocked']] == ['clip-grace-squeeze'] and rep['redoWaiting'] == ['clip-mudling-bump'], 'blocked and waiting clips are listed, not made')
         ok(E['clip-mudling-bump']['status'] == 'rejected' and E['clip-grace-squeeze']['status'] == 'draft', 'those two are untouched on main')
         ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-tom-cast', 'clip-tom-loungepass'] and abs(rep['spent'] - (.07 * 4 + .25)) < .005, 'report: 4 approved, spent about $%.2f' % rep['spent'])
@@ -156,8 +157,8 @@ def generation():
         ok(len(sends2) == before, 'a second run sends nothing new (the held video is used again): %d' % len(sends2))
         ok('hardly moves' in r.stdout, 'the video that never moves is still listed')
         # a request sent and not finished is picked up again with no new request
-        st = json.load(open(out + '/state.json')); st['held'].pop('clip-tom-give'); st['pending']['clip-tom-give'] = {'rid': 'req1', 'rev': 0, 'cost': .07, 't': time.time()}
-        json.dump(st, open(out + '/state.json', 'w')); os.remove(out + '/videos/clip-tom-give-rev0.mp4')
+        st = json.load(open(out + '/state.json')); st['held'].pop('clip-tom-give'); st['pending']['clip-tom-give'] = {'rid': 'req1', 'rev': GIVE_REV, 'cost': .07, 't': time.time()}
+        json.dump(st, open(out + '/state.json', 'w')); os.remove(out + '/videos/clip-tom-give-rev%d.mp4' % GIVE_REV)
         r = run_gen(work, out, port); sends3 = [x for x in stub_log(port) if x.get('xai') == '/v1/videos/generations']
         ok(len(sends3) == before and 'video in' in r.stdout, 'a pending request is fetched again with no new request or charge')
         # a clean run on a fresh state after Tom\'s redo: the entry goes to the queue only when its prompt was rewritten
@@ -230,17 +231,17 @@ def approve_on_moved_main(remote, work):
     other = TMP + '/other'; sh('git', 'clone', '-q', remote, other)
     doc = json.load(open(other + '/data/art-prompts.json', encoding='utf-8'))
     for e in doc['entries']:
-        if e['id'] == 'clip-bigone-glare': e['note-from-another-session'] = 'kept'
+        if e['id'] == 'clip-grace-squeeze': e['note-from-another-session'] = 'kept'
     open(other + '/data/art-prompts.json', 'w', encoding='utf-8').write(json.dumps(doc, indent=1, ensure_ascii=False) + '\n')
     open(other + '/docs.txt', 'w').write('hi'); sh('git', '-c', 'user.name=o', '-c', 'user.email=o@o', 'add', '-A', cwd=other); sh('git', '-c', 'user.name=o', '-c', 'user.email=o@o', 'commit', '-q', '-m', 'other', cwd=other); sh('git', 'push', '-q', 'origin', 'main', cwd=other)
     sys.path.insert(0, HERE)
     import clipgen
     repo = clipgen.Repo(work, 'origin')   # work is one commit behind: its main is stale
-    done = repo.approve([{'id': 'clip-bigone-glare', 'video': TMP + '/moving.webm', 'marks': {'first': 0, 'hit': 1.4, 'last': 2.5}, 'prompt': 'p', 'rev': 0}])
+    done = repo.approve([{'id': 'clip-grace-squeeze', 'video': TMP + '/moving.webm', 'marks': {'first': 0, 'hit': 1.4, 'last': 2.5}, 'prompt': 'p', 'rev': 0}])
     d, _ = remote_doc(remote); E = {e['id']: e for e in d['entries']}
-    ok('clip-bigone-glare' in done and E['clip-bigone-glare']['status'] == 'approved' and E['clip-bigone-glare'].get('note-from-another-session') == 'kept', 'an approval on a main that moved keeps the other session\'s change')
+    ok('clip-grace-squeeze' in done and E['clip-grace-squeeze']['status'] == 'approved' and E['clip-grace-squeeze'].get('note-from-another-session') == 'kept', 'an approval on a main that moved keeps the other session\'s change')
     ok(sh('git', '--git-dir', remote, 'cat-file', '-e', 'main:docs.txt').returncode == 0, "and the other session's file")
-    again = repo.approve([{'id': 'clip-bigone-glare', 'video': TMP + '/moving.webm', 'marks': {'first': 0, 'last': 1}, 'prompt': 'p', 'rev': 0}])
+    again = repo.approve([{'id': 'clip-grace-squeeze', 'video': TMP + '/moving.webm', 'marks': {'first': 0, 'last': 1}, 'prompt': 'p', 'rev': 0}])
     ok(again == {}, 'an entry approved meanwhile by someone else is left alone')
 
 if __name__ == '__main__':

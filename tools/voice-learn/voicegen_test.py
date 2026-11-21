@@ -73,7 +73,7 @@ rc, o = run(['--out', out, '--limit', '5', '--dry-run'])
 check('dry run exits 0 and says nothing was sent', rc == 0 and 'nothing was sent' in o, o[-300:])
 check('dry run made no request', len(CALLS) == 0)
 check('dry run logged no spend', len(fx.main_costs(cbare)['usage']) == 1)
-check('dry run counts 258 lines when limit is 0', '258' in run(['--out', out, '--limit', '0', '--dry-run'])[1])
+check('dry run counts every line with no clip when limit is 0', 'lines to make: %d;' % len(cands) in run(['--out', out, '--limit', '0', '--dry-run'])[1], len(cands))   # counted from the index, which grows and shrinks as clips are made
 # 2 real run, 5 lines, different voices; one flagged once
 first = None
 rc, o = run(['--out', out, '--limit', '5', '--dry-run'])
@@ -122,11 +122,11 @@ n0 = len(CALLS)
 rc, o = run(['--out', out, '--limit', '1', '--voices', twice['v'], '--retry-failed'])
 check('--retry-failed tries the failed line again', any(c['body']['text'] == twice['s'] for c in CALLS[n0:]), o[-300:])
 # 5 a long first tag is skipped
-j = json.loads(json.dumps(idx)); bad = [i for i in j['items'] if i['t'] == 'd' and i['f'] < 0 and i['v'] == 'tom'][0]
+j = json.loads(json.dumps(idx)); BADV = cands[0]['v']; bad = [i for i in j['items'] if i['t'] == 'd' and i['f'] < 0 and i.get('s') and i['v'] == BADV][0]
 bad['s'] = '[' + 'x' * 120 + '] ' + bad['x']
 alt = tempfile.mkdtemp(prefix='vgroot-'); shutil.copytree(os.path.join(ROOT, 'tools'), alt + '/tools', ignore=shutil.ignore_patterns('shots', 'results', '__pycache__'))
 os.makedirs(alt + '/data'); json.dump(j, open(alt + '/data/voice-index.json', 'w'))
-r2 = subprocess.run([sys.executable, '-I', alt + '/tools/voice-learn/voicegen.py', '--out', tempfile.mkdtemp(), '--limit', '0', '--voices', 'tom', '--dry-run'], capture_output=True, text=True, env=env)
+r2 = subprocess.run([sys.executable, '-I', alt + '/tools/voice-learn/voicegen.py', '--out', tempfile.mkdtemp(), '--limit', '0', '--voices', BADV, '--dry-run'], capture_output=True, text=True, env=env)
 check('a first tag of 100+ characters is skipped and listed', 'first tag 120 characters' in r2.stdout, r2.stdout[-400:] + r2.stderr[-300:])
 # 6 max chars
 out2 = tempfile.mkdtemp(prefix='vg2-')

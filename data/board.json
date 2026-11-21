@@ -29942,7 +29942,7 @@
    "theme": "Tools",
    "title": "Repair three tests that already failed on main",
    "blocks": [],
-   "next": "Repair clipgen_test.py, vision_test.py and the 258-line check in voicegen_test.py, which failed on main before costs2 for data reasons, not code reasons.",
+   "next": "Shipped as staletests1.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDLUieFcPSCe8LNEhP",
     "opening": "board"
@@ -29978,11 +29978,16 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Repaired the three tests (data changed, code was right); build staletests1."
     }
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-21T22:09:22+00:00"
+   "started_at": "2026-11-21T22:09:22+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "svc-voice-gen",

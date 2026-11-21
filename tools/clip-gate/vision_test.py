@@ -6,7 +6,7 @@ import json, os, subprocess, sys, tempfile, time, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 PORT = '8766'
-IDS = 'clip-tom-guard,clip-grump-idle,clip-tom-ko'
+IDS = 'clip-tom-cast,clip-grump-idle,clip-toad-idle'
 fails = []
 
 
@@ -37,7 +37,7 @@ def run(out, extra=(), key='testkey'):
 
 tmp = tempfile.mkdtemp()
 cache = os.path.join(tmp, 'cache')
-s = server({'STUB_NO': 'g_cover'})
+s = server({'STUB_NO': 'p_same'})
 try:
     out = os.path.join(tmp, 'v.json')
     rc, log = run(out, ['--runs', '2'])
@@ -50,9 +50,9 @@ try:
     check('system message sent', st['systems'] == 6, st)
     check('spend counted from cost_in_usd_ticks', abs(d['spent'] - .03) < 1e-6, d['spent'])
     check('tokens logged', d['tokens']['in'] == 18000 and d['tokens']['out'] == 2400, d['tokens'])
-    g = d['clips']['clip-tom-guard']
-    check('guard flagged g_cover by majority', g['flags'] == ['g_cover'], g.get('flags'))
-    check('ko not flagged', d['clips']['clip-tom-ko']['flags'] == [], d['clips']['clip-tom-ko'].get('flags'))
+    g = d['clips']['clip-tom-cast']
+    check('the cast clip flagged p_same by majority', g['flags'] == ['p_same'], g.get('flags'))
+    check('the toad idle not flagged', d['clips']['clip-toad-idle']['flags'] == [], d['clips']['clip-toad-idle'].get('flags'))
     check('monster idle asked the monster questions', set(d['clips']['clip-grump-idle']['verdict']) == {'m_animated', 'm_blink_quick', 'm_pupils', 'm_drops'},
           list(d['clips']['clip-grump-idle']['verdict']))
     rc, log = run(out, ['--runs', '2'])
@@ -71,7 +71,7 @@ s = server({'STUB_FENCE': '1'})
 try:
     out3 = os.path.join(tmp, 'f.json')
     rc, log = run(out3, ['--runs', '1'])
-    check('JSON in a code fence is read', rc == 0 and json.load(open(out3))['clips']['clip-tom-guard']['runs'][0]['answers'], log[-200:])
+    check('JSON in a code fence is read', rc == 0 and json.load(open(out3))['clips']['clip-tom-cast']['runs'][0]['answers'], log[-200:])
 finally:
     s.terminate()
 
@@ -81,14 +81,18 @@ os.chdir(ROOT)
 import hold
 d = json.load(open('data/art-prompts.json'))
 def entry(i): return [x for x in d['entries'] if x['id'] == i][0]
-s = server({'STUB_NO': 'g_cover,n_name'})
+s = server({'STUB_NO': 'p_same'})
 try:
-    e = entry('clip-tom-guard'); v = e['versions'][-1]
+    e = entry('clip-tom-cast'); v = e['versions'][-1]
     r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key=None)
     check('hold: no key runs the measured part only', r['vision_ran'] is False and r['hold'] and 'size' in r['measured'], r)
     r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key='testkey', base='http://127.0.0.1:' + PORT, runs=3)
-    check('hold: a question under hold that answers no holds the clip', 'g_cover' in r['vision'] and r['hold'] and r['vision_ran'], r)
+    check('hold: a question under hold that answers no holds the clip', 'p_same' in r['vision'] and r['hold'] and r['vision_ran'], r)
     check('hold: its spend is counted', abs(r['spent'] - .015) < 1e-6, r['spent'])
+finally:
+    s.terminate()
+s = server({'STUB_NO': 'n_name'})
+try:
     e = entry('clip-tom-give'); v = e['versions'][-1]
     r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key='testkey', base='http://127.0.0.1:' + PORT, runs=3)
     check('hold: an advisory question that answers no does not hold', r['vision'] == [] and not r['hold'] and r['measured'] == [], r)
@@ -97,7 +101,7 @@ try:
 finally:
     s.terminate()
 import gate
-for i in ('clip-tom-guard', 'clip-tom-give', 'clip-bigone-idle', 'clip-log-idle'):   # a calm loop, and (clipch1fix) a whole-stretch loop cut again by art_bake
+for i in ('clip-toad-idle', 'clip-tom-give', 'clip-bigone-idle', 'clip-log-idle'):   # a calm loop, and (clipch1fix) a whole-stretch loop cut again by art_bake
     e = entry(i); v = e['versions'][-1]
     h = gate.header_for(e, v['marks'], v['file'].replace('.json', '.mp4')); b = gate.baked_header(e['clip']['id'])
     check('header_for matches the baked header of ' + i, all(h[k] == b[k] for k in ('first', 'last', 'step', 'speed', 'pace', 'wrap')), (h, b))
@@ -105,7 +109,7 @@ for i in ('clip-tom-guard', 'clip-tom-give', 'clip-bigone-idle', 'clip-log-idle'
 # the hook in tools/art-library/clipgen.py (--gate): a held clip comes back with its reasons; a gate that cannot run holds nothing and says so
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))
 import clipgen
-e = entry('clip-tom-guard'); v = e['versions'][-1]
+e = entry('clip-tom-cast'); v = e['versions'][-1]
 r = clipgen.gate_check(e, v['file'].replace('.json', '.mp4'), v['marks'], None, .08)
 check('clipgen.gate_check holds a clip the measured gate flags', r['hold'] and 'size' in r['measured'], r)
 r = clipgen.gate_check(None, 'no-such.mp4', {}, None, .08)
