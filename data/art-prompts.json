@@ -14409,9 +14409,21 @@
    }
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "5x too big, not a clear trail",
+     "from": "v1",
+     "at": 1795220932221,
+     "srv": "area-hollow-trail3@20261121T002339",
+     "qa": 0.938,
+     "qaFail": [
+      "p2"
+     ]
+    }
+   ],
    "id": "area-hollow-trail3",
    "tab": "Areas",
    "group": "Grump Hollow",
