@@ -25638,7 +25638,7 @@
    "title": "Watch Rose, Victory",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play Victory, then tap All good or Something is wrong (say what you saw).",
@@ -25659,8 +25659,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-rose-victory-vqjc. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:48:23.121Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-rose-give-w5ws",
