@@ -28828,7 +28828,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF43ZogLhQidrKWaTM",
+    "url": "https://claude.ai/code/session_01RXeukGKwJycJ9se7H7h9VD",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.9 Built wanch2)\""
    },
    "history": [
@@ -28860,6 +28860,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "session_01RXeukF43ZogLhQidrKWaTM ended without shipping: the card was started twice, and the first conversation (session_01RXeukGKwJycJ9se7H7h9VD) had already pushed the three jobs and dispatched wan-gen run 44949779174. Nothing paid or changed here; chat link set back to the first conversation."
     }
    ],
    "prompt": {
