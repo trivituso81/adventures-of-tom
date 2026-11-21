@@ -1,3 +1,14 @@
+## fix-itembannerart-pics (2026-11-20): item pictures: only the 18 cells that missed are made again, on 2 small redo sheets
+
+Card c-fix-itembannerart-pics (from t-itembannerart-pics). Tom, after the first 18 item sheets were made: "fix only those that failed".
+
+- Claude looked at the 9 sheets the QA flagged, cell by cell. Real misses (18 items): sheet 3 cell 9 (a person kicking, not a kickball); 6 cell 4 (fur collar, many buttons); 11 cell 11 (a VR headset, QA missed it); 12 cells 6 (a whole frog, not a slicker), 13 (sheep slippers), 15 and 16 (Nike logos); 13 cells 3 (brand text on the watch) and 15 (oval locket, no moon); 17 cells 2 (a butter block), 3 (a real taco, not clay) and 13 (looks like a pastry); 18 cells 1, 2, 5, 7, 14 and 16 (blurred smudges where print was asked as "soft blurred squiggles"). Sheets 4 and 5 had no real miss: QA flagged numerals that belong on a clock, a stopwatch, the Perfect Ten pin and claim ticket No. 7. Sheet 13 cell 6 (a medal without its hole) was kept as close enough.
+- Two new Art Library entries, `prop-item-redo-1` and `prop-item-redo-2` (Props > Item pictures), 9 items each in a 3 x 3 grid (bigger cells). Kept from the first sheets: the whole prompt. Changed: the grid size, the print rule (plain surfaces, "not even blurred", which caused sheet 18's smudges), and each missed item's note only where the miss named it. `REDO` in `tools/art-library/itemart-prompts.js`. The first sheets' prompts are unchanged, so nothing is made again for them.
+- The 7 first sheets with a miss name that cell `-` in their `bake`: `bake_item_sheet.py` skips a `-` cell, so approving a first sheet installs only its good pictures, whichever sheet is approved last. `--grid=3` cuts the redo sheets. Checked on the real sheet 12: 12 pictures cut, the 4 missed cells left out.
+- Card t-itembannerart-pics: done when the 2 redo sheets are approved too; Generate makes only the 2 (about $0.10).
+- No in-game pencil report since the card was made is about item pictures.
+- Tests: `python3 tools/itemart_test.py` (new checks: skipped cells are on exactly one redo sheet, a `-` cell is skipped, a 3 x 3 sheet cuts into 9).
+
 ## fix-hollowtrail-play (2026-11-21): the Grump Hollow wrappers are bigger and stand out from the stones
 
 Tom (t-hollowtrail-play, play): "there are no wrappers visible".

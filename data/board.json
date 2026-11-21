@@ -19721,7 +19721,7 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Open ADMIN > BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji.",
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid.",
    "blocks": [],
    "done_when": {
     "art_approved": [
@@ -19742,7 +19742,9 @@
      "prop-item-15",
      "prop-item-16",
      "prop-item-17",
-     "prop-item-18"
+     "prop-item-18",
+     "prop-item-redo-1",
+     "prop-item-redo-2"
     ]
    },
    "links": [
@@ -19766,9 +19768,11 @@
       "prop-item-15",
       "prop-item-16",
       "prop-item-17",
-      "prop-item-18"
+      "prop-item-18",
+      "prop-item-redo-1",
+      "prop-item-redo-2"
      ],
-     "label": "Item pictures (18 sheets)"
+     "label": "Item pictures (18 sheets and 2 redo sheets)"
     }
    ],
    "created": "2026-11-20",
@@ -19791,6 +19795,11 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: fix only those that failed Sent to Claude as card c-fix-itembannerart-pics; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T02:55:32.311Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-itembannerart-pics: Claude checked the 9 sheets QA flagged. Real misses: sheet 3 cell 9; 6 cell 4; 11 cell 11; 12 cells 6, 13, 15, 16; 13 cells 3, 15; 17 cells 2, 3, 13; 18 cells 1, 2, 5, 7, 14, 16. Sheets 4 and 5 had none (QA flagged numerals that belong on a clock, stopwatch, Perfect Ten pin and ticket No. 7). The 18 missed items are on 2 new redo sheets; the first sheets skip those cells when cut. Sheet 13 cell 6 (medal without the hole) was kept as close enough.",
+     "at": "2026-11-21T03:02:40.000Z"
     }
    ],
    "gen": {
@@ -20415,6 +20424,11 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started in https://claude.ai/code/session_01RXeukGcWDU2BzMyfE8qWxv. No in-game pencil report since 02:55 is about item pictures (the 2 open ones are the taxi scene and the school fence icon). Shipped as fix-itembannerart-pics: 2 redo sheets, skipped cells in the first sheets' cut.",
+     "at": "2026-11-21T03:02:40.000Z"
     }
    ],
    "prompt": {

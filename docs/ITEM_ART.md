@@ -18,6 +18,6 @@ Add the item to `items` as usual, then add its row (id, name, what to paint) at 
 
 ## A miss on one cell
 
-The bake stops when a cell is empty and names the item. For a wrong picture in a cell, make a redo sheet entry holding only the missed items (the pattern of the Dungeon finds EDIT sheets in `dungeonfind-prompts.js`), with a `bake` that names their ids.
+The bake stops when a cell is empty and names the item. For a wrong picture in a cell, add the item to `REDO` in `itemart-prompts.js` (sheet, cell, a note changed only where the miss named it) and run it: the item goes onto a 3 x 3 redo sheet (`prop-item-redo-<n>`, 9 items each, `--grid=3`, plain surfaces with no blurred print), and its first sheet's `bake` names that cell `-`, so the first sheet skips it when cut and the order Tom approves in does not matter. The first sheet's prompt never changes. First used in fix-itembannerart-pics (18 cells on 2 redo sheets).
 
 Tests: `python3 tools/itemart_test.py`, `python3 tools/itembanner_test.py`.

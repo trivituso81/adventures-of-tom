@@ -37,15 +37,21 @@ check('no em or en dash in names or notes', not any(re.search('[—–]', n['nam
 
 # 2. sheet entries
 r = subprocess.run(['node', '-e', "const m=require('./tools/art-library/itemart-prompts.js');console.log(JSON.stringify(m.entries.map(e=>({id:e.id,bake:e.bake,prompt:e.prompt}))))"], cwd=ROOT, capture_output=True, text=True)
-entries = json.loads(r.stdout)
+allent = json.loads(r.stdout)
+entries = [e for e in allent if not e['id'].startswith('prop-item-redo-')]
+redos = [e for e in allent if e['id'].startswith('prop-item-redo-')]
 check('18 sheet entries', len(entries) == 18)
 flat = [i for e in entries for i in e['bake']['args'][1:]]
-check('the sheets hold every item exactly once, in the order of the notes file', flat == ids)
+check('the sheets hold every item in the order of the notes file, a redone cell as -', len(flat) == len(ids) and all(f in ('-', i) for f, i in zip(flat, ids)))
+redone = [i for e in redos for i in e['bake']['args'][1:] if not i.startswith('--')]
+skipped = [i for f, i in zip(flat, ids) if f == '-']
+check('fix-itembannerart-pics: every skipped cell is on exactly one redo sheet, and no other item is', sorted(redone) == sorted(skipped) and len(set(redone)) == len(redone))
+check('redo sheets are 3 x 3 (9 or fewer items, --grid=3), plain surfaces, own source path', all('--grid=3' in e['bake']['args'] and len(e['bake']['args']) <= 11 and '3 columns by 3 rows' in e['prompt'] and 'not even blurred' in e['prompt'] and e['bake']['src'].endswith(e['bake']['args'][0] + '.png') for e in redos))
 check('every sheet has 16 items and its own source path', all(len(e['bake']['args']) == 17 and e['bake']['src'].endswith(e['bake']['args'][0] + '.png') for e in entries))
 check('every prompt lists its items by name', all(all(n['name'] in e['prompt'] for n in notes[k * 16:(k + 1) * 16]) for k, e in enumerate(entries)))
 doc = json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json'), encoding='utf-8'))['entries']
 live = {e['id']: e for e in doc}
-check('data/art-prompts.json carries all 18 entries with the same prompt and bake', all(e['id'] in live and live[e['id']]['prompt'] == e['prompt'] and live[e['id']]['bake'] == e['bake'] and live[e['id']].get('group') == 'Item pictures' for e in entries))
+check('data/art-prompts.json carries all 18 entries and the redo sheets with the same prompt and bake', all(e['id'] in live and live[e['id']]['prompt'] == e['prompt'] and live[e['id']]['bake'] == e['bake'] and live[e['id']].get('group') == 'Item pictures' for e in allent))
 
 # 3. the baker on a made-up sheet
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'sprite-bake'))
@@ -82,6 +88,17 @@ except SystemExit as e:
     stopped = True; msg = str(e)
 check('an empty cell stops the bake and names the item', stopped and 'y05' in msg and 'cell 6' in msg)
 check('nothing from the missed sheet was installed', not any(f.startswith('y') for f in os.listdir(B.OUT)))
+names3 = ['z0', '-', 'z2']
+sheet(os.path.join(tmp, 'item-t3.png'), empty=1)
+try: made3 = B.cut('item-t3', names3); err3 = ''
+except SystemExit as e: made3 = []; err3 = str(e)
+check('a - cell is skipped: no error when it is empty, nothing written for it', made3 == ['z0', 'z2'] and not err3)
+g = Image.new('RGBA', (900, 900), (214, 2, 104, 0)); dg = ImageDraw.Draw(g)
+for k in range(9):
+    r_, c_ = divmod(k, 3); dg.ellipse([c_ * 300 + 90, r_ * 300 + 90, c_ * 300 + 210, r_ * 300 + 210], fill=(40 + k * 20, 120, 90, 255))
+g.save(os.path.join(tmp, 'item-t4.png'))
+made4 = B.cut('item-t4', [f'w{k}' for k in range(9)], grid=3)
+check('a 3 x 3 redo sheet cuts into 9 pictures', len(made4) == 9 and all(Image.open(os.path.join(B.OUT, f'w{k}.webp')).width < 140 for k in range(9)))
 shutil.rmtree(tmp)
 
 # 4. what is installed

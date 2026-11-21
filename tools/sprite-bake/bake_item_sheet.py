@@ -3,8 +3,10 @@
 
 Run by tools/art-library/art_bake.py when Tom approves an item sheet in the Art Library (entries prop-item-01 to prop-item-18, tools/art-library/itemart-prompts.js;
 the entry's `bake` field names this script with args <sheet> <item id>...). The Action keys the generator's magenta to transparent first (`key: 'corner'`).
-By hand:  python3 tools/sprite-bake/bake_item_sheet.py <sheet> <id> [<id> ...] [--check]
-Reads tools/sprite-bake/src/items/<sheet>.png: a 4 x 4 grid of equal cells, filled left to right then top to bottom, one object per cell in the order of the ids.
+By hand:  python3 tools/sprite-bake/bake_item_sheet.py <sheet> <id> [<id> ...] [--grid=N] [--check]
+Reads tools/sprite-bake/src/items/<sheet>.png: a 4 x 4 grid of equal cells (--grid=3 for the 3 x 3 redo sheets), filled left to right then top to bottom, one object per cell
+in the order of the ids. An id of `-` skips that cell: nothing is written for it (fix-itembannerart-pics: a cell that missed is made again on a redo sheet, so the first
+sheet must not overwrite it whichever of the two Tom approves last).
 Writes art/items/<id>.webp (trimmed to the drawn pixels, at most MAXSIDE on the long side) and rewrites the list in data/item-art.js, which the ITEM GAINED banner
 (engine/party-banner.js) reads: an item whose id is not in the list keeps its emoji.
 How a cell is cut: every drawn blob is merged with close neighbours (so a pair of shoes or a cookie with a crumb stays one object), the blob is given to the cell its centre
@@ -43,7 +45,8 @@ def clean(im):
     a[edge, 3] = 0                                                             # pink halo on the outline
     return a
 
-def cut(sheet, ids, check=False):
+def cut(sheet, ids, check=False, grid=4):
+    ROWS = COLS = grid
     src = os.path.join(SRC, sheet + '.png')
     if not os.path.exists(src): raise SystemExit(f'bake_item_sheet: {src} is missing')
     a = clean(Image.open(src))
@@ -61,11 +64,12 @@ def cut(sheet, ids, check=False):
         cells.setdefault(k, []).append(m)
     for k in sorted(cells):
         if k >= len(ids): print(f'bake_item_sheet: WARNING cell {k + 1} holds {len(cells[k])} drawn thing(s) but the list has only {len(ids)} items: ignored')
-    missing = [f'cell {k + 1} ({ids[k]})' for k in range(len(ids)) if k not in cells]
+    missing = [f'cell {k + 1} ({ids[k]})' for k in range(len(ids)) if k not in cells and ids[k] != '-']
     if missing: raise SystemExit(f'bake_item_sheet: {sheet}: nothing drawn in ' + ', '.join(missing) + '. The sheet missed; nothing was installed.')
     os.makedirs(OUT, exist_ok=True)
     made = []
     for k, item in enumerate(ids):
+        if item == '-': continue
         parts = cells[k]
         sizes = [int(p.sum()) for p in parts]
         keep = [p for p, s in zip(parts, sizes) if s >= 0.002 * cell_w * cell_h or s == max(sizes)]   # loose specks are not part of the object
@@ -106,4 +110,5 @@ def sync_list():
 if __name__ == '__main__':
     args = [x for x in sys.argv[1:] if not x.startswith('--')]
     if len(args) < 2: print(__doc__); raise SystemExit(2)
-    cut(args[0], args[1:], '--check' in sys.argv)
+    grid = next((int(x.split('=', 1)[1]) for x in sys.argv[1:] if x.startswith('--grid=')), 4)
+    cut(args[0], args[1:], '--check' in sys.argv, grid)

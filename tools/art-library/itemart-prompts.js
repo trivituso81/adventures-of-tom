@@ -12,8 +12,8 @@ const ITEMS = require('./itemart-items.json');
 const REF_KEY = 'art/grands.webp';   // the installed painting of Deedee and Boppy's house, used for the painting style by the other prop sheets
 const PER = 16;
 
-function sheetPrompt(items) {
-  const n = items.length;
+function sheetPrompt(items, redo) {
+  const n = items.length, g = redo ? 3 : 4;
   const list = items.map((it, i) => `${i + 1}. ${it.name}: ${it.note}`).join('\n');
   return `IMAGE REQUEST: ONE SINGLE ITEM SHEET. Return exactly one image, nothing else.
 
@@ -21,7 +21,7 @@ WHAT THIS IS
 A sheet of ${n} small items for "The Adventures of Tom", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the objects in the list below.
 
 LAYOUT
-- A grid of 4 columns by 4 rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.
+- A grid of ${g} columns by ${g} rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.
 - Exactly ${n} objects, one per cell, each complete and centered, filling about 70 percent of its cell with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge, and nothing overlaps.
 - Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.
 
@@ -33,12 +33,39 @@ STYLE
 RULES
 - Draw exactly the ${n} objects in the list, one per cell, and never substitute, add or skip one. Where a list entry is unusual, draw it as written.
 - Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).
-- No readable words or letters anywhere. Where an object normally carries print, paint soft blurred squiggles instead. A single bold numeral is allowed only where the list asks for it.
+${redo ? '- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.' : '- No readable words or letters anywhere. Where an object normally carries print, paint soft blurred squiggles instead. A single bold numeral is allowed only where the list asks for it.'}
 - No real brands, logos or copyrighted characters.
 
 THE ${n} ITEMS (cell number: name, what to paint)
 ${list}`;
 }
+
+// fix-itembannerart-pics (2026-11-20). Tom on the 18 first sheets: "fix only those that failed". Claude checked the 9 sheets QA flagged cell by cell
+// (QA's numeral flags on clocks, stopwatches, Perfect Ten and No. 7 are not misses: those numbers belong on the object). The cells below missed; each
+// gets a rewritten note (only what the miss named changes) on one of two 3 x 3 redo sheets, and its first sheet's bake skips it (`-`), so the first
+// sheet stays as made and can be approved for its other cells. Sheets 4 and 5 had no real miss.
+const REDO = [
+  [3, 9, 'A big round gold coin with a round kickball (a playground ball with panel seams) stamped in the middle and a beaded rim, standing on its edge at a tilt. No person on the coin.'],
+  [6, 4, 'A purple velvet coat with a smooth shiny satin collar (no fur anywhere) and one single big button, laid flat.'],
+  [11, 11, 'A sleek pair of noise-cancelling over-ear headphones in matte black, a headband joining two big padded ear cups, with a soft glow on the cups.'],
+  [12, 6, 'A bright green rain slicker (an empty raincoat, no animal in it) with webbed pockets and two round frog eyes on top of the hood, laid flat.'],
+  [12, 13, 'A pair of fluffy slippers shaped like puffy clouds in white and pale blue, with puffy tops and no faces.'],
+  [12, 15, 'A light race tempo singlet in teal with a plain white bib pinned on the chest, laid flat. No logo.'],
+  [12, 16, 'A pair of pro racing flats in neon with paper-thin soles and plain sides. No logo or swoosh.'],
+  [13, 3, 'A sporty split-time wristwatch with a bright strap and a plain face with tick marks only.'],
+  [13, 15, 'A silver locket shaped like a crescent moon on a chain, open to show a tiny heart inside.'],
+  [17, 2, 'A small rough bar of pale yellow skate wax, scuffed, with deep grooves rubbed into its top and edges.'],
+  [17, 3, 'A tiny clay sculpture of a taco, handmade pottery with speckled glaze (not real food), with a paperclip stuck in it.'],
+  [17, 13, 'A round flat golden pupusa (a thick stuffed corn tortilla) with melting cheese oozing from its edge and a side of curtido slaw on a small plate.'],
+  [18, 1, 'An oat milk latte in a plain ceramic cup with a heart in the foam.'],
+  [18, 2, 'A gold medal on a bright ribbon with a simple zigzag crack stamped on the gold.'],
+  [18, 5, 'A plain yellow hard hat with a few dents, two tiny scribbles inside the brim.'],
+  [18, 7, 'A small computer chip with a plain dark top, cracked in half, with gold traces along the crack.'],
+  [18, 14, 'A plain white birthday shirt with puffy fuzzy cuffs, laid flat.'],
+  [18, 16, 'A plain gold sparkly birthday sash with a big gold bow, draped.'],
+].map(([sheet, cell, note]) => ({ sheet, cell, note, item: ITEMS[(sheet - 1) * PER + cell - 1] }));
+const SKIP = new Set(REDO.map(r => r.item.id));
+const RPER = 9;
 
 const sheets = [];
 for (let i = 0; i < ITEMS.length; i += PER) sheets.push(ITEMS.slice(i, i + PER));
@@ -47,8 +74,17 @@ const entries = sheets.map((items, i) => ({
   id: `prop-item-${pad(i + 1)}`, tab: 'Props', group: 'Item pictures',
   title: `Item pictures, sheet ${i + 1} of ${sheets.length} (${items.length} items, ${items[0].name} to ${items[items.length - 1].name})`,
   ar: '1:1', refs: [REF_KEY], prompt: sheetPrompt(items),
-  bake: { script: 'bake_item_sheet.py', args: [`item-${pad(i + 1)}`, ...items.map(it => it.id)], src: `tools/sprite-bake/src/items/item-${pad(i + 1)}.png`, key: 'corner' },
+  bake: { script: 'bake_item_sheet.py', args: [`item-${pad(i + 1)}`, ...items.map(it => SKIP.has(it.id) ? '-' : it.id)], src: `tools/sprite-bake/src/items/item-${pad(i + 1)}.png`, key: 'corner' },
 }));
+for (let i = 0; i < REDO.length; i += RPER) {
+  const k = i / RPER + 1, rs = REDO.slice(i, i + RPER), items = rs.map(r => ({ id: r.item.id, name: r.item.name, note: r.note }));
+  entries.push({
+    id: `prop-item-redo-${k}`, tab: 'Props', group: 'Item pictures',
+    title: `Item pictures, redo sheet ${k} (${items.length} items that missed on sheets ${[...new Set(rs.map(r => r.sheet))].join(', ')})`,
+    ar: '1:1', refs: [REF_KEY], prompt: sheetPrompt(items, true),
+    bake: { script: 'bake_item_sheet.py', args: [`item-redo-${k}`, '--grid=3', ...items.map(it => it.id)], src: `tools/sprite-bake/src/items/item-redo-${k}.png`, key: 'corner' },
+  });
+}
 
 if (require.main === module) {
   const fs = require('fs');
@@ -69,4 +105,4 @@ if (require.main === module) {
   fs.writeFileSync(out, JSON.stringify(doc, null, 1) + '\n');
   console.log('item picture entries in', out + ':', entries.length, changed.length ? '\n  ' + changed.join('\n  ') : '(no prompt changes)');
 }
-module.exports = { entries, ITEMS, sheetPrompt, PER };
+module.exports = { entries, ITEMS, sheetPrompt, PER, REDO };

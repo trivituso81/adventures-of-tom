@@ -30020,7 +30020,7 @@
      "fishcoin",
      "lemoncoin",
      "hatcoin",
-     "kickcoin",
+     "-",
      "oldcoin",
      "callsheet",
      "windsock",
@@ -30129,7 +30129,7 @@
      "luckychip",
      "corsage",
      "d_compact",
-     "velvetcoat",
+     "-",
      "pretzels",
      "coldbrew",
      "prioritytag",
@@ -30326,7 +30326,7 @@
      "tom_chm2",
      "tom_tool3",
      "tom_out3",
-     "tom_chm3",
+     "-",
      "grace_tool1",
      "grace_out1",
      "grace_chm1",
@@ -30359,17 +30359,17 @@
      "grace_out3",
      "grace_chm3",
      "rose_tool1",
-     "rose_out1",
+     "-",
      "rose_chm1",
      "rose_tool2",
      "rose_out2",
      "rose_chm2",
      "rose_tool3",
      "rose_out3",
-     "rose_chm3",
+     "-",
      "amy_tool1",
-     "amy_out1",
-     "amy_chm1"
+     "-",
+     "-"
     ],
     "src": "tools/sprite-bake/src/items/item-12.png",
     "key": "corner"
@@ -30394,7 +30394,7 @@
      "item-13",
      "amy_tool2",
      "amy_out2",
-     "amy_chm2",
+     "-",
      "amy_tool3",
      "amy_out3",
      "amy_chm3",
@@ -30406,7 +30406,7 @@
      "deedee_chm2",
      "deedee_tool3",
      "deedee_out3",
-     "deedee_chm3",
+     "-",
      "boppy_tool1"
     ],
     "src": "tools/sprite-bake/src/items/item-13.png",
@@ -30545,8 +30545,8 @@
     "args": [
      "item-17",
      "popcorn",
-     "skatewax",
-     "claytaco",
+     "-",
+     "-",
      "lemons",
      "screenplay",
      "skyjar",
@@ -30556,7 +30556,7 @@
      "fossil",
      "rooftop",
      "praline",
-     "pupusa",
+     "-",
      "sweettea",
      "chalk",
      "kombucha"
@@ -30582,24 +30582,88 @@
     "script": "bake_item_sheet.py",
     "args": [
      "item-18",
-     "oatlatte",
-     "quakemedal",
+     "-",
+     "-",
      "goldtag",
      "greenlight",
-     "hardhat",
+     "-",
      "wardenhelm",
-     "hushchip",
+     "-",
      "present",
      "instax",
      "nsphoto",
      "nsinvites",
      "nspepper",
      "nsbanner",
-     "g_bshirt",
+     "-",
      "g_bpants",
-     "g_bsash"
+     "-"
     ],
     "src": "tools/sprite-bake/src/items/item-18.png",
+    "key": "corner"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-item-redo-1",
+   "tab": "Props",
+   "group": "Item pictures",
+   "title": "Item pictures, redo sheet 1 (9 items that missed on sheets 3, 6, 11, 12, 13)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE ITEM SHEET. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA sheet of 9 small items for \"The Adventures of Tom\", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the objects in the list below.\n\nLAYOUT\n- A grid of 3 columns by 3 rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.\n- Exactly 9 objects, one per cell, each complete and centered, filling about 70 percent of its cell with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge, and nothing overlaps.\n- Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.\n\nSTYLE\n- Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.\n- Three-quarter view from slightly above, unless the list says laid flat or standing. All objects share one lighting direction and one level of detail. Family friendly for children aged 6 and up.\n\nRULES\n- Draw exactly the 9 objects in the list, one per cell, and never substitute, add or skip one. Where a list entry is unusual, draw it as written.\n- Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).\n- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.\n- No real brands, logos or copyrighted characters.\n\nTHE 9 ITEMS (cell number: name, what to paint)\n1. Kickball Coin: A big round gold coin with a round kickball (a playground ball with panel seams) stamped in the middle and a beaded rim, standing on its edge at a tilt. No person on the coin.\n2. Moon Club Velvet Coat: A purple velvet coat with a smooth shiny satin collar (no fur anywhere) and one single big button, laid flat.\n3. Noise-Cancelling Cans: A sleek pair of noise-cancelling over-ear headphones in matte black, a headband joining two big padded ear cups, with a soft glow on the cups.\n4. Frog Slicker Deluxe: A bright green rain slicker (an empty raincoat, no animal in it) with webbed pockets and two round frog eyes on top of the hood, laid flat.\n5. Cloud Slippers: A pair of fluffy slippers shaped like puffy clouds in white and pale blue, with puffy tops and no faces.\n6. Tempo Singlet: A light race tempo singlet in teal with a plain white bib pinned on the chest, laid flat. No logo.\n7. Pro Racing Flats: A pair of pro racing flats in neon with paper-thin soles and plain sides. No logo or swoosh.\n8. Split-Time Watch: A sporty split-time wristwatch with a bright strap and a plain face with tick marks only.\n9. Moon Locket: A silver locket shaped like a crescent moon on a chain, open to show a tiny heart inside.",
+   "bake": {
+    "script": "bake_item_sheet.py",
+    "args": [
+     "item-redo-1",
+     "--grid=3",
+     "kickcoin",
+     "velvetcoat",
+     "tom_chm3",
+     "rose_out1",
+     "rose_chm3",
+     "amy_out1",
+     "amy_chm1",
+     "amy_chm2",
+     "deedee_chm3"
+    ],
+    "src": "tools/sprite-bake/src/items/item-redo-1.png",
+    "key": "corner"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-item-redo-2",
+   "tab": "Props",
+   "group": "Item pictures",
+   "title": "Item pictures, redo sheet 2 (9 items that missed on sheets 17, 18)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE ITEM SHEET. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA sheet of 9 small items for \"The Adventures of Tom\", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the objects in the list below.\n\nLAYOUT\n- A grid of 3 columns by 3 rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.\n- Exactly 9 objects, one per cell, each complete and centered, filling about 70 percent of its cell with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge, and nothing overlaps.\n- Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.\n\nSTYLE\n- Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.\n- Three-quarter view from slightly above, unless the list says laid flat or standing. All objects share one lighting direction and one level of detail. Family friendly for children aged 6 and up.\n\nRULES\n- Draw exactly the 9 objects in the list, one per cell, and never substitute, add or skip one. Where a list entry is unusual, draw it as written.\n- Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).\n- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.\n- No real brands, logos or copyrighted characters.\n\nTHE 9 ITEMS (cell number: name, what to paint)\n1. Skate Wax: A small rough bar of pale yellow skate wax, scuffed, with deep grooves rubbed into its top and edges.\n2. Tiny Clay Taco: A tiny clay sculpture of a taco, handmade pottery with speckled glaze (not real food), with a paperclip stuck in it.\n3. Pupusa Revuelta: A round flat golden pupusa (a thick stuffed corn tortilla) with melting cheese oozing from its edge and a side of curtido slaw on a small plate.\n4. Oat Milk Latte: An oat milk latte in a plain ceramic cup with a heart in the foam.\n5. Big Shake Medal: A gold medal on a bright ribbon with a simple zigzag crack stamped on the gold.\n6. Hard Hat: A plain yellow hard hat with a few dents, two tiny scribbles inside the brim.\n7. HUSH-9’s Chip: A small computer chip with a plain dark top, cracked in half, with gold traces along the crack.\n8. Fuzzy-Cuff Shirt: A plain white birthday shirt with puffy fuzzy cuffs, laid flat.\n9. Birthday Sash: A plain gold sparkly birthday sash with a big gold bow, draped.",
+   "bake": {
+    "script": "bake_item_sheet.py",
+    "args": [
+     "item-redo-2",
+     "--grid=3",
+     "skatewax",
+     "claytaco",
+     "pupusa",
+     "oatlatte",
+     "quakemedal",
+     "hardhat",
+     "hushchip",
+     "g_bshirt",
+     "g_bsash"
+    ],
+    "src": "tools/sprite-bake/src/items/item-redo-2.png",
     "key": "corner"
    }
   }
