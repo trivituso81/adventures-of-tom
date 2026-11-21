@@ -30,14 +30,14 @@ with sync_playwright() as pw:
         ev(pg, "()=>playScene(SCENES.ch1Pond,{})")
         ev(pg, "()=>{ window.__adv=setInterval(()=>{ if(window.dialog&&dialog.active&&typeof dialogAdvance==='function') dialogAdvance(); },700); }")
         # the scene runs to the first battle
-        r['first_fight'] = wait_for(pg, "()=>!!(window.B3&&B3.active&&B3.F&&B3.F.foes.map(f=>f.id).join(',')==='bigone')", 200)
+        r['first_fight'] = wait_for(pg, "()=>!!(typeof B3!=='undefined'&&B3.active&&B3.F&&B3.F.foes.map(f=>f.id).join(',')==='bigone')", 200)
         if r['first_fight']:
             pg.wait_for_timeout(1500); pg.screenshot(path=f'{OUT}/{name}-1-first-fight.png')
             ev(pg, "()=>{ B3.F.over='lose'; b3Finish(); }"); pg.wait_for_timeout(400); ev(pg, "()=>b3Pick(0)")
             # Deedee heals and speaks, then the fight must start again with no input from us
             r['deedee_line'] = wait_for(pg, "()=>!!(document.body.innerText||'').includes('Up, up') || !!(window.dialog&&dialog.active)", 30)
             pg.screenshot(path=f'{OUT}/{name}-2-after-loss.png')
-            r['second_fight'] = wait_for(pg, "()=>!!(window.B3&&B3.active&&B3.F&&B3.F.foes.map(f=>f.id).join(',')==='bigone'&&!B3.F.over)", 200)
+            r['second_fight'] = wait_for(pg, "()=>!!(typeof B3!=='undefined'&&B3.active&&B3.F&&B3.F.foes.map(f=>f.id).join(',')==='bigone'&&!B3.F.over)", 200)
             r['hp_full_at_restart'] = ev(pg, "()=>party.every(p=>p.hp>=p.maxHp*0.99)") if r['second_fight'] else None
             if r['second_fight']:
                 pg.wait_for_timeout(1500); pg.screenshot(path=f'{OUT}/{name}-3-second-fight.png')
