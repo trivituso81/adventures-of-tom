@@ -23345,9 +23345,9 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s15. Then CHAPTERS > Chapter 1 and play to the end (the job scene on Rivituso Row), about 30 minutes. Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, is the Big One too long (it is 7.83 rounds at Rank 1, aimed at 5 to 7), do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 1 on the old battle. Stage 17 (c-b3s17) waits on your notes.",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s15. Then CHAPTERS > Chapter 1 and play to the end (the job scene on Rivituso Row), about 30 minutes. Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, is the Big One too long (it is 7.83 rounds at Rank 1, aimed at 5 to 7), do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 1 on the old battle. Stage 17 shipped without waiting for it (c-b3s17, you asked for it directly); your notes still come first in stage 18 (c-b3s18).",
    "blocks": [
-    "c-b3s17"
+    "c-b3s18"
    ],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -23359,6 +23359,10 @@
     {
      "d": "2026-11-21",
      "t": "Created by the b3s15 session: Milestone B, Tom plays chapter 1 on the new battle."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stage 17 was started and shipped before this card was answered (Tom asked for it directly). This card now blocks stage 18 (c-b3s18) with t-milestonec."
     }
    ]
   },
@@ -23368,7 +23372,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on t-milestoneb (Milestone B, your play test of chapter 1). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "next": "Stage 17 is pushed in four parts (b3s17a chapter 2, b3s17b chapter 3, b3s17c chapter 4, b3s17 chapter 5). Chapters 2 to 5 play on the new battle behind ADMIN > Battle system > Story battles (OLD still plays them on battle 2). Open: three new retry lines are unrecorded; the Signature Tool toasts still say WARMTH (item stats). Milestone C is yours (t-milestonec); stage 18 (c-b3s18) waits on it.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -23414,13 +23418,17 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as b3s17c: chapter 4's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Final part (b3s17) shipped: chapter 5 on Battle 3 with Vibe Points and tips; Amy's loss coaching has a Battle 3 second line (unrecorded). Created the Milestone C card t-milestonec and the next Claude card c-b3s18."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
     "opening": "unknown"
    },
-   "after": "nothing for Tom: c-b3s17"
+   "after": "t-milestonec"
   },
   {
    "id": "c-voicepurge221",
@@ -25672,6 +25680,62 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-b3s18",
+   "title": "Battle system stage 18: chapters 6 to 10 and the bonus chapter story switch",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Waits on t-milestonec (Milestone C, your play test of chapters 2 to 5). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "tag": "b3s18",
+   "prompt": {
+    "what": "Stage 18 of the new battle system: chapters 6 to 10 and the bonus chapter's story fights run on Battle 3 behind the same switch, with Vibe Points, new tips and a start to finish test per chapter.",
+    "before": [
+     "Play chapters 2 to 5 on the new battle: card t-milestonec on the board (CHAPTERS > Chapter 2 to Chapter 5), then press All good or Something is wrong on it."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build across several files with the recipe written in stage 17; none of the three Fable conditions holds)",
+    "effort": "high (large: six chapters of scene references and six chapter tests)",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s17.md, then build stage 18 of the new battle system: the story switch for chapters 6 to 10 and the bonus chapter. First read the Milestone C card (t-milestonec) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then, one chapter per push (b3s18a chapter 6, b3s18b chapter 7, b3s18c chapter 8, b3s18d chapter 9, b3s18e chapter 10, b3s18 the bonus chapter), do what stage 17 did: list every battle 2 reference in the chapter's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 17 table before changing it, add the chapter to B3_STORY.chapters, give its fights Vibe Points and Battle 3 tips in data/b3-story.js, make its Tombo toasts and retry lines B3_CH_ON(n)-aware, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select with tools/b3_chapter_lib.py, modeled on tools/ch5_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touch, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s18. Your first push is the commit board: start c-b3s18. When it ships, create the next Milestone card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s17 session as the next card, after Milestone C."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   }
+  },
+  {
+   "id": "t-milestonec",
+   "title": "Milestone C: play chapters 2 to 5 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s17. Then CHAPTERS > Chapter 2, and play each of chapters 2, 3, 4 and 5 to its last scene (about 30 minutes each; Chapter Select lets you jump). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, do the tips on the message line tell you what to do (one per turn, once each), is each boss (The Big Shake, Old Iron-Gill, The Director's Cut, The Red Pen) 5 to 7 rounds, does the kind ending still play after each boss, do the family's moves feel like them. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays these chapters on the old battle. Stage 18 (c-b3s18) waits on your notes.",
+   "blocks": [
+    "c-b3s18"
+   ],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s17 session: Milestone C, Tom plays chapters 2 to 5 on the new battle."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   }
   }
  ],
  "sessions": [

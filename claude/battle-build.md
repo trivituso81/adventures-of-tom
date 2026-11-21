@@ -55,7 +55,8 @@ Rules for every stage's session:
 | 13 | Bestiary chapters 8 to 10 and the bonus chapter with their bosses: 22 monsters, Old Ironbelly, The Mirrorball, The Last Call, Brain Freeze, 22 formations, Lab fights NEW 45 to NEW 66. Pushed in four parts (`b3s13a` chapter 8, `b3s13b` chapter 9, `b3s13c` chapter 10, `b3s13` the bonus). New seams: strip kind `shieldOrBuff`, targets `frontAllies`, `firstTarget` and `lowestOtherAlly`, act condition `allyHurt`, 23 statuses | Pushed 2026-11-20 | `b3s13` | Nothing is asked. |
 | 14 | Balance pass on Part 1 (data only), plus the Rank 2 and Rank 5 follow-up | Pushed 2026-11-20 | `b3s14`, `b3s14b` | Nothing is asked. |
 | 15 | Story switch, chapter 1: ADMIN switch (OLD, BY CHAPTER, NEW), chapter 1's fights on Battle 3, level and Vibe Point migration, Ruckus as a save field, Vibe Points and a victory card, late joiners' loadouts on recruit, new tips, no Warmth in chapter 1 | Pushed 2026-11-21 | `b3s15` | Milestone B: Chapter Select > Chapter 1, play it on the new battle (about 30 minutes). |
-| 16 to 23 | See architecture section 5 | Not started | | |
+| 17 | Story switch, chapters 2 to 5: chapters 2 to 5's 16 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 16 fights, the kind flag on a boss win, one chapter test each | Pushed 2026-11-21 | `b3s17a`, `b3s17b`, `b3s17c`, `b3s17` | Milestone C: play chapters 2 to 5 (card t-milestonec). |
+| 16, 18 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
 
 ## Stage 15 results (facts)
 
@@ -65,6 +66,25 @@ Rules for every stage's session:
 | Tests | `node tools/b3-sim.js check` CHECKS 2205, FAILS []; `tools/b3_story_test.py` 52 ok; `tools/ch1_b3_test.py` both layouts, no page errors; `b3_test.py s4` passes after one stale expectation was updated; smoke fails only `board_sync_test` R5 (known, unrelated). |
 | Balance | New save at Rank 1: the plain player takes 7.83 rounds for the Big One (Rank 2: 5.78). Target 5 to 7. Left as is. |
 | XP | Clearing the Hollow pays 250 XP (2.5 levels); no number changed. |
+
+## Stage 17 results (facts)
+
+| Item | Result |
+|---|---|
+| Built | `B3_STORY.chapters=[1,2,3,4,5]`, tips for 16 fights, one new fight row (`smoglet2`), `kind:<boss>` set on a boss win from chapter 2 on, `B3_CH_ON(n)`, three Battle 3 retry lines. `docs/BATTLE3.md` "What stage 17 holds" (reference table, what it builds, tests), `docs/handoff/b3s17.md`, `claude/next-addendum-b3s17.md`. |
+| Tests | `node tools/b3-sim.js check` CHECKS 2668, FAILS []; `tools/ch2_b3_test.py` to `ch5_b3_test.py` in both layouts, no page errors, every fight on Battle 3, no Warmth words, tips once each, Vibe Points paid; `tools/b3_story_test.py` passes (one step flaked after a long run, passes alone); `unused_voice.py` 0 on all checks; smoke fails only `board_sync_test` R5 (known). |
+| Vibe Points | Main Vibe Points per chapter on the required path: chapter 2 is 60, chapter 3 54, chapter 4 50, chapter 5 66 (the pocket Vibe earns half). |
+| Not looked at | The chapter 2 to 5 fights as Tom plays them: Milestone C. |
+
+## Calls made in stage 17 that Tom has not confirmed
+
+| Call | Why | Undo |
+|---|---|---|
+| `b3sEnd` sets `kind:<boss>` on every boss win from chapter 2 on | Chapters 3 to 5's after-boss scenes branch on that flag and Battle 3 has no Warmth bar to set it; this matches the rule that kindness plays after a boss reaches 0 HP. Chapter 1 left as Milestone B has it | Delete the `kind:` line in `b3sEnd` (the plain ending then plays) |
+| The five "New Tombo" toasts of chapters 2 to 5 are skipped under Battle 3; the Tombo flags stay | No Tombo row exists to point at | Stage 16 brings Tombos back as skins |
+| Three loss-retry coaching lines (Boppy ch3, TNB ch4, Amy ch5) have a Battle 3 second line | The old lines name Tombos and Warmth-style kindness moves that do not exist on Battle 3 | The `else` branch is the old line; remove the `if` |
+| The Signature Tool toasts ("WARMTH +7", "WARMTH +6") are left alone | They are item stats shown in the menu, not the battle | A later item pass |
+| Stage 16 stays skipped; Milestone C is a play test of chapters 2 to 5, not a Move Lab review | Stage 16 asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions | Make a stage 16 card |
 
 ## Calls made in stage 15 that Tom has not confirmed
 
@@ -366,18 +386,18 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 17)
+## Next conversation (stage 18)
 
-Follows `claude/handoff-rules.md`. Facts for stage 15 are in `claude/next-addendum-b3s15.md` and `docs/handoff/b3s15.md`; where they and this file differ, they win until stage 17 folds them in. Stage 16 (Tombo skins) is skipped on purpose for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions. A stage 16 card can be made when Tom wants it.
+Follows `claude/handoff-rules.md`. Facts for stage 17 are in `claude/next-addendum-b3s17.md` and `docs/handoff/b3s17.md`; where they and this file differ, they win until stage 18 folds them in. Stage 16 (Tombo skins) is skipped on purpose for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions. A stage 16 card can be made when Tom wants it.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 17: chapters 2 to 5's story fights on Battle 3 behind the same switch, with VP, tips and a chapter test each. Board card c-b3s17. |
-| 2 | Before you paste | Play chapter 1 on the new battle (Milestone B, card t-milestoneb on the board) and send your notes. |
-| 3 | Model | Claude Sonnet 5.5 (row C: a build across several files with the steps not yet written; none of the three Fable conditions holds). |
-| 4 | Effort level | High (large: four chapters of scene references and four chapter tests). |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s15.md, then build stage 17 of the new battle system: the story switch for chapters 2 to 5. First read the Milestone B card (t-milestoneb) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then list every battle 2 reference in chapters 2 to 5's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 15 table, and replace only those. Then, following docs/handoff/b3s15.md: add chapters 2 to 5 to B3_STORY.chapters one chapter at a time (b3s17a chapter 2, b3s17b chapter 3, b3s17c chapter 4, b3s17 chapter 5), give each chapter's fights Vibe Points and rewritten Battle 3 tips in data/b3-story.js, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select, modeled on tools/ch1_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touched and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s17. Your first push is the commit board: start c-b3s17. When it ships, create the Milestone C card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo).` |
+| 1 | What it will do | Builds stage 18: chapters 6 to 10 and the bonus chapter's story fights on Battle 3 behind the same switch, with VP, tips and a chapter test each. Board card c-b3s18. |
+| 2 | Before you paste | Play chapters 2 to 5 on the new battle (Milestone C, card t-milestonec on the board) and press All good or Something is wrong on it. |
+| 3 | Model | Claude Sonnet 5.5 (row C: a build across several files, the recipe written in stage 17; none of the three Fable conditions holds). |
+| 4 | Effort level | High (large: six chapters of scene references and six chapter tests). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s17.md, then build stage 18 of the new battle system: the story switch for chapters 6 to 10 and the bonus chapter. First read the Milestone C card (t-milestonec) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then, one chapter per push (b3s18a chapter 6, b3s18b chapter 7, b3s18c chapter 8, b3s18d chapter 9, b3s18e chapter 10, b3s18 the bonus chapter), do what stage 17 did: list every battle 2 reference in the chapter's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 17 table before changing it, add the chapter to B3_STORY.chapters, give its fights Vibe Points and Battle 3 tips in data/b3-story.js, make its Tombo toasts and retry lines B3_CH_ON(n)-aware, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select with tools/b3_chapter_lib.py, modeled on tools/ch5_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touch, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s18. Your first push is the commit board: start c-b3s18. When it ships, create the next Milestone card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo).` |
 
-If a session fails stage 17 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 18 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
 Each stage ends by updating the stage board above and writing `docs/handoff/<tag>.md` in the repo.

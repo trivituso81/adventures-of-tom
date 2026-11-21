@@ -1928,7 +1928,7 @@ SCENES.ch5Arrive=[
   {trace:'amy-coffee'}, {hearts:'tom'},
   {flag:'tombo:amy1'},
   {party:{lock:['tom','grace','rose','amy']}},
-  {toast:'New Tombo: I Called It! (Tom + Amy). In battle, it is inside ▲ ATTACK.',time:3.5},
+  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: I Called It! (Tom + Amy). In battle, it is inside ▲ ATTACK.',time:3.5}],else:[]},
   {talk:'Rose',lines:["Mom. Mom. Are we going to SCHOOL? At NIGHT? That's the best thing that ever happened."]},
   {talk:'Amy',lines:["Everybody is coming. I have a clipboard, and I'm not afraid to use it."]},
   {talk:'Tom',lines:["And I have a binder! I'm bound to be useful."]},
@@ -2006,7 +2006,7 @@ SCENES.ch5Field=[
   {talk:'Grace',lines:["Round hole! It's right under the sneaker. I'm not touching it, Mom. I'm LOOKING."]},
   {pose:'tom'}, {show:'grace'}, {place:'grace',at:[18,8],dir:'down'},
   {flag:'tombo:grace2'},   // Uncle Spotter Toss unlocks here: Tom lifts Grace to look (chapter 5)
-  {toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2},
+  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2}],else:[]},
   {talk:'Tom',lines:["And there's going to be a burnt flashbulb close by."]},
   {walk:'tom',to:[[19,9]],speed:.2}, {pose:'tom',f:'c4t_bulb',mid:'tom'}, {call:()=>sfx.pickup()},   // jykk: Tom holds up the bulb
   {talk:'Tom',lines:["Second base."]},
@@ -2160,7 +2160,9 @@ SCENES.ch5Boss=[
   {battle:'redpen',tut:'redpen'},
   {if:()=>flag('battle:redpen')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:["Up. Everybody. Walk it off.","Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice.","If we say it three times, I think it'll calm down."]},
+    {if:()=>B3_CH_ON(5),then:[
+      {talk:'Amy',lines:["Up. Everybody. Walk it off.","Tom, when it winds up SEE ME, step in front of them. When it puts its red pen up, mix it up: two of us, two different moves, in the same round.","Then we tell it that its handwriting is nice."]}],else:[
+      {talk:'Amy',lines:["Up. Everybody. Walk it off.","Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice.","If we say it three times, I think it'll calm down."]}]},
     {toast:'Face The Red Pen and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 9. After the boss (won in the scene, or on a retry with A): the pen gives Amy its gold star. Conference night.

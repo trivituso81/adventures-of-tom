@@ -194,6 +194,28 @@ Fact: every place chapters 2 to 5's scenes and map monsters touch battle 2. Line
 
 Shares stage 17 does not touch: chapters 6 to 20 (`ch6` onward, `data/ch20-battle.js`, `engine/benchcall.js`), Battle Lab, and every battle 2 file. Under OLD chapters 2 to 5 play exactly as before.
 
+### What stage 17 builds (builds `b3s17a` chapter 2, `b3s17b` chapter 3, `b3s17c` chapter 4, `b3s17` chapter 5)
+
+| Part | What it does |
+|---|---|
+| Switch | `B3_STORY.chapters=[1,2,3,4,5]` (`data/b3-story.js`). BY CHAPTER plays chapters 1 to 5 on Battle 3, OLD plays them all on battle 2 on the same save, NEW is unchanged. `B3_CH_ON(n)` in `data/scenes.js` (was `B3_CH1_ON`) asks `b3sChapterOn(n)`. |
+| Fights | The 16 scripted story fights and every map monster of chapters 2 to 5 already had formations (stage 11 and 12). One new row: `smoglet2` (two Smoglets, the chapter 2 lawn fight). Vibe Points per fight are the bestiary's: chapter 2 is 10 and 30 (boss), chapter 3 9 and 27, chapter 4 8 and 26, chapter 5 12 and 30. On the required path that is 60, 54, 50 and 66 Main Vibe Points per chapter. |
+| Tips | `B3_STORY.tips`: one tip per family turn, once each, for 16 fights (`ch2lawn`, `ch2flurry`, `ch2coyote`, `bigshake`, `ch3sock`, `ch3tangle`, `ch3snag`, `irongill`, `ch4crab`, `ch4clapper`, `ch4moth`, `directorscut`, `ch5bell`, `ch5glue`, `ch5dodge`, `redpen`). They name Pet Peeves, Resists, the wind-up on screen and the answer to it (shield, interrupt, Break, Suite Door Slide, strip a buff, a Mix). No Warmth, HEART or Tombo word in any tip (checked by `tools/b3-check-s17.js`). Tips show only when the cross menu opens, never under `B3.cfg.auto`. |
+| Kind ending | Battle 3 has no Warmth bar, so `b3sEnd` sets `kind:<boss>` on a boss win from chapter 2 on (`engine/b3-story.js`). Chapters 3 to 5's after-boss scenes and `bossKind` (`engine/boss-finale.js`) read it, so the kind ending plays as under battle 2. Chapter 1 is unchanged (Milestone B). |
+| Tombo toasts | The five "New Tombo" toasts of chapters 2 to 5 show under OLD only. The Tombo flags stay. Tombos return as skins in stage 16 (not built). |
+| Scene lines | Three loss-retry coaching lines have a Battle 3 version under `B3_CH_ON(n)`: Boppy (chapter 3), TNB (chapter 4), Amy (chapter 5). The first line of each is the old text, so its recorded clip still plays. The new lines are not recorded: they play by speech synthesis and list under No clip yet in the Voice Library. OLD keeps the old lines. |
+| Left alone | The Signature Tool toasts ("WARMTH +7", "WARMTH +6") are item stats. `bossFrame('bigshake','calm')` is a painted pose in a scene. |
+
+### Stage 17 tests and numbers
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS 2668, FAILS [] (2205 before stage 17). `tools/b3-check-s17.js`: chapter list, every scripted fight has a formation and tips, every tips key is used, VP per chapter, tips use no battle 2 word, no em dash, at most 240 characters, Tombo toasts gated, the kind flag line exists. |
+| Chapter tests | `tools/ch2_b3_test.py` to `tools/ch5_b3_test.py`, each from the Chapter Select jump to the chapter's last scene, portrait and landscape (`LAYOUT=landscape`), helpers in `tools/b3_chapter_lib.py`. Per fight: it ran on Battle 3, the victory card showed, no Warmth, WARMTH or HEART text on the fight screen, the fight's tips showed once each, Tom's Vibe Points equal the fight's VP plus half; per boss: `kind:<boss>` is set. Each run takes 8 to 14 minutes. |
+| `tools/b3_story_test.py` | Expectations moved to chapter 6 for "not switched yet" (pool 675, a 450 and 225 split, level floor 14 at chapter 6). One step ("a save made on Battle 3 loads with the switch on Old") failed twice after a long run (the chapter 1 scene fight had not started after 30 seconds, an intro card was up) and passed on every run on its own. |
+| `unused_voice.py` | 0 on all checks after each part. |
+| Smoke | Fails only `board_sync_test` R5 (known, not from this stage). |
+
 ## What stage 9b holds, and what waits
 
 | In (build `b3s9b`) | Waits for |

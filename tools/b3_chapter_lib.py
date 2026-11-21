@@ -36,6 +36,7 @@ def win(tag):
     """Auto-play the fight on screen. Returns what happened (ended, card seen, Battle 3, Warmth words seen, tips shown)."""
     pg.wait_for_timeout(2500); snap(tag+'-battle-start')
     before=vpTotal(); info=pg.evaluate("()=>({foes:B3.F?B3.F.foes.map(f=>f.id):[],party:B3.F?B3.F.party.map(p=>p.id):[],v3:!!battle.v3,tut:(typeof B3S!=='undefined'&&B3S.tut)?B3S.tut.key:null,vp:(typeof B3S!=='undefined'&&B3S.fight)?B3S.fight.plan.vp:null})")
+    # (any open menu is played, not only the cross: Amy's Burpee Blitz opens a second menu for its mini turn)
     # not B3.cfg.auto: the fight opens each family turn as the screen does (so the turn's tip shows), and the test then plays the simple player's move
     carded=False; words=False; b2seen=False
     for i in range(400):
@@ -46,7 +47,7 @@ def win(tag):
             if not carded: pg.wait_for_timeout(1500); snap(tag+'-card'); carded=True
             pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
         if st['ui']=='done': pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(1500); continue
-        if st['ui']=='cross': pg.evaluate("()=>{ if(B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
+        if st['ui'] not in ('busy','done'): pg.evaluate("()=>{ if(B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
         if i==40: snap(tag+'-battle-mid')
         pg.wait_for_timeout(1000)
     ended=not pg.evaluate("()=>battle.active")

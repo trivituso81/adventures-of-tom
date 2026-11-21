@@ -9,7 +9,7 @@ module.exports=function(T) {
   const {G,ok}=T;
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),J=x=>JSON.stringify(x);
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
-  const EXPECT=[1,2,3,4];   // the chapters on the Battle 3 list at this build; each stage 17 part adds one
+  const EXPECT=[1,2,3,4,5];   // the chapters on the Battle 3 list at this build; each stage 17 part adds one
   ok(J(S.chapters)===J(EXPECT),'the Battle 3 story list is '+J(EXPECT)+' (found '+J(S.chapters)+')');
   const scenes=read('data/scenes.js');
   // Chapter of a position in scenes.js: the last `// CHAPTER n:` heading before it.

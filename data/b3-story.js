@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4],
+  chapters:[1,2,3,4,5],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -92,6 +92,25 @@ const B3_STORY={
       {id:'pips',who:'*',text:'The Director’s Cut has 6 Composure pips and can’t stand Razzle or Sizzle. It shrugs off Racket.'},
       {id:'cut',who:'*',text:'CUT! is charging (!!): a stun and a hard push on one person. Tom’s Suite Door Slide takes it, a Break or an interrupt cancels it, and Blind makes it miss.',when:(F)=>F.foes.some(f=>f.charge&&/CUT/.test(f.charge.name))},
       {id:'action',who:'*',text:'ACTION! called Extra Extras and sped everything up 15%. Knock out the Extras, or strip the speed buff.',when:(F)=>F.foes.some(f=>f.st&&f.st.action_speed)}
+    ],
+    // ---- Chapter 5 (stage 17): Tom, Grace, Rose and Amy at the school. ----
+    ch5bell:[
+      {id:'bell',who:'*',text:'The Tardy Bell stands in the Back row and can’t stand Drench or Racket. It shrugs off Clobber. You’re Late! slows one person and pushes them back on the turn bar.'},
+      {id:'ring',who:'*',text:'First-Bell Ring is charging (!!): it tires everyone, so they wait longer after each move. Shield the family, or interrupt it.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='tardybell')}
+    ],
+    ch5glue:[
+      {id:'glue',who:'*',text:'The Glitter Glue stands in the Back row and can’t stand Drench or Clobber. It shrugs off Razzle, so reach for Drench or Clobber instead.'},
+      {id:'burst',who:'*',text:'Glitter Burst is charging (!!): it hits everyone and blinds one person. A Break can’t cancel it (no pips), so interrupt it or shield the family.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='glitterglue')}
+    ],
+    ch5dodge:[
+      {id:'elite',who:'*',text:'Dodgeball Dread is an Elite: 4 Composure pips, and it can’t stand Racket or Drench. It shrugs off Clobber. Its Gym Bounce dodges 20% of attacks, and a Skill that strips a buff takes it off.'},
+      {id:'sweep',who:'*',text:'Gym-Wall Ricochet is charging (!!) and hits the whole family, so shield everyone or break its pips to cancel it.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='dodgeball')}
+    ],
+    redpen:[
+      {id:'pips',who:'*',text:'The Red Pen has 6 Composure pips and can’t stand Drench or Razzle. It shrugs off Clobber.'},
+      {id:'seeme',who:'*',text:'SEE ME is charging (!!): whoever it circles can only use single-target attacks on the pen, and a hard hit is coming. Tom’s Suite Door Slide takes it, or break its pips.',when:(F)=>F.foes.some(f=>f.charge&&/SEE ME/.test(f.charge.name))},
+      {id:'grading',who:'*',text:'Strict Grading: 30% less damage taken, and every hit on it is answered with Points Off. A Mix (two different people, two different flavors, in one round) or a Break ends it.',when:(F)=>F.foes.some(f=>f.st&&f.st.strict_grading)},
+      {id:'final',who:'*',text:'Final Grade is charging (!!) and hits everyone. Shield the family or break its pips to cancel it.',when:(F)=>F.foes.some(f=>f.charge&&/Final Grade/.test(f.charge.name))}
     ]
   }
 };

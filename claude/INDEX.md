@@ -315,6 +315,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-b3s13.md | Stage 14 facts (written by the b3s13 session, 2026-11-20) | 2026-11-20 |
 | next-addendum-b3s14.md | Stage 15 facts (written 2026-11-20 after stage 14 shipped) | 2026-11-20 |
 | next-addendum-b3s15.md | Addendum: stage 15 (b3s15, 2026-11-21). Where it and claude/battle-build.md differ, this wins. | 2026-11-21 |
+| next-addendum-b3s17.md | Addendum after stage 17 (b3s17a to b3s17), 2026-11-21 | 2026-11-21 |
 | next-addendum-b3s9a.md | Battle 3, stage 9: where it stands after b3s9a (2026-11-19) | 2026-11-19 |
 | next-addendum-b3s9b.md | Battle 3, stage 9: where it stands after b3s9b (2026-11-19) | 2026-11-19 |
 | next-addendum-b3s9c.md | Battle 3, stage 10: where it stands after b3s9c (2026-11-20) | 2026-11-20 |
