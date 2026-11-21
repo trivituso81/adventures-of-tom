@@ -28638,8 +28638,7 @@
    "title": "Battle system: the bonus chapter on the new battle",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "next": "Waits on t-milestoned (Milestone D, your play test of chapters 6 to 10). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
    "blocks": [],
    "changed": "2026-11-21",
@@ -28658,8 +28657,16 @@
     {
      "d": "2026-11-21",
      "t": "Created by the b3s18 session: the bonus chapter was not switched in stage 18 because its Brain Freeze fights end at half HP with results flee and shell in battle 2 code."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-buildpill2",
@@ -31018,6 +31025,16 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
+   "title": "Battle system: the bonus chapter on the new battle",
+   "first": "2026-11-21T14:50:19-08:00",
+   "last": "2026-11-21T14:50:22-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s18bonus"
    ]
   },
   {
@@ -34897,8 +34914,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "368d68c73bfd27c58f874cbd56d804ec60e2c3ad",
- "synced_at": "2026-11-21T22:49:39+00:00",
+ "synced": "43fda10986ec528b56864b16cbb5fc2064550ae7",
+ "synced_at": "2026-11-21T22:51:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
