@@ -27593,11 +27593,11 @@
   },
   {
    "id": "c-nightgreen",
-   "title": "Fix the 13 tests that already fail",
+   "title": "Fix the last failing test (ch20_test)",
    "theme": "Project Ops",
    "lane": "claude",
    "col": "prog",
-   "next": "Partly done: 4 of the 12 failing tests are fixed and on main (validate.js, sw_test, quest_test, terminal_test; builds nightgreena to nightgreend). 8 still carry known_fail in tools/night/tests.json: griffith_test, grands_walk_test, rooms_test, art-library/test.py, clip_kinds_test, clip_review_test, ch17_test, ch20_test. What was seen on each is in claude/next-addendum-nightgreen.md. To continue, tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. The card ships as nightgreen when no row has known_fail; nightly refactoring waits on that.",
+   "next": "Partly done: 11 of the 12 failing tests are fixed or retired and on main (builds nightgreena to nightgreenl). 1 still carries known_fail in tools/night/tests.json: ch20_test (about 16 minutes a run). The eight doors, the Core, the lift and the Leviathan fight now pass; the checks shatter scene to Julian, calm and epilogue, and game complete flag fail after the real Leviathan fight, while the game plays the same scenes fine when the flags are set directly. What was found and a cheap way to reproduce is in claude/next-addendum-nightgreen.md. To continue, tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort medium. The card ships as nightgreen when no row has known_fail; nightly refactoring waits on that.",
    "blocks": [
     "c-nightrefactor"
    ],
@@ -27728,17 +27728,21 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreenl: the chapter 20 test gets past the eight doors; it still fails after the Leviathan fight (notes written)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreen handoff 2 (conversation ran long after 8 parts, ch20_test takes 16 minutes a run): 11 of 12 tests fixed or retired (nightgreene to nightgreenl); 1 left, ch20_test, evidence and a cheap way to reproduce in claude/next-addendum-nightgreen.md; card prompt rewritten for it. Not finished, so the card stays In progress and ships as nightgreen when no row has known_fail."
     }
    ],
    "prompt": {
-    "what": "Works through the 8 tests that still fail on main: for each, finds whether the test or the game is wrong, fixes that (or deletes a test of something that no longer exists), and takes the test off the known failures list.",
+    "what": "Finds why the last failing test, the chapter 20 playthrough, fails after the first boss fight, fixes the test or the game, takes it off the known failures and ships the card.",
     "before": [
-     "Nothing to do first. (The night test run's first result is not needed: this card reproduces each test itself.)",
-     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+     "Nothing to do first.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
     ],
-    "model": "Claude Sonnet 5.5 (row C: the cause of each remaining failure is not known; none of the three Fable conditions holds)",
-    "effort": "high (8 failures with unknown causes and nothing written to follow, the same size as the first run)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Four of the twelve failing tests are already fixed (nightgreena to nightgreend). Eight rows in tools/night/tests.json still carry known_fail: griffith_test, grands_walk_test, rooms_test, art-library__test, clip_kinds_test, clip_review_test, ch17_test, ch20_test. The addendum says what was seen on each and how the four fixes went. Take them one at a time, cheapest first, in that order. For each: reproduce it, decide whether the test or the game is wrong, and fix the one that is wrong; a test of something that no longer exists (the old chapter 1 scenes, a retired page, a Battle 2 fight in a chapter that now uses Battle 3) is deleted by the purge rule; then remove its known_fail and push that part with its own build name (nightgreene, nightgreenf and so on) and docs/CHANGES.md entry. A test that needs a paid key or a missing input goes to the skip list with the reason. Apply the stop-loss per test: two tries that miss the same way, write what you found on the card and move to the next. When the conversation has run long, stop, list what is left in the card's next step, and give Tom the prompt for the rest by the five items of claude/handoff-rules.md. The card ships as nightgreen when no row is left with known_fail. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Sonnet 5.5 (row C: the cause of the last failure is not known yet; none of the three Fable conditions holds)",
+    "effort": "medium (one test, narrowed to one step, a cheap way to reproduce is written down; raise to high only if it misses twice)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Eleven of the twelve failing tests are already fixed or retired (nightgreena to nightgreenl). One row in tools/night/tests.json still carries known_fail: ch20_test. The addendum says what is known: the eight doors, the Core, the lift and the Leviathan fight pass; the checks shatter scene to Julian, calm and epilogue to the end, and game complete flag fail after the real Leviathan fight, although the game plays the shatter scene and starts the Julian fight when the same flags are set directly. Find what differs after the real fight 1 (the addendum has a cheap way: a temporary script that plays only fight 1 and prints the flags, the scene and the dialog state every second, not the whole 16 minute test), decide whether the test or the game is wrong, and fix the one that is wrong. A game fault that would trap a player is fixed in the game and tested. Then remove its known_fail, set `minutes` from the measured time (seconds divided by 60, times 1.2, rounded up), and push it with its own build name (nightgreenm) and a docs/CHANGES.md entry. Apply the stop-loss: two tries that miss the same way, write what you found on the card and stop. When it passes twice in a row, ship the card as nightgreen: add a `## nightgreen` heading in docs/CHANGES.md saying all rows are off known_fail, and write the result on the card. Then tell Tom in two lines what happens next and where. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
    "after": "nothing for Tom: c-nightrefactor"
