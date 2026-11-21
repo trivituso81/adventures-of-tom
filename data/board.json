@@ -28132,7 +28132,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Hit animations in a fight match the Battle Guide speed",
-   "next": "Building: a fight lets one frame count up to 0.1 s (the Guide's own cap), so a slow phone no longer plays clips in slow motion. Then a Tom card to watch a hit on the phone.",
+   "next": "Built as hitspeed1: in a fight one frame may count up to 0.1 s (the Guide's own cap), so getting-hit clips no longer play in slow motion on a slow phone. Tom watches a hit on card t-hitspeed1-try.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -28144,6 +28144,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"the speed of the getting hit animations in the battle guide look good but in the game they are too slow - can they match the guide?\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Measured: a hit clip plays exactly as long as the Guide shows it on a fast computer (Rose 2044 ms) but stretches to 1.5x with a slowed CPU, because the game counted at most 0.05 s per frame. The cap is now 0.1 s in a fight. Hands to Tom: t-hitspeed1-try."
     }
    ],
    "prompt": {
@@ -28154,7 +28158,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small engine change, cause worked out by measuring)",
     "effort": "medium (one known change plus a test)",
     "text": "Read CLAUDE.md and card c-hitspeed1 in data/board.json, then finish what its history describes and push build hitspeed1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-hitspeed1-try"
   },
   {
    "id": "t-stuck-anim-deedee-dodge-y4m3",
@@ -28299,6 +28304,34 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-hitspeed1-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "play",
+   "fyi": true,
+   "title": "Watch a getting-hit animation in a fight",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE, start any fight and let a monster hit Rose or Grace. Compare the hit with how it looks in ADMIN > BATTLE GUIDE. Then press All good, or Something is wrong and say whether it is still slower.",
+   "steps": [
+    "Open ADMIN > BATTLE LAB > NEW BATTLE and start the first fight.",
+    "Let a monster hit Rose or Grace, and watch how fast the hit animation plays.",
+    "Press All good if it now feels like the Battle Guide, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
+    "opening": "made by hitspeed1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by build hitspeed1 (card c-hitspeed1)."
+    }
+   ]
   }
  ],
  "sessions": [

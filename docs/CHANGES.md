@@ -1,3 +1,10 @@
+## hitspeed1 (2026-11-21): getting-hit animations in a fight keep real-time speed on a slow phone
+
+Card c-hitspeed1. Tom (11-21): "the speed of the getting hit animations in the battle guide look good but in the game they are too slow - can they match the guide?"
+- Cause: the clip data and the 1x playback are the same in the Guide and the game, but the game counted at most 0.05 s per frame, so a phone under 20 frames a second played every clip and beat in slow motion. The Guide's own cap is 0.1 s.
+- `engine/main.js`: while a fight is on, one frame may count up to 0.1 s (0.05 s everywhere else).
+- Measured in a real browser: with the CPU slowed 4x, Grace's hit clip (933 ms) took 1473 ms before and 1081 ms after; Rose's (2044 ms) 2490 ms before and 2369 ms after. A fast computer already matched (933 and 2084 ms). Not measured: a real phone. A phone under about 10 frames a second will still play slower than the Guide.
+- Tests: `python3 tools/b3_test.py s8` passes (FAILS: []). Tom card: t-hitspeed1-try.
 ## nightgreenc (2026-11-21): the quest tracker test knows about the party banner, the kept flags and the "Go to" wording
 
 Card c-nightgreen, test `quest_test` (`python3 tools/quest_test.py`). The tracker itself works; three things in the test were stale:
