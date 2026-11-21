@@ -9255,11 +9255,20 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA looked at this card: needs your eyes. how the kitchen and park read sideways is a look; the hop to the picnic tables is motion and timing a person should judge"
     }
    ],
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:15:34Z",
+    "verdict": "yours",
+    "why": "how the kitchen and park read sideways is a look; the hop to the picnic tables is motion and timing a person should judge"
    }
   },
   {
@@ -9947,12 +9956,21 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA looked at this card: needs your eyes. the amber blocks, who stands where and whether the scene looks right are composition a person judges"
     }
    ],
    "first": "Build alvarez shows on the title screen.",
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:15:34Z",
+    "verdict": "yours",
+    "why": "the amber blocks, who stands where and whether the scene looks right are composition a person judges"
    }
   },
   {
@@ -15232,12 +15250,21 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA looked at this card: needs your eyes. it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
     "opening": "unknown"
+   },
+   "machine": {
+    "at": "2026-11-21T21:15:34Z",
+    "verdict": "yours",
+    "why": "it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
    }
   },
   {
@@ -15434,6 +15461,10 @@
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-20T19:18:52.848Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night QA looked at this card: needs your eyes. the plane sitting in the window and rolling out is motion in painted art, a look; server browser frames cannot prove it reads right"
     }
    ],
    "chat": {
@@ -15443,6 +15474,11 @@
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:15:34Z",
+    "verdict": "yours",
+    "why": "the plane sitting in the window and rolling out is motion in painted art, a look; server browser frames cannot prove it reads right"
    }
   },
   {
@@ -29399,6 +29435,43 @@
     }
    ],
    "first": "After the publish of build guardwin1 (a minute or two after the push)."
+  },
+  {
+   "id": "c-night-qa",
+   "title": "Night QA: the test browser plays your check cards",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "nightly": true,
+   "tag": "nightqa",
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the build nightqa (card c-nightqa). Tom (2026-11-19): his role is not QA and not double-checking Claude's work."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "First night run by the build session: 4 oldest play cards (t-alvarezplay, t-ch2play, t-ch6play, t-gatezeroplay) sorted; all 4 are YOURS, none closed."
+    }
+   ],
+   "prompt": {
+    "what": "Plays up to 4 of Tom's play-and-report cards each night in a test browser and closes the ones a picture can prove, files fixes for the ones that fail, and marks the ones only a person can judge.",
+    "before": [
+     "Read the card c-night-qa history; nothing to wait for."
+    ],
+    "model": "Claude Sonnet 5.5 (standing card, steps in claude/night-plan.md section 8)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open Tom cards with ask play and no `machine` field, oldest first, backlog included (checking a parked card moves nothing of Tom's except closing it on a pass). 2. For each card: read `next`, `first` and the history, and sort it. YES OR NO (a fact a test browser can see: a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts) or YOURS (how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch, or audio). When in doubt it is YOURS. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Pictures go to branch night under qa/CARDID/DATE/. Pass: the card goes to Done with machine: {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT WAS SEEN\". It is listed under Closed for you on the Last night card. Fail: what Something is wrong does today: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium), and Tom's card waits behind it. 4. YOURS: machine: {at, verdict: \"yours\", why: WHY} so it is not looked at again; the card stays Tom's and its details show \"Needs your eyes: WHY\". Limits (also printed on the Last night card): the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never close a card about how something looks, sounds or feels. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. No paid run of any service. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

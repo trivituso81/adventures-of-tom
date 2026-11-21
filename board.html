@@ -765,6 +765,9 @@ function openSheet(id){
   }
   if(c.answer) body+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
   if(c.note) body+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
+  // nightqa1: the night QA's result on a play card (machine = {at, verdict: pass|yours, saw, why, shots}); pictures are on branch night
+  if(c.machine&&c.machine.verdict==='pass')body+='<h4>Checked by the night QA</h4><p>'+esc(c.machine.saw||'')+'</p>'+(c.machine.shots||[]).map(x=>'<p><a href="https://github.com/trivituso81/adventures-of-tom/blob/night/'+encodeURI(x)+'" target="_blank" rel="noopener">'+esc(String(x).split('/').pop())+'</a></p>').join('');
+  else if(c.machine&&c.machine.verdict==='yours')body+='<h4>Needs your eyes</h4><p>'+esc(c.machine.why||'')+'</p>';
   const w=open_?attnWhy(c):'';
   if(w) body+='<p class="err" style="font-size:14px;margin-top:10px">Needs attention: '+esc(w)+'</p>';
   else if(c.start_error&&open_) body+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
