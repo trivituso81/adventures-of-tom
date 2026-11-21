@@ -25333,10 +25333,10 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
-   "next": "Rescue chose START NEXT: the one remaining step is a paid Wan try (pad 0.8, at most $1) that is judged by looking at it, which is Opus work, not a rescue. Start it from the prompt below on Opus 5.5, effort medium.",
+   "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25428,16 +25428,21 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as anim-deedee-dodge-y4m3a: Deedee's Dodge: one more Wan video ordered, the same prompt with her figure at 80% of the frame (video being made)"
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T20:40:00+00:00",
+     "t": "Ended without shipping (stop-loss, $0.50 spent, nothing handed to Tom). Rev 4 (v3 prompt word for word, pad 0.8; wan-gen run 44946098349): feet planted on one row in all 150 pictures and no flying object, but her front hand ran off the left edge for 25 pictures (25 to 50) and she lunged forward into a wide squat toward the monster (head 179 px left; gate: edge 25, dodge_forward 0.178 against 0.04). Arms off the frame a third time, now with room around her: the lean wording makes Wan fling the arms to the edge whatever the room (the same finding as Tom's Lounge Pass). Staged the next try: prompt wan-deedee-dodge-v4.txt = Rose's passed duck prompt word for word (only MOTION differed from v3), job rev 5, pad 0.8 kept."
     }
    ],
    "prompt": {
-    "what": "Makes one more Wan video of Deedee, Dodge with her figure shrunk inside the frame, checks it, and hands it back to you to watch.",
+    "what": "Makes one Wan video of Deedee ducking (the wording that passed for Rose and Tom), checks it, bakes it into the game if it passes, and hands it to you to watch.",
     "before": [
-     "Nothing to do first. Your note and both misses are on the card."
+     "Nothing to do first. Every try and its result are on the card."
     ],
-    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
-    "effort": "medium (one change to a prompt that nearly worked)",
-    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) is still the old painted pose. Two Wan 3.0 tries missed (card history): retry 1 ducked forward to the left and her arm left the frame; retry 2 (prompt tools/art-library/prompts/wan-deedee-dodge-v3.txt, \"leans her upper body back to the right\") went the right way with her feet planted, but her flung arms ran off both edges of the video and Wan drew a small object flying past her (results deedee-dodge-r2.mp4 and r3.mp4 on branch wangen).\n\nMake one more video on the family route (wan-gen Action, tools/art-library/wangen-jobs.json) with one change: job deedee-dodge rev 4, the same v3 prompt word for word, plus \"pad\": 0.8 (the change that kept her spread hands inside the frame on her victory, deedee-victory). Check every picture against the plan section 4.4 list and run the measured clip gate (judge() in tools/clip-gate/gate.py) before Tom sees anything; a clip that fails is not handed to him. If the flying object comes back and crosses her, that is a miss: stop and say so. Spend at most $1. Bake it (tools/clip-bake/bake_clip.py, kind state, figure rows 99.3, data/clips/deedee-dodge.js), point B3_BODY_CLIPS.deedee.dodge at it and remove Deedee's dodge row from B3_BODY_PAINT (purge rule), run python3 tools/b3_test.py s8, python3 tools/paint_state_test.py, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Opus 5.5 (row D: a video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one prompt taken from a version that worked, steps written down)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) has no video yet (she slides her idle video). Three Wan 3.0 tries of the sideways lean missed (card history; results deedee-dodge-r2, r3, r4 on branch wangen): her arms ran off the frame every time, and pad 0.8 did not fix it (r4: front hand off the left edge for 25 pictures, and she lunged forward 18% toward the monster). The lean wording is retired for her.\n\nThe try is already staged: Wan job deedee-dodge rev 5 in tools/art-library/wangen-jobs.json, prompt tools/art-library/prompts/wan-deedee-dodge-v4.txt, which is Rose's passed duck prompt (wan-rose-dodge-v2.txt) word for word, with pad 0.8 kept; the same wording and pad passed for Rose and for Tom (anim-rose-dodge-v89r, anim-tom-dodge-ner3). Run it once on the wan-gen Action (gh api repos/trivituso81/adventures-of-tom/actions/workflows/wan-gen.yml/dispatches -f ref=main -f 'inputs[what]=deedee-dodge' -f 'inputs[dry_run]=false' -f 'inputs[cap]=' set to the ledger on branch wangen state.json plus 0.50). Spend at most $0.50. Check every picture against the plan section 4.4 list (feet on one row, whole figure inside the frame, last picture against first under 3 of 255) and run the measured clip gate (judge() in tools/clip-gate/gate.py with measure.py); a clip that fails is not handed to Tom, and a miss is the stop-loss for Wan on her dodge (next would be a different video model, card c-wanch2). If it passes: bake it like Rose's and Tom's dodges (tools/clip-bake/bake_clip.py, kind state, the duck stretch every 2nd picture at 1.5x, figure rows 99.3, data/clips/deedee-dodge.js, art/clips/deedee-dodge.webp, source art/raw/clips/wan-deedee-dodge-v1.mp4), add dodge:'deedee_dodge' to B3_BODY_CLIPS.deedee in data/b3-clips.js, rebuild data/guide-anims.json (node tools/guidegen/build_map.js), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py, python3 tools/wanproof_test.py deedee and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. (B3_BODY_PAINT and tools/paint_state_test.py no longer exist: purged in wanch2a.) Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-21T18:10:35+00:00",
    "after": "nothing for Tom: c-anim-deedee-dodge-y4m3"

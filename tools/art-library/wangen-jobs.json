@@ -886,7 +886,7 @@
   }
  },
  "deedee-dodge": {
-  "rev": 4,
+  "rev": 5,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -894,7 +894,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-deedee-dodge-v3.txt",
+  "prompt_file": "tools/art-library/prompts/wan-deedee-dodge-v4.txt",
   "frame": "art/clips/start/deedee-hero.png",
   "fit": "720x1280",
   "frame_fields": [

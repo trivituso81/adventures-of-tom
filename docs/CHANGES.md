@@ -1,3 +1,10 @@
+## board-deedee-dodge-r4 (2026-11-21): Deedee's Dodge try with her figure at 80% missed (arms off the frame again), not shown to you; the duck wording is staged next
+
+Card c-anim-deedee-dodge-y4m3. Wan job `deedee-dodge` rev 4 (prompt `wan-deedee-dodge-v3.txt` word for word, `pad: 0.8`), wan-gen run 44946098349, $0.50 (ledger $48.59).
+- Plan 4.4: feet on one row (1,122 to 1,123) in all 150 pictures, same woman, flat magenta, no flying object (nothing detached over 12 px). FAILED: her front hand runs off the left edge in 25 pictures (25 to 50), and she lunges forward into a wide squat toward the monster instead of leaning back (head 179 px to the left). Measured clip gate: `edge` 25, `dodge_forward` 0.178 (limit 0.04).
+- Stop-loss: arms off the frame three tries in a row (rev 2, 3, 4), the last with room around her. Not baked, not handed to Tom. Her dodge still slides her idle video (`b3cStandIn`).
+- Staged next (one change from v3, taken from two passes): `wan-deedee-dodge-v4.txt` is Rose's passed duck prompt (`wan-rose-dodge-v2.txt`) word for word, job rev 5, `pad: 0.8` kept. Not run.
+
 ## nightshift (2026-11-21): queued cards start by themselves between 11 pm and 3 am, and Tom reads one card each morning
 
 Card c-nightshift, `claude/night-plan.md` section 5, steps 1 to 7 as written (no rule of the plan changed).
