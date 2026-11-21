@@ -21321,13 +21321,13 @@
    "id": "c-qa-coh02",
    "tag": "qa-coh02",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Big One's win line has it splash away before its talk",
    "next": "Shipped in build qa-coh02: the VICTORY line now reads \"It stops thrashing and blinks up at the shore.\"",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "prompt": {
     "what": "Works on COH-02 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21358,6 +21358,10 @@
     {
      "d": "2026-11-21",
      "t": "Changed the die line in data/monsters.js (not voiced). Build qa-coh02."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh02: The Big One's win line no longer has it splash away before its talk"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21365,7 +21369,8 @@
     "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
     "opening": "started by START"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-coh03",
@@ -21662,7 +21667,7 @@
    "id": "c-qa-txt04",
    "tag": "qa-txt04",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Inspect prompt says boppy's in lowercase",
    "next": "Built and pushed as qa-txt04: the Inspect prompt keeps a name's capital letters. Waiting for Tom to look at the pond prompt.",
@@ -21699,6 +21704,10 @@
     {
      "d": "2026-11-21",
      "t": "Confirmed still present on main, fixed in engine/draw.js (lowercase only a leading The, A or An). Pushed as qa-txt04."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-txt04: the Inspect prompt keeps a name's capital letters (Boppy's fishing spot)"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
@@ -21706,7 +21715,8 @@
     "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
     "opening": "started by START"
    },
-   "after": "t-qa-txt04-play"
+   "after": "t-qa-txt04-play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-qa-battle2",
@@ -22073,6 +22083,30 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
+   "title": "Inspect prompt says boppy's in lowercase",
+   "first": "2026-11-21T03:26:33Z",
+   "last": "2026-11-21T03:33:54Z",
+   "tags": [
+    "qa-txt04"
+   ],
+   "cards": [
+    "c-qa-txt04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
+   "title": "Big One's win line has it splash away before its talk",
+   "first": "2026-11-21T03:30:07Z",
+   "last": "2026-11-21T03:33:23Z",
+   "tags": [
+    "qa-coh02"
+   ],
+   "cards": [
+    "c-qa-coh02"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGbQzVNxbtCiq6WdE8",
    "title": "Item banner: tiny icon, empty circle, prompt on the border",
    "first": "2026-11-21T03:32:24Z",
@@ -22126,16 +22160,6 @@
    "tags": [],
    "cards": [
     "c-qa-coh07"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDomYWFaksqaEKjbZk",
-   "title": "Big One's win line has it splash away before its talk",
-   "first": "2026-11-21T03:30:07Z",
-   "last": "2026-11-21T03:30:07Z",
-   "tags": [],
-   "cards": [
-    "c-qa-coh02"
    ]
   },
   {
@@ -22212,16 +22236,6 @@
    "tags": [],
    "cards": [
     "c-voiceboard"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukERbpzoKk8xp5jCbYB",
-   "title": "Inspect prompt says boppy's in lowercase",
-   "first": "2026-11-21T03:26:33Z",
-   "last": "2026-11-21T03:26:33Z",
-   "tags": [],
-   "cards": [
-    "c-qa-txt04"
    ]
   },
   {
@@ -25129,8 +25143,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5e1b5005354e738fda8e70a131173775ca9496e4",
- "synced_at": "2026-11-21T03:32:53+00:00",
+ "synced": "9df939eb4eee915276a854d9ff6ca043b9ba9edb",
+ "synced_at": "2026-11-21T03:34:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
