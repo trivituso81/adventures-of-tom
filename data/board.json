@@ -21946,10 +21946,10 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
-   "next": "Waits on stage 15 (card c-b3s15) to ship to main. Then it runs the old battle screen checks (BUG-05, 06, 09, 10, COH-09) on the new screen and fixes what fails.",
+   "next": "Retired: checked on the new battle screen (chapter 1 plays on it since b3s15); none of the 5 problems exist there.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -22021,12 +22021,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired, nothing to fix. Ran tools/ch1_b3_test.py and looked at the new battle and victory screenshots (portrait). BUG-05: the new BAG shows 'Not yet', no count. BUG-06: one status pill (BLOCKADE) fits, no stacking or clipped text. BUG-09: the victory card has no scrollbar and nothing past its border. BUG-10 and COH-09: the old hint and Inspect texts (Tap an enemy, B to Inspect, Flashcard Flurry or Red Pen) are not in Battle 3. Landscape and the pills on an enemy with two statuses were not looked at."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-itemdef1",
