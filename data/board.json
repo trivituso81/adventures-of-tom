@@ -25339,8 +25339,8 @@
     }
    ],
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
+    "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
    },
    "history": [
     {
@@ -25400,6 +25400,11 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:17:29.960Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card (Opus 5.5 medium, pasted prompt).",
+     "at": "2026-11-21T20:18:00+00:00"
     }
    ],
    "prompt": {
