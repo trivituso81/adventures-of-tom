@@ -1,0 +1,406 @@
+{
+ "spent": 23.6,
+ "calls": [
+  {
+   "what": "start",
+   "rev": 1,
+   "rid": "01a1fab9-b4e0-7f03-8e89-511892997967",
+   "est": 0.15,
+   "at": "2026-11-20T20:50:36.955714Z",
+   "file": "start-r1.png"
+  },
+  {
+   "what": "video",
+   "rev": 1,
+   "rid": "01a1fac7-e311-7682-8f53-5e25f11ae171",
+   "est": 0.5,
+   "at": "2026-11-20T21:06:06.265145Z",
+   "file": "video-r1.mp4"
+  },
+  {
+   "what": "start-tom",
+   "rev": 1,
+   "rid": "01a1fbc7-f4a7-7f20-8f4d-560199cbe588",
+   "est": 0.15,
+   "at": "2026-11-21T01:45:47.977262Z",
+   "file": "start-tom-r1.png"
+  },
+  {
+   "what": "start-deedee",
+   "rev": 1,
+   "rid": "01a1fbc7-f4ab-7bf3-bc45-52e90c19c636",
+   "est": 0.15,
+   "at": "2026-11-21T01:45:47.986584Z",
+   "file": "start-deedee-r1.png"
+  },
+  {
+   "what": "start-rose",
+   "rev": 1,
+   "rid": "01a1fbc7-f4c9-7e61-a756-49c1c5d686da",
+   "est": 0.15,
+   "at": "2026-11-21T01:45:48.021606Z",
+   "file": "start-rose-r1.png"
+  },
+  {
+   "what": "grace-dodge",
+   "rev": 1,
+   "rid": "01a1fbd3-8755-7032-8f15-fe54a142f095",
+   "est": 0.5,
+   "at": "2026-11-21T01:58:26.437557Z",
+   "file": "grace-dodge-r1.mp4"
+  },
+  {
+   "what": "grace-hit",
+   "rev": 1,
+   "rid": "01a1fbd3-8765-7f01-9702-d6794a35d80e",
+   "est": 0.5,
+   "at": "2026-11-21T01:58:26.444244Z",
+   "file": "grace-hit-r1.mp4"
+  },
+  {
+   "what": "grace-idle",
+   "rev": 1,
+   "rid": "01a1fbd3-87cf-7412-867f-6c7e1fdb5d54",
+   "est": 0.5,
+   "at": "2026-11-21T01:58:26.565580Z",
+   "file": "grace-idle-r1.mp4"
+  },
+  {
+   "what": "grace-ko",
+   "rev": 1,
+   "rid": "01a1fbd5-1942-7931-b452-f4f73ff3547b",
+   "est": 0.5,
+   "at": "2026-11-21T02:00:09.329235Z",
+   "file": "grace-ko-r1.mp4"
+  },
+  {
+   "what": "grace-victory",
+   "rev": 1,
+   "rid": "01a1fbd5-53a1-7023-9d1d-f3bf0ccdd9ee",
+   "est": 0.5,
+   "at": "2026-11-21T02:00:24.272288Z",
+   "file": "grace-victory-r1.mp4"
+  },
+  {
+   "what": "grace-run",
+   "rev": 1,
+   "rid": "01a1fbd6-1b7c-7d92-a5f8-12168eb6acbd",
+   "est": 0.5,
+   "at": "2026-11-21T02:01:15.436000Z",
+   "file": "grace-run-r1.mp4"
+  },
+  {
+   "what": "grace-cast",
+   "rev": 1,
+   "rid": "01a1fbd6-aaea-74d0-9cff-720c22ad6e59",
+   "est": 0.5,
+   "at": "2026-11-21T02:01:52.164674Z",
+   "file": "grace-cast-r1.mp4"
+  },
+  {
+   "what": "grace-squeeze",
+   "rev": 1,
+   "rid": "01a1fbd7-20d4-7d80-af40-f39e2f0a242a",
+   "est": 0.5,
+   "at": "2026-11-21T02:02:22.344616Z",
+   "file": "grace-squeeze-r1.mp4"
+  },
+  {
+   "what": "grace-cubepop",
+   "rev": 1,
+   "rid": "01a1fbd8-3dc2-75c3-a4c1-f32b30dbde3e",
+   "est": 0.5,
+   "at": "2026-11-21T02:03:35.276173Z",
+   "file": "grace-cubepop-r1.mp4"
+  },
+  {
+   "what": "grace-squeeze",
+   "rev": 2,
+   "rid": "01a1fbde-8293-7800-b033-f4a772e1a6b4",
+   "est": 0.5,
+   "at": "2026-11-21T02:10:26.104105Z",
+   "file": "grace-squeeze-r2.mp4"
+  },
+  {
+   "what": "grace-dodge",
+   "rev": 2,
+   "rid": "01a1fbde-8293-73c3-92f6-108a5493583c",
+   "est": 0.5,
+   "at": "2026-11-21T02:10:26.111630Z",
+   "file": "grace-dodge-r2.mp4"
+  },
+  {
+   "what": "grace-cast",
+   "rev": 2,
+   "rid": "01a1fbde-829f-7812-85a3-fba639eaea69",
+   "est": 0.5,
+   "at": "2026-11-21T02:10:26.132051Z",
+   "file": "grace-cast-r2.mp4"
+  },
+  {
+   "what": "grace-cubepop",
+   "rev": 2,
+   "rid": "01a1fbe0-24ae-7622-9cc5-c577dd9f67ee",
+   "est": 0.5,
+   "at": "2026-11-21T02:12:13.134389Z",
+   "file": "grace-cubepop-r2.mp4"
+  },
+  {
+   "what": "tom-hit",
+   "rev": 1,
+   "rid": "01a1fbe3-183e-7da1-ab2b-23a71afb920e",
+   "est": 0.5,
+   "at": "2026-11-21T02:15:26.551787Z",
+   "file": "tom-hit-r1.mp4"
+  },
+  {
+   "what": "tom-guard",
+   "rev": 1,
+   "rid": "01a1fbe3-187c-7630-90e7-3bf37e175f89",
+   "est": 0.5,
+   "at": "2026-11-21T02:15:26.613180Z",
+   "file": "tom-guard-r1.mp4"
+  },
+  {
+   "what": "tom-idle",
+   "rev": 1,
+   "rid": "01a1fbe3-1880-7400-b3f4-bf8abae33be2",
+   "est": 0.5,
+   "at": "2026-11-21T02:15:26.615846Z",
+   "file": "tom-idle-r1.mp4"
+  },
+  {
+   "what": "tom-ko",
+   "rev": 1,
+   "rid": "01a1fbe4-a4b9-7ac1-b7bd-b377c27b4b64",
+   "est": 0.5,
+   "at": "2026-11-21T02:17:08.041905Z",
+   "file": "tom-ko-r1.mp4"
+  },
+  {
+   "what": "tom-victory",
+   "rev": 1,
+   "rid": "01a1fbe4-ddef-7b73-b658-4fbc1b1391e1",
+   "est": 0.5,
+   "at": "2026-11-21T02:17:22.694965Z",
+   "file": "tom-victory-r1.mp4"
+  },
+  {
+   "what": "tom-run",
+   "rev": 1,
+   "rid": "01a1fbe4-e050-7212-b14d-44edde18b6a6",
+   "est": 0.5,
+   "at": "2026-11-21T02:17:23.303874Z",
+   "file": "tom-run-r1.mp4"
+  },
+  {
+   "what": "tom-loungepass",
+   "rev": 1,
+   "rid": "01a1fbe6-4073-74e2-90ae-b747129342d6",
+   "est": 0.5,
+   "at": "2026-11-21T02:18:53.481283Z",
+   "file": "tom-loungepass-r1.mp4"
+  },
+  {
+   "what": "tom-blockade",
+   "rev": 1,
+   "rid": "01a1fbe6-6a3c-7340-a107-0b33300bfa6d",
+   "est": 0.5,
+   "at": "2026-11-21T02:19:04.158228Z",
+   "file": "tom-blockade-r1.mp4"
+  },
+  {
+   "what": "rose-idle",
+   "rev": 1,
+   "rid": "01a1fc14-d2ef-71e2-bcc3-6aad8aecaf1b",
+   "est": 0.5,
+   "at": "2026-11-21T03:09:45.616760Z",
+   "file": "rose-idle-r1.mp4"
+  },
+  {
+   "what": "rose-hit",
+   "rev": 1,
+   "rid": "01a1fc14-d3dc-7df3-86b5-424dc85da183",
+   "est": 0.5,
+   "at": "2026-11-21T03:09:45.856447Z",
+   "file": "rose-hit-r1.mp4"
+  },
+  {
+   "what": "rose-guard",
+   "rev": 1,
+   "rid": "01a1fc14-d4da-7f83-8ad2-78694a47d7ec",
+   "est": 0.5,
+   "at": "2026-11-21T03:09:46.113709Z",
+   "file": "rose-guard-r1.mp4"
+  },
+  {
+   "what": "rose-ko",
+   "rev": 1,
+   "rid": "01a1fc16-ea97-72a1-a37b-a9e2d363ddb1",
+   "est": 0.5,
+   "at": "2026-11-21T03:12:02.740783Z",
+   "file": "rose-ko-r1.mp4"
+  },
+  {
+   "what": "rose-run",
+   "rev": 1,
+   "rid": "01a1fc16-ec2e-70c2-b3bc-32535c73ab01",
+   "est": 0.5,
+   "at": "2026-11-21T03:12:03.153250Z",
+   "file": "rose-run-r1.mp4"
+  },
+  {
+   "what": "rose-tackle",
+   "rev": 1,
+   "rid": "01a1fc17-a31f-7281-831f-9ed2464738f9",
+   "est": 0.5,
+   "at": "2026-11-21T03:12:49.991798Z",
+   "file": "rose-tackle-r1.mp4"
+  },
+  {
+   "what": "rose-lava",
+   "rev": 1,
+   "rid": "01a1fc18-c882-7a92-b9db-c294e448fcdc",
+   "est": 0.5,
+   "at": "2026-11-21T03:14:05.094006Z",
+   "file": "rose-lava-r1.mp4"
+  },
+  {
+   "what": "rose-giddyup",
+   "rev": 1,
+   "rid": "01a1fc18-ee25-7ce3-8225-0f17fbe17297",
+   "est": 0.5,
+   "at": "2026-11-21T03:14:14.718540Z",
+   "file": "rose-giddyup-r1.mp4"
+  },
+  {
+   "what": "deedee-idle",
+   "rev": 1,
+   "rid": "01a1fc19-7665-75c0-aa49-ef9ec53b8118",
+   "est": 0.5,
+   "at": "2026-11-21T03:14:49.605661Z",
+   "file": "deedee-idle-r1.mp4"
+  },
+  {
+   "what": "deedee-guard",
+   "rev": 1,
+   "rid": "01a1fc1a-7bf4-7480-bcc4-d9cf1b826af1",
+   "est": 0.5,
+   "at": "2026-11-21T03:15:56.561745Z",
+   "file": "deedee-guard-r1.mp4"
+  },
+  {
+   "what": "deedee-hit",
+   "rev": 1,
+   "rid": "01a1fc1a-918c-7a52-9158-127bf3a3a8b7",
+   "est": 0.5,
+   "at": "2026-11-21T03:16:02.100182Z",
+   "file": "deedee-hit-r1.mp4"
+  },
+  {
+   "what": "deedee-ko",
+   "rev": 1,
+   "rid": "01a1fc1b-03af-7392-b2b1-fa5c15a45112",
+   "est": 0.5,
+   "at": "2026-11-21T03:16:31.304656Z",
+   "file": "deedee-ko-r1.mp4"
+  },
+  {
+   "what": "deedee-victory",
+   "rev": 1,
+   "rid": "01a1fc1c-1fe4-7510-acc6-86da854292f5",
+   "est": 0.5,
+   "at": "2026-11-21T03:17:44.059720Z",
+   "file": "deedee-victory-r1.mp4"
+  },
+  {
+   "what": "deedee-run",
+   "rev": 1,
+   "rid": "01a1fc1c-44a4-7c63-a03f-f99923d50a09",
+   "est": 0.5,
+   "at": "2026-11-21T03:17:53.470887Z",
+   "file": "deedee-run-r1.mp4"
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 1,
+   "rid": "01a1fc1c-cc7d-7b93-bed0-ef1937d5c392",
+   "est": 0.5,
+   "at": "2026-11-21T03:18:28.247667Z",
+   "file": "deedee-wetfloor-r1.mp4"
+  },
+  {
+   "what": "deedee-scrub",
+   "rev": 1,
+   "rid": "01a1fc1d-f683-7c60-9ba0-460e06e45ad7",
+   "est": 0.5,
+   "at": "2026-11-21T03:19:44.541231Z",
+   "file": "deedee-scrub-r1.mp4"
+  },
+  {
+   "what": "grace-ko",
+   "rev": 2,
+   "rid": "01a1fc21-9290-7ed0-a142-11de920b81eb",
+   "est": 0.5,
+   "at": "2026-11-21T03:23:41.099418Z",
+   "file": "grace-ko-r2.mp4"
+  },
+  {
+   "what": "tom-blockade",
+   "rev": 2,
+   "rid": "01a1fc21-929a-7ef3-9135-3ee2938907e9",
+   "est": 0.5,
+   "at": "2026-11-21T03:23:41.110719Z",
+   "file": "tom-blockade-r2.mp4"
+  },
+  {
+   "what": "deedee-ko",
+   "rev": 2,
+   "rid": "01a1fc54-1f9e-7603-8c09-4de8349a23f2",
+   "est": 0.5,
+   "at": "2026-11-21T04:18:54.018456Z",
+   "file": "deedee-ko-r2.mp4"
+  },
+  {
+   "what": "rose-giddyup",
+   "rev": 2,
+   "rid": "01a1fc54-1fba-7860-a14f-3c0bb011c2f8",
+   "est": 0.5,
+   "at": "2026-11-21T04:18:54.037707Z",
+   "file": "rose-giddyup-r2.mp4"
+  },
+  {
+   "what": "rose-ko",
+   "rev": 2,
+   "rid": "01a1fc54-2081-7a63-ae55-0327bb090af3",
+   "est": 0.5,
+   "at": "2026-11-21T04:18:54.236926Z",
+   "file": "rose-ko-r2.mp4"
+  },
+  {
+   "what": "rose-tackle",
+   "rev": 2,
+   "rid": "01a1fc55-ae2e-7f60-8b88-2eb74c0dcf18",
+   "est": 0.5,
+   "at": "2026-11-21T04:20:36.042138Z",
+   "file": "rose-tackle-r2.mp4"
+  },
+  {
+   "what": "deedee-victory",
+   "rev": 2,
+   "rid": "01a1fc55-ae7d-7a52-a932-1ff0e2d33459",
+   "est": 0.5,
+   "at": "2026-11-21T04:20:36.129191Z",
+   "file": "deedee-victory-r2.mp4"
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 2,
+   "rid": "01a1fc55-e8e1-7201-881b-d03f2c5b98df",
+   "est": 0.5,
+   "at": "2026-11-21T04:20:51.073427Z",
+   "file": "deedee-wetfloor-r2.mp4"
+  }
+ ],
+ "pending": {}
+}

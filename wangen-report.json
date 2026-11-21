@@ -1,0 +1,84 @@
+{
+ "jobs": [
+  {
+   "what": "rose-ko",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 20.6,
+   "estimate": 0.5,
+   "file": "rose-ko-r2.mp4",
+   "bytes": 11193359,
+   "rid": "01a1fc54-2081-7a63-ae55-0327bb090af3",
+   "spent_after": 22.1
+  },
+  {
+   "what": "deedee-ko",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 20.6,
+   "estimate": 0.5,
+   "file": "deedee-ko-r2.mp4",
+   "bytes": 8977899,
+   "rid": "01a1fc54-1f9e-7603-8c09-4de8349a23f2",
+   "spent_after": 23.1
+  },
+  {
+   "what": "rose-giddyup",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 20.6,
+   "estimate": 0.5,
+   "file": "rose-giddyup-r2.mp4",
+   "bytes": 11378556,
+   "rid": "01a1fc54-1fba-7860-a14f-3c0bb011c2f8",
+   "spent_after": 22.1
+  },
+  {
+   "what": "rose-tackle",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 22.1,
+   "estimate": 0.5,
+   "file": "rose-tackle-r2.mp4",
+   "bytes": 9927507,
+   "rid": "01a1fc55-ae2e-7f60-8b88-2eb74c0dcf18",
+   "spent_after": 23.6
+  },
+  {
+   "what": "deedee-victory",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 22.1,
+   "estimate": 0.5,
+   "file": "deedee-victory-r2.mp4",
+   "bytes": 6531150,
+   "rid": "01a1fc55-ae7d-7a52-a932-1ff0e2d33459",
+   "spent_after": 23.6
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 2,
+   "endpoint": "alibaba/wan-3.0/image-to-video",
+   "dry_run": false,
+   "cap": 35.65,
+   "spent_before": 23.1,
+   "estimate": 0.5,
+   "file": "deedee-wetfloor-r2.mp4",
+   "bytes": 8252238,
+   "rid": "01a1fc55-e8e1-7201-881b-d03f2c5b98df",
+   "spent_after": 23.6
+  }
+ ],
+ "spent_after": 23.6,
+ "cap": 35.65
+}
