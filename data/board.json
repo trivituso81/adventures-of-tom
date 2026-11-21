@@ -19439,7 +19439,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    }
   },
@@ -19718,7 +19718,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "fyi": true,
    "next": "Claude remade the 3 pictures with new prompts and they missed a 4th time (Pro Racing Flats came back as slippers, Tiny Clay Taco as a real taco, Birthday Sash as a ribbon bow), so Claude stopped: words alone do not move the generator off its idea of these objects. 1. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and REJECT the 3 new pictures, note: stop-loss, waiting for a reference photo. 2. On your phone find one photo of each: a pair of racing flats (thin-soled racing shoes), a ceramic or clay taco figurine, and a gold pageant sash with a bow. 3. Open a new conversation in the Project on Opus 5.5, effort medium, attach the 3 photos and paste the prompt of card c-itemart-refs (Copy prompt on that card). The other 285 item pictures are approved and in the game; these 3 show their emoji until then.",
@@ -19864,6 +19864,11 @@
     {
      "d": "2026-11-20",
      "t": "fix-itembannerart-pics-3: Claude ran the 3 new prompts ($0.18). All 3 missed again: flats became plain slippers (QA 12 of 15), taco still real food (QA 15 of 15, but it is food, not pottery), sash still a ribbon bow (QA 11 of 15). Stop-loss: not tried a 5th time. Why it needs Tom: the generator keeps drawing its own idea of a taco, a sash and a running shoe whatever the words say, so the next try needs a reference picture of each object, and the workspace cannot download pictures from the web. The one thing needed: one photo each of racing flats, a clay taco figurine and a gold pageant sash with a bow, attached in the next conversation (card c-itemart-refs)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt Sent to Claude as card c-fix-itembannerart-pics-4; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T08:38:04.488Z"
     }
    ],
    "gen": {
@@ -19951,7 +19956,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
     "opening": "unknown"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-ch2lessons",
@@ -23050,6 +23056,58 @@
      "t": "Added by projclean1 (card c-projclean)."
     }
    ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics-4",
+   "tag": "fix-itembannerart-pics-4",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "next": "You reported a problem on Make and approve 18 item picture sheets (288 items). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt",
+   "blocks": [
+    "t-itembannerart-pics"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T08:38:03.417Z",
+     "card": "t-itembannerart-pics",
+     "title": "Make and approve 18 item picture sheets (288 items)",
+     "ask": "pictures",
+     "words": "2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt",
+     "shot": "",
+     "asked": "Claude remade the 3 pictures with new prompts and they missed a 4th time (Pro Racing Flats came back as slippers, Tiny Clay Taco as a real taco, Birthday Sash as a ribbon bow), so Claude stopped: words alone do not move the generator off its idea of these objects. 1. Open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and REJECT the 3 new pictures, note: stop-loss, waiting for a reference photo. 2. On your phone find one photo of each: a pair of racing flats (thin-soled racing shoes), a ceramic or clay taco figurine, and a gold pageant sash with a bow. 3. Open a new conversation in the Project on Opus 5.5, effort medium, attach the 3 photos and paste the prompt of card c-itemart-refs (Copy prompt on that card). The other 285 item pictures are approved and in the game; these 3 show their emoji until then."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-itembannerart-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-itembannerart-pics.",
+     "at": "2026-11-21T08:38:04.487Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-itembannerart-pics: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt",
+     "at": "2026-11-21T08:38:04.488Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make and approve 18 item picture sheets (288 items).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-4 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-4.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Claude remade the 3 pictures with new prompts and they missed a 4th time (Pro Racing Flats came back as slippers, Tiny Clay Taco as a real taco, Birthday Sash as a ribbon bow), so Claude stopped: words alone do not move the generator off its idea of these objects. 1. Open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and REJECT the 3 new pictures, note: stop-loss, waiting for a reference photo. 2. On your phone find one photo of each: a pair of racing flats (thin-soled racing shoes), a ceramic or clay taco figurine, and a gold pageant sash with a bow. 3. Open a new conversation in the Project on Opus 5.5, effort medium, attach the 3 photos and paste the prompt of card c-itemart-refs (Copy prompt on that card). The other 285 item pictures are approved and in the game; these 3 show their emoji until then. He wrote: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T08:38:03.417Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-4 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-itembannerart-pics"
   }
  ],
  "sessions": [
