@@ -13180,7 +13180,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet, the session must find where the beats are)",
     "effort": "medium (one behaviour in SKIP, built on the finished skipchain1 change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom's words (card history): \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\".\n\nWhat to build: when the player presses SKIP in a cut scene, skip its interstitials (for example Grace's list). Party members joining and leaving always play in full. Start from the done card c-skipchain1 (docs/CHANGES.md, 'skipchain1'), which made SKIP skip all of chapter 1 scene 1; extend that behaviour to the other cut scenes. Find the skip code, mark the interstitial beats in data/scenes.js using the steps documented at SCENE_OPS in engine/story.js, and leave every spoken line text unchanged (CLAUDE.md rule 5).\n\nTests: run python3 tools/smoke.py, look at the screenshots in tools/shots/ in portrait and landscape, and add a docs/CHANGES.md entry. Follow the build tag and tag bump steps in CLAUDE.md. Write the result and the next step onto this card, then push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "quiet": true
   },
   {
    "id": "c-projclean",
@@ -17551,6 +17552,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFzARn9vLzhxvD8GmY",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-21T00:07:30Z",
+   "last": "2026-11-21T00:07:30Z",
+   "tags": [
+    "takes-2026-11-20b"
+   ],
+   "cards": [
+    "c-takes-56fb01",
+    "c-takes-987c82"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEFveyJjLzGjhxUQUA",
    "title": "Fix: Play chapter 1 and watch people listen",
    "first": "2026-11-20T23:54:00Z",
@@ -19895,8 +19909,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "57cf7163ac93adc519e9b41f2a82920312bc51db",
- "synced_at": "2026-11-21T00:01:41+00:00",
+ "synced": "1a38d95336aa3b2e769c913f1baa7ac770a67a02",
+ "synced_at": "2026-11-21T00:08:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
