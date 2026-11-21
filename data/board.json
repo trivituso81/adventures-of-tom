@@ -20048,7 +20048,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    },
    "chat": {
@@ -25883,6 +25883,50 @@
      "t": "Made by anim-rose-dodge-v89r. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
     }
    ]
+  },
+  {
+   "id": "c-idea-savedportraits",
+   "tag": "idea-savedportraits",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "I saved new portraits in admin - how do I ensure they are",
+   "next": "Your idea: I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "idea": {
+    "at": "2026-11-21T18:22:59.600Z",
+    "words": "I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, high"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom made this card on the board: I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide",
+     "at": "2026-11-21T18:22:59.600Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session).",
+     "at": "2026-11-21T18:22:59.600Z"
+    }
+   ],
+   "prompt": {
+    "what": "Works on your idea: I saved new portraits in admin - how do I ensure they are.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
+    "effort": "high (something new designed and built in one session)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-savedportraits in data/board.json, history included. Your first push is the commit board: start c-idea-savedportraits.\n\nTom made this card himself with New card on the board. His words: \"I saved new portraits in admin - how do I ensure they are used appropriately in status screens turn order and the battle guide\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-savedportraits with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
