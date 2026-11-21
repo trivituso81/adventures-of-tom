@@ -27991,7 +27991,7 @@
    "title": "Take me there: a play card opens the game at its spot",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "dash3",
    "next": "Waits on the card Admin Dashboard: the strip under the game. Then a play card can carry the place to check, and Take me there in the dashboard puts the game at that spot in one click. Every open play card gets its place, or the mark On your phone when the check needs touch, sound or speed. Then it hands you the card Try the game strip and Take me there.",
    "blocks": [
@@ -28002,7 +28002,7 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Adds the place to check to play cards, the Take me there button in the dashboard, and the mark On your phone for checks that need the phone. Fills in every open play card.",
@@ -28022,6 +28022,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Admin Dashboard: the strip under the game is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T22:04:21.880Z"
     }
    ]
   },
