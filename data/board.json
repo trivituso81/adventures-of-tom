@@ -19561,7 +19561,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji.",
@@ -19615,7 +19615,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "history": [
     {
      "d": "2026-11-20",
@@ -19629,6 +19629,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 18 pictures, QA: 18 of 18, 18 of 18, 16 of 18, 17 of 18, 16 of 18, 17 of 18, 18 of 18, 18 of 18, 18 of 18, 18 of 18, 17 of 18, 16 of 18, 17 of 18, 18 of 18, 18 of 18, 16 of 16, 17 of 18, 16 of 18. Spent about $1.12."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: fix only those that failed Sent to Claude as card c-fix-itembannerart-pics; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T02:55:32.311Z"
     }
    ],
    "gen": {
@@ -19869,7 +19874,8 @@
       }
      }
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-ch2lessons",
@@ -20147,6 +20153,58 @@
     "effort": "medium (steps are known)",
     "text": "Read docs/VOICE_LIBRARY.md and merge the attached local-clips-pending export. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-fix-itembannerart-pics",
+   "tag": "fix-itembannerart-pics",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "next": "You reported a problem on Make and approve 18 item picture sheets (288 items). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: fix only those that failed",
+   "blocks": [
+    "t-itembannerart-pics"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T02:55:31.572Z",
+     "card": "t-itembannerart-pics",
+     "title": "Make and approve 18 item picture sheets (288 items)",
+     "ask": "pictures",
+     "words": "fix only those that failed",
+     "shot": "",
+     "asked": "Open ADMIN ) BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-itembannerart-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-itembannerart-pics.",
+     "at": "2026-11-21T02:55:32.311Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-itembannerart-pics: fix only those that failed",
+     "at": "2026-11-21T02:55:32.311Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make and approve 18 item picture sheets (288 items).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji. He wrote: fix only those that failed\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T02:55:31.572Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-itembannerart-pics"
   }
  ],
  "sessions": [
