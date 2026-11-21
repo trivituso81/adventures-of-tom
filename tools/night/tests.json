@@ -1317,6 +1317,12 @@
    "cmd": "python3 -I tools/voice-library/voicetake_test.py",
    "group": "g6",
    "minutes": 2
+  },
+  {
+   "id": "b3_skip_test",
+   "cmd": "python3 -I tools/b3_skip_test.py",
+   "group": "g6",
+   "minutes": 1
   }
  ]
 }

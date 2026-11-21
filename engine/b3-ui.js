@@ -33,7 +33,7 @@
 // Story fights add onTurn(unit) (a tip when a family member's turn opens) and beforeEnd(result, go) (called on CONTINUE after a win; the
 // story shows its victory card and calls go() to close the fight).
 function b3Start(cfg) {
-  B3.cfg=cfg; B3.recC=null; B3.pvC=null; B3.armed=-1; B3.awarded=false; B3.leaving=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
+  B3.cfg=cfg; B3.skipNow=false; B3.recC=null; B3.pvC=null; B3.armed=-1; B3.awarded=false; B3.leaving=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
   const mods=Object.assign({foeHp:b7FoeHp(),taken:b7Taken(),foeSpeed:typeof b7FoeSpeed==='function'?b7FoeSpeed():1},cfg.mods||{});
   // Rose Mode (pictures on) picks the Vibes and Quirks itself: the Sig Vibes and the newest written Quirks, from the same Ranks.
   let loadouts=cfg.loadouts;
@@ -80,6 +80,7 @@ function b3End(result) {
 const b3Over=()=>!!B3.F.over;
 function b3Flow() {
   if(!B3.active) return;
+  if(B3.skipNow) { b3DoSkip(); return; }
   const N=b3Next(B3.F);
   b3Play(N.beats,()=>{
     if(!B3.active) return;
@@ -445,6 +446,22 @@ function b3TargetAt(cx,cy) {
   return k>=0?k:B3.opts.findIndex(o=>o.units.includes(f));
 }
 
+// WIN NOW (admin option, OPTIONS page, B7.skipBtn): every foe goes down at the next safe moment (between actions) and the fight ends on the
+// normal win screen, so rewards are paid as usual. Real fights only, never the Battle Lab.
+function b3SkipFight() {
+  if(!B7.skipBtn||!B3.active||(B3.cfg&&B3.cfg.lab)||B3.F.over||B3.ui==='done') return;
+  B3.skipNow=true;
+  if(battle.state==='command') b3DoSkip();
+}
+function b3DoSkip() {
+  B3.skipNow=false; const F=B3.F; if(!B3.active||F.over) return;
+  for(const f of F.foes) if(!f.ko) f.hp=0;
+  const c={beats:[],g:'end',actor:null,ledger:{}};
+  b3KoCheck(F,c); b3CheckOver(F); b3OverBeats(F,c.beats,'end');
+  B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; battle.state='busy'; b3Render();
+  b3Play(c.beats,()=>{ if(B3.active) b3Finish(); });
+}
+
 // ---------- EXIT (Battle Lab) and speed, at the top right of the picture ----------
 function b3SyncTools() {
   const T=$('b3-tools'),cv=$('battle-canvas'); if(!T||!cv) return;
@@ -452,6 +469,7 @@ function b3SyncTools() {
   const st=T.parentElement;
   T.style.top=(cv.offsetTop+6)+'px'; T.style.right=Math.max(4,st.clientWidth-(cv.offsetLeft+cv.offsetWidth)+6)+'px';
   $('b3-exit').hidden=!(B3.cfg&&B3.cfg.lab);
+  $('b3-skip').hidden=!(B7.skipBtn&&B3.cfg&&!B3.cfg.lab);   // WIN NOW: real fights only
   const s=$('b3-speed'); s.textContent=B7.speed+'x'; s.classList.toggle('on',B7.speed===2);
 }
 function b3Speed() { b7ToggleSpeed(); b3SyncTools(); b3Say('Battle speed '+B7.speed+'x.'); }
@@ -460,10 +478,11 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
 (function b3Wire() {
   const ui=$('b3-ui'),cv=$('battle-canvas'),st=document.querySelector('#battle .battle-stage'); if(!ui||!cv||!st) return;
   const tools=document.createElement('div'); tools.id='b3-tools'; tools.className='b7-tools'; tools.hidden=true;
-  tools.innerHTML='<button type="button" id="b3-exit" class="exit" aria-label="Exit to the Battle Lab list" hidden>EXIT</button><button type="button" id="b3-speed" aria-label="Battle speed">1x</button>';
+  tools.innerHTML='<button type="button" id="b3-exit" class="exit" aria-label="Exit to the Battle Lab list" hidden>EXIT</button><button type="button" id="b3-skip" aria-label="Win this fight now" hidden>WIN NOW</button><button type="button" id="b3-speed" aria-label="Battle speed">1x</button>';
   st.appendChild(tools);
   $('b3-exit').addEventListener('click',e=>{ e.stopPropagation(); b3Exit(); });
   $('b3-speed').addEventListener('click',e=>{ e.stopPropagation(); b3Speed(); });
+  $('b3-skip').addEventListener('click',e=>{ e.stopPropagation(); b3SkipFight(); });
   ui.addEventListener('pointerdown',e=>{ B3.ptr=e.pointerType||'touch'; },true);
   cv.addEventListener('pointerdown',e=>{ B3.ptr=e.pointerType||'touch'; },true);
   ui.addEventListener('click',e=>{

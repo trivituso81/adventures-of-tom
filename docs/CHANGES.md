@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## board-deedee-dodge-r4 (2026-11-21): Deedee's Dodge try with her figure at 80% missed (arms off the frame again), not shown to you; the duck wording is staged next
 
 Card c-anim-deedee-dodge-y4m3. Wan job `deedee-dodge` rev 4 (prompt `wan-deedee-dodge-v3.txt` word for word, `pad: 0.8`), wan-gen run 44946098349, $0.50 (ledger $48.59).
@@ -35,6 +36,14 @@ Card c-nightgreen, test `quest_test` (`python3 tools/quest_test.py`). The tracke
 - The baseline wiped `STORY.flags`, which restarts the chapter's intro scene and hides the quest button. It now copies the flags (a new object is still a fresh baseline for the tracker) and clears only the Art, Music, Gym and done flags.
 - `questPhrase` turns a bare place into an instruction, so the log now reads "Go into the school" and the tracker "Go to the Cafetorium, at the east end of the hall." Two expectations updated.
 - `tools/night/tests.json`: `known_fail` removed from `quest_test`. All 16 checks pass. Nothing in the game changed.
+=======
+## win3skip (2026-11-21): the WIN NOW button is back in battle screens
+
+Tom: "when the option to auto win is turned on i dont see the corresponding button in batle screens anymore." The button only existed in the old battle screen (Battle 2); Battle 3 had none.
+- `engine/b3-ui.js`: WIN NOW button next to the speed button, shown only when OPTIONS > WIN NOW BUTTON is ON and the fight is real (not the Battle Lab). It ends the fight on the normal win screen at the next safe moment (between actions), so rewards are paid as usual (`b3SkipFight`, `b3DoSkip`).
+- `tools/b3_skip_test.py`: button shows only with option on and not in the Lab; pressing it ends in a win and calls onEnd. Passed.
+
+>>>>>>> 3847291 (win3skip: WIN NOW button in Battle 3 fights)
 ## fix-itemdefplay (2026-11-21): item banners no longer name old battle stats, and a banner can't close half faded in
 
 Gemini ch1 run, C11 (card t-itemdefplay): "On the Dragonfly Coin (KEY ITEM) banner ... the card began fading in over the map ... and auto-dismissed mid-fade-in" and "IN BATTLE is wrong/unclear for Battle 3 because it names removed Battle 2 stats ... Wear it: +18 HP, +4 GRIT, +1 COOL" (Pond Hoodie), "Wear it: +5 POW" (Bark Slab); related X-07, Boppy's Cap "GRIT +10%".
