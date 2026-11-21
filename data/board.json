@@ -21183,11 +21183,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEKRkPXjEpQbAggaBo",
+    "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
     "opening": "started by START"
    }
   },
@@ -21220,10 +21224,14 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T03:25:51.385Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug12c\""
    }
   },
@@ -21260,11 +21268,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCqqno6Qtzw2doduvF",
+    "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
     "opening": "started by START"
    }
   },
@@ -21338,10 +21350,14 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T03:25:37.228Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
     "opening": "pasted by Tom from the board"
    }
   },
@@ -21383,11 +21399,15 @@
      "d": "2026-11-21",
      "t": "Session started (board: start c-qa-coh04).",
      "at": "2026-11-21T03:28:18.728252Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDEgy2X4Dv7jdvw1DX",
+    "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
     "opening": "started by START"
    }
   },
@@ -21470,13 +21490,17 @@
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
     },
     {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
      "d": "2026-11-21",
      "t": "Confirmed on main, then fixed: after flag ch1-tin the cube plays one Tom line (new line, needs a recording) instead of the first discovery. Pan toast not added (not needed)."
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGpaW1o4Mr6QMGPE5R",
+    "url": "https://claude.ai/code/session_01RXeukGpaW1o4Mr6QMGPE5R",
     "opening": "started by START"
    },
    "after": "t-qa-coh06play"
@@ -21526,10 +21550,10 @@
    "id": "c-qa-txt03",
    "tag": "qa-txt03",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Speaker names switch from capitals mid-scene",
-   "next": "Ready to start. Screen report, not found in code yet.",
+   "next": "Retired: could not be reproduced on current main; nothing to change.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21555,13 +21579,19 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without a code change: played ch1AfterBoss on current main in portrait (Rose, The Big One, Tom, Grace, Deedee). Every speaker name goes through one path ($('speaker').textContent in openDialog) with the same style (small-caps, no text-transform), so the case never changes mid-scene. The report's all-caps versus title case most likely came from reading small caps on screen. Retired as not reproducible; if Tom sees it again, a pencil report with a picture will show the exact line.",
+     "at": "2026-11-21T03:50:00Z"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukFuf5FG3gcgaezmc8d",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-qa-txt04",
@@ -21910,6 +21940,56 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFuf5FG3gcgaezmc8d",
+   "title": "Speaker names switch from capitals mid-scene",
+   "first": "2026-11-21T03:29:03Z",
+   "last": "2026-11-21T03:29:03Z",
+   "tags": [],
+   "cards": [
+    "c-qa-txt03"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGpaW1o4Mr6QMGPE5R",
+   "title": "Orange cube replays its first look after the boss",
+   "first": "2026-11-21T03:28:56Z",
+   "last": "2026-11-21T03:28:56Z",
+   "tags": [],
+   "cards": [
+    "c-qa-coh06"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDEgy2X4Dv7jdvw1DX",
+   "title": "Rose asks for a piggyback right after the piggyback scene",
+   "first": "2026-11-21T03:28:53Z",
+   "last": "2026-11-21T03:28:53Z",
+   "tags": [],
+   "cards": [
+    "c-qa-coh04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCqqno6Qtzw2doduvF",
+   "title": "The Big One's Inspect text describes a frog",
+   "first": "2026-11-21T03:28:22Z",
+   "last": "2026-11-21T03:28:22Z",
+   "tags": [],
+   "cards": [
+    "c-qa-coh01"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEKRkPXjEpQbAggaBo",
+   "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
+   "first": "2026-11-21T03:28:15Z",
+   "last": "2026-11-21T03:28:15Z",
+   "tags": [],
+   "cards": [
+    "c-qa-bug12"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEwnnCwJ83eXvyeWJD",
    "title": "Signs cut off at the top and under the skip buttons",
@@ -22346,6 +22426,26 @@
    ],
    "cards": [
     "c-builds3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCnimLJ8v3hBYtoU3c",
+   "title": "Boppy's cap lettering is mirrored on his shocked art",
+   "first": "2026-11-20T19:28:44-08:00",
+   "last": "2026-11-20T19:28:44-08:00",
+   "tags": [],
+   "cards": [
+    "c-qa-bug12c"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
+   "title": "Big One asks about a folding chair; the spot has a bench",
+   "first": "2026-11-20T19:28:37-08:00",
+   "last": "2026-11-20T19:28:37-08:00",
+   "tags": [],
+   "cards": [
+    "c-qa-coh03"
    ]
   },
   {
@@ -24857,8 +24957,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "66e54226be6a2365bea745fda1862dfc9d435992",
- "synced_at": "2026-11-21T03:28:00+00:00",
+ "synced": "a7cb52ed3a91404ed2c012b42f85b1113f4bfe19",
+ "synced_at": "2026-11-21T03:29:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
