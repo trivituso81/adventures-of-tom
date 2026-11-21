@@ -27636,7 +27636,7 @@
    "title": "Admin Dashboard: the strip under the game",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "dash2",
    "next": "Waits on your card Try the Admin Dashboard on the wide monitor. Then it applies your notes and builds the strip under the game: the bar that tells you a newer build is live with Reload game, the screen sizes (four Duo poses and Desktop wide), jump to a chapter or a test fight, Story battles, Difficulty, Mute and Report. The next card, Take me there, follows it without a check from you.",
    "blocks": [
@@ -27647,7 +27647,7 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Applies your notes from the first try, then builds the strip under the game as drawn: the newer build bar with Reload game, the screen sizes, the chapter and test fight jumps, Story battles, Difficulty, Mute and Report.",
@@ -27667,6 +27667,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Try the Admin Dashboard on the wide monitor is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T20:59:48.921Z"
     }
    ]
   },
