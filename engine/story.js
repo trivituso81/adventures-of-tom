@@ -1662,7 +1662,7 @@ function questPhrase(text) {
   if(QUEST_VERBS.test(t)) return t;
   if(QUEST_DIRS[w]) return QUEST_DIRS[w]+t.slice(w.length);
   const first=(/^(.*?[.!?])(\s|$)/.exec(t)||[0,t])[1];
-  if(/\b(is|are|was|were|lead|leads|waiting|came|has|have|had|will)\b/.test(first)||/^It[\u2019']s\b/.test(first)) return t;   // a plain statement
+  if(/\b(is|are|was|were|lead|leads|waiting|came|picked|has|have|had|will)\b/.test(first)||/^It[\u2019']s\b/i.test(first)) return t.charAt(0).toUpperCase()+t.slice(1);   // a plain statement
   if(/^Pip,/.test(t)) return 'Find '+t;
   if(/^(Miss Odette|Do\u00f1a Carmen next)/.test(t)) return 'Visit '+t;
   if(/^Fiction \(top left\)/.test(t)) return 'Search '+t;

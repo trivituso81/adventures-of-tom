@@ -20845,7 +20845,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Quest log says Go to it's Sunday after the trip home",
-   "next": "Ready to start. Confirmed in code: questPhrase in engine/story.js skips \"It's\" only with a capital I, and the toast in SCENES.ch1End (data/scenes.js) starts with a lowercase \"it's\" after \"Goal: \".",
+   "next": "Shipped as qa-bug01: the quest log now reads \"It's Sunday. Head out the front door...\" instead of \"Go to it's Sunday\". Waits on Tom's look at the quest log.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20880,13 +20880,19 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed questPhrase (engine/story.js): the plain-statement check ignores case and capitalizes, and \"picked\" counts as a statement (the Hollow wrapper goals had the same slip). Checked all Goal toasts with node; browser tests could not run here (Playwright browser mismatch).",
+     "at": "2026-11-21T03:50:00.000Z"
     }
    ],
    "started_at": "2026-11-21T03:30:00.000Z",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD8oFaGoJktxUZTkgW",
     "opening": "started by START"
-   }
+   },
+   "after": "t-qa-bug01play"
   },
   {
    "id": "c-qa-bug02",
@@ -22077,6 +22083,25 @@
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-txt04."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug01play",
+   "title": "Check the quest log after the trip home",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to the return home scene (Deedee's house, it is Sunday). Tap the ! button. You should see \"It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\" (no \"Go to it's\"). If it still reads wrong, press Something is wrong.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-bug01."
     }
    ]
   }
