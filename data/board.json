@@ -26072,20 +26072,10 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
-   "title": "I saved new portraits in admin - how do I ensure they are",
-   "first": "2026-11-21T10:25:32-08:00",
-   "last": "2026-11-21T10:25:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-savedportraits"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T10:19:28-08:00",
+   "last": "2026-11-21T10:29:19-08:00",
    "tags": [
     "anim-rose-victory-vqjc",
     "anim-rose-give-w5ws",
@@ -26096,7 +26086,18 @@
     "c-anim-rose-dodge-v89r",
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
-    "c-anim-rose-lava-xftr"
+    "c-anim-rose-lava-xftr",
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCahTgscwXC8bRcWMp",
+   "title": "I saved new portraits in admin - how do I ensure they are",
+   "first": "2026-11-21T10:25:32-08:00",
+   "last": "2026-11-21T10:25:32-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-savedportraits"
    ]
   },
   {
@@ -29567,8 +29568,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d3d146ed876700033f30b445cbda77b251a38599",
- "synced_at": "2026-11-21T18:26:14+00:00",
+ "synced": "8550be69d0e80ed40150e568099eba6c0ea635bc",
+ "synced_at": "2026-11-21T18:30:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
