@@ -645,7 +645,7 @@
   }
  },
  "rose-dodge": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -667,7 +667,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "rose-ko": {
   "rev": 2,
@@ -770,7 +771,7 @@
   "pad": 0.8
  },
  "rose-lava": {
-  "rev": 2,
+  "rev": 3,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -792,7 +793,8 @@
    "audio": false,
    "enable_prompt_expansion": true,
    "seed": 81
-  }
+  },
+  "pad": 0.8
  },
  "rose-giddyup": {
   "rev": 2,
