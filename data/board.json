@@ -25437,7 +25437,7 @@
    "id": "c-artfallback",
    "tag": "artfallback1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
    "next": "Copy the prompt into a new conversation in the Project on Claude Sonnet 5.5, effort medium. It builds the fallback rule in claude/art-fallback-plan.md; no paid pictures are made.",
@@ -25445,7 +25445,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGAuLzLbsY54jqp2Q1",
+    "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
     "opening": "\"Can we make a rule when it comes to auto generation of assets and mainly images\""
    },
    "history": [
@@ -25456,6 +25456,10 @@
     {
      "d": "2026-11-21",
      "t": "Sized: Claude Sonnet 5.5 (row B: the steps are written in the plan, tests catch mistakes), effort medium (steps are known). Not auto-started: Tom starts it."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -25699,6 +25703,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
+   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
+   "first": "2026-11-21T09:34:32-08:00",
+   "last": "2026-11-21T10:11:23-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-tomgrace"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDqFMA8cHxvyppX5ur",
+   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
+   "first": "2026-11-21T10:11:10-08:00",
+   "last": "2026-11-21T10:11:10-08:00",
+   "tags": [],
+   "cards": [
+    "c-artfallback"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T09:18:43-08:00",
@@ -25785,16 +25809,6 @@
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
-   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
-   "first": "2026-11-21T09:34:32-08:00",
-   "last": "2026-11-21T09:34:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-idea-tomgrace"
    ]
   },
   {
@@ -29166,8 +29180,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5be63615661ef107ccea79a00094ae61edeac4c0",
- "synced_at": "2026-11-21T18:10:36+00:00",
+ "synced": "46ed056cb1a8f0aaf28e4d6463ddbadc76d902a7",
+ "synced_at": "2026-11-21T18:11:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
