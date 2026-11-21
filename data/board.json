@@ -22758,7 +22758,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGvHoJRHbmTxvW7YaR",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -22794,6 +22794,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T18:50:16.897Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -26268,7 +26272,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -26286,6 +26290,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T18:49:00.029Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -26304,11 +26312,12 @@
   {
    "url": "https://claude.ai/code/session_01RXeukGvHoJRHbmTxvW7YaR",
    "title": "Auto-approve pictures that pass QA",
-   "first": "2026-11-21T18:44:16Z",
+   "first": "2026-11-21T10:53:07-08:00",
    "last": "2026-11-21T18:44:16Z",
    "tags": [],
    "cards": [
-    "c-artgen3"
+    "c-artgen3",
+    "c-wanch2"
    ]
   },
   {
@@ -26420,6 +26429,16 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
+   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
+   "first": "2026-11-21T10:53:26-08:00",
+   "last": "2026-11-21T10:53:26-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-anim-grace-squeeze-qxim"
    ]
   },
   {
@@ -29924,8 +29943,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "cc6e67752a5dd9bbdac90d3dc350499ec42b5f9b",
- "synced_at": "2026-11-21T18:48:57+00:00",
+ "synced": "6c2cd04838786745cfdd259e797a3aeb9e2cc59f",
+ "synced_at": "2026-11-21T18:53:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
