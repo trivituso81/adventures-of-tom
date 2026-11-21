@@ -28064,7 +28064,12 @@
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
     }
    ],
-   "first": "Waits on the card Take me there: a play card opens the game at its spot."
+   "first": "Waits on the card Take me there: a play card opens the game at its spot.",
+   "machine": {
+    "at": "2026-11-21T22:08:37Z",
+    "verdict": "yours",
+    "why": "Judging the dashboard strip and layouts on the real 3440 x 1440 monitor; the test browser cannot stand in for that screen."
+   }
   },
   {
    "id": "c-dash4",
@@ -28131,7 +28136,12 @@
     }
    ],
    "first": "Waits on the card Admin Dashboard: search and two more layouts.",
-   "fyi": true
+   "fyi": true,
+   "machine": {
+    "at": "2026-11-21T22:08:37Z",
+    "verdict": "yours",
+    "why": "Judging search results and layouts on the real wide monitor; layout and feel, not a single fact."
+   }
   },
   {
    "id": "b-board-dashboard",
@@ -29585,7 +29595,12 @@
      "t": "Added by guardwin1: your phone check of the guard-then-win fix; blocks nothing."
     }
    ],
-   "first": "After the publish of build guardwin1 (a minute or two after the push)."
+   "first": "After the publish of build guardwin1 (a minute or two after the push).",
+   "machine": {
+    "at": "2026-11-21T22:08:37Z",
+    "verdict": "yours",
+    "why": "Whether the victory celebration looks right after a guard is an animation judgment; the test browser cannot judge how it looks."
+   }
   },
   {
    "id": "c-night-qa",
@@ -29640,6 +29655,11 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:10.957Z"
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T22:08:37Z",
+     "t": "Night run: t-dash3-try, t-dash4-try, t-guardwinplay sorted YOURS (real wide monitor, layout and animation looks). No yes or no cards tonight."
     }
    ],
    "prompt": {
