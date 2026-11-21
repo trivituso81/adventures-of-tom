@@ -13305,6 +13305,11 @@
     {
      "d": "2026-11-20",
      "t": "Back to Up next: nothing pushed since projclean1c at 13:15 (4.5 hours quiet). Tom (17:46): \"what do we do about the other in progress tasks that have sitting for 2 hours\". Use Copy prompt in a new conversation inside the Project, Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T02:54:41.668Z"
     }
    ],
    "chat": {
@@ -13318,7 +13323,8 @@
     "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
-   "started_at": "2026-11-20T17:43:02+00:00"
+   "started_at": "2026-11-20T17:43:02+00:00",
+   "start": true
   },
   {
    "id": "b-board-projclean",
