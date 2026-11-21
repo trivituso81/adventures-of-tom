@@ -1,3 +1,7 @@
+## board-guideplanned (2026-11-21): the Battle Guide's next card now shows everything planned but not built, marked PLANNED
+
+Card c-battleguide2. Tom (09:21): "Can you do the same thing with anything else that's planned but not built yet". The card's prompt gained Part 4 (unbuilt moves, the BAG, Tombo skins, which chapters are on the new battle, Part 2 monsters, missing rules, a What is coming topic), its effort went from medium to high, and its title changed. Board change only; no page or game file changed.
+
 ## board-guidevibe3 (2026-11-21): the Battle Guide's next card now also shows each person's third Vibe, marked as planned
 
 Card c-battleguide2. Tom (09:19): "How come I'm not seeing the third vibe for each character". Fact: the guide shows what the game holds, and the game has 20 of the spec's 30 Vibes; the third of each person is battle stages 19 to 21. Board change only; no page or game file changed.
