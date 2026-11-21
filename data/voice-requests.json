@@ -1,19 +1,4 @@
 {
- "requests": [
-  {
-   "kind": "sts",
-   "line": "d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!",
-   "voice_id": "cjVigY5qzO86Huf0OWal",
-   "fallback_ids": [],
-   "stability": 0.5,
-   "similarity": 0.85,
-   "label": "my read",
-   "script": "(recording)",
-   "at": 1795229503990,
-   "rid": "r1795229503990-dq0",
-   "audio": "in/r1795229503990-dq0.mp4",
-   "mime": "audio/mp4"
-  }
- ],
+ "requests": [],
  "cancel": []
 }
