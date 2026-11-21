@@ -26584,11 +26584,8 @@
      "t": "Tom: all good.",
      "at": "2026-11-21T19:23:05.723Z"
     }
-<<<<<<< HEAD
    ],
    "done": "2026-11-21"
-=======
-   ]
   },
   {
    "id": "t-buildpill-try",
@@ -26612,7 +26609,6 @@
      "t": "Made by build buildpill1 (card c-buildpill1)."
     }
    ]
->>>>>>> 968fc2d (buildpill1: the build name on the Builds screen is a status-colored pill)
   }
  ],
  "sessions": [
