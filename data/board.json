@@ -19221,7 +19221,7 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN > BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report).",
+   "next": "I made the pictures twice for you ($0.74) and checked each one against the game. Three passed and wait for you; three failed and I rejected them with details. Step 1: on this card tap Open in the Art Library and APPROVE these three if they match: Amy's door locked (the same red arched door as in the game, a note with a shoe doodle, no words), Amy's door open (the same door swung open on a lit hallway), Stage 7 doors open (the same steel doors with the middle open on a dark stage). Each approve bakes it into the game. Step 2: back on this card tap Generate, then tap again to confirm (about $0.20): it makes only the three still missing, which now use a method that worked every time (taking a part away): School gate open (only the two posts and top rail, no gate leaf, no chain, no sign), Car Barn open (both leaves swung open, the name plate on the left leaf, no chain), Studio gate open (only the two striped posts, no arm, no sign). APPROVE each that shows that state of the same gate as the locked one, alone on magenta, no extra words; REJECT with a note if not.",
    "blocks": [],
    "done_when": {
     "art_approved": [
@@ -19301,6 +19301,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 4 pictures, QA: 11 of 15, 10 of 15, 13 of 14, 12 of 15. Spent about $0.30."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Claude (fix-gatelayer-pics-2): Tom asked \"reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images\". Old six rejects rewritten with details. Round 1 ($0.44): Amy's door locked and open pass (after the door crop and the game rectangle were cut to exactly the arch); school (still shut), Car Barn (ajar), studio (arm missing), Stage 7 (narrow gap, lamp lit) rejected with details. Round 2 ($0.30): Stage 7 passes; school shut again, Car Barn plate floating across the gap, studio arm lowered: rejected. Stopped there (stop-loss: school missed twice the same way). Cause: with the locked picture attached the generator removes parts reliably but will not swing or raise them, so school and studio now take the part away and the Car Barn plate is fixed to the left leaf. The third paid try is your Generate tap.",
+     "at": "2026-11-21T03:58:51.000Z"
     }
    ],
    "chat": {
@@ -21930,6 +21935,11 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as fix-gatelayer-pics-2b: gate pictures round 2: two doors pass, four open states rejected with details and reworded"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Claude: shipped as fix-gatelayer-pics-2 (parts a and b before it). 3 of 6 pictures wait for Tom's approve, 3 rewritten for his Generate tap; no pencil report since 03:26 is about the gates (the two open ones are chapter 1 scenes). Also cleared conflict markers qa-bug01 had left in engine/main.js and index.html (fix-hollowtrail-play-2 got there first).",
+     "at": "2026-11-21T03:58:51.000Z"
     }
    ],
    "prompt": {
