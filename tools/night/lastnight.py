@@ -7,6 +7,8 @@ import datetime, re
 
 SHIP = re.compile(r'^(?:Shipped as|Part shipped as|Ran as) ([^\s:]+):? ?(.*)$')
 
+QA_LIMITS = 'the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold'   # nightqa1
+
 
 def lastnight(B, key, tests=None):
     night = B.get('night') or {}
@@ -34,7 +36,8 @@ def lastnight(B, key, tests=None):
         tl = '%s passed, %s failed%s' % (tests.get('passed', '?'), len(bad) if bad else tests.get('failed', 0), (': ' + ', '.join(bad[:8])) if bad else '')
     used = len((night.get('log') or {}).get(key, []))
     secs = [('Ran', ran or ['nothing started']), ('Shipped', shipped or ['nothing']), ('Tests', [tl] if tl else ['no test run yet (it is built by card c-nighttests)']),
-            ('Closed for you', closed or ['nothing']), ('Needs you', needs or ['nothing']), ('Starts used', ['%d of %d' % (used, night.get('max', 0))])]
+            ('Closed for you', closed or ['nothing']), ('Needs you', needs or ['nothing']), ('Starts used', ['%d of %d' % (used, night.get('max', 0))]),
+            ('Limits of the night QA', [QA_LIMITS])]
     text = 'Night of %s. ' % key + ' '.join('%s: %s.' % (h, '; '.join(x).rstrip('.')) for h, x in secs)
     news = bool(ran or shipped or closed or needs)
     return {'next': text[:1500], 'sections': secs, 'news': news}
