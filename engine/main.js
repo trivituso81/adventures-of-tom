@@ -60,7 +60,8 @@ function bootReady() {
 }
 
 function frame(now) {
-  const dt=Math.min(.05,Math.max(0,(now-previous)/1000));
+  // hitspeed1: a fight lets one frame count up to 0.1 s (the Battle Guide's own cap), so on a slow phone a video clip and the turn timing keep real-time pace instead of running in slow motion.
+  const dt=Math.min(battle.active?.1:.05,Math.max(0,(now-previous)/1000));
   previous=now;
   elapsedTime+=dt;
   if(!intro.active&&!splash.active) playTime+=dt;

@@ -28022,6 +28022,37 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "start": true
+  },
+  {
+   "id": "c-hitspeed1",
+   "tag": "hitspeed1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Hit animations in a fight match the Battle Guide speed",
+   "next": "Building: a fight lets one frame count up to 0.1 s (the Guide's own cap), so a slow phone no longer plays clips in slow motion. Then a Tom card to watch a hit on the phone.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGEvgtx92AGhs5fWm7",
+    "opening": "\"the speed of the getting hit animations in the battle guide look good but in the game they are too slow\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"the speed of the getting hit animations in the battle guide look good but in the game they are too slow - can they match the guide?\""
+    }
+   ],
+   "prompt": {
+    "what": "Makes getting-hit clips in a fight play at the Battle Guide's speed on a slow phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small engine change, cause worked out by measuring)",
+    "effort": "medium (one known change plus a test)",
+    "text": "Read CLAUDE.md and card c-hitspeed1 in data/board.json, then finish what its history describes and push build hitspeed1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
