@@ -25243,7 +25243,7 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "next": "Stop-loss: the lava and couch cushion story works on Wan, but she shrinks mid-clip and the cushion flies in from off screen, twice. Next try: a new start picture of Rose already holding the cushion. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
@@ -25273,7 +25273,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukH6RFk6itLJhVJ4MmH",
+    "url": "",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25316,6 +25316,11 @@
     {
      "d": "2026-11-21",
      "t": "START is not set up for this model and effort. Use Copy prompt."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T20:32:10.203Z"
     }
    ],
    "prompt": {
