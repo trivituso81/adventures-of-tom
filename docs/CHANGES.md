@@ -1,3 +1,7 @@
+## voices-t-ch2voices-315 (2026-11-21): 70 voice takes made from board card t-ch2voices and merged into the game
+
+The voice-gen Action made the takes (voiceboard1, tools/voice-learn/voiceboard.py) and merged them with merge-local.js: 70 clips, 0 lines on needs-human (silent, not merged), about 3381 credits. Nobody has listened to these takes yet; the card asks Tom to.
+
 ## nightgreene (2026-11-21): the Griffith Park test follows the repainted trail map
 
 Card c-nightgreen, test `griffith_test` (`python3 tools/griffith_test.py`; failed "walked up the trail" and "south exit leads to the Boulevard"). The test was wrong and the game was right: the Griffith plate was repainted (`griffith2`), the spawn is now (11,17), the south exit is on row 18 and rows 19 to 21 are solid rock, but the test still stood the player at (11,19), inside rock, and never cleared the party banner that holds input after `chapterJump`.
