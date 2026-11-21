@@ -20957,10 +20957,10 @@
    "id": "c-qa-bug04",
    "tag": "qa-bug04",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "Stray bar pictures on Rivituso Row in the departure scene",
-   "next": "Ready to start. Screen report only.",
+   "next": "Retired: not reproduced on current main.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20990,13 +20990,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired without a code change. Checked current main: played ch1Amy on Rivituso Row in portrait and landscape; no green or brown bar pictures at the GREGORI steps or under the CATTAIL PIER sign (the row plate paints those; the only planter and bench props sit where drawn). The pan part is gone: the after-boss scene was rewritten and the pan now leaves at Rose's BOO."
     }
    ],
    "started_at": "2026-11-21T03:24:16+00:00",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFfYFwHSAhwB1uc8J7",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-qa-bug07",
