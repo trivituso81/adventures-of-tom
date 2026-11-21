@@ -24033,14 +24033,13 @@
    "id": "c-costs2",
    "tag": "costs2",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "theme": "Tools",
    "title": "AI Costs fills itself in: balances and job spend",
    "next": "Waits on card t-costs1look. Then build the steps in docs/COSTS.md, section Next: a daily job that reads the ElevenLabs balance, and every paying job writing what its run cost into the ledger.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": ""
@@ -24058,6 +24057,10 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-costs1. No chat yet."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Look at the AI Costs page on your desktop is done."
     }
    ]
   },
@@ -24190,8 +24193,7 @@
    "title": "Battle Guide: real-fight button and everything planned",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "tag": "battleguide2",
    "next": "Waits on your card Try the Battle Guide on the Duo. Then it applies your notes, adds a See it in a fight button for moves with no video, and shows everything planned but not built yet (third Vibes, unbuilt moves, the BAG, Tombo skins, later chapters' monsters, what is coming next), marked PLANNED.",
    "blocks": [],
@@ -24223,6 +24225,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom, 09:21: \"Can you do the same thing with anything else that's planned but not built yet\". Added Part 4 to the prompt: everything planned and not built is shown with one PLANNED look, from a generated data file, and drops out when the real thing is built. Effort raised from medium to high because the list must be worked out; model stays Sonnet 5.5 (row C). Title changed to match."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Try the Battle Guide on the Duo is done."
     }
    ]
   },
@@ -28766,7 +28772,7 @@
    "id": "c-fix-ch1flight-3",
    "tag": "fix-ch1flight-3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -28788,7 +28794,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFfajAAt75dvCSxA9B",
     "opening": "Something is wrong on t-ch1flight"
    },
    "history": [
@@ -28806,6 +28812,10 @@
      "d": "2026-11-21",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-21T20:43:32.124Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -28819,7 +28829,7 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T20:44:38+00:00"
   }
  ],
  "sessions": [
@@ -32991,8 +33001,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d723b5a9e49b7d7312c077d726fa53c71a146a3f",
- "synced_at": "2026-11-21T20:43:23+00:00",
+ "synced": "5e2160a64de7ac8779564c69bd781c982107349d",
+ "synced_at": "2026-11-21T20:44:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
