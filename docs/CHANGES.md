@@ -1,3 +1,11 @@
+## fix-keysecrets2-try-5 (2026-11-21): the button no longer stays on ASKED, WAITING after the video is made and approved
+
+Card c-fix-keysecrets2-try-5. Tom (t-keysecrets2-try): "STILL NOT WORKING!" with the page text "ASKED, WAITING / Waiting for GitHub. / Made and approved. The game is cutting it now".
+- Fact: the job worked. Report on branch `clipgen` at 00:10 UTC names `clip-toad-idle` under `approved`, v5 was cut (build artbake1537). The fault was on the page: it set the "Made and approved" line and redrew the card while the press was still on the waiting list, so the button stayed grey on ASKED, WAITING with "Waiting for GitHub." under it.
+- Fix: `clipPoll` takes the answered press off the waiting list before it redraws (`engine/art-clips.js`). Tag `art-clips.js?v=fix-keysecrets2-try-5` in art.html. `keysecrets2_test.py` has a new check for it and passes.
+- Also removed leftover merge conflict marker lines in this file.
+- Not looked at: the toad idle video itself (v5); nothing was generated or spent in this session.
+
 ## hollowtrail1 (2026-11-20): Grump Hollow muffin wrapper trail: four paintings to make in the Art Library, monsters moved onto the trail and away from the boss
 
 Tom's reports, card c-hollowtrail1:
