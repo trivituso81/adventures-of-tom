@@ -1,3 +1,7 @@
+## board-boppy-bigfish (2026-11-20): board only: Boppy cap card waits on Tom's picture approval
+
+- Card c-boppy-bigfish moved to Waiting behind t-boppy-bigfish-pic (generate and approve Boppy's unimpressed pose). No game file changed.
+
 ## boppy-bigfisha (2026-11-20): Boppy's unimpressed pose prompt now uses his Paso Robles reference, back under To do in the Art Library
 
 - Card c-boppy-bigfish. Checked on main (fact): art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp still show the retired Big Fish cap. They come from Art Library entry boppy-em-unimpressed (v1), whose attachment 1 was boppy-hero-ref-v1, the old hero painting in the Big Fish cap; attachment 2 (boppy-emotions-v6) already wears Paso Robles.
