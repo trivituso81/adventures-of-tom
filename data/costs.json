@@ -703,6 +703,13 @@
    "amount": 0.15,
    "what": "Grace's large start picture for the guard video proof",
    "source": "docs/CHANGES.md, wanproofb"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-21",
+   "amount": 0.08,
+   "what": "Art Library pictures made on WAN 2.7 by the art-gen Action ()",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44937343154"
   }
  ],
  "balances": [
