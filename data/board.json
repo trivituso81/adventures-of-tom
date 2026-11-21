@@ -29973,7 +29973,7 @@
    "title": "Try In a fight and the PLANNED items in the Battle Guide",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open ADMIN > Battle system > Battle Guide (tap the green build chip at the top: it should read battleguide2; if not, close the page and open it again). Family > Tom > Frequent Flier: tap In a fight beside Zone One Blockade. The game opens a Battle Lab fight and the message line says Tom opens with Zone One Blockade; then the fight is yours. Then press All good, or Something is wrong and say what you saw.",
@@ -29992,8 +29992,14 @@
     {
      "d": "2026-11-21",
      "t": "Added with battleguide2 (card c-battleguide2)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T22:01:50.134Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
