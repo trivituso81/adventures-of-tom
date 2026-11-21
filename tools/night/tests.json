@@ -181,8 +181,7 @@
    "id": "clip_kinds_test",
    "cmd": "python3 -I tools/clip_kinds_test.py",
    "group": "g2",
-   "minutes": 2,
-   "known_fail": "failing since b3s8 (claude/next.md)"
+   "minutes": 2
   },
   {
    "id": "closeup_ch1_test",
