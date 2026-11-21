@@ -23351,6 +23351,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFEh2f6cJwL5RzcCLG",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T15:13:39Z",
+   "last": "2026-11-21T15:13:39Z",
+   "tags": [],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
    "title": "Old battle screen problems: check them in the new battle",
    "first": "2026-11-21T14:55:18Z",
@@ -26725,8 +26735,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3ce7680bc12e61bd3156d254a4654ed0a6a46e14",
- "synced_at": "2026-11-21T15:11:03+00:00",
+ "synced": "365ea8232ed32380a7f7a28d5c5434aef970f203",
+ "synced_at": "2026-11-21T15:14:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
