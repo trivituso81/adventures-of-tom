@@ -1,0 +1,144 @@
+[
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Tom",
+  "kind": "replace",
+  "in_game_now": "He's draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He's frozen solid.",
+  "original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "He's draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He's not moving."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Rose",
+  "kind": "insert_after",
+  "after_original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "He's inside something. It's see-through and yellow, like the honey bear."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Grace",
+  "kind": "insert_after",
+  "after_original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "It's the same color the Long Island gate turned, Tata. That's amber. It's what the bugs are stuck in, in my rock book."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "TNB",
+  "kind": "insert_after",
+  "after_original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "It's hard like glass, but it's warm. Babe, it's as warm as a mug right out of the kiln."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Tom",
+  "kind": "insert_after",
+  "after_original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "He's all right in there. He's just stopped, right in the middle of one second."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Amy",
+  "kind": "insert_after",
+  "after_original": "He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.",
+  "new": "This is what Vance told us he does. He stops people at a nice moment so that nothing ever changes. This is what it looks like up close."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "TNB",
+  "kind": "replace",
+  "in_game_now": "He's trapped in amber. Amber is warmth that got stuck. Doña Carmen's is right there, and the Alvarez house is down 2nd. They might be frozen too.",
+  "original": "That’s amber. It’s warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd.",
+  "new": "When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That's what amber is: warmth that got stuck."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Tom",
+  "kind": "replace",
+  "in_game_now": "We check on the neighbors first.",
+  "original": "We check on the neighbors first.",
+  "new": "Doña Carmen's is right there, and the Alvarez house is down 2nd. If it happened to him, it happened to them. We check on the neighbors first."
+ },
+ {
+  "scene": "ch12Marlowe",
+  "speaker": "Tom",
+  "kind": "insert_after",
+  "after_original": "We check on the neighbors first.",
+  "new": "And if amber is warmth that got stuck, maybe we can get it moving again."
+ },
+ {
+  "scene": "ch12Carmen",
+  "speaker": "Tom",
+  "kind": "replace",
+  "in_game_now": "She's frozen in amber, right in the middle of a sentence.",
+  "original": "She’s amber. Mid-sentence.",
+  "new": "She's in amber too, frozen right in the middle of a sentence."
+ },
+ {
+  "scene": "ch12Carmen",
+  "speaker": "TNB",
+  "kind": "replace",
+  "in_game_now": "Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.",
+  "original": "Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.",
+  "new": "It's warm, same as Mr. Washington's. I don't think we can break it, and I don't think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go."
+ },
+ {
+  "scene": "ch12Carmen",
+  "speaker": "Amy",
+  "kind": "replace",
+  "in_game_now": "Warmth. We’re good at warmth. Everybody find the warmest thing in the room.",
+  "original": "Warmth. We’re good at warmth. Everybody find the warmest thing in the room.",
+  "new": "Warmth. We're good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room."
+ },
+ {
+  "scene": "ch12Carmen",
+  "speaker": "Tom",
+  "kind": "replace",
+  "in_game_now": "You were amber for a little while.",
+  "original": "You were amber for a little while.",
+  "new": "You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again."
+ },
+ {
+  "scene": "ch12Carmen",
+  "speaker": "TNB",
+  "kind": "insert_after",
+  "after_original": "I was what? I had a whole sentence. I lost the sentence. It was a good sentence.",
+  "new": "So that's the rule. You can't crack amber. You warm it up with something the person loves."
+ },
+ {
+  "scene": "ch12Alvarez",
+  "speaker": "Tom",
+  "kind": "replace",
+  "in_game_now": "Okay. The whole family is frozen in amber. Marlowe's grey got in through the front door.",
+  "original": "Okay. They’re amber. The grey got in through the front door.",
+  "new": "Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe's grey got in through the front door."
+ },
+ {
+  "scene": "ch12Alvarez",
+  "speaker": "Amy",
+  "kind": "replace",
+  "in_game_now": "Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.",
+  "original": "Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.",
+  "new": "Save the pupusas for when they wake up. Warmth isn't only food. Heat is just movement. When the girls can't sleep, we run. Nobody stays stuck next to somebody who's moving."
+ },
+ {
+  "scene": "ch12Alvarez",
+  "speaker": "TNB",
+  "kind": "insert_after",
+  "after_original": "...Okay. That one can stay.",
+  "new": "Pupusas next door, laps in here. Anything warm enough gets the amber moving. Good to know. I have a feeling we're going to need it."
+ },
+ {
+  "scene": "ch12After",
+  "speaker": "Grace",
+  "kind": "insert_after",
+  "after_original": "Long Island is under glass. So we go under the glass. Or around it.",
+  "new": "The Long Island gate turned amber, Tata. Is Deedee stuck like Doña Carmen was?"
+ },
+ {
+  "scene": "ch12After",
+  "speaker": "Tom",
+  "kind": "insert_after",
+  "after_original": "Long Island is under glass. So we go under the glass. Or around it.",
+  "new": "Maybe. And if she is, we know how to fix it now. We bring her something warm."
+ }
+]

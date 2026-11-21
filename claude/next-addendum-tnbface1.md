@@ -1,0 +1,9 @@
+# tnbface1 (2026-11-12 ~18:06 to ~18:40, main 5c5dd30): chapter 11, everyone faces TNB while he talks with the group. DONE, waiting on Tom's phone check
+
+- Tom 18:06: in chapter 11 when the group meets Nara and TNB, Grace faces Rose but she should face TNB.
+- Fact (cause): conversation staging (`huddleTurn`, engine/story.js) turns each person toward the middle of the OTHER people in the huddle. TNB is not in the party yet (he is a hidden follower, barred from the party) so he was not counted, and Grace looked at Rose or Tom.
+- Fix (fact, pushed, smoke FAILS []): new optional `lookAt:'Name'` on a talk step. `stageScript`'s huddle step passes it through, and `huddleTurn` then turns everyone who can turn (not posed, not `still`), except that person, to face them (dominant axis, 4 directions). Used on all 16 talk steps of `SCENES.ch11Meet` from TNB's "Hey, babe" line to the sleepover rules (data/scenes-p2.js). No line reworded, no voice touched. Tags: engine/story.js and main.js stamp `tnbface1`.
+- Tested (fact): `tools/reaction_test.py`, chapter 11, `ch11Meet` on `concourse`, party tom, grace, rose, amy, starts [30,11,up] and [36,10,left], portrait; Grace faces TNB's side on every page, 0 page errors. Caveat: layouts vary a little run to run, and in the two test layouts the old code also happened to face the same 4-way direction, so I could not reproduce Tom's exact frame; the fix makes the facing deterministic.
+- Tom's check: title stamp `build tnbface1` or later; chapter 11, the meeting at the Concourse: during TNB's lines and while Grace speaks she should face TNB, not Rose.
+- Reusable (standing): to make a group face one person in any scene, put `lookAt:'<name>'` on the talk steps. Works for party members, followers and NPCs by name.
+- Note: next.md was NOT rewritten this session (it is large and other sessions edit it); next session should add one line pointing here.

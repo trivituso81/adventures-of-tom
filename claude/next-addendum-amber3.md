@@ -1,0 +1,6 @@
+# amber3 (2026-11-12 ~23:00 PT, main 18220bf): the twelve approved amber pictures are installed
+
+- Tom approved all 12 `amber-*` Art Library entries. Installed with `python3 tools/sprite-bake/bake_amber.py --all` (reads the newest `art/raw/npcs/amber-<id>-v*.png` directly, keys the background, removes pink flecks, crops; Carmen's three states share one crop; max 640 tall) into `art/amber/<id>.webp`.
+- Draw: `engine/ch12-render.js`. `AMBER_K=1.28` (picture height as a multiple of the figure height), `AMBER_V` cache tag, `amberArt(n)` picks the stage picture (falls back to the frozen one). Pictures are drawn in the `b7DrawMapFx` pass AFTER the grey street blend (`ch12GreyNow()`), otherwise the amber turned grey. The old glass block is only a fallback for Gus and Bean (ch14), who have no pictures.
+- Look at frames: `python3 tools/amber_look.py`. Test: `python3 tools/amber_test.py [OUT]` passes portrait and landscape (`AMBER_FAKE=1` for the stand-in path). The test now parks other residents far away before pressing A, because a wandering resident (Michael) could stand next to Mr. Washington and take the press (test problem, not a game bug).
+- Not done: not seen on a phone; Gus and Bean (ch14) still have no amber picture; Carmen's crack and break scene was tested by `reaction_test.py` before the pictures existed, not re-rendered with them.

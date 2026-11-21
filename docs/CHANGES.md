@@ -1,3 +1,8 @@
+## projclean1a (2026-11-21): Project docs moved into the repo: 151 docs copied into claude/ (first part of the second run)
+
+- Card c-projclean: the repo is now the one home for Claude working docs; the Project keeps only four mirrors. This part copied 151 Project docs word for word to the same path in claude/ (story, dialogue, next-addendum, tone and voice notes, the story bible, CHANGES-archive). No game file changed.
+- Left in the Project on purpose, not copied: comedy-bible.md, story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md (they spell out a full street address), costs1-handoff.md (a personal spending ledger), dialogue-clarity-rewrite.json (the write was stopped by a safety classifier; its .md twin copied in full).
+
 ## b3s14b (2026-11-20): New battle: balance pass follow-up, bosses checked at Rank 2 and Rank 5, no numbers changed
 
 - Tom's card c-b3s14b (the open items of c-b3s14). Plain player, 100 fights per boss: at Rank 2 (the Lab default) all 11 bosses stay at 5.07 to 6.32 rounds; at Rank 5 eight stay at 4.98 to 5.94 and three fall under 5 (Big Shake 3.72, Iron-Gill 4.04, Old Ironbelly 4.98). Call: not retuned, since raising HP would push Rank 2 past 7. Table in docs/BATTLE3.md.

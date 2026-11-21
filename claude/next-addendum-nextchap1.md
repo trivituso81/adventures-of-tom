@@ -1,0 +1,9 @@
+# nextchap1 (2026-11-12 ~18:30, main 3943bcb): no chapter says the next chapter is "still being built"
+
+- Tom 18:12: at the end of chapter 11 the game said chapter 12 was being built. All chapters are built; never say it at the end of any chapter.
+- Fact (DONE, pushed, smoke FAILS [], node --check on every changed file): removed the "Chapter N+1 is still being built" toasts after chapters 1, 7, 8, 11, 12, 14, 15, 17, 18, 19 (data/scenes.js, data/scenes-p2.js, data/scenes-ch12/14/15/17/18/19.js). Goal toasts that began "Chapter N is coming." (14, 15, 17, 18, 19) keep only their story sentence.
+- Fact: the generic completed-chapter line in `currentObjective` (engine/story.js) now reads the chapter's last goal if one is set, else "Explore as much as you like, then follow the story into chapter N+1." (chapter 20: "Explore as much as you like."). Chapters 1 to 4, 7 to 10 keep their own specific lines.
+- Closes ORDER item 3 of claude/next.md (the "still being built" cleanup). Still true: the quest log gives no specific "how to start chapter N+1" line for chapters 5, 6 and 11 to 19; wording is generic. If Tom wants exact lines, check how each chapter N+1 starts first and test each hop.
+- Left alone on purpose (unreachable): engine/splash.js:94 text for chapters past 20, and the placeholder FULL GAME button text in index.html (the splash rebuilds its choices).
+- Tom's check: title stamp `build nextchap1` or later; finish chapter 11 (or any chapter): no "being built" toast, quest log reads "Chapter complete. ..." with no such line.
+- Test (fact): real browser, `chapterJump(N)` plus `ch<N>-done`, `currentObjective().text` for chapters 1, 5, 11, 12, 19, 20: no stale wording, 0 page errors. Chapter jumps to 13, 16, 20 landed on the previous chapter in that quick check (test artifact), so those three end toasts were checked by reading the scene files only (13 and 16 never had the wording).

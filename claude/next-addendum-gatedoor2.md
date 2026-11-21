@@ -1,0 +1,14 @@
+# gatedoor2 + STOP-LOSS (2026-11-12 09:17 to 10:10, main 6a19034)
+- Tom 09:14: in chapter 9 the player must not enter Gate Zero until the coins are in; walking into the doors must show a prompt. Tom 09:17: gatedoor1 "didn't work". Tom 09:59: "there's still no possible interaction to insert coins". Two fixes in a row did not satisfy him, so the stop-loss rule applied: no third variant.
+- Facts (tested in a real browser, tools probes in /home/claude/scratch, not in the repo):
+  - gatedoor1 (0b504c8, other session): locked the two door tiles (14,3) (15,3) on Terminal Zero only in `chapter:10`. A chapter 9 save walked straight in.
+  - gatedoor2 (6a19034): lock now `cond:{until:10,notFlag:'ch10-door'}` (data/maps-le.js, Terminal Zero `gates`). Chapters 8, 9, 10 stay in Terminal Zero and show "The doors are locked tight. Above them, the big clock is waiting for its coins."
+  - The coin menu exists ONLY when ALL are true (`ch10Gate`, data/scenes.js ~3877): `STORY.chapter===10`, flag `ch10-term` set, no `ch10-door`, and all three clock hands (flags `ch10-sec`, `ch10-bag`, `ch10-lounge`, the Security, Baggage Claim and Lounge fights; `TERM_HANDS` in data/maps-le.js). With only fewer than 3 hands, A on the doors shows "Still missing: ..." and no coins. With all three, A shows the clock text then PUT THE COINS IN / NOT YET (verified by setting the flags).
+  - In chapter 9 (or earlier) there is NO coin interaction at all. So gatedoor2's chapter 9 line "the clock is waiting for its coins" points at something that does not exist yet. That is a defect in gatedoor2.
+  - A on the doors only works standing on tile x 14 or 15, row 4, facing up (doors are objects at (14,3), 2 wide). I did not test other tiles.
+- What I do NOT know (only Tom can supply): which chapter his save is in (STORY.chapter, shown on the chapter card), whether the Security, Baggage Claim and Lounge hands are done, and the exact text on screen when he presses A on the doors.
+- Next session: ask Tom for the exact on-screen text when he presses A on the doors and his chapter. Then pick ONE branch:
+  - chapter 9 or earlier, wants the coins there: the coin mechanic is a chapter 10 story beat (7 coins from the seven areas, hands first). Do not move it without Tom's go-ahead; instead make the chapter 9 line honest (no mention of coins).
+  - chapter 10, hands missing: the fix is the hand text (name which hand and where), not the coin menu.
+  - chapter 10, all hands done and still no menu: debug `pressAction` order (`LE_pressAction_ch10`, facingTarget on the doors object) at his tile.
+- Title stamp must read `build gatedoor2` on his phone (stale phone: `SW_VER` in sw.js).

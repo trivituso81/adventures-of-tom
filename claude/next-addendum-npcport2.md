@@ -1,0 +1,8 @@
+# next-addendum: NPC portrait zoom, crop and centering (npcport2, main at 92fd731, 2026-11-10 14:xx)
+
+- Tom 14:11: "Zoom and crop and center every npc portrait so they match Tom's current zoom and crop."
+- Done: `tools/sprite-bake/bake_npc_portraits.py` now uses the cast method (bake_portraits.py). Per NPC, `FACE[id] = (left pupil x, right pupil x, eye line y, chin y)` in hero pixels, read by eye on a grid for all 21 and checked on an overlay. Face size m = mean((chin-eye)/150, spacing/112); square side = 448 x m (448 = mean of Tom's seven saved cast crops); centred on the pupils; eye line 56 percent down the square. Old head-plus-hat box code removed. All 21 `portraits/npc/*.webp` rebaked; `?v=npcport2` in engine/menu.js PORTRAITS and in the index.html script tag for engine/menu.js. CHANGES entry "npcport2".
+- Tests: contact sheet looked at (faces all same size, eyes on one line), tag_check ok, smoke FAILS [].
+- Not checked: phone view. Judgement points: Fern and Luna have small faces under big hats, so they zoom in the most; hats are cropped on everyone, as on the cast.
+- If Tom says one NPC is too big, small or off-centre: edit that id's row in `FACE` (move the pupils or chin), rerun `CHECK=/tmp/p.png python3 -I tools/sprite-bake/bake_npc_portraits.py <id>`, bump `?v=` on engine/menu.js and its index.html script tag. If he gives his own square for an NPC (like portraits.html does for the cast), add a crops override.
+- Process note: rebase hit a docs/CHANGES.md conflict again; resolved by keeping both, then confirmed `git status -sb` showed no HEAD (no branch) and HEAD equalled origin/main.

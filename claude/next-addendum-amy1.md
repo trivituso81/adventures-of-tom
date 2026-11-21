@@ -1,0 +1,9 @@
+# next-addendum-amy1 (2026-11-11 12:15, main 14531bb, CHANGES "amy1" and "heads2"; read with claude/next.md, not merged into it because Project docs have no partial edit)
+
+- Tom 10:41 "new amy art also proposed" (read as approved): Amy hero v2, walking v3, emotions v4 installed with the tomboppy1 recipe (`walk_splice.py amy`, `emotion_frames.py`, `bake_emotion_faces.py`, `bake_story_poses.py`, `bake_talk_faces.py`, `bake_portraits.py`; tags `amy1`, `EMO_V`, `TALK_V` by hand).
+- Amy's saved hand crop in `data/portrait-crops.json` (10:16) predated hero v2 (approved 10:38), so it was removed; `FACE['amy']` in bake_portraits.py re-measured. Tom may re-crop her in portraits.html.
+- Amy's dialogue face is framed on her walk frame (`WALK_FRAMED`, `NECK_SET['amy']` .27 in bake_talk_faces.py) because the hero-ratio crop cut her chin.
+- Tom 12:05 "not reflected in head sizes ... and portrait crop": HEAD SIZES (heads.html) draws from `data/head-sizes.json` and `art/heads/*.webp`, built only by `python3 tools/sprite-bake/head_adjust.py manifest` (slow, about 3 minutes, run it in the background). It was not rerun in tomboppy1 or amy1. Rerun in heads2 for tom, boppy, justin, amy (applied factors 1.0). STANDING STEP for any walk or hero install: run `head_adjust.py manifest` and commit data/head-sizes.json plus art/heads.
+- Portrait crop page: base crops (`data/portrait-crops-base.json`) were already current for all four; saved crops for Tom and Boppy postdate their heroes and stay. Justin and Amy show the measured crop.
+- Not looked at: landscape, an Amy dialogue in the game, Amy NPC pose size on the map. Tom's phone check: Amy walking, her mood poses, her menu portrait crop, and the HEAD SIZES page for the four.
+- Other characters still on older approved sheets are not touched (see next.md ORDER NOW item 8).

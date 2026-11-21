@@ -1,0 +1,10 @@
+# Music takes merged (Tom 2026-11-12 18:19, music3, main 8008645)
+
+Merge this into claude/next.md Live state and "Waiting on Tom" at the next rewrite (next.md itself was not rewritten in this session; it is 25 KB and the Project tool has no patch).
+
+- Tom sent `local-music-export.json` ("I selected new musical tracks for most items"): 32 takes (music_v1): boss, defeat, levelup, 14 Long Island loops (all but title and battle), 12 Los Angeles loops, ns_party, ns_hunt. Not in the export, unchanged: title, battle, victory, ns_frozen, ns_boss, ns_win.
+- Fact (DONE, pushed, smoke FAILS [], tools/music-library/test.py PASS, tag_check ok): `python3 -I tools/music-library/merge-local.py <export> music`, then `node tools/music-library/make-index.js` (MC_TRACKS rewritten for 23 tracks). Tags: `?v=music3` (music-clips.js, main.js stamp `build music3`). `defeat` came back 8.1 s (asked 10 s), kept.
+- Fact: `merge-local.py` now handles the ElevenLabs fade-out itself (the music2 finding). A loop whose level stays 4 dB or more under the track body for over 1.5 s at the end is cut at the last steady point (max 8 s) with a 0.15 s fade; manifest `trim_tail`. Cut this time: boss, town, row, pier, reeds, sundial, school, stacks, readroom, moonclub, dome, terminal, blvd, studio, stageset, oakpark, oak (gatezero only lost 3.8 s of leading silence). Left as made (fade about 1.5 s or less): cafetorium, schoolyard, ns_party and the others.
+- Not verified: nobody listened (level measurement only). Tom's check: title stamp `build music3`; play stacks, row, blvd, boss past one loop; if an ending still dips or a cut sounds abrupt, fix the prompt wording (end at full level, no fade-out) in tools/music-library/tracks.json and re-make that track, do not keep trimming (stop-loss).
+- Note: his phone's own Used takes already played these on his phone; the repo copy matters for other devices and a cleared browser.
+- Process: two rebases were needed (other sessions pushed twice). The tag commit conflicted on engine/main.js and index.html; I skipped it and re-ran bump_tags against the new origin/main, which is cleaner than resolving.

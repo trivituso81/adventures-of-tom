@@ -1,0 +1,11 @@
+# pending1 (2026-11-12 19:09 to ~19:50, main 979a135): Voice Library "Pending upload" + "Export pending clips"
+
+Read this together with claude/next.md and claude/next-addendum-vclips1.md. It supersedes the "Not in game yet" notes in claude/next-addendum-notingame.md for what the filter is called and how it works. next.md was NOT rewritten (40 KB, other sessions writing).
+
+- Tom 19:09: the re-recorded filter showed every clip on the phone. He wanted a flag for clips recorded since the last upload, cleared once uploaded; implementation left to Claude.
+- Built (voices.html, network-first, no `?v=` tag): Show > **Pending upload** (fingerprint in neither `data/merged-takes.json` nor the device's own SENT list `aot-vl-sent` in localStorage) and Show > **Sent, not merged yet**. Button **Export pending clips (N)** writes `local-clips-pending.json` with only pending clips whose line is still live (stale clips are never in it), then marks them sent. **Export all phone clips** keeps the old full `local-clips-export.json`. Re-recording a line changes its fingerprint, so it is Pending again. Export recomputes fingerprints fresh first.
+- Merge procedure change (fact): a `local-clips-pending.json` needs NO stale-clip filtering (live lines only), so merge it straight with `merge-local.js` per the recipe. An `local-clips-export.json` ("all") still needs the unused_voice filter unless Tom says override everything. After any merge, push `data/merged-takes.json`; that is what clears Pending/Sent on his phone.
+- Honest limit (fact): "sent" is set when the share sheet completes or the download starts, not when Claude receives it. If Tom exports and the file never reaches Claude, those clips sit in Sent, not Pending. He can still use Export all phone clips.
+- Open for Tom: nothing. Stale "Tommy" clips on his phone are not in Pending and not exported by the pending export.
+- Tests: `python3 tools/voice-library/pending_test.py` (13 checks, FAILS []), serve on 8011; `tools/voice-library/test.py` export step now clicks `#expall`; that test still stops earlier at the disabled Clear button (line 76), as before. smoke FAILS [].
+- Tom's check: ADMIN > Voice Library, Show chips: "Pending upload" (count) and the button "Export pending clips (N)". Right now the count is the clips recorded since export 6 (the ledger holds export 6 after vclips1).

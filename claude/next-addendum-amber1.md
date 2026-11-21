@@ -1,0 +1,22 @@
+# amber1 and amber2 (2026-11-12, main 4ecdbb9): chapter 12 frozen neighbors
+
+Tom's reports: (1) amber residents were a see-through yellow block, still walked around, and spoke narration in their own voice and face; he asked for per-person amber pictures, no walking, and the narrator speaking. (2) The pictures should show the emotion each person had when frozen (not just standing), and Doña Carmen needs a few states as she breaks free.
+
+## Done (fact, pushed)
+- Freeze: `updateNPCs` (engine/battle-draw.js) never moves an NPC with `amber` set (also Gus and Bean, chapter 14). Cause was that `HOLD_RULES` only reached map monsters.
+- Narrator: `openDialog` (engine/overworld.js) uses speaker "Narrator", no portrait, no turning to face Tom while `n.amber && n.amberNarrator`. `amberNarrator` is set in data/scenes-ch12.js STORY_WORLD for the ten neighbors. After thawing they speak as themselves. Line texts and clip keys are unchanged. Inside the scenes (ch12Carmen, ch12Alvarez) the narration lines are still labelled with the neighbor's name because those lines have recorded clips keyed by speaker; not changed.
+- Art entries (all drafts, none generated), tab NPCs, group "Chapter 12 amber", builder tools/art-library/amber-prompts.js (listed in make-prompts.js; entries spliced into data/art-prompts.json because make-prompts.js fails on main in the sandbox, npc-prompts.js palette lookup). Each uses the person's newest approved npc-photo hero as ref and a prompt built from the moment in their frozen line (data/scenes-ch12.js, "What the neighbors say while amber"):
+  - amber-washington (mid-story, finger up, gold chip on hat), amber-marisol (amber shoulders to sneakers, free dog sitting beside the block), amber-larry (leaf blower raised, one leaf in the air), amber-carmen (pointing mid-sentence), amber-alvarez (mid-NO), amber-beto (standing, fist up, shouting at the TV), amber-tony (plate in each hand, tortilla in the air), amber-yesenia (mid eye-roll, earbud out), amber-claudia (on her phone), amber-kevin (mid-yawn, standing).
+  - Beto and Kevin are drawn standing because the game draws them as standing figures beside the sofa and bunk, not seated in furniture.
+  - Carmen's break-away: amber-carmen-crack and amber-carmen-break, each with refs [hero, art/raw/npcs/amber-carmen-v1.png] (the approved frozen picture, so generate and approve amber-carmen first). The Alvarez family thaws on one ding, so one picture each.
+- Carmen scene: `SCENES.ch12Carmen` sets `n.amberStage` (0 frozen, 1 cracking, 2 breaking away) through `ch12AmberStage`: ding and cracking picture for 1 s, whoosh and break-away picture for 0.5 s, then her recorded line, then free. Stage resets to 0 when thawed.
+- Renderer: engine/ch12-render.js `AMBER_IDS`, `amberLoad`, `amberArt`, a `drawActor` wrapper. Draws art/amber/<id>.webp (and <id>-crack, <id>-break) at 112 percent of the figure's drawn height (`a._figH`, recorded in drawSheetActor), feet on the ground line, and skips the glass block. A missing stage picture falls back to the frozen one; no picture at all falls back to the plain figure inside the glass block, as before.
+- Test: `python3 tools/amber_test.py` (portrait and landscape; `AMBER_FAKE=1` also checks the painted path, stage pictures and fallback with stand-ins). `reaction_test.py` plays ch12Carmen through (15 pages, no errors).
+
+## Install, once Tom has generated and approved a picture
+1. Find the approved file in data/art-prompts.json (entry `amber-<id>`, last version, under art/raw/npcs/).
+2. Key the magenta background to transparent (same corner-colour keying as tools/art-library/art_bake.py key_background) and save as tools/sprite-bake/src/amber-<id>-v1.png.
+3. `python3 tools/sprite-bake/bake_amber.py <id>` (ids include carmen-crack and carmen-break) writes art/amber/<id>.webp (cropped, at most 640 px tall).
+4. Look at it in the game (`AMBER_FAKE` shows how to place a test picture; for Carmen play ch12Carmen with `reaction_test.py` and view the frames), check the size against the figure (112 percent; change in the ch12-render.js `drawActor` wrapper if a slab looks too big or small; the three Carmen pictures share one canvas so they line up), bump tags (`AMBER_V` in engine/ch12-render.js too), CHANGES entry, push.
+- Chapter 14 Gus and Bean are amber too but have no picture entries; add them the same way if Tom asks.
+- Not checked: the figures in the Casa Alvarez and pupuseria interiors (indoor scale uses the same `_figH`), and any real picture (none exists yet).
