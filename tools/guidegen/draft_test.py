@@ -13,7 +13,7 @@ def check(name, ok, detail=''):
     print(('ok   ' if ok else 'FAIL ') + name + ('' if ok else '  ' + str(detail)[:400]))
     if not ok: fails.append(name)
 
-G = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8'))
+G = D.load_guide()   # starter drafts, whatever data/guide-prompts.json holds
 A = G['anims']
 work = D.todo(G)
 check('only rule-draft animations are picked', work and all(a['promptSource'] == 'rule-draft' for _, a in work), len(work))
@@ -47,6 +47,8 @@ check('left or right fails', bad(GOOD_F.replace('behind his back, holds', 'behin
 check('saying a thing twice fails', bad(GOOD_F + ' He tucks the cartridge behind his back again.', 'family', 'twice', bf))
 check('a banned word fails', bad(GOOD_F.replace('small game', 'small retro game'), 'family', 'not allowed', bf))
 check('an em dash fails', bad(GOOD_F.replace('and blows', '— and blows'), 'family', 'dash', bf))
+check('a game label used as a prop fails', bad(GOOD_F.replace('game cartridge', 'racket'), 'family', 'game label', bf))
+check('a game label that is in the move name is allowed', D.check_motion(bf, GOOD_F.replace('game cartridge', 'racket'), 'family', 'Racket Swing') == [])
 check('too short fails', bad('From his starting relaxed stance, he blows once. Without repeating, he stays completely still.', 'family', 'words', bf))
 
 # ---- draft_one: head and tail copied in code, broken answer retried once, second failure left alone

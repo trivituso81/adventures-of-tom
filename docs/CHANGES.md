@@ -1,3 +1,10 @@
+## guideprompts1c (2026-11-21): the prompt writer no longer turns the game's hit-type labels into props
+
+Card c-guideprompts. Looking at the 267 prompts from the first run, 92 used a game label as if it were an object or action (a monster "holds a racket behind its back" because its hit type is Racket, "as if performing a ground sweep").
+- `tools/guidegen/draft.py`: the model is told that racket, clobber, drench, razzle, sizzle, melee, ground sweep, guard stance and announced are labels for the kind of hit, and no longer sees the flavor and tag lists; the same words are refused in code unless they are in the move's own name or its starter. The script now rebuilds the starter drafts itself (`load_guide`), so it works whatever `data/guide-prompts.json` holds.
+- `python3 tools/guidegen/draft_test.py` covers a label used as a prop and a label that is in the move's name. Those 92 are written again; the other 175 are kept.
+- Nothing in the game changed.
+
 ## nightgreena (2026-11-21): the Art Library check no longer fails on gate and item pictures that carry a bake field
 
 Card c-nightgreen, test `art-library__validate` (`node tools/art-library/validate.js`). It failed with 41 problems, not only the clip-rose-strike one the old note named: 39 entries (14 story gates, 18 item sheets, 2 item redos, 3 solo items, one background) carry a `bake` field on purpose, and 2 solo item ids use an underscore because they are game item ids (`amy_chm1`, `g_bsash`). The game was right; the check was wrong.

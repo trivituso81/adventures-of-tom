@@ -20,6 +20,7 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, 'tools', 'clip-g
 import reconcile as R
 
 BAD_WORDS = ['sound', 'noise', 'zoom', 'camera', 'music', 'voice', 'says', 'shouts', 'yells', 'whispers', 'speaks', 'sings', 'left', 'right', 'faster', 'slower']
+LABEL_WORDS = ['racket', 'clobber', 'drench', 'razzle', 'sizzle', 'melee', 'ground sweep', 'guard stance', 'announced']   # the game's damage-type and aiming labels, never objects or actions
 EXAMPLES_FAMILY = [
     ('Single index finger tap (approved)', 'From her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.'),
     ('Lounge Pass Flex', 'From his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and presents it forward at face height once with a little flourish, holding it there like a VIP badge for a moment. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.'),
@@ -41,7 +42,8 @@ Rules (all of them):
 4. Describe what the camera would see in one clean action. No sound, no voice, no words spoken, no camera moves, no other characters, no text on screen, no effects added after the fact (the game draws the dust, sparks and markers).
 5. Never say left or right ("forward" is toward the foe). Never describe speed. Say each thing once: describing one action two ways comes back as two actions.
 6. Plain words, no em dashes, none of: 16-bit, 32-bit, SNES, pixel art, retro, sprite, Final Fantasy.
-7. A move that is a buff, shield or support (no hit) is shown as a clear gesture of that idea (hands raised, a prop held up), not as an attack.
+7. Words such as racket, clobber, drench, razzle, sizzle, melee, ground sweep, guard stance and announced are the game's labels for the kind of hit. They are never objects, props or actions: do not use them. Picture the move from its NAME and what it does.
+8. A move that is a buff, shield or support (no hit) is shown as a clear gesture of that idea (hands raised, a prop held up), not as an attack.
 
 Reply with JSON only: {"motion": "the new MOTION body only, the sentences, without the MOTION: line"}"""
 
@@ -70,7 +72,7 @@ def pronoun_ok(starter, motion):
     return ''
 
 
-def check_motion(starter, motion, kind='family'):
+def check_motion(starter, motion, kind='family', name=''):
     """Rules run in code on the new MOTION body. -> list of what is wrong (empty: fine)."""
     why = []
     m = (motion or '').strip()
@@ -97,6 +99,9 @@ def check_motion(starter, motion, kind='family'):
         if 'pose of the attached picture' not in low: why.append('the monster motion lacks "the pose of the attached picture"')
     for w in BAD_WORDS:
         if re.search(r'\b' + re.escape(w.strip()) + r'\b', low) and not re.search(r'\b' + re.escape(w.strip()) + r'\b', starter.lower()): why.append('the word "%s" is not allowed in a motion' % w.strip())
+    for w in LABEL_WORDS:
+        if re.search(r'\b' + re.escape(w) + r'\b', low) and not re.search(r'\b' + re.escape(w) + r'\b', (starter + ' ' + name).lower()):
+            why.append('"%s" is a game label for the kind of hit, not an object or an action: show what the move is by what the character or creature does' % w)
     bad = [b for b in R.BANNED if b in low]
     if bad: why.append('words that are not allowed: ' + ', '.join(bad))
     if '—' in m or '–' in m: why.append('a dash character was used')
@@ -107,7 +112,7 @@ def user_text(a, hdr, body, look):
     kind = a.get('route') == 'wan'
     ex = EXAMPLES_FAMILY if kind else EXAMPLES_MONSTER
     br = a.get('brief') or {}
-    facts = {k: br[k] for k in ('name', 'owner', 'desc', 'flavor', 'shape', 'target', 'tags', 'effects', 'does', 'listRow') if br.get(k)}
+    facts = {k: br[k] for k in ('name', 'owner', 'desc', 'shape', 'target', 'effects', 'does', 'listRow') if br.get(k)}   # flavor and tags are game labels (racket, clobber, thrown ...), not facts about what it looks like
     out = 'KIND: %s\nANIMATION FACTS (from the game data):\n%s\n' % ('a family member (Wan video model)' if kind else 'a monster (xAI video model)', json.dumps(facts, indent=1, ensure_ascii=False))
     if look: out += '\nTHE CREATURE\'S LOOK:\n%s\n' % look
     out += '\nSTARTER MOTION (a generic placeholder: replace it)\n%s\n%s\n' % (hdr, body)
@@ -137,11 +142,25 @@ def draft_one(ask, a):
         try: m = parse(txt)
         except Exception as ex: why = ['the reply was not the JSON asked for (%s)' % type(ex).__name__]; continue
         if not m: why = ['no motion was given']; continue
-        why = check_motion(body, m, kind)
+        why = check_motion(body, m, kind, (a.get('brief') or {}).get('name', ''))
         if not why:
             parts = [head, hdr + '\n' + m] + ([tail] if tail else [])
             return {'ok': True, 'prompt': '\n\n'.join(parts) + ('\n' if a['prompt'].endswith('\n') else ''), 'why': [], 'spent': round(spent, 5), 'tries': tries, 'motion': m}
     return {'ok': False, 'prompt': None, 'why': why, 'spent': round(spent, 5), 'tries': 2}
+
+
+def load_guide(root=ROOT):
+    """The Battle Guide's animations as they are with NO written prompts laid over them, so every animation that has no job, entry or used prompt shows its
+    starter draft (the thing this script replaces), whatever data/guide-prompts.json holds. Built by tools/guidegen/build_map.js with an empty override file."""
+    import subprocess, tempfile
+    with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:
+        json.dump({'anims': {}}, f); empty = f.name
+    try:
+        r = subprocess.run(['node', os.path.join(root, 'tools', 'guidegen', 'build_map.js'), '--stdout'], cwd=root, env={**os.environ, 'GUIDEGEN_PROMPTS': empty}, capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip().startswith('{'): return json.loads(r.stdout)
+    finally:
+        os.unlink(empty)
+    return json.load(open(os.path.join(root, 'data', 'guide-anims.json'), encoding='utf-8'))
 
 
 def todo(guide, ids=None):
@@ -191,7 +210,7 @@ def main(argv):
     ap.add_argument('--model', default=''); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--existing', default='', help='an earlier guide-prompts.json to add to (so a second run keeps the first run\'s prompts)')
     a = ap.parse_args(argv)
-    guide = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8'))
+    guide = load_guide()
     ids = {x.strip() for x in a.ids.split(',') if x.strip()} or None
     existing = None
     if a.existing and os.path.exists(a.existing):
