@@ -20801,7 +20801,7 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Fixed as fix-ch1flight-3 (the cab map no longer flashes). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: the phone picture stays on while TNB's text is read, then the Chapter 1 card, then straight to the flight seat with no taxi company flash in between. Report anything off with the REPORT tab.",
@@ -20838,9 +20838,12 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: there's still a flash of the taxi cab company between the phone on seat and the plane animation start Sent to Claude as card c-fix-ch1flight-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T20:43:32.124Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-voiceboard",
@@ -25352,7 +25355,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDLdQ8yhHeC6LQH7N8",
+    "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25412,6 +25415,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28834,7 +28841,7 @@
    "id": "c-fix-ch1flight-3",
    "tag": "fix-ch1flight-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check chapter 1 ends in the flight",
@@ -28882,6 +28889,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-ch1flight-3: no flash of the taxi company between the phone on the seat and the flight"
     }
    ],
    "prompt": {
@@ -28895,7 +28906,8 @@
    },
    "after": "t-ch1flight",
    "auto": true,
-   "started_at": "2026-11-21T20:44:38+00:00"
+   "started_at": "2026-11-21T20:44:38+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-night-clean",
@@ -28933,11 +28945,23 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "first": "2026-11-21T20:49:38Z",
+   "last": "2026-11-21T20:49:38Z",
+   "tags": [],
+   "cards": [
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFfajAAt75dvCSxA9B",
    "title": "Fix: Check chapter 1 ends in the flight",
    "first": "2026-11-21T20:46:01Z",
-   "last": "2026-11-21T20:46:01Z",
-   "tags": [],
+   "last": "2026-11-21T20:49:07Z",
+   "tags": [
+    "fix-ch1flight-3"
+   ],
    "cards": [
     "c-fix-ch1flight-3"
    ]
@@ -33113,8 +33137,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "42b54b644bc17c6e2c28c7f86b160797a12dda04",
- "synced_at": "2026-11-21T20:48:21+00:00",
+ "synced": "3e35b0cbfc734d897b6d2ed3869b34ae8ea92dbd",
+ "synced_at": "2026-11-21T20:49:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
