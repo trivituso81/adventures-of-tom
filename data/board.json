@@ -23816,7 +23816,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
     "opening": "not started"
    },
    "prompt": {
@@ -24939,6 +24939,29 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-scrub-1irj in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-scrub-1irj.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Longer brushing, outward towards monster\n\nThe animation: Deedee, \"Hand Me My Glasses\" Scrub (move hand_me_my_glasses_scrub in data/b3-kit-deedee.js). Its video is clip deedee_scrub (data/clips/deedee-scrub.js, art/clips/deedee-scrub.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-scrub-1irj. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play \"Hand Me My Glasses\" Scrub, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-board-guidevibe3",
+   "tag": "board-guidevibe3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle System",
+   "title": "the Battle Guide's next card now also shows each person's third Vibe, marked as planned",
+   "next": "Done: the Battle Guide's next card now also shows each person's third Vibe, marked as planned",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guidevibe3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -25035,7 +25058,7 @@
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T09:18:57-08:00",
+   "last": "2026-11-21T09:21:16-08:00",
    "tags": [],
    "cards": [
     "c-anim-rose-hit-uy5r",
@@ -25043,6 +25066,21 @@
     "c-anim-rose-victory-vqjc",
     "c-anim-rose-give-w5ws",
     "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "first": "2026-11-21T07:31:48-08:00",
+   "last": "2026-11-21T09:20:33-08:00",
+   "tags": [
+    "battleguide1",
+    "board-guidevibe3"
+   ],
+   "cards": [
+    "c-battleguide",
+    "c-battleguide2",
+    "b-board-guidevibe3"
    ]
   },
   {
@@ -25111,18 +25149,6 @@
     "c-costs1",
     "c-costs1icon",
     "c-costsduoplan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
-   "title": "Battle Guide page for the Duo, with animation notes",
-   "first": "2026-11-21T07:31:48-08:00",
-   "last": "2026-11-21T07:45:31-08:00",
-   "tags": [
-    "battleguide1"
-   ],
-   "cards": [
-    "c-battleguide"
    ]
   },
   {
@@ -28433,8 +28459,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a52b1785a004759006764da9b1532798ab6710b2",
- "synced_at": "2026-11-21T17:19:11+00:00",
+ "synced": "138898ea758008f6c7634c279d0d803a6d610d7e",
+ "synced_at": "2026-11-21T17:22:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
