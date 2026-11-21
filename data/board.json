@@ -20016,7 +20016,7 @@
   {
    "id": "t-madelot-rerecord",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
@@ -20034,6 +20034,11 @@
      "d": "2026-11-20",
      "t": "Added by c-idea-madelot. Two baked clips repeat a sentence (a looped take).",
      "at": "2026-11-21T02:06:45.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T02:55:59.313Z"
     }
    ],
    "links": [
@@ -20051,7 +20056,8 @@
      ],
      "label": "Mr. Washington's line"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-bigboard1-tap",
