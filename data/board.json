@@ -13243,7 +13243,7 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -13319,6 +13319,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stuck twice: The rescue started 9:43 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-projclean)."
     }
    ],
    "chat": {
@@ -13332,7 +13336,8 @@
     "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
-   "started_at": "2026-11-21T02:56:10+00:00"
+   "started_at": "2026-11-21T02:56:10+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "b-board-projclean",
@@ -20244,7 +20249,7 @@
    "id": "c-fix-hollowtrail-play",
    "tag": "fix-hollowtrail-play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -20266,7 +20271,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDp3fYArsNSrkJG75s",
     "opening": "Something is wrong on t-hollowtrail-play"
    },
    "history": [
@@ -20284,6 +20289,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-21T02:56:46.104Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -20297,7 +20306,35 @@
    },
    "after": "t-hollowtrail-play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T02:56:55+00:00"
+  },
+  {
+   "id": "t-stuck-projclean",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-projclean",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Move the Project docs into the repo (Project is",
+   "next": "Card c-projclean (Move the Project docs into the repo (Project is 97% full)) stalled again after its one automatic rescue. The rescue started 9:43 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-projclean"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: card c-projclean stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -23029,8 +23066,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f2346dbb09db072a506c171a95c3bcdd618c05aa",
- "synced_at": "2026-11-21T02:56:10+00:00",
+ "synced": "2511d9b33a4f2c601103ac05e1fc3fd8dd1807e9",
+ "synced_at": "2026-11-21T02:56:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
