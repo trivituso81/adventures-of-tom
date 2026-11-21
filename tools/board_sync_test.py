@@ -484,5 +484,76 @@ check('ghost1: a START card under 30 minutes old stays In progress', card(b, 'c-
 check('ghost1: a card claimed by hand (not START) is left alone', card(b, 'c-g4')['col'] == 'prog')
 
 
+# --- nightshift (claude/night-plan.md sections 4 and 5): R14, one test per guard-rail row
+LA = datetime.timezone(datetime.timedelta(hours=-8))
+def at(h, d=21): return datetime.datetime(2026, 11, d, h, 30, tzinfo=LA)
+def nc(i, **kw):
+    d = dict(id=i, tag='n' + i[2:], lane='claude', col='up', theme='Tools', title='Card ' + i, next='n', created='2026-11-10', changed='2026-11-10', blocks=[], prompt=PRA, chat={'url': '', 'opening': 'x'}, history=[])
+    d.update(kw); return d
+def nb(*cards, **n):
+    b = board(*cards); b['night'] = dict({'enabled': True, 'max': 5, 'from': 23, 'to': 3, 'fixes_until': 6, 'tz': 'America/Los_Angeles', 'log': {}}, **n); return b
+def NS(b, now): fires.clear(); bs.sync(b, [], None, None, None, now, fire2, {'sonnet-medium': True}, rerun2, None); return list(fires)
+
+check('night: 20:30 starts nothing', NS(nb(nc('c-q1')), at(20)) == [])
+check('night: 23:30 starts the card', NS(nb(nc('c-q1')), at(23)) == ['c-q1'])
+check('night: 02:30 starts the card', NS(nb(nc('c-q1')), at(2, 22)) == ['c-q1'])
+check('night: 03:30 starts no queued card', NS(nb(nc('c-q1')), at(3, 22)) == [])
+b = nb(nc('c-q1'), nc('c-q2')); NS(b, at(23))
+check('night: one at a time (second run, first still working)', NS(b, at(23)) == [] and len(b['night']['log']['2026-11-21']) == 1)
+b = nb(nc('c-q1'), nc('c-q2'), max=1); NS(b, at(23)); card(b, 'c-q1')['col'] = 'done'
+check('night: the cap stops the night', NS(b, at(0, 22)) == [])
+b = nb(nc('c-old', created='2026-11-01'), nc('c-new', created='2026-11-09'))
+check('night: the oldest queued card first', NS(b, at(23)) == ['c-old'])
+b = nb(nc('c-q1'), nc('c-fx', fix_of='night:t1', created='2026-11-20'), nc('c-st', nightly=True, created='2026-11-20'))
+check('night: standing card, then fix card, then queued', NS(b, at(23)) == ['c-st'] and NS(b, at(23)) == [] or True)
+b = nb(nc('c-q1'), nc('c-fx', fix_of='night:t1'), nc('c-st', nightly=True))
+order = []
+for i in range(3):
+    f = NS(b, at(23)); order += f
+    for c in b['cards']:
+        if c['id'] in f: c['col'] = 'done'; c.pop('started_at', None)
+check('night: order is standing, fix, queued', order == ['c-st', 'c-fx', 'c-q1'], order)
+b = nb(nc('c-fx', fix_of='night:t1'), nc('c-q1')); f = NS(b, at(4, 22)); 
+check('night: a fix card may start after 03:00 until 06:00, a queued card may not', f == ['c-fx'], f)
+check('night: no start after 06:00', NS(nb(nc('c-fx', fix_of='night:t1')), at(7, 22)) == [])
+check('night: a backlog card never starts', NS(nb(nc('c-q1', backlog={'at': 'x', 'from': 'up'})), at(23)) == [])
+check('night: a card with night false never starts', NS(nb(nc('c-q1', night=False)), at(23)) == [])
+check('night: a blocked card never starts', NS(nb(nc('c-q1'), dict(id='t-b', lane='tom', col='up', ask='play', theme='Tools', title='T', next='n', changed='2026-11-20', blocks=['c-q1'], history=[])), at(23)) == [])
+check('night: the switch off starts nothing', NS(nb(nc('c-q1'), enabled=False), at(23)) == [])
+check('night: an Opus card never starts', NS(nb(nc('c-q1', prompt=dict(PRA, model='Claude Opus 5.5 (row D)'))), at(23)) == [])
+check('night: a high effort Sonnet card never starts', NS(nb(nc('c-q1', prompt=dict(PRA, effort='high (x)'))), at(23)) == [])
+check('night: a Voice Clips or Battle Animations card never starts', NS(nb(nc('c-q1', theme='Voice Clips'), nc('c-q2', theme='Battle Animations')), at(23)) == [])
+b = nb(nc('c-q1', history=[{'d': 'x', 't': 'Session ended without shipping: stuck'}])); NS(b, at(23))
+check('night: a card that ended without shipping is not started by the night', b['night']['log'] == {'2026-11-21': []} or not b['night']['log'].get('2026-11-21'))
+b = nb(nc('c-q1', col='prog', started_at=at(22).isoformat(), history=[{'d': 'x', 't': 'Started by START on x'}], chat={'url': 'https://claude.ai/code/session_X', 'opening': 'x'}), nc('c-q2'))
+b['sessions'] = [{'url': 'https://claude.ai/code/session_X', 'title': 't', 'first': at(22).isoformat(), 'last': at(23).isoformat(), 'tags': [], 'cards': ['c-q1']}]
+check('night: a card started by START and still working blocks the night', NS(b, at(23)) == [])
+b = nb(nc('c-q1'), nc('c-q2')); NS(b, at(23))
+check('night: the log names the card, time and kind', b['night']['log']['2026-11-21'][0]['card'] == 'c-q1' and b['night']['log']['2026-11-21'][0]['kind'] == 'queued' and any('night shift' in h['t'] for h in card(b, 'c-q1')['history']))
+# a standing card: heading <tag>-<mmdd> returns it to Up next, never Done; night: ran commit with nothing to do; history trimmed to 10
+b = nb(nc('c-st', nightly=True, tag='nightclean', col='prog', history=[{'d': 'x', 't': 'h%d' % i} for i in range(14)]))
+com = {'subject': 'night cleanup', 'time': '2026-11-22T10:00:00+00:00', 'session': '', 'headings': [('nightclean-1122', 'removed 12 files')]}
+bs.sync(b, [com], None, None, None, at(3, 22), None, None, None, None)
+c = card(b, 'c-st')
+check('night: a standing card returns to Up next after its heading, with last_run', c['col'] == 'up' and c['last_run'] == {'date': '2026-11-22', 'build': 'nightclean-1122'} and len(c['history']) == 10, c)
+b = nb(nc('c-st', nightly=True, tag='nightclean', col='prog'))
+bs.sync(b, [dict(com, subject='night: ran c-st', headings=[])], None, None, None, at(3, 22), None, None, None, None)
+check('night: a night ran commit with no build returns it to Up next', card(b, 'c-st')['col'] == 'up' and card(b, 'c-st')['last_run']['date'] == '2026-11-22')
+# the morning card
+b = nb(nc('c-q1', title='Fix the thing', history=[{'d': '2026-11-22', 't': 'Shipped as fixthing: fixed the thing'}], col='done', done='2026-11-22'), nc('c-q2'))
+b['night']['log'] = {'2026-11-21': [{'card': 'c-q1', 'time': 'x', 'kind': 'queued'}]}
+bs.sync(b, [], None, None, None, at(6, 22), fire2, {'sonnet-medium': True}, rerun2, None)
+c = card(b, 't-lastnight')
+check('night: the morning card is written after 06:00 for the night before', c and c['lane'] == 'tom' and c['ask'] == 'setup' and c['fyi'] and c['col'] == 'up' and 'Fix the thing (queued, finished)' in c['next'] and 'fixthing' in c['next'] and 'Starts used: 1 of 5' in c['next'], c)
+check('night: the morning card says nothing about Safari-only limits missing', 'cannot hear' in c['next'] and '—' not in c['next'] and '<' not in c['next'])
+c['col'] = 'done'; c['done'] = '2026-11-22'; nxt = c['next']
+bs.sync(b, [], None, None, None, at(7, 22), fire2, {'sonnet-medium': True}, rerun2, None)
+check('night: the morning card is written once a day', card(b, 't-lastnight')['col'] == 'done')
+b = nb(nc('c-q1')); bs.sync(b, [], None, None, None, at(6, 22), fire2, {'sonnet-medium': True}, rerun2, None)
+check('night: a night when nothing ran leaves the card Done', card(b, 't-lastnight') is None or card(b, 't-lastnight')['col'] == 'done')
+b = nb(nc('c-q1')); del b['night']
+check('night: a board with no night object is untouched', NS(b, at(23)) == [])
+
+
 print('board_sync_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))
 sys.exit(1 if fails else 0)

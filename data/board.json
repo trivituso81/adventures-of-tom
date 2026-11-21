@@ -1,5 +1,14 @@
 {
  "version": 1,
+ "night": {
+  "enabled": true,
+  "max": 5,
+  "from": 23,
+  "to": 3,
+  "fixes_until": 6,
+  "tz": "America/Los_Angeles",
+  "log": {}
+ },
  "themes": [
   "Voice Clips",
   "Battle Animations",

@@ -146,6 +146,7 @@ if push_tag:
     def on_card(c):
         t = c.get('tag')
         if t and (push_tag == t or (push_tag.startswith(t) and len(push_tag) == len(t) + 1 and push_tag[-1].isalpha())): return True
+        if t and c.get('nightly') and re.fullmatch(re.escape(t) + r'-\d{4}', push_tag): return True   # nightshift: a standing card's build is <tag>-<mmdd>
         return any(push_tag in h.get('t', '') for h in c.get('history', [])) or push_tag == c.get('id')
     def tag_card(c):
         t = c.get('tag')

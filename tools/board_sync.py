@@ -16,8 +16,10 @@ R9 start (a card with `start: true` is started on the Claude scheduled task for 
 (a Tom card finished with a note that blocks nothing gets a Claude card "Your note on: ..."); R8 quiet is 6 hours.
 
 Rules (R1 to R10) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
-import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
+import copy, datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'night'))
+import lastnight   # nightshift: the morning card text
 import board_archive   # bigboard1: Done cards older than 7 days move to data/board-archive.json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -145,6 +147,9 @@ def r5_session(B, com):
 
 def r3_heading(B, com, tag, desc):
     d = local_date(com['time'])
+    st = next((c for c in B.cards if c.get('nightly') and re.fullmatch(re.escape(str(c.get('tag'))) + r'-\d{4}', tag)), None)
+    if st:   # nightshift: a standing card never goes to Done; its build is <tag>-<mmdd>
+        night_ran(B, st, tag, d, plain(desc)); return
     exact = B.by_tag(tag)
     if exact:
         if exact['col'] != 'done':
@@ -606,9 +611,90 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
     return B.log
 
 
+
+# ---------------------------------------------------------------- R14 night shift (nightshift, claude/night-plan.md sections 4 and 5)
+NIGHT_DEFAULT = {'enabled': True, 'max': 5, 'from': 23, 'to': 3, 'fixes_until': 6, 'tz': 'America/Los_Angeles', 'log': {}}
+NIGHT_NEVER_THEMES = ('Voice Clips', 'Battle Animations')   # voice and paid video: never at night (plan section 4)
+NIGHT_HISTORY_KEEP = 10
+
+
+def night_ran(B, c, build, d, desc):
+    """A standing card's run: last_run, back to Up next, newest 10 history lines (plan section 5 step 3)."""
+    c['last_run'] = {'date': d, 'build': build}
+    c['col'] = 'up'; c.pop('waiting_on', None); c.pop('quiet', None); c.pop('started_at', None); c.pop('start', None)
+    B.hist(c, ('Night run %s: %s' % (build, desc)) if build else 'Night run: %s' % desc, d)
+    c['history'] = c['history'][-NIGHT_HISTORY_KEEP:]
+    B.say('standing card %s ran as %s' % (c['id'], build))
+
+
+def night_clock(night, now):
+    """(local hour, night key): the night key is the evening's date, so 01:00 belongs to the night that began the evening before."""
+    from zoneinfo import ZoneInfo
+    loc = now.astimezone(ZoneInfo(night.get('tz', 'America/Los_Angeles')))
+    key = (loc.date() - datetime.timedelta(days=1 if loc.hour < night.get('from', 23) and loc.hour < 12 else 0)).isoformat()
+    return loc.hour, key, loc.date().isoformat()
+
+
+def night_window(night, hour, fixes=False):
+    f, t = night['from'], night['fixes_until'] if fixes else night['to']
+    return hour >= f or hour < t
+
+
+def night_candidates(B, night, hour, key):
+    """Cards the night may start, in order: standing cards not run tonight, fix cards made by a night test, the oldest queued Claude card."""
+    started = {e['card'] for e in night['log'].get(key, [])}
+    ok = []
+    def eligible(c):
+        if c['lane'] != 'claude' or c['col'] != 'up' or c.get('backlog') or c.get('night') is False or not c.get('prompt'): return False
+        if c.get('start') or c.get('rescue') or c.get('start_error') or c.get('start_retried') or c['id'] in started: return False
+        if c.get('theme') in NIGHT_NEVER_THEMES: return False
+        if any('ended without shipping' in str(h.get('t', '')) for h in c.get('history', [])): return False
+        if open_blockers(B, c): return False
+        r = routine_for(B, c)
+        return bool(r and r.get('enabled') and str(r['model']).startswith('Claude Sonnet 5.5') and str(r['effort']).startswith('medium'))
+    out = []
+    if night_window(night, hour):
+        out += [('standing', c) for c in B.cards if c.get('nightly') and eligible(c)]
+    out += [('fix', c) for c in B.cards if str(c.get('fix_of', '')).startswith('night:') and not c.get('nightly') and eligible(c)]
+    if night_window(night, hour):
+        out += [('queued', c) for c in sorted((c for c in B.cards if not c.get('nightly') and not str(c.get('fix_of', '')).startswith('night:') and eligible(c)), key=lambda c: (c.get('created') or '', c['id']))]
+    return out
+
+
+def r14_night(B, now, tests=None):
+    night = B.b.get('night')
+    if night is None: return
+    for k, v in NIGHT_DEFAULT.items(): night.setdefault(k, copy.deepcopy(v))
+    hour, key, today = night_clock(night, now)
+    # the morning card, once, at the first run after fixes_until
+    if night['fixes_until'] <= hour < night['from'] and night.get('written') != today:
+        log = night['log'].get(key, [])
+        title, nxt, news = lastnight.build(B.cards, log, key, today, night['max'], tests)
+        c = B.get('t-lastnight')
+        if not c:
+            c = {'id': 't-lastnight', 'lane': 'tom', 'col': 'done', 'done': today, 'theme': 'Project Ops', 'title': title, 'next': nxt, 'ask': 'setup', 'fyi': True,
+                 'blocks': [], 'chat': {'url': '', 'opening': 'written by the night shift'}, 'history': []}
+            B.add(c)
+        if news:
+            c['next'] = nxt; c['col'] = 'up'; c.pop('done', None); B.hist(c, 'Written by the night shift for the night of %s.' % key)
+        night['written'] = today
+        for k in [k for k in night['log'] if k < (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()]: night['log'].pop(k)
+        B.say('Last night card for %s' % key)
+    if not night.get('enabled'): return
+    if not night_window(night, hour, fixes=True): return
+    log = night['log'].setdefault(key, [])
+    if len(log) >= night['max']: return
+    for c in B.cards:   # one at a time: nothing started by START (or the night) may be running or waiting to fire
+        if c.get('start') or (c['col'] == 'prog' and c.get('started_at') and not c.get('quiet') and started_by_start(c)): return
+    for kind, c in night_candidates(B, night, hour, key):
+        c['start'] = True
+        log.append({'card': c['id'], 'time': now.isoformat(timespec='seconds'), 'kind': kind})
+        B.hist(c, 'Started by the night shift.'); B.say('night shift starts %s (%s)' % (c['id'], kind))
+        return
+
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, poses=None, archive=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, poses=None, archive=None, night_tests=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now), (archive or {}).get('cards'))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
@@ -617,6 +703,9 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
             r['enabled'] = want; B.say('START is %s for %s, effort %s' % ('on' if r['enabled'] else 'off', r['model'], r['effort']))
     for com in commits:
         if com['subject'].startswith('board-sync'): continue
+        m = re.match(r'night: ran (\S+)', com['subject'])
+        if m and B.get(m.group(1)) and B.get(m.group(1)).get('nightly'):
+            night_ran(B, B.get(m.group(1)), '', local_date(com['time']), 'nothing to do')
         r4_claim(B, com)
         r5_session(B, com)
         for tag, desc in com['headings']: r3_heading(B, com, tag, desc)
@@ -629,6 +718,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r12_ghost(B, now)
     r8_quiet(B, now)
     r11_attention(B, now, fire, rerun, shipped_tags)
+    r14_night(B, now, night_tests)
     r9_start(B, fire, now)
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
@@ -723,6 +813,12 @@ def routines_env(data):
     return {r['id']: bool(os.environ.get('CLAUDE_TASK_%s_URL' % r['env']) and os.environ.get('CLAUDE_TASK_%s_TOKEN' % r['env'])) for r in data.get('routines', [])}
 
 
+def night_tests_latest():
+    """nightshift: branch `night`, file tests/latest.json, when it exists (written by the night test run, a later card)."""
+    try: return json.loads(sh('git', 'show', 'origin/night:tests/latest.json'))
+    except Exception: return None
+
+
 def load(path): return json.load(open(path, encoding='utf-8'))
 
 
@@ -751,7 +847,7 @@ def main(argv):
         pp = os.path.join(ROOT, 'data', 'pose-review.json'); poses = load(pp) if os.path.exists(pp) else None
         before = json.dumps(data, sort_keys=True)
         ap = a.get('archive', board_archive.ARCHIVE); arch = board_archive.load_archive(ap); arch_before = json.dumps(arch, sort_keys=True)
-        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), poses, arch)
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes(), poses, arch, night_tests_latest())
         if '--dry' not in flags and json.dumps(arch, sort_keys=True) != arch_before: board_archive.save_archive(arch, ap)
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']

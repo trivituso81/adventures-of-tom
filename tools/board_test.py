@@ -45,6 +45,9 @@ b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it
                 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')},
                {'id': 'c-opuscard', 'tag': 'opuscard', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'An Opus card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
                 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Opus 5.5 (row D)', 'high (x)')}]
+b['night'] = {'enabled': True, 'max': 5, 'from': 23, 'to': 3, 'fixes_until': 6, 'tz': 'America/Los_Angeles', 'log': {}}   # nightshift
+b['cards'].append({'id': 'c-nightly', 'tag': 'nightly', 'nightly': True, 'last_run': {'date': '2026-11-20', 'build': 'nightly-1120'}, 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A standing card', 'next': 'Runs by itself.', 'blocks': [], 'changed': T, 'created': T,
+                   'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
 quiet_url = 'https://claude.ai/code/session_QUIET'
 b['cards'].append({'id': 'c-quiet', 'tag': 'quiet', 'lane': 'claude', 'col': 'prog', 'quiet': True, 'theme': 'Tools', 'title': 'A quiet card', 'next': 'Went silent.', 'blocks': [],
                    'changed': T, 'created': T, 'chat': {'url': quiet_url, 'opening': 'x'}, 'history': [],
@@ -248,6 +251,19 @@ try:
         pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(150)
         if not (pg.evaluate('window.__copied') or '').endswith(HIST(target)): fails.append('hand-back Copy prompt lacks the board card line')
         pg.screenshot(path=f'{out}/board-handback.png'); pg.click('#bclose')
+        # nightshift: the chip, two taps to change, the commit, the standing card line
+        if pg.inner_text('#nightb').strip() != 'Night shift ON': fails.append('night: chip text ' + pg.inner_text('#nightb'))
+        n1 = putn(); pg.click('#nightb'); pg.wait_for_timeout(200)
+        if 'Tap again' not in pg.inner_text('#nightb') or putn() != n1: fails.append('night: the first tap should only arm the chip')
+        pg.click('#nightb'); pg.wait_for_timeout(700)
+        if stored()['night']['enabled'] is not False or pg.inner_text('#nightb').strip() != 'Night shift OFF' or putn() != n1 + 1: fails.append('night: two taps did not turn it OFF')
+        msgs = [l for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT']
+        if 'board: night off' not in json.dumps(msgs[-1]): fails.append('night: commit message is not "board: night off": ' + json.dumps(msgs[-1])[:200])
+        pg.click('#nightb'); pg.click('#nightb'); pg.wait_for_timeout(700)
+        if stored()['night']['enabled'] is not True: fails.append('night: two taps did not turn it back ON')
+        V(pg, 'claude'); pg.click('.card[data-id="c-nightly"]'); pg.wait_for_selector('#bcopy')
+        if 'Runs every night. Last run 2026-11-20' not in pg.inner_text('#sheet'): fails.append('night: the standing card lacks "Runs every night. Last run"')
+        pg.click('#bclose'); V(pg, 'for')
         pg.click('.card[data-id="t-test6"]'); pg.click('#bdid'); pg.fill('#ntxt', 'it looked fine'); pg.click('#bdidgo'); pg.wait_for_timeout(600)
         c = card('t-test6')
         if c['col'] != 'done' or c.get('note') != 'it looked fine' or 'it looked fine' not in c['history'][-1]['t']: fails.append(f'I did this not saved right: {c["col"]} {c.get("note")}')

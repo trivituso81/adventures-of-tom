@@ -1,3 +1,13 @@
+## nightshift (2026-11-21): queued cards start by themselves between 11 pm and 3 am, and Tom gets one Last night card each morning
+
+Card c-nightshift. Tom (11-21): "so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring". Built exactly as `claude/night-plan.md` section 5, steps 1 to 7, no rule of the plan changed.
+- `night` object at the top of `data/board.json` (`enabled`, `max` 5, `from` 23, `to` 3, `fixes_until` 6, `tz`, `log`).
+- Rule R14 in `tools/board_sync.py` (before R9 fires): inside the window it sets `start: true` on one card at a time, standing cards first, then fix cards of a night test, then the oldest queued Sonnet 5.5 medium card. It skips a card in the backlog, with `night: false`, blocked, in the themes Voice Clips or Battle Animations, that ended without shipping, or that has a rescue or a START error. A standing card (`nightly: true`) returns to Up next on a `## <tag>-<mmdd>` heading or a `night: ran <id>` commit, keeping 10 history lines. `board_check.py --push` takes that build with no `after`.
+- `tools/night/lastnight.py` writes the card `t-lastnight` after 06:00 (Tom card, ask setup, fyi), reopened only when there is news.
+- `board.html`: the chip Night shift ON or OFF (two taps, commit `board: night on|off`) and "Runs every night. Last run ..." on a standing card.
+- CLAUDE.md "Night runs" and `nightshift1`; the same paragraph in `claude/handoff-rules.md` (repo copy).
+- Tests: `python3 tools/board_sync_test.py` (the "night:" cases, one per guard-rail row), `python3 tools/board_check.py`, `python3 tools/board_test.py /tmp/board`. Not fixed here, failing the same way before this build: three board_sync_test cases (R5 replay, R5 attention count, unstick check) and the live board counts and the START button case in board_test.py.
+
 ## guidestatus1-restore (2026-11-21): housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake
 
 Card c-guidestatus. The guidestatus1 push was rebased badly: it dropped the docs/CHANGES.md entries fix-anim-grace-squeeze-qxim, board-night and b3s18b (put back below guidestatus1, where they were), and re-added `art/raw/clips/wan-grace-squeeze-v3.mp4` and `tools/art-library/prompts/wan-grace-squeeze-v3.txt`, which fix-anim-grace-squeeze-qxim had purged (v4 replaced them). No game file changed.

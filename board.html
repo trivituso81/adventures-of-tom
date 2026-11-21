@@ -160,6 +160,9 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 #q{flex:1 1 auto;min-width:0;width:auto}
 #themeb{flex:none;background:var(--surface);border:1px solid var(--btn);border-radius:12px;padding:0 12px;white-space:nowrap}
 #themeb.on{outline:2px solid var(--accent)}
+#nightb{flex:none;min-height:36px;background:var(--surface);border:1px solid var(--btn);border-radius:18px;padding:0 14px;white-space:nowrap;margin:0 0 10px}
+#nightb.on{outline:2px solid var(--accent)}
+#nightb.armed{box-shadow:0 0 0 3px var(--text)}
 #newb{flex:none;border-radius:12px;padding:0 12px;white-space:nowrap;min-height:44px}
 #ncchg summary{color:var(--muted);padding:8px 0;cursor:pointer}
 #themes{display:none;background:var(--surface);border:1px solid var(--btn);border-radius:14px;padding:6px;margin:0 0 10px}
@@ -197,6 +200,7 @@ main{padding-bottom:40px}
 <div id="behind"></div>
 <main>
 <button id="since" type="button"></button>
+<button id="nightb" type="button" aria-label="Night shift"></button>
 <div id="tools"><input type="text" id="q" placeholder="Search cards" aria-label="Search cards" autocomplete="off"><button id="themeb" type="button" aria-expanded="false">Theme</button><button id="newb" class="gold" type="button">+ New card</button></div>
 <div id="themes"></div>
 <div id="tabs" role="tablist"></div>
@@ -463,6 +467,7 @@ function stateLine(c,ctx){
     if(back.length)s='Returns to you when fixed: '+esc(back.map(x=>dispTitle(x)).join('; '));
     else if(bl.length)s='Unblocks: '+esc(dispTitle(bl[0]))+(bl.length>1?' and '+(bl.length-1)+' more':'');}
   if(c.lane==='tom'&&ageOf(c)>=1)s+=(s?' · ':'')+days(ageOf(c))+' quiet';
+  if(c.nightly)s+=(s?' · ':'')+'Runs every night. Last run '+esc((c.last_run&&c.last_run.date)||'none yet')+'.';
   return s?'<div class="state">'+s+'</div>':'';
 }
 function actsHtml(c,ctx){
@@ -508,6 +513,7 @@ function counts(){tokbar();
   const parts=ASKS.map(a=>[secYour().filter(c=>c.ask===a[0]).length,a[0]]).concat([[secYour().filter(c=>!ASKS.some(a=>a[0]===c.ask)).length,'other']]).filter(x=>x[0]).map(x=>x[0]+' '+x[1]);
   $('tabs').setAttribute('data-text','For you: '+secYour().length+(parts.length?' ('+parts.join(', ')+')':'')+'. Start next: '+secReady().length+'. Working now: '+secRun().length+'. Queued: '+secQueued().length+'. Needs attention: '+secAttn().length+'.');
   const tc={};B.cards.filter(c=>c.col!=='done'&&!c.backlog).forEach(c=>{tc[c.theme]=(tc[c.theme]||0)+1;});
+  nightChip();
   $('themeb').textContent=theme?theme:'Theme';$('themeb').classList.toggle('on',!!theme);
   $('themes').innerHTML=['All'].concat(B.themes).map(t=>'<button type="button" class="'+((t==='All'?!theme:theme===t)?'on':'')+'" data-t="'+esc(t)+'">'+(t==='All'?'':'<i style="background:'+(THEME_COL[t]||'#ccc')+'"></i>')+esc(t)+'<span class="n">'+(t==='All'?B.cards.filter(c=>c.col!=='done'&&!c.backlog).length:(tc[t]||0))+'</span></button>').join('');
 }
@@ -720,10 +726,22 @@ function histHtml(c){
   const n=(c.history||[]).length;
   return '<h4>History</h4><details><summary class="hint" style="min-height:36px;cursor:pointer">'+(c.tag?'Build '+esc(c.tag)+'. ':'')+(c.col==='done'&&c.done?'Done '+esc(c.done)+'. ':'')+n+' entr'+(n===1?'y':'ies')+' (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
 }
+// ---- nightshift: Night shift ON or OFF (data/board.json `night.enabled`), two taps to change, commit `board: night on` or `board: night off`.
+let nightArm=false,nightTimer=0;
+const nightOn=()=>!!(B.night&&B.night.enabled);
+function nightChip(){const el=$('nightb');if(!el)return;if(!B.night){el.style.display='none';return;}el.style.display='';const on=nightOn();el.classList.toggle('on',on);el.classList.toggle('armed',nightArm);
+  el.textContent=nightArm?'Tap again to turn the night shift '+(on?'OFF':'ON'):'Night shift '+(on?'ON':'OFF');}
+async function nightTap(){
+  if(!nightArm){nightArm=true;clearTimeout(nightTimer);nightTimer=setTimeout(()=>{nightArm=false;nightChip();},5000);nightChip();return;}
+  nightArm=false;clearTimeout(nightTimer);const want=!nightOn();
+  try{await save('board: night '+(want?'on':'off'),d=>{d.night=d.night||{};d.night.enabled=want;return d;});toast('Night shift '+(want?'ON':'OFF'));}catch(e){toast(e.message);}
+  render();
+}
 function openSheet(id){
   const c=cardById(id);if(!c)return;cur=id;
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt,tom=c.lane==='tom',open_=c.col!=='done';
   let body='',bar='';const bk=inBacklog(c);
+  if(c.nightly) body+='<h4>Runs every night</h4><p>Runs every night. Last run '+esc((c.last_run&&c.last_run.date)||'none yet')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+'.</p>';
   if(bk) body+='<h4>In the backlog</h4><p>Parked'+(c.backlog.at?' on '+esc(c.backlog.at):'')+'. Nothing happens to it until you add it back.</p>';
   if(tom){
     const where=(String(c.next||'').match(PATHRE)||[])[0];   // the screen to go to, on its own line above the instruction
@@ -1121,6 +1139,7 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
   if(t.id==='wpick'){$('wshot').click();return;}
+  if(t.closest('#nightb')){nightTap();return;}
   if(t.closest('#newb')){newForm();return;}
   if(t.id==='ncgo'){sendNew();return;}
   if(t.id==='wgo'){sendWrong(cur);return;}
