@@ -20622,19 +20622,25 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: after TNB's text and the Chapter 1 card, the girls say goodbye and the flight plays straight on (seat, takeoff, map, landing) with no stop in the Square, and you land in Los Angeles for chapter 2. Report anything off with the REPORT tab.",
    "blocks": [],
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "created": "2026-11-21",
    "history": [
     {
      "d": "2026-11-21",
      "t": "Added with c-reports-7."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation with TNB's text. i also included this in a report. Sent to Claude as card c-fix-ch1flight; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T03:22:50.834Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-voiceboard",
@@ -21380,6 +21386,65 @@
    "after": "t-hollowtrail-play",
    "auto": true,
    "started_at": "2026-11-21T03:19:26+00:00"
+  },
+  {
+   "id": "c-fix-ch1flight",
+   "tag": "fix-ch1flight",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "next": "You reported a problem on Check chapter 1 ends in the flight. Claude starts the fix by itself. Latest: didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation wit",
+   "blocks": [
+    "t-ch1flight"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T03:22:49.980Z",
+     "card": "t-ch1flight",
+     "title": "Check chapter 1 ends in the flight",
+     "ask": "play",
+     "words": "didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation with TNB's text. i also included this in a report.",
+     "shot": "",
+     "asked": "Open the game, RELOAD, then CHAPTERS ) Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: after TNB's text and the Chapter 1 card, the girls say goodbye and the flight plays straight on (seat, takeoff, map, landing) with no stop in the Square, and you land in Los Angeles for chapter 2. Report anything off with the REPORT tab."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1flight"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-ch1flight.",
+     "at": "2026-11-21T03:22:50.834Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-ch1flight: didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation with TNB's text. i also included this in a report.",
+     "at": "2026-11-21T03:22:50.834Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-21T03:22:50.834Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Check chapter 1 ends in the flight.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1flight and t-ch1flight in data/board.json, history included. Your first push is the commit board: start c-fix-ch1flight.\n\nTom tested and found problems:\n1. Card t-ch1flight (Check chapter 1 ends in the flight, ask play). He was asked: Open the game, RELOAD, then CHAPTERS ) Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: after TNB's text and the Chapter 1 card, the girls say goodbye and the flight plays straight on (seat, takeoff, map, landing) with no stop in the Square, and you land in Los Angeles for chapter 2. Report anything off with the REPORT tab. He wrote: didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation with TNB's text. i also included this in a report.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:22:49.980Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1flight to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1flight, and give the build fix-ch1flight a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-ch1flight",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
