@@ -24147,7 +24147,7 @@
    "title": "Try the Battle Guide on the Duo",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "Open ADMIN > Battle system > Battle Guide. Folded: tap the five tabs at the bottom, open Tom, tap Back. Unfolded: the list and the detail sit side by side, held either way. In Animations > Tom, play Idle and Lounge Pass Flex and try Pause, the slider and quarter speed. Then press All good, or Something is wrong and say what you saw. Your notes go to the next card, Battle Guide: real-fight button and everything planned (c-battleguide2).",
    "steps": [
@@ -24171,8 +24171,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by battleguide1 (card c-battleguide)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:02.800Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-battleguide2",
