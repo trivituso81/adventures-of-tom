@@ -22594,7 +22594,34 @@
      "d": "2026-11-20",
      "t": "Added after c-b3s14 and c-b3s14b shipped: stage 15 follows stage 14. Tom asked for the stage 15 prompt and its card. Build board-b3s15 adds this card and claude/next-addendum-b3s14.md."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+    "opening": "unknown"
+   }
+  },
+  {
+   "id": "b-board-b3s15",
+   "tag": "board-b3s15",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: stage 15 card and handoff notes added",
+   "next": "Done: board only: stage 15 card and handoff notes added",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-b3s15. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -23031,6 +23058,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
+   "first": "2026-11-20T21:51:25-08:00",
+   "last": "2026-11-20T23:13:36-08:00",
+   "tags": [
+    "b3s14b",
+    "board-b3s15"
+   ],
+   "cards": [
+    "c-b3s14b",
+    "c-b3s14",
+    "c-b3s15"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCpdcFMZWaA7mYZvLA",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-20T23:11:58Z",
@@ -23086,19 +23128,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
-   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
-   "first": "2026-11-20T21:51:25-08:00",
-   "last": "2026-11-20T22:03:02-08:00",
-   "tags": [
-    "b3s14b"
-   ],
-   "cards": [
-    "c-b3s14b",
-    "c-b3s14"
    ]
   },
   {
@@ -25795,8 +25824,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "bcecfb85f332e3ab4c8c062e171e028727cd9ea8",
- "synced_at": "2026-11-21T07:12:19+00:00",
+ "synced": "567b2d9e775659c03134a576aca2e8d7c5eaacc9",
+ "synced_at": "2026-11-21T07:14:19+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
