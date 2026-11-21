@@ -23631,7 +23631,7 @@
    "id": "c-costs1icon",
    "tag": "costs1icon",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "AI Costs page gets its own browser tab icon",
    "next": "The AI Costs page has its own tab icon as build costs1icon: a gold receipt with a dollar sign. Tom sees it on card t-costs1look.",
@@ -23659,9 +23659,14 @@
     {
      "d": "2026-11-21",
      "t": "Drew icon-costs-32.png and icon-costs-180.png (tools/make_costs_icon.py), linked both in costs.html, added the check to tools/costs_test.py. Hands to Tom: t-costs1look."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs1icon: the AI Costs page has its own browser tab icon"
     }
    ],
-   "after": "t-costs1look"
+   "after": "t-costs1look",
+   "done": "2026-11-21"
   },
   {
    "id": "t-battleguide-try",
@@ -23808,6 +23813,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "first": "2026-11-21T07:27:18-08:00",
+   "last": "2026-11-21T07:47:39-08:00",
+   "tags": [
+    "costs1",
+    "costs1icon"
+   ],
+   "cards": [
+    "c-costs1",
+    "c-costs1icon"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
    "title": "Battle Guide page for the Duo, with animation notes",
    "first": "2026-11-21T07:31:48-08:00",
@@ -23817,19 +23836,6 @@
    ],
    "cards": [
     "c-battleguide"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
-   "title": "AI Costs page: plans, balances, every charge, the total",
-   "first": "2026-11-21T07:27:18-08:00",
-   "last": "2026-11-21T07:42:24-08:00",
-   "tags": [
-    "costs1"
-   ],
-   "cards": [
-    "c-costs1",
-    "c-costs1icon"
    ]
   },
   {
@@ -27150,8 +27156,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6c1d84e4928bd46b7fbd9e4556cc3d21ae499e0d",
- "synced_at": "2026-11-21T15:46:07+00:00",
+ "synced": "80150ed47e744b874e94e49bfca13a47d1a565ed",
+ "synced_at": "2026-11-21T15:48:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
