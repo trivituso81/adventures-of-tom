@@ -375,7 +375,9 @@ function b3CanUse(F,u,S) {
 // The choices a move offers: [{key, label, units, no}]. `no` is the reason a choice is greyed out.
 function b3Options(F,u,S) {
   const foes=b3Live(F,b3Other(u.side)),mates=b3Live(F,u.side);
-  if(S.target==='foe') return foes.map(f=>({key:f.key,label:f.name,units:[f]}));
+  // SEE ME (`foeTaunt`): while it lasts, a single-target attack can only aim at the monster that put it on (if that monster still stands).
+  if(S.target==='foe') { const tid=Object.keys(u.st).find(i=>B3_STATUS[i].flags.includes('foeTaunt')),tu=tid&&b3Unit(F,u.st[tid].src),only=tu&&tu.side==='foe'&&foes.includes(tu)?[tu]:foes;
+    return only.map(f=>({key:f.key,label:f.name,units:[f]})); }
   if(S.target==='ally') {
     const moves=S.effects.some(e=>e.op==='place'),gr=S.effects.find(e=>e.op==='grant');
     return mates.filter(m=>m!==u).map(m=>({key:m.key,label:m.name,units:[m],ally:true,no:moves&&m.placed?m.name+' was already moved this round.':
@@ -587,6 +589,7 @@ function b3CheckData() {
       if(!flav(A.flavor)) bad.push(wa+': unknown flavor'); if(!B3_FOE_HITS.includes(A.hits)) bad.push(wa+': hits "'+A.hits+'" not built yet');
       for(const k in (A.when||{})) if(!B3_FOE_WHEN.includes(k)) bad.push(wa+': condition "'+k+'" not built yet');
       for(const k of ['then','after']) if(A[k]&&!D.acts.some(x=>x.id===A[k])) bad.push(wa+': '+k+' names an act this foe does not have: '+A[k]);
+      if(A.starts&&!D.acts.some(x=>x.id===A.starts&&x.when&&x.when.everyTurn)) bad.push(wa+': starts names an act this foe does not have with an everyTurn count: '+A.starts);
       if(A.then&&!D.acts.some(x=>x.id===A.then&&x.after===A.id)) bad.push(wa+': its follow-up must say after:\''+A.id+'\'');
       if(A.hits==='marked'&&!D.acts.some(x=>x.then===A.id&&x.effects.some(e=>e.op==='mark'))) bad.push(wa+': hits the Marked ally, but no act Marks for it');
       if(A.hits==='attacker'&&A.recovery!==0) bad.push(wa+': a counter act has Recovery 0');

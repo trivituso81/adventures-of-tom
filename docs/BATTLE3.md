@@ -132,6 +132,14 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 
 Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at TNB himself; the Kiln Firing, Waymo flash and Baxter Hill waves are standard, standard and heavy at the all-monsters share (the spec prints no tier for the first two); Kiln Glow, Fresh Ride and the e-bike last the common 2 turns; the Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out; Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind; Kintsugi Gold Seam heals once per action for each member and lets a hit of a flavor that has no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!; Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%") and Carving Momentum takes another 10% off a Basic; the "slowest ally" of TAP-Card Transfer is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the TAP-Card extra turn applies to every buff TNB puts on, his own included; Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns; "scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10).
 
+## What stage 12 holds, and what waits
+
+| In (build `b3s12a`, chapter 5; chapters 6 and 7 follow as `b3s12b` and `b3s12`) | Waits for |
+|---|---|
+| Chapter 5: `data/b3-foes-ch05.js` (Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread, The Red Pen), 5 formations (12 VP each, 30 for the boss), Lab fights NEW 28 to NEW 32 (Tom, Grace, Rose, Amy, level 12). | Chapters 8 to 10 and the bonus chapter (stage 13). |
+| The Red Pen as data: Strict Grading (`strict_grading_first` once at 55% HP, then `strict_grading` every 3rd turn; the act field `starts` links the two counts), the stance status `strict_grading` (30% less damage, ends on a Mix through its own `on:{mix}`, on a Break or a stance strip), the counter act Points Off (`when:{has:'strict_grading'}`), Final Grade (party-wide, so Lights-Out Reset blocks it), SEE ME. | |
+| New seams: act field `starts`; flag `foeTaunt` (SEE ME, read in `b3Options`); 7 statuses (gym_bounce, trick_question, picked_last, margin_note, see_me, strict_grading, points_off). | |
+
 ## What stage 11 holds, and what waits
 
 | In (build `b3s11`) | Waits for |

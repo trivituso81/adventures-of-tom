@@ -61,5 +61,15 @@ const B3_LAB=[
   {id:'new26',name:'NEW 26: CUE CARD CRAB',sub:'Chapter 4 Elite. The Cue Card Crab has 4 Composure pips, shrugs off Clobber and starts behind its Posterboard Shell. A Boom Mic Moth in Back.',
     party:['tom','tnb','nara'],level:9,formation:'cuecrab',bg:'lot'},
   {id:'new27',name:'NEW 27: THE DIRECTOR\u2019S CUT',sub:'Chapter 4 boss. 6 Composure pips. At 60% HP it shouts ACTION! and calls Extra Extras. CUT! stuns and pushes one of the family.',
-    party:['tom','tnb','nara'],level:9,formation:'directorscut',bg:'lot'}
+    party:['tom','tnb','nara'],level:9,formation:'directorscut',bg:'lot'},
+  {id:'new28',name:'NEW 28: TWO POP QUIZZES',sub:'Chapter 5 fight. Two Pop Quizzes in Front. Trick Question and Pencils Down! sap Attack and Pep.',
+    party:['tom','grace','rose','amy'],level:12,formation:'popquiz',bg:'classroom'},
+  {id:'new29',name:'NEW 29: POP QUIZ AND TARDY BELL',sub:'Chapter 5 fight. The Tardy Bell in Back slows and pushes with You\u2019re Late!',
+    party:['tom','grace','rose','amy'],level:12,formation:'tardybell',bg:'classroom'},
+  {id:'new30',name:'NEW 30: POP QUIZ AND GLITTER GLUE',sub:'Chapter 5 fight. The Glitter Glue in Back pastes the floor and blinds one of the family with a Glitter Burst.',
+    party:['tom','grace','rose','amy'],level:12,formation:'glitterglue',bg:'classroom'},
+  {id:'new31',name:'NEW 31: DODGEBALL DREAD',sub:'Chapter 5 Elite. Dodgeball Dread has 4 Composure pips, shrugs off Clobber and starts bouncing (dodges more). A Tardy Bell in Back.',
+    party:['tom','grace','rose','amy'],level:12,formation:'dodgeball',bg:'classroom'},
+  {id:'new32',name:'NEW 32: THE RED PEN',sub:'Chapter 5 boss. 6 Composure pips. At 55% HP it raises Strict Grading: 30% less damage and Points Off on every hit, until a Mix or a Break ends it.',
+    party:['tom','grace','rose','amy'],level:12,formation:'redpen',bg:'cafe'}
 ];

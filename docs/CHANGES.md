@@ -1,3 +1,11 @@
+## b3s12a (2026-11-20): New battle: the chapter 5 school monsters and The Red Pen join the Battle Lab (stage 12, part a of three)
+
+- Tom (11-20): "build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system", in parts so a stalled session loses at most one chapter. This part is chapter 5, built from `claude/bestiary-v11.md`: Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread (Elite) and the boss The Red Pen in `data/b3-foes-ch05.js`, with five formations (12 VP each, 30 for the boss).
+- Lab: NEW 28 to NEW 32, one fight for every formation and the boss (Tom, Grace, Rose and Amy at level 12; the classroom backdrop, the cafetorium for the boss).
+- The Red Pen's Strict Grading is data plus two small seams: act field `starts:'act id'` (its first use at 55% HP starts the every-3rd-turn count of the repeat) and the status `strict_grading`, a stance (30% less damage taken) that ends on a Mix through its own `on:{mix}` row, and on a Break or a stance strip like any stance. Points Off is a counter act that only answers while the stance stands, once per ally action. Final Grade is party-wide, so Amy's Lights-Out Reset stops it. SEE ME is a Mental status with the new flag `foeTaunt`: a family member's single-target moves can only aim at the monster that put it on (`b3Options`).
+- Seven new statuses (gym_bounce, trick_question, picked_last, margin_note, see_me, strict_grading, points_off) in `data/b3-status.js`.
+- No picture or clip work (every act uses `anim:{kind:'default'}`), no voice lines added.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s12.js`, new; FAILS: []); the five new Lab fights each 100 simulated, all won, 0 errors (The Red Pen 5.8 rounds; normal fights 1.3 to 1.9, Dodgeball Dread 3.5); `python3 tools/b3_test.py s12` (portrait and landscape; frames `tools/shots/b3-s12*.png`). Chapters 6 and 7 follow as b3s12b and b3s12.
 ## wanch1a (2026-11-20): the wan-gen Action makes a list of videos per run, up to 3 at once; start-picture jobs for Tom, Rose and Deedee
 
 Card c-wanch1 (part a). Tooling only; nothing in the game changes.

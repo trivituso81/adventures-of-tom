@@ -1290,7 +1290,7 @@ def stage8(pg,lab,landscape=False):
 S11_WRAP="""()=>{ window.__s11={rows:[],summons:[],acts:[],statuses:[],pulls:[],soaks:[],misses:[]}; if(!window.__s11wrap){ window.__s11wrap=1; const os=b3Show; b3Show=function(b){ const H=window.__s11;
   if(b.t==='row') H.rows.push(b.tgt+':'+b.row); if(b.t==='summon') H.summons.push(b.id); if(b.t==='act'&&b.foe) H.acts.push(b.id); if(b.t==='status') H.statuses.push(b.tgt+':'+b.id);
   if(b.t==='pull') H.pulls.push(b.tgt); if(b.t==='soak') H.soaks.push(b.id); if(b.t==='miss') H.misses.push(b.why); return os.apply(this,arguments); }; } }"""
-def s11_run(pg,lab,fid,poke,frames,every=550,limit=360,watch=None,landscape=False):
+def s11_run(pg,lab,fid,poke,frames,every=550,limit=360,watch=None,landscape=False,tag='s11'):
     """One chapter 2 to 4 fight played by the simple player on screen, with a poke at the start; returns what the screen was told."""
     idx=lab.index(fid); pg.evaluate("()=>{ B7.speed=2; }"); pg.evaluate(S11_WRAP)
     start(pg,idx,{'seed':SEED,'auto':True})
@@ -1300,9 +1300,9 @@ def s11_run(pg,lab,fid,poke,frames,every=550,limit=360,watch=None,landscape=Fals
         pg.wait_for_timeout(every)
         if len(frames)<40: frames.append(shot(pg))
         for name,cond in (watch or {}).items():
-            if name not in seen and pg.evaluate(cond): seen.add(name); pg.wait_for_timeout(350); shot(pg).save(os.path.join(OUT,f'b3-s11-{name}-'+('landscape' if landscape else 'portrait')+'.png'))
+            if name not in seen and pg.evaluate(cond): seen.add(name); pg.wait_for_timeout(350); shot(pg).save(os.path.join(OUT,f'b3-{tag}-{name}-'+('landscape' if landscape else 'portrait')+'.png'))
         if pg.evaluate("()=>B3.ui==='done'"): break
-    else: fails.append(f'stage 11 {fid}: the auto fight did not finish')
+    else: fails.append(f'stage {tag[1:]} {fid}: the auto fight did not finish')
     pg.wait_for_timeout(300)
     R=pg.evaluate("()=>Object.assign({over:B3.F.over},window.__s11)"); pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
     return R
@@ -1342,6 +1342,38 @@ def stage11(pg,lab,landscape=False):
     need('scene_one' in R['acts'][:3],f"the Clapper Snapper should open with Scene One, Marker!: {R['acts'][:5]}")
     caps+=pick(fr,3)
     sheet(caps,5,os.path.join(OUT,'b3-s11'+('-land' if landscape else '')+'.png'),scale=.4)
+# ---------- Stage 12: chapters 5 to 7 (stage 12a: the school, Strict Grading and Points Off, SEE ME, Glitter Burst, You're Late!) ----------
+def stage12(pg,lab,landscape=False):
+    S='stage 12'+(' landscape' if landscape else '')+': '; caps=[]
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R_=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    def pick(fr,n): return [R_(fr[i]) for i in sorted(set(int(j*(len(fr)-1)/max(1,n-1)) for j in range(n)))] if fr else []
+    # The Red Pen: at 55% HP Strict Grading goes up (shown as a status on the monster), and a hit on it is answered by Points Off
+    fr=[]; R=s11_run(pg,lab,'new32',"()=>{ const e=B3.F.foes[0]; e.hp=Math.floor(e.maxHp*.54); e.spd=999; }",fr,every=450,landscape=landscape,tag='s12',watch={'grading':"()=>window.__s11.statuses.some(x=>x.endsWith(':strict_grading'))"})
+    need(R['over']=='win',f"Red Pen fight ended {R['over']}")
+    need('strict_grading_first' in R['acts'],f"Strict Grading should be raised at 55% HP: {R['acts'][:8]}")
+    need(any(x.endswith(':strict_grading') for x in R['statuses']),'Strict Grading should show as a status on the monster')
+    caps+=pick(fr,6)
+    # Dodgeball Dread: the Elite plays through (its bounce is a starting status)
+    fr=[]; R=s11_run(pg,lab,'new31',None,fr,every=500,landscape=landscape,tag='s12')
+    need(R['over']=='win',f"Dodgeball Dread fight ended {R['over']}")
+    caps+=pick(fr,3)
+    # Glitter Glue: Glitter Burst winds up and blinds exactly one family member
+    fr=[]; R=s11_run(pg,lab,'new30',"()=>{ for(const f of B3.F.foes) if(f.id==='glitterglue') { f.actIx=2; f.spd=999; } }",fr,every=500,landscape=landscape,tag='s12')
+    need(R['over']=='win',f"Glitter Glue fight ended {R['over']}")
+    need('glitter_burst' in R['acts'] and any(x.endswith(':blind') for x in R['statuses']),f"Glitter Burst should blind someone: {R['acts'][:8]}")
+    caps+=pick(fr,3)
+    # Tardy Bell: You're Late! slows and pushes
+    fr=[]; R=s11_run(pg,lab,'new29',"()=>{ for(const f of B3.F.foes) if(f.id==='tardybell') { f.actIx=1; f.spd=999; } }",fr,every=500,landscape=landscape,tag='s12')
+    need(R['over']=='win',f"Tardy Bell fight ended {R['over']}")
+    need('youre_late' in R['acts'] and any(x.endswith(':slow') for x in R['statuses']),f"You're Late! should slow someone: {R['acts'][:8]}")
+    caps+=pick(fr,3)
+    fr=[]; R=s11_run(pg,lab,'new28',None,fr,every=500,landscape=landscape,tag='s12')
+    need(R['over']=='win',f"Pop Quiz fight ended {R['over']}")
+    caps+=pick(fr,2)
+    sheet(caps,5,os.path.join(OUT,'b3-s12'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -1349,7 +1381,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1455,6 +1487,10 @@ with sync_playwright() as pw:
     if 's11' in sys.argv or not only and len(want)==len(lab):
         print('b3s11: chapters 2 to 4'); stage11(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage11(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    if 's12' in sys.argv or not only and len(want)==len(lab):
+        print('b3s12: chapters 5 to 7'); stage12(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage12(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

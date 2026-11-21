@@ -265,6 +265,8 @@ function check() {
   require('./b3-check-s10.js')({G,ok,near,play,noCrit});
   // Stage 11's groups: the chapter 2 to 4 bestiary (16 monsters, three bosses), the dive, Skill Lock, ACTION! and CUT!.
   require('./b3-check-s11.js')({G,ok,near,play,noCrit});
+  // Stage 12's groups: the chapter 5 to 7 bestiary (stage 12a: the school, The Red Pen).
+  require('./b3-check-s12.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

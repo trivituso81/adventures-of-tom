@@ -307,7 +307,27 @@ const B3_STATUS={
   // Skill Lock (bestiary 1.1): a Mental status. The family member cannot use the Skills that come from their Pocket Vibe
   // (engine/b3-core.js b3CanUse reads the `skillLock` flag). Their Main Vibe's Basic and Skills still work.
   skill_lock:{id:'skill_lock',name:'Skill Lock',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[],flags:['skillLock'],
-    short:'LOCKED',color:'#c9c9d6',weight:7,desc:'Cannot use the Skills from their Pocket Vibe. Their Basic and their Main Vibe Skills still work.'}
+    short:'LOCKED',color:'#c9c9d6',weight:7,desc:'Cannot use the Skills from their Pocket Vibe. Their Basic and their Main Vibe Skills still work.'},
+  // ---- Enemy statuses: chapter 5, the school (stage 12a, bestiary v11 section 2) ----
+  gym_bounce:{id:'gym_bounce',name:'Gym Bounce',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'gymBounce',v:.20}],flags:[],
+    short:'BOUNCY',color:'#ff9a6a',weight:4,desc:'Bouncing on its toes: dodges 20% of attacks. It can be stripped.'},
+  trick_question:{id:'trick_question',name:'Trick Question',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'trickQ',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#e8d27a',weight:4,desc:'Too busy second-guessing the answer: 15% less Attack.'},
+  picked_last:{id:'picked_last',name:'Picked Last',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'pickedLast',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#c9a27a',weight:4,desc:'Picked last for the team: 20% less Attack.'},
+  margin_note:{id:'margin_note',name:'Margin Note',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'marginNote',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#e0687a',weight:4,desc:'A red note in the margin points out every weak spot: 15% less Defense.'},
+  // SEE ME: a Mental status. While it lasts, this family member's single-target attacks can only aim at the monster that put it on
+  // (`foeTaunt`, read in engine/b3-core.js b3Options). The Red Pen fights alone, so nothing else could be aimed at anyway.
+  see_me:{id:'see_me',name:'SEE ME',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[],flags:['foeTaunt'],
+    short:'SEE ME',color:'#e0687a',weight:7,desc:'Told to stay after class: single-target attacks can only go at the monster that said it.'},
+  // Strict Grading: a counter stance, 30% less damage taken. A Mix (two family members, two different flavors, the same round) ends it at once;
+  // so do Panic Boil!, Rose\u2019s Whoopee-Cushion Trap and a Break (any stance). Points Off, its counter act, only answers while it stands.
+  strict_grading:{id:'strict_grading',name:'Strict Grading',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.30}],flags:[],
+    on:{mix:{carrier:'target',consume:true,effects:[]}},
+    short:'GRADING',color:'#e0687a',weight:5,desc:'Red pen out: takes 30% less damage, and every hit on it is answered with Points Off. A Mix, Panic Boil! or a Break ends it.'},
+  points_off:{id:'points_off',name:'Points Off',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'pointsOff',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#e0687a',weight:4,desc:'Points taken off: 15% less Attack.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

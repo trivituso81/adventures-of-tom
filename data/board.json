@@ -12809,7 +12809,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "b3s12",
-   "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
+   "next": "Part a (chapter 5: Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread, The Red Pen, Lab fights NEW 28 to NEW 32) is built and passes the checks: pushed as b3s12a. Next: part b, chapter 6 (Old Oak Park: five monsters, the Acorn Cache add and Chairman Cheeks, Lab fights from NEW 33), pushed as b3s12b, then part c, chapter 7 (the library: five monsters and The Unread), pushed as the final b3s12. Work from claude/bestiary-v11.md and docs/handoff/b3s12a.md.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12856,6 +12856,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part a pushed as b3s12a: chapter 5 (5 formations, The Red Pen, Lab fights NEW 28 to NEW 32). Chapters 6 and 7 still to do; they follow as b3s12b and b3s12."
     }
    ],
    "prompt": {

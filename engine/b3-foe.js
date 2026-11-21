@@ -168,6 +168,8 @@ function b3QueueCounters(F,c,t,a) {
 }
 function b3ActUsed(F,e,A) {
   e.lastUse[A.id]=e.turns; e.lastRound[A.id]=F.round; e.uses[A.id]=(e.uses[A.id]||0)+1;
+  // `starts:'act id'` (Strict Grading's first use): this act also starts the other act's "every N turns" count, so the repeat comes N turns after it.
+  if(A.starts) e.lastUse[A.starts]=e.turns;
   if(A.when&&A.when.everyRound) e.everyUsed[A.id]=Math.floor((F.round-1)/A.when.everyRound);
 }
 // One enemy turn. Returns its beats; the state is final when it returns.
