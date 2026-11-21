@@ -21294,7 +21294,7 @@
    "id": "c-qa-coh05",
    "tag": "qa-coh05",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "Grump Hollow fights show a town pond with a steeple",
    "next": "Build qa-coh05 is pushed: Art Library entry bg-29-grump-hollow (a woodland pond, written from the approved Pond Town prompt) and its bake; Grump Hollow fights use it as soon as Tom approves it (until then the pond). Next: Tom's card t-qa-coh05-pic.",
@@ -21333,13 +21333,18 @@
      "d": "2026-11-20",
      "t": "Confirmed on main: battleBgKey still gave map hollow the pond. Shipped qa-coh05: new Art Library entry bg-29-grump-hollow with a bake (tools/sprite-bake/bake_battle_bg.py), and battleBgKey uses it for map hollow once the picture exists. Tested with a stand-in picture in portrait and landscape. Hands to Tom card t-qa-coh05-pic (generate and approve).",
      "at": "2026-11-21T03:43:19.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh05: Grump Hollow gets its own woodland battle backdrop in the Art Library; fights there switch to it once Tom approves the picture"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh05\""
    },
-   "after": "t-qa-coh05-pic"
+   "after": "t-qa-coh05-pic",
+   "done": "2026-11-20"
   },
   {
    "id": "t-qa-coh05-pic",
@@ -22583,6 +22588,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
+   "title": "Grump Hollow fights show a town pond with a steeple",
+   "first": "2026-11-20T19:27:12-08:00",
+   "last": "2026-11-20T19:52:14-08:00",
+   "tags": [
+    "qa-coh05"
+   ],
+   "cards": [
+    "c-qa-coh05"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
    "first": "2026-11-20T19:35:42-08:00",
@@ -22663,16 +22680,6 @@
    "tags": [],
    "cards": [
     "c-qa-coh03"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
-   "title": "Grump Hollow fights show a town pond with a steeple",
-   "first": "2026-11-20T19:27:12-08:00",
-   "last": "2026-11-20T19:27:12-08:00",
-   "tags": [],
-   "cards": [
-    "c-qa-coh05"
    ]
   },
   {
@@ -25148,8 +25155,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "71b84c291ff5509ba3df0b9a59cc7d0601fb9599",
- "synced_at": "2026-11-21T03:51:50+00:00",
+ "synced": "8b2ac3222439d04bf28cd2bb3a12621c4cd5b8d5",
+ "synced_at": "2026-11-21T03:53:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
