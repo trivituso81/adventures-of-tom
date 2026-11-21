@@ -26501,7 +26501,7 @@
    "id": "c-buildpill1",
    "tag": "buildpill1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Builds screen: the build name is a status-colored pill",
    "next": "Built as buildpill1: every Builds row starts with the build name in a pill, colored by status. Tom checks it on card t-buildpill-try.",
@@ -26529,9 +26529,14 @@
     {
      "d": "2026-11-21",
      "t": "Built: engine/build-history.js buildNamePill, buildNameClass, cardRow; build-history.css .bl-chip.bl-name; tools/buildlog_test.py B16. Purple publishing, red your test, green live, amber being built, grey queued. Hands to Tom: t-buildpill-try."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as buildpill1: the build name on the Builds screen is a status-colored pill"
     }
    ],
-   "after": "t-buildpill-try"
+   "after": "t-buildpill-try",
+   "done": "2026-11-21"
   },
   {
    "id": "b-portraits2",
@@ -26740,7 +26745,7 @@
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:22:07-08:00",
+   "last": "2026-11-21T11:24:45-08:00",
    "tags": [
     "b3s17a",
     "b3s17b",
@@ -26757,8 +26762,10 @@
    "url": "https://claude.ai/code/session_01RXeukFsxNwWgaqBLsffjnE",
    "title": "Builds screen: the build name is a status-colored pill",
    "first": "2026-11-21T11:08:30-08:00",
-   "last": "2026-11-21T11:08:30-08:00",
-   "tags": [],
+   "last": "2026-11-21T11:23:41-08:00",
+   "tags": [
+    "buildpill1"
+   ],
    "cards": [
     "c-buildpill1"
    ]
@@ -30278,8 +30285,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "443182539a4e7fb884b72691b31f90243c7f0a0c",
- "synced_at": "2026-11-21T19:23:02+00:00",
+ "synced": "8a4c494ac561e171d0c4635a08b0c31dcf00f99c",
+ "synced_at": "2026-11-21T19:25:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
