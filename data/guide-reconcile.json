@@ -1,3 +1,244 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "replay:clip-grump-idle",
+   "at": "replay-00",
+   "note": "pupils sholdn't change direction. blinking motion should be much faster",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The moss and slime hanging from its body sway a little and stay attached. The frown stays. The arms and feet stay where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.",
+   "hasVideo": true,
+   "kind": "monster",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-toad-idle",
+   "at": "replay-01",
+   "note": "blinking motion should be much faster. water droplets come down the bounce back up unnaturally)",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.",
+   "hasVideo": true,
+   "kind": "monster",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-toad-idle #2",
+   "at": "replay-02",
+   "note": "Flashing",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One quick blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.",
+   "hasVideo": true,
+   "kind": "monster",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-log-idle",
+   "at": "replay-03",
+   "note": "nothing is animated",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.",
+   "hasVideo": true,
+   "kind": "monster",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-tom-give",
+   "at": "replay-04",
+   "note": "give what? an item? could be faster. his size pulses",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom his starting relaxed stance, he brings a small wrapped snack out from behind his back and holds it out forward at chest height once, as if handing it to a friend. Without repeating the gesture, he tucks it behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-tom-cast",
+   "at": "replay-05",
+   "note": "should be a longer animation",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom his starting relaxed stance, he draws both open hands in to his chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, he lowers his arms. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-tom-loungepass",
+   "at": "replay-06",
+   "note": "should be longer, he should be presenting the item not just holding it up and putting it away",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and presents it forward at face height once with a little flourish, holding it there like a VIP badge for a moment. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-tom-blockade",
+   "at": "replay-07",
+   "note": "dont know what this is but looks like a strange animation",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIP CHECK\nFrom his starting relaxed stance, he spreads both arms out wide to block the way and bumps one hip sharply forward once, as if guarding his place at the front of a boarding line. Without repeating the bump, he returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-grace-cast",
+   "at": "replay-08",
+   "note": "doesn't look like casting, looks like she just waving her arms, same comment as Tom",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-grace-squeeze",
+   "at": "replay-09",
+   "note": "complete fail",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-grace-cubepop",
+   "at": "replay-10",
+   "note": "feet sink into ground, size cahnges",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY CRUNCH\nFrom her starting relaxed stance, she brings a small clear cube-shaped squishy toy out from behind her back, holds it out forward in one hand at chest height, and crushes it in her fist once. Without repeating the crush, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-rose-cast",
+   "at": "replay-11",
+   "note": "same comment as Grace",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-rose-tackle",
+   "at": "replay-12",
+   "note": "i dont know what this is supposed to look like",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOW POUNCE\nFrom her starting relaxed stance, she brings a small white plush lamb out from behind her back, tucks it under one arm, and lunges forward low from the hips once, the other arm reaching out forward at ankle height to grab. Without repeating the lunge, she tucks the lamb behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-rose-lava",
+   "at": "replay-13",
+   "note": "shouldnt just be her jumping",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HOT FLOOR HOPS\nFrom her starting relaxed stance, she gasps and hops quickly from one foot to the other three times with her arms flapping, as if the floor is too hot to touch, staying on the exact same spot. Without hopping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-rose-giddyup",
+   "at": "replay-14",
+   "note": "not sure how im supposed to evaluate this - she just jumps in place?",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CANNONBALL JUMP\nFrom her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and jumps straight up once, hugging her knees to her chest in a tight cannonball at the top of the jump, then lands back on the exact same spot. Without jumping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-deedee-cast",
+   "at": "replay-15",
+   "note": "she grows unnaturally, doesnt look like casting sam comment as tom",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-deedee-wetfloor",
+   "at": "replay-16",
+   "note": "should be 1-2 seconds longer, broom disappears in the ground",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: MOP SWIPE\nFrom her starting relaxed stance, she grips a short mop in both hands and swipes its head across the floor just in front of her feet once, in one wide sweep. Without repeating the sweep, she tucks the mop behind her back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:clip-deedee-scrub",
+   "at": "replay-17",
+   "note": "glasses look like clown classes that changes her eyes. why does she take out a rolling pin?",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GLASSES ON, BRUSH SCRUB\nFrom her starting relaxed stance, she slides a pair of small thin-framed reading glasses onto her nose with one hand, then grips a scrub brush in one hand and scrubs it forward once at chest height in one firm stroke. Without repeating the stroke, she tucks the brush behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop: pointed at the viewer",
+   "at": "replay-18",
+   "note": "She points at the viewer and moves off her spot. She should face left with her feet planted and reach with one finger.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop: three reaches",
+   "at": "replay-19",
+   "note": "Her finger goes up, then she pokes twice. It should be one poke.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop with sound",
+   "at": "replay-20",
+   "note": "Make her say boop out loud and add a pop sound when she touches the screen.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop camera",
+   "at": "replay-21",
+   "note": "Zoom the camera in on her finger at the end.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop both ways",
+   "at": "replay-22",
+   "note": "Make it faster. Also make it slower and more gentle.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  },
+  {
+   "id": "replay:Boop vague",
+   "at": "replay-23",
+   "note": "complete fail",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.02
+  }
+ ]
 }
