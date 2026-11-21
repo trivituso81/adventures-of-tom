@@ -16863,7 +16863,7 @@
    "lane": "tom",
    "col": "wait",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE. The first box at the top is PROOF: GRACE'S GUARD (VIDEO): tap it. Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
    "blocks": [
     "c-wanidle"
    ],
@@ -16882,6 +16882,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i cant find this within the new battle lab UI Sent to Claude as card c-fix-wanproof-watch; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T21:49:57.233Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-wanproof-watch: the row was 29th of 31 on the list; it is now the first box at the top."
     }
    ],
    "waiting_on": "claude"

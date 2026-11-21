@@ -1,3 +1,11 @@
+## fix-wanproof-watch (2026-11-20): PROOF: GRACE'S GUARD (VIDEO) is now the first box on the NEW BATTLE list
+
+Card c-fix-wanproof-watch. Tom (11-20, on t-wanproof-watch): "i cant find this within the new battle lab UI".
+
+- Cause: the row was there, but 29th of 31 on the NEW BATTLE list, below all 27 fights and PAINTED STATES, and the card did not say to scroll.
+- Fix: the row is now the first box at the top of ADMIN > BATTLE LAB > NEW BATTLE (`engine/b3-lab.js`). Nothing else changed.
+- `tools/paint_state_test.py` list check allows the proof row first. Tests: `wanproof_test.py` FAILS: [], `paint_state_test.py` FAILS: [], smoke.
+
 ## keysecrets3 (2026-11-20): Voice Library and Script Editor takes are made on GitHub; the ElevenLabs key box and `aot-el-key` are gone
 
 Card c-keysecrets3. Tom: "now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens?"

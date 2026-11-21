@@ -109,9 +109,10 @@ function b3LabBack() {
 SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc to go back',
   text:'The new battle system, one stage at a time. New: Vibes. Everyone has a Main and a Pocket Vibe. Change them under VIBES AND RANKS.',
   choices:()=>{ const r=b3LabRank();
-    return [...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),
-      {name:'PAINTED STATES: CHAPTER 1',sub:'The family against one Mudling. Each fighter in turn shows idle, guard, braced hit, hit, dodge, knocked out and get up, victory and a run. After each one it waits: watch again, add a note, then APPROVE or REJECT. Your answers go to Claude.',cast:['tom','grace','rose','deedee'],act:()=>b3LabPaintedStates()},
+    return [
       {name:"PROOF: GRACE'S GUARD (VIDEO)",sub:'Grace against one Mudling. Her guard is a video made by Wan 3.0: watch it go up, take a hit and come down, three times (about 30 seconds). Then the list comes back.',cast:['grace'],act:()=>b3LabGuardProof()},
+      ...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),
+      {name:'PAINTED STATES: CHAPTER 1',sub:'The family against one Mudling. Each fighter in turn shows idle, guard, braced hit, hit, dodge, knocked out and get up, victory and a run. After each one it waits: watch again, add a note, then APPROVE or REJECT. Your answers go to Claude.',cast:['tom','grace','rose','deedee'],act:()=>b3LabPaintedStates()},
       {name:'VIBES AND RANKS',sub:'Main and Pocket Vibe, Quirks and rows for these fights. '+(r?'Every Vibe is Rank '+r+'.':'The Vibes are at different Ranks.'),cls:'nav',vibes:true,act:()=>b3vOpen('lab')},
       {name:'BACK',sub:'',cls:'back',act:splashBack}]; }};
 SPLASH_PARENT.lab3='lab';
