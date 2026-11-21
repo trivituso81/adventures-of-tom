@@ -25530,7 +25530,7 @@
    "title": "Battle Guide: make and remake battle videos from the page",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "guidegen1",
    "next": "Shipped as guidegen1 (parts guidegen1a, guidegen1b and guidegen1 are all on main). Nothing is left to do on this card. Your test is the card Try making a battle video in the Battle Guide.",
    "blocks": [],
@@ -25579,9 +25579,14 @@
     {
      "d": "2026-11-21",
      "t": "Part 3 shipped as guidegen1: the Battle Guide makes a video from the prompt (price shown first, second tap to spend), shows the take next to the one in the game with the clip gate's words, and puts it in the game on Use this one. Tests used stand-ins only; nothing paid was run. Tom's test is card t-guidegen-try."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidegen1: the Battle Guide can make a video, show it next to the one in the game, and put it in the game"
     }
    ],
-   "after": "t-guidegen-try"
+   "after": "t-guidegen-try",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-guidegen",
@@ -26622,6 +26627,43 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFsxNwWgaqBLsffjnE",
+   "title": "Builds screen: the build name is a status-colored pill",
+   "first": "2026-11-21T11:08:30-08:00",
+   "last": "2026-11-21T11:08:30-08:00",
+   "tags": [],
+   "cards": [
+    "c-buildpill1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T11:07:58-08:00",
+   "tags": [
+    "clips"
+   ],
+   "cards": [
+    "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T11:07:29-08:00",
+   "tags": [
+    "guidegen1a",
+    "guidegen1b",
+    "guide",
+    "guidegen1"
+   ],
+   "cards": [
+    "c-guidegen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
    "title": "Animation note: Tom, Lounge Pass Flex",
    "first": "2026-11-21T09:17:03-08:00",
@@ -26635,16 +26677,6 @@
     "c-anim-tom-dodge-ner3",
     "c-wanch2",
     "c-anim-tom-loungepass-fix1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T10:57:09-08:00",
-   "tags": [],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -26788,20 +26820,6 @@
    ],
    "cards": [
     "c-artfallback"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
-   "title": "Battle Guide: make and remake battle videos from the page",
-   "first": "2026-11-21T09:33:57-08:00",
-   "last": "2026-11-21T09:59:39-08:00",
-   "tags": [
-    "guidegen1a",
-    "guidegen1b",
-    "guide"
-   ],
-   "cards": [
-    "c-guidegen"
    ]
   },
   {
@@ -30148,8 +30166,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d459bc0c14c85c35bce91ab1da0eda0a1ac5cb72",
- "synced_at": "2026-11-21T19:05:23+00:00",
+ "synced": "34df14824d484c22ad5cdcfcfdd85921f03d8013",
+ "synced_at": "2026-11-21T19:08:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
