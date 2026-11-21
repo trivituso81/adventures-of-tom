@@ -18974,7 +18974,7 @@
    "title": "Make and approve 6 gate pictures (Amy's door, open states)",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > BOARD, this card, tap Generate all 6 pictures (two taps, about $0.30). When the job finishes, open ADMIN > ART LIBRARY > Props > Story gates (the button below). Six entries have a new picture: Amy's House door locked and open, and the open state of the school gate, Car Barn gate, Studio gate and Stage 7 doors. APPROVE one that shows that door or gate in that state with nothing else on the flat magenta background (no people, no words); REJECT with a note if not. Each approve bakes it into the game by itself; until then those doors show the plain painted plate.",
@@ -19014,9 +19014,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: complete and utter failure. stop wasting my time with your lazy bullshit that isnt throught through. why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of this makes any sense. Sent to Claude as card c-fix-gatelayer-pics; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T01:38:03.839Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Make and approve 6 gate pictures (Amy's door, open is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-gatelayer-play",
@@ -19070,7 +19073,7 @@
    "id": "c-fix-gatelayer-pics",
    "tag": "fix-gatelayer-pics",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
@@ -19109,6 +19112,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gatelayer-pics: the Grump Hollow wrapper trail is one trail of nine small wrappers, placed by script, no generator"
     }
    ],
    "prompt": {
@@ -19120,7 +19127,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gatelayer-pics and t-gatelayer-pics in data/board.json, history included. Your first push is the commit board: start c-fix-gatelayer-pics.\n\nTom tested and found problems:\n1. Card t-gatelayer-pics (Make and approve 6 gate pictures (Amy's door, open states), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 6 pictures (two taps, about $0.30). When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Story gates (the button below). Six entries have a new picture: Amy's House door locked and open, and the open state of the school gate, Car Barn gate, Studio gate and Stage 7 doors. APPROVE one that shows that door or gate in that state with nothing else on the flat magenta background (no people, no words); REJECT with a note if not. Each approve bakes it into the game by itself; until then those doors show the plain painted plate. He wrote: complete and utter failure. stop wasting my time with your lazy bullshit that isnt throught through. why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of this makes any sense.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T01:38:01.573Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gatelayer-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gatelayer-pics, and give the build fix-gatelayer-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-gatelayer-pics"
+   "after": "t-gatelayer-pics",
+   "done": "2026-11-20"
   },
   {
    "id": "c-reports-6",
@@ -19742,6 +19750,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "first": "2026-11-20T17:40:50-08:00",
+   "last": "2026-11-20T18:00:00-08:00",
+   "tags": [
+    "fix-gatelayer-pics"
+   ],
+   "cards": [
+    "c-fix-gatelayer-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGjLjN9fGXpe6ZtFWw",
    "title": "Painted pictures for the item gained banners",
    "first": "2026-11-20T17:36:08-08:00",
@@ -19892,16 +19912,6 @@
    ],
    "cards": [
     "c-startmore-test"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
-   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
-   "first": "2026-11-20T17:40:50-08:00",
-   "last": "2026-11-20T17:40:50-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-gatelayer-pics"
    ]
   },
   {
@@ -22013,8 +22023,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e8a957e293adae7078f16c9569ab0a835eed3832",
- "synced_at": "2026-11-21T01:59:29+00:00",
+ "synced": "168533ef52ab7421e334b54a937b29ce0a8e23c8",
+ "synced_at": "2026-11-21T02:00:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
