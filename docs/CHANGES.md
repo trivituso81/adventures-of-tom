@@ -1,8 +1,20 @@
+## anim-grace-squeeze-qxim (2026-11-21): Grace's Soup-Dumpling Squeeze is an attack now: she pushes the dumpling at the monster with both hands and squeezes it
+
+Card c-anim-grace-squeeze-qxim. Tom (Battle Guide, b3s17a): "This is an attack move, so she needs to hold the squishy out and basically essentially hold it with both hands and kind of push the monster with it and squeeze it while she does so".
+| | |
+|---|---|
+| Kept | Everything in `wan-grace-squeeze-v2.txt` outside the one MOTION sentence the note names (the three parts, the pocket, the round white dumpling squishy, the grin, puffing back up, tucking it away, the return), the start picture, every Wan setting, the bake shape (strike, every 3rd picture, 1.5x, figure 90 rows) |
+| Changed | One MOTION clause. Was: "holds it out toward the left in both hands at chest height and squeezes it hard once between her palms until it squishes flat". Now: "holds it in both hands at chest height and pushes it forward toward the left once, straightening both arms as she squeezes it hard between her palms until it squishes flat" (`wan-grace-squeeze-v3.txt`, job `grace-squeeze` rev 3) |
+- Video: wan-gen run 44929359366, $0.50. Source `art/raw/clips/wan-grace-squeeze-v3.mp4` (v2 removed), baked pictures 18 to 132, the hit at picture 81 where her arms are straight out (39 pictures, 2.6 s in the game, hit at 1.4 s).
+- Plan 4.4 checks: both arms push straight out to the left with the dumpling pressed into a flat oval, then it comes back; same girl; standing height 1,037 px first and last; feet on row 1,153 in all 150 pictures; never touches an edge; last against first 1.00 of 255. Clip gate (measured part): no flags (squeeze is an invented move: Tom's watch is the look check).
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py` FAILS [], smoke (its board_sync_test fails the same two checks on main before this build: R5 replays the live board at a fixed time). Looked at in the Battle Guide player at the hit, portrait and landscape.
+- Fixed on the way: main carried unresolved merge markers at the top of this file (the artbake1554 and guidegen1a entries); both entries kept, markers removed.
+- Tom's card: t-anim-grace-squeeze-qxim.
+
 ## guidegen1b (2026-11-21): the Battle Guide folds your note into an animation's prompt and shows what changed
 
 Card c-guidegen part 2. In the player sheet, a video has a box "What should change" and a no-video animation has "Anything to add"; Update the prompt commits `data/guide-reconcile.json` (message `guide: reconcile <animation id>`) and the `guide-reconcile` Action (`tools/guidegen/reconcile.py`, xAI text model, the existing repo secret XAI_API_KEY, no new key) returns the new prompt plus three plain lines (kept, changed, could not use and why), or one question when the note is contradictory, impossible or says nothing to change. The answer is checked in code first (parts in order, untouched parts identical, 70% of the words kept, length within 20%, one action once, no banned words); a broken answer is sent back once, a second failure is marked Check this one. He can edit the prompt by hand and Keep it (kept in this browser until a video is made). Nothing is generated yet. Tests: `python3 tools/guidegen/guidegen_test.py`, `python3 tools/battle_guide_test.py`. Plan: `claude/guidegen-plan.md`.
 
-<<<<<<< HEAD
 ## anim-rose-give-w5ws (2026-11-21): Rose's Giving (support moves) is a Wan 3.0 video now, made from the same prompt
 
 Card c-anim-rose-give-w5ws. Tom, from the Battle Guide: "Remake with wan".
@@ -28,11 +40,10 @@ Card c-anim-rose-victory-vqjc. Tom, from the Battle Guide: "Remake with wan".
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
 - bg-29-grump-hollow: `bake_battle_bg.py 29-grump-hollow` ran from art/raw/battle/bg-29-grump-hollow-v1.png
 - Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
-=======
+
 ## guidegen1a (2026-11-21): the Battle Guide now shows a prompt for every animation, and says what is missing before one can be made
 
 Card c-guidegen part 1. `tools/guidegen/build_map.js` writes `data/guide-anims.json`: for each of the 346 guide animations its Wan job or Art Library entry, the prompt (the real one where a video exists, otherwise a starter draft that keeps the same person's approved prompt and changes only MOTION), start picture, price, and what is missing. The player sheet shows it under the video: version, route, price a try, where the prompt came from, and "Cannot be made yet" for someone with no start picture. Nothing is generated and no key is on the page yet. Tests: `python3 tools/guidegen/build_map_test.py`, `python3 tools/battle_guide_test.py` (the stand-in board now starts without Tom's real animation notes). Plan: `claude/guidegen-plan.md`.
->>>>>>> 8603dbf (guidegen1a: the Battle Guide shows a prompt, price and what is missing for every animation)
 
 ## board-guidegen (2026-11-21): new card to make and remake battle videos from the Battle Guide
 

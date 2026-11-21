@@ -24286,7 +24286,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Soup-Dumpling Squeeze",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: This is an attack move, so she needs to hold the squishy out and basically essentially hold it with both hands and kind of push the monster with it and squeeze ",
+   "next": "Made in build anim-grace-squeeze-qxim. Made again on Wan 3.0 from the v2 prompt with one change from your note: she holds the dumpling in both hands and pushes it forward toward the monster with straight arms, squeezing it flat as she pushes. Passed every check in plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Grace, Soup-Dumpling Squeeze.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24325,6 +24325,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-grace-squeeze-qxim. Made again on Wan 3.0 from the v2 prompt with one change from your note: she holds the dumpling in both hands and pushes it forward toward the monster with straight arms, squeezing it flat as she pushes. Passed every check in plan 4.4 and the clip gate on the first video ($0.50)."
     }
    ],
    "prompt": {
@@ -24335,7 +24339,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-squeeze-qxim in data/board.json with its history. Your first push is the commit board: start c-anim-grace-squeeze-qxim.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) This is an attack move, so she needs to hold the squishy out and basically essentially hold it with both hands and kind of push the monster with it and squeeze it while she does so\n\nThe animation: Grace, Soup-Dumpling Squeeze (move soup_dumpling_squeeze in data/b3-kit-grace.js). Its video is clip grace_squeeze (data/clips/grace-squeeze.js, art/clips/grace-squeeze.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-squeeze-qxim. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-anim-grace-squeeze-qxim"
   },
   {
    "id": "t-costsduo-try",
@@ -25284,6 +25289,35 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-rose-give-w5ws. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-grace-squeeze-qxim",
+   "title": "Watch Grace, Soup-Dumpling Squeeze",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Grace.",
+    "Play Soup-Dumpling Squeeze (about 3 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-grace-squeeze-qxim",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+    "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-grace-squeeze-qxim. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
     }
    ]
   }
