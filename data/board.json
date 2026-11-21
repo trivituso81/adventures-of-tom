@@ -25702,7 +25702,7 @@
    "title": "Watch Grace, Soup-Dumpling Squeeze",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw).",
@@ -25723,8 +25723,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-grace-squeeze-qxim. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: Left a comment Sent to Claude as card c-fix-anim-grace-squeeze-qxim; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T18:48:49.425Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-boardsubfold1",
@@ -26185,6 +26191,58 @@
     }
    ],
    "done": "2026-11-21"
+  },
+  {
+   "id": "c-fix-anim-grace-squeeze-qxim",
+   "tag": "fix-anim-grace-squeeze-qxim",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
+   "next": "You reported a problem on Watch Grace, Soup-Dumpling Squeeze. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Left a comment",
+   "blocks": [
+    "t-anim-grace-squeeze-qxim"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-21T18:48:48.410Z",
+     "card": "t-anim-grace-squeeze-qxim",
+     "title": "Watch Grace, Soup-Dumpling Squeeze",
+     "ask": "animations",
+     "words": "Left a comment",
+     "shot": "",
+     "asked": "Open ADMIN ) BATTLE GUIDE ) Animations ) Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-anim-grace-squeeze-qxim"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-anim-grace-squeeze-qxim.",
+     "at": "2026-11-21T18:48:49.425Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-anim-grace-squeeze-qxim: Left a comment",
+     "at": "2026-11-21T18:48:49.425Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch Grace, Soup-Dumpling Squeeze.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-anim-grace-squeeze-qxim and t-anim-grace-squeeze-qxim in data/board.json, history included. Your first push is the commit board: start c-fix-anim-grace-squeeze-qxim.\n\nTom tested and found problems:\n1. Card t-anim-grace-squeeze-qxim (Watch Grace, Soup-Dumpling Squeeze, ask animations). He was asked: Open ADMIN ) BATTLE GUIDE ) Animations ) Grace, play Soup-Dumpling Squeeze, then tap All good or Something is wrong (say what you saw). He wrote: Left a comment\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T18:48:48.410Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-anim-grace-squeeze-qxim to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-anim-grace-squeeze-qxim, and give the build fix-anim-grace-squeeze-qxim a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-anim-grace-squeeze-qxim"
   }
  ],
  "sessions": [
