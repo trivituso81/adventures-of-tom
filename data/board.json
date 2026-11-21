@@ -23381,7 +23381,7 @@
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "col": "up",
+   "col": "done",
    "history": [
     {
      "d": "2026-11-21",
@@ -23395,6 +23395,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: 1 were already waiting for your review. Spent about $0.00."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T16:46:48.904Z"
     }
    ],
    "chat": {
@@ -23421,7 +23426,8 @@
      "failed": [],
      "spent": 0
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-gem1v",
