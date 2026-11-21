@@ -20083,6 +20083,37 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-ch1clips8",
+   "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "ch1clips8",
+   "next": "Merging local-clips-pending_7.json (8 kept takes: Amy, Boppy x2, Deedee, Grace, Moss, Rose, Tom). 4 takes say new words, so the screen words follow the take (rule 9).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"update missing chapter 1 voice clips, you have my approval for full repo access\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"update missing chapter 1 voice clips\", with the export local-clips-pending (7).json attached in chat."
+    }
+   ],
+   "prompt": {
+    "what": "Merges the 8 Chapter 1 phone clips Tom exported.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the merge steps are written in docs/VOICE_LIBRARY.md)",
+    "effort": "medium (steps are known)",
+    "text": "Read docs/VOICE_LIBRARY.md and merge the attached local-clips-pending export. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
