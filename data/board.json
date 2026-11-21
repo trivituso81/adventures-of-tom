@@ -27475,7 +27475,7 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Waits on the card Nightly cleanup: files, notes and the working agreement. Then tap START (or leave it to the night shift). It creates the standing card Night QA: each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge (looks, sound, feel, the real phone) stays yours and says why. 24 of your 35 open cards are play cards today.",
    "blocks": [],
    "created": "2026-11-21",
@@ -27505,6 +27505,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightqa: the night QA exists: a standing card that sorts Tom's play cards each night, two detail lines on the board page, and the rule that stops yes or no checks reaching Tom"
     }
    ],
    "prompt": {
@@ -27517,7 +27521,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-nightqa in data/board.json with its history. Your first push is the commit board: start c-nightqa. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Build section 8 exactly as written, steps 1 to 7: the standing card c-night-qa (nightly: true, tag nightqa, Sonnet 5.5 medium, theme Project Ops) whose prompt holds steps 2 to 4 and the limits of step 7 word for word, the `machine` field and the two detail lines in board.html with cases in tools/board_test.py, pictures on branch night under qa/, the Closed for you list in tools/night/lastnight.py, and the rule of step 5 in the board section of CLAUDE.md. Then run the first night yourself on the 4 oldest open play cards and write each result on its card. A check is YES OR NO only when the frames can prove it; when in doubt it is YOURS. Never close a card about how something looks, sounds or feels. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board. Push build nightqa as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightqa",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-nightgreen",
@@ -29447,7 +29452,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFNYZ6EPr9NbJWrwDh",
     "opening": "not started"
    },
    "nightly": true,
@@ -29472,9 +29477,45 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open Tom cards with ask play and no `machine` field, oldest first, backlog included (checking a parked card moves nothing of Tom's except closing it on a pass). 2. For each card: read `next`, `first` and the history, and sort it. YES OR NO (a fact a test browser can see: a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts) or YOURS (how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch, or audio). When in doubt it is YOURS. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Pictures go to branch night under qa/CARDID/DATE/. Pass: the card goes to Done with machine: {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT WAS SEEN\". It is listed under Closed for you on the Last night card. Fail: what Something is wrong does today: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium), and Tom's card waits behind it. 4. YOURS: machine: {at, verdict: \"yours\", why: WHY} so it is not looked at again; the card stays Tom's and its details show \"Needs your eyes: WHY\". Limits (also printed on the Last night card): the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never close a card about how something looks, sounds or feels. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. No paid run of any service. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-voices-t-ch2voices-315",
+   "tag": "voices-t-ch2voices-315",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Voice Clips",
+   "title": "70 voice takes made from board card t-ch2voices and merged into the game",
+   "next": "Done: 70 voice takes made from board card t-ch2voices and merged into the game",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voices-t-ch2voices-315. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFNYZ6EPr9NbJWrwDh",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-21T21:16:47Z",
+   "last": "2026-11-21T21:16:47Z",
+   "tags": [
+    "nightqa"
+   ],
+   "cards": [
+    "c-night-qa",
+    "c-nightqa"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukG23YgrNLwpd1VDRJY",
    "title": "Fix the report backlog (1 open)",
@@ -33841,8 +33882,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "abf245c7a2c8d55b24b8a75d90be26a1caefde54",
- "synced_at": "2026-11-21T21:13:01+00:00",
+ "synced": "501e1a76ce6e2bdeceb3ce2cbb64791bf680dbc4",
+ "synced_at": "2026-11-21T21:17:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
