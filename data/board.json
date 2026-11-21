@@ -21521,10 +21521,10 @@
    "id": "c-qa-txt03",
    "tag": "qa-txt03",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Speaker names switch from capitals mid-scene",
-   "next": "Ready to start. Screen report, not found in code yet.",
+   "next": "Retired: could not be reproduced on current main; nothing to change.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21550,13 +21550,19 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without a code change: played ch1AfterBoss on current main in portrait (Rose, The Big One, Tom, Grace, Deedee). Every speaker name goes through one path ($('speaker').textContent in openDialog) with the same style (small-caps, no text-transform), so the case never changes mid-scene. The report's all-caps versus title case most likely came from reading small caps on screen. Retired as not reproducible; if Tom sees it again, a pencil report with a picture will show the exact line.",
+     "at": "2026-11-21T03:50:00Z"
     }
    ],
    "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukFuf5FG3gcgaezmc8d",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-qa-txt04",
