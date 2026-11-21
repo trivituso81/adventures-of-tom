@@ -24246,7 +24246,7 @@
    "id": "c-costs2",
    "tag": "costs2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "AI Costs fills itself in: balances and job spend",
    "next": "Built as costs2 (docs/COSTS.md, How the page fills itself in). Done: the daily costs-sync Action (ElevenLabs balance with the repo key; fal and xAI only if the repo has an admin fal key and an xAI Management key with team id), and art-gen, clip-gen, clip-gate, voice-gen and wan-gen each log their run's spend. Tom's notes on t-costs1look were all good. Nothing paid was run. Next: Tom's optional card t-costs2keys.",
@@ -24287,9 +24287,14 @@
     {
      "d": "2026-11-21",
      "t": "Built costs2: costs-sync Action (balances), tools/costlog.py (every paying job logs its run), page shows a moving estimate. Tom's t-costs1look note was all good, so no page changes from it. Tested with stand-in servers only. Three tests (clipgen_test, vision_test, one voicegen check) already failed on main; card c-stale-tests holds them. fal and xAI balance reads need keys the repo may not have: card t-costs2keys."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs2: AI Costs fills itself in: a daily balance read and every paying job writing what its run cost"
     }
    ],
-   "after": "t-costs2keys"
+   "after": "t-costs2keys",
+   "done": "2026-11-21"
   },
   {
    "id": "c-battleguide",
@@ -30364,6 +30369,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEuKCzKJrDSyCZjBA2",
+   "title": "AI Costs fills itself in: balances and job spend",
+   "first": "2026-11-21T12:59:28-08:00",
+   "last": "2026-11-21T13:28:44-08:00",
+   "tags": [
+    "costs2"
+   ],
+   "cards": [
+    "c-costs2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T13:02:32-08:00",
@@ -30463,16 +30480,6 @@
    "tags": [],
    "cards": [
     "c-battleguide2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEuKCzKJrDSyCZjBA2",
-   "title": "AI Costs fills itself in: balances and job spend",
-   "first": "2026-11-21T12:59:28-08:00",
-   "last": "2026-11-21T12:59:28-08:00",
-   "tags": [],
-   "cards": [
-    "c-costs2"
    ]
   },
   {
@@ -34207,8 +34214,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2e8d3696dc8ecedeb918812530597560a1ce76d1",
- "synced_at": "2026-11-21T21:26:07+00:00",
+ "synced": "ba4db48190cb02d5eea8d17e71a0ee148480e2e2",
+ "synced_at": "2026-11-21T21:29:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
