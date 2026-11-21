@@ -25710,7 +25710,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25814,6 +25814,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Stuck twice: The rescue started 12:34 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-anim-deedee-dodge-y4m3)."
     }
    ],
    "prompt": {
@@ -25833,7 +25837,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukDaMeZbDPDpEFyVFNY",
     "prev": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -27719,6 +27724,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenl: ch20_test part fixed (the test was wrong: it teleported the player and left the followers 33 tiles behind, so each door scene walked the party for 10 s first; the doors, the Core, the lift and the Leviathan fight now pass); the row keeps known_fail (fails from the check shatter scene to Julian on; with flags set the game plays it, so what differs after the real fight is not found). minutes 2 to 20. 1 row still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenl: the chapter 20 test gets past the eight doors; it still fails after the Leviathan fight (notes written)"
     }
    ],
    "prompt": {
@@ -30188,6 +30197,34 @@
     }
    ],
    "fyi": true
+  },
+  {
+   "id": "t-stuck-anim-deedee-dodge-y4m3-2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-anim-deedee-dodge-y4m3",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Animation note: Deedee, Dodge",
+   "next": "Card c-anim-deedee-dodge-y4m3 (Animation note: Deedee, Dodge) stalled again after its one automatic rescue. The rescue started 12:34 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-anim-deedee-dodge-y4m3"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: card c-anim-deedee-dodge-y4m3 stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30883,6 +30920,25 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T13:02:32-08:00",
+   "last": "2026-11-21T14:38:10-08:00",
+   "tags": [
+    "nightgreene",
+    "nightgreenf",
+    "nightgreeng",
+    "nightgreenh",
+    "nightgreeni",
+    "nightgreenj",
+    "nightgreenk",
+    "nightgreenl"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
    "title": "Take me there: a play card opens the game at its spot",
    "first": "2026-11-21T14:06:28-08:00",
@@ -30904,24 +30960,6 @@
    ],
    "cards": [
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T14:04:19-08:00",
-   "tags": [
-    "nightgreene",
-    "nightgreenf",
-    "nightgreeng",
-    "nightgreenh",
-    "nightgreeni",
-    "nightgreenj",
-    "nightgreenk"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -34754,8 +34792,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "86cd1d227af1cb35e15edb243d3e2ac64ab30fb1",
- "synced_at": "2026-11-21T22:32:54+00:00",
+ "synced": "005ed7c2c33b0b1e5553335e448db4fd5262182a",
+ "synced_at": "2026-11-21T22:38:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
