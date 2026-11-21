@@ -25210,6 +25210,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T09:18:43-08:00",
+   "last": "2026-11-21T09:44:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3",
+    "c-anim-deedee-ko-yes1",
+    "c-anim-deedee-give-yy1o",
+    "c-anim-deedee-windex-z9p8",
+    "c-anim-deedee-scrub-1irj"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
@@ -25272,20 +25286,6 @@
     "b-board-guideplanned",
     "c-guidegen",
     "b-board-guidegen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGC8GqCJQ4iudnaMVm",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T09:18:43-08:00",
-   "last": "2026-11-21T09:23:16-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3",
-    "c-anim-deedee-ko-yes1",
-    "c-anim-deedee-give-yy1o",
-    "c-anim-deedee-windex-z9p8",
-    "c-anim-deedee-scrub-1irj"
    ]
   },
   {
@@ -28639,8 +28639,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "78a9e77374bfda8b6bfdf19606108f86390c8ad9",
- "synced_at": "2026-11-21T17:36:44+00:00",
+ "synced": "7d841387f7ee2283a0cce9decc4b95be4e63dd8a",
+ "synced_at": "2026-11-21T17:45:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
