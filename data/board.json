@@ -24434,7 +24434,7 @@
    "title": "Watch Tom's new Lounge Pass Flex",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex, then tap All good or Something is wrong. Now: he pulls the card out quickly, flashes it up with a smile and a sparkle, then holds his arm straight out with the card for most of the clip and flicks it down in a limp-wrist swat. No ding yet (card c-anim-tom-loungepass-ding adds it after your All good).",
    "steps": [
@@ -24461,8 +24461,14 @@
     {
      "d": "2026-11-21",
      "t": "Back to you after anim-tom-loungepass-fix1 (your note: quick take-out and sparkle, mostly the arm out and the swat)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T19:57:29.501Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-tom-loungepass-ding",
