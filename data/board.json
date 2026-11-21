@@ -20856,10 +20856,10 @@
    "col": "prog",
    "theme": "Areas",
    "title": "People walk on roofs and signs in the Square and the Row",
-   "next": "Ready to start. Screen report only, not reproduced yet.",
+   "next": "Shipped as qa-bug03 (roof-edge tiles added to the Square and Row no-go lists). Waits for Tom to look.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on BUG-03 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -20895,13 +20895,18 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped qa-bug03: 6 tiles added in the Square and 8 on the Row where townsfolk reached a roof edge. Boppy railing in grands not reproduced, left open."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukG2EwxznnZ2UoseGRC",
     "opening": "started by START"
    },
-   "started_at": "2026-11-21T05:27:44+00:00"
+   "started_at": "2026-11-21T05:27:44+00:00",
+   "after": "t-qa-bug03-look"
   },
   {
    "id": "c-qa-bug04",
@@ -22438,6 +22443,25 @@
     "url": "https://claude.ai/code/session_01RXeukEcJ1iNbSZTib9nw9o",
     "opening": "started by START"
    }
+  },
+  {
+   "id": "t-qa-bug03-look",
+   "title": "Look for people on roofs in the Square and the Row",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then go to the Square and Rivituso Row and watch the townsfolk for a minute each. Check: nobody walks onto the SNAIL MAIL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added with c-qa-bug03."
+    }
+   ]
   }
  ],
  "sessions": [

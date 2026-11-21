@@ -1,3 +1,7 @@
+## qa-bug03 (2026-11-21): Townsfolk in the Square and the Row no longer stand on roof edges
+
+- Chapter 1 QA report BUG-03 (build keysecrets2): people walk onto the SNAIL MAIL sign and roofs in the Square and over building edges on Rivituso Row. Fact: the roof lists were complete at the 50% rule of `tools/npc_roof_tiles.py`, but a 25 second headless run showed townsfolk standing on tiles where 30% to 50% of the feet box is painted foreground. Change: 6 such tiles added to `noGoRoof` in `town` and 8 in `row` (only tiles an NPC actually reached). Not reproduced: Boppy's feet over the railing in `grands` (a stationary scene actor, not a wanderer), left open.
+
 ## b3s13 (2026-11-20): New battle: the Nine Scoops monsters and Brain Freeze join the Battle Lab (stage 13 complete)
 
 - Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This last part is the bonus chapter, built from `claude/bestiary-v11.md`: Sprinkle Gremlin, Slushie Slug (Elite), Cone Head and the boss Brain Freeze in `data/b3-foes-ch11bonus.js`, with four formations (10 VP each, 30 for the boss). The foe ids match the old `MONSTERS` ids in `data/bonus-nine-scoops.js` (gremlin, slushslug, conehead, brainfreeze), so a Lab fight never crashes the old tables.
