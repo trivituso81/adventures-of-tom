@@ -20656,6 +20656,38 @@
     "effort": "medium (the pattern to copy is written: artgen1 in board.html and CLAUDE.md)",
     "text": "Read CLAUDE.md (artgen1, keysecrets1, No unused voice, Build label), docs/VOICE_LIBRARY.md (Takes are made on GitHub, Phone clip exports, Rebuild the index), claude/next-addendum-voicegen2.md, tools/voice-learn/GENERATION_JOB_PLAN.md, .github/workflows/voice-gen.yml, tools/voice-learn/voicegen.py, tools/voice-library/merge-local.js, and the artgen1 code in board.html (the gen button and its board: generate commit) and .github/workflows/art-gen.yml. Card c-voiceboard in data/board.json. Build voiceboard1: (1) A Tom card with ask voice can carry `voices` (a list of 'voice|exact text' keys) or `voice_chapter` (a chapter number); the board page shows Generate all N voices (about X credits, from voicegen2's 0.44 credits per character) with a second tap to confirm, the same as Generate all N pictures, and saves `vgen` on the card with a commit whose subject is board: vgen followed by the card id. (2) That commit starts voice-gen for exactly those lines that have no clip (add a `lines` or `chapter` input to voicegen.py and voice-gen.yml; keep dry_run defaulting to true for a manual run, and a cap on characters per run). (3) When voice-gen finishes, a merge step in the same workflow (or a second Action) merges every new export from branch generated into data/voice/dialog-ch*.js with merge-local.js as docs/VOICE_LIBRARY.md says, runs python3 tools/voice-library/rebuild.py and python3 tools/clip-audit/unused_voice.py, writes a docs/CHANGES.md entry with a new build name (voices- plus the card id plus a run number) and runs python3 tools/art-library/bump_tags.py for it, fetches and rebases, and pushes to main; needs-human lines are listed on the card, not merged. It writes `vgen.run` on the card (made, failed, credits) and the card's next becomes: listen in ADMIN > VOICE LIBRARY (links to the lines), All good or Something is wrong. (4) Make the first such card: t-ch2voices, ask voice, voice_chapter 2 (chapter 2's 73 lines, see the ch2lessons entry in docs/CHANGES.md), waiting until t-ch2play is done so no credits go on lines Tom may still cut. Never run the paid job in this session: test with a stand-in ElevenLabs and a dry run (tools/voice-library/voicetake_test.py and the artgen tests are the pattern), add tools/voiceboard_test.py (board page in portrait and landscape, the button, the commit, the merge on a fake export), and run python3 tools/board_test.py /tmp/board, python3 tools/board_check.py, tools/smoke.py. Push to main as voiceboard1; your first push is the commit board: start c-voiceboard. Set after on this card to t-ch2voices. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-board-qa2",
+   "tag": "board-qa2",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Project Ops",
+   "title": "Board only: cards from the second chapter 1 QA report",
+   "next": "Checking each of the 26 items in the chapter 1 QA report (build keysecrets2) against main, then adding a card for each valid one.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"assess this bug report, ensure the bug/improvement is valid, and add each one to the kanban board\""
+   },
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Adds a card for each valid item in the chapter 1 QA report.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/handoff-rules.md)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card b-board-qa2 in data/board.json and claude/ch1-qa-keysecrets2.md. Finish adding the cards the history says are missing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Started: Tom sent a chapter 1 playtest and QA report (build keysecrets2) and asked to check each item and add the valid ones."
+    }
+   ]
   }
  ],
  "sessions": [
