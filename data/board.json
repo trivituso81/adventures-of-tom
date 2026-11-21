@@ -22690,6 +22690,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Found conflict markers on main (board-sync commit 25f41e6) that stopped engine/main.js loading; fixed alone in build fix-conflictmarks before stage 15 code goes on top."
     }
    ],
    "chat": {

@@ -1,3 +1,9 @@
+## fix-conflictmarks (2026-11-20): the game would not start: merge conflict markers on main removed from engine/main.js and index.html
+
+- Fact: the board-sync commit 25f41e6 ("part shipped projclean1e") committed unresolved merge markers (`<<<<<<< HEAD` ... `>>>>>>> 7cbde07`) into `engine/main.js` (the build stamp line) and `index.html` (the build-history and main.js script tags). A browser stops reading `engine/main.js` at `<<<`, so a fresh load of the live game did not start; `data/build-history.js` also loaded twice.
+- Fix: kept one copy of each line (both sides held the same text apart from the build name; the newer side is kept). Nothing else changed. Found by the c-b3s15 session when its test page would not load.
+- Not looked at: how the markers reached main (a rebase conflict the board-sync job committed instead of stopping on). `git grep -n '^<<<<<<< '` is clean after this build.
+
 ## board-boppy-bigfish (2026-11-20): board only: Boppy cap card waits on Tom's picture approval
 
 - Card c-boppy-bigfish moved to Waiting behind t-boppy-bigfish-pic (generate and approve Boppy's unimpressed pose). No game file changed.
