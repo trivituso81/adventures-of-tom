@@ -20813,7 +20813,7 @@
    "title": "Check chapter 1 ends in the flight",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Fixed as fix-ch1flight-3 (the cab map no longer flashes). Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: the phone picture stays on while TNB's text is read, then the Chapter 1 card, then straight to the flight seat with no taxi company flash in between. Report anything off with the REPORT tab.",
@@ -20854,8 +20854,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight, Fix: Check chapter 1 ends in the flight is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:59:08.173Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-voiceboard",
