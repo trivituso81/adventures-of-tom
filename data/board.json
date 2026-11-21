@@ -22958,7 +22958,7 @@
    "title": "Look for people on roofs in the Square and the Row",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD (build fix-qa-bug03-look), go to the Square and Rivituso Row and watch the townsfolk for a minute each. Look at: nobody stands on the SNAIL MAIL sign or its weathervane, the SCHOOL sign, KETTLE COTTAGE's roof or the edge of Aunt Ellie's House. Pip now starts one step right of the weathervane. Report anything off with the REPORT tab.",
@@ -22977,9 +22977,12 @@
     {
      "d": "2026-11-21",
      "t": "Fix shipped in build fix-qa-bug03-look (c-fix-qa-bug03-look): 37 more roof, sign and edge tiles are off limits to townsfolk and Pip no longer starts on the weathervane; a 200 minute headless watch per map finds none."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Look for people on roofs in the Square and the Row is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-b3s14b",
@@ -27658,7 +27661,7 @@
    "id": "c-fix-qa-bug03-look",
    "tag": "fix-qa-bug03-look",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Look for people on roofs in the Square and the Row",
@@ -27708,6 +27711,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as fix-qa-bug03-look: noGoRoof extended (21 town, 16 row tiles), Pip moved off the weathervane tile; 40 x 300 s watch finds none."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-qa-bug03-look: Townsfolk in the Square and the Row stay off every roof, sign, weathervane and house edge, checked by a 5 minute watch"
     }
    ],
    "prompt": {
@@ -27721,7 +27728,8 @@
    },
    "after": "t-qa-bug03-look",
    "auto": true,
-   "started_at": "2026-11-21T19:39:25+00:00"
+   "started_at": "2026-11-21T19:39:25+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "b-guidestatus1-restore2",
@@ -27801,6 +27809,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
+   "title": "Fix: Look for people on roofs in the Square and the Row",
+   "first": "2026-11-21T19:42:50Z",
+   "last": "2026-11-21T19:47:19Z",
+   "tags": [
+    "fix-qa-bug03-look"
+   ],
+   "cards": [
+    "c-fix-qa-bug03-look"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFoJq8UAVPg4TrsQtF",
    "title": "Fix: Check chapter 1 ends in the flight",
    "first": "2026-11-21T19:42:38Z",
@@ -27810,16 +27830,6 @@
    ],
    "cards": [
     "c-fix-ch1flight-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCqw1GyaN2utsod3GN",
-   "title": "Fix: Look for people on roofs in the Square and the Row",
-   "first": "2026-11-21T19:42:50Z",
-   "last": "2026-11-21T19:42:50Z",
-   "tags": [],
-   "cards": [
-    "c-fix-qa-bug03-look"
    ]
   },
   {
@@ -31584,8 +31594,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2cebccc72dc89b0a2b646ec48c091322a6796f54",
- "synced_at": "2026-11-21T19:46:07+00:00",
+ "synced": "d6cf0454d928cc01c67b5b0580677cf3485654c7",
+ "synced_at": "2026-11-21T19:47:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
