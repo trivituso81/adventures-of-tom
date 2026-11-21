@@ -379,10 +379,14 @@ function clearInput() {
   refreshPad();
 }
 
+// A tap on a top left button must never reach the world (qa-bug12): drop a pending tap-walk and a queued A press, so arriving
+// at the Cookie counter a moment later does not inspect it instead of opening the Menu.
+function hudTapStopsWorld() { if(typeof twCancel==='function') twCancel(); queuedAction=false; }
 const menuButton=$('menu-button');
 menuButton.addEventListener('touchstart',e=>{
   e.preventDefault();
   lastTouchTime=performance.now();
+  hudTapStopsWorld();
   menuButton.classList.add('pressed');
 },nonPassive);
 menuButton.addEventListener('touchend',e=>{
@@ -392,6 +396,7 @@ menuButton.addEventListener('touchend',e=>{
   if(!dialog.active&&!transition) openMenu();
 },nonPassive);
 menuButton.addEventListener('click',()=>{
+  hudTapStopsWorld();
   if(performance.now()-lastTouchTime>500&&!dialog.active&&!transition) openMenu();
 });
 $('menu-back').addEventListener('click',()=>menuBack());
@@ -411,7 +416,7 @@ window.addEventListener('focus',fitViewportSoon);
 window.addEventListener('scroll',()=>{ if(window.scrollX||window.scrollY) window.scrollTo(0,0); },{passive:true});
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden) fitViewportSoon(); });
 if(window.visualViewport) { window.visualViewport.addEventListener('resize',fitViewport); window.visualViewport.addEventListener('scroll',fitViewport); }
-$('save-hud').addEventListener('click',()=>{ if(!dialog.active&&!transition) openSave(); });
+$('save-hud').addEventListener('click',()=>{ hudTapStopsWorld(); if(!dialog.active&&!transition) openSave(); });
 $('rotate-menu').addEventListener('click',toggleLayout);
 applyLayout();
 if('ResizeObserver' in window)
