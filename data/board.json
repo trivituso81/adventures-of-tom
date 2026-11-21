@@ -19465,7 +19465,7 @@
     "opening": "unknown"
    },
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T16:50:11Z",
     "ids": [
      "prop-gate-town-school-open",
@@ -19474,7 +19474,13 @@
      "prop-gate-backlot-stage7-open"
     ],
     "est": 0.24,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T16:50:24Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44926730930",
+     "n": 0
+    }
    }
   },
   {
