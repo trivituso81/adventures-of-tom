@@ -27989,7 +27989,12 @@
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
     }
    ],
-   "first": "Waits on the card Take me there: a play card opens the game at its spot."
+   "first": "Waits on the card Take me there: a play card opens the game at its spot.",
+   "machine": {
+    "at": "2026-11-21T23:30:00Z",
+    "verdict": "yours",
+    "why": "a layout and controls on the wide monitor: how the panes look and feel to use is yours to judge"
+   }
   },
   {
    "id": "c-dash4",
@@ -28056,7 +28061,12 @@
     }
    ],
    "first": "Waits on the card Admin Dashboard: search and two more layouts.",
-   "fyi": true
+   "fyi": true,
+   "machine": {
+    "at": "2026-11-21T23:30:00Z",
+    "verdict": "yours",
+    "why": "search results opening in panes and the Art review and Story layouts: how they look on the wide monitor is yours to judge"
+   }
   },
   {
    "id": "b-board-dashboard",
@@ -29491,7 +29501,12 @@
      "t": "Added by guardwin1: your phone check of the guard-then-win fix; blocks nothing."
     }
    ],
-   "first": "After the publish of build guardwin1 (a minute or two after the push)."
+   "first": "After the publish of build guardwin1 (a minute or two after the push).",
+   "machine": {
+    "at": "2026-11-21T23:30:00Z",
+    "verdict": "yours",
+    "why": "tools/guardwin_test.py passes (the victory video plays and the guard video is not drawn after the win), but how the celebration looks is yours to judge"
+   }
   },
   {
    "id": "c-night-qa",
@@ -29541,6 +29556,11 @@
     {
      "d": "2026-11-21",
      "t": "Ran: nothing to do."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Night run: t-dash3-try, t-dash4-try, t-guardwinplay sorted YOURS (looks and feel); nothing closed, nothing failed.",
+     "at": "2026-11-21T23:30:00Z"
     }
    ],
    "prompt": {
