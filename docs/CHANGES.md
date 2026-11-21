@@ -1,3 +1,14 @@
+## costs1 (2026-11-21): ADMIN > AI COSTS, a desktop page for what every AI service costs
+
+Tom: "come up with an admin screen for all the AI services we are connected to, the subscription type i have, what it allows, what my balance is, how much ive spent so far ... a complete history of my spend with dates for each transaction so i can total and subtotal in any way that i want. as well as a final cost total screen ... including with claude".
+
+- New page `costs.html` (its own address, button AI Costs on admin.html, no game code): Overview, Services, a screen per service, Ledger and Totals. Laid out for a desktop browser in landscape only.
+- New data file `data/costs.json`: 8 services (Claude, Google AI, xAI API, X Premium, ElevenLabs, fal.ai, Sorceress, GitHub) and 29 charges read from the receipts in Tom's email, Jul 30 to Nov 20, $975.44 in all. Every row has its date, Pacific time, kind, where it was billed and the order or invoice number. Three amounts are marked to confirm.
+- Ledger: search, service chips, kind, sort, subtotal by service, month, week, kind or paid through, tick rows to add them up, CSV of the rows shown. Totals: grand total, running total, service by month (a figure opens its charges).
+- What each plan allows is written with where it was read (provider pages read Nov 20, receipts, repo docs). Holes are listed under Needs a look (Apple sends no renewal receipts, one ElevenLabs invoice has no email, xAI and ElevenLabs balances not read).
+- Not done: balances are not read automatically and the jobs do not log their spend into the ledger yet (card c-costs2, steps in docs/COSTS.md). "Add a charge" and "Record the balance" save to the browser only.
+- Docs: docs/COSTS.md. Test: `python3 tools/costs_test.py` (FAILS: []).
+
 ## qa-battle2 (2026-11-21): old battle screen problems checked on the new battle; none exist there, nothing changed
 
 - Card c-qa-battle2 (chapter 1 QA report, build keysecrets2). Ran `tools/ch1_b3_test.py` in portrait and landscape and looked at the battle and victory card frames, and searched the Battle 3 files for the old texts.

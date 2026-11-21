@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<meta name="theme-color" content="#14122b">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-admin-32.png?v=adminicons1">
+<title>AI Costs: The Adventures of Tom</title>
+<style>
+/* costs.html (costs1): what every AI service costs, on one desktop page. Loads no game code. Data: data/costs.json. Notes: docs/COSTS.md */
+:root{
+ --bg:#14122b;--rail:#100e24;--surface:#1b1839;--raised:#231f4a;--line:#2e2a58;--line-soft:#252149;
+ --text:#f4f1ff;--muted:#aaa4d8;--faint:#8079b3;--accent:#ffd34d;--on-accent:#241b00;
+ --good:#0ca30c;--warn:#fab219;--crit:#e66767;
+ --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--s0:#6b6699;
+ --num:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+ --ui:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:14px/1.45 var(--ui)}
+body{min-width:1180px;display:grid;grid-template-columns:216px 1fr;grid-template-rows:100%}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* rail */
+#rail{background:var(--rail);border-right:1px solid var(--line-soft);display:flex;flex-direction:column;padding:18px 12px 14px}
+#rail .brand{padding:2px 10px 16px}
+#rail .brand b{display:block;font:600 21px/1.15 var(--num);letter-spacing:.005em}
+#rail .brand span{color:var(--faint);font-size:12px}
+#rail nav a{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:8px;color:var(--muted);font-weight:500;margin-bottom:2px}
+#rail nav a:hover{background:var(--surface);text-decoration:none;color:var(--text)}
+#rail nav a[aria-current=page]{background:var(--raised);color:var(--text);box-shadow:inset 3px 0 0 var(--accent)}
+#rail nav a i{font-style:normal;font-size:12px;color:var(--faint)}
+#rail h2{font-size:12px;font-weight:600;color:var(--faint);margin:18px 10px 6px}
+#rail .svc a{padding:6px 10px;font-weight:400;font-size:13px;justify-content:flex-start;gap:8px}
+#rail .foot{margin-top:auto;padding:10px;color:var(--faint);font-size:12px;border-top:1px solid var(--line-soft)}
+#rail .foot a{display:block;margin-bottom:6px}
+.dot{width:9px;height:9px;border-radius:2px;flex:none;display:inline-block}
+
+/* main */
+#main{display:flex;flex-direction:column;min-width:0;height:100%}
+#bar{display:flex;align-items:center;gap:14px;padding:12px 28px;border-bottom:1px solid var(--line-soft);background:var(--bg)}
+#bar h1{font:600 20px/1.2 var(--ui);margin:0;margin-right:auto;display:flex;align-items:baseline;gap:10px}
+#bar h1 a{font-size:13px;font-weight:500}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:2px}
+.seg button{border:0;background:none;padding:5px 11px;border-radius:7px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.seg button:hover{color:var(--text)}
+.seg button[aria-pressed=true]{background:var(--raised);color:var(--text);box-shadow:0 0 0 1px var(--line)}
+.lbl{color:var(--faint);font-size:12px;margin-right:-6px}
+input[type=date],input[type=text],input[type=number],input[type=search],select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color-scheme:dark}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--faint)}
+.btn.gold{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+.btn.small{padding:3px 8px;font-size:12px}
+#view{flex:1;overflow:auto;padding:22px 28px 60px}
+.wrap{max-width:1500px}
+
+.panel{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:16px 18px}
+.panel>h2,.h2{font:600 15px/1.3 var(--ui);margin:0 0 2px}
+.panel>p.sub,.sub{color:var(--muted);margin:0 0 12px;font-size:13px}
+.grid{display:grid;gap:16px}
+.g-over{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mt{margin-top:16px}
+
+/* the opening figure */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+.total .big{font:500 62px/1 var(--num);letter-spacing:-.01em;margin:6px 0 4px}
+.total .big small{font-size:.5em;color:var(--muted);letter-spacing:0}
+.total .cap{color:var(--muted)}
+.tape{display:flex;gap:2px;height:14px;margin:16px 0 10px;border-radius:4px;overflow:hidden}
+.tape span{min-width:3px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend b{color:var(--text);font-weight:500}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.fact{padding:4px 16px 12px;border-left:1px solid var(--line-soft)}
+.fact:nth-child(odd){border-left:0;padding-left:0}
+.fact:nth-child(n+3){border-top:1px solid var(--line-soft);padding-top:12px;padding-bottom:0}
+.fact .k{color:var(--muted);font-size:13px}
+.fact .v{font:500 27px/1.15 var(--num);margin:2px 0}
+.fact .n{color:var(--faint);font-size:12.5px}
+
+/* tables */
+table{border-collapse:collapse;width:100%}
+th{font-weight:500;color:var(--faint);font-size:12.5px;text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child>td{border-bottom:0}
+th.r,td.r{text-align:right}
+td.amt{font-variant-numeric:tabular-nums lining-nums;text-align:right;white-space:nowrap;font-weight:500}
+td.neg{color:#8fd6b4}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover>td{background:var(--raised)}
+td .s{color:var(--muted);font-size:12.5px;display:block}
+th button{all:unset;cursor:pointer;color:inherit}th button:hover{color:var(--text)}
+th[aria-sort] button{color:var(--text)}
+.tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.warn{border-color:#6b5a1e;color:var(--warn)}
+.tag.here{border-color:#3d5a8a;color:#9cc4f6}
+.svcname{display:inline-flex;align-items:center;gap:8px;font-weight:500;white-space:nowrap}
+
+/* ledger */
+.tools{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;cursor:pointer;color:var(--muted)}
+.chip[aria-pressed=true]{background:var(--raised);color:var(--text);border-color:var(--faint)}
+.ledger{padding:0}
+.ledger table thead th{position:sticky;top:-22px;background:var(--surface);z-index:1}
+.ledger table thead th:first-child{border-top-left-radius:12px}.ledger table thead th:last-child{border-top-right-radius:12px}
+tr.grp>td{background:#1f1b42;font-weight:600;border-bottom:1px solid var(--line);padding-top:10px}
+tr.grp .cnt{color:var(--faint);font-weight:400;margin-left:8px}
+tr.sel>td{background:#2a2556}
+.sum{position:sticky;bottom:0;border-radius:0 0 12px 12px;display:flex;align-items:center;gap:18px;background:var(--raised);border-top:1px solid var(--line);padding:11px 18px}
+.sum .t{margin-left:auto;font:500 22px/1 var(--num)}
+.sum .selbox{color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;margin:0;vertical-align:-2px}
+
+/* service */
+.kv{display:grid;grid-template-columns:150px 1fr;gap:9px 16px;margin:0}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+ul.plain{margin:0;padding:0;list-style:none}
+ul.plain li{padding:7px 0;border-bottom:1px solid var(--line-soft)}ul.plain li:last-child{border:0}
+ul.plain .src{display:block;color:var(--faint);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+a.card{display:block;color:inherit;background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:16px 18px}
+a.card:hover{border-color:var(--faint);text-decoration:none}
+a.card h3{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px}
+a.card .p{color:var(--muted);font-size:13px;min-height:38px}
+a.card .row{display:flex;justify-content:space-between;gap:10px;padding-top:9px;margin-top:9px;border-top:1px solid var(--line-soft)}
+a.card .row b{font:500 20px/1.1 var(--num)}
+a.card .row span{color:var(--muted);font-size:12.5px;display:block}
+.note{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-soft)}.note:last-child{border:0}
+.note i{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--warn);color:var(--warn);font:700 12px/15px var(--ui);text-align:center;font-style:normal;margin-top:1px}
+.note b{font-weight:600}
+.meter{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:8px 0 4px}
+.meter span{display:block;height:100%;background:var(--s5)}
+
+/* matrix */
+.matrix td,.matrix th{text-align:right}
+.matrix td:first-child,.matrix th:first-child{text-align:left}
+.matrix td.cell{cursor:pointer;font-variant-numeric:tabular-nums}
+.matrix td.cell:hover{background:var(--raised)}
+.matrix td.zero{color:#4f4a80}
+.matrix tr.tot>td,.matrix td.tot,.matrix th.tot{font-weight:600;border-top:1px solid var(--line)}
+.matrix td.tot,.matrix th.tot{border-left:1px solid var(--line)}
+.hb{display:grid;grid-template-columns:150px 1fr 96px;gap:10px;align-items:center;padding:5px 0}
+.hb .track{height:14px}
+.hb .track span{display:block;height:100%;border-radius:0 4px 4px 0;min-width:2px}
+.hb .v{text-align:right;font-variant-numeric:tabular-nums}
+
+/* charts */
+svg text{font:12px var(--ui);fill:var(--muted)}
+svg .gl{stroke:var(--line-soft);stroke-width:1}
+svg .ax{stroke:var(--line);stroke-width:1}
+svg .val{fill:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+#tip{position:fixed;z-index:20;pointer-events:none;background:#0d0b1f;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13px;min-width:170px;box-shadow:0 8px 24px rgba(0,0,0,.45);display:none}
+#tip h4{margin:0 0 5px;font-size:13px}
+#tip div{display:flex;justify-content:space-between;gap:16px;color:var(--muted)}
+#tip div b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+#tip div span{display:inline-flex;align-items:center;gap:6px}
+#tip .tt{border-top:1px solid var(--line);margin-top:5px;padding-top:5px}
+
+dialog{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:20px 22px;width:460px}
+dialog::backdrop{background:rgba(8,6,22,.65)}
+dialog h2{margin:0 0 4px;font-size:17px}
+dialog label{display:block;margin-top:11px;color:var(--muted);font-size:13px}
+dialog label input,dialog label select{display:block;width:100%;margin-top:4px;color:var(--text)}
+dialog .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+dialog .acts{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.empty{color:var(--muted);padding:26px 18px;text-align:center}
+@media (max-width:1100px){#narrow{display:block}}
+#narrow{display:none;background:#3a2f12;color:var(--warn);padding:6px 28px;font-size:13px}
+</style>
+</head>
+<body>
+<aside id="rail">
+ <div class="brand"><b>AI Costs</b><span>The Adventures of Tom</span></div>
+ <nav id="nav" aria-label="Screens"></nav>
+ <h2>Services</h2>
+ <nav id="navsvc" class="svc" aria-label="Services"></nav>
+ <div class="foot"><a href="admin.html">Back to Admin</a><span id="updated"></span></div>
+</aside>
+<div id="main">
+ <div id="narrow">This page is laid out for a desktop browser window at least 1,180 pixels wide.</div>
+ <div id="bar"></div>
+ <div id="view" tabindex="-1"><div class="empty">Loading the ledger...</div></div>
+</div>
+<div id="tip" role="status"></div>
+<dialog id="dlg"></dialog>
+<script>
+'use strict';
+// ---------- data ----------
+var D=null, LOCALKEY='aot-costs-local';
+var Q=new URLSearchParams(location.search);
+var TODAY=Q.get('today')||isoLocal(new Date());   // ?today=YYYY-MM-DD is for tests
+var F={range:'all',from:'',to:'',scope:'all'};
+var L={q:'',svc:{},type:'',group:'none',sort:'date',dir:-1,sel:{},month:''};
+var TYPES={subscription:'Plan',credits:'Credit bought',refund:'Refund'};
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function isoLocal(d){return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
+function p2(n){return (n<10?'0':'')+n;}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function money(n,whole){var neg=n<0;n=Math.abs(n);var s=n.toLocaleString('en-US',{minimumFractionDigits:whole?0:2,maximumFractionDigits:whole?0:2});return (neg?'-$':'$')+s;}
+function bigMoney(n){var s=money(n).split('.');return s[0]+'<small>.'+s[1]+'</small>';}
+function dfmt(iso,noYear){if(!iso)return '';var a=iso.split('-');return MONTHS[+a[1]-1].slice(0,3)+' '+(+a[2])+(noYear?'':', '+a[0]);}
+function tfmt(t){if(!t)return '';var a=t.split(':'),h=+a[0];return ((h+11)%12+1)+':'+a[1]+(h<12?' am':' pm');}
+function mlabel(ym,short){var a=ym.split('-');return (short?MONTHS[+a[1]-1].slice(0,3):MONTHS[+a[1]-1])+' '+a[0];}
+function addDays(iso,n){var a=iso.split('-'),d=new Date(+a[0],+a[1]-1,+a[2]+n);return isoLocal(d);}
+function addMonths(iso,n){var a=iso.split('-'),d=new Date(+a[0],+a[1]-1+n,1),last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(+a[2],last));return isoLocal(d);}
+function weekStart(iso){var a=iso.split('-'),d=new Date(+a[0],+a[1]-1,+a[2]);return addDays(iso,-((d.getDay()+6)%7));}
+function svc(id){return D.byId[id]||{id:id,name:id,slot:0,scope:'personal',plan:{}};}
+function color(id){return 'var(--s'+(svc(id).slot||0)+')';}
+function dot(id){return '<i class="dot" style="background:'+color(id)+'"></i>';}
+function local(){try{var o=JSON.parse(localStorage.getItem(LOCALKEY)||'{}');return {tx:o.tx||[],bal:o.bal||[]};}catch(e){return {tx:[],bal:[]};}}
+function saveLocal(o){try{localStorage.setItem(LOCALKEY,JSON.stringify(o));}catch(e){}}
+function allTx(){return D.transactions.concat(local().tx.map(function(t){t.local=true;return t;}));}
+function rangeOf(){
+ if(F.range==='month')return [TODAY.slice(0,8)+'01',TODAY];
+ if(F.range==='30')return [addDays(TODAY,-29),TODAY];
+ if(F.range==='custom')return [F.from||'0000-00-00',F.to||'9999-99-99'];
+ return ['0000-00-00','9999-99-99'];
+}
+function inScope(id){return F.scope==='all'||svc(id).scope==='game';}
+function txs(noRange){var r=rangeOf();return allTx().filter(function(t){return inScope(t.service)&&(noRange||(t.date>=r[0]&&t.date<=r[1]));});}
+function sum(a){return Math.round(a.reduce(function(s,t){return s+t.amount;},0)*100)/100;}
+function groupSum(a,keyFn){var m={};a.forEach(function(t){var k=keyFn(t);m[k]=Math.round(((m[k]||0)+t.amount)*100)/100;});return m;}
+function services(){return D.services.filter(function(s){return inScope(s.id);});}
+function paying(){return services().filter(function(s){return s.slot>0;});}
+function rangeWords(){var r=rangeOf();if(F.range==='all')return 'since the first receipt on '+dfmt(D.first);if(F.range==='month')return 'in '+mlabel(TODAY.slice(0,7))+' so far';if(F.range==='30')return 'in the last 30 days';return 'from '+(F.from?dfmt(F.from):'the start')+' to '+(F.to?dfmt(F.to):'today');}
+function nextCharge(s){ // the next expected renewal on or after today
+ var p=s.plan||{};if(!p.renews||!p.price)return null;var d=p.renews,n=0;while(d<TODAY&&n<240){d=addMonths(p.renews,++n);}return {date:d,amount:p.price,service:s.id,rolled:n>0};
+}
+function upcoming(){return services().map(nextCharge).filter(Boolean).sort(function(a,b){return a.date<b.date?-1:1;});}
+function recurring(){return Math.round(services().reduce(function(s,x){return s+((x.plan&&x.plan.period==='month'&&x.plan.price)||0);},0)*100)/100;}
+function usageOf(id){return D.usage.filter(function(u){return u.service===id;});}
+function balanceOf(s){ // {short,long,...}: newest of a balance in the ledger file (written by a job) or one recorded on this computer
+ var snap=D.balances.filter(function(b){return b.service===s.id&&b.left!=null;}).concat(local().bal.filter(function(b){return b.service===s.id;}).map(function(b){return {service:b.service,date:b.date,left:b.amount,unit:'usd',here:true};})).sort(function(a,b){return a.date<b.date?1:-1;})[0];
+ if(snap){var cr=snap.unit==='credits',v=cr?snap.left.toLocaleString('en-US')+' credits':money(snap.left);
+  return {short:v,long:v+' left'+(snap.limit?' of '+(cr?snap.limit.toLocaleString('en-US'):money(snap.limit)):'')+', as of '+dfmt(snap.date)+'. '+(snap.here?'You recorded it on this computer.':esc(snap.source||'')),meter:snap.limit?1-snap.left/snap.limit:null};}
+ var paid=sum(allTx().filter(function(t){return t.service===s.id;})),used=Math.round(usageOf(s.id).reduce(function(a,u){return a+u.amount;},0)*100)/100;
+ if(s.balance_unit==='usd'&&s.usage_complete)return {short:'About '+money(paid-used),long:'About '+money(paid-used)+' left. That is '+money(paid)+' paid in, less '+money(used)+' of use written in the game\'s change log up to '+dfmt(D.updated)+'. It is an estimate until a balance is recorded.',est:true};
+ if(s.balance_unit==='usd')return {short:'Not read yet',long:'Not read yet. '+money(paid)+' has been paid in. The game\'s log shows '+money(used)+' of use, which is not all of it. Read the real figure on the '+(s.console_name||'billing page')+' and record it here.',missing:true};
+ if(s.balance_unit==='credits')return {short:'Not read yet',long:'Not read yet. '+(s.balance_kind||''),missing:true};
+ if(s.billing==='subscription')return {short:'Plan limits',long:s.balance_kind||''};
+ return {short:'None',long:s.balance_kind||'None.'};
+}
+function flags(){ // things that need a look, for the overview
+ var out=[];
+ txs(true).filter(function(t){return t.verify;}).forEach(function(t){out.push({service:t.service,title:svc(t.service).name+', '+dfmt(t.date)+', '+money(t.amount)+': amount to confirm',text:t.verify});});
+ services().forEach(function(s){(s.gaps||[]).forEach(function(g){out.push({service:s.id,title:s.name,text:g});});});
+ return out;
+}
+
+// ---------- shell ----------
+var ROUTES=[['','Overview'],['services','Services'],['ledger','Ledger'],['totals','Totals']];
+function route(){var h=location.hash.replace(/^#\/?/,'').split('/');return {name:h[0]||'',arg:h[1]||''};}
+function go(h){location.hash='#/'+h;}
+function shell(){
+ var r=route();
+ document.getElementById('nav').innerHTML=ROUTES.map(function(x){
+  var cur=(r.name===x[0])||(r.name==='service'&&x[0]==='services');
+  var n=x[0]==='ledger'?txs().length:x[0]==='services'?services().length:'';
+  return '<a href="#/'+x[0]+'"'+(cur?' aria-current="page"':'')+'>'+x[1]+'<i class="num">'+n+'</i></a>';}).join('');
+ document.getElementById('navsvc').innerHTML=services().map(function(s){return '<a href="#/service/'+s.id+'"'+(r.name==='service'&&r.arg===s.id?' aria-current="page"':'')+'>'+dot(s.id)+esc(s.name)+'</a>';}).join('');
+ document.getElementById('updated').textContent='Ledger filed through '+dfmt(D.updated)+'. Times are Pacific.';
+ var title=r.name==='service'?'<a href="#/services">Services</a> '+esc(svc(r.arg).name):(ROUTES.filter(function(x){return x[0]===r.name;})[0]||ROUTES[0])[1];
+ var seg=function(key,opts){return '<span class="seg" role="group">'+opts.map(function(o){return '<button type="button" data-f="'+key+'" data-v="'+o[0]+'" aria-pressed="'+(F[key]===o[0])+'">'+o[1]+'</button>';}).join('')+'</span>';};
+ document.getElementById('bar').innerHTML='<h1>'+title+'</h1>'+
+  '<span class="lbl">Dates</span>'+seg('range',[['all','All time'],['month','This month'],['30','Last 30 days'],['custom','Custom']])+
+  (F.range==='custom'?'<input type="date" id="f-from" aria-label="From date" value="'+esc(F.from)+'"><input type="date" id="f-to" aria-label="To date" value="'+esc(F.to)+'">':'')+
+  '<span class="lbl">Show</span>'+seg('scope',[['all','Everything'],['game','Game tools only']])+
+  '<button type="button" class="btn gold" id="add">Add a charge</button>';
+}
+function render(){
+ if(!D)return;shell();var r=route(),v=document.getElementById('view');hideTip();
+ var fn={'' :vOverview,services:vServices,service:vService,ledger:vLedger,totals:vTotals}[r.name]||vOverview;
+ v.innerHTML='<div class="wrap">'+fn(r.arg)+'</div>';
+ if(after[r.name||'overview'])after[r.name||'overview'](r.arg);
+}
+var after={};
+
+// ---------- overview ----------
+function tape(by,total){var ids=paying().map(function(s){return s.id;}).filter(function(id){return by[id]>0;});
+ return '<div class="tape" role="img" aria-label="Share of the total by service">'+ids.map(function(id){return '<span style="flex:'+Math.max(by[id],total*.004)+' 0 0;background:'+color(id)+'" data-tip-svc="'+id+'"></span>';}).join('')+'</div>'+
+ '<div class="legend">'+ids.map(function(id){return '<span>'+dot(id)+esc(svc(id).name)+' <b class="num">'+money(by[id])+'</b></span>';}).join('')+'</div>';}
+function vOverview(){
+ var t=txs(),total=sum(t),by=groupSum(t,function(x){return x.service;});
+ var all=txs(true),ym=TODAY.slice(0,7),pm=addMonths(ym+'-01',-1).slice(0,7);
+ var thisM=sum(all.filter(function(x){return x.date.slice(0,7)===ym;})),lastM=sum(all.filter(function(x){return x.date.slice(0,7)===pm;}));
+ var up=upcoming(),nx=up[0],rec=recurring(),fl=flags();
+ var h='<div class="hero"><section class="panel total"><div class="cap">Paid for AI services '+rangeWords()+'</div><div class="big num" id="grand">'+bigMoney(total)+'</div>'+
+  '<div class="cap">'+t.length+' charges on receipts. Claude is '+(total>0?Math.round((by.claude||0)/total*100):0)+'% of it.</div>'+(total>0?tape(by,total):'')+'</section>'+
+  '<section class="panel facts">'+
+   '<div class="fact"><div class="k">'+mlabel(ym)+' so far</div><div class="v num">'+money(thisM)+'</div><div class="n">'+mlabel(pm)+' was '+money(lastM)+'</div></div>'+
+   '<div class="fact"><div class="k">Plans renewing each month</div><div class="v num">'+money(rec)+'</div><div class="n">'+services().filter(function(s){return s.plan&&s.plan.period==='month'&&s.plan.price;}).length+' plans at today\'s prices</div></div>'+
+   '<div class="fact"><div class="k">Next charge</div><div class="v num">'+(nx?money(nx.amount):'None')+'</div><div class="n">'+(nx?esc(svc(nx.service).name)+' on '+dfmt(nx.date):'No plan has a renewal date')+'</div></div>'+
+   '<div class="fact"><div class="k">Credit bought, not plans</div><div class="v num">'+money(sum(t.filter(function(x){return x.type==='credits';})))+'</div><div class="n">Top-ups and usage credits in these dates</div></div>'+
+  '</section></div>';
+ h+='<div class="grid g-over mt"><section class="panel"><h2>Paid each month, by service</h2><p class="sub">Hover a month for the split. The same numbers are a table on <a href="#/totals">Totals</a>.</p><div id="ch-months"></div></section>'+
+  '<section class="panel"><h2>Coming up</h2><p class="sub">Renewals expected from the plans on file.</p>'+(up.length?'<table><tbody>'+up.map(function(u){return '<tr class="click" data-go="service/'+u.service+'"><td>'+dfmt(u.date)+'</td><td><span class="svcname">'+dot(u.service)+esc(svc(u.service).name)+'</span><span class="s">'+esc(svc(u.service).plan.name)+'</span></td><td class="amt">'+money(u.amount)+'</td></tr>';}).join('')+'</tbody></table><p class="sub" style="margin:12px 0 0">Due in the next 30 days: <b class="num" style="color:var(--text)">'+money(sum(up.filter(function(u){return u.date<=addDays(TODAY,30);})))+'</b>. Credit top-ups are not included, because they happen only when you buy them.</p>':'<div class="empty">No plan has a renewal date.</div>')+'</section></div>';
+ h+='<section class="panel mt"><h2>Every service</h2><p class="sub">Click a row for the plan, what it allows and its own ledger.</p><table><thead><tr><th>Service</th><th>What the game uses it for</th><th>Plan</th><th class="r">Paid in these dates</th><th>Balance</th><th>Next charge</th></tr></thead><tbody>'+
+  services().map(function(s){var b=balanceOf(s),n=nextCharge(s),p=s.plan||{};return '<tr class="click" data-go="service/'+s.id+'"><td><span class="svcname">'+dot(s.id)+esc(s.name)+'</span>'+(s.scope!=='game'?'<span class="s">Not a game tool</span>':'')+'</td><td style="max-width:360px;color:var(--muted)">'+esc(s.used_for)+'</td><td>'+esc(p.name||'')+(p.price?'<span class="s num">'+money(p.price)+' a '+p.period+'</span>':'')+'</td><td class="amt">'+money(by[s.id]||0)+'</td><td>'+(b.missing?'<span class="tag warn">Not read yet</span>':esc(b.short))+(b.est?'<span class="s">estimate</span>':'')+'</td><td>'+(n?dfmt(n.date,true)+'<span class="s num">'+money(n.amount)+'</span>':'<span style="color:var(--faint)">None</span>')+'</td></tr>';}).join('')+'</tbody></table></section>';
+ h+='<div class="grid g2 mt"><section class="panel"><h2>Needs a look</h2><p class="sub">'+fl.length+' places where the ledger is unsure or has a hole.</p>'+fl.map(function(f){return '<div class="note"><i>!</i><div><b><a href="#/service/'+f.service+'">'+esc(f.title)+'</a></b><br><span style="color:var(--muted)">'+esc(f.text)+'</span></div></div>';}).join('')+'</section>'+
+  '<section class="panel"><h2>Latest charges</h2><p class="sub">The newest eight. <a href="#/ledger">Open the full ledger</a></p><table><tbody>'+t.slice().sort(function(a,b){return (a.date+a.time)<(b.date+b.time)?1:-1;}).slice(0,8).map(function(x){return '<tr><td style="white-space:nowrap">'+dfmt(x.date,true)+'</td><td><span class="svcname">'+dot(x.service)+esc(svc(x.service).name)+'</span><span class="s">'+esc(x.what)+'</span></td><td class="amt'+(x.amount<0?' neg':'')+'">'+money(x.amount)+'</td></tr>';}).join('')+'</tbody></table></section></div>';
+ return h;
+}
+after.overview=function(){monthsChart(document.getElementById('ch-months'),txs());};
+
+// ---------- services ----------
+function vServices(){
+ var by=groupSum(txs(),function(x){return x.service;});
+ return '<p class="sub" style="max-width:760px">Every AI service the game is connected to, plus the AI subscriptions on the same account. Paid figures follow the dates chosen above.</p><div class="cards">'+services().map(function(s){var b=balanceOf(s),p=s.plan||{},n=nextCharge(s);
+  return '<a class="card" href="#/service/'+s.id+'"><h3>'+dot(s.id)+esc(s.name)+(s.scope!=='game'?' <span class="tag">Not a game tool</span>':'')+'</h3><div class="p">'+esc(s.used_for)+'</div>'+
+  '<div class="row"><div><span>Plan</span>'+esc(p.name||'')+(p.price?', <span class="num" style="display:inline">'+money(p.price)+' a '+p.period+'</span>':'')+'</div></div>'+
+  '<div class="row"><div><span>Paid</span><b class="num">'+money(by[s.id]||0)+'</b></div><div style="text-align:right"><span>Balance</span>'+esc(b.short)+'</div><div style="text-align:right"><span>Next charge</span>'+(n?dfmt(n.date,true):'None')+'</div></div></a>';}).join('')+'</div>';
+}
+function vService(id){
+ var s=D.byId[id];if(!s)return '<div class="empty">No service is called '+esc(id)+'. <a href="#/services">See all services</a></div>';
+ var p=s.plan||{},b=balanceOf(s),n=nextCharge(s),t=txs().filter(function(x){return x.service===id;}),tAll=allTx().filter(function(x){return x.service===id;}),u=usageOf(id),bal=D.balances.filter(function(x){return x.service===id&&x.text;});
+ var h='<div class="grid g3"><section class="panel"><div class="sub" style="margin:0">Paid in these dates</div><div class="fact" style="padding:0;border:0"><div class="v num" style="font-size:38px">'+money(sum(t))+'</div><div class="n">'+t.length+' charges. '+money(sum(tAll))+' in all since '+(tAll.length?dfmt(tAll.map(function(x){return x.date;}).sort()[0]):'never')+'.</div></div></section>'+
+  '<section class="panel"><div class="sub" style="margin:0">Balance</div><div class="fact" style="padding:0;border:0"><div class="v num" style="font-size:'+(b.short.length>14?24:38)+'px">'+esc(b.short)+'</div>'+(b.meter!=null?'<div class="meter"><span style="width:'+Math.round(b.meter*100)+'%"></span></div>':'')+'<div class="n">'+esc(b.long)+'</div>'+(s.balance_unit==='usd'?'<button type="button" class="btn small" id="recbal" style="margin-top:8px">Record the balance</button>':'')+'</div></section>'+
+  '<section class="panel"><div class="sub" style="margin:0">Next charge</div><div class="fact" style="padding:0;border:0"><div class="v num" style="font-size:38px">'+(n?money(n.amount):'None')+'</div><div class="n">'+(n?'Expected on '+dfmt(n.date)+(n.rolled?', counted forward from the last renewal date on file':'')+'. '+esc(p.price_note||''):(s.billing==='prepaid'?'Prepaid. You are charged only when you buy more credit.':'No renewal on file.'))+'</div></div></section></div>';
+ h+='<div class="grid g2 mt"><section class="panel"><h2>The plan</h2><p class="sub">'+esc(s.used_for)+'</p><dl class="kv">'+
+  '<dt>Plan</dt><dd>'+esc(p.name||'Not confirmed')+'</dd>'+
+  '<dt>Price</dt><dd class="num">'+(p.price?money(p.price)+' a '+p.period:(p.price===0?'No charge':'Pay for what you use'))+'</dd>'+
+  (p.since?'<dt>On this plan since</dt><dd>'+dfmt(p.since)+'</dd>':'')+(p.via?'<dt>Billed through</dt><dd>'+esc(p.via)+'</dd>':'')+
+  '<dt>Where the key lives</dt><dd>'+esc(s.keys||'')+'</dd>'+
+  (s.console?'<dt>Billing page</dt><dd><a href="'+esc(s.console)+'" target="_blank" rel="noopener">'+esc(s.console_name)+'</a></dd>':'')+'</dl>'+
+  (s.history&&s.history.length>1?'<h2 class="h2" style="margin-top:16px">Plan changes</h2><table><tbody>'+s.history.map(function(x){return '<tr><td style="width:120px">'+dfmt(x.from)+'</td><td>'+esc(x.name)+'</td><td class="amt">'+money(x.price)+' a month</td></tr>';}).join('')+'</tbody></table>':'')+'</section>'+
+  '<section class="panel"><h2>What it allows</h2><p class="sub">Each line says where it was read.</p><ul class="plain">'+(s.allows||[]).map(function(a){return '<li>'+esc(a.text)+'<span class="src">'+esc(a.source)+'</span></li>';}).join('')+'</ul>'+
+  ((s.gaps||[]).length?'<h2 class="h2" style="margin-top:16px">Holes in this service\'s records</h2>'+s.gaps.map(function(g){return '<div class="note"><i>!</i><div style="color:var(--muted)">'+esc(g)+'</div></div>';}).join(''):'')+'</section></div>';
+ if(u.length||bal.length)h+='<div class="grid g2 mt">'+(u.length?'<section class="panel"><h2>Use written in the game\'s log</h2><p class="sub">Credit spent by the game\'s jobs. This is use of money already paid, so it is not added to any total.</p><table><tbody>'+u.map(function(x){return '<tr><td style="width:110px">'+dfmt(x.date)+'</td><td>'+esc(x.what)+'<span class="s">'+esc(x.source)+'</span></td><td class="amt">'+money(x.amount)+'</td></tr>';}).join('')+'</tbody></table></section>':'')+(bal.length?'<section class="panel"><h2>Usage notes from the provider</h2><p class="sub">What receipts and emails said about use.</p><table><tbody>'+bal.map(function(x){return '<tr><td style="width:110px">'+dfmt(x.date)+'</td><td>'+esc(x.text)+'<span class="s">'+esc(x.source)+'</span></td></tr>';}).join('')+'</tbody></table></section>':'')+'</div>';
+ h+='<section class="panel ledger mt"><div style="padding:16px 18px 6px"><h2 class="h2">Charges</h2><p class="sub">'+esc(s.name)+' only, in the dates chosen above. <a href="#/ledger" data-ledger-svc="'+id+'">Open in the ledger</a></p></div>'+(t.length?ledgerTable(t.slice().sort(function(a,b){return (a.date+a.time)<(b.date+b.time)?1:-1;}),{plain:true})+'<div class="sum" style="position:static"><span>'+t.length+' charges</span><span class="t num">'+money(sum(t))+'</span></div>':'<div class="empty">No charges for '+esc(s.name)+' in these dates.</div>')+'</section>';
+ return h;
+}
+after.service=function(id){var b=document.getElementById('recbal');if(b)b.onclick=function(){balanceDialog(id);};};
+
+// ---------- ledger ----------
+var COLS=[['date','Date'],['service','Service'],['what','What it was'],['type','Kind'],['via','Paid through'],['ref','Reference'],['amount','Amount']];
+function ledgerRows(){
+ var q=L.q.trim().toLowerCase(),on=Object.keys(L.svc).filter(function(k){return L.svc[k];});
+ var a=txs().filter(function(t){
+  if(on.length&&on.indexOf(t.service)<0)return false;if(L.type&&t.type!==L.type)return false;if(L.month&&t.date.slice(0,7)!==L.month)return false;
+  if(q&&(svc(t.service).name+' '+t.what+' '+t.ref+' '+t.via+' '+TYPES[t.type]+' '+t.date+' '+dfmt(t.date)+' '+t.amount.toFixed(2)).toLowerCase().indexOf(q)<0)return false;return true;});
+ var k=L.sort,dir=L.dir;
+ a.sort(function(x,y){var A=k==='date'?x.date+x.time:k==='service'?svc(x.service).name:k==='amount'?x.amount:k==='type'?TYPES[x.type]:x[k]||'',B=k==='date'?y.date+y.time:k==='service'?svc(y.service).name:k==='amount'?y.amount:k==='type'?TYPES[y.type]:y[k]||'';return (A<B?-1:A>B?1:(x.id<y.id?-1:1))*dir;});
+ return a;
+}
+function groupKey(t){var g=L.group;return g==='service'?[svc(t.service).name,svc(t.service).name]:g==='month'?[t.date.slice(0,7),mlabel(t.date.slice(0,7))]:g==='week'?[weekStart(t.date),'Week of '+dfmt(weekStart(t.date))]:g==='type'?[TYPES[t.type],TYPES[t.type]]:g==='via'?[t.via,t.via]:['',''];}
+function ledgerTable(rows,o){
+ o=o||{};var head='<thead><tr>'+(o.plain?'':'<th style="width:34px"><input type="checkbox" id="selall" aria-label="Select every charge shown"></th>')+COLS.map(function(c){if(o.plain&&c[0]==='service')return '';var cur=!o.plain&&L.sort===c[0];return '<th'+(c[0]==='amount'?' class="r"':'')+(cur?' aria-sort="'+(L.dir>0?'ascending':'descending')+'"':'')+'>'+(o.plain?c[1]:'<button type="button" data-sort="'+c[0]+'">'+c[1]+(cur?(L.dir>0?' ▴':' ▾'):'')+'</button>')+'</th>';}).join('')+'</tr></thead>';
+ var body='',last=null,groups={},order=[];
+ if(!o.plain&&L.group!=='none'){rows.forEach(function(t){var g=groupKey(t);if(!groups[g[0]]){groups[g[0]]={label:g[1],rows:[]};order.push(g[0]);}groups[g[0]].rows.push(t);});
+  if(L.group==='month'||L.group==='week')order.sort(function(a,b){return (a<b?-1:1)*(L.sort==='date'?L.dir:-1);});else order.sort(function(a,b){return sum(groups[b].rows)-sum(groups[a].rows);});
+  order.forEach(function(k){var g=groups[k];body+='<tr class="grp"><td colspan="'+COLS.length+'">'+esc(g.label)+'<span class="cnt">'+g.rows.length+(g.rows.length===1?' charge':' charges')+'</span></td><td class="amt">'+money(sum(g.rows))+'</td></tr>'+g.rows.map(function(t){return row(t,o);}).join('');});
+ } else body=rows.map(function(t){return row(t,o);}).join('');
+ return '<table>'+head+'<tbody>'+body+'</tbody></table>';
+}
+function row(t,o){
+ return '<tr data-id="'+t.id+'"'+(!o.plain&&L.sel[t.id]?' class="sel"':'')+'>'+(o.plain?'':'<td><input type="checkbox" data-sel="'+t.id+'"'+(L.sel[t.id]?' checked':'')+' aria-label="Select this charge"></td>')+
+ '<td style="white-space:nowrap">'+dfmt(t.date)+'<span class="s">'+tfmt(t.time)+'</span></td>'+(o.plain?'':'<td><a class="svcname" style="color:inherit" href="#/service/'+t.service+'">'+dot(t.service)+esc(svc(t.service).name)+'</a></td>')+
+ '<td>'+esc(t.what)+(t.verify?' <span class="tag warn" title="'+esc(t.verify)+'">Confirm amount</span>':'')+(t.local?' <span class="tag here">Added on this computer</span> <button type="button" class="btn small" data-del="'+t.id+'">Remove</button>':'')+(t.note?'<span class="s">'+esc(t.note)+'</span>':'')+'</td>'+
+ '<td style="white-space:nowrap">'+TYPES[t.type]+'</td><td style="white-space:nowrap">'+esc(t.via)+'</td><td style="color:var(--muted);white-space:nowrap">'+esc(t.ref)+'</td><td class="amt'+(t.amount<0?' neg':'')+'">'+money(t.amount)+'</td></tr>';
+}
+function vLedger(){
+ var rows=ledgerRows(),ids={};rows.forEach(function(t){ids[t.id]=1;});Object.keys(L.sel).forEach(function(k){if(!ids[k])delete L.sel[k];});
+ var sel=rows.filter(function(t){return L.sel[t.id];});
+ var h='<div class="tools"><input type="search" id="lq" placeholder="Search charges" aria-label="Search charges" value="'+esc(L.q)+'" style="width:230px">'+
+  '<div class="chips" role="group" aria-label="Services">'+paying().map(function(s){return '<button type="button" class="chip" data-svc="'+s.id+'" aria-pressed="'+!!L.svc[s.id]+'">'+dot(s.id)+esc(s.name)+'</button>';}).join('')+'</div>'+
+  '<select id="ltype" aria-label="Kind of charge"><option value="">Every kind</option>'+Object.keys(TYPES).map(function(k){return '<option value="'+k+'"'+(L.type===k?' selected':'')+'>'+TYPES[k]+'</option>';}).join('')+'</select>'+
+  (L.month?'<button type="button" class="chip" aria-pressed="true" id="lmonth">'+mlabel(L.month)+' only, clear</button>':'')+'</div>'+
+  '<div class="tools"><span class="lbl" style="margin-right:0">Subtotal by</span><span class="seg" role="group">'+[['none','Nothing'],['service','Service'],['month','Month'],['week','Week'],['type','Kind'],['via','Paid through']].map(function(g){return '<button type="button" data-group="'+g[0]+'" aria-pressed="'+(L.group===g[0])+'">'+g[1]+'</button>';}).join('')+'</span>'+
+  '<span style="margin-left:auto;color:var(--muted)">Tick rows to add them up.</span><button type="button" class="btn" id="csv">Download these rows as CSV</button></div>';
+ h+='<section class="panel ledger">'+(rows.length?ledgerTable(rows):'<div class="empty">No charges match. Clear the search or choose All time.</div>')+
+  '<div class="sum"><span id="lcount">'+rows.length+(rows.length===1?' charge':' charges')+' shown</span>'+(sel.length?'<span class="selbox num" id="lsel">'+sel.length+' ticked: '+money(sum(sel))+'</span><button type="button" class="btn small" id="clearsel">Clear ticks</button>':'')+'<span class="t num" id="ltotal">'+money(sum(rows))+'</span></div></section>';
+ return h;
+}
+after.ledger=function(){var q=document.getElementById('lq');if(q&&L._focus){q.focus();q.setSelectionRange(q.value.length,q.value.length);L._focus=0;}
+ var sa=document.getElementById('selall');if(sa){var rows=ledgerRows();sa.checked=rows.length>0&&rows.every(function(t){return L.sel[t.id];});}};
+function csv(){
+ var rows=ledgerRows(),c=function(v){v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+ var out=[['Date','Time (Pacific)','Service','Kind','What it was','Paid through','Reference','Amount (USD)','Source','Note'].join(',')].concat(rows.map(function(t){return [t.date,t.time,svc(t.service).name,TYPES[t.type],t.what,t.via,t.ref,t.amount.toFixed(2),t.local?'Added on this computer':t.source,t.verify||t.note||''].map(c).join(',');}));
+ var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out.join('\r\n')+'\r\n'],{type:'text/csv'}));a.download='ai-costs-'+TODAY+'.csv';document.body.appendChild(a);a.click();a.remove();
+}
+
+// ---------- totals ----------
+function monthsOf(t){if(!t.length)return [];var a=t.map(function(x){return x.date.slice(0,7);}).sort(),m=a[0],out=[];while(m<=a[a.length-1]){out.push(m);m=addMonths(m+'-01',1).slice(0,7);}return out;}
+function vTotals(){
+ var t=txs(),total=sum(t),ms=monthsOf(t),ss=paying().filter(function(s){return t.some(function(x){return x.service===s.id;});});
+ var cell={},bySvc=groupSum(t,function(x){return x.service;}),byM=groupSum(t,function(x){return x.date.slice(0,7);});
+ t.forEach(function(x){var k=x.service+'|'+x.date.slice(0,7);cell[k]=Math.round(((cell[k]||0)+x.amount)*100)/100;});
+ var byType=groupSum(t,function(x){return TYPES[x.type];}),byVia=groupSum(t,function(x){return x.via;});
+ var bars=function(m,colorFn){var keys=Object.keys(m).sort(function(a,b){return m[b]-m[a];}),mx=Math.max.apply(null,keys.map(function(k){return Math.abs(m[k]);}).concat([1]));return keys.map(function(k){return '<div class="hb"><span>'+esc(k)+'</span><span class="track"><span style="width:'+Math.max(Math.abs(m[k])/mx*100,.5)+'%;background:'+colorFn(k)+'"></span></span><span class="v">'+money(m[k])+'</span></div>';}).join('');};
+ var h='<div class="hero"><section class="panel total"><div class="cap">Everything paid for AI '+rangeWords()+(F.scope==='game'?', game tools only':'')+'</div><div class="big num" id="grand">'+bigMoney(total)+'</div><div class="cap">'+t.length+' charges across '+ss.length+' services. Refunds are taken off.</div>'+(total>0?tape(bySvc,total):'')+'</section>'+
+  '<section class="panel"><h2>Running total</h2><p class="sub">Each step is one charge. Hover for the total on that day.</p><div id="ch-cum"></div></section></div>';
+ h+='<section class="panel mt"><h2>Service by month</h2><p class="sub">Click any figure to see the charges behind it.</p>'+(t.length?'<table class="matrix num"><thead><tr><th>Service</th>'+ms.map(function(m){return '<th>'+mlabel(m,true)+'</th>';}).join('')+'<th class="tot">Total</th><th>Share</th></tr></thead><tbody>'+
+  ss.sort(function(a,b){return (bySvc[b.id]||0)-(bySvc[a.id]||0);}).map(function(s){return '<tr><td><a class="svcname" style="color:inherit" href="#/service/'+s.id+'">'+dot(s.id)+esc(s.name)+'</a></td>'+ms.map(function(m){var v=cell[s.id+'|'+m];return v?'<td class="cell" data-cell="'+s.id+'|'+m+'">'+money(v)+'</td>':'<td class="zero">0</td>';}).join('')+'<td class="tot cell" data-cell="'+s.id+'|">'+money(bySvc[s.id]||0)+'</td><td>'+(total?Math.round((bySvc[s.id]||0)/total*100):0)+'%</td></tr>';}).join('')+
+  '<tr class="tot"><td>Total</td>'+ms.map(function(m){return '<td class="cell" data-cell="|'+m+'">'+money(byM[m]||0)+'</td>';}).join('')+'<td class="tot" id="mtotal">'+money(total)+'</td><td>100%</td></tr></tbody></table>':'<div class="empty">No charges in these dates.</div>')+'</section>';
+ h+='<div class="grid g2 mt"><section class="panel"><h2>By kind of charge</h2><p class="sub">Plans are flat monthly prices. Credit bought is top-ups and usage credits.</p>'+bars(byType,function(){return 'var(--s1)';})+'</section><section class="panel"><h2>By where it was billed</h2><p class="sub">Which statement or store each charge shows up on.</p>'+bars(byVia,function(){return 'var(--s1)';})+'</section></div>';
+ return h;
+}
+after.totals=function(){cumChart(document.getElementById('ch-cum'),txs());};
+
+// ---------- charts ----------
+function niceMax(v){if(v<=0)return 1;var p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p,s=n<=1?1:n<=1.2?1.2:n<=1.6?1.6:n<=2?2:n<=2.4?2.4:n<=3?3:n<=4?4:n<=5?5:n<=6?6:n<=8?8:10;return s*p;}
+function showTip(html,x,y){var t=document.getElementById('tip');t.innerHTML=html;t.style.display='block';var w=t.offsetWidth,h=t.offsetHeight;t.style.left=Math.min(x+14,innerWidth-w-8)+'px';t.style.top=Math.max(8,Math.min(y-h-10,innerHeight-h-8))+'px';}
+function hideTip(){document.getElementById('tip').style.display='none';}
+function monthsChart(el,t){
+ if(!el)return;var ms=monthsOf(t);if(!ms.length){el.innerHTML='<div class="empty">No charges in these dates.</div>';return;}
+ var W=660,H=250,ml=52,mr=8,mt=22,mb=28,pw=W-ml-mr,ph=H-mt-mb,ids=paying().map(function(s){return s.id;});
+ var data=ms.map(function(m){var o={m:m,tot:0,by:{}};t.forEach(function(x){if(x.date.slice(0,7)===m){o.by[x.service]=(o.by[x.service]||0)+x.amount;o.tot+=x.amount;}});return o;});
+ var mx=niceMax(Math.max.apply(null,data.map(function(d){return d.tot;}))),band=pw/ms.length,bw=Math.min(24,band*.5),y=function(v){return mt+ph-v/mx*ph;};
+ var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Paid each month by service">';
+ for(var i=0;i<=4;i++){var v=mx*i/4;s+='<line class="'+(i?'gl':'ax')+'" x1="'+ml+'" x2="'+(W-mr)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text x="'+(ml-8)+'" y="'+(y(v)+4)+'" text-anchor="end">'+money(v,true)+'</text>';}
+ data.forEach(function(d,i){var cx=ml+band*(i+.5),x=cx-bw/2,base=0,segs=ids.filter(function(id){return d.by[id]>0;});
+  segs.forEach(function(id,j){var top=y(base+d.by[id]),bot=y(base),h=Math.max(bot-top-(j?2:0),1),yy=top,r=j===segs.length-1?Math.min(4,h):0;
+   s+=r?'<path fill="'+color(id)+'" d="M'+x+' '+(yy+h)+'V'+(yy+r)+'a'+r+' '+r+' 0 0 1 '+r+' -'+r+'h'+(bw-2*r)+'a'+r+' '+r+' 0 0 1 '+r+' '+r+'V'+(yy+h)+'z"/>':'<rect fill="'+color(id)+'" x="'+x+'" y="'+yy+'" width="'+bw+'" height="'+h+'"/>';base+=d.by[id];});
+  s+='<text class="val" x="'+cx+'" y="'+(y(Math.max(d.tot,0))-7)+'" text-anchor="middle">'+money(d.tot,true)+'</text><text x="'+cx+'" y="'+(H-8)+'" text-anchor="middle">'+mlabel(d.m,true)+'</text><rect class="hit" data-i="'+i+'" x="'+(ml+band*i)+'" y="'+mt+'" width="'+band+'" height="'+ph+'" fill="transparent"/>';});
+ s+='</svg><div class="legend" style="margin-top:8px">'+ids.filter(function(id){return data.some(function(d){return d.by[id];});}).map(function(id){return '<span>'+dot(id)+esc(svc(id).name)+'</span>';}).join('')+'</div>';
+ el.innerHTML=s;
+ el.querySelectorAll('.hit').forEach(function(r){r.addEventListener('mousemove',function(e){var d=data[+r.dataset.i];showTip('<h4>'+mlabel(d.m)+'</h4>'+ids.filter(function(id){return d.by[id];}).map(function(id){return '<div><span>'+dot(id)+esc(svc(id).name)+'</span><b>'+money(d.by[id])+'</b></div>';}).join('')+'<div class="tt"><span>Total</span><b>'+money(d.tot)+'</b></div>',e.clientX,e.clientY);});r.addEventListener('mouseleave',hideTip);});
+}
+function cumChart(el,t){
+ if(!el)return;t=t.slice().sort(function(a,b){return (a.date+a.time)<(b.date+b.time)?-1:1;});if(!t.length){el.innerHTML='<div class="empty">No charges in these dates.</div>';return;}
+ var W=520,H=226,ml=52,mr=14,mt=14,mb=26,pw=W-ml-mr,ph=H-mt-mb,day=function(iso){var a=iso.split('-');return Date.UTC(+a[0],+a[1]-1,+a[2])/864e5;};
+ var d0=day(t[0].date),d1=Math.max(day(t[t.length-1].date),day(rangeOf()[1]<'9'?rangeOf()[1]:TODAY),d0+1),run=0,pts=t.map(function(x){run=Math.round((run+x.amount)*100)/100;return {d:day(x.date),v:run,t:x};});
+ var mx=niceMax(run),X=function(d){return ml+(d-d0)/(d1-d0)*pw;},Y=function(v){return mt+ph-v/mx*ph;};
+ var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Running total of everything paid">';
+ for(var i=0;i<=4;i++){var v=mx*i/4;s+='<line class="'+(i?'gl':'ax')+'" x1="'+ml+'" x2="'+(W-mr)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text x="'+(ml-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+money(v,true)+'</text>';}
+ var ms=monthsOf(t);ms.forEach(function(m,i){if(i===0)return;var x=X(day(m+'-01'));if(x>ml+10&&x<W-mr-10)s+='<text x="'+x+'" y="'+(H-8)+'" text-anchor="middle">'+mlabel(m,true).split(' ')[0]+' 1</text>';});
+ var p='M'+X(d0)+' '+Y(0);pts.forEach(function(q){p+='H'+X(q.d)+'V'+Y(q.v);});p+='H'+X(d1);
+ s+='<path d="'+p+'V'+Y(0)+'H'+X(d0)+'z" fill="var(--s1)" opacity=".1"/><path d="'+p+'" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+ s+='<circle cx="'+X(d1)+'" cy="'+Y(run)+'" r="4.5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"/><text class="val" x="'+(X(d1)-8)+'" y="'+(Y(run)-9)+'" text-anchor="end">'+money(run)+'</text>';
+ s+='<line id="cx" class="ax" y1="'+mt+'" y2="'+(mt+ph)+'" x1="0" x2="0" style="display:none"/><circle id="cd" r="4.5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" style="display:none"/><rect id="chit" x="'+ml+'" y="'+mt+'" width="'+pw+'" height="'+ph+'" fill="transparent"/></svg>';
+ el.innerHTML=s;var hit=el.querySelector('#chit'),cx=el.querySelector('#cx'),cd=el.querySelector('#cd'),svg=el.querySelector('svg');
+ hit.addEventListener('mousemove',function(e){var b=svg.getBoundingClientRect(),d=d0+((e.clientX-b.left)/b.width*W-ml)/pw*(d1-d0),cur=null;pts.forEach(function(q){if(q.d<=d+.5)cur=q;});if(!cur){hideTip();cx.style.display=cd.style.display='none';return;}
+  cx.style.display=cd.style.display='';cx.setAttribute('x1',X(cur.d));cx.setAttribute('x2',X(cur.d));cd.setAttribute('cx',X(cur.d));cd.setAttribute('cy',Y(cur.v));
+  showTip('<h4>'+dfmt(cur.t.date)+'</h4><div><span>Paid by then</span><b>'+money(cur.v)+'</b></div><div class="tt"><span>'+dot(cur.t.service)+esc(svc(cur.t.service).name)+'</span><b>'+money(cur.t.amount)+'</b></div>',e.clientX,e.clientY);});
+ hit.addEventListener('mouseleave',function(){hideTip();cx.style.display=cd.style.display='none';});
+}
+
+// ---------- dialogs ----------
+function chargeDialog(){
+ var d=document.getElementById('dlg');
+ d.innerHTML='<form method="dialog" id="cf"><h2>Add a charge</h2><p class="sub">For a charge with no receipt in email. It is kept on this computer and marked that way until a Claude session files it in the game\'s ledger.</p>'+
+ '<div class="row2"><label>Date<input type="date" name="date" required value="'+TODAY+'"></label><label>Amount in dollars<input type="number" name="amount" step="0.01" required placeholder="20.00"></label></div>'+
+ '<div class="row2"><label>Service<select name="service">'+D.services.map(function(s){return '<option value="'+s.id+'">'+esc(s.name)+'</option>';}).join('')+'</select></label><label>Kind<select name="type">'+Object.keys(TYPES).map(function(k){return '<option value="'+k+'">'+TYPES[k]+'</option>';}).join('')+'</select></label></div>'+
+ '<label>What it was<input type="text" name="what" required placeholder="Claude Pro renewal"></label>'+
+ '<div class="row2"><label>Paid through<input type="text" name="via" value="Card"></label><label>Reference, if any<input type="text" name="ref"></label></div>'+
+ '<div class="acts"><button type="button" class="btn" id="cx1">Cancel</button><button class="btn gold" value="ok">Add the charge</button></div></form>';
+ d.querySelector('#cx1').onclick=function(){d.close();};
+ d.querySelector('#cf').onsubmit=function(e){e.preventDefault();var f=new FormData(e.target),amt=Math.round(parseFloat(f.get('amount'))*100)/100;if(!isFinite(amt))return;if(f.get('type')==='refund'&&amt>0)amt=-amt;
+  var o=local();o.tx.push({id:'L'+Date.now().toString(36),date:f.get('date'),time:'',service:f.get('service'),type:f.get('type'),amount:amt,what:f.get('what'),via:f.get('via')||'Card',ref:f.get('ref')||'',source:'Added on this computer'});saveLocal(o);d.close();render();};
+ d.showModal();
+}
+function balanceDialog(id){
+ var d=document.getElementById('dlg'),s=svc(id);
+ d.innerHTML='<form method="dialog" id="bf"><h2>Record the '+esc(s.name)+' balance</h2><p class="sub">Type what the '+esc(s.console_name||'billing page')+' shows. It is kept on this computer with today\'s date.</p>'+
+ '<div class="row2"><label>Credit left, in dollars<input type="number" name="amount" step="0.01" min="0" required></label><label>As of<input type="date" name="date" required value="'+TODAY+'"></label></div>'+
+ '<div class="acts"><button type="button" class="btn" id="cx2">Cancel</button><button class="btn gold" value="ok">Record the balance</button></div></form>';
+ d.querySelector('#cx2').onclick=function(){d.close();};
+ d.querySelector('#bf').onsubmit=function(e){e.preventDefault();var f=new FormData(e.target),o=local();o.bal.push({service:id,date:f.get('date'),amount:Math.round(parseFloat(f.get('amount'))*100)/100});saveLocal(o);d.close();render();};
+ d.showModal();
+}
+
+// ---------- events ----------
+document.addEventListener('click',function(e){
+ var t=e.target,b=t.closest('button,[data-go],[data-cell],[data-ledger-svc]');if(!b)return;
+ if(b.dataset.f){F[b.dataset.f]=b.dataset.v;if(b.dataset.v==='custom'&&!F.from){F.from=TODAY.slice(0,8)+'01';F.to=TODAY;}render();return;}
+ if(b.id==='add'){chargeDialog();return;}
+ if(b.dataset.sort){if(L.sort===b.dataset.sort)L.dir=-L.dir;else{L.sort=b.dataset.sort;L.dir=b.dataset.sort==='date'||b.dataset.sort==='amount'?-1:1;}render();return;}
+ if(b.dataset.group){L.group=b.dataset.group;render();return;}
+ if(b.dataset.svc){L.svc[b.dataset.svc]=!L.svc[b.dataset.svc];render();return;}
+ if(b.id==='lmonth'){L.month='';render();return;}
+ if(b.id==='csv'){csv();return;}
+ if(b.id==='clearsel'){L.sel={};render();return;}
+ if(b.dataset.del){var o=local();o.tx=o.tx.filter(function(x){return x.id!==b.dataset.del;});saveLocal(o);render();return;}
+ if(b.dataset.ledgerSvc){L.svc={};L.svc[b.dataset.ledgerSvc]=true;L.month='';L.q='';return;}
+ if(b.dataset.cell!=null&&b.dataset.cell!==undefined&&b.hasAttribute('data-cell')){var a=b.dataset.cell.split('|');L.svc={};if(a[0])L.svc[a[0]]=true;L.month=a[1]||'';L.q='';L.type='';go('ledger');return;}
+ if(b.dataset.go&&!t.closest('a')){go(b.dataset.go);return;}
+});
+document.addEventListener('change',function(e){
+ var t=e.target;
+ if(t.id==='f-from'){F.from=t.value;render();}else if(t.id==='f-to'){F.to=t.value;render();}
+ else if(t.id==='ltype'){L.type=t.value;render();}
+ else if(t.id==='selall'){ledgerRows().forEach(function(x){if(t.checked)L.sel[x.id]=1;else delete L.sel[x.id];});render();}
+ else if(t.dataset.sel){if(t.checked)L.sel[t.dataset.sel]=1;else delete L.sel[t.dataset.sel];render();}
+});
+document.addEventListener('input',function(e){if(e.target.id==='lq'){L.q=e.target.value;L._focus=1;render();}});
+document.addEventListener('mouseover',function(e){var s=e.target.closest&&e.target.closest('[data-tip-svc]');if(s){var id=s.dataset.tipSvc,t=txs(),by=groupSum(t,function(x){return x.service;}),tot=sum(t);showTip('<h4>'+esc(svc(id).name)+'</h4><div><span>Paid</span><b>'+money(by[id])+'</b></div><div><span>Share</span><b>'+Math.round(by[id]/tot*100)+'%</b></div>',e.clientX,e.clientY);}});
+document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('[data-tip-svc]'))hideTip();});
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)&&route().name==='ledger'){e.preventDefault();var q=document.getElementById('lq');if(q)q.focus();}});
+window.addEventListener('hashchange',function(){render();document.getElementById('view').scrollTop=0;});
+
+// ---------- start ----------
+function start(d){
+ D=d;D.byId={};D.services.forEach(function(s){D.byId[s.id]=s;});D.usage=D.usage||[];D.balances=D.balances||[];
+ D.first=D.transactions.map(function(t){return t.date;}).sort()[0]||TODAY;
+ render();
+}
+if(window.COSTS_DATA)start(window.COSTS_DATA);
+else fetch('data/costs.json?t='+Date.now()).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(start).catch(function(e){document.getElementById('view').innerHTML='<div class="empty">The ledger file data/costs.json did not load ('+esc(e.message)+'). Reload the page. If it keeps failing, tell Claude.</div>';});
+</script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+{
+ "version": 1,
+ "updated": "2026-11-20",
+ "timezone": "America/Los_Angeles",
+ "about": "Every charge is taken from a receipt in email. Dates and times are Pacific time. Amounts are US dollars.",
+ "services": [
+  {
+   "id": "claude",
+   "name": "Claude",
+   "vendor": "Anthropic",
+   "slot": 1,
+   "scope": "game",
+   "billing": "subscription",
+   "used_for": "Builds the game: every session that writes code, dialogue, prompts and plans. Also runs the board's START tasks.",
+   "plan": {
+    "name": "Ultra (bought as Max 20x)",
+    "price": 249.99,
+    "period": "month",
+    "since": "2026-10-26",
+    "renews": "2026-11-26",
+    "via": "Apple App Store"
+   },
+   "allows": [
+    {
+     "text": "Ten times the Pro plan's usage every week, with no five-hour limit on a verified account. Anthropic renamed Max 20x to Ultra and moved Max 20x subscribers over at the same price.",
+     "source": "support.claude.com, What is the Ultra plan?, read Nov 20"
+    },
+    {
+     "text": "Fable models are included. Up to half of the weekly limit can go to Fable at no extra cost.",
+     "source": "support.claude.com, Claude Fable models on your plan, read Nov 20"
+    },
+    {
+     "text": "$200 of Claude API credit each month, once a Claude Console organization is linked to the plan.",
+     "source": "platform.claude.com, API credits for Max, Ultra, and Team plans, read Nov 20"
+    },
+    {
+     "text": "Usage credits are extra usage bought in the app on top of the plan: 20 for $20.00, 100 for $90.00.",
+     "source": "Apple receipts of Oct 26 and Nov 4"
+    }
+   ],
+   "history": [
+    {
+     "from": "2026-07-30",
+     "name": "Pro",
+     "price": 20.0
+    },
+    {
+     "from": "2026-10-26",
+     "name": "Max 20x, now called Ultra",
+     "price": 249.99
+    }
+   ],
+   "console": "https://claude.ai/settings/usage",
+   "console_name": "Claude usage settings",
+   "keys": "Signed in on your devices. The board's START tasks use task links saved as repo secrets.",
+   "balance_kind": "Weekly usage limit. It is shown only inside Claude, so this page links to it.",
+   "gaps": [
+    "Apple does not email a receipt when a subscription renews unless renewal receipts are switched on. The Pro renewals expected on Aug 30 and Sep 30 ($20.00 each) are not in the ledger.",
+    "Any usage credits bought on the web instead of the iPhone app would be billed by Anthropic directly. No such receipt was found."
+   ]
+  },
+  {
+   "id": "google",
+   "name": "Google AI (Gemini)",
+   "vendor": "Google",
+   "slot": 2,
+   "scope": "game",
+   "billing": "subscription",
+   "used_for": "Gemini watches recordings of the game and writes the chapter audits. It also drafted prompts and the bestiary.",
+   "plan": {
+    "name": "Google AI Ultra (20 TB)",
+    "price": 99.99,
+    "period": "month",
+    "since": "2026-11-14",
+    "renews": "2026-12-14",
+    "via": "Google Play"
+   },
+   "allows": [
+    {
+     "text": "Five times the Gemini usage limits of the Pro plan, 20 TB of storage and YouTube Premium.",
+     "source": "Tom's Guide on the $100 AI Ultra plan, read Nov 20"
+    },
+    {
+     "text": "Everything in Google AI Pro.",
+     "source": "support.google.com, Google AI Ultra benefits, read Nov 20"
+    }
+   ],
+   "history": [
+    {
+     "from": "2026-08-17",
+     "name": "Google AI Plus (400 GB)",
+     "price": 4.99
+    },
+    {
+     "from": "2026-10-13",
+     "name": "Google AI Pro (5 TB)",
+     "price": 19.99
+    },
+    {
+     "from": "2026-11-14",
+     "name": "Google AI Ultra (20 TB)",
+     "price": 99.99
+    }
+   ],
+   "console": "https://one.google.com/",
+   "console_name": "Google One",
+   "keys": "Signed in with your Google account. The game holds no Gemini key.",
+   "balance_kind": "Usage limits inside Gemini. Not readable from here.",
+   "gaps": [
+    "Google AI Pro renewed on Nov 13 ($19.99) one day before the move to Ultra. No refund email for the unused Pro days was found.",
+    "The August receipt is a renewal, so the first Google AI Plus charge is older than this ledger."
+   ]
+  },
+  {
+   "id": "xai",
+   "name": "xAI API",
+   "vendor": "xAI",
+   "slot": 3,
+   "scope": "game",
+   "billing": "prepaid",
+   "used_for": "Makes the game's pictures in the Art Library, the monster battle videos, and checks pictures and clips with a vision model.",
+   "plan": {
+    "name": "Prepaid credit, no plan",
+    "price": null,
+    "period": null,
+    "since": "2026-11-02",
+    "renews": null,
+    "via": "Card"
+   },
+   "allows": [
+    {
+     "text": "Pay per use from the credit bought. A 3 second monster video on the lite model costs about 8 cents.",
+     "source": "CLAUDE.md and claude/video-battle-plan.md in the repo"
+    }
+   ],
+   "history": [],
+   "console": "https://console.x.ai/",
+   "console_name": "xAI console, Billing",
+   "keys": "Repo secret XAI_API_KEY for the Actions. The Art Library also keeps a key on each device.",
+   "balance_unit": "usd",
+   "balance_kind": "Dollars of prepaid credit left.",
+   "gaps": [
+    "The balance has not been read. Only the xAI console shows it.",
+    "Pictures made by pressing Generate in the Art Library are not written to any log in the repo, so the use recorded here is far below the real use."
+   ]
+  },
+  {
+   "id": "xpremium",
+   "name": "X Premium (Grok app)",
+   "vendor": "xAI",
+   "slot": 4,
+   "scope": "personal",
+   "billing": "subscription",
+   "used_for": "Not used by the game's tools. Listed because it is an AI subscription on the same account.",
+   "plan": {
+    "name": "Premium",
+    "price": 30.0,
+    "period": "month",
+    "since": "2026-11-04",
+    "renews": "2026-12-04",
+    "via": "Card",
+    "price_note": "First month was $15.00. It renews at $30.00."
+   },
+   "allows": [
+    {
+     "text": "Not confirmed. The receipt names the plan and the price only.",
+     "source": "Receipt of Nov 4"
+    }
+   ],
+   "history": [
+    {
+     "from": "2026-11-04",
+     "name": "Premium",
+     "price": 30.0
+    }
+   ],
+   "console": "https://x.com/settings/subscription",
+   "console_name": "X subscription settings",
+   "keys": "None.",
+   "balance_kind": "None. A flat monthly plan.",
+   "gaps": []
+  },
+  {
+   "id": "elevenlabs",
+   "name": "ElevenLabs",
+   "vendor": "ElevenLabs",
+   "slot": 5,
+   "scope": "game",
+   "billing": "subscription",
+   "used_for": "Every voice in the game and the music: the Voice Library, the Music Library and the voice-gen Action.",
+   "plan": {
+    "name": "Pro",
+    "price": 99.0,
+    "period": "month",
+    "since": "2026-11-12",
+    "renews": "2026-12-12",
+    "via": "Card"
+   },
+   "allows": [
+    {
+     "text": "600,000 credits a month. One credit is about one character of speech. Unused credits roll over.",
+     "source": "elevenlabs.io/pricing, read Nov 20"
+    },
+    {
+     "text": "Pay-as-you-go credit can be bought on top. Each top-up unit cost $1.00.",
+     "source": "Receipts of Oct 26 to Nov 3"
+    },
+    {
+     "text": "The account's custom voice slots were full at 30 on Nov 2, under the earlier plan.",
+     "source": "CLAUDE.md in the repo"
+    }
+   ],
+   "history": [
+    {
+     "from": "2026-10-17",
+     "name": "Starter",
+     "price": 6.0
+    },
+    {
+     "from": "2026-10-25",
+     "name": "Creator",
+     "price": 22.0
+    },
+    {
+     "from": "2026-11-12",
+     "name": "Pro",
+     "price": 99.0
+    }
+   ],
+   "console": "https://elevenlabs.io/app/subscription",
+   "console_name": "ElevenLabs subscription page",
+   "keys": "Repo secret ELEVENLABS_API_KEY for the voice-gen Action. The Voice and Music Library keep a key on each device.",
+   "balance_unit": "credits",
+   "balance_kind": "Credits left this month. Only ElevenLabs knows the figure. The next build (card c-costs2) reads it each day with the repo's key.",
+   "gaps": [
+    "Invoice UIRDNETR-0008 (between Oct 29 and Nov 3) has no receipt email. It may be a zero invoice or a missing charge."
+   ]
+  },
+  {
+   "id": "fal",
+   "name": "fal.ai",
+   "vendor": "fal",
+   "slot": 6,
+   "scope": "game",
+   "billing": "prepaid",
+   "used_for": "Runs the Wan 3.0 video model for the family's battle animations (the wan-gen Action).",
+   "plan": {
+    "name": "Prepaid credit, no plan",
+    "price": null,
+    "period": null,
+    "since": "2026-11-20",
+    "renews": null,
+    "via": "Card"
+   },
+   "allows": [
+    {
+     "text": "Pay per use from the credit bought. Each job's price is estimated before it is sent.",
+     "source": "tools/art-library/wangen.py in the repo"
+    }
+   ],
+   "history": [],
+   "console": "https://fal.ai/dashboard/billing",
+   "console_name": "fal dashboard, Billing",
+   "keys": "Repo secret FAL_KEY.",
+   "balance_unit": "usd",
+   "balance_kind": "Dollars of prepaid credit left.",
+   "usage_complete": true,
+   "gaps": []
+  },
+  {
+   "id": "sorceress",
+   "name": "Sorceress",
+   "vendor": "Sorceress",
+   "slot": 0,
+   "scope": "game",
+   "billing": "unknown",
+   "used_for": "Used by hand on Nov 17 for the first Wan and Kling video tests. Replaced by fal.ai.",
+   "plan": {
+    "name": "Not confirmed",
+    "price": null,
+    "period": null,
+    "since": null,
+    "renews": null,
+    "via": null
+   },
+   "allows": [
+    {
+     "text": "A Wan clip cost 70 Sorceress credits, about 70 cents.",
+     "source": "claude/animation-tool-test-exam.md in the repo"
+    }
+   ],
+   "history": [],
+   "console": null,
+   "console_name": null,
+   "keys": "None. Used in the browser.",
+   "balance_kind": "Sorceress credits. Not recorded.",
+   "gaps": [
+    "No Sorceress receipt was found in email. If credits were bought, that charge is missing from the ledger."
+   ]
+  },
+  {
+   "id": "github",
+   "name": "GitHub",
+   "vendor": "GitHub",
+   "slot": 0,
+   "scope": "game",
+   "billing": "free",
+   "used_for": "Holds the game, publishes it to the web address and runs the Actions that call the paid services. Not an AI service itself.",
+   "plan": {
+    "name": "No charge found",
+    "price": 0,
+    "period": null,
+    "since": null,
+    "renews": null,
+    "via": null
+   },
+   "allows": [
+    {
+     "text": "Not confirmed. No GitHub invoice was found in email, which fits the free plan.",
+     "source": "Email search, Nov 20"
+    }
+   ],
+   "history": [],
+   "console": "https://github.com/settings/billing",
+   "console_name": "GitHub billing",
+   "keys": "A token on each device for the board and libraries.",
+   "balance_kind": "None.",
+   "gaps": []
+  }
+ ],
+ "transactions": [
+  {
+   "id": "t001",
+   "date": "2026-07-30",
+   "time": "",
+   "service": "claude",
+   "type": "subscription",
+   "amount": 20.0,
+   "what": "Claude Pro, first month",
+   "via": "Apple App Store",
+   "ref": "Order MM63Z8GBLF",
+   "source": "Receipt email",
+   "note": "Bought Jul 30. Apple sent the receipt on Aug 9."
+  },
+  {
+   "id": "t002",
+   "date": "2026-08-17",
+   "time": "08:36",
+   "service": "google",
+   "type": "subscription",
+   "amount": 4.99,
+   "what": "Google AI Plus (400 GB), monthly",
+   "via": "Google Play",
+   "ref": "SOP.3393-2243-0818-92130..3",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t003",
+   "date": "2026-09-17",
+   "time": "08:36",
+   "service": "google",
+   "type": "subscription",
+   "amount": 4.99,
+   "what": "Google AI Plus (400 GB), monthly",
+   "via": "Google Play",
+   "ref": "SOP.3393-2243-0818-92130..4",
+   "source": "Receipt email",
+   "verify": "Amount taken from the August receipt of the same subscription. Open the Google Play receipt of Sep 17 to confirm."
+  },
+  {
+   "id": "t004",
+   "date": "2026-10-13",
+   "time": "10:52",
+   "service": "google",
+   "type": "refund",
+   "amount": -0.5,
+   "what": "Refund for the unused days of Google AI Plus",
+   "via": "Google Play",
+   "ref": "SOP.3393-2243-0818-92130..4",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t005",
+   "date": "2026-10-13",
+   "time": "10:52",
+   "service": "google",
+   "type": "subscription",
+   "amount": 19.99,
+   "what": "Google AI Pro (5 TB), first month",
+   "via": "Google Play",
+   "ref": "SOP.3327-0792-5398-69680",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t006",
+   "date": "2026-10-17",
+   "time": "14:26",
+   "service": "elevenlabs",
+   "type": "subscription",
+   "amount": 1.0,
+   "what": "Starter plan, first month ($6.00 less a $5.00 promotion)",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0001",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t007",
+   "date": "2026-10-25",
+   "time": "13:41",
+   "service": "elevenlabs",
+   "type": "subscription",
+   "amount": 11.0,
+   "what": "Creator plan, first month ($22.00 at half price)",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0002",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t008",
+   "date": "2026-10-26",
+   "time": "13:06",
+   "service": "claude",
+   "type": "subscription",
+   "amount": 249.99,
+   "what": "Claude Max 20x, monthly",
+   "via": "Apple App Store",
+   "ref": "Order MM64918XDJ",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t009",
+   "date": "2026-10-26",
+   "time": "13:06",
+   "service": "claude",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "Usage credits (20)",
+   "via": "Apple App Store",
+   "ref": "Order MM64918XDJ",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t010",
+   "date": "2026-10-26",
+   "time": "21:07",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 10.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0003",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t011",
+   "date": "2026-10-27",
+   "time": "08:11",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 10.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0004",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t012",
+   "date": "2026-10-27",
+   "time": "20:16",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 10.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0005",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t013",
+   "date": "2026-10-28",
+   "time": "11:34",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 10.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0006",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t014",
+   "date": "2026-10-29",
+   "time": "10:52",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0007",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t015",
+   "date": "2026-11-02",
+   "time": "10:03",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice FTWC-GRK2-2MVQ",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t016",
+   "date": "2026-11-03",
+   "time": "16:52",
+   "service": "elevenlabs",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "Pay-as-you-go credit top-up",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0009",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t017",
+   "date": "2026-11-04",
+   "time": "",
+   "service": "claude",
+   "type": "credits",
+   "amount": 90.0,
+   "what": "Usage credits (100)",
+   "via": "Apple App Store",
+   "ref": "Order MM64BWD4KX",
+   "source": "Receipt email",
+   "verify": "The receipt email shows the price only in its picture layout. $90.00 was found by searching the receipt. Open the Apple receipt of Nov 4 to confirm."
+  },
+  {
+   "id": "t018",
+   "date": "2026-11-04",
+   "time": "",
+   "service": "claude",
+   "type": "credits",
+   "amount": 90.0,
+   "what": "Usage credits (100)",
+   "via": "Apple App Store",
+   "ref": "Order MM64BWDDJM",
+   "source": "Receipt email",
+   "verify": "Second receipt of the same day for the same item. $90.00 is taken from the first one. Open the Apple receipt of Nov 4 to confirm."
+  },
+  {
+   "id": "t019",
+   "date": "2026-11-04",
+   "time": "10:26",
+   "service": "xpremium",
+   "type": "subscription",
+   "amount": 15.0,
+   "what": "X Premium, first month",
+   "via": "Card",
+   "ref": "Invoice 3DA2C10CD6",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t020",
+   "date": "2026-11-05",
+   "time": "15:14",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice 64GP-5PYB-MQFZ",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t021",
+   "date": "2026-11-05",
+   "time": "20:15",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice 6C82-PZ4G-M6ZY",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t022",
+   "date": "2026-11-06",
+   "time": "12:13",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice 8YJZ-B54U-LT5P",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t023",
+   "date": "2026-11-07",
+   "time": "09:28",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice LJC4-LQEY-H29U",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t024",
+   "date": "2026-11-09",
+   "time": "17:41",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice EPK8-DCBH-QLE4",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t025",
+   "date": "2026-11-12",
+   "time": "15:03",
+   "service": "elevenlabs",
+   "type": "subscription",
+   "amount": 99.0,
+   "what": "Pro plan, monthly (Nov 12 to Dec 12)",
+   "via": "Card",
+   "ref": "Invoice UIRDNETR-0010",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t026",
+   "date": "2026-11-13",
+   "time": "09:52",
+   "service": "google",
+   "type": "subscription",
+   "amount": 19.99,
+   "what": "Google AI Pro (5 TB), monthly",
+   "via": "Google Play",
+   "ref": "SOP.3327-0792-5398-69680..0",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t027",
+   "date": "2026-11-14",
+   "time": "11:16",
+   "service": "xai",
+   "type": "credits",
+   "amount": 20.0,
+   "what": "API credit top-up",
+   "via": "Card",
+   "ref": "Invoice CHFN-64GP-XWB2",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t028",
+   "date": "2026-11-14",
+   "time": "20:12",
+   "service": "google",
+   "type": "subscription",
+   "amount": 99.99,
+   "what": "Google AI Ultra (20 TB), first month",
+   "via": "Google Play",
+   "ref": "SOP.3317-1988-3775-51847",
+   "source": "Receipt email"
+  },
+  {
+   "id": "t029",
+   "date": "2026-11-20",
+   "time": "12:36",
+   "service": "fal",
+   "type": "credits",
+   "amount": 10.0,
+   "what": "Credit top-up",
+   "via": "Card",
+   "ref": "Invoice ZFTNIA-00001",
+   "source": "Receipt email"
+  }
+ ],
+ "usage": [
+  {
+   "service": "xai",
+   "date": "2026-11-19",
+   "amount": 5.34,
+   "what": "The 67 chapter 1 battle clips, made by the clip-gen Action",
+   "source": "docs/CHANGES.md, clipgen2"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-19",
+   "amount": 4.02,
+   "what": "Clip quality gate and remakes (clips cost $9.36 in all by Nov 19)",
+   "source": "claude/clip-reset-plan.md"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-20",
+   "amount": 0.15,
+   "what": "Grace's large start picture for the guard video proof",
+   "source": "docs/CHANGES.md, wanproofb"
+  }
+ ],
+ "balances": [
+  {
+   "service": "elevenlabs",
+   "date": "2026-10-25",
+   "text": "38,881 of 39,960 credits used in that billing period (Starter plan)",
+   "source": "ElevenLabs usage email"
+  },
+  {
+   "service": "elevenlabs",
+   "date": "2026-11-12",
+   "text": "Oct 25 to Nov 12: 121,000 plan credits and 440,000 pay-as-you-go credits used",
+   "source": "Receipt of Nov 12"
+  }
+ ]
+}
