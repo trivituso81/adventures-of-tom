@@ -134,13 +134,18 @@ Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at 
 
 ## What stage 12 holds, and what waits
 
+| In (build `b3s12`, chapter 7; stage 12 is complete) | Waits for |
+|---|---|
+| Chapter 7: `data/b3-foes-ch07.js` (Shusher, Dog-Ear, The Cliffhanger, The Know-It-All, Pop-Up Panic, The Unread), 6 formations (9 VP each, 27 for the boss), Lab fights NEW 39 to NEW 44 (Tom, Grace, Rose, Boppy, level 17). | Chapters 8 to 10 and the bonus chapter (stage 13), balance (stage 14) |
+| The Unread as data: Bookmark Ribbon (`bookmark_guard` stance and `bookmark_mend`, once per stance), THE END (`the_end`, below 50% HP, Slow and a 35-tick push on `unshielded`). 8 statuses (coiled_spring, corner_fold, actually, well_technically, hush_hour, jump_scare, bookmark_guard, bookmark_mend). | |
+
 | In (build `b3s12b`, chapter 6) | Waits for |
 |---|---|
 | Chapter 6: `data/b3-foes-ch06.js` (Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer, Acorn Cache, Chairman Cheeks), 6 formations (6 VP each, 30 for the boss), Lab fights NEW 33 to NEW 38 (Tom, TNB, Nara, level 14). | Chapter 7 (`b3s12`) |
 | Chairman Cheeks as data: Stash for Winter (`stash_for_winter` when `noAllyId:'acorncache'` and `everyRound:3`; `stash_eat` when `allyId:'acorncache'` and `allyAge:2`), Acorn Cache `onKo` feedback, The Big Stash below 50%. | |
 | New seams: conditions `noAllyId`, `allyAge`; targets `randomFrontAlly`, `unshielded`; ops `eat`, `hpLoss`; foe field `onKo`; 7 statuses. | |
 
-| In (build `b3s12a`, chapter 5; chapters 6 and 7 follow as `b3s12b` and `b3s12`) | Waits for |
+| In (build `b3s12a`, chapter 5) | Waits for |
 |---|---|
 | Chapter 5: `data/b3-foes-ch05.js` (Pop Quiz, Tardy Bell, Glitter Glue, Dodgeball Dread, The Red Pen), 5 formations (12 VP each, 30 for the boss), Lab fights NEW 28 to NEW 32 (Tom, Grace, Rose, Amy, level 12). | Chapters 8 to 10 and the bonus chapter (stage 13). |
 | The Red Pen as data: Strict Grading (`strict_grading_first` once at 55% HP, then `strict_grading` every 3rd turn; the act field `starts` links the two counts), the stance status `strict_grading` (30% less damage, ends on a Mix through its own `on:{mix}`, on a Break or a stance strip), the counter act Points Off (`when:{has:'strict_grading'}`), Final Grade (party-wide, so Lights-Out Reset blocks it), SEE ME. | |

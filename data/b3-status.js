@@ -342,7 +342,24 @@ const B3_STATUS={
   executive_monocle:{id:'executive_monocle',name:'Executive Monocle',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[{stat:'crit',kind:'monocle',v:.20},{stat:'atk',kind:'monocle',v:.20}],flags:[],
     short:'MONOCLE',color:'#f2d36b',weight:6,desc:'A very expensive monocle: 20% more Crit Rate and 20% more Attack. It can be stripped or stolen.'},
   winter_hoard:{id:'winter_hoard',name:'Winter Hoard',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'hoard',v:.25},{stat:'def',kind:'hoard',v:.25}],flags:[],
-    short:'HOARD',color:'#d9a15a',weight:6,desc:'A belly full of stash: 25% more Attack and Defense. It can be stripped or stolen.'}
+    short:'HOARD',color:'#d9a15a',weight:6,desc:'A belly full of stash: 25% more Attack and Defense. It can be stripped or stolen.'},
+  // ---- Enemy statuses: chapter 7, the Library (stage 12c, bestiary v11 section 3) ----
+  coiled_spring:{id:'coiled_spring',name:'Coiled Paper Spring',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'coiledSpring',v:.20}],flags:[],
+    short:'SPRING',color:'#e6d9a8',weight:4,desc:'Wound tight and ready to pop: dodges 20% of attacks. It can be stripped.'},
+  corner_fold:{id:'corner_fold',name:'Corner Fold',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'cornerFold',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#d9c48a',weight:4,desc:'A dog-eared corner: 15% less Defense.'},
+  actually:{id:'actually',name:'\u201cActually...\u201d',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'actually',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#c9b8e8',weight:4,desc:'Corrected in front of everyone: 20% less Defense.'},
+  well_technically:{id:'well_technically',name:'Well, Technically',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'wellTechnically',v:.20}],flags:[],
+    short:'DEF UP',color:'#c9b8e8',weight:4,desc:'Technically correct, which is the best kind of correct: 20% more Defense. It can be stripped.'},
+  hush_hour:{id:'hush_hour',name:'Hush Hour',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'hushHour',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#a8c4d9',weight:4,desc:'Everyone is whispering: 15% less Attack.'},
+  jump_scare:{id:'jump_scare',name:'Jump-Out Scare',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'jumpScare',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#e8a8a8',weight:4,desc:'Something popped out of the page: 20% less Attack.'},
+  bookmark_guard:{id:'bookmark_guard',name:'Bookmark Guard',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#c9a86b',weight:6,desc:'Holding its place in the book: 25% less damage taken until a Break or the end of the stance.'},
+  bookmark_mend:{id:'bookmark_mend',name:'Bookmark Mend',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],regen:.05,
+    short:'MEND',color:'#c9a86b',weight:5,desc:'A ribbon of calm: recovers 5% of Max HP at the start of each turn.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

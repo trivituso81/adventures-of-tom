@@ -12833,7 +12833,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "b3s12",
-   "next": "Parts a (chapter 5, b3s12a) and b (chapter 6: Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer, Acorn Cache, Chairman Cheeks, Lab fights NEW 33 to NEW 38, b3s12b) are built and pass the checks. Next: part c, chapter 7 (the library: Shusher, Dog-Ear, The Cliffhanger, The Know-It-All, Pop-Up Panic and The Unread, Lab fights from NEW 39), pushed as the final b3s12. Work from claude/bestiary-v11.md and docs/handoff/b3s12b.md.",
+   "next": "Shipped as b3s12 in three parts (b3s12a chapter 5, b3s12b chapter 6, b3s12 chapter 7): 16 monsters and adds, The Red Pen, Chairman Cheeks, The Unread, 17 formations, Lab fights NEW 28 to NEW 44. Nothing is asked of Tom. Next: c-b3s13.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12896,6 +12896,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as b3s12b: New battle: the chapter 6 park monsters and Chairman Cheeks join the Battle Lab (stage 12, part b of three)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Final part pushed as b3s12: chapter 7 (6 formations, The Unread, Lab fights NEW 39 to NEW 44). Stage 12 complete. Next: c-b3s13."
     }
    ],
    "prompt": {
@@ -12907,7 +12911,7 @@
     "effort": "high (three bosses with their own rules and nothing written to follow for those)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s11.md, then build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system. Attach trivituso81/adventures-of-tom with push access (add_repo). Board card c-b3s12. Read its history first: my notes and answers are there. Stage 11 (docs/CHANGES.md b3s11, claude/next-addendum-b3s11.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-sNN.js, Lab fights NEW 28 on). The previous session ended with nothing pushed, so work in parts: after chapter 5's monsters, formations, boss and Lab fights pass `node tools/b3-sim.js check`, push it as part b3s12a, then chapter 6 as b3s12b, then chapter 7 as the final `b3s12`. Your first push is the commit board: start c-b3s12 (it moves this card to In progress and links your conversation)."
    },
-   "after": "nothing for Tom: end",
+   "after": "nothing for Tom: c-b3s13",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
     "opening": "started by START"
@@ -20380,6 +20384,34 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-b3s13",
+   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "tag": "b3s13",
+   "next": "Builds stage 13: the bestiary for chapters 8 to 10 and the bonus chapter with their bosses, and Lab fights for each formation and boss (NEW 45 on). Pushed in parts b3s13a, b3s13b, b3s13c and the final b3s13.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by b3s12: stage 13 follows stage 12."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 13 of the new battle system: the bestiary for chapters 8 to 10 and the bonus chapter with their bosses, and Lab fights for each formation and boss.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose boss mechanics are designed in the session)",
+    "effort": "high (boss mechanics that the acts cannot express need their own functions)",
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s12.md, then build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system. Stage 12 (docs/CHANGES.md b3s12a, b3s12b, b3s12; claude/next-addendum-b3s12.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-s13.js, Lab fights NEW 45 on). Work in parts so a stalled session loses at most one chapter: push chapter 8 as b3s13a, chapter 9 as b3s13b, chapter 10 as b3s13c, the bonus chapter as the final b3s13, each after its monsters, formations, boss and Lab fights pass `node tools/b3-sim.js check`. Board card c-b3s13. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s13 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

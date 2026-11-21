@@ -51,8 +51,19 @@ Rules for every stage's session:
 | 9c | Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) Sig Vibes (28 lines), the late joiners' Vibe Point pool (TNB moved onto it), Lab fights NEW 8 and NEW 9. Ends stage 9. | Pushed 2026-11-20 | `b3s9c` | Nothing is asked. |
 | 10 | Amy (Fitness Queen, Classroom Boss), Justin (Basement Boss, Live Wire) and Olivia (Rope Champ, Working Mom) Sig Vibes (42 lines), Lab fight NEW 10 (Tom, Amy, Justin, Olivia). All 10 characters now have both Sig Vibes | Pushed 2026-11-20 | `b3s10` | Nothing is asked. |
 | 11 | Bestiary chapters 2 to 4 with their bosses: 15 regular monsters, The Big Shake, Old Iron-Gill, The Director's Cut, 17 formations, chapter 2's explicit stat blocks, Lab fights NEW 11 to NEW 27. New seams: `surfaces`, `stopByIntercept`, op `row`, summon `ifNoFront`, Skill Lock, 14 statuses | Pushed 2026-11-20 | `b3s11` | Nothing is asked. |
-| 12 | Bestiary chapters 5 to 7 (architecture section 5) | Not started (card c-b3s12) | `b3s12` | |
+| 12 | Bestiary chapters 5 to 7 with their bosses: 16 monsters and adds, The Red Pen, Chairman Cheeks, The Unread, 17 formations, Lab fights NEW 28 to NEW 44. Pushed in three parts (`b3s12a` chapter 5, `b3s12b` chapter 6, `b3s12` chapter 7). New seams: act field `starts`, conditions `noAllyId` and `allyAge`, targets `randomFrontAlly` and `unshielded`, ops `eat` and `hpLoss`, foe field `onKo`, flag `foeTaunt`, 22 statuses | Pushed 2026-11-20 | `b3s12` | Nothing is asked. |
 | 13 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 12 results (facts)
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 1817, FAILS: []. 268 more than stage 11, in `tools/b3-check-s12.js` (new): the bestiary rows and numbers of chapters 5 to 7, `hp3`/`hp4`, formation VP, the 17 Lab fights, the 22 statuses, Strict Grading (first use, repeat, 30% stance, Points Off, ends on a Mix), SEE ME, the Acorn Cache (call every 3rd round, printed 150 HP, eaten on his 2nd turn after, `onKo` feedback inside the 3-pip cap, never knocks the boss out), Bookmark Ribbon, THE END (shielded members are not pushed or slowed). |
+| Simulator, 100 fights each, plain player | `new28` to `new44`: all won, 0 errors. Rounds to win: normal fights 1.2 to 2.4 (Dodgeball Dread 3.5, Cheek Stuffer 4.3, Pop-Up Panic 2.4); bosses The Red Pen 5.8, Chairman Cheeks 3.3, The Unread 5.1. Chairman Cheeks and chapter 7 are short of the 5 to 7 target: stage 14 owns balance. |
+| `python3 tools/b3_test.py s12` | FAILS: [] (portrait then landscape): Strict Grading and Points Off on screen, Final Grade, the Acorn Cache call, Cheek Stuffer, Twig Spy, Peanut Gallery, Sticky Sap, Code Red!, Bookmark Ribbon and the library fights. Frames looked at: `tools/shots/b3-s12.png`, `b3-s12-land.png`. |
+| `tools/smoke.py` | Only `board_sync_test` R5 fails, as on unmodified main (not this work). |
+| `unused_voice.py` | No line or clip added. |
+| Tom's phone | Not played, not asked for. |
 
 ## Stage 11 results (facts)
 
@@ -173,6 +184,11 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | 11 | Clapper Snapper's Scene One pulls a dice-picked other monster 15 ticks, once. | Always the nearest to act. |
 | 11 | Iron-Gill surfaces after its Deep Dive, or at its next turn if a Break cancelled the dive; its dive below 50% is a second act with its own Deep Dive. | One dive act for both. |
 | 11 | CUT! only misses by Blind, an intercept or an interrupt (Spooked is not built). With an intercept the interceptor takes the damage but the stun and push do not land (`stopByIntercept`). | The stun lands on the Marked family member anyway. |
+| 12 | Strict Grading is two acts (once at 55% HP, then every 3rd turn after) joined by the act field `starts`; Points Off is a counter act that answers every hit of an action once. SEE ME makes the family target the putter (flag `foeTaunt`). | One act with a counter; no taunt. |
+| 12 | Chairman Cheeks' Stash for Winter is two acts with one name (call, eat). An Acorn Cache knocked out first gives +1 Pep to the family, 10% of his Max HP as flat damage (never the last point) and 1 pip, inside the 3-pip cap of the action; an eaten one gives nothing. | Cache pays HP only. |
+| 12 | Cheek Stuffer's Snack Snatch takes 1 Pep from its target. The Know-It-All's and Peanut Gallery's riders last 2 turns; Skill Lock 1 turn; Leaf Camo and Coiled Paper Spring are +20% Evasion for 2 turns. | 1 or 3 turns. |
+| 12 | The Unread's Bookmark Ribbon comes first below 50% HP (Guard 25% and Mend 5%), then Dead-Quiet and THE END in the rotation. THE END's Slow and push both skip a family member whose shield held (a shield blocks the rider); Boppy at high HP cannot be pushed (Speed Hold). | Slow lands through a shield. |
+| 12 | Party and backdrop per chapter: 5 Tom, Grace, Rose, Amy level 12 (classroom, cafetorium); 6 Tom, TNB, Nara level 14 (park, oak crown); 7 Tom, Grace, Rose, Boppy level 17 (stacks, reading room). VP: 12 / 6 / 9 per fight, bosses 30 / 30 / 27. | Other parties; other VP. |
 | 11 | "Opens round 1" is a `once` act on the monster's first turn, not a wait of 0. | Starts at 0 on the bar. |
 | 11 | Chapter 2 has 5 normal formations (the bestiary's VP table counts 6 fights). The Boat Angler answer to Iron-Gill's dive waits for Boppy's third Vibe. | A sixth formation; a stand-in answer now. |
 | 11 | Skill Lock on a family member blocks only the Pocket Vibe Skills (Boom Mic Moth's Mic Feedback, 1 turn). | Blocks all Skills. |
@@ -311,28 +327,20 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 12)
+## Next conversation (stage 13)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 11 are in `claude/next-addendum-b3s11.md`; where it and this file differ, it wins until stage 12 folds it in.
+Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 12 are in `claude/next-addendum-b3s12.md`; where it and this file differ, it wins until stage 13 folds it in.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 12: the bestiary for chapters 5 to 7 with their bosses (`claude/bestiary-v11.md`, architecture section 5), and Lab fights for each formation and boss. Its `## b3s12` heading ends stage 12. |
+| 1 | What it will do | Builds stage 13: the bestiary for chapters 8 to 10 and the bonus chapter with their bosses (`claude/bestiary-v11.md`, architecture section 5), and Lab fights for each formation and boss (NEW 45 on), pushed by chapter as `b3s13a`, `b3s13b`, `b3s13c` and the final `b3s13`. |
 | 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
-| 3 | Model | Claude Sonnet 5.5 (row C: the steps for the new boss mechanics are not written; the recipe from stage 11 is). |
-| 4 | Effort level | High (three bosses with their own rules, nothing written to follow for those). |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s11.md, then build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system. You have my full permission to access the repo. Board card c-b3s12. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s12 (it moves this card to In progress and links your conversation).` |
+| 3 | Model | Claude Sonnet 5.5 (row C). |
+| 4 | Effort level | High (boss mechanics that the acts cannot express). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s12.md, then build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system. Stage 12 (docs/CHANGES.md b3s12a, b3s12b, b3s12; claude/next-addendum-b3s12.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-s13.js, Lab fights NEW 45 on). Work in parts so a stalled session loses at most one chapter: push chapter 8 as b3s13a, chapter 9 as b3s13b, chapter 10 as b3s13c, the bonus chapter as the final b3s13, each after its monsters, formations, boss and Lab fights pass node tools/b3-sim.js check. Board card c-b3s13. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s13 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo).` |
 
-If a session fails stage 12 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 13 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
-Facts the next session needs (more in `docs/handoff/b3s11.md`):
-
-- A boss mechanic is first tried as data (acts, `when`, `then` and `after`, status rows, effects ops); stage 11 needed only five small seams (see `docs/BATTLE3.md` "What stage 11 holds").
-- Every wind-up act names its own follow-up in `after`; a boss with two dive or charge thresholds needs two copies of the follow-up.
-- `b3Who` target keys from a monster's view: `foes` is the family, `allies` is every monster including itself, `otherAllies` excludes itself.
-- A browser test that pokes a boss's HP to a threshold must raise its max HP too, or the boss dies in one round (`s11_run` in `tools/b3_test.py`).
-- A Break can cancel a dive or a charge, so a screen test asserts on either act name.
-- `console.error` is stubbed inside the sim vm: throw to see an error.
-- Clips: unchanged from stage 8 (`docs/BATTLE3.md` "Clips in Battle 3"); chapter 2 to 4 monsters have none and use default animations.
+Facts the next session needs are in `claude/next-addendum-b3s12.md` and `docs/handoff/b3s12.md`.
 
 Each stage ends by updating the stage board above, writing `docs/handoff/<tag>.md` in the repo, and updating item -8 in `claude/next.md`.

@@ -83,5 +83,17 @@ const B3_LAB=[
   {id:'new37',name:'NEW 37: CHEEK STUFFER',sub:'Chapter 6 Elite. The Cheek Stuffer has 4 Composure pips and shrugs off Clobber. Snack Snatch takes a Pep and stuffs its cheeks for more Defense. A Peanut Gallery in Back.',
     party:['tom','tnb','nara'],level:14,formation:'cheekstuffer',bg:'park'},
   {id:'new38',name:'NEW 38: CHAIRMAN CHEEKS',sub:'Chapter 6 boss. 6 Composure pips. Every 3 rounds he calls an Acorn Cache to the Back row and eats it on his 2nd turn after unless the family knocks it out first.',
-    party:['tom','tnb','nara'],level:14,formation:'chairman',bg:'canopy'}
+    party:['tom','tnb','nara'],level:14,formation:'chairman',bg:'canopy'},
+  {id:'new39',name:'NEW 39: DOG-EAR AND SHUSHER',sub:'Chapter 7 fight. The Shusher in Back locks a Skill (SHHH!) and winds up a Hush Hour.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'shusher',bg:'stacks'},
+  {id:'new40',name:'NEW 40: TWO DOG-EARS',sub:'Chapter 7 fight. Page Nip bleeds, Corner Fold lowers Defense, Hard Crease sweeps the Front row.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'dogear',bg:'stacks'},
+  {id:'new41',name:'NEW 41: THE CLIFFHANGER AND SHUSHER',sub:'Chapter 7 fight. Plot Twist! pushes someone back 20 ticks; To Be Continued... slows the whole family.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'cliffhanger',bg:'stacks'},
+  {id:'new42',name:'NEW 42: DOG-EAR AND THE KNOW-IT-ALL',sub:'Chapter 7 fight. The Know-It-All lowers Defense and winds up a Well, Technically.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'knowitall',bg:'stacks'},
+  {id:'new43',name:'NEW 43: POP-UP PANIC',sub:'Chapter 7 Elite. Pop-Up Panic has 4 Composure pips, shrugs off Racket and starts coiled (+20% Evasion). A Shusher in Back.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'popup',bg:'stacks'},
+  {id:'new44',name:'NEW 44: THE UNREAD',sub:'Chapter 7 boss. 7 Composure pips. Below half HP it marks its place (Bookmark Ribbon), then THE END sweeps the whole family and pushes everyone without a shield.',
+    party:['tom','grace','rose','boppy'],level:17,formation:'unread',bg:'readroom'}
 ];

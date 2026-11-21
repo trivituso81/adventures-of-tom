@@ -1,3 +1,13 @@
+## b3s12 (2026-11-20): New battle: the chapter 7 library monsters and The Unread join the Battle Lab (stage 12 complete)
+
+- Tom (11-20): "build stage 12 (bestiary chapters 5 to 7 with their bosses)". The final part is chapter 7, the library, from `claude/bestiary-v11.md`: Shusher, Dog-Ear, The Cliffhanger, The Know-It-All, Pop-Up Panic (Elite) and the boss The Unread (1230 HP for 4, 920 for 3), 6 formations (9 VP each, 27 for the boss), in `data/b3-foes-ch07.js`. With `b3s12a` and `b3s12b`, stage 12 now holds chapters 5 to 7.
+- Lab: NEW 39 to NEW 44 (Tom, Grace, Rose and Boppy at level 17; the stacks, the reading room for the boss).
+- The Unread below 50% HP: first Bookmark Ribbon (Bookmark Guard, a 25% stance, and Bookmark Mend, 5% healing), then THE END, a wind-up sweep of the whole family with Slow, and a 35-tick push on every family member without a shield (target `unshielded`). A shield blocks the Slow and the push; Boppy at high HP cannot be pushed (his Speed Hold).
+- Eight new statuses (coiled_spring, corner_fold, actually, well_technically, hush_hour, jump_scare, bookmark_guard, bookmark_mend). No new engine seam: chapter 6 added `unshielded`.
+- No picture or clip work, no voice lines added.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s12.js`, chapters 5 to 7; FAILS: []); the six new Lab fights each 100 simulated, all won (The Unread 5.1 rounds; normal fights 1.2 to 2.4); `python3 tools/b3_test.py s12` (portrait and landscape).
+- Stage 12 results and the calls Tom has not confirmed are in `claude/battle-build.md`.
+
 ## ch1clips8 (2026-11-20): 8 new phone takes merged (7 Chapter 1 lines, Grace's nine-for-six-hours line); 4 Chapter 1 lines now say what the takes say
 
 Card c-ch1clips8. Tom: "update missing chapter 1 voice clips", with `local-clips-pending (7).json` (made 2026-11-21 02:47 UTC, 8 kept dialogue takes).

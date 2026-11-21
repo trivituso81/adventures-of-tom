@@ -3,7 +3,7 @@
 // New pieces it covers: the chapter 5 statuses, the act field `starts` (Strict Grading's repeat count), a counter act that only answers
 // while a status stands (Points Off), Strict Grading ending on a Mix, a Break or a stance strip, Amy's Lights-Out Reset against Final Grade,
 // and SEE ME (`foeTaunt`). Chapter 6 (stage 12b): Old Oak Park, Chairman Cheeks and the Acorn Cache: `randomFrontAlly`, `summon` with printed HP,
-// the conditions `noAllyId` and `allyAge`, the ops `eat` and `hpLoss`, helper feedback (`onKo`), Executive Monocle. Chapter 7 is added by its own part (b3s12).
+// the conditions `noAllyId` and `allyAge`, the ops `eat` and `hpLoss`, helper feedback (`onKo`), Executive Monocle. Chapter 7 (stage 12c): the library, The Unread, THE END (`unshielded`), Bookmark Ribbon.
 // `node tools/b3-sim.js check` runs it after the file for stage 11.
 'use strict';
 module.exports=function(T) {
@@ -18,7 +18,7 @@ module.exports=function(T) {
   const go=(F,u,skill,key)=>{ F.acting=u; const r=act(F,u,skill,key); if(!r.ok) throw new Error('test move refused: '+skill+': '+r.why); return r.beats; };
   const turn=(F,e,n)=>{ F.acting=e; if(n!=null) e.turns=n; return foeTurn(F,e); };
   // The Attack a unit has with a status on, as a share of what it has with that status off.
-  const ratio=(t,id)=>{ const a=stat(t,'atk'),st=t.st[id]; delete t.st[id]; const b=stat(t,'atk'); t.st[id]=st; return a/b; };
+  const ratio=(t,id,st2)=>{ const k=st2===true?'def':'atk',a=stat(t,k),st=t.st[id]; delete t.st[id]; const b=stat(t,k); t.st[id]=st; return a/b; };
   // Test rows, in the sandbox only; taken out again at the end of this file.
   for(const [id,fl] of [['t12_clobber','clobber'],['t12_racket','racket'],['t12_sizzle','sizzle']])
     SK[id]={id,vibe:'tom_flier',slot:'s1',name:'Test '+id,pep:0,flavor:[fl],power:'standard',hits:1,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};
@@ -227,5 +227,72 @@ module.exports=function(T) {
     const {F,e}=chair(); const o=G('B3_OPS'),tom=F.party[0]; const c={F,actor:tom,src:tom,beats:[],g:'a',targets:[e],hit:[],detonated:{},reacted:{},tags:[],outExtra:{},ledger:{}};
     o.strip(F,c,{kind:'buff',all:true,to:'target'}); ok(!e.st.executive_monocle,'a buff strip takes the Executive Monocle off'); });
   delete SK.t12_kill;
+
+  // ====================== Chapter 7: the Library (stage 12c) ======================
+  const P7=['tom','grace','rose','boppy'];
+  const mk7=(foes,o)=>NF(Object.assign({party:P7,level:17,seed:13,foes},o||{}));
+  const ROWS7=[
+    ['shusher',7,'hexer','back',281,56,32,110,0,['razzle','sizzle'],[]],['dogear',7,'swarmer','front',215,50,28,110,0,['drench','sizzle'],['racket']],
+    ['cliffhanger',7,'bruiser','front',379,65,37,100,0,['sizzle','racket'],['clobber']],['knowitall',7,'hexer','back',281,56,32,110,0,['racket','razzle'],['sizzle']],
+    ['popup',7,'elite','front',594,68,44,95,4,['clobber','razzle'],['racket']],['unread',7,'boss','front',1230,74,40,107,7,['racket','sizzle'],['clobber']]];
+  for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS7) { const D=FOES[id];
+    ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists])); }
+  ok(FOES.unread.hp3===920&&FOES.unread.noRun,'The Unread prints 920 for a party of 3 and cannot be run from');
+  { const hp7=(party)=>NF({party,level:17,seed:3,foes:[{id:'unread',row:'front'}]}).foes[0].maxHp; ok(hp7(P7)===1230&&hp7(['tom','grace','rose'])===920,'The Unread: 1230 for 4, 920 for 3'); }
+  const FM7={shusher:9,dogear:9,cliffhanger:9,knowitall:9,popup:9,unread:27};
+  for(const k of Object.keys(FM7)) ok(FORM[k]&&FORM[k].ch===7&&FORM[k].vp===FM7[k],'formation '+k+' is chapter 7 and pays '+FM7[k]+' VP');
+  ok(J(FORM.shusher.foes)===J([{id:'dogear',row:'front'},{id:'shusher',row:'back'}])&&J(FORM.knowitall.foes)===J([{id:'dogear',row:'front'},{id:'knowitall',row:'back'}]),'two of the formations match section 4');
+  { const labs=LAB.filter(l=>/^new(39|4[0-4])$/.test(l.id));
+    ok(labs.length===6&&labs.every(l=>FORM[l.formation]&&FORM[l.formation].ch===7),'Lab fights new39 to new44 each run a real chapter 7 formation');
+    ok(labs.every(l=>l.level===17&&J(l.party)===J(P7)&&(l.id==='new44'?l.bg==='readroom':l.bg==='stacks')),'each uses level 17, Tom, Grace, Rose and Boppy, the stacks (the boss: the reading room)'); }
+  for(const id of ['coiled_spring','corner_fold','actually','well_technically','hush_hour','jump_scare','bookmark_guard','bookmark_mend'])
+    ok(ST[id]&&ST[id].desc&&ST[id].short&&ST[id].color&&!/—/.test(ST[id].desc),id+' is a complete status row');
+  ok(ST.bookmark_guard.kind==='stance'&&near(ST.bookmark_guard.mods[0].v,.25,1e-9)&&near(ST.bookmark_mend.regen,.05,1e-9),'Bookmark Guard is a 25% stance and Bookmark Mend heals 5%');
+  { const F=mk7([{id:'popup',row:'front'}]),e=F.foes[0]; ok(e.st.coiled_spring&&near(sum(e,'eva'),.20,1e-9),'Pop-Up Panic starts wound tight (+20% Evasion)'); }
+
+  // ---------- The plain acts ----------
+  const rider7=(foe,actId,fn,row)=>noCrit(()=>{ const F=mk7([{id:foe,row:row||'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id===actId);
+    e.charge=A.tags.includes('charge_up')?A:null; e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; const b=turn(F,e,2); fn(F,e,b); });
+  rider7('shusher','shhh',(F,e,b)=>{ const t=F.party.find(p=>p.st.skill_lock); ok(t&&t.st.skill_lock.n===1,'SHHH! puts Skill Lock on its target for 1 turn'); },'back');
+  noCrit(()=>{ const F=mk7([{id:'shusher',row:'back'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='hush_hour'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='hush_hour'&&!F.party.some(p=>p.st.hush_hour),'Hush Hour is announced first'); F.acting=e; turn(F,e,3);
+    ok(F.party.every(p=>p.st.hush_hour&&near(ratio(p,'hush_hour'),.85,.005)),'then every family member is 15% weaker for 2 turns'); });
+  rider7('dogear','page_nip',(F,e,b)=>ok(F.party.some(p=>p.st.bleed),'Page Nip makes its target Bleed'));
+  rider7('dogear','corner_fold',(F,e,b)=>{ const t=F.party.find(p=>p.st.corner_fold); ok(t&&near(ratio(t,'corner_fold',true),.85,.005),'Corner Fold: -15% Defense for 2 turns'); });
+  noCrit(()=>{ const F=mk7([{id:'dogear',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='hard_crease'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2); ok(F.party.every((p,i)=>p.hp<hp0[i]),'Hard Crease hits the whole family'); });
+  rider7('cliffhanger','plot_twist',(F,e,b)=>ok(b.some(x=>x.t==='push'||x.t==='pull'||x.t==='bar'),'Plot Twist! moves its target on the turn bar: '+J(b.map(x=>x.t))));
+  noCrit(()=>{ const F=mk7([{id:'cliffhanger',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='to_be_continued'); e.charge=A; F.acting=e; turn(F,e,2); ok(F.party.every(p=>p.st.slow&&p.st.slow.n===2),'To Be Continued... slows all four for 2 turns'); });
+  rider7('knowitall','actually',(F,e,b)=>{ const t=F.party.find(p=>p.st.actually); ok(t&&near(ratio(t,'actually',true),.80,.005),'"Actually..." takes 20% off the target’s Defense'); },'back');
+  noCrit(()=>{ const F=mk7([{id:'knowitall',row:'back'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='well_technically'); e.charge=A; F.acting=e; turn(F,e,2);
+    ok(F.party.every(p=>p.st.fatigue)&&e.st.well_technically&&near(stat(e,'def')/(()=>{ const s=e.st.well_technically; delete e.st.well_technically; const v=stat(e,'def'); e.st.well_technically=s; return v; })(),1.2,.005),'"Well, Technically": Fatigue on all four and +20% Defense on itself'); });
+  rider7('popup','jump_out_scare',(F,e,b)=>{ const t=F.party.find(p=>p.st.jump_scare); ok(t&&near(ratio(t,'jump_scare'),.80,.005),'Jump-Out Scare: -20% Attack for 2 turns'); });
+  noCrit(()=>{ const F=mk7([{id:'popup',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='big_reveal'); e.charge=A; F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2); ok(F.party.every((p,i)=>p.hp<hp0[i]),'Big Reveal hits all four'); });
+  rider7('unread','dust_cloud',(F,e,b)=>ok(F.party.some(p=>p.st.blind),'Dust Cloud blinds'));
+  noCrit(()=>{ const F=mk7([{id:'unread',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='dead_quiet_reading_room'); e.actIx=e.D.acts.indexOf(A); e.hp=e.maxHp; F.acting=e; turn(F,e,2);
+    ok(F.party.every(p=>p.st.fatigue&&p.st.fatigue.n===2)&&true,'Dead-Quiet Reading Room: Fatigue for 2 turns on all four'); });
+
+  // ---------- The Unread ----------
+  const unread=hpFrac=>{ const F=mk7([{id:'unread',row:'front'}]),e=F.foes[0]; e.peeves=[]; e.resists=[]; e.hp=Math.floor(e.maxHp*hpFrac); for(const p of F.party) { p.hp=p.maxHp=Math.max(p.maxHp,2000); } return {F,e}; };
+  noCrit(()=>{ const {F,e}=unread(.9); e.actIx=3; F.acting=e; const P=pick(F,e,true); ok(P&&!['bookmark_ribbon','the_end'].includes(P.act.id),'above half HP the boss uses neither the Bookmark Ribbon nor THE END: '+(P&&P.act.id)); });
+  noCrit(()=>{ const {F,e}=unread(.45); e.actIx=3; let P=pick(F,e,true); ok(P&&P.act.id==='bookmark_ribbon','below half HP it marks its place first (Bookmark Ribbon)');
+    F.acting=e; turn(F,e,2); ok(e.st.bookmark_guard&&e.st.bookmark_guard.n===2&&e.st.bookmark_mend,'it puts up Bookmark Guard and Bookmark Mend on itself');
+    e.actIx=3; P=pick(F,e,true); ok(P&&P.act.id!=='bookmark_ribbon','with the guard up it does not use the Ribbon again'); });
+  noCrit(()=>{ const {F,e}=unread(.45); const ids=[]; for(const ix of [3,5]) { e.actIx=ix; ids.push(pick(F,e,true).act.id); } ok(J(ids)===J(['bookmark_ribbon','the_end']),'below half HP the Ribbon comes before THE END in the rotation: '+J(ids)); });
+  const immune=p=>G('b3HasFlag')(p,'pushImmune')||G('b3SpeedHold')(p);   // Boppy at high HP cannot be pushed (Speed Hold)
+  noCrit(()=>{ const {F,e}=unread(.45); const A=e.D.acts.find(a=>a.id==='the_end'); e.charge=A; F.acting=e;
+    const grace=F.party.find(p=>p.id==='grace'); G('b3AddShield')(F,grace,5000,{n:3});
+    ok(G('b3ShieldTotal')(grace)>0,'test setup: Grace holds a shield');
+    const b=turn(F,e,2); const hurt=b.filter(x=>x.t==='hit').map(x=>x.tgt);
+    ok(F.party.every(p=>hurt.includes(p.key)),'THE END hits the whole family');
+    ok(F.party.filter(p=>p!==grace).every(p=>p.st.slow&&p.st.slow.n===2)&&!grace.st.slow,'and slows everyone whose shield did not hold for 2 turns (a shield blocks the rider)');
+    const pushed=b.filter(x=>x.t==='push').map(x=>x.tgt);
+    const want=F.party.filter(p=>!immune(p)&&G('b3ShieldTotal')(p)===0&&p!==grace).map(p=>p.key);
+    ok(pushed.length>=1&&!pushed.includes(grace.key)&&want.length===pushed.length&&want.every(k=>pushed.includes(k)),'a family member whose shield held is not pushed, the rest are: pushed '+J(pushed)+', shielded '+grace.key); });
+  noCrit(()=>{ const {F,e}=unread(.45); const A=e.D.acts.find(a=>a.id==='the_end'); e.charge=A; F.acting=e; const want0=F.party.filter(p=>!immune(p)).length; const b=turn(F,e,2);
+    const want=want0,n=b.filter(x=>x.t==='push').length; ok(n===want&&want>=3,'with no shields up, every family member that can be pushed is ('+n+' of '+want+')'); });
+  noCrit(()=>{ const {F,e}=unread(.9); const A=e.D.acts.find(a=>a.id==='turn_back_the_page'); e.charge=A; F.acting=e; const b=turn(F,e,2);
+    ok(b.some(x=>x.t==='push'||x.t==='bar'||x.t==='pull'),'Turn Back the Page pushes its target back'); });
+  noCrit(()=>{ const {F,e}=unread(.9); const o=G('B3_OPS'),tom=F.party[0]; const c={F,actor:tom,src:tom,beats:[],g:'a',targets:[e],hit:[],detonated:{},reacted:{},tags:[],outExtra:{},ledger:{}};
+    e.hp=Math.floor(e.maxHp*.45); e.st.bookmark_guard={id:'bookmark_guard',n:2,src:e.key}; o.strip(F,c,{kind:'stance',all:true,to:'target'}); ok(!e.st.bookmark_guard,'a Break or a stance strip ends Bookmark Guard'); });
   for(const k of ['t12_clobber','t12_racket','t12_sizzle','t12_multi']) delete SK[k];
 };

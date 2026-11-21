@@ -1385,6 +1385,16 @@ def stage12(pg,lab,landscape=False):
         need(R['over']=='win',f"{fid} fight ended {R['over']}")
         need(any(a.startswith(act) for a in R['acts']),f"{foe} should play {act}: {R['acts'][:8]}")
         caps+=pick(fr,2)
+    # Chapter 7. The Unread below half HP: its first turn is the Bookmark Ribbon (Guard and Mend on itself), then THE END winds up
+    fr=[]; R=s11_run(pg,lab,'new44',"()=>{ const e=B3.F.foes[0]; e.hp=Math.floor(e.maxHp*.49); e.actIx=3; }",fr,every=500,landscape=landscape,tag='s12',watch={'ribbon':"()=>window.__s11.statuses.some(x=>x.endsWith(':bookmark_guard'))"})
+    need(R['over']=='win',f"The Unread fight ended {R['over']}")
+    need(any(a.startswith('bookmark_ribbon') for a in R['acts']),f"Bookmark Ribbon should be played: {R['acts'][:8]}")
+    caps+=pick(fr,6)
+    for fid,foe,ix,act in (('new43','popup',1,'jump_out_scare'),('new42','knowitall',1,'actually'),('new41','cliffhanger',1,'plot_twist'),('new40','dogear',0,'page_nip'),('new39','shusher',1,'shhh')):
+        fr=[]; R=s11_run(pg,lab,fid,"()=>{ let n=0; for(const f of B3.F.foes) if(f.id==='%s'&&n++===0) { f.actIx=%d; f.spd=999; } }"%(foe,ix),fr,every=500,landscape=landscape,tag='s12')
+        need(R['over']=='win',f"{fid} fight ended {R['over']}")
+        need(any(a.startswith(act) for a in R['acts']),f"{foe} should play {act}: {R['acts'][:8]}")
+        caps+=pick(fr,2)
     sheet(caps,6,os.path.join(OUT,'b3-s12'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
