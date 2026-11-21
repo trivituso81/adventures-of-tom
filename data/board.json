@@ -21276,6 +21276,37 @@
      "t": "Unblocked by the board: nothing was left for it to wait on."
     }
    ]
+  },
+  {
+   "id": "c-itemdef1",
+   "tag": "itemdef1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Item banners as JRPG item definitions",
+   "next": "In progress: every ITEM GAINED banner becomes a JRPG item definition with four parts: name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Board: this is card “Item banners as JRPG item definitions” (lane Claude, theme Game Shell)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"change every item banner in The Adventures of Tom so it reads like a JRPG item definition with four parts: item name and type, a short description of the item, its effect in battle, and its effect in story (key items, gifts, unlocks).\" The card was not on the board yet, so this session added it. It also covers the layout half of c-qa-bug02 (tiny icon, empty circle, prompt on the border), which the new banner layout replaces."
+    }
+   ],
+   "prompt": {
+    "what": "Turns every ITEM GAINED banner into a four-part JRPG item definition and tests it in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are not written yet)",
+    "effort": "medium (one banner and one data field, modelled on the existing banner)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-itemdef1 in data/board.json, history included. Your first push is the commit board: start c-itemdef1.\n\nChange every item banner (itemBanner in engine/party-banner.js) so it reads like a JRPG item definition with four parts: item name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks). Write the item text in the game's voice: short, warm, funny, contractions, no em dashes. Test each banner in portrait and landscape, bump the tags, add a docs/CHANGES.md entry headed ## itemdef1, push to main and write the result onto the card.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
