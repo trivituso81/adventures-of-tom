@@ -1476,13 +1476,12 @@ const LE_ROOMS=[
     rug:[3,5,6,3],
     // Square painted plate (art/grands.webp, engine/plate.js, 16 x 16 tiles). The mask is the walk map: '#' blocks, '.' walks.
     // Recliner and lamp table back left, TV, plaid sofa and pepper plant across the back centre, baking island left, dining table right.
-    // 3D (grands3d, 2026-11-01): a tile walks when Tom's feet (tile centre, tile bottom) land on bare floor, or on something a cutout hides (art/grands-fg.webp,
-    // tools/make_grands_fg.py, PLATE_BEHIND.grands). Lanes: the gate lane (x7 to x9, rows 11 to 14) is the way out. The open floor (rows 7 to 10, x6 to x11) leads
-    // west along row 10 in front of the stools (x2 to x5), east along row 10 in front of the dining table (x12 to x14), and west to the cook's aisle behind the
-    // cookie counter (row 7, x2 to x5, legs hidden by the counter top). From the aisle the kitchen nook (x3 to x5, rows 5 and 6) opens onto row 5, the aisle behind
-    // the sofa (x6 to x10, legs hidden by the sofa), which turns up at x10 to the hall arch (x12 and x13, row 3) and down the east side to (12,5). It is a
-    // loop: floor, counter aisle, nook, sofa aisle, arch, and the east side ends at (12,5) because the end table and the dining chair close it. The ivy plants
-    // on the half-wall cover Tom's legs on row 10.
+    // 3D (grands3d, 2026-11-01; mask as the room is painted now): a tile walks when Tom's feet (tile centre, tile bottom) land on bare floor, or on something a cutout
+    // hides (art/grands-fg.webp, tools/make_grands_fg.py, PLATE_BEHIND.grands). Lanes: the gate lane (x7 to x9, rows 11 to 14) is the way out. The open floor (rows 7 to 10,
+    // x6 to x11) leads west along row 10 in front of the stools (x2 to x5), east along row 10 in front of the dining table (x12 to x14), and west along row 7 to the
+    // cook's aisle behind the cookie counter (x2 to x5, legs hidden by the counter top) with the kitchen nook (x3 to x5, rows 5 and 6) above it. Row 7 also runs east to
+    // the east lane (x12, rows 3 to 7), which climbs between the end table and the dining table to the hall arch (x12 and x13, row 3) and (x10 to x13, row 4) beside
+    // the TV. The sofa and the floor behind it, the coffee table and the dining set (x13 to x15) are closed. The ivy plants on the half-wall cover Tom's legs on row 10.
     plateMask:[
       '################',
       '################',

@@ -978,8 +978,7 @@
    "id": "grands_walk_test",
    "cmd": "python3 -I tools/grands_walk_test.py",
    "group": "g5",
-   "minutes": 2,
-   "known_fail": "on the failing list in claude/next.md"
+   "minutes": 2
   },
   {
    "id": "guidegen__take_test",

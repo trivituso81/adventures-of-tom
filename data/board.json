@@ -27636,6 +27636,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreene: the Griffith Park test follows the repainted trail map"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreenf: grands_walk_test fixed (the test was stale: the room was repainted, the sofa aisle is closed, the dining table moved east and an east lane opened; three touches stood on unreachable tiles); known_fail removed. 6 rows still marked known_fail."
     }
    ],
    "prompt": {

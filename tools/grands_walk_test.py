@@ -1,4 +1,4 @@
-# Deedee and Boppy's house walk-through (grands3d): every lane is reachable and walkable with real key presses, the furniture can be touched from the lanes,
+# Deedee and Boppy's house walk-through (grands3d): every lane (as the room is painted now) is reachable and walkable with real key presses, the furniture can be touched from the lanes,
 # the dinner table of chapter 15 leaves the floor as it found it, and Tom reads as BEHIND the cookie counter, the sofa and the ivy plants
 # (screenshots tools/shots/grands-3d-*.png).   Usage: python3 tools/grands_walk_test.py
 import threading, http.server, socketserver, functools, os, glob, sys
@@ -58,20 +58,22 @@ with sync_playwright() as p:
     allw=[(x,y) for y in range(len(solid)) for x in range(len(solid[0])) if wk(x,y)]
     unreach=[c for c in allw if c not in seen]
     check('every walkable tile is reachable from the front door (%d walkable, unreachable %s)'%(len(allw),unreach),not unreach)
-    LANES={'kitchen aisle':[(x,7) for x in range(2,6)],'kitchen nook':[(x,y) for x in range(3,6) for y in (5,6)],'sofa aisle':[(x,5) for x in range(6,11)],
+    LANES={'kitchen aisle':[(x,7) for x in range(2,6)],'kitchen nook':[(x,y) for x in range(3,6) for y in (5,6)],'east lane':[(12,y) for y in range(3,8)],
            'arch':[(12,3),(13,3),(10,4),(11,4),(12,4),(13,4),(12,5)],'stool lane':[(x,10) for x in range(2,6)],'dining lane':[(x,10) for x in range(12,15)],
            'gate lane':[(x,y) for x in (7,8,9) for y in range(11,15)],'open floor':[(x,y) for x in range(6,12) for y in range(7,10)]}
     for nm,cells in LANES.items(): check('%s walkable'%nm,all(wk(*c) for c in cells))
-    check('sofa seat (6..10,6), coffee table (7..9,4), end table (11,5..6), counter body and dining set block',
-          all(not wk(x,6) for x in range(6,11)) and all(not wk(x,4) for x in (7,8,9)) and not wk(11,5) and not wk(11,6)
-          and all(not wk(x,y) for x in range(1,6) for y in (8,9)) and all(not wk(x,y) for x in range(12,16) for y in (6,7,8,9)))
+    # the painted furniture blocks: sofa (6..10,6) and the floor behind it (6..10,5), coffee table (7..9,4), end table (11,5..6), counter body (1..5,8..9),
+    # dining set (13..15,6..9) and the floor below the east lane (12,8..9)
+    check('sofa and the floor behind it, coffee table, end table, counter body and dining set block',
+          all(not wk(x,6) for x in range(6,11)) and all(not wk(x,5) for x in range(6,11)) and all(not wk(x,4) for x in (7,8,9)) and not wk(11,5) and not wk(11,6)
+          and all(not wk(x,y) for x in range(1,6) for y in (8,9)) and all(not wk(x,y) for x in range(13,16) for y in (6,7,8,9)) and not wk(12,8) and not wk(12,9))
     check('npcs all on reachable floor %s'%pg.evaluate("()=>currentMap.npcs.map(n=>n.name+'@'+n.x+','+n.y)"),all((n[0],n[1]) in seen for n in pg.evaluate("()=>currentMap.npcs.filter(n=>!n.girlAtHome).map(n=>[Math.round(n.x),Math.round(n.y)])")))
     check('door tiles are exits',pg.evaluate("()=>['7,15','8,15','9,15'].every(k=>currentMap.portals.has(k))"))
     nogo=pg.evaluate("()=>[...currentMap.wanderSpots].filter(s=>['6,7','5,7','5,6','5,5','6,5','10,5','10,4','11,4','12,4','6,10','5,10','11,10','12,10','13,10','14,10'].includes(s.x+','+s.y)).length")
     check('link tiles are no-go for wanderers (%d left)'%nogo,nogo==0)
     # real key presses
-    t=walk(pg,(6,7),(('ArrowLeft',2),('ArrowUp',2),('ArrowRight',1),('ArrowRight',5),('ArrowUp',1),('ArrowRight',2),('ArrowDown',1)),'left')
-    check('floor, counter aisle, nook, sofa aisle, arch, east side: ended at %s'%(t[-1],),t[-1]==(12,5))
+    t=walk(pg,(6,7),(('ArrowLeft',2),('ArrowUp',2),('ArrowDown',2),('ArrowRight',8),('ArrowUp',4),('ArrowRight',1),('ArrowLeft',1),('ArrowDown',1),('ArrowLeft',2)),'left')
+    check('floor, counter aisle, nook, back, east lane, arch, behind the TV table: ended at %s'%(t[-1],),t[-1]==(10,4))
     t=walk(pg,(8,10),(('ArrowLeft',6),),'left'); check('west along the stools to %s'%(t[-1],),t[-1]==(2,10))
     t=walk(pg,(8,10),(('ArrowRight',6),),'right'); check('east along the dining table to %s'%(t[-1],),t[-1]==(14,10))
     if t[-1]!=(14,10): print('   blocked, who is where:',t,who(pg))
@@ -80,13 +82,13 @@ with sync_playwright() as p:
     if (8,14) not in t: print('   gate stalled:',t,who(pg),pg.evaluate("()=>({tr:!!transition,intro:intro.active,mv:player.move&&[player.move.tx,player.move.ty],face:player.facing,hid:player.hidden,map:currentMap.id,solid8_9:currentMap.solid[9*16+8]})"))
     pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1500); skip(pg); freeze(pg)
     # touching the furniture from the lanes
-    TOUCH=[(3,7,'down','cookie counter from the aisle'),(4,10,'up','cookie counter from the stool lane'),(8,5,'down','sofa from behind'),(8,7,'up','sofa from the front'),
-           (8,5,'up','coffee table'),(10,4,'up','TV'),(11,4,'up','pepper plant'),(13,4,'right','fern'),(13,3,'up','hall table'),(12,5,'right','hall chair'),
-           (12,5,'down','dining table from the hall side'),(11,8,'right','dining table from the rug'),(13,10,'up','dining table from the south'),
-           (3,5,'left','sideboard'),(4,5,'up','recliner'),(10,5,'right','end table')]
+    TOUCH=[(3,7,'down','cookie counter from the aisle'),(4,10,'up','cookie counter from the stool lane'),(8,7,'up','sofa from the front'),
+           (10,4,'left','coffee table'),(10,4,'up','TV'),(11,4,'up','pepper plant'),(13,4,'right','fern'),(13,3,'up','hall table'),(12,5,'right','hall chair'),
+           (12,6,'right','dining table from the east lane'),(12,7,'right','dining table from the open floor'),(13,10,'up','dining table from the south'),
+           (3,5,'left','sideboard'),(4,5,'up','recliner'),(12,5,'left','end table')]
     for x,y,d,nm in TOUCH:
         stand(pg,x,y,d); pg.keyboard.press('Enter'); pg.wait_for_timeout(450)
-        check(f'press A at ({x},{y}) facing {d}: {nm}',pg.evaluate("()=>dialog.active")); skip(pg)
+        check(f'press A at ({x},{y}) facing {d}: {nm}',wk(x,y) and pg.evaluate("()=>dialog.active")); skip(pg)   # the standing tile must be one a player can reach
     # chapter 15 dinner table: adding it and taking it away leaves the floor exactly as it was
     same=pg.evaluate("""()=>{ const g=worlds.grands, before=[...g.solid]; const ob=g.objects.length; ch15AddTable();
         const during=[...g.solid].filter((v,i)=>v!==before[i]).length; ch15RemoveTable();
