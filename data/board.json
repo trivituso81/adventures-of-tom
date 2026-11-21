@@ -30348,7 +30348,7 @@
    "title": "Allow one $0.50 Wan try for Deedee's Dodge (cap $53.10)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Tap one answer below. Card c-anim-deedee-dodge-y4m3 waits on it: the wan-gen spend cap counts every dollar ever spent ($52.53 so far), so its one staged try (Deedee ducking, about $0.50) cannot run unless the cap is set to $53.10. Nothing is spent until a session runs the try.",
    "choices": [
@@ -30368,8 +30368,15 @@
     {
      "d": "2026-11-21",
      "t": "Made by the rescue of c-anim-deedee-dodge-y4m3: the staged try was refused by the spend cap and raising it is Tom's call."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom answered: Make the cap $75",
+     "at": "2026-11-21T22:54:17.888Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Make the cap $75"
   }
  ],
  "sessions": [
