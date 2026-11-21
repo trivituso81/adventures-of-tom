@@ -16918,7 +16918,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
     "opening": "not started"
    },
    "history": [
@@ -17557,7 +17557,7 @@
    "title": "Check the Grump Hollow wrapper trail paintings in the game",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "hollowtrail2",
    "auto": true,
    "next": "Waits on card c-fix-hollowtrail1-pics (Tom rejected all 4 Hollow trail paintings, so nothing was installed). After the fix ships and Tom approves new paintings, run this card: check wrappers, play the Hollow by stage, hand Tom the play card.",
@@ -17565,7 +17565,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEBLqbkjs74eCG6Myp",
     "opening": "not started"
    },
    "history": [
@@ -17610,6 +17610,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T01:31:29.084Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -17621,7 +17625,7 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and docs/AREA_PAINTINGS.md section \"Story stage paintings: Grump Hollow's muffin wrapper trail\", then card c-hollowtrail2 in data/board.json with its history and the notes on card t-hollowtrail1-pics. Your first push is the commit board: start c-hollowtrail2. For every approved entry area-hollow-trail1 to 4: check that its painting art/hollow-trailN.webp (N = the stage number) and its line in data/hollow-trail.js exist (if the art-bake Action did not install one, copy its newest approved art/raw/areas file to tools/sprite-bake/src/hollow-trailN.png and run python3 tools/sprite-bake/bake_hollow_trail.py N), then look at the check picture it writes (tools/shots/hollow-trailN-check.png) and the result next to the plate: count the wrappers (nine, all inside the strip, on open ground, not on a bench, a sign or the water); if wrappers were dropped because they lie outside the strip, widen or bend that stage's ROUTES line in the bake script by the smallest change and bake again. Then play it: python3 tools/hollow_trail_test.py must pass, and with the chapter 1 jump walk the Hollow at each stage (beat the monsters with the test helpers) and look at portrait and landscape screenshots: the right painting per stage, no seam around the strip, the monsters on the trail. Push build hollowtrail2 with a docs/CHANGES.md heading, create the Tom card t-hollowtrail2-play (ask play: start chapter 1 from chapter select, win the Mudling fight at the Hollow gate, follow the wrappers to each monster and on to Boppy's fishing spot) and set this card's after to it. A rejected painting stays out; say which. Spend nothing on xAI. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-21T01:32:02+00:00"
   },
   {
    "id": "c-itembannerart1",
@@ -18836,7 +18840,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
     "opening": "not started"
    },
    "history": [
@@ -19363,6 +19367,27 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T17:31:13-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof",
+    "fix-wanproof-watch"
+   ],
+   "cards": [
+    "c-wanproof",
+    "c-fix-wanproof-watch",
+    "c-startfix",
+    "t-startfix-look",
+    "c-wanch1",
+    "c-wanidle",
+    "t-wanch1-fal"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDQX4RSnRr3Nh858L3",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T17:20:45Z",
@@ -19394,24 +19419,6 @@
    "tags": [],
    "cards": [
     "c-b3s12"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T17:25:22-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb",
-    "wanproof",
-    "fix-wanproof-watch"
-   ],
-   "cards": [
-    "c-wanproof",
-    "c-fix-wanproof-watch",
-    "c-startfix",
-    "t-startfix-look"
    ]
   },
   {
@@ -21464,8 +21471,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "2e609b1dd1237968b37f517ae845334bfce29118",
- "synced_at": "2026-11-21T01:28:41+00:00",
+ "synced": "fd472a2191f3311c0925a89dab2da1830afdd6d5",
+ "synced_at": "2026-11-21T01:32:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
