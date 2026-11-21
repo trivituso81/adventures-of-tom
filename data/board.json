@@ -27198,7 +27198,7 @@
    "theme": "Project Ops",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on the card Night test run: every test, every night, on GitHub. Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. 13 tests fail on main today and are marked as known failures, so the night run does not raise them. This card finds out for each whether the test or the game is wrong and fixes or removes it, so that a night with no failing test means the game works. Nightly refactoring waits on this.",
+   "next": "Partly done: 4 of the 12 failing tests are fixed and on main (validate.js, sw_test, quest_test, terminal_test; builds nightgreena to nightgreend). 8 still carry known_fail in tools/night/tests.json: griffith_test, grands_walk_test, rooms_test, art-library/test.py, clip_kinds_test, clip_review_test, ch17_test, ch20_test. What was seen on each is in claude/next-addendum-nightgreen.md. To continue, tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. The card ships as nightgreen when no row has known_fail; nightly refactoring waits on that.",
    "blocks": [
     "c-nightrefactor"
    ],
@@ -27257,17 +27257,21 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreend: a Carry-On in Terminal Zero no longer stands inside a bench"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreen handoff (conversation ran long after 4 fixes): 8 tests left, evidence per test in claude/next-addendum-nightgreen.md, card prompt rewritten for the rest. Not finished, so the card stays In progress and ships as nightgreen when no row has known_fail."
     }
    ],
    "prompt": {
-    "what": "Works through the 13 tests that fail on main: for each, finds whether the test or the game is wrong, fixes that, and takes the test off the known failures list.",
+    "what": "Works through the 8 tests that still fail on main: for each, finds whether the test or the game is wrong, fixes that (or deletes a test of something that no longer exists), and takes the test off the known failures list.",
     "before": [
-     "Wait until the card Night test run: every test, every night, on GitHub is Done and one night's run has finished (the card Last night, or branch night, shows it).",
+     "Nothing to do first. (The night test run's first result is not needed: this card reproduces each test itself.)",
      "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
     ],
-    "model": "Claude Sonnet 5.5 (row C: the cause of each failure is not known; none of the three Fable conditions holds)",
-    "effort": "high (13 bugs with unknown causes and nothing written to follow)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1, 6 and 10) and the line \"Pre-existing test failures on main\" in claude/next.md, then card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Read tests/latest.json on branch night for the output of each test marked known_fail in tools/night/tests.json. Take them one at a time, cheapest first. For each: reproduce it, decide whether the test or the game is wrong, and fix the one that is wrong; a test of something that no longer exists (the old chapter 1 scenes, a retired page) is deleted by the purge rule; then remove its known_fail and push that part with its own build name (nightgreena, nightgreenb and so on) and docs/CHANGES.md entry. A test that needs a paid key or a missing input goes to the skip list with the reason. Apply the stop-loss per test: two tries that miss the same way, write what you found on the card and move to the next. When the conversation has run long, stop, list what is left in the card's next step, and give Tom the prompt for the rest by the five items of claude/handoff-rules.md. The card ships as nightgreen when no row is left with known_fail. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Sonnet 5.5 (row C: the cause of each remaining failure is not known; none of the three Fable conditions holds)",
+    "effort": "high (8 failures with unknown causes and nothing written to follow, the same size as the first run)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Four of the twelve failing tests are already fixed (nightgreena to nightgreend). Eight rows in tools/night/tests.json still carry known_fail: griffith_test, grands_walk_test, rooms_test, art-library__test, clip_kinds_test, clip_review_test, ch17_test, ch20_test. The addendum says what was seen on each and how the four fixes went. Take them one at a time, cheapest first, in that order. For each: reproduce it, decide whether the test or the game is wrong, and fix the one that is wrong; a test of something that no longer exists (the old chapter 1 scenes, a retired page, a Battle 2 fight in a chapter that now uses Battle 3) is deleted by the purge rule; then remove its known_fail and push that part with its own build name (nightgreene, nightgreenf and so on) and docs/CHANGES.md entry. A test that needs a paid key or a missing input goes to the skip list with the reason. Apply the stop-loss per test: two tries that miss the same way, write what you found on the card and move to the next. When the conversation has run long, stop, list what is left in the card's next step, and give Tom the prompt for the rest by the five items of claude/handoff-rules.md. The card ships as nightgreen when no row is left with known_fail. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
    "after": "nothing for Tom: c-nightrefactor"

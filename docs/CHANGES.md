@@ -1,3 +1,6 @@
+## board-nightgreen1 (2026-11-21): nightgreen handoff, 4 of 12 failing tests fixed, notes for the other 8
+
+Card c-nightgreen. Parts nightgreena to nightgreend fixed art-library/validate.js, sw_test, quest_test (tests that were stale) and terminal_test (a game bug: a monster inside a bench). Eight rows keep `known_fail`. This push writes what was seen on each (`claude/next-addendum-nightgreen.md`), rewrites the card's next step and prompt for the rest, and corrects the failing-tests line in `claude/next.md` (the Project's mirror of next.md gets the same text). Nothing in the game changed.
 ## reports-2026-11-21b (2026-11-21): the Log Lump stays at the end of the wrappers and the fight starts when you walk up to it
 
 Tom's report r-20261121-122202-loak: "the log should be in a fixed position at the end of the 3 wrappers in this screen. when appraoching it will force the interaction".
