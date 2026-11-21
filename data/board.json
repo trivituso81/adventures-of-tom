@@ -20499,7 +20499,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: after TNB's text and the Chapter 1 card, the girls say goodbye and the flight plays straight on (seat, takeoff, map, landing) with no stop in the Square, and you land in Los Angeles for chapter 2. Report anything off with the REPORT tab.",
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 end: talk to Sal and tap TO THE AIRPORT. Check: Sal answers, the phone picture stays on screen while TNB's text is read, then the Chapter 1 card, and the flight plays straight on (seat, takeoff, map, landing) with no girls or Deedee goodbye, and you land in Los Angeles. Report anything off with the REPORT tab.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-21",
@@ -20512,6 +20512,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: didn't work, after TNB's text there was dialog between Tom and the girl's and Deedee. it should go straight to the airplane animation from the cab animation with TNB's text. i also included this in a report. Sent to Claude as card c-fix-ch1flight; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T03:22:50.834Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix fix-ch1flight shipped: the goodbyes are gone from the chapter 1 cab scene and the phone picture stays up under TNB's text."
     }
    ],
    "waiting_on": "claude"
@@ -21755,6 +21759,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed in build fix-ch1flight."
     }
    ],
    "prompt": {

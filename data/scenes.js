@@ -431,10 +431,11 @@ SCENES.ch1Sunday=[
   {talk:'Sal',lines:["Los Angeles? You got it."]},
   {sfx:'doorOut'}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
-  {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone'}},   // cutpolish4b: the phone lights up on the cab seat
+  {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone',keep:true}},   // cutpolish4b: the phone lights up on the cab seat and stays up while TNB's text is spoken
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
+  {ch1RevealEnd:true},
   {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
-  {trip:'west'}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
+  {trip:'west',quiet:true}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
 ];
 
 // ======================================================================================================

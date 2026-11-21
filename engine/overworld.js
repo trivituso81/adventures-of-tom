@@ -290,7 +290,7 @@ function pressAction() {
 function update(dt) {
   if(typeof twGuard==='function') twGuard();
   if(menuOpen||shopOpen||battle.active) return;
-  if(typeof closeup!=='undefined'&&closeup.active) return;   // a close-up screen (engine/closeup.js) pauses the world
+  if(typeof closeup!=='undefined'&&closeup.active&&!closeup.keep) return;   // (closeup.keep: the picture stays up under the scene's dialog, ch1Sunday phone) a close-up screen (engine/closeup.js) pauses the world
   if(typeof partyBannerHeld==='function'&&partyBannerHeld()) return;   // a join or leave banner holds the world and every scene until dismissed (bannerhold1)
   if(intro.active) { updateIntro(dt); return; }
   if(transition) {

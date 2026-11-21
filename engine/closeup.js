@@ -202,7 +202,7 @@ function closeupClose(after) {
   setTimeout(()=>{
     if(closeup.ro) closeup.ro.disconnect(); closeup.ro=null;
     if(el) el.remove();
-    closeup.active=false; closeup.el=closeup.plate=closeup.tray=closeup.cap=closeup.pad=closeup.glint=null; closeup.busy=false;
+    closeup.active=false; closeup.el=closeup.plate=closeup.tray=closeup.cap=closeup.pad=closeup.glint=null; closeup.busy=false; closeup.keep=false;
     if(typeof clearInput==='function') clearInput();
     if(after) after();
   },380);
@@ -241,7 +241,7 @@ function closeupReveal(img,label,onDone,v,opts) {
   closeupCSS();
   const host=document.getElementById('game'); if(!host) { if(onDone) onDone(); return false; }
   const el=closeup.el=cuEl('div','reveal',host); el.id='closeup'; el.hidden=false; closeup.reveal=true; closeup.def=null; closeup.hooks={};
-  closeup.busy=true; closeup.active=true; closeup.done=onDone||null;
+  closeup.busy=true; closeup.active=true; closeup.done=onDone||null; closeup.keep=!!(opts&&opts.keep);
   const sun=cuEl('div','cu-sun',el), box=cuEl('div','cu-rev',el), spin=cuEl('div','cu-spin',box);
   if(opts&&opts.still) box.classList.add('still');   // no spin or bob: a flat picture (Boppy's teeth) just fades in
   const im=cuImg(img+(v?'?v='+v:'')); spin.appendChild(im);
@@ -251,6 +251,7 @@ function closeupReveal(img,label,onDone,v,opts) {
   const pad=closeup.pad=cuEl('div','cu-pad',el);
   const b=cuEl('button','cu-b a',pad); b.type='button'; b.textContent='CONTINUE'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupRevealEnd);
   el.addEventListener('click',closeupRevealEnd);
+  if(closeup.keep) pad.style.display='none';   // the scene closes it, no CONTINUE
   const lay=()=>{
     const W=el.clientWidth,H=el.clientHeight; if(!W||!H) return;
     const d=Math.round(Math.min(W*.8,H*.52,520)),x=(W-d)/2,y=H/2-d/2-24;
@@ -271,7 +272,7 @@ function closeupReveal(img,label,onDone,v,opts) {
 function closeupRevealEnd() {
   if(!closeup.active||!closeup.reveal||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
   const after=closeup.done; closeup.done=null; if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
-  closeupClose(()=>{ closeup.reveal=false; if(after) after(); });
+  closeupClose(()=>{ closeup.reveal=false; closeup.keep=false; if(after) after(); });
 }
 
 // ---------- WATCH mode (Tom 2026-11-12, claude/closeup-plan.md Row 1): a painted plate with a scripted animation that plays once ----------

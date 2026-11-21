@@ -26,7 +26,7 @@ function pollGamepad() {
   }
   // Cutscenes: B toggles FAST, Start or Select skips (engine/skip.js).
   if(cutsceneOn()&&(B||START||SEL)) { input.padDir=null; if(B) cutFF(); else cutSkip(); return; }
-  if(typeof closeup!=='undefined'&&closeup.active) { input.padDir=null; closeupPad(dir,dirEdge,A,B); return; }
+  if(typeof closeup!=='undefined'&&closeup.active&&!closeup.keep) { input.padDir=null; closeupPad(dir,dirEdge,A,B); return; }
   if(shopOpen) { input.padDir=null; if(B||START||Y) closeShop(); else if(dirEdge&&(dir==='left'||dir==='right')) shopCycle(dir==='right'?1:-1); return; }
   if(menuOpen) { input.padDir=null; menuPad({dir,dirEdge,A,B,START,Y,prev:L2,next:R1||R2}); return; }
   if(dialog.active) {
@@ -109,11 +109,7 @@ startSplash();
   const d=document.createElement('button');
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-<<<<<<< HEAD
-  d.textContent='build wanch1f';
-=======
-  d.textContent='build qa-coh01';
->>>>>>> origin/main
+  d.textContent='build fix-ch1flight';
   const build=d.textContent,stamp=()=>{ const w=typeof buildWhenLabel==='function'?buildWhenLabel(build.slice(6)).slice(2):'', duo=typeof duoMode!=='undefined'&&duoMode.device?window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):'';
     d.textContent=build; for(const t of [w,duo]) if(t){ const s=document.createElement('small'); s.textContent=t; d.appendChild(s); } };
   window.BUILD_TAG=build.slice(6);

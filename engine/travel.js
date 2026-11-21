@@ -345,9 +345,16 @@ function runScene(steps) {
   clearInput();
 }
 
-function tripSteps(dir) {   // the whole airport run as steps; startTrip plays it, and a scene can chain it ({trip:'west'}, SCENE_OPS)
+function tripSteps(dir,quiet) {   // quiet: a scene that already said its goodbyes (chapter 1's cab) goes straight to the flight; the girls and recruits leave silently   // the whole airport run as steps; startTrip plays it, and a scene can chain it ({trip:'west'}, SCENE_OPS)
   if(typeof flightArtLoad==='function') flightArtLoad();
   const steps=[],d=departureNow(),arr=arrivalNow(dir);
+  if(quiet) {
+    if(dir==='west'&&!girlsAway()) steps.push(S.call(()=>setGirlsAway(true)));
+    for(const f of extras()) { const home=memberHome(f.id); if(home==='any'||home===(dir==='west'?'la':'le')) continue; steps.push(S.call(()=>recruitLeave(f,true))); }
+    if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));
+    steps.push(...flightSteps(dir,d.flight,arr,d.photo));
+    return steps;
+  }
   if(dir==='west') {
     if(!girlsAway()&&memberHome('grace')!=='any') {
       const ex=(d.driver&&d.grace&&d.rose&&d.tom)?{}:travelPick('west',TRAVEL_POOLS.west);   // one whole exchange, so the girls answer each other

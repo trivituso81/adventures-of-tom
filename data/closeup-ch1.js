@@ -10,8 +10,13 @@ const CH1_REVEAL={
   list:{img:'art/closeup/ch1-list.webp',label:'GRACE’S LIST',still:true},
   v:'ch1d'
 };
+// {ch1Reveal:'phone',keep:true} (report r-20261120-192121-ynen): the picture stays up while the next lines are spoken; {ch1RevealEnd:true} closes it.
 SCENE_OPS.ch1Reveal=o=>lazy(()=>{
   let done=false; const d=CH1_REVEAL[o.ch1Reveal];
-  return {start(){ done=false; if(!closeupReveal(d.img,d.label,()=>{ done=true; },CH1_REVEAL.v,d.still?{still:true}:null)) done=true; },
-    update(){ return done; }};
+  return {start(){ done=false; if(!closeupReveal(d.img,d.label,()=>{ if(!o.keep) done=true; },CH1_REVEAL.v,d.still||o.keep?{still:!!d.still,keep:!!o.keep}:null)) done=true; },
+    update(){ return o.keep?(done||!closeup.busy):done; }};
+});
+SCENE_OPS.ch1RevealEnd=o=>lazy(()=>{
+  return {start(){ if(closeup.active&&closeup.reveal) { closeup.busy=false; closeupRevealEnd(); } },
+    update(){ return !closeup.active; }};
 });
