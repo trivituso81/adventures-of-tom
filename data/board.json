@@ -27880,6 +27880,41 @@
      "t": "Created by the b3s18 session: the bonus chapter was not switched in stage 18 because its Brain Freeze fights end at half HP with results flee and shell in battle 2 code."
     }
    ]
+  },
+  {
+   "id": "c-buildpill2",
+   "tag": "buildpill2",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Build name pill: Battle Guide header and Board cards",
+   "next": "Moves the build name in the Battle Guide from above the title to a pill on the right of it (tap opens that build's details), and shows the build name as the same pill, more prominently, on the Board card and in the card details.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEgMLyk7xoZixcTVhF",
+    "opening": "\"in the battle guide, remove the build name from above the page title and put it to the right of the title\""
+   },
+   "prompt": {
+    "what": "Makes the build name a tappable pill in the Battle Guide header and on the Board.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small screen change, steps not written)",
+    "effort": "medium (two pages, small change)",
+    "text": "Read CLAUDE.md and card c-buildpill2 in data/board.json, then finish what its history describes and push build buildpill2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"in the battle guide, remove the build name from above the page title and put it to the right of the title, in a our standard build pill treatment, click/tap should open the existing build modal.\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"in the kanban board, the build name treatment should be the in the pill as well, and displayed more prominently in both the board card and the card details in any relevant card\""
+    }
+   ]
   }
  ],
  "sessions": [
