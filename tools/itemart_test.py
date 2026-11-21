@@ -38,14 +38,19 @@ check('no em or en dash in names or notes', not any(re.search('[—–]', n['nam
 # 2. sheet entries
 r = subprocess.run(['node', '-e', "const m=require('./tools/art-library/itemart-prompts.js');console.log(JSON.stringify(m.entries.map(e=>({id:e.id,bake:e.bake,prompt:e.prompt}))))"], cwd=ROOT, capture_output=True, text=True)
 allent = json.loads(r.stdout)
-entries = [e for e in allent if not e['id'].startswith('prop-item-redo-')]
+entries = [e for e in allent if not e['id'].startswith(('prop-item-redo-', 'prop-item-solo-'))]
 redos = [e for e in allent if e['id'].startswith('prop-item-redo-')]
+solos = [e for e in allent if e['id'].startswith('prop-item-solo-')]
 check('18 sheet entries', len(entries) == 18)
 flat = [i for e in entries for i in e['bake']['args'][1:]]
 check('the sheets hold every item in the order of the notes file, a redone cell as -', len(flat) == len(ids) and all(f in ('-', i) for f, i in zip(flat, ids)))
 redone = [i for e in redos for i in e['bake']['args'][1:] if not i.startswith('--')]
 skipped = [i for f, i in zip(flat, ids) if f == '-']
-check('fix-itembannerart-pics: every skipped cell is on exactly one redo sheet, and no other item is', sorted(redone) == sorted(skipped) and len(set(redone)) == len(redone))
+redo_cells = [i for e in redos for i in e['bake']['args'][1:] if not i.startswith('--')]
+redone = [i for i in redo_cells if i != '-']
+solo_ids = [e['bake']['args'][-1] for e in solos]
+check('fix-itembannerart-pics: every skipped cell is on exactly one redo sheet, and no other item is', sorted(redone + solo_ids) == sorted(skipped) and len(redo_cells) == len(skipped))
+check('fix-itembannerart-pics-2: a redo cell named - is made alone (one picture, --grid=1, own source path), and nothing else is', sorted(solo_ids) == sorted(set(skipped) - set(redone)) and len(solos) == 3 and all('--grid=1' in e['bake']['args'] and len(e['bake']['args']) == 3 and 'One object only' in e['prompt'] and e['bake']['src'].endswith(e['bake']['args'][0] + '.png') for e in solos))
 check('redo sheets are 3 x 3 (9 or fewer items, --grid=3), plain surfaces, own source path', all('--grid=3' in e['bake']['args'] and len(e['bake']['args']) <= 11 and '3 columns by 3 rows' in e['prompt'] and 'not even blurred' in e['prompt'] and e['bake']['src'].endswith(e['bake']['args'][0] + '.png') for e in redos))
 check('every sheet has 16 items and its own source path', all(len(e['bake']['args']) == 17 and e['bake']['src'].endswith(e['bake']['args'][0] + '.png') for e in entries))
 check('every prompt lists its items by name', all(all(n['name'] in e['prompt'] for n in notes[k * 16:(k + 1) * 16]) for k, e in enumerate(entries)))
@@ -99,6 +104,27 @@ for k in range(9):
 g.save(os.path.join(tmp, 'item-t4.png'))
 made4 = B.cut('item-t4', [f'w{k}' for k in range(9)], grid=3)
 check('a 3 x 3 redo sheet cuts into 9 pictures', len(made4) == 9 and all(Image.open(os.path.join(B.OUT, f'w{k}.webp')).width < 140 for k in range(9)))
+# fix-itembannerart-pics-2: on the real sheets two neighbours were often painted closer than the merge distance, became one blob and left a cell empty
+# (12 of the 18 sheets stopped the bake). Cells 0 and 1 here reach to 6 px of each other across the cell line.
+g = Image.new('RGBA', (1024, 1024), (214, 2, 104, 0)); dg = ImageDraw.Draw(g)
+for k in range(16):
+    r_, c_ = divmod(k, 4); cx, cy = c_ * 256 + 128, r_ * 256 + 128
+    x0, x1 = (cx - 60, cx + 125) if k == 0 else (cx - 125, cx + 60) if k == 1 else (cx - 60, cx + 60)
+    dg.ellipse([x0, cy - 60, x1, cy + 60], fill=(40 + k * 12, 160, 90, 255))
+g.save(os.path.join(tmp, 'item-t5.png'))
+try: made5 = B.cut('item-t5', [f'v{k:02d}' for k in range(16)]); err5 = ''
+except SystemExit as e: made5 = []; err5 = str(e)
+check('two neighbours painted closer than the merge distance are cut apart, one each', len(made5) == 16 and not err5 and Image.open(os.path.join(B.OUT, 'v00.webp')).width < 200)
+# the generator's soft drop shadow: a darker shade of the background under the object, opaque after keying
+key = np.array([183, 13, 82]); g = Image.new('RGBA', (900, 900), tuple(int(v) for v in key) + (0,)); dg = ImageDraw.Draw(g)
+for k in range(9):
+    r_, c_ = divmod(k, 3); x, y = c_ * 300 + 90, r_ * 300 + 90
+    dg.ellipse([x + 10, y + 100, x + 140, y + 150], fill=tuple(int(v) for v in key * 0.6) + (255,))   # shadow
+    dg.ellipse([x, y, x + 120, y + 120], fill=(200, 180, 60, 255))
+g.save(os.path.join(tmp, 'item-t6.png'))
+B.cut('item-t6', [f'u{k}' for k in range(9)], grid=3)
+u = np.array(Image.open(os.path.join(B.OUT, 'u0.webp')))
+check('the painted drop shadow is cleared; the object keeps its pixels', not ((u[:, :, 3] > 24) & (u[:, :, 0] < 140) & (u[:, :, 1] < 30)).any() and (u[:, :, 3] > 24).sum() > 10000)
 shutil.rmtree(tmp)
 
 # 4. what is installed

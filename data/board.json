@@ -19711,7 +19711,7 @@
    "col": "wait",
    "ask": "pictures",
    "fyi": true,
-   "next": "Open ADMIN > BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid.",
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it.",
    "blocks": [],
    "done_when": {
     "art_approved": [
@@ -19734,7 +19734,10 @@
      "prop-item-17",
      "prop-item-18",
      "prop-item-redo-1",
-     "prop-item-redo-2"
+     "prop-item-redo-2",
+     "prop-item-solo-amy_chm1",
+     "prop-item-solo-claytaco",
+     "prop-item-solo-g_bsash"
     ]
    },
    "links": [
@@ -19760,9 +19763,12 @@
       "prop-item-17",
       "prop-item-18",
       "prop-item-redo-1",
-      "prop-item-redo-2"
+      "prop-item-redo-2",
+      "prop-item-solo-amy_chm1",
+      "prop-item-solo-claytaco",
+      "prop-item-solo-g_bsash"
      ],
-     "label": "Item pictures (18 sheets and 2 redo sheets)"
+     "label": "Item pictures (18 sheets, 2 redo sheets, 3 items alone)"
     }
    ],
    "created": "2026-11-20",
@@ -19808,6 +19814,10 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 2 pictures, QA: 15 of 16, 15 of 16. Spent about $0.12."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-itembannerart-pics-2: on Tom's words \"only regenerate those than failed and approve those where nothing failed\", Claude made only the 2 redo sheets ($0.12) and approved the 18 first sheets and the 2 redo sheets with every failed cell left out, so 285 of 288 items now have their picture in the game. 3 items missed twice the same way (racing flats came back as cleats with a swoosh, the clay taco as a real taco, the sash as a bow alone): stop-loss, so they are now made alone, one picture each, words unchanged. Also fixed: the cutter dropped cells on 12 sheets and left a crimson shadow under every picture."
     }
    ],
    "gen": {
@@ -20635,6 +20645,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-itembannerart-pics-2: only failed cells made again, the 20 sheets approved without their failed cells (285 pictures in the game), 3 twice-missed items moved to single pictures, cutter fixed (dropped cells, crimson shadows). No pencil report about item pictures since 03:14."
     }
    ],
    "prompt": {

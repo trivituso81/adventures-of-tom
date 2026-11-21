@@ -12,31 +12,31 @@ const ITEMS = require('./itemart-items.json');
 const REF_KEY = 'art/grands.webp';   // the installed painting of Deedee and Boppy's house, used for the painting style by the other prop sheets
 const PER = 16;
 
-function sheetPrompt(items, redo) {
-  const n = items.length, g = redo ? 3 : 4;
-  const list = items.map((it, i) => `${i + 1}. ${it.name}: ${it.note}`).join('\n');
-  return `IMAGE REQUEST: ONE SINGLE ITEM SHEET. Return exactly one image, nothing else.
+function sheetPrompt(items, redo, solo) {
+  const n = items.length, g = solo ? 1 : redo ? 3 : 4;
+  const list = items.map((it, i) => `${solo ? '' : `${i + 1}. `}${it.name}: ${it.note}`).join('\n');
+  return `IMAGE REQUEST: ONE SINGLE ITEM ${solo ? 'PICTURE' : 'SHEET'}. Return exactly one image, nothing else.
 
 WHAT THIS IS
-A sheet of ${n} small items for "The Adventures of Tom", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the objects in the list below.
+${solo ? 'A picture of one small item' : `A sheet of ${n} small items`} for "The Adventures of Tom", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only ${solo ? 'the object' : 'the objects in the list'} below.
 
 LAYOUT
-- A grid of ${g} columns by ${g} rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.
-- Exactly ${n} objects, one per cell, each complete and centered, filling about 70 percent of its cell with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge, and nothing overlaps.
+${solo ? '- One object only, complete and centered, filling about 70 percent of the picture with at least 12 percent empty margin on every side. No borders, no numbers, no labels.' : `- A grid of ${g} columns by ${g} rows of equal square cells, filled left to right, top to bottom, in the order of the list. No grid lines, no borders, no numbers, no labels.
+- Exactly ${n} objects, one per cell, each complete and centered, filling about 70 percent of its cell with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge, and nothing overlaps.`}
 - Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.
 
 STYLE
 - Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.
 - No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.
-- Three-quarter view from slightly above, unless the list says laid flat or standing. All objects share one lighting direction and one level of detail. Family friendly for children aged 6 and up.
+- Three-quarter view from slightly above, unless the list says laid flat or standing.${solo ? '' : ' All objects share one lighting direction and one level of detail.'} Family friendly for children aged 6 and up.
 
 RULES
-- Draw exactly the ${n} objects in the list, one per cell, and never substitute, add or skip one. Where a list entry is unusual, draw it as written.
+- ${solo ? 'Draw exactly this one object and nothing else.' : `Draw exactly the ${n} objects in the list, one per cell, and never substitute, add or skip one.`} Where a list entry is unusual, draw it as written.
 - Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).
 ${redo ? '- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.' : '- No readable words or letters anywhere. Where an object normally carries print, paint soft blurred squiggles instead. A single bold numeral is allowed only where the list asks for it.'}
 - No real brands, logos or copyrighted characters.
 
-THE ${n} ITEMS (cell number: name, what to paint)
+${solo ? 'THE ITEM (name, what to paint)' : `THE ${n} ITEMS (cell number: name, what to paint)`}
 ${list}`;
 }
 
@@ -66,6 +66,11 @@ const REDO = [
 ].map(([sheet, cell, note]) => ({ sheet, cell, note, item: ITEMS[(sheet - 1) * PER + cell - 1] }));
 const SKIP = new Set(REDO.map(r => r.item.id));
 const RPER = 9;
+// fix-itembannerart-pics-2 (2026-11-20). Tom: "make sure you only regenerate those than failed and approve those where nothing failed". On the redo
+// sheets these three missed the same way as on their first sheets (football cleats with a swoosh again, a real taco again, a bow with no sash).
+// Stop-loss: the note is not reworded a third time; the method changes instead. Each is one object alone in its own picture (`prop-item-solo-<id>`,
+// the same note, cut with --grid=1), and its redo sheet's bake skips its cell (`-`), so the redo sheets are approved for their other cells.
+const SOLO = new Set(['amy_chm1', 'claytaco', 'g_bsash']);
 
 const sheets = [];
 for (let i = 0; i < ITEMS.length; i += PER) sheets.push(ITEMS.slice(i, i + PER));
@@ -82,7 +87,16 @@ for (let i = 0; i < REDO.length; i += RPER) {
     id: `prop-item-redo-${k}`, tab: 'Props', group: 'Item pictures',
     title: `Item pictures, redo sheet ${k} (${items.length} items that missed on sheets ${[...new Set(rs.map(r => r.sheet))].join(', ')})`,
     ar: '1:1', refs: [REF_KEY], prompt: sheetPrompt(items, true),
-    bake: { script: 'bake_item_sheet.py', args: [`item-redo-${k}`, '--grid=3', ...items.map(it => it.id)], src: `tools/sprite-bake/src/items/item-redo-${k}.png`, key: 'corner' },
+    bake: { script: 'bake_item_sheet.py', args: [`item-redo-${k}`, '--grid=3', ...items.map(it => SOLO.has(it.id) ? '-' : it.id)], src: `tools/sprite-bake/src/items/item-redo-${k}.png`, key: 'corner' },
+  });
+}
+for (const r of REDO.filter(r => SOLO.has(r.item.id))) {
+  const it = { id: r.item.id, name: r.item.name, note: r.note };
+  entries.push({
+    id: `prop-item-solo-${it.id}`, tab: 'Props', group: 'Item pictures',
+    title: `Item picture: ${it.name} alone (missed on sheet ${r.sheet} and on its redo sheet)`,
+    ar: '1:1', refs: [REF_KEY], prompt: sheetPrompt([it], true, true),
+    bake: { script: 'bake_item_sheet.py', args: [`item-solo-${it.id}`, '--grid=1', it.id], src: `tools/sprite-bake/src/items/item-solo-${it.id}.png`, key: 'corner' },
   });
 }
 
@@ -105,4 +119,4 @@ if (require.main === module) {
   fs.writeFileSync(out, JSON.stringify(doc, null, 1) + '\n');
   console.log('item picture entries in', out + ':', entries.length, changed.length ? '\n  ' + changed.join('\n  ') : '(no prompt changes)');
 }
-module.exports = { entries, ITEMS, sheetPrompt, PER, REDO };
+module.exports = { entries, ITEMS, sheetPrompt, PER, REDO, SOLO };

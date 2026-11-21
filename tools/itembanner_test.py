@@ -17,7 +17,7 @@ errs=[]; fails=[]
 def check(name,ok):
     print(('ok   ' if ok else 'FAIL ')+name)
     if not ok: fails.append(name)
-TXT="()=>{ const w=document.getElementById('party-banner'); return w&&w.classList.contains('on')?[w.classList.contains('item'),w.querySelector('.pb-line').textContent,w.querySelector('.pb-note').textContent,w.querySelector('.pb-icon').textContent]:null; }"
+TXT="()=>{ const w=document.getElementById('party-banner'); return w&&w.classList.contains('on')?[w.classList.contains('item'),w.querySelector('.pb-line').textContent,w.querySelector('.pb-note').textContent,w.querySelector('.pb-icon').textContent||w.querySelector('.pb-icon').querySelectorAll('img').length]:null; }"
 def dismiss(pg):
     pg.wait_for_timeout(600); pg.keyboard.press('Enter'); pg.wait_for_timeout(700)
 with sync_playwright() as pw:

@@ -27,6 +27,7 @@ MAXSIDE = 256
 ALPHA_CUT = 24            # at or below this a pixel is background
 KEY_NEAR = 50             # colour distance to the sheet's own key colour: a leftover pocket of background inside an object
 FRINGE_NEAR = 100         # an edge pixel this close to the key colour is a halo and goes
+SHADOW_OFF = 18           # how far from a darker shade of the key colour a pixel may be and still count as the painted drop shadow
 
 def key_colour(a):
     """The background colour the Action keyed: the colour still stored under the transparent pixels."""
@@ -43,6 +44,16 @@ def clean(im):
     clear = a[:, :, 3] <= ALPHA_CUT
     edge = (a[:, :, 3] > 0) & ndi.binary_dilation(clear, iterations=1) & (d < FRINGE_NEAR)
     a[edge, 3] = 0                                                             # pink halo on the outline
+    # fix-itembannerart-pics-2: the generator paints a soft drop shadow under each object in a darker shade of the key colour (about 120,8,55 on 183,13,82),
+    # too far from the key to be keyed, so it came out as a crimson smear under the object. A pixel that is the key colour scaled darker (small distance
+    # from the line through black and the key) and that joins the background through such pixels is shadow and goes. Inside an object nothing is touched.
+    p = a[:, :, :3].astype(float); t = (p @ col) / (col @ col)
+    off = np.sqrt(((p - t[..., None] * col) ** 2).sum(axis=2))
+    vis = a[:, :, 3] > ALPHA_CUT
+    cand = vis & (off < SHADOW_OFF) & (t > 0.15) & (t < 0.95)
+    lab, _ = ndi.label(cand | ~vis)
+    bgl = np.unique(lab[~vis]); bgl = bgl[bgl > 0]
+    a[cand & np.isin(lab, bgl), 3] = 0
     return a
 
 def cut(sheet, ids, check=False, grid=4):
@@ -55,13 +66,20 @@ def cut(sheet, ids, check=False, grid=4):
     grow = max(3, W // 70)
     blobs, n = ndi.label(ndi.binary_dilation(ink, structure=np.ones((3, 3)), iterations=grow))
     cell_h, cell_w = H / ROWS, W / COLS
+    raw, rn = ndi.label(ink, structure=np.ones((3, 3)))
+    def cell_of(m):
+        ys, xs = np.nonzero(m)
+        return min(ROWS - 1, int(ys.mean() / cell_h)) * COLS + min(COLS - 1, int(xs.mean() / cell_w))
     cells = {}
     for lab in range(1, n + 1):
         m = (blobs == lab) & ink
         if not m.any(): continue
-        ys, xs = np.nonzero(m)
-        k = min(ROWS - 1, int(ys.mean() / cell_h)) * COLS + min(COLS - 1, int(xs.mean() / cell_w))
-        cells.setdefault(k, []).append(m)
+        # fix-itembannerart-pics-2: two objects in neighbouring cells drawn closer than the merge distance became one blob and left a cell empty.
+        # A merged blob whose own drawn pieces sit in different cells is split back into those pieces, each going to its own cell.
+        parts = [raw == r for r in np.unique(raw[m]) if r]
+        homes = {cell_of(p) for p in parts}
+        if len(homes) == 1: cells.setdefault(homes.pop(), []).append(m); continue
+        for p in parts: cells.setdefault(cell_of(p), []).append(p)
     for k in sorted(cells):
         if k >= len(ids): print(f'bake_item_sheet: WARNING cell {k + 1} holds {len(cells[k])} drawn thing(s) but the list has only {len(ids)} items: ignored')
     missing = [f'cell {k + 1} ({ids[k]})' for k in range(len(ids)) if k not in cells and ids[k] != '-']

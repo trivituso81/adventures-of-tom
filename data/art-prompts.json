@@ -30111,8 +30111,18 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: REGROUP\nThe small mosquitoes swirl once in a tight circle around the big mosquito. The small mosquitoes stay close around the big one, the same number of them. Then they settle back into their places and it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-01-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-01/20261121T023421.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-01",
    "tab": "Props",
@@ -30149,8 +30159,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-02-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-02/20261121T023413.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-02",
    "tab": "Props",
@@ -30187,8 +30207,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-03-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-03/20261121T023422.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-03",
    "tab": "Props",
@@ -30225,8 +30255,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-04-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-04/20261121T023453.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-04",
    "tab": "Props",
@@ -30263,8 +30303,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-05-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-05/20261121T023502.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-05",
    "tab": "Props",
@@ -30301,8 +30351,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-06-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-06/20261121T023501.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-06",
    "tab": "Props",
@@ -30339,8 +30399,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-07-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-07/20261121T023529.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-07",
    "tab": "Props",
@@ -30377,8 +30447,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-08-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-08/20261121T023547.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-08",
    "tab": "Props",
@@ -30415,8 +30495,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-09-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-09/20261121T023542.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-09",
    "tab": "Props",
@@ -30453,8 +30543,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-10-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-10/20261121T023606.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-10",
    "tab": "Props",
@@ -30491,8 +30591,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-11-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-11/20261121T023621.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-11",
    "tab": "Props",
@@ -30529,8 +30639,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-12-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-12/20261121T023626.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-12",
    "tab": "Props",
@@ -30567,8 +30687,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-13-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-13/20261121T023654.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-13",
    "tab": "Props",
@@ -30605,8 +30735,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-14-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-14/20261121T023704.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-14",
    "tab": "Props",
@@ -30643,8 +30783,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-15-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-15/20261121T023701.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-15",
    "tab": "Props",
@@ -30681,8 +30831,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-16-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-16/20261121T023733.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-16",
    "tab": "Props",
@@ -30719,8 +30879,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-17-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-17/20261121T023748.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-17",
    "tab": "Props",
@@ -30757,8 +30927,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-18-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232076414,
+     "of": "results/prop-item-18/20261121T023743.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are on the redo sheets"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-18",
    "tab": "Props",
@@ -30795,8 +30975,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-redo-1-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232600599,
+     "of": "results/prop-item-redo-1/20261121T033602.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are made alone (prop-item-solo-*)"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-redo-1",
    "tab": "Props",
@@ -30818,7 +31008,7 @@
      "rose_out1",
      "rose_chm3",
      "amy_out1",
-     "amy_chm1",
+     "-",
      "amy_chm2",
      "deedee_chm3"
     ],
@@ -30827,8 +31017,18 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-item-redo-2-v1.png",
+     "date": "2026-11-20",
+     "from": "review",
+     "at": 1795232600599,
+     "of": "results/prop-item-redo-2/20261121T033603.png",
+     "by": "claude fix-itembannerart-pics-2 (Tom: approve those where nothing failed); cells that missed are - in bake and are made alone (prop-item-solo-*)"
+    }
+   ],
    "rejects": [],
    "id": "prop-item-redo-2",
    "tab": "Props",
@@ -30845,16 +31045,88 @@
      "item-redo-2",
      "--grid=3",
      "skatewax",
-     "claytaco",
+     "-",
      "pupusa",
      "oatlatte",
      "quakemedal",
      "hardhat",
      "hushchip",
      "g_bshirt",
-     "g_bsash"
+     "-"
     ],
     "src": "tools/sprite-bake/src/items/item-redo-2.png",
+    "key": "corner"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-item-solo-amy_chm1",
+   "tab": "Props",
+   "group": "Item pictures",
+   "title": "Item picture: Pro Racing Flats alone (missed on sheet 12 and on its redo sheet)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE ITEM PICTURE. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA picture of one small item for \"The Adventures of Tom\", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the object below.\n\nLAYOUT\n- One object only, complete and centered, filling about 70 percent of the picture with at least 12 percent empty margin on every side. No borders, no numbers, no labels.\n- Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.\n\nSTYLE\n- Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.\n- Three-quarter view from slightly above, unless the list says laid flat or standing. Family friendly for children aged 6 and up.\n\nRULES\n- Draw exactly this one object and nothing else. Where a list entry is unusual, draw it as written.\n- Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).\n- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.\n- No real brands, logos or copyrighted characters.\n\nTHE ITEM (name, what to paint)\nPro Racing Flats: A pair of pro racing flats in neon with paper-thin soles and plain sides. No logo or swoosh.",
+   "bake": {
+    "script": "bake_item_sheet.py",
+    "args": [
+     "item-solo-amy_chm1",
+     "--grid=1",
+     "amy_chm1"
+    ],
+    "src": "tools/sprite-bake/src/items/item-solo-amy_chm1.png",
+    "key": "corner"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-item-solo-claytaco",
+   "tab": "Props",
+   "group": "Item pictures",
+   "title": "Item picture: Tiny Clay Taco alone (missed on sheet 17 and on its redo sheet)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE ITEM PICTURE. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA picture of one small item for \"The Adventures of Tom\", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the object below.\n\nLAYOUT\n- One object only, complete and centered, filling about 70 percent of the picture with at least 12 percent empty margin on every side. No borders, no numbers, no labels.\n- Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.\n\nSTYLE\n- Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.\n- Three-quarter view from slightly above, unless the list says laid flat or standing. Family friendly for children aged 6 and up.\n\nRULES\n- Draw exactly this one object and nothing else. Where a list entry is unusual, draw it as written.\n- Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).\n- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.\n- No real brands, logos or copyrighted characters.\n\nTHE ITEM (name, what to paint)\nTiny Clay Taco: A tiny clay sculpture of a taco, handmade pottery with speckled glaze (not real food), with a paperclip stuck in it.",
+   "bake": {
+    "script": "bake_item_sheet.py",
+    "args": [
+     "item-solo-claytaco",
+     "--grid=1",
+     "claytaco"
+    ],
+    "src": "tools/sprite-bake/src/items/item-solo-claytaco.png",
+    "key": "corner"
+   }
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "prop-item-solo-g_bsash",
+   "tab": "Props",
+   "group": "Item pictures",
+   "title": "Item picture: Birthday Sash alone (missed on sheet 18 and on its redo sheet)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE ITEM PICTURE. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA picture of one small item for \"The Adventures of Tom\", a family role-playing game. The game shows each item in a banner when the player receives it, so each item is one clear object that reads at a glance. The attached picture shows the painting style: take only how it is painted, and paint only the object below.\n\nLAYOUT\n- One object only, complete and centered, filling about 70 percent of the picture with at least 12 percent empty margin on every side. No borders, no numbers, no labels.\n- Background: one flat solid #FF00FF magenta everywhere, with no magenta inside any object.\n\nSTYLE\n- Hand-painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, gently simplified friendly shapes. Warm golden light from the upper left, shadow on the lower right of each form, no cast shadow on the ground.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT glossy plastic.\n- Three-quarter view from slightly above, unless the list says laid flat or standing. Family friendly for children aged 6 and up.\n\nRULES\n- Draw exactly this one object and nothing else. Where a list entry is unusual, draw it as written.\n- Objects only: no people, no hands, no faces on anything unless the list says the object has them (a plush toy, a pot with eyes).\n- No words, letters, numbers or print anywhere, not even blurred: where an object normally carries print, leave that surface plain.\n- No real brands, logos or copyrighted characters.\n\nTHE ITEM (name, what to paint)\nBirthday Sash: A plain gold sparkly birthday sash with a big gold bow, draped.",
+   "bake": {
+    "script": "bake_item_sheet.py",
+    "args": [
+     "item-solo-g_bsash",
+     "--grid=1",
+     "g_bsash"
+    ],
+    "src": "tools/sprite-bake/src/items/item-solo-g_bsash.png",
     "key": "corner"
    }
   }
