@@ -21204,13 +21204,13 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Ready to start. Rewrite one Art Library prompt so the cap reads Paso Robles, then hand it to Tom to generate.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "prompt": {
     "what": "Replaces the retired Big Fish cap on Boppy's unimpressed mood pose with his Paso Robles cap.",
     "before": [
@@ -21224,11 +21224,16 @@
     {
      "d": "2026-11-21",
      "t": "Found by c-qa-bug12c while checking Boppy's cap lettering: his em_unimpressed frame says Big Fish."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T07:25:58.505Z"
     }
    ],
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    }
   },
   {
