@@ -23475,7 +23475,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "AI Costs page: plans, balances, every charge, the total",
-   "next": "Built as costs1: ADMIN > AI COSTS (costs.html) with Overview, Services, Ledger and Totals, and 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
+   "next": "ADMIN > AI COSTS (costs.html) is live as build costs1: Overview, Services, Ledger and Totals, with 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -23504,6 +23504,10 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"You have full approval to repo access and changes. If you did any work as part of this ensure kanban cards are created\". Taken as yes to publishing the ledger as built (the recommendation put to him). Pushed as build costs1 with cards t-costs1look and c-costs2."
     }
    ],
    "after": "t-costs1look",
