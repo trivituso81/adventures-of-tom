@@ -9,7 +9,7 @@ const AMBER_SPOTS=[
   // Chapter 1, Boppy's fishing spot (engine/plate.js HOLLOW_SPOT, SCENES.ch1Spot): the plum-sized block on the grey patch, tile (17,10).
   {id:'ch1',map:'hollow',name:'Orange block',show:()=>!flag('bb-hollow'),found:'ch1-spot',solid:[[17,10]],
     lines:[['rose','The grass is Boppy color!'],
-      ['grace','It\'s grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.'],
+      ['grace','It\'s grey, Rose. And it\'s just that one spot. And that orange cube has a dragonfly in it.'],
       ['rose','He\'s stuck! Tata, get him out!'],
       ['tom','It\'s the size of a plum. I carried a suitcase through two airports this morning.']]},
   // Chapter 2, the grey lemon tree on the Griffith trail (GRIFFITH_SPOT, SCENES.ch2Lemon): the trunk (row 7) and the dirt circle (row 8).

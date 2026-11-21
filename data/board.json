@@ -17875,8 +17875,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "I made a lot of updates to the voiceclips",
-   "next": "Your idea: i made a lot of updates to the voiceclips / 1) learn from what i did or tell me what info you need to do so / 2) update the text to match the new voiceclips Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
+   "title": "Chapter 1 subtitles now match your new voice clips",
+   "next": "Shipped as idea-madelot: 8 chapter 1 subtitles reworded to what your baked clips say (Tom pencil line, Deedee twelve more, Big One x2, Grace x4). 26 older kept takes left alone (6 already in the game, 20 stale). New tool tools/voice-library/retext_audit.py finds the next mismatches; merge-local.js now warns when a take's words differ. Waiting on your play check (t-madelot-play).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17928,6 +17928,11 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Learned from branch takes (1,177 takes, 512 kept): Tom edits the words in the script box while tuning, the take stays keyed to the old subtitle. Transcribed the 512 kept takes and 351 baked clips (Whisper base.en, small.en on each difference). 8 lines reworded to the clip, 26 older kept takes left alone, 2 looped clips handed to Tom (t-madelot-rerecord). Shipped as idea-madelot.",
+     "at": "2026-11-21T02:06:45.000Z"
     }
    ],
    "prompt": {
@@ -17938,7 +17943,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-madelot in data/board.json, history included. Your first push is the commit board: start c-idea-madelot.\n\nTom made this card himself with New card on the board. His words: \"i made a lot of updates to the voiceclips / 1) learn from what i did or tell me what info you need to do so / 2) update the text to match the new voiceclips\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-madelot with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-madelot-play"
   },
   {
    "id": "c-startfix",
@@ -19446,6 +19452,71 @@
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
    }
+  },
+  {
+   "id": "t-madelot-play",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "ask": "play",
+   "fyi": true,
+   "title": "Check 8 reworded Chapter 1 lines against the voice",
+   "next": "Start Chapter 1 from the chapter list and listen to each of these while reading the subtitle: (1) fishing spot, Grace: \"It's grey, Rose. And it's just that one spot...\" and \"It's a clue! I'm starting a new list...\"; (2) after the Big One fight: \"HA! HA! You got me! No one ever surprised me like that before!\" and \"Take this coin. The sneaky one can have it...\"; (3) back in the kitchen: Grace \"The fish ate them, Boppy.\" and Deedee \"Give me an hour and we'll have twelve more.\"; (4) the job scene: Tom \"On it. Um, can I borrow a pencil?\" and Grace \"Okay, that's my second best one.\" Every subtitle should match what is said. Use the pencil tab for any that does not.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-idea-madelot"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-idea-madelot.",
+     "at": "2026-11-21T02:06:45.000Z"
+    }
+   ],
+   "first": "Wait for build idea-madelot to reach your phone (reload once)."
+  },
+  {
+   "id": "t-madelot-rerecord",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Voice Clips",
+   "ask": "voice",
+   "fyi": true,
+   "title": "Record 2 clips that say a sentence twice",
+   "next": "Open the Voice Library with the buttons below and make a new take for each line, keep one, then press Send my takes to Claude: Boppy \"Stairs. Of course it's stairs. Nobody take them fast.\" (says the last sentence twice) and Mr. Washington \"Nobody needs to go anywhere. Nobody needs to get any older.\" (says the first sentence twice). Until then the game plays the repeating clips.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-idea-madelot"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-idea-madelot. Two baked clips repeat a sentence (a looped take).",
+     "at": "2026-11-21T02:06:45.000Z"
+    }
+   ],
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|boppy|Stairs. Of course it's stairs. Nobody take them fast."
+     ],
+     "label": "Boppy's line"
+    },
+    {
+     "to": "voice",
+     "ids": [
+      "d|washington|Nobody needs to go anywhere. Nobody needs to get any older."
+     ],
+     "label": "Mr. Washington's line"
+    }
+   ]
   }
  ],
  "sessions": [

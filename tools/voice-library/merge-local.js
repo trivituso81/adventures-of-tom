@@ -84,6 +84,8 @@ for(const f of dt){const {L,ci,clips:cl}=D[f];L[ci]='Object.assign(DIALOG_CLIPS.
  for(const c of clips.filter(c=>c.kind==='dialog')){
   if(!c.script||c.script==='(recording)'){srep.skipped.push(c.voice+'|'+c.text.slice(0,40));continue;}
   const k=c.voice+'|'+norm(c.text);let f=where[k];
+  {const fw=s=>String(s).replace(/\[[^\]]*\]/g,' ').replace(/[’‘]/g,"'").toLowerCase().replace(/\btah tah\b/g,'tata').replace(/[^a-z0-9' ]/g,' ').replace(/'/g,'').split(/\s+/).filter(Boolean).join(' ');
+   if(fw(c.script)!==fw(c.text))console.log('WORDS DIFFER (madelot): '+c.voice+' | screen: '+c.text.slice(0,70)+' | take says: '+c.script.replace(/\[[^\]]*\]\s*/g,'').slice(0,70)+'  -> reword the screen (docs/VOICE_LIBRARY.md "Words Tom changes while tuning")');}
   if(f&&!cache[f].rt)f=null;   // a file that does not round-trip through JSON.stringify (zz-v4-overrides.json) is never rewritten here: the kept-takes file wins over it anyway
   if(!f){f=KEPT;if(!cache[f])cache[f]={j:{note:'Scripts of takes Tom kept, for lines no chapter script file holds (merge-local.js). Loads last, so it wins.',lines:[]},rt:true};
    const L=cache[f].j.lines;let e=L.find(x=>x.voice===c.voice&&norm(x.text)===norm(c.text));

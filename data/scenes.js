@@ -325,14 +325,14 @@ SCENES.ch1Spot=[
   {flag:'ch1-spot'},
   {around:[17.2,11.2],size:[1.7,.9]},
   {talk:'Rose',lines:["The grass is Boppy color!"]},
-  {talk:'Grace',lines:["It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it."]},
+  {talk:'Grace',lines:["It's grey, Rose. And it's just that one spot. And that orange cube has a dragonfly in it."]},
   {talk:'Rose',lines:["He's stuck! Tata, get him out!"]},
   {talk:'Tom',lines:["Yes. Right away. Everybody give the dragonfly some room."]},
   ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {sfx:'bonk'}, {wait:.3},
   {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},   // Deedee bends down and picks something out of the grass with a tissue
   {talk:'Grace',lines:["Deedee, what's that?"]},
   {talk:'Deedee',lines:["A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it."]},
-  {talk:'Grace',lines:["Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil."]},
+  {talk:'Grace',lines:["It's a clue! I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it."]},
   {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.8},   // a huge splash from across the pond; everyone turns
   {toast:'Goal: the splash came from across the pond. Follow it.',time:4.5}
 ];
@@ -376,11 +376,11 @@ SCENES.ch1AfterBoss=[
   {call:()=>{ setFlag('ch1-crown',false); sfx.splat(); sfx.thud(); }},   // the fish jumps and the pan flies off its head
   {prop:'muffinpan',kind:'muffinpan',set:{map:'hollow',x:16.5,y:7.5,empty:true,z:0}},
   {propTo:'muffinpan',field:'x',to:14.5,time:.7,zField:'z',arc:1.6}, {sfx:'bonk'},
-  {talk:'The Big One',lines:["GLUB! HA! You got me! I see everybody. I never saw you!"]},
+  {talk:'The Big One',lines:["HA! HA! You got me! No one ever surprised me like that before!"]},
   {talk:'Tom',lines:["Nobody does. She's gotten me in an empty room."]},
   {propTo:'muffinpan',field:'y',to:11.5,time:1.2}, {sfx:'splat'},   // the fish pushes the pan across the water with its nose
   {call:()=>sfx.pickup()},
-  {talk:'The Big One',lines:["Take the pan. The sneaky one gets this. It's the only thing I've got."]},
+  {talk:'The Big One',lines:["Take this coin. The sneaky one can have it. It's the only thing I've got."]},
   {ch1Reveal:'coin'},
   {if:()=>!bag.includes('dragonflycoin'),then:[{give:'dragonflycoin'}],else:[]},
   {talk:'Rose',lines:["Thank you, fish! There's a bug on my money!"]},
@@ -408,9 +408,9 @@ SCENES.ch1End=()=>[
   {talk:'Boppy',lines:["Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look."]},
   {talk:'Rose',lines:["Under Lamby! Nobody looks under Lamby!"]},
   {talk:'Boppy',lines:["Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?"]},
-  {talk:'Grace',lines:["The fish ate them, Boppy. The last three."]},
+  {talk:'Grace',lines:["The fish ate them, Boppy."]},
   {talk:'Boppy',lines:["The fish gets THREE?"]},
-  {talk:'Deedee',lines:["Twelve more. Forty minutes. The first one's still yours."]},   // Deedee sets the empty pan on the counter and takes the flour down
+  {talk:'Deedee',lines:["Give me an hour and we'll have twelve more."]},   // Deedee sets the empty pan on the counter and takes the flour down
   {talk:'Tom',lines:["Alright, time for me to head back to LA. Let's head to Sal's!"]},
   {toast:"Goal: it's Sunday. Head out the front door. Cab 7 is waiting at the Square.",time:5}
 ];
@@ -419,8 +419,8 @@ SCENES.ch1End=()=>[
 SCENES.ch1Job=[
   {flag:'ch1-job'},
   {talk:'Grace',lines:["Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me."]},
-  {talk:'Tom',lines:["I have a job. Yes. Does the job come with a pencil?"]},
-  {talk:'Grace',lines:["That's my second best one. Don't lose it."]},   // she thinks, then takes a pencil from behind her ear
+  {talk:'Tom',lines:["On it. Um, can I borrow a pencil?"]},
+  {talk:'Grace',lines:["Okay, that's my second best one. Don't lose it."]},   // she thinks, then takes a pencil from behind her ear
   {call:()=>sfx.pickup()},
   {talk:'Rose',lines:["One more ride, Tata! To the cab!"]},
   {toast:'Goal: Cab 7, at the Square. Talk to Sal.',time:4}

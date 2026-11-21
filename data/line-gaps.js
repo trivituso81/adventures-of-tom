@@ -18,7 +18,7 @@ const LINE_GAPS={
 "Grace|Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.": "beat",
 "Grace|Rose licked a muffin.": "beat",
 "Grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.": "snap",
-"Grace|The fish ate them, Boppy. The last three.": "beat",
+"Grace|The fish ate them, Boppy.": "beat",
 "Mudling|No. Ours now.": "snap",
 "Rose|AHHH! DEEDEE!": "snap",
 "Rose|Aunt Ellie, did you miss Tata?": "beat",

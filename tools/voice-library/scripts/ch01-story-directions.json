@@ -378,7 +378,7 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.",
+   "text": "It's grey, Rose. And it's just that one spot. And that orange cube has a dragonfly in it.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[correcting, patient, quick] It's grey, Rose. [suspicious] And it's just that one spot... [curious, dumbfounded, quick] AND that orange cube has a [emphasized]dragonfly in it.",
    "takeId": "tmwpjlxpbwnul"
@@ -444,7 +444,7 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.",
+   "text": "It's a clue! I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[exclaiming] It's a clue! [decisive] I'm starting a new list. [analytical, listing] Burnt bulb... Grey grass... Orange cube with a dragonfly in it.",
    "takeId": "tmwpjsci4ro0m"
@@ -532,7 +532,7 @@
   {
    "voice": "bigone",
    "speaker": "The Big One",
-   "text": "GLUB! HA! You got me! I see everybody. I never saw you!",
+   "text": "HA! HA! You got me! No one ever surprised me like that before!",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[startled, then roaring with laughter] HA! [admitting] You [emphasized]GOT me! [amazed] No one ever surprised me like that before!",
    "takeId": "tmwpjwyeynjfd"
@@ -547,7 +547,7 @@
   {
    "voice": "bigone",
    "speaker": "The Big One",
-   "text": "Take the pan. The sneaky one gets this. It's the only thing I've got.",
+   "text": "Take this coin. The sneaky one can have it. It's the only thing I've got.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[huge, gentle] Take this coin. [conceding]The [emphasized]sneaky-one can have it. [plain, defeated] It's the only thing I've got.",
    "takeId": "tmwpk194d986q"
@@ -644,7 +644,7 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "The fish ate them, Boppy. The last three.",
+   "text": "The fish ate them, Boppy.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[flat] The fish ate them, Boppy.",
    "takeId": "tmwpk7q4hiv8a"
@@ -660,7 +660,7 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Twelve more. Forty minutes. The first one's still yours.",
+   "text": "Give me an hour and we'll have twelve more.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[warm Long Island accent, bragging] Give me an hour and we'll have 12 more.",
    "takeId": "tmwpk9nt8vwd8"
@@ -683,7 +683,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "I have a job. Yes. Does the job come with a pencil?",
+   "text": "On it. Um, can I borrow a pencil?",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[fast, serious] On it. [fast, hopeful] Um, can I borrow a pencil?",
    "takeId": "tmwpkdw1canvy"
@@ -691,7 +691,7 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "That's my second best one. Don't lose it.",
+   "text": "Okay, that's my second best one. Don't lose it.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[reluctant, sideways] That's my second best one. [firm] Don't LOSE it."
   },

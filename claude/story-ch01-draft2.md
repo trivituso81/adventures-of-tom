@@ -90,7 +90,7 @@ Idea: Rose asks the mud nicely, and can't believe that saying please didn't work
 Idea: Rose wants the dragonfly rescued. Tom takes the job seriously and loses to something the size of a plum, while Grace runs the investigation.
 [Beside Boppy's folding chair, a patch of grass the size of a hand is flat grey. On it sits an orange cube the size of a plum. A dragonfly is frozen inside it. One side of the cube has a small round dent.]
 - Rose: The grass is Boppy color!
-- Grace: It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+- Grace: It's grey, Rose. And it's just that one spot. And that orange cube has a dragonfly in it.
 - Rose: He's stuck! Tata, get him out!
 - Tom: Yes. Right away. Everybody give the dragonfly some room.
 [Tom takes the cube in both hands and pulls. It does not move. He plants his feet and pulls again. Nothing.]
@@ -101,7 +101,7 @@ Idea: Rose wants the dragonfly rescued. Tom takes the job seriously and loses to
 [Deedee bends down and picks something out of the grass with a tissue.]
 - Grace: Deedee, what's that?
 - Deedee: A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.
-- Grace: Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
+- Grace: It's a clue! I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it.
 - Tom: Why pencil?
 - Grace: Because I don't know what any of it means yet.
 [A huge splash from across the pond. Everyone turns.]
@@ -122,10 +122,10 @@ Idea: For twenty years Boppy has been underselling this fish. And the fish has b
 [The fish sulks in the shallows, still wearing the pan. Rose tiptoes through the reeds behind it.]
 - Rose: BOO!
 [The fish jumps. The pan flies off its head and lands on the bank. Then the fish laughs so hard the whole pond shakes.]
-- The Big One: GLUB! HA! You got me! I see everybody. I never saw you!
+- The Big One: HA! HA! You got me! No one ever surprised me like that before!
 - Tom: Nobody does. She's gotten me in an empty room.
 [The fish pushes the pan across the water with its nose. Then it works a gold coin out of its lip and holds it out to Rose. A dragonfly is stamped on the coin.]
-- The Big One: Take the pan. The sneaky one gets this. It's the only thing I've got.
+- The Big One: Take this coin. The sneaky one can have it. It's the only thing I've got.
 - Rose: Thank you, fish! There's a bug on my money!
 - The Big One: The man in the folding chair. Will he be back?
 - Grace: That's Boppy. He's here every single day.
@@ -145,19 +145,19 @@ Idea: Boppy is finally proved right about his fish, and he still wants to know w
 - Boppy: Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 - Rose: Under Lamby! Nobody looks under Lamby!
 - Boppy: Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
-- Grace: The fish ate them, Boppy. The last three.
+- Grace: The fish ate them, Boppy.
 - Boppy: The fish gets THREE?
 [Deedee sets the empty pan on the counter and takes the flour down from the shelf.]
-- Deedee: Twelve more. Forty minutes. The first one's still yours.
+- Deedee: Give me an hour and we'll have twelve more.
 - Boppy: Girls, you heard that. Forty minutes. Somebody watch the clock.
 
 ## Scene 8. Sunday
 Idea: Grace gives Tom a job so he stays on the case from California. Rose makes him take the long way to the cab, and he does.
 [The front door. Tom has his bag. Cab 7 waits at the Square.]
 - Grace: Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
-- Tom: I have a job. Yes. Does the job come with a pencil?
+- Tom: On it. Um, can I borrow a pencil?
 [Grace thinks about it. Then she takes a pencil from behind her ear and hands it over.]
-- Grace: That's my second best one. Don't lose it.
+- Grace: Okay, that's my second best one. Don't lose it.
 - Tom: Second best. It's going in the pocket with the zipper.
 [Rose pulls on his sleeve.]
 - Rose: One more ride, Tata! To the cab! Go the LONG way!
@@ -260,7 +260,7 @@ Scene 7
 - Boppy: [certain, chatty] Safest place there is. [plain, a rule] Gold is for keeping, Cozy Rosie. [conspiring] You put that where nobody's going to LOOK.
 - Rose: [instant, certain] Under Lamby! [stating a fact] NOBODY looks under Lamby!
 - Boppy: [pleased] Good girl. [turning to business] Now. Your grandmother promised me the first muffin. [looking around] Who's got my muffin?
-- Grace: [plain, reporting] The fish ate them, Boppy. The last three.
+- Grace: [plain, reporting] The fish ate them, Boppy.
 - Boppy: [hurt, baffled, louder than before] [punchline] The FISH gets THREE?
 - Deedee: [brisk, not looking up] Twelve more. Forty minutes. [quieter, plain] The first one's still yours.
 - Boppy: [gleeful, showman] Girls, you heard that. FORTY minutes. Somebody watch the clock.

@@ -59,12 +59,12 @@ chapter	where	speaker	listen	why	text
 1	ch1Mudling	Deedee	listen		There. Good as new. Try not to do that again.
 1	ch1Mudling	Deedee	listen		Then it has three of my muffins and my pan. Keep walking.
 1	ch1Spot	Rose	think	everyone looks at the grey patch	The grass is Boppy color!
-1	ch1Spot	Grace	think	examining the patch and the cube	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+1	ch1Spot	Grace	think	examining the patch and the cube	It's grey, Rose. And it's just that one spot. And that orange cube has a dragonfly in it.
 1	ch1Spot	Rose	listen		He's stuck! Tata, get him out!
 1	ch1Spot	Tom	listen		Yes. Right away. Everybody give the dragonfly some room.
 1	ch1Spot	Grace	think	Grace asks about the bulb: everyone looks at it	Deedee, what's that?
 1	ch1Spot	Deedee	think	the flashbulb clue (report c5no scenario)	A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.
-1	ch1Spot	Grace	think	Grace lists the clues	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
+1	ch1Spot	Grace	think	Grace lists the clues	It's a clue! I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it.
 1	ch1Pond	Tom	none	Tom yelps at the boss	GAH! Grace, I'm holding your hand. That's for me, not for you.
 1	ch1Pond	Grace	none	first sight of the Big One	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
 1	ch1Pond	Deedee	listen		For once in his life he rounded down.
@@ -75,9 +75,9 @@ chapter	where	speaker	listen	why	text
 1	ch1Pond	Deedee	listen		I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
 1	ch1Pond	Deedee	listen		Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
 1	ch1AfterBoss	Rose	none	BOO: surprise	BOO!
-1	ch1AfterBoss	The Big One	listen		GLUB! HA! You got me! I see everybody. I never saw you!
+1	ch1AfterBoss	The Big One	listen		HA! HA! You got me! No one ever surprised me like that before!
 1	ch1AfterBoss	Tom	listen		Nobody does. She's gotten me in an empty room.
-1	ch1AfterBoss	The Big One	listen		Take the pan. The sneaky one gets this. It's the only thing I've got.
+1	ch1AfterBoss	The Big One	listen		Take this coin. The sneaky one can have it. It's the only thing I've got.
 1	ch1AfterBoss	Rose	listen		Thank you, fish! There's a bug on my money!
 1	ch1AfterBoss	The Big One	think	the fish asks about Boppy	The man in the folding chair. Will he be back?
 1	ch1AfterBoss	Grace	listen		That's Boppy. He's here every single day.
@@ -89,10 +89,10 @@ chapter	where	speaker	listen	why	text
 1	ch1End	Boppy	listen		Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 1	ch1End	Rose	listen		Under Lamby! Nobody looks under Lamby!
 1	ch1End	Boppy	listen		Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
-1	ch1End	Grace	listen		The fish ate them, Boppy. The last three.
+1	ch1End	Grace	listen		The fish ate them, Boppy.
 1	ch1End	Boppy	listen		The fish gets THREE?
-1	ch1End	Deedee	listen		Twelve more. Forty minutes. The first one's still yours.
+1	ch1End	Deedee	listen		Give me an hour and we'll have twelve more.
 1	ch1Job	Grace	listen		Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
-1	ch1Job	Tom	listen		I have a job. Yes. Does the job come with a pencil?
-1	ch1Job	Grace	listen		That's my second best one. Don't lose it.
+1	ch1Job	Tom	listen		On it. Um, can I borrow a pencil?
+1	ch1Job	Grace	listen		Okay, that's my second best one. Don't lose it.
 1	ch1Sunday	TNB	none	a phone text: nobody is speaking aloud	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.
