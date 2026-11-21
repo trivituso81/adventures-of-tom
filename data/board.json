@@ -19062,11 +19062,30 @@
     {
      "d": "2026-11-20",
      "t": "Claude (fix-gatelayer-pics): Tom's note filed here was about the Hollow wrapper pictures (he had rejected all four a minute before, \"way way too big\"). Fixed there: one trail of nine small wrappers placed by script, no generator; see card t-hollowtrail-play. The gate pictures on this card were never generated, so its ask is unchanged."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 6 pictures (about $0.30).",
+     "at": "2026-11-21T02:32:18.550Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
+   },
+   "gen": {
+    "want": true,
+    "at": "2026-11-21T02:32:18Z",
+    "ids": [
+     "prop-gate-row-amyhouse",
+     "prop-gate-row-amyhouse-open",
+     "prop-gate-town-school-open",
+     "prop-gate-jpark-barn-open",
+     "prop-gate-blvd-studio-open",
+     "prop-gate-backlot-stage7-open"
+    ],
+    "est": 0.3,
+    "mode": "review"
    }
   },
   {
