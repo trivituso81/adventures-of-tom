@@ -617,6 +617,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | mudling-heist-prompt.md | Mudling pie heist: 16-frame sheet prompt (2026-10-30) | 2026-10-30 |
 | music-library.md | Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6) | 2026-11-02 |
 | music-scripts.json | { | 2026-11-21 |
+| night-plan.md | Night jobs: work that runs while Tom sleeps (plan of 2026-11-21) | 2026-11-21 |
 | nine-scoops-part2-status.md | Nine Scoops, the 80-minute version (built 2026-10-27, live in game v320, version id 1793109577-fc29) | 2026-10-27 |
 | nine-scoops-verify-status.md | Nine Scoops monster art verify (v319, 2026-10-27) | 2026-10-27 |
 | npc-art-audit-11-09.md | NPC hero art: audit, prompt fix, and the no-credit head fix (2026-11-09, main at 134e5f7; CHANGES "npcaudit1", | 2026-11-09 |

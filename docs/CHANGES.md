@@ -1,3 +1,16 @@
+## board-night (2026-11-21): board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)
+
+Tom (11:00): "I feel more could be done with automated tasks that you and i design together to get work done overnight." Tom (11:09): "i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it". Design: `claude/night-plan.md` (new; index rebuilt). Board change and that plan only; no page, tool or game file changed, and nothing is scheduled yet.
+| Card | Starts | Model, effort |
+|---|---|---|
+| c-nightshift, Night shift: queued cards start by themselves overnight | START now | Sonnet 5.5, medium |
+| c-nighttests, Night test run: every test, every night, on GitHub | START now | Sonnet 5.5, medium |
+| c-nightclean, Nightly cleanup: files, notes and the working agreement | START once c-nightshift ships | Sonnet 5.5, medium |
+| c-nightqa, Night QA: the test browser plays your check cards | START once c-nightclean ships | Sonnet 5.5, medium |
+| c-nightgreen, Fix the 13 tests that already fail | Copy prompt once c-nighttests ships | Sonnet 5.5, high |
+| c-nightrefactor, Nightly refactoring, one small piece a night | Copy prompt once c-nightgreen ships and 7 nights pass with no failing test | Sonnet 5.5, high |
+- Checked: `python3 tools/board_check.py` ok; the board page opened locally in portrait shows both Up next cards under Start next with START and Sonnet 5.5, medium.
+
 ## buildpill1 (2026-11-21): the build name on the Builds screen is a status-colored pill
 
 Card c-buildpill1. Tom (11-21): "in the builds screen, the build name must be more prominent. put it in a pill same style as publishing building etc with the color coding corresponding to that status."

@@ -26680,6 +26680,213 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "c-nightshift",
+   "title": "Night shift: queued cards start by themselves overnight",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Tap START. It builds the part every other night job needs: between 11 pm and 3 am the board starts one queued card at a time on Sonnet 5.5 medium (5 a night at most), runs the standing nightly cards first, and writes one card for you each morning, Last night, saying what ran, what shipped and what needs you. It adds a Night shift ON or OFF switch to the board page. Nothing starts at night until this ships.",
+   "blocks": [
+    "c-nightclean"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the night shift into the board job: the night window and cap, standing nightly cards, the Last night card for Tom, and the ON or OFF switch on the board page.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/night-plan.md section 5, the board tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 5), then card c-nightshift in data/board.json with its history. Your first push is the commit board: start c-nightshift. Build section 5 exactly as written, steps 1 to 7: the `night` object in data/board.json, rule R14 in tools/board_sync.py with its cases in tools/board_sync_test.py, standing cards (`nightly: true`, builds named with the tag, a hyphen and the month and day), the card t-lastnight written by tools/night/lastnight.py, the Night shift chip and the standing card lines in board.html, and the section \"Night runs\" in CLAUDE.md taken from section 4 of the plan. Change no rule of the plan without writing why on the card. Nothing may start at night that section 4 forbids: test each row of that table. Run python3 tools/board_sync_test.py, python3 tools/board_check.py and python3 tools/board_test.py /tmp/board, look at the board page in portrait and landscape, then push build nightshift as CLAUDE.md says. In the closing lines tell Tom that the Project copy of claude/handoff-rules.md needs the paragraph you added to the repo copy, and quote it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightshift",
+   "after": "nothing for Tom: c-nightclean"
+  },
+  {
+   "id": "c-nighttests",
+   "title": "Night test run: every test, every night, on GitHub",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Tap START. It builds a job on GitHub's machines (no Claude credits, free for a public repo) that runs every test of the game each night at about 3:20 am and compares the result with the night before. A test that newly fails becomes a Claude fix card with the output and the commits to suspect. Today no job runs the tests and 13 fail on main with nobody assigned.",
+   "blocks": [
+    "c-nightgreen"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the night test run: a list of every test, a runner, the GitHub job on a nightly clock, results on a branch of their own, and a fix card for each test that newly fails.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/night-plan.md section 6, a test with made-up rows catches mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 6), then card c-nighttests in data/board.json with its history. Your first push is the commit board: start c-nighttests. Build section 6 exactly as written, steps 1 to 7: tools/night/tests.json seeded from the Tests section and the \"Pre-existing test failures on main\" line of claude/next.md plus a listing of every test script under tools/, tools/night/manifest_check.py called from tools/smoke.py, tools/night/run_tests.py, .github/workflows/night-tests.yml (cron 23 11 * * *, at most 6 groups, no paid secret in the job), tools/night/report.py writing to the orphan branch night and adding one fix card per test that newly fails. Read claude/next.md Gotchas before choosing how tests are grouped (never two Playwright tests at once on one machine, which tests need a server, ffmpeg or VP9 stand-ins). Run python3 tools/night/night_test.py, then start one real run by hand with gh api repos/trivituso81/adventures-of-tom/actions/workflows/night-tests.yml/dispatches -f ref=main, read its result from branch night, write the measured minutes back into the manifest and rebalance the groups. If a group cannot finish inside its limit after one rebalance, stop and write what you measured on the card. Push build nighttests as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nighttests",
+   "after": "nothing for Tom: c-nightgreen"
+  },
+  {
+   "id": "c-nightclean",
+   "title": "Nightly cleanup: files, notes and the working agreement",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits on the card Night shift: queued cards start by themselves overnight. Then tap START (or leave it: the night shift starts it that night). It builds a nightly report of files nothing uses, a check that no standing rule or sentence of yours is ever dropped from the working agreement, moves Done cards off the board after 2 days instead of 7, and creates the standing card Night cleanup, which runs every night: one of four buckets a night (unused files, old notes, a shorter working agreement, dead tests). Voice clips, approved art sources and your saved files are never touched.",
+   "blocks": [
+    "c-nightqa"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the nightly cleanup: the report of unused files and sizes, the check that protects every standing rule, a faster archive of Done cards, the standing card that runs each night, and the first night's pass.",
+    "before": [
+     "Wait until the card Night shift: queued cards start by themselves overnight is Done (the board moves this card to Up next by itself)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/night-plan.md section 7, smoke and the rules check catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 7), then card c-nightclean in data/board.json with its history. Your first push is the commit board: start c-nightclean. Tom asked for the cleanup every night. Build section 7 exactly as written, steps 1 to 6: tools/night/clean_report.py, tools/night/rules_check.py with tools/night/rules.json taken from main today and called from tools/smoke.py, the 2 day archive in tools/board_archive.py with its two tests, and the standing card c-night-clean (nightly: true, tag nightclean, Sonnet 5.5 medium, theme Project Ops) whose prompt holds the four bucket rotation word for word with the \"Never touched\" row of section 4. Then do tonight's pass yourself as bucket A (at most 40 files, each with zero references by grep, none from the \"Never touched\" row), run smoke, and list what left in docs/CHANGES.md. Before deleting anything under tools/ or art/, show in docs/CHANGES.md the grep that proved it unused. Run python3 tools/night/clean_test.py, the board archive tests, python3 tools/board_check.py and python3 tools/smoke.py. Push build nightclean as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightclean",
+   "waiting_on": "claude",
+   "after": "nothing for Tom: c-nightqa"
+  },
+  {
+   "id": "c-nightqa",
+   "title": "Night QA: the test browser plays your check cards",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits on the card Nightly cleanup: files, notes and the working agreement. Then tap START (or leave it to the night shift). It creates the standing card Night QA: each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge (looks, sound, feel, the real phone) stays yours and says why. 24 of your 35 open cards are play cards today.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the night QA: the standing card that checks Tom's play cards in a test browser, the pass, fail and \"needs your eyes\" results on each card, and the rule that stops sessions handing Tom yes or no checks.",
+    "before": [
+     "Wait until the card Nightly cleanup: files, notes and the working agreement is Done (the board moves this card to Up next by itself)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/night-plan.md section 8, the board tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-nightqa in data/board.json with its history. Your first push is the commit board: start c-nightqa. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Build section 8 exactly as written, steps 1 to 7: the standing card c-night-qa (nightly: true, tag nightqa, Sonnet 5.5 medium, theme Project Ops) whose prompt holds steps 2 to 4 and the limits of step 7 word for word, the `machine` field and the two detail lines in board.html with cases in tools/board_test.py, pictures on branch night under qa/, the Closed for you list in tools/night/lastnight.py, and the rule of step 5 in the board section of CLAUDE.md. Then run the first night yourself on the 4 oldest open play cards and write each result on its card. A check is YES OR NO only when the frames can prove it; when in doubt it is YOURS. Never close a card about how something looks, sounds or feels. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board. Push build nightqa as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightqa",
+   "waiting_on": "claude",
+   "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-nightgreen",
+   "title": "Fix the 13 tests that already fail",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits on the card Night test run: every test, every night, on GitHub. Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. 13 tests fail on main today and are marked as known failures, so the night run does not raise them. This card finds out for each whether the test or the game is wrong and fixes or removes it, so that a night with no failing test means the game works. Nightly refactoring waits on this.",
+   "blocks": [
+    "c-nightrefactor"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Works through the 13 tests that fail on main: for each, finds whether the test or the game is wrong, fixes that, and takes the test off the known failures list.",
+    "before": [
+     "Wait until the card Night test run: every test, every night, on GitHub is Done and one night's run has finished (the card Last night, or branch night, shows it).",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause of each failure is not known; none of the three Fable conditions holds)",
+    "effort": "high (13 bugs with unknown causes and nothing written to follow)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1, 6 and 10) and the line \"Pre-existing test failures on main\" in claude/next.md, then card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Read tests/latest.json on branch night for the output of each test marked known_fail in tools/night/tests.json. Take them one at a time, cheapest first. For each: reproduce it, decide whether the test or the game is wrong, and fix the one that is wrong; a test of something that no longer exists (the old chapter 1 scenes, a retired page) is deleted by the purge rule; then remove its known_fail and push that part with its own build name (nightgreena, nightgreenb and so on) and docs/CHANGES.md entry. A test that needs a paid key or a missing input goes to the skip list with the reason. Apply the stop-loss per test: two tries that miss the same way, write what you found on the card and move to the next. When the conversation has run long, stop, list what is left in the card's next step, and give Tom the prompt for the rest by the five items of claude/handoff-rules.md. The card ships as nightgreen when no row is left with known_fail. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightgreen",
+   "waiting_on": "claude",
+   "after": "nothing for Tom: c-nightrefactor"
+  },
+  {
+   "id": "c-nightrefactor",
+   "title": "Nightly refactoring, one small piece a night",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits on the card Fix the 13 tests that already fail, and on 7 nights in a row with no failing test (the card Last night shows the count). Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. Refactoring means rewriting working code to be tidier without changing what the game does. It is the riskiest night job, so it comes last: the session writes a list of small pieces and creates the standing card Night refactor, which does one piece a night and puts a piece back when a test or a frame differs.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Writes the refactoring plan as a list of small, tested pieces and creates the standing card that does one piece a night.",
+    "before": [
+     "Wait until the card Fix the 13 tests that already fail is Done.",
+     "Wait until the card Last night shows 7 nights in a row with no failing test.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Sonnet 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the list of pieces is not written; each piece is small and changes no design, so none of the three Fable conditions holds)",
+    "effort": "high (a plan across 117 engine files with nothing written to follow)",
+    "text": "Read CLAUDE.md (Hard rules, How to work), docs/ARCHITECTURE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1 to 4 and 10) and the Gotchas of claude/next.md, then card c-nightrefactor in data/board.json with its history. Your first push is the commit board: start c-nightrefactor. First check branch night: if the last 7 files under tests/ do not all show zero failing tests, write a history line containing \"ended without shipping\" with the count, leave the card in Up next and stop. Otherwise write claude/refactor-plan.md: a list of small pieces, smallest risk first (dead functions and constants nothing names, duplicated helpers, a file split along an existing seam), each naming its files, the tests in tools/night/tests.json that cover it, and the scenes or fights whose frames are compared before and after. No piece changes a value, a line of dialogue, a data file, the load order of index.html or anything under demo/. Then create the standing card c-night-refactor (nightly: true, tag nightrefactor, Sonnet 5.5 medium, theme Project Ops) whose prompt says: do the next piece of claude/refactor-plan.md, run its tests and python3 tools/smoke.py, compare its frames, and when anything differs put the piece back the same night and mark it \"needs a person\" in the plan. Do the first piece yourself to prove the method. Push build nightrefactor as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "tag": "nightrefactor",
+   "waiting_on": "claude",
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
