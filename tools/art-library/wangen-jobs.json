@@ -788,7 +788,7 @@
   "pad": 0.8
  },
  "rose-giddyup": {
-  "rev": 4,
+  "rev": 5,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -806,8 +806,8 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.8,
-  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65."
+  "pad": 0.65,
+  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65. wanch4 r5: one change, pad 0.65 (was 0.8), the fix that passed rose-tackle r4 and the casts. Prompt v2 unchanged."
  },
  "deedee-idle": {
   "rev": 1,
