@@ -1,3 +1,9 @@
+## projclean1 (2026-11-21): Project docs move finished: working notes live in the repo's claude/ folder, the Project keeps four mirrors
+
+- Card c-projclean: copied project-instructions.md, status.md and build-plan.md into claude/ word for word; 28 compare-group docs matched the repo copy and were deleted from the Project; story-build.md takes the Project text (one missing period).
+- Stop the regrowth: claude/README.md rewritten (the repo copy is the original), CLAUDE.md rule projclean1, claude/handoff-rules.md 'Where notes go' (also written to the Project mirror, with next.md, which was stale there), claude/INDEX.md written by tools/claude_index.py, and publish.yml leaves claude/ off the game site (no game file loads from it).
+- Project: 1,941,747 bytes on 2026-11-20, 577,628 now; Tom cards t-projinstr2 (two lines of the Project instructions) and t-projdelete (two docs the session was not allowed to delete). Docs only: no game file changed.
+
 ## board-itemart-refs (2026-11-20): board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom
 
 - Ran the fix-itembannerart-pics-3 prompts for the 3 items ($0.18). Results (looked at, fact): Pro Racing Flats came back as plain yellow slippers (the words "almost like a slipper" were taken literally), Tiny Clay Taco as a real taco again (QA 15 of 15 but it is food), Birthday Sash as a ribbon bow again. Fourth miss: stop-loss, no fifth text-only try.

@@ -125,7 +125,7 @@ READ THIS FIRST: THE VOICE TOM WANTS NOW (2026-11-14, chapter 8). Everything low
 - 16:41: "this is like too heartwarming. Everything in here is getting sickeningly heartwarming and like it's meant for like a children's show. Where's the jabs? Where's the humor? Where's the adult like smirking like wink wink nudge nudge"
 - 2026-11-12 and 13, on the whole game: it reads like an elementary school children's TV program. He wants it more sophisticated and a little edgy, really funny and especially witty (a chuckle or a smirk, not an eye-roll), still readable by a child with nothing inappropriate. The funniness comes from the characters' personalities. Humor does not need incompetence or negative family banter.
 - 17:01: when insults and winks were bolted onto the sweet draft, he rejected that too and asked for a blank-slate rewrite.
-- 17:10, on the new opening beat: "Yes! That was great. and it made me laugh, and it was just well written"
+- 17:10, on the new opening beat: "Yes! That was great. and it made me laugh, and it was just well written".
 
 What the new voice is, as rules:
 - Sophisticated, witty, a little edgy. Adults should smirk. A child can still read all of it.

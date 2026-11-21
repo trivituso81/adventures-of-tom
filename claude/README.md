@@ -1,35 +1,15 @@
-# claude/: repo copies of the Project docs (copydocs, 2026-11-20)
+# claude/: Claude's working notes (projclean1, 2026-11-21)
 
-A run started by the board's START button is not in the claude.ai Project, so it cannot read the Project's claude/ docs (card c-starttest, check 1). These are copies of the Project docs that the repo CLAUDE.md or an open board card names, so a START run can read them here.
+This folder is the one home for Claude's working docs for The Adventures of Tom: plans, handoffs, addenda, story drafts, image and video prompts. Index: claude/INDEX.md (written by `python3 tools/claude_index.py`; never edit it by hand). These files are not published on the game site (publish.yml leaves out /claude/).
 
 | Rule | |
 |---|---|
-| Source of truth | The Project doc is still the original. The repo copy is a mirror for START runs. |
-| Keeping them equal | A session that rewrites one of these docs in the Project writes the same text here in the same push (and the reverse). |
-| New card prompts | A card that START may run (`auto: true`) names only files that exist in the repo. If it needs a Project doc that is not here, copy it here in the same push. |
-| Not here | Docs these files point to that no card or CLAUDE.md names (for example claude/battle-architecture.md, claude/battle-kit-ops.md, the battle spec and bestiary, the story drafts). An interactive session reads those from the Project. |
+| Source of truth | The repo copy is the original. Search here (grep the claude/ folder, or read INDEX.md); the Project has no other copies. |
+| The Project keeps four mirrors only | claude/handoff-rules.md, claude/next.md, claude/canon-addendum.md, claude/build-plan.md. A session that changes one writes the same text in both places in the same push. |
+| No new Project docs | A session never creates a new doc in the claude.ai Project. New notes, handoffs and addenda go here, in the repo, in the same push as the work. |
+| Index | Run `python3 tools/claude_index.py` after adding or renaming files here, and commit INDEX.md with them. |
+| START runs | A run started by the board's START button has no Project tools, so everything it needs must be here. Card prompts name repo files only. |
 
-Copied on 2026-11-20 from the Project, word for word:
-animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, battle-scope.md, board2-plan.md, board3-plan.md, clip-gate-plan.md, cutscene-polish-plan.md, handoff-rules.md, next.md, next-addendum-b3s9a.md, next-addendum-board1.md, next-addendum-board2.md, next-addendum-board3.md, pose-editor-plan.md, pose-editor-poseedit2.md, project-cleanup-plan.md, story-next.md.
+History: the Project held about 663 docs (1,941,747 of 2,000,000 bytes, 97% full) on 2026-11-20. Card c-projclean (builds projclean1a to projclean1) moved every doc here at the same path, word for word, and deleted each from the Project only after it was confirmed on origin/main. A few docs that could not be copied safely stay in the Project; the card names them and says why.
 
-Added 2026-11-19 by clipreset (written in both places): clip-reset-plan.md.
-
-Added 2026-11-19 by board-heist (written in both places): heist-redo-plan.md.
-
-Added 2026-11-19 by b3s9b (written in both places): next-addendum-b3s9b.md; battle-build.md updated.
-
-Added 2026-11-19 by board-artgen (written in both places): artgen-plan.md. Also adminhub-plan.md.
-
-Added 2026-11-20 by boardux1 (written in both places): boardux-plan.md (its Built section grows with each phase).
-
-Added 2026-11-20 by ch2build (written in both places): story-ch02-draft4.md, story-engine-capabilities.md, story-build.md, story-line-rules.md, next-addendum-ch1rebuild1.md (copied word for word from the Project so a START run can build chapter 2).
-
-Added 2026-11-20 by ch2build (written in both places): ch02-teardown.md.
-
-Added 2026-11-20 by board-gemcards (written in both places): ch1-gemini-tracker.md (Gemini's chapter 1 test report; the c-gem-* cards name it).
-
-Added 2026-11-20 by idea-implementlisteni (written in both places): next-addendum-listen1.md (install steps for card c-listen1-install).
-
-Added 2026-11-20 by board-lessons1 (written in both places): tom-line-edits.md filled with Tom's chapter 1 edits; story-line-rules.md gains rules 6 to 13 and the red pen pass (card c-ch2lessons names both). Also new: voice-tag-style.md (Tom's tagging habits from 52 retagged chapter 1 lines).
-
-Added 2026-11-20 by wanplan (written in both places): video-battle-plan.md (battle animation by video: why WAN was dropped, API routes, the Grace guard proof plan); canon-addendum.md (copied from the Project with the new section Battle animation, because CLAUDE.md now names it); clip-reset-plan.md marked superseded.
+Public: the repo is public on GitHub, so these notes are readable there (as docs/CANON.md always was). Docs with a street address, phone number, email or money figures stay in the Project.

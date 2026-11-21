@@ -18,6 +18,10 @@ Every time a prompt to paste is given, in any reply, it comes with all five of t
 
 A prompt given without the before-steps or the effort level is an error, even when the prompt is repeated from an earlier reply. A model or effort copied forward from an earlier prompt, instead of worked out from the logic below for this task, is also an error.
 
+## Where notes go (projclean1, 2026-11-21; applies to every session)
+
+The claude.ai Project filled to 97% (card c-projclean), so every working doc now lives in the repo's claude/ folder (index: claude/INDEX.md, rebuilt with `python3 tools/claude_index.py`). The repo copy is the original. The Project keeps only four mirrors: claude/handoff-rules.md, claude/next.md, claude/canon-addendum.md, claude/build-plan.md; a session that changes one writes the same text in both places. Never create a new Project doc: handoffs, addenda, plans and prompts go in the repo's claude/ folder in the same push as the work. To find an old note, grep the claude/ folder or read INDEX.md.
+
 ## The board (Tom, 2026-11-19 10:05; built as board1, made automatic by board2 the same day; applies to every session)
 
 Tom's words: "a kanban style board that i can refer to at anytime ... lanes for you, me, and each external dependencies ... greater clarity on all the different items in flux so i can understand the status and ensure im not a blocker or that a thread dropped". And, 15:31: "I want to create a seamless flow where cards are on the board and moved automatically and there are easy ways for me to initiate next steps with you. The issue is I'm losing track of all the conversations we have going in parallel". It is ADMIN > BOARD in the game (`board.html`), data in `data/board.json` in the repo. Facts, fields and tests: claude/next-addendum-board1.md and claude/next-addendum-board2.md. Design: claude/board-plan.md and claude/board2-plan.md. claude/pending-my-action.md is retired: do not add rows there.
@@ -58,7 +62,7 @@ If a session stops without shipping its card, its last push must do one of two t
 - They sit near the top of the reply, right under the one line saying what was done, under their own heading "Before you paste". Nothing else is in that list.
 - One action per step: the screen, the button, what he should see. Only steps the next session needs. A check that is nice to have (listen to a line, look at a scene) goes in a separate short list marked optional, after the prompt.
 - No scope he has to work out ("tune the next scene"). Say where to start and where the list is ("Show > No clip yet, from the top").
-- The whole reply stays short. Findings, tables of results and reasons go in the Project notes and docs/CHANGES.md, with at most a few lines in chat. If the reply needs scrolling to reach the steps, it is too long.
+- The whole reply stays short. Findings, tables of results and reasons go in the repo's claude/ notes and docs/CHANGES.md, with at most a few lines in chat. If the reply needs scrolling to reach the steps, it is too long.
 
 ## THE MODEL AND EFFORT LOGIC (Tom, 2026-11-18 15:35, corrected 15:37; use it for every prompt)
 

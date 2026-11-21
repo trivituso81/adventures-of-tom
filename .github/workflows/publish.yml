@@ -75,6 +75,7 @@ jobs:
             /*
             !/tools/sprite-bake/src/
             !/art/raw/
+            !/claude/
       - name: Size of the site
         run: du -sh --exclude=.git . && git log --oneline -1
       - uses: actions/upload-pages-artifact@v3

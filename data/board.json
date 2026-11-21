@@ -13332,11 +13332,11 @@
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
-   "next": "Part done 2026-11-21 (second run, builds projclean1a, 1b, 1c, 1d): 444 Project docs copied word for word into claude/, confirmed on origin/main by size, and deleted from the Project. Project size 1,438,803 at the start, 692,867 after the last delete (67 docs left, 4 of them the permanent mirrors handoff-rules.md, next.md, canon-addendum.md, build-plan.md). STILL TO DO: (1) 12 docs never copied because a safeguard stopped the copy agent (not the content): tombo-review.md, adventures_of_tom_ability_revamp_plan.md, adventures-of-tom-ability-revamp.md, kit-recipe.md, CHANGES.md, status.md, ability-revamp-brief.md, voice-baker-scripts.txt, voice-baking.md, battle-design.md, portrait-style.md, project-instructions.md; copy each to the same path in claude/ (claude/CHANGES.md may clash with docs/CHANGES.md only by name, it is a different folder), push, confirm size on origin, delete from the Project. (2) The compare group: the Project docs that are already in claude/ on origin (animation-chapter-plan, animation-tool-test-pack1, battle-build, bestiary-v10.1, story-next, story-ch02-draft4, story-line-rules, story-engine-capabilities, next-addendum-ch1rebuild1, next-addendum-b3s12, next-addendum-b3s13, voice-tag-style, tom-line-edits, keysecrets-plan, video-battle-plan, story-build, pose-editor-plan, pose-editor-poseedit2, the 12 anim-test v2/v3 clip prompts): write the Project text to /tmp, diff it against the repo file; if equal delete from the Project; if different the Project text wins and overwrites the repo file first. Never delete the 4 mirrors. (3) Held in the Project, name on the final card: monster-codex-build.md (a safety classifier stopped the write, do not retry it), 46_tomhouse_geometry.json (only a script rebuild exists, no byte check), battle-background-prompts.txt (171 KB, assembled by script, unverified: re-read it against the repo copy before deleting), comedy-bible.md, story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md (full street address), costs1-handoff.md (personal spending ledger), dialogue-clarity-rewrite.json and next-addendum-michael.md (classifier stops). (4) Steps 6 to 9: tools/claude_index.py for claude/INDEX.md, rewrite claude/README.md, the no-new-Project-docs rule in CLAUDE.md and claude/handoff-rules.md (repo and Project mirror), `!/claude/` in .github/workflows/publish.yml next to `!/art/raw/`, a last project_info sweep, then the final push `## projclean1` and the Tom card t-projinstr2 (ask setup, fyi true). Rules: forks cannot start forks; a fork that copies must be told 'YOUR ONLY TASK ... no git, no deletes, no board changes'; push each part under a NEW build name (next: projclean1e, then 1f ...); rebase with `git rebase --onto origin/main <base>` in the shallow clone. A Sonnet 5.5 copy agent was stopped by safeguards on 2026-11-21 while copying the docs in (1): run the next session on Claude Opus 5.5, effort medium, and copy the docs in (1) first. Runs only in a conversation inside the Project.",
+   "next": "Done 2026-11-21 (third run, builds projclean1f and projclean1). 484 Project docs are now in the repo's claude/ folder at the same path (444 earlier, 12 this run, plus 28 compare-group docs found equal to the repo copy). Project: 1,941,747 bytes and about 663 docs at the start (2026-11-20), 577,628 bytes and 23 docs after this run's last sweep, and it falls further when Tom does card t-projdelete. Rules in force: claude/README.md, CLAUDE.md projclean1, claude/handoff-rules.md 'Where notes go'; claude/INDEX.md is the index (tools/claude_index.py); publish.yml leaves claude/ off the site. Mirrors next.md and handoff-rules.md were stale in the Project and now hold the repo text; build-plan.md is now also in the repo. Still in the Project, with reasons: adventures-of-tom-ability-revamp.md and adventures_of_tom_ability_revamp_plan.md (copied and confirmed on GitHub; the permission check refused the delete, so Tom deletes them: card t-projdelete); project-instructions.md and status.md (copied and pushed in projclean1; deleted after this push if the permission check allows, otherwise add them to t-projdelete); battle-build.md, bestiary-v10.1.md, story-build.md (the repo copies were only spot-checked against the Project, not byte for byte; story-build.md had one missing period, fixed in the repo); monster-codex-build.md and next-addendum-michael.md and dialogue-clarity-rewrite.json (safety classifier stopped the copy), 46_tomhouse_geometry.json (no byte check), battle-background-prompts.txt (unverified script copy), comedy-bible.md, story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md (held by the earlier runs), bernadette-rewrite.md (street address) and costs1-handoff.md (personal spending), plus the four mirrors.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
-   "after": "nothing for Tom: end",
+   "changed": "2026-11-21",
+   "after": "t-projinstr2",
    "prompt": {
     "what": "Moves every Project doc except four into the repo's claude/ folder, deletes each from the Project only after it is confirmed on GitHub, and adds the rules that stop the Project filling up again.",
     "before": [
@@ -13462,6 +13462,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as projclean1f: Project docs moved into the repo: the last 10 large docs copied into claude/ (ability revamp plans, battle design, old changes and status notes)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Third run on Opus 5.5: the last 12 docs copied (forks), 28 compare-group docs found equal and deleted from the Project, rules, index and publish change shipped as projclean1. Two deletes refused by the permission check: card t-projdelete."
     }
    ],
    "chat": {
@@ -22986,6 +22990,44 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "t-projinstr2",
+   "title": "Replace two lines in this Project's instructions",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "fyi": true,
+   "next": "In claude.ai, open the Little Elsewhere Project, then its instructions. 1) In section 2, replace the sentence 'Copies and working notes are in this Project under claude/ (build-plan.md, canon-addendum.md, status.md, next.md).' with: 'Working notes live in the repo under claude/ (index: claude/INDEX.md); the Project keeps only handoff-rules.md, next.md, canon-addendum.md and build-plan.md, mirrored in both places; never create a new Project doc.' 2) In the STOP-LOSS RULE, replace 'check the Project docs' with 'check the repo claude/ folder'. Save. Nothing else changes.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by projclean1 (card c-projclean)."
+    }
+   ]
+  },
+  {
+   "id": "t-projdelete",
+   "title": "Delete two copied docs from the Project",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "fyi": true,
+   "next": "In claude.ai, open the Little Elsewhere Project's files and delete claude/adventures-of-tom-ability-revamp.md and claude/adventures_of_tom_ability_revamp_plan.md (about 450 KB together). Both are safely in the repo's claude/ folder, the same size to the byte; the delete was refused from inside the session, so it needs your tap. If project-instructions.md and status.md are still in the list, delete them too: they are in the repo as well.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by projclean1 (card c-projclean)."
+    }
+   ]
   }
  ],
  "sessions": [
