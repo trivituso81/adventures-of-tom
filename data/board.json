@@ -26720,6 +26720,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom said yes in the planning chat (11:32), so Claude set START for him.",
+     "at": "2026-11-21T19:33:23.000Z"
     }
    ],
    "prompt": {
@@ -26732,7 +26737,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 5), then card c-nightshift in data/board.json with its history. Your first push is the commit board: start c-nightshift. Build section 5 exactly as written, steps 1 to 7: the `night` object in data/board.json, rule R14 in tools/board_sync.py with its cases in tools/board_sync_test.py, standing cards (`nightly: true`, builds named with the tag, a hyphen and the month and day), the card t-lastnight written by tools/night/lastnight.py, the Night shift chip and the standing card lines in board.html, and the section \"Night runs\" in CLAUDE.md taken from section 4 of the plan. Change no rule of the plan without writing why on the card. Nothing may start at night that section 4 forbids: test each row of that table. Run python3 tools/board_sync_test.py, python3 tools/board_check.py and python3 tools/board_test.py /tmp/board, look at the board page in portrait and landscape, then push build nightshift as CLAUDE.md says. In the closing lines tell Tom that the Project copy of claude/handoff-rules.md needs the paragraph you added to the repo copy, and quote it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightshift",
-   "after": "nothing for Tom: c-nightclean"
+   "after": "nothing for Tom: c-nightclean",
+   "start": true
   },
   {
    "id": "c-nighttests",
@@ -26754,6 +26760,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom said yes in the planning chat (11:32), so Claude set START for him.",
+     "at": "2026-11-21T19:33:23.000Z"
     }
    ],
    "prompt": {
@@ -26766,7 +26777,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 6), then card c-nighttests in data/board.json with its history. Your first push is the commit board: start c-nighttests. Build section 6 exactly as written, steps 1 to 7: tools/night/tests.json seeded from the Tests section and the \"Pre-existing test failures on main\" line of claude/next.md plus a listing of every test script under tools/, tools/night/manifest_check.py called from tools/smoke.py, tools/night/run_tests.py, .github/workflows/night-tests.yml (cron 23 11 * * *, at most 6 groups, no paid secret in the job), tools/night/report.py writing to the orphan branch night and adding one fix card per test that newly fails. Read claude/next.md Gotchas before choosing how tests are grouped (never two Playwright tests at once on one machine, which tests need a server, ffmpeg or VP9 stand-ins). Run python3 tools/night/night_test.py, then start one real run by hand with gh api repos/trivituso81/adventures-of-tom/actions/workflows/night-tests.yml/dispatches -f ref=main, read its result from branch night, write the measured minutes back into the manifest and rebalance the groups. If a group cannot finish inside its limit after one rebalance, stop and write what you measured on the card. Push build nighttests as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nighttests",
-   "after": "nothing for Tom: c-nightgreen"
+   "after": "nothing for Tom: c-nightgreen",
+   "start": true
   },
   {
    "id": "c-nightclean",
