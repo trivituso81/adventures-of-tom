@@ -1,3 +1,7 @@
+## anim-deedee-dodge-y4m3a (2026-11-21): Deedee's Dodge: one more Wan video ordered, the same prompt with her figure at 80% of the frame (video being made)
+
+Card c-anim-deedee-dodge-y4m3, part a. Wan job `deedee-dodge` rev 4: prompt `wan-deedee-dodge-v3.txt` word for word, one change `pad: 0.8` (the change that kept her spread hands inside the frame on her victory). The video and the bake follow in build anim-deedee-dodge-y4m3.
+
 ## anim-tom-loungepass-ding (2026-11-21): a short ding plays on the sparkle of Tom's Lounge Pass Flex
 
 Card c-anim-tom-loungepass-ding (Tom: "a little like ding sound with like a sparkle"). The video is untouched. New `data/b3-sfx.js` (`B3_SFX_NOTES.ding`, three short bell notes); `engine/audio.js` `sfx.ding` plays it; the move row in `data/b3-kit-tom.js` has `anim.sound={at:9,sfx:'ding'}` (clip picture index 9 = baked picture 10, 600 ms in); `engine/b3-play.js` fires it when a clip move starts (timed from the clip's own `ms`); the Battle Guide player (`battle-guide.html`, `playNotes`, `soundOf`) plays the same notes when that picture shows. Any other move can use `anim.sound` the same way.
