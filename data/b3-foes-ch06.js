@@ -51,7 +51,7 @@ B3_FOES.acorncache={id:'acorncache',name:'Acorn Cache',ch:6,role:'helper',row:'b
 // Chairman Cheeks, the chapter 6 boss. Executive Monocle: he starts with +20% Crit Rate and +20% Atk (3 turns, a buff the party can strip or steal).
 // Stash for Winter is two acts with one name: every 3 rounds, when no cache stands, he calls one into the Back row; on his 2nd turn after a call
 // he eats it (15% HP back, Winter Hoard +25% Atk and Def for 2 turns). The Big Stash is the below-50% wind-up.
-B3_FOES.chairman={id:'chairman',name:'Chairman Cheeks',ch:6,role:'boss',row:'front',hp:660,hp4:880,atk:65,def:37,spd:106,pips:6,
+B3_FOES.chairman={id:'chairman',name:'Chairman Cheeks',ch:6,role:'boss',row:'front',hp:1130,hp4:1500,atk:65,def:37,spd:106,pips:6,
   peeves:['drench','sizzle'],resists:['racket'],start:['executive_monocle'],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'filibuster',name:'Filibuster',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'status',id:'fatigue',to:'target'}]},

@@ -450,3 +450,7 @@ Three approved clips exist and play only in battle 2's Battle Lab clip fights (`
 | Frame copies | `paintedCanvas` keeps a full-frame canvas copy of each drawn frame, capped at 24 million pixels in all (`PAINTED_PX_CAP`); one clip frame is about 160 thousand pixels, so about 4 clips fill the cap and older copies are remade when drawn again. |
 | A monster whose idle is a clip | Its hurt and attack pictures are still the painted frames, so the look switches for a moment (seen in battle 2's Lab). Either hold the clip's current picture with the engine's shake and flash, or give that monster an attack clip. Not decided. |
 
+
+## What stage 14 holds (balance pass, build `b3s14`)
+
+Data only. HP of eight bosses raised (before/after in `docs/CHANGES.md` "b3s14"); plain-player rounds (`node tools/b3-sim.js <fight> 100`): Big One 5.78, Big Shake 5.61, Old Iron-Gill 5.64, Director's Cut 5.71, Red Pen 5.81, Chairman Cheeks 6.32, Unread 5.12, Old Ironbelly 5.07, Mirrorball 5.92, Last Call 5.8, Brain Freeze 5.95. Normal fights and Elites unchanged (0.7 to 5.7 rounds). Open: re-measure with Vibes at Rank 2 and 5 (`--rank=5`).

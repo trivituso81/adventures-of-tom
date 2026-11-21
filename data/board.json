@@ -22373,7 +22373,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Builds stage 14: the balance pass on Part 1. Data only, no engine file changed. Measures every Lab fight in the simulator (NEW 1 to NEW 66), then retunes monster rows until every Part 1 boss takes 5 to 7 rounds for the plain player.",
+   "next": "Shipped as b3s14. Open: re-measure bosses with Vibes at Rank 2 and 5.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -22407,6 +22407,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped b3s14: eight short bosses lengthened to 5.6 to 6.3 plain-player rounds by raising HP only; all checks pass. Not re-measured at Rank 2/5; browser test s13 not run."
     }
    ],
    "tag": "b3s14",

@@ -35,7 +35,7 @@ B3_FOES.snag={id:'snag',name:'Snag',ch:3,role:'elite',row:'front',hp:279,atk:38,
     {id:'hook_catch',name:'Hook Catch',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],effects:[{op:'status',id:'hooked',to:'target'}]},
     {id:'undertow',name:'Undertow',flavor:['drench'],power:1.5,recovery:120,hits:'one',tags:['ground_sweep','charge_up'],effects:[{op:'status',id:'drenched',to:'target'},{op:'push',n:20,to:'target'}]}
   ]};
-B3_FOES.irongill={id:'irongill',name:'Old Iron-Gill',ch:3,role:'boss',row:'front',hp:650,hp3:490,atk:41,def:25,spd:100,pips:6,
+B3_FOES.irongill={id:'irongill',name:'Old Iron-Gill',ch:3,role:'boss',row:'front',hp:900,hp3:680,atk:41,def:25,spd:100,pips:6,
   peeves:['clobber','razzle'],resists:[],start:[],mechanics:[],drop:null,noRun:true,surfaces:true,
   acts:[
     {id:'pond_spit',name:'Pond Spit',flavor:['drench'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'status',id:'drenched',to:'target'},{op:'status',id:'slow',to:'target'}]},

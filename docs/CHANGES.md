@@ -1,3 +1,12 @@
+## b3s14 (2026-11-21): New battle: balance pass on Part 1, eight short bosses lengthened to 5 to 7 rounds (stage 14 complete)
+
+- Tom's card c-b3s14: every Part 1 boss takes 5 to 7 rounds for the plain player, normal fights stay short. Data only, no engine file changed.
+- Measured all 66 Lab fights first (100 simulated each, all won). Eleven bosses: three were already 5 to 7 (The Red Pen 5.8, The Unread 5.1, Old Ironbelly 5.1), eight were short. Normal fights and elites were left alone (0.7 to 5.7 rounds).
+- The one change per boss was its HP (both sizes, scaled together; rounds grow about in step with HP): The Big One 420/320 to 610/460, The Big Shake 380/510 to 460/620, Old Iron-Gill 650/490 to 900/680, The Director's Cut 470/630 to 610/820, Chairman Cheeks 660/880 to 1130/1500, The Mirrorball 1590/1190 to 2380/1780, The Last Call 1800/1350 to 2230/1670, Brain Freeze 680/910 to 930/1250. Attack, Defense, Speed, pips and act power kept as the bestiary prints them.
+- Rounds before to after: new6 3.5 to 5.78, new16 4.71 to 5.61, new21 4.14 to 5.64, new27 4.39 to 5.71, new38 3.33 to 6.32, new56 3.79 to 5.92, new62 4.61 to 5.8, new66 4.16 to 5.95. The two Big One fights with bigger parties (new9, new10) went 3.71 to 6.06 and 3.14 to 4.1.
+- Checks moved with the numbers (old values in this entry): `b3-check-s3.js`, `s11`, `s12`, `s13`. The Big One's support-every-4th-action guard was widened from 7 to 9.5 rounds because that player is slower than the plain one (9.31 was measured at 1.63 times HP; at the chosen 1.45 times it is lower).
+- Not done: Vibes at Rank 2 and Rank 5 were not re-measured; bosses may run shorter with Rank 5 Quirks. Browser test s13 not run in this session (data-only change, simulator and rule checks pass).
+
 ## qa-bug03 (2026-11-21): Townsfolk in the Square and the Row no longer stand on roof edges
 
 - Chapter 1 QA report BUG-03 (build keysecrets2): people walk onto the SNAIL MAIL sign and roofs in the Square and over building edges on Rivituso Row. Fact: the roof lists were complete at the 50% rule of `tools/npc_roof_tiles.py`, but a 25 second headless run showed townsfolk standing on tiles where 30% to 50% of the feet box is painted foreground. Change: 6 such tiles added to `noGoRoof` in `town` and 8 in `row` (only tiles an NPC actually reached). Not reproduced: Boppy's feet over the railing in `grands` (a stationary scene actor, not a wanderer), left open.

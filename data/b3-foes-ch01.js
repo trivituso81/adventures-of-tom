@@ -57,7 +57,7 @@ B3_FOES.log={id:'log',name:'Log Lump',ch:1,role:'elite',row:'front',hp:166,atk:2
 // The Big One, the chapter 1 boss. Big Glare is the wind-up of Swamp Chomp: it lands now, Marks its target, and the bite comes on
 // its next turn (Tom's Suite Door Slide can take the bite, Grace's Crunchy Sugar-Cube Pop or a Break cancels it).
 // Below half HP it puts the Muffin-Tin Crown back on once, and winds up Muddy Belly-Flop every 3rd turn.
-B3_FOES.bigone={id:'bigone',name:'The Big One',ch:1,role:'boss',row:'front',hp:420,hp3:320,atk:28,def:17,spd:96,pips:6,
+B3_FOES.bigone={id:'bigone',name:'The Big One',ch:1,role:'boss',row:'front',hp:610,hp3:460,atk:28,def:17,spd:96,pips:6,
   peeves:['razzle','racket'],resists:[],start:['muffin_crown'],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'big_glare',name:'Big Glare',flavor:['racket'],power:.8,recovery:80,hits:'one',aim:'back',tags:['projectile','charge_up'],then:'swamp_chomp',anim:{kind:'clip',clip:'bigone_glare',at:.55},effects:[{op:'mark'}]},

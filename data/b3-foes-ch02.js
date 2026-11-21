@@ -42,7 +42,7 @@ B3_FOES.tarblob={id:'tarblob',name:'Tar Pit Blob',ch:2,role:'elite',row:'front',
   ]};
 // The Big Shake, the chapter 2 boss. Above half HP it winds up Aftershock. Below half HP it takes Faultline Guard (Guard Stance and
 // Mend 5%, 2 turns) whenever it is not wearing one, and winds up Big Rumble. Panic Boil! drops the stance; a buff strip or a steal takes the Mend.
-B3_FOES.bigshake={id:'bigshake',name:'The Big Shake',ch:2,role:'boss',row:'front',hp:380,hp4:510,atk:33,def:21,spd:98,pips:6,
+B3_FOES.bigshake={id:'bigshake',name:'The Big Shake',ch:2,role:'boss',row:'front',hp:460,hp4:620,atk:33,def:21,spd:98,pips:6,
   peeves:['drench','razzle'],resists:[],start:[],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'smog_puff',name:'Smog Puff',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'status',id:'fatigue',to:'target'}]},

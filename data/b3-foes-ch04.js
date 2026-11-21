@@ -48,7 +48,7 @@ B3_FOES.cuecrab={id:'cuecrab',name:'Cue Card Crab',ch:4,role:'elite',row:'front'
 // 25 ticks forward and gives every monster +15% Speed (2 turns, a buff the party can strip or steal). CUT! is a charged megaphone
 // blast: Stun (1t) and a 40-tick push. It misses a Blinded Director (the Blind is checked when it fires), a Break or an interrupt
 // cancels it, and Tom's Suite Door Slide takes it: Tom takes the blast and the stun and the push do not land (`stopByIntercept`).
-B3_FOES.directorscut={id:'directorscut',name:'The Director’s Cut',ch:4,role:'boss',row:'front',hp:470,hp4:630,atk:48,def:29,spd:102,pips:6,
+B3_FOES.directorscut={id:'directorscut',name:'The Director’s Cut',ch:4,role:'boss',row:'front',hp:610,hp4:820,atk:48,def:29,spd:102,pips:6,
   peeves:['razzle','sizzle'],resists:['racket'],start:[],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'studio_notes',name:'Studio Notes',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'status',id:'studio_notes',to:'target'}]},

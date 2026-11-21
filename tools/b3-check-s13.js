@@ -126,13 +126,13 @@ module.exports=function(T) {
   const ROWS9=[
     ['velvetrope',9,'swarmer','front',273,63,34,112,0,['clobber','racket'],[]],['stuffedshirt',9,'bruiser','front',483,81,44,102,0,['racket','drench'],['razzle']],
     ['coathanger',9,'bruiser','front',483,81,44,102,0,['clobber','drench'],['sizzle']],['soreloser',9,'hexer','back',357,70,38,112,0,['sizzle','razzle'],['racket']],
-    ['wallflower',9,'elite','front',756,85,53,96,4,['razzle','sizzle'],['clobber']],['mirrorball',9,'boss','front',1590,93,48,109,7,['racket','clobber'],['razzle']]];
+    ['wallflower',9,'elite','front',756,85,53,96,4,['razzle','sizzle'],['clobber']],['mirrorball',9,'boss','front',2380,93,48,109,7,['racket','clobber'],['razzle']]];
   for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS9) { const D=FOES[id];
     ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
     ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
-  ok(FOES.mirrorball.hp3===1190&&FOES.mirrorball.noRun,'The Mirrorball prints 1,190 for a party of 3 and cannot be run from');
+  ok(FOES.mirrorball.hp3===1780&&FOES.mirrorball.noRun,'The Mirrorball prints 1,780 for a party of 3 and cannot be run from');
   { const hpOf=party=>NF({party,level:22,seed:3,foes:[{id:'mirrorball',row:'front'}]}).foes[0].maxHp;
-    ok(hpOf(P9)===1590&&hpOf(P9.slice(0,3))===1190,'The Mirrorball: 1,590 for 4, 1,190 for 3'); }
+    ok(hpOf(P9)===2380&&hpOf(P9.slice(0,3))===1780,'The Mirrorball: 2,380 for 4, 1,780 for 3'); }
   const FM9={velvetrope:9,stuffedshirt:9,coathanger:9,soreloser:9,wallflower:9,mirrorball:27};
   for(const k of Object.keys(FM9)) ok(FORM[k]&&FORM[k].ch===9&&FORM[k].vp===FM9[k],'formation '+k+' is chapter 9 and pays '+FM9[k]+' VP');
   ok(J(FORM.soreloser.foes)===J([{id:'stuffedshirt',row:'front'},{id:'soreloser',row:'back'}])&&J(FORM.wallflower.foes)===J([{id:'wallflower',row:'front'},{id:'soreloser',row:'back'}]),'the two formations with The Sore Loser match section 4');
@@ -209,13 +209,13 @@ module.exports=function(T) {
   const ROWS10=[
     ['carryon',10,'swarmer','front',319,71,37,113,0,['razzle','drench'],[]],['jetlag',10,'hexer','back',417,80,41,113,0,['clobber','sizzle'],['racket']],
     ['longline',10,'bruiser','front',564,92,48,103,0,['clobber','razzle'],['racket']],['unclaimed',10,'bruiser','front',564,92,48,103,0,['drench','sizzle'],['clobber']],
-    ['armresthog',10,'elite','front',882,97,58,97,4,['racket','razzle'],['sizzle']],['lastcall',10,'boss','front',1800,105,53,110,7,['drench','sizzle'],['racket']]];
+    ['armresthog',10,'elite','front',882,97,58,97,4,['racket','razzle'],['sizzle']],['lastcall',10,'boss','front',2230,105,53,110,7,['drench','sizzle'],['racket']]];
   for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS10) { const D=FOES[id];
     ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
     ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
-  ok(FOES.lastcall.hp3===1350&&FOES.lastcall.noRun,'The Last Call prints 1,350 for a party of 3 and cannot be run from');
+  ok(FOES.lastcall.hp3===1670&&FOES.lastcall.noRun,'The Last Call prints 1,670 for a party of 3 and cannot be run from');
   { const hpOf=party=>NF({party,level:25,seed:3,foes:[{id:'lastcall',row:'front'}]}).foes[0].maxHp;
-    ok(hpOf(P10)===1800&&hpOf(P10.slice(0,3))===1350,'The Last Call: 1,800 for 4, 1,350 for 3'); }
+    ok(hpOf(P10)===2230&&hpOf(P10.slice(0,3))===1670,'The Last Call: 2,230 for 4, 1,670 for 3'); }
   const FM10={carryon:8,jetlag:8,longline:8,unclaimed:8,armresthog:8,lastcall:26};
   for(const k of Object.keys(FM10)) ok(FORM[k]&&FORM[k].ch===10&&FORM[k].vp===FM10[k],'formation '+k+' is chapter 10 and pays '+FM10[k]+' VP');
   ok(J(FORM.jetlag.foes)===J([{id:'carryon',row:'front'},{id:'jetlag',row:'back'}])&&J(FORM.unclaimed.foes)===J([{id:'unclaimed',row:'front'},{id:'carryon',row:'front'}]),'two of the formations match section 4');
@@ -281,13 +281,13 @@ module.exports=function(T) {
   const mkB=(foes,o)=>NF(Object.assign({party:PB,level:12,seed:11,foes},o||{}));
   const ROWSB=[
     ['gremlin','swarmer','front',148,37,22,107,0,['sizzle','drench'],[]],['slushslug','elite','front',410,51,35,92,4,['sizzle','razzle'],['drench']],
-    ['conehead','hexer','back',194,42,25,107,0,['sizzle','racket'],[]],['brainfreeze','boss','front',680,55,32,104,6,['sizzle','razzle'],['drench']]];
+    ['conehead','hexer','back',194,42,25,107,0,['sizzle','racket'],[]],['brainfreeze','boss','front',930,55,32,104,6,['sizzle','razzle'],['drench']]];
   for(const [id,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWSB) { const D=FOES[id];
     ok(D&&D.ch==='bonus'&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
     ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
-  ok(FOES.brainfreeze.hp4===910&&FOES.brainfreeze.noRun,'Brain Freeze prints 910 for a party of 4 and cannot be run from');
+  ok(FOES.brainfreeze.hp4===1250&&FOES.brainfreeze.noRun,'Brain Freeze prints 1250 for a party of 4 and cannot be run from');
   { const hpOf=party=>NF({party,level:12,seed:3,foes:[{id:'brainfreeze',row:'front'}]}).foes[0].maxHp;
-    ok(hpOf(PB)===680&&hpOf([...PB,'deedee'])===910,'Brain Freeze: 680 for 3, 910 for 4'); }
+    ok(hpOf(PB)===930&&hpOf([...PB,'deedee'])===1250,'Brain Freeze: 930 for 3, 1250 for 4'); }
   const FMB={gremlin:10,conehead:10,slushslug:10,brainfreeze:30};
   for(const k of Object.keys(FMB)) ok(FORM[k]&&FORM[k].ch==='bonus'&&FORM[k].vp===FMB[k],'formation '+k+' is the bonus chapter and pays '+FMB[k]+' VP');
   ok(J(FORM.gremlin.foes.map(f=>f.id))===J(['gremlin','gremlin','gremlin'])&&J(FORM.conehead.foes)===J([{id:'gremlin',row:'front'},{id:'conehead',row:'back'},{id:'conehead',row:'back'}]),'the three-monster formations match section 4');

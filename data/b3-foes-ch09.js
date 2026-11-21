@@ -42,7 +42,7 @@ B3_FOES.wallflower={id:'wallflower',name:'The Wallflower',ch:9,role:'elite',row:
       effects:[{op:'status',id:'blind',n:1,to:'target'},{op:'status',id:'wall_hug',to:'self'}]},
     {id:'petal_storm',name:'Petal Storm',flavor:['razzle'],power:1.2,recovery:120,hits:'all',tags:['projectile','aoe','charge_up'],effects:[{op:'status',id:'dazzled',n:2,to:'target'}]}
   ]};
-B3_FOES.mirrorball={id:'mirrorball',name:'The Mirrorball',ch:9,role:'boss',row:'front',hp:1590,hp3:1190,atk:93,def:48,spd:109,pips:7,
+B3_FOES.mirrorball={id:'mirrorball',name:'The Mirrorball',ch:9,role:'boss',row:'front',hp:2380,hp3:1780,atk:93,def:48,spd:109,pips:7,
   peeves:['racket','clobber'],resists:['razzle'],start:['facet_spin'],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'chain_swing',name:'Chain Swing',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee','ground_sweep'],effects:[]},

@@ -17,21 +17,21 @@ module.exports=function(T) {
   const ROWS=[
     ['smoglet',2,'swarmer','front',73,22,14,101,0,['razzle','drench'],[]],['tickets',2,'skirmisher','back',90,27,15,115,0,['sizzle','drench'],[]],
     ['coyote',2,'skirmisher','front',90,27,15,115,0,['racket'],[]],['gridlock',2,'bruiser','front',129,29,19,91,0,['racket','razzle'],[]],
-    ['tarblob',2,'elite','front',202,30,23,86,4,['sizzle','drench'],['clobber']],['bigshake',2,'boss','front',380,33,21,98,6,['drench','razzle'],[]],
+    ['tarblob',2,'elite','front',202,30,23,86,4,['sizzle','drench'],['clobber']],['bigshake',2,'boss','front',460,33,21,98,6,['drench','razzle'],[]],
     ['soggysock',3,'swarmer','front',101,28,18,103,0,['sizzle','razzle'],['drench']],['bobber',3,'skirmisher','front',124,35,19,118,0,['drench','clobber'],[]],
     ['tangle',3,'bruiser','front',178,36,23,93,0,['sizzle','racket'],[]],['snag',3,'elite','front',279,38,28,88,4,['sizzle'],['drench']],
-    ['irongill',3,'boss','front',650,41,25,100,6,['clobber','razzle'],[]],
+    ['irongill',3,'boss','front',900,41,25,100,6,['clobber','razzle'],[]],
     ['extra',4,'swarmer','front',124,32,20,105,0,['racket','razzle'],[]],['boommoth',4,'hexer','back',162,36,23,105,0,['drench','clobber'],['racket']],
     ['clapper',4,'skirmisher','front',152,40,21,120,0,['sizzle','razzle'],[]],['fogwisp',4,'hexer','back',162,36,23,105,0,['sizzle','clobber'],['drench']],
-    ['cuecrab',4,'elite','front',342,44,31,90,4,['drench','racket'],['clobber']],['directorscut',4,'boss','front',470,48,29,102,6,['razzle','sizzle'],['racket']]];
+    ['cuecrab',4,'elite','front',342,44,31,90,4,['drench','racket'],['clobber']],['directorscut',4,'boss','front',610,48,29,102,6,['razzle','sizzle'],['racket']]];
   for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS) { const D=FOES[id];
     ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
     ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
-  ok(FOES.bigshake.hp4===510&&FOES.irongill.hp3===490&&FOES.directorscut.hp4===630,'the three bosses have their other-party HP');
+  ok(FOES.bigshake.hp4===620&&FOES.irongill.hp3===680&&FOES.directorscut.hp4===820,'the three bosses have their other-party HP');
   const hpFor=(party,id)=>NF({party,level:4,seed:3,foes:[{id,row:'front'}]}).foes[0].maxHp;
-  ok(hpFor(['tom','tnb','nara'],'bigshake')===380&&hpFor(['tom','tnb','nara','grace'],'bigshake')===510,'The Big Shake: 380 for 3, 510 for 4');
-  ok(hpFor(['tom','grace','rose','boppy'],'irongill')===650&&hpFor(['tom','grace','rose'],'irongill')===490,'Old Iron-Gill: 650 for 4, 490 for 3');
-  ok(hpFor(['tom','tnb','nara'],'directorscut')===470&&hpFor(['tom','tnb','nara','grace'],'directorscut')===630,'The Director’s Cut: 470 for 3, 630 for 4');
+  ok(hpFor(['tom','tnb','nara'],'bigshake')===460&&hpFor(['tom','tnb','nara','grace'],'bigshake')===620,'The Big Shake: 460 for 3, 620 for 4');
+  ok(hpFor(['tom','grace','rose','boppy'],'irongill')===900&&hpFor(['tom','grace','rose'],'irongill')===680,'Old Iron-Gill: 900 for 4, 680 for 3');
+  ok(hpFor(['tom','tnb','nara'],'directorscut')===610&&hpFor(['tom','tnb','nara','grace'],'directorscut')===820,'The Director’s Cut: 610 for 3, 820 for 4');
   // Formations and VP (bestiary sections 4 and 5)
   const FM={smoglet:[2,10],tickets:[2,10],coyote:[2,10],gridlock:[2,10],tarblob:[2,10],bigshake:[2,30],soggysock:[3,9],bobber:[3,9],tangle:[3,9],snag:[3,9],irongill:[3,27],
     extra:[4,8],boommoth:[4,8],clapper:[4,8],fogwisp:[4,8],cuecrab:[4,8],directorscut:[4,26]};

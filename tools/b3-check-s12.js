@@ -133,12 +133,12 @@ module.exports=function(T) {
     ['acornagent',6,'swarmer','front',185,44,26,109,0,['racket','drench'],[]],['stickysap',6,'bruiser','front',328,57,34,99,0,['sizzle','clobber'],['drench']],
     ['peanutgallery',6,'hexer','back',242,49,29,109,0,['racket','sizzle'],['clobber']],['twigspy',6,'skirmisher','back',228,55,27,125,0,['sizzle','razzle'],['racket']],
     ['cheekstuffer',6,'elite','front',513,60,40,94,4,['drench','racket'],['clobber']],['acorncache',6,'helper','back',150,0,26,109,0,['clobber','sizzle'],[]],
-    ['chairman',6,'boss','front',660,65,37,106,6,['drench','sizzle'],['racket']]];
+    ['chairman',6,'boss','front',1130,65,37,106,6,['drench','sizzle'],['racket']]];
   for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS6) { const D=FOES[id];
     ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists])); }
   ok(FOES.acorncache.acts.length===0,'the Acorn Cache never attacks (no acts)');
-  ok(FOES.chairman.hp4===880&&FOES.chairman.noRun,'Chairman Cheeks prints 880 for a party of 4 and cannot be run from');
-  { const hp6=(party)=>NF({party,level:14,seed:3,foes:[{id:'chairman',row:'front'}]}).foes[0].maxHp; ok(hp6(P6)===660&&hp6([...P6,'grace'])===880,'Chairman Cheeks: 660 for 3, 880 for 4'); }
+  ok(FOES.chairman.hp4===1500&&FOES.chairman.noRun,'Chairman Cheeks prints 1500 for a party of 4 and cannot be run from');
+  { const hp6=(party)=>NF({party,level:14,seed:3,foes:[{id:'chairman',row:'front'}]}).foes[0].maxHp; ok(hp6(P6)===1130&&hp6([...P6,'grace'])===1500,'Chairman Cheeks: 1130 for 3, 1500 for 4'); }
   const FM6={acornagent:[6,6],stickysap:[6,6],peanutgallery:[6,6],twigspy:[6,6],cheekstuffer:[6,6],chairman:[6,30]};
   for(const k of Object.keys(FM6)) ok(FORM[k]&&FORM[k].ch===FM6[k][0]&&FORM[k].vp===FM6[k][1],'formation '+k+' is chapter 6 and pays '+FM6[k][1]+' VP');
   ok(J(FORM.stickysap.foes)===J([{id:'stickysap',row:'front'},{id:'acornagent',row:'front'}])&&J(FORM.cheekstuffer.foes)===J([{id:'cheekstuffer',row:'front'},{id:'peanutgallery',row:'back'}]),'two of the formations match section 4');

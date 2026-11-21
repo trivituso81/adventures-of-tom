@@ -26,7 +26,7 @@ B3_FOES.conehead={id:'conehead',name:'Cone Head',ch:'bonus',role:'hexer',row:'ba
       effects:[{op:'heal',pct:.2,to:'lowestOtherAlly'},{op:'status',id:'scoop_pass',to:'lowestOtherAlly'}]}
   ]};
 // Brain Freeze, the bonus boss. Frosted Lid (Guard Stance plus +15% Def) goes up once below half HP, just before Deep Freeze; Panic Boil! pops it.
-B3_FOES.brainfreeze={id:'brainfreeze',name:'Brain Freeze',ch:'bonus',role:'boss',row:'front',hp:680,hp4:910,atk:55,def:32,spd:104,pips:6,
+B3_FOES.brainfreeze={id:'brainfreeze',name:'Brain Freeze',ch:'bonus',role:'boss',row:'front',hp:930,hp4:1250,atk:55,def:32,spd:104,pips:6,
   peeves:['sizzle','razzle'],resists:['drench'],start:[],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'frost_breath',name:'Frost Breath',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'status',id:'slow',n:2,to:'target'}]},

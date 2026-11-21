@@ -40,7 +40,7 @@ B3_FOES.armresthog={id:'armresthog',name:'The Armrest Hog',ch:10,role:'elite',ro
     {id:'neck_pillow_squeeze',name:'Neck-Pillow Squeeze',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],effects:[]},
     {id:'full_recline',name:'Full Recline',flavor:['clobber'],power:1.25,recovery:120,hits:'all',tags:['ground_sweep','aoe','charge_up'],effects:[{op:'status',id:'fatigue',to:'target'}]}
   ]};
-B3_FOES.lastcall={id:'lastcall',name:'The Last Call',ch:10,role:'boss',row:'front',hp:1800,hp3:1350,atk:105,def:53,spd:110,pips:7,
+B3_FOES.lastcall={id:'lastcall',name:'The Last Call',ch:10,role:'boss',row:'front',hp:2230,hp3:1670,atk:105,def:53,spd:110,pips:7,
   peeves:['drench','sizzle'],resists:['racket'],start:[],mechanics:[],drop:null,noRun:true,
   acts:[
     {id:'delayed',name:'DELAYED',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[{op:'push',n:25,to:'target'}]},
