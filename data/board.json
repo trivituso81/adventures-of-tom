@@ -24425,7 +24425,7 @@
    "title": "Battle Guide: real-fight button and everything planned",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "battleguide2",
    "next": "Built as battleguide2: In a fight on every move and monster attack (opens a Battle Lab fight on the new battle with it used first), the ten third Vibes, 26 Part 2 monsters, What is coming and a Planned filter in Search, all marked PLANNED and read from data/guide-planned.json, which drops each item by itself when the game gains it. Waits on your card Try In a fight and the PLANNED items in the Battle Guide (t-battleguide2-try).",
    "blocks": [],
@@ -24474,9 +24474,14 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as battleguide2. Part 1: no notes (Tom: all good on t-battleguide-try). Part 2: In a fight on every move and attack, game side b3LabFirst, b3FirstTurn and e.force, checked in a real browser for one move and one attack. Part 3 and 4: tools/guide_planned.py writes data/guide-planned.json (10 third Vibes, 26 Part 2 monsters, 10 features, 4 stages, 11 chapters), the page drops each item when the game's data gains it (tested for a Vibe, a monster, a chapter and the BAG rule). Also regenerated the stale data/battle-lab-index.json (27 of 66 fights). Not done: nothing animated was built or judged."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleguide2: the Battle Guide opens a real fight for any move or attack, and shows everything planned but not built, marked PLANNED"
     }
    ],
-   "after": "t-battleguide2-try"
+   "after": "t-battleguide2-try",
+   "done": "2026-11-21"
   },
   {
    "id": "c-costsduoplan",
@@ -30593,6 +30598,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHH1EobcNpvW5xn9Nu",
+   "title": "Battle Guide: real-fight button and everything planned",
+   "first": "2026-11-21T13:02:14-08:00",
+   "last": "2026-11-21T13:48:24-08:00",
+   "tags": [
+    "battleguide2"
+   ],
+   "cards": [
+    "c-battleguide2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T13:02:32-08:00",
@@ -30703,16 +30720,6 @@
    "tags": [],
    "cards": [
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHH1EobcNpvW5xn9Nu",
-   "title": "Battle Guide: real-fight button and everything planned",
-   "first": "2026-11-21T13:02:14-08:00",
-   "last": "2026-11-21T13:02:14-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleguide2"
    ]
   },
   {
@@ -34447,8 +34454,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f3581f12be39be88ebb886d180a5992ebf59120a",
- "synced_at": "2026-11-21T21:44:58+00:00",
+ "synced": "425e5177305d573bd585bdd0ad557368737fa244",
+ "synced_at": "2026-11-21T21:51:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
