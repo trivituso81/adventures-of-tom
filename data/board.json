@@ -13243,7 +13243,7 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -13315,10 +13315,14 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T02:54:41.668Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+    "url": "https://claude.ai/code/cse_01RXeukFawRxemhQq6CzP35C",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
    "rescue": {
@@ -13328,8 +13332,7 @@
     "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
-   "started_at": "2026-11-20T17:43:02+00:00",
-   "start": true
+   "started_at": "2026-11-21T02:56:10+00:00"
   },
   {
    "id": "b-board-projclean",
@@ -19522,7 +19525,7 @@
    "id": "c-takes-ae5d7d",
    "tag": "takes-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -19537,7 +19540,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukHAM936zjWpzVgYRp9",
     "opening": "not started"
    },
    "history": [
@@ -19549,12 +19552,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T02:54:53.285Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-21T02:56:10+00:00"
   },
   {
    "id": "t-itembannerart-pics",
@@ -20098,7 +20105,7 @@
    "id": "c-reports-7",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-184534-ict4. First note: Should go straight from tnb's text to the airport animation",
@@ -20112,7 +20119,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGZNTTnrivTmMf1GZU",
     "opening": "not started"
    },
    "history": [
@@ -20124,12 +20131,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T02:54:46.270Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-21T02:56:10+00:00"
   },
   {
    "id": "c-ch1clips8",
@@ -22948,8 +22959,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "41401fda83f681b598394c813172ec8015bd7d0b",
- "synced_at": "2026-11-21T02:52:07+00:00",
+ "synced": "f2346dbb09db072a506c171a95c3bcdd618c05aa",
+ "synced_at": "2026-11-21T02:56:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
