@@ -26987,7 +26987,7 @@
   {
    "id": "t-buildpill-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -27004,8 +27004,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by build buildpill1 (card c-buildpill1)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:41.198Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-guidestatus",
