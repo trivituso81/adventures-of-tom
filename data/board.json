@@ -25853,7 +25853,7 @@
    "title": "Watch Deedee, Knocked out",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Deedee, play Knocked out, then tap All good or Something is wrong (say what you saw).",
@@ -25874,8 +25874,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-deedee-ko-yes1. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:49:32.477Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-deedee-give-yy1o",
