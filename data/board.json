@@ -22182,6 +22182,46 @@
      "t": "Added by c-itemdef1: your play check of the new item banners. Replaces t-qa-bug02-play."
     }
    ]
+  },
+  {
+   "id": "svc-art-bake",
+   "tag": "svc-art-bake-fix",
+   "service": "art-bake",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "title": "art-bake failed",
+   "next": "The art-bake run failed: finished as failure. A session has to look at the run log and fix it.",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44863659964",
+   "prompt": {
+    "what": "Finds why the art-bake run failed and fixes it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md. The art-bake GitHub Action failed (finished as failure). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44863659964, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "art-bake failed: finished as failure"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Board re-ran the failed job once."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T04:04:06+00:00"
   }
  ],
  "sessions": [
@@ -25295,8 +25335,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "990b2a9e79beaefd744425665f4c9001a290a4f2",
- "synced_at": "2026-11-21T04:02:27+00:00",
+ "synced": "94e9a7fc5c4d6e57a62692d205f1e68f30675428",
+ "synced_at": "2026-11-21T04:04:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
