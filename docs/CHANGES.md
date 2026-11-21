@@ -1,3 +1,7 @@
+## portraits2 (2026-11-21): Portraits baked from your saved crops: rose (made by the portrait-bake Action)
+
+- Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
+
 ## guidegen1 (2026-11-21): the Battle Guide can make a video, show it next to the one in the game, and put it in the game
 
 Card c-guidegen part 3 (plan `claude/guidegen-plan.md`, facts `docs/BATTLE_GUIDE.md` "Making a video from the guide"). Nothing paid was run in this session: every test used a stand-in fal, a stand-in xAI and synthetic videos; the first real generation is Tom's tap.
