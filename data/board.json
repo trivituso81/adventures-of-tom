@@ -27519,7 +27519,7 @@
    "title": "Try the Admin Dashboard on the wide monitor",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "On the MacBook open Chrome at https://trivituso81.github.io/adventures-of-tom/dashboard.html (or ADMIN > Admin Dashboard) and make the window full screen on the wide monitor. Paste the GitHub token once in the Board pane (three dots), click through the four panes, play the game with the keyboard, press Ctrl 1 to 4, switch Layout to Battle, then press All good, or Something is wrong and say which pane and what you saw. Optional last step: install it as its own Chrome app window. Your notes go to the next card, Admin Dashboard: the strip under the game (c-dash2).",
    "steps": [
@@ -27554,9 +27554,15 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Admin Dashboard: the wide page with four panes is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:44:46.909Z"
     }
    ],
-   "first": "Waits on the card Admin Dashboard: the wide page with four panes."
+   "first": "Waits on the card Admin Dashboard: the wide page with four panes.",
+   "done": "2026-11-21"
   },
   {
    "id": "c-dash2",
