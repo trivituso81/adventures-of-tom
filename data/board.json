@@ -30563,6 +30563,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAhcmE8xg",
+   "title": "Night test run: every test, every night, on GitHub",
+   "first": "2026-11-21T19:48:49Z",
+   "last": "2026-11-21T23:53:32Z",
+   "tags": [
+    "nighttests",
+    "nighttestsb"
+   ],
+   "cards": [
+    "c-nighttests"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGzkghj5rCZRHTUQAf",
    "title": "Night cleanup: one bucket of cleanup every night",
    "first": "2026-11-21T23:22:54Z",
@@ -31114,18 +31127,6 @@
     "c-voicepurge221",
     "c-wanch1",
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAhcmE8xg",
-   "title": "Night test run: every test, every night, on GitHub",
-   "first": "2026-11-21T19:48:49Z",
-   "last": "2026-11-21T19:48:49Z",
-   "tags": [
-    "nighttests"
-   ],
-   "cards": [
-    "c-nighttests"
    ]
   },
   {
@@ -35198,8 +35199,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7e3bb7acea25783a61ebcca48a30a5e82ee45368",
- "synced_at": "2026-11-21T23:26:49+00:00",
+ "synced": "0556adf1c3cc215865937ab2db3325512de3ee98",
+ "synced_at": "2026-11-21T23:54:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
