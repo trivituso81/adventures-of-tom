@@ -27313,6 +27313,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Nightly cleanup: files, notes and the working agreement is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T20:59:33.968Z"
     }
    ],
    "prompt": {
@@ -27325,7 +27330,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-nightqa in data/board.json with its history. Your first push is the commit board: start c-nightqa. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Build section 8 exactly as written, steps 1 to 7: the standing card c-night-qa (nightly: true, tag nightqa, Sonnet 5.5 medium, theme Project Ops) whose prompt holds steps 2 to 4 and the limits of step 7 word for word, the `machine` field and the two detail lines in board.html with cases in tools/board_test.py, pictures on branch night under qa/, the Closed for you list in tools/night/lastnight.py, and the rule of step 5 in the board section of CLAUDE.md. Then run the first night yourself on the 4 oldest open play cards and write each result on its card. A check is YES OR NO only when the frames can prove it; when in doubt it is YOURS. Never close a card about how something looks, sounds or feels. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board. Push build nightqa as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightqa",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "start": true
   },
   {
    "id": "c-nightgreen",
