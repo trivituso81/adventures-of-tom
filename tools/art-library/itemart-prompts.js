@@ -75,10 +75,14 @@ const SOLO = new Set(['amy_chm1', 'claytaco', 'g_bsash']);
 // missed again: the flats had a letter logo, stripes and normal soles; the taco was filling in a shell (food, not pottery) and the sash a ribbon
 // with a bow, and QA called both a 3D render. Only these notes change (the redo sheets' notes stay, those sheets are approved), each describing the
 // shape to paint instead of what to avoid, plus one STYLE line for solo pictures (simpler brushwork, for the 3D render call).
+// fix-itembannerart-pics-4 (2026-11-21). Tom: "2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the
+// prompt". The taco passed (QA 15 of 15). One change each, from the QA lines: the flats came back as slippers (no laces, open heel), so "so each
+// shoe looks almost like a slipper" becomes "laced up like a running shoe with a closed heel"; the sash came back as a big crossed bow, so "a big
+// gold bow" becomes "a small gold bow". Everything else is kept word for word.
 const SOLO_NOTE = {
-  amy_chm1: 'A pair of racing flats: low, light running shoes in solid neon yellow, each upper one smooth color with no stripes, marks or patterns, on a flat sole as thin as a sheet of paper, so each shoe looks almost like a slipper. Seen from the side.',
+  amy_chm1: 'A pair of racing flats: low, light running shoes in solid neon yellow, each upper one smooth color with no stripes, marks or patterns, on a flat sole as thin as a sheet of paper, laced up like a running shoe with a closed heel. Seen from the side.',
   claytaco: 'A tiny taco figurine made of glazed pottery, like a little ceramic ornament: one solid piece of fired clay under a hard shiny cream glaze with small brown speckles, the shell and the filling the same smooth glazed clay (the filling is a few rounded bumps glazed green and red), with a silver paperclip stuck into the top. Clearly a clay ornament, not food.',
-  g_bsash: 'A gold sparkly birthday sash: one long, wide band of glittery gold fabric sewn into a big loop like a pageant sash, laid flat so the whole long loop shows, with a big gold bow tied on the band near the bottom of the loop. The long band fills most of the picture; the bow is one part of it.',
+  g_bsash: 'A gold sparkly birthday sash: one long, wide band of glittery gold fabric sewn into a big loop like a pageant sash, laid flat so the whole long loop shows, with a small gold bow tied on the band near the bottom of the loop. The long band fills most of the picture; the bow is one part of it.',
 };
 
 const sheets = [];

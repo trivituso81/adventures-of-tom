@@ -19869,17 +19869,20 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt Sent to Claude as card c-fix-itembannerart-pics-4; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T08:38:04.488Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "fix-itembannerart-pics-4: on Tom's words \"2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt\", Claude changed one phrase in each of the 2 failed notes (flats: \"so each shoe looks almost like a slipper\" became \"laced up like a running shoe with a closed heel\"; sash: \"a big gold bow\" became \"a small gold bow\") and asked for those 2 pictures again (about $0.10). The taco passed and is not made again."
     }
    ],
    "gen": {
-    "want": false,
-    "at": "2026-11-21T05:39:14Z",
+    "want": true,
+    "at": "2026-11-21T08:43:39Z",
     "ids": [
      "prop-item-solo-amy_chm1",
-     "prop-item-solo-claytaco",
      "prop-item-solo-g_bsash"
     ],
-    "est": 0.15,
+    "est": 0.1,
     "mode": "review",
     "run": {
      "state": "done",
