@@ -19438,14 +19438,20 @@
     "opening": "unknown"
    },
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T15:29:40Z",
     "ids": [
      "prop-gate-row-amyhouse",
      "prop-gate-row-amyhouse-open"
     ],
     "est": 0.12,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T15:30:00Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44919461664",
+     "n": 0
+    }
    }
   },
   {
