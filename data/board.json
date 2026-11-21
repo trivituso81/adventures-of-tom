@@ -25314,7 +25314,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Rescue chose START NEXT: the one remaining step is a paid Wan try (pad 0.8, at most $1) that is judged by looking at it, which is Opus work, not a rescue. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25339,7 +25339,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCkMPGRX9c6YtKLA2C",
+    "url": "",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25395,6 +25395,11 @@
     {
      "d": "2026-11-21",
      "t": "START is not set up for this model and effort. Use Copy prompt."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T20:17:29.960Z"
     }
    ],
    "prompt": {
