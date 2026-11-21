@@ -27700,6 +27700,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenk: ch17_test fixed (the test was wrong in two timing spots: a fixed 300 ms wait for the opening flag, and A pressed while the previous scene still played); known_fail removed; minutes 2 to 5 (measured 205 s). 1 row still marked known_fail: ch20_test."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenk: the chapter 17 test waits for the game instead of guessing times, and gets its real time limit"
     }
    ],
    "prompt": {
@@ -28001,7 +28005,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -28027,6 +28031,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T22:04:21.880Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -29331,13 +29339,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFtfHJc1wXT1SeYg7Y",
     "opening": "not started"
    },
    "nightly": true,
@@ -29382,6 +29390,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:08.614Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29397,7 +29409,7 @@
     "date": "2026-11-21",
     "build": "nightclean-1121"
    },
-   "start": true
+   "started_at": "2026-11-21T22:09:22+00:00"
   },
   {
    "id": "c-bigone25",
@@ -29592,13 +29604,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFeT21TqMsLGXYQtUR",
+    "url": "https://claude.ai/code/cse_01RXeukFbFnUQ85w1PAoP34G",
     "opening": "not started"
    },
    "nightly": true,
@@ -29640,6 +29652,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:10.957Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29655,7 +29671,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-21T22:09:22+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -29839,13 +29855,13 @@
    "title": "Optional: add fal and xAI keys for balance reads",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "prog",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
    "next": "Optional, about 10 minutes. Skip it and nothing breaks: ElevenLabs is read by itself, fal and xAI show the last balance recorded less the use logged since. What this does: the daily job can only read your fal and xAI balances with a second, more powerful kind of key (a password that is allowed to see billing, not only to make pictures). PART 1, fal. 1) Open https://fal.ai/dashboard/keys and sign in. 2) Press the Create key button. 3) The form has a Scope choice with two options, API and ADMIN. Pick ADMIN (the one that is allowed to see billing); give it any name, such as costs. 4) Press Create, then copy the long key shown (it is shown once). 5) Open https://github.com/trivituso81/adventures-of-tom/settings/secrets/actions and press New repository secret. 6) Name: FAL_ADMIN_KEY. Secret: paste the key. Press Add secret. PART 2, xAI. 1) Open https://console.x.ai and sign in. 2) In the left menu open Management Keys (if you do not see it, your account may lack permission: skip xAI, fal alone is fine). 3) Create a Management key, copy it. Copy the Team ID shown on the same page. 4) On the same GitHub secrets page add two secrets: Name XAI_MANAGEMENT_KEY (paste the key) and Name XAI_TEAM_ID (paste the Team ID). PART 3. Open https://github.com/trivituso81/adventures-of-tom/actions/workflows/costs-sync.yml, press Run workflow, set dry_run to false, press the green Run workflow button. When it turns green open https://trivituso81.github.io/adventures-of-tom/costs.html#/services: fal and xAI should each say balance read today. If one still says Not read yet, the Needs a look list on the Overview page says why. If a console looks different from these steps, stop and tell Claude on the board what you see; nothing is lost.",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFaY7qYkyAKVVW9VtN",
     "opening": "board"
    },
    "history": [
@@ -29867,6 +29883,10 @@
      "d": "2026-11-21",
      "t": "Claude rewrote the steps in plain words (scope explained, exact buttons and links) after Tom's note: 'choose Admin scope means nothing to me'. Nothing was set up; keys are Tom's to add.",
      "at": "2026-11-21T22:20:00.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "created": "2026-11-21",
@@ -29876,13 +29896,13 @@
    "id": "c-stale-tests",
    "tag": "staletests1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Repair three tests that already failed on main",
    "blocks": [],
    "next": "Repair clipgen_test.py, vision_test.py and the 258-line check in voicegen_test.py, which failed on main before costs2 for data reasons, not code reasons.",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFJKZG2JWaL2pGj5wR",
     "opening": "board"
    },
    "prompt": {
@@ -29908,11 +29928,15 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:24.648Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-21T22:09:22+00:00"
   },
   {
    "id": "svc-voice-gen",
@@ -30056,6 +30080,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFaY7qYkyAKVVW9VtN",
+   "title": "Optional: add fal and xAI keys for balance reads",
+   "first": "2026-11-21T22:08:44Z",
+   "last": "2026-11-21T22:08:44Z",
+   "tags": [],
+   "cards": [
+    "t-costs2keys"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDnzg2ftCCDy78SEfB",
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
@@ -30672,6 +30706,34 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
+   "title": "Take me there: a play card opens the game at its spot",
+   "first": "2026-11-21T14:06:28-08:00",
+   "last": "2026-11-21T14:06:28-08:00",
+   "tags": [],
+   "cards": [
+    "c-dash3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T13:02:32-08:00",
+   "last": "2026-11-21T14:04:19-08:00",
+   "tags": [
+    "nightgreene",
+    "nightgreenf",
+    "nightgreeng",
+    "nightgreenh",
+    "nightgreeni",
+    "nightgreenj",
+    "nightgreenk"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHH1EobcNpvW5xn9Nu",
    "title": "Battle Guide: real-fight button and everything planned",
    "first": "2026-11-21T13:02:14-08:00",
@@ -30681,23 +30743,6 @@
    ],
    "cards": [
     "c-battleguide2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T13:44:52-08:00",
-   "tags": [
-    "nightgreene",
-    "nightgreenf",
-    "nightgreeng",
-    "nightgreenh",
-    "nightgreeni",
-    "nightgreenj"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -34528,8 +34573,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8c9427c10b78c9702839aa1b306e3bc3dbe72c3c",
- "synced_at": "2026-11-21T21:53:40+00:00",
+ "synced": "6fb2b3c9566fb4b94c1fd4b71a685e792d9abbb5",
+ "synced_at": "2026-11-21T22:09:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
