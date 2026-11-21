@@ -29463,31 +29463,6 @@
    "history": [
     {
      "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Night run, bucket B (notes): removed 2 spent handoff notes, folded Grace's head share into docs/CHARACTER_PIPELINE.md. Build nightclean-1121."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Ran as nightclean-1121: the nightly cleanup (notes bucket) removed 2 spent handoff notes and kept the one fact still true"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T21:20:08.394Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
-     "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T22:04:08.614Z"
     },
@@ -29524,6 +29499,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ran: nothing to do (bucket B, no finished notes left; unused tools 1, art 115 reported only)."
     }
    ],
    "prompt": {
