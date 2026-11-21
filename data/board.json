@@ -24008,7 +24008,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24021,6 +24021,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:13:16.297Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24062,7 +24066,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -24075,6 +24079,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:13:42.939Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -24980,6 +24988,30 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+   "title": "Animation note: Grace, Dodge",
+   "first": "2026-11-21T09:15:53-08:00",
+   "last": "2026-11-21T09:17:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-grace-dodge-p7wh",
+    "c-anim-grace-give-q4es",
+    "c-anim-grace-squeeze-qxim",
+    "c-anim-grace-cubepop-tvik"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T09:17:03-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
@@ -24991,19 +25023,6 @@
    ],
    "cards": [
     "c-b3s17"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
-   "title": "Animation note: Grace, Dodge",
-   "first": "2026-11-21T09:15:53-08:00",
-   "last": "2026-11-21T09:15:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-grace-dodge-p7wh",
-    "c-anim-grace-give-q4es",
-    "c-anim-grace-squeeze-qxim",
-    "c-anim-grace-cubepop-tvik"
    ]
   },
   {
@@ -28342,8 +28361,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "4adceb2a50edf5095c7ad5f98fedada6eef25967",
- "synced_at": "2026-11-21T17:16:33+00:00",
+ "synced": "d0922b01d232e2a8a7b04e50522c5972bc652b65",
+ "synced_at": "2026-11-21T17:17:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
