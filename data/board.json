@@ -19364,6 +19364,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"I also want you to observe all of the annotation tagging that I changed... we have a very different style in tagging the voice clips\". His 52 retagged chapter 1 lines were compared with Claude's and written up as claude/voice-tag-style.md; this card now retags chapter 2 by it."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"the tagging itself has to be done in some kind of extreme ... a lot of tags in a row within the same set of brackets dilutes\". claude/voice-tag-style.md now starts with WHY he tags this way (W1 to W8) and a five-step method; this card's retag follows it."
     }
    ],
    "prompt": {

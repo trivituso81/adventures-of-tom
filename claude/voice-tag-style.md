@@ -4,6 +4,29 @@ Source (fact): chapter 1's voice scripts as Claude wrote them (build ch1tags1, 2
 
 This page beats the tag rules in claude/voice-studio.md, the v4 research notes (claude/next-addendum-ch1tags1.md) and the limits in `tools/voice-library/apply-scripts.py` where they differ. Tom's kept takes win over every rule.
 
+## WHY Tom tags this way (Tom, 2026-11-20 18:12, and the data under it). This section beats everything below.
+Tom: "your tagging is too subtle ... you are trying to make the tagging reflect the person's personality, but ... the tagging itself has to be done in some kind of extreme because otherwise it's not picked up in the voice accurately ... a lot of tags in a row within the same set of brackets dilutes ... they start to get mixed together."
+
+The principle: **a tag is a direction to an actor about the sound of the next few words, not a description of the character.** The character lives in the words of the line. The tag only has to move the voice, and the voice only moves when the tag is strong, simple and audible.
+
+| # | Why | What Claude did wrong | Evidence in the 52 lines |
+|---|---|---|---|
+| W1 | **The generator under-delivers, so tag at the extreme.** The take comes out at a fraction of the tag. A mild tag lands near the default read, which sounds like no tag. | Mild, polite words: warm, proud, pleased, curious, careful, gracious, important, sincere, cool, certain, mild interest | Tom's new words: disgusted, outraged, astounded, dumbfounded, accusatory, threatening, not amused, suspicious, very dismissive, very very deadpan |
+| W2 | **Only a sound can be heard.** A tag must name something the voice can do: pace, flatness, volume, pitch, breath, a pause, a laugh, stress, or an obvious emotion. A personality, a job or a thought has no sound, so the model ignores it or guesses. | dignified, honored, charge nurse, small teacher, taking notes in his head, settling into a story, a promise | Tom's new brackets: 52 sound words (quick, flat, deadpan, pause, sigh, under his breath, low, fast, deep voice, emphasized) against Claude's 34 in 99 brackets |
+| W3 | **One idea per bracket.** Several words in one bracket are averaged together, and opposites cancel (warm + formal, mock wounded, cool + elegant, dignified + defending). | Brackets of mixed directions and multi-word phrases: 17 descriptors of 3+ words | 54% of the brackets Tom wrote himself are ONE word. When he uses two or three, they point the same way (flat, deadpan) or the last one is only the pace (quick) |
+| W4 | **Change the sound by placing a new bracket, not by stacking words.** A new bracket at the exact word where the voice should turn. | 1.9 brackets a line, packed with adjectives | 2.4 brackets a line, short, mid-sentence: `[noting] They're for you, [mildly annoyed, quick] so [emphasized] nobody's allowed...` |
+| W5 | **Give the actor an action.** A speech act (informing, accusatory, taunting, conceding, announcing) is a clear thing to do with the voice and comes out stronger than an adjective. | 8 speech acts in 99 brackets | 28 in his 74 new brackets |
+| W6 | **Comedy is fast.** The default read is slow and earnest, which kills a joke. | No pace words | "quick" is his most added word (12) |
+| W7 | **Each bracket resets the voice** (Claude's reading of why he repeats it; not tested), so whatever must hold (accent, TNB's mellow) is repeated in every bracket, even a one-word one. | Accent named 0 times | 61 accent mentions; TNB's "mellow, laid-back, low-key" in every bracket |
+| W8 | **Point at the word.** Caps alone are unreliable and break names; `[emphasized]` right before the word says exactly where the stress goes. Pauses are written, not hoped for. | Caps only, caps on names | 12 `[emphasized]`, `[pause]`, `...`, more ! for energy |
+
+How to tag a line now (do it in this order):
+1. Decide what the listener should HEAR on each beat (faster, flatter, louder, a sigh, a stop, one stressed word). Not who the character is.
+2. Pick ONE strong word per beat, pushed to the extreme (disgusted, not wary; very flat, not level). Add "quick" if it is a joke beat.
+3. Put a new bracket at the exact word where the sound changes. Never two directions in one bracket.
+4. Accented speakers and TNB: repeat the accent or the mellow trio in every bracket.
+5. Read the brackets alone, without the line: if they describe a person rather than a sound, rewrite them.
+
 ## The numbers (52 changed lines, Claude's version against Tom's)
 | Measure | Claude | Tom |
 |---|---|---|
