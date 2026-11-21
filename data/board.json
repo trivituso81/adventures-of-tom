@@ -24504,7 +24504,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Dodge",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Make",
+   "next": "Made in build anim-rose-dodge-v89r. Made as a Wan 3.0 video (the family route): a duck straight down with her hands on her head, written in the pattern of her approved clips. Second try passed (one change: the picture shrunk to 80% so her hands stay in the frame). Two known small faults are named in docs/CHANGES.md. Booked $1.00. Next: your card Watch Rose, Dodge.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24543,6 +24543,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-rose-dodge-v89r. Made as a Wan 3.0 video (the family route): a duck straight down with her hands on her head, written in the pattern of her approved clips. Second try passed (one change: the picture shrunk to 80% so her hands stay in the frame). Two known small faults are named in docs/CHANGES.md. Booked $1.00."
     }
    ],
    "prompt": {
@@ -24553,7 +24557,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-dodge-v89r in data/board.json with its history. Your first push is the commit board: start c-anim-rose-dodge-v89r.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Make\n\nThe animation: Rose, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-dodge-v89r. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-anim-rose-dodge-v89r"
   },
   {
    "id": "c-anim-rose-victory-vqjc",
@@ -25741,6 +25746,35 @@
     "url": "",
     "opening": "unknown"
    }
+  },
+  {
+   "id": "t-anim-rose-dodge-v89r",
+   "title": "Watch Rose, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play Dodge, then tap All good or Something is wrong (say what you saw).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Rose.",
+    "Play Dodge (about 1.5 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-rose-dodge-v89r",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
+    "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-rose-dodge-v89r. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
+    }
+   ]
   }
  ],
  "sessions": [
