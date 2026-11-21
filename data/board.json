@@ -26775,7 +26775,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFpP5APDFFAHcmE8xg",
+    "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAHcmE8xg",
     "opening": "not started"
    },
    "history": [
@@ -26791,6 +26791,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -27274,9 +27278,42 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "b-guidestatus1-restore",
+   "tag": "guidestatus1-restore",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Voice Clips",
+   "title": "housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake",
+   "next": "Done: housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidestatus1-restore. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAHcmE8xg",
+   "title": "Night test run: every test, every night, on GitHub",
+   "first": "2026-11-21T19:37:23Z",
+   "last": "2026-11-21T19:37:23Z",
+   "tags": [],
+   "cards": [
+    "c-nighttests"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEp7AN4783dFHhPrzP",
    "title": "Animation note: Rose, Getting hit",
@@ -27402,6 +27439,30 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T11:35:49-08:00",
+   "tags": [
+    "guidegen1a",
+    "guidegen1b",
+    "guide",
+    "guidegen1",
+    "guidestatus1",
+    "guidestatus1-restore",
+    "fix-anim-grace-squeeze-qxim",
+    "board-night",
+    "b3s18b"
+   ],
+   "cards": [
+    "c-guidegen",
+    "c-guidestatus",
+    "b-board-night",
+    "c-b3s18",
+    "c-fix-anim-grace-squeeze-qxim"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "first": "2026-11-21T10:57:09-08:00",
@@ -27469,23 +27530,6 @@
    ],
    "cards": [
     "c-guideprompts"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
-   "title": "Battle Guide: make and remake battle videos from the page",
-   "first": "2026-11-21T09:33:57-08:00",
-   "last": "2026-11-21T11:30:44-08:00",
-   "tags": [
-    "guidegen1a",
-    "guidegen1b",
-    "guide",
-    "guidegen1",
-    "guidestatus1"
-   ],
-   "cards": [
-    "c-guidegen",
-    "c-guidestatus"
    ]
   },
   {
@@ -31000,8 +31044,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "de07b6d02f91b9d56080d9170b4eda7038eb4d3e",
- "synced_at": "2026-11-21T19:35:17+00:00",
+ "synced": "61f11c6d7a469175d732f91b2e8a7fadacbfb132",
+ "synced_at": "2026-11-21T19:37:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
