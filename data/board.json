@@ -29810,8 +29810,8 @@
    "waiting_on": "claude",
    "theme": "Tools",
    "title": "voice-gen failed",
-   "next": "The voice-gen run failed: finished as cancelled. A session has to look at the run log and fix it.",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44951739685",
+   "next": "The voice-gen run failed: finished as failure. A session has to look at the run log and fix it.",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44951549236",
    "prompt": {
     "what": "Finds why the voice-gen run failed and fixes it.",
     "before": [
@@ -29819,7 +29819,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
     "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md. The voice-gen GitHub Action failed (finished as cancelled). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44951739685, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read claude/handoff-rules.md. The voice-gen GitHub Action failed (finished as failure). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44951549236, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
     "url": "",
@@ -29828,11 +29828,7 @@
    "history": [
     {
      "d": "2026-11-21",
-     "t": "voice-gen failed: finished as cancelled"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Re-run failed to start: GitHub answered 403"
+     "t": "voice-gen failed: finished as failure"
     }
    ],
    "blocks": [],
