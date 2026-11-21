@@ -21287,7 +21287,7 @@
    "id": "c-itemdef1",
    "tag": "itemdef1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Item banners as JRPG item definitions",
    "next": "In progress: every ITEM GAINED banner becomes a JRPG item definition with four parts: name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks).",
@@ -21295,13 +21295,17 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
     "opening": "\"Board: this is card “Item banners as JRPG item definitions” (lane Claude, theme Game Shell)\""
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Tom: \"change every item banner in The Adventures of Tom so it reads like a JRPG item definition with four parts: item name and type, a short description of the item, its effect in battle, and its effect in story (key items, gifts, unlocks).\" The card was not on the board yet, so this session added it. It also covers the layout half of c-qa-bug02 (tiny icon, empty circle, prompt on the border), which the new banner layout replaces."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -21318,7 +21322,7 @@
    "id": "c-fix-hollowtrail-play-2",
    "tag": "fix-hollowtrail-play-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -21340,7 +21344,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGPY7Epbtv1rgdkxsq",
     "opening": "Something is wrong on t-hollowtrail-play"
    },
    "history": [
@@ -21358,6 +21362,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-21T03:19:06.407Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -21371,7 +21379,7 @@
    },
    "after": "t-hollowtrail-play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T03:19:26+00:00"
   }
  ],
  "sessions": [
@@ -21739,6 +21747,16 @@
    ],
    "cards": [
     "c-builds3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
+   "title": "Item banners as JRPG item definitions",
+   "first": "2026-11-20T19:18:42-08:00",
+   "last": "2026-11-20T19:18:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-itemdef1"
    ]
   },
   {
@@ -24216,8 +24234,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "465d39e66c69f2d97691958989d15cbb6a40bd4f",
- "synced_at": "2026-11-21T03:16:04+00:00",
+ "synced": "72a10a45d8c9e84537915ec266ff9b3088e33f4e",
+ "synced_at": "2026-11-21T03:19:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
