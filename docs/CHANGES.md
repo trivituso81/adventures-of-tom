@@ -1,3 +1,12 @@
+## b3s13c (2026-11-20): New battle: the chapter 10 airport monsters and The Last Call join the Battle Lab (stage 13, part c of four)
+
+- Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This part is chapter 10, built from `claude/bestiary-v11.md`: Carry-On, Jet Lag, The Long Line, The Unclaimed, The Armrest Hog (Elite) and the boss The Last Call in `data/b3-foes-ch10.js`, with six formations (8 VP each, 26 for the boss).
+- Lab: NEW 57 to NEW 62, one fight for every formation and the boss (Tom, Grace, Rose and Amy at level 25; the terminal backdrop).
+- The Last Call as data: Boarding Group Nine is the wind-up of GATE CLOSED, the same Mark pattern as The Big One's Big Glare and Swamp Chomp (`then` and `after`, `hits:'marked'`). It Marks a Back-row ally and gives the monster +20% Attack for 1 turn (the bestiary says only "It gains"; I read "it" as the monster, as with the Director's Spotlight Lock), then slams the Marked ally with Skill Lock for 2 turns on the next turn. A shield (Suite Door Slide) soaks the slam and the lock; an interrupt or a Break cancels it and drops the Mark. FINAL BOARDING only below 50% HP. 1,800 HP for 4, 1,350 for 3.
+- No new engine seams. Four new statuses (bin_drop, middle_seat, both_armrests, boarding_group).
+- No picture or clip work (every act uses `anim:{kind:'default'}`), no voice lines added.
+- Tests: `node tools/b3-sim.js check` (`tools/b3-check-s13.js`, chapter 10 section; FAILS: []); the six new Lab fights each 100 simulated, all won, 0 errors (The Last Call 4.6 rounds, the Armrest Hog 2.9, normal fights 1.9 to 2.9); `python3 tools/b3_test.py s13c` (portrait and landscape). The bonus chapter follows as the final b3s13.
+
 ## b3s13b (2026-11-20): New battle: the chapter 9 ballroom monsters and The Mirrorball join the Battle Lab (stage 13, part b of four)
 
 - Tom (11-20): "build stage 13 (bestiary chapters 8 to 10 and the bonus chapter with their bosses) of the new battle system", in parts. This part is chapter 9, built from `claude/bestiary-v11.md`: Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower (Elite) and the boss The Mirrorball in `data/b3-foes-ch09.js`, with six formations (9 VP each, 27 for the boss).

@@ -1,4 +1,5 @@
 // tools/b3-check-s13.js — Battle 3 rule tests for stage 13: the bestiary for chapters 8 to 10 and the bonus chapter.
+// Stage 13c: chapter 10, the airport terminal: Carry-On, Jet Lag, The Long Line, The Unclaimed, The Armrest Hog (Elite), The Last Call (boss), Lab fights new57 to new62.
 // Stage 13b: chapter 9, the Rose Dome Ballroom: Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower (Elite), The Mirrorball (boss), Lab fights new51 to new56.
 // Stage 13a: chapter 8, Division Nine Car Barn: Lukewarm, Leftover, Wet Blanket, The Draft, The Picky Eater (Elite), Old Ironbelly (boss),
 // Lab fights new45 to new50. New piece: the strip kind `shieldOrBuff` (Pilot-Light Gust). Old Ironbelly's heat against TNB's clay shields.
@@ -201,4 +202,78 @@ module.exports=function(T) {
     F.acting=e; turn(F,e,2); ok(e.charge&&e.charge.id==='last_dance','it is announced one turn ahead'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3);
     ok(F.party.every((p,i)=>p.hp<hp0[i]),'then it hits all four'); });
   noCrit(()=>{ const {F,e}=mb(); e.charge=e.D.acts.find(a=>a.id==='spotlight_solo'); loseCharge(F,e); ok(!e.charge,'an interrupt cancels Spotlight Solo'); });
+
+  // ====================== Chapter 10: the airport terminal (stage 13c) ======================
+  const P10=['tom','grace','rose','amy'];
+  const mk10=(foes,o)=>NF(Object.assign({party:P10,level:25,seed:11,foes},o||{}));
+  const ROWS10=[
+    ['carryon',10,'swarmer','front',319,71,37,113,0,['razzle','drench'],[]],['jetlag',10,'hexer','back',417,80,41,113,0,['clobber','sizzle'],['racket']],
+    ['longline',10,'bruiser','front',564,92,48,103,0,['clobber','razzle'],['racket']],['unclaimed',10,'bruiser','front',564,92,48,103,0,['drench','sizzle'],['clobber']],
+    ['armresthog',10,'elite','front',882,97,58,97,4,['racket','razzle'],['sizzle']],['lastcall',10,'boss','front',1800,105,53,110,7,['drench','sizzle'],['racket']]];
+  for(const [id,ch,role,row,hp,atk,def,spd,pips,peeves,resists] of ROWS10) { const D=FOES[id];
+    ok(D&&D.ch===ch&&D.role===role&&D.row===row&&D.hp===hp&&D.atk===atk&&D.def===def&&D.spd===spd&&D.pips===pips&&J(D.peeves)===J(peeves)&&J(D.resists)===J(resists),id+' has the bestiary row: '+J(D&&[D.ch,D.role,D.row,D.hp,D.atk,D.def,D.spd,D.pips,D.peeves,D.resists]));
+    ok(D.acts.filter(a=>!a.after&&a.hits!=='attacker').length>=3,id+' has its acts'); }
+  ok(FOES.lastcall.hp3===1350&&FOES.lastcall.noRun,'The Last Call prints 1,350 for a party of 3 and cannot be run from');
+  { const hpOf=party=>NF({party,level:25,seed:3,foes:[{id:'lastcall',row:'front'}]}).foes[0].maxHp;
+    ok(hpOf(P10)===1800&&hpOf(P10.slice(0,3))===1350,'The Last Call: 1,800 for 4, 1,350 for 3'); }
+  const FM10={carryon:8,jetlag:8,longline:8,unclaimed:8,armresthog:8,lastcall:26};
+  for(const k of Object.keys(FM10)) ok(FORM[k]&&FORM[k].ch===10&&FORM[k].vp===FM10[k],'formation '+k+' is chapter 10 and pays '+FM10[k]+' VP');
+  ok(J(FORM.jetlag.foes)===J([{id:'carryon',row:'front'},{id:'jetlag',row:'back'}])&&J(FORM.unclaimed.foes)===J([{id:'unclaimed',row:'front'},{id:'carryon',row:'front'}]),'two of the formations match section 4');
+  { const labs=LAB.filter(l=>/^new(5[7-9]|6[0-2])$/.test(l.id));
+    ok(labs.length===6&&labs.every(l=>FORM[l.formation]&&FORM[l.formation].ch===10),'Lab fights new57 to new62 each run a real chapter 10 formation');
+    ok(labs.every(l=>l.level===25&&J(l.party)===J(P10)&&l.bg==='term'),'each uses level 25, Tom, Grace, Rose and Amy, the terminal'); }
+  for(const id of ['bin_drop','middle_seat','both_armrests','boarding_group'])
+    ok(ST[id]&&ST[id].desc&&ST[id].short&&ST[id].color&&!/—/.test(ST[id].desc),id+' is a complete status row');
+  { const F=mk10([{id:'armresthog',row:'front'}]),e=F.foes[0]; ok(!!e.st.both_armrests&&near(sum(e,'reduce'),.25,1e-9),'The Armrest Hog starts with both armrests claimed (25% less damage taken)'); }
+
+  const rider10=(foe,actId,fn,row)=>noCrit(()=>{ const F=mk10([{id:foe,row:row||'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id===actId);
+    e.charge=A.tags.includes('charge_up')?A:null; e.actIx=e.D.acts.indexOf(A); e.aimLock=null; F.acting=e; const b=turn(F,e,2); fn(F,e,b); });
+  rider10('carryon','four_wheel_roll',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Four-Wheel Roll is a plain hit'));
+  rider10('carryon','overhead_bin_drop',(F)=>{ const t=F.party.find(p=>p.st.bin_drop); ok(t&&t.st.bin_drop.n===2&&near(off(t,'bin_drop','def'),.85,.005),'Overhead Bin Drop: -15% Defense for 2 turns'); });
+  noCrit(()=>{ const F=mk10([{id:'carryon',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='sizer_frame_check'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]),'Sizer Frame Check hits all four'); });
+  rider10('jetlag','contagious_yawn',(F)=>ok(F.party.some(p=>p.st.fatigue&&p.st.fatigue.n===2),'Contagious Yawn gives Fatigue for 2 turns'),'back');
+  rider10('jetlag','three_am_glare',(F)=>{ const t=F.party.find(p=>p.st.blind); ok(t&&t.st.blind.n===1,'3 AM Glare gives Blind for 1 turn'); },'back');
+  noCrit(()=>{ const F=mk10([{id:'jetlag',row:'back'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='three_hour_time_diff'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='three_hour_time_diff'&&!F.party.some(p=>p.st.slow),'Three-Hour Time Diff is announced first and does nothing yet');
+    F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.slow&&p.st.slow.n===2),'it lands next turn: Slow for 2 turns on all four'); });
+  rider10('longline','retractable_belt_snap',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Retractable Belt Snap is a plain hit'));
+  rider10('longline','step_back_behind_yellow',(F,e,b)=>ok(b.some(x=>x.t==='push'&&x.n>0&&x.n<=20),'“Step Back Behind Yellow” pushes its target back (20 ticks)'));
+  noCrit(()=>{ const F=mk10([{id:'longline',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='random_screening'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='random_screening','Random Screening is announced first'); F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.slow&&p.st.slow.n===2),'then it Slows all four for 2 turns'); });
+  rider10('unclaimed','carousel_spin',(F)=>ok(F.party.some(p=>p.st.slow&&p.st.slow.n===1),'Carousel Spin gives Slow for 1 turn'));
+  rider10('unclaimed','overweight_trunk',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Overweight Trunk is a plain hit'));
+  noCrit(()=>{ const F=mk10([{id:'unclaimed',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='excess_baggage'); e.actIx=e.D.acts.indexOf(A); F.acting=e; for(const p of F.party) p.pep=5; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='excess_baggage','Excess Baggage is announced first'); F.acting=e; const b=turn(F,e,3); const t=F.party.find(p=>p.st.fatigue);
+    ok(t&&t.st.fatigue.n===2&&t.pep===4,'it gives Fatigue for 2 turns and takes 1 Pep from its one target'); });
+  rider10('armresthog','middle_seat_elbow',(F)=>{ const t=F.party.find(p=>p.st.middle_seat); ok(t&&t.st.middle_seat.n===2&&near(off(t,'middle_seat','atk'),.8,.005),'Middle-Seat Elbow: -20% Attack for 2 turns'); });
+  rider10('armresthog','neck_pillow_squeeze',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Neck-Pillow Squeeze is a plain hit'));
+  noCrit(()=>{ const F=mk10([{id:'armresthog',row:'front'}]),e=F.foes[0],A=e.D.acts.find(a=>a.id==='full_recline'); e.actIx=e.D.acts.indexOf(A); F.acting=e; turn(F,e,2);
+    ok(e.charge&&e.charge.id==='full_recline','Full Recline is announced first'); F.acting=e; turn(F,e,3); ok(F.party.every(p=>p.st.fatigue&&p.st.fatigue.n===2),'then it gives all four Fatigue for 2 turns'); });
+
+  // ---------- The Last Call ----------
+  const lc=()=>{ const F=mk10([{id:'lastcall',row:'front'}]),e=F.foes[0]; for(const p of F.party) { p.hp=p.maxHp=Math.max(p.maxHp,1200); p.pep=8; } return {F,e}; };
+  rider10('lastcall','delayed',(F,e,b)=>ok(b.some(x=>x.t==='push'&&x.n>0&&x.n<=25),'DELAYED pushes its target back (25 ticks)'));
+  rider10('lastcall','split_flap_slap',(F,e,b)=>ok(b.some(x=>x.t==='hit'),'Split-Flap Slap is a plain hit'));
+  noCrit(()=>{ const {F,e}=lc(); const A=e.D.acts.find(a=>a.id==='pa_static'); e.actIx=e.D.acts.indexOf(A); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,2);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]),'PA Static hits all four'); });
+  // Boarding Group Nine, then GATE CLOSED on the Marked ally
+  noCrit(()=>{ const {F,e}=lc(); e.actIx=e.D.acts.findIndex(a=>a.id==='boarding_group_nine'); e.aimLock=null; F.acting=e; const hp0=F.party.map(p=>p.hp); const b=turn(F,e,2);
+    ok(e.charge&&e.charge.id==='gate_closed'&&!!e.mark,'Boarding Group Nine Marks one ally and sets up GATE CLOSED for its next turn');
+    const m=F.party.find(p=>p.key===e.mark); ok(m&&m.mark===e.key||m,'the Mark is on one family member');
+    ok(F.party.every((p,i)=>p.hp===hp0[i]),'Boarding Group Nine itself does no damage');
+    ok(e.st.boarding_group&&e.st.boarding_group.n===1&&near(off(e,'boarding_group','atk'),1.2,.005),'it gives The Last Call +20% Attack for 1 turn');
+    const back=F.party.filter(p=>G('b3EffRow')(F,p)==='back'); if(back.length) ok(back.some(p=>p.key===e.mark),'and the one it Marks is in the Back row when someone stands there');
+    F.acting=e; const hp1=m.hp; const b2=turn(F,e,3);
+    ok(b2.some(x=>x.t==='act'&&x.id==='gate_closed'&&x.tgts.join()===m.key)&&m.hp<hp1,'GATE CLOSED slams the Marked ally');
+    ok(m.st.skill_lock&&m.st.skill_lock.n===2,'and puts Skill Lock on them for 2 turns'); ok(F.party.filter(p=>p!==m).every(p=>!p.st.skill_lock),'on nobody else'); });
+  noCrit(()=>{ const {F,e}=lc(); e.actIx=e.D.acts.findIndex(a=>a.id==='boarding_group_nine'); F.acting=e; turn(F,e,2); const m=F.party.find(p=>p.key===e.mark);
+    addShield(F,m,2000,{src:m}); F.acting=e; turn(F,e,3); ok(!m.st.skill_lock,'a shield that soaks the slam also stops the Skill Lock'); });
+  noCrit(()=>{ const {F,e}=lc(); e.actIx=e.D.acts.findIndex(a=>a.id==='boarding_group_nine'); F.acting=e; turn(F,e,2); loseCharge(F,e);
+    ok(!e.charge&&!e.mark,'an interrupt cancels GATE CLOSED and drops the Mark'); });
+  noCrit(()=>{ const {F,e}=lc(); e.hp=Math.floor(e.maxHp*.6); const seen=new Set(); for(let i=0;i<12;i++) { const P=pick(F,e); seen.add(P.act.id); }
+    ok(!seen.has('final_boarding'),'above half HP there is no FINAL BOARDING'); });
+  noCrit(()=>{ const {F,e}=lc(); e.hp=Math.floor(e.maxHp*.5); e.actIx=e.D.acts.findIndex(a=>a.id==='final_boarding'); ok(pick(F,e,true).act.id==='final_boarding','at 50% HP FINAL BOARDING is next in the list');
+    F.acting=e; turn(F,e,2); ok(e.charge&&e.charge.id==='final_boarding','it is announced one turn ahead'); F.acting=e; const hp0=F.party.map(p=>p.hp); turn(F,e,3);
+    ok(F.party.every((p,i)=>p.hp<hp0[i]&&p.st.fatigue&&p.st.fatigue.n===2),'then it hits all four and gives each Fatigue for 2 turns'); });
 };

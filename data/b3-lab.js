@@ -119,5 +119,17 @@ const B3_LAB=[
   {id:'new55',name:'NEW 55: THE WALLFLOWER',sub:'Chapter 9 Elite. The Wallflower has 4 Composure pips, shrugs off Clobber and starts hugging the wall (dodges more). A Sore Loser in Back.',
     party:['tom','grace','rose','deedee'],level:22,formation:'wallflower',bg:'dome'},
   {id:'new56',name:'NEW 56: THE MIRRORBALL',sub:'Chapter 9 boss. 7 Composure pips. Her own glare leaves her Dazzled: a Clobber hit sets off Shatter Glitz! and a Racket hit sets off Sensory Overload!.',
-    party:['tom','grace','rose','deedee'],level:22,formation:'mirrorball',bg:'dome'}
+    party:['tom','grace','rose','deedee'],level:22,formation:'mirrorball',bg:'dome'},
+  {id:'new57',name:'NEW 57: TWO CARRY-ONS',sub:'Chapter 10 fight. Two Carry-Ons in Front. Overhead Bin Drop lowers Defense and Sizer Frame Check rattles the whole family.',
+    party:['tom','grace','rose','amy'],level:25,formation:'carryon',bg:'term'},
+  {id:'new58',name:'NEW 58: CARRY-ON AND JET LAG',sub:'Chapter 10 fight. Jet Lag in Back blinds with 3 AM Glare and winds up Three-Hour Time Diff over the whole family.',
+    party:['tom','grace','rose','amy'],level:25,formation:'jetlag',bg:'term'},
+  {id:'new59',name:'NEW 59: THE LONG LINE AND JET LAG',sub:'Chapter 10 fight. The Long Line pushes someone back with Step Back Behind Yellow and winds up Random Screening.',
+    party:['tom','grace','rose','amy'],level:25,formation:'longline',bg:'term'},
+  {id:'new60',name:'NEW 60: THE UNCLAIMED AND CARRY-ON',sub:'Chapter 10 fight. The Unclaimed spins, thuds and winds up Excess Baggage on one of the family.',
+    party:['tom','grace','rose','amy'],level:25,formation:'unclaimed',bg:'term'},
+  {id:'new61',name:'NEW 61: THE ARMREST HOG',sub:'Chapter 10 Elite. The Armrest Hog has 4 Composure pips, shrugs off Sizzle and starts with both armrests claimed. A Jet Lag in Back.',
+    party:['tom','grace','rose','amy'],level:25,formation:'armresthog',bg:'term'},
+  {id:'new62',name:'NEW 62: THE LAST CALL',sub:'Chapter 10 boss. 7 Composure pips. Boarding Group Nine marks a Back-row ally and GATE CLOSED slams them next turn with Skill Lock.',
+    party:['tom','grace','rose','amy'],level:25,formation:'lastcall',bg:'term'}
 ];

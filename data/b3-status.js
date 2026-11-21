@@ -383,7 +383,16 @@ const B3_STATUS={
   wall_hug:{id:'wall_hug',name:'Wall Hug',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'wallHug',v:.20}],flags:[],
     short:'WALL HUG',color:'#a8c9a0',weight:4,desc:'Pressed flat against the wall: dodges 20% of attacks. It can be stripped.'},
   facet_spin:{id:'facet_spin',name:'Facet Spin',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'facetSpin',v:.25}],flags:[],
-    short:'FACET SPIN',color:'#e8e8ff',weight:5,desc:'Spinning so her mirrors throw every hit off: dodges 25% of attacks. Shatter Glitz! strips it.'}
+    short:'FACET SPIN',color:'#e8e8ff',weight:5,desc:'Spinning so her mirrors throw every hit off: dodges 25% of attacks. Shatter Glitz! strips it.'},
+  // Stage 13c: chapter 10, the Long Island airport terminal.
+  bin_drop:{id:'bin_drop',name:'Overhead Bin Drop',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'binDrop',v:-.15}],flags:[],
+    short:'DEF DOWN',color:'#b8c4d9',weight:4,desc:'Something shifted during flight and fell on you: 15% less Defense.'},
+  middle_seat:{id:'middle_seat',name:'Middle-Seat Elbow',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'middleSeat',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#c4b8d9',weight:4,desc:'Boxed in by a stranger\u2019s elbow: 20% less Attack.'},
+  both_armrests:{id:'both_armrests',name:'Both Armrests Claimed',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#9aa7b8',weight:5,desc:'Both armrests, no apologies: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  boarding_group:{id:'boarding_group',name:'Boarding Group Nine',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'boardingGroup',v:.20}],flags:[],
+    short:'ATTACK UP',color:'#e8c25a',weight:5,desc:'Group Nine is called: 20% more Attack for a turn. It can be stripped.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

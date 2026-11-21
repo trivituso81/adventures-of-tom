@@ -145,6 +145,11 @@ Calls made in stage 9b (none confirmed by Tom): Center the Bowl can be aimed at 
 | Chapter 9: `data/b3-foes-ch09.js` (Velvet Rope, Stuffed Shirt, The Hanger-On, The Sore Loser, The Wallflower, The Mirrorball), 6 formations (9 VP each, 27 for the boss), Lab fights NEW 51 to NEW 56 (Tom, Grace, Rose, Deedee, level 22, the dome). | Chapter 10 and the bonus chapter (`b3s13c`, `b3s13`) |
 | The Mirrorball as data: Facet Spin (start), Facet Dazzle and Spotlight Solo leave her Dazzled, LAST DANCE below 50% HP. Members Only (`frontAllies`), Fifty-Two Pickup (`firstTarget`) and "Cheater!" (`foeTaunt`). 6 statuses (members_only, hmph, gauche, cheater, wall_hug, facet_spin). | |
 
+| In (build `b3s13c`, chapter 10) | Waits for |
+|---|---|
+| Chapter 10: `data/b3-foes-ch10.js` (Carry-On, Jet Lag, The Long Line, The Unclaimed, The Armrest Hog, The Last Call), 6 formations (8 VP each, 26 for the boss), Lab fights NEW 57 to NEW 62 (Tom, Grace, Rose, Amy, level 25, the terminal). | The bonus chapter (`b3s13`) |
+| The Last Call as data: Boarding Group Nine then GATE CLOSED (the Big Glare and Swamp Chomp pattern: `then`, `after`, `hits:'marked'`), FINAL BOARDING below 50% HP. 4 statuses (bin_drop, middle_seat, both_armrests, boarding_group). | |
+
 ## What stage 12 holds, and what waits
 
 | In (build `b3s12`, chapter 7; stage 12 is complete) | Waits for |

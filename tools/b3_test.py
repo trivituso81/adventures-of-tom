@@ -1436,6 +1436,18 @@ def stage13(pg,lab,landscape=False,parts='a'):
         caps+=pick(fr,4)
         for fid,foe,ix,act,st in (('new55','wallflower',1,None,None),('new54','soreloser',1,'cheater','cheater'),('new53','coathanger',1,'coat_cling','slow'),('new52','stuffedshirt',0,'hmph','hmph'),('new51','velvetrope',1,'not_on_the_list',None)):
             caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('velvetrope','soreloser','stuffedshirt','coathanger')),2)
+    if 'c' in parts:
+        # Chapter 10. The Last Call: Boarding Group Nine marks one ally (the mark shows), GATE CLOSED slams them; below half HP FINAL BOARDING winds up
+        fr=[]; R=s11_run(pg,lab,'new62',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*1.3); e.hp=e.maxHp; e.actIx=2; e.spd*=1.5; }",fr,every=500,landscape=landscape,tag='s13',watch={'mark':"()=>!!B3.F.foes[0].mark"})
+        need(R['over']=='win',f"The Last Call fight ended {R['over']}")
+        need(any(a.startswith('boarding_group_nine') for a in R['acts']),f"Boarding Group Nine should be played: {R['acts'][:10]}")
+        caps+=pick(fr,6)
+        fr=[]; R=s11_run(pg,lab,'new62',"()=>{ const e=B3.F.foes[0]; e.maxHp=Math.floor(e.maxHp*2.2); e.hp=Math.floor(e.maxHp*.49); e.actIx=5; e.spd*=1.5; }",fr,every=500,landscape=landscape,tag='s13')
+        need(R['over']=='win',f"The Last Call (low HP) fight ended {R['over']}")
+        need(any(a.startswith('final_boarding') for a in R['acts']),f"FINAL BOARDING should be played below half HP: {R['acts'][:10]}")
+        caps+=pick(fr,4)
+        for fid,foe,ix,act,st in (('new61','armresthog',0,None,None),('new60','unclaimed',0,'carousel_spin','slow'),('new59','longline',1,'step_back_behind_yellow',None),('new58','jetlag',1,'three_am_glare','blind'),('new57','carryon',1,'overhead_bin_drop','bin_drop')):
+            caps+=pick(rush(fid,foe,ix,act,st,fast=foe in ('carryon','jetlag','longline','unclaimed')),2)
     sheet(caps,6,os.path.join(OUT,'b3-s13'+('-land' if landscape else '')+'.png'),scale=.4)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
