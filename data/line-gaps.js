@@ -2,7 +2,7 @@
 const LINE_GAPS={
 "Aunt Ellie|I did. And what's number three?": "snap",
 "Aunt Ellie|Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?": "snap",
-"Boppy|Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?": "beat",
+"Boppy|Good girl. Now. Who's got my muffin?": "beat",
 "Boppy|In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...": "snap",
 "Boppy|Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.": "snap",
 "Boppy|The mud gets a muffin and I don't?": "snap",
@@ -29,7 +29,7 @@ const LINE_GAPS={
 "Rose|Hello, mud! Can we please have Deedee's muffins back? Thank you!": "beat",
 "Rose|It's bigger than a BUS! It ate a boat!": "snap",
 "Rose|One more ride, Tata! To the cab!": "snap",
-"Rose|Thank you, fish! There's a bug on my money!": "beat",
+"Rose|Thank you, fish! Wait, there's a bug on this money!": "beat",
 "Rose|The grass is Boppy color!": "snap",
 "The Big One|GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.": "snap",
 "The Big One|Good. He was in the middle of a story. The one about the race.": "beat",

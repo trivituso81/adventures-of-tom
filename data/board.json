@@ -20175,7 +20175,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "ch1clips8",
-   "next": "Merging local-clips-pending_7.json (8 kept takes: Amy, Boppy x2, Deedee, Grace, Moss, Rose, Tom). 4 takes say new words, so the screen words follow the take (rule 9).",
+   "next": "Shipped as ch1clips8: your 8 kept takes play in the game; Boppy's two muffin lines, Rose's coin line and Tom's line to the Big One now show the words the takes say.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20191,6 +20191,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ch1clips8 built: 8 takes merged (all replaced older takes), 4 Chapter 1 screen lines reworded to match the kept takes (rule 9)."
     }
    ],
    "prompt": {
@@ -20201,7 +20205,8 @@
     "model": "Claude Sonnet 5.5 (row B: the merge steps are written in docs/VOICE_LIBRARY.md)",
     "effort": "medium (steps are known)",
     "text": "Read docs/VOICE_LIBRARY.md and merge the attached local-clips-pending export. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-fix-itembannerart-pics",

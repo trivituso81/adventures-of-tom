@@ -1,0 +1,30 @@
+[
+ {
+  "voice": "boppy",
+  "old": "Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?",
+  "new": "Good girl. Now. Who's got my muffin?",
+  "script": "[deep voice, thick New York accent, pleased] Good girl. [thick New York accent, turning to business] Now... [thick New York accent, looking around] Who's got my muffin?",
+  "takeId": "tmwpk77bjw3na"
+ },
+ {
+  "voice": "boppy",
+  "old": "The fish gets THREE?",
+  "new": "The fish ate them ALL?",
+  "script": "[deep voice, thick New York accent, hurt, baffled, louder than before, punchline] The FISH ate them [thick New York accent, emphasized]ALL?",
+  "takeId": "tmwpk893xz92p"
+ },
+ {
+  "voice": "rose",
+  "old": "Thank you, fish! There's a bug on my money!",
+  "new": "Thank you, fish! Wait, there's a bug on this money!",
+  "script": "[thrilled, polite] Thank you, fish! [shouting the news] Wait, there's a BUG on this money!",
+  "takeId": "tmwpk1xgqvfke"
+ },
+ {
+  "voice": "tom",
+  "old": "Nobody does. She's gotten me in an empty room.",
+  "new": "Rose can surprise anybody.",
+  "script": "[dry, chuckling] Rose can surprise anybody!",
+  "takeId": "tmwpjxq6vj5ds"
+ }
+]

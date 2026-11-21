@@ -36,6 +36,18 @@
    "text": "Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.",
    "script": "[interrupting] Mom, wait. [informing] Bosses hit in a pattern. [calm, instructing] Watch what he does twice, then go.",
    "takeId": "tmwphzg13nekx"
+  },
+  {
+   "voice": "grace",
+   "text": "I've been nine for SIX hours.",
+   "script": "[proud, smug] I've been nine for SIX hours.",
+   "takeId": "tmwpponzx2eh4"
+  },
+  {
+   "voice": "moss",
+   "text": "I asked a tree for directions.",
+   "script": "[fast, dreamy] I asked a tree for directions.",
+   "takeId": "tmwpkl0xr19fl"
   }
  ]
 }

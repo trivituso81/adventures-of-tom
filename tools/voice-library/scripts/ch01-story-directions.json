@@ -540,9 +540,10 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Nobody does. She's gotten me in an empty room.",
+   "text": "Rose can surprise anybody.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, weary, fond] Nobody does. [punchline, flat] She's gotten me in an EMPTY room."
+   "script": "[dry, chuckling] Rose can surprise anybody!",
+   "takeId": "tmwpjxq6vj5ds"
   },
   {
    "voice": "bigone",
@@ -555,9 +556,10 @@
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "Thank you, fish! There's a bug on my money!",
+   "text": "Thank you, fish! Wait, there's a bug on this money!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thrilled, polite] Thank you, fish! [shouting the news] There's a BUG on my money!"
+   "script": "[thrilled, polite] Thank you, fish! [shouting the news] Wait, there's a BUG on this money!",
+   "takeId": "tmwpk1xgqvfke"
   },
   {
    "voice": "bigone",
@@ -585,8 +587,8 @@
    "speaker": "Deedee",
    "text": "He's been in the middle of that one for fifty-one years.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, dry, level, punchline] He's been in the middle of that one for FIFTY-ONE years.",
-   "takeId": "gen-13309801f9"
+   "script": "[warm Long Island accent, wry] He's been in the middle of that one for FIFTY-ONE years.",
+   "takeId": "tmwpk2zwszzth"
   },
   {
    "voice": "rose",
@@ -636,10 +638,10 @@
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?",
+   "text": "Good girl. Now. Who's got my muffin?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thick New York accent, pleased] Good girl. [thick New York accent, turning to business] Now. Your grandmother promised me the first muffin. [thick New York accent, looking around] Who's got my muffin?",
-   "takeId": "gen-3a229228d7"
+   "script": "[deep voice, thick New York accent, pleased] Good girl. [thick New York accent, turning to business] Now... [thick New York accent, looking around] Who's got my muffin?",
+   "takeId": "tmwpk77bjw3na"
   },
   {
    "voice": "grace",
@@ -652,10 +654,10 @@
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "The fish gets THREE?",
+   "text": "The fish ate them ALL?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thick New York accent, hurt, baffled, louder than before, punchline] The FISH gets THREE?",
-   "takeId": "gen-cc222ac75f"
+   "script": "[deep voice, thick New York accent, hurt, baffled, louder than before, punchline] The FISH ate them [thick New York accent, emphasized]ALL?",
+   "takeId": "tmwpk893xz92p"
   },
   {
    "voice": "deedee",

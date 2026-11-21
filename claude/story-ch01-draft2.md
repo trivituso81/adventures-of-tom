@@ -123,10 +123,10 @@ Idea: For twenty years Boppy has been underselling this fish. And the fish has b
 - Rose: BOO!
 [The fish jumps. The pan flies off its head and lands on the bank. Then the fish laughs so hard the whole pond shakes.]
 - The Big One: HA! HA! You got me! No one ever surprised me like that before!
-- Tom: Nobody does. She's gotten me in an empty room.
+- Tom: Rose can surprise anybody.
 [The fish pushes the pan across the water with its nose. Then it works a gold coin out of its lip and holds it out to Rose. A dragonfly is stamped on the coin.]
 - The Big One: Take this coin. The sneaky one can have it. It's the only thing I've got.
-- Rose: Thank you, fish! There's a bug on my money!
+- Rose: Thank you, fish! Wait, there's a bug on this money!
 - The Big One: The man in the folding chair. Will he be back?
 - Grace: That's Boppy. He's here every single day.
 - The Big One: Good. He was in the middle of a story. The one about the race.
@@ -144,9 +144,9 @@ Idea: Boppy is finally proved right about his fish, and he still wants to know w
 - Rose: You've got money in your TEETH!
 - Boppy: Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 - Rose: Under Lamby! Nobody looks under Lamby!
-- Boppy: Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+- Boppy: Good girl. Now. Who's got my muffin?
 - Grace: The fish ate them, Boppy.
-- Boppy: The fish gets THREE?
+- Boppy: The fish ate them ALL?
 [Deedee sets the empty pan on the counter and takes the flour down from the shelf.]
 - Deedee: Give me an hour and we'll have twelve more.
 - Boppy: Girls, you heard that. Forty minutes. Somebody watch the clock.

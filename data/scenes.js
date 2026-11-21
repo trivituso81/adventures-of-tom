@@ -377,13 +377,13 @@ SCENES.ch1AfterBoss=[
   {prop:'muffinpan',kind:'muffinpan',set:{map:'hollow',x:16.5,y:7.5,empty:true,z:0}},
   {propTo:'muffinpan',field:'x',to:14.5,time:.7,zField:'z',arc:1.6}, {sfx:'bonk'},
   {talk:'The Big One',lines:["HA! HA! You got me! No one ever surprised me like that before!"]},
-  {talk:'Tom',lines:["Nobody does. She's gotten me in an empty room."]},
+  {talk:'Tom',lines:["Rose can surprise anybody."]},
   {propTo:'muffinpan',field:'y',to:11.5,time:1.2}, {sfx:'splat'},   // the fish pushes the pan across the water with its nose
   {call:()=>sfx.pickup()},
   {talk:'The Big One',lines:["Take this coin. The sneaky one can have it. It's the only thing I've got."]},
   {ch1Reveal:'coin'},
   {if:()=>!bag.includes('dragonflycoin'),then:[{give:'dragonflycoin'}],else:[]},
-  {talk:'Rose',lines:["Thank you, fish! There's a bug on my money!"]},
+  {talk:'Rose',lines:["Thank you, fish! Wait, there's a bug on this money!"]},
   {talk:'The Big One',lines:["The man in the folding chair. Will he be back?"]},
   {talk:'Grace',lines:["That's Boppy. He's here every single day."]},
   {talk:'The Big One',lines:["Good. He was in the middle of a story. The one about the race."]},
@@ -407,9 +407,9 @@ SCENES.ch1End=()=>[
   {talk:'Rose',lines:["You've got money in your TEETH!"]},
   {talk:'Boppy',lines:["Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look."]},
   {talk:'Rose',lines:["Under Lamby! Nobody looks under Lamby!"]},
-  {talk:'Boppy',lines:["Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?"]},
+  {talk:'Boppy',lines:["Good girl. Now. Who's got my muffin?"]},
   {talk:'Grace',lines:["The fish ate them, Boppy."]},
-  {talk:'Boppy',lines:["The fish gets THREE?"]},
+  {talk:'Boppy',lines:["The fish ate them ALL?"]},
   {talk:'Deedee',lines:["Give me an hour and we'll have twelve more."]},   // Deedee sets the empty pan on the counter and takes the flour down
   {talk:'Tom',lines:["Alright, time for me to head back to LA. Let's head to Sal's!"]},
   {toast:"Goal: it's Sunday. Head out the front door. Cab 7 is waiting at the Square.",time:5}

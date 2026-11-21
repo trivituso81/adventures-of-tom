@@ -76,9 +76,9 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	280	Deedee	proud	I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
 1	data/scenes.js	293	Rose	happy	BOO!
 1	data/scenes.js	297	The Big One	none	HA! HA! You got me! No one ever surprised me like that before!
-1	data/scenes.js	298	Tom	unimpressed	Nobody does. She's gotten me in an empty room.
+1	data/scenes.js	298	Tom	unimpressed	Rose can surprise anybody.
 1	data/scenes.js	301	The Big One	none	Take this coin. The sneaky one can have it. It's the only thing I've got.
-1	data/scenes.js	304	Rose	happy	Thank you, fish! There's a bug on my money!
+1	data/scenes.js	304	Rose	happy	Thank you, fish! Wait, there's a bug on this money!
 1	data/scenes.js	305	The Big One	none	The man in the folding chair. Will he be back?
 1	data/scenes.js	306	Grace	surprised	That's Boppy. He's here every single day.
 1	data/scenes.js	307	The Big One	none	Good. He was in the middle of a story. The one about the race.
@@ -88,9 +88,9 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	326	Rose	surprised	You've got money in your TEETH!
 1	data/scenes.js	327	Boppy	proud	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 1	data/scenes.js	328	Rose	happy	Under Lamby! Nobody looks under Lamby!
-1	data/scenes.js	329	Boppy	happy	Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	data/scenes.js	329	Boppy	happy	Good girl. Now. Who's got my muffin?
 1	data/scenes.js	330	Grace	none	The fish ate them, Boppy.
-1	data/scenes.js	331	Boppy	sad	The fish gets THREE?
+1	data/scenes.js	331	Boppy	sad	The fish ate them ALL?
 1	data/scenes.js	332	Deedee	none	Give me an hour and we'll have twelve more.
 1	data/scenes.js	340	Grace	proud	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
 1	data/scenes.js	341	Tom	proud	On it. Um, can I borrow a pencil?

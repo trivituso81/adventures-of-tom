@@ -1,3 +1,13 @@
+## ch1clips8 (2026-11-20): 8 new phone takes merged (7 Chapter 1 lines, Grace's nine-for-six-hours line); 4 Chapter 1 lines now say what the takes say
+
+Card c-ch1clips8. Tom: "update missing chapter 1 voice clips", with `local-clips-pending (7).json` (made 2026-11-21 02:47 UTC, 8 kept dialogue takes).
+- Merged with `merge-local.js`: all 8 replaced older takes (dialog-ch1.js 6, dialog-ch22.js 1, dialog-ch28.js 1): Amy "Three.", Boppy x2, Deedee "fifty-one years", Grace "I've been nine for SIX hours.", Moss "I asked a tree for directions.", Rose, Tom. Kept scripts written as sent.
+- Rule 9 (screen words follow the kept take), `tools/voice-library/retext-ch1clips8.json` through `retext-lines.py`:
+  - Boppy: "Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?" is now "Good girl. Now. Who's got my muffin?"
+  - Boppy: "The fish gets THREE?" is now "The fish ate them ALL?" (answers Grace's "The fish ate them, Boppy.")
+  - Rose: "Thank you, fish! There's a bug on my money!" is now "Thank you, fish! Wait, there's a bug on this money!"
+  - Tom: "Nobody does. She's gotten me in an empty room." is now "Rose can surprise anybody." (answers the Big One's "No one ever surprised me like that before!")
+- `unused_voice.py`: check 4 is 221 before and after (baseline); checks 1, 2, 3, 5 are 0.
 ## b3s12b (2026-11-20): New battle: the chapter 6 park monsters and Chairman Cheeks join the Battle Lab (stage 12, part b of three)
 
 - Tom (11-20): "build stage 12 (bestiary chapters 5 to 7 with their bosses)", in parts. This part is chapter 6, Old Oak Park, from `claude/bestiary-v11.md`: Acorn Agent, Sticky Sap, Peanut Gallery, Twig Spy, Cheek Stuffer (Elite), the Acorn Cache add and the boss Chairman Cheeks (660 HP for 3, 880 for 4), 6 formations (6 VP each, 30 for the boss), in `data/b3-foes-ch06.js`.

@@ -61,9 +61,9 @@ ch	scene	speaker	after	text
 1	ch1Pond	Deedee	normal	I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
 1	ch1AfterBoss	Rose	snap	BOO!
 1	ch1AfterBoss	The Big One	normal	HA! HA! You got me! No one ever surprised me like that before!
-1	ch1AfterBoss	Tom	normal	Nobody does. She's gotten me in an empty room.
+1	ch1AfterBoss	Tom	normal	Rose can surprise anybody.
 1	ch1AfterBoss	The Big One	normal	Take this coin. The sneaky one can have it. It's the only thing I've got.
-1	ch1AfterBoss	Rose	beat	Thank you, fish! There's a bug on my money!
+1	ch1AfterBoss	Rose	beat	Thank you, fish! Wait, there's a bug on this money!
 1	ch1AfterBoss	The Big One	normal	The man in the folding chair. Will he be back?
 1	ch1AfterBoss	Grace	normal	That's Boppy. He's here every single day.
 1	ch1AfterBoss	The Big One	beat	Good. He was in the middle of a story. The one about the race.
@@ -73,9 +73,9 @@ ch	scene	speaker	after	text
 1	ch1End	Rose	normal	You've got money in your TEETH!
 1	ch1End	Boppy	snap	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 1	ch1End	Rose	normal	Under Lamby! Nobody looks under Lamby!
-1	ch1End	Boppy	beat	Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	ch1End	Boppy	beat	Good girl. Now. Who's got my muffin?
 1	ch1End	Grace	beat	The fish ate them, Boppy.
-1	ch1End	Boppy	normal	The fish gets THREE?
+1	ch1End	Boppy	normal	The fish ate them ALL?
 1	ch1End	Deedee	normal	Give me an hour and we'll have twelve more.
 1	ch1End	Tom	normal	Alright, time for me to head back to LA. Let's head to Sal's!
 1	ch1Job	Grace	normal	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.

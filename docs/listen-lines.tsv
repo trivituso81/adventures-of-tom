@@ -76,9 +76,9 @@ chapter	where	speaker	listen	why	text
 1	ch1Pond	Deedee	listen		Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
 1	ch1AfterBoss	Rose	none	BOO: surprise	BOO!
 1	ch1AfterBoss	The Big One	listen		HA! HA! You got me! No one ever surprised me like that before!
-1	ch1AfterBoss	Tom	listen		Nobody does. She's gotten me in an empty room.
+1	ch1AfterBoss	Tom	listen		Rose can surprise anybody.
 1	ch1AfterBoss	The Big One	listen		Take this coin. The sneaky one can have it. It's the only thing I've got.
-1	ch1AfterBoss	Rose	listen		Thank you, fish! There's a bug on my money!
+1	ch1AfterBoss	Rose	listen		Thank you, fish! Wait, there's a bug on this money!
 1	ch1AfterBoss	The Big One	think	the fish asks about Boppy	The man in the folding chair. Will he be back?
 1	ch1AfterBoss	Grace	listen		That's Boppy. He's here every single day.
 1	ch1AfterBoss	The Big One	listen		Good. He was in the middle of a story. The one about the race.
@@ -88,9 +88,9 @@ chapter	where	speaker	listen	why	text
 1	ch1End	Rose	listen		You've got money in your TEETH!
 1	ch1End	Boppy	listen		Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
 1	ch1End	Rose	listen		Under Lamby! Nobody looks under Lamby!
-1	ch1End	Boppy	listen		Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	ch1End	Boppy	listen		Good girl. Now. Who's got my muffin?
 1	ch1End	Grace	listen		The fish ate them, Boppy.
-1	ch1End	Boppy	listen		The fish gets THREE?
+1	ch1End	Boppy	listen		The fish ate them ALL?
 1	ch1End	Deedee	listen		Give me an hour and we'll have twelve more.
 1	ch1Job	Grace	listen		Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
 1	ch1Job	Tom	listen		On it. Um, can I borrow a pencil?
