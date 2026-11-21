@@ -28548,7 +28548,7 @@
   {
    "id": "t-hitspeed1-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "play",
    "fyi": true,
@@ -28570,8 +28570,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by build hitspeed1 (card c-hitspeed1)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:52:44.114Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-lastnight",
