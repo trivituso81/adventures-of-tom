@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PW, PH, TILE = 1536, 1408, 64          # the plate: 64 art px per map tile (the game draws a tile at T=32)
-WIDE = 34                              # wrapper width in plate px (about half a tile): on the phone about 20 px wide and 10 tall, narrower than
+WIDE = 50                              # wrapper width in plate px (about half a tile): on the phone about 20 px wide and 10 tall, narrower than
                                        # Grace's head; Tom stands 84 plate px tall. The rejected generated ones were about 80 (as big as a child);
                                        # 16 to 26 read as pebbles on the phone (the painting is full of pale stones that size)
 # The nine wrappers, in trail order: (leg, x, y) in map tiles, each on open ground. Leg n ends at stage n's monsters
@@ -60,11 +60,11 @@ def place(im, x, y, cut, k):
     cx, cy = x * TILE, y * TILE
     ground = im.crop((int(cx - 12), int(cy - 6), int(cx + 12), int(cy + 8))).convert('L')
     from PIL import ImageStat; lum = ImageStat.Stat(ground).mean[0]
-    c = ImageEnhance.Brightness(c).enhance(max(.9, min(1.0, .65 + lum / 300)))   # shaded ground darkens the cream a little
+    c = ImageEnhance.Brightness(c).enhance(1.12)   # shaded ground darkens the cream a little
     c = c.filter(ImageFilter.UnsharpMask(radius=1, percent=60, threshold=2))   # crisp pleats so it reads at phone size
     sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(sh)
-    d.ellipse([cx - w * .5, cy - h * .1, cx + w * .58, cy + h * .42], fill=(35, 22, 8, 150))
-    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(1.6)))
+    d.ellipse([cx - w * .5, cy - h * .1, cx + w * .58, cy + h * .42], fill=(20, 12, 4, 235))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(2.2)))
     im.alpha_composite(c, (int(round(cx - c.width / 2)), int(round(cy - c.height * .62))))
 
 def bake(base, cuts, stage):

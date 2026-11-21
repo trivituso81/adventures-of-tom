@@ -1,3 +1,10 @@
+## fix-hollowtrail-play (2026-11-21): the Grump Hollow wrappers are bigger and stand out from the stones
+
+Tom (t-hollowtrail-play, play): "there are no wrappers visible".
+- Fact (reproduced): the nine wrappers were placed correctly but were 34 plate px of cream paint on pale cream stones, dimmed to the ground's light, with a faint shadow, so they read as nothing on the phone.
+- Change (`tools/sprite-bake/bake_hollow_trail.py`): width 34 to 50 plate px (the rejected generated ones were about 80, Tom stands 84), no dimming (a slight brightening), a darker contact shadow. Kept: the nine spots, the one trail, the stage counts (9, 6, 4, 2), the liner pictures. The four stage paintings and `data/hollow-trail.js` are rebaked.
+- Not checked: how it looks on Tom's phone; look at the ground again after RELOAD.
+
 ## reports-2026-11-20 (2026-11-21): Chapter 1 now goes straight from TNB's text into the airport run
 
 - Report r-20261120-184534-ict4 (bug, ch1Sunday): "Should go straight from tnb's text to the airport animation". The cab scene used to end with the chapter 1 card, a toast and Tom standing in the Square, and the airport run only started when he talked to Sal again.

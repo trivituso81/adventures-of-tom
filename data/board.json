@@ -20019,7 +20019,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine small cream muffin wrappers, about as wide as Tom's face, in ONE trail: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: the first three are gone (Grace picked them up, the goal says so) and six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left, leading east to the fishing bench. Report anything off with the REPORT tab (pin the wrapper).",
+   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine cream muffin wrappers are now bigger (about the width of Grace's body) with a dark shadow, so they should stand out from the stones: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left. If you still cannot see them, or they are too big, use the REPORT tab and pin one.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20032,6 +20032,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: there are no wrappers visible Sent to Claude as card c-fix-hollowtrail-play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T02:56:46.104Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "fix-hollowtrail-play: wrappers made 50 plate px wide (were 34), brightened, darker shadow; they were cream on cream stones. Next: look again."
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
@@ -20363,6 +20367,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix built and pushed as fix-hollowtrail-play. Landscape was not separately checked."
     }
    ],
    "prompt": {

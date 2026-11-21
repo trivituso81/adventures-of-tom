@@ -27,7 +27,7 @@ base = np.array(Image.open(os.path.join(ROOT, 'art/hollow.webp')).convert('RGB')
 check('nine wrappers in all', len(B.WRAPPERS) == 9)
 check('legs hold 3, 2, 2, 2 wrappers in trail order', [sum(1 for w in B.WRAPPERS if w[0] == n) for n in (1, 2, 3, 4)] == [3, 2, 2, 2]
       and [w[0] for w in B.WRAPPERS] == sorted(w[0] for w in B.WRAPPERS))
-check('a wrapper is small: about half a tile, under half of Tom\'s height (84 plate px)', B.WIDE <= 36)
+check('a wrapper is small: under a tile, under two thirds of Tom\'s height (84 plate px)', B.WIDE <= 52)
 tmp = tempfile.mkdtemp()
 r = subprocess.run([sys.executable, os.path.join(HERE, 'sprite-bake', 'bake_hollow_trail.py')], capture_output=True, text=True,
                    env=dict(os.environ, HOLLOW_TRAIL_OUT=tmp))
@@ -42,7 +42,7 @@ for n in (1, 2, 3, 4):
     blobs = [np.argwhere(lab == i) for i in range(1, cnt)]; blobs = [b for b in blobs if len(b) > 30]
     check(f'stage {n}: {len(blobs)} wrappers on the ground (want {len(want)})', len(blobs) == len(want))
     widths = [b[:, 1].max() - b[:, 1].min() for b in blobs]
-    check(f'stage {n}: each wrapper under 50 plate px wide (widest {max(widths) if widths else 0})', widths and max(widths) < 50)
+    check(f'stage {n}: each wrapper under 75 plate px wide (widest {max(widths) if widths else 0})', widths and max(widths) < 75)
     near = sum(any(abs(b[:, 1].mean() - x * B.TILE) < 24 and abs(b[:, 0].mean() - y * B.TILE) < 24 for b in blobs) for x, y in want)
     check(f'stage {n}: every wrapper on its spot ({near} of {len(want)})', near == len(want))
     far = np.ones(d.shape, bool)
