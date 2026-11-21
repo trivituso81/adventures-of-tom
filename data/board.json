@@ -23721,8 +23721,7 @@
    "title": "Apply Gemini's chapter 1 report to the board",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "next": "Waits on Tom's card t-gem1v (Gemini plays chapter 1 with the brief and Tom attaches the report). Then this session closes the passed cards and writes fix cards for the failed ones.",
    "blocks": [],
    "created": "2026-11-21",
@@ -23741,8 +23740,16 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-gem1brief with Tom's card t-gem1v."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-costs1",
@@ -26197,6 +26204,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18b pushed: chapter 7 on Battle 3 (tips, Vibe Points, Tombo toast, retry line)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18b: chapter 7's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -27059,6 +27070,51 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:29:38-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17",
+    "b3s18a",
+    "b3s18b"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T11:29:14-08:00",
+   "tags": [
+    "anim-tom-loungepass-lf2z",
+    "anim-tom-dodge-ner3",
+    "wangen"
+   ],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3",
+    "c-wanch2",
+    "c-anim-tom-loungepass-fix1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGdWVyRBtNdY3W9hQQ",
+   "title": "Apply Gemini's chapter 1 report to the board",
+   "first": "2026-11-21T11:29:09-08:00",
+   "last": "2026-11-21T11:29:09-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem1v"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGMJuribVVmWEeAZDa",
    "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
    "first": "2026-11-21T10:53:26-08:00",
@@ -27122,23 +27178,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:24:45-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17",
-    "b3s18a"
-   ],
-   "cards": [
-    "c-b3s17",
-    "c-b3s18"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukFsxNwWgaqBLsffjnE",
    "title": "Builds screen: the build name is a status-colored pill",
    "first": "2026-11-21T11:08:30-08:00",
@@ -27148,22 +27187,6 @@
    ],
    "cards": [
     "c-buildpill1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
-   "title": "Animation note: Tom, Lounge Pass Flex",
-   "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T11:04:44-08:00",
-   "tags": [
-    "anim-tom-loungepass-lf2z",
-    "anim-tom-dodge-ner3"
-   ],
-   "cards": [
-    "c-anim-tom-loungepass-lf2z",
-    "c-anim-tom-dodge-ner3",
-    "c-wanch2",
-    "c-anim-tom-loungepass-fix1"
    ]
   },
   {
@@ -30626,8 +30649,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "94c2899717441b4691b20fc9e78599d362a0cc7b",
- "synced_at": "2026-11-21T19:28:56+00:00",
+ "synced": "1043d3fdeaf5e7c194c146f961b73c85e666ba1a",
+ "synced_at": "2026-11-21T19:30:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
