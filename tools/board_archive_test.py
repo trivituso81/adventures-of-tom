@@ -31,13 +31,13 @@ def board(*cards):
 def ids(b): return [c['id'] for c in b['cards']]
 
 # --- which cards move
-b = board(done('old', '2026-11-10'), done('edge', '2026-11-23'), done('fresh', '2026-11-29'), done('lnk-open', '2026-11-01', blocks=['o-target']), op('o-target'),
+b = board(done('old', '2026-11-10'), done('edge', '2026-11-28'), done('fresh', '2026-11-29'), done('lnk-open', '2026-11-01', blocks=['o-target']), op('o-target'),
           done('named', '2026-11-01'), op('o-after', after='named'), done('notetom', '2026-11-01', lane='tom', note='thanks', ask='play'),
           done('seen', '2026-11-01', lane='tom', note='ok', note_seen=True), done('bl', '2026-11-01', backlog={'at': 'x', 'from': 'y'}))
 b['cards'][4]['id'] = 'lnk-target'; b['cards'][3]['blocks'] = ['lnk-target']
 want = A.archivable(b, TODAY)
-check('a Done card older than 7 days moves', 'old' in want, want)
-check('a Done card exactly 7 days old stays', 'edge' not in want, want)
+check('a Done card older than 2 days moves', 'old' in want, want)
+check('a Done card exactly 2 days old stays', 'edge' not in want, want)
 check('a recent Done card stays', 'fresh' not in want)
 check('a Done card that blocks an open card stays', 'lnk-open' not in want)
 check('a Done card an open card names in `after` stays', 'named' not in want)
@@ -88,7 +88,7 @@ check('with the card archived the same heading adds no duplicate Done card', 'b-
 b4 = board(done('old', '2026-11-10'), done('fresh', '2026-11-29'))
 ar4 = A.empty()
 log = bs.sync(b4, [], None, None, None, now, archive=ar4)
-check('sync() with an archive moves Done cards older than 7 days and says so', ids(b4) == ['fresh'] and [c['id'] for c in ar4['cards']] == ['old'] and any('archived 1' in l for l in log), (ids(b4), log))
+check('sync() with an archive moves Done cards older than 2 days and says so', ids(b4) == ['fresh'] and [c['id'] for c in ar4['cards']] == ['old'] and any('archived 1' in l for l in log), (ids(b4), log))
 check('sync() without an archive leaves every card (the old tests rely on it)', len(bs.sync(board(done('old', '2026-11-10')), [], None, None, None, now) or []) >= 0)
 
 # --- build_history.py: a build of an archived card still finds its card

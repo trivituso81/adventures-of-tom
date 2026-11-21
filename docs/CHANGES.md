@@ -1,3 +1,16 @@
+## nightclean (2026-11-21): the nightly cleanup is built: a report of unused files, a check that no standing rule is dropped, Done cards leave the board after 2 days, and the first night's pass removed 14 dead scripts
+
+Card c-nightclean (claude/night-plan.md section 7). Built: `tools/night/clean_report.py` (sizes with change since yesterday, files nothing names, identical files, known_fail rows; report only), `tools/night/rules_check.py` with `tools/night/rules.json` (26 standing rule headings, 19 rule leads and 59 sentences of Tom's taken from main today; called by `tools/smoke.py`), `tools/night/clean_test.py`, Done cards archive after 2 days (`DAYS` in `tools/board_archive.py`, its test updated), and the standing card `c-night-clean` (nightly, tag `nightclean`, builds `nightclean-MMDD`, one bucket a night picked by day of the year). Tests added to `tools/night/tests.json`: `night__clean_test` and the missing `dashboard_test`.
+
+Tonight's pass, bucket A. The art files in the report (115) were NOT touched: the report cannot see names built in code, and `art/props/tom/` was committed today. Removed, each with zero references (`git grep -lF <stem>` over the whole repo returned no other file):
+
+| Removed | Grep |
+|---|---|
+| tools/art-library/bake_blockbreak_ch6.py, tools/blvd_behind_shots.py, tools/row_behind_shots.py, tools/town_behind_shots.py, tools/cut_grace_from_ai.py, tools/cut_grace_hero.py, tools/sprite-bake/bake_nara_fx.py, tools/clip-audit/baked_extract.js | `git grep -lF bake_blockbreak_ch6` and the same for each stem: no hit outside the file |
+| tools/art-library/tombo-split/dc-amy.js, dc-boppy.js, dc-deedee.js, dc-nara.js, dc-rose.js, dc-tnb.js | `git grep -lF dc-amy` and the same for each: no hit; `tombo-split-prompts.js` reads only `prompts/`, `ff-prompts.js` loads (checked with node) |
+
+Two numbers from the first report: 15 unused tools scripts found (14 removed, `tools/art-library/tombo-prompts.js` kept: one file names it), 20 groups of identical files, 8 known_fail rows. The unrelated `board_sync_test.py` failures (R5 rows and two board_check rows) fail the same way before this build.
+
 ## board-nightgreen1 (2026-11-21): nightgreen handoff, 4 of 12 failing tests fixed, notes for the other 8
 
 Card c-nightgreen. Parts nightgreena to nightgreend fixed art-library/validate.js, sw_test, quest_test (tests that were stale) and terminal_test (a game bug: a monster inside a bench). Eight rows keep `known_fail`. This push writes what was seen on each (`claude/next-addendum-nightgreen.md`), rewrites the card's next step and prompt for the rest, and corrects the failing-tests line in `claude/next.md` (the Project's mirror of next.md gets the same text). Nothing in the game changed.
