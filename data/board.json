@@ -21379,11 +21379,15 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T03:25:19.403Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started (Opus 5.5): checking COH-05 against current main."
     }
    ],
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh05\""
    }
   },
   {
