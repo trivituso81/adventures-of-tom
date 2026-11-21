@@ -23364,7 +23364,7 @@
    "title": "Delete two copied docs from the Project",
    "theme": "Project Ops",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "setup",
    "fyi": true,
    "next": "In claude.ai, open the Little Elsewhere Project's files and delete claude/adventures-of-tom-ability-revamp.md and claude/adventures_of_tom_ability_revamp_plan.md (about 450 KB together). Both are safely in the repo's claude/ folder, the same size to the byte; the delete was refused from inside the session, so it needs your tap. If project-instructions.md and status.md are still in the list, delete them too: they are in the repo as well.",
@@ -23375,8 +23375,14 @@
     {
      "d": "2026-11-21",
      "t": "Added by projclean1 (card c-projclean)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this.",
+     "at": "2026-11-21T18:59:34.201Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-itembannerart-pics-4",
