@@ -19224,7 +19224,7 @@
    "title": "Fix: board saves fail once board.json passes 1 MB",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "bigboard1",
    "next": "Pushed as bigboard1: board.html reads the board by blob id when GitHub sends no content; eight other pages got the same fallback; Done cards older than 7 days move to data/board-archive.json (nothing is old enough until 2026-11-27). Hands to your tap of the card Tap any save on the board to confirm the error is gone.",
    "blocks": [],
@@ -19244,6 +19244,10 @@
      "d": "2026-11-20",
      "t": "bigboard1 built: board.html fix as written, blob fallback on the heads, poses, portraits, music, art, script, voice-take and pose-review readers, archive tool run by board-sync (R13), tests board_big_test and board_archive_test. Hands to t-bigboard1-tap.",
      "at": "2026-11-21T02:21:32.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as bigboard1: board saves work again; the board reads big files by blob id and old Done cards move to an archive"
     }
    ],
    "prompt": {
@@ -19260,7 +19264,8 @@
     "opening": "\"The board (ADMIN > BOARD) fails every save with\""
    },
    "started_at": "2026-11-21T01:48:41+00:00",
-   "after": "t-bigboard1-tap"
+   "after": "t-bigboard1-tap",
+   "done": "2026-11-20"
   },
   {
    "id": "c-takes-ae5d7d",
@@ -19905,6 +19910,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
+   "title": "Fix: board saves fail once board.json passes 1 MB",
+   "first": "2026-11-20T17:48:44-08:00",
+   "last": "2026-11-20T18:26:03-08:00",
+   "tags": [
+    "bigboard1"
+   ],
+   "cards": [
+    "c-bigboard1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCZmu9BDyRxwTXwtHu",
    "title": "Fix: Open the Battle Lab page on your home screen",
    "first": "2026-11-20T18:17:47Z",
@@ -20106,16 +20123,6 @@
    ],
    "cards": [
     "c-b3s12"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
-   "title": "Fix: board saves fail once board.json passes 1 MB",
-   "first": "2026-11-20T17:48:44-08:00",
-   "last": "2026-11-20T17:48:44-08:00",
-   "tags": [],
-   "cards": [
-    "c-bigboard1"
    ]
   },
   {
@@ -22258,8 +22265,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "c60914ac9769c23c4ed0aca79948e3c9f077ca59",
- "synced_at": "2026-11-21T02:16:52+00:00",
+ "synced": "f0b6ef4bef80a94c5a689c2fdea9c163791a80f7",
+ "synced_at": "2026-11-21T02:27:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
