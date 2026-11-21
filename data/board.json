@@ -20670,7 +20670,7 @@
    "col": "prog",
    "theme": "Project Ops",
    "title": "Board only: cards from the second chapter 1 QA report",
-   "next": "Checking each of the 26 items in the chapter 1 QA report (build keysecrets2) against main, then adding a card for each valid one.",
+   "next": "Done: 19 cards added from the chapter 1 QA report; 5 items not added (reasons in claude/ch1-qa-keysecrets2.md).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20696,6 +20696,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Checked all 26 items against main. Added 18 fix cards (c-qa-*) and one card for the old battle screen items to check at stage 15 (c-qa-battle2). Not added: TXT-01 (Tom chose that line, t-gem-polish06), TXT-02 (the game spells grey everywhere and the lines are voiced), TXT-05 (two different moves, text is right), COH-08 (the code shows Grace's and Rose's banners one after the other; one combined banner goes against Tom's rule), COH-06 pan toast. Covered elsewhere: BUG-02 pictures (t-itembannerart-pics), BUG-11 fence by the SCHOOL sign (c-reports-7)."
     }
    ]
   },
@@ -20750,6 +20754,520 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-2 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-2.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 2 pictures (two taps, about $0.10): the 2 redo sheets, 9 items each, 3 across and 3 down. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Redo sheet 1 should show, in order: a gold coin with a kickball (no person), a purple coat with a satin collar and one button, black over-ear headphones, a green frog raincoat with no frog in it, cloud-shaped slippers with no faces, a teal singlet, neon racing flats with no logos, a wristwatch with a plain face, a crescent moon locket. Redo sheet 2: a grooved wax bar, a clay taco, a pupusa on a plate, a latte in a plain cup, a gold medal with a zigzag crack, a plain yellow hard hat, a cracked chip, a plain white shirt with fuzzy cuffs, a plain gold sash. No blurred smudges of print anywhere. APPROVE a redo sheet when all 9 are right; REJECT with a note naming the cells that missed (1 to 9, left to right, top to bottom). Then APPROVE the 18 first sheets: the 18 cells that missed are left out when a first sheet is cut, so approving it installs only its good pictures. If the card later offers Generate all 18 again, ignore it: those are already made, and nothing would be paid. He wrote: some failed. make sure you only regenerate those than failed and approve those where nothing failed\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:14:13.163Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-itembannerart-pics"
+  },
+  {
+   "id": "c-qa-bug01",
+   "tag": "qa-bug01",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Quest log says Go to it's Sunday after the trip home",
+   "next": "Ready to start. Confirmed in code: questPhrase in engine/story.js skips \"It's\" only with a capital I, and the toast in SCENES.ch1End (data/scenes.js) starts with a lowercase \"it's\" after \"Goal: \".",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-01 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is known and the tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug01 in data/board.json, history included. Your first push is the commit board: start c-qa-bug01.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-01.\n\nWhat the tester saw: The quest log (! button) shows \"Go to it's Sunday. Head out the front door. Cab 7 is waiting at the Square.\" after the return home scene.\n\nWhat the check found: Confirmed in code: questPhrase in engine/story.js skips \"It's\" only with a capital I, and the toast in SCENES.ch1End (data/scenes.js) starts with a lowercase \"it's\" after \"Goal: \". gem-bug06 fixed the capital case only. Make the check ignore case and scan the other Goal toasts for the same slip.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug01, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-01, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug02",
+   "tag": "qa-bug02",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Item banner: tiny icon, empty circle, prompt on the border",
+   "next": "Ready to start. The painted pictures are covered by card t-itembannerart-pics (itembannerart1 shipped after the tested build).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-02 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug02 in data/board.json, history included. Your first push is the commit board: start c-qa-bug02.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-02.\n\nWhat the tester saw: On Got Boppy's Pepper, Boppy's Cap, Mud Pie and Dragonfly Coin banners the item icon is tiny at the top left while the big circle is blank, the line Tap or press A to continue sits on the bottom border, and overworld speech bubbles show through the card.\n\nWhat the check found: The painted pictures are covered by card t-itembannerart-pics (itembannerart1 shipped after the tested build). This card is the layout only: picture centered and sized in the circle (or no circle when there is no picture), padding under the prompt, overworld bubbles hidden while a banner is up. engine/party-banner.js.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug02, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-02, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug03",
+   "tag": "qa-bug03",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "People walk on roofs and signs in the Square and the Row",
+   "next": "Ready to start. Screen report only, not reproduced yet.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-03 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug03 in data/board.json, history included. Your first push is the commit board: start c-qa-bug03.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-03.\n\nWhat the tester saw: The Square: a boy in green walks onto the SNAIL MAIL sign and roof, a straw hat townsperson crosses KETTLE COTTAGE's roof. Rivituso Row: a boy walks over the right edge of Aunt Ellie's House, someone stands on the CATTAIL PIER signpost. Inside Deedee and Boppy's House, Boppy's feet draw over the railing and plant on the right.\n\nWhat the check found: Screen report only, not reproduced yet. roofnpc2 fixed roof walkers before; this says some are back. Check wander bounds against the walk masks (tools/mask_overlay.py) in town and row, and the depth line of the grands foreground props.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug03, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-03, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug04",
+   "tag": "qa-bug04",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Stray bar pictures on Rivituso Row in the departure scene",
+   "next": "Ready to start. Screen report only.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-04 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug04 in data/board.json, history included. Your first push is the commit board: start c-qa-bug04.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-04.\n\nWhat the tester saw: Green and brown bar or planter pictures float at the GREGORI steps (over Tom's face in the cutscene) and under the CATTAIL PIER sign. The tester also saw the muffin pan floating behind Tom in the first lines after the Big One fight.\n\nWhat the check found: Screen report only. The after-boss scene was rewritten since the tested build (the pan now appears at Rose's BOO, data/scenes.js ch1AfterBoss), so check the pan part on current main and fix only what is still there.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug04, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-04, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug07",
+   "tag": "qa-bug07",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Grace's skill name cut off on her STAMPS card",
+   "next": "Ready to start. Screen report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-07 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug07 in data/board.json, history included. Your first push is the commit board: start c-qa-bug07.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-07.\n\nWhat the tester saw: Menu > STAMPS, Grace (Influencer Cleric): the button Welcome Back to My Channel shows as Welcome Back to My Chan.\n\nWhat the check found: Screen report. gem-bug10 wrapped long button labels in battle, not on the Stampcard. Let the label wrap to two lines; check the longest skill name of every member in portrait and landscape.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug07, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-07, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug08",
+   "tag": "qa-bug08",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Map buttons show during cutscenes and the chapter end card",
+   "next": "Ready to start. Screen report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-08 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug08 in data/board.json, history included. Your first push is the commit board: start c-qa-bug08.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-08.\n\nWhat the tester saw: HOLD + SLIDE flashes for one frame between lines of the Grump Hollow after-boss scene; the top left buttons (!, Menu, Save) still work during a cutscene, and opening ! mid-scene lets monsters roam; the ! Menu and Save icons and HOLD + SLIDE stay over the CHAPTER 1 COMPLETE card.\n\nWhat the check found: Screen report. gem-bug10 found the cutscene part already fixed or not seen, so reproduce first with the chapter select jump. reports-2026-11-20 changed the chapter 1 ending (straight to the airport), so check the end card as it is now.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug08, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-08, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug11",
+   "tag": "qa-bug11",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Signs cut off at the top and under the skip buttons",
+   "next": "Ready to start. The \"slider\" the tester saw above the SCHOOL sign is the locked fence picture; that part is report r-20261120-185740-5nwp on card c-reports-7, not this card.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-11 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug11 in data/board.json, history included. Your first push is the commit board: start c-qa-bug11.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-11.\n\nWhat the tester saw: The Square: the HOLLOW arch sign is cut off by the top of the screen, and an open ! panel covers the zoom slider. Rivituso Row: FAST and SKIP cover the LONG ISLAND SQUARE sign in a cutscene.\n\nWhat the check found: The \"slider\" the tester saw above the SCHOOL sign is the locked fence picture; that part is report r-20261120-185740-5nwp on card c-reports-7, not this card. Fix the rest with safe margins for the top signs and the ! panel.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug11, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-11, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug12",
+   "tag": "qa-bug12",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
+   "next": "Ready to start. Screen report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-12 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug12 in data/board.json, history included. Your first push is the commit board: start c-qa-bug12.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-12.\n\nWhat the tester saw: Inside Deedee and Boppy's House: tapping the Menu icon just as Tom comes into range of the Cookie counter inspects the counter instead of opening the Menu; Boppy's sprite briefly goes blocky as a talk starts.\n\nWhat the check found: Screen report. A tap on a top left button must never reach the world. The mirrored cap lettering on Boppy's art is its own card.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug12, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-12, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug12c",
+   "tag": "qa-bug12c",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Characters",
+   "title": "Boppy's cap lettering is mirrored on his shocked art",
+   "next": "Ready to start. Screen report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-12 (c) from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a picture prompt Tom judges by eye)",
+    "effort": "medium (one Art Library entry, written from a prompt that worked)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-bug12c in data/board.json, history included. Your first push is the commit board: start c-qa-bug12c.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-12 (c).\n\nWhat the tester saw: On Boppy's shocked face and the BOPPY'S GOLD TEETH close-up, the Paso Robles lettering on his cap looks garbled or mirrored.\n\nWhat the check found: Screen report. Find the pictures (Art Library entries for Boppy's mood sheet and the ch1 grin reveal), confirm the lettering is wrong, and put the fixed entries back under To do with the smallest prompt change. Images only in the Art Library.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-bug12c, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-12 (c), after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh01",
+   "tag": "qa-coh01",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "The Big One's Inspect text describes a frog",
+   "next": "Ready to start. Confirmed in code: data/battle2-data.js, bigone grumpy.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-01 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is known and the tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh01 in data/board.json, history included. Your first push is the commit board: start c-qa-coh01.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-01.\n\nWhat the tester saw: Battle INSPECT on The Big One: \"The biggest, coldest, muddiest one. Nobody has laughed at its croaks in a hundred years.\" On screen and in canon it is Boppy's twenty year pond fish.\n\nWhat the check found: Confirmed in code: data/battle2-data.js, bigone grumpy. Canon: the Big One stays Boppy's fish (see card c-gem-canon03). Rewrite this one sentence for the fish; it is not a spoken line.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh01, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-01, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh02",
+   "tag": "qa-coh02",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Big One's win line has it splash away before its talk",
+   "next": "Ready to start. Confirmed in code: data/monsters.js, The Big One die line.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-02 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is known and the tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh02 in data/board.json, history included. Your first push is the commit board: start c-qa-coh02.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-02.\n\nWhat the tester saw: The VICTORY card says \"It flips back into the pond with a splash you can hear from the Square.\" and then the after-boss scene has it still in the shallows talking with the family.\n\nWhat the check found: Confirmed in code: data/monsters.js, The Big One die line. Change it to a beat where it is still at the surface (for example it stops thrashing and blinks at the shore). Check whether the line is spoken first (no clip should depend on it).\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh02, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-02, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh03",
+   "tag": "qa-coh03",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Big One asks about a folding chair; the spot has a bench",
+   "next": "Ready to start. Confirmed: the line is in data/scenes.js ch1AfterBoss and the spot is a 'bench' in data/maps-le.js.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-03 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a picture prompt Tom judges by eye)",
+    "effort": "medium (one Art Library entry, written from a prompt that worked)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh03 in data/board.json, history included. Your first push is the commit board: start c-qa-coh03.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-03.\n\nWhat the tester saw: The Big One asks \"The man in the folding chair. Will he be back?\" but Boppy's fishing spot by the pond shows a wooden bench next to his thermos, bucket and rod.\n\nWhat the check found: Confirmed: the line is in data/scenes.js ch1AfterBoss and the spot is a 'bench' in data/maps-le.js. Canon keeps the chair line (c-gem-canon03). Make the spot show Boppy's folding chair: a prop picture in the Art Library (docs/PROP_ART.md), wired after Tom approves it.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh03, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-03, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh04",
+   "tag": "qa-coh04",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Rose asks for a piggyback right after the piggyback scene",
+   "next": "Ready to start. Confirmed: \"Tata, piggyback?\" is one of Rose's follower lines in engine/followers.js, used everywhere.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-04 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh04 in data/board.json, history included. Your first push is the commit board: start c-qa-coh04.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-04.\n\nWhat the tester saw: Outside Deedee and Boppy's House Rose says \"One more ride, Tata! To the cab!\" and then, back in free walking, she stands on the street and one of her lines is \"Tata, piggyback?\".\n\nWhat the check found: Confirmed: \"Tata, piggyback?\" is one of Rose's follower lines in engine/followers.js, used everywhere. Either put her on Tom's shoulders for the walk to Cab 7 or keep that line out after flag ch1-job. Do not reword spoken lines.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh04, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-04, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh05",
+   "tag": "qa-coh05",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Grump Hollow fights show a town pond with a steeple",
+   "next": "Ready to start. Confirmed: battleBackdrop in engine/battle-draw.js falls back to 'pond' for every Long Island map that is not named.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-05 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a picture prompt Tom judges by eye)",
+    "effort": "medium (one Art Library entry, written from a prompt that worked)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh05 in data/board.json, history included. Your first push is the commit board: start c-qa-coh05.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-05.\n\nWhat the tester saw: Skeeter Swarm and Log Lump fights in Grump Hollow show the pond backdrop with a church steeple and houses across the water, not the woods.\n\nWhat the check found: Confirmed: battleBackdrop in engine/battle-draw.js falls back to 'pond' for every Long Island map that is not named. Add a wooded hollow backdrop through the Art Library and use it for map hollow.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh05, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-05, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh06",
+   "tag": "qa-coh06",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Orange cube replays its first look after the boss",
+   "next": "Ready to start. Screen report.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-06 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh06 in data/board.json, history included. Your first push is the commit board: start c-qa-coh06.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-06.\n\nWhat the tester saw: After the Big One fight, inspecting the orange cube again replays the first discovery (\"He's stuck! Tata, get him out!\" and the plum size lines) as if Tom had never tried it.\n\nWhat the check found: Screen report. Give the cube a short second-look line after flag ch1-tin (a new line needs a recording; keep it to one line in canon voice). The tester's second point, a toast for the pan, is not needed: the pan is not a bag item and the scene now shows the fish pushing it ashore.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh06, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-06, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh07",
+   "tag": "qa-coh07",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Muffin pan missing from the island before the theft",
+   "next": "Ready to start. Screen report on a build from before or around the heist redo (c-heist1).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on COH-07 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh07 in data/board.json, history included. Your first push is the commit board: start c-qa-coh07.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is COH-07.\n\nWhat the tester saw: Walking into Deedee and Boppy's House before talking to Deedee shows a bare kitchen island; the twelve cup pan appears only when the scene starts.\n\nWhat the check found: Screen report on a build from before or around the heist redo (c-heist1). Check on current main: the pan should sit on the island from the moment Tom walks in, until the Mudling takes it.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-coh07, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), COH-07, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-txt03",
+   "tag": "qa-txt03",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Speaker names switch from capitals mid-scene",
+   "next": "Ready to start. Screen report, not found in code yet.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on TXT-03 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (a small fix, cause to confirm)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-txt03 in data/board.json, history included. Your first push is the commit board: start c-qa-txt03.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is TXT-03.\n\nWhat the tester saw: In the Grump Hollow after-boss scene the speaker name shows in capitals (THE BIG ONE, ROSE) for the first six lines and in normal case (Grace, The Big One, Deedee) for the last three.\n\nWhat the check found: Screen report, not found in code yet. Find what decides the name's case (portrait type, mood or talk pose) and make every speaker name use one style.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-txt03, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), TXT-03, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-txt04",
+   "tag": "qa-txt04",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Inspect prompt says boppy's in lowercase",
+   "next": "Ready to start. Confirmed in code: engine/draw.js lowercases every thing's name in the hint (t.value.name.toLowerCase()), so every proper name is affected.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on TXT-04 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is known and the tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-txt04 in data/board.json, history included. Your first push is the commit board: start c-qa-txt04.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is TXT-04.\n\nWhat the tester saw: Near the pond the prompt reads A · Inspect boppy's fishing spot, while the opened box says Boppy's fishing spot.\n\nWhat the check found: Confirmed in code: engine/draw.js lowercases every thing's name in the hint (t.value.name.toLowerCase()), so every proper name is affected. Lowercase only a leading The or A, the way questPhrase does.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-txt04, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), TXT-04, after checking it against main."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-battle2",
+   "tag": "qa-battle2",
+   "lane": "claude",
+   "col": "wait",
+   "theme": "Battle System",
+   "title": "Old battle screen problems: check them in the new battle",
+   "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Works on BUG-05, 06, 09, 10 and COH-09 from the chapter 1 QA report (build keysecrets2).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: a checklist to run with the stage 15 tests)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-battle2 in data/board.json, history included. Your first push is the commit board: start c-qa-battle2.\n\nThis card comes from a chapter 1 playtest and QA report on build keysecrets2 (2026-11-20 1:50 PM). The report and the check of each item against main are in claude/ch1-qa-keysecrets2.md; this card is BUG-05, 06, 09, 10 and COH-09.\n\nWhat the tester saw: From the tester, all in the old battle that chapter 1 still uses: BAG shows 8 ITEMS while the bag in a fight is empty (BUG-05); status pills GOOFED, STUN, STAGGER stack on one spot, STUN! clips at the top, CRACK! 6 overlaps UGH., party buffs shrink to GUAR TUCK (BUG-06); VICTORY card has a sideways scrollbar and UP + peeks past its border (BUG-09); RASPBERRY hint arrow points right while it sits left, DEFEND says Tap an enemy or a name, the hint says B to Inspect, TOM + ROSE touches the card icon (BUG-10); Inspect names Flashcard Flurry and Red Pen, moves a chapter 1 player does not have (COH-09).\n\nWhat the check found: Confirmed in code (battle2-ui.js counts B2.bag.length but lists only usable items; the Inspect text hard-codes '??? (Flashcard Flurry or Red Pen)'). The old battle is replaced, not fixed (cards c-gem-pillar-hp, c-gem-pillar-ruckus): do this at stage 15, when chapter 1 moves to the new battle. Run each check on the new battle screen and fix what fails there.\n\nFIRST confirm it still happens on current main (other sessions change chapter 1 often, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it goes against a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## qa-battle2, push to main, and write the result and the next step onto the card (with a Tom play card as after when there is something to look at).\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-05, 06, 09, 10 and COH-09, after checking it against main."
+    }
+   ],
+   "waiting_on": "claude"
   }
  ],
  "sessions": [

@@ -1,3 +1,12 @@
+## board-qa2 (2026-11-20): board only: 19 cards from the second chapter 1 QA report, 5 items not added
+
+Tom (11-20 19:05): "assess this bug report, ensure the bug/improvement is valid, and add each one to the kanban board".
+
+- The report (build keysecrets2) is copied to `claude/ch1-qa-keysecrets2.md` with a verdict table on top. Each of its 26 items was checked against main.
+- 18 fix cards (`c-qa-*`, Up next) and `c-qa-battle2` (Waiting): the old battle screen items, checked when chapter 1 moves to the new battle (stage 15), since the old battle is replaced, not fixed.
+- Not added: TXT-01 (Tom chose the boss line), TXT-02 (grey is the game's spelling and the lines are voiced), TXT-05 (text is right), COH-08 (banners already queue one each; combining them breaks partybanner1), the pan toast in COH-06. Covered elsewhere: BUG-02 pictures (t-itembannerart-pics), the fence by the SCHOOL sign (c-reports-7).
+- No game change.
+
 ## wanch1e (2026-11-20): Grace and Tom fight in Wan videos in every NEW BATTLE fight (idle with breathing, guard, hit, knocked out, victory, run) and Lounge Pass Flex, Soup-Dumpling Squeeze and Crunchy Sugar-Cube Pop are videos
 
 Card c-wanch1 (part e). Videos: wan-gen runs 44853113780, 44854296875 and 44854331690 (Wan 3.0, 720p, 5 s). Each one checked against plan 4.4 before baking (contact sheet of every 5th picture plus measures: height first against last, feet row, frame edges, background, last against first).
