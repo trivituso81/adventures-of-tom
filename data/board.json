@@ -26199,7 +26199,7 @@
    "id": "c-fix-anim-grace-squeeze-qxim",
    "tag": "fix-anim-grace-squeeze-qxim",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
@@ -26222,7 +26222,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-anim-grace-squeeze-qxim"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -26234,6 +26234,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-anim-grace-squeeze-qxim: Left a comment",
      "at": "2026-11-21T18:48:49.425Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T18:49:00.029Z"
     }
    ],
    "prompt": {
