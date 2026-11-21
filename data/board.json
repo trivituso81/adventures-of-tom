@@ -18113,7 +18113,7 @@
    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T15:58:05-08:00",
+   "last": "2026-11-20T16:00:59-08:00",
    "tags": [
     "projclean1a",
     "projclean1b",
@@ -19891,8 +19891,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "7739990f1bdd6107f6319c17a9abd0196c3e29f1",
- "synced_at": "2026-11-20T23:58:55+00:00",
+ "synced": "57cf7163ac93adc519e9b41f2a82920312bc51db",
+ "synced_at": "2026-11-21T00:01:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
