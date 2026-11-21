@@ -23235,6 +23235,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by ch2lessons: the No unused voice rule needs check 4 at 0, and these clips predate that build."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-21T14:52:09.516Z"
     }
    ],
    "prompt": {
@@ -23245,7 +23250,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "medium (a mechanical purge by the documented recipe)",
     "text": "Read CLAUDE.md (No unused voice) and docs/PURGED_VOICE.md. Run python3 tools/clip-audit/unused_voice.py: check 4 lists about 221 dialogue clips not in harvest or source. For each, confirm by grep that no scene, map, harvest line or source plays its text (a line that is live elsewhere is a harvest bug: fix the harvest instead of purging). Write a purge spec like tools/clip-audit/purge-ch2build.json, run node tools/clip-audit/purge_unused.js with the spec and --apply, rebuild with python3 tools/voice-library/rebuild.py, get all four checks to 0, record the list in docs/PURGED_VOICE.md and docs/CHANGES.md (## voicepurge221), bump tags, push. Your first push is the commit board: start c-voicepurge221. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   }
  ],
  "sessions": [
