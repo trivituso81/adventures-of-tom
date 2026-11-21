@@ -920,8 +920,7 @@
    "id": "clip_review_test",
    "cmd": "python3 -I tools/clip_review_test.py",
    "group": "g5",
-   "minutes": 5,
-   "known_fail": "failing since b3s8 (claude/next.md)"
+   "minutes": 5
   },
   {
    "id": "closeup_ch17_test",

@@ -27678,6 +27678,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreeni: the clip kinds test is taken off the known failures: it already passes"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "nightgreenj: clip_review_test taken off the known failures (it already passes, 3 runs in a row; the b3s8 break was fixed by a later build). 2 rows still marked known_fail: ch17_test and ch20_test."
     }
    ],
    "prompt": {
