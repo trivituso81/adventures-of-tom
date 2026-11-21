@@ -13243,11 +13243,11 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "up",
+   "col": "wait",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
-   "next": "Part done 2026-11-20 (projclean1a, 1b): 205 of 665 Project docs copied to the repo; 174 confirmed on origin/main and deleted from the Project. About 490 docs are left in the Project. The next run continues from the oldest remaining doc (the prompt is safe to run again: it skips what is already in claude/). Left in the Project on purpose (they spell out Tom's full street address): story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. Copied but not yet deleted, waiting on a full compare against the Project text: bestiary-v10.1.md, story-next.md, story-ch02-draft4.md, story-line-rules.md, story-engine-capabilities.md, animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, next-addendum-ch1rebuild1.md, pose-editor-plan.md, pose-editor-poseedit2.md, anim-test v2/v3 clip prompts. report-audit.md not copied (the Write tool refused its name: copy it with Bash). tools/claude_index.py is in the repo for step 6. Steps 7 to 9 not done yet. Runs only in a conversation inside the Project: open a new conversation in the Little Elsewhere Project and paste this card's prompt, Sonnet 5.5, effort medium.",
+   "next": "Part done 2026-11-20 (projclean1a, 1b): 205 of 665 Project docs copied to the repo; 174 confirmed on origin/main and deleted from the Project. About 490 docs are left in the Project. The next run continues from the oldest remaining doc (the prompt is safe to run again: it skips what is already in claude/). Left in the Project on purpose (they spell out Tom's full street address): story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. Copied but not yet deleted, waiting on a full compare against the Project text: bestiary-v10.1.md, story-next.md, story-ch02-draft4.md, story-line-rules.md, story-engine-capabilities.md, animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, next-addendum-ch1rebuild1.md, pose-editor-plan.md, pose-editor-poseedit2.md, anim-test v2/v3 clip prompts. report-audit.md not copied (the Write tool refused its name: copy it with Bash). tools/claude_index.py is in the repo for step 6. Steps 7 to 9 not done yet. Runs only in a conversation inside the Little Elsewhere Project (START cannot reach it). Waits on Tom card t-projclean-run2.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13315,6 +13315,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-21T02:54:41.668Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "ended without shipping: START run has no Project tools (project_info, project_read, project_delete), so the move cannot run here. Nothing pushed except this card change, nothing deleted. Queued behind Tom card t-projclean-run2."
     }
    ],
    "chat": {
@@ -13329,7 +13333,7 @@
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
    "started_at": "2026-11-20T17:43:02+00:00",
-   "start": true
+   "waiting_on": "tom"
   },
   {
    "id": "b-board-projclean",
@@ -20211,6 +20215,26 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 18 pictures (two taps, about $0.90 at the $0.05 each the gate pictures cost). When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below). Each of the 18 entries is one sheet of 16 items on a flat magenta background, 4 across and 4 down. APPROVE a sheet when all 16 objects are there, separate and clear; REJECT with a note naming the cell numbers that missed (cells count 1 to 16, left to right, top to bottom). Each approve cuts the sheet into one picture per item by itself, and the item gained banner shows it from then on; items on a sheet you have not approved keep their emoji. He wrote: fix only those that failed\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T02:55:31.572Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-itembannerart-pics"
+  },
+  {
+   "id": "t-projclean-run2",
+   "title": "Run the Project clean-up inside the Project",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "next": "Open a new conversation inside the Little Elsewhere Project, paste the prompt from card c-projclean (Sonnet 5.5, effort medium) and approve push access if asked. It skips docs already moved (about 490 left). A START run cannot do this: it has no Project tools.",
+   "blocks": [
+    "c-projclean"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by a START run of c-projclean, which cannot reach the Project."
+    }
+   ]
   }
  ],
  "sessions": [
