@@ -19286,7 +19286,7 @@
    "title": "Make and approve 6 gate pictures (Amy's door, open states)",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "fyi": true,
    "next": "I made the pictures twice for you ($0.74) and checked each one against the game. Three passed and wait for you; three failed and I rejected them with details. Step 1: on this card tap Open in the Art Library and APPROVE these three if they match: Amy's door locked (the same red arched door as in the game, a note with a shoe doodle, no words), Amy's door open (the same door swung open on a lit hallway), Stage 7 doors open (the same steel doors with the middle open on a dark stage). Each approve bakes it into the game. Step 2: back on this card tap Generate, then tap again to confirm (about $0.20): it makes only the three still missing, which now use a method that worked every time (taking a part away): School gate open (only the two posts and top rail, no gate leaf, no chain, no sign), Car Barn open (both leaves swung open, the name plate on the left leaf, no chain), Studio gate open (only the two striped posts, no arm, no sign). APPROVE each that shows that state of the same gate as the locked one, alone on magenta, no extra words; REJECT with a note if not.",
@@ -19468,6 +19468,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: 4 were already waiting for your review. Spent about $0.00."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:40:12.173Z"
     }
    ],
    "chat": {
@@ -19500,7 +19505,8 @@
      "failed": [],
      "spent": 0
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-gatelayer-play",
