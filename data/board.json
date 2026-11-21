@@ -19718,7 +19718,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "pictures",
    "fyi": true,
    "next": "Claude changed one phrase each in the 2 prompts that failed and made them again; Claude looked at both and they now read right. 1. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below). 2. Look at the newest picture of each: Pro Racing Flats should be low neon yellow running shoes with laces, a closed heel and a thin sole (not slippers); Birthday Sash should be a wide gold band in a loop with a small gold bow near the bottom (not just a bow); Tiny Clay Taco is the one you passed (taco with a paperclip). 3. APPROVE each that looks right. The game then shows all 288 item pictures in the ITEM GAINED banner. If one is still wrong, press Something is wrong on this card and say which.",
@@ -19879,6 +19879,10 @@
     {
      "d": "2026-11-21",
      "t": "fix-itembannerart-pics-4: the 2 remade pictures came back right on Claude's look (flats: laced neon yellow running shoes on a thin sole, QA 13 of 15; sash: wide gold loop with a small bow, QA 12 of 15, its failed view lines contradict each other). Card c-itemart-refs retired: no reference photos needed. Back to Tom to approve the 3."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Make and approve 18 item picture sheets (288, Fix: Make and approve 18 item picture sheets (288, Fix: Make and approve 18 item picture sheets (288, Fix: Make and approve 18 item picture sheets (288 is done."
     }
    ],
    "gen": {
@@ -19948,8 +19952,7 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
     "opening": "unknown"
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-ch2lessons",
@@ -23074,7 +23077,7 @@
    "id": "c-fix-itembannerart-pics-4",
    "tag": "fix-itembannerart-pics-4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Make and approve 18 item picture sheets (288",
@@ -23122,6 +23125,10 @@
     {
      "d": "2026-11-21",
      "t": "Changed one phrase in the flats and sash notes, made those 2 again ($0.12), looked at both: they read right. Retired c-itemart-refs. Shipped as fix-itembannerart-pics-4."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-itembannerart-pics-4: the last 2 item pictures (racing flats, birthday sash) remade with one phrase changed each; all 3 are ready for your review"
     }
    ],
    "prompt": {
@@ -23133,7 +23140,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-4 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-4.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Claude remade the 3 pictures with new prompts and they missed a 4th time (Pro Racing Flats came back as slippers, Tiny Clay Taco as a real taco, Birthday Sash as a ribbon bow), so Claude stopped: words alone do not move the generator off its idea of these objects. 1. Open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and REJECT the 3 new pictures, note: stop-loss, waiting for a reference photo. 2. On your phone find one photo of each: a pair of racing flats (thin-soled racing shoes), a ceramic or clay taco figurine, and a gold pageant sash with a bow. 3. Open a new conversation in the Project on Opus 5.5, effort medium, attach the 3 photos and paste the prompt of card c-itemart-refs (Copy prompt on that card). The other 285 item pictures are approved and in the game; these 3 show their emoji until then. He wrote: 2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T08:38:03.417Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-4 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-itembannerart-pics"
+   "after": "t-itembannerart-pics",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -23474,6 +23482,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGvrXMy9bmj4dWhBLZ",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "first": "2026-11-21T00:41:46-08:00",
+   "last": "2026-11-21T00:52:09-08:00",
+   "tags": [
+    "fix-itembannerart-pics-4"
+   ],
+   "cards": [
+    "c-fix-itembannerart-pics-4",
+    "t-itembannerart-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
    "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
    "first": "2026-11-21T00:47:05-08:00",
@@ -23492,17 +23513,6 @@
    "cards": [
     "c-fix-keysecrets2-try-7",
     "t-keysecrets2-try"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGvrXMy9bmj4dWhBLZ",
-   "title": "Fix: Make and approve 18 item picture sheets (288",
-   "first": "2026-11-21T00:41:46-08:00",
-   "last": "2026-11-21T00:43:49-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-itembannerart-pics-4",
-    "t-itembannerart-pics"
    ]
   },
   {
@@ -26430,8 +26440,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "efdc499bfaca19211b3e0b88b7ccced6bd569fdc",
- "synced_at": "2026-11-21T08:47:46+00:00",
+ "synced": "385fa39a58951baeac3b7eadd10f72fc88da7f33",
+ "synced_at": "2026-11-21T08:52:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
