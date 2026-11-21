@@ -17480,7 +17480,7 @@
   {
    "id": "t-reports5-play",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -17498,8 +17498,14 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-reports-5: Tom's play check of the Chapter 1 report fixes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T02:54:49.729Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-hollowtrail1",
