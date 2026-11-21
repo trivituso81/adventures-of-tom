@@ -29817,12 +29817,12 @@
    "id": "t-costs2keys",
    "title": "Optional: add fal and xAI keys for balance reads",
    "theme": "Tools",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Optional, about 5 minutes. Skip it and nothing breaks: ElevenLabs is read by itself, fal shows paid less logged use, and xAI shows the last balance you tell Claude less the use logged since. 1) fal: open https://fal.ai/dashboard/keys, press Create key, choose the Admin scope, copy it. Open GitHub, repo trivituso81/adventures-of-tom, Settings, Secrets and variables, Actions, New repository secret. Name FAL_ADMIN_KEY, paste the key, Add secret. 2) xAI: open https://console.x.ai, Settings. Create a Management key (your account needs the Management Keys permission on the Users page) and copy it, and copy the Team ID on the same page. Add two repository secrets the same way: XAI_MANAGEMENT_KEY and XAI_TEAM_ID. 3) GitHub, Actions, costs-sync, Run workflow, set dry_run to false, press Run. When it finishes open https://trivituso81.github.io/adventures-of-tom/costs.html#/services: fal and xAI should show a balance read today. If a service still says Not read yet, its card says why under Needs a look on the Overview.",
+   "next": "Handed to Claude by Tom: instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
    "chat": {
     "url": "",
     "opening": "board"
@@ -29831,10 +29831,26 @@
     {
      "d": "2026-11-21",
      "t": "Added with build costs2: the daily balance job can only read fal and xAI with keys their docs require."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom handed this to Claude: instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
+     "at": "2026-11-21T22:03:51.893Z"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21"
+   "changed": "2026-11-21",
+   "tag": "t-costs2keys",
+   "note": "instrutions unclear, eg, \"choose Admin scope\" means nothing to me",
+   "prompt": {
+    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
+    "effort": "medium (a handed-over card is usually one piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom handed you board card t-costs2keys with this note: instrutions unclear, eg, \"choose Admin scope\" means nothing to me. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "c-stale-tests",
