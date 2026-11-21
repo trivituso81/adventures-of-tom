@@ -9651,7 +9651,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCoFX44DPtEdpaTz4Q",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -18921,6 +18921,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1a: the wan-gen Action makes a list of videos per run, up to 3 at once; start-picture jobs for Tom, Rose and Deedee"
     }
    ],
    "prompt": {
@@ -19087,6 +19091,37 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gatelayer-pics and t-gatelayer-pics in data/board.json, history included. Your first push is the commit board: start c-fix-gatelayer-pics.\n\nTom tested and found problems:\n1. Card t-gatelayer-pics (Make and approve 6 gate pictures (Amy's door, open states), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 6 pictures (two taps, about $0.30). When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Story gates (the button below). Six entries have a new picture: Amy's House door locked and open, and the open state of the school gate, Car Barn gate, Studio gate and Stage 7 doors. APPROVE one that shows that door or gate in that state with nothing else on the flat magenta background (no people, no words); REJECT with a note if not. Each approve bakes it into the game by itself; until then those doors show the plain painted plate. He wrote: complete and utter failure. stop wasting my time with your lazy bullshit that isnt throught through. why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of this makes any sense.\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T01:38:01.573Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gatelayer-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gatelayer-pics, and give the build fix-gatelayer-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-gatelayer-pics"
+  },
+  {
+   "id": "c-reports-6",
+   "tag": "reports-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-142626-w74f. First note: missing art for all item banners",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -19568,6 +19603,34 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T17:44:40-08:00",
+   "tags": [
+    "wanch1a"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCoFX44DPtEdpaTz4Q",
+   "title": "Board: stop showing START cards as In progress when nothing is running",
+   "first": "2026-11-20T17:28:04-08:00",
+   "last": "2026-11-20T17:44:09-08:00",
+   "tags": [
+    "ghost1"
+   ],
+   "cards": [
+    "c-ghost1",
+    "c-fix-artgen2look",
+    "c-reports-5",
+    "c-takes-987c82",
+    "t-projclean-run"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukET7MxhBU662PA8H6L",
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "first": "2026-11-20T17:43:59Z",
@@ -19600,16 +19663,6 @@
    "tags": [],
    "cards": [
     "c-fix-gatelayer-pics"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T17:37:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -19687,18 +19740,6 @@
    ],
    "cards": [
     "c-fix-heist1play-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCoFX44DPtEdpaTz4Q",
-   "title": "Board: stop showing START cards as In progress when nothing is running",
-   "first": "2026-11-20T17:28:04-08:00",
-   "last": "2026-11-20T17:28:04-08:00",
-   "tags": [
-    "ghost1"
-   ],
-   "cards": [
-    "c-ghost1"
    ]
   },
   {
@@ -21751,8 +21792,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "391ccf51142ab494d85b354036acffae60d8d9e4",
- "synced_at": "2026-11-21T01:41:42+00:00",
+ "synced": "5676a261fef2b29cc617c16e77db7e27a284495a",
+ "synced_at": "2026-11-21T01:44:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
