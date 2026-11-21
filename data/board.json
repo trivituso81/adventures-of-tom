@@ -29335,7 +29335,7 @@
    "id": "c-reports-10",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Shipped reports-2026-11-21: report r-20261121-125831-qvon fixed (the phone picture stays up under TNB's text until the scene closes it).",
@@ -29374,13 +29374,18 @@
      "d": "2026-11-21",
      "t": "Fixed r-20261121-125831-qvon (the phone picture stays up while TNB talks); build reports-2026-11-21.",
      "at": "2026-11-21T21:40:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-21T21:10:00+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-guardwin1",
@@ -29510,6 +29515,22 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukG23YgrNLwpd1VDRJY",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-21T21:11:19Z",
+   "last": "2026-11-21T21:19:09Z",
+   "tags": [
+    "reports-2026-11-21",
+    "guardwin1"
+   ],
+   "cards": [
+    "c-reports-10",
+    "c-guardwin1",
+    "c-reports-8",
+    "c-reports-9"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFNYZ6EPr9NbJWrwDh",
    "title": "Night QA: the test browser plays your check cards",
    "first": "2026-11-21T21:16:47Z",
@@ -29520,16 +29541,6 @@
    "cards": [
     "c-night-qa",
     "c-nightqa"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG23YgrNLwpd1VDRJY",
-   "title": "Fix the report backlog (1 open)",
-   "first": "2026-11-21T21:11:19Z",
-   "last": "2026-11-21T21:11:19Z",
-   "tags": [],
-   "cards": [
-    "c-reports-10"
    ]
   },
   {
@@ -33888,8 +33899,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "501e1a76ce6e2bdeceb3ce2cbb64791bf680dbc4",
- "synced_at": "2026-11-21T21:17:53+00:00",
+ "synced": "8855c16a226b6db9fc8de2f4fd88c6e55d4d678c",
+ "synced_at": "2026-11-21T21:19:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
