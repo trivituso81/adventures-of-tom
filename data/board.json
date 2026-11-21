@@ -16564,7 +16564,7 @@
   {
    "id": "c-keysecrets5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets5",
    "title": "Recast and baker pages: key boxes",
@@ -16643,9 +16643,14 @@
     {
      "d": "2026-11-20",
      "t": "Built keysecrets5: no page asks for aot-baker-key any more (grep finds zero in code), docs and comments purged (CLAUDE.md, docs/VOICE.md, docs/VOICE_LIBRARY.md, READMEs). Tests: battle-scripts.py output identical, board_check, tag check."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets5: the recast and baker pages that asked for a pasted key are retired"
     }
    ],
-   "after": "nothing for Tom: c-keysecrets3"
+   "after": "nothing for Tom: c-keysecrets3",
+   "done": "2026-11-20"
   },
   {
    "id": "c-voiceauto1",
@@ -18088,7 +18093,7 @@
   {
    "id": "c-probe-sonnet-high",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "tag": "probesonnethigh1",
    "title": "Probe: Sonnet high START route",
@@ -18098,13 +18103,17 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEiCDyJ9kqKJEwycow",
+    "url": "https://claude.ai/code/session_01RXeukFBXXCeVm9sH5Xveuw",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Throwaway probe added by c-startfix to prove this START route. Retired in the same build."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -18222,6 +18231,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFBXXCeVm9sH5Xveuw",
+   "title": "Probe: Sonnet high START route",
+   "first": "2026-11-21T00:41:23Z",
+   "last": "2026-11-21T00:41:23Z",
+   "tags": [],
+   "cards": [
+    "c-probe-sonnet-high"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukHFTiVfku9KBW5f7sz",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -18741,6 +18760,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG9K6Rpr6n2qBhKfoJ",
+   "title": "Recast and baker pages: key boxes",
+   "first": "2026-11-20T16:30:36-08:00",
+   "last": "2026-11-20T16:41:19-08:00",
+   "tags": [
+    "keysecrets5"
+   ],
+   "cards": [
+    "c-keysecrets5"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukErmQedwFbjJq3WxTZ",
    "title": "SKIP passes pictures that only show something",
    "first": "2026-11-20T16:20:59-08:00",
@@ -18840,16 +18871,6 @@
    "tags": [],
    "cards": [
     "c-idea-searchthrough"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG9K6Rpr6n2qBhKfoJ",
-   "title": "Recast and baker pages: key boxes",
-   "first": "2026-11-20T16:30:36-08:00",
-   "last": "2026-11-20T16:30:36-08:00",
-   "tags": [],
-   "cards": [
-    "c-keysecrets5"
    ]
   },
   {
@@ -20704,8 +20725,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "f9a8bf1125f04f9da16bcc6b0f45d767c07d189a",
- "synced_at": "2026-11-21T00:39:31+00:00",
+ "synced": "cb177c2a9c740fe2fe0d934eec5c0d44ef63b025",
+ "synced_at": "2026-11-21T00:42:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
