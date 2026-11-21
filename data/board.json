@@ -17351,7 +17351,7 @@
    "title": "Generate and approve the 4 Hollow wrapper trail paintings",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "next": "Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN > ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2).",
    "blocks": [
@@ -17366,7 +17366,7 @@
     ]
    },
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFa4MdDrAtR4RY9gAw",
     "opening": "not started"
@@ -17384,6 +17384,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: 4 were already waiting for your review. Spent about $0.00."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: they all look like shit. did you even review? Sent to Claude as card c-fix-hollowtrail1-pics; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T00:29:25.713Z"
     }
    ],
    "gen": {
@@ -17412,7 +17417,8 @@
      "failed": [],
      "spent": 0
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-hollowtrail2",
@@ -17873,6 +17879,58 @@
    "after": "t-keysecrets2-try",
    "auto": true,
    "started_at": "2026-11-21T00:27:05+00:00"
+  },
+  {
+   "id": "c-fix-hollowtrail1-pics",
+   "tag": "fix-hollowtrail1-pics",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
+   "next": "You reported a problem on Generate and approve the 4 Hollow wrapper trail paintings. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: they all look like shit. did you even review?",
+   "blocks": [
+    "t-hollowtrail1-pics"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T00:29:25.325Z",
+     "card": "t-hollowtrail1-pics",
+     "title": "Generate and approve the 4 Hollow wrapper trail paintings",
+     "ask": "pictures",
+     "words": "they all look like shit. did you even review?",
+     "shot": "",
+     "asked": "Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN ) ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-hollowtrail1-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-hollowtrail1-pics.",
+     "at": "2026-11-21T00:29:25.713Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-hollowtrail1-pics: they all look like shit. did you even review?",
+     "at": "2026-11-21T00:29:25.713Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Generate and approve the 4 Hollow wrapper trail paintings.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-hollowtrail1-pics and t-hollowtrail1-pics in data/board.json, history included. Your first push is the commit board: start c-fix-hollowtrail1-pics.\n\nTom tested and found problems:\n1. Card t-hollowtrail1-pics (Generate and approve the 4 Hollow wrapper trail paintings, ask pictures). He was asked: Tap Generate all 4 pictures on this card (about $0.20), then in ADMIN ) ART LIBRARY, Areas tab, group Grump Hollow, APPROVE or REJECT each of area-hollow-trail1 to 4 with a note. Each should be the same Grump Hollow painting with exactly nine cream paper muffin wrappers lying on the ground: 1 from the gate under THE SQUARE SHOPS board up into the clearing, 2 over to the old bench and up the little path at the top left, 3 down to the middle of the clearing, 4 east to Boppy's fishing bench. Approving installs each one in the game by itself and starts card Check the Grump Hollow wrapper trail paintings in the game (c-hollowtrail2). He wrote: they all look like shit. did you even review?\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T00:29:25.325Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-hollowtrail1-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-hollowtrail1-pics, and give the build fix-hollowtrail1-pics a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-hollowtrail1-pics"
   }
  ],
  "sessions": [
