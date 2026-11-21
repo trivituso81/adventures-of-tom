@@ -94,6 +94,8 @@ textarea{min-height:92px;resize:vertical}
 .badge{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;background:var(--well);border:1px solid var(--line);color:var(--muted)}
 .badge.v{color:#0d2b18;background:var(--good);border-color:var(--good)}
 .badge.n{color:var(--prob-text)}
+.badge.w{color:#10202a;background:#8fd3ff;border-color:#8fd3ff}
+.badge.r{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
 .badge.o{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
 #dim{position:fixed;inset:0;background:#000a;display:none;z-index:20}
 #sheet{position:fixed;left:0;right:0;bottom:0;max-height:96vh;overflow-y:auto;background:var(--surface);border-radius:18px 18px 0 0;border-top:1px solid var(--line);padding:12px 14px calc(18px + env(safe-area-inset-bottom));display:none;z-index:21}
@@ -522,14 +524,54 @@ function statusHtml(s){
 
 // ---------- Animations ----------
 function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&c.anim.id===animId&&c.col!=='done');}
+// ---------- where a new video is (guidestatus1) ----------
+// Five stages, from what the request files and the services tell: REQUESTED (sent, GitHub has not picked it up), IN LINE (the video service accepted it
+// and has it waiting), MAKING (the service says it is working on it), CHECKING (the video is back: marks, clip gate, preview), READY TO REVIEW (a take
+// waits for Use this one or Keep the old one). xAI (monsters) only says "pending", so a monster goes from REQUESTED straight to MAKING.
+const STAGE={req:['REQUESTED','w'],line:['IN LINE','w'],making:['MAKING','w'],checking:['CHECKING','w'],ready:['READY TO REVIEW','r']};
+const PROG={status:{},takes:null,reqs:[],at:0,sig:'',timer:0};
+async function loadProgress(){
+  const tok=lsGet(TOKEN),get=(f,ref)=>ghGetJson(f,ref,tok).then(g=>g?g.doc:null).catch(()=>null);
+  const [st,tk,wr,cr]=await Promise.all([get('status.json','guidegen'),get('takes.json','guidegen'),get('data/wan-requests.json','main'),get('data/clip-requests.json','main')]);
+  PROG.status=(st&&st.anims)||{};if(tk){PROG.takes=tk;GT=tk;}
+  PROG.reqs=[].concat(((wr&&wr.requests)||[]).map(r=>({anim:r.anim,take:r.take})),((cr&&cr.requests)||[]).filter(r=>r.guide).map(r=>({anim:r.guide.anim,take:r.guide.take})));
+  PROG.at=Date.now();
+}
+function stageOf(a){
+  const T=((PROG.takes||GT||{}).anims||{})[a.id]||{takes:[]},have=n=>T.takes.some(t=>t.n>=n);
+  const S=PROG.status[a.id],P=GPEND[a.id];let best=null;
+  const consider=(n,key,at)=>{if(n&&!have(n)&&(!best||n>best.n||(n===best.n&&key!=='req')))best={n,key,at};};
+  PROG.reqs.filter(r=>r.anim===a.id).forEach(r=>consider(r.take,'req'));
+  if(P)consider(P.n,'req',P.at);
+  if(S)consider(S.take,S.stage,S.at);
+  if(best)return best;
+  const L=T.takes[T.takes.length-1];
+  if(L&&!L.used&&!(GKEPT[a.id]||[]).includes(L.n))return {n:L.n,key:'ready'};
+  return null;
+}
+function stageBadge(a){
+  const s=stageOf(a);if(!s)return '';const m=s.at&&s.key!=='req'?Math.max(0,Math.round((Date.now()-Date.parse(s.at))/60000)):null;
+  return '<span class="badge '+STAGE[s.key][1]+'" data-stage="'+s.key+'">'+STAGE[s.key][0]+(m!=null&&m>=1?' · '+m+' MIN':'')+'</span> ';
+}
+async function watchProgress(){
+  clearTimeout(PROG.timer);
+  const every=Q.get('fast')?400:15000;
+  if(Date.now()-PROG.at>=every){
+    await loadProgress();
+    const sig=JSON.stringify([PROG.status,PROG.reqs,Object.entries(((PROG.takes||{}).anims)||{}).map(([k,v])=>[k,v.takes.map(t=>[t.n,!!t.used])]),GPEND,GKEPT]);
+    if(sig!==PROG.sig){PROG.sig=sig;if(tab==='anims'&&sel){renderDetailKeep();return;}}
+  }
+  if(tab==='anims'&&(lsGet(TOKEN)||Q.get('gh')))PROG.timer=setTimeout(watchProgress,every);   // a browser with no token reads once (GitHub limits reads without one)
+}
 function animRow(a){
   const k={state:'Body',move:a.vibe||'Move',act:'Attack',wind:'Wind-up'}[a.kind],n=openNotes(a.id).length;
-  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(a.video?'<span class="badge v">VIDEO</span>':a.painted?'<span class="badge n">OLD PAINTED POSE</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':a.painted?'<span class="badge n">OLD PAINTED POSE</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
 }
 function animsHtml(id){
-  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='video')===a.video);
+  watchProgress();
+  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?!!stageOf(a):(f==='video')===a.video));
   let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
-  h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
+  h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet'],['work','In the works']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
   const grp=[['state','Body'],['move','Moves'],['act','Attacks'],['wind','Wind-ups']];
   grp.forEach(g=>{const r=show.filter(a=>a.kind===g[0]);if(r.length)h+='<h3>'+g[1]+'</h3>'+r.map(animRow).join('');});
   if(!show.length)h+='<p class="hint">Nothing in this filter.</p>';
@@ -539,7 +581,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){MP.on=false;GCUR.tok++;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){MP.on=false;GCUR.tok++;if(tab==='anims'){PROG.at=0;watchProgress();}$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -582,7 +624,7 @@ const saveGW=()=>{try{localStorage.setItem('aot-guide-work',JSON.stringify(GW));
 const workPrompt=a=>(GW[a.id]&&GW[a.id].prompt)||(G(a)&&G(a).prompt)||'';
 const slugOf=id=>id.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 async function ghGetJson(path,ref,tok){
-  const H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
+  const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
   const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+path+'?ref='+ref+'&t='+Date.now(),{cache:'no-store',headers:H});
   if(r.status===404)return null;if(!r.ok)throw new Error('GitHub '+r.status);
   const j=await r.json();let c=j.content||'';

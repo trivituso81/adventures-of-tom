@@ -72,6 +72,9 @@ jobs:
       - name: Make it
         env:
           FAL_KEY: ${{ secrets.FAL_KEY }}
+          GUIDE_STATUS: '1'   # guidestatus1: tools/guidegen/progress.py writes status.json on branch guidegen
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           WHAT: ${{ inputs.what }}
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}

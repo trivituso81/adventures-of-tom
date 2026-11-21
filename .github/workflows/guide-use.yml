@@ -79,6 +79,7 @@ jobs:
         run: |
           [ -f "$RUNNER_TEMP/guidegen/use-report.json" ] || exit 0
           mkdir -p "$RUNNER_TEMP/keep" && cp "$RUNNER_TEMP/guidegen/use-report.json" "$RUNNER_TEMP/keep/"
+          [ -f "$RUNNER_TEMP/guidegen/takes-used.json" ] && cp "$RUNNER_TEMP/guidegen/takes-used.json" "$RUNNER_TEMP/keep/takes.json"
           python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/keep" --msg "guidegen: use report (run ${{ github.run_id }}) [skip ci]"
       - name: Publish
         env:

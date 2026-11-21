@@ -26685,7 +26685,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "guidestatus1",
-   "next": "Being built in this conversation: five stage labels on the Animations list (Requested, In line, Making, Checking, Ready to review) in place of VIDEO or NO VIDEO YET while a new video is on its way.",
+   "next": "Shipped as guidestatus1. The Animations list in ADMIN > BATTLE GUIDE shows REQUESTED, IN LINE, MAKING, CHECKING or READY TO REVIEW on a row while its new video is on its way, and the filter In the works lists only those.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -26710,8 +26710,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "guidestatus1 shipped: five stage labels on the Animations list from what fal and xAI report, refreshed every 15 seconds, plus the In the works filter."
     }
-   ]
+   ],
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-nightshift",

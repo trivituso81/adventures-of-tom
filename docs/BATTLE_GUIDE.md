@@ -61,6 +61,18 @@ Open an animation (Animations tab). Under the player the sheet shows its prompt,
 
 The Action never approves a take. A take is `new`, `still` (the video hardly moves, so there is nothing to cut) or `failed` (nothing came back; no charge). Per animation the sheet shows the prompt version, takes made and dollars spent (`takes.json`).
 
+**Where a new video is (guidestatus1).** On the Animations list a stage label replaces VIDEO or NO VIDEO YET while a new video is on its way, and the filter In the works lists only those rows. The page reads the request files on `main`, `status.json` and `takes.json` on branch `guidegen`, every 15 seconds while the list is open (once, in a browser with no token).
+
+| Label | What it means | Who says so |
+|---|---|---|
+| REQUESTED | The tap was saved; GitHub has not picked it up yet | the request is still in `data/wan-requests.json` or `data/clip-requests.json` (or this phone just sent it) |
+| IN LINE · n MIN | The video service accepted it and has it waiting | fal answers IN_QUEUE (family only) |
+| MAKING · n MIN | The service is working on it | fal answers IN_PROGRESS; xAI only says pending, so a monster is MAKING from the moment it is sent |
+| CHECKING · n MIN | The video is back: marks, clip gate, preview | the video was downloaded |
+| READY TO REVIEW | A take waits for Use this one or Keep the old one (a failed take shows here too, with why inside) | `takes.json`; it clears when the take is used (`used` on the take) or kept on this phone |
+
+The jobs write a stage with `tools/guidegen/progress.py` (`mark`, on only when `GUIDE_STATUS=1`, which `wan-gen` and `clip-gen` set), through `keep.py`, which merges `status.json` by animation (newest wins). `falq.Fal.wait` reports each fal status to a `tell` callback.
+
 **Stop rule.** Generate refuses, sends nothing and offers the note box to Claude when the last two takes were held by the clip gate for the same fault (`stop` in `takes.json`, set by `make_take.py`; a take that passes clears it) or when the new try's note shares half its words with the note of the try before (the page, `stopFor`). Two misses the same way is the stop-loss in CLAUDE.md.
 
 **What Use this one changes** (`use_take.py`, no paid call): the take's video is kept as `art/raw/clips/wan-<job>-v<rev>.mp4` (family; the job in `tools/art-library/wangen-jobs.json` goes to rev + 1 with the prompt in `tools/art-library/prompts/wan-<job>-v<rev>.txt`) or `art/raw/clips/clip-<id>-v<n>.mp4` (monster; a new version of the entry in `data/art-prompts.json`, `promptRev` raised, status approved, a new entry when it had none); `tools/clip-bake/bake_clip.py` cuts `data/clips/<clip>.js` and `art/clips/<clip>.webp` by the recipe of its kind (`tools/guidegen/recipe.json`); the `<script>` tag goes into `index.html`; a body state is named in `B3_BODY_CLIPS` and its painted row leaves `B3_BODY_PAINT` (No painted poses in battle); a move or attack row gets `anim:{kind:'clip',clip:'<clip>'}` and a wind-up row `wind:'<clip>'` (`data/b3-kit-*.js`, `data/b3-foes-ch*.js`); `data/guide-prompts.json` records the prompt used (source `used`); `data/guide-anims.json` is rebuilt; `docs/CHANGES.md` gets the heading; `bump_tags.py` moves the cache tags; the job pushes to `main` and starts the publish. The player then shows the new clip and the guide says to press RELOAD on the title screen.

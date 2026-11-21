@@ -28,6 +28,8 @@ import os, sys, re, json, time, hashlib, base64, argparse, datetime, subprocess,
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, '..', 'guidegen'))
+import progress   # guidestatus1
 import clipmarks  # noqa: E402
 
 CLIP_RATE = {'grok-imagine-video-1.5': {'480p': .08, '720p': .14, '1080p': .25}, 'grok-imagine-video-1.5-lite': {'480p': .02, '720p': .03, '1080p': .14}}   # dollars per second, same table as engine/art-clips.js
@@ -366,6 +368,7 @@ def main():
                         with clock: spend['total'] -= c   # not accepted: nothing charged
                         raise
                     pend = {'rid': rid, 'rev': rev, 'ph': ph, 'cost': c, 't': time.time()}; state['pending'][id_] = pend; save_state(); say(id_, 'sent', rid)
+                if e.get('_guide'): progress.mark(e['_guide']['anim'], e['_guide']['take'], 'making')   # guidestatus1: xAI only says pending, so sent = making
                 try: url = xai.wait(pend['rid'], None)
                 except Gone: state['pending'].pop(id_, None); save_state(); raise
                 data = xai.download(url)
@@ -373,6 +376,7 @@ def main():
                 open(vid, 'wb').write(data)
                 state['held'][id_] = {'file': vid, 'rev': rev, 'ph': ph}; state['pending'].pop(id_, None); save_state()   # paid for and kept
                 report['made'].append(id_); say(id_, 'video in (%d KB)' % (len(data) // 1024))
+                if e.get('_guide'): progress.mark(e['_guide']['anim'], e['_guide']['take'], 'checking')
             if e.get('_guide'):   # guidegen1: keep the video as a take; the marks, the gate and the preview are made by make_take.py
                 g = e['_guide']; os.makedirs(os.path.join(a.out, 'guide'), exist_ok=True); keep = os.path.join(a.out, 'guide', id_ + '.mp4'); shutil.copyfile(vid, keep)
                 guide_rows.append({'anim': g['anim'], 'take': g['take'], 'video': keep, 'prompt': (e.get('prompt') or '').strip(), 'promptRev': e.get('promptRev', 0), 'route': 'xai', 'cost': round(cost(e), 4), 'at': e.get('_at'), 'note': g.get('note', '')})

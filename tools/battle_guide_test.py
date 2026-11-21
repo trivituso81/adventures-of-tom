@@ -88,6 +88,7 @@ prep('move:lounge_pass_flex', 1, g_ok); prep('move:lounge_pass_flex', 2, g_hold,
 prep('act:skeeter:darting_bite', 1, g_ok)
 prep('move:suite_door_slide', 1, g_hold); prep('move:suite_door_slide', 2, g_hold)   # already stopped: two held takes with the same fault
 STATE = {'anims': {'move:suite_door_slide': copy.deepcopy(SNAP[('move:suite_door_slide', 2)])}, 'spent': 1.0}
+STATUS = {'anims': {}}
 RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/wan-requests.json', 'data/clip-requests.json', 'data/guide-use.json')}
 ACT = {'pending': [], 'miss': 0, 'use': None, 'usemiss': 0, 'fail': set()}
 def action_takes(doc):
@@ -109,6 +110,9 @@ def github(route):
         doc = json.loads(base64.b64decode(body['content']).decode()); f['puts'].append({'msg': body['message'], 'doc': doc}); f['sha'] = 'q%d' % len(f['puts'])
         (action_use if path.endswith('guide-use.json') else action_takes)(doc)
         return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': 'n'}}))
+    if path == 'status.json':
+        if not STATUS['anims']: return route.fulfill(status=404, body='{}')
+        return route.fulfill(status=200, content_type='application/json', body=jfile(STATUS))
     if path == 'takes.json':
         if ACT['miss'] > 0: ACT['miss'] -= 1
         elif ACT['pending']:
@@ -365,6 +369,33 @@ with sync_playwright() as p:
           and cr['guide']['anim'] == 'act:skeeter:darting_bite' and cr['guide']['take'] == 1 and cr['guide']['clip']['owner'] == 'skeeter' and cr['guide']['clip']['model'] == 'grok-imagine-video-1.5-lite' and cr['guide']['clip']['kind'] == 'strike' and cr['cap'] <= 0.5, cp)
     check('a monster with no video has a standard-motion side to compare', 'standard motion' in pg.locator('#gtakecard').inner_text().lower() or 'Now in the game' in pg.locator('#gtakecard').inner_text())
     pg.click('#bclose')
+    # guidestatus1: the list shows where each new video is
+    import datetime as _dt
+    ago = lambda m: (_dt.datetime.utcnow() - _dt.timedelta(minutes=m)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    RQ['data/wan-requests.json']['doc'] = {'requests': [{'anim': 'move:konami_code', 'take': 1, 'at': 'x'}]}; RQ['data/wan-requests.json']['sha'] = 'qq'
+    STATUS['anims'] = {'move:cartridge_blow': {'take': 1, 'stage': 'line', 'at': ago(0)}, 'move:controller_toss': {'take': 1, 'stage': 'making', 'at': ago(3)},
+                       'move:winged_shell_lock_on': {'take': 1, 'stage': 'checking', 'at': ago(1)}, 'move:lounge_pass_flex': {'take': 1, 'stage': 'checking', 'at': ago(9)}}
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim')
+    pg.wait_for_function("document.querySelectorAll('#detail [data-stage]').length>=5", timeout=20000)
+    st = pg.evaluate("Object.fromEntries([...document.querySelectorAll('#detail .anim')].map(r=>[r.querySelector('b').textContent,(r.querySelector('[data-stage]')||{}).textContent||(r.querySelector('.badge')||{}).textContent]))")
+    check('REQUESTED: a request still on main', st.get('Konami Code', '').startswith('REQUESTED'), st)
+    check('IN LINE: the service has it waiting', st.get('Cartridge Blow') == 'IN LINE', st)
+    check('MAKING with the minutes since it started', st.get('Controller Toss') == 'MAKING · 3 MIN', st)
+    check('CHECKING: the video is back', st.get('Winged Shell Lock-On', '').startswith('CHECKING'), st)
+    check('READY TO REVIEW: a take nobody used or kept', st.get('Suite Door Slide') == 'READY TO REVIEW', st)
+    check('a stage older than the newest take does not show (the take is there), a kept take is not ready', st.get('Lounge Pass Flex') == 'VIDEO', st)
+    check('a stage replaces VIDEO / NO VIDEO YET on its row', pg.evaluate("[...document.querySelectorAll('#detail .anim')].every(r=>!(r.querySelector('[data-stage]')&&/VIDEO/.test([...r.querySelectorAll('.badge:not([data-stage])')].map(b=>b.textContent).join(''))))"))
+    pg.click('#detail [data-af=work]'); pg.wait_for_timeout(200)
+    check('In the works lists only animations with a stage', pg.locator('#detail .anim').count() == 5, pg.locator('#detail .anim').count())
+    STATUS['anims']['move:cartridge_blow']['stage'] = 'making'
+    pg.wait_for_function("[...document.querySelectorAll('#detail .anim')].some(r=>r.textContent.indexOf('Cartridge Blow')>=0&&r.querySelector('[data-stage=making]'))", timeout=20000)
+    check('the list updates by itself when a stage moves', True)
+    pg.screenshot(path=os.path.join(out, 'battleguide-stages.png'))
+    for nm, w, h, two in SIZES:
+        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(150)
+        check(nm + ': the stage badges fit', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
+    pg.set_viewport_size({'width': 466, 'height': 657}); pg.click('#detail [data-af=all]')
+    RQ['data/wan-requests.json']['doc'] = {'requests': []}; STATUS['anims'] = {}
     # no token
     pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
     n_all = sum(len(f['puts']) for f in RQ.values()); pg.click('#ggen'); pg.wait_for_timeout(200)

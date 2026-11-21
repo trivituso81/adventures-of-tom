@@ -85,13 +85,16 @@ class Fal:
         if not j.get('request_id'): raise Stop('fal gave no request id: ' + self.clean(r.text))
         return {'rid': j['request_id'], 'status_url': j['status_url'], 'response_url': j['response_url']}
 
-    def wait(self, pend):
+    def wait(self, pend, tell=None):
         t0 = time.time()
         while time.time() - t0 < POLL_MAX_S:
             try: r = self.s.get(pend['status_url'], headers=self.hdr, timeout=60)
             except Exception: time.sleep(POLL_S); continue
             if r.status_code in (401, 403): raise KeyRefused('fal refused the key while waiting (%d); the request is kept: run again' % r.status_code)
             j = r.json() if r.ok else {}
+            if tell and j.get('status'):
+                try: tell(j['status'])
+                except Exception: pass
             if j.get('status') == 'COMPLETED':
                 if j.get('error'): raise Gone('fal could not make it: %s' % self.clean(j.get('error')))
                 break

@@ -97,6 +97,9 @@ jobs:
       - name: Make the clips
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GUIDE_STATUS: '1'   # guidestatus1: tools/guidegen/progress.py writes status.json on branch guidegen
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           GROUP: ${{ inputs.group }}
           IDS: ${{ inputs.ids }}
           LIMIT: ${{ inputs.limit }}

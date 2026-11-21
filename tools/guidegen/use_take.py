@@ -171,6 +171,7 @@ def use(req, state, root, G, tag):
         notes += wire_row(root, req['anim'], clip_key)
     gp = jread(os.path.join(root, 'data', 'guide-prompts.json'), {'anims': {}}); gp.setdefault('anims', {})[req['anim']] = {'prompt': prompt, 'rev': (existing or {}).get('promptRev', 0) if a['route'] == 'xai' else rev, 'source': 'used'}
     open(os.path.join(root, 'data', 'guide-prompts.json'), 'w', encoding='utf-8').write(jdump(gp))
+    t['used'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())   # guidestatus1: the list stops showing Ready to review
     return {'anim': req['anim'], 'name': a['name'], 'owner': a['owner'], 'clip': clip_key, 'rev': rev_label, 'notes': notes, 'files': [rel]}
 
 
@@ -207,6 +208,8 @@ def main(argv=None):
     for r in reqs:
         try: done.append(use(r, state, root, G, a.tag)); say('used', r['anim'], 'take', r['take'])
         except Exception as x: failed.append({'anim': r['anim'], 'why': str(x)[:300]}); say('FAILED', r['anim'], str(x)[:300])
+    if done:   # only the used animations go back to the branch (keep.py merges them by take)
+        json.dump({'anims': {d['anim']: {k: v for k, v in state['anims'][d['anim']].items()} for d in done}}, open(os.path.join(a.state, 'takes-used.json'), 'w'), indent=1)
     json.dump({'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'reqs': [r.get('at') for r in reqs], 'tag': a.tag, 'done': done, 'failed': failed}, open(os.path.join(a.state, 'use-report.json'), 'w'), indent=1)
     if done:
         subprocess.run(['node', os.path.join(root, 'tools', 'guidegen', 'build_map.js')], cwd=root, check=False)

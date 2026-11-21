@@ -1,29 +1,11 @@
-## fix-anim-grace-squeeze-qxim (2026-11-21): Grace's Soup-Dumpling Squeeze: the dumpling has a cute face and bursts into fluff on the hit
+## guidestatus1 (2026-11-21): the Battle Guide list shows where each new video is: Requested, In line, Making, Checking, Ready to review
 
-Card c-fix-anim-grace-squeeze-qxim (from t-anim-grace-squeeze-qxim). Tom on the card: "Left a comment". The comment, his Battle Guide note (18:51): "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have."
-| | |
-|---|---|
-| Kept | Every word of `wan-grace-squeeze-v3.txt` outside the MOTION clauses his note names, the start picture, every Wan setting, the bake shape (strike, every 3rd picture, 1.5x, figure 90 rows) |
-| Changed | MOTION: the squishy gets "with a cute face of two black dot eyes, rosy cheeks and a tiny smile"; "until it squishes flat" became "until it bursts apart in a puff of white fluff"; "She lets it puff back up, tucks it back into her hoodie pocket and returns" became "She lowers her empty hands and returns" (a burst toy cannot go back in the pocket) |
-- Why not the Battle Guide's own answer: the reconcile Action's edit (branch guidegen) said the dumpling explodes and then puffs back up and is tucked away, which contradicts itself.
-- Video: wan-gen run 44938307197, $0.50. Source `art/raw/clips/wan-grace-squeeze-v4.mp4` (v3 video and prompt removed), baked pictures 18 to 144, the hit at picture 108 where the dumpling bursts (43 pictures, 2.9 s in the game, hit at 2.0 s).
-- Checks: same girl and outfit; standing height 1,035 px first, 1,037 last; feet on row 1,153 in every picture; nearest edge 14 px (the fluff); the fluff is gone before the last picture. Looked at in the Battle Guide player in portrait and landscape: HIT shows on the burst, Prompt v4.
-- Tests: `b3_test.py s8` FAILS []. `data/guide-anims.json` rebuilt.
-- No in-game pencil report was filed since 18:48.
-- Tom's card: t-anim-grace-squeeze-qxim.
-
-## board-night (2026-11-21): board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)
-
-Tom (11:00): "I feel more could be done with automated tasks that you and i design together to get work done overnight." Tom (11:09): "i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it". Design: `claude/night-plan.md` (new; index rebuilt). Board change and that plan only; no page, tool or game file changed, and nothing is scheduled yet.
-| Card | Starts | Model, effort |
-|---|---|---|
-| c-nightshift, Night shift: queued cards start by themselves overnight | START now | Sonnet 5.5, medium |
-| c-nighttests, Night test run: every test, every night, on GitHub | START now | Sonnet 5.5, medium |
-| c-nightclean, Nightly cleanup: files, notes and the working agreement | START once c-nightshift ships | Sonnet 5.5, medium |
-| c-nightqa, Night QA: the test browser plays your check cards | START once c-nightclean ships | Sonnet 5.5, medium |
-| c-nightgreen, Fix the 13 tests that already fail | Copy prompt once c-nighttests ships | Sonnet 5.5, high |
-| c-nightrefactor, Nightly refactoring, one small piece a night | Copy prompt once c-nightgreen ships and 7 nights pass with no failing test | Sonnet 5.5, high |
-- Checked: `python3 tools/board_check.py` ok; the board page opened locally in portrait shows both Up next cards under Start next with START and Sonnet 5.5, medium.
+Card c-guidestatus. Tom (11:17): "when im scanning the animations list i need better transparency to where a new video is in the creation process".
+- Five stage labels replace VIDEO or NO VIDEO YET on an Animations row while a new video is on its way; IN LINE, MAKING and CHECKING show the minutes since they started. New filter In the works. Table in docs/BATTLE_GUIDE.md.
+- Only what the services report is used: fal (family) gives IN_QUEUE and IN_PROGRESS; xAI (monsters) only says pending, so monsters skip IN LINE.
+- `tools/guidegen/progress.py` writes `status.json` on branch `guidegen` (through `keep.py`, merged by animation); `falq.Fal.wait` reports each status; `wan-gen` and `clip-gen` turn it on (`GUIDE_STATUS=1`); Use this one marks the take `used`.
+- A video requested before this build was running with the old job code: it shows REQUESTED until its take is READY TO REVIEW.
+- Tests: `tools/battle_guide_test.py` (stage labels, the filter, a stage moving by itself, four Duo sizes), `tools/guidegen/take_test.py` T6, `wangen_test.py`, `artgen_test.py` (falq is shared). Not seen on the phone yet.
 
 ## buildpill1 (2026-11-21): the build name on the Builds screen is a status-colored pill
 
@@ -38,14 +20,6 @@ Card c-buildpill1. Tom (11-21): "in the builds screen, the build name must be mo
 - clip-skeeter-bite: clip `skeeter-bite` cut from art/raw/clips/clip-skeeter-bite-v4.mp4 (24 pictures a second; video frames 0 to 72, every 2, hit at frame 10; 37 pictures kept; played at 1.5x). skeeter_bite frames 37 frame px 560 368 rows 70 46 sheet (997, 6251) in memory mb 24.9 (as a grid 30.5) kb 997 dur ms 2056 kind strike impact ms 278 reach [28.2, 21.4]
 - clip-skeeter-whine: clip `skeeter-whine` cut from art/raw/clips/clip-skeeter-whine-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, state; 37 pictures kept; played at 1.5x). skeeter_whine frames 37 frame px 544 376 rows 68 47 sheet (2455, 2415) in memory mb 23.7 (as a grid 30.3) kb 957 dur ms 2056 kind state impact ms 0 reach [22.2, 21.0]
 - Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
-
-## b3s18b (2026-11-21): chapter 7's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
-
-Card c-b3s18, part b. Chapter 7 (the Library) joins chapters 1 to 6: the Cliffhanger, the Know-It-All, Pop-Up Panic and The Unread play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch7cliff`, `ch7know`, `ch7pop`, `unread`): Pet Peeves and Resists, To Be Continued..., SHHH! and Skill Lock, Well, Technically and Actually..., Big Reveal, Turn Back the Page, the Bookmark Ribbon and THE END. No Warmth bar and no WARMTH command in these fights; OLD still plays them on battle 2 on the same save.
-- Scene change: the Pick the Rhubarb toast is skipped under Battle 3 (`B3_CH_ON(7)`). Grace's coaching after a loss to The Unread has a Battle 3 version: the first line is the same so its clip still plays, the second line is new and not recorded yet (speech synthesis until baked, listed under No clip yet in the Voice Library). OLD keeps the old line.
-- Left alone on purpose: the Grace Signature Tool toast that lists a WARMTH number (an equipment stat, not the bar).
-- Checks: `node tools/b3-sim.js check` (`tools/b3-check-s18.js`), `unused_voice.py` 0 on all checks. No browser tests this stage (Tom's request), so `smoke.py` and a chapter 7 test were not run.
-- Not looked at: any chapter 7 fight in a browser.
 
 ## portraits2 (2026-11-21): Portraits baked from your saved crops: rose (made by the portrait-bake Action)
 

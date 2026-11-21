@@ -189,11 +189,14 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
                 state['calls'].append({'what': what, 'rev': rev, 'rid': pend['rid'], 'est': est, 'at': pend['at']}); save()
             log('sent, request %s' % pend['rid'])
         else: log('picking up request %s sent earlier (no new charge)' % pend['rid'])
-        res = fal.wait(pend)
+        tell = getattr(a, 'tell', None)
+        if tell: tell('IN_QUEUE')
+        res = fal.wait(pend, tell)
         json.dump(res, open(os.path.join(a.out, '%s-r%d.json' % (what, rev)), 'w'), indent=1)
         url = result_url(job, res)
         if not url: raise Stop('the answer has no %s: %s' % (job['kind'], json.dumps(res)[:300]))
         data = fal.download(url)
+        if tell: tell('DOWNLOADED')
         open(res_file, 'wb').write(data)
         if frame: open(os.path.join(a.out, '%s-r%d-frame.png' % (what, rev)), 'wb').write(frame)
         with lock:
@@ -215,7 +218,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     seed 81, first and last frame = the start picture), capped by its own `cap` (at most $1) and by the day cap shared by every guide request
     (state['guide_days'], default $10 a day). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
     import copy, types
-    sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue
+    sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue, progress
     doc = gqueue.load('data/wan-requests.json', a.repo)
     reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
     say('%d guide request(s) found' % len(reqs))
@@ -234,6 +237,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
             if not dry and used + est > a.day_cap + 1e-9:
                 rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); continue
             ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0); ns.dry_run = dry
+            ns.tell = (lambda s, _r=r: progress.mark(_r['anim'], _r['take'], 'checking' if s == 'DOWNLOADED' else progress.fal_stage(s))) if not dry else None
         code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
         row = {'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'note': r.get('note', ''), 'cost': est if rep.get('file') else 0}
         if rep.get('file'):

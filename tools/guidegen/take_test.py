@@ -62,7 +62,7 @@ srv = ThreadingHTTPServer(('127.0.0.1', 0), Fal); FURL = 'http://127.0.0.1:%d' %
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 
 repo = os.path.join(TMP, 'wrepo'); out = os.path.join(TMP, 'wout')
-for rel in ['tools/art-library/wangen.py', 'tools/art-library/wangen-jobs.json', 'tools/art-library/prompts/wan-tom-idle-v1.txt', 'tools/guidegen/gqueue.py']:
+for rel in ['tools/art-library/wangen.py', 'tools/art-library/wangen-jobs.json', 'tools/art-library/prompts/wan-tom-idle-v1.txt', 'tools/guidegen/gqueue.py', 'tools/guidegen/progress.py', 'tools/guidegen/keep.py']:
     os.makedirs(os.path.dirname(os.path.join(repo, rel)), exist_ok=True); shutil.copy(os.path.join(ROOT, rel), os.path.join(repo, rel))
 for f in os.listdir(os.path.join(ROOT, 'tools/art-library')):   # wangen imports the shared fal queue code (falq.py) and friends
     if f.endswith('.py') and not f.endswith('_test.py'): shutil.copy(os.path.join(ROOT, 'tools/art-library', f), os.path.join(repo, 'tools/art-library', f))
@@ -199,6 +199,33 @@ node = sh('node', root + '/tools/guidegen/build_map.js', cwd=root)
 check('T5 guide-anims.json rebuilds and shows the used prompt', node.returncode == 0 and 'USED PROMPT' in json.load(open(root + '/data/guide-anims.json'))['anims']['move:lounge_pass_flex']['prompt'], node.stdout[-300:])
 bad = [f for f in ('data/b3-clips.js', 'data/b3-kit-tom.js', 'data/b3-foes-ch01.js', 'data/clips/tom-loungepass.js', 'data/clips/skeeter-bite.js') if sh('node', '--check', root + '/' + f).returncode]
 check('T5 every file the job touched is still valid JavaScript', not bad, bad)
+
+check('T5 Use marks the take used (the list stops showing Ready to review)', state_json['anims']['act:skeeter:darting_bite']['takes'][1].get('used'), state_json['anims']['act:skeeter:darting_bite']['takes'][1])
+
+# ---------------------------------------------------------------- T6 progress marks (guidestatus1)
+import progress as PG
+check('T6 off unless GUIDE_STATUS=1', PG.mark('a', 1, 'line') is False)
+sremote = os.path.join(TMP, 's.git'); sh('git', 'init', '-q', '--bare', '-b', 'guidegen', sremote)
+os.environ.update(GUIDE_STATUS='1', GUIDE_STATUS_URL=sremote)
+PG.mark('move:x', 1, 'line'); PG.mark('move:x', 1, 'line'); PG.mark('act:y', 2, 'making'); PG.mark('move:x', 1, 'making'); PG.mark('move:x', 1, 'bogus')
+sc = os.path.join(TMP, 'scheck'); sh('git', 'clone', '-q', '-b', 'guidegen', sremote, sc); S = json.load(open(sc + '/status.json'))['anims']
+check('T6 one entry per animation, the newest stage wins, two jobs both kept', S['move:x']['stage'] == 'making' and S['act:y']['stage'] == 'making' and S['act:y']['take'] == 2, S)
+check('T6 a repeated stage is not pushed again', int(sh('git', 'rev-list', '--count', 'guidegen', cwd=sc).stdout) == 1 and len([l for l in sh('git', '--git-dir', sremote, 'log', '--oneline', '-g', 'guidegen').stdout.splitlines()]) <= 3)
+check('T6 fal statuses map to IN LINE and MAKING', PG.fal_stage('IN_QUEUE') == 'line' and PG.fal_stage('IN_PROGRESS') == 'making' and PG.fal_stage('COMPLETED') is None)
+os.environ.pop('GUIDE_STATUS'); os.environ.pop('GUIDE_STATUS_URL')
+import falq
+seen = []
+class _R:
+    def __init__(s, j): s.ok = True; s.status_code = 200; s._j = j
+    def json(s): return s._j
+class _S:
+    def __init__(s): s.n = 0
+    def get(s, url, **k):
+        s.n += 1
+        return _R({'status': ['IN_QUEUE', 'IN_PROGRESS', 'COMPLETED'][min(s.n - 1, 2)]} if url.endswith('/status') else {'video': {'url': 'u'}})
+f = falq.Fal.__new__(falq.Fal); f.s = _S(); f.hdr = {}; falq.POLL_S = 0
+f.wait({'status_url': 'x/status', 'response_url': 'x'}, seen.append)
+check('T6 the fal wait reports each status it is told', seen == ['IN_QUEUE', 'IN_PROGRESS', 'COMPLETED'], seen)
 
 shutil.rmtree(TMP, ignore_errors=True)
 print('FAILS:', fails)
