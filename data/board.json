@@ -22777,7 +22777,7 @@
   {
    "id": "t-itemdefplay",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -22806,8 +22806,14 @@
     {
      "d": "2026-11-21",
      "t": "Cookie step removed: in chapter 1 Deedee joins the moment you enter her kitchen and never leaves the party, so her Cookie can't be reached there (checked in data/scenes.js)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:43:41.878Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-wanch1-watch",
