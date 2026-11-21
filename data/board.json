@@ -25378,7 +25378,7 @@
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
-   "last": "2026-11-21T09:56:55-08:00",
+   "last": "2026-11-21T09:57:43-08:00",
    "tags": [
     "anim-rose-victory-vqjc",
     "anim-rose-give-w5ws"
@@ -28812,8 +28812,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "51fc3779f86330066dd4ac97e1f2aa0265c7c5f0",
- "synced_at": "2026-11-21T17:57:32+00:00",
+ "synced": "86c76e3302490eaec0e33694b9e5cac06e2109e8",
+ "synced_at": "2026-11-21T17:58:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
