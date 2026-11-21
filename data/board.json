@@ -30434,6 +30434,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGzkghj5rCZRHTUQAf",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-21T23:22:54Z",
+   "last": "2026-11-21T23:22:54Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDb8nJiDxwzg1FfJQi",
    "title": "Animation note: Deedee, Dodge",
    "first": "2026-11-21T22:52:28Z",
@@ -35055,8 +35067,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "84b304d409396481a478248a48d048ed04e33294",
- "synced_at": "2026-11-21T23:21:00+00:00",
+ "synced": "da9d273a4f9a4d67378b94e656ac63936ccb925f",
+ "synced_at": "2026-11-21T23:23:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
