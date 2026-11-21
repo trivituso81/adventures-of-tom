@@ -22762,9 +22762,7 @@
    "col": "prog",
    "tag": "wanch2",
    "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. It also removes the old painted-pose code for good (no longer drawn since idea-tomgrace).",
-   "blocks": [
-    "c-anim-tom-dodge-ner3"
-   ],
+   "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
@@ -22808,6 +22806,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom's dodge is done on Wan as a duck (anim-tom-dodge-ner3), like Rose's; it no longer needs this card."
     }
    ],
    "prompt": {
@@ -24237,7 +24239,7 @@
      "card": "t-anim-tom-loungepass-lf2z-watch"
     }
    ],
-   "next": "Remakes Lounge Pass Flex from your note: the take-out and sparkle quick, most of the clip his arm out straight and the snooty swat.",
+   "next": "Not made yet. Your note worked (quick take-out, long arm out), but twice his arm and the card ran off the left edge of the video. Next try places him right of centre so the arm has room. The game keeps the current Lounge Pass clip until then.",
    "anim": {
     "id": "move:lounge_pass_flex",
     "owner": "tom",
@@ -24262,6 +24264,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping (stop-loss, two misses the same way). Prompt v3 (wan-tom-loungepass-v3.txt) made the take-out quick and the outstretched arm long, as Tom asked, but on rev 4 (pad 0.8) and rev 5 (pad 0.65) the arm and card ran past the left edge of the video for 12 to 17 pictures; the model stretches the arm to the frame edge whatever the scale. Neither showed the snooty chin-up face of the lf2z clip. Spent $1.00 of $2.50. Next: a different method, not a third pad: a wangen option that places the figure right of centre, then one try with v3 unchanged."
     }
    ],
    "prompt": {
@@ -24270,8 +24276,8 @@
      "Nothing to do first. Your note is on the card."
     ],
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
-    "effort": "medium (one prompt edited from a version that nearly worked)",
-    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-fix1 in data/board.json with its history and reports. Your first push is the commit board: start c-anim-tom-loungepass-fix1.\n\nTom's note on the clip made in anim-tom-loungepass-lf2z: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\". Start from tools/art-library/prompts/wan-tom-loungepass-v2.txt (job tom-loungepass in tools/art-library/wangen-jobs.json) and change only what the note names. Make it on Wan 3.0 through the wan-gen Action, check every picture against plan section 4.4, run the clip gate, bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Spend at most $2.50. Build tag anim-tom-loungepass-fix1. Set after to t-anim-tom-loungepass-lf2z-watch and rewrite its next to what to look at again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "effort": "medium (one small tool option, then one video from a prompt that nearly worked)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-loungepass-fix1 in data/board.json with its history and reports, and docs/CHANGES.md \"anim-tom-dodge-ner3\" (the Lounge Pass part). Your first push is the commit board: start c-anim-tom-loungepass-fix1.\n\nTom's note: \"Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it\". Prompt tools/art-library/prompts/wan-tom-loungepass-v3.txt did that, but on job tom-loungepass rev 4 (pad 0.8) and rev 5 (pad 0.65) his outstretched arm and the card ran past the LEFT edge of the 720 x 1280 video for 12 to 17 pictures (videos tom-loungepass-r4.mp4 and r5.mp4 on branch wangen). That is the stop-loss for pad. The one change for the next try: add a job option to tools/art-library/wangen.py (with a case in wangen_test.py) that places the start picture right of centre on the magenta frame, leaving room on the left, and use it with prompt v3 and pad 0.8 unchanged. Raise rev. Make it on Wan 3.0 through the wan-gen Action (cap = the ledger on branch wangen plus $0.50 per call), check every picture against plan section 4.4 (nothing may touch an edge), run the clip gate, bake it with the HIT on the swat, run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, look at portrait and landscape. Spend at most $1.50. If it misses again, stop and say what is wrong. Build tag anim-tom-loungepass-fix1. Set after to t-anim-tom-loungepass-lf2z-watch and rewrite its next to what to look at again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
@@ -24345,7 +24351,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Tom, Dodge",
-   "next": "Not made: Wan 3.0 already missed the dodge twice the same way (Grace, wanch1: she turns to the viewer and hops sideways, feet off the ground), and Tom's dodge prompt is the same prompt. A third Wan try would repeat it. Next try is a different video model (Kling 4 on fal), which is card c-wanch2. When c-wanch2 makes the family dodges, this card closes with it.",
+   "next": "Shipped anim-tom-dodge-ner3: Tom ducks straight down with both hands on his head and pops back up (Rose's passed duck, his name swapped in). Your card: watch it in the Battle Guide.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24406,6 +24412,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-tom-dodge-ner3. Rose's passed duck prompt with only his/he swapped in, pad 0.8; passed plan 4.4 and the measured gate on the first try. $0.50. Tom's painted dodge purged."
     }
    ],
    "prompt": {
@@ -24416,7 +24426,33 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-dodge-ner3 in data/board.json with its history. Your first push is the commit board: start c-anim-tom-dodge-ner3.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Needs to be generated\n\nThe animation: Tom, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-dodge-ner3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-anim-tom-dodge-ner3-watch"
+  },
+  {
+   "id": "t-anim-tom-dodge-ner3-watch",
+   "title": "Watch Tom, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then tap All good or Something is wrong (say what you saw). He should squat straight down with both hands on his head and pop back up, feet never leaving the ground.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom.",
+    "Play Dodge (about 1.3 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-tom-dodge-ner3",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-tom-dodge-ner3. The clip passed plan 4.4 and the measured clip gate before it was handed to you."
+    }
+   ]
   },
   {
    "id": "c-anim-grace-dodge-p7wh",
