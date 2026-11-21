@@ -20160,7 +20160,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGZNTTnrivTmMf1GZU",
+    "url": "https://claude.ai/code/cse_01RXeukDShHS5hzBFR7kD3R4",
     "opening": "not started"
    },
    "history": [
@@ -20204,13 +20204,24 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 1 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-21T02:56:10+00:00",
-   "after": "t-ch1flight"
+   "started_at": "2026-11-21T04:57:25+00:00",
+   "after": "t-ch1flight",
+   "rescue": {
+    "at": "2026-11-21T04:57:25+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukDShHS5hzBFR7kD3R4",
+    "prev": "https://claude.ai/code/cse_01RXeukGZNTTnrivTmMf1GZU"
+   }
   },
   {
    "id": "c-ch1clips8",
@@ -20443,7 +20454,7 @@
    "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s13",
    "next": "Stage 13 is complete (b3s13a, b3s13b, b3s13c, b3s13): the monsters, formations, bosses and Lab fights NEW 45 to NEW 66 of chapters 8 to 10 and the bonus chapter. Nothing is asked of Tom. The next step is c-b3s14 (the balance pass).",
    "blocks": [],
@@ -20490,6 +20501,10 @@
     {
      "d": "2026-11-20",
      "t": "Part d shipped as b3s13: the bonus chapter (4 formations, Brain Freeze, Lab fights NEW 63 to NEW 66). Stage 13 is complete: chapters 8 to 10 and the bonus are in the Battle Lab (NEW 45 to NEW 66), 2154 rule checks pass, browser tests pass in portrait and landscape. Next: card c-b3s14, the balance pass."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s13: New battle: the Nine Scoops monsters and Brain Freeze join the Battle Lab (stage 13 complete)"
     }
    ],
    "prompt": {
@@ -20505,7 +20520,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
     "opening": "pasted by Tom from the board"
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "t-ch1flight",
@@ -22894,6 +22910,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
+   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
+   "first": "2026-11-20T19:03:50-08:00",
+   "last": "2026-11-20T20:56:03-08:00",
+   "tags": [
+    "b3s13a",
+    "b3s13b",
+    "b3s13c",
+    "b3s13"
+   ],
+   "cards": [
+    "c-b3s13"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
    "title": "Make and check every chapter 1 battle video",
    "first": "2026-11-20T17:37:42-08:00",
@@ -22913,20 +22944,6 @@
     "c-wanch1",
     "c-wanch2",
     "t-wanch1-watch"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGKsqbybZat369d8fU",
-   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
-   "first": "2026-11-20T19:03:50-08:00",
-   "last": "2026-11-20T20:42:23-08:00",
-   "tags": [
-    "b3s13a",
-    "b3s13b",
-    "b3s13c"
-   ],
-   "cards": [
-    "c-b3s13"
    ]
   },
   {
@@ -25493,8 +25510,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ee6da2ed7466159c40458a4c9a2e6c0969f19ca5",
- "synced_at": "2026-11-21T04:44:28+00:00",
+ "synced": "0ccf17c44c67d03aaf96b6b080294eb4e94d367a",
+ "synced_at": "2026-11-21T04:57:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
