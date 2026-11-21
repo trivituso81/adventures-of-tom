@@ -18972,6 +18972,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1c: one retry each for four of Grace's videos, one change each (video jobs only)"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1d: the monster clips checked by eye; four made again with one change each"
     }
    ],
    "prompt": {
@@ -19830,36 +19834,10 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T18:09:17-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b",
-    "wanch1c"
-   ],
-   "cards": [
-    "c-wanch1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEhdz3K8a1vVuo5v2g",
-   "title": "Fix: Open the Battle Lab page on your home screen",
-   "first": "2026-11-20T18:08:46Z",
-   "last": "2026-11-20T18:08:46Z",
-   "tags": [
-    "fix-battlelabpagetry-2"
-   ],
-   "cards": [
-    "c-fix-battlelabpagetry-2"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
    "title": "Build the Grace guard video proof",
    "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T18:06:24-08:00",
+   "last": "2026-11-20T18:13:54-08:00",
    "tags": [
     "wanproofa",
     "wanproofb",
@@ -19876,6 +19854,33 @@
     "t-wanch1-fal",
     "c-ch2lessons",
     "c-ch3lessons"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T18:13:31-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c",
+    "wanch1d"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEhdz3K8a1vVuo5v2g",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "first": "2026-11-20T18:08:46Z",
+   "last": "2026-11-20T18:08:46Z",
+   "tags": [
+    "fix-battlelabpagetry-2"
+   ],
+   "cards": [
+    "c-fix-battlelabpagetry-2"
    ]
   },
   {
@@ -22142,8 +22147,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "1cbdb020e74d35ae6a34f82b0188d8d3cbcdab6c",
- "synced_at": "2026-11-21T02:10:00+00:00",
+ "synced": "79972f09c97fa458303d159f560d1c42e12b981e",
+ "synced_at": "2026-11-21T02:14:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
