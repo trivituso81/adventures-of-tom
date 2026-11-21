@@ -9611,7 +9611,7 @@
   {
    "id": "t-artgen2look",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "pictures",
    "title": "Look at the QA results on a real pictures card",
@@ -9620,7 +9620,7 @@
     "c-artgen3"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
     "opening": "started by c-artgen2"
@@ -9641,6 +9641,11 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Look at the QA results on a real pictures card is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:40:01.724Z"
     }
    ],
    "links": [
@@ -9656,7 +9661,8 @@
      ],
      "label": "Story gates (6, made again)"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-artgen2look",
