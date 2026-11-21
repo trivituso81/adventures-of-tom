@@ -27666,6 +27666,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreenh: art-library/test.py deleted by the purge rule (it tested the pasted-key page, retired in keysecrets1, and entry counts from before the library doubled); validate.js, review_test, keysecrets_test and keysecrets2_test cover what is live; row removed from the manifest. 4 rows still marked known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenh: the old Art Library page test is deleted (it tested a pasted-key page that no longer exists)"
     }
    ],
    "prompt": {
@@ -29840,6 +29844,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDJEYAdtfW4Xhm3Sts",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "first": "2026-11-21T21:35:28Z",
+   "last": "2026-11-21T21:35:28Z",
+   "tags": [],
+   "cards": [
+    "c-hollowfence"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCqWhhmWq22mmU3UZD",
    "title": "Lose to The Big One on purpose and check you are not stuck",
    "first": "2026-11-21T21:24:25Z",
@@ -30434,11 +30448,12 @@
    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T13:02:32-08:00",
-   "last": "2026-11-21T13:32:37-08:00",
+   "last": "2026-11-21T13:35:40-08:00",
    "tags": [
     "nightgreene",
     "nightgreenf",
-    "nightgreeng"
+    "nightgreeng",
+    "nightgreenh"
    ],
    "cards": [
     "c-nightgreen"
@@ -34279,8 +34294,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f7b0d9bc55a5e8c71e66db2f7b14e8d05fae746c",
- "synced_at": "2026-11-21T21:33:21+00:00",
+ "synced": "59d8777837a47fcaec15b581787083873b81837e",
+ "synced_at": "2026-11-21T21:36:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
