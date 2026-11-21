@@ -1,3 +1,13 @@
+## wanch1c (2026-11-20): one retry each for four of Grace's videos, one change each (video jobs only)
+
+Card c-wanch1 (part c). Grace's first 9 Wan videos (wan-gen run 44853113780, $4.50) checked against plan 4.4: idle, hit, ko, victory, run pass. Four miss, each retried once with one change:
+| Clip | Miss | The one change |
+|---|---|---|
+| dodge | she hops sideways, feet leave the ground (feet spread 5.6% of the frame) | "while her feet stay planted" becomes "while both feet stay flat on the ground and never lift" |
+| cast | reads as casting, but the model added glowing rings and a light haze (check 4) | `enable_prompt_expansion` off (the plan's named dial for added things); prompt unchanged |
+| squeeze | she shows the dumpling but never squeezes it | the squeeze is "between her palms until it squishes flat" |
+| cubepop | she shows the cube but never crushes it | "closes her fingers tight around it once, crushing it so it squishes out between her fingers" |
+
 ## 2026-11-21 (465): Art Library bake, 10 entries (`artbake1542`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

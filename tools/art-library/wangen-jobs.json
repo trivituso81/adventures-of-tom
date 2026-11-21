@@ -396,7 +396,7 @@
   }
  },
  "grace-dodge": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -404,7 +404,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-grace-dodge-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-grace-dodge-v2.txt",
   "frame": "art/clips/start/grace-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -494,7 +494,7 @@
   }
  },
  "grace-cast": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -514,12 +514,12 @@
    "aspect_ratio": "9:16",
    "duration": 5,
    "audio": false,
-   "enable_prompt_expansion": true,
+   "enable_prompt_expansion": false,
    "seed": 81
   }
  },
  "grace-squeeze": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -527,7 +527,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-grace-squeeze-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-grace-squeeze-v2.txt",
   "frame": "art/clips/start/grace-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -544,7 +544,7 @@
   }
  },
  "grace-cubepop": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -552,7 +552,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-grace-cubepop-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-grace-cubepop-v2.txt",
   "frame": "art/clips/start/grace-hero.png",
   "fit": "720x1280",
   "frame_fields": [
