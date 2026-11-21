@@ -15867,7 +15867,7 @@
    "title": "Play chapter 1 and watch people listen",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play Deedee's kitchen (the scene where Boppy tells the bread story and the Mudling throws mud), then Boppy's fishing spot (the grey patch). You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
@@ -15891,8 +15891,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Play chapter 1 and watch people listen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T02:33:07.920Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-listen1-play",
