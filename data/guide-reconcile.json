@@ -1,3 +1,14 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "move:soup_dumpling_squeeze",
+   "at": "2026-11-21T18:51:17.291Z",
+   "note": "The dumpling should explode on hit. Also, the dumpling should have a really cute face, just like the popular dumpling squishes have.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she takes a small round white dumpling-shaped squishy toy out of her hoodie pocket, holds it in both hands at chest height and pushes it forward toward the left once, straightening both arms as she squeezes it hard between her palms until it squishes flat, grinning with delight. She lets it puff back up, tucks it back into her hoodie pocket and returns to her starting relaxed stance.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 3,
+   "cap": 0.1
+  }
+ ]
 }
