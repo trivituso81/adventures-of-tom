@@ -27046,7 +27046,7 @@
    "title": "Fix the 13 tests that already fail",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Waits on the card Night test run: every test, every night, on GitHub. Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. 13 tests fail on main today and are marked as known failures, so the night run does not raise them. This card finds out for each whether the test or the game is wrong and fixes or removes it, so that a night with no failing test means the game works. Nightly refactoring waits on this.",
    "blocks": [
     "c-nightrefactor"
@@ -27055,7 +27055,7 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -27065,6 +27065,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Night test run: every test, every night, on GitHub is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T19:51:18.780Z"
     }
    ],
    "prompt": {
