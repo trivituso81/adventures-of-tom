@@ -28128,11 +28128,20 @@
     {
      "d": "2026-11-21",
      "t": "Created by the b3s18 session: Milestone D, Tom plays chapters 6 to 10 on the new battle."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-21T20:44:50.308Z"
     }
    ],
    "chat": {
     "url": "",
     "opening": "unknown"
+   },
+   "backlog": {
+    "at": "2026-11-21",
+    "from": "up"
    }
   },
   {
