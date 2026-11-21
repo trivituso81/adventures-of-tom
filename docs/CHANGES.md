@@ -1,3 +1,6 @@
+## projclean1f (2026-11-21): Project docs moved into the repo: the last 10 large docs copied into claude/ (ability revamp plans, battle design, old changes and status notes)
+
+- Card c-projclean: copied word for word to the same path in claude/: adventures-of-tom-ability-revamp.md, adventures_of_tom_ability_revamp_plan.md, battle-design.md, ability-revamp-brief.md, CHANGES.md (the old October change log, not docs/CHANGES.md), tombo-review.md, kit-recipe.md, voice-baker-scripts.txt, voice-baking.md, portrait-style.md. Docs only: no game file changed.
 ## fix-conflictmarks (2026-11-20): the game would not start: merge conflict markers on main removed from engine/main.js and index.html
 
 - Fact: the board-sync commit 25f41e6 ("part shipped projclean1e") committed unresolved merge markers (`<<<<<<< HEAD` ... `>>>>>>> 7cbde07`) into `engine/main.js` (the build stamp line) and `index.html` (the build-history and main.js script tags). A browser stops reading `engine/main.js` at `<<<`, so a fresh load of the live game did not start; `data/build-history.js` also loaded twice.

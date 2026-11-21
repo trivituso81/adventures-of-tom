@@ -1,0 +1,232 @@
+0	[warm, sincere, a little dry] Honestly? Great take. Really. [soft chuckle] Chef's kiss.
+1	[genuinely impressed] That was a GREAT take. [warm] I would watch that twice.
+2	[quietly moved, sincere] Great take. I got chills. [beat] Real ones.
+3	[dry, approving, matter-of-fact] Nice handwriting. Honestly. Very readable.
+4	[mock-serious, impressed] Those are the neatest cue cards I have ever seen.
+5	[warm, a little dry] Honestly? Lovely handwriting. Very legible.
+6	[sincere, gentle] That is beautiful penmanship. [pause] I mean it.
+7	[proud, casual] Here. Sourdough. I made it. [conspiratorial] You can have the heel. The heel is the best part.
+8	[warm, offering] Have a slice. Seriously. Bread is for sharing.
+9	[reading aloud, dramatic storyteller] Chapter one. It was a dark and stormy night. [normal, approving] Good start. Classic.
+10	[reading aloud, building suspense] And then the detective said... [gasps softly] ooh. I did not see that coming.
+11	[calm, precise, like a baking instructor] One sourdough boule. Score it, slide it in. Twenty minutes. [firm] Do not open the door.
+12	[proud, warm] Here. Bready Mercury's best. You are the only oven on the block hot enough for him.
+13	[shy, charming] May I have this dance? [sheepish laugh] I should warn you. I mostly sway.
+14	[warm, playful] One song. I lead. You spin. [smiling] You are very good at spinning.
+15	[brisk, dry, gate-agent tone] Here. Group zero. Pass out, liquids in a bag, shoes back on.
+16	[dry, polite] Present. Window seat, please. [deadpan] I will not be reclining.
+17	[relieved exhale, cheerful] Oof, I'm finally here! At least the six hours went by fast on Delta One!
+18	[delighted, then mock-serious announcer] Hello, Rose! Please keep your arms and legs inside the uncle at all times.
+19	[awed, then dry] That is the shiniest dumpling I have ever seen. And I have seen a LOT of dumplings.
+20	[short pained grunt] Ow!
+21	[winded, hit in the gut] OOF!
+22	[indignant] Hey now!
+23	[outraged, emphatic] That was UNCALLED for!
+24	[polite but forceful shout] Excuse me!
+25	[shouting, determined] Take THAT!
+26	[brisk, rolling up sleeves] Right, then!
+27	[button-mashing, fast, mock-serious] A, A, A, A. [deadpan] Very technical!
+28	[rapid, excited] Mash, mash, mash! That is the strategy!
+29	[proud, shouting] Day three starter! Smell THAT!
+30	[teacher voice, rapid-fire] Flashcards! Pop quiz! No peeking!
+31	[defensive, emphatic] It just arrived. It was NOT cheap!
+32	[shouting, hot kitchen warning] Dutch oven! Five hundred degrees! Mind the lid!
+33	[stern, teacherly shout] That one means fire! You should have STUDIED!
+34	[smug, shouting] Delta One! Lie flat! You are in basic economy!
+35	[dramatic, epic] Final boss! The music just CHANGED!
+36	[calm, firm, protective] No touching, please!
+37	[excited team-up shout] Unboxing time! Handle it with CARE!
+38	[excited, bracing] Double-decker! Hold on TIGHT!
+39	[proud shout] Fresh sourdough! Mind the crust!
+40	[playful, affectionate shout] Preheat! Five hundred degrees, babe!
+41	[excited, calling a dog] Nara! Fetch the BREAD!
+42	[loud stage whisper] Shhh! Quiet on the pier!
+43	[race starter, building] On your marks! Get set! [shouting] GO, Amy!
+44	[calm, firm, protective] No touching, please!
+45	[quick, firm] Nope! No touching!
+46	[urgent, reassuring] I have got you!
+47	[strained, wincing] Not great. [more worried] Not great!
+48	[exhausted, fading] I... need a minute.
+49	[pleased, upbeat] Well! Good job, team!
+50	[warm, proud] Very proud of you two!
+51	[shrieking with joy, from far away] Tah Tah!
+52	[ecstatic, shrieking] Tah Tah! You're BACK!
+53	[dramatic, exaggerating] We waited for you for a hundred years.
+54	[breathless, overexcited] Tah Tah, LOOK! A sparkling diamond gold dumpling squishy!
+55	[proud, bossy, very serious] It is limited edition. There are only two in the whole world. [excited] You can squeeze it!
+56	[sharp yelp] Ow!
+57	[offended, sassy] Rude!
+58	[indignant] Hey! That hurt!
+59	[calling out, upset] Tah Tah, it got me!
+60	[fierce karate shout] Hi-yah!
+61	[sassy, shouting] Take that, Kevin!
+62	[showing off] Watch me, Tah Tah!
+63	[excited, sing-song] Dance break!
+64	[showing off] Watch this!
+65	[giggly, sing-song] Twirly twirl!
+66	[trying to sound brave, a little shaky] I am fine. [smaller] Mostly fine.
+67	[tired, asking for help] Tah Tah, I need a hand.
+68	[dramatic, flopping down] Time out!
+69	[cheering] We did it!
+70	[cheering, proud] We did it, Tah Tah!
+71	[excited, mid-cartwheel] Cartwheel! Watch my toes, Tah Tah!
+72	[squealing, building] Squishy! Squeeze, squeeze, SQUEEZE!
+73	[bossy, focused] Hold still! Glitter coat! Do NOT smudge it!
+74	[confident runway strut, rhythmic] Runway! Walk, walk, pose! Walk, walk, Grump!
+75	[counting in like a dance captain] Dance battle! Five, six, seven, eight!
+76	[YouTuber voice, bubbly] Hey guys! Like, subscribe, and hit the Grump!
+77	[triumphant] Beam dismount! Ten out of ten!
+78	[proud, announcing] Perfect ten! The judges agree!
+79	[excited team-up shout] My dumpling! Tah Tah, squeeze it with me!
+80	[admiring, eager] Your cursive is SO pretty. Can you teach me the capital G?
+81	[admiring, determined] Your loops are perfect. I am going to practice mine.
+82	[YouTuber voice, bubbly] Hey guys! Today we are reading a REAL book. Out loud. Smash that like button!
+83	[bossy storyteller] Chapter two! I am doing all the voices. [snooty voice] This one is the duchess. [normal] She is bossy.
+84	[shouting, hand raised high, thrilled] HERE! Grace! Group zero! I have been waiting my WHOLE LIFE for this!
+85	[eager, polite, fast] Present! Can I sit by the window? I want to film the takeoff for my channel.
+86	[squealing, calling out] Tah Tah!
+87	[giggly, exaggerating] A hundred MILLION years!
+88	[bouncing, demanding] Tah Tah, up! Up up up!
+89	[giggling, proud] I am the tallest! Giddyup, Tah Tah!
+90	[impatient, excited] Come on, Tah Tah! Let's go!
+91	[whiny] Owie!
+92	[pouting] No fair!
+93	[upset, calling] Tah Tah!
+94	[scared, calling] Tah Tah, help!
+95	[giggling, playful] Boop!
+96	[blowing a raspberry, silly] Bleh!
+97	[teasing, sing-song] Nyeh nyeh nyeh!
+98	[giggling, teasing] You are a silly slime!
+99	[small, teary] My eye hurts.
+100	[tired, whiny] Tah Tah, carry me.
+101	[sad, sleepy] I want to go home.
+102	[squealing] Yay!
+103	[cheering] Yay, Tah Tah!
+104	[giggling, surprise shout] Peekaboo! I SEE YOU!
+105	[spinning, dizzy, delighted] Twirl tornado! Wheeeeee!
+106	[excited, throwing] Lamby launch! Go get him, Lamby!
+107	[giggling, bouncing] Piggyback pounce! Giddyup!
+108	[sweet, proud] Dress-up day! You get a bow!
+109	[spooky little-kid voice, then giggles] Monster under the bed! Lights out!
+110	[wild excitement] Lamby stampede! A hundred Lambies!
+111	[excited team-up shout] Tah Tah, up! Double-decker BOOP!
+112	[admiring, eager] Your writing is so pretty! Can you write ROSE? Big?
+113	[sweet, chatty] I like your red! Red is my second favorite!
+114	[storytelling, then giggling] Once upon a time there was a LAMB. The end! [demanding] Again! AGAIN!
+115	[proud, then roaring] I am reading the pictures! There is a dragon. The dragon is ME. RAWR!
+116	[shouting, bouncing] HERE! I am HERE! Me! Rose! I have Lamby!
+117	[eager, rapid] Me me me! Can I push the button? The ding button?
+118	[confident, upbeat] Need a fourth? I'm fast, I'm loud, and I brought a whistle!
+119	[coach voice, mom checking in] Grace! Rose! Did you stretch?
+120	[smug, competitive] Tom, I ran eight miles before you woke up.
+121	[challenging, then deadpan] Race you to the fountain. [pause] No? Then I win.
+122	[running, breathless shout] Coming through! Hydrate later!
+123	[competitive shout] Heads up! Mom has a record to set!
+124	[drill sergeant, counting down] Five burpees! Four! Three! You're next!
+125	[focused, menacing] I see the finish line. [pause] It's you.
+126	[stern teacher, deadpan] F. F. And see me after class.
+127	[coach shout, rhythmic] Hill repeats! Up the slime, down the slime!
+128	[strict teacher] Pop quiz! Eyes on your own puddle!
+129	[determined, powering through] Twenty-six point two! Straight through the slime!
+130	[triumphant, competitive] New personal best! Write it down, Tom!
+131	[fired-up coach shout] Thirty seconds! Give me everything you've got!
+132	[teacher clapping hands, brisk] Eyes up, team! Stretching is over!
+133	[scoffing, tough] Ow! Second graders hit harder than that!
+134	[indignant referee] Hey! That's a time penalty!
+135	[breathing hard, determined] Walking it off. Walking it off.
+136	[exhausted, panting between words] Time. Out. Somebody hydrate me.
+137	[proud, competitive] That's how this family does it!
+138	[smug, teasing] Faster than Tom. [deadpan] As usual.
+139	[excited team-up shout] Watch the clock, Tom! New family record!
+140	[teacher, approving, dry] Neatest handwriting in the building. And I check.
+141	[teacher, crisp, approving] Your margins are immaculate. Gold star.
+142	[brisk, proud, organized mom] Here! Gregori, party of four. We are always first in line.
+143	[competitive, proud] Present. I have never missed a connection in my life.
+144	[warm grandma, coaxing] Come on, honey. Deedee has not missed a dance floor in fifty years. [counting in] One, two, three.
+145	[cheerful, bossy hostess] Shoes off, everybody! Floors just mopped! Let us DANCE!
+146	[bubbly, warm] Room for one more? Deedee brings cookies, hugs, and love to the moon and back!
+147	[delighted grandma] There's my Tommy!
+148	[loving, gushing] Girls! I love you to the moon and back!
+149	[cheerful, singsong] Who wants rhubarb crisp? [matter-of-fact] Everyone wants rhubarb crisp.
+150	[fussing grandma] Hold still! You've got a smudge!
+151	[fussing, then satisfied] Spit shine! There. Much better.
+152	[energetic power-walker] Ten thousand steps! Keep up, honey!
+153	[brisk nurse, cheerful] Retired registered nurse! Little pinch, honey!
+154	[scolding, house-proud] I just mopped! Watch your step!
+155	[proud, warning] Fresh rhubarb crisp! Careful, it's HOT!
+156	[cheeky, giggling] Just one glass! It's five o'clock somewhere!
+157	[calling across the house, warm] Dinner's ready! Nobody leaves this table hungry!
+158	[building, then shouting with joy] I love you to the moon... AND BACK!
+159	[excited team-up shout] Tommy's bread and my rhubarb crisp! Everybody eat!
+160	[warm, arms wide] To the moon and back! Everybody in!
+161	[loving, insistent] Group hug! Tommy, you too!
+162	[shocked, offended] Oh! Well, I never!
+163	[pained, then nurse-matter-of-fact] Ow! That needs ice. Trust me, I'm a nurse!
+164	[tired, sweet] Deedee needs a little sit-down, babies.
+165	[weary sigh] Somebody pour me a glass of wine.
+166	[drowsy, insisting] I'm just resting my eyes.
+167	[cheering, generous] Rhubarb crisp for everyone! You earned it!
+168	[proud, gushing] My babies did it! To the moon and back!
+169	[grumbling, then softening] My knees say no. My heart says one song. Just one. [firm] Slow.
+170	[proud storyteller] Did I ever tell you I won a dance contest? 1970. [gruff] Sit down. [correcting himself] I mean, stand up.
+171	[gruff, shouting] Nobody talks on my pier! Not even the fish!
+172	[settling in for a long story] Did I ever tell you about 1970? [gruff] Sit down. This takes a while.
+173	[roaring, furious] Nobody gets past me! NOBODY!
+174	[gruff, proud] Need somebody to count heads? Count me in! Nobody gets past Boppy!
+175	[gruff, then complaining] Tom! Good. [sighs] I'm not feeling good. It's the stomach.
+176	[complaining, exasperated] Grace, Rose! Slow down! Why does everybody walk so fast?
+177	[proud, gruff] Did I ever tell you I was a champion cross country runner? Sit down.
+178	[gruff, swatting] Cap swat! I've had this cap since Rikers!
+179	[proud laugh, then groaning] Hah! Still got it. [wincing] Ooh. My stomach.
+180	[shouting, then groaning] Set the hook! [wincing] Ooh, too much twisting. My stomach!
+181	[ominous, gruff] I had a pepper at lunch. You're about to find out.
+182	[territorial shout] Recliner! Nobody sits in it! Not even you!
+183	[proud, taunting] Grew this one myself! Eat up, slimy!
+184	[excited, shouting] Big one! Biggest one! Somebody get the camera!
+185	[fired up, then panicking] Ghost pepper! Nobody stop me! [wheezing] Ohh, somebody stop me.
+186	[exasperated, insistent] It was THIS big! I told you it was THIS big!
+187	[grumbling, sulky] I'm not feeling good. Something with the stomach. [muttering] Nobody asked.
+188	[grumbling, complaining] My stomach is acting up, and everybody walks too fast!
+189	[groaning, outraged] Agh! Right in the stomach! I wasn't feeling good BEFORE that!
+190	[outraged] Hey! All those years at Rikers and nobody hit me like that!
+191	[weak, complaining] I'm not feeling good. Somebody get me a ginger ale.
+192	[dramatic, fading] I need the recliner. Tell Deedee I was brave.
+193	[triumphant, then groaning] Champion! Just like my cross country days! [wincing] Ooh, my stomach.
+194	[gruff drill sergeant] Everybody line up! Headcount! [satisfied] Good. Nobody's missing.
+195	[proud, then deadpan] Who's the strongest grandpa? [pause] Correct.
+196	[catching himself, laid-back] Babe... I mean, buddy. That take? Iconic.
+197	[chill, sincere] That was a great take. And I have seen forty-seven horror movies.
+198	[easy-going, warm] Great take. I would not change a single stitch.
+199	[impressed, suspicious] Your lettering is so clean. Are those fonts? Tell me those are not fonts.
+200	[laid-back, approving] Love the cards. Very crisp. Very wardrobe.
+201	[friendly, casual] Want half my granola bar? It is the good kind. With the chocolate.
+202	[kind, easy-going] Here, buddy. I always pack two. One for me, one for whoever is having a bad day.
+203	[warm, proud of his craft] I made you a little pot, buddy. Bisque fire. Five minutes in you and it is perfect.
+204	[playful, punny] Mug in the kiln! Okay, in the stove. Same thing. [chuckles] You are basically a kiln with feelings.
+205	[chill, upbeat] Need a fourth? I'm suited up and ready to roll!
+206	[slow, amused, drawn out] Well, well, well...
+207	[casual, tossing] Catch! [shrugging] That one was a second anyway.
+208	[cheerful warning] Heads up! Handmade!
+209	[amused, smooth] Well, well... a mug for you.
+210	[skater, stoked, shouting] Carve left! Carve right! Carve THROUGH!
+211	[rapid-fire, backstage rush] Quick change! Arms up! Hat, bow tie, boa!
+212	[train announcer voice] Next stop, you! Doors closing!
+213	[spooky whisper, then shouting] Do NOT look behind you. [shouting] Too late!
+214	[creepy, slow, horror-movie voice] Well, well, well... look who is behind you.
+215	[punny, playful] Cone six! Hold still, you are getting fired!
+216	[stoked, yelling, wind rushing] Bombing the hill! No brakes! Never brakes!
+217	[film-set announcer, satisfied] Final scene, everybody in costume! That is a wrap!
+218	[excited team-up shout] Glazed, fired, and served. Well, well, well!
+219	[wardrobe department, brisk] Wardrobe! Arms up, new shirt!
+220	[playful, conspiratorial] Fresh look! Nobody tell continuity!
+221	[amused, smooth] Well, well... somebody needs a costume change.
+222	[indignant, mock-offended] Hey! That was glazed!
+223	[pained, then punny] Ow. Not pot-sitive about that one.
+224	[unbothered, dry] Well, well... somebody is in a mood.
+225	[strained, still joking] Tom, I am a little cracked over here.
+226	[tired, wry] Well, well... I have seen better takes.
+227	[fading, still punny] Needs a second firing. Give me a minute.
+228	[fading, amused] Well, well... that is a wrap for me.
+229	[easy-going, cheerful] Nice work, team. Who wants a mug?
+230	[director voice, satisfied] And cut! That is a wrap, team.
+231	[smug, amused] Well, well... look who wrapped early.
