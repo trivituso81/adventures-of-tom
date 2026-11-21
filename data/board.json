@@ -27855,6 +27855,17 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
+   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
+   "first": "2026-11-21T14:57:29Z",
+   "last": "2026-11-21T19:52:09Z",
+   "tags": [],
+   "cards": [
+    "c-boppy-bigfish",
+    "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFoLKSmJfeAAAAP5kf",
    "title": "Fix: Play the Grump Hollow wrapper trail",
    "first": "2026-11-21T19:42:45Z",
@@ -28201,17 +28212,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
-   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "first": "2026-11-21T14:57:29Z",
-   "last": "2026-11-21T14:57:29Z",
-   "tags": [],
-   "cards": [
-    "c-boppy-bigfish",
-    "t-boppy-bigfish-pic2"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "first": "2026-11-21T14:55:50Z",
@@ -28220,6 +28220,24 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "first": "2026-11-21T09:17:03-08:00",
+   "last": "2026-11-21T11:51:57-08:00",
+   "tags": [
+    "anim-tom-loungepass-lf2z",
+    "anim-tom-dodge-ner3",
+    "wangen",
+    "anim-tom-loungepass-fix1"
+   ],
+   "cards": [
+    "c-anim-tom-loungepass-lf2z",
+    "c-anim-tom-dodge-ner3",
+    "c-wanch2",
+    "c-anim-tom-loungepass-fix1"
    ]
   },
   {
@@ -28336,23 +28354,6 @@
    ],
    "cards": [
     "c-guideprompts"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTMig6wammxmKwSfr",
-   "title": "Animation note: Tom, Lounge Pass Flex",
-   "first": "2026-11-21T09:17:03-08:00",
-   "last": "2026-11-21T11:29:14-08:00",
-   "tags": [
-    "anim-tom-loungepass-lf2z",
-    "anim-tom-dodge-ner3",
-    "wangen"
-   ],
-   "cards": [
-    "c-anim-tom-loungepass-lf2z",
-    "c-anim-tom-dodge-ner3",
-    "c-wanch2",
-    "c-anim-tom-loungepass-fix1"
    ]
   },
   {
@@ -31840,8 +31841,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "42471acf91eff895cdf463b82620fbc782d930fe",
- "synced_at": "2026-11-21T19:51:12+00:00",
+ "synced": "4a33e9b8b81039a78e1a891e35868eac83f05645",
+ "synced_at": "2026-11-21T19:52:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
