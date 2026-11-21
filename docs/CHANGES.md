@@ -1,3 +1,10 @@
+## guideprompts1b (2026-11-21): the prompt writer keeps each character's own pronoun, including Nara's "it"
+
+Card c-guideprompts. The first full run wrote 258 of 267 prompts for $0.27; nine came back as "check this one": eight were Nara (the starter says "From its starting relaxed stance" and the model wrote him or her) and one was a TNB move.
+- `tools/guidegen/draft.py`: the pronoun rule now says exactly what is wrong ("uses she but this character is his") so the one retry can fix it; "it" and "its" stay free for a prop; the prompt tells the model to copy the starter's own pronoun and that Nara is a dog (paws, mouth, head and tail, no arms).
+- `python3 tools/guidegen/draft_test.py` covers a dog motion that keeps "its" and one that says "her".
+- All 258 prompts already written still pass the new check. Nothing in the game changed.
+
 ## anim-tom-loungepass-fix1 (2026-11-21): Tom's Lounge Pass Flex again: a quick take-out and sparkle, then most of the clip is his arm held out and a snooty limp-wrist swat
 
 Card c-anim-tom-loungepass-fix1. Tom (10:33): "Lounge pass him taking it out and the sparkle should be very fast, the main part of the animation should be him extending his arm and swatting with it"; then "yes" (11:27) to the recommended next try.

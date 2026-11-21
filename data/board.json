@@ -27167,7 +27167,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "guideprompts1",
-   "next": "Part guideprompts1a shipped: draft.py, its test and the guide-draft Action are on main, nothing paid yet. Next: dry run, Cartridge Blow alone, then the rest under $1.00.",
+   "next": "Parts guideprompts1a and 1b shipped. First full run wrote 258 of 267 prompts for $0.27; re-running the nine rejected ones, then applying the file to data/guide-prompts.json.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",

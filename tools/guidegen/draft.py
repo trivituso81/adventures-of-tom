@@ -36,7 +36,7 @@ Write the motion so a viewer who knows the move's name would recognise it: use t
 
 Rules (all of them):
 1. Two or three sentences, 35 to 80 words. Name the gesture once, say how many times ("once", "twice" only if the move is a double hit), then "Without repeating the gesture" (or the matching noun: the bump, the throw) and how the body comes back.
-2. Family member: start "From his starting relaxed stance," or "From her starting relaxed stance," and end with the body back in its starting relaxed stance, "remains completely still in that pose for the rest of the clip". Props come out from behind the back, are used once, and go back behind the back.
+2. Family member: start with the starter's own words, "From his starting relaxed stance," or "From her starting relaxed stance," or "From its starting relaxed stance," (the starter shows which; Nara the dog is "it": use paws, mouth, head and tail, never arms or hands), keep to that one pronoun, and end with the body back in its starting relaxed stance, "remains completely still in that pose for the rest of the clip". Props come out from behind the back, are used once, and go back behind the back.
 3. Monster: start "The creature" and end with "it settles back into the pose of the attached picture and stays completely still for the rest of the clip". Use only parts the LOOK mentions or a general body part ("one arm", "its head"); the creature stays on its spot.
 4. Describe what the camera would see in one clean action. No sound, no voice, no words spoken, no camera moves, no other characters, no text on screen, no effects added after the fact (the game draws the dust, sparks and markers).
 5. Never say left or right ("forward" is toward the foe). Never describe speed. Say each thing once: describing one action two ways comes back as two actions.
@@ -57,12 +57,17 @@ def split_prompt(prompt):
 
 
 def pronoun_ok(starter, motion):
-    """The starter says "From his/her starting relaxed stance"; the new motion must use the same one and not the other."""
+    """The starter says "From his/her/its starting"; the new motion must use that pronoun and none of the others. -> '' when fine, else what is wrong."""
     m = re.search(r'From (his|her|its) starting', starter)
-    if not m: return True
-    want = m.group(1); low = ' ' + motion.lower() + ' '
-    others = [w for w in ('his', 'her') if w != want]
-    return ('from %s starting' % want) in low and not any((' %s ' % o) in low for o in others)
+    if not m: return ''
+    want = m.group(1); low = ' ' + re.sub(r"[^a-z' ]+", ' ', motion.lower()) + ' '
+    if ('from %s starting' % want) not in low: return 'the motion must start "From %s starting relaxed stance," like the starter' % want
+    subj = {'his': ('he', 'his'), 'her': ('she', 'her'), 'its': ('it', 'its')}[want]
+    allowed = set(subj)   # "it" and "its" are fine for a prop in any motion ("blows into it"); he, she, his, her are the character's
+    for o in ('he', 'she', 'his', 'her'):
+        if o not in allowed and (' %s ' % o) in low:
+            return 'the motion uses "%s" but this character is "%s" (use %s and %s only)' % (o, want, subj[0], subj[1])
+    return ''
 
 
 def check_motion(starter, motion, kind='family'):
@@ -83,7 +88,9 @@ def check_motion(starter, motion, kind='family'):
     if 'completely still' not in low: why.append('the motion does not end in a held pose ("completely still")')
     if kind == 'family':
         if not m.startswith('From '): why.append('a family motion starts "From his/her starting relaxed stance,"')
-        elif not pronoun_ok(starter, m): why.append('the pronoun does not match the character (starter uses the other one)')
+        else:
+            pw = pronoun_ok(starter, m)
+            if pw: why.append(pw)
         if 'starting relaxed stance' not in low: why.append('the family motion lacks "starting relaxed stance"')
     else:
         if not m.startswith('The creature'): why.append('a monster motion starts "The creature"')

@@ -35,7 +35,12 @@ def bad(txt, kind, needle, starter):
 check('no "once" fails', bad(GOOD_F.replace(' once', ''), 'family', 'how many times', bf))
 check('no "without repeating" fails', bad(GOOD_F.replace('Without repeating the gesture', 'Then'), 'family', 'Without repeating', bf))
 check('no held pose fails', bad(GOOD_F.replace('remains completely still', 'relaxes'), 'family', 'held pose', bf))
-check('the other pronoun fails', bad(GOOD_F.replace('From his', 'From her'), 'family', 'pronoun', bf))
+check('the other pronoun at the start fails', bad(GOOD_F.replace('From his', 'From her'), 'family', 'must start "From his', bf))
+check('the other pronoun later fails and names it', bad(GOOD_F.replace('he tucks', 'she tucks'), 'family', 'uses "she"', bf))
+NARA = 'From its starting relaxed stance, it lunges forward once with one arm in one quick, clear motion. Without repeating the motion, it steps back onto the same spot. It returns to its starting relaxed stance and remains completely still in that pose for the rest of the clip.'
+GOOD_N = 'From its starting relaxed stance, it snaps its jaws forward once like a chicken pecking, head low and tail up. Without repeating the gesture, it lifts its head back up. It returns to its starting relaxed stance and remains completely still in that pose for the rest of the clip.'
+check('a dog motion that keeps "its" passes', D.check_motion(NARA, GOOD_N, 'family') == [], D.check_motion(NARA, GOOD_N, 'family'))
+check('a dog motion that says "her" fails', bad(GOOD_N.replace('its jaws', 'her jaws'), 'family', 'uses "her"', NARA))
 check('a monster motion that does not start "The creature" fails', bad(GOOD_M.replace('The creature', 'It'), 'monster', 'starts "The creature"', bm))
 check('sound fails', bad(GOOD_F.replace('blows across', 'blows with a loud sound across'), 'family', 'sound', bf))
 check('left or right fails', bad(GOOD_F.replace('behind his back, holds', 'behind his back, to the left, holds'), 'family', 'left', bf))
