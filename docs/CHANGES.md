@@ -1,3 +1,12 @@
+## 2026-11-21 (1): Art Library bake, prop-gate-row-amyhouse, prop-gate-row-amyhouse-open (`artbake1552`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- prop-gate-row-amyhouse: background keyed from the corner colour rgb(226, 5, 106)
+- prop-gate-row-amyhouse: `bake_gate_art.py row-amyhouse locked` ran from art/raw/props/prop-gate-row-amyhouse-v1.png
+- prop-gate-row-amyhouse-open: background keyed from the corner colour rgb(208, 10, 122)
+- prop-gate-row-amyhouse-open: `bake_gate_art.py row-amyhouse open` ran from art/raw/props/prop-gate-row-amyhouse-open-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## b3s17b (2026-11-21): chapter 3's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips
 
 Card c-b3s17, part b. Chapter 3 joins chapters 1 and 2: the Soggy Socks, the Tangle and the Bobber, the Snag and Old Iron-Gill play on Battle 3 with the bestiary's Vibe Points (9 each, 27 for the boss) and tips for Battle 3 (`ch3sock`, `ch3tangle`, `ch3snag`, `irongill`): Pet Peeves, Resists, the wind-ups (Squelch, Big Knot, Undertow, Pepper Belch, Deep Dive), the Sock Iron-Gill hides behind, Toasty and Steam Cloud!. No Warmth bar, no HEART, no Tombo. A win over Iron-Gill sets `kind:irongill`, so the kind ending plays.
