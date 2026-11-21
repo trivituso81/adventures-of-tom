@@ -23203,8 +23203,7 @@
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "next": "Waits on t-milestoneb (Milestone B, your play test of chapter 1). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
    "blocks": [],
    "changed": "2026-11-21",
@@ -23223,8 +23222,16 @@
     {
      "d": "2026-11-21",
      "t": "Created by the b3s15 session as the next card. Stage 16 (Tombo skins) is skipped for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-voicepurge221",
@@ -23414,6 +23421,16 @@
    "tags": [],
    "cards": [
     "c-qa-battle2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T07:10:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s17"
    ]
   },
   {
@@ -26704,8 +26721,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f585418ea53f11fba702821b69d12971dfd3e8d8",
- "synced_at": "2026-11-21T15:06:16+00:00",
+ "synced": "3ce7680bc12e61bd3156d254a4654ed0a6a46e14",
+ "synced_at": "2026-11-21T15:11:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
