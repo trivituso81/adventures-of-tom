@@ -26212,6 +26212,10 @@
     {
      "d": "2026-11-21",
      "t": "Part b3s18c pushed: chapter 8 on Battle 3 (tips, Vibe Points, retry line)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as b3s18c: chapter 8's story fights now run on the new battle (BY CHAPTER), with Vibe Points and tips"
     }
    ],
    "chat": {
@@ -26945,6 +26949,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom, 11:14: \"why is this the prompt for cartridge blow, it seems generic\". Cause: 267 of 346 guide prompts are rule-made starter drafts (cast shape = spell gesture). The model-draft step of claude/guidegen-plan.md 3.1 was never built. Tom, 11:22: \"yes\" to add the card, build the step and run it capped under $1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as guideprompts1a: a script and an Action that write a real prompt for every starter-draft battle animation"
     }
    ],
    "prompt": {
@@ -27085,6 +27093,39 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
+   "title": "Battle system stage 17: chapters 2 to 5 story switch",
+   "first": "2026-11-21T07:10:18-08:00",
+   "last": "2026-11-21T11:32:36-08:00",
+   "tags": [
+    "b3s17a",
+    "b3s17b",
+    "b3s17c",
+    "b3s17",
+    "b3s18a",
+    "b3s18b",
+    "b3s18c",
+    "board-night"
+   ],
+   "cards": [
+    "c-b3s17",
+    "c-b3s18",
+    "b-board-night"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "first": "2026-11-21T11:25:36-08:00",
+   "last": "2026-11-21T11:32:03-08:00",
+   "tags": [
+    "guideprompts1a"
+   ],
+   "cards": [
+    "c-guideprompts"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
    "title": "Battle Guide: make and remake battle videos from the page",
    "first": "2026-11-21T09:33:57-08:00",
@@ -27099,24 +27140,6 @@
    "cards": [
     "c-guidegen",
     "c-guidestatus"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
-   "title": "Battle system stage 17: chapters 2 to 5 story switch",
-   "first": "2026-11-21T07:10:18-08:00",
-   "last": "2026-11-21T11:29:38-08:00",
-   "tags": [
-    "b3s17a",
-    "b3s17b",
-    "b3s17c",
-    "b3s17",
-    "b3s18a",
-    "b3s18b"
-   ],
-   "cards": [
-    "c-b3s17",
-    "c-b3s18"
    ]
   },
   {
@@ -27181,16 +27204,6 @@
    ],
    "cards": [
     "c-wanch2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjypMmFmdu9Fbm3ko",
-   "title": "Write real prompts for 267 starter-draft battle animations",
-   "first": "2026-11-21T11:25:36-08:00",
-   "last": "2026-11-21T11:25:36-08:00",
-   "tags": [],
-   "cards": [
-    "c-guideprompts"
    ]
   },
   {
@@ -30665,8 +30678,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "63d0e2c519be12d51d4aff76b8cd15b674b90fbd",
- "synced_at": "2026-11-21T19:31:20+00:00",
+ "synced": "62a657ac816a3f97857ce9e7532000cf38948383",
+ "synced_at": "2026-11-21T19:32:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
