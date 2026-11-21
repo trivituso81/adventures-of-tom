@@ -7,4 +7,4 @@ CAMERA AND BACKGROUND
 Locked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
 
 MOTION: DODGE
-From her starting relaxed stance, she quickly ducks and leans her upper body back and away to the right once, as if something is flying past her, while her feet stay planted. Without repeating the dodge, she straightens up and returns to her starting relaxed stance, holding it for the rest of the clip.
+From her starting relaxed stance, she quickly ducks and leans her upper body back once, as if something is flying past her, while her feet stay planted. Without repeating the dodge, she straightens up and returns to her starting relaxed stance, holding it for the rest of the clip.
