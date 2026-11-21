@@ -29,30 +29,30 @@ B3_FOES.skeeter={id:'skeeter',name:'Skeeter Swarm',ch:1,role:'hexer',row:'back',
   peeves:['drench','racket'],resists:[],start:['jitterflight'],mechanics:[],drop:'honey',
   acts:[
     {id:'darting_bite',name:'Darting Bite',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee'],effects:[]},
-    {id:'buzz_cloud',name:'Buzz Cloud',flavor:['support'],power:0,recovery:80,hits:'self',tags:['buff'],when:{stripped:'jitterflight'},effects:[{op:'status',id:'jitterflight',to:'self'}]},
+    {id:'buzz_cloud',name:'Buzz Cloud',flavor:['support'],power:0,recovery:80,hits:'self',tags:['buff'],anim:{kind:'clip',clip:'skeeter_buzz',at:.6},when:{stripped:'jitterflight'},effects:[{op:'status',id:'jitterflight',to:'self'}]},
     {id:'mosquito_whine',name:'Mosquito Whine',flavor:['racket'],power:1,recovery:100,hits:'one',tags:['projectile'],effects:[{op:'pep',n:-1,to:'target'},{op:'status',id:'fatigue',to:'target'}]}
   ]};
 B3_FOES.grump={id:'grump',name:'Pond Grump',ch:1,role:'bruiser',row:'front',hp:106,atk:24,def:16,spd:89,pips:0,
   peeves:['razzle','sizzle'],resists:[],start:[],mechanics:[],drop:'hoodie',
   acts:[
-    {id:'puddle_grumble',name:'Puddle Grumble',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[]},
-    {id:'bog_splash',name:'Bog Splash',flavor:['drench'],power:1,recovery:100,hits:'one',tags:['projectile'],effects:[{op:'status',id:'drenched',to:'target'}]},
-    {id:'soggy_slap',name:'Soggy Slap',flavor:['drench'],power:1.5,recovery:120,hits:'one',tags:['melee','charge_up'],effects:[{op:'status',id:'drenched',to:'target'}]}
+    {id:'puddle_grumble',name:'Puddle Grumble',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'grump_grumble',at:.5},effects:[]},
+    {id:'bog_splash',name:'Bog Splash',flavor:['drench'],power:1,recovery:100,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'grump_splash'},effects:[{op:'status',id:'drenched',to:'target'}]},
+    {id:'soggy_slap',name:'Soggy Slap',flavor:['drench'],power:1.5,recovery:120,hits:'one',tags:['melee','charge_up'],anim:{kind:'clip',clip:'grump_slap'},wind:'grump_slapwind',effects:[{op:'status',id:'drenched',to:'target'}]}
   ]};
 B3_FOES.toad={id:'toad',name:'Bog Toad',ch:1,role:'bruiser',row:'front',hp:106,atk:24,def:16,spd:89,pips:0,
   peeves:['sizzle','razzle'],resists:['drench'],start:[],mechanics:[],drop:'lilyhat',
   acts:[
-    {id:'night_croak',name:'Night Croak',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[]},
+    {id:'night_croak',name:'Night Croak',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],anim:{kind:'clip',clip:'toad_croak',at:.5},effects:[]},
     {id:'body_slam',name:'Body Slam',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],effects:[]},
-    {id:'tongue_lash',name:'Tongue Lash',flavor:['clobber'],power:1.1,recovery:120,hits:'all',tags:['ground_sweep','aoe','charge_up'],effects:[]}
+    {id:'tongue_lash',name:'Tongue Lash',flavor:['clobber'],power:1.1,recovery:120,hits:'all',tags:['ground_sweep','aoe','charge_up'],anim:{kind:'clip',clip:'toad_tongue'},wind:'toad_tonguewind',effects:[]}
   ]};
 // Log Lump, the chapter's Elite: 4 Composure pips, one Pet Peeve, and it starts braced.
 B3_FOES.log={id:'log',name:'Log Lump',ch:1,role:'elite',row:'front',hp:166,atk:25,def:19,spd:85,pips:4,
   peeves:['sizzle'],resists:[],start:['mossy_brace'],mechanics:[],drop:'barkslab',
   acts:[
-    {id:'low_roll',name:'Low Roll',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee','ground_sweep'],effects:[]},
-    {id:'branch_jab',name:'Branch Jab',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],effects:[]},
-    {id:'timber',name:'Timber!',flavor:['clobber'],power:1.5,recovery:120,hits:'one',tags:['melee','charge_up'],effects:[{op:'status',id:'slow',to:'target'}]}
+    {id:'low_roll',name:'Low Roll',flavor:['clobber'],power:.8,recovery:80,hits:'one',tags:['melee','ground_sweep'],anim:{kind:'clip',clip:'log_roll'},effects:[]},
+    {id:'branch_jab',name:'Branch Jab',flavor:['clobber'],power:1,recovery:100,hits:'one',tags:['melee'],anim:{kind:'clip',clip:'log_jab'},effects:[]},
+    {id:'timber',name:'Timber!',flavor:['clobber'],power:1.5,recovery:120,hits:'one',tags:['melee','charge_up'],anim:{kind:'clip',clip:'log_timber'},wind:'log_timberwind',effects:[{op:'status',id:'slow',to:'target'}]}
   ]};
 // The Big One, the chapter 1 boss. Big Glare is the wind-up of Swamp Chomp: it lands now, Marks its target, and the bite comes on
 // its next turn (Tom's Suite Door Slide can take the bite, Grace's Crunchy Sugar-Cube Pop or a Break cancels it).

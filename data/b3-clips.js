@@ -31,5 +31,6 @@ const B3_BODY_CLIPS={
   grump:{idle:'grump_idle'},
   toad:{idle:'toad_idle'},
   log:{idle:'log_idle'},
+  skeeter:{idle:'skeeter_idle'},   // wanch1
   bigone:{idle:'bigone_idle',hit:'bigone_hit',slip:'bigone_slip',flustered:'bigone_flustered',die:'bigone_defeated'}
 };
