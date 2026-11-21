@@ -1,3 +1,23 @@
+## idea-tomgrace (2026-11-21): Tom, Grace, Rose and Deedee never show an old painted frame in the new battle; a moment with no video of its own shows one of their videos
+
+Card c-idea-tomgrace. Tom: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations".
+
+What still drew a painted frame for them before this build (facts, from engine/b3-play.js): the dodge (the windup picture), low HP (the kneel picture), a hit or knock-out whose video had not loaded yet (the hurt picture, the knocked-out picture), every move with no video of its own (the strike, cast and give pictures, and the windup before a run), and the standing picture for the first moments of a fight while the idle video loads. (Deedee's painted knock-out was replaced by her video in anim-deedee-ko-yes1 an hour earlier.)
+
+| Moment | Now shows |
+|---|---|
+| A move with no video (strike, cast, throw, give, the Basic, a reaction) | their give video, once from the move's start (Tom has no give video, so his idle or guard video) |
+| Dodge | their idle video, sliding away and back as before |
+| Low HP, a hit before its video loads | their idle or guard video |
+| A knock-out before its video loads | their hit video held at its deepest wince, dimmed, with circling stars |
+| Before a video is loaded | nothing drawn for them (the turn arrows still show) |
+
+- Code: `B3_VIDEO_ONLY` in data/b3-clips.js; `b3cVideoOnly`, `b3cStandIn`, `b3cKoStandIn` in engine/b3-clips.js; `b3PaintState` is null for them and `b3DrawMember` swaps in the stand-in (engine/b3-play.js). The Battle Guide no longer marks their states OLD PAINTED POSE.
+- Retired: tools/paint_state_test.py (its subject, the painted states of these four, is no longer drawn). The rest of the painted-state code (B3_BODY_PAINT, B3_PAINT, b3GuardDraw, the Lab row PAINTED STATES, engine/pose-review.js) is now unreachable for everyone and is purged by card c-wanch2.
+- Not covered: battle 2, which chapters 5 to 10 still use until they move to the new battle (b3s17d onward). Its fights are drawn from painted frames.
+- Tests: new `python3 -I tools/video_only_test.py` (every moment for each of the four, then a whole fight with all four, portrait and landscape: 0 painted frames) FAILS []; `wanproof_test.py` FAILS [] (its painted size measure switches video-only off for that one measure); `b3_test.py s8` FAILS [] (its painted check now expects never painted for them); smoke FAILS only board_sync_test R5, which replays the live board at a fixed past date and fails the same way without this change; `battle_guide_test.py` has 4 failures about the note card that fail the same way without this change.
+
+
 ## artfallback1 (2026-11-21): Art Library pictures go to xAI first, to WAN after 2 misses, and stop after 4
 
 Card c-artfallback. Tom (11-21 09:49): "we should use XAI as the default for images, but then if there are more than two failed attempts with XAI, then we should switch the image service to WAN." Plan: claude/art-fallback-plan.md (its Built section lists the decisions).

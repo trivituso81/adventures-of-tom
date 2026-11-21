@@ -22648,7 +22648,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and play NEW 1 to NEW 6 once each (about 2 minutes each). The family now stand, breathe, guard, get hit, fall, cheer and run in videos; the Grump, Toad, Log and Skeeter attack in videos. Dodge and cast are still the old painted poses on purpose (next card). Then tap All good, or Something is wrong with a note. This unblocks Dodge, cast and the stop-loss videos (c-wanch2).",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and play NEW 1 to NEW 6 once each (about 2 minutes each). The family stand, breathe, guard, get hit, fall, cheer and run in videos; the Grump, Toad, Log and Skeeter attack in videos. New since build idea-tomgrace: Tom, Grace, Rose and Deedee never show an old painted pose. A dodge with no video of its own slides their standing video, and a move with no video of its own plays their hand-out (give) video. Check that none of the four ever looks like a flat painting, and that these stand-ins read well enough until their own videos come. Then tap All good, or Something is wrong with a note. This unblocks Dodge, cast and the stop-loss videos (c-wanch2).",
    "steps": [
     "Open ADMIN > BATTLE LAB > NEW BATTLE.",
     "Play NEW 1: TWO MUDLINGS to the end, then NEW 2 to NEW 6 the same way.",
@@ -22658,7 +22658,7 @@
     "c-wanch2"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "build": "wanch1",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
@@ -22668,6 +22668,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanch1. Every clip was checked against claude/video-battle-plan.md 4.4 before it was wired."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "idea-tomgrace changed what to look at: the dodge and moves with no video now show their videos, never painted poses."
     }
    ]
   },
@@ -22679,7 +22683,7 @@
    "col": "wait",
    "waiting_on": "tom",
    "tag": "wanch2",
-   "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. When every family state is a video, the painted poses are removed for good.",
+   "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. It also removes the old painted-pose code for good (no longer drawn since idea-tomgrace).",
    "blocks": [
     "c-anim-tom-dodge-ner3"
    ],
@@ -22709,6 +22713,10 @@
     {
      "d": "2026-11-21",
      "t": "Finding from anim-rose-dodge-v89r (2026-11-21): a dodge DOES work on Wan 3.0 when it is a duck instead of a sideways lean. Rose passed with MOTION \"she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground\" and pad 0.8 (tools/art-library/prompts/wan-rose-dodge-v2.txt, job rose-dodge rev 3). The lean wording is what made Grace hop sideways twice. Try this wording on Wan (same person's pattern, one change) before moving dodge to another model."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom's words from c-idea-tomgrace: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\". idea-tomgrace made the painted states unreachable for the four (B3_VIDEO_ONLY, video stand-ins) and retired tools/paint_state_test.py, so the purge no longer waits on every video passing."
     }
    ],
    "prompt": {
@@ -22719,7 +22727,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: video prompts and clips you judge by taste, and a miss costs generation money)",
     "effort": "medium (the route, the checks, the bake and the tests are built and written down; this repeats them with another model)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). When every family body state is a video, purge the painted states completely in the same change (B3_BODY_PAINT, B3_PAINT, b3PaintState, b3GuardDraw, b3KoDraw painted parts, the Lab row PAINTED STATES: CHAPTER 1, data/pose-review.json, tools/paint_state_test.py, docs/BATTLE3.md Painted body states). Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). The painted states are no longer drawn for Tom, Grace, Rose and Deedee (idea-tomgrace: B3_VIDEO_ONLY, b3cStandIn shows one of their videos where a state has none), so purge them completely in wanch2a whatever the video tries give (B3_BODY_PAINT, b3PaintState, b3GuardDraw and B3_GUARD, b3KoDraw painted parts and b3GetUp, B3_PAINT except the dodge slide b3cStandIn uses, the Lab row PAINTED STATES: CHAPTER 1 and its link in battle-lab.html and engine/splash.js, engine/pose-review.js, data/pose-review.json, docs/BATTLE3.md Painted body states; tools/paint_state_test.py is already gone). Keep python3 -I tools/video_only_test.py passing. A new video for a state replaces its stand-in by being listed in B3_BODY_CLIPS or the kit row. Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -25381,8 +25389,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Battle Animations",
-   "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
-   "next": "Your idea: For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
+   "title": "No painted frames in battle for Tom, Grace, Rose, Deedee",
+   "next": "Shipped as build idea-tomgrace: in the new battle these four never show an old painted frame. A move or state with no video of its own shows one of their videos (give video for moves, idle video for the dodge, the hit video while a knock-out video loads). Real videos for those moments come from c-wanch2 and the dodge cards. Battle 2 (chapters 5 to 10) is not covered until those chapters move to the new battle.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25420,6 +25428,14 @@
     {
      "d": "2026-11-21",
      "t": "Session started (Opus 5.5, medium; size kept: the stand-ins are judged by taste)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Checked the open cards: c-wanch2 makes the missing videos (dodge, cast) and purges the painted states, but only after Tom's watch card; nothing covered the painted frames still drawn today. Kept this card for that and added Tom's words to c-wanch2."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped idea-tomgrace: B3_VIDEO_ONLY (tom, grace, rose, deedee). Painted frames that were still drawn: dodge, low HP, a hit or knock-out before its video loaded, every move with no video, the standing picture while the idle loads. Each now shows one of their videos, or nothing until loaded. New test tools/video_only_test.py: 0 painted frames in every moment and in a whole fight of the four, portrait and landscape. Handed to Tom on t-wanch1-watch."
     }
    ],
    "prompt": {
@@ -25430,7 +25446,8 @@
     "model": "Claude Opus 5.5 (row D: judged by taste)",
     "effort": "medium (a small piece, starting from what is there)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-tomgrace in data/board.json, history included. Your first push is the commit board: start c-idea-tomgrace.\n\nTom made this card himself with New card on the board. His words: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\"\n\nThe board sized this from his words alone: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nTom judges this by taste. Read docs/CANON.md first, and docs/tom-edits.tsv for any dialogue. Pictures and videos are made only in the Art Library, and their prompts follow the prompt rules in CLAUDE.md. Start from what is there and change only what he names. Test it, look at it in portrait and landscape, and push build idea-tomgrace with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-wanch1-watch"
   },
   {
    "id": "t-anim-grace-give-q4es",

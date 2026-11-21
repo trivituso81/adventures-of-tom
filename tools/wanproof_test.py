@@ -75,10 +75,10 @@ with sync_playwright() as pw:
         kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&s.anim&&s.anim.kind==='clip').map(s=>s.anim.clip)",who)
         for id in kit: need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: the kit names clip {id}, which is not defined')
         # Battle size today: the painted standing figure, clips switched off for this one measure.
-        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={idle:'__none'}; }",who)   # no clip drawn, and no code breath to blur the measure
+        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={idle:'__none'}; window.__vo=B3_VIDEO_ONLY.slice(); B3_VIDEO_ONLY.length=0; }",who)   # no clip drawn, and no code breath to blur the measure (video-only switched off for this measure, idea-tomgrace)
         key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
         step(.5); S=M(); k=pg.evaluate("()=>window.__k"); tol=k*1.01
-        leave(); pg.evaluate("(w)=>{ B3_BODY_CLIPS[w]=window.__keep; }",who)
+        leave(); pg.evaluate("(w)=>{ B3_BODY_CLIPS[w]=window.__keep; B3_VIDEO_ONLY.push(...window.__vo); }",who)
         key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
         pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].idle)",arg=who,timeout=40000); step(.2)
         strip=[]; box=crop_of(pg,key)

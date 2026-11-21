@@ -238,10 +238,11 @@ function buildAnims(){
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
   const body=id=>{
     const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{},P=(typeof B3_BODY_PAINT!=='undefined'&&B3_BODY_PAINT[id])||{};
+    const VO=typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(id);
     const order=['idle','guard','hit','dodge','ko','victory','run','give','slip','flustered','die'];
     order.concat(Object.keys(C).filter(k=>!order.includes(k))).forEach(st=>{
       if(C[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:C[st],what:'body state '+st});
-      else if(P[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:null,painted:true,what:'body state '+st});
+      else if(P[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:null,painted:!VO,what:'body state '+st});   // idea-tomgrace: a video-only member shows one of their videos there, never the painted pose
     });
   };
   Object.keys(B3_CAST).forEach(id=>{body(id);

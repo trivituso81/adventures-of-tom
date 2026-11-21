@@ -514,7 +514,7 @@ A clip of kind `guard` (`bake_clip.py --kind guard --rise-end F --lower-start F`
 
 ### Painted body states (clipposes, 2026-11-19; the clip reset, `claude/clip-reset-plan.md`)
 
-SUPERSEDED BY RULE (Tom, 2026-11-20): NO PAINTED POSES IN BATTLE (CLAUDE.md). This section describes what the Lab still shows until each state's video exists; do not add to it or tune it. Plan: `claude/video-battle-plan.md`.
+SUPERSEDED BY RULE (Tom, 2026-11-20): NO PAINTED POSES IN BATTLE (CLAUDE.md). idea-tomgrace (2026-11-21): Tom, Grace, Rose and Deedee are in `B3_VIDEO_ONLY` (data/b3-clips.js), so none of this table is drawn for them any more; a moment with no video of its own shows one of their videos (`b3cStandIn`, engine/b3-clips.js), test `python3 -I tools/video_only_test.py`. This section describes what the Lab still shows until each state's video exists; do not add to it or tune it. Plan: `claude/video-battle-plan.md`.
 
 wanch1 (2026-11-20): the family's body states are Wan 3.0 videos in `B3_BODY_CLIPS` (idle loops with the breathing in them, guard videos of kind `guard` in every fight, hit, ko, victory, run). What is still painted after wanch1 is only what `B3_BODY_PAINT` still lists (dodge for Tom, Grace and Deedee; Deedee's ko and victory until their remakes pass; Rose's dodge became a Wan video, a duck, in anim-rose-dodge-v89r on 2026-11-21), and the Lab row below shows only those rows. A fighter with an idle video gets no code breath. Test of the videos: `python3 -I tools/wanproof_test.py` (W1 to W5 per fighter).
 
@@ -530,7 +530,7 @@ wanch1 (2026-11-20): the family's body states are Wan 3.0 videos in `B3_BODY_CLI
 | victory | celeb and leap | swap every .28 s, 16 high hop (Rose keeps her video) |
 | run | run pair, runFlip on the way home | swap every .11 s in place of the leap picture |
 
-Rules: a pose is never warped; only `s` (so the head matches the standing head) and `h` live in the table. Head rows: `tools/shots/paintstate-headrows.png`. Test: `python3 -I tools/paint_state_test.py` (feet on the ground line, size, slide distances, ko and get up, victory, run, then the Lab row, both layouts). Lab: NEW BATTLE > PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, `engine/b3-lab.js`) plays every state on every fighter in turn. fix-clipposes-2: after each state the run holds on a review panel (`engine/pose-review.js`: WATCH AGAIN, optional note, REJECT, APPROVE, STOP) at 1x; each answer is saved to `data/pose-review.json` on main (`runs.ch1.expect` and `answers` keyed `fighter.state`), and the board rule `done_when.poses_reviewed` closes Tom's card when every state is answered and hands his rejections and notes to the card that applies them.
+Rules: a pose is never warped; only `s` (so the head matches the standing head) and `h` live in the table. Head rows: `tools/shots/paintstate-headrows.png`. The test `tools/paint_state_test.py` was retired by idea-tomgrace (2026-11-21). Lab: NEW BATTLE > PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, `engine/b3-lab.js`) plays every state on every fighter in turn. fix-clipposes-2: after each state the run holds on a review panel (`engine/pose-review.js`: WATCH AGAIN, optional note, REJECT, APPROVE, STOP) at 1x; each answer is saved to `data/pose-review.json` on main (`runs.ch1.expect` and `answers` keyed `fighter.state`), and the board rule `done_when.poses_reviewed` closes Tom's card when every state is answered and hands his rejections and notes to the card that applies them.
 
 ## Clips: facts from the animation test (build `clippack1`, 2026-11-18)
 

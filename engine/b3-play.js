@@ -133,7 +133,7 @@ function b3Show(b) {
       else if(!b3cBodyClip(b.tgt,'hit',true)) B3P.body[b.tgt]={kind:'hit',t0:now,dur:b3PaintState(b3Unit(B3.F,b.tgt),'hit')?B3_PAINT.hit.dur:.45}; b3Sfx('hitParty'); }
     B3P.fx.push({kind:'burst',x:b3Spot(b.tgt).x,y:b3Spot(b.tgt).y,color:fl.color,t0:now,dur:.35});
   }
-  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.tgt[0]!=='f'&&!b3cBodyClip(b.tgt,'dodge')&&b3PaintState(b3Unit(B3.F,b.tgt),'dodge')) B3P.body[b.tgt]={kind:'dodge',t0:now,dur:B3_PAINT.dodge.dur}; if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
+  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.tgt[0]!=='f'&&!b3cBodyClip(b.tgt,'dodge')&&(b3PaintState(b3Unit(B3.F,b.tgt),'dodge')||b3cVideoOnly(b3Unit(B3.F,b.tgt)))) B3P.body[b.tgt]={kind:'dodge',t0:now,dur:B3_PAINT.dodge.dur}; if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
   else if(b.t==='status') {
     // An enemy wears its top 3 statuses over its head, so the new tag is the news; anything else gets a rising tag.
     const had=b.tgt[0]==='f'?b3ViewIcons(b.tgt).length:0;
@@ -416,7 +416,8 @@ function b3DrawFoe(f,t,picked) {
 // little stretched and settles into its crouch, then holds with a slow breath. The feet never leave their spot. Leaving the guard plays it backwards.
 // After a move of their own a guarding fighter sinks back into the pose the same way.
 const B3_GUARD={dip:.09,settle:.2,rise:.08,up:.14,low:.93,tall:1.1,breath:.006,ghost:.07};
-function b3PaintState(u,state) { if(u&&(state==='guard'||state==='idle')&&b3cGuardClip(u)) return null;   // wanproof: the guard video stands in for the painted guard and fidget in its own Lab row only
+function b3PaintState(u,state) { if(b3cVideoOnly(u)) return null;   // idea-tomgrace: never a painted state for them
+  if(u&&(state==='guard'||state==='idle')&&b3cGuardClip(u)) return null;   // wanproof: the guard video stands in for the painted guard and fidget in its own Lab row only
   const T=u&&B3_BODY_PAINT[u.id],R=T&&T[state],sp=u&&BATTLE_SPRITES[u.id]; return R&&sp&&sp[R.f]&&(!R.f2||sp[R.f2])?R:null; }
 // The other painted states. Numbers are battle seconds and battle pixels; +x is away from the monsters. A pose slides out, holds, slides home.
 const B3_PAINT={hit:{out:10,t1:.12,hold:.2,back:.25,flash:.08,dur:.57},dodge:{out:14,hop:6,t1:.14,hold:.1,back:.2,dur:.44},
@@ -474,6 +475,11 @@ function b3DrawMember(u,t,picked) {
     const KF=b3cMemberFrame(u,vu,t,A);   // a knock-out clip plays once and its last picture is held (engine/b3-clips.js)
     if(KF) { const w=KF[0].length*sp.scale,h=KF.length*sp.scale,ft=feetOf(KF);
       ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)'); drawSprite(KF,sp.pal,Math.round(cx-w/2),Math.round(base-h),sp.scale,{flash:0}); return; }
+    if(b3cVideoOnly(u)) {   // idea-tomgrace: no knock-out video yet, so the hit video's deepest wince, dimmed, with stars; nothing painted
+      const KS=b3cKoStandIn(u,t,A&&A.kind==='ko'?t-A.t0:9); if(!KS) return;
+      const w=KS[0].length*sp.scale,h=KS.length*sp.scale,ft=feetOf(KS);
+      ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
+      gfx.globalAlpha=.6; drawSprite(KS,sp.pal,Math.round(cx-w/2),Math.round(base-h),sp.scale,{flash:0}); gfx.globalAlpha=1; b3Stars(cx,base-h,w,t); return; }
     b3KoDraw(u,sp,cx,base,t,A&&A.kind==='ko'?t-A.t0:9);
     return;
   }
@@ -504,10 +510,18 @@ function b3DrawMember(u,t,picked) {
   // A clip, when one shows this state and is loaded: idle and guard loops, a hit, a dodge, a give or cast, the victory (engine/b3-clips.js).
   if(!CF&&!(B&&(B.kind==='path'||B.kind==='cmove'||B.kind==='pose'||(B.kind==='hit'&&!(B.guard&&b3cGuardClip(u)))))&&!(low&&!cheer)) CF=b3cMemberFrame(u,vu,t,B);
   if(CF&&cheer&&!B) hop=0;
+  // idea-tomgrace: a video-only member never shows a painted frame. A reaching pose or the strike of a move plays their give video from its
+  // start, anything else (a dodge, low HP, a hit or a move whose video is not loaded) their idle, guard or victory video. None loaded: not drawn.
+  const VO=b3cVideoOnly(u);
+  if(VO&&!CF) { let reach=false,r0=B?B.t0:t;
+    if(B&&B.kind==='pose') reach=B.f===B3_BODY.strike||B.f===B3_BODY.give||B.f===B3_BODY.cast;
+    else if(B&&B.kind==='path'&&fk===B3_BODY.strike) { const K=B.keys,e=t-B.t0; let i=0; while(i<K.length-2&&e>=K[i+1].t) i++; while(i>0&&K[i-1].f===B3_BODY.strike) i--; reach=true; r0=B.t0+K[i].t; }
+    CF=b3cStandIn(u,vu,t,reach,r0); PF=null; fk=B3_BODY.idle; }
   // Running (crossing the field): the two painted run pictures, the mirrored pair on the way home, in place of the leap picture.
   if(fk===B3_BODY.dash&&!CF&&!PF) { const R=b3PaintState(u,'run'); if(R) { const pair=dirR>0&&sp.runFlip?sp.runFlip:sp.run; PF=pair[Math.floor((t-B.t0)/B3_PAINT.run)%2]; PS=R.s; } }
   // A painted guard (B3_BODY_PAINT): the guard frame with the engine's motion, in place of a guard clip. Not while low, cheering or in a move.
   const GD=!low&&!cheer?b3GuardDraw(u,t,!!B&&!(B.kind==='hit'&&B.guard)):null,gp=GD&&GD.pose?sp[B3_BODY_PAINT[u.id].guard.f]:null;
+  if(VO&&!CF) { b3MemberMarks(u,t,picked,base-(sp.idle.length*sp.scale),cx); return; }
   const stand=CF||PF||sp[fk]||sp.idle,frame=gp||stand,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
   const x=Math.round(cx-w/2),y=Math.round(base-h-hop);
@@ -525,7 +539,10 @@ function b3DrawMember(u,t,picked) {
   const RI=!GD&&!B&&!CF&&!PF&&fk===B3_BODY.idle&&!cheer&&!low?b3PaintState(u,'idle'):null;
   if(RI) { const per=5+u.slot%3,F=B3_PAINT.fidget,fa=B3P.fidAt&&B3P.fidAt[u.key],ph=fa!=null&&t-fa<F.len?t-fa:F.on?(t+u.slot*1.3)%per:9;   // fidAt: the Lab demo starts one early
     if(ph<F.len) { gfx.globalAlpha=Math.max(0,Math.min(1,ph/F.fade,(F.len-ph)/F.fade)); b3DrawScaled(sp[RI.f],sp,cx,base,RI.s,{flash:0}); gfx.globalAlpha=1; } }
-  // The turn marker and the target arrow. (A family member's statuses show on their card, not over the head.)
+  b3MemberMarks(u,t,picked,y,cx);
+}
+// The turn marker and the target arrow over a family member whose figure's top is y. (Their statuses show on their card, not over the head.)
+function b3MemberMarks(u,t,picked,y,cx) {
   const sy=y-10;
   // Marked by a monster's wound-up act: a red arrow and the word, until the act fires or is cancelled.
   if(b3ViewMarked(u.key)&&!picked) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ff8f80'); b3Text('MARKED',cx,yy-12,'#ff8f80',2); }

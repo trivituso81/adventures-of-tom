@@ -31,3 +31,9 @@ const B3_BODY_CLIPS={
   skeeter:{idle:'skeeter_idle'},   // wanch1
   bigone:{idle:'bigone_idle',hit:'bigone_hit',slip:'bigone_slip',flustered:'bigone_flustered',die:'bigone_defeated'}
 };
+// B3_VIDEO_ONLY (idea-tomgrace, Tom 2026-11-21: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ever used in battle.
+// Only new video animations"): these family members never show a painted battle frame. B3_BODY_PAINT rows of theirs are ignored, and any
+// moment that has no video of its own shows one of their videos instead (b3cStandIn, engine/b3-clips.js): a reaching move (strike, cast,
+// throw, give) plays their give video, a dodge slides their idle video, a knock-out whose video is not loaded yet holds the deepest wince
+// of their hit video, dimmed, with stars; everything else is the idle, guard or victory video. Until a video is loaded they are not drawn at all.
+const B3_VIDEO_ONLY=['tom','grace','rose','deedee'];

@@ -1249,12 +1249,12 @@ def stage8(pg,lab,landscape=False):
     # 3. body states: the family are painted poses (tools/paint_state_test.py measures them); a monster hit and a Flustered monster are clips
     pg.wait_for_timeout(600)
     st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
-      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>(b3cOf(m.id,s)===null)===!!b3PaintState(m,s)));   // wanch1: each state is a video or (until it has one) painted, never both
-      out.vic=B3.F.party.every(m=>(b3cOf(m.id,'victory')===null)===!!b3PaintState(m,'victory'));
+      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>b3cVideoOnly(m)?!b3PaintState(m,s):(b3cOf(m.id,s)===null)===!!b3PaintState(m,s)));   // wanch1: each state is a video or (until it has one) painted, never both; idea-tomgrace: a video-only member is never painted
+      out.vic=B3.F.party.every(m=>b3cVideoOnly(m)?!b3PaintState(m,'victory'):(b3cOf(m.id,'victory')===null)===!!b3PaintState(m,'victory'));
       const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
       vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
     print('   states',st2)
-    need(st2['paint'] and st2['vic'],f'every body state of the four fighters is a video or painted, never both and never neither: {st2}')
+    need(st2['paint'] and st2['vic'],f'every body state of the four fighters is a video or painted, never both and never neither (video-only members: never painted): {st2}')
     need(st2['foeHit'],f'a monster hit clip is available and drawn: {st2}')
     # Flustered: the held picture, then restore
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))

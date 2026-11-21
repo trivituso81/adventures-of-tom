@@ -96,6 +96,17 @@ function b3cGuardMs(C,G,t) {
 }
 // Is the guard clip showing anything right now (up, holding, or still lowering)? When not, the idle loop shows (wanch1).
 function b3cGuardActive(C,key,on,t) { const G=B3C.gs[key]; if(on||(G&&G.on)) return true; if(!G||G.t0<-90) return false; return (t-G.t0)*1000+G.from<C.dur; }
+// idea-tomgrace: a family member in B3_VIDEO_ONLY (data/b3-clips.js) is drawn from videos only, never a painted frame.
+function b3cVideoOnly(u) { return !!u&&typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(u.id); }
+// The video picture that stands in for a painted one (video-only members). reach: a reaching move began at t0, so their give video plays
+// once from then (a member with no give video keeps the idle loop). Otherwise the idle, guard or victory loop. Null until a video is loaded.
+function b3cStandIn(u,vu,t,reach,t0) {
+  if(reach) { const G=b3cGet(u.id,'give',6000); if(G) return b3cOnce(G,(t-t0)*1000); }
+  return b3cMemberFrame(u,vu,t,null);
+}
+// A knocked-out video-only member whose knock-out video is not loaded (or not made): their hit video plays to its middle (the deepest wince) and holds there.
+function b3cKoStandIn(u,t,e) { const H=b3cGet(u.id,'hit',8000),I=H?null:b3cGet(u.id,'idle',9000);
+  return H?b3cOnce(H,Math.min(e*1000,H.dur*.5)):I?bclipFrameAt(I,0):null; }
 // The picture of a family member's clip right now, or null (draw the painted frame). e0 is the time the body started this state.
 function b3cMemberFrame(u,vu,t,B) {
   const GC=!vu.ko&&b3cGuardClip(u),gon=GC&&b3cGuarding(u);
