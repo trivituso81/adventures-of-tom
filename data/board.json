@@ -22749,7 +22749,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Read a few item banners on your phone",
-   "next": "Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
+   "next": "Open the game, press RELOAD on the title, load chapter 1, beat the Grump (Pond Hoodie) and a Log Lump (Bark Slab). The Wear it lines should name no stats, and the Dragonfly Coin card should stay up until you tap. The cookie only comes from Deedee as a townsperson, not in chapter 1.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -27562,6 +27562,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T19:39:08.565Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed: gear lines no longer name Battle 2 stats; item cards ignore dismissal for 1100 ms. Cookie: expectation outdated (Deedee gives cookies only as a townsperson, and in chapter 1 she is in the party), no change. Build fix-itemdefplay."
     }
    ],
    "prompt": {

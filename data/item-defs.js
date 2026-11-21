@@ -94,7 +94,7 @@ const ITEM_STORY={
 // A type name, where the one worked out from the fields is wrong for the item.
 const ITEM_TYPE={ present:'Key Item', nsinvites:'Key Item', nsbanner:'Key Item', fridgephoto:'Key Item' };
 // An IN BATTLE line, where the one worked out from the fields is not enough.
-const ITEM_BATTLE={ nspepper:'Throw it: 90 damage. It burns through an ICE SHELL like a Cozy hit.' };
+const ITEM_BATTLE={ hoodie:'Wear it. It looks great and smells like a pond. No fight rule cares.', barkslab:'Hold it. It looks sturdy and counts for nothing in the rules, but it feels like a shield.', bcap:'Wear it. Boppy says it’s lucky. The fight doesn’t check.', nspepper:'Throw it: 90 damage. It burns through an ICE SHELL like a Cozy hit.' };
 
 // The IN STORY line for every item without its own line, by kind.
 const ITEM_STORY_KIND={
@@ -141,7 +141,10 @@ const itemDefEnd=s=>s&&!/[.!?]$/.test(s)?s+'.':s;
 function itemDefBattle(id) {
   const it=items[id];
   if(ITEM_BATTLE[id]) return ITEM_BATTLE[id];
-  if(it.slot) { const b=typeof bonusText==='function'?bonusText(it):''; return b?'Wear it: '+itemDefEnd(b):'Wear it. It looks great. That’s all.'; }
+  if(it.slot) {   // fix-itemdefplay: Battle 3 has no GRIT, POW, COOL or HP gear stats, so a banner never names one; only wear effects Battle 3 understands are listed
+    const pk=it.perk&&typeof b6PerkText==='function'?b6PerkText(Object.assign({},it.perk,{stat:undefined})):'';
+    return pk?'Wear it: '+itemDefEnd(pk):'Wear it. It looks great. That’s all.';
+  }
   const fx=typeof effectText==='function'?effectText(it).replace(/^Battle: /,''):'';
   if(fx) {
     const verb=it.dmg||it.confuse||it.atkDown?'Throw it: ':'Use it: ';

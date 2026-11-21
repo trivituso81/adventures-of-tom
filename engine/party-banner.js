@@ -11,6 +11,7 @@
 // key, tap and pad button is swallowed, until the player dismisses it (tap, A, Enter, Space, Escape, any gamepad A or B). Queued banners each need
 // their own dismiss. PB_MIN keeps the press that ended the line before it from dismissing the banner by accident.
 const PB_MIN=450;    // ms a banner ignores dismissal after it appears
+const PB_ITEM_MIN=1100;   // fix-itemdefplay: an item card has four lines to read, so it ignores dismissal until it has fully faded in and been readable a moment (Gemini: the Dragonfly Coin card closed mid-fade)
 const PB_GAP=400;    // ms between one dismiss and the next banner
 const pbQueue=[];
 let pbBusy=false, pbShown=false, pbAt=0, pbTimer=0;
@@ -114,7 +115,7 @@ function pbNext() {
 }
 // Dismiss the banner on screen (ignored in its first PB_MIN ms). The next queued banner follows after PB_GAP; with none queued the game is free at once.
 function partyBannerDismiss() {
-  if(!pbShown||performance.now()-pbAt<PB_MIN) return false;
+  if(!pbShown||performance.now()-pbAt<(pbItem?PB_ITEM_MIN:PB_MIN)) return false;
   if(pbItem&&pbItem.at<pbItem.pages.length-1) {   // itemdef1: the next item of the same banner
     pbItem.at++; pbItemPage();
     try { if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); } catch(e) {}

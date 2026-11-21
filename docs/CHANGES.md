@@ -1,3 +1,15 @@
+## fix-itemdefplay (2026-11-21): item cards no longer name old Battle 2 stats, and stay up until readable
+
+Gemini (chapter 1 run, row C11): "Wear it: +18 HP, +4 GRIT, +1 COOL." on the Pond Hoodie and "Wear it: +5 POW." on the Bark Slab "names removed Battle 2 stats"; the Dragonfly Coin banner "auto-dismissed mid-fade-in before reaching full opacity"; the Cookie "could not be obtained ... because Deedee remained in Tom's active 4-person party".
+
+| Problem | What changed |
+|---|---|
+| Old stat lines | `itemDefBattle` (`data/item-defs.js`) no longer prints gear stats (`stats`, `perk.stat`); it lists only perks Battle 3 words (regen, crit, coins and so on). The Pond Hoodie, Bark Slab and Boppy's Cap have their own jokey lines in `ITEM_BATTLE`. The Menu > ITEMS line for Boppy's Cap (X-07) still shows GRIT +10% because Battle 2 (chapters 5 to 10) still uses it; not changed here. |
+| Banner closes too early | An item card ignores dismissal for 1100 ms (`PB_ITEM_MIN`, `engine/party-banner.js`), up from 450 ms. I could not reproduce a close with no input; a press that ended the line before is the likely cause. |
+| Cookie | Expectation outdated, no code change: Deedee gives cookies only as a townsperson (`n.grandma`, `engine/overworld.js`), and in chapter 1 she is in the party. |
+
+`tools/itemdef_test.py` waits updated and passing.
+
 ## gem1v (2026-11-21): Gemini's chapter 1 test applied to the board: 8 cards closed, 4 fix cards written
 
 Tom had Gemini play chapter 1 with the brief `claude/ch1-gemini-verify.md`; its report is saved as `claude/ch1-gemini-report.md` (build voicepurge221, MEDIUM, landed in Los Angeles, 1:04 in game).
