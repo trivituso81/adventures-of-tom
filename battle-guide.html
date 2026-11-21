@@ -27,8 +27,13 @@ button.ghost{background:none;border:1px solid var(--line)}
 button:disabled{opacity:.5}
 header{flex:none;display:flex;align-items:center;gap:8px;padding:0 10px 0 14px;height:54px;border-bottom:1px solid var(--line)}
 header .brand{flex:1 1 auto;min-width:0;line-height:1.1}
-header small{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-header h1{font-size:19px;margin:0;white-space:nowrap}
+header .brand{display:flex;align-items:center;gap:8px}
+header h1{flex:none;font-size:19px;margin:0;white-space:nowrap}
+/* The standard build pill (same look as the Builds screen, build-history.css .bl-chip.bl-name.live): tap opens that build's details. */
+a.bpill{flex:0 1 auto;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;padding:3px 11px;border:1px solid #4fae7a;border-radius:13px;background:#143324;color:#9be3bb;font:700 13px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.3px;text-decoration:none}
+/* Narrow (a folded Duo is about 360 wide): Search becomes an icon and Lab is reached through Admin, so the pill keeps room. */
+@media (max-width:480px){header{gap:6px;padding-left:12px}header h1{font-size:18px}header .brand{gap:6px}header a.hb[href="battle-lab.html"]{display:none}header #bsearch{font-size:0;min-width:44px;padding:0}header #bsearch::before{content:"\1F50D";font-size:17px}a.bpill{padding:3px 9px;font-size:12px}}
+a.bpill:active{opacity:.7}a.bpill[hidden]{display:none}
 header a.hb,header button.hb{flex:none;display:flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;font-size:14px}
 #tabs{flex:none;display:flex;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--well);border-top:1px solid var(--line);order:9}
 #tabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;min-height:50px;background:none;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:10px}
@@ -153,7 +158,7 @@ ol.steps li{margin:4px 0}
 </head>
 <body>
 <header>
- <div class="brand"><small id="buildline">The new battle system</small><h1>Battle Guide</h1></div>
+ <div class="brand"><h1>Battle Guide</h1><a class="bpill" id="buildline" href="builds.html" title="Open build details" hidden></a></div>
  <button class="hb" type="button" id="bsearch" aria-label="Search">Search</button>
  <a class="hb" href="battle-lab.html" title="Open the Battle Lab">Lab</a>
  <a class="hb" href="admin.html" title="Back to Admin">Admin</a>
@@ -200,7 +205,7 @@ async function boot(){
     if(!data.length) throw new Error('The game page lists no battle data files');
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
-    fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];$('buildline').textContent='Game build '+BUILD;}}).catch(()=>{});
+    fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;}).catch(()=>{});
     build();route();

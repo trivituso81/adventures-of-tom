@@ -27888,7 +27888,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Build name pill: Battle Guide header and Board cards",
-   "next": "Moves the build name in the Battle Guide from above the title to a pill on the right of it (tap opens that build's details), and shows the build name as the same pill, more prominently, on the Board card and in the card details.",
+   "next": "Built as buildpill2: the Battle Guide header shows the build as a pill right of the title (tap opens its details), and Board cards and card details show it as the same pill, larger. Tom checks it on card t-buildpill2-try.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -27913,6 +27913,39 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"in the kanban board, the build name treatment should be the in the pill as well, and displayed more prominently in both the board card and the card details in any relevant card\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Built: battle-guide.html (header pill, narrow layout), board.html buildPillOf and buildHtml, tools/board_build_test.py. Hands to Tom: t-buildpill2-try."
+    }
+   ],
+   "after": "t-buildpill2-try"
+  },
+  {
+   "id": "t-buildpill2-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Look at the build pill in the Battle Guide and on the Board",
+   "next": "Open ADMIN > Battle system > Battle Guide: the build name is a green pill right of the title. Tap it and the build details open. Then open the Board: cards that name a build show it as a larger pill under the title, and the card details show it at the top. Then press All good, or Something is wrong and say what you saw.",
+   "steps": [
+    "Open ADMIN > Battle system > Battle Guide. The line above the title is gone; the build name is a green pill right of Battle Guide. Tap it: the build details open.",
+    "Folded Duo: the pill may be shortened with dots; Search is a magnifier and Lab is reached through Admin.",
+    "Open the Board. A card that asks you to play shows Build and a pill under its title (red your test, amber not shipped yet). Open that card: the pill is at the top of the details. Tap it: the build details open."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEgMLyk7xoZixcTVhF",
+    "opening": "made by buildpill2"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by build buildpill2 (card c-buildpill2)."
     }
    ]
   }

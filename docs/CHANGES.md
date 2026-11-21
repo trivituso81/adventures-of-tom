@@ -1,3 +1,11 @@
+## buildpill2 (2026-11-21): the build name is a tappable pill in the Battle Guide header and on the Board cards and card details
+
+Card c-buildpill2. Tom (11:53): "in the battle guide, remove the build name from above the page title and put it to the right of the title, in a our standard build pill treatment, click/tap should open the existing build modal." And (11:55): "in the kanban board, the build name treatment should be the in the pill as well, and displayed more prominently in both the board card and the card details in any relevant card".
+- `battle-guide.html`: the "Game build ..." line above the title is gone; the build is a green pill (the Builds screen's live pill) right of "Battle Guide". Tapping opens `builds.html?build=<name>`, the existing build details sheet. Narrow screens (480 px and under, a folded Duo): Search is an icon and Lab is reached through Admin so the pill keeps room.
+- `board.html`: `buildPillOf` and `buildHtml`. The build is the same pill, larger, right under the card title and in the details header (it moved up from the bottom bar), with a short state beside it. Colors as on the Builds screen: red your test, amber being built or not shipped yet, green shipped. Shown on a Tom play card (as before) and on a Claude card that is in progress or shipped. Tapping opens the build's details.
+- Test: `python3 tools/board_build_test.py` (now looks for the pill in the card and the sheet header), `python3 tools/battle_guide_test.py`.
+- Tom card: t-buildpill2-try.
+
 ## guideprompts1c (2026-11-21): the prompt writer no longer turns the game's hit-type labels into props
 
 Card c-guideprompts. Looking at the 267 prompts from the first run, 92 used a game label as if it were an object or action (a monster "holds a racket behind its back" because its hit type is Racket, "as if performing a ground sweep").

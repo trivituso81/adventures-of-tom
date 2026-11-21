@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """buildname1 test: python3 tools/board_build_test.py [outdir]
-A Tom card that asks to play and report shows the build its change is in, on the card preview and at the bottom of the details sheet.
+A Tom card that asks to play and report shows the build its change is in, as the standard build pill on the card preview and in the details sheet header (buildpill2).
 Fixture cards: a shipped build plus a later fix (the fix wins), a build not shipped yet, an explicit `build`, a card waiting on a fix (none),
 a play card with no build (none) and a pictures card with a shipper (none). Screenshots in outdir (portrait and landscape). Prints FAILS: []."""
 import json, os, subprocess, sys, tempfile, time
@@ -40,20 +40,20 @@ try:
             errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
             pg.goto(URL); pg.wait_for_selector('.card >> visible=true'); pg.wait_for_timeout(500)
             for i, want in WANT.items():
-                sel = '.card[data-id="%s"] .bld code' % i
+                sel = '.card[data-id="%s"] .bld a.bpill' % i
                 got = pg.eval_on_selector_all(sel, 'e=>e.map(x=>x.textContent)')
                 if got != ([want] if want else []): fails.append(f'{name}: card {i} preview shows {got}, want {want}')
                 txt = pg.inner_text('.card[data-id="%s"] .bld' % i) if want else ''
-                if i == 't-b' and 'not shipped yet' not in txt: fails.append(f'{name}: t-b preview should say not shipped yet: {txt!r}')
-                if i == 't-a' and 'not shipped' in txt: fails.append(f'{name}: t-a preview says not shipped')
+                if i == 't-b' and 'not shipped yet' not in txt.lower(): fails.append(f'{name}: t-b preview should say not shipped yet: {txt!r}')
+                if i == 't-a' and 'not shipped' in txt.lower(): fails.append(f'{name}: t-a preview says not shipped')
             pg.screenshot(path=f'{out}/{name}-list.png')
             for i, want in WANT.items():
                 pg.evaluate("openSheet('%s')" % i); pg.wait_for_selector('#sheet.open'); pg.wait_for_timeout(250)
-                got = pg.eval_on_selector_all('#sheet .sh-bar .bld code', 'e=>e.map(x=>x.textContent)')
-                if got != ([want] if want else []): fails.append(f'{name}: sheet of {i} shows {got} in the bottom bar, want {want}')
-                if want:   # the line is inside the visible screen, above the buttons
-                    r = pg.evaluate("(()=>{const a=document.querySelector('#sheet .sh-bar .bld').getBoundingClientRect(),b=document.querySelector('#sheet .sh-bar .barrow').getBoundingClientRect();return [a.bottom<=b.top+1,a.top>=0,a.bottom<=innerHeight,a.right<=innerWidth]})()")
-                    if not all(r): fails.append(f'{name}: sheet of {i}: build line not above the buttons or off screen {r}')
+                got = pg.eval_on_selector_all('#sheet .sh-top .bld a.bpill', 'e=>e.map(x=>x.textContent)')
+                if got != ([want] if want else []): fails.append(f'{name}: sheet of {i} shows {got} in the sheet header, want {want}')
+                if want:   # the line is in the header, above the body, inside the screen
+                    r = pg.evaluate("(()=>{const a=document.querySelector('#sheet .sh-top .bld').getBoundingClientRect(),b=document.querySelector('#sheet .sh-body').getBoundingClientRect();return [a.bottom<=b.top+1,a.top>=0,a.bottom<=innerHeight,a.right<=innerWidth]})()")
+                    if not all(r): fails.append(f'{name}: sheet of {i}: build line not in the header or off screen {r}')
                 if i == 't-a': pg.screenshot(path=f'{out}/{name}-sheet.png')
                 pg.click('#bclose'); pg.wait_for_timeout(150)
             if errs: fails.append(f'{name}: page errors {errs[:2]}')

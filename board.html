@@ -63,10 +63,12 @@ code.path{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);bor
 .card .state{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .state a{font-weight:700}
 .card .state.quiet{color:var(--prob-text);font-weight:600}
-.bld{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bld a{color:inherit;text-decoration:none;display:inline-block;padding:10px 0}.bld a:active{opacity:.7}
-.bld code{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);border:1px solid var(--btn);border-radius:6px;padding:0 5px;color:var(--text)}
-.sh-bar .bld{margin:0 0 8px}
+.bld{margin-top:7px;display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden}
+.bld a.bpill{flex:0 1 auto;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;padding:4px 12px;border:1px solid;border-radius:14px;font:700 14px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.3px;text-transform:none;text-decoration:none}
+.bld a.bpill:active{opacity:.7}
+.bpill.live{border-color:#4fae7a;background:#143324;color:#9be3bb}.bpill.test{border-color:#d0675a;background:#3a1a18;color:#ffb1a6}.bpill.build{border-color:#c79a3a;background:#3a2f14;color:#f3dfa8}
+.bld .bst{flex:none;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:none}
+.sh-top .bld{margin:8px 44px 2px 0}
 .acts{display:flex;align-items:center;gap:6px 10px;margin-top:10px;flex-wrap:wrap}
 .acts .rvrow{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;width:100%}
 .acts .mdl{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -443,7 +445,16 @@ function buildOf(c){
   if(mk.length)return {tag:mk[mk.length-1].tag,shipped:false};
   return null;
 }
-const buildHtml=c=>{const b=buildOf(c);return b?'<div class="bld"><a href="builds.html?build='+encodeURIComponent(b.tag)+'">Build <code>'+esc(b.tag)+'</code></a>'+(b.shipped?'':' (not shipped yet)')+'</div>':'';};
+// buildpill2 (Tom 2026-11-21): the build name is the standard build pill (colors as on the Builds screen: red your test, amber being built, green live)
+// and tapping it opens that build's details. Shown on a Tom play card (buildOf), and on a Claude card that has a build (in progress or shipped).
+function buildPillOf(c){
+  const b=buildOf(c);
+  if(b)return {tag:b.tag,cls:b.shipped?'test':'build',note:b.shipped?'Your test':'Not shipped yet'};
+  if(c&&c.lane==='claude'&&c.tag&&c.col==='done')return {tag:c.tag,cls:'live',note:'Shipped'};
+  if(c&&c.lane==='claude'&&c.tag&&c.col==='prog')return {tag:c.tag,cls:'build',note:'Being built'};
+  return null;
+}
+const buildHtml=c=>{const b=buildPillOf(c);return b?'<div class="bld"><span>Build</span><a class="bpill '+b.cls+'" href="builds.html?build='+encodeURIComponent(b.tag)+'" title="Open build details">'+esc(b.tag)+'</a><span class="bst">'+esc(b.note)+'</span></div>':'';};
 const kickHtml=c=>'<div class="kick"><i style="background:'+(THEME_COL[c.theme]||'#ccc')+'"></i><span class="th">'+esc(c.theme)+'</span>'+(c.lane==='tom'&&c.ask&&c.col!=='done'?'<span class="ak">'+esc(askName(c.ask))+'</span>':'')+'</div>';
 const doText=c=>c.lane==='tom'?c.next:((c.prompt&&c.prompt.what&&c.col!=='done')?c.prompt.what:c.next);
 const days=n=>n+' day'+(n===1?'':'s');
@@ -479,8 +490,8 @@ function cardHtml(c,ctx){
   const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
   const first=c.lane==='tom'&&c.first&&c.col!=='done'?'<div class="first">First: '+withPaths(c.first)+'</div>':'';
   const tom=c.lane==='tom';
-  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'">'+kickHtml(c)+'<div class="t">'+esc(dispTitle(c))+dot+'</div>'+first
-    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+buildHtml(c)+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
+  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'">'+kickHtml(c)+'<div class="t">'+esc(dispTitle(c))+dot+'</div>'+buildHtml(c)+first
+    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
 }
 // On a card in the list: All good is an outline button (it is undone for 8 seconds), Something is wrong a text button, one row that never wraps.
 const rvBtns=id=>'<div class="rvrow"><button class="ob" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
@@ -769,8 +780,8 @@ function openSheet(id){
     else main='<button class="'+(c.col==='up'?'gold':'ob')+'" id="bcopy" type="button">Copy prompt</button><span class="hint">'+esc(modelShort(c))+'</span>';
   }else if(p&&!c.service&&open_) main='<button class="ob" id="bcopy" type="button">Copy prompt</button>';
   const more=(open_&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(open_?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button>';
-  bar+=buildHtml(c)+'<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
-  setSheet(shell(kickHtml(c)+'<h2>'+esc(dispTitle(c))+'</h2>',body,bar),'card');
+  bar+='<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
+  setSheet(shell(kickHtml(c)+'<h2>'+esc(dispTitle(c))+'</h2>'+buildHtml(c),body,bar),'card');
 }
 function toggleMore(v){moreOpen=v==null?!moreOpen:v;const r=$('moreRow'),b=$('bmore');if(r)r.hidden=!moreOpen;if(b){b.setAttribute('aria-expanded',moreOpen?'true':'false');b.textContent=moreOpen?'Less':'More';}}
 function closeSheet(){const sh=$('sheet');sh.classList.remove('open');sh.style.transform='';sh.dataset.kind='';$('dim').style.display='none';cur=null;moreOpen=false;}
