@@ -24439,7 +24439,7 @@
    "title": "Watch Tom, Dodge",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then tap All good or Something is wrong (say what you saw). He should squat straight down with both hands on his head and pop back up, feet never leaving the ground.",
@@ -24456,8 +24456,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-tom-dodge-ner3. The clip passed plan 4.4 and the measured clip gate before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T19:21:10.535Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-grace-dodge-p7wh",
