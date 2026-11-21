@@ -18968,6 +18968,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanch1b: start pictures for Tom, Rose and Deedee; the 39 family video prompts and jobs; 16 monster clip entries"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanch1c: one retry each for four of Grace's videos, one change each (video jobs only)"
     }
    ],
    "prompt": {
@@ -19822,6 +19826,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
+   "title": "Make and check every chapter 1 battle video",
+   "first": "2026-11-20T17:37:42-08:00",
+   "last": "2026-11-20T18:09:17-08:00",
+   "tags": [
+    "wanch1a",
+    "wanch1b",
+    "wanch1c"
+   ],
+   "cards": [
+    "c-wanch1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEhdz3K8a1vVuo5v2g",
    "title": "Fix: Open the Battle Lab page on your home screen",
    "first": "2026-11-20T18:08:46Z",
@@ -19914,19 +19932,6 @@
    ],
    "cards": [
     "c-fix-effectslook"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-   "title": "Make and check every chapter 1 battle video",
-   "first": "2026-11-20T17:37:42-08:00",
-   "last": "2026-11-20T17:56:46-08:00",
-   "tags": [
-    "wanch1a",
-    "wanch1b"
-   ],
-   "cards": [
-    "c-wanch1"
    ]
   },
   {
@@ -22133,8 +22138,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d466426c50a357a6747d698b6925abe59c7bc856",
- "synced_at": "2026-11-21T02:07:33+00:00",
+ "synced": "1cbdb020e74d35ae6a34f82b0188d8d3cbcdab6c",
+ "synced_at": "2026-11-21T02:10:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
