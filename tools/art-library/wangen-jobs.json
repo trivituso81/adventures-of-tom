@@ -807,7 +807,7 @@
    "duration": 5
   },
   "pad": 0.65,
-  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65. wanch4 r5: one change, pad 0.65 (was 0.8), the fix that passed rose-tackle r4 and the casts. Prompt v2 unchanged."
+  "why": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65. wanch4 r5: one change, pad 0.65 (was 0.8), the fix that passed rose-tackle r4 and the casts. Prompt v2 unchanged. Result r5 (wanch4): MISSED. The top edge is clear now (hair top at row 30), but the leap became a forward somersault, upside down at video frames 66 to 74, and her hair touches the left edge at frames 70 to 74. Edge miss twice in a row: stop-loss on pad. Cause: the prompt says feet planted on the same spot AND leaps up and forward to the left; the travel to the left plus the tuck turns into a tumble toward the left edge. Next one change (card c-wanch5): leaps straight up, pad stays 0.65."
  },
  "deedee-idle": {
   "rev": 1,

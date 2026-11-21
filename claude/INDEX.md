@@ -480,7 +480,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-nara42.md | next-addendum nara42 (2026-11-11 ~16:30, main b3c1a02) | 2026-11-11 |
 | next-addendum-near1.md | near1 (2026-11-12 22:22 to ~23:40 PT, main 487a58e): the party walks up to the person a scene is about; benche | 2026-11-12 |
 | next-addendum-nextchap1.md | nextchap1 (2026-11-12 ~18:30, main 3943bcb): no chapter says the next chapter is "still being built" | 2026-11-12 |
-| next-addendum-nightgreen.md | nightgreen: what is known (session of 2026-11-21, parts a to d shipped) | 2026-11-21 |
+| next-addendum-nightgreen.md | nightgreen: what is known (session of 2026-11-21, parts a to l shipped) | 2026-11-21 |
 | next-addendum-notingame.md | next addendum: Voice Library "Not in game yet" filter (2026-11-09, main at 3d38760, tag notingame1) | 2026-11-09 |
 | next-addendum-nowalk.md | No walking in battle (Tom 11-06 07:18, `noWalk1`, CHANGES 340, pushed) | 2026-11-21 |
 | next-addendum-npc-ff9.md | NPC hero prompts, Final Fantasy IX style (Tom 2026-11-09 00:01; main at d772b95) | 2026-11-09 |
@@ -847,3 +847,11 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | voice-studio.md | Voice Studio and the from-scratch chapter method (current as of 2026-11-17 13:35) | 2026-11-17 |
 | voice-tag-samples.json | [ | 2026-11-21 |
 | voice-tag-style.md | How Tom tags voice lines, and how Claude's tags differed (2026-11-20). READ BEFORE WRITING ANY VOICE SCRIPT. | 2026-11-20 |
+
+## wanch4
+
+| File | First line | Date |
+|---|---|---|
+| wanch4/giddyup-r5-top.jpg | ���� JFIF      �� C 				 |  |
+| wanch4/giddyup-r5.jpg | ���� JFIF      �� C 				 |  |
+| wanch4/wetfloor-r4.jpg | ���� JFIF      �� C 				 |  |

@@ -196,6 +196,15 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | Deedee Wet-Floor | Kling r4: "in front of her feet" to "beside her feet, level with them" | MISSED, the same way a third time. The mop head still drops 114 px (9% of the frame) below her feet row, and it sweeps out to the left edge twice (frames 52 to 56 and 76 to 80). Words about the feet line do not move it: in this three-quarter view any mop on the floor ahead of her is drawn lower on the screen. Stop-loss on prompt wording. Next: a decision for Tom, not a fourth prompt (card t-wanch3-wetfloor) |
 | Spend | fal $1.72 (ledger $49.24 to $50.96) | |
 
+### 4.11 Built (wanch4, 2026-11-21): Giddyup with more room; Wet-Floor goes to Tom
+| Video | One change | Result |
+|---|---|---|
+| Skeeter Darting Bite | none | Tom's answer on t-wanch3-watch: All good, no note |
+| Rose Giddyup | Kling r5: pad 0.65 (was 0.8), prompt v2 unchanged | MISSED. Top edge fixed (top of the hair at row 30 of 1,280; r4 was cut). New: the jump is a forward somersault, upside down at video frames 66 to 74, and the hair touches the left edge at frames 70 to 74. Last frame against first 1.97 of 255; feet on row 1,041 at stance and return. Edge miss twice in a row: stop-loss on pad. Cause: the prompt asks for feet planted on one spot and also "leaps up and forward to the left"; the travel plus the tuck becomes a tumble into the left edge. Next one change (card c-wanch5): "leaps straight up", pad stays 0.65. Pictures: claude/wanch4/giddyup-r5.jpg, giddyup-r5-top.jpg |
+| Deedee Wet-Floor | none (stop-loss from wanch3) | Decision card t-wanch4-wetfloor for Tom, evidence claude/wanch4/wetfloor-r4.jpg (r4: the mop head rests on the floor ahead of her, which this three-quarter view draws lower than her feet; it sweeps twice; it touches the left edge near frame 56). Blocks c-wanch5 |
+| Spend | fal $0.785 (ledger $53.03 to $53.81; $0.50 of the rise before it was another session's Deedee dodge) | |
+| Tom's question (14:51) | "Why do we have to do an opus prompt for every individual animation?" Fact: wangen.py already runs job lists 3 at once; the Opus cost is the by-eye check plus one retry round per session. Card c-wanbulk moves the 4.4 checks and the known retries into the Action | |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 
