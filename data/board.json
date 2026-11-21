@@ -29349,28 +29349,19 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFtfHJc1wXT1SeYg7Y",
+    "url": "https://claude.ai/code/session_01RXeukFtfHJc1wXT1SeYg7Y",
     "opening": "not started"
    },
    "nightly": true,
    "tag": "nightclean",
    "after": "nothing for Tom: end",
    "history": [
-    {
-     "d": "2026-11-21",
-     "t": "Created by the build nightclean (card c-nightclean). Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase.\""
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T20:59:39.274Z"
-    },
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
@@ -29404,6 +29395,14 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ran: nothing to do."
     }
    ],
    "prompt": {
@@ -29417,9 +29416,8 @@
    },
    "last_run": {
     "date": "2026-11-21",
-    "build": "nightclean-1121"
-   },
-   "started_at": "2026-11-21T22:09:22+00:00"
+    "build": ""
+   }
   },
   {
    "id": "c-bigone25",
@@ -29625,7 +29623,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFvxwzdQAn4fNerHcW",
+    "url": "https://claude.ai/code/session_01RXeukFbFnUQ85w1PAoP34G",
     "opening": "not started"
    },
    "nightly": true,
@@ -29677,6 +29675,10 @@
      "d": "2026-11-21",
      "at": "2026-11-21T22:12:24Z",
      "t": "Night run: t-dash3-try and t-dash4-try sorted YOURS (wide monitor, layout look). No play card left to check."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -29882,7 +29884,7 @@
    "blocks": [],
    "next": "Optional, and you can skip it: nothing breaks. ElevenLabs is read by itself. fal and xAI then show a balance estimated from the jobs' own logged spending instead of a balance read from the service. Words used: a repository secret is a password GitHub stores for the repo's jobs; the game never shows it. A key is a long password a service gives you. PART 1, fal (about 3 minutes). 1) Open https://fal.ai/dashboard/keys and press Create Key. 2) fal asks for a scope, which is just what the key may do. Pick ADMIN (the other choice is API; API cannot read the balance). If you see no scope choice, your account has only one kind: make the key anyway. 3) Give it any name, press Create, copy the long key shown (it is shown once). 4) Open https://github.com/trivituso81/adventures-of-tom/settings/secrets/actions and press New repository secret. Name: FAL_ADMIN_KEY (exactly). Secret: paste the key. Press Add secret. PART 2, xAI (about 4 minutes). 1) Open https://console.x.ai and sign in. 2) Find the Management key page (in Settings; if you cannot find it, say so on this card and skip xAI, Claude will look again). Press create, copy the key. 3) On the same site copy your Team ID (a short code of letters and digits). 4) On the same GitHub secrets page add two secrets: XAI_MANAGEMENT_KEY (the key) and XAI_TEAM_ID (the team id). PART 3 (1 minute). Open https://github.com/trivituso81/adventures-of-tom/actions/workflows/costs-sync.yml, press Run workflow, set dry_run to false, press the green Run workflow button. Wait about a minute, then open https://trivituso81.github.io/adventures-of-tom/costs.html#/services: the fal and xAI pages should say a balance was read today. If a step does not match your screen, tap I did this anyway or add a note here saying where you got stuck; Claude will fix the steps. I could not check fal's and xAI's current screens from here, so their button names may differ a little.",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFaY7qYkyAKVVW9VtN",
+    "url": "https://claude.ai/code/session_01RXeukDja3L6UEaiyZCn1Af",
     "opening": "board"
    },
    "history": [
@@ -29913,6 +29915,10 @@
      "d": "2026-11-21",
      "t": "Claude rewrote the steps in plain words after Tom's note (no jargon: 'Admin scope' now explained as the key's permission choice, exact links to every page, what to do if a screen differs). Still optional.",
      "at": "2026-11-21T22:20:00.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "created": "2026-11-21",
@@ -30110,6 +30116,40 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFtfHJc1wXT1SeYg7Y",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-21T22:12:44Z",
+   "last": "2026-11-21T22:13:03Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFbFnUQ85w1PAoP34G",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-21T22:12:22Z",
+   "last": "2026-11-21T22:12:30Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-qa"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDja3L6UEaiyZCn1Af",
+   "title": "Optional: add fal and xAI keys for balance reads",
+   "first": "2026-11-21T22:11:15Z",
+   "last": "2026-11-21T22:11:31Z",
+   "tags": [],
+   "cards": [
+    "t-costs2keys"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFvxwzdQAn4fNerHcW",
    "title": "Night QA: the test browser plays your check cards",
@@ -34623,8 +34663,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "f77aebbab4c23c8524da73e186d3334da572fdb1",
- "synced_at": "2026-11-21T22:11:00+00:00",
+ "synced": "dae73765c1606033c3a6edeee4b0fc62508b2c89",
+ "synced_at": "2026-11-21T22:13:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
