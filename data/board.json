@@ -19293,7 +19293,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19369,6 +19369,10 @@
      "d": "2026-11-20",
      "t": "Tom approved generating 4 pictures (about $0.24).",
      "at": "2026-11-21T07:28:11.176Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 3 pictures, 1 were already waiting for your review, QA: 15 of 15, 12 of 14, 12 of 14. Spent about $0.22."
     }
    ],
    "chat": {
@@ -19387,10 +19391,62 @@
     "est": 0.24,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T07:28:25Z",
+     "state": "done",
+     "at": "2026-11-21T07:29:02Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44880392539",
-     "n": 3
+     "made": [
+      "prop-gate-blvd-studio-open",
+      "prop-gate-town-school-open",
+      "prop-gate-jpark-barn-open"
+     ],
+     "already": [
+      "prop-gate-backlot-stage7-open"
+     ],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.22,
+     "qa": {
+      "prop-gate-blvd-studio-open": {
+       "file": "results/prop-gate-blvd-studio-open/20261121T072843.png",
+       "yes": 15,
+       "of": 15,
+       "failed": []
+      },
+      "prop-gate-jpark-barn-open": {
+       "file": "results/prop-gate-jpark-barn-open/20261121T072849.png",
+       "yes": 12,
+       "of": 14,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered style, not hand-painted with soft shading."
+        },
+        {
+         "id": "p8",
+         "q": "Is there a small soft contact shadow directly under the object?",
+         "why": "No visible contact shadow under object."
+        }
+       ]
+      },
+      "prop-gate-town-school-open": {
+       "file": "results/prop-gate-town-school-open/20261121T072848.png",
+       "yes": 12,
+       "of": 14,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered metallic look with hard edges, not hand-painted."
+        },
+        {
+         "id": "p6",
+         "q": "Do the posts span approximately the full width of the lane and appear a little taller than a person?",
+         "why": "Posts do not span full lane width; too narrow and taller than specified."
+        }
+       ]
+      }
+     }
     }
    }
   },
