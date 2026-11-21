@@ -19961,7 +19961,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCfzTbkBvgvEBi3CQt",
+    "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
     "opening": "not started"
    },
    "next": "Runs the red pen pass on built chapter 2: a fresh reviewer marks every line KEEP, CUT or REWRITE against your chapter 1 edits (claude/tom-line-edits.md), the cuts and rewrites go into the game, and the lines that referred to cut chapter 1 lines (fingerprints, pencil, page nine) are fixed. Every voice script is retagged in your style (claude/voice-tag-style.md: accent in every bracket, delivery words not character notes, quick, a bracket per beat). Then your chapter 2 play card lists exactly what changed.",
@@ -19993,6 +19993,10 @@
     {
      "d": "2026-11-21",
      "t": "Started over: the 2026-11-20 18:36 session claimed this card and shipped nothing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -23460,6 +23464,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCgd9rrJq3SjHCeya2",
+   "title": "Cut chapter 2's dialogue by your chapter 1 lessons",
+   "first": "2026-11-21T00:47:05-08:00",
+   "last": "2026-11-21T00:47:05-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch2lessons"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF5PRXLtbQ2GyKcQ6M",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-21T00:44:58Z",
@@ -26406,8 +26420,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "7b996738215911fa87f47127435ad4772fc64f12",
- "synced_at": "2026-11-21T08:43:53+00:00",
+ "synced": "efdc499bfaca19211b3e0b88b7ccced6bd569fdc",
+ "synced_at": "2026-11-21T08:47:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
