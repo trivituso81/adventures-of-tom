@@ -20667,7 +20667,7 @@
    "id": "b-board-qa2",
    "tag": "board-qa2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Board only: cards from the second chapter 1 QA report",
    "next": "Done: 19 cards added from the chapter 1 QA report; 5 items not added (reasons in claude/ch1-qa-keysecrets2.md).",
@@ -20700,8 +20700,13 @@
     {
      "d": "2026-11-20",
      "t": "Checked all 26 items against main. Added 18 fix cards (c-qa-*) and one card for the old battle screen items to check at stage 15 (c-qa-battle2). Not added: TXT-01 (Tom chose that line, t-gem-polish06), TXT-02 (the game spells grey everywhere and the lines are voiced), TXT-05 (two different moves, text is right), COH-08 (the code shows Grace's and Rose's banners one after the other; one combined banner goes against Tom's rule), COH-06 pan toast. Covered elsewhere: BUG-02 pictures (t-itembannerart-pics), BUG-11 fence by the SCHOOL sign (c-reports-7)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-qa2: board only: 19 cards from the second chapter 1 QA report, 5 items not added"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-itembannerart-pics-2",
@@ -21245,7 +21250,7 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
    "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
@@ -21265,9 +21270,12 @@
     {
      "d": "2026-11-20",
      "t": "Made from the chapter 1 QA report on build keysecrets2 (claude/ch1-qa-keysecrets2.md), BUG-05, 06, 09, 10 and COH-09, after checking it against main."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked by the board: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   }
  ],
  "sessions": [
@@ -21638,6 +21646,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGqHgJ",
+   "title": "Board only: cards from the second chapter 1 QA report",
+   "first": "2026-11-20T19:12:28-08:00",
+   "last": "2026-11-20T19:15:15-08:00",
+   "tags": [
+    "board-qa2"
+   ],
+   "cards": [
+    "b-board-qa2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "first": "2026-11-20T19:13:55Z",
@@ -21646,16 +21666,6 @@
    "cards": [
     "c-gem-pillar-rhubarb",
     "t-rhubarb-scope"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGqHgJ",
-   "title": "Board only: cards from the second chapter 1 QA report",
-   "first": "2026-11-20T19:12:28-08:00",
-   "last": "2026-11-20T19:12:28-08:00",
-   "tags": [],
-   "cards": [
-    "b-board-qa2"
    ]
   },
   {
@@ -24110,8 +24120,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2e0cf369b20dc2e7c6cddf67b9a0eaa94877e234",
- "synced_at": "2026-11-21T03:12:50+00:00",
+ "synced": "465d39e66c69f2d97691958989d15cbb6a40bd4f",
+ "synced_at": "2026-11-21T03:16:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
