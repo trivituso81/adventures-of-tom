@@ -24385,7 +24385,7 @@
    "id": "c-anim-grace-cubepop-tvik",
    "tag": "anim-grace-cubepop-tvik",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Crunchy Sugar-Cube Pop",
    "next": "Made in build anim-grace-cubepop-tvik. Made again on Wan 3.0 from the v2 prompt with the two changes in your note: the cube is neon blue, and she grips it in her fist and punches it toward the monster, where it bursts into blue goo. Passed every check in plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Grace, Crunchy Sugar-Cube Pop.",
@@ -24431,6 +24431,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped anim-grace-cubepop-tvik. Made again on Wan 3.0 from the v2 prompt with the two changes in your note: the cube is neon blue, and she grips it in her fist and punches it toward the monster, where it bursts into blue goo. Passed every check in plan 4.4 and the clip gate on the first video ($0.50)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-grace-cubepop-tvik: Grace's Crunchy Sugar-Cube Pop is a punch now, with a neon blue cube"
     }
    ],
    "prompt": {
@@ -24442,7 +24446,8 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-cubepop-tvik in data/board.json with its history. Your first push is the commit board: start c-anim-grace-cubepop-tvik.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) She should essentially punch the monster with it. And it should be neon blue\n\nThe animation: Grace, Crunchy Sugar-Cube Pop (move crunchy_sugar_cube_pop in data/b3-kit-grace.js). Its video is clip grace_cubepop (data/clips/grace-cubepop.js, art/clips/grace-cubepop.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-cubepop-tvik. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Crunchy Sugar-Cube Pop, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-anim-grace-cubepop-tvik"
+   "after": "t-anim-grace-cubepop-tvik",
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-rose-hit-uy5r",
@@ -25737,6 +25742,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+   "title": "Animation note: Grace, Dodge",
+   "first": "2026-11-21T09:15:53-08:00",
+   "last": "2026-11-21T10:12:34-08:00",
+   "tags": [
+    "anim-grace-give-q4es",
+    "anim-grace-squeeze-qxim",
+    "anim-grace-cubepop-tvik"
+   ],
+   "cards": [
+    "c-anim-grace-dodge-p7wh",
+    "c-anim-grace-give-q4es",
+    "c-anim-grace-squeeze-qxim",
+    "c-anim-grace-cubepop-tvik",
+    "c-wanch2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
    "title": "For Tom Grace and Rose and Deedee ensure that no old painted",
    "first": "2026-11-21T09:34:32-08:00",
@@ -25795,23 +25818,6 @@
    "tags": [],
    "cards": [
     "c-boardsubfold1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
-   "title": "Animation note: Grace, Dodge",
-   "first": "2026-11-21T09:15:53-08:00",
-   "last": "2026-11-21T10:01:31-08:00",
-   "tags": [
-    "anim-grace-give-q4es",
-    "anim-grace-squeeze-qxim"
-   ],
-   "cards": [
-    "c-anim-grace-dodge-p7wh",
-    "c-anim-grace-give-q4es",
-    "c-anim-grace-squeeze-qxim",
-    "c-anim-grace-cubepop-tvik",
-    "c-wanch2"
    ]
   },
   {
@@ -29214,8 +29220,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "46ed056cb1a8f0aaf28e4d6463ddbadc76d902a7",
- "synced_at": "2026-11-21T18:11:53+00:00",
+ "synced": "2841987356f9ff2c4d9ec6f36f1ec814471c9e34",
+ "synced_at": "2026-11-21T18:13:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
