@@ -30451,7 +30451,7 @@
    "title": "Watch Deedee, Dodge",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "fyi": true,
    "next": "Open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then tap All good or Something is wrong (say what you saw).",
@@ -30472,8 +30472,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-deedee-dodge-y4m3. The clip was checked against claude/video-battle-plan.md 4.4 before it was handed to you."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T23:35:03.092Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-wanch4-wetfloor",
