@@ -22842,7 +22842,7 @@
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanch2",
    "next": "Shipped (wanch2a, wanch2b, wanch2). Painted battle poses removed from the code. New videos: cast for all four (Kling 4.0), Grace's dodge (a Wan duck), Rose's Lamb-Tuck Ankle Tackle (Kling), the Toad's Body Slam and the Skeeter's Mosquito Whine (full Grok). Missed and listed for c-wanch3: Rose's Giddyup (jumps more than once), Deedee's Wet-Floor (mop below her feet on a second model), the Skeeter's Darting Bite (never settles back, twice). Spent $11.49 on fal and $1.00 on xAI.",
    "blocks": [],
@@ -22905,6 +22905,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped wanch2: cast (Tom, Grace, Rose, Deedee on Kling 4.0, no rings), Grace dodge (Kling left the frame twice, stop-loss; then Rose's passed duck on Wan, passed), Rose Tackle (Kling, one lamb), Toad Body Slam and Skeeter Whine (full Grok). Missed: Giddyup (repeated jumps), Wet-Floor (mop below the feet line again), Skeeter Bite (no settle, twice). Deedee's dodge left to c-anim-deedee-dodge-y4m3; Tom's and Rose's dodges already existed. Next: t-wanch2-watch, then c-wanch3."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch2: new battle videos: every family member casts a spell, Grace ducks, Rose tackles; three that missed are listed"
     }
    ],
    "prompt": {
@@ -22917,7 +22921,8 @@
     "effort": "medium (the route, the checks, the bake and the tests are built and written down; this repeats them with another model)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.8 Built wanch1), then card c-wanch2 in data/board.json with its history and the Tom card that blocked it (t-wanch1-watch: his answer and note). Your first push is the commit board: start c-wanch2. First apply Tom's notes from t-wanch1-watch (one change per clip, smallest change). Then the stop-loss list of wanch1, each by a DIFFERENT method than the one that missed twice (the stop-loss rule): (1) family dodge and cast: one test each on Grace with Kling 4 image to video on fal (add the endpoint to tools/art-library/wangen-jobs.json; same prompt files wan-grace-dodge-v2.txt and wan-grace-cast-v1.txt, same start picture and settings), checked by plan 4.4; only if a test passes, make that state for Tom, Rose and Deedee the same way; if both tests miss, stop and list it. (2) Deedee's knock-out (floats above the ground), Rose's Lamb-Tuck Ankle Tackle (a second lamb appears) and \"Giddyup, Tata!\" Launch (a ring appears), Deedee's Wet-Floor Hazard (the mop dips below her feet): Kling 4 too, one try each. (3) Monsters on full grok-imagine-video-1.5 instead of lite, prompts unchanged: Bog Toad Body Slam (clip-toad-slam), Skeeter Swarm Darting Bite and Mosquito Whine (clip-skeeter-bite, clip-skeeter-whine) through clip-gen. Bake, wire into B3_BODY_CLIPS or the kit and foe rows, test with python3 -I tools/wanproof_test.py, python3 tools/b3_test.py s8, tools/smoke.py (portrait and landscape). The painted states are no longer drawn for Tom, Grace, Rose and Deedee (idea-tomgrace: B3_VIDEO_ONLY, b3cStandIn shows one of their videos where a state has none), so purge them completely in wanch2a whatever the video tries give (B3_BODY_PAINT, b3PaintState, b3GuardDraw and B3_GUARD, b3KoDraw painted parts and b3GetUp, B3_PAINT except the dodge slide b3cStandIn uses, the Lab row PAINTED STATES: CHAPTER 1 and its link in battle-lab.html and engine/splash.js, engine/pose-review.js, data/pose-review.json, docs/BATTLE3.md Painted body states; tools/paint_state_test.py is already gone). Keep python3 -I tools/video_only_test.py passing. A new video for a state replaces its stand-in by being listed in B3_BODY_CLIPS or the kit row. Spend at most $15 on fal and $1 on xAI. Ship in parts (wanch2a, ...), build tag wanch2, end with one Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanch2-watch"
+   "after": "t-wanch2-watch",
+   "done": "2026-11-21"
   },
   {
    "id": "c-b3s14",
@@ -27105,7 +27110,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCvttazpatctUYAyzc",
+    "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
     "opening": "not started"
    },
    "history": [
@@ -27125,6 +27130,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28592,8 +28601,8 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
-    "opening": ""
+    "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+    "opening": "unknown"
    },
    "history": [
     {
@@ -28614,6 +28623,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
+   "title": "Nightly cleanup: files, notes and the working agreement",
+   "first": "2026-11-21T20:35:50Z",
+   "last": "2026-11-21T20:35:50Z",
+   "tags": [],
+   "cards": [
+    "c-nightclean"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGuUS6mkJhboMf4inb",
    "title": "Night shift: queued cards start by themselves overnight",
@@ -29031,6 +29050,31 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "first": "2026-11-21T12:34:05-08:00",
+   "last": "2026-11-21T12:36:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "first": "2026-11-21T10:57:09-08:00",
+   "last": "2026-11-21T12:35:29-08:00",
+   "tags": [
+    "clips",
+    "wanch2a",
+    "wanch2"
+   ],
+   "cards": [
+    "c-wanch2",
+    "c-wanch3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDyzD2bbZPcXjRqR7W",
    "title": "WIN NOW button in the new battle screen (win3skip)",
    "first": "2026-11-21T12:34:26-08:00",
@@ -29050,16 +29094,6 @@
    "tags": [],
    "cards": [
     "c-ch3lessons"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs",
-   "title": "Animation note: Rose, The Floor Is Lava!",
-   "first": "2026-11-21T12:34:05-08:00",
-   "last": "2026-11-21T12:34:05-08:00",
-   "tags": [],
-   "cards": [
-    "c-anim-rose-lava-xftr"
    ]
   },
   {
@@ -29139,19 +29173,6 @@
    ],
    "cards": [
     "c-buildpill2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFaCXYeuEuuH5EnXEN",
-   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
-   "first": "2026-11-21T10:57:09-08:00",
-   "last": "2026-11-21T11:57:57-08:00",
-   "tags": [
-    "clips",
-    "wanch2a"
-   ],
-   "cards": [
-    "c-wanch2"
    ]
   },
   {
@@ -32750,8 +32771,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "584c3c48647eea8d44574aff59572c469d192baf",
- "synced_at": "2026-11-21T20:34:46+00:00",
+ "synced": "5fd8ab7b68df1a3fd101adbdaef7dd81d2e6d8f0",
+ "synced_at": "2026-11-21T20:36:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
