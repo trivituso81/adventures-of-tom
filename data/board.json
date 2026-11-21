@@ -24514,10 +24514,10 @@
    "id": "c-anim-rose-hit-uy5r",
    "tag": "anim-rose-hit-uy5r",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Getting hit",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Should be flinching backwards",
+   "next": "Stop-loss: the backward stumble works on Wan (prompt v3) but she runs off the right edge of the frame, twice. Next try: same prompt, the start picture shrunk to 65% inside the frame (pad 0.65) so she has room to stumble. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24556,16 +24556,20 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping (stop-loss, session_01RXeukGvooY2cHTVMVLE9GQ). Tom's note \"Should be flinching backwards\". rev 2 (prompt says \"flinches backward\", feet planted): still no backward travel, the gate measured 0% (rev 1 was the same). rev 3 (one change: \"stumbling one small step back away to the right\", the feet clause dropped): the backward stumble is right (13% of her height to the right, wince, back into place) but she runs off the right edge of the frame. rev 4 (one change: pad 0.8): the same, the dress and hair cut straight by the right edge in 16 pictures. Two misses the same way: stopped. Cause: Wan makes the stumble about 130 px wide, and centred in a 720 px wide frame she has under 100 px of room on her right. Next: the rev 3 prompt unchanged, pad 0.65 (figure about 810 px tall, about 155 px of room on the right). Booked $2.00 (4 videos)."
     }
    ],
    "prompt": {
-    "what": "Makes the animation Rose, Getting hit again from your note, checks it, and hands it back to you to watch.",
+    "what": "Remakes Rose, Getting hit with the backward stumble that already works, with more room in the frame so she does not run off the edge.",
     "before": [
-     "Nothing to do first. Your note is on the card."
+     "Nothing to do first. The stop-loss notes are on the card."
     ],
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
-    "effort": "medium (one animation, starting from the version that exists)",
-    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-hit-uy5r in data/board.json with its history. Your first push is the commit board: start c-anim-rose-hit-uy5r.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Should be flinching backwards\n\nThe animation: Rose, Getting hit (body state hit). Its video is clip rose_hit (data/clips/rose-hit.js, art/clips/rose-hit.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-hit-uy5r. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Getting hit, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "effort": "medium (one setting changed on a prompt that already makes the right motion)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-hit-uy5r in data/board.json with its history. Your first push is the commit board: start c-anim-rose-hit-uy5r.\n\nTom's note on Rose, Getting hit: \"Should be flinching backwards\". Prompt v3 (tools/art-library/prompts/wan-rose-hit-v3.txt, job rose-hit rev 3 and 4 in tools/art-library/wangen-jobs.json) makes the right motion: she stumbles one step back to the right and steps back into place. Both tries ran off the right edge of the 720 x 1280 frame (rev 4 already had pad 0.8). Make job rose-hit rev 5 with one change: pad 0.65, prompt unchanged. Check every picture against the plan (section 4.4) and run the measured clip gate (tools/clip-gate/gate.py judge on the video; hit_no_stumble must pass, no picture may touch an edge). If it passes, bake it like the current clip (kind state, every 2nd picture, 1.5x, --fig-rows 83) over the stumble and the return, replace data/clips/rose-hit.js and art/clips/rose-hit.webp, raw source art/raw/clips/wan-rose-hit-v2.mp4 (purge v1), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py, python3 -I tools/wanproof_test.py rose and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. A third miss the same way is the stop-loss: try a different video model. Spend at most $1. Build tag anim-rose-hit-uy5r. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Getting hit, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -24776,10 +24780,10 @@
    "id": "c-anim-rose-lava-xftr",
    "tag": "anim-rose-lava-xftr",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, The Floor Is Lava!",
-   "next": "You sent 2 notes on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Or like the lava forms, she throws down a couch cushion, hops onto the couch cushion, which bounces her so that she can hop on the enemies",
+   "next": "Stop-loss: the lava and couch cushion story works on Wan, but she shrinks mid-clip and the cushion flies in from off screen, twice. Next try: a new start picture of Rose already holding the cushion. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24828,16 +24832,20 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping (stop-loss, session_01RXeukGvooY2cHTVMVLE9GQ). Tom's notes: lava forms, she throws down a couch cushion, hops on it and bounces (note 1; note 2, bouncing onto the enemies, was not used: a locked one-spot clip cannot travel). Prompt v2 (tools/art-library/prompts/wan-rose-lava-v2.txt) made the story right both times: lava spreads, the cushion lands on it, she hops on and bounces twice with her arms up, then the lava and cushion go. Faults: rev 2 she shrinks to 0.67x of the start size while on the cushion and the cushion flies in from outside the left edge; rev 3 (one change: pad 0.8) she still shrinks to 0.79x, the cushion again comes from outside the frame, and the lava pool runs off both sides of the frame in 84 pictures. Two misses the same way: stopped. Cause: Wan zooms out to make room for the cushion and the bounce, and has to bring the cushion in from off screen because nothing in the start picture holds it. Next: a new start picture of Rose holding a big square couch cushion (Nano Banana edit of rose-hero, as start-rose), the cushion already in her hands so nothing enters from outside, and \"a small pool\" of lava under her feet. Booked $1.00 (2 videos)."
     }
    ],
    "prompt": {
-    "what": "Makes the animation Rose, The Floor Is Lava! again from your note, checks it, and hands it back to you to watch.",
+    "what": "Remakes Rose, The Floor Is Lava! from your notes with a new start picture in which she already holds the couch cushion, so the video does not shrink her or pull the cushion in from off screen.",
     "before": [
-     "Nothing to do first. Your note is on the card."
+     "Nothing to do first. The stop-loss notes are on the card."
     ],
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
-    "effort": "medium (one animation, starting from the version that exists)",
-    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-lava-xftr in data/board.json with its history. Your first push is the commit board: start c-anim-rose-lava-xftr.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent these notes:\n1. (2026-11-21, game build b3s17a) Lava starts to form beneath her. She throws down a couch cushion on top of the lava, and then she jumps on top of the couch cushion, and then jumps up and down a couple of times\n2. (2026-11-21, game build b3s17a) Or like the lava forms, she throws down a couch cushion, hops onto the couch cushion, which bounces her so that she can hop on the enemies\n\nThe animation: Rose, The Floor Is Lava! (move the_floor_is_lava in data/b3-kit-rose.js). Its video is clip rose_lava (data/clips/rose-lava.js, art/clips/rose-lava.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-lava-xftr. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "effort": "medium (the story prompt works; one method change: the start picture)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-lava-xftr in data/board.json with its history. Your first push is the commit board: start c-anim-rose-lava-xftr.\n\nTom's notes on Rose, The Floor Is Lava!: \"Lava starts to form beneath her. She throws down a couch cushion on top of the lava, and then she jumps on top of the couch cushion, and then jumps up and down a couple of times\" (the second note, bouncing onto the enemies, is not possible in a clip that stays on one spot). Prompt v2 (tools/art-library/prompts/wan-rose-lava-v2.txt, job rose-lava rev 2 and 3) tells the story right, but Wan shrinks her to 0.67x to 0.79x while she is on the cushion and brings the cushion in from outside the frame. Change the method, not the story: (1) a new start picture, job start-rose-cushion, Nano Banana 2.1 edit of art/raw/characters/rose-hero-v1.png with the prompt of start-rose plus one line: she holds a big square cream couch cushion in both arms in front of her; check it like the other start pictures (facing left, same girl, flat magenta, mirror if it faces right); (2) job rose-lava rev 4 from that picture, start frame only, prompt v3 = v2 with the cushion already in her arms (\"she tosses the couch cushion she is holding down onto the lava\") and \"a small pool\" of lava. Check every picture against the plan (section 4.4) and the measured clip gate (size within 8%, nothing entering from an edge). If it passes, bake it like the current clip (kind strike, every 3rd picture, impact where she lands on the cushion, 1.5x, --fig-rows 83), replace data/clips/rose-lava.js and art/clips/rose-lava.webp, run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. Spend at most $1.50. Build tag anim-rose-lava-xftr. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play The Floor Is Lava!, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
