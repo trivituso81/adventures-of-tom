@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 ## 2026-11-21 (3): Art Library bake, bg-29-grump-hollow (`artbake1554`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
 - bg-29-grump-hollow: `bake_battle_bg.py 29-grump-hollow` ran from art/raw/battle/bg-29-grump-hollow-v1.png
 - Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+=======
+## guidegen1a (2026-11-21): the Battle Guide now shows a prompt for every animation, and says what is missing before one can be made
+
+Card c-guidegen part 1. `tools/guidegen/build_map.js` writes `data/guide-anims.json`: for each of the 346 guide animations its Wan job or Art Library entry, the prompt (the real one where a video exists, otherwise a starter draft that keeps the same person's approved prompt and changes only MOTION), start picture, price, and what is missing. The player sheet shows it under the video: version, route, price a try, where the prompt came from, and "Cannot be made yet" for someone with no start picture. Nothing is generated and no key is on the page yet. Tests: `python3 tools/guidegen/build_map_test.py`, `python3 tools/battle_guide_test.py` (the stand-in board now starts without Tom's real animation notes). Plan: `claude/guidegen-plan.md`.
+>>>>>>> 8603dbf (guidegen1a: the Battle Guide shows a prompt, price and what is missing for every animation)
 
 ## board-guidegen (2026-11-21): new card to make and remake battle videos from the Battle Guide
 

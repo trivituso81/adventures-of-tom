@@ -25081,8 +25081,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part 1 (guidegen1a) shipped: every animation in the Battle Guide now shows its prompt (real where a video exists, a starter draft otherwise), its price and what is missing. Nothing is generated yet. Parts 2 (guidegen1b) and 3 (guidegen1) follow in this session."
     }
-   ]
+   ],
+   "after": "nothing for Tom: c-guidegen"
   },
   {
    "id": "b-board-guidegen",

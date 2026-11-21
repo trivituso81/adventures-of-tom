@@ -1,0 +1,16 @@
+{
+ "about": "guidegen: how a made video is cut into a battle clip, by kind of animation. These are the numbers wanch1 and clipch1 settled (the stamps in data/clips/*.js show them: 'wan-gen tom-idle rev 1; 0 to 147 step 3, loop wrap'). Read by tools/guidegen/build_map.js (the recipe name of each animation) and tools/guidegen/make_take.py and use_take.py (the bake). step counts pictures of a 30 a second video; speed is the game's playback speed; marks says how the first and last picture (and the hit, or the guard's rise and lowering) are found from the video itself.",
+ "recipes": {
+  "idle":     {"kind": "loop",   "step": 3, "speed": 1,   "wrap": true,  "marks": "loop",   "says": "the whole video, every 3rd picture, played forward only"},
+  "run":      {"kind": "loop",   "step": 2, "speed": 1,   "wrap": true,  "marks": "stride", "says": "one stride cycle, every 2nd picture, played forward only"},
+  "guard":    {"kind": "guard",  "step": 2, "speed": 1,                   "marks": "guard",  "says": "the rise once, the held stretch back and forth, the lowering once"},
+  "reaction": {"kind": "state",  "step": 2, "speed": 1.5,                 "marks": "state",  "says": "the action stretch, every 2nd picture, 1.5x"},
+  "pose":     {"kind": "state",  "step": 2, "speed": 1,                   "marks": "state",  "says": "the action stretch, every 2nd picture, 1x"},
+  "strike":   {"kind": "strike", "step": 3, "speed": 1.5,                 "marks": "strike", "says": "the move with its hit, every 3rd picture, 1.5x"},
+  "strike1x": {"kind": "strike", "step": 3, "speed": 1,                   "marks": "strike", "says": "the move with its hit, every 3rd picture, 1x"},
+  "windup":   {"kind": "state",  "step": 2, "speed": 1.5,                 "marks": "state",  "says": "the wind-up, held at its end, every 2nd picture, 1.5x"}
+ },
+ "byBodyState": {"idle": "idle", "run": "run", "guard": "guard", "hit": "reaction", "ko": "reaction", "victory": "pose", "give": "pose", "dodge": "pose", "slip": "reaction", "flustered": "pose", "die": "pose", "cast": "pose"},
+ "at1x": ["cast", "loungepass", "wetfloor"],
+ "fps": 30
+}

@@ -114,6 +114,12 @@ pre.prompt{white-space:pre-wrap;word-break:break-word;background:var(--well);bor
 ol.steps{margin:6px 0 6px 20px;padding:0}
 ol.steps li{margin:4px 0}
 #boot{padding:30px 16px;color:var(--muted)}
+.gen{border-top:1px solid var(--line);margin-top:6px}
+.gen .meta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.gen .meta .chip{font-weight:600}
+.gen pre.prompt{max-height:none}
+.gen .why{border-left:3px solid var(--accent);padding:2px 0 2px 10px;margin:8px 0;font-size:14px}
+.gen .cant{border:1px solid var(--prob);background:#2a1519;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;color:var(--prob-text)}
 /* Two panes: the Duo unfolded (both poses), tablets, desktop. */
 @media (min-width:560px) and (min-height:560px){
  #tabs{order:0;border-top:0;border-bottom:1px solid var(--line);padding:6px 10px;gap:6px}
@@ -165,7 +171,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
-let BUILD='',BOARD_DOC=null;
+let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null;   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
 async function boot(){
   try{
@@ -179,6 +185,7 @@ async function boot(){
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];$('buildline').textContent='Game build '+BUILD;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
+    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;}).catch(()=>{});
     build();route();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Reload the page; if it stays, tell Claude.</div>';}
 }
@@ -549,16 +556,32 @@ function noteForm(a){
    +'<p class="err" id="nerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="nsend" style="width:100%">Send to Claude</button>'
    +'<p class="hint">It opens a card on the Board for Claude to make this animation again from your note.</p>';
 }
+// ---------- making this animation: the prompt, what it came from, and what is missing (guidegen1a) ----------
+const SRC_WORDS={job:'The prompt of the Wan job that made this animation',entry:'The prompt of this animation\'s Art Library entry',used:'A prompt written in the Battle Guide',
+  'model-draft':'A DRAFT prompt written for this animation: the same person\'s approved prompt, with only the MOTION part new','rule-draft':'A STARTER DRAFT: the same person\'s approved prompt, with only the MOTION part new, built from the move\'s own data'};
+const G=a=>(GUIDE&&GUIDE.anims&&GUIDE.anims[a.id])||null;
+function genBlock(a){
+  if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Reload the page.</p></div>';
+  const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
+  const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource);
+  let h='<div class="gen" id="gen"><h3>Prompt</h3>';
+  h+='<div class="meta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span></div>';
+  h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':a.painted?'. This animation is still an old painted pose.':'. This animation has no video yet.')+'</p>';
+  if(!g.canMake)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
+  h+='<pre class="prompt" id="gprompt">'+esc(g.prompt)+'</pre></div>';
+  return h;
+}
 async function openPlayer(animId){
+  if(!GUIDE&&GUIDE_P)await GUIDE_P;
   const a=ANIM_BY[animId];if(!a)return;PL.a=a;PL.on=false;cancelAnimationFrame(PL.raf);PL.D=null;PL.img=null;PL.t=0;PL.speed=1;
   const head='<div class="sh-top"><h2>'+esc(ownerName(a.owner))+': '+esc(a.name)+'</h2><button type="button" class="ghost" id="bclose">Close</button></div>';
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
-    S.innerHTML=head+stage(a.painted?'This one is still an old painted pose. Its video is not made yet, so there is nothing to play here.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+noteForm(a);
+    S.innerHTML=head+stage(a.painted?'This one is still an old painted pose. Its video is not made yet, so there is nothing to play here.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
     return;
   }
-  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+noteForm(a);
+  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a);
   try{
     const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;
     const cv=$('cv');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;$('scrub').max=r.D.n-1;

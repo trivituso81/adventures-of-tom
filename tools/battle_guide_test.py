@@ -38,8 +38,13 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));
 want = json.loads(subprocess.run(['node', '-e', node], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
 
 board = {'doc': json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8')), 'puts': []}
+<<<<<<< HEAD
 # the test sends notes on these animations: a real note card of Tom's on one of them would swallow the test's note
 board['doc']['cards'] = [c for c in board['doc']['cards'] if (c.get('anim') or {}).get('id') not in ('move:lounge_pass_flex', 'move:suite_door_slide')]
+=======
+# Tom's real notes sent from the guide are on the live board; the stand-in starts without them so the counts below are about this run only.
+board['doc']['cards'] = [c for c in board['doc']['cards'] if not c.get('anim')]
+>>>>>>> 8603dbf (guidegen1a: the Battle Guide shows a prompt, price and what is missing for every animation)
 def github(route):
     rq = route.request
     if rq.method == 'GET':
@@ -99,7 +104,23 @@ with sync_playwright() as p:
         check(name + ': the video moves', a != b, (a, b))
         check(name + ': the player fits the page', pg.evaluate("(()=>{const r=document.getElementById('sheet').getBoundingClientRect();return r.left>=-1&&r.right<=innerWidth+1&&r.top>=-1})()"))
         pg.screenshot(path=os.path.join(out, 'battleguide-%s-player.png' % name))
+        # guidegen1a: the prompt of the animation, from data/guide-anims.json
+        pg.wait_for_selector('#gprompt')
+        check(name + ': a video shows the prompt that made it, with its version', 'Prompt v' in pg.locator('#gen .meta').inner_text() and 'MOTION:' in pg.locator('#gprompt').inner_text() and 'made' in pg.locator('#gsrc').inner_text(), pg.locator('#gen').inner_text()[:300])
+        check(name + ': the prompt block fits the sheet', pg.evaluate("(()=>{const s=document.getElementById('sheet');return s.scrollWidth<=s.clientWidth+1})()"))
         pg.click('#bclose')
+        pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim')
+        pg.click('#detail [data-anim="move:suite_door_slide"]'); pg.wait_for_selector('#gprompt')
+        t1 = pg.locator('#gen').inner_text()
+        check(name + ': a move with no video shows a STARTER DRAFT and the price, and can be made', 'DRAFT' in t1 and '$0.50' in t1 and 'Cannot be made' not in t1 and 'MOTION: SUITE DOOR SLIDE' in t1, t1[:300])
+        pg.click('#bclose')
+        pg.goto(URL + '#anims/tnb'); pg.wait_for_selector('#detail .anim')
+        pg.click('#detail .anim .play >> nth=0'); pg.wait_for_selector('#gcant')
+        check(name + ': someone with no start picture cannot be made, and the page says what is missing', 'start picture' in pg.locator('#gcant').inner_text() and 'art/clips/start/tnb-hero.png' in pg.locator('#gcant').inner_text(), pg.locator('#gcant').inner_text())
+        pg.screenshot(path=os.path.join(out, 'battleguide-%s-cannot.png' % name))
+        pg.click('#bclose')
+        ids = pg.evaluate("[Object.keys(ANIM_BY).sort(), Object.keys(GUIDE.anims).sort()]")
+        check(name + ': the page and data/guide-anims.json list the same animations', ids[0] == ids[1] and len(ids[0]) == 346, (len(ids[0]), len(ids[1])))
         check(name + ': no script errors', not errs, errs)
         cx.close()
 
