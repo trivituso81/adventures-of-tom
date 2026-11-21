@@ -14273,7 +14273,7 @@
     },
     {
      "d": "2026-11-20",
-     "t": "ended without shipping: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+     "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
     }
    ],
    "prompt": {
@@ -16453,7 +16453,7 @@
     },
     {
      "d": "2026-11-20",
-     "t": "ended without shipping: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+     "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
     }
    ]
   },
@@ -16556,7 +16556,7 @@
     },
     {
      "d": "2026-11-20",
-     "t": "ended without shipping: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
+     "t": "Back to Up next: the START conversation on its route never made a first push (route paused, see c-startfix). Back in Up next: start it by hand with Copy prompt until START is fixed."
     }
    ]
   },
