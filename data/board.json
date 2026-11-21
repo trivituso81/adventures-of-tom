@@ -21800,10 +21800,10 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
-   "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
+   "next": "Waits on stage 15 (card c-b3s15) to ship to main. Then it runs the old battle screen checks (BUG-05, 06, 09, 10, COH-09) on the new screen and fixes what fails.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21863,13 +21863,16 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session ended without shipping: stage 15 (c-b3s15, chapter 1 story switch) is still In progress and not on main, so there is no new battle screen to check. Back to Up next; start it after stage 15 ships."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukD93dnwrF3uibZJwt4",
     "opening": "started by START"
-   },
-   "started_at": "2026-11-21T07:25:12+00:00"
+   }
   },
   {
    "id": "c-itemdef1",
