@@ -22469,7 +22469,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Re-measure every Part 1 boss with Vibes at Rank 2 and Rank 5 and fix any boss that leaves 5 to 7 rounds, data only. Then run the s13 browser test.",
+   "next": "Shipped as b3s14b. Open: Big Shake, Iron-Gill and Old Ironbelly run under 5 rounds at Rank 5; left as is.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -22486,6 +22486,10 @@
     {
      "d": "2026-11-20",
      "t": "Added: c-b3s14 shipped b3s14 but its history lists two open items (not re-measured at Rank 2/5; browser test s13 not run). Tom re-sent the stage 14 prompt, so this card carries them."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped b3s14b: bosses re-measured at Rank 2 (all 5 to 7) and Rank 5 (3 under 5); no numbers changed; browser test s13 passes."
     }
    ],
    "tag": "b3s14b",

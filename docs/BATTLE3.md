@@ -454,3 +454,23 @@ Three approved clips exist and play only in battle 2's Battle Lab clip fights (`
 ## What stage 14 holds (balance pass, build `b3s14`)
 
 Data only. HP of eight bosses raised (before/after in `docs/CHANGES.md` "b3s14"); plain-player rounds (`node tools/b3-sim.js <fight> 100`): Big One 5.78, Big Shake 5.61, Old Iron-Gill 5.64, Director's Cut 5.71, Red Pen 5.81, Chairman Cheeks 6.32, Unread 5.12, Old Ironbelly 5.07, Mirrorball 5.92, Last Call 5.8, Brain Freeze 5.95. Normal fights and Elites unchanged (0.7 to 5.7 rounds). Open: re-measure with Vibes at Rank 2 and 5 (`--rank=5`).
+
+### Stage 14 follow-up: bosses at Rank 2 and Rank 5 (`b3s14b`)
+
+Plain player, 100 fights each, `node tools/b3-sim.js <fight> 100 --rank=<n>`; all won, 0 errors. No number was changed in this follow-up (data and engine untouched).
+
+| Boss (fight) | Rank 2 rounds | Rank 5 rounds |
+|---|---|---|
+| The Big One (new6) | 5.78 | 5.11 |
+| The Big Shake (new16) | 5.61 | 3.72 |
+| Old Iron-Gill (new21) | 5.64 | 4.04 |
+| The Director's Cut (new27) | 5.71 | 5.56 |
+| The Red Pen (new32) | 5.81 | 5.34 |
+| Chairman Cheeks (new38) | 6.32 | 5.91 |
+| The Unread (new44) | 5.12 | 5.05 |
+| Old Ironbelly (new50) | 5.07 | 4.98 |
+| The Mirrorball (new56) | 5.92 | 5.49 |
+| The Last Call (new62) | 5.80 | 5.22 |
+| Brain Freeze (new66) | 5.95 | 5.94 |
+
+Rank 2 is the Lab default and equals the shipped b3s14 table, so every boss is inside 5 to 7. At Rank 5 (Quirks open, Capstones sooner) the family is stronger and three bosses fall under 5: Big Shake 3.72, Iron-Gill 4.04, Old Ironbelly 4.98. Call made: not retuned. Raising their HP to fix Rank 5 would push the Rank 2 fights past 7 rounds, and the target is the plain player at the default rank. If Tom feels those two chapters are short at high Rank, the lever is HP on `B3_FOES.shake` and `B3_FOES.irongill` (a Rank-scaled boss HP would need an engine change, so it is a later decision).
