@@ -29829,8 +29829,10 @@
    "url": "https://claude.ai/code/session_01RXeukDJEYAdtfW4Xhm3Sts",
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
    "first": "2026-11-21T21:35:28Z",
-   "last": "2026-11-21T21:35:28Z",
-   "tags": [],
+   "last": "2026-11-21T21:38:25Z",
+   "tags": [
+    "hollowfenceb"
+   ],
    "cards": [
     "c-hollowfence"
    ]
@@ -34276,8 +34278,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "59d8777837a47fcaec15b581787083873b81837e",
- "synced_at": "2026-11-21T21:36:17+00:00",
+ "synced": "23734f294ffd1c3ea0a362ac23a39693feda451b",
+ "synced_at": "2026-11-21T21:39:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
