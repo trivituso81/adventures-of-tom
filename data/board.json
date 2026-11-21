@@ -19218,7 +19218,7 @@
    "title": "Make and approve 6 gate pictures (Amy's door, open states)",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "pictures",
    "fyi": true,
    "next": "I made the pictures twice for you ($0.74) and checked each one against the game. Three passed and wait for you; three failed and I rejected them with details. Step 1: on this card tap Open in the Art Library and APPROVE these three if they match: Amy's door locked (the same red arched door as in the game, a note with a shoe doodle, no words), Amy's door open (the same door swung open on a lit hallway), Stage 7 doors open (the same steel doors with the middle open on a dark stage). Each approve bakes it into the game. Step 2: back on this card tap Generate, then tap again to confirm (about $0.20): it makes only the three still missing, which now use a method that worked every time (taking a part away): School gate open (only the two posts and top rail, no gate leaf, no chain, no sign), Car Barn open (both leaves swung open, the name plate on the left leaf, no chain), Studio gate open (only the two striped posts, no arm, no sign). APPROVE each that shows that state of the same gate as the locked one, alone on magenta, no extra words; REJECT with a note if not.",
@@ -19248,7 +19248,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "history": [
     {
      "d": "2026-11-20",
@@ -19306,6 +19306,10 @@
      "d": "2026-11-21",
      "t": "Claude (fix-gatelayer-pics-2): Tom asked \"reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images\". Old six rejects rewritten with details. Round 1 ($0.44): Amy's door locked and open pass (after the door crop and the game rectangle were cut to exactly the arch); school (still shut), Car Barn (ajar), studio (arm missing), Stage 7 (narrow gap, lamp lit) rejected with details. Round 2 ($0.30): Stage 7 passes; school shut again, Car Barn plate floating across the gap, studio arm lowered: rejected. Stopped there (stop-loss: school missed twice the same way). Cause: with the locked picture attached the generator removes parts reliably but will not swing or raise them, so school and studio now take the part away and the Car Barn plate is fixed to the left leaf. The third paid try is your Generate tap.",
      "at": "2026-11-21T03:58:51.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Look at the QA results on a real pictures card, Fix: Make and approve 6 gate pictures (Amy's door, open, Fix: Make and approve 6 gate pictures (Amy's door, open is done."
     }
    ],
    "chat": {
@@ -19435,8 +19439,7 @@
       }
      }
     }
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "t-gatelayer-play",
@@ -21691,7 +21694,7 @@
    "id": "c-itemdef1",
    "tag": "itemdef1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Item banners as JRPG item definitions",
    "next": "Shipped as itemdef1: every ITEM GAINED banner is now an item definition (picture, name and type, description, IN BATTLE, IN STORY), several items are pages of one banner. Waits only on your phone check (card t-itemdefplay).",
@@ -21718,6 +21721,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as itemdef1: item banners read like JRPG item definitions"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itemdef1: every item banner reads like a JRPG item definition: picture, name and type, description, In battle, In story"
     }
    ],
    "prompt": {
@@ -21729,7 +21736,8 @@
     "effort": "medium (one banner and one data field, modelled on the existing banner)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-itemdef1 in data/board.json, history included. Your first push is the commit board: start c-itemdef1.\n\nChange every item banner (itemBanner in engine/party-banner.js) so it reads like a JRPG item definition with four parts: item name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks). Write the item text in the game's voice: short, warm, funny, contractions, no em dashes. Test each banner in portrait and landscape, bump the tags, add a docs/CHANGES.md entry headed ## itemdef1, push to main and write the result onto the card.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-itemdefplay"
+   "after": "t-itemdefplay",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-hollowtrail-play-2",
@@ -21883,7 +21891,7 @@
    "id": "c-fix-gatelayer-pics-2",
    "tag": "fix-gatelayer-pics-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
@@ -21940,6 +21948,10 @@
      "d": "2026-11-21",
      "t": "Claude: shipped as fix-gatelayer-pics-2 (parts a and b before it). 3 of 6 pictures wait for Tom's approve, 3 rewritten for his Generate tap; no pencil report since 03:26 is about the gates (the two open ones are chapter 1 scenes). Also cleared conflict markers qa-bug01 had left in engine/main.js and index.html (fix-hollowtrail-play-2 got there first).",
      "at": "2026-11-21T03:58:51.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gatelayer-pics-2: gate pictures checked by Claude: three ready for Tom, three rewritten to a method that works"
     }
    ],
    "prompt": {
@@ -21951,7 +21963,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gatelayer-pics-2 and t-gatelayer-pics in data/board.json, history included. Your first push is the commit board: start c-fix-gatelayer-pics-2.\n\nTom tested and found problems:\n1. Card t-gatelayer-pics (Make and approve 6 gate pictures (Amy's door, open states), ask pictures). He was asked: Your six all failed, and I can see why: each open picture came back as a different gate from its approved locked one (the school and Car Barn gates were still chained and padlocked), the generator added words (OPEN, GREGORI), and Amy's door did not look like the painted door. I rewrote the six prompts: each open picture now has its own approved locked picture attached, Amy's door has a close crop of the real door attached, the open gates have no chain or padlock, and a picture with no lettering forbids every word. Your six are saved as rejected with your note. Open ADMIN ) BOARD, this card, tap Generate all 6 pictures, then tap again to confirm (about $0.45). When the job finishes, tap Open in the Art Library on this card. APPROVE a picture that shows the same door or gate as the one in the game, in the state its title says, alone on the magenta background with no people and no extra words; REJECT with a note if not. Each approve bakes it into the game by itself. Also play to the Square and walk to the school lane: the locked school gate now stands under the SCHOOL sign, between its two posts (your pencil report). He wrote: reject images that are wrong with details and adjust the prompt as necessary, then regerenate and recheck the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:26:37.250Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gatelayer-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gatelayer-pics, and give the build fix-gatelayer-pics-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-gatelayer-pics"
+   "after": "t-gatelayer-pics",
+   "done": "2026-11-20"
   },
   {
    "id": "t-qa-bug08play",
@@ -22705,6 +22718,32 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "first": "2026-11-20T19:35:42-08:00",
+   "last": "2026-11-20T20:02:22-08:00",
+   "tags": [
+    "fix-gatelayer-pics-2a",
+    "fix-gatelayer-pics-2b",
+    "fix-gatelayer-pics-2"
+   ],
+   "cards": [
+    "c-fix-gatelayer-pics-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
+   "title": "Item banners as JRPG item definitions",
+   "first": "2026-11-20T19:18:42-08:00",
+   "last": "2026-11-20T20:01:31-08:00",
+   "tags": [
+    "itemdef1"
+   ],
+   "cards": [
+    "c-itemdef1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEcSSNUR3b4McSpsKS",
    "title": "Big One asks about a folding chair; the spot has a bench",
    "first": "2026-11-20T19:28:37-08:00",
@@ -22739,19 +22778,6 @@
    ],
    "cards": [
     "c-b3s13"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE5CVoXbNDax28aKv1",
-   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
-   "first": "2026-11-20T19:35:42-08:00",
-   "last": "2026-11-20T19:53:21-08:00",
-   "tags": [
-    "fix-gatelayer-pics-2a",
-    "fix-gatelayer-pics-2b"
-   ],
-   "cards": [
-    "c-fix-gatelayer-pics-2"
    ]
   },
   {
@@ -22826,16 +22852,6 @@
    ],
    "cards": [
     "c-fix-artgen2look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD5FwA82cZJTQom5TT",
-   "title": "Item banners as JRPG item definitions",
-   "first": "2026-11-20T19:18:42-08:00",
-   "last": "2026-11-20T19:18:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-itemdef1"
    ]
   },
   {
@@ -25279,8 +25295,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "e4b862b9eac3ab4a1b9eea658c33e149b82918ab",
- "synced_at": "2026-11-21T04:00:35+00:00",
+ "synced": "990b2a9e79beaefd744425665f4c9001a290a4f2",
+ "synced_at": "2026-11-21T04:02:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
