@@ -20173,7 +20173,7 @@
    "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "ch1clips8",
    "next": "Shipped as ch1clips8: your 8 kept takes play in the game; Boppy's two muffin lines, Rose's coin line and Tom's line to the Big One now show the words the takes say.",
    "blocks": [],
@@ -20195,6 +20195,10 @@
     {
      "d": "2026-11-20",
      "t": "ch1clips8 built: 8 takes merged (all replaced older takes), 4 Chapter 1 screen lines reworded to match the kept takes (rule 9)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch1clips8: 8 new phone takes merged (7 Chapter 1 lines, Grace's nine-for-six-hours line); 4 Chapter 1 lines now say what the takes say"
     }
    ],
    "prompt": {
@@ -20206,7 +20210,8 @@
     "effort": "medium (steps are known)",
     "text": "Read docs/VOICE_LIBRARY.md and merge the attached local-clips-pending export. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-itembannerart-pics",
@@ -20234,7 +20239,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGcWDU2BzMyfE8qWxv",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -20252,6 +20257,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T02:56:52.691Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -20717,6 +20726,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFHUxGjPYqYd39CFN9",
+   "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
+   "first": "2026-11-20T18:50:56-08:00",
+   "last": "2026-11-20T18:58:58-08:00",
+   "tags": [
+    "ch1clips8"
+   ],
+   "cards": [
+    "c-ch1clips8"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGcWDU2BzMyfE8qWxv",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "first": "2026-11-20T18:58:39-08:00",
+   "last": "2026-11-20T18:58:39-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-itembannerart-pics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFmQjEQBPFWqM9vS6h",
    "title": "Fix: Look at the Effects page in Admin",
    "first": "2026-11-20T18:58:01Z",
@@ -20736,16 +20767,6 @@
    "tags": [],
    "cards": [
     "c-fix-artgen2look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFHUxGjPYqYd39CFN9",
-   "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
-   "first": "2026-11-20T18:50:56-08:00",
-   "last": "2026-11-20T18:50:56-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch1clips8"
    ]
   },
   {
@@ -23117,8 +23138,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6be545d1af7eafd32c0d6301d5446d8ce64c1169",
- "synced_at": "2026-11-21T02:58:24+00:00",
+ "synced": "e328d5835f05d300b53e3b794d4d5de829add051",
+ "synced_at": "2026-11-21T03:00:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
