@@ -1,3 +1,13 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "prop-gate-town-school-open",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of the Square, from \"The Adventures of Tom\", a family role-playing game. The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nThe same school gate with its chain link gate leaf taken off: only the two grey steel posts and the top rail between them remain, and the space between the posts is empty, showing only background. No chain and no padlock anywhere. No sign, no words.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The posts span the full width of the lane, about two people wide, and are a little taller than a person. Nothing stands in the middle of the lane.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/town.webp",
+    "art/raw/props/prop-gate-town-school-v1.png"
+   ],
+   "at": 1795286786144
+  }
+ ]
 }
