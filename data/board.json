@@ -18541,7 +18541,7 @@
   {
    "id": "t-clipstuck1-review",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -18563,8 +18563,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by clipstuck1. Tom asked for a card telling him to tap REVIEW on v5 and approve or reject."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T01:04:25.716Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
