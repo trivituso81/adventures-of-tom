@@ -28321,29 +28321,6 @@
    "done": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44945811620",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21"
-  },
-  {
    "id": "t-anim-tom-loungepass-ding-hear",
    "title": "Listen to the ding on Tom's Lounge Pass Flex",
    "theme": "Battle Animations",
@@ -28676,6 +28653,52 @@
      "t": "Found while checking the status of the four Gemini fix cards (Tom: \"can you check the status of each fix?\"): hollow_trail_test failed 2 of 4 runs on the fence check; the wrapper fix itself passed."
     }
    ]
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44947723982",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
+  },
+  {
+   "id": "b-board-nightgreen1",
+   "tag": "board-nightgreen1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Game Shell",
+   "title": "nightgreen handoff, 4 of 12 failing tests fixed, notes for the other 8",
+   "next": "Done: nightgreen handoff, 4 of 12 failing tests fixed, notes for the other 8",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -29119,6 +29142,23 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
+   "title": "Fix the 13 tests that already fail",
+   "first": "2026-11-21T11:54:20-08:00",
+   "last": "2026-11-21T12:42:42-08:00",
+   "tags": [
+    "nightgreena",
+    "nightgreenb",
+    "nightgreenc",
+    "nightgreend",
+    "board-nightgreen1"
+   ],
+   "cards": [
+    "c-nightgreen",
+    "b-board-nightgreen1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEtwdNGKn2hdVy2Wox",
    "title": "Run Gemini's chapter 1 test and save its report",
    "first": "2026-11-21T07:24:25-08:00",
@@ -29191,21 +29231,6 @@
    ],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
-   "title": "Fix the 13 tests that already fail",
-   "first": "2026-11-21T11:54:20-08:00",
-   "last": "2026-11-21T12:29:12-08:00",
-   "tags": [
-    "nightgreena",
-    "nightgreenb",
-    "nightgreenc",
-    "nightgreend"
-   ],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -32845,8 +32870,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ac45dee052f08aa85c2812bbf1c44c5b78206ff2",
- "synced_at": "2026-11-21T20:42:04+00:00",
+ "synced": "d723b5a9e49b7d7312c077d726fa53c71a146a3f",
+ "synced_at": "2026-11-21T20:43:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
