@@ -19541,11 +19541,11 @@
    "id": "c-takes-ae5d7d",
    "tag": "takes-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Already merged by build ch1clips8. Nothing needed.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -19572,6 +19572,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired: the take on branch takes (Grace, \"I've been nine for SIX hours.\") was already merged by build ch1clips8 (its fingerprint is in data/merged-takes.json). Nothing pushed except this note. 25 older kept takes are stale lines and stay unmerged.",
+     "at": "2026-11-21T03:30:00Z"
     }
    ],
    "blocks": [],
