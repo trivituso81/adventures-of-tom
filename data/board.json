@@ -22868,6 +22868,29 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "b-fix-conflictmarks",
+   "tag": "fix-conflictmarks",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Game Shell",
+   "title": "the game would not start: merge conflict markers on main removed from engine/main.js and index.html",
+   "next": "Done: the game would not start: merge conflict markers on main removed from engine/main.js and index.html",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-conflictmarks. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -23314,6 +23337,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
+   "title": "Battle system stage 15: chapter 1 story switch",
+   "first": "2026-11-20T23:19:07-08:00",
+   "last": "2026-11-20T23:43:27-08:00",
+   "tags": [
+    "fix-conflictmarks"
+   ],
+   "cards": [
+    "c-b3s15"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDsC4h8a7k5HsZNDTs",
    "title": "Battle system stage 15: chapter 1 story switch",
    "first": "2026-11-20T23:38:10-08:00",
@@ -23354,16 +23389,6 @@
    "tags": [],
    "cards": [
     "c-projclean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
-   "title": "Battle system stage 15: chapter 1 story switch",
-   "first": "2026-11-20T23:19:07-08:00",
-   "last": "2026-11-20T23:19:07-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s15"
    ]
   },
   {
@@ -26134,8 +26159,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "a67c331bf173ef73fd695b883e9c78ae27883cfc",
- "synced_at": "2026-11-21T07:38:40+00:00",
+ "synced": "9384d1924899bbca2ed5dfdf5d9c8952c26fab67",
+ "synced_at": "2026-11-21T07:44:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
