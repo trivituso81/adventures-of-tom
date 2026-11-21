@@ -27878,7 +27878,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27892,7 +27892,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "Tom (Battle Guide, b3s17a): \"Redo with wan\". Replaced by the Wan 3.0 video wan-grace-give-v1 (card c-anim-grace-give-q4es); prompt kept word for word",
+     "from": "anim-grace-give-q4es",
+     "at": 1795282202878,
+     "rev": 0
+    }
+   ],
    "id": "clip-grace-give",
    "tab": "Clips",
    "group": "Chapter 1",

@@ -22664,7 +22664,7 @@
    "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. When every family state is a video, the painted poses are removed for good.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
     "opening": "not started"
@@ -22673,6 +22673,10 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanch1 for its stop-loss list (two misses the same way each, so the next try is a different video model, not another prompt)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide on Grace, Dodge (2026-11-21, build b3s17a): \"Make\". Card c-anim-grace-dodge-p7wh was retired into this one: Wan already missed the dodge twice, so it waits for the Kling 4 test here."
     }
    ],
    "prompt": {
@@ -24141,10 +24145,10 @@
    "id": "c-anim-grace-dodge-p7wh",
    "tag": "anim-grace-dodge-p7wh",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Dodge",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Make",
+   "next": "Not made: Wan already missed Grace's dodge twice the same way in wanch1 (she hops sideways and her feet leave the ground), so a third Wan try breaks the stop-loss rule. Your note is moved to card c-wanch2, which tries the dodge on a different video model (Kling 4).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24183,6 +24187,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping, spent $0: Wan 3.0 missed Grace's dodge twice the same way in wanch1 (feet leave the ground; prompts wan-grace-dodge-v1 and v2), so this is past the stop-loss on Wan. Covered by c-wanch2 (dodge on Kling 4); Tom's note \"Make\" moved there. Retired."
     }
    ],
    "prompt": {
@@ -24193,7 +24201,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-dodge-p7wh in data/board.json with its history. Your first push is the commit board: start c-anim-grace-dodge-p7wh.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Make\n\nThe animation: Grace, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-dodge-p7wh. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-anim-grace-give-q4es",
@@ -24202,7 +24211,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Grace, Giving (support moves)",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Redo with wan",
+   "next": "Made in build anim-grace-give-q4es. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the clip gate on the first video ($0.50). Next: your card Watch Grace, Giving (support moves).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24241,6 +24250,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-grace-give-q4es. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed. Passed every check in plan 4.4 and the clip gate on the first video ($0.50)."
     }
    ],
    "prompt": {
@@ -24251,7 +24264,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-give-q4es in data/board.json with its history. Your first push is the commit board: start c-anim-grace-give-q4es.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Redo with wan\n\nThe animation: Grace, Giving (support moves) (body state give). Its video is clip grace_give (data/clips/grace-give.js, art/clips/grace-give.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-give-q4es. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Giving (support moves), then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-anim-grace-give-q4es"
   },
   {
    "id": "c-anim-grace-squeeze-qxim",
@@ -25140,6 +25154,35 @@
     "effort": "medium (a small piece, starting from what is there)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-tomgrace in data/board.json, history included. Your first push is the commit board: start c-idea-tomgrace.\n\nTom made this card himself with New card on the board. His words: \"For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations\"\n\nThe board sized this from his words alone: Claude Opus 5.5 (row D: judged by taste), effort medium (a small piece, starting from what is there). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nTom judges this by taste. Read docs/CANON.md first, and docs/tom-edits.tsv for any dialogue. Pictures and videos are made only in the Art Library, and their prompts follow the prompt rules in CLAUDE.md. Start from what is there and change only what he names. Test it, look at it in portrait and landscape, and push build idea-tomgrace with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-anim-grace-give-q4es",
+   "title": "Watch Grace, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Grace, play Giving (support moves), then tap All good or Something is wrong (say what you saw).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Grace.",
+    "Play Giving (support moves) (about 3 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-grace-give-q4es",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukF9WjVVKeeGBWGLkax",
+    "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-grace-give-q4es. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
+    }
+   ]
   }
  ],
  "sessions": [

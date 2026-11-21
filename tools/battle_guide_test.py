@@ -38,6 +38,8 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));
 want = json.loads(subprocess.run(['node', '-e', node], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
 
 board = {'doc': json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8')), 'puts': []}
+# the test sends notes on these animations: a real note card of Tom's on one of them would swallow the test's note
+board['doc']['cards'] = [c for c in board['doc']['cards'] if (c.get('anim') or {}).get('id') not in ('move:lounge_pass_flex', 'move:suite_door_slide')]
 def github(route):
     rq = route.request
     if rq.method == 'GET':

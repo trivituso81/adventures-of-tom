@@ -2,6 +2,21 @@
 
 Card c-guidegen. Tom (09:25): generate a missing video, or give feedback on one, have it merged into the prompt and regenerate, all from the Battle Guide. The card holds the full prompt (Sonnet 5.5, high). Board change only; no page or game file changed.
 
+## anim-grace-give-q4es (2026-11-21): Grace's Giving (support moves) is a Wan 3.0 video now, made from the same prompt
+
+Card c-anim-grace-give-q4es. Tom (Battle Guide, b3s17a): "Redo with wan".
+| | |
+|---|---|
+| Kept | The prompt of the approved Grok clip clip-grace-give, word for word (now `tools/art-library/prompts/wan-grace-give-v1.txt`), and the bake shape (kind state, every 2nd picture, 1.5x, figure 90 rows) |
+| Changed | Only what the note names: the video model (Wan 3.0 on fal instead of grok-imagine-video-1.5-lite) and with it the family route's start picture and settings (`art/clips/start/grace-hero.png`, 720 x 1280, 5 s, first and last frame, seed 81), job `grace-give` in `tools/art-library/wangen-jobs.json` |
+- Video: wan-gen run 44929359366, $0.50 (fal ledger $25.10). Source `art/raw/clips/wan-grace-give-v1.mp4`, baked pictures 27 to 89 (32 pictures, 1.4 s in the game).
+- Plan 4.4 checks: reads as a give (one open palm offered to the left, pulled back, still); same girl, face, outfit and style; standing height 1,037 px first and last; feet on row 1,153 in all 150 pictures; background flat, never touches an edge; last picture against first 1.03 of 255. Clip gate (measured part): no flags. The vision part only advises on give (an invented move, CLAUDE.md "Clip quality gate"), so Tom's watch is the look check.
+- The Art Library entry clip-grace-give is set to rejected with Tom's note, so the art-bake job does not cut the old Grok video over the new one (as wanch1f did for its replaced entries). Its approved source `art/raw/clips/clip-grace-give-v1.mp4` stays (Library history).
+- Grace, Dodge (card c-anim-grace-dodge-p7wh): not made, $0. Wan missed it twice the same way in wanch1 (her feet leave the ground), so a third Wan try is past the stop-loss; the card is retired into c-wanch2 (dodge on Kling 4) with Tom's note.
+- `tools/battle_guide_test.py`: its stand-in board drops real note cards on the two animations it sends notes on (Tom's real Lounge Pass card made 4 of its checks fail on main).
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py` FAILS [], smoke. Looked at in the Battle Guide player, portrait and landscape.
+- Tom's card: t-anim-grace-give-q4es.
+
 ## board-guideplanned (2026-11-21): the Battle Guide's next card now shows everything planned but not built, marked PLANNED
 
 Card c-battleguide2. Tom (09:21): "Can you do the same thing with anything else that's planned but not built yet". The card's prompt gained Part 4 (unbuilt moves, the BAG, Tombo skins, which chapters are on the new battle, Part 2 monsters, missing rules, a What is coming topic), its effort went from medium to high, and its title changed. Board change only; no page or game file changed.
