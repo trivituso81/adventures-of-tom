@@ -24219,15 +24219,15 @@
    "title": "Battle Guide: real-fight button and everything planned",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "battleguide2",
    "next": "Waits on your card Try the Battle Guide on the Duo. Then it applies your notes, adds a See it in a fight button for moves with no video, and shows everything planned but not built yet (third Vibes, unbuilt moves, the BAG, Tombo skins, later chapters' monsters, what is coming next), marked PLANNED.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGXni2sQBnMMQmdLqu",
-    "opening": "not started"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "prompt": {
     "what": "Applies your notes on the Battle Guide, adds See it in a fight (one tap opens a Battle Lab fight where a move is used), and shows everything that is planned but not built yet, marked PLANNED: third Vibes, unbuilt moves, the BAG, Tombo skins, later chapters' monsters, and what is coming next.",
@@ -24255,6 +24255,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Try the Battle Guide on the Duo is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T20:59:12.147Z"
     }
    ]
   },
