@@ -20199,8 +20199,7 @@
    "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "tag": "ch3lessons",
    "after": "nothing for Tom: c-ch3build",
    "blocks": [
@@ -20209,7 +20208,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
     "opening": "not started"
    },
    "next": "Waits on your chapter 2 play (card t-ch2play). Then it adds your chapter 2 edits to claude/tom-line-edits.md and runs the red pen pass on the locked chapter 3 script before chapter 3 is built, so chapter 3 reaches you already cut by everything you taught in chapters 1 and 2.",
@@ -20221,6 +20220,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom started this by hand (11-21 12:32) before playing chapter 2 (t-ch2play is still in his backlog with no note): his chapter 2 lessons will be counted as of today."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -25277,7 +25280,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25325,6 +25328,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:32:10.203Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -25342,7 +25349,7 @@
    "id": "c-anim-deedee-dodge-y4m3",
    "tag": "anim-deedee-dodge-y4m3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Deedee, Dodge",
    "next": "Try 3 with the figure at 80% missed the same way (arms off the frame, third time), so it was not baked or shown to you. Next: one Wan try of Rose's duck wording, which passed for Rose and Tom; already staged as job rev 5. Start it from the prompt below on Opus 5.5, effort medium.",
@@ -25367,7 +25374,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
+    "url": "https://claude.ai/code/cse_01RXeukDaMeZbDPDpEFyVFNY",
     "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
    },
    "history": [
@@ -25442,6 +25449,10 @@
      "d": "2026-11-21",
      "at": "2026-11-21T20:40:00+00:00",
      "t": "Ended without shipping (stop-loss, $0.50 spent, nothing handed to Tom). Rev 4 (v3 prompt word for word, pad 0.8; wan-gen run 44946098349): feet planted on one row in all 150 pictures and no flying object, but her front hand ran off the left edge for 25 pictures (25 to 50) and she lunged forward into a wide squat toward the monster (head 179 px left; gate: edge 25, dodge_forward 0.178 against 0.04). Arms off the frame a third time, now with room around her: the lean wording makes Wan fling the arms to the edge whatever the room (the same finding as Tom's Lounge Pass). Staged the next try: prompt wan-deedee-dodge-v4.txt = Rose's passed duck prompt word for word (only MOTION differed from v3), job rev 5, pad 0.8 kept."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -25453,8 +25464,15 @@
     "effort": "medium (one prompt taken from a version that worked, steps written down)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) has no video yet (she slides her idle video). Three Wan 3.0 tries of the sideways lean missed (card history; results deedee-dodge-r2, r3, r4 on branch wangen): her arms ran off the frame every time, and pad 0.8 did not fix it (r4: front hand off the left edge for 25 pictures, and she lunged forward 18% toward the monster). The lean wording is retired for her.\n\nThe try is already staged: Wan job deedee-dodge rev 5 in tools/art-library/wangen-jobs.json, prompt tools/art-library/prompts/wan-deedee-dodge-v4.txt, which is Rose's passed duck prompt (wan-rose-dodge-v2.txt) word for word, with pad 0.8 kept; the same wording and pad passed for Rose and for Tom (anim-rose-dodge-v89r, anim-tom-dodge-ner3). Run it once on the wan-gen Action (gh api repos/trivituso81/adventures-of-tom/actions/workflows/wan-gen.yml/dispatches -f ref=main -f 'inputs[what]=deedee-dodge' -f 'inputs[dry_run]=false' -f 'inputs[cap]=' set to the ledger on branch wangen state.json plus 0.50). Spend at most $0.50. Check every picture against the plan section 4.4 list (feet on one row, whole figure inside the frame, last picture against first under 3 of 255) and run the measured clip gate (judge() in tools/clip-gate/gate.py with measure.py); a clip that fails is not handed to Tom, and a miss is the stop-loss for Wan on her dodge (next would be a different video model, card c-wanch2). If it passes: bake it like Rose's and Tom's dodges (tools/clip-bake/bake_clip.py, kind state, the duck stretch every 2nd picture at 1.5x, figure rows 99.3, data/clips/deedee-dodge.js, art/clips/deedee-dodge.webp, source art/raw/clips/wan-deedee-dodge-v1.mp4), add dodge:'deedee_dodge' to B3_BODY_CLIPS.deedee in data/b3-clips.js, rebuild data/guide-anims.json (node tools/guidegen/build_map.js), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py, python3 tools/wanproof_test.py deedee and python3 tools/smoke.py, and look at it in the Battle Guide player in portrait and landscape. (B3_BODY_PAINT and tools/paint_state_test.py no longer exist: purged in wanch2a.) Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T18:10:35+00:00",
-   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3"
+   "started_at": "2026-11-21T20:34:46+00:00",
+   "after": "nothing for Tom: c-anim-deedee-dodge-y4m3",
+   "rescue": {
+    "at": "2026-11-21T20:34:46+00:00",
+    "n": 1,
+    "why": "A session ended without shipping",
+    "url": "https://claude.ai/code/cse_01RXeukDaMeZbDPDpEFyVFNY",
+    "prev": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej"
+   }
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -27075,7 +27093,7 @@
    "title": "Nightly cleanup: files, notes and the working agreement",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Waits on the card Night shift: queued cards start by themselves overnight. Then tap START (or leave it: the night shift starts it that night). It builds a nightly report of files nothing uses, a check that no standing rule or sentence of yours is ever dropped from the working agreement, moves Done cards off the board after 2 days instead of 7, and creates the standing card Night cleanup, which runs every night: one of four buckets a night (unused files, old notes, a shorter working agreement, dead tests). Voice clips, approved art sources and your saved files are never touched.",
    "blocks": [
     "c-nightqa"
@@ -27083,7 +27101,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCvttazpatctUYAyzc",
     "opening": "not started"
    },
    "history": [
@@ -27099,6 +27117,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:32:31.165Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27112,7 +27134,7 @@
    },
    "tag": "nightclean",
    "after": "nothing for Tom: c-nightqa",
-   "start": true
+   "started_at": "2026-11-21T20:34:46+00:00"
   },
   {
    "id": "c-nightqa",
@@ -28503,6 +28525,29 @@
    },
    "after": "nothing for Tom: end",
    "done": "2026-11-21"
+  },
+  {
+   "id": "b-board-deedee-dodge-r4",
+   "tag": "board-deedee-dodge-r4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Game Shell",
+   "title": "Deedee's Dodge try with her figure at 80% missed (arms off the frame again), not shown to you; the duck wording is staged next",
+   "next": "Done: Deedee's Dodge try with her figure at 80% missed (arms off the frame again), not shown to you; the duck wording is staged next",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-deedee-dodge-r4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -28923,6 +28968,51 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDyzD2bbZPcXjRqR7W",
+   "title": "WIN NOW button in the new battle screen (win3skip)",
+   "first": "2026-11-21T12:34:26-08:00",
+   "last": "2026-11-21T12:34:26-08:00",
+   "tags": [
+    "win3skip"
+   ],
+   "cards": [
+    "c-win3skip"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFi7HA9FhfQCDYz6rb",
+   "title": "Cut the chapter 3 script by your chapter 1 and 2 lessons",
+   "first": "2026-11-21T12:34:23-08:00",
+   "last": "2026-11-21T12:34:23-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch3lessons"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFKk8UEVAdcTUVxKJs",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "first": "2026-11-21T12:34:05-08:00",
+   "last": "2026-11-21T12:34:05-08:00",
+   "tags": [],
+   "cards": [
+    "c-anim-rose-lava-xftr"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
+   "title": "Animation note: Deedee, Dodge",
+   "first": "2026-11-21T12:19:13-08:00",
+   "last": "2026-11-21T12:32:04-08:00",
+   "tags": [
+    "anim-deedee-dodge-y4m3a",
+    "board-deedee-dodge-r4"
+   ],
+   "cards": [
+    "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHCh2YRZxTfHmjQZba",
    "title": "Fix the 13 tests that already fail",
    "first": "2026-11-21T11:54:20-08:00",
@@ -28947,18 +29037,6 @@
    ],
    "cards": [
     "c-hitspeed1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEbQBMBYTLvBQXTRej",
-   "title": "Animation note: Deedee, Dodge",
-   "first": "2026-11-21T12:19:13-08:00",
-   "last": "2026-11-21T12:23:54-08:00",
-   "tags": [
-    "anim-deedee-dodge-y4m3a"
-   ],
-   "cards": [
-    "c-anim-deedee-dodge-y4m3"
    ]
   },
   {
@@ -32609,8 +32687,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "aad2a800dab3739b1d27f92e8bc37a00b0d74b07",
- "synced_at": "2026-11-21T20:31:48+00:00",
+ "synced": "584c3c48647eea8d44574aff59572c469d192baf",
+ "synced_at": "2026-11-21T20:34:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
