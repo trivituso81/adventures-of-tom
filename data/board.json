@@ -23853,6 +23853,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "first": "2026-11-21T07:27:18-08:00",
+   "last": "2026-11-21T08:33:36-08:00",
+   "tags": [
+    "costs1",
+    "costs1icon"
+   ],
+   "cards": [
+    "c-costs1",
+    "c-costs1icon",
+    "c-costsduoplan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEUd9hHMf3kQQmMMDq",
    "title": "Battle system stage 17: chapters 2 to 5 story switch",
    "first": "2026-11-21T07:10:18-08:00",
@@ -23862,20 +23877,6 @@
    ],
    "cards": [
     "c-b3s17"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5",
-   "title": "AI Costs page: plans, balances, every charge, the total",
-   "first": "2026-11-21T07:27:18-08:00",
-   "last": "2026-11-21T07:47:39-08:00",
-   "tags": [
-    "costs1",
-    "costs1icon"
-   ],
-   "cards": [
-    "c-costs1",
-    "c-costs1icon"
    ]
   },
   {
@@ -27198,8 +27199,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3c94255b4cb03cd4496c8fd3a7fa4cd9b8611e58",
- "synced_at": "2026-11-21T16:09:43+00:00",
+ "synced": "ee1b64b7580365b3dadf02f5ead9eb9ea65dfe82",
+ "synced_at": "2026-11-21T16:34:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
