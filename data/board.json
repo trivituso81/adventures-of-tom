@@ -22582,7 +22582,7 @@
    "title": "Battle system stage 15: chapter 1 story switch",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high). It builds the chapter 1 switch; Milestone B (your play test) follows.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -22601,10 +22601,14 @@
     {
      "d": "2026-11-20",
      "t": "Added after c-b3s14 and c-b3s14b shipped: stage 15 follows stage 14. Tom asked for the stage 15 prompt and its card. Build board-b3s15 adds this card and claude/next-addendum-b3s14.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDmYMf6wjBdJVho9Gf",
+    "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
     "opening": "unknown"
    }
   },
@@ -23063,6 +23067,16 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTkmoL6tBRFc6nUoE",
+   "title": "Battle system stage 15: chapter 1 story switch",
+   "first": "2026-11-20T23:19:07-08:00",
+   "last": "2026-11-20T23:19:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s15"
    ]
   },
   {
@@ -25833,8 +25847,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5af59e9be91ea88ca895f0623a16a591d630bb4d",
- "synced_at": "2026-11-21T07:15:49+00:00",
+ "synced": "475dc4bcf3367564c41ff868266d2b9e5c0ffb78",
+ "synced_at": "2026-11-21T07:19:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
