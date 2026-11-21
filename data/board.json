@@ -20014,7 +20014,7 @@
    "title": "Play the Grump Hollow wrapper trail",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which.",
@@ -20047,14 +20047,17 @@
     {
      "d": "2026-11-21",
      "t": "fix-hollowtrail-play-2: three legs of four wrappers (Mudling to Toad, Toad to Log, Log to fishing spot), each painting shows only its leg; only Mudling, Toad and Log trigger it; Grace says \"3 wrappers, let's follow them!\" after each. Next: look again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Play the Grump Hollow wrapper trail, Fix: Play the Grump Hollow wrapper trail is done."
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "t-madelot-play",
@@ -21669,7 +21672,7 @@
    "id": "c-fix-hollowtrail-play-2",
    "tag": "fix-hollowtrail-play-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Play the Grump Hollow wrapper trail",
@@ -21717,6 +21720,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-hollowtrail-play-2: Grump Hollow wrapper trail is now three legs of four wrappers: Mudling to the top left Toad, Toad to the Log, Log to the fishing spot"
     }
    ],
    "prompt": {
@@ -21730,7 +21737,8 @@
    },
    "after": "t-hollowtrail-play",
    "auto": true,
-   "started_at": "2026-11-21T03:19:26+00:00"
+   "started_at": "2026-11-21T03:19:26+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1flight",
@@ -22005,6 +22013,20 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "first": "2026-11-21T03:22:40Z",
+   "last": "2026-11-21T03:40:35Z",
+   "tags": [
+    "fix-hollowtrail-play-2",
+    "board-qa2"
+   ],
+   "cards": [
+    "c-fix-hollowtrail-play-2",
+    "b-board-qa2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDnDXrnG3wwzVJgE4p",
    "title": "Muffin pan missing from the island before the theft",
    "first": "2026-11-21T03:30:28Z",
@@ -22174,16 +22196,6 @@
    "tags": [],
    "cards": [
     "c-voiceboard"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGPY7Epbtv1rgdkxsq",
-   "title": "Fix: Play the Grump Hollow wrapper trail",
-   "first": "2026-11-21T03:22:40Z",
-   "last": "2026-11-21T03:22:40Z",
-   "tags": [],
-   "cards": [
-    "c-fix-hollowtrail-play-2"
    ]
   },
   {
@@ -25094,8 +25106,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ce4c6233961dc760f3f0d3952adbbbee3b98e32f",
- "synced_at": "2026-11-21T03:40:02+00:00",
+ "synced": "042bedc1a351960ccc25b3227da382ea3b50e8e4",
+ "synced_at": "2026-11-21T03:41:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
