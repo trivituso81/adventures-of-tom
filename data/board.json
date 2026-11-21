@@ -13340,6 +13340,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "ended without shipping: this START run has no Project tools (project_info, project_read, project_delete), so the move cannot run here (same as 2026-11-20). Nothing pushed except this note, nothing deleted from the Project. Needs a conversation opened inside the Little Elsewhere Project: Copy prompt, Sonnet 5.5, effort medium.",
+     "at": "2026-11-21T03:05:00.000Z"
     }
    ],
    "chat": {
