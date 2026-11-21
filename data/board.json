@@ -30083,7 +30083,7 @@
    "title": "Watch the Skeeter Swarm's new Darting Bite video",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE GUIDE > Animations, choose Monsters, Skeeter Swarm, and play Darting Bite once (a few seconds). The big mosquito jabs its nose forward once and settles back while the small ones stay around it. Then tap All good, or Something is wrong with what you saw. This unblocks c-wanch4 (Rose's Giddyup and Deedee's Wet-Floor).",
    "steps": [
@@ -30101,8 +30101,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch3. The video was checked picture by picture against claude/video-battle-plan.md 4.4 before it was wired."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T22:48:44.774Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanch4",
