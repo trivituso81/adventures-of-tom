@@ -29179,7 +29179,7 @@
    "id": "c-reports-10",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-125831-qvon. First note: the car in phone image should still be displayed while TNB is talking",
@@ -29193,7 +29193,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukG23YgrNLwpd1VDRJY",
     "opening": "not started"
    },
    "history": [
@@ -29205,12 +29205,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T21:09:20.447Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-21T21:10:00+00:00"
   },
   {
    "id": "c-guardwin1",
@@ -33631,8 +33635,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "cde6464c5d2ffa7b680edf2cbcdb150eb8ffa3f8",
- "synced_at": "2026-11-21T21:08:36+00:00",
+ "synced": "b5629707df128af2165c9488ab09908041ad9abb",
+ "synced_at": "2026-11-21T21:10:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
