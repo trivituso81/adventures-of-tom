@@ -19633,6 +19633,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG5PxQccZYRRv3wYEz",
+   "title": "Fix: board saves fail once board.json passes 1 MB",
+   "first": "2026-11-20T17:48:44-08:00",
+   "last": "2026-11-20T17:48:44-08:00",
+   "tags": [],
+   "cards": [
+    "c-bigboard1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEuenpkNF2iFcioPMr",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T17:48:03-08:00",
+   "last": "2026-11-20T17:48:03-08:00",
+   "tags": [],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD7sCjzp3NJTWyxHVn",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T17:45:19Z",
@@ -21833,8 +21853,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "5676a261fef2b29cc617c16e77db7e27a284495a",
- "synced_at": "2026-11-21T01:44:58+00:00",
+ "synced": "091f6a665f9826548d16af0648e03ae1712bbca5",
+ "synced_at": "2026-11-21T01:48:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
