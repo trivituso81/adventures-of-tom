@@ -29012,7 +29012,7 @@
    "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "first": "2026-11-21T20:49:38Z",
-   "last": "2026-11-21T20:49:38Z",
+   "last": "2026-11-21T20:49:59Z",
    "tags": [],
    "cards": [
     "c-anim-rose-lava-xftr"
@@ -29470,6 +29470,18 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHG5BVGkK42BxYrdPv",
+   "title": "The Big One is drawn 2.5 times bigger in battle (bigone25)",
+   "first": "2026-11-21T12:50:13-08:00",
+   "last": "2026-11-21T12:50:13-08:00",
+   "tags": [
+    "bigone25"
+   ],
+   "cards": [
+    "c-bigone25"
    ]
   },
   {
@@ -33201,8 +33213,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "3e35b0cbfc734d897b6d2ed3869b34ae8ea92dbd",
- "synced_at": "2026-11-21T20:49:44+00:00",
+ "synced": "7999b3d5c0dd15ef7a5b7277c64c71b9130b0e4b",
+ "synced_at": "2026-11-21T20:50:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
