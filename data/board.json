@@ -25080,7 +25080,7 @@
     "rule": "Claude Opus 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukD2m7YJcoTDgoPfND7",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -25098,6 +25098,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T17:30:10.819Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session started (Opus 5.5, medium; size kept: the stand-ins are judged by taste)."
     }
    ],
    "prompt": {
