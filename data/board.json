@@ -26887,6 +26887,29 @@
    "tag": "nightrefactor",
    "waiting_on": "claude",
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "b-board-night",
+   "tag": "board-night",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Tools",
+   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "next": "Done: board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-night. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -27012,6 +27035,18 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
+   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "first": "2026-11-21T11:27:11-08:00",
+   "last": "2026-11-21T11:27:43-08:00",
+   "tags": [
+    "board-night"
+   ],
+   "cards": [
+    "b-board-night"
    ]
   },
   {
@@ -30569,8 +30604,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "bc79c6d2446df69398467353db29abecd7f541aa",
- "synced_at": "2026-11-21T19:26:49+00:00",
+ "synced": "e4945e6cc2e89e052ab3ef5e1d7f2242c9217ff4",
+ "synced_at": "2026-11-21T19:28:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
