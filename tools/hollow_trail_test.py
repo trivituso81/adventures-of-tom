@@ -98,6 +98,13 @@ with sync_playwright() as pw:
     ev("()=>{ player.x=12; player.y=11; player.move=null; }")   # bait the Log toward the boss side and run the monsters for a while
     pg.wait_for_timeout(6000)
     check('no monster stepped into the fence while chasing', ev("()=>currentMap.npcs.filter(n=>n.monster&&!b7IsBoss(n)).every(n=>n.x<13&&(!n.move||n.move.tx<13))"))
+    # hollowfence: a monster cleared out of a scene's picture walks to the nearest free tile outside it, never into the fence
+    check('scene clear-out never sends an ordinary monster into the fence', ev("""()=>{ const n=currentMap.npcs.find(x=>x.monster&&!b7IsBoss(x)&&!x.still); if(!n) return false;
+      const keep=[stageZone,intro.active,intro.sceneCast]; n.x=12; n.y=11; n.move=null; n.path=[]; n.held=false; n.hidden=false; n.stageRoute=null;
+      intro.active=true; intro.sceneCast={text:'',speakers:[]}; stageZone={x0:0,x1:12,y0:0,y1:21,pts:[{x:6,y:11}]};
+      let ok; try { stageShooOut(); const r=n.stageRoute||n.path||[]; const end=r.length?r[r.length-1]:{x:n.x,y:n.y}; ok=!b7Fenced(end.x,end.y)&&!b7Fenced(n.x,n.y); }
+      finally { stageZone=keep[0]; intro.active=keep[1]; intro.sceneCast=keep[2]; n.stageRoute=null; n.path=[]; n.stageShoo=false; n.x=n.home?n.home.x:n.x; n.y=n.home?n.home.y:n.y; }
+      return ok; }"""))
     # stages follow beaten monsters, out of order too
     def beat(m): ev(f"()=>{{ const n=currentMap.npcs.find(x=>x.monster==='{m}'); if(n) monsterFall(n); else storyMonsterFell({{monster:'{m}'}}); }}")
     beat('skeeter'); beat('grump'); check('Skeeter and Grump change nothing: still stage 1', ev("()=>hollowTrailStage()===1&&!flag('ch1-beat:skeeter')&&!flag('ch1-beat:grump')"))
