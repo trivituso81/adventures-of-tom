@@ -21306,7 +21306,7 @@
    "col": "wait",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Waiting on Tom card t-boppy-bigfish-pic2: the approved Paso Robles pose is not in the repo (only art/raw/characters/boppy-em-unimpressed-v1.png, the old Big Fish one). Once it is approved and saved, a session rebakes his mood frames and faces and ships boppy-bigfish.",
+   "next": "Waiting on Tom card t-boppy-bigfish-pic (reopened): the new Paso Robles pose was never generated. After he approves it, start this card again and it rebakes Boppy's mood frames and faces.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -21365,6 +21365,11 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session ended without shipping: the approved Paso Robles picture does not exist in the repo (only the Big Fish v1; entry still draft). Nothing to install. Reopened t-boppy-bigfish-pic and parked this card behind it.",
+     "at": "2026-11-21T14:58:07.000Z"
     }
    ],
    "chat": {
@@ -22937,9 +22942,9 @@
    "title": "Approve Boppy's unimpressed pose in his Paso Robles cap",
    "theme": "Characters",
    "lane": "tom",
-   "col": "done",
+   "col": "up",
    "ask": "pictures",
-   "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). When the job finishes, open ADMIN > ART LIBRARY > Characters > Report fixes > Boppy unimpressed WITH his mustache (the button below). It should show Boppy alone on magenta, leaning on one hip with one hand on the hip, eyelids half closed, mouth turned down, fishing rod over his shoulder, thick white mustache, and his cap reading Paso Robles (not Big Fish). APPROVE it if so; REJECT with a note saying what is wrong. Approving unblocks Claude card c-boppy-bigfish, which puts the new pose into his story scenes and his unimpressed dialogue face.",
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). The first tap on 11-21 made no picture: the only file for Boppy's unimpressed pose is still the old Big Fish one. When the job finishes, open the Art Library button below. It should show Boppy alone on magenta, half-closed eyelids, mustache, fishing rod over his shoulder, cap reading Paso Robles (not Big Fish). APPROVE it if so, REJECT with a note if not. Approving unblocks c-boppy-bigfish.",
    "blocks": [
     "c-boppy-bigfish"
    ],
@@ -22968,9 +22973,13 @@
      "d": "2026-11-21",
      "t": "Tom: all good.",
      "at": "2026-11-21T08:43:08.719Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Reopened by c-boppy-bigfish: 'All good' was pressed but no new picture exists in the repo (art/raw/characters/boppy-em-unimpressed-v1.png still reads Big Fish; entry status draft, no gen run, nothing on branch artgen). Needs Generate, then Approve.",
+     "at": "2026-11-21T14:58:07.000Z"
     }
-   ],
-   "done": "2026-11-21"
+   ]
   },
   {
    "id": "b-board-boppy-bigfish",
