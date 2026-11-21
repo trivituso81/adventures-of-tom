@@ -1335,6 +1335,12 @@
    "cmd": "python3 -I tools/dashboard_test.py",
    "group": "g6",
    "minutes": 2
+  },
+  {
+   "id": "guardwin_test",
+   "cmd": "python3 -I tools/guardwin_test.py",
+   "group": "g1",
+   "minutes": 3
   }
  ]
 }
