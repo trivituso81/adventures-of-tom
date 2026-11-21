@@ -21512,13 +21512,13 @@
    "id": "c-qa-battle2",
    "tag": "qa-battle2",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle System",
    "title": "Old battle screen problems: check them in the new battle",
    "next": "Waits on stage 15 of the new battle system (chapter 1 moves to it). Then it runs the tester's old battle screen checks on the new screen and fixes what fails.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on BUG-05, 06, 09, 10 and COH-09 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -21545,13 +21545,18 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session ended without shipping: stage 15 (chapter 1 moves to the new battle) has not happened yet (stage 13 is still in progress), so there is no new battle screen to check. Back to Waiting.",
+     "at": "2026-11-21T03:40:00Z"
     }
    ],
-   "started_at": "2026-11-21T03:25:14+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGjA53ZzZnyFQNd8R4",
     "opening": "started by START"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-itemdef1",
