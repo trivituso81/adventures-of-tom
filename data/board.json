@@ -27651,8 +27651,8 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukE8vUUrJV7q1RRdLRG",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/dashboard-plan.md, and look at the two pictures\""
    },
    "prompt": {
     "what": "Applies your notes from the first try, then builds the strip under the game as drawn: the newer build bar with Reload game, the screen sizes, the chapter and test fight jumps, Story battles, Difficulty, Mute and Report.",
@@ -27677,6 +27677,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-21T20:59:48.921Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by the dash2 session. Tom answered t-dash1-try with All good and no written note, so there are no notes to apply."
     }
    ]
   },
