@@ -63,6 +63,7 @@ function b3PartyUnit(F,id,level,slot) {
   for(const k of ['hp','atk','def','spd']) u[k]=Math.round(S[k]*(C.stat[k]||1)*(k==='hp'?1+(lean.hp||0):1));
   u.maxHp=u.hp;
   if(cfg.hpPct!=null) u.hp=Math.max(1,Math.round(u.maxHp*cfg.hpPct));
+  if(cfg.hpShare&&cfg.hpShare[id]!=null) u.hp=Math.max(1,Math.round(u.maxHp*Math.min(1,cfg.hpShare[id])));   // story fights: HP carries between fights as a share of each member's own Max HP
   return u;
 }
 // o.add: a foe called in mid-fight (bestiary 1.1): half its entry's HP unless o.hp prints a number, and 0 pips.
@@ -111,7 +112,7 @@ const b3Other=side=>side==='party'?'foe':'party';
 //      loadouts ({id: loadout}: Main and Pocket Vibe, Quirks, VP and row per member, engine/b3-progress.js; a member left out
 //      gets a fresh loadout with every Vibe at `rank`, 1 when that is left out too),
 //      rows ({id:'front' or 'back'}: overrides where a family member stands; left out = their loadout's row, else by Lean),
-//      hpPct (tests: the party starts at this share of its HP), plain (tests: see b3PartyUnit).
+//      hpPct (tests: the party starts at this share of its HP), hpShare ({id: share}: story fights, one share per member), plain (tests: see b3PartyUnit).
 function b3NewFight(cfg) {
   const seed=cfg.seed==null?Math.floor(Math.random()*2147483647):cfg.seed;
   const F={cfg,seed,rng:seed|0,clock:0,round:1,over:null,acting:null,priSeq:0,stamp:1,turnLog:[],hazards:[],reactions:[],reactSeq:0,later:[],opening:[],

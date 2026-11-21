@@ -23,7 +23,7 @@ const ROOT=path.dirname(__dirname);
 const DATA=['data/b3-rules.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
-  'data/b3-lab.js'];
+  'data/b3-lab.js','data/b3-story.js'];
 const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
@@ -269,6 +269,8 @@ function check() {
   require('./b3-check-s12.js')({G,ok,near,play,noCrit});
   // Stage 13's groups: the chapter 8 to 10 and bonus bestiary (stage 13a: the car barn, Old Ironbelly).
   require('./b3-check-s13.js')({G,ok,near,play,noCrit});
+  // Stage 15's groups: the chapter 1 story switch (data/b3-story.js; the page side is tested by tools/b3_test.py s15).
+  require('./b3-check-s15.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

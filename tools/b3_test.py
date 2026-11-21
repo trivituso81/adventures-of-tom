@@ -533,7 +533,7 @@ def stage4(pg,lab):
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(200)
     sv=pg.evaluate("()=>{ saveGame('7',true); const s=readSave('7'); return {tom:s.members.find(m=>m.id==='tom'),mike:s.members.find(m=>m.id==='michael'),n:s.members.filter(m=>m.vibes).map(m=>m.id),cast:Object.keys(B3_CAST)}; }")
     need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
-    need(sorted(sv['n'])==sorted(i for i in sv['cast'] if i in sv['n']) and set(sv['n'])>={'tom','grace','rose','deedee','boppy','tnb','nara'} and (not sv['mike'] or 'vibes' not in sv['mike']),f"only family members with a kit get the fields for now (stage 10 adds Amy, Justin and Olivia): {sv['n']}")
+    need(sorted(sv['n'])==sorted(i for i in sv['cast'] if i in sv['n']) and set(sv['n'])>={'tom','grace','rose','deedee'} and not (set(sv['n'])&{'boppy','tnb','nara'}) and (not sv['mike'] or 'vibes' not in sv['mike']),f"a new save has a loadout for every member with a kit except the late joiners (Boppy, TNB and Nara get theirs when the story recruits them, stage 15): {sv['n']}")
     need('stamps' in sv['tom'] and 'ranks' in sv['tom'] and 'loadouts' in sv['tom'],'the old save fields (stamps, ranks, loadouts) must stay')
     # The pause menu's door
     pg.evaluate("()=>{ openMenu(true); }"); pg.wait_for_timeout(350)

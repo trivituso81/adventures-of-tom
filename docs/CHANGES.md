@@ -1,3 +1,16 @@
+## b3s15 (2026-11-21): chapter 1's story fights now play on the new battle system, with a switch in ADMIN to go back to the old one
+
+- Build: stage 15 of the new battle system ("Battle 3"). Plain list of chapter 1's old-battle references by kind: `docs/BATTLE3.md` "What stage 15 holds". Only chapter 1's share was replaced.
+- The switch: ADMIN > Battle system > Story battles has OLD, BY CHAPTER (default) and NEW. It is kept on the phone. OLD plays chapter 1 on the old battle with the same save. NEW beyond chapter 1 is not finished: only chapters 1 to 10 have Battle 3 formations, and their story hand-offs are not built.
+- One door: `startBattle` is wrapped by `engine/b3-story.js`, so scene fights and map monsters both route there. `B2.result`, the `battle:<id>` flags, `monsterFall` (the Hollow trail) and the Tombo unlock flags work as before.
+- Story fights pay XP, coins and a drop as before, plus Vibe Points (15 each for the 3 Mudlings, 10 for a formation, 30 for the Big One). The victory card shows a "+n VP" line per person and the Ruckus gauge in its footer (no HEART).
+- HP carries between fights as a share of Max HP. A loss leaves everyone at 1 HP and Deedee's line plays as before.
+- Saves gain `b3:{v:1,ruckus}`; nothing is removed. Existing saves get a level floor and a pool of 135 Vibe Points per chapter finished (idempotent, never lowers anything). TNB, Nara and Boppy get a loadout when the story recruits them.
+- New battle tips replace the old ones for these fights (Battle 3 words only). No Warmth bar, WARMTH command or HEART line in any chapter 1 fight; the two Tombo toasts show under OLD only.
+- Tests: `node tools/b3-sim.js check` CHECKS 2205, FAILS []; `tools/b3_story_test.py` (52 checks); `tools/ch1_b3_test.py` (chapter 1 from Chapter Select to the job scene, portrait and landscape, no page errors); `tools/b3_test.py s4` (one stale expectation updated: late joiners have no loadout until recruited). `tools/smoke.py` passes except `board_sync_test` R5, which fails the same way before this build.
+- Fact for Milestone B: a new save is at Rank 1 in chapter 1 and the plain player needs 7.83 rounds for the Big One at Rank 1 (5.78 at Rank 2); target 5 to 7. Left as is. XP needed no change: clearing the Hollow pays 250 XP, 2.5 levels.
+- Not done: Rose Mode's emergency muffin (`b7Pie`) has no Battle 3 form.
+
 ## fix-itembannerart-pics-4 (2026-11-21): the last 2 item pictures (racing flats, birthday sash) remade with one phrase changed each; all 3 are ready for your review
 
 - Tom (card t-itembannerart-pics): "2 more images failed, which is major improvement. We're getting close. He's feedback to adjust the prompt". The Tiny Clay Taco passed (QA 15 of 15), so it was not touched.

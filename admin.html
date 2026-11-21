@@ -24,6 +24,7 @@ h2{font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-
 .btn b{display:block;font-size:17px}
 .btn span{display:block;color:#b9b3e6;font-size:13px;font-weight:400}
 .btn .live{color:#ffd34d;font-weight:600}
+.seg{display:flex;gap:6px;margin-top:10px}.seg button{flex:1;min-height:44px;border-radius:10px;border:1px solid #3a3566;background:#1a1740;color:#fff;font:inherit;font-weight:600;cursor:pointer}.seg button.on{background:#ffd34d;color:#241b00;border-color:#ffd34d}
 .btn.gold{background:#ffd34d;color:#241b00;border-color:#ffd34d}.btn.gold span{color:#4a3a00}
 </style>
 </head>
@@ -38,10 +39,13 @@ var GROUPS=[
  ['Story',[['Script Editor','Reword, reorder and play every scene.','script.html']]],
  ['Characters',[['Pose Editor','Size every pose: height, head, chin.','poses.html'],['Head Sizes','Make any head bigger or smaller and see it on the body.','heads.html'],['Portrait Crops','Choose how each face is cropped.','portraits.html'],['Effects','Every effect on people in the overworld, what sets it off, and a preview.','effects.html']]],
  ['World and screens',[['Area Builder','See and fix where you can walk in any area.','areas.html'],['Welcome Layout','Size and place each character on the welcome screen. Opens in the game.','index.html?go=welcome-layout']]],
+ ['Battle system',[['Story battles','Which battle system plays story fights and map monsters. Old: the old battle everywhere. By chapter: the new battle in the chapters built for it (chapter 1 now). New: the new battle wherever it has a fight. Kept on this phone; saves work with all three.',null,'b3s']]],
  ['Labs',[['Battle Lab','Boss fights from chapters 1 to 20. Has its own page and address. Opens in the game.','battle-lab.html'],['Block Break Lab','Old Oak Park: the coin, the cracks, the colour coming back. Opens in the game.','index.html?go=block-break-lab']]],
  ['Reporting',[['Report tab','The pencil tab that sends Claude a note.',null,'report']]]
 ];
 var BRP_ON='aot-report',BRP_TOKEN='aot-gh-token';
+var B3S_KEY='aot-b3-story';
+function b3sMode(){var v=ls(B3S_KEY);return v==='old'||v==='new'?v:'chapter';}
 function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function reportOn(){var v=ls(BRP_ON);return v==='1'||(v!=='0'&&!!ls(BRP_TOKEN));}
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
@@ -55,6 +59,11 @@ function render(){
     a=el('button','btn','<b>Report tab: <span id="rep" style="display:inline;color:#ffd34d">'+(reportOn()?'On':'Off')+'</span></b><span>'+b[1]+' Tap to switch.</span>');
     a.id='b-report';a.type='button';
     a.onclick=function(){try{localStorage.setItem(BRP_ON,reportOn()?'0':'1');}catch(e){}render();};
+   } else if(b[3]==='b3s') {
+    var cur=b3sMode();
+    a=el('div','btn','<b>'+b[0]+'</b><span>'+b[1]+'</span><div class="seg">'+[['old','Old'],['chapter','By chapter'],['new','New']].map(function(o){return '<button type="button" id="b3s-'+o[0]+'" class="'+(o[0]===cur?'on':'')+'" aria-pressed="'+(o[0]===cur)+'">'+o[1]+'</button>';}).join('')+'</div>');
+    a.id='b-story-battles';a.style.cursor='default';
+    a.querySelectorAll('button').forEach(function(x){x.onclick=function(){try{localStorage.setItem(B3S_KEY,x.id.slice(4));}catch(e){}render();};});
    } else {
     a=el('a','btn','<b>'+b[0]+'</b><span>'+b[1]+'</span>'+(b[3]==='board'?'<span class="live" id="wait">Counting what waits on you...</span>':'')+(b[3]==='builds'?'<span class="live" id="bnew">Counting builds...</span>':''));
     a.href=b[2];a.id='b-'+b[0].toLowerCase().replace(/ /g,'-');

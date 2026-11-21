@@ -30,8 +30,10 @@
 // Battle Lab: EXIT shows), auto (true: the simple player picks every move, for tests), hpPct and mods (tests), onEnd(result),
 // loadouts ({id: loadout}: each member's Vibes, Quirks, VP and row, engine/b3-progress.js) or rank (every Vibe at that Rank),
 // award(F) (called once on a win; returns the line the win screen adds, for example the Vibe Points earned).
+// Story fights add onTurn(unit) (a tip when a family member's turn opens) and beforeEnd(result, go) (called on CONTINUE after a win; the
+// story shows its victory card and calls go() to close the fight).
 function b3Start(cfg) {
-  B3.cfg=cfg; B3.recC=null; B3.pvC=null; B3.armed=-1; B3.awarded=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
+  B3.cfg=cfg; B3.recC=null; B3.pvC=null; B3.armed=-1; B3.awarded=false; B3.leaving=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
   const mods=Object.assign({foeHp:b7FoeHp(),taken:b7Taken(),foeSpeed:typeof b7FoeSpeed==='function'?b7FoeSpeed():1},cfg.mods||{});
   // Rose Mode (pictures on) picks the Vibes and Quirks itself: the Sig Vibes and the newest written Quirks, from the same Ranks.
   let loadouts=cfg.loadouts;
@@ -39,7 +41,7 @@ function b3Start(cfg) {
     const src=loadouts||{}; loadouts={};
     for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));
   }
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,rows:cfg.rows,
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,rows:cfg.rows,
     loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
   B3.view.bar=b3BarSnap(B3.F,null,0);
@@ -87,6 +89,7 @@ function b3Flow() {
     B3.actor=u;
     if(B3.cfg.auto) { const rk=B3.cfg.autoRuckus?b3AutoRuckus(B3.F,u):null; if(rk) { b3Commit('ruckus:'+rk.kind,rk.target); return; } const p=b3Auto(B3.F,u); b3Commit(p.skill,p.target); return; }
     b3Open('cross');
+    if(B3.cfg.onTurn) B3.cfg.onTurn(u);   // story fights: the tip for this turn (engine/b3-story.js)
   });
 }
 // The family member a granted action is waiting for, or null.
@@ -370,7 +373,7 @@ function b3Cross(d) {
 }
 function b3Pick(i) {
   const u=B3.actor;
-  if(B3.ui==='done') { b3Sfx('select'); b3End(B3.F.over); return; }
+  if(B3.ui==='done') { b3Sfx('select'); const over=B3.F.over; if(B3.cfg.beforeEnd&&over==='win'&&!B3.leaving) { B3.leaving=true; B3.cfg.beforeEnd(over,()=>{ B3.leaving=false; b3End(over); }); } else b3End(over); return; }   // beforeEnd: the story's victory card, shown over the fight before it closes
   if(B3.ui==='skills') { const S=b3SkillRows(u)[i]; if(S) { B3.sel=i; b3Choose(S); } }   // skillinfo1: the row uses the Skill (the i opens the card)
   else if(B3.ui==='skill') { const S=b3SkillRows(u)[B3.sel]; if(S) b3Choose(S); }
   else if(B3.ui==='ruckus') { const k=['double','full'][i]; if(!k) return; B3.sel=i; b3ChooseRuckus(k); }

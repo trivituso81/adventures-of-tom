@@ -4,7 +4,7 @@
 
 | Question | Answer |
 |---|---|
-| Where it is played today | ADMIN > BATTLE LAB > NEW BATTLE (first choice on every Lab page). Story fights still use battle 2. |
+| Where it is played today | ADMIN > BATTLE LAB > NEW BATTLE (first choice on every Lab page), and chapter 1's story fights (stage 15, switch ADMIN > Battle system > Story battles, default BY CHAPTER). Chapters 2 to 20 still use battle 2; NEW beyond chapter 1 is unfinished (it sends every fight that has a Battle 3 formation, and Battle 3 has formations for chapters 1 to 10 only, with their story hand-offs not yet built). |
 | Naming | Every Battle 3 global starts with `B3` or `b3`, every file with `b3-`. The game is classic scripts in one shared scope, so the prefix is what lets old and new load together. |
 | The one structural rule | Rules first, pictures second. The rules work out the whole result of an action and return a list of beats. The play layer shows the beats. The rules never wait for an animation. |
 | Stages built so far | Stage 1, the core loop (build `b3s1`). Stage 2 (build `b3s2`): statuses, caps, shields, healing, knock-outs and Pick-Me-Up, rows, aggro, the hook bus, wards, intercepts, hazards. Stage 3 (build `b3s3`): Composure pips, Break and Flustered, Marks, the full enemy act runner, counter acts, adds, the chapter 1 Elite and boss. Stage 4 (build `b3s4`): Vibes. Ranks and Vibe Points, Main and Pocket Vibe, two Quirk slots, Stat Leans, Portable Counters, the Vibes screen (pause menu and Battle Lab), the save fields, the Lab's Rank picker. Stage 5a (build `b3s5a`): the Traits, both Quirks and the Grand Capstones of the four first Sig Vibes (Frequent Flier, Squishy Collector, Sugar Rush, Neat Freak), with the free Skill (a granted action), taunts, the Family Ruckus count and the first one-off rule. Stage 5b (build `b3s5b`): Tom's Gamer Geek and Grace's Craft Artist complete (2 Skill 2s, 2 Capstones, 2 Traits, 4 Quirks, Cartridge Blow's foresee, Double Coat). Stage 6 (build `b3s6`): the Family Ruckus (gauge gains, Double Team, Full Family Ruckus, the RUCKUS button). Stage 5c (build `b3s5c`): Rose's Cozy Rosie and Deedee's Registered Nut complete (the `later` op, Skill `cooldown`, immunity, shield from overheal, survive at 1 HP, shield mods). All eight Sig Vibes are done. Stage 9b (build `b3s9b`): TNB's Ceramicist and Longboarder complete (clay shields, the Grand Amphora vessel, six pieces of new rule). What is in and what is not: the tables at the end. |
@@ -75,6 +75,8 @@ A fight is one plain object `F` from `b3NewFight(cfg)`. `b3Next(F)` moves the cl
 | Place | What |
 |---|---|
 | `battle.v3` | Set while a Battle 3 fight runs (`battle.v2` is battle 2's). |
+| `startBattle(npc,opts)` | Wrapped by `engine/b3-story.js` (stage 15). The one door for story fights and map monsters: it routes to `b3sBegin` or to battle 2 by the switch. Result: `B2.result` is set by `b3sEnd`, so the story `battle` op and the flags read it unchanged. |
+| `saveSnapshot`, `loadGame` | Wrapped by `engine/b3-story.js`: the save gains `b3:{v:1,ruckus}`. Nothing is removed from the save. |
 | `engine/battle.js` `updateBattle` | Calls `b3Update(dt)` |
 | `engine/battle-draw.js` `drawBattle` | Hands the frame to `b3Draw()`. Battle 3 draws its own party and enemies: battle 2's party drawing reads battle 2 state in a dozen places (architecture risk 2). |
 | `engine/draw.js`, `engine/main.js` | Keys and gamepad go to `b3Key` and `b3Pad` |
@@ -119,6 +121,53 @@ The simple player attacks whenever attacking scores higher, which is nearly alwa
 `tools/b3_test.py` plays each fight by hand through the real screen (keys and taps), checks that Windex Spritz then a Clobber hit shows Hydro-Slip!, compares the on-screen turn order with the simulator for the same seed, plays a fight to the lose screen, and checks a battle 2 fight still owns its screen afterwards. On the Pond Grump fight it also runs the stage 2 moves (section 5 in the file's header): there it aims the monsters with pokes (a test taunt, `actIx`) so every run shows a slip, a ward's answer, an intercept, an interrupt and a revive. On The Big One it also runs the stage 3 section (section 6 in the file's header): it pokes the boss into Big Glare at Rose three times and answers it three ways (Tom's Suite Door Slide takes the bite, Crunchy Sugar-Cube Pop cancels it, a Break cancels it), tops the boss's pips up between family turns so a Break only comes when the test wants one, and calls two Mudlings and a Skeeter Swarm in as adds. All six fights take about 25 minutes; one fight: `python3 tools/b3_test.py new3`. Look at the sheets before pushing.
 
 Gotcha for any test that drives the SKILLS list with the keys: move the mouse off the list first (`pg.mouse.move(2,2)`). A mouse left resting over a row moves the cursor to that row every time the list is redrawn.
+
+## What stage 15 holds: chapter 1's story switch (build `b3s15`)
+
+### Chapter 1's battle 2 references, by kind (listed before any change, 2026-11-20)
+
+Fact: every place chapter 1's scenes and map monsters touch battle 2. Lines are in `data/scenes.js` unless named. "Share" is what stage 15 replaces; everything else stays as it is.
+
+| Kind | Where | What it does with battle 2 | Stage 15 |
+|---|---|---|---|
+| Start a fight | `SCENES.ch1Mudling` (line 312) | `{battle:'mudling',tut:'basics',count:3}`: three Mudlings in battle 2 | Routed. NEW plays the 3-Mudling fight (`mudling3`, 15 VP each) |
+| Start a fight | `SCENES.ch1Pond` (354) and `bigOneRetry` (360 to 367, up to 8 nested `{battle:'bigone'}`) | The Big One, then on a loss heal and run it again | Routed. NEW plays `bigone` (new6) |
+| Start a fight | Map monsters in Grump Hollow and the Square (mudling, skeeter, grump, toad, log), `engine/overworld.js:149` `startBattle(npc)` | Touching a monster | Routed (one door: `startBattle`) |
+| Start a fight | Story `battle` op, `engine/story.js:333` | Calls `startBattle`, waits on `battle.active` | Wrapped: waits on the Battle 3 fight too |
+| Read a result | Flags `battle:mudling` and `battle:bigone` (set by the story op from `B2.result`, and for bosses by the `b2End` wrapper, `engine/story.js` ~1531) | Read by `CH1_AFTER` (293), `bigOneRetry` `lost()`, trigger `ch1-after` (707), the boss pose code (726 to 731) | NEW writes the same flags from the Battle 3 result |
+| Read a result | `{heal:true}` after a loss (293 to 295, 362) | Full HP for the party | Kept as is (Deedee's line plays, then full HP) |
+| Read a result | `monsterFall(npc)` (`engine/world.js:200`) calls `storyMonsterFell` (807 to 812), which sets `ch1-beat:toad` and `ch1-beat:log` and moves the Hollow trail (`hollowTrailStage`) | A beaten map monster falls | NEW calls `monsterFall` on a win, so the trail still moves |
+| Read a result | Rewards: `b2RewardsData` (XP, coins, drop, `b2WriteBack`) and `b7ShowCard` | Battle 2's victory card | NEW pays Vibe Points, XP and coins, and shows the same card with VP lines |
+| Unlock a Tombo | Flags `tombo:rose1` (59), `tombo:grace1` (73), `tombo:deedee1` (286) | Unlock Double-Decker Airplane, Squishy Delivery, Wine and Gossip | Flags stay. Tombos are retired as a rule (Dual Ruckus, architecture section 3) and return as skins in stage 16 |
+| Unlock a Tombo | Toasts at lines 122 and 287 | Name battle 2 menu rows (HEAL, ATTACK) | Shown under OLD only. Under NEW they are skipped, since no Tombo row exists to find |
+| Tutorial | `TUTORIALS.basics` and `TUTORIALS.bigone` (874 to 890), the `tut` option, `b2TutTip`, `b2TipAim`, `b7AfterRender` glow (`engine/story.js` ~1547 to 1577) | Tips about Warmth, RASPBERRY, HEART, Tombos, VP, Inspect, LOCK and DEFEND | Replaced for NEW by `B3_STORY.tips` (Pep, Basic, Skill, Preview, Ruckus, Inspect, row). OLD keeps these |
+
+Shares stage 15 does not touch: chapters 2 to 20 (`ch2` onward, `data/ch20-battle.js`, `engine/benchcall.js`, `engine/boss-finale.js`), Battle Lab, and every battle 2 file. Under OLD the chapter plays exactly as before.
+
+### What stage 15 builds (build `b3s15`)
+
+| Part | Fact |
+|---|---|
+| The switch | ADMIN > Battle system > Story battles: OLD, BY CHAPTER (default), NEW. Kept on the phone (`localStorage` `aot-b3-story`). `B3_STORY.chapters` is `[1]`. OLD sends every story fight to battle 2 on the same save. The demo always uses battle 2. |
+| Routing | `b3sPlan(npc,opts)` picks the Battle 3 fight for the monster (`B3_STORY.fights` for the 3-Mudling fight, else the bestiary formation for that monster id) or says "battle 2". A fight with no Battle 3 row goes to battle 2 in every mode. |
+| Levels, HP | A level floor (`B3_STORY.levelFloor`) is applied only where Battle 3 plays and never lowers a level. HP carries: a unit starts at its saved share of Max HP (`hpShare`, at least 1), and on a win the share is written back (full on a level-up). A loss leaves everyone at 1 HP and Deedee's scene line plays as before. |
+| Vibe Points | Story fights pay VP: 15 each for the 3 Mudlings, 10 for a formation, 30 for the Big One. The Main Vibe earns all of it, the Pocket half. Everyone earns, bench included. A save with progress gets a pool of 135 VP per chapter finished (two thirds to the first Sig Vibe, one third to the second). The migration is idempotent and runs on load, Chapter Select and a switch change. |
+| Ruckus | The gauge carries between fights and is a save field (`b3:{v:1,ruckus}`). An old save loads at 0. |
+| Victory card | `b7ShowCard` with a "+n VP" line per member and `RUCKUS n%` in the footer (no HEART). CONTINUE shows it before the fight closes (`cfg.beforeEnd`). |
+| Late joiners | TNB, Nara and Boppy get a loadout when the story recruits them (`recruitJoin`) or the bench takes them (`benchAdd`). A stale empty record of an unrecruited late joiner is dropped on load. |
+| Tips | `B3_STORY.tips`: Basic, Skills, Pet Peeves, support, Ruckus for the first fight; Composure pips, the crown, the Big Glare and the Ruckus for the Big One. Battle 3 words only. A tip shows once per fight, at the start of the turn it needs (`cfg.onTurn`). |
+| No Warmth | No Warmth bar, WARMTH command or HEART line in any chapter 1 fight. The two Tombo toasts (`data/scenes.js`) show only under OLD; the Tombo flags stay. |
+
+### Tests and numbers (stage 15)
+
+| Command | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 2205, FAILS: [] (`tools/b3-check-s15.js` is the stage 15 share) |
+| `python3 tools/b3_story_test.py` | 52 checks: the switch, routing in all three modes, a story fight end to end (tips, no Warmth, HP, VP, card, flags, save and load of the Ruckus), a loss, the boss flag, migration, late joiners, an old save, OLD on the same save, landscape |
+| `python3 tools/ch1_b3_test.py` (`LAYOUT=landscape` too) | Chapter 1 from Chapter Select to the job scene on Battle 3, both layouts, every fight auto-played, the card seen, no page errors |
+| XP | Fact: clearing Grump Hollow pays 36 (3 Mudlings) + 24 + 26 + 30 + 34 + 100 = 250 XP, which is 2.5 levels at 100 XP a level, so no number was changed. The required path alone (Mudlings and the Big One) pays 136. |
+| Balance (fact) | A new save is at Rank 1 in chapter 1 and the plain player takes 7.83 rounds against the Big One at Rank 1 (5.78 at Rank 2); the target is 5 to 7. Left unchanged, for Milestone B to judge on the phone. |
+| Not ported | Rose Mode's emergency muffin (`b7Pie`) has no Battle 3 form. |
 
 ## What stage 9b holds, and what waits
 

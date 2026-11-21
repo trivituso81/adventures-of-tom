@@ -5,7 +5,8 @@
 // Two books of loadouts (a loadout is {main, pocket, quirks, vp, row}; a book is one per family member):
 //   THE SAVE'S: on each family member object as `m.vibes`. It rides along in every save as two fields per member, `vibes`
 //               ({main, pocket, quirks, vp}) and `row`. A save from before these fields existed loads with fresh loadouts.
-//               Story fights still use the old battle, so this book earns no Vibe Points yet (that is the stage 15 switch).
+//               Story fights on Battle 3 (engine/b3-story.js, the ADMIN switch) pay Vibe Points into it. A late joiner (TNB, Nara, Boppy) has
+//               no loadout until the story recruits them.
 //   THE LAB'S:  kept on this device (localStorage 'aot-b3-lab'), because the Battle Lab runs from the title screen with no save
 //               loaded. NEW BATTLE fights use it, a Lab win pays Vibe Points into it, and its screen has a Rank picker.
 //               A change made on the pause menu's Vibes screen is copied to it (Main, Pocket, row), so what Tom picks in the
@@ -16,10 +17,14 @@
 
 // ---------- The save's book ----------
 const b3Member=id=>ALL_MEMBERS().find(m=>m.id===id)||null;
-// A family member's loadout, made valid for this build. null for someone whose kit is not built yet.
-function b3MemberLoadout(m) {
+// Whether the story has brought this member in (in the party or on the bench). A late joiner has no loadout before that.
+const b3Recruited=m=>!!m&&((typeof party!=='undefined'&&party.includes(m))||(typeof onBench==='function'&&onBench(m)));
+// A family member's loadout, made valid for this build. null for someone whose kit is not built yet, and for a late joiner the
+// story has not recruited yet (stage 15: the loadout is made when they arrive, from the pool of that moment; `force` makes it now).
+function b3MemberLoadout(m,force) {
   if(!m||!b3HasKit(m.id)) return null;
   if(!m.vibes&&b3IsLate(m.id)) {   // a late joiner arriving: the pool is the most VP any one member holds (spec section 1)
+    if(!force&&!b3Recruited(m)) return null;
     const book={}; for(const o of ALL_MEMBERS()) if(o.id!==m.id&&b3HasKit(o.id)&&o.vibes) book[o.id]=o.vibes;
     m.vibes=b3NewLoadout(m.id,1,b3PoolSize(book));
   }
@@ -43,11 +48,13 @@ loadGame=function(slot) {
 };
 // Every member's loadout from a save. A member the save says nothing about (an old save) gets a fresh one.
 function b3VibesFromSave(sv) {
-  for(const m of ALL_MEMBERS()) {
-    const sm=(sv.members||[]).find(x=>x.id===m.id);
-    m.vibes=sm&&sm.vibes&&typeof sm.vibes==='object'?Object.assign({},sm.vibes,{row:sm.row||null}):null;
-    b3MemberLoadout(m);
-  }
+  const from=m=>{ const sm=(sv.members||[]).find(x=>x.id===m.id); return sm&&sm.vibes&&typeof sm.vibes==='object'?Object.assign({},sm.vibes,{row:sm.row||null}):null; };
+  const all=ALL_MEMBERS();
+  for(const m of all) m.vibes=b3IsLate(m.id)?null:from(m);
+  for(const m of all) if(!b3IsLate(m.id)) b3MemberLoadout(m);
+  // Late joiners come second, so a newcomer's pool sees everyone else's Vibe Points. A save from before stage 15 holds a record for
+  // someone the story never recruited (made at save time, pool and Vibe Points all empty): it is dropped, and made when they arrive.
+  for(const m of all) if(b3IsLate(m.id)) { const v=from(m); m.vibes=v&&(b3Recruited(m)||b3VibeTotal(m.id,v)>0)?v:null; b3MemberLoadout(m); }
 }
 
 // ---------- The Lab's book ----------

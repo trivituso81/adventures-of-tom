@@ -53,7 +53,29 @@ Rules for every stage's session:
 | 11 | Bestiary chapters 2 to 4 with their bosses: 15 regular monsters, The Big Shake, Old Iron-Gill, The Director's Cut, 17 formations, chapter 2's explicit stat blocks, Lab fights NEW 11 to NEW 27. New seams: `surfaces`, `stopByIntercept`, op `row`, summon `ifNoFront`, Skill Lock, 14 statuses | Pushed 2026-11-20 | `b3s11` | Nothing is asked. |
 | 12 | Bestiary chapters 5 to 7 with their bosses: 16 monsters and adds, The Red Pen, Chairman Cheeks, The Unread, 17 formations, Lab fights NEW 28 to NEW 44. Pushed in three parts (`b3s12a` chapter 5, `b3s12b` chapter 6, `b3s12` chapter 7). New seams: act field `starts`, conditions `noAllyId` and `allyAge`, targets `randomFrontAlly` and `unshielded`, ops `eat` and `hpLoss`, foe field `onKo`, flag `foeTaunt`, 22 statuses | Pushed 2026-11-20 | `b3s12` | Nothing is asked. |
 | 13 | Bestiary chapters 8 to 10 and the bonus chapter with their bosses: 22 monsters, Old Ironbelly, The Mirrorball, The Last Call, Brain Freeze, 22 formations, Lab fights NEW 45 to NEW 66. Pushed in four parts (`b3s13a` chapter 8, `b3s13b` chapter 9, `b3s13c` chapter 10, `b3s13` the bonus). New seams: strip kind `shieldOrBuff`, targets `frontAllies`, `firstTarget` and `lowestOtherAlly`, act condition `allyHurt`, 23 statuses | Pushed 2026-11-20 | `b3s13` | Nothing is asked. |
-| 14 to 23 | See architecture section 5 | Not started | | |
+| 14 | Balance pass on Part 1 (data only), plus the Rank 2 and Rank 5 follow-up | Pushed 2026-11-20 | `b3s14`, `b3s14b` | Nothing is asked. |
+| 15 | Story switch, chapter 1: ADMIN switch (OLD, BY CHAPTER, NEW), chapter 1's fights on Battle 3, level and Vibe Point migration, Ruckus as a save field, Vibe Points and a victory card, late joiners' loadouts on recruit, new tips, no Warmth in chapter 1 | Pushed 2026-11-21 | `b3s15` | Milestone B: Chapter Select > Chapter 1, play it on the new battle (about 30 minutes). |
+| 16 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 15 results (facts)
+
+| Item | Result |
+|---|---|
+| Built | `data/b3-story.js`, `engine/b3-story.js`, the ADMIN switch, `docs/BATTLE3.md` "What stage 15 holds" (with the list of chapter 1's battle 2 references by kind). Small changes: b3-ui, b3-core, b3-menu, feel.js, scenes.js (two Tombo toasts), index.html. |
+| Tests | `node tools/b3-sim.js check` CHECKS 2205, FAILS []; `tools/b3_story_test.py` 52 ok; `tools/ch1_b3_test.py` both layouts, no page errors; `b3_test.py s4` passes after one stale expectation was updated; smoke fails only `board_sync_test` R5 (known, unrelated). |
+| Balance | New save at Rank 1: the plain player takes 7.83 rounds for the Big One (Rank 2: 5.78). Target 5 to 7. Left as is. |
+| XP | Clearing the Hollow pays 250 XP (2.5 levels); no number changed. |
+
+## Calls made in stage 15 that Tom has not confirmed
+
+| Call | Why | Undo |
+|---|---|---|
+| Default switch is BY CHAPTER (chapter 1 on the new battle for everyone) | The brief says chapter 1's story fights run on Battle 3 | ADMIN > Battle system > Story battles > OLD |
+| The Rank 1 Big One length (7.83) is left as is | Tom judges fight length at Milestone B | Data only, in `data/b3-foes-ch01.js` |
+| The two Tombo toasts are skipped under Battle 3; the Tombo flags stay | No Tombo row exists to point at | Stage 16 brings Tombos back as skins |
+| A knocked-out member starts the next Battle 3 fight at 1 HP | Battle 3 has no "down at start" rule | `b3PartyUnit` |
+| Rose Mode's emergency muffin is not ported | No Battle 3 form exists | A later card |
+| Next Claude card is stage 17 (chapters 2 to 5), not stage 16 | Stage 16 asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions | Make a stage 16 card |
 
 ## Stage 13 results (facts)
 
@@ -335,29 +357,27 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Clips for the other kit moves and the remaining monsters (only the moves named in the stage 8 calls and the chapter 1 monsters have them) | The kit stages (9, 10, 19 to 21) and the chapter animation plan (`claude/animation-chapter-plan.md`). A new move gets a clip by adding `anim:{kind:'clip',clip}` to its row. |
 | Spoken lines for the built moves and the two spends, for the Voice Library (architecture risk 8) | With the kit stages; none added yet |
 | Fight lengths: every chapter 1 fight is under its target with Leans, Pocket Skills, Traits and Quirks (5a to 5c results); The Big One's bite (stage 3) | The balance pass, stage 14. Tom will feel it first at milestone A. |
-| The Ruckus gauge in a saved game (a save field, and the story fight starting with the saved value) | Stage 15. Until then the Lab keeps it on the phone only. |
-| Story fights paying Vibe Points, the victory card, level and VP migration for existing saves | Stage 15 |
-| A save first creating a late joiner's loadout when the story recruits them (the pool is built; the Lab and the pause menu use it) | Stage 15 |
+| Done in stage 15: the Ruckus gauge is a save field and a story fight starts with the saved value | |
+| Done in stage 15 for chapter 1: story fights pay Vibe Points, the victory card, level and VP migration. Chapters 2 to 10 follow in stages 17 and 18 | |
+| Done in stage 15: a late joiner's loadout is created when the story recruits them or the bench takes them | |
 | Chapter 1 story fights win by HP only: no Warmth bar, no WARMTH command, no "likes" list; kindness plays in the scene after a boss reaches 0 HP (Gemini chapter 1 report, row 1.2 "Win Condition & Enemy Bars", retired card c-gem-pillar-hp). Battle 3 already has none of these; battle 2 still shows them (`engine/battle2-ui.js`). Stage 15's chapter test checks no Warmth bar or WARMTH command appears in any chapter 1 fight, and no chapter 1 scene step reads a Warmth result (risk 3's reference list). | Stage 15 (chapter 1 switch); stage 23 deletes Kindness in battle |
 | The simple player (`b3Auto`) rarely picks the second-Vibe shield and ally-buff Skills in short fights; fine for tests. Rose Mode's recommended move no longer uses it (stage 7 built `b3Recommend`) | Stage 14 only if the balance pass needs the simple player to match |
 | Rose Mode icons are battle 2's emoji and pixel pictures plus a few new ones (`engine/b3-pictures.js`); a drawn set is not planned | Only if Tom asks |
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 14)
+## Next conversation (stage 17)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for stage 13 are in `claude/next-addendum-b3s13.md`; where it and this file differ, it wins until stage 14 folds it in.
+Follows `claude/handoff-rules.md`. Facts for stage 15 are in `claude/next-addendum-b3s15.md` and `docs/handoff/b3s15.md`; where they and this file differ, they win until stage 17 folds them in. Stage 16 (Tombo skins) is skipped on purpose for now: it asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions. A stage 16 card can be made when Tom wants it.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 14: the balance pass on Part 1. Data only, no engine file changed. It measures every Lab fight in the simulator first (NEW 1 to NEW 66), then retunes monster HP, Attack, Defense, Speed, pips and act power until every Part 1 boss takes 5 to 7 rounds for the plain player and normal fights stay short; before and after tables go in `docs/BATTLE3.md` and the Project notes. Board card c-b3s14. |
-| 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
-| 3 | Model | Claude Sonnet 5.5 (row C: the numbers to change are found in the session, no engine work). |
-| 4 | Effort level | Medium (the architecture sets medium; it is data and the simulator checks every change). |
-| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s13.md, then build stage 14 (the balance pass on Part 1: chapters 1 to 10 and the bonus chapter) of the new battle system. Data only: change no engine file. First run node tools/b3-sim.js with a fight id and 100 as the run count (for example node tools/b3-sim.js new6 100) for every Lab fight new1 to new66 and keep the before table. Then change monster rows (HP, Attack, Defense, Speed, pips, act power) one change at a time, starting from what is closest, until every boss fight (new6, new16, new21, new27, new32, new38, new44, new50, new56, new62, new66) takes 5 to 7 rounds for the plain player and normal fights stay short. Keep bestiary-v11 as the starting point and record each number you changed in docs/BATTLE3.md. Run node tools/b3-sim.js check and python3 tools/b3_test.py s13 before each push. Board card c-b3s14. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s14 (it moves this card to In progress and links your conversation). Attach trivituso81/adventures-of-tom with push access (add_repo).` |
+| 1 | What it will do | Builds stage 17: chapters 2 to 5's story fights on Battle 3 behind the same switch, with VP, tips and a chapter test each. Board card c-b3s17. |
+| 2 | Before you paste | Play chapter 1 on the new battle (Milestone B, card t-milestoneb on the board) and send your notes. |
+| 3 | Model | Claude Sonnet 5.5 (row C: a build across several files with the steps not yet written; none of the three Fable conditions holds). |
+| 4 | Effort level | High (large: four chapters of scene references and four chapter tests). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s15.md, then build stage 17 of the new battle system: the story switch for chapters 2 to 5. First read the Milestone B card (t-milestoneb) in data/board.json: Tom's note and answer are on it and in this card's history, and they come first. Then list every battle 2 reference in chapters 2 to 5's scenes by kind (start a fight, read a result, unlock a Tombo, tutorial) in docs/BATTLE3.md next to the stage 15 table, and replace only those. Then, following docs/handoff/b3s15.md: add chapters 2 to 5 to B3_STORY.chapters one chapter at a time (b3s17a chapter 2, b3s17b chapter 3, b3s17c chapter 4, b3s17 chapter 5), give each chapter's fights Vibe Points and rewritten Battle 3 tips in data/b3-story.js, keep OLD working on the same save, and no Warmth bar or WARMTH command in any of these fights. Write one start-to-finish test per chapter from Chapter Select, modeled on tools/ch1_b3_test.py (portrait and landscape, look at the frames). Run node tools/b3-sim.js check, python3 tools/b3_story_test.py, python3 tools/b3_test.py for what you touched and python3 tools/smoke.py before each push. Never ask me to review an animation. Board card c-b3s17. Your first push is the commit board: start c-b3s17. When it ships, create the Milestone C card for me (ask play, after of this card) and set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo).` |
 
-If a session fails stage 14 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
+If a session fails stage 17 the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
-Facts the next session needs are in `claude/next-addendum-b3s13.md` and `docs/handoff/b3s13.md`.
-
-Each stage ends by updating the stage board above, writing `docs/handoff/<tag>.md` in the repo, and updating item -8 in `claude/next.md`.
+Each stage ends by updating the stage board above and writing `docs/handoff/<tag>.md` in the repo.
