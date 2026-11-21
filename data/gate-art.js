@@ -14,7 +14,7 @@
 // everyone standing on or south of the rectangle, so it never covers a character. Test: python3 tools/gate_art_test.py
 const GATE_V='gatelayer1';
 // Pictures baked so far (bake_gate_art.py rewrites this line; the game asks for no other file, so a picture still waiting in the Art Library is never fetched).
-const GATE_HAVE=['backlot-stage7-locked','blvd-studio-locked','blvd-trail-locked','jpark-barn-locked','jpark-oak-locked','row-amyhouse-locked','row-amyhouse-open','row-pier-locked','stage7-catwalk-locked','town-hollow-locked','town-school-locked'];
+const GATE_HAVE=['backlot-stage7-locked','backlot-stage7-open','blvd-studio-locked','blvd-studio-open','blvd-trail-locked','jpark-barn-locked','jpark-barn-open','jpark-oak-locked','row-amyhouse-locked','row-amyhouse-open','row-pier-locked','stage7-catwalk-locked','town-hollow-locked','town-school-locked','town-school-open'];
 const GATE_ART={
   'town-hollow':     {map:'town',     rect:[7,3,2,2],         fit:1.15, states:['locked']},
   'town-school':     {map:'town',     rect:[27.85,8,1.55,1.7], fit:.66,   states:['locked','open']},   // under the SCHOOL sign, between its posts (Tom 11-20 report 5nwp)

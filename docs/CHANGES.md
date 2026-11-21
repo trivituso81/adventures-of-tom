@@ -1,3 +1,22 @@
+## 2026-11-21 (4): Art Library bake, 7 entries (`artbake1563`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- prop-gate-town-school-open: background keyed from the corner colour rgb(193, 16, 94)
+- prop-gate-town-school-open: `bake_gate_art.py town-school open` ran from art/raw/props/prop-gate-town-school-open-v1.png
+- prop-gate-jpark-barn-open: background keyed from the corner colour rgb(213, 14, 102)
+- prop-gate-jpark-barn-open: `bake_gate_art.py jpark-barn open` ran from art/raw/props/prop-gate-jpark-barn-open-v1.png
+- prop-gate-blvd-studio-open: background keyed from the corner colour rgb(218, 10, 101)
+- prop-gate-blvd-studio-open: `bake_gate_art.py blvd-studio open` ran from art/raw/props/prop-gate-blvd-studio-open-v1.png
+- prop-gate-backlot-stage7-open: background keyed from the corner colour rgb(209, 3, 87)
+- prop-gate-backlot-stage7-open: `bake_gate_art.py backlot-stage7 open` ran from art/raw/props/prop-gate-backlot-stage7-open-v1.png
+- prop-item-solo-amy_chm1: background keyed from the corner colour rgb(232, 16, 103)
+- prop-item-solo-amy_chm1: `bake_item_sheet.py item-solo-amy_chm1 --grid=1 amy_chm1` ran from art/raw/props/prop-item-solo-amy_chm1-v1.png
+- prop-item-solo-claytaco: background keyed from the corner colour rgb(219, 7, 104)
+- prop-item-solo-claytaco: `bake_item_sheet.py item-solo-claytaco --grid=1 claytaco` ran from art/raw/props/prop-item-solo-claytaco-v1.png
+- prop-item-solo-g_bsash: background keyed from the corner colour rgb(213, 14, 101)
+- prop-item-solo-g_bsash: `bake_item_sheet.py item-solo-g_bsash --grid=1 g_bsash` ran from art/raw/props/prop-item-solo-g_bsash-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## idea-tomgrace (2026-11-21): Tom, Grace, Rose and Deedee never show an old painted frame in the new battle; a moment with no video of its own shows one of their videos
 
 Card c-idea-tomgrace. Tom: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ver used in battle. Only new video animations".
