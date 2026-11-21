@@ -18413,7 +18413,7 @@
   {
    "id": "t-refresh1-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -18430,8 +18430,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by build refresh1 (card c-refresh1)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T00:47:16.989Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-clipstuck1",
