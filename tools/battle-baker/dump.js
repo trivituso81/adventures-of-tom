@@ -1,5 +1,5 @@
 // node tools/battle-baker/dump.js [repoRoot] > dump.json
-// Reads the live game files and prints what the Battle Voice Baker needs:
+// Reads the live game files and prints what the Voice Library script resolution (build.py here) needs:
 //   lines    LINES from data/lines.js (every spoken battle line per character and kind)
 //   voices   VOICE_CLIPS.voices (voice ids, settings, saved scripts, Nara's sound prompts)
 //   clips    for each character: which texts have a baked clip, and under which kinds (no audio)

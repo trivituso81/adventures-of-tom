@@ -112,7 +112,7 @@
 {"tag":"npcvoice2","at":"2026-11-09T10:25:03-08:00","what":"The Voice Library now shows the rewritten NPC directions"},
 {"tag":"npcvoice1","at":"2026-11-09T10:12:27-08:00","what":"Every townsperson's voice direction rewritten for emphasis, personality and dry humor"},
 {"tag":"Square5","at":"2026-11-05T19:11:14-08:00","what":"Rebase tags, CHANGES 270, Moss off the teapot"},
-{"tag":"nobake1","at":"2026-11-02T11:15:03-08:00","what":"Remove Bake Voices and Recast Justin (admin entries, pages, data, tools, docs)"},
+{"tag":"nobake1","at":"2026-11-02T11:15:03-08:00","what":"Remove Bake Voices and Recast Justin (admin entries, pages, data, tools, docs)","card":"c-keysecrets5","theme":"Tools"},
 {"tag":"freeze2","at":"2026-11-02T11:13:41-08:00","what":"Rose1_dc gets a reaction while Tom explains the loaf"},
 {"tag":"sw1","at":"2026-11-02T11:00:30-08:00","what":"Service worker (cache first for ?v= files, 304 revalidation for untagged), tag check in smoke, sw_test"},
 {"tag":"row3","at":"2026-11-02T10:23:24-08:00","what":"Install Rivituso Row v3 painting with cutout layer, rebuilt walk map, doors and scripted coordinates"},

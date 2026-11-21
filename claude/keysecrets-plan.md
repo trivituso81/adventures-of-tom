@@ -26,8 +26,8 @@ An entry made from Tom's own photo (`own` field, 14 entries, all approved today)
 | c-keysecrets1 | Art Library pictures through art-gen | built (keysecrets1) |
 | c-keysecrets2 | Art Library videos (GENERATE VIDEO, GENERATE CHAPTER) through clip-gen; remove the xAI key and Relay boxes and the browser video code | built (keysecrets2) |
 | c-keysecrets3 | Voice Library takes and Script Editor takes through a new ElevenLabs Action; remove the ElevenLabs key box | not started |
-| c-keysecrets4 | Music Library makes through a new music Action | not started |
-| c-keysecrets5 | recast pages and the baker templates (`aot-baker-key`) | not started, needs a design call |
+| c-keysecrets4 | Music Library makes through a new music Action | built (keysecrets4) |
+| c-keysecrets5 | recast pages and the baker templates (`aot-baker-key`) | retired, not moved (keysecrets5) |
 
 A key box goes away only in the build that moves its last button. Until then its label says what it is still for.
 
@@ -40,3 +40,12 @@ A key box goes away only in the build that moves its last button. Until then its
 ## Built in keysecrets2 (videos)
 
 Same pattern as pictures with its own file and branch: `data/clip-requests.json` (message "clip: generate <id or group>"), the `clip-gen` Action with `--requests` (it also approves, so there is no browser review step for a made clip), the report on branch `clipgen` (`clipgen-report.json`: `mode`, `at`, `asked`, `approved`, `held`, `still`, `failed`, `blocked`, `skipped`, `spent`), `clipPoll` in `engine/art-clips.js` every 20 s. A request carries `cap` (the job stops before passing it, hard limit $40). Videos the gate holds or that hardly move stay on branch `clipgen`; the page shows the reason and the press is made again with GENERATE VIDEO. Facts: docs/CHANGES.md "keysecrets2".
+
+## Built in keysecrets5 (recast and baker pages)
+
+Call made: retire, do not move. Nothing that asked for `aot-baker-key` had been used since 2026-11-02, so there was nothing to move to an Action.
+- Deleted: `recast-deedee.html` (used once, 2026-11-02), the Ellie, Grace and Justin recast bakers in `tools/voice-recast/`, the Battle Voice Baker page (last used 2026-11-01) and the Contraction Fix Baker page (2026-10-28).
+- Kept because the Voice Library index needs them: `tools/battle-baker/build.py` (cut to script resolution), `dump.js`, `handscripts.txt` (run by `tools/voice-library/battle-scripts.py`), and `tools/voice-recast/dialogue-lines.json` (read by `tools/clip-audit/dd_lines.js`).
+- Left on purpose: `aot-el-key` in `voices.html` and `engine/script-voice.js` (Voice Library and Script Editor takes). It is in use and moves in c-keysecrets3.
+- A future voice recast is a new card: an Action designs the voice with the repo secret, a page plays the previews.
+- Old failure, not caused here: `python3 tools/board_sync_test.py` fails on R5 (it replays the live board and expects a state from 2026-11-20 15:10 UTC) and fails the same on main.

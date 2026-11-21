@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Build Battle-Voice-Baker.html: every battle voice line for every character (Tom, Grace, Rose, Amy, Deedee,
-Boppy, TNB, Nara). Run from the repo root:   python3 tools/battle-baker/build.py [out.html]
+"""Script resolution for the Voice Library index (run by tools/voice-library/battle-scripts.py, which executes this file).
+The Battle Voice Baker page this file used to build was retired (keysecrets5, 2026-11-20): it asked for an ElevenLabs key
+and nobody had used it since 2026-11-01.
 
 Script for each line (what ElevenLabs reads) comes from, in order:
   1. the script saved with the live clip (data/voice-clips.js voices.<ch>.scripts)       -> src "baked"
@@ -14,7 +15,6 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.pat
 sys.path.insert(0, os.path.join(REPO, 'tools', 'clip-audit'))
 from keepscript import convert, check, caps_from_text
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, 'tools', 'battle-baker', 'out', 'Battle-Voice-Baker.html')
 D = json.loads(subprocess.check_output(['node', os.path.join(HERE, 'dump.js'), REPO]))
 ORDER = ['tom', 'grace', 'rose', 'amy', 'deedee', 'boppy', 'tnb', 'nara']
 NAMES = {'tom': 'Tom', 'grace': 'Grace', 'rose': 'Rose', 'amy': 'Amy', 'deedee': 'Deedee', 'boppy': 'Boppy', 'tnb': 'TNB', 'nara': 'Nara'}
@@ -108,42 +108,3 @@ def resolve(ch, kinds, text, live_scripts):
         print('  hand script failed contraction check, using auto:', ch, text)
     return auto(ch, text), 'auto'
 
-# ---------- items ----------
-chars = []; report = {}
-for ch in ORDER:
-    live = D['voices'].get(ch, {}); lines = D['lines'].get(ch, {}); clips = D['clips'].get(ch, {})
-    seen = {}; order = []
-    for kind, texts in lines.items():
-        for t in texts:
-            if t not in seen: seen[t] = []; order.append(t)
-            if kind not in seen[t]: seen[t].append(kind)
-    items = []; cnt = {'baked': 0, 'hand': 0, 'auto': 0, 'noclip': 0}
-    for i, t in enumerate(order):
-        kinds = seen[t]; have = clips.get(t, [])
-        kind = next((k for k in kinds if k in have), kinds[0])   # keep the clip where it already lives
-        it = {'id': ch + ':' + str(i), 'text': t, 'kinds': kinds, 'kind': kind, 'has': bool(have)}
-        if not have: cnt['noclip'] += 1
-        if ch == 'nara':
-            pr = live.get('prompts', {}); p = next((pr[k + '|' + t] for k in kinds if (k + '|' + t) in pr), None) or next((v for k, v in pr.items() if k.split('|', 1)[1] == t), None)
-            it['prompt'] = (p or {}).get('p') or 'Friendly medium-size dog, happy excited barks.'; it['dur'] = (p or {}).get('d') or 2
-            it['src'] = 'baked' if p else 'auto'
-        else:
-            sc, src = resolve(ch, kinds, t, live.get('scripts', {}))
-            if ch == 'tnb' and re.search(r'well, well, well', t, re.I) and src != 'baked': sc = www(sc)
-            it['script'] = sc; it['src'] = src
-        cnt[it['src']] = cnt.get(it['src'], 0) + 1
-        items.append(it)
-    st = live.get('settings') or {}
-    chars.append({'id': ch, 'name': NAMES[ch], 'items': items,
-                  'voice': {'voice_id': live.get('voice_id', ''), 'name': live.get('name', ''), 'model': live.get('model', 'eleven_v4'),
-                            'stability': st.get('stability', 0.5), 'similarity': st.get('similarity_boost', 0.85), 'direction': live.get('direction', '')},
-                  'accent': ACCENT.get(ch, ''), 'sfx': ch == 'nara', 'sfxModel': live.get('model'), 'influence': live.get('prompt_influence', 0.5)})
-    report[ch] = cnt
-
-data = {'built': datetime.date.today().isoformat(), 'chars': chars, 'voicesLive': D['voices']}
-js = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
-head = open(os.path.join(HERE, 'tpl_head.html'), encoding='utf8').read(); body = open(os.path.join(HERE, 'tpl_body.js'), encoding='utf8').read()
-os.makedirs(os.path.dirname(OUT), exist_ok=True)
-open(OUT, 'w', encoding='utf8').write(head.rstrip()[:-len('/*__DATA__*/;')] + js + ';\n' + body)
-print(OUT, round(os.path.getsize(OUT) / 1024), 'KB')
-for ch, c in report.items(): print(' ', ch, c)

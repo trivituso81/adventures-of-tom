@@ -108,7 +108,7 @@ for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch
 // Tom 21:08: Boppy is sweet, fun-loving, a joker and a complainer (no "gruff", no "gravelly"; scripts say so). Tom 21:25: Boppy then
 // sounded too high, so his voice direction is "thick New York accent, deep voice" and his similarity is back at the voice entry's 1.0
 // (0.75 made him higher); merges deepen his clips again (pitch 0.9). Justin is direct and serious (no "warm").
-// Deedee recast (Tom, 2026-11-02): new ElevenLabs voice from recast-deedee.html. Baked data keeps the old id, so it is overridden here, as for Boppy.
+// Deedee recast (Tom, 2026-11-02): new ElevenLabs voice from the recast page (retired, keysecrets5). Baked data keeps the old id, so it is overridden here, as for Boppy.
 // No voice direction at all (89 put a 20-word one here and takes doubled and tripled the phrase, see CHANGES 90): each line's own short tags carry the acting.
 for(const k of ['battle|deedee','dialog|deedee']){ const v=voices[k]; if(!v) continue;
   v.voice_id='nh4f8rul91SCFqbXpyM0'; v.direction=''; }
@@ -152,7 +152,7 @@ for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]
 // "mellow, laid-back, low-key" goes into every bracket of every TNB script (ACCENT above), and a steadier voice setting keeps takes from getting effusive.
 for(const k of ['dialog|tnb','battle|tnb']) if(voices[k]&&voices[k].stability<.6) voices[k].stability=.6;
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
-// Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy (tools/clip-audit/merge.py); Grace gets none.
+// Merge effects: battle clips only deepen Boppy (the retired battle baker merge); dialogue adds speaker or voice fx, Boppy (tools/clip-audit/merge.py); Grace gets none.
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||(CAST.voices[voice]&&CAST.voices[voice].fx));
 
 // ---------- items ----------

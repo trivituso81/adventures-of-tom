@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Write tools/voice-library/battle-scripts.json for the Voice Library (and the Voice Baker v2): {"ch|kind|text": script} for every line in data/lines.js.
-Reuses the Battle Voice Baker's script resolution (tools/battle-baker/build.py): the live saved script, else the
+"""Write tools/voice-library/battle-scripts.json for the Voice Library: {"ch|kind|text": script} for every line in data/lines.js.
+Reuses the script resolution (from the retired Battle Voice Baker) (tools/battle-baker/build.py): the live saved script, else the
 hand-written direction (handscripts.txt, extra-battle.json, adapted with keepscript.py), else an automatic direction.
 Usage (repo root): python3 tools/voice-library/battle-scripts.py"""
 import sys, os, json

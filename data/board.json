@@ -16568,13 +16568,13 @@
    "theme": "Tools",
    "tag": "keysecrets5",
    "title": "Recast and baker pages: key boxes",
-   "next": "Decides what to do with the voice recast pages and the baker templates that still ask for a key.",
+   "next": "The recast and baker pages that asked for a key are retired in keysecrets5 (none was used since 2026-11-02). The only key box left is aot-el-key in the Voice Library and Script Editor, which card c-keysecrets3 moves to an Action.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukG9K6Rpr6n2qBhKfoJ",
-    "opening": "pasted by Tom from the board"
+    "opening": "Read claude/keysecrets-plan.md. List every page that still asks for an API key"
    },
    "prompt": {
     "what": "Settles the last pages that ask for an API key (recast-deedee.html, recast-justin.html, the baker templates under tools/).",
@@ -16611,8 +16611,41 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Audit (grep aot-baker-key and aot-el-key, plus a scan for any other key box): five groups of pages ask for an ElevenLabs key."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "recast-deedee.html: last used 2026-11-02 (docs/CHANGES.md 84 to 89: Tom picked the new Deedee voice, id installed in make-index.js). Not used since, linked from nowhere. Retired: page, source and builder deleted."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Ellie, Grace and Justin recast bakers (tools/voice-recast template.html, build.js, build-grace.js, grace-library.js, merge tool, tests): last used 2026-10-31 (Justin, whose page nobake1 deleted on 2026-11-02) and 2026-10-28 (Grace). Never committed as pages, only built on demand. Retired."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Battle Voice Baker page: last used 2026-11-01 (clips5, Tom's phone clips merged); the Voice Library replaced it on 2026-11-02. Retired. Kept: tools/battle-baker/build.py cut to its script-resolution half, dump.js and handscripts.txt, because tools/voice-library/battle-scripts.py runs them to build the Voice Library index (battle-scripts.json checked identical before and after)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Contraction Fix Baker page (tools/clip-audit build.py, templates, page tests): used 2026-10-28 for the contraction fix (255 clips merged), never since. Retired; the audit and merge scripts stay."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "voices.html and engine/script-voice.js (key aot-el-key): STILL USED, it is the Make a take button in the Voice Library and Script Editor. Not moved here on purpose: it moves to an Action in card c-keysecrets3 (open, its own conversation, edits those same two files). Reason written here so the box is not left unexplained: this card does not touch them to avoid two conversations rewriting one page. Nothing for Tom to decide."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Only other key box in the repo: the GitHub token box in the Art Library setup card, which stays by design (a browser cannot read a repo secret; claude/keysecrets-plan.md)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built keysecrets5: no page asks for aot-baker-key any more (grep finds zero in code), docs and comments purged (CLAUDE.md, docs/VOICE.md, docs/VOICE_LIBRARY.md, READMEs). Tests: battle-scripts.py output identical, board_check, tag check."
     }
-   ]
+   ],
+   "after": "nothing for Tom: c-keysecrets3"
   },
   {
    "id": "c-voiceauto1",

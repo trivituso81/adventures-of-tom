@@ -11,7 +11,7 @@ out = sys.argv[1] if len(sys.argv) > 1 else '/tmp/gracevoice'; os.makedirs(out, 
 fails = []
 
 # 1
-for f in ['tools/voice-library/merge-local.js', 'tools/clip-audit/merge.py', 'tools/voice-library/speedup-voice.py', 'tools/voice-recast/merge-voice.js']:
+for f in ['tools/voice-library/merge-local.js', 'tools/clip-audit/merge.py', 'tools/voice-library/speedup-voice.py']:
     if 'asetrate' in open(os.path.join(ROOT, f), encoding='utf8').read(): fails.append('asetrate still in ' + f)
 
 

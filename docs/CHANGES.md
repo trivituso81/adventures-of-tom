@@ -1,3 +1,14 @@
+## keysecrets5 (2026-11-20): the recast and baker pages that asked for a pasted key are retired
+
+Card c-keysecrets5, stage 5 of 5 (plan: `claude/keysecrets-plan.md`). Call made: none of these pages was still needed, so none was moved to an Action; they are deleted (git history keeps them). `grep aot-baker-key` now finds nothing in the repo.
+- `recast-deedee.html` (+ `tools/voice-recast/recast-deedee.src.html`, `build-deedee.js`): used once, 2026-11-02 (CHANGES 84 to 89: Tom picked the new Deedee voice, id `nh4f8rul91SCFqbXpyM0` is installed in `make-index.js`). Linked from nowhere. Deleted.
+- The Ellie, Grace and Justin recast bakers (`tools/voice-recast/` `template.html`, `build.js`, `build-grace.js`, `grace-library.js`, `merge-voice.js`, `test_baker.py`, `test_grace_baker.py`): last used 2026-10-31 (Justin page, which `nobake1` deleted on 2026-11-02) and 2026-10-28 (Grace). The pages were never committed, only built on demand. Deleted.
+- The Battle Voice Baker page (`tools/battle-baker/` `tpl_body.js`, `tpl_head.html`, `test.py`, `merge.js`): last used 2026-11-01 (`clips5`, Tom's phone clips merged); the Voice Library replaced it on 2026-11-02. Deleted. `build.py` is kept but cut to its script-resolution half, because `tools/voice-library/battle-scripts.py` runs it for the Voice Library index (`dump.js` and `handscripts.txt` stay for the same reason). Checked: `battle-scripts.py` writes the identical `battle-scripts.json` before and after.
+- The Contraction Fix Baker page (`tools/clip-audit/` `build.py`, `tpl_body.js`, `tpl_head.html`, `btest.py`, `ptest.py`, `ptest2.py`): used 2026-10-28 for the contraction fix (255 clips merged). Deleted; the audit and merge scripts stay.
+- Docs and comments purged: CLAUDE.md (voice limit paragraph, keysecrets1 paragraph), `docs/VOICE.md` items 6 and 7, `docs/VOICE_LIBRARY.md`, `tools/voice-recast/voice-limit-note.md`, `tools/battle-baker/README.md`, `tools/clip-audit/README.md`, comments in `make-index.js` and `battle-scripts.py`, `.gitignore`, and the merge-voice path in `tools/grace_voice_test.py`.
+- Not touched: `voices.html` and `engine/script-voice.js` still hold the `aot-el-key` box. That is the Voice Library and Script Editor take button, in use, and it moves to an Action in card c-keysecrets3 (open). `aot-el-key` is the only key box left in the repo besides the GitHub token box in the Art Library.
+- A future voice recast is a new card (an Action designs the voice with the repo secret, a page plays the previews); nothing here blocks that.
+
 ## idea-skippingcut (2026-11-20): SKIP now passes close-up pictures that only show something (Grace's list and similar); item finds and party joins and leaves still play in full
 
 Card c-idea-skippingcut (merged with c-idea-skippingscene). Tom (11-20): "When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped", and "any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well".
@@ -7,12 +18,14 @@ Card c-idea-skippingcut (merged with c-idea-skippingscene). Tom (11-20): "When s
 - Not marked, on purpose (they stay in full under SKIP): every item find (coins, badges, bulbs, hat, binder, coffees, photo for the plane, jar, crock), party join and leave banners and the item banner, close-ups that are puzzles to play, and choices and fights.
 - Test: `python3 -I tools/skip_interstitial_test.py` (wrapped picture skipped; same picture opens with SKIP off; an item reveal still opens under SKIP; a party join banner still shows; Grace's list is wrapped); `tools/closeup_ch13_test.py` now finds the wrapped step; `tools/skip_chain_test.py` still passes.
 
+
 ## fix-keysecrets2-try-6 (2026-11-21): the answer to GENERATE VIDEO stays on the card after the page is closed
 
 Card c-fix-keysecrets2-try-6. Tom (t-keysecrets2-try): "Approved: art/raw/clips/clip-toad-idle-v1.mp4, art/raw/clips/clip-toad-idle-v2.mp4, art/raw/clips/clip-toad-idle-v3.mp4, art/raw/clips/clip-toad-idle-v4.mp4, art/raw/clips/clip-toad-idle-v5.mp4".
 - Fact: the job worked every time (runs of 23:38, 00:09 and 00:25 UTC each approved `clip-toad-idle`; v6 was made at 00:28). The line Tom saw is the permanent list of approved files, not the answer to his press. The answer ("Made and approved") lived only in the open page, so reopening it showed only the list.
 - Fix (a recommendation, not proven on a phone): `clipPoll` now saves each answer on the device (`aot-clip-last`) and the page shows it on reopening as "Last press, <time>: Made and approved...". Tag `art-clips.js?v=fix-keysecrets2-try-6`. `keysecrets2_test.py` has a new check.
 - Not done: nothing else changed. Each press makes another version (about $0.26); five or six versions of the Toad idle now exist.
+
 
 ## fix-keysecrets2-try-5 (2026-11-21): the button no longer stays on ASKED, WAITING after the video is made and approved
 

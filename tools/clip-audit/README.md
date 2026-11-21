@@ -12,6 +12,6 @@ Pipeline (scratch dir SP, model sherpa-onnx whisper base.en from the k2-fsa/sher
 4. `python3 analyze.py SP N` writes SP/bad.json: clips whose audio says the long form of an on-screen contraction.
 5. `python3 merge_list.py SP` (needs fixtext.py) adds lines whose wording was fixed, writes final.json; `python3 speakers.py` adds the on-screen speaker (merge effects depend on it).
 6. Recover the hand-written scripts into orig-scripts.json ({index in final.json: {script, source}}) from the Project's claude/dialogue-scripts-*.json and voice-baker-scripts*.json. NEVER build a baker from auto-tags when a hand-written script exists: keepscript.py keeps every tag and pause and only swaps words that differ by a contraction (2026-10-28: the first baker lost Tom's directions; fixed).
-7. `node baked_extract.js` then `python3 build.py final.json` builds out/Contraction-Fix-Baker.html; `python3 btest.py` runs it against a mocked ElevenLabs.
+7. (Retired in keysecrets5, 2026-11-20: the baker page this step built asked for an ElevenLabs key. `build.py`, its template and its tests were deleted; git history has them.)
 8. `python3 silence.py final.json REPO` removes the mismatched clips so those lines are silent until re-baked.
 Paths inside the scripts point at /home/claude/bk and the scratch dir; adjust when rerunning.
