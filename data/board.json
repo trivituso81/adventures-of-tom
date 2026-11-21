@@ -10154,6 +10154,11 @@
    "backlog": {
     "at": "2026-11-20",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "where the family stands, who is hidden and whether the group reads right are composition a person judges"
    }
   },
   {
@@ -26824,6 +26829,11 @@
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "it asks whether fights are fun, the pace feels right and the family moves feel like them; a test browser cannot judge that"
    }
   },
   {
@@ -28430,6 +28440,11 @@
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-21T21:23:19Z",
+    "verdict": "yours",
+    "why": "it asks whether fights are fun and the pace is right across five chapters; that is taste, though a stalled fight is a fact worth a fix card if Tom reports one"
    }
   },
   {
@@ -29226,13 +29241,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
+    "url": "https://claude.ai/code/cse_01RXeukCyeLid5X3G7fCCX31",
     "opening": "not started"
    },
    "nightly": true,
@@ -29264,6 +29279,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T21:20:08.394Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29279,7 +29298,7 @@
     "date": "2026-11-21",
     "build": "nightclean-1121"
    },
-   "start": true
+   "started_at": "2026-11-21T21:23:06+00:00"
   },
   {
    "id": "c-bigone25",
@@ -29474,13 +29493,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFNYZ6EPr9NbJWrwDh",
+    "url": "https://claude.ai/code/cse_01RXeukFeT21TqMsLGXYQtUR",
     "opening": "not started"
    },
    "nightly": true,
@@ -29499,6 +29518,15 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T21:20:13.196Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "at": "2026-11-21T21:23:19Z",
+     "t": "Night run: t-stagefollowplay, t-milestonec, t-milestoned sorted YOURS. t-gem-bug01play (lose to the Big One, retry starts by itself) is a yes or no fact but this run could not find the retry code path in time; left unmarked for the next night."
     }
    ],
    "prompt": {
@@ -29510,7 +29538,7 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open Tom cards with ask play and no `machine` field, oldest first, backlog included (checking a parked card moves nothing of Tom's except closing it on a pass). 2. For each card: read `next`, `first` and the history, and sort it. YES OR NO (a fact a test browser can see: a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts) or YOURS (how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch, or audio). When in doubt it is YOURS. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Pictures go to branch night under qa/CARDID/DATE/. Pass: the card goes to Done with machine: {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT WAS SEEN\". It is listed under Closed for you on the Last night card. Fail: what Something is wrong does today: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium), and Tom's card waits behind it. 4. YOURS: machine: {at, verdict: \"yours\", why: WHY} so it is not looked at again; the card stays Tom's and its details show \"Needs your eyes: WHY\". Limits (also printed on the Last night card): the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never close a card about how something looks, sounds or feels. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. No paid run of any service. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-21T21:23:06+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -29570,7 +29598,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukeStaZ",
     "opening": "\"I just played through chapter 1 and there's still a lot of voices that are not in the game\""
    },
    "history": [
@@ -29579,6 +29607,29 @@
      "t": "Added after Tom (13:08): \"I just played through chapter 1 and there's still a lot of voices that are not in the game. Can you comb through the entire chapter... and then create a Kanban card where I can generate all of the voices at once?\" Audit: every chapter 1 scene, NPC, monster and cab line was checked against the baked clips in a real browser; 10 lines have no clip. Deedee's 3 battle barks (greet, crisp, win) also have none but the voice job only makes dialogue lines, and Battle 3 plays no spoken move lines."
     }
    ]
+  },
+  {
+   "id": "b-board-ch1voices",
+   "tag": "board-ch1voices",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Voice Clips",
+   "title": "a board card makes chapter 1's 10 missing voices with one tap",
+   "next": "Done: a board card makes chapter 1's 10 missing voices with one tap",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukeStaZ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-ch1voices. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30135,6 +30186,19 @@
    "cards": [
     "c-boppy-bigfish",
     "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukeStaZ",
+   "title": "Make chapter 1's 10 missing voices (one tap, then listen)",
+   "first": "2026-11-21T13:22:21-08:00",
+   "last": "2026-11-21T13:22:31-08:00",
+   "tags": [
+    "board-ch1voices",
+    "docs"
+   ],
+   "cards": [
+    "t-ch1voices"
    ]
   },
   {
@@ -33967,8 +34031,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "8855c16a226b6db9fc8de2f4fd88c6e55d4d678c",
- "synced_at": "2026-11-21T21:19:54+00:00",
+ "synced": "abdb15f9e99ec2977771b8b5d2414213a373db74",
+ "synced_at": "2026-11-21T21:23:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
