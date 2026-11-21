@@ -12831,7 +12831,7 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s12",
    "next": "Shipped as b3s12 in three parts (b3s12a chapter 5, b3s12b chapter 6, b3s12 chapter 7): 16 monsters and adds, The Red Pen, Chairman Cheeks, The Unread, 17 formations, Lab fights NEW 28 to NEW 44. Nothing is asked of Tom. Next: c-b3s13.",
    "blocks": [],
@@ -12900,6 +12900,10 @@
     {
      "d": "2026-11-20",
      "t": "Final part pushed as b3s12: chapter 7 (6 formations, The Unread, Lab fights NEW 39 to NEW 44). Stage 12 complete. Next: c-b3s13."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s12: New battle: the chapter 7 library monsters and The Unread join the Battle Lab (stage 12 complete)"
     }
    ],
    "prompt": {
@@ -12916,7 +12920,8 @@
     "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
     "opening": "started by START"
    },
-   "started_at": "2026-11-20T23:51:48+00:00"
+   "started_at": "2026-11-20T23:51:48+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "t-gem-canon01play",
@@ -13345,10 +13350,14 @@
      "d": "2026-11-21",
      "t": "ended without shipping: this START run has no Project tools (project_info, project_read, project_delete), so the move cannot run here (same as 2026-11-20). Nothing pushed except this note, nothing deleted from the Project. Needs a conversation opened inside the Little Elsewhere Project: Copy prompt, Sonnet 5.5, effort medium.",
      "at": "2026-11-21T03:05:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFom7Aamq1fxhQ57th",
+    "url": "https://claude.ai/code/session_01RXeukFom7Aamq1fxhQ57th",
     "opening": "\"all of the Claude cards that are in needs attention status\""
    },
    "started_at": "2026-11-21T02:58:24+00:00"
@@ -20144,8 +20153,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-184534-ict4, r-20261120-185740-5nwp. First note: Should go straight from tnb's text to the airport animation",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-185740-5nwp. First note: the locked fence icon needs to be within the area underneath the School sign",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -20176,6 +20185,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 1 report(s)."
     }
    ],
    "blocks": [],
@@ -20429,6 +20442,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFom7Aamq1fxhQ57th",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-21T03:02:14Z",
+   "last": "2026-11-21T03:02:14Z",
+   "tags": [],
+   "cards": [
+    "c-projclean"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukHAM936zjWpzVgYRp9",
    "title": "Merge 2 new voice takes",
@@ -20790,6 +20813,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
+   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
+   "first": "2026-11-20T17:27:52-08:00",
+   "last": "2026-11-20T19:01:55-08:00",
+   "tags": [
+    "b3s12a",
+    "b3s12b",
+    "b3s12"
+   ],
+   "cards": [
+    "c-b3s12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFHUxGjPYqYd39CFN9",
    "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
    "first": "2026-11-20T18:50:56-08:00",
@@ -20841,19 +20878,6 @@
    "tags": [],
    "cards": [
     "c-ch2lessons"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCXuJ3gjXrFd37Vn42",
-   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
-   "first": "2026-11-20T17:27:52-08:00",
-   "last": "2026-11-20T18:31:21-08:00",
-   "tags": [
-    "b3s12a",
-    "b3s12b"
-   ],
-   "cards": [
-    "c-b3s12"
    ]
   },
   {
@@ -23202,8 +23226,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "004183ffa64f7a4abd312739af4ea2b710099eba",
- "synced_at": "2026-11-21T03:01:50+00:00",
+ "synced": "e1c21e338084fd45931c678e0fbcab9fedf842f3",
+ "synced_at": "2026-11-21T03:03:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
