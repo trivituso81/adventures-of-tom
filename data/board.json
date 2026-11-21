@@ -19965,7 +19965,7 @@
      ],
      "skipped": [],
      "failed": [],
-     "spent": 0.0
+     "spent": 0
     }
    },
    "chat": {
@@ -23808,7 +23808,7 @@
    "title": "Approve the AI Costs layout for the Duo",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "On your Duo open https://trivituso81.github.io/adventures-of-tom/docs/costs-duo-mock.html . It is a drawing with typed numbers, and only Overview and Ledger are drawn. Folded: you see the pocket layout, and the Overview and Ledger tabs at the bottom switch. Unfold it and turn it sideways: it changes to two panes that meet at the fold, the list on the left and what you tapped on the right. Held upright while open, it shows the folded drawing with spare room below; the build fills that room (tiles four across, more on each row). Then tap one answer. Your answer starts the card \"AI Costs on the Duo: folded and unfolded layouts\" by itself.",
    "choices": [
@@ -23828,8 +23828,15 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-costsduoplan (build costsduoplan) with the drawing and the plan."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Build it as drawn",
+     "at": "2026-11-21T16:45:19.264Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Build it as drawn"
   },
   {
    "id": "c-costsduo1",
