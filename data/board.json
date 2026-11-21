@@ -24058,6 +24058,55 @@
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-tom-dodge-ner3 in data/board.json with its history. Your first push is the commit board: start c-anim-tom-dodge-ner3.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Needs to be generated\n\nThe animation: Tom, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-tom-dodge-ner3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Tom, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-anim-grace-dodge-p7wh",
+   "tag": "anim-grace-dodge-p7wh",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Animation note: Grace, Dodge",
+   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Make",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "anim": {
+    "id": "body:grace:dodge",
+    "owner": "grace",
+    "ownerName": "Grace",
+    "name": "Dodge",
+    "kind": "state",
+    "clip": "",
+    "painted": true,
+    "what": "body state dodge"
+   },
+   "notes": [
+    {
+     "at": "2026-11-21T17:02:52.041Z",
+     "words": "Make",
+     "build": "b3s17a"
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "A note sent from the Battle Guide"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom, from the Battle Guide: Make",
+     "at": "2026-11-21T17:02:52.041Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes the animation Grace, Dodge again from your note, checks it, and hands it back to you to watch.",
+    "before": [
+     "Nothing to do first. Your note is on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
+    "effort": "medium (one animation, starting from the version that exists)",
+    "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-grace-dodge-p7wh in data/board.json with its history. Your first push is the commit board: start c-anim-grace-dodge-p7wh.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Make\n\nThe animation: Grace, Dodge (body state dodge). It is still an old painted pose with no video.\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-grace-dodge-p7wh. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Grace, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
