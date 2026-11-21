@@ -21303,7 +21303,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-pic2: the approved Paso Robles pose is not in the repo (only art/raw/characters/boppy-em-unimpressed-v1.png, the old Big Fish one). Once it is approved and saved, a session rebakes his mood frames and faces and ships boppy-bigfish.",
@@ -21357,15 +21357,17 @@
     {
      "d": "2026-11-21",
      "t": "Ended without shipping: Tom's card t-boppy-bigfish-pic was marked all good, but no generated picture exists (card has no gen run, no boppy-em-unimpressed-v2 on main or branch artgen, the Art Library entry still lists only v1 in the Big Fish cap). Nothing to install. Parked behind new Tom card t-boppy-bigfish-pic2."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHDMDjx8dfDTwZjaC6",
+    "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-pic2",
-   "start": true,
-   "waiting_on": "tom"
+   "after": "t-boppy-bigfish-pic2"
   },
   {
    "id": "c-qa-coh01",
@@ -21937,7 +21939,7 @@
    "next": "Waits on stage 15 (card c-b3s15) to ship to main. Then it runs the old battle screen checks (BUG-05, 06, 09, 10, COH-09) on the new screen and fixes what fails.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Works on BUG-05, 06, 09, 10 and COH-09 from the chapter 1 QA report (build keysecrets2).",
     "before": [
@@ -22002,10 +22004,14 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukD93dnwrF3uibZJwt4",
+    "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
     "opening": "started by START"
    }
   },
@@ -22985,41 +22991,6 @@
    "changed": "2026-11-20"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44881212857",
-   "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFyaTPSweQedLP1aeE",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-20",
-     "t": "voice-gen started."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-20",
-   "changed": "2026-11-21",
-   "rescue": {
-    "at": "2026-11-21T08:02:03+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukFyaTPSweQedLP1aeE",
-    "prev": ""
-   },
-   "started_at": "2026-11-21T08:02:03+00:00"
-  },
-  {
    "id": "b-fix-conflictmarks",
    "tag": "fix-conflictmarks",
    "lane": "claude",
@@ -23230,7 +23201,7 @@
    "title": "Purge the 221 old dialogue clips nothing plays",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "voicepurge221",
    "blocks": [],
    "created": "2026-11-21",
@@ -23245,6 +23216,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T14:52:09.516Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -23256,7 +23231,10 @@
     "effort": "medium (a mechanical purge by the documented recipe)",
     "text": "Read CLAUDE.md (No unused voice) and docs/PURGED_VOICE.md. Run python3 tools/clip-audit/unused_voice.py: check 4 lists about 221 dialogue clips not in harvest or source. For each, confirm by grep that no scene, map, harvest line or source plays its text (a line that is live elsewhere is a harvest bug: fix the harvest instead of purging). Write a purge spec like tools/clip-audit/purge-ch2build.json, run node tools/clip-audit/purge_unused.js with the spec and --apply, rebuild with python3 tools/voice-library/rebuild.py, get all four checks to 0, record the list in docs/PURGED_VOICE.md and docs/CHANGES.md (## voicepurge221), bump tags, push. Your first push is the commit board: start c-voicepurge221. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
+    "opening": "unknown"
+   }
   },
   {
    "id": "t-boppy-bigfish-pic2",
@@ -23290,10 +23268,68 @@
      "d": "2026-11-21",
      "t": "Added by c-boppy-bigfish: card t-boppy-bigfish-pic closed as all good but the approved picture is not in the repo."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
+    "opening": "unknown"
+   }
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44916474211",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFK5haqtphtxqg8e1M",
+   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
+   "first": "2026-11-21T14:55:50Z",
+   "last": "2026-11-21T14:55:56Z",
+   "tags": [],
+   "cards": [
+    "c-boppy-bigfish",
+    "t-boppy-bigfish-pic2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDkh1pmD8GXboXEYbs",
+   "title": "Old battle screen problems: check them in the new battle",
+   "first": "2026-11-21T14:55:18Z",
+   "last": "2026-11-21T14:55:18Z",
+   "tags": [],
+   "cards": [
+    "c-qa-battle2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGneR86SkgFvkGMyc8",
+   "title": "Purge the 221 old dialogue clips nothing plays",
+   "first": "2026-11-21T14:54:16Z",
+   "last": "2026-11-21T14:54:16Z",
+   "tags": [],
+   "cards": [
+    "c-voicepurge221"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukD93dnwrF3uibZJwt4",
    "title": "Old battle screen problems: check them in the new battle",
@@ -26592,8 +26628,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "825433a0d0f4e2756f2aabc20ee4776a3babb7f3",
- "synced_at": "2026-11-21T09:15:49+00:00",
+ "synced": "386b81ca6ad2e842d272d0057146cd635b17e690",
+ "synced_at": "2026-11-21T14:56:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
