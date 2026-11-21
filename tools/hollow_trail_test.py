@@ -107,6 +107,8 @@ with sync_playwright() as pw:
     check('goal moved to the Log in the middle', ev("()=>/middle of the clearing.*Log/.test(flag('goal')||'')"))
     beat('log'); check('Log beaten: stage 3', ev("()=>hollowTrailStage()===3"))
     check('goal moved east to the fishing spot', ev("()=>/fishing spot/.test(flag('goal')||'')"))
+    ev("()=>{ for(const f of ['ch1-beat:toad','ch1-beat:log','ch1-spot']) setFlag(f,false); setFlag('ch1-tuts'); }")
+    check('fishing-spot scene waits for the Log (x-06)', ev("()=>{ const t=TRIGGERS.find(t=>t.id==='ch1-spot'); const a=storyMatch(t.when); setFlag('ch1-beat:log'); const b=storyMatch(t.when); setFlag('ch1-beat:log',false); return !a&&b; }"))
     ev("()=>{ for(const f of ['ch1-beat:toad','ch1-beat:log']) setFlag(f,false); setFlag('ch1-spot'); }"); check('boss scene started: stage 3 whatever is left', ev("()=>hollowTrailStage()===3"))
     ev("()=>{ setFlag('ch1-spot',false); setFlag('ch1-beat:toad',true); setFlag('ch1-beat:log',true); }")   # stage 3 for the painting checks below
     check('Grace follow scenes and triggers exist', ev("()=>SCENES.ch1FolToad[1].lines[0]===\"3 wrappers, let's follow them!\"&&SCENES.ch1FolLog[1].lines[0]===SCENES.ch1FolToad[1].lines[0]&&TRIGGERS.some(t=>t.id==='ch1-fol-toad')&&TRIGGERS.some(t=>t.id==='ch1-fol-log')"))

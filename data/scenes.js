@@ -685,7 +685,7 @@ const TRIGGERS=[
   {id:'ch1-t1',map:'hollow',at:[4,17,8,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
   {id:'ch1-fol-toad',map:'hollow',when:{...CH1,flag:'ch1-beat:toad',notFlag:['ch1-fol-toad','ch1-spot']},scene:'ch1FolToad'},
   {id:'ch1-fol-log',map:'hollow',when:{...CH1,flag:'ch1-beat:log',notFlag:['ch1-fol-log','ch1-spot']},scene:'ch1FolLog'},
-  {id:'ch1-spot',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-spot'},scene:'ch1Spot'},
+  {id:'ch1-spot',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-spot',test:S=>!S.flags['ch1-trail']||!!S.flags['ch1-beat:log']},scene:'ch1Spot'},
   {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-spot',notFlag:'ch1-pond'},scene:'ch1Pond'},
   {id:'ch1-after',map:'hollow',when:{...CH1,flag:{'battle:bigone':'win'},notFlag:'ch1-tin'},scene:'ch1AfterBoss'},
   {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-home'},scene:'ch1End'},

@@ -20237,7 +20237,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which.",
+   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which. LOOK AGAIN: walk into the middle clearing before the Log Lump: no fishing-spot scene should start. Beat the Log: Grace says the line and four wrappers lead east.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -20275,6 +20275,10 @@
     {
      "d": "2026-11-21",
      "t": "Gemini's chapter 1 test: FAIL. Leg 1: 4 wrappers, from \"THE SQUARE SHOPS\" gate to top-left bench before Bog Toad; Leg 2: 4 wrappers (Leg 1 cleared), from below top-left bench to middle clearing; Leg 3: blocked pre-boss twice because walking into the middle clearing toward Log Lump triggered Stop 9's pond scene early, and beating Log Lump post-boss gave no Grace line or new wrappers (also no \"Goal: ...\" popups appeared on any leg; Pond Grump changed nothing); Grace's words: \"3 wrappers, let's follow them!\" Sent to Claude as card c-fix-hollowtrail-play-3; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix pushed (fix-hollowtrail-play-3); look again at the Log leg."
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
@@ -27473,7 +27477,7 @@
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Play the Grump Hollow wrapper trail",
-   "next": "Gemini's chapter 1 test failed Play the Grump Hollow wrapper trail (C1). Claude starts the fix by itself. Latest: Leg 1: 4 wrappers, from \"THE SQUARE SHOPS\" gate to top-left bench before Bog Toad; Leg 2: 4 wrappers (Leg 1 cleared), from below top-left bench to middle cleari",
+   "next": "Fix shipped as build fix-hollowtrail-play-3.",
    "blocks": [
     "t-hollowtrail-play"
    ],
@@ -27515,6 +27519,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed: the fishing-spot scene (ch1-spot) now waits for the Log Lump, so Grace's third line and the third leg of wrappers come. Goal popups not changed (goals show in the quest log only)."
     }
    ],
    "prompt": {
