@@ -22749,7 +22749,7 @@
    "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "wanch2",
    "next": "Waits on your card Watch the chapter 1 fights. Then it applies your notes and tries the clips that missed twice in wanch1 by a different method: family dodge and cast, Deedee's knock-out, Rose's Tackle and Giddyup, Deedee's Wet-Floor on the Kling 4 video model (tested on Grace first); the Toad's Body Slam and the Skeeter's Bite and Whine on the full Grok model. It also removes the old painted-pose code for good (no longer drawn since idea-tomgrace).",
    "blocks": [
@@ -22758,8 +22758,8 @@
    "created": "2026-11-20",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCs6STg2FTuGLCNgc4",
-    "opening": "not started"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -22789,6 +22789,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Watch the chapter 1 fights in videos (NEW 1 to NEW 6) is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T18:50:16.897Z"
     }
    ],
    "prompt": {
