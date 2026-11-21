@@ -15808,7 +15808,8 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T22:52:33+00:00",
-   "after": "t-reports5-play"
+   "after": "t-reports5-play",
+   "quiet": true
   },
   {
    "id": "t-listen1-play",
@@ -16452,7 +16453,7 @@
   {
    "id": "c-keysecrets3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets3",
    "title": "Voice and Script takes through repo secrets",
@@ -16503,9 +16504,14 @@
     {
      "d": "2026-11-20",
      "t": "Built keysecrets3: voices.html and engine/script-voice.js ask data/voice-requests.json through engine/voice-take.js; voice-take Action + voicetake.py; results on branch voicetake, recordings briefly on branch voicein. Tests voicetake_test.py and keysecrets3_test.py pass; the Action was never run for real. Also fixed: the Script Editor voice buttons did nothing before (key built with the scene id twice)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets3: Voice Library and Script Editor takes are made on GitHub; the ElevenLabs key box and `aot-el-key` are gone"
     }
    ],
-   "after": "t-keysecrets3-try"
+   "after": "t-keysecrets3-try",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets4",
@@ -16861,7 +16867,7 @@
    "title": "Watch Grace's guard video once (1 minute)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE LAB > NEW BATTLE. The first box at the top is PROOF: GRACE'S GUARD (VIDEO): tap it. Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
    "blocks": [
@@ -16886,9 +16892,12 @@
     {
      "d": "2026-11-20",
      "t": "fix-wanproof-watch: the row was 29th of 31 on the list; it is now the first box at the top."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch Grace's guard video once (1 minute) is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-wanidle",
@@ -16927,7 +16936,7 @@
    "id": "c-fix-wanproof-watch",
    "tag": "fix-wanproof-watch",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch Grace's guard video once (1 minute)",
@@ -16971,6 +16980,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by the wanproof session (Tom 17:08: \"im confused. was this done?\"). The row exists but is 29th of 31 on the NEW BATTLE list, under all 27 fights; moving it to the top."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-wanproof-watch: PROOF: GRACE'S GUARD (VIDEO) is now the first box on the NEW BATTLE list"
     }
    ],
    "prompt": {
@@ -16982,7 +16995,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanproof-watch and t-wanproof-watch in data/board.json, history included. Your first push is the commit board: start c-fix-wanproof-watch.\n\nTom tested and found problems:\n1. Card t-wanproof-watch (Watch Grace's guard video once (1 minute), ask animations). He was asked: Open ADMIN ) BATTLE LAB ) NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos. He wrote: i cant find this within the new battle lab UI\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T21:49:55.972Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanproof-watch to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanproof-watch, and give the build fix-wanproof-watch a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanproof-watch"
+   "after": "t-wanproof-watch",
+   "done": "2026-11-20"
   },
   {
    "id": "t-keysecrets2-try",
@@ -18723,13 +18737,36 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukHAU5Y8sJKKLvA88b8",
+   "title": "Look at the two START tasks that still do not push",
+   "first": "2026-11-21T01:26:04Z",
+   "last": "2026-11-21T01:26:04Z",
+   "tags": [],
+   "cards": [
+    "t-startfix-look"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFFqEDYbBtHjdbx79a",
+   "title": "Look at the two START tasks that still do not push",
+   "first": "2026-11-21T01:25:50Z",
+   "last": "2026-11-21T01:25:50Z",
+   "tags": [],
+   "cards": [
+    "t-startfix-look"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFovmpwidf6dk3L6j9",
    "title": "Fix the START tasks for Opus medium and Sonnet high",
    "first": "2026-11-21T00:54:47Z",
-   "last": "2026-11-21T00:55:05Z",
-   "tags": [],
+   "last": "2026-11-21T01:06:11Z",
+   "tags": [
+    "startfix1"
+   ],
    "cards": [
-    "c-startfix"
+    "c-startfix",
+    "t-startfix-look"
    ]
   },
   {
@@ -19216,6 +19253,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T17:25:22-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof",
+    "fix-wanproof-watch"
+   ],
+   "cards": [
+    "c-wanproof",
+    "c-fix-wanproof-watch",
+    "c-startfix",
+    "t-startfix-look"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
    "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
    "first": "2026-11-20T17:13:10Z",
@@ -19259,6 +19314,18 @@
    ],
    "cards": [
     "c-fix-gem-canon01play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHEF3hQwx7ezVDQiTG",
+   "title": "Voice and Script takes through repo secrets",
+   "first": "2026-11-20T16:29:59-08:00",
+   "last": "2026-11-20T17:09:40-08:00",
+   "tags": [
+    "keysecrets3"
+   ],
+   "cards": [
+    "c-keysecrets3"
    ]
   },
   {
@@ -19423,16 +19490,6 @@
    "tags": [],
    "cards": [
     "c-idea-searchthrough"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHEF3hQwx7ezVDQiTG",
-   "title": "Voice and Script takes through repo secrets",
-   "first": "2026-11-20T16:29:59-08:00",
-   "last": "2026-11-20T16:29:59-08:00",
-   "tags": [],
-   "cards": [
-    "c-keysecrets3"
    ]
   },
   {
@@ -19664,20 +19721,6 @@
     "c-reports-2",
     "c-reports-3",
     "c-reports-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T13:36:44-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb",
-    "wanproof"
-   ],
-   "cards": [
-    "c-wanproof"
    ]
   },
   {
@@ -21277,8 +21320,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "a2db374f27b1ba3bd52c699c511119b55bf2deb0",
- "synced_at": "2026-11-21T01:05:55+00:00",
+ "synced": "15183a7f28a178eef295b22ed41bfaaf735e0dd8",
+ "synced_at": "2026-11-21T01:26:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
