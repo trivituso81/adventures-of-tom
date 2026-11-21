@@ -25,7 +25,7 @@ An entry made from Tom's own photo (`own` field, 14 entries, all approved today)
 |---|---|---|
 | c-keysecrets1 | Art Library pictures through art-gen | built (keysecrets1) |
 | c-keysecrets2 | Art Library videos (GENERATE VIDEO, GENERATE CHAPTER) through clip-gen; remove the xAI key and Relay boxes and the browser video code | built (keysecrets2) |
-| c-keysecrets3 | Voice Library takes and Script Editor takes through a new ElevenLabs Action; remove the ElevenLabs key box | not started |
+| c-keysecrets3 | Voice Library takes and Script Editor takes through a new ElevenLabs Action; remove the ElevenLabs key box | built (keysecrets3) |
 | c-keysecrets4 | Music Library makes through a new music Action | built (keysecrets4) |
 | c-keysecrets5 | recast pages and the baker templates (`aot-baker-key`) | retired, not moved (keysecrets5) |
 
@@ -46,6 +46,15 @@ Same pattern as pictures with its own file and branch: `data/clip-requests.json`
 Call made: retire, do not move. Nothing that asked for `aot-baker-key` had been used since 2026-11-02, so there was nothing to move to an Action.
 - Deleted: `recast-deedee.html` (used once, 2026-11-02), the Ellie, Grace and Justin recast bakers in `tools/voice-recast/`, the Battle Voice Baker page (last used 2026-11-01) and the Contraction Fix Baker page (2026-10-28).
 - Kept because the Voice Library index needs them: `tools/battle-baker/build.py` (cut to script resolution), `dump.js`, `handscripts.txt` (run by `tools/voice-library/battle-scripts.py`), and `tools/voice-recast/dialogue-lines.json` (read by `tools/clip-audit/dd_lines.js`).
-- Left on purpose: `aot-el-key` in `voices.html` and `engine/script-voice.js` (Voice Library and Script Editor takes). It is in use and moves in c-keysecrets3.
+- Left on purpose: `aot-el-key` in `voices.html` and `engine/script-voice.js` (Voice Library and Script Editor takes). It is in use and moves in c-keysecrets3 (done, see below).
 - A future voice recast is a new card: an Action designs the voice with the repo secret, a page plays the previews.
 - Old failure, not caused here: `python3 tools/board_sync_test.py` fails on R5 (it replays the live board and expects a state from 2026-11-20 15:10 UTC) and fails the same on main.
+
+## Built in keysecrets3 (voice takes)
+
+Same pattern with `data/voice-requests.json` (message "voice: take N (...)"), Action `voice-take` (`tools/voice-library/voicetake.py`, secret `ELEVENLABS_API_KEY`) and results on branch `voicetake`; shared page code `engine/voice-take.js`. Full table: docs/VOICE_LIBRARY.md "Takes are made on GitHub".
+- The Action empties the queue before it pays; Stop only adds ids to `cancel`; speech to speech recordings travel on throwaway branch `voicein` (public repo, so Tom is told).
+- Found: the Script Editor's voice buttons did nothing before this build (`VOICE.panel` built the button key with the scene id twice, `vResolve` found no line). Fixed in the same push (`bk=key`).
+- `tools/voice-library/test.py` (older) fails at its `#clear` click on the original code too.
+- Tests: `voicetake_test.py`, `keysecrets3_test.py`; `keysecrets_test.py`, `keysecrets2_test.py`, `artgen_test.py` still pass with the extended GitHub stand-in.
+

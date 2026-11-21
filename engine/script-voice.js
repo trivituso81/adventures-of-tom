@@ -3,11 +3,10 @@
 // It uses the same two stores as the Voice Library (voices.html), so a take made here shows there and plays in the game:
 //   IndexedDB 'aot-local-clips' store 'clips'  the clip each line uses (row id = dialog|<voice>||<exact text>; engine/local-clips.js reads it)
 //   IndexedDB 'aot-voice-library' store 'takes' every take made (line key d|<voice>|<exact text>)
-// Make a take = ElevenLabs text to speech from the line's direction (key aot-el-key, set once in the Voice Library). Record my read = Tom's own voice
-// turned into the character's voice (speech to speech). USE IT puts a take in the game for that exact wording.
+// Make a take = ElevenLabs text to speech from the line's direction. Record my read = Tom's own voice turned into the character's voice (speech to speech).
+// keysecrets3: no ElevenLabs key lives here. Both buttons ask GitHub (engine/voice-take.js, VT.ask: a request committed to data/voice-requests.json; the voice-take
+// Action makes the take with the repo secret ELEVENLABS_API_KEY) and the take arrives by itself (VT.watch below). USE IT puts a take in the game for that exact wording.
 const VOICE={busy:{},err:{},rec:{},takes:{},local:{},VI:null,ldb:null,tdb:null,booted:null,playing:null,files:{}};
-const VKEY='aot-el-key';
-const vApiKey=()=>{ try{ return localStorage.getItem(VKEY)||''; }catch(e){ return ''; } };
 function vIdb(name,store){ return new Promise(res=>{ try{ const r=indexedDB.open(name,1); r.onupgradeneeded=()=>{ try{ r.result.createObjectStore(store,{keyPath:'id'}); }catch(e){} }; r.onsuccess=()=>res(r.result); r.onerror=()=>res(null); }catch(e){ res(null); } }); }
 function vTx(db,st,fn){ return new Promise((res,rej)=>{ if(!db) return rej(new Error('This browser would not let me save clips.')); try{ const t=db.transaction(st,'readwrite'); fn(t.objectStore(st)); t.oncomplete=()=>res(); t.onerror=()=>rej(t.error||new Error('Save failed')); t.onabort=()=>rej(t.error||new Error('Save failed')); }catch(e){ rej(e); } }); }
 function vGet(db,st,id){ return new Promise(res=>{ if(!db) return res(null); try{ const q=db.transaction(st).objectStore(st).get(id); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } }); }
@@ -39,7 +38,7 @@ function vScript(cur,ln){ // the words ElevenLabs reads: the direction tag of th
 }
 VOICE.panel=function(key,id,o,ln,e,isIns){
   VOICE.boot();
-  const cur=vCur(id,o,ln,e); const bk=id+'|'+key;
+  const cur=vCur(id,o,ln,e); const bk=key;   // key is already sceneId|ref
   const row=cur.vid&&VOICE.local[vRowId(cur.vid,cur.text)];
   const takes=cur.vid?(VOICE.takes[vLine(cur.vid,cur.text)]||[]).slice().sort((a,b)=>a.t-b.t):[];
   const changed=isIns||(ln&&(ln.t!==cur.text||ln.who!==cur.who));
@@ -55,7 +54,7 @@ VOICE.panel=function(key,id,o,ln,e,isIns){
     +'<button class="small '+(rec?'rec':'')+'" data-vrec="'+esc(bk)+'"'+((busy&&!rec)||!cur.vid?' disabled':'')+'>'+(rec?'Stop and use my read':'Record my read')+'</button></div>';
   if(busy) h+='<div class="hint">'+esc(busy)+'</div>';
   if(err) h+='<div class="err">'+esc(err)+'</div>';
-  if(!vApiKey()) h+='<div class="hint">To make takes, paste the ElevenLabs key once in the Voice Library (it is shared with this page).</div>';
+  if(!VT.hasToken()) h+='<div class="hint">'+esc(VT.NOTOKEN)+'</div>';
   if(takes.length) h+='<div class="hint">Takes for these exact words:</div>'+takes.map((t,i)=>'<div class="pr"><span class="tag">'+esc(t.label||'take')+' '+(i+1)+(row&&row.takeId===t.id?' (in use)':'')+'</span><button class="small ghost" data-vplay="'+esc(bk)+'|'+esc(t.id)+'">Play</button>'+(row&&row.takeId===t.id?'':'<button class="small ghost" data-vuse="'+esc(bk)+'|'+esc(t.id)+'">Use it</button>')+'</div>').join('');
   if(row) h+='<div class="pr"><button class="small ghost" data-vgame="'+esc(bk)+'">Go back to the game\'s clip</button></div>';
   return h;
@@ -69,21 +68,12 @@ async function vBuiltIn(cur,ln){ // the game's own clip for the unchanged line
   if(!ln||ln.t!==cur.text||ln.f==null||!IX.files) return null; const f=IX.files[ln.f]; if(!f) return null; await vLoadFile(f);
   return window.DIALOG_CLIPS.clips[cur.vid+'|'+cur.text]||null;
 }
-// ---------- making takes ----------
-function vErr(r){ return r.text().then(t=>{ let m=t; try{ const j=JSON.parse(t); const d=j.detail; m=d&&typeof d==='object'?(d.message||d.status||JSON.stringify(d)):(d||t); }catch(e){} return new Error('ElevenLabs '+r.status+(r.status===401?' (the API key was not accepted)':r.status===402||r.status===403?' (check the ElevenLabs plan and credits)':'')+': '+String(m).slice(0,140)); }); }
-const vB64=buf=>{ const u=new Uint8Array(buf); let s=''; for(let i=0;i<u.length;i+=0x8000) s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(s); };
-async function vWithVoice(v,call){ const ids=[v.voice_id,...(v.fallback_ids||[]).filter(x=>x&&x!==v.voice_id)]; let r; for(const id of ids){ r=await call(id); if(r.status!==404) return r; } return r; }
-async function vTts(v,text){
-  const body={text,model_id:v.model||'eleven_v4',voice_settings:{stability:+v.stability,similarity_boost:+v.similarity,...(v.speed!=null?{speed:+v.speed}:{})}};
-  const r=await vWithVoice(v,id=>fetch('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(id)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':vApiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)}));
-  if(!r.ok) throw await vErr(r); return vB64(await r.arrayBuffer());
-}
-async function vSts(v,blob){
-  const f=new FormData(); f.append('audio',blob,'take.'+(blob.type.includes('mp4')?'mp4':blob.type.includes('ogg')?'ogg':'webm')); f.append('model_id','eleven_english_sts_v2');
-  f.append('voice_settings',JSON.stringify({stability:+v.stability,similarity_boost:+v.similarity})); f.append('remove_background_noise','true');
-  const r=await vWithVoice(v,id=>fetch('https://api.elevenlabs.io/v1/speech-to-speech/'+encodeURIComponent(id)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':vApiKey()},body:f}));
-  if(!r.ok) throw await vErr(r); return vB64(await r.arrayBuffer());
-}
+// ---------- making takes (on GitHub) ----------
+const vB64=buf=>VT.b64(buf);
+const vNewReq=(v,cur,key)=>({voice_id:v.voice_id,fallback_ids:(v.fallback_ids||[]).filter(x=>x&&x!==v.voice_id),stability:+v.stability,similarity:+v.similarity,line:vLine(cur.vid,cur.text),_ctx:{bk:key,vid:cur.vid,text:cur.text}});
+// what this page sent to ElevenLabs before: no seed, one try, the voice's model and speed
+const vTtsReq=(v,cur,key,script)=>Object.assign(vNewReq(v,cur,key),{kind:'tts',text:script,model:v.model||'eleven_v4',speed:v.speed!=null?+v.speed:null,seed:false,tries:1,label:'new take',script});
+const vStsReq=(v,cur,key,blob)=>Object.assign(vNewReq(v,cur,key),{kind:'sts',label:'my read',script:'(recording)',_blob:blob});
 async function vUse(cur,take,mp3){
   const mp=mp3||take.mp3||(await vGet(VOICE.tdb,'takes',take.id)||{}).mp3; if(!mp) throw new Error('That take is no longer saved on this phone.');
   const row={id:vRowId(cur.vid,cur.text),kind:'dialog',voice:cur.vid,lineKind:'',text:cur.text,mp3:mp,script:take.script,takeId:take.id,t:Date.now()};
@@ -111,12 +101,12 @@ document.addEventListener('click',async ev=>{
     toast('No clip yet for these words.'); return; }
   if(d.vuse!==undefined){ try{ await vUse(cur,{id:R.takeId,script:''}); toast('That take is now what the game plays for these words.'); }catch(e){ VOICE.err[key]=e.message||String(e); } render(); return; }
   if(d.vgame!==undefined){ try{ await vTx(VOICE.ldb,'clips',s=>s.delete(vRowId(cur.vid,cur.text))); delete VOICE.local[vRowId(cur.vid,cur.text)]; }catch(e){ VOICE.err[key]=e.message||String(e); } render(); return; }
-  if(!vApiKey()){ toast('Paste your ElevenLabs key in the Voice Library first.'); return; }
+  if(!VT.hasToken()){ toast(VT.NOTOKEN); return; }
   const v=VOICE.VI&&VOICE.VI.voices['dialog|'+cur.vid]; if(!v||!v.voice_id){ VOICE.err[key]='This voice has no ElevenLabs voice ID.'; render(); return; }
   if(d.vtake!==undefined){
-    delete VOICE.err[key]; VOICE.busy[key]='Making a take...'; render();
-    try{ const script=vScript(cur,ln); const mp3=await vTts(v,script); await vAdd(cur,mp3,'new take',script); }catch(e){ VOICE.err[key]=e.message||String(e); }
-    delete VOICE.busy[key]; render(); return; }
+    delete VOICE.err[key]; VOICE.busy[key]='Asking GitHub...'; render();
+    try{ await VT.ask('script',[vTtsReq(v,cur,key,vScript(cur,ln))]); VOICE.busy[key]='Asked. GitHub makes the take (about a minute); it shows up here by itself and you can close the page.'; }catch(e){ VOICE.err[key]=e.message||String(e); delete VOICE.busy[key]; }
+    render(); return; }
   if(d.vrec!==undefined){
     if(VOICE.rec[key]){ VOICE.rec[key].stop(); return; }
     const setSession=ty=>{ if(navigator.audioSession){ try{ navigator.audioSession.type=ty; }catch(e){} } };
@@ -126,10 +116,19 @@ document.addEventListener('click',async ev=>{
       const mr=new MediaRecorder(stream),chunks=[];
       mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
       mr.onstop=async()=>{ stream.getTracks().forEach(x=>x.stop()); setSession('auto'); delete VOICE.rec[key]; const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'});
-        VOICE.busy[key]='Turning your read into '+cur.who+'\u2019s voice...'; render();
-        try{ const mp3=await vSts(v,blob); await vAdd(cur,mp3,'my read','(recording)'); delete VOICE.err[key]; }catch(e){ VOICE.err[key]=e.message||String(e); }
-        delete VOICE.busy[key]; render(); };
+        VOICE.busy[key]='Sending your read to GitHub...'; render();
+        try{ await VT.ask('script',[vStsReq(v,cur,key,blob)]); delete VOICE.err[key]; VOICE.busy[key]='Asked. GitHub turns your read into '+cur.who+'\u2019s voice (about a minute); it shows up here by itself. Your recording is removed from GitHub once it is used.'; }catch(e){ VOICE.err[key]=e.message||String(e); delete VOICE.busy[key]; }
+        render(); };
       VOICE.rec[key]=mr; mr.start(); delete VOICE.err[key]; render();
     }catch(e){ setSession('auto'); VOICE.err[key]='The microphone is not available: '+(e.message||e)+'. Allow the microphone for this app and try again.'; render(); }
   }
 });
+// ---------- answers from GitHub (VT.watch): the take arrives and is kept and used as before, or the reason it was not made is shown on the line
+VT.watch('script',{
+  wait(p,text){ const k=p.ctx&&p.ctx.bk; if(k&&VOICE.busy[k]!==undefined){ VOICE.busy[k]=text; if(typeof render==='function') render(); } },
+  async take(p,buf,info){ const c=p.ctx||{}, k=c.bk; await VOICE.boot();
+    try{ await vAdd({vid:c.vid,text:c.text},vB64(buf),info.label||'new take',info.script||''); if(k) delete VOICE.err[k]; }catch(e){ if(k) VOICE.err[k]=e.message||String(e); }
+    if(k) delete VOICE.busy[k]; if(typeof render==='function') render(); },
+  fail(p,why){ const k=p.ctx&&p.ctx.bk; if(k){ VOICE.err[k]=why; delete VOICE.busy[k]; } if(typeof render==='function') render(); }
+});
+for(const p of VT.pend('script')) if(p.ctx&&p.ctx.bk) VOICE.busy[p.ctx.bk]='Asked earlier. Waiting for GitHub to make it...';   // asked before this page was opened: keep watching

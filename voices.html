@@ -133,6 +133,7 @@ header{padding:10px 28px}
 </main>
 <div class="bar" id="bar" hidden></div>
 <script src="engine/admin-music.js?v=adminvol1"></script>
+<script src="engine/voice-take.js?v=keysecrets3"></script>
 <script>
 'use strict';
 // voices.html: the Voice Library. Browse every spoken line in the game (data/voice-index.json, built by
@@ -142,8 +143,6 @@ header{padding:10px 28px}
 // at startup, so the game plays it on this device right away. All takes are kept in 'aot-voice-library' so he can switch back.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEYNAME='aot-el-key';
-const apiKey=()=>{try{return localStorage.getItem(KEYNAME)||'';}catch(e){return '';}};
 const PAGE=50;
 let IDX=null, WHO={}, shown=PAGE, openKey=null, selMode=true, BULK=null, playing=null;
 const SEL=new Set();
@@ -425,86 +424,39 @@ async function playNow(it,btn){
   catch(e){ btn.innerHTML='&#9654;'; toast(e.message||String(e)); }
 }
 
-// ---------- ElevenLabs ----------
-function b64(buf){const u=new Uint8Array(buf);let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);}
-async function apiErr(r){let t='';try{t=await r.text();const j=JSON.parse(t);const d=j.detail;if(d&&typeof d==='object'&&!Array.isArray(d))t=d.message||d.status||JSON.stringify(d);else if(Array.isArray(d))t=d.map(x=>x.msg).join('; ');else if(d)t=String(d);}catch(e){}
-  const code=r.status;const hint=code===401?' (the API key was not accepted)':code===402||code===403?' (check the ElevenLabs plan and credits)':'';
-  return new Error('ElevenLabs '+code+hint+': '+String(t).slice(0,160));}
-const wait=ms=>new Promise(r=>setTimeout(r,ms));
-const retry=async(fn,tries=4)=>{for(let k=0;;k++){try{return await fn();}catch(e){const m=e&&e.message||String(e);if(k<tries-1&&/ 429| 409|too many|concurrent|in progress/i.test(m)){await wait(2500*(k+1));continue;}throw e;}}};
-// A voice deleted on ElevenLabs answers 404. If the index lists fallback_ids, try them in order and keep the first that exists
-// for the rest of this session (v.voice_id is updated, so the export records the voice really used).
-async function withVoice(v,call){
-  const ids=[v.voice_id,...(v.fallback_ids||[]).filter(x=>x&&x!==v.voice_id)];
-  let r;
-  for(const id of ids){ r=await call(id); if(r.status!==404) { if(id!==v.voice_id){ toast('That voice is gone on ElevenLabs. Using a backup voice.'); v.voice_id=id; v.fallback_ids=(v.fallback_ids||[]).filter(x=>x!==id); } return r; } }
-  return r;
+// ---------- ElevenLabs takes, made on GitHub (keysecrets3) ----------
+// No ElevenLabs key lives on this page. A take is a request committed to data/voice-requests.json (engine/voice-take.js, VT.ask); the voice-take Action
+// makes it with the repo secret ELEVENLABS_API_KEY and keeps it on branch voicetake; VT polls that branch and hands each answer to the handlers in the
+// "answers" block below. The request carries exactly what this page used to send to ElevenLabs: the line's voice settings, a random seed, the backup
+// voices, best of three with the repeat check (the job does the check) for a spoken line; the seconds and prompt influence for Nara's sounds.
+function takeReq(it,sent){
+  const v=voiceOf(it), key=lk(it);
+  if(isDog(it)) return {kind:'sfx',line:key,text:scriptOf(it),secs:dogOf(it),influence:v.prompt_influence||.5,label:'new take',script:scriptOf(it),_ctx:{key}};
+  return {kind:'tts',line:key,voice_id:v.voice_id,fallback_ids:(v.fallback_ids||[]).filter(x=>x&&x!==v.voice_id),text:sent,model:v.model||'eleven_v4',stability:+v.stability,similarity:+v.similarity,speed:v.speed!=null?+v.speed:null,seed:true,tries:3,label:'new take',script:sent,_ctx:{key}};
 }
-async function tts(v,text){
-  const url=id=>'https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(id)+'?output_format=mp3_44100_128';
-  const body={text,model_id:v.model||'eleven_v4',voice_settings:{stability:+v.stability,similarity_boost:+v.similarity,...(v.speed!=null?{speed:+v.speed}:{})},seed:Math.floor(Math.random()*4294967295)};
-  const send=()=>withVoice(v,id=>fetch(url(id),{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)}));
-  let r=await send();
-  if(!r.ok&&(r.status===400||r.status===422)){const e=await apiErr(r);if(/seed/i.test(e.message)){delete body.seed;r=await send();}else throw e;}
-  if(!r.ok) throw await apiErr(r);
-  return b64(await r.arrayBuffer());
-}
-async function sfxGen(prompt,secs,influence){
-  const r=await fetch('https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey(),'Content-Type':'application/json',Accept:'audio/mpeg'},
-    body:JSON.stringify({text:prompt,duration_seconds:+secs,prompt_influence:+influence,model_id:'eleven_text_to_sound_v2'})});
-  if(!r.ok) throw await apiErr(r); return b64(await r.arrayBuffer());
-}
-async function sts(v,blob){
-  const f=new FormData();
-  f.append('audio',blob,'take.'+(blob.type.includes('mp4')?'mp4':blob.type.includes('ogg')?'ogg':'webm'));
-  f.append('model_id','eleven_english_sts_v2');
-  f.append('voice_settings',JSON.stringify({stability:+v.stability,similarity_boost:+v.similarity}));
-  f.append('remove_background_noise','true');
-  const r=await withVoice(v,id=>fetch('https://api.elevenlabs.io/v1/speech-to-speech/'+encodeURIComponent(id)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':apiKey()},body:f}));
-  if(!r.ok) throw await apiErr(r); return b64(await r.arrayBuffer());
-}
-// A take far longer than the words need usually means the voice looped: try again (best of three).
-function expectedSec(text){const w=text.replace(/\[[^\]]*\]/g,' ').split(/\s+/).filter(Boolean).length,s=(text.match(/[.!?]+/g)||[]).length||1;return 0.42*w+0.2*s;}
-const mp3Sec=b=>Math.round(b.length*0.75*8/128000*10)/10;
-// A take where the voice said the phrase twice: the sound splits at a pause into two halves of similar length whose loudness shapes match.
-async function looksDoubled(b64s){
-  try{
-    const bin=atob(b64s),u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-    const AC=window.OfflineAudioContext||window.webkitOfflineAudioContext; const ctx=new AC(1,44100,44100);
-    const buf=await new Promise((res,rej)=>{ const p=ctx.decodeAudioData(u.buffer,res,rej); if(p&&p.catch) p.catch(rej); });
-    const d=buf.getChannelData(0), fr=Math.round(buf.sampleRate*0.01), n=Math.floor(d.length/fr), env=new Float32Array(n);
-    let pk=0; for(let i=0;i<n;i++){ let s=0; for(let j=i*fr;j<(i+1)*fr;j++) s+=d[j]*d[j]; env[i]=Math.sqrt(s/fr); if(env[i]>pk) pk=env[i]; }
-    if(pk<=0) return false; const th=pk*0.06; let a=0,z=n-1; while(a<n&&env[a]<th) a++; while(z>a&&env[z]<th) z--;
-    const gaps=[]; for(let i=a;i<=z;){ if(env[i]<th){ let j=i; while(j<=z&&env[j]<th) j++; if(j-i>=12) gaps.push([i,j]); i=j; } else i++; }
-    for(const [g0,g1] of gaps){
-      const A=env.subarray(a,g0), B=env.subarray(g1,z+1); if(A.length<30||B.length<30) continue;
-      const r=A.length/B.length; if(r<0.7||r>1.45) continue;
-      const m=Math.min(A.length,B.length), x=[],y=[]; for(let i=0;i<m;i++){ x.push(A[Math.round(i*(A.length-1)/(m-1||1))]); y.push(B[Math.round(i*(B.length-1)/(m-1||1))]); }
-      const mx=x.reduce((s,v)=>s+v,0)/m, my=y.reduce((s,v)=>s+v,0)/m; let sxy=0,sxx=0,syy=0; for(let i=0;i<m;i++){ sxy+=(x[i]-mx)*(y[i]-my); sxx+=(x[i]-mx)**2; syy+=(y[i]-my)**2; }
-      if(sxx>0&&syy>0&&sxy/Math.sqrt(sxx*syy)>0.85) return true;
-    }
-  }catch(e){}
-  return false;
+const noVoice=it=>it.nv?'No voice is chosen for '+whoName(it)+' yet. Ask Claude to cast one.':'This voice has no ElevenLabs voice ID.';
+const ASKED='Asked. GitHub makes the take (about a minute); it shows up here by itself and you can close the page.';
+// Asks for one take of each line in the list in ONE commit; a line is busy until its take (or the reason it was not made) arrives. Returns the rids asked.
+async function askTakes(items){
+  const reqs=[], its=[];
+  for(const it of items){ const key=lk(it); if(BUSY[key]) continue;
+    const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]=noVoice(it); repaint(it); continue; }
+    reqs.push(takeReq(it,isDog(it)?null:finalText(it))); its.push(it); delete ERR[key]; BUSY[key]='Asking GitHub...'; repaint(it); }
+  if(!reqs.length) return [];
+  try{ const sent=await VT.ask('voices',reqs); its.forEach(it=>{ BUSY[lk(it)]=ASKED; repaint(it); }); return sent.map(r=>r.rid); }
+  catch(e){ its.forEach(it=>{ delete BUSY[lk(it)]; ERR[lk(it)]=e.message||String(e); repaint(it); }); toast(e.message||String(e)); return []; }
 }
 async function newTake(it){
+  if(!VT.hasToken()){ toast(VT.NOTOKEN); return false; }
   const key=lk(it); if(BUSY[key]) return false;
-  if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return false; }
-  const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]=it.nv?'No voice is chosen for '+whoName(it)+' yet. Ask Claude to cast one.':'This voice has no ElevenLabs voice ID.'; repaint(it); return false; }
-  delete ERR[key]; BUSY[key]='Making a take...'; repaint(it);
-  let ok=false;
-  try{
-    if(isDog(it)){ const d=dogOf(it); const mp3=await retry(()=>sfxGen(scriptOf(it),d,v.prompt_influence||.5)); await addTake(it,mp3,'new take',scriptOf(it)); }
-    else { const sent=finalText(it); let best=null;
-      for(let k=0;k<3;k++){ const mp3=await retry(()=>tts(v,sent)); const sec=mp3Sec(mp3), dbl=await looksDoubled(mp3), sc=sec+(dbl?1000:0); if(!best||sc<best.sc) best={mp3,sec,sc}; if(!dbl&&sec<=expectedSec(sent)*1.45+0.8) break; }
-      await addTake(it,best.mp3,'new take',sent); }
-    ok=true;
-  }catch(e){ ERR[key]=e.message||String(e); }
-  delete BUSY[key]; repaint(it); renderSum(); return ok;
+  const v=voiceOf(it); if(!v||!v.voice_id){ ERR[key]=noVoice(it); repaint(it); return false; }
+  return (await askTakes([it])).length>0;
 }
 let DOGLEN={}; try{ DOGLEN=JSON.parse(localStorage.getItem('aot-vl-doglen')||'{}')||{}; }catch(e){}
 const dogOf=it=>DOGLEN[lk(it)]||it.d||2;
 async function startRec(it){
   const key=lk(it); stopPlay();
+  if(!VT.hasToken()){ toast(VT.NOTOKEN); return; }
   // iOS (Safari 16.4+): the page is in playback mode after any clip plays, and iOS refuses the mic in that mode.
   // Switch the audio session to play-and-record first, and back to automatic when the take ends or fails.
   const setSession=t=>{ if(navigator.audioSession){ try{ navigator.audioSession.type=t; }catch(e){} } };
@@ -514,14 +466,33 @@ async function startRec(it){
     const mr=new MediaRecorder(stream), chunks=[];
     mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
     mr.onstop=async()=>{ stream.getTracks().forEach(t=>t.stop()); setSession('auto'); const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'}); delete REC[key];
-      if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); repaint(it); return; }
-      BUSY[key]='Turning your read into '+whoName(it)+'’s voice...'; repaint(it);
-      try{ const mp3=await retry(()=>sts(voiceOf(it),blob)); await addTake(it,mp3,'my read','(recording)'); delete ERR[key]; }
-      catch(e){ ERR[key]=e.message||String(e); }
-      delete BUSY[key]; repaint(it); renderSum(); };
+      const v=voiceOf(it); BUSY[key]='Sending your read to GitHub...'; repaint(it);
+      try{ await VT.ask('voices',[{kind:'sts',line:key,voice_id:v.voice_id,fallback_ids:(v.fallback_ids||[]).filter(x=>x&&x!==v.voice_id),stability:+v.stability,similarity:+v.similarity,label:'my read',script:'(recording)',_blob:blob,_ctx:{key}}]); delete ERR[key]; BUSY[key]='Asked. GitHub turns your read into '+whoName(it)+'’s voice (about a minute); it shows up here by itself. Your recording is removed from GitHub once it is used.'; }
+      catch(e){ ERR[key]=e.message||String(e); delete BUSY[key]; }
+      repaint(it); renderSum(); };
     REC[key]=mr; mr.start(); delete ERR[key]; repaint(it);
   }catch(e){ setSession('auto'); ERR[key]='The microphone is not available: '+(e.message||e)+'. Allow the microphone for this app and try again.'; repaint(it); }
 }
+// ---- answers from GitHub (VT.watch): a take arrives, or the reason it was not made
+function bulkSay(){ if(BULK&&BULK.done+BULK.fail>=BULK.total){ const r=BULK; BULK=null; toast(r.stopped?'Stopped after '+r.done+'.':'Done: '+r.done+' new take'+(r.done===1?'':'s')+(r.fail?', '+r.fail+' failed (tap a line to see why)':'')+'.'); renderAll(); } else renderBar(); }
+VT.watch('voices',{
+  wait(p,text){ const k=p.ctx&&p.ctx.key; if(k&&BUSY[k]!==undefined){ BUSY[k]=text; const it=itemByKey(k); if(it) repaint(it); } if(p.ctx&&p.ctx.history){ const m=$('histmsg'); if(m) m.textContent=text; } },
+  async take(p,buf,info){
+    if(p.ctx&&p.ctx.history){ let items=[]; try{ items=JSON.parse(new TextDecoder().decode(buf)).items||[]; }catch(e){} return applyHistory(items); }
+    const key=p.ctx&&p.ctx.key, it=key&&itemByKey(key); if(!it){ return; }
+    const v=voiceOf(it);
+    if(v&&info.voice_id&&p.kind!=='sfx'&&info.voice_id!==v.voice_id){ toast('That voice is gone on ElevenLabs. Using a backup voice.'); v.fallback_ids=(v.fallback_ids||[]).filter(x=>x!==info.voice_id); v.voice_id=info.voice_id; }   // the page's withVoice did this for the rest of the session
+    try{ await addTake(it,VT.b64(buf),info.label||'new take',info.script||''); delete ERR[key]; if(BULK) BULK.done++; }
+    catch(e){ ERR[key]=e.message||String(e); if(BULK) BULK.fail++; }
+    delete BUSY[key]; repaint(it); renderSum(); renderFilters(); bulkSay();
+  },
+  fail(p,why){
+    if(p.ctx&&p.ctx.history){ const b=$('hist'); if(b) b.disabled=false; const m=$('histmsg'); if(m) m.textContent=histNote(); return toast(why); }
+    const key=p.ctx&&p.ctx.key, it=key&&itemByKey(key); if(!key) return;
+    ERR[key]=why; delete BUSY[key]; if(it) repaint(it); renderSum();
+    if(BULK){ BULK.fail++; if(!BULK.stopped&&/ 401|API key|credit|quota/i.test(why)){ BULK.stopped=true; BULK.total=BULK.done+BULK.fail; VT.stop(BULK.rids.filter(r=>r!==p.rid)).catch(()=>{}); toast(why); } bulkSay(); }
+  }
+});
 
 // ---------- filters ----------
 function passWho(it,s){ s=s||F.who; return !s.size||s.has(it.v); }
@@ -660,27 +631,22 @@ function toast(m){ let el=$('toast'); if(!el){ el=document.createElement('div');
 async function runBulk(){
   const list=IDX.items.filter(it=>SEL.has(lk(it)));
   if(!list.length) return;
-  if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); return; }
+  if(!VT.hasToken()){ toast(VT.NOTOKEN); return; }
   const chars=list.reduce((n,it)=>n+(isDog(it)?0:finalText(it).length),0);
-  if(!confirm('Make a new take for '+list.length+' line'+(list.length>1?'s':'')+'? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each new take plays in the game on this device; the old ones stay here so you can switch back.')) return;
-  let wake=null; try{ if(navigator.wakeLock) wake=await navigator.wakeLock.request('screen'); }catch(e){}
-  BULK={done:0,fail:0,total:list.length,stop:false}; renderBar();
-  let i=0;
-  const worker=async()=>{ while(BULK&&!BULK.stop&&i<list.length){ const it=list[i++]; const ok=await newTake(it); if(!BULK) return; ok?BULK.done++:BULK.fail++; renderBar();
-    if(!ok&&/ 401|API key|credit|quota/i.test(ERR[lk(it)]||'')){ BULK.stop=true; toast(ERR[lk(it)]); } } };
-  await Promise.all([worker(),worker()]);
-  const r=BULK; BULK=null; try{ wake&&wake.release(); }catch(e){}
-  toast(r.stop?'Stopped after '+r.done+'.':'Done: '+r.done+' new take'+(r.done===1?'':'s')+(r.fail?', '+r.fail+' failed (tap a line to see why)':'')+'.');
-  renderAll();
+  if(!confirm('Ask GitHub to make a new take for '+list.length+' line'+(list.length>1?'s':'')+'? About '+chars.toLocaleString()+' characters of ElevenLabs credit. Each new take plays in the game on this device when it arrives; the old ones stay here so you can switch back. You can close the page while GitHub works.')) return;
+  BULK={done:0,fail:0,total:list.length,rids:[],stopped:false}; renderBar();
+  const rids=await askTakes(list);
+  if(!rids.length){ BULK=null; renderAll(); return; }
+  BULK.rids=rids; BULK.total=rids.length; renderBar();
 }
 
-// ---------- key ----------
+// ---------- takes are made on GitHub ----------
 function paintKey(){
-  const has=!!apiKey();
-  $('keybox').innerHTML=has
-    ?'<div class="keyrow"><span class="ok" style="flex:1">ElevenLabs key saved on this device.</span><button class="small" id="chg">Change key</button></div>'+
-     '<div class="keyrow" style="margin-top:10px"><button class="small gold" id="hist">Load the directions used for the baked clips</button><span class="hint" id="histmsg">'+histNote()+'</span></div>'
-    :'<label for="key">ElevenLabs API key (saved on this device only)</label><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste it here"><div class="keyrow" style="margin-top:8px"><button class="small" id="savekey">Save key</button></div>';
+  const has=VT.hasToken();
+  $('keybox').innerHTML=(has
+    ?'<div class="keyrow"><span class="ok" style="flex:1">New takes are made on GitHub with the game repository\'s ElevenLabs key. Nothing to paste here.</span></div>'
+    :'<div class="keyrow"><span class="err" style="flex:1">'+esc(VT.NOTOKEN)+'</span></div>')+
+    '<div class="keyrow" style="margin-top:10px"><button class="small gold" id="hist"'+(VT.pend('voices').some(p=>p.kind==='history')?' disabled':'')+'>Load the directions used for the baked clips</button><span class="hint" id="histmsg">'+histNote()+'</span></div>';
 }
 
 // ---------- directions from ElevenLabs history ----------
@@ -718,16 +684,16 @@ function retag(script,line){
   return lw.map((w,j)=>before[j].concat([surf[j]]).join(' ')).join(' ')+(tail.length?' '+tail.join(' '):'');
 }
 async function loadHistory(){
-  if(!apiKey()) return toast('Paste your ElevenLabs API key at the top first.');
-  const msg=$('histmsg'), btn=$('hist'); btn.disabled=true; msg.textContent='Reading your ElevenLabs history...';
-  const byVoice=new Map(); let after=null, pages=0, total=0;
-  try{
-    for(;;){ const u='https://api.elevenlabs.io/v1/history?page_size=1000'+(after?'&start_after_history_item_id='+encodeURIComponent(after):'');
-      const r=await retry(()=>fetch(u,{headers:{'xi-api-key':apiKey()}}).then(async r=>{ if(!r.ok) throw await apiErr(r); return r.json(); }));
-      for(const h of (r.history||[])){ if(!h.text||!h.voice_id||!/\[/.test(h.text)) continue; if(!byVoice.has(h.voice_id)) byVoice.set(h.voice_id,[]); byVoice.get(h.voice_id).push(h); total++; }
-      pages++; msg.textContent='Reading your ElevenLabs history... '+total.toLocaleString()+' scripts';
-      if(!r.has_more||!r.last_history_item_id||pages>60) break; after=r.last_history_item_id; }
-  }catch(e){ btn.disabled=false; msg.textContent=''; return toast(/ 401|403|permission/i.test(e.message)?'The key cannot read history. In ElevenLabs, allow "History" (read) for this key, then try again.':e.message); }
+  if(!VT.hasToken()) return toast(VT.NOTOKEN);
+  const msg=$('histmsg'), btn=$('hist'); btn.disabled=true; msg.textContent='Asking GitHub to read your ElevenLabs history...';
+  try{ await VT.ask('voices',[{kind:'history',line:'history',_ctx:{history:true}}]); msg.textContent='Asked. GitHub reads the history (about a minute); the directions load here by itself.'; }
+  catch(e){ btn.disabled=false; msg.textContent=''; toast(e.message||String(e)); }
+}
+// The Action sends back the scripts of the history that have a [direction] (voice id, text, date); the matching below is the page's own, as before.
+function applyHistory(list){
+  const byVoice=new Map(); let total=0;
+  for(const h of list){ if(!h.text||!h.voice_id||!/\[/.test(h.text)) continue; if(!byVoice.has(h.voice_id)) byVoice.set(h.voice_id,[]); byVoice.get(h.voice_id).push(h); total++; }
+  const btn=$('hist'), msg=$('histmsg');
   // Index the history by voice and words, newest first.
   const idx=new Map(); for(const [vid,list] of byVoice){ list.sort((x,y)=>(y.date_unix||0)-(x.date_unix||0)); const m=new Map(); for(const h of list){ const k=canonWords(h.text).join(' '); if(!m.has(k)) m.set(k,h); } idx.set(vid,{m,list}); }
   let got=0; const next={};
@@ -744,8 +710,6 @@ async function loadHistory(){
 // ---------- events ----------
 document.addEventListener('click',async e=>{
   const t=e.target.closest('button,[data-act]'); if(!t) return;
-  if(t.id==='savekey'){ const v=($('key').value||'').trim(); if(!v) return toast('Paste the key first.'); try{ localStorage.setItem(KEYNAME,v); }catch(err){ return toast('This browser would not save the key.'); } paintKey(); return; }
-  if(t.id==='chg'){ try{ localStorage.removeItem(KEYNAME); }catch(err){} paintKey(); return; }
   if(t.id==='hist'){ loadHistory(); return; }
   if(t.id==='loadphone'){ t.disabled=true; t.textContent='Loading...'; await loadPhone(true); return; }
   if(t.id==='clear'){ F.who.clear(); F.type.clear(); F.ch.clear(); F.show='all'; F.q=''; $('q').value=''; saveF(); shown=PAGE; renderAll(); return; }
@@ -761,7 +725,7 @@ document.addEventListener('click',async e=>{
   if(act==='selall'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(act==='selnone'){ SEL.clear(); renderList(); renderBar(); return; }
   if(act==='bulk') return runBulk();
-  if(act==='stopbulk'){ if(BULK) BULK.stop=true; t.textContent='Stopping...'; return; }
+  if(act==='stopbulk'){ if(BULK&&!BULK.stopped){ BULK.stopped=true; t.textContent='Stopping...'; const left=BULK.rids.filter(r=>VT.pend('voices').some(p=>p.rid===r)); VT.stop(left).then(()=>toast('Asked GitHub to stop. Takes it already made still arrive.')).catch(e=>toast(e.message||String(e))); } return; }
   const row=t.closest('.row'); const it=row&&itemByKey(row.dataset.k); if(!it) return;
   const key=lk(it);
   if(act==='open'){ const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
@@ -847,6 +811,7 @@ function voiceLink(again){
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the voice list ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   IDX.who.forEach(w=>WHO[w.id]=w);
   $('howto').textContent='Each box holds what ElevenLabs reads: change the words or the [directions] right there; edits save as you type and every new take uses them (CAPS for emphasis, Tah Tah for Ta-ta). The subtitle in the game stays as it is until Claude changes it. Tick the box on any line, or Select all shown for everything the filters show, then Regenerate makes a new take for each. Tap a line to open it. Play hears what the game plays now. New take makes a fresh ElevenLabs read from the direction; Record my voice turns your own read into the character. The newest take plays in the game on this device at once; tap Use on any older take or on Built into the game to switch. List made '+IDX.made+'.';
+  for(const p of VT.pend('voices')) if(p.ctx&&p.ctx.key) BUSY[p.ctx.key]='Asked earlier. Waiting for GitHub to make it...';   // takes asked before this page was opened keep being watched
   renderAll(); voiceLink();
   await loadPhone(false); voiceLink(true);
   if(window.__VL_READY) window.__VL_READY();
@@ -873,7 +838,7 @@ async function loadPhone(force){
   renderAll(); paintSendTakes();
   loadMerged().then(hashPhone); loadWanted();
 }
-window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake,sendTakes,takesToSend};
+window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,BUSY,ERR,get BULK(){return BULK;},lk,visible,newTake,askTakes,applyHistory,repaintItem:repaint,renderAll,renderBar,takeReq,finalText,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake,sendTakes,takesToSend};
 </script>
 </body>
 </html>

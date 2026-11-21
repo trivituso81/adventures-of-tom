@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Headless test for voices.html (Voice Library), ElevenLabs mocked. Phone-size viewport.
 Run from the repo root with the server up (python3 tools/serve.py):  python3 tools/voice-library/test.py
-Checks: list and filter counts, play of a built-in battle and dialogue clip, a new take (saved to aot-local-clips and used),
-Use built-in, select + bulk takes, record-free paths, the game picks the phone take up (engine/local-clips.js), and the admin entry.
+Checks: list and filter counts, play of a built-in battle and dialogue clip, a take kept on the phone (saved to aot-local-clips and used),
+Use built-in, select + bulk bar, the game picks the phone take up (engine/local-clips.js), and the admin entry.
+keysecrets3: takes are not made by this page any more (ElevenLabs is called by the voice-take Action), so this test keeps takes with the page's own addTake and
+the new-take, bulk, record, history and Script Editor flows are tested in tools/voice-library/keysecrets3_test.py.
 Screens go to tools/shots/vl-*.png."""
 import os, sys, json, asyncio, base64
 from playwright.async_api import async_playwright
@@ -32,18 +34,13 @@ async def main():
         b = await p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None, args=['--headless=new', '--autoplay-policy=no-user-gesture-required'])
         ctx = await b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
         page = await ctx.new_page()
-        calls = []; bodies = []
-        HIST = {'history': [], 'has_more': False}
-        async def el(route):
-            if '/v1/history' in route.request.url:
-                await route.fulfill(status=200, body=json.dumps(HIST), headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}); return
-            calls.append(route.request.url); bodies.append(route.request.post_data or '')
-            await route.fulfill(status=200, body=MP3, headers={'Content-Type': 'audio/mpeg', 'Access-Control-Allow-Origin': '*'})
+        calls = []
+        async def el(route):   # keysecrets3: the page must never call ElevenLabs
+            calls.append(route.request.url); await route.abort()
         await page.route('https://api.elevenlabs.io/**', el)
         errs = []; page.on('pageerror', lambda e: errs.append(str(e)))
         page.on('dialog', lambda d: asyncio.ensure_future(d.accept()))
         await page.goto(BASE + 'voices.html'); await page.evaluate("localStorage.clear()")
-        await page.evaluate("localStorage.setItem('aot-el-key','test-key')")
         await page.reload(); await page.wait_for_selector('.row', timeout=30000)
         J = page.evaluate
         total = await J("__VL.IDX.items.length")
@@ -95,11 +92,9 @@ async def main():
         await row.locator('[data-act="open"]').click()
         await page.wait_for_selector('.row.open [data-act="take"]')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-open.png'))
-        await page.locator('.row.open [data-act="take"]').click()
-        await page.wait_for_function("__VL.LOCAL.size>0", timeout=10000)
+        await J("async ([k,m])=>{ const it=__VL.itemByKey(k); await __VL.addTake(it,m,'new take','[whispering] Ow, testing.'); __VL.repaintItem(it); }", [key, base64.b64encode(MP3).decode()])
         nk = await J(f"__VL.itemByKey({json.dumps(key)}).k.length")
-        ok(await J("__VL.LOCAL.size") == nk and len(calls) >= 1, f'new take saved as phone clip ({nk} row(s)), {len(calls)} call')
-        ok('Ow, testing.' in bodies[0], 'new take sends the edited text')
+        ok(await J("__VL.LOCAL.size") == nk and not calls, f'a take is kept as phone clip ({nk} row(s)); the page called ElevenLabs {len(calls)} times')
         ok(await page.locator('.row.open .take.use').count() == 1 and 'playing in the game' in await page.locator('.row.open .take.use').inner_text(), 'new take marked as playing in the game')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-take.png'))
         # Use built-in again.
@@ -110,9 +105,8 @@ async def main():
         # Select two and bulk.
         picks = page.locator('.row .pick'); await picks.nth(1).check(); await picks.nth(2).check()
         before = await J("__VL.TAKES.size")
-        await page.click('[data-act="bulk"]')
-        await page.wait_for_function(f"__VL.TAKES.size>={before+2}", timeout=15000); await page.wait_for_timeout(300)
-        ok(await J("__VL.TAKES.size") == before + 2, 'bulk made 2 takes')
+        await J("async m=>{ for(const it of __VL.visible().slice(1,3)) await __VL.addTake(it,m,'new take','x'); }", base64.b64encode(MP3).decode())
+        ok(await J("__VL.TAKES.size") == before + 2, 'two more takes kept')
         await page.screenshot(path=os.path.join(SHOTS, 'vl-select.png'))
         ok('Regenerate 2' in await page.inner_text('#bar'), 'bar offers Regenerate 2')
         await page.click('[data-act="selnone"]'); await page.wait_for_timeout(200)
@@ -136,13 +130,14 @@ async def main():
         await page.click('#clear')
         pick = await J("(()=>{const it=__VL.IDX.items.find(i=>i.t==='d'&&i.f>=0&&/\\b(I'm|It's|don't)\\b/.test(i.x)&&i.x.split(' ').length>4); const v=__VL.IDX.voices['dialog|'+it.v]; return {key:__VL.lk(it),x:it.x,vid:v.voice_id};})()")
         old_script = '[sly, delighted] ' + pick['x'].replace("I'm", 'I am').replace("It's", 'It is').replace("don't", 'do not').replace(' ', ' [beat] ', 1)
-        HIST['history'] = [{'history_item_id': 'h1', 'voice_id': pick['vid'], 'text': old_script, 'date_unix': 1}]
-        await page.click('#hist'); await page.wait_for_function("document.getElementById('histmsg').textContent.includes('baked clips')", timeout=10000)
+        await J("items=>__VL.applyHistory(items)", [{'voice_id': pick['vid'], 'text': old_script, 'date_unix': 1}])
+        await page.wait_for_function("document.getElementById('histmsg').textContent.includes('baked clips')", timeout=10000)
         got = await J(f"JSON.parse(localStorage.getItem('aot-vl-hist'))[{json.dumps(pick['key'])}]")
         ok(bool(got) and got.startswith('[sly, delighted]') and '[beat]' in got, f'history direction applied: {got}')
         words_ok = await J(f"(()=>{{const g={json.dumps(got or '')}.replace(/\\[[^\\]]*\\]/g,' ').replace(/\\s+/g,' ').trim(); return g==={json.dumps(pick['x'])}.replace(/’/g,\"'\");}})()")
         ok(words_ok, 'history direction keeps the current words (contractions as on screen)')
         ok(not errs, 'no page errors: ' + '; '.join(errs[:3]))
+        ok(not calls, 'the page never called api.elevenlabs.io: %s' % calls)
         # The game reads the phone clip at startup.
         text = await J(f"__VL.itemByKey({json.dumps(key)}).x")
         await page.goto(BASE + 'index.html'); await page.wait_for_function("window.__LE&&__LE.LOCALCLIPS&&__LE.LOCALCLIPS.ready", timeout=30000)

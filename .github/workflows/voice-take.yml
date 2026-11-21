@@ -1,0 +1,63 @@
+name: voice-take
+
+# keysecrets3. Makes the ElevenLabs takes the Voice Library and the Script Editor asked for (tools/voice-library/voicetake.py): text to speech, sound effects,
+# speech to speech and the history read. The pages commit data/voice-requests.json with the message "voice: take <n> ..."; this workflow runs on that push
+# only (every other push skips it without a checkout). The key is the repo secret ELEVENLABS_API_KEY (never printed). Takes wait on branch `voicetake`
+# (never merged, never served); the pages poll it. A recording for speech to speech waits on branch `voicein` and is deleted from it as soon as it was used.
+# By hand (workflow_dispatch) it defaults to a dry run: it lists what is queued and sends nothing. This is not the old `voice-gen` job (voicegen1, lines with no clip).
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/voice-requests.json']
+  workflow_dispatch:
+    inputs:
+      cap_chars:
+        description: 'Most characters of text to speech made in this run (every attempt counts).'
+        required: false
+        default: '300000'
+      dry_run:
+        description: 'true: list what is queued, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-take
+  cancel-in-progress: false
+
+jobs:
+  take:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'voice: take ')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /data/voice-requests.json
+            /tools/art-library/artgen.py
+            /tools/voice-library/voicetake.py
+            /.github/
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests numpy soundfile
+      - name: Make the takes
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          EVENT: ${{ github.event_name }}
+          CAP: ${{ inputs.cap_chars }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--out "$RUNNER_TEMP/voicetake" --cap-chars "${CAP:-300000}" --max-minutes 320)
+          if [ "$EVENT" = "workflow_dispatch" ] && [ "$DRY" = "true" ]; then ARGS+=(--dry-run); fi
+          python3 -I tools/voice-library/voicetake.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### voice-take'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

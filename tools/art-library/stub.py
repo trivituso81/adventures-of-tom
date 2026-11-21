@@ -22,6 +22,7 @@ def png(w=96, h=128):
     return b'\x89PNG\r\n\x1a\n' + ch(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + ch(b'IDAT', data) + ch(b'IEND', b'')
 
 LOG, FILES, VIDEOS, PICK = [], {}, {}, {}
+REFS = {}   # keysecrets3: branches made through the git data API (blobs, trees, commits, refs)
 import os
 _seed = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'art-prompts.json')
 if os.path.exists(_seed):
@@ -81,6 +82,8 @@ class H(BaseHTTPRequestHandler):
         if self.path.startswith('/repos/') and '/actions/workflows/board-sync.yml/runs' in self.path:   # STUB_RUNS: JSON list of {conclusion, updated_at}; default one success now
             runs = json.loads(os.environ['STUB_RUNS']) if os.environ.get('STUB_RUNS') else [{'conclusion': 'success', 'updated_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}]
             return self._send(200, {'workflow_runs': [dict(r, status='completed') for r in runs]})
+        if self.path.startswith('/repos/') and '/git/ref/heads/' in self.path:   # keysecrets3: does branch <name> exist yet
+            return self._send(200, {'ref': self.path.split('/git/ref/', 1)[1]}) if self.path.split('/git/ref/heads/', 1)[1].split('?')[0] in REFS else self._send(404, {'message': 'Not Found'})
         if self.path.startswith('/repos/'):
             p = self.path.split('/contents/', 1)[-1].split('?')[0]
             if p in FILES: return self._send(200, {'sha': FILES[p]['sha'], 'content': FILES[p]['content'], 'path': p})
@@ -93,6 +96,14 @@ class H(BaseHTTPRequestHandler):
     def do_POST(self):
         b = self._body()
         if self.headers.get('Authorization') != 'Bearer test': return self._send(401, {'error': 'bad key'})
+        if self.path.startswith('/repos/') and '/git/' in self.path:   # keysecrets3: just enough of the git data API for a page to make a branch from an empty history
+            kind = self.path.rsplit('/', 1)[1]
+            LOG.append({'github': 'POST', 'git': kind, 'ref': (b or {}).get('ref', '')})
+            if kind == 'refs':
+                name = str((b or {}).get('ref', '')).replace('refs/heads/', '')
+                if name in REFS: return self._send(422, {'message': 'Reference already exists'})
+                REFS[name] = (b or {}).get('sha', ''); return self._send(201, {'ref': b.get('ref')})
+            return self._send(201, {'sha': hashlib.sha1((self.path + json.dumps(b, sort_keys=True)).encode()).hexdigest()})
         if self.path == '/v1/videos/generations':
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt') and isinstance(b.get('image'), dict) and str(b['image'].get('url', '')).startswith('data:image/') and isinstance(b.get('duration'), int) and b.get('resolution') in ('480p', '720p', '1080p')
             if not ok: return self._send(400, {'error': 'bad request shape'})

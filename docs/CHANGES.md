@@ -1,3 +1,15 @@
+## keysecrets3 (2026-11-20): Voice Library and Script Editor takes are made on GitHub; the ElevenLabs key box and `aot-el-key` are gone
+
+Card c-keysecrets3. Tom: "now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens?"
+- Fact: New take, Regenerate N, Record my voice, Load the directions (Voice Library) and Make a take, Record my read (Script Editor) now commit `data/voice-requests.json` (`voice: take N (...)`); the `voice-take` Action (`tools/voice-library/voicetake.py`, secret `ELEVENLABS_API_KEY`) makes the takes with the settings the pages sent before and keeps them on branch `voicetake`; the pages poll it, show failures on the line, and keep the take as before. Shared page code `engine/voice-take.js`.
+- Kept as before: voice, backup voices, model, stability, similarity, speed, a seed per try (dropped if refused), best of three (Voice Library), one try with no seed (Script Editor), retry on busy, sound effects, speech to speech, the history read.
+- Safety: the job empties the queue before it pays (a second run cannot pay twice), 300,000 characters per run counting every try, Stop adds ids to `cancel`.
+- Recordings of Tom's voice go to throwaway branch `voicein` (public repo) and are deleted after use.
+- Found and fixed: the Script Editor's voice buttons did nothing before (`VOICE.panel` built the key with the scene id twice).
+- Removed: the key box, `aot-el-key`, and the browser ElevenLabs code in `voices.html` and `engine/script-voice.js`. Remaining `api.elevenlabs.io` strings are in tests and old tool pages (not served pages of the game).
+- Not done: the Action was never run for real (no money spent); `tools/voice-library/test.py` still stops at a disabled Clear button, as on main before.
+- Tests: `voicetake_test.py`, `keysecrets3_test.py`; `keysecrets_test.py`, `keysecrets2_test.py`, `artgen_test.py` still pass.
+
 ## startfix1 (2026-11-21): the Opus medium and Sonnet high START routes tried again and are still not proven, so both stay paused
 
 Card c-startfix. Facts: after Tom's edit both routes were turned on at 00:55 UTC and the two probe cards flagged. Opus medium fired and claimed its probe but pushed nothing in 10 minutes; Sonnet high never fired. The earlier probe commits came from hand-pasted runs, so they prove nothing. Both routes are paused again, probes retired, Tom card t-startfix-look added. Nothing in the game changed.
