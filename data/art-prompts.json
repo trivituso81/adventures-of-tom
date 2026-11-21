@@ -17575,6 +17575,19 @@
       "f_paint",
       "p6"
      ]
+    },
+    {
+     "date": "2026-11-21",
+     "note": "As per qa",
+     "from": "v1",
+     "at": 1795286625476,
+     "srv": "prop-gate-town-school-open@20261121T072848",
+     "svc": "xai",
+     "qa": 0.857,
+     "qaFail": [
+      "f_paint",
+      "p6"
+     ]
     }
    ],
    "id": "prop-gate-town-school-open",
