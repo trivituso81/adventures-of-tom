@@ -19725,7 +19725,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN > ART LIBRARY > Props > Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it.",
@@ -19789,7 +19789,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "history": [
     {
      "d": "2026-11-20",
@@ -19848,6 +19848,11 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: made 3 pictures, QA: 13 of 14, 14 of 15, 10 of 13. Spent about $0.18."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Based on the feedback adjust the prompts for the failed images and regenerate Sent to Claude as card c-fix-itembannerart-pics-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T07:29:04.975Z"
     }
    ],
    "gen": {
@@ -19926,7 +19931,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
     "opening": "unknown"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-ch2lessons",
@@ -22716,6 +22722,58 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-fix-itembannerart-pics-3",
+   "tag": "fix-itembannerart-pics-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "next": "You reported a problem on Make and approve 18 item picture sheets (288 items). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Based on the feedback adjust the prompts for the failed images and regenerate",
+   "blocks": [
+    "t-itembannerart-pics"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T07:29:04.044Z",
+     "card": "t-itembannerart-pics",
+     "title": "Make and approve 18 item picture sheets (288 items)",
+     "ask": "pictures",
+     "words": "Based on the feedback adjust the prompts for the failed images and regenerate",
+     "shot": "",
+     "asked": "Open ADMIN ) BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-itembannerart-pics"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-itembannerart-pics.",
+     "at": "2026-11-21T07:29:04.975Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-itembannerart-pics: Based on the feedback adjust the prompts for the failed images and regenerate",
+     "at": "2026-11-21T07:29:04.975Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make and approve 18 item picture sheets (288 items).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-itembannerart-pics-3 and t-itembannerart-pics in data/board.json, history included. Your first push is the commit board: start c-fix-itembannerart-pics-3.\n\nTom tested and found problems:\n1. Card t-itembannerart-pics (Make and approve 18 item picture sheets (288 items), ask pictures). He was asked: Open ADMIN ) BOARD, this card, tap Generate all 3 pictures (two taps, about $0.15). These are the only 3 items still to make, each alone in its own picture; the 18 sheets and the 2 redo sheets are approved and in the game. When the job finishes, open ADMIN ) ART LIBRARY ) Props ) Item pictures (the button below) and look at the 3: (1) Pro Racing Flats: a pair of neon running shoes with flat paper-thin soles, no studs, no stripe or swoosh; (2) Tiny Clay Taco: a small pottery taco with shiny speckled glaze, not real food, with a paperclip in it; (3) Birthday Sash: a gold sparkly sash (a long band) with a big gold bow, not a bow alone. APPROVE each one that is right; REJECT with a note saying what is wrong. Then play: the next ITEM GAINED banner shows a painted picture in its ring instead of an emoji, with no crimson shadow smear under it. He wrote: Based on the feedback adjust the prompts for the failed images and regenerate\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T07:29:04.044Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-itembannerart-pics to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-itembannerart-pics, and give the build fix-itembannerart-pics-3 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-itembannerart-pics"
   }
  ],
  "sessions": [
