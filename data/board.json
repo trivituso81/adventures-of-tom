@@ -20148,7 +20148,7 @@
    "title": "Play the Grump Hollow wrapper trail",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine cream muffin wrappers are now bigger (about the width of Grace's body) with a dark shadow, so they should stand out from the stones: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left. If you still cannot see them, or they are too big, use the REPORT tab and pin one.",
@@ -20172,13 +20172,19 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Play the Grump Hollow wrapper trail is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating the mudling, there should be 4 wrappers that lead to the top left corner forcing the party to battle a monster there / - after defeating that monster, there should 4 more wrappers that lead to the center of the aera, where the party must defeat the log / - after defeating the log, there should be 4 more wrappers that lead to the big one activiation spot / after each monster is defeated in this case, Grace should say 3 wrappers, let's follow them! / remember thatn only 3 monster should trigger this: the mudling, the toad looking thing in the top left and the log that sits in the middle Sent to Claude as card c-fix-hollowtrail-play-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-21T03:19:06.407Z"
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGvfNDsKG9zQ49DJge",
     "opening": "unknown"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "t-madelot-play",
@@ -21307,6 +21313,65 @@
     "effort": "medium (one banner and one data field, modelled on the existing banner)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-itemdef1 in data/board.json, history included. Your first push is the commit board: start c-itemdef1.\n\nChange every item banner (itemBanner in engine/party-banner.js) so it reads like a JRPG item definition with four parts: item name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks). Write the item text in the game's voice: short, warm, funny, contractions, no em dashes. Test each banner in portrait and landscape, bump the tags, add a docs/CHANGES.md entry headed ## itemdef1, push to main and write the result onto the card.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-fix-hollowtrail-play-2",
+   "tag": "fix-hollowtrail-play-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "next": "You reported a problem on Play the Grump Hollow wrapper trail. Claude starts the fix by itself. Latest: youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating",
+   "blocks": [
+    "t-hollowtrail-play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-21T03:19:05.199Z",
+     "card": "t-hollowtrail-play",
+     "title": "Play the Grump Hollow wrapper trail",
+     "ask": "play",
+     "words": "youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating the mudling, there should be 4 wrappers that lead to the top left corner forcing the party to battle a monster there / - after defeating that monster, there should 4 more wrappers that lead to the center of the aera, where the party must defeat the log / - after defeating the log, there should be 4 more wrappers that lead to the big one activiation spot / after each monster is defeated in this case, Grace should say 3 wrappers, let's follow them! / remember thatn only 3 monster should trigger this: the mudling, the toad looking thing in the top left and the log that sits in the middle",
+     "shot": "",
+     "asked": "RELOAD, then CHAPTERS ) Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine cream muffin wrappers are now bigger (about the width of Grace's body) with a dark shadow, so they should stand out from the stones: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left. If you still cannot see them, or they are too big, use the REPORT tab and pin one."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-hollowtrail-play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-hollowtrail-play.",
+     "at": "2026-11-21T03:19:06.407Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-hollowtrail-play: youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating the mudling, there should be 4 wrappers that lead to the top left corner forcing the party to battle a monster there / - after defeating that monster, there should 4 more wrappers that lead to the center of the aera, where the party must defeat the log / - after defeating the log, there should be 4 more wrappers that lead to the big one activiation spot / after each monster is defeated in this case, Grace should say 3 wrappers, let's follow them! / remember thatn only 3 monster should trigger this: the mudling, the toad looking thing in the top left and the log that sits in the middle",
+     "at": "2026-11-21T03:19:06.407Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-21T03:19:06.407Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the Grump Hollow wrapper trail.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-hollowtrail-play-2 and t-hollowtrail-play in data/board.json, history included. Your first push is the commit board: start c-fix-hollowtrail-play-2.\n\nTom tested and found problems:\n1. Card t-hollowtrail-play (Play the Grump Hollow wrapper trail, ask play). He was asked: RELOAD, then CHAPTERS ) Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine cream muffin wrappers are now bigger (about the width of Grace's body) with a dark shadow, so they should stand out from the stones: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left. If you still cannot see them, or they are too big, use the REPORT tab and pin one. He wrote: youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating the mudling, there should be 4 wrappers that lead to the top left corner forcing the party to battle a monster there / - after defeating that monster, there should 4 more wrappers that lead to the center of the aera, where the party must defeat the log / - after defeating the log, there should be 4 more wrappers that lead to the big one activiation spot / after each monster is defeated in this case, Grace should say 3 wrappers, let's follow them! / remember thatn only 3 monster should trigger this: the mudling, the toad looking thing in the top left and the log that sits in the middle\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-21T03:19:05.199Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-hollowtrail-play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-hollowtrail-play, and give the build fix-hollowtrail-play-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-hollowtrail-play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
