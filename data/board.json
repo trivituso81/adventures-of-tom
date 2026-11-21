@@ -18112,6 +18112,42 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "c-clipstuck1",
+   "tag": "clipstuck1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "GENERATE VIDEO: fix stuck button and let Tom review",
+   "next": "Fix the ASKED, WAITING button that never clears; show every GitHub-made version on the clip's Art Library card with REVIEW; a single GENERATE VIDEO press waits for Tom's review instead of auto-approving (GENERATE CHAPTER keeps auto-approve). No video is generated.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/next-addendum-clipstuck.md in this Project, then CLAUDE.md and claude/handoff-rules.md in the repo\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom, 16:32: \"why are you tricking me into spending money by keeping the button label as asked, waiting when it's approved. and there's no way for me to review the video\". Retires t-keysecrets2-try and c-fix-keysecrets2-try-5 (six fix rounds did not cure the cause)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: this conversation took the card."
+    }
+   ],
+   "prompt": {
+    "what": "Builds clipstuck1: fixes the stuck GENERATE VIDEO button and lets Tom review GitHub-made clip versions.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build where the steps are not all written)",
+    "effort": "medium (three known changes in one area)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-clipstuck1 in data/board.json. Your first push is the commit board: start c-clipstuck1. Build clipstuck1 as the card's next says, run tools/art-library/clip_lib_test.py and the stub test, look at the clip card at 390 x 844, bump tags, add a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
