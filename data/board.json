@@ -28220,7 +28220,7 @@
   {
    "id": "t-buildpill2-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -28242,8 +28242,14 @@
     {
      "d": "2026-11-21",
      "t": "Made by build buildpill2 (card c-buildpill2)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:45:05.305Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-reports-8",
