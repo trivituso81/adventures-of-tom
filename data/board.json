@@ -23409,10 +23409,10 @@
    "id": "c-costs1",
    "tag": "costs1",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Tools",
    "title": "AI Costs page: plans, balances, every charge, the total",
-   "next": "Built as costs1: ADMIN > AI COSTS (costs.html) with Overview, Services, Ledger and Totals, and 29 charges filed from receipts in email ($975.44 from Jul 30 to Nov 20). Tom looks at it on card t-costs1look.",
+   "next": "Rebuild costs1 from scratch: the earlier session's files (costs.html, data/costs.json, docs/COSTS.md, tools/costs_test.py) were never pushed to any branch, so they are gone. Re-read the receipts from Gmail and build the page again.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -23427,7 +23427,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a new admin tool, designed in the session)",
     "effort": "high (a new tool designed and built in one session)",
-    "text": "Read CLAUDE.md, docs/COSTS.md and card c-costs1 in data/board.json, then finish what its history describes and push build costs1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md and card c-costs1 in data/board.json (its history has Tom's full request). Nothing from an earlier attempt exists in the repo, so build it from scratch: ADMIN > AI COSTS (costs.html, optimized for landscape desktop, own URL) with Overview, Services, Ledger and Totals, data in data/costs.json, the AI Costs button on admin.html, docs/COSTS.md, tools/costs_test.py. Fill the ledger from receipts in Tom's Gmail (Apple, Google Play, Stripe, Orb; the earlier attempt found 29 charges, $975.44 from Jul 30 to Nov 20). Commit and push to main after the page works, before reading more mail, so work cannot be lost. Then push build costs1 with `after` t-costs1look. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -23441,24 +23441,20 @@
     {
      "d": "2026-11-21",
      "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Rescue chose START NEXT: the 'Built' line above was wrong, nothing from the earlier session reached the repo (no costs.html on main or any branch). Prompt rewritten to rebuild it and to push to main early."
     }
    ],
-   "after": "t-costs1look",
-   "rescue": {
-    "at": "2026-11-21T15:27:53+00:00",
-    "n": 1,
-    "why": "Its note starts with Shipped but the card is open",
-    "url": "https://claude.ai/code/cse_01RXeukEArp9wiETGrGusDN4",
-    "prev": "https://claude.ai/code/session_01RXeukGu9qeueja9Yb7pRs5"
-   },
-   "started_at": "2026-11-21T15:27:53+00:00"
+   "after": "t-costs1look"
   },
   {
    "id": "t-costs1look",
    "title": "Look at the AI Costs page on your desktop",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "build": "costs1",
    "next": "On your desktop browser open https://trivituso81.github.io/adventures-of-tom/costs.html (or ADMIN > AI COSTS). Check the Overview total, open Ledger and press Subtotal by Month, open Totals and click one figure in the table, then open the Claude service. Say what is wrong or missing. Your notes go to the next build, \"AI Costs fills itself in: balances and job spend\".",
@@ -23471,8 +23467,13 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-costs1 (build costs1). Your notes go to card c-costs2, the AI Costs page that fills itself in."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Waits on c-costs1: the page was never pushed, so there is nothing to look at yet."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-costs2",
