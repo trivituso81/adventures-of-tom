@@ -599,9 +599,14 @@ function drawFrame(i){
   const sc=$('scrub');if(sc&&document.activeElement!==sc)sc.value=i;
   const fn=$('fno');if(fn)fn.textContent='Frame '+(i+1)+' of '+D.n+(D.impact!=null?' · hit lands on frame '+(D.impact+1):'');
 }
+// The move's sound (data/b3-sfx.js), played when its clip picture comes on screen: the same notes the game plays.
+let ACX=null;
+function playNotes(key){try{const N=(typeof B3_SFX_NOTES!=='undefined'&&B3_SFX_NOTES[key])||[];if(!N.length)return;ACX=ACX||new (window.AudioContext||window.webkitAudioContext)();if(ACX.state==='suspended')ACX.resume();
+  for(const n of N){const t=ACX.currentTime+(n.delay||0),o=ACX.createOscillator(),g=ACX.createGain();o.type=n.type||'sine';o.frequency.setValueAtTime(n.f0,t);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(n.vol,t+.005);g.gain.exponentialRampToValueAtTime(.001,t+n.dur);o.connect(g);g.connect(ACX.destination);o.start(t);o.stop(t+n.dur+.05);}}catch(e){}}
+function soundOf(a){const m=a&&a.kind==='move'?B3_SKILLS[a.id.replace(/^move:/,'')]:null;return m&&m.anim&&m.anim.sound||null;}
 function tick(now){
   if(!PL.on)return;const dt=Math.min(100,now-PL.last);PL.last=now;PL.t+=dt*PL.speed;const L=clipLen(PL.D);if(PL.t>=L)PL.t%=L;
-  drawFrame(frameAt(PL.D,PL.t));PL.raf=requestAnimationFrame(tick);
+  const fi=frameAt(PL.D,PL.t),SN=soundOf(PL.a);if(SN&&fi===SN.at&&PL.sfxAt!==SN.at)playNotes(SN.sfx);PL.sfxAt=fi;drawFrame(fi);PL.raf=requestAnimationFrame(tick);
 }
 function setPlaying(v){PL.on=v;const b=$('bplay');if(b)b.textContent=v?'Pause':'Play';if(v){PL.last=performance.now();PL.raf=requestAnimationFrame(tick);}else cancelAnimationFrame(PL.raf);}
 async function loadClip(id){

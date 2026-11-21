@@ -287,6 +287,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
       let jx=home.cx,jy=home.base; if(travel) { const st=b3cStand(src,CL,tg); jx=st.x; jy=st.y; T0=.55; }
       B3P.body[src]={kind:'cmove',t0:B3P.t,T0,jx,jy,C:CL,back:travel?.5:0,dur:T0+dur+.12+(travel?.5:0)};
     }
+    const SN=head.anim.sound; if(SN&&CL.ms[SN.at]!=null) b3After(T0+CL.ms[SN.at]/1000,()=>b3Sfx(SN.sfx));   // a sound on a given clip picture (data/b3-sfx.js)
     if(hits.length) hits.forEach((h,k)=>b3After(T0+land+k*.35,reveal)); else b3After(T0+land,()=>{ for(const b of late) b3Show(b); });
     b3After(Math.max(T0+dur+.1,T0+land+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
   }

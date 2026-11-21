@@ -1,3 +1,7 @@
+## anim-tom-loungepass-ding (2026-11-21): a short ding plays on the sparkle of Tom's Lounge Pass Flex
+
+Card c-anim-tom-loungepass-ding (Tom: "a little like ding sound with like a sparkle"). The video is untouched. New `data/b3-sfx.js` (`B3_SFX_NOTES.ding`, three short bell notes); `engine/audio.js` `sfx.ding` plays it; the move row in `data/b3-kit-tom.js` has `anim.sound={at:9,sfx:'ding'}` (clip picture index 9 = baked picture 10, 600 ms in); `engine/b3-play.js` fires it when a clip move starts (timed from the clip's own `ms`); the Battle Guide player (`battle-guide.html`, `playNotes`, `soundOf`) plays the same notes when that picture shows. Any other move can use `anim.sound` the same way.
+
 ## dash1 (2026-11-21): the Admin Dashboard page for the wide monitor: Board, game, Battle Guide and Admin side by side
 
 Card c-dash1 (plan `claude/dashboard-plan.md`, drawings `claude/dashboard-mock/`). New page `dashboard.html`, opened from ADMIN > Admin Dashboard (first button in What is next). No existing page changed except `admin.html` (the button) and `tools/admin_hub_test.py`.

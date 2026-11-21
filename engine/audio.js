@@ -230,6 +230,7 @@ function noise(o) {
 }
 
 const sfx={
+  ding(){ if(typeof B3_SFX_NOTES!=='undefined') B3_SFX_NOTES.ding.forEach(n=>tone(n)); },
   select(){ tone({type:'square',f0:880,f1:1100,dur:.06,vol:.12}); },
   move(){ tone({type:'square',f0:600,dur:.04,vol:.08}); },
   intro(){ tone({type:'square',f0:330,dur:.12,vol:.2}); tone({type:'square',f0:330,dur:.12,vol:.2,delay:.14}); tone({type:'square',f0:494,f1:660,dur:.35,vol:.2,delay:.3}); noise({dur:.4,vol:.08,delay:.3,f0:300,f1:3000}); },

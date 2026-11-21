@@ -24506,6 +24506,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped build anim-tom-loungepass-ding: sfx ding (data/b3-sfx.js) fires on clip picture 10 of Lounge Pass Flex."
     }
    ],
    "prompt": {
@@ -24521,7 +24525,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDbVsJeQieoJ7VeKSu",
     "opening": "started by START"
-   }
+   },
+   "after": "t-anim-tom-loungepass-ding-hear"
   },
   {
    "id": "c-anim-tom-dodge-ner3",
@@ -28205,6 +28210,34 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "t-anim-tom-loungepass-ding-hear",
+   "title": "Listen to the ding on Tom's Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom, play Lounge Pass Flex with the sound on, then tap All good or Something is wrong. You should hear one short bright ding right as the sparkle shows on the card.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom.",
+    "Turn your phone sound on, play Lounge Pass Flex (the 1/2 button slows it).",
+    "Tap All good, or Something is wrong and say what you heard."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-tom-loungepass-ding",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-tom-loungepass-ding: a ding on baked picture 10 of the clip (the sparkle), in the new battle and the Battle Guide player."
+    }
+   ],
+   "anim": {
+    "id": "move:lounge_pass_flex"
+   }
   }
  ],
  "sessions": [
