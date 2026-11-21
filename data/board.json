@@ -17084,6 +17084,10 @@
     {
      "d": "2026-11-21",
      "t": "Retired: Tom asked to close this card (\"Close this you're wasting my money!\"). No build, no new press."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Superseded by clipstuck1 (retired for good): six rounds of fixes read the wrong thing; the button fix is clipstuck1a and a single press now waits for Tom's review."
     }
    ],
    "after": null,
@@ -17914,6 +17918,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-keysecrets2-try-5: the button no longer stays on ASKED, WAITING after the video is made and approved"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Superseded by clipstuck1 (retired for good): its fix was kept; clipstuck1a and clipstuck1 finished the work."
     }
    ],
    "prompt": {
@@ -18196,7 +18204,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "GENERATE VIDEO: fix stuck button and let Tom review",
-   "next": "Parts 1 and 2 shipped as clipstuck1a (button fixed, every video plays on the card with REDO). Left: part 3, a single GENERATE VIDEO press waits for Tom instead of auto-approving.",
+   "next": "Built as clipstuck1: a single GENERATE VIDEO press is made and checked, then waits for Tom's REVIEW (a chapter press still approves by itself); every GitHub-made version of a clip has REVIEW on its Art Library card. No video was generated.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -18224,6 +18232,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as clipstuck1a: Art Library clips: the button no longer sticks on ASKED, WAITING, every video plays on its card, REDO with a note"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as clipstuck1: part 3 plus REVIEW on every GitHub-made version (built on top of clipstuck1a). A single GENERATE VIDEO press is held for Tom (made, checked, not approved); GENERATE CHAPTER keeps auto-approve. No video generated."
     }
    ],
    "prompt": {
@@ -18235,7 +18247,7 @@
     "effort": "medium (three known changes in one area)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and card c-clipstuck1 in data/board.json. Your first push is the commit board: start c-clipstuck1. Build clipstuck1 as the card's next says, run tools/art-library/clip_lib_test.py and the stub test, look at the clip card at 390 x 844, bump tags, add a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-clipstuck1"
+   "after": "t-clipstuck1-review"
   },
   {
    "id": "t-skippingcutplay",
@@ -18520,6 +18532,34 @@
     }
    ],
    "done": "2026-11-20"
+  },
+  {
+   "id": "t-clipstuck1-review",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Review a toad idle version with REVIEW",
+   "next": "ADMIN > ART LIBRARY: close it and open it again from the home-screen app. Tap Open in the Art Library below, find the toad card, and tap REVIEW under the v5 video (v6 is the newest and is the one in the game). Watch it, then tap APPROVE twice to approve or REJECT twice (with a note) to reject. All good if the review screen plays it. Do not press GENERATE VIDEO: it costs about $0.25.",
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "clip-toad-idle"
+     ],
+     "label": "the toad idle card"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by clipstuck1. Tom asked for a card telling him to tap REVIEW on v5 and approve or reject."
+    }
+   ]
   }
  ],
  "sessions": [

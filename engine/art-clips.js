@@ -6,6 +6,7 @@
 //   GENERATE  (keysecrets2) does not call xAI from this device: it commits a request to data/clip-requests.json and the clip-gen Action
 //             makes the video from the entry's start picture (clip.start: the character's own battle idle frame on flat magenta),
 //             finds the marks, runs the clip gate and approves it. clipPoll reads the job's report and says what happened.
+//   (clipstuck1) A single press is made and checked by the job but NOT approved: the video waits on the card (REVIEW). A chapter press still approves by itself.
 //   REVIEW    the video plays in the review screen. Tom marks three moments: START (standing still, before the move),
 //             HIT (the moment the hit should land) and END (back in the standing pose). ON THE BATTLEFIELD plays START
 //             to END at game speed with the magenta removed over a battle background.
@@ -29,17 +30,41 @@ const clipSpeed=r=>(r&&r.speed)||(r&&ENTRY[r.id]&&ENTRY[r.id].clip.speed)||1;
 // The game's own copy of an approved video (the Action saves it next to the approved file). Approving the same result
 // again (new marks or a new speed) points at that copy, so nothing is uploaded or downloaded twice and an expired address
 // does not matter.
-const clipPrior=(e,r)=>{ const v=(e.versions||[]).filter(x=>x.from==='v'+r.n&&/^art\/raw\/clips\/[a-z0-9-]+\.(mp4|json)$/.test(x.file||''))[0]; return v?v.file.replace(/\.json$/,'.mp4'):''; };
+const clipPrior=(e,r)=>{ if(r&&r.gh) return r.file; const v=(e.versions||[]).filter(x=>x.from==='v'+r.n&&/^art\/raw\/clips\/[a-z0-9-]+\.(mp4|json)$/.test(x.file||''))[0]; return v?v.file.replace(/\.json$/,'.mp4'):''; };
 const clipApproveFile=async(e,r)=>{ const prior=clipPrior(e,r); if(prior) return {ext:'.json',b64:textToB64(JSON.stringify({src:prior})+'\n')}; return r.blob?{ext:'.mp4',b64:await blobToB64(r.blob)}:{ext:'.json',b64:textToB64(JSON.stringify({url:r.url})+'\n')}; };
 
+// clipstuck1: the videos the clip-gen job made join RES[id] as in-memory results (r.gh) so the existing review screen can play, mark, approve or reject them. They come from the entry's
+// `versions` (approved; a pointer .json version names its video in `of`), `made` (kept for Tom, waiting) and `rejects` (a rejected one that kept its file).
+const CLIP_GHBLOB={};   // file -> blob, so a version fetched once for REVIEW is not fetched again
+function clipHostRes(e){
+  if(!e||!e.clip) return;
+  const by=new Map(), put=(f,st,x)=>{ if(!/^art\/raw\/clips\/[a-z0-9-]+\.mp4$/.test(f||'')) return; if(!by.has(f)||st==='approved') by.set(f,Object.assign({st},x)); };
+  for(const v of e.rejects||[]) put(v.file,'rejected',v);
+  for(const v of e.made||[]) put(v.file,'waiting',v);
+  const mine=new Set((RES[e.id]||[]).filter(r=>!r.gh).map(r=>'v'+r.n));   // a version approved from a result this device still holds is shown by that result, not twice
+  for(const v of e.versions||[]) if(!mine.has(v.from)) put(v.of||v.file,'approved',v);
+  const rows=[...by.entries()].map(([file,x])=>{ const N=+(/-v(\d+)\.mp4$/.exec(file)||[0,0])[1];
+    const r={id:e.id,key:'gh:'+file,n:1000+N,label:'v'+N,gh:true,file,state:x.st,t:+x.at||0,url:rawU(file),marks:x.marks||null,prompt:e.prompt,gate:x.gate||null,up:false};
+    if(CLIP_GHBLOB[file]) r.blob=CLIP_GHBLOB[file];
+    return r; }).sort((a,b)=>b.n-a.n);
+  RES[e.id]=rows.concat((RES[e.id]||[]).filter(r=>!r.gh));
+}
+function clipHostAll(){ for(const id in ENTRY) if(ENTRY[id]&&ENTRY[id].clip) clipHostRes(ENTRY[id]); }
+const clipHostFind=key=>{ if(!/^gh:/.test(key||'')) return null; for(const id in RES){ const r=(RES[id]||[]).find(x=>x.key===key); if(r) return r; } return null; };
+// REVIEW plays the game's own copy fetched from the same site and held in memory (the bare address can be refused by a phone's video player)
+function clipHostBlob(r){
+  if(!r||!r.gh||r.blob) return Promise.resolve(r&&r.blob);
+  return fetch(rawU(r.file),{cache:'no-store'}).then(x=>x.ok?x.blob():null).then(b=>{ if(!b||b.size<1000) return null; r.blob=CLIP_GHBLOB[r.file]=new Blob([b],{type:'video/mp4'}); return r.blob; }).catch(()=>null);
+}
 // clipstuck1 (2026-11-20; Tom: "there's no way for me to review the video"): every video GitHub made for this clip plays right on the card,
 // newest first. The newest approved one is the one the game cuts and plays. REDO (with a note) sends the clip back, as Battle Lab REDO does.
 function clipMadeList(e){
-  const vs=(e.versions||[]).filter(v=>/\.mp4$/.test(v.file||'')).slice().reverse(); if(!vs.length) return '';
-  const id=esc(e.id), when=v=>v.at?new Date(v.at).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):esc(v.date||'');
-  return '<label style="margin-top:10px">Videos made for this clip (newest first). Tap one to watch it.</label>'+
-    vs.map((v,i)=>'<div style="margin:6px 0"><video src="'+esc(rawU(v.file))+'#t=0.1" controls playsinline loop muted preload="metadata" style="width:100%;max-width:360px;background:#f0f;border-radius:8px;display:block"></video>'+
-      '<span class="hint">v'+(+v.n+1)+', '+when(v)+(i===0&&e.status!=='rejected'?' <span class="chip c-approved">in the game</span>':'')+'</span></div>').join('')+
+  const rows=(RES[e.id]||[]).filter(r=>r.gh); if(!rows.length) return '';
+  const id=esc(e.id), when=r=>r.t?new Date(r.t).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';
+  const live=(rows.filter(r=>r.state==='approved').sort((x,y)=>y.t-x.t)[0]||{}).file;   // the newest approved one is the one the game cuts and plays
+  return '<label style="margin-top:10px">Videos made for this clip (newest first). Tap REVIEW to watch one with its marks, then approve or reject.</label>'+
+    rows.map(r=>'<div style="margin:6px 0"><video src="'+esc(clipSrc(r))+'#t=0.1" controls playsinline loop muted preload="metadata" style="width:100%;max-width:360px;background:#f0f;border-radius:8px;display:block"></video>'+
+      '<span class="hint">'+esc(r.label)+(when(r)?', '+when(r):'')+(r.state==='waiting'?' <span class="chip c-wait">waiting for you</span>':r.state==='rejected'?' <span class="chip c-rejected">rejected</span>':r.file===live&&e.status!=='rejected'?' <span class="chip c-approved">in the game</span>':' <span class="chip c-approved">approved</span>')+(r.gate&&r.gate.held?' <span class="chip c-rejected">gate flagged</span>':'')+' <button class="small" data-res="'+esc(r.key)+'">REVIEW</button></span></div>').join('')+
     '<div class="row" style="margin-top:6px"><textarea data-ghnote="'+id+'" placeholder="Not right? Write what looks wrong, then tap REDO." style="flex:1;min-height:44px"></textarea>'+
     '<button class="small" data-ghredo="'+id+'">REDO</button></div>';
 }
@@ -58,20 +83,20 @@ async function clipRedo(id){
 }
 // After the job approves a clip, read the entry again from GitHub so the new video shows on the card without a reload.
 async function clipReloadEntry(id){
-  try{ const doc=JSON.parse(await (await ghFile(JSON_PATH)).text()), x=doc.entries.find(q=>q.id===id); if(x&&ENTRY[id]){ ['versions','rejects','status','promptRev'].forEach(k=>{ if(x[k]!==undefined) ENTRY[id][k]=x[k]; }); refreshItem(id); } }catch(x){}
+  try{ const doc=JSON.parse(await (await ghFile(JSON_PATH)).text()), x=doc.entries.find(q=>q.id===id); if(x&&ENTRY[id]){ ['versions','made','rejects','status','promptRev','prompt'].forEach(k=>{ if(x[k]!==undefined) ENTRY[id][k]=x[k]; else if(k==='made') delete ENTRY[id][k]; }); clipHostRes(ENTRY[id]); refreshItem(id); } }catch(x){}
 }
 document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.closest('[data-ghredo]'); if(b){ ev.preventDefault(); clipRedo(b.dataset.ghredo); } });
 
 function clipCard(e){
-  const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt, c=e.clip, pend=clipAsked(e.id);
+  clipHostRes(e); const id=esc(e.id), rs=(RES[e.id]||[]).filter(r=>!r.gh), blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt, c=e.clip, pend=clipAsked(e.id);
   const apr=n=>(e.versions||[]).some(v=>v.from==='v'+n), rjc=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
   return '<div class="card" data-id="'+id+'">'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Start picture (first frame of the video, made from the battle sprite)</label><div class="refs"><div class="ref"><img src="'+esc(c.start)+'" data-path="'+esc(c.start)+'" alt="" onerror="refMiss(this)">'+esc(c.start.split('/').pop())+'</div></div>'+
   '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
-  '<div class="row"><button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>'+(pend?'ASKED, WAITING':'GENERATE VIDEO')+'</button><span class="hint">'+(pend?'Waiting for GitHub.':c.dur+' second video, '+c.res+', about $'+clipCost(e).toFixed(2)+'. GitHub makes it, checks it and approves it (3 to 6 minutes).')+'</span></div>'+
+  '<div class="row"><button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>'+(pend?'ASKED, WAITING':'GENERATE VIDEO')+'</button><span class="hint">'+(pend?'Waiting for GitHub.':c.dur+' second video, '+c.res+', about $'+clipCost(e).toFixed(2)+'. GitHub makes it and checks it (3 to 6 minutes); then it waits here for your REVIEW. Nothing is approved without you.')+'</span></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-  (rs.length?'<div class="hint">'+(c.test?'Tap REVIEW to watch it, then approve or reject. No marks needed.':(c.kind&&c.kind!=='strike'?'Tap REVIEW to mark the start and the end, then approve or reject.':'Tap REVIEW to mark the start, the hit and the end, then approve or reject.'))+'</div>':'')+
+  ((RES[e.id]||[]).some(r=>r.gh&&r.state==='waiting')?'<div class="hint ok">Made. Tap REVIEW on the version marked waiting for you, watch it, then approve or reject.</div>':'')+(rs.length?'<div class="hint">'+(c.test?'Tap REVIEW to watch it, then approve or reject. No marks needed.':(c.kind&&c.kind!=='strike'?'Tap REVIEW to mark the start and the end, then approve or reject.':'Tap REVIEW to mark the start, the hit and the end, then approve or reject.'))+'</div>':'')+
   '<div class="res">'+rs.map(r=>'<div><video class="clipthumb" src="'+esc(clipSrc(r))+'#t=0.1" muted playsinline preload="metadata"></video><span>v'+r.n+'</span>'+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+(r.blob?'':' <span class="chip c-wait">address only</span>')+' <button class="small" data-res="'+esc(r.key)+'">REVIEW</button></div>').join('')+'</div>'+
   clipMadeList(e)+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
@@ -118,7 +143,7 @@ async function clipPoll(){
   let rep=null, src='';
   if(!Q.get('clipgen')&&LS.get('aot-gh-token')){ try{ const ab=new AbortController(), tm=setTimeout(()=>ab.abort(),20000); const r=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/clipgen-report.json?ref=clipgen&t='+Date.now(),{cache:'no-store',signal:ab.signal,headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github.raw+json','X-GitHub-Api-Version':'2022-11-28'}}); clearTimeout(tm); if(r.ok){ rep=await r.json(); src='api'; } }catch(x){} }
   if(!rep){ try{ const r=await fetch(clipGenBase()+'clipgen-report.json?t='+Date.now(),{cache:'no-store'}); if(r.ok){ rep=await r.json(); src='raw'; } }catch(x){} }
-  const repAt=clipTs(rep&&rep.at), left=[], finished=[], approvedNow=[];
+  const repAt=clipTs(rep&&rep.at), left=[], finished=[], approvedNow=[], waitingNow=[];
   for(const p of P){
     // repAt is NaN when the phone cannot read the report's time: then the report counts when it names this clip (the job replaces the file on every run)
     const mine=rep&&rep.mode==='requests'&&(repAt!==repAt||repAt>=p.at-120000)&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
@@ -129,7 +154,8 @@ async function clipPoll(){
     for(const id of p.ids||[]){
       const f=(rep.failed||[]).find(x=>x.id===id)||why, h=(rep.held||[]).find(x=>x.id===id), b=(rep.blocked||[]).find(x=>x.id===id), s=(rep.skipped||[]).find(x=>x.id===id);
       let m;
-      if((rep.approved||[]).includes(id)){ m={text:'Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen).',err:false}; if(ENTRY[id]) ENTRY[id].status='approved'; }
+      if((rep.waiting||[]).includes(id)){ const gh=(rep.held||[]).find(x=>x.id===id); m={text:'Made'+(gh?', but the clip gate flagged it ('+(gh.reasons||[]).join(' | ').slice(0,200)+')':' and checked')+'. It is waiting for you, not approved. Tap REVIEW on the new version below, watch it, then approve or reject.',err:false}; waitingNow.push(id); }
+      else if((rep.approved||[]).includes(id)){ m={text:'Made and approved. The game is cutting it now (about 3 minutes, then RELOAD on the title screen).',err:false}; if(ENTRY[id]) ENTRY[id].status='approved'; }
       else if(h) m={text:'Made, but the clip gate held it back (not approved): '+(h.reasons||[]).join(' | ').slice(0,300),err:true};
       else if((rep.still||[]).includes(id)) m={text:'Made, but the video hardly moves, so its marks could not be found. It is kept for Claude; nothing was approved.',err:true};
       else if(f) m={text:'Not made: '+f.why,err:true};
@@ -142,7 +168,7 @@ async function clipPoll(){
     if(p.group){ const n=(p.ids||[]).filter(i=>(rep.approved||[]).includes(i)).length; clipBatchSay(p.group,'Finished: '+n+' of '+(p.ids||[]).length+' clip(s) approved by the job'+((rep.failed||[]).length?'; '+rep.failed.length+' failed':'')+((rep.held||[]).length?'; '+rep.held.length+' held by the gate':'')+((rep.still||[]).length?'; '+rep.still.length+' hardly move':'')+'. Spent about $'+(+rep.spent||0).toFixed(2)+'. The game is cutting the approved ones now (about 3 minutes, then a RELOAD on the title screen; they show in Battle Lab > '+p.group.toUpperCase()+' REVIEW).',(rep.failed||[]).length>0||(rep.held||[]).length>0||(rep.still||[]).length>0); }
   }
   // clipstuck1: clear the finished presses BEFORE redrawing, or the card redraws its button as ASKED, WAITING under "Made and approved" and stays stuck
-  clipAskedSet(left); for(const id of finished) if(ENTRY[id]) refreshItem(id); for(const id of approvedNow) clipReloadEntry(id);
+  clipAskedSet(left); for(const id of finished) if(ENTRY[id]) refreshItem(id); for(const id of approvedNow.concat(waitingNow)) clipReloadEntry(id);
   if(left.length) CLIP_POLL=setTimeout(clipPoll,POLL_MS);
 }
 
@@ -213,10 +239,10 @@ function clipRvSetup(){
   v.addEventListener('timeupdate',()=>{ if(!CV.on) s.value=String(v.currentTime); cg('cpt').textContent=v.currentTime.toFixed(2)+' of '+(v.duration||0).toFixed(2)+' s'; });
   v.addEventListener('play',()=>cg('cpplay').textContent='PAUSE'); v.addEventListener('pause',()=>cg('cpplay').textContent='PLAY');
   cg('cliptools').addEventListener('click',async ev=>{ const sp=ev.target.closest('[data-speed]');
-    if(sp&&CV.r){ CV.r.speed=+sp.dataset.speed; await tx('readwrite',st=>st.put(CV.r)); clipPaintMarks(); if(CV.on) v.playbackRate=CV.r.speed; return; }
+    if(sp&&CV.r){ CV.r.speed=+sp.dataset.speed; if(!CV.r.gh) await tx('readwrite',st=>st.put(CV.r)); clipPaintMarks(); if(CV.on) v.playbackRate=CV.r.speed; return; }
     const b=ev.target.closest('[data-mark]'); if(!b||!CV.r) return;
     const r=CV.r; r.marks=Object.assign({first:-1,hit:-1,last:-1},r.marks||{}); r.marks[b.dataset.mark]=Math.round(v.currentTime*1000)/1000;
-    await tx('readwrite',st=>st.put(r)); clipPaintMarks(); });
+    if(!r.gh) await tx('readwrite',st=>st.put(r)); clipPaintMarks(); });
 }
 function clipPaintMarks(){
   const m=(CV.r&&CV.r.marks)||{}, ok=!!clipMarks(CV.r);
@@ -238,8 +264,9 @@ function clipRvDraw(e,r){
   const study=!!e.clip.test; document.querySelectorAll('#cliptools .forgame').forEach(x=>x.hidden=study); cg('clipstudy').hidden=!study;   // a study video: no marks, no speed
   CV.r=r; const src=clipSrc(r); if(v.getAttribute('src')!==src){ v.src=src; v.load(); }
   v.pause(); clipPaintMarks();
+  if(r.gh&&!r.blob) clipHostBlob(r).then(b=>{ if(b&&CV.r===r){ clipBf(false); v.src=clipSrc(r); v.load(); clipPaintMarks(); } });
   // An approved video this device holds only as an address: fetch the game's own copy (same site, so it can be kept) and use it from now on.
-  const prior=!r.blob&&clipPrior(e,r);
+  const prior=!r.blob&&!r.gh&&clipPrior(e,r);
   if(prior) fetch(rawU(prior),{cache:'no-store'}).then(x=>x.ok?x.blob():null).then(async b=>{ if(!b||b.size<1000||r.blob) return; r.blob=new Blob([b],{type:'video/mp4'}); r.url=''; await tx('readwrite',st=>st.put(r)); if(CV.r===r){ clipBf(false); v.src=clipSrc(r); v.load(); clipPaintMarks(); } }).catch(()=>{});
 }
 function clipRvStop(){ clipBf(false); const v=cg('rvvid'); if(v) v.pause(); }

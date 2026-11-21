@@ -143,7 +143,7 @@ header{padding:10px 28px}
 </div>
 <div id="toast"></div>
 <script src="engine/admin-music.js?v=adminvol1"></script>
-<script src="engine/art-clips.js?v=clipstuck1a"></script>
+<script src="engine/art-clips.js?v=clipstuck1"></script>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
 // GENERATE (keysecrets1) does not call xAI from this device: it commits data/art-requests.json ("art: generate <id>") and the art-gen Action makes the picture
@@ -217,7 +217,7 @@ const shortTitle=t=>baseTitle(t).replace(/\s*\([^)]*\)\s*$/,'');
 function rowLabel(e){ let t=baseTitle(e.title); const g=e.group||''; if(g&&t.toLowerCase().indexOf(g.toLowerCase()+': ')===0) t=t.slice(g.length+2); return t; }
 const URLS=new Map();
 const urlOf=r=>{ const k=r.key+'@'+r.t; if(!URLS.has(k)) URLS.set(k,URL.createObjectURL(r.blob)); return URLS.get(k); };
-async function loadResults(){ RES={}; OWN={}; if(!DB) return; const all=await tx('readonly',s=>s.getAll()); for(const r of all){ if(r.id==='__own'){ OWN[r.slot]=r; continue; } (RES[r.id]=RES[r.id]||[]).push(r); } for(const k in RES) RES[k].sort((a,b)=>b.n-a.n); }
+async function loadResults(){ RES={}; OWN={}; if(!DB) return; const all=await tx('readonly',s=>s.getAll()); for(const r of all){ if(r.id==='__own'){ OWN[r.slot]=r; continue; } (RES[r.id]=RES[r.id]||[]).push(r); } for(const k in RES) RES[k].sort((a,b)=>b.n-a.n); clipHostAll(); }
 // Waiting on me = the newest result on this device came after the last decision. Decisions carry `at` (ms) since udec1, so picking an
 // older result (approve v5 after making v6 to v8) settles the row; decisions without `at` fall back to comparing result numbers.
 function undecided(e){ const rs=RES[e.id]||[]; if(!rs.length) return false; const ds=[].concat(e.versions||[],e.rejects||[]); const at=Math.max(0,...ds.map(x=>+x.at||0)); if(at) return (rs[0].t||0)>at; const dec=Math.max(0,...ds.map(x=>parseInt(String(x.from||'').slice(1),10)||0)); return rs[0].n>dec; }
@@ -489,7 +489,7 @@ async function shrinkBig(b){
   }catch(x){ return b; }
 }
 async function decide(kind,resKey,btn){
-  const r=await tx('readonly',s=>s.get(resKey)); if(!r) return false;
+  const r=(await tx('readonly',s=>s.get(resKey)))||clipHostFind(resKey); if(!r) return false;
   const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return false;
   if(!LS.get('aot-gh-token')) return setMsg(id,'Close this, open Setup at the top of the page and paste the GitHub token first.',true), false;
   const note=(NOTES[id]||'').trim();
@@ -498,13 +498,13 @@ async function decide(kind,resKey,btn){
   if(e.clip&&!e.clip.test&&kind==='ok'&&!mk) return setMsg(id,e.clip.kind&&e.clip.kind!=='strike'?'Mark START and END first (in that order).':'Mark START, HIT and END first (in that order).',true), false;
   const armKey=kind+'|'+resKey;
   // two taps: the first arms the button (it keeps its width and label; the message line says what the second tap does)
-  if(ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm (v'+r.n+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
+  if(ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm ('+(r.label||'v'+r.n)+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
   ARMED=null; clearTimeout(decide.h); rvDisarm(); document.querySelectorAll('.rvb').forEach(b=>b.disabled=true);
   try{
     const today=new Date().toISOString().slice(0,10), NOWMS=Date.now();
     if(kind==='ok'){
       setMsg(id,'Saving the picture to the game files...');
-      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', cf=e.clip?await clipApproveFile(e,r):null, b64=cf?cf.b64:await blobToB64(await shrinkBig(r.blob)), done=false, srv=0;
+      const slug=(e.tab||'misc').toLowerCase(); let k=r.gh&&r.state==='waiting'?r.n-1000:Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', cf=e.clip?await clipApproveFile(e,r):null, b64=cf?cf.b64:await blobToB64(await shrinkBig(r.blob)), done=false, srv=0;
       const ext=cf?cf.ext:'.png';   // a video goes up as the file, as its address (the bake Action downloads it), or as a pointer to the game's own copy when the same result is approved again
       for(let tries=0;tries<9&&!done;tries++){
         path='art/raw/'+slug+'/'+id+'-v'+k+ext;
@@ -517,14 +517,14 @@ async function decide(kind,resKey,btn){
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
       setMsg(id,'Saving the prompt...');
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))); },'Art Library: '+id+' approved (v'+k+')');
-      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); delete EDITS[id]; saveEdits();
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{of:r.file}:{},mk?{marks:mk}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); delete EDITS[id]; saveEdits();
       MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen'+(clipChapterGroup(e.group)?' and open ADMIN > BATTLE LAB > '+e.group.toUpperCase()+' REVIEW':'')+'.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
-      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},x.clip?{rev:x.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))); if(r.gh&&x.made) x.made=x.made.filter(m=>m.file!==r.file); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:r.gh?'review':'v'+r.n,at:NOWMS},r.gh?{file:r.file}:{},e.clip?{rev:e.promptRev||0}:{},r.srv?{srv:r.srv}:{},qaRec(r))]); if(r.gh&&e.made) e.made=e.made.filter(m=>m.file!==r.file); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
     refreshItem(id); return true;
@@ -549,8 +549,8 @@ function rvDraw(){
   $('rvcount').textContent=RV.mode==='queue'?(RV.i+1)+' of '+RV.q.length+' in this queue · '+left+' still waiting on you':'Not in the waiting queue';
   const r=rs[RV.v]; if(r&&!e.clip) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
   clipRvDraw(e,r);
-  const ap=n=>(e.versions||[]).some(v=>v.from==='v'+n), rj=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
-  $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x.n)?'ap ':rj(x.n)?'rj ':'')+'">v'+x.n+(ap(x.n)?' approved':rj(x.n)?' rejected':'')+'</button>').join('');
+  const ap=x=>x.gh?x.state==='approved':(e.versions||[]).some(v=>v.from==='v'+x.n), rj=x=>x.gh?x.state==='rejected':(e.rejects||[]).some(v=>v.from==='v'+x.n);
+  $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x)?'ap ':rj(x)?'rj ':'')+'">'+(x.label||'v'+x.n)+(ap(x)?' approved':rj(x)?' rejected':x.gh&&x.state==='waiting'?' waiting':'')+'</button>').join('');
   const lr=(e.rejects||[]).slice(-1)[0]; $('rvhist').textContent=lr&&lr.note?'Last rejection note: '+lr.note:'';
   rvQa(r);
   $('rvnote').value=NOTES[id]||'';
@@ -575,7 +575,7 @@ async function rvDecide(kind){
   NOTES[id]=$('rvnote').value;
   const done=await decide(kind,r.key,$(kind==='ok'?'rvok':'rvno'));
   if(!done) return;
-  toast((kind==='ok'?'Approved ':'Rejected ')+rowLabel(ENTRY[id])+' v'+r.n+'.');
+  toast((kind==='ok'?'Approved ':'Rejected ')+rowLabel(ENTRY[id])+' '+(r.label||'v'+r.n)+'.');
   for(let k=1;k<=RV.q.length;k++){ const j=(RV.i+k)%RV.q.length; if(ST[RV.q[j]]==='wait'){ RV.i=j; RV.v=0; return rvDraw(); } }
   if(RV.mode==='queue'){ rvClose(); toast('Queue cleared. Nothing else is waiting on you.'); } else rvDraw();
 }

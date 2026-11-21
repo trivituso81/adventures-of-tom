@@ -1,3 +1,15 @@
+## clipstuck1 (2026-11-20): a single GENERATE VIDEO press waits for Tom's review; every GitHub-made version has REVIEW on the clip's card
+
+Card c-clipstuck1, on top of clipstuck1a. Tom (16:32): "why are you tricking me into spending money by keeping the button label as asked, waiting when it's approved. and there's no way for me to review the video".
+
+- Button: fixed in clipstuck1a (pending presses cleared before the card is redrawn). Not changed here; the new test also checks that a report naming the asked clip returns the button to GENERATE VIDEO.
+- Hold (fact, clipgen.py): a press of one clip (`clip-gen --requests` with an `id`) is made and gated as before, but not approved. The video is kept on main as `art/raw/clips/<id>-v<k>.mp4` and listed in the entry's `made` (with its marks and, if the gate flagged it, the reasons). Status and `versions` stay as they were, so nothing is cut and the game does not change. The report lists it under `waiting`. GENERATE CHAPTER (a `group` request) still approves by itself; a chapter press skips a clip that already has a video waiting.
+- Review: every video file of a clip (approved, waiting for you, rejected) is on its Art Library card, newest first, playable in place, with REVIEW (the existing review screen, which plays the game's copy). The newest approved one is marked in the game. APPROVE on a waiting version moves it from `made` to `versions` and commits a pointer file (`art/raw/clips/<id>-v<k>.json`), which starts the bake as before; REJECT saves the note and the file in `rejects`. Approving an approved version again makes it the one in the game.
+- Poll message for a held press: "Made and checked. It is waiting for you, not approved. Tap REVIEW...".
+- Tests: new `tools/art-library/clipstuck1_test.py`; `keysecrets2_test.py`, `clip_lib_test.py`, `clip_batch_test.py`, `clipgen_test.py requests` pass (requests-mode expectations changed: a single press is `waiting`, not `approved`). `clipgen_test.py gen` already fails before this change (the still video is not kept), not touched. Card looked at at 390 x 844.
+- Not done: no video was generated; the Action was not run.
+- Board: Tom card t-clipstuck1-review; t-keysecrets2-try and c-fix-keysecrets2-try-5 got a history line (they were already closed).
+
 ## 2026-11-21 (464): Art Library bake, clip-toad-idle (`artbake1540`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

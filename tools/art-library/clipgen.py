@@ -116,11 +116,42 @@ class Repo:
             say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
         raise RuntimeError('could not push the approval 8 times')
 
+    def hold(self, items):
+        """clipstuck1: items: [{id, video, marks, prompt, gate}]. Keep each video on main as art/raw/clips/<id>-v<k>.mp4 and list it in the entry's `made` (waiting for Tom's
+        REVIEW in the Art Library). Nothing is approved: status and versions stay as they are, so the game does not change and nothing is cut. Returns {id: path}."""
+        for attempt in range(8):
+            self.sync()
+            doc = self.entries(); by = {e['id']: e for e in doc['entries']}
+            done, now = {}, int(time.time() * 1000)
+            today = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
+            for it in items:
+                e = by.get(it['id'])
+                if not e: continue
+                taken = [v.get('n') or 0 for v in (e.get('versions') or []) + (e.get('made') or [])]
+                k = max([0] + taken) + 1
+                while self.exists('art/raw/clips/%s-v%d.mp4' % (e['id'], k)) or self.exists('art/raw/clips/%s-v%d.json' % (e['id'], k)): k += 1
+                rel = 'art/raw/clips/%s-v%d.mp4' % (e['id'], k)
+                os.makedirs(os.path.dirname(os.path.join(self.root, rel)), exist_ok=True)
+                with open(os.path.join(self.root, rel), 'wb') as f: f.write(open(it['video'], 'rb').read())
+                e['prompt'] = it['prompt']
+                m = {'n': k - 1, 'file': rel, 'date': today, 'from': 'clipgen', 'at': now, 'marks': it['marks']}
+                if it.get('gate'): m['gate'] = it['gate']
+                e.setdefault('made', []).append(m)
+                done[e['id']] = rel
+            if not done: return {}
+            open(self.data, 'w', encoding='utf-8').write(jdump(doc))
+            self.git('add', 'data/art-prompts.json', 'art/raw/clips')
+            self.git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m', 'clipgen: %s made, waiting for review (%d) [skip ci]' % (', '.join(sorted(done))[:200], len(done)))
+            p = self.git('push', self.remote, 'HEAD:main', check=False)
+            if p.returncode == 0: return done
+            say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
+        raise RuntimeError('could not push the held video 8 times')
+
 
 def classify(doc, repo, group):
     """todo / redo / blocked / waiting (a rejected clip waiting for a rewritten prompt) / approved, as clipBatchItems does."""
     by = {e['id']: e for e in doc['entries']}
-    out = {'todo': [], 'redo': [], 'redoWait': [], 'blocked': [], 'approved': [], 'all': []}
+    out = {'todo': [], 'redo': [], 'redoWait': [], 'blocked': [], 'approved': [], 'waiting': [], 'all': []}
     for e in doc['entries']:
         if e.get('group') != group or not e.get('clip') or e['clip'].get('test'): continue
         out['all'].append(e)
@@ -135,6 +166,7 @@ def classify(doc, repo, group):
                 if not repo.exists(rf): why = 'reference %s is missing' % rf
             elif not dep.get('versions'): why = 'reference %s is not approved yet' % m.group(2)
         if why: out['blocked'].append((e, why)); continue
+        if e.get('made'): out['waiting'].append(e); continue   # clipstuck1: a video already waits for Tom's REVIEW; a chapter press does not pay for another
         if e.get('status') == 'rejected':
             r = (e.get('rejects') or [None])[-1]
             ready = (not r) or r.get('rev') is None or (e.get('promptRev') or 0) > r['rev']
@@ -213,6 +245,7 @@ def request_queue(doc, repo, reqs):
             blk = next((w for b, w in cl['blocked'] if b['id'] == e['id']), '')
             if blk: notes.append({'id': e['id'], 'why': blk, 'kind': 'blocked'}); continue
             e['_replace'] = e.get('status') == 'approved'   # keysecrets2 fix: a press on an approved clip makes another version that replaces it
+            e['_hold'] = True   # clipstuck1: a single GENERATE VIDEO press is made and checked, then waits for Tom's REVIEW (a chapter press still approves by itself)
             add(e)
         else:
             cl = classify(doc, repo, r['group'])
@@ -276,7 +309,7 @@ def main():
     say('%s: %d clips, %d to make now (%d redo), %d approved, %d blocked, %d redo waiting for a rewritten prompt. Estimate $%.2f of the $%.2f cap.' % ('requests' if a.requests else a.group, len(cl['all']), len(queue), len(cl['redo']), len(cl['approved']), len(cl['blocked']), len(cl['redoWait']), need, a.cap))
     for e, why in cl['blocked']: say('  blocked: %s: %s' % (e['id'], why))
     for e in queue: say('  %s%s  %s %s %ss $%.2f%s' % (e['id'], '' if e['id'] not in state['held'] else ' (video already held)', e['clip']['model'], e['clip']['res'], e['clip']['dur'], cost(e), ' (request pending)' if e['id'] in state['pending'] else ''))
-    report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'still': [], 'held': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
+    report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'waiting': [], 'still': [], 'held': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
     rf = os.path.join(a.out, 'clipgen-report.json')
     if a.requests:   # keysecrets2: what the Art Library reads to tell Tom what happened to each press
         report.update({'mode': 'requests', 'at': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z', 'asked': asked, 'skipped': [n for n in notes if n['kind'] == 'skipped'], 'blocked': [{'id': n['id'], 'why': n['why']} for n in notes if n['kind'] == 'blocked']})
@@ -334,6 +367,7 @@ def main():
                 open(vid, 'wb').write(data)
                 state['held'][id_] = {'file': vid, 'rev': rev, 'ph': ph}; state['pending'].pop(id_, None); save_state()   # paid for and kept
                 report['made'].append(id_); say(id_, 'video in (%d KB)' % (len(data) // 1024))
+            gate_note = None
             kind = e['clip'].get('kind', 'strike')
             try: marks = clipmarks.auto_marks(vid, kind)
             except Exception as x: raise RuntimeError('could not read the video to find its marks: %s' % str(x)[:200])
@@ -344,8 +378,19 @@ def main():
                 with clock: spend['total'] += g.get('spent', 0.0)
                 if g['hold']:
                     report['held'].append({'id': id_, 'reasons': g['reasons'][:8], 'measured': g['measured'], 'vision': g['vision']})
-                    say(id_, 'HELD by the gate (not approved; video kept):', ' | '.join(g['reasons'])[:400]); return
+                    say(id_, 'HELD by the gate (not approved; video kept):', ' | '.join(g['reasons'])[:400])
+                    if not e.get('_hold'): return
+                    gate_note = {'held': True, 'reasons': g['reasons'][:4]}   # a single press shows Tom even a clip the gate flagged, with the reasons
                 say(id_, 'gate ok' + ('' if g.get('vision_ran') else ' (measured part only%s)' % ('; vision: ' + g['vision_error'] if g.get('vision_error') else '')))
+            if e.get('_hold'):   # clipstuck1: made and checked, but Tom approves it himself (REVIEW on the clip's card)
+                with clock: done = repo.hold([{'id': id_, 'video': vid, 'marks': marks, 'prompt': (e.get('prompt') or '').strip(), 'gate': gate_note}])
+                if done:
+                    report['waiting'].append(id_); say(id_, 'made, waiting for your review', json.dumps(marks), done[id_])
+                    state['held'].pop(id_, None); save_state()
+                    try: os.remove(vid)
+                    except OSError: pass
+                else: report['failed'].append({'id': id_, 'why': 'could not keep the video; it is kept in the output'})
+                return
             with clock:   # one commit at a time: each one rewrites data/art-prompts.json
                 done = repo.approve([{'id': id_, 'video': vid, 'marks': marks, 'prompt': (e.get('prompt') or '').strip(), 'rev': rev, 'replace': bool(e.get('_replace'))}])
             if done:

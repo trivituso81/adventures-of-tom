@@ -199,22 +199,23 @@ def requests_mode():
         rep = json.load(open(out + '/clipgen-report.json')); doc, _ = remote_doc(remote); E = {e['id']: e for e in doc['entries']}
         ok(r.returncode == 0 and queue() == [], 'the queue is emptied on main')
         ok(len(sends()) == 2, 'two requests were sent, one per pressed clip: %d' % len(sends()))
-        ok(rep['mode'] == 'requests' and rep['asked'] == ['clip-tom-cast', 'clip-tom-give', 'clip-nobody'] and rep['at'] and rep['approved'] == ['clip-tom-cast'] and rep['still'] == ['clip-tom-give'], 'report: mode, at, asked, approved, still: %s' % {k: rep[k] for k in ('asked', 'approved', 'still')})
+        ok(rep['mode'] == 'requests' and rep['asked'] == ['clip-tom-cast', 'clip-tom-give', 'clip-nobody'] and rep['at'] and rep['approved'] == [] and rep['waiting'] == ['clip-tom-cast'] and rep['still'] == ['clip-tom-give'], 'report: mode, at, asked, waiting (a single press is NOT approved), still: %s' % {k: rep[k] for k in ('asked', 'approved', 'waiting', 'still')})
         ok([x['id'] for x in rep['skipped']] == ['clip-nobody'], 'a name that is not a video entry is skipped with a reason: %s' % rep['skipped'])
-        ok(E['clip-tom-cast']['status'] == 'approved' and E['clip-tom-cast']['prompt'] == 'my edited prompt for cast', "the approved clip keeps the prompt that was on Tom's screen")
+        c0 = E['clip-tom-cast']; m0 = (c0.get('made') or [None])[0]
+        ok(c0['status'] == 'draft' and not c0.get('versions') and c0['prompt'] == 'my edited prompt for cast', "clipstuck1: a single press is not approved (status and versions untouched) and keeps the prompt that was on Tom's screen")
+        ok(m0 and m0['file'] == 'art/raw/clips/clip-tom-cast-v1.mp4' and m0['n'] == 0 and set(m0['marks']) == {'first', 'last'} and sh('git', '--git-dir', remote, 'cat-file', '-e', 'main:' + m0['file']).returncode == 0, 'the video waits on main as art/raw/clips/<id>-v1.mp4 and is listed in `made` with its marks: %s' % m0)
         ok(E['clip-tom-loungepass']['status'] == 'draft', 'a clip nobody asked for is not made')
         cmsgs = sh('git', '--git-dir', remote, 'log', '--format=%s', 'main').stdout.split('\n')
         ok(any(m.startswith('clip: requests taken') and '[skip ci]' in m for m in cmsgs), 'the emptied queue is committed with [skip ci] (it must not start another run): %s' % cmsgs[:6])
-        # an approved clip is skipped with the reason
+        # a second press on the same clip is another version waiting beside the first
         put([{'id': 'clip-tom-cast', 'at': 21}]); out = TMP + '/rq2'; n0 = len(sends()); r = go(out); rep = json.load(open(out + '/clipgen-report.json'))
-        doc, _ = remote_doc(remote); nv0 = len({e['id']: e for e in doc['entries']}['clip-tom-cast']['versions'])
-        ok(len(sends()) == n0 + 1 and rep['approved'] == ['clip-tom-cast'], 'a press on an approved clip makes a new version: %s' % rep)
+        ok(len(sends()) == n0 + 1 and rep['waiting'] == ['clip-tom-cast'] and rep['approved'] == [], 'a second press makes another version, waiting: %s' % rep)
         doc, _ = remote_doc(remote); c = {e['id']: e for e in doc['entries']}['clip-tom-cast']
-        ok(len(c['versions']) == nv0 + 1 and c['status'] == 'approved', 'the new version replaces the approved one (latest version is the current)')
+        ok([m['file'] for m in c['made']] == ['art/raw/clips/clip-tom-cast-v1.mp4', 'art/raw/clips/clip-tom-cast-v2.mp4'] and not c.get('versions') and c['status'] == 'draft', 'both versions wait; nothing is approved, so nothing is cut')
         # a group press makes what is not made yet; the held video that hardly moves is not paid for again
         n0 = len(sends()); put([{'group': 'Chapter 9', 'cap': 3, 'at': 31}]); out = TMP + '/rq1'; r = go(out)   # the same output folder: the held video that hardly moves is remembered, as the branch clipgen does in the Action
         rep = json.load(open(out + '/clipgen-report.json')); doc, _ = remote_doc(remote); E = {e['id']: e for e in doc['entries']}
-        ok(len(sends()) - n0 == 3, 'a group press makes the clips of the group that are not made yet (3 new requests): %d' % (len(sends()) - n0))
+        ok(len(sends()) - n0 == 3, 'a group press makes the clips of the group that are not made yet, and not the one already waiting for Tom (3 new requests): %d' % (len(sends()) - n0))
         ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-tom-loungepass'] and [b['id'] for b in rep['blocked']] == ['clip-grace-squeeze'], 'report: approved %s, blocked %s' % (rep['approved'], [b['id'] for b in rep['blocked']]))
         ok('clip-mudling-bump' in rep['asked'] and E['clip-mudling-bump']['status'] == 'rejected', 'a rejected clip with an unchanged prompt waits (it is in the group, not made)')
         ok(queue() == [] and rep['spent'] <= 3, 'the queue is empty again and the spend stayed under the request\'s cap (%s)' % rep['spent'])
