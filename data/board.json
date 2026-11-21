@@ -20109,7 +20109,7 @@
       }
      ],
      "failed": [],
-     "spent": 0.0,
+     "spent": 0,
      "svc": {}
     }
    },
@@ -22709,7 +22709,7 @@
    "title": "Watch the chapter 1 fights in videos (NEW 1 to NEW 6)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and play NEW 1 to NEW 6 once each (about 2 minutes each). The family stand, breathe, guard, get hit, fall, cheer and run in videos; the Grump, Toad, Log and Skeeter attack in videos. New since build idea-tomgrace: Tom, Grace, Rose and Deedee never show an old painted pose. A dodge with no video of its own slides their standing video, and a move with no video of its own plays their hand-out (give) video. Check that none of the four ever looks like a flat painting, and that these stand-ins read well enough until their own videos come. Then tap All good, or Something is wrong with a note. This unblocks Dodge, cast and the stop-loss videos (c-wanch2).",
    "steps": [
@@ -22735,8 +22735,14 @@
     {
      "d": "2026-11-21",
      "t": "idea-tomgrace changed what to look at: the dodge and moves with no video now show their videos, never painted poses."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T18:48:13.052Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanch2",
