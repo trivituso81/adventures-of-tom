@@ -1,3 +1,9 @@
+## 2026-11-21 (3): Art Library bake, bg-29-grump-hollow (`artbake1554`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- bg-29-grump-hollow: `bake_battle_bg.py 29-grump-hollow` ran from art/raw/battle/bg-29-grump-hollow-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## board-guidegen (2026-11-21): new card to make and remake battle videos from the Battle Guide
 
 Card c-guidegen. Tom (09:25): generate a missing video, or give feedback on one, have it merged into the prompt and regenerate, all from the Battle Guide. The card holds the full prompt (Sonnet 5.5, high). Board change only; no page or game file changed.
