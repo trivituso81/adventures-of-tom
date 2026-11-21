@@ -7412,7 +7412,7 @@
    "title": "Auto-approve pictures that pass QA",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "artgen3",
    "auto": true,
    "next": "Built and waiting on the push to land. Your try of the new button is the card Try the auto-approve button on a pictures card.",
@@ -7451,6 +7451,10 @@
     {
      "d": "2026-11-21",
      "t": "Built artgen3: a second button on every pictures card, Generate and auto-approve what passes QA. A picture is approved by the job only when QA ran 3 times, every must-pass check is yes, the score is 0.9 or more, the entry has no earlier reject of yours and no photo of your own. Entries waiting on an approved picture are made in the same run, and art-bake is started with the approved files. Nothing was sent to xAI. Notes in claude/artgen-plan.md Built."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artgen3: a second button on a pictures card approves what passes QA for you"
     }
    ],
    "prompt": {
@@ -7463,7 +7467,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 6), then card c-artgen3 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen3 exactly as the plan says and push it as artgen3. Your first push is the commit board: start c-artgen3. Spend nothing on xAI. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-21T18:41:28+00:00",
-   "after": "t-artgen3try"
+   "after": "t-artgen3try",
+   "done": "2026-11-21"
   },
   {
    "id": "c-cardlinks1",
@@ -26392,8 +26397,10 @@
    "url": "https://claude.ai/code/session_01RXeukGvHoJRHbmTxvW7YaR",
    "title": "Auto-approve pictures that pass QA",
    "first": "2026-11-21T10:53:07-08:00",
-   "last": "2026-11-21T18:44:16Z",
-   "tags": [],
+   "last": "2026-11-21T18:59:11Z",
+   "tags": [
+    "artgen3"
+   ],
    "cards": [
     "c-artgen3",
     "c-wanch2"
@@ -30036,8 +30043,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6fc2e1c04977f60474d06db7d00115071e42013c",
- "synced_at": "2026-11-21T18:57:31+00:00",
+ "synced": "e21d1292151166b73df0cb207d61b9b5b3d61e55",
+ "synced_at": "2026-11-21T19:00:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
