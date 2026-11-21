@@ -29713,29 +29713,6 @@
    "changed": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44951549236",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21"
-  },
-  {
    "id": "t-costs2keys",
    "title": "Optional: add fal and xAI keys for balance reads",
    "theme": "Tools",
@@ -29788,6 +29765,46 @@
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "svc-voice-gen",
+   "tag": "svc-voice-gen-fix",
+   "service": "voice-gen",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "title": "voice-gen failed",
+   "next": "The voice-gen run failed: finished as cancelled. A session has to look at the run log and fix it.",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44951739685",
+   "prompt": {
+    "what": "Finds why the voice-gen run failed and fixes it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md. The voice-gen GitHub Action failed (finished as cancelled). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44951739685, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen failed: finished as cancelled"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Re-run failed to start: GitHub answered 403"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
@@ -34230,8 +34247,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "baa0af340a030013d47fa2f162093c6a3b3779be",
- "synced_at": "2026-11-21T21:30:57+00:00",
+ "synced": "2b079d5dc402de0f1ebf91fe387ee35931805b0c",
+ "synced_at": "2026-11-21T21:31:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
