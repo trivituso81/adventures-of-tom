@@ -28237,7 +28237,7 @@
    "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.\n"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28251,7 +28251,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-21",
+     "note": "Tom: \"Remake with wan\". Replaced by the Wan 3.0 video (wan-gen rose-victory rev 1, art/raw/clips/wan-rose-victory-v1.mp4)",
+     "from": "anim-rose-victory",
+     "at": 1795282710743,
+     "rev": 0
+    }
+   ],
    "id": "clip-rose-victory",
    "tab": "Clips",
    "group": "Chapter 1",

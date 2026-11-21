@@ -24537,7 +24537,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Animation note: Rose, Victory",
-   "next": "You sent a note on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Remake with wan",
+   "next": "Made in build anim-rose-victory-vqjc. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed (plus pad 0.8). Passed every check in plan 4.4 on the first video; the measured gate's one flag (size in the jump) is a false reading, see docs/CHANGES.md. Booked $0.50. Next: your card Watch Rose, Victory.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -24576,6 +24576,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-rose-victory-vqjc. Made again on Wan 3.0 (the family route), prompt kept word for word from the approved Grok clip; only the video model and the start picture changed (plus pad 0.8). Passed every check in plan 4.4 on the first video; the measured gate's one flag (size in the jump) is a false reading, see docs/CHANGES.md. Booked $0.50."
     }
    ],
    "prompt": {
@@ -24586,7 +24590,8 @@
     "model": "Claude Opus 5.5 (row D: a battle video you judge by taste, and a miss costs generation money)",
     "effort": "medium (one animation, starting from the version that exists)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-rose-victory-vqjc in data/board.json with its history. Your first push is the commit board: start c-anim-rose-victory-vqjc.\n\nTom watched a battle animation in the Battle Guide (battle-guide.html, docs/BATTLE_GUIDE.md) and sent this note:\n1. (2026-11-21, game build b3s17a) Remake with wan\n\nThe animation: Rose, Victory (body state victory). Its video is clip rose_victory (data/clips/rose-victory.js, art/clips/rose-victory.webp).\n\nMake it again as a video and nothing else: the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3. Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-rose-victory-vqjc. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Rose, play Victory, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-anim-rose-victory-vqjc"
   },
   {
    "id": "c-anim-rose-give-w5ws",
@@ -25202,6 +25207,35 @@
     {
      "d": "2026-11-21",
      "t": "Made by anim-grace-give-q4es. The clip was checked against claude/video-battle-plan.md 4.4 and passed the clip gate before it was handed to you."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-victory-vqjc",
+   "title": "Watch Rose, Victory",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Rose, play Victory, then tap All good or Something is wrong (say what you saw).",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Rose.",
+    "Play Victory (about 2 seconds; the 1/2 button slows it down).",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "anim-rose-victory-vqjc",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
+    "opening": "\"Read CLAUDE.md (the rules No painted poses in battle...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by anim-rose-victory-vqjc. The clip was checked against claude/video-battle-plan.md 4.4 and the measured clip gate before it was handed to you."
     }
    ]
   }

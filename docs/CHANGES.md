@@ -1,4 +1,14 @@
 <<<<<<< HEAD
+## anim-rose-victory-vqjc (2026-11-21): Rose's Victory is a Wan 3.0 video now, made from the same prompt
+
+Card c-anim-rose-victory-vqjc. Tom, from the Battle Guide: "Remake with wan".
+- Kept: the prompt of the approved Grok clip, word for word (`clip-rose-victory` in `data/art-prompts.json`, now `tools/art-library/prompts/wan-rose-victory-v1.txt`): she giggles, jumps straight up once with both arms high, lands on the same spot and holds the arms-up grin. Kept the start-picture-only setting of the other Wan victories (the clip ends in the held pose).
+- Changed: the video model (Wan 3.0 on fal, 720 x 1280, 5 s, job `rose-victory` rev 1) and so the start picture (her large left-facing hero `art/clips/start/rose-hero.png`, as every Wan clip of hers). Also `pad: 0.8` (the picture shrunk to 80% inside the frame), the fix that kept Deedee's raised hands and Rose's Giddyup hair inside the frame.
+- Checks (plan 4.4, every 5th picture plus measurements): reads as a victory jump and a held arms-up grin; the same girl; standing height last 0.98 of first, feet back on the start row within 0.6% of her height in the hold; flat magenta, no halo, never touches an edge; no return needed (state clip). Measured clip gate: one flag, size 1.09x, only in the airborne pictures where the size fit has under 80 matched details (0.99 to 1.04 in the hold): read as a false reading. The vision part of the gate needs the xAI key and was not run.
+- Bake: video pictures 18 to 110, every 2nd, 47 pictures at 1.5x (2.1 s), `data/clips/rose-victory.js`, `art/clips/rose-victory.webp`, source `art/raw/clips/wan-rose-victory-v1.mp4`. The Grok entry `clip-rose-victory` is set to rejected with the reason, so the art-bake job does not cut the old video over this one.
+- Spend: wan-gen run 44929736650, booked $0.50 (fal's live price $0.045 a second, $0.23).
+- Tests: `b3_test.py s8` FAILS [], `battle_guide_test.py` FAILS [], smoke; portrait and landscape looked at.
+
 ## 2026-11-21 (3): Art Library bake, bg-29-grump-hollow (`artbake1554`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
