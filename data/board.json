@@ -25391,6 +25391,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped Start again after Stuck twice.",
      "at": "2026-11-21T20:16:33.071Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "START is not set up for this model and effort. Use Copy prompt."
     }
    ],
    "prompt": {
@@ -25402,8 +25406,7 @@
     "effort": "medium (one change to a prompt that nearly worked)",
     "text": "Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/handoff-rules.md and claude/video-battle-plan.md, then card c-anim-deedee-dodge-y4m3 in data/board.json with its history. Your first push is the commit board: start c-anim-deedee-dodge-y4m3.\n\nDeedee, Dodge (body state dodge) is still the old painted pose. Two Wan 3.0 tries missed (card history): retry 1 ducked forward to the left and her arm left the frame; retry 2 (prompt tools/art-library/prompts/wan-deedee-dodge-v3.txt, \"leans her upper body back to the right\") went the right way with her feet planted, but her flung arms ran off both edges of the video and Wan drew a small object flying past her (results deedee-dodge-r2.mp4 and r3.mp4 on branch wangen).\n\nMake one more video on the family route (wan-gen Action, tools/art-library/wangen-jobs.json) with one change: job deedee-dodge rev 4, the same v3 prompt word for word, plus \"pad\": 0.8 (the change that kept her spread hands inside the frame on her victory, deedee-victory). Check every picture against the plan section 4.4 list and run the measured clip gate (judge() in tools/clip-gate/gate.py) before Tom sees anything; a clip that fails is not handed to him. If the flying object comes back and crosses her, that is a miss: stop and say so. Spend at most $1. Bake it (tools/clip-bake/bake_clip.py, kind state, figure rows 99.3, data/clips/deedee-dodge.js), point B3_BODY_CLIPS.deedee.dodge at it and remove Deedee's dodge row from B3_BODY_PAINT (purge rule), run python3 tools/b3_test.py s8, python3 tools/paint_state_test.py, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape. Build tag anim-deedee-dodge-y4m3. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > Deedee, play Dodge, then All good or Something is wrong; set this card's after to it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-21T18:10:35+00:00",
-   "start": true
+   "started_at": "2026-11-21T18:10:35+00:00"
   },
   {
    "id": "c-anim-deedee-ko-yes1",
@@ -27703,7 +27706,7 @@
    "id": "c-fix-itemdefplay",
    "tag": "fix-itemdefplay",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Read a few item banners on your phone",
@@ -27725,7 +27728,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEPoSEs3hccRneDav9",
     "opening": "Gemini's chapter 1 report, card c-gem1v"
    },
    "history": [
@@ -27754,6 +27757,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T20:16:42.260Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -27767,7 +27774,7 @@
    },
    "after": "t-itemdefplay",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-21T20:17:12+00:00"
   },
   {
    "id": "c-fix-qa-bug03-look",
@@ -32172,8 +32179,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "385c1e4136f072e163b981dcaeea25f900de9727",
- "synced_at": "2026-11-21T20:16:03+00:00",
+ "synced": "83129da34a0fce255661ad663f310ee5126db719",
+ "synced_at": "2026-11-21T20:17:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
