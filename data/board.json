@@ -27186,7 +27186,7 @@
    "title": "Nightly cleanup: files, notes and the working agreement",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Waits on the card Night shift: queued cards start by themselves overnight. Then tap START (or leave it: the night shift starts it that night). It builds a nightly report of files nothing uses, a check that no standing rule or sentence of yours is ever dropped from the working agreement, moves Done cards off the board after 2 days instead of 7, and creates the standing card Night cleanup, which runs every night: one of four buckets a night (unused files, old notes, a shorter working agreement, dead tests). Voice clips, approved art sources and your saved files are never touched.",
    "blocks": [
     "c-nightqa"
@@ -27218,6 +27218,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightclean: the nightly cleanup is built: a report of unused files, a check that no standing rule is dropped, Done cards leave the board after 2 days, and the first night's pass removed 14 dead scripts"
     }
    ],
    "prompt": {
@@ -27231,14 +27235,15 @@
    },
    "tag": "nightclean",
    "after": "nothing for Tom: c-nightqa",
-   "started_at": "2026-11-21T20:34:46+00:00"
+   "started_at": "2026-11-21T20:34:46+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-nightqa",
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on the card Nightly cleanup: files, notes and the working agreement. Then tap START (or leave it to the night shift). It creates the standing card Night QA: each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge (looks, sound, feel, the real phone) stays yours and says why. 24 of your 35 open cards are play cards today.",
    "blocks": [],
    "created": "2026-11-21",
@@ -27251,6 +27256,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Nightly cleanup: files, notes and the working agreement is done."
     }
    ],
    "prompt": {
@@ -27263,7 +27272,6 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-nightqa in data/board.json with its history. Your first push is the commit board: start c-nightqa. Tom (2026-11-19): his role is not QA and not double-checking Claude's work. Build section 8 exactly as written, steps 1 to 7: the standing card c-night-qa (nightly: true, tag nightqa, Sonnet 5.5 medium, theme Project Ops) whose prompt holds steps 2 to 4 and the limits of step 7 word for word, the `machine` field and the two detail lines in board.html with cases in tools/board_test.py, pictures on branch night under qa/, the Closed for you list in tools/night/lastnight.py, and the rule of step 5 in the board section of CLAUDE.md. Then run the first night yourself on the 4 oldest open play cards and write each result on its card. A check is YES OR NO only when the frames can prove it; when in doubt it is YOURS. Never close a card about how something looks, sounds or feels. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board. Push build nightqa as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightqa",
-   "waiting_on": "claude",
    "after": "nothing for Tom: end"
   },
   {
@@ -27569,7 +27577,7 @@
    "title": "Admin Dashboard: the strip under the game",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "tag": "dash2",
    "next": "Waits on your card Try the Admin Dashboard on the wide monitor. Then it applies your notes and builds the strip under the game: the bar that tells you a newer build is live with Reload game, the screen sizes (four Duo poses and Desktop wide), jump to a chapter or a test fight, Story battles, Difficulty, Mute and Report. The next card, Take me there, follows it without a check from you.",
    "blocks": [
@@ -27596,9 +27604,12 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-dashboard. Tom approved the two drawings of the Admin Dashboard for his 3440 x 1440 monitor: \"ok looks good, create the kanban cards we need ot execute this properly\". Plan: claude/dashboard-plan.md; drawings: claude/dashboard-mock/."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Try the Admin Dashboard on the wide monitor is done."
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "c-dash3",
@@ -28869,7 +28880,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
     "opening": "not started"
    },
    "nightly": true,
@@ -28894,6 +28905,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
+   "title": "Nightly cleanup: files, notes and the working agreement",
+   "first": "2026-11-21T20:35:50Z",
+   "last": "2026-11-21T20:45:54Z",
+   "tags": [
+    "nightclean"
+   ],
+   "cards": [
+    "c-nightclean",
+    "c-night-clean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGMUb6GmCUSv3dZxdj",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-21T20:36:25Z",
@@ -28904,16 +28928,6 @@
    "cards": [
     "c-reports-9",
     "c-reports-8"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCvttazpatctUYAyzc",
-   "title": "Nightly cleanup: files, notes and the working agreement",
-   "first": "2026-11-21T20:35:50Z",
-   "last": "2026-11-21T20:35:50Z",
-   "tags": [],
-   "cards": [
-    "c-nightclean"
    ]
   },
   {
@@ -33061,8 +33075,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "5e2160a64de7ac8779564c69bd781c982107349d",
- "synced_at": "2026-11-21T20:44:38+00:00",
+ "synced": "f01d740611bbc30d92653d50920d1bcd7fb86790",
+ "synced_at": "2026-11-21T20:45:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
