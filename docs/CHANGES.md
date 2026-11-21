@@ -1,3 +1,9 @@
+## boardsubfold1 (2026-11-21): on the board, each group under For you folds and unfolds with a tap, all open by default
+
+Card c-boardsubfold1. Tom: "I wanna be able to collapse those subcategories as well, and of course expand them back whenever I want to. but by default they should all be expanded."
+- `mineGroups` in `board.html` draws each For you group (PLAY AND REPORT, REVIEW PICTURES, ...) as its own `details` (`data-sec` `mine-<ask>`), open by default, with the same arrow as the sections. What Tom folds stays folded through the 60 second reload (`secOpen`, in memory, like the sections). The Claude tab's sections already fold and have no groups inside.
+- Test: `tools/board_test.py` checks every group starts open, folds on a tap, stays folded after a redraw, unfolds on a second tap. Its other failures (top line, Queued 11 not 12, START click) fail the same way on main before this build: the stub replays live data. Looked at in portrait and landscape, folded and open.
+
 ## anim-grace-cubepop-tvik (2026-11-21): Grace's Crunchy Sugar-Cube Pop is a punch now, with a neon blue cube
 
 Card c-anim-grace-cubepop-tvik. Tom (Battle Guide, b3s17a): "She should essentially punch the monster with it. And it should be neon blue".

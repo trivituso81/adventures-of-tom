@@ -129,6 +129,10 @@ div.card{cursor:pointer}
 .conv a{font-weight:700;font-size:13px}
 .sub{display:flex;align-items:center;gap:8px;margin:10px 2px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
 .sub .ct{background:var(--line);color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
+.subg>summary.sub{list-style:none;cursor:pointer;min-height:36px;margin:4px 2px 2px}
+.subg>summary.sub::-webkit-details-marker{display:none}
+.subg>summary.sub::after{content:"\25BE";margin-left:auto}
+.subg:not([open])>summary.sub::after{content:"\25B8"}
 .big{font-size:20px;font-weight:800;color:var(--text);margin:6px 0}
 .ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:var(--btn);border-radius:12px;padding:10px 12px}
 .ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
@@ -512,7 +516,8 @@ function mineGroups(list){
   let h='';
   for(const [k,name] of ASKS.concat([['','OTHER']])){
     const g=list.filter(c=>k?c.ask===k:!ASKS.some(a=>a[0]===c.ask));if(!g.length)continue;
-    h+='<div class="sub" data-ask="'+k+'"><span>'+name+'</span><span class="ct">'+g.length+'</span></div>'+g.map(c=>cardHtml(c,'mine')).join('');
+    const sid='mine-'+(k||'other'),op=sid in secOpen?secOpen[sid]:true;   // boardsubfold1 (Tom 11-21): each group folds, open by default
+    h+='<details class="subg" data-sec="'+sid+'"'+(op?' open':'')+'><summary class="sub" data-ask="'+k+'"><span>'+name+'</span><span class="ct">'+g.length+'</span></summary>'+g.map(c=>cardHtml(c,'mine')).join('')+'</details>';
   }
   return h;
 }

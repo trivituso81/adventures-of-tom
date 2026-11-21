@@ -115,6 +115,15 @@ try:
                 subs = pg.eval_on_selector_all('[data-sec=mine] .sub', 'e=>e.map(x=>x.dataset.ask+":"+x.querySelector(".ct").textContent)')
                 wsubs = [k + ':' + str(len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])) for k in ORDER if any(c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k for c in oc)]
                 if subs != wsubs: fails.append(f'{name}: FOR YOU groups {subs}, want {wsubs}')
+                # boardsubfold1: every FOR YOU group is open by default, folds and unfolds with a tap, and stays folded through a redraw
+                if pg.eval_on_selector_all('[data-sec=mine] details.subg', 'e=>e.filter(x=>!x.open).length') != 0: fails.append(f'{name}: a FOR YOU group starts closed')
+                g0 = pg.get_attribute('[data-sec=mine] details.subg', 'data-sec')
+                pg.click(f'details[data-sec="{g0}"] > summary'); pg.wait_for_timeout(100)
+                if pg.eval_on_selector(f'details[data-sec="{g0}"]', 'e=>e.open') or pg.eval_on_selector(f'details[data-sec="{g0}"] .card', 'e=>e.checkVisibility()'): fails.append(f'{name}: tapping group {g0} does not fold it')
+                pg.evaluate('renderSections()')
+                if pg.eval_on_selector(f'details[data-sec="{g0}"]', 'e=>e.open'): fails.append(f'{name}: group {g0} opened again after a redraw')
+                pg.click(f'details[data-sec="{g0}"] > summary'); pg.wait_for_timeout(100)
+                if not pg.eval_on_selector(f'details[data-sec="{g0}"]', 'e=>e.open'): fails.append(f'{name}: tapping group {g0} again does not unfold it')
                 if 'REVIEW PICTURES' not in pg.inner_text('[data-sec=mine]') or 'PLAY AND REPORT' not in pg.inner_text('[data-sec=mine]'): fails.append(f'{name}: ask names missing in FOR YOU')
                 if not pg.inner_text('#synctxt').startswith('Synced '): fails.append(f'{name}: no Synced time in the header: {pg.inner_text("#synctxt")!r}')
                 if 'START' not in pg.inner_text('.card[data-id="c-startme"]'): fails.append(f'{name}: startable card has no START')

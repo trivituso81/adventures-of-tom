@@ -25418,7 +25418,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Board: fold and unfold the groups inside For you",
-   "next": "Building boardsubfold1: each group under For you (PLAY AND REPORT, REVIEW PICTURES and the rest) opens and closes with a tap, all open by default.",
+   "next": "Built boardsubfold1: under For you on the board, tap a group's name (PLAY AND REPORT and the rest) to fold it, tap again to open it. All start open. Folded groups stay folded until the page is closed.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -25431,6 +25431,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"I wanna be able to collapse those subcategories as well, and of course expand them back whenever I want to. but by default they should all be expanded.\" Card logged for audit; Tom asked for it to be processed fully."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pushed boardsubfold1: each For you group folds and unfolds, open by default; tested in portrait and landscape."
     }
    ],
    "prompt": {
