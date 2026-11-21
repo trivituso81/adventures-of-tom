@@ -32596,7 +32596,7 @@
   }
  ],
  "night": {
-  "enabled": true,
+  "enabled": false,
   "max": 5,
   "from": 23,
   "to": 3,
