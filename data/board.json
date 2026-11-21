@@ -7412,15 +7412,15 @@
    "title": "Auto-approve pictures that pass QA",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "tag": "artgen3",
    "auto": true,
    "next": "Waits on QA for generated pictures (artgen2) and your look at its results. Then it adds the second button, Generate and auto-approve what passes QA: a picture is approved for you only when every must-pass check is yes and the score reaches the threshold; the rest wait for you.",
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCUuwqar97Z4KXUgef",
     "opening": "not started"
    },
    "history": [
@@ -7431,6 +7431,18 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: QA for generated pictures, with the results on the card, Look at the QA results on a real pictures card is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7442,7 +7454,7 @@
     "effort": "medium (the rule, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 6), then card c-artgen3 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen3 exactly as the plan says and push it as artgen3. Your first push is the commit board: start c-artgen3. Spend nothing on xAI. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "waiting_on": "claude"
+   "started_at": "2026-11-21T18:41:28+00:00"
   },
   {
    "id": "c-cardlinks1",
@@ -19783,7 +19795,7 @@
    "title": "Make and approve 18 item picture sheets (288 items)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "fyi": true,
    "next": "Claude changed one phrase each in the 2 prompts that failed and made them again; Claude looked at both and they now read right. 1. Open ADMIN > ART LIBRARY > Props > Item pictures (the button below). 2. Look at the newest picture of each: Pro Racing Flats should be low neon yellow running shoes with laces, a closed heel and a thin sole (not slippers); Birthday Sash should be a wide gold band in a loop with a small gold bow near the bottom (not just a bow); Tiny Clay Taco is the one you passed (taco with a paperclip). 3. APPROVE each that looks right. The game then shows all 288 item pictures in the ITEM GAINED banner. If one is still wrong, press Something is wrong on this card and say which.",
@@ -20047,6 +20059,10 @@
     {
      "d": "2026-11-21",
      "t": "Pictures job: skipped 1. Spent about $0.00."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: you approved prop-item-01, prop-item-02, prop-item-03, prop-item-04, prop-item-05, prop-item-06, prop-item-07, prop-item-08, prop-item-09, prop-item-10, prop-item-11, prop-item-12, prop-item-13, prop-item-14, prop-item-15, prop-item-16, prop-item-17, prop-item-18, prop-item-redo-1, prop-item-redo-2, prop-item-solo-amy_chm1, prop-item-solo-claytaco, prop-item-solo-g_bsash in the Art Library."
     }
    ],
    "gen": {
@@ -20077,7 +20093,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-ch2lessons",
@@ -26091,7 +26108,7 @@
   {
    "id": "t-artfallback-seen",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -26108,6 +26125,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-artfallback (artfallback1 shipped)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: already in the game (prop-gate-town-school-open, prop-gate-jpark-barn-open, prop-gate-blvd-studio-open, prop-gate-backlot-stage7-open approved in the Art Library), nothing to make."
     }
    ],
    "links": [
@@ -26121,7 +26142,8 @@
      ],
      "label": "Open the four open gates"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -29738,8 +29760,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "93d959dbb5f4c61b2cc7451b36b177998740d0e0",
- "synced_at": "2026-11-21T18:36:18+00:00",
+ "synced": "f4b39cbae2bc73ab2c7e104a9b581d5cd606d470",
+ "synced_at": "2026-11-21T18:41:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
