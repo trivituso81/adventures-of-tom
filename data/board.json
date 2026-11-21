@@ -22253,24 +22253,13 @@
   },
   {
    "id": "svc-art-bake",
-   "tag": "svc-art-bake-fix",
    "service": "art-bake",
-   "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "lane": "github",
+   "col": "prog",
    "theme": "Tools",
-   "title": "art-bake failed",
-   "next": "The art-bake run failed: finished as failure. A session has to look at the run log and fix it.",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44863659964",
-   "prompt": {
-    "what": "Finds why the art-bake run failed and fixes it.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md. The art-bake GitHub Action failed (finished as failure). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44863659964, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
+   "title": "art-bake is running",
+   "next": "art-bake is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44865397241",
    "chat": {
     "url": "",
     "opening": "service run"
@@ -22278,7 +22267,7 @@
    "history": [
     {
      "d": "2026-11-20",
-     "t": "art-bake failed: finished as failure"
+     "t": "art-bake started."
     }
    ],
    "blocks": [],
