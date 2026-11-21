@@ -21303,10 +21303,10 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Waiting on Tom card t-boppy-bigfish-pic: generate and approve the new unimpressed pose. Then a session rebakes his mood frames and faces and ships boppy-bigfish.",
+   "next": "Waiting on Tom card t-boppy-bigfish-pic2: the approved Paso Robles pose is not in the repo (only art/raw/characters/boppy-em-unimpressed-v1.png, the old Big Fish one). Once it is approved and saved, a session rebakes his mood frames and faces and ships boppy-bigfish.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -21353,14 +21353,19 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-21T14:51:48.904Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping: Tom's card t-boppy-bigfish-pic was marked all good, but no generated picture exists (card has no gen run, no boppy-em-unimpressed-v2 on main or branch artgen, the Art Library entry still lists only v1 in the Big Fish cap). Nothing to install. Parked behind new Tom card t-boppy-bigfish-pic2."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHDMDjx8dfDTwZjaC6",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-pic",
-   "start": true
+   "after": "t-boppy-bigfish-pic2",
+   "start": true,
+   "waiting_on": "tom"
   },
   {
    "id": "c-qa-coh01",
@@ -23252,6 +23257,40 @@
     "text": "Read CLAUDE.md (No unused voice) and docs/PURGED_VOICE.md. Run python3 tools/clip-audit/unused_voice.py: check 4 lists about 221 dialogue clips not in harvest or source. For each, confirm by grep that no scene, map, harvest line or source plays its text (a line that is live elsewhere is a harvest bug: fix the harvest instead of purging). Write a purge spec like tools/clip-audit/purge-ch2build.json, run node tools/clip-audit/purge_unused.js with the spec and --apply, rebuild with python3 tools/voice-library/rebuild.py, get all four checks to 0, record the list in docs/PURGED_VOICE.md and docs/CHANGES.md (## voicepurge221), bump tags, push. Your first push is the commit board: start c-voicepurge221. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "start": true
+  },
+  {
+   "id": "t-boppy-bigfish-pic2",
+   "title": "Generate Boppy's unimpressed pose in his Paso Robles cap",
+   "theme": "Characters",
+   "lane": "tom",
+   "ask": "pictures",
+   "next": "Open ADMIN > ART LIBRARY > Characters > Report fixes > Boppy unimpressed WITH his mustache (the button below), press Generate, wait for the picture. It should show Boppy alone on magenta, one hand on his hip, half closed eyes, mouth turned down, rod over his shoulder, white mustache, cap reading Paso Robles. APPROVE it if so; REJECT with a note saying what is wrong. Approving unblocks Claude card c-boppy-bigfish.",
+   "blocks": [
+    "c-boppy-bigfish"
+   ],
+   "done_when": {
+    "art_approved": [
+     "boppy-em-unimpressed"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "boppy-em-unimpressed"
+     ],
+     "label": "Boppy unimpressed pose"
+    }
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "col": "up",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by c-boppy-bigfish: card t-boppy-bigfish-pic closed as all good but the approved picture is not in the repo."
+    }
+   ]
   }
  ],
  "sessions": [
