@@ -312,11 +312,10 @@ SCENES.ch1Mudling=[
   {battle:'mudling',tut:'basics',count:3},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
     {call:()=>{ sfx.splat(); }},   // the mud melts into the path
-    {flag:'ch1-trail'},   // hollowtrail1: the nine wrappers lie along the Hollow (stage 1 painting, HOLLOW_TRAIL), the first three leading up into the clearing
-    {talk:'Grace',lines:["Nine wrappers. There were twelve. So the one with the pan still has three."]},
-    {talk:'Deedee',lines:["Then it has three of my muffins and my pan. Keep walking."]},
+    {flag:'ch1-trail'},   // hollowtrail1: four wrappers lie from the gate up to the top left corner (stage 1 painting, HOLLOW_TRAIL)
+    {talk:'Grace',lines:["3 wrappers, let's follow them!"]},
     {flag:'ch1-tuts'},
-    {toast:'Goal: follow the muffin wrappers up into the clearing. The Hollow’s monsters are awake now.',time:5}])
+    {toast:'Goal: follow the muffin wrappers up to the top left corner. The Hollow’s monsters are awake now.',time:5}])
 ];
 
 // 5. Boppy's fishing spot: the grey patch and the orange block with the dragonfly. Tom pulls and fails; Deedee lifts the bulb with a tissue.
@@ -431,11 +430,10 @@ SCENES.ch1Sunday=[
   {talk:'Sal',lines:["Los Angeles? You got it."]},
   {sfx:'doorOut'}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
-  {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone',keep:true}},   // cutpolish4b: the phone lights up on the cab seat and stays up while TNB's text is spoken
+  {call:()=>sfx.ding()}, {interstitial:{ch1Reveal:'phone'}},   // cutpolish4b: the phone lights up on the cab seat
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
-  {ch1RevealEnd:true},
   {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
-  {trip:'west',quiet:true}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
+  {trip:'west'}   // TNB's text goes straight into the airport run (report r-20261120-184534-ict4); the chapter 2 save comes on landing
 ];
 
 // ======================================================================================================
@@ -702,6 +700,8 @@ const TRIGGERS=[
   {id:'ch1-ellie',map:'row',at:[4,15,9,19],when:{...CH1,flag:'ch1-amy',notFlag:['ch1-ellie','ch1-theft']},scene:'ch1Ellie'},
   {id:'ch1-theft',map:'grands',when:{...CH1,notFlag:'ch1-theft'},scene:'ch1Theft'},
   {id:'ch1-t1',map:'hollow',at:[4,17,8,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
+  {id:'ch1-fol-toad',map:'hollow',when:{...CH1,flag:'ch1-beat:toad',notFlag:['ch1-fol-toad','ch1-spot']},scene:'ch1FolToad'},
+  {id:'ch1-fol-log',map:'hollow',when:{...CH1,flag:'ch1-beat:log',notFlag:['ch1-fol-log','ch1-spot']},scene:'ch1FolLog'},
   {id:'ch1-spot',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-spot'},scene:'ch1Spot'},
   {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-spot',notFlag:'ch1-pond'},scene:'ch1Pond'},
   {id:'ch1-after',map:'hollow',when:{...CH1,flag:{'battle:bigone':'win'},notFlag:'ch1-tin'},scene:'ch1AfterBoss'},
@@ -789,30 +789,30 @@ const STORY_PROPS={
 };
 
 // Grump Hollow muffin wrapper trail (hollowtrail1; Tom's reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx).
-// fix-gatelayer-pics (Tom: "wny does each trail have 10 wrappers? none of this makes any sense"): the nine wrappers are ONE trail, three to the
-// Skeeter, two to the bench and the top left path, two to the log, two to the fishing spot (tools/sprite-bake/bake_hollow_trail.py WRAPPERS).
-// Grace picks up each leg's wrappers when its monsters are beaten, so stage n's painting shows only those still lying (9, 6, 4, 2).
-// After the Mudling fight the wrappers lead the party through the Hollow in four stages, one painting each (data/hollow-trail.js):
-// 1 up into the clearing (to the Skeeter Swarm), 2 the upper left corner (the Pond Grump by the soggy bench, the Bog Toad on the path above it),
-// 3 the Log Lump in the middle of the clearing, 4 east to Boppy's fishing spot (the boss trigger). A stage ends when all its monsters have been
-// beaten once in chapter 1 (a real win or a POP); the boss scene (ch1-spot) shows stage 4 whatever is left. After chapter 1: the base painting.
-const HOLLOW_TRAIL_STAGES=[['skeeter'],['grump','toad'],['log']];
-const HOLLOW_TRAIL_GOALS=['Goal: Grace picked up 3 wrappers. The other 6 go on, up to the top left corner by the old bench.','Goal: Grace picked up 2 more. The last 4 turn back, to the log in the middle of the clearing.','Goal: 2 wrappers left. They lead east, around the pond, to Boppy’s fishing spot.'];
+// fix-hollowtrail-play-2 (Tom 2026-11-21): the trail is three legs of four wrappers, never scattered. Only three monsters trigger it:
+// the Mudling at the gate (4 wrappers up to the top left corner, to the Bog Toad), the Bog Toad (4 wrappers to the middle, to the Log Lump),
+// the Log Lump (4 wrappers east to Boppy's fishing spot, the boss trigger). Each painting shows only the current leg's four wrappers
+// (tools/sprite-bake/bake_hollow_trail.py WRAPPERS); Grace picks up the last leg's when its monster falls and says "3 wrappers, let's follow them!".
+// The Skeeter Swarm and the Pond Grump are ordinary monsters and change nothing. After chapter 1: the base painting.
+const HOLLOW_TRAIL_GOALS=['Goal: follow the wrappers to the middle of the clearing, to the Log Lump.','Goal: follow the wrappers east, around the pond, to Boppy’s fishing spot.'];
 function hollowTrailStage() {
   if(typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||!flag('ch1-trail')) return 0;
-  if(flag('ch1-spot')) return 4;
-  for(let i=0;i<HOLLOW_TRAIL_STAGES.length;i++) if(!HOLLOW_TRAIL_STAGES[i].every(m=>flag('ch1-beat:'+m))) return i+1;
-  return 4;
+  if(flag('ch1-spot')) return 3;
+  if(!flag('ch1-beat:toad')) return 1;
+  if(!flag('ch1-beat:log')) return 2;
+  return 3;
 }
 PLATE_VARIANT.hollow=()=>{ const n=hollowTrailStage(); return n&&typeof HOLLOW_TRAIL!=='undefined'&&HOLLOW_TRAIL[n]||null; };
-// Called by monsterFall (engine/world.js) when a map monster is beaten (a won fight or a POP).
+// Called by monsterFall (engine/world.js) when a map monster is beaten (a won fight or a POP). Only the Toad and the Log move the trail on.
 function storyMonsterFell(n) {
-  if(!n||!n.monster||typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||currentMap.id!=='hollow'||!flag('ch1-trail')) return;
+  if(!n||(n.monster!=='toad'&&n.monster!=='log')||typeof STORY==='undefined'||STORY.mode!=='full'||STORY.chapter!==1||currentMap.id!=='hollow'||!flag('ch1-trail')) return;
   const was=hollowTrailStage();
   setFlag('ch1-beat:'+n.monster,true);
   const now=hollowTrailStage();
   if(now>was&&HOLLOW_TRAIL_GOALS[now-2]) storySetGoal(HOLLOW_TRAIL_GOALS[now-2]);   // the quest label pulses with the next leg
 }
+SCENES.ch1FolToad=[{flag:'ch1-fol-toad'},{talk:'Grace',lines:["3 wrappers, let's follow them!"]}];   // after the Toad (trigger ch1-fol-toad)
+SCENES.ch1FolLog=[{flag:'ch1-fol-log'},{talk:'Grace',lines:["3 wrappers, let's follow them!"]}];   // after the Log (trigger ch1-fol-log)
 
 // Story effects drawn on the map (engine/story.js, in map coordinates): chapter 2's purple smog, the trance swirls
 // over the neighbors, and the Observatory pipes in Griffith Park.

@@ -20017,7 +20017,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Look at the ground: nine cream muffin wrappers are now bigger (about the width of Grace's body) with a dark shadow, so they should stand out from the stones: three from the gate up into the clearing, then on to the old bench, the top left path, the log and Boppy's fishing bench. Beat the Skeeter Swarm: six are left. Beat the Pond Grump and the Bog Toad: four left. Beat the Log Lump: two left. If you still cannot see them, or they are too big, use the REPORT tab and pin one.",
+   "next": "RELOAD, then CHAPTERS > Chapter 1. Walk to Grump Hollow and win the Mudling fight at the gate. Grace says '3 wrappers, let's follow them!' and four wrappers lie in a line from the gate up to the top left corner. Beat the Bog Toad there (the toad on the path at the top left): Grace says it again and four new wrappers lead to the Log Lump in the middle. Beat the Log: four more lead east to Boppy's fishing spot. The Skeeter Swarm and Pond Grump change nothing. If a leg is wrong, press Something is wrong and say which.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -20043,6 +20043,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: youre not understanding - you created several images where the wrappers are scattered haphazardly across the area. let me explain it to you. / - after defeating the mudling, there should be 4 wrappers that lead to the top left corner forcing the party to battle a monster there / - after defeating that monster, there should 4 more wrappers that lead to the center of the aera, where the party must defeat the log / - after defeating the log, there should be 4 more wrappers that lead to the big one activiation spot / after each monster is defeated in this case, Grace should say 3 wrappers, let's follow them! / remember thatn only 3 monster should trigger this: the mudling, the toad looking thing in the top left and the log that sits in the middle Sent to Claude as card c-fix-hollowtrail-play-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-21T03:19:06.407Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "fix-hollowtrail-play-2: three legs of four wrappers (Mudling to Toad, Toad to Log, Log to fishing spot), each painting shows only its leg; only Mudling, Toad and Log trigger it; Grace says \"3 wrappers, let's follow them!\" after each. Next: look again."
     }
    ],
    "first": "Build fix-gatelayer-pics shows on the title screen.",

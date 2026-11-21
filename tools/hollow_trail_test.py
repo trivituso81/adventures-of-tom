@@ -24,8 +24,8 @@ def check(name, ok):
 
 # ---------------- BAKE ----------------
 base = np.array(Image.open(os.path.join(ROOT, 'art/hollow.webp')).convert('RGB')).astype(int)
-check('nine wrappers in all', len(B.WRAPPERS) == 9)
-check('legs hold 3, 2, 2, 2 wrappers in trail order', [sum(1 for w in B.WRAPPERS if w[0] == n) for n in (1, 2, 3, 4)] == [3, 2, 2, 2]
+check('twelve wrappers in all', len(B.WRAPPERS) == 12)
+check('three legs of four wrappers in trail order', [sum(1 for w in B.WRAPPERS if w[0] == n) for n in (1, 2, 3)] == [4, 4, 4]
       and [w[0] for w in B.WRAPPERS] == sorted(w[0] for w in B.WRAPPERS))
 check('a wrapper is small: under a tile, under two thirds of Tom\'s height (84 plate px)', B.WIDE <= 52)
 tmp = tempfile.mkdtemp()
@@ -33,12 +33,12 @@ r = subprocess.run([sys.executable, os.path.join(HERE, 'sprite-bake', 'bake_holl
                    env=dict(os.environ, HOLLOW_TRAIL_OUT=tmp))
 print('   ', r.stdout.strip()[-200:], r.stderr.strip()[-300:])
 check('bake ran', r.returncode == 0)
-for n in (1, 2, 3, 4):
+for n in (1, 2, 3):
     f = os.path.join(tmp, 'art', f'hollow-trail{n}.webp')
     if not os.path.exists(f): check(f'stage {n} written', False); continue
     out = np.array(Image.open(f).convert('RGB')).astype(int); d = np.abs(out - base).max(2) > 40
     cnt, lab = cv2.connectedComponents(cv2.dilate(d.astype(np.uint8), np.ones((9, 9), np.uint8)))
-    want = [(x, y) for leg, x, y in B.WRAPPERS if leg >= n]
+    want = [(x, y) for leg, x, y in B.WRAPPERS if leg == n]
     blobs = [np.argwhere(lab == i) for i in range(1, cnt)]; blobs = [b for b in blobs if len(b) > 30]
     check(f'stage {n}: {len(blobs)} wrappers on the ground (want {len(want)})', len(blobs) == len(want))
     widths = [b[:, 1].max() - b[:, 1].min() for b in blobs]
@@ -52,7 +52,7 @@ for n in (1, 2, 3, 4):
     live = os.path.join(ROOT, 'art', f'hollow-trail{n}.webp')
     check(f'stage {n}: art/hollow-trail{n}.webp matches a fresh bake', os.path.exists(live) and open(live, 'rb').read() == open(f, 'rb').read())
 idx = open(os.path.join(tmp, 'data', 'hollow-trail.js')).read() if os.path.exists(os.path.join(tmp, 'data', 'hollow-trail.js')) else ''
-check('data/hollow-trail.js lists the four stages', all(f"{n}:'art/hollow-trail{n}.webp?v=ht" in idx for n in (1, 2, 3, 4)))
+check('data/hollow-trail.js lists the three stages', all(f"{n}:'art/hollow-trail{n}.webp?v=ht" in idx for n in (1, 2, 3)))
 check('data/hollow-trail.js in the repo matches the fresh bake', open(os.path.join(ROOT, 'data', 'hollow-trail.js')).read() == idx)
 if os.path.exists(os.path.join(tmp, 'tools', 'shots', 'hollow-trail-check.png')):
     shutil.copy(os.path.join(tmp, 'tools', 'shots', 'hollow-trail-check.png'), os.path.join(SHOTS, 'hollow-trail-bake.png'))
@@ -87,9 +87,9 @@ with sync_playwright() as pw:
         pg.keyboard.press('Enter'); pg.wait_for_timeout(90)
     check('Mudling scene played to the end', ev("()=>flag('ch1-tuts')===true"))
     check('trail on: stage 1', ev("()=>flag('ch1-trail')===true&&hollowTrailStage()===1"))
-    check('goal names the wrappers', ev("()=>/muffin wrappers/.test(flag('goal')||'')"))
+    check('goal names the wrappers', ev("()=>/muffin wrappers.*top left corner/.test(flag('goal')||'')"))
     pg.wait_for_timeout(1200)
-    check('stage 1 painting shown (all nine wrappers)', ev("()=>PLATE_VARIANT.hollow()===HOLLOW_TRAIL[1]&&PLATES.hollow.src===HOLLOW_TRAIL[1]"))
+    check('stage 1 painting shown (the four wrappers of leg 1)', ev("()=>PLATE_VARIANT.hollow()===HOLLOW_TRAIL[1]&&PLATES.hollow.src===HOLLOW_TRAIL[1]"))
     pg.screenshot(path=os.path.join(SHOTS, 'hollow-trail-stage1-portrait.png'))
     # fence and spots
     check('every ordinary Hollow monster starts west of the fence (x<13)', ev("()=>currentMap.npcs.concat(currentMap.fallen||[]).filter(n=>n.monster&&!b7IsBoss(n)).every(n=>(n.home||n).x<13)"))
@@ -100,15 +100,16 @@ with sync_playwright() as pw:
     check('no monster stepped into the fence while chasing', ev("()=>currentMap.npcs.filter(n=>n.monster&&!b7IsBoss(n)).every(n=>n.x<13&&(!n.move||n.move.tx<13))"))
     # stages follow beaten monsters, out of order too
     def beat(m): ev(f"()=>{{ const n=currentMap.npcs.find(x=>x.monster==='{m}'); if(n) monsterFall(n); else storyMonsterFell({{monster:'{m}'}}); }}")
-    beat('log'); check('Log first: still stage 1 (the trail goes in order)', ev("()=>hollowTrailStage()===1&&flag('ch1-beat:log')===true"))
-    beat('skeeter'); check('Skeeter beaten: stage 2', ev("()=>hollowTrailStage()===2"))
-    check('goal moved to the top left corner and counts the wrappers picked up', ev("()=>/picked up 3 wrappers.*top left corner/.test(flag('goal')||'')"))
-    beat('grump'); check('Grump alone: still stage 2', ev("()=>hollowTrailStage()===2"))
-    beat('toad'); check('Toad too: Log already down, so stage 4', ev("()=>hollowTrailStage()===4"))
+    beat('skeeter'); beat('grump'); check('Skeeter and Grump change nothing: still stage 1', ev("()=>hollowTrailStage()===1&&!flag('ch1-beat:skeeter')&&!flag('ch1-beat:grump')"))
+    beat('log'); check('Log first: still stage 1 (the trail goes in order)', ev("()=>hollowTrailStage()===1"))
+    ev("()=>setFlag('ch1-beat:log',false)")
+    beat('toad'); check('Toad beaten: stage 2', ev("()=>hollowTrailStage()===2"))
+    check('goal moved to the Log in the middle', ev("()=>/middle of the clearing.*Log/.test(flag('goal')||'')"))
+    beat('log'); check('Log beaten: stage 3', ev("()=>hollowTrailStage()===3"))
     check('goal moved east to the fishing spot', ev("()=>/fishing spot/.test(flag('goal')||'')"))
-    ev("()=>setFlag('ch1-beat:log',false)"); check('without the Log: stage 3', ev("()=>hollowTrailStage()===3"))
-    ev("()=>setFlag('ch1-spot')"); check('boss scene started: stage 4 whatever is left', ev("()=>hollowTrailStage()===4"))
-    ev("()=>setFlag('ch1-spot',false)")
+    ev("()=>{ for(const f of ['ch1-beat:toad','ch1-beat:log']) setFlag(f,false); setFlag('ch1-spot'); }"); check('boss scene started: stage 3 whatever is left', ev("()=>hollowTrailStage()===3"))
+    ev("()=>{ setFlag('ch1-spot',false); setFlag('ch1-beat:toad',true); setFlag('ch1-beat:log',true); }")   # stage 3 for the painting checks below
+    check('Grace follow scenes and triggers exist', ev("()=>SCENES.ch1FolToad[1].lines[0]===\"3 wrappers, let's follow them!\"&&SCENES.ch1FolLog[1].lines[0]===SCENES.ch1FolToad[1].lines[0]&&TRIGGERS.some(t=>t.id==='ch1-fol-toad')&&TRIGGERS.some(t=>t.id==='ch1-fol-log')"))
     # an installed stage painting is shown, swapped in with no blank frame; a broken one falls back to the base
     ev("()=>{ window.__ht3=HOLLOW_TRAIL[3]; HOLLOW_TRAIL[3]='art/hollow.webp?v=trailswaptest'; }"); pg.wait_for_timeout(1500)
     check('stage 3 painting shown once loaded', ev("()=>PLATES.hollow.src==='art/hollow.webp?v=trailswaptest'&&PLATES.hollow.ready&&!!PLATES.hollow.img"))
@@ -117,7 +118,7 @@ with sync_playwright() as pw:
     ev("()=>{ delete HOLLOW_TRAIL[3]; }"); pg.wait_for_timeout(1200)
     check('no painting for the stage: back to the base plate', ev("()=>PLATES.hollow.src===PLATES.hollow.baseSrc"))
     ev("()=>{ HOLLOW_TRAIL[3]=window.__ht3; }"); pg.wait_for_timeout(1200)
-    check('stage 3 painting (four wrappers left) shown', ev("()=>PLATES.hollow.src===HOLLOW_TRAIL[3]"))
+    check('stage 3 painting (leg 3) shown', ev("()=>PLATES.hollow.src===HOLLOW_TRAIL[3]"))
     pg.screenshot(path=os.path.join(SHOTS, 'hollow-trail-stage3-portrait.png'))
     ev("()=>{ STORY.chapter=2; }"); check('after chapter 1: no trail', ev("()=>hollowTrailStage()===0")); ev("()=>{ STORY.chapter=1; }")
     pg.set_viewport_size({'width': 860, 'height': 430}); pg.wait_for_timeout(800)

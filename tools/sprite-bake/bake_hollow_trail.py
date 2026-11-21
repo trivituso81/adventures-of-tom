@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
-"""Grump Hollow muffin wrapper trail: the four stage paintings (hollowtrail1; remade in fix-gatelayer-pics, Tom 2026-11-20).
+"""Grump Hollow muffin wrapper trail: the three stage paintings (hollowtrail1; remade in fix-hollowtrail-play-2, Tom 2026-11-21).
 
-Tom on the generated trail paintings: "why are the wrappers half the size of the characters? wny does each trail have 10 wrappers? none of
-this makes any sense." The generator painted nine wrappers PER LEG (36 in all, though the story has nine: "Nine wrappers. There were twelve.")
-and each about as big as a child. So the generator is out: this script places the nine wrappers itself, at a fixed small size, and writes the
-four stage paintings straight onto the live plate. No Art Library entry, no cost.
+Tom: after the Mudling there are 4 wrappers leading to the top left corner (a monster there), after that monster 4 more leading to the middle
+(the Log), after the Log 4 more leading to the big activation spot; only those three monsters trigger it. So the trail is three legs of four,
+placed by this script at a fixed small size straight onto the live plate (the generator painted them scattered and as big as children).
+Stage n shows ONLY leg n; the earlier legs have been picked up. No Art Library entry, no cost.
 
-The story: the thief dropped nine wrappers on its way through the Hollow, one trail: up from the gate into the clearing, to the old bench and
-the top left path, back to the middle of the clearing, then east to Boppy's fishing spot. Grace picks up the wrappers of each leg once its
-monsters are beaten, so stage n shows the wrappers still lying: stage 1 all nine, stage 2 six, stage 3 four, stage 4 two.
-
-    python3 tools/sprite-bake/bake_hollow_trail.py          (writes art/hollow-trail1..4.webp, data/hollow-trail.js,
-                                                             tools/shots/hollow-trail-check.png: the four stages plus a close up of the gate)
+    python3 tools/sprite-bake/bake_hollow_trail.py          (writes art/hollow-trail1..3.webp, data/hollow-trail.js,
+                                                             tools/shots/hollow-trail-check.png: the three stages plus a close up of the gate)
 HOLLOW_TRAIL_OUT=<dir> writes under <dir> instead (tests).
 Wrapper pictures: tools/sprite-bake/src/hollow-wrapper-cutouts.png (ten painted liners cut from the first generated paintings).
 """
@@ -23,16 +19,16 @@ PW, PH, TILE = 1536, 1408, 64          # the plate: 64 art px per map tile (the 
 WIDE = 50                              # wrapper width in plate px (about half a tile): on the phone about 20 px wide and 10 tall, narrower than
                                        # Grace's head; Tom stands 84 plate px tall. The rejected generated ones were about 80 (as big as a child);
                                        # 16 to 26 read as pebbles on the phone (the painting is full of pale stones that size)
-# The nine wrappers, in trail order: (leg, x, y) in map tiles, each on open ground. Leg n ends at stage n's monsters
-# (data/scenes.js HOLLOW_TRAIL_STAGES; MONSTER_SPOTS in data/monsters.js).
+# The twelve wrappers, three legs of four (Tom 2026-11-21, fix-hollowtrail-play-2): (leg, x, y) in map tiles, each on open ground, in a line that
+# leads from one monster to the next. Leg 1: the gate to the Bog Toad (7,8) in the top left corner; leg 2: the Toad to the Log Lump (11,11) in
+# the middle; leg 3: the Log to Boppy's fishing spot (the boss trigger, x 14 and up). Stage n shows ONLY leg n (the earlier ones are picked up).
 WRAPPERS = [
-    (1, 6.45, 19.30), (1, 6.70, 17.55), (1, 7.70, 13.35),   # gate, under the exit board, into the clearing (Skeeter Swarm 9,13)
-    (2, 5.85, 11.95), (2, 6.55, 8.95),                     # to the soggy bench (Pond Grump 4,11), up the top left path (Bog Toad 7,8)
-    (3, 8.55, 9.85), (3, 9.75, 10.75),                      # back down to the middle of the clearing (Log Lump 11,11)
-    (4, 13.40, 11.85), (4, 16.40, 11.45),                   # east along the shore path to Boppy's fishing spot (the boss trigger)
+    (1, 6.70, 17.55), (1, 7.70, 13.35), (1, 5.85, 11.95), (1, 6.55, 8.95),
+    (2, 7.45, 9.35), (2, 8.45, 9.85), (2, 9.40, 10.35), (2, 10.20, 10.90),
+    (3, 12.20, 11.90), (3, 13.40, 11.85), (3, 14.90, 11.70), (3, 16.40, 11.45),
 ]
-assert len(WRAPPERS) == 9   # the story's nine
-STAGES = (1, 2, 3, 4)
+assert len(WRAPPERS) == 12 and all(sum(1 for w in WRAPPERS if w[0] == n) == 4 for n in (1, 2, 3))
+STAGES = (1, 2, 3)
 
 def out_dir():
     return os.environ.get('HOLLOW_TRAIL_OUT') or ROOT
@@ -49,7 +45,7 @@ def cutouts():
     return runs
 
 def wrappers_for(stage):
-    return [(x, y) for leg, x, y in WRAPPERS if leg >= stage]
+    return [(x, y) for leg, x, y in WRAPPERS if leg == stage]
 
 def place(im, x, y, cut, k):
     """Paste one small wrapper with its contact shadow, toned to the light of the ground it lies on."""
@@ -70,7 +66,7 @@ def place(im, x, y, cut, k):
 def bake(base, cuts, stage):
     im = base.convert('RGBA').copy()
     for k, (leg, x, y) in enumerate(WRAPPERS):
-        if leg >= stage: place(im, x, y, cuts[(k * 3) % len(cuts)], k)
+        if leg == stage: place(im, x, y, cuts[(k * 3) % len(cuts)], k)
     return im.convert('RGB')
 
 def write_index(od):
@@ -79,7 +75,7 @@ def write_index(od):
         f = os.path.join(od, 'art', 'hollow-trail%d.webp' % n)
         if os.path.exists(f): found[n] = 'art/hollow-trail%d.webp?v=ht%s' % (n, hashlib.md5(open(f, 'rb').read()).hexdigest()[:8])
     body = ('// Grump Hollow muffin wrapper trail paintings (hollowtrail1). Written by tools/sprite-bake/bake_hollow_trail.py; never by hand.\n'
-            '// Stage number -> painting address. Stage n shows the wrappers still on the ground (nine in all, picked up leg by leg).\n'
+            '// Stage number -> painting address. Stage n shows the four wrappers of leg n (the earlier legs are picked up).\n'
             'const HOLLOW_TRAIL={' + ','.join("%d:'%s'" % (n, s) for n, s in sorted(found.items())) + '};\n')
     p = os.path.join(od, 'data', 'hollow-trail.js'); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(body)
