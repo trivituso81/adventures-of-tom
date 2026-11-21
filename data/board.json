@@ -20772,6 +20772,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as qa-bug02: item banners: the picture fills its circle, the prompt sits on a dark pill below the card, speech pips hide while a banner is up"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "itemdef1 replaced this card's picture ring with the item definition banner's square tile; the pip rule is kept."
     }
    ],
    "started_at": "2026-11-21T03:23:33+00:00",
@@ -21685,7 +21689,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Item banners as JRPG item definitions",
-   "next": "In progress: every ITEM GAINED banner becomes a JRPG item definition with four parts: name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks).",
+   "next": "Shipped as itemdef1: every ITEM GAINED banner is now an item definition (picture, name and type, description, IN BATTLE, IN STORY), several items are pages of one banner. Waits only on your phone check (card t-itemdefplay).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21701,6 +21705,14 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built itemdef1: data/item-defs.js (itemDef, 62 written IN STORY lines, type and battle text worked out from each item's fields), new banner layout in portrait and landscape, pages for several items. Tests: tools/itemdef_test.py (all 288 items fit on screen in both orientations), itembanner_test, banner_hold_test pass. Built on top of qa-bug02, which shipped in parallel."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itemdef1: item banners read like JRPG item definitions"
     }
    ],
    "prompt": {
@@ -21711,7 +21723,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are not written yet)",
     "effort": "medium (one banner and one data field, modelled on the existing banner)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-itemdef1 in data/board.json, history included. Your first push is the commit board: start c-itemdef1.\n\nChange every item banner (itemBanner in engine/party-banner.js) so it reads like a JRPG item definition with four parts: item name and type, a short description, its effect in battle, and its effect in story (key items, gifts, unlocks). Write the item text in the game's voice: short, warm, funny, contractions, no em dashes. Test each banner in portrait and landscape, bump the tags, add a docs/CHANGES.md entry headed ## itemdef1, push to main and write the result onto the card.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-itemdefplay"
   },
   {
    "id": "c-fix-hollowtrail-play-2",
@@ -21992,19 +22005,25 @@
    "title": "Look at the item banner again",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then pick up Mud Pie (or any item). Check: the picture fills the circle, 'Tap or press A to continue' sits on a dark pill under the card, and no [...] bubble shows while the banner is up. Press All good, or Something is wrong.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-20",
    "history": [
     {
      "d": "2026-11-21",
      "t": "Added with c-qa-bug02."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: itemdef1 replaced the circle and the dark pill this card asks about with the new item definition banner. Its check moves to t-itemdefplay."
     }
-   ]
+   ],
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-qa-txt04-play",
@@ -22115,6 +22134,29 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-qa-coh03 when qa-coh03 shipped."
+    }
+   ]
+  },
+  {
+   "id": "t-itemdefplay",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Game Shell",
+   "ask": "play",
+   "fyi": true,
+   "title": "Read a few item banners on your phone",
+   "next": "Open the game, press RELOAD on the title, load chapter 1 and talk to Deedee near the fountain for her cookie, then beat a monster that drops something. Each banner should read like a JRPG item card: the picture in a square at the top left, the name with a brown type chip (RECOVERY ITEM, KEY ITEM and so on), the description in italics, then IN BATTLE and IN STORY, and 'Tap or press A to continue' inside the card. Turn on landscape once: the picture moves to the left. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-itemdef1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-itemdef1: your play check of the new item banners. Replaces t-qa-bug02-play."
     }
    ]
   }
