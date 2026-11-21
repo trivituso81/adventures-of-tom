@@ -20187,7 +20187,7 @@
    "id": "c-fix-itembannerart-pics",
    "tag": "fix-itembannerart-pics",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Make and approve 18 item picture sheets (288",
@@ -20210,7 +20210,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-itembannerart-pics"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -20222,6 +20222,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-itembannerart-pics: fix only those that failed",
      "at": "2026-11-21T02:55:32.311Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T02:56:52.691Z"
     }
    ],
    "prompt": {
