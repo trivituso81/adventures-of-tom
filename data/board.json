@@ -21843,6 +21843,29 @@
      "t": "Added with c-qa-coh07."
     }
    ]
+  },
+  {
+   "id": "svc-art-gen",
+   "service": "art-gen",
+   "lane": "xai",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "art-gen is running",
+   "next": "art-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44862957113",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "art-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
