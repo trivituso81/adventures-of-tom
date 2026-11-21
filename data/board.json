@@ -25085,6 +25085,10 @@
     {
      "d": "2026-11-21",
      "t": "Part 1 (guidegen1a) shipped: every animation in the Battle Guide now shows its prompt (real where a video exists, a starter draft otherwise), its price and what is missing. Nothing is generated yet. Parts 2 (guidegen1b) and 3 (guidegen1) follow in this session."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as guidegen1a: the Battle Guide now shows a prompt for every animation, and says what is missing before one can be made"
     }
    ],
    "after": "nothing for Tom: c-guidegen"
@@ -25286,6 +25290,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "first": "2026-11-21T09:33:57-08:00",
+   "last": "2026-11-21T09:51:39-08:00",
+   "tags": [
+    "guidegen1a"
+   ],
+   "cards": [
+    "c-guidegen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvooY2cHTVMVLE9GQ",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T09:18:57-08:00",
@@ -25337,16 +25353,6 @@
    "tags": [],
    "cards": [
     "c-idea-tomgrace"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE18v2ym5mRpiiGgKs",
-   "title": "Battle Guide: make and remake battle videos from the page",
-   "first": "2026-11-21T09:33:57-08:00",
-   "last": "2026-11-21T09:33:57-08:00",
-   "tags": [],
-   "cards": [
-    "c-guidegen"
    ]
   },
   {
@@ -28718,8 +28724,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "eb60401ea325659733949f0aaa945e4c5334b481",
- "synced_at": "2026-11-21T17:50:05+00:00",
+ "synced": "fb0877f0ee0e8a5d1032f97e60a7717497a94859",
+ "synced_at": "2026-11-21T17:52:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
