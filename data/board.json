@@ -17884,7 +17884,7 @@
    "id": "c-fix-hollowtrail1-pics",
    "tag": "fix-hollowtrail1-pics",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
@@ -17907,7 +17907,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-hollowtrail1-pics"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -17919,6 +17919,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-hollowtrail1-pics: they all look like shit. did you even review?",
      "at": "2026-11-21T00:29:25.713Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-21T00:29:36.190Z"
     }
    ],
    "prompt": {
