@@ -1215,5 +1215,26 @@
   },
   "pad": 0.8,
   "why": "rose-lava-xftr: Wan 3.0 missed rev 1 to 4 (lava to both side edges, camera pushes in to 1.2x); one change: the model, Kling 4.0 (fixed rose-tackle after Wan). Same start picture, prompt v3, pad 0.8 and start frame only as rose-lava r4"
+ },
+ "rose-cushion-kling": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "kling/v4/image-to-video",
+  "est_per_s": {
+   "720p": 0.157,
+   "1080p": 0.235
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-cushion-hop-v1.txt",
+  "frame": "art/clips/start/rose-cushion.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "duration": 5
+  },
+  "pad": 0.8,
+  "why": "rose-lava-xftr: Kling r1 (rose-lava-kling) told the story right but the lava touched the left edge in 66 of 121 pictures; fallback: the same job with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = v3 minus the lava); the game draws the lava under her"
  }
 }
