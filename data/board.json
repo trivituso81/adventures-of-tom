@@ -28006,7 +28006,7 @@
    "title": "Take me there: a play card opens the game at its spot",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "dash3",
    "next": "Shipped as dash3: a play card can carry the place to check, the strip lists the next three in Next for you with Take me there, and the Board shows it on the card inside the dashboard. You try it on the card Try the game strip and Take me there.",
    "blocks": [
@@ -28054,16 +28054,20 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as build dash3. A Tom play card can carry jump ({chapter}, {chapter, map, flags} or {fight, i}) or where: \"phone\"; board_check.py checks the shape. The strip has Next for you (first three open play cards with a jump, Take me there each) in column 3 (All four) and column 4 (Battle, side by side); the keyboard help moved under the screen sizes in Battle. The Board shows Take me there on the card only inside the dashboard, and On your phone everywhere. Backfill: t-guardwinplay jump {fight new, i 0} (NEW 1 has Tom in the party; proven in the game), t-ch2play where phone (real voice takes and gaps between lines are sound timing), the two dashboard cards need neither; six parked backlog play cards were not touched. tools/dashboard_test.py and tools/board_check.py pass; the test also took data/battle-lab-index.json's now 66 fights instead of 27. Rule added to the board section of CLAUDE.md (claude/handoff-rules.md untouched)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as dash3: a play card can name the place to check, and the dashboard's Next for you takes you there with one click"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-dash3-try",
    "title": "Try the game strip and Take me there",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "next": "Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and in Next for you press Take me there on the card Win a fight while Tom is guarding and check he celebrates. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
    "steps": [
@@ -28095,6 +28099,10 @@
     {
      "d": "2026-11-21",
      "t": "Steps rewritten by the dash3 session to match what dash2 and dash3 built: the strip, Next for you and Take me there on the card and in the Board pane, On your phone."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Take me there: a play card opens the game at its spot is done."
     }
    ],
    "first": "Waits on the card Take me there: a play card opens the game at its spot.",
@@ -30871,6 +30879,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
+   "title": "Take me there: a play card opens the game at its spot",
+   "first": "2026-11-21T14:06:28-08:00",
+   "last": "2026-11-21T14:30:40-08:00",
+   "tags": [
+    "dash3"
+   ],
+   "cards": [
+    "c-dash3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGC1pc5UTHywvnxx7e",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "first": "2026-11-21T13:03:56-08:00",
@@ -30880,16 +30900,6 @@
    ],
    "cards": [
     "c-anim-rose-lava-xftr"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCidhrUnnKWGNDTZrE",
-   "title": "Take me there: a play card opens the game at its spot",
-   "first": "2026-11-21T14:06:28-08:00",
-   "last": "2026-11-21T14:06:28-08:00",
-   "tags": [],
-   "cards": [
-    "c-dash3"
    ]
   },
   {
@@ -34740,8 +34750,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "be0d7ed5824e226cce67fc55b144004eebe3f126",
- "synced_at": "2026-11-21T22:23:19+00:00",
+ "synced": "86cd1d227af1cb35e15edb243d3e2ac64ab30fb1",
+ "synced_at": "2026-11-21T22:32:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
