@@ -21297,7 +21297,7 @@
    "col": "prog",
    "theme": "Areas",
    "title": "Grump Hollow fights show a town pond with a steeple",
-   "next": "Ready to start. Confirmed: battleBackdrop in engine/battle-draw.js falls back to 'pond' for every Long Island map that is not named.",
+   "next": "Build qa-coh05 is pushed: Art Library entry bg-29-grump-hollow (a woodland pond, written from the approved Pond Town prompt) and its bake; Grump Hollow fights use it as soon as Tom approves it (until then the pond). Next: Tom's card t-qa-coh05-pic.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -21322,17 +21322,58 @@
     },
     {
      "d": "2026-11-20",
-     "t": "Session started (Opus 5.5): checking COH-05 against current main."
+     "t": "Session started (Opus 5.5): checking COH-05 against current main.",
+     "at": "2026-11-21T03:43:19.000Z"
     },
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Confirmed on main: battleBgKey still gave map hollow the pond. Shipped qa-coh05: new Art Library entry bg-29-grump-hollow with a bake (tools/sprite-bake/bake_battle_bg.py), and battleBgKey uses it for map hollow once the picture exists. Tested with a stand-in picture in portrait and landscape. Hands to Tom card t-qa-coh05-pic (generate and approve).",
+     "at": "2026-11-21T03:43:19.000Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGoQZ4t9cFsFpscQxs",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-qa-coh05\""
-   }
+   },
+   "after": "t-qa-coh05-pic"
+  },
+  {
+   "id": "t-qa-coh05-pic",
+   "title": "Make and approve the Grump Hollow battle backdrop",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "fyi": true,
+   "next": "Open ADMIN > BOARD, this card, tap Generate all 1 pictures (two taps, about $0.05). When the job finishes, open ADMIN > ART LIBRARY > Battle > New backgrounds > 29 Grump Hollow (the button below). It should show a wide still woodland pond: lily pads and a mossy log in dark green water, mossy boulders, ferns and twisted old oaks on the far shore, two big oaks framing the left and right edges, an empty flat brown dirt floor across the bottom third, and NO buildings, church, steeple, houses or dock. APPROVE it if so; REJECT with a note saying what is wrong. After you approve, the game bakes it by itself within a few minutes: start a fight in Grump Hollow (walk into a Skeeter Swarm or Log Lump) and the woods should be behind the fight instead of the town pond.",
+   "blocks": [],
+   "done_when": {
+    "art_approved": [
+     "bg-29-grump-hollow"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "bg-29-grump-hollow"
+     ],
+     "label": "Grump Hollow battle backdrop"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by qa-coh05 (card c-qa-coh05, QA report COH-05): the picture that replaces the town pond behind Grump Hollow fights.",
+     "at": "2026-11-21T03:43:19.000Z"
+    }
+   ]
   },
   {
    "id": "c-qa-coh06",

@@ -1,4 +1,4 @@
-// Battle tab: 29 battle backgrounds (bgs/*.webp, 576 x 324 in the game). Text is the Project prompt pack claude/battle-background-prompts.txt:
+// Battle tab: 30 battle backgrounds (bgs/*.webp, 576 x 324 in the game). Text is the Project prompt pack claude/battle-background-prompts.txt:
 // the shared rules are written once below, and each file has its own title, scene and floor. Two wording changes only: the pack's "16-bit era" style
 // line and "classic 16-bit RPG" camera line use the approved painted wording, because those words are banned in every prompt. No reference pictures (the pack says do not attach any).
 const SHARED = (title, scene, floor) => `Paint one background picture for the battle screen of a family role-playing game: ${title}.
@@ -132,10 +132,15 @@ const BG = [
 ['28-flight-zero-cabin', 'Flight Zero cabin', 'NEW', 'Flight Zero (airplane cabin)',
  'The inside of a passenger airplane cabin, seen from the aisle looking at the side wall. The back wall is curved beige cabin panelling with four oval windows (each about 150 by 200 px, y 250 to 450) showing bright blue sky and a few white clouds. Overhead luggage bins run along the top. Rows of blue-grey seats with pale headrest covers stand against the wall in three groups, seat tops above y 590 and seat bases ending at the horizon line. Soft cool cabin light, a calm and quiet mood.',
  'Flat blue-grey aisle carpet, about #6F7E9C, matte, even. No seat legs, no armrests, no aisle lights, no pattern, no reflections.'],
+['29-grump-hollow', 'Grump Hollow', 'NEW', 'Grump Hollow (woodland pond, daytime)',
+ 'A soft green afternoon at a mossy woodland pond deep in old Long Island woods, painted as a wide calm landscape. Across the full width a band of still dark green pond water fills y 400 to y 565, with lily pads, a few white water lilies and one long mossy log lying in the water left of center. On the far shore: big mossy boulders, fern clumps and a wall of old twisted oak trunks with thick roots, their leafy canopies meeting overhead so only small patches of pale sky show between the leaves. No buildings, no church, no houses, no town, no dock anywhere. Two huge gnarled oak trees frame the far left and far right edges, trunk bases at about y 560, canopies reaching the top edge. The near bank is a soft mossy strip that ends exactly on the horizon line at y 590, with a few reed and cattail tufts allowed only above y 575. Warm sunlight filters through the leaves from the upper left in soft golden patches that stay above y 330.',
+ 'Flat damp packed earth, warm brown (about #8F7A5C) with a faint mossy olive tone. Even in tone from left to right. No puddles, roots, stones, mushrooms, tufts or water edge below y 590.'],
 ];
 const entries = BG.map(([file, name, type, title, scene, floor]) => ({
   id: 'bg-' + file, tab: 'Battle', ar: '16:9', refs: [],
   title: file.split('-')[0] + ' ' + name + ': battle background (' + type + (type === 'NEW' ? ', no painting today' : ', replaces bgs/' + file + '.webp') + ')',
-  prompt: SHARED(title, scene, floor)
+  prompt: SHARED(title, scene, floor),
+  // qa-coh05: a picture made for a place that has no backdrop yet is baked straight into the game (tools/sprite-bake/bake_battle_bg.py)
+  ...(file === '29-grump-hollow' ? { bake: { script: 'bake_battle_bg.py', args: [file], src: 'tools/sprite-bake/src/bg-' + file + '.png' } } : {})
 }));
 module.exports = { entries };

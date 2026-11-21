@@ -9,11 +9,23 @@ socketserver.TCPServer.allow_reuse_address=True
 srv=socketserver.TCPServer(('127.0.0.1',0),functools.partial(Q,directory=ROOT)); port=srv.server_address[1]
 threading.Thread(target=srv.serve_forever,daemon=True).start()
 LE=['tom','grace','rose','amy']; LA=['tom','tnb','nara']
-CASES=[('town','pond',LE),('hollow','pond',LE),('reeds','pond',LE),('schoolyard','classroom',LE),('school','classroom',LE),('cafetorium','cafe',LE),
+# qa-coh05: Grump Hollow gets its own woods once the Art Library picture bg-29-grump-hollow is approved and baked; until then the pond.
+HOLLOW='hollow' if os.path.exists(os.path.join(ROOT,'bgs','29-grump-hollow.webp')) else 'pond'
+CASES=[('town','pond',LE),('hollow',HOLLOW,LE),('reeds','pond',LE),('schoolyard','classroom',LE),('school','classroom',LE),('cafetorium','cafe',LE),
  ('stacks','stacks',LE),('readroom','readroom',LE),('moonclub','club',LE),('dome','dome',LE),('terminal','term',LE),('gatezero','gate',LE),
  ('blvd','griffith',LA),('jpark','griffith',LA),('griffith','griffith',LA),('studio','lot',LA),('backlot','lot',LA),('stage7','stage',LA),('stageset','stage',LA),
  ('oakpark','park',LA),('oak','oak',LA),('crown','canopy',LA),('carbarn','barn',LA),('boiler','boiler',LA)]
 fails=[]
+# qa-coh05: the bake script turns any approved picture into a 1152 x 648 backdrop (16:9 as is, other shapes cropped from the middle).
+import importlib.util, shutil, tempfile
+from PIL import Image
+spec=importlib.util.spec_from_file_location('bbg',os.path.join(ROOT,'tools','sprite-bake','bake_battle_bg.py')); bbg=importlib.util.module_from_spec(spec); spec.loader.exec_module(bbg)
+tmp=tempfile.mkdtemp(); os.makedirs(os.path.join(tmp,'tools','sprite-bake','src')); os.makedirs(os.path.join(tmp,'bgs')); bbg.ROOT=tmp
+for size in [(1920,1080),(1536,1536),(1024,1536)]:
+    Image.new('RGB',size,(90,120,80)).save(os.path.join(tmp,'tools','sprite-bake','src','bg-test-bake.png'))
+    got=Image.open(bbg.bake('test-bake')).size
+    if got!=(1152,648): fails.append(f'bake_battle_bg {size}: made {got}')
+shutil.rmtree(tmp)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']

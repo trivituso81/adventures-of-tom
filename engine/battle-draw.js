@@ -15,7 +15,7 @@ const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-sc
   park:'15-oak-park',oak:'16-inside-the-oak',canopy:'17-oak-crown-canopy',
   tower:'19-glass-tower',towerarch:'20-glass-tower-shelves',vault:'21-glass-tower-vault',pinnacle:'22-glass-tower-pinnacle',
   engine:'23a-forever-engine',engine_calm:'23b-forever-engine-calm',sorting:'24-sorting-hall',subway:'25-subway-tunnel',
-  chamber:'26-subway-chamber',infinity:'27-terminal-infinity',cabin:'28-flight-zero-cabin'};
+  chamber:'26-subway-chamber',infinity:'27-terminal-infinity',cabin:'28-flight-zero-cabin',hollow:'29-grump-hollow'};
 const BG_IMG={};
 const bgSrc=name=>'bgs/'+name+'.webp?v='+BG_V;
 for(const k in BG_FILES) { const im=new Image(); im.src=bgSrc(BG_FILES[k]); BG_IMG[k]=im; }
@@ -65,6 +65,9 @@ function battleBgKey() {
   if(g==='stacks'||L.labStacks) return 'stacks';
   if(g==='cafe'||(L.labSchool&&L.labCafe)) return 'cafe';
   if(g==='school'||g==='schoolyard'||L.labSchool) return 'classroom';
+  // qa-coh05: Grump Hollow's woods (Art Library entry bg-29-grump-hollow). Until Tom approves that picture the file does not
+  // exist, the image never loads, and the hollow keeps the pond picture.
+  if(currentMap&&currentMap.id==='hollow') { const im=BG_IMG.hollow; if(im&&im.complete&&im.naturalWidth) return 'hollow'; }
   return 'pond';
 }
 function drawBattleBackdrop(t) {
