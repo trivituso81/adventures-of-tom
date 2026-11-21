@@ -13332,7 +13332,7 @@
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
-   "next": "Part done 2026-11-20 (projclean1a, 1b): 205 of 665 Project docs copied to the repo; 174 confirmed on origin/main and deleted from the Project. About 490 docs are left in the Project. The next run continues from the oldest remaining doc (the prompt is safe to run again: it skips what is already in claude/). Left in the Project on purpose (they spell out Tom's full street address): story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. Copied but not yet deleted, waiting on a full compare against the Project text: bestiary-v10.1.md, story-next.md, story-ch02-draft4.md, story-line-rules.md, story-engine-capabilities.md, animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, next-addendum-ch1rebuild1.md, pose-editor-plan.md, pose-editor-poseedit2.md, anim-test v2/v3 clip prompts. report-audit.md not copied (the Write tool refused its name: copy it with Bash). tools/claude_index.py is in the repo for step 6. Steps 7 to 9 not done yet. Runs only in a conversation inside the Project: open a new conversation in the Little Elsewhere Project and paste this card's prompt, Sonnet 5.5, effort medium.",
+   "next": "Part done 2026-11-20 (second run, builds projclean1a and projclean1b of this run; the first run's names are listed in history): 267 Project docs copied word for word into claude/, confirmed on origin/main by size, and deleted from the Project (151 + 116). About 235 docs were left in the Project when this run stopped; 4 of them are the permanent mirrors. Still to move: about 193 docs never copied (the newest and oldest not yet covered; the prompt skips whatever is already in claude/), plus 33 docs that are already in claude/ and need a compare with the Project text (if equal, delete from the Project; if different, the Project text wins and overwrites the repo file). Left in the Project on purpose, to be named on the final card: comedy-bible.md, story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md (full street address), costs1-handoff.md (personal spending ledger), dialogue-clarity-rewrite.json and next-addendum-michael.md (a safety classifier stopped the write; do not retry that content). Fact: the Project's knowledge_size counts about 3.3 bytes of file text per unit (deleting 475,987 bytes of docs dropped it by about 143,000), so the real target is under 200,000 units, which is roughly 650 KB of text; the four mirrors must stay small. Size at this run's start 1,438,803, last measured 1,295,564 after the first 75 deletes (not re-measured after the later 192). Rules for the next run: forks cannot start forks (do the copies yourself or from one level of forks); push each part under a NEW build name (projclean2a, 2b, ...), never reuse 1a to 1c; steps 6 to 9 (INDEX.md, README rewrite, the no-new-Project-docs rule in CLAUDE.md and claude/handoff-rules.md, !/claude/ in publish.yml after the grep, final cards) are not done. Runs only in a conversation inside the Project: open a new conversation in the Little Elsewhere Project and paste this card's prompt, Sonnet 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13430,6 +13430,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Second run: projclean1a and projclean1b pushed (267 docs copied, confirmed, deleted from the Project). Stopped at a safe point because the conversation got long; card stays In progress."
     }
    ],
    "chat": {
