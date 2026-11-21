@@ -26333,6 +26333,10 @@
     {
      "d": "2026-11-21",
      "t": "Gemini's Milestone B notes are on t-milestoneb and c-b3s17 (6 rounds for The Big One, 0 knock-outs, ratings 5/4/4/5/5/4/4). Tom's own answer on t-milestoneb still comes first."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part b3s18e pushed: chapter 10 on Battle 3 (tips, Vibe Points, Tombo toast, retry line). Chapters 8 and 9 were put back in the same push after an upstream restore removed them."
     }
    ],
    "chat": {

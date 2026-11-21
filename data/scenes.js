@@ -4098,7 +4098,9 @@ SCENES.ch8Boss=[
   {battle:'ironbelly',tut:'ironbelly'},
   {if:()=>flag('battle:ironbelly')!=='win',then:[
     {heal:true},
-    {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.','What she really wants is for somebody to bake something in her. Do that three times.']},
+    {if:()=>B3_CH_ON(8),then:[
+      {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, when she winds up BROIL, shield everybody. And hit her with a Drench while she\'s burning, it sets her off.','Then somebody bake something in her. That\'s all she wants.']}],else:[
+      {talk:'TNB',lines:['Okay. Up. Everybody up. That was hot. That was SO hot.','Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.','What she really wants is for somebody to bake something in her. Do that three times.']}]},
     {toast:'Face Old Ironbelly and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 10. After the boss (won in the scene, or on a retry with A): forty loaves, a peel and a gold coin.
@@ -4515,7 +4517,9 @@ SCENES.ch9Boss=[
   {battle:'mirrorball',tut:'mirrorball'},
   {if:()=>flag('battle:mirrorball')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.','And honey, nobody has asked her to dance since 1971. Ask her three times.']},
+    {if:()=>B3_CH_ON(9),then:[
+      {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, when she goes dazzled, hit her with Clobber or Racket, that breaks her shine. And shield everyone before the LAST DANCE.','And honey, nobody has asked her to dance since 1971. Be kind about it.']}],else:[
+      {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.','And honey, nobody has asked her to dance since 1971. Ask her three times.']}]},
     {toast:'Face the Mirrorball and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 9. After the boss (won in the scene, or on a retry with A): the moon goes home. A compact, a coin, a boarding pass.
@@ -4858,7 +4862,7 @@ SCENES.ch10Term=[
   {trace:'girls-terminal'}, {hearts:'grace'},
   {flag:'ch10-term'},
   {flag:'tombo:rose2'}, {flag:'tombo:amy2'},   // Seat 1A Stowaway and Wing Walk unlock here (chapter 10)
-  {toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6},
+  {if:()=>!B3_CH_ON(10),then:[{toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6}],else:[]},
   {toast:'Goal: find the gate clock’s three hands. Security (top left), Baggage Claim (top right), the Lounge (bottom left).',time:5.5},
   {toast:'Tip: there\'s a photo booth by the curb doors. There\'s a quarter on the seat.',time:4}
 ];
@@ -4958,7 +4962,9 @@ SCENES.ch10Boss=[
   {battle:'lastcall',tut:'lastcall'},
   {if:()=>flag('battle:lastcall')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Up, everybody. Walk it off.','Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them.','And nobody has answered her call since 1989. Answer her three times.']},
+    {if:()=>B3_CH_ON(10),then:[
+      {talk:'Amy',lines:['Up, everybody. Walk it off.','Tom, when she marks one of us, shield that person or interrupt her before GATE CLOSED. And shield everybody for FINAL BOARDING.','And nobody has answered her call since 1989. So let\'s answer it.']}],else:[
+      {talk:'Amy',lines:['Up, everybody. Walk it off.','Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them.','And nobody has answered her call since 1989. Answer her three times.']}]},
     {toast:'Face the Last Call and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 7. After the boss (won in the scene, or on a retry with A): coin #8, every clock starts, Flight 0 leaves.
