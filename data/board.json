@@ -20046,13 +20046,19 @@
     }
    ],
    "gen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-21T18:40:09Z",
     "ids": [
      "prop-item-solo-claytaco"
     ],
     "est": 0.05,
-    "mode": "review"
+    "mode": "review",
+    "run": {
+     "state": "running",
+     "at": "2026-11-21T18:40:21Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44936779883",
+     "n": 0
+    }
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFFqUo38kGY8K14nh9",
