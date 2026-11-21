@@ -29005,7 +29005,7 @@
    "title": "Look at the bigger Big One in battle, say if 2.5x is right",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > NEW 6: THE BIG ONE. The Big One should fill about a third of the screen, 2.5 times its old size. Use the REPORT tab to say bigger or smaller (bigone25 is the build to name).",
@@ -29020,9 +29020,15 @@
     {
      "d": "2026-11-21",
      "t": "Added by bigone25: your phone check of the new size; blocks nothing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-21T20:57:21.347Z"
     }
    ],
-   "first": "Wait for the publish of build bigone25, then RELOAD on the title."
+   "first": "Wait for the publish of build bigone25, then RELOAD on the title.",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
