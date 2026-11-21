@@ -14906,10 +14906,11 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "fyi": true,
-   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight.",
-   "blocks": [],
-   "changed": "2026-11-20",
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it start to finish (TNB's loft, Nara on the porch, Mr. Washington and the two Smoglets, the smoking griddle on the boulevard, the trail fights, the grey lemon tree and the text to Grace, the Big Shake, the coin, bread on 2nd Avenue). Check: scene 2 plays Nara jumping on you instead of the old 'Is that NARA?!' meeting, and the lines read in a computer voice because the 90 new clips are not recorded yet. Report anything off with the REPORT tab. Answer the two teardown questions there too if the defaults are wrong: Nara's meeting replaced only in chapter 2, and the Tombos unlocking in scene 2 and before the Smoglet fight. Chapter 3 (card c-ch3build) is built after this.",
+   "blocks": [
+    "c-ch3build"
+   ],
+   "changed": "2026-11-21",
    "created": "2026-11-20",
    "history": [
     {
@@ -14920,6 +14921,10 @@
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-20T18:09:09.589Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Now blocks c-ch3build: chapter 3 is built after you play chapter 2."
     }
    ],
    "first": "Wait for the publish of build ch2build.",
@@ -17711,6 +17716,38 @@
    "auto": true,
    "started_at": "2026-11-21T00:16:54+00:00",
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-ch3build",
+   "title": "Build chapter 3 to the locked script",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "ch3build",
+   "waiting_on": "tom",
+   "next": "Waits on your chapter 2 play (card t-ch2play). Then it builds chapter 3 from the locked script claude/story-ch03-draft1.md the same way chapter 2 was built, tests it, pushes it as ch3build and hands you a chapter 3 play card. Chapters 4 to 20 are not written yet (see c-ch4write).",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added after Tom asked how to continue past chapter 2: one chapter per build, each waits on your play of the one before."
+    }
+   ],
+   "prompt": {
+    "what": "Builds chapter 3 from the locked script, tests it start to finish in portrait and landscape, then stops for Tom's phone play.",
+    "before": [
+     "Play chapter 2 and report with the REPORT tab (card t-ch2play)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/story-next.md, claude/ch02-teardown.md (the pattern), docs/CHANGES.md entry ch2build, and card c-ch3build in data/board.json with the Tom cards that blocked it (t-ch2play: apply any notes there). Write a chapter 3 teardown list like claude/ch02-teardown.md first, using claude/story-ch03-draft1.md word for word (the build never writes or rewords dialogue), then build it as ch2build was built: scenes in data/scenes.js, tools/ch3_test.py copied from tools/ch2_test.py, tools/ch3_lines_test.py copied from tools/ch2_lines_test.py, voice directions, harvest patch, unused_voice.py at 0, script-convos rows. Where the engine cannot play a direction, build the teardown default and list it for Tom; do not stop to ask. Push to main as ch3build; your first push is the commit board: start c-ch3build. Create the Tom card t-ch3play (ask play) and set after on this card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
