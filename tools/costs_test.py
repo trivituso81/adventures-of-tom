@@ -2,7 +2,7 @@
 """costs1 test (python3 tools/costs_test.py [outdir]): ADMIN > AI COSTS (costs.html, data/costs.json) on a desktop window.
 Checks the data file (every charge has a date, a known service, a kind and an amount; no em dash), that the page's totals equal the file's sums on the
 Overview, Ledger and Totals screens, the date and Game tools only filters, subtotals by service, ticked rows, a matrix cell opening the ledger, a
-service screen, a charge added on this computer, a recorded balance, a balance written into the file by a job, the CSV and the admin link.
+service screen, a charge added on this computer, a recorded balance, a balance written into the file by a job, the CSV, the page's own tab icon and the admin link.
 Screenshots land in outdir. Prints FAILS: []."""
 import json, os, re, subprocess, sys, time
 from playwright.sync_api import sync_playwright
@@ -116,6 +116,12 @@ try:
         # smaller desktop window
         pg.set_viewport_size({'width': 1280, 'height': 720}); pg.goto(H); pg.wait_for_selector('#grand'); pg.screenshot(path=out + '/overview-1280.png')
         if pg.evaluate('document.documentElement.scrollWidth>innerWidth'): fails.append('sideways scroll at 1280 wide')
+        # its own tab icon (costs1icon)
+        hrefs = pg.eval_on_selector_all('link[rel~="icon"], link[rel="apple-touch-icon"]', 'e=>e.map(x=>x.getAttribute("href"))')
+        if sorted(h.split('?')[0] for h in hrefs) != ['icon-costs-180.png', 'icon-costs-32.png']: fails.append('icon links are %s' % hrefs)
+        for n in ('180', '32'):
+            a = cx.request.get('http://127.0.0.1:8096/icon-costs-%s.png' % n); b = cx.request.get('http://127.0.0.1:8096/icon-admin-%s.png' % n)
+            if a.status != 200 or a.body() == b.body(): fails.append('icon-costs-%s.png missing or the same as the admin icon' % n)
         # the admin page links here
         pg.goto('http://127.0.0.1:8096/admin.html'); pg.wait_for_selector('a.btn')
         if pg.locator('a.btn[href="costs.html"]').count() != 1: fails.append('admin.html has no AI Costs button')

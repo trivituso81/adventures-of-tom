@@ -1,3 +1,7 @@
+## costs1icon (2026-11-21): the AI Costs page has its own browser tab icon
+
+Card c-costs1icon. Tom: "Give it a unique favicon". The page used the Admin gear. It now has a gold receipt with a dollar sign on the admin icons' dark background: `icon-costs-32.png` (browser tab) and `icon-costs-180.png` (home screen), drawn by `tools/make_costs_icon.py`. `tools/costs_test.py` checks the page links both and that they differ from the Admin icon (FAILS: []).
+
 ## battleguide1 (2026-11-21): Battle Guide, a reference page for the new battle system that fits the Duo folded and unfolded, with a player for every battle video and a note to Claude on any animation
 
 Card c-battleguide. Tom (11-21 07:15): "create an iPhone Duo folder and unfolded optimized page for the latest version of the battle system... a reference guide for me as i test... a way to preview each animation and provide feedback on the animation directly Claude which opens a new ticket to regenerate the animation based on the feedback." And 07:26: "It's favicon should be something related to the battle system library different from the battle lab favucon."

@@ -23634,7 +23634,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "AI Costs page gets its own browser tab icon",
-   "next": "In this session: a gold receipt with a dollar sign replaces the Admin gear as the AI Costs page icon. Tom sees it on card t-costs1look.",
+   "next": "The AI Costs page has its own tab icon as build costs1icon: a gold receipt with a dollar sign. Tom sees it on card t-costs1look.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -23655,6 +23655,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom: \"Give it a unique favicon\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Drew icon-costs-32.png and icon-costs-180.png (tools/make_costs_icon.py), linked both in costs.html, added the check to tools/costs_test.py. Hands to Tom: t-costs1look."
     }
    ],
    "after": "t-costs1look"

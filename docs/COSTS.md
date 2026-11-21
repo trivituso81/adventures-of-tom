@@ -2,7 +2,7 @@
 
 Built as costs1 (2026-11-20). Tom: "an admin screen for all the AI services we are connected to, the subscription type i have, what it allows, what my balance is, how much ive spent so far ... a complete history of my spend with dates for each transaction so i can total and subtotal in any way that i want ... a final cost total screen ... including with claude ... optmized only for landscape on desktop browser ... a unique URL".
 
-Address: https://trivituso81.github.io/adventures-of-tom/costs.html (also the AI Costs button on admin.html). It loads no game code.
+Address: https://trivituso81.github.io/adventures-of-tom/costs.html (also the AI Costs button on admin.html). It loads no game code. Its tab icon is a gold receipt with a dollar sign (`icon-costs-32.png`, `icon-costs-180.png`, drawn by `python3 tools/make_costs_icon.py`, costs1icon).
 
 ## The screens
 
