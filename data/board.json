@@ -19050,7 +19050,7 @@
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-20",
@@ -19073,6 +19073,10 @@
      "d": "2026-11-20",
      "t": "Tom approved generating 6 pictures (about $0.30).",
      "at": "2026-11-21T02:32:18.550Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: made 6 pictures, QA: 16 of 17, 13 of 17, 16 of 17, 9 of 16, 12 of 17, 12 of 17. Spent about $0.38."
     }
    ],
    "chat": {
@@ -19093,10 +19097,180 @@
     "est": 0.3,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-21T02:32:33Z",
+     "state": "done",
+     "at": "2026-11-21T02:33:50Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44856447268",
-     "n": 6
+     "made": [
+      "prop-gate-row-amyhouse-open",
+      "prop-gate-town-school-open",
+      "prop-gate-row-amyhouse",
+      "prop-gate-blvd-studio-open",
+      "prop-gate-jpark-barn-open",
+      "prop-gate-backlot-stage7-open"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.38,
+     "qa": {
+      "prop-gate-row-amyhouse-open": {
+       "file": "results/prop-gate-row-amyhouse-open/20261121T023254.png",
+       "yes": 16,
+       "of": 17,
+       "failed": [
+        {
+         "id": "p8",
+         "q": "Is the image centered with the object fully inside and with a clear margin around it?",
+         "why": "Object has no clear margin; fills to edges without space."
+        }
+       ]
+      },
+      "prop-gate-town-school-open": {
+       "file": "results/prop-gate-town-school-open/20261121T023255.png",
+       "yes": 13,
+       "of": 17,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered, not hand-painted with brush texture."
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "No character or creature in prompt or image."
+        },
+        {
+         "id": "p8",
+         "q": "Do the posts span about the width of a lane that would fit two people?",
+         "why": "Too narrow, does not span two people width."
+        },
+        {
+         "id": "p9",
+         "q": "Are the posts a little taller than a person?",
+         "why": "Much taller than a person, not slightly."
+        }
+       ]
+      },
+      "prop-gate-row-amyhouse": {
+       "file": "results/prop-gate-row-amyhouse/20261121T023258.png",
+       "yes": 16,
+       "of": 17,
+       "failed": [
+        {
+         "id": "p8",
+         "q": "Are there three stone steps visible below the door?",
+         "why": "No steps visible, as specified."
+        }
+       ]
+      },
+      "prop-gate-blvd-studio-open": {
+       "file": "results/prop-gate-blvd-studio-open/20261121T023326.png",
+       "yes": 9,
+       "of": 16,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains the word OPEN which prompt does not ask for"
+        },
+        {
+         "id": "f_bg",
+         "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+         "why": "Solid magenta background but object includes ground shadow not on transparent"
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "no match to reference painting style"
+        },
+        {
+         "id": "p2",
+         "q": "Is the object a road barrier arm gate that is raised?",
+         "why": "shows barrier and detached post"
+        },
+        {
+         "id": "p4",
+         "q": "Is there a long red and white striped arm lifted straight up and standing upright from the left post?",
+         "why": "arm is vertical on left post"
+        },
+        {
+         "id": "p5",
+         "q": "Is the arm positioned as tall as a person?",
+         "why": "Raised arm much taller than a person"
+        },
+        {
+         "id": "p6",
+         "q": "Are the two posts about waist high and spaced about two people wide apart?",
+         "why": "Posts taller than waist high, spacing not clearly two people wide"
+        }
+       ]
+      },
+      "prop-gate-jpark-barn-open": {
+       "file": "results/prop-gate-jpark-barn-open/20261121T023329.png",
+       "yes": 12,
+       "of": 17,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "Photorealistic 3D render with thick outlines, not hand-painted"
+        },
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains 'DIVISION NINE CAR BARN' text not requested in this object prompt"
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "No character or creature present in either image"
+        },
+        {
+         "id": "p9",
+         "q": "Is there only a small soft contact shadow directly under the object with no ground patch or other scenery?",
+         "why": "Grass and dirt visible under posts, not just small soft shadow"
+        },
+        {
+         "id": "p10",
+         "q": "Is the image free of any people, animals, characters, scenery, border, frame or caption?",
+         "why": "Grass and dirt at base count as scenery"
+        }
+       ]
+      },
+      "prop-gate-backlot-stage7-open": {
+       "file": "results/prop-gate-backlot-stage7-open/20261121T023333.png",
+       "yes": 12,
+       "of": 17,
+       "failed": [
+        {
+         "id": "f_paint",
+         "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+         "why": "3D rendered, not hand-painted with brush texture"
+        },
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Contains 'STAGE 7' text not asked for"
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "Does not match reference image style or lighting"
+        },
+        {
+         "id": "p6",
+         "q": "Is the round red warning lamp above the doors dark and unlit?",
+         "why": "Red lamp is lit, not dark"
+        },
+        {
+         "id": "p7",
+         "q": "Is there no sign visible on or near the doors?",
+         "why": "Visible 'STAGE 7' sign"
+        }
+       ]
+      }
+     }
     }
    }
   },
