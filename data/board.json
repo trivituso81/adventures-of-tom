@@ -22776,7 +22776,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Read a few item banners on your phone",
-   "next": "Open the game, press RELOAD on the title, load chapter 1. Get the Cookie from Deedee in her kitchen before she joins your party (she only stands there while she is not in it). Then beat a monster that drops something. Look at: Pond Hoodie and Bark Slab now say they don't change a fight (no +POW or +GRIT), the Dragonfly Coin banner stays fully visible until you tap, and every banner still has picture, type chip, italic line, IN BATTLE, IN STORY. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
+   "next": "Open the game, press RELOAD on the title, then CHAPTERS > Chapter 1 and play into Grump Hollow. Beat the Bog Toad, the Log Lump and the Pond Grump (each always drops an item), and the Big One (the Dragonfly Coin). Look at: Pond Hoodie and Bark Slab now say they don't change a fight (no +POW or +GRIT), the Dragonfly Coin banner stays fully visible until you tap, and every banner has the picture, type chip, italic line, IN BATTLE and IN STORY. Turn on landscape once. All good if it reads well; Something is wrong if any line is wrong, unclear or not funny (say which item).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-21",
@@ -22796,6 +22796,10 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Read a few item banners on your phone is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Cookie step removed: in chapter 1 Deedee joins the moment you enter her kitchen and never leaves the party, so her Cookie can't be reached there (checked in data/scenes.js)."
     }
    ]
   },
