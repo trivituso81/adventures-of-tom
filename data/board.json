@@ -34765,7 +34765,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDqxmV5mAjaJfGx1NH",
+    "url": "https://claude.ai/code/session_01RXeukDqxmV5mAjaJfGx1NH",
     "opening": "Why did the board sink fail?"
    },
    "history": [
@@ -34781,6 +34781,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -34982,6 +34986,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDqxmV5mAjaJfGx1NH",
+   "title": "Board sync can no longer be wedged by a bad board file",
+   "first": "2026-11-22T06:02:04Z",
+   "last": "2026-11-22T06:02:04Z",
+   "tags": [],
+   "cards": [
+    "c-boardwedge1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
    "title": "New menu: switch it on and remove the old one",
@@ -40189,8 +40203,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "d9b371585ca058bf35866d2d2f75f4d92b28b69e",
- "synced_at": "2026-11-22T06:01:02+00:00",
+ "synced": "cb60414dc02a9c14bd2e038b329d014890f5e2a0",
+ "synced_at": "2026-11-22T06:02:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
