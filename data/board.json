@@ -30551,8 +30551,19 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanch5. Giddyup r6: one change, \"leaps straight up once\" (was \"leaps up and forward to the left once\"). Wet-Floor r5: one change, pad 0.65, with a feet limit of 10 percent because the mop rests below her feet row (Tom's Yes on t-wanch4-wetfloor). First paid bulk run."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 2 videos (about $1.57).",
+     "at": "2026-11-22T00:42:39.933Z"
     }
-   ]
+   ],
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T00:42:39Z",
+    "n": 2,
+    "est": 1.57
+   }
   },
   {
    "id": "c-wanch5",
