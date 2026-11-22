@@ -29,11 +29,9 @@ function m2Plate(m,i,d) {
   const fresh=m.m2new&&v?'<span class="m2-chip new">New skill<span class="m2-nt"> to try</span></span>':'';
   const ko=hp<=0?'<span class="m2-ko">Knocked out</span>':'';
   const label=m.name+', Level '+m.level+', '+hp+' of '+mx+' health'+(v?', '+v.name+' Rank '+v.rank+', '+(v.row==='back'?'Back':'Front')+' row':'')+(m.m2new&&v?', new skill to try':'');
-  const nl='<span class="m2-nl"><b class="m2-name">'+m2Esc(m.name)+'</b><span class="m2-lv"><span class="m2-lw">Level </span><span class="m2-ls">Lv </span>'+m.level+'</span><span class="m2-hpn"><b>'+hp+'</b><span class="m2-of"> of '+mx+'</span><span class="m2-sl">/'+mx+'</span></span></span>'+
-    '<span class="m2-bar'+(low?' low':'')+'"><i style="width:'+Math.round(hp/mx*100)+'%"></i></span>';
+  const nl='<span class="m2-nl"><b class="m2-name">'+m2Esc(m.name)+'</b><span class="m2-lv"><span class="m2-lw">Level </span><span class="m2-ls">Lv </span>'+m.level+'</span><span class="m2-bar'+(low?' low':'')+'"><i style="width:'+Math.round(hp/mx*100)+'%"></i></span></span>';
   let rest;
-  if(d.wide&&!d.compact) rest='<span class="m2-hl"><span>Health</span><span><b>'+hp+'</b> of '+mx+'</span></span>'+
-    (v?'<span class="m2-vb">'+m2Esc(v.name)+'</span><span class="m2-vs">'+m2Stars(v.rank,v.max,13)+row+'</span>':'')+(fresh||ko?'<span class="m2-vs">'+fresh+ko+'</span>':'');
+  if(d.wide&&!d.compact) rest=(v?'<span class="m2-vb">'+m2Esc(v.name)+'</span><span class="m2-vs">'+m2Stars(v.rank,v.max,13)+row+'</span>':'')+(fresh||ko?'<span class="m2-vs">'+fresh+ko+'</span>':'');
   else if(d.compact) rest=(v?'<span class="m2-vb">'+m2Esc(v.name)+'</span><span class="m2-vs">'+m2Stars(v.rank,v.max,12)+row+fresh+'</span>':'')+(ko?'<span class="m2-vs">'+ko+'</span>':'');
   else rest=(v?'<span class="m2-vs"><span class="m2-vb">'+m2Esc(v.name)+'</span>'+m2Stars(v.rank,v.max,13)+fresh+'<span class="m2-sp"></span>'+row+'</span>':'')+(ko?'<span class="m2-vs">'+ko+'</span>':'');
   return '<button type="button" class="m2-plate" data-m2="select" data-a="'+i+'" data-k="p-'+i+'" aria-pressed="'+sel+'" aria-label="'+m2Esc(label)+'">'+nl+rest+'</button>';
@@ -41,7 +39,8 @@ function m2Plate(m,i,d) {
 function m2Page(list,startIdx,d,foot) {
   const slots=list.map(m=>'<div class="m2-slot" data-id="'+m.id+'"><img class="m2-fig" src="art/menu/'+m.id+'.webp?v='+M2_V+'" alt="" draggable="false"></div>').join('');
   const plates=list.map((m,k)=>m2Plate(m,startIdx+k,d)).join('');
-  return '<div class="m2-figs" data-n="'+list.length+'">'+slots+'</div><div class="m2-plates">'+plates+'</div>'+foot;
+  const hps='<div class="m2-hps">'+list.map(m=>'<span class="m2-hp'+(m.hp/Math.max(1,m.maxHp)<=.25?' low':'')+'"><span class="m2-hpl">HP </span><b>'+Math.max(0,m.hp)+'</b><span class="m2-of"> of '+Math.max(1,m.maxHp)+'</span></span>').join('')+'</div>';
+  return hps+'<div class="m2-figs" data-n="'+list.length+'">'+slots+'</div><div class="m2-plates">'+plates+'</div>'+foot;
 }
 
 // ---------- The bench, and Change ----------
@@ -73,9 +72,9 @@ const m2Outs=()=>extras().filter(x=>canLeave(x)&&!(typeof benchNever==='function
 
 function m2RuckusFoot() {
   const p=m2RuckusPct();
-  return '<div class="m2-foot"><div class="m2-ruck-box"><div class="m2-ruck-head"><b>Family Ruckus</b><span><b>'+p+'%</b></span></div>'+
-    '<div class="m2-gauge" role="img" aria-label="Family Ruckus '+p+' percent. Double Team at 50, Full Ruckus at 100"><i style="width:'+p+'%"></i><u class="m50"></u><u class="m100"></u></div>'+
-    '<div class="m2-marks"><span style="left:calc(50% - 38px)">Double Team at 50</span><span style="right:0">Full at 100</span></div></div></div>';
+  return '<div class="m2-foot"><div class="m2-ruck-box"><div class="m2-ruck-head"><b>Combos</b><span><b>'+p+'%</b></span></div>'+
+    '<div class="m2-gauge" role="img" aria-label="Combos '+p+' percent. Double Team at 50, Family Ruckus at 100"><i style="width:'+p+'%"></i><u class="m50"></u><u class="m100"></u></div>'+
+    '<div class="m2-marks"><span style="left:calc(50% - 38px)">Double Team</span><span style="right:0">Family Ruckus</span></div></div></div>';
 }
 
 function m2FamilyBody(d) {

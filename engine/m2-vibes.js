@@ -95,47 +95,53 @@ function m2Chips(m,L) {
   let h='<div class="m2-chips" role="tablist" aria-label="Vibes">';
   for(const v of ids) {
     const V=B3_VIBES[v],role=L.main===v?'main':L.pocket===v?'pocket':'none',rk=b3VibeRank(L,v);
-    h+='<button type="button" role="tab" class="m2-vc '+role+'" data-m2="vibe" data-a="'+v+'" data-k="vc-'+v+'" aria-selected="'+(v===M2.vibe)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Main':role==='pocket'?'Pocket':'Not in use')+'</span><b>'+m2Esc(V.name)+'</b>'+m2Stars(rk,b3MaxRank(),13)+'</button>';
+    h+='<button type="button" role="tab" class="m2-vc '+role+'" data-m2="vibe" data-a="'+v+'" data-k="vc-'+v+'" aria-selected="'+(v===M2.vibe)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Primary':role==='pocket'?'Secondary':'Not in use')+'</span><b>'+m2Esc(V.name)+'</b>'+m2Stars(rk,b3MaxRank(),13)+'</button>';
   }
   h+='<div class="m2-vc lock" role="img" aria-label="Freelancer, locked until all Vibes are mastered">'+m2Icon('lock',16)+'<b>Freelancer</b><span>Master all '+Math.max(3,ids.length)+'</span></div></div>';
   return h;
+}
+// What each number would do if the Vibe being looked at became the Primary (the +/- shown on the Gear screen).
+function m2VibeDelta(m,L) {
+  if(!L||M2.pick!=null||!B3_VIBES[M2.vibe]||L.main===M2.vibe) return null;
+  const a=m2Stats(m),keep=L.main; L.main=M2.vibe; let b; try { b=m2Stats(m); } finally { L.main=keep; }
+  const d={}; for(const [k] of M2_STATN) d[k]=b[k]-a[k]; return d;
 }
 function m2Overflow(m,L) {
   const ids=B3_CAST[m.id].vibes,done=ids.filter(v=>b3Mastered(L,v));
   if(!done.length) return '';
   const low=ids.filter(v=>!b3Mastered(L,v)).sort((a,b)=>(L.vp[a]||0)-(L.vp[b]||0))[0];
-  return '<p class="m2-note">'+(low?m2Esc(B3_VIBES[done[0]].name)+' is mastered, so its points now go to '+m2Esc(B3_VIBES[low].name)+', the Vibe with the fewest.':'Every Vibe is mastered, so new points are not needed.')+'</p>';
+  return '';
 }
 const m2First=s=>String(s||'').split(/(?<=[.!?])\s/)[0];
 function m2KitRow(r,V,L,role,fresh) {
   const S=B3_SKILLS[r.id],Q=B3_QUIRKS[r.id],T=B3_TRAITS[r.id];
   let icon,tag,desc,right='';
-  if(r.kind==='trait') { icon='<span class="m2-fl t">'+m2Icon('shield',16)+'</span>'; tag='Trait'; desc=T?T.desc:''; right=role==='main'?'Always on':'Main Vibe only'; }
+  if(r.kind==='trait') { icon='<span class="m2-fl t">'+m2Icon('shield',16)+'</span>'; tag='Trait'; desc=T?T.desc:''; right=role==='main'?'Always on':'Primary Vibe only'; }
   else if(r.kind==='quirk') { icon='<span class="m2-fl q">'+m2Icon('spark',16)+'</span>'; tag='Quirk'; desc=Q?Q.desc:''; right=L.quirks.includes(r.id)?'In a slot':''; }
   else { icon=m2FlIcon(S&&S.flavor,16); const fn=m2FlName(S&&S.flavor); tag=r.kind==='basic'?fn+' basic':r.kind==='cap'?'Capstone':fn+' skill'; desc=S?S.desc:''; right=r.kind==='basic'?'Free':(S&&S.pep!=null?'<b>'+S.pep+'</b> Pep':''); }
   if(!r.open) {
     return '<div class="m2-kr lock"><span class="m2-fl lk">'+m2Icon('lock',16)+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small><span class="m2-kc">'+(r.kind==='cap'&&S&&S.pep?'<b>'+S.pep+'</b> Pep &nbsp;':'')+'<em>Rank '+r.rank+'</em></span></div></div></div>';
   }
-  const dd=m2Details()?desc:m2First(desc);
+  const dd=desc,showD=m2Details();
   const soon=r.built?'':' <small class="m2-soon-t">Not working in this build yet</small>';
-  return '<div class="m2-kr"><span>'+icon+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small>'+(fresh?'<span class="m2-newt">New</span>':'')+'<span class="m2-kc">'+right+'</span></div><p>'+m2Esc(dd)+soon+'</p></div></div>';
+  return '<div class="m2-kr"><span>'+icon+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small>'+(fresh?'<span class="m2-newt">New</span>':'')+'<span class="m2-kc">'+right+'</span></div>'+(showD?'<p>'+m2Esc(dd)+soon+'</p>':'')+'</div></div>';
 }
 function m2VibeDetail(m,L,fresh) {
   const V=B3_VIBES[M2.vibe],rank=b3VibeRank(L,V.id),vp=L.vp[V.id]||0,role=L.main===V.id?'main':L.pocket===V.id?'pocket':'none',T=B3_RULES.rankVp;
   const mast=rank>=b3MaxRank(),next=mast?b3MasterVp():T[rank],from=T[rank-1],frac=mast?1:Math.max(0,Math.min(1,(vp-from)/(next-from)));
-  const ln=B3_LEANS[V.lean],lean=ln.name+': '+ln.desc.replace(/Max HP/g,'Health')+(role==='main'?'':' (when Main)');
+  const ln=B3_LEANS[V.lean],lean=ln.name+': '+ln.desc.replace(/Max HP/g,'Health')+(role==='main'?'':' (when Primary)');
   const unlock=mast?'':b3Ladder(V,rank).filter(r=>r.rank===rank+1).map(r=>r.name);
   let bar;
-  if(mast) bar='<span class="m2-vb2"><i style="width:100%"></i></span><span class="m2-vt"><b>Mastered</b></span>';
+  if(mast) bar='';
   else bar='<span class="m2-vb2"><i style="width:'+Math.round(frac*100)+'%"></i></span><span class="m2-vt"><b>'+vp+'</b> of '+next+' to Rank '+(rank+1)+(unlock.length?': '+m2Esc(unlock.join(' and ')):'')+'</span>';
   let h='<div class="m2-vh"><h2>'+m2Esc(V.name)+'</h2><span class="m2-sub">'+m2Esc(b3Subtitle(V,rank))+'</span></div>'+
     '<div class="m2-lean">'+m2Icon('shield',17)+'<span>'+m2Esc(lean)+'</span></div><div class="m2-vp">'+bar+'</div><div class="m2-kit">';
   for(const r of b3Ladder(V,rank)) h+=m2KitRow(r,V,L,role,fresh&&r.rank===rank&&rank>1);
   h+='</div>';
   const mk=role==='main',pk=role==='pocket';
-  h+='<div class="m2-acts">'+(mk?'<span class="m2-here">This is the Main Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+V.id+'" data-k="make-main">Make it Main</button>')+
-    (pk?'<span class="m2-here">This is the Pocket Vibe.</span>':'<button type="button" class="m2-btn" data-m2="pocket" data-a="'+V.id+'" data-k="make-pocket">Make it Pocket</button>')+'</div>';
-  h+='<p class="m2-note">The Pocket Vibe adds its Skills only, and earns half the Vibe Points of a fight. Everyone can also use Pick-Me-Up ('+B3_RULES.pickMeUp.pep+' Pep) to get a knocked-out family member back up.</p>';
+  h+='<div class="m2-acts">'+(mk?'<span class="m2-here">This is the Primary Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+V.id+'" data-k="make-main">Make it Primary</button><span class="m2-here">Or tap it again at the top.</span>')+
+    (pk?'<span class="m2-here">This is the Secondary Vibe.</span>':'<button type="button" class="m2-btn" data-m2="pocket" data-a="'+V.id+'" data-k="make-pocket">Make it Secondary</button>')+'</div>';
+  h+='<p class="m2-note">The Secondary Vibe adds its Skills only, and earns half the Vibe Points of a fight. Everyone can also use Pick-Me-Up ('+B3_RULES.pickMeUp.pep+' Pep) to get a knocked-out family member back up.</p>';
   if(!b3sOn()&&!M2.lab) h+='<button type="button" class="m2-link" data-m2="legacy" data-a="stamps" data-k="stampcard">Old Stampcard</button>';
   return h;
 }
@@ -171,7 +177,7 @@ function m2RowCtl(m,L) {
 }
 function m2DetailSwitch() {
   const on=m2Details();
-  return '<div class="m2-sw"><span id="m2-swl">Show what each skill does</span><button type="button" class="m2-tog" role="switch" aria-checked="'+on+'" aria-labelledby="m2-swl" data-m2="details" data-k="details"><i></i></button></div>';
+  return '<div class="m2-sw"><span id="m2-swl">Show skill descriptions</span><button type="button" class="m2-tog" role="switch" aria-checked="'+on+'" aria-labelledby="m2-swl" data-m2="details" data-k="details"><i></i></button></div>';
 }
 function m2QuirkPick(m,L) {
   const slot=M2.pick,pool=b3QuirkPool(m.id,L);
@@ -198,8 +204,8 @@ function m2VibesBody(d) {
   const fresh=M2.freshNow||(M2.fresh&&M2.fresh[m.id]); if(M2.freshNow) { M2.fresh=M2.fresh||{}; M2.fresh[m.id]=true; }
   const left=m2RankCtl()+m2PoolBlock(m,L)+m2RowCtl(m,L)+m2DetailSwitch()+m2QuirkSlots(m,L);
   const right=M2.pick!=null?m2QuirkPick(m,L):m2Chips(m,L)+m2Overflow(m,L)+'<div class="m2-scroll">'+m2VibeDetail(m,L,fresh)+'</div>';
-  if(d.wide) return {l:m2Header(m,d)+'<div class="m2-lowl">'+left+'</div>',r:right,cls:'m2-vibes'};
-  return {l:m2Header(m,d)+(M2.pick!=null?'<div class="m2-scroll">'+m2QuirkPick(m,L)+'</div>':'<div class="m2-scroll">'+m2PoolBlock(m,L)+m2Chips(m,L)+m2Overflow(m,L)+m2VibeDetail(m,L,fresh)+'<div class="m2-lowt">'+m2RankCtl()+m2RowCtl(m,L)+m2DetailSwitch()+'<div class="m2-lab">Quirks</div>'+m2QuirkSlots(m,L)+'</div></div>'),r:'',single:true,cls:'m2-vibes'};
+  if(d.wide) return {l:m2Header(m,d,m2VibeDelta(m,L))+'<div class="m2-lowl">'+left+'</div>',r:right,cls:'m2-vibes'};
+  return {l:m2Header(m,d,m2VibeDelta(m,L))+(M2.pick!=null?'<div class="m2-scroll">'+m2QuirkPick(m,L)+'</div>':'<div class="m2-scroll">'+m2PoolBlock(m,L)+m2Chips(m,L)+m2Overflow(m,L)+m2VibeDetail(m,L,fresh)+'<div class="m2-lowt">'+m2RankCtl()+m2RowCtl(m,L)+m2DetailSwitch()+'<div class="m2-lab">Quirks</div>'+m2QuirkSlots(m,L)+'</div></div>'),r:'',single:true,cls:'m2-vibes'};
 }
 
 // ---------- Gear ----------
@@ -272,10 +278,11 @@ function m2PersonAct(act,a,el) {
   if(act==='bench') { M2.bench=!M2.bench; sfx.tab(); M2.focusNext=M2.keys?'bench':null; m2Render(); return; }
   if(M2.tab==='vibes') {
     if(act==='rank'&&M2.lab) { const B=b3LabBook(); for(const id in B) b3SetRank(id,B[id],+a); b3LabSave(); sfx.select(); showToast('Every Vibe in the Battle Lab is now Rank '+a+'.',2.4); M2.focusNext=M2.keys?'rank-'+a:null; m2Render(); return; }
+    if(act==='vibe'&&a===M2.vibe&&L&&L.main!==a&&B3_VIBES[a]&&L.pocket!==a) { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Primary Vibe: its Trait, Basic, Skills and Lean.'); return; }
     if(act==='vibe') { M2.vibe=a; sfx.tab(); M2.focusNext=M2.keys?'vc-'+a:null; m2Render(); return; }
     if(!L) return;
-    if(act==='main') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Main Vibe: its Trait, Basic, Skills and Lean.'); return; }
-    if(act==='pocket') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetPocket(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Pocket Vibe: it adds its Skills.'); return; }
+    if(act==='main') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Primary Vibe: its Trait, Basic, Skills and Lean.'); return; }
+    if(act==='pocket') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetPocket(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Secondary Vibe: it adds its Skills.'); return; }
     if(act==='row') {
       if(b3RowOf(L)===a) return;
       if(a==='back'&&m2LastFront(m,L)) { sfx.nope&&sfx.nope(); showToast('Someone has to stand in Front.',2.4); return; }

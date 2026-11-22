@@ -1,3 +1,6 @@
+## fix-menu4play-3 (2026-11-22): Menu: Party tab, name beside the bar, HP above the pictures, Primary and Secondary, tap twice to pick
+
+Tom's report on t-menu4play: tab renamed Party; name level with the green bar and HP above the pictures; the Vibe name bigger; the gauge reads Combos with Double Team and Family Ruckus; the switch reads Show skill descriptions and, off, hides the whole description; Main and Pocket became Primary and Secondary; the mastered note is gone; tapping a Vibe once shows the +/- on Health, Attack, Defense and Speed, tapping it again makes it Primary.
 ## battleux2 (2026-11-21): every family move now has one plain line that says what it does
 
 Card c-battleux2. Wrote a `short` line (60 characters at most) on all 80 family moves of the 10 members in `data/b3-kit-*.js`, plus Pick-Me-Up in `data/b3-rules.js`. The new battle screen shows it under each move when DETAILS is on, and in the strip on a phone held sideways (where the strip has room for one line instead of the full description). Rules and numbers did not change; these are not spoken lines, so nothing to bake.

@@ -11,7 +11,7 @@
 // Files: engine/m2-core.js (this), engine/m2-family.js (the Family page), m2.css, fonts/bricolage.woff2 and figtree.woff2,
 // art/menu/<id>.webp (tools/sprite-bake/bake_menu_heroes.py).
 const M2={open:false,lab:false,labIds:null,tab:'family',legacy:false,back:'family',who:null,bench:false,vibe:null,pick:null,slot:null,peek:null,dirty:false,sel:0,change:null,keys:false,mode:'',dims:null,built:false,root:null,z:1,say:'',sig:''};
-const M2_TABS=[{id:'family',label:"Tom's Party"},{id:'vibes',label:'Vibes'},{id:'gear',label:'Gear'},{id:'bag',label:'Bag'},{id:'system',label:'System'}];
+const M2_TABS=[{id:'family',label:'Party'},{id:'vibes',label:'Vibes'},{id:'gear',label:'Gear'},{id:'bag',label:'Bag'},{id:'system',label:'System'}];
 // The picture for each tab (the same line icons as the drawings), always shown with its word.
 const M2_ICON={
  family:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',

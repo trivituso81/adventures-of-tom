@@ -165,7 +165,7 @@ function m2Options() {
   let h=m2Vol('music','Music','')+m2Vol('voice','Voices','')+m2Vol('fx','Sound effects','');
   h+=m2Seg('Difficulty',D.sub+'. '+D.text,'diff',[['rose','Rose'],['grace','Grace'],['director','Director']].map(([id,n])=>[id,n,B7.diff===id]));
   h+=m2Seg('Battle speed','','speed',[1,2].map(s=>[s,s+'x',B7.speed===s]));
-  h+=m2Sw('Show what each skill does','In this menu and in fights.','details',m2Details());
+  h+=m2Sw('Show skill descriptions','In this menu and in fights.','details',m2Details());
   if(typeof tabletMode!=='undefined'&&!tabletMode.on) h+=m2Sw('Turn the screen sideways','','rotate',!!layout.landscape);
   h+=m2Sw('Less motion','Pages change without sliding.','calm',m2Calm());
   if(!b3sOn()) h+='<div class="m2-lab m2-old">For the old battle</div>'+m2Sw('High-five timing','Tap the gold sparkle for +15%. Rose Mode lands it for you.','hf',B7.hf)+m2Sw('Auto-stamp spends points','Also ranks moves up and unlocks Remixes.','autospend',B7.autoSpend!==false)+m2Sw('Win Now button (admin)','A button in every real fight ends it in a win.','skip',!!B7.skipBtn);

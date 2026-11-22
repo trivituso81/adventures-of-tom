@@ -475,3 +475,13 @@
 #m2 .m2-askr{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
 #m2.m2-compact .m2-vol{min-height:46px}
 #m2.m2-compact .m2-sv{min-height:56px}
+
+/* menu fix 3: name level with the green bar, HP above the pictures, Vibe name prominent */
+#m2 .m2-nl{align-items:center}
+#m2 .m2-nl .m2-bar{flex:1 1 auto;min-width:24px;align-self:center}
+#m2 .m2-hps{display:flex;flex:none;padding:0 6px 4px}
+#m2 .m2-hp{flex:1 1 0;min-width:0;font-size:13px;font-weight:700;color:var(--soft);white-space:nowrap}
+#m2 .m2-hp b{font:800 17px var(--disp);color:var(--ink)}
+#m2 .m2-hp.low b{color:var(--coral)}
+#m2 .m2-vb{font:800 18px/1.15 var(--disp);letter-spacing:-.01em}
+#m2.m2-compact .m2-vb{font-size:15px}
