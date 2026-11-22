@@ -31869,7 +31869,7 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "build": "pairmove1",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDC1yqbxfJTPwowGvb",
@@ -31927,36 +31927,15 @@
     }
    ],
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T06:55:39Z",
     "n": 1,
     "est": 0.79,
     "run": {
-     "state": "done",
-     "at": "2026-11-22T06:40:30Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44992845017",
-     "n": 1,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [],
-     "capped": [],
-     "unchecked": [],
-     "errors": [
-      {
-       "what": "tom-rose-giddyup",
-       "why": "not ready after 20 minutes; the request is kept: run again (no new charge)"
-      }
-     ],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 0,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "tom-rose-giddyup": 1
-     }
+     "state": "running",
+     "at": "2026-11-22T07:04:20Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996404459",
+     "n": 1
     },
     "auto": true
    }
