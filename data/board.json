@@ -31322,8 +31322,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (25 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 19 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (26 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 20 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31382,6 +31382,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 25 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 26 report(s)."
     }
    ],
    "blocks": [],
@@ -36901,7 +36905,8 @@
    "r-20261121-180541-ojxd",
    "r-20261121-180626-4eca",
    "r-20261121-180646-o5il",
-   "r-20261121-180709-4jo0"
+   "r-20261121-180709-4jo0",
+   "r-20261121-180718-y1a5"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36941,8 +36946,8 @@
    "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "283e678bb4df3cc850b1ad5691e9fb923a63c076",
- "synced_at": "2026-11-22T02:07:33+00:00",
+ "synced": "2680207cf3ad4537f68281bb0c6fd74baff0803a",
+ "synced_at": "2026-11-22T02:08:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
