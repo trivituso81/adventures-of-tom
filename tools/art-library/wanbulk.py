@@ -273,7 +273,8 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                                 'passed_not_baked': [r['what'] for r in passed if r['what'] not in merged], 'retried': [r['what'] for r in rows if r.get('retried')],
                                 'stopped': [{'what': r['what'], 'why': r['result']['why'], 'card': 'c-wanstop-%s-r%d' % (r['what'], r['rev'])} for r in stopped],
                                 'capped': states['capped'], 'unchecked': states['unchecked'], 'errors': [{'what': r['what'], 'why': r.get('why')} for r in rows if r['state'] == 'error'],
-                                'already': states['already'], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid}
+                                'already': states['already'], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid,
+                                'revs': {r['what']: r['rev'] for r in rows}}   # fix-wanstop-gen: the board page lists a job again once its rev is raised
             c['history'] = (c.get('history') or []) + [{'d': today, 't': 'wan-gen bulk run %s: %d made and checked, %d passed%s, %d stopped, %d left for the next tap.' % (
                 run_id, len(rows), len(passed), ' (build %s)' % build if merged else '', len(stopped), len(states['capped']) + len(states['unchecked']))}]
             c['changed'] = today

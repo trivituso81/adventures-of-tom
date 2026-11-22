@@ -3,7 +3,7 @@
 A TEST board (the live one plus four cards with a `wan` job list) is served by the stub GitHub; board.html is loaded at 390x844 and 844x390 with the real tools/art-library/wangen-jobs.json.
 Checks: the Videos on this card section (the jobs left to make, the count and the dollar estimate worked out HERE from the job file, not copied from the page), two taps (the first only arms,
 the second saves `wgen` with the commit message `board: wan generate <id>`), the Started text, a card whose last run merged and stopped some jobs (the left list drops them, the run lines show),
-a card with nothing left, a card in Waiting (the button says what it waits on), no sideways scroll, and the board file the page wrote passes tools/board_check.py. Prints FAILS: []."""
+a card with nothing left, a card whose jobs stopped at the current rev (waits on the fix) and one whose rev was raised since (listed again; fix-wanstop-gen), a card in Waiting (the button says what it waits on), no sideways scroll, and the board file the page wrote passes tools/board_check.py. Prints FAILS: []."""
 import base64, json, os, subprocess, sys, tempfile, time, urllib.request, datetime
 from playwright.sync_api import sync_playwright
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, '..'))
@@ -17,15 +17,19 @@ J = json.load(open(os.path.join(ROOT, 'tools', 'art-library', 'wangen-jobs.json'
 def est(names): return sum(J[n]['est_per_s'][J[n]['input']['resolution']] * float(J[n]['input']['duration']) for n in names)   # worked out here from the job file
 import math
 def money(x): return '$%.2f' % (math.floor(x * 100 + .5) / 100)   # rounds halves up like the page (JS Math.round)
-TWO = ['rose-cast', 'tom-cast']; THREE = ['tom-cast', 'rose-cast', 'grace-cast']
+TWO = ['rose-cast', 'tom-cast']; FIX = ['rose-giddyup', 'deedee-wetfloor']; THREE = ['tom-cast', 'rose-cast', 'grace-cast']
 b = json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8'))
 def tc(i, title, **kw):
     d = {'id': i, 'lane': 'tom', 'col': 'up', 'theme': 'Battle Animations', 'title': title, 'next': 'Make the videos.', 'blocks': [], 'fyi': True, 'changed': T, 'created': T, 'ask': 'animations', 'chat': {'url': '', 'opening': 'x'}, 'history': []}
     d.update(kw); return d
 claude_open = next(c['id'] for c in b['cards'] if c['lane'] == 'claude' and c['col'] == 'up')
 b['cards'] += [tc('t-w-two', 'Two videos card', wan={'jobs': TWO}),
-               tc('t-w-done', 'Videos finished card', wan={'jobs': THREE}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 3, 'merged': ['tom-cast'], 'retried': ['tom-cast'], 'passed_not_baked': [], 'stopped': [{'what': 'rose-cast', 'why': 'failed twice: edge', 'card': 'c-wanstop-rose-cast-r3'}], 'capped': [], 'unchecked': [], 'errors': [], 'already': [], 'bake_failed': {}, 'spent': 1.23, 'build': 'wanbulk-t-w-done-7'}}),
+               tc('t-w-done', 'Videos finished card', wan={'jobs': THREE}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 3, 'merged': ['tom-cast'], 'retried': ['tom-cast'], 'passed_not_baked': [], 'stopped': [{'what': 'rose-cast', 'why': 'failed twice: edge', 'card': 'c-wanstop-rose-cast-r%d' % J['rose-cast']['rev']}], 'capped': [], 'unchecked': [], 'errors': [], 'already': [], 'bake_failed': {}, 'spent': 1.23, 'build': 'wanbulk-t-w-done-7'}}),
                tc('t-w-none', 'Nothing left card', wan={'jobs': ['tom-cast']}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 1, 'merged': ['tom-cast'], 'stopped': [], 'spent': .5}}),
+               # fix-wanstop-gen: Tom's t-wanstop-gen. Both jobs stopped at rev R; once a session raises R the page lists them again (from the stop card's id, or from run.revs)
+               tc('t-w-held', 'Stopped videos card', wan={'jobs': FIX}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 2, 'merged': [], 'stopped': [{'what': w, 'why': 'failed: p1', 'card': 'c-wanstop-%s-r%d' % (w, J[w]['rev'])} for w in FIX], 'spent': 1.58}}),
+               tc('t-w-revup', 'Fixed videos card', wan={'jobs': FIX}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 2, 'merged': [], 'stopped': [{'what': w, 'why': 'failed: p1', 'card': 'c-wanstop-%s-r%d' % (w, J[w]['rev'] - 1)} for w in FIX], 'spent': 1.58}}),
+               tc('t-w-revs', 'Merged at an old rev card', wan={'jobs': ['tom-cast']}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 1, 'merged': ['tom-cast'], 'stopped': [], 'spent': .5, 'revs': {'tom-cast': J['tom-cast']['rev'] - 1}}}),
                tc('t-w-wait', 'Waiting videos card', col='wait', waiting_on='claude', fyi=False, blocks=[], wan={'jobs': TWO})]
 b['cards'].append({'id': 'c-w-claude', 'tag': 'wclaude', 'lane': 'claude', 'col': 'up', 'theme': 'Battle Animations', 'title': 'The Claude card the videos wait on', 'next': 'Ready.', 'blocks': ['t-w-wait'], 'changed': T, 'created': T,
                    'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 'Prompt.'}})
@@ -75,6 +79,18 @@ try:
             pg.screenshot(path=f'{out}/board-wan-done-{tag}.png'); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-none')"); pg.wait_for_selector('#sheet .pics')
             ok(pg.is_disabled('#sheet button.gen') and 'Nothing to make' in pg.inner_text('#sheet button.gen'), tag + ': nothing left is disabled: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
+            pg.evaluate("openSheet('t-w-held')"); pg.wait_for_selector('#sheet .pics')
+            d = pg.inner_text('#sheet .pics'); bt = pg.inner_text('#sheet button.gen')
+            ok(pg.is_disabled('#sheet button.gen') and bt.startswith('Waiting for Claude to fix the stopped videos'), tag + ': stopped at the current rev waits on the fix: ' + bt)
+            ok('No video passed the checks yet' in d and 'c-wanstop-rose-giddyup-r%d' % J['rose-giddyup']['rev'] in d, tag + ': says why nothing was made: ' + d[:200])
+            pg.screenshot(path=f'{out}/board-wan-held-{tag}.png'); pg.click('#bclose')
+            pg.evaluate("openSheet('t-w-revup')"); pg.wait_for_selector('#sheet .pics')
+            bt = pg.inner_text('#sheet button.gen')
+            ok(not pg.is_disabled('#sheet button.gen') and bt == 'Generate all 2 videos (about %s)' % money(est(FIX)), tag + ': a raised rev lists the stopped jobs again: ' + bt)
+            ok('2 videos left to make: rose-giddyup, deedee-wetfloor' in pg.inner_text('#sheet .pics'), tag + ': lists both fixed jobs')
+            pg.screenshot(path=f'{out}/board-wan-revup-{tag}.png'); pg.click('#bclose')
+            pg.evaluate("openSheet('t-w-revs')"); pg.wait_for_selector('#sheet .pics')
+            ok(pg.inner_text('#sheet button.gen').startswith('Generate all 1 video'), tag + ': run.revs below the job rev lists the job again: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-wait')"); pg.wait_for_selector('#sheet .pics')
             ok(pg.is_disabled('#sheet button.gen') and pg.inner_text('#sheet button.gen').startswith('Waiting on'), tag + ': waiting card: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             sw = pg.evaluate('document.documentElement.scrollWidth')
