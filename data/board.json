@@ -30404,7 +30404,7 @@
      "already": [],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
@@ -30683,8 +30683,14 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T21:23:50.244Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-b3s22ch13",
