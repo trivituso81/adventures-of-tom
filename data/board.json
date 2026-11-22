@@ -27927,7 +27927,7 @@
     "c-nightrefactor"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
     "opening": "pasted by Tom from the board"
@@ -28065,6 +28065,10 @@
     {
      "d": "2026-11-22",
      "t": "nightgreenm: ch20_test fixed (the test was wrong in two ways: after the four relays it pressed a skill that does no damage to the Leviathan, so the fight never ended in 400 turns, and it then forced the win flag while the battle was still on); with the plain Attack the real fight ends, the game plays the shatter scene and starts Julian by itself. known_fail removed; minutes 10 to 5 (measured 223 s and 222 s, two passes in a row). No row is marked known_fail now."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part shipped as nightgreenm: the chapter 20 night test ends the Leviathan fight and now passes"
     }
    ],
    "prompt": {
@@ -36283,6 +36287,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
+   "title": "Fix the last failing test (ch20_test)",
+   "first": "2026-11-21T22:27:49-08:00",
+   "last": "2026-11-21T23:41:00-08:00",
+   "tags": [
+    "nightgreenm"
+   ],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDVm5HwGWr5yhmCUJy",
    "title": "Fix: Art Library WAN fallback fails on long prompts",
    "first": "2026-11-21T22:56:53-08:00",
@@ -36364,16 +36380,6 @@
    ],
    "cards": [
     "c-battleux1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
-   "title": "Fix the last failing test (ch20_test)",
-   "first": "2026-11-21T22:27:49-08:00",
-   "last": "2026-11-21T22:27:49-08:00",
-   "tags": [],
-   "cards": [
-    "c-nightgreen"
    ]
   },
   {
@@ -41177,8 +41183,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "c4d30f1f7634924d38c722f76d0ecb842820ad18",
- "synced_at": "2026-11-22T07:04:32+00:00",
+ "synced": "4f6d58e96a8416cf3355f660d5ff36fd5b8f41e1",
+ "synced_at": "2026-11-22T07:41:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
