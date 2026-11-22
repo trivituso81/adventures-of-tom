@@ -31636,7 +31636,7 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "wanmop1",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
@@ -31659,46 +31659,18 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44984439565: 1 made and checked, 0 passed, 1 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 video (about $0.79).",
+     "at": "2026-11-22T04:29:29.173Z"
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T04:18:00Z",
+    "want": true,
+    "at": "2026-11-22T04:29:29Z",
     "n": 1,
-    "est": 0.79,
-    "auto": true,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T04:26:36Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44984439565",
-     "n": 1,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [
-      "deedee-wetfloor"
-     ],
-     "stopped": [
-      {
-       "what": "deedee-wetfloor",
-       "why": "failed twice: p1, p2",
-       "card": "t-wangaveup-deedee-wetfloor-r9"
-      }
-     ],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [
-      "deedee-wetfloor"
-     ],
-     "bake_failed": {},
-     "spent": 1.58,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "deedee-wetfloor": 9
-     }
-    }
+    "est": 0.79
    }
   },
   {
