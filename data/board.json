@@ -29961,6 +29961,50 @@
      "t": "Tom: \"The battle guide doesn't seem to be working it's just stuck on a loading screen.\" New card."
     }
    ]
+  },
+  {
+   "id": "c-ch1title",
+   "tag": "ch1title1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Story and Dialogue",
+   "title": "Rename chapter 1 to Muffin to See Here",
+   "next": "Renaming chapter 1 (title card, chapter list, save labels, Voice Library heading). All other chapter names stay as they are.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "prompt": {
+    "what": "Renames chapter 1 to Muffin to See Here (engine/story.js CHAPTERS, the data/scenes.js heading, docs/ARCHITECTURE.md).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: one known edit, tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Board card c-ch1title. Rename chapter 1 to Muffin to See Here, build ch1title1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "idea": {
+    "at": "2026-11-22T17:40:49.802Z",
+    "words": "I actually think I like the original titles better with the exception of chapter 1, so can you rename chapter one and leave all the rest of the chapters the same",
+    "shot": "",
+    "row": "B",
+    "rule": "Claude Sonnet 5.5, low"
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
+    "opening": "\"Can you propose a re-name of each chapter heading\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom asked for chapter name ideas, then chose: keep the original titles except chapter 1 (the crisp was changed to apple muffins). New card.",
+     "at": "2026-11-22T17:40:49.802Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: this conversation claimed the card.",
+     "at": "2026-11-22T17:40:49.802Z"
+    }
+   ]
   }
  ],
  "sessions": [
