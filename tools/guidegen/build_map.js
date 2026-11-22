@@ -149,7 +149,7 @@ function personGesture(shape, name, w) {
 const STATE_NAME = { idle: 'BREATHING IDLE', guard: 'BRACED GUARD', hit: 'FLINCH', dodge: 'DODGE', ko: 'TOO TIRED TO GO ON', victory: 'VICTORY', run: 'RUNNING IN PLACE' };
 const VICTORY = {
   amy: 'raises both fists overhead once with a big proud grin, like crossing a finish line first. She holds that pose and remains completely still in it for the rest of the clip.',
-  boppy: 'gives a pleased, satisfied grin and pumps one fist once at chest height. He holds that fist up with the same grin and remains completely still in that pose for the rest of the clip.',
+  boppy: 'raises both hands to chest height, each making the American Sign Language I love you sign (thumb, index finger and little finger extended, middle and ring fingers folded), and breaks into a wide, toothy grin. One gold tooth sparkles once with a brief glint of light as he grins. He holds both hands in the sign with the same grin and remains completely still in that pose for the rest of the clip.',
   justin: 'gives two big thumbs up once with a proud, warm grin. He holds that pose and remains completely still in it for the rest of the clip.',
   olivia: 'throws both arms up in a V once with a big proud smile. She holds that arms-up pose and remains completely still in it for the rest of the clip.',
   tnb: 'gives a relaxed, pleased grin and raises one fist once at chest height. He holds that fist up with the same grin and remains completely still in that pose for the rest of the clip.',

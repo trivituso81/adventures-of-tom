@@ -1,3 +1,7 @@
+## startpics3 (2026-11-22): Boppy's victory animation is the ASL I love you sign with a toothy grin and a sparkling gold tooth
+
+Card c-startpics3. Tom (11-22 12:11): "Boppy should put both hands in an ASL 'I love you' sign and toothily grin and one of his gold teeth should sparkle when he grins." Changed one thing: Boppy's Victory line in `tools/guidegen/build_map.js` (before: one pumped fist). Everything else in his prompt and everyone else's is unchanged. The sparkle is one brief glint, named once. Wording was checked in `data/guide-anims.json`; no video was made and nothing was spent. Test: `python3 -I tools/art-library/startpic_test.py`.
+
 ## b3s22a (2026-11-22): Chapter 11 (the airport) fights on the new battle: Lost Luggage, Red-Eye, the Standby Sprite and FINAL CALL
 
 Card c-b3s22, part a. Chapter 11 is on the BY CHAPTER list for Battle 3, with the bestiary's numbers unchanged (every fight is inside its target in the simulator). Chapters 12 to 20 each have their own card (c-b3s22ch12 to c-b3s22ch20), so no chapter is built in the same conversation as another.

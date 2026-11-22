@@ -29858,7 +29858,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics2",
+   "build": "startpics3",
    "history": [
     {
      "d": "2026-11-22",
@@ -30810,6 +30810,39 @@
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
     }
    ]
+  },
+  {
+   "id": "c-startpics3",
+   "title": "Boppy's victory: ASL I love you and a sparkling gold tooth",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics3",
+   "next": "Built as startpics3: Boppy's Victory prompt now has both hands in the ASL I love you sign, a toothy grin and one sparkling gold tooth. No video was made. Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"Boppy should put both hands in an ASL 'I love you' sign and toothily grin and one of his gold teeth should sparkle when he grins.\" Built startpics3.",
+     "at": "2026-11-22T20:11:46.405Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try"
   }
  ],
  "sessions": [
