@@ -29915,56 +29915,6 @@
    "history": [
     {
      "d": "2026-11-21",
-     "at": "2026-11-21T21:23:19Z",
-     "t": "Night run: t-stagefollowplay, t-milestonec, t-milestoned sorted YOURS. t-gem-bug01play (lose to the Big One, retry starts by itself) is a yes or no fact but this run could not find the retry code path in time; left unmarked for the next night."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Second run the same evening, by hand: t-gem-bug01play checked and closed (a fact: Deedee speaks and the Big One fight restarts after a loss; frames in portrait, landscape and Duo size on branch night). The other three of its first 4 stay Tom's.",
-     "at": "2026-11-21T22:30:00Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Ran: nothing to do."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T22:04:10.957Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
-     "at": "2026-11-22T00:00:00Z",
-     "t": "Night run: t-guardwinplay sorted YOURS (celebration pose vs guard pose is a look). t-dash3-try and t-dash4-try wait on unshipped cards, not checked."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-21",
-     "at": "2026-11-21T22:12:24Z",
-     "t": "Night run: t-dash3-try and t-dash4-try sorted YOURS (wide monitor, layout look). No play card left to check."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Run finished (night: ran c-night-qa); card returned to Up next by hand because the manual last_run stopped the sync job doing it."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T00:51:38.848Z"
-    },
-    {
-     "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
     },
     {
@@ -30001,6 +29951,11 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:55:18.765Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Night QA: looked at 3 play cards (t-battleuxplay, t-menu1look, t-menu4play); all three are look and feel on the real Duo and iPhone, so marked Needs your eyes. Nothing closed, nothing filed.",
+     "at": "2026-11-22T02:58:43Z"
     }
    ],
    "prompt": {
@@ -32058,7 +32013,12 @@
      "d": "2026-11-21",
      "t": "Added by board-battleux: Tom's one play card for the battle screen redesign (plan section 5). Opens when c-battleux3 ships."
     }
-   ]
+   ],
+   "machine": {
+    "at": "2026-11-22T02:58:43Z",
+    "verdict": "yours",
+    "why": "it asks whether moves are readable, tap to read then tap to use feels right and aiming is clear on the Duo and iPhone; that is look and feel on real devices"
+   }
   },
   {
    "id": "c-takes-e8fba6",
@@ -32614,7 +32574,12 @@
      "d": "2026-11-21",
      "t": "Unblocked: nothing was left for it to wait on."
     }
-   ]
+   ],
+   "machine": {
+    "at": "2026-11-22T02:58:43Z",
+    "verdict": "yours",
+    "why": "it is about the paper page, lettering, the family row and head sizes side by side; that is how it looks, on the real Duo and iPhone"
+   }
   },
   {
    "id": "c-menu2",
@@ -32754,7 +32719,12 @@
      "d": "2026-11-22",
      "t": "Made with the build cards after Tom approved the menu proposal in the chat."
     }
-   ]
+   ],
+   "machine": {
+    "at": "2026-11-22T02:58:43Z",
+    "verdict": "yours",
+    "why": "it asks whether pages are easy to read and moving between them feels right on the Duo and iPhone; that is look and feel"
+   }
   },
   {
    "id": "c-b3gear",
