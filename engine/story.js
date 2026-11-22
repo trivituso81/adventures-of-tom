@@ -1208,23 +1208,37 @@ function cardBackdrop(n) {
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
 }
 
-// Chapter title card, drawn over the scene: CHAPTER N and the chapter's name.
+// Chapter title card (chaptercard1, Tom 2026-11-22: the 16-bit pixel text did not fit the storybook look; "feel like the main menu").
+// A DOM card in the main menu's Golden Hour style (m2.css, `#chcard`): the dusk wash over the scene, a cream paper card with a gold
+// lamp rule, the chapter number small above and the chapter's name large in the menu's two typefaces. It lives in #stage so it turns
+// with the stage in landscape. The canvas hook below only feeds it the card's state each frame.
 const LE_drawIntroScreen_story=drawIntroScreen;
+const CHCARD={el:null,key:'',fonts:false};
+function chcardEl() {
+  if(CHCARD.el) return CHCARD.el;
+  const el=document.createElement('div'); el.id='chcard'; el.hidden=true; el.setAttribute('aria-hidden','true');
+  el.innerHTML='<div class="cc-page"><div class="cc-eyebrow"></div><div class="cc-rule"><i></i><b>\u273F</b><i></i></div><div class="cc-title"></div><div class="cc-sub"></div></div>';
+  document.getElementById('stage').appendChild(el); CHCARD.el=el;
+  if(!CHCARD.fonts&&document.fonts&&document.fonts.load) { CHCARD.fonts=true;
+    Promise.all([document.fonts.load("800 20px 'Bricolage Grotesque'"),document.fonts.load("700 14px 'Figtree'")]).catch(()=>{}); }
+  return el;
+}
+setInterval(()=>{ if(CHCARD.el&&!CHCARD.el.hidden&&!intro.card) chcardHide(); },250);   // safety: an intro that ends or restarts without a last frame never leaves the card up
+function chcardHide() { if(CHCARD.el) { CHCARD.el.hidden=true; CHCARD.key=''; } }
 drawIntroScreen=function(time) {
   LE_drawIntroScreen_story(time);
-  const c=intro.card; if(!c) return;
-  const info=c.part?{title:c.title||PARTS[c.part].sub}:chapterInfo(c.n),a=Math.min(1,c.t/.4,Math.max(0,(3-c.t)/.4));
-  gfx.globalAlpha=a*.85; rect(0,0,W,H,'#14201c'); gfx.globalAlpha=a;
-  const cy=Math.round(H*.42),big=Math.max(2,Math.min(4,Math.floor(W/90)));
-  const words=info.title.toUpperCase().split(' '),lines=[];
-  let cur=''; const maxCh=Math.floor((W-24)/(4*big));
-  for(const w of words) { if((cur+' '+w).trim().length>maxCh) { lines.push(cur); cur=w; } else cur=(cur+' '+w).trim(); }
-  if(cur) lines.push(cur);
+  const c=intro.card; if(!c) { chcardHide(); return; }
+  const info=c.part?{title:c.title||PARTS[c.part].sub}:chapterInfo(c.n);
   const head=c.part?'PART '+c.part+(c.done?' COMPLETE':''):info.bonus?'BONUS CHAPTER'+(c.done?' COMPLETE':''):c.done?'CHAPTER '+c.n+' COMPLETE':(c.n?'CHAPTER '+c.n:'DEMO');
-  label(head,W/2+1,cy-12*big+1,'#1b2d27',big-1||1); label(head,W/2,cy-12*big,'#ffd968',big-1||1);
-  rect(W/2-40,cy-4*big,80,1,'#ffd968');
-  lines.forEach((l,i)=>{ const y=cy+i*8*big; label(l,W/2+1,y+1,'#1b2d27',big); label(l,W/2,y,'#fff1cb',big); });
-  gfx.globalAlpha=1;
+  const el=chcardEl(),key=head+'|'+info.title;
+  if(CHCARD.key!==key) { CHCARD.key=key;
+    el.querySelector('.cc-eyebrow').textContent=head;
+    el.querySelector('.cc-title').textContent=info.title;
+    el.querySelector('.cc-sub').textContent=c.part&&!c.title?'':(c.part&&PARTS[c.part]?PARTS[c.part].sub:''); }
+  el.hidden=false;
+  const a=Math.min(1,c.t/.5,Math.max(0,(3-c.t)/.5));
+  el.style.opacity=a.toFixed(3);
+  el.style.setProperty('--cc-lift',((1-a)*10).toFixed(1)+'px');
 };
 
 // ---------- 4. Save v3 ----------

@@ -29867,7 +29867,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Chapter headings in the storybook look of the main menu",
-   "next": "Restyling the chapter title card (CHAPTER N and the chapter's name, also Part and Bonus cards) from the 16-bit pixel text to the Golden Hour storybook look of the main menu: cream paper card, dusk wash, Bricolage Grotesque and Figtree type. Then test portrait and landscape and push as build chaptercard1.",
+   "next": "Shipped as build chaptercard1: the chapter title cards (CHAPTER N, Part, COMPLETE and Bonus) are now a cream paper card on the dusk wash in the main menu's fonts and colors, in portrait and landscape. Tom looks at it next (card t-chaptercard-look).",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -29900,6 +29900,38 @@
     {
      "d": "2026-11-22",
      "t": "Started: this conversation claimed the card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built and tested (portrait, landscape, long title); pushed as chaptercard1.",
+     "at": "2026-11-22T17:17:01.379Z"
+    }
+   ],
+   "after": "t-chaptercard-look"
+  },
+  {
+   "id": "t-chaptercard-look",
+   "lane": "tom",
+   "theme": "Game Shell",
+   "ask": "play",
+   "fyi": true,
+   "col": "up",
+   "title": "Look at the new chapter title cards",
+   "next": "Open the game from your home screen (close and reopen once if you see the old look). Tap NEW GAME, pick any chapter, and watch the title card at the start: a cream paper card with the chapter number and name, like the main menu. Check it in portrait and in landscape.",
+   "first": "Wait for Chapter headings in the storybook look of the main menu to ship (build chaptercard1).",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "where": "phone",
+   "chat": {
+    "url": "",
+    "opening": "started by c-chaptercard-storybook"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made by the session that built chaptercard1.",
+     "at": "2026-11-22T17:17:01.379Z"
     }
    ]
   }
