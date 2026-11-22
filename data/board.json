@@ -34697,7 +34697,7 @@
   {
    "id": "c-wanstop-grace-cubepop-r4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-grace-cubepop-r4",
    "title": "Fix the stopped video grace-cubepop",
@@ -34748,6 +34748,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-grace-cubepop-r4: Grace's Crunchy Sugar-Cube Pop video (rev 4) is baked into the game by hand"
     }
    ],
    "prompt": {
@@ -34759,7 +34763,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-grace-cubepop-r4 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job grace-cubepop (rev 4) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: grace-cubepop-r4-result.json (every check with numbers and the look-check answers) and the videos grace-cubepop-r4.mp4, grace-cubepop-a2-r4.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-grace-cubepop-r4` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-grace-cubepop-r4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T06:07:27+00:00"
+   "started_at": "2026-11-22T06:07:27+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
@@ -35266,6 +35271,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEzG7UpC3ncVHRM4wi",
+   "title": "Fix the stopped video grace-cubepop",
+   "first": "2026-11-22T06:08:58Z",
+   "last": "2026-11-22T06:12:04Z",
+   "tags": [
+    "wanstop-grace-cubepop-r4"
+   ],
+   "cards": [
+    "c-wanstop-grace-cubepop-r4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDCUGBdteWCXYuvoFF",
    "title": "Fix: Play chapter 2 on your phone and report",
    "first": "2026-11-22T06:11:08Z",
@@ -35273,16 +35290,6 @@
    "tags": [],
    "cards": [
     "c-fix-ch2play"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEzG7UpC3ncVHRM4wi",
-   "title": "Fix the stopped video grace-cubepop",
-   "first": "2026-11-22T06:08:58Z",
-   "last": "2026-11-22T06:08:58Z",
-   "tags": [],
-   "cards": [
-    "c-wanstop-grace-cubepop-r4"
    ]
   },
   {
@@ -40506,8 +40513,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3ff8f1fe43fb924e0236e247465e733b41fdc57f",
- "synced_at": "2026-11-22T06:11:43+00:00",
+ "synced": "c121571faba7d5c4b54299862c25716f4dccf240",
+ "synced_at": "2026-11-22T06:13:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
