@@ -34700,7 +34700,7 @@
   {
    "id": "t-movefun-gen",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -34716,7 +34716,7 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
@@ -34862,8 +34862,14 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44996404459: 0 made; already made, nothing sent: grace-cubepop, deedee-wetfloor; you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: See last run notes Sent to Claude as card c-fix-movefun-gen; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T07:49:51.038Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-wanstop-tom-blockade-r3",
@@ -35904,6 +35910,58 @@
    "after": "t-menu4play",
    "auto": true,
    "started_at": "2026-11-22T07:48:26+00:00"
+  },
+  {
+   "id": "c-fix-movefun-gen",
+   "tag": "fix-movefun-gen",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Remaking three flat moves: Blockade, Cube Pop,",
+   "next": "You reported a problem on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: See last run notes",
+   "blocks": [
+    "t-movefun-gen"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T07:49:50.162Z",
+     "card": "t-movefun-gen",
+     "title": "Remaking three flat moves: Blockade, Cube Pop, Wet-Floor",
+     "ask": "animations",
+     "words": "See last run notes",
+     "shot": "",
+     "asked": "Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-movefun-gen"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-movefun-gen.",
+     "at": "2026-11-22T07:49:51.037Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-movefun-gen: See last run notes",
+     "at": "2026-11-22T07:49:51.037Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-movefun-gen"
   }
  ],
  "sessions": [
