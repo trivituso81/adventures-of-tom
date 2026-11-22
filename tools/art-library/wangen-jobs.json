@@ -2078,7 +2078,7 @@
   "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  },
  "stage-tom-jetwash-vid": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2104,7 +2104,8 @@
    "step": 3,
    "after": "stage-tom-jetwash"
   },
-  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. rev 2: the start picture spans 90 percent of the width, so the streaks touched the edge in 48 of 90 pictures twice (bg and edge). Kept: prompt, seed, 480p, 3 s, picture. Changed one thing: pad 0.8 so the streaks have room.",
+  "pad": 0.8
  },
  "stage-tom-fireball-vid": {
   "rev": 1,

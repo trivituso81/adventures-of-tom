@@ -30361,138 +30361,11 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T21:21:04Z",
-    "n": 26,
-    "est": 6,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T21:50:09Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45071628174",
-     "n": 26,
-     "merged": [
-      "stage-tom-bluebang",
-      "stage-tom-glare",
-      "stage-tom-carryon",
-      "stage-tom-porsche",
-      "stage-tom-controller",
-      "stage-tom-wingedshell",
-      "stage-tom-runwaylights",
-      "stage-tom-jetwash",
-      "stage-tom-fireball",
-      "stage-tom-starbeam",
-      "stage-tom-meteor",
-      "tom-shell",
-      "stage-tom-wingedshell-vid",
-      "stage-tom-runwaylights-vid",
-      "stage-tom-fireball-vid",
-      "stage-tom-meteor-vid"
-     ],
-     "passed_not_baked": [],
-     "retried": [
-      "stage-tom-glare",
-      "stage-tom-suitedoor",
-      "tom-suitedoor",
-      "tom-porsche",
-      "tom-cartridge",
-      "tom-controller",
-      "tom-konami",
-      "stage-tom-bluebang-vid",
-      "stage-tom-glare-vid",
-      "stage-tom-jetwash-vid",
-      "stage-tom-starbeam-vid"
-     ],
-     "stopped": [
-      {
-       "what": "stage-tom-suitedoor",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-stage-tom-suitedoor-r1"
-      },
-      {
-       "what": "tom-suitedoor",
-       "why": "failed twice: edge, p1",
-       "card": "c-wanstop-tom-suitedoor-r1"
-      },
-      {
-       "what": "tom-porsche",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-tom-porsche-r1"
-      },
-      {
-       "what": "tom-cartridge",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-tom-cartridge-r1"
-      },
-      {
-       "what": "tom-controller",
-       "why": "failed twice: edge, p1",
-       "card": "c-wanstop-tom-controller-r1"
-      },
-      {
-       "what": "tom-konami",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-tom-konami-r1"
-      },
-      {
-       "what": "stage-tom-bluebang-vid",
-       "why": "failed twice: bg, edge",
-       "card": "c-wanstop-stage-tom-bluebang-vid-r1"
-      },
-      {
-       "what": "stage-tom-glare-vid",
-       "why": "failed twice: bg, edge",
-       "card": "c-wanstop-stage-tom-glare-vid-r1"
-      },
-      {
-       "what": "stage-tom-jetwash-vid",
-       "why": "failed twice: bg, edge",
-       "card": "c-wanstop-stage-tom-jetwash-vid-r1"
-      },
-      {
-       "what": "stage-tom-starbeam-vid",
-       "why": "failed twice: motion",
-       "card": "c-wanstop-stage-tom-starbeam-vid-r1"
-      }
-     ],
-     "waiting": [],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 9.53,
-     "build": "wanbulk-tmovestagelab-45071628174",
-     "watch": "",
-     "revs": {
-      "stage-tom-bluebang": 1,
-      "stage-tom-glare": 1,
-      "stage-tom-carryon": 1,
-      "stage-tom-suitedoor": 1,
-      "stage-tom-porsche": 1,
-      "stage-tom-controller": 1,
-      "stage-tom-wingedshell": 1,
-      "stage-tom-runwaylights": 1,
-      "stage-tom-jetwash": 1,
-      "stage-tom-fireball": 1,
-      "stage-tom-starbeam": 1,
-      "stage-tom-meteor": 1,
-      "tom-suitedoor": 1,
-      "tom-porsche": 1,
-      "tom-cartridge": 1,
-      "tom-controller": 1,
-      "tom-shell": 1,
-      "tom-konami": 1,
-      "stage-tom-bluebang-vid": 1,
-      "stage-tom-glare-vid": 1,
-      "stage-tom-wingedshell-vid": 1,
-      "stage-tom-runwaylights-vid": 1,
-      "stage-tom-jetwash-vid": 1,
-      "stage-tom-fireball-vid": 1,
-      "stage-tom-starbeam-vid": 1,
-      "stage-tom-meteor-vid": 1
-     }
-    }
+    "want": true,
+    "at": "2026-11-22T22:01:16Z",
+    "n": 1,
+    "est": 0.15,
+    "auto": true
    },
    "blocks": [],
    "created": "2026-11-22",
@@ -31882,6 +31755,10 @@
     {
      "d": "2026-11-22",
      "t": "Session started (Sonnet 5.5 medium)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both videos: the jet wash streaks stream left and fade out as asked, but the start picture already fills 90 percent of the width, so they touch the edge. Changed one thing: pad 0.8, rev 2. Next try started on t-movestage-lab."
     }
    ],
    "prompt": {

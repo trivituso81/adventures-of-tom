@@ -1,3 +1,7 @@
+## wanstop-stage-tom-jetwash-vid-r1 (2026-11-22): the Jet Wash object video (rev 2) starts smaller so the streaks clear the edge
+
+Card c-wanstop-stage-tom-jetwash-vid-r1. Looked at both rev 1 videos: the streaks stream left and fade out completely, so the move reads. They failed bg and edge twice: the start picture fills about 90 percent of the width, so the streaks touched the edge in 48 of 90 pictures. Kept: prompt, seed, 480p, 3 s, start picture. Changed one thing: `pad` 0.8 (job `stage-tom-jetwash-vid`, rev 2). Next try started by `wgen` on t-movestage-lab. Nothing for Tom.
+
 ## wanbulk-tmovestagelab-45071628174 (2026-11-22): 16 battle videos made from board card t-movestage-lab passed their checks and were put in the game
 
 The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-shell, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-fireball-vid, stage-tom-meteor-vid. Nobody has watched them yet; the card asks Tom to.
