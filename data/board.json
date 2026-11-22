@@ -31398,6 +31398,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+   "title": "Start pictures for the rest of the cast",
+   "first": "2026-11-22T06:57:31-08:00",
+   "last": "2026-11-22T13:05:01-08:00",
+   "tags": [
+    "startpics1",
+    "startpics2",
+    "startpics3",
+    "startpics4",
+    "startpics5",
+    "startpics7",
+    "guide"
+   ],
+   "cards": [
+    "c-startpics",
+    "c-startpics2",
+    "c-startpics3",
+    "c-startpics4",
+    "c-startpics5",
+    "c-startpics7"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE8rGGnCeamLccpvwH",
    "title": "Menu book: both pages the same width, crease in the center",
    "first": "2026-11-22T12:57:48-08:00",
@@ -31460,26 +31483,6 @@
    ],
    "cards": [
     "c-b3s22"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
-   "title": "Start pictures for the rest of the cast",
-   "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T12:16:38-08:00",
-   "tags": [
-    "startpics1",
-    "startpics2",
-    "startpics3",
-    "startpics4",
-    "startpics5"
-   ],
-   "cards": [
-    "c-startpics",
-    "c-startpics2",
-    "c-startpics3",
-    "c-startpics4",
-    "c-startpics5"
    ]
   },
   {
@@ -37021,8 +37024,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "090f8f1ef70405fa019a022cdf7fbe8d5bf27cfd",
- "synced_at": "2026-11-22T20:58:54+00:00",
+ "synced": "8c66774ac992fd5143b4f3f60b07fa7b28a8f547",
+ "synced_at": "2026-11-22T21:05:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
