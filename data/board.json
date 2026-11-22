@@ -27265,6 +27265,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Try the auto-approve button on a pictures card is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 4 pictures (about $0.20).",
+     "at": "2026-11-22T02:54:44.207Z"
     }
    ],
    "done_when": {
@@ -27286,7 +27291,19 @@
      ],
      "label": "Grace's and Rose's party banners"
     }
-   ]
+   ],
+   "gen": {
+    "want": true,
+    "at": "2026-11-22T02:54:44Z",
+    "ids": [
+     "banner-join-grace",
+     "banner-join-rose",
+     "banner-leave-grace",
+     "banner-leave-rose"
+    ],
+    "est": 0.2,
+    "mode": "review"
+   }
   },
   {
    "id": "t-guidegen-try",
