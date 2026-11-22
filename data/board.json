@@ -32787,7 +32787,7 @@
     "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux1 in data/board.json.\""
    },
-   "next": "Builds the battle screen you approved, in the new battle only, on all six screen sizes: one list of moves, tap once to read and again to use, tap a monster to aim, the strip under the scene that says what will happen, and the DETAILS switch. The old cross, Skills list, skill card, target list and i icon are removed. Rules and numbers do not change. Then the words card starts.",
+   "next": "Built and pushed as battleux1. Tom does nothing; the next card, c-battleux2, writes the one-line move descriptions and the reach and forecast words in data/b3-ux-words.js.",
    "prompt": {
     "what": "Builds the new battle screen you approved (new battle only) on all six screen sizes and removes the old cross, lists and i icon. Rules and numbers stay the same.",
     "before": [
@@ -32810,8 +32810,13 @@
     {
      "d": "2026-11-21",
      "t": "Session started on Sonnet 5.5; building the screen from claude/battleux-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux1: one-level deck (first tap shows, second uses), aim on the scene, one-line tray and battle log, DETAILS switch, turn bar tools, keys and gamepad; old cross, SKILLS list, skill card, target list, preview box and i icon removed. Words are in data/b3-ux-words.js, `short` fields are for c-battleux2. Rules unchanged (b3-sim 3329 checks). b3_test stages 2 to 13c, the story test and the WIN NOW test pass; new tools/b3_layout_test.py passes at all seven sizes and found three real bugs that were fixed. Not done: chapter 1 end to end test (fails at step 6 on main too). Built notes: claude/battleux-plan.md section 6."
     }
-   ]
+   ],
+   "after": "nothing for Tom: c-battleux2"
   },
   {
    "id": "c-battleux2",
