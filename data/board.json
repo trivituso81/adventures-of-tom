@@ -29859,6 +29859,49 @@
    "changed": "2026-11-22",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-chaptercard-storybook",
+   "tag": "chaptercard1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Game Shell",
+   "title": "Chapter headings in the storybook look of the main menu",
+   "next": "Restyling the chapter title card (CHAPTER N and the chapter's name, also Part and Bonus cards) from the 16-bit pixel text to the Golden Hour storybook look of the main menu: cream paper card, dusk wash, Bricolage Grotesque and Figtree type. Then test portrait and landscape and push as build chaptercard1.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "prompt": {
+    "what": "Restyles the chapter title card (engine/story.js drawIntroScreen: CHAPTER N, Part and Bonus cards) to match the main menu's Golden Hour storybook look (m2.css).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build, steps not written yet)",
+    "effort": "medium (small, one screen)",
+    "text": "Board card c-chaptercard-storybook. Restyle the chapter title card to the storybook look of the main menu, test portrait and landscape, push as build chaptercard1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "idea": {
+    "at": "2026-11-22T17:11:26.066Z",
+    "words": "Redo the chapter headings that appear at the beginning of each chapter, because currently they are 16 bit style and they don't fit with the storybook style of the game. In particular, I wanted look or feel like the main menu, like the hamburger menu.",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, medium"
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
+    "opening": "\"Redo the chapter headings that appear at the beginning of each chapter\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom asked in chat: redo the chapter headings (16-bit style) to feel like the main menu. New card; no open card covered it.",
+     "at": "2026-11-22T17:11:26.066Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: this conversation claimed the card."
+    }
+   ]
   }
  ],
  "sessions": [
