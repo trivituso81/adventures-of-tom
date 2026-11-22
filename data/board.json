@@ -26914,7 +26914,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -26929,7 +26929,7 @@
    ],
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
     "opening": "not started"
@@ -26973,9 +26973,12 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Rename the tab from Tom's party to party. put their name level the green bar and their HP above the character images. And then give the name of the current vibe, a more prominent treatment. Rename the family ruckus. Label to combos and instead of double team at 50, it should just say double team and instead of saying full at 100, it should say family ruckus. In the vibes tab Change show what each skill does to show skill descriptions. And when it's unchecked everything underneath the name of the skill should not be displayed. Change the name from Main and pocket to primary and secondary. Remove the mastered text That's it below the vibes. make the UX for selecting a new primary. as tapping a second time on the vibe at the top and the explanation text below it, and when you tap once on one of the new vibes before you confirm it, it should show you like a +- in terms of the attributes that are affected, just like on the equipment screen Sent to Claude as card c-fix-menu4play-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T07:47:43.690Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-b3gear",
@@ -28943,7 +28946,7 @@
    "id": "c-fix-menu4play-3",
    "tag": "fix-menu4play-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
@@ -28952,7 +28955,7 @@
     "t-menu4play"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "reports": [
     {
      "at": "2026-11-22T07:47:42.706Z",
@@ -28987,6 +28990,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as fix-menu4play-3: Menu: Party tab, name beside the bar, HP above the pictures, Primary and Secondary, tap twice to pick"
     }
    ],
    "prompt": {
@@ -29000,7 +29007,8 @@
    },
    "after": "t-menu4play",
    "auto": true,
-   "started_at": "2026-11-22T07:48:26+00:00"
+   "started_at": "2026-11-22T07:48:26+00:00",
+   "done": "2026-11-22"
   },
   {
    "id": "c-fix-movefun-gen",
@@ -29089,6 +29097,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGMmwSkPv2k98xFQGb",
+   "title": "Fix: Play the whole new menu on the Duo and iPhone",
+   "first": "2026-11-22T08:03:13Z",
+   "last": "2026-11-22T08:03:54Z",
+   "tags": [
+    "fix-menu4play-3"
+   ],
+   "cards": [
+    "c-fix-menu4play-3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFwddsN31hvgFthCzE",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
@@ -34451,8 +34471,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "90610a62dfc6259442cc2015bea237a9b34e427c",
- "synced_at": "2026-11-22T08:00:23+00:00",
+ "synced": "ec8821eaadcfc28147499dc8a90f9bf034a47122",
+ "synced_at": "2026-11-22T08:04:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
