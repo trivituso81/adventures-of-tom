@@ -1,4 +1,22 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "tts",
+   "line": "d|grace|I've been nine for SIX hours.",
+   "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+   "fallback_ids": [],
+   "text": "[proud, smug] I've been nine for [emphasized]SIX hours.",
+   "model": "eleven_v4",
+   "stability": 0.5,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[proud, smug] I've been nine for [emphasized]SIX hours.",
+   "at": 1795313399704,
+   "rid": "r1795313399704-bp4"
+  }
+ ],
  "cancel": []
 }
