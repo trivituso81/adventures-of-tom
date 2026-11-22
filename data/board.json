@@ -29389,14 +29389,14 @@
   },
   {
    "id": "t-lastnight",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-21. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Try the Battle Guide on the Duo; Try the Admin Dashboard on the wide monitor; Try the game strip and Take me there; Milestone D: play chapters 6 to 10 on the new battle. Starts used: 0 of 5.",
+   "next": "Handed to Claude by Tom: The what to do doesn't tell me what to do",
    "chat": {
     "url": "",
     "opening": "board"
@@ -29405,6 +29405,11 @@
     {
      "d": "2026-11-21",
      "t": "Night of 2026-11-21: Night of 2026-11-21. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Try "
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom handed this to Claude: The what to do doesn't tell me what to do",
+     "at": "2026-11-22T06:19:35.119Z"
     }
    ],
    "created": "2026-11-21",
@@ -29450,7 +29455,18 @@
      ]
     ]
    ],
-   "night_key": "2026-11-21"
+   "night_key": "2026-11-21",
+   "tag": "t-lastnight",
+   "note": "The what to do doesn't tell me what to do",
+   "prompt": {
+    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
+    "effort": "medium (a handed-over card is usually one piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "c-win3skip",
