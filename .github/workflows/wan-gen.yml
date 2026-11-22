@@ -170,3 +170,12 @@ jobs:
           git add -A
           git commit -q -m "wangen: results and ledger (run ${{ github.run_id }}) [skip ci]"
           git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" wangen
+      - name: Rebuild the Video History and push it to main (videohist2)
+        if: ${{ inputs.dry_run != 'true' && steps.mode.outputs.mode != 'none' && steps.mode.outputs.mode != 'jobs' && always() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # fresh clone of main inside publish.py (this checkout is shallow and main may have moved); needs ffmpeg for the strips (installed above)
+          python3 -I tools/videohist/publish.py --branch-dir "$RUNNER_TEMP/wangen" --run-id "${{ github.run_id }}" \
+            --remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"

@@ -37,4 +37,38 @@ with sync_playwright() as pw:
         sw = pg.evaluate('document.documentElement.scrollWidth'); ok(sw <= vp['width'] + 1, 'H2 %s: no sideways scroll (%d)' % (lay, sw))
         ok(not errs, 'H2 %s: no page errors %s' % (lay, errs[:2]))
     br.close()
+# videohist2: the wan-gen Action rebuilds the history and pushes it to main (tools/videohist/publish.py), tested against a local bare repo
+import subprocess, tempfile, shutil, sys, re as _re
+def sh(*c, cwd=None): return subprocess.run(c, cwd=cwd, capture_output=True, text=True)
+tmp = tempfile.mkdtemp()
+try:
+    seed = os.path.join(tmp, 'seed'); bare = os.path.join(tmp, 'bare.git'); bdir = os.path.join(tmp, 'wangen'); os.makedirs(bdir)
+    for rel in ('tools/videohist/build.py', 'tools/art-library/wangen-jobs.json'):
+        os.makedirs(os.path.dirname(os.path.join(seed, rel)), exist_ok=True); shutil.copy(os.path.join(ROOT, rel), os.path.join(seed, rel))
+    os.makedirs(os.path.join(seed, 'data', 'clips')); open(os.path.join(seed, 'data', 'clips', '.keep'), 'w').write(''); open(os.path.join(seed, 'other.txt'), 'w').write('one')
+    sh('git', 'init', '-q', '-b', 'main', cwd=seed); sh('git', 'add', '-A', cwd=seed)
+    sh('git', '-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-q', '-m', 'seed', cwd=seed)
+    sh('git', 'clone', '-q', '--bare', seed, bare)
+    for n, col in (('fake-rise-r1.mp4', 'red'), ('fake-rise-a2-r1.mp4', 'blue')):
+        sh('ffmpeg', '-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=%s:s=64x64:d=1:r=24' % col, '-pix_fmt', 'yuv420p', os.path.join(bdir, n))
+    json.dump({'job': 'fake-rise', 'rev': 1, 'attempts': [{'file': 'fake-rise-r1.mp4', 'failed': ['feet', 'edge']}, {'file': 'fake-rise-a2-r1.mp4', 'failed': []}]}, open(os.path.join(bdir, 'fake-rise-r1-result.json'), 'w'))
+    json.dump({'calls': [{'file': 'fake-rise-r1.mp4', 'est': 0.5, 'at': '2026-11-22'}]}, open(os.path.join(bdir, 'state.json'), 'w'))
+    # the first push is refused once (as if main moved during the run), and main really does move: other.txt changes
+    hook = os.path.join(bare, 'hooks', 'pre-receive'); mark = os.path.join(tmp, 'refused')
+    open(hook, 'w').write('#!/bin/sh\nif [ ! -f %s ]; then touch %s; echo refused >&2; exit 1; fi\n' % (mark, mark)); os.chmod(hook, 0o755)
+    r = sh(sys.executable, os.path.join(ROOT, 'tools', 'videohist', 'publish.py'), '--branch-dir', bdir, '--remote', bare, '--run-id', '777')
+    ok(r.returncode == 0 and 'pushed on try 2' in r.stdout, 'H4 publish pushes after one refused push (%s)' % (r.stdout + r.stderr)[-200:].replace('\n', ' | '))
+    chk = os.path.join(tmp, 'chk'); sh('git', 'clone', '-q', bare, chk)
+    msg = sh('git', 'log', '-1', '--format=%s', cwd=chk).stdout.strip()
+    ok(msg == 'videohist: rebuilt after wan-gen run 777 [skip ci]', 'H4 commit message (%s)' % msg)
+    changed = sh('git', 'show', '--name-only', '--format=', 'HEAD', cwd=chk).stdout.split()
+    ok(changed and all(c == 'data/video-history.json' or c.startswith('art/video-history/') for c in changed), 'H4 only the two history paths change %s' % changed)
+    h = json.load(open(os.path.join(chk, 'data', 'video-history.json')))
+    by = {v['file']: v for v in h['videos']}
+    ok(set(by) == {'fake-rise-r1.mp4', 'fake-rise-a2-r1.mp4'} and by['fake-rise-r1.mp4']['verdict'] == 'rejected' and by['fake-rise-a2-r1.mp4']['verdict'] == 'passed', 'H4 two made-up videos with verdicts')
+    ok(all(v['strip'] and os.path.exists(os.path.join(chk, v['strip'])) for v in h['videos']), 'H4 strips were made')
+    r2 = sh(sys.executable, os.path.join(ROOT, 'tools', 'videohist', 'publish.py'), '--branch-dir', bdir, '--remote', bare, '--run-id', '778')
+    ok(r2.returncode == 0 and 'nothing to push' in r2.stdout, 'H4 a second run with nothing new pushes nothing')
+finally:
+    shutil.rmtree(tmp, ignore_errors=True)
 print('FAILS:', fails)

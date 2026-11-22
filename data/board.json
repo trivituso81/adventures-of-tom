@@ -34832,7 +34832,7 @@
    "theme": "Battle Animations",
    "tag": "videohist2",
    "title": "Video History rebuilds itself after every video run",
-   "next": "Make the wan-gen Action rebuild data/video-history.json and the strips after each run and push them to main.",
+   "next": "Shipped as videohist2: the wan-gen Action rebuilds the Video History after each run that made videos.",
    "blocks": [],
    "auto": true,
    "created": "2026-11-21",
@@ -34853,6 +34853,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built the publish step (tools/videohist/publish.py) and the wan-gen step; tested against a local repo with two made-up videos and a refused push. Not run for real until the next wan-gen run."
     }
    ],
    "prompt": {
@@ -34864,7 +34868,8 @@
     "effort": "medium (one workflow step and a test)",
     "text": "Read CLAUDE.md (sections wanauto1 and wanstuck1), docs/CHANGES.md \"videohist1\", tools/videohist/build.py and .github/workflows/wan-gen.yml, then card c-videohist-auto in data/board.json. Add a step to the wan-gen job, after \"Keep the results and the ledger on the wangen branch\" and only when a video was made (not a dry run, not mode none): run python3 tools/videohist/build.py --branch-dir \"$RUNNER_TEMP/wangen\" on a fresh checkout of main, then commit data/video-history.json and art/video-history/ with the message \"videohist: rebuilt after wan-gen run followed by the run id, ending in [skip ci]\" and push to main, fetching and rebasing up to 5 times when main moved (take main's copy of every file except those two on a conflict). The build must keep working when the workflow checkout is shallow. Test it with a local branch-dir holding two made-up videos and a result file (extend tools/videohist/videohist_test.py), write the CHANGES heading ## videohist2 and push. After: nothing for Tom: end. Your first push is the commit board: start c-videohist-auto. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:29:42+00:00"
+   "started_at": "2026-11-22T05:29:42+00:00",
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
