@@ -31308,8 +31308,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (8 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 2 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (14 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 8 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31352,6 +31352,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 14 report(s)."
     }
    ],
    "blocks": [],
@@ -31493,7 +31497,7 @@
    "id": "c-battleux-cards",
    "tag": "board-battleux",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Make the battle screen build cards",
    "next": "Done. Tom approved as shown, so no change to the plan or the mock. Wrote the build cards in order: Build the new battle screen (battleux1, Sonnet 5.5 high), Write the one-line move descriptions (battleux2, Opus 5.5 medium), Add the scene marks and remove the proposal page (battleux3, Sonnet 5.5 medium), and Tom's one play card at the end.",
@@ -31542,9 +31546,14 @@
     {
      "d": "2026-11-21",
      "t": "Wrote c-battleux1, c-battleux2, c-battleux3 (each waits on the one before) and t-battleuxplay (opens when c-battleux3 ships). No change to the plan or mock: Tom approved as shown."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-battleux: the battle screen redesign is approved; its three build cards and your play card are on the board"
     }
    ],
-   "after": "nothing for Tom: c-battleux1"
+   "after": "nothing for Tom: c-battleux1",
+   "done": "2026-11-21"
   },
   {
    "id": "c-voicefast1",
@@ -31905,6 +31914,38 @@
      "t": "Added by board-battleux: Tom's one play card for the battle screen redesign (plan section 5). Opens when c-battleux3 ships."
     }
    ]
+  },
+  {
+   "id": "c-takes-e8fba6",
+   "tag": "takes-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -32604,6 +32645,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGgmCFuvp5uENEHv55",
+   "title": "Make the battle screen build cards",
+   "first": "2026-11-21T17:55:47-08:00",
+   "last": "2026-11-21T18:01:20-08:00",
+   "tags": [
+    "board-battleux"
+   ],
+   "cards": [
+    "c-battleux-cards"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
    "title": "Fix: Generate the two fixed videos",
    "first": "2026-11-21T17:55:54-08:00",
@@ -32613,16 +32666,6 @@
     "c-fix-wanstop-gen",
     "c-wanstop-rose-giddyup-r7",
     "c-wanstop-deedee-wetfloor-r6"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGgmCFuvp5uENEHv55",
-   "title": "Make the battle screen build cards",
-   "first": "2026-11-21T17:55:47-08:00",
-   "last": "2026-11-21T17:55:47-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleux-cards"
    ]
   },
   {
@@ -36664,7 +36707,13 @@
    "r-20261121-173717-wjou",
    "r-20261121-174051-vxq1",
    "r-20261121-174119-0522",
-   "r-20261121-174358-pwub"
+   "r-20261121-174358-pwub",
+   "r-20261121-180018-jc8f",
+   "r-20261121-180027-tyq4",
+   "r-20261121-180035-bjdf",
+   "r-20261121-180050-39xy",
+   "r-20261121-180126-mdm1",
+   "r-20261121-180138-yorh"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36699,11 +36748,13 @@
    "takes/20261122T014818-vsj/part-001.json",
    "takes/20261122T014818-vsj/state.json",
    "takes/20261122T015428-cdp/part-001.json",
-   "takes/20261122T015428-cdp/state.json"
+   "takes/20261122T015428-cdp/state.json",
+   "takes/20261122T015924-pqq/part-001.json",
+   "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "1fb89eb24a78d9bb86b280db865264815494efd6",
- "synced_at": "2026-11-22T01:58:39+00:00",
+ "synced": "d335b42d2c46bf99fd524dc7ccf1b2d8f7995d81",
+ "synced_at": "2026-11-22T02:02:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
