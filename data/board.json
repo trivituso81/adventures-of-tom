@@ -30480,7 +30480,7 @@
     "sal|Besides, you just got here. Go see your mother. She made apple muffins."
    ],
    "blocks": [],
-   "next": "Open ADMIN > BOARD, find this card, tap Generate all 16 voices (two taps). When it finishes, open ADMIN > VOICE LIBRARY with the button below, set Show to Built-in clip, and play a few. Tap All good, or Something is wrong and say which line you heard. Note: 3 changed lines (Rose and the tin, Deedee at the bridge, Grace on the map) never had a recording and are not on this card; they play speech synthesis as before.",
+   "next": "Listen to the new voices. Open ADMIN > VOICE LIBRARY with the button below (Show: No clip yet is now empty for these lines; use Built-in clip). Play a few. Tap All good if they sound right, or Something is wrong and say which line and what you heard.",
    "links": [
     {
      "to": "voice",
@@ -30520,6 +30520,11 @@
      "d": "2026-11-22",
      "t": "Tom approved generating 16 voices (about 955 credits).",
      "at": "2026-11-22T20:35:18.048Z"
+    },
+    {
+     "d": "2026-11-22",
+     "at": "2026-11-22T20:39:03Z",
+     "t": "Voice job done: 16 made, 0 need a human, about 627 credits (build voices-t-crispvoices-617)."
     }
    ],
    "vgen": {
@@ -30529,9 +30534,40 @@
     "chars": 2171,
     "est": 955,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T20:37:02Z",
-     "n": 16
+     "state": "done",
+     "at": "2026-11-22T20:39:02Z",
+     "n": 16,
+     "made": [
+      "boppy|Gracie, my apple muffins are under there.",
+      "deedee|Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
+      "grace|Tata. At the apple muffins.",
+      "rose|Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
+      "tom|Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
+      "kit|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.",
+      "sal|Besides, you just got here. Go see your mother. She made apple muffins.",
+      "boppy|I'll stay here and guard the apple muffins, Deary.",
+      "deedee|Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
+      "grace|Your apple muffins are under California, Boppy. Don't move. I'm presenting.",
+      "rose|Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
+      "tom|She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
+      "boppy|Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
+      "deedee|A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
+      "boppy|Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
+      "boppy|And the apple muffins are excellent."
+     ],
+     "failed": [],
+     "needs_human": [],
+     "credits": 627,
+     "chars": 2171,
+     "build": "voices-t-crispvoices-617",
+     "note": "",
+     "unused": [
+      "1. kinds never called: {}",
+      "2. attack pool only reachable as a fallback (every move has its own line): [] (check scenes and Move Lab by hand)",
+      "3. baked battle clips with no live line: 0",
+      "4. dialogue clips not in harvest or source: 0",
+      "5. lines for replaced moves (old animation code still exists): {}"
+     ]
     }
    }
   },
