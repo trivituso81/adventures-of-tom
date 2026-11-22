@@ -1358,6 +1358,13 @@
    "outdir": true
   },
   {
+   "id": "board_wanstale_test",
+   "cmd": "python3 -I tools/board_wanstale_test.py",
+   "group": "g2",
+   "minutes": 1,
+   "outdir": true
+  },
+  {
    "id": "hollow_spot_test",
    "cmd": "python3 -I tools/hollow_spot_test.py",
    "group": "g6",

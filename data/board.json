@@ -31808,7 +31808,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Make Rose's Giddyup with Tom in it",
-   "next": "Tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
+   "next": "Open this card on the board. Under Videos on this card it should now say 1 video left to make: tom-rose-giddyup and show a yellow button Generate all 1 video (about $0.79). If the board was already open it can take up to a minute, and it says Getting the job list... meanwhile, never Nothing to make. Tap the button twice. Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
    "wan": {
     "jobs": [
      "tom-rose-giddyup"
@@ -31817,7 +31817,7 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "build": "pairmove1",
    "chat": {
     "url": "",
@@ -31832,6 +31832,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Says nothing to make migrant lei Sent to Claude as card c-fix-pairmove1-gen; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T04:31:48.393Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed by fix-pairmove1-gen: the board page read the video job list once when it opened, so this card (added later) counted 0 videos and said Nothing to make right now. It now reads the list again every minute and while the card is open. Generate all 1 video is the next tap."
     }
    ],
    "waiting_on": "claude"
@@ -34132,7 +34136,7 @@
     "t-pairmove1-gen"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "reports": [
     {
      "at": "2026-11-22T04:31:47.204Z",
@@ -34167,6 +34171,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Reproduced (the page before the fix shows \"Nothing to make right now.\" when the card arrives after the page opened) and fixed in board.html; new test tools/board_wanstale_test.py. No pencil report filed since 04:31:47Z. Shipped as fix-pairmove1-gen."
     }
    ],
    "prompt": {

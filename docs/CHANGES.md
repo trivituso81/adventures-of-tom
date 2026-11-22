@@ -1,3 +1,15 @@
+## fix-pairmove1-gen (2026-11-22): the board's video button no longer says Nothing to make for a card added after the page opened
+
+Card c-fix-pairmove1-gen, for t-pairmove1-gen. Tom (11-21 20:31): "Says nothing to make migrant lei" (spoken; the same words as his earlier note on fix-wanstop-gen: "the button says nothing to make right now").
+
+| What | Detail |
+|---|---|
+| Cause (fact) | `board.html` re-read the board from GitHub every minute, but read the video job list (`tools/art-library/wangen-jobs.json`) only once, from the site copy, when the page first opened. pairmove1 added the card and its job `tom-rose-giddyup` at 20:30; a board page open since before then got the card but not the job, counted 0 videos left, and showed "Nothing to make right now." Nothing was spent and no run was asked. |
+| Fix | `loadWjobs` reads the job list again on every board reload, from GitHub (main) when the board is live (`ghFile`, the same read as the board, `ghBoard` now calls it), else the site copy. A job the list does not have yet is never counted as nothing to make: the card says "The job list has not caught up with this card yet" and the button "Getting the job list..." (disabled). The minute reload is skipped while a card is open, so an open card that names an unknown job asks for the list itself (`wjobsCatchUp`, at most every 20 seconds) and turns into Generate all 1 video when it arrives. |
+| Test | New `python3 tools/board_wanstale_test.py` (serves a copy of the site whose job file lags, like GitHub Pages): S1 the card and job are pushed while the page is open, then the card says Generate all 1 video (about $0.79); S2 the card is there and the job file is behind, the button never says Nothing to make and the open card catches up by itself; portrait and landscape, no sideways scroll, no page errors. The page before this fix fails S1 and S2 with Tom's exact words "Nothing to make right now." Pictures /tmp/board/board-wanstale-s1-*.png, s2-*.png, s2b-*.png (looked at). `python3 tools/board_wan_test.py` passes. |
+| Not this build | `python3 tools/board_test.py` stops at its Something is wrong step on the live board, with or without this change: its test report joins the open Tools fix card c-fix-artgen3try-3 instead of making c-fix-test2. Left for that card. |
+| Pencil reports | `python3 tools/reports.py list`: none filed since 2026-11-22T04:31:47Z; nothing to mark done. |
+
 ## movefun2 (2026-11-22): the three flat family moves get one-sentence fixes and their videos are started
 
 Card c-movefun-fix. Tom answered "Fix all of them" on t-movefun-pick. Each move changed one sentence of its prompt; everything else is kept. Nothing was run by this session; the `wan-gen` Action makes the videos (card t-movefun-gen, cap $9.60).

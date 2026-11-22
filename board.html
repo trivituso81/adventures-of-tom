@@ -249,9 +249,11 @@ function ago(iso){if(!iso)return 'no push yet';const m=Math.max(0,Math.round((no
 
 // bigboard1: GitHub's contents API leaves `content` empty once a file passes 1 MB (data/board.json reached 1.05 MB on 2026-11-20,
 // so every save failed with "JSON.parse: unexpected end of data"). Read big files through the git blob API instead (works to 100 MB).
-async function ghBoard(tok){
+// fix-pairmove1-gen: any repo file read like the board (contents API, blob fallback over 1 MiB); ghBoard is this for the board file.
+async function ghBoard(tok){return ghFile(PATH,tok);}
+async function ghFile(path,tok){
   const H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
-  const r=await fetch(URLF()+'?ref=main&t='+Date.now(),{cache:'no-store',headers:H});
+  const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+path+'?ref=main&t='+Date.now(),{cache:'no-store',headers:H});
   if(r.status===404)return null;
   if(!r.ok)throw new Error('GitHub '+r.status);
   const j=await r.json();let c=j.content||'';
@@ -721,10 +723,21 @@ function vgenTap(id){
 // makes, checks, bakes and wires them (tools/art-library/wanbulk.py) and writes wgen.run. The estimate is the job file's seconds x price, a retry of an edge miss can add one more video per job.
 let WJOBS=null,WGENARM='';
 const hasWan=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&((c.wan||{}).jobs||[]).length>0;
+// fix-pairmove1-gen (Tom 11-21: "Says nothing to make right now" on t-pairmove1-gen): the job list was read once, from the site copy, when the page opened,
+// while the board itself is re-read from GitHub every minute. A card added later named a job the page had never seen, so it counted 0 left. Now the list is
+// read again on every board reload, from GitHub (main) when the board is live, and a job the list does not have yet is never counted as nothing to make.
+const WJOBS_PATH='tools/art-library/wangen-jobs.json';
 async function loadWjobs(){
-  if(!B||!B.cards.some(hasWan)||WJOBS)return;
-  try{const r=await fetch((Q.get('wjobs')||'tools/art-library/wangen-jobs.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok)WJOBS=await r.json();}catch(e){}
+  if(!B||!B.cards.some(hasWan))return;
+  let j=null;const tok=lsGet(TOKEN);
+  if(!Q.get('wjobs')&&(tok||Q.get('gh'))){try{const g=await ghFile(WJOBS_PATH,tok);if(g)j=g.doc;}catch(e){}}
+  if(!j){try{const r=await fetch((Q.get('wjobs')||WJOBS_PATH)+'?t='+Date.now(),{cache:'no-store'});if(r.ok)j=await r.json();}catch(e){}}
+  if(j)WJOBS=j;
 }
+const wanUnknown=c=>(c.wan.jobs||[]).filter(j=>WJOBS&&!WJOBS[j]);
+// The minute reload is skipped while a card is open, so an open card that names an unknown job asks for the list itself (at most every 20 seconds).
+let wjobsAsk=0,wjobsT=0;
+function wjobsCatchUp(){if(wjobsT)return;wjobsT=setTimeout(()=>{wjobsAsk=nowMs();loadWjobs().then(()=>{wjobsT=0;rerender();});},Math.max(0,2e4-(nowMs()-wjobsAsk)));}
 const wMoney=x=>'$'+(Math.round(x*100)/100).toFixed(2);
 // fix-wanstop-gen (2026-11-21): a job the last run finished is done only at the rev it was made at. A session that fixes a stopped job raises
 // its rev, and the job is listed again (Tom 11-21: "the button says nothing to make right now. but there is no video made").
@@ -758,14 +771,15 @@ function wanHtml(c,compact){
   const g=c.wgen||{},run=g.run||{},left=wanLeft(c),n=left.length,est=wanEst(left),cap=wanCap(c);
   const stale=run.state==='running'&&run.at&&(Date.now()-Date.parse(run.at))>3*3600e3;
   const busy=g.want||(run.state==='running'&&!stale);
-  const held=wanStoppedOpen(c);
-  const head=n?n+' video'+(n===1?'':'s')+' left to make: '+left.map(esc).join(', ')
+  const held=wanStoppedOpen(c),unk=wanUnknown(c);
+  const head=unk.length&&!n?'The job list has not caught up with this card yet ('+unk.map(esc).join(', ')+'). It is read again every minute.':n?n+' video'+(n===1?'':'s')+' left to make: '+left.map(esc).join(', ')
     :held.length?'No video passed the checks yet. Stopped by the checks and being fixed by Claude: '+held.map(x=>esc(x.what)+(x.card?' (card '+esc(x.card)+')':'')).join(', ')+'.'
     :'Every video of this card is made.';
   let h='<div class="pics"><h4>Videos on this card</h4><div class="gm" style="margin:0">'+head+'</div>';
   let why='';
   if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' video'+((run.n||n)===1?'':'s')+'...';
   else if(c.col==='wait'){const by2=blockedBy(c);why='Waiting on: '+(by2.length?by2.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
+  else if(!n&&unk.length){why='Getting the job list...';wjobsCatchUp();}
   else if(!n)why=held.length?'A Claude session is fixing the stopped video'+(held.length===1?'':'s')+' and starts the next try by itself (wanauto1).':'Nothing to make right now.';
   const arm=WGENARM===c.id,txt=wMoney(est);
   h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="wgen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+txt+', at most '+wMoney(cap)+')':'Generate all '+n+' video'+(n===1?'':'s')+' (about '+txt+')')+'</button>';
