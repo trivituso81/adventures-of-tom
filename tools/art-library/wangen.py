@@ -256,8 +256,9 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue, progress
     doc = gqueue.load('data/wan-requests.json', a.repo)
     reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
-    say('%d guide request(s) found' % len(reqs))
-    if reqs and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
+    sps = [r for r in doc.get('requests') or [] if r.get('startpic') and isinstance(r.get('take'), int)]   # startpics1: Make the start picture
+    say('%d guide request(s) found, %d start picture request(s)' % (len(reqs), len(sps)))
+    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
     for r in reqs:
         what = 'guide-%s-t%d' % (r['slug'], r['take'])
@@ -283,7 +284,25 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         rows.append(row)
         json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)   # guidestuck1: after EVERY video, so a run that dies keeps what it made
     json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
-    return 0 if all(not r.get('error') for r in rows) else 2
+    code = 0 if all(not r.get('error') for r in rows) else 2
+    if sps:
+        import startpic
+        judge = None
+        if os.environ.get('XAI_API_KEY') and not a.dry_run:
+            import artqa
+            judge = artqa.Judge(os.environ['XAI_API_KEY'], os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
+        srows, scode = startpic.run(a, jobs, state, lock, save, fal, key, sps, run_one, judge, today, startpic.publish if not a.no_take else (lambda *x, **k: True))
+        old = []
+        try: old = json.load(open(os.path.join(a.out, 'startpic-results.json')))['results']
+        except Exception: pass
+        json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1)
+        code = code or scode
+        if judge is not None and judge.spent and not a.dry_run:
+            try:
+                import costlog
+                costlog.log_from_env([{'service': 'xai', 'amount': round(judge.spent, 4), 'what': 'wan-gen Action: start picture facing check', 'source': 'wan-gen run'}])
+            except Exception as x: say('warning: could not log the xAI spend: ' + str(x)[:200])
+    return code
 
 
 def log_run_spend(state, spent0, a, names, extra=None):

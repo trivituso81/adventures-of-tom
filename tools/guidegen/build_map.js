@@ -187,6 +187,7 @@ function build() {
   const used = { jobs: new Set(), entries: new Set() };
   const startOf = o => G.CAST[o] ? 'art/clips/start/' + o + '-hero.png' : 'art/clips/start/' + o + '.png';
   const figOf = {}; Object.values(S.E).forEach(x => { if (figOf[x.owner] == null && x.e.clip.figRows) figOf[x.owner] = x.e.clip.figRows; });
+  const FIGROWS = jread('tools/guidegen/figrows.json', {});   // startpics1: sprite heights of the people who have no Art Library clip entry (tools/guidegen/figrows.py)
   const nameOf = o => (G.CAST[o] || G.FOES[o] || {}).name || cap(o);
 
   // owners: route, start picture, pattern
@@ -205,9 +206,11 @@ function build() {
       const p = idle.e.prompt; head = p.slice(0, p.indexOf('MOTION:')).replace('A short looping animation', 'A short animation');
       tail = (p.match(/\n\nLength about[\s\S]*$/) || ['\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n'])[0];
     }
-    owners[o] = { name: nameOf(o), route: fam ? 'wan' : 'xai', start: has ? st : null, patternHead: head, patternTail: tail, figRows: figOf[o] == null ? null : figOf[o],
+    owners[o] = { name: nameOf(o), route: fam ? 'wan' : 'xai', start: has ? st : null, patternHead: head, patternTail: tail, figRows: figOf[o] != null ? figOf[o] : FIGROWS[o] != null ? FIGROWS[o] : null,
+      canStart: fam && !has && !!S.jobs['start-' + o], startCost: S.jobs['start-' + o] ? S.jobs['start-' + o].est : undefined,
       missing: has ? '' : fam
-        ? `No start picture for ${nameOf(o)} yet. It needs ${st}: a large picture of ${nameOf(o)} facing left on a flat magenta background, made from the hero picture the way the start pictures of Tom, Grace, Rose and Deedee were (a start-<who> job in tools/art-library/wangen-jobs.json).`
+        ? S.jobs['start-' + o] ? `No start picture for ${nameOf(o)} yet. Press Make the start picture below: it redraws ${nameOf(o)}'s hero picture facing left on flat magenta (about $${S.jobs['start-' + o].est.toFixed(2)}), checks it, and puts it in the game.`
+        : `No start picture for ${nameOf(o)} yet. It needs ${st}: a large picture of ${nameOf(o)} facing left on a flat magenta background, made from the hero picture the way the start pictures of Tom, Grace, Rose and Deedee were (a start-<who> job in tools/art-library/wangen-jobs.json).`
         : `No start picture for ${nameOf(o)} yet. It needs ${st}, made from the monster's battle idle frame with tools/clip-bake/make_start.py ${o}.` };
   }
 
@@ -274,7 +277,7 @@ function build() {
       owner: a.owner, kind: a.kind, name: a.name, state: a.state || undefined, clip: a.clip || null, video: !!clipFile,
       newClip, route: ow.route, job, entry: ent ? ent.e.id : null, prompt, promptSource: source, promptRev: rev, promptFile,
       madeBy: made ? (made.route === 'wan' ? 'wan job ' + made.job + ' rev ' + made.rev : 'entry clip-' + made.entry + ' v' + made.rev) : null, laterTries: laterTries || undefined, madeNote: madeNote || undefined,
-      start, canMake: !!start && ow.figRows != null, missing: !start ? ow.missing : ow.figRows == null ? 'The sprite height (figRows) of ' + ow.name + ' is not known yet, so a take cannot be cut into a clip.' : '',
+      start, canStart: !start && !!ow.canStart, startWho: !start && ow.canStart ? a.owner : undefined, startCost: !start && ow.canStart ? ow.startCost : undefined, canMake: !!start && ow.figRows != null, missing: !start ? ow.missing : ow.figRows == null ? 'The sprite height (figRows) of ' + ow.name + ' is not known yet, so a take cannot be cut into a clip.' : '',
       price, priceNote, pad: pad || undefined, recipe: rname, figRows: ow.figRows, brief: briefOf(a, lr), what: a.what, slug: slug(a.id),
     };
   }

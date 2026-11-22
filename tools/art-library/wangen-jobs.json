@@ -1368,5 +1368,113 @@
   },
   "pad": 0.8,
   "why": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)"
+ },
+ "start-amy": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/amy-hero-v2.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ "start-boppy": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/boppy-hero-v2.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ "start-justin": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/justin-hero-v2.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ "start-olivia": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/olivia-hero-v1.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ "start-tnb": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/tnb-hero-v1.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ "start-nara": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1/edit",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/hero-leftfacing-magenta-dog-v1.txt",
+  "images": {
+   "image_urls": [
+    "art/raw/characters/nara-hero-v1.png"
+   ]
+  },
+  "input": {
+   "aspect_ratio": "2:3",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
  }
 }

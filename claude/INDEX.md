@@ -597,6 +597,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-squaremusic.md | The Square music remake: stopped by the stop-loss rule (Tom 2026-11-19 19:07 to 19:12) | 2026-11-19 |
 | next-addendum-stage1.md | next addendum: boss staging (stage1, 2026-11-09) | 2026-11-09 |
 | next-addendum-starter1.md | starter1 (2026-11-12 ~19:00, main ea9498c): chapter 2 "Feed the starter" scene did not start | 2026-11-12 |
+| next-addendum-startpics1.md | startpics1 (2026-11-22): start pictures for the rest of the cast | 2026-11-22 |
 | next-addendum-story-gates.md | Story gates: inventory and Art Library entries (Tom 2026-11-06 15:58, CHANGES 401) | 2026-11-06 |
 | next-addendum-story1.md | Whole-game story thread handoff (story1, 2026-11-13 07:55). claude/next.md was NOT edited by this session. | 2026-11-13 |
 | next-addendum-story2.md | Story thread handoff (story2, final rewrite 2026-11-13 12:45). Supersedes claude/next-addendum-story1.md. clau | 2026-11-13 |
@@ -671,6 +672,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | assessment-2026-11-08.md | Game assessment, 2026-11-08 (main at 17f8eed, build tombo11) | 2026-11-08 |
 | attn-plan.md | Needs attention: automatic rescue (attn1), plan of 2026-11-20 | 2026-11-20 |
 | audit-fix4-part3.md | Audit fix 4, part 2 finished: no more freezes (2026-11-02, NO PUSH, nothing changed in the repo) | 2026-11-02 |
+| b3look-plan.md | Battle screen: the new menu's look, and only what is needed (b3look-plan, 2026-11-22) | 2026-11-22 |
 | bonus-chapter-nine-scoops.md | Bonus Chapter: Nine Scoops (premise) | 2026-11-22 |
 | boss-endings-spec.md | Boss endings: Step 2 spec (bossend2, 2026-11-11) | 2026-11-11 |
 | boss-finale-status-11-11.md | Boss endings status (2026-11-11 15:10) | 2026-11-11 |
