@@ -31486,7 +31486,7 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then cards c-battleux-cards\""
    },
    "prompt": {
     "what": "Reads your answer on the battle screen redesign, applies any changes you asked for to the plan and the mock, and writes the build cards with their prompts, models and effort.",
@@ -31514,6 +31514,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T01:54:06.308Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: Tom approved as shown, so this session writes the build cards battleux1 to battleux3 and his play card."
     }
    ]
   },
