@@ -31844,8 +31844,19 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 video (about $0.79).",
+     "at": "2026-11-22T05:13:54.128Z"
     }
-   ]
+   ],
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T05:13:54Z",
+    "n": 1,
+    "est": 0.79
+   }
   },
   {
    "id": "c-wanstuck1",
