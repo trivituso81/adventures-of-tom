@@ -31647,6 +31647,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 video (about $0.79).",
      "at": "2026-11-22T04:01:13.343Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44983183373: 1 made and checked, 0 passed, 1 stopped, 0 left for the next tap."
     }
    ],
    "wgen": {
@@ -31655,10 +31659,34 @@
     "n": 1,
     "est": 0.79,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T04:03:13Z",
+     "state": "done",
+     "at": "2026-11-22T04:12:21Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44983183373",
-     "n": 1
+     "n": 1,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [
+      "deedee-wetfloor"
+     ],
+     "stopped": [
+      {
+       "what": "deedee-wetfloor",
+       "why": "failed twice: feet, edge",
+       "card": "c-wanstop-deedee-wetfloor-r8"
+      }
+     ],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 1.57,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "deedee-wetfloor": 8
+     }
     }
    }
   },
@@ -33676,6 +33704,41 @@
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   }
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r8",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-deedee-wetfloor-r8",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "next": "The bulk run stopped deedee-wetfloor (failed twice: feet, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-wanmop1-gen",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (44983183373): deedee-wetfloor stopped at rev 8. attempt 1 (pad 0.65) bg; attempt 2 (pad 0.65) feet, edge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r8 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 8) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73). This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r8-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r8.mp4, deedee-wetfloor-a2-r8.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-wanmop1-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r8` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-wanmop1-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   }
  ],
