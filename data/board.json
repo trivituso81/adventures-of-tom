@@ -31002,10 +31002,10 @@
    "col": "prog",
    "theme": "Battle System",
    "title": "Battle screen redesign: the proposal",
-   "next": "Claude is writing a proposal for a new battle screen (the party and command panel, how a move is picked, read and aimed) for the Duo unfolded first, then desktop, Duo folded and a standard iPhone. Nothing in the game changes until Tom approves it in the chat; the build cards are made after that.",
+   "next": "The proposal is ready: ADMIN > Battle system > Battle screen redesign (proposal). It waits on your card Decide on the battle screen redesign. The build cards are made after you answer.",
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "prompt": {
     "what": "Writes the proposal for a new battle screen: how the game's battle system compares with modern RPGs, a new way to pick, read and aim a move, and drawings for the Duo unfolded, desktop, Duo folded and a standard iPhone. Nothing in the game changes.",
     "before": [
@@ -31027,8 +31027,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built battleux-plan: the proposal page and a mock Tom can tap (battle-ux.html), the plan (claude/battleux-plan.md), drawings of six screen sizes (claude/battleux-mock/). Nothing in the game changed. The mock was tested by script (taps, aim, use, Details, Ruckus, keys: FAILS []) and each size looked at. Known weak spots are in the plan, section 3.4. Seen and left alone: tools/admin_hub_test.py fails 'one link per fight' and tools/board_sync_test.py fails 3 checks on main before this push (not caused by it)."
     }
-   ]
+   ],
+   "after": "t-battleux-decide"
   },
   {
    "id": "c-reports-12",
@@ -31351,6 +31356,79 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r6 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 6) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears from side not behind back; multiple incons; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear put away behind back; returns to stance witho. Its files are on branch wangen: deedee-wetfloor-r6-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r6.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-battleux-decide",
+   "title": "Decide on the battle screen redesign",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "On the Duo, unfolded and held sideways: open ADMIN > Battle system > Battle screen redesign (proposal). It fills the screen with a mock you can tap. Tap Crunchy Sugar-Cube Pop once (the strip under the scene says what it does and what will happen), tap the other monster (the aim moves), tap the move again (it is used). Tap DETAILS in the top bar. Tap MOCK for Ruckus and the chapter 1 view. Then fold the phone and try it upright. On your computer the same address shows the reasons and all six screen sizes: https://trivituso81.github.io/adventures-of-tom/battle-ux.html . Then tap one answer here, or reply in the chat. Card Make the battle screen build cards waits on it.",
+   "steps": [
+    "Duo unfolded, sideways: ADMIN > Battle system > Battle screen redesign (proposal). Tap a move once, tap a monster, tap the move again.",
+    "Tap DETAILS in the top bar. Tap MOCK, then Ruckus 100%.",
+    "Fold the phone and look at it upright.",
+    "On your computer open https://trivituso81.github.io/adventures-of-tom/battle-ux.html for the reasons and the six screen sizes.",
+    "Tap one answer below. Write what to change in the note."
+   ],
+   "choices": [
+    "Approve as shown: make the build cards (Recommended)",
+    "Approve with changes (I wrote them in the note)",
+    "Not this direction (I wrote why in the note)"
+   ],
+   "leads": [
+    "Card Make the battle screen build cards writes the three build cards from claude/battleux-plan.md and your play card for the end.",
+    "The same card changes the plan and the mock by your note first, then writes the build cards.",
+    "The same card reworks the proposal from your note. Nothing is built."
+   ],
+   "blocks": [
+    "c-battleux-cards"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
+    "opening": "\"this is the side panel on unfolded duo landscape, which is my most important one. i think we need a total overhaul of the UX\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made by battleux-plan (card c-battleux-plan)."
+    }
+   ]
+  },
+  {
+   "id": "c-battleux-cards",
+   "tag": "board-battleux",
+   "lane": "claude",
+   "col": "wait",
+   "theme": "Battle System",
+   "title": "Make the battle screen build cards",
+   "next": "Waits on your card Decide on the battle screen redesign. From your answer it writes the build cards (the new screen, the words, the scene marks) and your one play card for the end, or changes the proposal first if you asked for changes. If you answer in the chat of the proposal instead, that chat does this and closes this card.",
+   "blocks": [],
+   "waiting_on": "tom",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Reads your answer on the battle screen redesign, applies any changes you asked for to the plan and the mock, and writes the build cards with their prompts, models and effort.",
+    "before": [
+     "Answer the card Decide on the battle screen redesign (tap an answer; write changes in the note)."
+    ],
+    "model": "Claude Opus 5.5 (row D: it turns your notes on a screen design into the plan and the mock, which you judge by taste)",
+    "effort": "medium (the plan is written; the piece is small)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then cards c-battleux-cards and t-battleux-decide in data/board.json, history included: Tom's answer and note on t-battleux-decide come first. Your first push is the commit board: start c-battleux-cards. Read claude/battleux-plan.md and open battle-ux.html (source in claude/battleux-mock/src/, build line in that folder's build.py). If he approved as shown: write the build cards of section 5 of the plan (battleux1, battleux2, battleux3, each with its tag, what, before steps, model with row letter, effort and a full prompt that names claude/battleux-plan.md and the mock source, per claude/handoff-rules.md) and his one play card for the end (ask play, where phone), with after and blocks set so the board job moves them. If he approved with changes: change the plan and the mock by the smallest change that answers each note, rebuild the page, look at the six screen sizes, then write the cards. If he said not this direction: rework the proposal from his note, write no build card, and hand him a new decide card. Change nothing in the game's battle code in this session. Build name board-battleux. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by battleux-plan. Tom (11-21): \"once approved, id ask you to create the corresponding cards to kick off the work with the appropriate models\"."
+    }
+   ]
   }
  ],
  "sessions": [

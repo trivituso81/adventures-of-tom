@@ -1,0 +1,113 @@
+<div class="vw">
+<header class="vh">
+  <div>
+    <p class="eye">PROPOSAL · NOT IN THE GAME · 21 NOV 2026</p>
+    <h1>Battle screen redesign</h1>
+    <p class="lede">One screen and no menus. Every move the family member has is on screen at once. The first tap on a move shows what it does and what it will do to the target. The second tap does it.</p>
+  </div>
+  <a class="cta" href="?frame=1">Open the mock full screen</a>
+</header>
+
+<section class="stagebox">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes" id="modes"></div>
+  <div class="stage" id="stage"><div class="dev" id="dev"><iframe id="fr" title="Tappable mock of the proposed battle screen"></iframe><img id="today" alt="The battle screen in the game today" hidden></div></div>
+  <p class="cap" id="cap"></p>
+</section>
+
+<section>
+  <h2>Try these in the mock</h2>
+  <table>
+    <tr><th>Do this</th><th>What it shows</th></tr>
+    <tr><td>Tap <b>Crunchy Sugar-Cube Pop</b> once</td><td>The strip under the scene reads as one sentence: the move, what it does, an arrow, the monster it is aimed at and what will happen to it. The turn bar shows the monster sliding back. Nothing has been used yet.</td></tr>
+    <tr><td>Tap the other monster</td><td>The aim moves. The forecast and the PET PEEVE tags on the moves change with it.</td></tr>
+    <tr><td>Tap the same move again (the gold USE bar)</td><td>It is used. The strip becomes the battle log while the move and the monsters play, then the next family member's moves appear.</td></tr>
+    <tr><td>Tap <b>DETAILS</b> (top bar; on a phone held upright it is above the moves)</td><td>Every move shows one plain line about what it does. Off: names, flavor and price only. The choice is remembered.</td></tr>
+    <tr><td>Tap <b>NeeDoh Stretch Pass</b>, then a family member's card or body</td><td>Moves for the family are aimed the same way. The turn bar shows who jumps ahead.</td></tr>
+    <tr><td>Tap <b>MOCK</b>, then Ruckus 50% or 100%</td><td>Double Team and Full Family Ruckus appear as gold moves at the top of the list when they can be used. There is no Ruckus menu.</td></tr>
+    <tr><td>Tap <b>MOCK</b>, then "5 moves (chapter 1)"</td><td>What chapter 1 looks like. The default view shows the most a person can ever have, 7 moves, to prove it fits.</td></tr>
+  </table>
+  <p class="fine">Move names and descriptions are the game's own. Damage numbers and turn positions are samples. The monsters in the mock never fall. On a keyboard: up and down pick a move, left and right aim, Enter uses, 1 to 9 pick directly.</p>
+</section>
+
+<section>
+  <h2>What is wrong today, measured on the Duo unfolded</h2>
+  <div class="two">
+    <img class="shot" id="steps" alt="Today's panel in four states: the cross, the Skills list, the skill card, the target list">
+    <table>
+      <tr><th>#</th><th>Today</th><th>Proposed</th></tr>
+      <tr><td>1</td><td>Everything lives in a strip 188 px wide, one fifth of the screen. Two bands of 763 x 72 px, above the turn bar and below the scene, are empty. The command box is 385 px tall and holds a 168 px cross.</td><td>The scene keeps its size (763 x 429). The empty band becomes a wide strip under the scene for the words. The whole right strip, top to bottom, is the party and the moves.</td></tr>
+      <tr><td>2</td><td>Four levels: cross, Skills list, skill card, target list. Reading a Skill and using it takes 4 taps (SKILLS, i, USE, target).</td><td>One level. 2 taps (the move, the move again). 3 if you change the aim.</td></tr>
+      <tr><td>3</td><td>One row does two things: the small i explains, the rest of the row fires. A slip of the thumb uses the Skill.</td><td>One rule everywhere: the first tap shows, the second tap does.</td></tr>
+      <tr><td>4</td><td>A description opens in a card that hides the other Skills, in a column 179 px wide (4 to 5 lines of text).</td><td>The description of the highlighted move is always on screen in 2 or 3 lines, with the other moves still visible. DETAILS adds a line to every move.</td></tr>
+      <tr><td>5</td><td>The cross has 4 slots. BAG is always dead, RUCKUS is dead until 50%. The arrows are keyboard hints shown on a touch screen. Pep, the number every choice depends on, is among the smallest text on the screen.</td><td>No cross. BASIC is the first move in the list and shows +2. Pep is a bar on top of the moves that shows what a move will cost before you use it. BAG appears when it exists.</td></tr>
+      <tr><td>6</td><td>Flavor pictures have no words. The Pocket picture is unexplained. A monster's Pet Peeves show only inside the skill card.</td><td>Every flavor is a picture, a color and its word together. Pocket moves sit under a labelled line. Pet Peeves are drawn under each monster, and a move that hits one says PET PEEVE on the move.</td></tr>
+      <tr><td>7</td><td>Targets are picked from a list of names in the strip while the targets stand on screen.</td><td>Tap the monster or the family member. The list stays for keyboard and gamepad as left and right.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>How it compares with modern RPGs</h2>
+  <p>Our system is a turn-order battle with a build-and-spend resource and a break meter. Its closest relatives are Honkai: Star Rail, Octopath Traveler II and Clair Obscur: Expedition 33, with Final Fantasy X's turn order. Their screens share the habits in this table. Today's screen follows two of them in part: Skills show a price, and the turn bar previews a push.</p>
+  <table>
+    <tr><th>Piece of our system</th><th>Games built on the same idea</th><th>What their screen does</th><th>What the proposal takes</th></tr>
+    <tr><td>BASIC is free and builds Pep, Skills spend it</td><td>Expedition 33 (AP), Star Rail (skill points), Octopath (BP)</td><td>The resource sits next to the moves. Every move shows its price. Moves you cannot afford are dimmed.</td><td>Pep bar on top of the moves, a price on every move, "needs 2 more Pep" on the ones out of reach, +2 on the Basic.</td></tr>
+    <tr><td>5 to 7 moves from two Vibes</td><td>Pokémon (4 moves always on screen), Expedition 33 (6 slotted skills), Slay the Spire (the text is on the card)</td><td>No submenu for moves. The text is on the move or one press away.</td><td>One flat list, Basic included. Full text of the highlighted move always shown. DETAILS for a line on every move.</td></tr>
+    <tr><td>Touch first</td><td>Star Rail, Pokémon on phones</td><td>Tap a move to pick it, tap it again to confirm. Tap a monster to aim.</td><td>The same. No spot on a row that behaves differently from the rest of the row.</td></tr>
+    <tr><td>Pet Peeves, Resists, Composure, Break</td><td>Octopath, Star Rail, Persona 5</td><td>Weaknesses are drawn on the enemy with its break counter. A move that hits a weakness is marked in the list.</td><td>Pet Peeve badges under each monster. PET PEEVE or RESISTS on the move while that monster is aimed at.</td></tr>
+    <tr><td>Turn bar with pushes and pulls</td><td>Final Fantasy X, Star Rail</td><td>Picking a move shows where everyone will stand in the order before you commit.</td><td>Already built (the ghost face). It now shows the moment a move is highlighted, not inside a card.</td></tr>
+    <tr><td>Family Ruckus gauge</td><td>Limit and Ultimate gauges (FF7 Remake, Star Rail), Persona 5's All-Out Attack</td><td>The gauge is always in view. The big move appears as its own button when it is ready.</td><td>Ruckus bar always in view. Double Team and Full Family Ruckus appear as gold moves when they can be used.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>The four screens</h2>
+  <table>
+    <tr><th>Screen</th><th>Layout</th><th>Scene size, today then proposed</th><th>Moves visible without scrolling (of 7)</th></tr>
+    <tr><td><b>Duo unfolded, sideways</b> 951 x 648</td><td>Turn bar on top. Scene. Sentence strip under the scene. Right strip: party, Pep and Ruckus, moves.</td><td>763 x 429, unchanged</td><td>7. With Details on: 5, the rest scroll.</td></tr>
+    <tr><td><b>Desktop</b> 1440 x 900</td><td>Same as the Duo with a wider right strip, so Details is on by default.</td><td>1080 x 608, then 1066 x 599</td><td>7 with their one-line details.</td></tr>
+    <tr><td><b>Duo folded, upright</b> 466 x 657</td><td>Turn bar, scene, party in one row, sentence strip, moves in two columns under the thumbs.</td><td>466 x 262, unchanged</td><td>6. The 7th scrolls. Chapter 1's 5 fit.</td></tr>
+    <tr><td><b>Duo folded, sideways</b> 678 x 445</td><td>The Duo unfolded layout, smaller.</td><td>502 x 282, then 494 x 278</td><td>4. The rest scroll.</td></tr>
+    <tr><td><b>iPhone, upright</b> 393 x 852</td><td>Same as the Duo folded upright, with more room for moves.</td><td>393 x 221, unchanged</td><td>7.</td></tr>
+    <tr><td><b>iPhone, sideways</b> 852 x 393</td><td>No room under the scene, so the sentence is a two-line caption on the sky. Party is a 2 x 2 block.</td><td>about the same</td><td>4. The rest scroll.</td></tr>
+  </table>
+  <p class="fine">The two short sideways phone screens are the weakest: 393 and 445 px of height cannot hold a party and 7 moves. They work, with scrolling. The move you have highlighted is always scrolled into view.</p>
+</section>
+
+<section>
+  <h2>What stays as it is</h2>
+  <table>
+    <tr><th>Stays</th><th>Why</th></tr>
+    <tr><td>Every battle rule, number, move and monster</td><td>This is the screen only. The rules already work out the forecast (the preview the skill card shows today); the new screen shows the same data in a new place.</td></tr>
+    <tr><td>The turn bar</td><td>You did not name it and it reads well. It gets slimmer on the Duo (52 px, was 75) and holds the speed and exit buttons.</td></tr>
+    <tr><td>Rose Mode (pictures and the glowing recommended move)</td><td>Pictures go on the same moves; the recommended move is the one highlighted when the turn opens.</td></tr>
+    <tr><td>Battle animations</td><td>Out of scope, by your rule of 19 Nov.</td></tr>
+    <tr><td>The old battle (bonus chapter until it moves over)</td><td>Untouched. The new layout applies to the new battle only.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Calls I made that you can overrule</h2>
+  <table>
+    <tr><th>Call</th><th>Why</th><th>The other way</th></tr>
+    <tr><td>The scene on the Duo keeps its size. The right strip stays 188 px.</td><td>You asked on 11 Nov for the left side as big as possible. Long move names wrap to 2 or 3 lines as a result.</td><td>A 220 px strip: names on fewer lines, scene 4% smaller.</td></tr>
+    <tr><td>A tap on a monster aims. It never fires.</td><td>One meaning per gesture; a monster is a big target and easy to touch by accident.</td><td>Tap the aimed monster again to fire: faster, riskier.</td></tr>
+    <tr><td>BASIC is highlighted when a turn opens, aimed where that person last aimed it.</td><td>The commonest turn becomes one tap.</td><td>Nothing highlighted until you tap.</td></tr>
+    <tr><td>The one line per move (DETAILS) is written by hand, about 120 lines for the 10 family members.</td><td>A line made from the rules by a formula reads like a formula.</td><td>Generate them from the move data: free, stiffer.</td></tr>
+    <tr><td>Flavor pictures are redrawn as six flat symbols in the flavor's color.</td><td>The emoji pictures are different styles and sizes and vanish at 13 px.</td><td>Keep the emoji and only add the words.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>If you approve: the build</h2>
+  <table>
+    <tr><th>Card</th><th>What it does</th><th>Model and effort</th></tr>
+    <tr><td>1. The new screen</td><td>Builds this layout and the tap, aim, use flow in the new battle for all four screens, keyboard and gamepad included. Removes the cross, the Skills list, the skill card and the target list and their code. Rewrites the screen tests that drive them.</td><td>Sonnet 5.5, high (row C: the design is written, the code path is not)</td></tr>
+    <tr><td>2. The words</td><td>Writes the one line per move and the forecast wording.</td><td>Opus 5.5, medium (row D: short lines you judge by taste)</td></tr>
+    <tr><td>3. On the scene</td><td>Pet Peeve badges and the aim marker on the scene, the Pep forecast, Rose Mode pictures on the new moves.</td><td>Sonnet 5.5, medium (row B: steps written by card 1)</td></tr>
+    <tr><td>4. Yours</td><td>Play three Battle Lab fights on the Duo unfolded and one on the iPhone, once, after card 3.</td><td>One play card at the end, not one per stage</td></tr>
+  </table>
+  <p class="fine">Tell me in the chat: approve, or what to change. I make the cards after that. This page and its pictures are removed from the site when card 1 ships.</p>
+</section>
+</div>
