@@ -30805,7 +30805,7 @@
   {
    "id": "c-wanstop-deedee-wetfloor-r5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r5",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -30813,15 +30813,20 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "added by the wan-gen job"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44967949648): deedee-wetfloor stopped at rev 5. attempt 1 (pad 0.65) edge, p1, p2. Evidence: edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; swee; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clea"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T01:12:26.326Z"
     }
    ],
    "prompt": {
