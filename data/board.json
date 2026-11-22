@@ -31351,6 +31351,29 @@
    },
    "after": "t-startpics-try",
    "done": "2026-11-22"
+  },
+  {
+   "id": "b-wannoday1",
+   "tag": "wannoday1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "no daily limit on battle videos",
+   "next": "Done: no daily limit on battle videos",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEw6MQskmRVRAiFVBm",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wannoday1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
@@ -31463,7 +31486,7 @@
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T13:05:01-08:00",
+   "last": "2026-11-22T13:11:12-08:00",
    "tags": [
     "startpics1",
     "startpics2",
@@ -31471,7 +31494,8 @@
     "startpics4",
     "startpics5",
     "startpics7",
-    "guide"
+    "guide",
+    "startpics8"
    ],
    "cards": [
     "c-startpics",
@@ -31479,8 +31503,19 @@
     "c-startpics3",
     "c-startpics4",
     "c-startpics5",
-    "c-startpics7"
+    "c-startpics7",
+    "c-startpics8"
    ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEw6MQskmRVRAiFVBm",
+   "title": "no daily limit on battle videos",
+   "first": "2026-11-22T13:10:42-08:00",
+   "last": "2026-11-22T13:10:42-08:00",
+   "tags": [
+    "wannoday1"
+   ],
+   "cards": []
   },
   {
    "url": "https://claude.ai/code/session_01RXeukE8rGGnCeamLccpvwH",
@@ -37086,8 +37121,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ac1b1e28b1c27313ebb5838c25f0e25b5c732423",
- "synced_at": "2026-11-22T21:08:06+00:00",
+ "synced": "fb3d04a854aa052408da7b42033288688e428227",
+ "synced_at": "2026-11-22T21:11:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
