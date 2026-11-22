@@ -34360,6 +34360,11 @@
      "d": "2026-11-22",
      "t": "Added by movefun2. Tom chose Fix all of them on t-movefun-pick.",
      "at": "2026-11-22T04:56:15Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Run requested (wanauto1): 3 videos, cap $9.60.",
+     "at": "2026-11-22T04:57:05Z"
     }
    ],
    "waiting_on": "claude"
