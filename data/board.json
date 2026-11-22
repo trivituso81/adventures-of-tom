@@ -30140,7 +30140,7 @@
   {
    "id": "c-movestage",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "movestage1",
    "title": "Moves in three layers: body video, stage, set piece",
@@ -30179,10 +30179,15 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as movestage1: plan, Tom's eight rows and body prompts, 12 asset prompts, Guide gate (112 family moves wait, 8 staged). Next card c-movestage-build."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as movestage1: Plan for moves that grow with each rank (body video, stage, set piece), Tom's eight moves written that way, other family moves wait in the Battle Guide"
     }
    ],
    "started_at": "2026-11-22T18:05:00+00:00",
-   "after": "nothing for Tom: c-movestage-build"
+   "after": "nothing for Tom: c-movestage-build",
+   "done": "2026-11-22"
   },
   {
    "id": "c-movestage-build",
@@ -30303,6 +30308,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDgeg1TQUp7kzdFksg",
+   "title": "Moves in three layers: body video, stage, set piece",
+   "first": "2026-11-22T10:06:14-08:00",
+   "last": "2026-11-22T10:43:31-08:00",
+   "tags": [
+    "movestage1"
+   ],
+   "cards": [
+    "c-movestage"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGCwdEYmep2ZkkJjUm",
    "title": "Battle stage 21: Vibe Mastery, Casual Mode, Vibe save",
    "first": "2026-11-22T09:06:02-08:00",
@@ -30312,16 +30329,6 @@
    ],
    "cards": [
     "c-b3s21"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDgeg1TQUp7kzdFksg",
-   "title": "Moves in three layers: body video, stage, set piece",
-   "first": "2026-11-22T10:06:14-08:00",
-   "last": "2026-11-22T10:06:14-08:00",
-   "tags": [],
-   "cards": [
-    "c-movestage"
    ]
   },
   {
@@ -35827,8 +35834,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "5b603de3475c77fdea1d4dd423660e890a767798",
- "synced_at": "2026-11-22T18:16:25+00:00",
+ "synced": "a46041e0fd183d357220d3e612d3abde8add3323",
+ "synced_at": "2026-11-22T18:44:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
