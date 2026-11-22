@@ -29853,6 +29853,11 @@
     {
      "d": "2026-11-21",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T01:24:54.282Z"
     }
    ],
    "prompt": {
@@ -29867,7 +29872,8 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   }
+   },
+   "start": true
   },
   {
    "id": "b-voices-t-ch2voices-315",
