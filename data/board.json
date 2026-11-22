@@ -21616,7 +21616,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
@@ -21720,14 +21720,18 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:12:37.744Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
+    "url": "https://claude.ai/code/cse_01RXeukDhdxE5xuhxYR1NXhn",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
    "after": "t-boppy-bigfish-cap2",
-   "start": true
+   "started_at": "2026-11-22T01:13:19+00:00"
   },
   {
    "id": "c-qa-coh01",
@@ -30890,7 +30894,7 @@
    "id": "c-reports-11",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-165412-a75h. First note: before this, we need a line where Grace jumps up and says \"Tata, look! There's the mud blob holding ",
@@ -30904,7 +30908,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEZdH8UYYeG9RP9wsa",
     "opening": "not started"
    },
    "history": [
@@ -30916,12 +30920,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:12:42.445Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T01:13:19+00:00"
   },
   {
    "id": "c-battleux-plan",
@@ -35624,8 +35632,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "12bfa83f4e0bb26a5631adbe62d0fc3396523115",
- "synced_at": "2026-11-22T01:12:34+00:00",
+ "synced": "f6fa1e469d8d63244d6c786f493d47df81066334",
+ "synced_at": "2026-11-22T01:13:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
