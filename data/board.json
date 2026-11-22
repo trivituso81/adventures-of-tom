@@ -31790,8 +31790,8 @@
     "c-battleux2"
    ],
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux1 in data/board.json.\""
    },
    "next": "Builds the battle screen you approved, in the new battle only, on all six screen sizes: one list of moves, tap once to read and again to use, tap a monster to aim, the strip under the scene that says what will happen, and the DETAILS switch. The old cross, Skills list, skill card, target list and i icon are removed. Rules and numbers do not change. Then the words card starts.",
    "prompt": {
@@ -31812,6 +31812,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T02:01:57.956Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Session started on Sonnet 5.5; building the screen from claude/battleux-plan.md."
     }
    ]
   },
