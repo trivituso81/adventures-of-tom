@@ -1502,7 +1502,21 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts)."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-suitedoor",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "suite_door_slide"
+   }
+  }
  },
  "tom-controller": {
   "rev": 1,
@@ -1529,7 +1543,21 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts)."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-controller",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "controller_toss"
+   }
+  }
  },
  "tom-shell": {
   "rev": 1,
@@ -1556,7 +1584,21 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts)."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-shell",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "winged_shell_lock_on"
+   }
+  }
  },
  "tom-konami": {
   "rev": 1,
@@ -1583,7 +1625,21 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts)."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-konami",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "konami_code"
+   }
+  }
  },
  "tom-porsche": {
   "rev": 1,
@@ -1609,7 +1665,21 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-porsche",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "tarmac_porsche_transfer"
+   }
+  }
  },
  "tom-cartridge": {
   "rev": 1,
@@ -1635,6 +1705,492 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage."
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "bake": {
+   "id": "tom-cartridge",
+   "owner": "tom",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 99.3
+  },
+  "wire": {
+   "stage": {
+    "move": "cartridge_blow"
+   }
+  }
+ },
+ "stage-tom-bluebang": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-bluebang-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/bluebang",
+   "kind": "obj",
+   "bg": "black",
+   "px": 320
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-glare": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-glare-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/glare",
+   "kind": "obj",
+   "bg": "black",
+   "px": 384
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-carryon": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-carryon-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/carryon",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 320
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-suitedoor": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-suitedoor-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/suitedoor",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 384
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-porsche": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-porsche-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/porsche",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 384
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-controller": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-controller-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/controller",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 192
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-wingedshell": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-wingedshell-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/wingedshell",
+   "kind": "obj",
+   "bg": "magenta",
+   "px": 192
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-runwaylights": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-runwaylights-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/runwaylights",
+   "kind": "obj",
+   "bg": "black",
+   "px": 384
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-jetwash": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-jetwash-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/jetwash",
+   "kind": "obj",
+   "bg": "black",
+   "px": 256
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-fireball": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-fireball-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/fireball",
+   "kind": "obj",
+   "bg": "black",
+   "px": 128
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-starbeam": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-starbeam-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/starbeam",
+   "kind": "obj",
+   "bg": "black",
+   "px": 160
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-meteor": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-tom-meteor-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "tom/meteor",
+   "kind": "obj",
+   "bg": "black",
+   "px": 160
+  },
+  "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-tom-bluebang-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-bluebang-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/bluebang",
+   "kind": "obj",
+   "bg": "black",
+   "loop": false,
+   "px": 320,
+   "step": 4,
+   "after": "stage-tom-bluebang"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-glare-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-glare-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/glare",
+   "kind": "obj",
+   "bg": "black",
+   "loop": false,
+   "px": 384,
+   "step": 4,
+   "after": "stage-tom-glare"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-wingedshell-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-wingedshell-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/wingedshell",
+   "kind": "obj",
+   "bg": "magenta",
+   "loop": true,
+   "px": 192,
+   "step": 3,
+   "after": "stage-tom-wingedshell"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-runwaylights-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-runwaylights-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/runwaylights",
+   "kind": "obj",
+   "bg": "black",
+   "loop": true,
+   "px": 384,
+   "step": 4,
+   "after": "stage-tom-runwaylights"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-jetwash-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-jetwash-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/jetwash",
+   "kind": "obj",
+   "bg": "black",
+   "loop": false,
+   "px": 256,
+   "step": 3,
+   "after": "stage-tom-jetwash"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-fireball-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-fireball-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/fireball",
+   "kind": "obj",
+   "bg": "black",
+   "loop": true,
+   "px": 128,
+   "step": 3,
+   "after": "stage-tom-fireball"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-starbeam-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-starbeam-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/starbeam",
+   "kind": "obj",
+   "bg": "black",
+   "loop": true,
+   "px": 160,
+   "step": 3,
+   "after": "stage-tom-starbeam"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+ },
+ "stage-tom-meteor-vid": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/stage-tom-meteor-motion-v1.txt",
+  "input": {
+   "resolution": "480p",
+   "aspect_ratio": "1:1",
+   "duration": 3,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "stage": {
+   "key": "tom/meteor",
+   "kind": "obj",
+   "bg": "black",
+   "loop": true,
+   "px": 160,
+   "step": 3,
+   "after": "stage-tom-meteor"
+  },
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  }
 }

@@ -18,7 +18,7 @@ Env: FAL_KEY, XAI_API_KEY (look checks), XAI_BASE (stand-in), GITHUB_* (the run'
 import os, sys, re, json, copy, time, shutil, threading, datetime, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import wangen, wanqa, wanbake, artgen
+import wangen, wanqa, wanbake, wanstage, artgen
 from falq import say
 
 VISION_ROOM = .30   # most dollars of look checks for one video
@@ -78,6 +78,7 @@ def write_result(out, what, rev, r):
 
 def pipeline(what, job, ctx):
     """One job from the first call to its verdict. Returns a row: {what, rev, state: passed|stopped|capped|error|unchecked|already|dry, ...}."""
+    if job.get('stage'): return stage_pipeline(what, job, ctx)
     a, out, log = ctx['a'], ctx['out'], ctx['log']
     rev = job['rev']
     prior = load_result(out, what, rev)
@@ -148,6 +149,70 @@ def pipeline(what, job, ctx):
     return {'what': what, 'rev': rev, 'state': 'stopped', 'result': r, 'retried': len(attempts) > 1}
 
 
+def stage_pipeline(what, job, ctx):
+    """movestage2: one stage job (a picture, or an object video that starts from a picture) from the first call to its verdict. Same shape and same
+    states as `pipeline`, plus `waiting`: an object video whose picture has not passed is not made (nothing sent, nothing spent)."""
+    a, out, log = ctx['a'], ctx['out'], ctx['log']
+    rev = job['rev']; st = job['stage']; bg = st['bg']; isvid = job['kind'] == 'video'
+    prior = load_result(out, what, rev)
+    if prior and prior.get('verdict') in ('passed', 'stopped'):
+        log('%s rev %d already has a result (%s): nothing sent.' % (what, rev, prior['verdict']))
+        return {'what': what, 'rev': rev, 'state': 'already', 'verdict': prior['verdict']}
+    picture = pic_png = None
+    if isvid:
+        pj = st['after']; pjob = ctx['jobs'][pj]
+        pr = load_result(out, pj, pjob['rev'])
+        if not pr or pr.get('verdict') != 'passed' or not os.path.exists(os.path.join(out, pr.get('file', ''))):
+            why = 'its picture %s has not passed yet (%s)' % (pj, (pr or {}).get('verdict') or 'not made')
+            log('%s waits: %s. Nothing sent.' % (what, why))
+            if a.dry_run: return {'what': what, 'rev': rev, 'state': 'dry', 'would_send': False}
+            return {'what': what, 'rev': rev, 'state': 'waiting', 'why': why}
+        picture = os.path.join(out, pr['file']); pic_png = open(picture, 'rb').read()
+    skip = wanqa.skips(job); attempts = []
+    cfg = ctx.get('cfg') or settings({})
+    for n in range(2):
+        if not a.dry_run:
+            bud = budget(what, job, ctx['state'], cfg)
+            if not bud['day_ok']:
+                if not attempts: return {'what': what, 'rev': rev, 'state': 'capped', 'why': 'the $%.0f a day for videos is spent ($%.2f today)' % (cfg['day_dollars'], bud['day_spent'])}
+                break
+            if not bud['job_ok']:
+                if not attempts: return {'what': what, 'rev': rev, 'state': 'gaveup', 'why': 'used its %d tries ($%.2f of $%.2f)' % (bud['tries'], bud['spent'], cfg['job_dollars']), 'budget': bud}
+                break
+        j = copy.deepcopy(job)
+        if picture:
+            j['frame'] = picture; j['fit'] = 'asis'; j['frame_fields'] = ['start_image_url'] + (['end_image_url'] if st.get('loop') else [])
+        name = what if n == 0 else '%s-a%d' % (what, n + 1)
+        code, rep = wangen.run_one(name, j, a, ctx['state'], ctx['lock'], ctx['save'], ctx['fal'], ctx['key'], log)
+        if code == 3: return {'what': what, 'rev': rev, 'state': 'capped', 'why': 'the run cap would be passed'}
+        if a.dry_run: return {'what': what, 'rev': rev, 'state': 'dry', 'would_send': bool(rep.get('would_send'))}
+        file = rep.get('file') or rep.get('already')
+        if code or not file: return {'what': what, 'rev': rev, 'state': 'error', 'why': str(rep.get('error') or 'nothing was made')[:300]}
+        path = os.path.join(out, file)
+        try: m = wanstage.measure_vid(path, bg, bool(st.get('loop'))) if isvid else wanstage.measure_pic(path, bg)
+        except Exception as x: return {'what': what, 'rev': rev, 'state': 'error', 'why': 'it could not be measured: %s' % str(x)[:200]}
+        fm = wanqa.fails(m, None, skip); v = None
+        if not fm:
+            if ctx['judge'] is None and not a.no_vision:
+                return {'what': what, 'rev': rev, 'state': 'unchecked', 'why': 'XAI_API_KEY is missing: the look checks could not run; it is kept and checked again at the next tap (no new charge)'}
+            v = wanstage.judge_it(job, dict(ctx, room=VISION_ROOM), m, path, pic_png)
+            if v is not None and v.get('skipped'): return {'what': what, 'rev': rev, 'state': 'unchecked', 'why': 'the look checks did not run (%s); it is kept and checked again at the next tap' % v['skipped']}
+        f = wanqa.fails(m, v, skip); ev = wanqa.evidence(m, v, skip)
+        attempts.append({'name': name, 'file': file, 'pad': None, 'failed': f, 'evidence': ev, 'checks': wanqa.slim(m), 'vision': v,
+                         'look_checks': 'not run (a measurement failed first)' if v is None else 'run'})
+        log('%s attempt %d: %s' % (what, n + 1, 'PASSED' if not f else 'failed: ' + ', '.join(f)))
+        if not f:
+            r = {'what': what, 'rev': rev, 'verdict': 'passed', 'file': file, 'n': m.get('n', 1), 'fps': m.get('fps', 0), 'attempts': attempts, 'at': now_iso(), 'skipped_checks': sorted(skip), 'merged': None}
+            write_result(out, what, rev, r)
+            return {'what': what, 'rev': rev, 'state': 'passed', 'result': r, 'retried': n > 0}
+        if n == 0: log('%s: failed %s, so it is made once more with every setting the same (a re-roll).' % (what, ', '.join(f)))
+    last = attempts[-1]
+    r = {'what': what, 'rev': rev, 'verdict': 'stopped', 'file': last['file'], 'attempts': attempts, 'at': now_iso(), 'evidence': last['evidence'],
+         'why': ('failed twice' if len(attempts) > 1 else 'failed') + ': ' + ', '.join(last['failed'])}
+    write_result(out, what, rev, r)
+    return {'what': what, 'rev': rev, 'state': 'stopped', 'result': r, 'retried': len(attempts) > 1}
+
+
 # ------------------------------------------------------------------ cards
 def plain_why(why):
     """fix-pairmove1-gen-2: the reason a video was not made, in Tom's words (the board's wanPlain says the same)."""
@@ -169,6 +234,7 @@ def history_line(run_id, rows, build=None):
     if made:
         parts[0] += ' (%d passed%s, %d stopped%s)' % (len(by.get('passed', [])), ' and in the game, build %s' % build if build else '',
                                                     len(by.get('stopped', [])), ', %d not checked yet' % len(by['unchecked']) if by.get('unchecked') else '')
+    if by.get('waiting'): parts.append('waiting on a picture that did not pass, nothing sent: ' + ', '.join(r['what'] for r in by['waiting']))
     if by.get('already'): parts.append('already made, nothing sent: ' + ', '.join(r['what'] for r in by['already']))
     if by.get('gaveup'): parts.append('out of tries: ' + ', '.join(r['what'] for r in by['gaveup']))
     rv = [r['what'] for r in rows if r.get('revisit')]
@@ -250,11 +316,15 @@ def apply_all(root, items, jobs, out, card, run, notes, bad):
         job = jobs[w]
         r = it['result']
         try:
+            if job.get('stage'):
+                try: note = wanstage.bake(root, job, os.path.join(out, r['file']), r['n'], r['fps'], run)
+                except wanstage.BakeError as x: raise wanbake.BakeError(str(x))
+                notes[w] = note; continue
             note = wanbake.bake(root, job, os.path.join(out, r['file']), r['n'], r['fps'], 'wanbulk %s run %s: %s' % (card, run, r['file']))
             if job.get('wire'):
                 wnote = wanbake.wire(root, job)
-                rel = job['wire']['move']['file'] if 'move' in job['wire'] else 'data/b3-clips.js'
-                if not wanbake.syntax_ok(root, rel): raise wanbake.BakeError('%s does not parse after the wire edit' % rel)
+                rel = job['wire']['move']['file'] if 'move' in job['wire'] else ('data/b3-clips.js' if 'body' in job['wire'] else None)
+                if rel and not wanbake.syntax_ok(root, rel): raise wanbake.BakeError('%s does not parse after the wire edit' % rel)
                 note += '; wired: ' + wnote
             else: note += '; not wired (the job has no `wire` field)'
             notes[w] = note
@@ -270,7 +340,7 @@ def merge(repo, a, items, jobs, out, card, run, build, log):
     for attempt in range(8):
         repo.sync()
         notes.clear()
-        subprocess.run(['git', '-C', root, 'clean', '-fdq', '--', 'art/clips', 'data/clips'], check=False)
+        subprocess.run(['git', '-C', root, 'clean', '-fdq', '--', 'art/clips', 'data/clips', 'art/stage', 'data/stage', 'art/raw/stage'], check=False)
         w = apply_all(root, items, jobs, out, card, run, notes, bad)
         if w:
             log('bake failed for %s: %s' % (w, notes[w])); bad.add(w); why[w] = notes[w]; repo.git('reset', '-q', '--hard', 'HEAD'); continue
@@ -340,15 +410,18 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
         import artqa
         judge = artqa.Judge(xk, os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
     ctx = {'cfg': cfg, 'a': a, 'out': a.out, 'state': state, 'lock': lock, 'save': save, 'fal': fal, 'key': key, 'judge': judge, 'vlock': threading.Lock(), 'pads': cfg['pads'],
-           'log': lambda m: say(m), 'more': more}
+           'log': lambda m: say(m), 'more': more, 'jobs': jobs}
 
     def one(n):
         c = dict(ctx); c['log'] = lambda m, _n=n: say('[%s]' % _n, m)
         try: return pipeline(n, jobs[n], c)
         except Exception as x:
             say('[%s] ERROR: %s' % (n, x)); return {'what': n, 'rev': jobs[n]['rev'], 'state': 'error', 'why': str(x)[:300]}
+    # movestage2: a job that starts from another job's result (an object video from its picture) runs in a second pass, after every picture is judged
+    first = [n for n in names if not (jobs[n].get('stage') or {}).get('after')]; second = [n for n in names if (jobs[n].get('stage') or {}).get('after')]
     with ThreadPoolExecutor(max_workers=max(1, min(3, a.parallel, len(names)))) as ex:
-        rows = list(ex.map(one, names))
+        rows = list(ex.map(one, first))
+        if second: rows += list(ex.map(one, second))
     vspent = round(judge.spent, 4) if judge else 0.0
     passed = [r for r in rows if r['state'] == 'passed']
     stopped = [r for r in rows if r['state'] == 'stopped']
@@ -357,14 +430,14 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
     log_extra = [{'service': 'xai', 'amount': vspent, 'what': 'wan-gen bulk look checks: %s' % cid, 'source': 'wan-gen run'}] if vspent else []
     wangen.log_run_spend(state, spent0, a, names, log_extra)
     merged, notes, failed = [], {}, {}
-    bakeable = [r for r in passed if jobs[r['what']].get('bake')]
+    bakeable = [r for r in passed if jobs[r['what']].get('bake') or jobs[r['what']].get('stage')]
     if bakeable and cid:
         try: merged, notes, failed = merge(repo, a, bakeable, jobs, a.out, cid, run_id, build, say)
         except Exception as x: say('MERGE FAILED: %s' % x); failed = {r['what']: 'could not be merged: %s' % str(x)[:200] for r in bakeable}
     for r in passed:
         res = r['result']
         res['merged'] = build if r['what'] in merged else None
-        res['bake_note'] = notes.get(r['what']) or ('not baked: the job has no `bake` settings' if not jobs[r['what']].get('bake') else failed.get(r['what'], ''))
+        res['bake_note'] = notes.get(r['what']) or ('not baked: the job has no `bake` settings' if not (jobs[r['what']].get('bake') or jobs[r['what']].get('stage')) else failed.get(r['what'], ''))
         write_result(a.out, r['what'], r['rev'], res)
     rep = {'card': cid, 'build': build if merged else None, 'rows': [{k: v for k, v in r.items() if k != 'result'} for r in rows], 'spent_fal': round(state['spent'] - spent0, 4), 'spent_xai': vspent}
     json.dump(rep, open(os.path.join(a.out, 'wanbulk-report-%s.json' % run_id), 'w'), indent=1)
@@ -389,7 +462,10 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                     sc = gaveup_card(r['what'], r['rev'], r['why'], None, today, run_id, cfg, c['id'])
                     if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
             wid = ''
-            if merged:
+            if merged and (c.get('wan') or {}).get('watch') is False:
+                # movestage2: a card that judges its videos somewhere else (the Move Lab) gets no separate watch card
+                c['history'] = (c.get('history') or []) + [{'d': today, 't': 'wan-gen run %s: %s passed and are in the game (build %s). No watch card: %s' % (run_id, ', '.join(merged), build, (c.get('wan') or {}).get('watch_note') or 'Tom judges them where this card says.')}]
+            elif merged:
                 # wanauto1: one open watch card collects every passed video until Tom watches them, so automatic runs do not stack up cards
                 ow = next((x for x in b['cards'] if x.get('wanwatch') and x.get('col') != 'done' and x.get('lane') == 'tom'), None)
                 if ow:
@@ -401,11 +477,11 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                 else:
                     wc = watch_card(c, [{'what': w} for w in merged], build, run_id, today); wc['wanwatch'] = sorted(merged)
                     if wc['id'] not in have: b['cards'].append(wc); wid = wc['id']
-            states = {s: [r['what'] for r in rows if r['state'] == s] for s in ('passed', 'stopped', 'capped', 'unchecked', 'error', 'already', 'gaveup')}
+            states = {s: [r['what'] for r in rows if r['state'] == s] for s in ('passed', 'stopped', 'capped', 'unchecked', 'error', 'already', 'gaveup', 'waiting')}
             c['wgen']['run'] = {'state': 'done', 'at': now_iso(), 'run': artgen.run_url(), 'n': len(names), 'merged': merged,
                                 'passed_not_baked': [r['what'] for r in passed if r['what'] not in merged], 'retried': [r['what'] for r in rows if r.get('retried')],
                                 'stopped': [{'what': r['what'], 'why': r['result']['why'], 'card': ('t-wangaveup-%s-r%d' if r.get('gaveup') else 'c-wanstop-%s-r%d') % (r['what'], r['rev'])} for r in stopped],
-                                'capped': states['capped'], 'unchecked': states['unchecked'], 'errors': [{'what': r['what'], 'why': r.get('why')} for r in rows if r['state'] == 'error'],
+                                'waiting': states['waiting'], 'capped': states['capped'], 'unchecked': states['unchecked'], 'errors': [{'what': r['what'], 'why': r.get('why')} for r in rows if r['state'] == 'error'],
                                 'already': states['already'], 'gaveup': states['gaveup'] + [r['what'] for r in stopped if r.get('gaveup')], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid,
                                 'revs': {r['what']: r['rev'] for r in rows}}   # fix-wanstop-gen: the board page lists a job again once its rev is raised
             c['history'] = (c.get('history') or []) + [{'d': today, 't': history_line(run_id, rows, build if merged else None)}]

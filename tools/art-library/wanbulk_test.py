@@ -21,6 +21,20 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B12 wanstuck1: Tom's "Give it 4 more tries" answer resets that job's count; the card names the run's card
   B16 fix-pairmove1-gen-2: after "Give it 4 more tries", a rev stopped before the answer goes to a Claude stop card instead of "already"
   B15 fix-pairmove1-gen-2: the card's history line counts only videos actually made and names already made, out of tries and errors in plain words
+  B17 movestage2: a stage PICTURE job (text-to-image endpoint, prompt word for word) is measured (background colour, object whole and centred) and judged, then baked as a prop
+      (art/stage webp, data/stage js, a script tag after data/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
+  B18 movestage2: an OBJECT VIDEO starts from its picture as sent (no frame fitting), end_image_url only for a loop, 480p; measured (flat background, edges, it moves, a loop
+      closes) and judged (nobody in it); baked into one packed sheet; a video whose picture was stopped waits (nothing sent); a person in it, a still video and a loop that
+      does not close are stopped
+  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the row in data/b3-stage.js and the kit files are untouched); a row that names another
+      job is refused; wan.watch false leaves no watch card
+  B17 movestage2: a stage PICTURE job (text-to-image endpoint, prompt word for word) is measured (background colour, object whole and centred) and judged, then baked as a prop
+      (art/stage webp, data/stage js, a script tag after data/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
+  B18 movestage2: an OBJECT VIDEO starts from its picture as sent (no frame fitting), end_image_url only for a loop, 480p; measured (flat background, edges, it moves, a loop
+      closes) and judged (nobody in it); baked into one packed sheet; a video whose picture was stopped waits (nothing sent); a person in it, a still video and a loop that
+      does not close are stopped
+  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the row in data/b3-stage.js and the kit files are untouched); a row that names another
+      job is refused; wan.watch false leaves no watch card
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
 import numpy as np
@@ -75,6 +89,34 @@ def make_video(frame_png, scenario):
     return data
 
 
+def make_pic(scenario, bg):
+    """movestage2: a stage picture, 512 x 512: one round object on the flat background the prompt names (picbadbg: light grey instead; picedge: the object touches the edge)."""
+    col = {'magenta': (255, 0, 255), 'black': (0, 0, 0), 'white': (230, 230, 230)}['white' if scenario == 'picbadbg' else bg]
+    im = Image.new('RGB', (512, 512), col); d = ImageDraw.Draw(im)
+    c = (90, 150, 255) if bg == 'black' else (200, 60, 40)
+    cx = 90 if scenario == 'picedge' else 256
+    d.ellipse((cx - 110, 146, cx + 110, 366), fill=c); d.ellipse((cx - 50, 206, cx + 50, 306), fill=(255, 255, 255) if bg == 'black' else (250, 220, 120))
+    b = io.BytesIO(); im.save(b, 'PNG'); return b.getvalue()
+
+
+def make_obj_video(frame_png, scenario):
+    """movestage2: an object-only video, 480 x 480, 36 pictures at 12 per second, from the start picture it was sent: objpass swells and returns (first and last picture equal),
+    objfade shrinks away to the bare background, objstill does not move, objloopbad swells and stays swelled (last picture differs from the first)."""
+    im = Image.open(io.BytesIO(frame_png)).convert('RGB').resize((480, 480)); a = np.asarray(im).astype(np.int16)
+    bgc = np.median(np.concatenate([a[:10, :10].reshape(-1, 3), a[:10, -10:].reshape(-1, 3)]), 0)
+    N2 = 36; tf = tempfile.mktemp(suffix='.mp4')
+    p = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '480x480', '-r', '12', '-i', '-', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '12', tf], stdin=subprocess.PIPE)
+    for k in range(N2):
+        t = k / (N2 - 1)
+        sc = {'objpass': 1 + .3 * np.sin(np.pi * t), 'objfade': max(.02, 1 - t), 'objstill': 1.0, 'objloopbad': 1 + .5 * t}[scenario]
+        fr = Image.new('RGB', (480, 480), tuple(int(v) for v in bgc))
+        if sc != 1.0:
+            w = max(2, int(480 * sc)); sm = im.resize((w, w), Image.LANCZOS); fr.paste(sm, ((480 - w) // 2, (480 - w) // 2))
+        else: fr = im
+        p.stdin.write(np.asarray(fr).astype(np.uint8).tobytes())
+    p.stdin.close(); p.wait(); data = open(tf, 'rb').read(); os.remove(tf); return data
+
+
 class Fal(BaseHTTPRequestHandler):
     def log_message(self, *a): pass
 
@@ -88,11 +130,17 @@ class Fal(BaseHTTPRequestHandler):
             return self.j(200, {'prices': [{'endpoint_id': 'x', 'unit_price': .1, 'unit': 'seconds', 'currency': 'USD'}]})
         if self.path.endswith('/status'): return self.j(200, {'status': 'COMPLETED'})
         if '/requests/' in self.path:
-            rid = self.path.rsplit('/', 1)[1]; return self.j(200, {'video': {'url': base + '/files/%s.mp4' % rid}, 'seed': 1, 'duration': 2})
+            rid = self.path.rsplit('/', 1)[1]; sent = next(s for s in S['sent'] if s['rid'] == rid)
+            if sent['ep'].startswith('google/'): return self.j(200, {'images': [{'url': base + '/files/%s.png' % rid}]})   # movestage2: a stage picture
+            return self.j(200, {'video': {'url': base + '/files/%s.mp4' % rid}, 'seed': 1, 'duration': 2})
         if self.path.startswith('/files/'):
             rid = self.path.rsplit('/', 1)[1].split('.')[0]; body = next(s['body'] for s in S['sent'] if s['rid'] == rid)
             sc = re.search(r'SCENARIO (\w+)', body['prompt']).group(1)
-            data = make_video(base64.b64decode(body['start_image_url'].split(',', 1)[1]), sc)
+            if self.path.endswith('.png'):
+                data = make_pic(sc, re.search(r'BG (\w+)', body['prompt']).group(1))
+                self.send_response(200); self.send_header('Content-Length', str(len(data))); self.end_headers(); self.wfile.write(data); return
+            if sc.startswith('obj'): data = make_obj_video(base64.b64decode(body['start_image_url'].split(',', 1)[1]), sc)
+            else: data = make_video(base64.b64decode(body['start_image_url'].split(',', 1)[1]), sc)
             self.send_response(200); self.send_header('Content-Length', str(len(data))); self.end_headers(); self.wfile.write(data); return
         self.j(404, {})
 
@@ -119,12 +167,12 @@ seed = os.path.join(tmp, 'seed'); bare = os.path.join(tmp, 'remote.git')
 sh('git', 'init', '-q', '--bare', '-b', 'main', bare); sh('git', 'clone', '-q', bare, seed)
 def cp(rel):
     os.makedirs(os.path.dirname(os.path.join(seed, rel)), exist_ok=True); shutil.copy(os.path.join(ROOT, rel), os.path.join(seed, rel))
-for rel in ['wangen', 'falq', 'wanqa', 'wanbulk', 'wanbake', 'artgen', 'artqa', 'clipmarks']: cp('tools/art-library/%s.py' % rel)
+for rel in ['wangen', 'falq', 'wanqa', 'wanbulk', 'wanbake', 'wanstage', 'artgen', 'artqa', 'clipmarks']: cp('tools/art-library/%s.py' % rel)
 for f in os.listdir(os.path.join(ROOT, 'tools', 'clip-gate')):
     if f.endswith('.py'): cp('tools/clip-gate/' + f)
-for rel in ['tools/clip-bake/bake_clip.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js']: cp(rel)
+for rel in ['tools/clip-bake/bake_clip.py', 'tools/clip-bake/bake_stage.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js', 'data/b3-stage.js']: cp(rel)
 open(os.path.join(seed, 'tools/art-library/bump_tags.py'), 'w').write("import sys; open('bump.log', 'a').write(' '.join(sys.argv[1:]) + '\\n')\n")   # the real one runs in the Action; its own tests are tag_check and buildlog
-open(os.path.join(seed, 'index.html'), 'w').write('<html><body>\n<script src="data/clips/rose-boop.js?v=clip0"></script>\n</body></html>\n')
+open(os.path.join(seed, 'index.html'), 'w').write('<html><body>\n<script src="data/clips/rose-boop.js?v=clip0"></script>\n<script src="data/b3-stage.js?v=movestage1"></script>\n</body></html>\n')
 os.makedirs(os.path.join(seed, 'docs'), exist_ok=True); open(os.path.join(seed, 'docs/CHANGES.md'), 'w').write('## old (2026-11-01): an old entry\n\n')
 os.makedirs(os.path.join(seed, 'art/clips/start'), exist_ok=True)
 fig = Image.new('RGB', (848, 1264), (255, 0, 255)); ImageDraw.Draw(fig).rectangle((330, 120, 520, 1180), fill=(90, 60, 40)); ImageDraw.Draw(fig).ellipse((350, 60, 500, 200), fill=(200, 150, 120)); fig.save(os.path.join(seed, 'art/clips/start/test-hero.png'))
@@ -149,6 +197,34 @@ JOBS = {'_about': 'test', '_bulk': {'cap': 5, 'pads': [None, .8, .65]},
         't-nobake': job('t-nobake', 'pass', bake=False),
         't-still': job('t-still', 'still', wire=ROW),
         't-cap1': job('t-cap1', 'pass'), 't-cap2': job('t-cap2', 'pass'), 't-cap3': job('t-cap3', 'pass')}
+def sprompt(name, scenario, bg, extra=''):
+    open(os.path.join(PR, 'p-%s.txt' % name), 'w').write('ONE PICTURE OF ONE OBJECT FOR A GAME. SCENARIO %s BG %s\n\nA round test object, centred, with a wide empty margin. NAME %s\n%s\n' % (scenario, bg, name, extra))
+    return 'tools/art-library/prompts/p-%s.txt' % name
+def spic(name, key, kind, bg, scenario='picpass', extra='', **kw):
+    j = {'rev': 1, 'kind': 'image', 'endpoint': 'google/nano-banana-2.1', 'est': .15, 'prompt_file': sprompt(name, scenario, bg, extra),
+         'input': {'aspect_ratio': '1:1', 'resolution': '1K', 'num_images': 1, 'output_format': 'png'}, 'stage': {'key': key, 'kind': kind, 'bg': bg}, 'why': 'test'}
+    j.update(kw); return j
+def svid(name, key, bg, after, scenario, loop=False, extra='', **kw):
+    j = {'rev': 1, 'kind': 'video', 'endpoint': 'alibaba/wan-3.0/image-to-video', 'est_per_s': {'480p': .05}, 'prompt_file': sprompt(name, scenario, bg, extra),
+         'input': {'resolution': '480p', 'aspect_ratio': '1:1', 'duration': 3, 'audio': False, 'enable_prompt_expansion': True, 'seed': 81}, 'why': 'test',
+         'stage': {'key': key, 'kind': 'obj', 'bg': bg, 'loop': loop, 'after': after}}
+    j.update(kw); return j
+JOBS.update({
+    's-prop': spic('s-prop', 'tom/sprop', 'prop', 'magenta'),
+    's-bad': spic('s-bad', 'tom/sbad', 'prop', 'magenta', scenario='picbadbg'),
+    's-badvid': svid('s-badvid', 'tom/sbadvid', 'magenta', 's-bad', 'objpass'),
+    's-vision': spic('s-vision', 'tom/svision', 'prop', 'magenta', extra='FAIL:f_obj'),
+    's-gpic': spic('s-gpic', 'tom/sglow', 'obj', 'black'),
+    's-gvid': svid('s-gvid', 'tom/sglow', 'black', 's-gpic', 'objpass', loop=True),
+    's-loopbad': svid('s-loopbad', 'tom/sloopbad', 'black', 's-gpic', 'objloopbad', loop=True),
+    's-npic': spic('s-npic', 'tom/sshell', 'obj', 'magenta'),
+    's-nvid': svid('s-nvid', 'tom/sshell', 'magenta', 's-npic', 'objfade'),
+    's-pvid': svid('s-pvid', 'tom/sperson', 'magenta', 's-npic', 'objpass', extra='FAIL:f_none'),
+    's-still': svid('s-still', 'tom/sstill', 'magenta', 's-npic', 'objstill'),
+    'tom-suitedoor': job('tom-suitedoor', 'pass', wire={'stage': {'move': 'suite_door_slide'}}, bake=False),
+    'tom-lounge': job('tom-lounge', 'pass', wire={'stage': {'move': 'lounge_pass_flex'}}, bake=False)})
+JOBS['tom-suitedoor']['bake'] = {'id': 'tom-suitedoor', 'owner': 'tom', 'kind': 'strike', 'fps': 30, 'step': 2, 'speed': 1.5, 'fig_rows': 83}
+JOBS['tom-lounge']['bake'] = {'id': 'tom-lounge', 'owner': 'tom', 'kind': 'strike', 'fps': 30, 'step': 2, 'speed': 1.5, 'fig_rows': 83}
 json.dump(JOBS, open(os.path.join(seed, 'tools/art-library/wangen-jobs.json'), 'w'), indent=1)
 def board(cards): json.dump({'cards': cards}, open(os.path.join(seed, 'data', 'board.json'), 'w'), indent=1)
 os.makedirs(os.path.join(seed, 'data'), exist_ok=True)
@@ -156,7 +232,9 @@ def tom(cid, jobs, want=True, **kw):
     d = {'id': cid, 'lane': 'tom', 'col': 'up', 'theme': 'Battle Animations', 'ask': 'animations', 'title': 'Generate test videos', 'fyi': True, 'blocks': [], 'history': [], 'created': '2026-11-21', 'changed': '2026-11-21',
          'wan': {'jobs': jobs}, 'wgen': {'want': want}}
     d.update(kw); return d
-board([tom('t-wan', ['t-pass', 't-edge', 't-feet', 't-vision'], cap=None), tom('t-wan2', ['t-edge2', 't-pass2']), tom('t-wan3', ['t-cap1', 't-cap2', 't-cap3']), tom('t-wan4', ['t-nobake', 't-still']), tom('t-wan5', ['t-pass'])])
+board([tom('t-wan', ['t-pass', 't-edge', 't-feet', 't-vision'], cap=None), tom('t-wan2', ['t-edge2', 't-pass2']), tom('t-wan3', ['t-cap1', 't-cap2', 't-cap3']), tom('t-wan4', ['t-nobake', 't-still']), tom('t-wan5', ['t-pass']),
+       tom('t-stage1', ['s-prop', 's-bad', 's-badvid', 's-vision', 's-gpic', 's-gvid', 's-loopbad', 's-npic', 's-nvid', 's-pvid', 's-still'], wan={'jobs': ['s-prop', 's-bad', 's-badvid', 's-vision', 's-gpic', 's-gvid', 's-loopbad', 's-npic', 's-nvid', 's-pvid', 's-still'], 'cap': 5, 'watch': False, 'watch_note': 'Tom judges them in the Move Lab.'}),
+       tom('t-stage2', ['tom-suitedoor', 'tom-lounge'], wan={'jobs': ['tom-suitedoor', 'tom-lounge'], 'cap': 5, 'watch': False})])
 GIT = ['-c', 'user.name=t', '-c', 'user.email=t@t']
 sh('git', *GIT, 'add', '-A', cwd=seed); sh('git', *GIT, 'commit', '-q', '-m', 'seed', cwd=seed); sh('git', 'push', '-q', 'origin', 'HEAD:main', cwd=seed)
 
@@ -337,6 +415,70 @@ ok(hl.startswith('wan-gen bulk run R1: 0 made;') and 'already made, nothing sent
    'B15 a run that sent nothing says 0 made, names the already made videos and the fal error in plain words', hl)
 hl2 = _wb.history_line('R2', [{'what': 'a', 'state': 'passed'}, {'what': 'b', 'state': 'stopped'}, {'what': 'c', 'state': 'gaveup'}], 'wanbulk-x-R2')
 ok(hl2 == 'wan-gen bulk run R2: 2 made (1 passed and in the game, build wanbulk-x-R2, 1 stopped); out of tries: c.', 'B15 made, passed, stopped and out of tries are each counted once', hl2)
+
+# ------------------------------------------------------------------ B17 B18 B19: movestage2, the stage jobs
+S['sent'].clear()
+kit0 = main_file('data/b3-kit-rose.js'); stage0 = main_file('data/b3-stage.js')
+c, o, repo_s = run('t-stage1')
+ok(c == 0, 'B17 the stage run exits 0', o[-2500:])
+def sent_stage(name):
+    t = open(os.path.join(seed, JOBS[name]['prompt_file'])).read().strip()
+    return [x for x in S['sent'] if x['body'].get('prompt', '').strip() == t]
+n = {k: len(sent_stage(k)) for k in ('s-prop', 's-bad', 's-badvid', 's-vision', 's-gpic', 's-gvid', 's-loopbad', 's-npic', 's-nvid', 's-pvid', 's-still')}
+ok(n == {'s-prop': 1, 's-bad': 2, 's-badvid': 0, 's-vision': 2, 's-gpic': 1, 's-gvid': 1, 's-loopbad': 2, 's-npic': 1, 's-nvid': 1, 's-pvid': 2, 's-still': 2},
+   'B17/B18 sends per job: a pass 1; a wrong background and a vision miss 2 (one re-roll); the video of a stopped picture 0; a person, a still video and an open loop 2', n)
+sp = sent_stage('s-prop')[0]
+ok(sp['ep'] == 'google/nano-banana-2.1' and sp['body']['prompt'].strip() == open(os.path.join(seed, JOBS['s-prop']['prompt_file'])).read().strip() and sp['body'].get('aspect_ratio') == '1:1' and 'image_urls' not in sp['body'],
+   'B17 the picture goes to the text to image endpoint with the prompt file word for word', sp['ep'])
+gv = sent_stage('s-gvid')[0]; nv = sent_stage('s-nvid')[0]
+ok(gv['body']['resolution'] == '480p' and gv['body']['duration'] == 3 and gv['body']['audio'] is False and gv['body'].get('start_image_url') and gv['body'].get('end_image_url') == gv['body']['start_image_url'],
+   'B18 a looping object video: 480p, 3 s, silent, the picture as first AND last frame', {k: v for k, v in gv['body'].items() if 'image' not in k and k != 'prompt'})
+ok(nv['body'].get('start_image_url') and 'end_image_url' not in nv['body'], 'B18 a one-way object video has a first frame and no last frame')
+pic_sent = base64.b64decode(gv['body']['start_image_url'].split(',', 1)[1])
+ok(pic_sent[:8] == b'\x89PNG\r\n\x1a\n' and Image.open(io.BytesIO(pic_sent)).size == (512, 512), 'B18 the first frame is the passed picture as it came (512 x 512, not fitted or padded)')
+NAMES = ('s-prop', 's-bad', 's-vision', 's-gpic', 's-gvid', 's-loopbad', 's-npic', 's-nvid', 's-pvid', 's-still')
+rs = {k: json.load(open(os.path.join(OUT, '%s-r1-result.json' % k))) for k in NAMES if os.path.exists(os.path.join(OUT, '%s-r1-result.json' % k))}
+ok({k: v['verdict'] for k, v in rs.items()} == {'s-prop': 'passed', 's-bad': 'stopped', 's-vision': 'stopped', 's-gpic': 'passed', 's-gvid': 'passed', 's-loopbad': 'stopped', 's-npic': 'passed', 's-nvid': 'passed', 's-pvid': 'stopped', 's-still': 'stopped'},
+   'B17/B18 verdicts', {k: v['verdict'] for k, v in rs.items()})
+ok('bg' in rs['s-bad']['attempts'][0]['failed'] and rs['s-bad']['attempts'][0]['look_checks'].startswith('not run'), 'B17 a wrong background fails the bg measurement and the look checker is not asked', rs['s-bad']['attempts'][0]['failed'])
+ok(rs['s-vision']['attempts'][0]['failed'] == ['f_obj'], 'B17 a vision miss on the one-object question stops the picture', rs['s-vision']['attempts'][0]['failed'])
+ok(rs['s-pvid']['attempts'][0]['failed'] == ['f_none'], 'B18 a person or hand in an object video fails f_none', rs['s-pvid']['attempts'][0]['failed'])
+ok(rs['s-still']['attempts'][0]['failed'] == ['motion'], 'B18 a video that does not move fails the motion measurement', rs['s-still']['attempts'][0]['failed'])
+ok(rs['s-loopbad']['attempts'][0]['failed'] == ['loop'], 'B18 a loop whose last picture is not its first fails the loop measurement', rs['s-loopbad']['attempts'][0]['failed'])
+ok(rs['s-nvid']['attempts'][0]['failed'] == [] and rs['s-gvid']['attempts'][0]['failed'] == [], 'B18 the good videos pass every check (a fade-out has no loop check)')
+tree = sh('git', '--git-dir', bare, 'ls-tree', '-r', '--name-only', 'main').stdout.split()
+ok(all(f in tree for f in ('art/stage/tom-sprop.webp', 'data/stage/tom-sprop.js', 'art/raw/stage/tom-sprop.png', 'art/stage/tom-sglow.webp', 'data/stage/tom-sglow.js', 'art/raw/stage/tom-sglow.mp4', 'art/stage/tom-sshell.webp', 'data/stage/tom-sshell.js')),
+   'B17/B18 the passed assets are baked: sheet, data file and the raw source', [f for f in tree if 'stage' in f])
+ok(not any(x in f for f in tree for x in ('tom-sbad', 'tom-svision', 'tom-sloopbad', 'tom-sperson', 'tom-sstill')), 'B17/B18 nothing stopped is baked')
+sj = main_file('data/stage/tom-sglow.js'); mm = re.search(r'b3sDefine\("tom/sglow",(\{.*\})\);', sj)
+D = json.loads(mm.group(1)) if mm else {}
+ok(D.get('kind') == 'obj' and D.get('bg') == 'black' and D.get('loop') is True and D.get('n') == 12 and len(D.get('rects', [])) == 12 and len(D.get('ms', [])) == 12 and D['ms'][1] == 250 and D.get('src', '').startswith('art/stage/tom-sglow.webp?v='),
+   'B18 the glow data file: object, black, loop, 12 pictures (36 minus the repeated last, every 3rd), 250 ms apart at 12 per second', D)
+sp_ = json.loads(re.search(r'b3sDefine\("tom/sprop",(\{.*\})\);', main_file('data/stage/tom-sprop.js')).group(1))
+ok(sp_['kind'] == 'prop' and sp_['n'] == 1 and sp_['w'] <= 384 and sp_['h'] <= 384, 'B17 the prop data file: one picture, long side at most 384 px', sp_)
+ix = main_file('index.html')
+ok(ix.count('data/stage/tom-sprop.js') == 1 and ix.count('data/stage/tom-sglow.js') == 1 and ix.index('data/b3-stage.js') < ix.index('data/stage/tom-sprop.js'), 'B17/B18 index.html loads each stage file once, after data/b3-stage.js', ix)
+cd = {x['id']: x for x in main_board()['cards']}
+ok(sorted(x for x in cd if x.startswith('c-wanstop-s-')) == ['c-wanstop-s-bad-r1', 'c-wanstop-s-loopbad-r1', 'c-wanstop-s-pvid-r1', 'c-wanstop-s-still-r1', 'c-wanstop-s-vision-r1'], 'B17/B18 one Claude card per stopped asset, none for the one that waited', sorted(x for x in cd if x.startswith('c-wanstop-')))
+wr = cd['t-stage1']['wgen']['run']
+ok('s-badvid' in wr.get('waiting', []), 'B18 the run record lists the video that waited on its picture', wr)
+ok(any('waiting on a picture' in h['t'] for h in cd['t-stage1']['history']), 'B18 the card history says what waited', cd['t-stage1']['history'])
+ok(not [x for x in cd if x.startswith('t-wanwatch-t-stage1')], 'B19 wan.watch false: no watch card for the card', [x for x in cd if 'watch' in x])
+ok(any('No watch card' in h['t'] for h in cd['t-stage1']['history']), 'B19 the card says there is no watch card and where Tom judges instead', cd['t-stage1']['history'])
+n0 = len(S['sent'])
+c, o, _ = run('t-stage1')
+ok(len(S['sent']) == n0, 'B17 a second tap sends nothing again (every result is already there)', len(S['sent']) - n0)
+
+S['sent'].clear()
+c, o, repo_w = run('t-stage2')
+ok(c == 0, 'B19 the stage wire run exits 0', o[-1500:])
+tree = sh('git', '--git-dir', bare, 'ls-tree', '-r', '--name-only', 'main').stdout.split()
+ok('art/clips/tom-suitedoor.webp' in tree and 'data/clips/tom-suitedoor.js' in tree and 'data/clips/tom-suitedoor.js' in main_file('index.html'), 'B19 the body clip and its script tag are added')
+ok(main_file('data/b3-stage.js') == stage0 and main_file('data/b3-kit-rose.js') == kit0, 'B19 the stage wire edits nothing else: data/b3-stage.js and the kit file are byte for byte as before')
+ok('art/clips/tom-lounge.webp' not in tree and 'data/clips/tom-lounge.js' not in tree, 'B19 a row that names another clip and job is refused: the body clip is not baked either')
+wr2 = [x for x in main_board()['cards'] if x['id'] == 't-stage2'][0]['wgen']['run']
+ok('tom-suitedoor' in wr2['merged'] and 'tom-lounge' in wr2['bake_failed'] and 'tom_loungepass' in wr2['bake_failed']['tom-lounge'], 'B19 the refusal is on the card in plain words', wr2)
+ok([x for x in main_board()['cards'] if x['id'].startswith('t-wanwatch-t-stage2')] == [], 'B19 no watch card for the body run either')
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'

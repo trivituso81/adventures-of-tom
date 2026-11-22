@@ -46,9 +46,13 @@ def check_spec(job):
             if not all(isinstance(m.get(k), int) for k in ('first', 'last', 'rise_end', 'lower_start')): bad.append('a guard clip needs bake.marks {first, last, rise_end, lower_start}')
     w = job.get('wire')
     if w is not None:
-        if not isinstance(w, dict) or len([k for k in ('body', 'move') if k in w]) != 1: bad.append('wire is exactly one of {"body": {owner, state}} or {"move": {file, id}}')
+        if not isinstance(w, dict) or len([k for k in ('body', 'move', 'stage') if k in w]) != 1: bad.append('wire is exactly one of {"body": {owner, state}}, {"move": {file, id}} or {"stage": {move}} (movestage2: only the clip and its script tag, the row in data/b3-stage.js finds the clip)')
+        elif 'stage' in w and not re.fullmatch(r'[a-z0-9_]+', str((w['stage'] or {}).get('move', ''))): bad.append('wire.stage needs move (the id of the row in data/b3-stage.js)')
         elif 'body' in w and not (re.fullmatch(r'[a-z0-9]+', str(w['body'].get('owner', ''))) and re.fullmatch(r'[a-z0-9]+', str(w['body'].get('state', '')))): bad.append('wire.body needs owner and state')
         elif 'move' in w and not (re.fullmatch(r'data/b3-(kit|foes)-[a-z0-9]+\.js', str(w['move'].get('file', ''))) and re.fullmatch(r'[a-z0-9_]+', str(w['move'].get('id', '')))): bad.append('wire.move needs file (data/b3-kit-*.js or data/b3-foes-*.js) and id')
+    if job.get('stage'):
+        import wanstage
+        bad += wanstage.check_spec(job)
     return bad
 
 
@@ -145,6 +149,10 @@ def _row(t, ident):
 def wire(root, job):
     """Edits the game's data file named by job['wire'] to play the job's clip. Returns a note. Raises BakeError."""
     w, key = job['wire'], key_of(job['bake']['id'])
+    if 'stage' in w:
+        import wanstage
+        try: return wanstage.wire_stage(root, job)
+        except wanstage.BakeError as x: raise BakeError(str(x))
     if 'body' in w:
         f = os.path.join(root, 'data', 'b3-clips.js'); t = open(f, encoding='utf-8').read()
         o, st = w['body']['owner'], w['body']['state']

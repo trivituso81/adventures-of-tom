@@ -12,6 +12,10 @@
 // steps / lasting / setpiece use only the stage actions of plan 4.1; assets: prop = one picture, obj = an object-only video;
 // size {h: share of the mover's standing height} or {sw: share of the screen width}.
 const B3_STAGE={};
+// movestage2: the baked stage assets (data/stage/<owner>-<name>.js, written by tools/clip-bake/bake_stage.py) call b3sDefine; they load right after this
+// file, before engine/b3-stage.js, so the calls only collect here and the engine registers them when it loads.
+const B3S_DATA={};
+function b3sDefine(key,D){B3S_DATA[key]=D;}
 
 // ================= Tom: Frequent Flier =================
 // Basic. Approved clip kept (Tom: all good, 2026-11-21). Accent only: the snooty swat gets a verdict.

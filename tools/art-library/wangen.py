@@ -123,12 +123,15 @@ def build(job, repo):
     if job.get('frame'):
         p = os.path.join(repo, job['frame'])
         if not os.path.exists(p): raise SystemExit('start picture %s is not in the repo (it is committed after its checks)' % job['frame'])
-        W, H = [int(x) for x in job['fit'].split('x')]
-        frame, how = fit_frame(open(p, 'rb').read(), (W, H))
+        if job['fit'] == 'asis':   # movestage2: a stage picture is square and is sent to the video model as it is (no magenta frame, no crop)
+            frame, how, W, H = open(p, 'rb').read(), 'sent as it is', 0, 0
+        else:
+            W, H = [int(x) for x in job['fit'].split('x')]
+            frame, how = fit_frame(open(p, 'rb').read(), (W, H))
         if job.get('pad'): frame, how = pad_frame(frame, float(job['pad'])), how + ', then shrunk to %d%% on the same magenta (pad)' % round(100 * float(job['pad']))
         if job.get('shift'):
             frame, dx = shift_frame(frame, float(job['shift'])); how += ', then moved %d px right (shift)' % dx
-        say('frame: %s -> %dx%d, %s' % (job['frame'], W, H, how))
+        say('frame: %s -> %s, %s' % (job['frame'], ('%dx%d' % (W, H)) if W else 'as it is', how))
         for k in job.get('frame_fields') or ['start_image_url']: body[k] = data_uri(frame)
     return body, frame
 

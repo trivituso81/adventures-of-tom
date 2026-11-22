@@ -183,7 +183,7 @@ function build() {
   const G = loadGame(), A = listAnims(G), S = loadSources(), rows = listRows();
   const recipe = JSON.parse(rd('tools/guidegen/recipe.json'));
   const over = (process.env.GUIDEGEN_PROMPTS ? JSON.parse(fs.readFileSync(process.env.GUIDEGEN_PROMPTS, 'utf8')) : jread('data/guide-prompts.json', { anims: {} })).anims || {};   // the env path is for tests
-  const wanJobs = Object.keys(S.jobs).filter(k => !k.startsWith('_') && !k.startsWith('start-') && k !== 'start');
+  const wanJobs = Object.keys(S.jobs).filter(k => !k.startsWith('_') && !k.startsWith('start-') && k !== 'start' && !S.jobs[k].stage);   // movestage2: a stage asset (picture or object video) is not an animation of the guide
   const used = { jobs: new Set(), entries: new Set() };
   const startOf = o => G.CAST[o] ? 'art/clips/start/' + o + '-hero.png' : 'art/clips/start/' + o + '.png';
   const figOf = {}; Object.values(S.E).forEach(x => { if (figOf[x.owner] == null && x.e.clip.figRows) figOf[x.owner] = x.e.clip.figRows; });
