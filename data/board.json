@@ -29266,7 +29266,7 @@
    "title": "Confirm the battle 2 purge (stage 23)",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "choices": [
     "Yes, delete battle 2 and its leftovers as the plan lists (Recommended)",
@@ -29286,8 +29286,15 @@
     {
      "d": "2026-11-22",
      "t": "Created on 2026-11-22 by the b3restore session: the purge needs your yes first (plan in claude/battle-architecture.md)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Yes, delete battle 2 and its leftovers as the plan lists",
+     "at": "2026-11-22T08:11:05.523Z"
     }
-   ]
+   ],
+   "done": "2026-11-22",
+   "answer": "Yes, delete battle 2 and its leftovers as the plan lists"
   }
  ],
  "sessions": [
