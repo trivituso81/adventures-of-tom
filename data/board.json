@@ -32286,31 +32286,6 @@
    "after": "t-artgen3try"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44974877938",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
-  },
-  {
    "id": "c-takes-e45d5a",
    "tag": "takes-2026-11-22",
    "lane": "claude",
@@ -32784,6 +32759,31 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44976315782",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
