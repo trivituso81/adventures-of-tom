@@ -26060,6 +26060,10 @@
     {
      "d": "2026-11-22",
      "t": "Session ended without shipping: Tom (11-22 00:05) started this card, then chose Hold when asked. c-b3look has not run, so the marks wait for it and get built once in the new look. Nothing was pushed to the game. Still waits on c-b3look."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Parked on purpose, not stuck: it waits on c-b3look, which Tom starts from its card (Copy prompt, Claude Opus 5.5, high). Nothing to rescue here until that ships."
     }
    ],
    "waiting_on": "claude"
