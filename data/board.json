@@ -27235,7 +27235,7 @@
   {
    "id": "t-artgen3try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -27283,6 +27283,10 @@
     {
      "d": "2026-11-21",
      "t": "Fix fix-artgen3try-2: the earlier run was made with the plain Generate button, so nothing was auto-approved. QA held three: the JOIN banners had hands cut off at the edge (real fault, prompt fixed) and QA faulted waist-up pictures for legs, shoes and pants (QA wording fixed). The two LEAVE banners are kept and wait for your look."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Try the auto-approve button on a pictures card, Fix: Try auto-approve on Grace's and Rose's party is done."
     }
    ],
    "done_when": {
@@ -27442,7 +27446,6 @@
      }
     }
    },
-   "waiting_on": "claude",
    "after": null
   },
   {
@@ -28926,7 +28929,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGqv7tvjJ2KTKftdCj",
     "opening": "unknown"
    },
    "backlog": {
@@ -28945,7 +28948,7 @@
    "title": "Battle system: the bonus chapter on the new battle",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s18bonusa (the scripted-fight seams) and b3s18bonus (chapter 21 on the switch, tips, test). Waits for nothing. Tom plays it on card t-milestonee.",
    "blocks": [],
    "changed": "2026-11-21",
@@ -28984,13 +28987,18 @@
     {
      "d": "2026-11-21",
      "t": "The chapter test found a stall in the after-boss scene (Brain Freeze was taken off the map before nsAfterBoss walked it out, so the scene hung until SKIP); fixed in nsBoss2 (bossAwait) and the test now has no page errors in both layouts."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3s18bonus: the bonus chapter (Nine Scoops, chapter 21) plays on Battle 3 behind the same switch"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
     "opening": "unknown"
    },
-   "after": "t-milestonee"
+   "after": "t-milestonee",
+   "done": "2026-11-21"
   },
   {
    "id": "c-buildpill2",
@@ -29750,13 +29758,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGrDDkCqRqw8QcDUZu",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -29826,6 +29834,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -29840,8 +29852,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-22T02:55:33+00:00"
+   }
   },
   {
    "id": "c-bigone25",
@@ -30051,13 +30062,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGiNhARy9rUb7TCugb",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -30156,6 +30167,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -30170,8 +30185,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-22T02:55:33+00:00"
+   }
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -31560,7 +31574,7 @@
   {
    "id": "c-wanauto1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanauto1",
    "title": "Battle videos finish without Tom (re-roll, auto fix, caps)",
@@ -31577,6 +31591,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (18:09): \"why has it taken me all day to record like 4 animations? ... why has the card come to me like a dozen times?\" Tom (18:11): yes to the Action spending up to $3.20 per animation and $15 a day without his tap. Tom (19:02): \"Argh it happened again!!!!\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanauto1: battle videos finish without Tom; Deedee's Wet-Floor is in the game"
     }
    ],
    "prompt": {
@@ -31587,7 +31605,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-wanauto1-watch",
@@ -31698,7 +31717,7 @@
   {
    "id": "c-wanmop1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanmop1",
    "title": "Deedee's Wet-Floor: a string mop, not a broom",
@@ -31715,6 +31734,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (19:48): \"I don't understand - Deedee is using a broom not a mop. And what was the visit for the cowgirl thing?\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanmop1: Deedee's Wet-Floor asks for a string mop, not a broom"
     }
    ],
    "prompt": {
@@ -31725,12 +31748,13 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-giddyupbake1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "giddyupbake1",
    "title": "Rose's Giddyup: the video Tom picked now plays in fights",
@@ -31747,6 +31771,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (19:52): \"So it sounds like roses animation is wrong then?\" Found: the take he chose at 19:46 was saved (art/raw/clips/wan-rose-giddyup-v9.mp4) but never cut or wired; the move still played the default. Cut and wired by hand."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as giddyupbake1: Rose's Giddyup plays the video Tom picked"
     }
    ],
    "prompt": {
@@ -31757,23 +31785,23 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-guideuse-fix",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guideusefix1",
    "title": "Use this one saves the video but does not put it in the game",
    "next": "Find why guide-use run 44982162678 saved Rose's Giddyup video without cutting and wiring it, and fix it.",
    "blocks": [],
    "auto": true,
-   "start": true,
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGTffP8zkoKc28LKNd",
     "opening": "added by giddyupbake1"
    },
    "history": [
@@ -31788,6 +31816,14 @@
     {
      "d": "2026-11-22",
      "t": "Follow-up guideusefix2: the Name the build step called use_take.py --changes without --state, so no CHANGES heading was written; --state is now needed only for a use."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideusefix1: Use this one in the Battle Guide never saves a video without putting it in the game"
     }
    ],
    "prompt": {
@@ -31799,7 +31835,8 @@
     "effort": "medium (one tool bug with a known failing run)",
     "text": "Read CLAUDE.md and docs/BATTLE_GUIDE.md, then card c-guideuse-fix in data/board.json and tools/guidegen/use_take.py. Tom pressed Use this one on move:giddyup_tata_launch at 2026-11-22T03:46Z (data/guide-use.json); the guide-use Action run 44982162678 pushed commit 22483dd with art/raw/clips/wan-rose-giddyup-v9.mp4, the prompt file and the job's rev, but did not cut the clip (no data/clips/rose-giddyup.js, no art/clips/rose-giddyup.webp, no script tag) and did not wire giddyup_tata_launch in data/b3-kit-rose.js. Read that run's log with gh run view 44982162678 --log, find why step 2 of use_take.py (cut and wire) was skipped or failed silently, fix it so a failure stops the run with a clear error on the take instead of a quiet commit, and add a test in tools/guidegen that replays a Wan job take with bake and wire fields (rose-giddyup's) and checks the clip files, the script tag and the wire. giddyupbake1 already cut and wired this one by hand; do not redo it. Write the CHANGES heading ## guideusefix1 and push. After: nothing for Tom: end. Your first push is the commit board: start c-guideuse-fix. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "t-giddyup-decide",
@@ -31879,18 +31916,17 @@
   {
    "id": "c-animplan",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "animplan1",
    "title": "Battle Guide: one Plan view of every battle animation",
    "next": "Add a Plan view to ADMIN > BATTLE GUIDE > Animations: every animation as Done, Making or Next.",
    "blocks": [],
    "auto": true,
-   "start": true,
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDo96i5kV2kcXWqV96",
     "opening": "added by wanauto1"
    },
    "history": [
@@ -31901,6 +31937,14 @@
     {
      "d": "2026-11-22",
      "t": "Plan view built in the Battle Guide Animations tab (build animplan1): Making, Next, Done counts and rows."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as animplan1: the Battle Guide has a Plan view of every battle animation"
     }
    ],
    "prompt": {
@@ -31912,7 +31956,8 @@
     "effort": "medium (one page view from data that exists)",
     "text": "Read CLAUDE.md (section wanauto1 and the Battle Guide row of Where things live), docs/BATTLE_GUIDE.md and claude/video-battle-plan.md 4.14, then card c-animplan in data/board.json. Tom (2026-11-21 18:09): \"there's no clarity on the plan, which animations we do and when\". Add a PLAN view at the top of ADMIN > BATTLE GUIDE > Animations (battle-guide.html): one row per battle animation from data/guide-anims.json, grouped Done (a baked video is in the game), Making (a job in tools/art-library/wangen-jobs.json with no baked clip, or an open c-wanstop card in data/board.json), Next (no video and no job), with a count per group at the top; each Making row shows the job's rev. Plain words, no em dashes, works in portrait on the phone. Test it in tools/battle_guide_test.py (counts match the data, rose-giddyup is a Making row), look at portrait and landscape screenshots, write the CHANGES heading ## animplan1 and push. After: nothing for Tom: end. Your first push is the commit board: start c-animplan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-menuux-plan",
@@ -32048,7 +32093,8 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-22T01:53:56+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "quiet": true
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -32946,7 +32992,7 @@
    "id": "c-fix-ch2play",
    "tag": "fix-ch2play",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play chapter 2 on your phone and report",
@@ -32968,7 +33014,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEBBfLQ4zm6MPou8Xp",
+    "url": "",
     "opening": "Something is wrong on t-ch2play"
    },
    "history": [
@@ -33003,6 +33049,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -33015,8 +33065,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch2play and t-ch2play in data/board.json, history included. Your first push is the commit board: start c-fix-ch2play.\n\nTom tested and found problems:\n1. Card t-ch2play (Play chapter 2 on your phone and report, ask play). He was asked: Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4. He wrote: tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:15:31.443Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch2play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch2play, and give the build fix-ch2play a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-ch2play",
-   "auto": true,
-   "started_at": "2026-11-22T02:57:06+00:00"
+   "auto": true
   },
   {
    "id": "c-fix-dash3-try-2",
@@ -33113,7 +33162,7 @@
    "id": "c-menu1",
    "tag": "menu1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "New menu: the look and the Family screen",
    "next": "Builds the new menu's look and its first screen beside the old menu, behind a switch: the paper book over the paused scene, the five tabs, the top bar and the Family line-up with the bench. The old menu stays the default until the last card. Then you get one 3 minute look on the Duo and the phone, and Vibes and Gear start by themselves.",
@@ -33125,7 +33174,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGSsXRqTDND47YH7MH",
     "opening": "pasted by Tom from the board"
    },
    "prompt": {
@@ -33150,15 +33199,24 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T02:55:27.369Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu1: the new main menu's look and Family screen are built beside the old menu, behind a switch (default Old)"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-menu1look",
    "title": "Look at the new menu's first screen on the Duo and phone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33204,16 +33262,18 @@
      "d": "2026-11-22",
      "t": "Fix c-fix-menu1look: Tom found no Menu in ADMIN. Cause: this card opened before its build; c-menu1 did not list it in blocks. Now blocked by c-menu1, so it returns when the build ships.",
      "at": "2026-11-22T04:00:00.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: the look and the Family screen, Fix: Look at the new menu's first screen on the Duo and is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-menu2",
    "tag": "menu2",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: Vibes and Gear",
@@ -33223,7 +33283,7 @@
    ],
    "after": "nothing for Tom: c-menu3",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -33241,6 +33301,10 @@
     {
      "d": "2026-11-22",
      "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: the look and the Family screen is done."
     }
    ]
   },
@@ -33352,7 +33416,7 @@
    "id": "c-b3gear",
    "tag": "b3gear",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "night": false,
    "theme": "Battle System",
    "title": "Make gear count in the new battle",
@@ -33395,9 +33459,14 @@
     {
      "d": "2026-11-22",
      "t": "Shipped b3gear: B3_GEAR table, b3GearSum, applied in b3PartyUnit and story fights, rule tests, sim --gear. Chapter 5 boss 4.78 rounds with typical gear (band 5 to 7): stopped there, numbers on t-b3gear-ch5."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3gear: worn gear now counts in the new battle (card c-b3gear)"
     }
    ],
-   "started_at": "2026-11-22T02:55:33+00:00"
+   "started_at": "2026-11-22T02:55:33+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-menuux4",
@@ -33451,7 +33520,7 @@
    "id": "c-fix-artgen3try-2",
    "tag": "fix-artgen3try-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try auto-approve on Grace's and Rose's party",
@@ -33473,7 +33542,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukD3aizZ58zvZWuqKjr",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -33491,6 +33560,14 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T02:57:17.571Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-artgen3try-2: QA no longer faults cropped pictures, and the JOIN banners keep their hands inside the picture"
     }
    ],
    "prompt": {
@@ -33502,7 +33579,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try-2 and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try-2.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try auto-approve on Grace's and Rose's party banners, ask pictures). He was asked: What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine. He wrote: Fix bases on qa\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:56:44.517Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-artgen3try"
+   "after": "t-artgen3try",
+   "done": "2026-11-21"
   },
   {
    "id": "t-milestonee",
@@ -33639,7 +33717,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDJmY6MvDbwUpRS5Sb",
     "opening": "Something is wrong on t-menu1look"
    },
    "history": [
@@ -33714,7 +33792,7 @@
   {
    "id": "c-wanstop-deedee-wetfloor-r8",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r8",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -33722,18 +33800,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-wanmop1-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDyvzBaR3E9EA4fC8o",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44983183373): deedee-wetfloor stopped at rev 8. attempt 1 (pad 0.65) bg; attempt 2 (pad 0.65) feet, edge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -33744,18 +33825,111 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r8 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 8) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73). This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r8-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r8.mp4, deedee-wetfloor-a2-r8.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-wanmop1-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r8` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-wanmop1-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T04:14:01+00:00"
+  },
+  {
+   "id": "b-guideusefix2",
+   "tag": "guideusefix2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Characters",
+   "title": "Use this one now writes its build heading",
+   "next": "Done: Use this one now writes its build heading",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDmoyN2PKf5j8SUR1z",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideusefix2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGJ4hsYbUcsAbWr9xh",
+   "title": "Use this one saves the video but does not put it in the game",
+   "first": "2026-11-22T04:12:17Z",
+   "last": "2026-11-22T04:12:17Z",
+   "tags": [],
+   "cards": [
+    "c-guideuse-fix"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDmoyN2PKf5j8SUR1z",
+   "title": "Use this one now writes its build heading",
+   "first": "2026-11-22T04:10:52Z",
+   "last": "2026-11-22T04:10:52Z",
+   "tags": [
+    "guideusefix2"
+   ],
+   "cards": []
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGTffP8zkoKc28LKNd",
+   "title": "Use this one saves the video but does not put it in the game",
+   "first": "2026-11-22T04:08:58Z",
+   "last": "2026-11-22T04:08:58Z",
+   "tags": [
+    "guideusefix1"
+   ],
+   "cards": [
+    "c-guideuse-fix"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDo96i5kV2kcXWqV96",
+   "title": "Battle Guide: one Plan view of every battle animation",
+   "first": "2026-11-22T03:20:56Z",
+   "last": "2026-11-22T03:27:36Z",
+   "tags": [
+    "animplan1"
+   ],
+   "cards": [
+    "c-animplan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCy9ak7gUEgSXmXGuh",
    "title": "Make gear count in the new battle",
    "first": "2026-11-22T02:56:35Z",
-   "last": "2026-11-22T02:56:35Z",
-   "tags": [],
+   "last": "2026-11-22T03:15:56Z",
+   "tags": [
+    "b3gear"
+   ],
    "cards": [
     "c-b3gear"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGBGg6LPzKXnMeUVcJ",
+   "title": "Fix: Look at the new menu's first screen on the Duo and",
+   "first": "2026-11-22T03:06:21Z",
+   "last": "2026-11-22T03:07:28Z",
+   "tags": [
+    "fix-menu1look"
+   ],
+   "cards": [
+    "c-fix-menu1look",
+    "c-menu1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDJmY6MvDbwUpRS5Sb",
+   "title": "Fix: Look at the new menu's first screen on the Duo and",
+   "first": "2026-11-22T03:03:37Z",
+   "last": "2026-11-22T03:03:37Z",
+   "tags": [],
+   "cards": [
+    "c-fix-menu1look"
    ]
   },
   {
@@ -34250,6 +34424,34 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGqv7tvjJ2KTKftdCj",
+   "title": "Milestone D: play chapters 6 to 10 on the new battle",
+   "first": "2026-11-21T20:12:47-08:00",
+   "last": "2026-11-21T20:12:47-08:00",
+   "tags": [],
+   "cards": [
+    "t-milestoned"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T19:59:44-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFoLKSmJfeAAAAP5kf",
    "title": "Fix: Play the Grump Hollow wrapper trail",
    "first": "2026-11-21T19:42:45Z",
@@ -34482,6 +34684,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGSsXRqTDND47YH7MH",
+   "title": "New menu: the look and the Family screen",
+   "first": "2026-11-21T18:58:38-08:00",
+   "last": "2026-11-21T19:34:57-08:00",
+   "tags": [
+    "menu1"
+   ],
+   "cards": [
+    "c-menu1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEp7AN4783dFHhPrzP",
    "title": "Animation note: Rose, Getting hit",
    "first": "2026-11-21T18:23:07Z",
@@ -34491,6 +34705,18 @@
    ],
    "cards": [
     "c-anim-rose-hit-uy5r"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD3aizZ58zvZWuqKjr",
+   "title": "Fix: Try auto-approve on Grace's and Rose's party",
+   "first": "2026-11-21T18:59:00-08:00",
+   "last": "2026-11-21T19:03:57-08:00",
+   "tags": [
+    "fix-artgen3try-2"
+   ],
+   "cards": [
+    "c-fix-artgen3try-2"
    ]
   },
   {
@@ -34504,6 +34730,19 @@
    "cards": [
     "c-artgen3",
     "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
+   "title": "Battle system: the bonus chapter on the new battle",
+   "first": "2026-11-21T14:50:19-08:00",
+   "last": "2026-11-21T18:58:06-08:00",
+   "tags": [
+    "b3s18bonusa",
+    "b3s18bonus"
+   ],
+   "cards": [
+    "c-b3s18bonus"
    ]
   },
   {
@@ -34632,18 +34871,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T16:40:26-08:00",
-   "tags": [
-    "wanch5"
-   ],
-   "cards": [
-    "c-wanch5"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
    "title": "Battle videos in bulk: checks and retries inside the Action",
    "first": "2026-11-21T15:20:15-08:00",
@@ -34696,18 +34923,6 @@
    "tags": [],
    "cards": [
     "c-qa-battle2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
-   "title": "Battle system: the bonus chapter on the new battle",
-   "first": "2026-11-21T14:50:19-08:00",
-   "last": "2026-11-21T15:12:23-08:00",
-   "tags": [
-    "b3s18bonusa"
-   ],
-   "cards": [
-    "c-b3s18bonus"
    ]
   },
   {
@@ -38670,8 +38885,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "99d0f4cc352c480ba1593547393572e282998dc1",
- "synced_at": "2026-11-22T02:57:06+00:00",
+ "synced": "2fd51414c6bb7b8c690054a4d6e41662fdd08f61",
+ "synced_at": "2026-11-22T04:14:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
