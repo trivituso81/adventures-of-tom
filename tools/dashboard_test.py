@@ -87,6 +87,8 @@ def strip_geometry(pg, tag, H, errs):
     geval(pg, "layout.mode='landscape';applyLayout()")
     pg.click('#sz-fs'); settle(pg); pg.click('#sz-fu'); settle(pg)
     ok(gsize(pg) == [466, 657] and 'rotated' not in gcls(pg) and 'landscape' not in gcls(pg) and geval(pg, "layout.mode") == 'auto', '%s: Duo folded, upright stays upright after a saved landscape choice (%s)' % (tag, gcls(pg)))
+    geval(pg, "layout.mode='landscape';applyLayout()")   # fix-dash3-try-2: the game itself ignores the saved choice on a ?duo= page
+    ok('rotated' not in gcls(pg) and 'landscape' not in gcls(pg), '%s: a ?duo= game page ignores layout.mode landscape (%s)' % (tag, gcls(pg)))
     pg.click('#sz-os'); settle(pg)
     ok(geval(pg, "location.search").count('duo=1') == 1, '%s: the game frame address carries ?duo=1 (%s)' % (tag, geval(pg, "location.search")))
     # --- Desktop wide is the Battle layout; a Duo size picked inside it stays in it

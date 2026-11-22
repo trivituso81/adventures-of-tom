@@ -78,7 +78,10 @@ function applyLayout() {
   root.classList.toggle('duo',duoMode.open);
   root.classList.toggle('duofold',duoMode.device&&!duoMode.open);   // folded Duo: a phone, but short and wide (466 x 657), so the title logo is sized by height
   root.style.setProperty('--ts',tabletMode.on?tabletMode.ts.toFixed(3):'1');
-  const mode=tabletMode.on?'auto':layout.mode;   // a tablet always follows how it is held
+  // A page opened with ?duo= is a test frame (the Admin Dashboard's screen sizes): it follows how it is held too, whatever the rotate
+  // button saved on this browser (le-layout), so an upright folded Duo can never come up sideways.
+  let duoQ=false; try { const q=new URLSearchParams(location.search).get('duo'); duoQ=q==='1'||q==='0'; } catch(e) {}
+  const mode=tabletMode.on||duoQ?'auto':layout.mode;   // a tablet always follows how it is held
   layout.landscape=mode==='auto'?deviceLandscape:mode==='landscape';
   layout.rotated=layout.landscape!==deviceLandscape;
   document.documentElement.classList.toggle('landscape',layout.landscape);
