@@ -25021,6 +25021,10 @@
      "d": "2026-11-22",
      "t": "Tom approved generating 1 video (about $0.79).",
      "at": "2026-11-22T14:33:06.339Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 45033435631: 0 made; waiting for the next tap (spending limit): tom-rose-giddyup."
     }
    ],
    "wgen": {
@@ -25029,10 +25033,28 @@
     "n": 1,
     "est": 0.79,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T14:36:15Z",
+     "state": "done",
+     "at": "2026-11-22T14:36:17Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45033435631",
-     "n": 1
+     "n": 1,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [
+      "tom-rose-giddyup"
+     ],
+     "unchecked": [],
+     "errors": [],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.0,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-rose-giddyup": 2
+     }
     }
    }
   },
