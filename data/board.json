@@ -30246,6 +30246,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDgeg1TQUp7kzdFksg",
+   "title": "Moves in three layers: body video, stage, set piece",
+   "first": "2026-11-22T10:06:14-08:00",
+   "last": "2026-11-22T10:06:14-08:00",
+   "tags": [],
+   "cards": [
+    "c-movestage"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
    "title": "Chapter headings in the storybook look of the main menu",
    "first": "2026-11-22T09:11:30-08:00",
@@ -35758,8 +35768,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "5f926a3f4ab9b56f4a9914f826f0f4346bcf4c80",
- "synced_at": "2026-11-22T17:59:29+00:00",
+ "synced": "ad228693d42b5113464bbb1c010fcc0b55253cee",
+ "synced_at": "2026-11-22T18:06:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
