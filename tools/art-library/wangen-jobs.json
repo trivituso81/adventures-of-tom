@@ -806,14 +806,14 @@
   "pad": 0.8
  },
  "rose-giddyup": {
-  "rev": 8,
+  "rev": 9,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
    "720p": 0.157,
    "1080p": 0.235
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v5.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-giddyup-v9.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
