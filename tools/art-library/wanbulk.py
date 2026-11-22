@@ -32,7 +32,7 @@ def settings(jobs):
     b = jobs.get('_bulk') or {}
     au = b.get('auto') or {}
     return {'cap': float(b.get('cap', 20)), 'pads': [None if p in (None, 0, 'none') else float(p) for p in (b.get('pads') or [None, .8, .65])],
-            'tries': int(au.get('tries', 4)), 'job_dollars': float(au.get('job_dollars', 3.2)), 'day_dollars': float(au.get('day_dollars', 15))}
+            'tries': int(au.get('tries', 4)), 'job_dollars': float(au.get('job_dollars', 3.2)), 'day_dollars': (None if ('day_dollars' in au and au['day_dollars'] is None) else float(au.get('day_dollars', 15)))}   # null = no daily limit (Tom 2026-11-22)
 
 
 # ------------------------------------------------------------------ wanauto1: the budget of one animation and of one day
@@ -54,7 +54,7 @@ def budget(what, job, state, cfg, day=None):
     est = wangen.estimate(job)
     return {'tries': tries, 'spent': spent, 'day_spent': dspent, 'est': est,
             'tries_left': max(0, cfg['tries'] - tries), 'job_ok': tries < cfg['tries'] and spent + est <= cfg['job_dollars'] + 1e-6,
-            'day_ok': dspent + est <= cfg['day_dollars'] + 1e-6}
+            'day_ok': cfg['day_dollars'] is None or dspent + est <= cfg['day_dollars'] + 1e-6}
 
 
 def pad_seq(job, pads):

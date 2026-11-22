@@ -370,6 +370,9 @@ calls = [{'what': 'j', 'at': '2026-11-21T23:00:00Z', 'est': .79}, {'what': 'j', 
          {'what': 'other', 'at': '2026-11-22T01:10:00Z', 'est': 13.0}]
 bd = wanbulk.budget('j', job, {'calls': calls}, cfg, day='2026-11-22')
 ok(bd['tries'] == 2 and bd['tries_left'] == 2 and bd['job_ok'] and abs(bd['day_spent'] - 14.58) < 1e-6 and bd['day_ok'] is False, 'B10 budget: counts the job and its -a2 retry since auto_from (2 tries, the call of 11-21 is before it), and every video of the UTC day: $14.58 + $0.79 passes $15, so it is refused', bd)
+cfg_nolimit = wanbulk.settings({'_bulk': {'auto': {'tries': 4, 'job_dollars': 3.2, 'day_dollars': None}}})
+bd_nl = wanbulk.budget('j', job, {'calls': calls}, cfg_nolimit, day='2026-11-22')
+ok(cfg_nolimit['day_dollars'] is None and bd_nl['day_ok'] is True and bd_nl['job_ok'], 'B10 budget: day_dollars null means no daily limit (Tom 2026-11-22), the per animation limit still holds', bd_nl)
 bd2 = wanbulk.budget('j', dict(job, auto_from='2026-11-21T00:00:00Z'), {'calls': calls[:3] + [{'what': 'j', 'at': '2026-11-22T02:00:00Z', 'est': .79}]}, cfg, day='2026-11-22')
 ok(bd2['tries'] == 4 and not bd2['job_ok'], 'B10 budget: a fifth video of one animation is refused (4 tries, $3.20)', bd2)
 gc = wanbulk.gaveup_card('j', 3, 'used 4 tries ($3.16)', {'evidence': ['edge: touches the left edge']}, '2026-11-22', 'r1', cfg)

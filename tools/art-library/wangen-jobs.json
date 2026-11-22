@@ -11,7 +11,7 @@
   "auto": {
    "tries": 4,
    "job_dollars": 3.2,
-   "day_dollars": 15,
+   "day_dollars": null,
    "about": "wanauto1 (Tom 2026-11-21 18:11, yes): the Action spends without Tom's tap within these limits. tries and job_dollars count the videos of one job made since its `auto_from` time (from the ledger); day_dollars counts every video of the UTC day. A miss is re-rolled once at the same rev; a second miss stops it and a Sonnet card starts by itself to change one thing and start the next try; a job out of tries gets one Tom card (t-wangaveup-<job>-r<rev>)."
   }
  },

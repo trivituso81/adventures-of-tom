@@ -1,3 +1,7 @@
+## wannoday1 (2026-11-22): no daily limit on battle videos
+
+Tom: "remove this - i will manage the limit myself with my balance". The card Judge Tom's eight moves showed all 18 waiting jobs as "spending limit": the log said "the $15 a day for videos is spent ($20.14 today)" (the day counts in UTC, so it resets at 4 PM Pacific). `_bulk.auto.day_dollars` in `tools/art-library/wangen-jobs.json` is now `null`, which `settings` and `budget` in `wanbulk.py` read as no daily limit. The per animation limit (4 videos, $3.20) and the run cap on the card still hold. Test: `wanbulk_test.py` B10. Nothing in the game changed.
+
 ## guideuse-45069823314 (2026-11-22): Idle (standing and breathing) (tnb) now plays a video chosen in the Battle Guide
 
 Card c-guidegen. USE THIS ONE in the Battle Guide (`data/guide-use.json`, Action guide-use). Not seen on the phone yet.

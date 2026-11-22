@@ -30467,6 +30467,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 45067718217: 0 made; waiting on a picture that did not pass, nothing sent: stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid; waiting for the next tap (spending limit): stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom (13:0x): the $15 a day video limit was used up ($20.14 today), so all 18 jobs waited. \"remove this - i will manage the limit myself with my balance\". Build wannoday1 sets the daily limit to none; the per animation limit ($3.20, 4 videos) and this card's $12 run cap stay.",
+     "at": "2026-11-22T21:09:59.000Z"
     }
    ]
   },
