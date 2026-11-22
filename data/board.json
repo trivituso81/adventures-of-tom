@@ -35618,6 +35618,71 @@
    "auto": true,
    "started_at": "2026-11-22T06:33:01+00:00",
    "done": "2026-11-21"
+  },
+  {
+   "id": "c-fix-artwan",
+   "title": "Fix: Art Library WAN fallback fails on long prompts",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "prog",
+   "fix": true,
+   "tag": "artwan2",
+   "next": "The WAN fallback sent prompts over fal's 2000 character limit (422), so the 3 gate pictures never got a try 3. WAN now gets a trimmed prompt (boilerplate only) and a prompt that cannot fit is skipped, not counted as a failed try. Then Tom taps Generate on the 3 gate pictures again.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDVm5HwGWr5yhmCUJy",
+    "opening": "Image generation in the art library doesn't seem to be working . Approve full repo access"
+   },
+   "after": "t-artwan2-regen",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"Image generation in the art library doesn't seem to be working.\" Cause: fal rejects prompts over 2000 characters (422); 418 of 1123 prompts are longer.",
+     "at": "2026-11-22T06:56:18.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "The Art Library's WAN fallback sends prompts over fal's 2000 character limit; this build trims them and records the fix.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row A, a small known code fix)",
+    "effort": "medium (the cause is known and tested)",
+    "text": "Read CLAUDE.md and card c-fix-artwan in data/board.json. Fix is wan_prompt in tools/art-library/artgen.py (build artwan2); confirm python3 tools/art-library/artgen_test.py passes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-artwan2-regen",
+   "title": "Generate the 3 gate pictures again",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "fyi": true,
+   "next": "Open ADMIN > ART LIBRARY, find prop-gate-town-school-open, prop-gate-backlot-stage7-open and prop-gate-jpark-barn-open, press Generate on each, then Approve or Reject. They now go to WAN (try 3) and should come back with a picture.",
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "prop-gate-town-school-open",
+      "prop-gate-backlot-stage7-open",
+      "prop-gate-jpark-barn-open"
+     ],
+     "label": "Open the 3 gate pictures"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-fix-artwan.",
+     "at": "2026-11-22T06:56:18.000Z"
+    }
+   ]
   }
  ],
  "sessions": [
