@@ -1,3 +1,7 @@
+## wanbulk-tmovestagelab-45075789998 (2026-11-22): 1 battle videos made from board card t-movestage-lab passed their checks and were put in the game
+
+The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): stage-tom-starbeam-vid. Nobody has watched them yet; the card asks Tom to.
+
 ## guideuse-45076526823 (2026-11-22): Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide
 
 Card c-guidegen. USE THIS ONE in the Battle Guide (`data/guide-use.json`, Action guide-use). Not seen on the phone yet.
