@@ -34787,6 +34787,71 @@
     "url": "",
     "opening": "added by session on c-wanstop-grace-cubepop-r4"
    }
+  },
+  {
+   "id": "c-videohist1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "videohist1",
+   "title": "Video History page: every video and why it was rejected",
+   "next": "Shipped in videohist1: ADMIN > VIDEO HISTORY.",
+   "blocks": [],
+   "after": "nothing for Tom: c-videohist-auto",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: Can I see a history of videos that were generated"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (21:15): \"Can I see a history of videos that were generated so I can see why you rejected them\""
+    }
+   ],
+   "prompt": {
+    "what": "Video History page.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
+   "id": "c-videohist-auto",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "videohist2",
+   "title": "Video History rebuilds itself after every video run",
+   "next": "Make the wan-gen Action rebuild data/video-history.json and the strips after each run and push them to main.",
+   "blocks": [],
+   "auto": true,
+   "start": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by videohist1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by videohist1. Tom (21:15): \"Can I see a history of videos that were generated so I can see why you rejected them\""
+    }
+   ],
+   "prompt": {
+    "what": "The Video History page stays current without a session.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (one workflow step and a test)",
+    "text": "Read CLAUDE.md (sections wanauto1 and wanstuck1), docs/CHANGES.md \"videohist1\", tools/videohist/build.py and .github/workflows/wan-gen.yml, then card c-videohist-auto in data/board.json. Add a step to the wan-gen job, after \"Keep the results and the ledger on the wangen branch\" and only when a video was made (not a dry run, not mode none): run python3 tools/videohist/build.py --branch-dir \"$RUNNER_TEMP/wangen\" on a fresh checkout of main, then commit data/video-history.json and art/video-history/ with the message \"videohist: rebuilt after wan-gen run followed by the run id, ending in [skip ci]\" and push to main, fetching and rebasing up to 5 times when main moved (take main's copy of every file except those two on a conflict). The build must keep working when the workflow checkout is shallow. Test it with a local branch-dir holding two made-up videos and a result file (extend tools/videohist/videohist_test.py), write the CHANGES heading ## videohist2 and push. After: nothing for Tom: end. Your first push is the commit board: start c-videohist-auto. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
