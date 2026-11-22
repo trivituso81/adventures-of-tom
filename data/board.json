@@ -24930,7 +24930,7 @@
   {
    "id": "t-pairmove1-gen",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -25025,6 +25025,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 45033435631: 0 made; waiting for the next tap (spending limit): tom-rose-giddyup."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: something is wrong: Pressing the button results in nothing happening Sent to Claude as card c-fix-movefun-gen; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T14:55:56.588Z"
     }
    ],
    "wgen": {
@@ -25049,14 +25054,15 @@
      "already": [],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
       "tom-rose-giddyup": 2
      }
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-wanstuck1",
@@ -29092,12 +29098,13 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Remaking three flat moves: Blockade, Cube Pop,",
-   "next": "You reported a problem on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: See last run notes",
+   "next": "You reported 2 problems on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor; Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Pressing the button results in nothing happening",
    "blocks": [
-    "t-movefun-gen"
+    "t-movefun-gen",
+    "t-pairmove1-gen"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "reports": [
     {
      "at": "2026-11-22T07:49:50.162Z",
@@ -29107,6 +29114,15 @@
      "words": "See last run notes",
      "shot": "",
      "asked": "Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes."
+    },
+    {
+     "at": "2026-11-22T14:55:55.705Z",
+     "card": "t-pairmove1-gen",
+     "title": "Make Rose's Giddyup with Tom in it",
+     "ask": "animations",
+     "words": "Pressing the button results in nothing happening",
+     "shot": "",
+     "asked": "Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him."
     }
    ],
    "chat": {
@@ -29123,6 +29139,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-movefun-gen: See last run notes",
      "at": "2026-11-22T07:49:51.037Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom reported on t-pairmove1-gen: Pressing the button results in nothing happening",
+     "at": "2026-11-22T14:55:56.588Z"
     }
    ],
    "prompt": {
@@ -29132,7 +29153,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
     "effort": "medium (fixing what you named, starting from what is there)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen, t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n2. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him. He wrote: Pressing the button results in nothing happening\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen, t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-movefun-gen"
   },
