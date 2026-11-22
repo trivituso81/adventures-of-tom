@@ -30556,6 +30556,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 2 videos (about $1.57).",
      "at": "2026-11-22T00:42:39.933Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44967949648: 2 made and checked, 0 passed, 2 stopped, 0 left for the next tap."
     }
    ],
    "wgen": {
@@ -30564,10 +30568,33 @@
     "n": 2,
     "est": 1.57,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T00:44:24Z",
+     "state": "done",
+     "at": "2026-11-22T00:47:37Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44967949648",
-     "n": 2
+     "n": 2,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [
+      {
+       "what": "rose-giddyup",
+       "why": "failed: p1, p2",
+       "card": "c-wanstop-rose-giddyup-r6"
+      },
+      {
+       "what": "deedee-wetfloor",
+       "why": "failed: edge, p1, p2",
+       "card": "c-wanstop-deedee-wetfloor-r5"
+      }
+     ],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [],
+     "bake_failed": {},
+     "spent": 1.58,
+     "build": null,
+     "watch": ""
     }
    }
   },
@@ -30693,6 +30720,70 @@
      "at": "2026-11-22T00:43:00.160Z"
     }
    ]
+  },
+  {
+   "id": "c-wanstop-rose-giddyup-r6",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-giddyup-r6",
+   "title": "Fix the stopped video rose-giddyup",
+   "next": "The bulk run stopped rose-giddyup (failed: p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (44967949648): rose-giddyup stopped at rev 6. attempt 1 (pad 0.65) p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head lik (inconsistent motion; multiple poses but no clear canno; p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (ends in relaxed stance but sequence does not clearly s"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped and changes one thing in its job.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-rose-giddyup-r6 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job rose-giddyup (rev 6) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head lik (inconsistent motion; multiple poses but no clear canno; p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (ends in relaxed stance but sequence does not clearly s. Its files are on branch wangen: rose-giddyup-r6-result.json (every check with numbers and the look-check answers) and the videos rose-giddyup-r6.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanch5-gen. Your first push is the commit board: start c-wanstop-rose-giddyup-r6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r5",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-deedee-wetfloor-r5",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "next": "The bulk run stopped deedee-wetfloor (failed: edge, p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (44967949648): deedee-wetfloor stopped at rev 5. attempt 1 (pad 0.65) edge, p1, p2. Evidence: edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; swee; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clea"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped and changes one thing in its job.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r5 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 5) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: edge, p1, p2. Evidence: edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; swee; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back; returns to stance bu. Its files are on branch wangen: deedee-wetfloor-r5-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r5.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanch5-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r5. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
