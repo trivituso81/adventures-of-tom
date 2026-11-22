@@ -31803,7 +31803,7 @@
   {
    "id": "t-pairmove1-gen",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -31817,7 +31817,7 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "pairmove1",
    "chat": {
     "url": "",
@@ -31836,9 +31836,12 @@
     {
      "d": "2026-11-22",
      "t": "Fixed by fix-pairmove1-gen: the board page read the video job list once when it opened, so this card (added later) counted 0 videos and said Nothing to make right now. It now reads the list again every minute and while the card is open. Generate all 1 video is the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-movefun",
@@ -34127,7 +34130,7 @@
    "id": "c-fix-pairmove1-gen",
    "tag": "fix-pairmove1-gen",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
@@ -34136,7 +34139,7 @@
     "t-pairmove1-gen"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "reports": [
     {
      "at": "2026-11-22T04:31:47.204Z",
@@ -34175,6 +34178,10 @@
     {
      "d": "2026-11-22",
      "t": "Reproduced (the page before the fix shows \"Nothing to make right now.\" when the card arrives after the page opened) and fixed in board.html; new test tools/board_wanstale_test.py. No pencil report filed since 04:31:47Z. Shipped as fix-pairmove1-gen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-pairmove1-gen: the board's video button no longer says Nothing to make for a card added after the page opened"
     }
    ],
    "prompt": {
@@ -34186,7 +34193,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen and t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Says nothing to make migrant lei\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T04:31:47.204Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-pairmove1-gen"
+   "after": "t-pairmove1-gen",
+   "done": "2026-11-21"
   },
   {
    "id": "t-movefun-pick",
@@ -34969,6 +34977,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFVkPGSFytGMTWkkwc",
+   "title": "Fix: Make Rose's Giddyup with Tom in it",
+   "first": "2026-11-21T20:39:51-08:00",
+   "last": "2026-11-21T21:01:16-08:00",
+   "tags": [
+    "fix-pairmove1-gen"
+   ],
+   "cards": [
+    "c-fix-pairmove1-gen"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDwRfZcZZQvLadQubT",
    "title": "Does each family move look like its name? List flat ones",
    "first": "2026-11-21T20:38:53-08:00",
@@ -35013,16 +35033,6 @@
    "cards": [
     "c-nightclean",
     "c-night-clean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFVkPGSFytGMTWkkwc",
-   "title": "Fix: Make Rose's Giddyup with Tom in it",
-   "first": "2026-11-21T20:39:51-08:00",
-   "last": "2026-11-21T20:39:51-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-pairmove1-gen"
    ]
   },
   {
@@ -39550,8 +39560,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "ae7c3eba00b89af4c0425393f7b8ab74a1b328d6",
- "synced_at": "2026-11-22T05:00:07+00:00",
+ "synced": "12c15c3c9264cca6fc02ef731c36a057dd00226b",
+ "synced_at": "2026-11-22T05:02:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
