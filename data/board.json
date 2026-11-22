@@ -27229,7 +27229,7 @@
   {
    "id": "t-artgen3try",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -27246,8 +27246,14 @@
     {
      "d": "2026-11-21",
      "t": "Added by c-artgen3 (artgen3 shipped)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh Sent to Claude as card c-fix-artgen3try; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T02:11:01.660Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-guidegen-try",
@@ -32149,6 +32155,58 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-fix-artgen3try",
+   "tag": "fix-artgen3try",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Try the auto-approve button on a pictures card",
+   "next": "You reported a problem on Try the auto-approve button on a pictures card. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh",
+   "blocks": [
+    "t-artgen3try"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T02:11:01.052Z",
+     "card": "t-artgen3try",
+     "title": "Try the auto-approve button on a pictures card",
+     "ask": "pictures",
+     "words": "i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh",
+     "shot": "",
+     "asked": "No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN ) BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-artgen3try"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-artgen3try.",
+     "at": "2026-11-22T02:11:01.660Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-artgen3try: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh",
+     "at": "2026-11-22T02:11:01.660Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Try the auto-approve button on a pictures card.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try the auto-approve button on a pictures card, ask pictures). He was asked: No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN ) BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly. He wrote: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:11:01.052Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-artgen3try"
   }
  ],
  "sessions": [
