@@ -32571,6 +32571,11 @@
     {
      "d": "2026-11-21",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T02:56:20.428Z"
     }
    ],
    "prompt": {
@@ -32583,7 +32588,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch2play and t-ch2play in data/board.json, history included. Your first push is the commit board: start c-fix-ch2play.\n\nTom tested and found problems:\n1. Card t-ch2play (Play chapter 2 on your phone and report, ask play). He was asked: Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4. He wrote: tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:15:31.443Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch2play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch2play, and give the build fix-ch2play a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-ch2play",
-   "auto": true
+   "auto": true,
+   "start": true
   },
   {
    "id": "c-fix-dash3-try-2",
