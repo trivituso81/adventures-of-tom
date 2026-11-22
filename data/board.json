@@ -21616,10 +21616,10 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Waiting on Tom card t-boppy-bigfish-cap: the approved v2 picture has a blank cap (no Paso Robles lettering). Install it anyway, or generate again with the lettering in the prompt.",
+   "next": "Installing v2 with the blank cap (Tom chose: Install the blank cap as it is). Rebaking Boppy's mood frames and faces.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -21633,6 +21633,10 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included, and Tom card t-boppy-bigfish-pic (his note and answer). Your first push is the commit board: start c-boppy-bigfish.\n\nTom approved a new Art Library picture for entry boppy-em-unimpressed (Boppy's unimpressed mood pose, now in the Paso Robles cap instead of the retired Big Fish cap). Install it. First confirm the newest approved file art/raw/characters/boppy-em-unimpressed-vN.png (the highest N) reads Paso Robles and has his mustache (look at it). tools/sprite-bake/emotion_frames.py already takes the newest -v file for Boppy's cell 7 (REPLACE). Rebake: python3 tools/sprite-bake/emotion_frames.py boppy, python3 tools/sprite-bake/bake_emotion_faces.py boppy, python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run it in the background), then the head chin check (CHECK=/tmp/chin.png python3 tools/sprite-bake/emotion_chin.py boppy, look at it). Measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py) so the cap writing is not mirrored when he faces left. Look at art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp: both must read Paso Robles. Grep for any leftover Big Fish art reference and purge it. Run python3 tools/smoke.py and look at the shots. Add a docs/CHANGES.md entry headed ## boppy-bigfish, bump the tags with python3 tools/art-library/bump_tags.py boppy-bigfish --base origin/main, set after on the card to \"nothing for Tom: end\", push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom answered t-boppy-bigfish-cap: Install the blank cap as it is. Session started to install it."
+    },
     {
      "d": "2026-11-22",
      "t": "Tom: card has been Working on now all day. It was left In progress after the session ended without shipping; now Queued behind t-boppy-bigfish-cap."
@@ -21701,8 +21705,7 @@
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-cap",
-   "waiting_on": "tom"
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-qa-coh01",
