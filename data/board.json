@@ -34000,7 +34000,7 @@
   {
    "id": "t-wangaveup-deedee-wetfloor-r9",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "fyi": true,
@@ -34016,7 +34016,7 @@
    ],
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "added by the wan-gen job"
@@ -34025,8 +34025,15 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44984439565): deedee-wetfloor used 4 tries ($3.14)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Give it 4 more tries",
+     "at": "2026-11-22T04:29:46.570Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Give it 4 more tries"
   }
  ],
  "sessions": [
