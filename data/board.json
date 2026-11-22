@@ -31214,7 +31214,7 @@
    "title": "Generate the two fixed videos",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "animations",
    "next": "Look again at this card. You wrote: \"the button says nothing to make right now. but there is no video made\". That was right: the last run made both videos, but neither passed its checks, and the card did not say so. It now says which videos were stopped and why, and the button comes back after a fix. Both are fixed now, so this card should show \"2 videos left to make: rose-giddyup, deedee-wetfloor\" and the button Generate all 2 videos (about $1.57). Tap it twice. Rose: the cannonball now says \"upright\" (the last one flipped upside down on the way up). Deedee: the line that kept the mop on the floor the whole time is gone (the last one swept back and forth 2 or 3 times). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal.",
    "steps": [
@@ -31255,6 +31255,10 @@
     {
      "d": "2026-11-21",
      "t": "Claude (fix-wanstop-gen): the Generate button now lists rose-giddyup (rev 8) and deedee-wetfloor (rev 7) again. Your words: \"the button says nothing to make right now. but there is no video made\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Generate the two fixed videos is done."
     }
    ],
    "wgen": {
@@ -31291,8 +31295,7 @@
      "build": null,
      "watch": ""
     }
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-menuux-plan",
@@ -31433,7 +31436,7 @@
   {
    "id": "c-wanstop-rose-giddyup-r7",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-giddyup-r7",
    "title": "Fix the stopped video rose-giddyup",
@@ -31463,6 +31466,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed: rose-giddyup rev 8. One change: \"a tight cannonball\" became \"a tight upright cannonball\" (prompt v5). Cause from the evidence: the jump became a backward somersault; the bg miss is frame 54 only (upside down) and the edge touches are frames 58 and 59 (the landing). Kept everything else. Next: Tom taps Generate on t-wanstop-gen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-rose-giddyup-r7: Rose's Giddyup asks for an upright cannonball, because the last one flipped upside down"
     }
    ],
    "prompt": {
@@ -31473,12 +31480,13 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-rose-giddyup-r7 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job rose-giddyup (rev 7) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: bg, edge. Evidence: bg: background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 23.8 (limit 15), 1.26 percent of it off colour (limit 1), colour moved at most 3 (limit 40); edge: the figure touches the left edge in 2 of 121 pictures (video frames 58 to 59). Its files are on branch wangen: rose-giddyup-r7-result.json (every check with numbers and the look-check answers) and the videos rose-giddyup-r7.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-rose-giddyup-r7. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r6",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -31508,6 +31516,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed: deedee-wetfloor rev 7. One change: deleted \", the mop head staying on top of the floor the whole time\" from the sweep sentence (prompt v4). Cause from the evidence: the short sweep cleared the edges, but she still strokes back and forth 2 or 3 times (video frames 36 to 90) with the mop on the floor the whole stretch. \"Behind her back\" kept (the mop must leave the picture for the ends check; Windex and scrub use it). Next: Tom taps Generate on t-wanstop-gen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r6: Deedee's Wet-Floor drops the line that kept the mop on the floor the whole time"
     }
    ],
    "prompt": {
@@ -31518,7 +31530,8 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r6 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 6) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears from side not behind back; multiple incons; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear put away behind back; returns to stance witho. Its files are on branch wangen: deedee-wetfloor-r6-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r6.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-battleux-decide",
@@ -31711,7 +31724,7 @@
    "id": "c-fix-wanstop-gen",
    "tag": "fix-wanstop-gen",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Generate the two fixed videos",
@@ -31759,6 +31772,10 @@
     {
      "d": "2026-11-21",
      "t": "Fixed: the board page counted a stopped job as finished by its name only, so after a session raised its rev the button still said \"Nothing to make right now\". Now a stopped job waits only at the rev it was stopped at, the card says which videos were stopped and by which fix card, and the run records each job's rev. Pencil reports since 01:45Z: none about this."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-wanstop-gen: the Generate videos button comes back after a stopped video is fixed, and the card says why nothing was made"
     }
    ],
    "prompt": {
@@ -31770,7 +31787,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanstop-gen and t-wanstop-gen in data/board.json, history included. Your first push is the commit board: start c-fix-wanstop-gen.\n\nTom tested and found problems:\n1. Card t-wanstop-gen (Generate the two fixed videos, ask animations). He was asked: Tap Generate all 2 videos on this card (two taps). It makes Rose's \"Giddyup, Tata!\" Launch again (she now circles her hand instead of twirling, because the last one spun all the way round) and Deedee's Wet-Floor Hazard again (now one short sweep, because the last one swept back and forth into both edges). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal. Nothing else to do first. He wrote: the button says nothing to make right now. but there is no video made\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T01:45:21.474Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanstop-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanstop-gen, and give the build fix-wanstop-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanstop-gen"
+   "after": "t-wanstop-gen",
+   "done": "2026-11-21"
   },
   {
    "id": "c-takes-9b7e15",
@@ -32232,6 +32250,38 @@
    "changed": "2026-11-21",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-takes-e45d5a",
+   "tag": "takes-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -32958,6 +33008,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
+   "title": "Fix: Generate the two fixed videos",
+   "first": "2026-11-21T17:55:54-08:00",
+   "last": "2026-11-21T18:13:11-08:00",
+   "tags": [
+    "fix-wanstop-gen",
+    "wanstop-rose-giddyup-r7",
+    "wanstop-deedee-wetfloor-r6"
+   ],
+   "cards": [
+    "c-fix-wanstop-gen",
+    "c-wanstop-rose-giddyup-r7",
+    "c-wanstop-deedee-wetfloor-r6"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
    "title": "Main menu redesign: the proposal",
    "first": "2026-11-21T17:30:53-08:00",
@@ -32990,18 +33056,6 @@
    ],
    "cards": [
     "c-battleux-cards"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
-   "title": "Fix: Generate the two fixed videos",
-   "first": "2026-11-21T17:55:54-08:00",
-   "last": "2026-11-21T17:55:54-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-wanstop-gen",
-    "c-wanstop-rose-giddyup-r7",
-    "c-wanstop-deedee-wetfloor-r6"
    ]
   },
   {
@@ -37088,11 +37142,13 @@
    "takes/20261122T015428-cdp/part-001.json",
    "takes/20261122T015428-cdp/state.json",
    "takes/20261122T015924-pqq/part-001.json",
-   "takes/20261122T015924-pqq/state.json"
+   "takes/20261122T015924-pqq/state.json",
+   "takes/20261122T021219-429/part-001.json",
+   "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3d2b1a07194cb362a493051a8338540e72758b2b",
- "synced_at": "2026-11-22T02:11:23+00:00",
+ "synced": "04be7def86a1ed0f26151ac09b9f14651dfa6b38",
+ "synced_at": "2026-11-22T02:13:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
