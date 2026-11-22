@@ -216,6 +216,13 @@ Tom (14:51): "Why do we have to do an opus prompt for every individual animation
 | Replay (free) | `python3 -I tools/art-library/wangen.py --replay-checks rose-giddyup-r4,deedee-wetfloor-r4 --out <folder with the videos>`: giddyup r4 fails the edge check only; wet-floor r4 fails feet (9.5 percent) and edge, as 4.10 says. Of the 46 videos (final rev of each job) on branch `wangen`, 12 pass every measurement as they are, 32 fail at least one (feet 23, edge 11, background 8, ends 6, height 2; mostly the feet rule at 1 percent, which Deedee's approved idle breaks at 2.7 percent), 2 files are unreadable. The plan's numbers are kept; loosen a job with `limits` and a `why`, or change `LIMITS` in `wanqa.py` on evidence |
 | Not done | No real fal call and no real bump_tags run in a session; the first paid bulk run is Tom's tap. Every video already made is at its final rev, so the first real use is a card that lists new jobs (c-wanch5's two) |
 
+### 4.13 Built (wanch5, 2026-11-21): the two remakes as one Generate tap
+| Job | One change | Result |
+|---|---|---|
+| Rose Giddyup r6 | Prompt v3: "leaps straight up once" (was "leaps up and forward to the left once"); pad 0.65, airborne | Waits on Tom's tap (t-wanch5-gen). Bake from rose-tackle (strike, 24 fps, step 2, 1.5x, 83 rows), wired to giddyup_tata_launch |
+| Deedee Wet-Floor r5 | Pad 0.65 (Tom's Yes on t-wanch4-wetfloor), prompt v2; `limits.feet` 0.10 (r4 replay: mop head 9.5 percent below her feet row) | Waits on Tom's tap. Bake from deedee-windex (strike, 24 fps, step 3, 1.5x, 99.3 rows), wired to wet_floor_hazard |
+| Spend | none in the session; the tap may add up to $2 to the ledger ($53.815) | |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

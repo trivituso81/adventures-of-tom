@@ -30524,13 +30524,44 @@
    "answer": "Yes, a mop drawn lower than her feet is fine if she sweeps once"
   },
   {
+   "id": "t-wanch5-gen",
+   "title": "Generate the new videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Tap Generate all 2 videos on this card (two taps). It makes Rose's \"Giddyup, Tata!\" Launch (now a straight-up jump) and Deedee's Wet-Floor Hazard (more room in the frame; the mop may sit lower than her feet, as you said). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal. Nothing else to do first.",
+   "steps": [
+    "Tap Generate all 2 videos on this card, then tap it again to confirm.",
+    "Wait for the card Watch the new videos (the Action adds it when a video passes)."
+   ],
+   "wan": {
+    "jobs": [
+     "rose-giddyup",
+     "deedee-wetfloor"
+    ],
+    "cap": 2
+   },
+   "blocks": [],
+   "fyi": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "wanch5",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanch5. Giddyup r6: one change, \"leaps straight up once\" (was \"leaps up and forward to the left once\"). Wet-Floor r5: one change, pad 0.65, with a feet limit of 10 percent because the mop rests below her feet row (Tom's Yes on t-wanch4-wetfloor). First paid bulk run."
+    }
+   ]
+  },
+  {
    "id": "c-wanch5",
    "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
    "theme": "Battle Animations",
    "lane": "claude",
    "col": "prog",
    "tag": "wanch5",
-   "next": "Waits on your card Deedee's Wet-Floor mop: is a lower mop fine? Then writes the one-change job for Giddyup and for Wet-Floor (your answer picks it) with their bake and wire settings, and a Tom card Generate all 2 videos: you tap it, the Action makes and checks them and puts what passes in the game. At most $2. No paid run in the session.",
+   "next": "Shipped in wanch5: the two jobs are written with their bake and wire settings, and your card Generate the new videos holds the button. Nothing more for Claude until a video stops (the Action then adds its own card).",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -30555,6 +30586,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped wanch5: rose-giddyup rev 6 (prompt v3, leaps straight up, pad 0.65, airborne), deedee-wetfloor rev 5 (prompt v2, pad 0.65, limits feet 0.10: r4 replay measured the mop head 9.5 percent below her feet row). Bake from rose-tackle and deedee-windex (neither clip existed yet); wired to giddyup_tata_launch and wet_floor_hazard. Tom card t-wanch5-gen, cap $2 (ledger $53.815)."
     }
    ],
    "prompt": {
@@ -30570,7 +30605,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.11 Built wanch4)\""
-   }
+   },
+   "after": "t-wanch5-gen"
   },
   {
    "id": "svc-voice-gen",

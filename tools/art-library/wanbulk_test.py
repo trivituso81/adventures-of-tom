@@ -12,7 +12,7 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B5  the card: wgen.want goes false before any spend, wgen.run lists merged / retried / stopped / capped, the Tom watch card names every new clip, history lines
   B6  dry run: sends nothing, changes nothing; a job with no `bake` passes but is not baked and is said so
   B7  a bake that cannot be done (marks cannot be found) leaves the others merged
-  B8  replay of the stored r4 videos of rose-giddyup and deedee-wetfloor (only if /tmp/wb has them, else skipped): they fail the way plan 4.10 says
+  B8  replay of the stored r4 videos of rose-giddyup and deedee-wetfloor (only if /tmp/wb has them, else skipped): they fail the way plan 4.10 says (Wet Floor's feet within its wanch5 limit, plan 4.13)
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
 import numpy as np
@@ -279,7 +279,7 @@ rv = '/tmp/wb'
 if all(os.path.exists('%s/%s.mp4' % (rv, v)) for v in ('rose-giddyup-r4', 'deedee-wetfloor-r4')):
     c, o = (lambda p: (p.returncode, p.stdout))(subprocess.run([sys.executable, '-I', os.path.join(ROOT, 'tools/art-library/wangen.py'), '--replay-checks', 'rose-giddyup-r4,deedee-wetfloor-r4', '--out', rv], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True))
     ok('rose-giddyup-r4: FAILS edge' in o and not re.search(r'rose-giddyup-r4: FAILS .*feet', o), 'B8 Rose Giddyup r4 fails the edge check and only that (plan 4.10)', o[:600])
-    ok(re.search(r'deedee-wetfloor-r4: FAILS feet, edge', o) and re.search(r'9\.5 percent', o), 'B8 Deedee Wet Floor r4 fails the feet check (9.5 percent) and the edge check (plan 4.10)', o[600:1500])
+    ok(re.search(r'deedee-wetfloor-r4: FAILS edge\n', o) and re.search(r'feet +ok .*9\.5 percent', o), 'B8 Deedee Wet Floor r4: the mop sits 9.5 percent below her feet, inside the job\'s feet limit of 10 percent (wanch5, Tom\'s Yes on t-wanch4-wetfloor), so it fails the edge check only (plan 4.10, 4.13)', o[600:1500])
 else: print('SKIP B8: the stored r4 videos are not in /tmp/wb')
 
 srv.shutdown(); xai.terminate(); shutil.rmtree(tmp, ignore_errors=True)
