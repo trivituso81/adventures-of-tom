@@ -31121,7 +31121,7 @@
    "id": "c-fix-dash3-try",
    "tag": "fix-dash3-try",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try the game strip and Take me there",
@@ -31143,7 +31143,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFXzajDMUzuRo7vyHb",
+    "url": "",
     "opening": "Something is wrong on t-dash3-try"
    },
    "history": [
@@ -31165,6 +31165,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -31177,8 +31181,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-dash3-try and t-dash3-try in data/board.json, history included. Your first push is the commit board: start c-fix-dash3-try.\n\nTom tested and found problems:\n1. Card t-dash3-try (Try the game strip and Take me there, ask play). He was asked: Open the Admin Dashboard on the wide monitor (https://trivituso81.github.io/adventures-of-tom/dashboard.html). Under the game: change the screen size, jump to a chapter and to a test fight, and in Next for you press Take me there on the card Win a fight while Tom is guarding and check he celebrates. Then press All good, or Something is wrong and say which control and what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4). He wrote: duo folded upright is the wrong orientation\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T01:23:46.984Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-dash3-try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-dash3-try, and give the build fix-dash3-try a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-dash3-try",
-   "auto": true,
-   "started_at": "2026-11-22T01:24:51+00:00"
+   "auto": true
   },
   {
    "id": "t-wanstop-gen",
@@ -31648,8 +31651,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 3,
-   "title": "Merge 3 new voice takes",
+   "count": 4,
+   "title": "Merge 4 new voice takes",
    "next": "New voice takes were saved on branch takes. Merge them into the game.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -31677,6 +31680,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "1 more take file(s) arrived."
     },
     {
      "d": "2026-11-21",
@@ -36426,11 +36433,12 @@
    "takes/20261121T015156-llm/state.json",
    "takes/20261122T014818-vsj/part-001.json",
    "takes/20261122T014818-vsj/state.json",
-   "takes/20261122T015428-cdp/part-001.json"
+   "takes/20261122T015428-cdp/part-001.json",
+   "takes/20261122T015428-cdp/state.json"
   ]
  },
- "synced": "b9c9c75d3eb6103b2c4578c9f223ffc14b27972b",
- "synced_at": "2026-11-22T01:54:39+00:00",
+ "synced": "8c52cc56d4d35d94c66cdac7d96c97ae680463b0",
+ "synced_at": "2026-11-22T01:55:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
