@@ -29,17 +29,18 @@ function m2Plate(m,i,d) {
   const fresh=m.m2new&&v?'<span class="m2-chip new">New skill<span class="m2-nt"> to try</span></span>':'';
   const ko=hp<=0?'<span class="m2-ko">Knocked out</span>':'';
   const label=m.name+', Level '+m.level+', '+hp+' of '+mx+' health'+(v?', '+v.name+' Rank '+v.rank+', '+(v.row==='back'?'Back':'Front')+' row':'')+(m.m2new&&v?', new skill to try':'');
-  const nl='<span class="m2-nl"><b class="m2-name">'+m2Esc(m.name)+'</b><span class="m2-lv"><span class="m2-lw">Level </span><span class="m2-ls">Lv </span>'+m.level+'</span><span class="m2-bar'+(low?' low':'')+'"><i style="width:'+Math.round(hp/mx*100)+'%"></i></span></span>';
   let rest;
   if(d.wide&&!d.compact) rest=(v?'<span class="m2-vb">'+m2Esc(v.name)+'</span><span class="m2-vs">'+m2Stars(v.rank,v.max,13)+row+'</span>':'')+(fresh||ko?'<span class="m2-vs">'+fresh+ko+'</span>':'');
   else if(d.compact) rest=(v?'<span class="m2-vb">'+m2Esc(v.name)+'</span><span class="m2-vs">'+m2Stars(v.rank,v.max,12)+row+fresh+'</span>':'')+(ko?'<span class="m2-vs">'+ko+'</span>':'');
   else rest=(v?'<span class="m2-vs"><span class="m2-vb">'+m2Esc(v.name)+'</span>'+m2Stars(v.rank,v.max,13)+fresh+'<span class="m2-sp"></span>'+row+'</span>':'')+(ko?'<span class="m2-vs">'+ko+'</span>':'');
-  return '<button type="button" class="m2-plate" data-m2="select" data-a="'+i+'" data-k="p-'+i+'" aria-pressed="'+sel+'" aria-label="'+m2Esc(label)+'">'+nl+rest+'</button>';
+  return '<button type="button" class="m2-plate" data-m2="select" data-a="'+i+'" data-k="p-'+i+'" aria-pressed="'+sel+'" aria-label="'+m2Esc(label)+'">'+rest+'</button>';
 }
 function m2Page(list,startIdx,d,foot) {
   const slots=list.map(m=>'<div class="m2-slot" data-id="'+m.id+'"><img class="m2-fig" src="art/menu/'+m.id+'.webp?v='+M2_V+'" alt="" draggable="false"></div>').join('');
   const plates=list.map((m,k)=>m2Plate(m,startIdx+k,d)).join('');
-  const hps='<div class="m2-hps">'+list.map(m=>'<span class="m2-hp'+(m.hp/Math.max(1,m.maxHp)<=.25?' low':'')+'"><span class="m2-hpl">HP </span><b>'+Math.max(0,m.hp)+'</b><span class="m2-of"> of '+Math.max(1,m.maxHp)+'</span></span>').join('')+'</div>';
+  const hps='<div class="m2-hps">'+list.map((m,k)=>{
+    const hp=Math.max(0,m.hp),mx=Math.max(1,m.maxHp),low=hp/mx<=.25;
+    return '<span class="m2-hd'+(startIdx+k===M2.sel?' sel':'')+'"><b class="m2-name">'+m2Esc(m.name)+'</b><span class="m2-nl"><span class="m2-lv"><span class="m2-lw">Level </span><span class="m2-ls">Lv </span>'+m.level+'</span><span class="m2-bar'+(low?' low':'')+'"><i style="width:'+Math.round(hp/mx*100)+'%"></i></span></span><span class="m2-hp'+(low?' low':'')+'"><span class="m2-hpl">HP </span><b>'+hp+'</b><span class="m2-of"> of '+mx+'</span></span></span>';}).join('')+'</div>';
   return hps+'<div class="m2-figs" data-n="'+list.length+'">'+slots+'</div><div class="m2-plates">'+plates+'</div>'+foot;
 }
 

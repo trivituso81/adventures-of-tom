@@ -26986,7 +26986,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
-   "next": "Fix shipped (build fix-menu4play-2). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the first tab (now named Tom's Party) Tom and Grace should sit on the left page and Rose and Deedee on the right page, the two pairs the same distance apart, nobody over the crease, empty space to the right of Rose and Deedee. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change (and what should go in the empty space, and the name if Tom's Party is not what you meant by Dallas's Party).",
+   "next": "Fix shipped (build fix-menu4play-4). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the Party tab each person's name, then Level with the green bar, then HP should sit in one block above their picture, for all four, the same on both pages. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
     "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
@@ -27049,6 +27049,10 @@
      "d": "2026-11-22",
      "t": "Tom: something is wrong: On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at the top above the HP Sent to Claude as card c-fix-menu4play-4; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T14:35:57.609Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix shipped for \"On the party tab, you only moved the HP to the top that you were also supposed to move the character name and level\": name, Level and the green bar now sit above the HP, all above the pictures (build fix-menu4play-4)."
     }
    ],
    "waiting_on": "claude"
@@ -29643,6 +29647,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped build fix-menu4play-4: name, level and bar moved above the HP. Menu test frames looked at (Duo, iPhone upright). The two open pencil reports are chapter 2 scenes, not this fix."
     }
    ],
    "prompt": {

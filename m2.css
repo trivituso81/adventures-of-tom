@@ -70,7 +70,7 @@
 #m2 .m2-plate{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px;padding:10px 6px 0;text-align:left;color:var(--ink)}
 #m2 .m2-nl{display:flex;align-items:baseline;gap:8px;min-width:0}
 #m2 .m2-name{font:800 25px/1.05 var(--disp);letter-spacing:-.015em;padding:0 3px;margin-left:-3px;white-space:nowrap}
-#m2 .m2-plate[aria-pressed="true"] .m2-name{background:linear-gradient(transparent 58%,var(--lamp) 58%,var(--lamp) 96%,transparent 96%)}
+#m2 .m2-hd.sel .m2-name{background:linear-gradient(transparent 58%,var(--lamp) 58%,var(--lamp) 96%,transparent 96%)}
 #m2 .m2-lv{font-size:13px;font-weight:700;color:var(--soft);white-space:nowrap}
 #m2 .m2-bar{height:8px;border-radius:8px;background:rgba(43,26,51,.15);overflow:hidden}
 #m2 .m2-bar i{display:block;height:100%;border-radius:8px;background:var(--green)}
@@ -487,3 +487,10 @@
 #m2 .m2-hp.low b{color:var(--coral)}
 #m2 .m2-vb{font:800 18px/1.15 var(--disp);letter-spacing:-.01em}
 #m2.m2-compact .m2-vb{font-size:15px}
+
+/* menu fix 4: name, level and green bar sit above the HP, all above the pictures */
+#m2 .m2-hd{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:3px}
+#m2 .m2-hd .m2-nl{width:100%}
+#m2 .m2-hd .m2-hp{flex:none}
+#m2 .m2-hd{padding-right:12px}
+#m2 .m2-hd .m2-name{align-self:flex-start;max-width:100%}
