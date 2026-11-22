@@ -29502,7 +29502,7 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
@@ -29515,11 +29515,6 @@
    "tag": "nightclean",
    "after": "nothing for Tom: end",
    "history": [
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T22:04:08.614Z"
-    },
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
@@ -29557,6 +29552,10 @@
     {
      "d": "2026-11-21",
      "t": "Ran: nothing to do (bucket B, no finished notes left; unused tools 1, art 115 reported only)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Quiet flag: the run on 11-21 had finished (nothing to do). Moved back to Up next by hand; the sync had left it In progress."
     }
    ],
    "prompt": {
