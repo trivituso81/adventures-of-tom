@@ -694,45 +694,6 @@ html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2
 
 /* ---- F7 (engine/feel.js): speed and AUTO buttons, Rose Mode tip, victory card, Options ---- */
 .battle-stage{position:relative}
-/* Battle 3 (engine/b3-ui.js): the turn bar's round divider and moved face, 10 Pep dots, the CONTINUE button. Layout comes from the .b2-* rules above. */
-.b3-bar{gap:3px}
-.b3-div{flex:0 0 auto;align-self:stretch;display:flex;align-items:center;justify-content:center;width:11px;margin:0 1px;border-left:2px dashed var(--gold);font-style:normal}
-.b3-div b{font-size:8px;font-weight:900;line-height:1;color:var(--gold);padding-left:1px}
-.b3-bar .b2-tk{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.b3-bar .b2-tk.b3-moved{box-shadow:0 0 0 2px #ffb070,0 0 8px 2px #ffb070cc;z-index:2}
-.b3-bar .b2-tk.ghost{opacity:.72}
-.b3-bar .b2-tk.b3-flus{box-shadow:0 0 0 2px #ff9a8a,0 0 0 3px var(--edge-ink)}.b3-bar .b2-tk.b3-flus img{transform:rotate(-16deg);filter:saturate(.45)}
-.b2-int.b3-brk{background:#ff9a8a;font-size:7px;letter-spacing:.2px}
-.b2-st.b3-mk{color:#1a1e26!important;background:#ff8f80}
-.b2-st.b3-nx{color:#1a1e26!important;background:#ffe27a}
-.b3-pep{gap:1px}.b3-pep i{width:4px}
-.b3-chips{display:flex;flex-wrap:wrap;gap:2px 3px;margin-top:2px}.b3-chips .b2-st{margin-left:0;white-space:nowrap}
-.b3-pepn{font-size:9px;font-weight:800;letter-spacing:.6px;color:#8dc4e6}
-#b3-cmd .b2-mid{flex-direction:column;gap:3px;display:flex;align-items:center;justify-content:center}#b3-cmd .b2-mid img{width:64%}#b3-cmd .b2-mid.off{opacity:.6}
-.b3-go{align-items:center;text-align:center;padding:14px 9px}.b3-go em{justify-content:center}
-/* The full list for one unit (statuses, shields, the floor), opened by tapping a party card or a monster. */
-.b3-shn{margin-left:3px;color:#9fd0ff;font-weight:800}
-.b3-info{align-content:start;max-height:100%;overflow-y:auto}
-.b3-inf-h{display:flex;justify-content:space-between;align-items:baseline;gap:6px;padding:0 2px}.b3-inf-h span{font-size:14px;font-weight:800;letter-spacing:.3px}.b3-inf-h em{font-size:10px;font-style:normal;color:var(--ink-dim)}
-.b3-inf{border:1px solid #ffffff22;border-radius:5px;background:#ffffff0a;padding:5px 7px}
-.b3-inf-t{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.b3-inf-t .b2-st{margin-left:0;white-space:nowrap}.b3-inf-t b{font-size:11.5px;font-weight:800}.b3-inf-t i{margin-left:auto;font-size:9.5px;font-style:normal;color:var(--gold);white-space:nowrap}
-.b3-inf p{margin:3px 0 0;font-size:10.5px;line-height:1.3;color:var(--ink-dim)}
-html.landscape #battle.v2 .b3-inf{padding:2px 5px}html.landscape #battle.v2 .b3-inf-h span{font-size:10.5px}html.landscape #battle.v2 .b3-inf-h em,html.landscape #battle.v2 .b3-inf-t i{font-size:7.5px}
-html.landscape #battle.v2 .b3-inf-t b{font-size:9px}html.landscape #battle.v2 .b3-inf p{font-size:8px;margin-top:1px;line-height:1.2}html.landscape #battle.v2 .b3-inf-t .b2-st{font-size:6.5px;padding:0 2px}
-html.landscape #battle.v2 .b3-div{width:8px}html.landscape #battle.v2 .b3-div b{font-size:7px}
-html.landscape #battle.v2 .b3-pep i{width:2px}
-html.landscape #battle.v2 .b3-chips{gap:1px 2px;margin-top:1px}html.landscape #battle.v2 .b3-chips .b2-st{font-size:6.5px;padding:0 2px}
-/* Battle 3 (engine/b3-ui.js): a Skill that comes from the Pocket Vibe, and a Portable Counter's number on its owner's portrait. */
-.b2-el.b3-pk{color:#8dc4e6;border:1px solid #8dc4e688;border-radius:3px;padding:0 3px}
-/* Battle 3 Family Ruckus (stage 6): the RUCKUS button is the gauge, filled from the bottom by its share. */
-.b3-rk{background:linear-gradient(to top,#ffd36b99 var(--rk,0%),#ffffff12 var(--rk,0%))}
-.b3-rk small{color:#ffe9a8;font-weight:900}
-.b3-rkh{color:#ffd36b}
-/* Battle 3: the heading over the SKILLS list while someone picks a free Skill (a granted action). */
-.b3-free{font-size:10.5px;font-weight:900;letter-spacing:.6px;color:#ffe27a;padding:0 2px}
-html.landscape #battle.v2 .b3-free{font-size:8px}
-.b3-rowtag{margin-left:5px;padding:0 .35em;border:1px solid #8dc4e688;border-radius:3px;font-style:normal;font-size:.6em;font-weight:900;letter-spacing:.05em;color:#8dc4e6;vertical-align:middle}
-.b3-ctr{position:absolute;right:-3px;bottom:-3px;min-width:14px;height:14px;padding:0 2px;border-radius:7px;background:var(--gold);color:#1a1e26;font-size:9px;font-weight:900;line-height:14px;text-align:center;box-shadow:0 0 0 1px var(--edge-ink)}
 .b7-tools{position:absolute;z-index:3;display:flex;gap:4px}
 .b7-tools button{min-width:36px;height:26px;padding:0 8px;border:2px solid #fff1c766;border-radius:5px;background:#0b0d12bf;color:#fff1cb;font:inherit;font-size:10px;font-weight:900;letter-spacing:.6px;touch-action:manipulation;cursor:pointer}
 .b7-tools button.gear{display:grid;place-items:center;min-width:30px;padding:0 6px}
@@ -773,75 +734,9 @@ html.landscape #battle.v2 .b3-free{font-size:8px}
 .bp-back{justify-content:center!important;padding:4px!important;min-height:0}
 .bp-empty{display:flex;gap:8px;justify-content:center;align-items:center;padding:14px}
 html.landscape .bp .b2-x small,html.landscape .bp-mid small{font-size:8px}html.landscape .bp-cross{gap:3px}html.landscape .bp-grid .bp-btn{height:92px;padding:3px}html.landscape .bp-list .bp-row{min-height:50px}
-/* Battle 3 tap to preview and Rose Mode pictures (engine/b3-ui.js, engine/b3-pictures.js) */
-.b3-pv{grid-column:1/-1;display:grid;gap:2px;border:1px solid #ffffff22;border-radius:5px;background:#ffffff0a;padding:3px 6px;font-size:10px;line-height:1.3}
-.b3-pv:empty{display:none}
-.b3-pv-h{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.b3-pv-h b{font-weight:900;letter-spacing:.5px;color:#8dc4e6}.b3-pv-h i{font-style:normal;color:#8fe3a6;font-weight:800}
-.b3-pv-r{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.b3-pv-r>span:first-child{font-weight:800;margin-right:2px}
-.b3-pv-c{font-weight:900;letter-spacing:.3px;font-size:9px;border:1px solid currentColor;border-radius:3px;padding:0 3px;white-space:nowrap}
-.b3-pv-b,.b3-pv-n{color:var(--ink-dim);font-size:9.5px}
-.b3-bar .b2-tk.b3-pvm{box-shadow:0 0 0 2px #ffb070,0 0 6px 1px #ffb070aa}
-.b2-int.b3-pvb{background:#ffb070;font-size:8px}
-.b3-bar .b2-tk.ghost{outline:2px dashed #ffffffaa;outline-offset:-2px}
-.b2-x.rec .b3p-star,.b3p-star{position:absolute;left:-3px;top:-5px;line-height:0;filter:drop-shadow(0 0 3px #000a)}
+/* Battle 3 Rose Mode pictures (engine/b3-pictures.js); the deck's styles are b3-deck.css */
 .b2-x{position:relative}
 .b3p-fl{display:flex;align-items:center;justify-content:center;gap:2px;width:100%;height:100%;line-height:0}.b3p-fl .bi{flex:1 1 0;width:auto;height:100%;max-width:100%;object-fit:contain}
-.bp-cross .b3p-fl{flex:1 1 0;min-height:0;height:0}
-.b3p-ef{position:absolute;right:-4px;bottom:-4px;line-height:0;filter:drop-shadow(0 0 2px #000c)}
-.b3p-star .bi,.b3p-ef .bi,.bp-ic .b3p-star .bi,.bp-ic .b3p-ef .bi,.bp-cross .b3p-star .bi{width:100%;height:100%;flex:none}
-#b3-pv .bi{width:20px;height:20px;max-width:none;flex:none}#b3-pv .b3p-fl{width:auto;height:22px;flex:none}#b3-pv .b3p-fl .bi{width:22px;height:22px;flex:none}#b3-pv .bp-face{width:24px;height:24px}#b3-pv .bi.b3p-s{width:24px;height:24px}
-.b3p-gauge{display:block;width:80%;height:6px;border-radius:3px;background:#ffffff1c;overflow:hidden;flex:none}.b3p-gauge i{display:block;height:100%;background:#ffd36b}
-.b3p-gems{display:inline-flex;gap:1px;align-items:center;line-height:0}.b3p-det{display:inline-flex;align-items:center;line-height:0}
-.b3p-mid{width:44px;height:44px}.bp-mid .b3-pep{margin-top:2px}
-.b3p-h,.b3p-r{display:flex;align-items:center;gap:6px;line-height:0}.b3p-s{width:24px;height:24px}.b3p-gain{display:inline-flex;align-items:center;gap:1px;font-size:10px;font-weight:900;color:#8dc4e6;line-height:12px}
-.b3p-no{display:flex;justify-content:center;padding:2px}
-.b3p-ih{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.b3p-sh{display:inline-flex;align-items:center;gap:2px}.b3p-sh b{font-size:11px;color:#9fd0ff}.b3p-pv{display:inline-flex;align-items:center;gap:1px}
-.b3p-chips{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-html.landscape #battle.v2 .b3-pv{font-size:8px;padding:1px 4px}html.landscape #battle.v2 .b3-pv-c{font-size:7px}html.landscape #battle.v2 .b3-pv-b,html.landscape #battle.v2 .b3-pv-n{font-size:7.5px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv{font-size:14px;padding:5px 9px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-c{font-size:12px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-b,html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv-n{font-size:13px}
-/* b3s9: the SKILLS list (name, flavor pictures, big Pep pill) and the skill card (B3.ui 'skill', engine/b3-ui.js) */
-.b2-btn.b3-sk{flex-direction:row;align-items:center;gap:6px}.b3-sk .b2-sn{flex:1 1 auto;min-width:0}
-.b3-ico{display:flex;align-items:center;gap:2px;flex:none;line-height:0}.b3-ico .bi{width:1.35em;height:1.35em;flex:none}
-/* skilllist1 (Tom 2026-11-19: the name "just a touch too big", "the icons can also be smaller"): in the SKILLS list the name is .86 of the row's size
-   (an inner <b>, because the layout rules size every span in a button), the flavor and Pocket pictures 1em instead of 1.35em, the Pep number 1.15em. */
-.b3-sk .b3-snt{font-size:.86em;font-weight:inherit;line-height:1.15}.b3-sk .b3-ico{gap:1px}.b3-sk .b3-ico .bi{width:1em;height:1em}.b3-sk .b3-cost b{font-size:1.15em}
-/* fix-skilllist1look-2 (Tom 2026-11-20: "now its too small! you went too far, isnt there a middle ground?"): fixed sizes halfway between skilllist1 and the thin rows.
-   Name 15px, pictures 16px, Pep pill 14px number over a 8px PEP, row padding 6px 9px. */
-#battle.v2 .b2-btn.b3-sk{padding:6px 9px;gap:6px;min-height:0}
-#battle.v2 .b3-sk .b2-sn,#battle.v2 .b3-sk .b3-snt{font-size:15px;line-height:1.15;letter-spacing:0}
-#battle.v2 .b3-sk .b3-ico .bi{width:16px;height:16px}
-#battle.v2 .b3-sk .b3-cost{font-size:14px;padding:0 7px;gap:2px;border-width:1px}
-#battle.v2 .b3-sk .b3-cost b{font-size:16px}#battle.v2 .b3-sk .b3-cost small{font-size:8px;letter-spacing:.3px}
-html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:12px}html.duo #battle.v2 .b3-sk .b3-ico .bi{width:13px;height:13px}html.duo #battle.v2 .b3-sk .b3-cost{font-size:11px}html.duo #battle.v2 .b3-sk .b3-cost b{font-size:12px}
-/* fix-skilllist1look-2 (Tom: "the back button doesnt match"): the Back row under the SKILLS list is the same size as a Skill row, text 15px, B / Esc hint 11px. */
-#battle.v2 .b2-list:has(.b3-sk) .b2-back{padding:6px 9px;min-height:0}
-#battle.v2 .b2-list:has(.b3-sk) .b2-back span{font-size:15px;font-weight:700;letter-spacing:0}
-#battle.v2 .b2-list:has(.b3-sk) .b2-back em{font-size:11px}
-.b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
-.b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
-.b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}
-/* skillinfo1: the i at the left of a Skill row. The circle is in the row's flow; its ::after is an invisible tap strip over the whole left of the row (the row is position:relative) */
-.b2-btn.b3-sk{position:relative}
-.b3-ii{flex:none;display:flex;align-items:center;justify-content:center;width:2.1em;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.b3-ii::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3.3em}
-.b3-ii i{display:flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 1.05em Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
-.b3-sk:has(.b3-ii:active) .b3-ii i{background:#2d5f8f}
-.b2-btn.no .b3-ii i{opacity:.8}
-.bp-grid .bp-btn{position:relative}.b3p-i{position:absolute;left:0;top:0;z-index:2;width:44px;height:44px;display:flex;align-items:flex-start;justify-content:flex-start;padding:3px;cursor:pointer}
-.b3p-i i{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 15px Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
-html.landscape .b3p-i{width:36px;height:36px}html.landscape .b3p-i i{width:20px;height:20px;font-size:12px}
-.b3-det{--f:15px}.b3-det>*{grid-column:1/-1}
-.b3-det-h{display:flex;align-items:center;gap:8px;font-size:var(--f)}.b3-det-h .b2-sn{font-size:calc(var(--f)*1.15);font-weight:900;flex:1 1 auto;min-width:0;color:#ffe9a8;line-height:1.15}
-.b3-det .b3-cost{font-size:calc(var(--f)*1.1)}
-.b3-det-f{display:flex;align-items:center;gap:6px;font-size:var(--f)}.b3-det-f em{font-style:normal;font-size:calc(var(--f)*.75);color:var(--ink-dim);font-weight:800}
-.b3-det-d{margin:0;font-size:calc(var(--f)*.85);line-height:1.35}.b3-det-no{margin:0;font-size:calc(var(--f)*.8);color:#ff9a8a;font-weight:800}
-.b3-det .b3-pv-h,.b3-det .b3p-h{display:none}.b3-det .b3-pv:not(:has(.b3-pv-r,.b3-pv-b,.b3-pv-n,.b3p-r,.b3p-no)){display:none}
-.b3-det-b{display:grid;grid-template-columns:1fr 2fr;gap:6px;position:sticky;bottom:0;background:#121a2b;padding-top:4px}.b3-det-b .b2-back{grid-column:auto;justify-content:center}
-.b2-btn.b3-use{position:relative;flex-direction:row;align-items:center;justify-content:center;background:#c99a2e;border-color:#ffe27a;color:#1a1206}.b3-use span{font-weight:900;letter-spacing:1.5px}.b2-btn.b3-use.no{opacity:.45}
-#b3-cmd .b3p-det{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:8px}.b3p-dh .b3p-ef{position:static}.b3p-det .b3-pv{align-self:center}
-.b3p-dh{display:flex;align-items:center;justify-content:center;gap:10px;line-height:0}.b3p-big{display:flex;height:72px}.b3p-big .b3p-fl{width:auto;height:72px}.b3p-big .bi{width:72px;height:72px;flex:none}
-.b3p-dh .bp-cost{display:flex;flex-wrap:wrap;max-width:120px;gap:1px}.b3p-dh .bp-cost .bi{width:18px;height:18px}.b3p-dw{text-align:center;font-weight:900}.b3p-det .b3-use .bi{width:34px;height:34px}.b3p-det .b3-use .b3p-star{position:absolute;right:4px;top:4px}
-html.landscape .b3-det{--f:12.5px}html.landscape #battle.v2 .b3-det{--f:11px}html.tablet.landscape #battle.v2 .b3-det{--f:calc(11px*var(--ts))}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-det{--f:14px}
 .b2-x.rec,.b2-btn.rec{border-color:#ffd24a;box-shadow:0 0 0 2px #ffd24a66,0 0 12px #ffd24a88;animation:b7glow 1.1s ease-in-out infinite}
 @keyframes b7glow{50%{box-shadow:0 0 0 3px #ffd24aaa,0 0 18px #ffd24acc}}
 .b7-card{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:14px calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));background:#0c0e12a6;cursor:pointer}
@@ -1307,8 +1202,6 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-rib-lbl{font-size:20px;lett
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk{width:55px;height:55px;font-size:22px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk img{border-radius:8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk.now{width:65px;height:65px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk b{font-size:20px;right:3px;bottom:1px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-bar{gap:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div{width:22px;margin:0 3px;border-left-width:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div b{font-size:20px;padding-left:2px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ui{gap:8px;padding:calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-low{gap:8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:16px;line-height:1.3;padding:8px 11px;max-height:8em;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -1316,18 +1209,17 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-party{grid-template-columns
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc{grid-template-columns:70px minmax(0,1fr);gap:12px;padding:6px 8px;align-items:center;min-height:82px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ph{width:70px;height:70px;border-radius:6px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm{font-size:24px;letter-spacing:.3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm em{font-size:18px;padding-left:6px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-chips{gap:4px 6px;margin-top:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-st{font-size:13px;padding:1px 6px;border-radius:3px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-st{font-size:13px;padding:1px 6px;border-radius:3px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-bar{height:13px;margin-top:5px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub{font-size:17px;margin-top:4px;gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub>span:first-child{font-size:17px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-vp{gap:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-vp i{width:6px;height:13px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-shn{margin-left:5px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart{padding:2px 6px 6px;gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart .lbl{font-size:15px;letter-spacing:1.4px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart svg{width:24px;height:22px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart b{font-size:17px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tr{font-size:12px;line-height:14px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cmd{padding:8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cross{gap:6px;max-height:none;width:min(100%,calc(100cqh));margin:auto}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:19px;border-width:2px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x .ar{width:17px;height:17px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x small{font-size:15px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x small.long{font-size:14px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 button.b2-mid small,html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pepn{font-size:14px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 button.b2-mid small{font-size:14px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-grid{gap:6px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-list{gap:6px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn{padding:8px 11px;gap:3px;border-width:2px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn span{font-size:21px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn em{font-size:15px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-top{gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cost{font-size:16px}
@@ -1336,12 +1228,6 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ic{width:18px;height:18px;p
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tbp img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tbp .b2-ph{width:44px;height:44px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-back{padding:8px 11px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-empty{font-size:16px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-info{gap:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-free{font-size:17px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf{padding:8px 11px;border-radius:7px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h span{font-size:24px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h em{font-size:16px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t{gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t b{font-size:20px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t i{font-size:16px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t .b2-st{font-size:13px;padding:1px 6px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf p{font-size:16px;margin-top:5px;line-height:1.3}
 }
 @media(min-width:1100px) and (min-height:560px) and (max-height:860px){
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:14px;padding:6px 10px}
@@ -1362,6 +1248,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <main id="game" aria-label="The Adventures of Tom, a family JRPG">
   <canvas id="world" tabindex="0" aria-label="Town game. Use arrow keys to move and Enter to interact."></canvas>
   <div id="boot" role="status" aria-live="polite"><div class="boot-card"><div class="boot-mark" aria-hidden="true">&#10047;</div><div class="boot-title">THE ADVENTURES OF TOM</div><div class="boot-bar" aria-hidden="true"><i></i></div><div class="boot-msg boot-wait">Loading the town...</div><div class="boot-msg boot-slow">Still going. It is a big download, hang tight.</div><div class="boot-msg boot-err">Something got stuck. Check your connection, then try again.</div><a id="boot-retry" class="boot-btn" href="#">TRY AGAIN</a></div></div>
+<link rel="stylesheet" href="b3-deck.css?v=battleux1">
   <header id="hud">
     <div class="progress" aria-label="Buildings visited"><div id="visitCount">0 / 10</div><div class="progress-label">DOORS</div></div>
     <div id="hud-btns"><div class="brand"><div class="brand-mark" aria-hidden="true">!</div><div class="brand-copy"><span id="eyebrow" hidden></span><span id="area-name" hidden></span><div class="eyebrow" id="qt-eyebrow">CHAPTER</div><div class="qt-text" id="qt-text">Look around. The story will find you.</div><div class="qt-pips" id="qt-pips"></div><div class="qt-area" id="qt-area"></div><div id="objective" hidden></div></div><span class="brand-chev" aria-hidden="true">&#9662;</span></div><button id="menu-button" type="button" aria-label="Open character menu">&#9776;</button><button id="save-hud" class="rotate-btn" type="button" aria-label="Save game">&#128190;</button></div>
@@ -1402,20 +1289,21 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
   <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 </main>
 <div id="battle" role="dialog" aria-modal="true" aria-label="Battle" hidden>
-  <div class="battle-stage"><div class="b2-ribbon" id="b2-ribbon" hidden></div><div class="b2-ribbon b3-bar" id="b3-bar" hidden></div><canvas id="battle-canvas" width="1152" height="648"></canvas></div>
+  <!-- Battle 3 (engine/b3-ui.js, engine/b3-deck.js, b3-deck.css): one grid, laid out by container size. Battle 2 never shows these parts: #b3-app is display:contents until #battle gets v3. -->
+  <div id="b3-app">
+    <div id="b3-bar" hidden><div id="b3-ticks"></div>
+      <div id="b3-tools" hidden><button type="button" class="bx-sw" id="b3-sw" data-tool="details" aria-pressed="false">DETAILS<i></i></button><button type="button" class="bx-tool" id="b3-exit" data-tool="exit" aria-label="Exit to the Battle Lab list" hidden>EXIT</button><button type="button" class="bx-tool" id="b3-skip" data-tool="skip" aria-label="Win this fight now" hidden>WIN NOW</button><button type="button" class="bx-tool" id="b3-speed" data-tool="speed" aria-label="Battle speed">1x</button></div></div>
+    <div class="battle-stage"><div class="b2-ribbon" id="b2-ribbon" hidden></div><canvas id="battle-canvas" width="1152" height="648"></canvas></div>
+    <div id="b3-tray"></div>
+    <div id="b3-side"><div id="b3-party"></div><div id="b3-deck"><div id="b3-dh"></div><div id="b3-rows"></div></div></div>
+    <div id="b3-sheet" hidden></div>
+    <div id="b3-msg" class="sr-only" aria-live="polite"></div>
+  </div>
   <div class="b2-ui" id="b2-ui" hidden>
     <div class="battle-box b2-msg" id="b2-msg" aria-live="polite"></div>
     <div class="b2-low" id="b2-low">
       <div class="battle-box b2-party" id="b2-party"></div>
       <div class="battle-box b2-cmd" id="b2-cmd"></div>
-    </div>
-  </div>
-  <!-- Battle 3 (engine/b3-ui.js): its own boxes with the same layout classes as battle 2 -->
-  <div class="b2-ui b3-ui" id="b3-ui" hidden>
-    <div class="battle-box b2-msg" id="b3-msg" aria-live="polite"></div>
-    <div class="b2-low">
-      <div class="battle-box b2-party" id="b3-party"></div>
-      <div class="battle-box b2-cmd" id="b3-cmd"></div>
     </div>
   </div>
 </div>
@@ -1937,6 +1825,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/b3-foes-ch09.js?v=b3s14"></script>
 <script src="data/b3-foes-ch10.js?v=b3s14"></script>
 <script src="data/b3-foes-ch11bonus.js?v=b3s14"></script>
+<script src="data/b3-ux-words.js?v=battleux1"></script>
 <script src="data/b3-clips.js?v=anim-deedee-dodge-y4m3"></script>
 <script src="data/b3-lab.js?v=b3s13"></script>
 <script src="data/b3-story.js?v=b3s18bonus"></script>
@@ -1952,10 +1841,11 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/b3-foe.js?v=b3s18bonusa"></script>
 <script src="engine/b3-script.js?v=b3s18bonusa"></script>
 <script src="engine/b3-clips.js?v=pairmove1"></script>
-<script src="engine/b3-play.js?v=pairmove1"></script>
-<script src="engine/b3-ui.js?v=b3gear"></script>
-<script src="engine/b3-pictures.js?v=menu4"></script>
-<script src="engine/b3-lab.js?v=menu4"></script>
+<script src="engine/b3-play.js?v=battleux1"></script>
+<script src="engine/b3-ui.js?v=battleux1"></script>
+<script src="engine/b3-deck.js?v=battleux1"></script>
+<script src="engine/b3-pictures.js?v=battleux1"></script>
+<script src="engine/b3-lab.js?v=battleux1"></script>
 <script src="engine/b3-menu.js?v=menu4"></script>
 <script src="engine/save-backup.js?v=slotless1"></script>
 <script src="engine/save-sync.js?v=menu4"></script>

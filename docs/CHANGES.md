@@ -1,3 +1,22 @@
+## battleux1 (2026-11-21): the new Battle 3 screen: one list of moves, tap once to read and again to use, the strip under the scene says what will happen
+
+Card c-battleux1. Builds the screen you approved in `claude/battleux-plan.md` (3.1 to 3.5, 3.7) for the new battle only; battle 2 is untouched and no rule or number changed (`node tools/b3-sim.js check`: 3329 checks, same as before).
+
+| What | Where |
+|---|---|
+| One-level deck: every move in one list, first tap shows it in the strip, second tap uses it (a mouse is a tap too); recommended move highlighted; a free Skill shows "Free from <name>" | `engine/b3-deck.js`, `b3-deck.css` |
+| Aim on the scene: a tap on a monster aims the highlighted move there; default aim is the Pet Peeve, then the last one aimed, then the front monster, and a heal goes to whoever is hurt most; a tap on a family card shows that member | `engine/b3-deck.js` (`b3AimDefault`, `b3TapUnit`) |
+| The strip under the scene is one sentence plus what will happen; it becomes the battle log between turns and shows the win line and CONTINUE at the end | `b3RenderTray` |
+| DETAILS switch in the turn bar (saved on the device as `aot-ux-details`; on by default on a desktop only) shows each move's one-line `short` when it has one | `b3Details`, `b3SetDetails` |
+| Keys and gamepad: arrows and D-pad move, Enter or A uses, number keys highlight, I or Y opens the full list of a member, Esc or B goes back | `b3Key`, `b3Pad` |
+| The words the screen adds (who a move reaches, what kind, how big, what the strip says, the two Ruckus moves) live in one small table each | `data/b3-ux-words.js` |
+| Removed: the command cross, the SKILLS list, the skill card, the target list, the preview box and the i icon, with their styles and code | `engine/b3-ui.js`, `engine/b3-pictures.js`, `index.html` |
+| Tests: the Battle 3 tests were rewritten for the deck; new layout test at the six sizes of plan 3.4 plus the rotated stage (fails when the highlighted move is off screen, a move name is cut or the strip overflows) | `tools/b3_test.py`, `tools/b3_layout_test.py <size>` |
+
+- Found by the new layout test and fixed: on a folded Duo (portrait) the highlighted move could sit partly under the bottom edge, and on a folded Duo on its side the strip text ran 4 to 23 pixels past its box.
+- Found while rewriting the tests and fixed: a tap right after using the keys rebuilt the rows under the finger and the tap did nothing.
+- `tools/ch1_b3_test.py` fails at step "6 spot" on the build before this change too; not touched here.
+
 ## fix-ch2play (2026-11-22): chapter 2 loses more dull lines, the phone call is announced, and Griffith Park has a three-find trail to search
 
 Card c-fix-ch2play (fix from Tom's report on t-ch2play). Tom: "tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this". The pencil reports of 2026-11-21 18:00 to 18:07 (r-20261121-180018-jc8f, 180027-tyq4, 180035-bjdf, 180050-39xy, 180126-mdm1, 180230-crne, 180249-oy95, 180326-tsde, 180345-jvj8, 180408-h8ca, 180458-58c9, 180626-4eca, 180646-o5il, 180709-4jo0, 180718-y1a5) are all answered here.

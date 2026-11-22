@@ -49,12 +49,12 @@ def mon(pg,name='mudling',key='__m'):
 def stop_all(pg):
     ev(pg,"()=>{ if(battle.v3&&B3.active) b3End('run'); else if(B2.active) b2End('run'); }"); pg.wait_for_timeout(300)
 def play_auto(pg,limit=150):
-    ev(pg,"()=>{ B3.cfg.auto=true; if(B3.ui==='cross'&&B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
+    ev(pg,"()=>{ B3.cfg.auto=true; if(B3.ui==='deck'&&B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
     for i in range(limit):
         if ev(pg,"()=>B3.ui==='done'"): return True
         pg.wait_for_timeout(1000)
     return False
-def kinds(pg): return ev(pg,"()=>({v3:!!battle.v3,b3:!!B3.active,b2:!!B2.active,ui3:!document.getElementById('b3-ui').hidden,ui2:!document.getElementById('b2-ui').hidden})")
+def kinds(pg): return ev(pg,"()=>({v3:!!battle.v3,b3:!!B3.active,b2:!!B2.active,ui3:getComputedStyle(document.getElementById('b3-app')).display!=='contents'&&document.getElementById('b3-app').getBoundingClientRect().width>0,ui2:!document.getElementById('b2-ui').hidden})")
 
 with sync_playwright() as pw:
     br=pw.chromium.launch(executable_path=os.environ.get('CHROME') or '/usr/bin/google-chrome',args=['--headless=new','--no-proxy-server','--no-sandbox'])
@@ -106,16 +106,15 @@ with sync_playwright() as pw:
     check('HP carries in as each member\'s own share (Rose half, Tom full)',abs(st['rose']-.5)<.03 and st['tom']>.97,st)
     body=ev(pg,"()=>document.getElementById('battle').innerText")
     check('no WARMTH command, no Warmth bar, no HEART meter on the screen',not any(w in body.upper() for w in('WARMTH','HEART')),body[:200])
-    check('the cross has BASIC, RUCKUS, SKILLS and BAG',all(w in body for w in('BASIC','RUCKUS','SKILLS','BAG')))
+    check('the deck has the Basic first and the Pep and RUCKUS meters',ev(pg,"()=>B3.deck[0].grp==='basic'&&!!document.getElementById('b3-pepm')&&!!document.getElementById('b3-rkm')"))
     # play a few turns by hand and read the tips
     tips=[]
     def hand_turns(n):
         for i in range(n):
-            pg.wait_for_function("()=>battle.state==='command'&&B3.actor&&B3.ui==='cross'||B3.ui==='done'",timeout=60000)
+            pg.wait_for_function("()=>battle.state==='command'&&B3.actor&&B3.ui==='deck'||B3.ui==='done'",timeout=60000)
             if ev(pg,"()=>B3.ui==='done'"): return
             msg=ev(pg,"()=>document.getElementById('b3-msg').textContent"); tips.append((ev(pg,"()=>B3.actor.id"),msg))
-            pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250)
-            if ev(pg,"()=>B3.ui")=='target': pg.keyboard.press('Enter')
+            pg.keyboard.press('Enter'); pg.wait_for_timeout(250)   # the deck opens on the Basic, aimed at the front monster
             pg.wait_for_timeout(1200)
     hand_turns(4)
     shot(pg,'tip-portrait')
@@ -208,7 +207,7 @@ with sync_playwright() as pw:
     # ---- landscape frames
     fresh(pg,1,'chapter'); mon(pg,'bigone'); ev(pg,"()=>{ toggleLayout(); startBattle(window.__m); }"); pg.wait_for_timeout(4000)
     shot(pg,'start-landscape')
-    ev(pg,"()=>{ B3.cfg.auto=true; for(const f of B3.F.foes) f.hp=1; if(B3.ui==='cross'&&B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
+    ev(pg,"()=>{ B3.cfg.auto=true; for(const f of B3.F.foes) f.hp=1; if(B3.ui==='deck'&&B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
     for i in range(150):
         if ev(pg,"()=>B3.ui==='done'"): break
         pg.wait_for_timeout(1000)

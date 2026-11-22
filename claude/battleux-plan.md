@@ -137,3 +137,27 @@ Rules, numbers, moves, monsters, the simulator. The turn bar's content. Rose Mod
 | Tom's play card | Three Battle Lab fights on the Duo unfolded and one on the iPhone, once, after battleux3 (looks and feel only; Claude tests every yes or no fact itself) | One card at the end |
 
 Tests the build must pass: `node tools/b3-sim.js check` (rules untouched), `python3 tools/b3_test.py` rewritten for the deck, portrait and landscape; a new layout test at the six sizes of 3.4 that fails when the highlighted move is off screen, a move's name is cut, or the tray overflows; `python3 tools/smoke.py`.
+
+## 6. Built: battleux1 (2026-11-21)
+
+The screen of sections 3.1 to 3.5 and 3.7 is built and scoped to `#battle.v3`; battle 2 is untouched. Rules and numbers did not change (`node tools/b3-sim.js check` passes as before).
+
+| Part | Where it lives |
+|---|---|
+| Deck (one level, first tap shows, second uses, mouse too), tray, battle log, party cards, the full-list sheet, aim rule 3, DETAILS, keys and gamepad | `engine/b3-deck.js` (`b3DeckBuild`, `b3RenderDeck`, `b3RenderTray`, `b3RenderParty`, `b3RenderSheet`, `b3Pick`, `b3Use`, `b3TapUnit`, `b3Key`, `b3Pad`) |
+| Layout at every size (container queries on `#battle.v3`, so the rotated stage and the Duo scale follow the stage's own size) | `b3-deck.css` |
+| The `short` line | a move's `short` field in `data/b3-kit-*.js`; shown in the deck row when DETAILS is on and under the tray when a move is highlighted (`S.short`, falls back to `desc`); the Ruckus pair's lines are in `B3_RUCKUS` |
+| Reach words, kind, size, forecast wording, Ruckus words | `data/b3-ux-words.js`: `B3_REACH` (by `target`), `B3_KIND`, `B3_SIZE`, `B3_FORECAST` (every tray line the preview can report), `B3_RUCKUS`. c-battleux2 edits these tables and the `short` fields only |
+| Saved choice | `localStorage` key `aot-ux-details`; default on for desktop only |
+| Tests | `tools/b3_test.py` (stages rewritten for the deck), `tools/b3_layout_test.py <size>` (six sizes of 3.4 plus the rotated stage; fails when the highlighted move is off screen, a move name is cut or the tray overflows) |
+
+Hooks for battleux3:
+
+| battleux3 part | Hook |
+|---|---|
+| Pet Peeve badges and the aim marker and tag on the scene | `engine/b3-play.js`, `b3DrawFoe` and `b3DrawMember` call `b3MemberMarks` and `b3Arrow` for every unit in `picked`, which is `b3AimUnits()` (engine/b3-deck.js); add the badge and the tag beside those calls |
+| Pep forecast | `b3PvCompute` (engine/b3-deck.js) fills `B3.pvNow`; the Pep meter is `#b3-pepm` in `b3RenderDeck`'s head; add the forecast there from `pv.P` |
+| Rose Mode pictures on the deck rows | `b3RenderDeck` builds each row from `bxW` strings; add the icons from `engine/b3-pictures.js` when `b7Diff().pictures` is on |
+| Anything shown in the tray for a unit the player taps | `B3.look` (the unit shown) and `B3.note` (a one-line note), read in `b3RenderTray` |
+
+Calls made: a tap on a unit aims the highlighted move when that unit is a valid target and otherwise shows it in the tray; MARKED and NEXT TARGET chips stay visible on narrow party cards (the mock hid every chip there); a pointer takes over from the keys without rebuilding the rows (rebuilding on pointerdown swallowed the click).

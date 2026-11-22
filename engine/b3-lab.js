@@ -83,4 +83,4 @@ SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc
       {name:'VIBES AND RANKS',sub:'Main and Pocket Vibe, Quirks and rows for these fights. '+(r?'Every Vibe is Rank '+r+'.':'The Vibes are at different Ranks.'),cls:'nav',vibes:true,act:()=>m2OpenLab()},
       {name:'BACK',sub:'',cls:'back',act:splashBack}]; }};
 SPLASH_PARENT.lab3='lab';
-window.addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{B3,B3P,B3_LAB,b3Start,b3Lab,b3LabGo,b3LabGuardProof,b3End,b3Dir,b3A,b3Back,b3Pick,b3Commit,b3Auto,b3OpenInfo}); });
+window.addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{B3,B3P,B3_LAB,b3Start,b3Lab,b3LabGo,b3LabGuardProof,b3End,b3Dir,b3A,b3Back,b3Pick,b3Use,b3Select,b3Commit,b3Auto,b3OpenSheet,b3TapUnit}); });

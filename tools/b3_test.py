@@ -97,31 +97,38 @@ def hand_fight(pg,idx,fid):
         if len(frames)<10 or turn%4==0: frames.append(shot(pg))
         expect_slip=False
         if who=='grace' and not did['skill'] and st['pep']>=3:
-            # SKILLS by taps (skillinfo1): the i opens the skill card, a tap on USE goes on; then a party card picks who.
-            pg.click('#b3-cmd .b2-x.right'); pg.wait_for_timeout(250); frames.append(shot(pg))
-            pg.dispatch_event('#b3-ui','pointerdown',{'pointerType':'touch'})
-            pg.click('#b3-cmd .b2-btn[data-i="0"] [data-info]'); pg.wait_for_timeout(250)
-            if state(pg)['ui']!='skill': fails.append(f'{fid} hand: tapping the i on NeeDoh Stretch Pass did not open its card')
-            frames.append(shot(pg)); pg.click('#b3-cmd [data-use]'); pg.wait_for_timeout(250)
-            if state(pg)['ui']!='target': fails.append(f'{fid} hand: USE on NeeDoh Stretch Pass did not open the target list')
-            frames.append(shot(pg))
-            pg.click('#b3-party .b2-pc[data-i="2"]'); did['skill']=True; did['card']=True
+            # A move by touch (battleux1): the first tap highlights it and the tray says what it does, a tap on a family card aims it, the second tap uses it.
+            i=pg.evaluate("()=>B3.deck.findIndex(e=>e.grp!=='basic'&&!e.ruckus&&e.can.ok&&e.opts.some(o=>o.label==='Rose'))")
+            row=f'#b3-rows .bx-mv[data-i="{i}"]'
+            pg.click(row); pg.wait_for_timeout(250); frames.append(shot(pg))
+            nm=pg.evaluate("()=>B3.deck[B3.sel].name")
+            if pg.evaluate("()=>B3.sel")!=i or state(pg)['ui']!='deck': fails.append(f'{fid} hand: the first tap on a move did not just highlight it')
+            elif nm not in pg.inner_text('#b3-tray'): fails.append(f'{fid} hand: the tray does not say what {nm} does after the first tap')
+            else: did['card']=True
+            aim(pg,'Rose'); frames.append(shot(pg))
+            if pg.evaluate("()=>b3AimOpt().label")!='Rose' or state(pg)['turns']!=st['turns']: fails.append(f'{fid} hand: tapping Rose did not aim {nm} at her without using it')
+            pg.click(row); did['skill']=True
             pg.wait_for_timeout(1100); frames.append(shot(pg))
         else:
             if who=='deedee': tgt=([f for f in live if not f['drenched']] or live)[0]
             elif who in('grace','rose') and wet: tgt=wet[0]; expect_slip=True
             else: tgt=live[-1] if who=='tom' else ([f for f in live if not f['drenched']] or live)[-1]
+            many=pg.evaluate("()=>b3Entry().opts.length")>1
             if who in('tom','deedee'):
-                pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(200); did['keys']=True
-                s2=state(pg)
-                if s2['ui']=='target':
-                    order=[f['key'] for f in live]
-                    for _ in range(order.index(tgt['key'])): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
+                # keys: left and right step the aim through the valid targets, Enter uses the highlighted move
+                if many:
+                    for _ in range(8):
+                        if pg.evaluate("()=>b3AimOpt().key")==tgt['key']: break
+                        pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(80)
+                    did['keys']=True
                     if turn<3: frames.append(shot(pg))
-                    pg.keyboard.press('Enter')
+                else: did['keys']=True
+                pg.keyboard.press('Enter')
             else:
-                pg.click('#b3-cmd .b2-x.up'); pg.wait_for_timeout(200)
-                if state(pg)['ui']=='target': tap_foe(pg,tgt['key']); did['tapfoe']=True
+                if many:
+                    tap_foe(pg,tgt['key']); did['tapfoe']=True; pg.wait_for_timeout(200)
+                    if pg.evaluate("()=>b3AimOpt().key")!=tgt['key']: fails.append(f"{fid} hand: tapping {tgt['key']} on the picture did not aim at it")
+                pg.click(f'#b3-rows .bx-mv[data-i="{pg.evaluate("()=>B3.sel")}"]'); pg.wait_for_timeout(200)
             if expect_slip and not did['slip']:
                 bar0=pg.evaluate("()=>B3.view.bar.map(e=>e.k)")
                 for k in range(12): pg.wait_for_timeout(230); slip.append(shot(pg))
@@ -138,7 +145,7 @@ def hand_fight(pg,idx,fid):
     solo=pg.evaluate("()=>B3.F.foes.length")==1   # one monster: BASIC fires at once, so there is no target to tap
     for k,v in did.items():
         if not v and not(solo and k=='tapfoe') and not(fid=='new7' and k=='slip'): fails.append(f'{fid} hand: never used {k}')   # new7 has no Drench source (Deedee is out), so no slip is possible
-    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(700)
+    pg.click('#b3-app [data-done]'); pg.wait_for_timeout(700)
     back=pg.evaluate("()=>({mode:splash.mode,active:splash.active,hidden:document.getElementById('battle').hidden,b3:B3.active,v3:!!battle.v3,cls:document.getElementById('battle').className})")
     if not(back['mode']=='lab3' and back['active'] and back['hidden'] and not back['b3'] and not back['v3']): fails.append(f'{fid} hand: CONTINUE did not land on the NEW BATTLE list: {back}')
     frames.append(shot(pg))
@@ -156,18 +163,25 @@ def burst(pg,n,gap=260,rot=False):
     for k in range(n):
         pg.wait_for_timeout(gap); f=shot(pg); fr.append(f.rotate(90,expand=True) if rot else f)
     return fr
+def deck_names(pg): return pg.evaluate("()=>B3.deck.map(e=>e.name)")
+def select_row(pg,name):
+    """Highlights a move by name with the number keys (1 to 9; a deck longer than that uses the same call the tap uses). Returns the names in the deck."""
+    pg.mouse.move(2,2)   # a mouse left resting over the deck would highlight the row under it
+    names=deck_names(pg)
+    if name not in names: fails.append(f'{name} is not in the deck: {names}'); return names
+    i=names.index(name)
+    if i<9: pg.keyboard.press('Digit'+str(i+1))
+    else: pg.evaluate("(i)=>b3Select(i)",i)
+    pg.wait_for_timeout(180); return pg.evaluate("()=>B3.deck.filter(e=>e.grp!=='basic'&&!e.ruckus).map(e=>e.name)")
 def skill(pg,name):
-    """Opens SKILLS with the keys and puts the cursor on a Skill. Returns the names in the list."""
-    pg.mouse.move(2,2)   # a mouse left resting over the list would move the cursor to the row under it
-    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(220)
-    names=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent)")
-    if name not in names: fails.append(f'stage 2: {name} is not in the SKILLS list: {names}'); return names
-    for _ in range(names.index(name)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(150)   # skillinfo1: I opens the skill card (Enter on a row uses it); the next Enter is USE
-    return names
+    """Highlights a Skill in the deck (the first tap or key: it only shows the move). The next Enter uses it. Returns the names in the deck."""
+    return select_row(pg,name)
 def basic(pg):
-    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(200)
-    if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
+    """Uses the Basic on its default aim (the deck opens with the Basic highlighted; a number key puts it back if the highlight moved)."""
+    pg.mouse.move(2,2)
+    i=pg.evaluate("()=>B3.deck.findIndex(e=>e.grp==='basic')")
+    if i>=0 and pg.evaluate("()=>B3.sel")!=i: pg.evaluate("(i)=>b3Select(i)",i); pg.wait_for_timeout(120)
+    pg.keyboard.press('Enter')
 def log(pg,n=30): return pg.evaluate("(n)=>B3.log.slice(-n).join(' | ')",n)
 # The stage 2 and stage 3 sections are scripted turn by turn against the bare units those stages built (cfg.plain: first Vibe only,
 # no Lean, so everyone has Speed 100 and the family acts Grace, Tom, Rose, Deedee). They test those stages' moves and screens, not
@@ -185,7 +199,7 @@ def stage2_fight(pg,idx):
     if names!=['Zone One Blockade','Suite Door Slide']: fails.append(S+f"Tom's SKILLS list: {names}")
     pg.keyboard.press('Enter'); fr+=burst(pg,4); wait_cmd(pg)
     if not pg.evaluate("()=>B3.view.u.p1.st.includes('zone_one')&&B3.F.party[1].pep===2"): fails.append(S+'Zone One Blockade is not on Tom, or did not cost 2 Pep')
-    if 'BLOCKADE' not in pg.inner_text('#b3-party .b2-pc[data-i="1"]'): fails.append(S+"Tom's card does not show BLOCKADE")
+    if 'BLOCKADE' not in pg.evaluate("()=>document.querySelector('#b3-party .bx-pc[data-i=\"1\"]').textContent"): fails.append(S+"Tom's card does not carry the BLOCKADE chip")
     # Rose: "Giddyup, Tata!" Launch on the first monster
     skill(pg,'"Giddyup, Tata!" Launch'); pg.keyboard.press('Enter'); pg.wait_for_timeout(220); pg.keyboard.press('Enter'); fr+=burst(pg,7); wait_cmd(pg)
     if not pg.evaluate("()=>B3.view.u.p3.st.includes('giddyup')&&B3.view.u.f0.st.includes('toasty')"): fails.append(S+'Giddyup did not buff Deedee or leave Toasty')
@@ -200,26 +214,34 @@ def stage2_fight(pg,idx):
     if 'slips on the wet floor' not in L: fails.append(S+'no monster slipped: '+L[-300:])
     if 'Tom: Zone One Blockade!' not in L: fails.append(S+"Tom's ward did not answer: "+L[-300:])
     if pg.evaluate("()=>B3.view.haz[0]&&B3.view.haz[0].uses")!=1: fails.append(S+'the wet floor should have 1 slip left')
-    # The full list: Tom's card, a monster, the keys
-    pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
-    if pg.evaluate("()=>B3.ui")!='info' or 'Zone One Blockade' not in T or 'turn' not in T: fails.append(S+"tapping Tom's card did not open his list: "+T[:200])
-    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
-    v=pg.evaluate("()=>({ui:B3.ui,key:B3.infoKey,rows:document.querySelectorAll('#b3-cmd .b3-inf').length,want:b3Carried(B3.F,B3.F.foes[0]).length})")
-    if v['ui']!='info' or v['key']!='f0' or v['rows']!=v['want'] or 'Wet Floor' not in T: fails.append(S+f'tapping a monster did not open its list: {v} {T[:160]}')
+    # What a unit carries: Tom's card puts him in the tray, I opens the full list as a sheet, the arrows step through everyone, Esc closes it
+    pg.click('#b3-party .bx-pc[data-i="1"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-tray')
+    if pg.evaluate("()=>[B3.ui,B3.look]")!=['deck','p1'] or 'zone one blockade' not in T.lower(): fails.append(S+"tapping Tom's card did not show him in the tray: "+T[:200])
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(250); T=pg.inner_text('#b3-sheet')
+    if pg.evaluate("()=>B3.sheet")!='p1' or 'Zone One Blockade' not in T or 'turn' not in T: fails.append(S+"I did not open Tom's full list: "+T[:200])
+    for _ in range(8):
+        if pg.evaluate("()=>B3.sheet")=='f0': break
+        pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(120)
+    pg.wait_for_timeout(200); info.append(shot(pg)); T=pg.inner_text('#b3-sheet')
+    v=pg.evaluate("()=>({key:B3.sheet,rows:document.querySelectorAll('#b3-sheet .sh-r').length,want:b3Carried(B3.F,B3.F.foes[0]).length})")
+    if v['key']!='f0' or v['rows']!=v['want'] or 'Wet Floor' not in T: fails.append(S+f'the arrows did not reach the monster\'s full list: {v} {T[:160]}')
     pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(150)
-    if pg.evaluate("()=>B3.infoKey")=='f0': fails.append(S+'the down key did not step to the next unit')
+    if pg.evaluate("()=>B3.sheet")=='f0': fails.append(S+'the down key did not step to the next unit')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
-    if pg.evaluate("()=>B3.ui")!='cross': fails.append(S+'Esc did not close the list')
+    if pg.evaluate("()=>[B3.ui,B3.sheet]")!=['deck',None]: fails.append(S+'Esc did not close the list')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)   # puts Tom away from the tray
     pg.keyboard.press('KeyI'); pg.wait_for_timeout(150)
-    if pg.evaluate("()=>[B3.ui,B3.infoKey]")!=['info',pg.evaluate("()=>B3.actor.key")]: fails.append(S+'the I key did not open the list on whoever is up')
+    if pg.evaluate("()=>[B3.ui,B3.sheet]")!=['deck',pg.evaluate("()=>B3.actor.key")]: fails.append(S+'the I key did not open the list on whoever is up')
     pg.keyboard.press('KeyI'); pg.wait_for_timeout(150)
+    if pg.evaluate("()=>B3.sheet"): fails.append(S+'the I key did not close the list')
     # The 3-icon rule: six statuses on Grace, 3 chips on her card, all six in her list
     pg.evaluate("()=>{ const g=B3.F.party[0]; for(const id of ['drenched','slow','fatigue','windexed','stress_melted','giddyup']) b3AddStatus(B3.F,g,id,{}); b3ViewSync(); b3Render(); }")
-    chips=pg.evaluate("()=>document.querySelectorAll('#b3-party .b2-pc[data-i=\"0\"] .b3-chips .b2-st').length")
-    pg.click('#b3-party .b2-pc[data-i="0"]'); pg.wait_for_timeout(250); info.append(shot(pg))
-    rows=pg.evaluate("()=>document.querySelectorAll('#b3-cmd .b3-inf').length")
+    chips=pg.evaluate("()=>document.querySelectorAll('#b3-party .bx-pc[data-i=\"0\"] .st').length")
+    pg.click('#b3-party .bx-pc[data-i="0"]'); pg.wait_for_timeout(250); info.append(shot(pg))
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(250)
+    rows=pg.evaluate("()=>document.querySelectorAll('#b3-sheet .sh-r').length")
     if chips!=3 or rows!=6: fails.append(S+f'six statuses should show 3 icons and 6 list rows, got {chips} and {rows}')
-    pg.evaluate("()=>{ const g=B3.F.party[0]; for(const id of Object.keys(g.st)) b3EndStatus(B3.F,g,id); b3ViewSync(); b3Back(); }"); pg.wait_for_timeout(150)
+    pg.evaluate("()=>{ const g=B3.F.party[0]; for(const id of Object.keys(g.st)) b3EndStatus(B3.F,g,id); b3ViewSync(); b3Back(); b3Back(); }"); pg.wait_for_timeout(150)
     # Pick-Me-Up: Rose is knocked out by a poke; Grace revives her from the SKILLS list
     pg.evaluate("()=>{ const r=B3.F.party[2]; r.hp=0; const b=[]; b3KoCheck(B3.F,{actor:B3.F.foes[0],beats:b,g:'pre'}); for(const x of b) b3Show(x); b3ViewSync(); B3.actor.pep=10; b3Render(); }")
     pg.wait_for_timeout(400); names=skill(pg,'Pick-Me-Up'); info.append(shot(pg))
@@ -244,13 +266,13 @@ def stage2_fight(pg,idx):
         if who(pg)=='grace': break
         basic(pg); wait_cmd(pg); pg.wait_for_timeout(120)
     pg.evaluate("()=>{ const f=B3.F.foes[0]; f.charge=f.D.acts[2]; B3.actor.pep=10; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200)
-    skill(pg,'Crunchy Sugar-Cube Pop'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250); fr.append(shot(pg)); pg.keyboard.press('Enter'); fr+=burst(pg,6); wait_cmd(pg)
+    skill(pg,'Crunchy Sugar-Cube Pop'); aim(pg,pg.evaluate("()=>B3.F.foes[0].name")); fr.append(shot(pg)); pg.keyboard.press('Enter'); pg.wait_for_timeout(250); fr+=burst(pg,6); wait_cmd(pg)
     if 'It was cancelled' not in log(pg,10) or pg.evaluate("()=>!!B3.F.foes[0].charge"): fails.append(S+'Crunchy Sugar-Cube Pop did not cancel the wind-up: '+log(pg,8)[-240:])
     # Finish: the simple player takes over against 1 HP monsters
     pg.evaluate("()=>{ for(const f of B3.F.foes) f.hp=1; b3ViewSync(); B3.cfg.auto=true; const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }")
     pg.wait_for_function("()=>B3.ui==='done'",timeout=60000); pg.wait_for_timeout(400); fr.append(shot(pg))
     if pg.evaluate("()=>B3.F.over")!='win': fails.append(S+'the fight did not end in a win')
-    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
+    pg.click('#b3-app [data-done]'); pg.wait_for_timeout(600)
     if pg.evaluate("()=>splash.mode")!='lab3': fails.append(S+'CONTINUE did not go back to the list')
     w=fr[0].size[0]; sheet([f.crop((0,0,w,300)) for f in fr],6,os.path.join(OUT,'b3-s2-moves.png'),scale=.75)
     sheet(info,5,os.path.join(OUT,'b3-s2-info.png'),scale=.6)
@@ -267,10 +289,10 @@ def stage2_land(pg,idx):
     pg.evaluate("()=>{ b3AddStatus(B3.F,B3.F.party[1],'t_taunt',{}); B3.F.foes[1].actIx=0; B3.F.foes[0].actIx=0; }")
     fr+=burst(pg,14,330,rot=rot); wait_cmd(pg)
     if 'Tom: Zone One Blockade!' not in log(pg): fails.append(S+"Tom's ward did not answer")
-    pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
-    if pg.evaluate("()=>B3.ui")!='info': fails.append(S+"tapping Tom's card did not open his list")
-    tap_foe(pg,'f0'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
-    if pg.evaluate("()=>B3.infoKey")!='f0': fails.append(S+'tapping a monster did not open its list')
+    pg.click('#b3-party .bx-pc[data-i="1"]'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    if pg.evaluate("()=>B3.look")!='p1': fails.append(S+"tapping Tom's card did not show him in the tray")
+    tap_foe(pg,'f1'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    if pg.evaluate("()=>b3AimOpt().key")!='f1': fails.append(S+'tapping a monster did not aim the Basic at it')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-exit'); pg.wait_for_timeout(500)
     if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(S+'EXIT did not go back to the list')
     sheet(fr,4,os.path.join(OUT,'b3-s2-land.png'),scale=.6)
@@ -280,7 +302,7 @@ def stage2_land(pg,idx):
 # every family turn, so that the scripted Mark steps are not cut short by a Break that the family's own hits bring on.
 S3_HOOK="""()=>{ window.__s3={brk:0,marks:0,keep:false}; if(!window.__s3wrap){ window.__s3wrap=1;
   const os=b3Show; b3Show=function(b){ if(b.t==='break') window.__s3.brk++; if(b.t==='telegraph'&&b.mark==='p2') window.__s3.marks++; return os.apply(this,arguments); };
-  const oo=b3Open; b3Open=function(m){ if(window.__s3.keep&&B3.F&&m==='cross'){ const f=B3.F.foes[0]; if(f.maxPips&&!f.broken&&!f.flusterTurn){ f.pips=f.maxPips; f.pipLock=false; b3ViewSync(); } } return oo.apply(this,arguments); }; } }"""
+  const oo=b3OpenDeck; b3OpenDeck=function(){ if(window.__s3.keep&&B3.F){ const f=B3.F.foes[0]; if(f.maxPips&&!f.broken&&!f.flusterTurn){ f.pips=f.maxPips; f.pipLock=false; b3ViewSync(); } } return oo.apply(this,arguments); }; } }"""
 def glare_at_rose(pg,S,fr,n):
     """Pokes The Big One into Big Glare at Rose and plays Basics until it has Marked her n times in all."""
     pg.evaluate("()=>{ const f=B3.F.foes[0]; b3AddStatus(B3.F,B3.F.party[2],'t_taunt',{}); f.actIx=0; f.charge=null; f.mark=null; f.wait=Math.min(f.wait,1); }")
@@ -293,7 +315,7 @@ def hold(pg,ticks=160):
     """Keeps the boss's next turn back until the whole family has had a turn (they all act inside 100 ticks)."""
     pg.evaluate("(n)=>{ B3.F.foes[0].wait=n; b3Render(); }",ticks); pg.wait_for_timeout(100)
 def breaks(pg): return pg.evaluate("()=>window.__s3.brk")
-def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.view.charge.f0||null,chip:document.querySelector('#b3-party .b2-pc[data-i=\"2\"]').innerText.includes('MARKED'),real:B3.F.foes[0].mark,rc:B3.F.foes[0].charge&&B3.F.foes[0].charge.id})")
+def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.view.charge.f0||null,chip:document.querySelector('#b3-party .bx-pc[data-i=\"2\"]').innerText.includes('MARKED'),real:B3.F.foes[0].mark,rc:B3.F.foes[0].charge&&B3.F.foes[0].charge.id})")
 def stage3_fight(pg,idx):
     """Portrait, The Big One. Composure, the Mark and its three answers, a Break, and adds. Monsters are aimed by pokes."""
     S='stage 3: '; fr=[]; brk=[]; info=[]
@@ -312,10 +334,10 @@ def stage3_fight(pg,idx):
     if m!={'mark':'p2','charge':'Swamp Chomp','chip':True,'real':'p2','rc':'swamp_chomp'}: fails.append(S+f'after Big Glare the screen should show Rose Marked for Swamp Chomp: {m}')
     if not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.foe .b2-int')"): fails.append(S+'the boss has no wind-up badge on the turn bar')
     hold(pg)
-    pg.click('#b3-party .b2-pc[data-i="2"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
-    if 'Marked' not in T or 'Swamp Chomp' not in T: fails.append(S+"Rose's list does not say who Marked her: "+T[:200])
-    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
-    if 'Composure' not in T or 'Winding up Swamp Chomp' not in T or 'aimed at Rose' not in T: fails.append(S+"the boss's list does not show Composure and the wind-up: "+T[:260])
+    pg.click('#b3-party .bx-pc[data-i="2"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=tray_full(pg,'p2')
+    if 'marked' not in T or 'swamp chomp' not in T: fails.append(S+"Rose's tray does not say who Marked her: "+T[:200])
+    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=tray_full(pg,'f0')
+    if 'composure' not in T or 'winding up swamp chomp' not in T or 'rose' not in T: fails.append(S+"the boss's tray does not show Composure and the wind-up: "+T[:260])
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
     # Answer 1: Tom's Suite Door Slide takes the bite
     for turn in range(6):
@@ -337,7 +359,6 @@ def stage3_fight(pg,idx):
         if who(pg)=='grace': break
         basic(pg); wait_cmd(pg); pg.wait_for_timeout(120)
     pg.evaluate("()=>{ B3.actor.pep=10; b3Render(); }"); skill(pg,'Crunchy Sugar-Cube Pop'); fr.append(shot(pg)); pg.keyboard.press('Enter'); pg.wait_for_timeout(220)
-    if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
     fr+=burst(pg,7); wait_cmd(pg); m=marked(pg)
     if 'loses Swamp Chomp. It was cancelled' not in log(pg,10) or m['mark'] or m['chip'] or m['real'] or m['rc']: fails.append(S+f'Crunchy Sugar-Cube Pop did not cancel the bite and the Mark: {m} '+log(pg,6)[-240:])
     # Answer 3: a Break cancels it. The boss is down to its last pip (a poke); the next pip off Breaks it.
@@ -353,8 +374,8 @@ def stage3_fight(pg,idx):
     m=marked(pg)
     if m['mark'] or m['chip'] or m['real']: fails.append(S+f'the Mark should be gone after the Break: {m}')
     brk.append(shot(pg))
-    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
-    if 'Flustered' not in T or 'until its next turn' not in T or '0 OF 6' not in T: fails.append(S+"the boss's list does not show Flustered: "+T[:260])
+    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=tray_full(pg,'f0')
+    if 'flustered' not in T or 'until its next turn' not in T or '0 of 6' not in T: fails.append(S+"the boss's list does not show Flustered: "+T[:260])
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
     # Its next turn begins: Flustered ends and the pips are back
     pg.evaluate("()=>{ B3.F.foes[0].wait=Math.min(B3.F.foes[0].wait,1); }")
@@ -370,16 +391,14 @@ def stage3_fight(pg,idx):
     v=pg.evaluate("()=>({n:B3.F.foes.length,laid:['f1','f2','f3'].every(k=>!!B3P.foe[k]),names:B3.F.foes.map(f=>f.name),hp:B3.F.foes[1].maxHp,bar:B3.view.bar.some(e=>e.k==='f1')})")
     if not(v['n']==4 and v['laid'] and v['names'][1:]==['Mudling A','Mudling B','Skeeter Swarm'] and v['hp']==30): fails.append(S+f'the adds did not join as expected: {v}')
     tap_foe(pg,'f3'); pg.wait_for_timeout(300); info.append(shot(pg))
-    if pg.evaluate("()=>B3.infoKey")!='f3': fails.append(S+'tapping an add did not open its list')
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
-    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250)
-    if pg.evaluate("()=>B3.ui")!='target' or pg.evaluate("()=>B3.opts.length")!=4: fails.append(S+'the target list should offer the boss and the three adds')
-    info.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    if pg.evaluate("()=>b3AimOpt().key")!='f3': fails.append(S+'tapping an add did not aim the Basic at it')
+    if pg.evaluate("()=>b3Entry().opts.length")!=4: fails.append(S+'the Basic should reach the boss and the three adds')
+    info.append(shot(pg))
     # Finish: the simple player takes over against 1 HP monsters
     pg.evaluate("()=>{ for(const f of B3.F.foes) f.hp=1; b3ViewSync(); B3.cfg.auto=true; const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }")
     pg.wait_for_function("()=>B3.ui==='done'",timeout=90000); pg.wait_for_timeout(400); fr.append(shot(pg))
     if pg.evaluate("()=>B3.F.over")!='win': fails.append(S+'the fight did not end in a win')
-    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
+    pg.click('#b3-app [data-done]'); pg.wait_for_timeout(600)
     if pg.evaluate("()=>splash.mode")!='lab3': fails.append(S+'CONTINUE did not go back to the list')
     w=fr[0].size[0]
     sheet([f.crop((0,0,w,300)) for f in fr][::2],6,os.path.join(OUT,'b3-s3-mark.png'),scale=.75)
@@ -394,8 +413,8 @@ def stage3_land(pg,idx):
     fr.append(R(shot(pg)))
     glare_at_rose(pg,S,[],1); hold(pg,95); fr.append(R(shot(pg))); m=marked(pg)
     if not(m['mark']=='p2' and m['chip']): fails.append(S+f'Rose is not shown Marked: {m}')
-    pg.click('#b3-party .b2-pc[data-i="2"]'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
-    if pg.evaluate("()=>B3.ui")!='info': fails.append(S+"tapping Rose's card did not open her list")
+    pg.click('#b3-party .bx-pc[data-i="2"]'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    if pg.evaluate("()=>B3.look")!='p2': fails.append(S+"tapping Rose's card did not show her in the tray")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
     pg.evaluate("()=>{ const f=B3.F.foes[0]; f.pips=1; f.pipLock=false; b3ViewSync(); b3Render(); }")
     for turn in range(6):
@@ -405,7 +424,7 @@ def stage3_land(pg,idx):
     if not breaks(pg) or not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.b3-flus')"): fails.append(S+'no Break on screen')
     fr.append(R(shot(pg)))
     tap_foe(pg,'f0'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
-    if pg.evaluate("()=>B3.infoKey")!='f0': fails.append(S+'tapping the boss did not open its list')
+    if pg.evaluate("()=>B3.look||b3AimOpt().key")!='f0': fails.append(S+'tapping the boss did not show or aim at it')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-exit'); pg.wait_for_timeout(500)
     if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(S+'EXIT did not go back to the list')
     sheet(fr,4,os.path.join(OUT,'b3-s3-land.png'),scale=.6)
@@ -489,27 +508,27 @@ def stage4(pg,lab):
         if who(pg)=='tom': break
         pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg); pg.wait_for_timeout(200)
     need(who(pg)=='tom','never reached Tom\'s turn in the Lab fight')
-    cross=pg.evaluate("()=>document.querySelector('#b3-cmd .b2-x.up small').textContent"); ff.append(shot(pg))
+    cross=pg.evaluate("()=>B3.deck.find(e=>e.grp==='basic').name"); ff.append(shot(pg))
     need(cross=='Cartridge Blow',f'with Gamer Geek as Main, BASIC should be Cartridge Blow: {cross}')
-    pg.mouse.move(2,2); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); ff.append(shot(pg))
-    sk=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn[data-i]')].map(b=>b.querySelector('.b2-sn').textContent+(b.querySelector('.b3-pki')?' [POCKET]':''))")
+    ff.append(shot(pg))
+    sk=pg.evaluate("()=>B3.deck.filter(e=>e.grp!=='basic'&&!e.ruckus).map(e=>e.name+(e.grp==='pocket'?' [POCKET]':''))")
     need(sk==['Controller Toss','Winged Shell Lock-On','Zone One Blockade [POCKET]','Suite Door Slide [POCKET]'],f'the SKILLS list should be the Main Vibe\'s two Skills, then the Pocket Vibe\'s two, tagged: {sk}')
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); ff.append(shot(pg))
-    inf=pg.evaluate("()=>document.querySelector('#b3-cmd .b3-info').textContent")
+    pg.click('#b3-party .bx-pc[data-i="1"]'); pg.wait_for_timeout(300); pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); ff.append(shot(pg))
+    inf=pg.evaluate("()=>document.getElementById('b3-sheet').textContent")
     need('Gamer Geek' in inf and 'RANK 2' in inf and 'Striker Lean' in inf and 'Frequent Flier' in inf,f'tapping Tom should show his Vibes: {inf[:200]}')
     frows=pg.evaluate("()=>B3.F.party.map(p=>p.id+':'+p.row+':'+p.vibe)")
     need(frows==['grace:back:grace_squishy','tom:front:tom_gamer','rose:back:rose_sugar','deedee:back:deedee_neat'],f'the fight should use the rows and Vibes set on the screen: {frows}')
     stats=pg.evaluate("()=>{ const t=B3.F.party[1]; return {hp:t.maxHp,atk:Math.round(b3Stat(t,'atk')*10)/10}; }")
     need(stats=={'hp':115,'atk':29.9},f'Tom with the Striker Lean: 115 HP and 29.9 Attack at level 2: {stats}')
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
     for _ in range(80):
         if pg.evaluate("()=>B3.ui")=='done': break
         pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg,60000); pg.wait_for_timeout(120)
     pg.wait_for_timeout(500); ff.append(shot(pg))
-    won=pg.evaluate("()=>({over:B3.F.over,btn:document.querySelector('#b3-cmd [data-done] em').textContent,msg:document.getElementById('b3-msg').textContent,vp:b3LabBook().tom.vp,g:b3LabBook().grace.vp})")
+    won=pg.evaluate("()=>({over:B3.F.over,btn:(document.querySelector('#b3-tray small')||{}).textContent||'',msg:document.getElementById('b3-msg').textContent,vp:b3LabBook().tom.vp,g:b3LabBook().grace.vp})")
     need(won['over']=='win' and '+10 Vibe Points' in won['btn'] and '+10 Vibe Points' in won['msg'],f'a Lab win should say the Vibe Points it paid: {won}')
     need(won['vp']=={'tom_flier':65,'tom_gamer':70} and won['g']=={'grace_squishy':70,'grace_craft':65},f"10 VP to each Main Vibe and 5 to each Pocket Vibe: {won['vp']} {won['g']}")
-    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
+    pg.click('#b3-app [data-done]'); pg.wait_for_timeout(600)
     # Kept on the device across a reload
     pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3LabBook',timeout=180000); pg.wait_for_timeout(1200)
     again=pg.evaluate("()=>{ const B=b3LabBook(); return {main:B.tom.main,vp:B.tom.vp.tom_gamer,rose:b3RowOf(B.rose)}; }")
@@ -568,30 +587,29 @@ S5_BOOK="""()=>{ const B=b3LabReset(5),Q={tom:['upgrade_certificate','million_mi
   for(const id in Q) Q[id].forEach((q,i)=>b3SetQuirk(id,B[id],i,q)); b3LabSave(); return Object.keys(Q).map(id=>B[id].quirks.join('+')); }"""
 # Before each scripted family turn: full Pep and HP for the family, and the boss's pips topped up so a Break never gets in the way.
 S5_PREP="""()=>{ for(const p of B3.F.party) { p.pep=10; if(!p.ko) p.hp=p.maxHp; } const f=B3.F.foes[0]; if(!f.broken&&!f.flusterTurn) { f.pips=f.maxPips; f.pipLock=false; } b3ViewSync(); b3Render(); }"""
-def s5(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.party) P[p.id]=p; const f=F.foes[0],chips=i=>[...document.querySelectorAll('#b3-party .b2-pc[data-i="'+i+'"] .b2-st')].map(e=>e.textContent);
+def s5(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.party) P[p.id]=p; const f=F.foes[0],chips=i=>[...document.querySelectorAll('#b3-party .bx-pc[data-i="'+i+'"] .st')].map(e=>e.textContent);
   return {ui:B3.ui,actor:B3.actor&&B3.actor.id,grant:F.grant&&F.grant.key,turns:F.turnLog.length,ruckus:F.ruckus,pips:f.pips,
     foe:Object.keys(f.st),hp:f.hp,tom:Object.keys(P.tom.st),grace:Object.keys(P.grace.st),rose:Object.keys(P.rose.st),deedee:Object.keys(P.deedee.st),
     cert:P.tom.counters.certificate||0,roseWait:P.rose.wait,roseTurns:P.rose.turns,clock:F.clock,chips:[0,1,2,3].map(chips),
-    ctr:(document.querySelector('#b3-party .b2-pc[data-i="1"] .b3-ctr')||{}).textContent||'',
-    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost,#b3-cmd .b2-btn .b3-cost')].map(e=>e.textContent.replace(/(\\d)PEP/,'$1 PEP')),
-    free:(document.querySelector('#b3-cmd .b3-free')||{}).textContent||'',back:!!document.querySelector('#b3-cmd [data-back]'),msg:document.getElementById('b3-msg').textContent,
+    ctr:(document.querySelector('#b3-party .bx-pc[data-i="1"] .ctr')||{}).textContent||'',
+    rows:[...document.querySelectorAll('#b3-rows .bx-mv .nm')].map(e=>e.textContent.replace(/^\\d+/,'').replace(/^★ /,'')),costs:[...document.querySelectorAll('#b3-rows .bx-mv .cost')].map(e=>e.textContent),
+    free:(document.querySelector('#b3-rows .bx-free')||{}).textContent||'',back:!!document.querySelector('#b3-app [data-back]'),msg:document.getElementById('b3-msg').textContent,
     bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':''))}; }""")
 def pick_row(pg,name):
-    """With the SKILLS list already open (a free Skill): put the cursor on a row with the keys and press Enter."""
-    pg.mouse.move(2,2)
-    names=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent)"); sel=pg.evaluate("()=>B3.sel")
-    if name not in names: fails.append(f'stage 5a: {name} is not in the list: {names}'); return
-    for _ in range((names.index(name)-sel)%len(names)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(150); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)   # the card (I), then USE
+    """With a free Skill's deck open: highlight a row and use it (Enter)."""
+    names=select_row(pg,name)
+    if name in names: pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
 def aim(pg,label):
-    """If a target list is open, put the cursor on the named target and press Enter."""
-    if pg.evaluate("()=>B3.ui")!='target': return
-    labels=pg.evaluate("()=>B3.opts.map(o=>o.label)"); sel=pg.evaluate("()=>B3.sel")
-    if label in labels:
-        for _ in range((labels.index(label)-sel)%len(labels)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
-    pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+    """Aims the highlighted move at a named target the way a player does: a tap on the monster on the picture, or on the family member's card. No label: keep the default aim."""
+    if not label or pg.evaluate("()=>B3.ui")!='deck': return
+    o=pg.evaluate("""(label)=>{ const e=b3Entry(); if(!e) return null; const i=e.opts.findIndex(o=>o.label===label); if(i<0) return null; const u=e.opts[i].units[0]; return {foe:u.side==='foe',key:u.key,i:B3.F.party.indexOf(u)}; }""",label)
+    if not o: fails.append(f'aim: {label} is not one of the targets of the highlighted move'); return
+    if o['foe']: tap_foe(pg,o['key'])
+    else: pg.click(f'#b3-party .bx-pc[data-i="{o["i"]}"]')
+    pg.wait_for_timeout(200)
 def use(pg,name,target=None):
-    skill(pg,name); pg.keyboard.press('Enter'); pg.wait_for_timeout(250); aim(pg,target)
+    """Highlights a move, aims it (a tap) when a target is named, and uses it (Enter)."""
+    skill(pg,name); aim(pg,target); pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
 def turn_of(pg,member,S,limit=8):
     """Plays Basics until it is that family member's turn (monsters take theirs in between). Returns False if it never comes."""
     for _ in range(limit):
@@ -611,14 +629,14 @@ def stage5(pg,lab):
     need(v['actor']=='grace',f"Grace should open at Rank 5: {v['actor']}")
     need('guard_stance' in v['tom'] and 'GUARD' in v['chips'][1],f"Priority Boarding: Tom should start in Guard Stance with its chip on his card: {v['tom']} {v['chips'][1]}")
     # The list a tap opens names the Trait and the Quirks
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText"); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-info-portrait.png')); caps.append(f)
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText"); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-info-portrait.png')); caps.append(f)
     need('Sensory Satisfying' in txt and 'TRAIT' in txt and 'Slow-Rise Memory Foam' in txt and 'Ultra-Rare Limited Edition' in txt and 'QUIRK' in txt,f"Grace's list should name her Trait and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     # Grace: Colossal Diamond-Gold Dumpling for Rose
-    names=skill(pg,'Colossal Diamond-Gold Dumpling'); caps.append(shot(pg)); need(pg.evaluate("()=>B3.ui")=='skill','the skill card did not open for Grace')
+    names=skill(pg,'Colossal Diamond-Gold Dumpling'); caps.append(shot(pg)); need(pg.evaluate("()=>[B3.ui,B3.deck[B3.sel].name]")==['deck','Colossal Diamond-Gold Dumpling'],'the first press should only highlight the Capstone')
     before=s5(pg); need(any(k.endswith('?') for k in before['bar']),f"the turn bar shows Grace's ghost for the highlighted Capstone: {before['bar']}")
-    pg.keyboard.press('Enter'); pg.wait_for_timeout(250); aim(pg,'Rose'); caps+=burst(pg,3,330)
-    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='skills'",timeout=20000); pg.wait_for_timeout(300)
+    aim(pg,'Rose'); pg.keyboard.press('Enter'); pg.wait_for_timeout(250); caps+=burst(pg,3,330)
+    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='deck'&&!!b3Granted()",timeout=20000); pg.wait_for_timeout(300)
     v=s5(pg); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-free-portrait.png')); caps.append(f)
     need(v['actor']=='rose' and v['grant']=='p2',f"the free Skill should be Rose's to pick: actor {v['actor']}, grant {v['grant']}")
     need(v['free']=='FREE SKILL FOR ROSE' and not v['back'],f"the list should be headed FREE SKILL FOR ROSE with no Back row: '{v['free']}', back {v['back']}")
@@ -626,7 +644,7 @@ def stage5(pg,lab):
     need(v['bar'][0]=='p2#1!' and not any(k.endswith('?') for k in v['bar']),f"the bar shows Rose picking, with no ghost (a free Skill moves nobody): {v['bar']}")
     need('Free from Grace' in v['msg'],f"the message line should say it is free: {v['msg']}")
     need('so_satisfying' in v['deedee'] and 'SATISFYING' in v['chips'][3],f"Sensory Satisfying: Deedee is next after Grace and should carry it: {v['deedee']} {v['chips'][3]}")
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); need(pg.evaluate("()=>B3.ui")=='skills' and 'Pick a free Skill' in pg.evaluate("()=>document.getElementById('b3-msg').textContent"),'Esc should not leave the free Skill list')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); need(pg.evaluate("()=>B3.ui==='deck'&&!!b3Granted()&&b3Entry().can.ok"),'Esc should not leave the free Skill deck')
     w0=v['roseWait']-0; c0=v['clock']; t0=v['turns']
     # Rose takes The Floor Is Lava! (Clobber leaves no Prime, so the Tsunami that follows leaves the boss Drenched; the landscape pass takes the Launch)
     pick_row(pg,'The Floor Is Lava!'); aim(pg,None); caps+=burst(pg,4,330); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg)
@@ -679,10 +697,10 @@ def stage5(pg,lab):
     pg.evaluate(S5_BOOK); start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
     pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); fr.append(R(shot(pg))); pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     use(pg,'Colossal Diamond-Gold Dumpling','Rose'); fr+=[R(f) for f in burst(pg,2,400)]
-    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='skills'",timeout=20000); pg.wait_for_timeout(300); v=s5(pg); f=R(shot(pg)); f.save(os.path.join(OUT,'b3-s5-free-landscape.png')); fr.append(f)
+    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='deck'&&!!b3Granted()",timeout=20000); pg.wait_for_timeout(300); v=s5(pg); f=R(shot(pg)); f.save(os.path.join(OUT,'b3-s5-free-landscape.png')); fr.append(f)
     need(v['actor']=='rose' and v['free']=='FREE SKILL FOR ROSE',f"landscape: the free Skill list should open for Rose: {v['actor']} '{v['free']}'")
-    vis=pg.evaluate("()=>{ const h=document.querySelector('#b3-cmd .b3-free'),b=document.getElementById('b3-cmd').getBoundingClientRect(),r=h.getBoundingClientRect(); return r.width>0&&r.height>0&&r.top>=b.top-1&&r.bottom<=b.bottom+1&&r.left>=b.left-1&&r.right<=b.right+1; }")
-    need(vis,'landscape: the FREE SKILL heading is not inside the command box')
+    vis=pg.evaluate("()=>{ const h=document.querySelector('#b3-rows .bx-free'),b=document.getElementById('b3-side').getBoundingClientRect(),r=h.getBoundingClientRect(); return r.width>0&&r.height>0&&r.top>=b.top-1&&r.bottom<=b.bottom+1&&r.left>=b.left-1&&r.right<=b.right+1; }")
+    need(vis,'landscape: the FREE SKILL heading is not inside the deck box')
     pick_row(pg,'"Giddyup, Tata!" Launch'); aim(pg,None); fr+=[R(f) for f in burst(pg,3,400)]; wait_cmd(pg); pg.wait_for_timeout(250)
     need(s5(pg)['actor']=='deedee','landscape: the turn order should carry on with Deedee after the free Skill')
     pg.evaluate(S5_PREP); use(pg,'Fifty-Year Dust Tsunami'); fr+=[R(f) for f in burst(pg,3,400)]; wait_cmd(pg); pg.wait_for_timeout(250); fr.append(R(shot(pg)))
@@ -699,8 +717,8 @@ S5B_HOOK="""()=>{ window.__b5=[]; if(!window.__b5w) { window.__b5w=1; const os=b
 def s5b(pg): return pg.evaluate("""()=>{ const F=B3.F,f=F.foes[0],I=f.intent,P={}; for(const p of F.party) P[p.id]=p;
   return {intent:I&&{act:I.act,aim:I.aim,kind:I.kind,name:I.name},lock:f.aimLock&&f.aimLock.key,viewAim:B3.view.aim[f.key]||null,acts:(window.__b5||[]).slice(),foe:Object.keys(f.st),pips:f.pips,
     tom:Object.keys(P.tom.st),grace:Object.keys(P.grace.st),haz:B3.view.haz.map(h=>h.id),hazText:F.hazards.map(h=>h.id),
-    chips:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>[...e.querySelectorAll('.b2-st')].map(x=>x.textContent)),
-    cards:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>!!e.querySelector('.b3-nx')),log:B3.log.slice(-60).join(' | ')}; }""")
+    chips:[...document.querySelectorAll('#b3-party .bx-pc')].map(e=>[...e.querySelectorAll('.st')].map(x=>x.textContent)),
+    cards:[...document.querySelectorAll('#b3-party .bx-pc')].map(e=>!!e.querySelector('.nx')),log:B3.log.slice(-60).join(' | ')}; }""")
 def stage5b(pg,lab,landscape=False):
     S='stage 5b'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
     rot=landscape and pg.evaluate("()=>layout.rotated")
@@ -713,7 +731,7 @@ def stage5b(pg,lab,landscape=False):
     if not turn_of(pg,'tom',S): return
     caps.append(R(shot(pg)))
     # The tap list names Gamer Geek's Trait and both Quirks
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
     if not landscape: f=shot(pg); f.save(os.path.join(OUT,'b3-s5b-info-portrait.png')); caps.append(f)
     need('Gamer\u2019s Intuition' in txt and 'Elixir Hoarder' in txt and 'New Game Plus' in txt and 'TRAIT' in txt,f"Tom's list should name his Trait and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
@@ -777,7 +795,7 @@ def stage5c(pg,lab,landscape=False):
     start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
     if not turn_of(pg,'rose',S): return
     caps.append(R(shot(pg)))
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
     need('Well-Loved Original' in txt and 'Mint-Condition Backup' in txt and 'Emergency Stuffy Swap' in txt,f"Rose's list should name her Trait and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     use(pg,'Sofa-Cushion Citadel'); wait_cmd(pg); pg.wait_for_timeout(500); v=s5c(pg); caps.append(R(shot(pg)))
@@ -797,9 +815,9 @@ def stage5c(pg,lab,landscape=False):
     sheet(caps,3 if landscape else 3,os.path.join(OUT,'b3-s5c'+('-land' if landscape else '')+'.png'),scale=.55)
 
 def s6(pg): return pg.evaluate("""()=>{ const F=B3.F; return {ui:B3.ui,actor:B3.actor&&B3.actor.id,ruckus:F.ruckus,view:B3.view.ruckus,turns:F.turnLog.length,
-    btn:(document.querySelector('#b3-cmd .b3-rk small')||{}).textContent||'',btnOff:!!document.querySelector('#b3-cmd .b3-rk.off'),fill:(document.querySelector('#b3-cmd .b3-rk')||{style:{}}).style.cssText||'',
-    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost,#b3-cmd .b2-btn .b3-cost')].map(e=>e.textContent.replace(/(\\d)PEP/,'$1 PEP')),
-    head:(document.querySelector('#b3-cmd .b3-rkh')||{}).textContent||'',msg:document.getElementById('b3-msg').textContent,
+    btn:(document.querySelector('#b3-rkm b')||{}).textContent||'',fill:(document.querySelector('#b3-rkm .track i')||{style:{}}).style.cssText||'',
+    rows:[...document.querySelectorAll('#b3-rows .bx-mv.ruck .nm')].map(e=>e.textContent.replace(/^\\d+/,'')),costs:[...document.querySelectorAll('#b3-rows .bx-mv.ruck .cost')].map(e=>e.textContent),
+    gold:[...document.querySelectorAll('#b3-rows .bx-mv')].map(e=>e.classList.contains('ruck')),msg:document.getElementById('b3-msg').textContent,
     pep:F.party.map(p=>p.pep),next:F.units.slice().sort(b3Before).map(u=>u.key).slice(0,5),log:B3.log.slice(-40).join(' | '),stored:localStorage.getItem('aot-b3-ruckus')}; }""")
 def stage6(pg,lab,landscape=False):
     S='stage 6'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
@@ -810,23 +828,19 @@ def stage6(pg,lab,landscape=False):
     pg.evaluate("()=>{ B7.speed=1; }")
     pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
     start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
-    v=s6(pg); need(v['ruckus']==0 and v['btn']=='0%' and v['btnOff'],f"a fresh fight shows RUCKUS 0% greyed: {v['ruckus']} {v['btn']} {v['btnOff']}")
+    v=s6(pg); need(v['ruckus']==0 and v['btn']=='0%' and not v['rows'],f"a fresh fight shows RUCKUS 0% with no RUCKUS move in the deck: {v['ruckus']} {v['btn']} {v['rows']}")
     caps.append(R(shot(pg)))
-    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(300); v=s6(pg)
-    need(v['ui']=='cross' and 'Double Team costs 50%' in v['msg'],f"RUCKUS at 0% should say how the gauge fills and stay on the cross: {v['ui']} {v['msg'][:120]}")
-    # Fill it to 100 and look at the button, then the list.
+    # Fill it to 100: the meter is full and the two gold moves lead the deck.
     pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200); v=s6(pg)
-    need(v['btn']=='100%' and not v['btnOff'] and '100%' in v['fill'],f"RUCKUS at 100% should be lit and full: {v['btn']} {v['btnOff']} {v['fill']}")
+    need(v['btn']=='100%' and '100%' in v['fill'],f"RUCKUS at 100% should be full: {v['btn']} {v['fill']}")
+    need(len(v['rows'])==2 and v['gold'][:2]==[True,True] and v['rows'][0].upper()=='DOUBLE TEAM' and v['rows'][1].upper()=='FULL FAMILY RUCKUS' and v['costs']==['50%','100%'],f"the gold moves should lead the deck with both spends: {v['rows']} {v['costs']} {v['gold']}")
     caps.append(R(shot(pg)))
-    pg.mouse.move(2,2); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(300); v=s6(pg)
-    need(v['ui']=='ruckus' and len(v['rows'])==2 and v['rows'][0]=='DOUBLE TEAM' and v['rows'][1]=='FULL FAMILY RUCKUS' and v['costs']==['50%','100%'] and 'RUCKUS 100%' in v['head'],f"the RUCKUS list should offer both spends: {v['ui']} {v['rows']} {v['costs']} {v['head']}")
-    caps.append(R(shot(pg)))
-    # Esc goes back to the cross.
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s6(pg)['ui']=='cross','Esc from the RUCKUS list should return to the cross')
-    # Double Team: the first member of a party turn, partner next on the bar.
+    # Double Team: the first member of a party turn, partner next on the bar. The first tap only shows it, the second uses it.
     turns0=s6(pg)['turns']; peps=s6(pg)['pep']; who0=who(pg); nxt=s6(pg)['next'][1]
-    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(250); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
-    need(s6(pg)['ui']=='busy' or s6(pg)['ui']=='cross','Double Team on a lone boss should go without a target list')
+    pg.keyboard.press('Digit1'); pg.wait_for_timeout(250); caps.append(R(shot(pg)))
+    need(pg.evaluate("()=>[B3.ui,B3.deck[B3.sel].ruckus]")==['deck','double'] and s6(pg)['turns']==turns0,'the first press on Double Team should only highlight it')
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    need(s6(pg)['ui']=='busy' or s6(pg)['ui']=='deck','Double Team on a lone boss should go without choosing a target')
     pg.wait_for_timeout(1500); caps.append(R(shot(pg)))
     wait_cmd(pg); pg.wait_for_timeout(500); v=s6(pg)
     need('Double Team' in v['log'],f"the log should name Double Team: {v['log'][-240:]}")
@@ -840,8 +854,8 @@ def stage6(pg,lab,landscape=False):
         nx=pg.evaluate("()=>{ const o=b3TurnOrder(B3.F).filter(x=>x!==B3.actor)[0]; return o&&o.side; }")
         if nx=='party': break
         pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
-    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(250); pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(200)
-    v=s6(pg); need(v['ui']=='ruckus','the RUCKUS list should be open for the Full spend: '+v['ui']); caps.append(R(shot(pg)))
+    pg.keyboard.press('Digit2'); pg.wait_for_timeout(250)
+    v=s6(pg); need(pg.evaluate("()=>B3.deck[B3.sel].ruckus")=='full','the deck should have the Full spend highlighted: '+str(v['ui'])); caps.append(R(shot(pg)))
     pg.keyboard.press('Enter'); pg.wait_for_timeout(2500); wait_cmd(pg); pg.wait_for_timeout(600); v=s6(pg)
     need('Full Family Ruckus' in v['log'],f"the log should name Full Family Ruckus: {v['log'][-240:]}")
     caps.append(R(shot(pg)))
@@ -851,13 +865,19 @@ def stage6(pg,lab,landscape=False):
     sheet(caps,4,os.path.join(OUT,'b3-s6'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
 
-def s7(pg): return pg.evaluate("""()=>{ const q=sel=>[...document.querySelectorAll(sel)], cmd=document.getElementById('b3-cmd'), pv=document.getElementById('b3-pv'); const rows=q('#b3-cmd .b2-btn,#b3-cmd .b2-x');
-    return {ui:B3.ui,sel:B3.sel,armed:B3.armed,actor:B3.actor&&B3.actor.id,turns:B3.F.turnLog.length,rec:q('#b3-cmd .rec').length,recWhere:q('#b3-cmd .rec').map(e=>e.dataset.d||e.dataset.i),
-      noPic:rows.filter(e=>!e.querySelector('img')).map(e=>(e.dataset.d||e.dataset.i||'')+':'+e.textContent.trim().slice(0,12)),
-      words:q('#b3-cmd .b2-btn:not(.b2-back):not([data-back]) .bp-w').length,star:q('#b3-cmd .b3p-star').length,pvThere:!!pv,pvImgs:pv?pv.querySelectorAll('img').length:0,pvText:pv?pv.textContent.trim():'',pvHeight:pv?Math.round(pv.getBoundingClientRect().height):0,
-      cmdBox:Math.round(cmd.getBoundingClientRect().height),cmdScroll:cmd.scrollHeight,over:B3.F.over,msg:document.getElementById('b3-msg').textContent,
-      info:(document.querySelector('#b3-cmd .b3p-info')||null)!==null,use:q('#b3-cmd [data-use]').length,backs:q('#b3-cmd [data-back]').length,otherRows:q('#b3-cmd .b2-btn[data-i]').length,moveGhost:q('#b3-bar .b3-ghost,#b3-bar .b3-pvm').length,logTail:B3.log.slice(-6).join(' | ')}; }""")
+def tray_full(pg,key):
+    """The tray's one line plus the full list sheet for one unit (battleux1: the tray is one line, the sheet holds the long text), lower-cased."""
+    pg.evaluate("(k)=>b3OpenSheet(k)",key); pg.wait_for_timeout(250)
+    T=(pg.inner_text('#b3-tray')+' '+pg.inner_text('#b3-sheet')).lower()
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(120); return T
+def s7(pg): return pg.evaluate("""()=>{ const q=sel=>[...document.querySelectorAll(sel)];
+    return {ui:B3.ui,sel:B3.sel,actor:B3.actor&&B3.actor.id,turns:B3.F.turnLog.length,over:B3.F.over,rec:q('#b3-rows .bx-mv.rec').length,recAt:q('#b3-rows .bx-mv').findIndex(e=>e.classList.contains('rec')),
+      deckRec:B3.deck.findIndex(e=>e.rec),n:B3.deck.length,look:B3.look,sheet:B3.sheet,aim:B3.aimK,say:document.getElementById('b3-msg').textContent,
+      tray:document.getElementById('b3-tray').innerText,keys:document.getElementById('b3-app').classList.contains('keys'),det:document.getElementById('b3-app').classList.contains('det'),
+      useBtn:q('#b3-rows .bx-mv.sel .use').length,logTail:B3.log.slice(-6).join(' | ')}; }""")
 def stage7(pg,lab,landscape=False):
+    """The deck's behaviour (battleux1): the first tap shows and the second uses (mouse too), the recommended move in Rose Mode, the keys and the pad,
+    the aim, the DETAILS switch and the bar's tools. The pictures on the deck are battleux3's."""
     S='stage 7'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new1')
     rot=landscape and pg.evaluate("()=>layout.rotated")
     R=lambda f: f.rotate(90,expand=True) if rot else f
@@ -866,86 +886,61 @@ def stage7(pg,lab,landscape=False):
     pg.evaluate("()=>{ B7.speed=1; b7SetDiff('rose'); }"); need(pg.evaluate("()=>b7Diff().pictures&&b7Diff().recommend"),'Rose Mode should turn on pictures and the recommended move')
     pg.evaluate(S5_BOOK)
     start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(400); pg.mouse.move(2,2)
-    # 1. the cross: pictures only, one glowing button, a star on it
+    # 1. the deck opens on the recommended move (Rose Mode), one row glowing
     v=s7(pg); caps.append(R(shot(pg)))
-    need(v['ui']=='cross','the fight should open on the cross: '+v['ui'])
-    need(v['noPic']==[] or all(x.startswith('down') for x in v['noPic']),f"every cross button should be a picture (Bag may be grey): {v['noPic']}")
-    need(v['rec']==1 and v['star']==1,f"exactly one button glows and carries the star: {v['rec']} {v['star']} {v['recWhere']}")
-    # 2. keys: open Skills, the cursor starts on the recommended row, the preview box is there with pictures, then Esc
-    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(350); v=s7(pg); f=shot(pg); caps.append(R(f)); f.save(os.path.join(OUT,'b3-s7-skills-'+('landscape' if landscape else 'portrait')+'.png')) if False else None
-    need(v['ui']=='skills','Right should open SKILLS: '+v['ui'])
-    need(v['noPic']==[] or all(x.startswith('back') or 'Back' in x or x=='' for x in v['noPic']),f"every Skill row should be a picture: {v['noPic']}")
-    need(v['rec']<=1,f"at most one recommended Skill row: {v['rec']}")
-    need(not v['pvThere'],'b3s9: the SKILLS list itself carries no preview box (it is on the skill card)')
-    n0=v['turns']
-    need(pg.evaluate("()=>document.querySelectorAll('#b3-cmd .bp-btn[data-i] [data-info]').length")==pg.evaluate("()=>document.querySelectorAll('#b3-cmd .bp-btn[data-i]').length"),'skillinfo1: every picture tile has its i')
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); v=s7(pg); caps.append(R(shot(pg)))
-    need(v['ui']=='skill' and v['turns']==n0,f"I on a Skill opens its card and uses nothing: {v['ui']} {v['turns']}")
-    need(v['pvThere'] and v['pvImgs']>=1,f"the skill card shows the preview as pictures: {v['pvThere']} {v['pvImgs']}")
-    need(v['pvText']=='' or len(v['pvText'])<=40,f"the preview box carries no sentences in Rose Mode: {v['pvText'][:80]}")
-    need(v['use']==1 and v['backs']==1 and v['otherRows']==0,f"the card shows only BACK and USE, no other Skills: use {v['use']} back {v['backs']} rows {v['otherRows']}")
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s7(pg)['ui']=='skills','Esc from the card returns to the SKILLS list')
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s7(pg)['ui']=='cross','Esc from SKILLS returns to the cross')
-    # 3. touch (skillinfo1): the i on a Skill tile opens its card; a tap on USE uses it (a tap on the tile itself uses the Skill: stage9ui)
-    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(300); pg.mouse.move(2,2)
-    n=pg.evaluate("()=>document.querySelectorAll('#b3-cmd .b2-btn[data-i]').length"); need(n>=2,'the SKILLS list should have rows: '+str(n))
-    pg.evaluate("()=>{ B3.armed=-1; }")
-    TAP="(i)=>{ const e=document.querySelector('#b3-cmd .b2-btn[data-i=\"'+i+'\"] [data-info]'); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"
-    pg.evaluate(TAP,1); pg.wait_for_timeout(350); v=s7(pg)
-    need(v['sel']==1 and v['turns']==n0 and v['ui']=='skill',f"a touch on a tile's i opens its card and does not use it: sel {v['sel']} turns {v['turns']} ui {v['ui']}")
-    need(v['pvImgs']>=1,'and the card shows the preview for that Skill')
+    need(v['ui']=='deck' and v['rec']==1 and v['recAt']==v['sel']==v['deckRec'],f"the deck should open on the one recommended move: {v['ui']} rec {v['rec']} at {v['recAt']} sel {v['sel']}")
+    # 2. keys: Up and Down move the highlight and use nothing; a number key highlights; the tray follows
+    n0=v['turns']; sel0=v['sel']
+    pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(200); v=s7(pg)
+    need(v['sel']==(sel0+1)%v['n'] and v['turns']==n0 and v['keys'],f"Down moves the highlight one row and uses nothing, and the keys hint shows: sel {sel0} -> {v['sel']} turns {v['turns']} keys {v['keys']}")
+    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(150); need(s7(pg)['sel']==sel0,'Up goes back one row')
+    pg.keyboard.press('Digit1'); pg.wait_for_timeout(150); need(s7(pg)['sel']==0 and s7(pg)['turns']==n0,'Digit1 highlights the first move and uses nothing')
+    # 3. a click: the first shows (the tray says what it does), the second on the same move uses it. A mouse is a tap like any other.
+    pg.mouse.move(2,2); i=1 if v['n']>1 else 0
+    row=f'#b3-rows .bx-mv[data-i="{i}"]'; pg.click(row); pg.wait_for_timeout(300); v=s7(pg)
+    need(v['sel']==i and v['turns']==n0 and not v['keys'],f"the first click highlights and uses nothing: sel {v['sel']} turns {v['turns']} keys {v['keys']}")
+    need(pg.evaluate("()=>b3Entry().name")in v['tray'],'the tray says which move is highlighted'); caps.append(R(shot(pg)))
+    # 4. the aim: left and right step through the targets, a tap on a monster aims at it, a tap on a family card shows that member
+    pg.keyboard.press('Digit1'); pg.wait_for_timeout(150)
+    if pg.evaluate("()=>b3Entry().opts.length")>1:
+        a0=s7(pg)['aim']; pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(200); a1=s7(pg)['aim']; need(a1!=a0,f'Right steps the aim: {a0} -> {a1}')
+        pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(200); need(s7(pg)['aim']==a0,'Left steps it back')
+        other=pg.evaluate("()=>{ const o=b3Entry().opts.find(o=>o.key!==B3.aimK); return o&&o.units[0].key; }")
+        if other: tap_foe(pg,other); pg.wait_for_timeout(250); need(s7(pg)['aim']==other,f'a tap on {other} aims the move at it')
+    pg.click('#b3-party .bx-pc[data-i="1"]'); pg.wait_for_timeout(250); need(s7(pg)['look']=='p1' or s7(pg)['aim']=='p1','a tap on a family card shows or aims at that member')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); need(s7(pg)['look'] is None,'Esc puts the shown member away')
+    # 5. I opens the full list, I again closes it; the pad's Y does the same; B closes
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(250); need(s7(pg)['sheet'] is not None,'I opens the list for whoever is up'); caps.append(R(shot(pg)))
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(200); need(s7(pg)['sheet'] is None,'I again closes it')
+    pg.evaluate("()=>b3Pad(null,null,false,false,true)"); pg.wait_for_timeout(250); need(s7(pg)['sheet'] is not None,"the pad's Y opens the list")
+    pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(250); need(s7(pg)['sheet'] is None,"the pad's B closes it")
+    # 6. the pad: D-pad down moves the highlight, up moves back, A uses
+    a=s7(pg)['sel']; pg.evaluate("()=>b3Pad('down',true,false,false,false)"); pg.wait_for_timeout(200); b=s7(pg)['sel']; pg.evaluate("()=>b3Pad('up',true,false,false,false)"); pg.wait_for_timeout(200)
+    need(b==(a+1)%s7(pg)['n'] and s7(pg)['sel']==a,f"the pad's D-pad down and up move the highlight: {a} -> {b} -> {s7(pg)['sel']}")
+    # 7. A on the recommended move really plays a turn (and one tap of A is enough: the highlight is already there)
+    t0=s7(pg)['turns']; rec=s7(pg)['deckRec']
+    pg.evaluate("(r)=>b3Select(r)",rec); pg.wait_for_timeout(150); pg.evaluate("()=>b3Pad(null,null,true,false,false)")
+    for _ in range(4):
+        pg.wait_for_timeout(2200); wait_cmd(pg); pg.wait_for_timeout(300)
+        if s7(pg)['turns']>t0 or s7(pg)['over']: break
+    need(s7(pg)['turns']>t0 or s7(pg)['over'],f"A on the recommended move plays a turn: {t0} -> {s7(pg)['turns']} {s7(pg)['logTail'][-120:]}")
     caps.append(R(shot(pg)))
-    pg.evaluate("()=>{ const e=document.querySelector('#b3-cmd [data-use]'); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"); pg.wait_for_timeout(400); v=s7(pg)
-    need(v['ui']!='skill' or v['turns']>n0,f"a touch on USE uses it (target list or the move): ui {v['ui']} turns {v['turns']}")
-    caps.append(R(shot(pg)))
-    for _ in range(3):
-        if s7(pg)['ui']=='cross': break
-        pg.keyboard.press('Escape'); pg.wait_for_timeout(250)   # target list, then the card, then the list
-    # 4. a target list: pictures of the monsters, one star, the preview box says what the hit would do
-    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(350); v=s7(pg)
-    need(v['ui']=='target','Basic on two monsters opens the target list: '+v['ui'])
-    if v['ui']=='target':
-        need(v['noPic']==[] or all('Back' in x for x in v['noPic']),f"every target row should be a picture: {v['noPic']}"); need(v['pvImgs']>=1,'the target list has its preview box'); caps.append(R(shot(pg)))
-        pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
-    # 5. the Ruckus list (gauge full)
-    pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(250); pg.mouse.move(2,2); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(350); v=s7(pg)
-    need(v['ui']=='ruckus','Left opens RUCKUS with the gauge full: '+v['ui']); need(v['noPic']==[] or all('Back' in x for x in v['noPic']),f"the RUCKUS rows are pictures: {v['noPic']}"); caps.append(R(shot(pg)))
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
-    # 6. the info list (key I, and the gamepad's Y), both with pictures; Y again closes it
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(350); v=s7(pg); need(v['ui']=='info' or v['info'],f"I opens the info list: {v['ui']}"); caps.append(R(shot(pg)))
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); u1=s7(pg)['ui']
-    pg.evaluate("()=>b3Pad(null,null,false,false,true)"); pg.wait_for_timeout(300); u2=s7(pg)['ui']; need(u2!=u1,f"the gamepad's Y opens the info list: {u1} then {u2}")
-    pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(300)
-    # 7. the gamepad walks every list: up, right, down, left, A to go in, B to go back
-    pg.evaluate("()=>b3Pad('right',true,false,false,false)"); pg.wait_for_timeout(300); a=s7(pg)['ui']; pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(250); b=s7(pg)['ui']
-    need(a=='skills' and b=='cross',f"the pad's right then B goes Skills then back: {a} {b}")
-    pg.evaluate("()=>b3Pad('left',true,false,false,false)"); pg.wait_for_timeout(300); a=s7(pg)['ui']; pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(250); b=s7(pg)['ui']
-    need(a in('ruckus','cross') and b=='cross',f"the pad's left then B: {a} {b}")
-    # 8. the recommended Basic really plays with one tap of A on the recommended button
-    pg.mouse.move(2,2); k=s7(pg); t0=k['turns']; rw=k['recWhere'][0] if k['recWhere'] else None
-    if rw in('up','right','left'):
-        pg.evaluate("(d)=>b3Pad(d,true,false,false,false)",rw); pg.wait_for_timeout(300)
-        seq=[pg.evaluate("()=>B3.ui")]
-        for _ in range(3):
-            if pg.evaluate("()=>B3.ui")in('skills','skill','target','ruckus'): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append(pg.evaluate("()=>B3.ui+':'+B3.sel"))
-        for _ in range(4):
-            pg.wait_for_timeout(2200); wait_cmd(pg); pg.wait_for_timeout(300)
-            if pg.evaluate("()=>B3.ui")in('skills','skill','target') and s7(pg)['turns']<=t0+0 or pg.evaluate("()=>!!B3.F.grant&&B3.ui!=='busy'"): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append('grant:'+pg.evaluate("()=>B3.ui"))
-            else: break
-        need(s7(pg)['turns']>t0 or s7(pg)['over'],f"following the star ({rw}) plays a turn: {t0} -> {s7(pg)['turns']} via {seq} {s7(pg)['msg'][:80]}")
-    else: need(False,'no recommended button to follow: '+str(k['recWhere']))
-    caps.append(R(shot(pg)))
-    # 9. the glow stays on exactly one button every turn for ten turns
+    # 8. the glow stays on exactly one move at the start of every turn for ten turns, and one press of Enter plays it
     bad=[]
-    for i in range(10):
+    for k in range(10):
         pg.evaluate(S5_PREP); pg.mouse.move(2,2); v=s7(pg)
-        if v['ui']=='cross' and v['rec']!=1: bad.append((v['actor'],v['rec']))
-        pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250)
-        if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
-        pg.wait_for_timeout(2200)
+        if v['ui']=='deck' and (v['rec']!=1 or v['sel']!=v['deckRec']): bad.append((v['actor'],v['rec'],v['sel'],v['deckRec']))
+        pg.keyboard.press('Enter'); pg.wait_for_timeout(2200)
         if pg.evaluate("()=>B3.F.over||B3.ui==='done'"): break
         wait_cmd(pg)
-    need(bad==[],f"one glowing button on every cross: {bad}")
+    need(bad==[],f"one glowing move, already highlighted, at the start of every turn: {bad}")
+    # 9. DETAILS: the switch is in the bar, the choice is kept on the device, and the deck class follows it
+    pg.evaluate("()=>localStorage.removeItem('aot-ux-details')")
+    d0=pg.evaluate("()=>b3Details()"); pg.locator('[data-tool="details"]:visible').first.click(); pg.wait_for_timeout(200)
+    need(pg.evaluate("()=>b3Details()")==(not d0) and pg.evaluate("()=>localStorage.getItem('aot-ux-details')")==('0' if d0 else '1'),'the DETAILS switch flips and is kept in localStorage')
+    need(s7(pg)['det']==(not d0),'the deck changes with the DETAILS switch'); pg.locator('[data-tool="details"]:visible').first.click(); pg.wait_for_timeout(150)
+    # 10. the bar's tools: speed cycles, EXIT leaves (below, after the loadout check)
+    sp=pg.evaluate("()=>B7.speed"); pg.click('#b3-speed'); pg.wait_for_timeout(150); need(pg.evaluate("()=>B7.speed")!=sp,'the speed button changes the speed'); pg.evaluate("()=>{ B7.speed=1; }")
     # 10. Rose Mode picks the loadouts: every member went into the fight with the Sig Vibes and the newest written Quirks, whatever the book says
     ra=pg.evaluate("()=>B3.F.party.map(p=>{ const L=b3RoseLoadout(p.id,b3LabBook()[p.id]); return {id:p.id,main:p.vibe===L.main,pocket:p.pocket===L.pocket,quirks:p.quirks.join()===L.quirks.filter(Boolean).join()}; })")
     need(all(x['main'] and x['pocket'] and x['quirks'] for x in ra),f"each member started with Rose Mode's automatic loadout: {ra}")
@@ -955,70 +950,6 @@ def stage7(pg,lab,landscape=False):
     sheet(caps,4,os.path.join(OUT,'b3-s7'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>{ b7SetDiff('grace'); }"); pg.click('#b3-exit') if pg.evaluate("()=>!!document.getElementById('b3-exit')&&B3.active") else None; pg.wait_for_timeout(400)
 
-# ---------- b3s9: the SKILLS list and the skill card (Tom's note 2026-11-19), words mode ----------
-TAP9="(sel)=>{ const e=document.querySelector('#b3-cmd '+sel); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"
-def s9(pg): return pg.evaluate("""()=>{ const q=s=>[...document.querySelectorAll('#b3-cmd '+s)],cmd=document.getElementById('b3-cmd'),msg=document.getElementById('b3-msg').textContent,u=B3.actor;
-  const descs=u?b3SkillRows(u).map(S=>S.desc).filter(Boolean):[],fs=e=>e?parseFloat(getComputedStyle(e).fontSize):0,use=document.querySelector('#b3-cmd [data-use]'),cb=cmd.getBoundingClientRect();
-  return {ui:B3.ui,turns:B3.F.turnLog.length,rows:q('.b3-sk').length,iconRows:q('.b3-sk').filter(b=>b.querySelector('.b3-ico img')).length,chips:q('.b2-el').length,costs:q('.b3-sk .b3-cost').length,
-    costPx:fs(document.querySelector('#b3-cmd .b3-cost b')),namePx:fs(document.querySelector('#b3-cmd .b3-snt')||document.querySelector('#b3-cmd .b2-sn')),msgHasDesc:descs.some(d=>msg.includes(d.slice(0,30))),msg,
-    cardDesc:(document.querySelector('#b3-cmd .b3-det-d')||{}).textContent||'',use:q('[data-use]').length,backs:q('[data-back]').length,others:q('.b2-btn[data-i]').length,
-    useIn:!!use&&(()=>{ const r=use.getBoundingClientRect(),h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2); return r.height>0&&r.top>=cb.top-1&&r.bottom<=cb.bottom+1&&!!h&&use.contains(h); })(),wide:cmd.scrollWidth>cmd.clientWidth+2}; }""")
-def stage9ui(pg,lab,landscape=False):
-    S='b3s9 skill card'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new3')
-    rot=landscape and pg.evaluate("()=>layout.rotated")
-    R=lambda f: f.rotate(90,expand=True) if rot else f
-    def need(cond,what):
-        if not cond: fails.append(S+what)
-    pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); }")
-    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(400); pg.mouse.move(2,2)
-    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(300); v=s9(pg); caps.append(R(shot(pg)))
-    need(v['ui']=='skills' and v['rows']>=2,f"Right opens the SKILLS list with rows: {v['ui']} {v['rows']}")
-    need(v['iconRows']==v['rows'] and v['chips']==0,f"every row shows its flavor as a picture and no word chips: {v['iconRows']} of {v['rows']}, chips {v['chips']}")
-    need(v['costs']==v['rows'] and v['costPx']>v['namePx'],f"every row has the Pep pill, its number bigger than the name: {v['costs']} {v['costPx']} > {v['namePx']}")
-    need(not v['msgHasDesc'],f"the message line does not show a Skill description: {v['msg'][:90]}")
-    n0=v['turns']
-    # skillinfo1: every row has an i at its left, in a tap strip as tall as the row's content and wide enough for a thumb
-    g=pg.evaluate("""()=>[...document.querySelectorAll('#b3-cmd .b3-sk')].map(b=>{ const i=b.querySelector('[data-info]'),n=b.querySelector('.b2-sn'),st=i?getComputedStyle(i,'::after'):null;
-      return {has:!!i,left:!!i&&i.offsetLeft+i.offsetWidth<=n.offsetLeft+1&&i.offsetLeft<=b.offsetWidth*.2,stripW:st?parseFloat(st.width):0,stripH:st?parseFloat(st.height):0,rowH:b.clientHeight}; })""")
-    need(g and all(x['has'] and x['left'] for x in g),f"every Skill row has an i to the left of its name: {g}")
-    need(g and all(x['stripW']>=28 and x['stripH']>=x['rowH']-1 for x in g),f"the i tap strip covers the row's full height and is wide enough for a thumb: {g}")
-    rows=pg.evaluate("()=>b3SkillRows(B3.actor).map(S=>b3Options(B3.F,B3.actor,S).filter(o=>!o.no).length)")
-    i=next((k for k,n in enumerate(rows) if n>1),0)
-    # the i opens the card and uses nothing
-    pg.evaluate(TAP9,f'.b2-btn[data-i="{i}"] [data-info]'); pg.wait_for_timeout(350); v=s9(pg); f=R(shot(pg)); caps.append(f); f.save(os.path.join(OUT,'b3-s9-card-'+('landscape' if landscape else 'portrait')+'.png'))
-    need(v['ui']=='skill' and v['turns']==n0,f"a tap on the i opens the Skill card and uses nothing: {v['ui']} {v['turns']}")
-    need(v['others']==0 and v['use']==1 and v['backs']==1,f"the card hides the other Skills and shows BACK and USE: others {v['others']} use {v['use']} back {v['backs']}")
-    need(len(v['cardDesc'])>20 and not v['msgHasDesc'],f"the description is on the card, not in the message line: '{v['cardDesc'][:60]}' / '{v['msg'][:60]}'")
-    need(v['useIn'] and not v['wide'],f"USE is inside the command box and nothing spills sideways: {v['useIn']} {v['wide']}")
-    pg.evaluate(TAP9,'[data-back]'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skills','BACK on the card returns to the list')
-    # USE on the card, for a Skill that needs a target, opens the target list; Back from there returns to the card
-    pg.evaluate(TAP9,f'.b2-btn[data-i="{i}"] [data-info]'); pg.wait_for_timeout(300); pg.evaluate(TAP9,'[data-use]'); pg.wait_for_timeout(400); v=s9(pg); caps.append(R(shot(pg)))
-    if rows[i]>1:
-        need(v['ui']=='target',f"USE on a Skill with several targets opens the target list: {v['ui']}")
-        pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skill','Back from the target list returns to the skill card')
-        pg.evaluate(TAP9,'[data-back]'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skills','BACK on the card returns to the list again')
-    else:
-        v=s9(pg); need(v['ui'] in('busy','cross','skills') or v['turns']>n0,f"USE plays the Skill: {v['ui']} {v['turns']}")
-        wait_cmd(pg); pg.wait_for_timeout(300)
-    # a tap anywhere on the row outside the i uses the Skill: the target list when it needs a target, the move when it does not
-    if pg.evaluate("()=>B3.ui")!='skills': pg.evaluate("()=>{ b3Open('skills',0); }"); pg.wait_for_timeout(200)
-    n0=s9(pg)['turns']
-    for part in ('.b2-sn','.b3-cost'):
-        pg.evaluate(TAP9,f'.b2-btn[data-i="{i}"] {part}'); pg.wait_for_timeout(350); v=s9(pg)
-        if rows[i]>1:
-            need(v['ui']=='target' and v['turns']==n0,f"a tap on the row ({part}) of a Skill with several targets opens the target list, no card: {v['ui']} {v['turns']}")
-            caps.append(R(shot(pg))) if part=='.b2-sn' else None
-            pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s9(pg)['ui']=='skills','Back from a target list opened by a row tap returns to the SKILLS list')
-    pg.evaluate(TAP9,f'.b2-btn[data-i="{i}"] .b2-sn'); pg.wait_for_timeout(350)
-    if rows[i]>1:
-        pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
-    v=s9(pg); need(v['ui'] in('busy','cross') or v['turns']>n0,f"a row tap, then a target, plays the Skill: {v['ui']} {v['turns']}")
-    # a Skill with exactly one target goes at once on a row tap
-    wait_cmd(pg); pg.wait_for_timeout(300)
-    wait_cmd(pg); pg.wait_for_timeout(300); caps.append(R(shot(pg)))
-    sheet(caps,3,os.path.join(OUT,'b3-s9ui'+('-land' if landscape else '')+'.png'),scale=.5)
-    pg.click('#b3-exit'); pg.wait_for_timeout(500)
-
 # ---------- Stage 9b: TNB complete (Ceramicist and Longboarder), on the Log Lump fight with TNB in Deedee's place ----------
 S9B_BOOK="""(boarder)=>{ const B=b3LabReset(5),Q=boarder?['tap_card_transfer','no_car_no_tickets']:['coaster_policy','kintsugi_gold_seam'];
   if(boarder) b3SetMain('tnb',B.tnb,B.tnb.pocket); Q.forEach((q,i)=>b3SetQuirk('tnb',B.tnb,i,q)); b3LabSave(); return B.tnb.main+':'+B.tnb.quirks.join('+'); }"""
@@ -1026,7 +957,7 @@ def s9b(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.par
   return {actor:B3.actor&&B3.actor.id,ui:B3.ui,sh:F.party.map(p=>(p.shields||[]).map(x=>({amt:Math.round(x.amt),clay:!!x.clay,glaze:x.glaze||0}))),
     haz:F.hazards.map(h=>h.id+':'+h.side+':'+h.uses),st:F.party.map(p=>Object.keys(p.st)),foe:Object.keys(f.st),hp:F.party.map(p=>p.hp),maxHp:F.party.map(p=>p.maxHp),
     ruckus:F.ruckus,mult:F.party.map(p=>p.st.e_bike?p.st.e_bike.mult||1:0),foeHp:F.foes.map(x=>x.hp),log:B3.log.slice(-80).join(' | '),
-    tags:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>e.innerText.replace(/\\n/g,' '))}; }""")
+    tags:[...document.querySelectorAll('#b3-party .bx-pc')].map(e=>e.innerText.replace(/\\n/g,' '))}; }""")
 def stage10(pg,lab,landscape=False):
     S='stage 10'+(' landscape' if landscape else '')+': '; caps=[]
     rot=landscape and pg.evaluate("()=>layout.rotated")
@@ -1041,10 +972,10 @@ def stage10(pg,lab,landscape=False):
         if not turn_of(pg,who_,S): return
         caps.append(R(shot(pg)))
         if not landscape: R(shot(pg)).save(os.path.join(OUT,f'b3-s10-{who_}-portrait.png'))
-        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
         need(trait in txt,f"{who_}'s list should name the Trait {trait}: {txt[:300]}")
         pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
-        names_=pg.evaluate("()=>(b3SkillRows(B3.actor)||[]).map(S=>S.name)"); need(any(sk in n for n in names_),f'{who_}: the SKILLS list should hold {sk}: {names_}')
+        names_=pg.evaluate("()=>B3.deck.filter(e=>e.grp!=='basic'&&!e.ruckus).map(e=>e.name)"); need(any(sk in n for n in names_),f'{who_}: the SKILLS list should hold {sk}: {names_}')
         sel=[n for n in names_ if sk in n]
         if sel:
             pg.evaluate("()=>{ B3.actor.pep=10; b3Render(); }")
@@ -1067,10 +998,10 @@ def stage9c(pg,lab,landscape=False):
     names=pg.evaluate("()=>B3.F.party.map(p=>p.id)"); need(sorted(names)==['nara','tnb','tom'],f'the chapter 2 party is Tom, TNB and Nara: {names}')
     if turn_of(pg,'nara',S):
         caps.append(R(shot(pg)))
-        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
         need('Nervous Vibrations' in txt,f"Nara's list should name her Trait: {txt[:300]}")
         pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
-        sk=pg.evaluate("()=>(b3SkillRows(B3.actor)||[]).map(S=>S.name)"); need('Vacuum-Cleaner Bolt!' in sk and "Don't Leave Me Meltdown" in sk or any('Vacuum' in n for n in sk),f'the SKILLS list should hold her Skills: {sk}')
+        sk=pg.evaluate("()=>B3.deck.filter(e=>e.grp!=='basic'&&!e.ruckus).map(e=>e.name)"); need('Vacuum-Cleaner Bolt!' in sk and "Don't Leave Me Meltdown" in sk or any('Vacuum' in n for n in sk),f'the SKILLS list should hold her Skills: {sk}')
         skill(pg,[n for n in sk if 'Vacuum' in n][0] if any('Vacuum' in n for n in sk) else sk[0]); pg.keyboard.press('Enter'); pg.wait_for_timeout(300)
         if pg.evaluate("()=>B3.ui")=='target':
             labels=pg.evaluate("()=>B3.opts.map(o=>o.label)"); need(all(l.startswith(('Front row','Back row')) for l in labels),f'a row Skill should offer rows: {labels}'); caps.append(R(shot(pg)))
@@ -1083,7 +1014,7 @@ def stage9c(pg,lab,landscape=False):
     if turn_of(pg,'boppy',S):
         caps.append(R(shot(pg)))
         if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9c-boppy-portrait.png'))
-        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+        pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
         need('Boppy' in txt or 'Warden' in txt or 'Stomach' in txt or 'Speed' in txt or len(txt)>20,f"Boppy's list should open: {txt[:200]}")
         pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
         basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(500); caps.append(R(shot(pg)))
@@ -1110,10 +1041,10 @@ def stage9b(pg,lab,landscape=False):
     names=pg.evaluate("()=>B3.F.party.map(p=>p.id)"); need(names==['grace','tom','tnb','rose'],f'TNB stands third with Grace, Tom and Rose: {names}')
     if not turn_of(pg,'tnb',S): return
     caps.append(R(shot(pg)))
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
     need('Wet Clay to Stoneware' in txt and 'Coaster Policy' in txt and 'Kintsugi Gold Seam' in txt,f"TNB's list should name his Trait and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
-    names=pg.evaluate("()=>(b3SkillRows(B3.actor)||[]).map(S=>S.name)"); need(all(n in names for n in ['Center the Bowl','Three-AM Kiln Firing','Grand Amphora Masterpiece']),f'the SKILLS list should hold his three Ceramicist Skills: {names}')
+    names=pg.evaluate("()=>B3.deck.filter(e=>e.grp!=='basic'&&!e.ruckus).map(e=>e.name)"); need(all(n in names for n in ['Center the Bowl','Three-AM Kiln Firing','Grand Amphora Masterpiece']),f'the SKILLS list should hold his three Ceramicist Skills: {names}')
     use(pg,'Center the Bowl','Grace'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
     if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9b-bowl-portrait.png'))
     need(v['sh'][0] and v['sh'][0][0]['clay'],f"Center the Bowl should give Grace a clay shield: {v['sh']}")
@@ -1135,7 +1066,7 @@ def stage9b(pg,lab,landscape=False):
     q=pg.evaluate(S9B_BOOK,True); need(q.startswith('tnb_boarder:tap_card_transfer+no_car_no_tickets'),f'the Lab book did not take TNB Longboarder and his Quirks: {q}')
     start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
     if not turn_of(pg,'tnb',S): return
-    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-sheet').innerText")
     need('Carving Momentum' in txt and 'TAP-Card Transfer' in txt and 'No Car, No Tickets' in txt,f"TNB's list should name Carving Momentum and both Quirks: {txt[:300]}")
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     use(pg,'E-Bike Tag-Along','Grace'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
@@ -1241,7 +1172,7 @@ def stage8(pg,lab,landscape=False):
     need(done['peak']<=16,f"no more than 16 clip pictures (about 160 MB) were ever held at once: peak {done['peak']}")
     sheet(caps[:24],4,os.path.join(OUT,'b3-s8'+('-land' if landscape else '')+'.png'),scale=.5)
     f=shot(pg); f.save(os.path.join(OUT,'b3-s8-end-'+('landscape' if landscape else 'portrait')+'.png'))
-    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
+    pg.click('#b3-app [data-done]'); pg.wait_for_timeout(500)
     # 5. a clip that cannot load: the move waits 2.5 s, then plays its default animation and the hit still lands
     if not landscape:
         pg.evaluate("()=>{ b3LabReset(); }"); start(pg,lab.index('new1'),{'seed':SEED}); wait_cmd(pg); pg.evaluate(S8_TRACE)
@@ -1271,7 +1202,7 @@ def s11_run(pg,lab,fid,poke,frames,every=550,limit=360,watch=None,landscape=Fals
         if pg.evaluate("()=>B3.ui==='done'"): break
     else: fails.append(f'stage {tag[1:]} {fid}: the auto fight did not finish')
     pg.wait_for_timeout(300)
-    R=pg.evaluate("()=>Object.assign({over:B3.F.over},window.__s11)"); pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
+    R=pg.evaluate("()=>Object.assign({over:B3.F.over},window.__s11)"); pg.click('#b3-app [data-done]'); pg.wait_for_timeout(500)
     return R
 def stage11(pg,lab,landscape=False):
     S='stage 11'+(' landscape' if landscape else '')+': '; caps=[]
@@ -1433,7 +1364,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1461,17 +1392,19 @@ with sync_playwright() as pw:
         fr=[]; R=auto_fight(pg,idx,fid,{'seed':SEED,'hpPct':.02,'mods':{'foeHp':20}},frames=fr,every=500,poke=FAST_FOES)
         if R['over']!='lose': fails.append(f"{fid}: the fight set up to be lost ended {R['over']}")
         sheet(fr[-8:],4,os.path.join(OUT,f'b3-{fid}-lose.png'))
-        pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
+        pg.click('#b3-app [data-done]'); pg.wait_for_timeout(500)
         if pg.evaluate("()=>splash.mode")!='lab3': fails.append(f'{fid}: CONTINUE after a loss did not go back to the list')
         # 4. landscape (the phone's own toggle: the stage turns a quarter turn)
         pg.evaluate("()=>{ B7.speed=1; toggleLayout(); }"); pg.wait_for_timeout(500)
         fr=[]; start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(400); fr.append(shot(pg)); first=state(pg)['actor']
-        pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250); fr.append(shot(pg))
-        key=[f['key'] for f in state(pg)['foes'] if f['alive']][0]
-        if state(pg)['ui']=='target': tap_foe(pg,key)
+        key=[f['key'] for f in state(pg)['foes'] if f['alive']][-1]
+        if pg.evaluate("()=>b3Entry().opts.length")>1:
+            tap_foe(pg,key); pg.wait_for_timeout(250); fr.append(shot(pg))
+            if pg.evaluate("()=>b3AimOpt().key")!=key: fails.append(f"{fid} landscape: tapping the enemy on the picture did not aim at it")
+        pg.click(f'#b3-rows .bx-mv[data-i="{pg.evaluate("()=>B3.sel")}"]')   # the second tap uses the highlighted Basic
         pg.wait_for_timeout(900); fr.append(shot(pg)); wait_cmd(pg); pg.wait_for_timeout(250)
-        if state(pg)['actor'] in(first,None) or pg.evaluate("()=>B3.F.turnLog.length")<2: fails.append(f"{fid} landscape: tapping the enemy did not use {first}'s Basic (now {state(pg)['actor']})")
-        pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); fr.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+        if state(pg)['actor'] in(first,None) or pg.evaluate("()=>B3.F.turnLog.length")<2: fails.append(f"{fid} landscape: the second tap did not use {first}'s Basic (now {state(pg)['actor']})")
+        pg.keyboard.press('KeyI'); pg.wait_for_timeout(250); fr.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
         pg.click('#b3-exit'); pg.wait_for_timeout(500)
         if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(f'{fid} landscape: EXIT did not go back to the list')
         R=auto_fight(pg,idx,fid,{'seed':SEED},frames=fr,every=700)
@@ -1519,11 +1452,6 @@ with sync_playwright() as pw:
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage8(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 6i. b3s9: the SKILLS list and the skill card (portrait, then landscape)
-    if 's9ui' in sys.argv or not only and len(want)==len(lab):
-        print('b3s9: skill card'); stage9ui(pg,lab)
-        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9ui(pg,lab,True)
-        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
-    # 6j. b3s9b: TNB complete (portrait, then a pass in landscape)
     if 's9b' in sys.argv or not only and len(want)==len(lab):
         print('b3s9b: TNB'); stage9b(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9b(pg,lab,True)
@@ -1552,7 +1480,7 @@ with sync_playwright() as pw:
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)
-    v=pg.evaluate("()=>({b2:!document.getElementById('b2-ui').hidden,b3:!document.getElementById('b3-ui').hidden,bar3:!document.getElementById('b3-bar').hidden,v3:document.getElementById('battle').classList.contains('v3'),tools:!document.getElementById('b3-tools').hidden})")
+    v=pg.evaluate("()=>{ const shown=id=>getComputedStyle(document.getElementById(id)).display!=='none'&&document.getElementById(id).getBoundingClientRect().width>0; return {b2:!document.getElementById('b2-ui').hidden,b3:shown('b3-side'),bar3:shown('b3-bar'),v3:document.getElementById('battle').classList.contains('v3'),tools:shown('b3-tools')}; }")
     if not v['b2'] or v['b3'] or v['bar3'] or v['v3'] or v['tools']: fails.append(f'battle 2 after Battle 3: wrong boxes showing: {v}')
     shot(pg).save(os.path.join(OUT,'b3-then-b2.png'))
     pg.evaluate("()=>b2End('run')"); pg.wait_for_timeout(300)

@@ -23,8 +23,8 @@
 | Where loadouts are kept | `engine/b3-menu.js` | The save's two fields per member, the Lab's book on the device, Vibe Points on a Lab win. The Vibes screen itself is the Vibes page of the menu (`engine/m2-vibes.js`, both doors; the Lab door is `m2OpenLab` with `M2.lab`); the old overlay was removed in menu4 |
 | Play layer | `engine/b3-play.js` | Beats to pictures: default animations, numbers, the view the screen shows, Battle 3's own draw function |
 | Preview and recommendation (no drawing) | `engine/b3-preview.js` | `b3Clone` (a safe copy of a fight), `b3Matchups`, `b3Preview` (a move played on a copy, nothing real changes, never rolls luck), `b3PreviewValue`, `b3Recommend` (the move that glows) |
-| Rose Mode pictures | `engine/b3-pictures.js` | Pictures for the cross, the lists, the info list, the preview box and the Vibes screen; reuses battle 2's `bp*` helpers and CSS. Words versions stay in `b3-ui.js` and are used when Rose Mode is off |
-| Screen | `engine/b3-ui.js` | Start and end, the turn flow, turn bar, party cards, command cross, lists, targeting, input |
+| Rose Mode pictures | `engine/b3-pictures.js` | The icon set and the Vibes screen's pictures; reuses battle 2's `bp*` helpers. The deck's rows get their pictures in battleux3 (`b3RenderDeck` in `engine/b3-deck.js`) |
+| Screen | `engine/b3-ui.js`, `engine/b3-deck.js`, `b3-deck.css`, `data/b3-ux-words.js` | `b3-ui.js`: start and end, the turn flow, turn bar. `b3-deck.js`: the one-level deck (first tap shows, second uses), the one-line tray and battle log, party cards, the full-list sheet, the aim, DETAILS, keys and gamepad. `b3-ux-words.js`: the reach, kind, size, forecast and Ruckus words, one small table each. A move's `short` line is its field in `data/b3-kit-*.js` |
 | Check | `tools/b3-sim.js` (node), `tools/b3-check-s2.js`, `tools/b3-check-s3.js`, `tools/b3-check-s4.js`, `tools/b3-check-s5.js`, `tools/b3-check-s9b.js`, `tools/b3_test.py` (browser) | Fights with no screen and the rule tests (stage 1's groups in `b3-sim.js`, one file per stage after that; `check` runs them all); fights and the Vibes screen on screen with contact sheets |
 
 The eight rules files never touch the canvas, the page, a timer, battle 2 or the game's own party and monster objects. `tools/b3-sim.js` loads them into an empty sandbox, so a rules file that reaches for any of those fails there.
@@ -86,7 +86,7 @@ A fight is one plain object `F` from `b3NewFight(cfg)`. `b3Next(F)` moves the cl
 | `engine/main.js` `pollGamepad` | Hands the gamepad to `m2Pad` while the Lab's Vibes page is open |
 | `saveSnapshot`, `loadGame` | Wrapped at the top of `engine/b3-menu.js` (the way `engine/bench.js` wraps them): every member with a kit is saved with `vibes` ({main, pocket, quirks, vp}) and `row`; on load every member's loadout is rebuilt from the save, or fresh when the save has none. No old field is removed. |
 | `localStorage` `aot-b3-lab` | The Battle Lab's book of loadouts (`b3LabBook`, `b3LabSave`, `b3LabReset`). Not part of any save. |
-| `index.html` | `#b3-bar` and `#b3-ui`, with the same layout classes as battle 2 (`.b2-ribbon`, `.b2-ui`, `.b2-party`, `.b2-cmd`), so portrait, landscape and tablet sizes are shared. `#battle` carries both `v2` (the shared layout) and `v3` during a Battle 3 fight. |
+| `index.html` | `#b3-bar` and `#b3-app` (scene, tray, deck, party cards, sheet). `#battle.v3` is a CSS size container and `b3-deck.css` lays the screen out with `@container` queries, so portrait, landscape, the rotated stage and the Duo sizes follow the stage's own size. `#battle` carries both `v2` (the shared layout) and `v3` during a Battle 3 fight. |
 
 Helpers Battle 3 borrows from battle 2 files (the purge stage must move or rename them, not delete them): `b2Meter`, `B2_METER`, `b2MeterTag`, `b2BattleDef`, `b2CanvasPt`, `b2Esc`, `b2Portrait`, `b2Thumb`, the `.b2-*` layout classes and `.b7-tools`, `b7FoeHp`, `b7Taken`, `b7FoeSpeed`, `b7ToggleSpeed`, `B7.speed`.
 

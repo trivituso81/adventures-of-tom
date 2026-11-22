@@ -43,7 +43,7 @@ def win(pg,boss=False):
             if not carded: pg.wait_for_timeout(1500); snap(pg,'card'); carded=True
             pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
         if st['ui']=='done': pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(1500); continue
-        if st['ui']=='cross': pg.evaluate("()=>{ if(B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
+        if st['ui']=='deck': pg.evaluate("()=>{ if(B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
         if i==40: snap(pg,'battle-mid')
         pg.wait_for_timeout(1000)
     return (not pg.evaluate("()=>battle.active"),carded)
@@ -86,7 +86,7 @@ with sync_playwright() as pw:
     check('7 pond and the Big One (Battle 3)',run(pg,"()=>flag('battle:bigone')==='win'",'7boss',2000) is not False)
     check('8 after the boss',run(pg,"()=>flag('ch1-tin')===true&&!intro.active&&!dialog.active",'8after') is True)
     check('dragonfly coin given',pg.evaluate("()=>bag.includes('dragonflycoin')"))
-    check('no Warmth or HEART left in chapter 1 fights',pg.evaluate("()=>!/WARMTH|HEART/.test(document.getElementById('b3-ui').innerText)"))
+    check('no Warmth or HEART left in chapter 1 fights',pg.evaluate("()=>!/WARMTH|HEART/.test(document.getElementById('b3-app').innerText)"))
     pg.evaluate("()=>window.__LE.go('grands')"); pg.wait_for_timeout(1500)
     check('9 home',run(pg,"()=>flag('ch1-home')===true&&!intro.active&&!dialog.active",'9home',1500) is True)
     pg.evaluate("()=>window.__LE.go('row')"); pg.wait_for_timeout(1500)

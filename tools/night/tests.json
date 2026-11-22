@@ -2,6 +2,10 @@
  "about": "Night test run (nighttests, claude/night-plan.md section 6). id, cmd, group, minutes, outdir (a folder is added as the first argument), known_fail (reason), env.",
  "skip": [
   {
+   "script": "tools/b3_layout_test.py",
+   "why": "takes one screen size per run (about 4 minutes each, seven sizes) and plays real fights; run by hand after a change to b3-deck.css or engine/b3-deck.js"
+  },
+  {
    "script": "tools/reaction_test.py",
    "why": "harness that needs a cases file, not a test on its own"
   },

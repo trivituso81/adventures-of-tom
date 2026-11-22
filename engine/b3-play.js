@@ -112,7 +112,13 @@ function b3Pop(key,text,color,o) {
 }
 function b3Word(text,color) { B3P.words.push({text,color,t0:B3P.t,dur:1.35}); }
 function b3Sfx(k) { try { if(typeof sfx!=='undefined'&&sfx[k]) sfx[k](); } catch(e) {} }
-function b3Say(text) { const el=$('b3-msg'); if(el) el.textContent=text; B3.log.push(text); if(B3.log.length>60) B3.log.shift(); }
+// A line for the battle log: the tray shows it while a move or a monster plays (engine/b3-deck.js); while the player picks, it is a note over the tray
+// (a reason a move cannot be used, a story tip). #b3-msg is the same line for a screen reader.
+function b3Say(text) {
+  const el=$('b3-msg'); if(el) el.textContent=text; B3.log.push(text); if(B3.log.length>60) B3.log.shift();
+  B3.say=text; if(B3.ui==='deck'&&battle.state==='command') B3.note=text;
+  if(typeof b3RenderTray==='function'&&B3.F&&B3.view) b3RenderTray();
+}
 const b3Name=key=>b3Unit(B3.F,key).name;
 
 // ---------- Showing one beat ----------
@@ -207,7 +213,7 @@ function b3Show(b) {
   else if(b.t==='grant') { b3Pop(b.tgt,'FREE SKILL!','#ffe27a'); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' gets a free Skill from '+b3Name(b.src)+'. It does not use up '+b3Name(b.tgt)+'’s turn.'); }
   else if(b.t==='grantEnd') { V.bar=b.bar; b3RenderBar(); }
   // The Family Ruckus (stage 6): the gauge moves (the RUCKUS button is its bar), a Mix is named, and a spend is announced.
-  else if(b.t==='ruckus') { V.ruckus=b.v; if(b.n>0&&b.src) b3Pop(b.src,'RUCKUS +'+b.n+'%','#ffd36b'); b3RenderCmd(); }
+  else if(b.t==='ruckus') { V.ruckus=b.v; if(b.n>0&&b.src) b3Pop(b.src,'RUCKUS +'+b.n+'%','#ffd36b'); b3RenderDeck(); }
   else if(b.t==='mix') { b3Pop(b.tgt,'MIX!','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say('A Mix: '+b3Name(b.src)+' hit '+b3Name(b.tgt)+' with a different flavor than their teammate.'); }
   else if(b.t==='ruckusSpend') { b3Word(b.name.toUpperCase()+'!','#ffd36b'); b3Sfx('combo'); b3Say(b3Name(b.src)+' and '+b3Name(b.partner)+': '+b.name+'!'); }
   else if(b.t==='detonate') {
@@ -357,7 +363,7 @@ function b3Draw() {
   if(bg&&bg.complete&&bg.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high'; gfx.drawImage(bg,0,0,576,324); gfx.imageSmoothingEnabled=sm; }
   else rect(0,0,576,324,'#14141c');
   if(!F||!V||B3.artWait) { gfx=ctx; return; }
-  const picked=B3.ui==='target'&&B3.opts[B3.sel]?B3.opts[B3.sel].units.map(u=>u.key):[];
+  const picked=b3AimUnits();   // the units the highlighted move is aimed at (engine/b3-deck.js)
   // What lies on a side's floor (hazards): a sheen under that side's feet and a tag in the top corner on that side.
   for(const h of V.haz||[]) { const H=B3_HAZARDS[h.id],foe=h.side==='foe',L=foe?F.foes.filter(f=>!V.u[f.key].ko&&f.row!=='back'):[];
     gfx.globalAlpha=.3+.08*Math.sin(t*3);
@@ -507,5 +513,5 @@ function b3MemberMarks(u,t,picked,y,cx) {
   // The aim Cartridge Blow showed: a yellow arrow and the words, until that monster's turn.
   else if(b3ViewAimed(u.key)&&!picked&&!(B3.view.u[u.key]||{}).ko) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ffe27a'); b3Text('NEXT TARGET',cx,yy-12,'#ffe27a',2); }
   if(picked) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#9be39a');
-  else if(B3.actor===u&&battle.state==='command'&&B3.ui!=='target'&&!b3ViewMarked(u.key)) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
+  else if(B3.actor===u&&battle.state==='command'&&B3.ui==='deck'&&!b3ViewMarked(u.key)) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
 }
