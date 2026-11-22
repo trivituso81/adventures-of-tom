@@ -30952,7 +30952,7 @@
    "url": "https://claude.ai/code/session_01RXeukDja3L6UEaiyZCn1Af",
    "title": "Optional: add fal and xAI keys for balance reads",
    "first": "2026-11-21T22:11:15Z",
-   "last": "2026-11-22T01:07:21Z",
+   "last": "2026-11-22T01:11:51Z",
    "tags": [],
    "cards": [
     "t-costs2keys"
@@ -35612,8 +35612,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "996606de5f3385dfd290bba59b0a33c08581192b",
- "synced_at": "2026-11-22T01:08:29+00:00",
+ "synced": "12bfa83f4e0bb26a5631adbe62d0fc3396523115",
+ "synced_at": "2026-11-22T01:12:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
