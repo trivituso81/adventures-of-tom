@@ -30120,6 +30120,43 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "c-movestage",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "movestage1",
+   "title": "Moves in three layers: body video, stage, set piece",
+   "next": "Writing the staging plan (claude/move-staging-plan.md), the staging rows and new body prompts for Tom's eight signature moves, the Battle Guide's Waits for staging gate, and the build card c-movestage-build.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDgeg1TQUp7kzdFksg",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/video-battle-plan.md\""
+   },
+   "prompt": {
+    "what": "Plans every family move as three layers (body video, stage drawn by the engine, set piece for Capstones) and writes Tom's eight signature moves that way.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts and comedy Tom judges by taste)",
+    "effort": "medium (a plan and eight rows; the engine build is its own card)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/video-battle-plan.md, claude/battle-animation-list-ch1-v11.md and claude/battle-spec-v11.md section 3 (Tom's two signature Vibes). Write claude/move-staging-plan.md, the staging rows and body prompts for Tom's eight signature moves, the Battle Guide gate (a family move without a staging row shows Waits for staging) and the next card c-movestage-build. No video is made. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by movestage1 (new card). Tom (2026-11-22 09:53): \"every single animation is just Tom pulling out something from behind his back and that's it\" and \"each subsequent ability as it gets unlocked to be fun, funny, and visually cool, especially with the final ability being visually stunning\".",
+     "at": "2026-11-22T18:05:00Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Finding of the 11-22 session: the move videos are flat because (1) the body-state video recipe was reused for moves, (2) the stage layer planned on 11-18 was never built in Battle 3 (one colored ball and a burst for every move), (3) guideprompts1 had a cheap text model write 70 family move prompts told \"props out from behind the back and back again\" (74 of 120 family move prompts say behind the back)."
+    }
+   ],
+   "started_at": "2026-11-22T18:05:00+00:00"
   }
  ],
  "sessions": [
