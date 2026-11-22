@@ -30934,6 +30934,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDja3L6UEaiyZCn1Af",
+   "title": "Optional: add fal and xAI keys for balance reads",
+   "first": "2026-11-21T22:11:15Z",
+   "last": "2026-11-22T01:07:21Z",
+   "tags": [],
+   "cards": [
+    "t-costs2keys"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "first": "2026-11-21T14:57:29Z",
@@ -31025,16 +31035,6 @@
    ],
    "cards": [
     "c-night-clean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDja3L6UEaiyZCn1Af",
-   "title": "Optional: add fal and xAI keys for balance reads",
-   "first": "2026-11-21T22:11:15Z",
-   "last": "2026-11-21T22:11:31Z",
-   "tags": [],
-   "cards": [
-    "t-costs2keys"
    ]
   },
   {
@@ -35597,8 +35597,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "18cdc4d5233685b7056355178f4262c9f1bccebe",
- "synced_at": "2026-11-22T01:06:39+00:00",
+ "synced": "996606de5f3385dfd290bba59b0a33c08581192b",
+ "synced_at": "2026-11-22T01:08:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
