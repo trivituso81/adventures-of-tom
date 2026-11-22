@@ -30554,6 +30554,10 @@
     {
      "d": "2026-11-22",
      "t": "wanstop session: tom-porsche (attempt 2, pad 0.8) accepted by eye and baked into the game (build wanstop-tom-porsche-r1); judge it in the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "tom-suitedoor accepted by eye after the bulk run stopped it (vision check p1 missed a move that is there): baked and wired to suite_door_slide (build wanstop-tom-suitedoor-r1). Judge it in the Move Lab."
     }
    ]
   },
@@ -31654,6 +31658,10 @@
     {
      "d": "2026-11-22",
      "t": "Session started (board: start)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Accepted the first video by eye (all measured checks passed; p1 was wrong), baked and wired. No new try."
     }
    ],
    "prompt": {
