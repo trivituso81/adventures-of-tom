@@ -35052,7 +35052,7 @@
   {
    "id": "t-fal-topup",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "setup",
    "fyi": true,
@@ -35069,8 +35069,14 @@
     {
      "d": "2026-11-21",
      "t": "Added by wanqueue1: fal answered every video request since 05:20 UTC with \"Exhausted balance\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this.",
+     "at": "2026-11-22T06:18:15.750Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanqueue1",
