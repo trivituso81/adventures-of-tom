@@ -1,22 +1,4 @@
 {
- "requests": [
-  {
-   "kind": "tts",
-   "line": "d|tom|A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast.",
-   "voice_id": "cjVigY5qzO86Huf0OWal",
-   "fallback_ids": [],
-   "text": "[blurting, very fast] A massive [emphasized] FISH was wearing my mom's muffin pan as a crown. [pause] [impatient] I'm so sorry. Please. Toast...",
-   "model": "eleven_v4",
-   "stability": 0.5,
-   "similarity": 0.85,
-   "speed": null,
-   "seed": true,
-   "tries": 3,
-   "label": "new take",
-   "script": "[blurting, very fast] A massive [emphasized] FISH was wearing my mom's muffin pan as a crown. [pause] [impatient] I'm so sorry. Please. Toast...",
-   "at": 1795312294985,
-   "rid": "r1795312294985-tml"
-  }
- ],
+ "requests": [],
  "cancel": []
 }
