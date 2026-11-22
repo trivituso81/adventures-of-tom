@@ -766,10 +766,10 @@ function wanHtml(c,compact){
   let why='';
   if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' video'+((run.n||n)===1?'':'s')+'...';
   else if(c.col==='wait'){const by2=blockedBy(c);why='Waiting on: '+(by2.length?by2.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}
-  else if(!n)why=held.length?'Waiting for Claude to fix the stopped video'+(held.length===1?'':'s')+'. This button comes back then.':'Nothing to make right now.';
+  else if(!n)why=held.length?'A Claude session is fixing the stopped video'+(held.length===1?'':'s')+' and starts the next try by itself (wanauto1).':'Nothing to make right now.';
   const arm=WGENARM===c.id,txt=wMoney(est);
   h+='<button type="button" class="gen'+(arm?' armed':'')+'" data-act="wgen" data-id="'+esc(c.id)+'"'+(why?' disabled':'')+'>'+(why?esc(why):arm?'Tap again to confirm: make '+n+' (about '+txt+', at most '+wMoney(cap)+')':'Generate all '+n+' video'+(n===1?'':'s')+' (about '+txt+')')+'</button>';
-  if(!why)h+='<div class="gm">The job checks each video itself. A video that only touches the edge is made once more with a smaller picture (up to one more video each, inside the '+wMoney(cap)+' cap). A video that fails anything else is stopped and written up on a card for Claude. Passed videos are put in the game for you.</div>';
+  if(!why)h+='<div class="gm">The job checks each video itself. A miss is made once more (a smaller picture if it only touched the edge, otherwise the same settings). A second miss goes to a Claude session that fixes it and starts the next try by itself, up to 4 videos and $3.20 per animation and $15 a day. Passed videos are put in the game for you.</div>';
   if(busy)h+='<div class="gm">'+(g.want?'Started. The videos are made, checked and put into the game for you (about 5 to 15 minutes each, 3 at a time). A card tells you when to watch.':'The job is running. A card tells you when to watch.')+'</div>';
   if(!busy&&run.state&&run.state!=='running'&&!compact){
     h+='<div class="gm"><b>Last run: '+(run.state==='done'?'finished':'failed')+'</b>'+(run.spent!=null?' (about '+wMoney(+run.spent)+')':'')

@@ -11,7 +11,7 @@ B3_SKILLS.windex_spritz={id:'windex_spritz',vibe:'deedee_neat',slot:'basic',name
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'windexed',to:'target'}],line:null,anim:{kind:'clip',clip:'deedee_windex',shape:'cast'},
   desc:'Light Drench hit. Leaves the monster Drenched, and its attacks miss 15% of the time for 2 turns.'};
 B3_SKILLS.wet_floor_hazard={id:'wet_floor_hazard',vibe:'deedee_neat',slot:'s1',name:'Wet-Floor Hazard',pep:3,flavor:['drench'],power:0,hits:0,
-  target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'wet_floor'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'wet_floor'}],line:null,anim:{kind:'clip',clip:'deedee_wetfloor',shape:'cast'},
   desc:'Mops the monsters\u2019 floor. The next 2 monsters to use a melee attack slip: a light Clobber fall, and that attack does 25% less damage.'};
 // "Hand Me My Glasses" Scrub: every buff comes off first, then one standard Clobber hit that is 25% stronger for each buff removed
 // (my call: the spec's "+25% Drench dmg/buff removed" is added to this Skill's own hit, which the spec lists as Clobber).

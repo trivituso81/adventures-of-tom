@@ -10,7 +10,7 @@ on:
   push:
     branches: [main]
   workflow_run:
-    workflows: [clip-gen, art-gen, voice-gen, clip-gate, art-bake]
+    workflows: [clip-gen, art-gen, voice-gen, clip-gate, art-bake, wan-gen]   # wanauto1: wan-gen pushes with the Action token, which starts no workflow; this wakes the job so a stop card starts at once
     types: [requested, completed]
   workflow_dispatch:
   schedule:

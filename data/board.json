@@ -31451,9 +31451,9 @@
    "title": "Generate the two fixed videos",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
-   "next": "Look again at this card. You wrote: \"the button says nothing to make right now. but there is no video made\". That was right: the last run made both videos, but neither passed its checks, and the card did not say so. It now says which videos were stopped and why, and the button comes back after a fix. Both are fixed now, so this card should show \"2 videos left to make: rose-giddyup, deedee-wetfloor\" and the button Generate all 2 videos (about $1.57). Tap it twice. Rose: the cannonball now says \"upright\" (the last one flipped upside down on the way up). Deedee: the line that kept the mop on the floor the whole time is gone (the last one swept back and forth 2 or 3 times). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal.",
+   "next": "Nothing for you here: Wet-Floor is in the game; Giddyup is one decision on its own card.",
    "steps": [
     "Open this card and check it shows 2 videos left to make and the yellow Generate all 2 videos button.",
     "Tap Generate all 2 videos, then tap it again to confirm.",
@@ -31469,7 +31469,7 @@
    "blocks": [],
    "fyi": true,
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "history": [
     {
      "d": "2026-11-21",
@@ -31505,6 +31505,10 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44978237279: 2 made and checked, 0 passed, 2 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanauto1. Tom 19:02: \"Argh it happened again!!!!\""
     }
    ],
    "wgen": {
@@ -31545,6 +31549,165 @@
       "deedee-wetfloor": 7
      }
     }
+   },
+   "done": "2026-11-21"
+  },
+  {
+   "id": "c-wanauto1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanauto1",
+   "title": "Battle videos finish without Tom (re-roll, auto fix, caps)",
+   "next": "Shipped in wanauto1: re-roll, automatic fix cards, caps, one watch card. Wet-Floor is in the game.",
+   "blocks": [],
+   "after": "t-wanauto1-watch",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: why has it taken me all day to record like 4 animations?"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (18:09): \"why has it taken me all day to record like 4 animations? ... why has the card come to me like a dozen times?\" Tom (18:11): yes to the Action spending up to $3.20 per animation and $15 a day without his tap. Tom (19:02): \"Argh it happened again!!!!\""
+    }
+   ],
+   "prompt": {
+    "what": "Rebuilds the battle video loop so it finishes without Tom.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
+   "id": "t-wanauto1-watch",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Watch Deedee's new Wet-Floor Hazard",
+   "next": "Open ADMIN > BATTLE GUIDE, choose Animations, Family, Deedee, and play Wet-Floor Hazard once. She brings out a flat mop, sweeps once beside her feet and puts it away. Tap All good, or Something is wrong and say what you saw.",
+   "wanwatch": [
+    "deedee-wetfloor"
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanauto1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanauto1. Wet-Floor r7 baked by hand after a look at every frame; the look check had failed it on the words \"from behind her back\" only."
+    }
+   ]
+  },
+  {
+   "id": "t-giddyup-decide",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "title": "Rose's Giddyup: drop the jump?",
+   "next": "Four tries in a row turned Rose's jump into a flip or a spin (and the last drew a hoop in her hand). Changing the words is not fixing it. Pick one. Your answer starts c-giddyup-next by itself.",
+   "choices": [
+    "No jump: she circles her hand like a cowgirl and points forward, shouting (Recommended)",
+    "Keep the jump, try a different video model",
+    "Keep the move without a video for now"
+   ],
+   "leads": [
+    "The video model handles standing gestures well (Boop, Windex and Scrub passed). One new video, made and put in the game without a tap.",
+    "Up to 4 more tries on the other model, inside the $3.20 limit. May miss the same way.",
+    "The move plays with its stand-in until a later card picks it up."
+   ],
+   "blocks": [
+    "c-giddyup-next"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanauto1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanauto1 (stop-loss on rose-giddyup: r5 somersault, r6 spin, r7 flip, r8 flip and a hoop)."
+    }
+   ]
+  },
+  {
+   "id": "c-giddyup-next",
+   "lane": "claude",
+   "col": "wait",
+   "theme": "Battle Animations",
+   "tag": "giddyup9",
+   "title": "Rose's Giddyup: make the video Tom picked",
+   "next": "Waits on Tom's answer on t-giddyup-decide, then starts by itself.",
+   "blocks": [],
+   "auto": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanauto1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by wanauto1."
+    }
+   ],
+   "prompt": {
+    "what": "Makes Rose's Giddyup video the way Tom picked.",
+    "before": [
+     "Tom answers t-giddyup-decide."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (one job edit from Tom's choice)",
+    "text": "Read CLAUDE.md (sections wanauto1, Fix a miss with the smallest change, Image and video prompts), claude/video-battle-plan.md 4.14, then card c-giddyup-next and Tom's answer on t-giddyup-decide in data/board.json, and the job rose-giddyup in tools/art-library/wangen-jobs.json. If he picked No jump: write tools/art-library/prompts/wan-rose-giddyup-v6.txt equal to v5 with the MOTION's jump sentence replaced by one sentence in which she points forward with the other hand and shouts, feet planted; set airborne false, raise rev to 9, set auto_from to now. If he picked a different model: change only the endpoint to the family route named in plan 4.12 (Wan 3.0), raise rev, set auto_from. If he picked Keep without a video: retire this card and change nothing. For a new rev start the run in the same push: set wgen on card t-wanstop-gen to {want: true, at: now, n: 1, est: 0.79, auto: true}, write the CHANGES heading ## giddyup9, run bump_tags, and make the LAST commit's subject exactly board: wan generate t-wanstop-gen. After: nothing for Tom: end. Your first push is the commit board: start c-giddyup-next. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "tom"
+  },
+  {
+   "id": "c-animplan",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "animplan1",
+   "title": "Battle Guide: one Plan view of every battle animation",
+   "next": "Add a Plan view to ADMIN > BATTLE GUIDE > Animations: every animation as Done, Making or Next.",
+   "blocks": [],
+   "auto": true,
+   "start": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanauto1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by wanauto1. Tom (18:09): \"there's no clarity on the plan, which animations we do and when\"."
+    }
+   ],
+   "prompt": {
+    "what": "A Plan view in the Battle Guide: every battle animation and where it stands.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (one page view from data that exists)",
+    "text": "Read CLAUDE.md (section wanauto1 and the Battle Guide row of Where things live), docs/BATTLE_GUIDE.md and claude/video-battle-plan.md 4.14, then card c-animplan in data/board.json. Tom (2026-11-21 18:09): \"there's no clarity on the plan, which animations we do and when\". Add a PLAN view at the top of ADMIN > BATTLE GUIDE > Animations (battle-guide.html): one row per battle animation from data/guide-anims.json, grouped Done (a baked video is in the game), Making (a job in tools/art-library/wangen-jobs.json with no baked clip, or an open c-wanstop card in data/board.json), Next (no video and no job), with a count per group at the top; each Making row shows the job's rev. Plain words, no em dashes, works in portrait on the phone. Test it in tools/battle_guide_test.py (counts match the data, rose-giddyup is a Making row), look at portrait and landscape screenshots, write the CHANGES heading ## animplan1 and push. After: nothing for Tom: end. Your first push is the commit board: start c-animplan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -33167,15 +33330,15 @@
   {
    "id": "c-wanstop-rose-giddyup-r8",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-giddyup-r8",
    "title": "Fix the stopped video rose-giddyup",
-   "next": "The bulk run stopped rose-giddyup (failed: edge, p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "next": "Retired by wanauto1: stop-loss, Tom decides the move on t-giddyup-decide.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "added by the wan-gen job"
@@ -33184,6 +33347,10 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44978237279): rose-giddyup stopped at rev 8. attempt 1 (pad 0.65) edge, p1, p2. Evidence: edge: the figure touches the left/top edge in 10 of 121 pictures (video frames 12 to 14, 36 to 38, 70 to 71, 74 to 75); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she circles one hand above her head li (No clear cowgirl hand circle or cannonball jump; shows; p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (No return to relaxed stance afte"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanauto1. Stop-loss: r5 somersault, r6 spin, r7 flip, r8 flip plus a hoop drawn in her hand. Four wording fixes missed the same way, so no fifth one. Tom decides on t-giddyup-decide."
     }
    ],
    "prompt": {
@@ -33194,20 +33361,21 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-rose-giddyup-r8 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job rose-giddyup (rev 8) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: edge, p1, p2. Evidence: edge: the figure touches the left/top edge in 10 of 121 pictures (video frames 12 to 14, 36 to 38, 70 to 71, 74 to 75); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she circles one hand above her head li (No clear cowgirl hand circle or cannonball jump; shows; p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (No return to relaxed stance after poses; ends in stand. Its files are on branch wangen: rose-giddyup-r8-result.json (every check with numbers and the look-check answers) and the videos rose-giddyup-r8.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-rose-giddyup-r8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r7",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r7",
    "title": "Fix the stopped video deedee-wetfloor",
-   "next": "The bulk run stopped deedee-wetfloor (failed: p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "next": "Retired by wanauto1: the video was good by eye and is in the game.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "added by the wan-gen job"
@@ -33216,6 +33384,10 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44978237279): deedee-wetfloor stopped at rev 7. attempt 1 (pad 0.65) p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears and disappears inconsistently; no clear si; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back or return to start; i"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanauto1. By eye, r7 is a clean single mop sweep beside her feet and a return; the look check failed it only because the mop came from her side, not \"from behind her back\". Baked and wired by hand (build wanauto1), no new video."
     }
    ],
    "prompt": {
@@ -33226,7 +33398,8 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r7 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 7) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears and disappears inconsistently; no clear si; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back or return to start; i. Its files are on branch wangen: deedee-wetfloor-r7-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r7.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r7. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-menu1look",

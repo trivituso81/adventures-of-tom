@@ -231,6 +231,19 @@ Bulk run 44967949648 (t-wanch5-gen, $1.58): both made, both stopped by the Actio
 | Deedee Wet-Floor r5 to r6 | Feet 7.7 percent (inside the 10 percent limit). Edge in 23 of 121 pictures, both sides; look checks p1 and p2 no. By eye: about five strokes (left, right, left, right, left, frames 32 to 91), the mop head reaching a side edge at each stroke end, which is every edge frame | Prompt v3: "one short sweep" (was "one wide sweep") | the rest of the prompt, Kling 4.0, start picture, 5 s, pad 0.65 (last pad: no edge retry left), feet limit 0.10, bake, wire |
 | Next | Tom's tap on t-wanstop-gen (cap $2). If Wet-Floor still strokes back and forth, the next one change is the sentence that counts the sweeps, not the width | | |
 
+### 4.14 Built (wanauto1, 2026-11-21): the Action finishes each animation without Tom
+Why: on 11-21 Giddyup and Wet-Floor took about 11 actions from Tom (paste a prompt, tap Generate) for 4 paid videos and 0 passes. The checks were right every time; the loop went through Tom twice per miss. Tom (18:11) approved spending without his tap within the limits below.
+
+| Step | Who | Detail |
+|---|---|---|
+| Make and check | Action | As 4.12 (measurements, then three look checks) |
+| First miss | Action | Re-roll at the same rev, every setting the same; an edge-only miss gets the next smaller pad instead |
+| Second miss | Action, then a Sonnet session | `c-wanstop-<job>-r<rev>`: Sonnet 5.5 medium, `auto`, `start`. The session looks at the frames, changes one thing, raises `rev`, sets `wgen.want` on the `wan_card` and pushes with the last subject `board: wan generate <card>` |
+| Limits | Action | `_bulk.auto`: 4 videos and $3.20 per job since its `auto_from`; $15 per UTC day for every video (ledger calls). Out of tries: Tom decide card `t-wangaveup-<job>-r<rev>` (two choices) |
+| Watch | Tom, once | Every passed video joins the one open watch card (`wanwatch`) |
+
+State at ship: Wet-Floor r7 baked by hand (good by eye; the look check was too literal on "from behind her back"). Giddyup stop-loss after r8 (four flips or spins in a row); Tom decides on t-giddyup-decide. Both jobs have fresh budgets from 2026-11-22T02:30Z. A video fix card waits from 11 pm to 3 am (R9).
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

@@ -81,7 +81,7 @@ try:
             ok(pg.is_disabled('#sheet button.gen') and 'Nothing to make' in pg.inner_text('#sheet button.gen'), tag + ': nothing left is disabled: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-held')"); pg.wait_for_selector('#sheet .pics')
             d = pg.inner_text('#sheet .pics'); bt = pg.inner_text('#sheet button.gen')
-            ok(pg.is_disabled('#sheet button.gen') and bt.startswith('Waiting for Claude to fix the stopped videos'), tag + ': stopped at the current rev waits on the fix: ' + bt)
+            ok(pg.is_disabled('#sheet button.gen') and bt.startswith('A Claude session is fixing the stopped videos') and 'by itself' in bt, tag + ': stopped at the current rev waits on the fix: ' + bt)
             ok('No video passed the checks yet' in d and 'c-wanstop-rose-giddyup-r%d' % J['rose-giddyup']['rev'] in d, tag + ': says why nothing was made: ' + d[:200])
             pg.screenshot(path=f'{out}/board-wan-held-{tag}.png'); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-revup')"); pg.wait_for_selector('#sheet .pics')

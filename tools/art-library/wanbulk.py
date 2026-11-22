@@ -30,7 +30,31 @@ def now_iso():
 
 def settings(jobs):
     b = jobs.get('_bulk') or {}
-    return {'cap': float(b.get('cap', 20)), 'pads': [None if p in (None, 0, 'none') else float(p) for p in (b.get('pads') or [None, .8, .65])]}
+    au = b.get('auto') or {}
+    return {'cap': float(b.get('cap', 20)), 'pads': [None if p in (None, 0, 'none') else float(p) for p in (b.get('pads') or [None, .8, .65])],
+            'tries': int(au.get('tries', 4)), 'job_dollars': float(au.get('job_dollars', 3.2)), 'day_dollars': float(au.get('day_dollars', 15))}
+
+
+# ------------------------------------------------------------------ wanauto1: the budget of one animation and of one day
+def _base(name):
+    """The job a ledger call belongs to: rose-giddyup-a2 (a retry) counts for rose-giddyup."""
+    return re.sub(r'-a\d+$', '', name or '')
+
+
+def budget(what, job, state, cfg, day=None):
+    """wanauto1 (Tom 2026-11-21 18:11, yes to: the Action may spend up to $3.20 per animation and $15 a day without his tap).
+    Counts from the ledger (state['calls'], every call ever made, with its time and price): the videos of this job made since its
+    `auto_from` time (no `auto_from`: every call of the job), and every video of today (UTC). Returns a dict with what is left."""
+    since = job.get('auto_from') or ''
+    day = day or datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
+    calls = state.get('calls') or []
+    mine = [c for c in calls if _base(c.get('what')) == what and str(c.get('at', '')) >= since]
+    today = [c for c in calls if str(c.get('at', '')).startswith(day)]
+    tries = len(mine); spent = round(sum(float(c.get('est') or 0) for c in mine), 4); dspent = round(sum(float(c.get('est') or 0) for c in today), 4)
+    est = wangen.estimate(job)
+    return {'tries': tries, 'spent': spent, 'day_spent': dspent, 'est': est,
+            'tries_left': max(0, cfg['tries'] - tries), 'job_ok': tries < cfg['tries'] and spent + est <= cfg['job_dollars'] + 1e-6,
+            'day_ok': dspent + est <= cfg['day_dollars'] + 1e-6}
 
 
 def pad_seq(job, pads):
@@ -61,9 +85,22 @@ def pipeline(what, job, ctx):
         log('%s rev %d already has a result (%s): nothing sent.' % (what, rev, prior['verdict']))
         return {'what': what, 'rev': rev, 'state': 'already', 'verdict': prior['verdict']}
     seq = pad_seq(job, ctx['pads']); skip = wanqa.skips(job); attempts = []
-    for n in range(min(2, len(seq))):
+    cfg = ctx.get('cfg') or settings({})
+    for n in range(2):
+        # wanauto1: a second video at the same rev. Failed ONLY the edge check -> the next smaller pad (as before); failed anything else -> a re-roll
+        # with every setting the same (the video model is partly random: the same prompt often passes on the next try).
+        pad = seq[0]
+        if n == 1 and wanqa.edge_only(attempts[-1]['failed']) and len(seq) > 1: pad = seq[1]
+        if not a.dry_run:
+            bud = budget(what, job, ctx['state'], cfg)
+            if not bud['day_ok']:
+                if not attempts: return {'what': what, 'rev': rev, 'state': 'capped', 'why': 'the $%.0f a day for videos is spent ($%.2f today)' % (cfg['day_dollars'], bud['day_spent'])}
+                break
+            if not bud['job_ok']:
+                if not attempts: return {'what': what, 'rev': rev, 'state': 'gaveup', 'why': 'used its %d tries ($%.2f of $%.2f)' % (bud['tries'], bud['spent'], cfg['job_dollars']), 'budget': bud}
+                break
         j = copy.deepcopy(job); j.pop('pad', None)
-        if seq[n]: j['pad'] = seq[n]
+        if pad: j['pad'] = pad
         name = what if n == 0 else '%s-a%d' % (what, n + 1)
         code, rep = wangen.run_one(name, j, a, ctx['state'], ctx['lock'], ctx['save'], ctx['fal'], ctx['key'], log)
         if code == 3: return {'what': what, 'rev': rev, 'state': 'capped', 'why': 'the run cap would be passed'}
@@ -86,15 +123,17 @@ def pipeline(what, job, ctx):
                 if v.get('skipped'): return {'what': what, 'rev': rev, 'state': 'unchecked', 'why': 'the look checks did not run (%s); the video is kept and is checked again at the next tap' % v['skipped']}
         f = wanqa.fails(m, v, skip)
         ev = wanqa.evidence(m, v, skip)
-        attempts.append({'name': name, 'file': file, 'pad': seq[n], 'failed': f, 'evidence': ev, 'checks': wanqa.slim(m), 'vision': v,
+        attempts.append({'name': name, 'file': file, 'pad': pad, 'failed': f, 'evidence': ev, 'checks': wanqa.slim(m), 'vision': v,
                          'look_checks': 'not run (a measurement failed first)' if v is None else 'run'})
-        log('%s attempt %d (pad %s): %s' % (what, n + 1, seq[n] or 'none', 'PASSED' if not f else 'failed: ' + ', '.join(f)))
+        log('%s attempt %d (pad %s): %s' % (what, n + 1, pad or 'none', 'PASSED' if not f else 'failed: ' + ', '.join(f)))
         if not f:
             r = {'what': what, 'rev': rev, 'verdict': 'passed', 'file': file, 'n': m['n'], 'fps': m['fps'], 'attempts': attempts, 'at': now_iso(), 'skipped_checks': sorted(skip), 'merged': None}
             write_result(out, what, rev, r)
             return {'what': what, 'rev': rev, 'state': 'passed', 'result': r, 'retried': n > 0}
-        if wanqa.edge_only(f) and n == 0 and len(seq) > 1:
-            log('%s: only the edge check failed, so it is made once more with pad %s.' % (what, seq[1])); continue
+        if n == 0:
+            if wanqa.edge_only(f) and len(seq) > 1: log('%s: only the edge check failed, so it is made once more with pad %s.' % (what, seq[1]))
+            else: log('%s: failed %s, so it is made once more with every setting the same (a re-roll).' % (what, ', '.join(f)))
+            continue
         break
     last = attempts[-1]
     r = {'what': what, 'rev': rev, 'verdict': 'stopped', 'file': last['file'], 'attempts': attempts, 'at': now_iso(), 'evidence': last['evidence'],
@@ -104,25 +143,48 @@ def pipeline(what, job, ctx):
 
 
 # ------------------------------------------------------------------ cards
-def stop_card(r, job, card, run, today):
-    """The one Claude card for a stopped job. Ids are fixed per job and rev, so a second tap never adds a second one."""
+def stop_card(r, job, card, run, today, bud=None, cfg=None):
+    """The one Claude card for a stopped job. Ids are fixed per job and rev, so a second run never adds a second one.
+    wanauto1: while the animation has tries and dollars left (`budget`), the card is Sonnet 5.5 medium with `auto` and `start`, so the board job starts it
+    at once (R9) and the session itself starts the next run: Tom is not asked. With nothing left it is not made: `gaveup_card` tells Tom instead."""
     w, rev = r['what'], r['rev']
+    cfg = cfg or settings({}); bud = bud or {}
     cid = 'c-wanstop-%s-r%d' % (w, rev)
     ev = '; '.join(e[:200] for e in r.get('evidence') or [])[:900]
     tries = '; '.join('attempt %d (pad %s) %s' % (i + 1, at['pad'] or 'none', ', '.join(at['failed']) or 'passed') for i, at in enumerate(r['attempts']))
-    text = ('Read CLAUDE.md and claude/handoff-rules.md, then card %s in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job %s (rev %d) in tools/art-library/wangen-jobs.json. '
-            'The wan-gen Action stopped this video after its own checks: %s. Evidence: %s. '
+    left = 'This animation has used %d of its %d tries ($%.2f of $%.2f).' % (bud.get('tries', 0), cfg['tries'], bud.get('spent', 0), cfg['job_dollars'])
+    text = ('Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card %s in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job %s (rev %d) in tools/art-library/wangen-jobs.json. '
+            'The wan-gen Action stopped this video after its own checks, a re-roll included: %s. Evidence: %s. %s '
             'Its files are on branch wangen: %s-r%d-result.json (every check with numbers and the look-check answers) and the videos %s. '
-            'Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); '
-            'raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom\'s tap on the card %s. '
-            'Your first push is the commit board: start %s. Attach trivituso81/adventures-of-tom with push access (add_repo).') % (cid, w, rev, r.get('why'), ev or 'see the result file', w, rev, ', '.join(at['file'] for at in r['attempts']), card['id'], cid)
+            'First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. '
+            'Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), '
+            'raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. '
+            'Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card %s to {"want": true, "at": now, "n": 1, "est": %.2f, "auto": true}, '
+            'keep the job in its `wan.jobs`, write the CHANGES heading `## %s` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate %s` (that starts the wan-gen Action). '
+            'Your first push is the commit board: start %s. Attach trivituso81/adventures-of-tom with push access (add_repo).') % (
+        cid, w, rev, r.get('why'), ev or 'see the result file', left, w, rev, ', '.join(at['file'] for at in r['attempts']), card['id'], bud.get('est', .79), 'wanstop-%s-r%d' % (w, rev), card['id'], cid)
     return {'id': cid, 'lane': 'claude', 'col': 'up', 'theme': 'Battle Animations', 'tag': 'wanstop-%s-r%d' % (w, rev), 'title': ('Fix the stopped video %s' % w)[:60].rstrip(),
-            'next': 'The bulk run stopped %s (%s). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.' % (w, r.get('why')),
-            'blocks': [], 'after': 'nothing for Tom: end', 'created': today, 'changed': today, 'chat': {'url': '', 'opening': 'added by the wan-gen job'},
-            'history': [{'d': today, 't': 'Added by the wan-gen job (%s): %s stopped at rev %d. %s. Evidence: %s' % (run, w, rev, tries, ev[:500])}],
-            'prompt': {'what': 'Finds the cause of one video the checks stopped and changes one thing in its job.',
+            'next': 'The bulk run stopped %s (%s) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.' % (w, r.get('why')),
+            'blocks': [], 'after': 'nothing for Tom: end', 'auto': True, 'start': True, 'wan_card': card['id'], 'created': today, 'changed': today,
+            'chat': {'url': '', 'opening': 'added by the wan-gen job'},
+            'history': [{'d': today, 't': 'Added by the wan-gen job (%s): %s stopped at rev %d. %s. %s Evidence: %s' % (run, w, rev, tries, left, ev[:500])}],
+            'prompt': {'what': 'Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.',
                        'before': ['Nothing: the evidence is in the result file on branch wangen.'],
-                       'model': 'Claude Opus 5.5 (row D: a video prompt Tom judges by eye)', 'effort': 'medium (one video; the checks say what failed)', 'text': text}}
+                       'model': 'Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)', 'effort': 'medium (one video; the checks say what failed)', 'text': text}}
+
+
+def gaveup_card(w, rev, why, last, today, run, cfg):
+    """wanauto1: an animation that used its tries or dollars. One Tom card per job and rev; it blocks nothing. Tom decides with one tap."""
+    cid = 't-wangaveup-%s-r%d' % (w, rev)
+    ev = '; '.join(e[:160] for e in (last or {}).get('evidence') or [])[:500]
+    return {'id': cid, 'lane': 'tom', 'col': 'up', 'theme': 'Battle Animations', 'ask': 'decide', 'fyi': True,
+            'title': ('The video %s did not pass in %d tries' % (w, cfg['tries']))[:60],
+            'next': 'The Action stopped making %s: it %s. Last reason: %s. Pick one.' % (w, why, ev or 'see the result file on branch wangen'),
+            'choices': ['Give it %d more tries (Recommended)' % cfg['tries'], 'Keep the move without a video for now'],
+            'leads': ['A Claude session changes one thing and the Action tries up to %d more times (at most $%.2f), no tap needed.' % (cfg['tries'], cfg['job_dollars']),
+                      'The move plays with its stand-in until a later card picks it up.'],
+            'blocks': [], 'created': today, 'changed': today, 'chat': {'url': '', 'opening': 'added by the wan-gen job'},
+            'history': [{'d': today, 't': 'Added by the wan-gen job (%s): %s %s.' % (run, w, why)}]}
 
 
 def watch_card(card, passed, build, run, today):
@@ -227,7 +289,7 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
     if xk and not a.dry_run:
         import artqa
         judge = artqa.Judge(xk, os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
-    ctx = {'a': a, 'out': a.out, 'state': state, 'lock': lock, 'save': save, 'fal': fal, 'key': key, 'judge': judge, 'vlock': threading.Lock(), 'pads': cfg['pads'],
+    ctx = {'cfg': cfg, 'a': a, 'out': a.out, 'state': state, 'lock': lock, 'save': save, 'fal': fal, 'key': key, 'judge': judge, 'vlock': threading.Lock(), 'pads': cfg['pads'],
            'log': lambda m: say(m)}
 
     def one(n):
@@ -262,18 +324,36 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
             have = {x.get('id') for x in b['cards']}
             added = []
             for r in stopped:
-                sc = stop_card(r['result'], jobs[r['what']], c, run_id, today)
+                bud = budget(r['what'], jobs[r['what']], state, cfg)
+                if bud['job_ok']:
+                    sc = stop_card(r['result'], jobs[r['what']], c, run_id, today, bud, cfg)
+                else:
+                    sc = gaveup_card(r['what'], r['rev'], 'used %d tries ($%.2f)' % (bud['tries'], bud['spent']), r['result']['attempts'][-1], today, run_id, cfg)
+                    r['gaveup'] = True
                 if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
+            for r in rows:
+                if r['state'] == 'gaveup':
+                    sc = gaveup_card(r['what'], r['rev'], r['why'], None, today, run_id, cfg)
+                    if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
             wid = ''
             if merged:
-                wc = watch_card(c, [{'what': w} for w in merged], build, run_id, today)
-                if wc['id'] not in have: b['cards'].append(wc); wid = wc['id']
-            states = {s: [r['what'] for r in rows if r['state'] == s] for s in ('passed', 'stopped', 'capped', 'unchecked', 'error', 'already')}
+                # wanauto1: one open watch card collects every passed video until Tom watches them, so automatic runs do not stack up cards
+                ow = next((x for x in b['cards'] if x.get('wanwatch') and x.get('col') != 'done' and x.get('lane') == 'tom'), None)
+                if ow:
+                    ow['wanwatch'] = sorted(set(ow['wanwatch']) | set(merged)); n = len(ow['wanwatch'])
+                    ow['title'] = ('Watch %d new battle video%s' % (n, '' if n == 1 else 's'))[:60]
+                    ow['next'] = re.sub(r'New: .*$', 'New: %s. Newest build %s.' % ('; '.join(ow['wanwatch']), build), ow['next'])
+                    ow['history'] = (ow.get('history') or []) + [{'d': today, 't': 'wan-gen run %s added %s (build %s).' % (run_id, ', '.join(merged), build)}]
+                    ow['changed'] = today; wid = ow['id']
+                else:
+                    wc = watch_card(c, [{'what': w} for w in merged], build, run_id, today); wc['wanwatch'] = sorted(merged)
+                    if wc['id'] not in have: b['cards'].append(wc); wid = wc['id']
+            states = {s: [r['what'] for r in rows if r['state'] == s] for s in ('passed', 'stopped', 'capped', 'unchecked', 'error', 'already', 'gaveup')}
             c['wgen']['run'] = {'state': 'done', 'at': now_iso(), 'run': artgen.run_url(), 'n': len(names), 'merged': merged,
                                 'passed_not_baked': [r['what'] for r in passed if r['what'] not in merged], 'retried': [r['what'] for r in rows if r.get('retried')],
-                                'stopped': [{'what': r['what'], 'why': r['result']['why'], 'card': 'c-wanstop-%s-r%d' % (r['what'], r['rev'])} for r in stopped],
+                                'stopped': [{'what': r['what'], 'why': r['result']['why'], 'card': ('t-wangaveup-%s-r%d' if r.get('gaveup') else 'c-wanstop-%s-r%d') % (r['what'], r['rev'])} for r in stopped],
                                 'capped': states['capped'], 'unchecked': states['unchecked'], 'errors': [{'what': r['what'], 'why': r.get('why')} for r in rows if r['state'] == 'error'],
-                                'already': states['already'], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid,
+                                'already': states['already'], 'gaveup': states['gaveup'] + [r['what'] for r in stopped if r.get('gaveup')], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid,
                                 'revs': {r['what']: r['rev'] for r in rows}}   # fix-wanstop-gen: the board page lists a job again once its rev is raised
             c['history'] = (c.get('history') or []) + [{'d': today, 't': 'wan-gen bulk run %s: %d made and checked, %d passed%s, %d stopped, %d left for the next tap.' % (
                 run_id, len(rows), len(passed), ' (build %s)' % build if merged else '', len(stopped), len(states['capped']) + len(states['unchecked']))}]

@@ -1,3 +1,21 @@
+## wanauto1 (2026-11-21): battle videos finish without Tom; Deedee's Wet-Floor is in the game
+
+Card c-wanauto1. Tom (18:09): "why has it taken me all day to record like 4 animations? ... why has the card come to me like a dozen times?" Tom (18:11): yes to the Action spending up to $3.20 per animation and $15 a day without his tap. Tom (19:02): "Argh it happened again!!!!"
+
+| Change | Detail |
+|---|---|
+| Re-roll | A miss is made once more at the same rev with every setting the same (an edge-only miss gets the smaller pad as before). wanbulk.py `pipeline` |
+| Caps | `_bulk.auto` in wangen-jobs.json: 4 videos and $3.20 per job since its `auto_from`, $15 per UTC day, counted from the ledger (`budget`) |
+| Automatic fix | A second miss adds `c-wanstop-<job>-r<rev>` as Sonnet 5.5 medium with `auto` and `start`; the session changes one thing and starts the next try itself (`wan_card`, last commit `board: wan generate <card>`). Out of tries: one Tom decide card `t-wangaveup-<job>-r<rev>` |
+| One watch card | Passed videos join the open card marked `wanwatch` |
+| Board job | Wakes when wan-gen ends (board-sync.yml `workflow_run`); R9 holds a fix card with `wan_card` from 11 pm to 3 am (night table) |
+| Board page | Text says a Claude session fixes a stopped video and starts the next try by itself |
+| Deedee Wet-Floor | r7 baked and wired by hand (data/clips/deedee-wetfloor.js, wet_floor_hazard in data/b3-kit-deedee.js). By eye every frame: a flat mop, one sweep beside her feet, put away, clean edges; the look check failed it only on "from behind her back". Bake settings from the job (deedee-windex's) |
+| Rose Giddyup | Stop-loss: r5 somersault, r6 spin, r7 flip, r8 flip plus a hoop drawn for "circles one hand". No fifth wording fix; Tom decides on t-giddyup-decide (No jump recommended), which starts c-giddyup-next |
+| Plan view | Card c-animplan (Sonnet, starts by itself): Done, Making, Next for every battle animation in the Battle Guide |
+
+Retired: c-wanstop-rose-giddyup-r8, c-wanstop-deedee-wetfloor-r7, t-wanstop-gen. Tests: wanbulk_test (B9 to B11 new), wangen_test, board_wan_test, board_sync_test, board_check, clip_test, clip_kinds_test, video_only_test. Plan: claude/video-battle-plan.md 4.14.
+
 ## b3gear (2026-11-22): worn gear now counts in the new battle (card c-b3gear)
 
 Fact: before this build no file under data/b3-*.js or engine/b3-*.js read a member's equipment, so a Tool, Outfit or Charm changed nothing in a new-battle fight. Now it does, by the battle plan's mapping (claude/battle-architecture.md, gap row 31). The mapping is the plan's own call and Tom has not confirmed it.

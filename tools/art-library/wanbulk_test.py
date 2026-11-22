@@ -13,6 +13,9 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B6  dry run: sends nothing, changes nothing; a job with no `bake` passes but is not baked and is said so
   B7  a bake that cannot be done (marks cannot be found) leaves the others merged
   B8  replay of the stored r4 videos of rose-giddyup and deedee-wetfloor (only if /tmp/wb has them, else skipped): they fail the way plan 4.10 says (Wet Floor's feet within its wanch5 limit, plan 4.13)
+  B9  wanauto1: a miss that is not only the edge is re-rolled once with the same settings (same start picture) before it stops
+  B10 wanauto1: budget() counts one animation's videos since its auto_from (4 tries, $3.20) and every video of the day ($15)
+  B11 wanauto1: an animation out of tries gets one Tom decide card instead of a Claude card
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
 import numpy as np
@@ -187,7 +190,8 @@ ok('estimate if every job is made once: $0.80' in o, 'B6 the dry run says the es
 c, o, repo1 = run('t-wan')
 ok(c == 0, 'B1 run 1 exits 0', o[-1500:])
 n = {k: len(sent_of(k)) for k in ('t-pass', 't-edge', 't-feet', 't-vision')}
-ok(n == {'t-pass': 1, 't-edge': 2, 't-feet': 1, 't-vision': 1}, 'B2/B3 videos made per job: pass 1, edge 2 (one retry), feet 1 (stopped at once), look-check miss 1', n)
+ok(n == {'t-pass': 1, 't-edge': 2, 't-feet': 2, 't-vision': 2}, 'B2/B3 videos made per job: pass 1, edge 2 (smaller pad), feet 2 and look-check miss 2 (wanauto1: one re-roll, same settings, then stopped)', n)
+ok(all(s['body'].get('start_image_url') == sent_of('t-feet')[0]['body'].get('start_image_url') for s in sent_of('t-feet')), 'B9 the re-roll of a feet miss sends the same start picture (same pad)')
 pads = sent_of('t-edge')
 def fig_h(s):
     a = np.asarray(Image.open(io.BytesIO(base64.b64decode(s['body']['start_image_url'].split(',', 1)[1]))).convert('RGB')).astype(int); d = np.sqrt(((a - np.array([255, 0, 255])) ** 2).sum(2)) > 90; y = np.where(d.any(1))[0]; return y.max() - y.min()
@@ -198,7 +202,7 @@ ok(r['t-edge']['attempts'][0]['failed'] == ['edge'] and r['t-edge']['attempts'][
 ok(r['t-feet']['attempts'][0]['failed'] == ['feet'] and r['t-feet']['attempts'][0]['look_checks'].startswith('not run'), 'B3 the feet miss stopped it and the look checker was not asked (money saved)', r['t-feet']['attempts'])
 ok(r['t-vision']['attempts'][0]['failed'] == ['p1'] and 'stub says no' in json.dumps(r['t-vision']), 'B3 a look-check miss stops it too, with the checker\'s reason', r['t-vision']['attempts'])
 st = json.load(open(os.path.join(OUT, 'state.json')))
-ok(abs(st['spent'] - .2 * 5) < 1e-9, 'ledger: five videos at $0.20', st['spent'])
+ok(abs(st['spent'] - .2 * 7) < 1e-9, 'ledger: seven videos at $0.20 (two re-rolls)', st['spent'])
 mb = main_board(); cards = {x['id']: x for x in mb['cards']}
 ok(main_file('docs/CHANGES.md').count('## wanbulk-twan-') == 1, 'B1 one CHANGES heading named wanbulk-<card>-<run>')
 head = main_file('docs/CHANGES.md').split('\n')[0]
@@ -214,10 +218,10 @@ ok("dance:'t_edge'" in bc, 'B2 B3_BODY_CLIPS.rose.dance = t_edge (a body state w
 ok(sh('git', '--git-dir', bare, 'log', '--format=%s', '-3', 'main').stdout.count('wan: 2 battle videos from board card t-wan baked and wired') == 1, 'B1 one commit for the whole run')
 ok(open(os.path.join(repo1, 'bump.log')).read().strip().startswith('wanbulk-twan-'), 'B1 bump_tags was called with the build name')
 w = cards['t-wan']['wgen']
-ok(w['want'] is False and w['run']['state'] == 'done' and sorted(w['run']['merged']) == ['t-edge', 't-pass'] and w['run']['retried'] == ['t-edge'] and sorted(s['what'] for s in w['run']['stopped']) == ['t-feet', 't-vision'], 'B5 wgen.run: merged, retried, stopped', w)
+ok(w['want'] is False and w['run']['state'] == 'done' and sorted(w['run']['merged']) == ['t-edge', 't-pass'] and sorted(w['run']['retried']) == ['t-edge', 't-feet', 't-vision'] and sorted(s['what'] for s in w['run']['stopped']) == ['t-feet', 't-vision'], 'B5 wgen.run: merged, retried, stopped', w)
 ok(w['run']['spent'] >= 1.0, 'B5 wgen.run.spent covers the fal money of the run ($0.20 x 5 plus the look checks)', w['run']['spent'])
 sc = [c for c in mb['cards'] if c['id'].startswith('c-wanstop-')]
-ok(sorted(c['id'] for c in sc) == ['c-wanstop-t-feet-r1', 'c-wanstop-t-vision-r1'] and all('Opus 5.5' in c['prompt']['model'] and c['prompt']['effort'].startswith('medium') and c['lane'] == 'claude' and c['after'].startswith('nothing for Tom') and '<' not in c['prompt']['text'] and '\u2014' not in json.dumps(c) for c in sc), 'B3 one Claude card per stopped job: Opus 5.5 medium, evidence in the history, no angle bracket, no em dash', [c['id'] for c in sc])
+ok(sorted(c['id'] for c in sc) == ['c-wanstop-t-feet-r1', 'c-wanstop-t-vision-r1'] and all('Sonnet 5.5' in c['prompt']['model'] and c['prompt']['effort'].startswith('medium') and c.get('auto') and c.get('start') and c.get('wan_card') == 't-wan' and 'board: wan generate t-wan' in c['prompt']['text'] and c['lane'] == 'claude' and c['after'].startswith('nothing for Tom') and '<' not in c['prompt']['text'] and '\u2014' not in json.dumps(c) for c in sc), 'B3 one Claude card per stopped job: Sonnet 5.5 medium, auto and start (wanauto1: it starts by itself and starts the next try), evidence in the history, no angle bracket, no em dash', [c['id'] for c in sc])
 ok('feet' in sc[0]['history'][0]['t'] and 'lowest row' in json.dumps(sc[0]), 'B3 the card carries the numbers (the feet line)', sc[0]['history'])
 wc = [c for c in mb['cards'] if c['id'].startswith('t-wanwatch-')]
 ok(len(wc) == 1 and wc[0]['ask'] == 'animations' and wc[0]['fyi'] and 't-pass' in wc[0]['next'] and 't-edge' in wc[0]['next'] and '\u2014' not in json.dumps(wc[0]) and wc[0]['title'] == 'Watch 2 new battle videos', 'B5 one Tom card (ask animations) lists every new clip', wc)
@@ -273,6 +277,21 @@ ok(len(S['sent']) == sent2 and json.load(open(os.path.join(OUT5, 't-pass-r1-resu
 # ------------------------------------------------------------------ wanbake / spec
 sys.path.insert(0, HERE); import wanbake
 ok(wanbake.check_spec(JOBS['t-pass']) == [] and wanbake.check_spec({'wire': ROW}) and wanbake.check_spec({'bake': {'id': 'A b', 'owner': 'rose', 'fig_rows': 8}}), 'wanbake.check_spec: accepts a good job, names a wire without a bake and a bad clip id')
+
+
+# ------------------------------------------------------------------ B10, B11 wanauto1: the budget and the gave-up card
+sys.path.insert(0, HERE); import wanbulk
+cfg = wanbulk.settings({'_bulk': {'auto': {'tries': 4, 'job_dollars': 3.2, 'day_dollars': 15}}})
+job = {'rev': 3, 'est': .79, 'auto_from': '2026-11-22T00:00:00Z'}
+calls = [{'what': 'j', 'at': '2026-11-21T23:00:00Z', 'est': .79}, {'what': 'j', 'at': '2026-11-22T01:00:00Z', 'est': .79}, {'what': 'j-a2', 'at': '2026-11-22T01:05:00Z', 'est': .79},
+         {'what': 'other', 'at': '2026-11-22T01:10:00Z', 'est': 13.0}]
+bd = wanbulk.budget('j', job, {'calls': calls}, cfg, day='2026-11-22')
+ok(bd['tries'] == 2 and bd['tries_left'] == 2 and bd['job_ok'] and abs(bd['day_spent'] - 14.58) < 1e-6 and bd['day_ok'] is False, 'B10 budget: counts the job and its -a2 retry since auto_from (2 tries, the call of 11-21 is before it), and every video of the UTC day: $14.58 + $0.79 passes $15, so it is refused', bd)
+bd2 = wanbulk.budget('j', dict(job, auto_from='2026-11-21T00:00:00Z'), {'calls': calls[:3] + [{'what': 'j', 'at': '2026-11-22T02:00:00Z', 'est': .79}]}, cfg, day='2026-11-22')
+ok(bd2['tries'] == 4 and not bd2['job_ok'], 'B10 budget: a fifth video of one animation is refused (4 tries, $3.20)', bd2)
+gc = wanbulk.gaveup_card('j', 3, 'used 4 tries ($3.16)', {'evidence': ['edge: touches the left edge']}, '2026-11-22', 'r1', cfg)
+ok(gc['lane'] == 'tom' and gc['ask'] == 'decide' and gc['fyi'] and len(gc['choices']) == 2 and gc['choices'][0].endswith('(Recommended)') and len(gc['leads']) == 2 and '\u2014' not in json.dumps(gc),
+   'B11 an animation out of tries gets one Tom decide card (fyi, two choices, first Recommended)', gc)
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'
