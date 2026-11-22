@@ -1,3 +1,14 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "body:tnb:idle",
+   "at": "2026-11-22T21:07:53.630Z",
+   "note": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: none); vision i_relaxed: Subtle head turns, weight shifts and expression changes occur.; Body and head slowly turn from left-facing to more forward-facing pose..",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nHe stands in his starting relaxed stance and breathes slowly and gently, his chest and shoulders rising and falling softly, and blinks once. His arms, head and feet stay where they are for the whole clip.",
+   "hasVideo": false,
+   "kind": "family",
+   "rev": 0,
+   "cap": 0.1
+  }
+ ]
 }
