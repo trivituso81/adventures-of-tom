@@ -35010,7 +35010,7 @@
   {
    "id": "c-wanqueue1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanqueue1",
    "title": "A video run also makes every other waiting card",
@@ -35027,6 +35027,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (21:59): \"OK, but that leaves me totally confused as to what happens next\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanqueue1: a video run also makes every other card still waiting; fal.ai is out of credit"
     }
    ],
    "prompt": {
@@ -35037,7 +35041,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -35519,7 +35524,7 @@
    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
    "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
    "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T21:57:21-08:00",
+   "last": "2026-11-21T22:03:04-08:00",
    "tags": [
     "wanch5",
     "wanauto1",
@@ -35529,7 +35534,8 @@
     "wanstuck1",
     "wanstuck1b",
     "videohist1",
-    "wanpurpose1"
+    "wanpurpose1",
+    "wanqueue1"
    ],
    "cards": [
     "c-wanch5",
@@ -35539,7 +35545,8 @@
     "c-pairmove1",
     "c-wanstuck1",
     "c-videohist1",
-    "c-wanpurpose1"
+    "c-wanpurpose1",
+    "c-wanqueue1"
    ]
   },
   {
@@ -40258,8 +40265,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "cb60414dc02a9c14bd2e038b329d014890f5e2a0",
- "synced_at": "2026-11-22T06:02:54+00:00",
+ "synced": "f659949118c79f53a3b06b339593ab9eadc20691",
+ "synced_at": "2026-11-22T06:03:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
