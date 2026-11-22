@@ -132,6 +132,17 @@
    "start": "art/clips/start/amy-hero.png",
    "cap": 0.6,
    "note": ""
+  },
+  {
+   "anim": "body:amy:ko",
+   "slug": "body-amy-ko",
+   "take": 1,
+   "at": "2026-11-22T21:03:55.706Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TOO TIRED TO GO ON\nFrom her starting relaxed stance, she gets dizzy, wobbles once, and slowly sinks down to sit on the ground with her eyes closed and her head drooping, as if she has fallen fast asleep. She stays sitting there, completely still, for the rest of the clip.",
+   "promptRev": 0,
+   "start": "art/clips/start/amy-hero.png",
+   "cap": 0.6,
+   "note": ""
   }
  ]
 }
