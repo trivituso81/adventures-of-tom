@@ -29,7 +29,15 @@ const B6_PATHS={
 const B6_XP={mudling:12,skeeter:24,grump:26,toad:30,log:34,bigone:100,
   smoglet:13,tickets:26,coyote:28,gridlock:32,tarblob:35,bigshake:100,
   soggysock:15,bobber:27,tangle:30,snag:36,irongill:100,
-  extra:10,boommoth:28,clapper:28,fogwisp:31,cuecrab:36,directorscut:100};
+  extra:10,boommoth:28,clapper:28,fogwisp:31,cuecrab:36,directorscut:100,directorscut:100,
+  // Chapters 5 to 10 (b3s20): one rate per chapter so a whole chapter pays about 260 to 270 XP (2.6 to 2.7 levels), which is
+  // what the chapter level floors (data/b3-story.js levelFloor) climb by. Before this they paid the flat fallback, 204 to 230.
+  popquiz:20,tardybell:20,glitterglue:20,dodgeball:20,
+  acornagent:17,stickysap:17,peanutgallery:17,twigspy:17,cheekstuffer:17,
+  dogear:17,shusher:17,cliffhanger:17,knowitall:17,popup:17,
+  lukewarm:17,leftover:17,wetblanket:17,thedraft:17,pickyeater:17,
+  velvetrope:17,stuffedshirt:17,coathanger:17,soreloser:17,wallflower:17,
+  carryon:17,jetlag:17,longline:17,unclaimed:17,armresthog:17};
 
 // ---- Each character's battle trait, for the Status page (the rules are in engine/battle2-traits.js). ----
 const B6_TRAITS={

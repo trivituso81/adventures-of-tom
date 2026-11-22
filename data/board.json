@@ -29307,13 +29307,18 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped b3s20: Battle 3 already shared XP through b6GainXp and b6Sync, so only data changed: XP rows for the 24 monsters of chapters 5 to 10 (chapters now pay 260 to 270 XP, matching the level floors). b3-sim check, b3_test s4 and b3_story_test pass. Roster not looked at in portrait and landscape."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
     "opening": "started by START"
    },
-   "started_at": "2026-11-22T14:24:46+00:00"
+   "started_at": "2026-11-22T14:24:46+00:00",
+   "after": "nothing for Tom: c-b3s21"
   },
   {
    "id": "c-b3s21",
