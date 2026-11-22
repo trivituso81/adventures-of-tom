@@ -34500,10 +34500,36 @@
     "est": 0.5,
     "auto": true,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T05:22:04Z",
+     "state": "done",
+     "at": "2026-11-22T05:22:07Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44988974716",
-     "n": 3
+     "n": 3,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [
+      {
+       "what": "tom-blockade",
+       "why": "fal refused the key (403): {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
+      }
+     ],
+     "already": [
+      "grace-cubepop",
+      "deedee-wetfloor"
+     ],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.0,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-blockade": 4,
+      "grace-cubepop": 4,
+      "deedee-wetfloor": 10
+     }
     }
    },
    "history": [
@@ -34524,6 +34550,10 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44987261923: 3 made and checked, 0 passed, 3 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44988974716: 3 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
     }
    ]
   },
