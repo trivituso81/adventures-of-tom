@@ -29813,7 +29813,8 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "started_at": "2026-11-21T22:09:22+00:00"
+   "started_at": "2026-11-21T22:09:22+00:00",
+   "quiet": true
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -35224,8 +35225,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "827526b99e8836d7a164b5181396d5d8c08aec85",
- "synced_at": "2026-11-22T00:00:38+00:00",
+ "synced": "fcf37c7367b5b64d002037ace1208f11bfffb4f4",
+ "synced_at": "2026-11-22T00:31:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
