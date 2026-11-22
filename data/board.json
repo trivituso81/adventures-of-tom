@@ -29094,6 +29094,196 @@
      "t": "New card. Tom (11-21 23:56, in the chat of the battle screen proposal): \"Now that the new status menu and vibe menu and all of that has been done, I want you to use that design as inspiration to update the design of the battle system controls and all of the battle controls, for that matter, and it's overall looking feel everything from colors to backgrounds to font styles, and when you do that, you know, remove any extraneous information, and if you have a toggle at the top to show details, it should hide the details from like everything, literally, and make sure things are really well organized and clearly laid out and that you really evaluate kind of like the labels versus the icons and what should be more prominent, like when we should be using color or not, and grouping similar pieces of information or keeping labels for icons near the labels and avoiding redundant information most of all\". Queued for a new conversation on Opus 5.5 high (the proposal chat is long and on Fable; handoff-rules step 5). The new menu shipped as menu1 to menu4; the new battle screen as battleux1 and battleux2."
     }
    ]
+  },
+  {
+   "id": "c-b3s16",
+   "title": "Battle system stage 16: Tombo skins on the new battle",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Tombos return as skins on Battle 3 (Full Family Ruckus, Tombo rows). No animation review: skins use each person's existing video or the default animation. Ships as b3s16.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s16",
+   "prompt": {
+    "what": "Tombos return as skins on Battle 3 (Full Family Ruckus, Tombo rows)",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the plan is written in docs/BATTLE3.md and battle-architecture.md; tests catch mistakes)",
+    "effort": "medium (steps are known; the stage 16 review step is removed)",
+    "text": "Read claude/battle-build.md (stage 16 rows and \"Calls made in stage 17\"), claude/battle-architecture.md section 5 row 16, docs/BATTLE3.md (the Tombo rows marked \"return as skins in stage 16\") and claude/battle-scope.md. Build stage 16 on Battle 3 only: the 22 Primary Tombos and Family Finishes come back as skins on Full Family Ruckus, the five Tombo toasts of chapters 2 to 10 return under Battle 3 with their existing flags, and no battle 2 file is touched. Do NOT ask Tom to review animations (standing rule in CLAUDE.md); a skin with no video of its own uses the default animation. Tests: node tools/b3-sim.js check, python3 tools/b3_test.py, tools/b3-check-s17.js and tools/b3-check-s18.js. Look at Battle Lab > NEW BATTLE in portrait and landscape before pushing. Write the result into this card's history and set `after` to the Milestone card for chapters 2 to 10 (t-milestonec or t-milestoned) or to \"nothing for Tom: c-b3s19\". Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s19",
+   "title": "Battle stage 19: third Vibes, four in a conversation",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3. Starts after c-b3s16.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s19",
+   "prompt": {
+    "what": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3",
+    "before": [
+     "Nothing to do first. If Milestone D (t-milestoned) has a note from Tom, read it on the card before starting."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the third Vibe rows are not written yet; the simulator catches mistakes)",
+    "effort": "high (a large data build with no written steps; plan it in claude/battle-architecture.md section 5 first)",
+    "text": "Read claude/battle-build.md, claude/battle-architecture.md section 5 (rows 19 to 21) and docs/BATTLE3.md, and the Battle Guide's PLANNED list (data/guide-planned.json) which names the ten third Vibes. Build stage 19: the third Vibe of each character as rows in data/b3-kit-*.js (one file per character), the four-party conversation rule, and the save fields with no migration of old saves. Keep battle 2 files untouched. Use the Battle Guide's planned list to mark each third Vibe built (drop it from PLANNED). Tests: node tools/b3-sim.js check, python3 tools/b3_test.py s4, and one Lab fight per new Vibe group run through Battle Lab > NEW BATTLE. Look at the Vibes screen in portrait and landscape. Write the result into this card's history; set `after` to \"nothing for Tom: c-b3s20\". Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s20",
+   "title": "Battle system stage 20: Character Level by shared XP",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data. Starts after c-b3s19.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s20",
+   "prompt": {
+    "what": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design is in battle-architecture.md row 20; the existing code is reused)",
+    "effort": "medium (steps are known; reuse, data retune)",
+    "text": "Read claude/battle-architecture.md section 5 row 20 and the Character Level rows in docs/BATTLE3.md. Reuse b6GainXp and b6Sync (engine/progress.js): everyone catches up to Tom's level after a fight. Retune only the XP amounts, in data. Battle 2 keeps working on the same save. Tests: node tools/b3-sim.js check, python3 tools/b3_test.py s4, and a fresh save and a Part 1 clear save both load with no errors in Chapter Select. Look at the party roster in portrait and landscape. Write the result into this card's history; set `after` to \"nothing for Tom: c-b3s21\". Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s21",
+   "title": "Battle stage 21: Vibe Mastery, Casual Mode, Vibe save",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Vibe Mastery on Battle 3 (VP, five ranks, Main and Pocket Vibe, two Quirk slots) and Casual Mode, replacing Stampcards, Polish Points and Remix Tickets. Starts after c-b3s20.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s21",
+   "prompt": {
+    "what": "Vibe Mastery on Battle 3 (VP, five ranks, Main and Pocket Vibe, two Quirk slots) and Casual Mode, replacing Stampcards, Polish Points and Remix Tickets",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: Casual Mode is a design the plan states but no code has yet)",
+    "effort": "high (new rules on a save that old chapters still read)",
+    "text": "Read claude/battle-architecture.md section 5 row 21 and docs/BATTLE3.md. Vibe Mastery already exists in engine/b3-progress.js and the Vibes page (stage 4); this stage makes it the only progression, deletes the Stampcard, Polish Point and Remix Ticket paths from Battle 3 and builds Casual Mode as a difficulty option (feel.js). Stop and ask Tom in one line before deleting any save field. Keep battle 2 and OLD running on the same save until stage 23. Tests: node tools/b3-sim.js check, python3 tools/b3_test.py s4 and s5, and Chapter 1 played to the end on Battle 3 with no page errors. Look at Casual Mode in the difficulty menu in portrait and landscape. Write the result into this card's history; set `after` to \"nothing for Tom: c-b3s22\". Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22",
+   "title": "Battle stage 22: Part 2 bestiary, Traits and Quirks",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Part 2 bestiary (chapters 11 to 20) built inside each chapter's own story build, and the 30 Traits and 60 Quirks rebuilt as data plus hooks. Start with chapter 11 only. Starts after c-b3s21.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22",
+   "prompt": {
+    "what": "Part 2 bestiary (chapters 11 to 20) built inside each chapter's own story build, and the 30 Traits and 60 Quirks rebuilt as data plus hooks",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C per chapter: each chapter's monsters are designed from its scenes; one chapter per conversation)",
+    "effort": "high (each chapter is new content; chapter tests are the check)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/battle-traits.md if present (else engine/battle2-traits.js), and docs/BATTLE3.md. This session builds ONLY chapter 11: its monsters, bosses (FINAL CALL and the Julian Vance fights where scenes name them), formations and tips, as data in data/b3-*.js, switched on Battle 3 for chapter 11 behind the BY CHAPTER switch, with one chapter test (tools/ch11_b3_test.py written from tools/ch5_b3_test.py). Then rebuild the 30 Traits and 60 Quirks as data plus hooks, in a separate push. Each further chapter gets its own card, created by this session with its full prompt, so no chapter is built in the same conversation. Tests: node tools/b3-sim.js check and the chapter test. Look at chapter 11 in portrait and landscape. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 11 that this session creates, with ask play. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s23",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs. Runs only after Tom answers t-b3s23-confirm. Ends the battle system.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s23",
+   "prompt": {
+    "what": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs",
+    "before": [
+     "Answer the card Confirm the battle 2 purge on the board (ADMIN > BOARD) first. Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the delete list is written in battle-architecture.md; checks catch mistakes)",
+    "effort": "medium (steps are known; checks are scripted)",
+    "text": "Read claude/battle-architecture.md section 5 row 23 and the stage 23 note near its end. Read Tom's answer on t-b3s23-confirm first (its note and answer are on the card). If the answer is not \"yes\", stop and write one history line. If yes: delete battle 2 files, Stampcards, Kindness in battle, Director's Cuts, Family Finishes and the Tombo rows, then the unused lines and clips. Purge completely (standing rule: grep for the old names and ids and confirm zero references outside demo/). Run python3 tools/clip-audit/unused_voice.py (all checks 0), grep for B2, b2 and B8 (zero outside demo/), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape. Write the result into this card's history and end the battle system card series with a Tom Milestone card: the whole game on Battle 3 with ask play. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    }
+   ]
+  },
+  {
+   "id": "t-b3s23-confirm",
+   "title": "Confirm the battle 2 purge (stage 23)",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "choices": [
+    "Yes, delete battle 2 and its leftovers as the plan lists (Recommended)",
+    "No, keep battle 2 files for now"
+   ],
+   "leads": [
+    "Battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes and unused lines and clips are deleted; the game then runs only on the new battle. Git keeps copies.",
+    "Nothing is deleted; the old battle files stay in the game and stage 23 waits."
+   ],
+   "next": "Tap one answer. Yes lets the card Battle stage 23 (c-b3s23) start once the Part 2 chapters are built. No keeps the old battle 2 files until you say otherwise.",
+   "blocks": [
+    "c-b3s23"
+   ],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created on 2026-11-22 by the b3restore session: the purge needs your yes first (plan in claude/battle-architecture.md)."
+    }
+   ]
   }
  ],
  "sessions": [
