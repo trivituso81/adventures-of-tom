@@ -29770,7 +29770,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGRuFAHDmbikz263XC",
+    "url": "https://claude.ai/code/session_01RXeukGRuFAHDmbikz263XC",
     "opening": "not started"
    },
    "nightly": true,
@@ -29853,6 +29853,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -33284,7 +33288,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukETpXPHu7mASVc7nnD",
+    "url": "https://claude.ai/code/session_01RXeukETpXPHu7mASVc7nnD",
     "opening": "not started"
    },
    "prompt": {
@@ -33313,6 +33317,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T04:18:26+00:00"
@@ -33931,6 +33939,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGRuFAHDmbikz263XC",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-22T04:21:43Z",
+   "last": "2026-11-22T04:21:43Z",
+   "tags": [],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukETpXPHu7mASVc7nnD",
+   "title": "New menu: Vibes and Gear",
+   "first": "2026-11-22T04:21:37Z",
+   "last": "2026-11-22T04:21:37Z",
+   "tags": [],
+   "cards": [
+    "c-menu2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -38986,8 +39014,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "747e4a6e1f5e28da736f5305d972002042fae6d3",
- "synced_at": "2026-11-22T04:18:27+00:00",
+ "synced": "226e5e5bcffc53f5297a3b3f663db883916748c5",
+ "synced_at": "2026-11-22T04:22:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
