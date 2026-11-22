@@ -167,7 +167,7 @@ function b3RenderBar(moved) {
     const flus=foe&&n===1&&((B3.view.u[e.k]||{}).st||[]).includes('flustered');
     const pm=n===1&&B3.pvNow&&B3.pvNow.P&&battle.state==='command'?B3.pvNow.moved[e.k]:null;
     const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(pm?' b3-pvm':'')+(flus?' b3-flus':'');
-    const img=foe?b2Thumb(u.id):b2Portrait(u.id);
+    const img=foe?b2Thumb(u.D&&u.D.art||u.id):b2Portrait(u.id);
     const badge=pm?'<i class="b2-int b3-pvb" title="'+(pm.kind==='push'?'Pushed back ':'Pulled forward ')+pm.n+' ticks">'+(pm.kind==='push'?'\u25B6':'\u25C0')+'</i>':flus?'<i class="b2-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
     return (e.div?'<i class="b3-div" title="Round '+e.div+' starts here"><b>'+e.div+'</b></i>':'')+
       '<div class="'+cls+'" data-k="'+key+'" title="'+b2Esc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+b2Esc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';

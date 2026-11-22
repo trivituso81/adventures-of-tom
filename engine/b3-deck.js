@@ -26,7 +26,7 @@ const bxW=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o&&o[k]!=null?o[k]:'');
 const bxChip=(t,tone,dx)=>'<span class="bx-chip'+(tone?' '+tone:'')+(dx?' dx':'')+'">'+t+'</span>';
 const bxFlIcon=f=>'<span class="fc" style="--c:'+B3_FLAVORS[f].color+'">'+BX_IC[f]+'</span>';
 const bxFl=f=>'<span class="bx-chip fl">'+bxFlIcon(f)+b2Esc(B3_FLAVORS[f].name)+'</span>';
-const bxFace=u=>{ const im=u.side==='foe'?b2Thumb(u.id):b2Portrait(u.id); return im?'<img alt="" src="'+im+'">':'<b class="bx-ph">'+b2Esc(u.name.charAt(0))+'</b>'; };
+const bxFace=u=>{ const im=u.side==='foe'?b2Thumb(u.D&&u.D.art||u.id):b2Portrait(u.id); return im?'<img alt="" src="'+im+'">':'<b class="bx-ph">'+b2Esc(u.name.charAt(0))+'</b>'; };
 const bxShare=u=>{ const v=B3.view&&B3.view.u[u.key]; return v?Math.max(0,v.hp)/v.maxHp:u.hp/u.maxHp; };
 
 // ---------- The DETAILS switch (plan 3.2): kept on the device, on for a wide desktop window, off elsewhere ----------

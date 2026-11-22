@@ -31,8 +31,8 @@ B3_FOES.gridlockprime={id:'gridlockprime',name:'Gridlock Prime',ch:12,role:'boss
       effects:[{op:'status',id:'four_way_red_light',to:'self'},{op:'status',id:'red_light_def',to:'self'},{op:'status',id:'red_light_atk',to:'self'}]},
     {id:'total_gridlock',name:'Total Gridlock',flavor:['clobber'],power:1.35,recovery:120,hits:'all',tags:['ground_sweep','aoe','charge_up'],when:{hpBelow:.5},effects:[]}
   ]};
-// The little Gridlock the boss calls: the chapter 2 monster's three acts on the chapter 12 helper numbers. Called mid-fight, so it carries no pips and pays no drop.
-B3_FOES.gridlockhelper={id:'gridlockhelper',name:'Gridlock',ch:12,role:'bruiser',row:'front',hp:713,hp3:357,atk:110,def:55,spd:105,pips:0,
+// The little Gridlock the boss calls (`art` is the map monster whose painted sprite it wears, since it has no entry of its own in MONSTERS): the chapter 2 monster's three acts on the chapter 12 helper numbers. Called mid-fight, so it carries no pips and pays no drop.
+B3_FOES.gridlockhelper={id:'gridlockhelper',art:'gridlock',name:'Gridlock',ch:12,role:'bruiser',row:'front',hp:713,hp3:357,atk:110,def:55,spd:105,pips:0,
   peeves:['racket','razzle'],resists:[],start:[],mechanics:[],drop:null,
   acts:[
     {id:'lay_on_the_horn',name:'Lay On The Horn',flavor:['racket'],power:.8,recovery:80,hits:'one',tags:['projectile'],effects:[]},
