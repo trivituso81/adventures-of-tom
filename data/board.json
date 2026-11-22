@@ -29559,6 +29559,11 @@
     {
      "d": "2026-11-22",
      "t": "Quiet flag: the run on 11-21 had finished (nothing to do). Moved back to Up next by hand; the sync had left it In progress."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T01:53:01.047Z"
     }
    ],
    "prompt": {
@@ -29574,7 +29579,8 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "started_at": "2026-11-21T23:20:59+00:00"
+   "started_at": "2026-11-21T23:20:59+00:00",
+   "start": true
   },
   {
    "id": "c-bigone25",
