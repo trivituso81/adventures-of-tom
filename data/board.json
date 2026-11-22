@@ -31308,8 +31308,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (14 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 8 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (17 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 11 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31356,6 +31356,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 14 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 17 report(s)."
     }
    ],
    "blocks": [],
@@ -31923,7 +31927,7 @@
    "id": "c-takes-e8fba6",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -31938,7 +31942,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukE33WFppK2bVzVtvP9",
     "opening": "not started"
    },
    "history": [
@@ -31950,12 +31954,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:02:58.104Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T02:03:59+00:00"
   }
  ],
  "sessions": [
@@ -32652,6 +32660,16 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
+   "title": "Build the new battle screen",
+   "first": "2026-11-21T18:03:55-08:00",
+   "last": "2026-11-21T18:03:55-08:00",
+   "tags": [],
+   "cards": [
+    "c-battleux1"
    ]
   },
   {
@@ -36723,7 +36741,10 @@
    "r-20261121-180035-bjdf",
    "r-20261121-180050-39xy",
    "r-20261121-180126-mdm1",
-   "r-20261121-180138-yorh"
+   "r-20261121-180138-yorh",
+   "r-20261121-180230-crne",
+   "r-20261121-180249-oy95",
+   "r-20261121-180326-tsde"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36763,8 +36784,8 @@
    "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "d335b42d2c46bf99fd524dc7ccf1b2d8f7995d81",
- "synced_at": "2026-11-22T02:02:11+00:00",
+ "synced": "bb55c17bd705ae7bc399241f52d11cdbd52f7cc5",
+ "synced_at": "2026-11-22T02:03:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
