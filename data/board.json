@@ -32360,7 +32360,7 @@
    "col": "prog",
    "theme": "Characters",
    "title": "Sal listens with a feeling frame, not the bad picture",
-   "next": "Replace Sal's listening frame with his loving feeling frame (hands on chest, warm), remove the bad listening picture and its wiring, test, push.",
+   "next": "Shipped as salslisten1: Sal listens in his loving feeling frame. Nothing needed from you.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
@@ -32373,6 +32373,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"Sals listening frame is bad. Replace it with any other feeling frame.\" New card; the work is a small known edit."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Done: Sal's listening picture and wiring purged; em_loving is his listener frame (build salslisten1). Tested the opening scene: tk_listen before, em_loving after."
     }
    ],
    "prompt": {

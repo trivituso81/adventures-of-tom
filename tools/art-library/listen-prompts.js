@@ -15,10 +15,6 @@ const entries = [
     title: `${n} listening (one full-body pose, for chapter 1 lines where someone else is talking)`,
     prompt: pose(n, [HERO(n), TALK(n)], LISTEN,
       'The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.') })),
-  { id: 'sal-listen', tab: 'Characters', group: 'Listening poses', ar: '2:3', refs: ['art/raw/npcs/npc-photo-sal-v3.png', 'art/raw/npcs/npc-emotions-sal-v1.png'],
-    title: 'Sal listening (one full-body pose, for the opening while Tom thanks him)',
-    prompt: pose('Sal, a cab driver of about fifty', [NPC('Sal'), 'The approved feelings sheet of Sal, for the size of the head against the body and the painted finish.'], LISTEN,
-      'The pose matches the attached feelings sheet in size and finish, so it can sit next to those poses.') },
 ];
 
 module.exports = { entries };

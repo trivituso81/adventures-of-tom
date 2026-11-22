@@ -177,10 +177,6 @@ for _id in NPC_EMO:
 for _id in DAZED_NPCS:   # c-reports: the dazed frame of each neighbour in chapter 2, at the same scale as that neighbour's feelings frames
     if os.path.exists(os.path.join(ROOT, 'art/story', _id + 'dz.webp')):
         SETS[_id + 'dz'] = {'member': _id, 'strip': os.path.join('art/story', _id + 'dz.webp'), 'k': 0, 'h': 40, 'ref': 'dz_dazed', 'names': ['dz_dazed'], 'npc': True}
-# listen1 (2026-11-20): Sal's listening frame (Art Library sal-listen, cut by report_singles.py into art/story/salls.webp), at the scale of his feelings frames, frame tk_listen
-# so engine/emotions.js emoListen finds it the same way as the family's.
-if os.path.exists(os.path.join(ROOT, 'art/story/salls.webp')):
-    SETS['salls'] = {'member': 'sal', 'strip': 'art/story/salls.webp', 'k': 0, 'h': 40, 'ref': 'tk_listen', 'names': ['tk_listen'], 'npc': True}
 
 
 def cut_cells(rgba, cols, rows, n, dil=6):

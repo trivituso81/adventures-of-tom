@@ -124,6 +124,7 @@ function emoReact(speakerId,text) {
 // speaker stands on the map. Skipped: the speaker, monsters, Nara and anyone with no such frame, hidden or seated people, Tom carrying Rose, anyone walking, anyone a scene
 // step posed or turned away (scenePose, storyBack). A listener reaction (docs/emotion-reactions.tsv) wins: it replaces the listener pose, also on a cue word. The listener
 // faces the speaker (left or right; a step that set their facing keeps it). A person with no baked frame keeps the old behaviour, so a pose appears as soon as it is baked.
+const LISTEN_FEEL={sal:'em_loving'};   // a person with no tk_listen frame who listens in one of their feeling frames instead
 const LISTEN_R=8;   // tiles from the speaker (or from Tom when the speaker is off the map); outside a scene only Tom and his followers listen
 function listenRowOf(name,text) {
   if(typeof LISTEN_TYPES==='undefined'||typeof STORY==='undefined'||!LISTEN_CHAPTERS.has(STORY.chapter)) return undefined;
@@ -150,8 +151,10 @@ function emoListen(name,text) {
   for(const a of all) {
     if(!a||a===spk||a.monster||a.hidden||a.seat||a.amber||a.storyBack||a.move||a.scenePose) continue;
     const id=listenerIdOf(a); if(!id) continue;
-    const t=L.by[id]||L.def,f='tk_'+t;
-    if(t==='none'||typeof STORY_POSES==='undefined'||!STORY_POSES[id]||!STORY_POSES[id][f]) continue;
+    const t=L.by[id]||L.def; let f='tk_'+t;
+    if(t==='none'||typeof STORY_POSES==='undefined'||!STORY_POSES[id]) continue;
+    if(!STORY_POSES[id][f]&&t==='listen'&&LISTEN_FEEL[id]) f=LISTEN_FEEL[id];   // Sal's listening picture was rejected (Tom 2026-11-22): he listens in a feeling frame
+    if(!STORY_POSES[id][f]) continue;
     const p=position(a),dx=c.x-p.x;
     if(Math.hypot(dx,c.y-p.y)>LISTEN_R) continue;
     const fx=spk?position(spk).x-p.x:0;
