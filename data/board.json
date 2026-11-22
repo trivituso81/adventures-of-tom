@@ -26077,7 +26077,7 @@
    "id": "c-battleux3",
    "tag": "battleux3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Add the scene marks and remove the proposal page",
    "created": "2026-11-21",
@@ -26140,16 +26140,20 @@
     {
      "d": "2026-11-22",
      "t": "Built battleux3: Pet Peeve badges under each monster on the scene, Rose Mode pictures and star on the new deck, proposal page and its Admin button removed. Aim-marker tag, MARKED/NEXT TARGET and a second Pep forecast left out as repeats (b3look). Layout test extended (badges, Rose pass). Hands to t-battleuxplay."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as battleux3: the new battle screen shows each monster's Pet Peeves as badges under it, Rose Mode gets pictures on the new deck, and the proposal page is gone"
     }
    ],
    "started_at": "2026-11-22T14:33:32+00:00",
-   "after": "t-battleuxplay"
+   "after": "t-battleuxplay",
+   "done": "2026-11-22"
   },
   {
    "id": "t-battleuxplay",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle System",
    "ask": "play",
    "where": "phone",
@@ -26175,6 +26179,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-battleux: Tom's one play card for the battle screen redesign (plan section 5). Opens when c-battleux3 ships."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: Add the scene marks and remove the proposal page is done."
     }
    ]
   },
@@ -29788,6 +29796,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEERNUaCXrLX69rTMS",
+   "title": "Add the scene marks and remove the proposal page",
+   "first": "2026-11-22T14:34:53Z",
+   "last": "2026-11-22T15:07:54Z",
+   "tags": [
+    "battleux3"
+   ],
+   "cards": [
+    "c-battleux3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFaCXixwyNJTmYPr4J",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
    "first": "2026-11-22T14:37:47Z",
@@ -29797,16 +29817,6 @@
    ],
    "cards": [
     "c-fix-menu4play-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEERNUaCXrLX69rTMS",
-   "title": "Add the scene marks and remove the proposal page",
-   "first": "2026-11-22T14:34:53Z",
-   "last": "2026-11-22T14:34:53Z",
-   "tags": [],
-   "cards": [
-    "c-battleux3"
    ]
   },
   {
@@ -35317,8 +35327,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "587100742afdaa71278f859e6f22b2c286f55163",
- "synced_at": "2026-11-22T14:59:32+00:00",
+ "synced": "41170dc3d88a372c933a9ab42bd8311d43487397",
+ "synced_at": "2026-11-22T15:09:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
