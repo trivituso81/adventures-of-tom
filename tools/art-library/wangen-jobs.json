@@ -1519,7 +1519,7 @@
   }
  },
  "tom-controller": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -1542,8 +1542,8 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "pad": 0.65,
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2). wanstop-tom-controller-r1: both rev 1 videos do the move by eye (the open hand flings left, then a fist is raised beside the shoulder), but the hand touched the left edge in 14 to 15 pictures. One change: pad 0.8 to 0.65 (the next pad of _bulk.pads); prompt, start picture and settings kept.",
   "bake": {
    "id": "tom-controller",
    "owner": "tom",
