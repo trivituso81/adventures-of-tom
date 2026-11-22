@@ -1054,6 +1054,15 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-22T21:01:42Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45069196819"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.0027,
+   "what": "wan-gen Action: start picture facing check",
+   "source": "wan-gen run",
+   "at": "2026-11-22T21:18:59Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45069962095"
   }
  ],
  "balances": [
