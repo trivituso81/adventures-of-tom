@@ -26056,6 +26056,10 @@
     {
      "d": "2026-11-22",
      "t": "Waits again, on c-b3look: Tom asked (11-21 23:56) for the battle controls to be restyled after the new menu with no repeated information. Doing the marks first would build them in the old look and hand Tom a play card for a screen about to change."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session ended without shipping: Tom (11-22 00:05) started this card, then chose Hold when asked. c-b3look has not run, so the marks wait for it and get built once in the new look. Nothing was pushed to the game. Still waits on c-b3look."
     }
    ],
    "waiting_on": "claude"
