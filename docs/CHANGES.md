@@ -1,3 +1,7 @@
+## nightclean-1122 (2026-11-22): Night cleanup, bucket C: CLAUDE.md is 2.3 KB shorter
+
+Bucket C (working agreement). Shortened two history-heavy sections of CLAUDE.md, "Load time" and "Clip quality gate": the sw1 and mem1 build stories and the clipch1fix details left (they stay in the entries above and in git history; sw1 details live in docs/WORKFLOW.md). Every standing rule, heading and quoted sentence of Tom's is kept: `python3 tools/night/rules_check.py` ok (26 headings, 19 leads, 59 quotes). CLAUDE.md 69,569 to 67,271 bytes; `claude/next.md` unchanged (44,187). No file under tools/ or art/ was deleted, so there is no reference grep.
+
 ## wanstop-deedee-wetfloor-r8 (2026-11-22): Deedee's Wet-Floor shrinks the start picture to 55 percent so the mop clears the left edge
 
 Card c-wanstop-deedee-wetfloor-r8. The bulk run 44983183373 stopped r8 (the string mop). By eye both videos are right: a string mop with a floppy head comes from behind her back, one sweep, put away. Try 1 failed only bg (a pink floor shadow, 5.46 percent off colour); try 2 failed feet by 0.2 point (10.2 percent, 2 pictures) and the left edge in 6 pictures (frames 46 to 47, 70 to 73). One change, rev 9: `pad` 0.55 (was 0.65). Kept: prompt v5, Kling 4.0, start picture, 5 s, feet limit 0.10, bake, wire, the 4 tries and $3.20 budget (2 used). Next try starts with this push (`wgen` on t-wanmop1-gen).
