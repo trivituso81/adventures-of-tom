@@ -29993,7 +29993,7 @@
   {
    "id": "t-guideboot-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle System",
    "ask": "play",
    "fyi": true,
@@ -30011,8 +30011,14 @@
     {
      "d": "2026-11-22",
      "t": "Added with guideboot1 (card c-fix-guideboot)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T18:42:55.129Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "c-ch1title",
