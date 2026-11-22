@@ -244,7 +244,7 @@ SCENES.ch12Alvarez=[
   {talk:'TNB',lines:['Pupusas next door, laps in here. Anything warm enough gets the amber moving. Good to know. I have a feeling we’re going to need it.']},
   {talk:'Tom',lines:['That wasn’t a lap. That was a Tombo. Run With Us, Mommy. Amy, Grace and Rose, together.']},
   {flag:'tombo:ff2'},
-  {call:()=>showToast&&showToast('New Tombo: Run With Us, Mommy! (Amy, Grace and Rose in front). 75% HEART.',5)},
+  {if:()=>!B3_CH_ON(12),then:[{call:()=>showToast&&showToast('New Tombo: Run With Us, Mommy! (Amy, Grace and Rose in front). 75% HEART.',5)}],else:[{toast:'New Tombo skin: Run With Us, Mommy! (Rose + Amy). It shows when they fire a Full Family Ruckus.',time:5}]},
   {talk:'Mrs. Alvarez',lines:['Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step.']},
   {give:'lemons'},
   {talk:'Daisy',lines:['Is it okay if I say that was the best thing that has ever happened in our kitchen?']},
@@ -279,11 +279,13 @@ SCENES.ch12Prime=()=>[
   {talk:'TNB',lines:['If it’s stuck, maybe it just needs somewhere to go. Kindness first. Hit it if it hits back.']},
   {talk:'Amy',lines:['Here’s the plan. I stay with the girls. If anybody needs a break, sit on a couch or a bench and we’ll swap.']},
   {talk:'Tom',lines:['Nobody gets run over. I’ll step in front of anyone who needs it.']},
-  {toast:'Tip: Amy, Grace and Rose in front unlocks Run With Us, Mommy!, which breaks its red light in one go.',time:6},
+  {if:()=>!B3_CH_ON(12),then:[{toast:'Tip: Amy, Grace and Rose in front unlocks Run With Us, Mommy!, which breaks its red light in one go.',time:6}],else:[{toast:'Tip: sit on a couch or the parkway bench before the fight to swap who is out front. Four fight at a time.',time:6}]},
   {battle:'gridlockprime',tut:'ch12'},
   {if:()=>flag('battle:gridlockprime')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Everybody okay? Good. It floors Rush Hour every third turn, so we heal before, not after.']},
+    {if:()=>B3_CH_ON(12),then:[
+      {talk:'Amy',lines:['Everybody okay? Good. When it puts up the Four-Way Red Light, hit it with Drench or Racket. It can’t stand either one.']}],else:[
+      {talk:'Amy',lines:['Everybody okay? Good. It floors Rush Hour every third turn, so we heal before, not after.']}]},
     {toast:'Face Gridlock Prime (the intersection on Jefferson) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

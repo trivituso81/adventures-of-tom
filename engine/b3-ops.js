@@ -221,7 +221,7 @@ const B3_OPS={
   // `ifNoFront`: only when no other monster stands in the Front row (Old Iron-Gill's Soggy Sock, called as it dives behind it).
   summon(F,c,e) {
     if(e.ifNoFront&&b3Live(F,c.actor.side).some(o=>o.row!=='back')) return;
-    for(let i=0;i<(e.n||1);i++) { const u=b3Summon(F,e.id,e.row,e.hp); if(!u) break;
+    for(let i=0;i<(e.n||1);i++) { const u=b3Summon(F,e.id,e.row,(F.party.length===3&&e.hp3)||e.hp); if(!u) break;
       u.addedBy=c.actor.key; u.addedTurn=c.actor.turns;   // who called it and on which of that monster's turns (a condition `allyAge` reads it)
       c.beats.push({t:'summon',src:c.actor.key,tgt:u.key,id:u.id,name:u.name,row:u.row,hp:u.hp,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); }
   },

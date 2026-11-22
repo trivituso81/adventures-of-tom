@@ -1,3 +1,19 @@
+## b3s22ch12 (2026-11-22): Chapter 12 (Tom's street) fights on the new battle: Gridlock Prime and its Four-Way Red Light
+
+Card c-b3s22ch12. Chapter 12 is on the BY CHAPTER list for Battle 3, with the bestiary's numbers unchanged (the simulator puts Gridlock Prime at 6.8 rounds, inside the 6 to 7 aimed for a boss that brings a helper). The chapter has one fight (Marlowe only introduces the boss), so the formation pays the boss's 45 Vibe Points and the bestiary's three other normal fights do not exist in the script. The three neighbor coins and the kind ending are unchanged; the recorded lines are untouched.
+
+| What | Where |
+|---|---|
+| Gridlock Prime (boss, 7 pips) and the little Gridlock it calls (713 HP with four in the party, 357 with three), one formation, Lab fight NEW 70, tips `ch12` | `data/b3-foes-ch12.js`, `data/b3-lab.js`, `data/b3-story.js` |
+| Four-Way Red Light is a 30% Guard Stance plus a +30% Defense buff and a +25% Attack buff (the Defense one is the heaviest, so "Is This Real?" Fact-Check turns that one); it is used once above half HP and once below (each calls 1 Gridlock) and again every 3 turns when it is down; Exhaust Heatwave leaves it Toasty too | `data/b3-foes-ch12.js`, `data/b3-status.js` |
+| The `summon` op reads `hp3` (the HP of a called foe when the party is three) | `engine/b3-ops.js` |
+| Battle 3 wording for the Run With Us, Mommy! toast, the couch and bench tip and Amy's retry coaching, behind `B3_CH_ON(12)` | `data/scenes-ch12.js` |
+| Chapter 12 test (arrival to chapter complete, portrait and landscape) and its place in the night manifest; the checks for chapter 12 | `tools/ch12_b3_test.py`, `tools/b3-check-s22ch12.js`, `tools/night/tests.json` |
+| Chapter 13 is now the first unswitched chapter in the story test; the Guide's start-of-chapter lists drop Gridlock Prime; the Battle Guide's animation list has the two new monsters | `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+| The chapter test library ran only on Python 3.12 (a backslash inside an f-string); now it runs on 3.11 too | `tools/b3_chapter_lib.py` |
+
+Tests: `node tools/b3-sim.js check` (FAILS: []).
+
 ## movestage2b (2026-11-22): the stage layer and the Move Lab are in the game; Tom's eight moves play through them as soon as their videos are baked
 
 Part b of card c-movestage-build (plan `claude/move-staging-plan.md`). The videos are not baked yet: the first run sent nothing because of the daily video limit, which Tom has since removed (wannoday1); the run is started again right after this push. Until a move's body video and pictures are baked it plays the version it played before.

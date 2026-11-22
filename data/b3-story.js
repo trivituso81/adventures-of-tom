@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -214,6 +214,13 @@ const B3_STORY={
       {id:'elite',who:'*',text:'The Standby Sprite is an Elite: 4 Composure pips, and it can’t stand Drench or Clobber. Behind its podium it takes 25% less damage until a Break or Panic Boil! ends that.'},
       {id:'bump',who:'*',text:'Waitlist Bump is charging (!!): it shoves one of you back down the turn bar and tires them. Break its pips to stop it, or shield that person.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='standbysprite')},
       {id:'seat',who:'*',text:'Seat Seventeen slows whoever it hits by 15%. Slow people act later, so a Pep-free Basic from the fastest of you keeps the turn bar moving.',when:(F)=>F.party.some(p=>p.st&&p.st.seat_seventeen)}
+    ],
+    // ---- Chapter 12 (stage 22b): Tom, Grace, Rose and Amy on Jefferson Boulevard. The key is the `tut` name in data/scenes-ch12.js. ----
+    ch12:[
+      {id:'peeve',who:'*',text:'Gridlock Prime has 7 Composure pips and can’t stand Drench or Racket. Both break it fastest, and a Racket hit also ends its Guard Stance with Panic Boil!.'},
+      {id:'light',who:'*',text:'Four-Way Red Light: 30% less damage plus more Defense and Attack for 2 turns, and a Gridlock joins the Front. Panic Boil!, a Break or a Skill that strips buffs ends it.',when:(F)=>F.foes.some(f=>f.id==='gridlockprime'&&f.st&&f.st.four_way_red_light)},
+      {id:'heat',who:'*',text:'Exhaust Heatwave leaves Gridlock Prime Toasty too. A Drench hit sets that off as Steam Cloud!, which costs it 3 pips.',when:(F)=>F.foes.some(f=>f.id==='gridlockprime'&&f.st&&f.st.toasty)},
+      {id:'total',who:'*',text:'Total Gridlock is charging (!!) below half HP: it hits everyone. Break its pips or shield the family before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Total/.test(f.charge.name||''))}
     ],
     finalcall:[
       {id:'peeve',who:'*',text:'FINAL CALL has 7 Composure pips and can’t stand Razzle or Racket. It shrugs off Clobber, so Razzle and Racket break it fastest.'},

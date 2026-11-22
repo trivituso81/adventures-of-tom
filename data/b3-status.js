@@ -546,3 +546,14 @@ Object.assign(B3_STATUS,{
   stampede:{id:'stampede',name:'Rebooking Stampede',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'stampede',v:.20}],flags:[],
     short:'SPEED UP',color:'#e8b35a',weight:5,desc:'Everyone rebooked at once and running for the gate: 20% more Speed. It can be stripped.'}
 });
+
+// Stage 22 (chapter 12, Tom's street): Gridlock Prime's Four-Way Red Light is a Guard Stance (30% less damage) and two buffs, so the family's answers differ:
+// Panic Boil! or a Break drops the stance, a buff strip or Nara's steal takes the buffs, and "Is This Real?" Fact-Check turns the heaviest one (Defense) against it.
+Object.assign(B3_STATUS,{
+  four_way_red_light:{id:'four_way_red_light',name:'Four-Way Red Light',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.30}],flags:[],
+    short:'GUARD',color:'#e0504a',weight:5,desc:'Every light on the block is red and nothing gets through: takes 30% less damage. Panic Boil!, a Break or a pull out of guard ends it.'},
+  red_light_def:{id:'red_light_def',name:'Red Light Plating',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'redLightDef',v:.30}],flags:[],
+    short:'DEF UP',color:'#d98a5a',weight:6,desc:'Bumper to bumper to bumper: 30% more Defense. It can be stripped, and a Fact-Check turns it against it.'},
+  red_light_atk:{id:'red_light_atk',name:'Red Light Rage',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'redLightAtk',v:.25}],flags:[],
+    short:'ATK UP',color:'#f08a6a',weight:5,desc:'Stuck so long it is furious: 25% more Attack. It can be stripped.'}
+});

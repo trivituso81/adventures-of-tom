@@ -935,6 +935,12 @@
    "minutes": 8
   },
   {
+   "id": "ch12_b3_test",
+   "cmd": "python3 -I tools/ch12_b3_test.py",
+   "group": "g5",
+   "minutes": 15
+  },
+  {
    "id": "ch5_school_test",
    "cmd": "python3 -I tools/ch5_school_test.py",
    "group": "g5",

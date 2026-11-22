@@ -33,6 +33,8 @@ module.exports=function(T) {
   if(S.chapters.includes(21)) for(const m of read('data/bonus-nine-scoops.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   // Chapter 11 (stage 22a) has its scenes in data/scenes-p2.js.
   if(S.chapters.includes(11)) for(const m of read('data/scenes-p2.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 12 (stage 22, chapter 12) has its scenes in data/scenes-ch12.js.
+  if(S.chapters.includes(12)) for(const m of read('data/scenes-ch12.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

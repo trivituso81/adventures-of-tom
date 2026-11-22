@@ -10,6 +10,7 @@ HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
 LAYOUT=os.environ.get('LAYOUT','portrait')
 OUT=None; pg=None; pw=None; br=None; srv=None
 errs=[]; fails=[]; frames=[]; seen=set(); log=[]; fights=[]
+WIN_STEPS=400   # one step is about a second of the fight; a long boss (Gridlock Prime, 52 turns) sets a larger number before its fight
 KEY="()=>dialog.active?(dialog.name+'|'+dialog.index+'|'+((dialog.pages&&dialog.pages[dialog.index])||dialog.lines[dialog.index]||'')):''"
 class Q(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*a): pass
@@ -39,7 +40,7 @@ def win(tag):
     # (any open menu is played, not only the cross: Amy's Burpee Blitz opens a second menu for its mini turn)
     # not B3.cfg.auto: the fight opens each family turn as the screen does (so the turn's tip shows), and the test then plays the simple player's move
     carded=False; words=False; b2seen=False; doneSnap=False
-    for i in range(400):
+    for i in range(WIN_STEPS):
         if not pg.evaluate("()=>battle.active"): break
         st=pg.evaluate("()=>({ui:B3.ui,card:!!(document.getElementById('b7-card')&&!document.getElementById('b7-card').hidden)})")
         bad=pg.evaluate(BAD); words=words or bad['words']; b2seen=b2seen or bad['b2']
@@ -68,7 +69,8 @@ def run(stop,tag,n=900,expect=None):
             f=win(tag); k=f['tut']
             scripted=f['result'] in ('flee','shell')   # a scripted end has no victory card and pays nothing
             check(f"{tag}: fight {'+'.join(f['foes'])} ended on Battle 3 and the victory card showed"+(f" (scripted end: {f['result']}, no card)" if scripted else ''),f['ended'] and f['v3'] and (f['card'] or scripted or f['result']=='lose'))
-            check(f"{tag}: no Warmth bar, WARMTH or HEART on the fight screen {pg.evaluate('()=>window.__badWords||\'\'') if f['words'] else ''}",not f['words'] and not f['b2'])
+            bw=pg.evaluate("()=>window.__badWords||''") if f['words'] else ''   # (outside the f-string: Python before 3.12 refuses a backslash inside one)
+            check(f"{tag}: no Warmth bar, WARMTH or HEART on the fight screen {bw}",not f['words'] and not f['b2'])
             if scripted: check(f"{tag}: a scripted end ({f['result']}) pays no Vibe Points ({f['vpPaid']})",f['vpPaid']==0)
             elif f['result']=='lose': check(f"{tag}: a lost fight pays no Vibe Points ({f['vpPaid']})",f['vpPaid']==0)
             else: check(f"{tag}: Tom's Vibe Points paid ({f['vpPaid']} for a {f['vpPlan']} VP fight: Main {f['vpPlan']} plus Pocket half)",f['vpPlan'] is not None and f['vpPaid']==f['vpPlan']+(f['vpPlan']+1)//2)

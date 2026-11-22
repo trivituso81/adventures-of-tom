@@ -288,6 +288,8 @@ function check() {
   require('./b3-check-s21.js')({G,ok,near,play,noCrit});
   // Stage 22's groups: chapter 11 (the Endless Concourse) on Battle 3: the Standby Sprite and FINAL CALL, Gate Change's row trade, Rebooking Stampede; and the 30 Traits and 60 Quirks guard.
   require('./b3-check-s22.js')({G,ok,near,play,noCrit});
+  // Stage 22, chapter 12 (Tom's street): Gridlock Prime, the Gridlock it calls and the Four-Way Red Light.
+  require('./b3-check-s22ch12.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

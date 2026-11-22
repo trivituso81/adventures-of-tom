@@ -13,7 +13,7 @@ module.exports=function(T) {
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
 
   // 1. The switch, the floor, the numbers
-  ok(J(S.chapters)===J([1,2,3,4,5,6,7,8,9,10,11,21]),'chapter 11 is on Battle 3 in order after chapter 10 (found '+J(S.chapters)+')');
+  ok(J(S.chapters.filter(n=>n<=11))===J([1,2,3,4,5,6,7,8,9,10,11])&&J(S.chapters.slice(0,11))===J([1,2,3,4,5,6,7,8,9,10,11]),'chapter 11 is on Battle 3 in order after chapter 10 (found '+J(S.chapters)+')');
   ok(S.levelFloor[11]===27,'chapter 11 floors the Character Level at the bestiary baseline, 27 (found '+S.levelFloor[11]+')');
   const NUM={lostluggage:[638,101,51,105,'bruiser','front'],redeye:[472,87,44,116,'hexer','back'],standbysprite:[999,106,61,99,'elite','front'],finalcall:[1670,115,56,112,'boss','front']};
   for(const id in NUM) { const D=FOES[id],n=NUM[id];

@@ -146,6 +146,8 @@ const B3_LAB=[
     party:['tom','grace','rose','amy'],level:27,formation:'standbysprite',bg:'infinity'},
   {id:'new69',name:'NEW 69: FINAL CALL',sub:'Chapter 11 boss. 7 Composure pips. Gate Change trades a Front and a Back ally and pushes both. At 60% HP it calls Lost Luggage and everyone speeds up.',
     party:['tom','grace','rose','amy'],level:27,formation:'finalcall',bg:'infinity'},
+  {id:'new70',name:'NEW 70: GRIDLOCK PRIME',sub:'Chapter 12 boss. 7 Composure pips. Four-Way Red Light is a Guard Stance and two buffs and calls a Gridlock, once above and once below half HP. Exhaust Heatwave leaves it Toasty too.',
+    party:['tom','grace','rose','amy'],level:30,formation:'gridlockprime',bg:'griffith'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true}
