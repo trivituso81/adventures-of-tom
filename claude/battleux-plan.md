@@ -161,3 +161,11 @@ Hooks for battleux3:
 | Anything shown in the tray for a unit the player taps | `B3.look` (the unit shown) and `B3.note` (a one-line note), read in `b3RenderTray` |
 
 Calls made: a tap on a unit aims the highlighted move when that unit is a valid target and otherwise shows it in the tray; MARKED and NEXT TARGET chips stay visible on narrow party cards (the mock hid every chip there); a pointer takes over from the keys without rebuilding the rows (rebuilding on pointerdown swallowed the click).
+
+## 7. Built: battleux2 (2026-11-21)
+
+| Part | Fact |
+|---|---|
+| `short` lines | On all 80 family moves (`data/b3-kit-*.js`) and Pick-Me-Up (`data/b3-rules.js`), 60 characters at most, kid's words: "boosts" for buffs, "bad effects" for debuffs, "attack up close" for melee, no percent signs. Status and game words the screen shows stay (Pep, Composure, Pet Peeve, Toasty, Dazzled, Drenched, Cadence, Reps). Full list in docs/CHANGES.md "battleux2". |
+| Data check | `node tools/b3-sim.js check` ("every family move has a short line of 60 characters at most"), run on the real data before any test row is added. A new family move needs its `short` in the same push. |
+| Words table | `data/b3-ux-words.js` edited (floor reach, Composure, pull, no aim, Ruckus lines). Longer chips overflow the Duo strip on The Big One (`tools/b3_layout_test.py` catches it), so a forecast chip must not grow. |

@@ -24,18 +24,21 @@ B3_TRAITS.unbroken_rhythm={id:'unbroken_rhythm',vibe:'olivia_rope',name:'Unbroke
   desc:'Every turn Olivia attacks builds Cadence, up to 3. Each rank gives her 10% more Crit Damage and 1 more hit on Criss-Cross Double-Under and Regional Championship Freestyle. A turn on a Support Skill resets it.'};
 B3_SKILLS.rusty_speed_rope_snap={id:'rusty_speed_rope_snap',vibe:'olivia_rope',slot:'basic',name:'Rusty Speed-Rope Snap',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'counter',id:'cadence',n:1,max:3,to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Builds 1 Cadence.',
   desc:'Light Clobber whip with an old jump rope. Builds 1 Cadence.'};
 // Criss-Cross Double-Under: the spec's "2 to 5 hits by Cadence" is `hitsBy`: 2 hits plus 1 per rank. The standard tier is the power at 2 hits; each extra
 // hit adds 15% of it (my call: a flat split would make Cadence's extra hits worth almost nothing). Then +20% Evasion and +15% Attack for 2 turns.
 B3_SKILLS.criss_cross_double_under={id:'criss_cross_double_under',vibe:'olivia_rope',slot:'s1',name:'Criss-Cross Double-Under',pep:3,flavor:['clobber'],power:'standard',hits:2,
   hitsBy:{counter:'cadence',base:2,per:1,max:5,grow:.15},target:'foe',tags:[],composure:0,counter:'cadence',
   effects:[{op:'damage'},{op:'status',id:'criss_cross',to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'A flurry of hits, plus one more for each Cadence.',
   desc:'A Clobber flurry of 2 hits, plus 1 for each Cadence rank (up to 5). Each hit past the second adds 15% to the move’s power. Olivia then has 20% more Evasion and 15% more Attack for 2 turns.'};
 // "Better Than Bobby!" Hype: builds 1 Cadence, +30% Crit Rate for 2 turns, and her next turn comes 25 ticks sooner (the `next` pull: it takes 25 off
 // the wait this very turn sets, engine/b3-ops.js). It deals no damage and builds Cadence itself, so it is not a Support turn and does not reset it.
 B3_SKILLS.better_than_bobby_hype={id:'better_than_bobby_hype',vibe:'olivia_rope',slot:'s2',name:'“Better Than Bobby!” Hype',pep:2,flavor:['racket'],power:0,hits:0,
   target:'self',tags:[],composure:0,counter:'cadence',
   effects:[{op:'counter',id:'cadence',n:1,max:3,to:'self'},{op:'status',id:'bobby_hype',to:'self'},{op:'pull',n:25,next:true,to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Builds 1 Cadence, and Olivia’s next turn comes sooner.',
   desc:'Olivia trash-talks her childhood rival. Builds 1 Cadence, gives her 30% more Crit Rate for 2 turns, and her next turn comes 25 ticks sooner.'};
 // Muscle Memory: with it equipped a Support turn leaves Cadence where it is (`lacksCustom:'muscleMemory'` on the reset in the Vibe row).
 B3_QUIRKS.muscle_memory={id:'muscle_memory',vibe:'olivia_rope',name:'Muscle Memory',
@@ -46,6 +49,7 @@ B3_QUIRKS.muscle_memory={id:'muscle_memory',vibe:'olivia_rope',name:'Muscle Memo
 B3_SKILLS.regional_championship_freestyle={id:'regional_championship_freestyle',vibe:'olivia_rope',slot:'cap',name:'Regional Championship Freestyle',pep:6,flavor:['clobber'],power:'capstone',hits:4,
   hitsBy:{counter:'cadence',base:4,per:1,max:7,grow:.15},target:'foe',tags:[],composure:2,counter:'cadence',
   effects:[{op:'damage',bonus:{buffs:true,add:.10}}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Four fast hits, plus one more for each Cadence.',
   desc:'Bleachers and pyro: 4 rapid Clobber strikes, plus 1 for each Cadence rank (up to 7). Each strike past the fourth adds 15% to the move’s power, and every buff Olivia has adds 10% damage. The slam knocks 2 Composure pips off.'};
 // Trophy-Shelf Ego: 8% more damage for each different buff Olivia has, up to 4 buffs (+32%).
 B3_QUIRKS.trophy_shelf_ego={id:'trophy_shelf_ego',vibe:'olivia_rope',name:'Trophy-Shelf Ego',
@@ -67,17 +71,20 @@ B3_TRAITS.multitasking_pro={id:'multitasking_pro',vibe:'olivia_mom',name:'Multit
 B3_SKILLS.baby_wipe_swipe={id:'baby_wipe_swipe',vibe:'olivia_mom',slot:'basic',name:'Baby-Wipe Swipe',pep:0,flavor:['drench'],power:'light',hits:1,
   target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'cleanse',n:1,minor:true,to:'target'},{op:'heal',pct:'small',to:'target'}],
   line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit on a monster, or a small heal for family.',
   desc:'Pick a monster for a light Drench swat with a cold wet wipe. Pick a family member to clear 1 minor debuff (Slow, Fatigue, an accuracy drop) and heal 10%.'};
 // Diaper-Bag Snack Drop: a party heal of 10% plus 4% for each Mom Prep (spent): 10% to 22%. At 3 Mom Prep the family member with the least Pep also
 // gets 1 Pep. The tote is party-wide (`party:true`, read by Childproofed Locks).
 B3_SKILLS.diaper_bag_snack_drop={id:'diaper_bag_snack_drop',vibe:'olivia_mom',slot:'s1',name:'Diaper-Bag Snack Drop',pep:3,flavor:['support'],power:0,hits:0,
   target:'self',tags:[],composure:0,party:true,counter:'momprep',
   effects:[{op:'heal',pct:.10,to:'allies',perCounter:{counter:'momprep',add:.04,spend:true}},{op:'pep',n:1,to:'lowestPepAlly',needCounter:{id:'momprep',min:3}}],line:null,anim:{kind:'default',shape:'give'},
+  short:'The whole family heals a little. Mom Prep makes it more.',
   desc:'Snacks and sippy cups for everyone: the whole family heals 10%, plus 4% for each Mom Prep, which is used up. At 3 Mom Prep the family member with the least Pep gets 1 Pep.'};
 // Cool-Mist Humidifier: the family takes 25% less damage from thrown (projectile) acts and from acts that hit the whole family, for 2 turns, and every
 // monster is left Drenched. It deals no damage (the spec prints none).
 B3_SKILLS.cool_mist_humidifier={id:'cool_mist_humidifier',vibe:'olivia_mom',slot:'s2',name:'Cool-Mist Humidifier',pep:4,flavor:['drench'],power:0,hits:0,
   target:'self',tags:[],composure:0,party:true,effects:[{op:'status',id:'cool_mist',to:'allies'},{op:'status',id:'drenched',to:'foes'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Drenches every monster and softens attacks on the family.',
   desc:'Isla’s cool-mist humidifier: for 2 turns the family takes 25% less damage from thrown attacks and from attacks on everyone, and every monster is left Drenched.'};
 // Nap-Window Efficiency: the spec's "add 0 extra Recovery Ticks" has nothing to be compared with, so (my call) a Support Skill waits as little as a Basic
 // does: 80 instead of 100, which is 20% less. A Support Capstone gets the same 20%. A "Support Skill" deals no damage and builds no counter.
@@ -89,6 +96,7 @@ B3_QUIRKS.nap_window_efficiency={id:'nap_window_efficiency',vibe:'olivia_mom',na
 B3_SKILLS.michael_grab_the_kids={id:'michael_grab_the_kids',vibe:'olivia_mom',slot:'cap',name:'“Michael, Grab the Kids!”',pep:5,flavor:['racket'],power:0,hits:0,
   target:'self',tags:[],composure:0,party:true,
   effects:[{op:'push',n:25,to:'foes'},{op:'heal',pct:'party',to:'allies'},{op:'cleanse',group:'mental',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Pushes every monster back and heals the family a little.',
   desc:'Michael sprints across the field with a toddler under each arm and a hot dinner tray. Every monster is startled 25 ticks back on the turn bar, the whole family heals 15%, and Stun and every other Mental status come off the family.'};
 // Childproofed Locks: when a party-wide Skill of Olivia's heals or buffs the family, one random family member (Olivia too) gets Childproofed:
 // it blocks the next debuff aimed at them. Once per action however many heals and buffs it gave.

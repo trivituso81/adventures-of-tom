@@ -32923,7 +32923,7 @@
     "url": "https://claude.ai/code/session_01RXeukG7DbKW7f6Jcurm6Gj",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux2\""
    },
-   "next": "Waits on Build the new battle screen. Then writes the one plain line (60 characters at most) for every move of the 10 family members, about 120, plus the words for who a move reaches and what will happen, in your plain style. They show with DETAILS on and in the strip under the scene.",
+   "next": "Built and pushed as battleux2: every family move (80, plus Pick-Me-Up) has a one-line short, and the reach and forecast words are plainer. Tom does nothing; the next card, c-battleux3, adds the scene marks and removes the proposal page.",
    "prompt": {
     "what": "Writes the one plain line for every family move (about 120) and the words for reach and what will happen, shown by the new battle screen.",
     "before": [
@@ -32950,8 +32950,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: writing the short lines for the family moves and the reach and forecast words."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux2: short lines on all 80 family moves and Pick-Me-Up (7 of the mock drafts kept, 18 reworded), plainer reach and forecast words in data/b3-ux-words.js, and a data check in node tools/b3-sim.js check for a missing or too long line. Three longer chip words made the Duo strip overflow on The Big One, so they stay as before. Rules unchanged. Full list in docs/CHANGES.md."
     }
-   ]
+   ],
+   "after": "nothing for Tom: c-battleux3"
   },
   {
    "id": "c-battleux3",

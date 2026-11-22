@@ -20,17 +20,20 @@ B3_TRAITS.load_bearing_swing={id:'load_bearing_swing',vibe:'justin_basement',nam
   desc:'Justin waits 15% longer after a Clobber move. Once a round, a Clobber hit on a shielded monster, or one with at least his Defense, knocks 1 extra Composure pip off it.'};
 B3_SKILLS.stud_finder_beep_and_knock={id:'stud_finder_beep_and_knock',vibe:'justin_basement',slot:'basic',name:'Stud-Finder Beep & Knock',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'knocked_loose',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Clobber hits do more to it for 1 turn.',
   desc:'Light Clobber hit with a beeping stud finder. For 1 turn the monster takes 15% more damage from Clobber hits.'};
 // Demo-Day Prybar: a standard Clobber hit that first rips every shield and Guard Stance off the monster (so nothing soaks or softens it), then
 // blasts the broken barrier's value at the monsters standing next to it as Clobber splash. A shield's value is what it had left; a Guard
 // Stance's is 25% of the damage the hit did. With no barrier it is a plain standard hit. Broken shields set off "shield broken" listeners.
 B3_SKILLS.demo_day_prybar={id:'demo_day_prybar',vibe:'justin_basement',slot:'s1',name:'Demo-Day Prybar',pep:3,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'prybar'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Rips off its shields, then hits it and the ones beside it.',
   desc:'A standard Clobber hit that rips every shield and Guard Stance off the monster first. What they were worth blasts into the monsters next to it as Clobber splash.'};
 // Hang Fresh Drywall: the 2 family members next to Justin each get a wall that halves the next 2 melee or thrown hits aimed at them
 // (the status field `hits`, engine/b3-resolve.js b3WearDown). It lasts at most 3 turns if nobody tests it (my call).
 B3_SKILLS.hang_fresh_drywall={id:'hang_fresh_drywall',vibe:'justin_basement',slot:'s2',name:'Hang Fresh Drywall',pep:4,flavor:['support'],power:0,hits:0,
   target:'adjacent_allies',tags:[],composure:0,effects:[{op:'status',id:'drywall',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'A wall halves the next 2 hits on the family beside Justin.',
   desc:'Justin screws up a wall in front of the 2 family members next to him. It cuts the next 2 melee or thrown hits on each of them in half.'};
 // Measure Twice, Cut Once: a turn spent on a Support Skill (no damage) squares up his aim: his next Clobber or Razzle hit is a sure crit.
 B3_QUIRKS.measure_twice_cut_once={id:'measure_twice_cut_once',vibe:'justin_basement',name:'Measure Twice, Cut Once',
@@ -41,6 +44,7 @@ B3_QUIRKS.measure_twice_cut_once={id:'measure_twice_cut_once',vibe:'justin_basem
 B3_SKILLS.dropped_screw_toolbox_punt={id:'dropped_screw_toolbox_punt',vibe:'justin_basement',slot:'cap',name:'Dropped-Screw Toolbox Punt',pep:6,flavor:['clobber'],power:'capstone',hits:1,
   target:'foe',tags:[],composure:0,
   effects:[{op:'damage',bonus:{if:'targetHas',ids:['flustered'],add:1}},{op:'crack',n:.15,once:'toolbox',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Huge hit. Double damage on a Flustered monster.',
   desc:'A tiny screw lands on his foot, he hops on one leg, and the 80-pound toolbox flies: a capstone Clobber hit that does double damage to a Flustered monster. It cracks 15% of the monster’s Defense for the rest of the fight, once per monster.'};
 // Store-Bought Bread Peace Offering: any shield breaking, a family member's or a monster's, gives Justin 20% more Attack for 2 turns and 1 Pep,
 // once a round.
@@ -62,6 +66,7 @@ B3_TRAITS.live_circuit={id:'live_circuit',vibe:'justin_wire',name:'Live Circuit'
   desc:'A Dazzled or Drenched monster that Justin hits becomes Wired for 2 turns. Hitting a Wired monster arcs 30% of the damage to every other monster as Razzle.'};
 B3_SKILLS.voltage_tester_poke={id:'voltage_tester_poke',vibe:'justin_wire',slot:'basic',name:'Voltage-Tester Poke',pep:0,flavor:['razzle'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Leaves the monster Dazzled.',
   desc:'Light Razzle hit with a pocket voltage tester. It leaves the monster Dazzled.'};
 // "Don't Touch the Copper!" Banner: a light Razzle hit (my call, as for the Four-Tab Binder) and a copper banner strung between the monster and
 // the one standing next to it (the lower slot, if both sides have one) for 2 monster turns. Once a round, when either loses Composure the other
@@ -69,11 +74,13 @@ B3_SKILLS.voltage_tester_poke={id:'voltage_tester_poke',vibe:'justin_wire',slot:
 B3_SKILLS.dont_touch_the_copper_banner={id:'dont_touch_the_copper_banner',vibe:'justin_wire',slot:'s1',name:'“Don’t Touch the Copper!” Banner',pep:3,flavor:['razzle'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,
   effects:[{op:'damage'},{op:'status',id:'copper_link',to:'target'},{op:'status',id:'copper_link',to:'targetNeighbor'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light hit. Links two monsters to lose Composure together.',
   desc:'A light Razzle hit, and a light-up copper banner strung between the monster and the one next to it for 2 turns. Once a round, when one of them loses Composure, the other loses 1 pip too.'};
 // Main Breaker Flip: a heavy Razzle hit that cancels a wound-up act (the `interrupt` op) and blacks the monster out for 1 turn: its counter acts
 // (its passives) do not answer. Composure: 1 pip printed; the Pet Peeve pip and a Detonation's own pips add to it as for every Skill (cap 3).
 B3_SKILLS.main_breaker_flip={id:'main_breaker_flip',vibe:'justin_wire',slot:'s2',name:'Main Breaker Flip',pep:4,flavor:['razzle'],power:'heavy',hits:1,
   target:'foe',tags:[],composure:1,effects:[{op:'damage'},{op:'interrupt',to:'target'},{op:'status',id:'blackout',to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit. Stops its wind-up and knocks 1 Composure off.',
   desc:'A heavy Razzle hit and a blackout. The monster loses an attack it was winding up, and for 1 turn its counter attacks cannot answer. Knocks 1 Composure pip off.'};
 // Rubber-Soled Workboots: 30% less damage from Razzle and from Sizzle hits, and a Short Circuit! that Justin sets off gives him 1 more Pep.
 B3_QUIRKS.rubber_soled_workboots={id:'rubber_soled_workboots',vibe:'justin_wire',name:'Rubber-Soled Workboots',
@@ -84,6 +91,7 @@ B3_QUIRKS.rubber_soled_workboots={id:'rubber_soled_workboots',vibe:'justin_wire'
 B3_SKILLS.flashlight_block_rewire={id:'flashlight_block_rewire',vibe:'justin_wire',slot:'cap',name:'Flashlight Block Rewire',pep:6,flavor:['razzle'],power:'capstone',hits:1,
   target:'foe',tags:[],composure:0,
   effects:[{op:'damage'},{op:'splash',flavor:'razzle',share:.75,of:'dealt',to:'otherFoesLive'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Huge hit that jumps to every Wired or Drenched monster.',
   desc:'Flashlight in his teeth, Justin cross-wires the transformer: a capstone Razzle hit that chains 75% of its damage to every other monster that is Wired or Drenched.'};
 // Rare Heart-Emoji Text: when a hit of Justin's Breaks a monster or knocks one out, he stores a Static Charge: 40% more damage on his Razzle
 // hits through his next turn.

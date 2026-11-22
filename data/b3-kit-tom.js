@@ -16,19 +16,23 @@ B3_VIBES.tom_flier={id:'tom_flier',owner:'tom',name:'Frequent Flier',sig:1,lean:
   quirks:['upgrade_certificate','million_miler_status'],counter:null};
 B3_SKILLS.lounge_pass_flex={id:'lounge_pass_flex',vibe:'tom_flier',slot:'basic',name:'Lounge Pass Flex',pep:0,flavor:['racket'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'eyes_on_me',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_loungepass',shape:'cast',sound:{at:9,sfx:'ding'}},
+  short:'Light hit. Monsters aim at Tom more.',
   desc:'Light Racket hit. Eyes On Me: monsters aim at Tom more until his next turn ends.'};
 B3_SKILLS.zone_one_blockade={id:'zone_one_blockade',vibe:'tom_flier',slot:'s1',name:'Zone One Blockade',pep:2,flavor:['clobber'],power:0,hits:0,
   target:'self',tags:[],composure:0,effects:[{op:'status',id:'zone_one',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_blockade',shape:'cast',at:.5},
+  short:'For 2 turns, Tom hip-checks any monster that hits him.',
   desc:'For 2 turns, any monster that hits Tom with a melee or thrown attack gets a Clobber hip-check back.'};
 // The family next to Tom when he slides the doors shut are the ones covered (the status sits on them, engine/b3-ops.js `intercept`).
 B3_SKILLS.suite_door_slide={id:'suite_door_slide',vibe:'tom_flier',slot:'s2',name:'Suite Door Slide',pep:3,flavor:['support'],power:0,hits:0,
   target:'adjacent_allies',tags:[],composure:0,effects:[{op:'intercept',id:'suite_door'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'For 2 turns, Tom takes hits for the family beside him.',
   desc:'For 2 turns, a hit aimed only at the family next to Tom lands on Tom instead, 35% weaker. Each one he takes gives him 1 Pep.'};
 
 // Tarmac Porsche Transfer (Grand Capstone): the spec prints "heavy AoE" (heavy tier at the all-monsters share), "strips 1 buff"
 // and "locks aggro". My calls: 1 buff comes off each monster it hits, and the lock is a taunt that lasts 2 turns.
 B3_SKILLS.tarmac_porsche_transfer={id:'tarmac_porsche_transfer',vibe:'tom_flier',slot:'cap',name:'Tarmac Porsche Transfer',pep:5,flavor:['racket'],power:'heavy',hits:1,
   target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,to:'target'},{op:'taunt',id:'high_beams',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit on every monster. Then they all aim at Tom.',
   desc:'Heavy Racket hit on every monster. Each one it hits loses 1 buff. For 2 turns, any attack aimed at one family member has to aim at Tom.'};
 // Priority Boarding: the Guard Stance is put on as the fight begins and is counted like one Tom put on during his own turn,
 // so it lasts until his second turn ends and covers the monsters' first attacks (my call: counted from the fight's start it
@@ -81,18 +85,22 @@ B3_QUIRKS.new_game_plus={id:'new_game_plus',vibe:'tom_gamer',name:'New Game Plus
 // monster's next target early and holds it to that choice. The screen marks that family member NEXT TARGET.
 B3_SKILLS.cartridge_blow={id:'cartridge_blow',vibe:'tom_gamer',slot:'basic',name:'Cartridge Blow',pep:0,flavor:['racket'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'foresee'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light hit. Shows who the monster will attack next.',
   desc:'Light Racket hit. Shows who the monster will aim its next attack at, and it keeps to that.'};
 B3_SKILLS.controller_toss={id:'controller_toss',vibe:'tom_gamer',slot:'s1',name:'Controller Toss',pep:2,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'tookHit',add:.40}}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Hit. Stronger if Tom just took a hit.',
   desc:'Clobber hit. 40% stronger if Tom took or blocked a hit since his last turn.'};
 // Winged Shell Lock-On: the spec says "Smacks foe" (Clobber, 4 Pep) and a free Razzle explosion if it attacks. Both are standard
 // power (my call: the spec names no tier). The explosion is the shell's own status row (data/b3-status.js winged_shell).
 B3_SKILLS.winged_shell_lock_on={id:'winged_shell_lock_on',vibe:'tom_gamer',slot:'s2',name:'Winged Shell Lock-On',pep:4,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'winged_shell',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Hit. If it attacks before Tom’s turn, the shell explodes.',
   desc:'Clobber hit. A blue winged shell hovers over the monster until Tom’s next turn. If it attacks before then, the shell slams down in a free Razzle explosion.'};
 // Konami Code (Grand Capstone): 6 Pep, Razzle, heavy at the all-monsters share, 2 Composure pips, and each monster's crit chance
 // rises 15% for every Prime on it. "Tom glows rainbow-invincible" is the picture only (my call: nothing acts during his own
 // action, so a rule would change nothing; it is not a turn of untargetable).
 B3_SKILLS.konami_code={id:'konami_code',vibe:'tom_gamer',slot:'cap',name:'Konami Code',pep:6,flavor:['razzle'],power:'heavy',hits:1,
   target:'all_foes',tags:[],composure:2,effects:[{op:'damage',critPerPrime:.15}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit on every monster. Knocks 2 Composure off each.',
   desc:'Heavy Razzle hit on every monster, knocking 2 Composure pips off each. Each monster is 15% more likely to crit for every Prime on it.'};

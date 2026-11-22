@@ -1,9 +1,161 @@
+## battleux2 (2026-11-21): every family move now has one plain line that says what it does
+
+Card c-battleux2. Wrote a `short` line (60 characters at most) on all 80 family moves of the 10 members in `data/b3-kit-*.js`, plus Pick-Me-Up in `data/b3-rules.js`. The new battle screen shows it under each move when DETAILS is on, and in the strip on a phone held sideways (where the strip has room for one line instead of the full description). Rules and numbers did not change; these are not spoken lines, so nothing to bake.
+
+- Started from the mock's drafts for Tom, Grace, Rose and Deedee: 7 kept word for word, 18 reworded to drop formulas (percent signs, "debuffs", "crit") or fix what they said ("burns" on moves that do not burn). Words used for a kid: "boosts" for buffs, "bad effects" for debuffs, "attack up close" for melee. Status and game words the screen already shows (Pep, Composure, Pet Peeve, Toasty, Dazzled, Drenched, Cadence, Reps) stay.
+- `data/b3-ux-words.js`, words only: reach of a floor move "The monsters’ floor" is now "The whole floor" (Grand Amphora sits in front of the family, so the old words were wrong for it); "Composure -2 (4 of 6 left)" is now "Composure down 2, 4 left"; "Comes sooner by N on the turn bar" is now "Moves up N on the turn bar"; "Nothing to aim" is now "No aim needed"; "Not a target for this move" is now "This move can’t aim here"; the two Ruckus lines no longer say "+50% power" or "fire". I tried "Pet Peeve: 50% more", "Heals N HP" and "Shield of N" too: the longer chips made the strip overflow on the Duo (layout test, The Big One), so those three stay as they were.
+- New data check: `node tools/b3-sim.js check` fails on a family move with no short line, one over 60 characters or one with an em dash (tested by breaking one line: it failed, then passed again).
+- Tested: `node tools/b3-sim.js check` (3587 checks, FAILS []), `python3 tools/b3_layout_test.py` (all seven sizes; the Duo again after the chip fix), `python3 tools/b3_test.py` for fights new1 to new6 and the stage 3 and stage 7 sections (all pass; the full 66-fight run takes hours and was stopped there), `python3 tools/smoke.py`. Looked at the Duo unfolded with DETAILS on and off (two Mudlings, The Big One with Amy, Justin and Olivia) and the iPhone upright.
+- Seen and left alone: on the iPhone upright the strip shows the first 2 lines of the full description (a tap on the strip opens the rest), as battleux1 built it.
+- Also removed a leftover merge marker line (`>>>>>>> 15a84a83`) at the top of this file from an earlier push.
+
+The full list:
+
+**Tom** (draft: kept, changed, or new where the mock had none)
+
+| Move | Line | Draft |
+|---|---|---|
+| Lounge Pass Flex | Light hit. Monsters aim at Tom more. | kept |
+| Zone One Blockade | For 2 turns, Tom hip-checks any monster that hits him. | changed |
+| Suite Door Slide | For 2 turns, Tom takes hits for the family beside him. | changed |
+| Tarmac Porsche Transfer | Heavy hit on every monster. Then they all aim at Tom. | changed |
+| Cartridge Blow | Light hit. Shows who the monster will attack next. | new |
+| Controller Toss | Hit. Stronger if Tom just took a hit. | changed |
+| Winged Shell Lock-On | Hit. If it attacks before Tom’s turn, the shell explodes. | kept |
+| Konami Code | Heavy hit on every monster. Knocks 2 Composure off each. | changed |
+
+**Grace** (draft: kept, changed, or new where the mock had none)
+
+| Move | Line | Draft |
+|---|---|---|
+| Soup-Dumpling Squeeze | Light hit. The next family member to hit it gets 1 Pep. | changed |
+| NeeDoh Stretch Pass | Pulls one family member up to act right after Grace. | kept |
+| Crunchy Sugar-Cube Pop | Light hit. Stops the move it’s winding up, pushes it back. | changed |
+| Colossal Diamond-Gold Dumpling | One family member uses a Skill right now, free. | kept |
+| Glitter-Brush Flick | Light hit. Leaves the monster Dazzled. | new |
+| Open-String Violin Screech | Hits every monster and makes them weaker for 2 turns. | changed |
+| Bedazzle-Gun Glue Trap | For 2 rounds, monsters that move take a hit and wait longer. | changed |
+| Masterpiece Portrait Makeover | Heavy hit. Razzle becomes its Pet Peeve. | kept |
+
+**Rose** (draft: kept, changed, or new where the mock had none)
+
+| Move | Line | Draft |
+|---|---|---|
+| Lamb-Tuck Ankle Tackle | Two quick hits on one monster. | kept |
+| The Floor Is Lava! | Three hops onto random monsters. | kept |
+| "Giddyup, Tata!" Launch | Powers up the next family member, then a heavy hit. | new |
+| Double-Lamby Return-Cart Blitz | Six bounces onto random monsters. | changed |
+| Pocket Pretzel & Pat | Light hit, then a tiny heal for whoever is hurt most. | new |
+| Tattered Lamby Boomerang | Light hit now, two more next turn, and a small shield. | changed |
+| Sofa-Cushion Citadel | Shields the whole family. Nobody gets pushed back. | changed |
+| Kingdom of Ten-Thousand Blankets | Big heal for one family member, then a hit on every monster. | changed |
+
+**Deedee** (draft: kept, changed, or new where the mock had none)
+
+| Move | Line | Draft |
+|---|---|---|
+| Windex Spritz | Light hit. Leaves it Drenched, so it misses more. | changed |
+| Wet-Floor Hazard | The next 2 monsters to attack up close slip and fall. | changed |
+| "Hand Me My Glasses" Scrub | Scrubs off its boosts, then hits harder for each one. | new |
+| Fifty-Year Dust Tsunami | Scrubs every monster clean, then a heavy wave Drenches all. | changed |
+| "Little Pinch!" Syringe Poke | Light jab. For 1 turn, it takes big hits more often. | new |
+| Deedee Makes It Better | Heals one family member and clears their bad effects. | changed |
+| "Bring a Jacket!" Ward | Two family members heal each turn and survive one big hit. | new |
+| To the Moon & Back | Revives or fully heals one, then hits every monster. | changed |
+
+**TNB**
+
+| Move | Line |
+|---|---|
+| Wheel-Thrown Lump | Light hit. Slows the monster down for 2 turns. |
+| Center the Bowl | Clay shield on one family member. Clears Toasty and Bleed. |
+| Three-AM Kiln Firing | Hits all monsters, leaves them Toasty, family gets stronger. |
+| Grand Amphora Masterpiece | A big vase blocks 2 attacks, then smashes every monster. |
+| Longboard Push & Carve | Light hit. TNB’s next turn comes a little sooner. |
+| E-Bike Tag-Along | Powers up one family member and clears their bad effects. |
+| Waymo Tailgate Rescue | Hits and blinds every monster, and helps one family member. |
+| Baxter Hill Longboard Express | Heavy hit on every monster. Leaves them Dazzled. |
+
+**Amy**
+
+| Move | Line |
+|---|---|
+| Kettlebell Swing | Light hit. Builds a Rep, and Amy’s next turn comes sooner. |
+| Burpee Blitz | Hit. With 3 Reps, Amy gets a bonus turn right away. |
+| Pace-Partner Run | One family member keeps up with Amy’s speed for 2 turns. |
+| Follow-Along Finale Burnout | Huge hit on every monster. Each Rep makes it stronger. |
+| “Eyes on Me” Clap | Light hit. Knocks off one of its speed or dodge boosts. |
+| Four-Tab Binder | Light hit. Two different flavors on it in a round earn Pep. |
+| Gold-Star Sticker | One family member’s moves get stronger and can’t miss. |
+| Classroom Lights-Out Reset | Heavy hit on every monster. Stops whole-family attacks. |
+
+**Justin**
+
+| Move | Line |
+|---|---|
+| Stud-Finder Beep & Knock | Light hit. Clobber hits do more to it for 1 turn. |
+| Demo-Day Prybar | Rips off its shields, then hits it and the ones beside it. |
+| Hang Fresh Drywall | A wall halves the next 2 hits on the family beside Justin. |
+| Dropped-Screw Toolbox Punt | Huge hit. Double damage on a Flustered monster. |
+| Voltage-Tester Poke | Light hit. Leaves the monster Dazzled. |
+| “Don’t Touch the Copper!” Banner | Light hit. Links two monsters to lose Composure together. |
+| Main Breaker Flip | Heavy hit. Stops its wind-up and knocks 1 Composure off. |
+| Flashlight Block Rewire | Huge hit that jumps to every Wired or Drenched monster. |
+
+**Boppy**
+
+| Move | Line |
+|---|---|
+| Warden’s Nightstick Rap | Light hit. The monster hits softer on its next turn. |
+| “Nobody Gets Past Me!” | For 2 turns, monsters must attack Boppy, and he’s tougher. |
+| 1970 Cross-Country Story | Slows Boppy and one monster, and it has to aim at Boppy. |
+| Warden’s Iron Gate | For 2 rounds, a gate softens attacks on the whole family. |
+| Seeds of Trouble | Light hit. Leaves the monster Toasty. |
+| “It’s Nothing, It’s Fine” Chomp | Boppy heals a little and his Sizzle hits get stronger. |
+| 1989 Pickle-Jar Bomb | Hits every monster. Toasty ones burn twice as hard. |
+| The Ghost One That Looks Back | Heavy hit on every monster. Their burns go off twice. |
+
+**Olivia**
+
+| Move | Line |
+|---|---|
+| Rusty Speed-Rope Snap | Light hit. Builds 1 Cadence. |
+| Criss-Cross Double-Under | A flurry of hits, plus one more for each Cadence. |
+| “Better Than Bobby!” Hype | Builds 1 Cadence, and Olivia’s next turn comes sooner. |
+| Regional Championship Freestyle | Four fast hits, plus one more for each Cadence. |
+| Baby-Wipe Swipe | Light hit on a monster, or a small heal for family. |
+| Diaper-Bag Snack Drop | The whole family heals a little. Mom Prep makes it more. |
+| Cool-Mist Humidifier | Drenches every monster and softens attacks on the family. |
+| “Michael, Grab the Kids!” | Pushes every monster back and heals the family a little. |
+
+**Nara**
+
+| Move | Line |
+|---|---|
+| Startled Water-Bowl Flip | Light hit. Leaves the monster Drenched. |
+| Jittery Shake-It-Off | Drenches every monster. Nara dodges more for 1 turn. |
+| Vacuum-Cleaner Bolt! | Light hit on a row of monsters, then Nara hides behind Tom. |
+| “Don’t Leave Me!” Meltdown | Heavy hit on every monster. Sets off Toasty and Dazzled. |
+| Grip-Chicken Snap | Quick bite. Heals Nara if the monster has a bad effect. |
+| Relentless Tug-of-War | Hit. The monster is weaker for 2 turns. |
+| “No Take, Only Throw!” | Hit. Nara steals one of its boosts for herself. |
+| Stunt-Double Squirrel Intercept | Three pounces that go right through shields. |
+
+**Anyone**
+
+| Move | Line |
+|---|---|
+| Pick-Me-Up | Gets a knocked-out family member back on their feet. |
+
+
 ## 2026-11-22 (3): Art Library bake, prop-gate-backlot-stage7-open (`artbake1587`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
 - prop-gate-backlot-stage7-open: background keyed from the corner colour rgb(209, 3, 87)
 - prop-gate-backlot-stage7-open: `bake_gate_art.py backlot-stage7 open` ran from art/raw/props/prop-gate-backlot-stage7-open-v2.png
 - Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
+
 
 ## nightgreen (2026-11-22): every night test is off the known failures
 
@@ -15,6 +167,8 @@ Card c-nightgreen, last row. The test was wrong, the game was fine. After the fo
 - `tools/ch20_test.py`: once no barrier is up, set the Leviathan to 5 HP and finish it with Attack.
 - `tools/night/tests.json`: `known_fail` removed from `ch20_test`; `minutes` 10 to 5 (measured 223 s and 222 s, two runs in a row, down from about 16 minutes).
 - Tested: `python3 -I tools/ch20_test.py` passes twice (all checks, including shatter scene to Julian, calm and epilogue to the end, game complete flag); `python3 tools/night/manifest_check.py` ok. Nothing in the game changed, so nothing to play on a phone.
+
+
 
 ## artwan2 (2026-11-21): Art Library pictures on WAN no longer fail on long prompts
 

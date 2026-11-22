@@ -9,14 +9,17 @@ B3_VIBES.deedee_neat={id:'deedee_neat',owner:'deedee',name:'Neat Freak',sig:1,le
   quirks:['car_crumb_vacuum','spit_shine'],counter:null};
 B3_SKILLS.windex_spritz={id:'windex_spritz',vibe:'deedee_neat',slot:'basic',name:'Windex Spritz',pep:0,flavor:['drench'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'windexed',to:'target'}],line:null,anim:{kind:'clip',clip:'deedee_windex',shape:'cast'},
+  short:'Light hit. Leaves it Drenched, so it misses more.',
   desc:'Light Drench hit. Leaves the monster Drenched, and its attacks miss 15% of the time for 2 turns.'};
 B3_SKILLS.wet_floor_hazard={id:'wet_floor_hazard',vibe:'deedee_neat',slot:'s1',name:'Wet-Floor Hazard',pep:3,flavor:['drench'],power:0,hits:0,
   target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'wet_floor'}],line:null,anim:{kind:'clip',clip:'deedee_wetfloor',shape:'cast'},
+  short:'The next 2 monsters to attack up close slip and fall.',
   desc:'Mops the monsters\u2019 floor. The next 2 monsters to use a melee attack slip: a light Clobber fall, and that attack does 25% less damage.'};
 // "Hand Me My Glasses" Scrub: every buff comes off first, then one standard Clobber hit that is 25% stronger for each buff removed
 // (my call: the spec's "+25% Drench dmg/buff removed" is added to this Skill's own hit, which the spec lists as Clobber).
 B3_SKILLS.hand_me_my_glasses_scrub={id:'hand_me_my_glasses_scrub',vibe:'deedee_neat',slot:'s2',name:'"Hand Me My Glasses" Scrub',pep:4,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'strip',kind:'buff',all:true,to:'target'},{op:'damage',bonus:{per:'stripped',add:.25}}],line:null,anim:{kind:'clip',clip:'deedee_scrub',shape:'strike'},
+  short:'Scrubs off its boosts, then hits harder for each one.',
   desc:'Scrubs every buff off one monster, then a Clobber hit that is 25% stronger for each buff scrubbed away.'};
 
 // Fifty-Year Dust Tsunami (Grand Capstone): the wave scrubs first (every buff off every monster, and whatever the monsters laid
@@ -25,6 +28,7 @@ B3_SKILLS.hand_me_my_glasses_scrub={id:'hand_me_my_glasses_scrub',vibe:'deedee_n
 // normal rule (not one whose Toasty it set off: spec 2.5).
 B3_SKILLS.fifty_year_dust_tsunami={id:'fifty_year_dust_tsunami',vibe:'deedee_neat',slot:'cap',name:'Fifty-Year Dust Tsunami',pep:5,flavor:['drench'],power:'heavy',hits:1,
   target:'all_foes',tags:[],composure:0,effects:[{op:'strip',kind:'buff',all:true,to:'target'},{op:'strip',kind:'hazard'},{op:'damage'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Scrubs every monster clean, then a heavy wave Drenches all.',
   desc:'Scrubs every buff off every monster and clears anything they left on the family\u2019s floor. Then a heavy Drench wave hits them all and leaves them Drenched.'};
 // Spotless Floor: "a Drenched foe" is one that is Drenched when the pips come off, or whose Drenched this same action set off
 // (Deedee's Scrub on a Drenched monster is a Hydro-Slip!, which uses the Drenched up before the pips are counted). The extra
@@ -62,11 +66,13 @@ B3_QUIRKS.warm_beats_cold={id:'warm_beats_cold',vibe:'deedee_nurse',name:'"Warm 
   desc:'Deedee cannot be Stunned or Slowed. When she cleanses a family member, she heals 10% of her own HP.'};
 B3_SKILLS.little_pinch_syringe_poke={id:'little_pinch_syringe_poke',vibe:'deedee_nurse',slot:'basic',name:'"Little Pinch!" Syringe Poke',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'pinched',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light jab. For 1 turn, it takes big hits more often.',
   desc:'Light Clobber jab. Attacks against that monster crit 15% more often for 1 turn.'};
 // Deedee Makes It Better: the spec's "snappy single heal" has no size, so it is the standard heal (20% of Max HP). She can use it
 // on herself. The +20% Attack lands only when the cleanse cleared something, and lasts the common 2 turns (my call).
 B3_SKILLS.deedee_makes_it_better={id:'deedee_makes_it_better',vibe:'deedee_nurse',slot:'s1',name:'Deedee Makes It Better',pep:2,flavor:['support'],power:0,hits:0,
   target:'family',tags:[],composure:0,effects:[{op:'heal',pct:'standard'},{op:'cleanse'},{op:'status',id:'all_better',when:'cleansed'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Heals one family member and clears their bad effects.',
   desc:'Heals one family member for 20% of their HP and clears every debuff on them. If something was cleared, they get 20% more Attack for 2 turns.'};
 
 // "Bring a Jacket!" Ward: the pick and the family member with the smallest share of HP left (target kind ally_pair). The Extra Jacket status
@@ -74,6 +80,7 @@ B3_SKILLS.deedee_makes_it_better={id:'deedee_makes_it_better',vibe:'deedee_nurse
 B3_SKILLS.bring_a_jacket_ward={id:'bring_a_jacket_ward',vibe:'deedee_nurse',slot:'s2',name:'"Bring a Jacket!" Ward',pep:4,flavor:['support'],power:0,hits:0,
   target:'ally_pair',tags:[],composure:0,cooldown:3,
   effects:[{op:'status',id:'jacket',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Two family members heal each turn and survive one big hit.',
   desc:'Deedee bundles two family members in extra jackets: the one you pick and whoever is hurt most. They heal a little each turn for 3 turns, and the first hit that would knock them out leaves them on 1 HP. Deedee needs 3 rounds before she can do it again.'};
 // To the Moon & Back (Grand Capstone): a knocked-out family member comes back at 80% HP, anyone else heals to full. Then a heavy Sizzle
 // wave at the all-monsters share hits every monster and shaves 2 Composure (the spec says "warm Sizzle shockwave shaving 2 Composure"; the tier is my call).
@@ -81,4 +88,5 @@ B3_SKILLS.to_the_moon_and_back={id:'to_the_moon_and_back',vibe:'deedee_nurse',sl
   target:'family_or_ko',tags:[],composure:2,
   effects:[{op:'revive',hp:.80,to:'target'},{op:'heal',pct:1,to:'target',when:'notRevived'},{op:'damage',flavor:['sizzle'],power:'heavy',aoe:true,to:'foes'}],
   line:null,anim:{kind:'default',shape:'give'},
+  short:'Revives or fully heals one, then hits every monster.',
   desc:'A full moon rises. A knocked-out family member gets back up with 80% of their HP; anyone else heals all the way. Then a heavy wave of Sizzle warmth hits every monster and knocks 2 Composure off each.'};

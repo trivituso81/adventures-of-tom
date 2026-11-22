@@ -21,17 +21,20 @@ B3_TRAITS.nervous_vibrations={id:'nervous_vibrations',vibe:'nara_pup',name:'Nerv
 // Back-row discount, so the row does not change it).
 B3_SKILLS.startled_water_bowl_flip={id:'startled_water_bowl_flip',vibe:'nara_pup',slot:'basic',name:'Startled Water-Bowl Flip',pep:0,flavor:['drench'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Leaves the monster Drenched.',
   desc:'Light Drench hit when Nara jumps at a noise and flips her water bowl. The monster is Drenched.'};
 // Jittery Shake-It-Off: the spec's "AoE Drenched" is the Drenched Prime on every monster with no damage (the ops list says so); it clears Nara's
 // debuffs and gives her +25% Evasion for 1 turn.
 B3_SKILLS.jittery_shake_it_off={id:'jittery_shake_it_off',vibe:'nara_pup',slot:'s1',name:'Jittery Shake-It-Off',pep:3,flavor:['drench'],power:0,hits:0,
   target:'all_foes',tags:[],composure:0,effects:[{op:'status',id:'drenched',to:'foes'},{op:'cleanse',to:'self'},{op:'status',id:'jitter_shake',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Drenches every monster. Nara dodges more for 1 turn.',
   desc:'A full-body nervous shake sprays every monster: they are all Drenched. It clears Nara’s debuffs, and she dodges 25% more attacks for 1 turn.'};
 // Vacuum-Cleaner Bolt!: a light Clobber hit on one row of monsters (a row hits like an AoE, at 70%: the tier is my call), kicked debris cuts their
 // accuracy 20% for 2 turns, and Nara hides behind Tom's legs: 50% less damage from an attack on the whole family for 1 turn. "Tom's legs" is the
 // picture: it works whoever is in the family.
 B3_SKILLS.vacuum_cleaner_bolt={id:'vacuum_cleaner_bolt',vibe:'nara_pup',slot:'s2',name:'Vacuum-Cleaner Bolt!',pep:3,flavor:['clobber'],power:'light',hits:1,
   target:'foe_row',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'debris',to:'target'},{op:'status',id:'behind_legs',to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit on a row of monsters, then Nara hides behind Tom.',
   desc:'Nara spots the vacuum and bolts, kicking debris at a row of monsters: a light Clobber hit on each, and each misses 20% more for 2 turns. Then she hides behind Tom’s legs and takes 50% less damage from an attack on the whole family for 1 turn.'};
 // "Where Are You Going?!": when a monster's attack misses her, she darts to the family's side: +1 Pep for her and that monster is Drenched.
 B3_QUIRKS.where_are_you_going={id:'where_are_you_going',vibe:'nara_pup',name:'“Where Are You Going?!”',
@@ -42,6 +45,7 @@ B3_QUIRKS.where_are_you_going={id:'where_are_you_going',vibe:'nara_pup',name:'�
 // sets off Toasty as Steam Cloud!, the Racket part sets off Dazzled as Sensory Overload!, and a Drenched or second Prime goes the same way).
 B3_SKILLS.dont_leave_me_meltdown={id:'dont_leave_me_meltdown',vibe:'nara_pup',slot:'cap',name:'“Don’t Leave Me!” Meltdown',pep:5,flavor:['drench','racket'],power:'heavy',hits:1,
   target:'all_foes',tags:[],composure:0,detonatesAll:true,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit on every monster. Sets off Toasty and Dazzled.',
   desc:'A 9 AM front-door howl and frantic circles: a heavy Drench and Racket hit on every monster. It sets off every Toasty and Dazzled on them at once.'};
 // Pressed Against Your Shins: her Attack also grows by half of the Speed bonuses she wears (`shins`, engine/b3-core.js b3Stat). The bonuses counted
 // are the positive Speed mods of her statuses and Quirks (an E-Bike, a NeeDoh squeeze), not her Lean, and a Slow does not take any away.
@@ -64,14 +68,17 @@ B3_TRAITS.locked_on_the_gold_ball={id:'locked_on_the_gold_ball',vibe:'nara_guard
 // (Slow, Stun, Blind, Fatigue, Bleed, Cracked-style debuffs; a Prime alone is not one: my call).
 B3_SKILLS.grip_chicken_snap={id:'grip_chicken_snap',vibe:'nara_guard',slot:'basic',name:'Grip-Chicken Snap',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'heal',pct:.05,to:'self',when:'targetDebuffed'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Quick bite. Heals Nara if the monster has a bad effect.',
   desc:'Quick Clobber bite. If the monster has a debuff on it, Nara gets a plain-chicken snack and heals 5% of her HP.'};
 B3_SKILLS.relentless_tug_of_war={id:'relentless_tug_of_war',vibe:'nara_guard',slot:'s1',name:'Relentless Tug-of-War',pep:3,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'tugged',to:'target'},{op:'strip',kind:'stance',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Hit. The monster is weaker for 2 turns.',
   desc:'Nara clamps on and pulls. A standard Clobber hit, the monster has 25% less Attack and Defense for 2 turns, and she yanks it out of any stance.'};
 // "No Take, Only Throw!": a standard Clobber hit, then she rips the heaviest buff off the monster and wears it for the turns it had left. If it had
 // no buff she could take (none, or the Big One's crown, which is stuck on: `noSteal`), she gets +35% Attack for 2 turns instead.
 B3_SKILLS.no_take_only_throw={id:'no_take_only_throw',vibe:'nara_guard',slot:'s2',name:'“No Take, Only Throw!”',pep:3,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'steal',n:1,to:'target'},{op:'status',id:'gold_grip',to:'self',when:'notStolen'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Hit. Nara steals one of its boosts for herself.',
   desc:'Nara clenches the gold tennis ball in her teeth. A standard Clobber hit, and she rips one buff off the monster to wear herself. If there is no buff to take, she gets 35% more Attack for 2 turns instead.'};
 // Sandbox Clue Digger: at the start of every fight, and again when a Boss Breaks, she digs up one treasure (b3Treasure): a Pep Bone (2 Pep for
 // whoever has the least), a Squeaky Toy (a light Racket squeak on a random monster) or a Chicken Strip (15% HP for whoever has the least HP left).
@@ -82,6 +89,7 @@ B3_QUIRKS.sandbox_clue_digger={id:'sandbox_clue_digger',vibe:'nara_guard',name:'
 // a wave), that ignore shields and Evasion (`pierce`), and do 40% more to a My Toy or Flustered monster.
 B3_SKILLS.stunt_double_squirrel_intercept={id:'stunt_double_squirrel_intercept',vibe:'nara_guard',slot:'cap',name:'Stunt-Double Squirrel Intercept',pep:6,flavor:['clobber'],power:'capstone',hits:3,
   target:'foe',tags:[],composure:0,effects:[{op:'damage',pierce:true,bonus:{if:'targetHas',ids:['my_toy','flustered'],add:.40}}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Three pounces that go right through shields.',
   desc:'Nara flashes her HORSE STUNT DOUBLE lanyard and pounces three times. The hits ignore shields and Evasion, and do 40% more to a monster that is My Toy or Flustered.'};
 // Forty-Pound Counterweight: when another family member hits a My Toy monster, Nara is pulled 15 ticks up the turn bar (once an action).
 B3_QUIRKS.forty_pound_counterweight={id:'forty_pound_counterweight',vibe:'nara_guard',name:'Forty-Pound Counterweight',

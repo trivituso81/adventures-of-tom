@@ -104,6 +104,9 @@ function check() {
   const base={party:['tom','grace','rose','deedee'],level:2};
   // 1. Data (before any test row is added)
   const bad=G('b3CheckData')(); ok(bad.length===0,'data check: '+bad.join('; '));
+  // battleux2: every family move (and Pick-Me-Up) has its one plain line for the battle screen, 60 characters at most, no em dash.
+  { const V=G('B3_VIBES'),C=G('B3_CAST'),badS=Object.values(SK).filter(S=>(S.common||(V[S.vibe]&&C[V[S.vibe].owner]))&&(typeof S.short!=='string'||!S.short.trim()||S.short.length>60||/—/.test(S.short)));
+    ok(badS.length===0,'every family move has a short line of 60 characters at most: '+badS.map(S=>S.id+' ('+(typeof S.short==='string'?S.short.length:'none')+')').join(', ')); }
   // Test moves (one per flavor) and test statuses, added to the sandbox only.
   for(const fl of ['clobber','sizzle','drench','razzle','racket'])
     SK['t_'+fl]={id:'t_'+fl,vibe:'tom_flier',slot:'s1',name:'Test '+fl,pep:0,flavor:[fl],power:'standard',hits:1,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};

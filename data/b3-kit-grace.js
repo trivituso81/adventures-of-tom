@@ -8,14 +8,17 @@ B3_VIBES.grace_squishy={id:'grace_squishy',owner:'grace',name:'Squishy Collector
   quirks:['slow_rise_memory_foam','ultra_rare_limited_edition'],counter:null};
 B3_SKILLS.soup_dumpling_squeeze={id:'soup_dumpling_squeeze',vibe:'grace_squishy',slot:'basic',name:'Soup-Dumpling Squeeze',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'squished',to:'target'}],line:null,anim:{kind:'clip',clip:'grace_squeeze',shape:'strike'},
+  short:'Light hit. The next family member to hit it gets 1 Pep.',
   desc:'Light Clobber hit. The next other family member to hit that monster gains 1 Pep.'};
 B3_SKILLS.needoh_stretch_pass={id:'needoh_stretch_pass',vibe:'grace_squishy',slot:'s1',name:'NeeDoh Stretch Pass',pep:3,flavor:['support'],power:0,hits:0,
   target:'ally',tags:[],composure:0,effects:[{op:'place',where:'next'},{op:'status',id:'stress_melted',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Pulls one family member up to act right after Grace.',
   desc:'Pulls one family member up the turn bar to act right after Grace, with 20% more Speed for 2 turns. Once a round for each person.'};
 // Crunchy Sugar-Cube Pop: 4 Pep and the full 30-tick push (decision 3 in claude/battle-v11-decisions.md). Light power is my call:
 // the spec names no damage tier, and the cancel and the push are what the 4 Pep buys.
 B3_SKILLS.crunchy_sugar_cube_pop={id:'crunchy_sugar_cube_pop',vibe:'grace_squishy',slot:'s2',name:'Crunchy Sugar-Cube Pop',pep:4,flavor:['racket'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'interrupt',to:'target'},{op:'push',n:30,to:'target'}],line:null,anim:{kind:'clip',clip:'grace_cubepop',shape:'cast'},
+  short:'Light hit. Stops the move it’s winding up, pushes it back.',
   desc:'Light Racket hit. Cancels the attack a monster is winding up and pushes it 30 ticks back on the turn bar.'};
 
 // Colossal Diamond-Gold Dumpling (Grand Capstone): one family member takes a Skill of 4 Pep or less at once, for free, and
@@ -23,6 +26,7 @@ B3_SKILLS.crunchy_sugar_cube_pop={id:'crunchy_sugar_cube_pop',vibe:'grace_squish
 // already had one, or who has no such Skill to use, cannot be chosen. My call: "any skill" means a Skill, never the Basic.
 B3_SKILLS.colossal_diamond_gold_dumpling={id:'colossal_diamond_gold_dumpling',vibe:'grace_squishy',slot:'cap',name:'Colossal Diamond-Gold Dumpling',pep:6,flavor:['support'],power:0,hits:0,
   target:'ally',tags:[],composure:0,effects:[{op:'pep',n:1,to:'self'},{op:'pep',n:1,to:'target'},{op:'grant',maxPep:4,free:true,to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'One family member uses a Skill right now, free.',
   desc:'One family member uses a Skill of 4 Pep or less right now, for free, without losing their place on the turn bar. Grace and that family member each gain 1 Pep. Once a round for each person.'};
 // Sensory Satisfying: judged as Grace's turn ends. If the very next face on the turn bar is family, they get So Satisfying
 // for their next turn. My call: "skill potency" is damage dealt and heals and shields given.
@@ -62,18 +66,22 @@ B3_QUIRKS.double_coat={id:'double_coat',vibe:'grace_craft',name:'Double Coat',
   desc:'When Grace follows a Razzle Skill with a Racket Skill, or the other way round, the second one knocks 1 Composure pip off for free.'};
 B3_SKILLS.glitter_brush_flick={id:'glitter_brush_flick',vibe:'grace_craft',slot:'basic',name:'Glitter-Brush Flick',pep:0,flavor:['razzle'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Light hit. Leaves the monster Dazzled.',
   desc:'Light Razzle hit. Leaves the monster Dazzled.'};
 // Open-String Violin Screech: standard power at the all-monsters share (70%). It sets off Dazzled by the normal Racket rule.
 B3_SKILLS.open_string_violin_screech={id:'open_string_violin_screech',vibe:'grace_craft',slot:'s1',name:'Open-String Violin Screech',pep:3,flavor:['racket'],power:'standard',hits:1,
   target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'off_key',to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Hits every monster and makes them weaker for 2 turns.',
   desc:'Racket hit on every monster. Each one it hits has 20% less Attack for 2 turns. It sets off Dazzled.'};
 // Bedazzle-Gun Glue Trap: lays the Glue Trap hazard (data/b3-status.js) on the monsters' floor for 2 rounds.
 B3_SKILLS.bedazzle_gun_glue_trap={id:'bedazzle_gun_glue_trap',vibe:'grace_craft',slot:'s2',name:'Bedazzle-Gun Glue Trap',pep:4,flavor:['sizzle'],power:0,hits:0,
   target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'glue_trap'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'For 2 rounds, monsters that move take a hit and wait longer.',
   desc:'Covers the monsters\u2019 floor in hot glue and rhinestones for 2 rounds. Every monster that acts takes a light Sizzle and Razzle hit and waits 20% longer after its move.'};
 // Masterpiece Portrait Makeover (Grand Capstone): heavy Razzle on one monster, then Razzle becomes one of its Pet Peeves for 2 of
 // its turns. The damage comes first, so the blast itself does not use the weakness (my call: the spec says "forcing temporary
 // weakness", which is for the hits that follow).
 B3_SKILLS.masterpiece_portrait_makeover={id:'masterpiece_portrait_makeover',vibe:'grace_craft',slot:'cap',name:'Masterpiece Portrait Makeover',pep:5,flavor:['razzle'],power:'heavy',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'razzle_weak',to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit. Razzle becomes its Pet Peeve.',
   desc:'Heavy Razzle hit. For 2 of its turns Razzle is one of that monster\u2019s Pet Peeves: Razzle hits do 50% more and knock a Composure pip off.'};

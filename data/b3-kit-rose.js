@@ -10,15 +10,18 @@ B3_VIBES.rose_sugar={id:'rose_sugar',owner:'rose',name:'Sugar Rush',sig:1,lean:'
   quirks:['twin_lamb_relay','its_our_longboard_now'],counter:null};
 B3_SKILLS.lamb_tuck_ankle_tackle={id:'lamb_tuck_ankle_tackle',vibe:'rose_sugar',slot:'basic',name:'Lamb-Tuck Ankle Tackle',pep:0,flavor:['clobber'],power:'light',hits:2,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'clip',clip:'rose_tackle',shape:'strike'},
+  short:'Two quick hits on one monster.',
   desc:'Two quick Clobber hits on one monster.'};
 B3_SKILLS.the_floor_is_lava={id:'the_floor_is_lava',vibe:'rose_sugar',slot:'s1',name:'The Floor Is Lava!',pep:3,flavor:['clobber'],power:'standard',hits:3,
   target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['toasty','dazzled'],add:.25}}],line:null,anim:{kind:'clip',clip:'rose_lava',shape:'strike'},
+  short:'Three hops onto random monsters.',
   desc:'Three Clobber hops onto random monsters. Each hop hits 25% harder on a Toasty or Dazzled monster.'};
 // "Giddyup, Tata!" Launch: the spec's header says Sizzle and its text says "heavy Clobber + Sizzle friction", so it is a two-flavor
 // move, Sizzle first (it leaves Toasty), heavy in total. My calls: the shoulders Rose climbs are the next family member due on the
 // turn bar, and their +20% Attack lasts the common 2 turns.
 B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'s2',name:'"Giddyup, Tata!" Launch',pep:4,flavor:['sizzle','clobber'],power:'heavy',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'status',id:'giddyup',to:'nextAlly'},{op:'damage'}],line:null,anim:{kind:'clip',clip:'rose_giddyup',pair:{with:'tom',clip:'tom_rose_giddyup'},shape:'strike'},
+  short:'Powers up the next family member, then a heavy hit.',
   desc:'Rose climbs the next family member in line: they get 20% more Attack for 2 turns. Then she cannonballs one monster for a heavy Sizzle and Clobber hit.'};
 
 // Double-Lamby Return-Cart Blitz (Grand Capstone): six ricochet hits on random monsters, capstone power shared by the six.
@@ -26,6 +29,7 @@ B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'
 // far (the 1st +10%, the 6th +60%).
 B3_SKILLS.double_lamby_return_cart_blitz={id:'double_lamby_return_cart_blitz',vibe:'rose_sugar',slot:'cap',name:'Double-Lamby Return-Cart Blitz',pep:6,flavor:['clobber'],power:'capstone',hits:6,
   target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['flustered'],add:.10,grow:true}}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Six bounces onto random monsters.',
   desc:'Six Clobber ricochets onto random monsters. On a Flustered monster each one hits harder than the last: 10% more for the 1st, up to 60% more for the 6th.'};
 // Bouncy Physics: +2% Family Ruckus for every hit that lands of a move that hits more than once. The gauge is counted now; the
 // screen's bar and what the gauge buys arrive with stage 6.
@@ -65,6 +69,7 @@ B3_QUIRKS.emergency_stuffy_swap={id:'emergency_stuffy_swap',vibe:'rose_cozy',nam
 // (my call: a six-year-old eats her own pretzel when she is the one who is hurt). A tiny heal is 5% of Max HP.
 B3_SKILLS.pocket_pretzel_and_pat={id:'pocket_pretzel_and_pat',vibe:'rose_cozy',slot:'basic',name:'Pocket Pretzel & Pat',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'heal',pct:'tiny',to:'lowestAlly'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit, then a tiny heal for whoever is hurt most.',
   desc:'Light Clobber bonk with Lamby. Then a pocket pretzel for whoever in the family is hurt the most: a tiny heal.'};
 
 // Tattered Lamby Boomerang: the throw is a light Clobber hit that leaves Lamby stuck on the monster. The spec's "free fast tackle" has no
@@ -75,11 +80,13 @@ B3_SKILLS.tattered_lamby_boomerang={id:'tattered_lamby_boomerang',vibe:'rose_coz
   effects:[{op:'damage'},{op:'status',id:'lamby_stuck',to:'target'},
     {op:'later',name:'Give Lamby Back!',effects:[{op:'damage',flavor:['clobber'],power:'standard',hits:2,to:'target'},{op:'shield',pct:.10,to:'self'}]}],
   line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit now, two more next turn, and a small shield.',
   desc:'Rose throws scruffy Lamby at a monster: a light Clobber hit. When her next turn begins she tackles it to get him back: two quick Clobber hits, and a small shield on her.'};
 // Sofa-Cushion Citadel: a 25% Max HP shield on every family member, and nobody can be pushed back for 3 turns. 3-round cooldown.
 B3_SKILLS.sofa_cushion_citadel={id:'sofa_cushion_citadel',vibe:'rose_cozy',slot:'s2',name:'Sofa-Cushion Citadel',pep:3,flavor:['support'],power:0,hits:0,
   target:'self',tags:[],composure:0,cooldown:3,
   effects:[{op:'shield',pct:.25,to:'allies'},{op:'status',id:'pillow_fort',to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Shields the whole family. Nobody gets pushed back.',
   desc:'Cushions and blankets make a fort: every family member gets a shield of 25% of their HP and cannot be pushed back on the turn bar for 3 turns. Rose needs 3 rounds before she can build it again.'};
 // Kingdom of Ten-Thousand Blankets (Grand Capstone): one family member heals 60% and is cleansed now; the Sizzle wave comes when Rose's next turn
 // begins (my calls: heavy Sizzle at the all-monsters share, the same as Fifty-Year Dust Tsunami).
@@ -88,4 +95,5 @@ B3_SKILLS.kingdom_of_ten_thousand_blankets={id:'kingdom_of_ten_thousand_blankets
   effects:[{op:'heal',pct:.60,to:'target'},{op:'cleanse',to:'target'},{op:'status',id:'blanket_castle',to:'self'},
     {op:'later',name:'Warmth Wave',who:'foes',effects:[{op:'damage',flavor:['sizzle'],power:'heavy',aoe:true,to:'foes'}]}],
   line:null,anim:{kind:'default',shape:'give'},
+  short:'Big heal for one family member, then a hit on every monster.',
   desc:'A star-lit blanket castle: one family member heals 60% of their HP and every debuff on them clears. When Rose\u2019s next turn begins, a wave of Sizzle warmth hits every monster.'};
