@@ -33591,7 +33591,7 @@
    "id": "c-menu4",
    "tag": "menu4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: switch it on and remove the old one",
@@ -33601,7 +33601,7 @@
    ],
    "after": "t-menu4play",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
     "opening": "not started"
@@ -33637,16 +33637,20 @@
      "d": "2026-11-22",
      "t": "Shipped as menu4: the new menu is the only menu; the ADMIN switch, the old Party, Items, Gear, Status, Load, Options and Quit screens, the Vibes overlay and about 16 KB of old styles are removed. Battle Lab > NEW BATTLE > VIBES AND RANKS opens the new Vibes page on the Lab's own book. Old Stampcard kept. See docs/CHANGES.md menu4.",
      "at": "2026-11-22T06:00:00.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu4: the new menu is the only menu and the old one is gone"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "t-menu4play",
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33661,15 +33665,19 @@
    ],
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Made with the build cards after Tom approved the menu proposal in the chat."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: switch it on and remove the old one is done."
     }
    ]
   },
@@ -34894,6 +34902,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
+   "title": "New menu: switch it on and remove the old one",
+   "first": "2026-11-22T04:59:14Z",
+   "last": "2026-11-22T05:51:04Z",
+   "tags": [
+    "menu4"
+   ],
+   "cards": [
+    "c-menu4",
+    "t-menu4play"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEfBtn2SmTzAcqk7uA",
    "title": "Video History rebuilds itself after every video run",
    "first": "2026-11-22T05:32:52Z",
@@ -34937,16 +34958,6 @@
    "cards": [
     "c-wanstop-deedee-wetfloor-r10",
     "t-wetfloor-check"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
-   "title": "New menu: switch it on and remove the old one",
-   "first": "2026-11-22T04:59:14Z",
-   "last": "2026-11-22T04:59:14Z",
-   "tags": [],
-   "cards": [
-    "c-menu4"
    ]
   },
   {
@@ -40095,8 +40106,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "cc9b8622ff5b42648a2864c7eea56dfcdf477c97",
- "synced_at": "2026-11-22T05:35:43+00:00",
+ "synced": "ec97649233c45d65d8064a8c0a6c18a1560604e8",
+ "synced_at": "2026-11-22T05:51:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
