@@ -33188,7 +33188,7 @@
    "id": "c-fix-ch2play",
    "tag": "fix-ch2play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play chapter 2 on your phone and report",
@@ -33210,7 +33210,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDCUGBdteWCXYuvoFF",
     "opening": "Something is wrong on t-ch2play"
    },
    "history": [
@@ -33254,6 +33254,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T06:00:13.439Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -33267,7 +33271,7 @@
    },
    "after": "t-ch2play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-22T06:01:01+00:00"
   },
   {
    "id": "c-fix-dash3-try-2",
@@ -34750,7 +34754,7 @@
   {
    "id": "c-boardwedge1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "tag": "boardwedge1",
    "title": "Board sync can no longer be wedged by a bad board file",
@@ -34761,7 +34765,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGqv7tvjJ2KTKftdCj",
+    "url": "https://claude.ai/code/cse_01RXeukDqxmV5mAjaJfGx1NH",
     "opening": "Why did the board sink fail?"
    },
    "history": [
@@ -34773,6 +34777,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T06:00:21.177Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34784,7 +34792,7 @@
     "effort": "medium (the two guards are specified, the pieces are small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (section The board), then card c-boardwedge1 in data/board.json. First push: `board: start c-boardwedge1`. Problem: the board-sync Action (.github/workflows/board-sync.yml, step 'Check the board file, then commit and push it if a card moved') exits 1 when tools/board_check.py rejects data/board.json, so no card move is saved and the board stops refreshing. It happened twice on 2026-11-21: (1) open Tom card t-milestoned blocked only a Claude card that shipped, so 'an open Tom card must block an open Claude card, or be marked fyi: true' failed (fixed by hand with fyi: true); (2) commit b3cdb22 pushed merge-conflict markers into data/board.json and board.html (repaired in 6a2e301). Build two guards. (A) Sync side, in tools/board_sync.py: when a Claude card moves to Done, any open Tom card whose blocks list holds only Done cards (or none open) and which is not fyi becomes fyi: true, with one history line saying why, so board_check never fails for that reason; add cases to tools/board_sync_test.py. (B) Push side: a check that fails a push when data/board.json, data/board-archive.json or board.html contains a line that starts with seven less-than signs, seven equals signs alone, or seven greater-than signs followed by a space. Put it in tools/board_check.py (JSON parse already fails for the board; add the board.html scan) and call it from tools/smoke.py and from a new step at the top of the board-sync workflow so a bad push is named in the run summary instead of only failing step 6. Do not change any card's meaning. Run python3 tools/board_sync_test.py, python3 tools/board_test.py /tmp/board, python3 tools/board_check.py and python3 tools/smoke.py. Write a heading '## boardwedge1' (with date and one plain line) in docs/CHANGES.md, bump tags with python3 tools/art-library/bump_tags.py boardwedge1 --base origin/main, and push. Use tag boardwedge1. At the end set this card's next to the result. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-22T06:01:01+00:00"
   },
   {
    "id": "t-wetfloor-check",
@@ -40181,8 +40189,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "8b6b5dd95a6e9eccfcf37313bc2c469638a8e2ae",
- "synced_at": "2026-11-22T05:58:12+00:00",
+ "synced": "d9b371585ca058bf35866d2d2f75f4d92b28b69e",
+ "synced_at": "2026-11-22T06:01:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
