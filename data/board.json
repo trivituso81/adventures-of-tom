@@ -31435,14 +31435,13 @@
    "id": "c-battleux-cards",
    "tag": "board-battleux",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle System",
    "title": "Make the battle screen build cards",
    "next": "Waits on your card Decide on the battle screen redesign. From your answer it writes the build cards (the new screen, the words, the scene marks) and your one play card for the end, or changes the proposal first if you asked for changes. If you answer in the chat of the proposal instead, that chat does this and closes this card.",
    "blocks": [],
-   "waiting_on": "tom",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -31460,6 +31459,14 @@
     {
      "d": "2026-11-22",
      "t": "Added by battleux-plan. Tom (11-21): \"once approved, id ask you to create the corresponding cards to kick off the work with the appropriate models\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Decide on the battle screen redesign is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Answer from \"Decide on the battle screen redesign\": Approve as shown: make the build cards"
     }
    ]
   },
@@ -31585,6 +31592,38 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanstop-gen and t-wanstop-gen in data/board.json, history included. Your first push is the commit board: start c-fix-wanstop-gen.\n\nTom tested and found problems:\n1. Card t-wanstop-gen (Generate the two fixed videos, ask animations). He was asked: Tap Generate all 2 videos on this card (two taps). It makes Rose's \"Giddyup, Tata!\" Launch again (she now circles her hand instead of twirling, because the last one spun all the way round) and Deedee's Wet-Floor Hazard again (now one short sweep, because the last one swept back and forth into both edges). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal. Nothing else to do first. He wrote: the button says nothing to make right now. but there is no video made\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T01:45:21.474Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanstop-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanstop-gen, and give the build fix-wanstop-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-wanstop-gen"
+  },
+  {
+   "id": "c-takes-9b7e15",
+   "tag": "takes-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -36321,11 +36360,13 @@
    "takes/20261120T224602-cq5/part-001.json",
    "takes/20261120T224602-cq5/state.json",
    "takes/20261121T015156-llm/part-001.json",
-   "takes/20261121T015156-llm/state.json"
+   "takes/20261121T015156-llm/state.json",
+   "takes/20261122T014818-vsj/part-001.json",
+   "takes/20261122T014818-vsj/state.json"
   ]
  },
- "synced": "36129b442bd56b7fa7040917e2313476f294f441",
- "synced_at": "2026-11-22T01:45:36+00:00",
+ "synced": "41f77b61701619b7dace3e038c2df568b8968a6c",
+ "synced_at": "2026-11-22T01:48:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
