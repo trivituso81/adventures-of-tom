@@ -15225,7 +15225,7 @@
    "title": "Play chapter 2 on your phone and report",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 2 and play it again. Look for: (1) fewer lines, no \"cloud made sense\", no \"Sour dough\", no bread talk at the end; (2) at the grey lemon tree a line says Tom calls Grace on his phone before his message; (3) after the boss Tom and TNB face Mr. Shake; (4) in Griffith Park a twinkle sits at the lens cap by the trailhead (bottom left of the clearing): press A on it, then follow the twinkles to the bent tripod on the east trail and the backpack up the switchback trail. Two lines were reworded and are silent until a new recording: Tom \"You said I cook well.\" and Miss Odette \"Both of you, back to my restaurant. ...\" Use REPORT for anything off. When you are done, the chapter 3 build (card c-ch3build) can start.",
    "blocks": [
@@ -15284,6 +15284,10 @@
      "d": "2026-11-22",
      "t": "Back to Tom: build fix-ch2play answers his report (tons of extraneous, boring, unfunny dialog; Griffith Park has nothing to search).",
      "at": "2026-11-22T06:27:12.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Play chapter 2 on your phone and report is done."
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
@@ -15296,8 +15300,7 @@
     "verdict": "yours",
     "why": "it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
    },
-   "where": "phone",
-   "waiting_on": "claude"
+   "where": "phone"
   },
   {
    "id": "c-fix-effectslook-2",
@@ -27914,7 +27917,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCjhhSZtNn5q544G9S",
+    "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -28042,6 +28045,10 @@
     {
      "d": "2026-11-21",
      "t": "nightgreen handoff 2 (conversation ran long after 8 parts, ch20_test takes 16 minutes a run): 11 of 12 tests fixed or retired (nightgreene to nightgreenl); 1 left, ch20_test, evidence and a cheap way to reproduce in claude/next-addendum-nightgreen.md; card prompt rewritten for it. Not finished, so the card stays In progress and ships as nightgreen when no row has known_fail."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -28055,8 +28062,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Eleven of the twelve failing tests are already fixed or retired (nightgreena to nightgreenl). One row in tools/night/tests.json still carries known_fail: ch20_test. The addendum says what is known: the eight doors, the Core, the lift and the Leviathan fight pass; the checks shatter scene to Julian, calm and epilogue to the end, and game complete flag fail after the real Leviathan fight, although the game plays the shatter scene and starts the Julian fight when the same flags are set directly. Find what differs after the real fight 1 (the addendum has a cheap way: a temporary script that plays only fight 1 and prints the flags, the scene and the dialog state every second, not the whole 16 minute test), decide whether the test or the game is wrong, and fix the one that is wrong. A game fault that would trap a player is fixed in the game and tested. Then remove its known_fail, set `minutes` from the measured time (seconds divided by 60, times 1.2, rounded up), and push it with its own build name (nightgreenm) and a docs/CHANGES.md entry. Apply the stop-loss: two tries that miss the same way, write what you found on the card and stop. When it passes twice in a row, ship the card as nightgreen: add a `## nightgreen` heading in docs/CHANGES.md saying all rows are off known_fail, and write the result on the card. Then tell Tom in two lines what happens next and where. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
-   "after": "nothing for Tom: c-nightrefactor",
-   "quiet": true
+   "after": "nothing for Tom: c-nightrefactor"
   },
   {
    "id": "c-nightrefactor",
@@ -33239,7 +33245,7 @@
    "id": "c-fix-ch2play",
    "tag": "fix-ch2play",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play chapter 2 on your phone and report",
@@ -33318,6 +33324,10 @@
      "d": "2026-11-22",
      "t": "Fix shipped as build fix-ch2play: 14 more dull lines cut, 2 reworded (Carmen and Odette at the end), the phone call announced, Tom and TNB face Mr. Shake, and a three-find trail added to Griffith Park. Boss size, the Jefferson Park cutout and the slow end-scene start stay open reports.",
      "at": "2026-11-22T06:27:12.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-ch2play: chapter 2 loses more dull lines, the phone call is announced, and Griffith Park has a three-find trail to search"
     }
    ],
    "prompt": {
@@ -33331,7 +33341,8 @@
    },
    "after": "t-ch2play",
    "auto": true,
-   "started_at": "2026-11-22T06:01:01+00:00"
+   "started_at": "2026-11-22T06:01:01+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-dash3-try-2",
@@ -35234,7 +35245,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGzvVM3m2QKbFGwhvb",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -35257,6 +35268,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T06:25:01.966Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -35450,6 +35465,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDCUGBdteWCXYuvoFF",
+   "title": "Fix: Play chapter 2 on your phone and report",
+   "first": "2026-11-22T06:11:08Z",
+   "last": "2026-11-22T06:27:20Z",
+   "tags": [
+    "fix-ch2play"
+   ],
+   "cards": [
+    "c-fix-ch2play"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGrGSmtZLXkQTJ3Uax",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
    "first": "2026-11-22T06:24:26Z",
@@ -35471,16 +35498,6 @@
    ],
    "cards": [
     "c-wanstop-grace-cubepop-r4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDCUGBdteWCXYuvoFF",
-   "title": "Fix: Play chapter 2 on your phone and report",
-   "first": "2026-11-22T06:11:08Z",
-   "last": "2026-11-22T06:11:08Z",
-   "tags": [],
-   "cards": [
-    "c-fix-ch2play"
    ]
   },
   {
@@ -35903,6 +35920,26 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
+   "title": "Fix the last failing test (ch20_test)",
+   "first": "2026-11-21T22:27:49-08:00",
+   "last": "2026-11-21T22:27:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-nightgreen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGzvVM3m2QKbFGwhvb",
+   "title": "Fix: Make Rose's Giddyup with Tom in it",
+   "first": "2026-11-21T22:27:09-08:00",
+   "last": "2026-11-21T22:27:09-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-pairmove1-gen-2"
    ]
   },
   {
@@ -40716,8 +40753,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "a4005c35bd17c8e20be903f76161f712a3eb4685",
- "synced_at": "2026-11-22T06:26:44+00:00",
+ "synced": "fc27c783f4f407383e98919f7654bf92b7fdd855",
+ "synced_at": "2026-11-22T06:29:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
