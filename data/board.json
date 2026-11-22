@@ -26032,7 +26032,7 @@
    "id": "c-battleux3",
    "tag": "battleux3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Add the scene marks and remove the proposal page",
    "created": "2026-11-21",
@@ -26041,7 +26041,7 @@
     "t-battleuxplay"
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
+    "url": "https://claude.ai/code/cse_01RXeukEERNUaCXrLX69rTMS",
     "opening": "not started"
    },
    "next": "Waits on c-b3look, which has shipped, so it starts next. Adds, in the menu's look and following claude/b3look-plan.md: the Pet Peeve badges under each monster (the one place the plan keeps them on the scene), Rose Mode's pictures and recommended move on the new deck. Leaves out the aim marker's PET PEEVE tag and any other mark the plan found to be a repeat (the Pep forecast is already in the deck header). Removes the proposal page and its Admin button. Then your play card opens.",
@@ -26083,9 +26083,13 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T14:32:48.379Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-22T14:33:32+00:00"
   },
   {
    "id": "t-battleuxplay",
@@ -29243,7 +29247,7 @@
    "title": "Battle system stage 20: Character Level by shared XP",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data. Starts after c-b3s19.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29292,6 +29296,10 @@
     {
      "d": "2026-11-22",
      "t": "Shipped b3s20: Battle 3 already shared XP through b6GainXp and b6Sync, so only data changed: XP rows for the 24 monsters of chapters 5 to 10 (chapters now pay 260 to 270 XP, matching the level floors). b3-sim check, b3_test s4 and b3_story_test pass. Roster not looked at in portrait and landscape."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s20: Character Level by shared XP on the new battle, with the chapter 5 to 10 XP amounts retuned in data"
     }
    ],
    "chat": {
@@ -29299,7 +29307,8 @@
     "opening": "started by START"
    },
    "started_at": "2026-11-22T14:24:46+00:00",
-   "after": "nothing for Tom: c-b3s21"
+   "after": "nothing for Tom: c-b3s21",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s21",
@@ -29543,6 +29552,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
+   "title": "Battle system stage 20: Character Level by shared XP",
+   "first": "2026-11-22T14:26:23Z",
+   "last": "2026-11-22T14:33:00Z",
+   "tags": [
+    "b3s20"
+   ],
+   "cards": [
+    "c-b3s20"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFspS715bzf1Xr8DqW",
    "title": "Fix the stopped video tom-blockade",
    "first": "2026-11-22T14:26:53Z",
@@ -29552,16 +29573,6 @@
    ],
    "cards": [
     "c-wanstop-tom-blockade-r4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
-   "title": "Battle system stage 20: Character Level by shared XP",
-   "first": "2026-11-22T14:26:23Z",
-   "last": "2026-11-22T14:26:23Z",
-   "tags": [],
-   "cards": [
-    "c-b3s20"
    ]
   },
   {
@@ -35026,8 +35037,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "d5057eff40a7fd05a92710176b53466a3714d65e",
- "synced_at": "2026-11-22T14:31:14+00:00",
+ "synced": "f2910e840aa510184bef32f09b0566c19d912ad5",
+ "synced_at": "2026-11-22T14:33:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
