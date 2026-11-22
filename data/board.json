@@ -34821,7 +34821,7 @@
   {
    "id": "t-cubepop-checkdecide-r4",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "title": "Grace cube pop: checks fail, video looks right to me",
@@ -34838,11 +34838,20 @@
     "c-wanstop-grace-cubepop-r4"
    ],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "added by session on c-wanstop-grace-cubepop-r4"
-   }
+   },
+   "done": "2026-11-21",
+   "answer": "Bake the latest video as it is",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Bake the latest video as it is",
+     "at": "2026-11-22T06:06:10.446Z"
+    }
+   ]
   },
   {
    "id": "c-videohist1",
