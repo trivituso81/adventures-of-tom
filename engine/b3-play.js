@@ -395,6 +395,23 @@ function b3Draw() {
     gfx.globalAlpha=q>.8?(1-q)/.2:1; b3Text(w.text,288,34+i*26,w.color,sc); gfx.globalAlpha=1; });
   gfx=ctx;
 }
+// battleux3: a monster's Pet Peeves as flavor badges under its HP bar and pips, in the menu's look (colors read from the shared variables of m2.css).
+// Always shown (not a detail): the picture-and-word is the one place the scene says what a monster dislikes. Returns the words drawn (the layout test reads them).
+let b3BadgeSt=null;
+function b3BadgeStyle() { if(!b3BadgeSt) { const cs=getComputedStyle($('b3-app')||document.body),g=(k,d)=>(cs.getPropertyValue(k)||'').trim()||d; b3BadgeSt={ink:g('--ink','#2B1A33'),cream:g('--cream','#FFF1D6'),font:g('--disp',"system-ui,sans-serif")}; } return b3BadgeSt; }
+function b3PeeveBadges(f,cx,y) {
+  const pv=b3Peeves(f); if(!pv.length) return [];
+  const St=b3BadgeStyle(),h=12,gap=3,words=pv.map(k=>B3_FLAVORS[k].name);
+  gfx.save(); gfx.font='700 9px '+St.font; gfx.textAlign='left'; gfx.textBaseline='middle';
+  const ws=words.map(w=>Math.ceil(gfx.measureText(w).width)+h+3),tot=ws.reduce((a,b)=>a+b,0)+gap*(pv.length-1);
+  let x=Math.round(Math.max(2,Math.min(cx-tot/2,576-2-tot)));
+  pv.forEach((k,i)=>{ const w=ws[i],r=h/2;
+    gfx.beginPath(); gfx.moveTo(x+r,y); gfx.lineTo(x+w-r,y); gfx.arc(x+w-r,y+r,r,-Math.PI/2,Math.PI/2); gfx.lineTo(x+r,y+h); gfx.arc(x+r,y+r,r,Math.PI/2,Math.PI*1.5); gfx.closePath();
+    gfx.fillStyle=St.cream; gfx.globalAlpha=.94; gfx.fill(); gfx.globalAlpha=1;
+    gfx.beginPath(); gfx.arc(x+r,y+r,r-1.5,0,Math.PI*2); gfx.fillStyle=B3_FLAVORS[k].color; gfx.fill(); gfx.lineWidth=1; gfx.strokeStyle=St.ink; gfx.stroke();
+    gfx.fillStyle=St.ink; gfx.fillText(words[i],x+h+1,y+r+.5); x+=w+gap; });
+  gfx.restore(); return words;
+}
 function b3DrawFoe(f,t,picked) {
   const L=B3P.foe[f.key],A=B3P.fa[f.key],vu=B3.view.u[f.key],def=L.def,R0=def.sprite,FR=def.frames,sc=L.sc;
   const dying=A.die!=null,dc=dying?b3cGet(f.id,'die',9000):null;   // a defeated clip plays out, then the monster fades (engine/b3-clips.js)
@@ -419,13 +436,14 @@ function b3DrawFoe(f,t,picked) {
   else drawSprite(R,def.pal,x,y,sc,{flash,alpha});
   if(dying) return;
   // HP meter and letter under the feet; the wind-up and (DETAILS on) statuses over the head.
-  const np=vu.maxPips||0,bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12-(np?9:0)),r=vu.hp/vu.maxHp;
+  const np=vu.maxPips||0,bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12-(np?9:0)-(b3Peeves(f).length?13:0)),r=vu.hp/vu.maxHp;
   b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
   if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
   // Composure pips under the HP meter: gold while it holds, empty as they are knocked off, all red-rimmed while it is Flustered.
   if(np) { const pw=Math.max(5,Math.min(10,Math.floor((bw-(np-1)*2)/np))),x0=Math.round(L.px-(np*pw+(np-1)*2)/2),py=byy+10,pop=A.pipAt!=null&&t-A.pipAt<.35;
     for(let i=0;i<np;i++) { const on=i<vu.pips,px=x0+i*(pw+2);
       rect(px-1,py-1,pw+2,7,fl?'#a8443c':'#0b0d12'); rect(px,py,pw,5,on?(pop?'#ffffff':'#ffd27a'):'#3a3340'); if(on) rect(px,py,pw,1,'#fff1cb'); } }
+  b3PeeveBadges(f,L.px,byy+(np?19:10));   // (the HP meter is lifted by 13 when a badge row must fit under the pips)
   const top=L.py-R0.length*sc+bob;
   // Stars circle a Flustered monster's head.
   if(fl) for(let k=0;k<3;k++) { const a=t*3.4+k*2.094,xx=L.px+Math.cos(a)*sw*.3,yy=top+2+Math.sin(a)*4; rect(Math.round(xx)-2,Math.round(yy)-2,5,5,'#141a22'); rect(Math.round(xx)-1,Math.round(yy)-1,3,3,k%2?'#fff1cb':'#ffe27a'); }

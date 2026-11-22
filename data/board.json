@@ -26136,9 +26136,14 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built battleux3: Pet Peeve badges under each monster on the scene, Rose Mode pictures and star on the new deck, proposal page and its Admin button removed. Aim-marker tag, MARKED/NEXT TARGET and a second Pep forecast left out as repeats (b3look). Layout test extended (badges, Rose pass). Hands to t-battleuxplay."
     }
    ],
-   "started_at": "2026-11-22T14:33:32+00:00"
+   "started_at": "2026-11-22T14:33:32+00:00",
+   "after": "t-battleuxplay"
   },
   {
    "id": "t-battleuxplay",
@@ -26153,12 +26158,13 @@
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "blocks": [],
-   "first": "Wait for the scene marks build (card Add the scene marks and remove the proposal page). This card opens by itself.",
-   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE. Play NEW 2: MUDLING AND SKEETER, NEW 6: THE BIG ONE and NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE) to the end. Then on the iPhone held upright, play NEW 2 once. Judge look and feel: does the battle screen now look like the new menu (colors, lettering, switch)? Do the DETAILS switch on and off leave only what you need to pick a move? Is anything still shown twice? Do tap once to read and tap again to use, and tapping a monster to aim, feel right? Claude has tested every yes or no fact. Tap All good, or Something is wrong and say what to change.",
+   "first": "Nothing: build battleux3 is pushed.",
+   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE. Play NEW 2: MUDLING AND SKEETER, NEW 6: THE BIG ONE and NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE) to the end. Then on the iPhone held upright, play NEW 2 once. Judge look and feel: does the battle screen now look like the new menu (colors, lettering, switch)? Do the DETAILS switch on and off leave only what you need to pick a move? Do the small flavor badges under each monster (what it dislikes) read well? Is anything still shown twice? Do tap once to read and tap again to use, and tapping a monster to aim, feel right? Claude has tested every yes or no fact. Tap All good, or Something is wrong and say what to change.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE.",
     "Play NEW 2: MUDLING AND SKEETER, NEW 6: THE BIG ONE and NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE).",
     "iPhone upright: play NEW 2 once.",
+    "Optional, for Rose: set the difficulty to Rose Mode, play NEW 2 once, and look for the flavor pictures, the drops and the Try this star on the recommended move.",
     "Tap All good, or Something is wrong with what to change."
    ],
    "chat": {

@@ -135,6 +135,10 @@
 #battle.v3 #b3-app .bx-mv .sub{grid-column:2/4;display:flex;flex-wrap:wrap;gap:2px 5px;align-items:center;font:600 12px/1.15 var(--text);color:var(--soft)}
 #battle.v3 #b3-app .bx-mv .sub .tag{font:700 11.5px/1.2 var(--text);font-style:normal;border-radius:99px;padding:1px 6px}
 #battle.v3 #b3-app .bx-mv .sub .tag.pv{background:var(--goodbg);color:var(--goodink)}
+#battle.v3 #b3-app .bx-mv .sub .tag.rt{background:var(--lamp);color:var(--ink);display:inline-flex;align-items:center;gap:3px}
+#battle.v3 #b3-app .bx-mv .fl img.bi{width:26px;height:26px;flex:none}
+#battle.v3 #b3-app .bx-mv .sub .dr{display:inline-flex;align-items:center;gap:1px}
+#battle.v3 #b3-app .bx-mv .sub .dr img{width:13px;height:13px}
 #battle.v3 #b3-app .bx-mv .sub .need{color:var(--coral);font-weight:700}
 #battle.v3 #b3-app .bx-mv .cost{grid-row:1;grid-column:3;align-self:start;display:flex;align-items:baseline;gap:2px;font:800 15px/1 var(--disp);color:var(--ink);white-space:nowrap;padding-top:1px}
 #battle.v3 #b3-app .bx-mv .cost small{font:600 12px var(--text);color:var(--soft)}

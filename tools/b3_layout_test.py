@@ -77,9 +77,22 @@ LOOK="""(det)=>{
   const W=window.__bxDrawn||[]; window.__bxDrawn=null;
   for(const w of W) { if(/^(MARKED|NEXT TARGET)$/.test(w)) bad.push('the scene writes '+w+' over a family member (their card says it)');
     if(!det&&B3.F.foes.some(f=>b3ViewIcons(f.key).some(id=>B3_STATUS[id].short===w&&id!=='flustered'))) bad.push('DETAILS off: the scene writes the status '+w); }
+  // battleux3: every live monster with a Pet Peeve shows one badge per Pet Peeve under it (the words are the flavors' names), badges are drawn
+  // whatever DETAILS says, and the tray never says the target's Pet Peeves again.
+  const B=window.__bxBadges||{};
+  for(const f of B3.F.foes) if(f.hp>0) { const want=b3Peeves(f).map(k=>B3_FLAVORS[k].name).join(','),got=(B[f.key]||[]).join(',');
+    if(want!==got) bad.push('the scene shows badges ['+got+'] for '+f.name+', its Pet Peeves are ['+want+']'); }
+  if(tray.querySelector('.tgt .lab')&&!tray.querySelector('.tgt.look')) bad.push('the tray says Pet Peeves again');
+  // Rose Mode (b3p): the rows carry pictures, with the recommended move starred (set by the test on turn 0 of the first fight)
+  if(window.__bxRose) { const rows=[...document.querySelectorAll('#b3-rows .bx-mv')];
+    if(rows.some(r=>!r.querySelector('.fl img.bi'))) bad.push('Rose Mode: a move has no picture');
+    if(rows.some(r=>!r.classList.contains('ruck')&&!r.querySelector('.sub .dr img'))) bad.push('Rose Mode: a price has no drops');
+    if(rows.some(r=>r.classList.contains('rec'))&&!rows.some(r=>r.classList.contains('rec')&&r.querySelector('.tag.rt img'))) bad.push('Rose Mode: the recommended move has no star and word');
+    if(det===0) for(const el of document.querySelectorAll('#b3-rows .bx-mv .dx')) if(shown(el)) bad.push('Rose Mode, DETAILS off: a detail shows'); }
   return bad;
 }"""
-SPY="""()=>{ if(!window.__bxSpy){ window.__bxSpy=window.b3Text; window.b3Text=function(t){ if(window.__bxDrawn) window.__bxDrawn.push(String(t)); return window.__bxSpy.apply(this,arguments); }; } window.__bxDrawn=[]; }"""
+SPY="""()=>{ if(!window.__bxBSpy){ window.__bxBSpy=window.b3PeeveBadges; window.b3PeeveBadges=function(f){ const r=window.__bxBSpy.apply(this,arguments); if(window.__bxBadges) window.__bxBadges[f.key]=r; return r; }; } window.__bxBadges={};
+  if(!window.__bxSpy){ window.__bxSpy=window.b3Text; window.b3Text=function(t){ if(window.__bxDrawn) window.__bxDrawn.push(String(t)); return window.__bxSpy.apply(this,arguments); }; } window.__bxDrawn=[]; }"""
 def look(pg,det,pt):
     pg.evaluate(SPY); pg.wait_for_timeout(120)
     for b in pg.evaluate(LOOK,det): fails.append(f'{pt}: {b}')
@@ -131,6 +144,22 @@ def run_size(br,name,w,h,rot,fit,minscene):
                 except Exception: break
                 pg.wait_for_timeout(300)
             if idx==FIGHTS[0] and det==0 and pg.evaluate("()=>B3.ui")!='done': end_check(pg,name)
+    # Rose Mode pass: pictures on, recommended move on; the first fight's first turns at DETAILS off and on
+    for det in (0,1):
+        pg.evaluate("([d])=>{ localStorage.setItem('aot-b3-details',d?'on':'off'); window.__bxRose=true; window.__bxD0=B7.diff; b7SetDiff('rose'); b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; b3Lab(0,{seed:%d}); }"%SEED,[det])
+        try: wait_cmd(pg)
+        except Exception: pass
+        pg.wait_for_timeout(450)
+        for pk in (None,'last'):
+            if pk: pg.evaluate("()=>b3Select(B3.deck.length-1)"); pg.wait_for_timeout(200)
+            if not pg.evaluate("()=>bpOn()"): fails.append(f'{name}: Rose Mode did not turn on'); break
+            pt=f'{name} rose details {det} {pk}'; look(pg,det,pt)
+            v=pg.evaluate(CHECK)
+            if v['sel']>=0 and not v['selRect']['inScroll']: fails.append(f'{pt}: the highlighted move is not fully inside the deck box')
+            cut=[c for c in v['nameCut'] if c]
+            if cut: fails.append(f'{pt}: a move name is cut: {cut}')
+        p=os.path.join(OUT,f'b3-layout-{name}-rose{det}.png'); pg.screenshot(path=p); shots.append(p)
+    pg.evaluate("()=>{ window.__bxRose=false; b7SetDiff(window.__bxD0||'grace'); }")
     real=[e for e in errs if 'AudioContext' not in e]
     if real: fails.append(f'{name}: page errors {real[:3]}')
     ctx.close()

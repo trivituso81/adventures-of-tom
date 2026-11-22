@@ -13,6 +13,7 @@ const B3_KIND={basic:'basic',s1:'skill',s2:'skill',cap:'capstone',revive:'revive
 const B3_SIZE={light:'Light hit',standard:'Hit',heavy:'Heavy hit',capstone:'Huge hit',hits:'{n} hits'};
 const B3_FORECAST={
   peeveTag:'Pet Peeve',
+  recTag:'Try this',
   resist:'Resists {flavor}',
   dmg:'About {n} damage',
   ko:'Knocks it out',

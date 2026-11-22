@@ -175,14 +175,17 @@ function b3RenderDeck() {
   (B3.ui==='done'?[]:B3.deck).forEach((x,i)=>{   // the fight is over: no moves, only Continue in the tray
     if(x.grp!==grp) { grp=x.grp; if(x.grp!=='basic'&&!free&&(x.grp!=='main'||has('pocket')||has('ruckus')||has('any'))) h+='<div class="bx-grp">'+gname[x.grp]+'</div>'; }
     const S=x.S,sel=cmd&&i===B3.sel,lack=!x.can.ok&&S&&x.cost>pep&&B3.actor,need=S?x.cost-pep:0,why=b2Esc(lack?bxW(W.needMore,{n:need}):x.can.why);
-    const fl=x.ruckus?'<span class="fc gold">'+BX_IC.razzle+'</span>':S.flavor.map(bxFlIcon).join('');
+    const rose=b3pOn();   // Rose Mode (engine/b3-pictures.js): the flavor is its emoji picture, the price is drops, the recommended move says so with a star
+    const fl=x.ruckus?(rose?bpIcon('b3_ruckus',28):'<span class="fc gold">'+BX_IC.razzle+'</span>'):rose?S.flavor.map(f=>bpIcon(B3P_FLAV[f],28)).join(''):S.flavor.map(bxFlIcon).join('');
     const pv=x.can.ok&&bxPeeve(x,sel,u)?'<i class="tag pv">'+W.peeveTag+'</i>':'';
-    const cost=x.ruckus?'<span class="cost rk">'+x.P.cost+'%</span>':S.slot==='basic'?'<span class="cost gain">+'+B3_RULES.pep.basic+' <small>'+W.pepWord+'</small></span>':x.cost?'<span class="cost">'+x.cost+' <small>'+W.pepWord+'</small></span>':'<span class="cost free">'+W.free+'</span>';
+    const dr=rose&&!x.ruckus?'<span class="dr">'+b3pDrops(S.slot==='basic'?0:x.cost,13)+'</span>':'';
+    const cost=x.ruckus?'<span class="cost rk">'+x.P.cost+'%</span>':S.slot==='basic'?'<span class="cost gain">'+'+'+B3_RULES.pep.basic+' <small>'+W.pepWord+'</small></span>':x.cost?'<span class="cost">'+x.cost+' <small>'+W.pepWord+'</small></span>':'<span class="cost free">'+W.free+'</span>';
+    const rt=rose&&x.rec?'<i class="tag rt">'+bpIcon('b3_star',14)+W.recTag+'</i>':'';
     const short=x.ruckus?B3_RUCKUS[x.ruckus].short:(S.short||'');
     const useTxt=x.can.ok?W.use+'<small>'+(B3.keys?W.useKey:W.useTap)+'</small>':why;
     h+='<button type="button" class="bx-mv'+(sel?' sel':'')+(x.can.ok?'':' no')+(x.ruckus?' ruck':'')+(x.rec?' rec':'')+'" data-i="'+i+'" data-id="'+b2Esc(x.id)+'">'+
       '<span class="fl">'+fl+'</span><span class="nm"><i class="kb">'+(i+1)+'</i>'+b2Esc(x.name)+'</span>'+cost+
-      '<span class="sub"><span class="kd">'+b2Esc(bxKind(x))+'</span>'+pv+(x.can.ok?'':'<span class="need">'+why+'</span>')+'</span>'+
+      '<span class="sub"><span class="kd">'+b2Esc(bxKind(x))+'</span>'+dr+pv+rt+(x.can.ok?'':'<span class="need">'+why+'</span>')+'</span>'+
       (det&&short?'<span class="short dx">'+b2Esc(short)+'</span>':'')+'<span class="use">'+useTxt+'</span></button>';
   });
   box.innerHTML=h; $('b3-deck').classList.toggle('busy',!cmd);
@@ -232,8 +235,6 @@ function bxCarry(t) {
   for(const r of rows) c.push(bxChip(b2Esc(r.name)));
   return c.join('');
 }
-// A monster's Pet Peeves under the target's name (a detail; battleux3 moves them to badges under each monster on the scene).
-const bxPeeves=t=>{ const pv=b3Peeves(t),W=B3_FORECAST; return '<div class="k dx"><span class="lab">'+W.peeves+'</span>'+(pv.length?pv.map(bxFl).join(''):bxChip(W.noPeeves))+'</div>'; };
 function bxLookHtml(t,why) {
   const rows=b3Carried(B3.F,t).filter(r=>['debuff','buff','stance','prime','mark','shield','hazard','counter','marked','charge'].includes(r.kind)||r.kind==='pips'),W=B3_FORECAST;
   return bxWho(t)+(why?'<div class="note"><b>'+b2Esc(why)+'</b></div>':'')+'<div class="k info">'+bxCarry(t)+'</div>'+
@@ -266,7 +267,8 @@ function b3RenderTray() {
   else if(!o||!o.units.length) t='<div class="h"><b>'+b2Esc(e.ruckus?W.family:u.name)+'</b></div>'+(bad?'<div class="k">'+bad+'</div>':'');
   else if(o.units.length===1) {
     const x=o.units[0];
-    t=bxWho(x)+'<div class="k">'+(P?b3FcChips(P,x).join(''):'')+bad+'</div>'+(x.side==='foe'?bxPeeves(x):'')+hint;
+    t=bxWho(x)+'<div class="k">'+(P?b3FcChips(P,x).join(''):'')+bad+'</div>'+hint;   // a monster's Pet Peeves are badges under it on the scene (battleux3), not said again here
+
   } else {
     t='<div class="h"><b>'+b2Esc(o.label)+'</b></div>'+o.units.map(x=>'<div class="k"><span class="bx-chip nm">'+b2Esc(x.name)+'</span>'+(P?b3FcChips(P,x).join(''):'')+'</div>').join('')+(bad?'<div class="k">'+bad+'</div>':'')+hint;
   }
