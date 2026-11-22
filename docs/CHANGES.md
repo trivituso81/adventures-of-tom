@@ -1,3 +1,10 @@
+## fix-menu4play-2 (2026-11-22): the Family page seats all four people evenly clear of the crease, and the tab says Tom's Party
+
+Card c-fix-menu4play-2 (fix from Tom's report on t-menu4play). Tom: "The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family."
+- Wide book (Duo, landscape, desktop): the right page now seats its people in the same width as the left page, packed to the left, so Rose and Deedee sit the same distance apart as Tom and Grace and stay clear of the crease. The dead space on the right of the line-up is left empty for now; what to put there is Tom's call (not done).
+- The tab is now "Tom's Party" (`M2_TABS` in `engine/m2-core.js`). I read "Dallas's" as "Tom's" because "Dallas" appears nowhere in the game; if another name was meant, say it on the card.
+- Tested: `python3 tools/m2_test.py` passes; frame `tools/shots/m2-duo.png`.
+
 ## fix-ch2play (2026-11-22): chapter 2 loses more dull lines, the phone call is announced, and Griffith Park has a three-find trail to search
 
 Card c-fix-ch2play (fix from Tom's report on t-ch2play). Tom: "tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this". The pencil reports of 2026-11-21 18:00 to 18:07 (r-20261121-180018-jc8f, 180027-tyq4, 180035-bjdf, 180050-39xy, 180126-mdm1, 180230-crne, 180249-oy95, 180326-tsde, 180345-jvj8, 180408-h8ca, 180458-58c9, 180626-4eca, 180646-o5il, 180709-4jo0, 180718-y1a5) are all answered here.
