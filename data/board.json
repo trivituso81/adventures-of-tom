@@ -29566,7 +29566,8 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "started_at": "2026-11-21T23:20:59+00:00"
+   "started_at": "2026-11-21T23:20:59+00:00",
+   "quiet": true
   },
   {
    "id": "c-bigone25",
@@ -29776,13 +29777,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDzJK39oZv9uhhUZZf",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -29842,6 +29843,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -29856,8 +29861,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-22T00:52:47+00:00"
+   }
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -30902,7 +30906,7 @@
    "id": "c-reports-11",
    "tag": "reports-2026-11-22",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Shipped: Grace line added to ch1Mudling (r-20261121-165412-a75h). Waiting on the sync job to close.",
@@ -30940,13 +30944,18 @@
     {
      "d": "2026-11-22",
      "t": "Added Grace's line \"Tata, look! There's the mud blob holding the muffins!\" before Rose's line in ch1Mudling (report r-20261121-165412-a75h). Build reports-2026-11-22."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-22: in the chapter 1 mud scene Grace now jumps in first with \"Tata, look! There's the mud blob holding the muffins!\""
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-22T01:13:19+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-battleux-plan",
@@ -30982,6 +30991,37 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "c-reports-12",
+   "tag": "reports-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172017-kfe3. First note: the block/bulb/gray grass shouldnt show up until after the log is defeated.",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -30989,8 +31029,10 @@
    "url": "https://claude.ai/code/session_01RXeukEZdH8UYYeG9RP9wsa",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-22T01:16:43Z",
-   "last": "2026-11-22T01:16:43Z",
-   "tags": [],
+   "last": "2026-11-22T01:22:41Z",
+   "tags": [
+    "reports-2026-11-22"
+   ],
    "cards": [
     "c-reports-11"
    ]
@@ -35636,7 +35678,8 @@
    "r-20261121-120404-lwe8",
    "r-20261121-122202-loak",
    "r-20261121-125831-qvon",
-   "r-20261121-165412-a75h"
+   "r-20261121-165412-a75h",
+   "r-20261121-172017-kfe3"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -35670,8 +35713,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "6519b6485ea85a0a45f0027d6bffb78901f2a09a",
- "synced_at": "2026-11-22T01:17:26+00:00",
+ "synced": "2bc47e8ec34023714c79afe52703f78f2d0b3fc1",
+ "synced_at": "2026-11-22T01:23:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
