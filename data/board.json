@@ -34226,7 +34226,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
+    "url": "https://claude.ai/code/session_01RXeukDYivdPsYXjec2AAAJ",
     "opening": "started by START"
    },
    "auto": true,
@@ -34264,6 +34264,10 @@
      "d": "2026-11-22",
      "t": "Session started. Tom chose Fix all of them on t-movefun-pick.",
      "at": "2026-11-22T04:55:59Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T04:54:10+00:00"
@@ -34322,6 +34326,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDYivdPsYXjec2AAAJ",
+   "title": "Remake the flat move videos Tom picked",
+   "first": "2026-11-22T04:56:08Z",
+   "last": "2026-11-22T04:56:08Z",
+   "tags": [],
+   "cards": [
+    "c-movefun-fix"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
+   "title": "Remake the flat move videos Tom picked",
+   "first": "2026-11-22T04:55:59Z",
+   "last": "2026-11-22T04:55:59Z",
+   "tags": [],
+   "cards": [
+    "c-movefun-fix"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGNmigviVcDA5SnDgw",
    "title": "New menu: Bag and System",
@@ -39437,8 +39461,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "d10ab02edb9328c804ea1b3c25784b07269a12e2",
- "synced_at": "2026-11-22T04:54:10+00:00",
+ "synced": "a6271dfdd8a975587d01abd757cea6c63971c328",
+ "synced_at": "2026-11-22T04:56:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
