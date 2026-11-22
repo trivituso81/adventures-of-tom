@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "timezone": "America/Los_Angeles",
  "about": "Every charge is taken from a receipt in email. Dates and times are Pacific time. Amounts are US dollars.",
  "services": [
@@ -783,6 +783,15 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-22T01:49:39Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44972891610"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.2358,
+   "what": "Art Library pictures and their QA checks made on xAI by the art-gen Action (banner-leave-grace, banner-join-rose, banner-join-grace, banner-leave-rose)",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44978224316",
+   "at": "2026-11-22T02:55:54Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44978224316"
   }
  ],
  "balances": [
