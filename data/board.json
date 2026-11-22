@@ -30361,10 +30361,11 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T21:21:04Z",
-    "n": 26,
-    "est": 6,
+    "want": true,
+    "at": "2026-11-22T22:00:23Z",
+    "n": 1,
+    "est": 0.15,
+    "auto": true,
     "run": {
      "state": "done",
      "at": "2026-11-22T21:50:09Z",
@@ -31855,6 +31856,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both videos: the burst does the move but grows to fill the frame and its sparks touch the edge. Changed one thing, pad 0.65, rev 2; next try started on t-movestage-lab."
     }
    ],
    "prompt": {

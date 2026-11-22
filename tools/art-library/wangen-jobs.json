@@ -1962,7 +1962,8 @@
   "why": "movestage2: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
  },
  "stage-tom-bluebang-vid": {
-  "rev": 1,
+  "rev": 2,
+  "pad": 0.65,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -1988,7 +1989,7 @@
    "step": 4,
    "after": "stage-tom-bluebang"
   },
-  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+  "why": "movestage2 r2: wanstop fix, ONE change: pad 0.65 (start picture shrunk inside the frame). Evidence r1: the burst grows to fill the frame and its sparks touch the edge (bg 96.8 and 92.8 percent, edge 43 and 62 of 90 pictures); the move itself is right (flares once, shrinks, fades out). Kept: prompt file, 480p, 3 s, seed, bake settings. Changed: pad only."
  },
  "stage-tom-glare-vid": {
   "rev": 1,
