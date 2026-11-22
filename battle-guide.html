@@ -225,7 +225,7 @@ async function boot(){
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;planRefresh();}).catch(()=>{});
-    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;planRefresh();}).catch(()=>{});
+    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
     build();route();
@@ -273,7 +273,7 @@ function buildAnims(){
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
   const body=id=>{
     const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{};
-    const VO=typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(id);
+    const VO=(typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(id))||!!(GUIDE&&GUIDE.anims&&GUIDE.anims['body:'+id+':idle']);   // startpics5: a person the data file lists the family states for (Amy, Boppy, Justin, Olivia, TNB, Nara) lists them here too
     const order=['idle','guard','hit','dodge','ko','victory','run','give','slip','flustered','die'];
     order.concat(Object.keys(C).filter(k=>!order.includes(k))).forEach(st=>{
       if(C[st]) add({id:'body:'+id+':'+st,owner:id,kind:'state',name:STATE[st]||cap(st),clip:C[st],what:'body state '+st});

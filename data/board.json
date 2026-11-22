@@ -29858,7 +29858,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics4",
+   "build": "startpics5",
    "history": [
     {
      "d": "2026-11-22",
@@ -30864,6 +30864,39 @@
      "d": "2026-11-22",
      "t": "Tom: \"TNB should fold his arms and smile and wink\"; \"Nara's victory pose is her jumping on her hind legs\". Built startpics4.",
      "at": "2026-11-22T20:12:52.621Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try"
+  },
+  {
+   "id": "c-startpics5",
+   "title": "Amy's standard poses on the Animations screen",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics5",
+   "next": "Built as startpics5: the Animations screen now lists the seven standard poses for Amy, Boppy, Justin, Olivia, TNB and Nara (checked in a phone-size browser). Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i still dont have any of AMy's standard poses in the Animations screen despite working off the latest build and doing a hard refresh\". Cause: the page ignored the data file. Built startpics5.",
+     "at": "2026-11-22T20:16:00.874Z"
     }
    ],
    "prompt": {

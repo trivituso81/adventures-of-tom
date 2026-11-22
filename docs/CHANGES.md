@@ -1,3 +1,7 @@
+## startpics5 (2026-11-22): the Battle Guide's Animations screen now shows Amy's standard poses (and the other five's)
+
+Card c-startpics5. Tom (11-22 12:15): "i still dont have any of AMy's standard poses in the Animations screen despite working off the latest build and doing a hard refresh". My startpics2 fix was only in the data file (`data/guide-anims.json`); the page (`battle-guide.html`, `buildAnims`) builds its own list of body states and only listed them for the video-only four, so the list on screen did not change. Now it also lists them for anyone the data file lists them for, and rebuilds once the file has loaded. I looked at Amy's page in a phone-size browser: Idle, Guard, Getting hit, Dodge, Knocked out, Victory and Running all show (19 animations). Test: `python3 -I tools/art-library/startpic_test.py` (S7). Nothing was made or spent.
+
 ## startpics4 (2026-11-22): TNB's victory is folded arms, a smile and a wink; Nara's victory is a jump onto her hind legs
 
 Card c-startpics4. Tom (11-22 12:12): "TNB should fold his arms and smile and wink" and "Nara's victory pose is her jumping on her hind legs". Changed only those two Victory lines in `tools/guidegen/build_map.js`. TNB winks once and ends with the eye open. Nara jumps up once and stays standing on her hind legs (before, she landed back on four paws; I kept the held end pose that every state prompt uses, say so if you want her to keep bouncing). No video was made and nothing was spent. Test: `python3 -I tools/art-library/startpic_test.py`.

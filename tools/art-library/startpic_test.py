@@ -76,3 +76,7 @@ for who in ('amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara'):
     check('S6 %s prompts are state prompts, not a lunge' % who, all('lunges forward' not in p and 'MOTION:' in p for p in ps))
 check('S6 a dog prompt never says she, her, hair or outfit', all(not any(w in ga['body:nara:%s' % x]['prompt'].lower().replace('the exact character', '') for w in (' she ', ' her ', 'outfit', ' hair')) for x in ('idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run')))
 print('\nstartpic test: %s' % ('FAILED ' + ', '.join(bad) if bad else 'all passed')); sys.exit(1 if bad else 0)
+
+# S7 (startpics5): the Guide page lists the family states of a person the data file lists them for, not only the video-only four
+_h = open('battle-guide.html').read()
+check('S7 page follows guide-anims.json for body states', "GUIDE.anims['body:'+id+':idle']" in _h and 'buildAnims();' in _h.split('GUIDE=j;')[1][:120], 'battle-guide.html')
