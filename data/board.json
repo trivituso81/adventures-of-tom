@@ -34633,6 +34633,10 @@
     {
      "d": "2026-11-22",
      "t": "Session ended without shipping: I looked at the frames of grace-cubepop-r4.mp4 and grace-cubepop-a2-r4.mp4. In both she takes the blue cube from her hand/waist, squeezes it with both hands once, then tucks it back at her waist and returns to her stance; height, feet, background and ends all pass. The two failed look-checks only say the pocket pickup and tuck are not clearly shown, which is a check problem, not a motion problem. Changed nothing in the job (rev stays 4), started no try, per the card prompt. Tom card t-cubepop-checkdecide-r4 asks which way to go."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session ended without shipping: I looked at the frames of grace-cubepop-r4.mp4 and grace-cubepop-a2-r4.mp4. In both she takes the blue cube from her hand/waist, squeezes it with both hands once, then tucks it back at her waist and returns to her stance; height, feet, background and ends all pass. The two failed look-checks only say the pocket pickup and tuck are not clearly shown, which is a check problem, not a motion problem. Changed nothing in the job (rev stays 4), started no try, per the card prompt. Tom card t-cubepop-checkdecide-r4 asks which way to go."
     }
    ],
    "prompt": {
@@ -34755,6 +34759,32 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDLQ1SUuvYvgjga3AQ",
     "opening": "unknown"
+   }
+  },
+  {
+   "id": "t-cubepop-checkdecide-r4",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "title": "Grace cube pop: checks fail, video looks right to me",
+   "next": "grace-cubepop failed the look-checks twice (pocket pickup and tuck \"not clear\"), but the frames show her taking the cube out, squeezing it once with both hands and tucking it back. Pick one (it blocks c-wanstop-grace-cubepop-r4).",
+   "choices": [
+    "Bake the latest video as it is (Recommended)",
+    "Try once more with the pocket named differently"
+   ],
+   "leads": [
+    "A Claude card bakes grace-cubepop-a2-r4.mp4 into the game by hand; the checks stay as they are.",
+    "A Claude card changes the pocket words in the prompt and starts one more try (about $0.50)."
+   ],
+   "blocks": [
+    "c-wanstop-grace-cubepop-r4"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by session on c-wanstop-grace-cubepop-r4"
    }
   },
   {
