@@ -800,22 +800,33 @@ function askStart(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
   $('gstartconf').innerHTML='<div class="conf"><p><b>This spends '+money(g.startCost||0.15)+'.</b> One picture of '+esc(ownerName(g.startWho))+', checked before it goes in the game. The most it can spend is $0.30.</p><div class="row2"><button type="button" class="gold" id="gstartgo">Yes, spend '+money(g.startCost||0.15)+'</button><button type="button" id="gstartcan">Cancel</button></div></div>';
 }
+const STARTING={};   // startpics7: a person whose picture was already asked for in this page is not asked for again
+async function queueLine(tok){   // startpics7: what is ahead of a request, from the Actions list (needs the GitHub token the page already uses)
+  try{const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
+    const r=await fetch(GH()+'/repos/'+REPO+'/actions/workflows/wan-gen.yml/runs?per_page=12&t='+Date.now(),{cache:'no-store',headers:H});if(!r.ok)return '';
+    const runs=((await r.json()).workflow_runs||[]).filter(x=>x.conclusion!=='skipped');
+    const going=runs.filter(x=>x.status==='in_progress').length,wait=runs.filter(x=>x.status==='queued'||x.status==='pending'||x.status==='waiting').length;
+    if(!going&&!wait)return 'Nothing else is running, so yours starts now.';
+    return 'Right now '+going+' run'+(going===1?' is':'s are')+' going and '+wait+' waiting. Runs go one at a time and a video run takes about 5 minutes, so yours may wait up to '+Math.max(1,going+Math.max(0,wait-1))*5+' minutes before it starts.';}
+  catch(e){return '';}
+}
 async function doStart(){
-  const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;const who=g.startWho,at=new Date().toISOString(),take=Math.floor(Date.now()/1000),box=$('gstartconf'),st=$('gstartstate');
+  const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;if(STARTING[g.startWho]){$('gstartmsg').textContent='Already asked for in this page. It is in line; do not press it again.';return;}STARTING[g.startWho]=1;const who=g.startWho,at=new Date().toISOString(),take=Math.floor(Date.now()/1000),box=$('gstartconf'),st=$('gstartstate');
   box.innerHTML='<p class="hint">Sending the request...</p>';
   try{await ghRequest('data/wan-requests.json','wan: generate startpic '+who,d=>{d.requests.push({startpic:who,take,at,cap:0.3});});}
-  catch(e){box.innerHTML='';$('gstartmsg').textContent=e.message+'. Nothing was sent.';return;}
-  box.innerHTML='';st.innerHTML='<p class="hint">Sent. GitHub is making the picture now (about a minute). Keep this page open.</p>';
-  const tok=lsGet(TOKEN),t0=Date.now();
-  while($('gstartstate')===st&&Date.now()-t0<20*60000){
+  catch(e){STARTING[who]=0;box.innerHTML='';$('gstartmsg').textContent=e.message+'. Nothing was sent.';return;}
+  box.innerHTML='';const tok=lsGet(TOKEN),t0=Date.now();
+  st.innerHTML='<p class="hint">Sent. The picture itself takes about a minute once its turn comes.</p><p class="hint" id="gstartq"></p>';
+  while($('gstartstate')===st&&Date.now()-t0<30*60000){
+    const ql=await queueLine(tok),qe=$('gstartq');if(qe&&$('gstartstate')===st)qe.textContent=ql;
     await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
     const r=await ghGetJson('startpic-results.json','wangen',tok).catch(()=>null);
     const row=r&&r.doc&&(r.doc.results||[]).find(x=>x.at===at);
     if(!row)continue;
-    if(row.error){st.innerHTML='<div class="cant"><b>No picture was put in the game.</b> '+esc(row.error)+'</div><p class="hint">'+(row.cost?'It cost '+money(row.cost)+'. ':'It cost nothing. ')+'Tap Make the start picture to try again, or send Claude a note below.</p>';return;}
+    if(row.error){st.innerHTML='<div class="cant"><b>No picture was put in the game.</b> '+esc(row.error)+'</div><p class="hint">'+(row.cost?'It cost '+money(row.cost)+'. ':'It cost nothing. ')+'Tap Make the start picture to try again, or send Claude a note below.</p>';STARTING[who]=0;return;}
     st.innerHTML='<div class="conf"><p><b>Done.</b> The start picture of '+esc(ownerName(who))+' is in the game'+(row.mirrored?' (it faced the wrong way, so it was mirrored)':'')+'. The video button appears after GitHub publishes the page, about two minutes: reload this page then.</p></div>';return;
   }
-  if($('gstartstate')===st)st.innerHTML='<p class="hint">No answer yet. Reload this page in a few minutes: if the video button is there, it worked.</p>';
+  if($('gstartstate')===st){STARTING[who]=0;st.innerHTML='<p class="hint">No answer yet after 30 minutes. Reload this page: if the video button is there, it worked. If not, tell Claude.</p>';}
 }
 async function waitAnswer(file,at,show){   // the Action keeps its answer on the branch guidegen; look every 5 seconds for up to 5 minutes
   const tok=lsGet(TOKEN),t0=Date.now();

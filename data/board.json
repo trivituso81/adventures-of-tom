@@ -29921,7 +29921,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics6",
+   "build": "startpics7",
    "history": [
     {
      "d": "2026-11-22",
@@ -31254,6 +31254,40 @@
     "effort": "medium (small piece of work)",
     "text": "Read CLAUDE.md. In engine/m2-core.js m2Render, the wide book must use two equal columns so the crease is at the book center; tools/m2_test.py checks the pages are equal. Run python3 tools/m2_test.py and look at tools/shots/m2-duo.png. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics7",
+   "title": "Guide taps no longer lost or doubled",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics7",
+   "next": "Built as startpics7: a lost or cancelled run can no longer drop a Guide request, a double tap is dropped before it costs money, and the page shows what is ahead of the request. Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"Something is still fundamentally wrong here, both with the image requests and the animation requests. They all hang\". Cause: GitHub keeps one waiting run per group and a card's video batch cancelled the waiting guide run. Built startpics7.",
+     "at": "2026-11-22T21:03:54.059Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
    "done": "2026-11-22"
   }
  ],

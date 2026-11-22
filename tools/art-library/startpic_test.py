@@ -89,3 +89,9 @@ for _n in ('tom', 'grace', 'rose', 'deedee'):
     _r = _sp.measure(open('art/clips/start/%s-hero.png' % _n, 'rb').read())
     check('S8 approved %s start picture passes the measure' % _n, _r['ok'], [c['say'] for c in _r['checks'] if not c['ok']])
     _j.dumps(_r)
+
+# S9 (startpics7): a lost run cannot lose a request, a double tap cannot double the charge, the page says what is ahead
+_w = open('.github/workflows/wan-gen.yml').read(); _g = open('tools/art-library/wangen.py').read(); _p = open('battle-guide.html').read()
+check('S9 non-guide runs sweep the request file and start a guide run', 'Sweep what is still asked' in _w and 'actions: write' in _w and "mode != 'guide'" in _w.split('Sweep what is still asked')[1][:200], 'wan-gen.yml')
+check('S9 duplicate start picture requests are dropped', 'duplicate start picture request' in _g, 'wangen.py')
+check('S9 page blocks a second tap and shows the queue', "STARTING[g.startWho]" in _p and 'queueLine(tok)' in _p, 'battle-guide.html')

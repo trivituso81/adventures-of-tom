@@ -50,6 +50,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # startpics7: the sweep step below starts the next run
 
 jobs:
   gen:
@@ -217,3 +218,21 @@ jobs:
           # fresh clone of main inside publish.py (this checkout is shallow and main may have moved); needs ffmpeg for the strips (installed above)
           python3 -I tools/videohist/publish.py --branch-dir "$RUNNER_TEMP/wangen" --run-id "${{ github.run_id }}" \
             --remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+      - name: Sweep what is still asked (startpics7)
+        if: ${{ inputs.dry_run != 'true' && steps.mode.outputs.mode != 'guide' && always() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # GitHub keeps ONE waiting run per group, and a card's video batch ("board: wan generate ...") waiting in the group cancels a waiting guide run: Tom's TNB tap and then
+        # his Amy video and Nara picture taps were lost or delayed that way (the request stayed in data/wan-requests.json with no run to make it). A run that is not a guide run
+        # therefore looks at data/wan-requests.json on the newest main when it ends and, if anything is still asked, starts one guide run. A guide run never starts another (no loop).
+        run: |
+          git fetch -q --depth 1 origin main
+          n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('requests') or []))")
+          echo "requests still asked: $n"
+          if [ "$n" -gt 0 ]; then
+            curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/wan-gen.yml/dispatches" \
+              -d '{"ref":"main","inputs":{"requests":"true","dry_run":"false"}}'
+            echo "started a guide run for them"
+          fi

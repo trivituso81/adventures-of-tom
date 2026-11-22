@@ -267,6 +267,13 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     doc = gqueue.load('data/wan-requests.json', a.repo)
     reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
     sps = [r for r in doc.get('requests') or [] if r.get('startpic') and isinstance(r.get('take'), int)]   # startpics1: Make the start picture
+    # startpics7: one picture per person per run. A second tap on the same person (the page said "sent" and nothing showed yet) is dropped here, before any money is spent.
+    uniq, seen = [], set()
+    for r in sps:
+        w = str(r.get('startpic'))
+        if w in seen: say('duplicate start picture request for %s dropped (nothing spent)' % w); continue
+        seen.add(w); uniq.append(r)
+    sps = uniq
     say('%d guide request(s) found, %d start picture request(s)' % (len(reqs), len(sps)))
     if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
