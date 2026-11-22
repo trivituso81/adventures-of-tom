@@ -5,13 +5,13 @@
 // index.html?menu=new forces NEW (?menu=old forces OLD).
 // How it plugs in (nothing in menu.js is edited): openMenu, closeMenu, renderMenu, menuKey, menuPad and menuBack are wrapped here.
 // While the new menu is open `menuOpen` is true, so every system that pauses for the menu (walking, dialogue, timers) still does.
-// Until their own cards ship: the Vibes tab opens today's Vibes screen over the book (b3vOpen), and Gear, Bag and System open
-// today's Gear, Items and Load screens in place of the book; Back there returns to the book.
+// Pages: Family (engine/m2-family.js), Vibes and Gear (engine/m2-vibes.js, card menu2). Until their own cards ship, Bag and System open
+// today's Items and Load screens in place of the book (and Old Stampcard opens today's Stamps screen); Back there returns to the book.
 // Layout: wider than tall = tabs down the left edge and a two-page spread (the gutter at the middle of the screen on the unfolded
 // Duo and on a desktop, where the fold is); taller than wide = one page and the tabs along the bottom edge.
 // Files: engine/m2-core.js (this), engine/m2-family.js (the Family page), m2.css, fonts/bricolage.woff2 and figtree.woff2,
 // art/menu/<id>.webp (tools/sprite-bake/bake_menu_heroes.py).
-const M2={open:false,tab:'family',legacy:false,sel:0,change:null,keys:false,mode:'',dims:null,built:false,root:null,z:1,say:'',sig:''};
+const M2={open:false,tab:'family',legacy:false,back:'family',who:null,bench:false,vibe:null,pick:null,slot:null,peek:null,dirty:false,sel:0,change:null,keys:false,mode:'',dims:null,built:false,root:null,z:1,say:'',sig:''};
 const M2_KEY='aot-menu';
 const M2_TABS=[{id:'family',label:'Family'},{id:'vibes',label:'Vibes'},{id:'gear',label:'Gear'},{id:'bag',label:'Bag'},{id:'system',label:'System'}];
 // The picture for each tab (the same line icons as the drawings), always shown with its word.
@@ -137,16 +137,18 @@ function m2Render() {
   M2.focusNext=null;
   let body;
   if(M2.tab==='family') body=m2FamilyBody(d);
+  else if(M2.tab==='vibes') body=m2VibesBody(d);
+  else if(M2.tab==='gear') body=m2GearBody(d);
   else body={l:m2Soon(M2_TABS.find(t=>t.id===M2.tab).label),r:'',single:true};
   if(d.wide) {
     const rail=d.compact?72:96,gap=8,center=document.documentElement.classList.contains('duo')||d.lw>=900;
     const lw=center?Math.round(d.lw/2-rail-gap):Math.round((d.lw-rail-gap-8)/2);
     grid.style.gridTemplateColumns=rail+'px minmax(0,1fr)'; grid.style.gridTemplateRows=(d.compact?44:48)+'px minmax(0,1fr)'; grid.style.columnGap=gap+'px'; grid.style.padding='0 8px 12px 0';
     grid.innerHTML='<div></div>'+m2Top(d)+m2Tabs()+
-      '<main class="m2-book" style="grid-template-columns:'+(body.single?'1fr':lw+'px minmax(0,1fr)')+'"><section class="m2-page l" aria-label="Page">'+body.l+'</section>'+(body.single?'':'<section class="m2-page r" aria-label="Page">'+body.r+'</section>')+'</main>';
+      '<main class="m2-book" style="grid-template-columns:'+(body.single?'1fr':lw+'px minmax(0,1fr)')+'"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section>'+(body.single?'':'<section class="m2-page r'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.r+'</section>')+'</main>';
   } else {
     grid.style.gridTemplateColumns='minmax(0,1fr)'; grid.style.gridTemplateRows='auto minmax(0,1fr) auto'; grid.style.columnGap='0'; grid.style.padding='calc(env(safe-area-inset-top,0px) + 6px) 0 calc(env(safe-area-inset-bottom,0px) + 8px)';
-    grid.innerHTML=m2Top(d)+'<main class="m2-book" style="margin:0 8px"><section class="m2-page l" aria-label="Page">'+body.l+'</section></main>'+m2Tabs();
+    grid.innerHTML=m2Top(d)+'<main class="m2-book" style="margin:0 8px"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section></main>'+m2Tabs();
   }
   r.classList.add('m2-in');
   if(M2.tab==='family') m2FamilyAfter();
@@ -154,7 +156,7 @@ function m2Render() {
   if(keep) { const f=r.querySelector('[data-k="'+keep+'"]')||r.querySelector('.m2-tab[aria-selected="true"]'); if(f) f.focus({preventScroll:true}); }
 }
 // Sizes that depend on measured space: the line-up scale.
-function m2Layout() { if(M2.open&&!M2.legacy&&M2.tab==='family'&&typeof m2FamilyLayout==='function') m2FamilyLayout(); }
+function m2Layout() { if(!M2.open||M2.legacy) return; if(M2.tab==='family') m2FamilyLayout(); else m2PersonLayout(); }
 
 // ---------- Open and close ----------
 function m2OpenNew(viaKeys) {
@@ -162,7 +164,7 @@ function m2OpenNew(viaKeys) {
   if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
   menuOpen=true; sfx.menuOpen(); clearInput();
   menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuChar=0;
-  Object.assign(M2,{open:true,legacy:false,tab:'family',sel:0,change:null,keys:!!viaKeys,say:'',mode:'',sig:''});
+  Object.assign(M2,{open:true,legacy:false,tab:'family',sel:0,who:null,bench:false,pick:null,slot:null,peek:null,dirty:false,change:null,keys:!!viaKeys,say:'',mode:'',sig:''});
   const r=m2Root(); m2Still(); r.classList.remove('m2-in'); r.hidden=false;
   m2Fonts();
   M2.focusNext=M2.keys?'tab-family':null;
@@ -171,7 +173,8 @@ function m2OpenNew(viaKeys) {
 }
 function m2CloseNew() {
   if(!M2.open) return;
-  M2.open=false; M2.legacy=false; M2.change=null;
+  M2.open=false; M2.legacy=false; M2.change=null; M2.pick=null;
+  if(M2.dirty) { M2.dirty=false; try { saveGame('auto',true); } catch(e) {} }   // a Vibes or gear change goes into the autosave, the way the old screens did
   const r=M2.root; if(r) { r.hidden=true; r.classList.remove('m2-in'); }
   menuOpen=false; menuQuit=false; menuSaving=false; menuConfirm=null;
   const q=$('menu-quit'); if(q) q.remove(); const sp=$('menu-save'); if(sp) sp.remove();
@@ -180,9 +183,9 @@ function m2CloseNew() {
 }
 // A tab that has no screen of its own yet: today's screen, in place of the book. Back returns to the book.
 function m2OpenLegacy(tab) {
-  const map={gear:'gear',bag:'items',system:'saves'},t=map[tab]||'gear';
+  const map={gear:'gear',bag:'items',system:'saves',stamps:'stamps'},t=map[tab]||'gear';
   if(menuChar>=party.length) menuChar=0;
-  M2.legacy=true; M2.root.hidden=true;
+  M2.back=M2.tab; M2.legacy=true; M2.root.hidden=true;
   menuTab=t; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuKeyNav=M2.keys; menuFocusNext=M2.keys?'cmd-'+t:null;
   menuZoom(); $('menu').hidden=false; $('menu-body').scrollTop=0;
   M2_orig.renderMenu();
@@ -190,7 +193,7 @@ function m2OpenLegacy(tab) {
 }
 function m2FromLegacy() {
   M2.legacy=false; $('menu').hidden=true; menuTab='home'; menuQuit=false; menuSaving=false; menuConfirm=null; menuItem=null; menuSlot=null;
-  sfx.tab(); M2.tab='family'; M2.root.hidden=false; M2.focusNext=M2.keys?'tab-family':null;
+  sfx.tab(); M2.tab=M2.back||'family'; M2.root.hidden=false; M2.focusNext=M2.keys?'tab-'+M2.tab:null;
   m2Fit(true); if(!M2.keys) M2.root.focus({preventScroll:true});
 }
 
@@ -199,16 +202,13 @@ function m2Act(act,a,el) {
   if(act==='close') { m2CloseNew(); return; }
   if(act==='tab') { m2Tab(a); return; }
   if(act==='legacy') { m2OpenLegacy(a); return; }
-  if(M2.tab==='family'&&typeof m2FamilyAct==='function') m2FamilyAct(act,a,el);
+  if(M2.tab==='family') m2FamilyAct(act,a,el); else m2PersonAct(act,a,el);
 }
 function m2Tab(id) {
-  if(id==='vibes') {
-    if(menuChar>=party.length) menuChar=0;
-    M2.change=null; sfx.tab(); b3vOpen('menu'); return;
-  }
   if(id===M2.tab) return;
-  sfx.tab(); M2.tab=id; M2.change=null; M2.focusNext=M2.keys?'tab-'+id:null;
-  if(id==='family') { m2Render(); return; }
+  sfx.tab(); M2.tab=id; M2.change=null; M2.pick=null; M2.peek=null; M2.focusNext=M2.keys?'tab-'+id:null;
+  if(id==='vibes'||id==='gear') { if(M2.tab!=='family'&&(!M2.who||!m2People().some(x=>x.id===M2.who))) M2.who=(party[Math.min(M2.sel,party.length-1)]||party[0]).id; }
+  if(id==='family'||id==='vibes'||id==='gear') { m2Render(); return; }
   m2OpenLegacy(id);
 }
 
@@ -238,10 +238,17 @@ function m2Move(dir) {
   sfx.move(); best.focus({preventScroll:true});
 }
 function m2Cycle(d) {
+  if(M2.tab==='vibes'||M2.tab==='gear') {
+    const all=M2.bench?m2Bench():party; if(all.length<2) return;
+    const i=Math.max(0,all.findIndex(x=>x.id===M2.who)),m=all[(i+d+all.length)%all.length];
+    M2.who=m.id; M2.pick=null; M2.peek=null; const pi=party.indexOf(m); if(pi>=0) { M2.sel=pi; menuChar=pi; }
+    sfx.tab(); M2.focusNext=M2.keys?'w-'+m.id:null; m2Render(); return;
+  }
   if(M2.tab!=='family'||party.length<2) return;
   M2.sel=(M2.sel+d+party.length)%party.length; menuChar=M2.sel; sfx.tab(); M2.focusNext=M2.keys?'p-'+M2.sel:null; m2Render();
 }
 function m2Back() {
+  if(M2.pick!=null) { const k='q-'+M2.pick; M2.pick=null; sfx.tab(); M2.focusNext=M2.keys?k:null; m2Render(); return; }
   if(M2.change) { M2.change=null; sfx.tab(); M2.focusNext=M2.keys?'change':null; m2Render(); return; }
   m2CloseNew();
 }
@@ -274,8 +281,8 @@ closeMenu=function() {
   return M2_orig.closeMenu.apply(this,arguments);
 };
 renderMenu=function() { if(M2.open&&!M2.legacy) { m2Render(); return; } return M2_orig.renderMenu.apply(this,arguments); };
-menuKey=function(e) { if(M2.open&&!M2.legacy) { if(typeof B3V!=='undefined'&&B3V.open) return false; return m2Key(e); } return M2_orig.menuKey.apply(this,arguments); };
-menuPad=function(p) { if(M2.open&&!M2.legacy) { if(typeof B3V!=='undefined'&&B3V.open) return; return m2Pad(p); } return M2_orig.menuPad.apply(this,arguments); };
+menuKey=function(e) { if(M2.open&&!M2.legacy) return m2Key(e); return M2_orig.menuKey.apply(this,arguments); };
+menuPad=function(p) { if(M2.open&&!M2.legacy) return m2Pad(p); return M2_orig.menuPad.apply(this,arguments); };
 // Back inside a today's-screen page returns to the book once nothing smaller is open (a confirm, an item, a slot).
 menuBack=function(fromCmd) {
   if(M2.open&&M2.legacy) {
@@ -293,12 +300,6 @@ const M2_origAward=b3AwardVp;
 b3AwardVp=function(id,L,vp) {
   const r=M2_origAward.apply(this,arguments);
   try { if(r&&r.ranks&&r.ranks.length) { const m=b3Member(id); if(m&&m.vibes===L) m.m2new=true; } } catch(e) {}
-  return r;
-};
-const M2_origVibesRender=b3vRender;
-b3vRender=function() {
-  const r=M2_origVibesRender.apply(this,arguments);
-  try { if(B3V.door==='menu') { const m=b3Member(B3V.ids[B3V.sel]); if(m&&m.m2new) m.m2new=false; } } catch(e) {}
   return r;
 };
 // The tags ride along in the save (a new field, nothing removed).

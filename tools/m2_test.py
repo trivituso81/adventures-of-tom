@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test of the new main menu (menu1, files engine/m2-*.js and m2.css).
+"""Test of the new main menu (menu1 Family, menu2 Vibes and Gear; files engine/m2-*.js and m2.css).
 
 Opens the new menu with four in the party and people on the bench at five sizes, fails when a page
 overflows, any text is under 12.5 px, any button is under 44 px, or the text has an em dash; tests the
@@ -44,9 +44,12 @@ AUDIT = """()=>{ const root=document.getElementById('m2'); const bad={over:[],sm
   const rr=root.getBoundingClientRect();
   for(const p of root.querySelectorAll('.m2-page')) {
     const r=p.getBoundingClientRect();
-    if(p.scrollWidth>p.clientWidth+1||p.scrollHeight>p.clientHeight+1) bad.over.push('page scroll '+p.className+' '+p.scrollWidth+'x'+p.scrollHeight+' in '+p.clientWidth+'x'+p.clientHeight);
+    const ys=e=>{ const o=getComputedStyle(e).overflowY; return o==='auto'||o==='scroll'; };
+    const inScroll=c=>{ for(let x=c;x&&x!==p.parentElement;x=x.parentElement) { if(x!==c&&ys(x)) return true; if(x===p&&ys(x)) return true; } return false; };
+    if(p.scrollWidth>p.clientWidth+1||(!ys(p)&&p.scrollHeight>p.clientHeight+1)) bad.over.push('page scroll '+p.className+' '+p.scrollWidth+'x'+p.scrollHeight+' in '+p.clientWidth+'x'+p.clientHeight);
     for(const c of p.querySelectorAll('*')) { if(c.classList.contains('m2-fig')) continue; const b=c.getBoundingClientRect(); if(!b.width||!b.height) continue;
-      if(b.bottom>r.bottom+1.5||b.right>r.right+1.5||b.left<r.left-1.5||b.top<r.top-1.5) bad.over.push((c.className||c.tagName)+' leaves its page by '+Math.round(Math.max(b.bottom-r.bottom,b.right-r.right,r.left-b.left,r.top-b.top))); }
+      const sc=inScroll(c);
+      if((!sc&&(b.bottom>r.bottom+1.5||b.top<r.top-1.5))||b.right>r.right+1.5||b.left<r.left-1.5) bad.over.push((c.className||c.tagName)+' leaves its page by '+Math.round(Math.max(b.bottom-r.bottom,b.right-r.right,r.left-b.left,r.top-b.top))); }
   }
   const L=document.getElementById('stage'); const sr=L.getBoundingClientRect();
   for(const c of root.querySelectorAll('.m2-top,.m2-tabs,.m2-book,.m2-page')) { const b=c.getBoundingClientRect(); if(b.right>sr.right+1.5||b.bottom>sr.bottom+1.5||b.left<sr.left-1.5||b.top<sr.top-1.5) bad.over.push((c.className)+' leaves the screen'); }
@@ -58,6 +61,124 @@ AUDIT = """()=>{ const root=document.getElementById('m2'); const bad={over:[],sm
     if(/[\\u2014\\u2013]/.test(t)) bad.dash.push(t.slice(0,30)); }
   for(const b of root.querySelectorAll('[data-m2]')) { const r=b.getBoundingClientRect(); if(!r.width) continue; if(r.width<43.5||r.height<43.5) bad.targets.push((b.dataset.k||b.className)+' '+Math.round(r.width)+'x'+Math.round(r.height)); }
   return bad; }"""
+
+
+def audit(pg, E, tag):
+    bad = E(AUDIT)
+    for k, v in bad.items():
+        if v:
+            check(False, f'{tag}: {k}: {v[:6]}')
+
+
+def stats_text(E):
+    return E("()=>document.getElementById('m2').innerText")
+
+
+def VG(pg, E, name):
+    """Vibes and Gear (menu2) at this size: header, chips, kit, Make Main, Quirks, row, gear slots, Wear, Best gear, bench, keys."""
+    # a later-game loadout for the first three: Ranks 5 and 4, 4 and 3, 3 and 3, both Quirk slots in use
+    E("""()=>{ const set=(m,a,b)=>{ const L=b3MemberLoadout(m),ids=B3_CAST[m.id].vibes; L.vp[ids[0]]=B3_RULES.rankVp[a-1]; L.vp[ids[1]]=B3_RULES.rankVp[b-1];
+        const pool=b3QuirkPool(m.id,L); L.quirks=[pool[0]||null,pool[1]||null]; };
+      set(party[0],5,4); set(party[1],4,3); set(party[2],3,3); }""")
+    E("()=>{ M2.sel=0; M2.who=null; M2.tab='vibes'; m2Render(); }")
+    pg.wait_for_timeout(300)
+    t = stats_text(E)
+    check('Health' in t and 'Attack' in t and 'Defense' in t and 'Speed' in t, f'{name}: Vibes header lacks the four numbers')
+    check('Freelancer' in t and 'Master all' in t, f'{name}: locked Freelancer chip missing')
+    n = E("()=>document.querySelectorAll('#m2 .m2-vc:not(.lock)').length")
+    check(n == E("()=>B3_CAST[m2Who().id].vibes.length"), f'{name}: {n} Vibe chips')
+    check(E("()=>[...document.querySelectorAll('#m2 .m2-kr')].length") >= 5, f'{name}: kit list too short')
+    check('Pep' in t, f'{name}: no Pep cost in the kit')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-vibes.png'))
+    audit(pg, E, f'{name} vibes')
+    # the four numbers are the new battle's own, with this loadout (no gear change here)
+    st = E("()=>{ const m=m2Who(),s=m2Stats(m); return [s.hp,s.atk,s.def,s.spd]; }")
+    shown = E("()=>[...document.querySelectorAll('#m2 .m2-st b')].map(b=>+b.textContent)")
+    check(st == shown, f'{name}: shown numbers {shown} are not the worked-out ones {st}')
+    # Make it Main on the other Vibe, through the real rule
+    other = E("()=>{ const m=m2Who(),L=m2Loadout(m); return B3_CAST[m.id].vibes.find(v=>v!==L.main); }")
+    pg.click(f'#m2 [data-m2=vibe][data-a={other}]')
+    pg.wait_for_timeout(150)
+    pg.click('#m2 [data-m2=main]')
+    pg.wait_for_timeout(200)
+    check(E("(v)=>m2Loadout(m2Who()).main===v", other) is True, f'{name}: Make it Main did not change the Main Vibe')
+    check(E("(v)=>m2Loadout(m2Who()).pocket!==v") is True, f'{name}: Pocket still the new Main')
+    pg.click('#m2 [data-m2=pocket]') if E("()=>!!document.querySelector('#m2 [data-m2=pocket]')") else None
+    # the row control: Back is refused for the last person in Front
+    E("()=>{ for(const p of party) { const L=m2Loadout(p); if(L) b3SetRow(L,'back'); } b3SetRow(m2Loadout(party[0]),'front'); m2Render(); }")
+    check(E("()=>!!document.querySelector('#m2 [data-m2=row][data-a=back]:disabled')") is True, f'{name}: Back row not refused for the last in Front')
+    E("()=>{ for(const p of party) { const L=m2Loadout(p); if(L) b3SetRow(L,null); } m2Render(); }")
+    # Quirks: open the chooser, pick one, back
+    if E("()=>!!document.querySelector('#m2 [data-m2=quirk]')"):
+        pg.click('#m2 [data-m2=quirk][data-a="0"]')
+        pg.wait_for_timeout(200)
+        check(E("()=>M2.pick===0") is True, f'{name}: Quirk chooser did not open')
+        pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-quirks.png'))
+        audit(pg, E, f'{name} quirk chooser')
+        pg.click('#m2 [data-m2=pick][data-a=""]')
+        pg.wait_for_timeout(200)
+        check(E("()=>m2Loadout(m2Who()).quirks[0]===null") is True, f'{name}: empty Quirk did not clear the slot')
+    # the details switch changes the saved setting
+    before = E("()=>m2Details()")
+    pg.click('#m2 [data-m2=details]')
+    check(E("()=>m2Details()") == (not before), f'{name}: details switch did not flip')
+    pg.click('#m2 [data-m2=details]')
+    # a late joiner's pool
+    E("()=>{ const m=MEMBERS().tnb; M2.bench=true; M2.who='tnb'; m.vibes=null; const L=b3MemberLoadout(m,true); if(L&&L.pool) L.pool.set=false; m2Render(); }")
+    if E("()=>{ const L=m2Loadout(m2Who()); return !!(L&&b3PoolOpen(L)); }"):
+        pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-pool.png'))
+        audit(pg, E, f'{name} pool')
+        pg.click('#m2 [data-m2=poollock]')
+        pg.wait_for_timeout(200)
+        check(E("()=>!b3PoolOpen(m2Loadout(m2Who()))") is True, f'{name}: Lock it in did not lock the split')
+    E("()=>{ M2.bench=false; M2.who=party[0].id; m2Render(); }")
+    # bench faces, then back
+    pg.click('#m2 [data-m2=bench]')
+    pg.wait_for_timeout(150)
+    check(E("()=>M2.bench===true&&document.querySelectorAll('#m2 .m2-fc').length===m2Bench().length") is True, f'{name}: bench button did not show the bench')
+    pg.click('#m2 [data-m2=who]')
+    pg.wait_for_timeout(150)
+    check(E("()=>!!m2Bench().find(x=>x.id===M2.who)") is True, f'{name}: picking a bench face did not pick them')
+    audit(pg, E, f'{name} bench vibes')
+    E("()=>{ M2.bench=false; M2.who=party[0].id; m2Render(); }")
+    # Gear
+    E("()=>{ bag.push('sweater','shirt','sunhat'); M2.tab='gear'; M2.slot=null; M2.peek=null; m2Render(); }")
+    pg.wait_for_timeout(300)
+    t = stats_text(E)
+    check('Best gear' in t, f'{name}: no Best gear button')
+    check('Tool' in t and 'Outfit' in t and 'Charm' in t, f'{name}: the three slots are not all there')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-gear.png'))
+    audit(pg, E, f'{name} gear')
+    # Wear changes the worked-out numbers, and the preview shows the change before Wear
+    E("()=>{ const m=party[0]; for(const s of wearSlots(m)) { if(m.equipment[s]) { bag.push(m.equipment[s]); m.equipment[s]=null; } } M2.slot='Outfit'; M2.peek=null; m2Render(); }")
+    opts = E("()=>gearOptions(party[0],'Outfit')")
+    if opts:
+        check(E("()=>!!document.querySelector('#m2 .m2-st i')") is True, f'{name}: no green change shown while looking at a piece')
+        before = E("()=>m2Stats(party[0])")
+        pg.click('#m2 [data-m2=wear]')
+        pg.wait_for_timeout(250)
+        after = E("()=>m2Stats(party[0])")
+        check(after != before and after['hp'] >= before['hp'], f'{name}: Wear did not change the numbers {before} {after}')
+        check(E("()=>!!party[0].equipment.Outfit") is True, f'{name}: Wear did not put the piece on')
+        pg.click('#m2 [data-m2=takeoff]')
+        pg.wait_for_timeout(200)
+        check(E("()=>!party[0].equipment.Outfit") is True, f'{name}: Take off did not take it off')
+    pg.click('#m2 [data-m2=best]')
+    pg.wait_for_timeout(250)
+    audit(pg, E, f'{name} gear after Best')
+    # keys: L and R (Q and E) change person on this page
+    E("()=>{ M2.keys=true; M2.who=party[0].id; m2Render(); }")
+    pg.keyboard.press('KeyE')
+    pg.wait_for_timeout(200)
+    check(E("()=>M2.who===party[1].id") is True, f'{name}: E did not move to the next person on Gear')
+    # tab to the Vibes and back to the Family
+    E("()=>{ M2.keys=false; m2Tab('vibes'); }")
+    pg.wait_for_timeout(200)
+    check(E("()=>M2.tab==='vibes'") is True, f'{name}: tab did not switch to Vibes')
+    E("()=>{ m2Tab('family'); }")
+    pg.wait_for_timeout(200)
+    check(E("()=>M2.tab==='family'") is True, f'{name}: tab did not return to Family')
+
 
 with sync_playwright() as pw:
     br = pw.chromium.launch(args=['--headless=new', '--no-proxy-server'])
@@ -100,6 +221,7 @@ with sync_playwright() as pw:
         hs = E("""()=>[...document.querySelectorAll('#m2 .m2-fig')].map(f=>[f.dataset.id||'',Math.round(f.getBoundingClientRect().height)])""")
         check(len(hs) == 4, f'{name}: {len(hs)} figures')
 
+        VG(pg, E, name)
         if name == 'duo':
             # the New skill tag: set on a member, shows, and clears when their Vibes page is opened
             E("()=>{ party[1].m2new=true; m2Render(); }")
@@ -149,18 +271,11 @@ with sync_playwright() as pw:
             pg.screenshot(path=os.path.join(SHOTS, 'm2-duo-noswap.png'))
             E("()=>{ const c=chapterInfo(); c.bench.never=c._old; M2.change=null; m2Render(); }")
 
-            # Tabs: Vibes opens the Vibes screen (and Back returns); Gear, Bag and System open today's screens
-            E("()=>{ M2.sel=0; menuChar=0; for(const m of party) m.m2new=false; party[0].m2new=true; m2Render(); }")
-            pg.click('#m2 [data-m2=tab][data-a=vibes]')
-            pg.wait_for_timeout(600)
-            check(E("()=>!party[0].m2new") is True, 'New skill tag did not clear when the Vibes page opened')
-            check(E("()=>(typeof B3V!=='undefined'&&!!B3V.open)") is True, 'Vibes tab did not open the Vibes screen')
-            E("()=>{ if(typeof b3vClose==='function') b3vClose(); }")
-            pg.wait_for_timeout(300)
-            pg.click('#m2 [data-m2=tab][data-a=gear]')
+            # Bag and System still open today's screens until menu3
+            pg.click('#m2 [data-m2=tab][data-a=bag]')
             pg.wait_for_timeout(500)
-            pg.screenshot(path=os.path.join(SHOTS, 'm2-duo-gear.png'))
-            check(E("()=>menuOpen") is True, 'Gear did not open')
+            check(E("()=>menuOpen") is True, 'Bag did not open')
+            E("()=>{ m2FromLegacy(); }")
             # Back to the game
             E("()=>closeMenu()")
             pg.wait_for_timeout(300)
