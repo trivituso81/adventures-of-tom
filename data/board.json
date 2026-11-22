@@ -29559,12 +29559,23 @@
      "d": "2026-11-22",
      "t": "ended without shipping: B3_STORY.chapters is [1..11, 21]; chapters 12 to 20 are not on Battle 3 yet (cards c-b3s22ch12 to c-b3s22ch20 still open). Tom's yes on t-b3s23-confirm is in. Start again after those nine ship.",
      "at": "2026-11-22T20:50:00.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
-   "started_at": "2026-11-22T20:37:33+00:00",
+   "started_at": "2026-11-22T20:42:04+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ",
+    "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "opening": "started by START"
+   },
+   "rescue": {
+    "at": "2026-11-22T20:42:04+00:00",
+    "n": 1,
+    "why": "A session ended without shipping",
+    "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
+    "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
    }
   },
   {
@@ -29901,31 +29912,6 @@
      "at": "2026-11-22T15:11:46.442Z"
     }
    ]
-  },
-  {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45047385381",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-22",
-   "changed": "2026-11-22",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
   },
   {
    "id": "c-chaptercard-storybook",
@@ -31092,9 +31078,44 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067835157",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDNsLWPpd5nBjmXzvJ",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "first": "2026-11-22T20:41:22Z",
+   "last": "2026-11-22T20:41:22Z",
+   "tags": [],
+   "cards": [
+    "c-b3s23"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGbrHbR5tTUJoJwwSg",
    "title": "Last night: what the night shift did",
@@ -36791,8 +36812,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "1f1f9b53f38778e9b48aed3272b219d2640a5bdd",
- "synced_at": "2026-11-22T20:40:41+00:00",
+ "synced": "d367edca4415a7128fe7bcc4eb8a3cdc1bf802ae",
+ "synced_at": "2026-11-22T20:42:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
