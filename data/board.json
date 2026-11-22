@@ -27248,10 +27248,10 @@
    "ask": "pictures",
    "fyi": true,
    "title": "Try auto-approve on Grace's and Rose's party banners",
-   "next": "What changed: the checker (QA) was judging cropped pictures wrongly, and the two JOIN banners really had hands cut off at the edge. Now QA no longer faults a waist-up picture for legs or shoes it is not supposed to show, and the JOIN prompts keep the hands inside the picture. Last time the plain Generate button was tapped, so QA graded but approved nothing; this time use the auto-approve button. 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.12; it remakes only Grace's and Rose's JOIN banners). 2) Close the board; it takes about 5 minutes. 3) Open this card again and look at the two JOIN thumbnails: are the hands fully inside the picture, and is each one Approved by QA (its score) or held with a reason? If QA approved one you would reject, tap Not this one and type what is wrong. 4) The two LEAVE banners from last time (Grace waving, Rose waving) still wait for you: tap Review them in the Art Library and APPROVE or REJECT. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and the JOIN banners are the new paintings. All good if no hand touches an edge and QA approved only what you would approve; Something is wrong if a hand is still cut off or QA held a fine one.",
+   "next": "What changed: the checker (QA) said \"cut off at the edge\" to both JOIN banners, but I looked at them full size and every hand is inside the picture, so that check no longer holds a picture on its own (it still counts in the score). 1) Open this card, under Pictures tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.12; it remakes only Grace's and Rose's JOIN banners). 2) Close the board and wait about 5 minutes. 3) Open this card again. For each JOIN banner it says Approved by QA (with its score) or Waits for you (with the reason). Look at the thumbnail: is any hand cut off by an edge, and would you approve it? If QA approved one you would reject, tap Not this one and type what is wrong. If QA held one you would approve, tap Something is wrong and name the picture. 4) The two LEAVE banners (Grace waving, Rose waving) still wait for you: tap Review them in the Art Library and APPROVE or REJECT. All good if QA approved only banners you would approve. Something is wrong if QA held a fine picture or approved one you reject.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "",
     "opening": "started by c-artgen3"
@@ -27300,6 +27300,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Failed qa Sent to Claude as card c-fix-artgen3try-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T04:17:41.018Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix fix-artgen3try-3: your \"Failed qa\" was the old results still on the card (no new auto run had been made). I opened the JOIN pictures at full size: no hand is cut off, so QA was wrong, and its \"cut off at the edge\" check no longer holds a picture. Not fixed: the lines comparing with the full-body reference are untested on a new picture; the one thing needed is your auto run."
     }
    ],
    "done_when": {
@@ -34325,8 +34329,8 @@
      "at": "2026-11-22T06:33:17.796Z"
     },
     {
-     "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
+     "d": "2026-11-22",
+     "t": "Shipped as fix-artgen3try-3: QA check f_crop moved from hold to advisory (the stored JOIN pictures have no cut hands). No paid run. Next: Tom taps Generate and auto-approve on t-artgen3try."
     }
    ],
    "prompt": {

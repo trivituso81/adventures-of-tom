@@ -1,3 +1,18 @@
+## fix-artgen3try-3 (2026-11-22): QA no longer holds a picture for "cut off at the edge" when nothing is cut off
+
+Card c-fix-artgen3try-3, from Tom on t-artgen3try: "Failed qa". Read as: QA failed pictures that were fine. Fact: the card shows no auto-approve run since the last fix (`gen.mode` is still review, run of 2026-11-22T02:55), so what he saw was the old QA results ("8 of 16", "11 of 16" with a list of failed checks). I opened the stored JOIN pictures at full size: in both, every finger is fully inside the picture (the nearest fingertip is 8 to 10 px from the right or top edge of 1408 x 704). So the cut-off hands I called "a real fault" in fix-artgen3try-2 were not real; the QA question `f_crop` could not see a margin that small and said "cut off" to both.
+
+| Change | Where |
+|---|---|
+| `f_crop` moves from hold to advisory (it still runs and still counts in the score, it no longer holds a picture on its own) | `tools/art-library/artqa-policy.json` |
+| t-artgen3try: next step rewritten to say what to look at; history line | `data/board.json` |
+
+- Kept: the JOIN and LEAVE prompts, the QA wording from fix-artgen3try-2, the 0.9 threshold, the other hold checks (`f_one`, `f_paint`, `f_text`, `f_bg`, `f_count`, `f_anat`).
+- Not fixed, and why: QA also failed the JOIN pictures on lines that compare with the full-body reference (outfit, proportions). The fix-artgen3try-2 wording is untested on a new picture because QA needs the repo key, which a session does not have. If the next auto run still holds a fine picture on those lines, the next fix is to drop the reference lines from the score for cropped pictures, on that evidence.
+- Tested: `artqa_test.py`, `artgen3_test.py`, `artgen3fix_test.py`, `artgen_test.py`, `board_artgen_test.py` all FAILS: []. No game screen changed, so no portrait or landscape frames apply.
+- Pencil reports filed since 2026-11-22T04:17:40Z: none (the 19 open ones are older chapter 2 notes), so none were marked done.
+- No paid run made. The auto run is Tom's tap.
+
 ## battleux1 (2026-11-21): the new Battle 3 screen: one list of moves, tap once to read and again to use, the strip under the scene says what will happen
 
 Card c-battleux1. Builds the screen you approved in `claude/battleux-plan.md` (3.1 to 3.5, 3.7) for the new battle only; battle 2 is untouched and no rule or number changed (`node tools/b3-sim.js check`: 3329 checks, same as before).

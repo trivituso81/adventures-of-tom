@@ -5,12 +5,12 @@
   "f_paint",
   "f_text",
   "f_bg",
-  "f_crop",
   "f_count",
   "f_anat"
  ],
  "advisory": {
-  "f_same": "said no to 8 of 40 pictures you approved (20%) in the 2026-11-20 replay, more than 1 in 10"
+  "f_same": "said no to 8 of 40 pictures you approved (20%) in the 2026-11-20 replay, more than 1 in 10",
+  "f_crop": "said 'cut off at the edge' to 2 of 2 JOIN banners whose hands are fully inside the picture (looked at full size, 2026-11-21, fingertips 8 to 10 px from the edge); a vision model cannot see a margin that small"
  },
  "min_record": 20
 }
