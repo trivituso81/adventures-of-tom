@@ -267,7 +267,7 @@ function statusesOf(effects){const out=[];(function walk(a){(a||[]).forEach(e=>{
 // An animation is: a body state of someone (idle, hit...), a family move, or a monster act (plus its wind-up). `clip` is its video's id when it has one.
 let ANIMS=[],ANIM_BY={};
 function owners(){return Object.keys(B3_CAST).concat(Object.keys(B3_FOES));}
-const ownerName=id=>(B3_CAST[id]||B3_FOES[id]||{}).name||cap(id);
+const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||cap(id);
 function buildAnims(){
   ANIMS=[];ANIM_BY={};
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
@@ -795,7 +795,6 @@ async function ghRequest(path,msg,fn){
     if(!w.ok)throw new Error('GitHub '+w.status);return;
   }
 }
-const ownerName=o=>((GUIDE&&GUIDE.owners&&GUIDE.owners[o])||{}).name||o;
 function askStart(){
   const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;const m=$('gstartmsg');m.textContent='';
   if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}

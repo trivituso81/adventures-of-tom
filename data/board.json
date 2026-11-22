@@ -29943,11 +29943,11 @@
   {
    "id": "c-fix-guideboot",
    "lane": "claude",
-   "col": "inprogress",
+   "col": "prog",
    "theme": "Battle System",
    "tag": "guideboot1",
    "title": "Battle Guide stuck on the loading screen",
-   "next": "Fix the page script error that stops the Battle Guide before it builds, and ship it.",
+   "next": "Shipped as guideboot1. Tom opens the Battle Guide and checks it loads.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -29959,6 +29959,40 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"The battle guide doesn't seem to be working it's just stuck on a loading screen.\" New card."
+    }
+   ],
+   "after": "t-guideboot-try",
+   "prompt": {
+    "what": "Fixes the Battle Guide page script error.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (known cause, one small fix)",
+    "text": "Read CLAUDE.md and docs/BATTLE_GUIDE.md. Shipped in guideboot1: battle-guide.html declared ownerName twice. Only reopen this card if the Battle Guide still shows the loading line. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-guideboot-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle System",
+   "ask": "play",
+   "fyi": true,
+   "title": "Open the Battle Guide and check it loads",
+   "next": "Open ADMIN > Battle system > Battle Guide. The list of the family should appear (not the loading line). If it still shows loading, close the page and open it again.",
+   "steps": [
+    "Open ADMIN > Battle system > Battle Guide. Tap the green build chip: it should read guideboot1 (if not, close the page and open it again).",
+    "The Family list shows ten people. Tap Tom: his moves appear.",
+    "Press All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added with guideboot1 (card c-fix-guideboot)."
     }
    ]
   },
