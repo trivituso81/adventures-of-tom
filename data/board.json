@@ -21715,13 +21715,19 @@
     {
      "d": "2026-11-21",
      "t": "Answer from \"Boppy's unimpressed face: keep current or redo?\": Keep the face in the game now and close the card"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T01:12:37.744Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-cap2"
+   "after": "t-boppy-bigfish-cap2",
+   "start": true
   },
   {
    "id": "c-qa-coh01",
