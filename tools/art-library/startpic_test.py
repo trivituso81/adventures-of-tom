@@ -80,3 +80,12 @@ print('\nstartpic test: %s' % ('FAILED ' + ', '.join(bad) if bad else 'all passe
 # S7 (startpics5): the Guide page lists the family states of a person the data file lists them for, not only the video-only four
 _h = open('battle-guide.html').read()
 check('S7 page follows guide-anims.json for body states', "GUIDE.anims['body:'+id+':idle']" in _h and 'buildAnims();' in _h.split('GUIDE=j;')[1][:120], 'battle-guide.html')
+
+# S8 (startpics6): the checks pass the four start pictures already approved and a result row is JSON safe
+import sys as _s, json as _j
+_s.path.insert(0, 'tools/art-library')
+import startpic as _sp
+for _n in ('tom', 'grace', 'rose', 'deedee'):
+    _r = _sp.measure(open('art/clips/start/%s-hero.png' % _n, 'rb').read())
+    check('S8 approved %s start picture passes the measure' % _n, _r['ok'], [c['say'] for c in _r['checks'] if not c['ok']])
+    _j.dumps(_r)

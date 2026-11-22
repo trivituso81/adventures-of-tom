@@ -29850,7 +29850,7 @@
    "col": "up",
    "ask": "animations",
    "fyi": true,
-   "next": "Open ADMIN > BATTLE GUIDE > Family, pick Amy, tap any move, and under Cannot be made yet tap Make the start picture, then Yes, spend $0.15. Do the same for Boppy, Justin, Olivia, TNB and Nara (about $0.90 in all). Each of them now also lists their standard pose animations (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running); those open once the picture is made. Then tap All good or Something is wrong. Build startpics1.",
+   "next": "Open ADMIN > BATTLE GUIDE > Family, pick Amy, tap any move, and under Cannot be made yet tap Make the start picture, then Yes, spend $0.15. Do the same for Boppy, Justin, Olivia, TNB and Nara (about $0.90 in all). Each of them now also lists their standard pose animations (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running); those open once the picture is made. Then tap All good or Something is wrong. Build startpics1. Amy's picture is already done: open one of her animations and press Generate this video.",
    "steps": [
     "Open ADMIN > BATTLE GUIDE > Family > Amy, then tap one of her moves (for example Kettlebell Swing).",
     "Under the red Cannot be made yet box, tap Make the start picture ($0.15), then Yes, spend $0.15. Keep the page open for about a minute.",
@@ -29862,7 +29862,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics5",
+   "build": "startpics6",
    "history": [
     {
      "d": "2026-11-22",
@@ -30901,6 +30901,39 @@
      "d": "2026-11-22",
      "t": "Tom: \"i still dont have any of AMy's standard poses in the Animations screen despite working off the latest build and doing a hard refresh\". Cause: the page ignored the data file. Built startpics5.",
      "at": "2026-11-22T20:16:00.874Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try"
+  },
+  {
+   "id": "c-startpics6",
+   "title": "Amy's start picture and the Make it crash",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics6",
+   "next": "Built as startpics6: Amy's start picture is in the game and the job no longer crashes after making a picture. Waits on your card t-startpics-try (Boppy, Justin, Olivia, TNB and Nara still need the tap).",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i hit Generate Image and it said it would be a minute but nothing is happening\". Cause: the checker crashed on a numpy bool after fal made the picture. Built startpics6.",
+     "at": "2026-11-22T20:29:02.631Z"
     }
    ],
    "prompt": {

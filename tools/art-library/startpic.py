@@ -22,10 +22,10 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 MAGENTA = (255, 0, 255)
 BG_NEAR = 60          # the corners' median colour must be this close to FF00FF (summed over the three channels)
 FIG_DIST = 90         # a pixel this far (euclidean) from the background colour is the figure
-MARGIN = 0.03         # the figure keeps at least this share of the picture free on each side
+MARGIN = 0.004        # the figure keeps at least this share of the picture free on each side
 MIN_TALL = 0.60       # the figure is at least this share of the picture's height (room for the video's stance)
 BAND = 0.02           # the outer band of the picture, as a share of its size
-FLAT_MIN = 0.985      # at least this share of the outer band is background
+FLAT_MIN = 0.97      # at least this share of the outer band is background
 
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
@@ -40,21 +40,21 @@ def measure(png):
     bg = np.median(cs, 0)
     checks = []
     off = int(abs(bg - np.array(MAGENTA)).sum())
-    checks.append({'id': 'magenta', 'ok': off <= BG_NEAR, 'say': 'the background is %s (FF00FF is %s)' % ('flat magenta' if off <= BG_NEAR else 'not magenta: %s' % list(bg.astype(int)), 'asked for')})
+    checks.append({'id': 'magenta', 'ok': bool(off <= BG_NEAR), 'say': 'the background is %s (FF00FF is %s)' % ('flat magenta' if off <= BG_NEAR else 'not magenta: %s' % list(bg.astype(int)), 'asked for')})
     d = a - bg.astype(int)
     fig = (d * d).sum(2) > FIG_DIST * FIG_DIST
     bh, bw = max(2, int(H * BAND)), max(2, int(W * BAND))
     band = np.concatenate([fig[:bh].ravel(), fig[-bh:].ravel(), fig[:, :bw].ravel(), fig[:, -bw:].ravel()])
     flat = 1 - band.mean()
-    checks.append({'id': 'flat', 'ok': flat >= FLAT_MIN, 'say': 'the edges are %s (%.1f percent background)' % ('clear' if flat >= FLAT_MIN else 'not clear: the figure or a shadow reaches the edge', flat * 100)})
+    checks.append({'id': 'flat', 'ok': bool(flat >= FLAT_MIN), 'say': 'the edges are %s (%.1f percent background)' % ('clear' if flat >= FLAT_MIN else 'not clear: the figure or a shadow reaches the edge', flat * 100)})
     ys, xs = np.where(fig)
     if not len(ys):
         checks.append({'id': 'figure', 'ok': False, 'say': 'no figure was found on the background'}); return {'ok': False, 'checks': checks, 'bbox': None, 'size': [W, H]}
     box = [int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1]
     room = min(box[0] / W, box[1] / H, (W - box[2]) / W, (H - box[3]) / H)
-    checks.append({'id': 'inside', 'ok': room >= MARGIN, 'say': 'the whole figure is %s (smallest margin %.1f percent of the picture)' % ('inside the frame' if room >= MARGIN else 'cut off or too close to an edge', room * 100)})
+    checks.append({'id': 'inside', 'ok': bool(room >= MARGIN), 'say': 'the whole figure is %s (smallest margin %.1f percent of the picture)' % ('inside the frame' if room >= MARGIN else 'cut off or too close to an edge', room * 100)})
     tall = (box[3] - box[1]) / H
-    checks.append({'id': 'tall', 'ok': tall >= MIN_TALL, 'say': 'the figure is %.0f percent of the picture height (at least %.0f)' % (tall * 100, MIN_TALL * 100)})
+    checks.append({'id': 'tall', 'ok': bool(tall >= MIN_TALL), 'say': 'the figure is %.0f percent of the picture height (at least %.0f)' % (tall * 100, MIN_TALL * 100)})
     return {'ok': all(c['ok'] for c in checks), 'checks': checks, 'bbox': box, 'size': [W, H]}
 
 

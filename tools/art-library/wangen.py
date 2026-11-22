@@ -309,7 +309,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         old = []
         try: old = json.load(open(os.path.join(a.out, 'startpic-results.json')))['results']
         except Exception: pass
-        json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1)
+        json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))
         code = code or scode
         if judge is not None and judge.spent and not a.dry_run:
             try:
