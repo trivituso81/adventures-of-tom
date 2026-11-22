@@ -195,6 +195,7 @@ const SPLASH_MODES={
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BLOCK BREAK LAB',sub:'Old Oak Park: the coin, the cracks, the colour coming back.',act:()=>splashGo(bbLabStart)},
     brpAdminItem(),
+    ...(typeof m2AdminItem==='function'?[m2AdminItem()]:[]),   // MENU: OLD or NEW (engine/m2-core.js)
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.

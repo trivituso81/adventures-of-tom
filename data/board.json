@@ -32940,6 +32940,10 @@
    },
    "history": [
     {
+     "d": "2026-11-21",
+     "t": "Built as menu1: new menu files engine/m2-core.js, engine/m2-family.js, m2.css, hero pictures art/menu/, fonts/, test tools/m2_test.py (five sizes, swap, tag, keys, all passing). Switch: ADMIN > MENU: OLD or NEW, default Old. Head row: docs/menu-head-row.png (nothing resized). Built notes for c-menu2 are in docs/CHANGES.md menu1."
+    },
+    {
      "d": "2026-11-22",
      "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
     },
@@ -32960,9 +32964,9 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: the look and the Family screen (c-menu1). The menu is not built yet, which is why ADMIN had no Menu choice. This card opens when that build ships.",
-   "next": "Nothing yet: the new menu (c-menu1) is still being built, so ADMIN > Menu does not exist until it ships. When it does, this card comes back: on the Duo unfolded, held sideways, RELOAD on the title, then ADMIN, Menu, New; load a game, open the menu and look at the Family screen (paper page, lettering, family in a row, head sizes), then again on the phone upright.",
+   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN. Find the entry MENU: OLD and tap it so it says MENU: NEW. Load a game and open the menu. Look at the Family screen: the paper page, the lettering, the family standing in a row on one line, and whether the heads look the right size next to each other. Then use the phone upright (or fold the Duo) and open the menu again. About 3 minutes. Judge looks only: Claude has already tested every yes or no fact (sizes, buttons, Change, keys). For the head sizes, the picture docs/menu-head-row.png in the repo is the head row Claude made from your hero paintings (nothing was resized). Tap All good, or Something is wrong and say what to change. Vibes and Gear are being built meanwhile.",
    "steps": [
-    "Duo unfolded, sideways: RELOAD on the title, then ADMIN, Menu, New.",
+    "Duo unfolded, sideways: RELOAD on the title, then ADMIN, then tap MENU: OLD so it says MENU: NEW.",
     "Load a game and open the menu. Look at the Family screen.",
     "iPhone upright (or the Duo folded): open the menu again.",
     "Tap All good, or Something is wrong with what to change."
@@ -32975,6 +32979,10 @@
     "opening": "not started"
    },
    "history": [
+    {
+     "d": "2026-11-21",
+     "t": "menu1 shipped: the switch is ADMIN > MENU: OLD (tap for NEW). The head row (nothing resized) is docs/menu-head-row.png, with all ten standing at real heights in docs/menu-line-up-all.png."
+    },
     {
      "d": "2026-11-22",
      "t": "Made with the build cards after Tom approved the menu proposal in the chat."

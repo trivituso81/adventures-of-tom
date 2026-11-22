@@ -1,3 +1,27 @@
+## menu1 (2026-11-21): the new main menu's look and Family screen are built beside the old menu, behind a switch (default Old)
+
+Card c-menu1. Tom approved the design on t-menuux-decide (11-21 18:20): "looks great now, just remove their heights and we can make the cards for this to be produced". Nothing a player sees changes until Tom picks New: ADMIN, then `MENU: OLD` (tap to flip to `MENU: NEW`, saved on the device as `aot-menu`), or `index.html?menu=new` for one visit.
+
+**Head row (step 1, no head was resized).** `docs/menu-head-row.png` is every family member's hero painting, heads side by side at line-up scale (order Tom, TNB, Justin, Boppy, Amy, Deedee, Olivia, Grace, Rose, Nara); `docs/menu-line-up-all.png` is all ten standing on one floor line, heights from `data/heights.json`. What it shows (fact): Boppy's head is the biggest of the adults and Tom's and Justin's the smallest; Grace's and Rose's heads are close to the adults' in size, which is the Grace/Rose ratio of `docs/CHARACTER_PIPELINE.md` section 7. Left as painted. If Tom wants any head changed, that is a card of its own.
+
+| Part | Where |
+|---|---|
+| Switch and open/close, keys, gamepad, tabs, top bar, backdrop still | `engine/m2-core.js` (wraps `openMenu`, `closeMenu`, `renderMenu`, `menuKey`, `menuPad`, `menuBack` and keeps the originals in `M2_orig`) |
+| Family screen: line-up, plates, bench with Change, Family Ruckus gauge, New skill tag | `engine/m2-family.js` |
+| Every style, all under `#m2` | `m2.css` |
+| Hero pictures, paper divided to white, no cutout (10 people) | `tools/sprite-bake/bake_menu_heroes.py` -> `art/menu/<id>.webp` |
+| Fonts, loaded when the menu first opens | `fonts/bricolage.woff2`, `fonts/figtree.woff2` |
+| Test: five sizes (951 x 648 with ?duo=1, 393 x 852, 852 x 393, 466 x 657, 1280 x 720), overflow, text under 12.5 px, targets under 44 px, em dashes, height labels, Change (free slot, swap, not allowed in words), New skill tag, tabs, close, keys, Report pencil above the menu, default Old | `tools/m2_test.py` (screens `tools/shots/m2-*.png`; listed in `tools/night/tests.json`) |
+
+- Layout (fact): wide screens (Duo unfolded, desktop, phone sideways) put the five tabs down the left edge with the gutter on the fold; tall screens (phone upright, Duo folded) put them along the bottom. Big screens scale the whole book with a transform, so measurements stay in layout pixels.
+- Family (fact): one ppi for everyone from `WALK_SCALE[id].inches`, never typed; no height labels; the bench holds everyone recruited who is not in the party. Change: free slot uses `benchToParty`, a full party asks who sits out (`benchSwap`); when the story allows nobody to sit out the page says so in words.
+- New skill tag: `m.m2new` is set when a Rank-up is awarded (wraps `b3AwardVp`), cleared when that person's Vibes page opens from the menu, saved in the save as `m2.newSkill`.
+- Until their own cards ship, Vibes opens today's Vibes screen (`b3vOpen('menu')`), and Gear, Bag and System open today's Gear, Bag and Saves screens inside the old menu; Back returns to the book.
+- Backdrop (fact): one still of the game picture, shrunk in steps and scaled up by the browser, drawn once when the menu opens, with a dusk wash over it. Nothing is blurred live.
+- No em dashes in the menu's words or files; no text under 12.5 px (phone sideways shows "Lv 1" and "98/98" so everything fits at that size).
+- Built notes for c-menu2 (Vibes and Gear): add a page by giving `m2Render` a body for the tab in `engine/m2-core.js` (`M2.tab`), put its styles in `m2.css` under `#m2`, and reuse `.m2-plate`, `.m2-chip`, `.m2-btn`; the old screens open through `m2OpenLegacy(tab)`.
+- Tests passing: `python3 tools/m2_test.py`, `python3 tools/smoke.py`.
+- Not done: no change to the old menu's code, no other tab built, nothing pushed to the Project.
 ## animplan1 (2026-11-22): the Battle Guide has a Plan view of every battle animation
 
 Card c-animplan. Tom (2026-11-21 18:09): "there's no clarity on the plan, which animations we do and when". ADMIN > BATTLE GUIDE > Animations now opens with a PLAN: three counts (Making, Next, Done) and a list per group, one row per animation, tap a row to open its owner. Done: a baked video is in the game (82). Making: a job in `tools/art-library/wangen-jobs.json` with no baked video, or an open `c-wanstop-<job>` card; shows the job's rev (now: Rose's Giddyup, rev 8). Next: no video and no job (267). It reads the same data as the rest of the guide (`data/guide-anims.json`, the jobs file, the board), so it moves by itself. Test: `tools/battle_guide_test.py` (counts match the data, rose-giddyup is a Making row, portrait and landscape, screenshots `tools/shots/guide-plan-*.png`). Not looked at: the rest of battle_guide_test past the take-card check fails to start in this sandbox's Chromium (video decode), so only the new block and the first 325 lines were run.

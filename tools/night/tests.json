@@ -1368,6 +1368,12 @@
    "cmd": "python3 -I tools/voice-library/sparse_files_test.py",
    "group": "g2",
    "minutes": 1
+  },
+  {
+   "id": "m2_test",
+   "cmd": "python3 -I tools/m2_test.py",
+   "group": "g4",
+   "minutes": 3
   }
  ]
 }
