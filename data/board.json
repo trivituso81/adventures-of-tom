@@ -31388,7 +31388,7 @@
    "title": "Decide on the battle screen redesign",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "On the Duo, unfolded and held sideways: open ADMIN > Battle system > Battle screen redesign (proposal). It fills the screen with a mock you can tap. Tap Crunchy Sugar-Cube Pop once (the strip under the scene says what it does and what will happen), tap the other monster (the aim moves), tap the move again (it is used). Tap DETAILS in the top bar. Tap MOCK for Ruckus and the chapter 1 view. Then fold the phone and try it upright. On your computer the same address shows the reasons and all six screen sizes: https://trivituso81.github.io/adventures-of-tom/battle-ux.html . Then tap one answer here, or reply in the chat. Card Make the battle screen build cards waits on it.",
    "steps": [
@@ -31412,7 +31412,7 @@
     "c-battleux-cards"
    ],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
     "opening": "\"this is the side panel on unfolded duo landscape, which is my most important one. i think we need a total overhaul of the UX\""
@@ -31421,8 +31421,15 @@
     {
      "d": "2026-11-22",
      "t": "Made by battleux-plan (card c-battleux-plan)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Approve as shown: make the build cards",
+     "at": "2026-11-22T01:47:53.652Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Approve as shown: make the build cards"
   },
   {
    "id": "c-battleux-cards",
