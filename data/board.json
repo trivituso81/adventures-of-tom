@@ -31855,7 +31855,7 @@
   {
    "id": "t-pairmove1-gen",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -31869,10 +31869,10 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "pairmove1",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDC1yqbxfJTPwowGvb",
     "opening": "added by pairmove1"
    },
    "history": [
@@ -31920,6 +31920,10 @@
      "d": "2026-11-22",
      "t": "Fixed by fix-pairmove1-gen-2 (Tom: \"Hanging\"): the request sent at 05:16 UTC, as fal ran out of money, never finished, and every run waited 20 minutes on it again. A request not finished after an hour is now dropped and a new one sent; this push starts the run.",
      "at": "2026-11-22T07:05:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it, Fix: Make Rose's Giddyup with Tom in it is done."
     }
    ],
    "wgen": {
@@ -31955,8 +31959,7 @@
      }
     },
     "auto": true
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-wanstuck1",
@@ -34666,7 +34669,7 @@
   {
    "id": "t-movefun-gen",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -34682,7 +34685,7 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
@@ -34813,9 +34816,12 @@
      "d": "2026-11-22",
      "t": "Fixed by fix-pairmove1-gen-2 (Tom: \"See your message\"): the yellow line said \"see its card\" twice without naming it; and Give it 4 more tries did nothing (run 44993341855 said rev 4 \"already has a result\"). Now the line names the card and what Tom chose, and the answer goes to a Claude stop card that raises rev.",
      "at": "2026-11-22T07:05:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-wanstop-tom-blockade-r3",
@@ -35319,7 +35325,7 @@
    "id": "c-fix-pairmove1-gen-2",
    "tag": "fix-pairmove1-gen-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
@@ -35329,7 +35335,7 @@
     "t-movefun-gen"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "reports": [
     {
      "at": "2026-11-22T06:04:54.215Z",
@@ -35383,6 +35389,10 @@
      "d": "2026-11-22",
      "t": "Result (fix-pairmove1-gen-2): Hanging = Rose's request of 05:16 UTC was sent as fal ran out of money and never finished; every run picked it up again and waited 20 minutes (run 44992845017 did, 06:20 to 06:40 UTC). A request not finished after an hour is now dropped and a new one sent. See your message = the yellow line said \"see its card\" twice without naming it; and Give it 4 more tries did nothing (run 44993341855: \"already has a result\"). Now the line names the card and what Tom chose, and a more-tries answer goes to an auto-started Claude stop card that raises rev. The last commit starts Rose's run again (t-movefun-gen also asking).",
      "at": "2026-11-22T07:05:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-pairmove1-gen-2: a dead video request no longer hangs Rose's Giddyup, Give it 4 more tries now makes a new try, and video cards say plainly what happened"
     }
    ],
    "prompt": {
@@ -35394,7 +35404,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen-2 and t-pairmove1-gen, t-movefun-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen-2.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Hanging\n2. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap: the run is already started. The Action makes the 3 videos (Tom's Zone One Blockade with the hip bump, Grace's Crunchy Sugar-Cube Pop held by her ear, Deedee's Wet-Floor with the yellow sign), checks them, retries by itself and puts the ones that pass in the game. A watch card comes when they pass. At most $9.60 for all three, about $1.80 if each passes first time. He wrote: See your message\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:04:54.215Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen, t-movefun-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-pairmove1-gen"
+   "after": "t-pairmove1-gen",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-menu4play",
@@ -36174,6 +36185,19 @@
    ],
    "cards": [
     "c-nighttests"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDC1yqbxfJTPwowGvb",
+   "title": "Fix: Make Rose's Giddyup with Tom in it",
+   "first": "2026-11-21T23:00:03-08:00",
+   "last": "2026-11-21T23:00:03-08:00",
+   "tags": [
+    "fix-pairmove1-gen-2"
+   ],
+   "cards": [
+    "c-fix-pairmove1-gen-2",
+    "t-pairmove1-gen"
    ]
   },
   {
@@ -41056,8 +41080,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "41e1f0366b18d769dc5621c6f04347f12a60505e",
- "synced_at": "2026-11-22T06:58:36+00:00",
+ "synced": "86f4019410402c6bb4c90635bbefac51859c0105",
+ "synced_at": "2026-11-22T07:03:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -41090,7 +41114,9 @@
   "to": 3,
   "fixes_until": 6,
   "tz": "America/Los_Angeles",
-  "log": {},
+  "log": {
+   "2026-11-21": []
+  },
   "reported": "2026-11-21"
  }
 }
