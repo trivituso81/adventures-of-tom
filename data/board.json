@@ -30011,7 +30011,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Rename chapter 1 to Muffin to See Here",
-   "next": "Renaming chapter 1 (title card, chapter list, save labels, Voice Library heading). All other chapter names stay as they are.",
+   "next": "Shipped as build ch1title1: chapter 1 is now Muffin to See Here (title card, chapter list, save labels, Voice Library heading). Other chapter names unchanged. Open item: the leftover 'crisp' lines, not on a card yet because Tom has not said yes.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -30045,8 +30045,14 @@
      "d": "2026-11-22",
      "t": "Started: this conversation claimed the card.",
      "at": "2026-11-22T17:40:49.802Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Renamed chapter 1; pushed as ch1title1.",
+     "at": "2026-11-22T17:41:07.589Z"
     }
-   ]
+   ],
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

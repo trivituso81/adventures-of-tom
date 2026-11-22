@@ -34,7 +34,7 @@ const DEFAULT_RULES={lock:['tom','grace','rose'],force:[],bar:[],allow:null,home
 // each chapter session (C1 to C20) fills in its rules and scenes.
 const CHAPTERS=[
   {n:0,title:'Demo',party:{}},
-  {n:1,title:'The Soup Dumpling Protocol',party:{allow:['deedee'],
+  {n:1,title:'Muffin to See Here',party:{allow:['deedee'],
     decline:{amy:'Twelve reading plans and a 5K in the morning. Take your mother. She has more energy than all of us.',
              boppy:'Not today. My stomach is doing something. Take Deedee. She already has her shoes on.'}},
     // No flights in chapter 1 (chapter 2 opens with the flight to LA).

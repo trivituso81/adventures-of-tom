@@ -1,3 +1,7 @@
+## ch1title1 (2026-11-22): Chapter 1 is now called "Muffin to See Here" (was "The Soup Dumpling Protocol"); every other chapter name is unchanged
+
+Card c-ch1title. Tom (11-22): "I actually think I like the original titles better with the exception of chapter 1." The old name came from the story bible, and the chapter's obstacle is now Deedee's apple muffins, not the crisp. Changed in `engine/story.js` (`CHAPTERS`, shown on the title card, the chapter list and save labels), the `// CHAPTER 1:` heading in `data/scenes.js` (the Voice Library files chapter 1's lines by it) and `docs/ARCHITECTURE.md`. No spoken line changed. Not done: the leftover "crisp" lines in chapters 1, 3, 5, 12 to 14, 16, 20 and the Part 2 intro (a separate cleanup, they need re-recording).
+
 ## guideboot1 (2026-11-22): the Battle Guide opens again; it was stuck on "Loading the game's battle data..."
 
 Card c-fix-guideboot. Tom (11-22): "The battle guide doesn't seem to be working it's just stuck on a loading screen." Cause: `battle-guide.html` declared `ownerName` twice in its one script (a short version near the top and a second one added by the video-making work), so the browser refused the whole script and the page never ran. Now one `ownerName` that uses the animation list's owner name first, then the game's own name. Checked in a test browser: the list builds, no script errors (battle_guide_test.py "no script errors" passes). battle_guide_test.py still has stale checks (Giddyup row, TNB start picture wording) from other sessions' changes; not touched here.
