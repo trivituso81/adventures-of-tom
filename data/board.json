@@ -30533,11 +30533,19 @@
     }
    ],
    "vgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T20:41:13Z",
     "n": 16,
     "chars": 2171,
-    "est": 955
+    "est": 955,
+    "run": {
+     "state": "done",
+     "at": "2026-11-22T20:43:07Z",
+     "made": [],
+     "failed": [],
+     "needs_human": [],
+     "note": "every line of this card already has a clip"
+    }
    }
   },
   {
