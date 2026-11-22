@@ -34646,10 +34646,32 @@
     "n": 1,
     "est": 0.5,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T06:45:10Z",
+     "state": "done",
+     "at": "2026-11-22T06:45:12Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44993341855",
-     "n": 3
+     "n": 3,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [
+      "tom-blockade",
+      "grace-cubepop",
+      "deedee-wetfloor"
+     ],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.0,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-blockade": 4,
+      "grace-cubepop": 4,
+      "deedee-wetfloor": 10
+     }
     }
    },
    "history": [
@@ -34733,6 +34755,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: See your message Sent to Claude as card c-fix-pairmove1-gen-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T06:23:50.671Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44993341855: 3 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
     }
    ],
    "waiting_on": "claude"
