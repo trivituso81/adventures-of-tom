@@ -34983,6 +34983,61 @@
     "text": "Done in the session that made this card."
    },
    "done": "2026-11-21"
+  },
+  {
+   "id": "t-fal-topup",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "setup",
+   "fyi": true,
+   "title": "Add money to fal.ai: the video service is out of credit",
+   "next": "Open fal.ai/dashboard/billing and add $20. Then on this board tap Generate all 1 video on Make Rose's Giddyup with Tom in it; that run also makes the three remakes that are waiting.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanqueue1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by wanqueue1: fal answered every video request since 05:20 UTC with \"Exhausted balance\"."
+    }
+   ]
+  },
+  {
+   "id": "c-wanqueue1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanqueue1",
+   "title": "A video run also makes every other waiting card",
+   "next": "Shipped in wanqueue1.",
+   "blocks": [],
+   "after": "t-fal-topup",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: that leaves me totally confused as to what happens next"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (21:59): \"OK, but that leaves me totally confused as to what happens next\""
+    }
+   ],
+   "prompt": {
+    "what": "Queue sweep for video runs.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
   }
  ],
  "sessions": [

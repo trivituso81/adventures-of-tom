@@ -133,6 +133,15 @@ jobs:
           [ "$DRY" = "true" ] && ARGS+=(--dry-run)
           if [ "$DRY" != "true" ] && [ -z "$FAL_KEY" ]; then echo "Repo secret FAL_KEY is empty or missing."; exit 2; fi
           python3 -I tools/art-library/wangen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          # wanqueue1 (2026-11-21): GitHub keeps only ONE waiting run per group, so a tap can still be dropped when two cards ask at once (Rose's pair tap,
+          # 05:23 UTC). Every bulk run therefore also makes every other card still asking (wgen.want true), from the newest main.
+          if [ "$MODE" = "bulk" ] && [ "$DRY" != "true" ]; then
+            git fetch -q --depth 1 origin main && git show FETCH_HEAD:data/board.json > "$RUNNER_TEMP/board-now.json"
+            for other in $(python3 -c "import json,sys; b=json.load(open(sys.argv[1])); print(' '.join(c['id'] for c in b['cards'] if (c.get('wgen') or {}).get('want') and c.get('wan') and c['id']!=sys.argv[2]))" "$RUNNER_TEMP/board-now.json" "$CARD"); do
+              echo "also asking: $other"
+              python3 -I tools/art-library/wangen.py --bulk --card "$other" --out "$RUNNER_TEMP/wangen" 2>&1 | tee -a "$RUNNER_TEMP/run.log" || true
+            done
+          fi
           { echo '### wan-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Make the takes (clip gate and preview) for the Battle Guide
         if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}

@@ -1,4 +1,6 @@
 [
+{"tag":"poseedit4","at":"2026-11-14T21:58:45-08:00","what":"Pose Editor: every resized pose is now exactly the person's height (the game itself is unchanged)","card":"b-poseedit4","theme":"Characters"},
+{"tag":"poseedit3","at":"2026-11-14T21:54:29-08:00","what":"Pose Editor: zoom slider, size sliders, pinching no longer scrambles the lines (the game itself is unchanged)","card":"b-poseedit3","theme":"Story and Dialogue"},
 {"tag":"poseedit2","at":"2026-11-14T21:36:09-08:00","what":"Pose Editor: feelings and talking poses added, and the page reworked into one simple flow (the game itself is unchanged)","card":"b-poseedit2","theme":"Characters"},
 {"tag":"poseedit1","at":"2026-11-14T20:53:19-08:00","what":"Pose Editor, phase 1: set the head, chin and feet lines on every walking pose and size it (the game itself is unchanged)","card":"b-poseedit1","theme":"Story and Dialogue"},
 {"tag":"scripted1","at":"2026-11-14T20:00:04-08:00","what":"Script Editor: edit every scene's words, play the edited scene, send the edits to Claude","card":"b-scripted1","theme":"Story and Dialogue"},
