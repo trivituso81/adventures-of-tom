@@ -27235,7 +27235,7 @@
   {
    "id": "t-artgen3try",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -27243,7 +27243,7 @@
    "next": "What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "started by c-artgen3"
@@ -27274,6 +27274,11 @@
     {
      "d": "2026-11-22",
      "t": "Pictures job: made 4 pictures, QA: 14 of 16, 8 of 16, 11 of 16, 16 of 16. Spent about $0.24."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: Fix bases on qa Sent to Claude as card c-fix-artgen3try-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T02:56:45.308Z"
     }
    ],
    "done_when": {
@@ -27432,7 +27437,8 @@
       }
      }
     }
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "t-guidegen-try",
@@ -32992,6 +32998,58 @@
    "changed": "2026-11-21",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-fix-artgen3try-2",
+   "tag": "fix-artgen3try-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Try auto-approve on Grace's and Rose's party",
+   "next": "You reported a problem on Try auto-approve on Grace's and Rose's party banners. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Fix bases on qa",
+   "blocks": [
+    "t-artgen3try"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T02:56:44.517Z",
+     "card": "t-artgen3try",
+     "title": "Try auto-approve on Grace's and Rose's party banners",
+     "ask": "pictures",
+     "words": "Fix bases on qa",
+     "shot": "",
+     "asked": "What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-artgen3try"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-artgen3try.",
+     "at": "2026-11-22T02:56:45.308Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-artgen3try: Fix bases on qa",
+     "at": "2026-11-22T02:56:45.308Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Try auto-approve on Grace's and Rose's party banners.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: pictures are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try-2 and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try-2.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try auto-approve on Grace's and Rose's party banners, ask pictures). He was asked: What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine. He wrote: Fix bases on qa\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:56:44.517Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-artgen3try"
   }
  ],
  "sessions": [
