@@ -30331,10 +30331,16 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T20:40:03Z",
     "n": 26,
-    "est": 6
+    "est": 6,
+    "run": {
+     "state": "running",
+     "at": "2026-11-22T20:42:26Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067718217",
+     "n": 26
+    }
    },
    "blocks": [],
    "created": "2026-11-22",
