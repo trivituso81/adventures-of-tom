@@ -32282,7 +32282,7 @@
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T13:46:43-08:00",
+   "last": "2026-11-22T14:11:51-08:00",
    "tags": [
     "startpics1",
     "startpics2",
@@ -32296,7 +32296,8 @@
     "repair",
     "startpic",
     "startpics9",
-    "startpics10"
+    "startpics10",
+    "startpics11"
    ],
    "cards": [
     "c-startpics",
@@ -32308,7 +32309,8 @@
     "c-startpics8",
     "b-wannoday1",
     "c-startpics9",
-    "c-startpics10"
+    "c-startpics10",
+    "c-startpics11"
    ]
   },
   {
@@ -37938,8 +37940,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2b497233fc2a80571e9fb2a4b77e01e9db231b2e",
- "synced_at": "2026-11-22T22:06:33+00:00",
+ "synced": "e5f7a291c5a1debbc67187be5524d41ed6726600",
+ "synced_at": "2026-11-22T22:12:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
