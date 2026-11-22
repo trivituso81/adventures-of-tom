@@ -30545,7 +30545,7 @@
    "title": "Generate the new videos",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
    "next": "Tap Generate all 2 videos on this card (two taps). It makes Rose's \"Giddyup, Tata!\" Launch (now a straight-up jump) and Deedee's Wet-Floor Hazard (more room in the frame; the mop may sit lower than her feet, as you said). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal. Nothing else to do first.",
    "steps": [
@@ -30562,7 +30562,7 @@
    "blocks": [],
    "fyi": true,
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "wanch5",
    "history": [
     {
@@ -30577,6 +30577,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44967949648: 2 made and checked, 0 passed, 2 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T01:04:10.897Z"
     }
    ],
    "wgen": {
@@ -30613,7 +30618,8 @@
      "build": null,
      "watch": ""
     }
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanch5",
