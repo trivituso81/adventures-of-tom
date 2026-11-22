@@ -31334,7 +31334,7 @@
   {
    "id": "c-wanstop-rose-giddyup-r7",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-giddyup-r7",
    "title": "Fix the stopped video rose-giddyup",
@@ -31342,15 +31342,20 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "added by the wan-gen job"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44971778287): rose-giddyup stopped at rev 7. attempt 1 (pad 0.65) bg, edge. Evidence: bg: background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 23.8 (limit 15), 1.26 percent of it off colour (limit 1), colour moved at most 3 (limit 40); edge: the figure touches the left edge in 2 of 121 pictures (video frames 58 to 59)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T01:53:48.265Z"
     }
    ],
    "prompt": {
