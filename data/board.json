@@ -34791,7 +34791,7 @@
   {
    "id": "c-videohist1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "videohist1",
    "title": "Video History page: every video and why it was rejected",
@@ -34808,6 +34808,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (21:15): \"Can I see a history of videos that were generated so I can see why you rejected them\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as videohist1: ADMIN ) VIDEO HISTORY shows every battle video, whether it is in the game, and why the checks rejected the rest"
     }
    ],
    "prompt": {
@@ -34818,29 +34822,33 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-videohist-auto",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "videohist2",
    "title": "Video History rebuilds itself after every video run",
    "next": "Make the wan-gen Action rebuild data/video-history.json and the strips after each run and push them to main.",
    "blocks": [],
    "auto": true,
-   "start": true,
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEfBtn2SmTzAcqk7uA",
     "opening": "added by videohist1"
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Added by videohist1. Tom (21:15): \"Can I see a history of videos that were generated so I can see why you rejected them\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34851,7 +34859,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "medium (one workflow step and a test)",
     "text": "Read CLAUDE.md (sections wanauto1 and wanstuck1), docs/CHANGES.md \"videohist1\", tools/videohist/build.py and .github/workflows/wan-gen.yml, then card c-videohist-auto in data/board.json. Add a step to the wan-gen job, after \"Keep the results and the ledger on the wangen branch\" and only when a video was made (not a dry run, not mode none): run python3 tools/videohist/build.py --branch-dir \"$RUNNER_TEMP/wangen\" on a fresh checkout of main, then commit data/video-history.json and art/video-history/ with the message \"videohist: rebuilt after wan-gen run followed by the run id, ending in [skip ci]\" and push to main, fetching and rebasing up to 5 times when main moved (take main's copy of every file except those two on a conflict). The build must keep working when the workflow checkout is shallow. Test it with a local branch-dir holding two made-up videos and a result file (extend tools/videohist/videohist_test.py), write the CHANGES heading ## videohist2 and push. After: nothing for Tom: end. Your first push is the commit board: start c-videohist-auto. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T05:29:42+00:00"
   }
  ],
  "sessions": [
@@ -35329,6 +35338,31 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T21:28:57-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1",
+    "pairmove1",
+    "wanstuck1",
+    "wanstuck1b",
+    "videohist1"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1",
+    "c-pairmove1",
+    "c-wanstuck1",
+    "c-videohist1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCqWhhmWq22mmU3UZD",
    "title": "Lose to The Big One on purpose and check you are not stuck",
    "first": "2026-11-21T21:24:25Z",
@@ -35402,29 +35436,6 @@
    "cards": [
     "t-milestoned",
     "c-boardwedge1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T21:11:06-08:00",
-   "tags": [
-    "wanch5",
-    "wanauto1",
-    "wanmop1",
-    "giddyupbake1",
-    "pairmove1",
-    "wanstuck1",
-    "wanstuck1b"
-   ],
-   "cards": [
-    "c-wanch5",
-    "c-wanauto1",
-    "c-wanmop1",
-    "c-giddyupbake1",
-    "c-pairmove1",
-    "c-wanstuck1"
    ]
   },
   {
@@ -40043,8 +40054,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3a508c47ab8eb67d37cd6f6c97185213942b9cd0",
- "synced_at": "2026-11-22T05:21:07+00:00",
+ "synced": "0149f929c418677331def9fe1f2eb3a10533e721",
+ "synced_at": "2026-11-22T05:29:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
