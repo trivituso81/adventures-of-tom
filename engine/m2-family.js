@@ -102,6 +102,13 @@ function m2FamilyLayout() {
   const ft=[...M2.root.querySelectorAll('.m2-page.l .m2-foot,.m2-page.r .m2-foot')];
   if(ft.length===2) { for(const e of ft) e.style.minHeight=''; const fh=Math.max(...ft.map(e=>e.offsetHeight)); for(const e of ft) e.style.minHeight=fh+'px'; }
   const figs=[...M2.root.querySelectorAll('.m2-figs')]; for(const f of figs) { f.style.flex=''; f.style.height=''; }
+  // Wide book: both pages seat their people in the same width, packed to the left of each page (clear of the crease), so the four are evenly spaced.
+  const pls=[...M2.root.querySelectorAll('.m2-plates')];
+  for(const e of [...figs,...pls]) { e.style.width=''; e.style.alignSelf=''; }
+  if(M2.dims.wide&&figs.length===2&&figs[0].querySelectorAll('.m2-slot').length===figs[1].querySelectorAll('.m2-slot').length) {
+    const w=Math.min(figs[0].clientWidth,figs[1].clientWidth);
+    for(const e of [figs[1],pls[1]]) if(e) { e.style.width=w+'px'; e.style.alignSelf='flex-start'; }
+  }
   if(!figs.length) return;
   const people=party.filter(m=>m2Inches(m)); if(!people.length) return;
   const maxIn=Math.max(...people.map(m2Inches));

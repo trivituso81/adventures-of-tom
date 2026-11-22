@@ -33790,7 +33790,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
-   "next": "Fix shipped (build fix-menu4play). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu > Vibes and tap Deedee's face at the top. Her name Deedee should now sit on ONE line, fully visible, with the picture a little narrower. Check the other people's names too. Then finish the rest of the walk: Family, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change.",
+   "next": "Fix shipped (build fix-menu4play-2). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the first tab (now named Tom's Party) Tom and Grace should sit on the left page and Rose and Deedee on the right page, the two pairs the same distance apart, nobody over the crease, empty space to the right of Rose and Deedee. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change (and what should go in the empty space, and the name if Tom's Party is not what you meant by Dallas's Party).",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
     "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
@@ -33831,6 +33831,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family. Sent to Claude as card c-fix-menu4play-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T06:32:16.175Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix shipped for \"The family screen should have part members equally spaced apart... Also it should be Dallas's Party not family\": right page seated at the left page's width, tab renamed Tom's Party (read Dallas's as Tom's) (build fix-menu4play-2). Empty space on the right not filled yet."
     }
    ],
    "waiting_on": "claude"
@@ -35579,6 +35583,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix shipped (build fix-menu4play-2)."
     }
    ],
    "prompt": {

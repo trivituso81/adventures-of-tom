@@ -1,3 +1,12 @@
+## fix-menu4play-2 (2026-11-22): the Family page seats all four people evenly clear of the crease, and the tab says Tom's Party
+
+Card c-fix-menu4play-2 (fix from Tom's report on t-menu4play). Tom: "The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family."
+- Wide book (Duo, landscape, desktop): the right page now seats its people in the same width as the left page, packed to the left, so Rose and Deedee sit the same distance apart as Tom and Grace and stay clear of the crease. The dead space on the right of the line-up is left empty for now; what to put there is Tom's call (not done).
+- The tab is now "Tom's Party" (`M2_TABS` in `engine/m2-core.js`). I read "Dallas's" as "Tom's" because "Dallas" appears nowhere in the game; if another name was meant, say it on the card.
+- Tested: `python3 tools/m2_test.py` passes; frame `tools/shots/m2-duo.png`.
+>>>>>>> 15a84a83 (fix-menu4play-2: Family page seats all four evenly clear of the crease; tab is Tom's Party)
+
+
 ## fix-artgen3try-3 (2026-11-22): QA no longer holds a picture for "cut off at the edge" when nothing is cut off
 
 Card c-fix-artgen3try-3, from Tom on t-artgen3try: "Failed qa". Read as: QA failed pictures that were fine. Fact: the card shows no auto-approve run since the last fix (`gen.mode` is still review, run of 2026-11-22T02:55), so what he saw was the old QA results ("8 of 16", "11 of 16" with a list of failed checks). I opened the stored JOIN pictures at full size: in both, every finger is fully inside the picture (the nearest fingertip is 8 to 10 px from the right or top edge of 1408 x 704). So the cut-off hands I called "a real fault" in fix-artgen3try-2 were not real; the QA question `f_crop` could not see a margin that small and said "cut off" to both.
