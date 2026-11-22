@@ -30374,6 +30374,10 @@
     {
      "d": "2026-11-22",
      "t": "movestage2c pushed: five moves (Frequent Flier, Zone One, Suite Door, Cartridge Blow, Konami Code) are fully baked and their marks are measured; the Lab test passes with the real pictures. Waiting: Winged Shell (blue burst video given up), Controller Toss (body video given up) and Tarmac Porsche Transfer (glare and jetwash videos in their stop cards). Card stays In progress until those are baked or Tom decides."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part shipped as movestage2c: the marks of five staged moves are measured on their baked videos"
     }
    ],
    "after": "t-movestage-lab"
@@ -33040,6 +33044,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-22T10:55:40-08:00",
+   "last": "2026-11-22T15:38:01-08:00",
+   "tags": [
+    "movestage2a",
+    "movestage2b",
+    "movestage2c"
+   ],
+   "cards": [
+    "c-movestage-build",
+    "t-movestage-lab"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEERNUaCXrLX69rTMS",
    "title": "Add the scene marks and remove the proposal page",
    "first": "2026-11-22T14:34:53Z",
@@ -33194,20 +33213,6 @@
    ],
    "cards": [
     "c-vibelayout1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
-   "title": "Build the move stage and Move Lab for Tom's eight moves",
-   "first": "2026-11-22T10:55:40-08:00",
-   "last": "2026-11-22T13:21:11-08:00",
-   "tags": [
-    "movestage2a",
-    "movestage2b"
-   ],
-   "cards": [
-    "c-movestage-build",
-    "t-movestage-lab"
    ]
   },
   {
@@ -38811,8 +38816,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "61534d86e47d383b985553d201e234fe1980f95d",
- "synced_at": "2026-11-22T22:59:07+00:00",
+ "synced": "f7afda8c037faca86d8987edacaa50f92fbc7f41",
+ "synced_at": "2026-11-22T23:39:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
