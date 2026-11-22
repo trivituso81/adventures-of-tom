@@ -1018,6 +1018,15 @@
    "unit": "credits",
    "at": "2026-11-22T20:37:46Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067282930"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.0027,
+   "what": "wan-gen Action: start picture facing check",
+   "source": "wan-gen run",
+   "at": "2026-11-22T20:49:17Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067851943"
   }
  ],
  "balances": [
