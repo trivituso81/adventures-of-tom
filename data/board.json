@@ -31684,40 +31684,11 @@
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T04:01:13Z",
+    "want": true,
+    "at": "2026-11-22T04:18:00Z",
     "n": 1,
     "est": 0.79,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T04:12:21Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44983183373",
-     "n": 1,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [
-      "deedee-wetfloor"
-     ],
-     "stopped": [
-      {
-       "what": "deedee-wetfloor",
-       "why": "failed twice: feet, edge",
-       "card": "c-wanstop-deedee-wetfloor-r8"
-      }
-     ],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 1.57,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "deedee-wetfloor": 8
-     }
-    }
+    "auto": true
    }
   },
   {
@@ -33814,12 +33785,16 @@
    "auto": true,
    "wan_card": "t-wanmop1-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
     "opening": "added by the wan-gen job"
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Fix: by eye both videos draw the string mop and one sweep; try 1 failed only bg (pink floor shadow), try 2 only by 0.2 point on feet and 6 left-edge pictures at the sweep end. One change: pad 0.65 to 0.55 (rev 9). Kept prompt v5, Kling 4.0, picture, 5 s, limits, bake, wire. Next try started (wgen on t-wanmop1-gen)."
+    },
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44983183373): deedee-wetfloor stopped at rev 8. attempt 1 (pad 0.65) bg; attempt 2 (pad 0.65) feet, edge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"

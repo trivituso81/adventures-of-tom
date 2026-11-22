@@ -1,3 +1,7 @@
+## wanstop-deedee-wetfloor-r8 (2026-11-22): Deedee's Wet-Floor shrinks the start picture to 55 percent so the mop clears the left edge
+
+Card c-wanstop-deedee-wetfloor-r8. The bulk run 44983183373 stopped r8 (the string mop). By eye both videos are right: a string mop with a floppy head comes from behind her back, one sweep, put away. Try 1 failed only bg (a pink floor shadow, 5.46 percent off colour); try 2 failed feet by 0.2 point (10.2 percent, 2 pictures) and the left edge in 6 pictures (frames 46 to 47, 70 to 73). One change, rev 9: `pad` 0.55 (was 0.65). Kept: prompt v5, Kling 4.0, start picture, 5 s, feet limit 0.10, bake, wire, the 4 tries and $3.20 budget (2 used). Next try starts with this push (`wgen` on t-wanmop1-gen).
+
 ## guideusefix2 (2026-11-22): Use this one now writes its build heading
 
 Card c-guideuse-fix, follow-up to guideusefix1. Fact: the guide-use step "Name the build" called `use_take.py --changes` without `--state`, which the script required, so it exited with a usage error and no `docs/CHANGES.md` heading was written (seen in run 44982162678). `--state` is now needed only when taking requests. Tool fix; nothing to see on the phone.
