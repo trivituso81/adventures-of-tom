@@ -31273,8 +31273,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (5 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (7 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 1 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31296,6 +31296,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 5 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 7 report(s)."
     }
    ],
    "blocks": [],
@@ -31442,7 +31446,7 @@
   {
    "id": "c-voicefast1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "tag": "voicefast1",
    "title": "Voice takes take 2 to 3 minutes and never arrive",
@@ -31451,13 +31455,17 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukJ",
     "opening": "\"the voice library is now unusable since it takes SO long\""
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Tom: \"the voice library is now unusable since it takes SO long (over 2-3 minutes) to generate one clip from github.\" Board: new card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voicefast1: Voice Library takes arrive in about 30 seconds again, and a crashed job now says so"
     }
    ],
    "after": "t-voicefast1-try",
@@ -31469,7 +31477,8 @@
     "model": "Claude Sonnet 5.5 (row C: cause unknown, found in the session)",
     "effort": "medium (one failing Action and one page file)",
     "text": "Read CLAUDE.md, .github/workflows/voice-take.yml and engine/voice-take.js. Tom says Voice Library takes now take over 2 minutes. Find the cause from the voice-take run logs (gh run list, gh run view --log-failed), fix it, keep the ElevenLabs key out of every page, test with tools/voice-library/sparse_files_test.py, keysecrets3_test.py and voicetake_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-voicefast1-try",
@@ -32168,6 +32177,18 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukJ",
+   "title": "Voice takes take 2 to 3 minutes and never arrive",
+   "first": "2026-11-21T17:41:17-08:00",
+   "last": "2026-11-21T17:41:17-08:00",
+   "tags": [
+    "voicefast1"
+   ],
+   "cards": [
+    "c-voicefast1"
    ]
   },
   {
@@ -36194,7 +36215,9 @@
    "r-20261121-172850-q5km",
    "r-20261121-173524-egdf",
    "r-20261121-173628-97ha",
-   "r-20261121-173717-wjou"
+   "r-20261121-173717-wjou",
+   "r-20261121-174051-vxq1",
+   "r-20261121-174119-0522"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36228,8 +36251,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "b85acae5f7831d7df72e32a3fdab21d7392aad7a",
- "synced_at": "2026-11-22T01:39:18+00:00",
+ "synced": "dc244323118ec3b1f05adf7e3c4d18b99239db12",
+ "synced_at": "2026-11-22T01:41:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
