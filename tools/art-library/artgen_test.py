@@ -223,6 +223,20 @@ def R(at, svc=None, up=False, auto=False, **kw):
     if up: d['up'] = True
     d.update(kw); return d
 
+def wan_prompt_test():
+    """artwan2: fal's WAN endpoints refuse a prompt over 2000 characters (422). A short prompt goes word for word; a long one is trimmed of boilerplate only; the three gate pictures
+    that failed on 2026-11-22 now fit; a prompt that cannot fit is None and is never sent."""
+    short = 'Paint a red door. ' * 10
+    ok(artgen.wan_prompt(short) == short.strip(), 'wan_prompt: a prompt that fits is sent word for word')
+    doc = json.load(open(os.path.join(HERE, '..', '..', 'data', 'art-prompts.json')))['entries']
+    d = {e['id']: e for e in doc}
+    for i in ('prop-gate-town-school-open', 'prop-gate-backlot-stage7-open', 'prop-gate-jpark-barn-open'):
+        raw = d[i]['prompt']; w = artgen.wan_prompt(raw)
+        ok(len(raw) > 2000 and w is not None and len(w) <= 2000, 'wan_prompt: %s (%d characters) now fits (%s)' % (i, len(raw), len(w or '')))
+        ok(w and 'PAINT THIS ONE OBJECT' in w.upper() and raw.split('PAINT THIS ONE OBJECT')[1].split('RULES')[0].strip() in w.replace('Paint this one object: ', ''), 'wan_prompt: %s keeps the whole object description' % i)
+        ok(w and 'IMAGE REQUEST' not in w, 'wan_prompt: %s drops the xAI-only opening' % i)
+    ok(artgen.wan_prompt('x' * 2001) is None and artgen.wan_prompt('Paint this. ' * 800) is None, 'wan_prompt: a prompt that cannot fit is None')
+
 def ladder_unit():
     X = lambda n, base=1000: [R(base + i, 'xai') for i in range(n)]
     W = lambda n, base=2000: [R(base + i, 'wan') for i in range(n)]
@@ -490,7 +504,7 @@ def report_test():
 
 if __name__ == '__main__':
     try:
-        classify_test(); ladder_unit(); js_parity(); report_test(); generation(); requests_test(); fallback_e2e()
+        classify_test(); wan_prompt_test(); ladder_unit(); js_parity(); report_test(); generation(); requests_test(); fallback_e2e()
     finally:
         print(open(TMP + '/stub.err').read()[-800:] if os.path.exists(TMP + '/stub.err') else ''); shutil.rmtree(TMP, ignore_errors=True)
     print('FAILS:', fails); sys.exit(1 if fails else 0)

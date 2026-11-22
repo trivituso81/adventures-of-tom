@@ -1,3 +1,11 @@
+## artwan2 (2026-11-21): Art Library pictures on WAN no longer fail on long prompts
+
+- Tom: "The picture was not made: fal result said 422 ... at most 2000 characters." fal's WAN endpoints refuse a prompt over 2000 characters, and 418 of 1123 Art Library prompts are longer. The three gate pictures (prop-gate-town-school-open, prop-gate-backlot-stage7-open, prop-gate-jpark-barn-open) reached WAN try 3 and all failed this way.
+- `wan_prompt` in tools/art-library/artgen.py: a prompt that fits goes word for word; a longer one loses only boilerplate (the xAI-only opening, the child-safety line, blank lines, section labels, the style word list the attached picture carries) and never the object description. A prompt that still cannot fit is not sent, not charged and not a failed try (`TooLong`); it is listed as skipped.
+- Tested: python3 tools/art-library/artgen_test.py (new wan_prompt_test). The three gate prompts now measure 1990, 1849 and 1989 characters. Only 35 of the 418 long prompts fit; the other 383 (areas, rooms, big props) are too long for WAN and wait on xAI.
+- Not fixed: the run also printed "could not save branch artgen: missing necessary objects" when it made nothing; the pictures are still kept as a workflow artifact.
+- Not run for real: no picture was generated in this build.
+
 ## fix-pairmove1-gen-2 (2026-11-22): a dead video request no longer hangs Rose's Giddyup, Give it 4 more tries now makes a new try, and video cards say plainly what happened
 
 Card c-fix-pairmove1-gen-2, for t-pairmove1-gen and t-movefun-gen. Tom on t-pairmove1-gen (22:04): "Hanging". Tom on t-movefun-gen (22:23): "See your message".

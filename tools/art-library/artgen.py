@@ -175,6 +175,27 @@ def plan_service(e):
     return {'svc': 'xai', 'try': x + 1, 'xai': x, 'wan': w}
 
 
+WAN_MAX = 2000   # fal's WAN endpoints reject a prompt longer than this (422 string_too_long); xAI takes the long form
+
+
+def wan_prompt(p):
+    """artwan2: the prompt as WAN can take it, or None when it cannot fit. A prompt that already fits goes word for word (artfallback1). A longer one loses,
+    in this order and only until it fits, what a reference-picture edit does not need: the xAI-only opening (return one image, no plan or sheet), the child-safety line,
+    blank lines, the section labels, and the long list of style words that the attached picture already carries. Nothing that describes the picture itself is cut. None means the prompt describes more than WAN can read."""
+    p = (p or '').strip()
+    if len(p) <= WAN_MAX: return p
+    steps = [lambda t: re.sub(r'^IMAGE REQUEST:[^\n]*\n+', '', t),
+             lambda t: re.sub(r'^- Family friendly[^\n]*\n?', '', t, flags=re.M),
+             lambda t: re.sub(r'\n{2,}', '\n', t),
+             lambda t: re.sub(r'^ATTACHED IMAGES\n', '', t, flags=re.M),
+             lambda t: re.sub(r'^(PAINT THIS ONE OBJECT|RULES)\n', lambda m: m.group(1).capitalize() + ': ', t, flags=re.M),
+             lambda t: re.sub(r'Match its painting exactly:[^.]*\.', 'Match its painting style, colors and lighting.', t)]   # the reference is attached: its look is carried by the picture
+    for st in steps:
+        p = st(p).strip()
+        if len(p) <= WAN_MAX: return p
+    return None
+
+
 def cost_of(e, svc='xai'):
     if svc == 'wan': return WAN_EST
     return SPEND_PER + SPEND_REF * len(e.get('refs') or [])
@@ -275,6 +296,7 @@ def dispatch_bake(files):
 
 
 class Stop(Exception): pass
+class TooLong(Exception): pass   # artwan2: a prompt WAN cannot take (over 2000 characters after trimming): nothing is sent, nothing is charged, and it is not a failed try
 
 
 class Refused(RuntimeError): pass   # xAI turned the request down or sent no picture: a failed try (artfallback1). A 5xx, a timeout or a rate limit is not.
@@ -590,7 +612,9 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
 
     def wan_make(e, prompt, blobs, c_est, sent):
         """One WAN picture through falq. `sent` is set once fal has accepted the request (from then on the money stays booked)."""
-        body = {'prompt': prompt, 'num_images': 1}
+        wp = wan_prompt(prompt)
+        if wp is None: raise TooLong('the prompt is %d characters and WAN takes %d: it needs a shorter prompt, or xAI' % (len(prompt), WAN_MAX))
+        body = {'prompt': wp, 'num_images': 1}
         if blobs: ep = WAN_EDIT; body['image_urls'] = [falq.data_uri(b) for b in blobs]
         else: ep = WAN_T2I; body['image_size'] = wan_size(e.get('ar'))
         pend = fal.send(ep, body); sent['v'] = True
@@ -672,6 +696,8 @@ def do_card(a, repo, cid, override, results, key, reqs=None):
                 except Exception as x:
                     with lock: rep['held'].append({'id': i, 'why': 'could not approve: ' + str(x)[:150]})
                     say(i, 'could not approve:', str(x)[:200])
+        except TooLong as x:   # not sent, not charged (the money was given back above), not a failed try
+            skipped.append({'id': i, 'why': str(x)}); say(i, 'NOT SENT:', x)
         except (Stop, falq.KeyRefused) as x:
             (stop_wan if svc == 'wan' else stop).set(); rep['failed'].append({'id': i, 'why': str(x)}); say(i, 'STOP:', x)
         except (Refused, falq.Refusal, falq.Gone) as x:   # a refusal or an error with no picture: a failed try, written to the entry as a reject
