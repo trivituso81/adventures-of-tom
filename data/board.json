@@ -29194,8 +29194,14 @@
     {
      "d": "2026-11-22",
      "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T08:19:40.695Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-b3s21",
