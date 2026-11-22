@@ -32301,8 +32301,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (19 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-173628-97ha, r-20261121-180018-jc8f, r-20261121-180027-tyq4, r-20261121-180035-bjdf, r-20261121-180050-39xy, r-20261121-180126-mdm1 and 13 more. First note: need a cut out for this so tom and party dont overlap it",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd. First note: this scene has to be triggered before they leagve",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -32387,6 +32387,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 19 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 2 report(s)."
     }
    ],
    "blocks": [],
@@ -41035,8 +41039,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "a2e27e94788542a5353c9f38a3266cdb0c6cf18e",
- "synced_at": "2026-11-22T06:57:52+00:00",
+ "synced": "41e1f0366b18d769dc5621c6f04347f12a60505e",
+ "synced_at": "2026-11-22T06:58:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
