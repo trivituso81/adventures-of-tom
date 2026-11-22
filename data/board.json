@@ -26987,7 +26987,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -27059,9 +27059,12 @@
     {
      "d": "2026-11-22",
      "t": "Fix shipped for \"On the party tab, you only moved the HP to the top that you were also supposed to move the character name and level\": name, Level and the green bar now sit above the HP, all above the pictures (build fix-menu4play-4)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-b3gear",
@@ -29620,7 +29623,7 @@
    "id": "c-fix-menu4play-4",
    "tag": "fix-menu4play-4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
@@ -29672,6 +29675,10 @@
     {
      "d": "2026-11-22",
      "t": "Shipped build fix-menu4play-4: name, level and bar moved above the HP. Menu test frames looked at (Duo, iPhone upright). The two open pencil reports are chapter 2 scenes, not this fix."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as fix-menu4play-4: Party tab: name, level and green bar now sit above the HP, above the pictures"
     }
    ],
    "prompt": {
@@ -29685,7 +29692,8 @@
    },
    "after": "t-menu4play",
    "auto": true,
-   "started_at": "2026-11-22T14:36:45+00:00"
+   "started_at": "2026-11-22T14:36:45+00:00",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
@@ -29693,8 +29701,10 @@
    "url": "https://claude.ai/code/session_01RXeukFaCXixwyNJTmYPr4J",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
    "first": "2026-11-22T14:37:47Z",
-   "last": "2026-11-22T14:37:47Z",
-   "tags": [],
+   "last": "2026-11-22T14:55:46Z",
+   "tags": [
+    "fix-menu4play-4"
+   ],
    "cards": [
     "c-fix-menu4play-4"
    ]
@@ -35197,8 +35207,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "efdc0952c4bd10f017bb0fe87bd7ddce2ae9a994",
- "synced_at": "2026-11-22T14:44:41+00:00",
+ "synced": "04a980a96a1cfa9fc8de02c93be69a7dd10f7e70",
+ "synced_at": "2026-11-22T14:56:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
