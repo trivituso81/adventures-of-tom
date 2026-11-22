@@ -30802,7 +30802,7 @@
   {
    "id": "c-wanstop-rose-giddyup-r6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-giddyup-r6",
    "title": "Fix the stopped video rose-giddyup",
@@ -30832,6 +30832,10 @@
     {
      "d": "2026-11-21",
      "t": "Result (build wanstop-rose-giddyup-r6): cause, by eye: \"twirls one hand above her head\" became a full body spin (back to the camera at video frames 32 to 42) before an otherwise good single jump; every measurement passed. One change: rev 7, prompt v4 says \"circles one hand above her head\". Everything else kept. Tom taps Generate on t-wanstop-gen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-rose-giddyup-r6: Rose's Giddyup asks her to circle her hand instead of twirl"
     }
    ],
    "prompt": {
@@ -30842,12 +30846,13 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-rose-giddyup-r6 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job rose-giddyup (rev 6) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head lik (inconsistent motion; multiple poses but no clear canno; p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (ends in relaxed stance but sequence does not clearly s. Its files are on branch wangen: rose-giddyup-r6-result.json (every check with numbers and the look-check answers) and the videos rose-giddyup-r6.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanch5-gen. Your first push is the commit board: start c-wanstop-rose-giddyup-r6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r5",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -30877,6 +30882,10 @@
     {
      "d": "2026-11-21",
      "t": "Result (build wanstop-deedee-wetfloor-r5): cause, by eye: she sweeps left, right, left, right, left (frames 32 to 91) and the mop head hits the left or right edge at each stroke end; the 23 edge frames are those ends. One change: rev 6, prompt v3 says \"one short sweep\" (was \"one wide sweep\"). Everything else kept, pad stays 0.65. Tom taps Generate on t-wanstop-gen."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r5: Deedee's Wet-Floor asks for one short sweep instead of one wide sweep"
     }
    ],
    "prompt": {
@@ -30887,7 +30896,8 @@
     "model": "Claude Opus 5.5 (row D: a video prompt Tom judges by eye)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r5 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 5) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: edge, p1, p2. Evidence: edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; swee; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back; returns to stance bu. Its files are on branch wangen: deedee-wetfloor-r5-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r5.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanch5-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r5. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-boppy-bigfish-cap2",
@@ -31026,8 +31036,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172017-kfe3. First note: the block/bulb/gray grass shouldnt show up until after the log is defeated.",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172017-kfe3, r-20261121-172826-9r47, r-20261121-172850-q5km. First note: the block/bulb/gray grass shouldnt show up until after the log is defeated.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31054,6 +31064,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
@@ -31810,8 +31824,11 @@
    "url": "https://claude.ai/code/session_01RXeukGzcjuTUzBAU4zUzH1",
    "title": "Fix the stopped video rose-giddyup",
    "first": "2026-11-21T17:14:14-08:00",
-   "last": "2026-11-21T17:14:14-08:00",
-   "tags": [],
+   "last": "2026-11-21T17:26:31-08:00",
+   "tags": [
+    "wanstop-rose-giddyup-r6",
+    "wanstop-deedee-wetfloor-r5"
+   ],
    "cards": [
     "c-wanstop-rose-giddyup-r6",
     "c-wanstop-deedee-wetfloor-r5"
@@ -35810,7 +35827,9 @@
    "r-20261121-122202-loak",
    "r-20261121-125831-qvon",
    "r-20261121-165412-a75h",
-   "r-20261121-172017-kfe3"
+   "r-20261121-172017-kfe3",
+   "r-20261121-172826-9r47",
+   "r-20261121-172850-q5km"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -35844,8 +35863,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "ca9e7b69cb73287b8905ba5a8d56a22b4cef4b7f",
- "synced_at": "2026-11-22T01:26:21+00:00",
+ "synced": "2c7826daffe8ddb160a1d234fb1e141fd5de4b0a",
+ "synced_at": "2026-11-22T01:30:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
