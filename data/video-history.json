@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T22:09Z",
+ "built": "2026-11-22T22:31Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1812,6 +1812,38 @@
    "model": "alibaba"
   },
   {
+   "file": "stage-tom-bluebang-vid-a2-r2.mp4",
+   "job": "stage-tom-bluebang-vid",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-22T22:17:28.486200Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-bluebang-vid-a2-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-bluebang-vid-r2.mp4",
+   "job": "stage-tom-bluebang-vid",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-22T22:16:15.184060Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-bluebang-vid-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "stage-tom-bluebang-vid-a2-r1.mp4",
    "job": "stage-tom-bluebang-vid",
    "rev": 1,
@@ -1952,6 +1984,20 @@
    "reasons": [],
    "in_game": null,
    "strip": "art/video-history/stage-tom-runwaylights-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-starbeam-vid-r2.mp4",
+   "job": "stage-tom-starbeam-vid",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-22T22:16:15.058505Z",
+   "price": 0.15,
+   "verdict": "passed",
+   "reasons": [],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-starbeam-vid-r2.webp",
    "pad": null,
    "model": "alibaba"
   },
@@ -2167,6 +2213,39 @@
    "strip": "art/video-history/tom-cast-r2.webp",
    "pad": null,
    "model": "kling"
+  },
+  {
+   "file": "tom-controller-a2-r2.mp4",
+   "job": "tom-controller",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-22T22:14:22.530074Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open \" Its reason: Main throw and catch actions missing; only minor pose variations and fist pumps shown"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-controller-a2-r2.webp",
+   "pad": 0.65,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-controller-r2.mp4",
+   "job": "tom-controller",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-22T22:12:27.879436Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open \" Its reason: Ball appears in hand for throw and catch, hands not empty whole clip"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-controller-r2.webp",
+   "pad": 0.65,
+   "model": "alibaba"
   },
   {
    "file": "tom-controller-a2-r1.mp4",
