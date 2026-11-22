@@ -28965,9 +28965,9 @@
    "theme": "Battle Animations",
    "tag": "wanstop-tom-blockade-r4",
    "title": "Fix the stopped video tom-blockade",
-   "next": "The bulk run stopped tom-blockade (failed twice: edge, p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Accepted the first rev 4 video of tom-blockade and baked it (build wanstop-tom-blockade-r4). Watch card t-wanwatch-tom-blockade-0522 asks Tom to look.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanwatch-tom-blockade-0522",
    "auto": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
@@ -28988,6 +28988,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both rev 4 videos: arms out like a gate, weight shift left, hold, return. The first try passed every measured check; only the strict hip look check said no. Accepted it (wanpurpose1), baked it, no new try, nothing spent. Build wanstop-tom-blockade-r4."
     }
    ],
    "prompt": {
@@ -29502,6 +29506,32 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "fyi": true
+  },
+  {
+   "id": "t-wanwatch-tom-blockade-0522",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "wanwatch": [
+    "tom-blockade"
+   ],
+   "title": "Watch 1 new battle video",
+   "next": "Open ADMIN > BATTLE GUIDE, find each animation named below, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. New: tom-blockade. Newest build wanstop-tom-blockade-r4.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by c-wanstop-tom-blockade-r4"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by c-wanstop-tom-blockade-r4: tom-blockade passed every measured check, was baked and wired (build wanstop-tom-blockade-r4). The hip bump is weak; the arms-out gate pose and hold are clear."
+    }
+   ]
   }
  ],
  "sessions": [
