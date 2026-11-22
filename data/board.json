@@ -32751,7 +32751,8 @@
    "title": "New menu: the look and the Family screen",
    "next": "Builds the new menu's look and its first screen beside the old menu, behind a switch: the paper book over the paused scene, the five tabs, the top bar and the Family line-up with the bench. The old menu stays the default until the last card. Then you get one 3 minute look on the Duo and the phone, and Vibes and Gear start by themselves.",
    "blocks": [
-    "c-menu2"
+    "c-menu2",
+    "t-menu1look"
    ],
    "after": "t-menu1look",
    "created": "2026-11-22",
@@ -32790,8 +32791,8 @@
    "ask": "play",
    "where": "phone",
    "fyi": true,
-   "first": "Waits on the card New menu: the look and the Family screen. This card opens by itself.",
-   "next": "Waits on card c-menu1 (the new menu's look and Family screen). When it ships this card comes back to you with the steps: ADMIN, Menu, choose New. Nothing to do until then.",
+   "first": "Waits on the card New menu: the look and the Family screen (c-menu1). The menu is not built yet, which is why ADMIN had no Menu choice. This card opens when that build ships.",
+   "next": "Nothing yet: the new menu (c-menu1) is still being built, so ADMIN > Menu does not exist until it ships. When it does, this card comes back: on the Duo unfolded, held sideways, RELOAD on the title, then ADMIN, Menu, New; load a game, open the menu and look at the Family screen (paper page, lettering, family in a row, head sizes), then again on the phone upright.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, then ADMIN, Menu, New.",
     "Load a game and open the menu. Look at the Family screen.",
@@ -32823,6 +32824,11 @@
      "d": "2026-11-22",
      "t": "Your report \"There is no menu in the admin\" was right: the menu is not built yet. Held until c-menu1 ships; the fix card was retired.",
      "at": "2026-11-22T03:10:00.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix c-fix-menu1look: Tom found no Menu in ADMIN. Cause: this card opened before its build; c-menu1 did not list it in blocks. Now blocked by c-menu1, so it returns when the build ships.",
+     "at": "2026-11-22T04:00:00.000Z"
     }
    ],
    "waiting_on": "claude"

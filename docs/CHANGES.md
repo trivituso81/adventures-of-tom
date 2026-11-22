@@ -1,3 +1,7 @@
+## fix-menu1look (2026-11-22): the menu look card now waits for the menu build
+
+Card c-fix-menu1look. Tom (11-22) on t-menu1look: "There is no menu in the admin". Fact: the new menu is not built yet (card c-menu1 is still In progress), so ADMIN has no Menu choice. The look card had opened early because c-menu1 did not list it in `blocks`. Fixed on the board only: c-menu1 now blocks t-menu1look, which waits and comes back when the build ships. No game code changed.
+
 ## fix-artgen3try-2 (2026-11-22): QA no longer faults cropped pictures, and the JOIN banners keep their hands inside the picture
 
 Card c-fix-artgen3try-2, from Tom on t-artgen3try: "Fix bases on qa". Read as: fix the banners based on what QA flagged. Fact: the 4 test banners scored 14, 8, 11 and 16 of 16; looking at them, two flags were real (Grace's and Rose's JOIN banners have a hand cut off at the top or right edge) and two were QA's fault (it failed the waist-up LEAVE banner because the legs were not shown, and held JOIN pictures on shoes, pants and "proportions" of a full-body reference that a waist-up crop cannot show). Fact: the card's history shows the plain Generate button was tapped (`gen.mode` review), so nothing was auto-approved in that run.
