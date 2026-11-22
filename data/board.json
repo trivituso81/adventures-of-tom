@@ -25411,7 +25411,7 @@
    "id": "c-reports-13",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd, r-20261122-064330-9lsh. First note: this scene has to be triggered before they leagve",
@@ -25520,6 +25520,14 @@
     {
      "d": "2026-11-22",
      "t": "The backlog now holds 3 report(s)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: Chapter 2: two scene reports need one answer from you is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Answer from \"Chapter 2: two scene reports need one answer from you\": Start each scene the moment the party arrives, no long walk-in"
     }
    ],
    "blocks": [],
@@ -25533,8 +25541,7 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
     "prev": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ"
-   },
-   "waiting_on": "tom"
+   }
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -29822,6 +29829,16 @@
    ],
    "cards": [
     "c-fix-menu4play-3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+   "title": "Start pictures for the rest of the cast",
+   "first": "2026-11-22T06:57:31-08:00",
+   "last": "2026-11-22T06:57:31-08:00",
+   "tags": [],
+   "cards": [
+    "c-startpics"
    ]
   },
   {
@@ -35252,8 +35269,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "04a980a96a1cfa9fc8de02c93be69a7dd10f7e70",
- "synced_at": "2026-11-22T14:56:34+00:00",
+ "synced": "7e8d7fe69a0872b7a875aa82f2de9a0a6263f000",
+ "synced_at": "2026-11-22T14:58:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
