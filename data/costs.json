@@ -855,6 +855,15 @@
    "source": "wan-gen run",
    "at": "2026-11-22T05:05:32Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44987261923"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-21",
+   "amount": 0.785,
+   "what": "wan-gen Action: tom-rose-giddyup",
+   "source": "wan-gen run",
+   "at": "2026-11-22T05:16:38Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44988499096"
   }
  ],
  "balances": [
