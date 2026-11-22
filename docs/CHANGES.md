@@ -1,3 +1,15 @@
+## movefun2 (2026-11-22): the three flat family moves get one-sentence fixes and their videos are started
+
+Card c-movefun-fix. Tom answered "Fix all of them" on t-movefun-pick. Each move changed one sentence of its prompt; everything else is kept. Nothing was run by this session; the `wan-gen` Action makes the videos (card t-movefun-gen, cap $9.60).
+
+| Move | New prompt | The one change | Kept | Play speed |
+|---|---|---|---|---|
+| Tom, Zone One Blockade (`tom-blockade` rev 3) | wan-tom-blockade-v3.txt | The hip bump is its own sentence after the pose: "Then he bumps his hip to the left once." | Everything else, Wan 3.0, start picture, seed, 5 s | 1.5x (as before) |
+| Grace, Crunchy Sugar-Cube Pop (`grace-cubepop` rev 4) | wan-grace-cubepop-v4.txt | The punch becomes "holds it up beside her ear and squeezes it once with both hands so it crunches and squishes out between her fingers" | The rest of the prompt, Wan 3.0, start picture, seed, 5 s | 1.25x (was 1.5x) |
+| Deedee, Wet-Floor Hazard (`deedee-wetfloor` rev 10) | wan-deedee-wetfloor-v6.txt | Last sentence only: she sets a small yellow wet-floor sign beside her feet and wags one finger at it | The sweep sentence word for word, Kling 4.0, start picture, pad 0.55, feet limit | 1.25x (was 1.5x) |
+
+`tom-blockade` and `grace-cubepop` now carry `bake` and `wire` copied from their clip files (Blockade: state, every 3, figure 99.3; Cube Pop: strike, every 3, figure 90 rows for Grace) so the Action bakes and wires them. Checks: `wanbake.check_spec` is clean for all three and `board_check.py` passes. `wanbulk_test.py`, `wangen_test.py` and `board_wan_test.py` could not run in this session's container (the same failures on the untouched repo: no fal client set up, no Playwright browser path), so they were not run.
+
 ## movefun1 (2026-11-22): which family move videos are fun; 3 flat ones listed for Tom to pick
 
 Card c-movefun. Tom (11-21 20:02): "But what makes it giddy up Tata? These moves need to be fun." I made a contact sheet of each of the 10 family move videos (16 pictures plus the hit picture) and judged it against the move's name, description and the person. No prompt changed, no run started, no game file changed.

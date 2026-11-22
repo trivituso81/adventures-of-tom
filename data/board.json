@@ -34222,7 +34222,7 @@
    "title": "Remake the flat move videos Tom picked",
    "next": "Waits on your card Which flat moves to remake, then starts by itself. It writes the new prompt for each move you picked (one sentence changed each) and starts their videos; the Action checks, retries and puts the passes in the game.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-movefun-gen",
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
@@ -34323,6 +34323,46 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanmop1-gen and t-wanmop1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-wanmop1-gen.\n\nTom tested and found problems:\n1. Card t-wanmop1-gen (Make Deedee's Wet-Floor with a real mop, ask animations). He was asked: Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video. He wrote: Stuck\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T04:52:18.565Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanmop1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanmop1-gen, and give the build fix-wanmop1-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-wanmop1-gen"
+  },
+  {
+   "id": "t-movefun-gen",
+   "lane": "tom",
+   "col": "wait",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Remaking three flat moves: Blockade, Cube Pop, Wet-Floor",
+   "next": "Nothing to tap: the run is already started. The Action makes the 3 videos (Tom's Zone One Blockade with the hip bump, Grace's Crunchy Sugar-Cube Pop held by her ear, Deedee's Wet-Floor with the yellow sign), checks them, retries by itself and puts the ones that pass in the game. A watch card comes when they pass. At most $9.60 for all three, about $1.80 if each passes first time.",
+   "wan": {
+    "jobs": [
+     "tom-blockade",
+     "grace-cubepop",
+     "deedee-wetfloor"
+    ],
+    "cap": 9.6
+   },
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "build": "movefun2",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
+    "opening": "added by movefun2"
+   },
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T04:56:15Z",
+    "n": 3,
+    "est": 1.79
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by movefun2. Tom chose Fix all of them on t-movefun-pick.",
+     "at": "2026-11-22T04:56:15Z"
+    }
+   ],
+   "waiting_on": "claude"
   }
  ],
  "sessions": [
