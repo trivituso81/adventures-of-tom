@@ -29465,7 +29465,7 @@
    "title": "Battle stage 22: Part 2 bestiary, Traits and Quirks",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Part 2 bestiary (chapters 11 to 20) built inside each chapter's own story build, and the 30 Traits and 60 Quirks rebuilt as data plus hooks. Start with chapter 11 only. Starts after c-b3s21.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29484,8 +29484,17 @@
     {
      "d": "2026-11-22",
      "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T18:45:59.200Z"
     }
-   ]
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   }
   },
   {
    "id": "c-b3s23",
