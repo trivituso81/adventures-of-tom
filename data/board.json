@@ -29941,7 +29941,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics10",
+   "build": "startpics11",
    "history": [
     {
      "d": "2026-11-22",
@@ -31990,6 +31990,40 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "c-startpics11",
+   "title": "Use this one: fix the failed push, show and notify its status",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics11",
+   "next": "Built as startpics11: the push step restarts from the newest main, the Guide keeps and resumes a waiting use, and your phone is notified when a take is in the game or failed. Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i said use in game and the status doesnt update. i cant even see it when its done\". Built startpics11.",
+     "at": "2026-11-22T22:30:00.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics11 in data/board.json. Your first push is the commit board: start c-startpics11. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [

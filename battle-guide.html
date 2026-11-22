@@ -999,23 +999,30 @@ function askUse(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
   $('guseconf').innerHTML='<div class="conf"><p><b>This changes the game.</b> '+(a.clip?'Take '+t.n+' replaces the current video of '+esc(a.name)+'; the old one is removed from the game (Git keeps it).':'Take '+t.n+' becomes the video of '+esc(a.name)+'.')+' It costs nothing and takes a few minutes.</p><div class="row2"><button type="button" class="gold" id="guseyes">Yes, use it</button><button type="button" id="gusecan">Cancel</button></div></div>';
 }
+let GUSE={};try{GUSE=JSON.parse(lsGet('aot-guide-use')||'{}')||{};}catch(e){GUSE={};}   // startpics11: a use that was sent and not yet answered, kept so a reload or another screen still shows its status
 async function doUse(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const at=new Date().toISOString(),box=$('guseconf');box.innerHTML='<p class="hint">Sending...</p>';
   try{await ghRequest('data/guide-use.json','guide: use '+a.id,d=>{d.requests.push({anim:a.id,take:t.n,at,prompt:t.prompt||workPrompt(a)});});}
   catch(e){box.innerHTML='<p class="err">'+esc(e.message)+'. Nothing was changed.</p>';return;}
-  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake');
-  while(alive()&&Date.now()-t0<20*60000){
+  GUSE[a.id]={n:t.n,at};saveLS('aot-guide-use',GUSE);
+  pollUse(a,t.n,at);
+}
+async function pollUse(a,n,at){
+  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake'),box=()=>$('guseconf')||$('gtake');
+  const t00=Math.max(t0-(Date.now()-new Date(at).getTime()),t0-25*60000);
+  while(alive()&&Date.now()-t00<25*60000){
     const g=await ghGetJson('use-report.json','guidegen',lsGet(TOKEN)).catch(()=>null);
     if(g&&g.doc&&(g.doc.reqs||[]).includes(at)){
       const ok=(g.doc.done||[]).find(x=>x.anim===a.id),bad=(g.doc.failed||[]).find(x=>x.anim===a.id);
-      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+t.n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight.</p></div>'
-        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Send Claude a note below.</div>';
+      delete GUSE[a.id];saveLS('aot-guide-use',GUSE);
+      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight. Your phone also gets a notification.</p></div>'
+        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Open the animation and tap Use this one again.</div>';
       return;
     }
-    if(alive())box.innerHTML='<p class="hint" id="guseWait">Putting it in the game, '+Math.round((Date.now()-t0)/1000)+' s. This takes about 3 to 6 minutes.</p>';
+    if(alive())box().innerHTML='<div class="take"><h3>Sent to the game</h3><p class="hint" id="guseWait">Take '+n+' of '+esc(a.name)+' is being put in the game, '+Math.round((Date.now()-new Date(at).getTime())/1000)+' s so far. This takes about 3 to 6 minutes. You can leave this screen: the status comes back when you open this animation, and your phone gets a notification.</p></div>';
     await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
   }
-  if(alive())box.innerHTML='<p class="err">No answer after 20 minutes. Tell Claude, or send the note below.</p>';
+  if(alive())box().innerHTML='<p class="err">No answer after 25 minutes. Tell Claude, or send the note below.</p>';
 }
 function tryAgain(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
@@ -1030,6 +1037,7 @@ async function initMake(a){
   const tok=GCUR.tok;await loadTakes();if(GCUR.tok!==tok||PL.a!==a||!$('gtake'))return;showStats(a);
   const A=takesOf(a),last=A.takes[A.takes.length-1],pend=GPEND[a.id];
   if(pend&&!A.takes.find(x=>x.n===pend.n)){waitTake(a,pend.n,pend.at);return;}
+  if(GUSE[a.id]){pollUse(a,GUSE[a.id].n,GUSE[a.id].at);return;}
   if(A.stop&&$('ghow')){$('gtake').innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
   if(last)showTake(a,last);
 }
