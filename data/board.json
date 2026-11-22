@@ -30771,7 +30771,7 @@
    "title": "Battle stage 22: chapter 12 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s22ch12: chapter 12 (Gridlock Prime) is on Battle 3. Tom plays it on t-b3s22ch12.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30811,10 +30811,15 @@
     {
      "d": "2026-11-22",
      "t": "Built chapter 12 on Battle 3 (build b3s22ch12): Gridlock Prime (boss, 7 pips; HP 1860, 1400 for three) and the Gridlock it calls (713 HP, 357 for three), Four-Way Red Light as a 30% Guard Stance plus +30% Def and +25% Atk, used once above and once below half HP, Total Gridlock below half. Numbers are the bestiary's, none changed: the simulator puts the fight at 6.8 rounds (aim 6 to 7). One small code change: the summon op reads hp3. The chapter has only the one fight, so the formation pays the boss's 45 VP. Chapter 12 test, checks and night manifest added; chapter 13 is the first unswitched chapter in the story test."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch12: Chapter 12 (Tom's street) fights on the new battle: Gridlock Prime and its Four-Way Red Light"
     }
    ],
    "started_at": "2026-11-22T21:24:38+00:00",
-   "after": "t-b3s22ch12"
+   "after": "t-b3s22ch12",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch13",
@@ -32469,6 +32474,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
+   "title": "Battle stage 22: chapter 12 on Battle 3",
+   "first": "2026-11-22T21:27:58Z",
+   "last": "2026-11-22T22:43:17Z",
+   "tags": [
+    "b3s22ch12"
+   ],
+   "cards": [
+    "c-b3s22ch12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEfWEg7m1o52RVDRy4",
    "title": "Fix the stopped video stage-tom-starbeam-vid",
    "first": "2026-11-22T22:02:32Z",
@@ -32578,16 +32595,6 @@
    ],
    "cards": [
     "c-wanstop-stage-tom-suitedoor-r1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
-   "title": "Battle stage 22: chapter 12 on Battle 3",
-   "first": "2026-11-22T21:27:58Z",
-   "last": "2026-11-22T21:27:58Z",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch12"
    ]
   },
   {
@@ -38402,8 +38409,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "85f6fc62bf54903e09502ec2f0c8ffd79d36ba86",
- "synced_at": "2026-11-22T22:41:35+00:00",
+ "synced": "75e979f125ad9234789ccd619f2352f95a974ccb",
+ "synced_at": "2026-11-22T22:44:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
