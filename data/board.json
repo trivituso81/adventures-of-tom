@@ -30676,7 +30676,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 12, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(12)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 12 (Tom's street, Los Angeles): Gridlock Prime (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch12.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 12 behind the BY CHAPTER switch (add 12 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch12_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Gridlock Prime's rules (Four-Way Red Light: Guard Stance plus a Def and Atk buff) may need one small act field; add it the way stage 22a added `front_back`. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 12 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 13, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch12_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(12)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 12 that this session creates (ask play, `jump` {chapter: 12}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGhKSapgz3YahmvbdS",
+    "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
     "opening": "created by the b3s22 session"
    },
    "history": [
@@ -30692,6 +30692,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T21:24:38+00:00"
@@ -31466,6 +31470,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
+   "title": "Battle stage 22: chapter 12 on Battle 3",
+   "first": "2026-11-22T21:27:58Z",
+   "last": "2026-11-22T21:27:58Z",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "first": "2026-11-22T20:45:36Z",
@@ -31574,7 +31588,7 @@
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T13:24:19-08:00",
+   "last": "2026-11-22T13:28:25-08:00",
    "tags": [
     "startpics1",
     "startpics2",
@@ -31586,7 +31600,8 @@
     "startpics8",
     "wannoday1",
     "repair",
-    "startpic"
+    "startpic",
+    "startpics9"
    ],
    "cards": [
     "c-startpics",
@@ -31596,7 +31611,8 @@
     "c-startpics5",
     "c-startpics7",
     "c-startpics8",
-    "b-wannoday1"
+    "b-wannoday1",
+    "c-startpics9"
    ]
   },
   {
@@ -37224,8 +37240,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "19aac4d4a6925cfe10f0fd448e4163d30a01a410",
- "synced_at": "2026-11-22T21:24:38+00:00",
+ "synced": "dc86ac6b0205cd4670b9a5f7240e7c6289e539da",
+ "synced_at": "2026-11-22T21:28:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
