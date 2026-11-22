@@ -31643,7 +31643,7 @@
   {
    "id": "t-voicefast1-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
@@ -31670,9 +31670,15 @@
     {
      "d": "2026-11-21",
      "t": "Created by c-voicefast1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T02:10:48.855Z"
     }
    ],
-   "prompt": ""
+   "prompt": "",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-wanstop-gen",
