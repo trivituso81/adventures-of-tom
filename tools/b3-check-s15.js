@@ -20,11 +20,11 @@ module.exports=function(T) {
 
   // 2. Migration numbers: the pool per chapter and its split, and the level floors
   ok(S.vpPerChapter===135&&Math.abs(S.split[0]+S.split[1]-1)<1e-9,'135 VP a chapter, split in two thirds and one third');
-  ok(S.levelFloor.length===11&&S.levelFloor.every((v,i,a)=>i===0||v>=a[i-1]),'one level floor per chapter 1 to 10, never going down');
+  ok(S.levelFloor.length===12&&S.levelFloor.every((v,i,a)=>i===0||v>=a[i-1]),'one level floor per chapter 1 to 11, never going down');   // 11: stage 22a
   ok(S.levelFloor[1]===1,'chapter 1 raises nobody (a new game starts at Level 1)');
 
   // 3. The tips: Battle 3 words only
-  const bad=/warmth|heart meter|tombo|b2|raspberry|goofed|inspect:|stamp/i;
+  const bad=/warmth|heart meter|tombo|b2|raspberry|goofed|inspect:|stamp(?!ede)/i;
   for(const key in S.tips) { const ids=new Set();
     for(const t of S.tips[key]) { ok(t.id&&!ids.has(t.id)&&t.text&&(t.who==='*'||CAST[t.who]),key+' tip '+t.id+' is complete with a real member'); ids.add(t.id);
       ok(!bad.test(t.text),key+' tip '+t.id+' has no battle 2 words'); ok(!/—/.test(t.text),key+' tip '+t.id+' has no em dash');

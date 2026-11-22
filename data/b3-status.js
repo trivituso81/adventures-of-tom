@@ -532,3 +532,17 @@ Object.assign(B3_STATUS,{
     on:{actionEnd:{carrier:'source',consume:true,effects:[]}},
     short:'BREAKING',color:'#ff5a5a',weight:1,desc:'Ruckus gains from this action are 25% bigger.'}
 });
+
+// Stage 22 (chapter 11, the airport the family is diverted to): the four statuses its monsters use. Lost Luggage's Frantic Rummage lowers Defense,
+// the Standby Sprite's Seat Seventeen lowers Speed and its Podium Counter is the Guard Stance it starts in, and FINAL CALL's Rebooking Stampede
+// speeds up every monster for 2 turns. (Fatigue, Slow, Blind and Dazzled are the shared rows above.)
+Object.assign(B3_STATUS,{
+  rummaged:{id:'rummaged',name:'Frantic Rummage',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'rummage',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#c9b79a',weight:4,desc:'Mismatched socks flung everywhere and a suitcase sitting on your bag: 20% less Defense.'},
+  seat_seventeen:{id:'seat_seventeen',name:'Seat Seventeen',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'seat17',v:-.15}],flags:[],
+    short:'SPEED DOWN',color:'#b3c2d6',weight:4,desc:'Stuck in a seat that is not yours: 15% less Speed.'},
+  podium_counter:{id:'podium_counter',name:'Podium Counter',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#9db0c9',weight:5,desc:'Standing behind the gate podium: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  stampede:{id:'stampede',name:'Rebooking Stampede',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'stampede',v:.20}],flags:[],
+    short:'SPEED UP',color:'#e8b35a',weight:5,desc:'Everyone rebooked at once and running for the gate: 20% more Speed. It can be stripped.'}
+});

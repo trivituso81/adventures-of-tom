@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay','tradeRows'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -239,6 +239,16 @@ const B3_OPS={
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       const n=Math.min(t.hp-1,Math.round(t.maxHp*e.pct)); if(n<=0) continue;
       t.hp-=n; c.beats.push({t:'hit',tgt:t.key,dmg:n,hp:t.hp,g:c.g}); }
+  },
+  // tradeRows (stage 22, FINAL CALL's Gate Change): the first two units the act hit swap rows, one Front for one Back (spec 2.1). If they
+  // already stand in the same row nothing changes, so an act that could only reach one row still hits and pushes both. Only the rows
+  // move: Marks, statuses and the turn bar stay where they are.
+  tradeRows(F,c,e) {
+    const [a,b]=c.targets||[]; if(!a||!b||!b3Alive(a)||!b3Alive(b)||a.side!==b.side||a.side!=='party') return;
+    if(b3EffRow(F,a)===b3EffRow(F,b)) return;
+    const ra=a.row==='back'?'back':'front',rb=b.row==='back'?'back':'front';
+    a.row=rb; b.row=ra;
+    c.beats.push({t:'rowTrade',a:a.key,b:b.key,rowA:a.row,rowB:b.row,g:c.g});
   },
   row(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(t.side!=='foe'||t.row===e.row) continue;

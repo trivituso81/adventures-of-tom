@@ -12,7 +12,7 @@
 //   2. an "every N turns" or "every N rounds" act that is due (the count starts again after the act fires)
 //   3. the next act in printed order that passes its `when`
 // Counter acts (hits:'attacker') and follow-ups (after:'...') are never picked from the list.
-const B3_FOE_HITS=['one','all','self','marked','attacker','two_random','two_adjacent','fastest','foes','field'];
+const B3_FOE_HITS=['one','all','self','marked','attacker','two_random','two_adjacent','front_back','fastest','foes','field'];
 // Stage 13: allyHurt:true (another monster on its side is below full HP; Cone Head's Scoop Pass). Stage 12: allyId / noAllyId (a monster of that id stands on its side / none does), allyAge:N (with allyId: the one this monster called has stood for N of its turns).
 const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns','allyId','noAllyId','allyAge','allyHurt'];
 function b3ActOk(F,e,A) {
@@ -92,7 +92,13 @@ function b3FoeTargets(F,e,A,given) {
     if(m&&b3Alive(m)) return b3HasFlag(m,'untargetable')?{targets:[m],single:true,hidden:true}:one(m);
     return one(b3AggroPick(F,e,A));
   }
-  if(A.hits==='two_random') {
+  // front_back (stage 22, FINAL CALL's Gate Change): one Front ally and one Back ally, each picked by the fight's own dice. With nobody
+  // in one of the rows it is two allies picked like two_random. The `tradeRows` op then swaps the two rows (bestiary 1.1, "Rows").
+  if(A.hits==='front_back') {
+    const fr=open.filter(u=>b3EffRow(F,u)!=='back'),bk=open.filter(u=>b3EffRow(F,u)==='back');
+    if(fr.length&&bk.length) return {targets:[fr[Math.floor(b3Rand(F)*fr.length)],bk[Math.floor(b3Rand(F)*bk.length)]],wide:them.length<=2};
+  }
+  if(A.hits==='two_random'||A.hits==='front_back') {
     const pool=open.slice(),out=[];
     while(pool.length&&out.length<2) out.push(pool.splice(Math.floor(b3Rand(F)*pool.length),1)[0]);
     return {targets:out,wide:out.length>=them.length};

@@ -31,6 +31,8 @@ module.exports=function(T) {
   const keys=new Set(steps.filter(s=>S.chapters.includes(s.ch)).map(s=>s.tut)); keys.add('basics'); keys.add('bigone');
   // The bonus chapter (21) has its scenes in data/bonus-nine-scoops.js, not scenes.js: its tut names count when it is switched.
   if(S.chapters.includes(21)) for(const m of read('data/bonus-nine-scoops.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 11 (stage 22a) has its scenes in data/scenes-p2.js.
+  if(S.chapters.includes(11)) for(const m of read('data/scenes-p2.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)
@@ -55,7 +57,7 @@ module.exports=function(T) {
     ok(F.vp>0&&F.foes.every(f=>FOES[f.id]),'story fight '+k+' is real and pays VP'); }
 
   // 4. New tips: Battle 3 words only, complete, named members exist, no em dash, never longer than a message line can hold
-  const bad=/warmth|heart meter|tombo|b2|raspberry|goofed|compliment|puppy dog|stamp/i;
+  const bad=/warmth|heart meter|tombo|b2|raspberry|goofed|compliment|puppy dog|stamp(?!ede)/i;
   for(const key of Object.keys(S.tips)) { if(key==='basics'||key==='bigone') continue; const ids=new Set();
     ok(S.tips[key].length>=2,key+' has at least two tips');
     for(const t of S.tips[key]) {

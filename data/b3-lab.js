@@ -139,5 +139,11 @@ const B3_LAB=[
   {id:'new65',name:'NEW 65: THE SLUSHIE SLUG',sub:'Bonus chapter Elite. The Slushie Slug has 4 Composure pips, shrugs off Drench and starts behind its Blue-Ice Glaze. A Cone Head in Back.',
     party:['tom','grace','rose'],level:12,formation:'slushslug',bg:'pond'},
   {id:'new66',name:'NEW 66: BRAIN FREEZE',sub:'Bonus chapter boss. 6 Composure pips. Below half HP it puts up the Frosted Lid and winds up Deep Freeze.',
-    party:['tom','grace','rose'],level:12,formation:'brainfreeze',bg:'pond'}
+    party:['tom','grace','rose'],level:12,formation:'brainfreeze',bg:'pond'},
+  {id:'new67',name:'NEW 67: LOST LUGGAGE AND RED-EYE',sub:'Chapter 11 fight. Lost Luggage in Front flings socks that lower Defense. Red-Eye in Back yawns, blinds and dims the cabin lights on everyone.',
+    party:['tom','grace','rose','amy'],level:27,formation:'lostluggage',bg:'infinity'},
+  {id:'new68',name:'NEW 68: THE STANDBY SPRITE',sub:'Chapter 11 Elite. The Standby Sprite has 4 Composure pips and starts behind the gate podium. Waitlist Bump pushes one of you back. A Red-Eye in Back.',
+    party:['tom','grace','rose','amy'],level:27,formation:'standbysprite',bg:'infinity'},
+  {id:'new69',name:'NEW 69: FINAL CALL',sub:'Chapter 11 boss. 7 Composure pips. Gate Change trades a Front and a Back ally and pushes both. At 60% HP it calls Lost Luggage and everyone speeds up.',
+    party:['tom','grace','rose','amy'],level:27,formation:'finalcall',bg:'infinity'}
 ];

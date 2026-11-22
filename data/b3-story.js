@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -208,6 +208,18 @@ const B3_STORY={
       {id:'peeve',who:'*',text:'The Last Call has 7 Composure pips and can’t stand Drench or Sizzle. It shrugs off Racket, so Drench and Sizzle break it fastest.'},
       {id:'gate',who:'*',text:'Boarding Group Nine marks one of you. Next turn GATE CLOSED slams the marked person and locks their Skills for 2 turns. Shield them, or interrupt it.',when:(F)=>F.foes.some(f=>f.charge&&/Boarding|GATE/.test(f.charge.name||''))},
       {id:'final',who:'*',text:'FINAL BOARDING is charging (!!) below half HP: it hits everyone and tires them. Shield the family, or interrupt it before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/FINAL/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 11 (stage 22a): Tom, Grace, Rose and Amy in the Endless Concourse (TNB and Nara wait on the gold benches). Keys are the `tut` names in data/scenes-p2.js. ----
+    ch11a:[
+      {id:'elite',who:'*',text:'The Standby Sprite is an Elite: 4 Composure pips, and it can’t stand Drench or Clobber. Behind its podium it takes 25% less damage until a Break or Panic Boil! ends that.'},
+      {id:'bump',who:'*',text:'Waitlist Bump is charging (!!): it shoves one of you back down the turn bar and tires them. Break its pips to stop it, or shield that person.',when:(F)=>F.foes.some(f=>f.charge&&f.id==='standbysprite')},
+      {id:'seat',who:'*',text:'Seat Seventeen slows whoever it hits by 15%. Slow people act later, so a Pep-free Basic from the fastest of you keeps the turn bar moving.',when:(F)=>F.party.some(p=>p.st&&p.st.seat_seventeen)}
+    ],
+    finalcall:[
+      {id:'peeve',who:'*',text:'FINAL CALL has 7 Composure pips and can’t stand Razzle or Racket. It shrugs off Clobber, so Razzle and Racket break it fastest.'},
+      {id:'gate',who:'*',text:'Gate Change trades one Front and one Back person and pushes both down the bar. It leaves FINAL CALL Dazzled, so a Razzle or Sizzle hit sets off a Detonation on it.',when:(F)=>F.foes.some(f=>f.st&&f.st.dazzled)},
+      {id:'stampede',who:'*',text:'Rebooking Stampede is charging (!!): Lost Luggage joins the Front and every monster gets 20% more Speed. A Skill that strips buffs ends the speed-up. Then a floor sweep hits everyone.',when:(F)=>F.foes.some(f=>f.charge&&/Stampede|Avalanche/.test(f.charge.name||''))},
+      {id:'final',who:'*',text:'ALL FLIGHTS CANCELLED is charging (!!) below half HP: it hits everyone, takes a Pep from each and tires them. Break its pips or shield the family before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/CANCELLED/.test(f.charge.name||''))}
     ]
   }
 };

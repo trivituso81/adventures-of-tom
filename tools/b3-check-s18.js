@@ -9,7 +9,7 @@ module.exports=function(T) {
   const {G,ok}=T;
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),J=x=>JSON.stringify(x);
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
-  const EXPECT=[6,7,8,9,10,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one
+  const EXPECT=[6,7,8,9,10,11,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one. 11 is stage 22a (tools/b3-check-s22.js).
   ok(J(S.chapters.slice(5))===J(EXPECT.filter(n=>S.chapters.includes(n))),'stage 18 chapters sit in order after chapter 5 (found '+J(S.chapters)+')');
   const MINE=c=>c>=6&&c<=10;   // the bonus chapter has its own section at the end
   const scenes=read('data/scenes.js');
@@ -32,6 +32,8 @@ module.exports=function(T) {
   const keys=new Set(steps.filter(s=>S.chapters.includes(s.ch)).map(s=>s.tut)); keys.add('basics'); keys.add('bigone');
   // The bonus chapter (21) has its scenes in data/bonus-nine-scoops.js, not scenes.js: its tut names count when it is switched.
   if(S.chapters.includes(21)) for(const m of read('data/bonus-nine-scoops.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 11 (stage 22a) has its scenes in data/scenes-p2.js.
+  if(S.chapters.includes(11)) for(const m of read('data/scenes-p2.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

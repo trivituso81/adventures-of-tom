@@ -170,7 +170,7 @@ SCENES.ch11Meet=[
   {trace:'tnb-nara-arrive'},
   {talk:'TNB',lookAt:'TNB',lines:['Okay, everybody. It’s always dusk here and nobody has slept, so I’m calling a sleepover before we go any farther.','We have a blanket, a dog, and nine hours of dusk.','Tom, build the fort. I’ll make the snacks.']},
   {flag:'tombo:ff1'},
-  {toast:'New Tombo: Sleepover at Tom’s (Tom, TNB, Grace, Rose in front). 50% HEART.',time:4.5},
+  {if:()=>!B3_CH_ON(11),then:[{toast:'New Tombo: Sleepover at Tom’s (Tom, TNB, Grace, Rose in front). 50% HEART.',time:4.5}],else:[{toast:'New Tombo skin: Sleepover at Tom’s (Rose + TNB). It shows when they fire a Full Family Ruckus.',time:4.5}]},
   {flag:'ch11-met'},
   {toast:'TNB and Nara are on the bench. Sit at a gold Boarding Gate bench to bring them out front.',time:6},
   {toast:'Goal: look around the Concourse, then walk east to Gate Infinity.',time:5},
@@ -266,11 +266,13 @@ SCENES.ch11Vance=[
   {talk:'Rose',lines:['I won’t look at anything.']},
   {talk:'Rose',lines:['...I looked at one thing.']},
   {talk:'Tom',lines:['If somebody gets called and can’t move, I’ll walk them on. And if we need a friend in a hurry, wave to the bench.']},
-  {toast:'Tip: ▼ Bag, BENCH CALL swaps in a friend from the bench. Tom DEFENDs anyone who is called.',time:6},
+  {if:()=>!B3_CH_ON(11),then:[{toast:'Tip: ▼ Bag, BENCH CALL swaps in a friend from the bench. Tom DEFENDs anyone who is called.',time:6}],else:[{toast:'Tip: sit on a gold Boarding Gate bench before the fight to swap who is out front. Four fight at a time.',time:6}]},
   {battle:'finalcall',tut:'finalcall'},
   {if:()=>flag('battle:finalcall')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Everybody okay? It calls one of us every turn. Move before it goes again, or Tom will walk you on.']},
+    {if:()=>B3_CH_ON(11),then:[
+      {talk:'Amy',lines:['Up, everybody. Walk it off.','When the board calls Rebooking Stampede, shield everyone before the sweep. It can’t stand Razzle or Racket, so hit it with those.']}],else:[
+      {talk:'Amy',lines:['Everybody okay? It calls one of us every turn. Move before it goes again, or Tom will walk you on.']}]},
     {toast:'Face FINAL CALL (near the big door) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

@@ -29466,7 +29466,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Part 2 bestiary (chapters 11 to 20) built inside each chapter's own story build, and the 30 Traits and 60 Quirks rebuilt as data plus hooks. Start with chapter 11 only. Starts after c-b3s21.",
+   "next": "Chapter 11 is built and pushed as b3s22a (monsters, FINAL CALL, switch, tests, board cards for chapters 12 to 20). Left on this card: the 30 Traits and 60 Quirks guard and docs (stage 22b), then the card closes with the b3s22 heading.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29493,12 +29493,17 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Chapter 11 built (b3s22a). Lost Luggage, Red-Eye, the Standby Sprite and FINAL CALL on Battle 3 with the bestiary numbers (no number changed; every fight is inside its target in the simulator), formations and Lab fights NEW 67 to 69, tips, chapter 11 switched on (level floor 27). FINAL CALL's Gate Change needed two engine additions: hits 'front_back' and the 'tradeRows' op. Battle 2's FINAL CALL shield, LET IT FLY route and in-fight BENCH CALL are not carried over (the gold bench swap before the fight is). Scene toasts and Amy's retry coaching have Battle 3 wording; recorded lines are untouched. Tests: b3-sim check 4513 checks no fails; tools/ch11_b3_test.py portrait and landscape FAILS []; the first run of a chapter test flagged 'Rose: Warmth Wave!' as a Battle 2 word, it is Rose's Battle 3 Capstone name, so the lib regex now allows it. Older checks that counted the switched chapters moved to include 11 (b3-check-s15 to s18bonus, b3_story_test, battle_guide_test). Two failures are on the untouched checkout too: b3_story_test 'a save made on Battle 3 loads with the switch on Old' (flaky, timing) and 7 battle_guide_test checks (no start picture for TNB, What is coming, plan counts). Chapters 12 to 20 each have their own card (c-b3s22ch12 to c-b3s22ch20)."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGUVmRr6pvVzqxDWeZ",
     "opening": "pasted by Tom from the board"
-   }
+   },
+   "after": "t-b3s22ch11"
   },
   {
    "id": "c-b3s23",
@@ -29506,7 +29511,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "up",
-   "next": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs. Runs only after Tom answers t-b3s23-confirm. Ends the battle system.",
+   "next": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs. Runs only after Tom answers t-b3s23-confirm. Ends the battle system. Also waits for chapters 12 to 20 to be on Battle 3 (cards c-b3s22ch12 to c-b3s22ch20).",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29518,7 +29523,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row B: the delete list is written in battle-architecture.md; checks catch mistakes)",
     "effort": "medium (steps are known; checks are scripted)",
-    "text": "Read claude/battle-architecture.md section 5 row 23 and the stage 23 note near its end. Read Tom's answer on t-b3s23-confirm first (its note and answer are on the card). If the answer is not \"yes\", stop and write one history line. If yes: delete battle 2 files, Stampcards, Kindness in battle, Director's Cuts, Family Finishes and the Tombo rows, then the unused lines and clips. Purge completely (standing rule: grep for the old names and ids and confirm zero references outside demo/). Run python3 tools/clip-audit/unused_voice.py (all checks 0), grep for B2, b2 and B8 (zero outside demo/), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape. Write the result into this card's history and end the battle system card series with a Tom Milestone card: the whole game on Battle 3 with ask play. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read claude/battle-architecture.md section 5 row 23 and the stage 23 note near its end. First check that every chapter 11 to 20 is in `B3_STORY.chapters` (cards c-b3s22ch12 to c-b3s22ch20); if one is missing, stop and write one history line naming it. Then read Tom's answer on t-b3s23-confirm (its note and answer are on the card). If the answer is not \"yes\", stop and write one history line. If yes: delete battle 2 files, Stampcards, Kindness in battle, Director's Cuts, Family Finishes and the Tombo rows, then the unused lines and clips. Purge completely (standing rule: grep for the old names and ids and confirm zero references outside demo/). Run python3 tools/clip-audit/unused_voice.py (all checks 0), grep for B2, b2 and B8 (zero outside demo/), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape. Write the result into this card's history and end the battle system card series with a Tom Milestone card: the whole game on Battle 3 with ask play. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -30500,6 +30505,311 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-startpics-try"
+  },
+  {
+   "id": "t-b3s22ch11",
+   "title": "Milestone: play chapter 11 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22a or a later name. Then CHAPTERS > Chapter 11 (or Take me there on the dashboard) and play to the last scene: the Standby Sprite on the concourse, then Julian Vance and FINAL CALL at Gate Infinity (about 30 minutes). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, does the Standby Sprite want a Break (4 pips, takes less damage behind its podium until Break or Panic Boil), is FINAL CALL 5 to 7 rounds, does Gate Change (it swaps one Front and one Back family member and shoves them back) read clearly, do the tips on the message line tell you what to do. Known and left alone: a few recorded lines before the boss still say the board calls one of you and Tom walks you on, because recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 11 on the old battle. The chapter 12 card (c-b3s22ch12) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 11
+   },
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: Milestone for chapter 11 on the new battle."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch12",
+   "title": "Battle stage 22: chapter 12 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 12 on Battle 3: Gridlock Prime (Boss). Starts after chapter 11 is switched on (c-b3s22, build b3s22a).",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch12",
+   "prompt": {
+    "what": "Chapter 12 (Tom's street, Los Angeles): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "medium (the chapter 11 pattern is written (docs/BATTLE3.md stage 22a) and the bestiary prints the numbers; one boss, one small act field)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 12, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(12)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 12 (Tom's street, Los Angeles): Gridlock Prime (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch12.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 12 behind the BY CHAPTER switch (add 12 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch12_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Gridlock Prime's rules (Four-Way Red Light: Guard Stance plus a Def and Atk buff) may need one small act field; add it the way stage 22a added `front_back`. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 12 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 13, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch12_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(12)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 12 that this session creates (ask play, `jump` {chapter: 12}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch13",
+   "title": "Battle stage 22: chapter 13 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 13 on Battle 3: Hushling (Hexer), Signal Fault (Elite), Turnstile Grump (Elite), Wired Relay Hushling (Special), Dual-Coast Drill Worm (Mini-boss), The Gold Knight (Boss). Starts after chapter 12 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch13",
+   "prompt": {
+    "what": "Chapter 13 (The tunnel under the dome, then frozen Long Island): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 12 must be on the BY CHAPTER list (card c-b3s22ch12 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (helper links and a returning-monster set are new rules; six foes)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 13, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(13)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 13 (The tunnel under the dome, then frozen Long Island): Hushling (Hexer), Signal Fault (Elite), Turnstile Grump (Elite), Wired Relay Hushling (Special), Dual-Coast Drill Worm (Mini-boss), The Gold Knight (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch13.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 13 behind the BY CHAPTER switch (add 13 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch13_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The chapter holds Part 1 monsters returning as Part 2 versions, the Wired Relay Hushling and Drill Worm helper link (the boss takes less damage while a helper stands, and loses pips when a helper falls: engine work, spec section 1.1 and bestiary 1.1), and the Gold Knight. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 13 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 14, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch13_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(13)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 13 that this session creates (ask play, `jump` {chapter: 13}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch14",
+   "title": "Battle stage 22: chapter 14 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 14 on Battle 3: Boppy's Gold Armor (Boss). Starts after chapter 13 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch14",
+   "prompt": {
+    "what": "Chapter 14 (Long Island under the dome): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 13 must be on the BY CHAPTER list (card c-b3s22ch13 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (a fight where hits land on armor, not on Boppy, is new rules)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 14, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(14)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 14 (Long Island under the dome): Boppy's Gold Armor (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch14.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 14 behind the BY CHAPTER switch (add 14 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch14_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Boppy's Gold Armor: the party's hits land on the gold armor, never on Boppy, and it is a normal fight (Tom, 2026-11-17). Part 1 monsters return here too. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 14 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 15, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch14_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(14)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 14 that this session creates (ask play, `jump` {chapter: 14}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch15",
+   "title": "Battle stage 22: chapter 15 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 15 on Battle 3: The Windowsill Radio (Boss). Starts after chapter 14 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch15",
+   "prompt": {
+    "what": "Chapter 15 (The family dinner): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 14 must be on the BY CHAPTER list (card c-b3s22ch14 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (helper link and feedback on a boss with provisional numbers)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 15, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(15)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 15 (The family dinner): The Windowsill Radio (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch15.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 15 behind the BY CHAPTER switch (add 15 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch15_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Windowsill Radio calls Hushlings as speaker pods (helper link and feedback, as built for chapter 13). Provisional numbers: the bestiary marks chapters 15 to 20 provisional, so keep the printed numbers and tune only in the simulator. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 15 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 16, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch15_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(15)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 15 that this session creates (ask play, `jump` {chapter: 15}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch16",
+   "title": "Battle stage 22: chapter 16 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 16 on Battle 3: Citation Slip (Hexer), The Square's Sign (Boss). Starts after chapter 15 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch16",
+   "prompt": {
+    "what": "Chapter 16 (The town square): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 15 must be on the BY CHAPTER list (card c-b3s22ch15 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (helpers plus Guard Stance on a boss with provisional numbers)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 16, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(16)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 16 (The town square): Citation Slip (Hexer), The Square's Sign (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch16.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 16 behind the BY CHAPTER switch (add 16 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch16_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Citation Slips are helpers of The Square's Sign (Red-Tape Wall: calls up to 2, Guard Stance while they stand). Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 16 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 17, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch16_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(16)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 16 that this session creates (ask play, `jump` {chapter: 16}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch17",
+   "title": "Battle stage 22: chapter 17 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 17 on Battle 3: Pause Sprite (Hexer), Brass Desk Weight (Elite), Curator (Elite), The Twin Lenses (Boss). Starts after chapter 16 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch17",
+   "prompt": {
+    "what": "Chapter 17 (Julian's building, Los Angeles): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 16 must be on the BY CHAPTER list (card c-b3s22ch16 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (stance swapping is a new rule; four foes)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 17, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(17)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 17 (Julian's building, Los Angeles): Pause Sprite (Hexer), Brass Desk Weight (Elite), Curator (Elite), The Twin Lenses (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch17.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 17 behind the BY CHAPTER switch (add 17 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch17_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Twin Lenses has two stances that swap at each round divider and on Rack Focus (stance-swapping Pet Peeves: engine work). Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 17 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 18, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch17_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(17)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 17 that this session creates (ask play, `jump` {chapter: 17}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch18",
+   "title": "Battle stage 22: chapter 18 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 18 on Battle 3: The Studio Rig (Boss). Starts after chapter 17 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch18",
+   "prompt": {
+    "what": "Chapter 18 (The studio on the top floor): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 17 must be on the BY CHAPTER list (card c-b3s22ch17 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (a lock-then-flash act and Vance's scene fights are new)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 18, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(18)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 18 (The studio on the top floor): The Studio Rig (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch18.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 18 behind the BY CHAPTER switch (add 18 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch18_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Studio Rig: Spotlight Lock then Big Flash (a lock on one Back-row ally, then a flash at that ally; the rules file may need a lock field). Julian Vance's own fights where the scenes name them. Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 18 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 19, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch18_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(18)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 18 that this session creates (ask play, `jump` {chapter: 18}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch19",
+   "title": "Battle stage 22: chapter 19 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 19 on Battle 3: Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Starts after chapter 18 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch19",
+   "prompt": {
+    "what": "Chapter 19 (The lost-mail office): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 18 must be on the BY CHAPTER list (card c-b3s22ch18 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (a per-round stamp rule and a mini-boss are new)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 19, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(19)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 19 (The lost-mail office): Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch19.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 19 behind the BY CHAPTER switch (add 19 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch19_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Dead-Letter Censor stamps a flavor at each round divider from round 2 (REDACTED). The Courier is a mini-boss with Elite stats. Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 19 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 20, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch19_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(19)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 19 that this session creates (ask play, `jump` {chapter: 19}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22ch20",
+   "title": "Battle stage 22: chapter 20 on Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build ONLY chapter 20 on Battle 3: Blue Lens and Orange Lens (Special), The Collector (Boss). Starts after chapter 19 is switched on.",
+   "blocks": [],
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "tag": "b3s22ch20",
+   "prompt": {
+    "what": "Chapter 20 (The studio again): its monsters, boss, formations and tips as data, switched on Battle 3, one chapter test",
+    "before": [
+     "Chapter 19 must be on the BY CHAPTER list (card c-b3s22ch19 shipped). Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the chapter is designed from its scenes and the bestiary; the steps are not written for each chapter)",
+    "effort": "high (phases, phase lines, helpers and picking the four again are new rules)",
+    "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 20, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(20)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 20 (The studio again): Blue Lens and Orange Lens (Special), The Collector (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch20.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 20 behind the BY CHAPTER switch (add 20 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch20_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The last fight: three phases with phase lines (damage past a line is lost), the Blue and Orange Lens helpers, helper links and feedback, and picking the four again at each phase (swapping happens outside battle only, with one exception here). This is the largest chapter of the series. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 20 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 21, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch20_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(20)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 20 that this session creates (ask play, `jump` {chapter: 20}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    }
+   ]
   }
  ],
  "sessions": [

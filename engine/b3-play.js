@@ -193,6 +193,11 @@ function b3Show(b) {
     if(L&&u) { const spot=b3FreeSpot(u,b.row==='back'); L.px=spot[0]; L.py=spot[1]; L.sc*=b.row==='back'?.9:1/.9;
       b3Sfx('thud'); b3Say(u.name+(b.row==='back'?' dives under the surface.':' comes back up.')); }
   }
+  else if(b.t==='rowTrade') {
+    // Gate Change: two family members swap rows. Their spots follow `u.row` on the next frame (b3PartyHome); the cards say Back or not.
+    b3Sfx('thud'); b3Pop(b.a,b.rowA==='back'?'TO THE BACK':'TO THE FRONT','#ffd27a',{sc:2}); b3Pop(b.b,b.rowB==='back'?'TO THE BACK':'TO THE FRONT','#ffd27a',{sc:2});
+    b3Say(b3Name(b.a)+' and '+b3Name(b.b)+' trade rows.'); if(typeof b3RenderParty==='function') b3RenderParty();
+  }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
   else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id),H=B3_HAZARDS[b.id]; if(h) h.uses=b.left; b3Pop(b.tgt,H.pop||'SLIPPED!',H.color); b3Sfx('thud'); if(b.tgt[0]==='f') b3cFoeClip(b.tgt,'slip'); b3Say(b3Name(b.tgt)+' '+(H.verb||'slips on')+' the '+H.name.toLowerCase()+'.'); }
   else if(b.t==='foresee') {

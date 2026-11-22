@@ -31,7 +31,7 @@ def adv(stop,n=900,tag='s'):
             seen.add((tag,k)); pg.wait_for_timeout(150); snap(tag); log.append((tag,k))
         pg.keyboard.press('Enter'); pg.wait_for_timeout(110)
     return False
-BAD="()=>{ const t=(document.getElementById('b3-app')||{}).innerText||''; const m=t.match(/.{0,30}(WARMTH|HEART|Warmth).{0,30}/); if(m) window.__badWords=m[0]; return {words:!!m,b2:!battle.v3,v3:!!battle.v3}; }"
+BAD="()=>{ const t=(document.getElementById('b3-app')||{}).innerText||''; const m=t.match(/.{0,30}(WARMTH|HEART|Warmth(?! Wave)).{0,30}/); if(m) window.__badWords=m[0]; return {words:!!m,b2:!battle.v3,v3:!!battle.v3}; }"
 def win(tag):
     """Auto-play the fight on screen. Returns what happened (ended, card seen, Battle 3, Warmth words seen, tips shown)."""
     pg.wait_for_timeout(2500); snap(tag+'-battle-start')

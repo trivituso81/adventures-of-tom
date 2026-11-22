@@ -286,6 +286,8 @@ function check() {
   require('./b3-check-s19.js')({G,ok,near,play,noCrit});
   // Stage 21's groups: Casual Mode ("Freelancer", the fourth Vibe) and the Stampcard, Polish Points and Remix Tickets gone from Battle 3.
   require('./b3-check-s21.js')({G,ok,near,play,noCrit});
+  // Stage 22's groups: chapter 11 (the Endless Concourse) on Battle 3: the Standby Sprite and FINAL CALL, Gate Change's row trade, Rebooking Stampede; and the 30 Traits and 60 Quirks guard.
+  require('./b3-check-s22.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

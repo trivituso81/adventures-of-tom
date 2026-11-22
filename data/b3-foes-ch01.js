@@ -4,7 +4,7 @@
 //   pips   Composure pips (Elites and Bosses). hp3 / hp4: the boss's HP when the party has 3 or 4 members and `hp` is for the other size.
 //   acts   in printed order. power is the printed multiplier, recovery the printed Base Recovery (0 = fires at once, does not move the foe).
 //          hits: one (1 ally, picked by aggro), all (all allies), self, marked (the ally this foe Marked), attacker (a counter act:
-//                it answers an ally's action that hit this foe, once per action), two_random, two_adjacent (with grow:[2,3,'all']
+//                it answers an ally's action that hit this foe, once per action), two_random, front_back (1 Front and 1 Back ally, for the `tradeRows` op), two_adjacent (with grow:[2,3,'all']
 //                the number rises with each use), fastest (the fastest ally), foes (every monster), field (nobody: it calls an add).
 //          aim:  'back' = a `one` act looks at Back-row allies first.
 //          when: every condition listed must hold. everyTurn:N (every Nth of its own turns, counted again after it fires),

@@ -1,3 +1,18 @@
+## b3s22a (2026-11-22): Chapter 11 (the airport) fights on the new battle: Lost Luggage, Red-Eye, the Standby Sprite and FINAL CALL
+
+Card c-b3s22, part a. Chapter 11 is on the BY CHAPTER list for Battle 3, with the bestiary's numbers unchanged (every fight is inside its target in the simulator). Chapters 12 to 20 each have their own card (c-b3s22ch12 to c-b3s22ch20), so no chapter is built in the same conversation as another.
+
+| What | Where |
+|---|---|
+| Lost Luggage, Red-Eye, the Standby Sprite (Elite, 4 pips) and FINAL CALL (boss, 7 pips), four formations, Lab fights NEW 67 to 69, tips `ch11a` and `finalcall` | `data/b3-foes-ch11.js`, `data/b3-lab.js`, `data/b3-story.js` |
+| FINAL CALL's Gate Change trades one Front and one Back family member (new `hits:'front_back'` and the `tradeRows` op, with a `rowTrade` beat on screen); Rebooking Stampede (once at 60%, calls up to 2 Lost Luggage, +20% Speed, then a floor sweep); ALL FLIGHTS CANCELLED below half HP | `engine/b3-foe.js`, `engine/b3-ops.js`, `engine/b3-play.js`, `data/b3-status.js` |
+| Battle 3 wording for the Sleepover toast, the bench toast and Amy's retry coaching, behind `B3_CH_ON(11)`; recorded lines untouched | `data/scenes-p2.js` |
+| Chapter 11 test (house to boss win, portrait and landscape) and its place in the night manifest | `tools/ch11_b3_test.py`, `tools/b3_chapter_lib.py`, `tools/night/tests.json` |
+| Checks that counted the switched chapters now include 11; chapter 12 is the first unswitched one | `tools/b3-check-s15.js` to `s18bonus.js`, `tools/b3-check-s22.js` (new), `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+| Board: Milestone card for chapter 11, one card per chapter 12 to 20, stage 23 waits for them | `data/board.json` |
+
+Tests: `node tools/b3-sim.js check` (4513 checks, FAILS: []); `python3 tools/ch11_b3_test.py` portrait and landscape (FAILS: []); `python3 tools/smoke.py`. Failing on the untouched checkout too (not from this build): `b3_story_test.py` "a save made on Battle 3 loads with the switch on Old" (timing flake) and seven `battle_guide_test.py` checks (no start picture for TNB, What is coming, the plan counts).
+
 ## startpics2 (2026-11-22): the Battle Guide lists the standard pose animations (idle, guard, hit, dodge, knocked out, victory, running) for Amy, Boppy, Justin, Olivia, TNB and Nara
 
 Card c-startpics2. Tom (11-22 12:02): "but under Amy, i dont see her standard pose animations listed". Cause: `build_map.js` listed the seven family states only for a person who already had a clip or was video-only (Tom, Grace, Rose, Deedee), so the six who just got start pictures showed their 12 moves and nothing else. Now any person with a `start-<id>` job lists all seven, each with a starting prompt made from the proven wording of the Tom, Grace and Deedee state prompts (`tools/art-library/prompts/wan-<who>-<state>-v1.txt`) with the pronoun filled in; before, a state fell into the move draft ("lunges forward... as if making the move Guard"), which was wrong. Only the victory differs by person (Amy raises both fists like crossing a finish line, Boppy pumps one fist, Justin two thumbs up, Olivia arms in a V, TNB one raised fist; each was my pick from the cast's canon, say so if one is off), and Nara, a dog, has her own seven (crouch, flinch, lie down asleep, hop with tail wagging, trot in place) and her own "fur, collar, markings" line. Each shows Make the start picture until that person's picture exists. A prompt Tom keeps is saved as a job by the Guide as for the first four. No video was made and nothing was spent. Test: `python3 -I tools/art-library/startpic_test.py` (S6).

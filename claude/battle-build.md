@@ -61,7 +61,8 @@ Rules for every stage's session:
 | 19 | Third Vibes: ten Vibes, 40 moves, 10 Traits, 20 Quirks as rows in `data/b3-kit-*.js`, new statuses and ops, save fields without migration | Pushed 2026-11-22 | `b3s19` | docs/BATTLE3.md "What stage 19 holds" |
 | 20 | Character Level by shared XP: Battle 3 already shared XP through `b6GainXp` and `b6Sync`, so only data changed (XP rows for the 24 monsters of chapters 5 to 10) | Pushed 2026-11-22 | `b3s20` | Card c-b3s20 history |
 | 21 | Vibe Mastery as the only progression on Battle 3 (Stampcard, Polish Point and Remix Ticket paths cut) and Casual Mode (the Freelancer Vibe) | Pushed 2026-11-22 | `b3s21` | docs/BATTLE3.md "What stage 21 holds" |
-| 22 to 23 | See architecture section 5 | Not started | | |
+| 22 | Part 2 bestiary, one card per chapter (11 to 20), then Traits and Quirks | Chapter 11 pushed 2026-11-22; chapters 12 to 20 are cards c-b3s22ch12 to c-b3s22ch20 | `b3s22a` | docs/BATTLE3.md "What stage 22a holds" |
+| 23 | See architecture section 5 | Not started | | |
 
 ## Stage 15 results (facts)
 
