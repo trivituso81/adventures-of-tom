@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T05:21Z",
+ "built": "2026-11-22T05:39Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1845,7 +1845,7 @@
   "tom-run": "",
   "tom-cast": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed",
   "tom-loungepass": "",
-  "tom-blockade": "movefun2 (Tom picked Fix all): one change, the hip bump moves out of the pose sentence into its own sentence after it (\"Then he bumps his hip to the left once.\"), because r2 only held two stop palms. Kept: every other word, Wan 3.0, start picture, seed 81, 720p, 5 s. Bake and wire copied from data/clips/tom-blockade.js (state, every 3, 1.5x). Rev 3.",
+  "tom-blockade": "wanstop-tom-blockade-r3: one change, pad 0.8 (the start picture is shrunk to 80 percent inside the frame). By eye both r3 videos do the move: arms out with open palms, a weight shift to the left, a hold, then back to the stance. The only measured fault in both is the right hand touching the right edge (video frames 29 to 33; 2 and 5 of 150 pictures). The look checks p1 to p3 said no on both, but the pictures show the moves; the checks may be strict about the palm pose and the hip, which is left for Tom's watch card. Kept: the prompt (v3), Wan 3.0, start picture, seed 81, 720p, 5 s, bake and wire. Rev 4.",
   "grace-idle": "",
   "grace-hit": "",
   "grace-dodge": "wanch2: Kling missed twice the same way (r3 hair and arm out of the frame, r4 head cut at the edge of the shrunk picture), stop-loss on Kling. Now Rose's passed dodge exactly (duck, Wan 3.0, pad 0.8; Tom 11-21 10:33: 'Maybe it should be ducking motion instead'), which also passed for Tom",
