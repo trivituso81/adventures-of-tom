@@ -31289,6 +31289,29 @@
    },
    "after": "t-startpics-try",
    "done": "2026-11-22"
+  },
+  {
+   "id": "b-guideuse-45069823314",
+   "tag": "guideuse-45069823314",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "Idle (standing and breathing) (tnb) now plays a video chosen in the Battle Guide",
+   "next": "Done: Idle (standing and breathing) (tnb) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideuse-45069823314. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
@@ -37024,8 +37047,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "8c66774ac992fd5143b4f3f60b07fa7b28a8f547",
- "synced_at": "2026-11-22T21:05:55+00:00",
+ "synced": "ac1b1e28b1c27313ebb5838c25f0e25b5c732423",
+ "synced_at": "2026-11-22T21:08:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
