@@ -1027,6 +1027,15 @@
    "source": "wan-gen run",
    "at": "2026-11-22T20:49:17Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067851943"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.15,
+   "what": "wan-gen Action: guide requests",
+   "source": "wan-gen run",
+   "at": "2026-11-22T20:49:19Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067851943"
   }
  ],
  "balances": [
