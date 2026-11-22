@@ -31034,7 +31034,7 @@
    "id": "c-reports-12",
    "tag": "reports-2026-11-22b",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Fixed and pushed as reports-2026-11-22b: r-20261121-172017-kfe3 (the block, bulb and grey grass at Boppy's spot show only after the Log is beaten). Report deleted from inbox.",
@@ -31072,13 +31072,18 @@
     {
      "d": "2026-11-22",
      "t": "Fixed r-20261121-172017-kfe3 (\"the block/bulb/gray grass shouldnt show up until after the log is defeated\"): the spot hides until scene ch1Spot plays. Shipped as reports-2026-11-22b."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-22b: Boppy's fishing spot in chapter 1 (grey grass, orange block, bulb) now shows only after the Log is beaten"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-22T01:26:21+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-dash3-try",
@@ -31218,9 +31223,53 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "c-reports-13",
+   "tag": "reports-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: 2 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCcuQnfnZVh5HBEm78",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-22T01:30:22Z",
+   "last": "2026-11-22T01:30:22Z",
+   "tags": [
+    "reports-2026-11-22b"
+   ],
+   "cards": [
+    "c-reports-11",
+    "c-reports-12"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGzkghj5rCZRHTUQAf",
    "title": "Night cleanup: one bucket of cleanup every night",
@@ -31869,6 +31918,16 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+   "title": "Main menu redesign: the proposal",
+   "first": "2026-11-21T17:30:53-08:00",
+   "last": "2026-11-21T17:30:53-08:00",
+   "tags": [],
+   "cards": [
+    "c-menuux-plan"
    ]
   },
   {
@@ -35914,8 +35973,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "2c7826daffe8ddb160a1d234fb1e141fd5de4b0a",
- "synced_at": "2026-11-22T01:30:05+00:00",
+ "synced": "54233f963efc5f1c6a8dec2f99b1f8ca1039b54e",
+ "synced_at": "2026-11-22T01:31:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
