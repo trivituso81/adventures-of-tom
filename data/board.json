@@ -29864,6 +29864,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCuaGvB32C87NhKN8e",
+   "title": "Battle Guide videos stuck at CHECKING all night",
+   "first": "2026-11-22T06:58:22-08:00",
+   "last": "2026-11-22T06:58:22-08:00",
+   "tags": [],
+   "cards": [
+    "c-guidestuck1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
@@ -35301,8 +35311,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "7e8d7fe69a0872b7a875aa82f2de9a0a6263f000",
- "synced_at": "2026-11-22T14:58:05+00:00",
+ "synced": "587100742afdaa71278f859e6f22b2c286f55163",
+ "synced_at": "2026-11-22T14:59:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
