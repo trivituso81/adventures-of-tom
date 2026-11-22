@@ -30205,7 +30205,7 @@
   {
    "id": "c-movestage-build",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "movestage2",
    "title": "Build the move stage and Move Lab for Tom's eight moves",
@@ -30214,7 +30214,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
     "opening": "added by c-movestage"
    },
    "prompt": {
@@ -30230,6 +30230,10 @@
     {
      "d": "2026-11-22",
      "t": "Added by movestage1. Tom (09:53): each ability as it unlocks should be fun, funny and visually cool, the final one visually stunning; (10:09) longer animations for each rank are fine. Tom's only review is the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
@@ -30318,6 +30322,16 @@
    "cards": [
     "c-wanstop-tom-rose-giddyup-r1",
     "t-pairmove1-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-22T10:55:40-08:00",
+   "last": "2026-11-22T10:55:40-08:00",
+   "tags": [],
+   "cards": [
+    "c-movestage-build"
    ]
   },
   {
@@ -35857,8 +35871,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3a968472087ed2caf16eba6a69d8fada29279102",
- "synced_at": "2026-11-22T18:48:22+00:00",
+ "synced": "5669bcd52decb88182e3ee8b676c1846d0b077d5",
+ "synced_at": "2026-11-22T18:56:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
