@@ -32049,7 +32049,7 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -32067,8 +32067,14 @@
     {
      "d": "2026-11-22",
      "t": "New card, made by the menuux-plan session: smoke failed the same way with and without that session's changes."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T02:06:09.909Z"
     }
-   ]
+   ],
+   "start": true
   }
  ],
  "sessions": [
