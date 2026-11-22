@@ -33216,7 +33216,7 @@
    "title": "Look at the new menu's first screen on the Duo and phone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33266,8 +33266,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: New menu: the look and the Family screen, Fix: Look at the new menu's first screen on the Duo and is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T04:17:30.892Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-menu2",
