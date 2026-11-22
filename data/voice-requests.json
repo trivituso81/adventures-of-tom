@@ -16,6 +16,23 @@
    "script": "[blurting, excited] I [emphasized] DO have news. [very strained] But you go first. [pause] [tight, quick] I can wait.",
    "at": 1795311057865,
    "rid": "r1795311057865-l30"
+  },
+  {
+   "kind": "tts",
+   "line": "d|tom|A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast.",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "fallback_ids": [],
+   "text": "[blurting, very fast] A [emphasized] FISH was wearing my mom's muffin pan. [very flat] As a crown. [pause] [polite, flat, quick] I'm so sorry. Please. [leading] Toast...",
+   "model": "eleven_v4",
+   "stability": 0.5,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[blurting, very fast] A [emphasized] FISH was wearing my mom's muffin pan. [very flat] As a crown. [pause] [polite, flat, quick] I'm so sorry. Please. [leading] Toast...",
+   "at": 1795311141564,
+   "rid": "r1795311141564-ie5"
   }
  ],
  "cancel": []
