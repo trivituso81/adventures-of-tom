@@ -30366,10 +30366,132 @@
     "n": 26,
     "est": 6,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T21:31:59Z",
+     "state": "done",
+     "at": "2026-11-22T21:50:09Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45071628174",
-     "n": 26
+     "n": 26,
+     "merged": [
+      "stage-tom-bluebang",
+      "stage-tom-glare",
+      "stage-tom-carryon",
+      "stage-tom-porsche",
+      "stage-tom-controller",
+      "stage-tom-wingedshell",
+      "stage-tom-runwaylights",
+      "stage-tom-jetwash",
+      "stage-tom-fireball",
+      "stage-tom-starbeam",
+      "stage-tom-meteor",
+      "tom-shell",
+      "stage-tom-wingedshell-vid",
+      "stage-tom-runwaylights-vid",
+      "stage-tom-fireball-vid",
+      "stage-tom-meteor-vid"
+     ],
+     "passed_not_baked": [],
+     "retried": [
+      "stage-tom-glare",
+      "stage-tom-suitedoor",
+      "tom-suitedoor",
+      "tom-porsche",
+      "tom-cartridge",
+      "tom-controller",
+      "tom-konami",
+      "stage-tom-bluebang-vid",
+      "stage-tom-glare-vid",
+      "stage-tom-jetwash-vid",
+      "stage-tom-starbeam-vid"
+     ],
+     "stopped": [
+      {
+       "what": "stage-tom-suitedoor",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-stage-tom-suitedoor-r1"
+      },
+      {
+       "what": "tom-suitedoor",
+       "why": "failed twice: edge, p1",
+       "card": "c-wanstop-tom-suitedoor-r1"
+      },
+      {
+       "what": "tom-porsche",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-tom-porsche-r1"
+      },
+      {
+       "what": "tom-cartridge",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-tom-cartridge-r1"
+      },
+      {
+       "what": "tom-controller",
+       "why": "failed twice: edge, p1",
+       "card": "c-wanstop-tom-controller-r1"
+      },
+      {
+       "what": "tom-konami",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-tom-konami-r1"
+      },
+      {
+       "what": "stage-tom-bluebang-vid",
+       "why": "failed twice: bg, edge",
+       "card": "c-wanstop-stage-tom-bluebang-vid-r1"
+      },
+      {
+       "what": "stage-tom-glare-vid",
+       "why": "failed twice: bg, edge",
+       "card": "c-wanstop-stage-tom-glare-vid-r1"
+      },
+      {
+       "what": "stage-tom-jetwash-vid",
+       "why": "failed twice: bg, edge",
+       "card": "c-wanstop-stage-tom-jetwash-vid-r1"
+      },
+      {
+       "what": "stage-tom-starbeam-vid",
+       "why": "failed twice: motion",
+       "card": "c-wanstop-stage-tom-starbeam-vid-r1"
+      }
+     ],
+     "waiting": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 9.53,
+     "build": "wanbulk-tmovestagelab-45071628174",
+     "watch": "",
+     "revs": {
+      "stage-tom-bluebang": 1,
+      "stage-tom-glare": 1,
+      "stage-tom-carryon": 1,
+      "stage-tom-suitedoor": 1,
+      "stage-tom-porsche": 1,
+      "stage-tom-controller": 1,
+      "stage-tom-wingedshell": 1,
+      "stage-tom-runwaylights": 1,
+      "stage-tom-jetwash": 1,
+      "stage-tom-fireball": 1,
+      "stage-tom-starbeam": 1,
+      "stage-tom-meteor": 1,
+      "tom-suitedoor": 1,
+      "tom-porsche": 1,
+      "tom-cartridge": 1,
+      "tom-controller": 1,
+      "tom-shell": 1,
+      "tom-konami": 1,
+      "stage-tom-bluebang-vid": 1,
+      "stage-tom-glare-vid": 1,
+      "stage-tom-wingedshell-vid": 1,
+      "stage-tom-runwaylights-vid": 1,
+      "stage-tom-jetwash-vid": 1,
+      "stage-tom-fireball-vid": 1,
+      "stage-tom-starbeam-vid": 1,
+      "stage-tom-meteor-vid": 1
+     }
     }
    },
    "blocks": [],
@@ -30419,6 +30541,14 @@
     {
      "d": "2026-11-22",
      "t": "Run started again by the build session (the daily video limit was removed by Tom, wannoday1; the first two taps were stopped by it and spent nothing)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen run 45071628174: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-shell, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-fireball-vid, stage-tom-meteor-vid passed and are in the game (build wanbulk-tmovestagelab-45071628174). No watch card: Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 45071628174: 26 made (16 passed and in the game, build wanbulk-tmovestagelab-45071628174, 10 stopped)."
     }
    ]
   },
@@ -31444,6 +31574,356 @@
    },
    "after": "t-startpics-try",
    "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-stage-tom-suitedoor-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-suitedoor-r1",
+   "title": "Fix the stopped video stage-tom-suitedoor",
+   "next": "The bulk run stopped stage-tom-suitedoor (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-suitedoor stopped at rev 1. attempt 1 (pad none) p1; attempt 2 (pad none) p1. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy sui"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-suitedoor-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-suitedoor (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy sui. This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-suitedoor-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-suitedoor-r1.png, stage-tom-suitedoor-a2-r1.png. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-suitedoor-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-suitedoor-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-tom-suitedoor-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-suitedoor-r1",
+   "title": "Fix the stopped video tom-suitedoor",
+   "next": "The bulk run stopped tom-suitedoor (failed twice: edge, p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-suitedoor stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) edge, p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instea"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-suitedoor-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-suitedoor (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1. Evidence: edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instea. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-suitedoor-r1-result.json (every check with numbers and the look-check answers) and the videos tom-suitedoor-r1.mp4, tom-suitedoor-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-suitedoor-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-suitedoor-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-tom-porsche-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-porsche-r1",
+   "title": "Fix the stopped video tom-porsche",
+   "next": "The bulk run stopped tom-porsche (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-porsche stopped at rev 1. attempt 1 (pad none) edge; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the sp"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-porsche-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-porsche (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the sp. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-porsche-r1-result.json (every check with numbers and the look-check answers) and the videos tom-porsche-r1.mp4, tom-porsche-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-porsche-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-porsche-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-tom-cartridge-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-cartridge-r1",
+   "title": "Fix the stopped video tom-cartridge",
+   "next": "The bulk run stopped tom-cartridge (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-cartridge stopped at rev 1. attempt 1 (pad none) p1; attempt 2 (pad none) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action of blowing into cartridge with puffed chee"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-cartridge-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-cartridge (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action of blowing into cartridge with puffed chee. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-cartridge-r1-result.json (every check with numbers and the look-check answers) and the videos tom-cartridge-r1.mp4, tom-cartridge-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-cartridge-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-cartridge-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-tom-controller-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-controller-r1",
+   "title": "Fix the stopped video tom-controller",
+   "next": "The bulk run stopped tom-controller (failed twice: edge, p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-controller stopped at rev 1. attempt 1 (pad 0.8) edge, p1; attempt 2 (pad 0.8) edge, p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, "
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-controller-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-controller (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1. Evidence: edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, . This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-controller-r1-result.json (every check with numbers and the look-check answers) and the videos tom-controller-r1.mp4, tom-controller-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-controller-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-controller-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-tom-konami-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-konami-r1",
+   "title": "Fix the stopped video tom-konami",
+   "next": "The bulk run stopped tom-konami (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-konami stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding c"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-konami-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-konami (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding c. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-konami-r1-result.json (every check with numbers and the look-check answers) and the videos tom-konami-r1.mp4, tom-konami-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-konami-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-konami-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-stage-tom-bluebang-vid-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-bluebang-vid-r1",
+   "title": "Fix the stopped video stage-tom-bluebang-vid",
+   "next": "The bulk run stopped stage-tom-bluebang-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-bluebang-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-bluebang-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-bluebang-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-bluebang-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-bluebang-vid-r1.mp4, stage-tom-bluebang-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-bluebang-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-bluebang-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-stage-tom-glare-vid-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-glare-vid-r1",
+   "title": "Fix the stopped video stage-tom-glare-vid",
+   "next": "The bulk run stopped stage-tom-glare-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-glare-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 96.6 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 40 of 90 pictures (limit 5 percent)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-glare-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-glare-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 96.6 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 40 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-glare-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-glare-vid-r1.mp4, stage-tom-glare-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-glare-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-glare-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-stage-tom-jetwash-vid-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-jetwash-vid-r1",
+   "title": "Fix the stopped video stage-tom-jetwash-vid",
+   "next": "The bulk run stopped stage-tom-jetwash-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-jetwash-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-jetwash-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-jetwash-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-jetwash-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-jetwash-vid-r1.mp4, stage-tom-jetwash-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-jetwash-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-jetwash-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-stage-tom-starbeam-vid-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-starbeam-vid-r1",
+   "title": "Fix the stopped video stage-tom-starbeam-vid",
+   "next": "The bulk run stopped stage-tom-starbeam-vid (failed twice: motion) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-starbeam-vid stopped at rev 1. attempt 1 (pad none) motion; attempt 2 (pad none) motion. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: motion: the biggest change from the first picture is 0.6 of 255 (needs 2.0): it hardly moves"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-starbeam-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-starbeam-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: motion. Evidence: motion: the biggest change from the first picture is 0.6 of 255 (needs 2.0): it hardly moves. This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-starbeam-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-starbeam-vid-r1.mp4, stage-tom-starbeam-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-starbeam-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-starbeam-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
