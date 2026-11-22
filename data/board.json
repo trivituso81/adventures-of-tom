@@ -34701,9 +34701,9 @@
    "theme": "Battle Animations",
    "tag": "wanstop-grace-cubepop-r4",
    "title": "Fix the stopped video grace-cubepop",
-   "next": "Waits on Tom card t-cubepop-checkdecide-r4: the checks may be too strict about the pocket. Nothing was changed or started.",
+   "next": "Baked grace-cubepop-a2-r4.mp4 as Tom chose; watch card t-wanwatch-cubepop-0522 asks him to look.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanwatch-cubepop-0522",
    "auto": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
@@ -34713,6 +34713,10 @@
     "opening": "added by the wan-gen job"
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Baked the latest video as Tom chose (wanbake, strike every 3, 1.25x); no new try, no money spent. Watch card added."
+    },
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44987261923): grace-cubepop stopped at rev 4. attempt 1 (pad none) p1, p2; attempt 2 (pad none) p1, p2. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once)"
@@ -35235,6 +35239,29 @@
    "after": "t-menu4play",
    "auto": true,
    "started_at": "2026-11-22T06:11:43+00:00"
+  },
+  {
+   "id": "t-wanwatch-cubepop-0522",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Watch the new Grace Cube Pop video",
+   "next": "Open ADMIN > BATTLE GUIDE, find Crunchy Sugar-Cube Pop, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. Build wanstop-grace-cubepop-r4.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by session on c-wanstop-grace-cubepop-r4"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added: Tom chose to bake the latest Grace Cube Pop video as it is; it is in the game now."
+    }
+   ]
   }
  ],
  "sessions": [

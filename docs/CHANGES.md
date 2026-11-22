@@ -1,3 +1,7 @@
+## wanstop-grace-cubepop-r4 (2026-11-22): Grace's Crunchy Sugar-Cube Pop video (rev 4) is baked into the game by hand
+
+Two tries of rev 4 failed only the look-checks (the pocket pickup and tuck are called not clear). I looked at the frames: she takes the blue cube, squeezes it once with both hands and tucks it back, and height, feet, flat background, edges and ends all pass. Tom chose "Bake the latest video as it is" on t-cubepop-checkdecide-r4, so I baked grace-cubepop-a2-r4.mp4 with the job's own settings (tools/art-library/wanbake.py, strike, every 3rd picture, 1.25x) into art/clips/grace-cubepop.webp and data/clips/grace-cubepop.js. The move already pointed at the clip, so no wiring changed. Nothing was generated and no money was spent; no new try was started (the fal balance was also out).
+
 ## wanqueue1 (2026-11-21): a video run also makes every other card still waiting; fal.ai is out of credit
 
 Card c-wanqueue1. Tom (21:59): "that leaves me totally confused as to what happens next". Facts: every wan-gen run since 05:20 UTC stopped on fal "User is locked. Reason: Exhausted balance" (ledger $66.52); Rose's pair tap (05:23 UTC) was dropped because two cards asked at once and GitHub keeps one waiting run. Change: after its own card, a bulk run makes every other card whose wgen.want is still true (read from the newest main), so a dropped run no longer strands a tap. Tom card t-fal-topup.
