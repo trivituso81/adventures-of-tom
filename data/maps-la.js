@@ -323,7 +323,15 @@ const LA_AREAS=[
       ['rock',21,3,1,1,'Lookout rock','From up here you can see the Observatory\'s white dome across the ridge. On a clear night you can see three stars. On a normal night, one.'],
       ['sign',7,9,1,1,'Trailhead sign','GRIFFITH PARK. Stay on the trail. Start with the Smoglet. Save the hill for last.'],
       ['sign',18,8,1,1,'Tar warning','DO NOT STEP IN THE TAR. It\'s not a puddle. It\'s a commitment.'],
-      ['rock',14,10,1,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.']],
+      ['rock',14,10,1,1,'Fault marker','EARTHQUAKE COUNTRY. If the ground starts talking, don\'t answer.'],
+      // fix-ch2play (Tom: the park is boring, nothing to search like Grump Hollow): Nara's trail, three finds in order once the trail opens
+      // (engine/overworld.js `find`, sparkles in STORY_MAPFX). Each answers A once with a new line and points at the next; the last two give a snack.
+      ['find',9,18,1,1,'Lens cap','A lens cap, face down in the dust. Nara sniffs it once, then stares up the east trail like she has been given an assignment.',
+        {find:{flag:'ch2-find1',hint:'Nara keeps staring up the east trail, near the tar pits.'}}],
+      ['find',15,9,1,1,'Bent tripod','A camera tripod with one leg bent like a flamingo. TNB: "Whoever set this up got out of the picture fast." There is half a granola bar in the bag. Nara claims it.',
+        {find:{flag:'ch2-find2',needs:'ch2-find1',item:'cookie',hint:'Nara hauls Tom toward the switchback trail, up near the Observatory.'}}],
+      ['find',7,5,1,1,'Hiker\'s backpack','A backpack dropped mid-stride, still zipped. Nara finds the juice box before anyone can object. TNB: "Babe, she was searching long before it was a quest."',
+        {find:{flag:'ch2-find3',needs:'ch2-find2',item:'juice',hint:'That is the whole trail. Nara looks extremely proud of herself.'}}]],
     npcs:[],
     // Spots on the painted trails (the Big Shake waits on the switchback trail below the Observatory).
     monsters:[['smoglet',12,14],['tickets',15,12],['coyote',16,8],['gridlock',19,3],['tarblob',17,5],['bigshake',4,4]]}

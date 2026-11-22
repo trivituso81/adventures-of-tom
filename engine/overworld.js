@@ -272,6 +272,13 @@ function pressAction() {
     const o=target.value;
     if(o.shop) { const pk=currentMap.npcs.find(n=>n.shopkeeper); if(pk) { talkToShopkeeper(pk); return; } }
     const text=storyVariant(o,'text');
+    // A find on a trail (fix-ch2play, data/maps-la.js Griffith Park): the first A, once the earlier find is done, sets its flag, reads the hint as a second page and gives its snack.
+    if(o.find&&!flag(o.find.flag)&&storyMatch({from:2,flag:['ch2-source'].concat(o.find.needs?[o.find.needs]:[])})) {
+      setFlag(o.find.flag); sfx.pickup();
+      openDialog(o.name,o.find.hint?[text,o.find.hint]:[text]);
+      const f=o.find,wait=setInterval(()=>{ if(dialog.active) return; clearInterval(wait); if(f.item) grantItem(f.item); },250);
+      return;
+    }
     if((o.kind==='fountain'||o.restore)&&party.some(m=>m.hp<m.maxHp||m.mp<m.maxMp)) {
       for(const m of party) { m.hp=m.maxHp; m.mp=m.maxMp; }
       sfx.fountain();

@@ -469,16 +469,12 @@ SCENES.ch2Loft=[
   {talk:'Tom',lines:["I can't skip ahead. Number one is a ball of mud that ran into my mother's kitchen and stole her muffin pan, with the muffins in it."]},
   {talk:'TNB',lines:["Huh. Are the muffins okay?"]},
   {talk:'Tom',lines:["Number two is the muffins. They're gone. Number three is the fish. He was the size of a cab, wearing the pan on his head like a crown."]},
-  {talk:'TNB',lines:["Then he knows where the muffins went."]},
-  {talk:'Tom',lines:["He gave the pan back, so number three is closed."]},
   {talk:'TNB',lines:["Okay. Look at the sky, babe. It's been purple since this morning."]},
   {talk:'Tom',lines:["That's not on my list. Okay. Number four, the sky."]},
   {talk:'TNB',lines:["Same color as my soda. I checked."]},
   {walk:'tom',to:routeTo('tom',8,10),speed:.2}, {face:'tom',dir:'up'},   // Tom goes to the window
   {talk:'TNB',lines:["It's coming off the hills. I figure we walk up and poke it."]},
   {talk:'Tom',lines:["Poke it. Yes. But maybe just gently."]},
-  {talk:'TNB',lines:["Nara's already on it. She's been barking at it from your porch since breakfast."]},
-  {talk:'Tom',lines:["Then we're her backup."]},
   {join:'tnb'},
   {wait:1.2},
   {toast:'Goal: home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468.',time:4.5}
@@ -599,10 +595,9 @@ SCENES.ch2Lemon=[
   ch2Tap('tom'), {sfx:'bonk'}, {wait:.4},   // Tom taps the block with the stick, very lightly
   ch2Tap('tnb'), {sfx:'bonk'}, {wait:.2}, ch2Tap('tnb'), {sfx:'bonk'}, {wait:.3},   // TNB knocks on it with his knuckles
   {talk:'TNB',lines:["It's not glass. It's not resin. I don't like it."]},
-  {talk:'Tom',lines:["You don't like it? You liked the talking cloud."]},
-  {talk:'TNB',lines:["The cloud made sense."]},
   {call:()=>{ sfx.bark&&sfx.bark(); }}, {hearts:'nara'}, {call:()=>sfx.pickup()}, {wait:.5},   // Nara drops a burnt flashbulb on Tom's shoe and backs up
   {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Narrator',lines:['Tom pulls out his phone and calls Grace on Long Island. She picks up on the first ring.']},   // fix-ch2play (r-20261121-180035-bjdf, 180050-39xy): it was not clear this is a phone call
   {talk:'Tom',lines:["Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down."]},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Grace',lines:["Tata, don't touch it! Send me a picture of both. And don't let Nara lick it."]},
@@ -623,7 +618,6 @@ SCENES.ch2Boss=[
   {hearts:'nara'},
   {talk:'Tom',lines:["GAH! I've got you, Nara. We're fine. We're both fine."]},
   {talk:'The Big Shake',lines:["RUMBLE. A flash woke me up. Now everybody runs."]},
-  {talk:'Tom',lines:["Excuse me. You're wearing the Observatory. Please don't drop it."]},
   {battle:'bigshake',tut:'bigshake'},
   CH2_LOST('bigshake','The Big Shake')
 ];
@@ -631,11 +625,10 @@ SCENES.ch2Boss=[
 SCENES.ch2AfterBoss=[
   {flag:'ch2-clear'},
   {call:()=>{ sfx.whoosh(); sfx.levelChime&&sfx.levelChime(); }},
-  {talk:'Tom',lines:["Excuse me. Mr. Shake. How are you doing?"]},
-  {talk:'The Big Shake',lines:["RUMBLE. ...Nobody asks. They just run."]},
+  {call:()=>{ const f=sceneActor('tom'),b=sceneActor('The Big Shake'); if(!f||!b) return; const p=position(f),q=position(b),dx=q.x-p.x,dy=q.y-p.y; f.facing=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down'); f.stageFaced=true; }},   // fix-ch2play (r-20261121-180230-crne): Tom and TNB face Mr. Shake
+  {call:()=>{ const f=sceneActor('tnb'),b=sceneActor('The Big Shake'); if(!f||!b) return; const p=position(f),q=position(b),dx=q.x-p.x,dy=q.y-p.y; f.facing=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down'); f.stageFaced=true; }},
   {talk:'TNB',lines:["I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill."]},
   {talk:'The Big Shake',lines:["RUMBLE. That was you? You snore."]},
-  {talk:'TNB',lines:["Yeah. That's fair."]},
   {call:()=>{ if(typeof bossFrame==='function') bossFrame('bigshake','touched'); }},   // w82d: eyes wide, mouth open for the build-up
   {talk:'The Big Shake',lines:["My pipe itches. Hold on. Hh... HHH..."]},
   {call:()=>{ sfx.whoosh(); sfx.thud(); }}, {endfx:'sneeze',on:'The Big Shake'}, {wait:.25},
@@ -644,12 +637,10 @@ SCENES.ch2AfterBoss=[
   {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.5,arc:12},   // Nara catches the coin in the air
   {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.4,arc:5},   // her one full circle (hops; no walk frames yet)
   {hearts:'nara'}, {wait:.4},
-  {talk:'Tom',lines:["Yes. I saw. Very good. May I?"]},
   {call:()=>{ sfx.pickup(); }}, {wait:.4},   // Nara drops the coin in his hand
   {ch2Reveal:'coin'},
   {if:()=>!bag.includes('lemoncoin'),then:[{give:'lemoncoin'}],else:[]},
   {talk:'Tom',lines:["Gold. And there's a lemon stamped on it."]},
-  {talk:'TNB',lines:["Huh. Sour dough."]},
   {finale:'bigshake'},   // the hill sits back down, the smog thins, the sky turns blue
   {toast:'Goal: back to 2nd Ave in Jefferson Park. Bread.',time:4.5}
 ];
@@ -669,11 +660,9 @@ SCENES.ch2End=[
   {spawn:{name:'Doña Carmen',look:'carmen',at:[8,17],dir:'right'}},
   {all:[{walk:'Miss Odette',to:routeTo('Miss Odette',13,19),speed:.3},{walk:'Doña Carmen',to:routeTo('Doña Carmen',13,17),speed:.3}]},
   {talk:'Doña Carmen',lines:["Tom! Who turned my pupusas? They're all wrong."]},
-  {talk:'Tom',lines:["You told me I cook well."]},
+  {talk:'Tom',lines:["You said I cook well."]},
   {talk:'Doña Carmen',lines:["I never said that."]},
-  {talk:'Miss Odette',lines:["Sit down, both of you. This gumbo needs salt and you two need lunch."]},
-  {talk:'Tom',lines:["We were going to get bread."]},
-  {talk:'Miss Odette',lines:["I have bread. Sit."]},
+  {talk:'Miss Odette',lines:["Both of you, back to my restaurant. This gumbo needs salt and you two need lunch."]},
   {call:()=>{ sfx.pickup(); }}, {hearts:'nara'}, {wait:.8},   // a piece of bread is gone from Tom's plate; Nara sits very straight beside it
   {despawn:'Miss Odette'}, {despawn:'Doña Carmen'},
   {hearts:'tom'}, {call:()=>sfx.levelChime()},
@@ -808,6 +797,15 @@ SCENES.ch1FolLog=[{flag:'ch1-fol-log'},{talk:'Grace',lines:["3 wrappers, let's f
 // over the neighbors, and the Observatory pipes in Griffith Park.
 const CH2_SMOG_MAPS={jpark:.26,blvd:.18,griffith:.3,creole:.18,pupuseria:.18,tomhouse:.08};
 const STORY_MAPFX=[
+  // Nara's trail in Griffith Park (data/maps-la.js `find` objects): a twinkle sits on the next find until it is searched.
+  time=>{
+    const M=currentMap; if(!M||M.id!=='griffith'||STORY.chapter<2||!flag('ch2-source')) return;
+    for(const o of M.objects) {
+      if(!o.find||flag(o.find.flag)||(o.find.needs&&!flag(o.find.needs))) continue;
+      const x=Math.round((o.x+.5)*T),y=Math.round((o.y+.5)*T),k=.5+.5*Math.sin(time*4+o.x);
+      gfx.globalAlpha=.35+.5*k; ellipse(x,y,5+k*4,5+k*4,'#fff3a8'); gfx.globalAlpha=.9; ellipse(x,y,2,2,'#ffffff'); gfx.globalAlpha=1;
+    }
+  },
   time=>{
     if(STORY.chapter!==2) return;
     const M=currentMap,smog=!!flag('ch2-smog')&&!flag('ch2-clear');
