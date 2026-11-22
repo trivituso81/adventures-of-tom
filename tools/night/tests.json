@@ -463,8 +463,7 @@
    "id": "ch20_test",
    "cmd": "python3 -I tools/ch20_test.py",
    "group": "g3",
-   "minutes": 10,
-   "known_fail": "fails from the check shatter scene to Julian on, after the real Leviathan fight (claude/next-addendum-nightgreen.md)"
+   "minutes": 5
   },
   {
    "id": "ch2_test",

@@ -26,7 +26,11 @@ def fight(pg,tag,maxn=400):
             if tag=='levi':
                 if pg.evaluate("()=>!!ch20Barrier()"):
                     pg.evaluate("()=>b2Do({relay:true,name:'FAMILY RELAY',weight:'standard'},{label:'RELAY',targets:[],primary:B2.actor,ally:true})"); relays+=1; pg.wait_for_timeout(1500); continue
-                pg.evaluate("()=>{ const f=B2.foes.find(f=>f.boss==='leviathan'); const B=CH20_BARS[f.barrier||0]; if(B) if(B){ f.hp=Math.round(f.maxHp*B.floor)-5; ch20Floor(f); } }")
+                done=pg.evaluate("()=>{ const f=B2.foes.find(f=>f.boss==='leviathan'); const B=CH20_BARS[f.barrier||0]; if(B){ f.hp=Math.round(f.maxHp*B.floor)-5; ch20Floor(f); return false; } if(f&&!f.dead) f.hp=Math.min(f.hp,5); return true; }")
+                if done:
+                    # all four barriers are down: the plain Attack (cross up, then the target) finishes the Leviathan; the first skill of Amy or Grace does no damage to it
+                    for k in range(2): pg.evaluate("()=>window.__LE.b2A()"); pg.wait_for_timeout(200)
+                    pg.wait_for_timeout(500); continue
             else:
                 pg.evaluate("()=>{ const j=B2.foes.find(f=>f.boss==='julian'); if(j&&!j.tomDone){ j.acts7=CH20_ACTS.slice(); j.warm=Math.round(j.warmGoal*7/8); j.tomDue=true; } }")
             pg.evaluate("()=>window.__LE.b2Dir('right')"); pg.wait_for_timeout(120)
