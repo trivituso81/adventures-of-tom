@@ -32397,6 +32397,39 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "c-guideflow-plan",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "guideflow-plan",
+   "title": "Plan a Battle Guide animation flow that works",
+   "next": "A planning session reads the code and the run logs, writes claude/guide-flow-plan.md and puts the build cards on the board. No code and no paid run.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md first. Then do the work below. This is a PLANNING session\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"this is like a cruel joke\", \"i cant sit at the screen staring for minutes on end\", \"be able to send as many concurrent requests as I want, and they need to queue\". New card for the planning session.",
+     "at": "2026-11-22T22:40:34.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Investigates the Battle Guide animation flow, writes the plan claude/guide-flow-plan.md and the build cards. Pushes a plan and cards only.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Fable 5.2 (row E, condition 3: Tom started this session on Fable himself; it is also an architecture decision other work is built on)",
+    "effort": "high (a design worked out with nothing written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-plan in data/board.json. Investigate the Battle Guide animation flow (battle-guide.html, the startpic-gen, wan-gen and guide-use workflows and their tools), write the plan claude/guide-flow-plan.md and put the build cards on the board. Push a plan and cards only, never code, and start no paid run. Your first push is the commit board: start c-guideflow-plan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
