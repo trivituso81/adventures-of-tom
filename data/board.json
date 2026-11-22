@@ -33462,6 +33462,10 @@
    "history": [
     {
      "d": "2026-11-22",
+     "t": "Session started on Claude Sonnet 5.5, effort medium (scheduled START run)."
+    },
+    {
+     "d": "2026-11-22",
      "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
     },
     {
