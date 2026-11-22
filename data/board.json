@@ -30116,7 +30116,7 @@
     "rule": "Claude Opus 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -30129,6 +30129,10 @@
      "d": "2026-11-22",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T19:11:31.693Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -30327,6 +30331,16 @@
    "cards": [
     "c-wanstop-tom-rose-giddyup-r1",
     "t-pairmove1-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
+   "title": "Replace every leftover crisp with apple muffins",
+   "first": "2026-11-22T11:13:34-08:00",
+   "last": "2026-11-22T11:13:34-08:00",
+   "tags": [],
+   "cards": [
+    "c-crispfix"
    ]
   },
   {
@@ -35876,8 +35890,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "5669bcd52decb88182e3ee8b676c1846d0b077d5",
- "synced_at": "2026-11-22T18:56:24+00:00",
+ "synced": "b8d368e9245704f5859c55907bd39b15133f0013",
+ "synced_at": "2026-11-22T19:14:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
