@@ -31803,7 +31803,7 @@
    "theme": "Battle Animations",
    "tag": "wanstop-tom-konami-r1",
    "title": "Fix the stopped video tom-konami",
-   "next": "The bulk run stopped tom-konami (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Shipped: accepted by eye, baked and wired. Nothing for Tom.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
@@ -31830,6 +31830,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Accepted by eye, no new try: both videos show the controller held in both hands, the tapping, one arms-up pose and the return; all measured checks passed, only the vision look check said no (wrongly). Baked and wired (konami_code plays tom_konami), build wanstop-tom-konami-r1. Judged in the Move Lab (t-movestage-lab)."
     }
    ],
    "prompt": {
