@@ -1,3 +1,30 @@
+## b3look (2026-11-22): the new battle screen takes the new menu's look and shows every fact once; Details hides the details everywhere
+
+Card c-b3look. Tom (11-21 23:56): use the new menu's design for all the battle controls, "everything from colors to backgrounds to font styles", remove extraneous information, a Details switch that hides the details "from like everything, literally", labels against icons, color only when it means something, like facts together, "avoiding redundant information most of all". Plan, inventory and rules: `claude/b3look-plan.md` (written before the code changed). New battle only; battle 2 is untouched; no rule or number changed (`node tools/b3-sim.js check`: 3587 checks before and after, FAILS []).
+
+| What | Before | Now |
+|---|---|---|
+| Look | Navy panels, gold borders, serif and Trebuchet type, small caps | The menu's: plum dusk frame and turn bar, paper pages for the party, the moves and the strip under the scene, plum ink, Bricolage Grotesque and Figtree, pill chips, the menu's switch, an ink Use button. The colors are the menu's own variables, declared once in `m2.css` for both (`#m2, #battle.v3`) |
+| Color | Many tints | Five meanings only: flavor colors, green good for you, coral danger or can't, lamplight what you picked (highlighted move, aimed card, aim arrow), gold for Combos and big results |
+| Strip under the scene | Move name, price, flavor, kind, reach chips, why it can't be used, then the target's HP bar and number, Composure, statuses, Pet Peeves, Pet Peeve +50%, pushes, next turn | What the move does (one plain line; Details on: the full description and its size), then who it is aimed at and what it does there (damage, knocks out, BREAK, sets off, cancels, heals). Details on adds Composure lost, statuses it leaves and the target's Pet Peeves |
+| Move rows | Name, price with a bolt, flavor picture, flavor word in caps, BASIC, PET PEEVE | Name, flavor circle with "Racket basic" or "Clobber skill" beside it (the menu's words), price as "3 Pep", Pet Peeve (for the highlighted move it now says whether the aim hits one). Details on: the one plain line on every row but the highlighted one |
+| Party cards | Face, name, statuses, BACK, HP, Pep pips for everyone | Face, name, HP bar and HP, Marked or Next target. Details on: Pep (not for whoever is up: the Pep over the moves is theirs), statuses, Back, the counter, max HP and shield. Upright phones show the bar without the number (the cards are a quarter of the width) |
+| Scene | Status words over monsters, MARKED and NEXT TARGET and a white turn arrow over family members | Status words over monsters with Details on only; nothing over family members but the aim arrow |
+| End | "The family wins!" under YOU WIN!, moves still listed | Only what the win paid and Continue; no moves |
+| Words | RUCKUS, Family Ruckus, Full Family Ruckus, Main, Pocket, DETAILS, USE, CONTINUE | Combos (gauge and group), Double Team, Family Ruckus, Primary, Secondary, Details, Use, Continue (Tom's words of 11-22 on the menu, card c-fix-menu4play-3). A Combo row says who it is with. The story tip and the victory card's foot say Combos |
+| Details switch | Its own saved setting | One saved setting with the menu's skill description switch (`M2_DET_KEY`); nothing saved: on for a wide desktop window, off elsewhere |
+| Victory card in story fights | Navy | Paper card on a dusk veil, the menu's type (shared markup with battle 2, so only the look changed, only under `#battle.v3`) |
+
+- Purged: the battle screen's own color set (`--bx-*`), the reach words `B3_REACH`, the forecast words no longer said (next turn, pushes and pulls, Composure count, wind-up, low Pep sentence, Pocket chip), `b3NextText`, `bxUnitHead`, `bxUnitSub`, the old saved key `aot-ux-details`.
+- `b3RuckusName` (the move's name the rules carry) now says Family Ruckus, and the reason lines say "The Combos gauge"; no number changed.
+- Tests: `tools/b3_layout_test.py` now also fails when Details off shows any detail in the strip, the party or the moves, when the scene writes a monster status with Details off or MARKED or NEXT TARGET at all, when the strip repeats the move's name, flavor, an HP bar, a Pet Peeve, pushes, the next turn, Composure, a wind-up or a Mark, when the card of whoever is up repeats Pep, and when the end shows "wins" or moves. All seven sizes pass. `tools/b3_test.py` wording checks moved to the new words (the strip says what the move does instead of its name; Free Skill for Rose; Family Ruckus; the shared Details key).
+
+Before and after, Duo unfolded (951 x 648) and iPhone upright (393 x 852), a Skill highlighted, Details off:
+
+![Duo before](frames/b3look/duo-before.jpg) ![Duo after](frames/b3look/duo-after.jpg)
+
+![iPhone before](frames/b3look/iphone-before.jpg) ![iPhone after](frames/b3look/iphone-after.jpg)
+
 ## wanstop-tom-blockade-r4 (2026-11-22): Tom's Zone One Blockade video (rev 4, first try) is accepted and put in the game
 
 Card c-wanstop-tom-blockade-r4. Looked at both rev 4 videos' frames: Tom holds both arms out with open palms like a gate, shifts his weight to the left, holds, then lowers his arms back to the relaxed stance. The first try passed every measured check (height, feet, flat background, edges, last against first). The only miss was the strict look check p1 asking for a clear hip bump; the second try also touched the right edge once. Per wanpurpose1 (the move's purpose and theme are met) the first try was accepted and no new try started: baked with the job's own settings by `wanbake.bake` (`art/clips/tom-blockade.webp`, `data/clips/tom-blockade.js`), `zone_one_blockade` already plays `tom_blockade`. Nothing was generated or spent. The watch card `t-wanwatch-tom-blockade-0522` asks Tom to look.

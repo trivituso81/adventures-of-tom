@@ -101,4 +101,4 @@ Words are the menu's (Tom on 11-22, card c-fix-menu4play-3): Combos for the gaug
 
 ## Built: b3look (2026-11-22)
 
-Filled in when the build ships.
+Shipped as build b3look. The tables above are what was built. The battle screen now shares the menu's variables (declared once in m2.css), every fact appears once, and DETAILS hides details from the moves, strip, party cards and scene. Scene marks MARKED, NEXT TARGET and the white turn arrow were found to be repeats and are gone; the aim arrow stays. The Pep forecast sits in the deck header. Tests: b3-sim check (3863, FAILS []), b3_layout_test (every size), b3_test, smoke.
