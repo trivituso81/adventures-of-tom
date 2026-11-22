@@ -28196,7 +28196,7 @@
    "title": "Try the game strip and Take me there",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "next": "Open the Admin Dashboard (https://trivituso81.github.io/adventures-of-tom/dashboard.html), press Reload game in the strip if the gold bar shows, then press Duo folded, upright (466 x 657) under Screen size. The game should stand upright, title screen taller than wide, with no sideways text. Then press All good, or Something is wrong and say what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4).",
    "steps": [
@@ -28245,6 +28245,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Take me there: a play card opens the game at its spot, Fix: Try the game strip and Take me there is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: didnt work, its till rotated 90 degreesclockwise Sent to Claude as card c-fix-dash3-try-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T02:16:33.907Z"
     }
    ],
    "first": "Waits on the card Take me there: a play card opens the game at its spot.",
@@ -28252,7 +28257,8 @@
     "at": "2026-11-21T22:12:24Z",
     "verdict": "yours",
     "why": "it is about the 3440 x 1440 wide monitor and how the dashboard controls feel; a test browser cannot judge that screen"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-dash4",
@@ -32370,6 +32376,65 @@
    "after": "t-ch2play",
    "auto": true,
    "started_at": "2026-11-22T02:16:23+00:00"
+  },
+  {
+   "id": "c-fix-dash3-try-2",
+   "tag": "fix-dash3-try-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Try the game strip and Take me there",
+   "next": "You reported a problem on Try the game strip and Take me there. Claude starts the fix by itself. Latest: didnt work, its till rotated 90 degreesclockwise",
+   "blocks": [
+    "t-dash3-try"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T02:16:33.095Z",
+     "card": "t-dash3-try",
+     "title": "Try the game strip and Take me there",
+     "ask": "play",
+     "words": "didnt work, its till rotated 90 degreesclockwise",
+     "shot": "",
+     "asked": "Open the Admin Dashboard (https://trivituso81.github.io/adventures-of-tom/dashboard.html), press Reload game in the strip if the gold bar shows, then press Duo folded, upright (466 x 657) under Screen size. The game should stand upright, title screen taller than wide, with no sideways text. Then press All good, or Something is wrong and say what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-dash3-try"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-dash3-try.",
+     "at": "2026-11-22T02:16:33.907Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-dash3-try: didnt work, its till rotated 90 degreesclockwise",
+     "at": "2026-11-22T02:16:33.907Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-22T02:16:33.907Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Try the game strip and Take me there.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-dash3-try-2 and t-dash3-try in data/board.json, history included. Your first push is the commit board: start c-fix-dash3-try-2.\n\nTom tested and found problems:\n1. Card t-dash3-try (Try the game strip and Take me there, ask play). He was asked: Open the Admin Dashboard (https://trivituso81.github.io/adventures-of-tom/dashboard.html), press Reload game in the strip if the gold bar shows, then press Duo folded, upright (466 x 657) under Screen size. The game should stand upright, title screen taller than wide, with no sideways text. Then press All good, or Something is wrong and say what you saw. Your answer starts the next card by itself, Admin Dashboard: search and two more layouts (c-dash4). He wrote: didnt work, its till rotated 90 degreesclockwise\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:16:33.095Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-dash3-try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-dash3-try, and give the build fix-dash3-try-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-dash3-try",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
