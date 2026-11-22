@@ -31913,7 +31913,7 @@
   {
    "id": "t-wanstuck1-watch",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -31937,8 +31937,14 @@
     {
      "d": "2026-11-21",
      "t": "wanpurpose1 replaced r9 with the r10 take that adds the wet-floor sign."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T06:05:47.477Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-movefun",
