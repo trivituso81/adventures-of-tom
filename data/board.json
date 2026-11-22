@@ -25040,7 +25040,7 @@
      "already": [],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
@@ -26097,8 +26097,14 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: Write the one-line move descriptions, Battle screen: the new menu's look, and only what is needed is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T14:32:48.379Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "t-battleuxplay",
