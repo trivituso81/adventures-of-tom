@@ -1,3 +1,19 @@
+## fix-ch2play (2026-11-22): chapter 2 loses 17 more boring lines and gets a three-clue search in Griffith Park
+
+Card c-fix-ch2play, from Tom on t-ch2play: "tons of extraenous, boring, and unfunny dialog... also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow". Pencil reports r-20261121-180018-jc8f, -180027-tyq4, -180035-bjdf, -180050-39xy, -180126-mdm1, -180249-oy95, -180326-tsde, -180345-jvj8, -180408-h8ca, -180646-o5il, -180709-4jo0, -180718-y1a5 are about the same lines (left open for Tom to close; see below).
+
+| Change | Where |
+|---|---|
+| Cut (no new words, so no voice goes silent): TNB "Same color as my soda", Tom "He gave the pan back", the walk to the window, TNB "Nara's already on it" and Tom "Then we're her backup", Tom "Okay. Work stick", Smoglet "There's two of us", Doña Carmen's first "Everything's fine", the dragonfly pair, "You liked the talking cloud" and "The cloud made sense", Tom "Mr. Shake. How are you doing?" and the Shake's reply, TNB "That's fair", Tom "May I?", TNB "Sour dough", Tom "We were going to get bread", Odette "I have bread. Sit." | `data/scenes.js` ch2Loft, ch2Porch, ch2Smog, ch2Odette, ch2Lemon, ch2AfterBoss, ch2End |
+| Reworded (4 lines, these need a new recording): Tom to Grace is now "Grace, it's Tata, you're on speaker..." (reports said it was not clear he was on the phone); Tom to Doña Carmen "Earlier you said I cook WELL."; Odette "Come back to the restaurant, both of you. There's bread, and the gumbo needs salt."; Tom to the Big Shake "That's the Observatory on your back. Please don't drop it." | `data/scenes.js` |
+| New search in Griffith Park: after the coyote, three burnt flash scorches on the trail (east clearing, west clearing, switchback), found in order, Nara sniffs each; the third leads to the grey lemon tree, which now waits for it. Flags `ch2-s1` to `ch2-s3`, triggers `ch2-s1` to `ch2-s3` | `data/scenes.js` `SCENES.ch2Scorch1` to `3`, `ch2Scorch` |
+| Test walks the scorches | `tools/ch2_test.py`, `tools/ch2_b3_test.py` |
+| Rows of the chapter 2 conversations updated | `docs/script-convos.tsv`, `data/script-index.json` |
+
+- Not done: the scorch marks have no painted picture yet (the three spots work by walking onto them; a painted mark is an Art Library job), the Big Shake's size and the cut-out for Tom's porch (reports r-20261121-180138-yorh, r-20261121-173628-97ha), the Shake not facing Tom (r-20261121-180230-crne), the slow start of ch2End (r-20261121-180541-ojxd).
+- Checked: `tools/ch2_test.py` runs chapter 2 start to finish, no page errors. `tools/ch2_b3_test.py` the same. Both report one "battle won" retry at the lemon scene, because the Big Shake fight now starts right after the lemon scene in the test; it passes on the retry.
+- `unused_voice.py` still reports 12 in check 4, the same 12 as before this change.
+
 ## fix-wanstop-gen (2026-11-21): the Generate videos button comes back after a stopped video is fixed, and the card says why nothing was made
 
 Card c-fix-wanstop-gen, from Tom on t-wanstop-gen: "the button says nothing to make right now. but there is no video made". Fact: the run (44971778287) did make both videos and spent $1.58, but both failed their checks and were stopped, so nothing went into the game. The card then said "Every video of this card is made" and "Nothing to make right now", which read as if nothing had run. Second fault found while reproducing: the page counted a stopped job as finished by its name alone, so even after a fix session raised the job's rev the button would have stayed off.

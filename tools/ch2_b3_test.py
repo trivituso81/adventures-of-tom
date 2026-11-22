@@ -19,7 +19,9 @@ at('griffith',12,18)
 check('5a flurry (Battle 3)',run("()=>flag('ch2-t1')===true&&flag('battle:tickets')==='win'&&!intro.active&&!dialog.active",'5flurry',1500) is True)
 at('griffith',12,11)
 check('5b coyote (Battle 3)',run("()=>flag('ch2-tuts')===true&&!intro.active&&!dialog.active",'5coyote',1500) is True)
-at('griffith',6,9)
+for n,(x,y) in enumerate([(15,13),(8,11)],1):
+    at('griffith',x,y); check(f'5c scorch {n}',run(f"()=>flag('ch2-s{n}')===true&&!intro.active&&!dialog.active",f'5scorch{n}') is True)
+at('griffith',4,9)
 check('6 lemon tree',run("()=>flag('ch2-lemon')===true&&!intro.active&&!dialog.active",'6lemon') in (True,'closeup'))   # the Big Shake's close-up can follow the lemon scene at once
 check('bulb pocketed',pg.evaluate("()=>!!flag('ch2-bulb')"))
 at('griffith',6,7)

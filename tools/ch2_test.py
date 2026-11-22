@@ -79,7 +79,9 @@ with sync_playwright() as pw:
     check('5a flurry',run(pg,"()=>flag('ch2-t1')===true&&flag('battle:tickets')==='win'&&!intro.active&&!dialog.active",'5flurry') is True)
     at(pg,'griffith',12,11)
     check('5b coyote',run(pg,"()=>flag('ch2-tuts')===true&&!intro.active&&!dialog.active",'5coyote') is True)
-    check('6 lemon tree',(at(pg,'griffith',6,9),run(pg,"()=>flag('ch2-lemon')===true&&!intro.active&&!dialog.active",'6lemon'))[1] is True)
+    for n,(x,y) in enumerate([(15,13),(8,11)],1):
+        at(pg,'griffith',x,y); check(f'5c scorch {n}',run(pg,f"()=>flag('ch2-s{n}')===true&&!intro.active&&!dialog.active",f'5scorch{n}') is True)
+    check('6 lemon tree',(at(pg,'griffith',4,9),run(pg,"()=>flag('ch2-lemon')===true&&!intro.active&&!dialog.active",'6lemon'))[1] is True)
     check('bulb pocketed',pg.evaluate("()=>!!flag('ch2-bulb')"))
     at(pg,'griffith',6,7)
     check('7 boss scene',run(pg,"()=>flag('battle:bigshake')==='win'",'7boss') is not False)
