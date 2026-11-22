@@ -34768,6 +34768,11 @@
     {
      "d": "2026-11-21",
      "t": "Tom (21:13): \"Yes\" to a card that makes board-sync unable to stall. Two stalls today: a Tom card blocking only a finished card, and merge-conflict markers pushed into board.json and board.html."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T06:00:21.177Z"
     }
    ],
    "prompt": {
@@ -34778,7 +34783,8 @@
     "model": "Claude Sonnet 5.5 (row C: a fix where the steps are not fully written, tests catch mistakes)",
     "effort": "medium (the two guards are specified, the pieces are small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (section The board), then card c-boardwedge1 in data/board.json. First push: `board: start c-boardwedge1`. Problem: the board-sync Action (.github/workflows/board-sync.yml, step 'Check the board file, then commit and push it if a card moved') exits 1 when tools/board_check.py rejects data/board.json, so no card move is saved and the board stops refreshing. It happened twice on 2026-11-21: (1) open Tom card t-milestoned blocked only a Claude card that shipped, so 'an open Tom card must block an open Claude card, or be marked fyi: true' failed (fixed by hand with fyi: true); (2) commit b3cdb22 pushed merge-conflict markers into data/board.json and board.html (repaired in 6a2e301). Build two guards. (A) Sync side, in tools/board_sync.py: when a Claude card moves to Done, any open Tom card whose blocks list holds only Done cards (or none open) and which is not fyi becomes fyi: true, with one history line saying why, so board_check never fails for that reason; add cases to tools/board_sync_test.py. (B) Push side: a check that fails a push when data/board.json, data/board-archive.json or board.html contains a line that starts with seven less-than signs, seven equals signs alone, or seven greater-than signs followed by a space. Put it in tools/board_check.py (JSON parse already fails for the board; add the board.html scan) and call it from tools/smoke.py and from a new step at the top of the board-sync workflow so a bad push is named in the run summary instead of only failing step 6. Do not change any card's meaning. Run python3 tools/board_sync_test.py, python3 tools/board_test.py /tmp/board, python3 tools/board_check.py and python3 tools/smoke.py. Write a heading '## boardwedge1' (with date and one plain line) in docs/CHANGES.md, bump tags with python3 tools/art-library/bump_tags.py boardwedge1 --base origin/main, and push. Use tag boardwedge1. At the end set this card's next to the result. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "t-wetfloor-check",
