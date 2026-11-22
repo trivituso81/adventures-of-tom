@@ -34073,7 +34073,7 @@
    "id": "c-fix-pairmove1-gen",
    "tag": "fix-pairmove1-gen",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
@@ -34096,7 +34096,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-pairmove1-gen"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -34108,6 +34108,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-pairmove1-gen: Says nothing to make migrant lei",
      "at": "2026-11-22T04:31:48.393Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T04:37:26.446Z"
     }
    ],
    "prompt": {
