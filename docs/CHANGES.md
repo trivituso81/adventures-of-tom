@@ -1,3 +1,9 @@
+## guideuse-45076526823 (2026-11-22): Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide
+
+Card c-guidegen. USE THIS ONE in the Battle Guide (`data/guide-use.json`, Action guide-use). Not seen on the phone yet.
+- Idle (standing and breathing) (`body:tnb:idle`, rev 2): Wan job tnb-idle is now rev 2 (prompt file tools/art-library/prompts/wan-tnb-idle-v2.txt); clip tnb_idle cut (50 pictures, 0 to 147 step 3, loop wrap); B3_BODY_CLIPS.tnb.idle = tnb_idle (was 'tnb_idle')
+- Guard (`body:tnb:guard`, rev 1): Wan job tnb-guard is now rev 1 (prompt file tools/art-library/prompts/wan-tnb-guard-v1.txt); clip tnb_guard cut (63 pictures, 0 to 124 step 2, hold 36, lowering 104); script tag added to index.html; B3_BODY_CLIPS.tnb.guard = tnb_guard
+
 ## startpics11 (2026-11-22): Use this one no longer fails on a busy day, and the Guide and your phone say when a take is in the game
 
 Tom: "this battle guide is shit. i said use in game and the status doesnt update. i cant even see it when its done". Cause (fact, from the run logs): the guide-use job failed for TNB Idle (21:13 UTC) and TNB Guard (21:57 UTC) in its last step, because main moved while it ran and the four files every build stamps (engine/main.js, index.html, data/build-history.js, docs/CHANGES.md) conflicted five times in a row; the take never reached the game. Changed: the push step starts every try from the newest main, re-applies the take's files, puts the build entry back on top, stamps again, checks for conflict markers, six tries; a failed push now turns the report into a failure and sends a notification; a finished use sends a phone notification either way; the Guide keeps a use that is waiting and shows "Sent to the game" with the seconds so far when you reopen the animation, then "In the game now" or the reason. Test: tools/art-library/queue_test.py Q5.
