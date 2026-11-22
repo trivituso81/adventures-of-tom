@@ -29707,6 +29707,38 @@
    "auto": true,
    "started_at": "2026-11-22T14:36:45+00:00",
    "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics",
+   "title": "Start pictures for the rest of the cast",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics1",
+   "next": "In progress: adding start-<who> jobs for Amy, Boppy, Justin, Olivia, TNB and Nara (hero picture redrawn facing left on flat magenta, the way Tom, Grace, Rose and Deedee were made) and a Make the start picture button in the Battle Guide, so their videos can be made.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "We need to add somewhere the ability for us to turn the hero images"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I'm unable to generate any images in the battle guide. I'm unable to generate any animations for characters who don't have that hero image in place, so I need that unblocked.\" Cause: only Tom, Grace, Rose, Deedee have art/clips/start/<who>-hero.png.",
+     "at": "2026-11-22T14:57:05.043Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes start pictures for the cast that has none, from their hero pictures, and a button in the Battle Guide to make one.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build where the steps are not written yet)",
+    "effort": "medium (the recipe exists; this repeats it for six more people)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics in data/board.json. Your first push is the commit board: start c-startpics. Add start jobs to tools/art-library/wangen-jobs.json for amy, boppy, justin, olivia, tnb and nara from their hero pictures, a request path so the Battle Guide can make a start picture with two taps, and checks for facing and height. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
