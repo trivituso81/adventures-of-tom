@@ -20,6 +20,10 @@
   {
    "script": "tools/art-library/wanbulk_test.py",
    "why": "run inside tools/art-library/wangen_test.py (W13), which owns the row"
+  },
+  {
+   "script": "tools/ns_b3_test.py",
+   "why": "plays the whole bonus chapter in real time (about 40 minutes per layout, portrait and landscape), run by hand before a push that touches chapter 21 or Battle 3's story layer, not a nightly test"
   }
  ],
  "tests": [

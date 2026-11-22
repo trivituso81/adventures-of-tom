@@ -4,6 +4,7 @@
 // the Frozen status, Grace's Birthday Sash at the start of a fight, the chapter 21 level floor and the Vibe Points the chapter pays.
 // `node tools/b3-sim.js check` runs it after the file for stage 18.
 'use strict';
+const fs=require('fs'),path=require('path');
 module.exports=function(T) {
   const {G,ok,near,play}=T;
   const NF=G('b3NewFight'),next=G('b3Next'),act=G('b3Act'),foeTurn=G('b3FoeTurn'),ST=G('B3_STATUS'),S=G('B3_STORY'),RULES=G('B3_RULES'),newL=G('b3NewLoadout'),stat=G('b3Stat'),
@@ -107,4 +108,17 @@ module.exports=function(T) {
       if(u.side==='party') { const p=G('b3Auto')(sash,u); act(sash,u,p.skill,p.target); if(u.id==='grace') turns++; } else foeTurn(sash,u); }
     ok(turns===2&&!g1.st.birthday_girl,'Birthday Girl lasts exactly Grace\'s first two turns ('+turns+')'); }
   { const F=NF(cfg('nsGremlin',9,{formation:'gremlin',setup:undefined})); ok(!U(F,'grace').st.birthday_girl&&F.foes.length>=1,'with no setup nothing is added to a fight'); }
+  // 8. Chapter 21 is on the switch list, and every fight its scenes start has tips, a Battle 3 fight and a setup row (a bonus scene step is `{battle:..,tut:'..'}`)
+  { const src=fs.readFileSync(path.join(path.dirname(__dirname),'data/bonus-nine-scoops.js'),'utf8');
+    const steps=[...src.matchAll(/\{battle:\(\)=>sceneActor\('([^']+)'\),tut:'([a-zA-Z0-9]+)'/g)].map(m=>({who:m[1],tut:m[2]}));
+    const ID={'Sprinkle Gremlin':'gremlin','Slushie Slug':'slushslug','Cone Head':'conehead','Brain Freeze':'brainfreeze'},FORMS=G('B3_FORMATIONS'),FOES=G('B3_FOES');
+    ok(S.chapters.includes(21),'chapter 21 is on the switch list');
+    ok(steps.length===7&&need.every(k=>steps.some(x=>x.tut===k)),'the bonus scenes start the seven fights the setup names: '+J(steps.map(x=>x.tut)));
+    for(const x of steps) { const id=ID[x.who];
+      ok(!!id&&!!FORMS[id]&&!!FOES[id],x.tut+': '+x.who+' has a formation and a bestiary row');
+      ok(Array.isArray(S.tips[x.tut])&&S.tips[x.tut].length>=2,x.tut+' has tips');
+      ok(!!S.setup[x.tut],x.tut+' has a setup row'); }
+    const words=/Warmth|WARMTH|HEART|Tombo|ICE SHELL|bag|BAG|—/;
+    for(const k of need) for(const t of S.tips[k]) ok(!words.test(t.text),'tip '+k+'.'+t.id+' has no battle 2 words');
+  }
 };

@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10],
+  chapters:[1,2,3,4,5,6,7,8,9,10,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -242,3 +242,40 @@ B3_STORY.setup={
 // save in it gets. `levelFloor` stops at chapter 10 and `finished` would count 20 chapters, so chapter 21 would start at level 25 with every Vibe
 // at mastery; the bonus chapter starts everyone at level 5 (b6Prep(5)) and a little over Rank 2.
 B3_STORY.bonus={21:{level:5,finished:1}};
+
+// Tips for the seven bonus fights, keyed by the `tut` name the scenes use (data/bonus-nine-scoops.js). Battle 2's Warmth, HEART and ICE SHELL words are not used.
+const NS_CHARGING=(F,id)=>F.foes.some(f=>f.charge&&(!id||f.id===id));
+B3_STORY.tips.nsGremlin=[
+  {id:'peeve',who:'tom',text:'Tom’s turn. Sprinkle Gremlins can’t stand Sizzle or Drench. Tap one (or press I) to check, then use a Skill of that flavor.'},
+  {id:'spray',who:'grace',text:'A gremlin’s Sprinkle Spray hits everyone and dazzles them. Keep somebody’s Pep up and heal whoever drops low.',when:(F)=>F.party.some(p=>p.hp<p.maxHp*.7)},
+  {id:'ruckus',who:'*',text:'The RUCKUS bar (◀) fills as the family fights. At 50% two people can team up: a Double Team.',when:(F)=>(F.ruckus||0)>=40}
+];
+B3_STORY.tips.nsSlug=[
+  {id:'elite',who:'tom',text:'The Slushie Slug is an Elite: 4 Composure pips. It can’t stand Sizzle or Razzle and shrugs off Drench, so skip Drench.'},
+  {id:'glaze',who:'*',text:'Blue-Ice Glaze takes 25% off every hit for 2 turns. Break it with a Break, or hit something else until it wears off.',when:(F)=>F.foes.some(f=>f.id==='slushslug'&&f.st&&f.st.blue_ice)},
+  {id:'cone',who:'*',text:'The Cone Head in the Back row can’t stand Sizzle or Racket, and single-target Clobber does 20% less to the Back row.',when:(F)=>F.foes.some(f=>f.id==='conehead')},
+  {id:'rush',who:'*',text:'Slush Rush is charging (!!): it hits everyone and slows them. Shield the family, or break its pips to stop it.',when:(F)=>NS_CHARGING(F,'slushslug')}
+];
+B3_STORY.tips.nsCone=[
+  {id:'back',who:'tom',text:'The Cone Heads stand in the Back row. They can’t stand Sizzle or Racket, and single-target Clobber does 20% less back there.'},
+  {id:'drip',who:'*',text:'Mint-Chip Drip drenches whoever it hits. A heal or a shield on that person keeps the turn bar friendly.',when:(F)=>F.party.some(p=>p.st&&p.st.drenched)},
+  {id:'pass',who:'*',text:'A hurt Cone Head or gremlin gets a Scoop Pass from the other Cone Head: a heal and a little Defense. Knock out the healer first.',when:(F)=>F.foes.some(f=>f.hp<f.maxHp*.8)}
+];
+B3_STORY.tips.nsBoss1=[
+  {id:'peeve',who:'tom',text:'Brain Freeze has 6 Composure pips and can’t stand Sizzle or Razzle. It shrugs off Drench. Hit it where it hurts.'},
+  {id:'pitch',who:'*',text:'Ice-Cube Pitch or Temple Throb is charging (!!). The pitch stuns one of you, the throb tires everyone. Shield them, or interrupt it.',when:(F)=>NS_CHARGING(F,'brainfreeze')},
+  {id:'slow',who:'*',text:'Frost Breath slows whoever it hits. A slowed person’s turns come later on the bar, so heal or shield them early.',when:(F)=>F.party.some(p=>p.st&&p.st.slow)}
+];
+B3_STORY.tips.nsBoss1b=[
+  {id:'peeve',who:'tom',text:'Brain Freeze can’t stand Sizzle or Razzle and shrugs off Drench. Rose is spicy now, so the pond’s cold has a harder time with her.'},
+  {id:'pitch',who:'*',text:'Ice-Cube Pitch or Temple Throb is charging (!!). Shield the family, or interrupt it before it lands.',when:(F)=>NS_CHARGING(F,'brainfreeze')}
+];
+B3_STORY.tips.nsGarden=[
+  {id:'peeve',who:'tom',text:'Gremlins again. They can’t stand Sizzle or Drench, and a Skill that hits all of them at once saves turns.'},
+  {id:'spray',who:'*',text:'Sprinkle Spray hits everyone and dazzles them. Heal whoever drops low, and keep going.',when:(F)=>F.party.some(p=>p.hp<p.maxHp*.7)}
+];
+B3_STORY.tips.nsBoss2=[
+  {id:'half',who:'tom',text:'Brain Freeze starts this fight at half HP, so it opens with Frosted Lid: 25% less damage and 15% more Defense. Panic Boil! or a Break pops the lid.'},
+  {id:'adds',who:'*',text:'Every third round two Sprinkle Gremlins skitter out of the freezer. Knock them out for a breather, or keep hitting Brain Freeze.',when:(F)=>F.foes.some(f=>f.id==='gremlin')},
+  {id:'deep',who:'*',text:'Deep Freeze is charging (!!): it hits everyone, drenches and slows them. Shield the family, or break its pips to stop it.',when:(F)=>NS_CHARGING(F,'brainfreeze')}
+];

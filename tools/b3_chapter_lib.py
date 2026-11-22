@@ -38,7 +38,7 @@ def win(tag):
     before=vpTotal(); info=pg.evaluate("()=>({foes:B3.F?B3.F.foes.map(f=>f.id):[],party:B3.F?B3.F.party.map(p=>p.id):[],v3:!!battle.v3,tut:(typeof B3S!=='undefined'&&B3S.tut)?B3S.tut.key:null,vp:(typeof B3S!=='undefined'&&B3S.fight)?B3S.fight.plan.vp:null})")
     # (any open menu is played, not only the cross: Amy's Burpee Blitz opens a second menu for its mini turn)
     # not B3.cfg.auto: the fight opens each family turn as the screen does (so the turn's tip shows), and the test then plays the simple player's move
-    carded=False; words=False; b2seen=False
+    carded=False; words=False; b2seen=False; doneSnap=False
     for i in range(400):
         if not pg.evaluate("()=>battle.active"): break
         st=pg.evaluate("()=>({ui:B3.ui,card:!!(document.getElementById('b7-card')&&!document.getElementById('b7-card').hidden)})")
@@ -46,13 +46,16 @@ def win(tag):
         if st['card']:
             if not carded: pg.wait_for_timeout(1500); snap(tag+'-card'); carded=True
             pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
-        if st['ui']=='done': pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(1500); continue
-        if st['ui'] not in ('busy','done'): pg.evaluate("()=>{ if(B3.actor){ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")
+        if st['ui']=='done':
+            if not doneSnap: snap(tag+'-end-'+str(pg.evaluate("()=>B3.F.over"))); doneSnap=True   # the end screen: YOU WIN, KNOCKED OUT, or a scripted end's own word and line
+            pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(1500); continue
+        if st['ui'] not in ('busy','done'): pg.evaluate("()=>{ if(B3.actor){ const p=(window.__rec&&b3Recommend(B3.F,B3.actor))||b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")   # window.__rec (set by a test): Rose Mode's recommended moves, closer to a person than the simple player
         if i==40: snap(tag+'-battle-mid')
         pg.wait_for_timeout(1000)
     ended=not pg.evaluate("()=>battle.active")
+    res=pg.evaluate("()=>B3.result")   # 'win', 'lose', or a scripted end ('flee', 'shell': engine/b3-script.js)
     tips=pg.evaluate("()=>{ const t=window.__tips||[]; window.__tips=[]; return t; }")   # the wrapper is installed at page start (start()), cleared after each fight
-    r={'tag':tag,'ended':ended,'card':carded,'v3':info['v3'],'words':words,'b2':b2seen,'foes':info['foes'],'party':info['party'],'tut':info['tut'],'vpPlan':info['vp'],'vpPaid':vpTotal()-before,'tips':tips}
+    r={'tag':tag,'result':res,'ended':ended,'card':carded,'v3':info['v3'],'words':words,'b2':b2seen,'foes':info['foes'],'party':info['party'],'tut':info['tut'],'vpPlan':info['vp'],'vpPaid':vpTotal()-before,'tips':tips}
     fights.append(r); return r
 def run(stop,tag,n=900,expect=None):
     """Play scenes with Enter until `stop` is true; every fight that starts is auto-played and checked."""
@@ -63,9 +66,12 @@ def run(stop,tag,n=900,expect=None):
             closeups+=1; pg.wait_for_timeout(1200); pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
         if r=='battle':
             f=win(tag); k=f['tut']
-            check(f"{tag}: fight {'+'.join(f['foes'])} ended on Battle 3 and the victory card showed",f['ended'] and f['v3'] and f['card'])
+            scripted=f['result'] in ('flee','shell')   # a scripted end has no victory card and pays nothing
+            check(f"{tag}: fight {'+'.join(f['foes'])} ended on Battle 3 and the victory card showed"+(f" (scripted end: {f['result']}, no card)" if scripted else ''),f['ended'] and f['v3'] and (f['card'] or scripted or f['result']=='lose'))
             check(f"{tag}: no Warmth bar, WARMTH or HEART on the fight screen {pg.evaluate('()=>window.__badWords||\'\'') if f['words'] else ''}",not f['words'] and not f['b2'])
-            check(f"{tag}: Tom's Vibe Points paid ({f['vpPaid']} for a {f['vpPlan']} VP fight: Main {f['vpPlan']} plus Pocket half)",f['vpPlan'] is not None and f['vpPaid']==f['vpPlan']+(f['vpPlan']+1)//2)
+            if scripted: check(f"{tag}: a scripted end ({f['result']}) pays no Vibe Points ({f['vpPaid']})",f['vpPaid']==0)
+            elif f['result']=='lose': check(f"{tag}: a lost fight pays no Vibe Points ({f['vpPaid']})",f['vpPaid']==0)
+            else: check(f"{tag}: Tom's Vibe Points paid ({f['vpPaid']} for a {f['vpPlan']} VP fight: Main {f['vpPlan']} plus Pocket half)",f['vpPlan'] is not None and f['vpPaid']==f['vpPlan']+(f['vpPlan']+1)//2)
             want=pg.evaluate("(k)=>(B3_STORY.tips[k]||[]).map(t=>t.text)",k) if k else []
             check(f"{tag}: tips for '{k}' came from B3_STORY.tips and none showed twice (saw {len(f['tips'])}: {[t[:28] for t in f['tips']]})",(not want or any(t in want for t in f['tips'])) and len(set(f['tips']))==len(f['tips']))
             continue
@@ -75,7 +81,7 @@ def at(mapid,x,y,f='up'):
     pg.evaluate(f"()=>{{ currentMap=worlds['{mapid}']; player.x={x}; player.y={y}; player.facing='{f}'; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld(); }}"); pg.wait_for_timeout(700)
 def go(mapid): pg.evaluate(f"()=>window.__LE.go('{mapid}')"); pg.wait_for_timeout(1500)
 def enter(house): pg.evaluate(f"()=>beginTransition({{kind:'enter',house:houseById['{house}']}})"); pg.wait_for_timeout(2500)
-def start(chapter,outdir=None):
+def start(chapter,outdir=None,bonus=False):
     global OUT,pg,pw,br,srv
     OUT=outdir or (sys.argv[1] if len(sys.argv)>1 else f'/tmp/ch{chapter}b3-{LAYOUT}'); os.makedirs(OUT,exist_ok=True)
     socketserver.TCPServer.allow_reuse_address=True
@@ -87,7 +93,7 @@ def start(chapter,outdir=None):
     pg.on('response',lambda r: errs.append('404 '+r.url) if r.status==404 else None); pg.on('pageerror',lambda e: errs.append(str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.chapterJump&&window.__LE.b3sMode',timeout=180000); pg.wait_for_timeout(1500)
     if LAYOUT=='landscape': pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }")
-    pg.evaluate(f"()=>{{ localStorage.removeItem('aot-b3-story'); splash.active=false; document.getElementById('splash').hidden=true; window.__LE.chapterJump({chapter}); }}")
+    pg.evaluate(f"()=>{{ localStorage.removeItem('aot-b3-story'); splash.active=false; document.getElementById('splash').hidden=true; window.__LE.{'beginBonus' if bonus else 'chapterJump'}({'' if bonus else chapter}); }}")
     pg.evaluate("()=>{ window.__tips=[]; const o=b3Say; b3Say=function(t){ const all=[].concat(...Object.values(B3_STORY.tips)).map(x=>x.text); if(all.includes(String(t))) window.__tips.push(String(t)); return o.apply(this,arguments); }; }")   # records only the story tips (the fight's other messages repeat by design)
     check(f'switch defaults to BY CHAPTER and chapter {chapter} is on Battle 3',pg.evaluate(f"()=>b3sMode()==='chapter'&&b3sChapterOn({chapter})"))
     return pg

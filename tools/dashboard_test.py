@@ -38,7 +38,7 @@ def wait_landed(pg, j, timeout=180000):
     """Wait until the game is at the place a jump names: the fight is on screen, or the chapter is up (and the map and flags, when named)."""
     if 'fight' in j: cond = "typeof B3==='object'&&B3.active===true&&!!B3.F&&splash.active===false"
     else:
-        cond = "typeof STORY==='object'&&STORY.mode==='full'&&STORY.chapter===%s&&splash.active===false&&!!__LE.map" % j['chapter']
+        cond = "typeof STORY==='object'&&STORY.mode==='full'&&STORY.chapter===%s&&splash.active===false&&!!__LE.map" % (21 if j['chapter'] == 'B' else j['chapter'])
         if j.get('map'): cond += "&&__LE.map.id===%s" % json.dumps(j['map'])
         for f in j.get('flags') or []: cond += "&&!!flag(%s)" % json.dumps(f)
     pg.wait_for_function("(c)=>{var w=__DASH.P[2].frame.contentWindow;try{return w.eval(c)===true}catch(e){return false}}", arg=cond, timeout=timeout)
@@ -129,7 +129,7 @@ def take_me_there(pg, ctx, errs, board_standin):
             party = geval(pg, "B3.F.party.map(u=>u.id).join(',')")
             ok(c['id'] != 't-guardwinplay' or 'tom' in party.split(','), 'dash3: real card %s: Tom is in the party (%s)' % (c['id'], party))
         else:
-            ok(geval(pg, "STORY.chapter") == j['chapter'], 'dash3: real card %s: the game is in chapter %s' % (c['id'], j['chapter']))
+            ok(geval(pg, "STORY.chapter") == (21 if j['chapter'] == 'B' else j['chapter']), 'dash3: real card %s: the game is in chapter %s' % (c['id'], j['chapter']))
             if j.get('map'): ok(geval(pg, "__LE.map.id") == j['map'], 'dash3: real card %s: the game is on map %s' % (c['id'], j['map']))
         ok(pg.evaluate("__DASH.keys()") == 2, 'dash3: real card %s: the game has the keys' % c['id'])
     # --- stand-in board

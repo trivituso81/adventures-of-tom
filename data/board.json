@@ -28936,7 +28936,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on t-milestoned (Milestone D, your play test of chapters 6 to 10). Then start this card: paste its prompt into a new conversation (Claude Sonnet 5.5, effort high).",
+   "next": "Shipped as b3s18bonusa (the scripted-fight seams) and b3s18bonus (chapter 21 on the switch, tips, test). Waits for nothing. Tom plays it on card t-milestonee.",
    "blocks": [],
    "changed": "2026-11-21",
    "created": "2026-11-21",
@@ -28966,13 +28966,21 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as b3s18bonusa: Battle 3 can run a scripted story fight (midpoint end, boss starting HP, adds, Frozen, the sash); the bonus chapter is not switched yet"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Part 2 (b3s18bonus) built: 21 is on B3_STORY.chapters, tips for the seven fights, beginBonus calls b3sFresh and b3sMigrate(21), the Tombos ready toast and the phase 2 retry goal are B3_CH_ON(21)-aware, tools/ns_b3_test.py plays the whole chapter from the BONUS start in portrait and landscape on Battle 3 (both scripted ends, the retry, the after-boss scene, the sash), node tools/b3-sim.js check and unused_voice.py clean. Open for Tom: the scene lines still name Birthday Wish and the bag peppers, which Battle 3 has no command for."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The chapter test found a stall in the after-boss scene (Brain Freeze was taken off the map before nsAfterBoss walked it out, so the scene hung until SKIP); fixed in nsBoss2 (bossAwait) and the test now has no page errors in both layouts."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukE3J9WH3dkmZ5gP2bv",
     "opening": "unknown"
    },
-   "after": "nothing for Tom: c-b3s18bonus"
+   "after": "t-milestonee"
   },
   {
    "id": "c-buildpill2",
@@ -33063,6 +33071,32 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try-2 and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try-2.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try auto-approve on Grace's and Rose's party banners, ask pictures). He was asked: What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine. He wrote: Fix bases on qa\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:56:44.517Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-artgen3try"
+  },
+  {
+   "id": "t-milestonee",
+   "title": "Milestone E: play the bonus chapter on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s18bonus or a later name. Then press BONUS on the title screen (or Take me there on the dashboard) and play Nine Scoops from the cab to the last scene (about 40 minutes). Judge the mechanics only: are the seven fights fun, is each one a fair fight at the level you have (you start at level 5 and should be near level 7 for the second Brain Freeze fight; the Slushie Slug is the hardest of the early ones), does the first pond run end with Brain Freeze's lid slamming, Rose frozen and the family running, does the second run end with the shell and Tom's present, is the real fight about 5 to 7 rounds with gremlins coming out of the freezer, can you read the screen and the turn bar in portrait and landscape, do the tips on the message line tell you what to do. Known and left alone: Grace says Birthday Wish is ready and Boppy's peppers are not items any more, because the new battle has no bag or Tombo command. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays the chapter on the old battle.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": "B"
+   },
+   "changed": "2026-11-21",
+   "created": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by the b3s18bonus session: Milestone E, Tom plays the bonus chapter on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [

@@ -29,6 +29,8 @@ module.exports=function(T) {
   }
   // Every tips key belongs to a story step of a switched chapter (no tips written for a fight that cannot run on Battle 3)
   const keys=new Set(steps.filter(s=>S.chapters.includes(s.ch)).map(s=>s.tut)); keys.add('basics'); keys.add('bigone');
+  // The bonus chapter (21) has its scenes in data/bonus-nine-scoops.js, not scenes.js: its tut names count when it is switched.
+  if(S.chapters.includes(21)) for(const m of read('data/bonus-nine-scoops.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

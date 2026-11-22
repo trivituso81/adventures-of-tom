@@ -237,9 +237,9 @@ Fact: every place these chapters' scenes and map monsters touch battle 2. Lines 
 | Tutorial | `TUTORIALS` rows in `data/scenes.js` near each chapter's end (battle 2: Warmth, HEART, Tombo, elements named Splash, Cozy, Sparkle) | Per-fight tips | Replaced under Battle 3 by `B3_STORY.tips` (same keys) |
 | Tutorial | Spoken retry coaching after a loss: TNB (ch6, "Three times should do it"), Grace (ch7, "Mystery, Chatter. Adventure, Kinetic ... Three times"), TNB (ch8, "Splash moves cool her down, Cozy moves stoke her up"), Deedee (ch9, "Ask her three times"), Amy (ch10, "Answer her three times") | Teach battle 2 (Warmth three times, element names, Kinetic) | Under Battle 3 each plays a new line naming what Battle 3 asks; the first line of each is the old text so its clip still plays |
 | Not a battle 2 reference | `{toast:'... Signature Tool ... WARMTH +n'}` in chapters 6 to 10: an item stat shown in the menu | Item stats | Left alone |
-| Not switched | Bonus chapter (`data/bonus-nine-scoops.js`, chapter 21): seven scripted fights (`nsGremlin`, `nsSlug`, `nsCone`, `nsBoss1`, `nsGarden`, `nsBoss2`, `nsBoss1b`) | Battle 2 with its own bespoke code | See "The bonus chapter is not switched" below |
+| Switched (b3s18bonus) | Bonus chapter (`data/bonus-nine-scoops.js`, chapter 21): seven scripted fights (`nsGremlin`, `nsSlug`, `nsCone`, `nsBoss1`, `nsGarden`, `nsBoss2`, `nsBoss1b`) | Battle 3, with the scripted-fight seams of `engine/b3-script.js` | See "The bonus chapter is switched" below |
 
-Shares stage 18 does not touch: chapters 11 to 20 (`engine/benchcall.js`, `data/ch20-battle.js`), the bonus chapter, Battle Lab and every battle 2 file. Under OLD chapters 6 to 10 play exactly as before.
+Shares stage 18 does not touch: chapters 11 to 20 (`engine/benchcall.js`, `data/ch20-battle.js`), Battle Lab and every battle 2 file. Under OLD chapters 6 to 10 play exactly as before.
 
 ### What stage 18 builds (builds `b3s18a` chapter 6, `b3s18b` chapter 7, `b3s18c` chapter 8, `b3s18d` chapter 9, `b3s18e` chapter 10)
 
@@ -253,19 +253,28 @@ Shares stage 18 does not touch: chapters 11 to 20 (`engine/benchcall.js`, `data/
 | Scene lines | Five loss-retry coaching lines have a Battle 3 version under `B3_CH_ON(n)`: TNB (ch6, ch8), Grace (ch7), Deedee (ch9), Amy (ch10). The first line of each is the old text, so its recorded clip still plays; the new lines are not recorded and play by speech synthesis (Voice Library, No clip yet). |
 | Left alone | The Signature Tool toasts with a WARMTH number (item stats). |
 
-### The bonus chapter is not switched (call made in stage 18)
+### The bonus chapter is switched (builds `b3s18bonusa` and `b3s18bonus`)
 
-Fact: the bonus chapter's two Brain Freeze fights are bespoke battle 2 code, not a plain fight. Adding chapter 21 to `B3_STORY.chapters` would send them to Battle 3 and the story would stall. What blocks it:
+Fact: the bonus chapter's Brain Freeze fights were bespoke battle 2 code (a midpoint that ends the fight with the result `flee` or `shell`, a second phase at half HP, adds, a frozen Rose). They are now data a fight carries, so the same fights run on Battle 3 and the scenes did not change. `OLD` still plays the chapter on battle 2 on the same save.
 
-| Item | Where | What Battle 3 lacks |
+| Seam | Where | What it does |
 |---|---|---|
-| Midpoint ends the fight early | `b2CheckPhase` and `b2BossTurn` overrides (`data/bonus-nine-scoops.js` 318 to 345): at half HP the lid slams (ICE SHELL), HP stops falling, the fight ends with result `shell` (second run) or `flee` (first run: Rose frozen mid Boo, a Deep Freeze on everyone) | A way for a scripted fight to end at an HP point with a named result other than win or lose; `b3sEnd` writes only `win` or `lose` to `B2.result` |
-| Scenes read those results | `B2.result==='flee'` (line 738) and `B2.result==='shell'` (line 890), then `flag('kind:brainfreeze')` (line 931) | The `flee` and `shell` branches, and a kind ending that Warmth no longer earns |
-| Two bespoke fights | Phase 2 starts at half HP; a retry fight `nsBoss2`; Brain Freeze's adds (Sprinkle Gremlins out of the freezer) and Deep Freeze on everyone | Starting HP for a boss, adds on a timer, a Rose frozen status |
-| Party and rewards | Tom, Grace and Rose at level 5 (`b6Prep(5)`); Grace's sash as a status at the start of a fight; Birthday Wish (Tom's special) and the Squishy Delivery and Double-Decker Airplane Tombos | Bonus-chapter kit rows; the sash status; a level floor for chapter 21 (`levelFloor` ends at chapter 10 and `Math.min(ch, last)` would give level 25) |
-| Four plain fights | `nsGremlin`, `nsSlug`, `nsCone`, `nsGarden` have formations (`gremlin`, `slushslug`, `conehead`) and set `battle:<id>` through the story op | Nothing new, but they ship with the boss: the chapter cannot mix two battle systems without a level floor and a sash |
+| `cfg.setup` | `engine/b3-script.js`, `b3NewFight` calls `b3SetupStart` last; rows are `B3_STORY.setup[<scene step tut>]` in `data/b3-story.js` | One object a story fight carries: `foeHp`, `start`, `midpoint`, `adds` (below). The rules read it; no scene code. `vp` in a row is the story layer's (`b3sBegin` strips it and sets the plan's Vibe Points). |
+| Scripted midpoint | `setup.midpoint {foe, at, hold, result, steps, word, line}` | `hold` is an HP floor under the monster (`hpFloor`, applied in `b3Hurt`), so he is never knocked out before the point. The first time he begins a turn at or below `at` of his Max HP (`b3ScriptTurn`, called first by `b3FoeTurn`), the `steps` play as `script` beats (a line and big word, a status on a family member, a Deep Freeze that takes a share of everyone's HP and never below `leave`) and `F.over` becomes `result` (`flee` or `shell`). The screen shows the scripted word and line; CONTINUE ends the fight with that result, and `b3sEnd` writes it to `B2.result` so the scene steps `B2.result==='flee'` and `'shell'` work unchanged. |
+| Boss starting HP | `setup.foeHp {foe: share}` | Phase 2 starts Brain Freeze at half HP (his Frosted Lid and Deep Freeze are open from the first turn). |
+| Adds on a timer | `setup.adds {foe, id, row, first, every, maxLive}` (`b3ScriptRound`, called by `b3RoundStart`) | From round 3, every third round, Sprinkle Gremlins arrive at the usual half HP and 0 pips, up to 2 alive, never into a full row. |
+| Frozen status | `data/b3-status.js` `frozen`; flag `frozen` in `b3BeginTurn` | The holder loses every turn for its length (9 turns, the midpoint's Rose). Unlike a Stun it is not used up by one skipped turn. |
+| Birthday Girl status | `data/b3-status.js` `birthday_girl`; `setup.start` (filled by `b3sBegin` when the Birthday Sash is on Grace) | Her first two turns: +75% Attack, +50% Defense, +25% crit, Skills cost 1 less Pep (battle 2's Warmth, Grit, Cool and Pep numbers have no Battle 3 twin; this is the Battle 3 reading). |
+| Chapter 21 floors | `B3_STORY.bonus[21] = {level:5, finished:1}`, read by `b3sMigrate` | `levelFloor` ends at chapter 10 and the Vibe Point pool counts finished chapters, so chapter 21 would have started at level 25 with every Vibe at mastery. It starts at level 5 with one chapter's worth of points (Main 90, Pocket 45). |
+| Vibe Points | `B3_STORY.setup[...].vp` | 15 for each of the four normal fights and 30 for the Brain Freeze win (the bestiary's 90 for the chapter, with four normal fights in the script); the flee and shell runs pay nothing. The Pocket Vibe earns half of each win, rounded up (Tom's total moves by 137). |
+| Tips | `B3_STORY.tips.nsGremlin`, `nsSlug`, `nsCone`, `nsBoss1`, `nsGarden`, `nsBoss2`, `nsBoss1b` | One tip per family turn, once each. No Warmth, HEART, Tombo or ICE SHELL words. |
+| Scenes | `data/bonus-nine-scoops.js` | `beginBonus` calls `b3sFresh()` and `b3sMigrate(21)`. The "Tombos ready" toast shows under OLD only. The phase 2 retry goal toast has a Battle 3 version (the lid and Sizzle). Battle 2's `b2CheckPhase`, `b2BossTurn` and the sash status stay for OLD. |
 
-The follow-up is card `c-b3s18bonus` (tag `b3s18bonus`).
+Balance (facts from the sim, `node tools/b3-sim.js check` and the chapter test): the party meets Brain Freeze's second phase at level 7 (it starts at 5 and the four earlier fights pay XP). With Rose Mode's recommended moves phase 2 is won about 1 in 30 at level 5, about half at level 6 and nearly always at level 7; the simple player wins 12 of 30 at 7.
+
+Not carried over (Battle 3 has no bag and no Tombo rows): Boppy's Peppers as items ("Bag: Boppy's Pepper... burns through an ICE SHELL"), the Birthday Wish Tombo and Grace's Instax command, and the "break the ICE SHELL" rule; Battle 3's Frosted Lid and Panic Boil! take that job. The scene lines that name Birthday Wish stay as written (a spoken line is never reworded), so Tom hears "Birthday Wish is ready" with no such command on the screen. That is the one open design question of the chapter.
+
+Tests: `node tools/b3-sim.js check` (`tools/b3-check-s18bonus.js`), `python3 tools/ns_b3_test.py` (portrait and landscape, from the BONUS start, every story fight auto-played on Battle 3, both scripted ends, the retry scene, the after-boss scene, the sash).
 
 ### Stage 18 tests and numbers
 

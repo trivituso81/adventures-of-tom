@@ -27,11 +27,13 @@ CHAPTERS[NS]={n:NS,title:'Nine Scoops',bonus:true,party:{allow:[],
   noFlight:()=>({lines:['Airport? On the birthday? Your sister would find me. On foot. In the dark.','The creamery is at the top of the Square. Go get those scoops.']})};
 function beginBonus() {
   endIntro();
+  if(typeof b3sFresh==='function') b3sFresh();   // everyone starts from fresh Battle 3 loadouts (engine/b3-story.js), then the chapter 21 floors below
   resetStory('full',NS);
   setFlag('bonus'); setFlag('tombo:grace1'); setFlag('tombo:rose1');
   for(const m of extras()) recruitLeave(m,true);
   if(girlsAway()) setGirlsAway(false);
   b6Prep(5); coins=60;
+  if(typeof b3sMigrate==='function') b3sMigrate(NS);   // level 5 and one chapter's worth of Vibe Points (B3_STORY.bonus): never the story's level 25 and 20 chapters of points
   bag.length=0; bag.push('bandage','bandage','juice','lemonade');
   const h=houseById.taxi;
   currentMap=town; player.x=h.door.x; player.y=h.door.y; player.facing='down'; player.move=null; player.hidden=true; player.scr=null;
@@ -634,7 +636,7 @@ SCENES.nsGoal=[
   {talk:'Tom',lines:['Nine dairy-free scoops. One per year. Black and white cookie on top. I ordered it in July.']},
   {talk:'Rose',lines:['Is the present a puppy?'],voice:[['rose','puppy']]},
   {talk:'Tom',lines:['It\'s not a puppy.','Presents are after cake. That\'s the rule. I didn\'t make the rule.'],voice:[['tom','not_puppy'],['tom','present_rule']]},
-  {toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
+  {if:()=>!B3_CH_ON(21),then:[{toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[]},
   {toast:'Goal: Sprinkle Street Creamery, the shop with the SCOOPS sign at the top of the Square.',time:4.5}
 ];
 // Sprinkle Street Creamery: frozen solid. Mr. Pistachio in an ice cube, three gremlins, the story of the thief.
@@ -870,7 +872,10 @@ SCENES.nsBoss2=[
     {heal:true},
     {talk:'Grace',lines:['Up, up. It\'s still my birthday. We go AGAIN.']},
     {flag:'ns-retry'},
-    {toast:'Goal: walk up to Brain Freeze and try again. Everyone is healed.',time:4.5}],else:[{flag:'ns-retry',value:false}]}
+    {if:()=>B3_CH_ON(21),then:[{toast:'Goal: walk up to Brain Freeze and try again. Everyone is healed. It starts at half HP: Sizzle is its pet peeve, and Panic Boil! pops the Frosted Lid.',time:6}],else:[
+      {toast:'Goal: walk up to Brain Freeze and try again. Everyone is healed.',time:4.5}]}],else:[{flag:'ns-retry',value:false},
+    // The beaten boss waits for the after scene (engine/boss-finale.js bossAwait). A spawned (scripted) monster never gets it from monsterFall, so the world rule that clears a beaten boss took it off the map before nsAfterBoss walked it out and the walk step failed on a missing actor.
+    {call:()=>{ const b=sceneActor('Brain Freeze'); if(b){ b.bossAwait=true; b.bossT=performance.now()+600000; } }}]}
 ];
 SCENES.nsPond2=[
   {flag:'ns-pond2'},
@@ -1161,5 +1166,7 @@ Object.assign(TUTORIALS,{
       {id:'shell',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'ICE SHELL! 2 Cozy or Sparkle hits crack it before the Deep Freeze. Boppy’s Pepper (▼ Bag) counts. Any Tombo breaks it at once.'},
       {id:'instax',who:'grace',dir:'up',text:'Grace’s new INSTAX (▲ Skills): a flash that Goofs every enemy and warms them up.'}]}
 });
+// The title screen's BONUS and the dashboard's BONUS button test `typeof beginBonus` from outside this closure; without a global they fell back to beginOpening and started chapter 1.
+window.beginBonus=beginBonus;
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{beginBonus,NSFX}); });
 })();

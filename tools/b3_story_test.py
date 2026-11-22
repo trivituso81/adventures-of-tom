@@ -87,7 +87,7 @@ with sync_playwright() as pw:
     stop_all(pg)
     fresh(pg,11,'chapter'); ev(pg,"()=>{ currentMap=worlds.hollow; }"); mon(pg,'mudling')
     ev(pg,"()=>startBattle(window.__m)"); pg.wait_for_timeout(1500)
-    k=kinds(pg); check('chapter 11, By chapter: the same monster fights on battle 2 (chapters 11 to 20 and the bonus chapter are not switched yet)',k['b2'] and not k['v3'] and k['ui2'] and not k['ui3'],k)
+    k=kinds(pg); check('chapter 11, By chapter: the same monster fights on battle 2 (chapters 11 to 20 are not switched yet; the bonus chapter is switched, tools/ns_b3_test.py)',k['b2'] and not k['v3'] and k['ui2'] and not k['ui3'],k)
     stop_all(pg)
     fresh(pg,1,'old'); mon(pg,'mudling'); ev(pg,"()=>startBattle(window.__m)"); pg.wait_for_timeout(1500)
     k=kinds(pg); check('chapter 1, Old: battle 2',k['b2'] and not k['v3'],k); stop_all(pg)
