@@ -30243,8 +30243,78 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "movestage2a: the wan-gen Action now makes stage pictures and object videos (wanstage.py, bake_stage.py, stage wire); 26 jobs added to wangen-jobs.json and started on t-movestage-lab (about $6). Next: the stage engine and the Move Lab."
     }
-   ]
+   ],
+   "after": "t-movestage-lab"
+  },
+  {
+   "id": "t-movestage-lab",
+   "lane": "tom",
+   "col": "wait",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Judge Tom's eight moves in the Move Lab",
+   "next": "Nothing to tap yet. The wan-gen Action is making the 12 stage pictures, 8 object videos and 6 body videos for Tom's eight moves (about $6, inside the auto limits); the Claude build then adds the stage engine and the Move Lab. When this card says it is ready, open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM, watch each of the eight moves in a real fight, and tap Keep, Tweak or Replace on each. There is no separate watch card for these videos: the Lab is the only review.",
+   "wan": {
+    "jobs": [
+     "stage-tom-bluebang",
+     "stage-tom-glare",
+     "stage-tom-carryon",
+     "stage-tom-suitedoor",
+     "stage-tom-porsche",
+     "stage-tom-controller",
+     "stage-tom-wingedshell",
+     "stage-tom-runwaylights",
+     "stage-tom-jetwash",
+     "stage-tom-fireball",
+     "stage-tom-starbeam",
+     "stage-tom-meteor",
+     "stage-tom-bluebang-vid",
+     "stage-tom-glare-vid",
+     "stage-tom-wingedshell-vid",
+     "stage-tom-runwaylights-vid",
+     "stage-tom-jetwash-vid",
+     "stage-tom-fireball-vid",
+     "stage-tom-starbeam-vid",
+     "stage-tom-meteor-vid",
+     "tom-suitedoor",
+     "tom-porsche",
+     "tom-cartridge",
+     "tom-controller",
+     "tom-shell",
+     "tom-konami"
+    ],
+    "cap": 12,
+    "watch": false,
+    "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
+   },
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T19:23:59Z",
+    "n": 26,
+    "est": 6.0,
+    "auto": true
+   },
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "build": "movestage2",
+   "chat": {
+    "url": "",
+    "opening": "added by c-movestage-build"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by c-movestage-build (movestage2a). Tom (2026-11-22): his only review of the eight staged moves is the Move Lab. Started the wan-gen run for every stage asset and body video (wanauto1 route: no tap needed). (ask animations while the run makes the videos; it becomes a play card with a jump when the Lab ships.)"
+    }
+   ],
+   "waiting_on": "claude"
   }
  ],
  "sessions": [
