@@ -27927,7 +27927,7 @@
     "c-nightrefactor"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
     "opening": "pasted by Tom from the board"
@@ -28061,6 +28061,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "nightgreenm: ch20_test fixed (the test was wrong in two ways: after the four relays it pressed a skill that does no damage to the Leviathan, so the fight never ended in 400 turns, and it then forced the win flag while the battle was still on); with the plain Attack the real fight ends, the game plays the shatter scene and starts Julian by itself. known_fail removed; minutes 10 to 5 (measured 223 s and 222 s, two passes in a row). No row is marked known_fail now."
     }
    ],
    "prompt": {

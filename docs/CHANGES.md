@@ -1,3 +1,10 @@
+## nightgreenm (2026-11-22): the chapter 20 night test ends the Leviathan fight and now passes
+
+Card c-nightgreen, last row. The test was wrong, the game was fine. After the four relays broke the four barriers, the test pressed the first skill row, and for Amy and Grace that skill does no damage, so the Leviathan sat at 5 HP and the fight ran out its 400 turns (6 minutes) still open. The test then forced `battle:leviathan` to win while the battle was still on, which is why the shatter scene never started. Measured with a temporary script that played only fight 1 and printed the flags, the scene and the dialog state every second (deleted). With the plain Attack (cross up, then the target) the Leviathan dies, the game sets `battle:leviathan` and `ch20-shatter` itself, plays the shatter scene (about 9 lines), and the Julian fight starts. No game change.
+- `tools/ch20_test.py`: once no barrier is up, set the Leviathan to 5 HP and finish it with Attack.
+- `tools/night/tests.json`: `known_fail` removed from `ch20_test`; `minutes` 10 to 5 (measured 223 s and 222 s, two runs in a row, down from about 16 minutes).
+- Tested: `python3 -I tools/ch20_test.py` passes twice (all checks, including shatter scene to Julian, calm and epilogue to the end, game complete flag); `python3 tools/night/manifest_check.py` ok. Nothing in the game changed, so nothing to play on a phone.
+
 ## artwan2 (2026-11-21): Art Library pictures on WAN no longer fail on long prompts
 
 - Tom: "The picture was not made: fal result said 422 ... at most 2000 characters." fal's WAN endpoints refuse a prompt over 2000 characters, and 418 of 1123 Art Library prompts are longer. The three gate pictures (prop-gate-town-school-open, prop-gate-backlot-stage7-open, prop-gate-jpark-barn-open) reached WAN try 3 and all failed this way.
