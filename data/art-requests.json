@@ -8,6 +8,15 @@
     "art/raw/props/prop-gate-backlot-stage7-v1.png"
    ],
    "at": 1795330195685
+  },
+  {
+   "id": "prop-gate-jpark-barn-open",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Jefferson Park, from \"The Adventures of Tom\", a family role-playing game. Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening is the side street at the far edge of the picture, beyond the green CAR BARN arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nA tall old black iron double gate between two weathered stone posts, both gate leaves swung toward the viewer and hanging at an angle from their stone posts, so the space between the posts is clear from post to post. No chain and no padlock anywhere. The frost is gone. The riveted metal plate is fixed to the left gate leaf only and swings open with it; it reads exactly: DIVISION NINE CAR BARN\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The stone posts span the full width of the side street, about two people wide, and are taller than a person. The gap between the open leaves is clear.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/jpark.webp",
+    "art/raw/props/prop-gate-jpark-barn-v1.png"
+   ],
+   "at": 1795330199305
   }
  ]
 }
