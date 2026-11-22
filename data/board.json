@@ -8286,7 +8286,7 @@
    "blocks": [
     "c-ch3build"
    ],
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "created": "2026-11-20",
    "history": [
     {
@@ -8343,6 +8343,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Play chapter 2 on your phone and report is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T22:12:58.802Z"
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
@@ -8355,7 +8360,11 @@
     "verdict": "yours",
     "why": "it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
    },
-   "where": "phone"
+   "where": "phone",
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "c-fix-effectslook-2",
