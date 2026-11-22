@@ -30097,6 +30097,29 @@
      "at": "2026-11-22T17:57:57.146Z"
     }
    ]
+  },
+  {
+   "id": "b-board-crispcard",
+   "tag": "board-crispcard",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Tools",
+   "title": "Board: new card to replace the leftover crisp with apple muffins",
+   "next": "Done: Board: new card to replace the leftover crisp with apple muffins",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as board-crispcard. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
@@ -30189,10 +30212,11 @@
    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
    "title": "Chapter headings in the storybook look of the main menu",
    "first": "2026-11-22T09:11:30-08:00",
-   "last": "2026-11-22T09:50:00-08:00",
+   "last": "2026-11-22T09:58:38-08:00",
    "tags": [
     "chaptercard1",
-    "ch1title1"
+    "ch1title1",
+    "board-crispcard"
    ],
    "cards": [
     "c-chaptercard-storybook",
@@ -35697,8 +35721,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "245293e1783c0022df49476530378f95354b6fe5",
- "synced_at": "2026-11-22T17:50:42+00:00",
+ "synced": "5f926a3f4ab9b56f4a9914f826f0f4346bcf4c80",
+ "synced_at": "2026-11-22T17:59:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
