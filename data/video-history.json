@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T21:55Z",
+ "built": "2026-11-22T22:02Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -2289,11 +2289,11 @@
    "attempt": 2,
    "at": "2026-11-22T21:40:11.251947Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"From his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws \" Its reason: main action missing: no hands together as if holding controller or thumb tapping rhythm"
    ],
-   "in_game": null,
+   "in_game": "tom-konami",
    "strip": "art/video-history/tom-konami-a2-r1.webp",
    "pad": 0.8,
    "model": "alibaba"
@@ -2401,11 +2401,11 @@
    "attempt": 2,
    "at": "2026-11-22T21:35:46.116050Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"From his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forwa\" Its reason: Multiple different actions and poses shown, not the specific watch check then wave sequence"
    ],
-   "in_game": null,
+   "in_game": "tom-porsche",
    "strip": "art/video-history/tom-porsche-a2-r1.webp",
    "pad": 0.8,
    "model": "alibaba"
@@ -2594,7 +2594,7 @@
   "tom-konami": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "tom-porsche": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "tom-cartridge": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
-  "stage-tom-bluebang-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-bluebang-vid": "movestage2 r2: wanstop fix, ONE change: pad 0.65 (start picture shrunk inside the frame). Evidence r1: the burst grows to fill the frame and its sparks touch the edge (bg 96.8 and 92.8 percent, edge 43 and 62 of 90 pictures); the move itself is right (flares once, shrinks, fades out). Kept: prompt file, 480p, 3 s, seed, bake settings. Changed: pad only.",
   "stage-tom-glare-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-wingedshell-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-runwaylights-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
