@@ -1,0 +1,215 @@
+{
+ "summary": {
+  "made": "2026-11-21T21:28:42Z",
+  "lines_tried": 10,
+  "clips_made": 10,
+  "needs_human": 0,
+  "regenerated": 0,
+  "errors": 0,
+  "characters_sent": 1313,
+  "usage_before": {
+   "used": 197282,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 197282,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 0
+ },
+ "lines": [
+  {
+   "line": "deedee|Excuse me! I just washed that floor.",
+   "voice": "deedee",
+   "chars": 119,
+   "attempts": [
+    {
+     "seed": 755945037,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 66498,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 119,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
+   "voice": "tom",
+   "chars": 150,
+   "attempts": [
+    {
+     "seed": 4287652954,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 109966,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 150,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming.",
+   "voice": "boppy",
+   "chars": 218,
+   "attempts": [
+    {
+     "seed": 2061285342,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 95755,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 218,
+   "status": "ok"
+  },
+  {
+   "line": "ellie|Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.",
+   "voice": "ellie",
+   "chars": 167,
+   "attempts": [
+    {
+     "seed": 1082298350,
+     "voice_id": "hZCpO8frcjUSQcVVhRiz",
+     "bytes": 116235,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 167,
+   "status": "ok"
+  },
+  {
+   "line": "grace|3 wrappers, let's follow them!",
+   "voice": "grace",
+   "chars": 65,
+   "attempts": [
+    {
+     "seed": 1259010620,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 38077,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 65,
+   "status": "ok"
+  },
+  {
+   "line": "rose|One more ride, Tata! To the cab!",
+   "voice": "rose",
+   "chars": 78,
+   "attempts": [
+    {
+     "seed": 3470497869,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 47272,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 78,
+   "status": "ok"
+  },
+  {
+   "line": "sal|Los Angeles? You got it.",
+   "voice": "sal",
+   "chars": 42,
+   "attempts": [
+    {
+     "seed": 3249430212,
+     "voice_id": "gcJ5PkVgShIxtP5HgbZK",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 42,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+   "voice": "deedee",
+   "chars": 223,
+   "attempts": [
+    {
+     "seed": 2743384908,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 140477,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 223,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Alright, time for me to head back to LA. Let's head to Sal's!",
+   "voice": "tom",
+   "chars": 92,
+   "attempts": [
+    {
+     "seed": 3909591051,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 65244,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 92,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.",
+   "voice": "deedee",
+   "chars": 159,
+   "attempts": [
+    {
+     "seed": 1112561253,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 95755,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 159,
+   "status": "ok"
+  }
+ ]
+}

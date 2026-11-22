@@ -1,0 +1,1365 @@
+{
+ "summary": {
+  "made": "2026-11-21T21:12:46Z",
+  "lines_tried": 70,
+  "clips_made": 70,
+  "needs_human": 0,
+  "regenerated": 1,
+  "errors": 0,
+  "characters_sent": 7578,
+  "usage_before": {
+   "used": 193606,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 196987,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 3381
+ },
+ "lines": [
+  {
+   "line": "tom|I do have news. But you go first. I can wait.",
+   "voice": "tom",
+   "chars": 114,
+   "attempts": [
+    {
+     "seed": 2765914723,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 114,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Hey, babe. You've got your news face on.",
+   "voice": "tnb",
+   "chars": 117,
+   "attempts": [
+    {
+     "seed": 1097395339,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 117,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|RUMBLE. A flash woke me up. Now everybody runs.",
+   "voice": "bigone",
+   "chars": 95,
+   "attempts": [
+    {
+     "seed": 480342919,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 97009,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 95,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|Everything's fine. Everything's fine.",
+   "voice": "carmen",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 3584021453,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "odette|This gumbo is perfect. Doesn't need a thing.",
+   "voice": "odette",
+   "chars": 124,
+   "attempts": [
+    {
+     "seed": 1814719000,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 86978,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 124,
+   "status": "ok"
+  },
+  {
+   "line": "mudling|Ahem. You're in my way.",
+   "voice": "mudling",
+   "chars": 53,
+   "attempts": [
+    {
+     "seed": 1159145054,
+     "voice_id": "E2hOWZ8x3nGJuQURP3SG",
+     "bytes": 52287,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 53,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|No parking Saturdays. Noon to two. You parked.",
+   "voice": "skeeter",
+   "chars": 87,
+   "attempts": [
+    {
+     "seed": 464449950,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 59811,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 87,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Morning, Tom! Back from your folks? How's your mama?",
+   "voice": "washington",
+   "chars": 318,
+   "attempts": [
+    {
+     "seed": 2718898038,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 318,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.",
+   "voice": "grace",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 2511548160,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  },
+  {
+   "line": "grump|Dog. Run with us. We never sit.",
+   "voice": "grump",
+   "chars": 72,
+   "attempts": [
+    {
+     "seed": 923519364,
+     "voice_id": "moX2FuSiiLmOw0uEq4OU",
+     "bytes": 67752,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 72,
+   "status": "ok"
+  },
+  {
+   "line": "tom|A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast.",
+   "voice": "tom",
+   "chars": 164,
+   "attempts": [
+    {
+     "seed": 834509179,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 119997,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 164,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Sure. So I got up this morning, and I was thinking about toast...",
+   "voice": "tnb",
+   "chars": 143,
+   "attempts": [
+    {
+     "seed": 3556789291,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 104950,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 143,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|RUMBLE. ...Nobody asks. They just run.",
+   "voice": "bigone",
+   "chars": 86,
+   "attempts": [
+    {
+     "seed": 1772615821,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 86978,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 86,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|Perfect. You cook so well, Tom.",
+   "voice": "carmen",
+   "chars": 101,
+   "attempts": [
+    {
+     "seed": 1897680601,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 101,
+   "status": "ok"
+  },
+  {
+   "line": "odette|Sit down, both of you. This gumbo needs salt and you two need lunch.",
+   "voice": "odette",
+   "chars": 207,
+   "attempts": [
+    {
+     "seed": 1285092566,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 207,
+   "status": "ok"
+  },
+  {
+   "line": "mudling|Ahem. There's two of us.",
+   "voice": "mudling",
+   "chars": 53,
+   "attempts": [
+    {
+     "seed": 2222084377,
+     "voice_id": "E2hOWZ8x3nGJuQURP3SG",
+     "bytes": 53541,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 53,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|Denied.",
+   "voice": "skeeter",
+   "chars": 31,
+   "attempts": [
+    {
+     "seed": 1471721746,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 44764,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 31,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Glad to hear it. Tell her I said hello.",
+   "voice": "washington",
+   "chars": 216,
+   "attempts": [
+    {
+     "seed": 3136868366,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 103278,
+     "extra": 9,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "Glad to hear it. Tell her I said hello. Glad to hear it. Tell her I said hello."
+    },
+    {
+     "seed": 2005863757,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 57303,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 432,
+   "status": "ok after regenerate"
+  },
+  {
+   "line": "tom|Big. No, sorry. TAXI big.",
+   "voice": "tom",
+   "chars": 76,
+   "attempts": [
+    {
+     "seed": 2822328268,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 52287,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 76,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|No, yours wins. How big a fish?",
+   "voice": "tnb",
+   "chars": 114,
+   "attempts": [
+    {
+     "seed": 2763145027,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 74021,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 114,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|RUMBLE. That was you? You snore.",
+   "voice": "bigone",
+   "chars": 74,
+   "attempts": [
+    {
+     "seed": 3100624918,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 76529,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 74,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|Tom! Who turned my pupusas? They're all wrong.",
+   "voice": "carmen",
+   "chars": 173,
+   "attempts": [
+    {
+     "seed": 864402715,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 173,
+   "status": "ok"
+  },
+  {
+   "line": "odette|I have bread. Sit.",
+   "voice": "odette",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 413304356,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 57303,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Go back one.",
+   "voice": "tom",
+   "chars": 31,
+   "attempts": [
+    {
+     "seed": 3797551776,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 16343,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 31,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Huh. That'd tip the scales.",
+   "voice": "tnb",
+   "chars": 101,
+   "attempts": [
+    {
+     "seed": 2254056128,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 46018,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 101,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|My pipe itches. Hold on. Hh... HHH...",
+   "voice": "bigone",
+   "chars": 84,
+   "attempts": [
+    {
+     "seed": 3260930638,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 84,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|I never said that.",
+   "voice": "carmen",
+   "chars": 61,
+   "attempts": [
+    {
+     "seed": 2612569204,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 25538,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 61,
+   "status": "ok"
+  },
+  {
+   "line": "tom|The PURPLE.",
+   "voice": "tom",
+   "chars": 38,
+   "attempts": [
+    {
+     "seed": 3031671781,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 38,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out of bread.",
+   "voice": "tnb",
+   "chars": 283,
+   "attempts": [
+    {
+     "seed": 302610406,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 152180,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 283,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Poke it. Yes. But maybe just gently.",
+   "voice": "tom",
+   "chars": 94,
+   "attempts": [
+    {
+     "seed": 2094452960,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 94,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|The window?",
+   "voice": "tnb",
+   "chars": 55,
+   "attempts": [
+    {
+     "seed": 671028120,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 26792,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 55,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Then we're her backup.",
+   "voice": "tom",
+   "chars": 52,
+   "attempts": [
+    {
+     "seed": 4261824975,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 35569,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 52,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Oh. Yeah. All day. It's coming off the hills. The bread's the real problem.",
+   "voice": "tnb",
+   "chars": 196,
+   "attempts": [
+    {
+     "seed": 988273415,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 103278,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 196,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Nara, no jumping. Hello. Yes. Hello. That's my whole face. Thank you.",
+   "voice": "tom",
+   "chars": 125,
+   "attempts": [
+    {
+     "seed": 3644041874,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 108712,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 125,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Hills, then bread. I figure we walk up and poke it.",
+   "voice": "tnb",
+   "chars": 131,
+   "attempts": [
+    {
+     "seed": 1304792182,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 75275,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 131,
+   "status": "ok"
+  },
+  {
+   "line": "tom|No. This isn't that kind of stick. This is a work stick.",
+   "voice": "tom",
+   "chars": 110,
+   "attempts": [
+    {
+     "seed": 2791003161,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 76529,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 110,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Nara's already on it. She's been barking at it from your porch since breakfast.",
+   "voice": "tnb",
+   "chars": 159,
+   "attempts": [
+    {
+     "seed": 3811681732,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 159,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Okay. Work stick. This is what you're for.",
+   "voice": "tom",
+   "chars": 86,
+   "attempts": [
+    {
+     "seed": 2776435246,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 86,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|She thinks you're sticking around.",
+   "voice": "tnb",
+   "chars": 108,
+   "attempts": [
+    {
+     "seed": 144293113,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 51034,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 108,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Morning, Mr. Washington. She's well, thank you.",
+   "voice": "tom",
+   "chars": 83,
+   "attempts": [
+    {
+     "seed": 863322730,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 83,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Huh. Now it's between us and the bread.",
+   "voice": "tnb",
+   "chars": 119,
+   "attempts": [
+    {
+     "seed": 195263610,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 69006,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 119,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Still well! Thank you.",
+   "voice": "tom",
+   "chars": 52,
+   "attempts": [
+    {
+     "seed": 2448541297,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 36823,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 52,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|She's never said that. Last week she sent a bowl back to herself.",
+   "voice": "tnb",
+   "chars": 143,
+   "attempts": [
+    {
+     "seed": 2830735069,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 80291,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 143,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She's... consistently well.",
+   "voice": "tom",
+   "chars": 85,
+   "attempts": [
+    {
+     "seed": 2664224052,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 66498,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 85,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|She's in the smog, babe.",
+   "voice": "tnb",
+   "chars": 64,
+   "attempts": [
+    {
+     "seed": 509854086,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 64,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Okay. So. You coughed on Mr. Washington's porch. He sweeps that porch every MORNING.",
+   "voice": "tom",
+   "chars": 150,
+   "attempts": [
+    {
+     "seed": 3779054051,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 126684,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 150,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Easy. She's spoken for. You want the rest of my soda?",
+   "voice": "tnb",
+   "chars": 167,
+   "attempts": [
+    {
+     "seed": 1984630330,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 75275,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 167,
+   "status": "ok"
+  },
+  {
+   "line": "tom|We can do this! I've done this one time.",
+   "voice": "tom",
+   "chars": 76,
+   "attempts": [
+    {
+     "seed": 780403138,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 76,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|You didn't mention a dragonfly.",
+   "voice": "tnb",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 3294063548,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Did you hear that? She said I cook WELL.",
+   "voice": "tom",
+   "chars": 91,
+   "attempts": [
+    {
+     "seed": 4282217757,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 59811,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 91,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It's not glass. It's not resin. I don't like it.",
+   "voice": "tnb",
+   "chars": 125,
+   "attempts": [
+    {
+     "seed": 1011264751,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 76529,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 125,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I know. I'm keeping it.",
+   "voice": "tom",
+   "chars": 54,
+   "attempts": [
+    {
+     "seed": 3110185690,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 54,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|The cloud made sense.",
+   "voice": "tnb",
+   "chars": 59,
+   "attempts": [
+    {
+     "seed": 2308347334,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 31807,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 59,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Oh, Observatory. Not you.",
+   "voice": "tom",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 2401148781,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 67752,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill.",
+   "voice": "tnb",
+   "chars": 172,
+   "attempts": [
+    {
+     "seed": 1996534922,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 99517,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 172,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I was in New York on Saturday. I still have my boarding pass.",
+   "voice": "tom",
+   "chars": 118,
+   "attempts": [
+    {
+     "seed": 2046167593,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 118,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Yeah. That's fair.",
+   "voice": "tnb",
+   "chars": 58,
+   "attempts": [
+    {
+     "seed": 2587379700,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 34315,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 58,
+   "status": "ok"
+  },
+  {
+   "line": "tom|That's the block. From the pond. The dragonfly was in one just like it.",
+   "voice": "tom",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 2680719629,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Huh. Sour dough.",
+   "voice": "tnb",
+   "chars": 90,
+   "attempts": [
+    {
+     "seed": 2609397126,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 43510,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 90,
+   "status": "ok"
+  },
+  {
+   "line": "tom|The fish took up a lot of the story.",
+   "voice": "tom",
+   "chars": 67,
+   "attempts": [
+    {
+     "seed": 3607087947,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 67,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You don't like it? You liked the talking cloud.",
+   "voice": "tom",
+   "chars": 92,
+   "attempts": [
+    {
+     "seed": 2249274705,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 92,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.",
+   "voice": "tom",
+   "chars": 180,
+   "attempts": [
+    {
+     "seed": 1421845080,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 126684,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 180,
+   "status": "ok"
+  },
+  {
+   "line": "tom|GAH! I've got you, Nara. We're fine. We're both fine.",
+   "voice": "tom",
+   "chars": 98,
+   "attempts": [
+    {
+     "seed": 174313088,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 79037,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 98,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Excuse me. You're wearing the Observatory. Please don't drop it.",
+   "voice": "tom",
+   "chars": 127,
+   "attempts": [
+    {
+     "seed": 2664908616,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 80291,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 127,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Excuse me. Mr. Shake. How are you doing?",
+   "voice": "tom",
+   "chars": 87,
+   "attempts": [
+    {
+     "seed": 4283386073,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 87,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Yes. I saw. Very good. May I?",
+   "voice": "tom",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 2153275408,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Gold. And there's a lemon stamped on it.",
+   "voice": "tom",
+   "chars": 76,
+   "attempts": [
+    {
+     "seed": 1102426611,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 76,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She's well, Mr. Washington.",
+   "voice": "tom",
+   "chars": 48,
+   "attempts": [
+    {
+     "seed": 1308813317,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 44764,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 48,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You told me I cook well.",
+   "voice": "tom",
+   "chars": 55,
+   "attempts": [
+    {
+     "seed": 3573636078,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 40585,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 55,
+   "status": "ok"
+  },
+  {
+   "line": "tom|We were going to get bread.",
+   "voice": "tom",
+   "chars": 45,
+   "attempts": [
+    {
+     "seed": 2289740370,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 38077,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 45,
+   "status": "ok"
+  }
+ ]
+}

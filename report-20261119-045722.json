@@ -1,0 +1,4892 @@
+{
+ "summary": {
+  "made": "2026-11-19T04:57:22Z",
+  "lines_tried": 253,
+  "clips_made": 251,
+  "needs_human": 2,
+  "regenerated": 6,
+  "errors": 0,
+  "characters_sent": 28620,
+  "usage_before": {
+   "used": 162843,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 175506,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 12663
+ },
+ "lines": [
+  {
+   "line": "tom|Let's go home to Jefferson Park. Bready Mercury has been alone all week.",
+   "voice": "tom",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 3583159622,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 79037,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Welcome home. Don't open the salad spinner. That's loaf thirty-one.",
+   "voice": "tnb",
+   "chars": 171,
+   "attempts": [
+    {
+     "seed": 2758818125,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 171,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata. Did you touch it?",
+   "voice": "grace",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 2823707680,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Shut that door. You're letting the cold in.",
+   "voice": "bigone",
+   "chars": 82,
+   "attempts": [
+    {
+     "seed": 1524410763,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 82,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|8:42 this morning. White sedan, parked across the Washington driveway for four minutes. Rental. Airport lot sticker on the windshield. I have the plate.",
+   "voice": "bernadette",
+   "chars": 215,
+   "attempts": [
+    {
+     "seed": 1004432568,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 175167,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 215,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|The drawer is ready for number eight. Also, a fancy letter came for you from the Moon Club. That place has been locked since 1971. I did not open it.",
+   "voice": "deedee",
+   "chars": 298,
+   "attempts": [
+    {
+     "seed": 1148154779,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 185198,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 298,
+   "status": "ok"
+  },
+  {
+   "line": "rose|BOO!",
+   "voice": "rose",
+   "chars": 24,
+   "attempts": [
+    {
+     "seed": 759529393,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 16343,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 24,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Tom! Get out here and look at my roses!",
+   "voice": "washington",
+   "chars": 195,
+   "attempts": [
+    {
+     "seed": 487629743,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 195,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...",
+   "voice": "boppy",
+   "chars": 357,
+   "attempts": [
+    {
+     "seed": 1012788515,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 211112,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 3,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 357,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|Password accepted. Welcome, Agent...",
+   "voice": "skeeter",
+   "chars": 51,
+   "attempts": [
+    {
+     "seed": 3639515427,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 51034,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 51,
+   "status": "ok"
+  },
+  {
+   "line": "odette|Tom! My gumbo's been on since six, and right now it's the temperature of a handshake.",
+   "voice": "odette",
+   "chars": 149,
+   "attempts": [
+    {
+     "seed": 3692563999,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 102025,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 149,
+   "status": "ok"
+  },
+  {
+   "line": "olivia|That's my dog under the table, and I've never seen that loaf before in my life.",
+   "voice": "olivia",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 2753189189,
+     "voice_id": "3KdkB2LF6PUw0muuS0j7",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|My griddle is cold. Do you know what a pupusa is off a cold griddle? It's an apology.",
+   "voice": "carmen",
+   "chars": 142,
+   "attempts": [
+    {
+     "seed": 4248049928,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 103278,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 142,
+   "status": "ok"
+  },
+  {
+   "line": "log|Stop right there. Somebody's had a fire going in this building, and I'm putting an end to it.",
+   "voice": "log",
+   "chars": 157,
+   "attempts": [
+    {
+     "seed": 1961776402,
+     "voice_id": "DmA9AOv6Fsic2LQdqVVM",
+     "bytes": 108712,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 157,
+   "status": "ok"
+  },
+  {
+   "line": "toad|What's in the salad spinner? Is that sourdough? No. Too sour.",
+   "voice": "toad",
+   "chars": 109,
+   "attempts": [
+    {
+     "seed": 1380133186,
+     "voice_id": "jcb48kKcDpNXjAxnAP2c",
+     "bytes": 95755,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 109,
+   "status": "ok"
+  },
+  {
+   "line": "michael|I've got it. Nobody get up.",
+   "voice": "michael",
+   "chars": 73,
+   "attempts": [
+    {
+     "seed": 2443102000,
+     "voice_id": "24fSFWvKYGI0zVR7L6JQ",
+     "bytes": 74021,
+     "extra": 6,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "I've got it. I've got it. I've got it. Nobody get up."
+    },
+    {
+     "seed": 3529887560,
+     "voice_id": "24fSFWvKYGI0zVR7L6JQ",
+     "bytes": 56049,
+     "extra": 3,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "I've got it. I've got it. Nobody get up."
+    }
+   ],
+   "chars_sent": 146,
+   "status": "needs human"
+  },
+  {
+   "line": "mudling|No. Ours now.",
+   "voice": "mudling",
+   "chars": 32,
+   "attempts": [
+    {
+     "seed": 3628848857,
+     "voice_id": "E2hOWZ8x3nGJuQURP3SG",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 32,
+   "status": "ok"
+  },
+  {
+   "line": "tom|\"Bohemian Rye-psody!\"",
+   "voice": "tom",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 2241253930,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 56049,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Bready Mercury was climbing out of the crock at five this morning. I wasn't going to argue with him.",
+   "voice": "tnb",
+   "chars": 167,
+   "attempts": [
+    {
+     "seed": 1414051709,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 91994,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 167,
+   "status": "ok"
+  },
+  {
+   "line": "grace|How big?",
+   "voice": "grace",
+   "chars": 30,
+   "attempts": [
+    {
+     "seed": 3443966145,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 21358,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 30,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Fifty years I fed the night crews out of this room. Then one morning in 1963 they shut off my gas and chained the door, and not one of them said a word to me about it.",
+   "voice": "bigone",
+   "chars": 249,
+   "attempts": [
+    {
+     "seed": 981242556,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 196901,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 249,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|One man. Long coat, in this heat. He pointed something at the roses, there was a flash, and when I could see again, there was that.",
+   "voice": "bernadette",
+   "chars": 199,
+   "attempts": [
+    {
+     "seed": 1088352866,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 173914,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 199,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|I held it up to the lamp. There's a piano on it.",
+   "voice": "deedee",
+   "chars": 127,
+   "attempts": [
+    {
+     "seed": 742595543,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 127,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Why didn't he jump?",
+   "voice": "rose",
+   "chars": 43,
+   "attempts": [
+    {
+     "seed": 300078617,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 43,
+   "status": "ok"
+  },
+  {
+   "line": "washington|And the red's gone out of everything around it. The roses, the lawn, my good hose. All grey.",
+   "voice": "washington",
+   "chars": 293,
+   "attempts": [
+    {
+     "seed": 3741814844,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 136715,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 293,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
+   "voice": "boppy",
+   "chars": 199,
+   "attempts": [
+    {
+     "seed": 699199665,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 199,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|...wait. You're very tall. Are you a squirrel?",
+   "voice": "skeeter",
+   "chars": 84,
+   "attempts": [
+    {
+     "seed": 367497952,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 72767,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 84,
+   "status": "ok"
+  },
+  {
+   "line": "odette|You're following them with a salad spinner.",
+   "voice": "odette",
+   "chars": 63,
+   "attempts": [
+    {
+     "seed": 880779950,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 48526,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 63,
+   "status": "ok"
+  },
+  {
+   "line": "olivia|She can get in line. She owes me a couch.",
+   "voice": "olivia",
+   "chars": 69,
+   "attempts": [
+    {
+     "seed": 4205944688,
+     "voice_id": "3KdkB2LF6PUw0muuS0j7",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 69,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|And this one is drinking purple soda before noon.",
+   "voice": "carmen",
+   "chars": 65,
+   "attempts": [
+    {
+     "seed": 2771143188,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 61065,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 65,
+   "status": "ok"
+  },
+  {
+   "line": "log|First it's one little flame. Then it's music. Then people have friends over. I've seen where it goes.",
+   "voice": "log",
+   "chars": 160,
+   "attempts": [
+    {
+     "seed": 2555191272,
+     "voice_id": "DmA9AOv6Fsic2LQdqVVM",
+     "bytes": 137969,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 160,
+   "status": "ok"
+  },
+  {
+   "line": "toad|That makes it worse. Do you have it in white? With the crusts cut off?",
+   "voice": "toad",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 144078859,
+     "voice_id": "jcb48kKcDpNXjAxnAP2c",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I couldn't pull the one at the pond out either. ...Maybe it's easier in California.",
+   "voice": "tom",
+   "chars": 126,
+   "attempts": [
+    {
+     "seed": 3737721998,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 91994,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 126,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|So we bring twenty-four and tell Bernadette it's a tasting menu.",
+   "voice": "tnb",
+   "chars": 128,
+   "attempts": [
+    {
+     "seed": 526016158,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 79037,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 128,
+   "status": "ok"
+  },
+  {
+   "line": "grace|That's bigger than the golf cart. And it's in Los Angeles. I said Los Angeles.",
+   "voice": "grace",
+   "chars": 137,
+   "attempts": [
+    {
+     "seed": 520263972,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 108712,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 137,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|I've seen your stoves. A flame the size of a pea, burning all day and all night so somebody can boil one egg. I'm putting them to work.",
+   "voice": "bigone",
+   "chars": 198,
+   "attempts": [
+    {
+     "seed": 3693811148,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 190632,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 198,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Then something small and on fire picked a gold thing up off the sidewalk and ran toward the boulevard. I wrote it down as a raccoon. I know it wasn't a raccoon.",
+   "voice": "bernadette",
+   "chars": 212,
+   "attempts": [
+    {
+     "seed": 1474544864,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 188124,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 212,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Your father says he once baked sixty loaves in one morning. He has never baked.",
+   "voice": "deedee",
+   "chars": 151,
+   "attempts": [
+    {
+     "seed": 2742260771,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 103278,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 151,
+   "status": "ok"
+  },
+  {
+   "line": "rose|I'm going to be number one.",
+   "voice": "rose",
+   "chars": 45,
+   "attempts": [
+    {
+     "seed": 820829704,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 38077,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 45,
+   "status": "ok"
+  },
+  {
+   "line": "washington|You're the one who's always on a plane, Tom. Did you bring this home with you?",
+   "voice": "washington",
+   "chars": 221,
+   "attempts": [
+    {
+     "seed": 1095227573,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 221,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|The mud gets a muffin and I don't?",
+   "voice": "boppy",
+   "chars": 84,
+   "attempts": [
+    {
+     "seed": 1436049704,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 84,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|No, he didn't. There's no draft in here.",
+   "voice": "skeeter",
+   "chars": 75,
+   "attempts": [
+    {
+     "seed": 1481459891,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 61065,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 75,
+   "status": "ok"
+  },
+  {
+   "line": "odette|Go on, then. And Tom, if my gumbo isn't hot by six, I'm telling Bernadette it was your idea.",
+   "voice": "odette",
+   "chars": 145,
+   "attempts": [
+    {
+     "seed": 1131944350,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 118743,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 145,
+   "status": "ok"
+  },
+  {
+   "line": "olivia|He's got it.",
+   "voice": "olivia",
+   "chars": 37,
+   "attempts": [
+    {
+     "seed": 910251242,
+     "voice_id": "3KdkB2LF6PUw0muuS0j7",
+     "bytes": 24284,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 37,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|No. Is it cold?",
+   "voice": "carmen",
+   "chars": 59,
+   "attempts": [
+    {
+     "seed": 1106322074,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 52287,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 59,
+   "status": "ok"
+  },
+  {
+   "line": "log|Then I got here just in time.",
+   "voice": "log",
+   "chars": 42,
+   "attempts": [
+    {
+     "seed": 3138528730,
+     "voice_id": "DmA9AOv6Fsic2LQdqVVM",
+     "bytes": 47272,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 42,
+   "status": "ok"
+  },
+  {
+   "line": "toad|I tried. It was too hot. Before that it was too cold. I'd like to speak to whoever packed me.",
+   "voice": "toad",
+   "chars": 150,
+   "attempts": [
+    {
+     "seed": 1850717709,
+     "voice_id": "jcb48kKcDpNXjAxnAP2c",
+     "bytes": 130446,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 150,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I promise. I packed a ruler.",
+   "voice": "tom",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 2041033650,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 48526,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|She came by at seven to check on us. She called me the Other Tom and said my bowls were too close together.",
+   "voice": "tnb",
+   "chars": 142,
+   "attempts": [
+    {
+     "seed": 3207817356,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 99517,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 142,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Thank you. Who's the lady behind you with the clipboard?",
+   "voice": "grace",
+   "chars": 92,
+   "attempts": [
+    {
+     "seed": 3868761352,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 59811,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 92,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|And they're no good. Every flame on the street, and I still can't get warm. A fire's no use with nothing to bake.",
+   "voice": "bigone",
+   "chars": 165,
+   "attempts": [
+    {
+     "seed": 1103617774,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 149672,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 165,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Write that down and sign it. Nobody on this street ever does.",
+   "voice": "bernadette",
+   "chars": 108,
+   "attempts": [
+    {
+     "seed": 1793333937,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 67752,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 108,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
+   "voice": "deedee",
+   "chars": 211,
+   "attempts": [
+    {
+     "seed": 4077787941,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 134207,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 211,
+   "status": "ok"
+  },
+  {
+   "line": "rose|It's bigger than a BUS! It ate a boat!",
+   "voice": "rose",
+   "chars": 86,
+   "attempts": [
+    {
+     "seed": 2936960305,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 86,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Seven. And it never once came up at a block meeting.",
+   "voice": "washington",
+   "chars": 187,
+   "attempts": [
+    {
+     "seed": 2660867686,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 79037,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 187,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|The first one. Tom, you heard her.",
+   "voice": "boppy",
+   "chars": 79,
+   "attempts": [
+    {
+     "seed": 3389437180,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 46018,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 79,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|It's an old building. They all do this. Have you tried a sweater?",
+   "voice": "skeeter",
+   "chars": 111,
+   "attempts": [
+    {
+     "seed": 344839492,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 111,
+   "status": "ok"
+  },
+  {
+   "line": "odette|Bernadette, your diagram had my gumbo behind the paper plates.",
+   "voice": "odette",
+   "chars": 87,
+   "attempts": [
+    {
+     "seed": 4216590247,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 74021,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 87,
+   "status": "ok"
+  },
+  {
+   "line": "olivia|Tom. A rosebush got sealed in orange glass, every stove on the block went out, and it was all fixed by six. I'd love a quote.",
+   "voice": "olivia",
+   "chars": 177,
+   "attempts": [
+    {
+     "seed": 1707119136,
+     "voice_id": "3KdkB2LF6PUw0muuS0j7",
+     "bytes": 123758,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 177,
+   "status": "ok"
+  },
+  {
+   "line": "carmen|Everyone got it. Then we moved the table.",
+   "voice": "carmen",
+   "chars": 73,
+   "attempts": [
+    {
+     "seed": 326489030,
+     "voice_id": "8ncJvaxiyfELP457mBLS",
+     "bytes": 59811,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 73,
+   "status": "ok"
+  },
+  {
+   "line": "log|Fine. Have your fun. Keep it down after ten.",
+   "voice": "log",
+   "chars": 94,
+   "attempts": [
+    {
+     "seed": 1580546623,
+     "voice_id": "DmA9AOv6Fsic2LQdqVVM",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 94,
+   "status": "ok"
+  },
+  {
+   "line": "toad|I'm still not eating the crust.",
+   "voice": "toad",
+   "chars": 49,
+   "attempts": [
+    {
+     "seed": 799530036,
+     "voice_id": "jcb48kKcDpNXjAxnAP2c",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 49,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You started without me. I made a schedule on the plane. It has tabs.",
+   "voice": "tom",
+   "chars": 114,
+   "attempts": [
+    {
+     "seed": 3696261702,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 114,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I said, 'Great note, Bernadette.' Then she stood there waiting for me to move them, and I opened a soda.",
+   "voice": "tnb",
+   "chars": 209,
+   "attempts": [
+    {
+     "seed": 397705254,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 125430,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 209,
+   "status": "ok"
+  },
+  {
+   "line": "grace|I'm Grace. I'm nine. I keep the chart.",
+   "voice": "grace",
+   "chars": 80,
+   "attempts": [
+    {
+     "seed": 577507047,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 57303,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 80,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|I don't take bread from a man holding a salad spinner.",
+   "voice": "bigone",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 1333618488,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|He was here fifteen minutes before your cab, 3468. You'd have seen him yourself if you were ever home.",
+   "voice": "bernadette",
+   "chars": 149,
+   "attempts": [
+    {
+     "seed": 1344569737,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 135461,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 5,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 149,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.",
+   "voice": "deedee",
+   "chars": 196,
+   "attempts": [
+    {
+     "seed": 2125278315,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 136715,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 3,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 196,
+   "status": "ok"
+  },
+  {
+   "line": "rose|AHHH! DEEDEE!",
+   "voice": "rose",
+   "chars": 27,
+   "attempts": [
+    {
+     "seed": 264945279,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 27,
+   "status": "ok"
+  },
+  {
+   "line": "washington|That'll be from her.",
+   "voice": "washington",
+   "chars": 87,
+   "attempts": [
+    {
+     "seed": 3654668760,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 127938,
+     "extra": 12,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "That'll be from her. That'll be from her. That'll be from her. That'll be from her."
+    },
+    {
+     "seed": 3785290569,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 126684,
+     "extra": 12,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "That'll be from her. That'll be from her. That'll be from her. That'll be from her."
+    }
+   ],
+   "chars_sent": 174,
+   "status": "needs human"
+  },
+  {
+   "line": "boppy|CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!",
+   "voice": "boppy",
+   "chars": 215,
+   "attempts": [
+    {
+     "seed": 2804281166,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 121251,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 215,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|I'm not holding anything. That flame was like that when I got here.",
+   "voice": "skeeter",
+   "chars": 110,
+   "attempts": [
+    {
+     "seed": 600236959,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 110,
+   "status": "ok"
+  },
+  {
+   "line": "odette|Thirty-eight thousand dollars, and the porch was already crooked.",
+   "voice": "odette",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 2163681946,
+     "voice_id": "ubIjwev8dFIC3TyJqJPC",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "olivia|That's a quote. I'm using it.",
+   "voice": "olivia",
+   "chars": 63,
+   "attempts": [
+    {
+     "seed": 2173299993,
+     "voice_id": "3KdkB2LF6PUw0muuS0j7",
+     "bytes": 43510,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 63,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Forty loaves, two at a time, forty-five minutes each. That's fifteen hours of oven, and we have nine.",
+   "voice": "tom",
+   "chars": 151,
+   "attempts": [
+    {
+     "seed": 3384014392,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 116235,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 4,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 151,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It was a long soda.",
+   "voice": "tnb",
+   "chars": 37,
+   "attempts": [
+    {
+     "seed": 2070543551,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 34315,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 37,
+   "status": "ok"
+  },
+  {
+   "line": "grace|A person! I said it was a person. What kind of car? What time? Did anybody get the license plate?",
+   "voice": "grace",
+   "chars": 152,
+   "attempts": [
+    {
+     "seed": 237543663,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 106204,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 152,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Too wet. Who taught you to shape a loaf?",
+   "voice": "bigone",
+   "chars": 74,
+   "attempts": [
+    {
+     "seed": 3232864311,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 57303,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 74,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Chained since 1963. I have the key. Nobody has ever asked me for it.",
+   "voice": "bernadette",
+   "chars": 132,
+   "attempts": [
+    {
+     "seed": 3791405763,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 112474,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 132,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.",
+   "voice": "deedee",
+   "chars": 167,
+   "attempts": [
+    {
+     "seed": 420961665,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 95755,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 167,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Hello, mud! Can we please have Deedee's muffins back? Thank you!",
+   "voice": "rose",
+   "chars": 94,
+   "attempts": [
+    {
+     "seed": 204963107,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 85724,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 94,
+   "status": "ok"
+  },
+  {
+   "line": "washington|The only thing at the end of the boulevard is the old Car Barn. My father drove the night streetcar out of it.",
+   "voice": "washington",
+   "chars": 247,
+   "attempts": [
+    {
+     "seed": 2875352680,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 111220,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 247,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Now that's real gold. Same as these. Look.",
+   "voice": "boppy",
+   "chars": 114,
+   "attempts": [
+    {
+     "seed": 2849788931,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 114,
+   "status": "ok"
+  },
+  {
+   "line": "skeeter|I'll be back in the winter. I always am.",
+   "voice": "skeeter",
+   "chars": 72,
+   "attempts": [
+    {
+     "seed": 2989549533,
+     "voice_id": "3NkCp1SubvPIw3g0s7Rf",
+     "bytes": 57303,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 72,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She'll count them. She counted the folding chairs at Mr. Washington's birthday.",
+   "voice": "tom",
+   "chars": 114,
+   "attempts": [
+    {
+     "seed": 3863139300,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 80291,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 114,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I've seen this movie, you know. The lady who runs the potluck always has something in her basement.",
+   "voice": "tnb",
+   "chars": 169,
+   "attempts": [
+    {
+     "seed": 2329732261,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 102025,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 169,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata, I like her.",
+   "voice": "grace",
+   "chars": 38,
+   "attempts": [
+    {
+     "seed": 2760026264,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 40585,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 38,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Better. Cut the top deeper next time. It needs somewhere to go.",
+   "voice": "bigone",
+   "chars": 127,
+   "attempts": [
+    {
+     "seed": 3883620997,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 127,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Then she can run the block meeting, because she'd be the first person on this street to keep a promise.",
+   "voice": "bernadette",
+   "chars": 136,
+   "attempts": [
+    {
+     "seed": 2159928605,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 97009,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 136,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|A ball of mud came through the door and took them. Pan and all.",
+   "voice": "deedee",
+   "chars": 112,
+   "attempts": [
+    {
+     "seed": 1126531133,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 66498,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 112,
+   "status": "ok"
+  },
+  {
+   "line": "rose|But I said PLEASE!",
+   "voice": "rose",
+   "chars": 43,
+   "attempts": [
+    {
+     "seed": 781183699,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 35569,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 43,
+   "status": "ok"
+  },
+  {
+   "line": "washington|If this turns out to be a parking meter, I'm going to be upset.",
+   "voice": "washington",
+   "chars": 198,
+   "attempts": [
+    {
+     "seed": 3953669495,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 198,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.",
+   "voice": "boppy",
+   "chars": 214,
+   "attempts": [
+    {
+     "seed": 4094846127,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 107458,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 3,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 214,
+   "status": "ok"
+  },
+  {
+   "line": "tom|What did you tell her?",
+   "voice": "tom",
+   "chars": 39,
+   "attempts": [
+    {
+     "seed": 3655631450,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 28046,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 39,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Two padlocks. On a shed.",
+   "voice": "tnb",
+   "chars": 96,
+   "attempts": [
+    {
+     "seed": 335825935,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 56049,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 96,
+   "status": "ok"
+  },
+  {
+   "line": "grace|The gold coin is with the biggest thing that woke up. Find it, put it in the hole, and call me when the color comes back.",
+   "voice": "grace",
+   "chars": 178,
+   "attempts": [
+    {
+     "seed": 4190414066,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 109966,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 178,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Hm. That one's a loaf.",
+   "voice": "bigone",
+   "chars": 62,
+   "attempts": [
+    {
+     "seed": 557387944,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 46018,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 62,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Who's asking?",
+   "voice": "bernadette",
+   "chars": 33,
+   "attempts": [
+    {
+     "seed": 3403304823,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 20105,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 33,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
+   "voice": "deedee",
+   "chars": 202,
+   "attempts": [
+    {
+     "seed": 357424713,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 188124,
+     "extra": 11,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "Girls, sneakers, girls, sneakers. Tom, hold the door. Hubby, you stay right there when we get them back the first one's yours. When we get them back the first one's yours."
+    },
+    {
+     "seed": 12914906,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 126684,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 404,
+   "status": "ok after regenerate"
+  },
+  {
+   "line": "rose|The grass is Boppy color!",
+   "voice": "rose",
+   "chars": 47,
+   "attempts": [
+    {
+     "seed": 405750929,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 36823,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 47,
+   "status": "ok"
+  },
+  {
+   "line": "washington|'Trim to regulation height.' Bernadette, you taped a notice to my roses.",
+   "voice": "washington",
+   "chars": 210,
+   "attempts": [
+    {
+     "seed": 759312065,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 95755,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 4,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 210,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?",
+   "voice": "boppy",
+   "chars": 201,
+   "attempts": [
+    {
+     "seed": 2956465275,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 94501,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 201,
+   "status": "ok"
+  },
+  {
+   "line": "tom|How long did she wait?",
+   "voice": "tom",
+   "chars": 46,
+   "attempts": [
+    {
+     "seed": 560282476,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 36823,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 46,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I'm going to stand over here, on the part of the sidewalk that still has a color.",
+   "voice": "tnb",
+   "chars": 139,
+   "attempts": [
+    {
+     "seed": 1119228539,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 85724,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 139,
+   "status": "ok"
+  },
+  {
+   "line": "grace|That's new. I need a new color for fire.",
+   "voice": "grace",
+   "chars": 93,
+   "attempts": [
+    {
+     "seed": 2374425785,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 76529,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 93,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|That's the first bread out of me since 1963. Don't stand there looking at it. Cut it.",
+   "voice": "bigone",
+   "chars": 158,
+   "attempts": [
+    {
+     "seed": 596720705,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 104950,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 158,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|White sedan. 8:42. Yes.",
+   "voice": "bernadette",
+   "chars": 70,
+   "attempts": [
+    {
+     "seed": 1589597968,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 70,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Girls, behind me. You three have till I count to three. Then I'm getting the hose.",
+   "voice": "deedee",
+   "chars": 180,
+   "attempts": [
+    {
+     "seed": 3634295980,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 150926,
+     "extra": 5,
+     "missing": 0,
+     "wrong": 0,
+     "flag": true,
+     "said": "Girls behind me. You three have till I count to three. Then I'm getting the hose. Then I'm getting the hose."
+    },
+    {
+     "seed": 1288890395,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 113727,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 360,
+   "status": "ok after regenerate"
+  },
+  {
+   "line": "rose|He's stuck! Tata, get him out!",
+   "voice": "rose",
+   "chars": 66,
+   "attempts": [
+    {
+     "seed": 886655742,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 66,
+   "status": "ok"
+  },
+  {
+   "line": "washington|It was inside a block all day.",
+   "voice": "washington",
+   "chars": 99,
+   "attempts": [
+    {
+     "seed": 1035403814,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 47272,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 99,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|The fish gets THREE?",
+   "voice": "boppy",
+   "chars": 90,
+   "attempts": [
+    {
+     "seed": 4177503098,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 29300,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 90,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She doesn't have a basement. She has that shed with the two padlocks.",
+   "voice": "tom",
+   "chars": 113,
+   "attempts": [
+    {
+     "seed": 4114271736,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 72767,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 113,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|That's what I don't like about it. The dough rises. The dog jumps. That thing is just waiting.",
+   "voice": "tnb",
+   "chars": 202,
+   "attempts": [
+    {
+     "seed": 2820587071,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 131700,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 202,
+   "status": "ok"
+  },
+  {
+   "line": "grace|The man rented a car AT THE AIRPORT. That means he flies back and forth. Like you. The next one is here. Come home.",
+   "voice": "grace",
+   "chars": 201,
+   "attempts": [
+    {
+     "seed": 3260401653,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 131700,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 201,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|I know what it is. It's my pension. Sixty years late, and a little flame carried it in this morning.",
+   "voice": "bigone",
+   "chars": 151,
+   "attempts": [
+    {
+     "seed": 2853660589,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 122505,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 151,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Give the niece my number, 3468. And don't get ideas. I'm not being friendly. She keeps records, and I respect records.",
+   "voice": "bernadette",
+   "chars": 206,
+   "attempts": [
+    {
+     "seed": 1099828434,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 155941,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 4,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 206,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Three.",
+   "voice": "deedee",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 1176916670,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 17597,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Your face is RED, Tata!",
+   "voice": "rose",
+   "chars": 35,
+   "attempts": [
+    {
+     "seed": 2573629662,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 35,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Hold on. This is the Car Barn loaf. My father brought one home every morning until they shut that place. Who baked this?",
+   "voice": "washington",
+   "chars": 397,
+   "attempts": [
+    {
+     "seed": 2501241352,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 168898,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 397,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Girls, you heard that. Forty minutes. Somebody watch the clock.",
+   "voice": "boppy",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 4275848409,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tom|That's your whole rosebush. It's inside an orange block the size of a minivan.",
+   "voice": "tom",
+   "chars": 110,
+   "attempts": [
+    {
+     "seed": 1372527601,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 97009,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 110,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Is that the chart? It has a key. It's color coded. That's the wall the detective has right before they take his badge away.",
+   "voice": "tnb",
+   "chars": 189,
+   "attempts": [
+    {
+     "seed": 330742922,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 127938,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 189,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.",
+   "voice": "grace",
+   "chars": 163,
+   "attempts": [
+    {
+     "seed": 1343319547,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 135461,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 163,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|So it's not even mine.",
+   "voice": "bigone",
+   "chars": 35,
+   "attempts": [
+    {
+     "seed": 1438522194,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 35,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Nineteen years I've carried this key. You're welcome in advance, since I won't hear it afterwards.",
+   "voice": "bernadette",
+   "chars": 136,
+   "attempts": [
+    {
+     "seed": 3006167644,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 114981,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 136,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Then it has three of my muffins and my pan. Keep walking.",
+   "voice": "deedee",
+   "chars": 98,
+   "attempts": [
+    {
+     "seed": 4192227219,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 71514,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 98,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Thank you, fish! There's a bug on my money!",
+   "voice": "rose",
+   "chars": 82,
+   "attempts": [
+    {
+     "seed": 3013575146,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 61065,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 82,
+   "status": "ok"
+  },
+  {
+   "line": "washington|Well, he took his time about it. You know, in 1979, when I bought that house...",
+   "voice": "washington",
+   "chars": 242,
+   "attempts": [
+    {
+     "seed": 963983905,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 117489,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 242,
+   "status": "ok"
+  },
+  {
+   "line": "tom|No, sir. But I've seen seven of them, and I know how to open one.",
+   "voice": "tom",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 2502886343,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|There are two of them now.",
+   "voice": "tnb",
+   "chars": 49,
+   "attempts": [
+    {
+     "seed": 1367184928,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 33061,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 49,
+   "status": "ok"
+  },
+  {
+   "line": "grace|It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.",
+   "voice": "grace",
+   "chars": 133,
+   "attempts": [
+    {
+     "seed": 2846078873,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 109966,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 133,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Sixty years, and the first gold through that door belongs to a shrub.",
+   "voice": "bigone",
+   "chars": 119,
+   "attempts": [
+    {
+     "seed": 1606184933,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 97009,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 119,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Don't be smart, Other Tom.",
+   "voice": "bernadette",
+   "chars": 40,
+   "attempts": [
+    {
+     "seed": 3881297353,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 40,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.",
+   "voice": "deedee",
+   "chars": 193,
+   "attempts": [
+    {
+     "seed": 3788943312,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 131700,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 193,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Boppy! Your fish is REAL! He's CAR size and he gave me money!",
+   "voice": "rose",
+   "chars": 81,
+   "attempts": [
+    {
+     "seed": 1076928237,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 81,
+   "status": "ok"
+  },
+  {
+   "line": "washington|I'm glad somebody on this street listens.",
+   "voice": "washington",
+   "chars": 108,
+   "attempts": [
+    {
+     "seed": 1519063962,
+     "voice_id": "ARRjeRIXQjOrcraWRDoq",
+     "bytes": 51034,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 108,
+   "status": "ok"
+  },
+  {
+   "line": "tom|They don't do anything. They just sit there.",
+   "voice": "tom",
+   "chars": 73,
+   "attempts": [
+    {
+     "seed": 4215596206,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 73,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I watch a lot of scary movies. That was good, though. Top ten.",
+   "voice": "tnb",
+   "chars": 166,
+   "attempts": [
+    {
+     "seed": 1861406362,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 79037,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 166,
+   "status": "ok"
+  },
+  {
+   "line": "grace|It's mine! Tata, get UP, it's getting away!",
+   "voice": "grace",
+   "chars": 80,
+   "attempts": [
+    {
+     "seed": 2892996786,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 66498,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 80,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|What time is this potluck?",
+   "voice": "bigone",
+   "chars": 42,
+   "attempts": [
+    {
+     "seed": 291164004,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 31807,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 42,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Forty loaves. Six o'clock. I don't care what's in there.",
+   "voice": "bernadette",
+   "chars": 89,
+   "attempts": [
+    {
+     "seed": 1070166219,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 67752,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 89,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|For once in his life he rounded down.",
+   "voice": "deedee",
+   "chars": 97,
+   "attempts": [
+    {
+     "seed": 980092958,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 97,
+   "status": "ok"
+  },
+  {
+   "line": "rose|You've got money in your TEETH!",
+   "voice": "rose",
+   "chars": 46,
+   "attempts": [
+    {
+     "seed": 1472257400,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 46,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Mr. Washington, there's a notice taped to your roses in there.",
+   "voice": "tom",
+   "chars": 82,
+   "attempts": [
+    {
+     "seed": 387677300,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 67752,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 82,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Through the dog door. Nara's never once used the dog door.",
+   "voice": "tnb",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 2980738097,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Nine papers. There were twelve. So the one with the pan still has three.",
+   "voice": "grace",
+   "chars": 115,
+   "attempts": [
+    {
+     "seed": 1799423026,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 104950,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 115,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|How many loaves?",
+   "voice": "bigone",
+   "chars": 38,
+   "attempts": [
+    {
+     "seed": 942750421,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 25538,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 38,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|At 5:30 this morning. Before the incident. It still applies.",
+   "voice": "bernadette",
+   "chars": 112,
+   "attempts": [
+    {
+     "seed": 2412464861,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 112,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|And that's my good twelve-cup pan on your head. It's never been in pond water in its life.",
+   "voice": "deedee",
+   "chars": 175,
+   "attempts": [
+    {
+     "seed": 1020608279,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 98263,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 175,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Under Lamby! Nobody looks under Lamby!",
+   "voice": "rose",
+   "chars": 74,
+   "attempts": [
+    {
+     "seed": 1884724925,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 57303,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 74,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You saw a person do this?",
+   "voice": "tom",
+   "chars": 41,
+   "attempts": [
+    {
+     "seed": 2206314262,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 41,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Then I guess we're following a flame down the street. Bring the dough. I'm not leaving loaf thirty-one alone with the dog.",
+   "voice": "tnb",
+   "chars": 225,
+   "attempts": [
+    {
+     "seed": 845040670,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 114981,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 225,
+   "status": "ok"
+  },
+  {
+   "line": "grace|It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.",
+   "voice": "grace",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 148615856,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 104950,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|I used to do two hundred before midnight. Load me. If this is my last shift, I'm not ending it on three.",
+   "voice": "bigone",
+   "chars": 159,
+   "attempts": [
+    {
+     "seed": 3786063517,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 134207,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 159,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|The date's on it.",
+   "voice": "bernadette",
+   "chars": 31,
+   "attempts": [
+    {
+     "seed": 3233262246,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 26792,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 31,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.",
+   "voice": "deedee",
+   "chars": 170,
+   "attempts": [
+    {
+     "seed": 2848750304,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 91994,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 170,
+   "status": "ok"
+  },
+  {
+   "line": "rose|One more ride, Tata! To the cab! Go the LONG way!",
+   "voice": "rose",
+   "chars": 67,
+   "attempts": [
+    {
+     "seed": 690402654,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 67,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Bernadette, that's the most useful thing anyone has told me in eight of these.",
+   "voice": "tom",
+   "chars": 99,
+   "attempts": [
+    {
+     "seed": 2261842865,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 76529,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 99,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It's grape. Do you want one?",
+   "voice": "tnb",
+   "chars": 91,
+   "attempts": [
+    {
+     "seed": 2131873958,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 91,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?",
+   "voice": "grace",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 76129111,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 112474,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Somebody's going to stand up tonight and say they arranged this bread. Somebody always did.",
+   "voice": "bigone",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 4117452943,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 108712,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|That bulb is evidence, 3468.",
+   "voice": "bernadette",
+   "chars": 64,
+   "attempts": [
+    {
+     "seed": 2669831710,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 56049,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 4,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 64,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|He's been in the middle of that one for fifty-one years.",
+   "voice": "deedee",
+   "chars": 105,
+   "attempts": [
+    {
+     "seed": 3264806053,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 105,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Before I touch anything, I have to make a phone call. I promised a nine-year-old.",
+   "voice": "tom",
+   "chars": 119,
+   "attempts": [
+    {
+     "seed": 2079138672,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 84470,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 119,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It's the only thing on this street that's the right temperature.",
+   "voice": "tnb",
+   "chars": 82,
+   "attempts": [
+    {
+     "seed": 950228423,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 82,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Deedee, what's that?",
+   "voice": "grace",
+   "chars": 30,
+   "attempts": [
+    {
+     "seed": 1696108107,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 33061,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 30,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Take your shrub money. And shut my door on the way out. I'd like to cool down slowly.",
+   "voice": "bigone",
+   "chars": 137,
+   "attempts": [
+    {
+     "seed": 4161092507,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 100771,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 137,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Then I want it logged first.",
+   "voice": "bernadette",
+   "chars": 45,
+   "attempts": [
+    {
+     "seed": 2206074770,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 45,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Twelve more. Forty minutes. The first one's still yours.",
+   "voice": "deedee",
+   "chars": 147,
+   "attempts": [
+    {
+     "seed": 1225723354,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 147,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I did not touch it. Look. Round hole, burnt bulb, grey patch.",
+   "voice": "tom",
+   "chars": 93,
+   "attempts": [
+    {
+     "seed": 2417464632,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 89486,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 93,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Thank you, Bernadette.",
+   "voice": "tnb",
+   "chars": 40,
+   "attempts": [
+    {
+     "seed": 3613609102,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 31807,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 40,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.",
+   "voice": "grace",
+   "chars": 197,
+   "attempts": [
+    {
+     "seed": 560267153,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 186870,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 197,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.",
+   "voice": "bigone",
+   "chars": 100,
+   "attempts": [
+    {
+     "seed": 3739685852,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 127938,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 100,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|Thirty-eight. Thirty-nine. That's thirty-nine, 3468. I said forty.",
+   "voice": "bernadette",
+   "chars": 127,
+   "attempts": [
+    {
+     "seed": 3126732073,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 118743,
+     "extra": 0,
+     "missing": 3,
+     "wrong": 8,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 127,
+   "status": "ok"
+  },
+  {
+   "line": "tom|A minivan.",
+   "voice": "tom",
+   "chars": 24,
+   "attempts": [
+    {
+     "seed": 1286635311,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 30554,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 24,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Chained from the outside since 1963. You lock a building to keep people out. You chain it to keep something in.",
+   "voice": "tnb",
+   "chars": 233,
+   "attempts": [
+    {
+     "seed": 1344128363,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 144238,
+     "extra": 0,
+     "missing": 2,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 233,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Because I don't know what any of it means yet.",
+   "voice": "grace",
+   "chars": 62,
+   "attempts": [
+    {
+     "seed": 1085972868,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 51034,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 62,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|It's my crown. A little muddy one brought it. I'm keeping it.",
+   "voice": "bigone",
+   "chars": 78,
+   "attempts": [
+    {
+     "seed": 947281031,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 78,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|The dog owes this street a loaf.",
+   "voice": "bernadette",
+   "chars": 46,
+   "attempts": [
+    {
+     "seed": 3145597935,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 44764,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 46,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Grace, somebody saw a man do this one. He came in a rental car.",
+   "voice": "tom",
+   "chars": 89,
+   "attempts": [
+    {
+     "seed": 2450499541,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 89,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Oh, we're going in. I just want it on the record that I knew.",
+   "voice": "tnb",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 1760365861,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "grace|I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!",
+   "voice": "grace",
+   "chars": 128,
+   "attempts": [
+    {
+     "seed": 3463477845,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 113727,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 128,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|GLUB! HA! You got me! I see everybody. I never saw you!",
+   "voice": "bigone",
+   "chars": 103,
+   "attempts": [
+    {
+     "seed": 759457578,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 119997,
+     "extra": 4,
+     "missing": 0,
+     "wrong": 1,
+     "flag": true,
+     "said": "Ha ha ha! Glam! Ha ha! You got me! I see everybody! I never saw you!"
+    },
+    {
+     "seed": 1263181070,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 112474,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 206,
+   "status": "ok after regenerate"
+  },
+  {
+   "line": "bernadette|Hot dishes on the left. Everyone got the diagram.",
+   "voice": "bernadette",
+   "chars": 81,
+   "attempts": [
+    {
+     "seed": 676950409,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 65244,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 81,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I know. They're going to start a newsletter.",
+   "voice": "tom",
+   "chars": 70,
+   "attempts": [
+    {
+     "seed": 3987763373,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 54795,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 70,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Tom. That's a turntable. They used to spin a whole streetcar on that.",
+   "voice": "tnb",
+   "chars": 142,
+   "attempts": [
+    {
+     "seed": 736925436,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 86978,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 142,
+   "status": "ok"
+  },
+  {
+   "line": "grace|That's Boppy. He's here every single day.",
+   "voice": "grace",
+   "chars": 61,
+   "attempts": [
+    {
+     "seed": 2344454208,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 61,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Take the pan. The sneaky one gets this. It's the only thing I've got.",
+   "voice": "bigone",
+   "chars": 106,
+   "attempts": [
+    {
+     "seed": 527106497,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 100771,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 106,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|If I could have your attention. The Watch would like to thank the Watch for arranging the bread.",
+   "voice": "bernadette",
+   "chars": 136,
+   "attempts": [
+    {
+     "seed": 1115895248,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 107458,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 136,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It ran toward the boulevard, and it was on fire.",
+   "voice": "tom",
+   "chars": 84,
+   "attempts": [
+    {
+     "seed": 3084144214,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 65244,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 84,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I need about an hour. But go ahead.",
+   "voice": "tnb",
+   "chars": 97,
+   "attempts": [
+    {
+     "seed": 33012354,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 97,
+   "status": "ok"
+  },
+  {
+   "line": "grace|The fish ate them, Boppy. The last three.",
+   "voice": "grace",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 3640950596,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|The man in the folding chair. Will he be back?",
+   "voice": "bigone",
+   "chars": 71,
+   "attempts": [
+    {
+     "seed": 240457584,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 65244,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 71,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Our pilot light just walked out of the house.",
+   "voice": "tom",
+   "chars": 61,
+   "attempts": [
+    {
+     "seed": 2452481846,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 48526,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 61,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It's a wet blanket. I'm not making a joke. Look at it.",
+   "voice": "tnb",
+   "chars": 151,
+   "attempts": [
+    {
+     "seed": 3910504513,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 151,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.",
+   "voice": "grace",
+   "chars": 128,
+   "attempts": [
+    {
+     "seed": 2218883631,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 129192,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 128,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|Good. He was in the middle of a story. The one about the race.",
+   "voice": "bigone",
+   "chars": 73,
+   "attempts": [
+    {
+     "seed": 2169134467,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 72767,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 73,
+   "status": "ok"
+  },
+  {
+   "line": "tom|We have forty loaves of raw dough and no fire.",
+   "voice": "tom",
+   "chars": 61,
+   "attempts": [
+    {
+     "seed": 3669575255,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 61,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Hi. We can hear you.",
+   "voice": "tnb",
+   "chars": 80,
+   "attempts": [
+    {
+     "seed": 3986308431,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 41838,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 80,
+   "status": "ok"
+  },
+  {
+   "line": "grace|That's my second best one. Don't lose it.",
+   "voice": "grace",
+   "chars": 70,
+   "attempts": [
+    {
+     "seed": 1488783039,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 61065,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 70,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Every flame on the block walked out. We're following them.",
+   "voice": "tom",
+   "chars": 83,
+   "attempts": [
+    {
+     "seed": 4262514624,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 83,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|You've got a flame in there. You could warm something up.",
+   "voice": "tnb",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 2878754842,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It's loaf thirty-one.",
+   "voice": "tom",
+   "chars": 42,
+   "attempts": [
+    {
+     "seed": 228173887,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 31807,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 42,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Three flames, one motor. On set I once fixed a zipper with a paper clip while the actor was still walking. This thing's holding still.",
+   "voice": "tnb",
+   "chars": 246,
+   "attempts": [
+    {
+     "seed": 3423657396,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 144238,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 246,
+   "status": "ok"
+  },
+  {
+   "line": "tom|So we're not going in?",
+   "voice": "tom",
+   "chars": 41,
+   "attempts": [
+    {
+     "seed": 619219112,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 43510,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 41,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|It says Boiler Room. I'm just reading it out loud so we both know.",
+   "voice": "tnb",
+   "chars": 124,
+   "attempts": [
+    {
+     "seed": 3363574839,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 124,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Do you need a minute?",
+   "voice": "tom",
+   "chars": 38,
+   "attempts": [
+    {
+     "seed": 1012484395,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 28046,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 38,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|No, you go. You're the one who's polite to things.",
+   "voice": "tnb",
+   "chars": 111,
+   "attempts": [
+    {
+     "seed": 2464149055,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 111,
+   "status": "ok"
+  },
+  {
+   "line": "tom|That blanket is talking, and it's soaking wet.",
+   "voice": "tom",
+   "chars": 79,
+   "attempts": [
+    {
+     "seed": 1568040703,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 79,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|He's got a point about the egg.",
+   "voice": "tnb",
+   "chars": 46,
+   "attempts": [
+    {
+     "seed": 3600066272,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 36823,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 46,
+   "status": "ok"
+  },
+  {
+   "line": "tom|We're having forty people over at six.",
+   "voice": "tom",
+   "chars": 53,
+   "attempts": [
+    {
+     "seed": 370332915,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 46018,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 53,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Forty.",
+   "voice": "tnb",
+   "chars": 21,
+   "attempts": [
+    {
+     "seed": 2059117065,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 21358,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 21,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Did you feel that?",
+   "voice": "tom",
+   "chars": 34,
+   "attempts": [
+    {
+     "seed": 2803875390,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 26792,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 34,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|We know exactly who.",
+   "voice": "tnb",
+   "chars": 38,
+   "attempts": [
+    {
+     "seed": 2574351770,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 34315,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 38,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You're holding one of our flames.",
+   "voice": "tom",
+   "chars": 49,
+   "attempts": [
+    {
+     "seed": 4178766040,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 35569,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 49,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Okay. Now I'll stand on the lawn.",
+   "voice": "tnb",
+   "chars": 96,
+   "attempts": [
+    {
+     "seed": 612183586,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 56049,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 96,
+   "status": "ok"
+  },
+  {
+   "line": "tom|You sound exactly like my first landlord.",
+   "voice": "tom",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 1307389723,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 52287,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|He called it.",
+   "voice": "tnb",
+   "chars": 41,
+   "attempts": [
+    {
+     "seed": 3980100651,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 26792,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 41,
+   "status": "ok"
+  },
+  {
+   "line": "tom|The starter is nine years old and it has a name.",
+   "voice": "tom",
+   "chars": 85,
+   "attempts": [
+    {
+     "seed": 3026691350,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 69006,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 85,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|I figured. Take a loaf for your mom.",
+   "voice": "tnb",
+   "chars": 86,
+   "attempts": [
+    {
+     "seed": 3065962345,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 86,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Nara, this is what you sound like.",
+   "voice": "tom",
+   "chars": 68,
+   "attempts": [
+    {
+     "seed": 423499801,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 68,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|We're fine. She thinks I moved the bowls.",
+   "voice": "tnb",
+   "chars": 103,
+   "attempts": [
+    {
+     "seed": 1967398539,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 56049,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 103,
+   "status": "ok"
+  },
+  {
+   "line": "tom|After you.",
+   "voice": "tom",
+   "chars": 24,
+   "attempts": [
+    {
+     "seed": 835570055,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 20105,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 24,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.",
+   "voice": "tnb",
+   "chars": 214,
+   "attempts": [
+    {
+     "seed": 956164779,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 137969,
+     "extra": 4,
+     "missing": 0,
+     "wrong": 4,
+     "flag": true,
+     "said": "Hey, babe, say flight. The small over second avenue turned purple this morning. It'll probably blow over. It'll probably blow over."
+    },
+    {
+     "seed": 1813152892,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 112474,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 3,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 428,
+   "status": "ok after regenerate"
+  },
+  {
+   "line": "tom|That oven is the size of our kitchen, and every flame on the block is inside it.",
+   "voice": "tom",
+   "chars": 104,
+   "attempts": [
+    {
+     "seed": 1889197749,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 93247,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 104,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Those flames belong to the stoves on 2nd Avenue.",
+   "voice": "tom",
+   "chars": 67,
+   "attempts": [
+    {
+     "seed": 1381403281,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 58557,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 67,
+   "status": "ok"
+  },
+  {
+   "line": "tom|We have dough.",
+   "voice": "tom",
+   "chars": 31,
+   "attempts": [
+    {
+     "seed": 261552520,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 34315,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 31,
+   "status": "ok"
+  },
+  {
+   "line": "tom|There's a gold coin on your door. I need it, and I have to tell you what it does before I take it.",
+   "voice": "tom",
+   "chars": 147,
+   "attempts": [
+    {
+     "seed": 1659501101,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 102025,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 147,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It isn't your pension. It opens an orange block on our street. When it does, every flame goes home and you go back to being an oven. A cold one. You won't be able to talk.",
+   "voice": "tom",
+   "chars": 236,
+   "attempts": [
+    {
+     "seed": 785600937,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 190632,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 236,
+   "status": "ok"
+  },
+  {
+   "line": "tom|No. It has a rosebush on it.",
+   "voice": "tom",
+   "chars": 60,
+   "attempts": [
+    {
+     "seed": 1547393903,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 52287,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 60,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Six o'clock.",
+   "voice": "tom",
+   "chars": 29,
+   "attempts": [
+    {
+     "seed": 1375454237,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 40585,
+     "extra": 2,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 29,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Thank you for the bread.",
+   "voice": "tom",
+   "chars": 41,
+   "attempts": [
+    {
+     "seed": 3596162196,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 29300,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 41,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It goes in the round hole. It's your rosebush, so it should be you.",
+   "voice": "tom",
+   "chars": 97,
+   "attempts": [
+    {
+     "seed": 3870676977,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 77783,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 97,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It's going in my mother's junk drawer with the other seven.",
+   "voice": "tom",
+   "chars": 74,
+   "attempts": [
+    {
+     "seed": 1200500556,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 48526,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 74,
+   "status": "ok"
+  },
+  {
+   "line": "tom|No comment.",
+   "voice": "tom",
+   "chars": 27,
+   "attempts": [
+    {
+     "seed": 3474667330,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 29300,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 27,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Somebody always did.",
+   "voice": "tom",
+   "chars": 42,
+   "attempts": [
+    {
+     "seed": 499873389,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 38077,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 42,
+   "status": "ok"
+  },
+  {
+   "line": "tom|An old-timer from the barn. He retired today.",
+   "voice": "tom",
+   "chars": 75,
+   "attempts": [
+    {
+     "seed": 3625456709,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 75,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I have to fly back tomorrow.",
+   "voice": "tom",
+   "chars": 43,
+   "attempts": [
+    {
+     "seed": 3038964257,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 35569,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 43,
+   "status": "ok"
+  },
+  {
+   "line": "tom|That leaves you alone on this street with Bernadette.",
+   "voice": "tom",
+   "chars": 70,
+   "attempts": [
+    {
+     "seed": 2112286720,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 53541,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 70,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Twenty years, one witness. That's a strong number one. What's number two?",
+   "voice": "tom",
+   "chars": 138,
+   "attempts": [
+    {
+     "seed": 2272711088,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 94501,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 138,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.",
+   "voice": "tom",
+   "chars": 171,
+   "attempts": [
+    {
+     "seed": 2454360948,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 142985,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 171,
+   "status": "ok"
+  },
+  {
+   "line": "tom|GAH! I'm on the floor. Grace, is that your elbow or mine?",
+   "voice": "tom",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 3009114480,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 97009,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She did. I was right here. It was an excellent please.",
+   "voice": "tom",
+   "chars": 103,
+   "attempts": [
+    {
+     "seed": 66921584,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 70260,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 103,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Yes. Right away. Everybody give the dragonfly some room.",
+   "voice": "tom",
+   "chars": 112,
+   "attempts": [
+    {
+     "seed": 2433407010,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 74021,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 112,
+   "status": "ok"
+  },
+  {
+   "line": "tom|It's the size of a plum. I carried a suitcase through two airports this morning.",
+   "voice": "tom",
+   "chars": 127,
+   "attempts": [
+    {
+     "seed": 2598745505,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 127,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Grace. I couldn't even make it wobble.",
+   "voice": "tom",
+   "chars": 78,
+   "attempts": [
+    {
+     "seed": 1474603007,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 78,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Why pencil?",
+   "voice": "tom",
+   "chars": 33,
+   "attempts": [
+    {
+     "seed": 2139614746,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 26792,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 33,
+   "status": "ok"
+  },
+  {
+   "line": "tom|GAH! Grace, I'm holding your hand. That's for me, not for you.",
+   "voice": "tom",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 3114132958,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 90740,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Mom. That's a boss. You don't just walk up to a boss.",
+   "voice": "tom",
+   "chars": 80,
+   "attempts": [
+    {
+     "seed": 733916922,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 74021,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 80,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Nobody does. She's gotten me in an empty room.",
+   "voice": "tom",
+   "chars": 83,
+   "attempts": [
+    {
+     "seed": 544704449,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 63990,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 83,
+   "status": "ok"
+  },
+  {
+   "line": "tom|I have a job. Yes. Does the job come with a pencil?",
+   "voice": "tom",
+   "chars": 80,
+   "attempts": [
+    {
+     "seed": 3216129153,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 75275,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 80,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Second best. It's going in the pocket with the zipper.",
+   "voice": "tom",
+   "chars": 89,
+   "attempts": [
+    {
+     "seed": 4263979689,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 65244,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 89,
+   "status": "ok"
+  },
+  {
+   "line": "tom|The long way. That's all the way around the Square. Twice.",
+   "voice": "tom",
+   "chars": 121,
+   "attempts": [
+    {
+     "seed": 609296902,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 79037,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 121,
+   "status": "ok"
+  }
+ ]
+}

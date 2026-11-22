@@ -1,0 +1,120 @@
+{
+ "summary": {
+  "made": "2026-11-19T03:15:26Z",
+  "lines_tried": 5,
+  "clips_made": 5,
+  "needs_human": 0,
+  "regenerated": 0,
+  "errors": 0,
+  "characters_sent": 623,
+  "usage_before": {
+   "used": 162540,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 162785,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 245
+ },
+ "lines": [
+  {
+   "line": "tom|I flew six hours for that pun?",
+   "voice": "tom",
+   "chars": 65,
+   "attempts": [
+    {
+     "seed": 2485401284,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 62318,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 65,
+   "status": "ok"
+  },
+  {
+   "line": "tnb|Scarier than movie night. Remember? You threw the whole popcorn bowl.",
+   "voice": "tnb",
+   "chars": 158,
+   "attempts": [
+    {
+     "seed": 2700290839,
+     "voice_id": "QPmHuIriDGOvu1d9U7wn",
+     "bytes": 81545,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 158,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Number eight is in Los Angeles. Call me BEFORE you touch it. I sharpened the pencil.",
+   "voice": "grace",
+   "chars": 138,
+   "attempts": [
+    {
+     "seed": 2039296151,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 93247,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 138,
+   "status": "ok"
+  },
+  {
+   "line": "bigone|If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.",
+   "voice": "bigone",
+   "chars": 142,
+   "attempts": [
+    {
+     "seed": 3640934099,
+     "voice_id": "qDteMRfOWoUEc7kcfWvl",
+     "bytes": 141731,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 142,
+   "status": "ok"
+  },
+  {
+   "line": "bernadette|3468. You're back. Don't touch that. It's on my street.",
+   "voice": "bernadette",
+   "chars": 120,
+   "attempts": [
+    {
+     "seed": 1661144193,
+     "voice_id": "2PhKaj7sDKqdDEhqQyhl",
+     "bytes": 82798,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 5,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 120,
+   "status": "ok"
+  }
+ ]
+}

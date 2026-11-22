@@ -1,0 +1,16 @@
+{
+ "michael|I've got it. Nobody get up.": {
+  "script": "[calm, unbothered, under load] I've got it. [easy, gentle] Nobody get up.",
+  "said": [
+   "I've got it. I've got it. I've got it. Nobody get up.",
+   "I've got it. I've got it. Nobody get up."
+  ]
+ },
+ "washington|That'll be from her.": {
+  "script": "[older African American man, warm Louisiana drawl, weary, certain] That'll be from HER.",
+  "said": [
+   "That'll be from her. That'll be from her. That'll be from her. That'll be from her.",
+   "That'll be from her. That'll be from her. That'll be from her. That'll be from her."
+  ]
+ }
+}

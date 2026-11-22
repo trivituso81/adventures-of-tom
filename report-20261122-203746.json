@@ -1,0 +1,329 @@
+{
+ "summary": {
+  "made": "2026-11-22T20:37:46Z",
+  "lines_tried": 16,
+  "clips_made": 16,
+  "needs_human": 0,
+  "regenerated": 0,
+  "errors": 0,
+  "characters_sent": 2171,
+  "usage_before": {
+   "used": 198686,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 199313,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 627
+ },
+ "lines": [
+  {
+   "line": "boppy|Gracie, my apple muffins are under there.",
+   "voice": "boppy",
+   "chars": 82,
+   "attempts": [
+    {
+     "seed": 551335263,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 43510,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 82,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
+   "voice": "deedee",
+   "chars": 233,
+   "attempts": [
+    {
+     "seed": 3758960620,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 137969,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 233,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Tata. At the apple muffins.",
+   "voice": "grace",
+   "chars": 48,
+   "attempts": [
+    {
+     "seed": 2052529413,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 49780,
+     "extra": 0,
+     "missing": 1,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 48,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
+   "voice": "rose",
+   "chars": 102,
+   "attempts": [
+    {
+     "seed": 1907972586,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 77783,
+     "extra": 1,
+     "missing": 0,
+     "wrong": 3,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 102,
+   "status": "ok"
+  },
+  {
+   "line": "tom|Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
+   "voice": "tom",
+   "chars": 135,
+   "attempts": [
+    {
+     "seed": 1289212766,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 109966,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 135,
+   "status": "ok"
+  },
+  {
+   "line": "kit|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.",
+   "voice": "kit",
+   "chars": 157,
+   "attempts": [
+    {
+     "seed": 61074924,
+     "voice_id": "zROpM0X5rfQMe4CN4C7f",
+     "bytes": 136715,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 157,
+   "status": "ok"
+  },
+  {
+   "line": "sal|Besides, you just got here. Go see your mother. She made apple muffins.",
+   "voice": "sal",
+   "chars": 111,
+   "attempts": [
+    {
+     "seed": 3387916379,
+     "voice_id": "gcJ5PkVgShIxtP5HgbZK",
+     "bytes": 100771,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 111,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|I'll stay here and guard the apple muffins, Deary.",
+   "voice": "boppy",
+   "chars": 95,
+   "attempts": [
+    {
+     "seed": 3505095017,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 47272,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 2,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 95,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
+   "voice": "deedee",
+   "chars": 211,
+   "attempts": [
+    {
+     "seed": 1987726853,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 134207,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 211,
+   "status": "ok"
+  },
+  {
+   "line": "grace|Your apple muffins are under California, Boppy. Don't move. I'm presenting.",
+   "voice": "grace",
+   "chars": 122,
+   "attempts": [
+    {
+     "seed": 3609952930,
+     "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
+     "bytes": 88232,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 122,
+   "status": "ok"
+  },
+  {
+   "line": "rose|Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
+   "voice": "rose",
+   "chars": 92,
+   "attempts": [
+    {
+     "seed": 3155985054,
+     "voice_id": "ocZQ262SsZb9RIxcQBOj",
+     "bytes": 89486,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 1,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 92,
+   "status": "ok"
+  },
+  {
+   "line": "tom|She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
+   "voice": "tom",
+   "chars": 167,
+   "attempts": [
+    {
+     "seed": 3104486147,
+     "voice_id": "cjVigY5qzO86Huf0OWal",
+     "bytes": 157195,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 167,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
+   "voice": "boppy",
+   "chars": 234,
+   "attempts": [
+    {
+     "seed": 3857244403,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 148418,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 234,
+   "status": "ok"
+  },
+  {
+   "line": "deedee|A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
+   "voice": "deedee",
+   "chars": 179,
+   "attempts": [
+    {
+     "seed": 2533370857,
+     "voice_id": "nh4f8rul91SCFqbXpyM0",
+     "bytes": 127938,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 179,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
+   "voice": "boppy",
+   "chars": 138,
+   "attempts": [
+    {
+     "seed": 2810984049,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 77783,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 138,
+   "status": "ok"
+  },
+  {
+   "line": "boppy|And the apple muffins are excellent.",
+   "voice": "boppy",
+   "chars": 65,
+   "attempts": [
+    {
+     "seed": 117982042,
+     "voice_id": "QzTKubutNn9TjrB7Xb2Q",
+     "bytes": 39331,
+     "extra": 0,
+     "missing": 0,
+     "wrong": 0,
+     "flag": false,
+     "said": ""
+    }
+   ],
+   "chars_sent": 65,
+   "status": "ok"
+  }
+ ]
+}

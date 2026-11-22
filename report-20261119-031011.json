@@ -1,0 +1,60 @@
+{
+ "summary": {
+  "made": "2026-11-19T03:10:11Z",
+  "lines_tried": 5,
+  "clips_made": 0,
+  "needs_human": 0,
+  "regenerated": 0,
+  "errors": 5,
+  "characters_sent": 623,
+  "usage_before": {
+   "used": 162237,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "usage_after": {
+   "used": 162237,
+   "limit": 600000,
+   "tier": "pro"
+  },
+  "aborted": null,
+  "credits_used_by_this_run": 0
+ },
+ "lines": [
+  {
+   "line": "tom|I flew six hours for that pun?",
+   "voice": "tom",
+   "chars": 65,
+   "attempts": [],
+   "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+  },
+  {
+   "line": "tnb|Scarier than movie night. Remember? You threw the whole popcorn bowl.",
+   "voice": "tnb",
+   "chars": 158,
+   "attempts": [],
+   "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+  },
+  {
+   "line": "grace|Number eight is in Los Angeles. Call me BEFORE you touch it. I sharpened the pencil.",
+   "voice": "grace",
+   "chars": 138,
+   "attempts": [],
+   "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+  },
+  {
+   "line": "bigone|If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.",
+   "voice": "bigone",
+   "chars": 142,
+   "attempts": [],
+   "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+  },
+  {
+   "line": "bernadette|3468. You're back. Don't touch that. It's on my street.",
+   "voice": "bernadette",
+   "chars": 120,
+   "attempts": [],
+   "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+  }
+ ]
+}
