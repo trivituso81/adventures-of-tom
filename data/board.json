@@ -28452,6 +28452,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Take me there: a play card opens the game at its spot, Fix: Try the game strip and Take me there, Fix: Try the game strip and Take me there is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T06:06:30.620Z"
     }
    ],
    "first": "Waits on the card Take me there: a play card opens the game at its spot.",
@@ -28459,6 +28464,10 @@
     "at": "2026-11-21T22:12:24Z",
     "verdict": "yours",
     "why": "it is about the 3440 x 1440 wide monitor and how the dashboard controls feel; a test browser cannot judge that screen"
+   },
+   "backlog": {
+    "at": "2026-11-21",
+    "from": "up"
    }
   },
   {
