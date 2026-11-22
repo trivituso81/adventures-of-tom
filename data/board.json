@@ -35313,7 +35313,7 @@
   {
    "id": "c-wanfeedback1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanfeedback1",
    "title": "Video cards say what their last run did",
@@ -35330,6 +35330,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (22:12): \"You have to explain to me in one sentence why I repeatedly have to click regenerate in the board with zero feedback on what happened after the last generation\" Tom (22:13): \"Yes\" (fix it)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanfeedback1: every video card says in one plain line what its last run did, and a dropped tap says so"
     }
    ],
    "prompt": {
@@ -35340,7 +35344,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-wangaveup-tom-blockade-r4",
@@ -35831,6 +35836,37 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T22:19:54-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1",
+    "pairmove1",
+    "wanstuck1",
+    "wanstuck1b",
+    "videohist1",
+    "wanpurpose1",
+    "wanqueue1",
+    "wanfeedback1"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1",
+    "c-pairmove1",
+    "c-wanstuck1",
+    "c-videohist1",
+    "c-wanpurpose1",
+    "c-wanqueue1",
+    "c-wanfeedback1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDLUieFcPSCe8LNEhP",
    "title": "Repair three tests that already failed on main",
    "first": "2026-11-21T22:09:52Z",
@@ -35872,35 +35908,6 @@
    "tags": [],
    "cards": [
     "t-costs2keys"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T22:03:04-08:00",
-   "tags": [
-    "wanch5",
-    "wanauto1",
-    "wanmop1",
-    "giddyupbake1",
-    "pairmove1",
-    "wanstuck1",
-    "wanstuck1b",
-    "videohist1",
-    "wanpurpose1",
-    "wanqueue1"
-   ],
-   "cards": [
-    "c-wanch5",
-    "c-wanauto1",
-    "c-wanmop1",
-    "c-giddyupbake1",
-    "c-pairmove1",
-    "c-wanstuck1",
-    "c-videohist1",
-    "c-wanpurpose1",
-    "c-wanqueue1"
    ]
   },
   {
@@ -40619,8 +40626,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "c121571faba7d5c4b54299862c25716f4dccf240",
- "synced_at": "2026-11-22T06:13:23+00:00",
+ "synced": "f4db489552d44e838d60709c04a03fb4135e4d88",
+ "synced_at": "2026-11-22T06:20:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
