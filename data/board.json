@@ -34838,7 +34838,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEfBtn2SmTzAcqk7uA",
+    "url": "https://claude.ai/code/session_01RXeukEfBtn2SmTzAcqk7uA",
     "opening": "added by videohist1"
    },
    "history": [
@@ -34849,6 +34849,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -34864,6 +34868,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEfBtn2SmTzAcqk7uA",
+   "title": "Video History rebuilds itself after every video run",
+   "first": "2026-11-22T05:32:52Z",
+   "last": "2026-11-22T05:32:52Z",
+   "tags": [],
+   "cards": [
+    "c-videohist-auto"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukH6de9RdduXtZtnif5",
    "title": "Fix the stopped video tom-blockade",
@@ -40054,8 +40068,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "0149f929c418677331def9fe1f2eb3a10533e721",
- "synced_at": "2026-11-22T05:29:43+00:00",
+ "synced": "1c2000ec899480c02f57b84d88f0dc122d02823d",
+ "synced_at": "2026-11-22T05:33:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
