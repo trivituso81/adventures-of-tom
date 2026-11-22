@@ -551,7 +551,7 @@ function rvDraw(){
   $('rvtitle').textContent=rowLabel(e); $('rvsub').textContent=e.tab+(e.group&&e.group!==e.tab?' · '+e.group:'')+' · '+STATE_NAME[ST[id]];
   const left=RV.q.filter(x=>ST[x]==='wait').length;
   $('rvcount').textContent=RV.mode==='queue'?(RV.i+1)+' of '+RV.q.length+' in this queue · '+left+' still waiting on you':'Not in the waiting queue';
-  const r=rs[RV.v]; if(r&&!e.clip) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
+  const r=rs[RV.v], av0=!r&&!e.clip&&autoVersion(e); if(r&&!e.clip) $('rvimg').src=urlOf(r); else if(av0&&av0.file) $('rvimg').src=rawU(av0.file); else $('rvimg').removeAttribute('src');   // fix-artgen3try: show the picture QA approved (it is in art/raw, not a result on this phone)
   if(r&&!e.clip&&svcLabel(r)) $('rvsub').textContent+=' · '+svcLabel(r);
   clipRvDraw(e,r);
   const ap=x=>x.gh?x.state==='approved':(e.versions||[]).some(v=>v.from==='v'+x.n), rj=x=>x.gh?x.state==='rejected':(e.rejects||[]).some(v=>v.from==='v'+x.n);
@@ -704,7 +704,7 @@ function openIds(ids){
 // ?review=<ids>: the review viewer on those entries (the ones waiting on Tom on this device)
 function reviewIds(ids){
   ids=linkIds(ids); if(!ids.length) return;
-  computeStates(); const w=ids.filter(id=>ST[id]==='wait');
+  computeStates(); const w=ids.filter(id=>ST[id]==='wait'||autoVersion(ENTRY[id]));   // fix-artgen3try: a picture QA approved opens here too, so the board's Not this one lands on NOT THIS ONE
   if(!w.length) return toast('Those pictures are not waiting for review on this device. Open Setup and press Check for pictures made for you.');
   RV.q=w; RV.mode='queue'; RV.i=0; RV.v=0; $('rv').hidden=false; document.body.style.overflow='hidden'; rvDraw();
 }

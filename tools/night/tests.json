@@ -135,6 +135,12 @@
    "minutes": 1
   },
   {
+   "id": "art-library__artgen3fix_test",
+   "cmd": "python3 -I tools/art-library/artgen3fix_test.py",
+   "group": "g2",
+   "minutes": 1
+  },
+  {
    "id": "art-library__artgen_lib_test",
    "cmd": "python3 -I tools/art-library/artgen_lib_test.py",
    "group": "g2",

@@ -610,7 +610,7 @@ function qaHtml(run){
   const qa=run.qa||{},ids=Object.keys(qa);if(!ids.length)return '';
   return ids.map(id=>{const v=qa[id],e=ART&&ART[id],t=e?shortT(e.title):id;
     const ap=(run.approved||[]).find(x=>x.id===id);
-    const body=(ap?'<div class="qs">Approved by QA ('+ap.yes+' of '+ap.of+') <a href="art.html?open='+esc(id)+'">Not this one</a></div>':'')+(v.yes!=null?'<div class="qs">QA '+v.yes+' of '+v.of+'</div>'+((v.failed||[]).length?(v.failed||[]).map(f=>'<div class="qf">Failed: '+esc(f.q)+(f.why?' ('+esc(f.why)+')':'')+'</div>').join(''):'<div>Nothing failed.</div>'):'<div>QA not run: '+esc(v.skipped||'no reason given')+'</div>');
+    const body=(ap?'<div class="qs">Approved by QA ('+ap.yes+' of '+ap.of+') <a href="art.html?review='+esc(id)+'">Not this one</a></div>':'')+(v.yes!=null?'<div class="qs">QA '+v.yes+' of '+v.of+'</div>'+((v.failed||[]).length?(v.failed||[]).map(f=>'<div class="qf">Failed: '+esc(f.q)+(f.why?' ('+esc(f.why)+')':'')+'</div>').join(''):'<div>Nothing failed.</div>'):'<div>QA not run: '+esc(v.skipped||'no reason given')+'</div>');
     return '<div class="qa"><a href="art.html?review='+esc(id)+'"><img alt="'+esc(t)+'" src="'+esc(ARTGEN_RAW()+(v.file||''))+'" loading="lazy"></a><div><b>'+esc(t)+'</b>'+body+'</div></div>';}).join('');
 }
 // artgen2: QA against Tom's own decisions, worked out from data/art-prompts.json the way tools/art-library/artqa_report.py does

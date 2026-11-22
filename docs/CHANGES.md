@@ -1,3 +1,20 @@
+## fix-artgen3try (2026-11-22): the auto-approve test card now holds real pictures to try it on: Grace's and Rose's party banners
+
+Card c-fix-artgen3try, from Tom on t-artgen3try: "i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh". Fact: the card was handed over with no pictures on it, and the board shows the Generate buttons only on a card that holds pictures, so there was nothing to tap. Two more gaps on the path he would click: the card's Not this one opened the Art Library list (`art.html?open=`), where NOT THIS ONE is not offered, and the review viewer showed no picture for a QA-approved entry (the picture is in art/raw, not a result on the phone).
+
+| Change | Where |
+|---|---|
+| t-artgen3try holds 4 real pictures the game needs (`done_when.art_approved`: banner-join-grace, banner-join-rose, banner-leave-grace, banner-leave-rose; Art Library link), a new title, and a next step that says in plain words what auto-approve is and the clicks from tap to seeing the banner in the game | `data/board.json` |
+| Party banners have a bake hook: an approved banner (by Tom or by QA) is baked by the art-bake Action into `art/banners/` and `data/party-banners.js`, so it shows in the game with no session | `tools/sprite-bake/bake_party_banner.py` (new), `bake` on the 20 entries in `tools/art-library/partybanner-prompts.js` and `data/art-prompts.json` |
+| The board's Not this one opens `art.html?review=<id>` | `board.html` |
+| `?review=` also opens a picture QA approved, and the viewer shows that picture (from art/raw) with NOT THIS ONE | `art.html` (`reviewIds`, `rvDraw`) |
+| New test; board_artgen_test checks the new link | `tools/art-library/artgen3fix_test.py`, `tools/board_artgen_test.py` |
+
+- Tested: a stand-in banner approved as if by QA, baked through `art_bake.py` in a scratch copy: `join-grace.webp` made and the game showed it as the painting (banner_hold_test, portrait and landscape, FAILS: []). The board card shows both buttons, 4 pictures, about $0.20, in portrait and landscape. The viewer test fails 9 ways on the old code and passes on the new.
+- Tests passing: `artgen3fix_test.py`, `artgen3_test.py`, `artgen_test.py`, `artgen_lib_test.py`, `board_artgen_test.py`, `cardlinks_test.py` (its unknown-id check waits only 1.2 s and failed once on timing, then passed twice), `board_check.py`, `validate.js`.
+- Pencil reports filed since 2026-11-22T02:11:01Z: none about this (the 19 open ones are chapter 2 story and map notes, left open).
+- No paid run made. The first auto-approve run is Tom's tap on t-artgen3try.
+
 ## board-menuux4 (2026-11-22): the new main menu is approved; its four build cards are on the board
 
 Card t-menuux-decide. Tom (11-21 18:20): "looks great now, just remove their heights and we can make the cards for this to be produced". The height labels are removed from the Family line-up in the drawings and the plan (the family still stands at real relative heights). New cards: c-menu1 (the look and the Family screen, Sonnet 5.5 high, Tom starts it), c-menu2 (Vibes and Gear), c-menu3 (Bag and System) and c-menu4 (switch on, purge the old menu), each Sonnet 5.5 medium and starting by itself, with Tom's look cards t-menu1look and t-menu4play. The bake method for the hero pictures is saved as `claude/menuux-mock/gen/bake_heroes.py`. Also new: c-b3gear, because gear changes nothing in the new battle yet (no `b3-*` file reads equipment). Card c-menuux-cards is closed as not needed. Nothing in the game changed.

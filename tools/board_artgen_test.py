@@ -126,7 +126,7 @@ try:
         ad = pg.inner_text('#sheet .pics')
         for want in ('Approved by QA: ' + two[0]['id'] + ' (11 of 12)', 'Waits for you: ' + two[1]['id'] + ', a must-pass check said no (f_text)', 'Approved by QA (11 of 12)', 'Not this one'):
             if want not in ad: fails.append('auto run lacks "%s": %s' % (want, ad[-500:]))
-        if pg.get_attribute('#sheet .pics .qa a[href^="art.html?open="]', 'href') != 'art.html?open=' + two[0]['id']: fails.append('Not this one link')
+        if pg.get_attribute('#sheet .pics .qa a[href^="art.html?review="]', 'href') != 'art.html?review=' + two[0]['id']: fails.append('Not this one link')
         pg.screenshot(path=f'{out}/board-artgen-autodone.png'); pg.click('#bclose')
         # a card in Waiting
         pg.evaluate("openSheet('t-pics-wait')")

@@ -27158,7 +27158,12 @@
     "art/raw/characters/grace-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27172,7 +27177,12 @@
     "art/raw/characters/grace-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27186,7 +27196,12 @@
     "art/raw/characters/rose-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27200,7 +27215,12 @@
     "art/raw/characters/rose-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27214,7 +27234,12 @@
     "art/raw/characters/amy-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27228,7 +27253,12 @@
     "art/raw/characters/amy-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27242,7 +27272,12 @@
     "art/raw/characters/deedee-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27256,7 +27291,12 @@
     "art/raw/characters/deedee-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27270,7 +27310,12 @@
     "art/raw/characters/boppy-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27284,7 +27329,12 @@
     "art/raw/characters/boppy-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27298,7 +27348,12 @@
     "art/raw/characters/tnb-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27312,7 +27367,12 @@
     "art/raw/characters/tnb-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27326,7 +27386,12 @@
     "art/raw/characters/justin-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27340,7 +27405,12 @@
     "art/raw/characters/justin-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27354,7 +27424,12 @@
     "art/raw/characters/olivia-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27368,7 +27443,12 @@
     "art/raw/characters/olivia-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27382,7 +27462,12 @@
     "art/raw/characters/nara-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nFront paws up, mouth open in a happy bark, ears perked.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nFront paws up, mouth open in a happy bark, ears perked.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27396,7 +27481,12 @@
     "art/raw/characters/nara-hero-v1.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nSitting, one front paw raised in a goodbye wave, head tilted.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nSitting, one front paw raised in a goodbye wave, head tilted.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27410,7 +27500,12 @@
     "art/raw/characters/tom-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "draft",
@@ -27424,7 +27519,12 @@
     "art/raw/characters/tom-hero-v2.png"
    ],
    "group": "Party banners",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.",
+   "bake": {
+    "script": "bake_party_banner.py",
+    "args": [],
+    "src": "tools/sprite-bake/src/party-banner-last.png"
+   }
   },
   {
    "status": "approved",

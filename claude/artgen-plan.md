@@ -199,3 +199,9 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 - Not changed: threshold 0.9, hold list (f_same stays advisory).
 - Measured: nothing; no xAI call was made. The first paid auto run is Tom's tap (card t-artgen3try). The Project copy of this file needs the same section.
 - Pre-existing test failures seen, not from this build: `board_test.py` (c-startme start button timed out) and four `board_sync_test.py` checks (R5 replay, two board_check cases). c-b3s18's long title was fixed because it stopped board_check.
+
+### fix-artgen3try (2026-11-22, Opus 5.5)
+
+- Tom could not test artgen3: t-artgen3try held no pictures, so no button showed. A try card for a pictures feature must hold real entries (`done_when.art_approved`) whose result Tom can see, never "wait for the next pictures card".
+- The card now holds Grace's and Rose's join and leave banners. Party banners got a bake hook (`tools/sprite-bake/bake_party_banner.py`, re-runs `bake_partybanners.py` with a new tag each run), so an approval puts them in the game with no session.
+- The board's Not this one opens `art.html?review=<id>`; `reviewIds` accepts a picture the job approved and `rvDraw` shows its art/raw file. Test: `tools/art-library/artgen3fix_test.py`.

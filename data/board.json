@@ -27239,8 +27239,8 @@
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
-   "title": "Try the auto-approve button on a pictures card",
-   "next": "No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN > BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly.",
+   "title": "Try auto-approve on Grace's and Rose's party banners",
+   "next": "What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -27257,9 +27257,33 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh Sent to Claude as card c-fix-artgen3try; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T02:11:01.660Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed by fix-artgen3try: this card had no pictures on it, so there was nothing to click. It now holds Grace's and Rose's 4 party banners (real art the game needs), Not this one opens the picture itself, and an approved banner goes into the game by itself."
     }
    ],
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "done_when": {
+    "art_approved": [
+     "banner-join-grace",
+     "banner-join-rose",
+     "banner-leave-grace",
+     "banner-leave-rose"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "banner-join-grace",
+      "banner-join-rose",
+      "banner-leave-grace",
+      "banner-leave-rose"
+     ],
+     "label": "Grace's and Rose's party banners"
+    }
+   ]
   },
   {
    "id": "t-guidegen-try",
@@ -32272,6 +32296,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Cause: t-artgen3try shipped with no pictures on it, and the button only shows on a card that holds pictures. Fix: the card holds Grace's and Rose's party banners; the board's Not this one opens the Library viewer on the approved picture (before: it opened the list and the viewer showed no picture); party banners got a bake hook so approval puts them in the game. No pencil report filed since was about this (all 19 open ones are chapter 2 notes)."
     }
    ],
    "prompt": {

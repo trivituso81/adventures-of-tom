@@ -42,12 +42,16 @@ STYLE
 Hand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D.`;
 }
 
+// fix-artgen3try: art_bake.py copies the approved picture to src and runs the script, which re-bakes every approved banner
+const BAKE = { script: 'bake_party_banner.py', args: [], src: 'tools/sprite-bake/src/party-banner-last.png' };
+
 const entries = [];
 for (const [id, name, ref] of MEMBERS) {
   for (const kind of ['join', 'leave']) {
     entries.push({ id: `banner-${kind}-${id}`, tab: 'Characters',
       title: `Party banner: ${name} ${kind === 'join' ? 'joins' : 'leaves'} the party (one wide painting, no words)`,
-      ar: '2:1', refs: [ref], group: 'Party banners', prompt: banner(kind, id === 'nara') });
+      ar: '2:1', refs: [ref], group: 'Party banners', prompt: banner(kind, id === 'nara'),
+      bake: BAKE });   // fix-artgen3try: approved -> in the game by the art-bake Action
   }
 }
 
