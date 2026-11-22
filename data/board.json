@@ -31328,42 +31328,18 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Generate the two fixed videos is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 2 videos (about $1.57).",
+     "at": "2026-11-22T02:54:54.431Z"
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T01:30:28Z",
+    "want": true,
+    "at": "2026-11-22T02:54:54Z",
     "n": 2,
-    "est": 1.57,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T01:36:32Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44971778287",
-     "n": 2,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [
-      {
-       "what": "rose-giddyup",
-       "why": "failed: bg, edge",
-       "card": "c-wanstop-rose-giddyup-r7"
-      },
-      {
-       "what": "deedee-wetfloor",
-       "why": "failed: p1, p2",
-       "card": "c-wanstop-deedee-wetfloor-r6"
-      }
-     ],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "bake_failed": {},
-     "spent": 1.58,
-     "build": null,
-     "watch": ""
-    }
+    "est": 1.57
    }
   },
   {
