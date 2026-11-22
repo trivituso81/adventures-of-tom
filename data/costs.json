@@ -1099,6 +1099,60 @@
    "source": "wan-gen run",
    "at": "2026-11-22T21:26:40Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45071921305"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 9.4,
+   "what": "wan-gen Action: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireba",
+   "source": "wan-gen run",
+   "at": "2026-11-22T21:47:35Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45071628174"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.1336,
+   "what": "wan-gen bulk look checks: t-movestage-lab",
+   "source": "wan-gen run",
+   "at": "2026-11-22T21:47:35Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45071628174"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.0026,
+   "what": "wan-gen Action: start picture facing check",
+   "source": "wan-gen run",
+   "at": "2026-11-22T22:03:36Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45075367833"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.15,
+   "what": "wan-gen Action: guide requests",
+   "source": "wan-gen run",
+   "at": "2026-11-22T22:03:38Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45075367833"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 1.45,
+   "what": "wan-gen Action: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireba",
+   "source": "wan-gen run",
+   "at": "2026-11-22T22:25:18Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45075789998"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.0185,
+   "what": "wan-gen bulk look checks: t-movestage-lab",
+   "source": "wan-gen run",
+   "at": "2026-11-22T22:25:18Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45075789998"
   }
  ],
  "balances": [

@@ -8286,7 +8286,7 @@
    "blocks": [
     "c-ch3build"
    ],
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "created": "2026-11-20",
    "history": [
     {
@@ -8343,6 +8343,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Play chapter 2 on your phone and report is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T22:12:58.802Z"
     }
    ],
    "first": "Nothing: build ch2lessons is pushed.",
@@ -8355,7 +8360,11 @@
     "verdict": "yours",
     "why": "it is listening to computer-voiced lines and reading rewritten jokes; sound and timing cannot be judged by a test browser"
    },
-   "where": "phone"
+   "where": "phone",
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "c-fix-effectslook-2",
@@ -26178,12 +26187,21 @@
      "d": "2026-11-22",
      "t": "Night QA looked at this card: it needs your eyes. it asks how the new battle looks and feels on the Duo and iPhone held in hand; that is look, feel and the real phone, which the test browser cannot judge.",
      "at": "2026-11-22T17:04:27.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T22:13:15.587Z"
     }
    ],
    "machine": {
     "at": "2026-11-22T17:04:27.000Z",
     "verdict": "yours",
     "why": "it asks how the new battle looks and feels on the Duo and iPhone held in hand; that is look, feel and the real phone, which the test browser cannot judge."
+   },
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
    }
   },
   {
@@ -27013,7 +27031,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
-   "next": "Fix shipped (build fix-menu4play-4). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the Party tab each person's name, then Level with the green bar, then HP should sit in one block above their picture, for all four, the same on both pages. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change.",
+   "next": "Fix shipped (build fix-menu4play-4). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the Party tab each person's name, then Level with the green bar, then HP should sit in one block above their picture, for all four, the same on both pages. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change. New since then (build vibelayout1): on the Vibes tab, Tom's head should sit level with the top of his name, with the name, Lv and XP to go on one line and the bar under it; under the four numbers are the Vibe Loadout cards (tap Primary or Secondary on a card to change it, tap the card to see its abilities on the right) with Row and the Quirk pills; the Descriptions switch is at the right of the abilities title. Say what to change if any of it looks off.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
     "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
@@ -27089,12 +27107,25 @@
      "d": "2026-11-22",
      "t": "Night QA looked at this card: it needs your eyes. it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge.",
      "at": "2026-11-22T17:04:27.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Vibes page re-laid out as Tom drew it (card c-vibelayout1, build vibelayout1); this card now asks him to look at it too."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T22:13:05.667Z"
     }
    ],
    "machine": {
     "at": "2026-11-22T17:04:27.000Z",
     "verdict": "yours",
     "why": "it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge."
+   },
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
    }
   },
   {
@@ -29142,10 +29173,11 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Remaking three flat moves: Blockade, Cube Pop,",
-   "next": "You reported 2 problems on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor; Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Pressing the button results in nothing happening",
+   "next": "You reported 3 problems on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor; Make Rose's Giddyup with Tom in it; Judge Tom's eight moves in the Move Lab. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: stuck for 2 hours",
    "blocks": [
     "t-movefun-gen",
-    "t-pairmove1-gen"
+    "t-pairmove1-gen",
+    "t-movestage-lab"
    ],
    "created": "2026-11-21",
    "changed": "2026-11-22",
@@ -29167,6 +29199,15 @@
      "words": "Pressing the button results in nothing happening",
      "shot": "",
      "asked": "Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him."
+    },
+    {
+     "at": "2026-11-22T22:07:55.217Z",
+     "card": "t-movestage-lab",
+     "title": "Judge Tom's eight moves in the Move Lab",
+     "ask": "animations",
+     "words": "stuck for 2 hours",
+     "shot": "",
+     "asked": "Nothing to tap yet. The wan-gen Action is making the 12 stage pictures, 8 object videos and 6 body videos for Tom's eight moves (about $6, inside the auto limits); the Claude build then adds the stage engine and the Move Lab. When this card says it is ready, open ADMIN ) BATTLE LAB ) NEW BATTLE ) MOVE LAB: TOM, watch each of the eight moves in a real fight, and tap Keep, Tweak or Replace on each. There is no separate watch card for these videos: the Lab is the only review."
     }
    ],
    "chat": {
@@ -29188,6 +29229,11 @@
      "d": "2026-11-22",
      "t": "Tom reported on t-pairmove1-gen: Pressing the button results in nothing happening",
      "at": "2026-11-22T14:55:56.588Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom reported on t-movestage-lab: stuck for 2 hours",
+     "at": "2026-11-22T22:07:55.854Z"
     }
    ],
    "prompt": {
@@ -29197,7 +29243,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
     "effort": "medium (fixing what you named, starting from what is there)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen, t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n2. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him. He wrote: Pressing the button results in nothing happening\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen, t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen, t-pairmove1-gen, t-movestage-lab in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n2. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him. He wrote: Pressing the button results in nothing happening\n3. Card t-movestage-lab (Judge Tom's eight moves in the Move Lab, ask animations). He was asked: Nothing to tap yet. The wan-gen Action is making the 12 stage pictures, 8 object videos and 6 body videos for Tom's eight moves (about $6, inside the auto limits); the Claude build then adds the stage engine and the Move Lab. When this card says it is ready, open ADMIN ) BATTLE LAB ) NEW BATTLE ) MOVE LAB: TOM, watch each of the eight moves in a real fight, and tap Keep, Tweak or Replace on each. There is no separate watch card for these videos: the Lab is the only review. He wrote: stuck for 2 hours\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen, t-pairmove1-gen, t-movestage-lab to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-movefun-gen"
   },
@@ -29916,12 +29962,13 @@
     "The page says Done when the picture is in the game; it says why in plain words when it is not. After about two minutes reload the page: the Generate this video button appears for Amy.",
     "Repeat for Boppy, Justin, Olivia, TNB and Nara (each is one tap on any of their moves).",
     "Open the Amy sheet again: the picture should be Amy facing left on flat magenta, same face and clothes as her hero. Tap All good, or Something is wrong and say who looks wrong.",
-    "Open the same person again: under their moves, the seven standard pose animations are listed. Tell me if a Victory pose is wrong for the person."
+    "Open the same person again: under their moves, the seven standard pose animations are listed. Tell me if a Victory pose is wrong for the person.",
+    "One time: install the free ntfy app, tap +, enter the name shown at the top of ADMIN > BATTLE GUIDE > Animations (Phone notifications), then press Send a test to my phone. You should see a message on your phone."
    ],
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics8",
+   "build": "startpics12b",
    "history": [
     {
      "d": "2026-11-22",
@@ -29990,7 +30037,7 @@
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
-   "col": "up",
+   "col": "done",
    "title": "Look at the new chapter title cards",
    "next": "Open the game from your home screen (close and reopen once if you see the old look). Tap NEW GAME, pick any chapter, and watch the title card at the start: a cream paper card with the chapter number and name, like the main menu. Check it in portrait and in landscape.",
    "first": "Wait for Chapter headings in the storybook look of the main menu to ship (build chaptercard1).",
@@ -30007,8 +30054,14 @@
      "d": "2026-11-22",
      "t": "Made by the session that built chaptercard1.",
      "at": "2026-11-22T17:17:01.379Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:38.648Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "c-fix-guideboot",
@@ -30316,7 +30369,7 @@
   {
    "id": "t-movestage-lab",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -30356,30 +30409,41 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": true,
-    "at": "2026-11-22T21:21:04Z",
-    "n": 26,
-    "est": 6,
+    "want": false,
+    "at": "2026-11-22T22:06:06Z",
+    "n": 1,
+    "est": 0.15,
+    "auto": true,
     "run": {
      "state": "done",
-     "at": "2026-11-22T20:42:28Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067718217",
+     "at": "2026-11-22T22:26:12Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45075789998",
      "n": 26,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [],
-     "waiting": [
-      "stage-tom-bluebang-vid",
-      "stage-tom-glare-vid",
-      "stage-tom-wingedshell-vid",
-      "stage-tom-runwaylights-vid",
-      "stage-tom-jetwash-vid",
-      "stage-tom-fireball-vid",
-      "stage-tom-starbeam-vid",
-      "stage-tom-meteor-vid"
+     "merged": [
+      "stage-tom-starbeam-vid"
      ],
-     "capped": [
+     "passed_not_baked": [],
+     "retried": [
+      "tom-controller",
+      "stage-tom-bluebang-vid"
+     ],
+     "stopped": [
+      {
+       "what": "tom-controller",
+       "why": "failed twice: p1",
+       "card": "t-wangaveup-tom-controller-r2"
+      },
+      {
+       "what": "stage-tom-bluebang-vid",
+       "why": "failed twice: edge",
+       "card": "t-wangaveup-stage-tom-bluebang-vid-r2"
+      }
+     ],
+     "waiting": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [
       "stage-tom-bluebang",
       "stage-tom-glare",
       "stage-tom-carryon",
@@ -30395,17 +30459,22 @@
       "tom-suitedoor",
       "tom-porsche",
       "tom-cartridge",
-      "tom-controller",
       "tom-shell",
-      "tom-konami"
+      "tom-konami",
+      "stage-tom-glare-vid",
+      "stage-tom-wingedshell-vid",
+      "stage-tom-runwaylights-vid",
+      "stage-tom-jetwash-vid",
+      "stage-tom-fireball-vid",
+      "stage-tom-meteor-vid"
      ],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
+     "gaveup": [
+      "tom-controller",
+      "stage-tom-bluebang-vid"
+     ],
      "bake_failed": {},
-     "spent": 0,
-     "build": null,
+     "spent": 1.47,
+     "build": "wanbulk-tmovestagelab-45075789998",
      "watch": "",
      "revs": {
       "stage-tom-bluebang": 1,
@@ -30423,16 +30492,16 @@
       "tom-suitedoor": 1,
       "tom-porsche": 1,
       "tom-cartridge": 1,
-      "tom-controller": 1,
+      "tom-controller": 2,
       "tom-shell": 1,
       "tom-konami": 1,
-      "stage-tom-bluebang-vid": 1,
+      "stage-tom-bluebang-vid": 2,
       "stage-tom-glare-vid": 1,
       "stage-tom-wingedshell-vid": 1,
       "stage-tom-runwaylights-vid": 1,
       "stage-tom-jetwash-vid": 1,
       "stage-tom-fireball-vid": 1,
-      "stage-tom-starbeam-vid": 1,
+      "stage-tom-starbeam-vid": 2,
       "stage-tom-meteor-vid": 1
      }
     }
@@ -30484,13 +30553,43 @@
     {
      "d": "2026-11-22",
      "t": "Run started again by the build session (the daily video limit was removed by Tom, wannoday1; the first two taps were stopped by it and spent nothing)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen run 45071628174: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-shell, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-fireball-vid, stage-tom-meteor-vid passed and are in the game (build wanbulk-tmovestagelab-45071628174). No watch card: Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 45071628174: 26 made (16 passed and in the game, build wanbulk-tmovestagelab-45071628174, 10 stopped)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wanstop session: tom-porsche (attempt 2, pad 0.8) accepted by eye and baked into the game (build wanstop-tom-porsche-r1); judge it in the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "tom-suitedoor accepted by eye after the bulk run stopped it (vision check p1 missed a move that is there): baked and wired to suite_door_slide (build wanstop-tom-suitedoor-r1). Judge it in the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: something is wrong: stuck for 2 hours Sent to Claude as card c-fix-movefun-gen; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T22:07:55.854Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen run 45075789998: stage-tom-starbeam-vid passed and are in the game (build wanbulk-tmovestagelab-45075789998). No watch card: Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 45075789998: 3 made (1 passed and in the game, build wanbulk-tmovestagelab-45075789998, 2 stopped); already made, nothing sent: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-suitedoor, tom-porsche, tom-cartridge, tom-shell, tom-konami, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-meteor-vid."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-crispvoices",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
@@ -30564,6 +30663,11 @@
      "d": "2026-11-22",
      "t": "Tom approved generating 16 voices (about 955 credits).",
      "at": "2026-11-22T20:41:13.996Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:30.611Z"
     }
    ],
    "vgen": {
@@ -30580,7 +30684,8 @@
      "needs_human": [],
      "note": "every line of this card already has a clip"
     }
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics2",
@@ -30634,7 +30739,7 @@
    "title": "Milestone: play chapter 11 on the new battle",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22a or a later name. Then CHAPTERS > Chapter 11 (or Take me there on the dashboard) and play to the last scene: the Standby Sprite on the concourse, then Julian Vance and FINAL CALL at Gate Infinity (about 30 minutes). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, does the Standby Sprite want a Break (4 pips, takes less damage behind its podium until Break or Panic Boil), is FINAL CALL 5 to 7 rounds, does Gate Change (it swaps one Front and one Back family member and shoves them back) read clearly, do the tips on the message line tell you what to do. Known and left alone: a few recorded lines before the boss still say the board calls one of you and Tom walks you on, because recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 11 on the old battle. The chapter 12 card (c-b3s22ch12) reads your note.",
    "blocks": [],
@@ -30652,8 +30757,14 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: Milestone for chapter 11 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:21.948Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch12",
@@ -30676,7 +30787,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 12, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(12)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 12 (Tom's street, Los Angeles): Gridlock Prime (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch12.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 12 behind the BY CHAPTER switch (add 12 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch12_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Gridlock Prime's rules (Four-Way Red Light: Guard Stance plus a Def and Atk buff) may need one small act field; add it the way stage 22a added `front_back`. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 12 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 13, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch12_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(12)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 12 that this session creates (ask play, `jump` {chapter: 12}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGhKSapgz3YahmvbdS",
+    "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
     "opening": "created by the b3s22 session"
    },
    "history": [
@@ -30695,6 +30806,10 @@
     },
     {
      "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
      "t": "Built chapter 12 on Battle 3 (build b3s22ch12): Gridlock Prime (boss, 7 pips; HP 1860, 1400 for three) and the Gridlock it calls (713 HP, 357 for three), Four-Way Red Light as a 30% Guard Stance plus +30% Def and +25% Atk, used once above and once below half HP, Total Gridlock below half. Numbers are the bestiary's, none changed: the simulator puts the fight at 6.8 rounds (aim 6 to 7). One small code change: the summon op reads hp3. The chapter has only the one fight, so the formation pays the boss's 45 VP. Chapter 12 test, checks and night manifest added; chapter 13 is the first unswitched chapter in the story test."
     }
    ],
@@ -30706,7 +30821,7 @@
    "title": "Battle stage 22: chapter 13 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 13 on Battle 3: Hushling (Hexer), Signal Fault (Elite), Turnstile Grump (Elite), Wired Relay Hushling (Special), Dual-Coast Drill Worm (Mini-boss), The Gold Knight (Boss). Starts after chapter 12 is switched on.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30722,13 +30837,22 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 13, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(13)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 13 (The tunnel under the dome, then frozen Long Island): Hushling (Hexer), Signal Fault (Elite), Turnstile Grump (Elite), Wired Relay Hushling (Special), Dual-Coast Drill Worm (Mini-boss), The Gold Knight (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch13.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 13 behind the BY CHAPTER switch (add 13 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch13_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The chapter holds Part 1 monsters returning as Part 2 versions, the Wired Relay Hushling and Drill Worm helper link (the boss takes less damage while a helper stands, and loses pips when a helper falls: engine work, spec section 1.1 and bestiary 1.1), and the Gold Knight. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 13 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 14, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch13_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(13)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 13 that this session creates (ask play, `jump` {chapter: 13}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
-    "opening": "created by the b3s22 session"
+    "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T22:13:22.215Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -31406,10 +31530,10 @@
    "id": "c-vibelayout1",
    "tag": "vibelayout1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Vibes page: smaller figure, loadout cards, abilities panel",
-   "next": "Building: smaller figure with its head top level with the name line, name, Lv and XP on one line, the Vibe Loadout cards (Primary, Secondary, Off), Row and Quirk pills, and the abilities panel with the Descriptions switch at its right.",
+   "next": "Built vibelayout1: the Vibes page has a smaller figure with the name, Lv and XP on one line, Vibe Loadout cards with Primary, Secondary and Off, Row and Quirk pills, and an abilities panel with the Descriptions switch at its right. Tested at five sizes (m2_test, b3_test s4 s9c s21). Not looked at on a real phone.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -31422,6 +31546,14 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"layout changes to the vibe tab of the character menu: shrink the character down so that the top of their head is aligned with the top of Level N, then shift all content up accordingly. Put Level N below the characters name but above the level up bar. redesign the area below the character stats as per the attached screenshot, but keeping your same fonts and color palette. move the descriptions toggle to the right side and mimic the layout in the second image\". Then: \"actually also adjust the level and experience bar and name to a similar layout as this\" (Tom, Lv 2 on one line, XP to go at the right, bar under). The last message wins over \"Level below the name\"."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Pushed vibelayout1 (docs/CHANGES.md has the list). Off on a Vibe in use only explains itself, because the rules have no empty Secondary. The Primes and Detonations link and the speed pill from the drawing were not added."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as vibelayout1: the Vibes page has a smaller figure, a one line name, Vibe Loadout cards and a new abilities panel"
     }
    ],
    "prompt": {
@@ -31432,6 +31564,880 @@
     "model": "Claude Sonnet 5.5 (row C: a layout change in one page)",
     "effort": "medium (one page, one stylesheet, tested at five sizes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-vibelayout1 in data/board.json. Your first push is the commit board: start c-vibelayout1. The Vibes page (engine/m2-vibes.js, m2.css) takes Tom's new layout: see the card history for his words. Test with python3 tools/m2_test.py, look at the screenshots, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics9",
+   "title": "Start pictures get their own line",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics9",
+   "next": "Built as startpics9: start pictures have their own workflow and queue, so videos cannot block or cancel them. Boppy and Nara pictures are done (Boppy's cap lettering is reversed). Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I just want to generate these images. I've been trying for over a day\". Cause: pictures shared a line with videos and were cancelled by them. Built startpics9.",
+     "at": "2026-11-22T21:27:30.822Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics10",
+   "title": "Queue any number of requests, notify each change",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics10",
+   "next": "Built as startpics10: requests queue and run four at a time, the next starts as one ends, and each status change goes to the phone through ntfy. Waits on your card t-startpics-try (one-time: install the ntfy app and add the topic shown on the Animations screen).",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"be able to send as many concurrent requests as I want, and they need to queue. And when one is completed, the next one needs to go, and then I need to be notified of the status change for each.\" Built startpics10.",
+     "at": "2026-11-22T21:45:53.371Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-stage-tom-suitedoor-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-suitedoor-r1",
+   "title": "Fix the stopped video stage-tom-suitedoor",
+   "next": "The bulk run stopped stage-tom-suitedoor (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukDpcAAHuT63xEfxbh5",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-suitedoor stopped at rev 1. attempt 1 (pad none) p1; attempt 2 (pad none) p1. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy sui"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-suitedoor-r1: the suite door picture was accepted and put in the game"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-suitedoor-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-suitedoor (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy sui. This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-suitedoor-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-suitedoor-r1.png, stage-tom-suitedoor-a2-r1.png. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-suitedoor-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-suitedoor-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-tom-suitedoor-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-suitedoor-r1",
+   "title": "Fix the stopped video tom-suitedoor",
+   "next": "The bulk run stopped tom-suitedoor (failed twice: edge, p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDg7gNwYBxxtNvKVfr",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-suitedoor stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) edge, p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instea"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session started (board: start)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Accepted the first video by eye (all measured checks passed; p1 was wrong), baked and wired. No new try."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-suitedoor-r1: accepted the first tom-suitedoor video by eye and put it in the game"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-suitedoor-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-suitedoor (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1. Evidence: edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instea. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-suitedoor-r1-result.json (every check with numbers and the look-check answers) and the videos tom-suitedoor-r1.mp4, tom-suitedoor-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-suitedoor-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-suitedoor-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T22:00:43Z",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-tom-porsche-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-porsche-r1",
+   "title": "Fix the stopped video tom-porsche",
+   "next": "The bulk run stopped tom-porsche (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGi55KazH2KyFdeGKJ",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-porsche stopped at rev 1. attempt 1 (pad none) edge; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the sp"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Accepted tom-porsche-a2-r1.mp4 (all measured checks passed, whole move visible, vision p1 miss was noise); baked and wired, no new try. No watch card (Move Lab judges)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-porsche-r1: the Tom Porsche body video is accepted and in the game, no new try"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-porsche-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-porsche (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the sp. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-porsche-r1-result.json (every check with numbers and the look-check answers) and the videos tom-porsche-r1.mp4, tom-porsche-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-porsche-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-porsche-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-tom-cartridge-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-cartridge-r1",
+   "title": "Fix the stopped video tom-cartridge",
+   "next": "The bulk run stopped tom-cartridge (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEaKhaK4QfzkbyjYCW",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-cartridge stopped at rev 1. attempt 1 (pad none) p1; attempt 2 (pad none) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action of blowing into cartridge with puffed chee"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-cartridge-r1: the cartridge blow video was accepted and put in the game"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-cartridge-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-cartridge (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action of blowing into cartridge with puffed chee. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-cartridge-r1-result.json (every check with numbers and the look-check answers) and the videos tom-cartridge-r1.mp4, tom-cartridge-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-cartridge-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-cartridge-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-tom-controller-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-controller-r1",
+   "title": "Fix the stopped video tom-controller",
+   "next": "Rev 2 (pad 0.65) was started by this session; the wan-gen Action checks it. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG36Y6npk36bx3nyZj",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-controller stopped at rev 1. attempt 1 (pad 0.8) edge, p1; attempt 2 (pad 0.8) edge, p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, "
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "at": "2026-11-22T22:03:51Z",
+     "t": "Looked at both rev 1 frames: the open hand flings left, then a fist is raised beside the shoulder, so the move reads; the hand touches the left edge in 14 to 15 pictures (a game picture fault). One change: pad 0.8 to 0.65, rev 2; prompt, start picture and settings kept. Started the next try on t-movestage-lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-controller-r1: Tom's Controller Toss video (rev 2) starts smaller so his flung hand clears the left edge"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-controller-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-controller (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1. Evidence: edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, . This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-controller-r1-result.json (every check with numbers and the look-check answers) and the videos tom-controller-r1.mp4, tom-controller-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-controller-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-controller-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-tom-konami-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-tom-konami-r1",
+   "title": "Fix the stopped video tom-konami",
+   "next": "Shipped: accepted by eye, baked and wired. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFKPJKcJbcFBoaHKiC",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): tom-konami stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding c"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session started: looking at both videos first."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Accepted by eye, no new try: both videos show the controller held in both hands, the tapping, one arms-up pose and the return; all measured checks passed, only the vision look check said no (wrongly). Baked and wired (konami_code plays tom_konami), build wanstop-tom-konami-r1. Judged in the Move Lab (t-movestage-lab)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-konami-r1: Tom's Konami Code body video is in the game, accepted by eye after two stopped tries"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-konami-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-konami (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding c. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-konami-r1-result.json (every check with numbers and the look-check answers) and the videos tom-konami-r1.mp4, tom-konami-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-konami-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-konami-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-stage-tom-bluebang-vid-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-bluebang-vid-r1",
+   "title": "Fix the stopped video stage-tom-bluebang-vid",
+   "next": "The bulk run stopped stage-tom-bluebang-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCfrWm6T1tT87CNc4b",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-bluebang-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both videos: the burst does the move but grows to fill the frame and its sparks touch the edge. Changed one thing, pad 0.65, rev 2; next try started on t-movestage-lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-bluebang-vid-r1: the blue burst video gets a smaller start picture so its sparks stay inside the frame, and the next try is started"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-bluebang-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-bluebang-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-bluebang-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-bluebang-vid-r1.mp4, stage-tom-bluebang-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-bluebang-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-bluebang-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-wanstop-stage-tom-glare-vid-r1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-glare-vid-r1",
+   "title": "Fix the stopped video stage-tom-glare-vid",
+   "next": "The bulk run stopped stage-tom-glare-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFoj8QppoZXk7BZuyJ",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-glare-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 96.6 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 40 of 90 pictures (limit 5 percent)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-glare-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-glare-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 96.6 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 40 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-glare-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-glare-vid-r1.mp4, stage-tom-glare-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-glare-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-glare-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00"
+  },
+  {
+   "id": "c-wanstop-stage-tom-jetwash-vid-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-jetwash-vid-r1",
+   "title": "Fix the stopped video stage-tom-jetwash-vid",
+   "next": "The bulk run stopped stage-tom-jetwash-vid (failed twice: bg, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-jetwash-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-jetwash-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-jetwash-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-jetwash-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-jetwash-vid-r1.mp4, stage-tom-jetwash-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-jetwash-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-jetwash-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-stage-tom-starbeam-vid-r1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Battle Animations",
+   "tag": "wanstop-stage-tom-starbeam-vid-r1",
+   "title": "Fix the stopped video stage-tom-starbeam-vid",
+   "next": "The bulk run stopped stage-tom-starbeam-vid (failed twice: motion) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEfWEg7m1o52RVDRy4",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45071628174): stage-tom-starbeam-vid stopped at rev 1. attempt 1 (pad none) motion; attempt 2 (pad none) motion. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: motion: the biggest change from the first picture is 0.6 of 255 (needs 2.0): it hardly moves"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both videos: the star and its trail sit almost still. Changed one thing: the motion sentence (the star pulses brighter and dimmer three times), rev 2. Next try started on t-movestage-lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-starbeam-vid-r1: the starbeam video (rev 2) pulses so the star visibly twinkles"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-starbeam-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-starbeam-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: motion. Evidence: motion: the biggest change from the first picture is 0.6 of 255 (needs 2.0): it hardly moves. This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-starbeam-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-starbeam-vid-r1.mp4, stage-tom-starbeam-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-starbeam-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-starbeam-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-22T21:56:27+00:00",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "b-wanbulk-tmovestagelab-45071628174",
+   "tag": "wanbulk-tmovestagelab-45071628174",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "16 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "next": "Done: 16 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanbulk-tmovestagelab-45071628174. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
+  },
+  {
+   "id": "c-startpics11",
+   "title": "Use this one: fix the failed push, show and notify its status",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics11",
+   "next": "Built as startpics11: the push step restarts from the newest main, the Guide keeps and resumes a waiting use, and your phone is notified when a take is in the game or failed. Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i said use in game and the status doesnt update. i cant even see it when its done\". Built startpics11.",
+     "at": "2026-11-22T22:30:00.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics11 in data/board.json. Your first push is the commit board: start c-startpics11. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "b-guideuse-45076526823",
+   "tag": "guideuse-45076526823",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide",
+   "next": "Done: Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideuse-45076526823. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
+  },
+  {
+   "id": "t-wangaveup-tom-controller-r2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "fyi": true,
+   "title": "The video tom-controller did not pass in 4 tries",
+   "next": "The Action stopped making tom-controller: it used 4 tries ($2.00). Last reason: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main throw and. Pick one.",
+   "choices": [
+    "Give it 4 more tries (Recommended)",
+    "Keep the move without a video for now"
+   ],
+   "leads": [
+    "A Claude session changes one thing and the Action tries up to 4 more times (at most $3.20), no tap needed.",
+    "The move plays with its stand-in until a later card picks it up."
+   ],
+   "blocks": [],
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45075789998): tom-controller used 4 tries ($2.00)."
+    }
+   ]
+  },
+  {
+   "id": "t-wangaveup-stage-tom-bluebang-vid-r2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "fyi": true,
+   "title": "The video stage-tom-bluebang-vid did not pass in 4 tries",
+   "next": "The Action stopped making stage-tom-bluebang-vid: it used 4 tries ($0.60). Last reason: edge: the object touches an edge of the picture in 15 of 90 pictures (limit 5 percent). Pick one.",
+   "choices": [
+    "Give it 4 more tries (Recommended)",
+    "Keep the move without a video for now"
+   ],
+   "leads": [
+    "A Claude session changes one thing and the Action tries up to 4 more times (at most $3.20), no tap needed.",
+    "The move plays with its stand-in until a later card picks it up."
+   ],
+   "blocks": [],
+   "wan_card": "t-movestage-lab",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (45075789998): stage-tom-bluebang-vid used 4 tries ($0.60)."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics12",
+   "title": "Guide videos get their own lane",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics12b",
+   "next": "Built as startpics12b: Battle Guide video requests run in their own lane and no longer wait behind bulk card runs. Waits on t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i generated a video for Tom and it's been siting for 10 minutes again\". Built startpics12b.",
+     "at": "2026-11-22T22:35:00.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics11 in data/board.json. Your first push is the commit board: start c-startpics11. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-squishyfont1",
+   "tag": "squishyfont1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Story and Dialogue",
+   "title": "Grace's squishy reveal: caption in the storybook font",
+   "next": "Built squishyfont1: the squishy close-up caption uses the chapter card's storybook typefaces. Looked at in portrait and landscape in the test browser; not on a phone.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDMncH1LTwaSPHWkpA",
+    "opening": "\"When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial.\" Read as the chapter title card typefaces (Bricolage Grotesque and Figtree)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Pushed squishyfont1. Caption lines are now a DOM caption in Bricolage Grotesque and Figtree (same as the chapter title card). board_sync_test already failed before this change."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as squishyfont1: Grace's squishy close-up names it in the chapter card's storybook type"
+    }
+   ],
+   "prompt": {
+    "what": "Restyles the squishy caption in storybook type.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: small visual change)",
+    "effort": "medium (one caption restyle)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-squishyfont1 in data/board.json. Your first push is the commit board: start c-squishyfont1. In engine/intro.js the squishy close-up caption lines are drawn with the pixel label font; draw them in the chapter card's typefaces (Bricolage Grotesque 800, Figtree) as a DOM caption in #stage, test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-sal-listen-swap",
+   "tag": "salslisten1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Characters",
+   "title": "Sal listens with a feeling frame, not the bad picture",
+   "next": "Replace Sal's listening frame with his loving feeling frame (hands on chest, warm), remove the bad listening picture and its wiring, test, push.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDXHrg4LAc6cfGD2xR",
+    "opening": "\"Sals listening frame is bad. Replace it with any other feeling frame.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"Sals listening frame is bad. Replace it with any other feeling frame.\" New card; the work is a small known edit."
+    }
+   ],
+   "prompt": {
+    "what": "Swaps Sal's bad listening frame for his loving feeling frame.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: known small edit)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md. Sal's listening frame (sal-listen, tk_listen) is replaced by his em_loving feeling frame in emoListen (engine/emotions.js); purge salls and the sal-listen picture. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "b-wanbulk-tmovestagelab-45075789998",
+   "tag": "wanbulk-tmovestagelab-45075789998",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "1 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "next": "Done: 1 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanbulk-tmovestagelab-45075789998. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
+  },
+  {
+   "id": "c-guideflow-plan",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "guideflow-plan",
+   "title": "Plan a Battle Guide animation flow that works",
+   "next": "A planning session reads the code and the run logs, writes claude/guide-flow-plan.md and puts the build cards on the board. No code and no paid run.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md first. Then do the work below. This is a PLANNING session\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"this is like a cruel joke\", \"i cant sit at the screen staring for minutes on end\", \"be able to send as many concurrent requests as I want, and they need to queue\". New card for the planning session.",
+     "at": "2026-11-22T22:40:34.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    }
+   ],
+   "prompt": {
+    "what": "Investigates the Battle Guide animation flow, writes the plan claude/guide-flow-plan.md and the build cards. Pushes a plan and cards only.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Fable 5.2 (row E, condition 3: Tom started this session on Fable himself; it is also an architecture decision other work is built on)",
+    "effort": "high (a design worked out with nothing written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-plan in data/board.json. Investigate the Battle Guide animation flow (battle-guide.html, the startpic-gen, wan-gen and guide-use workflows and their tools), write the plan claude/guide-flow-plan.md and put the build cards on the board. Push a plan and cards only, never code, and start no paid run. Your first push is the commit board: start c-guideflow-plan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -31462,6 +32468,128 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEfWEg7m1o52RVDRy4",
+   "title": "Fix the stopped video stage-tom-starbeam-vid",
+   "first": "2026-11-22T22:02:32Z",
+   "last": "2026-11-22T22:06:06Z",
+   "tags": [
+    "wanstop-stage-tom-starbeam-vid-r1"
+   ],
+   "cards": [
+    "c-wanstop-stage-tom-starbeam-vid-r1",
+    "t-movestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEaKhaK4QfzkbyjYCW",
+   "title": "Fix the stopped video tom-cartridge",
+   "first": "2026-11-22T22:01:10Z",
+   "last": "2026-11-22T22:04:47Z",
+   "tags": [
+    "wanstop-tom-cartridge-r1"
+   ],
+   "cards": [
+    "c-wanstop-tom-cartridge-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG36Y6npk36bx3nyZj",
+   "title": "Fix the stopped video tom-controller",
+   "first": "2026-11-22T21:59:42Z",
+   "last": "2026-11-22T22:04:12Z",
+   "tags": [
+    "wanstop-tom-controller-r1",
+    "wan"
+   ],
+   "cards": [
+    "c-wanstop-tom-controller-r1",
+    "t-movestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDg7gNwYBxxtNvKVfr",
+   "title": "Fix the stopped video tom-suitedoor",
+   "first": "2026-11-22T22:00:48Z",
+   "last": "2026-11-22T22:03:25Z",
+   "tags": [
+    "wanstop-tom-suitedoor-r1",
+    "wan"
+   ],
+   "cards": [
+    "c-wanstop-tom-suitedoor-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFoj8QppoZXk7BZuyJ",
+   "title": "Fix the stopped video stage-tom-glare-vid",
+   "first": "2026-11-22T22:03:11Z",
+   "last": "2026-11-22T22:03:11Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-stage-tom-glare-vid-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFKPJKcJbcFBoaHKiC",
+   "title": "Fix the stopped video tom-konami",
+   "first": "2026-11-22T21:58:31Z",
+   "last": "2026-11-22T22:02:24Z",
+   "tags": [
+    "wanstop-tom-konami-r1",
+    "wan"
+   ],
+   "cards": [
+    "c-wanstop-tom-konami-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGi55KazH2KyFdeGKJ",
+   "title": "Fix the stopped video tom-porsche",
+   "first": "2026-11-22T21:58:18Z",
+   "last": "2026-11-22T22:01:45Z",
+   "tags": [
+    "wanstop-tom-porsche-r1"
+   ],
+   "cards": [
+    "c-wanstop-tom-porsche-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCfrWm6T1tT87CNc4b",
+   "title": "Fix the stopped video stage-tom-bluebang-vid",
+   "first": "2026-11-22T21:58:37Z",
+   "last": "2026-11-22T22:00:55Z",
+   "tags": [
+    "wanstop-stage-tom-bluebang-vid-r1"
+   ],
+   "cards": [
+    "c-wanstop-stage-tom-bluebang-vid-r1",
+    "t-movestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDpcAAHuT63xEfxbh5",
+   "title": "Fix the stopped video stage-tom-suitedoor",
+   "first": "2026-11-22T21:59:49Z",
+   "last": "2026-11-22T21:59:49Z",
+   "tags": [
+    "wanstop-stage-tom-suitedoor-r1"
+   ],
+   "cards": [
+    "c-wanstop-stage-tom-suitedoor-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
+   "title": "Battle stage 22: chapter 12 on Battle 3",
+   "first": "2026-11-22T21:27:58Z",
+   "last": "2026-11-22T21:27:58Z",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch12"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
    "title": "Battle stage 23: purge battle 2 and Kindness",
@@ -31531,6 +32659,76 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+   "title": "Plan a Battle Guide animation flow that works",
+   "first": "2026-11-22T14:40:47-08:00",
+   "last": "2026-11-22T14:40:47-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-plan"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDMncH1LTwaSPHWkpA",
+   "title": "Grace's squishy reveal: caption in the storybook font",
+   "first": "2026-11-22T14:34:30-08:00",
+   "last": "2026-11-22T14:38:58-08:00",
+   "tags": [
+    "squishyfont1"
+   ],
+   "cards": [
+    "c-squishyfont1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDXHrg4LAc6cfGD2xR",
+   "title": "Sal listens with a feeling frame, not the bad picture",
+   "first": "2026-11-22T14:34:40-08:00",
+   "last": "2026-11-22T14:34:40-08:00",
+   "tags": [],
+   "cards": [
+    "c-sal-listen-swap"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+   "title": "Start pictures for the rest of the cast",
+   "first": "2026-11-22T06:57:31-08:00",
+   "last": "2026-11-22T14:34:04-08:00",
+   "tags": [
+    "startpics1",
+    "startpics2",
+    "startpics3",
+    "startpics4",
+    "startpics5",
+    "startpics7",
+    "guide",
+    "startpics8",
+    "wannoday1",
+    "repair",
+    "startpic",
+    "startpics9",
+    "startpics10",
+    "startpics11",
+    "startpics12",
+    "startpics12b"
+   ],
+   "cards": [
+    "c-startpics",
+    "c-startpics2",
+    "c-startpics3",
+    "c-startpics4",
+    "c-startpics5",
+    "c-startpics7",
+    "c-startpics8",
+    "b-wannoday1",
+    "c-startpics9",
+    "c-startpics10",
+    "c-startpics11",
+    "c-startpics12"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
    "title": "Battle system stage 20: Character Level by shared XP",
    "first": "2026-11-22T14:26:23Z",
@@ -31568,32 +32766,25 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
-   "title": "Start pictures for the rest of the cast",
-   "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T13:24:19-08:00",
+   "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
+   "title": "Battle stage 22: chapter 13 on Battle 3",
+   "first": "2026-11-22T14:15:21-08:00",
+   "last": "2026-11-22T14:15:21-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch13"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
+   "title": "Vibes page: smaller figure, loadout cards, abilities panel",
+   "first": "2026-11-22T13:16:22-08:00",
+   "last": "2026-11-22T13:29:26-08:00",
    "tags": [
-    "startpics1",
-    "startpics2",
-    "startpics3",
-    "startpics4",
-    "startpics5",
-    "startpics7",
-    "guide",
-    "startpics8",
-    "wannoday1",
-    "repair",
-    "startpic"
+    "vibelayout1"
    ],
    "cards": [
-    "c-startpics",
-    "c-startpics2",
-    "c-startpics3",
-    "c-startpics4",
-    "c-startpics5",
-    "c-startpics7",
-    "c-startpics8",
-    "b-wannoday1"
+    "c-vibelayout1"
    ]
   },
   {
@@ -31608,16 +32799,6 @@
    "cards": [
     "c-movestage-build",
     "t-movestage-lab"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
-   "title": "Vibes page: smaller figure, loadout cards, abilities panel",
-   "first": "2026-11-22T13:16:22-08:00",
-   "last": "2026-11-22T13:16:22-08:00",
-   "tags": [],
-   "cards": [
-    "c-vibelayout1"
    ]
   },
   {
@@ -37221,8 +38402,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "19aac4d4a6925cfe10f0fd448e4163d30a01a410",
- "synced_at": "2026-11-22T21:24:38+00:00",
+ "synced": "85f6fc62bf54903e09502ec2f0c8ffd79d36ba86",
+ "synced_at": "2026-11-22T22:41:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

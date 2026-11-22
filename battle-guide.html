@@ -225,6 +225,7 @@ async function boot(){
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;planRefresh();}).catch(()=>{});
+    fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;planRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
@@ -429,7 +430,7 @@ function renderList(){
     h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
   }else if(tab==='anims'){
     const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
-    h=planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    h=notifyHtml()+planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
     const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
     h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
@@ -800,6 +801,19 @@ function askStart(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
   $('gstartconf').innerHTML='<div class="conf"><p><b>This spends '+money(g.startCost||0.15)+'.</b> One picture of '+esc(ownerName(g.startWho))+', checked before it goes in the game. The most it can spend is $0.30.</p><div class="row2"><button type="button" class="gold" id="gstartgo">Yes, spend '+money(g.startCost||0.15)+'</button><button type="button" id="gstartcan">Cancel</button></div></div>';
 }
+let NOTIFY=null;
+function notifyHtml(){   // startpics10: how to get a phone notification for every status change of a picture or video
+  if(!NOTIFY||!NOTIFY.topic)return '';
+  return '<div class="card"><div class="k">Phone notifications</div><p>Get a notification on your phone each time a picture or video is in line, being made, checked, ready or failed, so you never have to watch this page.</p>'
+   +'<p class="hint">One time: 1. Install the free app <b>ntfy</b> from the App Store. 2. Open it, tap <b>+</b>, and enter this name exactly: <b>'+esc(NOTIFY.topic)+'</b> (leave the server as it is). 3. Press the button below: your phone should show a test message.</p>'
+   +'<p><button type="button" class="ghost" id="gnotest">Send a test to my phone</button></p><p class="hint" id="gnotestmsg"></p></div>';
+}
+async function sendNotifyTest(){
+  const m=$('gnotestmsg');if(!NOTIFY){return;}
+  try{const r=await fetch((NOTIFY.server||'https://ntfy.sh')+'/'+NOTIFY.topic,{method:'POST',body:'Test from the Battle Guide. Your phone will get a message like this each time a picture or video changes status.',headers:{Title:'Battle Guide test'}});
+    m.textContent=r.ok?'Sent. If your phone shows nothing within a few seconds, check that the ntfy app is subscribed to the name above.':'The test did not go through ('+r.status+').';}
+  catch(e){m.textContent='The test did not go through: '+e.message;}
+}
 const STARTING={};   // startpics7: a person whose picture was already asked for in this page is not asked for again
 async function queueLine(tok){   // startpics7: what is ahead of a request, from the Actions list (needs the GitHub token the page already uses)
   try{const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
@@ -985,23 +999,30 @@ function askUse(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
   $('guseconf').innerHTML='<div class="conf"><p><b>This changes the game.</b> '+(a.clip?'Take '+t.n+' replaces the current video of '+esc(a.name)+'; the old one is removed from the game (Git keeps it).':'Take '+t.n+' becomes the video of '+esc(a.name)+'.')+' It costs nothing and takes a few minutes.</p><div class="row2"><button type="button" class="gold" id="guseyes">Yes, use it</button><button type="button" id="gusecan">Cancel</button></div></div>';
 }
+let GUSE={};try{GUSE=JSON.parse(lsGet('aot-guide-use')||'{}')||{};}catch(e){GUSE={};}   // startpics11: a use that was sent and not yet answered, kept so a reload or another screen still shows its status
 async function doUse(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const at=new Date().toISOString(),box=$('guseconf');box.innerHTML='<p class="hint">Sending...</p>';
   try{await ghRequest('data/guide-use.json','guide: use '+a.id,d=>{d.requests.push({anim:a.id,take:t.n,at,prompt:t.prompt||workPrompt(a)});});}
   catch(e){box.innerHTML='<p class="err">'+esc(e.message)+'. Nothing was changed.</p>';return;}
-  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake');
-  while(alive()&&Date.now()-t0<20*60000){
+  GUSE[a.id]={n:t.n,at};saveLS('aot-guide-use',GUSE);
+  pollUse(a,t.n,at);
+}
+async function pollUse(a,n,at){
+  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake'),box=()=>$('guseconf')||$('gtake');
+  const t00=Math.max(t0-(Date.now()-new Date(at).getTime()),t0-25*60000);
+  while(alive()&&Date.now()-t00<25*60000){
     const g=await ghGetJson('use-report.json','guidegen',lsGet(TOKEN)).catch(()=>null);
     if(g&&g.doc&&(g.doc.reqs||[]).includes(at)){
       const ok=(g.doc.done||[]).find(x=>x.anim===a.id),bad=(g.doc.failed||[]).find(x=>x.anim===a.id);
-      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+t.n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight.</p></div>'
-        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Send Claude a note below.</div>';
+      delete GUSE[a.id];saveLS('aot-guide-use',GUSE);
+      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight. Your phone also gets a notification.</p></div>'
+        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Open the animation and tap Use this one again.</div>';
       return;
     }
-    if(alive())box.innerHTML='<p class="hint" id="guseWait">Putting it in the game, '+Math.round((Date.now()-t0)/1000)+' s. This takes about 3 to 6 minutes.</p>';
+    if(alive())box().innerHTML='<div class="take"><h3>Sent to the game</h3><p class="hint" id="guseWait">Take '+n+' of '+esc(a.name)+' is being put in the game, '+Math.round((Date.now()-new Date(at).getTime())/1000)+' s so far. This takes about 3 to 6 minutes. You can leave this screen: the status comes back when you open this animation, and your phone gets a notification.</p></div>';
     await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
   }
-  if(alive())box.innerHTML='<p class="err">No answer after 20 minutes. Tell Claude, or send the note below.</p>';
+  if(alive())box().innerHTML='<p class="err">No answer after 25 minutes. Tell Claude, or send the note below.</p>';
 }
 function tryAgain(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
@@ -1016,6 +1037,7 @@ async function initMake(a){
   const tok=GCUR.tok;await loadTakes();if(GCUR.tok!==tok||PL.a!==a||!$('gtake'))return;showStats(a);
   const A=takesOf(a),last=A.takes[A.takes.length-1],pend=GPEND[a.id];
   if(pend&&!A.takes.find(x=>x.n===pend.n)){waitTake(a,pend.n,pend.at);return;}
+  if(GUSE[a.id]){pollUse(a,GUSE[a.id].n,GUSE[a.id].at);return;}
   if(A.stop&&$('ghow')){$('gtake').innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
   if(last)showTake(a,last);
 }
@@ -1177,6 +1199,7 @@ function doSearch(){const q=$('q').value.trim();if(q.length>1||sFilter==='plan')
 // ---------- taps ----------
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,a');if(!t)return;
+  if(t.id==='gnotest'){sendNotifyTest();return;}
   if(t.dataset.tab){$('q').value='';$('searchbar').hidden=true;go(t.dataset.tab,'');return;}
   if(t.dataset.anim){e.preventDefault();openPlayer(t.dataset.anim);return;}
   if(t.dataset.go){if(t.dataset.vibePick)vibeSel[t.dataset.id]=t.dataset.vibePick;if($('q').value){$('q').value='';$('searchbar').hidden=true;}go(t.dataset.go,t.dataset.id);return;}

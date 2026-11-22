@@ -95,9 +95,23 @@ def VG(pg, E, name):
             if w[2] == 'Deedee':
                 pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-deedee-vibes.png'))
     E("()=>{ M2.sel=0; M2.who=null; m2Render(); }")
-    check('Freelancer' in t and 'Master all' in t, f'{name}: locked Freelancer chip missing')
-    n = E("()=>document.querySelectorAll('#m2 .m2-vc:not(.lock)').length")
-    check(n == E("()=>B3_CAST[m2Who().id].vibes.length"), f'{name}: {n} Vibe chips')
+    check('vibe loadout' in t.lower() and 'Freelancer:' in t, f'{name}: Vibe Loadout header or the Freelancer count is missing')
+    n = E("()=>document.querySelectorAll('#m2 .m2-vcard').length")
+    check(n == E("()=>B3_CAST[m2Who().id].vibes.length"), f'{name}: {n} Vibe cards')
+    # vibelayout1: name, Lv and XP on one line with the bar under it; the Descriptions switch sits at the right of the abilities title
+    lay = E("""()=>{ const q=s=>document.querySelector('#m2 '+s), r=e=>e&&e.getBoundingClientRect();
+      const wn=r(q('.m2-wn')),lv=r(q('.m2-lvl')),xt=r(q('.m2-xt')),xb=r(q('.m2-xb')),fig=r(q('.m2-hfig')),h2=r(q('.m2-ah h2')),sw=r(q('.m2-dsw'));
+      return {wn,lv,xt,xb,fig,h2,sw,name:(m2Who()||{}).id}; }""")
+    if lay['wn']:
+        check(abs((lay['lv']['top'] + lay['lv']['bottom']) / 2 - (lay['wn']['top'] + lay['wn']['bottom']) / 2) < 22, f'{name}: Lv is not on the name line')
+        check(lay['xb']['top'] >= lay['wn']['bottom'] - 1, f'{name}: the XP bar is not under the name')
+        if lay['xt']['top'] < lay['xb']['top']:
+            check(lay['xt']['right'] > lay['lv']['right'], f'{name}: the XP to go is not at the right of Lv')
+    if lay['fig'] and lay['fig']['width'] > 0 and lay['wn'] and lay['name'] == 'tom':
+        check(abs(lay['fig']['top'] - lay['wn']['top']) <= 3, f'{name}: the top of Tom\'s head is {lay["fig"]["top"] - lay["wn"]["top"]:.1f}px from the top of the name line')
+    if lay['h2'] and lay['sw']:
+        check(lay['sw']['left'] > lay['h2']['right'] - 2 or lay['sw']['top'] > lay['h2']['bottom'] - 2, f'{name}: the Descriptions switch is not beside or under the title')
+        check(lay['sw']['right'] > lay['h2']['left'] + (lay['sw']['left'] - lay['h2']['left']), f'{name}: the Descriptions switch is not at the right')
     check(E("()=>[...document.querySelectorAll('#m2 .m2-kr')].length") >= 5, f'{name}: kit list too short')
     check('Pep' in t, f'{name}: no Pep cost in the kit')
     pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-vibes.png'))
@@ -110,11 +124,29 @@ def VG(pg, E, name):
     other = E("()=>{ const m=m2Who(),L=m2Loadout(m); return B3_CAST[m.id].vibes.find(v=>v!==L.main); }")
     pg.click(f'#m2 [data-m2=vibe][data-a={other}]')
     pg.wait_for_timeout(150)
-    pg.click('#m2 [data-m2=main]')
+    check(E("(v)=>M2.vibe===v", other) is True, f'{name}: tapping a Vibe card did not pick it for the abilities panel')
+    check(E("(v)=>document.querySelector('#m2 .m2-ah h2').textContent.startsWith(B3_VIBES[v].name)", other) is True, f'{name}: the abilities title does not name the picked Vibe')
+    pg.click(f'#m2 [data-m2=main][data-a={other}]')
     pg.wait_for_timeout(200)
     check(E("(v)=>m2Loadout(m2Who()).main===v", other) is True, f'{name}: Make it Main did not change the Main Vibe')
     check(E("(v)=>m2Loadout(m2Who()).pocket!==v") is True, f'{name}: Pocket still the new Main')
-    pg.click('#m2 [data-m2=pocket]') if E("()=>!!document.querySelector('#m2 [data-m2=pocket]')") else None
+    third = E("()=>{ const m=m2Who(),L=m2Loadout(m); return B3_CAST[m.id].vibes.find(v=>v!==L.main&&v!==L.pocket); }")
+    if third:
+        pg.click(f'#m2 [data-m2=pocket][data-a={third}]')
+        pg.wait_for_timeout(200)
+        check(E("(v)=>m2Loadout(m2Who()).pocket===v", third) is True, f'{name}: Secondary on a card did not make it the Secondary Vibe')
+    # Off on a Vibe that is in use changes nothing (a Vibe steps out when another takes its place)
+    snap = E("()=>JSON.stringify(m2Loadout(m2Who()))")
+    pg.click(f'#m2 [data-m2=off][data-a={other}]')
+    pg.wait_for_timeout(120)
+    check(E("()=>JSON.stringify(m2Loadout(m2Who()))") == snap, f'{name}: Off changed the loadout')
+    # a Rank not reached yet opens its words when tapped
+    if E("()=>!!document.querySelector('#m2 [data-m2=peekrow]')"):
+        pg.click('#m2 [data-m2=peekrow]')
+        pg.wait_for_timeout(120)
+        check(E("()=>!!document.querySelector('#m2 .m2-peek')") is True, f'{name}: tapping a future Rank row did not open it')
+        pg.click('#m2 [data-m2=peekrow][aria-expanded=true]')
+        check(E("()=>!document.querySelector('#m2 .m2-peek')") is True, f'{name}: tapping an open future Rank row did not close it')
     # the row control: Back is refused for the last person in Front
     E("()=>{ for(const p of party) { const L=m2Loadout(p); if(L) b3SetRow(L,'back'); } b3SetRow(m2Loadout(party[0]),'front'); m2Render(); }")
     check(E("()=>!!document.querySelector('#m2 [data-m2=row][data-a=back]:disabled')") is True, f'{name}: Back row not refused for the last in Front')

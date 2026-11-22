@@ -59,7 +59,8 @@ jobs:
     # wanstuck1 (2026-11-21): one run at a time, set on the JOB, not the workflow. At workflow level every push to main joined the group, and GitHub
     # keeps only one waiting run per group, so an unrelated push (whose job is skipped) cancelled a waiting paid run: Tom's tap at 04:31 UTC was lost that way.
     concurrency:
-      group: wan-gen
+      # startpics12 (2026-11-22): a video asked for in the Battle Guide has its own lane. It waited 10+ minutes behind a bulk card run (up to 170 min) in the same group.
+      group: "wan-gen-${{ ((github.event_name == 'workflow_dispatch' && inputs.requests == 'true') || startsWith(github.event.head_commit.message, 'wan: generate ')) && 'guide' || 'bulk' }}"
       cancel-in-progress: false
     timeout-minutes: 170
     env:
@@ -228,10 +229,18 @@ jobs:
         # his Amy video and Nara picture taps were lost or delayed that way (the request stayed in data/wan-requests.json with no run to make it). A run that is not a guide run
         # therefore looks at data/wan-requests.json on the newest main when it ends and, if anything is still asked, starts one guide run. A guide run never starts another (no loop).
         run: |
-          # a guide run starts another only when it left videos queued behind its pictures (startpics8), never otherwise (no loop)
-          if [ "$MODE" = guide ] && ! grep -q 'stay queued for the next run' "$RUNNER_TEMP/run.log" 2>/dev/null; then echo "guide run, nothing deferred"; exit 0; fi
+          # startpics10: a guide run starts the next run when requests were tapped WHILE it was working (their `at` is later than this run's start) or it left videos behind its pictures
+          # (startpics8). A guide run takes everything that was there when it began, so what is left is new and the run cannot loop on its own leftovers. One line, one run at a time:
+          # that is the queue, and the next request starts the moment this run ends.
           git fetch -q --depth 1 origin main
-          n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('requests') or []))")
+          START=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}" | python3 -c "import json,sys; print(json.load(sys.stdin).get('run_started_at',''))")
+          if [ "$MODE" = guide ]; then
+            n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; s=sys.argv[1]; print(len([r for r in (json.load(sys.stdin).get('requests') or []) if (r.get('at') or '') > s]))" "$START")
+            if ! grep -q 'stay queued for the next run' "$RUNNER_TEMP/run.log" 2>/dev/null && [ "$n" -eq 0 ]; then echo "guide run, nothing new and nothing deferred"; exit 0; fi
+            [ "$n" -eq 0 ] && n=1
+          else
+            n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('requests') or []))")
+          fi
           echo "requests still asked: $n"
           if [ "$n" -gt 0 ]; then
             curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \

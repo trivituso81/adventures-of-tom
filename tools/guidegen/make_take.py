@@ -88,6 +88,11 @@ def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=Tr
         if (p['gate'] or {}).get('hold') and (q['gate'] or {}).get('hold') and f:
             A['stop'], A['stopWhy'] = True, 'Takes %d and %d were held by the clip gate for the same fault (%s).' % (p['n'], q['n'], ', '.join(sorted(f)))
     state['spent'] = round(sum(v['spent'] for v in state['anims'].values()), 4)
+    try:   # startpics10: the final outcome goes to the phone
+        import notify
+        ok = take['status'] == 'new'
+        notify.send(notify.label(row.get('anim')), ('Ready to review in the Battle Guide. ' + ((take.get('gate') or {}).get('words') or '')) if ok else ('Did not work: ' + str(take.get('why') or take['status'])[:160]), tags='white_check_mark' if ok else 'x')
+    except Exception: pass
     return take
 
 
