@@ -31850,7 +31850,7 @@
   {
    "id": "c-wanstuck1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstuck1",
    "title": "Video runs no longer get lost or stuck",
@@ -31867,6 +31867,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (20:53): \"Aaamaaand we're stuck yet again\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop"
     }
    ],
    "prompt": {
@@ -31877,7 +31881,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-wanstuck1-watch",
@@ -34520,7 +34525,7 @@
   {
    "id": "c-wanstop-tom-blockade-r3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-blockade-r3",
    "title": "Fix the stopped video tom-blockade",
@@ -34528,18 +34533,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukH6de9RdduXtZtnif5",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44987261923): tom-blockade stopped at rev 3. attempt 1 (pad none) edge, p1, p2, p3; attempt 2 (pad none) edge, p1, p2, p3. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33); p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose varies but never clearly holds both arms out like; p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame.); p3: Reading the pi"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34550,12 +34558,13 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-blockade-r3 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-blockade (rev 3) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1, p2, p3. Evidence: edge: the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33); p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose varies but never clearly holds both arms out like; p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame.); p3: Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and  (No wide blocking pose held or clear return sequence ma. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-blockade-r3-result.json (every check with numbers and the look-check answers) and the videos tom-blockade-r3.mp4, tom-blockade-a2-r3.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-blockade-r3` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-blockade-r3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T05:11:55+00:00"
   },
   {
    "id": "c-wanstop-grace-cubepop-r4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-grace-cubepop-r4",
    "title": "Fix the stopped video grace-cubepop",
@@ -34563,18 +34572,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEJ9MnPb7xooquuzBC",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44987261923): grace-cubepop stopped at rev 4. attempt 1 (pad none) p1, p2; attempt 2 (pad none) p1, p2. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once)"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34585,12 +34597,13 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-grace-cubepop-r4 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job grace-cubepop (rev 4) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: grace-cubepop-r4-result.json (every check with numbers and the look-check answers) and the videos grace-cubepop-r4.mp4, grace-cubepop-a2-r4.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-grace-cubepop-r4` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-grace-cubepop-r4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T05:11:55+00:00"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r10",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -34598,18 +34611,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDLQ1SUuvYvgjga3AQ",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44987261923): deedee-wetfloor stopped at rev 10. attempt 1 (pad 0.55) edge, p1, p2; attempt 2 (pad 0.55) p1, p2. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34620,7 +34636,8 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r10 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 10) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r10-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r10.mp4, deedee-wetfloor-a2-r10.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r10` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r10. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T05:11:55+00:00"
   }
  ],
  "sessions": [
@@ -35129,6 +35146,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T21:11:06-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1",
+    "pairmove1",
+    "wanstuck1",
+    "wanstuck1b"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1",
+    "c-pairmove1",
+    "c-wanstuck1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEq7wEWHRwaEWCX5vt",
    "title": "Night cleanup: one bucket of cleanup every night",
    "first": "2026-11-21T21:01:32Z",
@@ -35272,26 +35312,6 @@
    ],
    "cards": [
     "c-nightshift"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T20:28:15-08:00",
-   "tags": [
-    "wanch5",
-    "wanauto1",
-    "wanmop1",
-    "giddyupbake1",
-    "pairmove1"
-   ],
-   "cards": [
-    "c-wanch5",
-    "c-wanauto1",
-    "c-wanmop1",
-    "c-giddyupbake1",
-    "c-pairmove1"
    ]
   },
   {
@@ -39774,8 +39794,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "12c15c3c9264cca6fc02ef731c36a057dd00226b",
- "synced_at": "2026-11-22T05:02:02+00:00",
+ "synced": "6a2e30163f923f7853d63e84e77bcaa3a65c6396",
+ "synced_at": "2026-11-22T05:11:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
