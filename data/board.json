@@ -34495,10 +34495,36 @@
     "n": 1,
     "est": 0.5,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T05:57:45Z",
+     "state": "done",
+     "at": "2026-11-22T05:57:49Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44991446048",
-     "n": 3
+     "n": 3,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [
+      {
+       "what": "tom-blockade",
+       "why": "fal refused the key (403): {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
+      }
+     ],
+     "already": [
+      "grace-cubepop",
+      "deedee-wetfloor"
+     ],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.0,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-blockade": 4,
+      "grace-cubepop": 4,
+      "deedee-wetfloor": 10
+     }
     }
    },
    "history": [
@@ -34555,6 +34581,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 video (about $0.50).",
      "at": "2026-11-22T05:55:12.754Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44991446048: 3 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
     }
    ]
   },
