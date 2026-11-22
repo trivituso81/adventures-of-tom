@@ -1,0 +1,7 @@
+ONE PICTURE OF ONE OBJECT FOR A GAME.
+
+A sleek black luxury SUV with tinted windows and polished silver wheels, its headlights switched on. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.
+
+Seen exactly from the side, the front of the car facing left, both wheels on one level line. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.
+
+No people, no hands, no logos or badges, no other text: the only lettering is a small white card propped inside the rear side window, which reads TOM in black capitals.

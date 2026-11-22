@@ -1402,6 +1402,12 @@
    "cmd": "python3 -I tools/art-library/startpic_test.py",
    "group": "g4",
    "minutes": 1
+  },
+  {
+   "id": "movestage_test",
+   "cmd": "python3 -I tools/movestage_test.py",
+   "group": "g3",
+   "minutes": 1
   }
  ]
 }

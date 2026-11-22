@@ -247,6 +247,13 @@ def stale_pending(pend, now=None):
     return (now - t).total_seconds() > STALE_S
 
 
+def staging_waits(repo):
+    """movestage1: the animation ids the Battle Guide marks Waits for staging (data/guide-anims.json `waits`). An unreadable file waits nothing."""
+    try: A = json.load(open(os.path.join(repo, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
+    except (OSError, ValueError, KeyError): return set()
+    return {k for k, v in A.items() if v.get('waits') == 'staging'}
+
+
 def run_guide_requests(a, jobs, state, lock, save, fal, key):
     """guidegen1: what UPDATE/GENERATE in the Battle Guide asked for (data/wan-requests.json: {anim, slug, take, at, prompt, promptRev, start, pad?, cap?}).
     The requests are taken off main first (before any spend), each one is one Wan video made with the proven settings of the `tom-idle` job (720p, 5 s,
@@ -260,8 +267,12 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     say('%d guide request(s) found, %d start picture request(s)' % (len(reqs), len(sps)))
     if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+    waiting = staging_waits(a.repo)
     for r in reqs:
         what = 'guide-%s-t%d' % (r['slug'], r['take'])
+        if r['anim'] in waiting:   # movestage1: a family move with no staging row is never made (a page cached before the gate could still ask)
+            rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0,
+                         'error': 'Waits for staging: this move is made in three layers now (claude/move-staging-plan.md) and its staging row is not written yet. Nothing was made or spent.'}); continue
         job = copy.deepcopy(jobs[a.template]); job.update(rev=1, frame=r['start'])
         job.pop('pad', None)
         if r.get('pad'): job['pad'] = float(r['pad'])

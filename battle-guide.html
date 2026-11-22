@@ -711,7 +711,7 @@ async function watchProgress(){
 }
 function animRow(a){
   const k={state:'Body',move:a.vibe||'Move',act:'Attack',wind:'Wind-up'}[a.kind],n=openNotes(a.id).length;
-  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+(GUIDE&&G(a)&&G(a).waits==='staging'?' <span class="badge n">WAITS FOR STAGING</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
 }
 function animsHtml(id){
   watchProgress();
@@ -1008,20 +1008,22 @@ async function initMake(a){
   if(A.stop&&$('ghow')){$('gtake').innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
   if(last)showTake(a,last);
 }
+const STAGE_TIER={basic:'Basic: a gag in the body',s1:'Skill 1: one stage element',s2:'Skill 2: a bigger, lasting stage',cap:'Capstone: full-screen set piece'};   // movestage1, claude/move-staging-plan.md section 3
 function genBlock(a){
   if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Reload the page.</p></div>';
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
   const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource);
   let h='<div class="gen" id="gen"><h3>Prompt</h3>';
-  h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span><span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
+  h+='<div class="meta" id="gmeta"><span class="chip">'+(g.oldDraft?'OLD DRAFT, NOT FOR USE':draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(g.stage?'<span class="chip" id="gstage">'+esc(STAGE_TIER[g.stage.tier]||g.stage.tier)+', about '+g.stage.budget+' s'+(g.stage.keep?', video kept':'')+'</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
-  if(!g.canMake)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
+  if(g.waits==='staging')h+='<div class="cant" id="gstagewait"><b>Waits for staging.</b> '+esc(g.waitsWhy||'')+'</div>';   // movestage1: a family move with no staging row (data/b3-stage.js)
+  if(!g.canMake&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   if(g.canStart)h+='<h3>Start picture</h3><p class="hint">Every video of '+esc(g.startWho)+' starts from one picture of them facing left on flat magenta. This makes it from their hero picture, checks it, and turns the video button on.</p>'
     +'<p class="err" id="gstartmsg" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gstart" style="width:100%">Make the start picture ($'+(g.startCost||0.15).toFixed(2)+')</button><div id="gstartconf"></div><div id="gstartstate"></div>';
   const w=GW[a.id];
   h+='<pre class="prompt" id="gprompt">'+esc(w?w.prompt:g.prompt)+'</pre>';
   if(w)h+='<p class="hint" id="gedited">You changed this prompt here ('+esc(w.at.slice(0,10))+'). The version above is the one a new video would use.</p>';
-  {   // the note box shows even when it cannot be made yet: the prompt can still be worked on
+  if(!g.waits){   // the note box shows even when it cannot be made yet: the prompt can still be worked on (not while a move waits for staging: its old draft is never used)
     const tok=!!(lsGet(TOKEN)||Q.get('gh'));
     h+='<h3>'+(g.video?'What should change':'Anything to add')+'</h3>'
       +(tok?'':'<p class="err" style="font-size:14px">This browser has no GitHub token, so it cannot send. Open the <a href="board.html">Board</a>, tap the three dots, paste the token there, then come back.</p>')

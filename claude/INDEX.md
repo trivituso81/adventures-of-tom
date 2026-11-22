@@ -714,6 +714,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | missing-baker-tools.md | Missing Baker tools (built 2026-10-27, rebuilt against game v332 the same evening) | 2026-10-27 |
 | move-fun-review.md | Move fun review (movefun1, 2026-11-21) | 2026-11-21 |
 | move-review.md | Move review round 2 (2026-10-24, build 1792878363) | 2026-10-24 |
+| move-staging-plan.md | Family moves in three layers: body, stage, set piece (movestage1, 2026-11-22) | 2026-11-22 |
 | mudling-heist-prompt.md | Mudling pie heist: 16-frame sheet prompt (2026-10-30) | 2026-10-30 |
 | music-library.md | Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6) | 2026-11-02 |
 | music-scripts.json | { | 2026-11-22 |

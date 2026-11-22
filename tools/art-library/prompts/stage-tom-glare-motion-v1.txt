@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.
+
+MOTION: HEADLIGHT FLARE
+The glare flares brighter once, its rays stretching longer, then it fades away completely until only the black background is left.

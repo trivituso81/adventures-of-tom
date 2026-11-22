@@ -18,7 +18,9 @@ A = G['anims']
 work = D.todo(G)
 check('only rule-draft animations are picked', work and all(a['promptSource'] == 'rule-draft' for _, a in work), len(work))
 check('a job, entry or used prompt is never picked', not any(a['promptSource'] in ('job', 'entry', 'used', 'model-draft') for _, a in work))
-fam = A.get('move:cartridge_blow') or next(a for _, a in work if a['route'] == 'wan')
+check('movestage1: a family move that waits for staging is never picked', not any(a.get('waits') for _, a in work) and any(a.get('waits') and a['promptSource'] == 'rule-draft' for a in A.values()))
+fam = next(a for a in A.values() if a['route'] == 'wan' and a['kind'] == 'move' and a.get('waits'))   # the family prompt shape, for the MOTION checks below
+PICK = next(k for k, a in work if a['route'] == 'xai')
 mon = next(a for _, a in work if a['route'] == 'xai')
 for a in (fam, mon):
     head, hdr, body, tail = D.split_prompt(a['prompt'])
@@ -82,18 +84,18 @@ check('results are written as model-draft with rev 0', all(v['source'] == 'model
 first = set(res['anims'])
 res2, _ = D.run(smart, 'stand-in', G, os.path.join(tmp, 'o2'), 0.011, limit=40, existing=json.load(open(os.path.join(out, 'guide-prompts.json'))))
 check('a second run keeps the first run and adds new ones', first <= set(res2['anims']) and len(res2['anims']) > len(first), (len(first), len(res2['anims'])))
-res3, sp3 = D.run(smart, 'stand-in', G, os.path.join(tmp, 'o3'), 1.0, ids={'move:cartridge_blow'})
-check('--ids asks for exactly the one named', set(res3['anims']) == {'move:cartridge_blow'}, list(res3['anims']))
+res3, sp3 = D.run(smart, 'stand-in', G, os.path.join(tmp, 'o3'), 1.0, ids={PICK})
+check('--ids asks for exactly the one named', set(res3['anims']) == {PICK}, list(res3['anims']))
 res4, sp4 = D.run(smart, 'stand-in', G, os.path.join(tmp, 'o4'), 1.0, dry=True)
 check('a dry run asks nothing and writes nothing', sp4 == 0 and not os.path.exists(os.path.join(tmp, 'o4')))
 
 # ---- the loader reads the file as model-draft and never replaces a job, entry or used prompt
 job_id = next(k for k, a in A.items() if a['promptSource'] == 'job')
-over = {'anims': {'move:cartridge_blow': res3['anims']['move:cartridge_blow'], job_id: {'prompt': 'Z\n\nMOTION: NOT A DRAFT OVERRIDE', 'rev': 0, 'source': 'model-draft'}}}
+over = {'anims': {PICK: res3['anims'][PICK], job_id: {'prompt': 'Z\n\nMOTION: NOT A DRAFT OVERRIDE', 'rev': 0, 'source': 'model-draft'}}}
 pth = os.path.join(tmp, 'over.json'); json.dump(over, open(pth, 'w'))
 pr = subprocess.run(['node', os.path.join(HERE, 'build_map.js'), '--stdout'], cwd=ROOT, env={**os.environ, 'GUIDEGEN_PROMPTS': pth}, capture_output=True, text=True)
 O = json.loads(pr.stdout)['anims'] if pr.returncode == 0 else {}
-check('the loader shows the drafted prompt as model-draft', O.get('move:cartridge_blow', {}).get('promptSource') == 'model-draft' and 'cartridge' in O['move:cartridge_blow']['prompt'].lower(), pr.stderr[-300:])
+check('the loader shows the drafted prompt as model-draft', O.get(PICK, {}).get('promptSource') == 'model-draft' and O[PICK]['prompt'] == res3['anims'][PICK]['prompt'], pr.stderr[-300:])
 check('a model draft never replaces a job prompt', O.get(job_id, {}).get('promptSource') == 'job')
 
 # ---- the whole command line against an http stand-in
@@ -111,12 +113,12 @@ class H(http.server.BaseHTTPRequestHandler):
 srv = socketserver.TCPServer(('127.0.0.1', 0), H); threading.Thread(target=srv.serve_forever, daemon=True).start()
 env = {**os.environ, 'XAI_API_KEY': 'k', 'XAI_BASE': 'http://127.0.0.1:%d' % srv.server_address[1]}
 oc = os.path.join(tmp, 'cli')
-p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'draft.py'), '--ids', 'move:cartridge_blow', '--cap', '0.05', '--out', oc], cwd=ROOT, env=env, capture_output=True, text=True)
+p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'draft.py'), '--ids', PICK, '--cap', '0.05', '--out', oc], cwd=ROOT, env=env, capture_output=True, text=True)
 fj = json.load(open(os.path.join(oc, 'guide-prompts.json'))) if os.path.exists(os.path.join(oc, 'guide-prompts.json')) else {}
-check('the command line writes guide-prompts.json with the picked model', p.returncode == 0 and set(asked) == {'grok-4.20-non-reasoning'} and 'move:cartridge_blow' in fj.get('anims', {}), (p.stdout[-300:], p.stderr[-300:]))
+check('the command line writes guide-prompts.json with the picked model', p.returncode == 0 and set(asked) == {'grok-4.20-non-reasoning'} and PICK in fj.get('anims', {}), (p.stdout[-300:], p.stderr[-300:]))
 p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'draft.py'), '--dry-run', '--limit', '2'], cwd=ROOT, env={**os.environ, 'XAI_API_KEY': ''}, capture_output=True, text=True)
 check('a dry run needs no key', p.returncode == 0 and 'would ask' in p.stdout, p.stdout + p.stderr)
-p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'draft.py'), '--ids', 'move:cartridge_blow'], cwd=ROOT, env={**os.environ, 'XAI_API_KEY': ''}, capture_output=True, text=True)
+p = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'draft.py'), '--ids', PICK], cwd=ROOT, env={**os.environ, 'XAI_API_KEY': ''}, capture_output=True, text=True)
 check('without the key it stops and names the secret', p.returncode != 0 and 'XAI_API_KEY' in (p.stdout + p.stderr))
 print('FAILS:', fails)
 sys.exit(1 if fails else 0)
