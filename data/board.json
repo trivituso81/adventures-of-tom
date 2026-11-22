@@ -31224,7 +31224,7 @@
    "id": "c-menucrease",
    "tag": "menucrease1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Menu book: both pages the same width, crease in the center",
    "next": "Make the two pages of the menu book equal so the crease runs down the center on every tab. Then Tom looks at it on the Duo.",
@@ -31238,6 +31238,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"in the hamburger menu screen, the storybook look of each page should be even on both sides, ie symmetrical the crease should always be down the center\". Cause: on the Duo the left page was sized so the crease sat at the screen center, not the book center."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as menucrease1: the menu book's two pages are the same width, crease in the center"
     }
    ],
    "after": "t-menu4play",
@@ -31249,7 +31253,8 @@
     "model": "Claude Sonnet 5.5 (row C: small fix, cause found)",
     "effort": "medium (small piece of work)",
     "text": "Read CLAUDE.md. In engine/m2-core.js m2Render, the wide book must use two equal columns so the crease is at the book center; tools/m2_test.py checks the pages are equal. Run python3 tools/m2_test.py and look at tools/shots/m2-duo.png. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
@@ -31356,6 +31361,18 @@
    "cards": [
     "c-wanstop-tom-rose-giddyup-r1",
     "t-pairmove1-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE8rGGnCeamLccpvwH",
+   "title": "Menu book: both pages the same width, crease in the center",
+   "first": "2026-11-22T12:57:48-08:00",
+   "last": "2026-11-22T12:57:48-08:00",
+   "tags": [
+    "menucrease1"
+   ],
+   "cards": [
+    "c-menucrease"
    ]
   },
   {
@@ -36970,8 +36987,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "3390a7271c180b837db35ceba0382300c4be3d96",
- "synced_at": "2026-11-22T20:51:24+00:00",
+ "synced": "090f8f1ef70405fa019a022cdf7fbe8d5bf27cfd",
+ "synced_at": "2026-11-22T20:58:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
