@@ -121,7 +121,7 @@ SCENES.ch1Goal=[
   {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {interstitial:{ch1Reveal:'list'}},   // Grace holds up the finished list: the close-up (ch1art3), A to continue. Only after her third item (Tom report r-20261120-000755-3h9p)
-  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[]},   // b3s15: the Tombo rows are battle 2's; the flags above still set
+  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[{toast:'New Tombo skins: Squishy Delivery (Tom + Grace) and Double-Decker Airplane (Tom + Rose). They show when that pair fires a Full Family Ruckus.',time:4.4}]},   // b3s15: the Tombo rows are battle 2's; the flags above still set
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
   // Tom (with Rose still on his shoulders, cutpolish3) and Grace walk out onto the open plaza path toward the Rivituso Row arch, so control comes back
   // on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18). Rose rides along; she hops down in the kitchen.
@@ -286,7 +286,7 @@ SCENES.ch1Theft=[
   {call:()=>{ intro.endTrail=[[12,10],[11,10],[10,10],[9,10],[8,10]]; }},
   {wait:1.2},
   {flag:'tombo:deedee1'},
-  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3}],else:[]},
+  {if:()=>!B3_CH_ON(1),then:[{toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3}],else:[{toast:'New Tombo skin: Wine and Gossip (Tom + Deedee). It shows when they fire a Full Family Ruckus.',time:3.4}]},
   {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5},
   {call:()=>queueToast('Goal: follow the muddy trail to Grump Hollow, north of the Square.',4.5)}   // pops up once (roofnpc2, Gemini audit: players stalled at the front gate)
 ];
@@ -499,7 +499,7 @@ SCENES.ch2Porch=[
   {join:'nara'},
   {call:()=>{ grantItem('naraball'); if(typeof heartTrace==='function') { heartTrace('nara-meet'); setFlag('met-nara'); } }},
   {flag:'tombo:nara1'},
-  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[]},
+  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[{toast:'New Tombo skin: Sit. Paw. Treat. (Tom + Nara). It shows when they fire a Full Family Ruckus.',time:3.6}]},
   {toast:'Goal: the smog is coming down 2nd Ave. Walk toward Mr. Washington’s porch.',time:4.5}
 ];
 // Scene 3. 2nd Avenue: Mr. Washington is stuck on one greeting; two Smoglets; one fight.
@@ -527,7 +527,7 @@ SCENES.ch2Smog=[
   {talk:'Smoglet',lines:["Ahem. There's two of us."]},
   {talk:'Tom',lines:["We can do this! I've done this one time."]},
   {flag:'tombo:tnb1'},
-  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6}],else:[]},
+  {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6}],else:[{toast:'New Tombo skin: Popcorn Jump (Tom + TNB). It shows when they fire a Full Family Ruckus.',time:3.2}]},
   {battle:()=>findMonster('smoglet'),tut:'ch2lawn',count:2},
   {despawn:'Smoglet'}, {despawn:'Smoglet B'},
   {if:()=>flag('battle:smoglet')!=='win',then:[{heal:true},{toast:'Everyone is healed. Try again: walk back toward Mr. Washington’s porch.',time:5}],else:[]},
@@ -1034,7 +1034,7 @@ SCENES.ch3Pier=[
   {talk:'Boppy',lines:['Tom holds the tackle box. I cast. The fish comes. Nobody talks. That\'s the system.']},
   {talk:'Tom',lines:['I\'ve got the tackle box in one hand and the big net in the other. I\'m ready.']},
   {flag:'tombo:boppy1'},
-  {if:()=>!B3_CH_ON(3),then:[{toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[]},
+  {if:()=>!B3_CH_ON(3),then:[{toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, it is inside ▲ ATTACK.',time:3.6}],else:[{toast:'New Tombo skin: You Hold the Net (Tom + Boppy). It shows when they fire a Full Family Ruckus.',time:3.6}]},
   {call:()=>sfx.whoosh()}, {wait:1.4},
   {talk:'Boppy',lines:['...Any minute now.']},
   {wait:1.2},
@@ -1935,7 +1935,7 @@ SCENES.ch5Arrive=[
   {trace:'amy-coffee'}, {hearts:'tom'},
   {flag:'tombo:amy1'},
   {party:{lock:['tom','grace','rose','amy']}},
-  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: I Called It! (Tom + Amy). In battle, it is inside ▲ ATTACK.',time:3.5}],else:[]},
+  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: I Called It! (Tom + Amy). In battle, it is inside ▲ ATTACK.',time:3.5}],else:[{toast:'New Tombo skin: I Called It! (Tom + Amy). It shows when they fire a Full Family Ruckus.',time:3.5}]},
   {talk:'Rose',lines:["Mom. Mom. Are we going to SCHOOL? At NIGHT? That's the best thing that ever happened."]},
   {talk:'Amy',lines:["Everybody is coming. I have a clipboard, and I'm not afraid to use it."]},
   {talk:'Tom',lines:["And I have a binder! I'm bound to be useful."]},
@@ -2013,7 +2013,7 @@ SCENES.ch5Field=[
   {talk:'Grace',lines:["Round hole! It's right under the sneaker. I'm not touching it, Mom. I'm LOOKING."]},
   {pose:'tom'}, {show:'grace'}, {place:'grace',at:[18,8],dir:'down'},
   {flag:'tombo:grace2'},   // Uncle Spotter Toss unlocks here: Tom lifts Grace to look (chapter 5)
-  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2}],else:[]},
+  {if:()=>!B3_CH_ON(5),then:[{toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2}],else:[{toast:'New Tombo skin: Uncle Spotter Toss (Tom + Grace). It shows when they fire a Full Family Ruckus.',time:3.5}]},
   {talk:'Tom',lines:["And there's going to be a burnt flashbulb close by."]},
   {walk:'tom',to:[[19,9]],speed:.2}, {pose:'tom',f:'c4t_bulb',mid:'tom'}, {call:()=>sfx.pickup()},   // jykk: Tom holds up the bulb
   {talk:'Tom',lines:["Second base."]},
@@ -2470,7 +2470,7 @@ SCENES.ch6Kitchen=[
   {talk:'Tom',lines:[`Together. Hold on, Bready Mercury. We're coming!`]},
   {party:{lock:['tom','tnb']}},
   {flag:'tombo:tnb2'},   // Red Line Transfer unlocks here (chapter 6)
-  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2}],else:[]},
+  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2}],else:[{toast:'New Tombo skin: Red Line Transfer (Tom + TNB). It shows when they fire a Full Family Ruckus.',time:3.4}]},
   {toast:'Goal: out to 2nd Ave. Find Olivia, Michael and Nara.',time:4.5}
 ];
 // 3. 2nd Ave: Nara growls at the jacaranda, Olivia and Michael list what is missing, Bernadette saw a flash (story-ch06.md scene 3).
@@ -2503,7 +2503,7 @@ SCENES.ch6Nara=[
   {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.6},   // she is at the end of the street before he finishes the word, and looks back and barks
   {talk:'Olivia',lines:[`Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.`]},
   {flag:'tombo:nara2'},   // Tug of War unlocks here (chapter 6)
-  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2}],else:[]},
+  {if:()=>!B3_CH_ON(6),then:[{toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2}],else:[{toast:'New Tombo skin: Tug of War (Tom + Nara). It shows when they fire a Full Family Ruckus.',time:3.4}]},
   {toast:'Goal: Old Oak Park, through the south end of 2nd Ave.',time:4.5}
 ];
 // 4. Old Oak Park: Bernadette's briefing, then the picnic tables: the grey circle, the block, the round hole, the bulb in her bag (story-ch06.md scene 4).
@@ -3783,7 +3783,7 @@ SCENES.ch7End=[
   {flag:'tombo:deedee2'},   // Pick the Rhubarb unlocks here (chapter 7)
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
-  {if:()=>!B3_CH_ON(7),then:[{toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2}],else:[]},
+  {if:()=>!B3_CH_ON(7),then:[{toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2}],else:[{toast:'New Tombo skin: Pick the Rhubarb (Tom + Deedee). It shows when they fire a Full Family Ruckus.',time:3.4}]},
   {toast:'Chapter 7 complete! Long Island is yours to explore.',time:6}
 ];
 TRIGGERS.push(
@@ -4869,7 +4869,7 @@ SCENES.ch10Term=[
   {trace:'girls-terminal'}, {hearts:'grace'},
   {flag:'ch10-term'},
   {flag:'tombo:rose2'}, {flag:'tombo:amy2'},   // Seat 1A Stowaway and Wing Walk unlock here (chapter 10)
-  {if:()=>!B3_CH_ON(10),then:[{toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6}],else:[]},
+  {if:()=>!B3_CH_ON(10),then:[{toast:'New Tombos: Seat 1A Stowaway (Rose) and Wing Walk (Amy). 50% HEART each.',time:3.6}],else:[{toast:'New Tombo skins: Seat 1A Stowaway (Tom + Rose) and Ymamot Creation (Tom + Amy). They show when that pair fires a Full Family Ruckus.',time:4.4}]},
   {toast:'Goal: find the gate clock’s three hands. Security (top left), Baggage Claim (top right), the Lounge (bottom left).',time:5.5},
   {toast:'Tip: there\'s a photo booth by the curb doors. There\'s a quarter on the seat.',time:4}
 ];

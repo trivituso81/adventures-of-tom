@@ -636,7 +636,7 @@ SCENES.nsGoal=[
   {talk:'Tom',lines:['Nine dairy-free scoops. One per year. Black and white cookie on top. I ordered it in July.']},
   {talk:'Rose',lines:['Is the present a puppy?'],voice:[['rose','puppy']]},
   {talk:'Tom',lines:['It\'s not a puppy.','Presents are after cake. That\'s the rule. I didn\'t make the rule.'],voice:[['tom','not_puppy'],['tom','present_rule']]},
-  {if:()=>!B3_CH_ON(21),then:[{toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[]},
+  {if:()=>!B3_CH_ON(21),then:[{toast:'Tombos ready: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4}],else:[{toast:'New Tombo skins: Squishy Delivery (Tom + Grace) and Double-Decker Airplane (Tom + Rose). They show when that pair fires a Full Family Ruckus.',time:4.4}]},
   {toast:'Goal: Sprinkle Street Creamery, the shop with the SCOOPS sign at the top of the Square.',time:4.5}
 ];
 // Sprinkle Street Creamery: frozen solid. Mr. Pistachio in an ice cube, three gremlins, the story of the thief.
@@ -899,6 +899,7 @@ SCENES.nsPond2=[
     {talk:'Grace',lines:['...Wait. Mr. Pistachio said. The DOOR.','Tata. He needs something on his door. Something that\'s HIS.']},
     {talk:'Tom',lines:['...Okay. Presents are before cake. New rule.'],voice:[['tom','present_give']]},
     {call:()=>{ sfx.pickup(); setFlag('ns-printer'); setFlag('tombo:wish'); STORY.flags.heart=75; }},
+    {if:()=>B3_CH_ON(21),then:[{toast:'New Tombo skin: Birthday Wish (Tom + Grace, Tom + Rose). It shows when that pair fires a Full Family Ruckus.',time:4}],else:[]},
     {give:'instax'},
     {talk:'Grace',lines:['An INSTAX. Tata. A PRINTER. For PHOTOS.','...The cab photo. This morning. All of us.']},
     {talk:'Tom',lines:['Pair it to my phone. One tap. It\'s still on there.']},

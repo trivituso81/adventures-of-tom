@@ -216,7 +216,10 @@ function b3Show(b) {
   // The Family Ruckus (stage 6): the gauge moves (the RUCKUS button is its bar), a Mix is named, and a spend is announced.
   else if(b.t==='ruckus') { V.ruckus=b.v; if(b.n>0&&b.src) b3Pop(b.src,'RUCKUS +'+b.n+'%','#ffd36b'); b3RenderDeck(); }
   else if(b.t==='mix') { b3Pop(b.tgt,'MIX!','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say('A Mix: '+b3Name(b.src)+' hit '+b3Name(b.tgt)+' with a different flavor than their teammate.'); }
-  else if(b.t==='ruckusSpend') { b3Word(b.name.toUpperCase()+'!','#ffd36b'); b3Sfx('combo'); b3Say(b3Name(b.src)+' and '+b3Name(b.partner)+': '+b.name+'!'); }
+  // A Full Family Ruckus with a live Tombo skin (engine/b3-skins.js) shows the skin's name and plays the pair's recorded lines; the result is the rule's.
+  else if(b.t==='ruckusSpend') { const sk=b.kind==='full'?b3SkinForUnits(B3.F,b.src,b.partner):null,nm=sk?sk.name:b.name;
+    b3Word(nm.toUpperCase()+'!','#ffd36b'); b3Sfx('combo'); b3Say(b3Name(b.src)+' and '+b3Name(b.partner)+': '+nm+'!');
+    if(sk) b3SkinSay(sk,b3Unit(B3.F,b.src).id,b3Unit(B3.F,b.partner).id); }
   else if(b.t==='detonate') {
     const D=B3_DETONATIONS.find(d=>d.id===b.id),c=B3_FLAVORS[D.flavor].color;
     vu.st=vu.st.filter(id=>id!==b.prime);   // the Prime is used up

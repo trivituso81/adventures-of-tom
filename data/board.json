@@ -29122,7 +29122,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Tombos return as skins on Battle 3 (Full Family Ruckus, Tombo rows). No animation review: skins use each person's existing video or the default animation. Ships as b3s16.",
+   "next": "Shipped as b3s16. The 26 Tombos (21 Primaries, 4 Family Finishes, Birthday Wish) are skins on the Full Family Ruckus: the row and the big word show the skin's name and the pair's recorded Tombo lines play; the chapter 1 to 10 and bonus Tombo toasts are back under Battle 3. No animation review. Nothing is asked of Tom. Next: c-b3s19.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29144,12 +29144,17 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s16 by the stage 16 session. 26 skins on the Full Family Ruckus (data/b3-tombo-skins.js, engine/b3-skins.js), the rules files and every battle 2 file untouched. Tested: node tools/b3-sim.js check (FAILS []), python3 tools/b3_test.py s16 (new), s6, s7 and the fights new1, new3 and new6. Calls made are in claude/battle-build.md 'Calls made in stage 16'."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
-    "opening": "unknown"
-   }
+    "opening": "\"Attach trivituso81/adventures-of-tom with push access (add_repo). Read data/board.json and do card c-b3s16, the Battle system stage 16 card: Tombo skins on the new battle.\""
+   },
+   "after": "nothing for Tom: c-b3s19"
   },
   {
    "id": "c-b3s19",
@@ -29157,7 +29162,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3. Starts after c-b3s16.",
+   "next": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3. Can start now: c-b3s16 shipped as b3s16.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",

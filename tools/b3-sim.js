@@ -280,6 +280,8 @@ function check() {
   require('./b3-check-s17.js')({G,ok,near,play,noCrit});
   require('./b3-check-s18.js')({G,ok,near,play,noCrit});
   require('./b3-check-s18bonus.js')({G,ok,near,play,noCrit});
+  // Stage 16's groups: the Tombo skins on the Full Family Ruckus (data/b3-tombo-skins.js, engine/b3-skins.js; the page side is tested by tools/b3_test.py s16).
+  require('./b3-check-s16.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

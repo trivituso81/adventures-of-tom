@@ -5,6 +5,7 @@
 #                     python3 tools/b3_test.py s4         only the stage 4 section (the Vibes screen, the Lab's Ranks, the save fields), about 2 min
 #                     python3 tools/b3_test.py s5         only the stage 5a section (Rank 5 on The Big One: the four Capstones, the free Skill, Traits and Quirks), about 3 min
 #                     python3 tools/b3_test.py s8         only the stage 8 section (video clips: idle loops, clip moves on the impact frame, The Big One's acts, body states, the fallback), about 4 min
+#                     python3 tools/b3_test.py s16        only the stage 16 section (Tombo skins: the skin's name on the tray and the screen at a Full Family Ruckus, the recorded lines, portrait and landscape), about 1 min
 #                     python3 tools/b3_test.py s7         only the stage 7 section (Rose Mode: pictures, preview, the recommended move, keys and pad), about 2 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
@@ -856,13 +857,71 @@ def stage6(pg,lab,landscape=False):
         pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
     pg.keyboard.press('Digit2'); pg.wait_for_timeout(250)
     v=s6(pg); need(pg.evaluate("()=>B3.deck[B3.sel].ruckus")=='full','the deck should have the Full spend highlighted: '+str(v['ui'])); caps.append(R(shot(pg)))
+    full_name=pg.evaluate("()=>B3.deck[B3.sel].name")   # b3s16: a pair with a live Tombo skin reads the skin's name; the others read Full Family Ruckus
     pg.keyboard.press('Enter'); pg.wait_for_timeout(2500); wait_cmd(pg); pg.wait_for_timeout(600); v=s6(pg)
-    need('Full Family Ruckus' in v['log'],f"the log should name Full Family Ruckus: {v['log'][-240:]}")
+    need(full_name+'!' in v['log'],f"the log should name {full_name} (Full Family Ruckus or the pair's Tombo skin): {v['log'][-240:]}")
     caps.append(R(shot(pg)))
     # The gauge goes on to the next fight: leave and read what the Lab stored.
     g=s6(pg)['ruckus']; pg.click('#b3-exit'); pg.wait_for_timeout(500)
     st=pg.evaluate("()=>localStorage.getItem('aot-b3-ruckus')"); need(st==str(round(g)),f'leaving should store the gauge ({g}): {st}')
     sheet(caps,4,os.path.join(OUT,'b3-s6'+('-land' if landscape else '')+'.png'),scale=.5)
+    pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
+
+def stage16(pg,lab,landscape=False):
+    """Stage 16: Tombo skins. A Full Family Ruckus in a Lab fight shows the live skin's name on the tray and on the screen, says the pair's
+    recorded lines, and the plain name comes back for a pair with no skin. Story flags and the Lab's all-unlocked rule are checked on the page."""
+    S='stage 16'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }"); pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    # The choosing rule on the real page: no flag, no skin; a flag makes it live; the Lab counts every skin as unlocked.
+    r=pg.evaluate("""()=>{ const out={}; const lab=B3.cfg.lab; B3.cfg.lab=false; const save={...STORY.flags};
+      for(const k of Object.keys(STORY.flags)) if(/^tombo:/.test(k)) delete STORY.flags[k];
+      out.none=!b3SkinFor('tom','grace'); STORY.flags['tombo:grace1']=true; out.one=(b3SkinFor('tom','grace')||{}).name; STORY.flags['tombo:grace2']=true; out.two=(b3SkinFor('grace','tom')||{}).name;
+      B3.cfg.lab=true; out.lab=(b3SkinFor('tom','deedee')||{}).name; out.nopair=!b3SkinFor('grace','deedee')&&!b3SkinFor('tom','justin');
+      B3.cfg.lab=lab; for(const k of Object.keys(STORY.flags)) delete STORY.flags[k]; Object.assign(STORY.flags,save); return out; }""")
+    need(r['none'],'no Tombo flag should mean no skin: '+str(r)); need(r['one']=='Squishy Delivery' and r['two']=='Uncle Spotter Toss',"tombo:grace1 then grace2 should make Squishy Delivery then Uncle Spotter Toss live: "+str(r))
+    need(r['lab']=='Tom Cooks for Mom' and r['nopair'],"the Lab counts every skin as unlocked (Tom and Deedee: Tom Cooks for Mom), and Grace with Deedee or Tom with Justin has none: "+str(r))
+    # Spy on the spoken lines.
+    pg.evaluate("()=>{ window.__said=[]; if(window.__sayWrapped) return; window.__sayWrapped=true; const o=window.say; window.say=function(){ window.__said.push([arguments[0],arguments[1]]); return o.apply(this,arguments); }; }")
+    def find_pair(skin,tries=40):
+        """Play basics until a family pair with (skin=True) or without (False) a live skin is up, with the gauge full."""
+        for _ in range(tries):
+            pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(120)
+            ok_=pg.evaluate("""(want)=>{ const u=B3.actor,p=b3TurnOrder(B3.F).filter(x=>x!==u)[0]; return !!(u&&p&&p.side==='party'&&u.side==='party'&&(!!b3SkinFor(u.id,p.id))===want); }""",skin)
+            if ok_: return True
+            pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(250)
+        return False
+    def fire(label):
+        pg.evaluate("()=>{ window.__said.length=0; }")
+        info=pg.evaluate("""()=>{ const u=B3.actor,p=b3TurnOrder(B3.F).filter(x=>x!==u)[0],sk=b3SkinFor(u.id,p.id),e=B3.deck.find(d=>d.ruckus==='full'); return {a:u.id,b:p.id,skin:sk&&sk.name,deck:e&&e.name,lines:sk?b3SkinLines(sk,u.id,p.id).map(l=>l.join('.')):[]}; }""")
+        nm=info['skin'] or 'Full Family Ruckus'
+        need(info['deck']==nm,f"{label}: the Full Family Ruckus row should read {nm}: {info}")
+        pg.keyboard.press('Digit2'); pg.wait_for_timeout(300)
+        tray=pg.evaluate("()=>(document.querySelector('#b3-tray')||{}).textContent||''")
+        need(nm in tray,f"{label}: the tray should name {nm}: {tray[:120]}"); caps.append(R(shot(pg)))
+        pg.keyboard.press('Enter')
+        seen=False; w=[]
+        for _ in range(14):
+            pg.wait_for_timeout(120)
+            w=pg.evaluate("()=>(B3P.words||[]).map(w=>w.text)")
+            if (nm.upper()+'!') in w and not seen: seen=True; caps.append(R(shot(pg)))
+        need(seen,f"{label}: the screen should flash {nm} in big letters: last words {w}")
+        wait_cmd(pg); pg.wait_for_timeout(600)
+        lg=pg.evaluate("()=>B3.log.slice(-60).join(' | ')"); said=pg.evaluate("()=>window.__said")
+        need((info['a'] and nm+'!' in lg),f"{label}: the log should name {nm}: {lg[-240:]}")
+        need(['.'.join(x) for x in said]==info['lines'],f"{label}: the pair's recorded lines should play in order {info['lines']}: {said}")
+        return info
+    # A pair with no skin keeps the plain name and says nothing extra; then a Tom pair shows its skin and speaks its lines.
+    need(find_pair(False),'a family pair with no skin should come up in the Lab'); fire('no skin')
+    need(find_pair(True),'a Tom pair with a skin should come up in the Lab'); info=fire('skin '+str(pg.evaluate("()=>B3.actor&&B3.actor.id")))
+    need(info['skin'] is not None and len(info['lines'])==2,f"a Tom pair's skin plays two lines: {info}")
+    caps.append(R(shot(pg)))
+    pg.click('#b3-exit'); pg.wait_for_timeout(400)
+    sheet(caps,4,os.path.join(OUT,'b3-s16'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
 
 def tray_full(pg,key):
@@ -1364,7 +1423,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1442,6 +1501,10 @@ with sync_playwright() as pw:
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage6(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 6g. stage 7: tap to preview, Rose Mode pictures, the recommended move (portrait, then a pass in landscape)
+    if 's16' in sys.argv or not only and len(want)==len(lab):
+        print('b3s16: Tombo skins'); stage16(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage16(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     if 's7' in sys.argv or not only and len(want)==len(lab):
         print('stage 7: preview and Rose Mode'); stage7(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage7(pg,lab,True)

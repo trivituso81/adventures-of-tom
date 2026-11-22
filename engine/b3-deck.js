@@ -40,7 +40,7 @@ function b3DeckBuild() {
   const free=b3Granted()===u,rc=b3Rec();
   if(!free) for(const k of ['double','full']) {
     const P=b3RuckusPlan(F,u,k); if(!P.ok) continue;
-    out.push({id:'ruckus:'+k,ruckus:k,P,S:null,name:b3RuckusName(k),grp:'ruckus',can:{ok:true,why:''},cost:0,opts:P.foeOpts,rec:!!(rc&&rc.skill==='ruckus:'+k)});
+    out.push({id:'ruckus:'+k,ruckus:k,P,S:null,name:k==='full'?b3SkinName(F,u,P.partner,b3RuckusName(k)):b3RuckusName(k),grp:'ruckus',can:{ok:true,why:''},cost:0,opts:P.foeOpts,rec:!!(rc&&rc.skill==='ruckus:'+k)});
   }
   for(const S of b3Skills(F,u)) {
     const opts=b3Options(F,u,S),can=b3CanUse(F,u,S);

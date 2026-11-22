@@ -57,7 +57,8 @@ Rules for every stage's session:
 | 15 | Story switch, chapter 1: ADMIN switch (OLD, BY CHAPTER, NEW), chapter 1's fights on Battle 3, level and Vibe Point migration, Ruckus as a save field, Vibe Points and a victory card, late joiners' loadouts on recruit, new tips, no Warmth in chapter 1 | Pushed 2026-11-21 | `b3s15` | Milestone B: Chapter Select > Chapter 1, play it on the new battle (about 30 minutes). |
 | 17 | Story switch, chapters 2 to 5: chapters 2 to 5's 16 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 16 fights, the kind flag on a boss win, one chapter test each | Pushed 2026-11-21 | `b3s17a`, `b3s17b`, `b3s17c`, `b3s17` | Milestone C: play chapters 2 to 5 (card t-milestonec). |
 | 18 | Story switch, chapters 6 to 10: chapters 6 to 10's 20 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 20 fights, five Battle 3 retry lines. The bonus chapter was switched afterwards in `b3s18bonusa` and `b3s18bonus` (see the row below and `docs/BATTLE3.md` "The bonus chapter is switched") | Pushed 2026-11-21 (chapters 6 to 10) | `b3s18a`, `b3s18b`, `b3s18c`, `b3s18d`, `b3s18e`, `b3s18` | Milestone D: play chapters 6 to 10 (card t-milestoned). The bonus chapter is card c-b3s18bonus. |
-| 16, 19 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
+| 16 | Tombo skins: 26 skins (21 Primary Tombos, 4 Family Finishes, Birthday Wish) on the Full Family Ruckus: the skin's name on the tray and the stage, the pair's recorded lines, the Tombo toasts of chapters 1 to 10 and the bonus back under Battle 3. No Move Lab review (animations are out of scope) | Pushed 2026-11-22 | `b3s16` | Nothing is asked. |
+| 19 to 23 | See architecture section 5 | Not started | | |
 
 ## Stage 15 results (facts)
 
@@ -96,6 +97,20 @@ Rules for every stage's session:
 | The same retry-line and Tombo-toast pattern as stage 17 | Old lines name Warmth, Tombos and elements that do not exist on Battle 3 | The `else` branch is the old line |
 | `b3_story_test.py` moved to chapter 11 for "not switched yet" | Chapter 6 is now switched | Edit the six numbers back if chapter 11 behaves differently |
 
+## Calls made in stage 16 that Tom has not confirmed
+
+| Call | Why | Undo |
+|---|---|---|
+| All 26 skins are kept; none is marked Replace and there was no Move Lab review | The standing rule keeps animation review out of battle system sessions, and a skin carries no animation or numbers, so a Replace verdict has nothing to act on. The card said so | Delete a row of `data/b3-tombo-skins.js` |
+| The card's "22 Primary Tombos" are 21 Primaries (7 partners x 3 tiers) plus Birthday Wish; the 4 Family Finishes are skins too | Counted from `B2_TOMBOS` and `data/bonus-nine-scoops.js`. The card names Family Finishes, so they come back; architecture section 3 had said they would be deleted | Delete the `ff1` to `ff4` rows |
+| A Family Finish is live only for the pair who speak in it (Rose and TNB, Rose and Amy, Deedee and Boppy, Tom and Grace); Birthday Wish for Tom with Rose or Grace | A Full Family Ruckus is a pair, and a skin plays only the lines of the two who fire it | Edit `pairs` in the row |
+| A Family Finish or Birthday Wish outranks a Primary for the same pair (rank 4 over 1 to 3) | Newest unlocked wins and they come later in the story; in the Lab Tom and Grace show Birthday Wish, the last row | Lower `rank` |
+| Skin names follow what the pair says and plays: TNB tier 2 is Red Line Transfer (battle 2's data names it Measure Twice by a copy mistake; the toast, the registry and the train line all say Red Line Transfer); Amy tier 2 is Ymamot Creation (the toast said Wing Walk, the animation and lines are Ymamot Creation); Boppy tier 1 uses Tom's line `tombopier` (battle 2's latest animation says `tombodeedee` by mistake) | One name per skin that matches its recording | Edit `name` or the line key |
+| The Battle Lab has every skin unlocked | Battle 2's Lab had every Tombo | `b3SkinUnlocked` |
+| Only a Full Family Ruckus is skinned; Double Team is not | The architecture says skins are for the Full Family Ruckus | None needed |
+| The toasts name the skin and say "It shows when they fire a Full Family Ruckus"; chapter 1's two and the bonus chapter's are restored too, and Birthday Wish gets a new toast when its flag is set | The same reason for all: the story moment keeps its reward. The card named chapters 2 to 10 (nine toasts); chapter 1 and the bonus chapter had the same hole | Put `else:[]` back on the line |
+| The nine toasts of chapters 2 to 10 are all restored (the card says "five": chapters 2 to 5 have five, chapters 6, 7 and 10 four more) | They are the same hole | As above |
+
 ## Calls made in stage 17 that Tom has not confirmed
 
 | Call | Why | Undo |
@@ -104,7 +119,7 @@ Rules for every stage's session:
 | The five "New Tombo" toasts of chapters 2 to 5 are skipped under Battle 3; the Tombo flags stay | No Tombo row exists to point at | Stage 16 brings Tombos back as skins |
 | Three loss-retry coaching lines (Boppy ch3, TNB ch4, Amy ch5) have a Battle 3 second line | The old lines name Tombos and Warmth-style kindness moves that do not exist on Battle 3 | The `else` branch is the old line; remove the `if` |
 | The Signature Tool toasts ("WARMTH +7", "WARMTH +6") are left alone | They are item stats shown in the menu, not the battle | A later item pass |
-| Stage 16 stays skipped; Milestone C is a play test of chapters 2 to 5, not a Move Lab review | Stage 16 asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions | Make a stage 16 card |
+| Stage 16 stays skipped (built later as `b3s16`, card c-b3s16); Milestone C is a play test of chapters 2 to 5, not a Move Lab review | Stage 16 asks Tom to review 22 skin animations, which the standing rule keeps out of battle system sessions | Make a stage 16 card |
 
 ## Calls made in stage 15 that Tom has not confirmed
 
@@ -408,7 +423,7 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 
 ## Next conversation (the bonus chapter, then stage 19)
 
-Follows `claude/handoff-rules.md`. Facts for stage 18 are in `claude/next-addendum-b3s18.md` and `docs/handoff/b3s18.md`; where they and this file differ, they win until the next stage folds them in. Stage 16 (Tombo skins) is skipped on purpose for now.
+Follows `claude/handoff-rules.md`. Facts for stage 18 are in `claude/next-addendum-b3s18.md` and `docs/handoff/b3s18.md`; where they and this file differ, they win until the next stage folds them in. Stage 16 (Tombo skins) is built (`b3s16`, `claude/next-addendum-b3s16.md`).
 
 | # | Item | |
 |---|---|---|

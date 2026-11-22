@@ -258,7 +258,7 @@ Each stage is one conversation. "Lab fight" means a fight in ADMIN, Battle Lab, 
 | 13 | Bestiary chapters 8 to 10 and the bonus chapter | Large | Same | Same | Same |
 | 14 | Balance pass on Part 1 from the simulator and Tom's Lab notes. Data only | Medium | Replay the fights that felt wrong | Simulator before and after | Every Part 1 boss at 5 to 7 rounds; no engine file changed |
 | 15 | Story switch, chapter 1: the switch in ADMIN, level and VP migration, XP retune, victory card with VP, rewritten battle tips, chapter 1 on the list | Large | Play chapter 1 from Chapter Select on the new battle | Chapter 1 cases start to finish, both layouts; old save and new save load | Chapter 1 plays through; setting the switch to OLD still works on the same save |
-| 16 | Tombo skins: Move Lab review of the 22 Primary Tombos, then wire the kept ones onto Full Family Ruckus | Medium | Mark Keep, Tweak or Replace in the Move Lab | Screen test per kept skin | Kept skins play with their recorded line |
+| 16 | Tombo skins: Move Lab review of the 22 Primary Tombos, then wire the kept ones onto Full Family Ruckus (built as `b3s16` without the review, all kept: animation review is out of scope; 26 skins, see docs/BATTLE3.md) | Medium | Mark Keep, Tweak or Replace in the Move Lab | Screen test per kept skin | Kept skins play with their recorded line |
 | 17 | Story switch, chapters 2 to 5 | Large | Play them | Chapter tests | On the list |
 | 18 | Story switch, chapters 6 to 10 and the bonus | Large | Play them | Chapter tests | On the list |
 | 19 to 21 | Third Vibes, three or four characters per conversation, and Casual Mode | Large each | Lab fights | Simulator | All 30 Vibes complete |
