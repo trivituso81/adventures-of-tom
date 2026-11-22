@@ -30421,8 +30421,20 @@
     {
      "d": "2026-11-22",
      "t": "Added by c-crispfix (crispfix1): 16 spoken lines changed from crisp to apple muffins lost their old recordings (the old clips were removed). List: claude/crispfix1-voice-lines.md."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom approved generating 16 voices (about 955 credits).",
+     "at": "2026-11-22T20:35:18.048Z"
     }
-   ]
+   ],
+   "vgen": {
+    "want": true,
+    "at": "2026-11-22T20:35:18Z",
+    "n": 16,
+    "chars": 2171,
+    "est": 955
+   }
   },
   {
    "id": "c-startpics2",
