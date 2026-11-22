@@ -31032,12 +31032,12 @@
   },
   {
    "id": "c-reports-12",
-   "tag": "reports-2026-11-21",
+   "tag": "reports-2026-11-22b",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172017-kfe3, r-20261121-172826-9r47, r-20261121-172850-q5km. First note: the block/bulb/gray grass shouldnt show up until after the log is defeated.",
+   "next": "Fixed and pushed as reports-2026-11-22b: r-20261121-172017-kfe3 (the block, bulb and grey grass at Boppy's spot show only after the Log is beaten). Report deleted from inbox.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31068,12 +31068,17 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 3 report(s)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed r-20261121-172017-kfe3 (\"the block/bulb/gray grass shouldnt show up until after the log is defeated\"): the spot hides until scene ch1Spot plays. Shipped as reports-2026-11-22b."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-22T01:26:21+00:00"
+   "started_at": "2026-11-22T01:26:21+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-fix-dash3-try",

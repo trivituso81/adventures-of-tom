@@ -7,7 +7,7 @@
 // tiles that answer A without being made solid (already solid tiles, like water under the floating fish); lines = [speaker id, text].
 const AMBER_SPOTS=[
   // Chapter 1, Boppy's fishing spot (engine/plate.js HOLLOW_SPOT, SCENES.ch1Spot): the plum-sized block on the grey patch, tile (17,10).
-  {id:'ch1',map:'hollow',name:'Orange block',show:()=>!flag('bb-hollow'),found:'ch1-spot',solid:[[17,10]],
+  {id:'ch1',map:'hollow',name:'Orange block',show:()=>!flag('bb-hollow')&&!(typeof hollowSpotHidden==='function'&&hollowSpotHidden()),found:'ch1-spot',solid:[[17,10]],
     lines:[['rose','The grass is Boppy color!'],
       ['grace','It\'s grey, Rose. And it\'s just that one spot. And that orange cube has a dragonfly in it.'],
       ['rose','He\'s stuck! Tata, get him out!'],

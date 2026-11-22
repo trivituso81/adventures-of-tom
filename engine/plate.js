@@ -422,12 +422,15 @@ const bbRing=id=>typeof bbRingR==='function'?bbRingR(currentMap.id):-1;
 // picture with the bulb cleared away. Placed so its block sits exactly where engine/block-break.js has the block (centre 1100,682, 52 wide): the picture is 185.6 art px wide
 // and the block's centre is .4784,.4929 of it (tools/art-library/bake_closeup_ch1.py prints these). The old separate patch is gone.
 const HOLLOW_SPOT_PIC={cx:1104,cy:682.8,w:185.6};
+// Chapter 1 only: while the family is still following the wrappers (ch1-trail) the spot is not there until scene 5 (ch1-spot) plays.
+const hollowSpotHidden=()=>typeof STORY!=='undefined'&&STORY.mode==='full'&&STORY.chapter===1&&!!flag('ch1-trail')&&!flag('ch1-spot');
 function drawHollowSpot(after) {
   if(typeof flag!=='function') return;
   const s=T/64,st=bbState('hollow');
   if((st==='run')!==!!after) return;   // during the break these are drawn after the grey circle (bbUnderDraw), so it does not cover them
   if(st==='run'){ if(!flag('ch1-bulb')&&PROPART.ready('hollow/ch1_bulb')) PROPART.draw('hollow/ch1_bulb',1166*s,696*s,{w:20*s}); return; }   // the bulb stays through the break if nobody took it
   if(st!=='on') return;                // the spot goes with the break
+  if(hollowSpotHidden()) return;       // r-20261121-172017-kfe3: nothing of it shows until the Log is beaten and the family finds it (scene ch1Spot)
   const id=flag('ch1-bulb')?'hollow/ch1_spot_nobulb':'hollow/ch1_spot',P=HOLLOW_SPOT_PIC;
   if(PROPART.ready(id)) PROPART.draw(id,P.cx*s,P.cy*s,{w:P.w*s});
 }
