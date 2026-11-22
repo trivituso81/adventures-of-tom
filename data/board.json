@@ -32298,6 +32298,38 @@
    },
    "after": "t-startpics-try",
    "done": "2026-11-22"
+  },
+  {
+   "id": "c-squishyfont1",
+   "tag": "squishyfont1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Story and Dialogue",
+   "title": "Grace's squishy reveal: caption in the storybook font",
+   "next": "Switch the two caption lines under Grace's squishy close-up (chapter 1 scene 1) from the pixel font to the chapter card's storybook typefaces.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDMncH1LTwaSPHWkpA",
+    "opening": "\"When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial.\" Read as the chapter title card typefaces (Bricolage Grotesque and Figtree)."
+    }
+   ],
+   "prompt": {
+    "what": "Restyles the squishy caption in storybook type.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: small visual change)",
+    "effort": "medium (one caption restyle)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-squishyfont1 in data/board.json. Your first push is the commit board: start c-squishyfont1. In engine/intro.js the squishy close-up caption lines are drawn with the pixel label font; draw them in the chapter card's typefaces (Bricolage Grotesque 800, Figtree) as a DOM caption in #stage, test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
