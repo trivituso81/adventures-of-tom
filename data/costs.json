@@ -1008,6 +1008,16 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-22T15:42:37Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45037078700"
+  },
+  {
+   "service": "elevenlabs",
+   "date": "2026-11-22",
+   "amount": 627.0,
+   "what": "voice-gen Action: 16 lines tried, 2171 characters sent",
+   "source": "voice-gen run",
+   "unit": "credits",
+   "at": "2026-11-22T20:37:46Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45067282930"
   }
  ],
  "balances": [
