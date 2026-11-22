@@ -30895,13 +30895,13 @@
    "id": "c-battleux-plan",
    "tag": "battleux-plan",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Battle screen redesign: the proposal",
    "next": "Claude is writing a proposal for a new battle screen (the party and command panel, how a move is picked, read and aimed) for the Duo unfolded first, then desktop, Duo folded and a standard iPhone. Nothing in the game changes until Tom approves it in the chat; the build cards are made after that.",
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Writes the proposal for a new battle screen: how the game's battle system compares with modern RPGs, a new way to pick, read and aim a move, and drawings for the Duo unfolded, desktop, Duo folded and a standard iPhone. Nothing in the game changes.",
     "before": [
@@ -30919,6 +30919,10 @@
     {
      "d": "2026-11-22",
      "t": "New card. Tom (11-21 16:59): \"i think we need a total overhaul of the UX, especially for the lower half with actions. i think we need to take a step back and think about our battle system and compare the paradigm to similar paradigm in modern RPGs and then completely design the interactions from scratch. a few existing painpoints are the lack of clarity on what each skill does (the i icon isn't working well) without cluttering the space or creating extra taps (maybe a toggle to show/hide descriptions by default). the icons are also a bit confusing. im open to anything, but id like to see a proposal before moving forward. once approved, id ask you to create the corresponding cards\". And 17:01: \"although the viewport i mentioned is most important, i want it to also work well in landscape on a desktop browser, duo folded, and standard iphone viewport\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
@@ -31560,6 +31564,16 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
+   "title": "Battle screen redesign: the proposal",
+   "first": "2026-11-21T17:05:57-08:00",
+   "last": "2026-11-21T17:05:57-08:00",
+   "tags": [],
+   "cards": [
+    "c-battleux-plan"
    ]
   },
   {
@@ -35578,8 +35592,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "badb5cb94973f79e9d2142b5d98f18b077aca938",
- "synced_at": "2026-11-22T01:04:35+00:00",
+ "synced": "18cdc4d5233685b7056355178f4262c9f1bccebe",
+ "synced_at": "2026-11-22T01:06:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
