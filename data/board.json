@@ -31642,8 +31642,19 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanmop1. Tom (19:48): \"Deedee is using a broom not a mop.\" One change: \"a short mop\" became \"a short string mop with a floppy wet head\"."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 video (about $0.79).",
+     "at": "2026-11-22T04:01:13.343Z"
     }
-   ]
+   ],
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T04:01:13Z",
+    "n": 1,
+    "est": 0.79
+   }
   },
   {
    "id": "c-wanmop1",
