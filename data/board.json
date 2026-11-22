@@ -31832,7 +31832,7 @@
   {
    "id": "c-movefun",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "movefun1",
    "title": "Does each family move look like its name? List flat ones",
@@ -31842,12 +31842,17 @@
    "changed": "2026-11-21",
    "chat": {
     "url": "",
-    "opening": "added by pairmove1"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-21",
      "t": "Added by pairmove1. Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun. Are we making them too short?\" Tom (20:07): \"I'm gonna leave it to you to figure out that solution, but it feels like if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up or something like that... the more the advanced move is that more acceptable is for to take longer\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T04:36:53.327Z"
     }
    ],
    "prompt": {
