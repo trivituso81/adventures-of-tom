@@ -1,3 +1,7 @@
+## giddyupbake1 (2026-11-21): Rose's Giddyup plays the video Tom picked
+
+Card c-giddyupbake1. Tom (19:52): "So it sounds like roses animation is wrong then?" By eye the take he chose in the Battle Guide at 19:46 is right for the move as designed (a raised hand, a crouch, one upright cannonball jump, a landing, back to her stance, no flip, inside the frame). But Use this one (guide-use run 44982162678, commit 22483dd) only saved the video (art/raw/clips/wan-rose-giddyup-v9.mp4); nothing cut or wired it, so the move still played the default animation. Cut by the job's bake settings (strike, step 2, 1.5x, 83 rows; the video is 30 fps) into data/clips/rose-giddyup.js and art/clips/rose-giddyup.webp, wired to giddyup_tata_launch in data/b3-kit-rose.js. The tool bug is card c-guideuse-fix (Sonnet, starts by itself).
+
 ## wanmop1 (2026-11-21): Deedee's Wet-Floor asks for a string mop, not a broom
 
 Card c-wanmop1. Tom (19:48): "Deedee is using a broom not a mop." Right: the r7 video baked in wanauto1 drew a flat push-broom head. One change: deedee-wetfloor rev 8, prompt v5 = v4 with "a short mop" changed to "a short string mop with a floppy wet head"; everything else kept, fresh budget. Tom card t-wanmop1-gen holds the Generate button; the current clip stays until the new one passes and replaces it. Retired: t-giddyup-decide and c-giddyup-next (Tom picked a Giddyup take in the Battle Guide at 19:46), t-wanauto1-watch (answered).

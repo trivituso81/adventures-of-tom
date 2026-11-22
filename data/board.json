@@ -31678,6 +31678,71 @@
    }
   },
   {
+   "id": "c-giddyupbake1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "giddyupbake1",
+   "title": "Rose's Giddyup: the video Tom picked now plays in fights",
+   "next": "Shipped in giddyupbake1.",
+   "blocks": [],
+   "after": "nothing for Tom: c-guideuse-fix",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: So it sounds like roses animation is wrong then?"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (19:52): \"So it sounds like roses animation is wrong then?\" Found: the take he chose at 19:46 was saved (art/raw/clips/wan-rose-giddyup-v9.mp4) but never cut or wired; the move still played the default. Cut and wired by hand."
+    }
+   ],
+   "prompt": {
+    "what": "Cut and wire the Giddyup take Tom chose.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
+   "id": "c-guideuse-fix",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "guideusefix1",
+   "title": "Use this one saves the video but does not put it in the game",
+   "next": "Find why guide-use run 44982162678 saved Rose's Giddyup video without cutting and wiring it, and fix it.",
+   "blocks": [],
+   "auto": true,
+   "start": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by giddyupbake1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by giddyupbake1. Tom pressed Use this one on Rose's Giddyup at 19:46; the commit 22483dd added art/raw/clips/wan-rose-giddyup-v9.mp4 and the job's prompt but no data/clips/rose-giddyup.js and no wire, so the move kept the default animation. Fixed by hand in giddyupbake1."
+    }
+   ],
+   "prompt": {
+    "what": "Makes Use this one in the Battle Guide always put the chosen video in the game.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (one tool bug with a known failing run)",
+    "text": "Read CLAUDE.md and docs/BATTLE_GUIDE.md, then card c-guideuse-fix in data/board.json and tools/guidegen/use_take.py. Tom pressed Use this one on move:giddyup_tata_launch at 2026-11-22T03:46Z (data/guide-use.json); the guide-use Action run 44982162678 pushed commit 22483dd with art/raw/clips/wan-rose-giddyup-v9.mp4, the prompt file and the job's rev, but did not cut the clip (no data/clips/rose-giddyup.js, no art/clips/rose-giddyup.webp, no script tag) and did not wire giddyup_tata_launch in data/b3-kit-rose.js. Read that run's log with gh run view 44982162678 --log, find why step 2 of use_take.py (cut and wire) was skipped or failed silently, fix it so a failure stops the run with a clear error on the take instead of a quiet commit, and add a test in tools/guidegen that replays a Wan job take with bake and wire fields (rose-giddyup's) and checks the clip files, the script tag and the wire. giddyupbake1 already cut and wired this one by hand; do not redo it. Write the CHANGES heading ## guideusefix1 and push. After: nothing for Tom: end. Your first push is the commit board: start c-guideuse-fix. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "t-giddyup-decide",
    "lane": "tom",
    "col": "done",
