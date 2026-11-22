@@ -31821,31 +31821,6 @@
    "done": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44973906658",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
-  },
-  {
    "id": "c-battleux1",
    "tag": "battleux1",
    "lane": "claude",
@@ -32215,6 +32190,31 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try the auto-approve button on a pictures card, ask pictures). He was asked: No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN ) BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly. He wrote: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:11:01.052Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-artgen3try"
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44974877938",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
