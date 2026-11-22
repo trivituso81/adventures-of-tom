@@ -7,7 +7,7 @@
 //   Kits: b6Kit(id) is the basic move, the signature special and the stamped path skills (Battle Lab: everything).
 //   Perks: gear perks (Keepsake Charms), merged by b6Perks and read by the battle. Passive stamps were retired.
 //   The Family Group Chat: b6Sync raises every member to Tom's total XP after each fight (shared story XP).
-//   The Stampcard screen (renderStampsTab) and the Status page (renderStatusTab) are menu views drawn here.
+//   The Stampcard screen (renderStampsTab) is the one view the old menu shell (engine/menu.js) still draws.
 // Loaded after engine/battle2-traits.js.
 
 // ---------- Levels and XP ----------
@@ -503,65 +503,5 @@ function renderStampsTab(body,m) {
   scMark(m);
 }
 
-// ---------- Menu: the Status page ----------
-const B6_STAT_NOTES={hp:'Health before a knockout.',pow:'Strikes, throws and jumps.',grit:'Shrugs off physical hits.',warmth:'Heals, baking, pep talks and Kindness.',cool:'Keeps calm under Warmth hits and statuses.',pep:'Turn speed on the ribbon.'};
-function renderStatusTab(body,m) {
-  $('menu-foot').textContent='Green numbers come from gear (GEAR). Skills come from the Stampcard (STAMPS).';
-  const card=el('div','mcard who-card');
-  const land=document.documentElement.classList.contains('landscape');
-  card.appendChild(charPic(m,land?72:88));
-  const vit=el('div','vitals');
-  const hd=el('div','who-head');
-  const tn=el('span','who-title'); tn.textContent=m.title||''; hd.appendChild(tn);
-  const lv=el('span','who-lv'); lv.textContent='LV '+m.level; hd.appendChild(lv);
-  vit.appendChild(hd);
-  card.appendChild(vit);
-  const line=(lbl,cur,max,color,txt)=>{
-    const r=el('div','vrow');
-    r.appendChild(el('span','vlbl',lbl));
-    r.appendChild(bar(cur/max,color));
-    const n=el('span','vnum'); n.textContent=txt||(cur+' / '+max); r.appendChild(n);
-    vit.appendChild(r);
-  };
-  line('HP',m.hp,m.maxHp,m.hp/m.maxHp<=.25?'#c8553d':null);
-  const top=m.level>=B6.maxLevel;
-  line('XP',top?1:m.xp,top?1:B6.xpPerLevel,'#c9a24d',top?'MAX':m.xp+' / '+B6.xpPerLevel);
-  const left=b6SpLeft(m);
-  const note=el('div','stat-note');
-  note.textContent=m.hp<=0?m.name+' is knocked out. A Wake-Up Whistle (ITEMS) or the fountain will help.':
-    (m.hp/m.maxHp<=.25?'Below a quarter. '+m.name+' is kneeling in battle. ':'')+(top?'Top level. ':(B6.xpPerLevel-m.xp)+' XP to level '+(m.level+1)+'. ')+(left>0?left+' Stamp Point'+(left>1?'s':'')+' to spend.':'');
-  vit.appendChild(note);
-  body.appendChild(card);
-  if(m.noBattle) { note.textContent=''; const soon=el('div','mcard trait-card'); soon.appendChild(el('div','slot-label','MOVES')); const tx=el('div','stat-note'); tx.textContent=m.name+'’s stats and moves are coming soon. Until then he follows along and sits fights out.'; soon.appendChild(tx); body.appendChild(soon); return; }
-
-  const grid=el('div','stat-grid six');
-  for(const k of STAT_NAMES) {
-    const base=b2Stat(m.id,k,m.level),bonus=statBonus(m,k);
-    const c=el('div','stat-cell');
-    c.innerHTML='<div class="slot-label">'+STAT_LABEL[k]+'</div><div class="stat-value">'+(base+bonus)+(bonus?'<span class="stat-bonus">+'+bonus+'</span>':'')+'</div><div class="stat-note"></div>';
-    c.querySelector('.stat-note').textContent=B6_STAT_NOTES[k];
-    grid.appendChild(c);
-  }
-  body.appendChild(grid);
-
-  const T=B6_TRAITS[m.id];
-  if(T) { const tc=el('div','mcard trait-card'); tc.appendChild(el('div','slot-label','TRAIT')); const tt=el('div','trait-name'); tt.textContent=T.name; tc.appendChild(tt); const tx=el('div','stat-note'); tx.textContent=T.text; tc.appendChild(tx); body.appendChild(tc); }
-  const pk=b6Perks(m),pt=b6PerkText(pk);
-  if(pt) { const pc=el('div','mcard trait-card'); pc.appendChild(el('div','slot-label','PERKS')); const tx=el('div','stat-note'); tx.textContent=pt+'.'; pc.appendChild(tx); body.appendChild(pc); }
-
-  const mv=el('div','mcard');
-  mv.appendChild(el('div','slot-label','MOVES'));
-  const list=el('div','move-list');
-  const kit=b6Kit(m.id);
-  const row=(name,cost,cls)=>{ const r=el('div','move-row'+(cls?' '+cls:'')); const n=el('span','move-name'); n.textContent=name; r.appendChild(n); const c=el('span','move-cost'); c.textContent=cost; r.appendChild(c); list.appendChild(r); };
-  row(kit.basic.name,'FREE');
-  if(kit.special) row(kit.special.name,kit.special.vp+' VP');
-  for(const s of kit.skills) row(s.name,s.vp+' VP');
-  const total=B8_SLOTS.filter(sl=>b8Playable(m.id,sl)).length;
-  if(kit.skills.length<total) row((total-kit.skills.length)+' more on the Stampcard','',' locked');
-  mv.appendChild(list);
-  mv.appendChild(btn('menu-act'+(left>0?' primary':''),'to-stamps','STAMPCARD'+(left>0?' · '+left+' SP':''),()=>setMenuTab('stamps')));
-  body.appendChild(mv);
-}
 
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{b8Move,b8Built,B6,B6_PATHS,B8,B8_KITS,B8_COMBOS,b8St,b8Polish,b8UnlockRemix,b8Equip,b8SwapLoadout,b8LevelRewards,b8PpLeft,b8TkLeft,b8DcOpen,b6NodeState,b6Trim,b6SaveMember,b6LoadMember,b6AfterLoad,b6Kit,b6Perks,b6Stamp,b6Unstamp,b6AutoStamp,b6ClearStamps,b6SpLeft,b6SpEarned,b6GainXp,b6SetTotal,b6Total,b6Sync,b6BattleXp,b6Refresh,hero,ALL_MEMBERS}); });

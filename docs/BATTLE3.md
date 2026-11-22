@@ -20,7 +20,7 @@
 | Enemies | `data/b3-foes-ch<NN>.js` | Stat lines, acts, formations |
 | Lab | `data/b3-lab.js`, `engine/b3-lab.js` | The NEW BATTLE fights and their list on the title screen. `index.html?go=new&i=<fight>&move=<move id>` or `&act=<monster id>:<act id>` (the Battle Guide's In a fight button) starts that fight with the move used first: `b3LabFirstOpt` and `b3LabFirst` (`engine/b3-lab.js`) set `cfg.first` and the owner's Vibe and Rank, `b3FirstSet` and `b3FirstTurn` (`engine/b3-ui.js`) make the owner go first and use it once, `e.force` in `b3FoePick` (`engine/b3-foe.js`) does the same for a monster. Details in docs/BATTLE_GUIDE.md |
 | Rules (no drawing) | `engine/b3-core.js`, `b3-progress.js`, `b3-timeline.js`, `b3-hooks.js`, `b3-ops.js`, `b3-custom.js`, `b3-resolve.js`, `b3-foe.js` | Fight state and stat maths, Vibe Mastery (Ranks, Vibe Points, loadouts and what a loadout gives a unit), the tick clock, hooks, effect ops, the one-off rules a kit line needs when data cannot say it (one so far: Twin-Lamb Relay), one action from cost to beats, the enemy turn |
-| Vibes screen and where loadouts are kept | `engine/b3-menu.js` | The Vibes screen (both doors), the save's two fields per member, the Lab's book on the device, Vibe Points on a Lab win |
+| Where loadouts are kept | `engine/b3-menu.js` | The save's two fields per member, the Lab's book on the device, Vibe Points on a Lab win. The Vibes screen itself is the Vibes page of the menu (`engine/m2-vibes.js`, both doors; the Lab door is `m2OpenLab` with `M2.lab`); the old overlay was removed in menu4 |
 | Play layer | `engine/b3-play.js` | Beats to pictures: default animations, numbers, the view the screen shows, Battle 3's own draw function |
 | Preview and recommendation (no drawing) | `engine/b3-preview.js` | `b3Clone` (a safe copy of a fight), `b3Matchups`, `b3Preview` (a move played on a copy, nothing real changes, never rolls luck), `b3PreviewValue`, `b3Recommend` (the move that glows) |
 | Rose Mode pictures | `engine/b3-pictures.js` | Pictures for the cross, the lists, the info list, the preview box and the Vibes screen; reuses battle 2's `bp*` helpers and CSS. Words versions stay in `b3-ui.js` and are used when Rose Mode is off |
@@ -82,8 +82,8 @@ A fight is one plain object `F` from `b3NewFight(cfg)`. `b3Next(F)` moves the cl
 | `engine/draw.js`, `engine/main.js` | Keys and gamepad go to `b3Key` and `b3Pad` |
 | `engine/painted.js` `paintedWanted` | Loads the painted sheets a Battle 3 fight needs |
 | `engine/splash.js` | NEW BATTLE on the Lab pages; `engine/b3-lab.js` adds the `lab3` list. The title screen's key handler stands aside while the Vibes screen is open (`B3V.open`). |
-| `engine/menu.js` | The pause menu's VIBES command. It is not a tab: it calls `b3vOpen('menu')`, which opens the Vibes screen over the menu. |
-| `engine/main.js` `pollGamepad` | Hands the gamepad to `b3vPad` while the Vibes screen is open |
+| `engine/m2-core.js`, `engine/m2-vibes.js` | The menu's Vibes tab (the save's book) and `m2OpenLab` (Battle Lab > NEW BATTLE > VIBES AND RANKS, the Lab's book, a Rank picker). |
+| `engine/main.js` `pollGamepad` | Hands the gamepad to `m2Pad` while the Lab's Vibes page is open |
 | `saveSnapshot`, `loadGame` | Wrapped at the top of `engine/b3-menu.js` (the way `engine/bench.js` wraps them): every member with a kit is saved with `vibes` ({main, pocket, quirks, vp}) and `row`; on load every member's loadout is rebuilt from the save, or fresh when the save has none. No old field is removed. |
 | `localStorage` `aot-b3-lab` | The Battle Lab's book of loadouts (`b3LabBook`, `b3LabSave`, `b3LabReset`). Not part of any save. |
 | `index.html` | `#b3-bar` and `#b3-ui`, with the same layout classes as battle 2 (`.b2-ribbon`, `.b2-ui`, `.b2-party`, `.b2-cmd`), so portrait, landscape and tablet sizes are shared. `#battle` carries both `v2` (the shared layout) and `v3` during a Battle 3 fight. |
@@ -99,7 +99,7 @@ node tools/b3-sim.js new2 1 --seed=7 --log
 node tools/b3-sim.js new6 300 --support=4   # every 4th action of each family member is a move that deals no damage, if they have one
 python3 tools/b3_test.py              # every NEW BATTLE fight on screen, portrait and landscape; sheets in tools/shots/b3-*.png
 python3 tools/b3_test.py s3           # only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 minutes
-python3 tools/b3_test.py s4           # only the stage 4 section (the Vibes screen from both doors, Ranks, the save fields), about 2 minutes
+python3 tools/b3_test.py s4           # only the stage 4 section (the Vibes page from both doors, Ranks, the save fields), about 2 minutes
 python3 tools/b3_test.py s7           # only the stage 7 section (Rose Mode: pictures, preview, the star, keys and pad, the Vibes screen; portrait then landscape), about 3 minutes
 python3 tools/b3_test.py s6           # only the stage 6 section (RUCKUS button fill, the list, Double Team, Full), about 2 minutes
 python3 tools/b3_test.py s5c          # only the stage 5c section (Cozy Rosie and Registered Nut on The Big One, FORT, JACKET, LAMBY OUT), about 2 minutes

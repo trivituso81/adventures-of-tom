@@ -58,13 +58,13 @@ with sync_playwright() as pw:
     check('his NPC left the room while he travels',E("()=>!currentMap.npcs.some(n=>n.name==='Justin')"))
     E("()=>{ player.x=9; player.y=9; player.move=null; placeFollowers(); camera.snap=true; }"); pg.wait_for_timeout(500)
     pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-joined.png'))
-    # ---- 2. Menu tabs with Justin selected ----
+    # ---- 2. Menu pages with Justin selected ----
     E("()=>{ openMenu(); }"); pg.wait_for_timeout(300)
-    for tab in ['home','items','gear','status','stamps','saves','options']:
+    for tab in ['family','vibes','gear','bag','system']:
         for ch in range(4):
-            E("(a)=>{ menuChar=a[1]; setMenuTab(a[0]); }",[tab,ch]); pg.wait_for_timeout(120)
-    E("()=>{ menuChar=3; setMenuTab('status'); }"); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-status.png'))
-    E("()=>{ menuChar=0; setMenuTab('home'); }"); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-menu.png'))
+            E("(a)=>{ M2.sel=a[1]; menuChar=a[1]; M2.who=null; m2Tab(a[0]); }",[tab,ch]); pg.wait_for_timeout(120)
+    E("()=>{ M2.sel=3; menuChar=3; M2.who='justin'; m2Tab('vibes'); }"); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-vibes.png'))
+    E("()=>{ M2.sel=0; menuChar=0; m2Tab('family'); }"); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(SHOTS,'recruit-justin-menu.png'))
     E("()=>closeMenu()"); pg.wait_for_timeout(200)
     check('no errors opening every menu tab',not [e for e in errs if 'AudioContext' not in e and 'Failed to load' not in e],errs[:3])
     # ---- 3. A fight with Justin along: he fights in slot 4 ----

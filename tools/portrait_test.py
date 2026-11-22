@@ -108,12 +108,7 @@ with sync_playwright() as pw:
         ck(name + ': the game has a PORTRAITS entry for every id, each tagged', pg.evaluate("(a)=>a[0].every(i=>PORTRAITS[i]&&PORTRAITS[i].endsWith('?v='+a[1]))", [ids, V]))
         pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }")
         pg.wait_for_timeout(300)
-        # status screens: the Party tab and the Status tab of the pause menu
-        pg.evaluate("()=>{ openMenu(true); }"); pg.wait_for_timeout(500)
-        faces_ok(name + ' Party menu', pg, 2); pg.screenshot(path=os.path.join(SHOTS, 'portrait1-party-%s.png' % name))
-        pg.evaluate("()=>{ setMenuTab('status'); }"); pg.wait_for_timeout(500)
-        faces_ok(name + ' Status menu', pg, 1); pg.screenshot(path=os.path.join(SHOTS, 'portrait1-status-%s.png' % name))
-        pg.evaluate("()=>{ closeMenu(); }"); pg.wait_for_timeout(200)
+        # (the menu's faces are the book's own pictures, art/menu/<id>.webp, checked by tools/m2_test.py; no portraits/ crop is drawn there since menu4)
         # a Battle 3 fight: turn order ribbon, party panel, command panel
         pg.evaluate("()=>{ b3Lab(0); }"); pg.wait_for_function("()=>typeof B3!=='undefined'&&B3.active&&B3.F&&B3.F.party.length>0", timeout=30000); pg.wait_for_timeout(2500)
         faces_ok(name + ' Battle 3 (turn order, party, command)', pg, 3); pg.screenshot(path=os.path.join(SHOTS, 'portrait1-battle-%s.png' % name))

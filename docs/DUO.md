@@ -27,7 +27,7 @@ Apple has not published the page sizes. The numbers below were measured by devel
 | Classes | `applyLayout` | Unfolded sets `html.duo` and `html.tablet` (iPad mode: full screen, follows how the phone is held, rotate button hidden). Folded sets `html.duofold` only: the phone layouts, rotate toggle and all, with the title logo sized by height because the folded screen is short (657 tall). |
 | UI scale | `--ts` | Sideways: page height / 520, between 1.1 and 1.3 (1.25 at 648). HUD, D-pad, A and menu buttons, dialogue box, title menu and battle strip are the phone landscape sizes times `--ts`. |
 | Overworld, rooms | `resize` in `engine/overworld.js`, unchanged | Outdoor paintings cover the screen as before, so the Duo shows about half again as much of the map top to bottom as a phone in landscape. Square room paintings fill the width and show about 68% of their height (a phone in landscape shows 46%). Character size is unchanged. |
-| Menus, shops | `menuZoom` in `engine/menu.js` | Sideways the menu lays out at about 800 x 500 and zooms to fit (1.19 at 951 x 648). Upright it lays out about 520 wide (1.24). |
+| Menus, shops | The menu is the book of `engine/m2-core.js` (`m2Dims`: made at about 951 x 648 sideways and 466 wide upright, then scaled up; the gutter sits at the fold). `menuZoom` in `engine/menu.js` is for the shop and the Old Stampcard shell only: sideways about 800 x 500 (1.19 at 951 x 648), upright about 520 wide (1.24). |
 | Welcome screen | `html.duo` block, end of the last `<style>` in `index.html` | Logo sized by height (31% sideways, 29% upright) so it clears the family's heads; the title menu scales with `--ts`. |
 | Build stamp | `engine/main.js` | On a Duo the title stamp also shows the measured page size and pose, for example `build duo1 951x648 duo open`. |
 | Admin pages | `voices.html`, `music.html` | The two-column layout now starts at 860 px wide (was 1000), with the left column at 34% of the width up to 400 px, so the Duo sideways gets it. Art Library, Area Builder, Portrait Crops, Head Sizes and Recast Deedee already fit both poses and were not changed. |
@@ -45,7 +45,7 @@ Chromium only, with an iPhone user agent, touch, and `screen` faked to 466 x 678
 | He says | Change |
 |---|---|
 | Controls or dialogue too big or small sideways | the `--ts` clamp for `duoMode.open` in `applyLayout` |
-| Menu text too big or small | the 800 (sideways) or 520 (upright) in `menuZoom` |
+| Menu text too big or small | the book: `m2Dims` in `engine/m2-core.js`; the shop and Old Stampcard: the 800 (sideways) or 520 (upright) in `menuZoom` |
 | The stamp shows a size not in the table | add it to the table and the test poses; the layout follows the page size, so it should still fit |
 | The game did not switch when unfolded | read the stamp: if it does not say `duo`, the screen fingerprint is wrong; lower `DUO_OPEN_MIN` or fix `detectDuo` |
 | Black bar or a strip beside the game | (duoedge1: now `black-translucent`) the status bar style (`apple-mobile-web-app-status-bar-style` in `index.html`); iOS reads it when the app is added to the Home Screen, so it needs a remove and re-add |

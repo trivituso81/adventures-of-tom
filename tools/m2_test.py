@@ -14,8 +14,8 @@ from playwright.sync_api import sync_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = os.path.join(ROOT, 'tools', 'shots')
 os.makedirs(SHOTS, exist_ok=True)
-SIZES = [(951, 648, '?menu=new&duo=1', 'duo'), (393, 852, '?menu=new', 'phone'), (852, 393, '?menu=new', 'land'),
-         (466, 657, '?menu=new', 'fold'), (1280, 720, '?menu=new', 'desk')]
+SIZES = [(951, 648, '?duo=1', 'duo'), (393, 852, '', 'phone'), (852, 393, '', 'land'),
+         (466, 657, '', 'fold'), (1280, 720, '', 'desk')]
 fails = []
 
 
@@ -352,7 +352,6 @@ with sync_playwright() as pw:
         r = E(SETUP)
         check(len(r[0]) == 4, f'{name}: party has {len(r[0])} not 4: {r[0]}')
         check(len(r[1]) >= 3, f'{name}: bench has {len(r[1])}: {r[1]}')
-        check(E("()=>m2On()") is True, f'{name}: new menu is not selected by ?menu=new')
         E("()=>openMenu(false)")
         pg.wait_for_timeout(1000)
         check(E("()=>M2.open") is True, f'{name}: new menu did not open')
@@ -440,17 +439,18 @@ with sync_playwright() as pw:
             pg.keyboard.press('Escape')
             pg.wait_for_timeout(300)
             check(E("()=>!M2.open") is True, 'Escape did not close the menu')
-            # the old menu is still there when the switch is Old
-            E("()=>{ localStorage.setItem('aot-menu','old'); }")
-        E("()=>{ localStorage.removeItem('aot-menu'); }")
         BS(pg, E, name)
         check(not errs, f'{name}: console errors {errs[:3]}')
         pg.close()
-    # Default is Old
+    # No switch is left: the old menu's names are gone and the Stampcard shell and the Lab door still work
     pg = br.new_page(viewport={'width': 393, 'height': 852})
     pg.goto(f'http://127.0.0.1:{port}/index.html')
     pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start')
-    check(pg.evaluate("()=>m2On()") is False, 'default menu is not Old')
+    gone = pg.evaluate("()=>['m2On','m2AdminItem','renderHome','renderGearTab','renderItemsTab','renderSaveTab','renderStatusTab','b3vOpen','targetPicker','openQuit'].filter(n=>typeof window[n]!=='undefined'||(()=>{try{return eval('typeof '+n)!=='undefined'}catch(e){return false}})())")
+    check(not gone, f'old menu names are still defined: {gone}')
+    lab = pg.evaluate("""()=>{ splash.active=true; const r={}; m2OpenLab(); r.open=M2.open&&M2.lab; r.tabs=[...document.querySelectorAll('#m2 .m2-tab')].map(t=>t.textContent);
+      r.ranks=document.querySelectorAll('#m2 [data-m2=rank]').length; r.people=m2People().length; m2CloseNew(); r.closed=!M2.open&&!M2.lab; return r; }""")
+    check(lab['open'] and lab['tabs'] == ['Vibes'] and lab['ranks'] >= 3 and lab['people'] >= 3 and lab['closed'], f'Battle Lab door: {lab}')
     pg.close()
     br.close()
 

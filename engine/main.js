@@ -15,7 +15,7 @@ function pollGamepad() {
   const back=dir==='up'||dir==='left';
   if(typeof partyBannerHeld==='function'&&partyBannerHeld()) { input.padDir=null; if(A||B) partyBannerDismiss(); return; }   // a join or leave banner holds the game (bannerhold1)
   if(L) toggleLayout();
-  if(typeof B3V!=='undefined'&&B3V.open) { input.padDir=null; b3vPad(dir,dirEdge,A,B,L2,R1||R2); return; }   // the Vibes screen: engine/b3-menu.js
+  if(typeof M2!=='undefined'&&M2.open&&M2.lab) { input.padDir=null; m2Pad({dir,dirEdge,A,B,prev:L2,next:R1||R2}); return; }   // the Battle Lab's Vibes page: engine/m2-core.js
   if(splash.active) { input.padDir=null; splashPad(dir,dirEdge,A,B); return; }
   if(battle.active) {
     input.padDir=null;

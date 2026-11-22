@@ -195,7 +195,6 @@ const SPLASH_MODES={
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BLOCK BREAK LAB',sub:'Old Oak Park: the coin, the cracks, the colour coming back.',act:()=>splashGo(bbLabStart)},
     brpAdminItem(),
-    ...(typeof m2AdminItem==='function'?[m2AdminItem()]:[]),   // MENU: OLD or NEW (engine/m2-core.js)
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -436,7 +435,7 @@ function splashPad(dir,dirEdge,A,B) {
 for(const ev of ['touchend','click']) window.addEventListener(ev,unlockAudio,{passive:true});
 window.addEventListener('keydown',e=>{
   if(!splash.active) return;
-  if(typeof B3V!=='undefined'&&B3V.open) return;   // the Vibes screen is open over the Battle Lab list: its own keys (engine/b3-menu.js)
+  if(typeof M2!=='undefined'&&M2.open&&M2.lab) return;   // the Vibes page is open over the Battle Lab list: its own keys (engine/m2-core.js)
   if(typeof BUILDLOG!=='undefined'&&BUILDLOG.open) return;   // the builds list is open over the welcome screen: its own keys (engine/build-history.js)
   if(e.code==='KeyL') return; // rotate still works
   e.stopImmediatePropagation();

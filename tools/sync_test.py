@@ -147,12 +147,13 @@ with sync_playwright() as pw:
     G['mode'] = '404'; p3.evaluate("window.__msg=null;syncTap(m=>window.__msg=m)"); p3.wait_for_function('window.__msg')
     ok('Gists permission' in p3.evaluate('__msg') and p3.evaluate('syncOn()') is False, 'token without gist permission: tells Tom what the token needs')
     G['mode'] = 'ok'
-    # 10. in-game Load tab lists other devices too
+    # 10. in-game System page lists other devices too
     p4.evaluate("splash.active=false;document.getElementById('splash').hidden=true;endIntro&&endIntro()")
-    p4.evaluate("openMenu&&openMenu(); menuTab='saves'; renderMenu()"); p4.wait_for_timeout(800)
-    txt = p4.evaluate("document.getElementById('menu')?document.getElementById('menu').innerText:''")
-    ok('SYNC NOW' in txt and 'CLOUD OFF' in txt and 'From your other devices' in txt and 'iPad app' in txt, 'Load tab shows other devices and SYNC NOW / CLOUD OFF (%s)' % txt.replace('\n', ' | ')[:160])
-    p4.screenshot(path=os.path.join(SHOTS, 'sync-load-tab.png'))
+    p4.evaluate("openMenu&&openMenu(); m2Tab('system')"); p4.wait_for_timeout(800)
+    txt = p4.evaluate("document.getElementById('m2')?document.getElementById('m2').innerText:''")
+    U = txt.upper()
+    ok('SYNC NOW' in U and 'CLOUD OFF' in U and 'FROM YOUR OTHER DEVICES' in U and 'IPAD APP' in U, 'System page shows other devices and SYNC NOW / CLOUD OFF (%s)' % txt.replace('\n', ' | ')[:160])
+    p4.screenshot(path=os.path.join(SHOTS, 'sync-system-page.png'))
     p4.evaluate("syncOff()"); ok(p4.evaluate('syncOn()') is False and p4.evaluate("localStorage.getItem('aot-sync-gist')") is None and p4.evaluate('syncOthers().length') == 0, 'CLOUD OFF clears the token, gist id and the cloud list on this device')
     for n, e in (('p1', e1), ('p2', e2), ('p3', e3), ('p4', e4)): ok(not e, n + ': no page errors ' + str(e))
     br.close()

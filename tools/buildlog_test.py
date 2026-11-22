@@ -286,10 +286,11 @@ with sync_playwright() as pw:
 
         # B14: In the game: open the menu, tap the build row.
         pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; openMenu(); }"); pg.wait_for_timeout(500)
-        mtxt=pg.inner_text('#menu-build')
+        pg.evaluate("()=>m2Tab('system')"); pg.wait_for_timeout(400)
+        mtxt=pg.inner_text('.m2-bf')
         need(tag in mtxt and re.search(r'\d+:\d\d [AP]M',mtxt) is not None, f'{layout} B14: menu label shows build and time ({mtxt!r})')
         pg.screenshot(path=f'{OUT}/{layout}-9-menu.png')
-        pg.tap('#menu-build'); pg.wait_for_timeout(500)
+        pg.tap('.m2-blink'); pg.wait_for_timeout(500)
         need(pg.evaluate("()=>BUILDLOG.open&&menuOpen"), f'{layout} B14: tap on the menu label opens the list over the menu')
         pg.screenshot(path=f'{OUT}/{layout}-10-menu-list.png')
         pg.keyboard.press('Escape'); pg.wait_for_timeout(300)

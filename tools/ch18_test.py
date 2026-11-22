@@ -78,7 +78,7 @@ with sync_playwright() as pw:
     check('chapter 18 done and Tom gone',pg.evaluate("()=>flag('ch18-done')===true&&flag('tom-gone')===true"))
     # the menu has no Tom portrait
     pg.evaluate("()=>{ openMenu&&openMenu(); }"); pg.wait_for_timeout(600); shot(pg,'menu')
-    check('menu roster lists no Tom',pg.evaluate("()=>[...document.querySelectorAll('#menu-body .rrow .r-name')].every(n=>!/^Tom/.test(n.textContent))&&document.querySelectorAll('#menu-body .rrow .r-name').length>=3"))
+    check('menu line-up lists no Tom',pg.evaluate("()=>{ const n=[...document.querySelectorAll('#m2 .m2-plate')].map(b=>b.getAttribute('aria-label')||''); return n.length>=3&&n.every(t=>!/^Tom/.test(t)); }"))
     pg.evaluate("()=>{ closeMenu&&closeMenu(); }"); pg.wait_for_timeout(300)
     # walking around as TNB: the followers trail him and nothing errors
     pg.evaluate("()=>{ for(const d of ['up','up','right','right']) { movePlayer(d); } }"); pg.wait_for_timeout(900)

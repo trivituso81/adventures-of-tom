@@ -1,15 +1,11 @@
 'use strict';
-// engine/menu.js — The pause menu: PARTY, ITEMS, GEAR, STATUS, STAMPS, VIBES, LOAD, OPTIONS (engine/feel.js), QUIT. (STATUS and STAMPS are drawn by engine/progress.js.)
-// VIBES is not a tab: it opens the new battle system's Vibes screen over the menu (engine/b3-menu.js).
-// Section tabs and character tabs share one tab style. STATUS and GEAR are per character (character row shown);
-// ITEMS and SAVE are party-wide (character row hidden; items pick their target inline).
-// Controls: tap; or arrows/WASD move focus, Enter/A selects, Esc/B goes back, Q/E (L2/R2, R1) switch character.
-// Layout follows the Final Fantasy IV Pixel Remaster menu: command list on the left (with play time and coins
-// under it), the party roster on the right, the location line, then a hint bar with Rotate, Music, Sound, Close.
-const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'vibes',label:'Vibes'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
-// Saving happens from the SAVE button on the map HUD (openSave), which shows just the save popup.
-const PER_CHAR_TABS=['status','gear','stamps'];
-// Character portraits (menu roster, dialogue box, battle panels, chapter select): head crops of each hero painting,
+// engine/menu.js: what is left of the old pause menu (card c-menu4). The menu is now the book of engine/m2-core.js.
+// This file keeps: the face pictures (PORTRAITS, drawPortrait), the gear and bag helpers other screens borrow, the Save pop-up opened
+// from the map's SAVE button (openSave), and a small shell that draws only the Old Stampcard (engine/progress.js) while a chapter
+// still runs on the old battle. Controls in the shell: tap; arrows/WASD move focus, Esc/B goes back, Q/E switch character.
+const MENU_TABS=[{id:'home',label:'Menu'},{id:'stamps',label:'Stamps'}];
+const PER_CHAR_TABS=['stamps'];
+// Character portraits (the menu's faces, dialogue box, battle panels, chapter select): head crops of each hero painting,
 // baked by tools/sprite-bake/bake_portraits.py (256 x 256). Boomie has no hero painting yet. Empty shows a placeholder.
 // portrait1: the faces in status screens, turn order and battle panels (portraits/<id>.png, tools/sprite-bake/bake_portraits.py). The ids and the tag
 // come from data/portrait-ver.js (written by the baker), so a saved crop reaches every screen and the phone fetches the new picture.
@@ -25,22 +21,15 @@ for(const [id,src] of Object.entries(PORTRAITS)) if(src&&!id.startsWith('foe_'))
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;
-const STAT_SHORT={hp:'HP',pow:'POW',grit:'GRIT',warmth:'WARM',cool:'COOL',pep:'PEP'};
 // BEST GEAR scoring: stat points (HP counts less, it comes in bigger numbers); charms by their perk (b6PerkScore).
 const GEAR_WEIGHT={hp:.2,pow:1,grit:1,warmth:1,cool:1,pep:1};
-const ITEM_FILTERS=[{id:'all',label:'ALL'},{id:'heal',label:'HEAL'},{id:'battle',label:'BATTLE'},{id:'gear',label:'GEAR'},{id:'keep',label:'KEEPSAKE'}];
-let menuSaving=false,menuQuit=false,menuItem=null,menuFilter='all',menuConfirm=null,menuConfirmTimer=0,menuKeyNav=false,menuFocusNext=null;
+let menuSaving=false,menuConfirm=null,menuConfirmTimer=0,menuKeyNav=false,menuFocusNext=null;
 menuTab='home';
 
 const gearVal=(it,k)=>!it?0:((it.stats&&it.stats[k])||0);
 const gearScore=it=>!it?0:GEAR_KEYS.reduce((a,k)=>a+gearVal(it,k)*GEAR_WEIGHT[k],0)+b6PerkScore(it.perk);
 const itemCat=it=>it.slot?'gear':(fieldUsable(it)?'heal':(battleUsable(it)?'battle':'keep'));
 const CAT_ORDER={heal:0,battle:1,gear:2,keep:3};
-function gearDiff(m,id,slot) {
-  const it=id?items[id]:null; slot=slot||it.slot;
-  const cur=m.equipment[slot]?items[m.equipment[slot]]:null;
-  return GEAR_KEYS.map(k=>[k,gearVal(it,k)-gearVal(cur,k)]).filter(([,v])=>v);
-}
 function gearOptions(m,slot) {
   return [...new Set(bag.filter(id=>items[id]&&items[id].slot===slot&&canWear(m,items[id])))]
     .sort((a,b)=>gearScore(items[b])-gearScore(items[a])||items[a].name.localeCompare(items[b].name));
@@ -50,7 +39,6 @@ function bestFor(m,slot) {
   for(const id of gearOptions(m,slot)) { const s=gearScore(items[id]); if(s>bs) { best=id; bs=s; } }
   return best;
 }
-const hasUpgrade=m=>wearSlots(m).some(s=>bestFor(m,s));
 function gearTotals(m,swapSlot,swapId) {
   const t={};
   for(const k of GEAR_KEYS) {
@@ -68,17 +56,6 @@ function btn(cls,key,html,fn) {
   if(fn) b.addEventListener('click',e=>{ e.stopPropagation(); fn(e); });
   return b;
 }
-// Stat changes as chips; a charm (perk) shows what its perk does instead.
-function diffChips(diffs,cur,it) {
-  const w=el('span','chips-inline');
-  const perk=it&&it.perk?b6PerkText(it.perk):'';
-  if(perk) { const c=el('span','dchip perk'); c.textContent='★ '+perk; w.appendChild(c); }
-  else if(it===null&&cur&&cur.perk) { const c=el('span','dchip down'); c.textContent='No perk'; w.appendChild(c); }
-  if(!diffs.length) { if(!perk&&!(it===null&&cur&&cur.perk)) w.appendChild(el('span','dchip same',cur?'Same stats':'No stats')); return w; }
-  for(const [k,v] of diffs) { const c=el('span','dchip '+(v>0?'up':'down')); c.textContent=(v>0?'▲':'▼')+signed(v)+' '+STAT_SHORT[k]; w.appendChild(c); }
-  return w;
-}
-function miniPortrait(m) { const c=document.createElement('canvas'); c.width=24; c.height=24; drawPortrait(m,c); return c; }
 function bar(frac,color) { const b=el('span','mbar'); const i=el('i'); i.style.width=Math.max(0,Math.min(100,Math.round(frac*100)))+'%'; if(color) i.style.background=color; b.appendChild(i); return b; }
 
 // ---------- Actions ----------
@@ -86,23 +63,6 @@ function bar(frac,color) { const b=el('span','mbar'); const i=el('i'); i.style.w
 function syncHeroHat() {
   const it=hero.equipment.Charm&&items[hero.equipment.Charm],h=it&&it.hat;
   palettes.player.hat=h?(String(h)[0]==='#'?h:'#dac487'):null;
-}
-function menuWear(m,id) {
-  const it=items[id];
-  if(!canWear(m,it)) { sfx.nope(); showToast(it.name+' is made for '+memberById(it.who).name+'. It would not fit '+m.name+'.',2.4); return; }
-  const slot=it.slot;
-  if(!equipTo(m,id)) { sfx.nope(); return; }
-  sfx.equip(); syncHeroHat();
-  showToast(m.name+' puts on '+it.name+'.',1.6);
-  if(menuTab==='gear') { menuSlot=null; menuFocusNext='slot-'+slot; }
-  renderMenu();
-}
-function menuTakeOff(m,slot) {
-  const id=m.equipment[slot]; if(!id) return;
-  m.equipment[slot]=null; bag.push(id);
-  sfx.unequip(); syncHeroHat();
-  menuSlot=null; menuFocusNext='slot-'+slot;
-  renderMenu();
 }
 function equipBest(m) {
   const before=gearTotals(m),put=[];
@@ -112,7 +72,7 @@ function equipBest(m) {
   const after=gearTotals(m);
   const ch=GEAR_KEYS.map(k=>[k,after[k]-before[k]]).filter(([,v])=>v).map(([k,v])=>signed(v)+' '+STAT_LABEL[k]).join(', ');
   showToast(m.name+' puts on '+put.join(', ')+'.'+(ch?' '+ch+'.':''),3.2);
-  menuSlot=null; renderMenu();
+  renderMenu();
 }
 // Rose Mode: nobody has to open GEAR. The best gear goes on by itself whenever something new arrives (gift, win, shop,
 // story) and whenever someone joins the party. list = who to dress (default: the party). Returns toast sentences.
@@ -123,14 +83,7 @@ function autoGear(list) {
   if(put.length&&typeof syncHeroHat==='function') syncHeroHat();
   return put;
 }
-function removeAll(m) {
-  const off=wearSlots(m).filter(s=>m.equipment[s]);
-  if(!off.length) { sfx.nope(); return; }
-  for(const s of off) { bag.push(m.equipment[s]); m.equipment[s]=null; }
-  sfx.unequip(); syncHeroHat();
-  showToast(m.name+' takes everything off. Back to the pockets.',2);
-  menuSlot=null; renderMenu();
-}
+
 function askConfirm(key) {
   menuConfirm=key; clearTimeout(menuConfirmTimer);
   menuConfirmTimer=setTimeout(()=>{ if(menuConfirm===key) { menuConfirm=null; if(menuOpen) renderMenu(); } },3500);
@@ -152,8 +105,8 @@ function renderMenu() {
   // Command list.
   const cmds=$('menu-cmds'); cmds.innerHTML='';
   for(const t of MENU_TABS) {
-    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>{ if(t.id==='quit') openQuit(); else if(t.id==='vibes') b3vOpen('menu'); else setMenuTab(t.id); });
-    if(t.id!=='quit'&&t.id!=='vibes') { b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab); }
+    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>setMenuTab(t.id));
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab);
     if(t.id==='stamps'&&party.some(b6Stampable)) b.appendChild(el('i','cmd-dot'));   // Stamp Points waiting
     cmds.appendChild(b);
   }
@@ -171,22 +124,14 @@ function renderMenu() {
     copy.appendChild(bar(pm.hp/pm.maxHp,pm.hp/pm.maxHp<=.25?'#c8553d':null));
     copy.appendChild(bar(pm.level>=B6.maxLevel?1:pm.xp/B6.xpPerLevel,'#c9a24d'));
     b.appendChild(copy);
-    if(menuTab==='gear'&&hasUpgrade(pm)) b.appendChild(el('i','up-badge','\u25B2'));
     if(menuTab==='stamps'&&b6Stampable(pm)) b.appendChild(el('i','up-badge sp','\u2605'));
     pick.appendChild(b);
   });
 
-  if(menuTab==='home') renderHome(body);
-  else if(menuTab==='status') renderStatusTab(body,m);
-  else if(menuTab==='gear') renderGearTab(body,m);
-  else if(menuTab==='stamps') renderStampsTab(body,m);
-  else if(menuTab==='items') renderItemsTab(body);
-  else if(menuTab==='options') b7RenderOptions(body);   // engine/feel.js: difficulty, battle speed, High-Five
-  else renderSaveTab(body);
+  if(menuTab==='stamps') renderStampsTab(body,m);   // the only page left in this shell (the Old Stampcard link, engine/m2-core.js)
   $('menu-foot').hidden=menuTab==='home';
 
   body.scrollTop=top;
-  renderQuit();
   b6Badge();
   if(keep) {
     const f=document.querySelector('#menu [data-k="'+keep+'"]')||document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd');
@@ -195,8 +140,6 @@ function renderMenu() {
 }
 const fmtTime=s=>{ s=Math.floor(s); const h=Math.floor(s/3600),mm=Math.floor(s/60)%60; return h+':'+String(mm).padStart(2,'0'); };
 
-// Portrait box: an image when PORTRAITS has one, otherwise a placeholder with the initial.
-// Portrait size snapped so the 64px art lands on whole device pixels.
 // Big screens (desktop, iPad): the menu and shop lay out as if on a phone in landscape (about 880 x 500),
 // then zoom up to fill the screen, so text and windows grow together. Phones never reach the threshold.
 let menuZ=1;
@@ -209,81 +152,19 @@ function menuZoom() {
   for(const id of ['menu','shop']) { const e=$(id); if(e) e.style.zoom=menuZ>1?menuZ.toFixed(3):''; }
   return menuZ;
 }
-function snapPz(want) { const dpr=(window.devicePixelRatio||1)*menuZ,step=64/dpr,k=Math.floor(want/step); return k>=1&&step*k>=want*.8?step*k:want; }
-// Big portrait for the STATUS and GEAR views.
-function charPic(m,want,cls) {
-  const b=portraitBox(m,'lg'+(cls?' '+cls:'')+(m.hp<=0?' ko':''));
-  b.style.setProperty('--pz',snapPz(want).toFixed(2)+'px');
-  return b;
-}
-function portraitBox(m,cls) {
-  const box=el('span','pbox'+(cls?' '+cls:''));
-  if(PORTRAITS[m.id]) { const img=document.createElement('img'); img.src=PORTRAITS[m.id]; img.alt=m.name; box.appendChild(img); }
-  else { box.classList.add('ph'); box.innerHTML='<b></b><small>PORTRAIT</small>'; box.querySelector('b').textContent=m.name[0]; }
-  return box;
-}
-// Big gold level badge: the Party roster and the top of the Stampcard (engine/progress.js) use it.
-function levelBadge(p) {
-  const b=el('span','lv-badge'); b.setAttribute('aria-label','Level '+p.level);
-  b.appendChild(el('small','','LEVEL')); const v=el('b'); v.textContent=p.level; b.appendChild(v);
-  return b;
-}
-// HOME: the roster. Tap someone to see their status.
-function renderHome(body) {
-  const list=el('div','roster');
-  party.forEach((p,i)=>{
-    const row=btn('rrow'+(i===menuChar?' active':'')+(p.hp<=0?' ko':''),'roster-'+i,'',()=>{ menuChar=i; setMenuTab('status'); });
-    row.setAttribute('aria-label',p.name+', status');
-    row.appendChild(portraitBox(p));
-    const who=el('span','r-who'), id=el('span','r-id');
-    const t=el('span','r-title'); t.textContent=p.title; id.appendChild(t);
-    const n=el('span','r-name'); n.textContent=p.name+(p.hp<=0?' \u00b7 KO':''); id.appendChild(n);
-    who.appendChild(id); who.appendChild(levelBadge(p));
-    row.appendChild(who);
-    const st=el('span','r-stats');
-    const line=(lbl,val,cls)=>{ const l=el('span','r-line'+(cls?' '+cls:'')); l.appendChild(el('span','r-lbl',lbl)); const v=el('span','r-val'); v.textContent=val; l.appendChild(v); st.appendChild(l); };
-    line('HP',p.hp+' / '+p.maxHp,p.hp<=0?'ko':(p.hp/p.maxHp<=.25?'low':''));
-    { const sp=b6SpLeft(p); line('Stamps',sp?sp+' SP':'—',sp&&b6Stampable(p)?'gold':''); }
-    row.appendChild(st);
-    const nx=el('span','r-next'); nx.appendChild(el('span','r-lbl','Next level in')); const nv=el('span','r-val'); nv.textContent=p.level>=B6.maxLevel?'MAX':Math.max(0,B6.xpPerLevel-p.xp); nx.appendChild(nv);
-    row.appendChild(nx);
-    list.appendChild(row);
-  });
-  // Always show four slots, like FF IV; slots nobody fills stay empty (not focusable).
-  for(let i=party.length;i<(typeof PARTY_MAX==='number'?PARTY_MAX:4);i++) {
-    const empty=el('div','rrow empty'); empty.setAttribute('aria-hidden','true'); list.appendChild(empty);
-  }
-  body.appendChild(list);
-  sizeRoster(); requestAnimationFrame(sizeRoster);
-}
-// Portrait size: rows split the window evenly (like FF IV) and the portrait fills its row.
-// Snapped so 64px art lands on whole device pixels (no uneven pixel widths).
-function sizeRoster() {
-  const list=document.querySelector('#menu .roster'); if(!list) return;
-  const body=$('menu-body'), n=Math.max(1,list.children.length);
-  const cs=getComputedStyle(body), padV=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);
-  const rowH=(body.clientHeight-padV)/Math.max(4,n);
-  const land=document.documentElement.classList.contains('landscape');
-  const cap=land?Math.min(150,body.clientWidth*.2):Math.min(132,body.clientWidth*.46);
-  const want=Math.max(48,Math.min(cap,rowH-12));
-  const dpr=(window.devicePixelRatio||1)*menuZ, step=64/dpr;
-  const snap=step*Math.floor(want/step);
-  const pz=snap>=want*.88?snap:Math.floor(want*dpr)/dpr;
-  list.style.setProperty('--pz',pz.toFixed(2)+'px');
-}
-addEventListener('resize',()=>{ menuZoom(); if(!$('menu').hidden) sizeRoster(); });
+addEventListener('resize',()=>{ menuZoom(); });
 
 // Leaving the Stampcard (another tab, Back, or closing the menu) autosaves quietly, so new stamps are never lost.
 function menuLeaveStamps() { if(menuTab==='stamps'&&typeof saveGame==='function') saveGame('auto',true); }
 function setMenuTab(id) {
   if(menuTab!==id) { sfx.tab(); menuLeaveStamps(); }
-  menuTab=id; menuSlot=null; menuItem=null; menuConfirm=null; if(typeof b6Sure!=='undefined') b6Sure=null;
+  menuTab=id; menuConfirm=null; if(typeof b6Sure!=='undefined') b6Sure=null;
   $('menu-body').scrollTop=0; menuFocusNext=menuKeyNav?'cmd-'+id:null;
   renderMenu();
 }
 function setMenuChar(i) {
   if(menuChar!==i) sfx.tab();
-  menuChar=i; menuSlot=null;
+  menuChar=i;
   menuFocusNext=menuKeyNav?'char-'+i:null;
   renderMenu();
 }
@@ -292,217 +173,10 @@ function menuCycleChar(d) {
   setMenuChar((menuChar+d+party.length)%party.length);
 }
 
-// STATUS and STAMPS: renderStatusTab and renderStampsTab in engine/progress.js.
+// STAMPS: renderStampsTab in engine/progress.js.
 
-// GEAR: stat panel with live preview, BEST GEAR, slots with comparisons.
-function renderGearTab(body,m) {
-  $('menu-foot').textContent='Tool: POW and WARMTH. Outfit: HP, GRIT and COOL. Charm: a perk. ▲ means a better piece is in the pockets.';
-  const wrap=el('div','gear-wrap');
-  const side=el('div','gear-side');
-  const panel=el('div','mcard gear-stats'); panel.id='gear-stats';
-  const t=gearTotals(m);
-  for(const k of GEAR_KEYS) {
-    const c=el('div','gs-cell'); c.dataset.stat=k;
-    c.innerHTML='<span class="gs-lbl">'+STAT_SHORT[k]+'</span><span class="gs-val">'+t[k]+'</span><span class="gs-new"></span>';
-    panel.appendChild(c);
-  }
-  const top=el('div','gear-top');
-  top.appendChild(charPic(m,document.documentElement.classList.contains('landscape')?96:64));
-  top.appendChild(panel);
-  side.appendChild(top);
-  const acts=el('div','gear-acts');
-  const up=hasUpgrade(m);
-  acts.appendChild(btn('menu-act primary'+(up?'':' dim'),'best','★ BEST GEAR',()=>equipBest(m)));
-  acts.appendChild(btn('menu-act'+(wearSlots(m).some(s=>m.equipment[s])?'':' dim'),'strip','REMOVE ALL',()=>removeAll(m)));
-  side.appendChild(acts);
-  wrap.appendChild(side);
 
-  const list=el('div','slot-list');
-  for(const slot of wearSlots(m)) {
-    const id=m.equipment[slot],it=id?items[id]:null,open=menuSlot===slot,better=bestFor(m,slot);
-    const opts=gearOptions(m,slot);
-    const row=btn('slot-row'+(open?' open':''),'slot-'+slot,'',()=>{ sfx.tab(); menuSlot=open?null:slot; menuFocusNext=menuKeyNav?(open?'slot-'+slot:(opts[0]?'cand-'+slot+'-'+opts[0]:'slot-'+slot)):null; renderMenu(); });
-    row.setAttribute('aria-expanded',open);
-    row.appendChild(el('span','slot-name',SLOT_SHORT[slot]));
-    row.appendChild(el('span','item-icon sm',it?it.icon+(it.color?'<i class="swatch" style="background:'+it.color+'"></i>':''):'·'));
-    const copy=el('span','item-copy');
-    const nm=el('span','item-name'); nm.textContent=it?it.name:'Nothing'; copy.appendChild(nm);
-    const meta=el('span','item-meta'); meta.textContent=it?(bonusText(it)||'No stats. Looks nice.'):(opts.length?opts.length+' in the pockets fit here.':'Open '+SLOT_LABEL[slot]+' slot.'); copy.appendChild(meta);
-    row.appendChild(copy);
-    if(better) row.appendChild(el('span','up-mark','▲'));
-    row.appendChild(el('span','chev',open?'▾':'▸'));
-    list.appendChild(row);
-    if(!open) continue;
-    const picker=el('div','picker');
-    opts.forEach((oid,i)=>{
-      const o=items[oid],n=countInBag(oid),diffs=gearDiff(m,oid,slot);
-      const c=btn('item-row cand','cand-'+slot+'-'+oid,'',()=>menuWear(m,oid));
-      c.dataset.prev=oid; c.dataset.slot=slot;
-      c.appendChild(el('span','item-icon sm',o.icon+(o.color?'<i class="swatch" style="background:'+o.color+'"></i>':'')));
-      const cc=el('span','item-copy');
-      const cn=el('span','item-name'); cn.textContent=o.name+(n>1?' ×'+n:''); cc.appendChild(cn);
-      const vs=el('span','item-meta'); vs.textContent=it?'vs '+it.name:'vs nothing'; cc.appendChild(vs);
-      cc.appendChild(diffChips(diffs,it,o));
-      c.appendChild(cc);
-      if(oid===better) c.appendChild(el('span','item-tag best','BEST'));
-      picker.appendChild(c);
-    });
-    if(id) {
-      const off=btn('item-row cand','off-'+slot,'<span class="item-icon sm">✕</span><span class="item-copy"><span class="item-name">Take it off</span><span class="item-meta">Back to the pockets.</span></span>',()=>menuTakeOff(m,slot));
-      off.dataset.prev=''; off.dataset.slot=slot;
-      off.querySelector('.item-copy').appendChild(diffChips(gearDiff(m,null,slot),it,null));
-      picker.appendChild(off);
-    }
-    const others=[...new Set(bag.filter(b=>items[b]&&items[b].slot===slot&&!canWear(m,items[b])))];
-    if(!opts.length) picker.appendChild(el('div','menu-empty','Nothing in the pockets fits '+m.name+' here yet.'));
-    if(others.length) { const note=el('div','menu-empty small'); note.textContent=others.map(b=>items[b].name+' ('+memberById(items[b].who).name+' only)').join(', ')+' also in the pockets.'; picker.appendChild(note); }
-    list.appendChild(picker);
-  }
-  wrap.appendChild(list);
-  body.appendChild(wrap);
-}
-// Show "4 > 5" in the stat panel while a candidate is focused or hovered.
-function gearPreview(slot,id) {
-  const panel=$('gear-stats'); if(!panel) return;
-  const m=party[menuChar],now=gearTotals(m),then=slot!=null?gearTotals(m,slot,id||null):now;
-  for(const c of panel.children) {
-    const k=c.dataset.stat,d=then[k]-now[k],nw=c.querySelector('.gs-new');
-    c.classList.toggle('up',d>0); c.classList.toggle('down',d<0);
-    nw.textContent=d?'→'+then[k]:'';
-  }
-}
 
-// ITEMS: filters, stacks, inline targets.
-function renderItemsTab(body) {
-  $('menu-foot').textContent='\u{1FA99} '+coins+' coins. Healing works here; battle items are used from the ▼ Bag in a fight. Buy and sell at Penny’s Pockets.';
-  const ids=[...new Set(bag)].filter(id=>items[id]);
-  const count={all:ids.length,heal:0,battle:0,gear:0,keep:0};
-  for(const id of ids) count[itemCat(items[id])]++;
-  if(menuFilter!=='all'&&!count[menuFilter]) menuFilter='all';
-  if(menuItem&&!bag.includes(menuItem)) menuItem=null;
-  const chips=el('div','filter-row');
-  for(const f of ITEM_FILTERS) {
-    if(f.id!=='all'&&!count[f.id]) continue;
-    chips.appendChild(btn('fchip'+(f.id===menuFilter?' active':''),'f-'+f.id,f.label+' <b>'+count[f.id]+'</b>',()=>{ if(menuFilter!==f.id) sfx.tab(); menuFilter=f.id; menuItem=null; menuFocusNext=menuKeyNav?'f-'+f.id:null; renderMenu(); }));
-  }
-  body.appendChild(chips);
-  if(!ids.length) { body.appendChild(el('div','menu-empty','Pockets empty. Go find a door.')); return; }
-  const shown=ids.filter(id=>items[id]).filter(id=>menuFilter==='all'||itemCat(items[id])===menuFilter)
-    .sort((a,b)=>CAT_ORDER[itemCat(items[a])]-CAT_ORDER[itemCat(items[b])]||items[a].name.localeCompare(items[b].name));
-  const list=el('div','item-list single');
-  for(const id of shown) {
-    const it=items[id],cat=itemCat(it),n=countInBag(id),open=menuItem===id;
-    const row=el('div','item-row'+(open?' open':''));
-    row.appendChild(el('span','item-icon',it.icon+(it.color?'<i class="swatch" style="background:'+it.color+'"></i>':'')));
-    const copy=el('span','item-copy');
-    const nm=el('span','item-name'); nm.textContent=it.name+(n>1?' ×'+n:''); copy.appendChild(nm);
-    const fx=bonusText(it);
-    if(fx||it.slot) { const s=el('span','shop-note '+(cat==='gear'?'up':'fx')); s.textContent=(it.slot?(it.who?memberById(it.who).name+' · ':'')+SLOT_LABEL[it.slot]+(fx?' · ':''):'')+fx.replace('Battle: ',''); copy.appendChild(s); }
-    const d=el('span','item-meta'); d.textContent=it.desc; copy.appendChild(d);
-    row.appendChild(copy);
-    const act=el('span','shop-actions');
-    if(cat==='heal') {
-      if(it.healAll) act.appendChild(btn('shop-btn','use-'+id,'USE ALL',()=>useFieldItem(hero,id)));
-      else act.appendChild(btn('shop-btn'+(open?' wear':''),'use-'+id,open?'CLOSE':'USE',()=>toggleItem(id)));
-    } else if(cat==='gear') {
-      const wearers=party.filter(p=>canWear(p,it));
-      if(wearers.length) act.appendChild(btn('shop-btn'+(open?' wear':' ghost'),'use-'+id,open?'CLOSE':'WEAR',()=>toggleItem(id)));
-      else act.appendChild(el('span','item-tag muted',(memberById(it.who).name+' only').toUpperCase()));
-    } else act.appendChild(el('span','item-tag muted',cat==='battle'?'IN BATTLE':'KEEPSAKE'));
-    row.appendChild(act);
-    list.appendChild(row);
-    if(open) list.appendChild(targetPicker(id));
-  }
-  body.appendChild(list);
-}
-function toggleItem(id) {
-  sfx.tab();
-  menuItem=menuItem===id?null:id;
-  menuFocusNext=menuKeyNav?(menuItem?'tgt-'+id+'-0':'use-'+id):null;
-  renderMenu();
-}
-// Who gets it: each party member with the bar that matters and what would happen.
-function targetPicker(id) {
-  const it=items[id],box=el('div','picker targets');
-  const list=it.slot?party.filter(p=>canWear(p,it)):party;
-  list.forEach((p,i)=>{
-    const t=btn('item-row tgt','tgt-'+id+'-'+i,'',()=>it.slot?menuWear(p,id):useFieldItem(p,id));
-    t.appendChild(portraitBox(p,'sm'));
-    const cc=el('span','item-copy');
-    const nm=el('span','item-name'); nm.textContent=p.name; cc.appendChild(nm);
-    let tag='',dim=false;
-    if(it.slot) {
-      const cur=p.equipment[it.slot]?items[p.equipment[it.slot]]:null;
-      const vs=el('span','item-meta'); vs.textContent=cur?'Wears '+cur.name:'No '+SLOT_LABEL[it.slot]; cc.appendChild(vs);
-      cc.appendChild(diffChips(gearDiff(p,id),cur,it));
-      if(bestFor(p,it.slot)===id) tag='BEST';
-    } else {
-      const cur=p.hp,max=p.maxHp;
-      const r=el('span','vrow tight');
-      r.appendChild(bar(cur/max,cur/max<=.25?'#c8553d':null));
-      const num=el('span','vnum'); num.textContent='HP '+cur+'/'+max; r.appendChild(num);
-      cc.appendChild(r);
-      if(p.id==='nara'&&it.heal&&!it.dogOk) { tag='WON’T EAT'; dim=true; }
-      else if(it.revive) { tag=p.hp>0?'AWAKE':'+'+Math.ceil(p.maxHp/2)+' HP'; dim=p.hp>0; }
-      else if(p.hp<=0) { tag='KO'; dim=true; }
-      else if(cur>=max) { tag='FULL'; dim=true; }
-      else tag='+'+Math.min(it.heal||it.healAll||0,max-cur)+' HP';
-    }
-    t.insertBefore(cc,null);
-    if(tag) t.appendChild(el('span','item-tag'+(dim?' muted':(tag==='BEST'?' best':'')),tag));
-    if(dim) t.classList.add('dim');
-    box.appendChild(t);
-  });
-  return box;
-}
-
-// LOAD: loading asks once before acting. (Saving lives in the HUD save popup below.)
-function renderSaveTab(body) {
-  $('menu-foot').textContent=saveNoteLine()+' Autosave happens at every door, after each battle and when you leave the app.';
-  const list=el('div','item-list single loadlist');
-  const used=SAVE_SLOTS.filter(k=>readSave(k));   // every used slot (autosave plus every numbered slot), same as the title Load page; empty slots are not listed
-  if(!used.length&&!(typeof syncOthers==='function'&&syncOthers().length)) list.appendChild(el('div','menu-empty','No saved games yet. Use the SAVE button on the map.'));
-  for(const slot of used) {
-    const sv=readSave(slot);
-    const row=el('div','save-row');
-    row.innerHTML='<div class="item-icon">'+(slot==='auto'?'⏱':'\u{1F4BE}')+'</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
-    row.querySelector('.save-name').textContent=slot==='auto'?'Autosave':'Slot '+slot;
-    row.querySelector('.save-meta').textContent=saveSummary(sv);
-    const k='load-'+slot,sure=menuConfirm===k;
-    const l=btn('save-btn'+(sure?' sure':''),k,sure?'LOAD IT?':'LOAD',()=>{
-      if(!sure) { askConfirm(k); return; }
-      menuConfirm=null; closeMenu(); loadGame(slot);
-    });
-    l.disabled=!sv;
-    row.appendChild(l);
-    list.appendChild(row);
-  }
-  // Saves from the player's other devices (engine/save-sync.js). Loading one copies it into a slot here first. Opening the tab reads the cloud.
-  if(typeof syncPull==='function') syncPull();
-  const others=typeof syncOthers==='function'?syncOthers():[];
-  if(others.length) list.appendChild(el('div','menu-empty small','From your other devices'));
-  others.forEach((o,i)=>{
-    const row=el('div','save-row');
-    row.innerHTML='<div class="item-icon">\u2601</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
-    row.querySelector('.save-name').textContent=syncOtherName(o);
-    row.querySelector('.save-meta').textContent=saveSummary(o.sv);
-    const k='loadc-'+o.dev+'-'+o.slot,sure=menuConfirm===k;
-    row.appendChild(btn('save-btn'+(sure?' sure':''),k,sure?'LOAD IT?':'LOAD',()=>{
-      if(!sure) { askConfirm(k); return; }
-      menuConfirm=null; const slot=syncTake(o);
-      if(!slot) { showToast('Couldn\'t copy that save to this device.',3); renderMenu(); return; }
-      closeMenu(); loadGame(slot); showToast('Copied to Slot '+slot+' on this device.',3);
-    }));
-    list.appendChild(row);
-  });
-  const hint=el('div','menu-empty small','Loading replaces where you are now. Anything since your last save is lost.');
-  const bk=el('div','mquit-btns');
-  bk.appendChild(btn('save-btn','backup','BACK UP',()=>{ doBackup().then(()=>renderMenu()); }));
-  bk.appendChild(btn('save-btn','restore','RESTORE',()=>{ pickRestore(msg=>{ showToast(msg,4); renderMenu(); }); }));
-  bk.appendChild(btn('save-btn','cloud',syncButtonLabel(),()=>{ syncTap(msg=>{ showToast(msg,5); renderMenu(); }); }));
-  if(syncOn()) bk.appendChild(btn('save-btn','cloudoff','CLOUD OFF',()=>{ syncOff(); showToast('Cloud saves are off. Your saves stay on this phone.',3.5); renderMenu(); }));
-  body.appendChild(list); body.appendChild(hint); body.appendChild(bk);
-}
 
 // SAVE POPUP: opened from the HUD save button. Ten slots (the list scrolls); overwriting asks once. Closes after saving.
 function openSave(viaKeys) {
@@ -511,7 +185,7 @@ function openSave(viaKeys) {
   menuOpen=true; menuSaving=true;
   sfx.menuOpen();
   clearInput();
-  menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false;
+  menuTab='home'; menuConfirm=null;
   menuKeyNav=!!viaKeys;
   menuFocusNext=menuKeyNav?'psave-1':null;
   $('menu').classList.add('saving');
@@ -556,30 +230,10 @@ function renderSavePop() {
   if(keep) { const f=document.querySelector('#menu-save [data-k="'+keep+'"]')||document.querySelector('#menu-save button'); if(f) f.focus({preventScroll:true}); }
 }
 
-// QUIT: back to the title screen, after a confirm. Reloading gives a clean start (same as a fresh launch).
-function openQuit() { menuQuit=true; menuConfirm=null; sfx.select(); menuFocusNext=menuKeyNav?'quit-no':null; renderMenu(); }
-function closeQuit() { menuQuit=false; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-quit':null; renderMenu(); }
 function quitToTitle() {
-  menuQuit=false; sfx.select();
+  sfx.select();
   $('menu').classList.add('quitting');
   setTimeout(()=>location.reload(),220);
-}
-function renderQuit() {
-  const old=$('menu-quit'); if(old) old.remove();
-  if(!menuQuit) return;
-  const wrap=el('div','mquit'); wrap.id='menu-quit';
-  wrap.setAttribute('role','alertdialog'); wrap.setAttribute('aria-modal','true'); wrap.setAttribute('aria-labelledby','mquit-title');
-  wrap.addEventListener('click',e=>{ if(e.target===wrap) closeQuit(); });
-  const box=el('div','mwin mquit-box');
-  const h=el('div','mquit-title'); h.id='mquit-title'; h.textContent='Quit to the title screen?'; box.appendChild(h);
-  box.appendChild(el('div','mquit-text','Anything since your last save will be lost.'));
-  const auto=readSave('auto');
-  if(auto) { const l=el('div','mquit-save'); l.appendChild(el('span','mp-lbl','Autosave')); const v=el('span'); v.textContent=saveSummary(auto); l.appendChild(v); box.appendChild(l); }
-  const row=el('div','mquit-btns');
-  row.appendChild(btn('save-btn mquit-no','quit-no','KEEP PLAYING',closeQuit));
-  row.appendChild(btn('save-btn sure mquit-yes','quit-yes','QUIT',quitToTitle));
-  box.appendChild(row); wrap.appendChild(box);
-  $('menu-panel').appendChild(wrap);
 }
 
 // ---------- Portrait ----------
@@ -615,28 +269,11 @@ function drawPortrait(m,canvasId='portrait') {
   if(m===hero&&canvasId==='portrait') syncHeroHat();
 }
 
-// ---------- Open, close, navigation ----------
-function openMenu(viaKeys) {
-  if(typeof intro!=='undefined'&&intro.active) return;
-  if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
-  menuOpen=true;
-  sfx.menuOpen();
-  clearInput();
-  menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false;
-  menuKeyNav=!!viaKeys;
-  menuFocusNext=menuKeyNav?'cmd-home':null;
-  menuZoom();
-  $('menu').hidden=false;
-  $('menu-body').scrollTop=0;
-  renderMenu();
-  if(!menuKeyNav) $('menu-panel').focus({preventScroll:true});
-}
 
 function closeMenu() {
   if(!menuOpen) return;
   menuLeaveStamps();
-  menuOpen=false; menuQuit=false; menuSaving=false; menuConfirm=null;
-  const q=$('menu-quit'); if(q) q.remove();
+  menuOpen=false; menuSaving=false; menuConfirm=null;
   const sp=$('menu-save'); if(sp) sp.remove();
   $('menu').classList.remove('saving');
   sfx.menuClose();
@@ -644,28 +281,27 @@ function closeMenu() {
   canvas.focus();
 }
 
-// Back: cancel a confirm, close an open slot or item, then close the menu.
+// The menu is the book of engine/m2-core.js (travel.js wraps this name, so it is declared here, before them).
+function openMenu(viaKeys) { return m2OpenNew(viaKeys); }
+
+// Back: cancel a confirm or a Stampcard pick, then close the menu (a Stampcard opened from the book goes back to the book first, engine/m2-core.js).
 function menuBack(fromCmd) {
   if(menuSaving) { if(menuConfirm) { menuConfirm=null; renderMenu(); } else closeMenu(); return; }
-  if(menuQuit) { closeQuit(); return; }
-  if(fromCmd) { menuItem=null; menuSlot=null; menuConfirm=null; }
+  if(fromCmd) menuConfirm=null;
   if(menuConfirm) { menuConfirm=null; renderMenu(); return; }
   if(typeof b6Sure!=='undefined'&&b6Sure) { b6Sure=null; renderMenu(); return; }
   if(!fromCmd&&menuTab==='stamps'&&typeof scBack==='function'&&scBack()) return;
-  if(menuItem) { const id=menuItem; menuItem=null; sfx.tab(); menuFocusNext=menuKeyNav?'use-'+id:null; renderMenu(); return; }
-  if(menuSlot) { const s=menuSlot; menuSlot=null; sfx.tab(); menuFocusNext=menuKeyNav?'slot-'+s:null; renderMenu(); return; }
-  if(menuTab!=='home') { const t=menuTab; menuLeaveStamps(); menuTab='home'; sfx.tab(); menuFocusNext=menuKeyNav?'cmd-'+t:null; renderMenu(); return; }
   closeMenu();
 }
 function menuButtons() {
-  const sel=menuSaving?'#menu-save button':menuQuit?'#menu-quit button':'#menu .menu-panel button';
+  const sel=menuSaving?'#menu-save button':'#menu .menu-panel button';
   return [...document.querySelectorAll(sel)].filter(b=>!b.disabled&&b.offsetParent!==null);
 }
 // Spatial focus: pick the nearest button in the pressed direction.
 function menuMove(dir) {
   menuKeyNav=true;
   const all=menuButtons(),cur=document.activeElement;
-  if(!all.includes(cur)) { const t=menuSaving?all[0]:menuQuit?$('quit-no'):document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd'); if(t) t.focus(); sfx.move(); return; }
+  if(!all.includes(cur)) { const t=menuSaving?all[0]:document.querySelector('#menu .mcmd.active')||document.querySelector('#menu .mcmd'); if(t) t.focus(); sfx.move(); return; }
   const a=cur.getBoundingClientRect(),cx=a.left+a.width/2,cy=a.top+a.height/2;
   let best=null,bd=Infinity;
   for(const b of all) {
@@ -700,7 +336,7 @@ function menuPad(p) {
   if(p.dir&&p.dirEdge) menuMove(p.dir);
   if(p.A) { const f=document.activeElement; if(menuButtons().includes(f)) f.click(); else menuMove('down'); }
   if(p.B) menuBack();
-  if(p.START||p.Y) { if(menuQuit) closeQuit(); else closeMenu(); }
+  if(p.START||p.Y) closeMenu();
   if(p.prev) { menuKeyNav=true; menuCycleChar(-1); }
   if(p.next) { menuKeyNav=true; menuCycleChar(1); }
 }
@@ -708,10 +344,6 @@ function menuPad(p) {
 // Live stat preview on focus or hover; touch input switches focus restore off.
 (function wireMenu() {
   const mb=$('menu-body');
-  const show=e=>{ const c=e.target.closest&&e.target.closest('[data-slot]'); if(c) gearPreview(c.dataset.slot,c.dataset.prev); };
-  const hide=e=>{ const c=e.target.closest&&e.target.closest('[data-slot]'); if(c) gearPreview(null); };
-  mb.addEventListener('focusin',show); mb.addEventListener('mouseover',show);
-  mb.addEventListener('focusout',hide); mb.addEventListener('mouseout',hide);
   $('menu').addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') menuKeyNav=false; });
   // Tapping a hint's label works like tapping its key.
   for(const h of document.querySelectorAll('#menu .hint')) h.addEventListener('click',e=>{ const k=h.querySelector('.key'); if(e.target!==k) k.click(); });

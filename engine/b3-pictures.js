@@ -128,20 +128,3 @@ function b3pPv(v) {
 const b3pPvText=b3PvHtml;
 b3PvHtml=function(v) { return b3pOn()?b3pPv(v):b3pPvText(v); };
 
-// ---------- The Vibes screen in Rose Mode (called at the end of b3vRender, engine/b3-menu.js) ----------
-// The screen is built the same way; this puts a picture on each thing and takes the small words off. Names stay (a kid reads those).
-// Role: a star for the Main Vibe, a bag for the Pocket Vibe. A ladder row: a picture of what it is, its name, then drops (Pep), a
-// lock (not open yet) or a star (a Quirk that is equipped). Rose Mode picks the Vibes and Quirks itself in a fight, and a line says so.
-function b3pVibes(box,L) {
-  if(!b3pOn()) return;
-  const say=box.querySelector('.b3v-say'); if(say&&!box.querySelector('.b3p-auto')) { const a=document.createElement('div'); a.className='b3p-auto'; a.innerHTML=bpIcon('b3_star',18)+'<span>Rose Mode picks Vibes and Quirks for fights</span>'; box.querySelector('.b3v-body').prepend(a); }
-  box.querySelectorAll('.b3v-card').forEach(c=>{ const r=c.querySelector('.b3v-role'); if(!r||r.dataset.p) return; const main=c.classList.contains('main'),pocket=c.classList.contains('pocket');
-    r.dataset.p='1'; r.innerHTML=bpIcon(main?'b3_star':pocket?'x_bag':'m_lock',16,'',!main&&!pocket); });
-  box.querySelectorAll('.b3v-row').forEach(b=>{ if(b.dataset.p) return; b.dataset.p='1';
-    const id=(b.dataset.k||'').split('-').slice(2).join('-'),S=B3_SKILLS[id],locked=b.classList.contains('locked'),soon=b.classList.contains('soon');
-    const ico=S?(S.slot==='cap'?bpIcon('b3_star',22):'<span class="b3p-fl">'+S.flavor.map(f=>bpIcon(B3P_FLAV[f]||'m_shoulder',22)).join('')+'</span>'):B3_QUIRKS[id]?bpIcon('m_plusheart',22):bpIcon('b3_guard',22);
-    const small=b.querySelector('small'),em=b.querySelector('em'),eq=em&&em.textContent==='EQUIPPED';
-    const tail=locked||soon?bpIcon('m_lock',18):eq?bpIcon('b3_star',18):S&&S.pep?b3pDrops(S.pep,11):'';
-    if(small) small.outerHTML='<small class="b3p-vi">'+ico+'</small>'; if(em) em.outerHTML='<em class="b3p-vt">'+tail+'</em>'; else if(tail) b.insertAdjacentHTML('beforeend','<em class="b3p-vt">'+tail+'</em>'); });
-  box.querySelectorAll('.b3v-act').forEach(b=>{ if(b.dataset.p) return; b.dataset.p='1'; const main=/MAIN/.test(b.textContent),on=b.classList.contains('on'); b.innerHTML=bpIcon(main?'b3_star':'x_bag',22)+'<span>'+(on?(main?'Main':'Pocket'):(main?'Make main':'Make pocket'))+'</span>'; });
-}

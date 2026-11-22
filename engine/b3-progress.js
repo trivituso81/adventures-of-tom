@@ -1,7 +1,7 @@
 'use strict';
 // engine/b3-progress.js — Battle 3 progress: Vibe Mastery (spec section 1). Ranks and Vibe Points, overflow, the four loadout
 // slots (Main Vibe, Pocket Vibe, two Quirks), the row a family member stands in, and what a loadout gives a unit in a fight.
-// RULES FILE: no drawing, no page, no timers, no saves. tools/b3-sim.js loads it in node. Saving and the Vibes screen are in
+// RULES FILE: no drawing, no page, no timers, no saves. tools/b3-sim.js loads it in node. Saving and the books are in
 // engine/b3-menu.js.
 //
 // A LOADOUT is one family member's plain record:

@@ -32,10 +32,13 @@ function m2FlIcon(flavors,size) {
 const m2FlName=flavors=>(flavors||[]).map(f=>(B3_FLAVORS[f]||{}).name||f).join(' and ');
 
 // ---------- Who the page is about ----------
-const m2People=()=>party.concat(m2Bench());
-function m2Who() { const all=m2People(); let m=all.find(x=>x.id===M2.who); if(!m) { m=party[Math.min(M2.sel,party.length-1)]||party[0]; M2.who=m.id; } return m; }
-const m2Loadout=m=>(m&&b3HasKit(m.id))?b3MemberLoadout(m):null;
-const m2InParty=m=>party.includes(m);
+// The Battle Lab door (M2.lab) shows the four who fight there and edits the Lab's own book (b3LabBook), not the party's loadouts.
+const m2LabPeople=()=>(M2.labIds||[]).map(id=>ALL_MEMBERS().find(m=>m.id===id)).filter(Boolean);
+const m2People=()=>M2.lab?m2LabPeople():party.concat(m2Bench());
+const m2FaceList=()=>M2.lab?m2LabPeople():(M2.bench?m2Bench():party);
+function m2Who() { const all=m2People(); let m=all.find(x=>x.id===M2.who); if(!m) { m=M2.lab?all[0]:(party[Math.min(M2.sel,party.length-1)]||party[0]); M2.who=m.id; } return m; }
+const m2Loadout=m=>(m&&b3HasKit(m.id))?(M2.lab?b3LabBook()[m.id]||null:b3MemberLoadout(m)):null;
+const m2InParty=m=>M2.lab||party.includes(m);
 function m2Hint(m) { return wearSlots(m).some(s=>bestFor(m,s)); }
 
 // Health, Attack, Defense and Speed as a fight works them out (engine/b3-core.js b3PartyUnit): the level line times the member's own
@@ -57,13 +60,13 @@ function m2DiffText(d) { const p=M2_STATN.filter(([k])=>d[k]).map(([k,n])=>n+' '
 
 // ---------- The shared header ----------
 function m2Faces(m0) {
-  const list=M2.bench?m2Bench():party,bn=m2Bench().length;
+  const list=m2FaceList(),bn=M2.lab?0:m2Bench().length;
   let h='<div class="m2-fr" role="tablist" aria-label="Family member">';
   for(const m of list) {
     const up=M2.tab==='gear'&&m2Hint(m);
     h+='<button type="button" role="tab" class="m2-fc" data-m2="who" data-a="'+m.id+'" data-k="w-'+m.id+'" aria-selected="'+(m.id===m0.id)+'" aria-label="'+m2Esc(m.name)+(m.hp<=0?', knocked out':'')+(up?', the bag holds something better':'')+'"><span class="m2-fi">'+m2Face(m.id)+'</span>'+(up?'<i class="m2-fu" aria-hidden="true">'+m2Icon('up',12,3)+'</i>':'')+'</button>';
   }
-  if(bn||M2.bench) h+='<button type="button" class="m2-more" data-m2="bench" data-k="bench" aria-pressed="'+!!M2.bench+'">'+(M2.bench?'Party':'+'+bn)+'<span class="m2-ml">'+(M2.bench?'':' bench')+'</span></button>';
+  if(!M2.lab&&(bn||M2.bench)) h+='<button type="button" class="m2-more" data-m2="bench" data-k="bench" aria-pressed="'+!!M2.bench+'">'+(M2.bench?'Party':'+'+bn)+'<span class="m2-ml">'+(M2.bench?'':' bench')+'</span></button>';
   return h+'</div>';
 }
 function m2NameBlock(m,tall) {
@@ -133,7 +136,7 @@ function m2VibeDetail(m,L,fresh) {
   h+='<div class="m2-acts">'+(mk?'<span class="m2-here">This is the Main Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+V.id+'" data-k="make-main">Make it Main</button>')+
     (pk?'<span class="m2-here">This is the Pocket Vibe.</span>':'<button type="button" class="m2-btn" data-m2="pocket" data-a="'+V.id+'" data-k="make-pocket">Make it Pocket</button>')+'</div>';
   h+='<p class="m2-note">The Pocket Vibe adds its Skills only, and earns half the Vibe Points of a fight. Everyone can also use Pick-Me-Up ('+B3_RULES.pickMeUp.pep+' Pep) to get a knocked-out family member back up.</p>';
-  if(!b3sOn()) h+='<button type="button" class="m2-link" data-m2="legacy" data-a="stamps" data-k="stampcard">Old Stampcard</button>';
+  if(!b3sOn()&&!M2.lab) h+='<button type="button" class="m2-link" data-m2="legacy" data-a="stamps" data-k="stampcard">Old Stampcard</button>';
   return h;
 }
 function m2PoolBlock(m,L) {
@@ -152,7 +155,14 @@ function m2QuirkSlots(m,L) {
 }
 function m2LastFront(m,L) {
   if(!m2InParty(m)) return false;
-  return !party.some(o=>o!==m&&m2Loadout(o)&&b3RowOf(m2Loadout(o))==='front');
+  return !(M2.lab?m2LabPeople():party).some(o=>o!==m&&m2Loadout(o)&&b3RowOf(m2Loadout(o))==='front');
+}
+// The Lab's Rank picker: every Vibe of everyone in the Lab at one Rank (the Lab's own book, so the story is not touched).
+function m2RankCtl() {
+  if(!M2.lab) return '';
+  const cur=b3LabRank();
+  let b=''; for(let r=1;r<=b3MaxRank();r++) b+='<button type="button" class="m2-seg'+(r===cur?' on':'')+'" data-m2="rank" data-a="'+r+'" data-k="rank-'+r+'" aria-pressed="'+(r===cur)+'" aria-label="Rank '+r+'">'+r+'</button>';
+  return '<div class="m2-lab">Every Vibe in the Battle Lab at Rank</div><div class="m2-segs m2-rankc" role="group" aria-label="Rank">'+b+'</div>';
 }
 function m2RowCtl(m,L) {
   const cur=b3RowOf(L),lock=m2LastFront(m,L);
@@ -186,10 +196,10 @@ function m2VibesBody(d) {
   }
   const ids=B3_CAST[m.id].vibes; if(!ids.includes(M2.vibe)||M2.vibeFor!==m.id) { M2.vibe=L.main; M2.vibeFor=m.id; M2.pick=null; }
   const fresh=M2.freshNow||(M2.fresh&&M2.fresh[m.id]); if(M2.freshNow) { M2.fresh=M2.fresh||{}; M2.fresh[m.id]=true; }
-  const left=m2PoolBlock(m,L)+m2RowCtl(m,L)+m2DetailSwitch()+m2QuirkSlots(m,L);
+  const left=m2RankCtl()+m2PoolBlock(m,L)+m2RowCtl(m,L)+m2DetailSwitch()+m2QuirkSlots(m,L);
   const right=M2.pick!=null?m2QuirkPick(m,L):m2Chips(m,L)+m2Overflow(m,L)+'<div class="m2-scroll">'+m2VibeDetail(m,L,fresh)+'</div>';
   if(d.wide) return {l:m2Header(m,d)+'<div class="m2-lowl">'+left+'</div>',r:right,cls:'m2-vibes'};
-  return {l:m2Header(m,d)+(M2.pick!=null?'<div class="m2-scroll">'+m2QuirkPick(m,L)+'</div>':'<div class="m2-scroll">'+m2PoolBlock(m,L)+m2Chips(m,L)+m2Overflow(m,L)+m2VibeDetail(m,L,fresh)+'<div class="m2-lowt">'+m2RowCtl(m,L)+m2DetailSwitch()+'<div class="m2-lab">Quirks</div>'+m2QuirkSlots(m,L)+'</div></div>'),r:'',single:true,cls:'m2-vibes'};
+  return {l:m2Header(m,d)+(M2.pick!=null?'<div class="m2-scroll">'+m2QuirkPick(m,L)+'</div>':'<div class="m2-scroll">'+m2PoolBlock(m,L)+m2Chips(m,L)+m2Overflow(m,L)+m2VibeDetail(m,L,fresh)+'<div class="m2-lowt">'+m2RankCtl()+m2RowCtl(m,L)+m2DetailSwitch()+'<div class="m2-lab">Quirks</div>'+m2QuirkSlots(m,L)+'</div></div>'),r:'',single:true,cls:'m2-vibes'};
 }
 
 // ---------- Gear ----------
@@ -252,15 +262,16 @@ function m2PersonLayout() {
 
 // ---------- Taps ----------
 function m2Changed(m,text) {
-  M2.dirty=true; const L=m2Loadout(m); if(L) b3LabFollow(m.id,L);
+  if(M2.lab) b3LabSave(); else { M2.dirty=true; const L=m2Loadout(m); if(L) b3LabFollow(m.id,L); }
   sfx.select(); if(text) showToast(text,2.4);
   M2.focusNext=M2.keys?M2.focusNext:null; m2Render();
 }
 function m2PersonAct(act,a,el) {
   const m=m2Who(),L=m2Loadout(m);
-  if(act==='who') { if(a!==M2.who) { M2.who=a; M2.pick=null; M2.peek=null; sfx.tab(); const i=party.findIndex(x=>x.id===a); if(i>=0) { M2.sel=i; menuChar=i; } } M2.focusNext=M2.keys?'w-'+a:null; m2Render(); return; }
+  if(act==='who') { if(a!==M2.who) { M2.who=a; M2.pick=null; M2.peek=null; sfx.tab(); const i=party.findIndex(x=>x.id===a); if(i>=0&&!M2.lab) { M2.sel=i; menuChar=i; } } M2.focusNext=M2.keys?'w-'+a:null; m2Render(); return; }
   if(act==='bench') { M2.bench=!M2.bench; sfx.tab(); M2.focusNext=M2.keys?'bench':null; m2Render(); return; }
   if(M2.tab==='vibes') {
+    if(act==='rank'&&M2.lab) { const B=b3LabBook(); for(const id in B) b3SetRank(id,B[id],+a); b3LabSave(); sfx.select(); showToast('Every Vibe in the Battle Lab is now Rank '+a+'.',2.4); M2.focusNext=M2.keys?'rank-'+a:null; m2Render(); return; }
     if(act==='vibe') { M2.vibe=a; sfx.tab(); M2.focusNext=M2.keys?'vc-'+a:null; m2Render(); return; }
     if(!L) return;
     if(act==='main') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Main Vibe: its Trait, Basic, Skills and Lean.'); return; }

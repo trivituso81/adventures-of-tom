@@ -24,7 +24,7 @@ with sync_playwright() as pw:
         pg.evaluate("""([lv,id])=>{ if(typeof closeMenu==='function'&&menuOpen) closeMenu();
           const t=ALL_MEMBERS().find(m=>m.id===id); t.stamps=[]; t.ranks={}; t.remix=[]; t.ver={}; b6SetTotal(t,lv>=50?4900:lv===30?2900:lv===1?0:lv*100); b6Sync(); b6RefreshAll();
           delete SC.sel[id]; delete SC.pin[id]; delete SC.view[id];
-          menuChar=Math.max(0,party.findIndex(p=>p.id===id)); openMenu(); setMenuTab('stamps'); }""",[level,char]); pg.wait_for_timeout(400)
+          menuChar=Math.max(0,party.findIndex(p=>p.id===id)); openMenu(); m2OpenLegacy('stamps'); }""",[level,char]); pg.wait_for_timeout(400)
     def snap(n):
         f=os.path.join(SHOTS,f'sg-{n}.png'); pg.screenshot(path=f)
         if n.startswith('l'):   # the stage is rotated in landscape: turn the shot upright so it reads like the phone held sideways
@@ -101,7 +101,7 @@ with sync_playwright() as pw:
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     check(info()['sel'] is None and pg.evaluate("()=>menuTab")=='stamps','Escape 2 closes the drawer, stays on Stamps')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
-    check(pg.evaluate("()=>menuTab")=='home','Escape 3 leaves the tab')
+    check(pg.evaluate("()=>menuTab==='home'&&M2.open&&!M2.legacy"),'Escape 3 leaves the Stampcard and goes back to the book')
     # Every member renders (partial kits show Soon chips) without errors.
     r=pg.evaluate("""()=>ALL_MEMBERS().map(m=>{ try { const d=document.createElement('div'); renderStampsTab(d,m); return m.id+':'+d.querySelectorAll('.sc-chip').length+'/'+d.querySelectorAll('.sc-chip.soon').length; } catch(e) { return m.id+':ERR '+e.message; } })""")
     print('members (chips/soon):',r); check(not any('ERR' in x for x in r),'a member failed to render: '+str(r))

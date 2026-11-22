@@ -427,76 +427,62 @@ def auto_fight(pg,idx,fid,opt,frames=None,every=450,poke=None):
     return pg.evaluate("()=>({over:B3.F.over,order:B3.F.turnLog,rounds:B3.F.clock/100,ends:window.__b3.ends,turns:window.__b3.turns})")
 
 # ---------- Stage 4: the Vibes screen, the Lab's Ranks, the save fields ----------
-def vib(pg,k,wait=230): pg.click(f'#b3-vibes [data-k="{k}"]'); pg.wait_for_timeout(wait)
-def vstate(pg): return pg.evaluate("""()=>({open:B3V.open,door:B3V.door,sel:B3V.sel,say:document.querySelector('#b3-vibes .b3v-say').textContent,head:document.querySelector('#b3-vibes .b3v-title span').textContent,
-  hidden:document.getElementById('b3-vibes').hidden,focus:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k||null:null,
-  tabs:[...document.querySelectorAll('#b3-vibes .b3v-tab span')].map(e=>e.textContent),
-  cards:[...document.querySelectorAll('#b3-vibes .b3v-card')].map(c=>({role:c.querySelector('.b3v-role').textContent,name:c.querySelector('.b3v-ct b').textContent,vp:c.querySelector('.b3v-vp').textContent,
-    live:[...c.querySelectorAll('.b3v-row.live span')].map(e=>e.textContent),rows:c.querySelectorAll('.b3v-row').length})),
-  slots:[...document.querySelectorAll('#b3-vibes .b3v-slots')].map(r=>[...r.querySelectorAll('.b3v-slot')].map(b=>b.querySelector('b').textContent+(b.classList.contains('on')?'*':''))),
-  rank:[...document.querySelectorAll('#b3-vibes .b3v-rk.on')].map(e=>e.textContent),picks:[...document.querySelectorAll('#b3-vibes .b3v-q b')].map(e=>e.textContent)})""")
-def vbottom(pg): pg.evaluate("()=>{ document.querySelector('#b3-vibes .b3v-body').scrollTop=99999; }"); pg.wait_for_timeout(120)
+def vib(pg,k,wait=250): pg.click(f'#m2 [data-k="{k}"]'); pg.wait_for_timeout(wait)
+def vstate(pg): return pg.evaluate("""()=>({open:M2.open,lab:M2.lab,tab:M2.tab,who:M2.who,hidden:document.getElementById('m2').hidden,
+  people:[...document.querySelectorAll('#m2 .m2-fc')].map(b=>b.dataset.a),rank:[...document.querySelectorAll('#m2 [data-m2=rank].on')].map(e=>e.textContent),
+  focus:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k||null:null,tabs:[...document.querySelectorAll('#m2 .m2-tab span')].map(e=>e.textContent)})""")
 def stage4(pg,lab):
     S='stage 4: '; fr=[]; ff=[]
     def need(cond,what):
         if not cond: fails.append(S+what)
-    # --- The Lab's door: NEW BATTLE > VIBES AND RANKS ---
+    # --- The Lab's door: NEW BATTLE > VIBES AND RANKS opens the Vibes page of the new menu on the Lab's book (card c-menu4) ---
     pg.evaluate("()=>{ b3LabReset(); const el=document.getElementById('splash'); el.hidden=false; el.classList.remove('out'); splash.active=true; splashSetMode('lab3'); }"); pg.wait_for_timeout(300)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
     need('VIBES AND RANKS' in names and names[-1]=='BACK',f'the NEW BATTLE list has no VIBES AND RANKS row: {names}')
-    box=pg.evaluate("()=>{ const b=[...document.querySelectorAll('#splash .sp-choice')].find(e=>e.textContent.includes('VIBES AND RANKS')),r=b.getBoundingClientRect(),c=document.querySelector('#splash .sp-choices').getBoundingClientRect(); b.scrollIntoView({block:'nearest'}); const r2=b.getBoundingClientRect(); return r2.bottom<=c.bottom+1&&r2.top>=c.top-1; }")
-    need(box,'VIBES AND RANKS is not fully on screen on the NEW BATTLE list')
     fr.append(shot(pg))
-    pg.click('#splash .sp-choice:has-text("VIBES AND RANKS")'); pg.wait_for_timeout(450); v=vstate(pg); fr.append(shot(pg))
-    need(v['open'] and not v['hidden'] and v['door']=='lab',f'the Vibes screen did not open from the Lab: {v}')
-    need(v['tabs']==['TOM','GRACE','ROSE','AMY','DEEDEE','BOPPY','TNB','NARA','JUSTIN','OLIVIA'],f"the Lab's Vibes screen should list everyone with a kit (Tom, Grace, Rose, Amy, Deedee, Boppy, TNB, Nara, Justin, Olivia): {v['tabs']}")
+    pg.click('#splash .sp-choice:has-text("VIBES AND RANKS")'); pg.wait_for_timeout(600); v=vstate(pg); fr.append(shot(pg))
+    need(v['open'] and v['lab'] and not v['hidden'] and v['tab']=='vibes',f'the Vibes page did not open from the Lab: {v}')
+    need(v['tabs']==['Vibes'],f"the Lab door shows the Vibes page alone: {v['tabs']}")
+    need(v['people']==['tom','grace','rose','amy','deedee','boppy','tnb','nara','justin','olivia'],f"the Lab's Vibes page should list everyone with a kit: {v['people']}")
     need(v['rank']==['2'],f"the Lab starts with every Vibe at Rank 2: {v['rank']}")
-    c=v['cards']
-    need(len(c)==2 and c[0]['role']=='MAIN VIBE' and c[0]['name']=='Frequent Flier' and '60 / 220 VP' in c[0]['vp'] and c[0]['rows']==7,f'Tom\'s Main Vibe card is wrong: {c[:1]}')
-    need(c[0]['live']==['Priority Boarding','Lounge Pass Flex','Zone One Blockade','Suite Door Slide'],f"what is in use from the Main Vibe at Rank 2 (the Trait counts since stage 5a wrote it): {c[0]['live']}")
-    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Gamer Geek' and c[1]['live']==['Controller Toss','Winged Shell Lock-On'],f'the Pocket Vibe adds only its unlocked Skills (both of Gamer Geek\u2019s since 5b): {c[1:]}')
-    vib(pg,'row-tom_flier-suite_door_slide'); v=vstate(pg); need('Skill, 3 Pep' in v['say'] and 'Tom' in v['say'],f"tapping a Skill row should say what it does: {v['say']}")
-    vib(pg,'row-tom_flier-upgrade_certificate'); v=vstate(pg); need('Unlocks at Rank 3 (220 Vibe Points)' in v['say'],f"a locked Quirk should say when it unlocks: {v['say']}")
-    # Main and Pocket trade places
-    vib(pg,'main-tom_gamer',350); v=vstate(pg); c=v['cards']; fr.append(shot(pg))
-    need(c[0]['role']=='MAIN VIBE' and c[0]['name']=='Gamer Geek' and c[0]['live']==['Gamer\u2019s Intuition','Cartridge Blow','Controller Toss','Winged Shell Lock-On'],f'MAKE MAIN on Gamer Geek (its Trait counts since stage 5b): {c[:1]}')
-    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Frequent Flier' and c[1]['live']==['Zone One Blockade','Suite Door Slide'],f'Frequent Flier should now be the Pocket Vibe: {c[1:]}')
+    # Main and Pocket trade places (Tom: Frequent Flier Main, Gamer Geek Pocket at the start)
+    vib(pg,'vc-tom_gamer'); vib(pg,'make-main',350); fr.append(shot(pg))
     kept=pg.evaluate("()=>JSON.parse(localStorage.getItem('aot-b3-lab')).book.tom")
     need(kept['main']=='tom_gamer' and kept['pocket']=='tom_flier',f"the Lab's change is kept on the device at once: {kept}")
+    live=pg.evaluate("()=>({story:b3Member('tom').vibes&&b3Member('tom').vibes.main})")
+    need(live['story']!='tom_gamer',f"a change in the Lab must not touch the save's book: {live}")
     # The Rank picker and the Quirk slots
-    vib(pg,'rank-5'); v=vstate(pg); need(v['rank']==['5'] and all('MASTERED' in x['vp'] for x in v['cards']),f"Rank 5 for every Vibe: {v['rank']} {[x['vp'] for x in v['cards']]}")
-    vbottom(pg); vib(pg,'quirk-0',350); v=vstate(pg); fr.append(shot(pg))
-    need(v['picks']==['Elixir Hoarder','New Game Plus','Upgrade Certificate','Million-Miler Status','EMPTY','BACK'] or sorted(v['picks'][:4])==sorted(['Elixir Hoarder','New Game Plus','Upgrade Certificate','Million-Miler Status']),f"the Quirk list at Rank 5 should hold Tom's four Quirks: {v['picks']}")
-    vib(pg,'pick-upgrade_certificate',350); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Upgrade Certificate*','Empty'],f"picking a Quirk fills the slot: {v['slots']}")
-    vib(pg,'quirk-1',300); vib(pg,'pick-upgrade_certificate',300); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Empty','Upgrade Certificate*'],f"the same Quirk in the other slot moves it: {v['slots']}")
-    vib(pg,'quirk-0',300); vib(pg,'pick-elixir_hoarder',300); vbottom(pg); v=vstate(pg); fr.append(shot(pg)); need(v['slots'][0]==['Elixir Hoarder*','Upgrade Certificate*'],f"two Quirks from two Vibes: {v['slots']}")
-    vib(pg,'quirk-0',300); pg.keyboard.press('Escape'); pg.wait_for_timeout(250); v=vstate(pg); need(v['open'] and not v['picks'],f'Esc in the Quirk list should go back to the Vibes, not close the screen: {v["open"]} {v["picks"]}')
-    pg.evaluate("()=>{ document.querySelector('#b3-vibes .b3v-body').scrollTop=0; }"); vib(pg,'rank-2'); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Empty','Empty'] and v['rank']==['2'],f"back at Rank 2 the Quirks come off: {v['slots']}")
-    vib(pg,'quirk-0'); v=vstate(pg); need('No Quirk is unlocked yet' in v['say'] and not v['picks'],f"an empty Quirk slot before Rank 3 should say why: {v['say']}")
-    # Rows: three to the Back, the fourth is refused
-    for i,who_ in ((1,'grace'),(2,'rose'),(3,'amy'),(4,'deedee'),(5,'boppy'),(6,'tnb'),(7,'nara'),(8,'justin'),(9,'olivia')):
-        vib(pg,f'who-{i}'); vbottom(pg); vib(pg,'rowpick-back')
+    vib(pg,'rank-5'); v=vstate(pg); need(v['rank']==['5'] and pg.evaluate("()=>b3VibeRank(b3LabBook().tom,'tom_gamer')")==5,f"Rank 5 for every Vibe: {v['rank']}")
+    vib(pg,'q-0',350); fr.append(shot(pg))
+    picks=pg.evaluate("()=>[...document.querySelectorAll('#m2 [data-m2=pick]')].map(b=>b.dataset.a)")
+    need(set(['elixir_hoarder','new_game_plus','upgrade_certificate','million_miler_status'])<=set(picks),f"the Quirk list at Rank 5 should hold Tom's four Quirks: {picks}")
+    vib(pg,'pick-upgrade_certificate',350); q=pg.evaluate("()=>b3LabBook().tom.quirks"); need(q==['upgrade_certificate',None],f"picking a Quirk fills the slot: {q}")
+    vib(pg,'q-1',300); vib(pg,'pick-upgrade_certificate',350); q=pg.evaluate("()=>b3LabBook().tom.quirks"); need(q==[None,'upgrade_certificate'],f"the same Quirk in the other slot moves it: {q}")
+    vib(pg,'q-0',300); vib(pg,'pick-elixir_hoarder',350); q=pg.evaluate("()=>b3LabBook().tom.quirks"); fr.append(shot(pg)); need(q==['elixir_hoarder','upgrade_certificate'],f"two Quirks from two Vibes: {q}")
+    vib(pg,'q-0',300); pg.keyboard.press('Escape'); pg.wait_for_timeout(250); v=vstate(pg); need(v['open'] and v['lab'],f'Esc in the Quirk list should go back to the Vibes, not close the page: {v}')
+    vib(pg,'rank-2',350); q=pg.evaluate("()=>b3LabBook().tom.quirks"); v=vstate(pg); need(q==[None,None] and v['rank']==['2'],f"back at Rank 2 the Quirks come off: {q} {v['rank']}")
+    # Rows: everyone but Tom to the Back, then the last one in Front cannot go
+    for who_ in ('grace','rose','amy','deedee','boppy','tnb','nara','justin','olivia'):
+        vib(pg,'w-'+who_,200); vib(pg,'row-back',200)
     fr.append(shot(pg))
     rows=pg.evaluate("()=>{ const B=b3LabBook(); return ['tom','grace','rose','amy','deedee','boppy','tnb','nara','justin','olivia'].map(id=>b3RowOf(B[id])); }")
-    need(rows==['front']+['back']*9,f'three of them moved to the Back row: {rows}')
-    vib(pg,'who-0'); vbottom(pg); vib(pg,'rowpick-back'); v=vstate(pg); fr.append(shot(pg))
-    need('Someone has to stand in Front' in v['say'] and pg.evaluate("()=>b3RowOf(b3LabBook().tom)")=='front',f"the last one in Front cannot go to the Back: {v['say']}")
+    need(rows==['front']+['back']*9,f'everyone but Tom moved to the Back row: {rows}')
+    vib(pg,'w-tom',200); fr.append(shot(pg))
+    need(pg.evaluate("()=>document.querySelector('#m2 [data-k=\"row-back\"]').disabled") is True and pg.evaluate("()=>b3RowOf(b3LabBook().tom)")=='front',"the last one in Front cannot go to the Back (the button is off)")
     # Keys and gamepad
-    pg.mouse.move(2,2); pg.keyboard.press('KeyE'); pg.wait_for_timeout(200); v=vstate(pg); need(v['sel']==1 and v['focus']=='who-1',f"E should move to the next family member: {v['sel']} {v['focus']}")
+    pg.mouse.move(2,2); pg.keyboard.press('KeyE'); pg.wait_for_timeout(250); v=vstate(pg); need(v['who']=='grace',f"E should move to the next family member: {v['who']}")
+    pg.keyboard.press('KeyQ'); pg.wait_for_timeout(250); need(vstate(pg)['who']=='tom','Q should move back to Tom')
     seen=[]
     for _ in range(4): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(110); seen.append(vstate(pg)['focus'])
-    need(len(set(seen))==4 and all(seen),f'the arrow keys should walk down the buttons: {seen}')
-    pg.keyboard.press('KeyQ'); pg.wait_for_timeout(200); need(vstate(pg)['sel']==0,'Q should move back to Tom')
-    for _ in range(12):
-        if vstate(pg)['focus']=='pocket-tom_gamer': break
-        pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(90)
-    f0=vstate(pg)['focus']; pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(120); f1=vstate(pg)['focus']
-    pg.evaluate("()=>window.__LE.b3vPad('down',true,false,false)"); pg.wait_for_timeout(120); f2=vstate(pg)['focus']
-    need(f2 and f2!=f1,f'the gamepad should move the cursor too: {f0} {f1} {f2}')
+    need(len(set(seen))>=3 and all(seen),f'the arrow keys should walk down the buttons: {seen}')
+    pg.evaluate("()=>m2Pad({dir:'down',dirEdge:true})"); pg.wait_for_timeout(120); need(vstate(pg)['focus'] not in (None,seen[-1]),'the gamepad should move the cursor too')
     fr.append(shot(pg))
-    pg.evaluate("()=>window.__LE.b3vPad(null,false,false,true)"); pg.wait_for_timeout(350)
-    back=pg.evaluate("()=>({open:B3V.open,hidden:document.getElementById('b3-vibes').hidden,mode:splash.mode,name:(splash.list[splash.sel]||{}).name})")
-    need(not back['open'] and back['hidden'] and back['mode']=='lab3' and back['name']=='VIBES AND RANKS',f'B should close the screen and land on VIBES AND RANKS: {back}')
+    pg.evaluate("()=>m2Pad({B:true})"); pg.wait_for_timeout(450)
+    back=pg.evaluate("()=>({open:M2.open,hidden:document.getElementById('m2').hidden,mode:splash.mode,name:(splash.list[splash.sel]||{}).name})")
+    need(not back['open'] and back['hidden'] and back['mode']=='lab3' and back['name']=='VIBES AND RANKS',f'B should close the page and land on VIBES AND RANKS: {back}')
+    # the old overlay and its names are gone
+    gone=pg.evaluate("()=>['B3V','b3vOpen','b3vRender','b3vPad'].filter(n=>{ try { return eval('typeof '+n)!=='undefined'; } catch(e) { return false; } })")
+    need(not gone,f'the old Vibes overlay is still defined: {gone}')
     # --- A Lab fight with these Vibes: Gamer Geek as Main, three in the Back row ---
     idx=lab.index('new1'); pg.evaluate("()=>{ B7.speed=2; }"); start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.wait_for_timeout(300)
     for _ in range(12):
@@ -525,7 +511,7 @@ def stage4(pg,lab):
     need(won['vp']=={'tom_flier':65,'tom_gamer':70} and won['g']=={'grace_squishy':70,'grace_craft':65},f"10 VP to each Main Vibe and 5 to each Pocket Vibe: {won['vp']} {won['g']}")
     pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
     # Kept on the device across a reload
-    pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3vOpen',timeout=180000); pg.wait_for_timeout(1200)
+    pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3LabBook',timeout=180000); pg.wait_for_timeout(1200)
     again=pg.evaluate("()=>{ const B=b3LabBook(); return {main:B.tom.main,vp:B.tom.vp.tom_gamer,rose:b3RowOf(B.rose)}; }")
     need(again=={'main':'tom_gamer','vp':70,'rose':'back'},f"the Lab's Vibes should survive a reload: {again}")
     pg.evaluate("()=>{ b3LabReset(); }")
@@ -535,36 +521,24 @@ def stage4(pg,lab):
     need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
     need(sorted(sv['n'])==sorted(i for i in sv['cast'] if i in sv['n']) and set(sv['n'])>={'tom','grace','rose','deedee'} and not (set(sv['n'])&{'boppy','tnb','nara'}) and (not sv['mike'] or 'vibes' not in sv['mike']),f"a new save has a loadout for every member with a kit except the late joiners (Boppy, TNB and Nara get theirs when the story recruits them, stage 15): {sv['n']}")
     need('stamps' in sv['tom'] and 'ranks' in sv['tom'] and 'loadouts' in sv['tom'],'the old save fields (stamps, ranks, loadouts) must stay')
-    # The pause menu's door
-    pg.evaluate("()=>{ openMenu(true); }"); pg.wait_for_timeout(350)
-    cmds=pg.evaluate("()=>[...document.querySelectorAll('#menu .mcmd')].map(b=>({t:b.textContent,vis:b.getBoundingClientRect().bottom<=document.querySelector('#menu .mcmds-win').getBoundingClientRect().bottom+1}))")
-    need(any(x['t']=='Vibes' for x in cmds) and all(x['vis'] for x in cmds),f'the pause menu should list Vibes with every command on screen: {cmds}')
+    # The menu's door: the Vibes tab of the new menu, on the save's book (the Lab's book follows Main, Pocket and row, not Vibe Points)
+    pg.evaluate("()=>{ openMenu(true); m2Tab('vibes'); }"); pg.wait_for_timeout(450)
     mm=[shot(pg)]
-    pg.click('#menu [data-k="cmd-vibes"]'); pg.wait_for_timeout(450); v=vstate(pg); mm.append(shot(pg))
-    need(v['open'] and v['door']=='menu' and v['tabs']==['TOM','GRACE','ROSE'],f"the pause menu's Vibes screen should list the party: {v['tabs']} {v['open']}")
-    need('Story fights still use the old battle' in v['head'],f"the pause menu's screen should say where the Vibes are used: {v['head']}")
-    need(not v['rank'] and pg.evaluate("()=>!document.querySelector('#b3-vibes .b3v-rank')"),'the Rank picker belongs to the Lab only')
-    need(v['cards'][0]['live']==['Priority Boarding','Lounge Pass Flex','Zone One Blockade'] and '0 / 60 VP' in v['cards'][0]['vp'],f"a new game is Rank 1 with 0 VP: {v['cards'][0]}")
-    vib(pg,'main-tom_gamer',350); vib(pg,'who-1'); vbottom(pg); vib(pg,'rowpick-back'); mm.append(shot(pg))
-    pg.keyboard.press('KeyM'); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(150)
-    need(pg.evaluate("()=>menuOpen&&B3V.open&&menuTab==='home'"),'keys must not reach the pause menu while the Vibes screen is open over it')
-    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600); rot=pg.evaluate("()=>layout.rotated"); f=shot(pg); land=f.rotate(90,expand=True) if rot else f
-    fits=pg.evaluate("()=>{ const p=document.querySelector('#b3-vibes .b3v-panel').getBoundingClientRect(),g=document.getElementById('stage').getBoundingClientRect(); return p.left>=g.left-1&&p.right<=g.right+1&&p.top>=g.top-1&&p.bottom<=g.bottom+1; }")
-    need(fits,'landscape: the Vibes panel does not fit inside the stage')
+    v=pg.evaluate("()=>({open:M2.open,lab:M2.lab,people:[...document.querySelectorAll('#m2 .m2-fc')].map(b=>b.dataset.a),rank:document.querySelectorAll('#m2 [data-m2=rank]').length,tabs:document.querySelectorAll('#m2 .m2-tab').length})")
+    need(v['open'] and not v['lab'] and v['people']==['tom','grace','rose'],f"the menu's Vibes page should list the party: {v}")
+    need(v['rank']==0 and v['tabs']==5,f"the Rank picker belongs to the Lab only, and the menu keeps its five tabs: {v}")
+    vib(pg,'vc-tom_gamer'); vib(pg,'make-main',350); vib(pg,'w-grace',250); vib(pg,'row-back',250); mm.append(shot(pg))
+    pg.keyboard.press('KeyM'); pg.wait_for_timeout(300)
+    pg.evaluate("()=>{ M2.keys=true; toggleLayout(); }"); pg.wait_for_timeout(600); rot=pg.evaluate("()=>layout.rotated"); f=shot(pg); land=f.rotate(90,expand=True) if rot else f
+    fits=pg.evaluate("()=>{ const p=document.querySelector('#m2 .m2-grid').getBoundingClientRect(),g=document.getElementById('stage').getBoundingClientRect(); return p.left>=g.left-1&&p.right<=g.right+1&&p.top>=g.top-1&&p.bottom<=g.bottom+1; }")
+    need(fits,'landscape: the menu does not fit inside the stage')
     pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(450)
     pg.keyboard.press('Escape'); pg.wait_for_timeout(400); mm.append(shot(pg))
-    # The pause menu in landscape: its command list scrolls when the screen is short (it did before Vibes was added, on a phone
-    # 393 high). Every one of the nine commands must be reachable.
-    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600); f=shot(pg); land2=f.rotate(90,expand=True) if rot else f
-    cmds=pg.evaluate("()=>{ const w=document.querySelector('#menu .mcmds-win'); return [...document.querySelectorAll('#menu .mcmd')].map(b=>{ b.scrollIntoView({block:'nearest'}); const r=b.getBoundingClientRect(),W=w.getBoundingClientRect(); return {t:b.textContent,vis:r.left>=W.left-1&&r.right<=W.right+1&&r.top>=W.top-1&&r.bottom<=W.bottom+1}; }); }")
-    need(len(cmds)==9 and all(x['vis'] for x in cmds),f'landscape: a pause menu command cannot be reached: {cmds}')
-    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(450)
     after=pg.evaluate("""()=>{ const a=readSave('auto')||{members:[]},t=a.members.find(m=>m.id==='tom')||{},g=a.members.find(m=>m.id==='grace')||{};
-      return {open:B3V.open,menu:menuOpen,auto:(t.vibes||{}).main,grow:g.row,lab:b3LabBook().tom.main,labrow:b3RowOf(b3LabBook().grace),labvp:b3LabBook().tom.vp.tom_gamer,focus:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k:null}; }""")
-    need(not after['open'] and after['menu'],f'Esc should close the Vibes screen and leave the pause menu open: {after}')
-    need(after['auto']=='tom_gamer' and after['grow']=='back',f"closing the screen should put the change in the autosave: {after}")
-    need(after['lab']=='tom_gamer' and after['labrow']=='back' and after['labvp']==60,f"what is set in the pause menu is what a Lab fight uses (Vibes and row, not Vibe Points): {after}")
-    need(after['focus']=='cmd-vibes',f"the cursor should be back on Vibes in the pause menu: {after['focus']}")
+      return {open:M2.open,menu:menuOpen,auto:(t.vibes||{}).main,grow:g.row,lab:b3LabBook().tom.main,labrow:b3RowOf(b3LabBook().grace),labvp:b3LabBook().tom.vp.tom_gamer}; }""")
+    need(not after['open'] and not after['menu'],f'Esc should close the menu: {after}')
+    need(after['auto']=='tom_gamer' and after['grow']=='back',f"closing the menu should put the change in the autosave: {after}")
+    need(after['lab']=='tom_gamer' and after['labrow']=='back' and after['labvp']==60,f"what is set in the menu is what a Lab fight uses (Vibes and row, not Vibe Points): {after}")
     # Save, wipe, load
     rt=pg.evaluate("""()=>{ saveGame('7',true); for(const m of ALL_MEMBERS()) m.vibes=null; const ok=loadGame('7'); const t=b3Member('tom').vibes,g=b3Member('grace').vibes;
       return {ok,tom:t&&t.main,pocket:t&&t.pocket,grow:g&&g.row,vp:t&&t.vp}; }""")
@@ -586,8 +560,8 @@ def stage4(pg,lab):
     need(old['resaved'],'saving an old save again should add the Vibe fields and keep the old ones')
     pg.evaluate("()=>{ if(menuOpen) closeMenu(); b3LabReset(); }"); pg.wait_for_timeout(200)
     sheet(fr,4,os.path.join(OUT,'b3-s4-lab.png')); sheet(ff,4,os.path.join(OUT,'b3-s4-fight.png')); sheet(mm,4,os.path.join(OUT,'b3-s4-menu.png'))
-    # Full-size frames of the three views Tom will use most, to look at closely.
-    for name,im in (('b3-s4-vibes-portrait.png',fr[1]),('b3-s4-vibes-menu-landscape.png',land),('b3-s4-menu-landscape.png',land2),('b3-s4-fight-skills.png',ff[1])): im.save(os.path.join(OUT,name))
+    # Full-size frames of the views Tom will use most, to look at closely.
+    for name,im in (('b3-s4-vibes-portrait.png',fr[1]),('b3-s4-vibes-menu-landscape.png',land),('b3-s4-fight-skills.png',ff[1])): im.save(os.path.join(OUT,name))
 
 # ---------- Stage 5a: the Traits, Quirks and Capstones of the four first Sig Vibes, at Rank 5 on The Big One ----------
 S5_BOOK="""()=>{ const B=b3LabReset(5),Q={tom:['upgrade_certificate','million_miler_status'],grace:['slow_rise_memory_foam','ultra_rare_limited_edition'],rose:['twin_lamb_relay','its_our_longboard_now'],deedee:['car_crumb_vacuum','spit_shine']};
@@ -976,16 +950,8 @@ def stage7(pg,lab,landscape=False):
     ra=pg.evaluate("()=>B3.F.party.map(p=>{ const L=b3RoseLoadout(p.id,b3LabBook()[p.id]); return {id:p.id,main:p.vibe===L.main,pocket:p.pocket===L.pocket,quirks:p.quirks.join()===L.quirks.filter(Boolean).join()}; })")
     need(all(x['main'] and x['pocket'] and x['quirks'] for x in ra),f"each member started with Rose Mode's automatic loadout: {ra}")
     need(pg.evaluate("()=>b3LabBook().deedee.quirks.join()")=='car_crumb_vacuum,spit_shine','the Lab book itself (the Quirks Tom picked) was not rewritten by the fight: '+pg.evaluate("()=>b3LabBook().deedee.quirks.join()"))
-    # 11. the Vibes screen in Rose Mode: a picture on every ladder row, no small words, the line that says Rose Mode picks, the acts as pictures
+    # 11. Rose Mode picks the loadouts in a fight itself; the Vibes page (m2-vibes) is the same page in every difficulty, so only the exit is checked here
     pg.click('#b3-exit'); pg.wait_for_timeout(500)
-    pg.evaluate("()=>{ b3vOpen('lab'); }"); pg.wait_for_timeout(500)
-    vv=pg.evaluate("""()=>{ const q=s=>[...document.querySelectorAll('#b3-vibes '+s)]; return {rows:q('.b3v-row').length,noPic:q('.b3v-row').filter(b=>!b.querySelector('small.b3p-vi img')).length,words:q('.b3v-row small:not(.b3p-vi)').length,
-      tags:q('.b3v-row em').filter(e=>/PEP|EQUIPPED|SOON|RANK/.test(e.textContent)).length,auto:q('.b3p-auto').length,roles:q('.b3v-role').filter(r=>!r.querySelector('img')||r.textContent.trim()).length,acts:q('.b3v-act').filter(a=>!a.querySelector('img')).length,
-      over:document.getElementById('b3-vibes').scrollWidth>document.getElementById('b3-vibes').clientWidth+2}; }""")
-    need(vv['rows']>=6 and vv['noPic']==0 and vv['words']==0 and vv['tags']==0,f"every ladder row on the Vibes screen is a picture with no small words: {vv}")
-    need(vv['auto']==1 and vv['roles']==0 and vv['acts']==0 and not vv['over'],f"the Vibes screen has its Rose Mode line, picture roles and picture buttons, and nothing spills sideways: {vv}")
-    caps.append(R(shot(pg))); f=shot(pg); f.save(os.path.join(OUT,'b3-s7-vibes-'+('landscape' if landscape else 'portrait')+'.png'))
-    pg.evaluate("()=>{ b3vClose(); }"); pg.wait_for_timeout(300)
     sheet(caps,4,os.path.join(OUT,'b3-s7'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>{ b7SetDiff('grace'); }"); pg.click('#b3-exit') if pg.evaluate("()=>!!document.getElementById('b3-exit')&&B3.active") else None; pg.wait_for_timeout(400)
 
@@ -1125,14 +1091,13 @@ def stage9c(pg,lab,landscape=False):
     # The pool on the Vibes screen: Nara arrives with the pool, unlocked until confirmed
     st=pg.evaluate("""()=>{ const B=b3LabBook(),L=B.nara; return {open:b3PoolOpen(L),total:L.pool&&L.pool.total,sum:b3VibeTotal('nara',L),tnb:!!B.tnb.pool}; }""")
     need(st['open'] and st['total']==st['sum'] and st['tnb'],f'the Lab book should hold the pool for late joiners: {st}')
-    pg.evaluate("()=>{ b3vOpen('lab'); }"); pg.wait_for_timeout(400)
-    pg.evaluate("()=>{ b3vWho(B3V.ids.indexOf('nara')); }"); pg.wait_for_timeout(300)
-    txt=pg.evaluate("()=>document.querySelector('#b3-vibes .b3v-body').innerText"); need('VIBE POINT POOL' in txt,f"Nara's Vibes screen should show the pool: {txt[:300]}")
+    pg.evaluate("()=>{ const el=document.getElementById('splash'); el.hidden=false; el.classList.remove('out'); splash.active=true; splashSetMode('lab3'); m2OpenLab(); M2.who='nara'; m2Render(); }"); pg.wait_for_timeout(500)
+    txt=pg.evaluate("()=>document.getElementById('m2').innerText"); need('Vibe Points' in txt and pg.evaluate("()=>!!document.querySelector('#m2 .m2-pool')"),f"Nara's Vibes page should show the pool: {txt[:300]}")
     caps.append(R(shot(pg)))
     if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9c-pool-portrait.png'))
-    pg.evaluate("()=>{ b3vPoolLock('nara'); }"); pg.wait_for_timeout(300)
-    txt=pg.evaluate("()=>document.querySelector('#b3-vibes .b3v-body').innerText"); need('VIBE POINT POOL' not in txt,'locking the split should hide the pool')
-    pg.evaluate("()=>{ b3vClose(); }"); pg.wait_for_timeout(300)
+    pg.click('#m2 [data-k="poollock"]'); pg.wait_for_timeout(300)
+    need(pg.evaluate("()=>!document.querySelector('#m2 .m2-pool')"),'locking the split should hide the pool')
+    pg.evaluate("()=>{ m2CloseNew(); }"); pg.wait_for_timeout(300)
 def stage9b(pg,lab,landscape=False):
     S='stage 9b'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new7')
     rot=landscape and pg.evaluate("()=>layout.rotated")

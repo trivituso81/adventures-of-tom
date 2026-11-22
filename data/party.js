@@ -351,7 +351,7 @@ const ATTACKS={
        {key:'pounce',name:'Piggyback Pounce',mp:6,mult:2.0,lvl:2},{key:'dressup',name:'Dress-Up Day',mp:7,mult:2.3,lvl:3},{key:'bedtime',name:'Monster Under the Bed',mp:8,mult:2.6,lvl:4},{key:'stampede',name:'Lamby Stampede',mp:10,mult:3.2,lvl:5}]
 };
 const alive=m=>m.hp>0;
-let menuOpen=false,menuTab='inventory',menuChar=0,menuSlot=null;
+let menuOpen=false,menuTab='inventory',menuChar=0;
 
 // Flat gear bonus to one battle stat (hp, pow, grit, warmth, cool, pep) from what a member wears.
 function statBonus(m,stat) {
@@ -400,25 +400,6 @@ function equipTo(m,id) {
   return true;
 }
 
-function equipItem(id) {
-  const m=party[menuChar],item=items[id];
-  if(!item.slot) {
-    sfx.nope();
-    if(fieldUsable(item)) { useFieldItem(m,id); return; }
-    showToast(item.name+' isn\'t something you can wear. Or is it. No.',2.2);
-    return;
-  }
-  if(!canWear(m,item)) {
-    sfx.nope();
-    showToast(item.name+' is made for '+memberById(item.who).name+'. It wouldn\'t fit '+m.name+'.',2.4);
-    return;
-  }
-  if(!equipTo(m,id)) return;
-  sfx.equip();
-  menuSlot=null;
-  showToast(m.name+' puts on '+item.name+'.',1.8);
-  renderMenu();
-}
 
 // Healing items can be used from the menu on the selected member (or the whole party).
 function useFieldItem(m,id) {
@@ -444,16 +425,6 @@ function useFieldItem(m,id) {
   renderMenu();
 }
 
-function unequipSlot(slot) {
-  const m=party[menuChar],id=m.equipment[slot];
-  if(!id) return;
-  sfx.unequip();
-  m.equipment[slot]=null;
-  bag.push(id);
-  if(typeof b6Refresh==='function') b6Refresh(m);
-  menuSlot=null;
-  renderMenu();
-}
 
 // itembanner1: the ITEM GAINED banner (engine/party-banner.js) replaces the old 'Got ... It went in a pocket.' popup. id may be a list (several items from one source, one banner).
 function grantItem(id) {

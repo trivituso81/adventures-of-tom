@@ -1,18 +1,16 @@
 'use strict';
 // engine/m2-core.js: the new main menu, "Golden Hour" (card menu1; plan claude/menuux-plan.md; drawings claude/menuux-mock/).
-// It lives BESIDE the old menu (engine/menu.js, which stays the default until card c-menu4): its own root element #m2, its own
-// styles (m2.css, every rule under #m2), its own keys. ADMIN > MENU: OLD or NEW chooses (saved on the device, default OLD) and
-// index.html?menu=new forces NEW (?menu=old forces OLD).
-// How it plugs in (nothing in menu.js is edited): openMenu, closeMenu, renderMenu, menuKey, menuPad and menuBack are wrapped here.
+// It is the only menu (card c-menu4 removed the old one): its own root element #m2, its own styles (m2.css, every rule under #m2), its own keys.
+// engine/menu.js keeps what other screens borrow (portraits, gear helpers, the map's Save pop-up) and a small shell that draws only the Old Stampcard.
+// How it plugs in: menu.js's openMenu hands over to m2OpenNew; closeMenu, renderMenu, menuKey, menuPad and menuBack are wrapped (the shell and the Save pop-up still use theirs).
 // While the new menu is open `menuOpen` is true, so every system that pauses for the menu (walking, dialogue, timers) still does.
 // Pages: Family (engine/m2-family.js), Vibes and Gear (engine/m2-vibes.js, card menu2), Bag and System (engine/m2-bag.js, card menu3).
-// Old Stampcard (a link on Vibes) opens today's Stamps screen in place of the book; Back there returns to the book.
+// Old Stampcard (a link on Vibes) opens the Stamps screen of the shell in place of the book; Back there returns to the book.
 // Layout: wider than tall = tabs down the left edge and a two-page spread (the gutter at the middle of the screen on the unfolded
 // Duo and on a desktop, where the fold is); taller than wide = one page and the tabs along the bottom edge.
 // Files: engine/m2-core.js (this), engine/m2-family.js (the Family page), m2.css, fonts/bricolage.woff2 and figtree.woff2,
 // art/menu/<id>.webp (tools/sprite-bake/bake_menu_heroes.py).
-const M2={open:false,tab:'family',legacy:false,back:'family',who:null,bench:false,vibe:null,pick:null,slot:null,peek:null,dirty:false,sel:0,change:null,keys:false,mode:'',dims:null,built:false,root:null,z:1,say:'',sig:''};
-const M2_KEY='aot-menu';
+const M2={open:false,lab:false,labIds:null,tab:'family',legacy:false,back:'family',who:null,bench:false,vibe:null,pick:null,slot:null,peek:null,dirty:false,sel:0,change:null,keys:false,mode:'',dims:null,built:false,root:null,z:1,say:'',sig:''};
 const M2_TABS=[{id:'family',label:'Family'},{id:'vibes',label:'Vibes'},{id:'gear',label:'Gear'},{id:'bag',label:'Bag'},{id:'system',label:'System'}];
 // The picture for each tab (the same line icons as the drawings), always shown with its word.
 const M2_ICON={
@@ -34,22 +32,6 @@ function m2Stars(rank,of,size) {
   return '<span class="m2-stars" role="img" aria-label="Rank '+rank+' of '+of+'">'+s+'</span>';
 }
 const m2Esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-// ---------- The switch ----------
-function m2On() {
-  try {
-    const q=location.search;
-    if(/[?&]menu=new(&|$)/.test(q)) return true;
-    if(/[?&]menu=old(&|$)/.test(q)) return false;
-    return localStorage.getItem(M2_KEY)==='new';
-  } catch(e) { return false; }
-}
-// ADMIN > MENU (engine/splash.js): which menu this device opens.
-function m2AdminItem() {
-  const on=m2On(),forced=/[?&]menu=(new|old)(&|$)/.test(location.search);
-  return {name:'MENU: '+(on?'NEW':'OLD'),sub:forced?'Set by the address of this page.':(on?'The new paper menu. Tap to go back to the old one.':'The old menu. Tap to try the new paper menu.'),
-    act:()=>{ try { localStorage.setItem(M2_KEY,on?'old':'new'); } catch(e) {} const i=splash.sel; splashSetMode('admin'); splash.sel=i; if(typeof splashMark==='function') splashMark(); }};
-}
 
 // ---------- The root element, made once ----------
 function m2Root() {
@@ -113,6 +95,8 @@ function m2NextLine() {
   try { if(typeof currentObjective!=='function') return ''; const o=currentObjective(); return o.complete?'Chapter complete':questShort(o.text); } catch(e) { return ''; }
 }
 function m2Top(d) {
+  if(M2.lab) return '<header class="m2-top"><div class="m2-place"><b>Battle Lab</b><span>Used in every NEW BATTLE fight</span></div><div class="m2-next"></div><div class="m2-meters"></div>'+
+    '<button type="button" class="m2-x" data-m2="close" data-k="close" aria-label="Back to the Battle Lab">'+m2Icon('x',20)+'</button></header>';
   const nxt=m2NextLine();
   const next=nxt?'<div class="m2-next">'+m2Icon('flag',d.compact?15:17)+'<span><em>Next</em>&nbsp; '+m2Esc(nxt)+'</span></div>':'<div class="m2-next"></div>';
   return '<header class="m2-top"><div class="m2-place"><b>'+m2Esc(m2Place())+'</b><span>'+m2Region()+'</span></div>'+next+
@@ -122,7 +106,7 @@ function m2Top(d) {
 }
 function m2Tabs() {
   const fresh=ALL_MEMBERS().some(m=>m.m2new);
-  return '<nav class="m2-tabs" role="tablist" aria-label="Menu">'+M2_TABS.map(t=>
+  return '<nav class="m2-tabs" role="tablist" aria-label="Menu">'+(M2.lab?M2_TABS.filter(t=>t.id==='vibes'):M2_TABS).map(t=>
     '<button type="button" role="tab" class="m2-tab" data-m2="tab" data-a="'+t.id+'" data-k="tab-'+t.id+'" aria-selected="'+(t.id===M2.tab)+'">'+m2Icon(t.id,M2.dims.wide&&!M2.dims.compact?24:20)+'<span>'+t.label+'</span>'+
     (t.id==='vibes'&&fresh&&M2.tab!=='vibes'?'<i class="m2-dot" role="img" aria-label="Something new"></i>':'')+'</button>').join('')+'</nav>';
 }
@@ -162,7 +146,7 @@ function m2OpenNew(viaKeys) {
   if(typeof intro!=='undefined'&&intro.active) return;
   if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
   menuOpen=true; sfx.menuOpen(); clearInput();
-  menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuChar=0;
+  menuTab='home'; menuConfirm=null; menuChar=0;
   Object.assign(M2,{open:true,legacy:false,tab:'family',sel:0,who:null,bench:false,pick:null,slot:null,peek:null,dirty:false,change:null,keys:!!viaKeys,say:'',mode:'',sig:'',bagF:'all',bagSel:null,sheet:false,sure:null,quit:false,pulled:false,slide:false});
   const r=m2Root(); m2Still(); r.classList.remove('m2-in'); r.hidden=false;
   m2Fonts();
@@ -170,13 +154,31 @@ function m2OpenNew(viaKeys) {
   m2Fit(true);
   if(!M2.keys) r.focus({preventScroll:true});
 }
+// The Battle Lab's VIBES AND RANKS door: the Vibes page alone, over the Lab list, on the Lab's own book. The story is not paused (menuOpen stays false).
+function m2OpenLab() {
+  if(M2.open) return;
+  const ids=ALL_MEMBERS().map(m=>m.id).filter(id=>b3HasKit(id)&&B3_LAB.some(L=>L.party.includes(id)));
+  if(!ids.length) return;
+  sfx.menuOpen();
+  Object.assign(M2,{open:true,lab:true,labIds:ids,legacy:false,tab:'vibes',sel:0,who:ids[0],bench:false,vibe:null,pick:null,slot:null,peek:null,dirty:false,change:null,keys:false,say:'',mode:'',sig:'',slide:false});
+  const r=m2Root(); m2Still(); r.classList.remove('m2-in'); r.hidden=false;
+  m2Fonts(); M2.focusNext=null; m2Fit(true);
+  r.focus({preventScroll:true});
+}
+function m2CloseLab() {
+  M2.open=false; M2.lab=false; M2.pick=null;
+  const r=M2.root; if(r) { r.hidden=true; r.classList.remove('m2-in'); }
+  sfx.menuClose();
+  splashSetMode('lab3',Math.max(0,(splash.list||[]).findIndex(c=>c.vibes)));
+}
 function m2CloseNew() {
   if(!M2.open) return;
+  if(M2.lab) { m2CloseLab(); return; }
   M2.open=false; M2.legacy=false; M2.change=null; M2.pick=null;
   if(M2.dirty) { M2.dirty=false; try { saveGame('auto',true); } catch(e) {} }   // a Vibes or gear change goes into the autosave, the way the old screens did
   const r=M2.root; if(r) { r.hidden=true; r.classList.remove('m2-in'); }
-  menuOpen=false; menuQuit=false; menuSaving=false; menuConfirm=null;
-  const q=$('menu-quit'); if(q) q.remove(); const sp=$('menu-save'); if(sp) sp.remove();
+  menuOpen=false; menuSaving=false; menuConfirm=null;
+  const sp=$('menu-save'); if(sp) sp.remove();
   $('menu').hidden=true; $('menu').classList.remove('saving');
   sfx.menuClose(); canvas.focus();
 }
@@ -185,13 +187,13 @@ function m2OpenLegacy(tab) {
   const t='stamps';
   if(menuChar>=party.length) menuChar=0;
   M2.back=M2.tab; M2.legacy=true; M2.root.hidden=true;
-  menuTab=t; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuKeyNav=M2.keys; menuFocusNext=M2.keys?'cmd-'+t:null;
+  menuTab=t; menuConfirm=null; menuKeyNav=M2.keys; menuFocusNext=M2.keys?'cmd-'+t:null;
   menuZoom(); $('menu').hidden=false; $('menu-body').scrollTop=0;
   M2_orig.renderMenu();
   if(!M2.keys) $('menu-panel').focus({preventScroll:true});
 }
 function m2FromLegacy() {
-  M2.legacy=false; $('menu').hidden=true; menuTab='home'; menuQuit=false; menuSaving=false; menuConfirm=null; menuItem=null; menuSlot=null;
+  menuLeaveStamps(); M2.legacy=false; $('menu').hidden=true; menuTab='home'; menuSaving=false; menuConfirm=null;
   sfx.tab(); M2.tab=M2.back||'family'; M2.root.hidden=false; M2.focusNext=M2.keys?'tab-'+M2.tab:null;
   m2Fit(true); if(!M2.keys) M2.root.focus({preventScroll:true});
 }
@@ -237,9 +239,9 @@ function m2Move(dir) {
 }
 function m2Cycle(d) {
   if(M2.tab==='vibes'||M2.tab==='gear') {
-    const all=M2.bench?m2Bench():party; if(all.length<2) return;
+    const all=m2FaceList(); if(all.length<2) return;
     const i=Math.max(0,all.findIndex(x=>x.id===M2.who)),m=all[(i+d+all.length)%all.length];
-    M2.who=m.id; M2.pick=null; M2.peek=null; const pi=party.indexOf(m); if(pi>=0) { M2.sel=pi; menuChar=pi; }
+    M2.who=m.id; M2.pick=null; M2.peek=null; const pi=party.indexOf(m); if(pi>=0&&!M2.lab) { M2.sel=pi; menuChar=pi; }
     sfx.tab(); M2.focusNext=M2.keys?'w-'+m.id:null; m2Render(); return;
   }
   if(M2.tab!=='family'||party.length<2) return;
@@ -269,9 +271,18 @@ function m2Pad(p) {
   if(p.next) { M2.keys=true; m2Cycle(1); }
 }
 
-// ---------- Plugging in beside the old menu ----------
-const M2_orig={openMenu,closeMenu,renderMenu,menuKey,menuPad,menuBack};
-openMenu=function(viaKeys) { if(m2On()) return m2OpenNew(viaKeys); return M2_orig.openMenu.apply(this,arguments); };
+// The Lab door has no pause menu behind it, so its keys come here first (capture), the way the old Vibes screen's did.
+window.addEventListener('keydown',e=>{
+  if(!M2.open||!M2.lab||e.code==='KeyL') return;
+  e.stopImmediatePropagation();
+  if(e.code==='KeyM') { e.preventDefault(); return; }
+  if(e.repeat&&(e.code==='Escape'||e.code==='Backspace'||e.code==='KeyX'||e.code==='KeyQ'||e.code==='KeyE')) { e.preventDefault(); return; }
+  if(e.code==='KeyX') { e.preventDefault(); m2Back(); return; }
+  m2Key(e);
+},true);
+
+// ---------- Plugging in over the shell ----------
+const M2_orig={closeMenu,renderMenu,menuKey,menuPad,menuBack};
 closeMenu=function() {
   if(M2.open) {
     if(M2.legacy) { M2.open=false; M2.legacy=false; M2.change=null; M2.root.hidden=true; return M2_orig.closeMenu.apply(this,arguments); }   // a today's-screen page was showing: its own close does the rest
@@ -285,7 +296,8 @@ menuPad=function(p) { if(M2.open&&!M2.legacy) return m2Pad(p); return M2_orig.me
 // Back inside a today's-screen page returns to the book once nothing smaller is open (a confirm, an item, a slot).
 menuBack=function(fromCmd) {
   if(M2.open&&M2.legacy) {
-    const small=menuSaving||menuQuit||menuConfirm||menuItem||menuSlot||(typeof b6Sure!=='undefined'&&b6Sure);
+    const small=menuSaving||menuConfirm||(typeof b6Sure!=='undefined'&&b6Sure);
+    if(!small&&menuTab==='stamps'&&typeof scBack==='function'&&scBack()) return;   // a pin or an open drawer on the Stampcard closes first
     if(!small) { m2FromLegacy(); return; }
   }
   return M2_orig.menuBack.apply(this,arguments);
@@ -310,4 +322,4 @@ loadGame=function(slot) {
   if(ok) { const ids=(sv&&sv.m2&&Array.isArray(sv.m2.newSkill))?sv.m2.newSkill:[]; for(const m of ALL_MEMBERS()) m.m2new=ids.includes(m.id); }
   return ok;
 };
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{M2,m2On,m2OpenNew,m2CloseNew}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{M2,m2OpenNew,m2CloseNew}); });
