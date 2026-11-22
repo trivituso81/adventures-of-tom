@@ -25402,7 +25402,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ",
+    "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
     "opening": "not started"
    },
    "history": [
@@ -25480,13 +25480,24 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "started_at": "2026-11-22T01:53:56+00:00",
-   "after": "nothing for Tom: end"
+   "changed": "2026-11-22",
+   "started_at": "2026-11-22T09:05:04+00:00",
+   "after": "nothing for Tom: end",
+   "rescue": {
+    "at": "2026-11-22T09:05:04+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
+    "prev": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ"
+   }
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -29121,7 +29132,7 @@
    "title": "Battle system stage 16: Tombo skins on the new battle",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s16. The 26 Tombos (21 Primaries, 4 Family Finishes, Birthday Wish) are skins on the Full Family Ruckus: the row and the big word show the skin's name and the pair's recorded Tombo lines play; the chapter 1 to 10 and bonus Tombo toasts are back under Battle 3. No animation review. Nothing is asked of Tom. Next: c-b3s19.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29148,13 +29159,18 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as b3s16 by the stage 16 session. 26 skins on the Full Family Ruckus (data/b3-tombo-skins.js, engine/b3-skins.js), the rules files and every battle 2 file untouched. Tested: node tools/b3-sim.js check (FAILS []), python3 tools/b3_test.py s16 (new), s6, s7 and the fights new1, new3 and new6. Calls made are in claude/battle-build.md 'Calls made in stage 16'."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s16: The Tombos are back in the new battle as named skins on the Full Family Ruckus"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
     "opening": "\"Attach trivituso81/adventures-of-tom with push access (add_repo). Read data/board.json and do card c-b3s16, the Battle system stage 16 card: Tombo skins on the new battle.\""
    },
-   "after": "nothing for Tom: c-b3s19"
+   "after": "nothing for Tom: c-b3s19",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s19",
@@ -29201,7 +29217,7 @@
    "title": "Battle system stage 20: Character Level by shared XP",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data. Starts after c-b3s19.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29229,11 +29245,14 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
-   "started_at": "2026-11-22T08:20:37+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukETdNcxVt8YMqrXeiq",
+    "url": "",
     "opening": "started by START"
    }
   },
@@ -29790,6 +29809,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
+   "title": "Battle system stage 16: Tombo skins on the new battle",
+   "first": "2026-11-22T00:15:08-08:00",
+   "last": "2026-11-22T01:00:47-08:00",
+   "tags": [
+    "b3s16"
+   ],
+   "cards": [
+    "c-b3s16"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "first": "2026-11-21T14:57:29Z",
@@ -29856,16 +29887,6 @@
     "c-battleux-plan",
     "c-b3look",
     "c-battleux3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
-   "title": "Battle system stage 16: Tombo skins on the new battle",
-   "first": "2026-11-22T00:15:08-08:00",
-   "last": "2026-11-22T00:15:08-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s16"
    ]
   },
   {
@@ -34787,8 +34808,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "0229b1f9443772732eb0993bf64aa4c630cb5948",
- "synced_at": "2026-11-22T08:47:12+00:00",
+ "synced": "af56c6085ab245e96a5556b708f86028fb83a32d",
+ "synced_at": "2026-11-22T09:05:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
