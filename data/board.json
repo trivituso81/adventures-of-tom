@@ -31183,6 +31183,41 @@
     "n": 2,
     "est": 1.57
    }
+  },
+  {
+   "id": "c-menuux-plan",
+   "tag": "menuux-plan",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Game Shell",
+   "title": "Main menu redesign: the proposal",
+   "next": "Claude is writing a proposal for a new main menu (the pause menu: Party, Items, Gear, Status, Stamps, Vibes, Load, Options): research on the best modern RPG menus, a new look in the game's painted style, and a layout that fits the new battle system. Nothing in the game changes until Tom approves it in the chat; the build cards are made after that.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "prompt": {
+    "what": "Writes the proposal for a new main menu: what the best modern RPG menus do, a new look and layout that suits the game and the new battle system, drawn for the phone and the Duo. Nothing in the game changes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Fable 5.2 (row E3: Tom opened this conversation on Fable himself)",
+    "effort": "high (a whole design worked out with nothing written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-menuux-plan in data/board.json, history included (Tom's words are there). Your first push is the commit board: start c-menuux-plan. Read engine/menu.js, engine/progress.js and engine/b3-menu.js, take screenshots of every pause menu screen in portrait and landscape, research the best modern RPG menus, and write the proposal Tom asked for with drawings. Keep the plan in claude/menuux-plan.md and the drawings in claude/menuux-mock/. Change nothing in the game. End with a Tom card (ask decide) that the build cards wait on. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+    "opening": "\"The main menu needs a complete overhaul - i originally wanted it like odl school JRPG style but im now finding it dated and hard to read\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "New card. Tom (11-21 17:28): \"The main menu needs a complete overhaul - i originally wanted it like odl school JRPG style but im now finding it dated and hard to read. and im not sure its optimized for the new battle system. can you research best in class menus (eg, Person 3 Reload; just one example) that perfectly suits the needs of the game. it also should be strikingly beautiful and in theme with the design of the game.im open to anything, but id like to see a proposal before moving forward. once approved, id ask you to create the corresponding cards to kick off the work with the appropriate models.\""
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    }
+   ]
   }
  ],
  "sessions": [
