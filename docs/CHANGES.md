@@ -1,3 +1,7 @@
+## menucrease1 (2026-11-22): the menu book's two pages are the same width, crease in the center
+
+Tom: "the storybook look of each page should be even on both sides, ie symmetrical the crease should always be down the center". On the Duo the left page was sized to put the crease at the screen center, which left the pages unequal. The wide book now uses two equal columns on every tab and size; `tools/m2_test.py` fails when the two pages differ by more than 1.5 px. Tested: m2_test passed, Duo frame looked at (crease centered).
+
 ## standingfix (2026-11-22): standing night cards show under Runs every night with no START, and Nightly refactoring waits on GitHub
 
 Tom (11-22): "why do these cards constantly show in the board no matter how many times a start them?" Cause: Night cleanup and Night QA are standing cards (`nightly: true`) that return to Up next after every run by design, and a START on one that finds nothing to push is undone by the ghost watchdog (r12) after 30 minutes. Nightly refactoring sat in Start next because its wait (7 clean night test runs) was only text. Now `board.html` puts standing cards in a Runs every night section (last run and result, no START, no Copy prompt), `startable()` is false for them, and c-nightrefactor is col wait on GitHub. `tools/board_test.py` expects the new section. Not fixed here: board_sync_test.py and two counts in board_test.py (back, queued) were already off before this build.

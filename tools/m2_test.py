@@ -51,6 +51,7 @@ AUDIT = """()=>{ const root=document.getElementById('m2'); const bad={over:[],sm
       const sc=inScroll(c);
       if((!sc&&(b.bottom>r.bottom+1.5||b.top<r.top-1.5))||b.right>r.right+1.5||b.left<r.left-1.5) bad.over.push((c.className||c.tagName)+' leaves its page by '+Math.round(Math.max(b.bottom-r.bottom,b.right-r.right,r.left-b.left,r.top-b.top))); }
   }
+  { const pgs=root.querySelectorAll('.m2-page'); if(pgs.length===2) { const a=pgs[0].getBoundingClientRect(),b=pgs[1].getBoundingClientRect(); if(Math.abs(a.width-b.width)>1.5) bad.over.push('pages are not equal: '+Math.round(a.width)+' vs '+Math.round(b.width)); } }
   const L=document.getElementById('stage'); const sr=L.getBoundingClientRect();
   for(const c of root.querySelectorAll('.m2-top,.m2-tabs,.m2-book,.m2-page')) { const b=c.getBoundingClientRect(); if(b.right>sr.right+1.5||b.bottom>sr.bottom+1.5||b.left<sr.left-1.5||b.top<sr.top-1.5) bad.over.push((c.className)+' leaves the screen'); }
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);

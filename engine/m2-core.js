@@ -123,11 +123,10 @@ function m2Render() {
   else if(M2.tab==='bag') body=m2BagBody(d);
   else body=m2SystemBody(d);
   if(d.wide) {
-    const rail=d.compact?72:96,gap=8,center=document.documentElement.classList.contains('duo')||d.lw>=900;
-    const lw=center?Math.round(d.lw/2-rail-gap):Math.round((d.lw-rail-gap-8)/2);
+    const rail=d.compact?72:96,gap=8;
     grid.style.gridTemplateColumns=rail+'px minmax(0,1fr)'; grid.style.gridTemplateRows=(d.compact?44:48)+'px minmax(0,1fr)'; grid.style.columnGap=gap+'px'; grid.style.padding='0 8px 12px 0';
     grid.innerHTML='<div></div>'+m2Top(d)+m2Tabs()+
-      '<main class="m2-book" style="grid-template-columns:'+(body.single?'1fr':lw+'px minmax(0,1fr)')+'"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section>'+(body.single?'':'<section class="m2-page r'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.r+'</section>')+'</main>';
+      '<main class="m2-book" style="grid-template-columns:'+(body.single?'1fr':'minmax(0,1fr) minmax(0,1fr)')+'"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section>'+(body.single?'':'<section class="m2-page r'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.r+'</section>')+'</main>';
   } else {
     grid.style.gridTemplateColumns='minmax(0,1fr)'; grid.style.gridTemplateRows='auto minmax(0,1fr) auto'; grid.style.columnGap='0'; grid.style.padding='calc(env(safe-area-inset-top,0px) + 6px) 0 calc(env(safe-area-inset-bottom,0px) + 8px)';
     grid.innerHTML=m2Top(d)+'<main class="m2-book" style="margin:0 8px"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section></main>'+m2Tabs();
