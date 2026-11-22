@@ -22488,7 +22488,7 @@
   {
    "id": "t-lastnight",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
@@ -22496,7 +22496,7 @@
    "blocks": [],
    "next": "Handed to Claude by Tom: The what to do doesn't tell me what to do",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
     "opening": "board"
    },
    "history": [
@@ -22513,6 +22513,10 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T17:02:35.905Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "created": "2026-11-21",
@@ -22570,7 +22574,7 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "started_at": "2026-11-22T17:03:19+00:00"
   },
   {
    "id": "c-win3skip",
@@ -22894,13 +22898,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGRuFAHDmbikz263XC",
+    "url": "https://claude.ai/code/cse_01RXeukEx1RuSKPKxbZ98g9u",
     "opening": "not started"
    },
    "nightly": true,
@@ -22953,6 +22957,10 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T17:02:49.104Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -22968,7 +22976,7 @@
     "date": "2026-11-21",
     "build": "nightclean-1122"
    },
-   "start": true
+   "started_at": "2026-11-22T17:03:19+00:00"
   },
   {
    "id": "c-bigone25",
@@ -23178,13 +23186,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGpS5QYVaShemAAdNg",
     "opening": "not started"
    },
    "nightly": true,
@@ -23292,6 +23300,10 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T17:02:58.127Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -23307,7 +23319,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-22T17:03:19+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -35398,8 +35410,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "51ebf93e55c64193dda05ed3d67c103012e85e43",
- "synced_at": "2026-11-22T15:17:59+00:00",
+ "synced": "101d50415d6c546db1d19c4e10651be10e7fb32f",
+ "synced_at": "2026-11-22T17:03:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
