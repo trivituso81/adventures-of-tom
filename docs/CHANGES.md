@@ -1,3 +1,10 @@
+## 2026-11-22 (3): Art Library bake, prop-gate-backlot-stage7-open (`artbake1587`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- prop-gate-backlot-stage7-open: background keyed from the corner colour rgb(209, 3, 87)
+- prop-gate-backlot-stage7-open: `bake_gate_art.py backlot-stage7 open` ran from art/raw/props/prop-gate-backlot-stage7-open-v2.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## nightgreen (2026-11-22): every night test is off the known failures
 
 Card c-nightgreen is done. All 12 rows of `tools/night/tests.json` that carried `known_fail` are fixed or retired (parts nightgreena to nightgreenm), and no row carries `known_fail` now (`python3 tools/night/manifest_check.py` ok). Nine tests were out of date, one game fault was fixed (a Carry-On spawn inside a bench in Terminal Zero), three already passed, one was deleted by the purge rule. The last one, `ch20_test`, took the longest: two test mistakes after the Leviathan fight (nightgreenm), and it now runs in under 4 minutes instead of 16. Notes: `claude/next-addendum-nightgreen.md`. This unblocks nightly refactoring (c-nightrefactor).
