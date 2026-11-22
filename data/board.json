@@ -34687,7 +34687,7 @@
   {
    "id": "c-wanstop-grace-cubepop-r4",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-grace-cubepop-r4",
    "title": "Fix the stopped video grace-cubepop",
@@ -34697,9 +34697,9 @@
    "auto": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEJ9MnPb7xooquuzBC",
+    "url": "https://claude.ai/code/cse_01RXeukEzG7UpC3ncVHRM4wi",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -34714,6 +34714,22 @@
     {
      "d": "2026-11-22",
      "t": "Session ended without shipping: I looked at the frames of grace-cubepop-r4.mp4 and grace-cubepop-a2-r4.mp4. In both she takes the blue cube from her hand/waist, squeezes it with both hands once, then tucks it back at her waist and returns to her stance; height, feet, background and ends all pass. The two failed look-checks only say the pocket pickup and tuck are not clearly shown, which is a check problem, not a motion problem. Changed nothing in the job (rev stays 4), started no try, per the card prompt. Tom card t-cubepop-checkdecide-r4 asks which way to go."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Grace cube pop: checks fail, video looks right to me is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Answer from \"Grace cube pop: checks fail, video looks right to me\": Bake the latest video as it is"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -34725,8 +34741,7 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-grace-cubepop-r4 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job grace-cubepop (rev 4) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: grace-cubepop-r4-result.json (every check with numbers and the look-check answers) and the videos grace-cubepop-r4.mp4, grace-cubepop-a2-r4.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-grace-cubepop-r4` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-grace-cubepop-r4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:11:55+00:00",
-   "waiting_on": "tom"
+   "started_at": "2026-11-22T06:07:27+00:00"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
@@ -34784,7 +34799,7 @@
   {
    "id": "c-boardwedge1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "tag": "boardwedge1",
    "title": "Board sync can no longer be wedged by a bad board file",
@@ -34819,6 +34834,10 @@
     {
      "d": "2026-11-22",
      "t": "Built both guards (boardwedge1): r15_fyi in board_sync.py, marker scan in board_check.py and the board-sync workflow. board_sync_test.py all passed."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as boardwedge1: board sync can no longer be stalled by a Tom card that blocks only finished work, or by merge-conflict markers in the board files"
     }
    ],
    "prompt": {
@@ -34830,7 +34849,8 @@
     "effort": "medium (the two guards are specified, the pieces are small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (section The board), then card c-boardwedge1 in data/board.json. First push: `board: start c-boardwedge1`. Problem: the board-sync Action (.github/workflows/board-sync.yml, step 'Check the board file, then commit and push it if a card moved') exits 1 when tools/board_check.py rejects data/board.json, so no card move is saved and the board stops refreshing. It happened twice on 2026-11-21: (1) open Tom card t-milestoned blocked only a Claude card that shipped, so 'an open Tom card must block an open Claude card, or be marked fyi: true' failed (fixed by hand with fyi: true); (2) commit b3cdb22 pushed merge-conflict markers into data/board.json and board.html (repaired in 6a2e301). Build two guards. (A) Sync side, in tools/board_sync.py: when a Claude card moves to Done, any open Tom card whose blocks list holds only Done cards (or none open) and which is not fyi becomes fyi: true, with one history line saying why, so board_check never fails for that reason; add cases to tools/board_sync_test.py. (B) Push side: a check that fails a push when data/board.json, data/board-archive.json or board.html contains a line that starts with seven less-than signs, seven equals signs alone, or seven greater-than signs followed by a space. Put it in tools/board_check.py (JSON parse already fails for the board; add the board.html scan) and call it from tools/smoke.py and from a new step at the top of the board-sync workflow so a bad push is named in the run summary instead of only failing step 6. Do not change any card's meaning. Run python3 tools/board_sync_test.py, python3 tools/board_test.py /tmp/board, python3 tools/board_check.py and python3 tools/smoke.py. Write a heading '## boardwedge1' (with date and one plain line) in docs/CHANGES.md, bump tags with python3 tools/art-library/bump_tags.py boardwedge1 --base origin/main, and push. Use tag boardwedge1. At the end set this card's next to the result. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T06:01:01+00:00"
+   "started_at": "2026-11-22T06:01:01+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "t-wetfloor-check",
@@ -35145,8 +35165,10 @@
    "url": "https://claude.ai/code/session_01RXeukDqxmV5mAjaJfGx1NH",
    "title": "Board sync can no longer be wedged by a bad board file",
    "first": "2026-11-22T06:02:04Z",
-   "last": "2026-11-22T06:02:04Z",
-   "tags": [],
+   "last": "2026-11-22T06:07:02Z",
+   "tags": [
+    "boardwedge1"
+   ],
    "cards": [
     "c-boardwedge1"
    ]
@@ -40360,8 +40382,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "f659949118c79f53a3b06b339593ab9eadc20691",
- "synced_at": "2026-11-22T06:03:54+00:00",
+ "synced": "d1270a990a6a582431d2417fafeff04786b171e7",
+ "synced_at": "2026-11-22T06:07:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
