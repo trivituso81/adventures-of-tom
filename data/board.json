@@ -30723,7 +30723,7 @@
    "title": "Battle stage 22: chapter 13 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 13 on Battle 3: Hushling (Hexer), Signal Fault (Elite), Turnstile Grump (Elite), Wired Relay Hushling (Special), Dual-Coast Drill Worm (Mini-boss), The Gold Knight (Boss). Starts after chapter 12 is switched on.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30740,12 +30740,17 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T22:13:22.215Z"
     }
    ]
   },
