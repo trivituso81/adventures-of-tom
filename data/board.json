@@ -30301,6 +30301,10 @@
     {
      "d": "2026-11-22",
      "t": "Part shipped as movestage2a: the video Action can make stage pictures and object videos, and the run for Tom's eight moves is started"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "movestage2b pushed: the stage engine (engine/b3-stage.js), its hooks in b3-play.js and the Move Lab (MOVE LAB: TOM) are in the game and tested in portrait and landscape with stand-in pictures. Waiting: the videos (the run is started again now, the daily limit is gone) and then the measured marks and the Lab jump (movestage2)."
     }
    ],
    "after": "t-movestage-lab"

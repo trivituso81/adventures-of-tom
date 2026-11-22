@@ -453,11 +453,11 @@ tree = sh('git', '--git-dir', bare, 'ls-tree', '-r', '--name-only', 'main').stdo
 ok(all(f in tree for f in ('art/stage/tom-sprop.webp', 'data/stage/tom-sprop.js', 'art/raw/stage/tom-sprop.png', 'art/stage/tom-sglow.webp', 'data/stage/tom-sglow.js', 'art/raw/stage/tom-sglow.mp4', 'art/stage/tom-sshell.webp', 'data/stage/tom-sshell.js')),
    'B17/B18 the passed assets are baked: sheet, data file and the raw source', [f for f in tree if 'stage' in f])
 ok(not any(x in f for f in tree for x in ('tom-sbad', 'tom-svision', 'tom-sloopbad', 'tom-sperson', 'tom-sstill')), 'B17/B18 nothing stopped is baked')
-sj = main_file('data/stage/tom-sglow.js'); mm = re.search(r'b3sDefine\("tom/sglow",(\{.*\})\);', sj)
+sj = main_file('data/stage/tom-sglow.js'); mm = re.search(r'b3gDefine\("tom/sglow",(\{.*\})\);', sj)
 D = json.loads(mm.group(1)) if mm else {}
 ok(D.get('kind') == 'obj' and D.get('bg') == 'black' and D.get('loop') is True and D.get('n') == 12 and len(D.get('rects', [])) == 12 and len(D.get('ms', [])) == 12 and D['ms'][1] == 250 and D.get('src', '').startswith('art/stage/tom-sglow.webp?v='),
    'B18 the glow data file: object, black, loop, 12 pictures (36 minus the repeated last, every 3rd), 250 ms apart at 12 per second', D)
-sp_ = json.loads(re.search(r'b3sDefine\("tom/sprop",(\{.*\})\);', main_file('data/stage/tom-sprop.js')).group(1))
+sp_ = json.loads(re.search(r'b3gDefine\("tom/sprop",(\{.*\})\);', main_file('data/stage/tom-sprop.js')).group(1))
 ok(sp_['kind'] == 'prop' and sp_['n'] == 1 and sp_['w'] <= 384 and sp_['h'] <= 384, 'B17 the prop data file: one picture, long side at most 384 px', sp_)
 ix = main_file('index.html')
 ok(ix.count('data/stage/tom-sprop.js') == 1 and ix.count('data/stage/tom-sglow.js') == 1 and ix.index('data/b3-stage.js') < ix.index('data/stage/tom-sprop.js'), 'B17/B18 index.html loads each stage file once, after data/b3-stage.js', ix)

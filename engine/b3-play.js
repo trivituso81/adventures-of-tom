@@ -42,7 +42,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null}); if(typeof B3C!=='undefined') B3C.gs={}; }   // wanch1: guard clip state starts fresh with the fight's clock
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null}); if(typeof B3C!=='undefined') B3C.gs={}; if(typeof b3gReset==='function') b3gReset(); }   // wanch1: guard clip state starts fresh with the fight's clock
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -125,6 +125,7 @@ const b3Name=key=>b3Unit(B3.F,key).name;
 // ---------- Showing one beat ----------
 function b3Show(b) {
   const V=B3.view,vu=b.tgt?V.u[b.tgt]:null,now=B3P.t;
+  if((b.t==='react'||b.t==='intercept')&&typeof b3gBeat==='function') b3gBeat(b);   // movestage2: a lasting stage element answers (engine/b3-stage.js)
   if(b.t==='round') { b3Word('ROUND '+b.n,'#fff1cb'); }
   else if(b.t==='turn') { V.bar=b.bar; B3.turnOf=b.who; b3RenderBar(); }
   else if(b.t==='hit') {
@@ -268,6 +269,8 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const head=beats[0];
   // Clips (engine/b3-clips.js): ask for what this move will show. A move whose clip is still loading waits for it (2.5 s at most), then plays its default animation.
   b3cWarmBeats(beats);
+  const SR=typeof b3gRowFor==='function'?b3gRowFor(head):null;   // movestage2: a staged move (data/b3-stage.js) waits for its body clip and stage assets like any clip, then plays its row
+  if(SR) { b3gWarm(SR); if(!b3gReady(SR)&&(waited||0)<B3C.waitMax) { b3After(.1,()=>b3PlayMove(beats,done,mid,(waited||0)+.1)); return; } }
   let PR=b3cPair(head);   // pairmove1: a two-person video when the partner is standing (engine/b3-clips.js)
   const own=head.t==='act'&&head.anim&&head.anim.kind==='clip'?head.anim.clip:null,cid=PR?PR.clip:own;
   if(cid&&BCLIPS[cid]&&!b3cReady(cid)&&(waited||0)<B3C.waitMax) { b3After(.1,()=>b3PlayMove(beats,done,mid,(waited||0)+.1)); return; }
@@ -292,6 +295,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const finishNow=()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); if(reacts.length) b3After(.3*K,()=>react(0)); else wrap(); };
   const finish=s=>at(s,finishNow);
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
+  if(SR&&b3gReady(SR)) { b3gPlay(SR,{head,hits,late,reveal,finishNow}); return; }   // movestage2: the row's body clip, stage steps and set piece (engine/b3-stage.js)
   // A video clip plays the move (the move's or act's row says which, engine/b3-clips.js). It plays at the clock's own pace, not B3_TEMPO's:
   // the hit shows on the clip's impact frame (a clip with no impact lands at `at` of its length). A family member crosses to the monster first.
   let CL=cid&&b3cReady(cid)?BCLIPS[cid]:null;
@@ -368,10 +372,12 @@ function b3Draw() {
   battleFit();
   gfx=fightCtx; gfx.setTransform(BS,0,0,BS,0,0);
   const t=B3P.t,F=B3.F,V=B3.view;
+  const skk=typeof b3gShakeAt==='function'?b3gShakeAt(t):null; if(skk) gfx.translate(skk.x,skk.y);   // movestage2: a stage shake moves the whole field
   const bg=BG_IMG[(B3.cfg&&B3.cfg.bg)||'pond'];
   if(bg&&bg.complete&&bg.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high'; gfx.drawImage(bg,0,0,576,324); gfx.imageSmoothingEnabled=sm; }
   else rect(0,0,576,324,'#14141c');
   if(!F||!V||B3.artWait) { gfx=ctx; return; }
+  if(typeof b3gDrawBack==='function') b3gDrawBack(t);   // movestage2: the set piece's dim over the backdrop
   const picked=b3AimUnits();   // the units the highlighted move is aimed at (engine/b3-deck.js)
   // What lies on a side's floor (hazards): a sheen under that side's feet and a tag in the top corner on that side.
   for(const h of V.haz||[]) { const H=B3_HAZARDS[h.id],foe=h.side==='foe',L=foe?F.foes.filter(f=>!V.u[f.key].ko&&f.row!=='back'):[];
@@ -391,7 +397,8 @@ function b3Draw() {
       gfx.globalAlpha=1; ellipse(x,y,8,8,'#141a22'); ellipse(x,y,6.5,6.5,e.color); ellipse(x-2,y-2,2.5,2.5,'#ffffff'); }
     else if(e.kind==='burst') { gfx.globalAlpha=Math.max(0,1-q); for(let k=0;k<8;k++) { const a=k*.785+.3,r=10+q*34; rect(e.x+Math.cos(a)*r-2,e.y+Math.sin(a)*r*.8-2,5,5,k%2?'#ffffff':e.color); } gfx.globalAlpha=1; }
   }
-  if(B3P.flash) { const q=(t-B3P.flash.t0)/B3P.flash.dur; gfx.globalAlpha=.3*(1-q); rect(0,0,576,324,B3P.flash.color); gfx.globalAlpha=1; }
+  if(typeof b3gDrawFront==='function') b3gDrawFront(t);   // movestage2: props, flying things, glows and words of a stage row
+  if(B3P.flash) { const q=(t-B3P.flash.t0)/B3P.flash.dur; gfx.globalAlpha=(B3P.flash.a||.3)*(1-q); rect(0,0,576,324,B3P.flash.color); gfx.globalAlpha=1; }
   // Numbers and tags.
   for(const p of B3P.pops) { const q=(t-p.t0)/p.dur,w=(String(p.text).length*4-1)*p.sc,x=Math.max(w/2+3,Math.min(573-w/2,p.x)),y=Math.max(4,p.y-q*22);
     gfx.globalAlpha=q>.75?(1-q)/.25:1; b3Text(p.text,x,y,p.color,p.sc); gfx.globalAlpha=1; }
@@ -437,7 +444,9 @@ function b3DrawFoe(f,t,picked) {
   const x=Math.round(L.px-w/2+dx+shake-lean+sway),y=Math.round(L.py-h+bob+dy-(dc?0:dq*30));
   if(!dying||dc) ellipse(L.px+dx,L.py-1+(A.lunge?(A.lunge.ty-L.py)*lq:0),sw*.48*(hov?.8:1),Math.max(4,sc*2),hov?'rgba(30,50,40,.22)':'rgba(30,50,40,.3)');
   const flash=t<A.flashUntil||(dying&&!dc&&dq>.1),alpha=(1-dq)*(A.born!=null?Math.min(1,(t-A.born)/.5):1);
-  if(breath&&!A.lunge&&!shake&&!holding&&!fl&&!CFr) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
+  const SO=typeof b3gFoeOffset==='function'?b3gFoeOffset(f.key,t):null;   // movestage2: pushed back or squashed by a stage row
+  if(SO) { gfx.save(); gfx.translate(L.px+SO.dx,L.py); gfx.scale(1,SO.sq); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
+  else if(breath&&!A.lunge&&!shake&&!holding&&!fl&&!CFr) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
   else drawSprite(R,def.pal,x,y,sc,{flash,alpha});
   if(dying) return;
   // HP meter and letter under the feet; the wind-up and (DETAILS on) statuses over the head.

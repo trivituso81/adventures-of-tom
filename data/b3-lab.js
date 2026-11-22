@@ -145,5 +145,8 @@ const B3_LAB=[
   {id:'new68',name:'NEW 68: THE STANDBY SPRITE',sub:'Chapter 11 Elite. The Standby Sprite has 4 Composure pips and starts behind the gate podium. Waitlist Bump pushes one of you back. A Red-Eye in Back.',
     party:['tom','grace','rose','amy'],level:27,formation:'standbysprite',bg:'infinity'},
   {id:'new69',name:'NEW 69: FINAL CALL',sub:'Chapter 11 boss. 7 Composure pips. Gate Change trades a Front and a Back ally and pushes both. At 60% HP it calls Lost Luggage and everyone speeds up.',
-    party:['tom','grace','rose','amy'],level:27,formation:'finalcall',bg:'infinity'}
+    party:['tom','grace','rose','amy'],level:27,formation:'finalcall',bg:'infinity'},
+  // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
+  {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
+    party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true}
 ];
