@@ -32535,7 +32535,7 @@
    "id": "c-fix-ch2play",
    "tag": "fix-ch2play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play chapter 2 on your phone and report",
@@ -32557,7 +32557,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEBBfLQ4zm6MPou8Xp",
     "opening": "Something is wrong on t-ch2play"
    },
    "history": [
@@ -32588,6 +32588,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:56:20.428Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -32601,7 +32605,7 @@
    },
    "after": "t-ch2play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-22T02:57:06+00:00"
   },
   {
    "id": "c-fix-dash3-try-2",
@@ -32922,7 +32926,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCy9ak7gUEgSXmXGuh",
+    "url": "https://claude.ai/code/session_01RXeukCy9ak7gUEgSXmXGuh",
     "opening": "not started"
    },
    "prompt": {
@@ -32947,6 +32951,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T02:55:33+00:00"
@@ -33053,6 +33061,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCy9ak7gUEgSXmXGuh",
+   "title": "Make gear count in the new battle",
+   "first": "2026-11-22T02:56:35Z",
+   "last": "2026-11-22T02:56:35Z",
+   "tags": [],
+   "cards": [
+    "c-b3gear"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukExxyhqWAYx7n1VUpm",
    "title": "Fix: Try the game strip and Take me there",
@@ -37965,8 +37983,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "f0f54d3d8e86ba8c32f9412b65e2314da9a6ca61",
- "synced_at": "2026-11-22T02:55:33+00:00",
+ "synced": "99d0f4cc352c480ba1593547393572e282998dc1",
+ "synced_at": "2026-11-22T02:57:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
