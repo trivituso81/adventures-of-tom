@@ -32086,6 +32086,11 @@
     {
      "d": "2026-11-22",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T23:56:46.456Z"
     }
    ],
    "prompt": {
@@ -32096,7 +32101,8 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-jetwash-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-jetwash-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-jetwash-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-jetwash-vid-r1.mp4, stage-tom-jetwash-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-jetwash-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-jetwash-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-wanstop-stage-tom-starbeam-vid-r1",
