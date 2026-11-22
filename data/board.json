@@ -33735,7 +33735,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33776,8 +33776,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family. Sent to Claude as card c-fix-menu4play-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T06:32:16.175Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-b3gear",
@@ -35461,6 +35467,65 @@
    ],
    "done": "2026-11-21",
    "answer": "Give it 4 more tries"
+  },
+  {
+   "id": "c-fix-menu4play-2",
+   "tag": "fix-menu4play-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Play the whole new menu on the Duo and iPhone",
+   "next": "You reported a problem on Play the whole new menu on the Duo and iPhone. Claude starts the fix by itself. Latest: The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in",
+   "blocks": [
+    "t-menu4play"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T06:32:15.202Z",
+     "card": "t-menu4play",
+     "title": "Play the whole new menu on the Duo and iPhone",
+     "ask": "play",
+     "words": "The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family.",
+     "shot": "board-shots/t-menu4play-mwrgm1a3.jpg",
+     "asked": "Fix shipped (build fix-menu4play). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu ) Vibes and tap Deedee's face at the top. Her name Deedee should now sit on ONE line, fully visible, with the picture a little narrower. Check the other people's names too. Then finish the rest of the walk: Family, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-menu4play"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-menu4play.",
+     "at": "2026-11-22T06:32:16.175Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-menu4play: The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family. Screenshot: board-shots/t-menu4play-mwrgm1a3.jpg on branch inbox.",
+     "at": "2026-11-22T06:32:16.175Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-22T06:32:16.175Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the whole new menu on the Duo and iPhone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-menu4play-2 and t-menu4play in data/board.json, history included. Your first push is the commit board: start c-fix-menu4play-2.\n\nTom tested and found problems:\n1. Card t-menu4play (Play the whole new menu on the Duo and iPhone, ask play). He was asked: Fix shipped (build fix-menu4play). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu ) Vibes and tap Deedee's face at the top. Her name Deedee should now sit on ONE line, fully visible, with the picture a little narrower. Check the other people's names too. Then finish the rest of the walk: Family, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change. He wrote: The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family. Screenshot: board-shots/t-menu4play-mwrgm1a3.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-menu4play-mwrgm1a3.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:32:15.202Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-menu4play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-menu4play, and give the build fix-menu4play-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-menu4play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
