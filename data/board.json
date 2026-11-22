@@ -32381,7 +32381,7 @@
    "id": "c-fix-dash3-try-2",
    "tag": "fix-dash3-try-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try the game strip and Take me there",
@@ -32403,7 +32403,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukExxyhqWAYx7n1VUpm",
     "opening": "Something is wrong on t-dash3-try"
    },
    "history": [
@@ -32421,6 +32421,10 @@
      "d": "2026-11-21",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-22T02:16:33.907Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -32434,7 +32438,7 @@
    },
    "after": "t-dash3-try",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-22T02:18:07+00:00"
   }
  ],
  "sessions": [
@@ -37310,8 +37314,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3b61c21cc6106408fea00435d2dc8764e4dea7c6",
- "synced_at": "2026-11-22T02:16:23+00:00",
+ "synced": "6f353aa1ae079a43d3dd6c1591a6294076ac2f2c",
+ "synced_at": "2026-11-22T02:18:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
