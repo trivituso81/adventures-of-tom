@@ -30777,31 +30777,6 @@
    "done": "2026-11-21"
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44962513445",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
-  },
-  {
    "id": "t-boppy-bigfish-cap",
    "title": "Boppy's new pose has a blank cap: install or redo?",
    "theme": "Characters",
@@ -31762,6 +31737,31 @@
    "started_at": "2026-11-22T01:53:56+00:00",
    "after": "nothing for Tom: end",
    "done": "2026-11-21"
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44973906658",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
