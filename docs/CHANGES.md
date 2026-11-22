@@ -9,6 +9,23 @@ Card c-movefun. Tom (11-21 20:02): "But what makes it giddy up Tata? These moves
 | Wrong (1) | Rose Giddyup, Tata! (no Tom in it; already being remade by pairmove1) |
 
 Length is not the cause: every move plays 2.1 to 3.4 s, and the two good signature moves are 2.8 s. Each flat move has one fix (one prompt sentence; Cube Pop and Wet-Floor also play at 1.25x). List and exact wording: claude/move-fun-review.md. Board: t-movefun-pick (Tom decides) blocks c-movefun-fix (Sonnet 5.5 medium, auto, build movefun2).
+## menu3 (2026-11-22): the new menu has its Bag and System pages (still behind the MENU: NEW switch)
+
+Card c-menu3. Tom approved the design on t-menuux-decide (11-21 18:20). Nothing a player sees changes until Tom picks `MENU: NEW` in ADMIN (or `index.html?menu=new`). Bag and System are pages of the book now; no tab opens today's Items or Load screens any more.
+
+| Part | Where |
+|---|---|
+| Bag: All, Heal, Gear, Keepsakes (a Battle chip shows only when the bag holds a battle item), the list with painted pictures and counts, the item's page (what it does, You have N), Use it on: the family by health, most hurt first, the health each would end at, Use; Use on everyone for the picnic; Wear for a piece of gear. On a tall screen the page is a sheet that slides up (Back closes it first) | `engine/m2-bag.js` (`m2BagBody`, `m2BagDetail`, `m2UseRows`); rules `useFieldItem`, `equipTo` |
+| System, left page: Autosave and the slots with Save and Load, each asking twice before anything is replaced (Replace it?, Load it?, Back cancels), saves from other devices, Back up, Restore, Cloud set-up, Sync now, Cloud off, the build label (opens the build history above the menu), Quit to title with its question | `m2SystemBody`, `m2SavesBlock`, `m2SaveRow`, `m2QuitAsk` |
+| System, right page: Music, Voices and Sound effects (a slider you tap or drag, with minus and plus buttons for keys and the controller), Difficulty, Battle speed, Show what each skill does (the same saved setting as in fights), Turn the screen sideways (phones only), Less motion | `m2Options`, `m2BagWire` |
+| Options only the old battle uses (High-five timing, Auto-stamp spends points, Win Now button) | show only while `b3sOn()` is false |
+
+- Less motion (new, call): saved on the device as `aot-m2-calm`; it turns off the book opening, the page slide and the sheet. A tab change now slides the page (the style existed from menu1 but nothing used it).
+- Turn the screen sideways (call): hidden on the unfolded Duo and iPads, where `toggleLayout` does nothing (the drawing showed it on the Duo; it would be a dead switch).
+- Using an item, wearing, a volume or option change marks the menu for the autosave on close. Loading a save clears that mark first so the autosave is not overwritten by the game being replaced.
+- Removed (purge rule): the Bag, System and Gear paths into today's screens (`m2OpenLegacy` now opens only Stamps), the `m2Soon` placeholder.
+- Tests passing: `python3 tools/m2_test.py` (both pages at the five sizes: overflow, text under 12.5 px, targets under 44 px, em dashes; an item used on a hurt person, Wear from the Bag, Save here, Replace it, a save and load round trip, every option, the old-battle options, the quit question, the build label opening the history), `python3 tools/smoke.py`. Screens: `tools/shots/m2-<size>-bag.png`, `-bagitem.png`, `-system.png`, `-system-old.png`, `-quit.png`. Compared by eye with `claude/menuux-mock/shots/bag_*` and `system_*`.
+- Not done: the switch to New for everyone and the purge of the old menu (card c-menu4). Not tested: a real cloud set-up, Back up's share sheet, Restore's file picker (they call the same functions as the old page).
 
 ## menu2 (2026-11-22): the new menu has its Vibes and Gear pages (still behind the MENU: NEW switch)
 
