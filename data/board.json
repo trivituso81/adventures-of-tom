@@ -30999,13 +30999,13 @@
    "id": "c-battleux-plan",
    "tag": "battleux-plan",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Battle screen redesign: the proposal",
    "next": "The proposal is ready: ADMIN > Battle system > Battle screen redesign (proposal). It waits on your card Decide on the battle screen redesign. The build cards are made after you answer.",
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Writes the proposal for a new battle screen: how the game's battle system compares with modern RPGs, a new way to pick, read and aim a move, and drawings for the Duo unfolded, desktop, Duo folded and a standard iPhone. Nothing in the game changes.",
     "before": [
@@ -31031,9 +31031,14 @@
     {
      "d": "2026-11-22",
      "t": "Built battleux-plan: the proposal page and a mock Tom can tap (battle-ux.html), the plan (claude/battleux-plan.md), drawings of six screen sizes (claude/battleux-mock/). Nothing in the game changed. The mock was tested by script (taps, aim, use, Details, Ruckus, keys: FAILS []) and each size looked at. Known weak spots are in the plan, section 3.4. Seen and left alone: tools/admin_hub_test.py fails 'one link per fight' and tools/board_sync_test.py fails 3 checks on main before this push (not caused by it)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux-plan: a proposal for a new battle screen, with a mock you can tap (nothing in the game changed)"
     }
    ],
-   "after": "t-battleux-decide"
+   "after": "t-battleux-decide",
+   "done": "2026-11-21"
   },
   {
    "id": "c-reports-12",
@@ -31268,8 +31273,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (5 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31287,6 +31292,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-sync: 2 report(s) on branch inbox."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 5 report(s)."
     }
    ],
    "blocks": [],
@@ -32096,6 +32105,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
+   "title": "Battle screen redesign: the proposal",
+   "first": "2026-11-21T17:05:57-08:00",
+   "last": "2026-11-21T17:38:09-08:00",
+   "tags": [
+    "battleux-plan"
+   ],
+   "cards": [
+    "c-battleux-plan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
    "title": "Main menu redesign: the proposal",
    "first": "2026-11-21T17:30:53-08:00",
@@ -32117,16 +32138,6 @@
    "cards": [
     "c-wanstop-rose-giddyup-r6",
     "c-wanstop-deedee-wetfloor-r5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
-   "title": "Battle screen redesign: the proposal",
-   "first": "2026-11-21T17:05:57-08:00",
-   "last": "2026-11-21T17:05:57-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleux-plan"
    ]
   },
   {
@@ -36114,7 +36125,10 @@
    "r-20261121-165412-a75h",
    "r-20261121-172017-kfe3",
    "r-20261121-172826-9r47",
-   "r-20261121-172850-q5km"
+   "r-20261121-172850-q5km",
+   "r-20261121-173524-egdf",
+   "r-20261121-173628-97ha",
+   "r-20261121-173717-wjou"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36148,8 +36162,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "54233f963efc5f1c6a8dec2f99b1f8ca1039b54e",
- "synced_at": "2026-11-22T01:31:03+00:00",
+ "synced": "b85acae5f7831d7df72e32a3fdab21d7392aad7a",
+ "synced_at": "2026-11-22T01:39:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
