@@ -29085,7 +29085,7 @@
    "changed": "2026-11-22",
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-b3look...\""
    },
    "prompt": {
     "what": "Restyles the new battle screen after the new main menu and cuts it down: one look across all battle controls, no fact shown twice, labels next to their pictures, color only where it means something, and a DETAILS switch that hides the details everywhere. No rule or number changes.",
