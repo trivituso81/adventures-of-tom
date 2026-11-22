@@ -729,6 +729,24 @@
    "source": "wan-gen run",
    "at": "2026-11-21T23:01:21Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44959213994"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-21",
+   "amount": 1.57,
+   "what": "wan-gen Action: rose-giddyup, deedee-wetfloor",
+   "source": "wan-gen run",
+   "at": "2026-11-22T00:47:35Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44967949648"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-21",
+   "amount": 0.0135,
+   "what": "wan-gen bulk look checks: t-wanch5-gen",
+   "source": "wan-gen run",
+   "at": "2026-11-22T00:47:35Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44967949648"
   }
  ],
  "balances": [
