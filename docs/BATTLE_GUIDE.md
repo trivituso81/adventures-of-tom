@@ -10,7 +10,7 @@
 | Family | Each member: who they are, their Vibes, Lean, titles, Trait, Basic, Skills, Capstone, Quirks, counter, body animations | `B3_CAST`, `B3_VIBES`, `B3_SKILLS`, `B3_TRAITS`, `B3_QUIRKS`; the one-liners are `WHO` in the page |
 | Monsters | By chapter: stats, pips, Pet Peeves, resists, what it starts with, every attack and when it uses it, the Lab fights it is in | `B3_FOES`, `B3_FORMATIONS`, `B3_LAB` |
 | Statuses | Every status, Prime, stance, mark and hazard, with who uses it | `B3_STATUS`, `B3_HAZARDS` |
-| Animations | Per person and monster: body states, moves, attacks, wind-ups; VIDEO or NO VIDEO YET (wanch2a: no painted poses are left); NOTE OPEN when a card is open | `B3_BODY_CLIPS`, `B3_VIDEO_ONLY`, each row's `anim`, each act's `wind`, the clip files named in `index.html` |
+| Animations | A PLAN at the top (animplan1: Making, Next, Done counts and rows, from `data/guide-anims.json`, `wangen-jobs.json` and open `c-wanstop` cards); per person and monster: body states, moves, attacks, wind-ups; VIDEO or NO VIDEO YET (wanch2a: no painted poses are left); NOTE OPEN when a card is open | `B3_BODY_CLIPS`, `B3_VIDEO_ONLY`, each row's `anim`, each act's `wind`, the clip files named in `index.html` |
 
 The page loads no engine. `boot()` reads `index.html`, takes its `data/b3-*.js` script tags in order and adds them to the page, so the guide is whatever the game is. Clip data files (`data/clips/<id>.js`) call `bclipDefine`; the page has its own one-line version and loads a clip's file and picture only when it is played.
 

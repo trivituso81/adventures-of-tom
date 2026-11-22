@@ -31698,6 +31698,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by wanauto1. Tom (18:09): \"there's no clarity on the plan, which animations we do and when\"."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Plan view built in the Battle Guide Animations tab (build animplan1): Making, Next, Done counts and rows."
     }
    ],
    "prompt": {
@@ -31708,7 +31712,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "medium (one page view from data that exists)",
     "text": "Read CLAUDE.md (section wanauto1 and the Battle Guide row of Where things live), docs/BATTLE_GUIDE.md and claude/video-battle-plan.md 4.14, then card c-animplan in data/board.json. Tom (2026-11-21 18:09): \"there's no clarity on the plan, which animations we do and when\". Add a PLAN view at the top of ADMIN > BATTLE GUIDE > Animations (battle-guide.html): one row per battle animation from data/guide-anims.json, grouped Done (a baked video is in the game), Making (a job in tools/art-library/wangen-jobs.json with no baked clip, or an open c-wanstop card in data/board.json), Next (no video and no job), with a count per group at the top; each Making row shows the job's rev. Plain words, no em dashes, works in portrait on the phone. Test it in tools/battle_guide_test.py (counts match the data, rose-giddyup is a Making row), look at portrait and landscape screenshots, write the CHANGES heading ## animplan1 and push. After: nothing for Tom: end. Your first push is the commit board: start c-animplan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-menuux-plan",

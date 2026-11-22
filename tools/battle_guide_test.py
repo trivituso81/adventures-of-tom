@@ -520,6 +520,24 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
             act = href.split('act=')[1].replace('%3A', ':').split(':')[1]
             check('the game opens the fight with the monster using the attack first (' + act + ')', any(act in u[1] or any(act in k for k in u[1]) for u in res['uses']), res)
         check(what + ': the game shows no script error', not gerr, gerr); g.close()
+    # animplan1: the Plan view at the top of Animations: Done, Making, Next counts match the data, rose-giddyup is a Making row with its rev
+    G = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
+    JB = json.load(open(os.path.join(ROOT, 'tools', 'art-library', 'wangen-jobs.json'), encoding='utf-8'))
+    stops = [c['id'] for c in board['doc']['cards'] if c['id'].startswith('c-wanstop-') and c.get('col') != 'done']
+    def mk(v):
+        j = v.get('job') or ''
+        return bool(j and j in JB) or any(i.startswith('c-wanstop-' + j + '-r') for i in stops) if j else False
+    wd = sum(1 for v in G.values() if v.get('video')); wm = sum(1 for v in G.values() if not v.get('video') and mk(v)); wn = len(G) - wd - wm
+    for name, w, h in (('portrait', 390, 844), ('landscape', 844, 390)):
+        cx = br.new_context(viewport={'width': w, 'height': h}, device_scale_factor=2, has_touch=True); pg = cx.new_page(); perr = []; pg.on('pageerror', lambda e: perr.append(str(e)))
+        ready(pg); pg.click('#tabs [data-tab=anims]'); pg.wait_for_selector('.plangrp', timeout=30000); pg.wait_for_timeout(1200)
+        c = pg.eval_on_selector_all('.plansum b', 'a=>a.map(x=>+x.textContent)')
+        check('plan (%s): counts Making %d, Next %d, Done %d match the data' % (name, wm, wn, wd), c == [wm, wn, wd] and sum(c) == len(G), c)
+        rr = pg.locator('.plangrp[data-plan=making] .row', has_text='Giddyup').inner_text()
+        check('plan (%s): rose-giddyup is a Making row with rev %s' % (name, JB['rose-giddyup']['rev']), 'REV %s' % JB['rose-giddyup']['rev'] in rr, rr)
+        check('plan (%s): one row per animation in each group' % name, pg.eval_on_selector_all('.plangrp', 'a=>a.map(d=>d.querySelectorAll(".row").length)') == [wm, wn, wd])
+        check('plan (%s): no sideways scroll, no script errors' % name, pg.evaluate("document.documentElement.scrollWidth<=innerWidth") and not perr, perr)
+        pg.screenshot(path=os.path.join(HERE, 'shots', 'guide-plan-%s.png' % name)); cx.close()
     cx.close(); br.close()
 srv.shutdown()
 print('FAILS:', fails)

@@ -81,6 +81,10 @@ th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute
 .hero{display:flex;gap:14px;align-items:center;margin-top:14px}
 .hero img{flex:none;width:92px;height:92px;border-radius:18px;object-fit:cover;object-position:top;background:var(--well)}
 .hero h2{margin:0}
+.plansum{display:flex;gap:8px;margin:0 0 8px}
+.plansum div{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}
+.plansum b{display:block;font-size:22px}.plansum span{font-size:12px;color:var(--muted)}
+.plangrp{margin:0 0 8px}.plangrp summary{cursor:pointer;font-weight:800;padding:8px 2px;min-height:36px}.plangrp summary .hint{font-weight:400;font-size:12px}
 .seg{display:flex;gap:6px;margin:10px 0}
 .seg button{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);font-size:14px;padding:8px 6px}
 .seg button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
@@ -204,7 +208,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
-let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
+let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,JOBS=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
 async function boot(){
   try{
@@ -220,8 +224,9 @@ async function boot(){
     for(const s of srcs) if(/^engine\/clip-ground\.js/.test(s)) await addScript(s).catch(()=>{});   // rose-lava-xftr: the game's ground effects (lava) for the player
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
-    fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;}).catch(()=>{});
-    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;}).catch(()=>{});
+    fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;planRefresh();}).catch(()=>{});
+    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;planRefresh();}).catch(()=>{});
+    fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
     build();route();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Reload the page; if it stays, tell Claude.</div>';}
@@ -424,7 +429,7 @@ function renderList(){
     h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
   }else if(tab==='anims'){
     const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
-    h='<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    h=planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
     const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
     h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
@@ -432,6 +437,33 @@ function renderList(){
   }
   L.innerHTML=h;
   const on=L.querySelector('.row.on');if(on&&wide())on.scrollIntoView({block:'nearest'});
+}
+// ---------- the Plan view (animplan1) ----------
+// Every animation in one of three places. DONE: a baked video is in the game. MAKING: a video job (tools/art-library/wangen-jobs.json, shown with its rev) or an open
+// c-wanstop card on the board has it and no baked clip yet. NEXT: no video and no job. Read from the same data as the rest of the guide, so it moves by itself.
+function planRefresh(){try{if(tab==='anims'&&!sel&&typeof ANIMS!=='undefined'&&ANIMS.length){const o=[...document.querySelectorAll('.plangrp')].map(d=>d.open);renderList();document.querySelectorAll('.plangrp').forEach((d,i)=>{if(o[i]!==undefined)d.open=o[i];});}}catch(e){}}
+function planGroups(){
+  const cards=((BOARD_DOC||{}).cards||[]).filter(c=>/^c-wanstop-/.test(c.id)&&c.col!=='done'),g={done:[],making:[],next:[]};
+  ANIMS.forEach(a=>{
+    if(a.video){g.done.push({a});return;}
+    const job=((GUIDE&&GUIDE.anims&&GUIDE.anims[a.id])||{}).job||'',jr=job&&JOBS&&JOBS[job]?JOBS[job].rev:null;
+    const stop=job?cards.find(c=>c.id.indexOf('c-wanstop-'+job+'-r')===0):null;
+    if(jr!=null||stop||(job&&!JOBS)){
+      const rev=jr!=null?jr:stop?+stop.id.split('-r').pop():null;
+      g.making.push({a,rev,stopped:!!stop});
+    }else g.next.push({a});
+  });
+  return g;
+}
+function planHtml(){
+  const g=planGroups(),n=ANIMS.length;
+  const grp=[['making','Making','A video job has it, no baked video yet',x=>'<span class="badge w">'+(x.rev!=null?'REV '+x.rev:'JOB')+'</span>'+(x.stopped?' <span class="badge o">STOPPED</span>':'')],
+    ['next','Next','No video and no job yet',()=>'<span class="badge n">NEXT</span>'],
+    ['done','Done','A baked video is in the game',()=>'<span class="badge v">DONE</span>']];
+  let h='<div class="grp">Plan: '+n+' animations</div><div class="plansum">'+grp.map(x=>'<div><b>'+g[x[0]].length+'</b><span>'+x[1]+'</span></div>').join('')+'</div>';
+  h+=grp.map(x=>'<details class="plangrp" data-plan="'+x[0]+'"'+(x[0]==='making'?' open':'')+'><summary>'+x[1]+' ('+g[x[0]].length+') <span class="hint">'+x[2]+'</span></summary>'
+    +(g[x[0]].length?g[x[0]].map(r=>rowHtml('anims',r.a.owner,r.a.name,esc(ownerName(r.a.owner)),'',x[3](r))).join(''):'<p class="hint">Nothing here.</p>')+'</details>').join('');
+  return h;
 }
 function glossRows(){
   const a=Object.values(B3_STATUS).map(s=>s);
