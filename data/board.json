@@ -32868,8 +32868,8 @@
     "c-battleux3"
    ],
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukG7DbKW7f6Jcurm6Gj",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux2\""
    },
    "next": "Waits on Build the new battle screen. Then writes the one plain line (60 characters at most) for every move of the 10 family members, about 120, plus the words for who a move reaches and what will happen, in your plain style. They show with DETAILS on and in the strip under the scene.",
    "prompt": {
@@ -32894,6 +32894,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T06:46:16.450Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: writing the short lines for the family moves and the reach and forecast words."
     }
    ]
   },
