@@ -25015,10 +25015,16 @@
     }
    ],
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T14:30:35Z",
     "n": 1,
-    "est": 0.79
+    "est": 0.79,
+    "run": {
+     "state": "running",
+     "at": "2026-11-22T14:32:17Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45033198002",
+     "n": 1
+    }
    }
   },
   {
