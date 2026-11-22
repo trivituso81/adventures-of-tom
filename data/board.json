@@ -31307,6 +31307,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as menuux-plan: a proposal for a new main menu, with drawings; nothing in the game changed"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "board-menuux2: the skill rows now say the flavor in words (Racket basic, Clobber skill), matching rule 5 of the battle screen proposal Tom approved the same day; the plan says how the two looks sit together (section 4)."
     }
    ],
    "after": "t-menuux-decide",

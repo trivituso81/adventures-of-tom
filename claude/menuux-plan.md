@@ -82,6 +82,14 @@ Sizes drawn: Duo unfolded 951 x 648 (all five screens), phone upright 393 x 852 
 | Gear mapped to the new stats (architecture row 31: POW to Attack, GRIT to Defense, PEP to Speed) | Old stat names | Effects written in the new stats |
 | Stampcards (deleted at the purge, stage 23) | A tab and SP on every row | Not in the new menu. While a chapter still runs on the old battle, an "Old Stampcard" link shows at the bottom of Vibes; the purge removes it |
 
+### The battle screen proposal Tom approved the same day (claude/battleux-plan.md, cards c-battleux1 to 3)
+
+| Point | The battle screen | This menu | Call |
+|---|---|---|---|
+| Surface | Dark navy panels around the bright fight scene, serif names (today's look, kept) | Paper pages, two new typefaces | Keep both. A dark frame is right around a bright scene; a menu is a page you read. After menu1 is approved in the hand, one small card carries the two typefaces and the lamplight accent into the battle panels so the two read as one game. Not before, so battleux1 is not disturbed. |
+| Flavors | Rule 5: picture, colour and word together | The same: "Racket basic", "Clobber skill" beside every dot | menu2 uses the battle mock's six flat symbols (`IC` in `claude/battleux-mock/src/app.js`), not the stand-in symbols in these drawings. One set for the game. |
+| What a move does | A `short` line per move (battleux2 writes them), full text in the detail panel, a DETAILS switch | The full `desc` on every row (there is room), one switch | One saved setting drives both switches. |
+
 Open point for the battle system, not the menu: Charms whose perk raised WARMTH or COOL (Moon Beanie, Straw Sunhat) have no meaning in the new stats. The menu shows whatever the gear mapping table says.
 
 ## 5. The build, after approval (cards to create; one conversation each)
@@ -95,7 +103,7 @@ The new menu is built beside the old one behind a switch (ADMIN > Menu: new or o
 | c-menu3 (tag menu3) | Bag and System: the list, the detail, Use it on, the phone sheet; saves, options, build label, quit; Rose Mode; Less motion. | Sonnet 5.5 (row B: the patterns exist after menu1 and menu2). Effort medium. | None. |
 | c-menu4 (tag menu4) | Switch the new menu on for everyone and purge the old one: old render functions and CSS in `engine/menu.js`, the Vibes overlay's own screen in `engine/b3-menu.js` (its save code stays), the admin switch, tests. | Sonnet 5.5 (row B: the purge rule and tests are written). Effort medium. Can run on the night shift. | Play the whole menu once on the phone, about 10 minutes. |
 
-Not in this proposal (each would be its own card, after the menu is approved in the hand): the shop (it shares the menu's code and look, so it is the natural next one), the title menu, the dialogue box, the save pop-up on the map. The battle screen has its own proposal (c-battleux-plan); the two should agree on colours, type, the skill row and the flavor icons.
+Not in this proposal (each would be its own card, after the menu is approved in the hand): the typefaces and accent carried into the battle panels (table in section 4), the shop (it shares the menu's code and look, so it is the natural next one), the title menu, the dialogue box, the save pop-up on the map. The battle screen has its own proposal (c-battleux-plan); the two should agree on colours, type, the skill row and the flavor icons.
 
 ## 6. Known risks and open points
 

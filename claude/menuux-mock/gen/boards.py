@@ -88,12 +88,12 @@ def vibe_head(tag, tagbg, name, sub, lean, rank, vp, of, unlock, tagcolor=INK):
             f'<span style="font-size:13px;color:{SOFT};white-space:nowrap"><span style="{D};font-weight:800;font-size:15px;color:{INK}">{vp}</span> of {of} to Rank {rank+1}: {unlock}</span></div></div>')
 
 def pocket_strip():
-    return (f'<div style="margin-top:auto;display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:12px;background:{SHADE};box-shadow:inset 0 0 0 1.5px {RULE}">'
-            f'<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px">'
-            f'<div style="display:flex;align-items:center;gap:8px">{chip("Pocket Vibe", JAC, "#fff", 12.5, "3px 10px")}{stars(1, 14)}</div>'
-            f'<div style="{D};font-weight:800;font-size:19px;line-height:1.1">Gamer Geek</div>'
-            f'<div style="font-size:13.5px;color:{SOFT};display:flex;align-items:center;gap:6px;white-space:nowrap">Adds its skills: {flavor("clobber", 18)}<span style="font-weight:700;color:{INK}">Controller Toss</span> {pep(2, 12)}</div></div>'
-            f'{btn("Swap with Main", "line", 13.5, "0 14px", 44, ic="swap")}</div>')
+    return (f'<div style="margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:8px 12px;border-radius:12px;background:{SHADE};box-shadow:inset 0 0 0 1.5px {RULE}">'
+            f'<div style="display:flex;align-items:center;gap:10px">{chip("Pocket Vibe", JAC, "#fff", 12.5, "3px 10px")}'
+            f'<span style="{D};font-weight:800;font-size:19px;line-height:1.1;white-space:nowrap">Gamer Geek</span><span style="flex:1 1 auto"></span>'
+            f'{btn("Swap with Main", "line", 13.5, "0 14px", 40, ic="swap")}</div>'
+            f'<div style="font-size:13px;color:{SOFT};display:flex;align-items:center;gap:7px;white-space:nowrap">{stars(1, 13)}<span style="margin-left:4px">Adds</span>{flavor("clobber", 18)}'
+            f'<span style="font-weight:700;color:{INK}">Controller Toss</span><span style="font-weight:600">Clobber skill</span><span style="flex:1 1 auto"></span>{pep(2, 12)}</div></div>')
 
 def vibes_duo():
     lw, rw = 371, 468

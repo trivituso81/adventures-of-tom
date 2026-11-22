@@ -219,7 +219,7 @@ def skill_row(kind, name, desc, flav=None, cost=None, compact=False, new=False, 
     return (f'<div style="display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1.5px solid {RULE}">{left}'
             f'<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px">'
             f'<div style="display:flex;align-items:baseline;gap:8px"><span style="{D};font-weight:700;font-size:{size+1}px;line-height:1.2;letter-spacing:-.005em">{name}</span>{nw}'
-            f'<span style="font-size:12.5px;font-weight:600;color:{SOFT}">{kind}</span><span style="flex:1 1 auto"></span>{right}</div>{d}</div></div>')
+            f'<span style="font-size:12.5px;font-weight:600;color:{SOFT};white-space:nowrap">{(FLAV[flav][1] + " " + kind.lower()) if flav else kind}</span><span style="flex:1 1 auto"></span>{right}</div>{d}</div></div>')
 
 
 def locked_row(rank, name, kind, cost=None, show_cost=True):
