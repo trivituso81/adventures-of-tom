@@ -427,6 +427,22 @@ Tom, on t-dash3-try, after the first fix: "didnt work, its till rotated 90 degre
 ## fix-dash3-try (2026-11-22): the dashboard's Duo folded, upright size stays upright
 
 Tom, on t-dash3-try: "duo folded upright is the wrong orientation". Cause: a folded Duo is not a tablet, so the game follows the landscape choice saved by its own rotate button (`le-layout`, shared by every game tab in the browser) and sat sideways inside the upright 466 x 657 frame. Fix: at the four Duo sizes `forceDuo` in `dashboard.html` sets the game frame's `layout.mode` to auto (frame only, nothing saved), so the layout follows how the pane is held. `tools/dashboard_test.py` now saves a landscape choice, switches sizes and checks the folded upright frame is not rotated. Reproduced and checked in the browser at 466 x 657 before and after.
+## reports-2026-11-21b (2026-11-22): every boss is drawn 2.5 times larger, the Old Oak Park barrier no longer sits under the party, and the chapter 2 clean-up is finished
+
+Second part of card c-reports-13. Eighteen reports on build wanch5 (chapter 2); fix-ch2play (above) had already cut or reworded most of the lines, so this part closes the rest and answers each report.
+
+| Report and Tom's note | Fix |
+|---|---|
+| r-20261121-180138-yorh: "why is he tiny? all bosses should be HUGE. he should be at least 2.5x larger" | `b3LayoutFoes` (`engine/b3-play.js`) draws every boss (`role: 'boss'`, not an add) 2.5 times the usual fit (`B3_BOSS_SIZE`); the Big One already was. Checked in the Battle Lab on all 11 bosses: 240 px wide (the Last Call 294), none off the screen. Rows with their own `size` in `B3_FOE_LOOK` keep it. |
+| r-20261121-173628-97ha: "need a cut out for this so tom and party dont overlap it" | The Old Oak Park barrier picture (`jpark-oak`, `data/gate-art.js`) was 1.7 rows tall, so Tom in row 20 stood on its top. It is now one row tall (`fit .66`) and sits wholly under the party. |
+| r-20261121-180326-tsde: "boring - he should say you should hear tom" | After the Big Shake's "You snore." TNB says "You should hear Tom." (new line, no recording yet). |
+| r-20261121-180458-58c9: "dialog is too boring and drawn out" (TNB at the grey tree, A on the orange block) | The block's second look reads "It's not glass and it's not glaze. And I work with glaze." (`engine/amber-spots.js`; mood, reaction and talk tables moved with it; the old clip is purged). |
+| r-20261121-180018-jc8f, 180027-tyq4, 180035-bjdf, 180050-39xy, 180126-mdm1, 180230-crne, 180249-oy95, 180345-jvj8, 180408-h8ca, 180626-4eca, 180646-o5il, 180709-4jo0, 180718-y1a5 | Already fixed in fix-ch2play (lines cut or reworded, the phone call announced, Tom and TNB face Mr. Shake); closed here after checking the scenes. |
+
+Purged voice: the audit (`unused_voice.py` check 4) listed 27 dialogue clips that fix-ch2play's cuts and rewrites left behind; all removed (list in docs/PURGED_VOICE.md). Check 4 now reports 0.
+
+Still open: r-20261121-180439-svqd ("this scene has to be triggered before they leave", at the grey tree after the boss) and r-20261121-180541-ojxd ("the cut scene took too long to start", chapter 2 end). Findings are on card c-reports-13. Not played on a phone.
+
 ## reports-2026-11-21 (2026-11-22): chapter 2 opening zoomed in and purple from the landing, the loft talk rewritten, Carmen gets a Tom reaction, two scene spots moved
 
 Seven of the eight reports (all on build wanch5). The eighth stays open (see below).

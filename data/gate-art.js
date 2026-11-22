@@ -22,7 +22,7 @@ const GATE_ART={
   'row-amyhouse':    {map:'row',      rect:[5.94,4.45,1.78,2.14], fill:true, states:['locked','open']},   // exactly the stone arch (fix-gatelayer-pics-2)
   'blvd-trail':      {map:'blvd',     rect:[1.9,2,2.2,1.5],   fit:1.2,  states:['locked']},
   'blvd-studio':     {map:'blvd',     rect:[26.9,6.8,2.4,1],  states:['locked','open']},
-  'jpark-oak':       {map:'jpark',    rect:[13,21,4,1],       fit:1.1,  states:['locked']},
+  'jpark-oak':       {map:'jpark',    rect:[13,21,4,1],       fit:.66,  states:['locked']},   // fit .66: the board is one row tall, so nobody in row 20 stands on it (report r-20261121-173628-97ha)
   'jpark-barn':      {map:'jpark',    rect:[28,10,2,2],       states:['locked','open']},
   'backlot-stage7':  {map:'backlot',  rect:[11.65,2.2,2.7,2.1], states:['locked','open']},
   'stage7-catwalk':  {map:'stage7',   rect:[15.3,3,2,1.6],    states:['locked']},

@@ -88,7 +88,7 @@ const EMOTION_REACTIONS={
 "TNB|If the smog did this to him, what about everybody on the boulevard?|2": [["tom", "scared", 66]],
 "TNB|It's been like that since this morning. I held my soda up to it. It's the exact same color.|2": [["tom", "surprised", 38]],
 "TNB|It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.|2": [["nara", "scared", 76], ["tom", "surprised", 32]],
-"TNB|It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.|2": [["tom", "scared", 104]],
+"TNB|It's not glass and it's not glaze. And I work with glaze.|2": [["tom", "scared", 56]],
 "TNB|Look who flew three thousand miles to see me.|2": [["tom", "loving", 13]],
 "TNB|Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.|2": [["nara", "happy", 27], ["tom", "happy", 27]],
 "TNB|Me neither. And I like almost everything.|2": [["tom", "happy", 40]],

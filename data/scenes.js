@@ -629,6 +629,7 @@ SCENES.ch2AfterBoss=[
   {call:()=>{ const f=sceneActor('tnb'),b=sceneActor('The Big Shake'); if(!f||!b) return; const p=position(f),q=position(b),dx=q.x-p.x,dy=q.y-p.y; f.facing=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down'); f.stageFaced=true; }},
   {talk:'TNB',lines:["I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill."]},
   {talk:'The Big Shake',lines:["RUMBLE. That was you? You snore."]},
+  {talk:'TNB',lines:['You should hear Tom.']},   // report r-20261121-180326-tsde (Tom: "he should say you should hear tom"); a new line, read by speech synthesis until recorded
   {call:()=>{ if(typeof bossFrame==='function') bossFrame('bigshake','touched'); }},   // w82d: eyes wide, mouth open for the build-up
   {talk:'The Big Shake',lines:["My pipe itches. Hold on. Hh... HHH..."]},
   {call:()=>{ sfx.whoosh(); sfx.thud(); }}, {endfx:'sneeze',on:'The Big Shake'}, {wait:.25},

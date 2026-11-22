@@ -18,7 +18,7 @@ const AMBER_SPOTS=[
   {id:'ch2',map:'griffith',name:'Orange block',show:()=>STORY.chapter>=2&&!flag('bb-griffith'),found:'ch2-lemon',solid:[[3,7],[4,7],[3,8],[4,8]],
     lines:[['tnb','Babe, look at that tree. It\'s grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.'],
       ['tom','There\'s one lemon on it. And the lemon is inside a block of something orange.'],
-      ['tnb','It\'s not glass, and it\'s not glaze. I work with this kind of stuff all day and I have no idea what it is.']]},
+      ['tnb','It\'s not glass and it\'s not glaze. And I work with glaze.']]},
   // Chapter 3, Sundial Hollow (SUNDIAL_SPOT, SCENES.ch3Hollow): the fish hangs over the water, which is already solid; A from the bank.
   {id:'ch3',map:'sundial',name:'Orange block',show:()=>STORY.chapter>=3&&!flag('bb-sundial'),found:'ch3-hollow',solid:[],press:[[9,9],[10,9],[11,9]],
     lines:[['grace','It\'s inside an orange block, like the dragonfly. It\'s just hanging there. Nothing is holding it up!'],

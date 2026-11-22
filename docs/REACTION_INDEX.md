@@ -341,7 +341,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside. | TNB surprised (at "seen this before") |
 | TNB | On Long Island? Babe, that's three thousand miles away. | Tom unimpressed (at "three thousand miles") |
 | Tom | Two thousand four hundred and seventy-five. | TNB unimpressed (at "seventy-five") |
-| TNB | It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is. | Tom scared (at "no idea what it is") |
+| TNB | It's not glass and it's not glaze. And I work with glaze. | Tom scared (at "no idea what it is") |
 | TNB | There's a little round hole in the side, like somebody took a bite out of it. | Tom surprised (at "round hole in the side") |
 | Tom | The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried. | TNB surprised (at "a bite out of it") |
 | TNB | Can I try anyway? | Tom happy (at "try anyway") |

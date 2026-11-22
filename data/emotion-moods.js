@@ -1229,7 +1229,7 @@ const EMOTION_MOODS={
 "TNB|It's been like that since this morning. I held my soda up to it. It's the exact same color.": "happy",
 "TNB|It's just hanging in the air? Babe! That's a flying fish!": "happy",
 "TNB|It's not a frisbee, Nara. It's an award.": "proud",
-"TNB|It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.": "surprised",
+"TNB|It's not glass and it's not glaze. And I work with glaze.": "surprised",
 "TNB|It’s a bowl. It just doesn’t know yet.": "loving",
 "TNB|It’s a very good bowl, Deedee. I’m biased.": "happy",
 "TNB|It’s a very good lock. Whoever made it really cared about the mechanism.": "surprised",

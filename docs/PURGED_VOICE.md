@@ -2,6 +2,38 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-22 (`reports-2026-11-21b`): 27 chapter 2 dialogue clips left by fix-ch2play
+
+Card c-reports-13. `unused_voice.py` check 4 listed these after the chapter 2 line cuts and rewrites; each was no longer in any scene, harvest list or spot, so they were removed (git history keeps the audio). One more, TNB at the grey tree, was reworded in this build.
+
+- `tom|I do have news. But you go first. I can wait.`
+- `tom|A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast.`
+- `tnb|Sure. So I got up this morning, and I was thinking about toast...`
+- `bigone|RUMBLE. ...Nobody asks. They just run.`
+- `odette|Sit down, both of you. This gumbo needs salt and you two need lunch.`
+- `tom|Big. No, sorry. TAXI big.`
+- `tnb|No, yours wins. How big a fish?`
+- `odette|I have bread. Sit.`
+- `tom|Go back one.`
+- `tnb|Huh. That'd tip the scales.`
+- `tom|The PURPLE.`
+- `tnb|Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out o`
+- `tnb|The window?`
+- `tom|Then we're her backup.`
+- `tnb|Oh. Yeah. All day. It's coming off the hills. The bread's the real problem.`
+- `tnb|Hills, then bread. I figure we walk up and poke it.`
+- `tnb|Nara's already on it. She's been barking at it from your porch since breakfast.`
+- `tnb|The cloud made sense.`
+- `tnb|Yeah. That's fair.`
+- `tnb|Huh. Sour dough.`
+- `tom|You don't like it? You liked the talking cloud.`
+- `tom|Excuse me. You're wearing the Observatory. Please don't drop it.`
+- `tom|Excuse me. Mr. Shake. How are you doing?`
+- `tom|Yes. I saw. Very good. May I?`
+- `tom|You told me I cook well.`
+- `tom|We were going to get bread.`
+- `tnb|Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out of bread.`
+
 ## 2026-11-21 (`voicepurge221`): 221 dialogue clips nothing plays
 
 Card c-voicepurge221. `unused_voice.py` check 4 listed 221 baked dialogue clips that no scene, harvest line or source plays (old chapter 1, 3 and 6 lines found by ch2lessons). Each text was grepped against data/ and engine/ outside data/voice: none is played (the squirrel line in `data/scenes.js` is the unquoted text `...wait. You're very tall. Are you a squirrel?` by the Tiny voice, so the quoted narrator clip never matched it). Spec `tools/clip-audit/purge-voicepurge221.json`. By voice: tom 57, tnb 39, narrator 27, bernadette 22, bigone 18, grace 12, washington 12, odette 5, olivia 5, rose 4, carmen 4, log 4, toad 4, skeeter 4, deedee 3, boppy 1. About 6.5 MB of audio removed from data/voice/dialog-ch*.js; the Voice Library list was rebuilt (221 removed, 0 added). All four checks now report 0.

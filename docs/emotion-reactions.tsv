@@ -204,7 +204,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	Ther
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside.	tnb	surprised	seen this before
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	On Long Island? Babe, that's three thousand miles away.	tom	unimpressed	three thousand miles
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	Two thousand four hundred and seventy-five.	tnb	unimpressed	seventy-five
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.	tom	scared	no idea what it is
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	It's not glass and it's not glaze. And I work with glaze.	tom	scared	I work with glaze
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	There's a little round hole in the side, like somebody took a bite out of it.	tom	surprised	round hole in the side
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.	tnb	surprised	a bite out of it
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Can I try anyway?	tom	happy	try anyway
