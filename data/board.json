@@ -28919,6 +28919,10 @@
      "d": "2026-11-21",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-21T20:44:50.308Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Marked fyi: its Claude card c-b3s18bonus shipped, so this card no longer blocks an open card. The check rejected the board for this, which stopped every board-sync run from saving."
     }
    ],
    "chat": {
@@ -28933,7 +28937,8 @@
     "at": "2026-11-21T21:23:19Z",
     "verdict": "yours",
     "why": "it asks whether fights are fun and the pace is right across five chapters; that is taste, though a stalled fight is a fact worth a fix card if Tom reports one"
-   }
+   },
+   "fyi": true
   },
   {
    "id": "c-b3s18bonus",
