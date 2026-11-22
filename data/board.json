@@ -32301,8 +32301,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (19 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-173628-97ha, r-20261121-180018-jc8f, r-20261121-180027-tyq4, r-20261121-180035-bjdf, r-20261121-180050-39xy, r-20261121-180126-mdm1 and 13 more. First note: need a cut out for this so tom and party dont overlap it",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Part 2 shipped as reports-2026-11-21b: every boss drawn 2.5x in battle, the Old Oak Park barrier one row tall, TNB 'You should hear Tom.', the grey-tree look shortened, 27 orphan clips purged. Two reports stay open. r-20261121-180439-svqd (\"this scene has to be triggered before they leave\", at the grey tree after the boss): it is not clear which scene is meant; the only text at that spot is the A-press replay of the tree, and the tree scene (ch2Lemon) did fire before the boss in that save. Needs Tom: which scene should have played there? r-20261121-180541-ojxd (\"the cut scene took too long to start\", chapter 2 end): measured about 3 to 5 s from arriving to the first line: about 2.4 s while extras walk off the street (clearout), about 2 s after the walk-in while the camera gathers the party (huddle). Skipping the huddle left the party hidden behind the dialogue box, and a faster walk changed nothing measurable, so neither was kept. Next session: cut the clearout wait for this scene only, or start the camera framing during the walk-in.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -32378,11 +32378,16 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part 2 shipped in build reports-2026-11-21b: 17 of the 19 open reports closed (13 were already fixed by fix-ch2play, 4 fixed here); r-20261121-180439-svqd and r-20261121-180541-ojxd left open with findings on the card.",
+     "at": "2026-11-22T06:55:00Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "started_at": "2026-11-22T01:53:56+00:00",
    "after": "nothing for Tom: end"
   },
