@@ -891,6 +891,15 @@
    "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44995343068",
    "at": "2026-11-22T06:48:20Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44995343068"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.24,
+   "what": "Art Library pictures made on WAN 2.7 by the art-gen Action ()",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44995488644",
+   "at": "2026-11-22T06:50:19Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44995488644"
   }
  ],
  "balances": [
