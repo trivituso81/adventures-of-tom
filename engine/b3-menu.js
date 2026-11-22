@@ -80,7 +80,7 @@ function b3LabAward(vp) {
   const B=b3LabBook(),R=b3AwardAll(B,vp),ups=[];
   for(const id in R) for(const r of R[id].ranks) ups.push(B3_VIBES[r.vibe].name+' '+r.to);
   b3LabSave();
-  return '+'+vp+' Vibe Points (Pocket Vibes +'+Math.round(vp*B3_RULES.pocketVp)+').'+(ups.length?' Rank up: '+ups.join(', ')+'.':'');
+  return '+'+vp+' Vibe Points (Secondary Vibes +'+Math.round(vp*B3_RULES.pocketVp)+').'+(ups.length?' Rank up: '+ups.join(', ')+'.':'');
 }
 // What the pause menu's screen changes is copied here: the Vibes and the row, not the Vibe Points (the Lab has its own Ranks).
 function b3LabFollow(id,L) {

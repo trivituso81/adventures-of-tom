@@ -328,7 +328,7 @@ function b3Carried(F,u) {
   // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
   if(u.side==='party'&&u.lean&&B3_VIBES[u.vibe]) { const V=B3_VIBES[u.vibe],P=u.pocket&&B3_VIBES[u.pocket],Ln=B3_LEANS[u.lean];
     rows.push({name:V.name,short:'RANK '+u.rank,color:'#c9e6a8',kind:'vibe',left:Ln.name+' Lean',
-      desc:'Main Vibe: '+Ln.desc+'.'+(P?' Pocket Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')});
+      desc:'Primary Vibe: '+Ln.desc+'.'+(P?' Secondary Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')});
     // The Trait and the equipped Quirks whose rules are written, so the player can read what is working for this family member.
     const T=B3_TRAITS[u.trait]; if(T&&!T.soon) rows.push({name:T.name,short:'TRAIT',color:'#c9e6a8',kind:'trait',left:'',desc:T.desc});
     for(const q of u.quirks) { const Q=B3_QUIRKS[q]; if(Q&&!Q.soon) rows.push({name:Q.name,short:'QUIRK',color:'#c9e6a8',kind:'quirk',left:'',desc:Q.desc}); } }
@@ -400,7 +400,7 @@ function b3GrantSkills(F,u,G) {
 function b3CanUse(F,u,S) {
   if(!S) return {ok:false,why:'That move is not built yet.'};
   // Skill Lock (a Mental status from a monster): the Skills that come from the Pocket Vibe cannot be used. The Basic and the Main Vibe's Skills can.
-  if(u.pocketSkills&&u.pocketSkills.includes(S.id)&&b3HasFlag(u,'skillLock')) return {ok:false,why:u.name+' is Skill Locked: the Pocket Vibe Skills cannot be used.'};
+  if(u.pocketSkills&&u.pocketSkills.includes(S.id)&&b3HasFlag(u,'skillLock')) return {ok:false,why:u.name+' is Skill Locked: the Secondary Vibe Skills cannot be used.'};
   if(S.needs&&!((u.counters[S.needs.counter]||0)>=S.needs.min)) return {ok:false,why:S.name+' needs '+S.needs.min+' or more '+((u.counterInfo[S.needs.counter]&&u.counterInfo[S.needs.counter].name)||S.needs.counter)+'.'};   // stage 19: Leviathan
   const c=b3Cost(F,u,S);
   if(S.cooldown&&u.cd[S.id]>F.round) return {ok:false,why:S.name+' needs a rest. '+u.name+' can use it again in round '+u.cd[S.id]+'.'};

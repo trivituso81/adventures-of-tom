@@ -127,7 +127,7 @@ with sync_playwright() as pw:
     ev(pg,"()=>b3Pick(0)"); pg.wait_for_timeout(1800)
     card=ev(pg,"()=>{const c=document.getElementById('b7-card');return c&&!c.hidden?c.innerText:'';}")
     shot(pg,'card-portrait')
-    check('the victory card shows, with XP, coins, a VP line per person and the Ruckus',all(w in card for w in('VICTORY','XP','Pocket Coins','+15 VP','RUCKUS')) and card.count('+15 VP')==3,card)
+    check('the victory card shows, with XP, coins, a VP line per person and the Ruckus',all(w in card for w in('VICTORY','XP','Pocket Coins','+15 VP','Combos')) and card.count('+15 VP')==3,card)
     check('the card has no HEART line',('HEART' not in card.upper()),card)
     ev(pg,"()=>b7CloseCard(true)"); pg.wait_for_timeout(800)
     r=ev(pg,"""()=>({active:battle.active,v3:battle.v3,result:B2.result,flag:flag('battle:mudling'),

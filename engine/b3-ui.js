@@ -162,7 +162,7 @@ function b3RenderBar(moved) {
   // Remember where each face was, so a face that changes place slides there (a push visibly moves the monster back).
   const was={}; box.querySelectorAll('.b2-tk[data-k]').forEach(el=>{ was[el.dataset.k]=[el.offsetLeft,el.offsetTop]; });
   const seen={};
-  box.innerHTML='<span class="b2-rib-lbl">TURN</span>'+list.map(e=>{
+  box.innerHTML='<span class="b2-rib-lbl">'+B3_FORECAST.turns+'</span>'+list.map(e=>{
     const u=b3Unit(B3.F,e.k),n=seen[e.k]=(seen[e.k]||0)+1,key=e.k+'#'+n,foe=u.side==='foe';
     const flus=foe&&n===1&&((B3.view.u[e.k]||{}).st||[]).includes('flustered');
     const pm=n===1&&B3.pvNow&&B3.pvNow.P&&battle.state==='command'?B3.pvNow.moved[e.k]:null;
@@ -202,14 +202,14 @@ function b3DoSkip() {
   b3Play(c.beats,()=>{ if(B3.active) b3Finish(); });
 }
 
-// ---------- EXIT (Battle Lab), WIN NOW, speed and DETAILS, at the right end of the turn bar ----------
+// ---------- Exit (Battle Lab), Win now, speed and Details, at the right end of the turn bar (words in index.html match B3_FORECAST) ----------
 function b3SyncTools() {
   const T=$('b3-tools'); if(!T) return;
   T.hidden=!B3.active; if(!B3.active) return;
   $('b3-exit').hidden=!(B3.cfg&&B3.cfg.lab);
   $('b3-skip').hidden=!(B7.skipBtn&&B3.cfg&&!B3.cfg.lab);   // WIN NOW: real fights only
   const s=$('b3-speed'); s.textContent=B7.speed+'x'; s.classList.toggle('on',B7.speed===2);
-  const d=$('b3-sw'); if(d) { const on=b3Details(); d.classList.toggle('on',on); d.setAttribute('aria-pressed',on); }
+  const d=$('b3-sw'); if(d) { const on=b3Details(); d.classList.toggle('on',on); d.setAttribute('aria-pressed',on); d.setAttribute('aria-checked',on); }
 }
 function b3Speed() { b7ToggleSpeed(); b3SyncTools(); b3Say('Battle speed '+B7.speed+'x.'); }
 function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }

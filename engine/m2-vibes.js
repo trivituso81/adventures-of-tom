@@ -7,7 +7,7 @@
 // Health, Attack, Defense and Speed worked out the way a fight works them out for that loadout and that gear (m2Stats).
 // Bench members keep their Vibes and gear, so the faces switch between the party and the bench.
 // The DETAILS setting ("Show what each skill does") is saved as M2_DET_KEY and is meant to be the one switch for this menu and the battle
-// screen (card c-battleux1 reads the same key). The flavor symbols are the six flat ones of the battle mock (claude/battleux-mock/src/app.js IC).
+// screen (b3look: engine/b3-deck.js b3Details reads and writes the same key; with nothing saved the battle screen is on for a wide window only). The flavor symbols are the six flat ones of the battle mock (claude/battleux-mock/src/app.js IC).
 const M2_DET_KEY='aot-b3-details';
 function m2Details() { try { return localStorage.getItem(M2_DET_KEY)!=='off'; } catch(e) { return true; } }
 function m2SetDetails(on) { try { localStorage.setItem(M2_DET_KEY,on?'on':'off'); } catch(e) {} }

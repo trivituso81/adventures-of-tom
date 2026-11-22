@@ -37,7 +37,7 @@ function b3RuckusMix(F,c,a,t,fl,hot) {
 
 // ---------- The spends ----------
 const B3_RK_SLOT={s1:1,s2:2,cap:3};
-const b3RuckusName=kind=>kind==='full'?'Full Family Ruckus':'Double Team';
+const b3RuckusName=kind=>kind==='full'?'Family Ruckus':'Double Team';   // the names the player sees (b3look: Tom's words of 11-22, the menu's)
 const b3RuckusCost=kind=>kind==='full'?B3_RULES.ruckus.full:B3_RULES.ruckus.doubleTeam;
 // The choices a Ruckus move may take: a move aimed at a monster or a family member (Baby-Wipe Swipe) is only ever used on a monster here.
 const b3RkOpts=(F,x,S)=>b3Options(F,x,S).filter(o=>!o.no&&!(S.target==='either'&&o.ally));
@@ -54,12 +54,12 @@ function b3RuckusPlan(F,u,kind) {
   const cost=b3RuckusCost(kind),no=why=>({ok:false,why,kind,cost,parts:[],foeOpts:[]});
   if(F.over||!b3Alive(u)||u.side!=='party') return no('Only the family can use the Family Ruckus.');
   if(F.grant) return no('A free Skill is waiting. Take it first.');
-  if(F.ruckus<cost) return no('The Family Ruckus is at '+F.ruckus+'%. '+b3RuckusName(kind)+' needs '+cost+'%.');
+  if(F.ruckus<cost) return no('The Combos gauge is at '+F.ruckus+'%. '+b3RuckusName(kind)+' needs '+cost+'%.');
   const partner=b3TurnOrder(F).find(x=>x!==u);
   if(!partner||partner.side!=='party') return no('A monster is up next. '+b3RuckusName(kind)+' needs a family member next on the turn bar.');
   const parts=[];
   for(const x of [u,partner]) {
-    const S=b3RuckusSkill(F,x,kind); if(!S) return no(x.name+' has no Skill unlocked for a Full Family Ruckus yet.');
+    const S=b3RuckusSkill(F,x,kind); if(!S) return no(x.name+' has no Skill unlocked for a Family Ruckus yet.');
     const opts=b3RkOpts(F,x,S); if(!opts.length) return no('Nobody to use '+S.name+' on right now.');
     parts.push({unit:x,S,opts});
   }

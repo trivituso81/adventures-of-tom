@@ -418,7 +418,7 @@ function b3DrawFoe(f,t,picked) {
   if(breath&&!A.lunge&&!shake&&!holding&&!fl&&!CFr) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
   else drawSprite(R,def.pal,x,y,sc,{flash,alpha});
   if(dying) return;
-  // HP meter and letter under the feet; statuses and a wind-up badge over the head.
+  // HP meter and letter under the feet; the wind-up and (DETAILS on) statuses over the head.
   const np=vu.maxPips||0,bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12-(np?9:0)),r=vu.hp/vu.maxHp;
   b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
   if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
@@ -431,8 +431,9 @@ function b3DrawFoe(f,t,picked) {
   if(fl) for(let k=0;k<3;k++) { const a=t*3.4+k*2.094,xx=L.px+Math.cos(a)*sw*.3,yy=top+2+Math.sin(a)*4; rect(Math.round(xx)-2,Math.round(yy)-2,5,5,'#141a22'); rect(Math.round(xx)-1,Math.round(yy)-1,3,3,k%2?'#fff1cb':'#ffe27a'); }
   let sy=top-14;
   if(B3.view.charge[f.key]) { const yy=sy-Math.round(Math.abs(Math.sin(t*6))*3); b3Text('!! '+B3.view.charge[f.key],L.px,yy,'#ff8f80',2); sy-=14; }
-  for(const id of b3ViewIcons(f.key)) { const S=B3_STATUS[id]; b3Text(S.short,L.px,sy,S.color,2); sy-=13; }
-  if(picked) b3Arrow(L.px,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#ffe27a');
+  // Its statuses are a detail (b3look: shown while DETAILS is on); Flustered is left off, the stars and the turn bar's badge show it.
+  if(b3Details()) for(const id of b3ViewIcons(f.key).filter(x=>x!=='flustered')) { const S=B3_STATUS[id]; b3Text(S.short,L.px,sy,S.color,2); sy-=13; }
+  if(picked) b3Arrow(L.px,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),b3AimColor());
 }
 // ---------- The dodge slide (wanch2a: the painted body states are gone; Tom, Grace, Rose and Deedee are videos only, B3_VIDEO_ONLY) ----------
 // A dodge with no video of its own slides the fighter's standing video out, holds and slides it home (b3cStandIn shows the video).
@@ -509,13 +510,10 @@ function b3DrawMember(u,t,picked) {
   activeKneelCut=0;
   b3MemberMarks(u,t,picked,y,cx);
 }
-// The turn marker and the target arrow over a family member whose figure's top is y. (Their statuses show on their card, not over the head.)
+// The aim arrow over a family member whose figure's top is y. Nothing else is drawn over a member (b3look): whose turn it is shows on the turn bar
+// and their card, MARKED and NEXT TARGET on their card, statuses on their card.
 function b3MemberMarks(u,t,picked,y,cx) {
-  const sy=y-10;
-  // Marked by a monster's wound-up act: a red arrow and the word, until the act fires or is cancelled.
-  if(b3ViewMarked(u.key)&&!picked) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ff8f80'); b3Text('MARKED',cx,yy-12,'#ff8f80',2); }
-  // The aim Cartridge Blow showed: a yellow arrow and the words, until that monster's turn.
-  else if(b3ViewAimed(u.key)&&!picked&&!(B3.view.u[u.key]||{}).ko) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ffe27a'); b3Text('NEXT TARGET',cx,yy-12,'#ffe27a',2); }
-  if(picked) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#9be39a');
-  else if(B3.actor===u&&battle.state==='command'&&B3.ui==='deck'&&!b3ViewMarked(u.key)) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
+  if(picked) b3Arrow(cx,y-12-Math.round(Math.abs(Math.sin(t*6))*5),b3AimColor());
 }
+// The aim arrow is the menu's lamplight, the screen's one color for "what you picked" (read from m2.css, so it is never copied here).
+function b3AimColor() { if(!B3.aimC) B3.aimC=getComputedStyle($('b3-app')).getPropertyValue('--lamp').trim(); return B3.aimC; }

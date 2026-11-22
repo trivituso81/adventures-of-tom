@@ -102,9 +102,9 @@ def hand_fight(pg,idx,fid):
             i=pg.evaluate("()=>B3.deck.findIndex(e=>e.grp!=='basic'&&!e.ruckus&&e.can.ok&&e.opts.some(o=>o.label==='Rose'))")
             row=f'#b3-rows .bx-mv[data-i="{i}"]'
             pg.click(row); pg.wait_for_timeout(250); frames.append(shot(pg))
-            nm=pg.evaluate("()=>B3.deck[B3.sel].name")
+            nm=pg.evaluate("()=>B3.deck[B3.sel].name"); does=pg.evaluate("()=>{ const S=B3.deck[B3.sel].S; return (b3Details()?S.desc:S.short||S.desc).slice(0,30); }")
             if pg.evaluate("()=>B3.sel")!=i or state(pg)['ui']!='deck': fails.append(f'{fid} hand: the first tap on a move did not just highlight it')
-            elif nm not in pg.inner_text('#b3-tray'): fails.append(f'{fid} hand: the tray does not say what {nm} does after the first tap')
+            elif does not in pg.inner_text('#b3-tray'): fails.append(f'{fid} hand: the tray does not say what {nm} does after the first tap')
             else: did['card']=True
             aim(pg,'Rose'); frames.append(shot(pg))
             if pg.evaluate("()=>b3AimOpt().label")!='Rose' or state(pg)['turns']!=st['turns']: fails.append(f'{fid} hand: tapping Rose did not aim {nm} at her without using it')
@@ -316,7 +316,7 @@ def hold(pg,ticks=160):
     """Keeps the boss's next turn back until the whole family has had a turn (they all act inside 100 ticks)."""
     pg.evaluate("(n)=>{ B3.F.foes[0].wait=n; b3Render(); }",ticks); pg.wait_for_timeout(100)
 def breaks(pg): return pg.evaluate("()=>window.__s3.brk")
-def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.view.charge.f0||null,chip:document.querySelector('#b3-party .bx-pc[data-i=\"2\"]').innerText.includes('MARKED'),real:B3.F.foes[0].mark,rc:B3.F.foes[0].charge&&B3.F.foes[0].charge.id})")
+def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.view.charge.f0||null,chip:document.querySelector('#b3-party .bx-pc[data-i=\"2\"]').innerText.toUpperCase().includes('MARKED'),real:B3.F.foes[0].mark,rc:B3.F.foes[0].charge&&B3.F.foes[0].charge.id})")
 def stage3_fight(pg,idx):
     """Portrait, The Big One. Composure, the Mark and its three answers, a Break, and adds. Monsters are aimed by pokes."""
     S='stage 3: '; fr=[]; brk=[]; info=[]
@@ -640,8 +640,8 @@ def stage5(pg,lab):
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='deck'&&!!b3Granted()",timeout=20000); pg.wait_for_timeout(300)
     v=s5(pg); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-free-portrait.png')); caps.append(f)
     need(v['actor']=='rose' and v['grant']=='p2',f"the free Skill should be Rose's to pick: actor {v['actor']}, grant {v['grant']}")
-    need(v['free']=='FREE SKILL FOR ROSE' and not v['back'],f"the list should be headed FREE SKILL FOR ROSE with no Back row: '{v['free']}', back {v['back']}")
-    need(v['rows']==['The Floor Is Lava!','"Giddyup, Tata!" Launch','Tattered Lamby Boomerang','Sofa-Cushion Citadel'] and all(c=='FREE' for c in v['costs']),f"Rose's free choices: {v['rows']} {v['costs']}")
+    need(v['free']=='Free Skill for Rose' and not v['back'],f"the list should be headed Free Skill for Rose with no Back row: '{v['free']}', back {v['back']}")
+    need(v['rows']==['The Floor Is Lava!','"Giddyup, Tata!" Launch','Tattered Lamby Boomerang','Sofa-Cushion Citadel'] and all(c=='Free' for c in v['costs']),f"Rose's free choices: {v['rows']} {v['costs']}")
     need(v['bar'][0]=='p2#1!' and not any(k.endswith('?') for k in v['bar']),f"the bar shows Rose picking, with no ghost (a free Skill moves nobody): {v['bar']}")
     need('Free from Grace' in v['msg'],f"the message line should say it is free: {v['msg']}")
     need('so_satisfying' in v['deedee'] and 'SATISFYING' in v['chips'][3],f"Sensory Satisfying: Deedee is next after Grace and should carry it: {v['deedee']} {v['chips'][3]}")
@@ -699,7 +699,7 @@ def stage5(pg,lab):
     pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); fr.append(R(shot(pg))); pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     use(pg,'Colossal Diamond-Gold Dumpling','Rose'); fr+=[R(f) for f in burst(pg,2,400)]
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='deck'&&!!b3Granted()",timeout=20000); pg.wait_for_timeout(300); v=s5(pg); f=R(shot(pg)); f.save(os.path.join(OUT,'b3-s5-free-landscape.png')); fr.append(f)
-    need(v['actor']=='rose' and v['free']=='FREE SKILL FOR ROSE',f"landscape: the free Skill list should open for Rose: {v['actor']} '{v['free']}'")
+    need(v['actor']=='rose' and v['free']=='Free Skill for Rose',f"landscape: the free Skill list should open for Rose: {v['actor']} '{v['free']}'")
     vis=pg.evaluate("()=>{ const h=document.querySelector('#b3-rows .bx-free'),b=document.getElementById('b3-side').getBoundingClientRect(),r=h.getBoundingClientRect(); return r.width>0&&r.height>0&&r.top>=b.top-1&&r.bottom<=b.bottom+1&&r.left>=b.left-1&&r.right<=b.right+1; }")
     need(vis,'landscape: the FREE SKILL heading is not inside the deck box')
     pick_row(pg,'"Giddyup, Tata!" Launch'); aim(pg,None); fr+=[R(f) for f in burst(pg,3,400)]; wait_cmd(pg); pg.wait_for_timeout(250)
@@ -834,7 +834,7 @@ def stage6(pg,lab,landscape=False):
     # Fill it to 100: the meter is full and the two gold moves lead the deck.
     pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200); v=s6(pg)
     need(v['btn']=='100%' and '100%' in v['fill'],f"RUCKUS at 100% should be full: {v['btn']} {v['fill']}")
-    need(len(v['rows'])==2 and v['gold'][:2]==[True,True] and v['rows'][0].upper()=='DOUBLE TEAM' and v['rows'][1].upper()=='FULL FAMILY RUCKUS' and v['costs']==['50%','100%'],f"the gold moves should lead the deck with both spends: {v['rows']} {v['costs']} {v['gold']}")
+    need(len(v['rows'])==2 and v['gold'][:2]==[True,True] and v['rows'][0].upper()=='DOUBLE TEAM' and v['rows'][1].upper()=='FAMILY RUCKUS' and v['costs']==['50%','100%'],f"the gold moves should lead the deck with both spends: {v['rows']} {v['costs']} {v['gold']}")
     caps.append(R(shot(pg)))
     # Double Team: the first member of a party turn, partner next on the bar. The first tap only shows it, the second uses it.
     turns0=s6(pg)['turns']; peps=s6(pg)['pep']; who0=who(pg); nxt=s6(pg)['next'][1]
@@ -859,7 +859,7 @@ def stage6(pg,lab,landscape=False):
     v=s6(pg); need(pg.evaluate("()=>B3.deck[B3.sel].ruckus")=='full','the deck should have the Full spend highlighted: '+str(v['ui'])); caps.append(R(shot(pg)))
     full_name=pg.evaluate("()=>B3.deck[B3.sel].name")   # b3s16: a pair with a live Tombo skin reads the skin's name; the others read Full Family Ruckus
     pg.keyboard.press('Enter'); pg.wait_for_timeout(2500); wait_cmd(pg); pg.wait_for_timeout(600); v=s6(pg)
-    need(full_name+'!' in v['log'],f"the log should name {full_name} (Full Family Ruckus or the pair's Tombo skin): {v['log'][-240:]}")
+    need(full_name+'!' in v['log'],f"the log should name {full_name} (Family Ruckus or the pair's Tombo skin): {v['log'][-240:]}")
     caps.append(R(shot(pg)))
     # The gauge goes on to the next fight: leave and read what the Lab stored.
     g=s6(pg)['ruckus']; pg.click('#b3-exit'); pg.wait_for_timeout(500)
@@ -898,11 +898,11 @@ def stage16(pg,lab,landscape=False):
     def fire(label):
         pg.evaluate("()=>{ window.__said.length=0; }")
         info=pg.evaluate("""()=>{ const u=B3.actor,p=b3TurnOrder(B3.F).filter(x=>x!==u)[0],sk=b3SkinFor(u.id,p.id),e=B3.deck.find(d=>d.ruckus==='full'); return {a:u.id,b:p.id,skin:sk&&sk.name,deck:e&&e.name,lines:sk?b3SkinLines(sk,u.id,p.id).map(l=>l.join('.')):[]}; }""")
-        nm=info['skin'] or 'Full Family Ruckus'
-        need(info['deck']==nm,f"{label}: the Full Family Ruckus row should read {nm}: {info}")
+        nm=info['skin'] or 'Family Ruckus'
+        need(info['deck']==nm,f"{label}: the Family Ruckus row should read {nm}: {info}")
         pg.keyboard.press('Digit2'); pg.wait_for_timeout(300)
-        tray=pg.evaluate("()=>(document.querySelector('#b3-tray')||{}).textContent||''")
-        need(nm in tray,f"{label}: the tray should name {nm}: {tray[:120]}"); caps.append(R(shot(pg)))
+        row=pg.evaluate("()=>{ const r=document.querySelector('#b3-rows .bx-mv.sel .nm'); return r?r.innerText:''; }"); tray=pg.evaluate("()=>(document.querySelector('#b3-tray')||{}).innerText||''")
+        need(nm in row and nm not in tray,f"{label}: the highlighted row should name {nm} and the tray should not repeat it (b3look): {row} | {tray[:120]}"); caps.append(R(shot(pg)))
         pg.keyboard.press('Enter')
         seen=False; w=[]
         for _ in range(14):
@@ -958,7 +958,7 @@ def stage7(pg,lab,landscape=False):
     pg.mouse.move(2,2); i=1 if v['n']>1 else 0
     row=f'#b3-rows .bx-mv[data-i="{i}"]'; pg.click(row); pg.wait_for_timeout(300); v=s7(pg)
     need(v['sel']==i and v['turns']==n0 and not v['keys'],f"the first click highlights and uses nothing: sel {v['sel']} turns {v['turns']} keys {v['keys']}")
-    need(pg.evaluate("()=>b3Entry().name")in v['tray'],'the tray says which move is highlighted'); caps.append(R(shot(pg)))
+    need(pg.evaluate("()=>{ const e=b3Entry(),S=e.S; return e.ruckus?B3_RUCKUS[e.ruckus].short:(b3Details()?S.desc:S.short||S.desc); }")[:30] in v['tray'],'the tray says what the highlighted move does'); caps.append(R(shot(pg)))
     # 4. the aim: left and right step through the targets, a tap on a monster aims at it, a tap on a family card shows that member
     pg.keyboard.press('Digit1'); pg.wait_for_timeout(150)
     if pg.evaluate("()=>b3Entry().opts.length")>1:
@@ -994,9 +994,9 @@ def stage7(pg,lab,landscape=False):
         wait_cmd(pg)
     need(bad==[],f"one glowing move, already highlighted, at the start of every turn: {bad}")
     # 9. DETAILS: the switch is in the bar, the choice is kept on the device, and the deck class follows it
-    pg.evaluate("()=>localStorage.removeItem('aot-ux-details')")
+    pg.evaluate("()=>localStorage.removeItem(M2_DET_KEY)")
     d0=pg.evaluate("()=>b3Details()"); pg.locator('[data-tool="details"]:visible').first.click(); pg.wait_for_timeout(200)
-    need(pg.evaluate("()=>b3Details()")==(not d0) and pg.evaluate("()=>localStorage.getItem('aot-ux-details')")==('0' if d0 else '1'),'the DETAILS switch flips and is kept in localStorage')
+    need(pg.evaluate("()=>b3Details()")==(not d0) and pg.evaluate("()=>localStorage.getItem(M2_DET_KEY)")==('off' if d0 else 'on'),'the DETAILS switch flips and is kept in localStorage, the setting the menu uses')
     need(s7(pg)['det']==(not d0),'the deck changes with the DETAILS switch'); pg.locator('[data-tool="details"]:visible').first.click(); pg.wait_for_timeout(150)
     # 10. the bar's tools: speed cycles, EXIT leaves (below, after the loadout check)
     sp=pg.evaluate("()=>B7.speed"); pg.click('#b3-speed'); pg.wait_for_timeout(150); need(pg.evaluate("()=>B7.speed")!=sp,'the speed button changes the speed'); pg.evaluate("()=>{ B7.speed=1; }")

@@ -1292,7 +1292,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
   <!-- Battle 3 (engine/b3-ui.js, engine/b3-deck.js, b3-deck.css): one grid, laid out by container size. Battle 2 never shows these parts: #b3-app is display:contents until #battle gets v3. -->
   <div id="b3-app">
     <div id="b3-bar" hidden><div id="b3-ticks"></div>
-      <div id="b3-tools" hidden><button type="button" class="bx-sw" id="b3-sw" data-tool="details" aria-pressed="false">DETAILS<i></i></button><button type="button" class="bx-tool" id="b3-exit" data-tool="exit" aria-label="Exit to the Battle Lab list" hidden>EXIT</button><button type="button" class="bx-tool" id="b3-skip" data-tool="skip" aria-label="Win this fight now" hidden>WIN NOW</button><button type="button" class="bx-tool" id="b3-speed" data-tool="speed" aria-label="Battle speed">1x</button></div></div>
+      <div id="b3-tools" hidden><button type="button" class="bx-sw" id="b3-sw" data-tool="details" role="switch" aria-checked="false" aria-pressed="false"><span>Details</span><i></i></button><button type="button" class="bx-tool" id="b3-exit" data-tool="exit" aria-label="Exit to the Battle Lab list" hidden>Exit</button><button type="button" class="bx-tool" id="b3-skip" data-tool="skip" aria-label="Win this fight now" hidden>Win now</button><button type="button" class="bx-tool" id="b3-speed" data-tool="speed" aria-label="Battle speed">1x</button></div></div>
     <div class="battle-stage"><div class="b2-ribbon" id="b2-ribbon" hidden></div><canvas id="battle-canvas" width="1152" height="648"></canvas></div>
     <div id="b3-tray"></div>
     <div id="b3-side"><div id="b3-party"></div><div id="b3-deck"><div id="b3-dh"></div><div id="b3-rows"></div></div></div>

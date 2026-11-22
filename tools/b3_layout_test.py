@@ -7,6 +7,12 @@
 #   - the tray's text overflows its box (the tray scrolls or is clipped), or the tray, the bar, the party strip or the deck stick out
 #     of the battle screen;
 #   - the scene (canvas) is smaller than 3.4 allows, or the page itself scrolls.
+# b3look (claude/b3look-plan.md) adds, at every size and turn:
+#   - DETAILS off: no part marked as a detail (class dx) shows in the strip, the party or the tray, and the scene draws no monster status
+#     (plan table c);
+#   - no fact from the plan's remove and merge rows shows twice: the highlighted move's name, price, flavor or kind in the tray, a Pet Peeve,
+#     pushes, the next turn, Composure, HP, a wind-up or a Mark as a tray chip, Pep on the card of whoever is up, MARKED, NEXT TARGET or the
+#     turn arrow over a family member on the scene; and at the end, "The family wins" in the tray (the scene says YOU WIN!) or moves left in the deck.
 # Usage (repo root):  python3 tools/b3_layout_test.py          all sizes
 #                     python3 tools/b3_layout_test.py 393x852  one size
 # Env: OUT = folder for the screenshots (default tools/shots), SEED (default 7). Prints FAILS: [] when all pass.
@@ -52,6 +58,38 @@ CHECK="""()=>{
     pageScroll:document.documentElement.scrollHeight>window.innerHeight+1||document.documentElement.scrollWidth>window.innerWidth+1,
     longest:names.reduce((a,n,i)=>n.length>(names[a]||'').length?i:a,0)};
 }"""
+LOOK="""(det)=>{
+  const bad=[],app=document.getElementById('b3-app'),tray=document.getElementById('b3-tray'),e=b3Entry();
+  const shown=el=>{ const c=getComputedStyle(el); if(c.display==='none'||c.visibility==='hidden') return false; const r=el.getBoundingClientRect(); return r.width>0&&r.height>0; };
+  if(app.classList.contains('det')!==!!det) bad.push('the screen does not follow the DETAILS setting');
+  if(!det) for(const el of document.querySelectorAll('#b3-side .dx,#b3-tray .dx')) if(shown(el)) bad.push('DETAILS off shows a detail: '+(el.className+' '+el.textContent).slice(0,60));
+  const tt=tray.innerText;
+  if(e&&!tray.classList.contains('log')) {
+    if(tt.includes(e.name)) bad.push('the tray repeats the move name '+e.name);
+    if(tray.querySelector('.act .bx-chip')) bad.push('the tray repeats the move flavor or kind as a chip');
+    if(tray.querySelector('.bx-hp')) bad.push('the tray repeats an HP bar');
+  }
+  for(const c of tray.querySelectorAll('.bx-chip')) { const t=c.textContent.trim();
+    if(/^Pet Peeve( |$)|turn bar|next turn|^\\d+ of \\d+ Composure|^HP |Winding up|^Marked$|^Pocket/i.test(t)) bad.push('a tray chip repeats a fact shown elsewhere: '+t); }
+  if(/next turn: /i.test(tt)) bad.push('the tray repeats the next turn in words');
+  const up=document.querySelector('#b3-party .bx-pc.up'); if(up&&up.querySelector('.pp')) bad.push('the up member\u2019s card repeats the Pep of the deck header');
+  // the scene: record what is written on the canvas for a few frames
+  const W=window.__bxDrawn||[]; window.__bxDrawn=null;
+  for(const w of W) { if(/^(MARKED|NEXT TARGET)$/.test(w)) bad.push('the scene writes '+w+' over a family member (their card says it)');
+    if(!det&&B3.F.foes.some(f=>b3ViewIcons(f.key).some(id=>B3_STATUS[id].short===w&&id!=='flustered'))) bad.push('DETAILS off: the scene writes the status '+w); }
+  return bad;
+}"""
+SPY="""()=>{ if(!window.__bxSpy){ window.__bxSpy=window.b3Text; window.b3Text=function(t){ if(window.__bxDrawn) window.__bxDrawn.push(String(t)); return window.__bxSpy.apply(this,arguments); }; } window.__bxDrawn=[]; }"""
+def look(pg,det,pt):
+    pg.evaluate(SPY); pg.wait_for_timeout(120)
+    for b in pg.evaluate(LOOK,det): fails.append(f'{pt}: {b}')
+def end_check(pg,name):
+    """Finish the fight with a win: the tray adds only what the win paid and Continue, the deck holds no moves."""
+    pg.evaluate("()=>{ for(const f of B3.F.foes) f.hp=0; const c={beats:[],g:'end',actor:null,ledger:{}}; b3KoCheck(B3.F,c); b3CheckOver(B3.F); b3Finish(); }"); pg.wait_for_timeout(300)
+    v=pg.evaluate("()=>({tray:document.getElementById('b3-tray').innerText,rows:document.querySelectorAll('#b3-rows .bx-mv').length,go:!!document.querySelector('#b3-tray [data-done]')})")
+    if 'wins' in v['tray']: fails.append(f'{name} end: the tray repeats the win the scene shows: {v["tray"][:60]}')
+    if v['rows']: fails.append(f'{name} end: {v["rows"]} moves are still in the deck')
+    if not v['go']: fails.append(f'{name} end: no Continue')
 def wait_cmd(pg,t=40000): pg.wait_for_function("()=>window.__LE.battle.state==='command'&&(B3.actor||B3.ui==='done')",timeout=t)
 def run_size(br,name,w,h,rot,fit,minscene):
     ctx=br.new_context(viewport={'width':w,'height':h},device_scale_factor=1); pg=ctx.new_page(); errs=[]
@@ -59,7 +97,7 @@ def run_size(br,name,w,h,rot,fit,minscene):
     pg.goto(f'http://127.0.0.1:{PORT}/index.html'); pg.wait_for_function("()=>window.__LE&&window.__LE.b3Lab",timeout=60000)
     for idx in FIGHTS:
         for det in (0,1):
-            pg.evaluate("([i,d])=>{ localStorage.setItem('aot-ux-details',d?'1':'0'); b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; if(!!layout.rotated!==%s) toggleLayout(); b3Lab(i,{seed:%d}); }"%('true' if rot else 'false',SEED),[idx,det])
+            pg.evaluate("([i,d])=>{ localStorage.setItem('aot-b3-details',d?'on':'off'); b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; if(!!layout.rotated!==%s) toggleLayout(); b3Lab(i,{seed:%d}); }"%('true' if rot else 'false',SEED),[idx,det])
             wait_cmd(pg); pg.wait_for_timeout(450)
             for turn in range(4):
                 if pg.evaluate("()=>B3.ui")=='done': break
@@ -71,6 +109,7 @@ def run_size(br,name,w,h,rot,fit,minscene):
                         v0=pg.evaluate(CHECK); i=v0['longest'] if pk=='longest' else pk
                         pg.evaluate("(i)=>b3Select(i)",i); pg.wait_for_timeout(260)
                     v=pg.evaluate(CHECK); pt=f'{tag} move {v["sel"]}'
+                    look(pg,det,pt)
                     if v['sel']<0: fails.append(f'{pt}: no row is highlighted')
                     elif not v['selRect']['inScroll']: fails.append(f'{pt}: the highlighted move is not fully inside the deck box')
                     elif not v['selRect']['inBattle']: fails.append(f'{pt}: the highlighted move is off the battle screen')
@@ -91,6 +130,7 @@ def run_size(br,name,w,h,rot,fit,minscene):
                 try: wait_cmd(pg,30000)
                 except Exception: break
                 pg.wait_for_timeout(300)
+            if idx==FIGHTS[0] and det==0 and pg.evaluate("()=>B3.ui")!='done': end_check(pg,name)
     real=[e for e in errs if 'AudioContext' not in e]
     if real: fails.append(f'{name}: page errors {real[:3]}')
     ctx.close()

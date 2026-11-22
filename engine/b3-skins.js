@@ -32,7 +32,7 @@ function b3SkinSay(s,idA,idB) {
   if(typeof say!=='function') return;
   b3SkinLines(s,idA,idB).forEach((l,i)=>say(l[0],l[1],.15+i*1.7));
 }
-// The name the deck shows for a Full Family Ruckus the pair can fire now (the tray's chip still says Family Ruckus).
+// The name the deck shows for a Family Ruckus the pair can fire now (b3look: its row's kind line still says "Family Ruckus with <partner>").
 function b3SkinName(F,u,partner,fallback) {
   const s=b3SkinFor(u.id,partner.id); return s?s.name:fallback;
 }

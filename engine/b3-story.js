@@ -104,7 +104,7 @@ function b3sAward(F) {
   const stamp=members.some(m=>m.rw&&m.rw.length)&&party.some(m=>b6Stampable(m)||b8PpLeft(m)>0||b8TkLeft(m)>0);
   const many=F.foes.length>1&&F.foes.every(f=>f.id===F.foes[0].id),def=MONSTERS[F.foes[0].id]||{};
   const line=many?'The '+(def.name||F.foes[0].D.name)+'s melt back into the mud. Politely.':(def.die||F.foes[0].D.name+' goes down.');
-  B3S.card={title:'VICTORY',line,xp:gain,purse,calm:0,drop,members,stamp,heart:null,puddle:false,foot:'RUCKUS '+Math.round(F.ruckus||0)+'%'};
+  B3S.card={title:'VICTORY',line,xp:gain,purse,calm:0,drop,members,stamp,heart:null,puddle:false,foot:B3_FORECAST.combos+' '+Math.round(F.ruckus||0)+'%'};
   return '+'+(plan.vp||0)+' Vibe Points.';
 }
 function b3sShowCard(result,go) { const R=B3S.card; if(!R||typeof b7ShowCard!=='function') { go(); return; } b7ShowCard(R,go); }
