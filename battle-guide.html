@@ -672,6 +672,7 @@ function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&
 // and has it waiting), MAKING (the service says it is working on it), CHECKING (the video is back: marks, clip gate, preview), READY TO REVIEW (a take
 // waits for Use this one or Keep the old one). xAI (monsters) only says "pending", so a monster goes from REQUESTED straight to MAKING.
 const STAGE={req:['REQUESTED','w'],line:['IN LINE','w'],making:['MAKING','w'],checking:['CHECKING','w'],ready:['READY TO REVIEW','r']};
+const STALL_MIN=90;
 const PROG={status:{},takes:null,reqs:[],at:0,sig:'',timer:0};
 async function loadProgress(){
   const tok=lsGet(TOKEN),get=(f,ref)=>ghGetJson(f,ref,tok).then(g=>g?g.doc:null).catch(()=>null);
@@ -694,7 +695,9 @@ function stageOf(a){
 }
 function stageBadge(a){
   const s=stageOf(a);if(!s)return '';const m=s.at&&s.key!=='req'?Math.max(0,Math.round((Date.now()-Date.parse(s.at))/60000)):null;
-  return '<span class="badge '+STAGE[s.key][1]+'" data-stage="'+s.key+'">'+STAGE[s.key][0]+(m!=null&&m>=1?' · '+m+' MIN':'')+'</span> ';
+  // guidestuck1: a video that sat at IN LINE, MAKING or CHECKING for 90 minutes is not still being made (a run that is lost never reports back): say STALLED, in red, and Generate this video works again
+  const stalled=m!=null&&m>=STALL_MIN&&s.key!=='ready';
+  return '<span class="badge '+(stalled?'n':STAGE[s.key][1])+'" data-stage="'+(stalled?'stalled':s.key)+'">'+(stalled?'STALLED':STAGE[s.key][0])+(m!=null&&m>=1?' · '+m+' MIN':'')+'</span> ';
 }
 async function watchProgress(){
   clearTimeout(PROG.timer);

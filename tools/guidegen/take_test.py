@@ -146,6 +146,25 @@ MT.process(row('act:skeeter:darting_bite', 3, MOVING, route='xai', cost=.07), st
 check('T3 spent is the takes plus the gate', abs(state['anims']['act:skeeter:darting_bite']['spent'] - (3 * .07 + .01)) < 1e-6, state['anims']['act:skeeter:darting_bite']['spent'])
 json.dump(state, open(os.path.join(outdir, 'takes.json'), 'w'))
 
+# ---------------------------------------------------------------- T3b guidestuck1: a hung look check costs one row, not the run
+import socket, threading, time as _time
+hang = socket.socket(); hang.bind(('127.0.0.1', 0)); hang.listen(8); hang_port = hang.getsockname()[1]; _conns = []
+def _accept():
+    while True:
+        try: c, _ = hang.accept(); _conns.append(c)      # takes the connection and never answers it
+        except OSError: return
+threading.Thread(target=_accept, daemon=True).start()
+hd = os.path.join(TMP, 'hang'); os.makedirs(hd + '/res'); hstate = hd + '/state'
+shutil.copyfile(MOVING, hd + '/res/a.mp4'); shutil.copyfile(MOVING, hd + '/res/b.mp4')
+json.dump({'results': [row('move:lounge_pass_flex', 7, 'a.mp4'), row('move:lounge_pass_flex', 8, 'b.mp4')]}, open(hd + '/res/guide-results.json', 'w'))
+env = dict(os.environ, XAI_API_KEY='x', XAI_BASE='http://127.0.0.1:%d' % hang_port, GH_TOKEN='', COSTS_LOG_REPO='')
+t0 = _time.time()
+r = subprocess.run([sys.executable, '-I', HERE + '/make_take.py', '--results', hd + '/res/guide-results.json', '--state', hstate, '--seconds', '6'], env=env, capture_output=True, text=True, timeout=120)
+hs = json.load(open(hstate + '/takes.json'))['anims']['move:lounge_pass_flex']['takes']
+check('T3b a look check that never answers is dropped after the time limit and both takes are still made without it', r.returncode == 0 and [x['n'] for x in hs] == [7, 8] and all(x['status'] == 'new' and 'did not run' in x['gate']['words'] for x in hs) and _time.time() - t0 < 90, (r.returncode, r.stdout[-600:], hs))
+check('T3b the run says the look check was skipped', 'making the take again without it' in r.stdout, r.stdout[-600:])
+hang.close()
+
 # ---------------------------------------------------------------- T4 keep.py
 kremote = os.path.join(TMP, 'k.git'); sh('git', 'init', '-q', '--bare', '-b', 'guidegen', kremote)
 d1, d2 = os.path.join(TMP, 'j1'), os.path.join(TMP, 'j2'); os.makedirs(d1 + '/takes/a'); os.makedirs(d2 + '/takes/a'); os.makedirs(d2 + '/reconcile')

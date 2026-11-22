@@ -281,6 +281,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         elif not dry: row['error'] = rep.get('error') or 'the video was not made'
         else: continue
         rows.append(row)
+        json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)   # guidestuck1: after EVERY video, so a run that dies keeps what it made
     json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
     return 0 if all(not r.get('error') for r in rows) else 2
 

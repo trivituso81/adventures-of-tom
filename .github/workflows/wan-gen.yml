@@ -143,8 +143,27 @@ jobs:
             done
           fi
           { echo '### wan-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep what was made so far on the wangen branch (guidestuck1 checkpoint)
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # guidestuck1 (2026-11-22): run 45002823299 made 10 paid videos, then its runner was lost during the takes step, and the videos, the results and the
+        # money ledger were still only on the runner. Saved here BEFORE the checks, so a lost runner can no longer lose paid videos; the last step saves again.
+        run: |
+          cd "$RUNNER_TEMP/wangen"
+          cp "$RUNNER_TEMP/run.log" "run-${{ github.run_id }}.log" 2>/dev/null || true
+          if [ -z "$(ls -A)" ]; then echo "nothing to save"; exit 0; fi
+          rm -rf .git; git init -q -b wangen
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "wangen: results and ledger, checkpoint (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" wangen
+          rm -rf .git   # the last step starts its own commit
       - name: Make the takes (clip gate and preview) for the Battle Guide
         if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}
+        timeout-minutes: 40   # guidestuck1: a step that hangs is stopped here and the steps after it (always) still keep what it finished; each take also has its own 7 minute limit
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         run: |

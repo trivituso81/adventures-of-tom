@@ -29768,7 +29768,7 @@
    "theme": "Battle Animations",
    "tag": "guidestuck1",
    "title": "Battle Guide videos stuck at CHECKING all night",
-   "next": "Find why 12 guide videos requested at about 12:20 am sat at CHECKING for hours with no result, fix it so a lost run keeps the paid videos and shows what happened, and clear the stuck badges.",
+   "next": "Shipped as guidestuck1. Nothing more to do unless the 10 re-queued videos stall again: then read the wan-gen run for them.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -29780,6 +29780,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom (06:53): \"Creating animations within the battle guide seems to not be working at all. I requested these last night and I hung overnight and nothing happened.\" Evidence: wan-gen run 45002823299 (guide requests) lost its runner at 09:40 UTC after 72 minutes; the Battle Guide status file shows 12 videos at checking since 08:25 to 08:48 UTC."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guidestuck1: each take is checked in its own process with a 7 minute limit, results and videos are saved to the wangen branch before any check, and the Guide shows STALLED after 90 minutes. The 10 lost requests (Tom, Deedee: 9 first takes and Controller Toss take 2) were put back in data/wan-requests.json so the videos are made again, about $6."
     }
    ],
    "after": "nothing for Tom: end",

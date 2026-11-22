@@ -91,27 +91,59 @@ def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=Tr
     return take
 
 
+def _run_child(row, results_dir, state, no_gate, cap, seconds):
+    """guidestuck1: ONE row in its own process with a time limit. Returns (ok, why). A hung look check, a stuck baker or a process the runner kills for memory
+    costs that one row, never the whole step (run 45002823299 lost its runner during this step and every paid video of the run with it)."""
+    import subprocess
+    one = os.path.join(results_dir, '_one.json'); json.dump([row], open(one, 'w'))
+    cmd = [sys.executable, '-I', os.path.abspath(__file__), '--results', one, '--state', state, '--child', '--cap', str(cap)] + (['--no-gate'] if no_gate else [])
+    try:
+        r = subprocess.run(cmd, timeout=seconds, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    except subprocess.TimeoutExpired as x:
+        out = x.stdout.decode('utf-8', 'replace') if isinstance(x.stdout, bytes) else (x.stdout or '')
+        print(out[-800:], flush=True); return False, 'took longer than %d seconds' % seconds
+    print(r.stdout[-1500:], end='', flush=True)
+    return r.returncode == 0, 'stopped with code %d' % r.returncode
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument('--results', required=True); ap.add_argument('--state', required=True)
     ap.add_argument('--no-gate', action='store_true'); ap.add_argument('--cap', type=float, default=0.08)
+    ap.add_argument('--child', action='store_true', help='guidestuck1: internal, one row in this process (no time limit here, the parent holds it)')
+    ap.add_argument('--seconds', type=int, default=int(os.environ.get('TAKE_SECONDS', '420')), help='guidestuck1: most seconds one take may use before it is dropped to the measured checks only')
     a = ap.parse_args(argv)
     rows = json.load(open(a.results, encoding='utf-8'))
     rows = rows['results'] if isinstance(rows, dict) else rows
     os.makedirs(a.state, exist_ok=True)
     sf = os.path.join(a.state, 'takes.json')
-    state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}, 'spent': 0.0}
-    G = RC.load()
     base = os.path.dirname(os.path.abspath(a.results))
-    key = os.environ.get('XAI_API_KEY') or None
-    gate_spent = 0.0
     for r in rows:
         if r.get('video') and not os.path.isabs(r['video']): r['video'] = os.path.join(base, r['video'])
+    if not a.child:
+        # guidestuck1: every row in its own process. First try with the gate; if that hangs or dies, the same video again with the measured checks only; if that
+        # fails too, the take is recorded as failed with the reason (the page then says so and offers Generate again, instead of sitting at CHECKING).
+        for r in rows:
+            ok, why = _run_child(r, base, a.state, a.no_gate, a.cap, a.seconds)
+            if not ok and not a.no_gate:
+                say('%s take %s: the look check %s; making the take again without it' % (r['anim'], r['take'], why))
+                ok, why = _run_child(r, base, a.state, True, a.cap, max(120, a.seconds // 2))
+            if not ok:
+                say('%s take %s: could not be checked (%s)' % (r['anim'], r['take'], why))
+                state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}, 'spent': 0.0}
+                process(dict(r, error='The video came back but checking it %s. Tap Generate this video to try again.' % why), state, RC.load(), a.state, use_gate=False)
+                open(sf, 'w', encoding='utf-8').write(jdump(state))
+        state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}}
+        want = {(r['anim'], int(r['take'])) for r in rows}
+        gate_spent = sum((t.get('gate') or {}).get('spent', 0.0) or 0.0 for k, v in state['anims'].items() for t in v['takes'] if (k, t['n']) in want)
+        costlog.log_from_env([{'service': 'xai', 'amount': gate_spent, 'what': 'Battle Guide takes: clip gate look checks on %d take%s' % (len(rows), '' if len(rows) == 1 else 's'), 'source': 'clip-gen run (guide takes)'}])
+        return 0
+    state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}, 'spent': 0.0}
+    G = RC.load()
+    key = os.environ.get('XAI_API_KEY') or None
+    for r in rows:
         t = process(r, state, G, a.state, key=key, cap=a.cap, use_gate=not a.no_gate)
         say('%s take %d: %s%s' % (r['anim'], t['n'], t['status'], ' | ' + t['gate']['words'] if t['gate'] else ''))
-        open(sf, 'w', encoding='utf-8').write(jdump(state)); gate_spent += (t.get('gate') or {}).get('spent', 0.0) or 0.0
-    open(sf, 'w', encoding='utf-8').write(jdump(state))
-    # costs2: the gate's look check on the new takes is xAI vision money (the videos themselves were logged by the clip-gen step that made them)
-    costlog.log_from_env([{'service': 'xai', 'amount': gate_spent, 'what': 'Battle Guide takes: clip gate look checks on %d take%s' % (len(rows), '' if len(rows) == 1 else 's'), 'source': 'clip-gen run (guide takes)'}])
+        open(sf, 'w', encoding='utf-8').write(jdump(state))
     return 0
 
 
