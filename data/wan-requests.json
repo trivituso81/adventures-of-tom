@@ -10,6 +10,17 @@
    "start": "art/clips/start/tom-hero.png",
    "cap": 0.6,
    "note": ""
+  },
+  {
+   "anim": "move:tarmac_porsche_transfer",
+   "slug": "move-tarmac-porsche-transfer",
+   "take": 1,
+   "at": "2026-11-22T08:24:09.901Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TARMAC PORSCHE TRANSFER\nFrom his starting relaxed stance, he brings a small model Porsche car out from behind his back, holds it forward at chest height once with a proud smile, and transfers it smoothly from one hand to the other. Without repeating the transfer, he tucks the car behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "promptRev": 0,
+   "start": "art/clips/start/tom-hero.png",
+   "cap": 0.6,
+   "note": ""
   }
  ]
 }
