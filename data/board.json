@@ -29426,10 +29426,14 @@
      "d": "2026-11-22",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T17:04:04.600Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGCwdEYmep2ZkkJjUm",
     "opening": "pasted by Tom from the board"
    }
   },
@@ -29930,6 +29934,16 @@
    "cards": [
     "c-reports-13",
     "t-reports13-ch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGCwdEYmep2ZkkJjUm",
+   "title": "Battle stage 21: Vibe Mastery, Casual Mode, Vibe save",
+   "first": "2026-11-22T09:06:02-08:00",
+   "last": "2026-11-22T09:06:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s21"
    ]
   },
   {
@@ -35397,8 +35411,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "6bd9407a15be6ba1d13da8304770468198a5e7c3",
- "synced_at": "2026-11-22T17:05:40+00:00",
+ "synced": "9da28d675ab1e71b99da07d2b717f070573909f5",
+ "synced_at": "2026-11-22T17:06:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
