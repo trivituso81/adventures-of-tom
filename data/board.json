@@ -33711,7 +33711,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33748,9 +33748,12 @@
     {
      "d": "2026-11-22",
      "t": "Fix shipped for \"On the vibes screen Deedee name is cut off\": the name area is wider and the name no longer breaks inside a word (build fix-menu4play)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-b3gear",
@@ -35258,7 +35261,7 @@
    "id": "c-fix-menu4play",
    "tag": "fix-menu4play",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
@@ -35306,6 +35309,10 @@
     {
      "d": "2026-11-22",
      "t": "Fixed: picture area 52% to 44%, name 36 px and never breaks; m2_test checks every name on one line (build fix-menu4play)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-menu4play: on the Vibes page a person's name no longer wraps or gets cut off (Deedee)"
     }
    ],
    "prompt": {
@@ -35319,7 +35326,8 @@
    },
    "after": "t-menu4play",
    "auto": true,
-   "started_at": "2026-11-22T06:11:43+00:00"
+   "started_at": "2026-11-22T06:11:43+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "t-wanwatch-cubepop-0522",
@@ -35428,6 +35436,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGrGSmtZLXkQTJ3Uax",
+   "title": "Fix: Play the whole new menu on the Duo and iPhone",
+   "first": "2026-11-22T06:24:26Z",
+   "last": "2026-11-22T06:24:26Z",
+   "tags": [
+    "fix-menu4play"
+   ],
+   "cards": [
+    "c-fix-menu4play"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEzG7UpC3ncVHRM4wi",
    "title": "Fix the stopped video grace-cubepop",
@@ -40673,8 +40693,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "f4db489552d44e838d60709c04a03fb4135e4d88",
- "synced_at": "2026-11-22T06:20:43+00:00",
+ "synced": "71a0ceca42d1d9af39742d8fa7036a65029ff410",
+ "synced_at": "2026-11-22T06:25:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
