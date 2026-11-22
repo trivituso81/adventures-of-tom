@@ -32178,7 +32178,7 @@
    "id": "c-fix-artgen3try",
    "tag": "fix-artgen3try",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try the auto-approve button on a pictures card",
@@ -32201,7 +32201,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-artgen3try"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -32213,6 +32213,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-artgen3try: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh",
      "at": "2026-11-22T02:11:01.660Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T02:14:31.463Z"
     }
    ],
    "prompt": {
