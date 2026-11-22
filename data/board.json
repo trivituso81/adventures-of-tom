@@ -34606,17 +34606,17 @@
   {
    "id": "c-wanstop-grace-cubepop-r4",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "tag": "wanstop-grace-cubepop-r4",
    "title": "Fix the stopped video grace-cubepop",
-   "next": "The bulk run stopped grace-cubepop (failed twice: p1, p2) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Waits on Tom card t-cubepop-checkdecide-r4: the checks may be too strict about the pocket. Nothing was changed or started.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukEJ9MnPb7xooquuzBC",
     "opening": "added by the wan-gen job"
@@ -34629,6 +34629,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session ended without shipping: I looked at the frames of grace-cubepop-r4.mp4 and grace-cubepop-a2-r4.mp4. In both she takes the blue cube from her hand/waist, squeezes it with both hands once, then tucks it back at her waist and returns to her stance; height, feet, background and ends all pass. The two failed look-checks only say the pocket pickup and tuck are not clearly shown, which is a check problem, not a motion problem. Changed nothing in the job (rev stays 4), started no try, per the card prompt. Tom card t-cubepop-checkdecide-r4 asks which way to go."
     }
    ],
    "prompt": {
@@ -34640,7 +34644,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-grace-cubepop-r4 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job grace-cubepop (rev 4) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she takes a small neon blue cube-shape (sequence shows multiple takes, toy appears and disappe; p2: Reading the pictures in order, does this happen, once and clearly: \"She opens her hand, tucks the toy back into her hoodie pocket and return (tucking back into pocket not shown clearly or once). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: grace-cubepop-r4-result.json (every check with numbers and the look-check answers) and the videos grace-cubepop-r4.mp4, grace-cubepop-a2-r4.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-grace-cubepop-r4` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-grace-cubepop-r4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:11:55+00:00"
+   "started_at": "2026-11-22T05:11:55+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
@@ -34750,6 +34755,32 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDLQ1SUuvYvgjga3AQ",
     "opening": "unknown"
+   }
+  },
+  {
+   "id": "t-cubepop-checkdecide-r4",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "title": "Grace cube pop: checks fail, video looks right to me",
+   "next": "grace-cubepop failed the look-checks twice (pocket pickup and tuck \"not clear\"), but the frames show her taking the cube out, squeezing it once with both hands and tucking it back. Pick one (it blocks c-wanstop-grace-cubepop-r4).",
+   "choices": [
+    "Bake the latest video as it is (Recommended)",
+    "Try once more with the pocket named differently"
+   ],
+   "leads": [
+    "A Claude card bakes grace-cubepop-a2-r4.mp4 into the game by hand; the checks stay as they are.",
+    "A Claude card changes the pocket words in the prompt and starts one more try (about $0.50)."
+   ],
+   "blocks": [
+    "c-wanstop-grace-cubepop-r4"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by session on c-wanstop-grace-cubepop-r4"
    }
   }
  ],
