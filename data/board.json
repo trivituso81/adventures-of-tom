@@ -32306,7 +32306,7 @@
    "id": "c-squishyfont1",
    "tag": "squishyfont1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Grace's squishy reveal: caption in the storybook font",
    "next": "Built squishyfont1: the squishy close-up caption uses the chapter card's storybook typefaces. Looked at in portrait and landscape in the test browser; not on a phone.",
@@ -32326,6 +32326,10 @@
     {
      "d": "2026-11-22",
      "t": "Pushed squishyfont1. Caption lines are now a DOM caption in Bricolage Grotesque and Figtree (same as the chapter title card). board_sync_test already failed before this change."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as squishyfont1: Grace's squishy close-up names it in the chapter card's storybook type"
     }
    ],
    "prompt": {
@@ -32336,7 +32340,8 @@
     "model": "Claude Sonnet 5.5 (row C: small visual change)",
     "effort": "medium (one caption restyle)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-squishyfont1 in data/board.json. Your first push is the commit board: start c-squishyfont1. In engine/intro.js the squishy close-up caption lines are drawn with the pixel label font; draw them in the chapter card's typefaces (Bricolage Grotesque 800, Figtree) as a DOM caption in #stage, test portrait and landscape, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-sal-listen-swap",
@@ -32586,6 +32591,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDMncH1LTwaSPHWkpA",
+   "title": "Grace's squishy reveal: caption in the storybook font",
+   "first": "2026-11-22T14:34:30-08:00",
+   "last": "2026-11-22T14:38:58-08:00",
+   "tags": [
+    "squishyfont1"
+   ],
+   "cards": [
+    "c-squishyfont1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDXHrg4LAc6cfGD2xR",
    "title": "Sal listens with a feeling frame, not the bad picture",
    "first": "2026-11-22T14:34:40-08:00",
@@ -32593,16 +32610,6 @@
    "tags": [],
    "cards": [
     "c-sal-listen-swap"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDMncH1LTwaSPHWkpA",
-   "title": "Grace's squishy reveal: caption in the storybook font",
-   "first": "2026-11-22T14:34:30-08:00",
-   "last": "2026-11-22T14:34:30-08:00",
-   "tags": [],
-   "cards": [
-    "c-squishyfont1"
    ]
   },
   {
@@ -38317,8 +38324,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "026ce252048bc410cfa353780d3cc4a277eb77c3",
- "synced_at": "2026-11-22T22:34:59+00:00",
+ "synced": "6805c106124dcd2b73ed2ec38bacb78a5aea889e",
+ "synced_at": "2026-11-22T22:39:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
