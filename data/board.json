@@ -29526,8 +29526,8 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
-   "next": "Waiting for chapters 12 to 20 on Battle 3 (cards c-b3s22ch12 to c-b3s22ch20). Tom's yes on t-b3s23-confirm is in. Then run the prompt.",
+   "col": "wait",
+   "next": "Waits on the nine chapter cards c-b3s22ch12 to c-b3s22ch20 (chapters 12 to 20 onto Battle 3). Tom's yes on t-b3s23-confirm is in. Start it when the last of them ships, then run the prompt.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29563,6 +29563,11 @@
     {
      "d": "2026-11-22",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Rescue outcome: nothing to finish, the work is blocked on Claude cards c-b3s22ch12 to c-b3s22ch20 (all still Up next). Card moved to Wait; ch20 now blocks it. Not retired: the work is still wanted.",
+     "at": "2026-11-22T21:00:00.000Z"
     }
    ],
    "started_at": "2026-11-22T20:42:04+00:00",
@@ -29576,7 +29581,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "t-b3s23-confirm",
@@ -30876,7 +30882,9 @@
    "lane": "claude",
    "col": "up",
    "next": "Build ONLY chapter 20 on Battle 3: Blue Lens and Orange Lens (Special), The Collector (Boss). Starts after chapter 19 is switched on.",
-   "blocks": [],
+   "blocks": [
+    "c-b3s23"
+   ],
    "changed": "2026-11-22",
    "created": "2026-11-22",
    "tag": "b3s22ch20",
