@@ -557,5 +557,34 @@ r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/
 check('board_check accepts the card Last night', r.returncode == 0, r.stdout[-300:])
 
 
+# boardwedge1 guard A: a Tom card that blocks only finished work becomes fyi by itself; one that blocks open work is left alone
+b = fixed(nc('c-done1', col='done', done='2026-11-22'), nc('c-open1'),
+          dict(id='t-old', lane='tom', col='up', theme='Tools', title='Old', next='n', blocks=['c-done1'], ask='play', changed='2026-11-22', created='2026-11-22', chat={'url': '', 'opening': 'x'}, history=[]),
+          dict(id='t-live', lane='tom', col='up', theme='Tools', title='Live', next='n', blocks=['c-open1'], ask='play', changed='2026-11-22', created='2026-11-22', chat={'url': '', 'opening': 'x'}, history=[]),
+          dict(id='t-none', lane='tom', col='up', theme='Tools', title='None', next='n', blocks=[], ask='play', changed='2026-11-22', created='2026-11-22', chat={'url': '', 'opening': 'x'}, history=[]))
+bs.sync(b, [], None, None, None, NOWA, None, None, None, None)
+check('boardwedge1 A: a Tom card blocking only a Done card becomes fyi with one history line', card(b, 't-old').get('fyi') is True and sum(1 for h in card(b, 't-old')['history'] if 'Made fyi' in h['t']) == 1, card(b, 't-old'))
+check('boardwedge1 A: a card blocking an open Claude card is left alone', not card(b, 't-live').get('fyi'))
+check('boardwedge1 A: a card blocking nothing becomes fyi', card(b, 't-none').get('fyi') is True)
+n = len(card(b, 't-old')['history']); bs.sync(b, [], None, None, None, NOWA, None, None, None, None)
+check('boardwedge1 A: it happens once', len(card(b, 't-old')['history']) == n)
+d = fixed(*b['cards']); open('/tmp/board_wedge.json', 'w').write(json.dumps(d))
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_wedge.json'], capture_output=True, text=True)
+check('boardwedge1 A: board_check accepts the board after the rule ran', 'must block an open Claude card' not in r.stdout, r.stdout[-300:])
+
+# boardwedge1 guard B: merge-conflict markers fail board_check, named in the output
+for label, body in (('<<<<<<< HEAD', '<<<<<<< HEAD\n'), ('=======', '=======\n'), ('>>>>>>> sha', '>>>>>>> abc123\n')):
+    open('/tmp/board_marks.json', 'w').write(json.dumps(d, indent=1).replace('{\n', '{\n' + body, 1))
+    r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_marks.json'], capture_output=True, text=True)
+    check('boardwedge1 B: a line %r in the board file fails the check and says so' % label, r.returncode == 1 and 'merge-conflict markers' in r.stdout, r.stdout[-300:])
+os.makedirs('/tmp/bwx/data', exist_ok=True)
+open('/tmp/bwx/data/board.json', 'w').write(json.dumps(d)); open('/tmp/bwx/board.html', 'w').write('<p>x</p>\n=======\n')
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/bwx/data/board.json'], capture_output=True, text=True)
+check('boardwedge1 B: markers in board.html fail the check', r.returncode == 1 and 'board.html' in r.stdout, r.stdout[-300:])
+open('/tmp/bwx/board.html', 'w').write('<p>a line with ======= inside</p>\n')
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/bwx/data/board.json'], capture_output=True, text=True)
+check('boardwedge1 B: seven equals signs inside a line are not a marker', 'merge-conflict' not in r.stdout, r.stdout[-300:])
+
+
 print('board_sync_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))
 sys.exit(1 if fails else 0)

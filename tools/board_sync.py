@@ -703,6 +703,19 @@ def r14_report(B, n, key, tests):
 
 # ---------------------------------------------------------------- the whole pass
 
+def r15_fyi(B):
+    """boardwedge1 guard A: an open Tom card that blocks only finished work (or nothing open) turns fyi by itself, so board_check never
+    fails with 'an open Tom card must block an open Claude card, or be marked fyi: true' and stalls every board move."""
+    for c in B.cards:
+        if c.get('lane') != 'tom' or c.get('col') == 'done' or c.get('fyi') or c.get('backlog'): continue
+        n = c['id']
+        waits_fix = c.get('col') == 'wait' and any(k.get('lane') == 'claude' and k.get('col') != 'done' and n in k.get('blocks', []) for k in B.cards)
+        holds = any((B.get(b) or {}).get('lane') == 'claude' and (B.get(b) or {}).get('col') != 'done' for b in c.get('blocks', []))
+        if waits_fix or holds: continue
+        c['fyi'] = True
+        B.hist(c, 'Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up.'); B.say('fyi %s (blocks only finished work)' % n)
+
+
 def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None, archive=None, night_tests=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now), (archive or {}).get('cards'))
@@ -724,6 +737,7 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r12_ghost(B, now)
     r8_quiet(B, now)
     r11_attention(B, now, fire, rerun, shipped_tags)
+    r15_fyi(B)
     r14_night(B, now, night_tests)
     r9_start(B, fire, now)
     r8_quiet(B, now)

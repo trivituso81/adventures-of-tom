@@ -40,6 +40,12 @@ jobs:
             docs
             tools
             .github
+      - name: A pushed board file holds merge-conflict markers (boardwedge1)
+        # named here, in the run summary, instead of only failing the later check step
+        run: |
+          if grep -nE '^(<{7}|={7}$|>{7} )' data/board.json data/board-archive.json board.html 2>/dev/null; then
+            echo "::error::Merge-conflict markers are in data/board.json, data/board-archive.json or board.html (lines above). Resolve them and push again."; exit 1
+          fi
       - name: Fetch the branches the rules read (missing ones are skipped)
         run: |
           git fetch --depth=1 origin inbox:refs/remotes/origin/inbox || true

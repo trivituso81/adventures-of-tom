@@ -34788,7 +34788,7 @@
    "theme": "Project Ops",
    "tag": "boardwedge1",
    "title": "Board sync can no longer be wedged by a bad board file",
-   "next": "Build two guards: the sync job turns a Tom card that blocks only finished work into fyi by itself, and a push is refused when board.json or board.html holds merge-conflict markers.",
+   "next": "Shipped as boardwedge1: board sync turns a Tom card that blocks only finished work into fyi by itself (r15_fyi), and board_check refuses a push whose board.json, board-archive.json or board.html holds merge-conflict markers (also named in a new first step of board-sync). Tests in tools/board_sync_test.py pass.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
@@ -34815,6 +34815,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built both guards (boardwedge1): r15_fyi in board_sync.py, marker scan in board_check.py and the board-sync workflow. board_sync_test.py all passed."
     }
    ],
    "prompt": {

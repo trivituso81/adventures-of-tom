@@ -31,10 +31,20 @@ path = args[0] if args else DEFAULT
 ASKS = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup', 'unstick']
 THEMES = ['Voice Clips', 'Battle Animations', 'Battle System', 'Areas', 'Characters', 'Story and Dialogue', 'Game Shell', 'Tools', 'Project Ops']
 bad = []
+# boardwedge1 guard B: merge-conflict markers in the board files stop a push (a push with them wedged board-sync on 2026-11-21).
+MARKER = re.compile(r'^(<{7}|={7}$|>{7} )')
+def marker_lines(f):
+    try: lines = open(f, encoding='utf-8', errors='replace').read().splitlines()
+    except OSError: return []
+    return [i + 1 for i, l in enumerate(lines) if MARKER.match(l)]
+_here = os.path.dirname(os.path.abspath(path))
+for _f in (path, os.path.join(_here, 'board-archive.json'), os.path.join(_here, '..', 'board.html')):
+    _m = marker_lines(_f)
+    if _m: bad.append('merge-conflict markers in %s at line(s) %s: resolve the conflict (take the newest board and run board_sync again), then push' % (os.path.relpath(_f), ', '.join(map(str, _m[:5]))))
 try:
     d = json.load(open(path, encoding='utf-8'))
 except Exception as e:
-    print('board FAIL: cannot read %s: %s' % (path, e)); raise SystemExit(1)
+    print('board FAIL: cannot read %s: %s' % (path, e)); [print('  ' + b) for b in bad]; raise SystemExit(1)
 if d.get('themes') != THEMES: bad.append('themes list differs from the nine in claude/pending-my-action.md')
 lanes = {l.get('id') for l in d.get('lanes', [])}
 cols = {c.get('id') for c in d.get('columns', [])}
