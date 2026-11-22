@@ -25388,10 +25388,10 @@
    "id": "c-reports-13",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Game Shell",
    "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd. First note: this scene has to be triggered before they leagve",
+   "next": "Two reports (r-20261121-180439-svqd, r-20261121-180541-ojxd) wait on Tom's answer on card t-reports13-ch2. Then fix them in one small change.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -25488,6 +25488,11 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Rescue chose BACK TO YOU: both reports lack a pin or a clear fault, so a fix would be a guess. Added Tom card t-reports13-ch2; this card waits behind it.",
+     "at": "2026-11-22T09:20:00Z"
     }
    ],
    "blocks": [],
@@ -25501,7 +25506,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
     "prev": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -29375,6 +29381,36 @@
    ],
    "done": "2026-11-22",
    "answer": "Yes, delete battle 2 and its leftovers as the plan lists"
+  },
+  {
+   "id": "t-reports13-ch2",
+   "title": "Chapter 2: two scene reports need one answer from you",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Fact: your two reports have no pin and no clear fault. (1) r-20261121-180439-svqd, 'this scene has to be triggered before they leave': the grey tree scene starts when Tom walks into the clearing, and in your report it was already running with the party standing at the tree. (2) r-20261121-180541-ojxd, 'the cut scene took too long to start': the end scene begins the moment you enter Jefferson Park, then the party walks about 17 tiles down to Mr. Washington before he speaks. Tap the answer closest to what you want; card c-reports-13 (the report fixer) reads it next.",
+   "choices": [
+    "Start each scene the moment the party arrives, no long walk-in (Recommended)",
+    "Keep the scenes, only shorten the walk to Mr. Washington",
+    "Leave both as they are"
+   ],
+   "leads": [
+    "The end scene places the party next to Mr. Washington at once; the tree scene fires on entering the clearing.",
+    "Only the Jefferson Park end scene changes; the tree scene stays.",
+    "Both reports are closed with no change."
+   ],
+   "blocks": [
+    "c-reports-13"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the c-reports-13 rescue: the two open reports are too vague to fix without a guess."
+    }
+   ]
   }
  ],
  "sessions": [
