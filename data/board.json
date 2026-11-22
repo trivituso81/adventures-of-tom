@@ -29809,13 +29809,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFNHS7egv29b7fCK1f",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -29888,6 +29888,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -29902,8 +29906,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-22T01:26:21+00:00"
+   }
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -31322,7 +31325,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDVc9XVv6gEcsWPqV3",
+    "url": "https://claude.ai/code/session_01RXeukDVc9XVv6gEcsWPqV3",
     "opening": "not started"
    },
    "history": [
@@ -31350,6 +31353,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -31370,7 +31377,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -31382,6 +31389,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T01:53:48.265Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -31407,7 +31418,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -31419,6 +31430,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T01:53:13.565Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -31491,7 +31506,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGgmCFuvp5uENEHv55",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then cards c-battleux-cards\""
    },
    "prompt": {
@@ -31524,6 +31539,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: Tom approved as shown, so this session writes the build cards battleux1 to battleux3 and his play card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -31624,7 +31643,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -31642,6 +31661,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T01:54:20.241Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -31707,6 +31730,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDVc9XVv6gEcsWPqV3",
+   "title": "Fix the report backlog (8 open)",
+   "first": "2026-11-22T01:56:57Z",
+   "last": "2026-11-22T01:56:57Z",
+   "tags": [],
+   "cards": [
+    "c-reports-13"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGysMhUJFPz6cDcX1r",
+   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
+   "first": "2026-11-22T01:56:11Z",
+   "last": "2026-11-22T01:56:12Z",
+   "tags": [],
+   "cards": [
+    "c-boppy-bigfish"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCcuQnfnZVh5HBEm78",
    "title": "Fix the report backlog (1 open)",
@@ -32368,6 +32411,28 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDuDE1AKMjeSFc6JMX",
+   "title": "Fix: Generate the two fixed videos",
+   "first": "2026-11-21T17:55:54-08:00",
+   "last": "2026-11-21T17:55:54-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-wanstop-gen",
+    "c-wanstop-rose-giddyup-r7",
+    "c-wanstop-deedee-wetfloor-r6"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGgmCFuvp5uENEHv55",
+   "title": "Make the battle screen build cards",
+   "first": "2026-11-21T17:55:47-08:00",
+   "last": "2026-11-21T17:55:47-08:00",
+   "tags": [],
+   "cards": [
+    "c-battleux-cards"
    ]
   },
   {
@@ -36447,8 +36512,8 @@
    "takes/20261122T015428-cdp/state.json"
   ]
  },
- "synced": "8c52cc56d4d35d94c66cdac7d96c97ae680463b0",
- "synced_at": "2026-11-22T01:55:28+00:00",
+ "synced": "b6ac55e8f5da95a61968b6b129271cdf5bd61a9d",
+ "synced_at": "2026-11-22T01:57:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
