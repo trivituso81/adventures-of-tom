@@ -1,3 +1,7 @@
+## board-menuux3 (2026-11-22): the menu proposal now covers the full v11 battle design, not only what is built
+
+Card t-menuux-decide. Tom (11-21 18:14): "did you design this for only what is implemented or to incorporate the full vision of the v11 battle system". Fact: the first drawings were made from what is in the game (two Vibes each, four people). Redrawn: Vibes has three Vibe chips with Main, Pocket and Not in use, a locked Freelancer chip (Casual Mode), two Quirk slots, and a new drawing "Vibes later in the game" with the Quirk chooser and the mastery overflow line; Family shows all six on the bench with Change; the face switcher has a +6 button for the bench. `claude/menuux-plan.md` section 4 has a table of every v11 item, whether it is built, and where it is in the proposal. Drawings and plan only; nothing in the game changed.
+
 ## smokefix1 (2026-11-22): the smoke test passes again; two tests listed for the night run, three board checks no longer read today's board
 
 Card c-smokefix1. `tools/hollow_spot_test.py` and `tools/voice-library/sparse_files_test.py` are rows in `tools/night/tests.json` now (the night manifest check failed without them). In `tools/board_sync_test.py` the R5 replay builds its own three stalled cards plus a backlog card and a done card (it expects exactly those three to fire), and the unstick and Last night checks use `fixed()`, the real board's themes, columns and lanes with only the cards the check names, so none of them depends on which cards are open today. No rule was weakened and no game file changed.

@@ -32069,7 +32069,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "decide",
-   "next": "Open the drawings at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (also in the chat that starts \"The main menu needs a complete overhaul\"). The first row is the Duo unfolded: today's menu, then Family, Vibes, Gear, Bag and System. Press Play on Family, Duo unfolded and tap the five tabs; do the same on Family, phone in the second row. About 5 minutes. Then tap one answer below. Your answer starts the card Create the menu build cards by itself.",
+   "next": "Open the drawings at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (also in the chat that starts \"The main menu needs a complete overhaul\"). The first row is the Duo unfolded: today's menu, then Family, Vibes, Gear, Bag and System, and last Vibes later in the game (three Vibes, choosing Quirks). Press Play on Family, Duo unfolded and tap the five tabs; do the same on Family, phone in the second row. About 5 minutes. Then tap one answer below. Your answer starts the card Create the menu build cards by itself.",
    "choices": [
     "Build it as drawn (Recommended)",
     "Build it with my changes (I wrote them in the note)",
@@ -32089,6 +32089,10 @@
     {
      "d": "2026-11-22",
      "t": "Made by menuux-plan. The proposal is drawings and a plan only; nothing in the game changed. Plan: claude/menuux-plan.md."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "board-menuux3. Tom (11-21 18:14): \"did you design this for only what is implemented or to incorporate the full vision of the v11 battle system\". The first drawings covered only what is built. Vibes is redrawn for three Vibes, a Quirk chooser, mastery and the locked Freelancer chip; Family shows the whole bench with Change; plan section 4 lists every v11 item and where it lives."
     }
    ]
   },

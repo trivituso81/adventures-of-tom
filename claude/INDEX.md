@@ -318,6 +318,9 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/img/item-shirt.webp | RIFF�  WEBPVP8X | 2026-11-21 |
 | menuux-mock/img/item-sunhat.webp | RIFFH&  WEBPVP8X | 2026-11-21 |
 | menuux-mock/img/item-sweater.webp | RIFF"1  WEBPVP8X | 2026-11-21 |
+| menuux-mock/img/justin-head.webp | RIFFh#  WEBPVP8 \#  �c �*� � >A�C���=FD(� gr#����yW�O}}��gA=�����x?�z����k�#���Ǩ�:?D?�� :��/��Z�����l�_ |  |
+| menuux-mock/img/nara-head.webp | RIFF�#  WEBPVP8 �#  �e �*� � >A�C���;��(�g7"������9o����K�^���~�������\:dy��������������@9�V����-�L |  |
+| menuux-mock/img/olivia-head.webp | RIFF")  WEBPVP8 )  Pi �*� � >=�C�!!�60 ĳ d����ȹ_���d��^��m�o@����z�_�E�?�ǜ���T_�=@?���>�]��n�������� |  |
 | menuux-mock/img/rose-head.webp | RIFF�'  WEBPVP8 �'  �j �*� � >A�C����6�(�P����+鿧�r�n����\y>{w/C�=Ay�������{�s�/S��������_<P���W;�� | 2026-11-21 |
 | menuux-mock/img/rose.webp | RIFFZU WEBPVP8 NU �0�*#4>=�C�!�<İ Ħ��+HG\ƴv_a�*���� | 2026-11-21 |
 | menuux-mock/img/tnb-head.webp | RIFF`)  WEBPVP8 T)  0n �*� � >=�C�!�/� Ĵ d��*?/�1�=<���n����'΢�������?���?׺y���q�����/D.�O��}-:�4�� | 2026-11-21 |
@@ -341,6 +344,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/shots/system_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
 | menuux-mock/shots/system_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
 | menuux-mock/shots/vibes_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
+| menuux-mock/shots/vibes_late_duo.jpg | ���� JFIF      �� C  |  |
 | menuux-mock/shots/vibes_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
 
 ## moon club

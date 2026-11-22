@@ -6,7 +6,7 @@ Tom (11-21 17:28): "The main menu needs a complete overhaul - i originally wante
 
 | Where | What |
 |---|---|
-| The drawings Tom looks at | Design canvas "The Adventures of Tom: main menu redesign proposal", https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (13 artboards; press Play on Family and the tabs move between screens) |
+| The drawings Tom looks at | Design canvas "The Adventures of Tom: main menu redesign proposal", https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (14 artboards; press Play on Family and the tabs move between screens) |
 | The same drawings in the repo | `claude/menuux-mock/shots/*.jpg` (one per screen, plus `sheet-duo.jpg` and `sheet-phone.jpg`) |
 | The source of the drawings | `claude/menuux-mock/gen/kit.py` (colours, type, every component), `boards.py` (the screens), `render.py` and `shot.py` (test pages and screenshots), `export_canvas.py` (the canvas files). `python3 claude/menuux-mock/gen/render.py && python3 claude/menuux-mock/gen/shot.py family_duo` |
 | Pictures and fonts the drawings use | `claude/menuux-mock/img/`, `claude/menuux-mock/fonts/` |
@@ -62,12 +62,12 @@ One sentence: pausing turns the world to dusk and opens the sketchbook the famil
 | Screen | Left page (or top, on a phone) | Right page (or below) |
 |---|---|---|
 | Family | The line-up. Under each person: name, level, health bar and numbers, Main Vibe with Rank stars, Front row or Back row, and a "New skill to try" tag after a Rank-up. Who is waiting at home. | The other two people, and the Family Ruckus gauge with its 50 and 100 marks. Top bar on every screen: place, the next thing to do, coins, play time, Back to the game. |
-| Vibes | Face switcher (swipe or L and R), the person, level and XP, Health, Attack, Defense, Speed, Front or Back row, "Show what each skill does" switch, Quirk slots. | Main Vibe: name, subtitle, Lean in words, Rank stars, VP bar that says what the next Rank unlocks. Then the kit in Rank order, each row with its flavor, its Pep cost and one or two lines of what it does; locked rows show the Rank that opens them. The Pocket Vibe sits below with what it adds and Swap with Main. |
+| Vibes | Faces of the four in the party plus a +6 button for the bench (swipe or L and R), the person, level and XP, Health, Attack, Defense, Speed, Front or Back row, "Show what each skill does" switch, the two Quirk slots. | The person's three Vibes as three chips, each with its stars and its tag (Main, Pocket, Not in use); a fourth chip, Freelancer, stays locked until all three are mastered. Tap a chip to read that Vibe below: name, subtitle, Lean in words, VP bar that says what the next Rank unlocks, then the kit in Rank order, each row with its flavor in words, its Pep cost and one or two lines of what it does; locked rows show the Rank that opens them. A Vibe that is not Main shows Make it Main and Make it Pocket. Tapping a Quirk slot turns the right page into Choose a Quirk: all six, by Vibe, locked ones with the Rank they need. |
 | Gear | The same header. The four numbers show the change in green while you look at a piece. A green arrow on a face means the bag holds something better for them. | Tool, Outfit, Charm with the painted picture and the effect in the new stats. The chosen slot opens the pieces in the bag that fit, each with "how much better" and Wear. Best gear button. |
 | Bag | All, Heal, Gear, Keepsakes, then the list with painted pictures and counts. | The chosen item large, what it does, and Use it on: the family with health bars, most hurt first, the health they would end at, Use. On a phone this is a sheet that slides up. |
 | System | Autosave and three slots (Save, Load), Back up, Restore, the build label (opens the build history), Quit to title. | Music, Voices, Sound effects, Difficulty, Battle speed, Show what each skill does, Turn the screen sideways, Less motion. |
 
-Sizes drawn: Duo unfolded 951 x 648 (all five screens), phone upright 393 x 852 (all five), phone sideways 852 x 393 (Family). Duo folded (466 x 657) uses the phone upright layout; desktop and the Admin Dashboard pane use the Duo layout with a centred gutter. The top 50 px of the phone drawings are left empty for the real status bar.
+Sizes drawn: Duo unfolded 951 x 648 (all five screens, plus Vibes later in the game), phone upright 393 x 852 (all five), phone sideways 852 x 393 (Family). Duo folded (466 x 657) uses the phone upright layout; desktop and the Admin Dashboard pane use the Duo layout with a centred gutter. The top 50 px of the phone drawings are left empty for the real status bar.
 
 ## 4. How it fits the new battle system (v11, "Battle 3")
 
@@ -81,6 +81,27 @@ Sizes drawn: Duo unfolded 951 x 648 (all five screens), phone upright 393 x 852 
 | Family Ruckus gauge that carries between fights | Not shown | On Family |
 | Gear mapped to the new stats (architecture row 31: POW to Attack, GRIT to Defense, PEP to Speed) | Old stat names | Effects written in the new stats |
 | Stampcards (deleted at the purge, stage 23) | A tab and SP on every row | Not in the new menu. While a chapter still runs on the old battle, an "Old Stampcard" link shows at the bottom of Vibes; the purge removes it |
+
+### The full v11 design, not only what is built (added 11-21 after Tom asked)
+
+Fact: the first drawings were made from what is in the game today (two Vibes each, four people, no Quirk choice). The spec (`claude/battle-spec-v11.md`) has more. The drawings and this plan now cover it:
+
+| In the v11 spec | Built today | In the proposal |
+|---|---|---|
+| 3 Vibes per person, 30 in all, all open from the day they join | 2 per person; the third comes in battle stages 19 to 21 | Three Vibe chips (drawn with Tom's Star Baker). The layout does not change when the third Vibes arrive. |
+| Main and Pocket | Yes | A tag on the chip. Reading a Vibe that is not Main offers Make it Main and Make it Pocket. |
+| 2 Quirk slots, any two of the person's six Quirks | Yes, for the Quirks written so far | Two slots on the left page; Choose a Quirk on the right (drawn: "Vibes later in the game"). |
+| Mastery and overflow (a mastered Vibe's points go to the lowest one) | Yes | One line under the chips says where the points go (drawn). |
+| Casual Mode, "Freelancer": after all three are mastered, two Pocket slots, a Basic of your choice, all three Traits | No (stage 21) | The fourth chip, locked with "Master all 3" (drawn). Open, it is the Main chip, two other chips carry Pocket, and the kit list gains a Basic row with Change and three Trait rows. Not drawn open. |
+| A late joiner splits a pool of Vibe Points once across three Vibes | Yes (`b3PoolShift`, `b3PoolConfirm`) | The first time their Vibes page opens, the three chips carry minus and plus (20 points a tap) and Lock it in. Not drawn. |
+| 4 in the party out of 10, the bench earns XP and Vibe Points, swaps outside battle only | The bench exists; swaps happen at set places in the story | Family shows everyone on the bench with Change (drawn). Change, tap a bench face, tap who sits out. Someone the story holds in or out says so in words. The +6 button on Vibes and Gear reaches the bench, so their builds and gear can be kept up. The swap itself is not drawn. |
+| Rows: any split, at least 1 in Front | Yes | The Front and Back control; for the last person in front, Back is greyed with the reason. |
+| Portable Counters (Oven Temp, Reps, Whopper Tally) | Yes | Named in the Trait and Skill text. |
+| Pick-Me-Up for everyone | Yes | A line under the kit. |
+| Family Ruckus kept between fights; Double Team at 50, Full Family Ruckus at 100 | Yes | On Family, with both marks. |
+| Level 1 to 50, XP shared by all ten | Yes | The header of Vibes and Gear, and every Family plate. |
+
+Outside the menu's scope and unchanged by it: fights, Pet Peeves, Composure, Primes and Detonations (the battle screen and the Battle Guide show those).
 
 ### The battle screen proposal Tom approved the same day (claude/battleux-plan.md, cards c-battleux1 to 3)
 
@@ -98,8 +119,8 @@ The new menu is built beside the old one behind a switch (ADMIN > Menu: new or o
 
 | Card | What it builds | Model and effort (claude/handoff-rules.md) | Tom's part after |
 |---|---|---|---|
-| c-menu1 (tag menu1) | The look and the Family screen: fonts in the repo, colours and components as CSS, the paused-scene backdrop, the book and its tabs for wide and tall screens, the top bar, the hero bake (`tools/sprite-bake/bake_menu_heroes.py`, paper to white, for all ten family members, Nara included), the line-up at real heights, keys, gamepad and touch. A head row of the line-up goes to Tom. | Sonnet 5.5 (row C: a build whose code is not written; the look is fully specified by `claude/menuux-mock/gen/kit.py`). Effort high (a new screen system worked out in one session). | One look on the real Duo and phone, about 3 minutes: does it feel right in the hand. This is the only taste check before the rest is built. |
-| c-menu2 (tag menu2) | Vibes and Gear: the shared header and switcher, the Vibe pages on the real loadout functions (`b3SetMain`, `b3SetPocket`, `b3vRow`, the Quirk picker, the pool), the skill row, Gear with live changes through the gear mapping table, Best gear. Reads `claude/battleux-plan.md` first if it exists, so the skill row and the flavor icons are the same in the menu and in a fight. | Sonnet 5.5 (row C). Effort high. | None (tests and frames; folded into the final look). |
+| c-menu1 (tag menu1) | The look and the Family screen: fonts in the repo, colours and components as CSS, the paused-scene backdrop, the book and its tabs for wide and tall screens, the top bar, the hero bake (`tools/sprite-bake/bake_menu_heroes.py`, paper to white, for all ten family members, Nara included), the line-up at real heights, the bench with Change (swap a bench member in, with the story's locks said in words), keys, gamepad and touch. A head row of the line-up goes to Tom. | Sonnet 5.5 (row C: a build whose code is not written; the look is fully specified by `claude/menuux-mock/gen/kit.py`). Effort high (a new screen system worked out in one session). | One look on the real Duo and phone, about 3 minutes: does it feel right in the hand. This is the only taste check before the rest is built. |
+| c-menu2 (tag menu2) | Vibes and Gear: the shared header and switcher with the bench button, the three Vibe chips and the locked Freelancer chip, the Vibe pages on the real loadout functions (`b3SetMain`, `b3SetPocket`, `b3vRow`, the Quirk chooser, the late joiner's pool), the overflow line, the skill row, Gear with live changes through the gear mapping table, Best gear. Reads `claude/battleux-plan.md` first if it exists, so the skill row and the flavor icons are the same in the menu and in a fight. | Sonnet 5.5 (row C). Effort high. | None (tests and frames; folded into the final look). |
 | c-menu3 (tag menu3) | Bag and System: the list, the detail, Use it on, the phone sheet; saves, options, build label, quit; Rose Mode; Less motion. | Sonnet 5.5 (row B: the patterns exist after menu1 and menu2). Effort medium. | None. |
 | c-menu4 (tag menu4) | Switch the new menu on for everyone and purge the old one: old render functions and CSS in `engine/menu.js`, the Vibes overlay's own screen in `engine/b3-menu.js` (its save code stays), the admin switch, tests. | Sonnet 5.5 (row B: the purge rule and tests are written). Effort medium. Can run on the night shift. | Play the whole menu once on the phone, about 10 minutes. |
 

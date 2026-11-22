@@ -26,20 +26,19 @@ def plate(pid, w, sel=False, new=None, name_size=25):
             f'<div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:14px;font-weight:700;line-height:1.2">{p["vibe"]}</span>'
             f'<div style="display:flex;align-items:center;gap:8px">{stars(p["rank"], 14)}{chip(p["row"]+" row", SHADE, INK, 12, "2px 8px")}</div></div>{nw}</button>')
 
-def person_header(pid, fig_ppi=3.25, w=335, deltas=None, badge=None):
+def person_header(pid, fig_ppi=3.25, w=335, deltas=None, badge=None, lv=None, stats=None, nxt=None, xp=.36):
     """Left page of Vibes and Gear: who you are looking at, their level and their four numbers."""
-    p = PEOPLE[pid]; deltas = deltas or {}
-    stats = {'tom': (132, 26, 18, 100), 'grace': (115, 26, 16, 115)}.get(pid, (115, 26, 16, 100))
+    p = PEOPLE[pid]; deltas = deltas or {}; lv = lv or p["lv"]; nxt = nxt or p["nxt"]
+    stats = stats or {'tom': (132, 26, 18, 100), 'grace': (115, 26, 16, 115)}.get(pid, (115, 26, 16, 100))
     area = 250
-    return (f'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">{switcher(pid, badge=badge)}'
-            f'<span style="font-size:12.5px;color:{SOFT};text-align:right;line-height:1.25">Swipe or L R<br>to change person</span></div>'
+    return (f'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">{switcher(pid, badge=badge)}</div>'
             f'<div style="display:flex;align-items:flex-end;gap:4px;margin-top:6px;border-bottom:2px solid {INK}">'
             f'{figure(pid, fig_ppi, 150, area, tick=False)}'
             f'<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px;padding-bottom:14px">'
             f'<div style="font-size:13.5px;font-weight:600;color:{SOFT}">{p["title"]}</div>'
             f'<div style="{D};font-weight:800;font-size:44px;line-height:.95;letter-spacing:-.025em">{p["name"]}</div>'
-            f'<div style="display:flex;align-items:baseline;gap:8px;margin-top:4px"><span style="{D};font-weight:800;font-size:20px">Level {p["lv"]}</span></div>'
-            f'{bar(.36, GOLD, 8)}<div style="font-size:13px;color:{SOFT}">{p["nxt"]} to Level {p["lv"]+1}</div>'
+            f'<div style="display:flex;align-items:baseline;gap:8px;margin-top:4px"><span style="{D};font-weight:800;font-size:20px">Level {lv}</span></div>'
+            f'{bar(xp, GOLD, 8)}<div style="font-size:13px;color:{SOFT}">{nxt} to Level {lv+1}</div>'
             f'</div></div>'
             f'<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px 2px 0">'
             f'{stat("Health", stats[0], deltas.get("hp"))}{stat("Attack", stats[1], deltas.get("atk"))}{stat("Defense", stats[2], deltas.get("def"))}{stat("Speed", stats[3], deltas.get("spd"))}</div>')
@@ -53,7 +52,7 @@ def ruckus(pct=35, w='100%'):
 
 # ---------- Family ----------
 def family_duo():
-    ppi = 4.6; area = 356
+    ppi = 4.36; area = 334
     lw, rw = 371, 468
     lslots = [('tom', 176), ('grace', 159)]; rslots = [('rose', 200), ('deedee', 232)]
     def half(slots, sel=None, new=None, ticks='left'):
@@ -61,9 +60,11 @@ def family_duo():
         plates = ''.join(plate(p, w, sel == p, (new or {}).get(p)) for p, w in slots)
         return (f'<div style="display:flex;align-items:flex-end;border-bottom:2px solid {INK}">{figs}</div>'
                 f'<div style="display:flex;align-items:flex-start">{plates}</div>')
-    bench = (f'<div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1.5px solid {RULE}">'
-             f'<div style="display:flex">{head("boppy", 34)}<span style="margin-left:-8px;display:block">{head("amy", 34)}</span><span style="margin-left:-8px;display:block">{head("tnb", 34)}</span></div>'
-             f'<div style="font-size:13.5px;line-height:1.3;color:{SOFT}"><span style="font-weight:700;color:{INK}">Waiting at home</span><br>Boppy, Amy and TNB</div></div>')
+    bh = ''.join(f'<span style="margin-left:{0 if i == 0 else -7}px;display:block">{head(p, 32)}</span>' for i, p in enumerate(('boppy', 'amy', 'tnb', 'nara', 'justin', 'olivia')))
+    bench = (f'<div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding-top:8px;border-top:1.5px solid {RULE}">'
+             f'<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;color:{SOFT};white-space:nowrap"><span style="font-weight:700;color:{INK}">6 on the bench.</span> They level up too.</div>'
+             f'<div style="display:flex">{bh}</div></div>'
+             f'{btn("Change", "line", 13, "0 14px", 40, ic="swap")}</div>')
     left = half(lslots, sel='tom', new={'tom': 'New skill to try'}) + bench
     right = half(rslots) + f'<div style="margin-top:auto;padding-top:10px;border-top:1.5px solid {RULE}">{ruckus(35)}</div>'
     return shell_wide(951, 648, 'family', 'world-duo', topbar('The Square', 'Long Island', NEXT), left, right, lw, rw, links=DUO_LINKS)
@@ -79,35 +80,74 @@ def main_vibe(compact_locked=True, desc=True, show_cost=True):
             + locked_row(5, 'Million-Miler Status', 'Quirk'))
     return rows
 
-def vibe_head(tag, tagbg, name, sub, lean, rank, vp, of, unlock, tagcolor=INK):
-    return (f'<div style="display:flex;flex-direction:column;gap:6px">'
-            f'<div style="display:flex;align-items:center;gap:8px">{chip(tag, tagbg, tagcolor, 12.5, "3px 10px")}<span style="font-size:13.5px;color:{SOFT};font-weight:600">{sub}</span><span style="flex:1 1 auto"></span>{stars(rank, 17, gap=2)}</div>'
-            f'<div style="{D};font-weight:800;font-size:30px;line-height:1;letter-spacing:-.02em">{name}</div>'
-            f'<div style="display:flex;align-items:center;gap:7px;font-size:13.5px;color:{SOFT}">{icon("shield", 16, INK, 2)}<span><span style="font-weight:700;color:{INK}">{lean}</span></span></div>'
-            f'<div style="display:flex;align-items:center;gap:10px">{bar(vp/of, GOLD, 8, extra="flex:1 1 auto;")}'
-            f'<span style="font-size:13px;color:{SOFT};white-space:nowrap"><span style="{D};font-weight:800;font-size:15px;color:{INK}">{vp}</span> of {of} to Rank {rank+1}: {unlock}</span></div></div>')
+def vibe_head(name, sub, lean, rank, vp, of, unlock, name_size=28, note=None):
+    prog = (f'<div style="display:flex;align-items:center;gap:10px">{bar(vp/of, GOLD, 8, extra="flex:1 1 auto;")}'
+            f'<span style="font-size:13px;color:{SOFT};white-space:nowrap"><span style="{D};font-weight:800;font-size:15px;color:{INK}">{vp}</span> of {of} to Rank {rank+1}: {unlock}</span></div>') if not note else (
+            f'<div style="font-size:13px;color:{SOFT};line-height:1.3">{note}</div>')
+    return (f'<div style="display:flex;flex-direction:column;gap:5px">'
+            f'<div style="display:flex;align-items:baseline;gap:10px"><span style="{D};font-weight:800;font-size:{name_size}px;line-height:1;letter-spacing:-.02em;white-space:nowrap">{name}</span>'
+            f'<span style="font-size:13.5px;color:{SOFT};font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{sub}</span></div>'
+            f'<div style="display:flex;align-items:center;gap:7px;font-size:13.5px">{icon("shield", 16, INK, 2)}<span style="font-weight:700">{lean}</span></div>{prog}</div>')
 
-def pocket_strip():
-    return (f'<div style="margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:8px 12px;border-radius:12px;background:{SHADE};box-shadow:inset 0 0 0 1.5px {RULE}">'
-            f'<div style="display:flex;align-items:center;gap:10px">{chip("Pocket Vibe", JAC, "#fff", 12.5, "3px 10px")}'
-            f'<span style="{D};font-weight:800;font-size:19px;line-height:1.1;white-space:nowrap">Gamer Geek</span><span style="flex:1 1 auto"></span>'
-            f'{btn("Swap with Main", "line", 13.5, "0 14px", 40, ic="swap")}</div>'
-            f'<div style="font-size:13px;color:{SOFT};display:flex;align-items:center;gap:7px;white-space:nowrap">{stars(1, 13)}<span style="margin-left:4px">Adds</span>{flavor("clobber", 18)}'
-            f'<span style="font-weight:700;color:{INK}">Controller Toss</span><span style="font-weight:600">Clobber skill</span><span style="flex:1 1 auto"></span>{pep(2, 12)}</div></div>')
+TOM_VIBES = [('Frequent Flier', 2, 'Main'), ('Gamer Geek', 1, 'Pocket'), ('Star Baker', 1, '')]
+TOM_VIBES_LATE = [('Frequent Flier', 5, 'Main'), ('Gamer Geek', 4, 'Pocket'), ('Star Baker', 3, '')]
+
+def quirk_slot(n, name=None, desc=None, sel=False, locked=None):
+    if locked:
+        return (f'<div style="display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:12px;box-shadow:inset 0 0 0 1.5px {RULE};color:{SOFT};font-size:13px;line-height:1.25;min-height:44px;box-sizing:border-box">'
+                f'{icon("lock", 16, SOFT, 2)}<span><span style="font-weight:700;color:{INK}">Quirk {n}</span> {locked}</span></div>')
+    bg = f'background:{LAMP};box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);' if sel else f'background:transparent;box-shadow:inset 0 0 0 1.5px {RULE};'
+    return (f'<button type="button" aria-pressed="{"true" if sel else "false"}" style="{bg}border:0;border-radius:12px;padding:6px 10px;display:flex;align-items:center;gap:9px;text-align:left;color:{INK};{T};cursor:pointer;width:100%;box-sizing:border-box;min-height:44px">'
+            f'<span style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column"><span style="font-size:12px;font-weight:700;color:{SOFT}">Quirk {n}</span>'
+            f'<span style="{D};font-weight:700;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{name}</span></span></button>')
 
 def vibes_duo():
     lw, rw = 371, 468
     left = (person_header('tom')
-            + f'<div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">{label("Stands in")}{seg(["Front row", "Back row"], "Front row", 38, 13.5)}</div>'
-            + f'<div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:14px;font-weight:600">Show what each skill does</span>{toggle(True, "Show what each skill does")}</div>'
-            + f'<div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1.5px solid {RULE};color:{SOFT};font-size:13.5px;line-height:1.3">'
-              f'{icon("lock", 18, SOFT, 2)}<span><span style="font-weight:700;color:{INK}">2 Quirk slots</span> open when one of Tom&#39;s Vibes reaches Rank 3.</span></div>')
-    right = (vibe_head('Main Vibe', LAMP, 'Frequent Flier', 'Sky Club Applicant', 'Guard: 15% more Health and Defense', 2, 90, 220, 'first Quirk')
+            + f'<div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">{label("Stands in")}{seg(["Front row", "Back row"], "Front row", 38, 13.5)}</div>'
+            + f'<div style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:14px;font-weight:600">Show what each skill does</span>{toggle(True, "Show what each skill does")}</div>'
+            + f'<div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">'
+              f'{quirk_slot(1, locked="opens at Rank 3")}{quirk_slot(2, locked="opens at Rank 3")}</div>')
+    right = (vibe_picker(TOM_VIBES, 0)
+             + f'<div style="margin-top:10px">{vibe_head("Frequent Flier", "Sky Club Applicant", "Guard: 15% more Health and Defense", 2, 90, 220, "first Quirk")}</div>'
              + f'<div style="margin-top:6px;display:flex;flex-direction:column">{main_vibe()}</div>'
-             + pocket_strip())
+             + f'<div style="margin-top:auto;padding-top:8px;border-top:1.5px solid {RULE};font-size:13px;color:{SOFT};line-height:1.3">The Pocket Vibe adds its Skills only. Everyone can also use Pick-Me-Up (4 Pep) to get a knocked-out family member back up.</div>')
     return shell_wide(951, 648, 'vibes', 'world-duo', topbar('The Square', 'Long Island', NEXT), left, right, lw, rw, dot=(), links=DUO_LINKS)
 
-# ---------- Gear ----------
+def quirk_row(name, vibe, desc, state):
+    """state: 'slot1', 'slot2', 'choose', or a rank number (still locked)."""
+    if state == 'slot1': right = chip(icon("check", 13, INK, 3) + 'In Quirk 1', LAMP, INK, 12.5, '5px 11px', f'box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.35);')
+    elif state == 'slot2': right = chip('In Quirk 2', SHADE, INK, 12.5, '5px 11px')
+    elif state == 'choose': right = btn('Choose', 'ink', 13, '0 16px', 40)
+    else: right = f'<span style="display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:{SOFT};white-space:nowrap">{icon("lock", 14, SOFT, 2.2)}{vibe} Rank {state}</span>'
+    lockd = isinstance(state, int)
+    return (f'<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1.5px solid {RULE}">'
+            f'<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px">'
+            f'<div style="display:flex;align-items:baseline;gap:8px"><span style="{D};font-weight:700;font-size:16px;line-height:1.2;{"color:"+SOFT+";" if lockd else ""}">{name}</span>'
+            f'<span style="font-size:12.5px;font-weight:600;color:{SOFT};white-space:nowrap">{vibe}</span></div>'
+            f'<div style="font-size:13px;line-height:1.3;color:{SOFT};text-wrap:pretty">{desc}</div></div><div style="flex:none">{right}</div></div>')
+
+def vibes_late_duo():
+    """Later in the game: three Vibes at different Ranks, one mastered, both Quirk slots in use, the Quirk list open."""
+    lw, rw = 371, 468
+    left = (person_header('tom', lv=30, stats=(799, 124, 64, 111), nxt=212, xp=.58)
+            + f'<div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">{label("Stands in")}{seg(["Front row", "Back row"], "Front row", 38, 13.5)}</div>'
+            + f'<div style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:14px;font-weight:600">Show what each skill does</span>{toggle(True, "Show what each skill does")}</div>'
+            + f'<div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">'
+              f'{quirk_slot(1, "Million-Miler Status", sel=True)}{quirk_slot(2, "Elixir Hoarder")}</div>')
+    rows = (quirk_row('Million-Miler Status', 'Frequent Flier', 'A counter or a hit taken for someone knocks 1 more Composure off and moves Tom up the turn bar.', 'slot1')
+            + quirk_row('Upgrade Certificate', 'Frequent Flier', 'Each hit Tom takes for someone stamps a Certificate, 3 at most. His next Clobber Skill cashes them in.', 'choose')
+            + quirk_row('Elixir Hoarder', 'Gamer Geek', 'Starting a turn with 6 Pep or more gives Tom 15% more Speed and more crits.', 'slot2')
+            + quirk_row('Parchment Lined', 'Star Baker', 'A heal, shield or support Skill cuts Tom&#39;s wait after that turn by a quarter.', 'choose')
+            + quirk_row('New Game Plus', 'Gamer Geek', 'After a Detonation or a counter, his next Skill costs 2 Pep less.', 5)
+            + quirk_row('Caramelized Crust', 'Star Baker', 'A shield or heal of Tom&#39;s that runs out bursts for Sizzle damage.', 5))
+    right = (vibe_picker(TOM_VIBES_LATE, 0, freelancer='Master all 3', name_size=13)
+             + f'<div style="margin-top:8px;font-size:13px;color:{SOFT};line-height:1.3"><span style="font-weight:700;color:{INK}">Frequent Flier is mastered.</span> The Vibe Points it would earn now go to Star Baker, Tom&#39;s lowest Vibe.</div>'
+             + f'<div style="margin-top:10px">{h2("Choose Quirk 1", 22)}</div>'
+             + f'<div style="font-size:13px;color:{SOFT};margin-top:2px">Any two of Tom&#39;s Quirks, from any of his Vibes.</div>'
+             + f'<div style="margin-top:8px;display:flex;flex-direction:column">{rows}</div>')
+    return shell_wide(951, 648, 'vibes', 'world-duo', topbar('Downtown', 'Los Angeles', 'Find the man in the gold armor'), left, right, lw, rw, dot=())
+
 def gear_slot(slot, iid, name, effect, sel=False, empty=False, size=48):
     bg = f'background:{LAMP};box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.35);' if sel else f'background:transparent;box-shadow:inset 0 0 0 1.5px {RULE};'
     pic = (f'<span style="width:{size}px;height:{size}px;flex:none;border-radius:12px;box-shadow:inset 0 0 0 1.5px {RULE};display:block;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(43,26,51,.08) 6px 7px)"></span>'
@@ -240,8 +280,9 @@ def family_phone():
     figs = ''.join(figure(p, ppi, w, area, tick=False) for p, w in slots)
     body = (f'<div style="display:flex;align-items:flex-end;border-bottom:2px solid {INK}">{figs}</div>'
             f'<div style="display:flex;flex-direction:column">{prow("tom", True, "New skill")}{prow("grace")}{prow("rose")}{prow("deedee")}</div>'
-            f'<div style="display:flex;align-items:center;gap:10px;padding:7px 2px;border-top:1.5px solid {RULE}"><div style="display:flex">{head("boppy", 30)}<span style="margin-left:-8px;display:block">{head("amy", 30)}</span><span style="margin-left:-8px;display:block">{head("tnb", 30)}</span></div>'
-            f'<div style="font-size:13.5px;color:{SOFT}"><span style="font-weight:700;color:{INK}">Waiting at home:</span> Boppy, Amy and TNB</div></div>'
+            f'<div style="display:flex;align-items:center;gap:8px;padding:6px 2px;border-top:1.5px solid {RULE}"><div style="display:flex;flex:none">'
+            + ''.join(f'<span style="margin-left:{0 if i == 0 else -8}px;display:block">{head(p, 30)}</span>' for i, p in enumerate(('boppy', 'amy', 'tnb', 'nara', 'justin', 'olivia'))) +
+            f'</div><div style="flex:1 1 auto;min-width:0;font-size:13px;color:{SOFT};white-space:nowrap"><span style="font-weight:700;color:{INK}">6 on the bench</span></div>{btn("Change", "line", 13, "0 12px", 36, ic="swap")}</div>'
             f'<div style="margin-top:auto;padding-top:10px;border-top:1.5px solid {RULE}">'
             f'<div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:5px"><span style="{D};font-weight:700;font-size:16px">Family Ruckus</span><span style="{D};font-weight:800;font-size:16px">35%</span></div>'
             f'<div style="position:relative;height:12px;border-radius:12px;background:rgba(43,26,51,.15)"><div style="width:35%;height:100%;border-radius:12px;background:{GOLD};box-shadow:inset 0 0 0 1.5px {GOLDINK}"></div><span style="position:absolute;left:50%;top:-3px;width:2px;height:18px;background:{INK};opacity:.55"></span></div></div>')
@@ -249,19 +290,16 @@ def family_phone():
 
 def who_strip(pid, deltas=None, badge=None):
     p = PEOPLE[pid]; deltas = deltas or {}
-    return (f'<div style="display:flex;align-items:center;gap:10px">{switcher(pid, size=42, badge=badge)}<span style="flex:1 1 auto"></span>'
+    return (f'<div style="display:flex;align-items:center;gap:8px">{switcher(pid, size=38, badge=badge)}<span style="flex:1 1 auto"></span>'
             f'<div style="text-align:right"><div style="{D};font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em">{p["name"]}</div><div style="font-size:13px;font-weight:700;color:{SOFT};margin-top:2px">Level {p["lv"]}</div></div></div>'
-            f'<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px 2px 10px;margin-top:8px;border-top:2px solid {INK}">'
+            f'<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:9px 2px 9px;margin-top:8px;border-top:2px solid {INK}">'
             f'{stat("Health", 132, deltas.get("hp"), 22)}{stat("Attack", 26, deltas.get("atk"), 22)}{stat("Defense", 18, deltas.get("def"), 22)}{stat("Speed", 100, deltas.get("spd"), 22)}</div>')
 
 def vibes_phone():
     body = (who_strip('tom')
-            + seg(['Main: Frequent Flier', 'Pocket: Gamer Geek'], 'Main: Frequent Flier', 38, 13)
-            + f'<div style="display:flex;flex-direction:column;gap:5px;margin-top:10px">'
-              f'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:13.5px;font-weight:600;color:{SOFT}">Sky Club Applicant</span><span style="flex:1 1 auto"></span>{stars(2, 16, gap=2)}</div>'
-              f'<div style="display:flex;align-items:center;gap:7px;font-size:13.5px">{icon("shield", 16, INK, 2)}<span style="font-weight:700">Guard: 15% more Health and Defense</span></div>'
-              f'<div style="display:flex;align-items:center;gap:10px">{bar(90/220, GOLD, 8, extra="flex:1 1 auto;")}<span style="font-size:13px;color:{SOFT};white-space:nowrap"><span style="{D};font-weight:800;font-size:15px;color:{INK}">90</span> of 220 to Rank 3</span></div></div>'
-            + f'<div style="margin-top:8px;display:flex;flex-direction:column">{main_vibe(show_cost=False)}</div>')
+            + vibe_picker(TOM_VIBES, 0, name_size=13.5)
+            + f'<div style="margin-top:9px">{vibe_head("Frequent Flier", "Sky Club Applicant", "Guard: 15% more Health and Defense", 2, 90, 220, "first Quirk", name_size=22)}</div>'
+            + f'<div style="margin-top:6px;display:flex;flex-direction:column">{main_vibe(show_cost=False)}</div>')
     return shell_tall(393, 852, 'vibes', 'world-p', topbar_phone('The Square', 'Long Island'), body, dot=(), safe_top=50, sheet_pad='12px 14px 0', links=PHONE_LINKS)
 
 def gear_phone():

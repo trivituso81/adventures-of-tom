@@ -198,7 +198,8 @@ def stat(name, val, delta=None, size=26, note=None):
             f'<div style="display:flex;align-items:baseline;gap:6px"><span style="{D};font-weight:800;font-size:{size}px;line-height:1;letter-spacing:-.01em">{val}</span>{d}</div>{nt}</div>')
 
 
-def switcher(sel, ids=('tom', 'grace', 'rose', 'deedee'), size=44, badge=None):
+def switcher(sel, ids=('tom', 'grace', 'rose', 'deedee'), size=44, badge=None, more=6):
+    """Faces of the four in the party, then one button for everyone on the bench (they keep earning XP and Vibe Points)."""
     out = ''
     names = {'tom': 'Tom', 'grace': 'Grace', 'rose': 'Rose', 'deedee': 'Deedee'}
     for p in ids:
@@ -207,7 +208,10 @@ def switcher(sel, ids=('tom', 'grace', 'rose', 'deedee'), size=44, badge=None):
              if (badge and p in badge) else '')
         out += (f'<button type="button" aria-label="{names[p]}" aria-pressed="{"true" if on else "false"}" style="position:relative;border:0;background:transparent;padding:3px;border-radius:50%;cursor:pointer;display:block">'
                 f'{head(p, size, ring=INK if on else None, dim=False)}{b}</button>')
-    return f'<div style="display:flex;gap:8px;align-items:center">{out}</div>'
+    if more:
+        out += (f'<button type="button" aria-label="{more} more on the bench" style="border:0;cursor:pointer;width:{size}px;height:{size}px;border-radius:50%;background:{SHADE};box-shadow:inset 0 0 0 1.5px {RULE};color:{INK};'
+                f'{D};font-weight:800;font-size:{round(size*.36)}px;display:flex;align-items:center;justify-content:center;margin-left:3px;flex:none">+{more}</button>')
+    return f'<div style="display:flex;gap:{8 if size >= 44 else 4}px;align-items:center">{out}</div>'
 
 
 def skill_row(kind, name, desc, flav=None, cost=None, compact=False, new=False, size=15):
@@ -295,3 +299,24 @@ def h2(text, size=24, extra=''):
 
 DUO_LINKS = {'family': 'Main.dc.html', 'vibes': 'Vibes-Duo.dc.html', 'gear': 'Gear-Duo.dc.html', 'bag': 'Bag-Duo.dc.html', 'system': 'System-Duo.dc.html'}
 PHONE_LINKS = {'family': 'Family-Phone.dc.html', 'vibes': 'Vibes-Phone.dc.html', 'gear': 'Gear-Phone.dc.html', 'bag': 'Bag-Phone.dc.html', 'system': 'System-Phone.dc.html'}
+
+
+def vibe_picker(items, sel, freelancer=None, name_size=15):
+    """The person's three Vibes side by side: which one is Main, which is in the Pocket, and the one being read below.
+    items: (name, rank, slot) with slot 'Main', 'Pocket' or ''. freelancer: None, or the words under the fourth chip."""
+    out = ''
+    for i, (name, rank, slot) in enumerate(items):
+        on = i == sel
+        bg = f'background:{LAMP};box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);' if on else f'background:{SHADE};box-shadow:inset 0 0 0 1.5px {RULE};'
+        tag = (chip('Main', INK, CREAM, 11.5, '1px 8px') if slot == 'Main' else chip('Pocket', JAC, '#fff', 11.5, '1px 8px') if slot == 'Pocket'
+               else f'<span style="font-size:11.5px;font-weight:600;color:{SOFT};line-height:1.25;padding:1px 0">Not in use</span>')
+        st = ''
+        out += (f'<button type="button" aria-pressed="{"true" if on else "false"}" style="{bg}flex:1 1 0;min-width:0;border:0;border-radius:12px;padding:6px 9px 7px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;color:{INK};{T};cursor:pointer;min-height:44px">'
+                f'<span style="display:flex;align-items:center;gap:6px;width:100%">{tag}<span style="flex:1 1 auto"></span>{st}</span>'
+                f'<span style="{D};font-weight:700;font-size:{name_size}px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">{name}</span>{stars(rank, 12)}</button>')
+    if freelancer:
+        out += (f'<button type="button" aria-pressed="false" style="flex:.8 1 0;min-width:0;overflow:hidden;border:0;border-radius:12px;padding:6px 7px 7px;background:transparent;box-shadow:inset 0 0 0 1.5px {RULE};display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;color:{SOFT};{T};cursor:pointer;min-height:44px">'
+                f'<span style="display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;line-height:1.25;padding:1px 0">{icon("lock", 12, SOFT, 2.2)}Locked</span>'
+                f'<span style="{D};font-weight:700;font-size:{name_size-.5}px;line-height:1.1;white-space:nowrap">Freelancer</span>'
+                f'<span style="font-size:11.5px;line-height:1.15;white-space:nowrap">{freelancer}</span></button>')
+    return f'<div style="display:flex;gap:6px;align-items:stretch">{out}</div>'
