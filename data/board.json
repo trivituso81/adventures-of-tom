@@ -34530,7 +34530,7 @@
   {
    "id": "t-movefun-gen",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -34546,7 +34546,7 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
@@ -34671,8 +34671,14 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44992845017: 3 made and checked, 0 passed, 1 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: See your message Sent to Claude as card c-fix-pairmove1-gen-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T06:23:50.671Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-wanstop-tom-blockade-r3",
@@ -35180,9 +35186,10 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
-   "next": "You reported a problem on Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Hanging",
+   "next": "You reported 2 problems on Make Rose's Giddyup with Tom in it; Remaking three flat moves: Blockade, Cube Pop, Wet-Floor. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: See your message",
    "blocks": [
-    "t-pairmove1-gen"
+    "t-pairmove1-gen",
+    "t-movefun-gen"
    ],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -35195,6 +35202,15 @@
      "words": "Hanging",
      "shot": "",
      "asked": "Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20."
+    },
+    {
+     "at": "2026-11-22T06:23:49.599Z",
+     "card": "t-movefun-gen",
+     "title": "Remaking three flat moves: Blockade, Cube Pop, Wet-Floor",
+     "ask": "animations",
+     "words": "See your message",
+     "shot": "",
+     "asked": "Nothing to tap: the run is already started. The Action makes the 3 videos (Tom's Zone One Blockade with the hip bump, Grace's Crunchy Sugar-Cube Pop held by her ear, Deedee's Wet-Floor with the yellow sign), checks them, retries by itself and puts the ones that pass in the game. A watch card comes when they pass. At most $9.60 for all three, about $1.80 if each passes first time."
     }
    ],
    "chat": {
@@ -35211,6 +35227,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-pairmove1-gen: Hanging",
      "at": "2026-11-22T06:04:55.075Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-movefun-gen: See your message",
+     "at": "2026-11-22T06:23:50.671Z"
     }
    ],
    "prompt": {
@@ -35220,7 +35241,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
     "effort": "medium (fixing what you named, starting from what is there)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen-2 and t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen-2.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Hanging\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:04:54.215Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen-2 and t-pairmove1-gen, t-movefun-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen-2.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Hanging\n2. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap: the run is already started. The Action makes the 3 videos (Tom's Zone One Blockade with the hip bump, Grace's Crunchy Sugar-Cube Pop held by her ear, Deedee's Wet-Floor with the yellow sign), checks them, retries by itself and puts the ones that pass in the game. A watch card comes when they pass. At most $9.60 for all three, about $1.80 if each passes first time. He wrote: See your message\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:04:54.215Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen, t-movefun-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-pairmove1-gen"
   },
