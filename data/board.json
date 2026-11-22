@@ -34524,7 +34524,7 @@
   {
    "id": "c-wanstop-tom-blockade-r3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-blockade-r3",
    "title": "Fix the stopped video tom-blockade",
@@ -34559,6 +34559,10 @@
     {
      "d": "2026-11-22",
      "t": "By eye both r3 videos do the move; the only measured fault is the right hand on the right edge. Changed one thing: pad 0.8, rev 4. Next try started."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-tom-blockade-r3: Tom's Blockade shrinks the start picture to 80 percent so his right hand clears the edge"
     }
    ],
    "prompt": {
@@ -34570,7 +34574,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-blockade-r3 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-blockade (rev 3) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1, p2, p3. Evidence: edge: the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33); p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose varies but never clearly holds both arms out like; p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame.); p3: Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and  (No wide blocking pose held or clear return sequence ma. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: tom-blockade-r3-result.json (every check with numbers and the look-check answers) and the videos tom-blockade-r3.mp4, tom-blockade-a2-r3.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-blockade-r3` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-blockade-r3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:11:55+00:00"
+   "started_at": "2026-11-22T05:11:55+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-grace-cubepop-r4",
@@ -34758,10 +34763,13 @@
    "url": "https://claude.ai/code/session_01RXeukH6de9RdduXtZtnif5",
    "title": "Fix the stopped video tom-blockade",
    "first": "2026-11-22T05:17:58Z",
-   "last": "2026-11-22T05:17:58Z",
-   "tags": [],
+   "last": "2026-11-22T05:20:11Z",
+   "tags": [
+    "wanstop-tom-blockade-r3"
+   ],
    "cards": [
-    "c-wanstop-tom-blockade-r3"
+    "c-wanstop-tom-blockade-r3",
+    "t-movefun-gen"
    ]
   },
   {
@@ -39939,8 +39947,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "86468e6ad9a39701d06076757e32e7dfb7d197a5",
- "synced_at": "2026-11-22T05:18:32+00:00",
+ "synced": "3a508c47ab8eb67d37cd6f6c97185213942b9cd0",
+ "synced_at": "2026-11-22T05:21:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
