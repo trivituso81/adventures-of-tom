@@ -31849,6 +31849,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 video (about $0.79).",
      "at": "2026-11-22T05:13:54.128Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44988499096: 1 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
     }
    ],
    "wgen": {
@@ -31857,10 +31861,31 @@
     "n": 1,
     "est": 0.79,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T05:16:35Z",
+     "state": "done",
+     "at": "2026-11-22T05:16:40Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44988499096",
-     "n": 1
+     "n": 1,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [
+      {
+       "what": "tom-rose-giddyup",
+       "why": "fal result said 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
+      }
+     ],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.78,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-rose-giddyup": 1
+     }
     }
    }
   },
