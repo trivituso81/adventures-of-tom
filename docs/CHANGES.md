@@ -1,3 +1,7 @@
+## smokefix1 (2026-11-22): the smoke test passes again; two tests listed for the night run, three board checks no longer read today's board
+
+Card c-smokefix1. `tools/hollow_spot_test.py` and `tools/voice-library/sparse_files_test.py` are rows in `tools/night/tests.json` now (the night manifest check failed without them). In `tools/board_sync_test.py` the R5 replay builds its own three stalled cards plus a backlog card and a done card (it expects exactly those three to fire), and the unstick and Last night checks use `fixed()`, the real board's themes, columns and lanes with only the cards the check names, so none of them depends on which cards are open today. No rule was weakened and no game file changed.
+
 ## fix-wanstop-gen (2026-11-21): the Generate videos button comes back after a stopped video is fixed, and the card says why nothing was made
 
 Card c-fix-wanstop-gen, from Tom on t-wanstop-gen: "the button says nothing to make right now. but there is no video made". Fact: the run (44971778287) did make both videos and spent $1.58, but both failed their checks and were stopped, so nothing went into the game. The card then said "Every video of this card is made" and "Nothing to make right now", which read as if nothing had run. Second fault found while reproducing: the page counted a stopped job as finished by its name alone, so even after a fix session raised the job's rev the button would have stayed off.

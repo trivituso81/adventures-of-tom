@@ -332,6 +332,8 @@ def qc(i, **kw):   # a Claude card In progress whose conversation went quiet
              chat={'url': 'https://claude.ai/code/session_' + i, 'opening': 'x'}, history=[])
     d.update(kw); return d
 def board(*cards): return {'cards': list(cards), 'lanes': [], 'sessions': [], 'routines': copy.deepcopy(RTA)}
+def fixed(*cards):   # the real board's themes, columns and lanes with only the cards given, so a check does not depend on today's cards
+    d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); d['cards'] = list(cards); return d
 fires = []
 def fire2(r, cid): fires.append(cid); return 'https://claude.ai/code/session_RESCUE_' + cid
 reruns = []
@@ -432,9 +434,9 @@ b = board(qc('c-b1', backlog={'at': '2026-11-20', 'from': 'prog'}), qc('c-b2'), 
 A(b)
 check('R4: backlog, open blocker and a fresh Tom note are never fired', fires == ['c-b4'], fires)
 
-# R5: today's board (data/board.json as it stood at 898f261 plus c-attn1): the three cards fire once each, nothing else
-live = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8'))
-live['cards'] = [k for k in live['cards'] if k['id'] != 'c-attn1']
+# R5: a board with three stalled cards and the cards that must never fire: the three fire once each, nothing else (built here, not read from today's board)
+live = board(qc('c-reports-2'), qc('c-gatezero'), qc('c-adminicons1'),
+             qc('c-r5-backlog', backlog={'at': '2026-11-20', 'from': 'prog'}), dict(qc('c-r5-done'), col='done', quiet=False))
 fires.clear()
 bs.sync(live, [], None, None, None, datetime.datetime.fromisoformat('2026-11-20T15:10:00+00:00'), fire2, None, rerun2, set())
 check('R5: replaying today fires c-reports-2, c-gatezero and c-adminicons1 once each, nothing else', sorted(fires) == ['c-adminicons1', 'c-gatezero', 'c-reports-2'], fires)
@@ -453,7 +455,7 @@ check('R6: and nothing is moved or fired', card(b, 'c-b')['col'] == 'wait' and c
 # the board_check accepts the new ask
 def addunstick(d):
     d['cards'].append(dict(id='t-stuck-x', lane='tom', col='up', ask='unstick', unstick={'card': 'c-ch2build', 'kind': 'stuck'}, theme='Tools', title='Stuck twice: X', next='Card c-ch2build stalled. Tap Start again.', blocks=['c-ch2build'], changed='2026-11-20', created='2026-11-20', chat={'url': '', 'opening': 'board'}, history=[]))
-d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); addunstick(d)
+d = fixed(qc('c-ch2build')); addunstick(d)
 open('/tmp/board_unstick.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_unstick.json'], capture_output=True, text=True)
 check('board_check accepts an unstick card', r.returncode == 0, r.stdout[-300:])
@@ -549,7 +551,7 @@ check('R14 morning: written once per night', len(b['cards']) == n0 and sum(1 for
 b = nb(nc('c-z')); run14(b, at(6, '2026-11-23'))
 b['cards'][-1]['col'] = 'done'; b['night']['reported'] = ''; b['night']['log'] = {}; run14(b, at(7, '2026-11-24'))
 check('R14 morning: a night when nothing ran leaves the card Done', card(b, 't-lastnight')['col'] == 'done')
-d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); d['cards'].append(card(b, 't-lastnight')); d['cards'][-1]['blocks'] = []
+d = fixed(); d['cards'].append(card(b, 't-lastnight')); d['cards'][-1]['blocks'] = []
 open('/tmp/board_night.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_night.json'], capture_output=True, text=True)
 check('board_check accepts the card Last night', r.returncode == 0, r.stdout[-300:])

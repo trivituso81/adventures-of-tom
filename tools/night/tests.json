@@ -1346,6 +1346,18 @@
    "group": "g2",
    "minutes": 1,
    "outdir": true
+  },
+  {
+   "id": "hollow_spot_test",
+   "cmd": "python3 -I tools/hollow_spot_test.py",
+   "group": "g6",
+   "minutes": 1
+  },
+  {
+   "id": "sparse_files_test",
+   "cmd": "python3 -I tools/voice-library/sparse_files_test.py",
+   "group": "g2",
+   "minutes": 1
   }
  ]
 }
