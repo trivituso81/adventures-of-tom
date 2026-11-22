@@ -1,4 +1,22 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "tts",
+   "line": "d|tom|I do have news. But you go first. I can wait.",
+   "voice_id": "cjVigY5qzO86Huf0OWal",
+   "fallback_ids": [],
+   "text": "[blurting, excited] I [emphasized] DO have news. [very strained] But you go first. [pause] [tight, quick] I can wait.",
+   "model": "eleven_v4",
+   "stability": 0.5,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[blurting, excited] I [emphasized] DO have news. [very strained] But you go first. [pause] [tight, quick] I can wait.",
+   "at": 1795311057865,
+   "rid": "r1795311057865-l30"
+  }
+ ],
  "cancel": []
 }
