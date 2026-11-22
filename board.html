@@ -765,17 +765,42 @@ function wanStoppedOpen(c){
 }
 function wanEst(names){return names.reduce((a,n)=>{const j=WJOBS[n],i=j.input||{};return a+(j.est_per_s?(j.est_per_s[i.resolution]||0)*(+i.duration||0):(+j.est||0));},0);}
 function wanCap(c){const b=(WJOBS&&WJOBS._bulk)||{};return Math.min(+((c.wan||{}).cap)||+b.cap||20,+b.cap||20);}
+// wanfeedback1 (Tom 2026-11-21 22:12: "why I repeatedly have to click regenerate in the board with zero feedback on what happened after the last generation").
+// One plain sentence about the last run, shown on the card itself (not only when it is opened), and a tap GitHub dropped is named as such.
+function wanPlain(why){ const w=String(why||'');
+  if(/Exhausted balance|User is locked/i.test(w)) return 'fal.ai (the video service) is out of money. Add credit at fal.ai/dashboard/billing, then tap Generate again.';
+  if(/refused the key|401|403/.test(w)) return 'fal.ai refused the key. The repo secret FAL_KEY needs checking.';
+  if(/cap would be passed/.test(w)) return 'it would go over the spending limit, so it waits for the next tap.';
+  if(/a day for videos is spent/.test(w)) return 'the $15 a day for videos is used up; it goes again tomorrow.';
+  return w.slice(0,200); }
+function wanDropped(c){ const g=c.wgen||{},run=g.run||{};
+  return !!(g.want&&g.at&&(Date.now()-Date.parse(g.at))>15*60e3&&!(run.at&&Date.parse(run.at)>=Date.parse(g.at))); }
+function wanSummary(c){ const g=c.wgen||{},run=g.run||{};
+  if(wanDropped(c)) return 'Your tap at '+new Date(g.at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+' never started: GitHub dropped the run. Tap Generate again.';
+  if(!run.state||run.state==='running') return '';
+  const when=run.at?' ('+new Date(run.at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+')':'',parts=[];
+  if(run.state==='failed') return 'Last run'+when+' failed: '+wanPlain(run.why||run.error||'the job stopped before it finished');
+  const m=(run.merged||[]).length; if(m) parts.push(m+' passed and '+(m===1?'is':'are')+' in the game');
+  (run.errors||[]).forEach(x=>parts.push(x.what+': '+wanPlain(x.why)));
+  (run.stopped||[]).forEach(x=>parts.push(x.what+' was stopped by the checks ('+String(x.why||'').replace(/^failed( twice)?: /,'')+'); '+(/^t-wangaveup/.test(x.card||'')?'it used its tries, see its card':'a Claude session fixes it by itself')));
+  (run.gaveup||[]).forEach(w=>parts.push(w+' used its 4 tries; see its card'));
+  (run.capped||[]).forEach(w=>parts.push(w+' waits: it would go over the spending limit'));
+  (run.unchecked||[]).forEach(w=>parts.push(w+' was made but not checked yet; the next tap checks it for free'));
+  (run.already||[]).forEach(w=>parts.push(w+' was already made at this version, so nothing was sent'));
+  return 'Last run'+when+': '+(parts.length?parts.map(s=>s.replace(/\.+$/,'')).join('. ')+'.':'nothing to make.');
+}
 function wanHtml(c,compact){
   if(!hasWan(c))return '';
   if(!WJOBS)return '<div class="pics"><h4>Videos on this card</h4><div class="gm">Loading the job list...</div></div>';
   const g=c.wgen||{},run=g.run||{},left=wanLeft(c),n=left.length,est=wanEst(left),cap=wanCap(c);
   const stale=run.state==='running'&&run.at&&(Date.now()-Date.parse(run.at))>3*3600e3;
-  const busy=g.want||(run.state==='running'&&!stale);
+  const busy=(g.want&&!wanDropped(c))||(run.state==='running'&&!stale);
   const held=wanStoppedOpen(c),unk=wanUnknown(c);
   const head=unk.length&&!n?'The job list has not caught up with this card yet ('+unk.map(esc).join(', ')+'). It is read again every minute.':n?n+' video'+(n===1?'':'s')+' left to make: '+left.map(esc).join(', ')
     :held.length?'No video passed the checks yet. Stopped by the checks and being fixed by Claude: '+held.map(x=>esc(x.what)+(x.card?' (card '+esc(x.card)+')':'')).join(', ')+'.'
     :'Every video of this card is made.';
   let h='<div class="pics"><h4>Videos on this card</h4><div class="gm" style="margin:0">'+head+'</div>';
+  const sum=wanSummary(c); if(sum) h+='<div class="gm wansum" style="margin:6px 0;color:#ffd34d"><b>'+esc(sum)+'</b></div>';
   let why='';
   if(busy)why=g.want?'Asked. Waiting for the job to start...':'Making '+(run.n||n)+' video'+((run.n||n)===1?'':'s')+'...';
   else if(c.col==='wait'){const by2=blockedBy(c);why='Waiting on: '+(by2.length?by2.map(x=>x.title).join('; '):laneName(c.waiting_on||''));}

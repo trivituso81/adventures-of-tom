@@ -16,6 +16,7 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B9  wanauto1: a miss that is not only the edge is re-rolled once with the same settings (same start picture) before it stops
   B10 wanauto1: budget() counts one animation's videos since its auto_from (4 tries, $3.20) and every video of the day ($15)
   B11 wanauto1: an animation out of tries gets one Tom decide card instead of a Claude card
+  B14 wanfeedback1: a run that crashes before writing its result still tells the card why
   B13 wanpurpose1: the motion check asks one question about the move's main action, not one strict question per sentence
   B12 wanstuck1: Tom's "Give it 4 more tries" answer resets that job's count; the card names the run's card
 Prints ALL PASS."""
@@ -308,6 +309,14 @@ import wanqa
 qs = wanqa.questions('WHAT THIS IS\nx\n\nMOTION: TEST\nShe sweeps the mop once. She puts it away and stands still.')
 ok([q[0] for q in qs] == ['f_same', 'p1'] and 'Small differences do NOT matter' in qs[1][1] and 'sweeps the mop once' in qs[1][1] and 'puts it away' in qs[1][1],
    'B13 wanpurpose1: one motion question about the whole move (purpose, not word for word), not one strict question per sentence', [q[0] for q in qs])
+
+import wan_runfail
+bd2 = {'cards': [{'id': 'c1', 'wgen': {'want': True}}, {'id': 'c2', 'wgen': {'want': False, 'run': {'state': 'done', 'run': 'U'}}}]}
+lg = os.path.join(tempfile.mkdtemp(), 'run.log'); open(lg, 'w').write('ok line\n[deedee] STOP: fal refused the key (403): {"detail":"User is locked. Reason: Exhausted balance."}\nalready\n')
+why = wan_runfail.last_error(lg)
+ok(wan_runfail.mark(bd2, 'c1', 'U', why, '2026-11-22T06:00:00Z') and bd2['cards'][0]['wgen']['run']['state'] == 'failed' and 'Exhausted balance' in bd2['cards'][0]['wgen']['run']['why'] and bd2['cards'][0]['wgen']['want'] is False,
+   'B14 wanfeedback1: a run that ended without a result writes failed and the error line on its card', bd2['cards'][0])
+ok(not wan_runfail.mark(bd2, 'c2', 'U', why, '2026-11-22T06:00:00Z'), 'B14 a card whose run wrote its result for this run is left alone')
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'

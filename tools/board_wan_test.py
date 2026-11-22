@@ -25,6 +25,8 @@ def tc(i, title, **kw):
 claude_open = next(c['id'] for c in b['cards'] if c['lane'] == 'claude' and c['col'] == 'up')
 b['cards'] += [tc('t-w-two', 'Two videos card', wan={'jobs': TWO}),
                tc('t-w-done', 'Videos finished card', wan={'jobs': THREE}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 3, 'merged': ['tom-cast'], 'retried': ['tom-cast'], 'passed_not_baked': [], 'stopped': [{'what': 'rose-cast', 'why': 'failed twice: edge', 'card': 'c-wanstop-rose-cast-r%d' % J['rose-cast']['rev']}], 'capped': [], 'unchecked': [], 'errors': [], 'already': [], 'bake_failed': {}, 'spent': 1.23, 'build': 'wanbulk-t-w-done-7'}}),
+               tc('t-w-broke', 'Broke card', wan={'jobs': ['rose-cast']}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 1, 'merged': [], 'stopped': [], 'errors': [{'what': 'rose-cast', 'why': 'fal refused the key (403): {"detail":"User is locked. Reason: Exhausted balance."}'}], 'spent': 0}}),
+               tc('t-w-dropped', 'Dropped card', wan={'jobs': ['rose-cast']}, wgen={'want': True, 'at': '2026-11-21T01:00:00Z', 'n': 1, 'est': .5}),
                tc('t-w-none', 'Nothing left card', wan={'jobs': ['tom-cast']}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 1, 'merged': ['tom-cast'], 'stopped': [], 'spent': .5}}),
                # fix-wanstop-gen: Tom's t-wanstop-gen. Both jobs stopped at rev R; once a session raises R the page lists them again (from the stop card's id, or from run.revs)
                tc('t-w-held', 'Stopped videos card', wan={'jobs': FIX}, wgen={'want': False, 'run': {'state': 'done', 'at': '2026-11-21T01:00:00Z', 'n': 2, 'merged': [], 'stopped': [{'what': w, 'why': 'failed: p1', 'card': 'c-wanstop-%s-r%d' % (w, J[w]['rev'])} for w in FIX], 'spent': 1.58}}),
@@ -93,6 +95,11 @@ try:
             ok(pg.inner_text('#sheet button.gen').startswith('Generate all 1 video'), tag + ': run.revs below the job rev lists the job again: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             pg.evaluate("async()=>{ WJOBS=Object.assign({},WJOBS); delete WJOBS['rose-cast']; await loadWjobs(); }")
             ok(pg.evaluate("()=>!!WJOBS['rose-cast']"), tag + ': wanstuck1: a job list loaded before a card\'s job was added is loaded again')
+            sums = pg.evaluate("()=>({broke:wanSummary(B.cards.find(c=>c.id==='t-w-broke')),dropped:wanSummary(B.cards.find(c=>c.id==='t-w-dropped'))})")
+            ok('out of money' in sums['broke'] and 'fal.ai/dashboard/billing' in sums['broke'], tag + ': wanfeedback1: an out-of-money run says so in plain words: ' + sums['broke'])
+            ok('never started' in sums['dropped'] and 'Tap Generate again' in sums['dropped'], tag + ': wanfeedback1: a dropped tap says so: ' + sums['dropped'])
+            pg.evaluate("openSheet('t-w-dropped')"); pg.wait_for_selector('#sheet .pics')
+            ok(not pg.is_disabled('#sheet button.gen'), tag + ': wanfeedback1: after a dropped tap the Generate button works again'); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-wait')"); pg.wait_for_selector('#sheet .pics')
             ok(pg.is_disabled('#sheet button.gen') and pg.inner_text('#sheet button.gen').startswith('Waiting on'), tag + ': waiting card: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             sw = pg.evaluate('document.documentElement.scrollWidth')
