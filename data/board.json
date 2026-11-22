@@ -29764,13 +29764,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGRuFAHDmbikz263XC",
     "opening": "not started"
    },
    "nightly": true,
@@ -29849,6 +29849,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T04:18:08.224Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29864,7 +29868,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-22T04:18:26+00:00"
   },
   {
    "id": "c-bigone25",
@@ -31671,7 +31675,7 @@
    "changed": "2026-11-22",
    "build": "wanmop1",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
     "opening": "added by wanmop1"
    },
    "history": [
@@ -33262,7 +33266,7 @@
    "id": "c-menu2",
    "tag": "menu2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: Vibes and Gear",
@@ -33274,7 +33278,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukETpXPHu7mASVc7nnD",
     "opening": "not started"
    },
    "prompt": {
@@ -33299,9 +33303,13 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T04:18:20.778Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-22T04:18:26+00:00"
   },
   {
    "id": "c-menu3",
@@ -33787,7 +33795,7 @@
   {
    "id": "c-wanstop-deedee-wetfloor-r8",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r8",
    "title": "Fix the stopped video deedee-wetfloor",
@@ -33797,9 +33805,9 @@
    "auto": true,
    "wan_card": "t-wanmop1-gen",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
+    "url": "https://claude.ai/code/session_01RXeukDyvzBaR3E9EA4fC8o",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -33818,6 +33826,14 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r8: Deedee's Wet-Floor shrinks the start picture to 55 percent so the mop clears the left edge"
     }
    ],
    "prompt": {
@@ -33829,7 +33845,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r8 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 8) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent; edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73). This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r8-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r8.mp4, deedee-wetfloor-a2-r8.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-wanmop1-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r8` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-wanmop1-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T04:14:01+00:00"
+   "started_at": "2026-11-22T04:14:01+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "b-guideusefix2",
@@ -33912,7 +33929,20 @@
    "url": "https://claude.ai/code/session_01RXeukDyH3FwJ7rMGUsDF6q",
    "title": "Fix the stopped video deedee-wetfloor",
    "first": "2026-11-22T04:16:25Z",
-   "last": "2026-11-22T04:16:25Z",
+   "last": "2026-11-22T04:18:00Z",
+   "tags": [
+    "wanstop-deedee-wetfloor-r8"
+   ],
+   "cards": [
+    "c-wanstop-deedee-wetfloor-r8",
+    "t-wanmop1-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDyvzBaR3E9EA4fC8o",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "first": "2026-11-22T04:17:28Z",
+   "last": "2026-11-22T04:17:28Z",
    "tags": [],
    "cards": [
     "c-wanstop-deedee-wetfloor-r8"
@@ -38950,8 +38980,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "78e75732eae6e3a6d9c67cb0fbfd498b4c1959cb",
- "synced_at": "2026-11-22T04:17:17+00:00",
+ "synced": "747e4a6e1f5e28da736f5305d972002042fae6d3",
+ "synced_at": "2026-11-22T04:18:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
