@@ -32428,7 +32428,7 @@
   {
    "id": "c-guideflow-plan",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guideflow-plan",
    "title": "Plan a Battle Guide animation flow that works",
@@ -32457,6 +32457,10 @@
      "d": "2026-11-22",
      "t": "Planned (build guideflow-plan). Read the code, 134 video runs and the status files. New facts: the Guide has its own $10 a day limit that failed 14 requests today; 28 of 38 Guide video runs were cancelled; one video took 6 minutes of which fal needed 2. Plan: one status file on its own branch, a worker with a picture line and a video line, one batched job for Use this one. Retired t-startpics-try.",
      "at": "2026-11-22T22:56:03.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow-plan: a plan and nine build cards for a Battle Guide animation flow that always shows the true status"
     }
    ],
    "prompt": {
@@ -32467,7 +32471,8 @@
     "model": "Claude Fable 5.2 (row E, condition 3: Tom started this session on Fable himself; it is also an architecture decision other work is built on)",
     "effort": "high (a design worked out with nothing written to follow)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-plan in data/board.json. Investigate the Battle Guide animation flow (battle-guide.html, the startpic-gen, wan-gen and guide-use workflows and their tools), write the plan claude/guide-flow-plan.md and put the build cards on the board. Push a plan and cards only, never code, and start no paid run. Your first push is the commit board: start c-guideflow-plan. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "t-b3s22ch12",
@@ -33043,6 +33048,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+   "title": "Plan a Battle Guide animation flow that works",
+   "first": "2026-11-22T14:40:47-08:00",
+   "last": "2026-11-22T14:58:20-08:00",
+   "tags": [
+    "guideflow-plan"
+   ],
+   "cards": [
+    "c-guideflow-plan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFaCXixwyNJTmYPr4J",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
    "first": "2026-11-22T14:37:47Z",
@@ -33064,16 +33081,6 @@
    ],
    "cards": [
     "c-sal-listen-swap"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
-   "title": "Plan a Battle Guide animation flow that works",
-   "first": "2026-11-22T14:40:47-08:00",
-   "last": "2026-11-22T14:40:47-08:00",
-   "tags": [],
-   "cards": [
-    "c-guideflow-plan"
    ]
   },
   {
@@ -38800,8 +38807,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "099a48d4f1288513a6d205123d9259527106a0bd",
- "synced_at": "2026-11-22T22:48:32+00:00",
+ "synced": "61534d86e47d383b985553d201e234fe1980f95d",
+ "synced_at": "2026-11-22T22:59:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
