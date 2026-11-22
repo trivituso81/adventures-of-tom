@@ -32800,7 +32800,7 @@
    "id": "c-battleux1",
    "tag": "battleux1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Build the new battle screen",
    "created": "2026-11-21",
@@ -32839,16 +32839,20 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as battleux1: one-level deck (first tap shows, second uses), aim on the scene, one-line tray and battle log, DETAILS switch, turn bar tools, keys and gamepad; old cross, SKILLS list, skill card, target list, preview box and i icon removed. Words are in data/b3-ux-words.js, `short` fields are for c-battleux2. Rules unchanged (b3-sim 3329 checks). b3_test stages 2 to 13c, the story test and the WIN NOW test pass; new tools/b3_layout_test.py passes at all seven sizes and found three real bugs that were fixed. Not done: chapter 1 end to end test (fails at step 6 on main too). Built notes: claude/battleux-plan.md section 6."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux1: the new Battle 3 screen: one list of moves, tap once to read and again to use, the strip under the scene says what will happen"
     }
    ],
-   "after": "nothing for Tom: c-battleux2"
+   "after": "nothing for Tom: c-battleux2",
+   "done": "2026-11-21"
   },
   {
    "id": "c-battleux2",
    "tag": "battleux2",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle System",
    "title": "Write the one-line move descriptions",
    "created": "2026-11-21",
@@ -32874,6 +32878,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-battleux: plan section 5, card battleux2. Waits on c-battleux1, which builds the tables these words go into."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Build the new battle screen is done."
     }
    ]
   },
@@ -36031,6 +36039,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
+   "title": "Build the new battle screen",
+   "first": "2026-11-21T18:03:55-08:00",
+   "last": "2026-11-21T22:40:09-08:00",
+   "tags": [
+    "battleux1"
+   ],
+   "cards": [
+    "c-battleux1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEuhm2Kx7Jk8KHJpyD",
    "title": "Fix: Try auto-approve on Grace's and Rose's party",
    "first": "2026-11-21T22:35:53-08:00",
@@ -36782,16 +36802,6 @@
     "c-fix-wanstop-gen",
     "c-wanstop-rose-giddyup-r7",
     "c-wanstop-deedee-wetfloor-r6"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
-   "title": "Build the new battle screen",
-   "first": "2026-11-21T18:03:55-08:00",
-   "last": "2026-11-21T18:03:55-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleux1"
    ]
   },
   {
@@ -40871,8 +40881,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "df20363404e93c0823c8e6e5a02f67bfa0042240",
- "synced_at": "2026-11-22T06:36:36+00:00",
+ "synced": "8b2b58ba32b616331b92b70f912e506449f9ff3e",
+ "synced_at": "2026-11-22T06:40:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
