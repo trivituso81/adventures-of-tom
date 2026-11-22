@@ -29764,7 +29764,7 @@
   {
    "id": "c-guidestuck1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guidestuck1",
    "title": "Battle Guide videos stuck at CHECKING all night",
@@ -29784,6 +29784,10 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as guidestuck1: each take is checked in its own process with a 7 minute limit, results and videos are saved to the wangen branch before any check, and the Guide shows STALLED after 90 minutes. The 10 lost requests (Tom, Deedee: 9 first takes and Controller Toss take 2) were put back in data/wan-requests.json so the videos are made again, about $6."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guidestuck1: Battle Guide videos no longer stall at CHECKING, and a lost run no longer loses the paid videos"
     }
    ],
    "after": "nothing for Tom: end",
@@ -29795,7 +29799,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "medium (cause found in run 45002823299, steps known)",
     "text": "Read CLAUDE.md, card c-guidestuck1 in data/board.json and .github/workflows/wan-gen.yml. Battle Guide videos requested through data/wan-requests.json stalled at CHECKING because the wan-gen run lost its runner during the Make the takes step (run 45002823299). Make the takes step bounded and saved piece by piece, and push the results branch before the takes. Write the CHANGES heading ## guidestuck1 and push. Your first push is the commit board: start c-guidestuck1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
@@ -29887,8 +29892,11 @@
    "url": "https://claude.ai/code/session_01RXeukCuaGvB32C87NhKN8e",
    "title": "Battle Guide videos stuck at CHECKING all night",
    "first": "2026-11-22T06:58:22-08:00",
-   "last": "2026-11-22T06:58:22-08:00",
-   "tags": [],
+   "last": "2026-11-22T07:13:03-08:00",
+   "tags": [
+    "guidestuck1",
+    "wan"
+   ],
    "cards": [
     "c-guidestuck1"
    ]
@@ -35331,8 +35339,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "41170dc3d88a372c933a9ab42bd8311d43487397",
- "synced_at": "2026-11-22T15:09:27+00:00",
+ "synced": "200e4858288a86ae45e0f58b65b2037fd7d10e4d",
+ "synced_at": "2026-11-22T15:13:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
