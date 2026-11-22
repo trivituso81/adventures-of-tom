@@ -1,3 +1,9 @@
+## nightclean-1122 (2026-11-22): night cleanup, bucket C: CLAUDE.md is 579 bytes shorter
+
+Bucket C (working agreement). Removed from CLAUDE.md the one-off story bullet under "Fix a miss with the smallest change"; the rule and Tom's quote stay. `rules_check.py` passes. claude/next.md unchanged. What left, word for word:
+
+> - What happened, so it is not repeated: the first Boop prompt was about 330 words and said one reach three ways (finger went up; then two pokes). Tom asked for "concise clean and only describe the exact motion". Claude swung to 49 words, which dropped the facing and the planted feet (she pointed at the viewer and moved off her spot), then swung again to a different method (pictures pinned into the video, another model, 2 seconds), which also missed. A 158 word prompt written by Gemini, the same three-part shape as the original with the repeats cut, worked on the next try.
+
 ## fix-artgen3try (2026-11-22): the auto-approve test card now holds real pictures to try it on: Grace's and Rose's party banners
 
 Card c-fix-artgen3try, from Tom on t-artgen3try: "i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh". Fact: the card was handed over with no pictures on it, and the board shows the Generate buttons only on a card that holds pictures, so there was nothing to tap. Two more gaps on the path he would click: the card's Not this one opened the Art Library list (`art.html?open=`), where NOT THIS ONE is not offered, and the review viewer showed no picture for a QA-approved entry (the picture is in art/raw, not a result on the phone).

@@ -154,7 +154,6 @@ Tom (11-18 15:12), after Claude rewrote one video prompt three times and each re
 - Feedback about one fault is not a new rule for everything. "Too long and repetitive" means cut the repeats, not cut to a fifth of the length. Do not turn a note into an absolute ("never mention X") unless Tom states it as one.
 - Before pushing a fix, name what was kept and what was changed. If nearly nothing was kept, that is a swing: stop and redo it as an edit.
 - Every try costs Tom money (video and picture generations, Claude credits). Do not hand him a try whose only basis is a guess; say what the evidence is.
-- What happened, so it is not repeated: the first Boop prompt was about 330 words and said one reach three ways (finger went up; then two pokes). Tom asked for "concise clean and only describe the exact motion". Claude swung to 49 words, which dropped the facing and the planted feet (she pointed at the viewer and moved off her spot), then swung again to a different method (pictures pinned into the video, another model, 2 seconds), which also missed. A 158 word prompt written by Gemini, the same three-part shape as the original with the repeats cut, worked on the next try.
 
 ## Image and video prompts: clean, each thing once (standing rule, Tom 2026-11-18)
 
