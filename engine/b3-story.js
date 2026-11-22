@@ -88,7 +88,7 @@ function b3sAward(F) {
   const purse=b2Purse(foes,npc,0);
   npc.tier=(npc.tier||0)+1; npc.maxHp+=d.hpStep||0; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;
-  const members=S.ids.map(id=>{ const r=b2GainFor(memberById(id),gain); if(r.ups) B3S.levelled[id]=true; return r; });
+  const members=S.ids.map(id=>{ const r=b3sGainFor(memberById(id),gain); if(r.ups) B3S.levelled[id]=true; return r; });
   b6Sync();
   // Vibe Points: the Main Vibe earns the formation's number, the Pocket Vibe half; everyone with a loadout earns, on the bench too.
   const book={}; for(const m of ALL_MEMBERS()) { const L=b3MemberLoadout(m); if(L) book[m.id]=L; }
@@ -101,11 +101,19 @@ function b3sAward(F) {
   let drop=null;
   const dr=d.drop;
   if(dr&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); const put=typeof autoGear==='function'?autoGear():[]; drop={id:dr.id,name:(items[dr.id]||{}).name||dr.id,msg:put.length?((dr.msg||'')+' '+put.join(' ')).trim():dr.msg}; if(typeof itemBanner==='function') itemBanner([dr.id],drop.msg); }
-  const stamp=members.some(m=>m.rw&&m.rw.length)&&party.some(m=>b6Stampable(m)||b8PpLeft(m)>0||b8TkLeft(m)>0);
   const many=F.foes.length>1&&F.foes.every(f=>f.id===F.foes[0].id),def=MONSTERS[F.foes[0].id]||{};
   const line=many?'The '+(def.name||F.foes[0].D.name)+'s melt back into the mud. Politely.':(def.die||F.foes[0].D.name+' goes down.');
-  B3S.card={title:'VICTORY',line,xp:gain,purse,calm:0,drop,members,stamp,heart:null,puddle:false,foot:B3_FORECAST.combos+' '+Math.round(F.ruckus||0)+'%'};
+  B3S.card={title:'VICTORY',line,xp:gain,purse,calm:0,drop,members,heart:null,puddle:false,foot:B3_FORECAST.combos+' '+Math.round(F.ruckus||0)+'%'};
   return '+'+(plan.vp||0)+' Vibe Points.';
+}
+// What one family member gets from a win on Battle 3: shared XP and levels only. Vibe Points (b3AwardAll, engine/b3-progress.js) are the one
+// progression, so a level-up pays no Stamp Point, Polish Point or Remix Ticket and the victory card carries no reward cards (stage 21).
+function b3sGainFor(p,gain) {
+  const lvl0=p.level,xp0=p.xp;
+  p.wins=(p.wins||0)+1;
+  const ups=b6GainXp(p,gain);
+  if(p===hero) { const L=ups.length?ups[ups.length-1]:0; if(L>=5) p.title='Local Busybody'; else if(L>=3) p.title='Regular'; }
+  return {id:p.id,name:p.name,lvl0,xp0,lvl1:p.level,xp1:p.xp,ups:ups.length};
 }
 function b3sShowCard(result,go) { const R=B3S.card; if(!R||typeof b7ShowCard!=='function') { go(); return; } b7ShowCard(R,go); }
 

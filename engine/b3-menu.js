@@ -34,7 +34,8 @@ saveSnapshot=function() {
   const s=LE_saveSnapshot_b3();
   for(const sm of (s.members||[])) {
     const m=b3Member(sm.id),L=b3MemberLoadout(m)||(m&&m.vibes)||null;   // someone with no kit yet keeps whatever their save held
-    if(L) { sm.vibes={main:L.main,pocket:L.pocket,quirks:(L.quirks||[]).slice(),vp:Object.assign({},L.vp)}; if(L.pool) sm.vibes.pool={total:L.pool.total,set:!!L.pool.set}; sm.row=L.row||null; }
+    // pocket2 and basic are Casual Mode's two added fields (stage 21); no field is removed.
+    if(L) { sm.vibes={main:L.main,pocket:L.pocket,quirks:(L.quirks||[]).slice(),vp:Object.assign({},L.vp)}; if(L.pocket2) sm.vibes.pocket2=L.pocket2; if(L.basic) sm.vibes.basic=L.basic; if(L.pool) sm.vibes.pool={total:L.pool.total,set:!!L.pool.set}; sm.row=L.row||null; }
   }
   return s;
 };
@@ -85,7 +86,7 @@ function b3LabAward(vp) {
 // What the pause menu's screen changes is copied here: the Vibes and the row, not the Vibe Points (the Lab has its own Ranks).
 function b3LabFollow(id,L) {
   const B=b3LabBook(); if(!B[id]) return;
-  B[id]=b3FixLoadout(id,Object.assign({},B[id],{main:L.main,pocket:L.pocket,row:L.row}));
+  B[id]=b3FixLoadout(id,Object.assign({},B[id],{main:L.main,pocket:L.pocket,pocket2:L.pocket2,basic:L.basic,row:L.row}));
   b3LabSave();
 }
 

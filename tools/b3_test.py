@@ -6,6 +6,7 @@
 #                     python3 tools/b3_test.py s5         only the stage 5a section (Rank 5 on The Big One: the four Capstones, the free Skill, Traits and Quirks), about 3 min
 #                     python3 tools/b3_test.py s8         only the stage 8 section (video clips: idle loops, clip moves on the impact frame, The Big One's acts, body states, the fallback), about 4 min
 #                     python3 tools/b3_test.py s16        only the stage 16 section (Tombo skins: the skin's name on the tray and the screen at a Full Family Ruckus, the recorded lines, portrait and landscape), about 1 min
+#                     python3 tools/b3_test.py s21        only the stage 21 section (Casual Mode: the Freelancer chip locked at Rank 4 and open at Rank 5, its Basic and two Secondary Vibes, a Lab fight in it, portrait and landscape), about 2 min
 #                     python3 tools/b3_test.py s7         only the stage 7 section (Rose Mode: pictures, preview, the recommended move, keys and pad), about 2 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
@@ -1088,6 +1089,68 @@ def stage9c(pg,lab,landscape=False):
     pg.click('#m2 [data-k="poollock"]'); pg.wait_for_timeout(300)
     need(pg.evaluate("()=>!document.querySelector('#m2 .m2-pool')"),'locking the split should hide the pool')
     pg.evaluate("()=>{ m2CloseNew(); }"); pg.wait_for_timeout(300)
+def stage21(pg,lab,landscape=False):
+    """Stage 21: Casual Mode ("Freelancer") on the Vibes page and in a Lab fight, portrait and landscape. Locked at Rank 4, open at Rank 5."""
+    S='stage 21'+(' landscape' if landscape else '')+': '; caps=[]
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=2; b3LabReset(4); const el=document.getElementById('splash'); el.hidden=false; el.classList.remove('out'); splash.active=true; splashSetMode('lab3'); m2OpenLab(); M2.who='tom'; M2.vibe=null; m2Render(); }"); pg.wait_for_timeout(500)
+    st=pg.evaluate("()=>({lock:!!document.querySelector('#m2 .m2-vc.lock'),free:!!document.querySelector('#m2 .m2-vc.free'),txt:(document.querySelector('#m2 .m2-vc.lock')||{}).innerText||''})")
+    need(st['lock'] and not st['free'] and 'Freelancer' in st['txt'],f'at Rank 4 Freelancer should show locked: {st}')
+    caps.append(R(shot(pg)))
+    pg.click('#m2 [data-k="rank-5"]'); pg.wait_for_timeout(400)
+    st=pg.evaluate("()=>({lock:!!document.querySelector('#m2 .m2-vc.lock'),free:!!document.querySelector('#m2 .m2-vc.free'),rank:b3LabRank()})")
+    need(st['free'] and not st['lock'] and st['rank']==5,f'at Rank 5 the Freelancer chip should be open: {st}')
+    pg.click('#m2 [data-k="vc-freelancer"]'); pg.wait_for_timeout(400); caps.append(R(shot(pg)))
+    d=pg.evaluate("()=>({txt:document.querySelector('#m2 .m2-kit')?document.querySelector('#m2 .m2-vibes, #m2').innerText:'',kr:document.querySelectorAll('#m2 .m2-kit .m2-kr').length,main:!!document.querySelector('#m2 [data-k=make-main]'),pickers:document.querySelectorAll('#m2 .m2-frs').length,sub:(document.querySelector('#m2 .m2-sub')||{}).innerText})")
+    need(d['kr']==3 and d['main'] and d['pickers']==0 and d['sub']=='Casual Mode',f'Freelancer, not yet Primary, should list the three Traits and offer Make it Primary only: {d}')
+    pg.click('#m2 [data-k="make-main"]'); pg.wait_for_timeout(500)
+    b=pg.evaluate("()=>{ const L=b3LabBook().tom; return {main:L.main,p:L.pocket,p2:L.pocket2,basic:L.basic,pickers:document.querySelectorAll('#m2 .m2-frs').length,names:[...document.querySelectorAll('#m2 .m2-vc')].map(e=>e.innerText.replace(/\\s+/g,' ')).join(' | ')}; }")
+    need(b['main']=='freelancer' and b['p']=='tom_flier' and b['p2']=='tom_gamer' and b['pickers']==3,f'Make it Primary should put Tom in Casual Mode with his old Vibes as Secondary: {b}')
+    caps.append(R(shot(pg)))
+    other=pg.evaluate("()=>b3Basics('tom').find(x=>x!==b3LabBook().tom.basic)")
+    pg.click(f'#m2 [data-k="fb-{other}"]'); pg.wait_for_timeout(300)
+    pg.click('#m2 [data-k="fp1-tom_baker"]'); pg.wait_for_timeout(300)
+    b=pg.evaluate("()=>{ const L=b3LabBook().tom; return {basic:L.basic,p:L.pocket,p2:L.pocket2,on:[...document.querySelectorAll('#m2 .m2-frs .m2-seg.on')].length}; }")
+    need(b['basic']==other and b['p2']=='tom_baker' and b['p']=='tom_flier' and b['on']==3,f'the Basic and second Secondary Vibe pickers should save: {b}')
+    caps.append(R(shot(pg)))
+    # the header stats carry no Lean bonus in Casual Mode (the same numbers as a Vibe with no Lean)
+    hp=pg.evaluate("()=>{ const m=m2Who(),L=m2Loadout(m); const a=m2Stats(m).hp; L.main='tom_flier'; const b=m2Stats(m).hp; L.main='freelancer'; return {a,b}; }")
+    need(hp['a']<=hp['b'],f'Casual Mode has no Lean, so its Health is not above a Lean Vibe: {hp}')
+    pg.evaluate("()=>{ m2CloseNew(); }"); pg.wait_for_timeout(300)
+    # a Lab fight in Casual Mode
+    pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }")
+    start(pg,lab.index('new1'),{'seed':SEED},keep=True); wait_cmd(pg); pg.wait_for_timeout(300)
+    for _ in range(12):
+        if who(pg)=='tom': break
+        pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg); pg.wait_for_timeout(200)
+    need(who(pg)=='tom',"never reached Tom's turn")
+    f=pg.evaluate("()=>{ const t=B3.F.party.find(p=>p.id==='tom'); return {vibe:t.vibe,lean:t.lean,traits:t.traits.length,basic:B3.deck.find(e=>e.grp==='basic').id,want:t.basic,groups:[...new Set(B3.deck.filter(e=>!e.ruckus&&e.grp!=='basic'&&e.grp!=='any').map(e=>e.grp))]}; }")
+    need(f['vibe']=='freelancer' and f['lean'] is None and f['traits']==3 and f['basic']==f['want']==other,f'the fight should use Casual Mode and the picked Basic: {f}')
+    need(f['groups']==['pocket'],f'every Skill of a Freelancer comes through a Pocket Vibe: {f}')
+    caps.append(R(shot(pg)))
+    pg.click('#b3-party .bx-pc[data-i="1"]'); pg.wait_for_timeout(300); pg.keyboard.press('KeyI'); pg.wait_for_timeout(300)
+    inf=pg.evaluate("()=>document.getElementById('b3-sheet').textContent")
+    need('Freelancer' in inf and 'No Lean' in inf and 'Priority Boarding' in inf and "Gamer's Intuition" in inf.replace('\u2019',"'"),f'tapping Tom should name Freelancer and all three Traits: {inf[:260]}')
+    caps.append(R(shot(pg)))
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    for _ in range(80):
+        if pg.evaluate("()=>B3.ui")=='done': break
+        pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg,60000); pg.wait_for_timeout(120)
+    won=pg.evaluate("()=>({over:B3.F.over,vp:b3LabBook().tom.vp,main:b3LabBook().tom.main})")
+    need(won['over']=='win' and won['main']=='freelancer' and set(won['vp'].values())=={800},f'the win should leave Casual Mode on and give it no Vibe Points: {won}')
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    # back out: tapping a real Vibe twice makes it Primary again
+    pg.evaluate("()=>{ const el=document.getElementById('splash'); el.hidden=false; el.classList.remove('out'); splash.active=true; splashSetMode('lab3'); m2OpenLab(); M2.who='tom'; m2Render(); }"); pg.wait_for_timeout(400)
+    pg.click('#m2 [data-k="vc-tom_gamer"]'); pg.wait_for_timeout(250); pg.click('#m2 [data-k="vc-tom_gamer"]'); pg.wait_for_timeout(400)
+    b=pg.evaluate("()=>{ const L=b3LabBook().tom; return {main:L.main,p:L.pocket,p2:L.pocket2,basic:L.basic}; }")
+    need(b['main']=='tom_gamer' and b['p2'] is None and b['basic'] is None and b['p'] not in (None,'tom_gamer'),f'tapping Gamer Geek twice should leave Casual Mode cleanly: {b}')
+    caps.append(R(shot(pg)))
+    pg.evaluate("()=>{ m2CloseNew(); b3LabReset(); }"); pg.wait_for_timeout(300)
+    sheet(caps,3,os.path.join(OUT,'b3-s21'+('-land' if landscape else '')+'.png'),scale=.5)
+
 def stage9b(pg,lab,landscape=False):
     S='stage 9b'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new7')
     rot=landscape and pg.evaluate("()=>layout.rotated")
@@ -1423,7 +1486,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16','s21')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9b','s9c','s10','s11','s12','s13a','s13b','s13c','s13','s16','s21')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1518,6 +1581,10 @@ with sync_playwright() as pw:
     if 's9b' in sys.argv or not only and len(want)==len(lab):
         print('b3s9b: TNB'); stage9b(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9b(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    if 's21' in sys.argv or not only and len(want)==len(lab):
+        print('b3s21: Casual Mode'); stage21(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage21(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     if 's9c' in sys.argv or not only and len(want)==len(lab):
         print('b3s9c: Nara and Boppy'); stage9c(pg,lab)

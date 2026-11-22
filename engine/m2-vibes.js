@@ -44,7 +44,7 @@ function m2Hint(m) { return wearSlots(m).some(s=>bestFor(m,s)); }
 // Health, Attack, Defense and Speed as a fight works them out (engine/b3-core.js b3PartyUnit): the level line times the member's own
 // factor, the Main Vibe's Lean, then worn gear (flat points added, percent perks multiplied in). `list` is a worn-item list to try.
 function m2Stats(m,list) {
-  const S=b3LevelStats(m.level),C=B3_CAST[m.id],L=m2Loadout(m),lean=(L&&B3_RULES.leans[B3_VIBES[L.main].lean])||{};
+  const S=b3LevelStats(m.level),C=B3_CAST[m.id],L=m2Loadout(m),lean=(L&&b3VibeOf(L.main).lean&&B3_RULES.leans[b3VibeOf(L.main).lean])||{};
   const G=b3GearSum(list||wearSlots(m).map(s=>m.equipment[s]&&items[m.equipment[s]])),o={};
   for(const k of ['hp','atk','def','spd']) {
     let v=S[k]*((C&&C.stat&&C.stat[k])||1)*(k==='hp'?1+(lean.hp||0):1); v=Math.round(v)+G.flat[k];
@@ -94,10 +94,13 @@ function m2Chips(m,L) {
   const ids=B3_CAST[m.id].vibes;
   let h='<div class="m2-chips" role="tablist" aria-label="Vibes">';
   for(const v of ids) {
-    const V=B3_VIBES[v],role=L.main===v?'main':L.pocket===v?'pocket':'none',rk=b3VibeRank(L,v);
+    const V=B3_VIBES[v],role=L.main===v?'main':(L.pocket===v||L.pocket2===v)?'pocket':'none',rk=b3VibeRank(L,v);
     h+='<button type="button" role="tab" class="m2-vc '+role+'" data-m2="vibe" data-a="'+v+'" data-k="vc-'+v+'" aria-selected="'+(v===M2.vibe)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Primary':role==='pocket'?'Secondary':'Not in use')+'</span><b>'+m2Esc(V.name)+'</b>'+m2Stars(rk,b3MaxRank(),13)+'</button>';
   }
-  h+='<div class="m2-vc lock" role="img" aria-label="Freelancer, locked until all Vibes are mastered">'+m2Icon('lock',16)+'<b>Freelancer</b><span>Master all '+Math.max(3,ids.length)+'</span></div></div>';
+  if(b3CasualOpen(m.id,L)) {   // Casual Mode (engine/b3-progress.js): open once every Vibe is mastered
+    const role=L.main===B3_FREELANCER?'main':'none';
+    h+='<button type="button" role="tab" class="m2-vc free '+role+'" data-m2="vibe" data-a="'+B3_FREELANCER+'" data-k="vc-'+B3_FREELANCER+'" aria-selected="'+(M2.vibe===B3_FREELANCER)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Primary':'Casual Mode')+'</span><b>Freelancer</b>'+m2Stars(b3MaxRank(),b3MaxRank(),13)+'</button></div>';
+  } else h+='<div class="m2-vc lock" role="img" aria-label="Freelancer, Casual Mode, locked until all Vibes are mastered">'+m2Icon('lock',16)+'<b>Freelancer</b><span>Master all '+Math.max(3,ids.length)+'</span></div></div>';
   return h;
 }
 // What each number would do if the Vibe being looked at became the Primary (the +/- shown on the Gear screen).
@@ -126,8 +129,25 @@ function m2KitRow(r,V,L,role,fresh) {
   const soon=r.built?'':' <small class="m2-soon-t">Not working in this build yet</small>';
   return '<div class="m2-kr"><span>'+icon+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small>'+(fresh?'<span class="m2-newt">New</span>':'')+'<span class="m2-kc">'+right+'</span></div>'+(showD?'<p>'+m2Esc(dd)+soon+'</p>':'')+'</div></div>';
 }
+// Casual Mode's page (spec section 1: "Freelancer"): its Traits, the Basic to use and the two Secondary Vibes. The pickers show only while it is the Primary Vibe.
+function m2FreeDetail(m,L) {
+  const ids=B3_CAST[m.id].vibes,main=L.main===B3_FREELANCER,seg=(on,act,a,k,t)=>'<button type="button" class="m2-seg'+(on?' on':'')+'" data-m2="'+act+'" data-a="'+a+'" data-k="'+k+'" aria-pressed="'+on+'">'+m2Esc(t)+'</button>';
+  let h='<div class="m2-vh"><h2>Freelancer</h2><span class="m2-sub">Casual Mode</span></div>'+
+    '<div class="m2-lean">'+m2Icon('shield',17)+'<span>No Lean: Freelancer gives no stat bonus. It earns no Vibe Points, because every Vibe is mastered.</span></div>';
+  if(main) {   // the pickers come first, so they are on screen without scrolling past the three Traits
+    h+='<div class="m2-lab">Basic action</div><div class="m2-segs m2-frs" role="group" aria-label="Basic action">'+ids.map(v=>{ const b=B3_VIBES[v].basic,S=B3_SKILLS[b]; return seg(L.basic===b,'fbasic',b,'fb-'+b,S?S.name:b); }).join('')+'</div>';
+    for(const slot of [0,1]) { const cur=slot?L.pocket2:L.pocket;
+      h+='<div class="m2-lab">Secondary Vibe '+(slot+1)+'</div><div class="m2-segs m2-frs" role="group" aria-label="Secondary Vibe '+(slot+1)+'">'+ids.map(v=>seg(cur===v,'fpocket',slot+':'+v,'fp'+slot+'-'+v,B3_VIBES[v].name)).join('')+'</div>'; }
+  } else h+='<p class="m2-note">As the Primary Vibe, Freelancer gives two Secondary Vibes, a Basic action of your choice and all three Traits. Make it Primary, then pick them here.</p>';
+  h+='<div class="m2-acts">'+(main?'<span class="m2-here">This is the Primary Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+B3_FREELANCER+'" data-k="make-main">Make it Primary</button><span class="m2-here">Or tap it again at the top.</span>')+'</div><div class="m2-kit">';
+  for(const v of ids) { const V=B3_VIBES[v],T=B3_TRAITS[V.trait];
+    h+='<div class="m2-kr"><span><span class="m2-fl t">'+m2Icon('shield',16)+'</span></span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(T?T.name:V.trait)+'</b><small>Trait · '+m2Esc(V.name)+'</small><span class="m2-kc">'+(main?'Always on':'On as Primary')+'</span></div>'+(m2Details()&&T?'<p>'+m2Esc(T.desc)+'</p>':'')+'</div></div>'; }
+  h+='</div><p class="m2-note">Tap any other Vibe at the top to go back to playing it as the Primary Vibe.</p>';
+  return h;
+}
 function m2VibeDetail(m,L,fresh) {
-  const V=B3_VIBES[M2.vibe],rank=b3VibeRank(L,V.id),vp=L.vp[V.id]||0,role=L.main===V.id?'main':L.pocket===V.id?'pocket':'none',T=B3_RULES.rankVp;
+  if(M2.vibe===B3_FREELANCER) return m2FreeDetail(m,L);
+  const V=B3_VIBES[M2.vibe],rank=b3VibeRank(L,V.id),vp=L.vp[V.id]||0,role=L.main===V.id?'main':(L.pocket===V.id||L.pocket2===V.id)?'pocket':'none',T=B3_RULES.rankVp;
   const mast=rank>=b3MaxRank(),next=mast?b3MasterVp():T[rank],from=T[rank-1],frac=mast?1:Math.max(0,Math.min(1,(vp-from)/(next-from)));
   const ln=B3_LEANS[V.lean],lean=ln.name+': '+ln.desc.replace(/Max HP/g,'Health')+(role==='main'?'':' (when Primary)');
   const unlock=mast?'':b3Ladder(V,rank).filter(r=>r.rank===rank+1).map(r=>r.name);
@@ -200,7 +220,7 @@ function m2VibesBody(d) {
     const none='<div class="m2-soon"><b>'+m2Esc(m.name)+'’s Vibes are not in this build yet.</b><span>They arrive with a later build of the new battle.</span></div>';
     return d.wide?{l:m2Header(m,d),r:none}:{l:'<div class="m2-hd">'+m2Faces(m)+'</div>'+none,r:'',single:true};
   }
-  const ids=B3_CAST[m.id].vibes; if(!ids.includes(M2.vibe)||M2.vibeFor!==m.id) { M2.vibe=L.main; M2.vibeFor=m.id; M2.pick=null; }
+  const ids=B3_CAST[m.id].vibes; if(!(ids.includes(M2.vibe)||(M2.vibe===B3_FREELANCER&&b3CasualOpen(m.id,L)))||M2.vibeFor!==m.id) { M2.vibe=L.main; M2.vibeFor=m.id; M2.pick=null; }
   const fresh=M2.freshNow||(M2.fresh&&M2.fresh[m.id]); if(M2.freshNow) { M2.fresh=M2.fresh||{}; M2.fresh[m.id]=true; }
   const left=m2RankCtl()+m2PoolBlock(m,L)+m2RowCtl(m,L)+m2DetailSwitch()+m2QuirkSlots(m,L);
   const right=M2.pick!=null?m2QuirkPick(m,L):m2Chips(m,L)+m2Overflow(m,L)+'<div class="m2-scroll">'+m2VibeDetail(m,L,fresh)+'</div>';
@@ -272,16 +292,19 @@ function m2Changed(m,text) {
   sfx.select(); if(text) showToast(text,2.4);
   M2.focusNext=M2.keys?M2.focusNext:null; m2Render();
 }
+const m2MainText=(m,V)=>V.id===B3_FREELANCER?V.name+' is now '+m.name+'’s Primary Vibe: every Trait, a Basic action of their choice and two Secondary Vibes.':V.name+' is now '+m.name+'’s Primary Vibe: its Trait, Basic, Skills and Lean.';
 function m2PersonAct(act,a,el) {
   const m=m2Who(),L=m2Loadout(m);
   if(act==='who') { if(a!==M2.who) { M2.who=a; M2.pick=null; M2.peek=null; sfx.tab(); const i=party.findIndex(x=>x.id===a); if(i>=0&&!M2.lab) { M2.sel=i; menuChar=i; } } M2.focusNext=M2.keys?'w-'+a:null; m2Render(); return; }
   if(act==='bench') { M2.bench=!M2.bench; sfx.tab(); M2.focusNext=M2.keys?'bench':null; m2Render(); return; }
   if(M2.tab==='vibes') {
     if(act==='rank'&&M2.lab) { const B=b3LabBook(); for(const id in B) b3SetRank(id,B[id],+a); b3LabSave(); sfx.select(); showToast('Every Vibe in the Battle Lab is now Rank '+a+'.',2.4); M2.focusNext=M2.keys?'rank-'+a:null; m2Render(); return; }
-    if(act==='vibe'&&a===M2.vibe&&L&&L.main!==a&&B3_VIBES[a]&&L.pocket!==a) { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Primary Vibe: its Trait, Basic, Skills and Lean.'); return; }
+    if(act==='vibe'&&a===M2.vibe&&L&&L.main!==a&&b3VibeOf(a)&&L.pocket!==a&&L.pocket2!==a) { const V=b3VibeOf(a); M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,m2MainText(m,V)); return; }
     if(act==='vibe') { M2.vibe=a; sfx.tab(); M2.focusNext=M2.keys?'vc-'+a:null; m2Render(); return; }
     if(!L) return;
-    if(act==='main') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Primary Vibe: its Trait, Basic, Skills and Lean.'); return; }
+    if(act==='main') { const V=b3VibeOf(a); M2.focusNext=M2.keys?'vc-'+a:null; if(V&&b3SetMain(m.id,L,a)) m2Changed(m,m2MainText(m,V)); return; }
+    if(act==='fbasic') { M2.focusNext=M2.keys?'fb-'+a:null; if(b3SetBasic(m.id,L,a)) m2Changed(m,(B3_SKILLS[a]?B3_SKILLS[a].name:a)+' is '+m.name+'’s Basic action.'); return; }
+    if(act==='fpocket') { const [sl,v]=String(a).split(':'); M2.focusNext=M2.keys?'fp'+sl+'-'+v:null; if(b3SetPocket(m.id,L,v,+sl)) m2Changed(m,B3_VIBES[v].name+' is now Secondary Vibe '+(+sl+1)+': it adds its Skills.'); return; }
     if(act==='pocket') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetPocket(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Secondary Vibe: it adds its Skills.'); return; }
     if(act==='row') {
       if(b3RowOf(L)===a) return;

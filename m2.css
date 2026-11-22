@@ -513,3 +513,7 @@
 #chcard .cc-title{font:800 clamp(26px,9cqmin,64px)/1.05 var(--disp);letter-spacing:-.015em;color:var(--ink);text-wrap:balance;overflow-wrap:anywhere}
 #chcard .cc-sub{margin-top:clamp(6px,1.8cqmin,12px);font:600 clamp(12px,3.4cqmin,19px)/1.2 var(--text);color:var(--soft)}
 #chcard .cc-sub:empty{display:none}
+/* Casual Mode ("Freelancer", stage 21): the Basic and Secondary Vibe pickers wrap on a narrow page. */
+#m2 .m2-frs{flex-wrap:wrap;border-radius:20px}
+#m2 .m2-frs .m2-seg{flex:1 1 30%;min-height:40px;padding:0 8px;font-size:13px;line-height:1.1;border-radius:18px}
+#m2 .m2-vc.free b{font-size:16px}

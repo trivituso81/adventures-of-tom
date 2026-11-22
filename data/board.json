@@ -29443,12 +29443,17 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Stage 21 built (b3s21). Vibe Mastery is the only progression on Battle 3: the level-up reward cards, the victory-card stamp note, Rose Mode auto-stamp, the menu Stamp dot and the join-banner Stamp Point text are gone from Battle 3 (battle 2 and OLD keep them on the same save; no save field was deleted, so no question was needed). Casual Mode is built as the Freelancer Vibe from claude/battle-spec-v11.md (unlocks when all three Vibes are mastered; as Main: two Pocket Vibes, a chosen Basic, all Traits, no Lean, Front row, Rank 5), not as a difficulty entry in feel.js: no plan document defines a Casual difficulty or its numbers, so I followed the spec. New save fields pocket2 and basic only. Tests: b3-sim check 4387 checks no fails; b3_test s4, s5, s21 pass (s21 portrait and landscape, frames looked at). Chapter 1 on Battle 3 portrait: no page errors, Mudlings fight and Vibe Points pass; step '6 spot' fails the same way on an unmodified checkout (the Boppy-spot scene never starts after the Mudlings; cause not found), so it is not from this stage, and it cascades into steps 7 to 10. Landscape Chapter 1 not run. m2_test: only GitHub 403 rate-limit console errors."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGCwdEYmep2ZkkJjUm",
     "opening": "pasted by Tom from the board"
-   }
+   },
+   "after": "nothing for Tom: c-b3s22"
   },
   {
    "id": "c-b3s22",

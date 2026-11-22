@@ -61,8 +61,8 @@ function b3PartyUnit(F,id,level,slot) {
   let K;
   if(cfg.plain) { const V=B3_VIBES[C.vibes[0]]; K={main:V.id,pocket:null,basic:V.basic,skills:V.skills.slice(0,2).filter(s=>B3_SKILLS[s]),pocketSkills:[],trait:null,quirks:[],lean:null,row:B3_RULES.rowByLean[V.lean]||'front',counters:[],rank:2}; }
   else K=b3Kit(id,b3FixLoadout(id,(cfg.loadouts&&cfg.loadouts[id])||b3NewLoadout(id,cfg.rank)));
-  Object.assign(u,{id,name:C.name,level,row:(cfg.rows&&cfg.rows[id])||K.row,vibe:K.main,pocket:K.pocket,lean:K.lean,rank:K.rank,basic:K.basic,
-    skills:K.skills.slice(),pocketSkills:K.pocketSkills.slice(),trait:K.trait,quirks:K.quirks.slice(),pep:B3_RULES.pep.start});
+  Object.assign(u,{id,name:C.name,level,row:(cfg.rows&&cfg.rows[id])||K.row,vibe:K.main,pocket:K.pocket,pocket2:K.pocket2||null,lean:K.lean,rank:K.rank,basic:K.basic,
+    skills:K.skills.slice(),pocketSkills:K.pocketSkills.slice(),trait:K.trait,traits:K.traits||(K.trait?[K.trait]:[]),quirks:K.quirks.slice(),pep:B3_RULES.pep.start});
   // Traits and Quirks listen on the hook bus (engine/b3-hooks.js), and so does the rule that builds a Portable Counter.
   // A Trait or Quirk may also carry mods (some with a `when`), a counter of its own, and the name of a one-off rule.
   if(!cfg.plain) { const KP=b3KitPassives(K); u.passives=KP.listeners; u.mods.push(...KP.mods); Object.assign(u.custom,KP.custom); u.immune.push(...KP.immune); u.shieldMods.push(...KP.shieldMods); u.allyMods=KP.allyMods;
@@ -326,7 +326,12 @@ function b3Carried(F,u) {
   for(const f of F.foes) if(f.mark===u.key&&b3Alive(f)) rows.push({name:'Marked',short:'MARKED',color:'#ff8f80',kind:'marked',left:'next turn',
     desc:f.name+(f.charge?' will use '+f.charge.name+' on '+u.name:' is aiming at '+u.name)+' on its next turn. A Mark cannot be cleansed.'});
   // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
-  if(u.side==='party'&&u.lean&&B3_VIBES[u.vibe]) { const V=B3_VIBES[u.vibe],P=u.pocket&&B3_VIBES[u.pocket],Ln=B3_LEANS[u.lean];
+  if(u.side==='party'&&u.vibe===B3_FREELANCER) {   // Casual Mode (engine/b3-progress.js): no Lean, two Secondary Vibes, every Trait
+    const Ps=[u.pocket,u.pocket2].filter(x=>x&&B3_VIBES[x]).map(x=>B3_VIBES[x].name);
+    rows.push({name:'Freelancer',short:'CASUAL',color:'#c9e6a8',kind:'vibe',left:'No Lean',desc:'Casual Mode: every Trait is on and the Basic is picked. Secondary Vibes: '+Ps.join(' and ')+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which add no Skill yet.')});
+    for(const t of u.traits) { const T=B3_TRAITS[t]; if(T&&!T.soon) rows.push({name:T.name,short:'TRAIT',color:'#c9e6a8',kind:'trait',left:'',desc:T.desc}); }
+    for(const q of u.quirks) { const Q=B3_QUIRKS[q]; if(Q&&!Q.soon) rows.push({name:Q.name,short:'QUIRK',color:'#c9e6a8',kind:'quirk',left:'',desc:Q.desc}); } }
+  else if(u.side==='party'&&u.lean&&B3_VIBES[u.vibe]) { const V=B3_VIBES[u.vibe],P=u.pocket&&B3_VIBES[u.pocket],Ln=B3_LEANS[u.lean];
     rows.push({name:V.name,short:'RANK '+u.rank,color:'#c9e6a8',kind:'vibe',left:Ln.name+' Lean',
       desc:'Primary Vibe: '+Ln.desc+'.'+(P?' Secondary Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')});
     // The Trait and the equipped Quirks whose rules are written, so the player can read what is working for this family member.

@@ -25,12 +25,15 @@ function b6Refresh(m,full) {
   m.hp=full?m.maxHp:(m.hp<=0?0:Math.max(1,Math.min(m.maxHp,Math.round(m.maxHp*frac))));
 }
 function b6RefreshAll(full) { for(const m of ALL_MEMBERS()) b6Refresh(m,full); }
+// Whether the Stampcard (Stamp, Polish and Remix points) is in play. Not while a chapter runs on Battle 3 (engine/b3-story.js b3sOn): there
+// Vibe Mastery (engine/b3-progress.js) is the only progression, so Rose Mode spends no Stamp Points and the menu shows no Stamp dot.
+const b6CardOn=()=>!(typeof b3sOn==='function'&&b3sOn());
 // Add XP. Returns the levels reached (each level up refills HP).
 function b6GainXp(m,n) {
   const before=m.level,ups=[];
   b6SetTotal(m,b6Total(m)+n);
   for(let L=before+1;L<=m.level;L++) ups.push(L);
-  if(ups.length) { b6Refresh(m,true); if(roseAuto()) b6AutoStamp(m,true); }
+  if(ups.length) { b6Refresh(m,true); if(roseAuto()&&b6CardOn()) b6AutoStamp(m,true); }
   return ups;
 }
 // Shared story XP: everyone matches Tom (never lowered). Members who catch up while away keep a note for when they rejoin.
@@ -39,7 +42,7 @@ function b6Sync() {
   for(const m of ALL_MEMBERS()) {
     if(m===hero||b6Total(m)>=t) continue;
     const was=m.level; b6SetTotal(m,t);
-    if(m.level>was) { b6Refresh(m,true); if(roseAuto()) b6AutoStamp(m,true); if(!inParty(m)) m.caughtUp=(m.caughtUp||0)+(m.level-was); }
+    if(m.level>was) { b6Refresh(m,true); if(roseAuto()&&b6CardOn()) b6AutoStamp(m,true); if(!inParty(m)) m.caughtUp=(m.caughtUp||0)+(m.level-was); }
   }
 }
 // XP for the fight just won: each monster's B6_XP (+5% per time it has been beaten, up to +50%), or a flat level for a boss.
@@ -335,7 +338,7 @@ function b6LoadMember(m,s) {
 }
 b6RefreshAll(true);
 // A gold dot on the MENU button while someone in the party has a Stamp Point they can spend right now.
-function b6Badge() { const b=typeof $==='function'&&$('menu-button'); if(b) b.classList.toggle('sp-dot',party.some(b6Stampable)); }
+function b6Badge() { const b=typeof $==='function'&&$('menu-button'); if(b) b.classList.toggle('sp-dot',b6CardOn()&&party.some(b6Stampable)); }
 
 // ---------- Menu: the Stampcard screen (stampgrid1) ----------
 // One screen: a strip (points, AUTO, RESPEC, loadouts), a CORE row, two columns of six chips (Path A and Path B), and a drawer under

@@ -141,7 +141,7 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
   // Shared story XP (engine/progress.js b6Sync): say so when they caught up with Tom while at home.
   const sp=b6SpLeft(m),caught=m.caughtUp; m.caughtUp=0;
   b6Badge();
-  partyBanner(m.id,'join',((caught?'Caught up to Lv '+m.level+'. ':'')+(sp&&b6Stampable(m)?sp+' Stamp Point'+(sp>1?'s':'')+' to spend.':'')).trim());   // one banner per person, with its jingle (partybanner1)
+  partyBanner(m.id,'join',((caught?'Caught up to Lv '+m.level+'. ':'')+(sp&&b6CardOn()&&b6Stampable(m)?sp+' Stamp Point'+(sp>1?'s':'')+' to spend.':'')).trim());   // one banner per person, with its jingle (partybanner1)
   openDialog(m.name,[RECRUIT_TALK[m.id].yes]);
 }
 

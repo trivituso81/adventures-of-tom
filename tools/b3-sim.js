@@ -284,6 +284,8 @@ function check() {
   require('./b3-check-s16.js')({G,ok,near,play,noCrit});
   // Stage 19's groups: the ten third Vibes (Star Baker, Stage Performer, Prankster, SuperMom, Home Cook, Boat Angler, Scream King, Picky Princess, Armchair Ref, News Anchor).
   require('./b3-check-s19.js')({G,ok,near,play,noCrit});
+  // Stage 21's groups: Casual Mode ("Freelancer", the fourth Vibe) and the Stampcard, Polish Points and Remix Tickets gone from Battle 3.
+  require('./b3-check-s21.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

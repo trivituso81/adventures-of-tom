@@ -45,6 +45,9 @@ const B3_RULES={
   subtitleRank:[1,3,5],                       // the Rank at which each of a Vibe's three Subtitles takes over
   pocketVp:.5,                                // the equipped Pocket Vibe earns this share of a fight's VP (the Main Vibe earns all of it)
   quirkSlots:2,
+  // Casual Mode, "Freelancer" (spec section 1; engine/b3-progress.js, stage 21): opens when every Vibe of a member is mastered. As Main it gives `pockets` Pocket
+  // Vibe slots, all of the member's Traits and a Basic of their choice, with no Lean, and it earns no Vibe Points. It is not a row of B3_VIBES.
+  casual:{id:'freelancer',pockets:2,traits:'all',basic:'chosen',lean:null,earnsVp:false},
   labRank:2,                                  // the Rank every Vibe starts at in the Battle Lab (the Rank chapter 1 reaches)
   // Stat Leans (spec section 1): the Main Vibe's Lean only. Max HP is set when the fight begins; the others are mods of kind 'lean'.
   leans:{guard:{hp:.15,def:.15},striker:{atk:.15},tempo:{spd:.15},support:{healGiven:.15}},

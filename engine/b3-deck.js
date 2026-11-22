@@ -171,7 +171,7 @@ function b3RenderDeck() {
   const free=b3Granted()===u;
   let h=free?'<div class="bx-grp bx-free">'+bxW(W.freeFor,{who:b2Esc(u.name)})+'</div>':'',grp='';
   const has=g=>B3.deck.some(x=>x.grp===g),vn=id=>B3_VIBES[id]?'<span class="dx">· '+b2Esc(B3_VIBES[id].name)+'</span>':'';
-  const gname={ruckus:W.group.ruckus,main:W.group.main+vn(u.vibe),pocket:W.group.pocket+vn(u.pocket),any:W.group.any};
+  const gname={ruckus:W.group.ruckus,main:W.group.main+vn(u.vibe),pocket:W.group.pocket+vn(u.pocket)+vn(u.pocket2),any:W.group.any};
   (B3.ui==='done'?[]:B3.deck).forEach((x,i)=>{   // the fight is over: no moves, only Continue in the tray
     if(x.grp!==grp) { grp=x.grp; if(x.grp!=='basic'&&!free&&(x.grp!=='main'||has('pocket')||has('ruckus')||has('any'))) h+='<div class="bx-grp">'+gname[x.grp]+'</div>'; }
     const S=x.S,sel=cmd&&i===B3.sel,lack=!x.can.ok&&S&&x.cost>pep&&B3.actor,need=S?x.cost-pep:0,why=b2Esc(lack?bxW(W.needMore,{n:need}):x.can.why);

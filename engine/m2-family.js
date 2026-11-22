@@ -15,7 +15,7 @@ function m2RuckusPct() { const v=(typeof B3S!=='undefined'&&Number.isFinite(B3S.
 function m2Vibe(m) {
   try {
     const L=typeof b3MemberLoadout==='function'?b3MemberLoadout(m):null; if(!L) return null;
-    return {name:B3_VIBES[L.main].name,rank:b3VibeRank(L,L.main),max:b3MaxRank(),row:b3RowOf(L)};
+    return {name:b3VibeOf(L.main).name,rank:b3VibeRank(L,L.main),max:b3MaxRank(),row:b3RowOf(L)};
   } catch(e) { return null; }
 }
 function m2Face(id,cls) {

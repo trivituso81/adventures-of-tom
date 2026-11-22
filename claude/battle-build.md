@@ -59,7 +59,9 @@ Rules for every stage's session:
 | 18 | Story switch, chapters 6 to 10: chapters 6 to 10's 20 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 20 fights, five Battle 3 retry lines. The bonus chapter was switched afterwards in `b3s18bonusa` and `b3s18bonus` (see the row below and `docs/BATTLE3.md` "The bonus chapter is switched") | Pushed 2026-11-21 (chapters 6 to 10) | `b3s18a`, `b3s18b`, `b3s18c`, `b3s18d`, `b3s18e`, `b3s18` | Milestone D: play chapters 6 to 10 (card t-milestoned). The bonus chapter is card c-b3s18bonus. |
 | 16 | Tombo skins: 26 skins (21 Primary Tombos, 4 Family Finishes, Birthday Wish) on the Full Family Ruckus: the skin's name on the tray and the stage, the pair's recorded lines, the Tombo toasts of chapters 1 to 10 and the bonus back under Battle 3. No Move Lab review (animations are out of scope) | Pushed 2026-11-22 | `b3s16` | Nothing is asked. |
 | 19 | Third Vibes: ten Vibes, 40 moves, 10 Traits, 20 Quirks as rows in `data/b3-kit-*.js`, new statuses and ops, save fields without migration | Pushed 2026-11-22 | `b3s19` | docs/BATTLE3.md "What stage 19 holds" |
-| 20 to 23 | See architecture section 5 | Not started | | |
+| 20 | Character Level by shared XP: Battle 3 already shared XP through `b6GainXp` and `b6Sync`, so only data changed (XP rows for the 24 monsters of chapters 5 to 10) | Pushed 2026-11-22 | `b3s20` | Card c-b3s20 history |
+| 21 | Vibe Mastery as the only progression on Battle 3 (Stampcard, Polish Point and Remix Ticket paths cut) and Casual Mode (the Freelancer Vibe) | Pushed 2026-11-22 | `b3s21` | docs/BATTLE3.md "What stage 21 holds" |
+| 22 to 23 | See architecture section 5 | Not started | | |
 
 ## Stage 15 results (facts)
 
@@ -88,6 +90,24 @@ Rules for every stage's session:
 | Vibe Points | Main Vibe Points per chapter on the required path: chapter 6 is 48, chapter 7 54, chapter 8 54, chapter 9 54, chapter 10 50 (the pocket Vibe earns half). |
 | Not looked at | Every chapter 6 to 10 fight in a browser: Milestone D. |
 | Incident | An upstream commit removed chapters 8 and 9 from `main` shortly after `b3s18c` and `b3s18d` landed (a restore by another session); `b3s18e` put them back. Another session left merge conflict markers in `data/board.json`; fixed in its own commit. |
+
+## Stage 21 results (facts)
+
+| Item | Result |
+|---|---|
+| Built | Casual Mode ("Freelancer") as the spec defines it, and the Stampcard, Polish Point and Remix Ticket paths cut from Battle 3's reward path (victory card, level-up rewards, Rose Mode auto-stamp, Stamp dot, join banner). Detail: docs/BATTLE3.md "What stage 21 holds". |
+| Save fields | None deleted, so Tom was not asked. Two added (`vibes.pocket2`, `vibes.basic`). |
+| Tests | `node tools/b3-sim.js check` and `python3 tools/b3_test.py s4`, `s5`, `s21` (see the card history for the numbers); Chapter 1 played to the end on Battle 3 (`tools/ch1_b3_test.py`). |
+
+## Calls made in stage 21 that Tom has not confirmed
+
+| Call | Why | Undo |
+|---|---|---|
+| Casual Mode is the Freelancer Vibe, not a difficulty option | The card text said "difficulty option (feel.js)", but the spec, the architecture plan and the menu plan all define Casual Mode as the fourth Vibe unlocked by mastering all three, and no document gives a difficulty option that name or its numbers. | Say what a Casual difficulty should do; it becomes a card. Nothing in `B7_DIFF` was touched, so there is nothing to revert. |
+| Freelancer needs every Vibe of a member mastered (800 VP each), as the spec says | The spec says "around Chapter 18". The Battle Lab's Rank 5 picker opens it for testing. | Change `B3_RULES.casual` use in `b3CasualOpen` |
+| The chosen Basic starts as the old Main Vibe's Basic and the old Main and Pocket become the two Pocket slots | The spec does not say what a fresh switch starts with; this keeps the person's kit as it was. | `b3SetMain` in `engine/b3-progress.js` |
+| A Skill Lock covers Casual Mode's Skills | All of its Skills come through Pocket Vibes, and the rules call Pocket Skills the ones a Skill Lock stops. | Drop the `pocketSkills` copy in `b3KitFree` |
+| `b6Prep` (chapter-select jump) still auto-stamps | A jump into an OLD chapter needs Stamp Points, and `b6Prep` does not know which battle the chapter uses. Harmless on Battle 3: the points are never read. | Gate it in stage 23 when the Stampcard is deleted |
 
 ## Stage 19 results (facts)
 
