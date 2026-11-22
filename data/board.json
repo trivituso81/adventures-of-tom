@@ -34614,13 +34614,13 @@
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r10",
    "title": "Fix the stopped video deedee-wetfloor",
-   "next": "The bulk run stopped deedee-wetfloor (failed twice: p1, p2) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Both videos look like they meet the motion (one short mop sweep, sign set down, finger wag, back to her stance); the look check and one 2-frame edge touch stopped them. Waits on Tom card t-wetfloor-check.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wetfloor-check",
    "auto": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
@@ -34630,6 +34630,11 @@
     "opening": "added by the wan-gen job"
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "ended without shipping: I looked at contact sheets of deedee-wetfloor-r10.mp4 and deedee-wetfloor-a2-r10.mp4. Both show the string mop swept once beside her feet, the yellow sign set down, one finger wag, then her stance. The look check (p1 'from behind her back', p2 'mixed with extra mop poses') reads this strictly, and the first video also touches the right edge in 2 pictures. Per the card this is a check problem: nothing changed in the job, no run started.",
+     "at": "2026-11-22T05:14:29.154866Z"
+    },
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44987261923): deedee-wetfloor stopped at rev 10. attempt 1 (pad 0.55) edge, p1, p2; attempt 2 (pad 0.55) p1, p2. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge"
@@ -34648,7 +34653,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r10 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 10) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r10-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r10.mp4, deedee-wetfloor-a2-r10.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r10` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r10. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:11:55+00:00"
+   "started_at": "2026-11-22T05:11:55+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-boardwedge1",
@@ -34682,6 +34688,31 @@
     "effort": "medium (the two guards are specified, the pieces are small)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (section The board), then card c-boardwedge1 in data/board.json. First push: `board: start c-boardwedge1`. Problem: the board-sync Action (.github/workflows/board-sync.yml, step 'Check the board file, then commit and push it if a card moved') exits 1 when tools/board_check.py rejects data/board.json, so no card move is saved and the board stops refreshing. It happened twice on 2026-11-21: (1) open Tom card t-milestoned blocked only a Claude card that shipped, so 'an open Tom card must block an open Claude card, or be marked fyi: true' failed (fixed by hand with fyi: true); (2) commit b3cdb22 pushed merge-conflict markers into data/board.json and board.html (repaired in 6a2e301). Build two guards. (A) Sync side, in tools/board_sync.py: when a Claude card moves to Done, any open Tom card whose blocks list holds only Done cards (or none open) and which is not fyi becomes fyi: true, with one history line saying why, so board_check never fails for that reason; add cases to tools/board_sync_test.py. (B) Push side: a check that fails a push when data/board.json, data/board-archive.json or board.html contains a line that starts with seven less-than signs, seven equals signs alone, or seven greater-than signs followed by a space. Put it in tools/board_check.py (JSON parse already fails for the board; add the board.html scan) and call it from tools/smoke.py and from a new step at the top of the board-sync workflow so a bad push is named in the run summary instead of only failing step 6. Do not change any card's meaning. Run python3 tools/board_sync_test.py, python3 tools/board_test.py /tmp/board, python3 tools/board_check.py and python3 tools/smoke.py. Write a heading '## boardwedge1' (with date and one plain line) in docs/CHANGES.md, bump tags with python3 tools/art-library/bump_tags.py boardwedge1 --base origin/main, and push. Use tag boardwedge1. At the end set this card's next to the result. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-wetfloor-check",
+   "title": "Deedee's Wet-Floor video: accept it or try again",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Unblocks c-wanstop-deedee-wetfloor-r10. Fact: the checks stopped deedee-wetfloor twice at rev 10, but by Claude's frame check both videos do the move (mop sweep once, sign set down, finger wag). Tap one answer; Claude acts on it next session.",
+   "choices": [
+    "Bake the second video anyway (Recommended)",
+    "Try once more with a stricter prompt",
+    "Drop the sign, keep only the mop sweep"
+   ],
+   "leads": [
+    "Claude bakes deedee-wetfloor-a2-r10.mp4 as is; you watch it on the Battle Animations watch card.",
+    "Another paid try, one prompt change, no guarantee the look check agrees.",
+    "Simpler move the look check can read more easily; costs a new try."
+   ],
+   "blocks": [
+    "c-wanstop-deedee-wetfloor-r10"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "history": []
   }
  ],
  "sessions": [
