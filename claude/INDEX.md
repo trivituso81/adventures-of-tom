@@ -703,6 +703,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | grands3d-house.md | Deedee and Boppy's house (map `grands`), clear paths and 3D (`grands3d`, 2026-11-01) | 2026-11-01 |
 | grump-hollow-lettering.md | Grump Hollow: painted lettering pass (written 2026-10-30, revised 16:15) | 2026-10-30 |
 | grump-hollow-redo.md | Grump Hollow redo: prompt and install plan (written 2026-10-30) | 2026-10-30 |
+| guide-flow-plan.md | Battle Guide animation flow: the plan (guideflow-plan, 2026-11-22) | 2026-11-22 |
 | guidegen-plan.md | Battle Guide makes and remakes battle videos (guidegen), plan and state | 2026-11-22 |
 | handoff-rules.md | How every next-session prompt is given to Tom (standing rules) | 2026-11-22 |
 | heist-fix5-plan.md | Muffin theft, fix round 5: the Mudling's whole path (plan, 2026-11-20) | 2026-11-20 |
