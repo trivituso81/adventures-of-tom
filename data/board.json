@@ -23201,73 +23201,6 @@
    "history": [
     {
      "d": "2026-11-21",
-     "at": "2026-11-21T21:23:19Z",
-     "t": "Night run: t-stagefollowplay, t-milestonec, t-milestoned sorted YOURS. t-gem-bug01play (lose to the Big One, retry starts by itself) is a yes or no fact but this run could not find the retry code path in time; left unmarked for the next night."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Second run the same evening, by hand: t-gem-bug01play checked and closed (a fact: Deedee speaks and the Big One fight restarts after a loss; frames in portrait, landscape and Duo size on branch night). The other three of its first 4 stay Tom's.",
-     "at": "2026-11-21T22:30:00Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Ran: nothing to do."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T22:04:10.957Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
-     "at": "2026-11-22T00:00:00Z",
-     "t": "Night run: t-guardwinplay sorted YOURS (celebration pose vs guard pose is a look). t-dash3-try and t-dash4-try wait on unshipped cards, not checked."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-21",
-     "at": "2026-11-21T22:12:24Z",
-     "t": "Night run: t-dash3-try and t-dash4-try sorted YOURS (wide monitor, layout look). No play card left to check."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Run finished (night: ran c-night-qa); card returned to Up next by hand because the manual last_run stopped the sync job doing it."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T00:51:38.848Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T01:24:54.282Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     },
     {
@@ -23304,6 +23237,11 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Night QA run: 3 play cards read, 0 closed, 0 fixes filed, 3 marked Needs your eyes (t-battleuxplay, t-menu4play, t-milestonee).",
+     "at": "2026-11-22T17:04:27.000Z"
     }
    ],
    "prompt": {
@@ -26213,8 +26151,18 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: Add the scene marks and remove the proposal page is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Night QA looked at this card: it needs your eyes. it asks how the new battle looks and feels on the Duo and iPhone held in hand; that is look, feel and the real phone, which the test browser cannot judge.",
+     "at": "2026-11-22T17:04:27.000Z"
     }
-   ]
+   ],
+   "machine": {
+    "at": "2026-11-22T17:04:27.000Z",
+    "verdict": "yours",
+    "why": "it asks how the new battle looks and feels on the Duo and iPhone held in hand; that is look, feel and the real phone, which the test browser cannot judge."
+   }
   },
   {
    "id": "c-takes-e8fba6",
@@ -27114,8 +27062,18 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Night QA looked at this card: it needs your eyes. it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge.",
+     "at": "2026-11-22T17:04:27.000Z"
     }
-   ]
+   ],
+   "machine": {
+    "at": "2026-11-22T17:04:27.000Z",
+    "verdict": "yours",
+    "why": "it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge."
+   }
   },
   {
    "id": "c-b3gear",
@@ -27290,11 +27248,21 @@
      "d": "2026-11-21",
      "t": "Tom sent this to the backlog.",
      "at": "2026-11-22T03:09:36.899Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Night QA looked at this card: it needs your eyes. it asks whether Nine Scoops is fun and well paced over about 40 minutes; fun and pace are judgment, not a fact a test browser can see.",
+     "at": "2026-11-22T17:04:27.000Z"
     }
    ],
    "backlog": {
     "at": "2026-11-21",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-22T17:04:27.000Z",
+    "verdict": "yours",
+    "why": "it asks whether Nine Scoops is fun and well paced over about 40 minutes; fun and pace are judgment, not a fact a test browser can see."
    }
   },
   {
