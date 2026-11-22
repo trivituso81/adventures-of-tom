@@ -29184,7 +29184,7 @@
    "title": "Battle system stage 20: Character Level by shared XP",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data. Starts after c-b3s19.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29208,9 +29208,17 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T08:19:40.695Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-22T08:20:37+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukETdNcxVt8YMqrXeiq",
+    "opening": "started by START"
+   }
   },
   {
    "id": "c-b3s21",
@@ -34732,8 +34740,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "31a3cebc9eb553a54d36a5df02ab517681773e63",
- "synced_at": "2026-11-22T08:18:26+00:00",
+ "synced": "23304a864f93e6dba22d708ffb6bdf9cadae789d",
+ "synced_at": "2026-11-22T08:20:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
