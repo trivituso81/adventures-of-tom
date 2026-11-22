@@ -22898,7 +22898,7 @@
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGRuFAHDmbikz263XC",
     "opening": "not started"
@@ -22948,6 +22948,11 @@
     {
      "d": "2026-11-21",
      "t": "Ran as nightclean-1122: Night cleanup, bucket C: CLAUDE.md is 2.3 KB shorter"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom tapped START.",
+     "at": "2026-11-22T17:02:49.104Z"
     }
    ],
    "prompt": {
@@ -22962,7 +22967,8 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1122"
-   }
+   },
+   "start": true
   },
   {
    "id": "c-bigone25",
