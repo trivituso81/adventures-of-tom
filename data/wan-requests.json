@@ -65,6 +65,17 @@
    "start": "art/clips/start/deedee-hero.png",
    "cap": 0.6,
    "note": ""
+  },
+  {
+   "anim": "move:deedee_makes_it_better",
+   "slug": "move-deedee-makes-it-better",
+   "take": 1,
+   "at": "2026-11-22T08:25:26.987Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DEEDEE MAKES IT BETTER\nFrom her starting relaxed stance, she brings a small glowing heart-shaped charm out from behind her back, holds it up forward at chest height once with both hands as if offering a gift to the whole family. Without repeating the gesture, she tucks the charm behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "promptRev": 0,
+   "start": "art/clips/start/deedee-hero.png",
+   "cap": 0.6,
+   "note": ""
   }
  ]
 }
