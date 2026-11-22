@@ -29751,6 +29751,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGPiHCnDNj4Gev2nEd",
+   "title": "Battle screen: the new menu's look, and only what is needed",
+   "first": "2026-11-22T00:09:49-08:00",
+   "last": "2026-11-22T00:09:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3look"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCX9PonpzyjcthPHog",
+   "title": "board: restore battle stages 16 and 19 to 23 (board-b3restore)",
+   "first": "2026-11-22T00:09:26-08:00",
+   "last": "2026-11-22T00:09:26-08:00",
+   "tags": [],
+   "cards": []
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
    "title": "Battle screen redesign: the proposal",
    "first": "2026-11-21T17:05:57-08:00",
@@ -34665,8 +34683,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "ec8821eaadcfc28147499dc8a90f9bf034a47122",
- "synced_at": "2026-11-22T08:04:38+00:00",
+ "synced": "14622e2ca8770636d3779a3dfecd0b5d48622067",
+ "synced_at": "2026-11-22T08:10:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
