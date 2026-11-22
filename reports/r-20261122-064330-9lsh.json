@@ -1,0 +1,1750 @@
+{
+ "v": 1,
+ "id": "r-20261122-064330-9lsh",
+ "at": "2026-11-22T06:43:53-08:00",
+ "kind": "bug",
+ "note": "When there are three characters, a third one should not be centered on the page. He should be left aligned. Same as when there's four",
+ "pins": [],
+ "shot": "reports/r-20261122-064330-9lsh.jpg",
+ "where": {
+  "mode": "menu",
+  "build": "b3s20",
+  "url": "/adventures-of-tom/?r=mwry3cdh",
+  "screen": {
+   "layout": "landscape",
+   "rotated": false,
+   "duo": "open",
+   "tablet": true,
+   "w": 867,
+   "h": 669,
+   "dpr": 3
+  },
+  "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1",
+  "story": {
+   "mode": "full",
+   "chapter": 9,
+   "goal": "Find the three mirrors."
+  },
+  "map": {
+   "id": "moonclub",
+   "name": "The Moon Club",
+   "x": 21,
+   "y": 6,
+   "facing": "right",
+   "cam": [
+    93,
+    0
+   ],
+   "zoom": 1
+  },
+  "party": [
+   "tom",
+   "deedee",
+   "boppy"
+  ],
+  "bench": [],
+  "walkers": [
+   {
+    "id": "deedee",
+    "x": 21,
+    "y": 5,
+    "facing": "right"
+   },
+   {
+    "id": "boppy",
+    "x": 20,
+    "y": 5,
+    "facing": "right"
+   }
+  ],
+  "near": [
+   {
+    "name": "Velvet Rope",
+    "monster": "velvetrope",
+    "x": 25,
+    "y": 10,
+    "facing": "down"
+   },
+   {
+    "name": "The Sore Loser",
+    "monster": "soreloser",
+    "x": 21,
+    "y": 4,
+    "facing": "down"
+   }
+  ],
+  "scene": null,
+  "dialog": null,
+  "battle": null,
+  "menu": {
+   "loc": "The Moon Club",
+   "tab": "Menu"
+  },
+  "flags": {
+   "opening-done": true,
+   "met-tnb": true,
+   "met-nara": true,
+   "visited-la": true,
+   "saw-squishy": true,
+   "tombo:rose1": true,
+   "tombo:grace1": true,
+   "ch1-goal": true,
+   "ch1-theft": true,
+   "tombo:deedee1": true,
+   "ch1-t1": true,
+   "battle:mudling": "win",
+   "ch1-t2": true,
+   "battle:skeeter": "win",
+   "battle:grump": "win",
+   "ch1-tuts": true,
+   "ch1-pond": true,
+   "ch1-crown": true,
+   "battle:bigone": "win",
+   "ch1-tin": true,
+   "ch1-done": true,
+   "ch2-goal": true,
+   "ch2-tnb": true,
+   "ch2-nara": true,
+   "tombo:nara1": true,
+   "ch2-starter": true,
+   "ch2-smog": true,
+   "tombo:tnb1": true,
+   "ch2-lawn": true,
+   "ch2-odette": true,
+   "ch2-carmen": true,
+   "ch2-source": true,
+   "ch2-t1": true,
+   "battle:tickets": "win",
+   "battle:coyote": "win",
+   "ch2-tuts": true,
+   "ch2-boss": true,
+   "battle:bigshake": "win",
+   "ch2-clear": true,
+   "ch2-done": true,
+   "ch3-goal": true,
+   "ch3-boppy": true,
+   "ch3-tea": true,
+   "ch3-story": true,
+   "ch3-pier": true,
+   "tombo:boppy1": true,
+   "ch3-jar": true,
+   "ch3-r1": true,
+   "battle:soggysock": "win",
+   "battle:tangle": "win",
+   "ch3-tuts": true,
+   "ch3-wait": true,
+   "battle:snag": "win",
+   "ch3-snag": true,
+   "ch3-hollow": true,
+   "ch3-coin": true,
+   "ch3-pool": true,
+   "battle:irongill": "win",
+   "ch3-release": true,
+   "ch3-clear": true,
+   "ch3-done": true,
+   "ch4-goal": true,
+   "ch4-nara": true,
+   "ch4-gate": true,
+   "ch4-snack": true,
+   "ch4-fetch": true,
+   "battle:cuecrab": "win",
+   "ch4-main": true,
+   "ch4-sets": true,
+   "battle:clapper": "win",
+   "ch4-west": true,
+   "battle:boommoth": "win",
+   "ch4-ny": true,
+   "ch4-stage": true,
+   "ch4-rig": true,
+   "ch4-boss": true,
+   "battle:directorscut": "win",
+   "ch4-wrap": true,
+   "ch4-clear": true,
+   "ch4-done": true,
+   "ch5-goal": true,
+   "tombo:amy1": true,
+   "ch5-pruitt": true,
+   "ch5-hall": true,
+   "ch5-snack": true,
+   "battle:tardybell": "win",
+   "ch5-art": true,
+   "battle:glitterglue": "win",
+   "ch5-music": true,
+   "battle:dodgeball": "win",
+   "ch5-gym": true,
+   "ch5-clocks": true,
+   "tombo:grace2": true,
+   "ch5-boss": true,
+   "battle:redpen": "win",
+   "ch5-wrap": true,
+   "ch5-clear": true,
+   "ch5-done": true,
+   "ch6-goal": true,
+   "ch6-tnb": true,
+   "tombo:tnb2": true,
+   "ch6-nara": true,
+   "tombo:nara2": true,
+   "ch6-park": true,
+   "battle:peanutgallery": "win",
+   "ch6-play": true,
+   "battle:twigspy": "win",
+   "ch6-garden": true,
+   "battle:cheekstuffer": "win",
+   "ch6-picnic": true,
+   "ch6-dig-play": true,
+   "ch6-scraps": true,
+   "ch6-dig-garden": true,
+   "ch6-dig-picnic": true,
+   "ch6-fetch": true,
+   "ch6-door": true,
+   "ch6-oak": true,
+   "ch6-board": true,
+   "ch6-ladder": true,
+   "ch6-boss": true,
+   "battle:chairman": "win",
+   "ch6-wrap": true,
+   "ch6-take": true,
+   "ch6-clear": true,
+   "ch6-done": true,
+   "ch7-goal": true,
+   "ch7-page": true,
+   "ch7-stacks": true,
+   "ch7-story": true,
+   "battle:cliffhanger": "win",
+   "ch7-fic": true,
+   "ch7-cards": true,
+   "battle:knowitall": "win",
+   "ch7-non": true,
+   "battle:popup": "win",
+   "ch7-pic": true,
+   "ch7-door": true,
+   "ch7-boss": true,
+   "battle:unread": "win",
+   "ch7-wrap": true,
+   "ch7-clear": true,
+   "tombo:deedee2": true,
+   "ch7-done": true,
+   "ch8-goal": true,
+   "goalCh": 9,
+   "ch8-block": true,
+   "goalLog": [
+    {
+     "c": 8,
+     "t": "2nd Ave in Jefferson Park, south of Downtown."
+    },
+    {
+     "c": 8,
+     "t": "the old Car Barn, at the east end of Jefferson Boulevard."
+    },
+    {
+     "c": 8,
+     "t": "the Paint Shop (top left), the Machine Shop (top right), the Lunchroom (bottom left). Get the pilot lights back."
+    },
+    {
+     "c": 8,
+     "t": "the turntable motor (bottom of the corridor, by the turntable)."
+    },
+    {
+     "c": 8,
+     "t": "pull the turntable lever (top of the corridor). Track 4 goes to the Boiler Room."
+    },
+    {
+     "c": 8,
+     "t": "across the turntable to Track 4, the Boiler Room."
+    },
+    {
+     "c": 9,
+     "t": "Deedee and Boppy’s house (RIVITUSO), on Rivituso Row, south of the Square."
+    },
+    {
+     "c": 9,
+     "t": "the Moon Club. Luna’s observatory (MOON) in the Square."
+    },
+    {
+     "c": 9,
+     "t": "up the stairs, through the little silver door (back right of the observatory)."
+    }
+   ],
+   "ch8-barn": true,
+   "shopseen:tom_tool1": true,
+   "shopseen:tom_out1": true,
+   "shopseen:tom_chm1": true,
+   "shopseen:tom_tool2": true,
+   "shopseen:tom_out2": true,
+   "shopseen:tom_chm2": true,
+   "shopseen:grace_tool1": true,
+   "shopseen:grace_out1": true,
+   "shopseen:grace_chm1": true,
+   "shopseen:grace_tool2": true,
+   "shopseen:grace_out2": true,
+   "shopseen:grace_chm2": true,
+   "shopseen:rose_tool1": true,
+   "shopseen:rose_out1": true,
+   "shopseen:rose_chm1": true,
+   "shopseen:rose_tool2": true,
+   "shopseen:rose_out2": true,
+   "shopseen:rose_chm2": true,
+   "shopseen:amy_tool1": true,
+   "shopseen:amy_out1": true,
+   "shopseen:amy_chm1": true,
+   "shopseen:amy_tool2": true,
+   "shopseen:amy_out2": true,
+   "shopseen:amy_chm2": true,
+   "shopseen:justin_tool1": true,
+   "shopseen:justin_out1": true,
+   "shopseen:justin_chm1": true,
+   "shopseen:justin_tool2": true,
+   "shopseen:justin_out2": true,
+   "shopseen:justin_chm2": true,
+   "shopseen:deedee_tool1": true,
+   "shopseen:deedee_out1": true,
+   "shopseen:deedee_chm1": true,
+   "shopseen:deedee_tool2": true,
+   "shopseen:deedee_out2": true,
+   "shopseen:deedee_chm2": true,
+   "shopseen:b_goldreel": true,
+   "shopseen:boppy_tool1": true,
+   "shopseen:boppy_out1": true,
+   "shopseen:boppy_chm1": true,
+   "shopseen:boppy_tool2": true,
+   "shopseen:boppy_out2": true,
+   "shopseen:boppy_chm2": true,
+   "shopseen:tnb_tool1": true,
+   "shopseen:tnb_out1": true,
+   "shopseen:tnb_chm1": true,
+   "shopseen:tnb_tool2": true,
+   "shopseen:tnb_out2": true,
+   "shopseen:tnb_chm2": true,
+   "shopseen:nara_tool1": true,
+   "shopseen:nara_out1": true,
+   "shopseen:nara_chm1": true,
+   "shopseen:nara_tool2": true,
+   "shopseen:nara_out2": true,
+   "shopseen:nara_chm2": true,
+   "shopseen:bandage1": true,
+   "shopseen:picnic1": true,
+   "shopseen:bandage2": true,
+   "shopseen:picnic2": true,
+   "shopseen:popper1": true,
+   "shopseen:popper2": true,
+   "heart": 100,
+   "ch8-paint": true,
+   "battle:wetblanket": "win",
+   "ch8-shop": true,
+   "battle:thedraft": "win",
+   "ch8-lunch": true,
+   "battle:pickyeater": "win",
+   "ch8-pilots": true,
+   "ch8-motor": true,
+   "ch8-tt": "east",
+   "ch8-turn": true,
+   "ch8-boss": true,
+   "battle:ironbelly": "win",
+   "ch8-clear": true,
+   "ch8-wrap": true,
+   "ch8-done": true,
+   "ch8-feast": true,
+   "ch9-sol": true,
+   "ch9-goal": true,
+   "goal": "find the three mirrors. Coat Check (top left), Card Room (top right), Ballroom (bottom).",
+   "ch9-letter": true,
+   "ellie-paid-1": true,
+   "ellie-paid-2": true,
+   "ch9-luna": true,
+   "ch9-club": true,
+   "ch9-cards": true,
+   "battle:soreloser": "win",
+   "ch9-coat": true,
+   "battle:coathanger": "win",
+   "ch9-rotB": 1,
+   "ch9-rotA": 1
+  },
+  "faults": [],
+  "errors": [
+   {
+    "at": 1795358505875,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/?r=mwry3cdh:0"
+   }
+  ],
+  "save": {
+   "v": 4,
+   "when": 1795358610421,
+   "map": "moonclub",
+   "x": 21,
+   "y": 6,
+   "facing": "right",
+   "visited": [
+    "lacab",
+    "jordansam",
+    "nickels",
+    "boards",
+    "grands",
+    "shop",
+    "observatory"
+   ],
+   "allVisited": false,
+   "bag": [
+    "notebook",
+    "button",
+    "sweater",
+    "oldcoin",
+    "pepperjar",
+    "jerky",
+    "picnic",
+    "a_stopwatch",
+    "bready",
+    "bandage",
+    "g_librarycard",
+    "kombucha",
+    "shirt",
+    "n_rib",
+    "y_stick",
+    "k_keyboard",
+    "sunhat",
+    "y_goldball",
+    "pebble",
+    "skatewax",
+    "warmblanket",
+    "leftovers",
+    "draftstopper",
+    "leftovers",
+    "hotsauce",
+    "tepidcoffee",
+    "leftovers",
+    "e_scarf",
+    "tom_tool2",
+    "d_pin",
+    "e_brooch",
+    "b_rod",
+    "wrapjacket",
+    "pepper",
+    "scrap",
+    "corsage",
+    "luckychip",
+    "cufflink",
+    "velvetbow",
+    "coatticket",
+    "cufflink",
+    "velvetbow",
+    "velvetbow",
+    "cufflink",
+    "cufflink"
+   ],
+   "coins": 919,
+   "time": 3253,
+   "grump": {
+    "tier": 0,
+    "maxHp": 22
+   },
+   "monsters": {
+    "mudling": {
+     "tier": 0,
+     "maxHp": 12
+    },
+    "skeeter": {
+     "tier": 0,
+     "maxHp": 16
+    },
+    "grump": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "toad": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "log": {
+     "tier": 0,
+     "maxHp": 50
+    },
+    "bigone": {
+     "tier": 0,
+     "maxHp": 78
+    },
+    "soggysock": {
+     "tier": 0,
+     "maxHp": 20
+    },
+    "bobber": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "tangle": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "snag": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "irongill": {
+     "tier": 0,
+     "maxHp": 90
+    },
+    "popquiz": {
+     "tier": 0,
+     "maxHp": 16
+    },
+    "tardybell": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "glitterglue": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "dodgeball": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "redpen": {
+     "tier": 0,
+     "maxHp": 110
+    },
+    "shusher": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "dogear": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "cliffhanger": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "knowitall": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "popup": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "unread": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "velvetrope": {
+     "tier": 6,
+     "maxHp": 40
+    },
+    "stuffedshirt": {
+     "tier": 5,
+     "maxHp": 40
+    },
+    "coathanger": {
+     "tier": 3,
+     "maxHp": 47
+    },
+    "soreloser": {
+     "tier": 3,
+     "maxHp": 49
+    },
+    "wallflower": {
+     "tier": 3,
+     "maxHp": 51
+    },
+    "mirrorball": {
+     "tier": 0,
+     "maxHp": 128
+    },
+    "carryon": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "jetlag": {
+     "tier": 0,
+     "maxHp": 23
+    },
+    "longline": {
+     "tier": 0,
+     "maxHp": 33
+    },
+    "unclaimed": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "armresthog": {
+     "tier": 0,
+     "maxHp": 37
+    },
+    "lastcall": {
+     "tier": 0,
+     "maxHp": 132
+    },
+    "finalcall": {
+     "tier": 0,
+     "maxHp": 150
+    },
+    "standbysprite": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "lostluggage": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "redeye": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "hushling": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "signalfault": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "turnstile": {
+     "tier": 0,
+     "maxHp": 42
+    },
+    "drillworm": {
+     "tier": 0,
+     "maxHp": 170
+    },
+    "pausesprite": {
+     "tier": 0,
+     "maxHp": 44
+    },
+    "paperweight": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "curator": {
+     "tier": 0,
+     "maxHp": 56
+    },
+    "twinlens": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "vance": {
+     "tier": 0,
+     "maxHp": 99999
+    },
+    "deadletter": {
+     "tier": 0,
+     "maxHp": 58
+    },
+    "rubberstamp": {
+     "tier": 0,
+     "maxHp": 66
+    },
+    "censor": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "leviathan": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "julian": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "gridlockprime": {
+     "tier": 0,
+     "maxHp": 160
+    },
+    "smoglet": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "tickets": {
+     "tier": 0,
+     "maxHp": 17
+    },
+    "coyote": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "gridlock": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "tarblob": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "bigshake": {
+     "tier": 0,
+     "maxHp": 84
+    },
+    "cuecrab": {
+     "tier": 0,
+     "maxHp": 40
+    },
+    "clapper": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "boommoth": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "extra": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "fogwisp": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "directorscut": {
+     "tier": 0,
+     "maxHp": 100
+    },
+    "acornagent": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "peanutgallery": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "twigspy": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "cheekstuffer": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "stickysap": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "chairman": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "lukewarm": {
+     "tier": 4,
+     "maxHp": 32
+    },
+    "leftover": {
+     "tier": 2,
+     "maxHp": 30
+    },
+    "wetblanket": {
+     "tier": 3,
+     "maxHp": 47
+    },
+    "thedraft": {
+     "tier": 2,
+     "maxHp": 40
+    },
+    "pickyeater": {
+     "tier": 1,
+     "maxHp": 41
+    },
+    "ironbelly": {
+     "tier": 1,
+     "maxHp": 136
+    }
+   },
+   "flags": {
+    "town": {},
+    "row": {},
+    "hollow": {},
+    "pier": {},
+    "reeds": {},
+    "sundial": {},
+    "schoolyard": {},
+    "school": {},
+    "cafetorium": {},
+    "stacks": {},
+    "readroom": {},
+    "moonclub": {},
+    "dome": {},
+    "terminal": {},
+    "gatezero": {},
+    "flightzero": {},
+    "gate00": {},
+    "concourse": {},
+    "subdepot": {},
+    "subtunnel": {},
+    "subchamber": {},
+    "towerlobby": {},
+    "towerstairs": {},
+    "towershelves": {},
+    "towervault": {},
+    "towerpinnacle": {},
+    "deadletter": {},
+    "memgrace": {},
+    "memrose": {},
+    "memamy": {},
+    "memtnb": {},
+    "stillcore": {},
+    "foreverheart": {},
+    "bakery": {},
+    "library": {},
+    "greenhouse": {},
+    "post": {},
+    "tea": {},
+    "observatory": {},
+    "shop": {
+     "Penny": true
+    },
+    "taxi": {},
+    "amyhouse": {},
+    "grands": {},
+    "elliehouse": {},
+    "blvd": {},
+    "jpark": {
+     "Olivia": true,
+     "Nara": true
+    },
+    "griffith": {},
+    "studio": {},
+    "backlot": {},
+    "stage7": {},
+    "stageset": {},
+    "oakpark": {},
+    "oak": {},
+    "crown": {},
+    "carbarn": {},
+    "boiler": {},
+    "coffee": {},
+    "ramen": {},
+    "juicebar": {},
+    "nickels": {
+     "Nickel": true
+    },
+    "wardrobe": {},
+    "cinema": {},
+    "boards": {},
+    "lacab": {
+     "Sol": true
+    },
+    "tomhouse": {},
+    "tomsuite": {},
+    "casa": {},
+    "loftlobby": {},
+    "lofts": {},
+    "tower": {},
+    "creole": {},
+    "pupuseria": {},
+    "jordansam": {},
+    "dakota": {}
+   },
+   "fallen": [
+    "stuffedshirt@18,5"
+   ],
+   "party": [
+    {
+     "id": "tom",
+     "level": 38,
+     "xp": 34,
+     "hp": 778,
+     "maxHp": 778
+    },
+    {
+     "id": "deedee",
+     "level": 38,
+     "xp": 34,
+     "hp": 705,
+     "maxHp": 705
+    },
+    {
+     "id": "boppy",
+     "level": 38,
+     "xp": 34,
+     "hp": 814,
+     "maxHp": 814
+    }
+   ],
+   "members": [
+    {
+     "id": "tom",
+     "level": 38,
+     "xp": 34,
+     "wins": 44,
+     "hp": 778,
+     "maxHp": 778,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "t_peel",
+      "Outfit": "motorcoat",
+      "Charm": "tom_chm2"
+     },
+     "stamps": [
+      "A1",
+      "B1",
+      "B2",
+      "B4",
+      "B3",
+      "B5",
+      "B6",
+      "A2"
+     ],
+     "ver": {},
+     "remix": [
+      "A1",
+      "sig",
+      "basic"
+     ],
+     "ranks": {
+      "sig": 3,
+      "basic": 3,
+      "A1": 3,
+      "B1": 3,
+      "B2": 2,
+      "B4": 2,
+      "B5": 2,
+      "A2": 3,
+      "B3": 2,
+      "B6": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": [
+      {
+       "stamps": [
+        "A1",
+        "B1",
+        "B2",
+        "B4",
+        "B3",
+        "B5",
+        "A2"
+       ],
+       "ver": {}
+      },
+      {
+       "stamps": [
+        "A1",
+        "B1",
+        "B2",
+        "B4",
+        "B3",
+        "B5",
+        "A2"
+       ],
+       "ver": {}
+      }
+     ],
+     "loadout": 0,
+     "vibes": {
+      "main": "tom_flier",
+      "pocket": "tom_gamer",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "tom_flier": 729,
+       "tom_gamer": 365,
+       "tom_baker": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "grace",
+     "level": 38,
+     "xp": 34,
+     "wins": 0,
+     "hp": 619,
+     "maxHp": 619,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "g_dumpling",
+      "Outfit": "gtee",
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1",
+      "A2",
+      "B2"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "A1": 2,
+      "B1": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0,
+     "vibes": {
+      "main": "grace_squishy",
+      "pocket": "grace_craft",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "grace_squishy": 729,
+       "grace_craft": 365,
+       "grace_stage": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "rose",
+     "level": 38,
+     "xp": 34,
+     "wins": 0,
+     "hp": 587,
+     "maxHp": 587,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "r_lambytoy",
+      "Outfit": "rdress",
+      "Charm": "rclip"
+     },
+     "stamps": [
+      "B1",
+      "A1",
+      "B2",
+      "A2"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "B1": 2,
+      "A1": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0,
+     "vibes": {
+      "main": "rose_sugar",
+      "pocket": "rose_cozy",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "rose_sugar": 729,
+       "rose_cozy": 365,
+       "rose_prank": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "amy",
+     "level": 38,
+     "xp": 34,
+     "wins": 0,
+     "hp": 705,
+     "maxHp": 705,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "a_whistle",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1",
+      "A2",
+      "B2"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "A1": 2,
+      "B1": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0,
+     "vibes": {
+      "main": "amy_fitness",
+      "pocket": "amy_classroom",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "amy_fitness": 729,
+       "amy_classroom": 365,
+       "amy_super": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "deedee",
+     "level": 38,
+     "xp": 34,
+     "wins": 27,
+     "hp": 705,
+     "maxHp": 705,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "deedee_tool2",
+      "Outfit": "hushsweater",
+      "Charm": "deedee_chm2"
+     },
+     "stamps": [
+      "B1",
+      "B2",
+      "B4",
+      "B3",
+      "A5",
+      "B6",
+      "A1",
+      "A2"
+     ],
+     "ver": {},
+     "remix": [
+      "B2",
+      "sig",
+      "basic"
+     ],
+     "ranks": {
+      "sig": 3,
+      "basic": 3,
+      "A1": 3,
+      "B1": 3,
+      "B4": 2,
+      "B3": 2,
+      "A5": 2,
+      "A2": 3,
+      "B2": 2,
+      "B6": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": [
+      {
+       "stamps": [
+        "A1",
+        "B1",
+        "B2",
+        "B4",
+        "B3",
+        "A5",
+        "A2"
+       ],
+       "ver": {}
+      },
+      {
+       "stamps": [
+        "A1",
+        "B1",
+        "B2",
+        "B4",
+        "B3",
+        "A5",
+        "A2"
+       ],
+       "ver": {}
+      }
+     ],
+     "loadout": 0,
+     "vibes": {
+      "main": "deedee_neat",
+      "pocket": "deedee_nurse",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "deedee_neat": 729,
+       "deedee_nurse": 365,
+       "deedee_cook": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "boppy",
+     "level": 38,
+     "xp": 34,
+     "wins": 27,
+     "hp": 814,
+     "maxHp": 814,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "boppy_tool2",
+      "Outfit": "boppy_out2",
+      "Charm": "boppy_chm2"
+     },
+     "stamps": [
+      "B2",
+      "A4",
+      "B3",
+      "B5",
+      "B1",
+      "A3",
+      "B6",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [
+      "B2",
+      "B1"
+     ],
+     "ranks": {
+      "sig": 3,
+      "basic": 3,
+      "A1": 3,
+      "B1": 2,
+      "A4": 2,
+      "B3": 2,
+      "B5": 2,
+      "A2": 2,
+      "B2": 2,
+      "A3": 2,
+      "B6": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": [
+      {
+       "stamps": [
+        "A1",
+        "A2",
+        "B2",
+        "A4",
+        "B3",
+        "B5",
+        "B1"
+       ],
+       "ver": {}
+      },
+      {
+       "stamps": [
+        "A1",
+        "A2",
+        "B2",
+        "A4",
+        "B3",
+        "B5",
+        "B1"
+       ],
+       "ver": {}
+      }
+     ],
+     "loadout": 0,
+     "vibes": {
+      "main": "boppy_dep",
+      "pocket": "boppy_pepper",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "boppy_dep": 9,
+       "boppy_pepper": 5,
+       "boppy_angler": 0
+      },
+      "pool": {
+       "total": 0,
+       "set": false
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "tnb",
+     "level": 38,
+     "xp": 34,
+     "wins": 17,
+     "hp": 719,
+     "maxHp": 719,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "n_steamer",
+      "Outfit": "watchvest",
+      "Charm": "tnb_chm2"
+     },
+     "stamps": [
+      "B1",
+      "A1",
+      "B2",
+      "B3",
+      "A4",
+      "A3"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "B1": 2,
+      "A1": 2,
+      "B3": 2,
+      "A2": 2,
+      "A4": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "nara",
+     "level": 38,
+     "xp": 34,
+     "wins": 17,
+     "hp": 657,
+     "maxHp": 657,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "nara_tool2",
+      "Outfit": "nara_out2",
+      "Charm": "nara_chm2"
+     },
+     "stamps": [
+      "B1",
+      "A1",
+      "B2",
+      "A2",
+      "B3",
+      "A3"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "B1": 2,
+      "A1": 2,
+      "B3": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "justin",
+     "level": 38,
+     "xp": 34,
+     "wins": 0,
+     "hp": 752,
+     "maxHp": 752,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "j_tester",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1",
+      "A2",
+      "B2"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "A1": 2,
+      "B1": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0,
+     "vibes": {
+      "main": "justin_basement",
+      "pocket": "justin_wire",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "justin_basement": 729,
+       "justin_wire": 365,
+       "justin_ref": 0
+      }
+     },
+     "row": null
+    },
+    {
+     "id": "olivia",
+     "level": 38,
+     "xp": 34,
+     "wins": 17,
+     "hp": 717,
+     "maxHp": 717,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "o_phone",
+      "Outfit": "fielddaytee",
+      "Charm": "beanie"
+     },
+     "stamps": [
+      "A1",
+      "B1",
+      "A2",
+      "B2",
+      "B3",
+      "A3"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2,
+      "basic": 2,
+      "A1": 2,
+      "B1": 2,
+      "B3": 2,
+      "A3": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0,
+     "vibes": {
+      "main": "olivia_rope",
+      "pocket": "olivia_mom",
+      "quirks": [
+       null,
+       null
+      ],
+      "vp": {
+       "olivia_rope": 729,
+       "olivia_mom": 365,
+       "olivia_news": 0
+      }
+     },
+     "row": null
+    }
+   ],
+   "opts": {
+    "diff": "director",
+    "speed": 2,
+    "hf": true,
+    "skipBtn": true,
+    "autoSpend": true,
+    "volMusic": 5,
+    "volFx": 10,
+    "volVoice": 10
+   },
+   "story": {
+    "mode": "full",
+    "chapter": 9,
+    "flags": {
+     "opening-done": true,
+     "met-tnb": true,
+     "met-nara": true,
+     "visited-la": true,
+     "saw-squishy": true,
+     "tombo:rose1": true,
+     "tombo:grace1": true,
+     "ch1-goal": true,
+     "ch1-theft": true,
+     "tombo:deedee1": true,
+     "ch1-t1": true,
+     "battle:mudling": "win",
+     "ch1-t2": true,
+     "battle:skeeter": "win",
+     "battle:grump": "win",
+     "ch1-tuts": true,
+     "ch1-pond": true,
+     "ch1-crown": true,
+     "battle:bigone": "win",
+     "ch1-tin": true,
+     "ch1-done": true,
+     "ch2-goal": true,
+     "ch2-tnb": true,
+     "ch2-nara": true,
+     "tombo:nara1": true,
+     "ch2-starter": true,
+     "ch2-smog": true,
+     "tombo:tnb1": true,
+     "ch2-lawn": true,
+     "ch2-odette": true,
+     "ch2-carmen": true,
+     "ch2-source": true,
+     "ch2-t1": true,
+     "battle:tickets": "win",
+     "battle:coyote": "win",
+     "ch2-tuts": true,
+     "ch2-boss": true,
+     "battle:bigshake": "win",
+     "ch2-clear": true,
+     "ch2-done": true,
+     "ch3-goal": true,
+     "ch3-boppy": true,
+     "ch3-tea": true,
+     "ch3-story": true,
+     "ch3-pier": true,
+     "tombo:boppy1": true,
+     "ch3-jar": true,
+     "ch3-r1": true,
+     "battle:soggysock": "win",
+     "battle:tangle": "win",
+     "ch3-tuts": true,
+     "ch3-wait": true,
+     "battle:snag": "win",
+     "ch3-snag": true,
+     "ch3-hollow": true,
+     "ch3-coin": true,
+     "ch3-pool": true,
+     "battle:irongill": "win",
+     "ch3-release": true,
+     "ch3-clear": true,
+     "ch3-done": true,
+     "ch4-goal": true,
+     "ch4-nara": true,
+     "ch4-gate": true,
+     "ch4-snack": true,
+     "ch4-fetch": true,
+     "battle:cuecrab": "win",
+     "ch4-main": true,
+     "ch4-sets": true,
+     "battle:clapper": "win",
+     "ch4-west": true,
+     "battle:boommoth": "win",
+     "ch4-ny": true,
+     "ch4-stage": true,
+     "ch4-rig": true,
+     "ch4-boss": true,
+     "battle:directorscut": "win",
+     "ch4-wrap": true,
+     "ch4-clear": true,
+     "ch4-done": true,
+     "ch5-goal": true,
+     "tombo:amy1": true,
+     "ch5-pruitt": true,
+     "ch5-hall": true,
+     "ch5-snack": true,
+     "battle:tardybell": "win",
+     "ch5-art": true,
+     "battle:glitterglue": "win",
+     "ch5-music": true,
+     "battle:dodgeball": "win",
+     "ch5-gym": true,
+     "ch5-clocks": true,
+     "tombo:grace2": true,
+     "ch5-boss": true,
+     "battle:redpen": "win",
+     "ch5-wrap": true,
+     "ch5-clear": true,
+     "ch5-done": true,
+     "ch6-goal": true,
+     "ch6-tnb": true,
+     "tombo:tnb2": true,
+     "ch6-nara": true,
+     "tombo:nara2": true,
+     "ch6-park": true,
+     "battle:peanutgallery": "win",
+     "ch6-play": true,
+     "battle:twigspy": "win",
+     "ch6-garden": true,
+     "battle:cheekstuffer": "win",
+     "ch6-picnic": true,
+     "ch6-dig-play": true,
+     "ch6-scraps": true,
+     "ch6-dig-garden": true,
+     "ch6-dig-picnic": true,
+     "ch6-fetch": true,
+     "ch6-door": true,
+     "ch6-oak": true,
+     "ch6-board": true,
+     "ch6-ladder": true,
+     "ch6-boss": true,
+     "battle:chairman": "win",
+     "ch6-wrap": true,
+     "ch6-take": true,
+     "ch6-clear": true,
+     "ch6-done": true,
+     "ch7-goal": true,
+     "ch7-page": true,
+     "ch7-stacks": true,
+     "ch7-story": true,
+     "battle:cliffhanger": "win",
+     "ch7-fic": true,
+     "ch7-cards": true,
+     "battle:knowitall": "win",
+     "ch7-non": true,
+     "battle:popup": "win",
+     "ch7-pic": true,
+     "ch7-door": true,
+     "ch7-boss": true,
+     "battle:unread": "win",
+     "ch7-wrap": true,
+     "ch7-clear": true,
+     "tombo:deedee2": true,
+     "ch7-done": true,
+     "ch8-goal": true,
+     "goalCh": 9,
+     "ch8-block": true,
+     "goalLog": [
+      {
+       "c": 8,
+       "t": "2nd Ave in Jefferson Park, south of Downtown."
+      },
+      {
+       "c": 8,
+       "t": "the old Car Barn, at the east end of Jefferson Boulevard."
+      },
+      {
+       "c": 8,
+       "t": "the Paint Shop (top left), the Machine Shop (top right), the Lunchroom (bottom left). Get the pilot lights back."
+      },
+      {
+       "c": 8,
+       "t": "the turntable motor (bottom of the corridor, by the turntable)."
+      },
+      {
+       "c": 8,
+       "t": "pull the turntable lever (top of the corridor). Track 4 goes to the Boiler Room."
+      },
+      {
+       "c": 8,
+       "t": "across the turntable to Track 4, the Boiler Room."
+      },
+      {
+       "c": 9,
+       "t": "Deedee and Boppy’s house (RIVITUSO), on Rivituso Row, south of the Square."
+      },
+      {
+       "c": 9,
+       "t": "the Moon Club. Luna’s observatory (MOON) in the Square."
+      },
+      {
+       "c": 9,
+       "t": "up the stairs, through the little silver door (back right of the observatory)."
+      }
+     ],
+     "ch8-barn": true,
+     "shopseen:tom_tool1": true,
+     "shopseen:tom_out1": true,
+     "shopseen:tom_chm1": true,
+     "shopseen:tom_tool2": true,
+     "shopseen:tom_out2": true,
+     "shopseen:tom_chm2": true,
+     "shopseen:grace_tool1": true,
+     "shopseen:grace_out1": true,
+     "shopseen:grace_chm1": true,
+     "shopseen:grace_tool2": true,
+     "shopseen:grace_out2": true,
+     "shopseen:grace_chm2": true,
+     "shopseen:rose_tool1": true,
+     "shopseen:rose_out1": true,
+     "shopseen:rose_chm1": true,
+     "shopseen:rose_tool2": true,
+     "shopseen:rose_out2": true,
+     "shopseen:rose_chm2": true,
+     "shopseen:amy_tool1": true,
+     "shopseen:amy_out1": true,
+     "shopseen:amy_chm1": true,
+     "shopseen:amy_tool2": true,
+     "shopseen:amy_out2": true,
+     "shopseen:amy_chm2": true,
+     "shopseen:justin_tool1": true,
+     "shopseen:justin_out1": true,
+     "shopseen:justin_chm1": true,
+     "shopseen:justin_tool2": true,
+     "shopseen:justin_out2": true,
+     "shopseen:justin_chm2": true,
+     "shopseen:deedee_tool1": true,
+     "shopseen:deedee_out1": true,
+     "shopseen:deedee_chm1": true,
+     "shopseen:deedee_tool2": true,
+     "shopseen:deedee_out2": true,
+     "shopseen:deedee_chm2": true,
+     "shopseen:b_goldreel": true,
+     "shopseen:boppy_tool1": true,
+     "shopseen:boppy_out1": true,
+     "shopseen:boppy_chm1": true,
+     "shopseen:boppy_tool2": true,
+     "shopseen:boppy_out2": true,
+     "shopseen:boppy_chm2": true,
+     "shopseen:tnb_tool1": true,
+     "shopseen:tnb_out1": true,
+     "shopseen:tnb_chm1": true,
+     "shopseen:tnb_tool2": true,
+     "shopseen:tnb_out2": true,
+     "shopseen:tnb_chm2": true,
+     "shopseen:nara_tool1": true,
+     "shopseen:nara_out1": true,
+     "shopseen:nara_chm1": true,
+     "shopseen:nara_tool2": true,
+     "shopseen:nara_out2": true,
+     "shopseen:nara_chm2": true,
+     "shopseen:bandage1": true,
+     "shopseen:picnic1": true,
+     "shopseen:bandage2": true,
+     "shopseen:picnic2": true,
+     "shopseen:popper1": true,
+     "shopseen:popper2": true,
+     "heart": 100,
+     "ch8-paint": true,
+     "battle:wetblanket": "win",
+     "ch8-shop": true,
+     "battle:thedraft": "win",
+     "ch8-lunch": true,
+     "battle:pickyeater": "win",
+     "ch8-pilots": true,
+     "ch8-motor": true,
+     "ch8-tt": "east",
+     "ch8-turn": true,
+     "ch8-boss": true,
+     "battle:ironbelly": "win",
+     "ch8-clear": true,
+     "ch8-wrap": true,
+     "ch8-done": true,
+     "ch8-feast": true,
+     "ch9-sol": true,
+     "ch9-goal": true,
+     "goal": "find the three mirrors. Coat Check (top left), Card Room (top right), Ballroom (bottom).",
+     "ch9-letter": true,
+     "ellie-paid-1": true,
+     "ellie-paid-2": true,
+     "ch9-luna": true,
+     "ch9-club": true,
+     "ch9-cards": true,
+     "battle:soreloser": "win",
+     "ch9-coat": true,
+     "battle:coathanger": "win",
+     "ch9-rotB": 1,
+     "ch9-rotA": 1
+    },
+    "traces": 11,
+    "traceLog": {
+     "8:tnb-hello8": 1,
+     "8:nara-hello8": 1,
+     "8:olivia-hello": 1,
+     "8:tnb-motor": 1,
+     "8:ironbelly-bread": 1,
+     "8:ch8-wrap": 1,
+     "9:girls-letter": 1,
+     "9:deedee-invite": 1,
+     "9:ellie-hello": 1,
+     "9:grands-club": 1,
+     "9:boppy-cards": 1
+    },
+    "override": {
+     "lock": [
+      "tom",
+      "deedee",
+      "boppy"
+     ],
+     "bar": [
+      "grace",
+      "rose"
+     ],
+     "allow": [
+      "deedee",
+      "boppy"
+     ]
+    },
+    "bench": []
+   },
+   "b3": {
+    "v": 1,
+    "ruckus": 0
+   },
+   "m2": {
+    "newSkill": []
+   }
+  }
+ }
+}
