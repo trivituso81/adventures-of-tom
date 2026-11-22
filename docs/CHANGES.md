@@ -1,3 +1,7 @@
+## b3looka (2026-11-22): the new battle screen's styles and scripts now carry a new cache tag, so phones load the new look
+
+Tom saw the old battle look after b3look. Cause: a push in the middle of a rebase put the b3look files on main before the tag bump, so `b3-deck.css`, `m2.css`, `engine/b3-deck.js`, `b3-play.js`, `b3-ui.js`, `b3-core.js`, `b3-ruckus.js`, `b3-menu.js`, `b3-skins.js`, `b3-story.js`, `m2-vibes.js` and the words file kept their old `?v=` tags and the phone's cache served the old files. Tags only; no code changed.
+
 ## b3look (2026-11-22): the new battle screen takes the new menu's look and shows every fact once; Details hides the details everywhere
 
 Card c-b3look. Tom (11-21 23:56): use the new menu's design for all the battle controls, "everything from colors to backgrounds to font styles", remove extraneous information, a Details switch that hides the details "from like everything, literally", labels against icons, color only when it means something, like facts together, "avoiding redundant information most of all". Plan, inventory and rules: `claude/b3look-plan.md` (written before the code changed). New battle only; battle 2 is untouched; no rule or number changed (`node tools/b3-sim.js check`: 3587 checks before and after, FAILS []).
