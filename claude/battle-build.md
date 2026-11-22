@@ -94,7 +94,7 @@ Rules for every stage's session:
 | Item | Result |
 |---|---|
 | Built | Ten third Vibes (Star Baker, Stage Performer, Prankster, SuperMom, Home Cook, Boat Angler, Scream King, Picky Princess, Armchair Ref, News Anchor), 40 moves, 10 Traits, 20 Quirks, 32 new statuses, ops extend, swapGap, replay, invert, five one-offs in `engine/b3-custom.js`. |
-| Tests | `node tools/b3-sim.js check` CHECKS 3773, FAILS []; `python3 tools/b3_test.py s4` FAILS []; a Lab fight for each of the ten Vibes opens with the new move and shows no script error; the Vibes screen looked at in portrait and landscape (`tools/shots/b3s19-vibes-*.png`). |
+| Tests | `node tools/b3-sim.js check` CHECKS 4049, FAILS []; `python3 tools/b3_test.py s4` FAILS []; a Lab fight for each of the ten Vibes opens with the new move and shows no script error; the Vibes screen looked at in portrait and landscape (`tools/shots/b3s19-vibes-*.png`). |
 | Not run | `tools/m2_test.py` ends with two console errors that are GitHub API rate limits (403), nothing to do with the Vibes page. The Battle Guide test keeps three failures that are not from this stage: the guide page loads `engine/clip-ground.js`, and the plan counts follow the live board. |
 
 ## Calls made in stage 19 that Tom has not confirmed

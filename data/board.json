@@ -29215,12 +29215,17 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built stage 19 (build b3s19): ten third Vibes (40 moves, 10 Traits, 20 Quirks, 32 statuses, new ops), old saves load them at 0 VP with no migration, Battle 2 untouched, Battle Guide no longer lists them as planned. No four-in-a-conversation game rule exists in any document, so none was built; every move is tested in four-member parties. Tests: b3-sim check 4049 FAILS [], b3_test s4 FAILS [], one Lab fight per Vibe (all ten open with the new move), Vibes screen looked at in portrait and landscape. Not from this stage: m2_test two GitHub 403 rate-limit console errors; Battle Guide test keeps three failures (engine/clip-ground.js loaded by the page, plan counts follow the live board)."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD69XD6MhKUjtiGGmR",
     "opening": "\"Read claude/battle-build.md, claude/battle-architecture.md section 5 (rows 19 to 21) and docs/BATTLE3.md...\""
-   }
+   },
+   "after": "nothing for Tom: c-b3s20"
   },
   {
    "id": "c-b3s20",
