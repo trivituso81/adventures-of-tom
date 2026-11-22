@@ -33685,7 +33685,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33713,8 +33713,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: New menu: switch it on and remove the old one is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view Sent to Claude as card c-fix-menu4play; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T06:10:52.060Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-b3gear",
@@ -34548,7 +34554,7 @@
      ],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
@@ -35162,6 +35168,65 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen-2 and t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen-2.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Hanging\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:04:54.215Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen-2 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-pairmove1-gen"
+  },
+  {
+   "id": "c-fix-menu4play",
+   "tag": "fix-menu4play",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Play the whole new menu on the Duo and iPhone",
+   "next": "You reported a problem on Play the whole new menu on the Duo and iPhone. Claude starts the fix by itself. Latest: On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view",
+   "blocks": [
+    "t-menu4play"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T06:10:51.177Z",
+     "card": "t-menu4play",
+     "title": "Play the whole new menu on the Duo and iPhone",
+     "ask": "play",
+     "words": "On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view",
+     "shot": "board-shots/t-menu4play-mwrfuika.jpg",
+     "asked": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, load a game and open the menu. Go through Family, Vibes, Gear, Bag and System: change someone's Main Vibe, put on a piece of gear, use a healing item, save. Then do the same once on the iPhone held upright. Also open title ) Admin ) Battle Lab ) NEW BATTLE ) VIBES AND RANKS: it is the same Vibes page, with a row of Rank 1 to 5 buttons. About 10 minutes. Judge looks and feel only: is everything easy to read, does each page make sense at a glance, does moving between people and pages feel right. Tap All good, or Something is wrong and say what to change."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-menu4play"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-menu4play.",
+     "at": "2026-11-22T06:10:52.060Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-menu4play: On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view Screenshot: board-shots/t-menu4play-mwrfuika.jpg on branch inbox.",
+     "at": "2026-11-22T06:10:52.060Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-22T06:10:52.060Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the whole new menu on the Duo and iPhone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-menu4play and t-menu4play in data/board.json, history included. Your first push is the commit board: start c-fix-menu4play.\n\nTom tested and found problems:\n1. Card t-menu4play (Play the whole new menu on the Duo and iPhone, ask play). He was asked: On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, load a game and open the menu. Go through Family, Vibes, Gear, Bag and System: change someone's Main Vibe, put on a piece of gear, use a healing item, save. Then do the same once on the iPhone held upright. Also open title ) Admin ) Battle Lab ) NEW BATTLE ) VIBES AND RANKS: it is the same Vibes page, with a row of Rank 1 to 5 buttons. About 10 minutes. Judge looks and feel only: is everything easy to read, does each page make sense at a glance, does moving between people and pages feel right. Tap All good, or Something is wrong and say what to change. He wrote: On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view Screenshot: board-shots/t-menu4play-mwrfuika.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-menu4play-mwrfuika.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T06:10:51.177Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-menu4play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-menu4play, and give the build fix-menu4play a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-menu4play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
