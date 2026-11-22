@@ -29146,10 +29146,11 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Remaking three flat moves: Blockade, Cube Pop,",
-   "next": "You reported 2 problems on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor; Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Pressing the button results in nothing happening",
+   "next": "You reported 3 problems on Remaking three flat moves: Blockade, Cube Pop, Wet-Floor; Make Rose's Giddyup with Tom in it; Judge Tom's eight moves in the Move Lab. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: stuck for 2 hours",
    "blocks": [
     "t-movefun-gen",
-    "t-pairmove1-gen"
+    "t-pairmove1-gen",
+    "t-movestage-lab"
    ],
    "created": "2026-11-21",
    "changed": "2026-11-22",
@@ -29171,6 +29172,15 @@
      "words": "Pressing the button results in nothing happening",
      "shot": "",
      "asked": "Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him."
+    },
+    {
+     "at": "2026-11-22T22:07:55.217Z",
+     "card": "t-movestage-lab",
+     "title": "Judge Tom's eight moves in the Move Lab",
+     "ask": "animations",
+     "words": "stuck for 2 hours",
+     "shot": "",
+     "asked": "Nothing to tap yet. The wan-gen Action is making the 12 stage pictures, 8 object videos and 6 body videos for Tom's eight moves (about $6, inside the auto limits); the Claude build then adds the stage engine and the Move Lab. When this card says it is ready, open ADMIN ) BATTLE LAB ) NEW BATTLE ) MOVE LAB: TOM, watch each of the eight moves in a real fight, and tap Keep, Tweak or Replace on each. There is no separate watch card for these videos: the Lab is the only review."
     }
    ],
    "chat": {
@@ -29192,6 +29202,11 @@
      "d": "2026-11-22",
      "t": "Tom reported on t-pairmove1-gen: Pressing the button results in nothing happening",
      "at": "2026-11-22T14:55:56.588Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom reported on t-movestage-lab: stuck for 2 hours",
+     "at": "2026-11-22T22:07:55.854Z"
     }
    ],
    "prompt": {
@@ -29201,7 +29216,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
     "effort": "medium (fixing what you named, starting from what is there)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen, t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n2. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him. He wrote: Pressing the button results in nothing happening\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen, t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen, t-pairmove1-gen, t-movestage-lab in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n2. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN ) BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him. He wrote: Pressing the button results in nothing happening\n3. Card t-movestage-lab (Judge Tom's eight moves in the Move Lab, ask animations). He was asked: Nothing to tap yet. The wan-gen Action is making the 12 stage pictures, 8 object videos and 6 body videos for Tom's eight moves (about $6, inside the auto limits); the Claude build then adds the stage engine and the Move Lab. When this card says it is ready, open ADMIN ) BATTLE LAB ) NEW BATTLE ) MOVE LAB: TOM, watch each of the eight moves in a real fight, and tap Keep, Tweak or Replace on each. There is no separate watch card for these videos: the Lab is the only review. He wrote: stuck for 2 hours\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen, t-pairmove1-gen, t-movestage-lab to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-movefun-gen"
   },
@@ -30321,7 +30336,7 @@
   {
    "id": "t-movestage-lab",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -30430,8 +30445,14 @@
     {
      "d": "2026-11-22",
      "t": "tom-suitedoor accepted by eye after the bulk run stopped it (vision check p1 missed a move that is there): baked and wired to suite_door_slide (build wanstop-tom-suitedoor-r1). Judge it in the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: something is wrong: stuck for 2 hours Sent to Claude as card c-fix-movefun-gen; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T22:07:55.854Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-crispvoices",
