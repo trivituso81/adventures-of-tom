@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T22:02Z",
+ "built": "2026-11-22T22:09Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -2111,11 +2111,11 @@
    "attempt": 2,
    "at": "2026-11-22T21:35:50.102987Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"From his starting relaxed stance, he quickly pulls a small gray game cartridge out of his pocket, holds it up to his mouth with both hands and blows hard into its open end once with puffed cheeks. He squints into the car\" Its reason: main action of blowing into cartridge with puffed cheeks and squinting is missing"
    ],
-   "in_game": null,
+   "in_game": "tom-cartridge",
    "strip": "art/video-history/tom-cartridge-a2-r1.webp",
    "pad": null,
    "model": "alibaba"
@@ -2497,11 +2497,11 @@
    "attempt": 1,
    "at": "2026-11-22T21:33:39.871339Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"From his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He give\" Its reason: main action missing: no arms spreading wide or sweeping inward like sliding doors"
    ],
-   "in_game": null,
+   "in_game": "tom-suitedoor",
    "strip": "art/video-history/tom-suitedoor-r1.webp",
    "pad": 0.8,
    "model": "alibaba"
@@ -2589,7 +2589,7 @@
   "skeeter-bite": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry. Result r1: passed, baked as skeeter_bite.",
   "rose-cushion-kling": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)",
   "tom-suitedoor": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
-  "tom-controller": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-controller": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2). wanstop-tom-controller-r1: both rev 1 videos do the move by eye (the open hand flings left, then a fist is raised beside the shoulder), but the hand touched the left edge in 14 to 15 pictures. One change: pad 0.8 to 0.65 (the next pad of _bulk.pads); prompt, start picture and settings kept.",
   "tom-shell": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "tom-konami": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "tom-porsche": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
@@ -2600,7 +2600,7 @@
   "stage-tom-runwaylights-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-fireball-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
-  "stage-tom-starbeam-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-starbeam-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. Rev 2: the star hardly moved in rev 1 (motion 0.6 of 255, needs 2.0, both tries). Kept: start picture, resolution, duration, seed, camera and background text. Changed one thing: the motion sentence now says the star pulses brighter and dimmer three times with the trail flickering.",
   "stage-tom-meteor-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  }
 }
