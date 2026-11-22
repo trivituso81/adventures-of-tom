@@ -33435,7 +33435,7 @@
    "id": "c-menu3",
    "tag": "menu3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: Bag and System",
@@ -33447,7 +33447,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGNmigviVcDA5SnDgw",
+    "url": "https://claude.ai/code/session_01RXeukGNmigviVcDA5SnDgw",
     "opening": "not started"
    },
    "prompt": {
@@ -33480,16 +33480,24 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu3: the new menu has its Bag and System pages (still behind the MENU: NEW switch)"
     }
    ],
-   "started_at": "2026-11-22T04:37:42+00:00"
+   "started_at": "2026-11-22T04:37:42+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-menu4",
    "tag": "menu4",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: switch it on and remove the old one",
@@ -33499,7 +33507,7 @@
    ],
    "after": "t-menu4play",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -33517,6 +33525,10 @@
     {
      "d": "2026-11-22",
      "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: Bag and System is done."
     }
    ]
   },
@@ -34204,7 +34216,7 @@
   {
    "id": "c-movefun-fix",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "movefun2",
    "title": "Remake the flat move videos Tom picked",
@@ -34214,10 +34226,9 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDYivdPsYXjec2AAAJ",
     "opening": "not started"
    },
-   "waiting_on": "tom",
    "auto": true,
    "prompt": {
     "what": "Applies the fixes Tom picked on t-movefun-pick and starts their videos.",
@@ -34232,8 +34243,25 @@
     {
      "d": "2026-11-21",
      "t": "Added by movefun1. Blocked by t-movefun-pick."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Which flat moves to remake is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Answer from \"Which flat moves to remake\": Fix all of them"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-22T04:54:10+00:00"
   },
   {
    "id": "c-fix-wanmop1-gen",
@@ -34289,6 +34317,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGNmigviVcDA5SnDgw",
+   "title": "New menu: Bag and System",
+   "first": "2026-11-22T04:53:09Z",
+   "last": "2026-11-22T04:54:05Z",
+   "tags": [
+    "menu3"
+   ],
+   "cards": [
+    "c-menu3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukETpXPHu7mASVc7nnD",
    "title": "New menu: Vibes and Gear",
@@ -39392,8 +39432,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "08051dc791c3ce4656a4cf7d36abfb70a25b931c",
- "synced_at": "2026-11-22T04:51:53+00:00",
+ "synced": "d10ab02edb9328c804ea1b3c25784b07269a12e2",
+ "synced_at": "2026-11-22T04:54:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
