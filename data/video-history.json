@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T20:54Z",
+ "built": "2026-11-22T21:04Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -910,6 +910,22 @@
    "strip": "art/video-history/grace-victory-r1.webp",
    "pad": null,
    "model": "alibaba"
+  },
+  {
+   "file": "guide-body-tnb-idle-t1-r1.mp4",
+   "job": "guide-body-tnb-idle-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T20:57:26.863316Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-idle-t1-r1.webp",
+   "pad": null,
+   "model": null
   },
   {
    "file": "guide-move-bring-a-jacket-ward-t1-r1.mp4",
