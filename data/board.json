@@ -28881,7 +28881,7 @@
   {
    "id": "c-wanstop-tom-rose-giddyup-r1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-rose-giddyup-r1",
    "title": "Fix the stopped video tom-rose-giddyup",
@@ -28893,7 +28893,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDKRyWfnM5DgpkTYMR",
+    "url": "https://claude.ai/code/session_01RXeukDKRyWfnM5DgpkTYMR",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -28908,6 +28908,14 @@
     {
      "d": "2026-11-22",
      "t": "Looked at the frames: Rose rides and springs off as asked; misses were feet 1.1 percent and edge touch in frames 86 to 87. Changed only pad 0.65 to 0.55 (rev 2), started next try."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-rose-giddyup-r1: Tom and Rose's Giddyup video (rev 2) starts smaller so Rose's leap clears the edge"
     }
    ],
    "prompt": {
@@ -28919,7 +28927,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-rose-giddyup-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-rose-giddyup (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed: feet, edge. Evidence: feet: lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent; edge: the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87). This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: tom-rose-giddyup-r1-result.json (every check with numbers and the look-check answers) and the videos tom-rose-giddyup-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-pairmove1-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-rose-giddyup-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-pairmove1-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-rose-giddyup-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T14:23:01+00:00"
+   "started_at": "2026-11-22T14:23:01+00:00",
+   "done": "2026-11-22"
   },
   {
    "id": "c-wanstop-tom-blockade-r4",
@@ -29460,6 +29469,19 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDKRyWfnM5DgpkTYMR",
+   "title": "Fix the stopped video tom-rose-giddyup",
+   "first": "2026-11-22T14:25:27Z",
+   "last": "2026-11-22T14:25:28Z",
+   "tags": [
+    "wanstop-tom-rose-giddyup-r1"
+   ],
+   "cards": [
+    "c-wanstop-tom-rose-giddyup-r1",
+    "t-pairmove1-gen"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
    "title": "Fix the report backlog (2 open)",
@@ -34907,8 +34929,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "b91d17fbc46c2b55d83710258dab521670f72003",
- "synced_at": "2026-11-22T14:24:47+00:00",
+ "synced": "793a29e93b9ba651201c27e78f7d72a9a36baf15",
+ "synced_at": "2026-11-22T14:26:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
