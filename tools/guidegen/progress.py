@@ -17,6 +17,10 @@ _last = {}
 def mark(anim, take, stage):
     if os.environ.get('GUIDE_STATUS') != '1' or stage not in STAGES or _last.get((anim, take)) == stage: return False
     _last[(anim, take)] = stage
+    try:   # startpics10: tell the phone (tools/notify.py never raises)
+        sys.path.insert(0, os.path.join(os.path.dirname(HERE))); import notify
+        notify.send(notify.label(anim), {'line': 'In line at the video service. It starts when its turn comes.', 'making': 'Being made now (about 2 minutes).', 'checking': 'The video is made. Checking it now.'}[stage], tags='hourglass_flowing_sand' if stage != 'checking' else 'mag')
+    except Exception: pass
     d = tempfile.mkdtemp(prefix='guidestatus-')
     try:
         at = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())

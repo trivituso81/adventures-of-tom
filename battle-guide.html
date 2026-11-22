@@ -225,6 +225,7 @@ async function boot(){
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;planRefresh();}).catch(()=>{});
+    fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;planRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
@@ -429,7 +430,7 @@ function renderList(){
     h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
   }else if(tab==='anims'){
     const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
-    h=planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    h=notifyHtml()+planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
     const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
     h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
@@ -799,6 +800,19 @@ function askStart(){
   const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;const m=$('gstartmsg');m.textContent='';
   if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
   $('gstartconf').innerHTML='<div class="conf"><p><b>This spends '+money(g.startCost||0.15)+'.</b> One picture of '+esc(ownerName(g.startWho))+', checked before it goes in the game. The most it can spend is $0.30.</p><div class="row2"><button type="button" class="gold" id="gstartgo">Yes, spend '+money(g.startCost||0.15)+'</button><button type="button" id="gstartcan">Cancel</button></div></div>';
+}
+let NOTIFY=null;
+function notifyHtml(){   // startpics10: how to get a phone notification for every status change of a picture or video
+  if(!NOTIFY||!NOTIFY.topic)return '';
+  return '<div class="card"><div class="k">Phone notifications</div><p>Get a notification on your phone each time a picture or video is in line, being made, checked, ready or failed, so you never have to watch this page.</p>'
+   +'<p class="hint">One time: 1. Install the free app <b>ntfy</b> from the App Store. 2. Open it, tap <b>+</b>, and enter this name exactly: <b>'+esc(NOTIFY.topic)+'</b> (leave the server as it is). 3. Press the button below: your phone should show a test message.</p>'
+   +'<p><button type="button" class="ghost" id="gnotest">Send a test to my phone</button></p><p class="hint" id="gnotestmsg"></p></div>';
+}
+async function sendNotifyTest(){
+  const m=$('gnotestmsg');if(!NOTIFY){return;}
+  try{const r=await fetch((NOTIFY.server||'https://ntfy.sh')+'/'+NOTIFY.topic,{method:'POST',body:'Test from the Battle Guide. Your phone will get a message like this each time a picture or video changes status.',headers:{Title:'Battle Guide test'}});
+    m.textContent=r.ok?'Sent. If your phone shows nothing within a few seconds, check that the ntfy app is subscribed to the name above.':'The test did not go through ('+r.status+').';}
+  catch(e){m.textContent='The test did not go through: '+e.message;}
 }
 const STARTING={};   // startpics7: a person whose picture was already asked for in this page is not asked for again
 async function queueLine(tok){   // startpics7: what is ahead of a request, from the Actions list (needs the GitHub token the page already uses)
@@ -1177,6 +1191,7 @@ function doSearch(){const q=$('q').value.trim();if(q.length>1||sFilter==='plan')
 // ---------- taps ----------
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,a');if(!t)return;
+  if(t.id==='gnotest'){sendNotifyTest();return;}
   if(t.dataset.tab){$('q').value='';$('searchbar').hidden=true;go(t.dataset.tab,'');return;}
   if(t.dataset.anim){e.preventDefault();openPlayer(t.dataset.anim);return;}
   if(t.dataset.go){if(t.dataset.vibePick)vibeSel[t.dataset.id]=t.dataset.vibePick;if($('q').value){$('q').value='';$('searchbar').hidden=true;}go(t.dataset.go,t.dataset.id);return;}

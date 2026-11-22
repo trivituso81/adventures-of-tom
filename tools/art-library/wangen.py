@@ -297,11 +297,11 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take(qf, ({r.get('at') for r in sps} if defer else {r.get('at') for r in doc.get('requests') or []}), a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
     waiting = staging_waits(a.repo)
-    for r in reqs:
+    def make_one(r):   # startpics10: one request, start to finish; a.pool of these run at once, and each one that ends lets the next begin
         what = 'guide-%s-t%d' % (r['slug'], r['take'])
         if r['anim'] in waiting:   # movestage1: a family move with no staging row is never made (a page cached before the gate could still ask)
             rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0,
-                         'error': 'Waits for staging: this move is made in three layers now (claude/move-staging-plan.md) and its staging row is not written yet. Nothing was made or spent.'}); continue
+                         'error': 'Waits for staging: this move is made in three layers now (claude/move-staging-plan.md) and its staging row is not written yet. Nothing was made or spent.'}); return
         job = copy.deepcopy(jobs[a.template]); job.update(rev=1, frame=r['start'])
         job.pop('pad', None)
         if r.get('pad'): job['pad'] = float(r['pad'])
@@ -311,18 +311,28 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         with lock:
             day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
             if not dry and used + est > a.day_cap + 1e-9:
-                rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); continue
-            ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0); ns.dry_run = dry
+                rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); return
+            ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0) + max(1, getattr(a, 'pool', 4)) * 1.0; ns.dry_run = dry   # startpics10: up to a.pool videos book at once, so the cap leaves room for the others
             ns.tell = (lambda s, _r=r: progress.mark(_r['anim'], _r['take'], 'checking' if s == 'DOWNLOADED' else progress.fal_stage(s))) if not dry else None
+        rcap = min(float(r.get('cap') or 1.0), 1.0)
+        if not dry and est > rcap + 1e-9:   # the request's own cap is checked here, since the run's cap leaves room for the videos made at the same time
+            say('REFUSED: $%.2f estimate is over this request\'s $%.2f cap. Nothing sent.' % (est, rcap))
+            with lock: rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'cap'})
+            return
         code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
         row = {'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'note': r.get('note', ''), 'cost': est if rep.get('file') else 0}
         if rep.get('file'):
             row['video'] = os.path.join(a.out, rep['file'])
             with lock: day[today] = round(day.get(today, 0.0) + est, 4); save()
         elif not dry: row['error'] = rep.get('error') or 'the video was not made'
-        else: continue
-        rows.append(row)
-        json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)   # guidestuck1: after EVERY video, so a run that dies keeps what it made
+        else: return
+        with lock:
+            rows.append(row)
+            json.dump({'results': list(rows)}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)   # guidestuck1: after EVERY video, so a run that dies keeps what it made
+
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=max(1, getattr(a, 'pool', 4))) as ex:
+        list(ex.map(make_one, reqs))
     json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
     code = 0 if all(not r.get('error') for r in rows) else 2
     if sps:
@@ -381,6 +391,7 @@ def main():
     ap.add_argument('--replay-checks', default='', help='measure videos already in --out (names like rose-giddyup-r4, comma list); free')
     ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
     ap.add_argument('--requests', action='store_true', help='guidegen1: work through data/wan-requests.json (what the Battle Guide asked for) instead of --what')
+    ap.add_argument('--pool', type=int, default=4, help='--requests: videos made at the same time; the rest wait and start as each one ends (startpics10)')
     ap.add_argument('--startpics', action='store_true', help='startpics9: work through data/startpic-requests.json only (start pictures; no videos)')
     ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
     ap.add_argument('--no-take', action='store_true', help='--requests: leave the request list as it is (tests)')

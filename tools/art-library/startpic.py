@@ -122,6 +122,13 @@ def publish(root, who, png, remote='origin', rebuild=True):
     return False
 
 
+def _note(who, msg, tags):   # startpics10: a phone notification (tools/notify.py never raises)
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))); import notify
+        notify.send('Start picture: ' + notify.label(who), msg, tags=tags)
+    except Exception: pass
+
+
 def run(a, jobs, state, lock, save, fal, key, reqs, run_one, judge, today, publisher=publish):
     """Every startpic request, one after the other. Returns (rows, exit code). `run_one` is wangen.run_one (a parameter so tests can stand in for fal)."""
     import copy, types
@@ -138,6 +145,7 @@ def run(a, jobs, state, lock, save, fal, key, reqs, run_one, judge, today, publi
             if not dry and used + est > a.day_cap + 1e-9:
                 row['error'] = 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap; rows.append(row); continue
             ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 0.3), 0.3); ns.dry_run = dry; ns.tell = None
+        _note(who, 'Making the start picture now (about 1 to 2 minutes).', 'hourglass_flowing_sand')
         code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
         if not rep.get('file'):
             if not dry: row['error'] = rep.get('error') or 'the picture was not made'
@@ -153,4 +161,7 @@ def run(a, jobs, state, lock, save, fal, key, reqs, run_one, judge, today, publi
         row['published'] = bool(publisher(a.repo, who, out))
         if not row['published']: row['error'] = 'The picture passed but could not be pushed to main. It is kept on the wangen branch.'
         rows.append(row)
+    for r in rows:
+        if r.get('error'): _note(r.get('startpic'), 'No picture was put in the game: ' + str(r['error'])[:150], 'x')
+        elif r.get('published'): _note(r.get('startpic'), 'The start picture is in the game' + (' (it faced the wrong way, so it was mirrored)' if r.get('mirrored') else '') + '. Generate this video now works for them.', 'white_check_mark')
     return rows, (0 if all(not r.get('error') for r in rows) else 2)

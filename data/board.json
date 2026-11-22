@@ -29920,12 +29920,13 @@
     "The page says Done when the picture is in the game; it says why in plain words when it is not. After about two minutes reload the page: the Generate this video button appears for Amy.",
     "Repeat for Boppy, Justin, Olivia, TNB and Nara (each is one tap on any of their moves).",
     "Open the Amy sheet again: the picture should be Amy facing left on flat magenta, same face and clothes as her hero. Tap All good, or Something is wrong and say who looks wrong.",
-    "Open the same person again: under their moves, the seven standard pose animations are listed. Tell me if a Victory pose is wrong for the person."
+    "Open the same person again: under their moves, the seven standard pose animations are listed. Tell me if a Victory pose is wrong for the person.",
+    "One time: install the free ntfy app, tap +, enter the name shown at the top of ADMIN > BATTLE GUIDE > Animations (Phone notifications), then press Send a test to my phone. You should see a message on your phone."
    ],
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics9",
+   "build": "startpics10",
    "history": [
     {
      "d": "2026-11-22",
@@ -31396,6 +31397,40 @@
      "d": "2026-11-22",
      "t": "Tom: \"I just want to generate these images. I've been trying for over a day\". Cause: pictures shared a line with videos and were cancelled by them. Built startpics9.",
      "at": "2026-11-22T21:27:30.822Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics10",
+   "title": "Queue any number of requests, notify each change",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics10",
+   "next": "Built as startpics10: requests queue and run four at a time, the next starts as one ends, and each status change goes to the phone through ntfy. Waits on your card t-startpics-try (one-time: install the ntfy app and add the topic shown on the Animations screen).",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"be able to send as many concurrent requests as I want, and they need to queue. And when one is completed, the next one needs to go, and then I need to be notified of the status change for each.\" Built startpics10.",
+     "at": "2026-11-22T21:45:53.371Z"
     }
    ],
    "prompt": {
