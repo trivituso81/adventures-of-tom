@@ -30661,7 +30661,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Build ONLY chapter 12 on Battle 3: Gridlock Prime (Boss). Starts after chapter 11 is switched on (c-b3s22, build b3s22a).",
+   "next": "Shipped as b3s22ch12: chapter 12 (Gridlock Prime) is on Battle 3. Tom plays it on t-b3s22ch12.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -30692,9 +30692,14 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built chapter 12 on Battle 3 (build b3s22ch12): Gridlock Prime (boss, 7 pips; HP 1860, 1400 for three) and the Gridlock it calls (713 HP, 357 for three), Four-Way Red Light as a 30% Guard Stance plus +30% Def and +25% Atk, used once above and once below half HP, Total Gridlock below half. Numbers are the bestiary's, none changed: the simulator puts the fight at 6.8 rounds (aim 6 to 7). One small code change: the summon op reads hp3. The chapter has only the one fight, so the formation pays the boss's 45 VP. Chapter 12 test, checks and night manifest added; chapter 13 is the first unswitched chapter in the story test."
     }
    ],
-   "started_at": "2026-11-22T21:24:38+00:00"
+   "started_at": "2026-11-22T21:24:38+00:00",
+   "after": "t-b3s22ch12"
   },
   {
    "id": "c-b3s22ch13",
@@ -31428,6 +31433,32 @@
     "effort": "medium (one page, one stylesheet, tested at five sizes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-vibelayout1 in data/board.json. Your first push is the commit board: start c-vibelayout1. The Vibes page (engine/m2-vibes.js, m2.css) takes Tom's new layout: see the card history for his words. Test with python3 tools/m2_test.py, look at the screenshots, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-b3s22ch12",
+   "title": "Milestone: play chapter 12 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch12 or a later name. Then CHAPTERS > Chapter 12 (or Take me there on the dashboard) and play to the last scene: Marlowe greys Jefferson Boulevard, Doña Carmen, the Alvarez house, then Gridlock Prime at the intersection (about 25 minutes). Judge the mechanics only: is the fight fun, is the pace right (aim 5 to 7 rounds), can you read the screen and the turn bar in portrait and landscape, does Four-Way Red Light read clearly (it takes 30% less damage and gains Defense and Attack for 2 turns and a Gridlock joins the Front; Panic Boil or a Break ends the guard), does Drench or Racket feel like the answer, do the tips on the message line tell you what to do. Known and left alone: recorded lines in the scenes still talk about Rush Hour and the old Tombo; recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 12 on the old battle. The chapter 13 card (c-b3s22ch13) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 12
+   },
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "created by the c-b3s22ch12 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the c-b3s22ch12 session: Milestone for chapter 12 on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [

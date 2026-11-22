@@ -165,7 +165,7 @@ with sync_playwright() as pw:
     fresh(pg,13,'chapter','hollow')
     ev(pg,"()=>{ memberById('tom').level=1; b3sMigrate(13); }")
     m=ev(pg,"()=>({lv:ALL_MEMBERS().map(m=>m.id+':'+m.level).join(' '),tom:memberById('tom').vibes.vp,deedee:memberById('deedee').vibes.vp,tnb:!!memberById('tnb').vibes})")
-    check('By chapter at chapter 13: a pool of 1620 (12 chapters done), 800 to the first Sig Vibe (capped) and 685 to the second',m['tom']['tom_flier']==800 and m['tom']['tom_gamer']==685 and m['deedee']['deedee_neat']==800,m)
+    check('By chapter at chapter 13: a pool of 1620 (12 chapters done), 800 to the first Sig Vibe (capped) and 800 to the second (also capped)',m['tom']['tom_flier']==800 and m['tom']['tom_gamer']==800 and m['deedee']['deedee_neat']==800,m)
     check('By chapter at chapter 13: no level is raised (battle 2 plays chapter 13)',' tom:1' in (' '+m['lv']),m)
     ev(pg,"()=>{ b3sMigrate(13); }")
     check('running it again changes nothing',ev(pg,"()=>memberById('tom').vibes.vp.tom_flier")==800)
@@ -174,7 +174,7 @@ with sync_playwright() as pw:
     check('New at chapter 13: Level floor 30 (the last on the list, set by chapter 12) is applied, and a higher level is never lowered',lv['tom']==30 and lv['grace']==35,lv)
     ev(pg,"()=>{ b3sSetMode('chapter'); resetStory('full',13); b3sFresh(); b3sMigrate(13); }")
     big=ev(pg,"()=>memberById('tom').vibes.vp")
-    check('chapter 13: the pool overflows (1620): the first Vibe caps at 800 and the rest goes to the second',big['tom_flier']==800 and big['tom_gamer']==685,big)
+    check('chapter 13: the pool overflows (1620): both Vibes cap at 800',big['tom_flier']==800 and big['tom_gamer']==800,big)
 
     # ---- 6. late joiners
     fresh(pg,3,'chapter','hollow'); ev(pg,"()=>b3sMigrate&&b3sMigrate(3)")
