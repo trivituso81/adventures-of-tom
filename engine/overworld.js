@@ -264,6 +264,9 @@ function pressAction() {
       const prev=n.onClose;
       n.onClose=()=>{ if(prev) prev(); offerRecruit(rm,n); };
     }
+    // A `tomReply` (also as a `when` variant) is Tom's reaction after the NPC's lines (report r-20261121-174051-vxq1).
+    const tomReply=npcLines(n,'tomReply');
+    if(tomReply.length&&!n.monster) { const prevT=n.onClose; n.onClose=()=>{ if(prevT) prevT(); openDialog('Tom',tomReply); }; }
     openDialog(n.name,lines,n);
   } else if(target.kind==='object') {
     const o=target.value;

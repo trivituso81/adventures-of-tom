@@ -31386,12 +31386,18 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 26 report(s)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed 7 of 8 reports in build reports-2026-11-21 (chapter 2 zoom, purple from landing, loft dialogue, Carmen reaction, Odette and Flurry spots). r-20261121-173628-97ha left open: no pin, nothing visibly overlaps; needs Tom to name the object.",
+     "at": "2026-11-22T03:00:00Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-22T01:53:56+00:00"
+   "started_at": "2026-11-22T01:53:56+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",

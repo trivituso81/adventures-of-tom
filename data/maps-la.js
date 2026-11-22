@@ -1466,7 +1466,8 @@ const LA_ROOMS=[
       '#######....#####'],
     npcs:[
       {name:'Doña Carmen',x:9,y:6,look:'carmen',roam:0,
-        when:[{...CH2_SMOG,lines:['The pupusas are fine. Everything is fine.','It\'s always this afternoon. Why\'d I ever flip them?']},
+        when:[{...CH2_SMOG,lines:['The pupusas are fine. Everything is fine.','It\'s always this afternoon. Why\'d I ever flip them?'],
+                tomReply:["She said fine twice. Nobody who's actually fine says it twice. That's the rule.","And she's right about one thing. They do smell perfect. Don't tell her I noticed."]},
               {...CH2_CLEAR,lines:['I left them on the comal the whole time. They came out perfectly crispy, actually.','Don\'t tell the juice bar. They\'ll want the recipe.']}],
         lines:[
         'Bienvenidos! Pupusas revueltas, and curtido on the side. Curtido isn\'t optional.',

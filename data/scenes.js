@@ -453,6 +453,9 @@ const CH2_LOST=(f,name)=>({if:()=>flag('battle:'+f)!=='win',then:[{heal:true},{t
 // Landing downtown. The script has no landing line; only the goal toast.
 SCENES.ch2Arrive=[
   {flag:'ch2-goal'},
+  {zoom:2,time:.01},   // the camera is already pushed in on Tom from the landing (travel.js arriveLA)
+  {talk:'Tom',lines:["And there's the purple. TNB texted about it in the cab. It looks even better than it sounded."]},
+  {zoom:1,time:.8},
   {toast:"Goal: TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown.",time:4.5}
 ];
 // Scene 1. TNB's loft: Tom insists TNB go first, then can't hold his news in. TNB joins.
@@ -461,19 +464,18 @@ SCENES.ch2Loft=[
   {place:'TNB',at:[8,9],dir:'down'},
   {walk:'tom',to:routeTo('tom',8,10),speed:.22}, {face:'tom',dir:'up'},
   {talk:'TNB',lines:["Hey, babe. You've got your news face on."]},
-  {talk:'Tom',lines:["I do have news. But you go first. I can wait."]},
-  {talk:'TNB',lines:["Sure. So I got up this morning, and I was thinking about toast..."]},
-  {talk:'Tom',lines:["A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast."]},
-  {talk:'TNB',lines:["No, yours wins. How big a fish?"]},
-  {talk:'Tom',lines:["Big. No, sorry. TAXI big."]},
-  {talk:'TNB',lines:["Huh. That'd tip the scales."]},
-  {talk:'TNB',lines:["Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out of bread."]},
-  {talk:'Tom',lines:["Go back one."]},
-  {talk:'TNB',lines:["The window?"]},
-  {talk:'Tom',lines:["The PURPLE."]},
-  {talk:'TNB',lines:["Oh. Yeah. All day. It's coming off the hills. The bread's the real problem."]},
+  {talk:'Tom',lines:["Babe! Hi! I missed you. I made a list of everything I need to tell you. It's three things, and number three is a fish."]},
+  {talk:'TNB',lines:["Start with three."]},
+  {talk:'Tom',lines:["I can't skip ahead. Number one is a ball of mud that ran into my mother's kitchen and stole her muffin pan, with the muffins in it."]},
+  {talk:'TNB',lines:["Huh. Are the muffins okay?"]},
+  {talk:'Tom',lines:["Number two is the muffins. They're gone. Number three is the fish. He was the size of a cab, wearing the pan on his head like a crown."]},
+  {talk:'TNB',lines:["Then he knows where the muffins went."]},
+  {talk:'Tom',lines:["He gave the pan back, so number three is closed."]},
+  {talk:'TNB',lines:["Okay. Look at the sky, babe. It's been purple since this morning."]},
+  {talk:'Tom',lines:["That's not on my list. Okay. Number four, the sky."]},
+  {talk:'TNB',lines:["Same color as my soda. I checked."]},
   {walk:'tom',to:routeTo('tom',8,10),speed:.2}, {face:'tom',dir:'up'},   // Tom goes to the window
-  {talk:'TNB',lines:["Hills, then bread. I figure we walk up and poke it."]},
+  {talk:'TNB',lines:["It's coming off the hills. I figure we walk up and poke it."]},
   {talk:'Tom',lines:["Poke it. Yes. But maybe just gently."]},
   {talk:'TNB',lines:["Nara's already on it. She's been barking at it from your porch since breakfast."]},
   {talk:'Tom',lines:["Then we're her backup."]},
@@ -539,6 +541,8 @@ SCENES.ch2Smog=[
 // Scene 4. The boulevard: Doña Carmen's griddle is smoking. One outdoor scene at the two storefronts; the trail opens at the end.
 SCENES.ch2Odette=[
   {flag:'ch2-odette'}, {flag:'ch2-carmen'},
+  // The party stands on the street, not in a front yard (report r-20261121-174119-0522).
+  {place:'tom',at:[13,8],dir:'up'}, {place:'tnb',at:[14,8],dir:'up'}, {place:'nara',at:[14,9],dir:'up'},
   {spawn:{name:'Miss Odette',look:'odette',at:[5,7],dir:'right'}},
   {spawn:{name:'Doña Carmen',look:'carmen',at:[11,7],dir:'left'}},
   {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }},
@@ -561,6 +565,8 @@ SCENES.ch2Odette=[
 // Scene 5. The trail: a parking ticket from a monster, then a coyote who only looks at Nara.
 SCENES.ch2Flurry=[
   {flag:'ch2-t1'},
+  // The party steps up into the clearing first so the DOWNTOWN arch does not cover them (report r-20261121-174358-pwub).
+  {if:()=>player.y>14,then:[{walk:'tom',to:routeTo('tom',12,13),speed:.24},{wait:.5}],else:[]},
   {place:'Ticket Flurry',at:()=>[player.x-5,player.y]},
   {walk:'Ticket Flurry',to:()=>[[player.x-4,player.y],[player.x-3,player.y],[player.x-2,player.y]],speed:.25},
   {talk:'Ticket Flurry',lines:["No parking Saturdays. Noon to two. You parked."]},
@@ -811,7 +817,7 @@ const STORY_MAPFX=[
       if(smog||!flag('ch2-tnb')) for(let k=0;k<4;k++) { const ph=(time*.5+k/4)%1; gfx.globalAlpha=(1-ph)*.7; ellipse(x+1+Math.sin(time*2+k)*5,y-18-ph*40,5+ph*12,4+ph*8,k%2?'#8a5aa8':'#b48ad0'); }
       gfx.globalAlpha=1;
     }
-    if(!smog&&!(M.id==='blvd'&&flag('ch2-goal')&&!flag('ch2-clear'))) return;   // Downtown is already under the haze when Tom lands (chapter 2 scene 1)
+    if(!smog&&!(M.id==='blvd'&&!flag('ch2-clear'))) return;   // Downtown is under the haze from the landing, before the goal toast (report r-20261121-172850-q5km)
     const a=CH2_SMOG_MAPS[M.id]; if(!a) return;
     // A purple haze over the whole map, with slow drifting puffs.
     gfx.globalAlpha=a; rect(0,0,M.w*T,M.h*T,'#7a4aa0');

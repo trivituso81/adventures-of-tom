@@ -448,9 +448,12 @@ function arriveLA(arr,card=[]) {
     {start(){ this.s=S.walk(player,[[h.door.x,h.door.y+1]],.3); this.s.start(); },update(dt){ return this.s.update(dt); }},
     S.call(()=>{ for(const f of followers) { f.hidden=false; f.x=h.door.x; f.y=h.door.y; f.facing='down'; } }),
     ...card,
+    // Report r-20261121-172826-9r47: the camera is pushed in on Tom from the first word of the chapter; ch2Arrive keeps it and zooms out itself.
+    {start(){ this.z=compileScene([{zoom:2,time:.9}])[0]; this.z.start(); }, update(dt){ return this.z.update(dt); }},
     S.talk('Tom',(arr&&arr.tom)||travelPick('arrLA',TRAVEL_POOLS.arrLA)),
     S.call(()=>{
-      endIntro(); placeFollowers();
+      const n=STORY.chapter,sc=SCENES['ch'+n+'Arrive'],keepZoom=Array.isArray(sc)&&sc.some(x=>x.zoom>1)&&!STORY.flags['ch'+n+'-goal'];
+      endIntro(); if(keepZoom) setSceneZoom(2); placeFollowers();
       sfx.levelChime();
       showToast(arr?'Welcome back to Los Angeles.':'Los Angeles! Downtown is here, Jefferson Park is south, monsters are up in Griffith Park.',arr?3:4.5);
       saveGame('auto',true);
