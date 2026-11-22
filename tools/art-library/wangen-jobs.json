@@ -2137,7 +2137,7 @@
   "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  },
  "stage-tom-starbeam-vid": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2145,7 +2145,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/stage-tom-starbeam-motion-v1.txt",
+  "prompt_file": "tools/art-library/prompts/stage-tom-starbeam-motion-v2.txt",
   "input": {
    "resolution": "480p",
    "aspect_ratio": "1:1",
@@ -2163,7 +2163,7 @@
    "step": 3,
    "after": "stage-tom-starbeam"
   },
-  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. Rev 2: the star hardly moved in rev 1 (motion 0.6 of 255, needs 2.0, both tries). Kept: start picture, resolution, duration, seed, camera and background text. Changed one thing: the motion sentence now says the star pulses brighter and dimmer three times with the trail flickering."
  },
  "stage-tom-meteor-vid": {
   "rev": 1,

@@ -30362,9 +30362,9 @@
    },
    "wgen": {
     "want": true,
-    "at": "2026-11-22T22:03:51Z",
+    "at": "2026-11-22T22:05:30Z",
     "n": 1,
-    "est": 0.5,
+    "est": 0.15,
     "auto": true
    },
    "blocks": [],
@@ -31906,6 +31906,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at both videos: the star and its trail sit almost still. Changed one thing: the motion sentence (the star pulses brighter and dimmer three times), rev 2. Next try started on t-movestage-lab."
     }
    ],
    "prompt": {
