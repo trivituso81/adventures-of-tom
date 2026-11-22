@@ -32126,7 +32126,7 @@
    "title": "Make the smoke test pass again on main",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "next": "A Sonnet session makes python3 tools/smoke.py pass again. It fails on main today for reasons that are not in the game: tools/hollow_spot_test.py and tools/voice-library/sparse_files_test.py are missing from tools/night/tests.json, and tools/board_sync_test.py fails three checks that depend on what is on the board today (R5 replay, the unstick card, the card Last night: duplicate card id t-lastnight). Nothing for Tom to do.",
    "blocks": [],
@@ -32134,7 +32134,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDeYfVUYU53oJvSeVf",
+    "url": "https://claude.ai/code/session_01RXeukDeYfVUYU53oJvSeVf",
     "opening": "not started"
    },
    "prompt": {
@@ -32159,9 +32159,18 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as smokefix1: the smoke test passes again; two tests listed for the night run, three board checks no longer read today's board"
     }
    ],
-   "started_at": "2026-11-22T02:07:33+00:00"
+   "started_at": "2026-11-22T02:07:33+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "b-board-menuux2",
@@ -32442,6 +32451,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDeYfVUYU53oJvSeVf",
+   "title": "Make the smoke test pass again on main",
+   "first": "2026-11-22T02:18:26Z",
+   "last": "2026-11-22T02:19:00Z",
+   "tags": [
+    "smokefix1"
+   ],
+   "cards": [
+    "c-smokefix1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCpWRQTkDHBoY79qPj",
    "title": "Fix: Try the game strip and Take me there",
@@ -37314,8 +37335,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "6f353aa1ae079a43d3dd6c1591a6294076ac2f2c",
- "synced_at": "2026-11-22T02:18:09+00:00",
+ "synced": "df0943c002d27b2fe485a3fde52b359f9cb01042",
+ "synced_at": "2026-11-22T02:19:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
