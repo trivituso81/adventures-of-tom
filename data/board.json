@@ -30352,8 +30352,8 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T20:40:03Z",
+    "want": true,
+    "at": "2026-11-22T21:21:04Z",
     "n": 26,
     "est": 6,
     "run": {
@@ -30476,6 +30476,10 @@
      "d": "2026-11-22",
      "t": "Tom (13:0x): the $15 a day video limit was used up ($20.14 today), so all 18 jobs waited. \"remove this - i will manage the limit myself with my balance\". Build wannoday1 sets the daily limit to none; the per animation limit ($3.20, 4 videos) and this card's $12 run cap stay.",
      "at": "2026-11-22T21:09:59.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Run started again by the build session (the daily video limit was removed by Tom, wannoday1; the first two taps were stopped by it and spent nothing)."
     }
    ]
   },
