@@ -34926,7 +34926,7 @@
   {
    "id": "c-wanpurpose1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanpurpose1",
    "title": "Video check judges the move's purpose, not every word",
@@ -34943,6 +34943,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (21:35): \"I've now spent the most $10 trying to get the mop for DD. It's crazy\" Tom (21:36): \"it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanpurpose1: the video check judges the move's purpose, not every word; Deedee's Wet-Floor uses the take with the wet-floor sign"
     }
    ],
    "prompt": {
@@ -34953,7 +34957,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -35422,6 +35427,33 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T21:57:21-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1",
+    "pairmove1",
+    "wanstuck1",
+    "wanstuck1b",
+    "videohist1",
+    "wanpurpose1"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1",
+    "c-pairmove1",
+    "c-wanstuck1",
+    "c-videohist1",
+    "c-wanpurpose1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDnzg2ftCCDy78SEfB",
    "title": "Grump Hollow monsters sometimes slip past the boss fence",
    "first": "2026-11-21T21:52:59Z",
@@ -35443,31 +35475,6 @@
    ],
    "cards": [
     "c-hollowfence"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T21:28:57-08:00",
-   "tags": [
-    "wanch5",
-    "wanauto1",
-    "wanmop1",
-    "giddyupbake1",
-    "pairmove1",
-    "wanstuck1",
-    "wanstuck1b",
-    "videohist1"
-   ],
-   "cards": [
-    "c-wanch5",
-    "c-wanauto1",
-    "c-wanmop1",
-    "c-giddyupbake1",
-    "c-pairmove1",
-    "c-wanstuck1",
-    "c-videohist1"
    ]
   },
   {
@@ -40162,8 +40169,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "ec97649233c45d65d8064a8c0a6c18a1560604e8",
- "synced_at": "2026-11-22T05:51:52+00:00",
+ "synced": "8b6b5dd95a6e9eccfcf37313bc2c469638a8e2ae",
+ "synced_at": "2026-11-22T05:58:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
