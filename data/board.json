@@ -29939,6 +29939,28 @@
      "at": "2026-11-22T17:17:01.379Z"
     }
    ]
+  },
+  {
+   "id": "c-fix-guideboot",
+   "lane": "claude",
+   "col": "inprogress",
+   "theme": "Battle System",
+   "tag": "guideboot1",
+   "title": "Battle Guide stuck on the loading screen",
+   "next": "Fix the page script error that stops the Battle Guide before it builds, and ship it.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGhtfUEQq5o5Cd7e6E",
+    "opening": "The battle guide doesn't seem to be working it's just stuck on a loading screen"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"The battle guide doesn't seem to be working it's just stuck on a loading screen.\" New card."
+    }
+   ]
   }
  ],
  "sessions": [
