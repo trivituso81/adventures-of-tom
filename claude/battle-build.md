@@ -57,7 +57,8 @@ Rules for every stage's session:
 | 15 | Story switch, chapter 1: ADMIN switch (OLD, BY CHAPTER, NEW), chapter 1's fights on Battle 3, level and Vibe Point migration, Ruckus as a save field, Vibe Points and a victory card, late joiners' loadouts on recruit, new tips, no Warmth in chapter 1 | Pushed 2026-11-21 | `b3s15` | Milestone B: Chapter Select > Chapter 1, play it on the new battle (about 30 minutes). |
 | 17 | Story switch, chapters 2 to 5: chapters 2 to 5's 16 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 16 fights, the kind flag on a boss win, one chapter test each | Pushed 2026-11-21 | `b3s17a`, `b3s17b`, `b3s17c`, `b3s17` | Milestone C: play chapters 2 to 5 (card t-milestonec). |
 | 18 | Story switch, chapters 6 to 10: chapters 6 to 10's 20 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 20 fights, five Battle 3 retry lines. The bonus chapter was switched afterwards in `b3s18bonusa` and `b3s18bonus` (see the row below and `docs/BATTLE3.md` "The bonus chapter is switched") | Pushed 2026-11-21 (chapters 6 to 10) | `b3s18a`, `b3s18b`, `b3s18c`, `b3s18d`, `b3s18e`, `b3s18` | Milestone D: play chapters 6 to 10 (card t-milestoned). The bonus chapter is card c-b3s18bonus. |
-| 16, 19 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
+| 20 | Character Level by shared XP: no new rule (Battle 3 already used `b6GainXp` and `b6Sync`); `B3_STORY.xp` retunes the XP per monster of chapters 1 to 10 so a chapter pays about 250 XP (2.5 levels), `b6BattleXp` takes an optional table | Pushed 2026-11-22 | `b3s20` | Nothing is asked. |
+| 16, 19, 21 to 23 | See architecture section 5 | Not started (16 is skipped on purpose, see "Calls made in stage 17") | | |
 
 ## Stage 15 results (facts)
 

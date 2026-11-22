@@ -15,6 +15,20 @@ const B3_STORY={
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
   levelFloor:[0,1,4,7,9,12,14,17,19,22,25],
+  // Character Level by shared XP (stage 20): XP a Battle 3 win pays per monster. Everything else in the formula stays battle 2's (`b6BattleXp`,
+  // engine/progress.js): a boss fight pays B6.bossXp (100), so with the chapter's other formations paying about 150 once each, a chapter
+  // pays about 250 XP, 2.5 levels at 100 XP a level, which is what `levelFloor` climbs by. Battle 2 keeps its own `B6_XP` and the same save.
+  // Chapters 6 to 10 paid 292 to 409 before this (the fallback grows with level), chapters 1 to 5 paid 192 to 225. Not listed (the bonus chapter): B6_XP.
+  xp:{mudling:9,skeeter:17,grump:19,toad:21,log:24,
+    smoglet:9,tickets:17,coyote:19,gridlock:21,tarblob:23,
+    soggysock:12,bobber:21,tangle:23,snag:28,
+    extra:7,boommoth:20,clapper:20,fogwisp:22,cuecrab:26,
+    popquiz:18,tardybell:20,glitterglue:20,dodgeball:20,
+    acornagent:14,stickysap:14,peanutgallery:16,twigspy:16,cheekstuffer:16,
+    dogear:15,shusher:15,cliffhanger:16,knowitall:16,popup:16,
+    lukewarm:14,leftover:14,wetblanket:16,thedraft:16,pickyeater:16,
+    velvetrope:15,stuffedshirt:15,coathanger:16,soreloser:16,wallflower:16,
+    carryon:15,jetlag:15,longline:16,unclaimed:16,armresthog:16},
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],

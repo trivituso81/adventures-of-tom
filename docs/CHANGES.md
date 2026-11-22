@@ -1,3 +1,12 @@
+## b3s20 (2026-11-22): Battle 3 pays about 250 XP a chapter, so the family climbs 2.5 levels a chapter
+
+Card c-b3s20 (stage 20, Character Level by shared XP). Fact: Battle 3 already used `b6GainXp` and `b6Sync` (everyone catches up to Tom after a win, `b3sAward` in `engine/b3-story.js`), so no rule was built. Only the XP amounts changed, in data.
+
+- Measured what one clear of each chapter's formations paid (boss fight 100 flat): chapter 1 310, 2 325, 3 292, 4 311, 5 312, then 392, 419, 452, 482 and 509 for chapters 6 to 10 (the fallback `10 + 3 x level` grows with the bestiary level). The target is about 250 (2.5 levels at 100 XP a level, the same climb as `B3_STORY.levelFloor`).
+- New table `B3_STORY.xp` in `data/b3-story.js`: one number per monster of chapters 1 to 10 (kept in the old order within a chapter, scaled so the non-boss formations pay about 150 and the boss 100). Every chapter now pays 248 to 254. Not changed: boss XP, the bonus chapter (274), chapters 11 to 20 (not on Battle 3 yet).
+- `b6BattleXp(foes,npc,table)` in `engine/progress.js` takes an optional table that wins over `B6_XP`; `b3sAward` passes `B3_STORY.xp`. Battle 2 passes none, so its numbers and the same save are untouched.
+- Tested: `node tools/b3-sim.js check` (3587 checks, FAILS []), `python3 tools/b3_test.py s4` (pass), `python3 tools/smoke.py` build checks. `python3 tools/b3_story_test.py`: 1 fail, "a save made on Battle 3 loads with the switch on Old", the same step that failed before this change (checked with the change stashed). Not looked at: the roster in portrait and landscape.
+
 ## fix-menu4play-3 (2026-11-22): Menu: Party tab, name beside the bar, HP above the pictures, Primary and Secondary, tap twice to pick
 
 Tom's report on t-menu4play: tab renamed Party; name level with the green bar and HP above the pictures; the Vibe name bigger; the gauge reads Combos with Double Team and Family Ruckus; the switch reads Show skill descriptions and, off, hides the whole description; Main and Pocket became Primary and Secondary; the mastered note is gone; tapping a Vibe once shows the +/- on Health, Attack, Defense and Speed, tapping it again makes it Primary.

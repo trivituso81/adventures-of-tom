@@ -84,7 +84,7 @@ function b3sAward(F) {
   const S=B3S.fight; if(!S) return '';
   const npc=S.npc,d=monsterDef(npc),plan=S.plan;
   const foes=F.foes.filter(f=>!f.add).map(f=>({id:f.id,boss:f.D.role==='boss',lvl:F.party[0]?F.party[0].level:1,calm:false}));
-  const gain=b6BattleXp(foes,npc);
+  const gain=b6BattleXp(foes,npc,B3_STORY.xp);
   const purse=b2Purse(foes,npc,0);
   npc.tier=(npc.tier||0)+1; npc.maxHp+=d.hpStep||0; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;

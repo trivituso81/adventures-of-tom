@@ -44,7 +44,8 @@ function b6Sync() {
 }
 // XP for the fight just won: each monster's B6_XP (+5% per time it has been beaten, up to +50%), or a flat level for a boss.
 // foes and npc default to the fight in progress; the overlevel instant win (engine/feel.js) passes its own.
-function b6BattleXp(foes,npc) {
+// table (optional): a monster-id table that wins over B6_XP (Battle 3's B3_STORY.xp).
+function b6BattleXp(foes,npc,table) {
   if(!foes) { foes=B2.foes; npc=B2.cfg&&B2.cfg.npc; }
   const tier=Math.min(B6.tierXpMax,(npc&&npc.tier)||0);
   if(foes.some(f=>f.boss)) return B6.bossXp;
@@ -54,7 +55,7 @@ function b6BattleXp(foes,npc) {
   for(const f of foes) {
     const D=typeof b2FoeDef==='function'&&b2FoeDef(f.id),base=(D&&D.level)||(MONSTERS[f.id]&&MONSTERS[f.id].level)||1;
     const gap=Math.max(0,(hero.level||1)-Math.max(base,f.lvl||1)),taper=Math.max(B6.overFloor,1-B6.overTaper*gap);
-    xp+=(B6_XP[f.id]||Math.round(10+base*3))*(1+B6.tierXp*tier)*taper;
+    xp+=((table&&table[f.id])||B6_XP[f.id]||Math.round(10+base*3))*(1+B6.tierXp*tier)*taper;
   }
   return Math.max(1,Math.round(xp));
 }

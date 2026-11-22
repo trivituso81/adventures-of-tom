@@ -29185,7 +29185,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Character Level by shared XP on Battle 3, reusing b6GainXp and b6Sync with the XP amounts retuned in data. Starts after c-b3s19.",
+   "next": "Shipped as b3s20: Battle 3 pays about 250 XP a chapter (B3_STORY.xp). Next card c-b3s21.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29212,13 +29212,18 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped b3s20: no new rule (Battle 3 already used b6GainXp and b6Sync); chapters 1 to 10 paid 292 to 509 XP, now 248 to 254 through a Battle 3 table B3_STORY.xp. Sim 3587 checks pass, b3_test s4 passes; b3_story_test has the one old failure (switch on Old), unchanged by this build."
     }
    ],
    "started_at": "2026-11-22T08:20:37+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukETdNcxVt8YMqrXeiq",
     "opening": "started by START"
-   }
+   },
+   "after": "nothing for Tom: c-b3s21"
   },
   {
    "id": "c-b3s21",
