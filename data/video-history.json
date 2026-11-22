@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T06:47Z",
+ "built": "2026-11-22T07:12Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1819,6 +1819,23 @@
    "model": "alibaba"
   },
   {
+   "file": "tom-rose-giddyup-r1.mp4",
+   "job": "tom-rose-giddyup",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T07:04:23.305907Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-rose-giddyup-r1.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
    "file": "tom-run-r1.mp4",
    "job": "tom-run",
    "rev": 1,
@@ -1898,6 +1915,7 @@
   "rose-tackle": "wanch2: Kling r3 has one lamb (the Wan fault is gone) but her reaching hand left the left edge at the lunge; one change: pad 0.65 (was 0.8)",
   "rose-lava": "",
   "rose-giddyup": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65. wanch4 r5: one change, pad 0.65 (was 0.8), the fix that passed rose-tackle r4 and the casts. Prompt v2 unchanged. Result r5 (wanch4): MISSED. The top edge is clear now (hair top at row 30), but the leap became a forward somersault, upside down at video frames 66 to 74, and her hair touches the left edge at frames 70 to 74. Edge miss twice in a row: stop-loss on pad. Cause: the prompt says feet planted on the same spot AND leaps up and forward to the left; the travel to the left plus the tuck turns into a tumble toward the left edge. Next one change (card c-wanch5): leaps straight up, pad stays 0.65. wanch5 r6: one change, v3 prompt = v2 with \"leaps up and forward to the left once\" changed to \"leaps straight up once\". Pad stays 0.65, airborne stays true. Bake settings from rose-tackle (rose-giddyup.js does not exist yet; the tackle is her other Kling strike at pad 0.65). Result r6 (bulk run 44967949648): STOPPED on the look checks p1 and p2; every measurement passed (edge clear, height 0.1 percent, ends 2.01). By eye: one straight-up jump with knees tucked and a clean return, but before it the word \"twirls\" became a full body spin: her back is to the camera at video frames 32 to 42, then she turns back and crouches. The spin is the extra motion the look check called inconsistent. wanstop r7: one change, v4 prompt = v3 with \"twirls one hand above her head\" changed to \"circles one hand above her head\". Kept: the rest of the prompt word for word, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65, airborne, bake and wire. Result r7 (bulk run 44971778287): STOPPED on bg and edge (measurements; look checks not run). By eye: the hand circle is right (no body spin now), but the cannonball became a backward somersault, upside down at video frame 54, and she lands with her arm flung out to the left. Both misses are that flip: the background spread over the limit is in frame 54 only (23.8, the blur of the upside-down figure; every other frame is under 15) and the left edge touches are frames 58 and 59, the landing. The jump sentence was the same in r6 (upright jump) and r7 (flip), and r5 also tumbled, so the tuck is free to turn into a flip. wanstop r8: one change, v5 prompt = v4 with \"a tight cannonball\" changed to \"a tight upright cannonball\". Kept: the rest of the prompt word for word, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65, airborne, bake and wire. wanauto1: fresh budget from auto_from (4 videos, $3.20); this rev runs without a tap. wanauto1: stop-loss after r8 (flip again, and a hoop drawn for \"circles one hand\"); Tom decides the move on t-giddyup-decide.",
+  "tom-rose-giddyup": "pairmove1 (Tom 2026-11-21 20:07): \"if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up\"; \"the more advanced the move is the more acceptable it is for it to take longer\". Two-person video for Rose's \"Giddyup, Tata!\" Launch: she hops onto Tom's shoulders, rides with a fist up, springs off and lands crouched in front of him. Start picture art/clips/start/tom-rose-pair.png is built from tom-hero.png and rose-hero.png at their battle heights (Rose 83 of Tom's 99 rows, so she does not change size when the video starts). Only a start picture (she ends in front of him, so no end picture); returns false and airborne true because she leaves the ground and ends somewhere new. Played at 1x (a signature skill may take longer). The game plays it at Tom's spot with Rose hidden when Tom is standing (anim.pair in data/b3-kit-rose.js), else Rose's solo clip.",
   "deedee-idle": "",
   "deedee-guard": "",
   "deedee-hit": "",
