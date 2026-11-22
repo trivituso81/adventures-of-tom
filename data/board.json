@@ -31579,7 +31579,7 @@
    "id": "c-fix-wanstop-gen",
    "tag": "fix-wanstop-gen",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Generate the two fixed videos",
@@ -31602,7 +31602,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-wanstop-gen"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -31614,6 +31614,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-wanstop-gen: the button says nothing to make right now. but there is no video made",
      "at": "2026-11-22T01:45:22.081Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T01:54:20.241Z"
     }
    ],
    "prompt": {
