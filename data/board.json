@@ -29991,6 +29991,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
+   "title": "Chapter headings in the storybook look of the main menu",
+   "first": "2026-11-22T09:11:30-08:00",
+   "last": "2026-11-22T09:11:30-08:00",
+   "tags": [],
+   "cards": [
+    "c-chaptercard-storybook"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
    "title": "Fix the report backlog (2 open)",
    "first": "2026-11-22T09:08:23Z",
@@ -35476,8 +35486,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "666486de47586ea07b9a5866c16ffff205702b60",
- "synced_at": "2026-11-22T17:09:55+00:00",
+ "synced": "f9a1fc0543feeedf6e7f8d7c2cb9fc156ec02f9b",
+ "synced_at": "2026-11-22T17:12:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
