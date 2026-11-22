@@ -31130,6 +31130,38 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "c-standingfix",
+   "title": "Standing cards: show them as \"Runs every night\", no START",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Tom asked why Night cleanup and Night QA keep showing START however often he taps it, and why Nightly refactoring sits in Start next. Fix: standing cards get their own Runs every night section with last result and no START; Nightly refactoring becomes a Waiting card on GitHub (the night tests) until 7 clean nights.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "tag": "standingfix",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "",
+    "opening": "\"why do these cards constantly show in the board no matter how many times a start them?\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added from Tom's question: \"why do these cards constantly show in the board no matter how many times a start them?\" and his \"yes do all that\"."
+    }
+   ],
+   "prompt": {
+    "what": "Standing cards get a Runs every night section with no START; Nightly refactoring becomes a Waiting card.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix in the board page and sync job)",
+    "effort": "medium (the cause is known)",
+    "text": "Read CLAUDE.md, then card c-standingfix in data/board.json. Standing cards (nightly true) show in a Runs every night section of board.html with last run and result and no START or Copy prompt; startable() is false for them; Nightly refactoring (c-nightrefactor) is col wait, waiting_on github until 7 clean night test runs. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
