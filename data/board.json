@@ -35268,6 +35268,38 @@
      "t": "Added: Tom chose to bake the latest Grace Cube Pop video as it is; it is in the game now."
     }
    ]
+  },
+  {
+   "id": "c-wanfeedback1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanfeedback1",
+   "title": "Video cards say what their last run did",
+   "next": "Shipped in wanfeedback1.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: why I repeatedly have to click regenerate"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (22:12): \"You have to explain to me in one sentence why I repeatedly have to click regenerate in the board with zero feedback on what happened after the last generation\" Tom (22:13): \"Yes\" (fix it)."
+    }
+   ],
+   "prompt": {
+    "what": "Run feedback on video cards.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
   }
  ],
  "sessions": [
