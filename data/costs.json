@@ -927,6 +927,24 @@
    "source": "wan-gen run",
    "at": "2026-11-22T07:09:54Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996404459"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.08,
+   "what": "Art Library pictures made on WAN 2.7 by the art-gen Action (prop-gate-backlot-stage7-open)",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184",
+   "at": "2026-11-22T07:16:01Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.0128,
+   "what": "Art Library pictures and their QA checks made on xAI by the art-gen Action ()",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184",
+   "at": "2026-11-22T07:16:01Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184"
   }
  ],
  "balances": [
