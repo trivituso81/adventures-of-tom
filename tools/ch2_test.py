@@ -79,6 +79,9 @@ with sync_playwright() as pw:
     check('5a flurry',run(pg,"()=>flag('ch2-t1')===true&&flag('battle:tickets')==='win'&&!intro.active&&!dialog.active",'5flurry') is True)
     at(pg,'griffith',12,11)
     check('5b coyote',run(pg,"()=>flag('ch2-tuts')===true&&!intro.active&&!dialog.active",'5coyote') is True)
+    for n,(x,y) in ((1,(16,8)),(2,(12,10)),(3,(9,9))):
+        at(pg,'griffith',x,y)
+        check('5 glass clue %d'%n,run(pg,"()=>flag('ch2-glass%d')===true&&!intro.active&&!dialog.active"%n,'5glass%d'%n) is True)
     check('6 lemon tree',(at(pg,'griffith',6,9),run(pg,"()=>flag('ch2-lemon')===true&&!intro.active&&!dialog.active",'6lemon'))[1] is True)
     check('bulb pocketed',pg.evaluate("()=>!!flag('ch2-bulb')"))
     at(pg,'griffith',6,7)

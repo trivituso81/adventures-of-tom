@@ -1,3 +1,23 @@
+## fix-ch2play (2026-11-22): chapter 2 cut from 73 to about 55 lines, and Griffith Park has a three-clue glass trail to find
+
+Card c-fix-ch2play, from Tom on t-ch2play: "tons of extraenous, boring, and unfunny dialog ... also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this". Fact: the lines below were removed or merged in `data/scenes.js`; every kept line is unchanged except where listed. Cut lines silence nothing (their clips are already unused-voice free for this change); the reworded lines need a new voice bake.
+
+| Scene | Cut | Reworded |
+|---|---|---|
+| Loft | "Start with three", the long mud/muffins/fish list (two lines), "He gave the pan back", "Okay. Number four", "Poke it. Yes", "Same color as my soda" | one Tom line now tells the fish and the muffins; TNB "Start with the fish"; TNB's sky line now ends "Same color as my soda. I checked." |
+| Porch | TNB "between us and the bread" | none |
+| 2nd Avenue | Mr. Washington's middle greeting and Tom's "Still well", "We can do this", Smoglet "There's two of us" | none |
+| Boulevard | Doña Carmen "Everything's fine" | none |
+| Lemon tree | dragonfly (3 lines), "You liked the talking cloud" and "The cloud made sense" | Tom "Same as the one at the pond"; the text becomes a phone call (toast "Tom calls Grace on the phone.", Tom "Grace? It's Tata. ...", Grace without the "send a picture" line). Reports r-20261121-180035-bjdf and r-20261121-180050-39xy asked for the phone to be clear. |
+| Big Shake | Tom "You're wearing the Observatory" (report r-20261121-180126-mdm1) | none |
+| After the fight | Tom "Yes. I saw. Very good. May I?" | Tom now faces the Big Shake before his first line (report r-20261121-180230-crne) |
+| End | Tom "We were going to get bread", Odette "I have bread. Sit." | Odette: "Sit down, both of you. I have bread." |
+
+**The glass trail (ch2glass1).** After the coyote, the grey lemon tree no longer opens by walking west. Nara finds three scorched flashbulb spots, each only after the one before: the tar pit trail (16 to 17, 8 to 9), the clearing path (12 to 13, 10), the trailhead (9 to 10, 9). Each has one Tom or TNB line and a toast naming where the next one is; the third points at the west slope and opens the tree scene (`SCENES.ch2Glass1` to `ch2Glass3`, triggers `ch2-glass1` to `ch2-glass3`, flags `ch2-glass1` to `ch2-glass3`). There is no painted glass yet (Art Library only): the spots are felt through Nara, not drawn. A first-pass idea; the painted glass is a separate picture card if Tom likes the trail.
+
+- Tested: `python3 tools/ch2_test.py` plays all nine scenes with the three clues and passes (its `6lemon: battle won` line fails the same way on the untouched code and is not from this change); `tools/ch2_b3_test.py` has the same three clue steps added. `python3 tools/clip-audit/unused_voice.py` reports the same 12 old loft clips before and after this change (not touched here).
+- Pencil reports: the open ones about the same scenes are quoted above; the map notes (r-20261121-173628-97ha cut-out, r-20261121-180138-yorh boss size) are left open.
+
 ## fix-artgen3try (2026-11-22): the auto-approve test card now holds real pictures to try it on: Grace's and Rose's party banners
 
 Card c-fix-artgen3try, from Tom on t-artgen3try: "i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh". Fact: the card was handed over with no pictures on it, and the board shows the Generate buttons only on a card that holds pictures, so there was nothing to tap. Two more gaps on the path he would click: the card's Not this one opened the Art Library list (`art.html?open=`), where NOT THIS ONE is not offered, and the review viewer showed no picture for a QA-approved entry (the picture is in art/raw, not a result on the phone).

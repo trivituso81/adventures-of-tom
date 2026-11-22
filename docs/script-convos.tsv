@@ -22,11 +22,11 @@ ch2Smog	8	Morning, Tom! Back from your folks? How'		Mr. Washington is stuck on o
 ch2Odette	8	This gumbo is perfect. Doesn't need a th		Doña Carmen thinks Tom can't cook. In the smog she says he can, and he keeps the compliment.		
 ch2Flurry	4	No parking Saturdays. Noon to two. You p		Tom gets a parking ticket from a monster and tries to contest it the proper way.		
 ch2Coyote	3	Dog. Run with us. We never sit.		A coyote looks only at Nara, and Nara chooses Tom.		
-ch2Lemon	2	That's the block. From the pond. The dra		The cloud didn't bother TNB at all. The block does.		
+ch2Lemon	2	That's the block. Same as the one at the 		TNB doesn't like the block. Tom phones Grace, and Nara drops a burnt flashbulb.		
 ch2Boss	10	GAH! I've got you, Nara. We're fine. We'		Tom's body reacts before he does. Then he worries about the building on the monster's head.		
-ch2AfterBoss	2	Excuse me. Mr. Shake. How are you doing?		The hill has known TNB for two years. TNB didn't know.		
+ch2AfterBoss	3	Excuse me. Mr. Shake. How are you doing?		The hill has known TNB for two years. TNB didn't know.		
 ch2End	4	Morning, Tom! Back from your folks? How'		Everyone is back to normal, so Doña Carmen takes the compliment back. And there is finally bread.		
-ch2Smog	19	Ahem. You're in my way.		A rude little cloud coughs on Mr. Washington's porch, and Tom takes it personally on his neighbor's behalf.		
+ch2Smog	17	Ahem. You're in my way.		A rude little cloud coughs on Mr. Washington's porch, and Tom takes it personally on his neighbor's behalf.		
 ch2AfterBoss	24	Gold. And there's a lemon stamped on it.		Nara hands over the coin: a gold coin with a lemon on it, and TNB makes a pun.		
 ch2End	11	Tom! Who turned my pupusas? They're all 		Back to normal, Doña Carmen takes the compliment back, and Miss Odette sits them down with the bread they came for.		
 ch3AfterBoss	18	Boppy got treasure! Now your mouth match		Boppy finally catches Iron-Gill and lets him go with a promise to visit.		
@@ -208,3 +208,6 @@ nsThaw	26	My peppers. Out back, in the garden. The		Boppy offers his garden pepp
 nsTrail	7	Halt. We hold the scoops. Chocolate. Coo		Cone Heads hold three scoops and Moo-rielle; Brain Freeze sulks that nobody filmed his birthday; fight.	Brain Freeze: ...Nobody filmed MY birthday	
 opening	10	Oof, I'm finally here! At least the 6 ho		Tom stretches in the taxi office, Sal sends him out, and the girls claim him: sets up Uncle Tom, Rose on his shoulders and Grace's dumpling squishy.		
 ch2Arrive	2	And there's the purple.		Tom lands under the purple haze TNB texted about in the cab and notes it.		
+ch2Glass1	7	Burnt flashbulb glass. Somebody took a pi		Nara noses the first scorched glass by the tar pits. Tom reads it.		
+ch2Glass2	7	More glass. Somebody photographed this wh		Nara finds more glass in the clearing. TNB sums up the trail.		
+ch2Glass3	7	The last piece points up the west slope. 		The last glass points at the grey lemon tree.		

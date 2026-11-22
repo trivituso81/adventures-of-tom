@@ -465,18 +465,12 @@ SCENES.ch2Loft=[
   {walk:'tom',to:routeTo('tom',8,10),speed:.22}, {face:'tom',dir:'up'},
   {talk:'TNB',lines:["Hey, babe. You've got your news face on."]},
   {talk:'Tom',lines:["Babe! Hi! I missed you. I made a list of everything I need to tell you. It's three things, and number three is a fish."]},
-  {talk:'TNB',lines:["Start with three."]},
-  {talk:'Tom',lines:["I can't skip ahead. Number one is a ball of mud that ran into my mother's kitchen and stole her muffin pan, with the muffins in it."]},
-  {talk:'TNB',lines:["Huh. Are the muffins okay?"]},
-  {talk:'Tom',lines:["Number two is the muffins. They're gone. Number three is the fish. He was the size of a cab, wearing the pan on his head like a crown."]},
+  {talk:'TNB',lines:["Start with the fish."]},
+  {talk:'Tom',lines:["He was the size of a cab, wearing my mother's muffin pan on his head like a crown. A mud ball stole it. Number two is the muffins. They're gone."]},
   {talk:'TNB',lines:["Then he knows where the muffins went."]},
-  {talk:'Tom',lines:["He gave the pan back, so number three is closed."]},
-  {talk:'TNB',lines:["Okay. Look at the sky, babe. It's been purple since this morning."]},
-  {talk:'Tom',lines:["That's not on my list. Okay. Number four, the sky."]},
-  {talk:'TNB',lines:["Same color as my soda. I checked."]},
+  {talk:'TNB',lines:["Okay. Look at the sky, babe. Same color as my soda. I checked."]},
   {walk:'tom',to:routeTo('tom',8,10),speed:.2}, {face:'tom',dir:'up'},   // Tom goes to the window
   {talk:'TNB',lines:["It's coming off the hills. I figure we walk up and poke it."]},
-  {talk:'Tom',lines:["Poke it. Yes. But maybe just gently."]},
   {talk:'TNB',lines:["Nara's already on it. She's been barking at it from your porch since breakfast."]},
   {talk:'Tom',lines:["Then we're her backup."]},
   {join:'tnb'},
@@ -498,7 +492,6 @@ SCENES.ch2Porch=[
   {talk:'Tom',lines:["No. This isn't that kind of stick. This is a work stick."]},
   {talk:'TNB',lines:["She thinks you're sticking around."]},
   {call:()=>{ setFlag('ch2-smog'); storyWorld(); sfx.growl?sfx.growl():sfx.bark(); sfx.whoosh(); }}, {wait:1},   // Nara goes stiff and growls; purple smog rolls down 2nd Avenue
-  {talk:'TNB',lines:["Huh. Now it's between us and the bread."]},
   {talk:'Tom',lines:["Okay. Work stick. This is what you're for."]},
   {join:'nara'},
   {call:()=>{ grantItem('naraball'); if(typeof heartTrace==='function') { heartTrace('nara-meet'); setFlag('met-nara'); } }},
@@ -516,8 +509,6 @@ SCENES.ch2Smog=[
   {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
   {talk:'Tom',lines:["Morning, Mr. Washington. She's well, thank you."]},
   {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
-  {talk:'Tom',lines:["Still well! Thank you."]},
-  {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
   {talk:'Tom',lines:["She's... consistently well."]},
   {spawn:{name:'Smoglet',monster:'smoglet',at:[14,18],dir:'left'}},
   {spawn:{name:'Smoglet B',monster:'smoglet',at:[14,20],dir:'left'}},
@@ -528,8 +519,6 @@ SCENES.ch2Smog=[
   {talk:'Smoglet',lines:["Ahem. You're in my way."]},
   {talk:'Tom',lines:["Okay. So. You coughed on Mr. Washington's porch. He sweeps that porch every MORNING."]},
   {walk:'Smoglet B',to:[[13,20],[12,20],[12,19]],speed:.36},   // a second cloud floats up beside the first
-  {talk:'Smoglet',lines:["Ahem. There's two of us."]},
-  {talk:'Tom',lines:["We can do this! I've done this one time."]},
   {flag:'tombo:tnb1'},
   {if:()=>!B3_CH_ON(2),then:[{toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6}],else:[]},
   {battle:()=>findMonster('smoglet'),tut:'ch2lawn',count:2},
@@ -548,7 +537,6 @@ SCENES.ch2Odette=[
   {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }},
   {talk:'Miss Odette',lines:["This gumbo is perfect. Doesn't need a thing."]},
   {talk:'TNB',lines:["She's never said that. Last week she sent a bowl back to herself."]},
-  {talk:'Doña Carmen',lines:["Everything's fine. Everything's fine."]},
   {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }},
   {walk:'tom',to:routeTo('tom',10,8),speed:.24}, {face:'tom',dir:'up'},   // Tom steps up to the griddle and flips the pupusas
   {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }}, ch2Tap('tom'), {wait:.8},
@@ -587,25 +575,38 @@ SCENES.ch2Coyote=[
   CH2_LOST('coyote','the Canyon Coyote'),
   {flag:'ch2-tuts'},
   {heal:true},
-  {toast:'Goal: the grey lemon tree, up the trail near the Observatory. The park’s monsters are awake now.',time:5}
+  {toast:'Goal: find what burned. Nara smells scorched glass by the tar pits (east trail, near the lookout rock).',time:6}
+];
+// Scenes 5b to 5d. The glass trail (ch2glass1; Tom 2026-11-21: "the griffith park area is boring - there is nothing to search for like in chapter 1"):
+// three scorched flashbulb spots, east to west (tar pit trail, clearing, trailhead), each walk-in only after the one before; the third points at the tree.
+const ch2Glass=(n,face)=>[{flag:'ch2-glass'+n},{face:'nara',dir:face},{call:()=>{ sfx.bark&&sfx.bark(); }},ch2Tap('nara'),{hearts:'nara'},{call:()=>sfx.pickup()},{wait:.4}];
+SCENES.ch2Glass1=[
+  ...ch2Glass(1,'down'),
+  {talk:'Tom',lines:["Burnt flashbulb glass. Somebody took a picture up here."]},
+  {toast:'Clue 1 of 3. More glass lies in the clearing, west on the main path.',time:6}
+];
+SCENES.ch2Glass2=[
+  ...ch2Glass(2,'left'),
+  {talk:'TNB',lines:["More glass. Somebody photographed this whole hill."]},
+  {toast:'Clue 2 of 3. The glass leads to the trailhead sign, at the top of the clearing.',time:6}
+];
+SCENES.ch2Glass3=[
+  ...ch2Glass(3,'left'),
+  {talk:'Tom',lines:["The last piece points up the west slope. Come on, work stick."]},
+  {toast:'Clue 3 of 3. Goal: the grey lemon tree, up the west trail near the Observatory.',time:5}
 ];
 // Scene 6. The grey lemon tree: the cloud made sense, the block does not. Tom texts Grace.
 SCENES.ch2Lemon=[
   {flag:'ch2-lemon'},
   {around:[3.6,7.9],size:[2.2,1.1]},   // the tree stands at art px (225,455), its dirt circle at tile 3 to 4, row 8
-  {talk:'Tom',lines:["That's the block. From the pond. The dragonfly was in one just like it."]},
-  {talk:'TNB',lines:["You didn't mention a dragonfly."]},
-  {talk:'Tom',lines:["The fish took up a lot of the story."]},
+  {talk:'Tom',lines:["That's the block. Same as the one at the pond."]},
   ch2Tap('tom'), {sfx:'bonk'}, {wait:.4},   // Tom taps the block with the stick, very lightly
   ch2Tap('tnb'), {sfx:'bonk'}, {wait:.2}, ch2Tap('tnb'), {sfx:'bonk'}, {wait:.3},   // TNB knocks on it with his knuckles
   {talk:'TNB',lines:["It's not glass. It's not resin. I don't like it."]},
-  {talk:'Tom',lines:["You don't like it? You liked the talking cloud."]},
-  {talk:'TNB',lines:["The cloud made sense."]},
   {call:()=>{ sfx.bark&&sfx.bark(); }}, {hearts:'nara'}, {call:()=>sfx.pickup()}, {wait:.5},   // Nara drops a burnt flashbulb on Tom's shoe and backs up
-  {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:["Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down."]},
-  {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Grace',lines:["Tata, don't touch it! Send me a picture of both. And don't let Nara lick it."]},
+  {toast:'Tom calls Grace on the phone.',time:2.6}, {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Tom',lines:["Grace? It's Tata. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb."]},
+  {talk:'Grace',lines:["Tata, don't touch it! And don't let Nara lick it."]},
   {call:()=>{ sfx.squeak&&sfx.squeak(); }}, {wait:.3},   // camera click
   {call:()=>{ sfx.pickup(); setFlag('ch2-bulb'); }},   // Tom pockets the bulb (chapter 3 needs it); no line
   {call:()=>{ sfx.thud(); }}, {wait:.5}, {call:()=>{ sfx.thud(); }},
@@ -623,7 +624,6 @@ SCENES.ch2Boss=[
   {hearts:'nara'},
   {talk:'Tom',lines:["GAH! I've got you, Nara. We're fine. We're both fine."]},
   {talk:'The Big Shake',lines:["RUMBLE. A flash woke me up. Now everybody runs."]},
-  {talk:'Tom',lines:["Excuse me. You're wearing the Observatory. Please don't drop it."]},
   {battle:'bigshake',tut:'bigshake'},
   CH2_LOST('bigshake','The Big Shake')
 ];
@@ -631,6 +631,7 @@ SCENES.ch2Boss=[
 SCENES.ch2AfterBoss=[
   {flag:'ch2-clear'},
   {call:()=>{ sfx.whoosh(); sfx.levelChime&&sfx.levelChime(); }},
+  {face:'tom',dir:'up'},
   {talk:'Tom',lines:["Excuse me. Mr. Shake. How are you doing?"]},
   {talk:'The Big Shake',lines:["RUMBLE. ...Nobody asks. They just run."]},
   {talk:'TNB',lines:["I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill."]},
@@ -644,7 +645,6 @@ SCENES.ch2AfterBoss=[
   {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.5,arc:12},   // Nara catches the coin in the air
   {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.4,arc:5},   // her one full circle (hops; no walk frames yet)
   {hearts:'nara'}, {wait:.4},
-  {talk:'Tom',lines:["Yes. I saw. Very good. May I?"]},
   {call:()=>{ sfx.pickup(); }}, {wait:.4},   // Nara drops the coin in his hand
   {ch2Reveal:'coin'},
   {if:()=>!bag.includes('lemoncoin'),then:[{give:'lemoncoin'}],else:[]},
@@ -671,9 +671,7 @@ SCENES.ch2End=[
   {talk:'Doña Carmen',lines:["Tom! Who turned my pupusas? They're all wrong."]},
   {talk:'Tom',lines:["You told me I cook well."]},
   {talk:'Doña Carmen',lines:["I never said that."]},
-  {talk:'Miss Odette',lines:["Sit down, both of you. This gumbo needs salt and you two need lunch."]},
-  {talk:'Tom',lines:["We were going to get bread."]},
-  {talk:'Miss Odette',lines:["I have bread. Sit."]},
+  {talk:'Miss Odette',lines:["Sit down, both of you. I have bread."]},
   {call:()=>{ sfx.pickup(); }}, {hearts:'nara'}, {wait:.8},   // a piece of bread is gone from Tom's plate; Nara sits very straight beside it
   {despawn:'Miss Odette'}, {despawn:'Doña Carmen'},
   {hearts:'tom'}, {call:()=>sfx.levelChime()},
@@ -704,7 +702,10 @@ const TRIGGERS=[
   {id:'ch2-odette',map:'jpark',at:[1,6,13,10],when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-source'},scene:'ch2Odette'},
   {id:'ch2-t1',map:'griffith',at:[1,1,22,19],when:{...CH2,flag:'ch2-source',notFlag:'ch2-t1'},scene:'ch2Flurry'},
   {id:'ch2-t2',map:'griffith',at:[1,1,22,12],when:{...CH2,flag:'ch2-t1',notFlag:'ch2-tuts'},scene:'ch2Coyote'},
-  {id:'ch2-lemon',map:'griffith',at:[1,1,8,9],when:{...CH2,flag:'ch2-tuts',notFlag:'ch2-lemon'},scene:'ch2Lemon'},
+  {id:'ch2-glass1',map:'griffith',at:[16,8,17,9],when:{...CH2,flag:'ch2-tuts',notFlag:'ch2-glass1'},scene:'ch2Glass1'},
+  {id:'ch2-glass2',map:'griffith',at:[12,10,13,10],when:{...CH2,flag:'ch2-glass1',notFlag:'ch2-glass2'},scene:'ch2Glass2'},
+  {id:'ch2-glass3',map:'griffith',at:[9,9,10,9],when:{...CH2,flag:'ch2-glass2',notFlag:'ch2-glass3'},scene:'ch2Glass3'},
+  {id:'ch2-lemon',map:'griffith',at:[1,1,8,9],when:{...CH2,flag:'ch2-glass3',notFlag:'ch2-lemon'},scene:'ch2Lemon'},
   {id:'ch2-boss',map:'griffith',at:[1,1,8,7],when:{...CH2,flag:'ch2-lemon',notFlag:'ch2-boss'},scene:'ch2Boss'},
   {id:'ch2-after',map:'griffith',when:{...CH2,flag:{'battle:bigshake':'win'},notFlag:'ch2-clear'},scene:'ch2AfterBoss'},
   {id:'ch2-end',map:'jpark',when:{...CH2,flag:'ch2-clear',notFlag:'ch2-done'},scene:'ch2End'}
