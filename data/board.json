@@ -21616,7 +21616,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
@@ -21724,14 +21724,17 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDhdxE5xuhxYR1NXhn",
+    "url": "",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-cap2",
-   "started_at": "2026-11-22T01:13:19+00:00"
+   "after": "t-boppy-bigfish-cap2"
   },
   {
    "id": "c-qa-coh01",
@@ -31279,8 +31282,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 1 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (8 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 2 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31306,6 +31309,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 7 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 8 report(s)."
     }
    ],
    "blocks": [],
@@ -36275,7 +36282,8 @@
    "r-20261121-173628-97ha",
    "r-20261121-173717-wjou",
    "r-20261121-174051-vxq1",
-   "r-20261121-174119-0522"
+   "r-20261121-174119-0522",
+   "r-20261121-174358-pwub"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36309,8 +36317,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "dc244323118ec3b1f05adf7e3c4d18b99239db12",
- "synced_at": "2026-11-22T01:41:58+00:00",
+ "synced": "36129b442bd56b7fa7040917e2313476f294f441",
+ "synced_at": "2026-11-22T01:45:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
