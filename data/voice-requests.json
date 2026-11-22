@@ -1,4 +1,22 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "tts",
+   "line": "d|tnb|Hey, babe. You've got your news face on.",
+   "voice_id": "QPmHuIriDGOvu1d9U7wn",
+   "fallback_ids": [],
+   "text": "[mellow, laid-back, low-key, greeting] hey, babe. [mellow, laid-back, low-key, teasing] you've got your \"I've got news\" face on.",
+   "model": "eleven_v4",
+   "stability": 0.6,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[mellow, laid-back, low-key, greeting] hey, babe. [mellow, laid-back, low-key, teasing] you've got your \"I've got news\" face on.",
+   "at": 1795312146997,
+   "rid": "r1795312146997-6oa"
+  }
+ ],
  "cancel": []
 }
