@@ -31170,8 +31170,19 @@
     {
      "d": "2026-11-21",
      "t": "Made by c-wanstop-rose-giddyup-r6 and c-wanstop-deedee-wetfloor-r5. Giddyup r7: one change, \"twirls one hand\" to \"circles one hand\" (r6 spun her whole body round before the jump). Wet-Floor r6: one change, \"one wide sweep\" to \"one short sweep\" (r5 swept about five times and the mop hit both side edges). Replaces the Generate button of t-wanch5-gen, which is Done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 2 videos (about $1.57).",
+     "at": "2026-11-22T01:30:28.575Z"
     }
-   ]
+   ],
+   "wgen": {
+    "want": true,
+    "at": "2026-11-22T01:30:28Z",
+    "n": 2,
+    "est": 1.57
+   }
   }
  ],
  "sessions": [
