@@ -32911,7 +32911,7 @@
    "id": "c-battleux2",
    "tag": "battleux2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Write the one-line move descriptions",
    "created": "2026-11-21",
@@ -32954,16 +32954,20 @@
     {
      "d": "2026-11-21",
      "t": "Shipped as battleux2: short lines on all 80 family moves and Pick-Me-Up (7 of the mock drafts kept, 18 reworded), plainer reach and forecast words in data/b3-ux-words.js, and a data check in node tools/b3-sim.js check for a missing or too long line. Three longer chip words made the Duo strip overflow on The Big One, so they stay as before. Rules unchanged. Full list in docs/CHANGES.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux2: every family move now has one plain line that says what it does"
     }
    ],
-   "after": "nothing for Tom: c-battleux3"
+   "after": "nothing for Tom: c-battleux3",
+   "done": "2026-11-21"
   },
   {
    "id": "c-battleux3",
    "tag": "battleux3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle System",
    "title": "Add the scene marks and remove the proposal page",
    "created": "2026-11-21",
@@ -32989,6 +32993,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-battleux: plan section 5, card battleux3. Waits on c-battleux2."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Write the one-line move descriptions is done."
     }
    ]
   },
@@ -36424,6 +36432,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG7DbKW7f6Jcurm6Gj",
+   "title": "Write the one-line move descriptions",
+   "first": "2026-11-21T22:48:18-08:00",
+   "last": "2026-11-21T23:55:40-08:00",
+   "tags": [
+    "battleux2"
+   ],
+   "cards": [
+    "c-battleux2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFpP5APDFFAhcmE8xg",
    "title": "Night test run: every test, every night, on GitHub",
    "first": "2026-11-21T19:48:49Z",
@@ -36497,16 +36517,6 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG7DbKW7f6Jcurm6Gj",
-   "title": "Write the one-line move descriptions",
-   "first": "2026-11-21T22:48:18-08:00",
-   "last": "2026-11-21T22:48:18-08:00",
-   "tags": [],
-   "cards": [
-    "c-battleux2"
    ]
   },
   {
@@ -41334,8 +41344,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "3ea2e392ac96767b7036251df6dec582bafd418d",
- "synced_at": "2026-11-22T07:48:28+00:00",
+ "synced": "ee919f743e2ff69b9e7d1da50576fddc6448637b",
+ "synced_at": "2026-11-22T07:56:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
