@@ -70,6 +70,7 @@ def strip_geometry(pg, tag, H, errs):
     want = {'fu': ([466, 657], {'duofold'}, {'duo', 'tablet', 'landscape'}), 'fs': ([678, 445], {'duofold', 'landscape'}, {'duo', 'tablet'}),
             'ou': ([669, 869], {'duo', 'tablet'}, {'duofold', 'landscape'}), 'os': ([951, 648], {'duo', 'tablet', 'landscape'}, {'duofold'})}
     for sid in ('fu', 'fs', 'ou', 'os'):
+        geval(pg, "layout.mode='landscape'")   # a saved sideways layout must not turn a size's frame (fix-dash3-try)
         pg.click('#sz-' + sid); settle(pg)
         size, has, hasnt = want[sid]; c = gcls(pg)
         ok(gsize(pg) == size, '%s: size %s: the game frame is %s (%s)' % (tag, sid, size, gsize(pg)))

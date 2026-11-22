@@ -1,3 +1,6 @@
+## fix-dash3-try (2026-11-22): the Admin Dashboard's Duo folded, upright size now shows the game upright
+Tom: "duo folded upright is the wrong orientation" (card t-dash3-try). A rotate choice saved by the game turned the frame sideways; the dashboard now makes the game follow each size's own shape. Nothing else changed.
+
 ## wanstop-deedee-wetfloor-r5 (2026-11-21): Deedee's Wet-Floor asks for one short sweep instead of one wide sweep
 
 Card c-wanstop-deedee-wetfloor-r5. The bulk run 44967949648 stopped r5 (edge, p1, p2). By eye she sweeps left, right, left, right, left (video frames 32 to 91) and the mop head reaches the left or right edge at each stroke end; the 23 edge frames are exactly those. One change, rev 6: prompt `wan-deedee-wetfloor-v3.txt` = v2 with "one wide sweep" changed to "one short sweep". Kept: everything else (Kling 4.0, start picture, 5 s, pad 0.65, feet limit 0.10, bake, wire). No video made in the session; Tom taps Generate on t-wanstop-gen. Plan: claude/video-battle-plan.md 4.14.

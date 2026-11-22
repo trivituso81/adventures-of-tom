@@ -318,6 +318,9 @@ function forceDuo(w){
  try{
   if(!w||typeof w.detectDuo!=='function')return;
   if(!w.detectDuo.__dash){var f=function(){return !!curSize.duo;};f.__dash=1;w.detectDuo=f;}
+  // A folded size must follow the frame's own shape: the le-layout the game saved on this browser (a rotate tap in the game, or a landscape
+  // session) would turn an upright frame sideways (fix-dash3-try). Auto for this frame only; the stored value is left alone.
+  try{w.eval("layout.mode='auto'");}catch(e){}
   if(typeof w.applyLayout==='function')w.applyLayout();
   w.dispatchEvent(new w.Event('resize'));
   duoAddress(w);

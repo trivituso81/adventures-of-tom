@@ -108,3 +108,6 @@ Add a row to `LAYOUTS` in `dashboard.html`: `id`, `label`, `w` (four pane widths
 ## Next
 
 dash4 (search, Art review and Story layouts). Plan section of the same name.
+
+## fix-dash3-try (2026-11-22): the game follows each size's own shape
+Tom (card t-dash3-try): "duo folded upright is the wrong orientation". Cause: the game keeps a rotate choice in `localStorage` `le-layout`; a saved `landscape` turned the 466 x 657 upright frame sideways (`html` had `landscape rotated`). `forceDuo` in `dashboard.html` now sets `layout.mode='auto'` for the game frame only (the saved value is left alone), so every size lays out by its own shape. Test: `python3 tools/dashboard_test.py` (each size starts from a sideways layout).
