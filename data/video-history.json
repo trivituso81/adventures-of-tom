@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T21:04Z",
+ "built": "2026-11-22T21:29Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -912,6 +912,70 @@
    "model": "alibaba"
   },
   {
+   "file": "guide-body-amy-idle-t1-r1.mp4",
+   "job": "guide-body-amy-idle-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:05:55.170170Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-amy-idle-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-body-tnb-dodge-t1-r1.mp4",
+   "job": "guide-body-tnb-dodge-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:12:06.947875Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-dodge-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-body-tnb-guard-t1-r1.mp4",
+   "job": "guide-body-tnb-guard-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:07:59.814965Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-guard-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-body-tnb-hit-t1-r1.mp4",
+   "job": "guide-body-tnb-hit-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:10:02.513589Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-hit-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
    "file": "guide-body-tnb-idle-t1-r1.mp4",
    "job": "guide-body-tnb-idle-t1",
    "rev": 1,
@@ -924,6 +988,38 @@
    ],
    "in_game": null,
    "strip": "art/video-history/guide-body-tnb-idle-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-body-tnb-ko-t1-r1.mp4",
+   "job": "guide-body-tnb-ko-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:14:10.415779Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-ko-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-body-tnb-victory-t1-r1.mp4",
+   "job": "guide-body-tnb-victory-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:16:16.538853Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-body-tnb-victory-t1-r1.webp",
    "pad": null,
    "model": null
   },
