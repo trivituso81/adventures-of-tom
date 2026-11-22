@@ -27243,7 +27243,7 @@
    "next": "What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "",
     "opening": "started by c-artgen3"
@@ -27270,6 +27270,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 4 pictures (about $0.20).",
      "at": "2026-11-22T02:54:44.207Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Pictures job: made 4 pictures, QA: 14 of 16, 8 of 16, 11 of 16, 16 of 16. Spent about $0.24."
     }
    ],
    "done_when": {
@@ -27304,10 +27308,129 @@
     "est": 0.2,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-22T02:54:57Z",
+     "state": "done",
+     "at": "2026-11-22T02:55:55Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44978224316",
-     "n": 4
+     "made": [
+      "banner-leave-grace",
+      "banner-join-rose",
+      "banner-join-grace",
+      "banner-leave-rose"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.24,
+     "svc": {
+      "banner-leave-grace": "xai",
+      "banner-join-rose": "xai",
+      "banner-join-grace": "xai",
+      "banner-leave-rose": "xai"
+     },
+     "qa": {
+      "banner-leave-grace": {
+       "file": "results/banner-leave-grace/20261122T025514.png",
+       "yes": 14,
+       "of": 16,
+       "failed": [
+        {
+         "id": "f_crop",
+         "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+         "why": "Person's lower body is cut off at bottom edge"
+        },
+        {
+         "id": "p5",
+         "q": "Is the person shown from the waist up?",
+         "why": "Shown from chest up, not waist up"
+        }
+       ]
+      },
+      "banner-join-rose": {
+       "file": "results/banner-join-rose/20261122T025517.png",
+       "yes": 8,
+       "of": 16,
+       "failed": [
+        {
+         "id": "f_crop",
+         "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+         "why": "Girl's right hand and hair are cut off at the right edge."
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "Face, hair, proportions and outfit differ from reference."
+        },
+        {
+         "id": "p1",
+         "q": "Is there exactly one person shown from the waist up filling the right third of the image?",
+         "why": "Shows full body, not waist up filling only right third."
+        },
+        {
+         "id": "p2",
+         "q": "Is the person facing directly toward the viewer?",
+         "why": "Person is angled, not facing directly toward viewer."
+        },
+        {
+         "id": "p5",
+         "q": "Does the person have the exact same face as in the attached reference picture?",
+         "why": "Face shape, eyes and expression differ from reference."
+        },
+        {
+         "id": "p6",
+         "q": "Does the person have the exact same hair as in the attached reference picture?",
+         "why": "Hair style, volume and bow placement differ from reference."
+        },
+        {
+         "id": "p7",
+         "q": "Does the person have the exact same body proportions as in the attached reference picture?",
+         "why": "Proportions are taller and slimmer than reference."
+        },
+        {
+         "id": "p8",
+         "q": "Is the person wearing the exact same outfit as in the attached reference picture?",
+         "why": "Outfit lacks shoes, socks and has different dress details."
+        }
+       ]
+      },
+      "banner-join-grace": {
+       "file": "results/banner-join-grace/20261122T025522.png",
+       "yes": 11,
+       "of": 16,
+       "failed": [
+        {
+         "id": "f_crop",
+         "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+         "why": "Left hand and part of right hand are cut off at the top edge."
+        },
+        {
+         "id": "f_same",
+         "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+         "why": "Outfit and proportions differ from reference; reference shows full body with pants and sneakers."
+        },
+        {
+         "id": "p1",
+         "q": "Is there exactly one person shown from the waist up filling the right third of the image?",
+         "why": "Shows from hips up, not waist up, and does not fill only the right third."
+        },
+        {
+         "id": "p7",
+         "q": "Does the person have the exact same body proportions as in the attached reference picture?",
+         "why": "Body proportions differ; reference is full-body with different pose and scale."
+        },
+        {
+         "id": "p8",
+         "q": "Is the person wearing the exact same outfit as in the attached reference picture?",
+         "why": "Outfit differs; reference has pants, sneakers, no visible belt pouch in same way."
+        }
+       ]
+      },
+      "banner-leave-rose": {
+       "file": "results/banner-leave-rose/20261122T025544.png",
+       "yes": 16,
+       "of": 16,
+       "failed": []
+      }
+     }
     }
    }
   },
