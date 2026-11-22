@@ -60,7 +60,7 @@ jobs:
     # keeps only one waiting run per group, so an unrelated push (whose job is skipped) cancelled a waiting paid run: Tom's tap at 04:31 UTC was lost that way.
     concurrency:
       # startpics12 (2026-11-22): a video asked for in the Battle Guide has its own lane. It waited 10+ minutes behind a bulk card run (up to 170 min) in the same group.
-      group: wan-gen-${{ ((github.event_name == 'workflow_dispatch' && inputs.requests == 'true') || startsWith(github.event.head_commit.message, 'wan: generate ')) && 'guide' || 'bulk' }}
+      group: "wan-gen-${{ ((github.event_name == 'workflow_dispatch' && inputs.requests == 'true') || startsWith(github.event.head_commit.message, 'wan: generate ')) && 'guide' || 'bulk' }}"
       cancel-in-progress: false
     timeout-minutes: 170
     env:

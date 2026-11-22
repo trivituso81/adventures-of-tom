@@ -1,3 +1,7 @@
+## startpics12b (2026-11-22): a video asked for in the Battle Guide no longer waits behind a bulk card run
+
+Tom (14:22): "i generated a video for Tom and it's been siting for 10 minutes again". Cause (fact): the Guide's request run for suite_door_slide sat Pending from 22:16 UTC behind the bulk run for card t-movestage-lab (started 22:06), because both used the one wan-gen lane. Guide requests now have their own lane (wan-gen-guide), bulk cards keep wan-gen-bulk. My first push of this (startpics12) left an unquoted colon in the lane name and GitHub rejected the whole video workflow for about 10 minutes; this build quotes it and every workflow file is parsed before the push. Known cost: both runs save the money ledger on branch wangen at their end, so a bulk run finishing later can overwrite the ledger lines of a Guide video made meanwhile; the take itself and data/costs.json are separate and unaffected.
+
 ## wanbulk-tmovestagelab-45075789998 (2026-11-22): 1 battle videos made from board card t-movestage-lab passed their checks and were put in the game
 
 The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): stage-tom-starbeam-vid. Nobody has watched them yet; the card asks Tom to.

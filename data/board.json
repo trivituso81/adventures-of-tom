@@ -29968,7 +29968,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics11",
+   "build": "startpics12b",
    "history": [
     {
      "d": "2026-11-22",
@@ -32264,6 +32264,40 @@
      "t": "Added by the wan-gen job (45075789998): stage-tom-bluebang-vid used 4 tries ($0.60)."
     }
    ]
+  },
+  {
+   "id": "c-startpics12",
+   "title": "Guide videos get their own lane",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics12b",
+   "next": "Built as startpics12b: Battle Guide video requests run in their own lane and no longer wait behind bulk card runs. Waits on t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i generated a video for Tom and it's been siting for 10 minutes again\". Built startpics12b.",
+     "at": "2026-11-22T22:35:00.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics11 in data/board.json. Your first push is the commit board: start c-startpics11. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
