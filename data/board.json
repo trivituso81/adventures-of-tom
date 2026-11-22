@@ -31953,11 +31953,11 @@
    "id": "c-takes-e8fba6",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Done: nothing to merge. Nine wrappers is not in the game; A FISH and \"Huh. That would tip the scales\" have different words from the screen lines.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -31988,12 +31988,19 @@
     {
      "d": "2026-11-22",
      "t": "Session started."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Retired, nothing to merge: of the 3 kept takes on branch takes sent 11-21 to 11-22, Nine wrappers (Grace) is not a line in the game, and A FISH (Tom) and Huh, that would tip the scales (TNB) have different words from the screen lines (the takes add \"massive\" and \"A massive fish, huh? Sounds like he tipped the scales\"), so they stay out until Tom rewords the scene. Hello Rose, Three and I do have news were already merged in takes-2026-11-21. The 26 older unmerged kept takes were judged stale in takes-2026-11-20b and are not wanted.",
+     "at": "2026-11-22T03:00:00Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "started_at": "2026-11-22T02:03:59+00:00"
+   "changed": "2026-11-22",
+   "started_at": "2026-11-22T02:03:59+00:00",
+   "done": "2026-11-22",
+   "retired": true
   },
   {
    "id": "t-menuux-decide",
