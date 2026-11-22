@@ -29104,7 +29104,7 @@
    "title": "Battle system stage 16: Tombo skins on the new battle",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Tombos return as skins on Battle 3 (Full Family Ruckus, Tombo rows). No animation review: skins use each person's existing video or the default animation. Ships as b3s16.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29123,8 +29123,16 @@
     {
      "d": "2026-11-22",
      "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-b3s19",
@@ -29755,6 +29763,16 @@
    ],
    "cards": [
     "c-night-qa"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFB3FnpQNae6DfWCZD",
+   "title": "Battle system stage 16: Tombo skins on the new battle",
+   "first": "2026-11-22T00:15:08-08:00",
+   "last": "2026-11-22T00:15:08-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s16"
    ]
   },
   {
@@ -34690,8 +34708,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "14622e2ca8770636d3779a3dfecd0b5d48622067",
- "synced_at": "2026-11-22T08:10:08+00:00",
+ "synced": "4f0a670283136ebe49751877e3a5631643c71b0f",
+ "synced_at": "2026-11-22T08:15:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
