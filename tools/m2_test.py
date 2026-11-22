@@ -252,7 +252,7 @@ def BS(pg, E, name):
     E("()=>{ localStorage.removeItem('le-save-2'); M2.tab='system'; M2.sure=null; M2.quit=false; m2Render(); }")
     pg.wait_for_timeout(300)
     t = stats_text(E)
-    for bit in ('Saved games', 'Back up', 'Restore', 'Quit to title', 'Build', 'Options', 'Music', 'Voices', 'Sound effects', 'Difficulty', 'Battle speed', 'Show what each skill does', 'Less motion'):
+    for bit in ('Saved games', 'Back up', 'Restore', 'Quit to title', 'Build', 'Options', 'Music', 'Voices', 'Sound effects', 'Difficulty', 'Battle speed', 'Show skill descriptions', 'Less motion'):
         check(bit in t, f'{name}: System page lacks "{bit}"')
     pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-system.png'))
     audit(pg, E, f'{name} system')
