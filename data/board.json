@@ -21616,7 +21616,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
@@ -21703,14 +21703,25 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Approve Boppy's unimpressed pose in his Paso Robles cap, Generate Boppy's unimpressed pose in his Paso Robles cap, Boppy's new pose has a blank cap: install or redo?, Boppy's unimpressed face: keep current or redo? is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Answer from \"Boppy's new pose has a blank cap: install or redo?\": Install the blank cap as it is"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Answer from \"Boppy's unimpressed face: keep current or redo?\": Keep the face in the game now and close the card"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-cap2",
-   "waiting_on": "tom"
+   "after": "t-boppy-bigfish-cap2"
   },
   {
    "id": "c-qa-coh01",
@@ -30848,6 +30859,37 @@
      "at": "2026-11-22T01:04:07.583Z"
     }
    ]
+  },
+  {
+   "id": "c-reports-11",
+   "tag": "reports-2026-11-21",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-165412-a75h. First note: before this, we need a line where Grace jumps up and says \"Tata, look! There's the mud blob holding ",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -35470,7 +35512,8 @@
    "r-20261120-192121-ynen",
    "r-20261121-120404-lwe8",
    "r-20261121-122202-loak",
-   "r-20261121-125831-qvon"
+   "r-20261121-125831-qvon",
+   "r-20261121-165412-a75h"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -35504,8 +35547,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "98ebffb4054bc21bbbcbb7151ff6cc42551fd426",
- "synced_at": "2026-11-22T00:52:48+00:00",
+ "synced": "badb5cb94973f79e9d2142b5d98f18b077aca938",
+ "synced_at": "2026-11-22T01:04:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
