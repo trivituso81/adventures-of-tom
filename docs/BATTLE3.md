@@ -720,3 +720,14 @@ Card c-b3s22. Chapter 11 only (the card builds one chapter per conversation; cha
 | Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22.js`: numbers, the Elite, Gate Change in all row cases, the Stampede with the cap, ALL FLIGHTS CANCELLED, tips, whole fights at Rank 2 in three parties); `python3 tools/ch11_b3_test.py` (portrait and landscape, `LAYOUT=landscape`): the house to the boss win on Battle 3, no Battle 2 word on screen (`tools/b3_chapter_lib.py`). Older checks that counted the switched chapters (`b3-check-s15` to `s18bonus`, `b3_story_test.py`, `battle_guide_test.py`) now include chapter 11; chapter 12 is the first one not switched. |
 | Battle Guide | The four monsters leave the planned list by themselves; `data/guide-anims.json` rebuilt. |
 | Waits | The 30 Traits and 60 Quirks (stage 22b, a separate push on this card; they are already data plus hooks from stages 5 to 21), then chapters 12 to 20, one card each. |
+
+## What stage 22b holds (build `b3s22`, 2026-11-22)
+
+Card c-b3s22, part b: the 30 Traits and 60 Quirks. Fact found by reading the code: they were already rebuilt as data plus hooks in stages 5, 9, 10 and 19 to 21 (`B3_TRAITS` and `B3_QUIRKS` in the `data/b3-kit-<id>.js` files and `data/b3-rules.js`, run by `engine/b3-core.js` and the files it calls). Nothing was rebuilt in this push; it adds the guard that proves it and writes down what stage 23 may delete.
+
+| Item | Built |
+|---|---|
+| Guard | `tools/b3-check-s22.js` section 5 (run by `node tools/b3-sim.js check`): 30 Vibes, 30 Traits and 60 Quirks exist as data; none is a name only (`soon`) and none of the 90 Skills is still in `B3_SOON`; every Trait and Quirk carries a rule key (`on`, `listen`, `mods`, `counter`, `custom`, `allyMods`, `effects`, `viaVibe` or `shieldMods`); every Vibe names one Trait and two Quirks that exist. |
+| Nothing leans on the old file | The same check reads `engine/battle2-traits.js`, takes its 28 top-level names (`b2TraitBegin`, `b2TraitHit`, ...) and fails if any `engine/b3-*.js` or `data/b3-*.js` file mentions one. None does, so stage 23 can delete the file and its `<script>` tag in `index.html` without touching Battle 3. |
+| Not touched | `engine/battle2-traits.js` and its tag (battle 2 and OLD chapters still use it until stage 23). |
+| Waits | Chapters 12 to 20 (cards c-b3s22ch12 to c-b3s22ch20), then stage 23. |

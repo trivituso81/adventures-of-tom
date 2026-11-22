@@ -1,3 +1,7 @@
+## b3s22 (2026-11-22): The 30 Traits and 60 Quirks are checked as finished data, and nothing in Battle 3 uses the old Traits file
+
+Card c-b3s22, part b. The Traits and Quirks were already data plus hooks (stages 5, 9, 10, 19 to 21), so nothing was rebuilt. `tools/b3-check-s22.js` now fails if one of the 30 Traits or 60 Quirks is a name only or carries no rule, and if any Battle 3 file uses a name from `engine/battle2-traits.js`, so stage 23 can delete that file safely. Tests: `node tools/b3-sim.js check` (4514 checks, FAILS: []). Chapter 11 shipped as b3s22a; chapters 12 to 20 have their own cards.
+
 ## startpics5 (2026-11-22): the Battle Guide's Animations screen now shows Amy's standard poses (and the other five's)
 
 Card c-startpics5. Tom (11-22 12:15): "i still dont have any of AMy's standard poses in the Animations screen despite working off the latest build and doing a hard refresh". My startpics2 fix was only in the data file (`data/guide-anims.json`); the page (`battle-guide.html`, `buildAnims`) builds its own list of body states and only listed them for the video-only four, so the list on screen did not change. Now it also lists them for anyone the data file lists them for, and rebuilds once the file has loaded. I looked at Amy's page in a phone-size browser: Idle, Guard, Getting hit, Dodge, Knocked out, Victory and Running all show (19 animations). Test: `python3 -I tools/art-library/startpic_test.py` (S7). Nothing was made or spent.

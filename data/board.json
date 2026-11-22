@@ -29466,7 +29466,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Chapter 11 is built and pushed as b3s22a (monsters, FINAL CALL, switch, tests, board cards for chapters 12 to 20). Left on this card: the 30 Traits and 60 Quirks guard and docs (stage 22b), then the card closes with the b3s22 heading.",
+   "next": "Done: chapter 11 on Battle 3 (b3s22a) and the Traits and Quirks guard (b3s22). Chapters 12 to 20 are cards c-b3s22ch12 to c-b3s22ch20; Tom's chapter 11 Milestone is t-b3s22ch11.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -29497,6 +29497,10 @@
     {
      "d": "2026-11-22",
      "t": "Chapter 11 built (b3s22a). Lost Luggage, Red-Eye, the Standby Sprite and FINAL CALL on Battle 3 with the bestiary numbers (no number changed; every fight is inside its target in the simulator), formations and Lab fights NEW 67 to 69, tips, chapter 11 switched on (level floor 27). FINAL CALL's Gate Change needed two engine additions: hits 'front_back' and the 'tradeRows' op. Battle 2's FINAL CALL shield, LET IT FLY route and in-fight BENCH CALL are not carried over (the gold bench swap before the fight is). Scene toasts and Amy's retry coaching have Battle 3 wording; recorded lines are untouched. Tests: b3-sim check 4513 checks no fails; tools/ch11_b3_test.py portrait and landscape FAILS []; the first run of a chapter test flagged 'Rose: Warmth Wave!' as a Battle 2 word, it is Rose's Battle 3 Capstone name, so the lib regex now allows it. Older checks that counted the switched chapters moved to include 11 (b3-check-s15 to s18bonus, b3_story_test, battle_guide_test). Two failures are on the untouched checkout too: b3_story_test 'a save made on Battle 3 loads with the switch on Old' (flaky, timing) and 7 battle_guide_test checks (no start picture for TNB, What is coming, plan counts). Chapters 12 to 20 each have their own card (c-b3s22ch12 to c-b3s22ch20)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Stage 22b (b3s22): the 30 Traits and 60 Quirks were already data plus hooks (stages 5, 9, 10, 19 to 21), so nothing was rebuilt. Added a guard to tools/b3-check-s22.js: all 30 Traits, 60 Quirks and 90 Skills exist and carry a rule, and no Battle 3 file uses any of the 28 names in engine/battle2-traits.js (so stage 23 can delete it). b3-sim check 4514 checks, no fails. Card done: chapter 11 shipped as b3s22a, chapters 12 to 20 have their own cards, `after` is t-b3s22ch11."
     }
    ],
    "chat": {

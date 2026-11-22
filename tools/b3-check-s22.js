@@ -80,5 +80,10 @@ module.exports=function(T) {
   const bare=[...Object.values(TRAITS),...Object.values(QUIRKS)].filter(r=>!RULE.some(k=>r[k])).map(r=>r.id);
   ok(!bare.length,'every Trait and Quirk carries a rule of some kind ('+J(bare)+')');
   ok(Object.values(VIBES).every(v=>TRAITS[v.trait]&&v.quirks.length===2&&v.quirks.every(q=>QUIRKS[q])),'every Vibe names one Trait row and two Quirk rows that exist');
+  // Battle 3 does not read the old Traits file: no top-level name of engine/battle2-traits.js appears in any engine/b3-*.js or data/b3-*.js, so stage 23 can delete it.
+  const oldNames=[...new Set([...read('engine/battle2-traits.js').matchAll(/^(?:function|const|let|var)\s+([A-Za-z0-9_$]+)/gm)].map(m=>m[1]))];
+  const b3files=[...fs.readdirSync(path.join(ROOT,'engine')).filter(f=>/^b3-.*\.js$/.test(f)).map(f=>'engine/'+f),...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-.*\.js$/.test(f)).map(f=>'data/'+f)];
+  const leaks=[]; for(const f of b3files) { const t=read(f); for(const n of oldNames) if(new RegExp('(^|[^A-Za-z0-9_$])'+n.replace(/\$/g,'\\$')+'([^A-Za-z0-9_$]|$)').test(t)) leaks.push(f+':'+n); }
+  ok(oldNames.length>=10&&!leaks.length,'no Battle 3 file uses a name from engine/battle2-traits.js ('+oldNames.length+' names looked for; found '+J(leaks)+')');
   function b3Row(F,u) { return effRow(F,u); }
 };
