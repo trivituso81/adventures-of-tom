@@ -30051,7 +30051,7 @@
    "title": "Optional: add fal and xAI keys for balance reads",
    "theme": "Tools",
    "lane": "tom",
-   "col": "prog",
+   "col": "done",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
@@ -30102,10 +30102,16 @@
      "d": "2026-11-22",
      "t": "Tom: stuck at 'copy your Team ID'. Step 3 now says what it is and where to look (address bar, Settings or Team page); not verified against xAI's current screen.",
      "at": "2026-11-22T00:10:00.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this.",
+     "at": "2026-11-22T01:24:08.418Z"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21"
+   "changed": "2026-11-21",
+   "done": "2026-11-21"
   },
   {
    "id": "c-stale-tests",
