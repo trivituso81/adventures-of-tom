@@ -31322,8 +31322,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (22 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 16 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (25 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 19 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31378,6 +31378,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 22 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 25 report(s)."
     }
    ],
    "blocks": [],
@@ -32047,7 +32051,7 @@
    "title": "Make the smoke test pass again on main",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "auto": true,
    "next": "A Sonnet session makes python3 tools/smoke.py pass again. It fails on main today for reasons that are not in the game: tools/hollow_spot_test.py and tools/voice-library/sparse_files_test.py are missing from tools/night/tests.json, and tools/board_sync_test.py fails three checks that depend on what is on the board today (R5 replay, the unstick card, the card Last night: duplicate card id t-lastnight). Nothing for Tom to do.",
    "blocks": [],
@@ -32055,7 +32059,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDeYfVUYU53oJvSeVf",
     "opening": "not started"
    },
    "prompt": {
@@ -32076,9 +32080,36 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:06:09.909Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-22T02:07:33+00:00"
+  },
+  {
+   "id": "b-board-menuux2",
+   "tag": "board-menuux2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle System",
+   "title": "the menu proposal's skill rows name the flavor in words, like the approved battle screen",
+   "next": "Done: the menu proposal's skill rows name the flavor in words, like the approved battle screen",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -32781,9 +32812,10 @@
    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
    "title": "Main menu redesign: the proposal",
    "first": "2026-11-21T17:30:53-08:00",
-   "last": "2026-11-21T18:05:01-08:00",
+   "last": "2026-11-21T18:07:29-08:00",
    "tags": [
-    "menuux-plan"
+    "menuux-plan",
+    "board-menuux2"
    ],
    "cards": [
     "c-menuux-plan"
@@ -36866,7 +36898,10 @@
    "r-20261121-180408-h8ca",
    "r-20261121-180439-svqd",
    "r-20261121-180458-58c9",
-   "r-20261121-180541-ojxd"
+   "r-20261121-180541-ojxd",
+   "r-20261121-180626-4eca",
+   "r-20261121-180646-o5il",
+   "r-20261121-180709-4jo0"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36906,8 +36941,8 @@
    "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "354bca31058f9aaa0d4053d22b7ed416440a04f9",
- "synced_at": "2026-11-22T02:06:04+00:00",
+ "synced": "283e678bb4df3cc850b1ad5691e9fb923a63c076",
+ "synced_at": "2026-11-22T02:07:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
