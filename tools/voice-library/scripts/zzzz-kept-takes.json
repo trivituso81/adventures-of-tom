@@ -90,6 +90,84 @@
    "text": "Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.",
    "script": "[warm Long Island accent, stern, warm] Apple muffins is cooling on the counter. Don't touch it. [warm Long Island accent, softening, playful] Okay, one corner.",
    "takeId": "gen-c6a9eb0577"
+  },
+  {
+   "voice": "deedee",
+   "text": "Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
+   "script": "[warm Long Island accent, tender, melting] Oh, honey. [warm Long Island accent, warm, reassuring] Nobody has to turn off the lights. We'll come back. Every full moon. [warm Long Island accent, brisk, gentle] I'll bring apple muffins.",
+   "takeId": "gen-07d1cf3d3d"
+  },
+  {
+   "voice": "grace",
+   "text": "Tata. At the apple muffins.",
+   "script": "[sheepish, small] Tah Tah. At the apple muffins.",
+   "takeId": "gen-b66dd48d04"
+  },
+  {
+   "voice": "rose",
+   "text": "Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
+   "script": "[astonished, delighted] Apple muffins! [scandalized, shrill] Deedee brings the teachers APPLE MUFFINS?",
+   "takeId": "gen-c7eaee9732"
+  },
+  {
+   "voice": "tom",
+   "text": "Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
+   "script": "[quiet, steady] Dad’s in his recliner. Mom has the apple muffins. [thin, hopeful] They’re fine. [uncertain, low] They’re probably fine.",
+   "takeId": "gen-f1a2bde472"
+  },
+  {
+   "voice": "kit",
+   "text": "Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.",
+   "script": "[matter-of-fact] Long Island is under glass now, you know. Mr. Vance put a dome over it. It's very safe. Your mother is in her kitchen, making apple muffins.",
+   "takeId": "gen-d5fcb1e3cf"
+  },
+  {
+   "voice": "sal",
+   "text": "Besides, you just got here. Go see your mother. She made apple muffins.",
+   "script": "[warm, friendly] Besides, you just got here. Go see your mother. [relishing, drawn out] She made APPLE MUFFINS.",
+   "takeId": "gen-232daa9ede"
+  },
+  {
+   "voice": "deedee",
+   "text": "Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
+   "script": "[warm Long Island accent, warm, bustling] Tom! Sit. Eat. [warm Long Island accent, proud, firm] I made apple muffins. Yes, I know it's nine in the morning. [warm Long Island accent, sweet, warning] Do not argue.",
+   "takeId": "gen-b0e4341d6f"
+  },
+  {
+   "voice": "rose",
+   "text": "Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
+   "script": "[gentle, resolved] Deedee. I’m going to eat the apple muffins now. [soft, brave] Okay? Okay.",
+   "takeId": "gen-f1064fd752"
+  },
+  {
+   "voice": "tom",
+   "text": "She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
+   "script": "[quiet, sad] She’s looping. Look at the tray. [careful, flat] Same apple muffins. Every time. [aching, soft] They’re fresh, they’re perfect, and nobody ever eats them.",
+   "takeId": "gen-91c730562d"
+  },
+  {
+   "voice": "boppy",
+   "text": "Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
+   "script": "[thick New York accent, flat, recited] Nobody gets hurt. Nobody gets old. Nobody gets left. [thick New York accent, gentle, proud] Your mother’s inside. She’s fine. [thick New York accent, flat, mechanical] She’s making apple muffins.",
+   "takeId": "gen-989e236d6a"
+  },
+  {
+   "voice": "deedee",
+   "text": "A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
+   "script": "[warm Long Island accent, bright, thrilled] A layover! Where? Never mind. [warm Long Island accent, brisk, fussing] Take a sweater. Actually, take two. And take the apple muffins.",
+   "takeId": "gen-8db130f895"
+  },
+  {
+   "voice": "boppy",
+   "text": "Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
+   "script": "[thick New York accent, evasive] Inside. She’s fine. She’s making apple muffins. [thick New York accent, hurried] Don’t look at the porch.",
+   "takeId": "gen-92e96d3894"
+  },
+  {
+   "voice": "boppy",
+   "text": "And the apple muffins are excellent.",
+   "script": "[thick New York accent, dry] And the apple muffins are excellent.",
+   "takeId": "gen-59ad542521"
   }
  ]
 }

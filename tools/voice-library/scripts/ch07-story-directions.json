@@ -224,7 +224,8 @@
    "speaker": "Boppy",
    "text": "Gracie, my apple muffins are under there.",
    "ctx": "chapter 7 (new)",
-   "script": "[mild, plaintive] Gracie, my apple muffins are under THERE."
+   "script": "[thick New York accent, mild, plaintive] Gracie, my apple muffins are under THERE.",
+   "takeId": "gen-d16be1fd27"
   },
   {
    "voice": "grace",
@@ -497,7 +498,8 @@
    "speaker": "Boppy",
    "text": "I'll stay here and guard the apple muffins, Deary.",
    "ctx": "chapter 7 (new)",
-   "script": "[dignified, relieved] I'll stay here and guard the apple muffins, DEARY."
+   "script": "[thick New York accent, dignified, relieved] I'll stay here and guard the apple muffins, DEARY.",
+   "takeId": "gen-b06244f782"
   },
   {
    "voice": "deedee",

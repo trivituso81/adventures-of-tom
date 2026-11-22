@@ -1,3 +1,7 @@
+## voices-t-crispvoices-617 (2026-11-22): 16 voice takes made from board card t-crispvoices and merged into the game
+
+The voice-gen Action made the takes (voiceboard1, tools/voice-learn/voiceboard.py) and merged them with merge-local.js: 16 clips, 0 lines on needs-human (silent, not merged), about 627 credits. Nobody has listened to these takes yet; the card asks Tom to.
+
 ## board-numpy (2026-11-22): the board sync no longer stops when the GitHub runner has no numpy
 
 Tom: "the board is stuck yet again ... The last sync failed". The sync job's check step (`tools/board_check.py`) checks stage-job video specs through `wanstage.py`, which imports numpy; the runner has none, so every run died before it could push the board (run 45066534485). `board_check.py` now skips that one check if numpy is missing, and `board-sync.yml` installs numpy first. Nothing in the game changed.
