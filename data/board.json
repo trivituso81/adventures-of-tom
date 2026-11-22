@@ -29526,7 +29526,7 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs. Runs only after Tom answers t-b3s23-confirm. Ends the battle system. Also waits for chapters 12 to 20 to be on Battle 3 (cards c-b3s22ch12 to c-b3s22ch20).",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29550,9 +29550,17 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T20:36:51.223Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-22T20:37:33+00:00",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ",
+    "opening": "started by START"
+   }
   },
   {
    "id": "t-b3s23-confirm",
@@ -36784,8 +36792,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "cd12592cb1c5c7bc740ea7fc749bab33bf20a562",
- "synced_at": "2026-11-22T20:32:08+00:00",
+ "synced": "f98b857f0aa4114565ecb7cffe61ef6a129a32e0",
+ "synced_at": "2026-11-22T20:37:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
