@@ -31751,6 +31751,10 @@
     {
      "d": "2026-11-22",
      "t": "Cause: the guide-use runner had ffmpeg (imageio-ffmpeg) but no ffprobe, so recipe.probe_fps raised and the run, which ignored failures, still committed the saved video and prompt. Fixed in guideusefix1."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Follow-up guideusefix2: the Name the build step called use_take.py --changes without --state, so no CHANGES heading was written; --state is now needed only for a use."
     }
    ],
    "prompt": {

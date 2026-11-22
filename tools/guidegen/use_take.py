@@ -221,10 +221,11 @@ def write_changes(report, tag, root):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(); ap.add_argument('--state', required=True); ap.add_argument('--root', default=ROOT0); ap.add_argument('--requests', default='data/guide-use.json')
+    ap = argparse.ArgumentParser(); ap.add_argument('--state', default=''); ap.add_argument('--root', default=ROOT0); ap.add_argument('--requests', default='data/guide-use.json')
     ap.add_argument('--no-take', action='store_true'); ap.add_argument('--tag', default=''); ap.add_argument('--changes', default='')
     a = ap.parse_args(argv)
     if a.changes: return write_changes(a.changes, a.tag, a.root)
+    if not a.state: ap.error('--state is required')
     root = a.root; sys.path.insert(0, os.path.join(root, 'tools', 'guidegen'))
     doc = jread(os.path.join(root, a.requests), {'requests': []}); reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('take')]
     say('%d use request(s) found' % len(reqs))
