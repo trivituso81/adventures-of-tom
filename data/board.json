@@ -30900,12 +30900,12 @@
   },
   {
    "id": "c-reports-11",
-   "tag": "reports-2026-11-21",
+   "tag": "reports-2026-11-22",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-165412-a75h. First note: before this, we need a line where Grace jumps up and says \"Tata, look! There's the mud blob holding ",
+   "next": "Shipped: Grace line added to ch1Mudling (r-20261121-165412-a75h). Waiting on the sync job to close.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -30936,12 +30936,17 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Added Grace's line \"Tata, look! There's the mud blob holding the muffins!\" before Rose's line in ch1Mudling (report r-20261121-165412-a75h). Build reports-2026-11-22."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-22T01:13:19+00:00"
+   "started_at": "2026-11-22T01:13:19+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-battleux-plan",

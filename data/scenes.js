@@ -304,6 +304,7 @@ SCENES.ch1Mudling=[
   {call:()=>{ const m=findMonster('mudling'); if(m) m.carry='muffins'; }},
   {spawn:{name:'Mudling B',monster:'mudling',carry:'muffins',at:[10,15],dir:'left'}},
   {spawn:{name:'Mudling C',monster:'mudling',carry:'muffins',at:[10,17],dir:'left'}},
+  {talk:'Grace',lines:["Tata, look! There's the mud blob holding the muffins!"]},   // r-20261121-165412-a75h
   {talk:'Rose',lines:["Hello, mud! Can we please have Deedee's muffins back? Thank you!"]},
   {talk:'Mudling',lines:["No. Ours now."]},
   {talk:'Rose',lines:["But I said PLEASE!"]},
