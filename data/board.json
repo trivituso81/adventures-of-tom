@@ -29546,13 +29546,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEUFp92RuXhVtRnTbD",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -29609,6 +29609,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -29623,8 +29627,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-22T01:53:56+00:00"
+   }
   },
   {
    "id": "c-bigone25",
@@ -32541,8 +32544,7 @@
    "title": "Look at the new menu's first screen on the Duo and phone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -32556,7 +32558,7 @@
    ],
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -32565,6 +32567,10 @@
     {
      "d": "2026-11-22",
      "t": "Made with the build cards after Tom approved the menu proposal in the chat."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ]
   },
@@ -32740,6 +32746,29 @@
      "t": "New card, made by the menu proposal session: the new menu has a Gear page, and gear does not count in the new battle yet. The mapping is the battle plan's own call, listed there as not yet confirmed by Tom."
     }
    ]
+  },
+  {
+   "id": "b-board-menuux4",
+   "tag": "board-menuux4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Tools",
+   "title": "the new main menu is approved; its four build cards are on the board",
+   "next": "Done: the new main menu is approved; its four build cards are on the board",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
@@ -33483,11 +33512,12 @@
    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
    "title": "Main menu redesign: the proposal",
    "first": "2026-11-21T17:30:53-08:00",
-   "last": "2026-11-21T18:20:23-08:00",
+   "last": "2026-11-21T18:24:44-08:00",
    "tags": [
     "menuux-plan",
     "board-menuux2",
-    "board-menuux3"
+    "board-menuux3",
+    "board-menuux4"
    ],
    "cards": [
     "c-menuux-plan"
@@ -37640,8 +37670,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "1d2951f8c052e9e4fd334adcd403196709cf4346",
- "synced_at": "2026-11-22T02:23:01+00:00",
+ "synced": "a3fdcf1a458e608041e2a10d949f995e14a138c4",
+ "synced_at": "2026-11-22T02:25:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
