@@ -30463,7 +30463,7 @@
   {
    "id": "t-crispvoices",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Voice Clips",
    "ask": "voice",
    "fyi": true,
@@ -30537,6 +30537,11 @@
      "d": "2026-11-22",
      "t": "Tom approved generating 16 voices (about 955 credits).",
      "at": "2026-11-22T20:41:13.996Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:30.611Z"
     }
    ],
    "vgen": {
@@ -30553,7 +30558,8 @@
      "needs_human": [],
      "note": "every line of this card already has a clip"
     }
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics2",
