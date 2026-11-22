@@ -31899,6 +31899,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Hanging Sent to Claude as card c-fix-pairmove1-gen-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T06:04:55.075Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44992845017: 1 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
     }
    ],
    "wgen": {
@@ -31907,10 +31911,31 @@
     "n": 1,
     "est": 0.79,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T06:20:22Z",
+     "state": "done",
+     "at": "2026-11-22T06:40:30Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44992845017",
-     "n": 1
+     "n": 1,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [],
+     "stopped": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [
+      {
+       "what": "tom-rose-giddyup",
+       "why": "not ready after 20 minutes; the request is kept: run again (no new charge)"
+      }
+     ],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {},
+     "spent": 0.0,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-rose-giddyup": 1
+     }
     }
    },
    "waiting_on": "claude"
