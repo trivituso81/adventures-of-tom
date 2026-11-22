@@ -31858,7 +31858,7 @@
   {
    "id": "c-wanstop-stage-tom-jetwash-vid-r1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-stage-tom-jetwash-vid-r1",
    "title": "Fix the stopped video stage-tom-jetwash-vid",
@@ -31878,6 +31878,10 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (45071628174): stage-tom-jetwash-vid stopped at rev 1. attempt 1 (pad none) bg, edge; attempt 2 (pad none) bg, edge. This animation has used 2 of its 4 tries ($0.30 of $3.20). Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Session started (Sonnet 5.5 medium)."
     }
    ],
    "prompt": {
