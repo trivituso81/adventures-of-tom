@@ -152,7 +152,7 @@ const VICTORY = {
   boppy: 'raises both hands to chest height, each making the American Sign Language I love you sign (thumb, index finger and little finger extended, middle and ring fingers folded), and breaks into a wide, toothy grin. One gold tooth sparkles once with a brief glint of light as he grins. He holds both hands in the sign with the same grin and remains completely still in that pose for the rest of the clip.',
   justin: 'gives two big thumbs up once with a proud, warm grin. He holds that pose and remains completely still in it for the rest of the clip.',
   olivia: 'throws both arms up in a V once with a big proud smile. She holds that arms-up pose and remains completely still in it for the rest of the clip.',
-  tnb: 'gives a relaxed, pleased grin and raises one fist once at chest height. He holds that fist up with the same grin and remains completely still in that pose for the rest of the clip.',
+  tnb: 'folds his arms across his chest, smiles, and winks once with one eye. He holds the folded arms and the smile with the eye open again and remains completely still in that pose for the rest of the clip.',
 };
 function stateText(a, w) {
   const S = w.S, s = w.s, h = w.h, st = a.state, o = a.owner;
@@ -162,7 +162,7 @@ function stateText(a, w) {
     hit: `From its starting stance, the dog flinches once as if bumped from the front, ducking its head back with its ears flat while its paws stay planted. Without repeating the flinch, it straightens up and returns to its starting stance, holding it for the rest of the clip.`,
     dodge: `From its starting stance, the dog quickly ducks and leans its body back and away to the right once, as if something is flying past, while its paws stay planted. Without repeating the dodge, it straightens up and returns to its starting stance, holding it for the rest of the clip.`,
     ko: `From its starting stance, the dog gets dizzy, wobbles once, and slowly lies down flat on the ground with its eyes closed and its head resting on its paws, as if it has fallen fast asleep. It stays lying there, completely still, for the rest of the clip.`,
-    victory: `From its starting stance, the dog hops up onto its back legs once with its front paws lifted and its tail wagging, mouth open in a happy pant. It lands back in its starting stance, tail still wagging, and holds it for the rest of the clip.`,
+    victory: `From its starting stance, the dog jumps up onto its hind legs once, front paws lifted and tail wagging, mouth open in a happy pant. It stays standing upright on its hind legs in that pose, tail still wagging, for the rest of the clip.`,
     run: `The dog trots in place facing left, legs pumping in a steady rhythm, without moving forward or backward from its spot. It keeps the same steady pace for the whole clip, then slows and stops in its starting stance at the very end.`,
   }[st];
   return {

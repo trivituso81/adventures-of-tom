@@ -29858,7 +29858,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics3",
+   "build": "startpics4",
    "history": [
     {
      "d": "2026-11-22",
@@ -30831,6 +30831,39 @@
      "d": "2026-11-22",
      "t": "Tom: \"Boppy should put both hands in an ASL 'I love you' sign and toothily grin and one of his gold teeth should sparkle when he grins.\" Built startpics3.",
      "at": "2026-11-22T20:11:46.405Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try"
+  },
+  {
+   "id": "c-startpics4",
+   "title": "TNB and Nara victory poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics4",
+   "next": "Built as startpics4: TNB's Victory is folded arms, a smile and a wink; Nara's is a jump onto her hind legs. No video was made. Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"TNB should fold his arms and smile and wink\"; \"Nara's victory pose is her jumping on her hind legs\". Built startpics4.",
+     "at": "2026-11-22T20:12:52.621Z"
     }
    ],
    "prompt": {

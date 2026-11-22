@@ -1,3 +1,7 @@
+## startpics4 (2026-11-22): TNB's victory is folded arms, a smile and a wink; Nara's victory is a jump onto her hind legs
+
+Card c-startpics4. Tom (11-22 12:12): "TNB should fold his arms and smile and wink" and "Nara's victory pose is her jumping on her hind legs". Changed only those two Victory lines in `tools/guidegen/build_map.js`. TNB winks once and ends with the eye open. Nara jumps up once and stays standing on her hind legs (before, she landed back on four paws; I kept the held end pose that every state prompt uses, say so if you want her to keep bouncing). No video was made and nothing was spent. Test: `python3 -I tools/art-library/startpic_test.py`.
+
 ## startpics3 (2026-11-22): Boppy's victory animation is the ASL I love you sign with a toothy grin and a sparkling gold tooth
 
 Card c-startpics3. Tom (11-22 12:11): "Boppy should put both hands in an ASL 'I love you' sign and toothily grin and one of his gold teeth should sparkle when he grins." Changed one thing: Boppy's Victory line in `tools/guidegen/build_map.js` (before: one pumped fist). Everything else in his prompt and everyone else's is unchanged. The sparkle is one brief glint, named once. Wording was checked in `data/guide-anims.json`; no video was made and nothing was spent. Test: `python3 -I tools/art-library/startpic_test.py`.
