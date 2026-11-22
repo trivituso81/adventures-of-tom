@@ -52,11 +52,11 @@ def ruckus(pct=35, w='100%'):
 
 # ---------- Family ----------
 def family_duo():
-    ppi = 4.36; area = 334
+    ppi = 4.5; area = 334
     lw, rw = 371, 468
     lslots = [('tom', 176), ('grace', 159)]; rslots = [('rose', 200), ('deedee', 232)]
     def half(slots, sel=None, new=None, ticks='left'):
-        figs = ''.join(figure(p, ppi, w, area) for p, w in slots)
+        figs = ''.join(figure(p, ppi, w, area, tick=False) for p, w in slots)
         plates = ''.join(plate(p, w, sel == p, (new or {}).get(p)) for p, w in slots)
         return (f'<div style="display:flex;align-items:flex-end;border-bottom:2px solid {INK}">{figs}</div>'
                 f'<div style="display:flex;align-items:flex-start">{plates}</div>')
@@ -338,7 +338,7 @@ def family_land():
     ppi = 2.98; area = 222
     lw, rw = 382, 382
     def half(slots, sel=None):
-        figs = ''.join(figure(p, ppi, w, area, tick=True) for p, w in slots)
+        figs = ''.join(figure(p, ppi, w, area, tick=False) for p, w in slots)
         plates = ''.join(plate_s(p, w, sel == p) for p, w in slots)
         return f'<div style="display:flex;align-items:flex-end;border-bottom:2px solid {INK}">{figs}</div><div style="display:flex;align-items:flex-start">{plates}</div>'
     left = half([('tom', 180), ('grace', 174)], 'tom'); right = half([('rose', 174), ('deedee', 180)])

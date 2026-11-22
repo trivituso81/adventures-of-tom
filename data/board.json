@@ -32067,7 +32067,7 @@
    "title": "Decide on the new main menu",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Open the drawings at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (also in the chat that starts \"The main menu needs a complete overhaul\"). The first row is the Duo unfolded: today's menu, then Family, Vibes, Gear, Bag and System, and last Vibes later in the game (three Vibes, choosing Quirks). Press Play on Family, Duo unfolded and tap the five tabs; do the same on Family, phone in the second row. About 5 minutes. Then tap one answer below. Your answer starts the card Create the menu build cards by itself.",
    "choices": [
@@ -32093,8 +32093,15 @@
     {
      "d": "2026-11-22",
      "t": "board-menuux3. Tom (11-21 18:14): \"did you design this for only what is implemented or to incorporate the full vision of the v11 battle system\". The first drawings covered only what is built. Vibes is redrawn for three Vibes, a Quirk chooser, mastery and the locked Freelancer chip; Family shows the whole bench with Change; plan section 4 lists every v11 item and where it lives."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom answered in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". The height labels are gone from the line-up (the family still stands at real relative heights). Build cards made by the same session: c-menu1 to c-menu4, t-menu1look, t-menu4play."
     }
-   ]
+   ],
+   "done": "2026-11-22",
+   "answer": "Build it with my changes (I wrote them in the note)",
+   "note": "looks great now, just remove their heights and we can make the cards for this to be produced"
   },
   {
    "id": "c-menuux-cards",
@@ -32102,9 +32109,7 @@
    "title": "Create the menu build cards",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
-   "auto": true,
+   "col": "done",
    "next": "Waits on your answer on the card Decide on the new main menu, then starts by itself. It creates the four build cards from the plan (menu1 the look and Family, menu2 Vibes and Gear, menu3 Bag and System, menu4 the switch-over and removing the old menu) and starts the first.",
    "blocks": [],
    "after": "nothing for Tom: end",
@@ -32122,7 +32127,14 @@
     "model": "Claude Sonnet 5.5 (row B: the four cards, their order, models and efforts are written in the plan; the board check catches mistakes)",
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then cards c-menuux-cards and t-menuux-decide in data/board.json: Tom's answer and note on t-menuux-decide come first. Your first push is the commit board: start c-menuux-cards. Read claude/menuux-plan.md, section 5 above all, and look at the pictures in claude/menuux-mock/shots/. If the answer is Build it as drawn: add the four Claude cards c-menu1 (tag menu1), c-menu2 (tag menu2), c-menu3 (tag menu3) and c-menu4 (tag menu4) exactly as section 5 lists them, each with a full prompt (what, before steps, model with its row letter, effort with its reason, the text) that names claude/menuux-plan.md, claude/menuux-mock/gen/kit.py and boards.py as the specification and the shots as the pictures to match; c-menu1 in Up next, the others in Waiting behind the one before; c-menu1 hands Tom a play card with where phone (one look at the Family screen on the Duo and the phone, and a head row of the line-up) and c-menu4 hands him a play card for the whole menu; c-menu2 and c-menu3 are nothing for Tom. Sonnet 5.5 medium cards get auto true, the two high ones do not. If the answer is Build it with my changes: when the note asks only for wording, or for an element to be moved, resized or removed, apply it to claude/menuux-plan.md and to the generator in claude/menuux-mock/gen/ (python3 render.py and shot.py, look at the screenshots, save them into shots/), then create the four cards; when the note changes the look itself (colours, type, the paper and line-up idea, the layout of a screen), do not redraw: add one Claude card for an Opus 5.5 high session that redraws from his note and hands t-menuux-decide back to him, tell Tom in two lines, and stop. If the answer is Not this direction: create no build cards, add one Claude proposal card (Opus 5.5 high) carrying his note, and stop. Run python3 tools/board_check.py before every push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Not needed: Tom approved in the chat and the proposal session made the build cards itself (build board-menuux4)."
+    }
+   ]
   },
   {
    "id": "c-smokefix1",
@@ -32489,6 +32501,245 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-menu1",
+   "tag": "menu1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "New menu: the look and the Family screen",
+   "next": "Builds the new menu's look and its first screen beside the old menu, behind a switch: the paper book over the paused scene, the five tabs, the top bar and the Family line-up with the bench. The old menu stays the default until the last card. Then you get one 3 minute look on the Duo and the phone, and Vibes and Gear start by themselves.",
+   "blocks": [
+    "c-menu2"
+   ],
+   "after": "t-menu1look",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds the look of the new main menu and its Family screen, beside the old menu and behind a switch. The old menu stays the default.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the design is written and drawn, the code is not, and it is a new screen system)",
+    "effort": "high (a whole screen system, a picture bake and two layouts worked out in one session)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-menu1 in data/board.json. Your first push is the commit board: start c-menu1. Tom approved the main menu redesign on 2026-11-21 (card t-menuux-decide: \"looks great now, just remove their heights and we can make the cards for this to be produced\"). claude/menuux-plan.md is the spec. The generator in claude/menuux-mock/gen/ is the reference for every size, colour and component (kit.py holds the colours, type and components; boards.py holds each screen), and the pictures in claude/menuux-mock/shots/ show what it must look like; they are a reference, not the implementation. Read sections 3, 4, 5 (the c-menu1 row) and 6 of the plan, engine/menu.js (how the menu opens, closes, zooms and takes keys and the gamepad), docs/DUO.md and engine/bench.js. Build the new menu in new files with the prefix m2 (engine/m2-*.js and m2.css, added to index.html), every style scoped under one root element so nothing leaks into or out of the old menu. A switch chooses the menu: ADMIN, Menu: Old or New (saved on the device, default Old), and index.html?menu=new forces New. Build, in this order: (1) a head row: every family member's hero painting at line-up scale with the heads side by side, saved into docs/CHANGES.md and named on Tom's card; never resize a head. (2) tools/sprite-bake/bake_menu_heroes.py from claude/menuux-mock/gen/bake_heroes.py (paper divided to white, no cutout), writing art/menu/ pictures for every family member who has a hero painting in art/raw/characters; look at every one on the page colour before going on. (3) The two font files from claude/menuux-mock/fonts/ copied to fonts/ and loaded when the menu first opens. (4) The colours and components of kit.py as CSS. (5) The backdrop: one still of the game picture taken when the menu opens, blurred once, under the dusk wash; nothing is blurred live. (6) The book and its five tabs, Family, Vibes, Gear, Bag, System, each a picture with its word: down the left edge when the screen is wider than tall (Duo unfolded with the gutter on the fold, desktop, phone sideways), along the bottom edge when it is taller than wide (phone upright, Duo folded). Until their own cards ship, Vibes, Gear, Bag and System open today's screens. (7) The top bar: place, the next thing to do (questShort in engine/story.js), coins, play time, Back to the game. (8) The Family screen as drawn in family_duo, family_phone and family_land: the line-up on one floor line, each height from data/heights.json and never typed, no height labels; under each person the name, level, health, Main Vibe with Rank stars, Front row or Back row, and a New skill tag after a Rank-up until their Vibes page is opened; everyone recruited who is not in the party on the bench, with Change (tap Change, then a bench face, then who sits out; benchSwap and benchToParty; where the story does not allow a swap, say so in words); the Family Ruckus gauge with marks at 50 and 100. (9) Keys, gamepad and touch; every target 44 px or more; no text under 12.5 px; no em dashes; the pencil Report tab and Rose Mode keep working. Write tools/m2_test.py: it opens the new menu with four in the party and people on the bench at 951 x 648 with ?duo=1, 393 x 852, 852 x 393, 466 x 657 and 1280 x 720, fails when a page overflows or text is under 12.5 px, tests the swap, and saves screenshots; compare them by eye with the three shots and fix what differs. Smoke and the tests of what you touched must pass. The card you ship hands Tom the look card t-menu1look, which is on the board: rewrite its next if the path to the switch differs, and put the head row's file name on it. Card c-menu2 starts by itself when you ship. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    }
+   ]
+  },
+  {
+   "id": "t-menu1look",
+   "title": "Look at the new menu's first screen on the Duo and phone",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "first": "Waits on the card New menu: the look and the Family screen. This card opens by itself.",
+   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN, Menu, and choose New. Load a game and open the menu. Look at the Family screen, then fold the phone or use the iPhone upright and look again. About 3 minutes. Judge looks only: the paper page, the lettering, the family standing in a row, and whether the heads look the right size next to each other. Claude has already tested every yes or no fact. Tap All good, or Something is wrong and say what to change. Vibes and Gear are being built meanwhile.",
+   "steps": [
+    "Duo unfolded, sideways: RELOAD on the title, then ADMIN, Menu, New.",
+    "Load a game and open the menu. Look at the Family screen.",
+    "iPhone upright (or the Duo folded): open the menu again.",
+    "Tap All good, or Something is wrong with what to change."
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made with the build cards after Tom approved the menu proposal in the chat."
+    }
+   ]
+  },
+  {
+   "id": "c-menu2",
+   "tag": "menu2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "auto": true,
+   "theme": "Game Shell",
+   "title": "New menu: Vibes and Gear",
+   "next": "Waits on New menu: the look and the Family screen, then starts by itself. Builds the Vibes page (three Vibes as chips, the kit with every skill described, Quirk slots and the Quirk chooser, front or back row) and the Gear page (three slots with painted pictures, what changes in green, Best gear). Nothing for you to do.",
+   "blocks": [
+    "c-menu3"
+   ],
+   "after": "nothing for Tom: c-menu3",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds the Vibes and Gear pages of the new menu on top of the first card's page system.",
+    "before": [
+     "Nothing to do first. This card starts by itself when New menu: the look and the Family screen has shipped; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the page system and components exist after menu1, the loadout functions exist, and the plan and generator say what goes where)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-menu2 in data/board.json. Your first push is the commit board: start c-menu2. Tom approved the main menu redesign on 2026-11-21 (card t-menuux-decide: \"looks great now, just remove their heights and we can make the cards for this to be produced\"). claude/menuux-plan.md is the spec. The generator in claude/menuux-mock/gen/ is the reference for every size, colour and component (kit.py holds the colours, type and components; boards.py holds each screen), and the pictures in claude/menuux-mock/shots/ show what it must look like; they are a reference, not the implementation. Read sections 3 and 4 of the plan (the table of every v11 item above all) and the row c-menu2 of section 5, the section Built: menu1 that the first card left in docs/CHANGES.md, engine/b3-menu.js and engine/b3-progress.js. If Tom answered card t-menu1look with Something is wrong, read its fix card first and do not undo it. Build as drawn in vibes_duo, vibes_late_duo, vibes_phone, gear_duo and gear_phone: (1) the shared header: faces of the party with a button for the bench (bench members keep their Vibes and gear), swipe and L and R to change person, the person at their height, level and XP, Health, Attack, Defense and Speed as the new battle works them out for that loadout. (2) Vibes: the person's Vibes as chips with stars and the tag Main, Pocket or Not in use (two chips today, three when the third Vibes exist, with no layout change); a locked Freelancer chip that says Master all 3; the chosen Vibe below with its subtitle, its Lean in words, its Vibe Point bar and what the next Rank unlocks, and for a mastered Vibe the line that says where its points go; the kit in Rank order, each row with its flavor as picture and word, its Pep cost and its description, locked rows with their Rank; Make it Main and Make it Pocket (b3SetMain, b3SetPocket); the two Quirk slots and the Choose a Quirk list (b3SetQuirk); Front row and Back row (b3SetRow, with the reason when the last person in front cannot move); a late joiner's point split with Lock it in (b3PoolShift, b3PoolConfirm); the line about Pick-Me-Up. Use the flavor symbols and the saved DETAILS setting of the new battle screen (claude/battleux-plan.md, section Built: battleux1) so the menu and a fight match. While a chapter still runs on the old battle, a link Old Stampcard at the bottom opens today's Stamps screen. (3) Gear: Tool, Outfit and Charm with the painted pictures of art/items (data/item-art.js), the pieces in the bag that fit the chosen slot with how much better, Wear, take off, Best gear, the header's numbers showing the change in green, and the green arrow on a face when the bag holds something better (hasUpgrade in engine/menu.js). Words for a piece's effect come from the gear mapping of claude/battle-architecture.md (POW to Attack, GRIT to Defense, PEP to Speed, HP to Health): if no mapping table exists yet, add it as data only (data/b3-gear.js), use it for the menu's words, change no fight number, and say in docs/CHANGES.md that fights do not count gear until card c-b3gear ships. Extend tools/m2_test.py to both pages at the five sizes, with a later-game loadout too (Ranks 5, 4 and 3, both Quirk slots in use), and compare the screenshots with the shots by eye. Smoke and python3 tools/b3_test.py s4 must pass. Nothing for Tom: card c-menu3 starts by itself. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    }
+   ]
+  },
+  {
+   "id": "c-menu3",
+   "tag": "menu3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "auto": true,
+   "theme": "Game Shell",
+   "title": "New menu: Bag and System",
+   "next": "Waits on New menu: Vibes and Gear, then starts by itself. Builds the Bag (the list with painted pictures, the item's page, Use it on) and System (saved games, options, the build label, quit). Nothing for you to do.",
+   "blocks": [
+    "c-menu4"
+   ],
+   "after": "nothing for Tom: c-menu4",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds the Bag and System pages of the new menu.",
+    "before": [
+     "Nothing to do first. This card starts by itself when New menu: Vibes and Gear has shipped; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the patterns exist after menu1 and menu2 and the old screens show every function to keep)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-menu3 in data/board.json. Your first push is the commit board: start c-menu3. Tom approved the main menu redesign on 2026-11-21 (card t-menuux-decide: \"looks great now, just remove their heights and we can make the cards for this to be produced\"). claude/menuux-plan.md is the spec. The generator in claude/menuux-mock/gen/ is the reference for every size, colour and component (kit.py holds the colours, type and components; boards.py holds each screen), and the pictures in claude/menuux-mock/shots/ show what it must look like; they are a reference, not the implementation. Read section 3 of the plan and the row c-menu3 of section 5, the sections Built: menu1 and Built: menu2 in docs/CHANGES.md, and in engine/menu.js the Items, Load, Options and Quit code (renderItemsTab, targetPicker, renderSaveTab, the save pop-up, renderQuit) plus b7RenderOptions in engine/feel.js: every function they offer today must still be reachable. Build as drawn in bag_duo, bag_phone, system_duo and system_phone: (1) Bag: All, Heal, Gear and Keepsakes, the list with painted pictures and counts, the chosen item's page with what it does, and Use it on with the family's health bars, most hurt first, the health they would end at and Use (a sheet that slides up on a tall screen). (2) System: Autosave and the slots with Save and Load and the ask-twice guard that exists today, saves from his other devices, Back up, Restore and the cloud set-up, the build label that opens the build history, Quit to title; Music, Voices and Sound effects, Difficulty, Battle speed, Show what each skill does (the same saved setting as in a fight), Turn the screen sideways on phones, Less motion (pages change without sliding). Keep every option that only the old battle uses out of sight unless a chapter on the old battle is being played. Rose Mode keeps working. Extend tools/m2_test.py to both pages at the five sizes, test a save and a load round trip and one item used on a hurt person, and compare the screenshots with the shots by eye. Smoke must pass. Nothing for Tom: card c-menu4 starts by itself. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    }
+   ]
+  },
+  {
+   "id": "c-menu4",
+   "tag": "menu4",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "auto": true,
+   "theme": "Game Shell",
+   "title": "New menu: switch it on and remove the old one",
+   "next": "Waits on New menu: Bag and System, then starts by itself. Makes the new menu the only menu and removes the old one's code and styles. Then you play the whole menu once.",
+   "blocks": [
+    "t-menu4play"
+   ],
+   "after": "t-menu4play",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Makes the new menu the only menu and purges the old one.",
+    "before": [
+     "Nothing to do first. This card starts by itself when New menu: Bag and System has shipped; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the purge rule is written and the tests catch mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-menu4 in data/board.json. Your first push is the commit board: start c-menu4. Tom approved the main menu redesign on 2026-11-21 (card t-menuux-decide: \"looks great now, just remove their heights and we can make the cards for this to be produced\"). claude/menuux-plan.md is the spec. The generator in claude/menuux-mock/gen/ is the reference for every size, colour and component (kit.py holds the colours, type and components; boards.py holds each screen), and the pictures in claude/menuux-mock/shots/ show what it must look like; they are a reference, not the implementation. Read the row c-menu4 of section 5 of the plan and the Built sections of menu1, menu2 and menu3 in docs/CHANGES.md. If card t-menu1look has an open fix card, stop and say so on this card. Make the new menu the only menu: remove the ADMIN switch and ?menu=new, then purge by the rule Purge replaced files completely in CLAUDE.md: the old menu's render functions and styles (engine/menu.js and the menu rules in index.html), the Vibes overlay's own screen in engine/b3-menu.js (keep its save and load wrappers and the Battle Lab's VIBES AND RANKS door, which now opens the new Vibes page), stale comments and tests of the old menu (rewrite the parts of tools/stampgrid_test.py, tools/b3_test.py s4 and any other test that drives the old menu). Keep everything other screens borrow from engine/menu.js (portraits, drawPortrait, item and gear helpers, the save pop-up on the map, the shop): move, do not delete, what is still used, and grep for every removed name until nothing is left. The Old Stampcard link stays only while a chapter still runs on the old battle. Update docs (CLAUDE.md Where things live, docs/DUO.md menus row, docs/ARCHITECTURE.md). Run smoke, tools/m2_test.py, python3 tools/b3_test.py s4 and python3 tools/buildlog_test.py, and look at the menu at the five sizes once more. The card you ship hands Tom the play card t-menu4play, which is on the board: rewrite its next if anything differs. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made after Tom approved the menu proposal in the chat (11-21 18:20): \"looks great now, just remove their heights and we can make the cards for this to be produced\". Plan: claude/menuux-plan.md section 5."
+    }
+   ]
+  },
+  {
+   "id": "t-menu4play",
+   "title": "Play the whole new menu on the Duo and iPhone",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
+   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, load a game and open the menu. Go through Family, Vibes, Gear, Bag and System: change someone's Main Vibe, put on a piece of gear, use a healing item, save. Then do the same once on the iPhone held upright. About 10 minutes. Judge looks and feel only: is everything easy to read, does each page make sense at a glance, does moving between people and pages feel right. Tap All good, or Something is wrong and say what to change.",
+   "steps": [
+    "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
+    "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
+    "iPhone upright: the same, once.",
+    "Tap All good, or Something is wrong with what to change."
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made with the build cards after Tom approved the menu proposal in the chat."
+    }
+   ]
+  },
+  {
+   "id": "c-b3gear",
+   "tag": "b3gear",
+   "lane": "claude",
+   "col": "up",
+   "night": false,
+   "theme": "Battle System",
+   "title": "Make gear count in the new battle",
+   "next": "Fact found while planning the new menu: in the new battle a Tool, Outfit or Charm changes nothing yet. The battle plan already says how gear should count (POW to Attack, GRIT to Defense, PEP to Speed, HP to Health; perks with no new meaning off). This card builds that and checks fight balance in the simulator. It does not start by itself: use Copy prompt when you want it.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Makes worn gear change Health, Attack, Defense and Speed in the new battle, as the battle plan decided, and checks balance in the simulator.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the mapping is decided in the battle plan and the simulator catches balance mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-b3gear in data/board.json. Your first push is the commit board: start c-b3gear. Read docs/BATTLE3.md (the top tables), claude/battle-architecture.md (the gap row Gear and the section that says stat bonuses pass through a mapping table in data: POW to Attack, GRIT to Defense, PEP to Speed, HP to HP, perks with no v11 meaning switched off in that table, not removed from items), and data/party.js (items with stats and perks). Fact on 2026-11-21: no file under data/b3-*.js or engine/b3-*.js reads a member's equipment, so gear changes nothing in a new-battle fight. If data/b3-gear.js exists (the menu card c-menu2 may have added the table for its words), use it; else create it. Apply it where a family unit's stats are built for a fight (engine/b3-core.js, engine/b3-story.js), list every perk and what the table does with it in docs/BATTLE3.md, and say which Charms end up with no effect so Tom can decide about them later. Add rule tests (a new tools/b3-check file, wired into node tools/b3-sim.js check) and run the simulator for the chapter 1 to 5 fights with and without typical gear for that chapter: report win rate and rounds to win both ways in docs/CHANGES.md, and if gear moves a boss outside the bestiary's target band, stop and write the numbers on the card for Tom instead of retuning monsters. Do not touch animations. Smoke and python3 tools/b3_test.py must pass. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "New card, made by the menu proposal session: the new menu has a Gear page, and gear does not count in the new battle yet. The mapping is the battle plan's own call, listed there as not yet confirmed by Tom."
+    }
+   ]
   }
  ],
  "sessions": [

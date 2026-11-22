@@ -295,6 +295,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 |---|---|---|
 | menuux-mock/fonts/bricolage.woff2 | wOF2    �    �$ c                       ��*��2�R?HVAR� | 2026-11-21 |
 | menuux-mock/fonts/figtree.woff2 | wOF2     N�     ��  NJ                       �4�F�8?HVAR�d`?STAT�'* �/j | 2026-11-21 |
+| menuux-mock/gen/bake_heroes.py | """Reference for the menu's hero pictures (the mockups were made with it): a hero painting on its cream paper  |  |
 | menuux-mock/gen/boards.py | from kit import * | 2026-11-21 |
 | menuux-mock/gen/export_canvas.py | Writes the Design canvas files (project/*.dc.html and project/canvas.json) from the same builders as the test  | 2026-11-21 |
 | menuux-mock/gen/kit.py | Golden Hour menu mockups: shared tokens and components. Every element carries inline styles (the Design canvas | 2026-11-21 |
@@ -318,9 +319,9 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/img/item-shirt.webp | RIFF�  WEBPVP8X | 2026-11-21 |
 | menuux-mock/img/item-sunhat.webp | RIFFH&  WEBPVP8X | 2026-11-21 |
 | menuux-mock/img/item-sweater.webp | RIFF"1  WEBPVP8X | 2026-11-21 |
-| menuux-mock/img/justin-head.webp | RIFFh#  WEBPVP8 \#  �c �*� � >A�C���=FD(� gr#����yW�O}}��gA=�����x?�z����k�#���Ǩ�:?D?�� :��/��Z�����l�_ |  |
-| menuux-mock/img/nara-head.webp | RIFF�#  WEBPVP8 �#  �e �*� � >A�C���;��(�g7"������9o����K�^���~�������\:dy��������������@9�V����-�L |  |
-| menuux-mock/img/olivia-head.webp | RIFF")  WEBPVP8 )  Pi �*� � >=�C�!!�60 ĳ d����ȹ_���d��^��m�o@����z�_�E�?�ǜ���T_�=@?���>�]��n�������� |  |
+| menuux-mock/img/justin-head.webp | RIFFh#  WEBPVP8 \#  �c �*� � >A�C���=FD(� gr#����yW�O}}��gA=�����x?�z����k�#���Ǩ�:?D?�� :��/��Z�����l�_ | 2026-11-21 |
+| menuux-mock/img/nara-head.webp | RIFF�#  WEBPVP8 �#  �e �*� � >A�C���;��(�g7"������9o����K�^���~�������\:dy��������������@9�V����-�L | 2026-11-21 |
+| menuux-mock/img/olivia-head.webp | RIFF")  WEBPVP8 )  Pi �*� � >=�C�!!�60 ĳ d����ȹ_���d��^��m�o@����z�_�E�?�ǜ���T_�=@?���>�]��n�������� | 2026-11-21 |
 | menuux-mock/img/rose-head.webp | RIFF�'  WEBPVP8 �'  �j �*� � >A�C����6�(�P����+鿧�r�n����\y>{w/C�=Ay�������{�s�/S��������_<P���W;�� | 2026-11-21 |
 | menuux-mock/img/rose.webp | RIFFZU WEBPVP8 NU �0�*#4>=�C�!�<İ Ħ��+HG\ƴv_a�*���� | 2026-11-21 |
 | menuux-mock/img/tnb-head.webp | RIFF`)  WEBPVP8 T)  0n �*� � >=�C�!�/� Ĵ d��*?/�1�=<���n����'΢�������?���?׺y���q�����/D.�O��}-:�4�� | 2026-11-21 |
@@ -344,7 +345,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/shots/system_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
 | menuux-mock/shots/system_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
 | menuux-mock/shots/vibes_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/vibes_late_duo.jpg | ���� JFIF      �� C  |  |
+| menuux-mock/shots/vibes_late_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
 | menuux-mock/shots/vibes_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
 
 ## moon club
