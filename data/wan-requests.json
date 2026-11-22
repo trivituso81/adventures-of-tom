@@ -43,6 +43,17 @@
    "start": "art/clips/start/tom-hero.png",
    "cap": 0.6,
    "note": ""
+  },
+  {
+   "anim": "move:fifty_year_dust_tsunami",
+   "slug": "move-fifty-year-dust-tsunami",
+   "take": 1,
+   "at": "2026-11-22T08:25:10.458Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FIFTY-YEAR DUST TSUNAMI\nFrom her starting relaxed stance, she brings a small feather duster out from behind her back, waves it forward once in a wide sweeping arc at chest height as if clearing the air. Without repeating the gesture, she tucks the duster behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+   "promptRev": 0,
+   "start": "art/clips/start/deedee-hero.png",
+   "cap": 0.6,
+   "note": ""
   }
  ]
 }
