@@ -32781,7 +32781,7 @@
    "title": "Look at the new menu's first screen on the Duo and phone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -32808,8 +32808,14 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: There is no menu in the admin Sent to Claude as card c-fix-menu1look; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T03:01:23.959Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-menu2",
@@ -33192,6 +33198,65 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r7 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 7) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears and disappears inconsistently; no clear si; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back or return to start; i. Its files are on branch wangen: deedee-wetfloor-r7-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r7.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanstop-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r7. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-fix-menu1look",
+   "tag": "fix-menu1look",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Look at the new menu's first screen on the Duo and",
+   "next": "You reported a problem on Look at the new menu's first screen on the Duo and phone. Claude starts the fix by itself. Latest: There is no menu in the admin",
+   "blocks": [
+    "t-menu1look"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T03:01:23.092Z",
+     "card": "t-menu1look",
+     "title": "Look at the new menu's first screen on the Duo and phone",
+     "ask": "play",
+     "words": "There is no menu in the admin",
+     "shot": "",
+     "asked": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN, Menu, and choose New. Load a game and open the menu. Look at the Family screen, then fold the phone or use the iPhone upright and look again. About 3 minutes. Judge looks only: the paper page, the lettering, the family standing in a row, and whether the heads look the right size next to each other. Claude has already tested every yes or no fact. Tap All good, or Something is wrong and say what to change. Vibes and Gear are being built meanwhile."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-menu1look"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-menu1look.",
+     "at": "2026-11-22T03:01:23.959Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-menu1look: There is no menu in the admin",
+     "at": "2026-11-22T03:01:23.959Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-22T03:01:23.959Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the new menu's first screen on the Duo and phone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-menu1look and t-menu1look in data/board.json, history included. Your first push is the commit board: start c-fix-menu1look.\n\nTom tested and found problems:\n1. Card t-menu1look (Look at the new menu's first screen on the Duo and phone, ask play). He was asked: On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN, Menu, and choose New. Load a game and open the menu. Look at the Family screen, then fold the phone or use the iPhone upright and look again. About 3 minutes. Judge looks only: the paper page, the lettering, the family standing in a row, and whether the heads look the right size next to each other. Claude has already tested every yes or no fact. Tap All good, or Something is wrong and say what to change. Vibes and Gear are being built meanwhile. He wrote: There is no menu in the admin\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T03:01:23.092Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-menu1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-menu1look, and give the build fix-menu1look a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-menu1look",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
