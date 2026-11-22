@@ -31911,8 +31911,8 @@
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
-   "title": "Watch Deedee's Wet-Floor with the string mop",
-   "next": "Open ADMIN > BATTLE GUIDE, choose Animations, Family, Deedee, and play Wet-Floor Hazard once. She holds a brown string mop, sweeps twice beside her feet and puts it away. Tap All good, or Something is wrong and say what you saw (for example if it still reads as a broom).",
+   "title": "Watch Deedee's Wet-Floor with the mop and sign",
+   "next": "Open ADMIN > BATTLE GUIDE, choose Animations, Family, Deedee, and play Wet-Floor Hazard once. She sweeps once with a string mop, sets down a yellow wet-floor sign, wags a finger at it and goes back to her stance. Tap All good, or Something is wrong and say what you saw.",
    "wanwatch": [
     "deedee-wetfloor"
    ],
@@ -31927,6 +31927,10 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanstuck1: deedee-wetfloor r9 baked by hand after a look at every frame."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "wanpurpose1 replaced r9 with the r10 take that adds the wet-floor sign."
     }
    ]
   },
@@ -34651,11 +34655,11 @@
   {
    "id": "c-wanstop-deedee-wetfloor-r10",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r10",
    "title": "Fix the stopped video deedee-wetfloor",
-   "next": "Both videos look like they meet the motion (one short mop sweep, sign set down, finger wag, back to her stance); the look check and one 2-frame edge touch stopped them. Waits on Tom card t-wetfloor-check.",
+   "next": "Retired: r10 is in the game (wanpurpose1).",
    "blocks": [],
    "after": "t-wetfloor-check",
    "auto": true,
@@ -34683,6 +34687,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanpurpose1: the r10 second take was accepted by eye and baked."
     }
    ],
    "prompt": {
@@ -34694,7 +34702,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r10 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 10) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r10-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r10.mp4, deedee-wetfloor-a2-r10.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r10` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r10. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T05:11:55+00:00"
+   "started_at": "2026-11-22T05:11:55+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-boardwedge1",
@@ -34734,9 +34743,9 @@
    "title": "Deedee's Wet-Floor video: accept it or try again",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
-   "next": "Unblocks c-wanstop-deedee-wetfloor-r10. Fact: the checks stopped deedee-wetfloor twice at rev 10, but by Claude's frame check both videos do the move (mop sweep once, sign set down, finger wag). Tap one answer; Claude acts on it next session.",
+   "next": "Decided by wanpurpose1: the r10 take with the wet-floor sign is in the game.",
    "choices": [
     "Bake the second video anyway (Recommended)",
     "Try once more with a stricter prompt",
@@ -34751,12 +34760,18 @@
     "c-wanstop-deedee-wetfloor-r10"
    ],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
-   "history": [],
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanpurpose1. Tom (21:36): \"it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme\". Claude put deedee-wetfloor-a2-r10 in the game (mop sweep, wet-floor sign, finger wag); no new video."
+    }
+   ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDLQ1SUuvYvgjga3AQ",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-cubepop-checkdecide-r4",
@@ -34871,6 +34886,38 @@
    "started_at": "2026-11-22T05:29:42+00:00",
    "after": "nothing for Tom: end",
    "done": "2026-11-21"
+  },
+  {
+   "id": "c-wanpurpose1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanpurpose1",
+   "title": "Video check judges the move's purpose, not every word",
+   "next": "Shipped in wanpurpose1.",
+   "blocks": [],
+   "after": "t-wanstuck1-watch",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: I've now spent the most $10 trying to get the mop for DD"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (21:35): \"I've now spent the most $10 trying to get the mop for DD. It's crazy\" Tom (21:36): \"it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme\""
+    }
+   ],
+   "prompt": {
+    "what": "Loosen the motion check to the move's purpose.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
   }
  ],
  "sessions": [

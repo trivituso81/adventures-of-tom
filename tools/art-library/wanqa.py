@@ -179,8 +179,15 @@ def motion_sentences(prompt, cap=4):
 def questions(prompt):
     """[(id, text)]: f_same, then p1.. one per motion sentence. Yes = fine."""
     q = [('f_same', 'Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.')]
-    for i, s in enumerate(motion_sentences(prompt)):
-        q.append(('p%d' % (i + 1), 'Reading the pictures in order, does this happen, once and clearly: "%s"  Say no if it does not happen, happens twice, or something else happens instead.' % s))
+    # wanpurpose1 (Tom 2026-11-21 21:36: "it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme").
+    # One question about the move as a whole, not one strict question per sentence: the per-sentence form ("once and clearly... say no if it happens twice")
+    # rejected all 6 Deedee Wet-Floor videos it judged for details (the mop not coming from behind her back, two strokes instead of one), $9.63 in all.
+    m = ' '.join(motion_sentences(prompt))
+    if m:
+        q.append(('p1', 'Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a '
+                  'game? "%s"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the '
+                  'order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, '
+                  'falls or turns away from the camera, or the action keeps repeating over and over.' % m))
     return q
 
 

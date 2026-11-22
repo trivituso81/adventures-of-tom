@@ -1,3 +1,16 @@
+## wanpurpose1 (2026-11-21): the video check judges the move's purpose, not every word; Deedee's Wet-Floor uses the take with the wet-floor sign
+
+Card c-wanpurpose1. Tom (21:35): "this pattern has continued. I've now spent the most $10 trying to get the mop for DD. It's crazy" Tom (21:36): "it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme". Fact: 13 Deedee Wet-Floor videos cost $9.63; the motion check judged 6 and rejected all 6, every time over details (the mop not coming from behind her back, two strokes instead of one); r9 and r10 were good by eye.
+
+| Change | Detail |
+|---|---|
+| Motion check | `questions` in tools/art-library/wanqa.py asks ONE question about the move as a whole: does it show the main action well enough to be this battle move? Small differences (strokes, where a prop comes from, exact pose) do not count; no only for a missing or different action, a flip, spin, fall or turning away, or endless repeats. It replaces one strict yes or no per prompt sentence ("once and clearly... say no if it happens twice") |
+| Stop sessions | A c-wanstop session that sees the purpose met by eye accepts the video (bake, wire, watch card) and starts no new try; only picture-breaking faults (edge, background, feet, a different person) always need a new try |
+| Deedee | deedee-wetfloor-a2-r10 baked by hand and wired (string mop sweep, a yellow wet-floor sign set down, a finger wag, back to her stance); it replaces r9. No new video. Retired: t-wetfloor-check, c-wanstop-deedee-wetfloor-r10 |
+| Video History | rebuilt (r10 shows as in the game) |
+
+Tests: wanbulk_test B13, wangen_test, smoke.
+
 ## menu4 (2026-11-22): the new menu is the only menu and the old one is gone
 
 Card c-menu4. Tom approved the redesign on t-menuux-decide (11-21 18:20). Nothing was run for money. Plan: claude/menuux-plan.md section 5.

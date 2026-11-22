@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T05:39Z",
+ "built": "2026-11-22T05:52Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -281,12 +281,12 @@
    "attempt": 2,
    "at": "2026-11-22T05:02:27.156613Z",
    "price": 0.785,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears suddenly; no clear bringing out or sweeping motion",
     "The motion check said no to: \"Without repeating the sweep, she sets a small yellow wet-floor sign on the floor beside her feet and wags one finger at it.\" Its reason: Sign appears inconsistently; no clear setting or finger wagging sequence"
    ],
-   "in_game": null,
+   "in_game": "deedee-wetfloor",
    "strip": "art/video-history/deedee-wetfloor-a2-r10.webp",
    "pad": 0.55,
    "model": "kling"
@@ -333,13 +333,13 @@
    "attempt": 1,
    "at": "2026-11-22T04:20:12.717802Z",
    "price": 0.785,
-   "verdict": "in_game",
+   "verdict": "rejected",
    "reasons": [
     "Part of her went past the edge of the picture.",
     "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears from side, not behind back; multiple sweeps and poses instead of one clear sweep",
     "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: Mop not put behind back; ends in varied poses without returning to start stance once clearly"
    ],
-   "in_game": "deedee-wetfloor",
+   "in_game": null,
    "strip": "art/video-history/deedee-wetfloor-r9.webp",
    "pad": 0.55,
    "model": "kling"

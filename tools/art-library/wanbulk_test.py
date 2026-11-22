@@ -16,6 +16,7 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B9  wanauto1: a miss that is not only the edge is re-rolled once with the same settings (same start picture) before it stops
   B10 wanauto1: budget() counts one animation's videos since its auto_from (4 tries, $3.20) and every video of the day ($15)
   B11 wanauto1: an animation out of tries gets one Tom decide card instead of a Claude card
+  B13 wanpurpose1: the motion check asks one question about the move's main action, not one strict question per sentence
   B12 wanstuck1: Tom's "Give it 4 more tries" answer resets that job's count; the card names the run's card
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
@@ -302,6 +303,11 @@ ok(mt == {'j': '2026-11-22T04:29:46.570Z'} and jobs_m['j']['auto_from'] == '2026
    'B12 "Give it 4 more tries" starts that job\'s count again from the answer time; another job or another answer changes nothing', mt)
 gc2 = wanbulk.gaveup_card('j', 3, 'x', None, '2026-11-22', 'r1', cfg, 't-card')
 ok(gc2.get('wan_card') == 't-card', 'B12 the out-of-tries card names the card whose run makes the job (the wan-gen Action runs it on the answer)')
+
+import wanqa
+qs = wanqa.questions('WHAT THIS IS\nx\n\nMOTION: TEST\nShe sweeps the mop once. She puts it away and stands still.')
+ok([q[0] for q in qs] == ['f_same', 'p1'] and 'Small differences do NOT matter' in qs[1][1] and 'sweeps the mop once' in qs[1][1] and 'puts it away' in qs[1][1],
+   'B13 wanpurpose1: one motion question about the whole move (purpose, not word for word), not one strict question per sentence', [q[0] for q in qs])
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'
