@@ -27921,13 +27921,13 @@
    "title": "Fix the last failing test (ch20_test)",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Done: no row of tools/night/tests.json carries known_fail (parts nightgreena to nightgreenm). The last one, ch20_test, was the test's fault (it never finished the Leviathan once the four barriers were down) and now passes in about 4 minutes, twice in a row. Nothing for Tom. Nightly refactoring (c-nightrefactor) is no longer blocked by this card.",
    "blocks": [
     "c-nightrefactor"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
     "opening": "pasted by Tom from the board"
@@ -28073,6 +28073,10 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as nightgreen: all rows are off known_fail; ch20_test passes twice in a row (223 s, 222 s). Notes in claude/next-addendum-nightgreen.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightgreen: every night test is off the known failures"
     }
    ],
    "prompt": {
@@ -28086,14 +28090,15 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Eleven of the twelve failing tests are already fixed or retired (nightgreena to nightgreenl). One row in tools/night/tests.json still carries known_fail: ch20_test. The addendum says what is known: the eight doors, the Core, the lift and the Leviathan fight pass; the checks shatter scene to Julian, calm and epilogue to the end, and game complete flag fail after the real Leviathan fight, although the game plays the shatter scene and starts the Julian fight when the same flags are set directly. Find what differs after the real fight 1 (the addendum has a cheap way: a temporary script that plays only fight 1 and prints the flags, the scene and the dialog state every second, not the whole 16 minute test), decide whether the test or the game is wrong, and fix the one that is wrong. A game fault that would trap a player is fixed in the game and tested. Then remove its known_fail, set `minutes` from the measured time (seconds divided by 60, times 1.2, rounded up), and push it with its own build name (nightgreenm) and a docs/CHANGES.md entry. Apply the stop-loss: two tries that miss the same way, write what you found on the card and stop. When it passes twice in a row, ship the card as nightgreen: add a `## nightgreen` heading in docs/CHANGES.md saying all rows are off known_fail, and write the result on the card. Then tell Tom in two lines what happens next and where. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
-   "after": "nothing for Tom: c-nightrefactor"
+   "after": "nothing for Tom: c-nightrefactor",
+   "done": "2026-11-21"
   },
   {
    "id": "c-nightrefactor",
    "title": "Nightly refactoring, one small piece a night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on the card Fix the 13 tests that already fail, and on 7 nights in a row with no failing test (the card Last night shows the count). Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. Refactoring means rewriting working code to be tidier without changing what the game does. It is the riskiest night job, so it comes last: the session writes a list of small pieces and creates the standing card Night refactor, which does one piece a night and puts a piece back when a test or a frame differs.",
    "blocks": [],
    "created": "2026-11-21",
@@ -28106,6 +28111,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-night from the planning chat https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k. Tom (11:00): \"I feel more could be done with automated tasks that you and i design together to get work done overnight. so while im sleeping tasks can go off that execute, test, file cleanup, code cleanup and refactoring\". Tom (11:09): \"i think we should do cleanup every night since we are in such an active development phase. create a card for each job in the board so that i can action it\". Design: claude/night-plan.md."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix the last failing test (ch20_test) is done."
     }
    ],
    "prompt": {
@@ -28120,7 +28129,6 @@
     "text": "Read CLAUDE.md (Hard rules, How to work), docs/ARCHITECTURE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1 to 4 and 10) and the Gotchas of claude/next.md, then card c-nightrefactor in data/board.json with its history. Your first push is the commit board: start c-nightrefactor. First check branch night: if the last 7 files under tests/ do not all show zero failing tests, write a history line containing \"ended without shipping\" with the count, leave the card in Up next and stop. Otherwise write claude/refactor-plan.md: a list of small pieces, smallest risk first (dead functions and constants nothing names, duplicated helpers, a file split along an existing seam), each naming its files, the tests in tools/night/tests.json that cover it, and the scenes or fights whose frames are compared before and after. No piece changes a value, a line of dialogue, a data file, the load order of index.html or anything under demo/. Then create the standing card c-night-refactor (nightly: true, tag nightrefactor, Sonnet 5.5 medium, theme Project Ops) whose prompt says: do the next piece of claude/refactor-plan.md, run its tests and python3 tools/smoke.py, compare its frames, and when anything differs put the piece back the same night and mark it \"needs a person\" in the plan. Do the first piece yourself to prove the method. Push build nightrefactor as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightrefactor",
-   "waiting_on": "claude",
    "after": "nothing for Tom: end"
   },
   {
@@ -36294,9 +36302,10 @@
    "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
    "title": "Fix the last failing test (ch20_test)",
    "first": "2026-11-21T22:27:49-08:00",
-   "last": "2026-11-21T23:41:00-08:00",
+   "last": "2026-11-21T23:42:26-08:00",
    "tags": [
-    "nightgreenm"
+    "nightgreenm",
+    "nightgreen"
    ],
    "cards": [
     "c-nightgreen"
@@ -41187,8 +41196,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "4f6d58e96a8416cf3355f660d5ff36fd5b8f41e1",
- "synced_at": "2026-11-22T07:41:37+00:00",
+ "synced": "641fae8cf51bf50cabc60f78b29a3485db816f39",
+ "synced_at": "2026-11-22T07:43:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
