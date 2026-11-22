@@ -761,6 +761,33 @@
    "date": "2026-11-12",
    "text": "Oct 25 to Nov 12: 121,000 plan credits and 440,000 pay-as-you-go credits used",
    "source": "Receipt of Nov 12"
+  },
+  {
+   "service": "elevenlabs",
+   "left": 402080,
+   "limit": 600000,
+   "unit": "credits",
+   "source": "Read from ElevenLabs by the costs-sync job (pro plan, 197,920 credits used).",
+   "date": "2026-11-21",
+   "at": "2026-11-22T01:17:15Z",
+   "read": true
+  },
+  {
+   "service": "fal",
+   "left": 8.92,
+   "unit": "usd",
+   "source": "Read from fal by the costs-sync job (FAL_ADMIN_KEY).",
+   "date": "2026-11-21",
+   "at": "2026-11-22T01:17:15Z",
+   "read": true
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-21",
+   "at": "2026-11-22T01:17:15Z",
+   "text": "The costs-sync job could not read the balance: xAI refused the management key for the balance call.",
+   "source": "costs-sync job",
+   "job": true
   }
  ]
 }
