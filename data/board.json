@@ -30890,6 +30890,37 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "c-battleux-plan",
+   "tag": "battleux-plan",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle System",
+   "title": "Battle screen redesign: the proposal",
+   "next": "Claude is writing a proposal for a new battle screen (the party and command panel, how a move is picked, read and aimed) for the Duo unfolded first, then desktop, Duo folded and a standard iPhone. Nothing in the game changes until Tom approves it in the chat; the build cards are made after that.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "prompt": {
+    "what": "Writes the proposal for a new battle screen: how the game's battle system compares with modern RPGs, a new way to pick, read and aim a move, and drawings for the Duo unfolded, desktop, Duo folded and a standard iPhone. Nothing in the game changes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: a screen design Tom judges by taste, where a miss costs him review time)",
+    "effort": "high (a whole design worked out with nothing written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux-plan in data/board.json, history included (Tom's words are there). Your first push is the commit board: start c-battleux-plan. Read docs/BATTLE3.md (the top tables), docs/DUO.md and the screen code in engine/b3-ui.js, and take screenshots of a NEW BATTLE Lab fight at 951 x 648 (Duo unfolded, ?duo=1), 1440 x 900, 466 x 657, 678 x 445, 393 x 852 and 852 x 393. Write the proposal Tom asked for: compare the battle system's paradigm with modern RPGs, then design the battle screen's interactions from scratch (what each Skill does must be readable without clutter or extra taps, with a switch that shows or hides descriptions; icons must explain themselves). Draw it for all four screens, Duo unfolded first. Keep the plan in claude/battleux-plan.md and the drawings in claude/battleux-mock/. Change nothing in the game. End with a Tom card (ask decide) that the build cards wait on. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFGY9EWFUmjQ73Nm3K",
+    "opening": "\"this is the side panel on unfolded duo landscape, which is my most important one. i think we need a total overhaul of the UX\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "New card. Tom (11-21 16:59): \"i think we need a total overhaul of the UX, especially for the lower half with actions. i think we need to take a step back and think about our battle system and compare the paradigm to similar paradigm in modern RPGs and then completely design the interactions from scratch. a few existing painpoints are the lack of clarity on what each skill does (the i icon isn't working well) without cluttering the space or creating extra taps (maybe a toggle to show/hide descriptions by default). the icons are also a bit confusing. im open to anything, but id like to see a proposal before moving forward. once approved, id ask you to create the corresponding cards\". And 17:01: \"although the viewport i mentioned is most important, i want it to also work well in landscape on a desktop browser, duo folded, and standard iphone viewport\"."
+    }
+   ]
   }
  ],
  "sessions": [
