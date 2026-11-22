@@ -32084,6 +32084,29 @@
    },
    "after": "t-startpics-try",
    "done": "2026-11-22"
+  },
+  {
+   "id": "b-guideuse-45076526823",
+   "tag": "guideuse-45076526823",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Battle System",
+   "title": "Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide",
+   "next": "Done: Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideuse-45076526823. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
@@ -32315,20 +32338,10 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
-   "title": "Battle stage 22: chapter 13 on Battle 3",
-   "first": "2026-11-22T14:15:21-08:00",
-   "last": "2026-11-22T14:15:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch13"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T14:13:42-08:00",
+   "last": "2026-11-22T14:24:33-08:00",
    "tags": [
     "startpics1",
     "startpics2",
@@ -32343,7 +32356,8 @@
     "startpic",
     "startpics9",
     "startpics10",
-    "startpics11"
+    "startpics11",
+    "startpics12"
    ],
    "cards": [
     "c-startpics",
@@ -32357,6 +32371,16 @@
     "c-startpics9",
     "c-startpics10",
     "c-startpics11"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
+   "title": "Battle stage 22: chapter 13 on Battle 3",
+   "first": "2026-11-22T14:15:21-08:00",
+   "last": "2026-11-22T14:15:21-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch13"
    ]
   },
   {
@@ -37986,8 +38010,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "9f1cd8bb437faeb6a03a241600abb20764730a58",
- "synced_at": "2026-11-22T22:16:07+00:00",
+ "synced": "364bd2f381e33876e734fb8784293791693e0cfa",
+ "synced_at": "2026-11-22T22:25:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
