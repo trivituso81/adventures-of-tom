@@ -81,6 +81,12 @@ def pipeline(what, job, ctx):
     a, out, log = ctx['a'], ctx['out'], ctx['log']
     rev = job['rev']
     prior = load_result(out, what, rev)
+    more_at = (ctx.get('more') or {}).get(what)
+    if prior and prior.get('verdict') == 'stopped' and more_at and str(prior.get('at') or '') < more_at and not a.dry_run:
+        # fix-pairmove1-gen-2: Tom answered "Give it 4 more tries" after this rev was stopped. The same rev cannot be made again (its files are
+        # already there), so the stop goes to a Claude session that changes one thing and raises rev (what the out-of-tries card promises), not to "already".
+        log('%s rev %d was stopped before Tom asked for more tries (%s): a Claude session changes one thing and starts the next try.' % (what, rev, more_at))
+        return {'what': what, 'rev': rev, 'state': 'stopped', 'result': prior, 'retried': len(prior.get('attempts') or []) > 1, 'revisit': True}
     if prior and prior.get('verdict') in ('passed', 'stopped'):
         log('%s rev %d already has a result (%s): nothing sent.' % (what, rev, prior['verdict']))
         return {'what': what, 'rev': rev, 'state': 'already', 'verdict': prior['verdict']}
@@ -143,6 +149,35 @@ def pipeline(what, job, ctx):
 
 
 # ------------------------------------------------------------------ cards
+def plain_why(why):
+    """fix-pairmove1-gen-2: the reason a video was not made, in Tom's words (the board's wanPlain says the same)."""
+    w = str(why or '')
+    if re.search(r'Exhausted balance|User is locked', w, re.I): return 'fal.ai (the video service) is out of money'
+    if re.search(r'refused the key|401|403', w): return 'fal.ai refused the key'
+    return w[:120] or 'unknown error'
+
+
+def history_line(run_id, rows, build=None):
+    """fix-pairmove1-gen-2 (Tom 11-21 22:04 "Hanging"): the card's history line counted every job as "made and checked", so a run that
+    sent nothing (fal out of money, or every video already in the game) read "3 made and checked, 0 passed, 0 stopped". Now it counts
+    only the videos actually made and names the rest: already made, out of tries, waiting on the cap, and each error in plain words."""
+    by = {}
+    for r in rows: by.setdefault(r['state'], []).append(r)
+    made = [r for r in rows if r['state'] in ('passed', 'stopped', 'unchecked') and not r.get('revisit')]
+    by['stopped'] = [r for r in by.get('stopped', []) if not r.get('revisit')]
+    parts = ['%d made' % len(made)]
+    if made:
+        parts[0] += ' (%d passed%s, %d stopped%s)' % (len(by.get('passed', [])), ' and in the game, build %s' % build if build else '',
+                                                    len(by.get('stopped', [])), ', %d not checked yet' % len(by['unchecked']) if by.get('unchecked') else '')
+    if by.get('already'): parts.append('already made, nothing sent: ' + ', '.join(r['what'] for r in by['already']))
+    if by.get('gaveup'): parts.append('out of tries: ' + ', '.join(r['what'] for r in by['gaveup']))
+    rv = [r['what'] for r in rows if r.get('revisit')]
+    if rv: parts.append('you asked for more tries, so a Claude session changes one thing and starts the next try: ' + ', '.join(rv))
+    if by.get('capped'): parts.append('waiting for the next tap (spending limit): ' + ', '.join(r['what'] for r in by['capped']))
+    for r in by.get('error', []): parts.append('%s not made: %s' % (r['what'], plain_why(r.get('why'))))
+    return 'wan-gen bulk run %s: %s.' % (run_id, '; '.join(parts))
+
+
 def stop_card(r, job, card, run, today, bud=None, cfg=None):
     """The one Claude card for a stopped job. Ids are fixed per job and rev, so a second run never adds a second one.
     wanauto1: while the animation has tries and dollars left (`budget`), the card is Sonnet 5.5 medium with `auto` and `start`, so the board job starts it
@@ -282,7 +317,8 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
     card = next((c for c in board['cards'] if c['id'] == cid), None) if cid else None
     if cid and card is None: say('card %s is not on the board' % cid); return 1
     names = card_jobs(card, jobs) if card else wangen.pick(jobs, a.what)
-    for n, at in more_tries(board, jobs, names).items(): say('%s: Tom asked for more tries at %s, so its count starts again from then' % (n, at))
+    more = more_tries(board, jobs, names)
+    for n, at in more.items(): say('%s: Tom asked for more tries at %s, so its count starts again from then' % (n, at))
     if a.what and card: names = [n for n in wangen.pick(jobs, a.what) if n in names] or names
     run_cap = min(float(a.cap_set and a.cap or (card or {}).get('wan', {}).get('cap') or cfg['cap']), cfg['cap'])
     a.cap = round(state['spent'] + run_cap, 4)   # the ledger counts every call ever made; this run may add run_cap
@@ -304,7 +340,7 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
         import artqa
         judge = artqa.Judge(xk, os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
     ctx = {'cfg': cfg, 'a': a, 'out': a.out, 'state': state, 'lock': lock, 'save': save, 'fal': fal, 'key': key, 'judge': judge, 'vlock': threading.Lock(), 'pads': cfg['pads'],
-           'log': lambda m: say(m)}
+           'log': lambda m: say(m), 'more': more}
 
     def one(n):
         c = dict(ctx); c['log'] = lambda m, _n=n: say('[%s]' % _n, m)
@@ -344,6 +380,9 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                 else:
                     sc = gaveup_card(r['what'], r['rev'], 'used %d tries ($%.2f)' % (bud['tries'], bud['spent']), r['result']['attempts'][-1], today, run_id, cfg, c['id'])
                     r['gaveup'] = True
+                if r.get('revisit') and sc['id'] in have:   # fix-pairmove1-gen-2: a second more-tries round at the same rev gets its own card
+                    sfx = '-m' + re.sub(r'\D', '', more.get(r['what'], ''))[4:12]
+                    sc = json.loads(json.dumps(sc).replace(sc['id'], sc['id'] + sfx).replace('wanstop-%s-r%d' % (r['what'], r['rev']), 'wanstop-%s-r%d%s' % (r['what'], r['rev'], sfx)))
                 if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
             for r in rows:
                 if r['state'] == 'gaveup':
@@ -369,8 +408,7 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                                 'capped': states['capped'], 'unchecked': states['unchecked'], 'errors': [{'what': r['what'], 'why': r.get('why')} for r in rows if r['state'] == 'error'],
                                 'already': states['already'], 'gaveup': states['gaveup'] + [r['what'] for r in stopped if r.get('gaveup')], 'bake_failed': failed, 'spent': round(state['spent'] - spent0 + vspent, 2), 'build': build if merged else None, 'watch': wid,
                                 'revs': {r['what']: r['rev'] for r in rows}}   # fix-wanstop-gen: the board page lists a job again once its rev is raised
-            c['history'] = (c.get('history') or []) + [{'d': today, 't': 'wan-gen bulk run %s: %d made and checked, %d passed%s, %d stopped, %d left for the next tap.' % (
-                run_id, len(rows), len(passed), ' (build %s)' % build if merged else '', len(stopped), len(states['capped']) + len(states['unchecked']))}]
+            c['history'] = (c.get('history') or []) + [{'d': today, 't': history_line(run_id, rows, build if merged else None)}]
             c['changed'] = today
         repo.update_board('board: wan-gen finished %s' % cid, finish)
     return 3 if any(r['state'] == 'capped' for r in rows) else (2 if any(r['state'] == 'error' for r in rows) else 0)

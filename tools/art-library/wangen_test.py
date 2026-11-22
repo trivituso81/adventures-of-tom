@@ -144,6 +144,14 @@ S['fail'] = False
 c, o = run(repo, out, 'start', '--dry-run', '--cap', '9', key='')
 check('W1 dry run with no key: says so, exit 0', c == 0 and 'key not checked' in o, o[-200:])
 
+# W5b fix-pairmove1-gen-2: a pending request still not finished an hour after it was sent is dropped and a new one is sent in the same run
+J = json.load(open(jf)); J['start']['rev'] = 9; json.dump(J, open(jf, 'w'))
+st = json.load(open(os.path.join(out, 'state.json'))); st['pending']['start'] = {'rid': 'rOld', 'rev': 9, 'status_url': URL + '/google/nano-banana-2.1/requests/rOld/status', 'response_url': URL + '/google/nano-banana-2.1/requests/rOld', 'est': .15, 'at': '2020-01-01T00:00:00Z'}
+st['calls'].append({'what': 'start', 'rev': 9, 'rid': 'rOld', 'est': .15, 'at': '2020-01-01T00:00:00Z'}); json.dump(st, open(os.path.join(out, 'state.json'), 'w'))
+S['pending_status'] = 1; n0 = len(S['sent']); c, o = run(repo, out, 'start', '--cap', '99')
+st = json.load(open(os.path.join(out, 'state.json')))
+check('W5b a request still IN_PROGRESS after an hour is dropped (marked on its call) and a new one is sent and made', c == 0 and len(S['sent']) == n0 + 1 and 'dropping request rOld' in o and os.path.exists(os.path.join(out, 'start-r9.png')) and not st['pending'] and any(x.get('rid') == 'rOld' and x.get('dropped') == 'IN_PROGRESS' for x in st['calls']), o[-500:])
+
 # W9 a list of jobs at once (wanch1): three videos picked by a wildcard, a fourth by name; cap lets two through
 J = json.load(open(jf))
 for n in ('lt-a', 'lt-b', 'lt-c', 'lt-d'): J[n] = dict(J['video'], rev=1)

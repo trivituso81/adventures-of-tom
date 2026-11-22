@@ -138,7 +138,7 @@ jobs:
           if [ "$MODE" = "bulk" ] && [ "$DRY" != "true" ]; then
             git fetch -q --depth 1 origin main && git show FETCH_HEAD:data/board.json > "$RUNNER_TEMP/board-now.json"
             for other in $(python3 -c "import json,sys; b=json.load(open(sys.argv[1])); print(' '.join(c['id'] for c in b['cards'] if (c.get('wgen') or {}).get('want') and c.get('wan') and c['id']!=sys.argv[2]))" "$RUNNER_TEMP/board-now.json" "$CARD"); do
-              echo "also asking: $other"
+              echo "also asking: $other"; echo "$other" >> "$RUNNER_TEMP/also.txt"
               python3 -I tools/art-library/wangen.py --bulk --card "$other" --out "$RUNNER_TEMP/wangen" 2>&1 | tee -a "$RUNNER_TEMP/run.log" || true
             done
           fi
@@ -170,7 +170,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python3 -I tools/art-library/wan_runfail.py --card "${{ steps.mode.outputs.card }}" --log "$RUNNER_TEMP/run.log" || true
+        # fix-pairmove1-gen-2: also every card this run made because it was still asking (wanqueue1); before, a crash there left that card on "running".
+        run: |
+          for c in "${{ steps.mode.outputs.card }}" $(cat "$RUNNER_TEMP/also.txt" 2>/dev/null); do
+            python3 -I tools/art-library/wan_runfail.py --card "$c" --log "$RUNNER_TEMP/run.log" || true
+          done
       - name: Keep the results and the ledger on the wangen branch
         if: ${{ inputs.dry_run != 'true' && always() }}
         env:

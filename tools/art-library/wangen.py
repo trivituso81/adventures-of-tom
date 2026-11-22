@@ -168,6 +168,18 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
         done = [c for c in state['calls'] if c['what'] == what and c['rev'] == rev and c.get('file')]
         pend = state['pending'].get(what)
         if pend and pend.get('rev') != rev: log('dropping a pending request of an older rev: %s' % pend['rid']); state['pending'].pop(what); pend = None; save()
+    # fix-pairmove1-gen-2 (Tom 11-21 22:04 "Hanging"): Rose's Giddyup request of 05:16 UTC was queued just as fal ran out of money and never finished;
+    # every later tap picked it up, waited 20 minutes and gave up again. A request still not COMPLETED an hour after it was sent is dropped and a new one sent.
+    if pend and key and not a.dry_run and stale_pending(pend):
+        st = fal.status(pend)
+        if st != 'COMPLETED':
+            log('dropping request %s: sent %s and still %s after an hour; a new one is sent' % (pend['rid'], pend.get('at', '?'), st))
+            with lock:
+                state['pending'].pop(what, None)
+                for c in state['calls']:
+                    if c.get('rid') == pend['rid']: c['dropped'] = st
+                save()
+            pend = None
     if key:
         try:
             live = fal.price(job['endpoint'])
@@ -222,6 +234,17 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
             with lock: state['pending'].pop(what, None); save()
         report['error'] = str(x); log('STOP: %s' % x); return 2, report
     return 0, report
+
+
+STALE_S = float(os.environ.get('WANGEN_STALE_S') or 3600)
+
+
+def stale_pending(pend, now=None):
+    """fix-pairmove1-gen-2: True when a pending request was sent more than STALE_S seconds ago (no time recorded: not stale)."""
+    try: t = datetime.datetime.fromisoformat(str(pend.get('at', '')).rstrip('Z').split('+')[0])
+    except Exception: return False
+    now = now or datetime.datetime.utcnow()
+    return (now - t).total_seconds() > STALE_S
 
 
 def run_guide_requests(a, jobs, state, lock, save, fal, key):

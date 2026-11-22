@@ -85,6 +85,14 @@ class Fal:
         if not j.get('request_id'): raise Stop('fal gave no request id: ' + self.clean(r.text))
         return {'rid': j['request_id'], 'status_url': j['status_url'], 'response_url': j['response_url']}
 
+    def status(self, pend):
+        """fix-pairmove1-gen-2: one look at a queued request. Returns fal's status word (IN_QUEUE, IN_PROGRESS, COMPLETED) or 'HTTP <code>'."""
+        try: r = self.s.get(pend['status_url'], headers=self.hdr, timeout=60)
+        except Exception as x: return 'unreachable (%s)' % type(x).__name__
+        if not r.ok: return 'HTTP %d' % r.status_code
+        try: return str(r.json().get('status') or 'no status')
+        except Exception: return 'no status'
+
     def wait(self, pend, tell=None):
         t0 = time.time()
         while time.time() - t0 < POLL_MAX_S:

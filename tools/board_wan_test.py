@@ -98,6 +98,11 @@ try:
             sums = pg.evaluate("()=>({broke:wanSummary(B.cards.find(c=>c.id==='t-w-broke')),dropped:wanSummary(B.cards.find(c=>c.id==='t-w-dropped'))})")
             ok('out of money' in sums['broke'] and 'fal.ai/dashboard/billing' in sums['broke'], tag + ': wanfeedback1: an out-of-money run says so in plain words: ' + sums['broke'])
             ok('never started' in sums['dropped'] and 'Tap Generate again' in sums['dropped'], tag + ': wanfeedback1: a dropped tap says so: ' + sums['dropped'])
+            gv = pg.evaluate("""()=>{ const run={state:'done',at:'2026-11-22T06:20:20Z',stopped:[{what:'tom-blockade',why:'failed twice: edge, p1',card:'t-wangaveup-gvx-r4'}],gaveup:['tom-blockade'],already:['grace-cubepop'],revs:{'tom-blockade':4}};
+              const c={id:'t-gv-card',wgen:{want:false,run}}, g={id:'t-wangaveup-gvx-r4',title:'The video tom-blockade did not pass in 4 tries'}; B.cards.push(g);
+              const a=wanSummary(c); g.answer='Give it 4 more tries'; const b=wanSummary(c); B.cards.pop(); return {a,b}; }""")
+            ok(gv['a'].count('tom-blockade was') == 1 and 'used its 4 tries' not in gv['a'] and 'answer the card "The video tom-blockade did not pass in 4 tries"' in gv['a'] and 'see its card' not in gv['a'], tag + ': fix-pairmove1-gen-2: an out-of-tries video is named once, with the card to answer: ' + gv['a'])
+            ok('you chose "Give it 4 more tries", so a Claude session changes one thing and the Action tries again by itself' in gv['b'], tag + ': fix-pairmove1-gen-2: after Tom answers, the line says what he chose and what follows: ' + gv['b'])
             pg.evaluate("openSheet('t-w-dropped')"); pg.wait_for_selector('#sheet .pics')
             ok(not pg.is_disabled('#sheet button.gen'), tag + ': wanfeedback1: after a dropped tap the Generate button works again'); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-wait')"); pg.wait_for_selector('#sheet .pics')

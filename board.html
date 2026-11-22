@@ -775,6 +775,21 @@ function wanPlain(why){ const w=String(why||'');
   return w.slice(0,200); }
 function wanDropped(c){ const g=c.wgen||{},run=g.run||{};
   return !!(g.want&&g.at&&(Date.now()-Date.parse(g.at))>15*60e3&&!(run.at&&Date.parse(run.at)>=Date.parse(g.at))); }
+// fix-pairmove1-gen-2 (Tom 11-21 22:23 "See your message"): the line said "see its card" (twice for one video) without naming the card, and kept
+// saying it after Tom had answered. Now it names the out-of-tries card by its title and, once he answered, says what he chose and what follows.
+function wanGaveupSay(w,id){ const g=cardById(id);
+  if(!g) return 'a card asks you whether to try again';
+  if(g.answer) return /^Give it/.test(g.answer)?'you chose "'+g.answer+'", so a Claude session changes one thing and the Action tries again by itself (nothing to tap)':'you chose "'+g.answer+'"';
+  return 'answer the card "'+g.title+'"'; }
+// fix-pairmove1-gen-2: the head said "No video passed the checks yet ... being fixed by Claude" for a card whose other videos were done and whose
+// stopped video was out of tries (a Tom card, not a Claude fix). It now says how many are done and splits Claude fixes from out-of-tries cards.
+function wanHeldHead(c,held){
+  const tot=(c.wan.jobs||[]).length,fin=tot-held.length,gv=held.filter(x=>/^t-wangaveup/.test(x.card||'')),cl=held.filter(x=>!/^t-wangaveup/.test(x.card||''));
+  const out=[fin?fin+' of '+tot+' videos are done.':'No video passed the checks yet.'];
+  if(cl.length)out.push('Stopped by the checks and being fixed by Claude: '+cl.map(x=>esc(x.what)+(x.card?' (card '+esc(x.card)+')':'')).join(', ')+'.');
+  if(gv.length)out.push('Out of tries: '+gv.map(x=>{const g=cardById(x.card);return esc(x.what)+(g&&g.answer?' (you chose "'+esc(g.answer)+'")':' (answer the card "'+esc(g?g.title:x.card)+'")');}).join(', ')+'.');
+  return out.join(' ');
+}
 function wanSummary(c){ const g=c.wgen||{},run=g.run||{};
   if(wanDropped(c)) return 'Your tap at '+new Date(g.at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+' never started: GitHub dropped the run. Tap Generate again.';
   if(!run.state||run.state==='running') return '';
@@ -782,11 +797,11 @@ function wanSummary(c){ const g=c.wgen||{},run=g.run||{};
   if(run.state==='failed') return 'Last run'+when+' failed: '+wanPlain(run.why||run.error||'the job stopped before it finished');
   const m=(run.merged||[]).length; if(m) parts.push(m+' passed and '+(m===1?'is':'are')+' in the game');
   (run.errors||[]).forEach(x=>parts.push(x.what+': '+wanPlain(x.why)));
-  (run.stopped||[]).forEach(x=>parts.push(x.what+' was stopped by the checks ('+String(x.why||'').replace(/^failed( twice)?: /,'')+'); '+(/^t-wangaveup/.test(x.card||'')?'it used its tries, see its card':'a Claude session fixes it by itself')));
-  (run.gaveup||[]).forEach(w=>parts.push(w+' used its 4 tries; see its card'));
+  (run.stopped||[]).forEach(x=>parts.push(x.what+' was stopped by the checks ('+String(x.why||'').replace(/^failed( twice)?: /,'')+'); '+(/^t-wangaveup/.test(x.card||'')?wanGaveupSay(x.what,x.card):'a Claude session fixes it by itself')));
+  (run.gaveup||[]).filter(w=>!(run.stopped||[]).some(x=>x.what===w)).forEach(w=>parts.push(w+' used its 4 tries; '+wanGaveupSay(w,'t-wangaveup-'+w+'-r'+wanRunRev(run,w))));
   (run.capped||[]).forEach(w=>parts.push(w+' waits: it would go over the spending limit'));
   (run.unchecked||[]).forEach(w=>parts.push(w+' was made but not checked yet; the next tap checks it for free'));
-  (run.already||[]).forEach(w=>parts.push(w+' was already made at this version, so nothing was sent'));
+  const al=run.already||[]; if(al.length) parts.push(al.join(' and ')+(al.length===1?' was':' were')+' already made at this version, so nothing was sent');
   return 'Last run'+when+': '+(parts.length?parts.map(s=>s.replace(/\.+$/,'')).join('. ')+'.':'nothing to make.');
 }
 function wanHtml(c,compact){
@@ -797,7 +812,7 @@ function wanHtml(c,compact){
   const busy=(g.want&&!wanDropped(c))||(run.state==='running'&&!stale);
   const held=wanStoppedOpen(c),unk=wanUnknown(c);
   const head=unk.length&&!n?'The job list has not caught up with this card yet ('+unk.map(esc).join(', ')+'). It is read again every minute.':n?n+' video'+(n===1?'':'s')+' left to make: '+left.map(esc).join(', ')
-    :held.length?'No video passed the checks yet. Stopped by the checks and being fixed by Claude: '+held.map(x=>esc(x.what)+(x.card?' (card '+esc(x.card)+')':'')).join(', ')+'.'
+    :held.length?wanHeldHead(c,held)
     :'Every video of this card is made.';
   let h='<div class="pics"><h4>Videos on this card</h4><div class="gm" style="margin:0">'+head+'</div>';
   const sum=wanSummary(c); if(sum) h+='<div class="gm wansum" style="margin:6px 0;color:#ffd34d"><b>'+esc(sum)+'</b></div>';

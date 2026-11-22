@@ -31860,7 +31860,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Make Rose's Giddyup with Tom in it",
-   "next": "Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
+   "next": "Nothing to tap: this push starts Rose's Giddyup again with a fresh request (the old one was stuck at fal). Open this card on the board in about 15 minutes and read the yellow Last run line: it should say in one sentence what happened to tom-rose-giddyup (passed and in the game, or stopped and why). If it passed, a watch card comes: open ADMIN > BATTLE GUIDE, find Giddyup, press PLAY: Rose hops onto Tom's shoulders, rides with a fist up, springs off and lands in front of him.",
    "wan": {
     "jobs": [
      "tom-rose-giddyup"
@@ -31915,6 +31915,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44992845017: 1 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed by fix-pairmove1-gen-2 (Tom: \"Hanging\"): the request sent at 05:16 UTC, as fal ran out of money, never finished, and every run waited 20 minutes on it again. A request not finished after an hour is now dropped and a new one sent; this push starts the run.",
+     "at": "2026-11-22T07:05:00Z"
     }
    ],
    "wgen": {
@@ -34665,7 +34670,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Remaking three flat moves: Blockade, Cube Pop, Wet-Floor",
-   "next": "Nothing to tap: the run is already started. The Action makes the 3 videos (Tom's Zone One Blockade with the hip bump, Grace's Crunchy Sugar-Cube Pop held by her ear, Deedee's Wet-Floor with the yellow sign), checks them, retries by itself and puts the ones that pass in the game. A watch card comes when they pass. At most $9.60 for all three, about $1.80 if each passes first time.",
+   "next": "Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes.",
    "wan": {
     "jobs": [
      "tom-blockade",
@@ -34801,6 +34806,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44993341855: 3 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed by fix-pairmove1-gen-2 (Tom: \"See your message\"): the yellow line said \"see its card\" twice without naming it; and Give it 4 more tries did nothing (run 44993341855 said rev 4 \"already has a result\"). Now the line names the card and what Tom chose, and the answer goes to a Claude stop card that raises rev.",
+     "at": "2026-11-22T07:05:00Z"
     }
    ],
    "waiting_on": "claude"
@@ -35317,7 +35327,7 @@
     "t-movefun-gen"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "reports": [
     {
      "at": "2026-11-22T06:04:54.215Z",
@@ -35339,7 +35349,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGzvVM3m2QKbFGwhvb",
+    "url": "https://claude.ai/code/session_01RXeukDC1yqbxfJTPwowGvb",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -35366,6 +35376,11 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Result (fix-pairmove1-gen-2): Hanging = Rose's request of 05:16 UTC was sent as fal ran out of money and never finished; every run picked it up again and waited 20 minutes (run 44992845017 did, 06:20 to 06:40 UTC). A request not finished after an hour is now dropped and a new one sent. See your message = the yellow line said \"see its card\" twice without naming it; and Give it 4 more tries did nothing (run 44993341855: \"already has a result\"). Now the line names the card and what Tom chose, and a more-tries answer goes to an auto-started Claude stop card that raises rev. The last commit starts Rose's run again (t-movefun-gen also asking).",
+     "at": "2026-11-22T07:05:00Z"
     }
    ],
    "prompt": {

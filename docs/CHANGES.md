@@ -1,3 +1,21 @@
+## fix-pairmove1-gen-2 (2026-11-22): a dead video request no longer hangs Rose's Giddyup, Give it 4 more tries now makes a new try, and video cards say plainly what happened
+
+Card c-fix-pairmove1-gen-2, for t-pairmove1-gen and t-movefun-gen. Tom on t-pairmove1-gen (22:04): "Hanging". Tom on t-movefun-gen (22:23): "See your message".
+
+| What | Detail |
+|---|---|
+| Hanging, cause (fact) | Rose's Giddyup tap at 05:13 UTC reached fal.ai after its money ran out (403 "Exhausted balance"); the card history then said "1 made and checked, 0 passed, 0 stopped", which reads like something was made. The 05:23 tap was dropped by GitHub (one waiting run per group). wanqueue1, wanfeedback1 and Tom's fal top-up (t-fal-topup) landed after his report; since 06:20 UTC the video is being made inside run 44992845017 (it makes every card still asking after its own). |
+| Hanging, second cause (fact) | The request sent at 05:16 UTC, just as fal ran out of money, never finished. Every later run picked it up again "with no new charge", waited 20 minutes and gave up: run 44992845017 did exactly that (06:20 to 06:40 UTC, "not ready after 20 minutes"). It would have hung on every tap. |
+| Hanging, second fix | `wangen.py` `stale_pending` and `falq.py` `status`: a request still not COMPLETED an hour after it was sent is dropped (its ledger row is marked `dropped`) and a new one is sent in the same run. |
+| Hanging, fix | `history_line` in `tools/art-library/wanbulk.py`: the history counts only videos actually made and names the rest ("already made, nothing sent: ...", "out of tries: ...", "tom-blockade not made: fal.ai (the video service) is out of money"). `.github/workflows/wan-gen.yml`: the run-failed step (`wan_runfail.py`) now also covers each card a run made because it was still asking, so a crash there leaves "failed: <reason>", never "Making 1 video..." forever. |
+| See your message, cause (fact) | The card's yellow line said "tom-blockade ... it used its tries, see its card" and again "tom-blockade used its 4 tries; see its card" without naming the card, and kept saying it after Tom answered Give it 4 more tries. The head said "No video passed the checks yet ... being fixed by Claude" while Cube Pop and Wet-Floor were done and Blockade was out of tries (a Tom card). |
+| See your message, fix | `board.html` `wanGaveupSay`, `wanHeldHead`: the line names the out-of-tries card by its title, says each video once, and after an answer says "you chose "Give it 4 more tries", so a new run makes it again by itself (nothing to tap)"; the head reads "2 of 3 videos are done. Out of tries: tom-blockade (you chose ...)". |
+| Give it 4 more tries did nothing (fact) | Tom chose Give it 4 more tries on t-wangaveup-tom-blockade-r4 at 06:21 UTC; run 44993341855 then said "tom-blockade rev 4 already has a result (stopped): nothing sent", because the same rev cannot be made twice. |
+| Give it 4 more tries, fix | `wanbulk.py` `pipeline`: a rev stopped before Tom's more-tries answer comes back as stopped, so the run adds the Sonnet stop card (auto-started) that changes one thing, raises rev and starts the next try, as the out-of-tries card promises. A second round at the same rev gets its own card id. |
+| Started again | The last commit of this push is `board: wan generate t-pairmove1-gen` (Rose's Giddyup, within Tom's approved tap) with t-movefun-gen also asking, so Rose gets a fresh request and Blockade goes to its stop card. |
+| Tests | `wanbulk_test.py` B15 (history line) and B16 (more tries), `wangen_test.py` W5b (stale request dropped and sent again), `board_wan_test.py` (out-of-tries line before and after an answer), portrait and landscape; the real board card looked at in both. |
+| Pencil reports | `python3 tools/reports.py list`: none filed since 2026-11-22T06:04:54Z; nothing to mark done. |
+
 ## 2026-11-22 (2): Art Library bake, banner-leave-rose (`artbake1586`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
@@ -17,7 +35,6 @@ Card c-fix-menu4play-2 (fix from Tom's report on t-menu4play). Tom: "The family 
 - Wide book (Duo, landscape, desktop): the right page now seats its people in the same width as the left page, packed to the left, so Rose and Deedee sit the same distance apart as Tom and Grace and stay clear of the crease. The dead space on the right of the line-up is left empty for now; what to put there is Tom's call (not done).
 - The tab is now "Tom's Party" (`M2_TABS` in `engine/m2-core.js`). I read "Dallas's" as "Tom's" because "Dallas" appears nowhere in the game; if another name was meant, say it on the card.
 - Tested: `python3 tools/m2_test.py` passes; frame `tools/shots/m2-duo.png`.
->>>>>>> 15a84a83 (fix-menu4play-2: Family page seats all four evenly clear of the crease; tab is Tom's Party)
 
 
 ## fix-artgen3try-3 (2026-11-22): QA no longer holds a picture for "cut off at the edge" when nothing is cut off

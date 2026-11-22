@@ -19,6 +19,8 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B14 wanfeedback1: a run that crashes before writing its result still tells the card why
   B13 wanpurpose1: the motion check asks one question about the move's main action, not one strict question per sentence
   B12 wanstuck1: Tom's "Give it 4 more tries" answer resets that job's count; the card names the run's card
+  B16 fix-pairmove1-gen-2: after "Give it 4 more tries", a rev stopped before the answer goes to a Claude stop card instead of "already"
+  B15 fix-pairmove1-gen-2: the card's history line counts only videos actually made and names already made, out of tries and errors in plain words
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
 import numpy as np
@@ -305,6 +307,16 @@ ok(mt == {'j': '2026-11-22T04:29:46.570Z'} and jobs_m['j']['auto_from'] == '2026
 gc2 = wanbulk.gaveup_card('j', 3, 'x', None, '2026-11-22', 'r1', cfg, 't-card')
 ok(gc2.get('wan_card') == 't-card', 'B12 the out-of-tries card names the card whose run makes the job (the wan-gen Action runs it on the answer)')
 
+import types
+od = tempfile.mkdtemp(); wanbulk.write_result(od, 'j', 3, {'what': 'j', 'rev': 3, 'verdict': 'stopped', 'at': '2026-11-22T06:20:20Z', 'attempts': [{'pad': None, 'failed': ['edge'], 'file': 'j-r3.mp4'}, {'pad': None, 'failed': ['p1'], 'file': 'j-a2-r3.mp4'}], 'why': 'failed twice: edge, p1', 'evidence': ['p1: x']})
+cx = {'a': types.SimpleNamespace(dry_run=False), 'out': od, 'log': lambda m: None}
+r16 = wanbulk.pipeline('j', {'rev': 3}, dict(cx, more={'j': '2026-11-22T06:21:17.719Z'}))
+ok(r16['state'] == 'stopped' and r16.get('revisit') and r16['result']['why'] == 'failed twice: edge, p1' and r16['retried'], 'B16 a rev stopped before Tom asked for more tries comes back as stopped (a Claude stop card), not already', r16)
+ok(wanbulk.pipeline('j', {'rev': 3}, dict(cx, more={'j': '2026-11-22T06:00:00Z'}))['state'] == 'already' and wanbulk.pipeline('j', {'rev': 3}, cx)['state'] == 'already',
+   'B16 a stop after the answer, or no answer, is still already (nothing sent)')
+hl3 = wanbulk.history_line('R3', [r16, {'what': 'g', 'state': 'already'}])
+ok(hl3.startswith('wan-gen bulk run R3: 0 made;') and 'a Claude session changes one thing and starts the next try: j' in hl3, 'B16 the history says the stopped video went to a Claude session', hl3)
+
 import wanqa
 qs = wanqa.questions('WHAT THIS IS\nx\n\nMOTION: TEST\nShe sweeps the mop once. She puts it away and stands still.')
 ok([q[0] for q in qs] == ['f_same', 'p1'] and 'Small differences do NOT matter' in qs[1][1] and 'sweeps the mop once' in qs[1][1] and 'puts it away' in qs[1][1],
@@ -317,6 +329,14 @@ why = wan_runfail.last_error(lg)
 ok(wan_runfail.mark(bd2, 'c1', 'U', why, '2026-11-22T06:00:00Z') and bd2['cards'][0]['wgen']['run']['state'] == 'failed' and 'Exhausted balance' in bd2['cards'][0]['wgen']['run']['why'] and bd2['cards'][0]['wgen']['want'] is False,
    'B14 wanfeedback1: a run that ended without a result writes failed and the error line on its card', bd2['cards'][0])
 ok(not wan_runfail.mark(bd2, 'c2', 'U', why, '2026-11-22T06:00:00Z'), 'B14 a card whose run wrote its result for this run is left alone')
+
+import wanbulk as _wb
+hl = _wb.history_line('R1', [{'what': 'tom-blockade', 'state': 'error', 'why': 'fal refused the key (403): {"detail":"User is locked. Reason: Exhausted balance."}'},
+                             {'what': 'grace-cubepop', 'state': 'already'}, {'what': 'deedee-wetfloor', 'state': 'already'}])
+ok(hl.startswith('wan-gen bulk run R1: 0 made;') and 'already made, nothing sent: grace-cubepop, deedee-wetfloor' in hl and 'tom-blockade not made: fal.ai (the video service) is out of money' in hl and 'made and checked' not in hl,
+   'B15 a run that sent nothing says 0 made, names the already made videos and the fal error in plain words', hl)
+hl2 = _wb.history_line('R2', [{'what': 'a', 'state': 'passed'}, {'what': 'b', 'state': 'stopped'}, {'what': 'c', 'state': 'gaveup'}], 'wanbulk-x-R2')
+ok(hl2 == 'wan-gen bulk run R2: 2 made (1 passed and in the game, build wanbulk-x-R2, 1 stopped); out of tries: c.', 'B15 made, passed, stopped and out of tries are each counted once', hl2)
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'
