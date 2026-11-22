@@ -27235,7 +27235,7 @@
   {
    "id": "t-artgen3try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -27261,9 +27261,12 @@
     {
      "d": "2026-11-21",
      "t": "Fixed by fix-artgen3try: this card had no pictures on it, so there was nothing to click. It now holds Grace's and Rose's 4 party banners (real art the game needs), Not this one opens the picture itself, and an approved banner goes into the game by itself."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: Fix: Try the auto-approve button on a pictures card is done."
     }
    ],
-   "waiting_on": "claude",
    "done_when": {
     "art_approved": [
      "banner-join-grace",
@@ -32252,7 +32255,7 @@
    "id": "c-fix-artgen3try",
    "tag": "fix-artgen3try",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try the auto-approve button on a pictures card",
@@ -32300,6 +32303,10 @@
     {
      "d": "2026-11-21",
      "t": "Cause: t-artgen3try shipped with no pictures on it, and the button only shows on a card that holds pictures. Fix: the card holds Grace's and Rose's party banners; the board's Not this one opens the Library viewer on the approved picture (before: it opened the list and the viewer showed no picture); party banners got a bake hook so approval puts them in the game. No pencil report filed since was about this (all 19 open ones are chapter 2 notes)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-artgen3try: the auto-approve test card now holds real pictures to try it on: Grace's and Rose's party banners"
     }
    ],
    "prompt": {
@@ -32311,7 +32318,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-artgen3try and t-artgen3try in data/board.json, history included. Your first push is the commit board: start c-fix-artgen3try.\n\nTom tested and found problems:\n1. Card t-artgen3try (Try the auto-approve button on a pictures card, ask pictures). He was asked: No pictures card is open right now, so nothing is needed yet. When one appears: ADMIN ) BOARD, open that card, read the rule line above the second button, tap Generate and auto-approve what passes QA, then tap again to confirm. When the job finishes, the card lists each picture as Approved by QA (with its score) or Waits for you (with the reason). For one that QA approved and you disagree with, tap Not this one, type a note, and it is rejected. All good if QA approved only what you would approve; Something is wrong with what it approved or held wrongly. He wrote: i have no idea what this feature is or how i'm supposed to test it - it needs to be acompanied by an actual use case i can click thorugh\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:11:01.052Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-artgen3try to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-artgen3try, and give the build fix-artgen3try a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-artgen3try"
+   "after": "t-artgen3try",
+   "done": "2026-11-21"
   },
   {
    "id": "c-takes-e45d5a",
@@ -33564,6 +33572,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFSLWWLUn4tZta48FX",
+   "title": "Fix: Try the auto-approve button on a pictures card",
+   "first": "2026-11-21T18:16:18-08:00",
+   "last": "2026-11-21T18:36:38-08:00",
+   "tags": [
+    "fix-artgen3try"
+   ],
+   "cards": [
+    "c-fix-artgen3try"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
    "title": "Main menu redesign: the proposal",
    "first": "2026-11-21T17:30:53-08:00",
@@ -33576,16 +33596,6 @@
    ],
    "cards": [
     "c-menuux-plan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFSLWWLUn4tZta48FX",
-   "title": "Fix: Try the auto-approve button on a pictures card",
-   "first": "2026-11-21T18:16:18-08:00",
-   "last": "2026-11-21T18:16:18-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-artgen3try"
    ]
   },
   {
@@ -37725,8 +37735,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "eb24c3fd42c2bbcb2db41b401ba2b0d4be863006",
- "synced_at": "2026-11-22T02:30:00+00:00",
+ "synced": "5841dbb5aa56a1807a5915ad66818ef2ecc1ea1f",
+ "synced_at": "2026-11-22T02:37:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
