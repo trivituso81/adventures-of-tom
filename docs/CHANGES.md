@@ -1,6 +1,12 @@
+<<<<<<< ours
 ## wannoday1 (2026-11-22): no daily limit on battle videos
 
 Tom: "remove this - i will manage the limit myself with my balance". The card Judge Tom's eight moves showed all 18 waiting jobs as "spending limit": the log said "the $15 a day for videos is spent ($20.14 today)" (the day counts in UTC, so it resets at 4 PM Pacific). `_bulk.auto.day_dollars` in `tools/art-library/wangen-jobs.json` is now `null`, which `settings` and `budget` in `wanbulk.py` read as no daily limit. The per animation limit (4 videos, $3.20) and the run cap on the card still hold. Test: `wanbulk_test.py` B10. Nothing in the game changed.
+=======
+## startpics8 (2026-11-22): start pictures go first; videos wait for the next run
+
+Card c-startpics8. Tom (11-22 13:08): "the image generation is definitely not working for generating the hero pose. i clicked it 10 minutes ago for boppy and nara and hard refreshed yet i still cant generate the breathing pose". Cause (from the live progress file on branch `guidegen`): one guide run took all 14 queued requests, and `run_guide_requests` made every video before it looked at the start pictures, one video at a time, so Nara's picture (and Boppy's, in the next run) waited behind about 12 videos, roughly an hour. Fixed: a run that finds both pictures and videos makes the pictures only (about a minute), leaves the videos in `data/wan-requests.json`, and starts the next guide run for them (`next_guide_run` in `wangen.py`; the sweep step does it if that call fails). I stopped the running batch (the finished videos and the money ledger are saved by the checkpoint step) and put its unfinished requests back in the queue so they run after the pictures. Test: `python3 -I tools/art-library/startpic_test.py` (S10).
+>>>>>>> theirs
 
 ## guideuse-45069823314 (2026-11-22): Idle (standing and breathing) (tnb) now plays a video chosen in the Battle Guide
 

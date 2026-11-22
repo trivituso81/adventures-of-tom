@@ -219,14 +219,17 @@ jobs:
           python3 -I tools/videohist/publish.py --branch-dir "$RUNNER_TEMP/wangen" --run-id "${{ github.run_id }}" \
             --remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
       - name: Sweep what is still asked (startpics7)
-        if: ${{ inputs.dry_run != 'true' && steps.mode.outputs.mode != 'guide' && always() }}
+        if: ${{ inputs.dry_run != 'true' && always() }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+          MODE: ${{ steps.mode.outputs.mode }}
         # GitHub keeps ONE waiting run per group, and a card's video batch ("board: wan generate ...") waiting in the group cancels a waiting guide run: Tom's TNB tap and then
         # his Amy video and Nara picture taps were lost or delayed that way (the request stayed in data/wan-requests.json with no run to make it). A run that is not a guide run
         # therefore looks at data/wan-requests.json on the newest main when it ends and, if anything is still asked, starts one guide run. A guide run never starts another (no loop).
         run: |
+          # a guide run starts another only when it left videos queued behind its pictures (startpics8), never otherwise (no loop)
+          if [ "$MODE" = guide ] && ! grep -q 'stay queued for the next run' "$RUNNER_TEMP/run.log" 2>/dev/null; then echo "guide run, nothing deferred"; exit 0; fi
           git fetch -q --depth 1 origin main
           n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('requests') or []))")
           echo "requests still asked: $n"

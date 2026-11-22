@@ -257,6 +257,18 @@ def staging_waits(repo):
     return {k for k, v in A.items() if v.get('waits') == 'staging'}
 
 
+def next_guide_run():
+    """startpics8: start the guide run that makes the videos a pictures-first run left in data/wan-requests.json (GITHUB_TOKEN may dispatch a workflow)."""
+    import urllib.request
+    tok, repo = os.environ.get('GH_TOKEN', ''), os.environ.get('GITHUB_REPOSITORY', '')
+    if not tok or not repo: say('no token here: the sweep step at the end of the run starts the next one'); return
+    try:
+        rq = urllib.request.Request('https://api.github.com/repos/%s/actions/workflows/wan-gen.yml/dispatches' % repo, data=json.dumps({'ref': 'main', 'inputs': {'requests': 'true', 'dry_run': 'false'}}).encode(),
+                                    headers={'Authorization': 'Bearer ' + tok, 'Accept': 'application/vnd.github+json'}, method='POST')
+        urllib.request.urlopen(rq, timeout=30); say('started the next guide run for the queued videos')
+    except Exception as e: say('could not start the next run (%s); the sweep step will' % e)
+
+
 def run_guide_requests(a, jobs, state, lock, save, fal, key):
     """guidegen1: what UPDATE/GENERATE in the Battle Guide asked for (data/wan-requests.json: {anim, slug, take, at, prompt, promptRev, start, pad?, cap?}).
     The requests are taken off main first (before any spend), each one is one Wan video made with the proven settings of the `tom-idle` job (720p, 5 s,
@@ -275,7 +287,11 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         seen.add(w); uniq.append(r)
     sps = uniq
     say('%d guide request(s) found, %d start picture request(s)' % (len(reqs), len(sps)))
-    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', {r.get('at') for r in doc.get('requests') or []}, a.repo, 'origin', 'guide: wan requests taken [skip ci]')
+    # startpics8: pictures first. A run used to make every queued video before the first picture, so a picture waited behind an hour of videos. Now a run that finds both makes the
+    # pictures only (about a minute), leaves the videos in the file and starts the next run for them when it ends.
+    defer = bool(sps and reqs and not a.dry_run and not a.no_take)
+    if defer: say('start pictures first: %d video request(s) stay queued for the next run' % len(reqs)); reqs = []
+    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', ({r.get('at') for r in sps} if defer else {r.get('at') for r in doc.get('requests') or []}), a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
     waiting = staging_waits(a.repo)
     for r in reqs:
@@ -317,6 +333,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         try: old = json.load(open(os.path.join(a.out, 'startpic-results.json')))['results']
         except Exception: pass
         json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))
+        if defer: next_guide_run()
         code = code or scode
         if judge is not None and judge.spent and not a.dry_run:
             try:
