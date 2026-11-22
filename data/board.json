@@ -34158,7 +34158,7 @@
   {
    "id": "t-movefun-pick",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "title": "Which flat moves to remake",
@@ -34187,8 +34187,15 @@
     {
      "d": "2026-11-21",
      "t": "Added by movefun1. Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun.\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Fix all of them",
+     "at": "2026-11-22T04:52:34.076Z"
     }
-   ]
+   ],
+   "done": "2026-11-21",
+   "answer": "Fix all of them"
   },
   {
    "id": "c-movefun-fix",
