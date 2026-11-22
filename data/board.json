@@ -30305,6 +30305,10 @@
     {
      "d": "2026-11-22",
      "t": "movestage2b pushed: the stage engine (engine/b3-stage.js), its hooks in b3-play.js and the Move Lab (MOVE LAB: TOM) are in the game and tested in portrait and landscape with stand-in pictures. Waiting: the videos (the run is started again now, the daily limit is gone) and then the measured marks and the Lab jump (movestage2)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part shipped as movestage2b: the stage layer and the Move Lab are in the game; Tom's eight moves play through them as soon as their videos are baked"
     }
    ],
    "after": "t-movestage-lab"
@@ -31523,6 +31527,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-22T10:55:40-08:00",
+   "last": "2026-11-22T13:21:11-08:00",
+   "tags": [
+    "movestage2a",
+    "movestage2b"
+   ],
+   "cards": [
+    "c-movestage-build",
+    "t-movestage-lab"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
    "title": "Vibes page: smaller figure, loadout cards, abilities panel",
    "first": "2026-11-22T13:16:22-08:00",
@@ -31656,19 +31674,6 @@
    "cards": [
     "c-crispfix",
     "t-crispvoices"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
-   "title": "Build the move stage and Move Lab for Tom's eight moves",
-   "first": "2026-11-22T10:55:40-08:00",
-   "last": "2026-11-22T11:29:23-08:00",
-   "tags": [
-    "movestage2a"
-   ],
-   "cards": [
-    "c-movestage-build",
-    "t-movestage-lab"
    ]
   },
   {
@@ -37174,8 +37179,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0faa10268fa40214a7a5bdbda3eeb02ffc638af3",
- "synced_at": "2026-11-22T21:16:55+00:00",
+ "synced": "c26192a8f83814a5a884e000c61eef7dd84c3d23",
+ "synced_at": "2026-11-22T21:21:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
