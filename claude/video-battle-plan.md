@@ -223,6 +223,14 @@ Tom (14:51): "Why do we have to do an opus prompt for every individual animation
 | Deedee Wet-Floor r5 | Pad 0.65 (Tom's Yes on t-wanch4-wetfloor), prompt v2; `limits.feet` 0.10 (r4 replay: mop head 9.5 percent below her feet row) | Waits on Tom's tap. Bake from deedee-windex (strike, 24 fps, step 3, 1.5x, 99.3 rows), wired to wet_floor_hazard |
 | Spend | none in the session; the tap may add up to $2 to the ledger ($53.815) | |
 
+### 4.14 Built (wanstop, 2026-11-21): the first bulk run stopped both; one change each
+Bulk run 44967949648 (t-wanch5-gen, $1.58): both made, both stopped by the Action, nothing baked. Cards c-wanstop-rose-giddyup-r6 and c-wanstop-deedee-wetfloor-r5. Causes found by eye on contact sheets of the stored videos.
+| Job | What the checks and the pictures said | One change | Kept |
+|---|---|---|---|
+| Rose Giddyup r6 to r7 | Every measurement passed (edge clear, height 0.1 percent, ends 2.01). Look checks p1 and p2 no. By eye: one straight-up jump, knees tucked, clean return; but "twirls one hand above her head" became a full body spin, back to the camera at video frames 32 to 42, before the crouch | Prompt v4: "circles one hand above her head" | the rest of the prompt, Kling 4.0, start picture, 5 s, pad 0.65, airborne, bake, wire |
+| Deedee Wet-Floor r5 to r6 | Feet 7.7 percent (inside the 10 percent limit). Edge in 23 of 121 pictures, both sides; look checks p1 and p2 no. By eye: about five strokes (left, right, left, right, left, frames 32 to 91), the mop head reaching a side edge at each stroke end, which is every edge frame | Prompt v3: "one short sweep" (was "one wide sweep") | the rest of the prompt, Kling 4.0, start picture, 5 s, pad 0.65 (last pad: no edge retry left), feet limit 0.10, bake, wire |
+| Next | Tom's tap on t-wanstop-gen (cap $2). If Wet-Floor still strokes back and forth, the next one change is the sentence that counts the sweeps, not the width | | |
+
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.
 

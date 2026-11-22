@@ -30806,14 +30806,14 @@
    "theme": "Battle Animations",
    "tag": "wanstop-rose-giddyup-r6",
    "title": "Fix the stopped video rose-giddyup",
-   "next": "The bulk run stopped rose-giddyup (failed: p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "next": "Rev 7 is ready and waits on Tom's tap on t-wanstop-gen.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanstop-gen",
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGzcjuTUzBAU4zUzH1",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-rose-giddyup-r6\""
    },
    "history": [
     {
@@ -30828,6 +30828,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Result (build wanstop-rose-giddyup-r6): cause, by eye: \"twirls one hand above her head\" became a full body spin (back to the camera at video frames 32 to 42) before an otherwise good single jump; every measurement passed. One change: rev 7, prompt v4 says \"circles one hand above her head\". Everything else kept. Tom taps Generate on t-wanstop-gen."
     }
    ],
    "prompt": {
@@ -30847,14 +30851,14 @@
    "theme": "Battle Animations",
    "tag": "wanstop-deedee-wetfloor-r5",
    "title": "Fix the stopped video deedee-wetfloor",
-   "next": "The bulk run stopped deedee-wetfloor (failed: edge, p1, p2). Change one thing in the job by the evidence, raise its rev and tell Tom to tap Generate on the card again.",
+   "next": "Rev 6 is ready and waits on Tom's tap on t-wanstop-gen.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanstop-gen",
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGzcjuTUzBAU4zUzH1",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r5\""
    },
    "history": [
     {
@@ -30869,6 +30873,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Result (build wanstop-deedee-wetfloor-r5): cause, by eye: she sweeps left, right, left, right, left (frames 32 to 91) and the mop head hits the left or right edge at each stroke end; the 23 edge frames are those ends. One change: rev 6, prompt v3 says \"one short sweep\" (was \"one wide sweep\"). Everything else kept, pad stays 0.65. Tom taps Generate on t-wanstop-gen."
     }
    ],
    "prompt": {
@@ -31115,6 +31123,36 @@
    "after": "t-dash3-try",
    "auto": true,
    "started_at": "2026-11-22T01:24:51+00:00"
+  },
+  {
+   "id": "t-wanstop-gen",
+   "title": "Generate the two fixed videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Tap Generate all 2 videos on this card (two taps). It makes Rose's \"Giddyup, Tata!\" Launch again (she now circles her hand instead of twirling, because the last one spun all the way round) and Deedee's Wet-Floor Hazard again (now one short sweep, because the last one swept back and forth into both edges). The Action checks each video, puts what passes in the game, and adds one card for you to watch them. At most $2 on fal. Nothing else to do first.",
+   "steps": [
+    "Tap Generate all 2 videos on this card, then tap it again to confirm.",
+    "Wait for the card Watch the new videos (the Action adds it when a video passes)."
+   ],
+   "wan": {
+    "jobs": [
+     "rose-giddyup",
+     "deedee-wetfloor"
+    ],
+    "cap": 2
+   },
+   "blocks": [],
+   "fyi": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by c-wanstop-rose-giddyup-r6 and c-wanstop-deedee-wetfloor-r5. Giddyup r7: one change, \"twirls one hand\" to \"circles one hand\" (r6 spun her whole body round before the jump). Wet-Floor r6: one change, \"one wide sweep\" to \"one short sweep\" (r5 swept about five times and the mop hit both side edges). Replaces the Generate button of t-wanch5-gen, which is Done."
+    }
+   ]
   }
  ],
  "sessions": [
