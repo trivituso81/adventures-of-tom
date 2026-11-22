@@ -29639,7 +29639,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   }
+   },
+   "quiet": true
   },
   {
    "id": "t-b3s23-confirm",
@@ -32357,7 +32358,7 @@
    "id": "c-sal-listen-swap",
    "tag": "salslisten1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Characters",
    "title": "Sal listens with a feeling frame, not the bad picture",
    "next": "Shipped as salslisten1: Sal listens in his loving feeling frame. Nothing needed from you.",
@@ -32377,6 +32378,10 @@
     {
      "d": "2026-11-22",
      "t": "Done: Sal's listening picture and wiring purged; em_loving is his listener frame (build salslisten1). Tested the opening scene: tk_listen before, em_loving after."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as salslisten1: Sal listens in his loving feeling frame instead of the listening picture"
     }
    ],
    "prompt": {
@@ -32387,7 +32392,8 @@
     "model": "Claude Sonnet 5.5 (row B: known small edit)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md. Sal's listening frame (sal-listen, tk_listen) is replaced by his em_loving feeling frame in emoListen (engine/emotions.js); purge salls and the sal-listen picture. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "b-wanbulk-tmovestagelab-45075789998",
@@ -32670,6 +32676,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDXHrg4LAc6cfGD2xR",
+   "title": "Sal listens with a feeling frame, not the bad picture",
+   "first": "2026-11-22T14:34:40-08:00",
+   "last": "2026-11-22T14:47:37-08:00",
+   "tags": [
+    "salslisten1"
+   ],
+   "cards": [
+    "c-sal-listen-swap"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
    "title": "Plan a Battle Guide animation flow that works",
    "first": "2026-11-22T14:40:47-08:00",
@@ -32689,16 +32707,6 @@
    ],
    "cards": [
     "c-squishyfont1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDXHrg4LAc6cfGD2xR",
-   "title": "Sal listens with a feeling frame, not the bad picture",
-   "first": "2026-11-22T14:34:40-08:00",
-   "last": "2026-11-22T14:34:40-08:00",
-   "tags": [],
-   "cards": [
-    "c-sal-listen-swap"
    ]
   },
   {
@@ -38413,8 +38421,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "75e979f125ad9234789ccd619f2352f95a974ccb",
- "synced_at": "2026-11-22T22:44:08+00:00",
+ "synced": "099a48d4f1288513a6d205123d9259527106a0bd",
+ "synced_at": "2026-11-22T22:48:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
