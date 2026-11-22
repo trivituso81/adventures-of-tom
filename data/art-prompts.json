@@ -27261,8 +27261,21 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/banner-leave-rose-v1.png",
+     "date": "2026-11-22",
+     "from": "v1",
+     "at": 1795330152607,
+     "srv": "banner-leave-rose@20261122T025544",
+     "svc": "xai",
+     "try": 1,
+     "qa": 1,
+     "qaFail": []
+    }
+   ],
    "rejects": [],
    "id": "banner-leave-rose",
    "tab": "Characters",
