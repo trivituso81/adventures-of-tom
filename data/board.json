@@ -30807,7 +30807,7 @@
    "title": "Boppy's unimpressed face: keep current or redo?",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Open https://github.com/trivituso81/adventures-of-tom/blob/main/portraits/emo/boppy-unimpressed.webp (the face in the game now: Paso Robles cap, mustache). The new v2 picture would replace it with a blank cap and a turned, larger head. Tap one answer. Card c-boppy-bigfish waits on it.",
    "steps": [
@@ -30828,11 +30828,20 @@
     "c-boppy-bigfish"
    ],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-21",
+   "answer": "Keep the face in the game now and close the card",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Keep the face in the game now and close the card",
+     "at": "2026-11-22T01:04:07.583Z"
+    }
+   ]
   }
  ],
  "sessions": [
