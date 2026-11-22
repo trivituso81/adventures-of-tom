@@ -32266,11 +32266,11 @@
    "id": "c-takes-e45d5a",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Nothing to merge: no new take is mergeable.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -32297,12 +32297,17 @@
     {
      "d": "2026-11-22",
      "t": "Session started."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Checked branch takes: 4 kept takes since the last merge. Nine wrappers (grace), the FISH muffin pan line (tom) and Huh, that'd tip the scales (tnb) are no longer in the game, so they are stale (docs/VOICE_LIBRARY.md Old takes). I've been nine for SIX hours (grace) already plays from dialog-ch22 with the same words. Nothing merged, no build pushed. Retired."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
-   "start": true
+   "changed": "2026-11-22",
+   "start": true,
+   "done": "2026-11-22"
   },
   {
    "id": "c-fix-ch2play",
