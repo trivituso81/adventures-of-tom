@@ -31374,6 +31374,38 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "c-vibelayout1",
+   "tag": "vibelayout1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Game Shell",
+   "title": "Vibes page: smaller figure, loadout cards, abilities panel",
+   "next": "Building: smaller figure with its head top level with the name line, name, Lv and XP on one line, the Vibe Loadout cards (Primary, Secondary, Off), Row and Quirk pills, and the abilities panel with the Descriptions switch at its right.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "after": "t-menu4play",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
+    "opening": "layout changes to the vibe tab of the character menu"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"layout changes to the vibe tab of the character menu: shrink the character down so that the top of their head is aligned with the top of Level N, then shift all content up accordingly. Put Level N below the characters name but above the level up bar. redesign the area below the character stats as per the attached screenshot, but keeping your same fonts and color palette. move the descriptions toggle to the right side and mimic the layout in the second image\". Then: \"actually also adjust the level and experience bar and name to a similar layout as this\" (Tom, Lv 2 on one line, XP to go at the right, bar under). The last message wins over \"Level below the name\"."
+    }
+   ],
+   "prompt": {
+    "what": "Re-lays out the Vibes page of the menu as Tom drew it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a layout change in one page)",
+    "effort": "medium (one page, one stylesheet, tested at five sizes)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-vibelayout1 in data/board.json. Your first push is the commit board: start c-vibelayout1. The Vibes page (engine/m2-vibes.js, m2.css) takes Tom's new layout: see the card history for his words. Test with python3 tools/m2_test.py, look at the screenshots, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
