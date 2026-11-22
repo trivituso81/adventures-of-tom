@@ -31623,7 +31623,7 @@
   {
    "id": "t-wanmop1-gen",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -31674,6 +31674,11 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 video (about $0.79).",
      "at": "2026-11-22T04:31:37.116Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: something is wrong: Stuck Sent to Claude as card c-fix-wanmop1-gen; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T04:52:19.969Z"
     }
    ],
    "wgen": {
@@ -31681,7 +31686,8 @@
     "at": "2026-11-22T04:31:37Z",
     "n": 1,
     "est": 0.79
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-wanmop1",
@@ -34217,6 +34223,58 @@
      "t": "Added by movefun1. Blocked by t-movefun-pick."
     }
    ]
+  },
+  {
+   "id": "c-fix-wanmop1-gen",
+   "tag": "fix-wanmop1-gen",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Make Deedee's Wet-Floor with a real mop",
+   "next": "You reported a problem on Make Deedee's Wet-Floor with a real mop. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Stuck",
+   "blocks": [
+    "t-wanmop1-gen"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "reports": [
+    {
+     "at": "2026-11-22T04:52:18.565Z",
+     "card": "t-wanmop1-gen",
+     "title": "Make Deedee's Wet-Floor with a real mop",
+     "ask": "animations",
+     "words": "Stuck",
+     "shot": "",
+     "asked": "Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-wanmop1-gen"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by Something is wrong on t-wanmop1-gen.",
+     "at": "2026-11-22T04:52:19.969Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom reported on t-wanmop1-gen: Stuck",
+     "at": "2026-11-22T04:52:19.969Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Make Deedee's Wet-Floor with a real mop.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanmop1-gen and t-wanmop1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-wanmop1-gen.\n\nTom tested and found problems:\n1. Card t-wanmop1-gen (Make Deedee's Wet-Floor with a real mop, ask animations). He was asked: Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video. He wrote: Stuck\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T04:52:18.565Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanmop1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanmop1-gen, and give the build fix-wanmop1-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-wanmop1-gen"
   }
  ],
  "sessions": [
