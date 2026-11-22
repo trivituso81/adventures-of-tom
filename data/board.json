@@ -32309,7 +32309,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Grace's squishy reveal: caption in the storybook font",
-   "next": "Switch the two caption lines under Grace's squishy close-up (chapter 1 scene 1) from the pixel font to the chapter card's storybook typefaces.",
+   "next": "Built squishyfont1: the squishy close-up caption uses the chapter card's storybook typefaces. Looked at in portrait and landscape in the test browser; not on a phone.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -32322,6 +32322,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial.\" Read as the chapter title card typefaces (Bricolage Grotesque and Figtree)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Pushed squishyfont1. Caption lines are now a DOM caption in Bricolage Grotesque and Figtree (same as the chapter title card). board_sync_test already failed before this change."
     }
    ],
    "prompt": {

@@ -274,6 +274,25 @@ function drawIntroScreen(time) {
     const hero=!intro.showcase.sprite&&typeof PROPART!=='undefined'&&PROPART.ready(SQUISHY_HERO),HH=hero?hh*s*1.4:hh*s;   // painted version is drawn about 40% larger than the old 18x14 sprite
     if(!(hero&&PROPART.draw(SQUISHY_HERO,cx,cy+bob,{h:HH*2}))) drawSprite(SQ,SP,cx-Math.round(hw*s),cy-Math.round(hh*s)+bob,s);
     sparkles(cx,cy+bob,13*s,time,Math.max(1,Math.round(s/2)));
-    if(u>=1) L2.forEach((l,i)=>{ label(l,cx+1,cy+Math.round(HH)+14+i*15,'#1b2d27',2); label(l,cx,cy+Math.round(HH)+13+i*15,'#ffd968',2); });
-  }
+    // squishyfont1 (Tom 2026-11-22): the caption is a DOM card in the chapter title card's typefaces (m2.css #sqcap), not the pixel label.
+    if(u>=1) sqcapShow(L2,(cy+Math.round(HH)+8)/H);
+    else sqcapHide();
+  } else sqcapHide();
 }
+const SQCAP={el:null,key:'',fonts:false};
+function sqcapEl() {
+  if(SQCAP.el) return SQCAP.el;
+  const el=document.createElement('div'); el.id='sqcap'; el.hidden=true; el.setAttribute('aria-hidden','true');
+  document.getElementById('stage').appendChild(el); SQCAP.el=el;
+  if(!SQCAP.fonts&&document.fonts&&document.fonts.load) { SQCAP.fonts=true;
+    Promise.all([document.fonts.load("800 20px 'Bricolage Grotesque'"),document.fonts.load("700 14px 'Figtree'")]).catch(()=>{}); }
+  return el;
+}
+function sqcapShow(lines,topFrac) {
+  const el=sqcapEl(),key=lines.join('|');
+  if(SQCAP.key!==key) { SQCAP.key=key;
+    el.innerHTML=''; lines.forEach((l,i)=>{ const d=document.createElement('div'); d.className=i?'sq-sub':'sq-main'; d.textContent=l; el.appendChild(d); }); }
+  el.style.top=(topFrac*100).toFixed(2)+'%'; el.hidden=false;
+}
+setInterval(()=>{ if(SQCAP.el&&!SQCAP.el.hidden&&!intro.showcase) sqcapHide(); },250);   // safety: a scene that ends without a last frame never leaves the caption up
+function sqcapHide() { if(SQCAP.el&&!SQCAP.el.hidden) { SQCAP.el.hidden=true; SQCAP.key=''; } }

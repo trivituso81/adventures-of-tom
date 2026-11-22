@@ -1,3 +1,7 @@
+## squishyfont1 (2026-11-22): Grace's squishy close-up names it in the chapter card's storybook type
+
+Card c-squishyfont1. Tom: "When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial." The two caption lines under the squishy (and under Nine Scoops' cow and dice, same showcase) were drawn with the pixel label font; they are now a DOM caption (`#sqcap`, m2.css) in the chapter title card's typefaces (Bricolage Grotesque 800 for the name, Figtree 700 for the second line). Read "interstitial" as the chapter title card; if he meant the picture close-up captions (Trebuchet), say so.
+
 ## startpics12b (2026-11-22): a video asked for in the Battle Guide no longer waits behind a bulk card run
 
 Tom (14:22): "i generated a video for Tom and it's been siting for 10 minutes again". Cause (fact): the Guide's request run for suite_door_slide sat Pending from 22:16 UTC behind the bulk run for card t-movestage-lab (started 22:06), because both used the one wan-gen lane. Guide requests now have their own lane (wan-gen-guide), bulk cards keep wan-gen-bulk. My first push of this (startpics12) left an unquoted colon in the lane name and GitHub rejected the whole video workflow for about 10 minutes; this build quotes it and every workflow file is parsed before the push. Known cost: both runs save the money ledger on branch wangen at their end, so a bulk run finishing later can overwrite the ledger lines of a Guide video made meanwhile; the take itself and data/costs.json are separate and unaffected.

@@ -570,3 +570,10 @@
 @container (min-width:128px){ #m2 .m2-vpw{display:inline} }
 @container (min-width:158px){ #m2 .m2-sfx{display:inline} }
 #m2 .m2-vcard:not(.main) .m2-vlean{color:var(--soft)}
+
+/* ---- Grace's squishy close-up caption (squishyfont1): the chapter card's two typefaces over the dimmed scene ---- */
+#sqcap{position:absolute;left:0;right:0;z-index:22;text-align:center;pointer-events:none;container-type:inline-size;
+  --disp:'Bricolage Grotesque','Avenir Next Condensed',system-ui,sans-serif;--text:'Figtree','Avenir Next',system-ui,sans-serif}
+#sqcap[hidden]{display:none}
+#sqcap .sq-main{font:800 clamp(18px,7cqw,34px)/1.1 var(--disp);letter-spacing:-.01em;color:#FFCF6E;text-shadow:0 2px 0 #2B1A33,0 0 14px rgba(43,26,51,.8)}
+#sqcap .sq-sub{margin-top:4px;font:700 clamp(12px,4cqw,20px)/1.2 var(--text);letter-spacing:.14em;text-indent:.14em;text-transform:uppercase;color:#FCE6C3;text-shadow:0 2px 0 #2B1A33,0 0 10px rgba(43,26,51,.8)}
