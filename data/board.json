@@ -30601,7 +30601,7 @@
    "title": "Milestone: play chapter 11 on the new battle",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22a or a later name. Then CHAPTERS > Chapter 11 (or Take me there on the dashboard) and play to the last scene: the Standby Sprite on the concourse, then Julian Vance and FINAL CALL at Gate Infinity (about 30 minutes). Judge the mechanics only: are the fights fun, is the pace right, can you read the screen and the turn bar in portrait and landscape, does the Standby Sprite want a Break (4 pips, takes less damage behind its podium until Break or Panic Boil), is FINAL CALL 5 to 7 rounds, does Gate Change (it swaps one Front and one Back family member and shoves them back) read clearly, do the tips on the message line tell you what to do. Known and left alone: a few recorded lines before the boss still say the board calls one of you and Tom walks you on, because recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 11 on the old battle. The chapter 12 card (c-b3s22ch12) reads your note.",
    "blocks": [],
@@ -30619,8 +30619,14 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: Milestone for chapter 11 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:21.948Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch12",
