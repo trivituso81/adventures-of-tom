@@ -1,3 +1,28 @@
+## b3gear (2026-11-22): worn gear now counts in the new battle (card c-b3gear)
+
+Fact: before this build no file under data/b3-*.js or engine/b3-*.js read a member's equipment, so a Tool, Outfit or Charm changed nothing in a new-battle fight. Now it does, by the battle plan's mapping (claude/battle-architecture.md, gap row 31). The mapping is the plan's own call and Tom has not confirmed it.
+
+| Change | Where |
+|---|---|
+| The mapping table: POW to Attack, GRIT to Defense, PEP to Speed, HP to Max HP, one battle point per item point; percent perks on POW, GRIT or PEP become a `gear` mod on that stat; everything else is switched off with a reason | `data/b3-gear.js` (new, `B3_GEAR`), loaded in `index.html` |
+| `b3GearSum` adds up worn items; `b3PartyUnit` applies `cfg.gear[id]`; story fights pass each member's worn items | `engine/b3-core.js`, `engine/b3-story.js`, `engine/b3-ui.js` |
+| Rule tests (data complete for every item stat and perk, sums, a dressed fight against a bare one) and the simulator option `--gear=<chapter>` | `tools/b3-check-gear.js` (new), `tools/b3-sim.js` |
+
+Simulator, 300 fights each, `--support=4`, the family wearing typical gear for that chapter (chapter 1: Notebook, Shirt, Walking Shoes; 2: Notebook, Sweater, Bandana Cap; 3: Driftwood, Hoodie, Bandana Cap; 4: Slate, Jacket, Hot Pepper; 5: Slate, Field Day Tee, Hot Pepper). Rounds to win, bare then with gear; every fight won, no errors.
+
+| Fight | Bare | With gear | Party HP left |
+|---|---|---|---|
+| Chapter 1 boss, The Big One | 6.84 | 6.27 | 96% / 96% |
+| Chapter 2 boss, The Big Shake | 6.16 | 5.81 | 96% / 96% |
+| Chapter 3 boss, Old Iron-Gill | 5.66 | 5.47 | 100% / 99% |
+| Chapter 4 boss, The Director's Cut | 6.68 | 5.49 | 68% / 86% |
+| Chapter 5 boss, The Red Pen | 5.78 | **4.78** | 82% / 83% |
+| Elites ch1, 2, 4, 5 (Log Lump, Tar Pit Blob, Cue Card Crab, Dodgeball Dread) | 3.32, 4.06, 5.26, 4.07 | 3.11, 4.05, 4.70, 3.44 | 95 to 83% / 95 to 96% |
+
+The boss target is 5 to 7 rounds. Gear leaves chapters 1 to 4 inside it and puts the chapter 5 boss at 4.78, 0.22 under. Per the card, no monster was retuned: the numbers are on a card for Tom (t-b3gear-ch5).
+
+Charms and perks that now do nothing in a new-battle fight (they still show in the menu): Cool and Warmth stats; perks crit, evade, regen (Lily Hat, Glue Stick, Bag Tag, Garden Hat, Heating Pad), startVp, heart, coins, kind, and the status immunities (Fishing Line, Windsock, Hall Pass, Reading Glasses, Warm Blanket, Coat Ticket, Priority Tag, Scarf, Boots). The full list with a reason each is in `B3_GEAR.off` and docs/BATTLE3.md "Gear".
+
 ## fix-menu1look (2026-11-22): the menu look card now waits for the menu build
 
 Card c-fix-menu1look. Tom (11-22) on t-menu1look: "There is no menu in the admin". Fact: the new menu is not built yet (card c-menu1 is still In progress), so ADMIN has no Menu choice. The look card had opened early because c-menu1 did not list it in `blocks`. Fixed on the board only: c-menu1 now blocks t-menu1look, which waits and comes back when the build ships. No game code changed.

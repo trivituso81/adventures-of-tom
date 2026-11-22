@@ -40,6 +40,16 @@ function b3BlankUnit(key,side,slot) {
     intent:null,  // {act, name, kind}: what Cartridge Blow told the player about this foe's next act; void if the foe would now pick another
     lastFlavor:null};   // the flavor of this unit's last move, when it had exactly one (Double Coat)
 }
+// ---------- Gear (data/b3-gear.js) ----------
+// Adds up what a member wears. `list` is their worn item objects (data/party.js shape: stats, perk). Returns {flat:{hp,atk,def,spd}, pct:{atk,def,spd}}:
+// flat points to add to the level-line stat, percent shares for a mod of kind 'gear'. A stat or perk the table switches off adds nothing.
+function b3GearSum(list) {
+  const out={flat:{hp:0,atk:0,def:0,spd:0},pct:{atk:0,def:0,spd:0}};
+  for(const it of list||[]) { if(!it) continue;
+    for(const k in (it.stats||{})) { const m=B3_GEAR.flat[k]; if(m) out.flat[m.to]+=it.stats[k]*m.per; }
+    const ps=(it.perk&&it.perk.stat)||{}; for(const k in ps) { const to=B3_GEAR.pct[k]; if(to) out.pct[to]+=ps[k]; } }
+  return out;
+}
 // A family member in a fight. What they bring comes from their loadout (engine/b3-progress.js): cfg.loadouts[id], or a fresh
 // one with every Vibe at cfg.rank (1 when left out). The Main Vibe's Lean is applied here: Max HP is raised at once, the rest
 // are mods of kind 'lean', so they multiply with every other kind of bonus (spec 2.4).
@@ -61,6 +71,8 @@ function b3PartyUnit(F,id,level,slot) {
   const lean=(K.lean&&B3_RULES.leans[K.lean])||{};
   for(const k in lean) if(k!=='hp') u.mods.push({stat:k,kind:'lean',v:lean[k]});
   for(const k of ['hp','atk','def','spd']) u[k]=Math.round(S[k]*(C.stat[k]||1)*(k==='hp'?1+(lean.hp||0):1));
+  const G=cfg.gear&&cfg.gear[id];
+  if(G) { for(const k of ['hp','atk','def','spd']) u[k]+=G.flat[k]; for(const k of ['atk','def','spd']) if(G.pct[k]) u.mods.push({stat:k,kind:'gear',v:G.pct[k]}); }
   u.maxHp=u.hp;
   if(cfg.hpPct!=null) u.hp=Math.max(1,Math.round(u.maxHp*cfg.hpPct));
   if(cfg.hpShare&&cfg.hpShare[id]!=null) u.hp=Math.max(1,Math.round(u.maxHp*Math.min(1,cfg.hpShare[id])));   // story fights: HP carries between fights as a share of each member's own Max HP
@@ -112,6 +124,7 @@ const b3Other=side=>side==='party'?'foe':'party';
 //      loadouts ({id: loadout}: Main and Pocket Vibe, Quirks, VP and row per member, engine/b3-progress.js; a member left out
 //      gets a fresh loadout with every Vibe at `rank`, 1 when that is left out too),
 //      rows ({id:'front' or 'back'}: overrides where a family member stands; left out = their loadout's row, else by Lean),
+//      gear ({id: b3GearSum(worn items)}: what each member wears; left out = bare, as the rule tests were written),
 //      hpPct (tests: the party starts at this share of its HP), hpShare ({id: share}: story fights, one share per member), plain (tests: see b3PartyUnit),
 //      setup (a story fight's scripted extras: foe start HP, statuses to begin with, a scripted midpoint, adds on a timer: engine/b3-script.js).
 function b3NewFight(cfg) {

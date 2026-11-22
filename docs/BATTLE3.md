@@ -622,3 +622,20 @@ Plain player, 100 fights each, `node tools/b3-sim.js <fight> 100 --rank=<n>`; al
 | Brain Freeze (new66) | 5.95 | 5.94 |
 
 Rank 2 is the Lab default and equals the shipped b3s14 table, so every boss is inside 5 to 7. At Rank 5 (Quirks open, Capstones sooner) the family is stronger and three bosses fall under 5: Big Shake 3.72, Iron-Gill 4.04, Old Ironbelly 4.98. Call made: not retuned. Raising their HP to fix Rank 5 would push the Rank 2 fights past 7 rounds, and the target is the plain player at the default rank. If Tom feels those two chapters are short at high Rank, the lever is HP on `B3_FOES.shake` and `B3_FOES.irongill` (a Rank-scaled boss HP would need an engine change, so it is a later decision).
+
+
+## Gear (build `b3gear`, 2026-11-22)
+
+Worn gear counts in a Battle 3 fight through one table, `B3_GEAR` in `data/b3-gear.js`. Items keep their old stats and perks.
+
+| Item field | In the new battle |
+|---|---|
+| `stats.hp` | + Max HP, 1 for 1 |
+| `stats.pow` | + Attack, 1 for 1 |
+| `stats.grit` | + Defense, 1 for 1 |
+| `stats.pep` | + Speed, 1 for 1 |
+| `perk.stat.pow`, `grit`, `pep` | a mod of kind `gear` on Attack, Defense, Speed (multiplies with Leans, statuses and Quirks) |
+| `stats.warmth`, `stats.cool`, `perk.stat.warmth`, `perk.stat.cool` | off: no such stats in the new battle |
+| perks `crit`, `evade`, `regen`, `startVp`, `heart`, `coins`, `kind`, `immune` | off, a reason each in `B3_GEAR.off.perks` |
+
+Where it is applied: `b3GearSum` (`engine/b3-core.js`) adds a member's worn items; `b3PartyUnit` adds the flat points to the level-line stats and pushes the percent mods; a story fight builds `cfg.gear` in `b3sBegin` (`engine/b3-story.js`). A fight with no `gear` is the bare fight (rule tests and the Lab). Test: `tools/b3-check-gear.js`. Simulator: `--gear=<chapter 1 to 5>`. Balance numbers: docs/CHANGES.md `b3gear`.

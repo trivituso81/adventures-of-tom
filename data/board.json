@@ -32981,9 +32981,9 @@
    "night": false,
    "theme": "Battle System",
    "title": "Make gear count in the new battle",
-   "next": "Fact found while planning the new menu: in the new battle a Tool, Outfit or Charm changes nothing yet. The battle plan already says how gear should count (POW to Attack, GRIT to Defense, PEP to Speed, HP to Health; perks with no new meaning off). This card builds that and checks fight balance in the simulator. It does not start by itself: use Copy prompt when you want it.",
+   "next": "Built and pushed as b3gear. Gear counts in the new battle. Chapters 1 to 4 bosses stay in the 5 to 7 round band; chapter 5 (The Red Pen) drops to 4.78. Numbers are on Tom card t-b3gear-ch5; no monster was retuned.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-b3gear-ch5",
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
@@ -33016,6 +33016,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped b3gear: B3_GEAR table, b3GearSum, applied in b3PartyUnit and story fights, rule tests, sim --gear. Chapter 5 boss 4.78 rounds with typical gear (band 5 to 7): stopped there, numbers on t-b3gear-ch5."
     }
    ],
    "started_at": "2026-11-22T02:55:33+00:00"
@@ -33287,6 +33291,30 @@
    "after": "t-menu1look",
    "auto": true,
    "done": "2026-11-22"
+  },
+  {
+   "id": "t-b3gear-ch5",
+   "title": "Gear makes the chapter 5 boss a bit short: pick what to do",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "fyi": true,
+   "next": "Fact: with typical gear the simulator beats The Red Pen in 4.78 rounds; the target is 5 to 7. Chapters 1 to 4 bosses stay inside it (6.27, 5.81, 5.47, 5.49). Nothing was retuned, as the card said. Tap one answer; it is read by the next battle balance session.",
+   "choices": [
+    "Leave it (Recommended)",
+    "Halve the gear numbers",
+    "Raise the Red Pen's HP about 5 percent"
+   ],
+   "leads": [
+    "Chapter 5 boss is a little easier for a well geared family; Milestone B on your phone is the judge.",
+    "Gear helps half as much in every fight; the bosses sit near their bare numbers.",
+    "Only that boss gets longer; the gear stays as the plan wrote it."
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "history": []
   }
  ],
  "sessions": [

@@ -42,7 +42,7 @@ function b3Start(cfg) {
     const src=loadouts||{}; loadouts={};
     for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=(cfg.keepLoadout||[]).includes(id)&&src[id]?src[id]:b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));   // keepLoadout: the Battle Guide's "See it in a fight" needs this member's Vibe as set
   }
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,rows:cfg.rows,setup:cfg.setup,
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,gear:cfg.gear,rows:cfg.rows,setup:cfg.setup,
     loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
   b3FirstSet();
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();

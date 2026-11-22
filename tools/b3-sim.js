@@ -20,7 +20,7 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.dirname(__dirname);
-const DATA=['data/b3-rules.js','data/b3-status.js',
+const DATA=['data/b3-rules.js','data/b3-gear.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js','data/b3-story.js'];
@@ -88,6 +88,7 @@ function cfgFor(id) {
     if(flag('quirks')!=='none') { const pool=G('b3QuirkPool')(m,Ld),V=G('B3_VIBES'),Q=G('B3_QUIRKS');
       [...V[Ld.main].quirks,...(Ld.pocket?V[Ld.pocket].quirks:[])].filter(q=>pool.includes(q)&&!Q[q].soon).slice(0,2).forEach((q,i)=>G('b3SetQuirk')(m,Ld,i,q)); }
     cfg.loadouts[m]=Ld; }
+  if(flag('gear')) cfg.gear=require('./b3-check-gear.js').typicalGear(G,cfg.party,Number(flag('gear')));   // --gear=N: the gear a family typically wears by chapter N (tools/b3-check-gear.js)
   if(flag('hp')) cfg.hpPct=Number(flag('hp'));
   if(flag('foehp')) cfg.mods={foeHp:Number(flag('foehp'))};
   return cfg;
@@ -271,6 +272,7 @@ function check() {
   require('./b3-check-s13.js')({G,ok,near,play,noCrit});
   // Stage 15's groups: the chapter 1 story switch (data/b3-story.js; the page side is tested by tools/b3_test.py s15).
   require('./b3-check-s15.js')({G,ok,near,play,noCrit});
+  require('./b3-check-gear.js')({G,ok,near,play,noCrit});
   // Stage 17's groups: chapters 2 to 5 on Battle 3 (data/b3-story.js; the page side is tested by tools/ch2_b3_test.py to ch5_b3_test.py).
   require('./b3-check-s17.js')({G,ok,near,play,noCrit});
   require('./b3-check-s18.js')({G,ok,near,play,noCrit});

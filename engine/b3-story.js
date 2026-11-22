@@ -47,8 +47,8 @@ startBattle=function(npc,opts={}) {
   b3sBegin(npc,opts,plan);
 };
 function b3sBegin(npc,opts,plan) {
-  const fighters=b3sFighters(),levels={},hpShare={},loadouts={};
-  for(const p of fighters) { levels[p.id]=p.level; hpShare[p.id]=p.maxHp?Math.max(0,Math.min(1,p.hp/p.maxHp)):1; loadouts[p.id]=b3MemberLoadout(p); }
+  const fighters=b3sFighters(),levels={},hpShare={},loadouts={},gear={};
+  for(const p of fighters) { gear[p.id]=b3GearSum(wearSlots(p).map(s=>items[p.equipment[s]])); levels[p.id]=p.level; hpShare[p.id]=p.maxHp?Math.max(0,Math.min(1,p.hp/p.maxHp)):1; loadouts[p.id]=b3MemberLoadout(p); }
   B3S.tut=opts.tut&&B3_STORY.tips[opts.tut]?{key:opts.tut,done:{}}:null;
   // A scripted story fight (B3_STORY.setup, engine/b3-script.js) carries its extras in `setup`; `vp` is the story's own number and the rules never read it.
   const S0=opts.tut&&B3_STORY.setup&&B3_STORY.setup[opts.tut];
@@ -58,7 +58,7 @@ function b3sBegin(npc,opts,plan) {
   const sashed=fighters.some(p=>p.id==='grace')&&typeof grace!=='undefined'&&grace.equipment&&items[grace.equipment.Sash]&&items[grace.equipment.Sash].sash;
   if(sashed) { setup=setup||{}; setup.start=Object.assign({},setup.start,{grace:[{id:'birthday_girl',n:2}]}); }
   B3S.fight={npc,plan,ids:fighters.map(p=>p.id)}; B3S.card=null; B3S.levelled={};
-  b3Start({party:fighters.map(p=>p.id),levels,hpShare,loadouts,formation:plan.formation,foes:plan.foes,setup:setup&&Object.keys(setup).length?setup:undefined,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
+  b3Start({party:fighters.map(p=>p.id),levels,hpShare,loadouts,gear,formation:plan.formation,foes:plan.foes,setup:setup&&Object.keys(setup).length?setup:undefined,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
     ruckus:B3S.ruckus,onRuckus:v=>{ B3S.ruckus=Math.max(0,Math.min(100,Math.round(v||0))); },
     award:b3sAward,beforeEnd:b3sShowCard,onTurn:b3sTip,onEnd:b3sEnd});
 }
