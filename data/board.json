@@ -27102,12 +27102,21 @@
     {
      "d": "2026-11-22",
      "t": "Vibes page re-laid out as Tom drew it (card c-vibelayout1, build vibelayout1); this card now asks him to look at it too."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-22T22:13:05.667Z"
     }
    ],
    "machine": {
     "at": "2026-11-22T17:04:27.000Z",
     "verdict": "yours",
     "why": "it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge."
+   },
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
    }
   },
   {
