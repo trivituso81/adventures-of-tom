@@ -21616,10 +21616,10 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
+   "next": "Retired: Tom chose to keep the face in the game now (Paso Robles cap, mustache). Nothing installed.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -21633,6 +21633,11 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included, and Tom card t-boppy-bigfish-pic (his note and answer). Your first push is the commit board: start c-boppy-bigfish.\n\nTom approved a new Art Library picture for entry boppy-em-unimpressed (Boppy's unimpressed mood pose, now in the Paso Robles cap instead of the retired Big Fish cap). Install it. First confirm the newest approved file art/raw/characters/boppy-em-unimpressed-vN.png (the highest N) reads Paso Robles and has his mustache (look at it). tools/sprite-bake/emotion_frames.py already takes the newest -v file for Boppy's cell 7 (REPLACE). Rebake: python3 tools/sprite-bake/emotion_frames.py boppy, python3 tools/sprite-bake/bake_emotion_faces.py boppy, python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run it in the background), then the head chin check (CHECK=/tmp/chin.png python3 tools/sprite-bake/emotion_chin.py boppy, look at it). Measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py) so the cap writing is not mirrored when he faces left. Look at art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp: both must read Paso Robles. Grep for any leftover Big Fish art reference and purge it. Run python3 tools/smoke.py and look at the shots. Add a docs/CHANGES.md entry headed ## boppy-bigfish, bump the tags with python3 tools/art-library/bump_tags.py boppy-bigfish --base origin/main, set after on the card to \"nothing for Tom: end\", push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Retired: Tom answered t-boppy-bigfish-cap2 \"Keep the face in the game now and close the card\". The v2 picture was not installed; the face on main already reads Paso Robles. Nothing shipped.",
+     "at": "2026-11-22T01:55:54.886550Z"
+    },
     {
      "d": "2026-11-22",
      "t": "Ended without shipping: baked v2 (blank cap, as Tom chose) and compared faces. The unimpressed face on main already reads Paso Robles with his mustache; the v2 face has a blank cap, a turned and larger head. Installing it would make that face worse, so nothing was pushed. Asked Tom on t-boppy-bigfish-cap2."
@@ -21743,7 +21748,7 @@
     "url": "https://claude.ai/code/cse_01RXeukGysMhUJFPz6cDcX1r",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "t-boppy-bigfish-cap2",
+   "after": "nothing for Tom: end",
    "started_at": "2026-11-22T01:54:37+00:00"
   },
   {
