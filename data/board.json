@@ -31271,13 +31271,13 @@
    "id": "c-menuux-plan",
    "tag": "menuux-plan",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Main menu redesign: the proposal",
    "next": "The proposal is written and drawn: 13 drawings (Duo unfolded, phone upright, phone sideways, and today's menu beside them) at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm , the same pictures in claude/menuux-mock/shots/, and the plan in claude/menuux-plan.md. Nothing in the game changed. Tom decides on the card Decide on the new main menu; his answer starts the card Create the menu build cards.",
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "prompt": {
     "what": "Writes the proposal for a new main menu: what the best modern RPG menus do, a new look and layout that suits the game and the new battle system, drawn for the phone and the Duo. Nothing in the game changes.",
     "before": [
@@ -31303,9 +31303,14 @@
     {
      "d": "2026-11-22",
      "t": "Proposal done (build menuux-plan). Direction \"Golden Hour\": the paused world goes to dusk and a paper sketchbook opens; the Family screen is a line-up of the hero paintings at real heights; five tabs (Family, Vibes, Gear, Bag, System) instead of nine commands; Vibes is a first-class screen with every skill described; four new stats; the Family Ruckus gauge; painted item pictures. Drawn for Duo unfolded (5 screens), phone upright (5) and phone sideways (1). Build plan: four cards, menu1 to menu4, all Sonnet 5.5 (claude/menuux-plan.md section 5). Open point for Tom at menu1: head sizes in the line-up."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menuux-plan: a proposal for a new main menu, with drawings; nothing in the game changed"
     }
    ],
-   "after": "t-menuux-decide"
+   "after": "t-menuux-decide",
+   "done": "2026-11-21"
   },
   {
    "id": "c-reports-13",
@@ -31313,8 +31318,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (17 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 11 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (22 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 16 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31365,6 +31370,10 @@
     {
      "d": "2026-11-21",
      "t": "The backlog now holds 17 report(s)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 22 report(s)."
     }
    ],
    "blocks": [],
@@ -32759,6 +32768,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+   "title": "Main menu redesign: the proposal",
+   "first": "2026-11-21T17:30:53-08:00",
+   "last": "2026-11-21T18:05:01-08:00",
+   "tags": [
+    "menuux-plan"
+   ],
+   "cards": [
+    "c-menuux-plan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH1c2e5DbqY2tsAqWZ",
    "title": "Build the new battle screen",
    "first": "2026-11-21T18:03:55-08:00",
@@ -32814,16 +32835,6 @@
    ],
    "cards": [
     "c-battleux-plan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
-   "title": "Main menu redesign: the proposal",
-   "first": "2026-11-21T17:30:53-08:00",
-   "last": "2026-11-21T17:30:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-menuux-plan"
    ]
   },
   {
@@ -36840,7 +36851,12 @@
    "r-20261121-180138-yorh",
    "r-20261121-180230-crne",
    "r-20261121-180249-oy95",
-   "r-20261121-180326-tsde"
+   "r-20261121-180326-tsde",
+   "r-20261121-180345-jvj8",
+   "r-20261121-180408-h8ca",
+   "r-20261121-180439-svqd",
+   "r-20261121-180458-58c9",
+   "r-20261121-180541-ojxd"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -36880,8 +36896,8 @@
    "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "bb55c17bd705ae7bc399241f52d11cdbd52f7cc5",
- "synced_at": "2026-11-22T02:03:59+00:00",
+ "synced": "354bca31058f9aaa0d4053d22b7ed416440a04f9",
+ "synced_at": "2026-11-22T02:06:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
