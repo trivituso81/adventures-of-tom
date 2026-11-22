@@ -28050,7 +28050,8 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-nightgreen.md and card c-nightgreen in data/board.json with its history. Your first push is the commit board: start c-nightgreen. Eleven of the twelve failing tests are already fixed or retired (nightgreena to nightgreenl). One row in tools/night/tests.json still carries known_fail: ch20_test. The addendum says what is known: the eight doors, the Core, the lift and the Leviathan fight pass; the checks shatter scene to Julian, calm and epilogue to the end, and game complete flag fail after the real Leviathan fight, although the game plays the shatter scene and starts the Julian fight when the same flags are set directly. Find what differs after the real fight 1 (the addendum has a cheap way: a temporary script that plays only fight 1 and prints the flags, the scene and the dialog state every second, not the whole 16 minute test), decide whether the test or the game is wrong, and fix the one that is wrong. A game fault that would trap a player is fixed in the game and tested. Then remove its known_fail, set `minutes` from the measured time (seconds divided by 60, times 1.2, rounded up), and push it with its own build name (nightgreenm) and a docs/CHANGES.md entry. Apply the stop-loss: two tries that miss the same way, write what you found on the card and stop. When it passes twice in a row, ship the card as nightgreen: add a `## nightgreen` heading in docs/CHANGES.md saying all rows are off known_fail, and write the result on the card. Then tell Tom in two lines what happens next and where. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightgreen",
-   "after": "nothing for Tom: c-nightrefactor"
+   "after": "nothing for Tom: c-nightrefactor",
+   "quiet": true
   },
   {
    "id": "c-nightrefactor",
@@ -31832,7 +31833,7 @@
   {
    "id": "c-movefun",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "movefun1",
    "title": "Does each family move look like its name? List flat ones",
@@ -31861,6 +31862,10 @@
     {
      "d": "2026-11-21",
      "t": "movefun1: contact sheets of the 10 family move videos judged against name, description and person. Fun 6, Flat 3, Wrong 1 (Giddyup, covered by pairmove1). Length is not the cause: every move is 2.1 to 3.4 s and the two good signature moves are 2.8 s. No prompt changed, no run started. Hands Tom t-movefun-pick."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as movefun1: which family move videos are fun; 3 flat ones listed for Tom to pick"
     }
    ],
    "prompt": {
@@ -31872,7 +31877,8 @@
     "effort": "medium",
     "text": "Read CLAUDE.md (sections wanauto1, No painted poses in battle, Fix a miss with the smallest change, Image and video prompts), docs/CANON.md, claude/canon-addendum.md (the 2026-11-21 pairmove1 line), claude/video-battle-plan.md 4.14, then card c-movefun in data/board.json. Tom (2026-11-21 20:02): \"But what makes it giddy up Tata? These moves need to be fun.\" For every family member's move in data/b3-kit-*.js that has a video (data/clips/*.js), make a contact sheet of the clip (its sheet in art/clips/) and judge it against the move's name, its description and the person: would a kid watching say that is the move? Write claude/move-fun-review.md: one table row per move (who, move, what the video shows, verdict Fun / Flat / Wrong, one fix: a prompt change, a two-person video like pairmove1, or a longer length for a signature move, 2 to 3 s for basics and up to 5 s for signature and team moves). Change no prompt and start no run in this session; the list is for Tom. Add one Tom decide card t-movefun-pick that lists the Flat and Wrong moves with your recommended fixes (choices: Fix all of them (Recommended), Fix only the signature moves, Not now) and blocks a Sonnet 5.5 medium card c-movefun-fix (auto) that applies the fixes he picks and starts their runs (wanauto1). Write the CHANGES heading ## movefun1 and push. After: t-movefun-pick. Your first push is the commit board: start c-movefun. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-movefun-pick"
+   "after": "t-movefun-pick",
+   "done": "2026-11-21"
   },
   {
    "id": "c-guideuse-fix",
@@ -34736,6 +34742,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDwRfZcZZQvLadQubT",
+   "title": "Does each family move look like its name? List flat ones",
+   "first": "2026-11-21T20:38:53-08:00",
+   "last": "2026-11-21T20:51:08-08:00",
+   "tags": [
+    "movefun1"
+   ],
+   "cards": [
+    "c-movefun"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDLdQ8yhHeC6LQH7N8",
    "title": "Animation note: Rose, The Floor Is Lava!",
    "first": "2026-11-21T20:49:38Z",
@@ -34778,16 +34796,6 @@
    "tags": [],
    "cards": [
     "c-fix-pairmove1-gen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDwRfZcZZQvLadQubT",
-   "title": "Does each family move look like its name? List flat ones",
-   "first": "2026-11-21T20:38:53-08:00",
-   "last": "2026-11-21T20:38:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-movefun"
    ]
   },
   {
@@ -39315,8 +39323,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "a8b6d7d948092e0c9aa3700d82b84aba3946eb00",
- "synced_at": "2026-11-22T04:40:44+00:00",
+ "synced": "08051dc791c3ce4656a4cf7d36abfb70a25b931c",
+ "synced_at": "2026-11-22T04:51:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
