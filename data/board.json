@@ -30461,6 +30461,38 @@
      "t": "Added by c-crispfix (crispfix1): 16 spoken lines changed from crisp to apple muffins lost their old recordings (the old clips were removed). List: claude/crispfix1-voice-lines.md."
     }
    ]
+  },
+  {
+   "id": "c-startpics2",
+   "title": "Standard pose animations listed for Amy and the other five",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics2",
+   "next": "In progress: the Battle Guide lists idle, guard, hit, dodge, knocked out, victory and running for Amy, Boppy, Justin, Olivia, TNB and Nara, each with a starting prompt, the way it lists them for Tom, Grace, Rose and Deedee.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"but under Amy, i dont see her standard pose animations listed\". Cause: the Guide lists the family states only for people who already have a clip or are video-only (Tom, Grace, Rose, Deedee).",
+     "at": "2026-11-22T20:03:57.185Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
