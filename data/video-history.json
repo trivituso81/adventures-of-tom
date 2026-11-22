@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T14:38Z",
+ "built": "2026-11-22T15:45Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -912,6 +912,38 @@
    "model": "alibaba"
   },
   {
+   "file": "guide-move-bring-a-jacket-ward-t1-r1.mp4",
+   "job": "guide-move-bring-a-jacket-ward-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:28:00.050557Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-bring-a-jacket-ward-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-cartridge-blow-t1-r1.mp4",
+   "job": "guide-move-cartridge-blow-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:18:27.546916Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-cartridge-blow-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
    "file": "guide-move-controller-toss-t1-r1.mp4",
    "job": "guide-move-controller-toss-t1",
    "rev": 1,
@@ -928,6 +960,54 @@
    "model": null
   },
   {
+   "file": "guide-move-controller-toss-t2-r1.mp4",
+   "job": "guide-move-controller-toss-t2",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:31:53.419076Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-controller-toss-t2-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-deedee-makes-it-better-t1-r1.mp4",
+   "job": "guide-move-deedee-makes-it-better-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:25:56.635188Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-deedee-makes-it-better-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-fifty-year-dust-tsunami-t1-r1.mp4",
+   "job": "guide-move-fifty-year-dust-tsunami-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:22:22.586771Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-fifty-year-dust-tsunami-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
    "file": "guide-move-giddyup-tata-launch-t1-r1.mp4",
    "job": "guide-move-giddyup-tata-launch-t1",
    "rev": 1,
@@ -940,6 +1020,38 @@
    ],
    "in_game": null,
    "strip": "art/video-history/guide-move-giddyup-tata-launch-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-konami-code-t1-r1.mp4",
+   "job": "guide-move-konami-code-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:20:17.613358Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-konami-code-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-little-pinch-syringe-poke-t1-r1.mp4",
+   "job": "guide-move-little-pinch-syringe-poke-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:24:11.265688Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-little-pinch-syringe-poke-t1-r1.webp",
    "pad": null,
    "model": null
   },
@@ -972,6 +1084,54 @@
    ],
    "in_game": null,
    "strip": "art/video-history/guide-move-suite-door-slide-t2-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-tarmac-porsche-transfer-t1-r1.mp4",
+   "job": "guide-move-tarmac-porsche-transfer-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:16:37.522034Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-tarmac-porsche-transfer-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-to-the-moon-and-back-t1-r1.mp4",
+   "job": "guide-move-to-the-moon-and-back-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:29:49.931868Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-to-the-moon-and-back-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-winged-shell-lock-on-t1-r1.mp4",
+   "job": "guide-move-winged-shell-lock-on-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T15:14:33.544184Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-winged-shell-lock-on-t1-r1.webp",
    "pad": null,
    "model": null
   },
