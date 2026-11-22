@@ -318,6 +318,9 @@ function forceDuo(w){
  try{
   if(!w||typeof w.detectDuo!=='function')return;
   if(!w.detectDuo.__dash){var f=function(){return !!curSize.duo;};f.__dash=1;w.detectDuo=f;}
+  // A folded Duo is not a tablet, so the game would obey the le-layout saved by the rotate button (shared with every game tab in this
+  // browser) and sit sideways in the upright frame. The dashboard's screen sizes follow how the pane is held: auto, in this frame only.
+  if(curSize.duo)w.eval("layout.mode='auto'");
   if(typeof w.applyLayout==='function')w.applyLayout();
   w.dispatchEvent(new w.Event('resize'));
   duoAddress(w);

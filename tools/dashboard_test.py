@@ -83,6 +83,11 @@ def strip_geometry(pg, tag, H, errs):
         ok({'fu': 'Duo folded, upright', 'fs': 'Duo folded, sideways', 'ou': 'Duo open, upright', 'os': 'Duo open, sideways'}[sid] in pg.inner_text('#pane2 .wh'), '%s: size %s: the pane header names it' % (tag, sid))
         ok(pg.evaluate("localStorage.getItem('le-duo')") is None, '%s: size %s: le-duo is still not set' % (tag, sid))
         if sid == 'ou': pg.screenshot(path=os.path.join(SHOTS, 'dashboard-strip-upright-%d.png' % H))
+    # --- fix-dash3-try: a rotate button choice saved by the game (le-layout landscape) must not turn the upright Duo sideways
+    geval(pg, "layout.mode='landscape';applyLayout()")
+    pg.click('#sz-fs'); settle(pg); pg.click('#sz-fu'); settle(pg)
+    ok(gsize(pg) == [466, 657] and 'rotated' not in gcls(pg) and 'landscape' not in gcls(pg) and geval(pg, "layout.mode") == 'auto', '%s: Duo folded, upright stays upright after a saved landscape choice (%s)' % (tag, gcls(pg)))
+    pg.click('#sz-os'); settle(pg)
     ok(geval(pg, "location.search").count('duo=1') == 1, '%s: the game frame address carries ?duo=1 (%s)' % (tag, geval(pg, "location.search")))
     # --- Desktop wide is the Battle layout; a Duo size picked inside it stays in it
     pg.click('#sz-dw'); settle(pg, 2500)
