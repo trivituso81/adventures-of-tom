@@ -32287,7 +32287,7 @@
   },
   {
    "id": "c-takes-e45d5a",
-   "tag": "takes-2026-11-21",
+   "tag": "takes-2026-11-22",
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
@@ -32307,7 +32307,8 @@
     "url": "https://claude.ai/code/cse_01RXeukCw2qcisNVtn3BmZ5V",
     "opening": "not started"
    },
-   "history": [
+   "after": "nothing for Tom: end",
+  "history": [
     {
      "d": "2026-11-21",
      "t": "Added by board-sync: new files on branch takes."
@@ -32317,6 +32318,10 @@
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:14:25.310Z"
     },
+   {
+    "d": "2026-11-22",
+    "t": "Merged 1 kept take (Grace: I've been nine for SIX hours) in build takes-2026-11-22; it replaced an existing clip in dialog-ch22. Not merged, left on branch takes: TNB 'Huh. That'd tip the scales.' (kept take says 'A massive fish, huh? Sounds like he tipped the scales.', words differ from the screen line, Tom's call). unused_voice.py not run (no python playwright here)."
+   },
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."

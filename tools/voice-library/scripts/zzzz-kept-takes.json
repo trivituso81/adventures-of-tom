@@ -40,8 +40,8 @@
   {
    "voice": "grace",
    "text": "I've been nine for SIX hours.",
-   "script": "[proud, smug] I've been nine for SIX hours.",
-   "takeId": "tmwpponzx2eh4"
+   "script": "[proud, smug] I've been nine for [emphasized]SIX hours.",
+   "takeId": "tmwr797pb1ycr"
   },
   {
    "voice": "moss",
