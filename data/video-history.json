@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T07:12Z",
+ "built": "2026-11-22T08:27Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -956,6 +956,22 @@
    ],
    "in_game": null,
    "strip": "art/video-history/guide-move-suite-door-slide-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-suite-door-slide-t2-r1.mp4",
+   "job": "guide-move-suite-door-slide-t2",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T08:23:36.297304Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-suite-door-slide-t2-r1.webp",
    "pad": null,
    "model": null
   },
