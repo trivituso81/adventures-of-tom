@@ -28973,7 +28973,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFspS715bzf1Xr8DqW",
+    "url": "https://claude.ai/code/session_01RXeukFspS715bzf1Xr8DqW",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -28984,6 +28984,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -29304,10 +29308,14 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCjKd1ryfcKrFkGvnE",
+    "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
     "opening": "started by START"
    },
    "started_at": "2026-11-22T14:24:46+00:00"
@@ -29497,6 +29505,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFspS715bzf1Xr8DqW",
+   "title": "Fix the stopped video tom-blockade",
+   "first": "2026-11-22T14:26:53Z",
+   "last": "2026-11-22T14:26:53Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-tom-blockade-r4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCjKd1ryfcKrFkGvnE",
+   "title": "Battle system stage 20: Character Level by shared XP",
+   "first": "2026-11-22T14:26:23Z",
+   "last": "2026-11-22T14:26:23Z",
+   "tags": [],
+   "cards": [
+    "c-b3s20"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDKRyWfnM5DgpkTYMR",
    "title": "Fix the stopped video tom-rose-giddyup",
@@ -34957,8 +34985,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "793a29e93b9ba651201c27e78f7d72a9a36baf15",
- "synced_at": "2026-11-22T14:26:11+00:00",
+ "synced": "c232d380231732a72fbb69ab3ef6c5d9dcaa47df",
+ "synced_at": "2026-11-22T14:27:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
