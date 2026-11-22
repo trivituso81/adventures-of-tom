@@ -34649,6 +34649,39 @@
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r10 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job deedee-wetfloor (rev 10) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1, p2. Evidence: p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears suddenly; no clear bringing out or sweepin; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she sets a small yellow wet-floor sign on t (Sign appears inconsistently; no clear setting or finge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: deedee-wetfloor-r10-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r10.mp4, deedee-wetfloor-a2-r10.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. If both videos look like they meet the motion and the checks are wrong, say so in a history line, change nothing and stop: that is a check problem for Tom. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-deedee-wetfloor-r10` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-deedee-wetfloor-r10. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-22T05:11:55+00:00"
+  },
+  {
+   "id": "c-boardwedge1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "tag": "boardwedge1",
+   "title": "Board sync can no longer be wedged by a bad board file",
+   "next": "Build two guards: the sync job turns a Tom card that blocks only finished work into fyi by itself, and a push is refused when board.json or board.html holds merge-conflict markers.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGqv7tvjJ2KTKftdCj",
+    "opening": "Why did the board sink fail?"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (21:13): \"Yes\" to a card that makes board-sync unable to stall. Two stalls today: a Tom card blocking only a finished card, and merge-conflict markers pushed into board.json and board.html."
+    }
+   ],
+   "prompt": {
+    "what": "Make board-sync unable to stall on a bad board file (two guards).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix where the steps are not fully written, tests catch mistakes)",
+    "effort": "medium (the two guards are specified, the pieces are small)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (section The board), then card c-boardwedge1 in data/board.json. First push: `board: start c-boardwedge1`. Problem: the board-sync Action (.github/workflows/board-sync.yml, step 'Check the board file, then commit and push it if a card moved') exits 1 when tools/board_check.py rejects data/board.json, so no card move is saved and the board stops refreshing. It happened twice on 2026-11-21: (1) open Tom card t-milestoned blocked only a Claude card that shipped, so 'an open Tom card must block an open Claude card, or be marked fyi: true' failed (fixed by hand with fyi: true); (2) commit b3cdb22 pushed merge-conflict markers into data/board.json and board.html (repaired in 6a2e301). Build two guards. (A) Sync side, in tools/board_sync.py: when a Claude card moves to Done, any open Tom card whose blocks list holds only Done cards (or none open) and which is not fyi becomes fyi: true, with one history line saying why, so board_check never fails for that reason; add cases to tools/board_sync_test.py. (B) Push side: a check that fails a push when data/board.json, data/board-archive.json or board.html contains a line that starts with seven less-than signs, seven equals signs alone, or seven greater-than signs followed by a space. Put it in tools/board_check.py (JSON parse already fails for the board; add the board.html scan) and call it from tools/smoke.py and from a new step at the top of the board-sync workflow so a bad push is named in the run summary instead of only failing step 6. Do not change any card's meaning. Run python3 tools/board_sync_test.py, python3 tools/board_test.py /tmp/board, python3 tools/board_check.py and python3 tools/smoke.py. Write a heading '## boardwedge1' (with date and one plain line) in docs/CHANGES.md, bump tags with python3 tools/art-library/bump_tags.py boardwedge1 --base origin/main, and push. Use tag boardwedge1. At the end set this card's next to the result. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
