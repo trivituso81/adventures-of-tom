@@ -32289,7 +32289,7 @@
    "id": "c-takes-e45d5a",
    "tag": "takes-2026-11-22",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -32304,11 +32304,11 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCw2qcisNVtn3BmZ5V",
+    "url": "https://claude.ai/code/session_01RXeukGLXn6YRugeb1yoddG",
     "opening": "not started"
    },
    "after": "nothing for Tom: end",
-  "history": [
+   "history": [
     {
      "d": "2026-11-21",
      "t": "Added by board-sync: new files on branch takes."
@@ -32318,19 +32318,28 @@
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:14:25.310Z"
     },
-   {
-    "d": "2026-11-22",
-    "t": "Merged 1 kept take (Grace: I've been nine for SIX hours) in build takes-2026-11-22; it replaced an existing clip in dialog-ch22. Not merged, left on branch takes: TNB 'Huh. That'd tip the scales.' (kept take says 'A massive fish, huh? Sounds like he tipped the scales.', words differ from the screen line, Tom's call). unused_voice.py not run (no python playwright here)."
-   },
+    {
+     "d": "2026-11-22",
+     "t": "Merged 1 kept take (Grace: I've been nine for SIX hours) in build takes-2026-11-22; it replaced an existing clip in dialog-ch22. Not merged, left on branch takes: TNB 'Huh. That'd tip the scales.' (kept take says 'A massive fish, huh? Sounds like he tipped the scales.', words differ from the screen line, Tom's call). unused_voice.py not run (no python playwright here)."
+    },
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as takes-2026-11-22: 1 of Tom's new voice takes is in the game (Grace's I've been nine for SIX hours)"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-22T02:16:23+00:00"
+   "started_at": "2026-11-22T02:16:23+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-ch2play",
@@ -32457,9 +32466,44 @@
    "after": "t-dash3-try",
    "auto": true,
    "started_at": "2026-11-22T02:18:07+00:00"
+  },
+  {
+   "id": "b-board-menuux3",
+   "tag": "board-menuux3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-21",
+   "theme": "Battle System",
+   "title": "the menu proposal now covers the full v11 battle design, not only what is built",
+   "next": "Done: the menu proposal now covers the full v11 battle design, not only what is built",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGLXn6YRugeb1yoddG",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-22T02:21:02Z",
+   "last": "2026-11-22T02:21:02Z",
+   "tags": [
+    "takes-2026-11-22"
+   ],
+   "cards": [
+    "c-takes-e45d5a"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDeYfVUYU53oJvSeVf",
    "title": "Make the smoke test pass again on main",
@@ -33185,6 +33229,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
+   "title": "Main menu redesign: the proposal",
+   "first": "2026-11-21T17:30:53-08:00",
+   "last": "2026-11-21T18:20:23-08:00",
+   "tags": [
+    "menuux-plan",
+    "board-menuux2",
+    "board-menuux3"
+   ],
+   "cards": [
+    "c-menuux-plan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFSLWWLUn4tZta48FX",
    "title": "Fix: Try the auto-approve button on a pictures card",
    "first": "2026-11-21T18:16:18-08:00",
@@ -33218,19 +33276,6 @@
     "c-fix-wanstop-gen",
     "c-wanstop-rose-giddyup-r7",
     "c-wanstop-deedee-wetfloor-r6"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG5qjtauKh9omacU4f",
-   "title": "Main menu redesign: the proposal",
-   "first": "2026-11-21T17:30:53-08:00",
-   "last": "2026-11-21T18:07:29-08:00",
-   "tags": [
-    "menuux-plan",
-    "board-menuux2"
-   ],
-   "cards": [
-    "c-menuux-plan"
    ]
   },
   {
@@ -37344,8 +37389,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "df0943c002d27b2fe485a3fde52b359f9cb01042",
- "synced_at": "2026-11-22T02:19:18+00:00",
+ "synced": "261dcef3bd152ce511a9b643fa8eb0d3043335a2",
+ "synced_at": "2026-11-22T02:21:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
