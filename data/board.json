@@ -30008,7 +30008,7 @@
    "id": "c-ch1title",
    "tag": "ch1title1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Rename chapter 1 to Muffin to See Here",
    "next": "Shipped as build ch1title1: chapter 1 is now Muffin to See Here (title card, chapter list, save labels, Voice Library heading). Other chapter names unchanged. Open item: the leftover 'crisp' lines, not on a card yet because Tom has not said yes.",
@@ -30050,9 +30050,14 @@
      "d": "2026-11-22",
      "t": "Renamed chapter 1; pushed as ch1title1.",
      "at": "2026-11-22T17:41:07.589Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as ch1title1: Chapter 1 is now called \"Muffin to See Here\" (was \"The Soup Dumpling Protocol\"); every other chapter name is unchanged"
     }
    ],
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
@@ -30142,6 +30147,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
+   "title": "Chapter headings in the storybook look of the main menu",
+   "first": "2026-11-22T09:11:30-08:00",
+   "last": "2026-11-22T09:50:00-08:00",
+   "tags": [
+    "chaptercard1",
+    "ch1title1"
+   ],
+   "cards": [
+    "c-chaptercard-storybook",
+    "c-ch1title"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGhtfUEQq5o5Cd7e6E",
    "title": "Battle Guide stuck on the loading screen",
    "first": "2026-11-22T09:33:48-08:00",
@@ -30151,19 +30170,6 @@
    ],
    "cards": [
     "c-fix-guideboot"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
-   "title": "Chapter headings in the storybook look of the main menu",
-   "first": "2026-11-22T09:11:30-08:00",
-   "last": "2026-11-22T09:40:50-08:00",
-   "tags": [
-    "chaptercard1"
-   ],
-   "cards": [
-    "c-chaptercard-storybook",
-    "c-ch1title"
    ]
   },
   {
@@ -35652,8 +35658,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "8d4745eb7c13f19107091754488dc50c1072e608",
- "synced_at": "2026-11-22T17:45:09+00:00",
+ "synced": "245293e1783c0022df49476530378f95354b6fe5",
+ "synced_at": "2026-11-22T17:50:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
