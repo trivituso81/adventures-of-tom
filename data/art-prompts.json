@@ -27166,8 +27166,24 @@
    }
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/banner-leave-grace-v1.png",
+     "date": "2026-11-22",
+     "from": "v1",
+     "at": 1795330023038,
+     "srv": "banner-leave-grace@20261122T025514",
+     "svc": "xai",
+     "try": 1,
+     "qa": 0.875,
+     "qaFail": [
+      "f_crop",
+      "p5"
+     ]
+    }
+   ],
    "rejects": [],
    "id": "banner-leave-grace",
    "tab": "Characters",
@@ -30324,7 +30340,7 @@
      "marks": {
       "first": 0,
       "hit": 0.433,
-      "last": 3.0
+      "last": 3
      }
     }
    ],
