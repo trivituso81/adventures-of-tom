@@ -34465,49 +34465,17 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T05:23:17Z",
+    "want": true,
+    "at": "2026-11-22T05:26:03Z",
     "n": 1,
-    "est": 0.5,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T05:25:05Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44989194270",
-     "n": 3,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [],
-     "capped": [],
-     "unchecked": [],
-     "errors": [
-      {
-       "what": "tom-blockade",
-       "why": "fal refused the key (403): {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
-      }
-     ],
-     "already": [
-      "grace-cubepop",
-      "deedee-wetfloor"
-     ],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 0.0,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "tom-blockade": 4,
-      "grace-cubepop": 4,
-      "deedee-wetfloor": 10
-     }
-    }
+    "est": 0.5
    },
    "history": [
     {
@@ -34540,6 +34508,11 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 44989194270: 3 made and checked, 0 passed, 0 stopped, 0 left for the next tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom approved generating 1 video (about $0.50).",
+     "at": "2026-11-22T05:26:03.635Z"
     }
    ]
   },
