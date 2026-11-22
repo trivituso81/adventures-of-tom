@@ -22494,7 +22494,7 @@
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Shipped: each Needs you line on Last night now carries the card's own steps. Check tomorrow morning's card.",
+   "next": "Night of 2026-11-22. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
     "opening": "board"
@@ -22557,10 +22557,7 @@
     [
      "Needs you",
      [
-      "Try the Battle Guide on the Duo",
-      "Try the Admin Dashboard on the wide monitor",
-      "Try the game strip and Take me there",
-      "Milestone D: play chapters 6 to 10 on the new battle"
+      "nothing"
      ]
     ],
     [
@@ -22568,9 +22565,15 @@
      [
       "0 of 5"
      ]
+    ],
+    [
+     "Limits of the night QA",
+     [
+      "the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold"
+     ]
     ]
    ],
-   "night_key": "2026-11-21",
+   "night_key": "2026-11-22",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "prompt": {
@@ -29465,7 +29468,7 @@
    "title": "Battle stage 22: Part 2 bestiary, Traits and Quirks",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Done: chapter 11 on Battle 3 (b3s22a) and the Traits and Quirks guard (b3s22). Chapters 12 to 20 are cards c-b3s22ch12 to c-b3s22ch20; Tom's chapter 11 Milestone is t-b3s22ch11.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29501,13 +29504,22 @@
     {
      "d": "2026-11-22",
      "t": "Stage 22b (b3s22): the 30 Traits and 60 Quirks were already data plus hooks (stages 5, 9, 10, 19 to 21), so nothing was rebuilt. Added a guard to tools/b3-check-s22.js: all 30 Traits, 60 Quirks and 90 Skills exist and carry a rule, and no Battle 3 file uses any of the 28 names in engine/battle2-traits.js (so stage 23 can delete it). b3-sim check 4514 checks, no fails. Card done: chapter 11 shipped as b3s22a, chapters 12 to 20 have their own cards, `after` is t-b3s22ch11."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part shipped as b3s22a: Chapter 11 (the airport) fights on the new battle: Lost Luggage, Red-Eye, the Standby Sprite and FINAL CALL"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22: The 30 Traits and 60 Quirks are checked as finished data, and nothing in Battle 3 uses the old Traits file"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGUVmRr6pvVzqxDWeZ",
     "opening": "pasted by Tom from the board"
    },
-   "after": "t-b3s22ch11"
+   "after": "t-b3s22ch11",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s23",
@@ -30102,7 +30114,7 @@
    "id": "c-crispfix",
    "tag": "crispfix1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "Replace every leftover crisp with apple muffins",
    "next": "Done in crispfix1: 19 spoken lines, signs, scene notes and docs now say apple muffins; dependent keys and indexes updated; 16 old recordings removed; one Tom voice card (t-crispvoices) made for the lines that need recording.",
@@ -30126,7 +30138,7 @@
     "rule": "Claude Opus 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
     "opening": "Board card c-crispfix. Tom (2026-11-22): the chapter 1 mud monster steals Deedee's apple muffins"
    },
    "history": [
@@ -30143,9 +30155,14 @@
     {
      "d": "2026-11-22",
      "t": "crispfix1: replaced crisp with apple muffins in 19 spoken lines plus on-screen text, comments and docs (Marlowe's second line kept so its recording stays); purged 16 orphaned clips; unused_voice.py reports 0 for all checks; voice card t-crispvoices created. Flagged: painted art and art prompts still show rhubarb crisp; emotion-apply.py and npc-emotion-apply.py fail on the untouched tree, so those two data files were updated by text replace."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as crispfix1: Deedee's dessert is apple muffins in every spoken line, sign note and doc; 16 old recordings removed"
     }
    ],
-   "after": "t-crispvoices"
+   "after": "t-crispvoices",
+   "done": "2026-11-22"
   },
   {
    "id": "b-board-crispcard",
@@ -30258,6 +30275,10 @@
     {
      "d": "2026-11-22",
      "t": "movestage2a: the wan-gen Action now makes stage pictures and object videos (wanstage.py, bake_stage.py, stage wire); 26 jobs added to wangen-jobs.json and started on t-movestage-lab (about $6). Next: the stage engine and the Move Lab."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part shipped as movestage2a: the video Action can make stage pictures and object videos, and the run for Tom's eight moves is started"
     }
    ],
    "after": "t-movestage-lab"
@@ -30265,7 +30286,7 @@
   {
    "id": "t-movestage-lab",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -30392,7 +30413,7 @@
    "changed": "2026-11-22",
    "build": "movestage2",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
     "opening": "added by c-movestage-build"
    },
    "history": [
@@ -30403,9 +30424,12 @@
     {
      "d": "2026-11-22",
      "t": "wan-gen bulk run 45061033537: 0 made; waiting on a picture that did not pass, nothing sent: stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid; waiting for the next tap (spending limit): stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-crispvoices",
@@ -30462,7 +30486,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
     "opening": "Board card c-crispfix. Tom (2026-11-22): the chapter 1 mud monster steals Deedee's apple muffins"
    },
    "history": [
@@ -30477,14 +30501,14 @@
    "title": "Standard pose animations listed for Amy and the other five",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics2",
    "next": "Built as startpics2: the Battle Guide now lists idle, guard, hit, dodge, knocked out, victory and running for Amy, Boppy, Justin, Olivia, TNB and Nara, each with a starting prompt. No video was made. Waits on your card Make the start pictures in the Battle Guide (t-startpics-try).",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjjZ5BAsFW",
     "opening": "but under Amy, i dont see her standard pose animations listed"
    },
    "history": [
@@ -30497,6 +30521,14 @@
      "d": "2026-11-22",
      "t": "Built startpics2: the six now list the seven standard pose animations, drafted from the proven state prompts. Victory lines are my picks from canon.",
      "at": "2026-11-22T20:04:33.819Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics2: the Battle Guide lists the standard pose animations (idle, guard, hit, dodge, knocked out, victory, running) for Amy, Boppy, Justin, Olivia, TNB and Nara"
     }
    ],
    "prompt": {
@@ -30508,7 +30540,8 @@
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "t-b3s22ch11",
@@ -30820,7 +30853,7 @@
    "title": "Boppy's victory: ASL I love you and a sparkling gold tooth",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics3",
    "next": "Built as startpics3: Boppy's Victory prompt now has both hands in the ASL I love you sign, a toothy grin and one sparkling gold tooth. No video was made. Waits on your card t-startpics-try.",
    "blocks": [],
@@ -30835,6 +30868,10 @@
      "d": "2026-11-22",
      "t": "Tom: \"Boppy should put both hands in an ASL 'I love you' sign and toothily grin and one of his gold teeth should sparkle when he grins.\" Built startpics3.",
      "at": "2026-11-22T20:11:46.405Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics3: Boppy's victory animation is the ASL I love you sign with a toothy grin and a sparkling gold tooth"
     }
    ],
    "prompt": {
@@ -30846,14 +30883,15 @@
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics4",
    "title": "TNB and Nara victory poses",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics4",
    "next": "Built as startpics4: TNB's Victory is folded arms, a smile and a wink; Nara's is a jump onto her hind legs. No video was made. Waits on your card t-startpics-try.",
    "blocks": [],
@@ -30868,6 +30906,10 @@
      "d": "2026-11-22",
      "t": "Tom: \"TNB should fold his arms and smile and wink\"; \"Nara's victory pose is her jumping on her hind legs\". Built startpics4.",
      "at": "2026-11-22T20:12:52.621Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics4: TNB's victory is folded arms, a smile and a wink; Nara's victory is a jump onto her hind legs"
     }
    ],
    "prompt": {
@@ -30879,14 +30921,15 @@
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics5",
    "title": "Amy's standard poses on the Animations screen",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics5",
    "next": "Built as startpics5: the Animations screen now lists the seven standard poses for Amy, Boppy, Justin, Olivia, TNB and Nara (checked in a phone-size browser). Waits on your card t-startpics-try.",
    "blocks": [],
@@ -30901,6 +30944,10 @@
      "d": "2026-11-22",
      "t": "Tom: \"i still dont have any of AMy's standard poses in the Animations screen despite working off the latest build and doing a hard refresh\". Cause: the page ignored the data file. Built startpics5.",
      "at": "2026-11-22T20:16:00.874Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics5: the Battle Guide's Animations screen now shows Amy's standard poses (and the other five's)"
     }
    ],
    "prompt": {
@@ -30912,14 +30959,15 @@
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics6",
    "title": "Amy's start picture and the Make it crash",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics6",
    "next": "Built as startpics6: Amy's start picture is in the game and the job no longer crashes after making a picture. Waits on your card t-startpics-try (Boppy, Justin, Olivia, TNB and Nara still need the tap).",
    "blocks": [],
@@ -30934,6 +30982,10 @@
      "d": "2026-11-22",
      "t": "Tom: \"i hit Generate Image and it said it would be a minute but nothing is happening\". Cause: the checker crashed on a numpy bool after fal made the picture. Built startpics6.",
      "at": "2026-11-22T20:29:02.631Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics6: Amy's start picture is in the game, and the start picture job no longer crashes after making one"
     }
    ],
    "prompt": {
@@ -30945,7 +30997,8 @@
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "b-board-numpy",
@@ -30968,6 +31021,38 @@
    ],
    "blocks": [],
    "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
+  },
+  {
+   "id": "c-takes-38383a",
+   "tag": "takes-2026-11-22",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22"
   }
@@ -31059,33 +31144,96 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
-   "title": "Replace every leftover crisp with apple muffins",
-   "first": "2026-11-22T11:13:34-08:00",
-   "last": "2026-11-22T11:13:34-08:00",
-   "tags": [],
+   "url": "https://claude.ai/code/session_01RXeukFbF2rd3BZypUr39Xq",
+   "title": "Board sync was stuck: the check step crashed because the GitHub runner has no numpy",
+   "first": "2026-11-22T12:31:28-08:00",
+   "last": "2026-11-22T12:31:28-08:00",
+   "tags": [
+    "board-numpy"
+   ],
    "cards": [
-    "c-crispfix"
+    "b-board-numpy"
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
-   "title": "Build the move stage and Move Lab for Tom's eight moves",
-   "first": "2026-11-22T10:55:40-08:00",
-   "last": "2026-11-22T10:55:40-08:00",
-   "tags": [],
+   "url": "https://claude.ai/code/session_01RXeukGzdyyko1LdjZ5BAsFW",
+   "title": "Amy's start picture and the Make it crash",
+   "first": "2026-11-22T12:29:42-08:00",
+   "last": "2026-11-22T12:29:42-08:00",
+   "tags": [
+    "startpics6"
+   ],
    "cards": [
-    "c-movestage-build"
+    "c-startpics6"
    ]
   },
   {
    "url": "https://claude.ai/code/session_01RXeukGUVmRr6pvVzqxDWeZ",
    "title": "Battle stage 22: Part 2 bestiary, Traits and Quirks",
    "first": "2026-11-22T10:47:41-08:00",
-   "last": "2026-11-22T10:47:41-08:00",
-   "tags": [],
+   "last": "2026-11-22T12:17:35-08:00",
+   "tags": [
+    "b3s22a",
+    "b3s22"
+   ],
    "cards": [
     "c-b3s22"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+   "title": "Start pictures for the rest of the cast",
+   "first": "2026-11-22T06:57:31-08:00",
+   "last": "2026-11-22T12:16:38-08:00",
+   "tags": [
+    "startpics1",
+    "startpics2",
+    "startpics3",
+    "startpics4",
+    "startpics5"
+   ],
+   "cards": [
+    "c-startpics",
+    "c-startpics2",
+    "c-startpics3",
+    "c-startpics4",
+    "c-startpics5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjjZ5BAsFW",
+   "title": "Standard pose animations listed for Amy and the other five",
+   "first": "2026-11-22T12:03:58-08:00",
+   "last": "2026-11-22T12:03:58-08:00",
+   "tags": [],
+   "cards": [
+    "c-startpics2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
+   "title": "Replace every leftover crisp with apple muffins",
+   "first": "2026-11-22T11:13:34-08:00",
+   "last": "2026-11-22T11:34:15-08:00",
+   "tags": [
+    "crispfix1"
+   ],
+   "cards": [
+    "c-crispfix",
+    "t-crispvoices"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-22T10:55:40-08:00",
+   "last": "2026-11-22T11:29:23-08:00",
+   "tags": [
+    "movestage2a"
+   ],
+   "cards": [
+    "c-movestage-build",
+    "t-movestage-lab"
    ]
   },
   {
@@ -31160,18 +31308,6 @@
    ],
    "cards": [
     "c-fix-menu4play-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
-   "title": "Start pictures for the rest of the cast",
-   "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T07:17:17-08:00",
-   "tags": [
-    "startpics1"
-   ],
-   "cards": [
-    "c-startpics"
    ]
   },
   {
@@ -36612,11 +36748,13 @@
    "takes/20261122T015924-pqq/part-001.json",
    "takes/20261122T015924-pqq/state.json",
    "takes/20261122T021219-429/part-001.json",
-   "takes/20261122T021219-429/state.json"
+   "takes/20261122T021219-429/state.json",
+   "takes/20261122T201002-4hq/part-001.json",
+   "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "b8d368e9245704f5859c55907bd39b15133f0013",
- "synced_at": "2026-11-22T19:14:14+00:00",
+ "synced": "cd12592cb1c5c7bc740ea7fc749bab33bf20a562",
+ "synced_at": "2026-11-22T20:32:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -36652,6 +36790,6 @@
   "log": {
    "2026-11-21": []
   },
-  "reported": "2026-11-21"
+  "reported": "2026-11-22"
  }
 }
