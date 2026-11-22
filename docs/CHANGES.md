@@ -1,3 +1,7 @@
+## wanstop-tom-blockade-r3 (2026-11-22): Tom's Blockade shrinks the start picture to 80 percent so his right hand clears the edge
+
+Card c-wanstop-tom-blockade-r3. Both r3 videos (frames on branch wangen) show the move: arms out with open palms, a weight shift to the left, a hold, a return to the stance. Measured fault in both: the right hand touches the right edge (video frames 29 to 33). One change: `pad` 0.8 on job tom-blockade, rev 4. Kept: prompt v3, Wan 3.0, start picture, seed 81, 720p, 5 s, bake, wire. Not changed: the look checks p1 to p3 said no on both videos although the pictures show the moves; if rev 4 passes the edge and still fails them, that is a check problem for Tom's watch card. Next try started by the board commit.
+
 ## wanstuck1b (2026-11-21): repair: the wanstuck1 push carried conflict markers in data/board.json and board.html; both restored from the newest main with the wanstuck1 card edits re-applied
 
 Card c-wanstuck1. The board data and board page were broken for a few minutes after b3cdb22. board.html is main's copy (fix-pairmove1-gen's job list reload); data/board.json is main's copy plus the wanstuck1 card changes. board_check, board_wan_test and smoke pass.

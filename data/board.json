@@ -34494,54 +34494,11 @@
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T04:56:15Z",
-    "n": 3,
-    "est": 1.79,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T05:05:35Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44987261923",
-     "n": 3,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [
-      "tom-blockade",
-      "grace-cubepop",
-      "deedee-wetfloor"
-     ],
-     "stopped": [
-      {
-       "what": "tom-blockade",
-       "why": "failed twice: edge, p1, p2, p3",
-       "card": "c-wanstop-tom-blockade-r3"
-      },
-      {
-       "what": "grace-cubepop",
-       "why": "failed twice: p1, p2",
-       "card": "c-wanstop-grace-cubepop-r4"
-      },
-      {
-       "what": "deedee-wetfloor",
-       "why": "failed twice: p1, p2",
-       "card": "c-wanstop-deedee-wetfloor-r10"
-      }
-     ],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 3.61,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "tom-blockade": 3,
-      "grace-cubepop": 4,
-      "deedee-wetfloor": 10
-     }
-    }
+    "want": true,
+    "at": "2026-11-22T05:30:00Z",
+    "n": 1,
+    "est": 0.5,
+    "auto": true
    },
    "history": [
     {
@@ -34571,7 +34528,7 @@
    "theme": "Battle Animations",
    "tag": "wanstop-tom-blockade-r3",
    "title": "Fix the stopped video tom-blockade",
-   "next": "The bulk run stopped tom-blockade (failed twice: edge, p1, p2, p3) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Rev 4 (pad 0.8) is started by the board commit; the wan-gen run closes this card's job or stops it again.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
@@ -34598,6 +34555,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "By eye both r3 videos do the move; the only measured fault is the right hand on the right edge. Changed one thing: pad 0.8, rev 4. Next try started."
     }
    ],
    "prompt": {

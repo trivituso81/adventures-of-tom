@@ -337,7 +337,7 @@
   "shift": 0.2
  },
  "tom-blockade": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -361,7 +361,7 @@
    "seed": 81
   },
   "auto_from": "2026-11-22T04:54:00Z",
-  "why": "movefun2 (Tom picked Fix all): one change, the hip bump moves out of the pose sentence into its own sentence after it (\"Then he bumps his hip to the left once.\"), because r2 only held two stop palms. Kept: every other word, Wan 3.0, start picture, seed 81, 720p, 5 s. Bake and wire copied from data/clips/tom-blockade.js (state, every 3, 1.5x). Rev 3.",
+  "why": "wanstop-tom-blockade-r3: one change, pad 0.8 (the start picture is shrunk to 80 percent inside the frame). By eye both r3 videos do the move: arms out with open palms, a weight shift to the left, a hold, then back to the stance. The only measured fault in both is the right hand touching the right edge (video frames 29 to 33; 2 and 5 of 150 pictures). The look checks p1 to p3 said no on both, but the pictures show the moves; the checks may be strict about the palm pose and the hip, which is left for Tom's watch card. Kept: the prompt (v3), Wan 3.0, start picture, seed 81, 720p, 5 s, bake and wire. Rev 4.",
   "bake": {
    "id": "tom-blockade",
    "owner": "tom",
@@ -377,7 +377,8 @@
     "id": "zone_one_blockade",
     "shape": "cast"
    }
-  }
+  },
+  "pad": 0.8
  },
  "grace-idle": {
   "rev": 1,
