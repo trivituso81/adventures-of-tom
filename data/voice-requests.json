@@ -1,4 +1,22 @@
 {
- "requests": [],
+ "requests": [
+  {
+   "kind": "tts",
+   "line": "d|tnb|No, yours wins. How big a fish?",
+   "voice_id": "QPmHuIriDGOvu1d9U7wn",
+   "fallback_ids": [],
+   "text": "[mellow, laid-back, low-key, delete].",
+   "model": "eleven_v4",
+   "stability": 0.6,
+   "similarity": 0.85,
+   "speed": null,
+   "seed": true,
+   "tries": 3,
+   "label": "new take",
+   "script": "[mellow, laid-back, low-key, delete].",
+   "at": 1795312564092,
+   "rid": "r1795312564092-yz6"
+  }
+ ],
  "cancel": []
 }
