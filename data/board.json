@@ -29741,7 +29741,7 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
@@ -29754,15 +29754,6 @@
    "tag": "nightqa",
    "after": "nothing for Tom: end",
    "history": [
-    {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-21T21:20:13.196Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
     {
      "d": "2026-11-21",
      "at": "2026-11-21T21:23:19Z",
@@ -29803,6 +29794,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Run finished (night: ran c-night-qa); card returned to Up next by hand because the manual last_run stopped the sync job doing it."
     }
    ],
    "prompt": {
@@ -29817,9 +29812,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": ""
-   },
-   "started_at": "2026-11-21T22:09:22+00:00",
-   "quiet": true
+   }
   },
   {
    "id": "b-voices-t-ch2voices-315",
