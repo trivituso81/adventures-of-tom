@@ -49,6 +49,16 @@ function b3cStand(src,C,tgtKey) {
   const tipX=b?b.x+b.w*.5-8:z.x,tipY=z.y,dx=C.reach?C.reach[0]*sc:0,up=C.reach?C.reach[1]*sc:0;
   return {x:Math.min(548,Math.max(z.sx-30,tipX+dx)),y:Math.max(z.sb-12,Math.min(z.sb+6,tipY+up))};
 }
+// pairmove1 (Tom 2026-11-21 20:07: "she jumps on the shoulders and then jumps off and says giddy up"): a move whose video shows two family
+// members (the move row's anim.pair = {with: <member id>, clip: <clip id>}). It plays when that member is in the party, standing, and the clip
+// exists: the video is drawn as the partner's body at the partner's spot and the mover is hidden for its length (b3PlayMove). Otherwise the
+// move's own clip (anim.clip) plays. Returns {key, clip} or null.
+function b3cPair(head) {
+  const P=head&&head.t==='act'&&head.anim&&head.anim.pair;
+  if(!P||!head.src||head.src[0]==='f'||typeof B3==='undefined'||!B3.F||!BCLIPS[P.clip]) return null;
+  const u=B3.F.party.find(x=>x.id===P.with&&x.key!==head.src),vu=u&&B3.view&&B3.view.u[u.key];
+  return u&&vu&&!vu.ko?{key:u.key,clip:P.clip}:null;
+}
 // When, in seconds after a clip starts, its move lands: the marked impact frame, or `at` of its length for a clip with no impact.
 function b3cLandAt(C,anim) { return (C.kind==='strike'&&C.impact!=null?C.ms[C.impact]:C.dur*(anim&&anim.at!=null?anim.at:.5))/1000; }
 
@@ -56,7 +66,7 @@ function b3cLandAt(C,anim) { return (C.kind==='strike'&&C.impact!=null?C.ms[C.im
 // A move is about to play: load what its beats will show, so the pictures are there when the hit lands.
 function b3cWarmBeats(beats) {
   for(const b of beats) {
-    if(b.t==='act'&&b.anim&&b.anim.kind==='clip') { b3cWant(b.anim.clip,8000); const u=b3Unit(B3.F,b.src); if(u&&u.side==='party') b3cWant(b3cOf(u.id,'run'),8000); }
+    if(b.t==='act'&&b.anim&&b.anim.kind==='clip') { b3cWant(b.anim.clip,8000); if(b.anim.pair) b3cWant(b.anim.pair.clip,8000); const u=b3Unit(B3.F,b.src); if(u&&u.side==='party') b3cWant(b3cOf(u.id,'run'),8000); }
     else if(b.t==='telegraph'&&b.wind) b3cWant(b.wind,8000);
     else if(b.t==='hit'||b.t==='miss'||b.t==='ko') { const id=b.tgt,u=id&&b3Unit(B3.F,id); if(!u) continue;
       const st=b.t==='ko'?(u.side==='foe'?'die':'ko'):b.t==='miss'?'dodge':'hit'; b3cWant(b3cOf(u.id,st),6000); }

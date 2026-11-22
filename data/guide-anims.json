@@ -8,7 +8,9 @@
   "canMake": 105
  },
  "unmapped": {
-  "jobs": [],
+  "jobs": [
+   "tom-rose-giddyup"
+  ],
   "entries": [
    "rose-boop",
    "rose-sleep",

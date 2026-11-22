@@ -31776,6 +31776,99 @@
    "done": "2026-11-21"
   },
   {
+   "id": "c-pairmove1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "pairmove1",
+   "title": "Giddyup, Tata!: one video of Rose riding Tom's shoulders",
+   "next": "Shipped in pairmove1.",
+   "blocks": [],
+   "after": "t-pairmove1-gen",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: what makes it giddy up Tata?"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun. Are we making them too short?\" Tom (20:07): \"I'm gonna leave it to you to figure out that solution, but it feels like if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up or something like that... the more the advanced move is that more acceptable is for to take longer\""
+    }
+   ],
+   "prompt": {
+    "what": "Two-person battle videos, first one for Giddyup.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
+   "id": "t-pairmove1-gen",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Make Rose's Giddyup with Tom in it",
+   "next": "Tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
+   "wan": {
+    "jobs": [
+     "tom-rose-giddyup"
+    ],
+    "cap": 3.2
+   },
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "pairmove1",
+   "chat": {
+    "url": "",
+    "opening": "added by pairmove1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by pairmove1. Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun. Are we making them too short?\" Tom (20:07): \"I'm gonna leave it to you to figure out that solution, but it feels like if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up or something like that... the more the advanced move is that more acceptable is for to take longer\""
+    }
+   ]
+  },
+  {
+   "id": "c-movefun",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "movefun1",
+   "title": "Does each family move look like its name? List flat ones",
+   "next": "Watch every family move video against its name and the move's idea, and list the ones that fall flat, with one fix each.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by pairmove1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by pairmove1. Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun. Are we making them too short?\" Tom (20:07): \"I'm gonna leave it to you to figure out that solution, but it feels like if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up or something like that... the more the advanced move is that more acceptable is for to take longer\""
+    }
+   ],
+   "prompt": {
+    "what": "Checks every family move video against its name and lists the flat ones with a fix each.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5 (row D: judging moves by eye and by the family's personalities)",
+    "effort": "medium",
+    "text": "Read CLAUDE.md (sections wanauto1, No painted poses in battle, Fix a miss with the smallest change, Image and video prompts), docs/CANON.md, claude/canon-addendum.md (the 2026-11-21 pairmove1 line), claude/video-battle-plan.md 4.14, then card c-movefun in data/board.json. Tom (2026-11-21 20:02): \"But what makes it giddy up Tata? These moves need to be fun.\" For every family member's move in data/b3-kit-*.js that has a video (data/clips/*.js), make a contact sheet of the clip (its sheet in art/clips/) and judge it against the move's name, its description and the person: would a kid watching say that is the move? Write claude/move-fun-review.md: one table row per move (who, move, what the video shows, verdict Fun / Flat / Wrong, one fix: a prompt change, a two-person video like pairmove1, or a longer length for a signature move, 2 to 3 s for basics and up to 5 s for signature and team moves). Change no prompt and start no run in this session; the list is for Tom. Add one Tom decide card t-movefun-pick that lists the Flat and Wrong moves with your recommended fixes (choices: Fix all of them (Recommended), Fix only the signature moves, Not now) and blocks a Sonnet 5.5 medium card c-movefun-fix (auto) that applies the fixes he picks and starts their runs (wanauto1). Write the CHANGES heading ## movefun1 and push. After: t-movefun-pick. Your first push is the commit board: start c-movefun. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "c-guideuse-fix",
    "lane": "claude",
    "col": "done",

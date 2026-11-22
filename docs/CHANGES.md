@@ -1,3 +1,18 @@
+## pairmove1 (2026-11-21): two-person battle videos; Rose's Giddyup will ride Tom's shoulders
+
+Card c-pairmove1. Tom (20:02): "But what makes it giddy up Tata? These moves need to be fun." Tom (20:07): "it needs to be something where she jumps on the shoulders and then jumps off and says giddy up... the more the advanced move is that more acceptable is for to take longer."
+
+| Part | What |
+|---|---|
+| Engine | A move row may carry `anim.pair = {with, clip}` (`b3cPair` in engine/b3-clips.js). When that member is in the party and standing and the clip exists, b3PlayMove draws the two-person video as the partner's body at the partner's spot, hides the mover (`away`), lands the hit as she springs off with a short arc to the monster, then both stand at home. Otherwise the move's own clip plays, as before |
+| Giddyup | data/b3-kit-rose.js: `pair:{with:'tom',clip:'tom_rose_giddyup'}` next to the solo clip |
+| Start picture | art/clips/start/tom-rose-pair.png: tom-hero.png and rose-hero.png, each whole and unaltered, side by side on magenta, Rose at her battle height (83 of Tom's 99 rows) so she keeps her size when the video starts |
+| Video job | tom-rose-giddyup (Kling 4.0, 5 s, start picture only, pad 0.65, airborne, returns false, baked at 1x: a signature move may take longer). Prompt tools/art-library/prompts/wan-tom-rose-giddyup-v1.txt: she hops onto his shoulders, rides with a fist up, springs off and lands crouched in front of him |
+| Canon | claude/canon-addendum.md (repo and Project): moves read as their name; two-person moves are one video; length follows the move |
+| Cards | t-pairmove1-gen (Tom: Generate, at most $3.20); c-movefun (judge every family move video against its name) |
+
+Test: tools/pairmove_test.py (P1 solo with no two-person clip, P2 a stand-in two-person clip plays at Tom's spot with Rose hidden and the hit lands, P3 Tom knocked out gives the solo clip, P4 asked for ahead). Pictures tools/shots/pairmove-solo.png, pairmove-pair.png.
+
 ## nightclean-1122 (2026-11-22): Night cleanup, bucket C: CLAUDE.md is 2.3 KB shorter
 
 Bucket C (working agreement). Shortened two history-heavy sections of CLAUDE.md, "Load time" and "Clip quality gate": the sw1 and mem1 build stories and the clipch1fix details left (they stay in the entries above and in git history; sw1 details live in docs/WORKFLOW.md). Every standing rule, heading and quoted sentence of Tom's is kept: `python3 tools/night/rules_check.py` ok (26 headings, 19 leads, 59 quotes). CLAUDE.md 69,569 to 67,271 bytes; `claude/next.md` unchanged (44,187). No file under tools/ or art/ was deleted, so there is no reference grep.

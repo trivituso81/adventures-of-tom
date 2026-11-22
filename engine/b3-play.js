@@ -253,7 +253,8 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const head=beats[0];
   // Clips (engine/b3-clips.js): ask for what this move will show. A move whose clip is still loading waits for it (2.5 s at most), then plays its default animation.
   b3cWarmBeats(beats);
-  const cid=head.t==='act'&&head.anim&&head.anim.kind==='clip'?head.anim.clip:null;
+  let PR=b3cPair(head);   // pairmove1: a two-person video when the partner is standing (engine/b3-clips.js)
+  const own=head.t==='act'&&head.anim&&head.anim.kind==='clip'?head.anim.clip:null,cid=PR?PR.clip:own;
   if(cid&&BCLIPS[cid]&&!b3cReady(cid)&&(waited||0)<B3C.waitMax) { b3After(.1,()=>b3PlayMove(beats,done,mid,(waited||0)+.1)); return; }
   if(head.t==='telegraph') { for(const b of beats) if(b.t!=='over') b3Show(b); B3P.fa[head.src].hold=B3P.t+.8; b3After(1.15,done); return; }
   const pre=beats.filter(b=>b.g==='pre'),post=beats.filter(b=>b.g==='post'&&b.t!=='over'),swings=beats.filter(b=>b.t==='swing');
@@ -278,7 +279,19 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
   // A video clip plays the move (the move's or act's row says which, engine/b3-clips.js). It plays at the clock's own pace, not B3_TEMPO's:
   // the hit shows on the clip's impact frame (a clip with no impact lands at `at` of its length). A family member crosses to the monster first.
-  const CL=cid&&b3cReady(cid)?BCLIPS[cid]:null;
+  let CL=cid&&b3cReady(cid)?BCLIPS[cid]:null;
+  if(!CL&&PR) { PR=null; CL=own&&b3cReady(own)?BCLIPS[own]:null; }   // the two-person video did not load in time: the move's own video
+  if(CL&&PR) {
+    // pairmove1: the partner's body plays the video at the partner's spot, the mover is hidden; the hit lands as the mover springs off (impact frame),
+    // carried to the monster by a short arc.
+    const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000,ph=b3PartyHome(b3Unit(B3.F,PR.key)),fly=.3;
+    B3P.body[PR.key]={kind:'cmove',t0:B3P.t,T0:0,jx:ph.cx,jy:ph.base,C:CL,back:0,dur:dur+.12};
+    B3P.body[src]={kind:'away',t0:B3P.t,dur:dur+.12};
+    const tg=hits.length&&hits[0].swing.tgts[0];
+    if(tg) { const z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:ph.cx-24,y0:ph.base-70,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+land,dur:fly,arc:50}); }
+    if(hits.length) hits.forEach((h,k)=>b3After(land+fly+k*.35,reveal)); else b3After(land,()=>{ for(const b of late) b3Show(b); });
+    b3After(Math.max(dur+.1,land+fly+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
+  }
   if(CL) {
     const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000;
     let T0=0;
@@ -446,6 +459,7 @@ function b3DrawMember(u,t,picked) {
   const low=vu.hp/vu.maxHp<=B3_RULES.lowHp,cheer=B3P.cheer||B3P.cheerKey===u.key;   // cheerKey: a test cheers one fighter
   if(A&&A.kind!=='ko'&&t-A.t0>=A.dur) delete B3P.body[u.key];
   const B=B3P.body[u.key];
+  if(B&&B.kind==='away') return;   // pairmove1: drawn inside the partner's two-person video for now
   if(B&&B.kind==='path') {
     const e=t-B.t0,K=B.keys; let i=0; while(i<K.length-2&&e>=K[i+1].t) i++;
     const a=K[i],b=K[i+1],q=Math.max(0,Math.min(1,(e-a.t)/Math.max(.001,b.t-a.t))),s=q*q*(3-2*q);

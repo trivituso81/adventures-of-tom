@@ -1374,6 +1374,12 @@
    "cmd": "python3 -I tools/m2_test.py",
    "group": "g4",
    "minutes": 3
+  },
+  {
+   "id": "pairmove_test",
+   "cmd": "python3 -I tools/pairmove_test.py",
+   "group": "g2",
+   "minutes": 2
   }
  ]
 }

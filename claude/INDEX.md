@@ -121,7 +121,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | battle-architecture.md | The Adventures of Tom: architecture for the new battle system (2026-11-18) | 2026-11-18 |
 | battle-background-prompts.txt | FILE: 01-pond-town | 2026-11-22 |
 | battle-background-spec.md | LITTLE ELSEWHERE: BATTLE BACKGROUND SPEC | 2026-11-22 |
-| battle-build.md | The Adventures of Tom: new battle system, build tracker | 2026-11-21 |
+| battle-build.md | The Adventures of Tom: new battle system, build tracker | 2026-11-22 |
 | battle-design.md | LITTLE ELSEWHERE: COMPLETE BATTLE SYSTEM DESIGN BIBLE | 2026-11-22 |
 | battle-fix-prompts-index.txt | PROMPT PACK: battle animation fixes | 2026-11-22 |
 | battle-kit-ops.md | The Adventures of Tom: the 210 kit lines sorted into "ops" or "custom" (2026-11-18) | 2026-11-18 |
@@ -295,11 +295,11 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 |---|---|---|
 | menuux-mock/fonts/bricolage.woff2 | wOF2    �    �$ c                       ��*��2�R?HVAR� | 2026-11-22 |
 | menuux-mock/fonts/figtree.woff2 | wOF2     N�     ��  NJ                       �4�F�8?HVAR�d`?STAT�'* �/j | 2026-11-22 |
-| menuux-mock/gen/bake_heroes.py | """Reference for the menu's hero pictures (the mockups were made with it): a hero painting on its cream paper  | 2026-11-21 |
-| menuux-mock/gen/boards.py | from kit import * | 2026-11-21 |
-| menuux-mock/gen/export_canvas.py | Writes the Design canvas files (project/*.dc.html and project/canvas.json) from the same builders as the test  | 2026-11-21 |
-| menuux-mock/gen/kit.py | Golden Hour menu mockups: shared tokens and components. Every element carries inline styles (the Design canvas | 2026-11-21 |
-| menuux-mock/gen/render.py | Test pages of the menu mockups: python3 render.py [names]  writes ../test/<name>.html; python3 shot.py <names> | 2026-11-21 |
+| menuux-mock/gen/bake_heroes.py | """Reference for the menu's hero pictures (the mockups were made with it): a hero painting on its cream paper  | 2026-11-22 |
+| menuux-mock/gen/boards.py | from kit import * | 2026-11-22 |
+| menuux-mock/gen/export_canvas.py | Writes the Design canvas files (project/*.dc.html and project/canvas.json) from the same builders as the test  | 2026-11-22 |
+| menuux-mock/gen/kit.py | Golden Hour menu mockups: shared tokens and components. Every element carries inline styles (the Design canvas | 2026-11-22 |
+| menuux-mock/gen/render.py | Test pages of the menu mockups: python3 render.py [names]  writes ../test/<name>.html; python3 shot.py <names> | 2026-11-22 |
 | menuux-mock/gen/shot.py | import sys, os | 2026-11-22 |
 | menuux-mock/img/amy-head.webp | RIFFN%  WEBPVP8 B%  Pf �*� � >A�C���/(� aw��o�o9�;�=�/K���^ss�~Z0���?����׽0���7�տ��Q����ս<���{;� | 2026-11-22 |
 | menuux-mock/img/amy.webp | RIFF�* WEBPVP8 �* P��*#4>=�C�!��[�� ı�~�8�B����?M~��G�*�����s��V�O�?�O�^��������o�#����ڏ{��}R�� | 2026-11-22 |
@@ -319,9 +319,9 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/img/item-shirt.webp | RIFF�  WEBPVP8X | 2026-11-22 |
 | menuux-mock/img/item-sunhat.webp | RIFFH&  WEBPVP8X | 2026-11-22 |
 | menuux-mock/img/item-sweater.webp | RIFF"1  WEBPVP8X | 2026-11-22 |
-| menuux-mock/img/justin-head.webp | RIFFh#  WEBPVP8 \#  �c �*� � >A�C���=FD(� gr#����yW�O}}��gA=�����x?�z����k�#���Ǩ�:?D?�� :��/��Z�����l�_ | 2026-11-21 |
-| menuux-mock/img/nara-head.webp | RIFF�#  WEBPVP8 �#  �e �*� � >A�C���;��(�g7"������9o����K�^���~�������\:dy��������������@9�V����-�L | 2026-11-21 |
-| menuux-mock/img/olivia-head.webp | RIFF")  WEBPVP8 )  Pi �*� � >=�C�!!�60 ĳ d����ȹ_���d��^��m�o@����z�_�E�?�ǜ���T_�=@?���>�]��n�������� | 2026-11-21 |
+| menuux-mock/img/justin-head.webp | RIFFh#  WEBPVP8 \#  �c �*� � >A�C���=FD(� gr#����yW�O}}��gA=�����x?�z����k�#���Ǩ�:?D?�� :��/��Z�����l�_ | 2026-11-22 |
+| menuux-mock/img/nara-head.webp | RIFF�#  WEBPVP8 �#  �e �*� � >A�C���;��(�g7"������9o����K�^���~�������\:dy��������������@9�V����-�L | 2026-11-22 |
+| menuux-mock/img/olivia-head.webp | RIFF")  WEBPVP8 )  Pi �*� � >=�C�!!�60 ĳ d����ȹ_���d��^��m�o@����z�_�E�?�ǜ���T_�=@?���>�]��n�������� | 2026-11-22 |
 | menuux-mock/img/rose-head.webp | RIFF�'  WEBPVP8 �'  �j �*� � >A�C����6�(�P����+鿧�r�n����\y>{w/C�=Ay�������{�s�/S��������_<P���W;�� | 2026-11-22 |
 | menuux-mock/img/rose.webp | RIFFZU WEBPVP8 NU �0�*#4>=�C�!�<İ Ħ��+HG\ƴv_a�*���� | 2026-11-22 |
 | menuux-mock/img/tnb-head.webp | RIFF`)  WEBPVP8 T)  0n �*� � >=�C�!�/� Ĵ d��*?/�1�=<���n����'΢�������?���?׺y���q�����/D.�O��}-:�4�� | 2026-11-22 |
@@ -335,18 +335,18 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | menuux-mock/img/world-p.jpg | ���� JFIF      �� C 		 | 2026-11-22 |
 | menuux-mock/shots/bag_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
 | menuux-mock/shots/bag_phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
-| menuux-mock/shots/family_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/family_land.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/family_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/gear_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/gear_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/sheet-duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/sheet-phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
+| menuux-mock/shots/family_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/family_land.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/family_phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/gear_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/gear_phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/sheet-duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/sheet-phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
 | menuux-mock/shots/system_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
 | menuux-mock/shots/system_phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
-| menuux-mock/shots/vibes_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/vibes_late_duo.jpg | ���� JFIF      �� C  | 2026-11-21 |
-| menuux-mock/shots/vibes_phone.jpg | ���� JFIF      �� C  | 2026-11-21 |
+| menuux-mock/shots/vibes_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/vibes_late_duo.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| menuux-mock/shots/vibes_phone.jpg | ���� JFIF      �� C  | 2026-11-22 |
 
 ## moon club
 
