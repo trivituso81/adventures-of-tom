@@ -1,0 +1,63 @@
+name: startpic-gen
+
+# startpics9 (2026-11-22): the Battle Guide's Make the start picture has its OWN line. It used to share the wan-gen line with every video batch, and GitHub keeps only one waiting run per
+# line, so a card's video batch cancelled Tom's waiting picture runs again and again (Boppy, Nara, TNB), and a picture waited behind an hour of videos. Nothing else enters this line.
+# The page commits data/startpic-requests.json with the message "startpic: generate <who>"; this run makes every picture asked for (tools/art-library/wangen.py --startpics: fal Nano Banana 2.1,
+# the look check, then art/clips/start/<who>-hero.png on main) and keeps its ledger and results on its own branch `startpic` (never merge it). Needs the repo secrets FAL_KEY and XAI_API_KEY.
+on:
+  push:
+    branches: [main]
+    paths: ['data/startpic-requests.json']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'startpic: generate ')"
+    runs-on: ubuntu-latest
+    concurrency:
+      group: startpic-gen
+      cancel-in-progress: false
+    timeout-minutes: 30
+    env:
+      COSTS_LOG_REPO: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests pillow numpy
+      - name: Restore what the startpic branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/sp"
+          if git ls-remote --exit-code --heads origin startpic >/dev/null 2>&1; then
+            git fetch --depth 1 origin startpic
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/sp"
+          fi
+      - name: Make the pictures
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -o pipefail
+          if [ -z "$FAL_KEY" ]; then echo "Repo secret FAL_KEY is empty or missing."; exit 2; fi
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 -I tools/art-library/wangen.py --startpics --out "$RUNNER_TEMP/sp" 2>&1 | tee "$RUNNER_TEMP/run.log"
+      - name: Keep the results and the ledger on the startpic branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/sp"
+          cp "$RUNNER_TEMP/run.log" "run-${{ github.run_id }}.log" 2>/dev/null || true
+          if [ -z "$(ls -A)" ]; then echo "nothing to save"; exit 0; fi
+          rm -rf .git; git init -q -b startpic
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A; git commit -q -m "startpic: results and ledger (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" startpic

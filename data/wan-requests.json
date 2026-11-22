@@ -1,12 +1,6 @@
 {
  "requests": [
   {
-   "startpic": "boppy",
-   "take": 1795381473,
-   "at": "2026-11-22T21:04:33.853Z",
-   "cap": 0.3
-  },
-  {
    "anim": "move:suite_door_slide",
    "slug": "move-suite-door-slide",
    "take": 3,

@@ -803,24 +803,24 @@ function askStart(){
 const STARTING={};   // startpics7: a person whose picture was already asked for in this page is not asked for again
 async function queueLine(tok){   // startpics7: what is ahead of a request, from the Actions list (needs the GitHub token the page already uses)
   try{const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
-    const r=await fetch(GH()+'/repos/'+REPO+'/actions/workflows/wan-gen.yml/runs?per_page=12&t='+Date.now(),{cache:'no-store',headers:H});if(!r.ok)return '';
+    const r=await fetch(GH()+'/repos/'+REPO+'/actions/workflows/startpic-gen.yml/runs?per_page=12&t='+Date.now(),{cache:'no-store',headers:H});if(!r.ok)return '';
     const runs=((await r.json()).workflow_runs||[]).filter(x=>x.conclusion!=='skipped');
     const going=runs.filter(x=>x.status==='in_progress').length,wait=runs.filter(x=>x.status==='queued'||x.status==='pending'||x.status==='waiting').length;
     if(!going&&!wait)return 'Nothing else is running, so yours starts now.';
-    return 'Right now '+going+' run'+(going===1?' is':'s are')+' going and '+wait+' waiting. Runs go one at a time and a video run takes about 5 minutes, so yours may wait up to '+Math.max(1,going+Math.max(0,wait-1))*5+' minutes before it starts.';}
+    return 'Right now '+going+' picture run'+(going===1?' is':'s are')+' going and '+wait+' waiting. A picture takes about 1 to 2 minutes and only pictures are in this line.';}
   catch(e){return '';}
 }
 async function doStart(){
   const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;if(STARTING[g.startWho]){$('gstartmsg').textContent='Already asked for in this page. It is in line; do not press it again.';return;}STARTING[g.startWho]=1;const who=g.startWho,at=new Date().toISOString(),take=Math.floor(Date.now()/1000),box=$('gstartconf'),st=$('gstartstate');
   box.innerHTML='<p class="hint">Sending the request...</p>';
-  try{await ghRequest('data/wan-requests.json','wan: generate startpic '+who,d=>{d.requests.push({startpic:who,take,at,cap:0.3});});}
+  try{await ghRequest('data/startpic-requests.json','startpic: generate '+who,d=>{d.requests.push({startpic:who,take,at,cap:0.3});});}
   catch(e){STARTING[who]=0;box.innerHTML='';$('gstartmsg').textContent=e.message+'. Nothing was sent.';return;}
   box.innerHTML='';const tok=lsGet(TOKEN),t0=Date.now();
   st.innerHTML='<p class="hint">Sent. The picture itself takes about a minute once its turn comes.</p><p class="hint" id="gstartq"></p>';
   while($('gstartstate')===st&&Date.now()-t0<30*60000){
     const ql=await queueLine(tok),qe=$('gstartq');if(qe&&$('gstartstate')===st)qe.textContent=ql;
     await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
-    const r=await ghGetJson('startpic-results.json','wangen',tok).catch(()=>null);
+    const r=await ghGetJson('startpic-results.json','startpic',tok).catch(()=>null);
     const row=r&&r.doc&&(r.doc.results||[]).find(x=>x.at===at);
     if(!row)continue;
     if(row.error){st.innerHTML='<div class="cant"><b>No picture was put in the game.</b> '+esc(row.error)+'</div><p class="hint">'+(row.cost?'It cost '+money(row.cost)+'. ':'It cost nothing. ')+'Tap Make the start picture to try again, or send Claude a note below.</p>';STARTING[who]=0;return;}

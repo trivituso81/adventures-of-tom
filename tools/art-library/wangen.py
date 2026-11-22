@@ -276,13 +276,16 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     (state['guide_days'], default $10 a day). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
     import copy, types
     sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue, progress
-    doc = gqueue.load('data/wan-requests.json', a.repo)
+    qf = 'data/startpic-requests.json' if getattr(a, 'startpics', False) else 'data/wan-requests.json'   # startpics9: pictures have their own queue file and their own workflow
+    doc = gqueue.load(qf, a.repo)
     reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
     sps = [r for r in doc.get('requests') or [] if r.get('startpic') and isinstance(r.get('take'), int)]   # startpics1: Make the start picture
     # startpics7: one picture per person per run. A second tap on the same person (the page said "sent" and nothing showed yet) is dropped here, before any money is spent.
+    if getattr(a, 'startpics', False): reqs = []
     uniq, seen = [], set()
     for r in sps:
         w = str(r.get('startpic'))
+        if os.path.exists(os.path.join(a.repo, 'art', 'clips', 'start', w + '-hero.png')): say('start picture for %s already exists, request dropped (nothing spent)' % w); continue
         if w in seen: say('duplicate start picture request for %s dropped (nothing spent)' % w); continue
         seen.add(w); uniq.append(r)
     sps = uniq
@@ -291,7 +294,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     # pictures only (about a minute), leaves the videos in the file and starts the next run for them when it ends.
     defer = bool(sps and reqs and not a.dry_run and not a.no_take)
     if defer: say('start pictures first: %d video request(s) stay queued for the next run' % len(reqs)); reqs = []
-    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take('data/wan-requests.json', ({r.get('at') for r in sps} if defer else {r.get('at') for r in doc.get('requests') or []}), a.repo, 'origin', 'guide: wan requests taken [skip ci]')
+    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take(qf, ({r.get('at') for r in sps} if defer else {r.get('at') for r in doc.get('requests') or []}), a.repo, 'origin', 'guide: wan requests taken [skip ci]')
     rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
     waiting = staging_waits(a.repo)
     for r in reqs:
@@ -378,6 +381,7 @@ def main():
     ap.add_argument('--replay-checks', default='', help='measure videos already in --out (names like rose-giddyup-r4, comma list); free')
     ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
     ap.add_argument('--requests', action='store_true', help='guidegen1: work through data/wan-requests.json (what the Battle Guide asked for) instead of --what')
+    ap.add_argument('--startpics', action='store_true', help='startpics9: work through data/startpic-requests.json only (start pictures; no videos)')
     ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
     ap.add_argument('--no-take', action='store_true', help='--requests: leave the request list as it is (tests)')
     ap.add_argument('--day-cap', type=float, default=10.0, help='--requests: most dollars of guide videos a day')
@@ -386,6 +390,7 @@ def main():
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
     a = ap.parse_args()
     a.cap_set = any(x.startswith('--cap') for x in sys.argv[1:])
+    if a.startpics: a.requests = True
     jobs = load_jobs(a.repo)
     if a.replay_checks: return replay_checks(a, jobs)
     if a.bulk and not a.card and not a.what: ap.error('--bulk needs --card or --what')

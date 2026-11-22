@@ -98,3 +98,9 @@ check('S9 page blocks a second tap and shows the queue', "STARTING[g.startWho]" 
 
 # S10 (startpics8): pictures first, videos wait for the next run
 check('S10 a run with pictures and videos makes the pictures only and starts the next run', 'start pictures first' in _g and 'def next_guide_run' in _g and 'if defer: next_guide_run()' in _g, 'wangen.py')
+
+# S11 (startpics9): pictures have their own workflow, queue file and branch; nothing else enters their line
+_s = open('.github/workflows/startpic-gen.yml').read()
+check('S11 startpic-gen has its own group and queue file', 'group: startpic-gen' in _s and 'data/startpic-requests.json' in _s and '--startpics' in _s, 'startpic-gen.yml')
+check('S11 the page asks the picture line, not the video line', "'data/startpic-requests.json','startpic: generate '" in _p and "'startpic-results.json','startpic'" in _p, 'battle-guide.html')
+check('S11 --startpics makes pictures only', "getattr(a, 'startpics', False): reqs = []" in _g and 'already exists, request dropped' in _g, 'wangen.py')
