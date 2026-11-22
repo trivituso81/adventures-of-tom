@@ -32401,7 +32401,7 @@
   {
    "id": "c-guideflow-plan",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow-plan",
    "title": "Plan a Battle Guide animation flow that works",
@@ -32419,6 +32419,10 @@
      "d": "2026-11-22",
      "t": "Tom: \"this is like a cruel joke\", \"i cant sit at the screen staring for minutes on end\", \"be able to send as many concurrent requests as I want, and they need to queue\". New card for the planning session.",
      "at": "2026-11-22T22:40:34.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -32621,6 +32625,16 @@
    ],
    "cards": [
     "c-fix-menu4play-4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+   "title": "Plan a Battle Guide animation flow that works",
+   "first": "2026-11-22T14:40:47-08:00",
+   "last": "2026-11-22T14:40:47-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-plan"
    ]
   },
   {
@@ -38357,8 +38371,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6805c106124dcd2b73ed2ec38bacb78a5aea889e",
- "synced_at": "2026-11-22T22:39:44+00:00",
+ "synced": "85f6fc62bf54903e09502ec2f0c8ffd79d36ba86",
+ "synced_at": "2026-11-22T22:41:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
