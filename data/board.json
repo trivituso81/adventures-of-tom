@@ -31322,8 +31322,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (26 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 20 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
+   "title": "Fix the report backlog (19 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-173628-97ha, r-20261121-180018-jc8f, r-20261121-180027-tyq4, r-20261121-180035-bjdf, r-20261121-180050-39xy, r-20261121-180126-mdm1 and 13 more. First note: need a cut out for this so tom and party dont overlap it",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -31391,6 +31391,10 @@
      "d": "2026-11-22",
      "t": "Fixed 7 of 8 reports in build reports-2026-11-21 (chapter 2 zoom, purple from landing, loft dialogue, Carmen reaction, Odette and Flurry spots). r-20261121-173628-97ha left open: no pin, nothing visibly overlaps; needs Tom to name the object.",
      "at": "2026-11-22T03:00:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "The backlog now holds 19 report(s)."
     }
    ],
    "blocks": [],
@@ -32135,6 +32139,31 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDVc9XVv6gEcsWPqV3",
+   "title": "Fix the report backlog (26 open)",
+   "first": "2026-11-22T01:56:57Z",
+   "last": "2026-11-22T02:09:41Z",
+   "tags": [
+    "reports-2026-11-21"
+   ],
+   "cards": [
+    "c-reports-13",
+    "c-reports-10",
+    "c-reports-8",
+    "c-reports-9"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE33WFppK2bVzVtvP9",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-22T02:08:36Z",
+   "last": "2026-11-22T02:08:36Z",
+   "tags": [],
+   "cards": [
+    "c-takes-e8fba6"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDZ8yfH7q7xENyMfFu",
    "title": "Merge 4 new voice takes",
    "first": "2026-11-22T01:57:20Z",
@@ -32144,16 +32173,6 @@
    ],
    "cards": [
     "c-takes-9b7e15"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDVc9XVv6gEcsWPqV3",
-   "title": "Fix the report backlog (8 open)",
-   "first": "2026-11-22T01:56:57Z",
-   "last": "2026-11-22T01:56:57Z",
-   "tags": [],
-   "cards": [
-    "c-reports-13"
    ]
   },
   {
@@ -36963,8 +36982,8 @@
    "takes/20261122T015924-pqq/state.json"
   ]
  },
- "synced": "2680207cf3ad4537f68281bb0c6fd74baff0803a",
- "synced_at": "2026-11-22T02:08:18+00:00",
+ "synced": "18150fe83547d8632c22926926780d6ecd2bd3c8",
+ "synced_at": "2026-11-22T02:09:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
