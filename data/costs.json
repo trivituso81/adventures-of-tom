@@ -963,6 +963,15 @@
    "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947",
    "at": "2026-11-22T07:17:08Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.5,
+   "what": "wan-gen Action: guide requests",
+   "source": "wan-gen run",
+   "at": "2026-11-22T08:25:19Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45002446843"
   }
  ],
  "balances": [
