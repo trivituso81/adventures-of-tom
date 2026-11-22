@@ -25407,8 +25407,8 @@
    "lane": "claude",
    "col": "wait",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd. First note: this scene has to be triggered before they leagve",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd, r-20261122-064330-9lsh. First note: this scene has to be triggered before they leagve",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -25510,6 +25510,10 @@
      "d": "2026-11-22",
      "t": "Rescue chose BACK TO YOU: both reports lack a pin or a clear fault, so a fix would be a guess. Added Tom card t-reports13-ch2; this card waits behind it.",
      "at": "2026-11-22T09:20:00Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
@@ -29752,9 +29756,10 @@
    "url": "https://claude.ai/code/session_01RXeukHEiKeVH4vFayFQNtG",
    "title": "Battle screen: the new menu's look, and only what is needed",
    "first": "2026-11-22T00:46:30-08:00",
-   "last": "2026-11-22T06:30:03-08:00",
+   "last": "2026-11-22T06:43:55-08:00",
    "tags": [
-    "b3look"
+    "b3look",
+    "b3looka"
    ],
    "cards": [
     "c-b3look"
@@ -35120,7 +35125,8 @@
    "r-20261121-180626-4eca",
    "r-20261121-180646-o5il",
    "r-20261121-180709-4jo0",
-   "r-20261121-180718-y1a5"
+   "r-20261121-180718-y1a5",
+   "r-20261122-064330-9lsh"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -35162,8 +35168,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "a977dd2e82e3c220d9d358d36fbaf27f034f56a5",
- "synced_at": "2026-11-22T14:38:29+00:00",
+ "synced": "efdc0952c4bd10f017bb0fe87bd7ddce2ae9a994",
+ "synced_at": "2026-11-22T14:44:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
