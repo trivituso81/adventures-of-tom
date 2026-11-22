@@ -31409,7 +31409,7 @@
    "id": "c-vibelayout1",
    "tag": "vibelayout1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Vibes page: smaller figure, loadout cards, abilities panel",
    "next": "Built vibelayout1: the Vibes page has a smaller figure with the name, Lv and XP on one line, Vibe Loadout cards with Primary, Secondary and Off, Row and Quirk pills, and an abilities panel with the Descriptions switch at its right. Tested at five sizes (m2_test, b3_test s4 s9c s21). Not looked at on a real phone.",
@@ -31429,6 +31429,10 @@
     {
      "d": "2026-11-22",
      "t": "Pushed vibelayout1 (docs/CHANGES.md has the list). Off on a Vibe in use only explains itself, because the rules have no empty Secondary. The Primes and Detonations link and the speed pill from the drawing were not added."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as vibelayout1: the Vibes page has a smaller figure, a one line name, Vibe Loadout cards and a new abilities panel"
     }
    ],
    "prompt": {
@@ -31439,7 +31443,8 @@
     "model": "Claude Sonnet 5.5 (row C: a layout change in one page)",
     "effort": "medium (one page, one stylesheet, tested at five sizes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-vibelayout1 in data/board.json. Your first push is the commit board: start c-vibelayout1. The Vibes page (engine/m2-vibes.js, m2.css) takes Tom's new layout: see the card history for his words. Test with python3 tools/m2_test.py, look at the screenshots, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-startpics9",
@@ -31593,6 +31598,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
+   "title": "Vibes page: smaller figure, loadout cards, abilities panel",
+   "first": "2026-11-22T13:16:22-08:00",
+   "last": "2026-11-22T13:29:26-08:00",
+   "tags": [
+    "vibelayout1"
+   ],
+   "cards": [
+    "c-vibelayout1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
    "title": "Start pictures for the rest of the cast",
    "first": "2026-11-22T06:57:31-08:00",
@@ -31635,16 +31652,6 @@
    "cards": [
     "c-movestage-build",
     "t-movestage-lab"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGbBbiNr5YrfZBPanw",
-   "title": "Vibes page: smaller figure, loadout cards, abilities panel",
-   "first": "2026-11-22T13:16:22-08:00",
-   "last": "2026-11-22T13:16:22-08:00",
-   "tags": [],
-   "cards": [
-    "c-vibelayout1"
    ]
   },
   {
@@ -37248,8 +37255,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "dc86ac6b0205cd4670b9a5f7240e7c6289e539da",
- "synced_at": "2026-11-22T21:28:42+00:00",
+ "synced": "3606df47cdd062eda993e0f5b6c08ed351e3ba22",
+ "synced_at": "2026-11-22T21:30:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
