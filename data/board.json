@@ -31065,7 +31065,7 @@
    "title": "Standing cards: show them as \"Runs every night\", no START",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Tom asked why Night cleanup and Night QA keep showing START however often he taps it, and why Nightly refactoring sits in Start next. Fix: standing cards get their own Runs every night section with last result and no START; Nightly refactoring becomes a Waiting card on GitHub (the night tests) until 7 clean nights.",
    "blocks": [],
    "created": "2026-11-22",
@@ -31073,13 +31073,17 @@
    "tag": "standingfix",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
     "opening": "\"why do these cards constantly show in the board no matter how many times a start them?\""
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added from Tom's question: \"why do these cards constantly show in the board no matter how many times a start them?\" and his \"yes do all that\"."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -31091,6 +31095,29 @@
     "effort": "medium (the cause is known)",
     "text": "Read CLAUDE.md, then card c-standingfix in data/board.json. Standing cards (nightly true) show in a Runs every night section of board.html with last run and result and no START or Copy prompt; startable() is false for them; Nightly refactoring (c-nightrefactor) is col wait, waiting_on github until 7 clean night test runs. Run python3 tools/board_check.py, python3 tools/board_sync_test.py and python3 tools/board_test.py /tmp/board before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-voices-t-crispvoices-617",
+   "tag": "voices-t-crispvoices-617",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Voice Clips",
+   "title": "16 voice takes made from board card t-crispvoices and merged into the game",
+   "next": "Done: 16 voice takes made from board card t-crispvoices and merged into the game",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as voices-t-crispvoices-617. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
@@ -31177,6 +31204,21 @@
    "cards": [
     "c-wanstop-tom-rose-giddyup-r1",
     "t-pairmove1-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
+   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "first": "2026-11-21T11:27:11-08:00",
+   "last": "2026-11-22T12:39:22-08:00",
+   "tags": [
+    "board-night"
+   ],
+   "cards": [
+    "b-board-night",
+    "c-nightshift",
+    "c-nighttests",
+    "c-standingfix"
    ]
   },
   {
@@ -33275,20 +33317,6 @@
    ],
    "cards": [
     "c-gem1v"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD6Akpm4xQwBbn5y8k",
-   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
-   "first": "2026-11-21T11:27:11-08:00",
-   "last": "2026-11-21T11:33:24-08:00",
-   "tags": [
-    "board-night"
-   ],
-   "cards": [
-    "b-board-night",
-    "c-nightshift",
-    "c-nighttests"
    ]
   },
   {
@@ -36789,8 +36817,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "f98b857f0aa4114565ecb7cffe61ef6a129a32e0",
- "synced_at": "2026-11-22T20:37:33+00:00",
+ "synced": "1f1f9b53f38778e9b48aed3272b219d2640a5bdd",
+ "synced_at": "2026-11-22T20:40:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
