@@ -27240,7 +27240,7 @@
    "ask": "pictures",
    "fyi": true,
    "title": "Try auto-approve on Grace's and Rose's party banners",
-   "next": "What this is: when pictures are made for you, you normally open each one in the Art Library and press APPROVE or REJECT. This button lets a checker (an AI that grades each picture against a checklist taken from its prompt) approve the good ones for you, so you only look at the ones it was unsure about. This card now holds 4 real pictures the game needs: the painted JOIN and LEAVE banners for Grace and Rose (today the game shows a plain cream ribbon with a face). 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.20). 2) Close the board; it takes about 5 minutes. 3) Open this card again. Each picture shows a thumbnail with Approved by QA (its score) or a line saying it waits for you and why. 4) Tap each thumbnail and look. On one QA approved that you would reject, tap Not this one: the picture opens with a NOT THIS ONE button; type what is wrong and tap it (it is made again next time). For ones that wait, tap Review them in the Art Library and APPROVE or REJECT as usual. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and Grace's and Rose's JOIN banners are the new paintings. All good if QA approved only what you would approve; Something is wrong if it approved one you would reject or held one that was fine.",
+   "next": "What changed: the checker (QA) was judging cropped pictures wrongly, and the two JOIN banners really had hands cut off at the edge. Now QA no longer faults a waist-up picture for legs or shoes it is not supposed to show, and the JOIN prompts keep the hands inside the picture. Last time the plain Generate button was tapped, so QA graded but approved nothing; this time use the auto-approve button. 1) Under Pictures on this card, tap Generate and auto-approve what passes QA, then tap again to confirm (about $0.12; it remakes only Grace's and Rose's JOIN banners). 2) Close the board; it takes about 5 minutes. 3) Open this card again and look at the two JOIN thumbnails: are the hands fully inside the picture, and is each one Approved by QA (its score) or held with a reason? If QA approved one you would reject, tap Not this one and type what is wrong. 4) The two LEAVE banners from last time (Grace waving, Rose waving) still wait for you: tap Review them in the Art Library and APPROVE or REJECT. 5) About 5 minutes after a banner is approved it is in the game: START NEW, tap SKIP at the top right, and the JOIN banners are the new paintings. All good if no hand touches an edge and QA approved only what you would approve; Something is wrong if a hand is still cut off or QA held a fine one.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -27279,6 +27279,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Fix bases on qa Sent to Claude as card c-fix-artgen3try-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T02:56:45.308Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fix fix-artgen3try-2: the earlier run was made with the plain Generate button, so nothing was auto-approved. QA held three: the JOIN banners had hands cut off at the edge (real fault, prompt fixed) and QA faulted waist-up pictures for legs, shoes and pants (QA wording fixed). The two LEAVE banners are kept and wait for your look."
     }
    ],
    "done_when": {
@@ -27438,7 +27442,8 @@
      }
     }
    },
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "after": null
   },
   {
    "id": "t-guidegen-try",

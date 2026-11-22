@@ -27,9 +27,9 @@ FIXED = [
     ('f_paint', 'Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?'),
     ('f_text', 'Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?'),
     ('f_bg', 'Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?'),
-    ('f_crop', 'Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?'),
+    ('f_crop', 'Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.'),
     ('f_count', 'Does the picture show exactly the number of poses, cells or items the prompt asks for, laid out as asked?'),
-    ('f_same', 'Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?'),
+    ('f_same', 'Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)? Judge only the parts the prompt shows: a figure the prompt crops (for example waist up) is not faulted for legs, shoes or pants that are out of the picture.'),
     ('f_anat', 'Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?'),
 ]
 FIXED_Q = dict(FIXED)
@@ -120,7 +120,7 @@ def criteria_for(judge, prompt, cache_dir=None):
     txt = judge.chat([], 'Here is the prompt an image generator was given.\n\nPROMPT\n' + (prompt or '').strip()[:6000] + '\n\n'
                      'List up to %d requirements from this prompt that a person can check just by looking at the finished picture. Each one is a yes or no '
                      'question written so that yes means the picture is right. Say each thing once. Leave out anything about painting style, outlines, text '
-                     'and background (those are checked elsewhere) and anything a viewer could not see. Reply as JSON: {"requirements": ["...", ...]}' % MAX_PROMPT_Q, 600)
+                     'and background (those are checked elsewhere) and anything a viewer could not see. When the prompt crops the figure (for example waist up), ask only about the parts that stay in the picture, and write a question that compares with a reference picture as one question about the face, hair and visible clothes, not one per body part. Reply as JSON: {"requirements": ["...", ...]}' % MAX_PROMPT_Q, 600)
     try:
         a, b = txt.find('{'), txt.rfind('}'); d = json.loads(txt[a:b + 1]); req = [str(x).strip()[:300] for x in (d.get('requirements') or []) if str(x).strip()][:MAX_PROMPT_Q]
     except Exception: req = []

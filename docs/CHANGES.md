@@ -1,3 +1,19 @@
+## fix-artgen3try-2 (2026-11-22): QA no longer faults cropped pictures, and the JOIN banners keep their hands inside the picture
+
+Card c-fix-artgen3try-2, from Tom on t-artgen3try: "Fix bases on qa". Read as: fix the banners based on what QA flagged. Fact: the 4 test banners scored 14, 8, 11 and 16 of 16; looking at them, two flags were real (Grace's and Rose's JOIN banners have a hand cut off at the top or right edge) and two were QA's fault (it failed the waist-up LEAVE banner because the legs were not shown, and held JOIN pictures on shoes, pants and "proportions" of a full-body reference that a waist-up crop cannot show). Fact: the card's history shows the plain Generate button was tapped (`gen.mode` review), so nothing was auto-approved in that run.
+
+| Change | Where |
+|---|---|
+| JOIN pose says both hands stay fully inside the picture with clear space above the fingers and by the right edge (9 people, not the dog) | `tools/art-library/partybanner-prompts.js`, `data/art-prompts.json` |
+| f_crop and f_same allow a cut the prompt asks for (waist up); the requirement list is told to ask only about what stays in the picture and to compare with a reference in one question | `tools/art-library/artqa.py` |
+| t-artgen3try: next step rewritten (auto-approve button, remakes only the two JOIN banners, the two LEAVE banners wait for Tom's look); history line | `data/board.json` |
+
+- Kept: the four LEAVE results, the other prompt text, the hold list and the 0.9 threshold. LEAVE prompts are unchanged, so those two stay "already made and waiting"; QA is not re-run on them (it needs the repo key).
+- Tested: `artqa_test.py`, `artgen3_test.py`, `artgen3fix_test.py`, `artgen_test.py`, `board_artgen_test.py` all FAILS: []. I looked at all four banners side by side. No game screen changed, so no portrait or landscape frames apply.
+- Pencil reports filed since 2026-11-22T02:56:44Z: none (the 19 open ones are older chapter 2 notes).
+- `tools/art-library/make-prompts.js` fails on main in `npc-prompts.js` (undefined colour), so the JOIN text was patched into `data/art-prompts.json` as well as the source file. Not mine; left alone.
+- No paid run made. The first auto run on the two JOIN banners is Tom's tap.
+
 ## b3s18bonus (2026-11-21): the bonus chapter (Nine Scoops, chapter 21) plays on Battle 3 behind the same switch
 
 Card c-b3s18bonus, part 2 of 2. Chapter 21 is on `B3_STORY.chapters`, so it follows the same switch as chapters 1 to 10 (BY CHAPTER and NEW run it on Battle 3, OLD keeps battle 2 on the same save). Scene dialogue is unchanged and no spoken line was added or reworded.

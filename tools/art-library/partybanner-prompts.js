@@ -18,7 +18,7 @@ const MEMBERS = [
 ];
 
 const POSE = {
-  join: 'Both arms raised in a happy cheer, a big open smile, glad to be on the team.',
+  join: 'Both arms raised in a happy cheer, a big open smile, glad to be on the team. Both hands stay fully inside the picture with clear space above the fingers and between the hands and the right edge, and none of the hair or arms touches an edge.',
   leave: 'One hand raised in a warm goodbye wave, a gentle smile.',
 };
 const DOG = {
