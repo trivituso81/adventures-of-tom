@@ -1672,6 +1672,11 @@
    "source": "model-draft",
    "model": "grok-4.20-0309-non-reasoning",
    "notForUse": "movestage1 (2026-11-22): a family move is now a body video plus a stage the engine draws (claude/move-staging-plan.md). This draft asks for a prop out from behind the back and back again; it is kept for the record and is never used."
+  },
+  "body:tnb:idle": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nHe stands in his starting relaxed stance and breathes slowly and gently, his chest and shoulders rising and falling softly, and blinks once. His arms, head and feet stay where they are for the whole clip.",
+   "rev": 1,
+   "source": "used"
   }
  }
 }

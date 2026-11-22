@@ -18,7 +18,8 @@ const B3_BODY_CLIPS={
   toad:{idle:'toad_idle'},
   log:{idle:'log_idle'},
   skeeter:{idle:'skeeter_idle'},   // wanch1
-  bigone:{idle:'bigone_idle',hit:'bigone_hit',slip:'bigone_slip',flustered:'bigone_flustered',die:'bigone_defeated'}
+  bigone:{idle:'bigone_idle',hit:'bigone_hit',slip:'bigone_slip',flustered:'bigone_flustered',die:'bigone_defeated'},
+  tnb:{idle:'tnb_idle'}
 };
 // B3_VIDEO_ONLY (idea-tomgrace, Tom 2026-11-21: "For Tom Grace and Rose and Deedee ensure that no old painted frames are ever used in battle.
 // Only new video animations"): these family members never show a painted battle frame. Any
