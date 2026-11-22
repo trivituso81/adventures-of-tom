@@ -33497,7 +33497,7 @@
    "id": "c-menu4",
    "tag": "menu4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "auto": true,
    "theme": "Game Shell",
    "title": "New menu: switch it on and remove the old one",
@@ -33509,7 +33509,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
     "opening": "not started"
    },
    "prompt": {
@@ -33534,9 +33534,12 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T04:57:09.151Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
-   ],
-   "start": true
+   ]
   },
   {
    "id": "t-menu4play",
@@ -34222,7 +34225,7 @@
   {
    "id": "c-movefun-fix",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "movefun2",
    "title": "Remake the flat move videos Tom picked",
@@ -34274,9 +34277,14 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as movefun2: the three flat family moves get one-sentence fixes and their videos are started"
     }
    ],
-   "started_at": "2026-11-22T04:54:10+00:00"
+   "started_at": "2026-11-22T04:54:10+00:00",
+   "done": "2026-11-21"
   },
   {
    "id": "c-fix-wanmop1-gen",
@@ -34333,7 +34341,7 @@
   {
    "id": "t-movefun-gen",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -34349,7 +34357,7 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
@@ -34377,27 +34385,43 @@
      "d": "2026-11-22",
      "t": "Run requested (wanauto1): 3 videos, cap $9.60.",
      "at": "2026-11-22T04:57:05Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   }
  ],
  "sessions": [
   {
-   "url": "https://claude.ai/code/session_01RXeukDYivdPsYXjec2AAAJ",
-   "title": "Remake the flat move videos Tom picked",
-   "first": "2026-11-22T04:56:08Z",
-   "last": "2026-11-22T04:56:08Z",
+   "url": "https://claude.ai/code/session_01RXeukF1DfGbAG25aJ43rw9",
+   "title": "New menu: switch it on and remove the old one",
+   "first": "2026-11-22T04:59:14Z",
+   "last": "2026-11-22T04:59:14Z",
    "tags": [],
    "cards": [
-    "c-movefun-fix"
+    "c-menu4"
    ]
   },
   {
    "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
    "title": "Remake the flat move videos Tom picked",
    "first": "2026-11-22T04:55:59Z",
-   "last": "2026-11-22T04:55:59Z",
+   "last": "2026-11-22T04:57:05Z",
+   "tags": [
+    "movefun2"
+   ],
+   "cards": [
+    "c-movefun-fix",
+    "t-movefun-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDYivdPsYXjec2AAAJ",
+   "title": "Remake the flat move videos Tom picked",
+   "first": "2026-11-22T04:56:08Z",
+   "last": "2026-11-22T04:56:08Z",
    "tags": [],
    "cards": [
     "c-movefun-fix"
@@ -39518,8 +39542,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "a6271dfdd8a975587d01abd757cea6c63971c328",
- "synced_at": "2026-11-22T04:56:44+00:00",
+ "synced": "ae7c3eba00b89af4c0425393f7b8ab74a1b328d6",
+ "synced_at": "2026-11-22T05:00:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
