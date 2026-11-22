@@ -29749,13 +29749,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFbFnUQ85w1PAoP34G",
+    "url": "https://claude.ai/code/cse_01RXeukDzJK39oZv9uhhUZZf",
     "opening": "not started"
    },
    "nightly": true,
@@ -29811,6 +29811,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T00:51:38.848Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29826,7 +29830,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-22T00:52:47+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -35479,8 +35483,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "d588c79c64c17812aefd14109e046d362fb737fa",
- "synced_at": "2026-11-22T00:51:13+00:00",
+ "synced": "98ebffb4054bc21bbbcbb7151ff6cc42551fd426",
+ "synced_at": "2026-11-22T00:52:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
