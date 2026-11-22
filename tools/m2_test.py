@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test of the new main menu (menu1 Family, menu2 Vibes and Gear; files engine/m2-*.js and m2.css).
+"""Test of the new main menu (menu1 Family, menu2 Vibes and Gear, menu3 Bag and System; files engine/m2-*.js and m2.css).
 
 Opens the new menu with four in the party and people on the bench at five sizes, fails when a page
 overflows, any text is under 12.5 px, any button is under 44 px, or the text has an em dash; tests the
@@ -180,6 +180,157 @@ def VG(pg, E, name):
     check(E("()=>M2.tab==='family'") is True, f'{name}: tab did not return to Family')
 
 
+def BS(pg, E, name):
+    """Bag and System (menu3) at this size: the list, the item page (a sheet on a tall screen), Use on a hurt person, Wear, the
+    ask-twice Save and Load round trip, the options, the quit question, the build label."""
+    if not E("()=>M2.open"):
+        E("()=>openMenu(false)")
+        pg.wait_for_timeout(900)
+    E("()=>{ M2.tab='bag'; m2Render(); }")
+    tall = E("()=>!M2.dims.wide")
+    ids = E("""()=>{ const a=Object.keys(items); const f=p=>a.find(id=>items[id]&&p(items[id])); return {heal:f(i=>i.heal&&!i.slot&&!i.healAll&&!i.revive&&fieldUsable(i)),
+      all:f(i=>i.healAll),gear:f(i=>i.slot&&canWear(party[0],i)),keep:f(i=>!i.slot&&itemCat(i)==='keep')}; }""")
+    check(bool(ids['heal']) and bool(ids['gear']), f'{name}: no heal or gear item found to test with {ids}')
+    E("""(ids)=>{ bag.length=0; bag.push(ids.heal,ids.heal,ids.heal,ids.gear); if(ids.all) bag.push(ids.all); if(ids.keep) bag.push(ids.keep);
+      party[0].hp=Math.max(1,Math.floor(party[0].maxHp*.4)); party[1].hp=party[1].maxHp; M2.tab='bag'; M2.bagF='all'; M2.bagSel=null; M2.sheet=false; m2Render(); }""", ids)
+    pg.wait_for_timeout(300)
+    t = stats_text(E)
+    check('All' in t and 'Heal' in t and 'Gear' in t, f'{name}: Bag filters missing')
+    check(E("()=>document.querySelectorAll('#m2 .m2-br').length") >= 3, f'{name}: Bag list too short')
+    check(E("()=>document.querySelectorAll('#m2 .m2-br .m2-ip').length===document.querySelectorAll('#m2 .m2-br').length"), f'{name}: a Bag row has no picture')
+    if tall:
+        check(E("()=>!document.querySelector('#m2 .m2-sheet')") is True, f'{name}: the sheet is open before an item is chosen')
+        pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-bag.png'))
+        audit(pg, E, f'{name} bag list')
+        pg.click(f'#m2 [data-m2=item][data-a={ids["heal"]}]')
+        pg.wait_for_timeout(400)
+        check(E("()=>!!document.querySelector('#m2 .m2-sheet')") is True, f'{name}: the item page did not slide up')
+    else:
+        pg.click(f'#m2 [data-m2=item][data-a={ids["heal"]}]')
+        pg.wait_for_timeout(250)
+    t = stats_text(E)
+    check('Use it on' in t and 'to ' in t and 'You have 3' in t, f'{name}: item page lacks Use it on / the end health / the count')
+    check('hurt' in t.lower(), f'{name}: no line about who is hurt most')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-bagitem.png'))
+    audit(pg, E, f'{name} bag item')
+    # the hurt person is first
+    first = E("()=>document.querySelector('#m2 .m2-ur .m2-uname').textContent")
+    check(first == E("()=>party[0].name"), f'{name}: most hurt is not first ({first})')
+    hp0 = E("()=>party[0].hp")
+    pg.click(f'#m2 [data-m2=use][data-a={E("()=>party[0].id")}]')
+    pg.wait_for_timeout(300)
+    check(E("()=>party[0].hp") > hp0, f'{name}: Use did not heal')
+    check(E("(i)=>countInBag(i)", ids['heal']) == 2, f'{name}: the item was not used up one at a time')
+    check(E("()=>M2.dirty") is True, f'{name}: using an item did not mark the menu for an autosave')
+    # a full person has no Use button
+    E("()=>{ party[0].hp=party[0].maxHp; m2Render(); }")
+    check(E("()=>!document.querySelector('#m2 [data-m2=use]')") is True, f'{name}: everyone is full but a Use button shows')
+    # gear: Wear from the Bag
+    E("(i)=>{ M2.bagF='gear'; M2.bagSel=null; M2.sheet=false; m2Render(); }", ids['gear'])
+    pg.click(f'#m2 [data-m2=item][data-a={ids["gear"]}]')
+    pg.wait_for_timeout(300)
+    check('Wear it on' in stats_text(E), f'{name}: gear page has no Wear it on')
+    pg.click(f'#m2 [data-m2=wearbag][data-a={E("()=>party[0].id")}]')
+    pg.wait_for_timeout(300)
+    check(E("(i)=>party[0].equipment[items[i].slot]===i", ids['gear']) is True, f'{name}: Wear from the Bag did not put it on')
+    # Back closes the sheet before it closes the menu
+    if tall:
+        E("(i)=>{ M2.bagF='all'; M2.bagSel=i; M2.sheet=true; m2Render(); }", ids['heal'])
+        E("()=>m2Back()")
+        check(E("()=>M2.open&&!M2.sheet") is True, f'{name}: Back did not close the sheet first')
+    # ---- System ----
+    E("()=>{ localStorage.removeItem('le-save-2'); M2.tab='system'; M2.sure=null; M2.quit=false; m2Render(); }")
+    pg.wait_for_timeout(300)
+    t = stats_text(E)
+    for bit in ('Saved games', 'Back up', 'Restore', 'Quit to title', 'Build', 'Options', 'Music', 'Voices', 'Sound effects', 'Difficulty', 'Battle speed', 'Show what each skill does', 'Less motion'):
+        check(bit in t, f'{name}: System page lacks "{bit}"')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-system.png'))
+    audit(pg, E, f'{name} system')
+    # save: an empty slot saves at once, a used one asks twice
+    key = E("()=>{ const k=SAVE_SLOTS.filter(s=>s!=='auto').find(s=>!readSave(s)); return k; }")
+    coins0 = E("()=>coins")
+    pg.click(f'#m2 [data-m2=save][data-a="{key}"]')
+    pg.wait_for_timeout(300)
+    check(E("(k)=>!!readSave(k)", key) is True, f'{name}: Save here did not save slot {key}')
+    pg.click(f'#m2 [data-m2=save][data-a="{key}"]')
+    pg.wait_for_timeout(200)
+    check(E("(k)=>M2.sure==='save-'+k", key) is True, f'{name}: saving over a used slot did not ask first')
+    check('Replace it?' in stats_text(E), f'{name}: no Replace it? words')
+    audit(pg, E, f'{name} system ask')
+    E("()=>m2Back()")
+    check(E("()=>M2.sure===null&&M2.open") is True, f'{name}: Back did not cancel the ask')
+    # load round trip: change the coins, load, the coins come back and the menu closes
+    E("()=>{ coins+=123; }")
+    pg.click(f'#m2 [data-m2=load][data-a="{key}"]')
+    pg.wait_for_timeout(200)
+    check(E("()=>coins")==coins0+123 and E("()=>M2.open") is True, f'{name}: Load did not ask first')
+    pg.click(f'#m2 [data-m2=load][data-a="{key}"]')
+    pg.wait_for_timeout(1200)
+    check(E("()=>coins")==coins0, f'{name}: Load did not bring the coins back ({E("()=>coins")} vs {coins0})')
+    check(E("()=>!M2.open&&!menuOpen") is True, f'{name}: Load did not close the menu')
+    E("()=>{ openMenu(false); }")
+    pg.wait_for_timeout(800)
+    E("()=>{ M2.tab='system'; m2Render(); }")
+    pg.wait_for_timeout(200)
+    # options
+    for kind in ('music', 'fx'):
+        E("(k)=>setVolume(k,5)", kind)
+        E("()=>m2Render()")
+        pg.click(f'#m2 [data-m2=vol][data-a="{kind}:1"]')
+        check(E("(k)=>sound.vol[k]", kind) == 6, f'{name}: {kind} plus did not raise the volume')
+        pg.click(f'#m2 [data-m2=vol][data-a="{kind}:-1"]')
+        check(E("(k)=>sound.vol[k]", kind) == 5, f'{name}: {kind} minus did not lower the volume')
+    box = E("()=>{ const r=document.querySelector('#m2 .m2-track[data-kind=voice] .m2-rail').getBoundingClientRect(); return [r.left,r.top,r.width,r.height]; }")
+    if not E("()=>layout.rotated"):
+        pg.mouse.click(box[0] + box[2] * .1, box[1] + box[3] / 2)
+        check(E("()=>sound.vol.voice") <= 2, f'{name}: tapping the left of the Voices slider did not lower it')
+        pg.mouse.click(box[0] + box[2] * .98, box[1] + box[3] / 2)
+        check(E("()=>sound.vol.voice") >= 9, f'{name}: tapping the right of the Voices slider did not raise it')
+    E("()=>setVolume('voice',10)")
+    pg.click('#m2 [data-m2=diff][data-a=rose]')
+    check(E("()=>B7.diff") == 'rose', f'{name}: Difficulty Rose did not set')
+    pg.click('#m2 [data-m2=diff][data-a=grace]')
+    check(E("()=>B7.diff") == 'grace', f'{name}: Difficulty Grace did not set')
+    pg.click('#m2 [data-m2=speed][data-a="2"]')
+    check(E("()=>B7.speed") == 2, f'{name}: Battle speed 2x did not set')
+    pg.click('#m2 [data-m2=speed][data-a="1"]')
+    det = E("()=>m2Details()")
+    pg.click('#m2 [data-m2=details]')
+    check(E("()=>m2Details()") == (not det), f'{name}: skill switch did not flip')
+    pg.click('#m2 [data-m2=details]')
+    pg.click('#m2 [data-m2=calm]')
+    check(E("()=>m2Calm()&&M2.root.classList.contains('m2-less')") is True, f'{name}: Less motion did not switch on')
+    pg.click('#m2 [data-m2=calm]')
+    check(E("()=>!m2Calm()&&!M2.root.classList.contains('m2-less')") is True, f'{name}: Less motion did not switch off')
+    sideways = E("()=>!tabletMode.on")
+    check(E("()=>!!document.querySelector('#m2 [data-m2=rotate]')") == sideways, f'{name}: the sideways switch shows only on phones')
+    old = E("()=>!b3sOn()")
+    check(E("()=>!!document.querySelector('#m2 [data-m2=hf]')") == old, f'{name}: old-battle options and the old battle disagree')
+    # the old-battle options show when a chapter on the old battle is played
+    E("()=>{ M2.__s=b3sOn; window.b3sOn=()=>false; m2Render(); }")
+    check(E("()=>!!document.querySelector('#m2 [data-m2=hf]')&&!!document.querySelector('#m2 [data-m2=skip]')") is True, f'{name}: old-battle options missing on the old battle')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-system-old.png'))
+    audit(pg, E, f'{name} system old options')
+    E("()=>{ window.b3sOn=M2.__s; m2Render(); }")
+    # quit asks first and Keep playing returns
+    pg.click('#m2 [data-m2=quit]')
+    pg.wait_for_timeout(200)
+    check('Quit to the title screen?' in stats_text(E), f'{name}: Quit did not ask')
+    pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-quit.png'))
+    audit(pg, E, f'{name} quit ask')
+    pg.click('#m2 [data-m2=quitno]')
+    check(E("()=>!M2.quit&&M2.open") is True, f'{name}: Keep playing did not close the question')
+    # the build label opens the build history, above the menu
+    pg.click('#m2 [data-m2=builds]')
+    pg.wait_for_timeout(500)
+    check(E("()=>{ const b=document.getElementById('buildlog'); return !!b&&!b.hidden; }") is True, f'{name}: the build label did not open the build history')
+    E("()=>buildHistoryClose()")
+    check(E("()=>M2.open") is True, f'{name}: closing the history closed the menu')
+    # Back up and cloud buttons are there
+    check(E("()=>!!document.querySelector('#m2 [data-m2=backup]')&&!!document.querySelector('#m2 [data-m2=restore]')&&!!document.querySelector('#m2 [data-m2=cloud]')") is True, f'{name}: backup buttons missing')
+    E("()=>{ M2.tab='family'; m2Render(); }")
+
+
 with sync_playwright() as pw:
     br = pw.chromium.launch(args=['--headless=new', '--no-proxy-server'])
     for W, H, q, name in SIZES:
@@ -271,11 +422,7 @@ with sync_playwright() as pw:
             pg.screenshot(path=os.path.join(SHOTS, 'm2-duo-noswap.png'))
             E("()=>{ const c=chapterInfo(); c.bench.never=c._old; M2.change=null; m2Render(); }")
 
-            # Bag and System still open today's screens until menu3
-            pg.click('#m2 [data-m2=tab][data-a=bag]')
-            pg.wait_for_timeout(500)
-            check(E("()=>menuOpen") is True, 'Bag did not open')
-            E("()=>{ m2FromLegacy(); }")
+            # Bag and System are pages of the book now (menu3)
             # Back to the game
             E("()=>closeMenu()")
             pg.wait_for_timeout(300)
@@ -295,6 +442,8 @@ with sync_playwright() as pw:
             check(E("()=>!M2.open") is True, 'Escape did not close the menu')
             # the old menu is still there when the switch is Old
             E("()=>{ localStorage.setItem('aot-menu','old'); }")
+        E("()=>{ localStorage.removeItem('aot-menu'); }")
+        BS(pg, E, name)
         check(not errs, f'{name}: console errors {errs[:3]}')
         pg.close()
     # Default is Old

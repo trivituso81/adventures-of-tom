@@ -5,8 +5,8 @@
 // index.html?menu=new forces NEW (?menu=old forces OLD).
 // How it plugs in (nothing in menu.js is edited): openMenu, closeMenu, renderMenu, menuKey, menuPad and menuBack are wrapped here.
 // While the new menu is open `menuOpen` is true, so every system that pauses for the menu (walking, dialogue, timers) still does.
-// Pages: Family (engine/m2-family.js), Vibes and Gear (engine/m2-vibes.js, card menu2). Until their own cards ship, Bag and System open
-// today's Items and Load screens in place of the book (and Old Stampcard opens today's Stamps screen); Back there returns to the book.
+// Pages: Family (engine/m2-family.js), Vibes and Gear (engine/m2-vibes.js, card menu2), Bag and System (engine/m2-bag.js, card menu3).
+// Old Stampcard (a link on Vibes) opens today's Stamps screen in place of the book; Back there returns to the book.
 // Layout: wider than tall = tabs down the left edge and a two-page spread (the gutter at the middle of the screen on the unfolded
 // Duo and on a desktop, where the fold is); taller than wide = one page and the tabs along the bottom edge.
 // Files: engine/m2-core.js (this), engine/m2-family.js (the Family page), m2.css, fonts/bricolage.woff2 and figtree.woff2,
@@ -62,7 +62,7 @@ function m2Root() {
     const b=e.target.closest&&e.target.closest('[data-m2]'); if(!b||b.disabled) return;
     m2Act(b.dataset.m2,b.dataset.a||'',b);
   });
-  M2.root=r;
+  M2.root=r; m2BagWire(r);
   if('ResizeObserver' in window) new ResizeObserver(()=>{ if(M2.open&&!M2.legacy) m2Fit(true); }).observe(document.getElementById('stage'));
   return r;
 }
@@ -126,9 +126,6 @@ function m2Tabs() {
     '<button type="button" role="tab" class="m2-tab" data-m2="tab" data-a="'+t.id+'" data-k="tab-'+t.id+'" aria-selected="'+(t.id===M2.tab)+'">'+m2Icon(t.id,M2.dims.wide&&!M2.dims.compact?24:20)+'<span>'+t.label+'</span>'+
     (t.id==='vibes'&&fresh&&M2.tab!=='vibes'?'<i class="m2-dot" role="img" aria-label="Something new"></i>':'')+'</button>').join('')+'</nav>';
 }
-function m2Soon(label) {
-  return '<div class="m2-soon"><b>'+label+'</b><span>This page is being redrawn. Today\'s screen opens for now.</span><button type="button" class="m2-btn on" data-m2="legacy" data-a="'+M2.tab+'" data-k="soon">Open it</button></div>';
-}
 function m2Render() {
   if(!M2.open||M2.legacy) return;
   const r=M2.root,d=M2.dims||m2Dims(),grid=r.querySelector('.m2-grid');
@@ -139,7 +136,8 @@ function m2Render() {
   if(M2.tab==='family') body=m2FamilyBody(d);
   else if(M2.tab==='vibes') body=m2VibesBody(d);
   else if(M2.tab==='gear') body=m2GearBody(d);
-  else body={l:m2Soon(M2_TABS.find(t=>t.id===M2.tab).label),r:'',single:true};
+  else if(M2.tab==='bag') body=m2BagBody(d);
+  else body=m2SystemBody(d);
   if(d.wide) {
     const rail=d.compact?72:96,gap=8,center=document.documentElement.classList.contains('duo')||d.lw>=900;
     const lw=center?Math.round(d.lw/2-rail-gap):Math.round((d.lw-rail-gap-8)/2);
@@ -150,13 +148,14 @@ function m2Render() {
     grid.style.gridTemplateColumns='minmax(0,1fr)'; grid.style.gridTemplateRows='auto minmax(0,1fr) auto'; grid.style.columnGap='0'; grid.style.padding='calc(env(safe-area-inset-top,0px) + 6px) 0 calc(env(safe-area-inset-bottom,0px) + 8px)';
     grid.innerHTML=m2Top(d)+'<main class="m2-book" style="margin:0 8px"><section class="m2-page l'+(body.cls?' '+body.cls:'')+'" aria-label="Page">'+body.l+'</section></main>'+m2Tabs();
   }
-  r.classList.add('m2-in');
+  r.classList.add('m2-in'); r.classList.toggle('m2-less',m2Calm());
+  if(M2.slide2) { M2.slide2=false; for(const pg of r.querySelectorAll('.m2-page')) pg.classList.add('m2-slide'); }
   if(M2.tab==='family') m2FamilyAfter();
   m2Layout();
   if(keep) { const f=r.querySelector('[data-k="'+keep+'"]')||r.querySelector('.m2-tab[aria-selected="true"]'); if(f) f.focus({preventScroll:true}); }
 }
 // Sizes that depend on measured space: the line-up scale.
-function m2Layout() { if(!M2.open||M2.legacy) return; if(M2.tab==='family') m2FamilyLayout(); else m2PersonLayout(); }
+function m2Layout() { if(!M2.open||M2.legacy) return; if(M2.tab==='family') m2FamilyLayout(); else if(M2.tab==='vibes'||M2.tab==='gear') m2PersonLayout(); }
 
 // ---------- Open and close ----------
 function m2OpenNew(viaKeys) {
@@ -164,7 +163,7 @@ function m2OpenNew(viaKeys) {
   if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
   menuOpen=true; sfx.menuOpen(); clearInput();
   menuTab='home'; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuChar=0;
-  Object.assign(M2,{open:true,legacy:false,tab:'family',sel:0,who:null,bench:false,pick:null,slot:null,peek:null,dirty:false,change:null,keys:!!viaKeys,say:'',mode:'',sig:''});
+  Object.assign(M2,{open:true,legacy:false,tab:'family',sel:0,who:null,bench:false,pick:null,slot:null,peek:null,dirty:false,change:null,keys:!!viaKeys,say:'',mode:'',sig:'',bagF:'all',bagSel:null,sheet:false,sure:null,quit:false,pulled:false,slide:false});
   const r=m2Root(); m2Still(); r.classList.remove('m2-in'); r.hidden=false;
   m2Fonts();
   M2.focusNext=M2.keys?'tab-family':null;
@@ -181,9 +180,9 @@ function m2CloseNew() {
   $('menu').hidden=true; $('menu').classList.remove('saving');
   sfx.menuClose(); canvas.focus();
 }
-// A tab that has no screen of its own yet: today's screen, in place of the book. Back returns to the book.
+// Today's Stamps screen, in place of the book (the Old Stampcard link on Vibes). Back returns to the book.
 function m2OpenLegacy(tab) {
-  const map={gear:'gear',bag:'items',system:'saves',stamps:'stamps'},t=map[tab]||'gear';
+  const t='stamps';
   if(menuChar>=party.length) menuChar=0;
   M2.back=M2.tab; M2.legacy=true; M2.root.hidden=true;
   menuTab=t; menuSlot=null; menuItem=null; menuConfirm=null; menuQuit=false; menuKeyNav=M2.keys; menuFocusNext=M2.keys?'cmd-'+t:null;
@@ -202,14 +201,13 @@ function m2Act(act,a,el) {
   if(act==='close') { m2CloseNew(); return; }
   if(act==='tab') { m2Tab(a); return; }
   if(act==='legacy') { m2OpenLegacy(a); return; }
-  if(M2.tab==='family') m2FamilyAct(act,a,el); else m2PersonAct(act,a,el);
+  if(M2.tab==='family') m2FamilyAct(act,a,el); else if(M2.tab==='bag'||M2.tab==='system') m2BagAct(act,a,el); else m2PersonAct(act,a,el);
 }
 function m2Tab(id) {
   if(id===M2.tab) return;
-  sfx.tab(); M2.tab=id; M2.change=null; M2.pick=null; M2.peek=null; M2.focusNext=M2.keys?'tab-'+id:null;
+  sfx.tab(); M2.tab=id; M2.change=null; M2.pick=null; M2.peek=null; M2.sheet=false; M2.sure=null; M2.quit=false; M2.slide2=true; M2.focusNext=M2.keys?'tab-'+id:null;
   if(id==='vibes'||id==='gear') { if(M2.tab!=='family'&&(!M2.who||!m2People().some(x=>x.id===M2.who))) M2.who=(party[Math.min(M2.sel,party.length-1)]||party[0]).id; }
-  if(id==='family'||id==='vibes'||id==='gear') { m2Render(); return; }
-  m2OpenLegacy(id);
+  m2Render();
 }
 
 // ---------- Keys and the gamepad ----------
@@ -248,6 +246,7 @@ function m2Cycle(d) {
   M2.sel=(M2.sel+d+party.length)%party.length; menuChar=M2.sel; sfx.tab(); M2.focusNext=M2.keys?'p-'+M2.sel:null; m2Render();
 }
 function m2Back() {
+  if((M2.tab==='bag'||M2.tab==='system')&&m2BagBack()) return;
   if(M2.pick!=null) { const k='q-'+M2.pick; M2.pick=null; sfx.tab(); M2.focusNext=M2.keys?k:null; m2Render(); return; }
   if(M2.change) { M2.change=null; sfx.tab(); M2.focusNext=M2.keys?'change':null; m2Render(); return; }
   m2CloseNew();

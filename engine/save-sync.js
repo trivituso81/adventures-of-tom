@@ -199,6 +199,7 @@ function syncRedraw() {
   try {
     if(typeof splash!=='undefined'&&splash.active&&splash.mode==='ask'&&typeof SPLASH_MODES!=='undefined'&&SPLASH_MODES.ask&&SPLASH_MODES.ask.tab==='Load'&&typeof loadMenu==='function') { loadMenu(true); return; }
     if(typeof menuTab!=='undefined'&&menuTab==='saves'&&typeof menuOpen!=='undefined'&&menuOpen&&typeof renderMenu==='function') renderMenu();
+    if(typeof M2!=='undefined'&&M2.open&&!M2.legacy&&M2.tab==='system') renderMenu();   // the new menu's System page lists them too
   } catch(e) {}
 }
 
