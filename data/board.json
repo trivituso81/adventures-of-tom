@@ -27092,7 +27092,7 @@
    "id": "svc-voice-gen",
    "service": "voice-gen",
    "lane": "elevenlabs",
-   "col": "prog",
+   "col": "wait",
    "theme": "Tools",
    "title": "voice-gen is running",
    "next": "voice-gen is running",
@@ -27109,6 +27109,10 @@
     {
      "d": "2026-11-22",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Stuck twice: The rescue started 12:00 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-svvoice-gen)."
     }
    ],
    "blocks": [],
@@ -27123,7 +27127,8 @@
     "url": "https://claude.ai/code/cse_01RXeukFUnqXV1DXsh3DVPzG",
     "prev": ""
    },
-   "started_at": "2026-11-22T08:00:22+00:00"
+   "started_at": "2026-11-22T08:00:22+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-fix-artgen3try-2",
@@ -28904,7 +28909,7 @@
   {
    "id": "c-wanstop-tom-rose-giddyup-r1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-rose-giddyup-r1",
    "title": "Fix the stopped video tom-rose-giddyup",
@@ -28912,18 +28917,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-pairmove1-gen",
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDKRyWfnM5DgpkTYMR",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44996404459): tom-rose-giddyup stopped at rev 1. attempt 1 (pad 0.65) feet, edge. This animation has used 2 of its 4 tries ($1.57 of $3.20). Evidence: feet: lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent; edge: the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -28934,12 +28942,13 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-rose-giddyup-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-rose-giddyup (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed: feet, edge. Evidence: feet: lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent; edge: the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87). This animation has used 2 of its 4 tries ($1.57 of $3.20). Its files are on branch wangen: tom-rose-giddyup-r1-result.json (every check with numbers and the look-check answers) and the videos tom-rose-giddyup-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-pairmove1-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.79, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-rose-giddyup-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-pairmove1-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-rose-giddyup-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T14:23:01+00:00"
   },
   {
    "id": "c-wanstop-tom-blockade-r4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-blockade-r4",
    "title": "Fix the stopped video tom-blockade",
@@ -28947,18 +28956,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-movefun-gen",
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFspS715bzf1Xr8DqW",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (44996404459): tom-blockade stopped at rev 4. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) edge, p1. This animation has used 0 of its 4 tries ($0.00 of $3.20). Evidence: edge: the figure touches the right edge in 1 of 150 pictures (video frames 32); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Hip bump missing; no clear side hip movement shown)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -28969,7 +28981,8 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-blockade-r4 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-blockade (rev 4) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge, p1. Evidence: edge: the figure touches the right edge in 1 of 150 pictures (video frames 32); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Hip bump missing; no clear side hip movement shown). This animation has used 0 of its 4 tries ($0.00 of $3.20). Its files are on branch wangen: tom-blockade-r4-result.json (every check with numbers and the look-check answers) and the videos tom-blockade-r4.mp4, tom-blockade-a2-r4.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movefun-gen to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-blockade-r4` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movefun-gen` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-blockade-r4. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-22T14:23:01+00:00"
   },
   {
    "id": "c-fix-menu4play-3",
@@ -29187,7 +29200,7 @@
    "title": "Battle stage 19: third Vibes, four in a conversation",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3. Can start now: c-b3s16 shipped as b3s16.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29219,13 +29232,18 @@
     {
      "d": "2026-11-22",
      "t": "Built stage 19 (build b3s19): ten third Vibes (40 moves, 10 Traits, 20 Quirks, 32 statuses, new ops), old saves load them at 0 VP with no migration, Battle 2 untouched, Battle Guide no longer lists them as planned. No four-in-a-conversation game rule exists in any document, so none was built; every move is tested in four-member parties. Tests: b3-sim check 4049 FAILS [], b3_test s4 FAILS [], one Lab fight per Vibe (all ten open with the new move), Vibes screen looked at in portrait and landscape. Not from this stage: m2_test two GitHub 403 rate-limit console errors; Battle Guide test keeps three failures (engine/clip-ground.js loaded by the page, plan counts follow the live board)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s19: the third Vibe of each of the ten characters is in Battle 3 (40 new moves, 20 Quirks), and old saves load it at 0 Vibe Points"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD69XD6MhKUjtiGGmR",
     "opening": "\"Read claude/battle-build.md, claude/battle-architecture.md section 5 (rows 19 to 21) and docs/BATTLE3.md...\""
    },
-   "after": "nothing for Tom: c-b3s20"
+   "after": "nothing for Tom: c-b3s20",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s20",
@@ -29420,6 +29438,39 @@
     "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
     "opening": "unknown"
    }
+  },
+  {
+   "id": "t-stuck-svvoice-gen",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "unstick",
+   "unstick": {
+    "card": "svc-voice-gen",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: voice-gen is running",
+   "next": "Card svc-voice-gen (voice-gen is running) stalled again after its one automatic rescue. The rescue started 12:00 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "svc-voice-gen"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by board-sync: card svc-voice-gen stalled after its rescue"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
+    }
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "fyi": true
   }
  ],
  "sessions": [
@@ -29480,6 +29531,18 @@
    ],
    "cards": [
     "c-fix-menu4play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD69XD6MhKUjtiGGmR",
+   "title": "Battle stage 19: third Vibes, four in a conversation",
+   "first": "2026-11-22T00:22:04-08:00",
+   "last": "2026-11-22T06:22:02-08:00",
+   "tags": [
+    "b3s19"
+   ],
+   "cards": [
+    "c-b3s19"
    ]
   },
   {
@@ -29923,16 +29986,6 @@
    "tags": [],
    "cards": [
     "c-b3look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD69XD6MhKUjtiGGmR",
-   "title": "Battle stage 19: third Vibes, four in a conversation",
-   "first": "2026-11-22T00:22:04-08:00",
-   "last": "2026-11-22T00:22:04-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s19"
    ]
   },
   {
@@ -34868,8 +34921,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "1921ef50e46303bb1ae0821a51ba71fd6e4dabcc",
- "synced_at": "2026-11-22T09:09:59+00:00",
+ "synced": "b0396e5b3f9f272488f58c1758a6a29f8d80fd11",
+ "synced_at": "2026-11-22T14:23:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
