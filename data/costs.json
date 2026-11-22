@@ -945,6 +945,24 @@
    "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184",
    "at": "2026-11-22T07:16:01Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997372184"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-22",
+   "amount": 0.16,
+   "what": "Art Library pictures made on WAN 2.7 by the art-gen Action (prop-gate-town-school-open, prop-gate-jpark-barn-open)",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947",
+   "at": "2026-11-22T07:17:08Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-22",
+   "amount": 0.027,
+   "what": "Art Library pictures and their QA checks made on xAI by the art-gen Action ()",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947",
+   "at": "2026-11-22T07:17:08Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44997441947"
   }
  ],
  "balances": [
