@@ -30010,7 +30010,7 @@
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
-   "col": "up",
+   "col": "done",
    "title": "Look at the new chapter title cards",
    "next": "Open the game from your home screen (close and reopen once if you see the old look). Tap NEW GAME, pick any chapter, and watch the title card at the start: a cream paper card with the chapter number and name, like the main menu. Check it in portrait and in landscape.",
    "first": "Wait for Chapter headings in the storybook look of the main menu to ship (build chaptercard1).",
@@ -30027,8 +30027,14 @@
      "d": "2026-11-22",
      "t": "Made by the session that built chaptercard1.",
      "at": "2026-11-22T17:17:01.379Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T22:12:38.648Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "c-fix-guideboot",
