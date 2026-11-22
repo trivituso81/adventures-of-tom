@@ -1,3 +1,13 @@
+## fix-menu4play (2026-11-22): on the Vibes page a person's name no longer wraps or gets cut off (Deedee)
+
+Card c-fix-menu4play, from t-menu4play. Tom: "On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view".
+
+| Change | Detail |
+|---|---|
+| Cause | The person's picture took 52% of the width, so the name box was narrow and `word-break:break-word` split Deedee into "Deede" and "e". |
+| Fix | `m2.css`: the picture area is 44% (the name area moves left and gets wider), the name is 36 px instead of 40 and never breaks inside a word. |
+| Test | `tools/m2_test.py` fails if any party member's name wraps or runs out of its box, and saves `tools/shots/m2-<size>-deedee-vibes.png`. All sizes pass. |
+
 ## wanfeedback1 (2026-11-21): every video card says in one plain line what its last run did, and a dropped tap says so
 
 Card c-wanfeedback1. Tom (22:12): "why I repeatedly have to click regenerate in the board with zero feedback on what happened after the last generation". Cause: the result was only shown with the card opened, left out "already made" and "out of tries", showed raw errors, and a run that crashed or a tap GitHub dropped wrote nothing at all. Now (board.html `wanSummary`, `wanPlain`, `wanDropped`): a yellow line on the card, e.g. "Last run (9:55 PM): rose-cast: fal.ai (the video service) is out of money. Add credit at fal.ai/dashboard/billing, then tap Generate again."; a tap that has not started after 15 minutes says "never started: GitHub dropped the run. Tap Generate again." and the button works again; a run that ends without writing its result is marked failed with the error line by the new last step of the wan-gen job (tools/art-library/wan_runfail.py). Tests: wanbulk_test B14, board_wan_test.

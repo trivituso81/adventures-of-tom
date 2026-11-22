@@ -33716,7 +33716,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
-   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, load a game and open the menu. Go through Family, Vibes, Gear, Bag and System: change someone's Main Vibe, put on a piece of gear, use a healing item, save. Then do the same once on the iPhone held upright. Also open title > Admin > Battle Lab > NEW BATTLE > VIBES AND RANKS: it is the same Vibes page, with a row of Rank 1 to 5 buttons. About 10 minutes. Judge looks and feel only: is everything easy to read, does each page make sense at a glance, does moving between people and pages feel right. Tap All good, or Something is wrong and say what to change.",
+   "next": "Fix shipped (build fix-menu4play). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu > Vibes and tap Deedee's face at the top. Her name Deedee should now sit on ONE line, fully visible, with the picture a little narrower. Check the other people's names too. Then finish the rest of the walk: Family, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
     "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
@@ -33744,6 +33744,10 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: On the vibes screen Deedee name is cut off. I think you could slightly shift that area to the left but don't break the view Sent to Claude as card c-fix-menu4play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T06:10:52.060Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fix shipped for \"On the vibes screen Deedee name is cut off\": the name area is wider and the name no longer breaks inside a word (build fix-menu4play)."
     }
    ],
    "waiting_on": "claude"
@@ -35272,6 +35276,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Fixed: picture area 52% to 44%, name 36 px and never breaks; m2_test checks every name on one line (build fix-menu4play)."
     }
    ],
    "prompt": {

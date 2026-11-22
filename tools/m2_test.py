@@ -84,6 +84,16 @@ def VG(pg, E, name):
     pg.wait_for_timeout(300)
     t = stats_text(E)
     check('Health' in t and 'Attack' in t and 'Defense' in t and 'Speed' in t, f'{name}: Vibes header lacks the four numbers')
+    # fix-menu4play (Tom: "On the vibes screen Deedee name is cut off"): no name breaks across lines or runs out of its box
+    for i in range(E("()=>party.length")):
+        E("()=>{ M2.sel=%d; M2.who=null; m2Render(); }" % i)
+        pg.wait_for_timeout(120)
+        w = E("()=>{ const n=document.querySelector('#m2 .m2-wn'); if(!n) return null; const r=n.getBoundingClientRect(), f=parseFloat(getComputedStyle(n).fontSize); return [Math.round(r.height/f*10)/10, n.scrollWidth-n.clientWidth, n.textContent]; }")
+        if w:
+            check(w[0] <= 1.3 and w[1] <= 1, f'{name}: the name {w[2]} wraps or is cut off {w}')
+            if w[2] == 'Deedee':
+                pg.screenshot(path=os.path.join(SHOTS, f'm2-{name}-deedee-vibes.png'))
+    E("()=>{ M2.sel=0; M2.who=null; m2Render(); }")
     check('Freelancer' in t and 'Master all' in t, f'{name}: locked Freelancer chip missing')
     n = E("()=>document.querySelectorAll('#m2 .m2-vc:not(.lock)').length")
     check(n == E("()=>B3_CAST[m2Who().id].vibes.length"), f'{name}: {n} Vibe chips')

@@ -226,11 +226,11 @@
 #m2 .m2-more[aria-pressed="true"]{background:var(--lamp)}
 /* person, level, XP */
 #m2 .m2-stage{position:relative;flex:1 1 auto;min-height:130px;display:flex;align-items:flex-end;border-bottom:2px solid var(--ink);margin-top:8px}
-#m2 .m2-hero{position:relative;flex:0 0 52%;height:100%;min-height:0}
+#m2 .m2-hero{position:relative;flex:0 0 44%;height:100%;min-height:0}
 #m2 .m2-hfig{position:absolute;left:50%;bottom:0;transform:translateX(-50%);mix-blend-mode:multiply;pointer-events:none;display:block}
 #m2 .m2-who{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px;padding:0 0 12px 4px}
 #m2 .m2-lvl{font-size:15px;font-weight:700;color:var(--soft)}
-#m2 .m2-wn{font:800 40px/1 var(--disp);letter-spacing:-.02em;word-break:break-word}
+#m2 .m2-wn{font:800 36px/1 var(--disp);letter-spacing:-.02em;overflow-wrap:normal;word-break:normal;white-space:nowrap}
 #m2 .m2-xb{height:8px;border-radius:8px;background:rgba(43,26,51,.15);overflow:hidden;display:block;margin-top:4px}
 #m2 .m2-xb i{display:block;height:100%;background:var(--gold);border-radius:8px}
 #m2 .m2-xt{font-size:13px;color:var(--soft)}
