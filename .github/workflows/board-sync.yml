@@ -40,6 +40,8 @@ jobs:
             docs
             tools
             .github
+      - name: numpy for the stage-job check in board_check.py (boardnumpy1)
+        run: pip install numpy --break-system-packages -q || pip install numpy -q || echo "numpy not installed; board_check skips the stage-job check"
       - name: A pushed board file holds merge-conflict markers (boardwedge1)
         # named here, in the run summary, instead of only failing the later check step
         run: |

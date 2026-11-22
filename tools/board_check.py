@@ -175,7 +175,9 @@ for c in d['cards']:
         except Exception: wanbake = None
         for j in w['jobs']:
             if j not in WJ or j.startswith('_'): bad.append('%s: wan.jobs names %r, which is not a job in wangen-jobs.json' % (n, j)); continue
-            for p in (wanbake.check_spec(WJ[j]) if wanbake else []): bad.append('%s: job %s: %s' % (n, j, p))
+            try: specp = wanbake.check_spec(WJ[j]) if wanbake else []
+            except ImportError: specp = []   # boardnumpy1: a stage job's check needs numpy; a runner without it skips that one check instead of crashing the whole board sync
+            for p in specp: bad.append('%s: job %s: %s' % (n, j, p))
         top = float((WJ.get('_bulk') or {}).get('cap', 20))
         if 'cap' in w and not (isinstance(w['cap'], (int, float)) and 0 < w['cap'] <= top): bad.append('%s: wan.cap is a number above 0 and at most the job file\'s _bulk.cap (%s)' % (n, top))
 # dash3: the shape of `jump` and `where` on a Tom play card

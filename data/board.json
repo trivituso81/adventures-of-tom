@@ -30946,6 +30946,30 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-startpics-try"
+  },
+  {
+   "id": "b-board-numpy",
+   "tag": "board-numpy",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-22",
+   "theme": "Project Ops",
+   "title": "Board sync was stuck: the check step crashed because the GitHub runner has no numpy",
+   "next": "Done: board_check.py skips the one stage-job check when numpy is missing, and the board-sync workflow installs numpy. Nothing for Tom.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFbF2rd3BZypUr39Xq",
+    "opening": "\"the board is stuck yet again\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"the board is stuck yet again ... The last sync failed and the board was last synced at 11:14 AM\". Cause: board_check.py imports wanstage (numpy) for stage jobs; the runner has no numpy, so every sync run died before pushing. Fixed in board-numpy."
+    }
+   ],
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
