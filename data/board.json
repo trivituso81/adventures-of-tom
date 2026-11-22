@@ -30395,7 +30395,7 @@
    "title": "Battle videos in bulk: checks and retries inside the Action",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "tag": "wanbulk",
    "next": "Built. A Tom card with a `wan` job list has Generate all N videos; the wan-gen Action makes the jobs, measures and look-checks each video, retries an edge-only miss once with a smaller picture, stops anything else with an Opus card, and bakes and wires what passes. Nothing was paid for in the session. The first real use is c-wanch5 (Rose Giddyup and Deedee Wet-Floor).",
    "blocks": [],
@@ -30418,6 +30418,10 @@
     {
      "d": "2026-11-21",
      "t": "Built (wanbulk): wanqa.py (the checks), wanbake.py (bake and wire from the job), wanbulk.py (the run), wangen.py --bulk and --replay-checks, wan-gen.yml (starts on the commit board: wan generate <id>), board.html (Generate all N videos on a card with `wan`), board_check.py (shape of wan), wangen-jobs.json (_bulk: cap 20, pads none 0.8 0.65; airborne on rose-giddyup; returns false on the four knock-outs). Tests: wanbulk_test.py (pass, edge retry, stop, cap, bake and wire, cards, second tap), wangen_test.py W1 to W13, board_wan_test.py. Replay of the stored r4 videos: rose-giddyup fails the edge check only, deedee-wetfloor fails feet (9.5 percent) and edge, as plan 4.10 says. Replay of all 46 final videos: 12 pass every measurement, 32 fail at least one (feet 23, edge 11), see plan 4.12. No paid run was made; the first paid bulk run is Tom's tap."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanbulk: battle videos are made, checked and put in the game by one board button"
     }
    ],
    "prompt": {
@@ -30429,7 +30433,12 @@
     "effort": "high (a new automated check and retry loop designed and built in one session)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (sections 4.4, 4.7 to 4.10), then card c-wanbulk in data/board.json with its history (Tom's words). Your first push is the commit board: start c-wanbulk. Build wanbulk: (1) in tools/art-library/wangen.py, after each video, run plan 4.4 checks 3 to 5 as measurements (standing height first against last within 2 percent, feet row within 1 percent of the frame height in every picture, flat magenta background, figure never touches an edge, last picture against first under 3 of 255) and checks 1 and 2 as a vision checklist built the way tools/art-library/artqa.py works (three runs, majority; the motion sentence of the job's prompt is the requirement), written to the job's result on branch wangen; (2) a job that fails only on an edge check is retried once automatically with the next pad from a list in the job file (none, 0.8, 0.65), a job that fails anything else or fails twice is marked stopped and gets one Claude card (Opus 5.5 medium) with the evidence; (3) a job that passes is baked by the bake settings stored on the job (bake_clip.py kind, fps, step, marks found the way clipmarks.py finds them) and wired from a `wire` field on the job, then one Tom card (ask animations) lists every new clip of the run; (4) a Generate all N videos button on a Tom card that lists jobs, which saves the request with a commit the way an art-gen `gen` request does and starts wan-gen, never past the job file's cap. Tests with the stand-in fal server (wangen_test.py) for pass, edge retry, stop and cap; replay the checks on the stored r4 videos of rose-giddyup and deedee-wetfloor on branch wangen and confirm they fail the way plan 4.10 says. A session never makes a paid run; the first paid bulk run is Tom's tap. Build tag wanbulk. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: c-wanch5"
+   "after": "nothing for Tom: c-wanch5",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
+    "opening": "unknown"
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-anim-deedee-dodge-y4m3",
@@ -31220,6 +31229,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
+   "title": "Battle videos in bulk: checks and retries inside the Action",
+   "first": "2026-11-21T15:20:15-08:00",
+   "last": "2026-11-21T15:59:57-08:00",
+   "tags": [
+    "wanbulk"
+   ],
+   "cards": [
+    "c-wanbulk"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGnVk2pzbLKvYJUt9V",
    "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
    "first": "2026-11-21T14:54:35-08:00",
@@ -31250,16 +31271,6 @@
     "c-anim-deedee-give-yy1o",
     "c-anim-deedee-windex-z9p8",
     "c-anim-deedee-scrub-1irj"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDr9BZptnzQTu36GJ5",
-   "title": "Battle videos in bulk: checks and retries inside the Action",
-   "first": "2026-11-21T15:20:15-08:00",
-   "last": "2026-11-21T15:20:15-08:00",
-   "tags": [],
-   "cards": [
-    "c-wanbulk"
    ]
   },
   {
@@ -35208,8 +35219,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0556adf1c3cc215865937ab2db3325512de3ee98",
- "synced_at": "2026-11-21T23:54:13+00:00",
+ "synced": "827526b99e8836d7a164b5181396d5d8c08aec85",
+ "synced_at": "2026-11-22T00:00:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
