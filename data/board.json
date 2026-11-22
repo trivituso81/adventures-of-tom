@@ -29775,7 +29775,7 @@
    "title": "Start pictures for the rest of the cast",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startpics1",
    "next": "Built as startpics1: the Battle Guide now shows Make the start picture ($0.15) for Amy, Boppy, Justin, Olivia, TNB and Nara; the GitHub job makes it from their hero picture, checks it and puts it in the game, which turns on their video buttons. Nothing was paid for in testing. Waits on your card Make the start pictures in the Battle Guide (t-startpics-try).",
    "blocks": [],
@@ -29795,6 +29795,10 @@
      "d": "2026-11-22",
      "t": "Built startpics1. Found how Tom, Grace, Rose and Deedee were made: the hero picture redrawn facing left on flat magenta by Nano Banana (no cutout; the cutout is done to the finished video in the bake). Added the same jobs for the six others, a Make the start picture button with a facing check and mirror, and each person's sprite height. No money was spent; the first picture is Tom's tap.",
      "at": "2026-11-22T15:11:46.442Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics1: the Battle Guide can make the start picture for Amy, Boppy, Justin, Olivia, TNB and Nara, which turns on their video buttons"
     }
    ],
    "prompt": {
@@ -29806,7 +29810,8 @@
     "effort": "medium (the recipe exists; this repeats it for six more people)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics in data/board.json. Your first push is the commit board: start c-startpics. Add start jobs to tools/art-library/wangen-jobs.json for amy, boppy, justin, olivia, tnb and nara from their hero pictures, a request path so the Battle Guide can make a start picture with two taps, and checks for facing and height. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-startpics-try"
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   },
   {
    "id": "t-startpics-try",
@@ -29923,6 +29928,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+   "title": "Start pictures for the rest of the cast",
+   "first": "2026-11-22T06:57:31-08:00",
+   "last": "2026-11-22T07:17:17-08:00",
+   "tags": [
+    "startpics1"
+   ],
+   "cards": [
+    "c-startpics"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCuaGvB32C87NhKN8e",
    "title": "Battle Guide videos stuck at CHECKING all night",
    "first": "2026-11-22T06:58:22-08:00",
@@ -29933,16 +29950,6 @@
    ],
    "cards": [
     "c-guidestuck1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
-   "title": "Start pictures for the rest of the cast",
-   "first": "2026-11-22T06:57:31-08:00",
-   "last": "2026-11-22T06:57:31-08:00",
-   "tags": [],
-   "cards": [
-    "c-startpics"
    ]
   },
   {
@@ -35373,8 +35380,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "200e4858288a86ae45e0f58b65b2037fd7d10e4d",
- "synced_at": "2026-11-22T15:13:28+00:00",
+ "synced": "51ebf93e55c64193dda05ed3d67c103012e85e43",
+ "synced_at": "2026-11-22T15:17:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
