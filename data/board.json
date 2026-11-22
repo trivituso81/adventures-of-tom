@@ -34356,10 +34356,16 @@
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T04:56:15Z",
     "n": 3,
-    "est": 1.79
+    "est": 1.79,
+    "run": {
+     "state": "running",
+     "at": "2026-11-22T04:59:27Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44987261923",
+     "n": 3
+    }
    },
    "history": [
     {
