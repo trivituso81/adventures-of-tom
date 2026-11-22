@@ -29716,7 +29716,7 @@
    "title": "Win a fight while Tom is guarding and check he celebrates",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "RELOAD on the title, open ADMIN > BATTLE LAB > NEW BATTLE, put Tom in the party, press his Guard, then finish the last monster while the guard is still up. Tom should switch to his victory celebration like the others. Report with the REPORT tab if he stays in the guard pose (guardwin1 is the build to name).",
@@ -29731,6 +29731,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by guardwin1: your phone check of the guard-then-win fix; blocks nothing."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T01:03:52.206Z"
     }
    ],
    "first": "After the publish of build guardwin1 (a minute or two after the push).",
@@ -29742,7 +29747,8 @@
    "jump": {
     "fight": "new",
     "i": 0
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "c-night-qa",
