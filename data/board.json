@@ -21153,11 +21153,11 @@
    "title": "Nightly refactoring, one small piece a night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
-   "next": "Waits on the card Fix the 13 tests that already fail, and on 7 nights in a row with no failing test (the card Last night shows the count). Then tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort high. Refactoring means rewriting working code to be tidier without changing what the game does. It is the riskiest night job, so it comes last: the session writes a list of small pieces and creates the standing card Night refactor, which does one piece a night and puts a piece back when a test or a frame differs.",
+   "col": "wait",
+   "next": "Waits on the night test run (GitHub): 7 nights in a row with no failing test. The fix card for the failing tests is done. When the 7th clean night is in, tell me or tap Copy prompt on this card and paste it into a new conversation on Claude Sonnet 5.5, effort high. Refactoring means rewriting working code to be tidier without changing what the game does. It is the riskiest night job, so it comes last: the session writes a list of small pieces and creates the standing card Night refactor, which does one piece a night and puts a piece back when a test or a frame differs.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -21170,6 +21170,10 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix the last failing test (ch20_test) is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Moved to Waiting on GitHub: its only open condition is 7 clean night test runs, which the board cannot count by itself, so it no longer sits in Start next. Tom asked why it kept showing."
     }
    ],
    "prompt": {
@@ -21184,7 +21188,8 @@
     "text": "Read CLAUDE.md (Hard rules, How to work), docs/ARCHITECTURE.md, claude/handoff-rules.md, claude/night-plan.md (sections 1 to 4 and 10) and the Gotchas of claude/next.md, then card c-nightrefactor in data/board.json with its history. Your first push is the commit board: start c-nightrefactor. First check branch night: if the last 7 files under tests/ do not all show zero failing tests, write a history line containing \"ended without shipping\" with the count, leave the card in Up next and stop. Otherwise write claude/refactor-plan.md: a list of small pieces, smallest risk first (dead functions and constants nothing names, duplicated helpers, a file split along an existing seam), each naming its files, the tests in tools/night/tests.json that cover it, and the scenes or fights whose frames are compared before and after. No piece changes a value, a line of dialogue, a data file, the load order of index.html or anything under demo/. Then create the standing card c-night-refactor (nightly: true, tag nightrefactor, Sonnet 5.5 medium, theme Project Ops) whose prompt says: do the next piece of claude/refactor-plan.md, run its tests and python3 tools/smoke.py, compare its frames, and when anything differs put the piece back the same night and mark it \"needs a person\" in the plan. Do the first piece yourself to prove the method. Push build nightrefactor as CLAUDE.md says. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "tag": "nightrefactor",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "waiting_on": "github"
   },
   {
    "id": "b-board-night",
@@ -31143,6 +31148,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built: Runs every night section on the Claude tab, START and Copy prompt removed from standing cards, Nightly refactoring moved to Waiting on GitHub."
     }
    ],
    "prompt": {

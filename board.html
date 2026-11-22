@@ -394,17 +394,18 @@ function statusOf(c){
   if(c.lane==='tom')return c.col==='wait'?(waitsOnClaude(c)?'back':'queued'):'mine';
   if(attnWhy(c))return 'attn';
   if(c.col==='prog'||c.start)return 'run';
+  if(c.nightly)return 'standing';   // standingfix: a standing card is never ready to start; the night shift runs it
   if(c.col==='wait'||blockedBy(c).length)return 'queued';
   return 'ready';
 }
 const byStatus=k=>open().filter(c=>statusOf(c)===k);
-const secYour=()=>byStatus('mine'),secBack=()=>byStatus('back'),secReady=()=>byStatus('ready'),secRun=()=>byStatus('run'),secQueued=()=>byStatus('queued'),secAttn=()=>byStatus('attn');
+const secYour=()=>byStatus('mine'),secBack=()=>byStatus('back'),secReady=()=>byStatus('ready'),secRun=()=>byStatus('run'),secQueued=()=>byStatus('queued'),secAttn=()=>byStatus('attn'),secStanding=()=>byStatus('standing');
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
 // startmore: the task for a model and effort. An exact match first; a low effort card goes to the same model's medium task. Fable has no task, so it never starts.
 const routineIn=(rs,model,effort)=>{model=String(model||'');effort=String(effort||'');const same=(rs||[]).filter(r=>model.startsWith(r.model));
   return same.find(r=>effort.startsWith(r.effort))||(effort.startsWith('low')?same.find(r=>r.effort==='medium'):null)||null;};
 const routineFor=c=>{const p=c.prompt;if(!p)return null;return routineIn(B.routines,p.model,p.effort);};
-const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&!c.backlog&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
+const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&!c.backlog&&c.lane==='claude'&&!c.nightly&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
 const sessionFor=c=>(B.sessions||[]).find(s=>s.url&&s.url===(c.chat||{}).url);
 const modelShort=c=>{const p=c.prompt;if(!p)return '';return String(p.model||'').split(' (')[0].replace('Claude ','')+', '+String(p.effort||'').split(' ')[0];};
 function convState(s){
@@ -476,8 +477,10 @@ const doText=c=>c.lane==='tom'?c.next:((c.prompt&&c.prompt.what&&c.col!=='done')
 const days=n=>n+' day'+(n===1?'':'s');
 // The one state line, picked in the plan's order: Needs attention reason, After (what it waits on), Unblocks, Returns to you when fixed. A Working now card
 // shows its last push and chat link instead (that is its state). Tom's open cards add "N days quiet" from one day on (the age pill is gone).
+const lastResult=c=>{const h=(c.history||[]).slice().reverse().find(x=>/^(Ran|Night run|Night QA run|Night cleanup)/.test(String(x.t||'')));return h?String(h.t):'';};
 function stateLine(c,ctx){
   if(c.col==='done')return '';
+  if(ctx==='standing'){const r=lastResult(c);return '<div class="state">Last run '+esc((c.last_run&&c.last_run.date)||'never')+(r?': '+esc(r.length>140?r.slice(0,137)+'...':r):'')+'</div>';}
   if(ctx==='backlog')return '<div class="state">'+esc(laneName(c.lane))+(c.backlog&&c.backlog.at?' \u00B7 parked '+esc(c.backlog.at):'')+'</div>';
   if(rescueRunning(c))return '<div class="state">Rescue started '+esc(clock(Date.parse(c.rescue.at)))+'. '+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener">Open chat</a>':'')+'</div>';
   const w=attnWhy(c);if(w)return '<div class="state quiet">'+esc(w)+'</div>';
@@ -528,7 +531,7 @@ const qmatch=c=>{if(!query)return true;const h=[c.title,c.next,c.tag,c.id,c.them
 const shippedAll=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&themeOk(c)&&qmatch(c)).sort((a,b)=>String(b.done).localeCompare(String(a.done)));
 function counts(){tokbar();
   const f=k=>byStatus(k).filter(qmatch);
-  const n={mine:f('mine').length,claude:f('ready').length+f('run').length+f('queued').length+f('attn').length,attn:f('attn').length};
+  const n={mine:f('mine').length,claude:f('ready').length+f('run').length+f('queued').length+f('attn').length+f('standing').length,attn:f('attn').length};
   const cnt={for:n.mine,claude:n.claude,backlog:secBacklog().filter(qmatch).length};
   const on=k=>wideNow()&&(view==='for'||view==='claude')?(k==='for'||k==='claude'):view===k;
   $('tabs').innerHTML=VIEWS.map(v=>'<button type="button" role="tab" data-view="'+v[0]+'" aria-selected="'+(on(v[0])?'true':'false')+'" class="'+(on(v[0])?'on ':'')+(v[0]==='for'&&n.mine?'me':'')+'">'+v[1]+(v[0] in cnt?' <b>'+cnt[v[0]]+'</b>':'')+'</button>').join('');
@@ -557,6 +560,7 @@ function renderSections(){
     +sec('back','COMING BACK TO YOU','waiting on a Claude fix, then back to you',secBack().filter(ok),c=>cardHtml(c,'back'),false);
   $('vClaude').innerHTML='<h2 class="vt">Claude</h2>'+sec('ready','START NEXT','ready to start',secReady().filter(ok),c=>cardHtml(c,'ready'),true)
     +sec('run','WORKING NOW','Claude is on these',secRun().filter(ok),c=>cardHtml(c,'run'),true)
+    +sec('standing','RUNS EVERY NIGHT','the night shift starts these; nothing to tap',secStanding().filter(ok),c=>cardHtml(c,'standing'),true)
     +sec('queued','QUEUED','waiting behind another card',secQueued().filter(ok),c=>cardHtml(c,'queued'),true)
     +sec('attn','NEEDS ATTENTION','late, failed or stopped',secAttn().filter(ok),c=>cardHtml(c,'attn'),true,false,true);
   const cv=recentConvs().filter(s=>!query||(String(s.title||'')+' '+(s.tags||[]).join(' ')).toLowerCase().indexOf(query.toLowerCase())>=0);
@@ -914,11 +918,11 @@ function openSheet(id){
   const w=open_?attnWhy(c):'';
   if(w) body+='<p class="err" style="font-size:14px;margin-top:10px">Needs attention: '+esc(w)+'</p>';
   else if(c.start_error&&open_) body+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
-  if(c.nightly) body+='<h4>Runs every night</h4><p>Last run '+esc((c.last_run&&c.last_run.date)||'never')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+'.</p>';
+  if(c.nightly) body+='<h4>Runs every night</h4><p>Starts by itself between 11 pm and 3 am, so there is no START. Last run '+esc((c.last_run&&c.last_run.date)||'never')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+(lastResult(c)?': '+esc(lastResult(c)):'')+'.</p>';
   if(open_&&(c.col==='wait'||bb.length)) body+='<h4>Waiting on</h4><p>'+(bb.length?esc(bb.map(x=>dispTitle(x)).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?'. When it ships, this card comes back to you to check again.':'')+'</p>';
   if(bl.length){const back=!tom&&bl.every(x=>x.lane==='tom');
     body+='<h4>'+(tom?'Why it matters':back?'Returns to you when fixed':'Unblocks')+'</h4><p>'+(tom?'It unblocks: ':'')+esc(bl.map(x=>dispTitle(x)).join('; '))+'</p>';}
-  if(p&&!c.service&&open_){   // a finished card's prompt is history: not shown
+  if(p&&!c.service&&open_&&!c.nightly){   // a finished card's prompt is history: not shown; a standing card has no prompt to paste
     const bf=(p.before||[]).filter(x=>!NOTHING_FIRST.test(String(x)));
     if(bf.length) body+='<h4>Before you paste</h4><ol>'+bf.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
     body+='<h4>The prompt</h4><pre id="ptxt" class="cut">'+esc(withId(c))+'</pre><button class="lnkbtn" id="ballp" type="button">Show all</button>';
@@ -937,10 +941,10 @@ function openSheet(id){
   else if(tom&&open_&&c.ask==='unstick'&&c.unstick&&c.unstick.kind==='hand'&&cardById(c.unstick.card)&&cardById(c.unstick.card).prompt) main='<button class="gold" type="button" data-act="copy" data-id="'+esc(c.unstick.card)+'">Copy prompt</button><button class="ob" id="bdid" type="button">I did this</button>';
   else if(tom&&open_&&!dec&&!isReview(c)&&!bk) main='<button class="gold" id="bdid" type="button">I did this</button><button class="ob" id="btake" type="button">Claude takes this</button>';
   else if(tom&&open_&&dec) main='<button class="ob small" id="btake" type="button">Claude takes this</button>';
-  else if(p&&!c.service&&open_&&c.lane==='claude'){
+  else if(p&&!c.service&&open_&&c.lane==='claude'&&!c.nightly){
     if(startable(c)) main='<button class="gold" id="bstart" type="button">START</button><button class="ob" id="bcopy" type="button">Copy prompt</button>';
     else main='<button class="'+(c.col==='up'?'gold':'ob')+'" id="bcopy" type="button">Copy prompt</button><span class="hint">'+esc(modelShort(c))+'</span>';
-  }else if(p&&!c.service&&open_) main='<button class="ob" id="bcopy" type="button">Copy prompt</button>';
+  }else if(p&&!c.service&&open_&&!c.nightly) main='<button class="ob" id="bcopy" type="button">Copy prompt</button>';
   const more=(open_&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(open_?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button>';
   bar+='<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
   setSheet(shell(kickHtml(c)+'<h2>'+esc(dispTitle(c))+'</h2>'+buildHtml(c),body,bar),'card');

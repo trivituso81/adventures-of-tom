@@ -1,3 +1,7 @@
+## standingfix (2026-11-22): standing night cards show under Runs every night with no START, and Nightly refactoring waits on GitHub
+
+Tom (11-22): "why do these cards constantly show in the board no matter how many times a start them?" Cause: Night cleanup and Night QA are standing cards (`nightly: true`) that return to Up next after every run by design, and a START on one that finds nothing to push is undone by the ghost watchdog (r12) after 30 minutes. Nightly refactoring sat in Start next because its wait (7 clean night test runs) was only text. Now `board.html` puts standing cards in a Runs every night section (last run and result, no START, no Copy prompt), `startable()` is false for them, and c-nightrefactor is col wait on GitHub. `tools/board_test.py` expects the new section. Not fixed here: board_sync_test.py and two counts in board_test.py (back, queued) were already off before this build.
+
 ## voices-t-crispvoices-617 (2026-11-22): 16 voice takes made from board card t-crispvoices and merged into the game
 
 The voice-gen Action made the takes (voiceboard1, tools/voice-learn/voiceboard.py) and merged them with merge-local.js: 16 clips, 0 lines on needs-human (silent, not merged), about 627 credits. Nobody has listened to these takes yet; the card asks Tom to.

@@ -72,7 +72,7 @@ time.sleep(2)
 # ---- expected numbers, worked out here from the rules (not copied from the page)
 oc = [c for c in b['cards'] if c['col'] != 'done' and not c.get('backlog')]   # parked cards (backlog1) are on no list
 E_MINE = len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog')])
-E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up' and not c.get('start') and not any(c['id'] in k.get('blocks', []) for k in oc)])
+E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up' and not c.get('nightly') and not c.get('start') and not any(c['id'] in k.get('blocks', []) for k in oc)])
 # boardux1: the status words (plan 3.2). Needs attention = a Claude or service card that is quiet, says Shipped, Done or Built while open, or has a failed run or START.
 WAITFIX = lambda c: c['lane'] == 'tom' and c['col'] == 'wait' and any(k['lane'] == 'claude' and c['id'] in k.get('blocks', []) for k in oc)
 BLOCKED = lambda c: any(c['id'] in k.get('blocks', []) for k in b['cards'] if k['col'] != 'done')   # a parked (backlog) blocker still blocks, as in the page's blockedBy
@@ -111,7 +111,7 @@ try:
             if pg.inner_text('#src') != 'live': fails.append(f'{name}: page did not read the stub')
             if w < 860:
                 order = pg.eval_on_selector_all('#views .sec', 'e=>e.map(x=>x.dataset.sec)')
-                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv-running', 'conv-you', 'conv-fin']: fails.append(f'{name}: section order {order}')
+                if order != ['mine', 'back', 'ready', 'run', 'standing', 'queued', 'attn', 'conv-running', 'conv-you', 'conv-fin']: fails.append(f'{name}: section order {order}')
                 cnt = pg.eval_on_selector_all('#views .sec', 'e=>Object.fromEntries(e.map(x=>[x.dataset.sec,x.querySelectorAll(".card,.conv").length]))')
                 for k, v in (('mine', E_MINE), ('back', E_BACK), ('ready', E_READY), ('run', E_RUN), ('queued', E_QUEUED), ('attn', E_ATTN)):
                     if cnt[k] != v: fails.append(f'{name}: section {k} has {cnt[k]} cards, want {v}')
@@ -157,8 +157,13 @@ try:
                 pg.click('#nightb'); pg.click('#nightb'); pg.wait_for_timeout(500)
                 if stored()['night']['enabled'] is not True: fails.append(f'{name}: night shift did not come back ON')
                 if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: night chip makes the page scroll sideways')
-                V(pg, 'claude'); pg.click('.card[data-id="c-standing"] .t'); pg.wait_for_selector('#sheet')
+                V(pg, 'claude')
+                # standingfix: a standing card sits in Runs every night, never in Start next, and has no START or Copy prompt
+                if pg.eval_on_selector_all('[data-sec=standing] .card[data-id="c-standing"]', 'e=>e.length') != 1 or pg.eval_on_selector_all('[data-sec=ready] .card[data-id="c-standing"]', 'e=>e.length'): fails.append(f'{name}: the standing card is not only in Runs every night')
+                if pg.eval_on_selector_all('[data-sec=standing] .card button', 'e=>e.length'): fails.append(f'{name}: a standing card shows a button')
+                pg.click('.card[data-id="c-standing"] .t'); pg.wait_for_selector('#sheet')
                 if 'Runs every night' not in pg.inner_text('#sheet') or 'Last run 2026-11-20' not in pg.inner_text('#sheet'): fails.append(f'{name}: standing card detail lacks its last run line')
+                if pg.query_selector('#sheet #bstart') or pg.query_selector('#sheet #bcopy'): fails.append(f'{name}: the standing card sheet offers START or Copy prompt')
                 pg.keyboard.press('Escape'); pg.wait_for_timeout(200); V(pg, 'for')
                 pg.screenshot(path=f'{out}/board-{name}.png', full_page=(name != 'portrait'))
                 # tabs: one view at a time, For you first
@@ -187,8 +192,9 @@ try:
                     V(pg, 'for')
                 # copy prompt on a Ready card
                 V(pg, 'claude')
-                first = pg.eval_on_selector('[data-sec=ready] .card', 'e=>e.dataset.id')
-                pg.click('[data-sec=ready] .card [data-act=copy]'); pg.wait_for_timeout(150)
+                bymap = {x['id']: x for x in b['cards']}   # standingfix: skip a live card that a rescue or a start is holding, so the test does not depend on today's board
+                first = [i for i in pg.eval_on_selector_all('[data-sec=ready] .card', 'e=>e.map(x=>x.dataset.id)') if bymap.get(i, {}).get('prompt') and not bymap[i].get('rescue') and not bymap[i].get('started_at')][0]
+                pg.click(f'[data-sec=ready] .card[data-id="{first}"] [data-act=copy]'); pg.wait_for_timeout(150)
                 want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text']
                 if 'Read its history first' not in want: want += ' Board card %s. Read its history first: my notes and answers are there.' % first
                 if 'board: start ' + first not in want: want += FIRST(first)   # mirrors withId in board.html
