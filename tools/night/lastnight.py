@@ -10,6 +10,14 @@ SHIP = re.compile(r'^(?:Shipped as|Part shipped as|Ran as) ([^\s:]+):? ?(.*)$')
 QA_LIMITS = 'the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold'   # nightqa1
 
 
+def _need(c):
+    # Tom (11-22): the line must say what to do, not only name the card. The card's own `next` is the exact steps.
+    nx = re.sub(r'\s+', ' ', c.get('next') or '').strip()
+    if len(nx) > 260:
+        nx = nx[:260].rsplit(' ', 1)[0] + ' ... (full steps on the card)'
+    return '%s: %s' % (c['title'], nx) if nx else c['title']
+
+
 def lastnight(B, key, tests=None):
     night = B.get('night') or {}
     cards = {c['id']: c for c in B['cards']}
@@ -29,7 +37,7 @@ def lastnight(B, key, tests=None):
             if m and c.get('lane') == 'claude' and c['id'] in {e['id'] for e in (night.get('log') or {}).get(key, [])}:
                 shipped.append('%s: %s' % (m.group(1), m.group(2).strip() or c['title']))
             if h.get('t', '').startswith('Checked by the night QA'): closed.append('%s: %s' % (c['title'], h['t'].split(':', 1)[-1].strip()))
-    needs = ['%s' % c['title'] for c in B['cards'] if c['lane'] == 'tom' and c['col'] != 'done' and c['id'] != 't-lastnight' and (c.get('created') in days) and not c.get('fyi')]
+    needs = [_need(c) for c in B['cards'] if c['lane'] == 'tom' and c['col'] != 'done' and c['id'] != 't-lastnight' and (c.get('created') in days) and not c.get('fyi')]
     tl = None
     if tests:
         bad = [t.get('id') for t in tests.get('failed', [])] if isinstance(tests.get('failed'), list) else []
