@@ -35290,7 +35290,7 @@
   {
    "id": "t-wanwatch-cubepop-0522",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -35298,7 +35298,7 @@
    "next": "Open ADMIN > BATTLE GUIDE, find Crunchy Sugar-Cube Pop, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. Build wanstop-grace-cubepop-r4.",
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "",
     "opening": "added by session on c-wanstop-grace-cubepop-r4"
@@ -35307,8 +35307,14 @@
     {
      "d": "2026-11-22",
      "t": "Added: Tom chose to bake the latest Grace Cube Pop video as it is; it is in the game now."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T06:23:40.022Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanfeedback1",
