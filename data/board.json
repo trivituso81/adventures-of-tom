@@ -33789,7 +33789,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -33839,9 +33839,12 @@
     {
      "d": "2026-11-22",
      "t": "Fix shipped for \"The family screen should have part members equally spaced apart... Also it should be Dallas's Party not family\": right page seated at the left page's width, tab renamed Tom's Party (read Dallas's as Tom's) (build fix-menu4play-2). Empty space on the right not filled yet."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-b3gear",
@@ -35539,7 +35542,7 @@
    "id": "c-fix-menu4play-2",
    "tag": "fix-menu4play-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
@@ -35591,6 +35594,10 @@
     {
      "d": "2026-11-22",
      "t": "Fix shipped (build fix-menu4play-2)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-menu4play-2: the Family page seats all four people evenly clear of the crease, and the tab says Tom's Party"
     }
    ],
    "prompt": {
@@ -35604,7 +35611,8 @@
    },
    "after": "t-menu4play",
    "auto": true,
-   "started_at": "2026-11-22T06:33:01+00:00"
+   "started_at": "2026-11-22T06:33:01+00:00",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -35612,8 +35620,10 @@
    "url": "https://claude.ai/code/session_01RXeukFwddsN31hvgFthCzE",
    "title": "Fix: Play the whole new menu on the Duo and iPhone",
    "first": "2026-11-22T06:46:23Z",
-   "last": "2026-11-22T06:46:23Z",
-   "tags": [],
+   "last": "2026-11-22T06:48:05Z",
+   "tags": [
+    "fix-menu4play-2"
+   ],
    "cards": [
     "c-fix-menu4play-2"
    ]
@@ -36074,6 +36084,16 @@
    "tags": [],
    "cards": [
     "c-anim-deedee-dodge-y4m3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukG7DbKW7f6Jcurm6Gj",
+   "title": "Write the one-line move descriptions",
+   "first": "2026-11-21T22:48:18-08:00",
+   "last": "2026-11-21T22:48:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-battleux2"
    ]
   },
   {
@@ -40921,8 +40941,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "f594ff1e3c2f61b461e801e27db7ee165d6d1f88",
- "synced_at": "2026-11-22T06:47:05+00:00",
+ "synced": "27aeab3399b8f3d4bb5149f04b734e11d66a4109",
+ "synced_at": "2026-11-22T06:48:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
