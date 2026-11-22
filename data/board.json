@@ -31937,7 +31937,7 @@
      "already": [],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
@@ -32859,7 +32859,7 @@
    "id": "c-battleux2",
    "tag": "battleux2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Write the one-line move descriptions",
    "created": "2026-11-21",
@@ -32869,7 +32869,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "next": "Waits on Build the new battle screen. Then writes the one plain line (60 characters at most) for every move of the 10 family members, about 120, plus the words for who a move reaches and what will happen, in your plain style. They show with DETAILS on and in the strip under the scene.",
    "prompt": {
@@ -32889,6 +32889,11 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Build the new battle screen is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T06:46:16.450Z"
     }
    ]
   },
@@ -34672,7 +34677,7 @@
      ],
      "gaveup": [],
      "bake_failed": {},
-     "spent": 0.0,
+     "spent": 0,
      "build": null,
      "watch": "",
      "revs": {
