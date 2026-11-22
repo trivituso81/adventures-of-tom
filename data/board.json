@@ -31686,7 +31686,7 @@
    "theme": "Voice Clips",
    "count": 4,
    "title": "Merge 4 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Merged 3 of the new takes (build takes-2026-11-21). Two left on branch takes: Grace 'Nine wrappers' (line no longer in any scene) and Tom 'A FISH was wearing...' (take words differ from the screen).",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -31721,12 +31721,18 @@
     {
      "d": "2026-11-21",
      "t": "1 more take file(s) arrived."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Merged 3 kept takes (Hello Rose, Deedee Three, I do have news) in build takes-2026-11-21. Not merged: Nine wrappers (line not in the game) and A FISH (words differ from the screen line, Tom's call). unused_voice.py not run (no python playwright here); all 3 replaced existing clips.",
+     "at": "2026-11-22T02:00:00Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "started_at": "2026-11-22T01:53:56+00:00"
+   "started_at": "2026-11-22T01:53:56+00:00",
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
