@@ -30654,7 +30654,7 @@
    "title": "Boppy's new pose has a blank cap: install or redo?",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Look at art/raw/characters/boppy-em-unimpressed-v2.png (https://github.com/trivituso81/adventures-of-tom/blob/main/art/raw/characters/boppy-em-unimpressed-v2.png). The mustache and pose are right but the cap has no Paso Robles writing. Tap one answer. Card c-boppy-bigfish waits on it.",
    "steps": [
@@ -30673,11 +30673,20 @@
     "c-boppy-bigfish"
    ],
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-21",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-21",
+   "answer": "Install the blank cap as it is",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Install the blank cap as it is",
+     "at": "2026-11-22T00:43:00.160Z"
+    }
+   ]
   }
  ],
  "sessions": [
