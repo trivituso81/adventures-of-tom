@@ -1387,6 +1387,12 @@
    "cmd": "python3 -I tools/pairmove_test.py",
    "group": "g2",
    "minutes": 2
+  },
+  {
+   "id": "videohist_test",
+   "cmd": "python3 tools/videohist/videohist_test.py",
+   "group": "g4",
+   "minutes": 1
   }
  ]
 }

@@ -1,0 +1,1886 @@
+{
+ "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
+ "built": "2026-11-22T05:21Z",
+ "videos": [
+  {
+   "file": "deedee-cast-r3.mp4",
+   "job": "deedee-cast",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:59:26.546291Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-cast",
+   "strip": "art/video-history/deedee-cast-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-cast-r2.mp4",
+   "job": "deedee-cast",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T19:52:26.787570Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-cast-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-dodge-r5.mp4",
+   "job": "deedee-dodge",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-21T22:53:16.344779Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-dodge",
+   "strip": "art/video-history/deedee-dodge-r5.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-dodge-r4.mp4",
+   "job": "deedee-dodge",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T20:25:36.236525Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-dodge-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-dodge-r3.mp4",
+   "job": "deedee-dodge",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:45:53.850315Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-dodge-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-dodge-r2.mp4",
+   "job": "deedee-dodge",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:37:24.523911Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-dodge-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-give-r1.mp4",
+   "job": "deedee-give",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T17:35:47.061698Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-give",
+   "strip": "art/video-history/deedee-give-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-guard-r1.mp4",
+   "job": "deedee-guard",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:15:56.561745Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-guard",
+   "strip": "art/video-history/deedee-guard-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-hit-r1.mp4",
+   "job": "deedee-hit",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:16:02.100182Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-hit",
+   "strip": "art/video-history/deedee-hit-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-idle-r1.mp4",
+   "job": "deedee-idle",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:14:49.605661Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-idle",
+   "strip": "art/video-history/deedee-idle-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-ko-r2.mp4",
+   "job": "deedee-ko",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:18:54.018456Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-ko",
+   "strip": "art/video-history/deedee-ko-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-ko-r1.mp4",
+   "job": "deedee-ko",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:16:31.304656Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-ko-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-run-r1.mp4",
+   "job": "deedee-run",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:17:53.470887Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-run",
+   "strip": "art/video-history/deedee-run-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-scrub-r2.mp4",
+   "job": "deedee-scrub",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:35:47.024742Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-scrub",
+   "strip": "art/video-history/deedee-scrub-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-scrub-r1.mp4",
+   "job": "deedee-scrub",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:19:44.541231Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-scrub-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-victory-r2.mp4",
+   "job": "deedee-victory",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:20:36.129191Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-victory",
+   "strip": "art/video-history/deedee-victory-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-victory-r1.mp4",
+   "job": "deedee-victory",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:17:44.059720Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-victory-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "deedee-wetfloor-a2-r10.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 10,
+   "attempt": 2,
+   "at": "2026-11-22T05:02:27.156613Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears suddenly; no clear bringing out or sweeping motion",
+    "The motion check said no to: \"Without repeating the sweep, she sets a small yellow wet-floor sign on the floor beside her feet and wags one finger at it.\" Its reason: Sign appears inconsistently; no clear setting or finger wagging sequence"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-a2-r10.webp",
+   "pad": 0.55,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r10.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 10,
+   "attempt": 1,
+   "at": "2026-11-22T04:59:30.613769Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears without clear bring from back; multiple poses with mop instead of one short sweep",
+    "The motion check said no to: \"Without repeating the sweep, she sets a small yellow wet-floor sign on the floor beside her feet and wags one finger at it.\" Its reason: Sign placement and finger wag occur but mixed with extra mop poses and no clear sequence after single sweep"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r10.webp",
+   "pad": 0.55,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-a2-r9.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 9,
+   "attempt": 2,
+   "at": "2026-11-22T04:23:16.827906Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears variably, multiple sweeps and poses instead of one clear sweep",
+    "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: No clear putting mop behind back or return to start; inconsistent sequence"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-a2-r9.webp",
+   "pad": 0.55,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r9.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 9,
+   "attempt": 1,
+   "at": "2026-11-22T04:20:12.717802Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, on\" Its reason: Mop appears from side, not behind back; multiple sweeps and poses instead of one clear sweep",
+    "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: Mop not put behind back; ends in varied poses without returning to start stance once clearly"
+   ],
+   "in_game": "deedee-wetfloor",
+   "strip": "art/video-history/deedee-wetfloor-r9.webp",
+   "pad": 0.55,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-a2-r8.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 8,
+   "attempt": 2,
+   "at": "2026-11-22T04:07:15.762199Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-a2-r8.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r8.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 8,
+   "attempt": 1,
+   "at": "2026-11-22T04:03:16.416587Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r8.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r7.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 7,
+   "attempt": 1,
+   "at": "2026-11-22T02:56:31.741882Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from ri\" Its reason: Mop appears and disappears inconsistently; no clear single sweep from right to left",
+    "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: No clear putting mop behind back or return to start; inconsistent poses"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r7.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r6.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 6,
+   "attempt": 1,
+   "at": "2026-11-22T01:32:11.151963Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from ri\" Its reason: Mop appears from side not behind back; multiple inconsistent sweeps shown.",
+    "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: No clear put away behind back; returns to stance without proper sequence."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r6.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r5.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-22T00:44:27.430119Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one wide sweep from rig\" Its reason: Mop appears without clear bringing out from back; sweep unclear or inconsistent",
+    "The motion check said no to: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\" Its reason: No clear putting mop behind back; returns to stance but motion incomplete"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r5.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r4.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T21:08:15.635840Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r4.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r3.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:05:33.523926Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r2.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:20:51.073427Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-wetfloor-r1.mp4",
+   "job": "deedee-wetfloor",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:18:28.247667Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/deedee-wetfloor-r1.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "deedee-windex-r1.mp4",
+   "job": "deedee-windex",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T17:35:46.975838Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "deedee-windex",
+   "strip": "art/video-history/deedee-windex-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-cast-r4.mp4",
+   "job": "grace-cast",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T19:37:22.359355Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-cast",
+   "strip": "art/video-history/grace-cast-r4.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "grace-cast-r3.mp4",
+   "job": "grace-cast",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:03:00.882898Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cast-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "grace-cast-r2.mp4",
+   "job": "grace-cast",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T02:10:26.132051Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cast-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "grace-cast-r1.mp4",
+   "job": "grace-cast",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:01:52.164674Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cast-r1.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "grace-cubepop-a2-r4.mp4",
+   "job": "grace-cubepop",
+   "rev": 4,
+   "attempt": 2,
+   "at": "2026-11-22T05:01:29.319128Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she takes a small neon blue cube-shaped squishy toy out of her hoodie pocket, holds it up beside her ear and squeezes it once with both hands so it crunches and squishes out between her \" Its reason: sequence shows multiple takes, toy appears and disappears inconsistently",
+    "The motion check said no to: \"She opens her hand, tucks the toy back into her hoodie pocket and returns to her starting relaxed stance.\" Its reason: tucking back into pocket not shown clearly or once"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cubepop-a2-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-cubepop-r4.mp4",
+   "job": "grace-cubepop",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-22T04:59:31.070825Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she takes a small neon blue cube-shaped squishy toy out of her hoodie pocket, holds it up beside her ear and squeezes it once with both hands so it crunches and squishes out between her \" Its reason: Toy appears without clear pocket retrieval; squeezing uses one hand, not both",
+    "The motion check said no to: \"She opens her hand, tucks the toy back into her hoodie pocket and returns to her starting relaxed stance.\" Its reason: Toy is held or absent without clear tucking back into pocket"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cubepop-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-cubepop-r3.mp4",
+   "job": "grace-cubepop",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:19:59.795928Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-cubepop",
+   "strip": "art/video-history/grace-cubepop-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-cubepop-r2.mp4",
+   "job": "grace-cubepop",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T02:12:13.134389Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cubepop-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-cubepop-r1.mp4",
+   "job": "grace-cubepop",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:03:35.276173Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-cubepop-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-dodge-r5.mp4",
+   "job": "grace-dodge",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-21T19:50:23.100094Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-dodge",
+   "strip": "art/video-history/grace-dodge-r5.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-dodge-r4.mp4",
+   "job": "grace-dodge",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T19:37:22.457056Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-dodge-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-dodge-r3.mp4",
+   "job": "grace-dodge",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:03:00.934587Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-dodge-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-dodge-r2.mp4",
+   "job": "grace-dodge",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T02:10:26.111630Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-dodge-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-dodge-r1.mp4",
+   "job": "grace-dodge",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T01:58:26.437557Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-dodge-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-give-r1.mp4",
+   "job": "grace-give",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T17:19:59.809065Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-give",
+   "strip": "art/video-history/grace-give-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-hit-r1.mp4",
+   "job": "grace-hit",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T01:58:26.444244Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-hit",
+   "strip": "art/video-history/grace-hit-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-idle-r1.mp4",
+   "job": "grace-idle",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T01:58:26.565580Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-idle",
+   "strip": "art/video-history/grace-idle-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-ko-r2.mp4",
+   "job": "grace-ko",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T03:23:41.099418Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-ko",
+   "strip": "art/video-history/grace-ko-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-ko-r1.mp4",
+   "job": "grace-ko",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:00:09.329235Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-ko-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-run-r1.mp4",
+   "job": "grace-run",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:01:15.436000Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-run",
+   "strip": "art/video-history/grace-run-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-squeeze-r4.mp4",
+   "job": "grace-squeeze",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T18:58:54.136193Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-squeeze",
+   "strip": "art/video-history/grace-squeeze-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-squeeze-r3.mp4",
+   "job": "grace-squeeze",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:19:59.827118Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-squeeze-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-squeeze-r2.mp4",
+   "job": "grace-squeeze",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T02:10:26.104105Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-squeeze-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-squeeze-r1.mp4",
+   "job": "grace-squeeze",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:02:22.344616Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/grace-squeeze-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "grace-victory-r1.mp4",
+   "job": "grace-victory",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:00:24.272288Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-victory",
+   "strip": "art/video-history/grace-victory-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "guide-move-controller-toss-t1-r1.mp4",
+   "job": "guide-move-controller-toss-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T19:24:29.964253Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-controller-toss-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-giddyup-tata-launch-t1-r1.mp4",
+   "job": "guide-move-giddyup-tata-launch-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T01:46:42.896946Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-giddyup-tata-launch-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "guide-move-suite-door-slide-t1-r1.mp4",
+   "job": "guide-move-suite-door-slide-t1",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T19:13:10.483455Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "A take made in the Battle Guide; you chose or skipped it there."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/guide-move-suite-door-slide-t1-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "rose-cast-r3.mp4",
+   "job": "rose-cast",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:59:26.526761Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-cast",
+   "strip": "art/video-history/rose-cast-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-cast-r2.mp4",
+   "job": "rose-cast",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T19:50:22.961120Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-cast-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-cushion-kling-r1.mp4",
+   "job": "rose-cushion-kling",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T21:37:48.368808Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-lava",
+   "strip": "art/video-history/rose-cushion-kling-r1.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-dodge-r3.mp4",
+   "job": "rose-dodge",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:41:40.214744Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-dodge",
+   "strip": "art/video-history/rose-dodge-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-dodge-r2.mp4",
+   "job": "rose-dodge",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:28:05.801071Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-dodge-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-giddyup-r8.mp4",
+   "job": "rose-giddyup",
+   "rev": 8,
+   "attempt": 1,
+   "at": "2026-11-22T02:56:31.736178Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From her starting relaxed stance, she circles one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight upright cannonball at the top of the jump, and\" Its reason: No clear cowgirl hand circle or cannonball jump; shows varied poses instead",
+    "The motion check said no to: \"Without jumping again, she returns to her starting relaxed stance.\" Its reason: No return to relaxed stance after poses; ends in standing positions"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r8.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r7.mp4",
+   "job": "rose-giddyup",
+   "rev": 7,
+   "attempt": 1,
+   "at": "2026-11-22T01:32:11.182150Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r7.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r6.mp4",
+   "job": "rose-giddyup",
+   "rev": 6,
+   "attempt": 1,
+   "at": "2026-11-22T00:44:27.466013Z",
+   "price": 0.785,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight cannonball at the top of the jump, and lands on\" Its reason: inconsistent motion; multiple poses but no clear cannonball jump or leap",
+    "The motion check said no to: \"Without jumping again, she returns to her starting relaxed stance.\" Its reason: ends in relaxed stance but sequence does not clearly show single return after jump"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r6.webp",
+   "pad": 0.65,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r5.mp4",
+   "job": "rose-giddyup",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-21T22:58:28.751796Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r5.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r4.mp4",
+   "job": "rose-giddyup",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T21:08:15.637998Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r4.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r3.mp4",
+   "job": "rose-giddyup",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:05:28.902501Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r2.mp4",
+   "job": "rose-giddyup",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:18:54.037707Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-giddyup-r1.mp4",
+   "job": "rose-giddyup",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:14:14.718540Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-giddyup-r1.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-give-r1.mp4",
+   "job": "rose-give",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T17:30:03.172246Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-give",
+   "strip": "art/video-history/rose-give-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-guard-r1.mp4",
+   "job": "rose-guard",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:09:46.113709Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-guard",
+   "strip": "art/video-history/rose-guard-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-hit-r5.mp4",
+   "job": "rose-hit",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-21T18:27:34.760845Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-hit",
+   "strip": "art/video-history/rose-hit-r5.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-hit-r4.mp4",
+   "job": "rose-hit",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T17:59:05.071623Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-hit-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-hit-r3.mp4",
+   "job": "rose-hit",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:50:58.942685Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-hit-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-hit-r2.mp4",
+   "job": "rose-hit",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:28:05.822136Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-hit-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-hit-r1.mp4",
+   "job": "rose-hit",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:09:45.856447Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-hit-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-idle-r1.mp4",
+   "job": "rose-idle",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:09:45.616760Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-idle",
+   "strip": "art/video-history/rose-idle-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-ko-r2.mp4",
+   "job": "rose-ko",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:18:54.236926Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-ko",
+   "strip": "art/video-history/rose-ko-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-ko-r1.mp4",
+   "job": "rose-ko",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:12:02.740783Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-ko-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lava-r4.mp4",
+   "job": "rose-lava",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T20:42:25.633562Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lava-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lava-r3.mp4",
+   "job": "rose-lava",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T17:41:40.184482Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lava-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lava-r2.mp4",
+   "job": "rose-lava",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:28:05.625988Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lava-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lava-r1.mp4",
+   "job": "rose-lava",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:14:05.094006Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lava-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lava-kling-r1.mp4",
+   "job": "rose-lava-kling",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T21:22:28.849881Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lava-kling-r1.webp",
+   "pad": null,
+   "model": null
+  },
+  {
+   "file": "rose-run-r1.mp4",
+   "job": "rose-run",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:12:03.153250Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-run",
+   "strip": "art/video-history/rose-run-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-tackle-r4.mp4",
+   "job": "rose-tackle",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T19:37:22.395155Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-tackle",
+   "strip": "art/video-history/rose-tackle-r4.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-tackle-r3.mp4",
+   "job": "rose-tackle",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:03:00.946653Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tackle-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-tackle-r2.mp4",
+   "job": "rose-tackle",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T04:20:36.042138Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tackle-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-tackle-r1.mp4",
+   "job": "rose-tackle",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T03:12:49.991798Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tackle-r1.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "rose-victory-r1.mp4",
+   "job": "rose-victory",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T17:30:02.873628Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "rose-victory",
+   "strip": "art/video-history/rose-victory-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "skeeter-bite-r1.mp4",
+   "job": "skeeter-bite",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T21:08:15.536327Z",
+   "price": 0.15,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "skeeter-bite",
+   "strip": "art/video-history/skeeter-bite-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-blockade-a2-r3.mp4",
+   "job": "tom-blockade",
+   "rev": 3,
+   "attempt": 2,
+   "at": "2026-11-22T05:01:43.033280Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line.\" Its reason: Pose varies but never clearly holds both arms out like a gate with elbows bent.",
+    "The motion check said no to: \"Then he bumps his hip to the left once.\" Its reason: No visible hip bump to the left in any frame.",
+    "The motion check said no to: \"He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.\" Its reason: No wide blocking pose held or clear return sequence matching description."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-blockade-a2-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-blockade-r3.mp4",
+   "job": "tom-blockade",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-22T04:59:30.723656Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line.\" Its reason: Pose is inconsistent; arms not clearly like a gate with elbows bent in sequence",
+    "The motion check said no to: \"Then he bumps his hip to the left once.\" Its reason: No visible hip bump to the left in any frame",
+    "The motion check said no to: \"He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.\" Its reason: No clear hold of wide blocking pose before returning to start"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-blockade-r3.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-blockade-r2.mp4",
+   "job": "tom-blockade",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T03:23:41.110719Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-blockade",
+   "strip": "art/video-history/tom-blockade-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-blockade-r1.mp4",
+   "job": "tom-blockade",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:19:04.158228Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-blockade-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-cast-r3.mp4",
+   "job": "tom-cast",
+   "rev": 3,
+   "attempt": 1,
+   "at": "2026-11-21T19:59:26.488766Z",
+   "price": 0.785,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-cast",
+   "strip": "art/video-history/tom-cast-r3.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "tom-cast-r2.mp4",
+   "job": "tom-cast",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T19:50:22.991302Z",
+   "price": 0.785,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-cast-r2.webp",
+   "pad": null,
+   "model": "kling"
+  },
+  {
+   "file": "tom-dodge-r2.mp4",
+   "job": "tom-dodge",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T18:37:51.354788Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-dodge",
+   "strip": "art/video-history/tom-dodge-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-guard-r1.mp4",
+   "job": "tom-guard",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:15:26.613180Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-guard",
+   "strip": "art/video-history/tom-guard-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-hit-r1.mp4",
+   "job": "tom-hit",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:15:26.551787Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-hit",
+   "strip": "art/video-history/tom-hit-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-idle-r1.mp4",
+   "job": "tom-idle",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:15:26.615846Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-idle",
+   "strip": "art/video-history/tom-idle-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-ko-r1.mp4",
+   "job": "tom-ko",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:17:08.041905Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-ko",
+   "strip": "art/video-history/tom-ko-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-loungepass-r6.mp4",
+   "job": "tom-loungepass",
+   "rev": 6,
+   "attempt": 1,
+   "at": "2026-11-21T19:32:41.069204Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-loungepass",
+   "strip": "art/video-history/tom-loungepass-r6.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-loungepass-r5.mp4",
+   "job": "tom-loungepass",
+   "rev": 5,
+   "attempt": 1,
+   "at": "2026-11-21T18:44:17.072308Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-loungepass-r5.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-loungepass-r4.mp4",
+   "job": "tom-loungepass",
+   "rev": 4,
+   "attempt": 1,
+   "at": "2026-11-21T18:37:51.442449Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-loungepass-r4.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-loungepass-r2.mp4",
+   "job": "tom-loungepass",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-21T17:24:00.482081Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-loungepass-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-loungepass-r1.mp4",
+   "job": "tom-loungepass",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:18:53.481283Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-loungepass-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-run-r1.mp4",
+   "job": "tom-run",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:17:23.303874Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-run",
+   "strip": "art/video-history/tom-run-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-victory-r1.mp4",
+   "job": "tom-victory",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-21T02:17:22.694965Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "tom-victory",
+   "strip": "art/video-history/tom-victory-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "video-r1.mp4",
+   "job": "video",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-20T21:06:06.265145Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": "grace-guard",
+   "strip": "art/video-history/video-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  }
+ ],
+ "notes": {
+  "video": "",
+  "tom-idle": "",
+  "tom-guard": "",
+  "tom-hit": "",
+  "tom-dodge": "",
+  "tom-ko": "",
+  "tom-victory": "",
+  "tom-run": "",
+  "tom-cast": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed",
+  "tom-loungepass": "",
+  "tom-blockade": "movefun2 (Tom picked Fix all): one change, the hip bump moves out of the pose sentence into its own sentence after it (\"Then he bumps his hip to the left once.\"), because r2 only held two stop palms. Kept: every other word, Wan 3.0, start picture, seed 81, 720p, 5 s. Bake and wire copied from data/clips/tom-blockade.js (state, every 3, 1.5x). Rev 3.",
+  "grace-idle": "",
+  "grace-hit": "",
+  "grace-dodge": "wanch2: Kling missed twice the same way (r3 hair and arm out of the frame, r4 head cut at the edge of the shrunk picture), stop-loss on Kling. Now Rose's passed dodge exactly (duck, Wan 3.0, pad 0.8; Tom 11-21 10:33: 'Maybe it should be ducking motion instead'), which also passed for Tom",
+  "grace-ko": "",
+  "grace-victory": "",
+  "grace-run": "",
+  "grace-cast": "wanch2: Kling r3 made no rings (the Wan fault is gone) but her fingertips touched the left edge in the hold; one change: pad 0.8",
+  "grace-squeeze": "",
+  "grace-cubepop": "movefun2 (Tom picked Fix all): one change, the punch becomes \"holds it up beside her ear and squeezes it once with both hands so it crunches and squishes out between her fingers\", because r3 read as Grace punching. Kept: the rest of the prompt, Wan 3.0, start picture, seed 81, 720p, 5 s. Plays at 1.25x (was 1.5x), about 3.5 s. Bake and wire copied from data/clips/grace-cubepop.js (strike, every 3). Rev 4. fig_rows 90 (Grace, plan 4.x table).",
+  "rose-idle": "",
+  "rose-guard": "",
+  "rose-hit": "",
+  "rose-dodge": "",
+  "rose-ko": "",
+  "rose-run": "",
+  "rose-cast": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed",
+  "rose-tackle": "wanch2: Kling r3 has one lamb (the Wan fault is gone) but her reaching hand left the left edge at the lunge; one change: pad 0.65 (was 0.8)",
+  "rose-lava": "",
+  "rose-giddyup": "wanch3: Kling r3 jumped two or three times. One change: the last sentence loses \"she hops back to her spot and\" (the second hop) (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): one jump now, but the hair top is cut at the top of the jump and the waving hand leaves the left edge; next one change is pad 0.65. wanch4 r5: one change, pad 0.65 (was 0.8), the fix that passed rose-tackle r4 and the casts. Prompt v2 unchanged. Result r5 (wanch4): MISSED. The top edge is clear now (hair top at row 30), but the leap became a forward somersault, upside down at video frames 66 to 74, and her hair touches the left edge at frames 70 to 74. Edge miss twice in a row: stop-loss on pad. Cause: the prompt says feet planted on the same spot AND leaps up and forward to the left; the travel to the left plus the tuck turns into a tumble toward the left edge. Next one change (card c-wanch5): leaps straight up, pad stays 0.65. wanch5 r6: one change, v3 prompt = v2 with \"leaps up and forward to the left once\" changed to \"leaps straight up once\". Pad stays 0.65, airborne stays true. Bake settings from rose-tackle (rose-giddyup.js does not exist yet; the tackle is her other Kling strike at pad 0.65). Result r6 (bulk run 44967949648): STOPPED on the look checks p1 and p2; every measurement passed (edge clear, height 0.1 percent, ends 2.01). By eye: one straight-up jump with knees tucked and a clean return, but before it the word \"twirls\" became a full body spin: her back is to the camera at video frames 32 to 42, then she turns back and crouches. The spin is the extra motion the look check called inconsistent. wanstop r7: one change, v4 prompt = v3 with \"twirls one hand above her head\" changed to \"circles one hand above her head\". Kept: the rest of the prompt word for word, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65, airborne, bake and wire. Result r7 (bulk run 44971778287): STOPPED on bg and edge (measurements; look checks not run). By eye: the hand circle is right (no body spin now), but the cannonball became a backward somersault, upside down at video frame 54, and she lands with her arm flung out to the left. Both misses are that flip: the background spread over the limit is in frame 54 only (23.8, the blur of the upside-down figure; every other frame is under 15) and the left edge touches are frames 58 and 59, the landing. The jump sentence was the same in r6 (upright jump) and r7 (flip), and r5 also tumbled, so the tuck is free to turn into a flip. wanstop r8: one change, v5 prompt = v4 with \"a tight cannonball\" changed to \"a tight upright cannonball\". Kept: the rest of the prompt word for word, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65, airborne, bake and wire. wanauto1: fresh budget from auto_from (4 videos, $3.20); this rev runs without a tap. wanauto1: stop-loss after r8 (flip again, and a hoop drawn for \"circles one hand\"); Tom decides the move on t-giddyup-decide.",
+  "deedee-idle": "",
+  "deedee-guard": "",
+  "deedee-hit": "",
+  "deedee-dodge": "",
+  "deedee-ko": "",
+  "deedee-victory": "",
+  "deedee-run": "",
+  "deedee-cast": "wanch2: Kling r2 (pad 0.8) made the cast with no rings, but the outstretched hands left the left edge (this start picture fills the frame more than Grace's); one change: pad 0.65, as rose-tackle r4 that passed",
+  "deedee-wetfloor": "wanch3: on Wan and on Kling r3 the mop head swept below her feet line; the words \"in front of her feet\" read as lower on the screen in this view. One change: \"beside her feet, level with them\" (v2 prompt). Same model, picture, frame, pad. Result r4 (wanch3): same miss a third time (mop head 114 px below the feet row) and two sweeps; stop-loss on wording. wanch5 r5: Tom answered t-wanch4-wetfloor \"Yes, a mop drawn lower than her feet is fine if she sweeps once\". One change: pad 0.65 (was 0.8), the fix that cleared the left edge on rose-tackle and the casts. Prompt v2 unchanged. Feet limit 0.10 (was 0.01): in this three-quarter view the mop head rests on the floor ahead of her and is drawn below her feet row; r4 measured 122 px, 9.5 percent of the frame height, at pad 0.8 (replay-checks). The other 4.4 checks hold. Bake settings from deedee-windex (deedee-wetfloor.js does not exist yet; Windex is her other move with shape cast). Result r5 (bulk run 44967949648): STOPPED on edge, p1, p2. The feet limit held (7.7 percent) and the left edge at the stance is clear; by eye she sweeps left, right, left, right, left (about five strokes, video frames 32 to 91) and the mop head touches the left or right edge at the end of each stroke: the 23 edge frames are exactly those stroke ends, and the repeated strokes are what p1 and p2 call unclear. wanstop r6: one change, v3 prompt = v2 with \"in one wide sweep from right to left\" changed to \"in one short sweep from right to left\" (\"wide\" asks for the reach that hits the edges). Kept: the rest of the prompt word for word, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65 (the last pad, so the Action has no edge retry left), feet limit 0.10, bake and wire. If it still strokes back and forth, the next one change is the sentence that says how many sweeps, not the width. Result r6 (bulk run 44971778287): STOPPED on the look checks p1 and p2; every measurement passed (edge clear now, feet 7.3 percent, ends 1.55). By eye: the short sweep fixed the edges, but she still strokes back and forth two or three times (video frames 36 to 90), and the mop shows up at her side instead of from behind her back. The look check named \"behind her back\" in r5 and r6 alike; that wording stays, because the mop has to leave the picture for the last picture to match the first (ends check) and her baked Windex and scrub use the same wording. wanstop r7: one change, the sweep sentence (as planned at r6): v4 prompt = v3 with \", the mop head staying on top of the floor the whole time\" deleted. It asks for the mop on the floor for a long stretch, which is what the repeated strokes fill; it was there only to keep the mop above her feet, which Tom said is fine (11-21) and the feet limit 0.10 now allows. Kept: every other word of the prompt, Kling 4.0, the start picture, 720x1280, 5 s, pad 0.65, feet limit 0.10, bake and wire. wanauto1: fresh budget from auto_from (4 videos, $3.20); this rev runs without a tap. wanauto1: r7 baked by hand after a look at every frame (one sweep beside her feet, mop put away); the look check failed it only on \"from behind her back\". wanmop1 r8: Tom (19:48): \"Deedee is using a broom not a mop.\" Right: r7 drew a flat push-broom head. One change: v5 = v4 with \"a short mop\" changed to \"a short string mop with a floppy wet head\". Everything else kept. Fresh budget. wanstop r9 (card c-wanstop-deedee-wetfloor-r8): the r8 string mop is right in both videos. Try 1 failed only bg (a pink floor shadow under the mop, 5.46 percent off colour); try 2 (same settings) looked right and failed feet by 0.2 point (10.2 percent, 2 pictures) and the left edge in 6 pictures (video frames 46 to 47 and 70 to 73), the mop head at the end of the sweep. One change: pad 0.55 (was 0.65), the next step down for the same edge and feet reach: a smaller figure leaves room at the left and puts the mop head fewer pixels below the feet row. Kept: prompt v5 word for word, Kling 4.0, start picture, 720x1280, 5 s, feet limit 0.10, bake and wire. Rev 9. movefun2 (Tom picked Fix all): one change, the last sentence only: after the sweep she sets a small yellow wet-floor sign beside her feet and wags one finger at it (was: mop behind her back). Kept: the sweep sentence word for word, Kling 4.0, start picture, 5 s, pad 0.55, feet limit 0.10, bake and wire. Plays at 1.25x (was 1.5x), about 4 s. Rev 10. wanstuck1: r9 baked by hand (a brown string mop, two short sweeps beside her feet, put away, back to her stance); the look check failed it on \"once\" and \"from behind her back\" only.",
+  "deedee-scrub": "",
+  "grace-give": "",
+  "rose-victory": "",
+  "rose-give": "",
+  "deedee-give": "",
+  "deedee-windex": "",
+  "skeeter-bite": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry. Result r1: passed, baked as skeeter_bite.",
+  "rose-cushion-kling": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)"
+ }
+}
