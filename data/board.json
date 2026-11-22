@@ -26949,7 +26949,7 @@
    "title": "Play the whole new menu on the Duo and iPhone",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "where": "phone",
    "fyi": true,
@@ -27012,8 +27012,14 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: New menu: switch it on and remove the old one, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone, Fix: Play the whole new menu on the Duo and iPhone is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: something is wrong: On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at the top above the HP Sent to Claude as card c-fix-menu4play-4; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-22T14:35:57.609Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-b3gear",
@@ -29552,6 +29558,65 @@
    "changed": "2026-11-22",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-fix-menu4play-4",
+   "tag": "fix-menu4play-4",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Play the whole new menu on the Duo and iPhone",
+   "next": "You reported a problem on Play the whole new menu on the Duo and iPhone. Claude starts the fix by itself. Latest: On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at",
+   "blocks": [
+    "t-menu4play"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "reports": [
+    {
+     "at": "2026-11-22T14:35:56.624Z",
+     "card": "t-menu4play",
+     "title": "Play the whole new menu on the Duo and iPhone",
+     "ask": "play",
+     "words": "On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at the top above the HP",
+     "shot": "",
+     "asked": "Fix shipped (build fix-menu4play-2). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the first tab (now named Tom's Party) Tom and Grace should sit on the left page and Rose and Deedee on the right page, the two pairs the same distance apart, nobody over the crease, empty space to the right of Rose and Deedee. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change (and what should go in the empty space, and the name if Tom's Party is not what you meant by Dallas's Party)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-menu4play"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made by Something is wrong on t-menu4play.",
+     "at": "2026-11-22T14:35:57.609Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom reported on t-menu4play: On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at the top above the HP",
+     "at": "2026-11-22T14:35:57.609Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-22T14:35:57.609Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the whole new menu on the Duo and iPhone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-menu4play-4 and t-menu4play in data/board.json, history included. Your first push is the commit board: start c-fix-menu4play-4.\n\nTom tested and found problems:\n1. Card t-menu4play (Play the whole new menu on the Duo and iPhone, ask play). He was asked: Fix shipped (build fix-menu4play-2). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the first tab (now named Tom's Party) Tom and Grace should sit on the left page and Rose and Deedee on the right page, the two pairs the same distance apart, nobody over the crease, empty space to the right of Rose and Deedee. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change (and what should go in the empty space, and the name if Tom's Party is not what you meant by Dallas's Party). He wrote: On the party tab, you only moved the HP to the top that you were also supposed to move the character name and  level which of course is what's supposed to be at the top above the HP\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T14:35:56.624Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-menu4play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-menu4play, and give the build fix-menu4play-4 a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-menu4play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
