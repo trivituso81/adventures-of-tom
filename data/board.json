@@ -21616,10 +21616,10 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
-   "next": "Installing v2 with the blank cap (Tom chose: Install the blank cap as it is). Rebaking Boppy's mood frames and faces.",
+   "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -21633,6 +21633,10 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish in data/board.json, history included, and Tom card t-boppy-bigfish-pic (his note and answer). Your first push is the commit board: start c-boppy-bigfish.\n\nTom approved a new Art Library picture for entry boppy-em-unimpressed (Boppy's unimpressed mood pose, now in the Paso Robles cap instead of the retired Big Fish cap). Install it. First confirm the newest approved file art/raw/characters/boppy-em-unimpressed-vN.png (the highest N) reads Paso Robles and has his mustache (look at it). tools/sprite-bake/emotion_frames.py already takes the newest -v file for Boppy's cell 7 (REPLACE). Rebake: python3 tools/sprite-bake/emotion_frames.py boppy, python3 tools/sprite-bake/bake_emotion_faces.py boppy, python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run it in the background), then the head chin check (CHECK=/tmp/chin.png python3 tools/sprite-bake/emotion_chin.py boppy, look at it). Measure the em_unimpressed box in data/pose-unflip.js again (python3 tools/pose_unflip_test.py) so the cap writing is not mirrored when he faces left. Look at art/chars/boppyemo-story.webp frame em_unimpressed and portraits/emo/boppy-unimpressed.webp: both must read Paso Robles. Grep for any leftover Big Fish art reference and purge it. Run python3 tools/smoke.py and look at the shots. Add a docs/CHANGES.md entry headed ## boppy-bigfish, bump the tags with python3 tools/art-library/bump_tags.py boppy-bigfish --base origin/main, set after on the card to \"nothing for Tom: end\", push to main.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Ended without shipping: baked v2 (blank cap, as Tom chose) and compared faces. The unimpressed face on main already reads Paso Robles with his mustache; the v2 face has a blank cap, a turned and larger head. Installing it would make that face worse, so nothing was pushed. Asked Tom on t-boppy-bigfish-cap2."
+    },
     {
      "d": "2026-11-22",
      "t": "Tom answered t-boppy-bigfish-cap: Install the blank cap as it is. Session started to install it."
@@ -21705,7 +21709,8 @@
     "url": "https://claude.ai/code/session_01RXeukGpptGg2Da5f2QoHDn",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
-   "after": "nothing for Tom: end"
+   "after": "t-boppy-bigfish-cap2",
+   "waiting_on": "tom"
   },
   {
    "id": "c-qa-coh01",
@@ -30780,6 +30785,34 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-wanstop-deedee-wetfloor-r5 in data/board.json, claude/video-battle-plan.md sections 4.4 and 4.12 and the job deedee-wetfloor (rev 5) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks: failed: edge, p1, p2. Evidence: edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more); p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; swee; p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back; returns to stance bu. Its files are on branch wangen: deedee-wetfloor-r5-result.json (every check with numbers and the look-check answers) and the videos deedee-wetfloor-r5.mp4. Find the single cause from that evidence and change ONE thing in the job (the prompt sentence the evidence names, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change); raise rev by one and say in `why` what was kept and what changed. Never make a painted pose, and never run the job yourself: the first paid try is Tom's tap on the card t-wanch5-gen. Your first push is the commit board: start c-wanstop-deedee-wetfloor-r5. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-boppy-bigfish-cap2",
+   "title": "Boppy's unimpressed face: keep current or redo?",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open https://github.com/trivituso81/adventures-of-tom/blob/main/portraits/emo/boppy-unimpressed.webp (the face in the game now: Paso Robles cap, mustache). The new v2 picture would replace it with a blank cap and a turned, larger head. Tap one answer. Card c-boppy-bigfish waits on it.",
+   "steps": [
+    "Open the face in the game now: https://github.com/trivituso81/adventures-of-tom/blob/main/portraits/emo/boppy-unimpressed.webp",
+    "Tap one answer below."
+   ],
+   "choices": [
+    "Keep the face in the game now and close the card (Recommended)",
+    "Generate the pose again with Paso Robles lettering and a straight-on head",
+    "Install v2 as it is anyway"
+   ],
+   "leads": [
+    "Card c-boppy-bigfish is retired; nothing changes in the game.",
+    "Card c-boppy-bigfish edits the prompt, you generate and approve once more in the Art Library, then it rebakes.",
+    "Card c-boppy-bigfish rebakes Boppy's mood frames and faces with v2 (about 11 minutes)."
+   ],
+   "blocks": [
+    "c-boppy-bigfish"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22"
   }
  ],
  "sessions": [
