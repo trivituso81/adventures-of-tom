@@ -25006,38 +25006,10 @@
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T06:55:39Z",
+    "want": true,
+    "at": "2026-11-22T14:24:52Z",
     "n": 1,
     "est": 0.79,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T07:09:55Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996404459",
-     "n": 1,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [
-      {
-       "what": "tom-rose-giddyup",
-       "why": "failed: feet, edge",
-       "card": "c-wanstop-tom-rose-giddyup-r1"
-      }
-     ],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 0.79,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "tom-rose-giddyup": 1
-     }
-    },
     "auto": true
    }
   },
@@ -28932,6 +28904,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Looked at the frames: Rose rides and springs off as asked; misses were feet 1.1 percent and edge touch in frames 86 to 87. Changed only pad 0.65 to 0.55 (rev 2), started next try."
     }
    ],
    "prompt": {

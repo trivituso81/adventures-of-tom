@@ -883,7 +883,7 @@
   "auto_from": "2026-11-22T02:30:00Z"
  },
  "tom-rose-giddyup": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
@@ -900,10 +900,10 @@
    "resolution": "720p",
    "duration": 5
   },
-  "pad": 0.65,
+  "pad": 0.55,
   "airborne": true,
   "returns": false,
-  "why": "pairmove1 (Tom 2026-11-21 20:07): \"if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up\"; \"the more advanced the move is the more acceptable it is for it to take longer\". Two-person video for Rose's \"Giddyup, Tata!\" Launch: she hops onto Tom's shoulders, rides with a fist up, springs off and lands crouched in front of him. Start picture art/clips/start/tom-rose-pair.png is built from tom-hero.png and rose-hero.png at their battle heights (Rose 83 of Tom's 99 rows, so she does not change size when the video starts). Only a start picture (she ends in front of him, so no end picture); returns false and airborne true because she leaves the ground and ends somewhere new. Played at 1x (a signature skill may take longer). The game plays it at Tom's spot with Rose hidden when Tom is standing (anim.pair in data/b3-kit-rose.js), else Rose's solo clip.",
+  "why": "pairmove1 rev 2 (wanstop r1: feet 1.1 percent over, edge touched in video frames 86 to 87 as Rose leaps forward): kept the prompt, start picture and bake; changed only pad 0.65 to 0.55 so the figures start smaller and have room at the edge. pairmove1 (Tom 2026-11-21 20:07): the original brief follows. pairmove1 (Tom 2026-11-21 20:07): \"if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up\"; \"the more advanced the move is the more acceptable it is for it to take longer\". Two-person video for Rose's \"Giddyup, Tata!\" Launch: she hops onto Tom's shoulders, rides with a fist up, springs off and lands crouched in front of him. Start picture art/clips/start/tom-rose-pair.png is built from tom-hero.png and rose-hero.png at their battle heights (Rose 83 of Tom's 99 rows, so she does not change size when the video starts). Only a start picture (she ends in front of him, so no end picture); returns false and airborne true because she leaves the ground and ends somewhere new. Played at 1x (a signature skill may take longer). The game plays it at Tom's spot with Rose hidden when Tom is standing (anim.pair in data/b3-kit-rose.js), else Rose's solo clip.",
   "bake": {
    "id": "tom-rose-giddyup",
    "owner": "tom",
