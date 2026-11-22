@@ -1,4 +1,4 @@
-# nightgreen: what is known (session of 2026-11-21, parts a to l shipped)
+# nightgreen: DONE (parts a to m shipped, 2026-11-22; no row has known_fail)
 
 Card c-nightgreen. 12 rows of `tools/night/tests.json` carried `known_fail` (make-prompts.js was already in `skip`, so 12 not 13). No night run had happened, so every failure was reproduced by hand with `CHROMIUM=$(ls /opt/pw-browsers/chromium*/chrome-linux*/chrome|head -1) PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers python3 -I tools/<test>.py`.
 
@@ -19,14 +19,7 @@ Card c-nightgreen. 12 rows of `tools/night/tests.json` carried `known_fail` (mak
 | nightgreenk | ch17_test | test | two timing spots: a fixed 300 ms wait for the opening flag, and A pressed while the previous scene still played (`idle` wait added); `minutes` 2 to 5 |
 | nightgreenl | ch20_test (part) | test | teleports left the followers behind, so each door scene first walked the party about 10 s (`placeFollowers()` after each teleport) |
 
-## Still marked known_fail (1): ch20_test
-
-It takes about 16 minutes (960 s); `minutes` is 20 now. Passing: the eight doors, the Core, the lift, the Leviathan boss in the fight, the four relays (chapter 20 still runs fight 1 and 2 on Battle 2: `B2.foes`, `b2Do relay` work, so the purge rule does not apply). Failing, in this order: `shatter scene to Julian` (waits for `ch20-shatter` true and a battle active, 500 Enter presses), `calm and epilogue to the end`, `game complete flag`.
-
-Found so far:
-- With chapter 20 set (`setChapter(20,{apply:false})`), the flags `ch20-open`, `door-*` (8), `ch20-core`, `ch20-heart`, `ch20-fight` set, the party placed with `ch17Place('foreverheart',10,12,'up')` and `setFlag('battle:leviathan','win')`, the game plays ch20Shatter (about 9 lines), sets `ch20-shatter`, `ch20-julian`, `ch20-fight2` and the Julian battle is active about 11 s later. So the scene, the trigger (`data/scenes-ch20.js` line 308) and the Julian fight work. Without `setChapter(20)` nothing fires (chapter stays 19): that was a wrong repro, not a bug.
-- So the difference is in the state after a real Battle 2 fight 1: suspects are the victory card still open, `ch20Fight1`'s own scene still waiting on its `battle` op or running its defeat branch (heal and "Up. Everybody up"), `intro.active` held, or the test forcing `battle:leviathan` to win when the fight ended another way. Not checked yet.
-- Cheap way to find it: do not run the whole test. Write a temporary script that copies the head of `tools/ch20_test.py` through the lift, plays only fight 1 with the test's `fight(pg,'levi')` (about 8 minutes), then prints `flag('battle:leviathan')`, `flag('ch20-shatter')`, `intro.active`, `intro.sid`, `dialog.active`, `battle.active` and the victory card state every second for 20 seconds with an Enter press each time, before any forced flag. Delete the script afterwards.
+| nightgreenm | ch20_test | test | two mistakes after the Leviathan fight: with all four barriers down the test pressed the first skill row, which does no damage to the Leviathan for Amy and Grace, so the boss sat at 5 HP and the fight ran out its 400 turns still open; then it forced `battle:leviathan` to win during the live battle. The plain Attack (cross up, then the target) ends the fight, and the game sets the flags, plays the shatter scene and starts Julian by itself. Run time 16 min to 223 s; `minutes` 5 |
 
 ## How a fix went, in order (so the next session does not rediscover it)
 

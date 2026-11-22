@@ -27922,12 +27922,12 @@
    "theme": "Project Ops",
    "lane": "claude",
    "col": "prog",
-   "next": "Partly done: 11 of the 12 failing tests are fixed or retired and on main (builds nightgreena to nightgreenl). 1 still carries known_fail in tools/night/tests.json: ch20_test (about 16 minutes a run). The eight doors, the Core, the lift and the Leviathan fight now pass; the checks shatter scene to Julian, calm and epilogue, and game complete flag fail after the real Leviathan fight, while the game plays the same scenes fine when the flags are set directly. What was found and a cheap way to reproduce is in claude/next-addendum-nightgreen.md. To continue, tap Copy prompt and paste it into a new conversation on Claude Sonnet 5.5, effort medium. The card ships as nightgreen when no row has known_fail; nightly refactoring waits on that.",
+   "next": "Done: no row of tools/night/tests.json carries known_fail (parts nightgreena to nightgreenm). The last one, ch20_test, was the test's fault (it never finished the Leviathan once the four barriers were down) and now passes in about 4 minutes, twice in a row. Nothing for Tom. Nightly refactoring (c-nightrefactor) is no longer blocked by this card.",
    "blocks": [
     "c-nightrefactor"
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDh8wptxusyQanQwcg",
     "opening": "pasted by Tom from the board"
@@ -28069,6 +28069,10 @@
     {
      "d": "2026-11-21",
      "t": "Part shipped as nightgreenm: the chapter 20 night test ends the Leviathan fight and now passes"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as nightgreen: all rows are off known_fail; ch20_test passes twice in a row (223 s, 222 s). Notes in claude/next-addendum-nightgreen.md."
     }
    ],
    "prompt": {

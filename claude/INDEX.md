@@ -563,7 +563,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | next-addendum-nara42.md | next-addendum nara42 (2026-11-11 ~16:30, main b3c1a02) | 2026-11-11 |
 | next-addendum-near1.md | near1 (2026-11-12 22:22 to ~23:40 PT, main 487a58e): the party walks up to the person a scene is about; benche | 2026-11-12 |
 | next-addendum-nextchap1.md | nextchap1 (2026-11-12 ~18:30, main 3943bcb): no chapter says the next chapter is "still being built" | 2026-11-12 |
-| next-addendum-nightgreen.md | nightgreen: what is known (session of 2026-11-21, parts a to l shipped) | 2026-11-21 |
+| next-addendum-nightgreen.md | nightgreen: DONE (parts a to m shipped, 2026-11-22; no row has known_fail) | 2026-11-22 |
 | next-addendum-notingame.md | next addendum: Voice Library "Not in game yet" filter (2026-11-09, main at 3d38760, tag notingame1) | 2026-11-09 |
 | next-addendum-nowalk.md | No walking in battle (Tom 11-06 07:18, `noWalk1`, CHANGES 340, pushed) | 2026-11-22 |
 | next-addendum-npc-ff9.md | NPC hero prompts, Final Fantasy IX style (Tom 2026-11-09 00:01; main at d772b95) | 2026-11-09 |
@@ -710,7 +710,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | la-areas-qc-2026-11-05.md | Los Angeles area paintings: check of the six approved Library pictures (2026-11-05) | 2026-11-05 |
 | menuux-plan.md | Main menu redesign: the proposal (menuux-plan, 2026-11-21) | 2026-11-21 |
 | missing-baker-tools.md | Missing Baker tools (built 2026-10-27, rebuilt against game v332 the same evening) | 2026-10-27 |
-| move-fun-review.md | Move fun review (movefun1, 2026-11-21) | 2026-11-22 |
+| move-fun-review.md | Move fun review (movefun1, 2026-11-21) | 2026-11-21 |
 | move-review.md | Move review round 2 (2026-10-24, build 1792878363) | 2026-10-24 |
 | mudling-heist-prompt.md | Mudling pie heist: 16-frame sheet prompt (2026-10-30) | 2026-10-30 |
 | music-library.md | Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6) | 2026-11-02 |
