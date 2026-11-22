@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T21:29Z",
+ "built": "2026-11-22T21:55Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1812,6 +1812,196 @@
    "model": "alibaba"
   },
   {
+   "file": "stage-tom-bluebang-vid-a2-r1.mp4",
+   "job": "stage-tom-bluebang-vid",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:43:49.309469Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-bluebang-vid-a2-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-bluebang-vid-r1.mp4",
+   "job": "stage-tom-bluebang-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:42:20.575232Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-bluebang-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-fireball-vid-r1.mp4",
+   "job": "stage-tom-fireball-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:45:02.672429Z",
+   "price": 0.15,
+   "verdict": "passed",
+   "reasons": [],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-fireball-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-glare-vid-a2-r1.mp4",
+   "job": "stage-tom-glare-vid",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:43:49.350376Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-glare-vid-a2-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-glare-vid-r1.mp4",
+   "job": "stage-tom-glare-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:42:20.658594Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-glare-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-jetwash-vid-a2-r1.mp4",
+   "job": "stage-tom-jetwash-vid",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:46:02.867816Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-jetwash-vid-a2-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-jetwash-vid-r1.mp4",
+   "job": "stage-tom-jetwash-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:44:49.157229Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-jetwash-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-meteor-vid-r1.mp4",
+   "job": "stage-tom-meteor-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:46:19.944743Z",
+   "price": 0.15,
+   "verdict": "passed",
+   "reasons": [],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-meteor-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-runwaylights-vid-r1.mp4",
+   "job": "stage-tom-runwaylights-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:43:37.804263Z",
+   "price": 0.15,
+   "verdict": "passed",
+   "reasons": [],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-runwaylights-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-starbeam-vid-a2-r1.mp4",
+   "job": "stage-tom-starbeam-vid",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:46:16.518116Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The check \"motion\" failed."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-starbeam-vid-a2-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-starbeam-vid-r1.mp4",
+   "job": "stage-tom-starbeam-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:45:02.718620Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The check \"motion\" failed."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-starbeam-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-wingedshell-vid-r1.mp4",
+   "job": "stage-tom-wingedshell-vid",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:42:20.775335Z",
+   "price": 0.15,
+   "verdict": "passed",
+   "reasons": [],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-wingedshell-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "tom-blockade-a2-r4.mp4",
    "job": "tom-blockade",
    "rev": 4,
@@ -1915,6 +2105,38 @@
    "model": "alibaba"
   },
   {
+   "file": "tom-cartridge-a2-r1.mp4",
+   "job": "tom-cartridge",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:35:50.102987Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he quickly pulls a small gray game cartridge out of his pocket, holds it up to his mouth with both hands and blows hard into its open end once with puffed cheeks. He squints into the car\" Its reason: main action of blowing into cartridge with puffed cheeks and squinting is missing"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-cartridge-a2-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-cartridge-r1.mp4",
+   "job": "tom-cartridge",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:33:54.576496Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he quickly pulls a small gray game cartridge out of his pocket, holds it up to his mouth with both hands and blows hard into its open end once with puffed cheeks. He squints into the car\" Its reason: main action of blowing into cartridge is missing; he holds but does not puff cheeks or blow"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-cartridge-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "tom-cast-r3.mp4",
    "job": "tom-cast",
    "rev": 3,
@@ -1945,6 +2167,40 @@
    "strip": "art/video-history/tom-cast-r2.webp",
    "pad": null,
    "model": "kling"
+  },
+  {
+   "file": "tom-controller-a2-r1.mp4",
+   "job": "tom-controller",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:39:45.686851Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open \" Its reason: Main action missing: no throw to left, no catch pose, just idle variations and arm raises."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-controller-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-controller-r1.mp4",
+   "job": "tom-controller",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:37:30.917230Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open \" Its reason: No sidearm throw or catch; mostly idle poses with minor fist raises"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-controller-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
   },
   {
    "file": "tom-dodge-r2.mp4",
@@ -2024,6 +2280,38 @@
    "in_game": "tom-ko",
    "strip": "art/video-history/tom-ko-r1.webp",
    "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-konami-a2-r1.mp4",
+   "job": "tom-konami",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:40:11.251947Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws \" Its reason: main action missing: no hands together as if holding controller or thumb tapping rhythm"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-konami-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-konami-r1.mp4",
+   "job": "tom-konami",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:37:59.470141Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws \" Its reason: Thumbs not tapping on controller; multiple victory poses instead of one"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-konami-r1.webp",
+   "pad": 0.8,
    "model": "alibaba"
   },
   {
@@ -2107,6 +2395,38 @@
    "model": "alibaba"
   },
   {
+   "file": "tom-porsche-a2-r1.mp4",
+   "job": "tom-porsche",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:35:46.116050Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forwa\" Its reason: Multiple different actions and poses shown, not the specific watch check then wave sequence"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-porsche-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-porsche-r1.mp4",
+   "job": "tom-porsche",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:33:51.379762Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-porsche-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "tom-rose-giddyup-r1.mp4",
    "job": "tom-rose-giddyup",
    "rev": 1,
@@ -2137,6 +2457,53 @@
    "in_game": "tom-run",
    "strip": "art/video-history/tom-run-r1.webp",
    "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-shell-r1.mp4",
+   "job": "tom-shell",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:37:55.226151Z",
+   "price": 0.5,
+   "verdict": "in_game",
+   "reasons": [],
+   "in_game": "tom-shell",
+   "strip": "art/video-history/tom-shell-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-suitedoor-a2-r1.mp4",
+   "job": "tom-suitedoor",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-22T21:35:35.757985Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"From his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He give\" Its reason: Animation shows multiple arm gestures and poses instead of single described sequence"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-suitedoor-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "tom-suitedoor-r1.mp4",
+   "job": "tom-suitedoor",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-22T21:33:39.871339Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"From his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He give\" Its reason: main action missing: no arms spreading wide or sweeping inward like sliding doors"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/tom-suitedoor-r1.webp",
+   "pad": 0.8,
    "model": "alibaba"
   },
   {
@@ -2220,6 +2587,20 @@
   "deedee-give": "",
   "deedee-windex": "",
   "skeeter-bite": "wanch3: full Grok never brought the Darting Bite back to its start pose (twice, wanch2 stop-loss). Different method: Wan 3.0 with the start picture as first AND last frame (end_image_url forces the return); the Art Library entry clip-skeeter-bite prompt (promptRev 3) word for word, MOTION unchanged; 4:3 at 480p and 3 s like the entry. Result r1: passed, baked as skeeter_bite.",
-  "rose-cushion-kling": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)"
+  "rose-cushion-kling": "rose-lava-xftr: Kling 4.0 with the lava in the prompt (one try, $0.78, job rose-lava-kling, now removed; video rose-lava-kling-r1.mp4 on branch wangen) told the story right but the lava touched the left edge in 66 of 121 pictures; so the same settings (start picture rose-cushion, pad 0.8, start frame only) with the lava taken out of the prompt (wan-rose-cushion-hop-v1.txt = wan-rose-lava-v3.txt minus the lava); the game draws the lava under her (engine/clip-ground.js)",
+  "tom-suitedoor": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-controller": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-shell": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-konami": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-porsche": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "tom-cartridge": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "stage-tom-bluebang-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-glare-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-wingedshell-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-runwaylights-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-fireball-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-starbeam-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-meteor-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  }
 }
