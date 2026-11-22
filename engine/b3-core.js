@@ -186,7 +186,7 @@ function b3OverBeats(F,beats,g) {
 //         deals no damage and builds no counter of its own (b3IsSupport).  oncePerRound:key: counts the first time each round (b3Act marks it).
 //         tagsAny:[..]: the act in progress carries one of these tags (Drywall: melee or projectile; Cool-Mist: projectile or aoe), stage 10.
 const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row','either'];
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny'];
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny','skillId','pepAtLeast','attackerPips','has','attackerDebuffed','tgtWeak','jumped','attackerFast'];
 // A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
 function b3Peeves(u) {
   let out=u.peeves;
@@ -194,6 +194,8 @@ function b3Peeves(u) {
   return out;
 }
 const b3PrimeCount=u=>Object.keys(u.st).filter(id=>B3_STATUS[id].kind==='prime').length;
+// Stage 19: a foe is "weak" to a unit when it is slower than that unit or carries any debuff or mark (Scream King's Trait).
+const b3TgtWeak=(u,t)=>!!t&&t.side!==u.side&&(b3Stat(t,'spd')<b3Stat(u,'spd')||Object.keys(t.st).some(i=>['debuff','mark'].includes(B3_STATUS[i].kind)));
 function b3ModWhen(u,m,ctx,putBy) {
   const W=m.when,c=ctx.c;
   for(const k in W) {
@@ -211,6 +213,14 @@ function b3ModWhen(u,m,ctx,putBy) {
     else if(k==='supportSkill') { if(!b3IsSupport(ctx.skill)) return false; }
     else if(k==='oncePerRound') { const F=ctx.F; if(!F||u.used['pr:'+W.oncePerRound]===F.round) return false; }
     else if(k==='tagsAny') { if(!(c&&c.tags&&W.tagsAny.some(t=>c.tags.includes(t)))) return false; }
+    else if(k==='skillId') { const S=c&&c.skill; if(!S||S.id!==W.skillId) return false; }                      // stage 19: the move in progress is this one (Grand Jeté Spotlight Finale)
+    else if(k==='pepAtLeast') { if(!(u.pep>=W.pepAtLeast)) return false; }                                   // the holder has this much Pep right now (Upside-Down Pilot Wings)
+    else if(k==='attackerPips') { const a=ctx.a; if(!a||!a.maxPips||!(a.pips<a.maxPips*W.attackerPips)) return false; }   // the attacker has less than this share of its Composure left (Too Loud for Secrets)
+    else if(k==='has') { if(![].concat(W.has).some(i=>u.st[i])) return false; }                              // the holder wears one of these statuses (Did You Eat?)
+    else if(k==='attackerDebuffed') { const a=ctx.a; if(!a||!Object.keys(a.st).some(i=>['debuff','mark'].includes(B3_STATUS[i].kind))) return false; }   // Forty-Seven Rewatches
+    else if(k==='tgtWeak') { if(!b3TgtWeak(u,ctx.t)) return false; }                                          // the target is slower than the holder or carries a debuff (Don't Look Behind You)
+    else if(k==='attackerFast') { const a=ctx.a; if(!a||!(b3Stat(a,'spd')>b3Stat(u,'spd')||b3HasFlag(a,'airborne'))) return false; }   // the attacker is faster than the holder, or Airborne (Spooked)
+    else if(k==='jumped') { if(!((u.jumped||0)>=W.jumped)) return false; }                                   // the holder has leapt past this many icons on the turn bar since its last turn (Choreographed Momentum)
     else if(k==='tgtBelow') { const t=ctx.tgt; if(!t||t.side!==u.side||t.ko||!(t.hp<t.maxHp*W.tgtBelow)) return false; }
     else throw new Error('Battle 3 mod condition not built yet: '+k);
   }
@@ -230,7 +240,7 @@ function b3Mods(u,stat,ctx) {
     else if(m.per) { v*=Math.min(m.per.max==null?99:m.per.max,u.counters[m.per.counter]||0); if(m.per.spend&&v&&ctx&&ctx.c) (ctx.c.spend=ctx.c.spend||{})[u.key+':'+m.per.counter]=true; }
     if(stId&&u.st[stId].mult) v*=u.st[stId].mult;   // a doubled buff (Baxter Hill Longboard Express)
     out[m.kind]=(out[m.kind]||0)+v; };
-  for(const id in u.st) for(const m of B3_STATUS[id].mods) add(m,id);
+  for(const id in u.st) { if(ctx&&ctx.pierce&&stat==='reduce'&&B3_STATUS[id].kind==='stance') continue; for(const m of B3_STATUS[id].mods) add(m,id); }   // stage 19: a piercing hit ignores a Guard Stance
   for(const m of u.mods) add(m,null);
   // A shield may carry mods from whoever put it on (Mint-Condition Backup): they count once each while any such shield is up.
   if(u.shields.length) { const seen={}; for(const sh of u.shields) for(const m of (sh.mods||[])) if(m.stat===stat&&!seen[m.kind]) { seen[m.kind]=true; out[m.kind]=(out[m.kind]||0)+m.v; } }
@@ -261,7 +271,7 @@ function b3OutMult(u,extra,ctx) {
 const b3TakenMult=(u,extra,ctx)=>(1+Math.max(0,b3Sum(u,'taken',ctx)))*(1-Math.min(B3_RULES.caps.reduction,Math.max(0,b3Sum(u,'reduce',ctx)+(extra||0))));
 // Evasion. Nervous Vibrations (Nara, stage 9c, `custom:'nervous'`) adds `per` for every Pep she is holding, up to `max`, and only `wide`
 // of that against an attack that reaches the whole family (wide: the hit is part of a party-wide act).
-const b3Evasion=(u,wide)=>{ let e=b3Sum(u,'eva'); const n=u.custom&&u.custom.nervous;
+const b3Evasion=(u,wide,ctx)=>{ let e=b3Sum(u,'eva',ctx); const n=u.custom&&u.custom.nervous;
   if(n&&u.pep!=null) e+=Math.min(n.max,n.per*u.pep)*(wide?n.wide:1);
   return Math.min(B3_RULES.caps.evasion,Math.max(0,e)); };
 const b3MissChance=u=>Math.min(1,Math.max(0,-b3Sum(u,'acc')));
@@ -273,6 +283,13 @@ const b3Adjacent=(F,u)=>b3Live(F,u.side).filter(o=>Math.abs(o.slot-u.slot)===1);
 
 // ---------- Statuses ----------
 // A fresh one applied during the carrier's own turn does not count that turn (so "1t" on yourself lasts until your next turn ends).
+// A buff turned against its carrier (the `invert` op): a debuff row with the buff's own numbers reversed, made once and kept.
+function b3InvertRow(id) {
+  const rid='inv_'+id; if(B3_STATUS[rid]) return rid; const S=B3_STATUS[id];
+  B3_STATUS[rid]={id:rid,name:'Inverted '+S.name,kind:'debuff',group:null,dur:S.dur,mods:S.mods.map(m=>Object.assign({},m,{v:-m.v})),flags:[],inverted:true,short:'INVERTED',color:'#c06080',weight:S.weight,
+    desc:S.name+' turned against it: the same numbers, the other way round.'};
+  return rid;
+}
 function b3AddStatus(F,u,id,o) {
   const S=B3_STATUS[id]; if(!S) throw new Error('Battle 3 has no status called '+id);
   const had=u.st[id],src=o&&o.src;
@@ -284,6 +301,8 @@ function b3AddStatus(F,u,id,o) {
 }
 function b3EndStatus(F,u,id,why) {
   if(!u.st[id]) return false; delete u.st[id]; if(why==='strip') u.stripped[id]=true;
+  // Encore Poise (Grace, stage 19, `custom:'encore'`): a one-attack buff that runs out after it fired leaves half its bonus for one more turn (the status row's `echo`).
+  if((why==='time'||why==='used')&&u.custom&&u.custom.encore&&B3_STATUS[id].echo&&B3_STATUS[B3_STATUS[id].echo]) b3AddStatus(F,u,B3_STATUS[id].echo,{src:u});
   if(id==='toasty'&&u.st.five_alarm) delete u.st.five_alarm;   // Five-Alarm Burn is Toasty turned up: it ends with it (1989 Pickle-Jar Bomb)
   return true;
 }
@@ -382,6 +401,7 @@ function b3CanUse(F,u,S) {
   if(!S) return {ok:false,why:'That move is not built yet.'};
   // Skill Lock (a Mental status from a monster): the Skills that come from the Pocket Vibe cannot be used. The Basic and the Main Vibe's Skills can.
   if(u.pocketSkills&&u.pocketSkills.includes(S.id)&&b3HasFlag(u,'skillLock')) return {ok:false,why:u.name+' is Skill Locked: the Pocket Vibe Skills cannot be used.'};
+  if(S.needs&&!((u.counters[S.needs.counter]||0)>=S.needs.min)) return {ok:false,why:S.name+' needs '+S.needs.min+' or more '+((u.counterInfo[S.needs.counter]&&u.counterInfo[S.needs.counter].name)||S.needs.counter)+'.'};   // stage 19: Leviathan
   const c=b3Cost(F,u,S);
   if(S.cooldown&&u.cd[S.id]>F.round) return {ok:false,why:S.name+' needs a rest. '+u.name+' can use it again in round '+u.cd[S.id]+'.'};
   if(c>u.pep) return {ok:false,why:'Not enough Pep. '+S.name+' costs '+c+'. '+u.name+' has '+u.pep+'.'};
@@ -413,6 +433,7 @@ function b3Options(F,u,S) {
   if(S.target==='adjacent_allies') { const adj=b3Adjacent(F,u); return adj.length?[{key:'*',label:adj.map(m=>m.name).join(' and '),units:adj,ally:true}]:[]; }
   if(S.target==='field') return foes.length?[{key:'*',label:'The monsters\u2019 floor',units:foes}]:[];
   // One row of monsters (Vacuum-Cleaner Bolt!): a choice for each row that has someone standing in it. It hits like an AoE (spec 2.4: "all foes or a row").
+  if(S.target==='foe_row'&&S.widen&&(u.counters[S.widen.counter]||0)>=S.widen.min) return foes.length?[{key:'*',label:'All monsters',units:foes}]:[];   // stage 19: Trophy Striper Haul reaches every monster at Tally 2 or more
   if(S.target==='foe_row') { const out=[];
     for(const row of ['front','back']) { const L=foes.filter(f=>b3EffRow(F,f)===row); if(L.length) out.push({key:'row:'+row,label:(row==='front'?'Front row: ':'Back row: ')+L.map(f=>f.name).join(', '),units:L}); }
     return out; }
@@ -525,7 +546,8 @@ function b3CheckData() {
     if(!m.stat||!m.kind||typeof m.v!=='number') bad.push(where+': a mod needs stat, kind and v'); } };
   const effects=(where,list)=>{ for(const e of (list||[])) {
     if(!B3_OP_LIST.includes(e.op)) bad.push(where+': unknown op '+e.op); else if(!B3_OPS[e.op]) bad.push(where+': op not built yet: '+e.op);
-    if((e.op==='status'||e.op==='prime'||e.op==='intercept'||e.op==='taunt')&&!B3_STATUS[e.id]) bad.push(where+': unknown status '+e.id);
+    if((e.op==='status'||e.op==='prime'||e.op==='intercept'||e.op==='taunt')&&!e.oneOf&&!B3_STATUS[e.id]) bad.push(where+': unknown status '+e.id);
+    if(e.oneOf) for(const id of e.oneOf) if(!B3_STATUS[id]) bad.push(where+': unknown status '+id);
     if(e.op==='taunt'&&B3_STATUS[e.id]&&!B3_STATUS[e.id].flags.includes('taunt')) bad.push(where+': status '+e.id+' has no taunt flag');
     if(e.op==='grant'&&!(e.maxPep>0)) bad.push(where+': a grant needs maxPep');
     if(e.op==='ruckus'&&typeof e.n!=='number') bad.push(where+': a ruckus effect needs n');

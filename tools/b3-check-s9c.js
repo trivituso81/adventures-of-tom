@@ -22,7 +22,7 @@ module.exports=function(T) {
     ok(!VIBES[v].skills.some(s=>SOON[s])&&!(VIBES[v].quirks||[]).some(q=>QUIRKS[q].soon)&&!TRAITS[VIBES[v].trait].soon,v+': nothing is still a name only');
     for(const s of [VIBES[v].basic,...VIBES[v].skills]) ok(SK[s].desc&&SK[s].desc.length>40&&!/—/.test(SK[s].desc),s+' has a full plain description'); }
   ok(bad0==='[]','the data check is clean with Nara and Boppy in: '+bad0);
-  ok(J(CAST.nara.vibes)==='["nara_pup","nara_guard"]'&&J(CAST.boppy.vibes)==='["boppy_dep","boppy_pepper"]','both are in the cast with both Vibes');
+  ok(J(CAST.nara.vibes.slice(0,2))==='["nara_pup","nara_guard"]'&&J(CAST.boppy.vibes.slice(0,2))==='["boppy_dep","boppy_pepper"]','both are in the cast with both Vibes');
   ok(['boppySpeed','goldTeeth','mailbox','hoseFlinched','nervous','shins'].every(k=>CUSTOM[k]),'the six one-offs exist');
   for(const k of ['steal','tick','upgrade','treasure','goldBall']) ok(typeof OPS[k]==='function','op '+k+' is built');
 

@@ -4,7 +4,7 @@
 // (chapter 2 on); his Vibe Points start from the late joiners' pool (`late:true` on his cast row; engine/b3-progress.js, stage 9c).
 // Six lines needed their own rule (engine/b3-custom.js): Wet Clay to Stoneware, Three-AM Kiln Firing (the firing half), Grand Amphora
 // Masterpiece, Kintsugi Gold Seam, Waymo Tailgate Rescue (the rebalance half) and Baxter Hill Longboard Express (the doubling half).
-B3_CAST.tnb={id:'tnb',name:'TNB',vibes:['tnb_potter','tnb_boarder'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.tnb={id:'tnb',name:'TNB',vibes:['tnb_potter','tnb_boarder','tnb_scream'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Ceramicist (first Sig Vibe) ----------------------------------------------------------------
 B3_VIBES.tnb_potter={id:'tnb_potter',owner:'tnb',name:'Ceramicist',sig:1,lean:'support',
@@ -102,3 +102,39 @@ B3_QUIRKS.no_car_no_tickets={id:'no_car_no_tickets',vibe:'tnb_boarder',name:'No 
   immune:['slow'],on:'detonation',carrier:'source',ids:['shatter_glitz','sensory_overload'],show:true,
   effects:[{op:'crack',n:.10,once:'noCar',to:'target'}],
   desc:'TNB cannot be Slowed. The first time he sets off a Dazzled Detonation on a monster, its Defense is cut 10% for the rest of the fight.'};
+
+// ---------------------------------------------------------------- Scream King (third Vibe, stage 19; sig 0) ----------------------------------------------------------------
+B3_VIBES.tnb_scream={id:'tnb_scream',owner:'tnb',name:'Scream King',sig:0,lean:'striker',
+  subtitles:['Popcorn Tosser','Slasher Scholar','Untouchable Final Boy'],
+  trait:'dont_look_behind_you',basic:'flashlight_under_chin',skills:['flying_popcorn_jump_scare','dont_go_in_the_basement','act_three_mask_reveal'],
+  quirks:['forty_seven_rewatches','sequel_hook'],counter:null};
+// "Don't Look Behind You": my call for "Racket-debuffed or slower": a monster that carries any debuff or mark, or is slower than TNB (`tgtWeak`).
+B3_TRAITS.dont_look_behind_you={id:'dont_look_behind_you',vibe:'tnb_scream',name:'"Don\u2019t Look Behind You"',
+  mods:[{stat:'out',kind:'behind',v:.30,when:{tgtWeak:true}}],
+  on:'afterHit',carrier:'source',tgtFoe:true,tgtWeak:true,limit:'actionTarget',show:true,effects:[{op:'composure',n:1,to:'target'}],
+  desc:'TNB hits a monster 30% harder, and takes 1 more Composure pip, if it carries a debuff or is slower than he is.'};
+B3_SKILLS.flashlight_under_chin={id:'flashlight_under_chin',vibe:'tnb_scream',slot:'basic',name:'Flashlight Under Chin',pep:0,flavor:['razzle'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light Razzle hit. Leaves it Dazzled.',
+  desc:'Spooky campfire uplighting: a light Razzle hit that leaves the monster Dazzled.'};
+B3_SKILLS.flying_popcorn_jump_scare={id:'flying_popcorn_jump_scare',vibe:'tnb_scream',slot:'s1',name:'Flying Popcorn Jump-Scare',pep:3,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'spooked',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Light hit. Spooks it: weaker next hit, crits on it.',
+  desc:'Light Racket hit with a horror sting. The monster is Spooked: its next hit misses 30% more and does 30% less, and a faster or Airborne family member always crits it.'};
+B3_SKILLS.dont_go_in_the_basement={id:'dont_go_in_the_basement',vibe:'tnb_scream',slot:'s2',name:'"Don\u2019t Go In The Basement!"',pep:4,flavor:['racket'],power:'standard',hits:1,
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'pull',n:20,to:'nextAlly'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Standard hit on all. Pulls the next ally up 20.',
+  desc:'VHS static and a slamming cellar door: a standard Racket hit on every monster, and the next family member due to act moves 20 ticks up the turn bar.'};
+// Act-Three Mask Reveal: one heavy Racket hit (my call: the spec says "ambush" and a multiplier, so it is a single-target hit), 1.5 times as strong on a monster with 2 or more debuffs.
+B3_SKILLS.act_three_mask_reveal={id:'act_three_mask_reveal',vibe:'tnb_scream',slot:'cap',name:'Act-Three Mask Reveal',pep:6,flavor:['racket'],power:'heavy',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetDebuffs',min:2,add:.5}}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit, 1.5 times as strong on 2+ debuffs.',
+  desc:'The lights die and purple fog floods the stage: a heavy Racket hit that does 50% more to a monster carrying 2 or more debuffs.'};
+B3_QUIRKS.forty_seven_rewatches={id:'forty_seven_rewatches',vibe:'tnb_scream',name:'Forty-Seven Rewatches',
+  mods:[{stat:'eva',kind:'rewatch',v:.20,when:{attackerDebuffed:true}}],
+  desc:'TNB knows every trope: 20% more Evasion against a monster that carries a debuff.'};
+// Sequel Hook: a KO or a Composure Break by TNB refunds 2 Pep, once a round between the two.
+B3_QUIRKS.sequel_hook={id:'sequel_hook',vibe:'tnb_scream',name:'Sequel Hook',
+  listen:[{on:'ko',carrier:'source',tgtFoe:true,limit:'round',limitKey:'sequel',show:true,effects:[{op:'pep',n:2,to:'self'}]},
+    {on:'break',carrier:'source',limit:'round',limitKey:'sequel',show:true,effects:[{op:'pep',n:2,to:'self'}]}],
+  desc:'When TNB knocks out a monster or Breaks its Composure he gets 2 Pep back (once a round).'};

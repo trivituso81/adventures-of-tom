@@ -1,11 +1,11 @@
 'use strict';
 // data/b3-kit-amy.js — Battle 3 kit: Amy (spec section 3.4). Built: all of Fitness Queen and all of Classroom Boss (stage 10).
-// SuperMom, her third Vibe, is stage 19 to 21 (its Skills are named in B3_SOON when that stage lands).
+// SuperMom, her third Vibe, is stage 19 (sig 0).
 // Same shape as the other kit files (see the top of data/b3-kit-tom.js). Amy is in the party from chapter 1, so she is not a late joiner.
 // Two lines needed more than data: Pace-Partner Run (a copied Speed value: `b3PaceSet`, engine/b3-custom.js) and the Reps rule
 // (a Portable Counter on the Vibe row, `counter`, built by engine/b3-progress.js). Every number the spec leaves out is a call,
 // written where it is made and listed in claude/battle-build.md "Calls made that Tom has not confirmed".
-B3_CAST.amy={id:'amy',name:'Amy',vibes:['amy_fitness','amy_classroom'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.amy={id:'amy',name:'Amy',vibes:['amy_fitness','amy_classroom','amy_super'],stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Fitness Queen (first Sig Vibe) ----------------------------------------------------------------
 // Reps (Portable Counter, max 4): every action Amy finishes that is not a Basic builds 1 Rep, and Kettlebell Swing builds 1 itself, so each
@@ -101,3 +101,40 @@ B3_SKILLS.classroom_lights_out_reset={id:'classroom_lights_out_reset',vibe:'amy_
 B3_QUIRKS.never_late_once={id:'never_late_once',vibe:'amy_classroom',name:'Never Late Once',
   on:'statusApplied',carrier:'source',kinds:['buff'],tgtAlly:true,limit:'actionTarget',show:true,effects:[{op:'pull',n:15,to:'target'}],
   desc:'A buff Amy gives a family member also moves them 15 ticks up the turn bar.'};
+
+// ---------------------------------------------------------------- SuperMom (third Vibe, stage 19; sig 0) ----------------------------------------------------------------
+B3_VIBES.amy_super={id:'amy_super',owner:'amy',name:'SuperMom',sig:0,lean:'guard',
+  subtitles:['Double-Cold-Brew Driver','Ford Explorer Captain','Unstoppable Mama'],
+  trait:'eyes_in_back_of_her_head',basic:'backup_iced_coffee',skills:['mom_arm_seatbelt_stop','dairy_free_snack_pack','act_one_inside_voice_belt'],
+  quirks:['emergency_purse_tissue','the_rivituso_rule'],counter:null};
+// Eyes in the Back of Her Head: when a family member other than Amy falls under 35% of Max HP (the `allyBelowHp` hook, engine/b3-resolve.js b3Hurt)
+// she moves 25 ticks up the bar. It cannot go off again for 2 rounds.
+B3_TRAITS.eyes_in_back_of_her_head={id:'eyes_in_back_of_her_head',vibe:'amy_super',name:'Eyes in the Back of Her Head',
+  on:'allyBelowHp',tgtOther:true,cooldown:2,show:true,effects:[{op:'pull',n:25,to:'self'}],
+  desc:'When a family member drops under 35% HP, Amy moves 25 ticks up the turn bar. It cannot happen again for 2 rounds.'};
+B3_SKILLS.backup_iced_coffee={id:'backup_iced_coffee',vibe:'amy_super',slot:'basic',name:'Backup Iced Coffee',pep:0,flavor:['drench'],power:'light',hits:1,
+  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'heal',pct:'small'},{op:'status',id:'iced_up',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Light Drench hit, or a small heal and Speed for an ally.',
+  desc:'On a monster, a light Drench hit. On a family member, a small heal and 15% more Speed for 2 turns.'};
+// Mom-Arm Seatbelt Stop: a fast move (Base Recovery 70, my call for "fast"). It deals no damage (the spec gives the lunge no power); the Seatbelt on the
+// two allies halves an act that reaches the whole family for 2 turns (my call for the length).
+B3_SKILLS.mom_arm_seatbelt_stop={id:'mom_arm_seatbelt_stop',vibe:'amy_super',slot:'s1',name:'Mom-Arm Seatbelt Stop',pep:2,flavor:['clobber'],power:0,hits:0,rec:70,
+  target:'ally_pair',tags:[],composure:0,effects:[{op:'status',id:'seatbelt',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Fast. Two allies take half from whole-family acts.',
+  desc:'A fast protective lunge across the formation. Two family members take half damage from any act that reaches the whole family, for 2 turns.'};
+B3_SKILLS.dairy_free_snack_pack={id:'dairy_free_snack_pack',vibe:'amy_super',slot:'s2',name:'Dairy-Free Snack Pack',pep:4,flavor:['support'],power:0,hits:0,
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',ids:['slow','fatigue'],to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Heals the family and clears Slow and Fatigue.',
+  desc:'Fruit leather, apple slices and protein bites: a party heal that also clears Slow and Fatigue.'};
+B3_SKILLS.act_one_inside_voice_belt={id:'act_one_inside_voice_belt',vibe:'amy_super',slot:'cap',name:'Act-One "Inside Voice" Belt',pep:5,flavor:['racket'],power:'heavy',hits:1,
+  target:'all_foes',tags:[],composure:0,party:true,effects:[{op:'damage'},{op:'status',id:'inside_voice',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit on all. Family: +25% Defense, no debuffs.',
+  desc:'A chandelier-rattling belt: heavy Racket hit on every monster. The whole family gets 25% more Defense and cannot be given bad effects by monsters for 2 turns.'};
+// Emergency Purse Tissue: Amy's heals grow 35% on a family member under 40% HP (the heal op reads `healGiven` with the target in view).
+B3_QUIRKS.emergency_purse_tissue={id:'emergency_purse_tissue',vibe:'amy_super',name:'Emergency Purse Tissue',
+  mods:[{stat:'healGiven',kind:'tissue',v:.35,when:{tgtBelow:.4}}],
+  desc:'Amy\u2019s heals do 35% more on a family member under 40% HP.'};
+// The Rivituso Rule: a family member (Amy too) takes a crit, or a hit of 25% of their Max HP or more that no shield soaked any of: Amy gets 1 Pep (once a round).
+B3_QUIRKS.the_rivituso_rule={id:'the_rivituso_rule',vibe:'amy_super',name:'The Rivituso Rule',
+  on:'afterHit',from:'foe',tgtAlly:true,hurtOver:.25,orCrit:true,limit:'round',show:true,effects:[{op:'pep',n:1,to:'self'}],
+  desc:'When a family member takes a crit, or a heavy hit (a quarter of their Max HP) with no shield in the way, Amy gets 1 Pep (once a round).'};

@@ -436,3 +436,99 @@ const B3_HAZARDS={
     effects:[{op:'damage',flavor:['sizzle','razzle'],power:'light',to:'target'},{op:'status',id:'fatigue',to:'target'}],short:'GLUE',color:'#ff9ad0',pop:'STUCK!',verb:'gets stuck in',
     desc:'Hot glue, googly eyes and rhinestones cover the monsters\u2019 floor for 2 rounds. Every monster that acts takes a light Sizzle and Razzle hit and waits 20% longer after its move.'}
 };
+
+// ---- Stage 19: the third Vibes (statuses) ----
+Object.assign(B3_STATUS,{
+  // Grace, Stage Performer. Airborne: an act tagged `ground_sweep` misses her. Poise: +50% Crit Rate for her next attack Skill, and the bar cannot push her.
+  airborne:{id:'airborne',name:'Airborne',kind:'stance',group:null,dur:{n:1,unit:'turn'},mods:[],flags:['airborne'],short:'AIRBORNE',color:'#ffd6f2',weight:7,
+    desc:'In the air: a monster\u2019s ground sweep misses.'},
+  poise:{id:'poise',name:'Poise',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[{stat:'crit',kind:'poise',v:.50}],flags:['pushImmune'],
+    on:{actionEnd:{carrier:'source',attacks:true,consume:true,effects:[]}},
+    echo:'poise_echo',short:'POISE',color:'#f7a8e0',weight:6,desc:'+50% Crit Rate for her next attack Skill. The turn bar cannot push her.'},
+  poise_echo:{id:'poise_echo',name:'Poise Echo',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'crit',kind:'poise',v:.25}],flags:['pushImmune'],
+    short:'ECHO',color:'#f2c8ea',weight:3,desc:'Half of Poise lingers for one more turn: +25% Crit Rate.'},
+  // Justin, Armchair Ref. Yellow Penalty Flag: the monster takes 25% more from the next hit a family member lands, and that hit pushes it 15 ticks.
+  yellow_flag:{id:'yellow_flag',name:'Yellow Flag',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'taken',kind:'flag',v:.25}],flags:[],
+    on:{afterHit:{carrier:'target',fromParty:true,effects:[{op:'push',n:15,to:'target'}],consume:true}},
+    short:'FLAG',color:'#ffe14d',weight:5,desc:'Takes 25% more from the next hit a family member lands, and that hit pushes it back a little.'},
+  // Flag on the Play!: for its next turn the monster cannot use an act that reaches the whole family or one that puts a buff on its side.
+  flag_lock:{id:'flag_lock',name:'Play Flagged',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[],flags:['noAoe','noBuff'],
+    short:'FLAGGED',color:'#ffd24d',weight:4,desc:'Cannot use an act that hits the whole family or buffs its side on its next turn.'},
+  // Jumbotron Instant Replay: the offender is under review.
+  under_review:{id:'under_review',name:'Under Review',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'review',v:-.25}],flags:[],
+    short:'REVIEW',color:'#ff9f5a',weight:4,desc:'25% less Defense for 2 turns.'},
+  // Tom, Star Baker: Three-Tier Showstopper Cake. The family member's next attack adds a Sizzle splash of 30% of what it dealt.
+  sparklers:{id:'sparklers',name:'Sparklers',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[],flags:[],
+    on:{afterHit:{carrier:'source',attacks:true,tgtFoe:true,limit:'action',consume:true,effects:[{op:'splash',of:'dealt',share:.30,flavor:'sizzle',to:'target'}]}},
+    short:'SPARKLERS',color:'#ffd27a',weight:5,desc:'Their next attack adds Sizzle damage worth 30% of what it dealt.'},
+  // Rose, Prankster. The nose boop takes 10% Speed from the monster for a turn and gives it to Rose.
+  nose_boop:{id:'nose_boop',name:'Booped',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'spd',kind:'boop',v:-.10}],flags:[],
+    short:'BOOPED',color:'#f9a8c9',weight:2,desc:'10% slower for a turn.'},
+  nose_swift:{id:'nose_swift',name:'Sneaky Swift',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'spd',kind:'boop',v:.10}],flags:[],
+    short:'SWIFT',color:'#f9c6dc',weight:2,desc:'10% faster for a turn.'},
+  // Backup-Lamby Bait & Switch: Rose and tattered Lamby hide until her next turn begins.
+  lamby_hide:{id:'lamby_hide',name:'Hiding',kind:'buff',group:null,dur:{n:1,unit:'begin'},mods:[],flags:['untargetable'],
+    short:'HIDING',color:'#e8d8f2',weight:7,desc:'Hiding behind the bait: monsters cannot aim at her until her next turn.'},
+  // Mega Whoopee-Cushion Trap: embarrassed monsters land only the first hit of a multi-hit act; a Boss is also shaken (25% less Attack).
+  embarrassed:{id:'embarrassed',name:'Embarrassed',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[],flags:['fumble'],
+    short:'FUMBLE',color:'#ff9ec7',weight:5,desc:'Fumbles a multi-hit act: only its first hit lands.'},
+  shamed:{id:'shamed',name:'Shamed',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'shamed',v:-.25}],flags:[],
+    short:'ATK DOWN',color:'#ff8fbf',weight:4,desc:'25% less Attack for 2 turns.'},
+  // Amy, SuperMom. Backup Iced Coffee on an ally: 15% faster for 2 turns.
+  iced_up:{id:'iced_up',name:'Iced Up',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'iced',v:.15}],flags:[],
+    short:'SPEED UP',color:'#c9a77c',weight:3,desc:'15% faster for 2 turns.'},
+  // Mom-Arm Seatbelt Stop: the arm across the car seat takes half of any act that reaches the whole family.
+  seatbelt:{id:'seatbelt',name:'Seatbelt',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'seatbelt',v:.50,when:{aoe:true}}],flags:[],
+    short:'SEATBELT',color:'#9fc5e8',weight:6,desc:'Takes half damage from an act that reaches the whole family, for 2 turns.'},
+  // Act-One "Inside Voice" Belt: +25% Defense and no bad effects from monsters for 2 turns.
+  inside_voice:{id:'inside_voice',name:'Inside Voice',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'voice',v:.25}],flags:['debuffImmune'],
+    short:'BELTED',color:'#f2b8ff',weight:7,desc:'25% more Defense, and bad effects from monsters do not land. 2 turns.'},
+  // Deedee, Home Cook. Stuffed: nobody leaves the kitchen hungry (her Trait makes a Stuffed ally hit harder and take less). Stuffed Ward is Stuffed with the
+  // Warm Apple Muffins' bite: a monster that hits them up close gets burned.
+  stuffed:{id:'stuffed',name:'Stuffed',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
+    short:'STUFFED',color:'#f0c27b',weight:3,desc:'Full of Deedee\u2019s cooking. With her Home Cook Trait on: 15% more damage dealt and 10% less taken.'},
+  stuffed_ward:{id:'stuffed_ward',name:'Stuffed (Muffin)',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
+    on:{afterHit:{carrier:'target',from:'foe',tags:['melee'],limit:'action',react:true,effects:[{op:'damage',flavor:['sizzle'],power:'light',to:'attacker'}]}},
+    short:'MUFFIN',color:'#e8a85c',weight:4,desc:'Stuffed with warm muffins: a monster that hits them up close takes a light Sizzle burn.'},
+  // Wine O'Clock Pour: the monsters wobble, 10% less Evasion for a turn.
+  tipsy:{id:'tipsy',name:'Tipsy',kind:'debuff',group:'mental',dur:{n:1,unit:'turn'},mods:[{stat:'eva',kind:'tipsy',v:-.10}],flags:[],
+    short:'TIPSY',color:'#c58be0',weight:2,desc:'10% less Evasion for a turn.'},
+  // Full-House Sunday Dinner: for 2 rounds each of their turns starts with a heal, 1 Pep and a random boost.
+  sunday_dinner:{id:'sunday_dinner',name:'Sunday Dinner',kind:'buff',group:null,dur:{n:2,unit:'round'},mods:[],flags:[],
+    on:{turnStart:{carrier:'source',show:true,effects:[{op:'heal',pct:.15,to:'self'},{op:'pep',n:1,to:'self'},{op:'status',oneOf:['dinner_atk','dinner_def','dinner_spd'],to:'self'}]}},
+    short:'DINNER',color:'#ffd9a0',weight:8,desc:'The family is at the table: each turn starts with a 15% heal, 1 Pep and a random boost.'},
+  dinner_atk:{id:'dinner_atk',name:'Seconds (Attack)',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'dinner',v:.15}],flags:[],
+    short:'ATK UP',color:'#ffb27a',weight:2,desc:'15% more Attack for a turn.'},
+  dinner_def:{id:'dinner_def',name:'Seconds (Defense)',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'def',kind:'dinner',v:.15}],flags:[],
+    short:'DEF UP',color:'#b0c7e8',weight:2,desc:'15% more Defense for a turn.'},
+  dinner_spd:{id:'dinner_spd',name:'Seconds (Speed)',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'spd',kind:'dinner',v:.15}],flags:[],
+    short:'SPEED UP',color:'#b7e8a8',weight:2,desc:'15% more Speed for a turn.'},
+  // TNB, Scream King. Spooked: its next hit misses 30% more and does 30% less; anyone faster than it, or Airborne, crits it for sure.
+  spooked:{id:'spooked',name:'Spooked',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[{stat:'acc',kind:'spooked',v:-.30},{stat:'out',kind:'spooked',v:-.30},{stat:'critTaken',kind:'spooked',v:1,when:{attackerFast:true}}],flags:[],
+    on:{afterHit:{carrier:'source',limit:'action',consume:true,effects:[]}},
+    short:'SPOOKED',color:'#a78bd6',weight:5,desc:'Its next hit misses 30% more and does 30% less. A faster family member, or one in the air, always crits it.'},
+  // Nara, Picky Princess. Unimpressed Sniff: the monster's next hit does 20% less.
+  snubbed:{id:'snubbed',name:'Snubbed',kind:'debuff',group:'mental',dur:{n:2,unit:'turn'},mods:[{stat:'out',kind:'snub',v:-.20}],flags:[],
+    on:{afterHit:{carrier:'source',limit:'action',consume:true,effects:[]}},
+    short:'SNUBBED',color:'#c9b3a0',weight:3,desc:'Its next hit does 20% less damage.'},
+  // Weaponized Puppy Eyes: it will not aim at Nara, and hits 35% weaker, for its next turn.
+  puppy_eyes:{id:'puppy_eyes',name:'Puppy Eyes',kind:'debuff',group:'mental',dur:{n:1,unit:'turn'},mods:[{stat:'out',kind:'puppy',v:-.35}],flags:['avoidSrc'],
+    short:'PUPPY EYES',color:'#e0b890',weight:5,desc:'Will not aim at Nara and does 35% less damage on its next turn.'},
+  plate_warm:{id:'plate_warm',name:'Warm Plate',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'plate',v:.20}],flags:[],
+    short:'ATK UP',color:'#ffc27a',weight:3,desc:'20% more Attack for 2 turns.'},
+  high_standards:{id:'high_standards',name:'High Standards',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'crit',kind:'standards',v:.15}],flags:[],
+    short:'CRIT UP',color:'#ffe0a8',weight:3,desc:'15% more Crit Rate for 2 turns.'},
+  fuss:{id:'fuss',name:'Fussing Over Her',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'fuss',v:.15}],flags:[],
+    short:'SPEED UP',color:'#c8e8b0',weight:3,desc:'15% faster for 2 turns.'},
+  // Olivia, News Anchor. On the Record: every monster is exposed for the whole fight (it cannot be cleansed): the family crits it 15% more.
+  on_record:{id:'on_record',name:'On the Record',kind:'mark',group:null,dur:{n:99,unit:'turn'},mods:[{stat:'critTaken',kind:'record',v:.15}],flags:['noCleanse'],
+    short:'ON RECORD',color:'#ffe08a',weight:1,desc:'Exposed: the family crits it 15% more. Cannot be cleansed.'},
+  mic_in_face:{id:'mic_in_face',name:'Mic in Face',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'mic',v:-1}],flags:[],
+    short:'MIC',color:'#ffd0a0',weight:3,desc:'Cannot dodge for 2 turns: the mic is right in its face.'},
+  // Breaking Exclusive: a Pet Peeve or other resistance counts one step weaker (a resistance becomes neutral).
+  stripped_defenses:{id:'stripped_defenses',name:'Exposed',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['resistStep'],
+    short:'EXPOSED',color:'#ff7a9a',weight:4,desc:'Its resistances count one step weaker for 2 turns.'},
+  ruckus_boost:{id:'ruckus_boost',name:'Breaking News',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['ruckusBoost'],
+    on:{actionEnd:{carrier:'source',consume:true,effects:[]}},
+    short:'BREAKING',color:'#ff5a5a',weight:1,desc:'Ruckus gains from this action are 25% bigger.'}
+});

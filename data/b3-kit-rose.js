@@ -3,7 +3,7 @@
 // Quirks and its Grand Capstone); Cozy Rosie's Basic. Trait and Quirk rows marked `soon:true` have a name and a sentence but
 // no rule yet (stage 5b).
 // A multi-hit move's `power` is the whole move's power, shared evenly by its hits (my call: the spec gives one tier per move).
-B3_CAST.rose={id:'rose',name:'Rose',vibes:['rose_sugar','rose_cozy'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.rose={id:'rose',name:'Rose',vibes:['rose_sugar','rose_cozy','rose_prank'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.rose_sugar={id:'rose_sugar',owner:'rose',name:'Sugar Rush',sig:1,lean:'striker',
   subtitles:['Ankle Tackler','Shoulder Jockey','Human Pinball'],
   trait:'bouncy_physics',basic:'lamb_tuck_ankle_tackle',skills:['the_floor_is_lava','giddyup_tata_launch','double_lamby_return_cart_blitz'],
@@ -97,3 +97,42 @@ B3_SKILLS.kingdom_of_ten_thousand_blankets={id:'kingdom_of_ten_thousand_blankets
   line:null,anim:{kind:'default',shape:'give'},
   short:'Big heal for one family member, then a hit on every monster.',
   desc:'A star-lit blanket castle: one family member heals 60% of their HP and every debuff on them clears. When Rose\u2019s next turn begins, a wave of Sizzle warmth hits every monster.'};
+
+// ---- Prankster (third Vibe, stage 19; sig 0) ----
+B3_VIBES.rose_prank={id:'rose_prank',owner:'rose',name:'Prankster',sig:0,lean:'tempo',
+  subtitles:['Giggle Bug','Twin-Lamb Trickster','Master of Mischief'],
+  trait:'too_loud_for_secrets',basic:'sneaky_nose_boop',skills:['supersonic_raspberry','backup_lamby_bait_and_switch','mega_whoopee_cushion_trap'],
+  quirks:['nanas_card_trick','upside_down_pilot_wings'],counter:null};
+// Too Loud for Secrets: a monster with less than half its Composure pips left deals 20% less to Rose (a `reduce` mod, read in b3Hit with the attacker in view).
+B3_TRAITS.too_loud_for_secrets={id:'too_loud_for_secrets',vibe:'rose_prank',name:'Too Loud for Secrets',
+  mods:[{stat:'reduce',kind:'loud',v:.20,when:{attackerPips:.5}}],
+  desc:'A monster that has less than half its Composure left is so rattled by Rose\u2019s volume that it deals 20% less damage to her.'};
+B3_SKILLS.sneaky_nose_boop={id:'sneaky_nose_boop',vibe:'rose_prank',slot:'basic',name:'Sneaky Nose Boop',pep:0,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'nose_boop',to:'target'},{op:'status',id:'nose_swift',to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Steals 10% Speed for a turn.',
+  desc:'Light Racket hit. The monster is 10% slower and Rose 10% faster until their next turns end.'};
+// Supersonic Raspberry: light Racket (my call). 1 Composure pip if the monster is winding up an act; a second if the hit was a Pet Peeve hit or a Detonation.
+B3_SKILLS.supersonic_raspberry={id:'supersonic_raspberry',vibe:'rose_prank',slot:'s1',name:'Supersonic Raspberry',pep:2,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'composure',n:1,to:'target',when:'targetCharging'},{op:'composure',n:1,to:'target',when:'chargingBoost'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light hit. Pips off a monster winding up an act.',
+  desc:'Light Racket hit. If the monster is winding up an act it loses 1 Composure pip, 2 if this was a Pet Peeve hit or set off a Prime.'};
+// Backup-Lamby Bait & Switch: standard Racket (my call). The bait draws the monsters\u2019 aim: Rose cannot be aimed at until her next turn begins, then
+// the later part (the `later` op, as Give Lamby Back! is) hits with a push of 35.
+B3_SKILLS.backup_lamby_bait_and_switch={id:'backup_lamby_bait_and_switch',vibe:'rose_prank',slot:'s2',name:'Backup-Lamby Bait & Switch',pep:4,flavor:['racket'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,
+  effects:[{op:'status',id:'lamby_hide',to:'self'},{op:'later',name:'BOOOOO!',effects:[{op:'damage',flavor:['racket'],power:'standard',to:'target'},{op:'push',n:35,to:'target'}]}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Hide now, leap out next turn: hit and push 35.',
+  desc:'Rose sets Backup Lamby down as bait and hides: monsters cannot aim at her until her next turn begins. Then she leaps out for a standard Racket hit that pushes the monster back 35 ticks.'};
+B3_SKILLS.mega_whoopee_cushion_trap={id:'mega_whoopee_cushion_trap',vibe:'rose_prank',slot:'cap',name:'Mega Whoopee-Cushion Trap',pep:5,flavor:['racket'],power:'standard',hits:1,
+  target:'all_foes',tags:[],composure:0,
+  effects:[{op:'damage'},{op:'strip',kind:'stance',to:'target'},{op:'status',id:'embarrassed',to:'target'},{op:'status',id:'shamed',to:'bossTargets'},{op:'composure',n:1,to:'bossTargets'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Hits all, drops stances, fumbles multi-hit acts.',
+  desc:'Standard Racket hit on every monster. Each loses its stance and fumbles multi-hit acts (only the first hit lands) for 2 turns. A Boss also gets 25% less Attack and loses 1 Composure pip.'};
+// Nana's Card Trick: delaying a monster (a push on the turn bar from Rose) takes 1 minor buff off it for Rose; if there is none, a Pep candy goes to a random family member (once an action).
+B3_QUIRKS.nanas_card_trick={id:'nanas_card_trick',vibe:'rose_prank',name:'Nana\u2019s Card Trick',
+  on:'barMoved',carrier:'source',pushed:true,tgtFoe:true,limit:'action',show:true,effects:[{op:'steal',n:1,to:'target'},{op:'pep',n:1,to:'randomAlly',when:'notStolen'}],
+  desc:'When Rose delays a monster\u2019s turn she steals 1 buff from it, or tosses a Pep candy to a random family member if it has none (once an action).'};
+// Upside-Down Pilot Wings: at 8 or more Pep, her Skills (not her Basic) ignore Evasion, shields and a Guard Stance (a `pierce` mod, b3Hit in engine/b3-resolve.js).
+B3_QUIRKS.upside_down_pilot_wings={id:'upside_down_pilot_wings',vibe:'rose_prank',name:'Upside-Down Pilot Wings',
+  mods:[{stat:'pierce',kind:'wings',v:1,when:{notBasic:true,pepAtLeast:8}}],
+  desc:'With 8 or more Pep, Rose\u2019s Skills ignore monster shields, Evasion and Guard Stances.'};

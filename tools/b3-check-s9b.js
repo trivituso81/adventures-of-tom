@@ -33,7 +33,7 @@ module.exports=function(T) {
     ok(!VIBES[v].skills.some(s=>SOON[s])&&!(VIBES[v].quirks||[]).some(q=>QUIRKS[q].soon)&&!TRAITS[VIBES[v].trait].soon,v+': no Skill, Trait or Quirk is still a name only');
     for(const s of [VIBES[v].basic,...VIBES[v].skills]) ok(SK[s].desc&&SK[s].desc.length>40&&!/—/.test(SK[s].desc),s+' has a full plain description'); }
   ok(bad0==='[]','the data check is clean with TNB in: '+bad0);
-  ok(G('B3_CAST').tnb&&J(G('B3_CAST').tnb.vibes)==='["tnb_potter","tnb_boarder"]','TNB is in the cast with both Vibes');
+  ok(G('B3_CAST').tnb&&J(G('B3_CAST').tnb.vibes.slice(0,2))==='["tnb_potter","tnb_boarder"]','TNB is in the cast with both Vibes');
 
   // 2. Wheel-Thrown Lump: a light Clobber hit; the monster is Wet Clay (10% slower) for 2 turns
   noCrit(()=>{ const {F,tnb,f0}=fight(); const spd0=stat(f0,'spd'),b=go(F,tnb,'wheel_thrown_lump','f0'),h=hits(b,'f0');

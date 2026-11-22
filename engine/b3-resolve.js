@@ -122,6 +122,7 @@ function b3EndTurn(F,u,recovery,beats) {
     if(u.flusterMove) { u.flusterMove=false; b3FlusterMove(F,u,0); }
     // The turn a Broken foe was owed is over: its pips can be shaved again.
     if(u.flusterTurn) { u.flusterTurn=false; u.pipLock=false; }
+    u.jumped=0;   // (stage 19) the count of icons leapt past restarts; the pull below counts toward the next turn
     // A pull this turn asked for after its wait was set ("Better Than Bobby!": the next turn comes sooner).
     if(u.nextPull) { const amt=b3Pull(F,u,u.nextPull); u.nextPull=0; if(amt) beats.push({t:'pull',tgt:u.key,n:amt,bar:b3BarSnap(F,null,0),g:'end'}); }
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(!s||s.unit!=='turn') continue;   /* a status an earlier one's end took away: Toasty ending ends Five-Alarm Burn with it (found in stage 11) */
@@ -155,6 +156,7 @@ function b3Hurt(F,c,t,dmg,info) {
     // "Gold Like My Teeth" (Boppy, stage 9c, `custom:'goldTeeth'`): once a battle a lethal hit leaves him on 1 HP, and he gains Pep.
     else if(t.custom&&t.custom.goldTeeth&&!t.used.goldTeeth) { t.used.goldTeeth=true; gold=t.custom.goldTeeth; held='gold_teeth'; left=t.hp-1; } }
   if(t.hpFloor!=null&&left>t.hp-t.hpFloor) left=Math.max(0,t.hp-t.hpFloor);   // a scripted monster's HP never falls below its floor (cfg.setup.midpoint.hold)
+  const hp0=t.hp;
   t.hp=Math.max(0,t.hp-left);
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;
@@ -164,6 +166,10 @@ function b3Hurt(F,c,t,dmg,info) {
   if(gold) { const got=b3Pep(F,t,gold.pep,'effect'); if(got) c.beats.push({t:'pep',tgt:t.key,n:got,pep:t.pep,g:c.g}); }
   for(const [sh,a] of glazed) b3GlazeReflect(F,c,t,sh,a,info);   // Fired Glaze throws back what it soaked
   for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g,c},c.beats); }
+  // Stage 19. The last hit a monster dealt to the family (Jumbotron Instant Replay rewinds half of it), and the moment a family member
+  // drops below B3_LOW_HP of their Max HP (Eyes in the Back of Her Head).
+  if(t.side==='party'&&info&&!info.tick&&info.src&&left+soak>0) { const sU=b3Unit(F,info.src); if(sU&&sU.side!==t.side) F.lastAllyHit={tgt:t.key,src:info.src,dmg:left+soak,flavor:info.flavor||null}; }
+  if(t.side==='party'&&t.hp>0&&hp0>=t.maxHp*B3_LOW_HP&&t.hp<t.maxHp*B3_LOW_HP) b3Fire(F,'allyBelowHp',{src:c.actor,tgt:t,g:c.g,c},c.beats);
 }
 function b3KoCheck(F,c) {
   for(const u of F.units) if(!u.ko&&u.hp<=0) {
@@ -239,15 +245,16 @@ function b3FindDetonation(t,flavor,a) {
 //   targetHas  the target carries one of `ids`
 //   tookHit    the attacker took or blocked a hit since its last turn ended (a burn tick is not a hit)
 // A bonus with grow:true is counted once for every hit of the move so far (hit 3 of a move gets three times `add`).
-const B3_CONDS=['targetHas','tookHit'];
+const B3_CONDS=['targetHas','tookHit','targetDebuffs'];
 function b3Cond(F,c,cond,t) {
   if(cond.if==='targetHas') return cond.ids.some(id=>t.st[id]);
   if(cond.if==='tookHit') return !!c.actor.hitSince;
+  if(cond.if==='targetDebuffs') return Object.keys(t.st).filter(id=>['debuff','mark'].includes(B3_STATUS[id].kind)).length>=cond.min;   // stage 19: Act-Three Mask Reveal (2 or more)
   throw new Error('Battle 3 condition not built yet: '+cond.if);
 }
 // The chance a hit crits: the base rate, the attacker's own bonus, what the target gives away (Dazzled), and a Skill that crits more
 // often for every Prime on the target (`critPerPrime` on its damage effect: Konami Code).
-const b3CritChance=(a,t,e)=>B3_RULES.crit.rate+b3Sum(a,'crit')+b3Sum(t,'critTaken')+(e&&e.critPerPrime?e.critPerPrime*b3PrimeCount(t):0);
+const b3CritChance=(a,t,e)=>B3_RULES.crit.rate+b3Sum(a,'crit')+b3Sum(t,'critTaken',{a,t})+(e&&e.critPerPrime?e.critPerPrime*b3PrimeCount(t):0);
 // One hit on one target. `per` is the Skill Power of each flavor part of this hit.
 function b3Hit(F,c,t,per,flavors,e,single) {
   const a=c.actor,B=c.beats;
@@ -257,11 +264,15 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     for(const id of Object.keys(a.st)) if(B3_STATUS[id].flags.includes('blind')) { b3EndStatus(F,a,id,'used'); B.push({t:'statusEnd',tgt:a.key,id,g:c.g}); }
     B.push({t:'miss',src:a.key,tgt:t.key,why:'blind',g:c.g}); return;
   }
+  // Airborne (Five-Six-Seven-Eight!): an act with the `ground_sweep` tag misses a family member in the air.
+  if(a.side==='foe'&&t.side==='party'&&c.tags&&c.tags.includes('ground_sweep')&&b3HasFlag(t,'airborne')) { B.push({t:'miss',src:a.key,tgt:t.key,why:'airborne',g:c.g}); return; }
+  // Upside-Down Pilot Wings (a `pierce` mod) or a pierce effect: the hit ignores Evasion, shields and a Guard Stance.
+  const pierce=!!(e&&e.pierce)||b3Sum(a,'pierce',{F,c,a,t,fl:flavors[0]})>0;
   // Gold-Star Sticker (`trueAim`): the carrier's hits ignore accuracy penalties and Evasion. A Blind still makes the next single-target hit miss.
   const ta=b3HasFlag(a,'trueAim');
   const mc=ta?0:b3MissChance(a); if(mc>0&&b3Rand(F)<mc) { B.push({t:'miss',src:a.key,tgt:t.key,why:'acc',g:c.g}); return; }
   // A pierce hit (Stunt-Double Squirrel Intercept) ignores Evasion and shields. A hit that is part of a party-wide act is `wide`.
-  const ev=e&&e.pierce||ta?0:b3Evasion(t,!single); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
+  const ev=pierce||ta?0:b3Evasion(t,!single,{F,c,a,t,fl:flavors[0]}); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
   c.landed=(c.landed||0)+1;   // hits this action has landed so far ("It's OUR Longboard Now")
   // Family Ruckus: each hit after the first of a multi-hit move that lands (engine/b3-ruckus.js).
   if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&b3HitsOf(a,c.skill)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
@@ -284,13 +295,14 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     const bonus=Object.assign({},c.outExtra);
     // `counter` reads one of the attacker's Portable Counters (so much per point built up).
     if(e.bonus) { if(e.bonus.counter) { const n=a.counters[e.bonus.counter]||0; bonus.skill=e.bonus.add*n; if(e.bonus.spend&&n) (c.spend=c.spend||{})[a.key+':'+e.bonus.counter]=true; }
+      else if(e.bonus.targetBuffs) bonus.skill=e.bonus.add*b3BuffCount(t);   // every buff on the monster (Is This Real? Fact-Check)
       else if(e.bonus.buffs) bonus.skill=e.bonus.add*b3BuffCount(a);   // every buff the attacker has (Regional Championship Freestyle)
       else if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0);
       else if(b3Cond(F,c,e.bonus,t)) bonus.skill=e.bonus.add*(e.bonus.grow?(c.hitNo||0)+1:1); }
-    const pv=b3Peeves(t).includes(fl),rs=t.resists.includes(fl);
+    const pv=b3Peeves(t).includes(fl),rs=t.resists.includes(fl)&&!b3HasFlag(t,'resistStep');   // stage 19: Breaking Exclusive lowers a resistance one step (it becomes neutral)
     // What this hit is, for the mods that only count on some hits (a Quirk's `when`, a rider like Spit Shine): b3Mods in engine/b3-core.js.
-    const mx={F,c,a,t,fl};
-    let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg*(1+b3Sum(a,'critDmg')):1)*b3TakenMult(t,red,mx);
+    const mx={F,c,a,t,fl,pierce};
+    let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg*(1+b3Sum(a,'critDmg',mx)):1)*b3TakenMult(t,red,mx);
     if(single&&fl==='clobber'&&b3EffRow(F,t)==='back') dmg*=1-B3_RULES.backRowClobber;
     if(t.side==='party') dmg*=F.mods.taken;
     dmg=Math.max(1,Math.round(dmg));
@@ -304,7 +316,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
       b3Fire(F,'detonation',{src:a,tgt:t,id:det.id,g:c.g,c},B);
       det=every?b3FindDetonation(t,fl,a):null;
     }
-    b3Hurt(F,c,t,dmg,Object.assign({src:a.key,flavor:fl,crit,peeve:pv,resist:rs},e&&e.pierce?{pierce:true}:null));
+    b3Hurt(F,c,t,dmg,Object.assign({src:a.key,flavor:fl,crit,peeve:pv,resist:rs},pierce?{pierce:true}:null));
     b3RuckusMix(F,c,a,t,fl,pv||!!c.detonated[t.key]);
     if(!c.hit.includes(t)) c.hit.push(t);
     if(a.side==='party'&&t.side==='foe') {
@@ -335,11 +347,11 @@ function b3Interceptor(F,t) {
 // whoever `to` names and its beats stay in the part of the action it was set off in.
 function b3DamageOp(F,c,e) {
   const own=e.power!=null,S=own?{flavor:e.flavor,power:e.power,hits:e.hits||1,target:'foe'}:c.skill;
-  const a=c.actor,hits=b3HitsOf(a,S),all=own?!!e.aoe:(S.target==='all_foes'||S.target==='foe_row');
+  const a=c.actor,hits0=b3HitsOf(a,S),hits=a.side==='foe'&&b3HasFlag(a,'fumble')?1:hits0,all=own?!!e.aoe:(S.target==='all_foes'||S.target==='foe_row');
   const tier=typeof S.power==='number'?S.power:B3_RULES.power[S.power];
   // A move with `hitsBy`: its power is for `base` hits, and every hit past that adds `grow` of it (Criss-Cross Double-Under).
   const grow=S.hitsBy?1+S.hitsBy.grow*(hits-S.hitsBy.base):1;
-  const per=tier*grow*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
+  const per=tier*grow*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits0/S.flavor.length*(c.scale||1);   // stage 19: a Fumbled monster (Mega Whoopee-Cushion Trap) lands only the first hit of a multi-hit act
   if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
   c.didDamage=true;
   if(a.side==='foe'&&b3VesselTake(F,c)) { c.g='post'; return; }   // a vessel on the family's floor soaked the whole act
@@ -393,6 +405,8 @@ function b3Act(F,u,skillId,optKey) {
   // A Skill's own printed Composure number, on every monster it hit (or aimed at, when it deals no damage).
   if(S.composure) for(const t of (c.hit.length?c.hit:c.targets)) b3Pips(c,t,S.composure);
   b3DoubleCoat(F,c);     // Grace's Razzle-then-Racket chain (engine/b3-custom.js)
+  b3Tupperware(F,c);     // Deedee's "Tupperware Send-Off": a single heal or buff bounces to a second ally (engine/b3-custom.js)
+  b3Unmailed(F,c);       // Justin's "Unmailed Invitations": a Racket Skill repeated for free (engine/b3-custom.js)
   b3KoCheck(F,c);
   // Composure is paid before anything answers: a foe this action Broke has lost its counter (architecture 2.6, step 6).
   b3PayLedger(F,c);

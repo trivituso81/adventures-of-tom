@@ -657,3 +657,32 @@ Worn gear counts in a Battle 3 fight through one table, `B3_GEAR` in `data/b3-ge
 | perks `crit`, `evade`, `regen`, `startVp`, `heart`, `coins`, `kind`, `immune` | off, a reason each in `B3_GEAR.off.perks` |
 
 Where it is applied: `b3GearSum` (`engine/b3-core.js`) adds a member's worn items; `b3PartyUnit` adds the flat points to the level-line stats and pushes the percent mods; a story fight builds `cfg.gear` in `b3sBegin` (`engine/b3-story.js`). A fight with no `gear` is the bare fight (rule tests and the Lab). Test: `tools/b3-check-gear.js`. Simulator: `--gear=<chapter 1 to 5>`. Balance numbers: docs/CHANGES.md `b3gear`.
+
+## What stage 19 holds (build `b3s19`, 2026-11-22)
+
+The third Vibe of every character is built: ten new Vibes, 40 moves (4 each: a Basic and three Skills), 10 Traits and 20 Quirks, as rows in the ten `data/b3-kit-<id>.js` files. A character's third Vibe is the third entry of `B3_CAST[id].vibes` with `sig:0`.
+
+| Character | Third Vibe | Lean |
+|---|---|---|
+| Tom | Star Baker | support |
+| Grace | Stage Performer | see `data/b3-kit-grace.js` |
+| Rose | Prankster | see `data/b3-kit-rose.js` |
+| Amy | SuperMom | see `data/b3-kit-amy.js` |
+| Deedee | Home Cook | see `data/b3-kit-deedee.js` |
+| Boppy | Boat Angler | see `data/b3-kit-boppy.js` |
+| TNB | Scream King | see `data/b3-kit-tnb.js` |
+| Nara | Picky Princess | see `data/b3-kit-nara.js` |
+| Justin | Armchair Ref | see `data/b3-kit-justin.js` |
+| Olivia | News Anchor | see `data/b3-kit-olivia.js` |
+
+| Item | Fact |
+|---|---|
+| Saves | No migration. The progression code walks `B3_CAST[id].vibes`, so an old save loads the third Vibe at 0 Vibe Points (`b3FixLoadout` repairs the loadout). New saves hold three `vp` entries. The Lab's fresh loadouts put every Vibe at Rank 2 (60 VP). Battle 2 files are untouched. |
+| Four-party rule | The plan text "three or four characters per conversation" is a work split for the build sessions, not a game rule, and no document defines a rule for a fight. I did not invent one. What is built and tested: every one of the 40 moves works in a four-member party, and whole fights run in four-member parties (`tools/b3-check-s19.js` sections 2 and 3). |
+| New statuses | airborne, poise, poise_echo, yellow_flag, flag_lock, under_review, sparklers, nose_boop, nose_swift, lamby_hide, embarrassed, shamed, iced_up, seatbelt, inside_voice, stuffed, stuffed_ward, tipsy, sunday_dinner, dinner_atk, dinner_def, dinner_spd, spooked, snubbed, puppy_eyes, plate_warm, high_standards, fuss, on_record, mic_in_face, stripped_defenses, ruckus_boost (`data/b3-status.js`). |
+| New ops | `extend`, `swapGap`, `replay`, `invert`; options on old ops: shield `perCounter`, status `oneOf`, composure `ifBuffed`, row and push fire hooks (`rowMoved`, `barMoved` with `crossed`). |
+| New conditions | Mods: skillId, pepAtLeast, attackerPips, has, attackerDebuffed, tgtWeak, attackerFast, jumped. Listeners: pushed, crossed, srcCrit, fromParty, tgtOther, hurtOver, orCrit, skillVibe, peeveHit, tgtWeak, cooldown. Targets: lowestPepAlly, lowestHpAlly, bossTargets. |
+| One-offs | `engine/b3-custom.js`: encore, unmailed, tupperware, couch, scoop (end of `B3_CUSTOM`). |
+| Tests | `node tools/b3-sim.js check` (3773, FAILS []; `tools/b3-check-s19.js` is new: all ten Vibes complete, all 40 moves in four-member parties, whole fights, an old save loads with 0 VP, per-character seams). `python3 tools/b3_test.py s4` FAILS [] (Vibe Point expectations now list the third Vibe). One Lab fight per Vibe (all ten open with the new Basic or Skill, no script error). |
+| Battle Guide | The ten third Vibes are no longer planned: `data/guide-planned.json` rebuilt, `tools/battle_guide_test.py` updated, `data/guide-anims.json` rebuilt for the 40 new moves, and `tools/guide_planned.py` no longer drops chapters 11 to 20 because the bonus chapter 21 is in `B3_STORY.chapters`. |
+| Waits | Stage 20 (Casual Mode, the Freelancer Vibe), card c-b3s20. |

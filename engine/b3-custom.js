@@ -15,7 +15,12 @@ const B3_CUSTOM={
   hoseFlinched:'Boppy, Pepper Boss, Quirk A: the damage-over-time ticks of statuses he put on can crit (engine/b3-resolve.js b3TickHit)',
   nervous:'Nara, Attached Pup, Trait: Evasion from the Pep she is holding, half against a party-wide act (engine/b3-core.js b3Evasion)',
   shins:'Nara, Attached Pup, Quirk B: her Attack grows by a share of her Speed bonuses (engine/b3-core.js b3Stat)',
-  muscleMemory:'Olivia, Rope Champ, Quirk A: a Support turn no longer resets her Cadence (the reset in her Vibe row has `lacksCustom:\'muscleMemory\'`, engine/b3-hooks.js)'
+  muscleMemory:'Olivia, Rope Champ, Quirk A: a Support turn no longer resets her Cadence (the reset in her Vibe row has `lacksCustom:\'muscleMemory\'`, engine/b3-hooks.js)',
+  encore:'Grace, Stage Performer, Quirk B: a one-attack buff that fires leaves half its bonus for one more turn (engine/b3-core.js b3EndStatus, the status row\'s `echo`)',
+  scoop:'Olivia, News Anchor, Quirk B: the first debuff she puts on a Boss lasts a turn longer and cannot be cleansed (engine/b3-ops.js b3PutStatus)',
+  couch:'Nara, Picky Princess, Quirk B: a single buff on her is copied for half its turns onto the family member with the lowest HP (engine/b3-ops.js b3PutStatus)',
+  tupperware:'Deedee, Home Cook, Quirk A: a single heal or buff bounces at half size to a second family member, sometimes (b3Tupperware)',
+  unmailed:'Justin, Armchair Ref, Quirk B: once a fight a 2 or 3 Pep Racket Skill is repeated free at half power (b3Unmailed)'
 };
 
 // ---------- Boppy Speed (spec 3.6: "timeline pushback immune >50% HP") ----------
@@ -109,6 +114,31 @@ function b3DoubleCoat(F,c) {
     c.beats.push({t:'passive',src:a.key,id:'double_coat',name:B3_QUIRKS.double_coat.name,g:c.g});
   }
   a.lastFlavor=fl;
+}
+
+// ---------- "Unmailed Invitations" (Justin, Armchair Ref, Quirk B, stage 19) ----------
+// Once a fight, a Racket Skill that costs 2 or 3 Pep is delivered again for free at half power (my calls: the repeat is the Skill's damage
+// and heals at `scale` .5, as a rider-held repeat is; a rider such as a push or a status does not repeat; "or Break" is not built, the
+// repeat is once a fight). Called from b3Act after the move's effects, before the ledger is paid.
+function b3Unmailed(F,c) {
+  const a=c.actor,S=c.skill,n=a.custom&&a.custom.unmailed; if(!n||!S||a.side!=='party'||a.used.unmailed||!c.hit.length) return;
+  if(S.slot==='basic'||!(S.flavor||[]).includes('racket')||!(S.pep>=2&&S.pep<=3)) return;
+  a.used.unmailed=true;
+  c.beats.push({t:'passive',src:a.key,id:'unmailed_invitations',name:B3_QUIRKS.unmailed_invitations.name,g:c.g});
+  b3RunEffects(F,Object.assign({},c,{scale:.5}),S.effects);
+}
+
+// ---------- "Tupperware Send-Off" (Deedee, Home Cook, Quirk A, stage 19) ----------
+// A single-target heal or buff Deedee gives an ally can bounce to a second family member (any other than the first, picked by the fight's dice) at
+// half size (a heal or a shield; a buff goes on whole, my call). 35% of the time, always at 8 or more Pep. Called from b3Act after the move's effects.
+function b3Tupperware(F,c) {
+  const a=c.actor,S=c.skill,n=a.custom&&a.custom.tupperware; if(!n||F.preview||!S||a.side!=='party'||!['ally','family'].includes(S.target)||c.targets.length!==1) return;
+  if(!(S.effects||[]).some(e=>e.op==='heal'||e.op==='shield'||(e.op==='status'&&B3_STATUS[e.id]&&B3_STATUS[e.id].kind==='buff'))) return;
+  const first=c.targets[0],L=b3Live(F,a.side).filter(o=>o!==first); if(!L.length) return;
+  if(!(a.pep>=n.pep?true:b3Rand(F)<n.chance)) return;
+  const to=L[Math.floor(b3Rand(F)*L.length)];
+  c.beats.push({t:'passive',src:a.key,id:'tupperware_send_off',name:B3_QUIRKS.tupperware_send_off.name,g:c.g});
+  b3RunEffects(F,Object.assign({},c,{targets:[to],tgt:to,hit:[],scale:.5,bounce:true}),S.effects);
 }
 
 // ---------- Wet Clay to Stoneware, clay shields and Fired Glaze (spec 3.7, Ceramicist) ----------

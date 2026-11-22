@@ -1,7 +1,7 @@
 'use strict';
 // data/b3-kit-grace.js — Battle 3 kit: Grace (spec section 3.2). Built: all of Squishy Collector (stage 5a) and all of Craft
 // Artist (stage 5b). A Trait or Quirk row marked `soon:true` has a name and a sentence but no rule yet.
-B3_CAST.grace={id:'grace',name:'Grace',vibes:['grace_squishy','grace_craft'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.grace={id:'grace',name:'Grace',vibes:['grace_squishy','grace_craft','grace_stage'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.grace_squishy={id:'grace_squishy',owner:'grace',name:'Squishy Collector',sig:1,lean:'tempo',
   subtitles:['NeeDoh Molder','Dumpling Squeezer','Golden Squishy Keeper'],
   trait:'sensory_satisfying',basic:'soup_dumpling_squeeze',skills:['needoh_stretch_pass','crunchy_sugar_cube_pop','colossal_diamond_gold_dumpling'],
@@ -85,3 +85,38 @@ B3_SKILLS.masterpiece_portrait_makeover={id:'masterpiece_portrait_makeover',vibe
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'razzle_weak',to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
   short:'Heavy hit. Razzle becomes its Pet Peeve.',
   desc:'Heavy Razzle hit. For 2 of its turns Razzle is one of that monster\u2019s Pet Peeves: Razzle hits do 50% more and knock a Composure pip off.'};
+
+// ---- Stage Performer (third Vibe, stage 19; sig 0) ----
+B3_VIBES.grace_stage={id:'grace_stage',owner:'grace',name:'Stage Performer',sig:0,lean:'striker',
+  subtitles:['Back-Row Dancer','Recital Soloist','Spotlight Headliner'],
+  trait:'choreographed_momentum',basic:'five_six_seven_eight',skills:['jazz_hands_cartwheel','good_scrunchie_pirouette','grand_jete_spotlight_finale'],
+  quirks:['standing_ovation','encore_poise'],counter:null};
+// Choreographed Momentum: the turn bar counts the icons Grace leaps past (b3Pull in engine/b3-timeline.js, `jumped`); 2 or more since her last turn
+// is +25% damage. The two stances are Airborne (Five-Six-Seven-Eight!) and the ordinary Grounded one, which is simply no stance (my call).
+B3_TRAITS.choreographed_momentum={id:'choreographed_momentum',vibe:'grace_stage',name:'Choreographed Momentum',
+  mods:[{stat:'out',kind:'momentum',v:.25,when:{jumped:2}},{stat:'critDmg',kind:'finale',v:.50,when:{skillId:'grand_jete_spotlight_finale',has:'airborne'}}],
+  desc:'When Grace leaps past 2 or more icons on the turn bar since her last turn, her hits do 25% more damage. In the air (Airborne) her Grand Jet\u00e9 crits harder.'};
+B3_SKILLS.five_six_seven_eight={id:'five_six_seven_eight',vibe:'grace_stage',slot:'basic',name:'Five-Six-Seven-Eight!',pep:0,flavor:['clobber'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'airborne',to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Grace springs into the air.',
+  desc:'Light Clobber hit. Grace snaps an eight-count pose and springs Airborne until her next turn ends: monster ground sweeps miss her.'};
+// Jazz-Hands Cartwheel: standard Clobber (my call: the spec says "Clobber damage"). The swap is the `swapGap` op (engine/b3-ops.js).
+B3_SKILLS.jazz_hands_cartwheel={id:'jazz_hands_cartwheel',vibe:'grace_stage',slot:'s1',name:'Jazz-Hands Cartwheel',pep:2,flavor:['clobber'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'swapGap',max:25}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Hit, then swap places with the next monster to act.',
+  desc:'Standard Clobber hit. Grace then trades places on the turn bar with the monster due to act next: it is pushed back and she moves up by the gap, 25 ticks at most.'};
+B3_SKILLS.good_scrunchie_pirouette={id:'good_scrunchie_pirouette',vibe:'grace_stage',slot:'s2',name:'Good-Scrunchie Pirouette',pep:3,flavor:['support'],power:0,hits:0,
+  target:'self',tags:[],composure:0,effects:[{op:'status',id:'poise',to:'self'},{op:'pull',n:30,next:true,to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Poise for her next attack, and an earlier next turn.',
+  desc:'Poise: +50% Crit Rate for her next attack Skill and nothing on the turn bar can push her. Her next turn comes 30 ticks sooner.'};
+// Grand Jet\u00e9 Spotlight Finale: heavy Clobber (my call: the spec names no tier for a 6 Pep Capstone), 2 Composure pips. The +50% Crit Damage from Airborne is in her Trait.
+B3_SKILLS.grand_jete_spotlight_finale={id:'grand_jete_spotlight_finale',vibe:'grace_stage',slot:'cap',name:'Grand Jet\u00e9 Spotlight Finale',pep:6,flavor:['clobber'],power:'heavy',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'composure',n:2,to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Heavy hit, crits harder from the air. 2 Composure pips.',
+  desc:'Heavy Clobber hit that takes 2 Composure pips. If Grace is Airborne, its crits do 50% more damage.'};
+B3_QUIRKS.standing_ovation={id:'standing_ovation',vibe:'grace_stage',name:'Standing Ovation',
+  on:'crit',carrier:'source',limit:'action',show:true,effects:[{op:'pep',n:1,to:'self'},{op:'pull',n:15,next:true,to:'self'}],
+  desc:'When Grace crits, the audience cheers: she gets 1 Pep and her next turn comes 15 ticks sooner (once an action).'};
+// Encore Poise: a buff that fires once and is used up (Poise) leaves its half-strength echo for one more turn (b3EndStatus, `custom:'encore'`).
+B3_QUIRKS.encore_poise={id:'encore_poise',vibe:'grace_stage',name:'Encore Poise',custom:'encore',n:{},
+  desc:'A one-attack buff of Grace\u2019s keeps half its bonus for 1 more turn after it fires.'};

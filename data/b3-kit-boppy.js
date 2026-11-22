@@ -1,10 +1,10 @@
 'use strict';
-// data/b3-kit-boppy.js — Battle 3 kit: Boppy (spec section 3.6). Built: The Dep and Pepper Boss (stage 9c). Boat Angler, his third Vibe, is stage 19 to 21.
+// data/b3-kit-boppy.js — Battle 3 kit: Boppy (spec section 3.6). Built: The Dep and Pepper Boss (stage 9c). Boat Angler, his third Vibe, is stage 19 (sig 0).
 // Same shape as the other kit files (see the top of data/b3-kit-tom.js). Boppy joins in chapter 3: his Vibe Points start from the late joiners'
 // pool (engine/b3-progress.js b3NewLoadout), and his Main Vibe is The Dep, his Pocket Vibe Pepper Boss.
 // Three lines needed their own rule (engine/b3-custom.js and the engine files named there): "Gold Like My Teeth", "The Hose Flinched" and
 // "The Mailbox Moved". The Trait Boppy Speed has one small rule too (`boppySpeed`). Every number the spec leaves out is a call, written where it is made.
-B3_CAST.boppy={id:'boppy',name:'Boppy',vibes:['boppy_dep','boppy_pepper'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.boppy={id:'boppy',name:'Boppy',vibes:['boppy_dep','boppy_pepper','boppy_angler'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- The Dep (first Sig Vibe) ----------------------------------------------------------------
 B3_VIBES.boppy_dep={id:'boppy_dep',owner:'boppy',name:'The Dep',sig:1,lean:'guard',
@@ -95,3 +95,42 @@ B3_SKILLS.the_ghost_one_that_looks_back={id:'the_ghost_one_that_looks_back',vibe
 B3_QUIRKS.no_reach_for_water={id:'no_reach_for_water',vibe:'boppy_pepper',name:'No Reach for Water',
   on:'detonation',carrier:'source',ids:['steam_cloud'],limit:'round',show:true,effects:[{op:'pep',n:2,to:'self'}],
   desc:'Boppy will not lose a spice contest. When his hit sets off Steam Cloud!, he gets 2 Pep (once a round).'};
+
+// ---- Boat Angler (third Vibe, stage 19; sig 0) ----
+B3_VIBES.boppy_angler={id:'boppy_angler',owner:'boppy',name:'Boat Angler',sig:0,lean:'striker',
+  subtitles:['Deckhand Fibber','Long Island Sound Skipper','Admiral of the Big One'],
+  trait:'it_was_this_big',basic:'choppy_water_cast',skills:['lead_sinker_boat_slam','trophy_striper_haul','long_island_sound_leviathan'],
+  quirks:['lucky_boat_lure_2006','star_in_graces_key'],
+  counter:{id:'tally',name:'Whopper Tally',max:4,on:'actionEnd',carrier:'source',skillVibe:'boppy_angler',n:1}};
+// "It Was THIS Big!": every Angler move (the Basic too) adds 1 Whopper Tally, 4 at most. The widening is on Trophy Striper Haul (`widen`), the
+// growing is on the Leviathan (`bonus` that spends it). It builds while Angler is his Main Vibe, or his Pocket Vibe with a Skill that reads it.
+B3_TRAITS.it_was_this_big={id:'it_was_this_big',vibe:'boppy_angler',name:'"It Was THIS Big!"',viaVibe:true,
+  desc:'Each Boat Angler move adds 1 Whopper Tally, 4 at most. At 2 or more his Trophy Striper Haul reaches every monster, and the Leviathan grows with every Tally.'};
+B3_SKILLS.choppy_water_cast={id:'choppy_water_cast',vibe:'boppy_angler',slot:'basic',name:'Choppy-Water Cast',pep:0,flavor:['drench'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'row',row:'front',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Light Drench hit. Hooks a back-row monster forward.',
+  desc:'Light Drench hit. A monster in the Back row is hooked into the Front row.'};
+// Lead-Sinker Boat Slam: standard Clobber (my call: the spec says "heavy" in words but prices it at 2 Pep), +20% against a Drenched or hooked monster.
+B3_SKILLS.lead_sinker_boat_slam={id:'lead_sinker_boat_slam',vibe:'boppy_angler',slot:'s1',name:'Lead-Sinker Boat Slam',pep:2,flavor:['clobber'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['drenched','hooked'],add:.20}}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Standard hit, +20% on a Drenched or hooked monster.',
+  desc:'Standard Clobber hit with the heavy sinker. 20% more damage on a Drenched monster or one that was hooked.'};
+B3_SKILLS.trophy_striper_haul={id:'trophy_striper_haul',vibe:'boppy_angler',slot:'s2',name:'Trophy Striper Haul',pep:4,flavor:['drench','clobber'],power:'standard',hits:1,
+  target:'foe_row',widen:{counter:'tally',min:2},counter:'tally',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Hits a row. Every monster at Tally 2 or more.',
+  desc:'Hauls a cooler-sized striped bass over the rail: a standard Drench and Clobber hit on one row of monsters, or on every monster once the Whopper Tally is 2 or more. The Drench leaves them Drenched.'};
+// Leviathan: heavy Drench on every monster, needs Tally 2, +25% for every Tally, which it spends. 2 Composure pips on each monster.
+B3_SKILLS.long_island_sound_leviathan={id:'long_island_sound_leviathan',vibe:'boppy_angler',slot:'cap',name:'Long Island Sound Leviathan',pep:6,flavor:['drench'],power:'heavy',hits:1,
+  target:'all_foes',needs:{counter:'tally',min:2},counter:'tally',tags:[],composure:0,
+  effects:[{op:'damage',bonus:{counter:'tally',add:.25,spend:true}},{op:'composure',n:2,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Needs Tally 2. Heavy hit on all, +25% per Tally.',
+  desc:'Needs 2 or more Whopper Tally and spends it all. A heavy Drench hit on every monster, 25% stronger for every Tally spent, and 2 Composure pips off each.'};
+// 2006 Lucky Boat Lure: when Boppy pulls or pushes a monster on the turn bar, or hooks it into the Front row, 1 more Composure pip comes off it and it is Drenched.
+B3_QUIRKS.lucky_boat_lure_2006={id:'lucky_boat_lure_2006',vibe:'boppy_angler',name:'2006 Lucky Boat Lure',
+  listen:[{on:'barMoved',carrier:'source',tgtFoe:true,limit:'action',limitKey:'lure',show:true,effects:[{op:'composure',n:1,to:'target'},{op:'prime',id:'drenched',to:'target'}]},
+    {on:'rowMoved',carrier:'source',tgtFoe:true,limit:'action',limitKey:'lure',show:true,effects:[{op:'composure',n:1,to:'target'},{op:'prime',id:'drenched',to:'target'}]}],
+  desc:'When Boppy moves a monster on the turn bar or hooks it forward, 1 more Composure pip comes off it and it is Drenched (once an action).'};
+// Star in Grace's Key: every Portable Counter Boppy keeps starts the fight at 2 (the `counter` op's id '*').
+B3_QUIRKS.star_in_graces_key={id:'star_in_graces_key',vibe:'boppy_angler',name:'Star in Grace\u2019s Key',
+  on:'battleStart',show:true,effects:[{op:'counter',id:'*',n:2,to:'self'}],
+  desc:'Boppy starts every battle with 2 stacks of any stacking job meter he has going.'};

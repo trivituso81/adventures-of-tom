@@ -2,7 +2,7 @@
 // data/b3-kit-deedee.js — Battle 3 kit: Deedee (spec section 3.5). Built so far: all of Neat Freak (stage 5a wrote its Trait, both
 // Quirks and its Grand Capstone); Registered Nut's Basic and Skill 1. Trait and Quirk rows marked `soon:true` have a name and
 // a sentence but no rule yet (stage 5b).
-B3_CAST.deedee={id:'deedee',name:'Deedee',vibes:['deedee_neat','deedee_nurse'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.deedee={id:'deedee',name:'Deedee',vibes:['deedee_neat','deedee_nurse','deedee_cook'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.deedee_neat={id:'deedee_neat',owner:'deedee',name:'Neat Freak',sig:1,lean:'tempo',
   subtitles:['Crumb Spotter','Mop Marshal','Supreme Dust Terminator'],
   trait:'spotless_floor',basic:'windex_spritz',skills:['wet_floor_hazard','hand_me_my_glasses_scrub','fifty_year_dust_tsunami'],
@@ -90,3 +90,37 @@ B3_SKILLS.to_the_moon_and_back={id:'to_the_moon_and_back',vibe:'deedee_nurse',sl
   line:null,anim:{kind:'default',shape:'give'},
   short:'Revives or fully heals one, then hits every monster.',
   desc:'A full moon rises. A knocked-out family member gets back up with 80% of their HP; anyone else heals all the way. Then a heavy wave of Sizzle warmth hits every monster and knocks 2 Composure off each.'};
+
+// ---- Home Cook (third Vibe, stage 19; sig 0) ----
+B3_VIBES.deedee_cook={id:'deedee_cook',owner:'deedee',name:'Home Cook',sig:0,lean:'support',
+  subtitles:['Muffin-Tin Baker','Sunday-Roast Pro','Holiday Feast Matriarch'],
+  trait:'did_you_eat',basic:'wooden_spoon_taste_test',skills:['warm_apple_muffins','wine_o_clock_pour','full_house_sunday_dinner'],
+  quirks:['tupperware_send_off','everything_gives_me_gas'],counter:null};
+// "Did You Eat?": the Trait gives the whole family a mod that counts only while that family member is Stuffed (`allyMods`).
+B3_TRAITS.did_you_eat={id:'did_you_eat',vibe:'deedee_cook',name:'"Did You Eat?"',
+  allyMods:[{stat:'out',kind:'fed',v:.15,when:{has:['stuffed','stuffed_ward']}},{stat:'reduce',kind:'fed',v:.10,when:{has:['stuffed','stuffed_ward']}}],
+  desc:'Nobody leaves the kitchen hungry: a family member who is Stuffed deals 15% more damage and takes 10% less.'};
+B3_SKILLS.wooden_spoon_taste_test={id:'wooden_spoon_taste_test',vibe:'deedee_cook',slot:'basic',name:'Wooden-Spoon Taste Test',pep:0,flavor:['sizzle'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'stuffed',to:'randomAlly'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. A random family member gets Stuffed.',
+  desc:'Light Sizzle smack with the wooden spoon. A random family member gets a sample and is Stuffed for 2 turns.'};
+B3_SKILLS.warm_apple_muffins={id:'warm_apple_muffins',vibe:'deedee_cook',slot:'s1',name:'Warm Apple Muffins',pep:3,flavor:['sizzle'],power:0,hits:0,
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'status',id:'stuffed_ward',to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Heals the family. Stuffed: burns up-close attackers.',
+  desc:'A tin of warm cinnamon-apple muffins: a party heal, and everyone is Stuffed for 2 turns. A monster that hits a Stuffed family member up close takes a light Sizzle burn.'};
+// Wine O'Clock Pour: a light Drench hit on one row of monsters (10% less Evasion for a turn). The spec's +2 Pep goes to "target ally"; there is no
+// ally in a row target, so my call is the family member (Deedee too) with the least Pep.
+B3_SKILLS.wine_o_clock_pour={id:'wine_o_clock_pour',vibe:'deedee_cook',slot:'s2',name:'Wine O\u2019Clock Pour',pep:3,flavor:['drench'],power:'light',hits:1,
+  target:'foe_row',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'tipsy',to:'target'},{op:'pep',n:2,to:'lowestPepAlly'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Drench a row, -10% Evasion. +2 Pep for the lowest.',
+  desc:'A light Drench splash on one row of monsters: 10% less Evasion for a turn. The family member with the least Pep gets 2 Pep.'};
+B3_SKILLS.full_house_sunday_dinner={id:'full_house_sunday_dinner',vibe:'deedee_cook',slot:'cap',name:'Full-House Sunday Dinner',pep:6,flavor:['support'],power:0,hits:0,
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'status',id:'sunday_dinner',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'For 2 rounds, each turn starts with heal, Pep, boost.',
+  desc:'Sets the table, with one extra place. For 2 rounds every family member\u2019s turn starts with a 15% heal, 1 Pep and a random boost (Attack, Defense or Speed).'};
+// Tupperware Send-Off: a single heal or buff bounces at half size to a second family member, 35% of the time and always at 8 or more Pep (b3Tupperware, engine/b3-custom.js).
+B3_QUIRKS.tupperware_send_off={id:'tupperware_send_off',vibe:'deedee_cook',name:'Tupperware Send-Off',custom:'tupperware',n:{chance:.35,pep:8},
+  desc:'A heal or buff Deedee gives one family member can bounce to a second at half size (35% of the time, always with 8 or more Pep).'};
+B3_QUIRKS.everything_gives_me_gas={id:'everything_gives_me_gas',vibe:'deedee_cook',name:'"Everything Gives Me Gas"',
+  on:'statusEnded',ids:['stuffed','stuffed_ward'],show:true,effects:[{op:'pep',n:1,to:'target'}],
+  desc:'When Stuffed runs out on a family member, it bursts: they get 1 Pep.'};

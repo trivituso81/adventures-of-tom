@@ -181,18 +181,19 @@ with sync_playwright() as p:
             check(name + ': detail closed until a tap', not pg.evaluate("document.getElementById('detail').classList.contains('open')"))
         pg.click('#list .row[data-id=tom]'); pg.wait_for_selector('#detail .hero h2')
         check(name + ': Tom opens', pg.locator('#detail .hero h2').inner_text() == 'Tom')
-        check(name + ': Tom has 2 Vibes and his moves', pg.locator('#detail .seg button:not(.planbtn)').count() == 2 and pg.locator('#detail .card').count() >= 8)
+        check(name + ': Tom has 3 Vibes and his moves', pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and pg.locator('#detail .card').count() >= 8)
         # battleguide2 Part 2: an In a fight button on every move, and its address
         fl = pg.eval_on_selector_all('#detail a.play.fight', 'a=>a.map(x=>x.getAttribute("href"))')
         check(name + ': every move of Tom has an In a fight button with the game address', len(fl) == 4 and all(re.match(r'^index\.html\?go=new&i=\d+&move=[a-z0-9_]+$', h) for h in fl), fl)
-        # Part 3: his third Vibe is there, marked, with no Play or fight button
-        check(name + ': Tom shows one PLANNED Vibe button after his two', pg.locator('#detail .seg button.planbtn').count() == 1 and 'PLANNED' in pg.locator('#detail .seg button.planbtn').inner_text())
-        pg.click('#detail .seg button.planbtn'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
-        check(name + ': the planned Vibe says PLANNED and not in the game yet, and has name, titles, Lean, Trait, moves and Quirks', 'PLANNED' in dt and 'Not in the game yet' in dt and all(k in dt for k in ('Star Baker', 'LEAN', 'Titles by Rank', 'TRAIT', 'Sheet-Pan Bribe', 'QUIRK A', 'QUIRK B')), dt[:400])
-        check(name + ': the planned Vibe has no Play and no fight button', pg.locator('#detail .play').count() == 0 and pg.locator('#detail a.fight').count() == 0)
-        check(name + ': the planned Vibe fits the page', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
-        pg.screenshot(path=os.path.join(out, 'battleguide-%s-planned-vibe.png' % name))
-        pg.click('#detail .seg button:not(.planbtn)')
+        # stage 19: his third Vibe is built, so it is a real button with a Play and fight button on every move and nothing is marked PLANNED
+        check(name + ': Tom shows no PLANNED Vibe button (the third Vibe is built)', pg.locator('#detail .seg button.planbtn').count() == 0)
+        pg.click('#detail .seg button:not(.planbtn) >> nth=2'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
+        check(name + ': the third Vibe has name, Lean, Trait, moves and Quirks and is not marked PLANNED', 'PLANNED' not in dt and 'Not in the game yet' not in dt and all(k in dt for k in ('Star Baker', 'Sheet-Pan Bribe')), dt[:400])
+        fl3 = pg.eval_on_selector_all('#detail a.play.fight', 'a=>a.map(x=>x.getAttribute("href"))')
+        check(name + ': every move of the third Vibe has an In a fight button', len(fl3) == 4 and all(re.match(r'^index\.html\?go=new&i=\d+&move=[a-z0-9_]+$', h) for h in fl3), fl3)
+        check(name + ': the third Vibe fits the page', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
+        pg.screenshot(path=os.path.join(out, 'battleguide-%s-third-vibe.png' % name))
+        pg.click('#detail .seg button:not(.planbtn) >> nth=0')
         pg.wait_for_timeout(250); pg.screenshot(path=os.path.join(out, 'battleguide-%s-tom.png' % name))
         if not two:
             pg.click('#dback button'); pg.wait_for_timeout(250)
@@ -433,7 +434,7 @@ code+='globalThis.OUT={vibes:Object.values(B3_VIBES).map(v=>[v.owner,v.name]),fo
 vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     game = json.loads(subprocess.run(['node', '-e', gnode], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
     nrm = lambda x: re.sub(r'[^a-z0-9]+', '', str(x).lower())
-    check('generator: ten third Vibes, one list entry each, none of them in the game', len(pv) == 10 and not [v for v in pv if any(o == v['owner'] and nrm(n) == nrm(v['name']) for o, n in game['vibes'])] and sorted(v['owner'] for v in pv) == sorted(game['owners']), [(v['owner'], v['name']) for v in pv])
+    check('generator: the ten third Vibes are built (stage 19), so none is planned and each is in the game', len(pv) == 0 and all(sum(1 for o, n in game['vibes'] if o == ow) == 3 for ow in game['owners']), [(v['owner'], v['name']) for v in pv])
     check('generator: every third Vibe is whole (3 titles, Lean, Trait, Basic, 3 Skills with Rank 1, 2 and 4, 2 Quirks)', all(len(v['subtitles']) == 3 and v['lean'] in ('guard', 'striker', 'tempo', 'support') and v['trait']['desc'] and v['basic']['desc'] and [k['rank'] for k in v['skills']] == [1, 2, 4] and len(v['quirks']) == 2 and v['when'] for v in pv))
     check('generator: no planned monster is in the game, and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes']] and len(pfoe) >= 26 and all(i.get('when') for i in items))
     check('generator: the stage list is 16, 19 to 21, 22 and 23 in order', [x['n'] for x in pst] == ['16', '19 to 21', '22', '23'], [x['n'] for x in pst])
@@ -465,24 +466,23 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     # search: the Planned filter
     pg.click('#bsearch'); pg.click('#sflt [data-sf=plan]'); pg.wait_for_timeout(200)
     n_plan = pg.locator('#list .row.plan').count()
-    check('search, Planned filter with no words: lists every planned thing and only planned things', n_plan >= len(pv) + len(pfoe) and pg.locator('#list .row:not(.plan)').count() == 0, n_plan)
+    check('search, Planned filter with no words: lists every planned thing and only planned things', n_plan >= len(pfoe) and pg.locator('#list .row:not(.plan)').count() == 0, n_plan)
     pg.fill('#q', 'Star Baker'); pg.wait_for_timeout(200)
-    check('search, Planned filter finds a third Vibe', pg.locator('#list .row.plan').count() >= 1 and 'PLANNED' in pg.locator('#list .row.plan').first.inner_text())
+    check('search, Planned filter no longer finds a third Vibe (built)', pg.locator('#list .row').count() == 0)
     pg.fill('#q', 'Konami'); pg.wait_for_timeout(200)
     check('search, Planned filter leaves out what is in the game', pg.locator('#list .row').count() == 0)
     pg.click('#sflt [data-sf=all]'); pg.fill('#q', 'Konami'); pg.wait_for_timeout(200)
     check('search, All finds Konami with no planned badge on it', pg.locator('#list .row[data-go=family]:not(.plan)').count() > 0)
     pg.fill('#q', 'Star Baker'); pg.wait_for_timeout(200)
-    check('search, All also shows the planned third Vibe, marked', pg.locator('#list .row.plan[data-go=family]').count() >= 1)
-    pg.click('#list .row.plan[data-go=family] >> nth=0'); pg.wait_for_timeout(300)
-    check('tapping a planned search result opens that planned Vibe', 'Not in the game yet' in pg.locator('#detail').inner_text() and 'Star Baker' in pg.locator('#detail').inner_text())
+    check('search, All shows the built third Vibe with no planned badge', pg.locator('#list .row[data-go=family]:not(.plan)').count() >= 1 and pg.locator('#list .row.plan[data-go=family]').count() == 0)
+    pg.click('#list .row[data-go=family]:not(.plan) >> nth=0'); pg.wait_for_timeout(300)
+    check('tapping the search result opens the built third Vibe', 'Not in the game yet' not in pg.locator('#detail').inner_text() and 'Star Baker' in pg.locator('#detail').inner_text())
     check('the guide still loads no game engine', not [x for x in pg.evaluate("[...document.scripts].map(s=>s.src)") if '/engine/' in x])
     check('planned pages: no script errors', not errs, errs)
     cx.close()
 
-    # drop by itself: the game's own data gains the real thing (a third Vibe, a monster, a chapter, the BAG rule); the planned item goes and the real one shows
+    # drop by itself: the game's own data gains the real thing (a monster, a chapter, the BAG rule; the third Vibes went this way in stage 19); the planned item goes and the real one shows
     cx = br.new_context(viewport={'width': 951, 'height': 648}); gains = {
-        'data/b3-kit-tom.js': "B3_VIBES.starbaker=Object.assign({},B3_VIBES[B3_CAST.tom.vibes[0]],{id:'starbaker',name:'Star Baker',sig:0});B3_CAST.tom.vibes.push('starbaker');",
         'data/b3-foes-ch10.js': "B3_FOES.finalcall=Object.assign({},B3_FOES.mudling,{id:'finalcall',name:'FINAL CALL',ch:11});",
         'data/b3-story.js': "B3_STORY.chapters.push(11);",
         'data/b3-rules.js': "B3_RULES.bag=true;"}
@@ -491,8 +491,7 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     for f in gains: cx.route('**/' + f + '*', gain)
     pg = cx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     pg.goto(URL + '#family/tom'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3 && document.querySelector('#detail .seg')", timeout=60000)
-    check('the game gains Tom\'s third Vibe: the planned one drops out and the real one is a normal button', pg.locator('#detail .seg button.planbtn').count() == 0 and pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and 'Star Baker' in pg.locator('#detail .seg').inner_text() and 'PLANNED' not in pg.locator('#detail .seg').inner_text(), pg.locator('#detail .seg').inner_text())
-    check('the game gains it: the Family list stops saying planned for Tom', '(planned)' not in pg.locator('#list .row[data-id=tom]').inner_text() and '(planned)' in pg.locator('#list .row[data-id=grace]').inner_text())
+    check('stage 19: no Family row says planned and Tom shows his three built Vibes', '(planned)' not in pg.locator('#list').inner_text() and pg.locator('#detail .seg button.planbtn').count() == 0 and pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and 'Star Baker' in pg.locator('#detail .seg').inner_text(), pg.locator('#detail .seg').inner_text())
     pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
     check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len(pfoe) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and 'FINAL CALL' in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
     pg.goto(URL + '#rules/coming'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()

@@ -5,7 +5,7 @@
 // `passives`, with `on` naming the hook; the kit stages write those rows from stage 5 on).
 const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeHit','afterHit','crit','dodge','primeApplied','detonation',
   'pipsShaved','break','statusApplied','statusEnded','shieldBroken','shieldEnded','healed','cleansed','buffStripped','barMoved','intercept',
-  'counter','foeTelegraph','foeDoubleTurn','allyBelowHp','ko','revive','actionEnd','turnEnd','battleEnd','mix','counterFull'];
+  'counter','foeTelegraph','foeDoubleTurn','allyBelowHp','ko','revive','actionEnd','turnEnd','battleEnd','mix','counterFull','rowMoved'];
 // ev: who the moment is about ({src, tgt, tags (the act's tags), c (the action in progress), g ...}).
 // A listener row (the same fields for a status's `on.<hook>` and for a passive):
 //   carrier  'target' or 'source': the unit holding it must be that side of the event (left out = anyone)
@@ -52,7 +52,13 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //   tgtGuarded   the event's target is shielded (or was, as this hit landed) or has at least the holder's base Defense (Load-Bearing Swing)
 //   tgtHasStatus the event's target carries this status (Live Circuit: Wired).  tgtPrimeAny  it carries one of these Primes, or this action set one off on it
 //   tgtDebuffedBy:'holder'  the event's target carries a debuff or mark the holder put on (Good Try Margin Note; Flustered does not count)
-const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss',
+// Stage 19 (third Vibes): B3_LOW_HP is the share of Max HP under which a family member is "low" (`allyBelowHp` fires once as they cross it).
+//   tgtOther     the event's target is not the holder.  hurtOver:X  the hit took X of the target's Max HP or more and no shield soaked any of it (with
+//   orCrit:true a crit counts too: The Rivituso Rule).  skillVibe:'<id>'  the move in progress belongs to that Vibe (Whopper Tally builds on every Angler move).
+//   peeveHit  the hit's flavor is one of the target's Pet Peeves (Inverted Pyramid).  tgtWeak  the target is slower than the holder or carries a debuff (Scream King).
+//   cooldown:N  once it has gone off it cannot go off again for N rounds (Eyes in the Back of Her Head).  crossed  the bar move carried the unit past a round divider (Home-Field Advantage).
+const B3_LOW_HP=.35;
+const B3_LISTEN_IF=['pushed','crossed','srcCrit','fromParty','tgtOther','hurtOver','orCrit','skillVibe','peeveHit','tgtWeak','cooldown','crossed','ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss',
   'notBasic','supportTurn','partySkill','lacksCustom','everyOwnTurn','tgtGuarded','tgtHasStatus','tgtPrimeAny','tgtDebuffedBy'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
@@ -85,6 +91,16 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.tgtHasStatus&&!(ev.tgt&&ev.tgt.st[L.tgtHasStatus])) return false;
   if(L.tgtPrimeAny&&!(ev.tgt&&L.tgtPrimeAny.some(p=>ev.tgt.st[p]||(ev.c&&ev.c.detPrime&&ev.c.detPrime[ev.tgt.key]===p)))) return false;
   if(L.tgtDebuffedBy==='holder'&&!(ev.tgt&&Object.keys(ev.tgt.st).some(id=>id!=='flustered'&&['debuff','mark'].includes(B3_STATUS[id].kind)&&ev.tgt.st[id].src===u.key))) return false;
+  if(L.pushed&&!(ev.n>0)) return false;                                      // the bar move was a push back (a delay), not a pull
+  if(L.srcCrit&&!(ev.crit&&ev.src&&ev.src.side!==u.side)) return false;     // a monster's hit crit ("ARE YOU BLIND, REF?!")
+  if(L.fromParty&&!(ev.src&&ev.src.side==='party')) return false;           // the hit came from the family (Yellow Penalty Flag: any family member's next hit)
+  if(L.tgtOther&&!(ev.tgt&&ev.tgt!==u)) return false;
+  if(L.hurtOver!=null) { const t=ev.tgt,soaked=!!(ev.c&&ev.c.soak&&t&&ev.c.soak[t.key]>0); if(!(t&&((ev.dmg>=t.maxHp*L.hurtOver&&!soaked)||(L.orCrit&&ev.crit)))) return false; }
+  if(L.skillVibe&&!(ev.c&&ev.c.skill&&ev.c.skill.vibe===L.skillVibe)) return false;
+  if(L.peeveHit&&!(ev.tgt&&ev.flavor&&b3Peeves(ev.tgt).includes(ev.flavor))) return false;
+  if(L.tgtWeak&&!b3TgtWeak(u,ev.tgt)) return false;
+  if(L.crossed&&!ev.crossed) return false;
+  if(L.cooldown&&u.used[useKey]!=null&&F.round-u.used[useKey]<L.cooldown) return false;
   if(L.limit==='roundAll'&&F.usedAll&&F.usedAll[useKey]===F.round) return false;
   if(L.limit==='round'&&u.used[useKey]===F.round) return false;
   if(L.limit==='battle'&&u.used[useKey]) return false;
@@ -98,6 +114,7 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   else if(L.limit==='actionTarget') { if(ev.c&&ev.tgt) (ev.c.reacted=ev.c.reacted||{})[u.key+useKey+'@'+ev.tgt.key]=true; }
   else if(L.limit==='roundAll') (F.usedAll=F.usedAll||{})[useKey]=F.round;
   else if(L.limit) u.used[useKey]=F.round;
+  if(L.cooldown) u.used[useKey]=F.round;
   if(L.react) {
     // The status's own answer is the holder's. `answer:'putter'` makes it the answer of whoever put the status on, aimed at the holder.
     // `answer:'thorns'`: the answer is the putter's, aimed at whoever set the status off (the Iron Gate's thorns are Boppy's, not the one it hit).

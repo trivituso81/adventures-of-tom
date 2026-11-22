@@ -52,7 +52,11 @@ function b3Push(F,u,n) {
 }
 function b3Pull(F,u,n) {
   if(!b3Alive(u)) return 0;
-  const amt=Math.min(u.wait,n*Math.pow(B3_RULES.halving,u.pulls)); u.pulls++; u.wait-=amt; return amt;
+  const i0=b3TurnOrder(F).indexOf(u);
+  const amt=Math.min(u.wait,n*Math.pow(B3_RULES.halving,u.pulls)); u.pulls++; u.wait-=amt;
+  // Stage 19: icons leapt past on the turn bar are counted until the unit's next turn ends (Choreographed Momentum).
+  const i1=b3TurnOrder(F).indexOf(u); if(i0>=0&&i1>=0&&i1<i0) u.jumped=(u.jumped||0)+(i0-i1);
+  return amt;
 }
 // Place a unit to act next (NeeDoh Stretch Pass). It is a pull of the whole gap, so it halves like one, and each unit can be
 // moved this way once a round. A unit that reaches the front goes ahead of anyone else already waiting there.

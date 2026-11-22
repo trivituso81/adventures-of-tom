@@ -1,10 +1,10 @@
 'use strict';
 // data/b3-kit-justin.js — Battle 3 kit: Justin (spec section 3.9). Built: all of Basement Boss and all of Live Wire (stage 10).
-// Armchair Ref, his third Vibe, is stage 19 to 21. Same shape as the other kit files (see the top of data/b3-kit-tom.js).
+// Armchair Ref, his third Vibe, is stage 19 (sig 0). Same shape as the other kit files (see the top of data/b3-kit-tom.js).
 // His Main Vibe on joining is Basement Boss, his Pocket Vibe Live Wire (spec: "Sig: Basement Boss + Live Wire").
 // One line needed its own function: Demo-Day Prybar (`prybar`, engine/b3-custom.js). Every number the spec leaves out is a call,
 // written where it is made and listed in claude/battle-build.md "Calls made that Tom has not confirmed".
-B3_CAST.justin={id:'justin',name:'Justin',vibes:['justin_basement','justin_wire'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.justin={id:'justin',name:'Justin',vibes:['justin_basement','justin_wire','justin_ref'],stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Basement Boss (first Sig Vibe) ----------------------------------------------------------------
 B3_VIBES.justin_basement={id:'justin_basement',owner:'justin',name:'Basement Boss',sig:1,lean:'guard',
@@ -99,3 +99,39 @@ B3_QUIRKS.rare_heart_emoji_text={id:'rare_heart_emoji_text',vibe:'justin_wire',n
   listen:[{on:'break',carrier:'source',show:true,effects:[{op:'status',id:'static_charge',to:'self'}]},
     {on:'ko',carrier:'source',tgtFoe:true,show:true,effects:[{op:'status',id:'static_charge',to:'self'}]}],
   desc:'When Justin Breaks or knocks out a monster, he stores a Static Charge: his Razzle hits do 40% more damage through his next turn.'};
+
+// ---------------------------------------------------------------- Armchair Ref (third Vibe, stage 19; sig 0) ----------------------------------------------------------------
+B3_VIBES.justin_ref={id:'justin_ref',owner:'justin',name:'Armchair Ref',sig:0,lean:'tempo',
+  subtitles:['Couch Heckler','Replay Judge','Hall-of-Fame Whistleblower'],
+  trait:'are_you_blind_ref',basic:'couch_side_boo',skills:['flag_on_the_play','giant_dad_sneeze','jumbotron_instant_replay'],
+  quirks:['home_field_advantage','unmailed_invitations'],counter:null};
+// "ARE YOU BLIND, REF?!": a monster's crit, or a monster taking two turns in a row, throws the yellow flag on it (once an action).
+B3_TRAITS.are_you_blind_ref={id:'are_you_blind_ref',vibe:'justin_ref',name:'"ARE YOU BLIND, REF?!"',
+  listen:[{on:'afterHit',srcCrit:true,limit:'action',show:true,effects:[{op:'status',id:'yellow_flag',to:'attacker'}]},
+    {on:'foeDoubleTurn',limit:'round',limitKey:'dblflag',show:true,effects:[{op:'status',id:'yellow_flag',to:'attacker'}]}],
+  desc:'When a monster crits the family or takes two turns in a row, Justin throws the Yellow Flag on it: it takes 25% more from the next family hit, which also pushes it back.'};
+B3_SKILLS.couch_side_boo={id:'couch_side_boo',vibe:'justin_ref',slot:'basic',name:'Couch-Side Boo!',pep:0,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'push',n:10,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light hit. Pushes the monster back a little.',
+  desc:'Light Racket hit. The monster is pushed back 10 ticks on the turn bar.'};
+// Flag on the Play!: light Racket (my call for a 2 Pep hit). "Locks strongest AoE/buff": for its next turn the monster cannot use an act that
+// hits every family member or buffs its side (the `flag_lock` status; a monster with no other act acts as usual).
+B3_SKILLS.flag_on_the_play={id:'flag_on_the_play',vibe:'justin_ref',slot:'s1',name:'Flag on the Play!',pep:2,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'push',n:25,to:'target'},{op:'status',id:'flag_lock',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Hit, push 25, and its next turn has no big or buffing act.',
+  desc:'Light Racket hit. Pushes the monster back 25 ticks. On its next turn it cannot use an act that hits the whole family or buffs its side.'};
+B3_SKILLS.giant_dad_sneeze={id:'giant_dad_sneeze',vibe:'justin_ref',slot:'s2',name:'Giant Dad-Sneeze',pep:4,flavor:['racket'],power:'standard',hits:1,
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'push',n:20,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Standard hit on every monster, pushes them all back 20.',
+  desc:'Standard Racket blast on every monster. A Racket hit already sets off Toasty and Dazzled. Every monster is pushed back 20 ticks.'};
+// Jumbotron Instant Replay: Justin picks the offender. Half of the last hit a monster landed on the family (F.lastAllyHit, set in b3Hurt) is
+// dealt to whoever landed it (`replay`, engine/b3-ops.js), and the offender takes a heavy Racket strike and 25% less Defense for 2 turns.
+B3_SKILLS.jumbotron_instant_replay={id:'jumbotron_instant_replay',vibe:'justin_ref',slot:'cap',name:'Jumbotron Instant Replay',pep:5,flavor:['racket'],power:'heavy',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'under_review',to:'target'},{op:'replay',share:.5}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heavy hit, -25% Defense, replays half the last hit.',
+  desc:'Heavy Racket hit and 25% less Defense for 2 turns. Half of the last hit a monster landed on the family is dealt back to that monster.'};
+B3_QUIRKS.home_field_advantage={id:'home_field_advantage',vibe:'justin_ref',name:'Home-Field Advantage',
+  on:'barMoved',carrier:'source',crossed:true,tgtFoe:true,show:true,effects:[{op:'composure',n:1,to:'target'}],
+  desc:'When Justin pushes a monster past a round divider on the turn bar, 1 more Composure pip comes off it.'};
+B3_QUIRKS.unmailed_invitations={id:'unmailed_invitations',vibe:'justin_ref',name:'"Unmailed Invitations"',custom:'unmailed',n:{},
+  desc:'Once a fight, one of Justin\u2019s 2 or 3 Pep Racket Skills is delivered again for free at half power.'};

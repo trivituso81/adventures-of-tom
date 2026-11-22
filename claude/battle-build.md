@@ -58,7 +58,8 @@ Rules for every stage's session:
 | 17 | Story switch, chapters 2 to 5: chapters 2 to 5's 16 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 16 fights, the kind flag on a boss win, one chapter test each | Pushed 2026-11-21 | `b3s17a`, `b3s17b`, `b3s17c`, `b3s17` | Milestone C: play chapters 2 to 5 (card t-milestonec). |
 | 18 | Story switch, chapters 6 to 10: chapters 6 to 10's 20 story fights and every map monster on Battle 3 behind the same switch, Vibe Points, tips for 20 fights, five Battle 3 retry lines. The bonus chapter was switched afterwards in `b3s18bonusa` and `b3s18bonus` (see the row below and `docs/BATTLE3.md` "The bonus chapter is switched") | Pushed 2026-11-21 (chapters 6 to 10) | `b3s18a`, `b3s18b`, `b3s18c`, `b3s18d`, `b3s18e`, `b3s18` | Milestone D: play chapters 6 to 10 (card t-milestoned). The bonus chapter is card c-b3s18bonus. |
 | 16 | Tombo skins: 26 skins (21 Primary Tombos, 4 Family Finishes, Birthday Wish) on the Full Family Ruckus: the skin's name on the tray and the stage, the pair's recorded lines, the Tombo toasts of chapters 1 to 10 and the bonus back under Battle 3. No Move Lab review (animations are out of scope) | Pushed 2026-11-22 | `b3s16` | Nothing is asked. |
-| 19 to 23 | See architecture section 5 | Not started | | |
+| 19 | Third Vibes: ten Vibes, 40 moves, 10 Traits, 20 Quirks as rows in `data/b3-kit-*.js`, new statuses and ops, save fields without migration | Pushed 2026-11-22 | `b3s19` | docs/BATTLE3.md "What stage 19 holds" |
+| 20 to 23 | See architecture section 5 | Not started | | |
 
 ## Stage 15 results (facts)
 
@@ -87,6 +88,22 @@ Rules for every stage's session:
 | Vibe Points | Main Vibe Points per chapter on the required path: chapter 6 is 48, chapter 7 54, chapter 8 54, chapter 9 54, chapter 10 50 (the pocket Vibe earns half). |
 | Not looked at | Every chapter 6 to 10 fight in a browser: Milestone D. |
 | Incident | An upstream commit removed chapters 8 and 9 from `main` shortly after `b3s18c` and `b3s18d` landed (a restore by another session); `b3s18e` put them back. Another session left merge conflict markers in `data/board.json`; fixed in its own commit. |
+
+## Stage 19 results (facts)
+
+| Item | Result |
+|---|---|
+| Built | Ten third Vibes (Star Baker, Stage Performer, Prankster, SuperMom, Home Cook, Boat Angler, Scream King, Picky Princess, Armchair Ref, News Anchor), 40 moves, 10 Traits, 20 Quirks, 32 new statuses, ops extend, swapGap, replay, invert, five one-offs in `engine/b3-custom.js`. |
+| Tests | `node tools/b3-sim.js check` CHECKS 3773, FAILS []; `python3 tools/b3_test.py s4` FAILS []; a Lab fight for each of the ten Vibes opens with the new move and shows no script error; the Vibes screen looked at in portrait and landscape (`tools/shots/b3s19-vibes-*.png`). |
+| Not run | `tools/m2_test.py` ends with two console errors that are GitHub API rate limits (403), nothing to do with the Vibes page. The Battle Guide test keeps three failures that are not from this stage: the guide page loads `engine/clip-ground.js`, and the plan counts follow the live board. |
+
+## Calls made in stage 19 that Tom has not confirmed
+
+| Call | Why | Undo |
+|---|---|---|
+| No new "four in a conversation" game rule | The plan phrase is a build-session work split. No spec defines a fight rule. I tested that every move works in a four-member party instead. | Say what the rule is; it becomes a card |
+| Several skills are simplified and each is commented "my call" in its kit file | The plan's wording needed seams that do not exist (for example Sugar Kick on Tom's next turn, Gale and Caramelized Crust hit a random foe, Wine O'Clock Pep goes to the lowest-Pep ally, Grounded stance means no stance, Investigative Scoop lasts one turn longer and cannot be cleansed, On the Record needs no code because Battle 3 never hides Pet Peeves or Composure) | Search "my call" in `data/b3-kit-<id>.js` and rewrite that row |
+| Old tests that assumed two Vibes now assume three | `tools/b3-check-s4.js`, s5, s9b, s9c, s10 and `tools/b3_test.py` s4 | Edit the expected numbers |
 
 ## Calls made in stage 18 that Tom has not confirmed
 

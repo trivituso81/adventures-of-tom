@@ -96,6 +96,8 @@ module.exports=function(T) {
     const r2=award('tom',L,50); ok(L.vp.tom_flier===60&&J(r2.ranks)===J([{vibe:'tom_flier',from:1,to:2}]),'reaching 60 VP is Rank 2, and it is reported: '+J(r2.ranks));
     const L3=newL('tom'); award('tom',L3,15); ok(L3.vp.tom_gamer===8,'half of an odd number rounds up: '+L3.vp.tom_gamer);
     const L4=newL('tom'); const r4=award('tom',L4,500); ok(J(r4.ranks)===J([{vibe:'tom_flier',from:1,to:4},{vibe:'tom_gamer',from:1,to:3}]),'one big award can climb several Ranks: '+J(r4.ranks)); }
+  // (stage 19) Tom has a real third Vibe now, so the overflow and pacing checks below run with his three as they always did: the two real Sig Vibes and this test Vibe.
+  const KEEP4=CAST.tom.vibes.slice(); CAST.tom.vibes=['tom_flier','tom_gamer','t_v3'];
   // 75. Overflow: a mastered Vibe keeps nothing; its share goes to that member's lowest unmastered Vibe
   { const L=newL('tom'); L.vp={tom_flier:800,tom_gamer:100,t_v3:40}; const r=award('tom',L,10);
     ok(L.vp.tom_flier===800&&L.vp.t_v3===50&&L.vp.tom_gamer===105,'Main mastered: its 10 go to the lowest unmastered Vibe, the Pocket still earns its 5: '+J(L.vp)); ok(!r.lost&&!('tom_flier' in r.gains),'nothing is lost and the mastered Vibe gains nothing');
@@ -107,6 +109,7 @@ module.exports=function(T) {
   // 76. The spec's pacing: 90 Main VP a chapter masters the first Vibe around chapter 9 and all three around chapter 18
   { const L=newL('tom'); let first=0,all=0; for(let ch=1;ch<=20;ch++) { award('tom',L,90); if(!first&&L.vp.tom_flier>=800) first=ch; if(!all&&CAST.tom.vibes.every(v=>L.vp[v]>=800)) all=ch; }
     ok(first===9&&all===18,'first Vibe mastered in chapter '+first+' (9), all three in chapter '+all+' (18)'); }
+  CAST.tom.vibes=KEEP4;
   { const B=book(1); B.michael={main:'x'}; const r=awardAll(B,10); ok(Object.keys(r).sort().join()==='deedee,grace,rose,tom'&&B.grace.vp.grace_squishy===10&&B.rose.vp.rose_cozy===5,'everyone with a kit earns after a fight; someone with no kit yet is skipped'); }
 
   // 77. What a loadout gives: Skills by Rank, Main first then Pocket; the Basic and the Trait from the Main Vibe only

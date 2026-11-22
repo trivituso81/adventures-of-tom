@@ -528,7 +528,7 @@ def stage4(pg,lab):
     pg.wait_for_timeout(500); ff.append(shot(pg))
     won=pg.evaluate("()=>({over:B3.F.over,btn:(document.querySelector('#b3-tray small')||{}).textContent||'',msg:document.getElementById('b3-msg').textContent,vp:b3LabBook().tom.vp,g:b3LabBook().grace.vp})")
     need(won['over']=='win' and '+10 Vibe Points' in won['btn'] and '+10 Vibe Points' in won['msg'],f'a Lab win should say the Vibe Points it paid: {won}')
-    need(won['vp']=={'tom_flier':65,'tom_gamer':70} and won['g']=={'grace_squishy':70,'grace_craft':65},f"10 VP to each Main Vibe and 5 to each Pocket Vibe: {won['vp']} {won['g']}")
+    need(won['vp']=={'tom_flier':65,'tom_gamer':70,'tom_baker':60} and won['g']=={'grace_squishy':70,'grace_craft':65,'grace_stage':60},f"10 VP to each Main Vibe and 5 to each Pocket Vibe: {won['vp']} {won['g']}")
     pg.click('#b3-app [data-done]'); pg.wait_for_timeout(600)
     # Kept on the device across a reload
     pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3LabBook',timeout=180000); pg.wait_for_timeout(1200)
@@ -538,7 +538,7 @@ def stage4(pg,lab):
     # --- The save fields ---
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(200)
     sv=pg.evaluate("()=>{ saveGame('7',true); const s=readSave('7'); return {tom:s.members.find(m=>m.id==='tom'),mike:s.members.find(m=>m.id==='michael'),n:s.members.filter(m=>m.vibes).map(m=>m.id),cast:Object.keys(B3_CAST)}; }")
-    need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
+    need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0,'tom_baker':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
     need(sorted(sv['n'])==sorted(i for i in sv['cast'] if i in sv['n']) and set(sv['n'])>={'tom','grace','rose','deedee'} and not (set(sv['n'])&{'boppy','tnb','nara'}) and (not sv['mike'] or 'vibes' not in sv['mike']),f"a new save has a loadout for every member with a kit except the late joiners (Boppy, TNB and Nara get theirs when the story recruits them, stage 15): {sv['n']}")
     need('stamps' in sv['tom'] and 'ranks' in sv['tom'] and 'loadouts' in sv['tom'],'the old save fields (stamps, ranks, loadouts) must stay')
     # The menu's door: the Vibes tab of the new menu, on the save's book (the Lab's book follows Main, Pocket and row, not Vibe Points)
@@ -562,7 +562,7 @@ def stage4(pg,lab):
     # Save, wipe, load
     rt=pg.evaluate("""()=>{ saveGame('7',true); for(const m of ALL_MEMBERS()) m.vibes=null; const ok=loadGame('7'); const t=b3Member('tom').vibes,g=b3Member('grace').vibes;
       return {ok,tom:t&&t.main,pocket:t&&t.pocket,grow:g&&g.row,vp:t&&t.vp}; }""")
-    need(rt=={'ok':True,'tom':'tom_gamer','pocket':'tom_flier','grow':'back','vp':{'tom_flier':0,'tom_gamer':0}},f'save then load should bring the Vibes back: {rt}')
+    need(rt=={'ok':True,'tom':'tom_gamer','pocket':'tom_flier','grow':'back','vp':{'tom_flier':0,'tom_gamer':0,'tom_baker':0}},f'save then load should bring the Vibes back: {rt}')
     # A save from before the fields existed (a battle 2 save), one with junk in them, and one from before members were saved at all
     old=pg.evaluate("""()=>{ const put=(slot,s)=>{ const raw=JSON.stringify(s); SAVE_CACHE[slot]=raw; localStorage.setItem('aot-save-'+slot,raw); };
       const a=readSave('7'); for(const m of a.members) { delete m.vibes; delete m.row; } put('8',a);

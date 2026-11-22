@@ -1,6 +1,6 @@
 'use strict';
-// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built: all of Frequent Flier (stage 5a) and all of Gamer Geek
-// (stage 5b). Every Trait and Quirk has its name and sentence for the Vibes screen; `soon:true` marks one whose rule is not written.
+// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built: all of Frequent Flier (stage 5a), all of Gamer Geek
+// (stage 5b) and all of Star Baker (stage 19, his third Vibe, sig 0: neither Main nor Pocket on joining). Every Trait and Quirk has its name and sentence for the Vibes screen; `soon:true` marks one whose rule is not written.
 // A working Trait or Quirk row is one listener (`on` plus the listener fields of engine/b3-hooks.js and `effects`), several
 // (`listen:[...]`), `mods` (engine/b3-core.js b3Mods: a mod may carry `when` and `per`), a `counter` of its own, or any mix.
 // The Vibe row names every Skill, Trait and Quirk from the spec; a move exists in a fight once its own row is in B3_SKILLS.
@@ -9,7 +9,7 @@
 //   tempo or support), subtitles (three, taking over at Ranks 1, 3 and 5), trait, basic, skills ([Skill 1, Skill 2, Grand Capstone]),
 //   quirks ([Quirk A, Quirk B]), counter (null, or the rule that builds a Portable Counter: engine/b3-progress.js b3Kit).
 // What each Rank unlocks is B3_RULES.rankUnlock (data/b3-rules.js). A Skill with no row yet has its name in B3_SOON.
-B3_CAST.tom={id:'tom',name:'Tom',vibes:['tom_flier','tom_gamer'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.tom={id:'tom',name:'Tom',vibes:['tom_flier','tom_gamer','tom_baker'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.tom_flier={id:'tom_flier',owner:'tom',name:'Frequent Flier',sig:1,lean:'guard',
   subtitles:['Sky Club Applicant','Diamond Medallion','Delta 360 VIP'],
   trait:'priority_boarding',basic:'lounge_pass_flex',skills:['zone_one_blockade','suite_door_slide','tarmac_porsche_transfer'],
@@ -104,3 +104,51 @@ B3_SKILLS.konami_code={id:'konami_code',vibe:'tom_gamer',slot:'cap',name:'Konami
   target:'all_foes',tags:[],composure:2,effects:[{op:'damage',critPerPrime:.15}],line:null,anim:{kind:'default',shape:'cast'},
   short:'Heavy hit on every monster. Knocks 2 Composure off each.',
   desc:'Heavy Razzle hit on every monster, knocking 2 Composure pips off each. Each monster is 15% more likely to crit for every Prime on it.'};
+
+// ---- Star Baker (third Vibe, stage 19) ----
+B3_VIBES.tom_baker={id:'tom_baker',owner:'tom',name:'Star Baker',sig:0,lean:'support',
+  subtitles:['Underproofer','Stand-Mixer Pro','Grand Pâtissier'],
+  trait:'preheated_oven',basic:'starter_splash',skills:['sheet_pan_bribe','five_hundred_degree_boule','three_tier_showstopper'],
+  quirks:['parchment_lined','caramelized_crust'],
+  counter:{id:'oven',name:'Oven Temp',max:3,on:'turnEnd',carrier:'source',n:1}};
+// Preheated Oven: Oven Temp is a Portable Counter (+1 Stage at the end of each of Tom's turns, 3 at most). Each Stage is +10% on
+// every heal and shield Tom gives (`healGiven`) and +10% on his Sizzle hits.
+B3_TRAITS.preheated_oven={id:'preheated_oven',vibe:'tom_baker',name:'Preheated Oven',
+  mods:[{stat:'healGiven',kind:'oven',v:.10,per:{counter:'oven'}},{stat:'out',kind:'oven',v:.10,per:{counter:'oven'},when:{flavor:'sizzle'}}],
+  desc:'Oven Temp goes up 1 Stage after each of Tom’s turns, 3 at most. Each Stage makes his heals and shields 10% bigger and his Sizzle hits 10% stronger.'};
+// Starter Splash: on a monster a light Drench hit (it leaves Drenched); on a family member it makes one buff or regen last 1 turn longer
+// (the `extend` op, engine/b3-ops.js). My call: "an active buff/regen" is every buff the member wears, each 1 turn longer.
+B3_SKILLS.starter_splash={id:'starter_splash',vibe:'tom_baker',slot:'basic',name:'Starter Splash',pep:0,flavor:['drench'],power:'light',hits:1,
+  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'extend',n:1,to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  short:'Light hit, or makes a family member’s buffs last longer.',
+  desc:'Tosses bubbly sourdough starter. On a monster it is a light Drench hit. On a family member it makes every buff and regen they have last 1 turn longer.'};
+// Sheet-Pan Bribe: heals now; Sugar Kick comes on Tom's next turn (my call for "in 2 turns": the `later` op runs at the start of Tom's next
+// turn, which is 2 turns after the heal counting the ally's own).
+B3_SKILLS.sheet_pan_bribe={id:'sheet_pan_bribe',vibe:'tom_baker',slot:'s1',name:'Sheet-Pan Bribe',pep:2,flavor:['support'],power:0,hits:0,
+  target:'ally',tags:[],composure:0,effects:[{op:'heal',pct:'small'},
+    {op:'later',name:'Sugar Kick',who:'target',effects:[{op:'heal',pct:'small',to:'target'},{op:'pep',n:2,to:'target'}]}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Heals a family member now, and again next turn with +2 Pep.',
+  desc:'Slides a warm cinnamon roll to a family member: a small heal now. Sugar Kick comes at the start of Tom’s next turn: a second small heal and 2 Pep for them.'};
+// Five-Hundred-Degree Boule: standard Sizzle on every monster (the hit leaves them Toasty), then every family member gets a golden-crust
+// shield of 10% Max HP for each Oven Temp Stage (a shield op with `perCounter`).
+B3_SKILLS.five_hundred_degree_boule={id:'five_hundred_degree_boule',vibe:'tom_baker',slot:'s2',name:'Five-Hundred-Degree Boule',pep:4,flavor:['sizzle'],power:'standard',hits:1,
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'shield',pct:0,perCounter:{counter:'oven',add:.10},to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Sizzle on all monsters. Shields the family.',
+  desc:'Uncovers a 500 degree Dutch oven: Sizzle hit on every monster, which leaves them Toasty. Every family member gets a golden-crust shield of 10% Max HP for each Oven Temp Stage.'};
+// Three-Tier Showstopper Cake: party heal, cleanse, and the sparkler status (data/b3-status.js sparklers) that adds Sizzle to each
+// family member's next hit. That needed no one-off: the status listens for the hit and splashes a share of it.
+B3_SKILLS.three_tier_showstopper={id:'three_tier_showstopper',vibe:'tom_baker',slot:'cap',name:'Three-Tier Showstopper Cake',pep:5,flavor:['sizzle'],power:0,hits:0,
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',to:'allies'},{op:'status',id:'sparklers',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Heals the family, clears debuffs, adds Sizzle.',
+  desc:'Rolls out a three-layer cake blazing with sparklers. Heals the whole family, clears their bad effects, and each of them adds Sizzle damage to their next hit.'};
+// Parchment Lined: any heal, shield or other support Skill of Tom's leaves him waiting 25% less (`moveRec` with `supportSkill`).
+B3_QUIRKS.parchment_lined={id:'parchment_lined',vibe:'tom_baker',name:'Parchment Lined',
+  mods:[{stat:'moveRec',kind:'parchment',v:-.25,when:{supportSkill:true}}],
+  desc:'When Tom uses a heal, a shield or another support Skill, he waits 25% less before his next turn.'};
+// Caramelized Crust: when a shield Tom put on ends or breaks, the sugar-glass crust shatters on a monster. My calls: the spec says "on
+// attacker" but a shield that runs out on its own has none, so the crust always lands on a monster picked by the fight's dice; and only shields
+// count (Tom has no heal-over-time: Sugar Kick is one more heal).
+B3_QUIRKS.caramelized_crust={id:'caramelized_crust',vibe:'tom_baker',name:'Caramelized Crust',
+  listen:[{on:'shieldBroken',shieldBy:'holder',limit:'round',limitKey:'caramel',show:true,effects:[{op:'damage',flavor:['sizzle'],power:'light',to:'randomFoe'}]},
+    {on:'shieldEnded',shieldBy:'holder',limit:'round',limitKey:'caramel',show:true,effects:[{op:'damage',flavor:['sizzle'],power:'light',to:'randomFoe'}]}],
+  desc:'When a shield Tom gave breaks or runs out, sugar-glass shatters on a random monster for a light Sizzle hit (once a round).'};

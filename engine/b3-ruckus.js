@@ -18,6 +18,8 @@
 
 // Adds to the gauge and writes the beat. Returns what was really added.
 function b3RuckusAdd(F,beats,g,n,src,why) {
+  // Stage 19, LivNews Breaking Exclusive (`ruckusBoost`): this action's Ruckus gains are 25% bigger.
+  if(n>0&&src) { const su=b3Unit(F,src); if(su&&b3HasFlag(su,'ruckusBoost')) n=Math.round(n*1.25); }
   const was=F.ruckus; F.ruckus=Math.max(0,Math.min(B3_RULES.ruckus.full,was+n));
   const d=F.ruckus-was; if(d) beats.push({t:'ruckus',n:d,v:F.ruckus,why:why||'',src:src||null,g});
   return d;

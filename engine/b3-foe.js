@@ -19,6 +19,8 @@ function b3ActOk(F,e,A) {
   const W=A.when||{};
   // Classroom Lights-Out Reset (`noAoe`): for a while it cannot use an act that reaches every family member.
   if(b3HasFlag(e,'noAoe')&&(A.hits==='all'||A.tags.includes('aoe'))) return false;
+  // Flag on the Play (`noBuff`): for a while it cannot use an act that puts a buff on its side.
+  if(b3HasFlag(e,'noBuff')&&(A.effects||[]).some(x=>(x.op==='status'||x.op==='prime')&&x.id&&B3_STATUS[x.id]&&B3_STATUS[x.id].kind==='buff')) return false;
   if(W.stripped&&!e.stripped[W.stripped]) return false;
   if(W.has&&!e.st[W.has]) return false;
   if(W.lacks&&e.st[W.lacks]) return false;
@@ -65,6 +67,8 @@ function b3AggroPick(F,e,A) {
     const N=A.when&&A.when.notSameAllyTurns,last=e.lastAim[A.id];
     if(N&&last&&e.turns-last.turn<=N) { const O=L.filter(u=>u.key!==last.key); if(O.length) L=O; }
   }
+  // Weaponized Puppy Eyes (`avoidSrc`): this monster refuses to aim at whoever put the status on it, unless nobody else is left (a taunt still wins).
+  if(!T.length&&!LK) { const av=L.filter(u=>!Object.values(e.st).some(s=>B3_STATUS[s.id].flags.includes('avoidSrc')&&s.src===u.key)); if(av.length) L=av; }
   if(!L.length) return null;
   const w=L.map(u=>B3_RULES.aggro[b3EffRow(F,u)]*b3Mult(u,'aggro')),sum=w.reduce((a,b)=>a+b,0);
   let r=b3Rand(F)*sum;

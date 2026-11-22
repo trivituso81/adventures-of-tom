@@ -1,11 +1,11 @@
 'use strict';
 // data/b3-kit-olivia.js — Battle 3 kit: Olivia (spec section 3.10). Built: all of Rope Champ and all of Working Mom (stage 10).
-// News Anchor, her third Vibe, is stage 19 to 21. Same shape as the other kit files (see the top of data/b3-kit-tom.js).
+// News Anchor, her third Vibe, is stage 19 (sig 0). Same shape as the other kit files (see the top of data/b3-kit-tom.js).
 // Olivia is in the party from chapter 1, so she is not a late joiner. Her Main Vibe on joining is Rope Champ, her Pocket Vibe Working Mom.
 // Two Portable Counters: Cadence (Rope Champ) and Mom Prep (Working Mom), both written on the Vibe rows and built by engine/b3-progress.js.
 // A Skill that reads a counter carries `counter:'<id>'`, so it still works when its Vibe is the Pocket Vibe.
 // Every number the spec leaves out is a call, written where it is made and listed in claude/battle-build.md "Calls made that Tom has not confirmed".
-B3_CAST.olivia={id:'olivia',name:'Olivia',vibes:['olivia_rope','olivia_mom'],stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.olivia={id:'olivia',name:'Olivia',vibes:['olivia_rope','olivia_mom','olivia_news'],stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Rope Champ (first Sig Vibe) ----------------------------------------------------------------
 // Cadence (Portable Counter, max 3: 0 is no rhythm yet, then 1x, 2x, 3x): every turn Olivia attacks builds 1 (a Basic builds its own, so each
@@ -104,3 +104,37 @@ B3_QUIRKS.childproofed_locks={id:'childproofed_locks',vibe:'olivia_mom',name:'Ch
   listen:[{on:'healed',carrier:'source',partySkill:true,limit:'action',limitKey:'locks',show:true,effects:[{op:'status',id:'childproofed',to:'randomAlly'}]},
     {on:'statusApplied',carrier:'source',kinds:['buff'],partySkill:true,limit:'action',limitKey:'locks',show:true,effects:[{op:'status',id:'childproofed',to:'randomAlly'}]}],
   desc:'When Olivia heals or buffs the whole family, a random family member gets Childproofed: the next debuff aimed at them bounces off.'};
+
+// ---------------------------------------------------------------- News Anchor (third Vibe, stage 19; sig 0) ----------------------------------------------------------------
+B3_VIBES.olivia_news={id:'olivia_news',owner:'olivia',name:'News Anchor',sig:0,lean:'tempo',
+  subtitles:['Curbside Reporter','Live Fact-Checker','Prime-Time Broadcast Queen'],
+  trait:'on_the_record',basic:'hot_mic_question',skills:['camera_crew_spotlight','is_this_real_fact_check','livnews_breaking_exclusive'],
+  quirks:['inverted_pyramid','investigative_scoop'],counter:null};
+// On The Record: every monster is marked at the start of the fight and crits 15% more from the family. The spec's "reveals Pet Peeves and Composure"
+// needs nothing here: Battle 3 never hides a monster's Pet Peeves or Composure pips, so the exposure is the mark.
+B3_TRAITS.on_the_record={id:'on_the_record',vibe:'olivia_news',name:'On The Record',
+  on:'battleStart',show:true,effects:[{op:'status',id:'on_record',to:'foes'}],
+  desc:'Every monster is exposed from the first moment, for good: the family crits it 15% more often.'};
+B3_SKILLS.hot_mic_question={id:'hot_mic_question',vibe:'olivia_news',slot:'basic',name:'Hot-Mic Question',pep:0,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'mic_in_face',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. It cannot dodge for 2 turns.',
+  desc:'Light Racket hit. The mic is in its face: it cannot dodge for 2 turns.'};
+B3_SKILLS.camera_crew_spotlight={id:'camera_crew_spotlight',vibe:'olivia_news',slot:'s1',name:'Camera-Crew Spotlight',pep:3,flavor:['razzle'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'splash',of:'dealt',share:.25,flavor:'racket',to:'otherFoes'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Dazzles. A quarter of the hit splashes to the rest.',
+  desc:'Standard Razzle hit that leaves the monster Dazzled. 25% of the damage splashes as Racket to every other monster.'};
+// "Is This Real?" Fact-Check: standard Racket (my call), +35% for every buff the monster has (counted before the swap), then its heaviest buff turns into the matching debuff.
+B3_SKILLS.is_this_real_fact_check={id:'is_this_real_fact_check',vibe:'olivia_news',slot:'s2',name:'"Is This Real?" Fact-Check',pep:3,flavor:['racket'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{targetBuffs:true,add:.35}},{op:'invert',n:1,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'+35% per buff on it, then turns one buff against it.',
+  desc:'Standard Racket hit, 35% stronger for every buff the monster has. Then its heaviest buff is inverted into the matching debuff.'};
+B3_SKILLS.livnews_breaking_exclusive={id:'livnews_breaking_exclusive',vibe:'olivia_news',slot:'cap',name:'LivNews Breaking Exclusive',pep:5,flavor:['racket'],power:'standard',hits:1,
+  target:'all_foes',tags:[],composure:0,
+  effects:[{op:'status',id:'ruckus_boost',to:'self'},{op:'damage'},{op:'status',id:'stripped_defenses',to:'target'},{op:'composure',n:2,ifBuffed:true,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Hits all, weakens resistances, -2 pips on buffed.',
+  desc:'Standard Racket hit on every monster. Their resistances count one step weaker for 2 turns, a monster with a buff loses 2 more Composure pips, and the Ruckus gains of this action are 25% bigger.'};
+B3_QUIRKS.inverted_pyramid={id:'inverted_pyramid',vibe:'olivia_news',name:'Inverted Pyramid',
+  on:'afterHit',carrier:'source',peeveHit:true,limit:'action',show:true,effects:[{op:'pep',n:1,to:'self'}],
+  desc:'When Olivia hits a monster\u2019s Pet Peeve she gets 1 Pep (once an action).'};
+B3_QUIRKS.investigative_scoop={id:'investigative_scoop',vibe:'olivia_news',name:'Investigative Scoop',custom:'scoop',n:{},
+  desc:'The first debuff Olivia puts on a Boss lasts 1 turn longer and cannot be cleansed.'};

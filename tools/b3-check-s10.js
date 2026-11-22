@@ -37,7 +37,7 @@ module.exports=function(T) {
     for(const s of [VIBES[v].basic,...VIBES[v].skills]) ok(SK[s].desc&&SK[s].desc.length>40&&!/—/.test(SK[s].desc),s+' has a full plain description');
     for(const q of [TRAITS[VIBES[v].trait],...VIBES[v].quirks.map(x=>QUIRKS[x])]) ok(q.desc&&q.desc.length>30&&!/—/.test(q.desc+q.name),q.id+' has a full plain description'); }
   ok(bad0==='[]','the data check is clean with Amy, Justin and Olivia in: '+bad0);
-  ok(J(CAST.amy.vibes)==='["amy_fitness","amy_classroom"]'&&J(CAST.justin.vibes)==='["justin_basement","justin_wire"]'&&J(CAST.olivia.vibes)==='["olivia_rope","olivia_mom"]','the three are in the cast with their two Sig Vibes');
+  ok(J(CAST.amy.vibes.slice(0,2))==='["amy_fitness","amy_classroom"]'&&J(CAST.justin.vibes.slice(0,2))==='["justin_basement","justin_wire"]'&&J(CAST.olivia.vibes.slice(0,2))==='["olivia_rope","olivia_mom"]','the three are in the cast with their two Sig Vibes');
   ok(!CAST.amy.late&&!CAST.justin.late&&!CAST.olivia.late,'none of the three is a late joiner');
   ok(['refresh','prybar'].every(k=>typeof OPS[k]==='function'),'the two new ops are built');
   ok(typeof CUSTOM.muscleMemory==='string','Muscle Memory is a one-off switch');

@@ -1,11 +1,11 @@
 'use strict';
-// data/b3-kit-nara.js — Battle 3 kit: Nara (spec section 3.8). Built: Attached Pup and Guard Dog (stage 9c). Picky Princess, her third Vibe, is stage 19 to 21.
+// data/b3-kit-nara.js — Battle 3 kit: Nara (spec section 3.8). Built: Attached Pup and Guard Dog (stage 9c). Picky Princess, her third Vibe, is stage 19 (sig 0).
 // Same shape as the other kit files (see the top of data/b3-kit-tom.js). Nara joins in chapter 2: her Vibe Points start from the late joiners'
 // pool (engine/b3-progress.js b3NewLoadout), and her Main Vibe is Attached Pup, her Pocket Vibe Guard Dog.
 // Four lines needed their own rule: Locked On the Gold Ball (the memory is `b3GoldBall`, engine/b3-custom.js, and the My Toy mark is a status row),
 // Sandbox Clue Digger (`b3Treasure`), Nervous Vibrations (`nervous`, engine/b3-core.js b3Evasion) and Pressed Against Your Shins (`shins`,
 // engine/b3-core.js b3Stat). Every number the spec leaves out is a call, written where it is made.
-B3_CAST.nara={id:'nara',name:'Nara',vibes:['nara_pup','nara_guard'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
+B3_CAST.nara={id:'nara',name:'Nara',vibes:['nara_pup','nara_guard','nara_princess'],late:true,stat:{hp:1,atk:1,def:1,spd:1}};
 
 // ---------------------------------------------------------------- Attached Pup (first Sig Vibe) ----------------------------------------------------------------
 B3_VIBES.nara_pup={id:'nara_pup',owner:'nara',name:'Attached Pup',sig:1,lean:'tempo',
@@ -95,3 +95,38 @@ B3_SKILLS.stunt_double_squirrel_intercept={id:'stunt_double_squirrel_intercept',
 B3_QUIRKS.forty_pound_counterweight={id:'forty_pound_counterweight',vibe:'nara_guard',name:'Forty-Pound Counterweight',
   on:'afterHit',byAlly:true,tgtFoe:true,targetPrime:'my_toy',limit:'action',show:true,effects:[{op:'pull',n:15,to:'self'}],
   desc:'When a family member hits a My Toy monster, Nara pulls all forty pounds and moves 15 ticks up the turn bar (once per move).'};
+
+// ---- Picky Princess (third Vibe, stage 19; sig 0) ----
+B3_VIBES.nara_princess={id:'nara_princess',owner:'nara',name:'Picky Princess',sig:0,lean:'support',
+  subtitles:['Bowl Snubber','Plate Bandit','Forbidden Couch Royalty'],
+  trait:'high_standards_trait',basic:'unimpressed_sniff',skills:['weaponized_puppy_eyes','only_off_your_plate','eighth_chair_pie_crust_decree'],
+  quirks:['belly_rub_tax','allowed_on_the_couch'],counter:null};
+// High Standards: a family member who heals Nara or buffs her gets 1 Pep and 15% more Crit Rate for 2 turns (my call: a Nara who heals or buffs herself does not count).
+B3_TRAITS.high_standards_trait={id:'high_standards_trait',vibe:'nara_princess',name:'High Standards',
+  listen:[{on:'healed',carrier:'target',byAlly:true,limit:'action',show:true,effects:[{op:'pep',n:1,to:'attacker'},{op:'status',id:'high_standards',to:'attacker'}]},
+    {on:'statusApplied',carrier:'target',byAlly:true,kinds:['buff'],limit:'action',limitKey:'hsb',show:true,effects:[{op:'pep',n:1,to:'attacker'},{op:'status',id:'high_standards',to:'attacker'}]}],
+  desc:'A family member who heals or buffs Nara gets 1 Pep and 15% more Crit Rate for 2 turns.'};
+B3_SKILLS.unimpressed_sniff={id:'unimpressed_sniff',vibe:'nara_princess',slot:'basic',name:'Unimpressed Sniff',pep:0,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'snubbed',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  short:'Light hit. Its next hit does 20% less.',
+  desc:'Light Racket hit. Nara sniffs the monster like cold kibble and looks away: its next hit does 20% less damage.'};
+B3_SKILLS.weaponized_puppy_eyes={id:'weaponized_puppy_eyes',vibe:'nara_princess',slot:'s1',name:'Weaponized Puppy Eyes',pep:3,flavor:['racket'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,
+  effects:[{op:'damage'},{op:'status',id:'puppy_eyes',to:'target'},{op:'composure',n:1,to:'target',when:'targetBuffed'},{op:'composure',n:1,to:'target',when:'peeveHit'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'Light hit. It will not aim at Nara and hits weaker.',
+  desc:'Light Racket hit. For its next turn the monster will not aim at Nara and does 35% less damage. 1 Composure pip off a monster with a buff, 1 more on a Pet Peeve hit or a Detonation.'};
+B3_SKILLS.only_off_your_plate={id:'only_off_your_plate',vibe:'nara_princess',slot:'s2',name:'"Only Off Your Plate"',pep:3,flavor:['sizzle'],power:0,hits:0,
+  target:'ally',tags:[],composure:0,
+  effects:[{op:'heal',pct:.30,to:'target'},{op:'heal',pct:.30,to:'self'},{op:'shield',pct:.10,to:'target'},{op:'shield',pct:.10,to:'self'},{op:'status',id:'plate_warm',to:'target'},{op:'status',id:'plate_warm',to:'self'}],line:null,anim:{kind:'default',shape:'give'},
+  short:'Nara and an ally each heal 30%, shield, and hit harder.',
+  desc:'An ally shares warm food off their plate: Nara and that ally each heal 30% of Max HP, get a small warm shield (10% Max HP) and 20% more Attack for 2 turns.'};
+B3_SKILLS.eighth_chair_pie_crust_decree={id:'eighth_chair_pie_crust_decree',vibe:'nara_princess',slot:'cap',name:'Eighth-Chair Pie-Crust Decree',pep:5,flavor:['racket'],power:0,hits:0,
+  target:'all_foes',tags:[],composure:0,party:true,
+  effects:[{op:'composure',n:1,to:'target'},{op:'cleanse',group:'mental',to:'allies'},{op:'pull',n:20,to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  short:'-1 Composure on all, clears mental, pulls family.',
+  desc:'Nara hops on her own dining chair and barks for chicken and crust: every monster loses 1 Composure pip, the family loses their mental bad effects, and everyone moves 20 ticks up the turn bar.'};
+B3_QUIRKS.belly_rub_tax={id:'belly_rub_tax',vibe:'nara_princess',name:'Belly-Rub Tax',
+  on:'afterHit',carrier:'target',from:'foe',hurtOver:.20,limit:'round',show:true,effects:[{op:'status',id:'fuss',to:'allies'}],
+  desc:'When a monster hits Nara for 20% of her Max HP or more with no shield in the way, the family fusses over her: 15% more Speed for 2 turns (once a round).'};
+B3_QUIRKS.allowed_on_the_couch={id:'allowed_on_the_couch',vibe:'nara_princess',name:'Allowed on the Couch',custom:'couch',n:{},
+  desc:'A single buff put on Nara is copied, for half as many turns, onto the family member with the lowest HP.'};

@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -39,6 +39,11 @@ function b3Who(F,c,to) {
   if(to==='otherFoes'||to==='otherFoesLive') { const p=c.tgt||c.targets[0]; return b3Live(F,b3Other(c.actor.side)).filter(o=>o!==p&&(to==='otherFoes'||o.st.wired||o.st.drenched)); }
   if(to==='targetNeighbor') { const p=c.tgt||c.targets[0]; return p?b3Adjacent(F,p).sort((x,y)=>x.slot-y.slot).slice(0,1):[]; }
   if(to==='linked') return b3Live(F,b3Other(c.actor.side)).filter(o=>o!==c.tgt&&o.st.copper_link);
+  // Stage 19. lowestPepAlly: the family member (the actor included) with the least Pep, the first in line on a tie (Wine O'Clock).  lowestHpAlly: the lowest share of HP.
+  if(to==='lowestPepAlly') return b3Live(F,c.actor.side).filter(o=>o.pep!=null).sort((x,y)=>x.pep-y.pep||x.slot-y.slot).slice(0,1);
+  if(to==='lowestHpAlly') return b3Live(F,c.actor.side).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
+  // Stage 19. bossTargets: only the Bosses among the monsters this act reached (Mega Whoopee-Cushion Trap).
+  if(to==='bossTargets') return (c.didDamage?c.hit:c.targets).filter(t=>b3Alive(t)&&t.D&&t.D.role==='boss');
   if(to==='randomAlly') { const L=b3Live(F,c.actor.side); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   // Stage 11. otherAllies: every other monster on the actor's side.  randomOtherAlly: one of them picked by the fight's own dice
   // (Scene One, Marker! pulls one other monster forward).
@@ -63,6 +68,8 @@ function b3PutStatus(F,c,t,e) {
   const S=B3_STATUS[e.id];
   // Warm Beats Cold: some units cannot be given some statuses at all.
   if(t.immune&&t.immune.includes(e.id)) { c.beats.push({t:'immune',tgt:t.key,id:e.id,g:c.g}); return; }
+  // Inside Voice (`debuffImmune`): nothing bad from the other side lands while it lasts.
+  if((S.kind==='debuff'||S.kind==='mark')&&c.actor.side!==t.side&&b3HasFlag(t,'debuffImmune')) { c.beats.push({t:'immune',tgt:t.key,id:e.id,g:c.g}); return; }
   // A Stun on a Boss is a push instead of a lost turn (spec 2.8).
   if(S.flags.includes('skipTurn')&&t.D&&t.D.role==='boss') { B3_OPS.push(F,Object.assign({},c,{tgt:t}),{n:B3_RULES.stunBossTicks,to:'target'}); return; }
   // Fresh Ride: a family member who wears it is not given the next debuff the other side aims at them; the lock is used up.
@@ -73,6 +80,12 @@ function b3PutStatus(F,c,t,e) {
   // TAP-Card Transfer: a buff TNB puts on lasts longer.
   const tc=c.actor.custom&&c.actor.custom.tapCard; if(tc&&S.kind==='buff'&&t.side===c.actor.side&&S.dur.unit==='turn') t.st[e.id].n+=tc.extend;
   b3Fire(F,S.kind==='prime'?'primeApplied':'statusApplied',{src:c.actor,tgt:t,id:e.id,g:c.g,c},c.beats);
+  // "Investigative Scoop" (Olivia, stage 19, `custom:'scoop'`): the first debuff she puts on a Boss lasts 1 turn longer and cannot be cleansed.
+  if(c.actor.custom&&c.actor.custom.scoop&&S.kind==='debuff'&&t.D&&t.D.role==='boss'&&!t.scooped&&t.st[e.id]) { t.scooped=true; t.st[e.id].noCleanse=true; t.st[e.id].n+=1; }
+  // "Allowed on the Couch" (Nara, stage 19, `custom:'couch'`): a buff put on her alone by a single-target act is copied for half its turns onto the family member with the lowest share of HP.
+  if(t.custom&&t.custom.couch&&S.kind==='buff'&&!e.mirror&&(!c.targets||c.targets.length<=1)&&t.st[e.id]) {
+    const o=b3Live(F,t.side).filter(x=>x!==t).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot)[0];
+    if(o) b3PutStatus(F,c,o,Object.assign({},e,{mirror:true,n:Math.max(1,Math.ceil(t.st[e.id].n/2))})); }
 }
 const B3_OPS={
   damage(F,c,e) { b3DamageOp(F,c,e); },
@@ -80,7 +93,8 @@ const B3_OPS={
     const rides=c.actor.side==='foe'&&c.didDamage&&!c.tgt&&(e.to==='target'||e.to==null);
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       if(rides&&b3Soaked(c,t)) { c.beats.push({t:'soak',tgt:t.key,id:e.id,g:c.g}); continue; }
-      b3PutStatus(F,c,t,e); }
+      // Stage 19: `oneOf:[ids]` puts on one of those statuses, chosen by the fight's own dice (Full-House Sunday Dinner's random boost).
+      b3PutStatus(F,c,t,e.oneOf?Object.assign({},e,{id:e.oneOf[Math.floor(b3Rand(F)*e.oneOf.length)]}):e); }
   },
   prime(F,c,e) { B3_OPS.status(F,c,e); },
   // intercept: the status goes on each chosen ally (never on the actor); its data row says how much weaker the actor takes the hit.
@@ -115,7 +129,7 @@ const B3_OPS={
   cleanse(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       // `minor:true` takes only a light debuff (a status weight of 4 or less: Slow, Fatigue, an accuracy drop), lightest first (Baby-Wipe Swipe).
-      let ids=Object.keys(t.st).filter(id=>{ const S=B3_STATUS[id]; return e.ids?e.ids.includes(id):e.group?S.group===e.group:e.minor?S.kind==='debuff'&&S.weight<=4:['debuff','prime','mark'].includes(S.kind); })
+      let ids=Object.keys(t.st).filter(id=>{ const S=B3_STATUS[id]; if(t.st[id].noCleanse||S.flags.includes('noCleanse')) return false; return e.ids?e.ids.includes(id):e.group?S.group===e.group:e.minor?S.kind==='debuff'&&S.weight<=4:['debuff','prime','mark'].includes(S.kind); })
         .sort((a,b)=>e.minor?B3_STATUS[a].weight-B3_STATUS[b].weight:B3_STATUS[b].weight-B3_STATUS[a].weight);
       if(e.n) ids=ids.slice(0,e.n);
       c.cleansed=(c.cleansed||0)+ids.length;
@@ -129,13 +143,15 @@ const B3_OPS={
     if(e.perCounter) { const n=c.actor.counters[e.perCounter.counter]||0; pct+=e.perCounter.add*n; if(e.perCounter.spend&&n) (c.spend=c.spend||{})[c.actor.key+':'+e.perCounter.counter]=true; }
     // Forty Years a Nurse (a one-off of the Trait row, `custom:'cleanBill'`): a share of the healing that goes past full HP becomes a shield.
     const cb=c.actor.custom&&c.actor.custom.cleanBill;
-    for(const t of b3Who(F,c,e.to)) { const want=Math.round(t.maxHp*pct*b3Mult(c.actor,'healGiven')*(c.scale||1)),alive=b3Alive(t),got=b3Heal(F,t,want);
+    for(const t of b3Who(F,c,e.to)) { const want=Math.round(t.maxHp*pct*b3Mult(c.actor,'healGiven',{F,c,a:c.actor,t,tgt:t,skill:c.skill})*(c.scale||1)),alive=b3Alive(t),got=b3Heal(F,t,want);
       if(got) { c.beats.push({t:'heal',tgt:t.key,n:got,hp:t.hp,g:c.g}); b3Fire(F,'healed',{src:c.actor,tgt:t,n:got,g:c.g,c},c.beats); }
       if(cb&&alive&&want>got) { const sh=b3AddShield(F,t,Math.min((want-got)*cb.share,t.maxHp*cb.cap),{src:c.actor});
         if(sh) c.beats.push({t:'shield',tgt:t.key,n:sh,sh:b3ShieldTotal(t),g:c.g}); } }
   },
   shield(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns,clay:e.clay});
+    // Stage 19: `perCounter:{counter,add}` makes the shield bigger for each point of that Counter on the actor (Five-Hundred-Degree Boule: +10% per Oven Temp).
+    const pc=e.perCounter?(c.actor.counters[e.perCounter.counter]||0)*e.perCounter.add:0;
+    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*(e.pct+pc)*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns,clay:e.clay});
       c.beats.push({t:'shield',tgt:t.key,n:got,sh:b3ShieldTotal(t),g:c.g}); }
   },
   revive(F,c,e) {
@@ -143,9 +159,38 @@ const B3_OPS={
       c.revived=(c.revived||0)+1;
       c.beats.push({t:'revive',src:c.actor.key,tgt:t.key,hp:t.hp,pep:t.pep,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'revive',{src:c.actor,tgt:t,g:c.g,c},c.beats); }
   },
+  // Stage 19. extend: a status the target already wears lasts n turns longer (Starter Splash on an ally, Investigative Scoop on a boss).
+  extend(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) for(const id of Object.keys(t.st)) { const S=B3_STATUS[id]; if(e.kind&&S.kind!==e.kind) continue; if(S.dur.unit==='permanent') continue; t.st[id].n+=e.n; c.beats.push({t:'extend',tgt:t.key,id,n:e.n,g:c.g}); } },
+  // swapBar: the actor and the target trade places on the turn bar (Backstage Pass, Fire Drill Shuffle).
+  swapBar(F,c,e) {
+    const a=c.actor; for(const t of b3Who(F,c,e.to||'target')) { if(t===a||!b3Alive(t)) continue; const w=a.wait; a.wait=t.wait; t.wait=w;
+      c.beats.push({t:'swap',src:a.key,tgt:t.key,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:a,tgt:t,n:0,g:c.g,c},c.beats); } },
+  // invert (stage 19, \"Is This Real?\" Fact-Check): the heaviest buff on a monster (n of them) turns into the matching debuff: the same turns, every number against it.
+  // The debuff's row is made the first time it is needed (b3InvertRow in engine/b3-core.js).
+  invert(F,c,e) {
+    for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
+      const ids=Object.keys(t.st).filter(id=>B3_STATUS[id].kind==='buff'&&!B3_STATUS[id].noSteal&&!B3_STATUS[id].inverted).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight).slice(0,e.n||1);
+      for(const id of ids) { const n=t.st[id].n; b3EndStatus(F,t,id,'strip'); c.stripped=(c.stripped||0)+1; c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g});
+        const rid=b3InvertRow(id); b3AddStatus(F,t,rid,{src:c.actor,n}); c.beats.push({t:'status',tgt:t.key,id:rid,g:c.g});
+        b3Fire(F,'buffStripped',{src:c.actor,tgt:t,id,g:c.g,c},c.beats); } } },
+  // swapGap: the actor trades places with the monster due to act next: it is pushed back, and the actor is pulled up, by the gap between them
+  // (`max` ticks at most). Jazz-Hands Cartwheel.
+  swapGap(F,c,e) {
+    const a=c.actor,nx=b3TurnOrder(F).find(o=>o.side!==a.side&&b3Alive(o)); if(!nx) return;
+    const amt=Math.min(e.max,Math.max(0,nx.wait)); if(amt<=0) return;
+    B3_OPS.push(F,Object.assign({},c,{tgt:nx}),{n:amt,to:'target'});
+    B3_OPS.pull(F,c,{n:amt,next:true,to:'self'}); },
+  // replay: the monster's last hit on the family is dealt again, in part, to its own side (Jumbotron Instant Replay).
+  replay(F,c,e) {
+    const L=F.lastAllyHit; if(!L) return; const src=b3Unit(F,L.src); if(!src||!b3Alive(src)) return;
+    const dmg=Math.max(1,Math.round(L.dmg*e.share*(c.scale||1)));
+    b3Hurt(F,c,src,dmg,{src:c.actor.key,flavor:L.flavor||undefined,splash:true}); F.lastAllyHit=null; },
   push(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { const amt=b3Push(F,t,e.n); if(!amt) continue;
-      c.beats.push({t:'push',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:amt,g:c.g,c},c.beats); }
+    for(const t of b3Who(F,c,e.to)) { const w0=t.wait,amt=b3Push(F,t,e.n); if(!amt) continue;
+      // `crossed`: the push carried the unit past a round divider on the turn bar (Home-Field Advantage).
+      const R=B3_RULES.round,crossed=Math.floor((F.clock+t.wait)/R+1e-9)>Math.floor((F.clock+w0)/R+1e-9);
+      c.beats.push({t:'push',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:amt,crossed,g:c.g,c},c.beats); }
   },
   pull(F,c,e) {
     for(const t of b3Who(F,c,e.to)) {
@@ -198,7 +243,7 @@ const B3_OPS={
   row(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(t.side!=='foe'||t.row===e.row) continue;
       t.row=e.row; b3Reslot(F);
-      c.beats.push({t:'row',tgt:t.key,row:e.row,g:c.g}); }
+      c.beats.push({t:'row',tgt:t.key,row:e.row,g:c.g}); b3Fire(F,'rowMoved',{src:c.actor,tgt:t,g:c.g,c},c.beats); }   // (stage 19: 2006 Lucky Boat Lure listens)
   },
   // hazard: lays a B3_HAZARDS row on one side's floor. Laying the same one again replaces it.
   hazard(F,c,e) {
@@ -209,8 +254,9 @@ const B3_OPS={
   },
   // counter: adds to (or, with a negative n, spends from) a Portable Counter.
   // When it fills to its max the `counterFull` hook fires (Walk It Off, Hydrate).
-  counter(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) { const was=t.counters[e.id]||0,mx=e.max!=null?e.max:(t.counterInfo[e.id]||{}).max,v=b3Counter(t,e.id,e.n,e.max); c.beats.push({t:'counter',tgt:t.key,id:e.id,v,g:c.g});
-    if(mx!=null&&v>=mx&&was<mx) b3Fire(F,'counterFull',{src:t,tgt:t,id:e.id,g:c.g,c},c.beats); } },
+  // id '*' (stage 19, Star in Grace's Key): every Portable Counter the unit keeps.
+  counter(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) for(const id of (e.id==='*'?Object.keys(t.counterInfo||{}):[e.id])) { const was=t.counters[id]||0,mx=e.max!=null?e.max:(t.counterInfo[id]||{}).max,v=b3Counter(t,id,e.n,e.max); c.beats.push({t:'counter',tgt:t.key,id,v,g:c.g});
+    if(mx!=null&&v>=mx&&was<mx) b3Fire(F,'counterFull',{src:t,tgt:t,id,g:c.g,c},c.beats); } },
   // crack: a battle-long cut of base Defense, 25% in total at most. once:'<name>' lets each foe take that crack one time.
   crack(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)||(e.once&&t.cracked[e.once])) continue;
@@ -267,7 +313,8 @@ const B3_OPS={
   // takes their place. `who:'foes'` leaves the effects to aim at every monster alive at that time. engine/b3-resolve.js b3RunLater.
   later(F,c,e) { F.later.push({key:c.actor.key,name:e.name,effects:e.effects,tgt:c.targets.map(t=>t.key),who:e.who||'target',skill:c.skill}); },
   // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
-  composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
+  // `ifBuffed:true` (LivNews Breaking Exclusive): only the monsters that carry a buff.
+  composure(F,c,e) { for(const t of b3Who(F,c,e.to)) { if(e.ifBuffed&&!Object.keys(t.st).some(id=>B3_STATUS[id].kind==='buff')) continue; b3Pips(c,t,e.n); } },
   // refresh (Classroom Lights-Out Reset): every buff and stance the chosen units carry that lasts a number of turns or rounds goes back to its full length.
   refresh(F,c,e) { for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
     for(const id of Object.keys(t.st)) { const S=B3_STATUS[id],s=t.st[id]; if(!['buff','stance'].includes(S.kind)||!['turn','round'].includes(s.unit)) continue;
@@ -295,7 +342,7 @@ const B3_OPS={
 //   revived   a revive in this action brought someone back;  notRevived  none did (To the Moon & Back heals the living instead)
 //   stolen    a steal in this action took a buff;  notStolen  none did (No Take, Only Throw! then gives Nara the Attack bonus instead)
 //   targetDebuffed  a monster this action hit carries a debuff (Grip-Chicken Snap)
-const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived','stolen','notStolen','targetDebuffed','mixHot'];
+const B3_EFFECT_WHEN=['targetBuffed','peeveHit','targetCharging','chargingBoost','crit','cleansed','stripped','revived','notRevived','stolen','notStolen','targetDebuffed','mixHot'];
 // c.scale below 1 (a rider held for the later hits of a multi-hit move, engine/b3-custom.js): only the ops whose size can be
 // cut run, at that share; an effect that cannot be split (1 Pep, a status) does not repeat.
 const B3_SCALABLE=['damage','splash','heal','shield'];
@@ -303,9 +350,9 @@ const B3_SCALABLE=['damage','splash','heal','shield'];
 function b3RunEffects(F,c,effects) {
   for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
     if(e.needCounter&&!((c.actor.counters[e.needCounter.id]||0)>=e.needCounter.min)) continue;
-    if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)) continue;
+    if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)&&!(c.bounce&&e.op==='status'&&B3_STATUS[e.id]&&B3_STATUS[e.id].kind==='buff')) continue;   // (a Tupperware bounce also carries a buff, whole)
     if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when);
-      const hold=e.when==='notRevived'?!(c.revived>0):e.when==='notStolen'?!(c.stolen>0):e.when==='targetDebuffed'?(c.hit||[]).some(t=>Object.keys(t.st).some(id=>B3_STATUS[id].kind==='debuff')):(c[e.when]>0);
+      const hold=e.when==='notRevived'?!(c.revived>0):e.when==='notStolen'?!(c.stolen>0):e.when==='targetDebuffed'?(c.hit||[]).some(t=>Object.keys(t.st).some(id=>B3_STATUS[id].kind==='debuff')):e.when==='targetBuffed'?(c.hit||[]).some(t=>Object.keys(t.st).some(id=>B3_STATUS[id].kind==='buff')):e.when==='peeveHit'?(c.hit||[]).some(t=>(c.ledger&&c.ledger[t.key]&&c.ledger[t.key].peeve)||(c.detonated&&c.detonated[t.key])):e.when==='targetCharging'?(c.hit||[]).some(t=>t.charge):e.when==='chargingBoost'?(c.hit||[]).some(t=>t.charge&&((c.ledger&&c.ledger[t.key]&&c.ledger[t.key].peeve)||(c.detonated&&c.detonated[t.key]))):(c[e.when]>0);   // stage 19: Supersonic Raspberry reads whether the monster is winding up an act, and whether this was a Pet Peeve hit or a Detonation
       if(!hold) continue; }
     fn(F,c,e); }
 }
