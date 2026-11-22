@@ -35644,7 +35644,7 @@
    "title": "Fix: Art Library WAN fallback fails on long prompts",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "tag": "artwan2",
    "next": "The WAN fallback sent prompts over fal's 2000 character limit (422), so the 3 gate pictures never got a try 3. WAN now gets a trimmed prompt (boilerplate only) and a prompt that cannot fit is skipped, not counted as a failed try. Then Tom taps Generate on the 3 gate pictures again.",
@@ -35661,6 +35661,10 @@
      "d": "2026-11-21",
      "t": "Tom: \"Image generation in the art library doesn't seem to be working.\" Cause: fal rejects prompts over 2000 characters (422); 418 of 1123 prompts are longer.",
      "at": "2026-11-22T06:56:18.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artwan2: Art Library pictures on WAN no longer fail on long prompts"
     }
    ],
    "prompt": {
@@ -35671,7 +35675,8 @@
     "model": "Claude Sonnet 5.5 (row A, a small known code fix)",
     "effort": "medium (the cause is known and tested)",
     "text": "Read CLAUDE.md and card c-fix-artwan in data/board.json. Fix is wan_prompt in tools/art-library/artgen.py (build artwan2); confirm python3 tools/art-library/artgen_test.py passes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-artwan2-regen",
@@ -36167,6 +36172,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDVm5HwGWr5yhmCUJy",
+   "title": "Fix: Art Library WAN fallback fails on long prompts",
+   "first": "2026-11-21T22:56:53-08:00",
+   "last": "2026-11-21T23:03:46-08:00",
+   "tags": [
+    "artwan2"
+   ],
+   "cards": [
+    "c-fix-artwan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDC1yqbxfJTPwowGvb",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
    "first": "2026-11-21T23:00:03-08:00",
@@ -36192,16 +36209,6 @@
     "c-reports-10",
     "c-reports-8",
     "c-reports-9"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDVm5HwGWr5yhmCUJy",
-   "title": "Fix: Art Library WAN fallback fails on long prompts",
-   "first": "2026-11-21T22:56:53-08:00",
-   "last": "2026-11-21T22:56:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-artwan"
    ]
   },
   {
@@ -41059,8 +41066,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "86f4019410402c6bb4c90635bbefac51859c0105",
- "synced_at": "2026-11-22T07:03:05+00:00",
+ "synced": "c4d30f1f7634924d38c722f76d0ecb842820ad18",
+ "synced_at": "2026-11-22T07:04:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
