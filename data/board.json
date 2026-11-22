@@ -34690,44 +34690,22 @@
    },
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "build": "movefun2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukF62Nh7RYtFLs69cED",
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T06:55:39Z",
     "n": 1,
     "est": 0.5,
     "run": {
-     "state": "done",
-     "at": "2026-11-22T06:45:12Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44993341855",
-     "n": 3,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [
-      "tom-blockade",
-      "grace-cubepop",
-      "deedee-wetfloor"
-     ],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 0,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "tom-blockade": 4,
-      "grace-cubepop": 4,
-      "deedee-wetfloor": 10
-     }
+     "state": "running",
+     "at": "2026-11-22T07:09:57Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996404459",
+     "n": 3
     },
     "auto": true
    },
